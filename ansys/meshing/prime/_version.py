@@ -1,4 +1,4 @@
-"""Version of ansys-<product/service>-<library> library.
+"""Version of ansys-meshing-prime library.
 
 On the ``main`` branch, use 'dev0' to denote a development version.
 For example:
