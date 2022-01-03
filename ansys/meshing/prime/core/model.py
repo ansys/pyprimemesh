@@ -152,23 +152,23 @@ class Model( _Model ):
         for part in self._parts:
             result += part.__str__() + "\n"
         return result
-    
-    @property
-    def python_logger(self) -> logging.Logger:
-        """  Get PRIME's Logger instance
 
-        Description 
-        ----------- 
-        PRIME's Logger instance can be used to control the verbosity of messages printed by PRIME
-        
-        Return 
-        ------ 
+    @property
+    def python_logger(self):
+        """Get PRIME's Logger instance
+
+        PRIME's Logger instance can be used to control the verbosity
+        of messages printed by PRIME
+
+        Returns
+        -------
         Logger
              Returns logging.Logger instance
 
-        Example 
-        ------- 
-        
+        Examples
+        --------
+        Set log level to debug.
+
         >>> model.python_logger.setLevel(logging.DEBUG)
 
         """
