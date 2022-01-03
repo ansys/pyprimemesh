@@ -1,0 +1,4 @@
+Sphinx
+https://github.com/numpy/numpydoc/archive/main.zip  # need latest
+pyansys_sphinx_theme>=0.2.0
+sphinx-copybutton
