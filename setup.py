@@ -13,7 +13,7 @@ from setuptools import setup
 # the module
 HERE = os.path.abspath(os.path.dirname(__file__))
 __version__ = None
-version_file = os.path.join(HERE, 'ansys', 'product', 'library', '_version.py')
+version_file = os.path.join(HERE, 'ansys', 'meshing', 'prime', '_version.py')
 with io_open(version_file, mode='r') as fd:
     exec(fd.read())
 
@@ -30,8 +30,8 @@ with open(os.path.join(HERE, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(
-    name='ansys-product-library',
-    packages=['ansys.product.library'],
+    name='ansys-meshing-prime',
+    packages=['ansys.meshing.prime'],
     version=__version__,
     description='Template PyAnsys library',
     long_description=long_description,

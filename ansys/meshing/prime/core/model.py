@@ -9,6 +9,7 @@ import json
 import logging
 
 class Model( _Model ):
+
     """Proxy of C++ PrimeMesh::Model class."""
     def __init__(self, comm : Communicator , id : int, object_id : int, name : str):
         """ Initialize Model """

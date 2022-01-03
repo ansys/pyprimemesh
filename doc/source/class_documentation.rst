@@ -7,9 +7,11 @@ Autosummary Directive
 We use a custom class template (included in ``_template`` to
 automatically generate class and method documentation.
 
+.. currentmodule:: ansys.meshing.prime
+
 .. autosummary::
    :toctree: _autosummary/
 
-   ansys.product.library.Complex
+   Model
 
-Note how each method or attribute has its own page.
+

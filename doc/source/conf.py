@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pyansys_sphinx_theme import pyansys_logo_black
 
-from ansys.product.library import __version__
+from ansys.meshing.prime import __version__
 
 # Project information
 project = 'ansys-product-library'
@@ -49,7 +49,6 @@ numpydoc_xref_param_type = True
 
 # Consider enabling numpydoc validation. See:
 # https://numpydoc.readthedocs.io/en/latest/validation.html#
-numpydoc_validate = True
 numpydoc_validation_checks = {
     "GL06",  # Found unknown section
     "GL07",  # Sections are in the wrong order.
