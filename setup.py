@@ -37,7 +37,7 @@ for package in find_namespace_packages(include="ansys*"):
 
 setup(
     name='ansys-meshing-prime',
-    packages=['ansys.meshing.prime'],
+    packages=packages,
     version=__version__,
     description='Template PyAnsys library',
     long_description=long_description,
