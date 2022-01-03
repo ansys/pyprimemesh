@@ -6,7 +6,7 @@ from pyansys_sphinx_theme import pyansys_logo_black
 from ansys.meshing.prime import __version__
 
 # Project information
-project = 'ansys-product-library'
+project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
@@ -17,7 +17,7 @@ html_theme = 'pyansys_sphinx_theme'
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+    "github_url": "https://github.com/pyansys/pyprime",
     "show_prev_next": False
 }
 

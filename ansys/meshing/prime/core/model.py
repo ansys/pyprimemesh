@@ -30,14 +30,8 @@ class Model( _Model ):
         ----------- 
             Updates proxy child objects of the client model with the child objects of the server model.
 
-        Parameters 
-        ----------  
-
-        Return 
-        ------ 
-        
-        Example 
-        ------- 
+        Examples 
+        --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> model.sync_up_model()
@@ -54,16 +48,13 @@ class Model( _Model ):
         ----------- 
           Gets the list of proxy parts of a model.        
 
-        Parameters 
-        ---------- 
-
-        Return 
-        ------ 
+        Returns 
+        -------
         List[Part]
              Returns the list of parts. 
         
-        Example 
-        ------- 
+        Examples 
+        --------
             >>> from ansys.meshing.prime import local_model
             >>> model = local_model()
             >>> parts = model.get_parts()
@@ -82,13 +73,13 @@ class Model( _Model ):
         name : str
             Name of the part. 
 
-        Return 
-        ------ 
+        Returns 
+        -------
         Part
             Returns the part. 
         
-        Example 
-        ------- 
+        Examples 
+        --------
             >>> from ansys.meshing.prime import local_model
             >>> model = local_model()
             >>> part = model.get_part_by_name("part.1")
@@ -110,13 +101,13 @@ class Model( _Model ):
         id : int
             Id of the part. 
 
-        Return 
-        ------ 
+        Returns 
+        -------
         Part
             Returns the part. 
         
-        Example 
-        ------- 
+        Examples 
+        --------
             >>> from ansys.meshing.prime import local_model
             >>> model = local_model()
             >>> part = model.get_part(2)
@@ -133,15 +124,12 @@ class Model( _Model ):
         ----------- 
             Prints the summary of the model.            
 
-        Parameters 
-        ----------
-        
-        Return 
-        ------ 
+        Returns 
+        -------
         str
             Returns the summary of the model.
 
-        Example 
+        Examples 
         ------- 
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()

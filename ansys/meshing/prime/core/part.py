@@ -28,13 +28,13 @@ class Part(_Part):
         peint_id : bool
             print_id pass True will get id's of topo entities/zonelets along with part summary. The default is False.
         
-        Return 
-        ------ 
+        Returns
+        -------
         str
             Returns the summary of part.
 
-        Example 
-        ------- 
+        Examples 
+        --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> part = model.get_part_by_name("Part.1")
@@ -59,16 +59,13 @@ class Part(_Part):
         ----------- 
           Uses print_mesh and print_id properties to control the the summary of a part .            
 
-        Parameters 
-        ----------
-        
-        Return 
-        ------ 
+        Returns 
+        -------
         str
             Returns the summary of a part.
 
-        Example 
-        ------- 
+        Examples 
+        --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> part = model.get_part_by_name("Part.1")

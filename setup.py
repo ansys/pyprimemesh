@@ -39,10 +39,10 @@ setup(
     name='ansys-meshing-prime',
     packages=packages,
     version=__version__,
-    description='Template PyAnsys library',
+    description='Prime Meshing Library',
     long_description=long_description,
     long_description_content_type='text/x-rst',
-    url='https://github.com/pyansys/template/',
+    url='https://github.com/pyansys/pyprime/',
     license='MIT',
     author='ANSYS, Inc.',  # this is required
     maintainer='PyAnsys developers',  # you can change this
@@ -56,7 +56,7 @@ setup(
     install_requires=[],
 
     # Plan on supporting only the currently supported versions of Python
-    python_requires='>=3.6',
+    python_requires='>=3.6, <4',
 
     # Less than critical but helpful
     classifiers=[
