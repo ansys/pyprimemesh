@@ -26,13 +26,13 @@ class FileIO(_FileIO):
         file_name : str
              Path to file on disk
 
-        Return 
-        ------ 
+        Returns 
+        -------
         FileReadResults
              Returns FileReadResults
 
-        Example 
-        ------- 
+        Examples 
+        --------
         
         >>> from ansys.meshing.prime import FileIO
         >>> #connect client to server and get model from it
