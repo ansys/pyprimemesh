@@ -16,11 +16,9 @@ class SurfaceQualitySummary( _SurfaceSearch):
         solver :  SolverType = None, 
         face_quality_measures: List[FaceQualityMeasure] = None, 
         quality_limit: List[float] = None):
-        """ Initialize SurfaceQualitySummary. 
+        """Initialize SurfaceQualitySummary. 
 
-        Description 
-        ----------- 
-          Constructor to initialize SurfaceQualitySummary object. Uses solver type to define face quality measures if not defined explicitly
+        Constructor to initialize SurfaceQualitySummary object. Uses solver type to define face quality measures if not defined explicitly
 
         Parameters
         ----------
@@ -37,11 +35,8 @@ class SurfaceQualitySummary( _SurfaceSearch):
         quality_limit : List[float], optional
             List of quality limit per face quality measure. Uses default quality limit if not specified.
         
-        Return 
-        ------ 
-        
-        Example 
-        ------- 
+        Examples
+        -------- 
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> quality_summary = SurfaceQualitySummary(model=model, solver = SolverType.FLUENT)
@@ -68,22 +63,17 @@ class SurfaceQualitySummary( _SurfaceSearch):
         _SurfaceSearch.__init__(self, model)  
     
     def __str__(self) -> str: 
-        """ Prints the suface quality summary. 
+        """Prints the suface quality summary. 
 
-        Description 
-        ----------- 
-            Uses face_quality_measures, parts, scope, solver_type and quality_limit properties to print the surface quality summary.            
+        Uses face_quality_measures, parts, scope, solver_type and quality_limit properties to print the surface quality summary.            
 
-        Parameters 
-        ----------
-        
-        Return 
-        ------ 
+        Returns
+        -------
         str
             Returns the surface quality summary.
 
-        Example 
-        ------- 
+        Examples
+        --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> print(model)

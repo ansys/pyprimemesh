@@ -15,11 +15,9 @@ class Part(_Part):
         _Part.__init__(self, model, id, object_id, name)
 
     def __call__(self, *args: Any, **kwds: Any) -> str:
-        """  Callable interface of the Part. 
+        """Callable interface of the Part. 
 
-        Description 
-        ----------- 
-          Gets summary of the part using supported keyword arguments as given below.            
+        Gets summary of the part using supported keyword arguments as given below.            
 
         Parameters 
         ----------  
@@ -53,11 +51,9 @@ class Part(_Part):
         return result.message
     
     def __str__(self) -> str:
-        """ Prints the summary of a part. 
+        """Prints the summary of a part. 
 
-        Description 
-        ----------- 
-          Uses print_mesh and print_id properties to control the the summary of a part .            
+        Uses print_mesh and print_id properties to control the the summary of a part .            
 
         Returns 
         -------

@@ -24,11 +24,9 @@ class Model( _Model ):
         self._freeze()
     
     def _sync_up_model(self):
-        """  Synchronizes client model with the server model. 
+        """Synchronizes client model with the server model. 
 
-        Description 
-        ----------- 
-            Updates proxy child objects of the client model with the child objects of the server model.
+        Updates proxy child objects of the client model with the child objects of the server model.
 
         Examples 
         --------
@@ -42,11 +40,9 @@ class Model( _Model ):
         # self._weld_controls = [WeldControl(self, wc[0], wc[1]) for wc in wc_data] # support prism controls here and remove weld control
 
     def get_parts(self) -> List[Part]:
-        """  Gets the list of parts of a model. 
+        """Gets the list of parts of a model. 
 
-        Description 
-        ----------- 
-          Gets the list of proxy parts of a model.        
+        Gets the list of proxy parts of a model.        
 
         Returns 
         -------
@@ -62,11 +58,9 @@ class Model( _Model ):
         return self._parts
         
     def get_part_by_name(self, name:str) -> Part:
-        """  Gets the part by name. 
+        """Get the part by name. 
 
-        Description 
-        ----------- 
-            Gets the part by name. Returns None if part doesn't exist for the given name.            
+        Gets the part by name. Returns None if part doesn't exist for the given name.            
 
         Parameters 
         ---------- 
@@ -90,11 +84,9 @@ class Model( _Model ):
         return None
     
     def get_part(self, id : int) -> Part:
-        """  Gets the part by id. 
+        """Gets the part by id. 
 
-        Description 
-        ----------- 
-            Gets the part by id. Returns None if part doesn't exist for the given id.            
+        Gets the part by id. Returns None if part doesn't exist for the given id.            
 
         Parameters 
         ---------- 
@@ -120,9 +112,7 @@ class Model( _Model ):
     def __str__(self):
         """ Prints the summary of the model. 
 
-        Description 
-        ----------- 
-            Prints the summary of the model.            
+        Prints the summary of the model.            
 
         Returns 
         -------

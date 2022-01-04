@@ -13,10 +13,8 @@ class FileIO(_FileIO):
         _FileIO.__init__(self, model)
     
     def read_pmdat(self, file_name) -> FileReadResults:
-        """  Function that reads PRIME's database file.
+        """Function that reads PRIME's database file.
 
-        Description 
-        ----------- 
         Read PRIME's database file from disk.
         PRIME's database files have pmdat extension.
         Unicode paths are not currently supported by this API
