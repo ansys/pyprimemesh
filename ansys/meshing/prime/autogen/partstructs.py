@@ -6,16 +6,14 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
 
-from ansys.meshing.prime.autogen.primeconfig import *
-
-from ansys.meshing.prime.autogen.commontypes import *
-
 from ansys.meshing.prime.params.primestructs import *
 
 
 
 class PartSummaryParams(CoreObject):
     """ 
+     Parameters to control part summary results.
+
     """ 
     default_params = {}
     def __initialize(
@@ -32,6 +30,24 @@ class PartSummaryParams(CoreObject):
         print_mesh : bool = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes PartSummaryParams
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a PartSummaryParams object with default parameters.
+        print_id : bool, optional
+             Boolean to control print ids. The default is false. 
+        print_mesh : bool, optional
+             Boolean to control print mesh info. The default is true. 
+        json_data : dict, optional 
+            JSON dictionary to create a PartSummaryParams object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> part_summary_params = PartSummaryParams(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 json_data["printId"],
@@ -85,7 +101,7 @@ class PartSummaryParams(CoreObject):
     @property
     def print_id(self) -> bool:
         """ 
-         Boolean to control print ids, The default is false 
+         Boolean to control print ids. The default is false. 
 
         """ 
         return self._print_id
@@ -97,7 +113,7 @@ class PartSummaryParams(CoreObject):
     @property
     def print_mesh(self) -> bool:
         """ 
-         Boolean to control print mesh info. The default is true 
+         Boolean to control print mesh info. The default is true. 
 
         """ 
         return self._print_mesh
@@ -110,6 +126,8 @@ class PartSummaryParams(CoreObject):
 
 class PartSummaryResults(CoreObject):
     """ 
+     Results of part summary.
+
     """ 
     default_params = {}
     def __initialize(
@@ -189,6 +207,66 @@ class PartSummaryResults(CoreObject):
         n_unmeshed_topo_faces : int = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes PartSummaryResults
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a PartSummaryResults object with default parameters.
+        message : str, optional
+             Part summary text. 
+        n_topo_edges : int, optional
+             Number of topo edges. 
+        n_topo_faces : int, optional
+             Number of topo faces. 
+        n_topo_volumes : int, optional
+             Number of topo volumes. 
+        n_edge_zonelets : int, optional
+             Number of edge zonelets. 
+        n_face_zonelets : int, optional
+             Number of face zonelets. 
+        n_cell_zonelets : int, optional
+             Number of cell zonelets. 
+        n_edge_zones : int, optional
+             Number of edge zones. 
+        n_face_zones : int, optional
+             Number of face zones. 
+        n_volume_zones : int, optional
+             Number of volume zones. 
+        n_labels : int, optional
+             Number of labels. 
+        n_nodes : int, optional
+             Number of nodes. 
+        n_faces : int, optional
+             Number of faces. 
+        n_cells : int, optional
+             Number of cells. 
+        n_tri_faces : int, optional
+             Number of triangular faces. 
+        n_poly_faces : int, optional
+             Number of polygonal faces. 
+        n_quad_faces : int, optional
+             Number of quadrilateral faces. 
+        n_tet_cells : int, optional
+             Number of tetrahedral cells. 
+        n_pyra_cells : int, optional
+             Number of pyramid cells. 
+        n_prism_cells : int, optional
+             Number of prism cells. 
+        n_poly_cells : int, optional
+             Number of polyhedral cells. 
+        n_hex_cells : int, optional
+             Number of hexahedral cells. 
+        n_unmeshed_topo_faces : int, optional
+             Number of unmeshed topo faces. 
+        json_data : dict, optional 
+            JSON dictionary to create a PartSummaryResults object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> part_summary_results = PartSummaryResults(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 json_data["message"],
@@ -347,7 +425,7 @@ class PartSummaryResults(CoreObject):
     @property
     def message(self) -> str:
         """ 
-         Part summary info 
+         Part summary text. 
 
         """ 
         return self._message
@@ -359,7 +437,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_topo_edges(self) -> int:
         """ 
-         Number of topo edges 
+         Number of topo edges. 
 
         """ 
         return self._n_topo_edges
@@ -371,7 +449,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_topo_faces(self) -> int:
         """ 
-         Number of topo faces 
+         Number of topo faces. 
 
         """ 
         return self._n_topo_faces
@@ -383,7 +461,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_topo_volumes(self) -> int:
         """ 
-         Number of topo volumes 
+         Number of topo volumes. 
 
         """ 
         return self._n_topo_volumes
@@ -395,7 +473,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_edge_zonelets(self) -> int:
         """ 
-         Number of edge zonelets 
+         Number of edge zonelets. 
 
         """ 
         return self._n_edge_zonelets
@@ -407,7 +485,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_face_zonelets(self) -> int:
         """ 
-         Number of face zonelets 
+         Number of face zonelets. 
 
         """ 
         return self._n_face_zonelets
@@ -419,7 +497,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_cell_zonelets(self) -> int:
         """ 
-         Number of cell zonelets 
+         Number of cell zonelets. 
 
         """ 
         return self._n_cell_zonelets
@@ -431,7 +509,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_edge_zones(self) -> int:
         """ 
-         Number of edge zones 
+         Number of edge zones. 
 
         """ 
         return self._n_edge_zones
@@ -443,7 +521,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_face_zones(self) -> int:
         """ 
-         Number of face zones 
+         Number of face zones. 
 
         """ 
         return self._n_face_zones
@@ -455,7 +533,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_volume_zones(self) -> int:
         """ 
-         Number of volume zones 
+         Number of volume zones. 
 
         """ 
         return self._n_volume_zones
@@ -467,7 +545,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_labels(self) -> int:
         """ 
-         Number of labels 
+         Number of labels. 
 
         """ 
         return self._n_labels
@@ -479,7 +557,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_nodes(self) -> int:
         """ 
-         Number of nodes 
+         Number of nodes. 
 
         """ 
         return self._n_nodes
@@ -491,7 +569,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_faces(self) -> int:
         """ 
-         Number of faces 
+         Number of faces. 
 
         """ 
         return self._n_faces
@@ -503,7 +581,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_cells(self) -> int:
         """ 
-         Number of cells 
+         Number of cells. 
 
         """ 
         return self._n_cells
@@ -515,7 +593,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_tri_faces(self) -> int:
         """ 
-         Number of triangular faces 
+         Number of triangular faces. 
 
         """ 
         return self._n_tri_faces
@@ -527,7 +605,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_poly_faces(self) -> int:
         """ 
-         Number of polygonal faces 
+         Number of polygonal faces. 
 
         """ 
         return self._n_poly_faces
@@ -539,7 +617,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_quad_faces(self) -> int:
         """ 
-         Number of quadrilateral faces 
+         Number of quadrilateral faces. 
 
         """ 
         return self._n_quad_faces
@@ -551,7 +629,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_tet_cells(self) -> int:
         """ 
-         Number of tetrahedral cells 
+         Number of tetrahedral cells. 
 
         """ 
         return self._n_tet_cells
@@ -563,7 +641,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_pyra_cells(self) -> int:
         """ 
-         Number of pyramid cells 
+         Number of pyramid cells. 
 
         """ 
         return self._n_pyra_cells
@@ -575,7 +653,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_prism_cells(self) -> int:
         """ 
-         Number of prism cells 
+         Number of prism cells. 
 
         """ 
         return self._n_prism_cells
@@ -587,7 +665,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_poly_cells(self) -> int:
         """ 
-         Number of polyhedral cells 
+         Number of polyhedral cells. 
 
         """ 
         return self._n_poly_cells
@@ -599,7 +677,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_hex_cells(self) -> int:
         """ 
-         Number of hexahedral cells 
+         Number of hexahedral cells. 
 
         """ 
         return self._n_hex_cells
@@ -611,7 +689,7 @@ class PartSummaryResults(CoreObject):
     @property
     def n_unmeshed_topo_faces(self) -> int:
         """ 
-         Number of unmeshed topo faces 
+         Number of unmeshed topo faces. 
 
         """ 
         return self._n_unmeshed_topo_faces

@@ -5,8 +5,7 @@ from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import *
 
 class FileIO(_FileIO):
-    """Proxy of C++ PrimeMesh::FileIO class."""
-    
+    __doc__ = _FileIO.__doc__
     def __init__(self, model):
         """ __init__(FileIO self, Model model)"""
         self._model = model
@@ -17,17 +16,17 @@ class FileIO(_FileIO):
 
         Read PRIME's database file from disk.
         PRIME's database files have pmdat extension.
-        Unicode paths are not currently supported by this API
+        Unicode paths are not currently supported by this API.
 
         Parameters 
         ---------- 
         file_name : str
-             Path to file on disk
+             Path to file on disk.
 
         Returns 
         -------
         FileReadResults
-             Returns FileReadResults
+             Returns FileReadResults.
 
         Examples 
         --------

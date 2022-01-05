@@ -6,18 +6,15 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any
 
 class FileIO(CoreObject):
-    """ 
-     Handles reading/writing files
+    """Handles reading/writing files
 
-    Description 
-    ----------- 
     Contains methods to read/write files from disk
     """ 
 
     def __init__(self, model: CommunicationManager):
         """ Initialize FileIO """
         self._model = model
-        self._comm = model.communicator
+        self._comm = model._communicator
         command_name = "PrimeMesh::FileIO/Construct"
         args = {"ModelID" : model.object_id , "MaxID" : -1 }
         result = self._comm.serve(command_name, args=args)
@@ -34,26 +31,24 @@ class FileIO(CoreObject):
         self._comm.serve(command_name, self.object_id, args={})
     
     def read_pmdat(self, file_name : str) -> FileReadResults:
-        """  Function that reads PRIME's database file.
+        """ Function that reads PRIME's database file.
 
-        Description 
-        ----------- 
         Read PRIME's database file from disk.
         PRIME's database files have pmdat extension.
         Unicode paths are not currently supported by this API
 
-        Parameters 
-        ---------- 
+        Parameters
+        ----------
         file_name : str
-             Path to file on disk
+            Path to file on disk
 
-        Return 
-        ------ 
+        Returns
+        -------
         FileReadResults
-             Returns FileReadResults
+            Returns FileReadResults
 
-        Example 
-        ------- 
+        Examples
+        --------
         
         >>> from ansys.meshing.prime import FileIO
         >>> #connect client to server and get model from it

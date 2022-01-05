@@ -50,9 +50,12 @@ class GRPCCommunicator(Communicator):
         else:
             raise RuntimeError("No connection with server")
 
-    def initialize_params(self, param_name: str) -> dict:
+    def initialize_params(self, param_name: str, *args) -> dict:
         if self._stub:
-            response = self._stub.GetParamDefaultJson(prime_pb2.Request(command=param_name))
+            command = { "ParamName" : param_name }
+            if(len(args) > 0 ):
+                command.update({ "ModelID" : args[0]})
+            response = self._stub.GetParamDefaultJson(prime_pb2.Request(command=json.dumps(command)))
             message = ''.join(str(resp.output) for resp in response)
             return json.loads(message)
         else:

@@ -6,25 +6,14 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
 
-from ansys.meshing.prime.autogen.primeconfig import *
-
-from ansys.meshing.prime.autogen.commontypes import *
-
 from ansys.meshing.prime.params.primestructs import *
-
-class SolverType(enum.IntEnum):
-    """ 
-    """ 
-    FLUENT = 1
-    """ Solver type is Fluent. Creates a group of face quality measures mostly used in Fluent""" 
-    MAPDL = 2
-    """ Solver type is MAPDL. Creates a group of face quality measures mostly used in MAPDL""" 
-    
 
 
 
 class SurfaceQualityResult(CoreObject):
     """ 
+     Result of surface quality.
+
     """ 
     default_params = {}
     def __initialize(
@@ -53,6 +42,32 @@ class SurfaceQualityResult(CoreObject):
         min_value : float = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes SurfaceQualityResult
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a SurfaceQualityResult object with default parameters.
+        face_quality_measure : FaceQualityMeasure, optional
+             Type of the face quality measure.  
+        measure_name : str, optional
+             Name of the face quality measure. 
+        quality_limit : float, optional
+             Target quality limit used to find failures. 
+        n_found : int, optional
+             Number of failed faces. 
+        max_value : float, optional
+             Maximum value of quality measure. 
+        min_value : float, optional
+             Minimum value of quality measure. 
+        json_data : dict, optional 
+            JSON dictionary to create a SurfaceQualityResult object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> surface_quality_result = SurfaceQualityResult(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 FaceQualityMeasure(json_data["faceQualityMeasure"]),
@@ -126,7 +141,7 @@ class SurfaceQualityResult(CoreObject):
     @property
     def face_quality_measure(self) -> FaceQualityMeasure:
         """ 
-         Type of the face quality measure  
+         Type of the face quality measure.  
 
         """ 
         return self._face_quality_measure
@@ -138,7 +153,7 @@ class SurfaceQualityResult(CoreObject):
     @property
     def measure_name(self) -> str:
         """ 
-         Name of the face quality measure 
+         Name of the face quality measure. 
 
         """ 
         return self._measure_name
@@ -150,7 +165,7 @@ class SurfaceQualityResult(CoreObject):
     @property
     def quality_limit(self) -> float:
         """ 
-         Target quality limit used to find failures 
+         Target quality limit used to find failures. 
 
         """ 
         return self._quality_limit
@@ -162,7 +177,7 @@ class SurfaceQualityResult(CoreObject):
     @property
     def n_found(self) -> int:
         """ 
-         Number of failed faces 
+         Number of failed faces. 
 
         """ 
         return self._n_found
@@ -174,7 +189,7 @@ class SurfaceQualityResult(CoreObject):
     @property
     def max_value(self) -> float:
         """ 
-         Maximum value of quality measure 
+         Maximum value of quality measure. 
 
         """ 
         return self._max_value
@@ -186,7 +201,7 @@ class SurfaceQualityResult(CoreObject):
     @property
     def min_value(self) -> float:
         """ 
-         Minimum value of quality measure 
+         Minimum value of quality measure. 
 
         """ 
         return self._min_value
@@ -199,6 +214,8 @@ class SurfaceQualityResult(CoreObject):
 
 class SurfaceQualitySummaryResults(CoreObject):
     """ 
+     Results of surface quality summary.
+
     """ 
     default_params = {}
     def __initialize(
@@ -218,6 +235,26 @@ class SurfaceQualitySummaryResults(CoreObject):
         summary : str = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes SurfaceQualitySummaryResults
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a SurfaceQualitySummaryResults object with default parameters.
+        error_code : ErrorCode, optional
+             Error code associated with the surface quality summary. 
+        quality_results : List[SurfaceQualityResult], optional
+             Contains surface quality result per face quality measure specified in parameters. 
+        summary : str, optional
+             Surface quality summary text. 
+        json_data : dict, optional 
+            JSON dictionary to create a SurfaceQualitySummaryResults object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> surface_quality_summary_results = SurfaceQualitySummaryResults(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 ErrorCode(json_data["errorCode"]),
@@ -276,7 +313,7 @@ class SurfaceQualitySummaryResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """ 
-         Approproate error code is set if the get quality summary was unsuccessful 
+         Error code associated with the surface quality summary. 
 
         """ 
         return self._error_code
@@ -288,7 +325,7 @@ class SurfaceQualitySummaryResults(CoreObject):
     @property
     def quality_results(self) -> List[SurfaceQualityResult]:
         """ 
-         Contains surface quality result per face quality measure specified in params. 
+         Contains surface quality result per face quality measure specified in parameters. 
 
         """ 
         return self._quality_results
@@ -300,7 +337,7 @@ class SurfaceQualitySummaryResults(CoreObject):
     @property
     def summary(self) -> str:
         """ 
-         Surface quality summary. 
+         Surface quality summary text. 
 
         """ 
         return self._summary
@@ -313,6 +350,8 @@ class SurfaceQualitySummaryResults(CoreObject):
 
 class SurfaceQualitySummaryParams(CoreObject):
     """ 
+     Parameters to control surface quality summary results.
+
     """ 
     default_params = {}
     def __initialize(
@@ -332,6 +371,26 @@ class SurfaceQualitySummaryParams(CoreObject):
         quality_limit : List[float] = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes SurfaceQualitySummaryParams
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a SurfaceQualitySummaryParams object with default parameters.
+        face_quality_measures : List[int], optional
+             List of face quality measures for surface quality diagnostics.
+        scope : ScopeDefinition, optional
+             Scope the face zonelets for surface quality diagnostics.
+        quality_limit : List[float], optional
+             Quality limit per face quality measure, if not specified for particular measure default quality limit is used. 
+        json_data : dict, optional 
+            JSON dictionary to create a SurfaceQualitySummaryParams object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> surface_quality_summary_params = SurfaceQualitySummaryParams(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 json_data["faceQualityMeasures"],
@@ -390,7 +449,7 @@ class SurfaceQualitySummaryParams(CoreObject):
     @property
     def face_quality_measures(self) -> List[int]:
         """ 
-         List of face quality measures for surface quality diagnostics
+         List of face quality measures for surface quality diagnostics.
 
         """ 
         return self._face_quality_measures
@@ -402,7 +461,7 @@ class SurfaceQualitySummaryParams(CoreObject):
     @property
     def scope(self) -> ScopeDefinition:
         """ 
-         Scope the face zonelets for surface quality diagnostics
+         Scope the face zonelets for surface quality diagnostics.
 
         """ 
         return self._scope

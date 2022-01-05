@@ -9,11 +9,16 @@ import logging
 from ansys.meshing.prime.internals import utils
 
 class Model(CoreObject, CommunicationManager):
-    """ 
-    
+    """Base class of Prime Mesh
 
-    Description 
-    ----------- 
+    Model is the nucleus of Prime Mesh. Model forms the base and contains
+    all information about Prime. You can access any information in Prime
+    only through Model. Model is comprised of different Parts, Size fields,
+    Size controls, Prism control, checkpoints cand other functions. You
+    can perform different actions like get, check, activate, update,
+    create, delete, deactivate on the mesh items through Model to get the
+    respective output.For example, you can create a Part through model
+    using the function Create Meshpart
     """ 
 
     def __init__(self, comm, id: int, object_id: int, name: str):
@@ -32,29 +37,25 @@ class Model(CoreObject, CommunicationManager):
 
     
     def get_child_objects_json(self) -> str:
-        """  Gets child objects of model in JSON format.
+        """ Gets child objects of model in JSON format.
 
-        Description 
-        ----------- 
-        Used to create proxy child objects of the model at client side.
-        Client side model store the proxy child objects(e.g Part, TopoData, ControlData, etc), those can be queried directly from client side model.
+        Used to create child objects of the model at client side.
+        Client side model store the child objects(e.g Part, TopoData, ControlData, etc), those can be queried directly from the model.
 
-        Parameters 
-        ---------- 
 
-        Return 
-        ------ 
+        Returns
+        -------
         String
-             Returns the JSON format which can be loaded to create proxy child objects of the model.
+            Returns the JSON format which can be loaded to create child objects of the model.
 
-        Note 
-        ---- 
+        Notes
+        -----
         This method is used by FileIO to synchronize model after read or append files.
         User may not need to call this API explicitly.
 
         
-        Example 
-        ------- 
+        Examples
+        --------
         
         >>> results = model.get_child_objects_json()
 

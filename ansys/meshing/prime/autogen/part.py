@@ -6,42 +6,42 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any
 
 class Part(CoreObject):
-    """ 
-    
+    """A collection of zonelets. 
 
-    Description 
-    ----------- 
-    *********************************************************************************************************************************************************
+    Parts are a collection of zonelets and information about how the zonelets are connected to each other.
+    Zonelets are a group of interconnected entities in a mesh. There are four types of zonelets. They are:
+    - FaceZonelet: A group of interconnected faces
+    - EdgeZonelet: A group of connected edges
+    - CellZonelet: A group of connected cells
+    - NodeZonelet: A group of connected nodes
     """ 
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
         """ Initialize Part """
         self._model = model
-        self._comm = model.communicator
+        self._comm = model._communicator
         self._id = id
         self._object_id = object_id
         self._name = name
         self._freeze()
     
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
-        """  Gets the part summary.
+        """ Gets the part summary.
 
-        Description 
-        ----------- 
-        Gets the part summary for the provided parameters 
+        Gets the part summary for the provided parameters
 
-        Parameters 
-        ---------- 
+        Parameters
+        ----------
         params : PartSummaryParams
-             Part summary parameters.
+            Part summary parameters.
 
-        Return 
-        ------ 
+        Returns
+        -------
         PartSummaryResults
-             Returns the PartSummaryResults structure.
+            Returns the PartSummaryResults structure.
 
-        Example 
-        ------- 
+        Examples
+        --------
         
         >>> results = part.get_summary(PartSummaryParams(model=model))
 

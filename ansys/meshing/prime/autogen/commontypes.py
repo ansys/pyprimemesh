@@ -8,6 +8,17 @@ from ansys.meshing.prime.autogen.coreobject import *
 
 from ansys.meshing.prime.params.primestructs import *
 
+class SolverType(enum.IntEnum):
+    """ 
+     Type of solver.
+
+    """ 
+    FLUENT = 1
+    """ Solver type is Fluent. Creates a group of face quality measures mostly used in Fluent.""" 
+    MAPDL = 2
+    """ Solver type is MAPDL. Creates a group of face quality measures mostly used in MAPDL.""" 
+    
+
 class FaceQualityMeasure(enum.IntEnum):
     """ 
     """ 

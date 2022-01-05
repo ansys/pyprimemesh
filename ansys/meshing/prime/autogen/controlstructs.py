@@ -6,32 +6,34 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
 
-from ansys.meshing.prime.autogen.primeconfig import *
-
-from ansys.meshing.prime.autogen.commontypes import *
-
 from ansys.meshing.prime.params.primestructs import *
 
 class ScopeEntity(enum.IntEnum):
     """ 
+      ScopeDefinition uses entity type to scope entities.
+
     """ 
     FACEZONELETS = 1
-    """ Evaluate scope to get the face zonelets""" 
+    """ Evaluate scope to get the face zonelets.""" 
     
 
 class ScopeEvaluationType(enum.IntEnum):
     """ 
+     ScopeDefinition uses evaluation type to evaluate the scope.
+
     """ 
     LABELS = 3
-    """ Use labels to evaluate the scope""" 
+    """ Use labels to evaluate the scope.""" 
     ZONES = 4
-    """ Use zones to evaluate the scope""" 
+    """ Use zones to evaluate the scope.""" 
     
 
 
 
 class ScopeDefinition(CoreObject):
     """ 
+      ScopeDefinition to scope entities based on entity and evaluation type.
+
     """ 
     default_params = {}
     def __initialize(
@@ -57,6 +59,30 @@ class ScopeDefinition(CoreObject):
         zone_expression : str = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes ScopeDefinition
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a ScopeDefinition object with default parameters.
+        entity_type : ScopeEntity, optional
+             Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+        evaluation_type : ScopeEvaluationType, optional
+             Evaluation type to scope entities. The default is set to labels.
+        part_expression : str, optional
+             Part expression to scope parts while evaluating scope. 
+        label_expression : str, optional
+             Label expression to scope entities when evaluation type is set to labels. 
+        zone_expression : str, optional
+             Zone expression to scope entities when evaluation type is set to zones. 
+        json_data : dict, optional 
+            JSON dictionary to create a ScopeDefinition object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> scope_definition = ScopeDefinition(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 ScopeEntity(json_data["entityType"]),
@@ -125,7 +151,7 @@ class ScopeDefinition(CoreObject):
     @property
     def entity_type(self) -> ScopeEntity:
         """ 
-         Entity type for which scope needs to be evaluated. The default is set to face zonelets
+         Entity type for which scope needs to be evaluated. The default is set to face zonelets.
 
         """ 
         return self._entity_type
@@ -137,7 +163,7 @@ class ScopeDefinition(CoreObject):
     @property
     def evaluation_type(self) -> ScopeEvaluationType:
         """ 
-         Evaluation type to scope entities. The default is set to labels
+         Evaluation type to scope entities. The default is set to labels.
 
         """ 
         return self._evaluation_type
@@ -149,7 +175,7 @@ class ScopeDefinition(CoreObject):
     @property
     def part_expression(self) -> str:
         """ 
-         Part expression to scope parts while evaluating scope 
+         Part expression to scope parts while evaluating scope. 
 
         """ 
         return self._part_expression
@@ -161,7 +187,7 @@ class ScopeDefinition(CoreObject):
     @property
     def label_expression(self) -> str:
         """ 
-         Label expression to scope entities when evaluation type is set to labels 
+         Label expression to scope entities when evaluation type is set to labels. 
 
         """ 
         return self._label_expression
@@ -173,7 +199,7 @@ class ScopeDefinition(CoreObject):
     @property
     def zone_expression(self) -> str:
         """ 
-         Zone expression to scope entities when evaluation type is set to zones 
+         Zone expression to scope entities when evaluation type is set to zones. 
 
         """ 
         return self._zone_expression

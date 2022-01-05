@@ -6,9 +6,22 @@ from typing import KeysView, List
 import json
 
 class Part(_Part):
-    """Proxy of C++ PrimeMesh::Part class."""
+    __doc__ = _Part.__doc__
+
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
-        """ Initialize Part """
+        """Initialize Part 
+
+        Parameters
+        ----------
+        model: ansys.meshing.prime.Model
+            Model in which part is created
+        id: int
+            Id of the part provided by server
+        object_id: int
+            Object id provided by the server
+        name: str
+            Part name
+        """
         self._model = model
         self._print_mesh = False
         self._print_id = False
@@ -21,9 +34,9 @@ class Part(_Part):
 
         Parameters 
         ----------  
-        print_mesh : bool
+        print_mesh : bool, optional
             print_mesh pass True will get the mesh summary along with part summary. The default is False. 
-        peint_id : bool
+        peint_id : bool, optional
             print_id pass True will get id's of topo entities/zonelets along with part summary. The default is False.
         
         Returns
@@ -31,7 +44,7 @@ class Part(_Part):
         str
             Returns the summary of part.
 
-        Examples 
+        Examples
         --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
@@ -53,7 +66,7 @@ class Part(_Part):
     def __str__(self) -> str:
         """Prints the summary of a part. 
 
-        Uses print_mesh and print_id properties to control the the summary of a part .            
+        Uses print_mesh and print_id properties to control the the summary of a part.            
 
         Returns 
         -------
@@ -61,7 +74,7 @@ class Part(_Part):
             Returns the summary of a part.
 
         Examples 
-        --------
+        -------- 
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> part = model.get_part_by_name("Part.1")
@@ -75,7 +88,7 @@ class Part(_Part):
     
     @property
     def print_mesh(self) ->bool:
-        """ print_mesh pass True will get the mesh summary along with part summary. The default is False """
+        """True will get the mesh summary along with part summary. The default is False. """
         return self._print_mesh
     
     @print_mesh.setter
@@ -84,7 +97,7 @@ class Part(_Part):
 
     @property
     def print_id(self) ->bool:
-        """ print_id pass True will get id's of topo entities/zonelets along with part summary. The default is False. """
+        """True will get id's of topo entities/zonelets along with part summary. The default is False. """
         return self._print_id
     
     @print_id.setter

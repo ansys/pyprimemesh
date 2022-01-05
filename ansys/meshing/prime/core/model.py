@@ -9,8 +9,7 @@ import json
 import logging
 
 class Model( _Model ):
-
-    """Proxy of C++ PrimeMesh::Model class."""
+    __doc__ = _Model.__doc__
     def __init__(self, comm : Communicator , id : int, object_id : int, name : str):
         """ Initialize Model """
         _Model.__init__(self, comm, id, object_id, name)
@@ -32,7 +31,7 @@ class Model( _Model ):
         --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
-        >>> model.sync_up_model()
+        >>> model._sync_up_model()
         """
         res = json.loads(_Model.get_child_objects_json(self))
         part_data = res["Parts"]
@@ -41,8 +40,6 @@ class Model( _Model ):
 
     def get_parts(self) -> List[Part]:
         """Gets the list of parts of a model. 
-
-        Gets the list of proxy parts of a model.        
 
         Returns 
         -------
@@ -112,15 +109,13 @@ class Model( _Model ):
     def __str__(self):
         """ Prints the summary of the model. 
 
-        Prints the summary of the model.            
-
         Returns 
         -------
         str
             Returns the summary of the model.
 
-        Examples 
-        ------- 
+        Examples
+        --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
         >>> print(model)
@@ -141,7 +136,7 @@ class Model( _Model ):
         Returns
         -------
         Logger
-             Returns logging.Logger instance
+             Returns logging.Logger instance.
 
         Examples
         --------

@@ -6,17 +6,13 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
 
-from ansys.meshing.prime.autogen.primeconfig import *
-
-from ansys.meshing.prime.autogen.commontypes import *
-
 from ansys.meshing.prime.params.primestructs import *
 
 
 
 class FileReadResults(CoreObject):
     """ 
-      Results of file read
+      Results of file read.
 
     """ 
     default_params = {}
@@ -31,6 +27,22 @@ class FileReadResults(CoreObject):
         error_code : ErrorCode = None,
         json_data : dict = None,
          **kwargs):
+        """ 
+        Initializes FileReadResults
+
+        Parameters 
+        ---------- 
+        model : CommunicationManager 
+            CommunicationManager to create a FileReadResults object with default parameters.
+        error_code : ErrorCode, optional
+             Appropriate error code is set if the read was unsuccessful. 
+        json_data : dict, optional 
+            JSON dictionary to create a FileReadResults object with provided parameters.
+
+        Examples 
+        ------- 
+        >>> file_read_results = FileReadResults(model = model)
+        """ 
         if json_data:
             self.__initialize(
                 ErrorCode(json_data["errorCode"]))
@@ -79,7 +91,7 @@ class FileReadResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """ 
-         Approproate error code is set if the read was unsuccessful 
+         Appropriate error code is set if the read was unsuccessful. 
 
         """ 
         return self._error_code

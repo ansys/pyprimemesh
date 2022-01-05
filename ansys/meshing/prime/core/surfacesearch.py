@@ -5,12 +5,12 @@ from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.autogen.surfacesearchstructs import *
 
 from ansys.meshing.prime.autogen.commontypes import FaceQualityMeasure
+from ansys.meshing.prime.autogen.commontypes import SolverType
 from typing import KeysView, List
 import json
 
 class SurfaceQualitySummary( _SurfaceSearch):
-    """Proxy of C++ PrimeMesh::SurfaceQualitySummary class."""
-    
+    __doc__ = _SurfaceSearch.__doc__
     def __init__(self, model: CommunicationManager, parts : List[Part] = None, 
         scope: ScopeDefinition = None, 
         solver :  SolverType = None, 
@@ -18,12 +18,12 @@ class SurfaceQualitySummary( _SurfaceSearch):
         quality_limit: List[float] = None):
         """Initialize SurfaceQualitySummary. 
 
-        Constructor to initialize SurfaceQualitySummary object. Uses solver type to define face quality measures if not defined explicitly
+        Constructor to initialize SurfaceQualitySummary object. Uses solver type to define face quality measures if not defined explicitly.
 
         Parameters
         ----------
         model : CommunicationManager
-            Communication manager to serve JSON API
+            Communication manager to serve JSON API.
         parts : List[Part], optional
             List of parts to scope the face zonelets to get surface quality summary.
         scope : ScopeDefinition, optional
@@ -35,7 +35,7 @@ class SurfaceQualitySummary( _SurfaceSearch):
         quality_limit : List[float], optional
             List of quality limit per face quality measure. Uses default quality limit if not specified.
         
-        Examples
+        Examples 
         -------- 
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
@@ -67,12 +67,12 @@ class SurfaceQualitySummary( _SurfaceSearch):
 
         Uses face_quality_measures, parts, scope, solver_type and quality_limit properties to print the surface quality summary.            
 
-        Returns
-        -------
+        Returns 
+        ------- 
         str
             Returns the surface quality summary.
 
-        Examples
+        Examples 
         --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()

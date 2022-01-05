@@ -5,5 +5,5 @@ class CommunicationManager:
         self._comm = comm
 
     @property
-    def communicator(self):
+    def _communicator(self):
         return self._comm

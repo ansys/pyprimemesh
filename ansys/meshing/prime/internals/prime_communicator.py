@@ -24,8 +24,11 @@ class PrimeCommunicator(Communicator):
         
         return json.loads(Prime.ServeJson(json.dumps(command)).Get())
 
-    def initialize_params(self, param_name: str) -> dict:
-        return json.loads(Prime.GetParamDefaultJson(param_name).Get())
+    def initialize_params(self, param_name: str, *args) -> dict:
+        command = { "ParamName" : param_name }
+        if(len(args) > 0 ):
+            command.update({ "ModelID" : args[0]})
+        return json.loads(Prime.GetParamDefaultJson(json.dumps(command)).Get())
     
     def run_on_server(self, recipe: str) -> dict:
         exec(recipe, globals())

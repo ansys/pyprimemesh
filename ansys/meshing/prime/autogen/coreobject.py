@@ -5,11 +5,8 @@ from ansys.meshing.prime.params.primestructs import *
 from typing import List, Any
 
 class CoreObject(object):
-    """ 
-    
+    """
 
-    Description 
-    ----------- 
     """ 
 
     __isfrozen = False

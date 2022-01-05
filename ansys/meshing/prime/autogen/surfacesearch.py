@@ -6,17 +6,14 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any
 
 class SurfaceSearch(CoreObject):
-    """ 
-    
+    """
 
-    Description 
-    ----------- 
     """ 
 
     def __init__(self, model: CommunicationManager):
         """ Initialize SurfaceSearch """
         self._model = model
-        self._comm = model.communicator
+        self._comm = model._communicator
         command_name = "PrimeMesh::SurfaceSearch/Construct"
         args = {"ModelID" : model.object_id , "MaxID" : -1 }
         result = self._comm.serve(command_name, args=args)
@@ -33,25 +30,23 @@ class SurfaceSearch(CoreObject):
         self._comm.serve(command_name, self.object_id, args={})
     
     def get_surface_quality_summary(self, params : SurfaceQualitySummaryParams) -> SurfaceQualitySummaryResults:
-        """  Gets the surface quality summary.
+        """ Gets the surface quality summary.
 
-        Description 
-        ----------- 
         Diagnose surface quality for the given scope and face quality measures provided in params.
         Uses default quality limit if not specified with params.
 
-        Parameters 
-        ---------- 
+        Parameters
+        ----------
         params : SurfaceQualitySummaryParams
-             Surface quality summary parameters.
+            Surface quality summary parameters.
 
-        Return 
-        ------ 
+        Returns
+        -------
         SurfaceQualitySummaryResults
-             Returns the SurfaceQualitySummaryResults.
+            Returns the SurfaceQualitySummaryResults.
 
-        Example 
-        ------- 
+        Examples
+        --------
         
         >>> surf_search = SurfaceSearch(model=model)
         >>> results = surf_search.get_surface_quality_summary(SurfaceQualitySummaryParams(model=model))
