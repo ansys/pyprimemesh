@@ -9,7 +9,7 @@ The PyPRIME project supports Pythonic access to Ansys' PRIME Meshing Engine.
 Installation
 ------------
 The ``ansys-meshing-prime`` package currently supports Python 3.6 through
-Python 3.8 on Windows, MacOS and Linux.
+Python 3.10 on Windows, MacOS and Linux.
 
 Install PyPrime with:
 

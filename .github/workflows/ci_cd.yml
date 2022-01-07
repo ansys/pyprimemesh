@@ -47,8 +47,8 @@ jobs:
 
       - name: Create wheel
         run: |
-          pip install wheel
-          python setup.py bdist_wheel
+          pip install build
+          python -m build
 
       - name: Validate wheel
         run: |
@@ -58,11 +58,11 @@ jobs:
       - name: Install library
         run: pip install dist/*
 
-      - name: Unit testing
-        run: |
-          pip install -r requirements_test.txt
-          cd tests  # so we're testing the install, not local
-          pytest -vx
+      # - name: Unit testing
+      #   run: |
+      #     pip install -r requirements_test.txt
+      #     cd tests  # so we're testing the install, not local
+      #     pytest -vx
 
       - name: Upload wheel
         uses: actions/upload-artifact@v2
