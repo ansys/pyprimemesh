@@ -48,7 +48,7 @@ jobs:
       - name: Create wheel
         run: |
           pip install build
-          python -m build
+          python -m build -w
 
       - name: Validate wheel
         run: |
