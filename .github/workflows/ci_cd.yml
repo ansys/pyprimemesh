@@ -67,7 +67,7 @@ jobs:
       - name: Upload wheel
         uses: actions/upload-artifact@v2
         with:
-          name: ansys-product-library-wheel
+          name: PyPrime-client-wheel
           path: dist/
           retention-days: 7
 
