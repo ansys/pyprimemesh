@@ -1,6 +1,5 @@
 """ Auto-generated file. DO NOT MODIFY """
 import enum
-import logging
 from typing import Dict, Any, List
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
@@ -9,756 +8,446 @@ from ansys.meshing.prime.autogen.coreobject import *
 from ansys.meshing.prime.params.primestructs import *
 
 class ErrorCode(enum.IntEnum):
-    """ 
-     Please Document 
-
-    """ 
+    """Please Document
+    """
     NOERROR = 0
-    """ """ 
     UNKNOWN = 1
-    """ """ 
     SIGSEGV = 2
-    """ """ 
     SURFERFAILED = 3
-    """ """ 
     TOPOFACESREMESHFAILED = 4
-    """ """ 
     TOPOEDGESREMESHFAILED = 5
-    """ """ 
     SURFERLAYEREDQUADFAILED = 6
-    """ """ 
     SURFERINVALIDINPUT = 7
-    """ """ 
     SURFERQUADFAILED = 8
-    """ """ 
     SURFERWITHAUTOSIZINGFAILED = 9
-    """ """ 
     FACEZONELETSFEATURESNOTUPTODATE = 10
-    """ """ 
     SURFERAUTOSIZEQUADUNSUPPORTED = 11
-    """ """ 
     SURFERAUTOSIZEMUSTBEVOLUMETRIC = 12
-    """ """ 
     SURFERDEGENERATEFACE = 13
-    """ """ 
     SURFERNONMANIFOLDEDGE = 14
-    """ """ 
     MAPMESHINGFAILED = 15
-    """ """ 
     CHECKSLICERINPUTFAILED = 17
-    """ """ 
     SLICERINPUTFREEMULTIFACES = 18
-    """ """ 
     SLICERINPUTOVERLAPPINGFACES = 19
-    """ """ 
     SLICERINPUTINTERSECTINGFACES = 20
-    """ """ 
     PRESLICERFAILED = 21
-    """ """ 
     POSTSLICERFAILED = 22
-    """ """ 
     SLICERPROJECTIONINTERSECTINGFACES = 23
-    """ """ 
     SLICERFAILED = 24
-    """ """ 
     IMPROVESLICEDPARTFAILED = 25
-    """ """ 
     INFLATESLICECELLNODESFAILED = 26
-    """ """ 
     DELETETRAPPEDSLICESFAILED = 27
-    """ """ 
     CHECKSLICEDLAYERSFAILED = 28
-    """ """ 
     SCAFFOLDERBADINPUTEMPTYTOPO = 50
-    """ """ 
     SCAFFOLDERBADINPUTNOFREEFACES = 51
-    """ """ 
     SCAFFOLDERBADINPUTPARAMS = 52
-    """ """ 
     SHELLBLFAILED = 60
-    """ """ 
     SHELLBLQUADS = 61
-    """ """ 
     SHELLBLNOMESH = 62
-    """ """ 
     SHELLBLFEWLAYERS = 63
-    """ """ 
     SHELLBLWRONGTOPO = 64
-    """ """ 
     OGRIDREFINEFAILED = 65
-    """ """ 
     SPLITTOTRIFAILED = 66
-    """ """ 
     AUTOMESHFAILED = 100
-    """ """ 
     AITOVERLAPALONGMULTIFOUND = 101
-    """ """ 
     TRIANGULATIONFAILED = 102
-    """ """ 
     DUPLICATENODESFOUND = 103
-    """ """ 
     EDGEINTERSECTINGFACEFOUND = 104
-    """ """ 
     DUPLICATEFACESFOUND = 105
-    """ """ 
     TETIMPROVEFAILED = 106
-    """ """ 
     AUTONODEMOVEFAILED = 107
-    """ """ 
     COMPUTEBODIESFAILED = 109
-    """ """ 
     ALREADYVOLUMEMESHED = 110
-    """ """ 
     INVALIDPRISMCONTROLS = 111
-    """ """ 
     VOLUMESNOTUPTODATE = 112
-    """ """ 
     QUATRICMESHSUPPORTEDONLYFORTETS = 113
-    """ """ 
     NOACTIVESFFOUND = 114
-    """ """ 
     OUTOFMEMORY = 200
-    """ """ 
     INTERRUPTED = 201
-    """ """ 
     GETSTATISTICSFAILED = 250
-    """ """ 
     GETELEMENTCOUNTFAILED = 251
-    """ """ 
     PARTNOTFOUND = 300
-    """ """ 
     TOPODATANOTFOUND = 301
-    """ """ 
     SIZEFIELDNOTFOUND = 302
-    """ """ 
     ZONESARENOTOFSAMETYPE = 303
-    """ """ 
     PARTNOTMESHED = 304
-    """ """ 
     INVALIDINPUTPART = 305
-    """ """ 
     CADGEOMETRYNOTFOUND = 306
-    """ """ 
     VOLUMENOTFOUND = 307
-    """ """ 
     SPHEREATINVALIDNORMALNODESFAILED = 350
-    """ """ 
     PROJECTONCADGEOMETRYFAILED = 351
-    """ """ 
     SEPARATIONRESULTSFAILED = 360
-    """ """ 
     STRUCTUREDBLOCKSEPARATIONFAILED = 361
-    """ """ 
     MERGEFACEZONELETSRESULTSFAILED = 371
-    """ """ 
     COPYFACEZONELETSRESULTSFAILED = 372
-    """ """ 
     COPYEDGEZONELETSRESULTSFAILED = 373
-    """ """ 
     SIZEFIELDCOMPUTATIONFAILED = 400
-    """ """ 
     INVALIDSIZECONTROLS = 401
-    """ """ 
     REFRESHSIZEFIELDSFAILED = 402
-    """ """ 
     READMESHFAILED = 500
-    """ """ 
     WRITEMESHFAILED = 501
-    """ """ 
     CADIMPORTFAILED = 502
-    """ """ 
     READSIZEFIELDFAILED = 503
-    """ """ 
     WRITESIZEFIELDFAILED = 503
-    """ """ 
     READPMDBFAILED = 504
-    """ """ 
     READCDBFAILED = 505
-    """ """ 
     WRITECDBFAILED = 506
-    """ """ 
     READG2MFAILED = 507
-    """ """ 
     WRITEM2GFAILED = 508
-    """ """ 
     READNLAD2DFAILED = 509
-    """ """ 
     WRITENLAD2DFAILED = 510
-    """ """ 
     PATHNOTFOUND = 511
-    """ """ 
     READPROJFAILED = 512
-    """ """ 
     WRITEPROJFAILED = 513
-    """ """ 
     READMZPROJECTFAILED = 514
-    """ """ 
     WRITEMZPROJECTFAILED = 515
-    """ """ 
     WRITEBLOCKINGFAILED = 516
-    """ """ 
     READKEYWORDFILEFAILED = 517
-    """ """ 
     WRITEKEYWORDFILEFAILED = 518
-    """ """ 
     QUADRATICMESH_WRITEMESHFAILED = 519
-    """ """ 
     INCLUDEKFILENOTFOUND = 520
-    """ """ 
     READVTKFAILED = 521
-    """ """ 
     READSIZECONTROLFAILED = 522
-    """ """ 
     WRITESIZECONTROLFAILED = 523
-    """ """ 
     FILENOTFOUND = 524
-    """ """ 
     READPMDATFAILED = 525
-    """ """ 
     CREATECHECKPOINTFAILED = 550
-    """ """ 
     RESTORECHECKPOINTFAILED = 551
-    """ """ 
     CLEARCHECKPOINTFAILED = 552
-    """ """ 
     UNDOFAILED = 570
-    """ """ 
     REDOFAILED = 571
-    """ """ 
     WELDCONTROLNOTDEFINED = 600
-    """ """ 
     WELDMESHERBADINPUTPARAMS = 601
-    """ """ 
     WELDINPUTWELDEDGEEMPTY = 602
-    """ """ 
     NEARBYENTITYNOTFOUND = 603
-    """ """ 
     CREATETENTFACESFAILED = 604
-    """ """ 
     WELDFACESCONNECTEDBADLY = 605
-    """ """ 
     SPOTWELDLOCATIONSNOTPROVIDED = 606
-    """ """ 
     SPOTWELDLOCATIONSINFOINCOMPLETE = 607
-    """ """ 
     SPOTWELDCREATIONFAILED = 608
-    """ """ 
     SPOTWELDNOFACESFOUNDWITHININPUTRADIUS = 609
-    """ """ 
     SPOTWELDDESIREDNUMBEROFLAYERSNOTFOUND = 610
-    """ """ 
     ORTHOGONALSPOTWELDNOTPOSSIBLE = 611
-    """ """ 
     SPOTWELDSNAPTOEDGETOLNOTPROVIDED = 612
-    """ """ 
     SPOTWELDLABELSNOTDEFINED = 613
-    """ """ 
     SPOTWELDSNAPTOEDGEVIOLATESANGLETOL = 614
-    """ """ 
     WELDLINETOOCLOSETOUPEGDE = 615
-    """ """ 
     WELDINPUTEDGESDONTBELONGTOUPFACES = 616
-    """ """ 
     WELDINPUTUPFACEEMPTY = 617
-    """ """ 
     WELDINPUTDOWNFACEEMPTY = 618
-    """ """ 
     WELDINPUTEDGELISTHASREPETITION = 619
-    """ """ 
     WELDINPUTUPFACELISTHASREPETITION = 620
-    """ """ 
     WELDINPUTDOWNFACELISTHASREPETITION = 621
-    """ """ 
     WELDINPUTWELDEDGENOTCONTINUOUS = 622
-    """ """ 
     WELDWRONGLAPWELDANGLEINPUT = 623
-    """ """ 
     WELDREPLACESUPPRESSFAILURE = 624
-    """ """ 
     SPOTWELDLOCATIONSOUTSIDEBBOX = 625
-    """ """ 
     RIGIDWELDNOEXTENSIONFACESEXITS = 626
-    """ """ 
     SPOTWELDINPUTMESHSIZENOTPROVIDED = 627
-    """ """ 
     WELDUNABLETOFINDUPFACEEDGE = 628
-    """ """ 
     WELDINTERSECTIONCONFIGURATIONNOTSUPPORTED = 629
-    """ """ 
     WELDINTERSECTIONWORKSFOREXTENSIONONLY = 630
-    """ """ 
     WELDINTERSECTIONGAPFILLINGFAILED = 631
-    """ """ 
     WELDINTERSECTIONREQUIRESSUCCESSFULWELDCREATION = 632
-    """ """ 
     WELDINTERSECTIONINVALIDWELDCONTROLID = 633
-    """ """ 
     WELDINTERSECTIONNEEDSATLEASTTWOWELDS = 634
-    """ """ 
     OCTFORESTCONSTRUCTIONFAILED = 700
-    """ """ 
     CONFORMALHEXMESHINGPROJECTIONFAILED = 800
-    """ """ 
     MECHMESHERFAILED = 900
-    """ """ 
     INVALIDINPUTMODEL = 901
-    """ """ 
     HARDNODENOTPRESERVED = 902
-    """ """ 
     INTERSECTIONFAILED = 903
-    """ """ 
     INVALIDFRACTUREMESH = 904
-    """ """ 
     QUALITYIMPROVEMENTFAILED = 905
-    """ """ 
     LARGESIZEDIFFERENCE = 906
-    """ """ 
     LARGEPORTIONBADQUALITYELEMENTS = 907
-    """ """ 
     ADAPTMESHSIZEFAILED = 908
-    """ """ 
     INVALIDELEMENTS = 909
-    """ """ 
     BADQUALITYELEMENTS = 910
-    """ """ 
     QUADRATICEDGEPROJECTIONFAILED = 911
-    """ """ 
     QUADRATICFACEPROJECTIONFAILED = 912
-    """ """ 
     NULLPTR = 913
-    """ """ 
     UNSUPPORTSIZEFIELDTYPE = 914
-    """ """ 
     SPLITATHARDMIDNODE = 915
-    """ """ 
     INPUTMESHSIZETOOCOARSE = 916
-    """ """ 
     INPUTMESHQUALITYTOOBAD = 917
-    """ """ 
     SMOOTHBADEDGEMIDPNTFAILED = 918
-    """ """ 
     SIZEADAPTFAILURE = 919
-    """ """ 
     INVERSEMAPPINGFAILURE = 920
-    """ """ 
     LOADINGASSOCIATIONFAILED = 921
-    """ """ 
     LOADINGGEOMETRYFAILED = 922
-    """ """ 
     SELFMERGEFAILED = 923
-    """ """ 
     NEWCRACKOUTSIDEOFREGION = 924
-    """ """ 
     NEWCRACKTOOSHALLOW = 925
-    """ """ 
     PROPERTYTABLEINVALIDTYPE = 1001
-    """ """ 
     PACKPARTICLESNOWATERTIGHTREGION = 1100
-    """ """ 
     NOTSUPPORTEDFORTOPOLOGYPART = 1200
-    """ """ 
     NOTSUPPORTEDFORHIGHERORDERMESHPART = 1201
-    """ """ 
     NOTSUPPORTEDFORNONTRIFACEZONE = 1202
-    """ """ 
     NOTSUPPORTEDFORNONQUADFACEZONE = 1203
-    """ """ 
     PREPAREFORSOLVERFAILED = 1300
-    """ """ 
     MORPHFIELD_INVALIDINPUTVECTORSSIZE = 1400
-    """ """ 
     MORPHFIELD_SOLVEFIELDFAILED = 1401
-    """ """ 
     MORPHFIELD_EVALUATIONFIELDFAILED = 1402
-    """ """ 
     MORPHFIELD_INVALIDOPERATIONSORDER = 1404
-    """ """ 
     MORPHFIELD_CANNOTREADMORPHFIELDFILE = 1405
-    """ """ 
     MORPHFIELD_CANNOTWRITEMORPHFIELDFILE = 1406
-    """ """ 
     MORPHFIELD_CANNOTCREATEMORPHFIELD = 1407
-    """ """ 
     MORPHFIELD_CANNOTAPPLYMORPHFIELDFILE = 1408
-    """ """ 
     MORPHFIELD_CANNOTGATHERDATA = 1409
-    """ """ 
     MORPHER_COMPUTEBCS = 1410
-    """ """ 
     MORPHER_MORPHSOLVE = 1411
-    """ """ 
     MORPHER_MORPHAPPLYSOLUTION = 1412
-    """ """ 
     MORPHER_MORPHALONGNORMALSSOLVEANDAPPLY = 1413
-    """ """ 
     MORPHER_EXTERNALFIELDMORPHSOLVEANDAPPLY = 1414
-    """ """ 
     MORPHER_BCSINCORRECTINPUTFORSYMMETRY = 1415
-    """ """ 
     MORPHER_BCSPARTIDNOTPROVIDED = 1416
-    """ """ 
     MORPHER_MORPHWITHTRANSFORMATIONSOLVEANDAPPLY = 1417
-    """ """ 
     MORPHFIELD_APPLYFIELDFAILED = 1418
-    """ """ 
     INVALIDGLOBALMINMAX = 1500
-    """ """ 
     INVALIDSIZECONTROLINPUTS = 1501
-    """ """ 
     EXTRACTFEATURESFAILED = 1600
-    """ """ 
     EXTRACTFEATURESBYEDGESFAILED = 1601
-    """ """ 
     CREATEEDGEZONELETFAILED = 1602
-    """ """ 
     NOSIDEFRONTFACES = 1700
-    """ """ 
     NOTALLSIDEFRONTFACES = 1701
-    """ """ 
     NOMESHONSIDEFACES = 1702
-    """ """ 
     NOMESHONFRONTFACES = 1703
-    """ """ 
     TETINITFAILED = 1704
-    """ """ 
     TETCUTFAILED = 1705
-    """ """ 
     MIDSURFACEFAILED = 1706
-    """ """ 
     IMPRINTFAILED = 1707
-    """ """ 
     INVALIDSIDETHICKNESS = 1708
-    """ """ 
     NOTMIDSURFTOPOFACE = 1709
-    """ """ 
     NOTUNIFORMTHICKNESSMIDSURFTOPOFACE = 1710
-    """ """ 
     OPENSIDEFACELOOPS = 1711
-    """ """ 
     SINGLESETFRONTFACES = 1712
-    """ """ 
     VOLUMEMESH_MIDNODESNOTSUPPORTED = 1800
-    """ """ 
     VOLUMEMESHNOTFOUND = 1801
-    """ """ 
     MESHDISTRIBUTIONFAILED = 1802
-    """ """ 
     UNOCONTROL_CONTROLNOTSTORED = 1900
-    """ """ 
     UNOCONTROL_EMPTYCONTROLLIST = 1901
-    """ """ 
     UNO_CANNOTOPENFILE = 1902
-    """ """ 
     UNOCONTROL_DUPLICATEDNAMESINFILE = 1903
-    """ """ 
     UNOCONTROL_NOTVALIDCONTROLINFILE = 1904
-    """ """ 
     UNOCONTROL_GENERIC = 1905
-    """ """ 
     UNOOPERATION_NOTVALIDOPERATIONINFILE = 1906
-    """ """ 
     UNOOPERATION_NOTVALIDWORKFLOWINFILE = 1907
-    """ """ 
     IGA_NURBSOPFAILED = 2400
-    """ """ 
     IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE = 2401
-    """ """ 
     IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT = 2402
-    """ """ 
     IGA_NURBSFITTINGFAILED = 2403
-    """ """ 
     IGA_NEGATIVEJACOBIAN = 2404
-    """ """ 
     IGA_PERIODICKNOTVECTORCONVERSIONFAILED = 2405
-    """ """ 
     IGA_HREFINEMENTFAILED = 2406
-    """ """ 
     IGA_PREFINEMENTFAILED = 2407
-    """ """ 
     IGA_NURBSSMOOTHFAILED = 2408
-    """ """ 
     IGA_NODEINDEXINGFAILED = 2409
-    """ """ 
     IGA_NOCELLZONELETS = 2410
-    """ """ 
     IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING = 2411
-    """ """ 
     IGA_INVALIDINPUTFILEFORGENUSZEROFITTING = 2412
-    """ """ 
     IGA_NOFACEZONELETS = 2413
-    """ """ 
     IGA_EDGEPATHCOMPUTATIONFAILED = 2414
-    """ """ 
     IGA_INCORRECTDEGREE = 2415
-    """ """ 
     IGA_QUADRATICMESHINPUT = 2416
-    """ """ 
     IGA_UNIFORMTRIMMEDNURBSFAILED = 2417
-    """ """ 
     IGA_NONCONFORMALHEXMESH = 2418
-    """ """ 
+    IGA_EMPTYSPLINEIDLIST = 2419
+    IGA_INVALIDREFINESPLINEPARAM = 2420
     MZMESHER_GEOMETRYTRANSFERFAILED = 2600
-    """ """ 
     MZMESHER_BLOCKINGFAILED = 2601
-    """ """ 
     MZMESHER_PRISMMESHINGFAILED = 2602
-    """ """ 
     MZMESHER_MESHINGFAILED = 2603
-    """ """ 
     MZMESHER_MESHTRANSFERFAILED = 2604
-    """ """ 
     MZMESHER_SETMATCHCONTROLFAILED = 2605
-    """ """ 
     SWEEPERINVALIDINPUT = 2705
-    """ """ 
     SWEEPERINVALIDPARAMS = 2706
-    """ """ 
     SWEEPERINTERSECTINGDIRECTIONS = 2707
-    """ """ 
     SWEEPERCLOSEDBODYCOMPUTATIONFAILED = 2708
-    """ """ 
     PARTHASTOPOLOGY = 2800
-    """ """ 
     SEARCHHOLESONFACEZONELETSFAILED = 2801
-    """ """ 
     SURFACESEARCHFAILED = 2802
-    """ """ 
+    # Part with mesh not found for surface quality check
     SURFACESEARCHPARTWITHMESHNOTFOUND = 2803
-    """ Part with mesh not found for surface quality check""" 
+    # Please Document
     NODESNOTFOUND = 2900
-    """ Please Document""" 
+    # Please Document
     FILLHOLEFAILED = 2901
-    """ Please Document""" 
+    # Please Document
     CREATEFACEZONELETSBYEDGEZONELETSFAILED = 2902
-    """ Please Document""" 
+    # Please Document
     TRANSFORMATIONFAILED = 3000
-    """ Please Document""" 
+    # Please Document
     SCALINGFAILED = 3001
-    """ Please Document""" 
+    # Please Document
     ALIGNMENTFAILED = 3002
-    """ Please Document""" 
+    # Please Document
     DELETEMESHFACESFAILED = 3200
-    """ Please Document""" 
+    # Please Document
     DELETEMESHFACES_TOPOLOGYNOTSUPPORTED = 3201
-    """ Please Document""" 
+    # Please Document
     DELETEMESHFACES_CELLFOUND = 3202
-    """ Please Document""" 
+    # Please Document
     DELETEFRINGESANDOVERLAPSFAILED = 3203
-    """ Please Document""" 
+    # Please Document
     MATERIALPOINTWITHSAMENAMEEXISTS = 3300
-    """ Please Document""" 
+    # Please Document
     MATERIALPOINTWITHGIVENNAMEDOESNTEXIST = 3301
-    """ Please Document""" 
+    # Please Document
     MATERIALPOINTWITHGIVENIDDOESNTEXIST = 3302
-    """ Please Document""" 
+    # Please Document
     MATERIALPOINTWITHSAMEIDEXISTS = 3303
-    """ Please Document""" 
+    # Please Document
     WRAPPERGLOBALSETTINGSNOTSET = 3400
-    """ Please Document""" 
+    # Please Document
     WRAPPERRESOLVEINTERSECTIONFAILED = 3401
-    """ Please Document""" 
+    # Please Document
     WRAPPERCONNECTFAILED = 3402
-    """ Please Document""" 
+    # Please Document
     WRAPPERFATALERROR = 3403
-    """ Please Document""" 
+    # Please Document
     WRAPPERCOULDNOTSETUPFROMXMLFILE = 3404
-    """ Please Document""" 
+    # Please Document
     WRAPPERCOULDNOTEXTRACTINTERFACE = 3405
-    """ Please Document""" 
+    # Please Document
     WRAPPERLEAKPREVENTIONFAILED = 3406
-    """ Please Document""" 
+    # Please Document
     WRAPPERSURFACEHASHOLES = 3410
-    """ Please Document""" 
+    # Please Document
     WRAPPEROCTREEREGIONINGFAILED = 3411
-    """ Please Document""" 
+    # Please Document
     WRAPPERPROJECTIONFAILED = 3412
-    """ Please Document""" 
+    # Please Document
     WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST = 3413
-    """ Please Document""" 
+    # Please Document
     WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST = 3414
-    """ Please Document""" 
+    # Please Document
     MESHEDITCANNOTMOVEMULTIPLENODES = 3500
-    """ Please Document""" 
+    # Please Document
     MESHEDITNODEATEDGEBOUNDARY = 3501
-    """ Please Document""" 
+    # Please Document
     MESHEDITINVALIDPOSITION = 3502
-    """ Please Document""" 
+    # Please Document
     MESHEDITNOTSUPPORTEDFORHIGHERORDER = 3503
-    """ Please Document""" 
+    # Please Document
     MESHEDITNOTINITIALIZED = 3504
-    """ Please Document""" 
+    # Please Document
     MESHEDITNOTSUPPORTEDFORPARTSWITHVOLUMEMESH = 3505
-    """ Please Document""" 
+    # Please Document
     MESHEDITSWAPEDGEFAILED = 3506
-    """ Please Document""" 
+    # Please Document
     MESHEDITSWAPEDGEFAILED_FACESONDIFFERENTZONELET = 3507
-    """ Please Document""" 
+    # Please Document
     MESHEDITSWAPEDGEFAILED_TGEDGEPRESENT = 3508
-    """ Please Document""" 
+    # Please Document
     MESHEDITNODEMOVEMENTNOTINITIALIZED = 3509
-    """ Please Document""" 
+    # Please Document
     MESHEDITPROJECTTOPLANENOTSUPPORTTOPOLOGY = 3510
-    """ Please Document""" 
+    # Please Document
     MESHEDITMERGETRIFACESFAILED_UNSUPPORTEDFACES = 3511
-    """ Please Document""" 
+    # Please Document
     MESHEDITMERGENODESFAILED = 3512
-    """ Please Document""" 
+    # Please Document
     MESHEDITPOLYNOTSUPPORTED = 3513
-    """ Please Document""" 
+    # Please Document
     VT_BADINPUT = 3600
-    """ Please Document""" 
+    # Please Document
     VT_MERGEFACESFAILED = 3601
-    """ Please Document""" 
+    # Please Document
     VT_MERGETHINSTRIPESFAILED = 3602
-    """ Please Document""" 
+    # Please Document
     VT_MERGETHINEXTFAILED = 3603
-    """ Please Document""" 
+    # Please Document
     VT_REPAIRSHARPCORNERANGLESFAILED = 3604
-    """ Please Document""" 
+    # Please Document
     VT_PINCHFACESFAILED = 3605
-    """ Please Document""" 
+    # Please Document
     VT_FILLHOLEFAILED = 3606
-    """ Please Document""" 
+    # Please Document
     VT_FILLANNULARHOLEFAILED = 3607
-    """ Please Document""" 
+    # Please Document
     VT_COLLAPSESHORTEDGESFAILED = 3608
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDMANAGER_GENERIC = 4000
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDMANAGER_INCORRECTINPUTBBOXES = 4001
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDMANAGER_INCORRECTSTOPRECORDING = 4002
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDMANAGER_FILEERROR = 4003
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDMANAGER_INCORRECTNAME = 4004
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDMANAGER_DUPLICATENAME = 4005
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_GENERIC = 5001
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_MORPHFIELDNOTINITIALIZED = 5002
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_MORPHFIELDALREADYINITIALIZED = 5003
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_SOLVEFAILED = 5004
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_INCORRECTNAME = 5005
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_DUPLICATENAME = 5006
-    """ Please Document""" 
+    # Please Document
     MORPHFIELDPLAYER_ONLYTRANSFORMATIONSUPPORT = 5007
-    """ Please Document""" 
+    # Please Document
     CREATENODEENTITIESFAILED = 5500
-    """ Please Document""" 
+    # Please Document
     CREATEEDGEENTITIESFAILED = 5501
-    """ Please Document""" 
+    # Please Document
     CREATEFACEENTITIESFAILED = 5502
-    """ Please Document""" 
-    
 
 class WarningCode(enum.IntEnum):
-    """ 
-    """ 
+    """    """
     NOWARNING = 0
-    """ """ 
     UNKNOWN = 1
-    """ """ 
     WELD_WIDTHADJUSTFAILED = 5
-    """ """ 
     WELD_HEIGHTADJUSTFAILED = 6
-    """ """ 
     WELD_INTERSECTIONFOUND = 7
-    """ """ 
     SPOTWELD_FACELABELSNOTPROVIDED = 8
-    """ """ 
     SPOTWELD_NOFACESWITHPROVIDEDLABELSEXITS = 9
-    """ """ 
     SPOTWELD_RBEONTRIFACE = 10
-    """ """ 
     WELD_WRONGINPUTTOLERANCE = 11
-    """ """ 
     WELD_WRONGINPUTANGLE = 12
-    """ """ 
     WELD_SHARPBENDINWELDCURVE = 13
-    """ """ 
     SPOTWELD_DEGENERATEDBEAM = 14
-    """ """ 
     WELD_PARTIALWELDCREATED = 15
-    """ """ 
     WELD_NOEXTENSIONFACESDUETOCOINCIDENCE = 16
-    """ """ 
     WELD_INTERSECTIONNEEDSATLEASTTWOWELDS = 17
-    """ """ 
     WELD_INTERSECTIONGAPFILLINGINCOMPLETE = 18
-    """ """ 
     WELD_HEIGHTADJUSTMENTNOTSUPPORTEDFORINTERSECTINGWELDS = 19
-    """ """ 
     WELD_INTERSECTIONNOTSUPPORTEDFORTENTANDEXTENSION = 20
-    """ """ 
     WELD_INTERSECTIONNOTSUPPORTEDAROUND3DFILLETSURFACE = 21
-    """ """ 
     WELD_INTERSECTIONNOTSUPPORTEDFORINTERMITTENTSEAMWELDS = 22
-    """ """ 
     WELD_SHEETTHICKNESSISTOOSMALL = 23
-    """ """ 
     SURFER_AUTOSIZING_MULTITHREADINGNOTSUPPORTED = 101
-    """ """ 
     SURFER_QUADCLEANUP_MULTITHREADINGNOTSUPPORTED = 102
-    """ """ 
     MORPHER_BIASINGNOMORPHNODES = 1600
-    """ """ 
     MORPHER_MOVABLEEDGESUNSUPPORTED = 1601
-    """ """ 
     MORPHER_ONSELECTIONWHILEMORPHING = 1602
-    """ """ 
     MORPHFIELD_RECORDINGCANCELLED = 1700
-    """ """ 
     MORPHFIELD_APPLYCANCELLED = 1701
-    """ """ 
     UNOCONTROL_EMPTYCONTROLLIST = 1800
-    """ """ 
     UNOCONTROL_CONTROLNOTSTORED = 1801
-    """ """ 
     UNOCONTROL_NOCONTROLSINFILE = 1802
-    """ """ 
     UNOCONTROL_DUPLICATEDNAMES = 1902
-    """ """ 
     UNOCONTROL_INVALIDCONTROLFILE = 1803
-    """ """ 
     UNOCONTROL_INVALIDSCOPETYPE = 1804
-    """ """ 
     UNOCONTROL_INVALIDSCOPEENTITY = 1805
-    """ """ 
     UNOCONTROL_INVALIDDATA = 1806
-    """ """ 
     UNOCONTROL_INVALIDSCOPEENTITYSIZE = 1807
-    """ """ 
     UNOOPERATION_NOOPERATIONSINFILE = 1808
-    """ """ 
     UNOOPERATION_INVALIDOPERATIONFILE = 1809
-    """ """ 
     UNOWORKFLOW_NOOPERATIONSINFILE = 1810
-    """ """ 
     UNOWORKFLOW_INVALIDOPERATIONFILE = 1811
-    """ """ 
     UNOWORKFLOW_NOWORKFLOWSINFILE = 1812
-    """ """ 
     UNOWORKFLOW_INVALIDWORKFLOWFILE = 1813
-    """ """ 
     SURFERLAYEREDQUADFAILED = 1800
-    """ """ 
     SURFERDEGENERATEFACE = 1801
-    """ """ 
     ALIGN_OPERATIONINTERRUPTED = 1900
-    """ """ 
     MORPHFIELDMANAGER_INCORRECTNAME = 4004
-    """ """ 
     MORPHFIELDMANAGER_DUPLICATENAME = 4005
-    """ """ 
     IGA_NOGEOMZONELETFORSPLINEFITTING = 5001
-    """ """ 
-    
-
-
-

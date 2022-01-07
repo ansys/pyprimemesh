@@ -113,7 +113,7 @@ prime_error_messages = {
     ErrorCode.IGA_INVALIDINPUTFILEFORGENUSZEROFITTING : "Wrong Input file. Only tetrahedral mesh is allowed.",
     ErrorCode.IGA_NOFACEZONELETS : "No face zonelets found.",
     ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED : "Edge path computation failed.",
-    ErrorCode.IGA_INCORRECTDEGREE : "Degree 0 not allowed.", 
+    ErrorCode.IGA_INCORRECTDEGREE : "Degree 0 not allowed.",
     ErrorCode.IGA_QUADRATICMESHINPUT : "Quadratic mesh is not supported for solid spline creation.",
     ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED : "Failed to create uniform trimmed solid spline."
 }
@@ -156,13 +156,12 @@ class PrimeRuntimeWarning(RuntimeWarning):
     def message(self):
         return self._message
 
-def communicator_error_handler(
-    _func=None, *,
-    expected_token='Results',
-    server_error_token='ServerError',
-    info_token = 'info_msg',
-    warning_token='warning_msg',
-    error_token='err_msg'):
+def communicator_error_handler(_func=None, *,
+                               expected_token='Results',
+                               server_error_token='ServerError',
+                               info_token = 'info_msg',
+                               warning_token='warning_msg',
+                               error_token='err_msg'):
     def decorator_handle_errors(func):
         @wraps(func)
         def wrapper_handle_errors(*args, **kwargs):
@@ -188,10 +187,8 @@ def communicator_error_handler(
                 return result
             else:
                 return func_result
-                
-        
         return wrapper_handle_errors
-    
+
     if _func is None:
         return decorator_handle_errors
     else:
@@ -218,11 +215,11 @@ def error_code_handler(_func=None):
                     single_warning = result.get('warningCode', None)
                     if single_warning is not None and single_warning > 0:
                         prime_warnings.append(single_warning)
-                    
+
                     multiple_warnings = result.get('warningCodes', None)
                     if multiple_warnings: # Note that this will filter out empty list as well
                         [ prime_warnings.append(w) for w in multiple_warnings ]
-                    
+
                     if prime_warnings:
                         import warnings
                         [ warnings.warn(prime_warning_messages.get(w, f'Unrecogonized warning {w}'), PrimeRuntimeWarning) for w in prime_warnings ]
@@ -240,5 +237,5 @@ def apply_if(decorator, condition):
         if not condition:
             return func
         return decorator(func)
-    
+
     return decorator_apply_if

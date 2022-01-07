@@ -1,11 +1,14 @@
 import PrimePyPrimeServer as Prime
 import json
 from ansys.meshing.prime import relaxed_json
-from ansys.meshing.prime.internals.error_handling import communicator_error_handler, error_code_handler
+from ansys.meshing.prime.internals.error_handling import (
+    communicator_error_handler,
+    error_code_handler
+)
 from ansys.meshing.prime.internals.communicator import Communicator
 
 global return_value
-return_value=""
+return_value = ""
 
 class PrimeCommunicator(Communicator):
     @error_code_handler
@@ -18,10 +21,10 @@ class PrimeCommunicator(Communicator):
         if (kwargs is not None):
             command.update({ "Args" : kwargs["args"]})
             binary = kwargs.get("binary", False)
-        
+
         if binary:
             return relaxed_json.loads(Prime.ServeJsonBinary(json.dumps(command)).AsBytes())
-        
+
         return json.loads(Prime.ServeJson(json.dumps(command)).Get())
 
     def initialize_params(self, param_name: str, *args) -> dict:
@@ -29,7 +32,7 @@ class PrimeCommunicator(Communicator):
         if(len(args) > 0 ):
             command.update({ "ModelID" : args[0]})
         return json.loads(Prime.GetParamDefaultJson(json.dumps(command)).Get())
-    
+
     def run_on_server(self, recipe: str) -> dict:
         exec(recipe, globals())
         output = '{"Results" : "' + str(return_value) + '"}'

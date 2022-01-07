@@ -8,7 +8,7 @@ from typing import List, Any
 class SurfaceSearch(CoreObject):
     """
 
-    """ 
+    """
 
     def __init__(self, model: CommunicationManager):
         """ Initialize SurfaceSearch """
@@ -19,16 +19,16 @@ class SurfaceSearch(CoreObject):
         result = self._comm.serve(command_name, args=args)
         self._object_id = result["ObjectIndex"]
         self._freeze()
-    
+
     def __enter__(self):
         """ Enter context for SurfaceSearch """
         return self
-    
+
     def __exit__(self, type, value, traceback) :
         """ Exit context for SurfaceSearch """
         command_name = "PrimeMesh::SurfaceSearch/Destruct"
         self._comm.serve(command_name, self.object_id, args={})
-    
+
     def get_surface_quality_summary(self, params : SurfaceQualitySummaryParams) -> SurfaceQualitySummaryResults:
         """ Gets the surface quality summary.
 
@@ -47,7 +47,6 @@ class SurfaceSearch(CoreObject):
 
         Examples
         --------
-        
         >>> surf_search = SurfaceSearch(model=model)
         >>> results = surf_search.get_surface_quality_summary(SurfaceQualitySummaryParams(model=model))
 
@@ -58,9 +57,8 @@ class SurfaceSearch(CoreObject):
         result = self._comm.serve(command_name, self.object_id, args=args)
         self._model._print_logs_after_command("get_surface_quality_summary", SurfaceQualitySummaryResults(model = self._model, json_data = result))
         return SurfaceQualitySummaryResults(model = self._model, json_data = result)
-    
+
     @property
     def object_id(self):
         """ Object id of SurfaceSearch """
         return self._object_id
-    

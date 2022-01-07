@@ -46,7 +46,9 @@ def make_scanner(context) -> Callable[[str, int], Tuple[str, int]]:
         if m is not None:
             integer, frac, exp = m.groups()
             if frac or exp:
-                res = parse_float(integer.decode('utf-8') + (frac or b'').decode('utf-8') + (exp or b'').decode('utf-8'))
+                res = parse_float(integer.decode('utf-8') +\
+                      (frac or b'').decode('utf-8') +\
+                      (exp or b'').decode('utf-8'))
             else:
                 res = parse_int(integer)
             return res, m.end()

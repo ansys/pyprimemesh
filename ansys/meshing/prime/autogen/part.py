@@ -6,7 +6,7 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any
 
 class Part(CoreObject):
-    """A collection of zonelets. 
+    """A collection of zonelets.
 
     Parts are a collection of zonelets and information about how the zonelets are connected to each other.
     Zonelets are a group of interconnected entities in a mesh. There are four types of zonelets. They are:
@@ -14,7 +14,7 @@ class Part(CoreObject):
     - EdgeZonelet: A group of connected edges
     - CellZonelet: A group of connected cells
     - NodeZonelet: A group of connected nodes
-    """ 
+    """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
         """ Initialize Part """
@@ -24,7 +24,57 @@ class Part(CoreObject):
         self._object_id = object_id
         self._name = name
         self._freeze()
-    
+
+    def get_cell_zonelets(self) -> List[int]:
+        """ Gets the cell zonelet ids in the part.
+
+        Gets the cell zonelet ids in the part.
+
+
+        Returns
+        -------
+        IntVector
+            Returns the list of cell zonelet ids.
+
+
+        Examples
+        --------
+        >>> from ansys.meshing.prime import Part
+        >>> cell_zonelet_ids = part.get_cell_zonelets()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Part/GetCellZonelets"
+        self._model._print_logs_before_command("get_cell_zonelets", args)
+        result = self._comm.serve(command_name, self.object_id, args=args)
+        self._model._print_logs_after_command("get_cell_zonelets")
+        return result
+
+    def get_splines(self) -> List[int]:
+        """ Gets the list of spline ids.
+
+        Gets the list of spline ids.
+
+
+        Returns
+        -------
+        IntVector
+            Returns the list of spline ids.
+
+
+        Examples
+        --------
+        >>> from ansys.meshing.prime import Part
+        >>> results = part.get_splines()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Part/GetSplines"
+        self._model._print_logs_before_command("get_splines", args)
+        result = self._comm.serve(command_name, self.object_id, args=args)
+        self._model._print_logs_after_command("get_splines")
+        return result
+
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
         """ Gets the part summary.
 
@@ -42,7 +92,6 @@ class Part(CoreObject):
 
         Examples
         --------
-        
         >>> results = part.get_summary(PartSummaryParams(model=model))
 
         """
@@ -52,23 +101,23 @@ class Part(CoreObject):
         result = self._comm.serve(command_name, self.object_id, args=args)
         self._model._print_logs_after_command("get_summary", PartSummaryResults(model = self._model, json_data = result))
         return PartSummaryResults(model = self._model, json_data = result)
-    
+
     @property
     def id(self):
         """ Get id """
         return self._id
-    
+
     @property
     def object_id(self):
-        """ GetObjectId """
+        """ Get Object Id """
         return self._object_id
+
     @property
     def name(self):
         """ Get name """
         return self._name
-    
+
     @name.setter
     def name(self, name):
         """ Set the name """
         self._name = name
-    

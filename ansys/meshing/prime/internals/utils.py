@@ -8,7 +8,8 @@ def start_server(prime_installdir: str=None, ip: str="localhost", port: int=5005
     proc = None
     try:
         if "PRIME_INSTALLDIR" not in os.environ.keys() and prime_installdir is None:
-            raise RuntimeError("Specify where your Prime install is present either through environment or as parameter")
+            raise RuntimeError(
+                "Specify where your Prime install is present")
         if prime_installdir is None:
             prime_installdir = os.environ["PRIME_INSTALLDIR"]
         if (sys.platform == "linux") :
@@ -67,4 +68,3 @@ def print_logs_after_command(logger : logging.Logger, command : str, ret):
         for line in printable_str.splitlines():
             logger.debug("        " + line)
         logger.debug("")
-

@@ -1,6 +1,5 @@
 """Implementation of Relaxed JSON Decoder
 """
-from sys import byteorder
 from typing import Tuple, Any, Callable, Dict
 import re
 import numpy as np
@@ -21,11 +20,10 @@ _CONSTANTS = {
 }
 
 class JSONDecodeError(ValueError):
-    def __init__(
-        self,
-        msg: str,
-        document: bytes or bytearray,
-        pos:int):
+    def __init__(self,
+                 msg: str,
+                 document: bytes or bytearray,
+                 pos: int):
         lineno = document.count(b'\n', 0, pos) + 1
         colno = pos - document.rfind(b'\n', 0, pos)
         error_msg = f"{msg}: line {lineno} column {colno} (char {pos})"
@@ -41,7 +39,7 @@ WHITESPACE_STR = b' \t\n\r'
 STRINGCHUNK = re.compile(r'(.*?)(["\\])'.encode('utf-8'), FLAGS)
 BACKSLASH = {
     '"': b'"', '\\': b'\\', '/': b'/',
-    'b': b'\b', 'f': b'\f', 'n': b'\n', 
+    'b': b'\b', 'f': b'\f', 'n': b'\n',
     'r': b'\r', 't': b'\t',
 }
 
@@ -49,7 +47,7 @@ def then(first, continuation):
     def _then(dct):
         dct = first(dct)
         return continuation(dct)
-        
+
     return _then
 
 TYPEMAP = {
@@ -73,10 +71,9 @@ TYPEDATA = {
     'double': { 'type': float, 'object_size': 8 }
 }
 
-def scan_string(
-    str: bytes or bytearray,
-    end: int,
-    _b=BACKSLASH, _m=STRINGCHUNK.match):
+def scan_string(str: bytes or bytearray,
+                end: int,
+                _b=BACKSLASH, _m=STRINGCHUNK.match):
     """Scan the string s for a JSON string. End is the index of the
     character in s after the quote that started the JSON string.
     Unescapes all valid JSON string escape sequences and raises ValueError
@@ -113,7 +110,7 @@ def scan_string(
             raise JSONDecodeError("Unicode not supported", str, end)
         else:
             try:
-                char:bytes or bytearray = _b[esc.decode('utf-8')]
+                char: bytes or bytearray = _b[esc.decode('utf-8')]
             except KeyError:
                 msg = "Invalid \\escape: {0!r}".format(esc.decode('utf-8'))
                 raise JSONDecodeError(msg, str, end)
@@ -146,16 +143,14 @@ def decode_bytes(s, end):
     dtype = np.dtype(dtype)
     data = np.frombuffer(value, dtype=dtype.newbyteorder('>'))
     return np.array(data, dtype=dtype), end
-    
 
-def decode_object(
-    str_and_idx: Tuple[str, int],
-    scan_once: Callable[[str, int], Tuple[str, int]],
-    object_hook: Callable[[Dict[str, Any]], Any],
-    object_pairs_hook,
-    memo,
-    _w=WHITESPACE.match,
-    _ws=WHITESPACE_STR):
+def decode_object(str_and_idx: Tuple[str, int],
+                  scan_once: Callable[[str, int], Tuple[str, int]],
+                  object_hook: Callable[[Dict[str, Any]], Any],
+                  object_pairs_hook,
+                  memo,
+                  _w=WHITESPACE.match,
+                  _ws=WHITESPACE_STR):
     s, end = str_and_idx
     pairs = []
     pairs_append = pairs.append
@@ -202,7 +197,7 @@ def decode_object(
                     end = _w(s, end + 1).end()
         except IndexError:
             pass
-        
+
         try:
             value, end = scan_once(s, end)
         except StopIteration as err:
@@ -235,11 +230,10 @@ def decode_object(
         pairs = object_hook(pairs)
     return pairs, end
 
-def decode_array(
-    str_and_idx: Tuple[str, int],
-    scan_once: Callable[[str, int], Tuple[str, int]],
-    _w=WHITESPACE.match,
-    _ws=WHITESPACE_STR):
+def decode_array(str_and_idx: Tuple[str, int],
+                 scan_once: Callable[[str, int], Tuple[str, int]],
+                 _w=WHITESPACE.match,
+                 _ws=WHITESPACE_STR):
     s, end = str_and_idx
     values = []
     nextchar = bytes(s[end:end+1])
@@ -276,14 +270,13 @@ def decode_array(
     return values, end
 
 class JSONDecoder:
-    def __init__(
-        self, *,
-        object_hook: Callable[[Dict[str, Any]], Any]=None,
-        parse_float: Callable[[bytes or bytearray], float]=None,
-        parse_int: Callable[[bytes or bytearray], int]=None,
-        parse_constant: Callable[[bytes or bytearray], float]=None or _CONSTANTS.__getitem__,
-        strict:bool=True,
-        object_pairs_hook=None):
+    def __init__(self, *,
+                 object_hook=None,
+                 parse_float=None,
+                 parse_int=None,
+                 parse_constant=None or _CONSTANTS.__getitem__,
+                 strict=True,
+                 object_pairs_hook=None):
         self.object_hook = object_hook or None
         self.parse_float = parse_float or float
         self.parse_int = parse_int or int
@@ -297,7 +290,7 @@ class JSONDecoder:
         self.memo = {}
         self.scan_once = scanner.make_scanner(self)
 
-    def raw_decode(self, s: bytes or bytearray, idx:int) -> Tuple[Any, int]:
+    def raw_decode(self, s: bytes or bytearray, idx: int) -> Tuple[Any, int]:
         try:
             obj, end = self.scan_once(s, idx)
         except StopIteration as err:
@@ -310,4 +303,3 @@ class JSONDecoder:
         if end != len(s):
             raise JSONDecodeError("Extra data at end of document", s, end)
         return obj.decode('utf-8') if isinstance(obj, (bytes, bytearray)) else obj
-

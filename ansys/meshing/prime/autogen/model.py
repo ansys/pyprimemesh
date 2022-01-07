@@ -19,7 +19,7 @@ class Model(CoreObject, CommunicationManager):
     create, delete, deactivate on the mesh items through Model to get the
     respective output.For example, you can create a Part through model
     using the function Create Meshpart
-    """ 
+    """
 
     def __init__(self, comm, id: int, object_id: int, name: str):
         """ Initialize Model """
@@ -35,7 +35,6 @@ class Model(CoreObject, CommunicationManager):
     def _print_logs_after_command(self, command, args = None):
         utils.print_logs_after_command(self._logger, command, args)
 
-    
     def get_child_objects_json(self) -> str:
         """ Gets child objects of model in JSON format.
 
@@ -52,11 +51,8 @@ class Model(CoreObject, CommunicationManager):
         -----
         This method is used by FileIO to synchronize model after read or append files.
         User may not need to call this API explicitly.
-
-        
         Examples
         --------
-        
         >>> results = model.get_child_objects_json()
 
         """
@@ -66,23 +62,23 @@ class Model(CoreObject, CommunicationManager):
         result = self._comm.serve(command_name, self.object_id, args=args)
         self._print_logs_after_command("get_child_objects_json")
         return result
-    
+
     @property
     def id(self):
         """ Get id """
         return self._id
-    
+
     @property
     def object_id(self):
-        """ GetObjectId """
+        """ Get Object Id """
         return self._object_id
+
     @property
     def name(self):
         """ Get name """
         return self._name
-    
+
     @name.setter
     def name(self, name):
         """ Set the name """
         self._name = name
-    

@@ -1,15 +1,13 @@
 from ansys.meshing.prime.autogen.model import Model as _Model
 from ansys.meshing.prime.core.part import Part
-from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.internals.communicator import Communicator
 
 from typing import List
 import json
 
-import logging
-
 class Model( _Model ):
     __doc__ = _Model.__doc__
+
     def __init__(self, comm : Communicator , id : int, object_id : int, name : str):
         """ Initialize Model """
         _Model.__init__(self, comm, id, object_id, name)
@@ -21,13 +19,13 @@ class Model( _Model ):
         self._control_data = None
         self._material_point_data = None
         self._freeze()
-    
+
     def _sync_up_model(self):
-        """Synchronizes client model with the server model. 
+        """Synchronizes client model with the server model.
 
         Updates proxy child objects of the client model with the child objects of the server model.
 
-        Examples 
+        Examples
         --------
         >>> from ansys.meshing.prime import local_model
         >>> model = local_model()
@@ -36,40 +34,41 @@ class Model( _Model ):
         res = json.loads(_Model.get_child_objects_json(self))
         part_data = res["Parts"]
         self._parts = [Part(self, part[0], part[1], part[2]) for part in part_data]
-        # self._weld_controls = [WeldControl(self, wc[0], wc[1]) for wc in wc_data] # support prism controls here and remove weld control
+        # support prism controls here and remove weld control
+        # self._weld_controls = [WeldControl(self, wc[0], wc[1]) for wc in wc_data]
 
     def get_parts(self) -> List[Part]:
-        """Gets the list of parts of a model. 
+        """Gets the list of parts of a model.
 
-        Returns 
+        Returns
         -------
         List[Part]
-             Returns the list of parts. 
-        
-        Examples 
+            Returns the list of parts.
+
+        Examples
         --------
             >>> from ansys.meshing.prime import local_model
             >>> model = local_model()
             >>> parts = model.get_parts()
         """
         return self._parts
-        
-    def get_part_by_name(self, name:str) -> Part:
-        """Get the part by name. 
 
-        Gets the part by name. Returns None if part doesn't exist for the given name.            
+    def get_part_by_name(self, name: str) -> Part:
+        """Get the part by name.
 
-        Parameters 
-        ---------- 
+        Gets the part by name. Returns None if part doesn't exist for the given name.
+
+        Parameters
+        ----------
         name : str
-            Name of the part. 
+            Name of the part.
 
-        Returns 
+        Returns
         -------
         Part
-            Returns the part. 
-        
-        Examples 
+            Returns the part.
+
+        Examples
         --------
             >>> from ansys.meshing.prime import local_model
             >>> model = local_model()
@@ -79,23 +78,23 @@ class Model( _Model ):
             if(part.name == name):
                 return part
         return None
-    
+
     def get_part(self, id : int) -> Part:
-        """Gets the part by id. 
+        """Gets the part by id.
 
-        Gets the part by id. Returns None if part doesn't exist for the given id.            
+        Gets the part by id. Returns None if part doesn't exist for the given id.
 
-        Parameters 
-        ---------- 
+        Parameters
+        ----------
         id : int
-            Id of the part. 
+            Id of the part.
 
-        Returns 
+        Returns
         -------
         Part
-            Returns the part. 
-        
-        Examples 
+            Returns the part.
+
+        Examples
         --------
             >>> from ansys.meshing.prime import local_model
             >>> model = local_model()
@@ -105,11 +104,11 @@ class Model( _Model ):
             if(part.id == id):
                 return part
         return None
-    
-    def __str__(self):
-        """ Prints the summary of the model. 
 
-        Returns 
+    def __str__(self):
+        """ Prints the summary of the model.
+
+        Returns
         -------
         str
             Returns the summary of the model.

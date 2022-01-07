@@ -1,10 +1,14 @@
-from abc import abstractmethod
 import logging
 from ansys.meshing.prime.internals.utils import terminate_child_processes
 from ansys.meshing.prime.core.model import Model
 
 class Client(object):
-    def __init__(self, local:bool=False, server_process=None, ip:str="localhost", port:int=50052, credentials=None):
+    def __init__(self,
+                 local: bool=False,
+                 server_process=None,
+                 ip: str="localhost",
+                 port: int=50052,
+                 credentials=None):
         self._default_model: Model = None
         if local and server_process is not None:
             raise ValueError("Local client cannot be instantiated with a server process")
@@ -21,7 +25,7 @@ class Client(object):
                 if self._process is not None:
                     self._process.terminate()
                     self._process = None
-                
+
                 logging.error('Failed to connect to PRIME GRPC server')
                 raise
         else:
@@ -36,7 +40,7 @@ class Client(object):
         if self._default_model is None:
             self._default_model = Model(self._comm, 1, 1, "Default")
         return self._default_model
-    
+
     def run_on_server(self, recipe : str):
         if self._comm is not None:
             result = self._comm.run_on_server(recipe)
