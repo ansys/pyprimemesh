@@ -9,16 +9,10 @@ import logging
 from ansys.meshing.prime.internals import utils
 
 class Model(CoreObject, CommunicationManager):
-    """Base class of Prime Mesh
+    """Model is the nucleus of PRIME. Model forms the base and contains all the information about PRIME.
 
-    Model is the nucleus of Prime Mesh. Model forms the base and contains
-    all information about Prime. You can access any information in Prime
-    only through Model. Model is comprised of different Parts, Size fields,
-    Size controls, Prism control, checkpoints cand other functions. You
-    can perform different actions like get, check, activate, update,
-    create, delete, deactivate on the mesh items through Model to get the
-    respective output.For example, you can create a Part through model
-    using the function Create Meshpart
+    You can access any information in PRIME only through Model.
+    Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
     """
 
     def __init__(self, comm, id: int, object_id: int, name: str):
@@ -35,50 +29,62 @@ class Model(CoreObject, CommunicationManager):
     def _print_logs_after_command(self, command, args = None):
         utils.print_logs_after_command(self._logger, command, args)
 
-    def get_child_objects_json(self) -> str:
-        """ Gets child objects of model in JSON format.
-
-        Used to create child objects of the model at client side.
-        Client side model store the child objects(e.g Part, TopoData, ControlData, etc), those can be queried directly from the model.
+    def set_global_sizing_params(self, params : GlobalSizingParams) -> SetSizingResults:
+        """ Sets the global sizing parameters to initialize surfer parameters and various size control parameters.
 
 
-        Returns
-        -------
-        String
-            Returns the JSON format which can be loaded to create child objects of the model.
+        Parameters
+        ----------
+        params : GlobalSizingParams
+            Global sizing parameters.
 
-        Notes
-        -----
-        This method is used by FileIO to synchronize model after read or append files.
-        User may not need to call this API explicitly.
         Examples
         --------
-        >>> results = model.get_child_objects_json()
+        >>> model = client.model
+        >>> model.set_global_sizing_params(
+        >>>           prime.GlobalSizingParams(model=model,
+        >>>           min = 0.1, max = 1.0, growth_rate = 1.2))
 
         """
-        args = {}
-        command_name = "PrimeMesh::Model/GetChildObjectsJson"
-        self._print_logs_before_command("get_child_objects_json", args)
-        result = self._comm.serve(command_name, self.object_id, args=args)
-        self._print_logs_after_command("get_child_objects_json")
-        return result
+        args = {"params" : params._jsonify()}
+        command_name = "PrimeMesh::Model/SetGlobalSizingParams"
+        self._print_logs_before_command("set_global_sizing_params", args)
+        result = self._comm.serve(command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_global_sizing_params", SetSizingResults(model = self, json_data = result))
+        return SetSizingResults(model = self, json_data = result)
+
+    def set_num_threads(self, num : int):
+        """ Sets the number of threads for multithreaded operation.
+
+
+        Parameters
+        ----------
+        num : int
+            Number of threads.
+
+        Examples
+        --------
+        >>> model = client.model
+        >>> model.set_num_threads(4)
+
+        """
+        args = {"num" : num}
+        command_name = "PrimeMesh::Model/SetNumThreads"
+        self._print_logs_before_command("set_num_threads", args)
+        self._comm.serve(command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_num_threads")
 
     @property
     def id(self):
-        """ Get id """
+        """ Get the id of Model."""
         return self._id
 
     @property
-    def object_id(self):
-        """ Get Object Id """
-        return self._object_id
-
-    @property
     def name(self):
-        """ Get name """
+        """ Get the name of Model."""
         return self._name
 
     @name.setter
     def name(self, name):
-        """ Set the name """
+        """ Set the name of Model. """
         self._name = name

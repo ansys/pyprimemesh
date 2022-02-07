@@ -10,7 +10,7 @@ from ansys.meshing.prime.params.primestructs import *
 class SurfaceQualityResult(CoreObject):
     """Result of surface quality.
     """
-    default_params = {}
+    _default_params = {}
 
     def __initialize(
             self,
@@ -20,7 +20,7 @@ class SurfaceQualityResult(CoreObject):
             n_found: int,
             max_value: float,
             min_value: float):
-        self._face_quality_measure = face_quality_measure
+        self._face_quality_measure = FaceQualityMeasure(face_quality_measure)
         self._measure_name = measure_name
         self._quality_limit = quality_limit
         self._n_found = n_found
@@ -38,7 +38,7 @@ class SurfaceQualityResult(CoreObject):
             min_value: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes SurfaceQualityResult
+        """Initializes the SurfaceQualityResult.
 
         Parameters
         ----------
@@ -61,7 +61,7 @@ class SurfaceQualityResult(CoreObject):
 
         Examples
         --------
-        >>> surface_quality_result = SurfaceQualityResult(model = model)
+        >>> surface_quality_result = prime.SurfaceQualityResult(model = model)
         """
         if json_data:
             self.__initialize(
@@ -85,14 +85,14 @@ class SurfaceQualityResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("SurfaceQualityResult")["SurfaceQualityResult"]
+                    json_data = model._communicator.initialize_params("SurfaceQualityResult")["SurfaceQualityResult"]
                     self.__initialize(
-                        face_quality_measure if face_quality_measure is not None else ( SurfaceQualityResult.default_params["face_quality_measure"] if "face_quality_measure" in SurfaceQualityResult.default_params else FaceQualityMeasure(json_data["faceQualityMeasure"])),
-                        measure_name if measure_name is not None else ( SurfaceQualityResult.default_params["measure_name"] if "measure_name" in SurfaceQualityResult.default_params else json_data["measureName"]),
-                        quality_limit if quality_limit is not None else ( SurfaceQualityResult.default_params["quality_limit"] if "quality_limit" in SurfaceQualityResult.default_params else json_data["qualityLimit"]),
-                        n_found if n_found is not None else ( SurfaceQualityResult.default_params["n_found"] if "n_found" in SurfaceQualityResult.default_params else json_data["nFound"]),
-                        max_value if max_value is not None else ( SurfaceQualityResult.default_params["max_value"] if "max_value" in SurfaceQualityResult.default_params else json_data["maxValue"]),
-                        min_value if min_value is not None else ( SurfaceQualityResult.default_params["min_value"] if "min_value" in SurfaceQualityResult.default_params else json_data["minValue"]))
+                        face_quality_measure if face_quality_measure is not None else ( SurfaceQualityResult._default_params["face_quality_measure"] if "face_quality_measure" in SurfaceQualityResult._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"])),
+                        measure_name if measure_name is not None else ( SurfaceQualityResult._default_params["measure_name"] if "measure_name" in SurfaceQualityResult._default_params else json_data["measureName"]),
+                        quality_limit if quality_limit is not None else ( SurfaceQualityResult._default_params["quality_limit"] if "quality_limit" in SurfaceQualityResult._default_params else json_data["qualityLimit"]),
+                        n_found if n_found is not None else ( SurfaceQualityResult._default_params["n_found"] if "n_found" in SurfaceQualityResult._default_params else json_data["nFound"]),
+                        max_value if max_value is not None else ( SurfaceQualityResult._default_params["max_value"] if "max_value" in SurfaceQualityResult._default_params else json_data["maxValue"]),
+                        min_value if min_value is not None else ( SurfaceQualityResult._default_params["min_value"] if "min_value" in SurfaceQualityResult._default_params else json_data["minValue"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -108,16 +108,39 @@ class SurfaceQualityResult(CoreObject):
             n_found: int = None,
             max_value: float = None,
             min_value: float = None):
+        """Sets the default values of SurfaceQualityResult.
+
+        Parameters
+        ----------
+        face_quality_measure: FaceQualityMeasure, optional
+            Type of the face quality measure.
+        measure_name: str, optional
+            Name of the face quality measure.
+        quality_limit: float, optional
+            Target quality limit used to find failures.
+        n_found: int, optional
+            Number of failed faces.
+        max_value: float, optional
+            Maximum value of quality measure.
+        min_value: float, optional
+            Minimum value of quality measure.
+        """
         args = locals()
-        [SurfaceQualityResult.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [SurfaceQualityResult._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of SurfaceQualityResult.
+
+        Examples
+        --------
+        >>> SurfaceQualityResult.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SurfaceQualityResult.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SurfaceQualityResult._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["faceQualityMeasure"] = self._face_quality_measure
         json_data["measureName"] = self._measure_name
@@ -196,14 +219,14 @@ class SurfaceQualityResult(CoreObject):
 class SurfaceQualitySummaryResults(CoreObject):
     """Results of surface quality summary.
     """
-    default_params = {}
+    _default_params = {}
 
     def __initialize(
             self,
             error_code: ErrorCode,
             quality_results: List[SurfaceQualityResult],
             summary: str):
-        self._error_code = error_code
+        self._error_code = ErrorCode(error_code)
         self._quality_results = quality_results
         self._summary = summary
 
@@ -215,7 +238,7 @@ class SurfaceQualitySummaryResults(CoreObject):
             summary: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes SurfaceQualitySummaryResults
+        """Initializes the SurfaceQualitySummaryResults.
 
         Parameters
         ----------
@@ -232,7 +255,7 @@ class SurfaceQualitySummaryResults(CoreObject):
 
         Examples
         --------
-        >>> surface_quality_summary_results = SurfaceQualitySummaryResults(model = model)
+        >>> surface_quality_summary_results = prime.SurfaceQualitySummaryResults(model = model)
         """
         if json_data:
             self.__initialize(
@@ -250,11 +273,11 @@ class SurfaceQualitySummaryResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("SurfaceQualitySummaryResults")["SurfaceQualitySummaryResults"]
+                    json_data = model._communicator.initialize_params("SurfaceQualitySummaryResults")["SurfaceQualitySummaryResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( SurfaceQualitySummaryResults.default_params["error_code"] if "error_code" in SurfaceQualitySummaryResults.default_params else ErrorCode(json_data["errorCode"])),
-                        quality_results if quality_results is not None else ( SurfaceQualitySummaryResults.default_params["quality_results"] if "quality_results" in SurfaceQualitySummaryResults.default_params else [SurfaceQualityResult(model = model, json_data = data) for data in json_data["qualityResults"]]),
-                        summary if summary is not None else ( SurfaceQualitySummaryResults.default_params["summary"] if "summary" in SurfaceQualitySummaryResults.default_params else json_data["summary"]))
+                        error_code if error_code is not None else ( SurfaceQualitySummaryResults._default_params["error_code"] if "error_code" in SurfaceQualitySummaryResults._default_params else ErrorCode(json_data["errorCode"])),
+                        quality_results if quality_results is not None else ( SurfaceQualitySummaryResults._default_params["quality_results"] if "quality_results" in SurfaceQualitySummaryResults._default_params else [SurfaceQualityResult(model = model, json_data = data) for data in json_data["qualityResults"]]),
+                        summary if summary is not None else ( SurfaceQualitySummaryResults._default_params["summary"] if "summary" in SurfaceQualitySummaryResults._default_params else json_data["summary"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -267,19 +290,36 @@ class SurfaceQualitySummaryResults(CoreObject):
             error_code: ErrorCode = None,
             quality_results: List[SurfaceQualityResult] = None,
             summary: str = None):
+        """Sets the default values of SurfaceQualitySummaryResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the surface quality summary.
+        quality_results: List[SurfaceQualityResult], optional
+            Contains surface quality result per face quality measure specified in parameters.
+        summary: str, optional
+            Surface quality summary text.
+        """
         args = locals()
-        [SurfaceQualitySummaryResults.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [SurfaceQualitySummaryResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of SurfaceQualitySummaryResults.
+
+        Examples
+        --------
+        >>> SurfaceQualitySummaryResults.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SurfaceQualitySummaryResults.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SurfaceQualitySummaryResults._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
-        json_data["qualityResults"] = [data.jsonify() for data in self._quality_results]
+        json_data["qualityResults"] = [data._jsonify() for data in self._quality_results]
         json_data["summary"] = self._summary
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
@@ -322,7 +362,7 @@ class SurfaceQualitySummaryResults(CoreObject):
 class SurfaceQualitySummaryParams(CoreObject):
     """Parameters to control surface quality summary results.
     """
-    default_params = {}
+    _default_params = {}
 
     def __initialize(
             self,
@@ -341,7 +381,7 @@ class SurfaceQualitySummaryParams(CoreObject):
             quality_limit: List[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes SurfaceQualitySummaryParams
+        """Initializes the SurfaceQualitySummaryParams.
 
         Parameters
         ----------
@@ -352,13 +392,13 @@ class SurfaceQualitySummaryParams(CoreObject):
         scope: ScopeDefinition, optional
             Scope the face zonelets for surface quality diagnostics.
         quality_limit: List[float], optional
-            Quality limit per face quality measure, if not specified for particular measure default quality limit is used.
+            Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
         json_data: dict, optional
             JSON dictionary to create a SurfaceQualitySummaryParams object with provided parameters.
 
         Examples
         --------
-        >>> surface_quality_summary_params = SurfaceQualitySummaryParams(model = model)
+        >>> surface_quality_summary_params = prime.SurfaceQualitySummaryParams(model = model)
         """
         if json_data:
             self.__initialize(
@@ -376,11 +416,11 @@ class SurfaceQualitySummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("SurfaceQualitySummaryParams")["SurfaceQualitySummaryParams"]
+                    json_data = model._communicator.initialize_params("SurfaceQualitySummaryParams")["SurfaceQualitySummaryParams"]
                     self.__initialize(
-                        face_quality_measures if face_quality_measures is not None else ( SurfaceQualitySummaryParams.default_params["face_quality_measures"] if "face_quality_measures" in SurfaceQualitySummaryParams.default_params else json_data["faceQualityMeasures"]),
-                        scope if scope is not None else ( SurfaceQualitySummaryParams.default_params["scope"] if "scope" in SurfaceQualitySummaryParams.default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
-                        quality_limit if quality_limit is not None else ( SurfaceQualitySummaryParams.default_params["quality_limit"] if "quality_limit" in SurfaceQualitySummaryParams.default_params else json_data["qualityLimit"]))
+                        face_quality_measures if face_quality_measures is not None else ( SurfaceQualitySummaryParams._default_params["face_quality_measures"] if "face_quality_measures" in SurfaceQualitySummaryParams._default_params else json_data["faceQualityMeasures"]),
+                        scope if scope is not None else ( SurfaceQualitySummaryParams._default_params["scope"] if "scope" in SurfaceQualitySummaryParams._default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
+                        quality_limit if quality_limit is not None else ( SurfaceQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in SurfaceQualitySummaryParams._default_params else json_data["qualityLimit"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -393,19 +433,36 @@ class SurfaceQualitySummaryParams(CoreObject):
             face_quality_measures: List[int] = None,
             scope: ScopeDefinition = None,
             quality_limit: List[float] = None):
+        """Sets the default values of SurfaceQualitySummaryParams.
+
+        Parameters
+        ----------
+        face_quality_measures: List[int], optional
+            List of face quality measures for surface quality diagnostics.
+        scope: ScopeDefinition, optional
+            Scope the face zonelets for surface quality diagnostics.
+        quality_limit: List[float], optional
+            Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
+        """
         args = locals()
-        [SurfaceQualitySummaryParams.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [SurfaceQualitySummaryParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of SurfaceQualitySummaryParams.
+
+        Examples
+        --------
+        >>> SurfaceQualitySummaryParams.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SurfaceQualitySummaryParams.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SurfaceQualitySummaryParams._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["faceQualityMeasures"] = self._face_quality_measures
-        json_data["scope"] = self._scope.jsonify()
+        json_data["scope"] = self._scope._jsonify()
         json_data["qualityLimit"] = self._quality_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
@@ -437,7 +494,7 @@ class SurfaceQualitySummaryParams(CoreObject):
 
     @property
     def quality_limit(self) -> List[float]:
-        """Quality limit per face quality measure, if not specified for particular measure default quality limit is used.
+        """Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
         """
         return self._quality_limit
 

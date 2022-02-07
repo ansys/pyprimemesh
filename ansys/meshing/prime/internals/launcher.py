@@ -2,7 +2,7 @@ import os
 import subprocess
 
 from ansys.meshing.prime.internals.client import Client
-__all__ = [ 'launch_prime', 'PrimeServerLaunchError' ]
+__all__ = [ 'launch_prime', 'launch_server_process', 'PrimeServerLaunchError' ]
 
 class PrimeServerLaunchError(RuntimeError):
     def __init__(self, msg='Timed out while launching server'):
@@ -66,9 +66,11 @@ def get_pyprime_root():
         pyprime_root = available_versions[version]
         return pyprime_root
 
-def launch_prime(pyprime_root: str=None,
-                 ip: str=__LOCALHOST,
-                 port: int=__DEFAULT_PORT):
+def launch_server_process(pyprime_root: str=None,
+                          ip: str=__LOCALHOST,
+                          port: int=__DEFAULT_PORT,
+                          n_procs=None,
+                          log_level: str='WARNING'):
     if pyprime_root is None:
         pyprime_root = get_pyprime_root()
         if pyprime_root is None:
@@ -89,13 +91,39 @@ def launch_prime(pyprime_root: str=None,
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f'{run_prime_script} not found in {pyprime_root}')
 
-    server = subprocess.Popen(
-        [
-            exec_path,
-            server_path,
-            f'--ip={ip}',
-            f'--port={port}'
-        ],
-    )
+    if n_procs is not None and isinstance(n_procs, int):
+        print('Launching server in distributed mode')
+        server = subprocess.Popen(
+            [
+                exec_path,
+                server_path,
+                f'--ip={ip}',
+                f'--port={port}',
+                f'-np={n_procs}',
+                f'-l={log_level}'
+            ],
+        )
+    else:
+        server = subprocess.Popen(
+            [
+                exec_path,
+                server_path,
+                f'--ip={ip}',
+                f'--port={port}',
+                f'-l={log_level}'
+            ],
+        )
+    return server
+
+def launch_prime(pyprime_root: str=None,
+                 ip: str=__LOCALHOST,
+                 port: int=__DEFAULT_PORT,
+                 n_procs=None,
+                 log_level: str='WARNING'):
+    server = launch_server_process(pyprime_root=pyprime_root,
+                                   ip=ip,
+                                   port=port,
+                                   n_procs=n_procs,
+                                   log_level=log_level)
 
     return Client(server_process=server, ip=ip, port=port)

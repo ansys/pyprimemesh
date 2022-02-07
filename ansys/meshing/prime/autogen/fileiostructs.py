@@ -8,14 +8,14 @@ from ansys.meshing.prime.autogen.coreobject import *
 from ansys.meshing.prime.params.primestructs import *
 
 class FileReadResults(CoreObject):
-    """Results of file read.
+    """Results of file read operation.
     """
-    default_params = {}
+    _default_params = {}
 
     def __initialize(
             self,
             error_code: ErrorCode):
-        self._error_code = error_code
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
@@ -23,20 +23,20 @@ class FileReadResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes FileReadResults
+        """Initializes the FileReadResults.
 
         Parameters
         ----------
         model: Model
             Model to create a FileReadResults object with default parameters.
         error_code: ErrorCode, optional
-            Appropriate error code is set if the read was unsuccessful.
+            Error code if file read operation was unsuccessful.
         json_data: dict, optional
             JSON dictionary to create a FileReadResults object with provided parameters.
 
         Examples
         --------
-        >>> file_read_results = FileReadResults(model = model)
+        >>> file_read_results = prime.FileReadResults(model = model)
         """
         if json_data:
             self.__initialize(
@@ -50,9 +50,9 @@ class FileReadResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("FileReadResults")["FileReadResults"]
+                    json_data = model._communicator.initialize_params("FileReadResults")["FileReadResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( FileReadResults.default_params["error_code"] if "error_code" in FileReadResults.default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( FileReadResults._default_params["error_code"] if "error_code" in FileReadResults._default_params else ErrorCode(json_data["errorCode"])))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -63,16 +63,29 @@ class FileReadResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
+        """Sets the default values of FileReadResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code if file read operation was unsuccessful.
+        """
         args = locals()
-        [FileReadResults.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [FileReadResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of FileReadResults.
+
+        Examples
+        --------
+        >>> FileReadResults.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FileReadResults.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FileReadResults._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
@@ -85,7 +98,7 @@ class FileReadResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """Appropriate error code is set if the read was unsuccessful.
+        """Error code if file read operation was unsuccessful.
         """
         return self._error_code
 
@@ -94,13 +107,14 @@ class FileReadResults(CoreObject):
         self._error_code = value
 
 class FileWriteResults(CoreObject):
-    """    """
-    default_params = {}
+    """Results of file write operation.
+    """
+    _default_params = {}
 
     def __initialize(
             self,
             error_code: ErrorCode):
-        self._error_code = error_code
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
@@ -108,19 +122,20 @@ class FileWriteResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes FileWriteResults
+        """Initializes the FileWriteResults.
 
         Parameters
         ----------
         model: Model
             Model to create a FileWriteResults object with default parameters.
         error_code: ErrorCode, optional
+            Error code if file write operation is unsuccessful.
         json_data: dict, optional
             JSON dictionary to create a FileWriteResults object with provided parameters.
 
         Examples
         --------
-        >>> file_write_results = FileWriteResults(model = model)
+        >>> file_write_results = prime.FileWriteResults(model = model)
         """
         if json_data:
             self.__initialize(
@@ -134,9 +149,9 @@ class FileWriteResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("FileWriteResults")["FileWriteResults"]
+                    json_data = model._communicator.initialize_params("FileWriteResults")["FileWriteResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( FileWriteResults.default_params["error_code"] if "error_code" in FileWriteResults.default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( FileWriteResults._default_params["error_code"] if "error_code" in FileWriteResults._default_params else ErrorCode(json_data["errorCode"])))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -147,16 +162,29 @@ class FileWriteResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
+        """Sets the default values of FileWriteResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code if file write operation is unsuccessful.
+        """
         args = locals()
-        [FileWriteResults.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [FileWriteResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of FileWriteResults.
+
+        Examples
+        --------
+        >>> FileWriteResults.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FileWriteResults.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FileWriteResults._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
@@ -169,8 +197,7 @@ class FileWriteResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """
-        Error code if file export operation is unsuccessful
+        """Error code if file write operation is unsuccessful.
         """
         return self._error_code
 
@@ -179,8 +206,9 @@ class FileWriteResults(CoreObject):
         self._error_code = value
 
 class ExportBoundaryFittedSplineParams(CoreObject):
-    """    """
-    default_params = {}
+    """Parameters for exporting boundary fitted splines.
+    """
+    _default_params = {}
 
     def __initialize(
             self,
@@ -196,20 +224,22 @@ class ExportBoundaryFittedSplineParams(CoreObject):
             id_start: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes ExportBoundaryFittedSplineParams
+        """Initializes the ExportBoundaryFittedSplineParams.
 
         Parameters
         ----------
         model: Model
             Model to create a ExportBoundaryFittedSplineParams object with default parameters.
         id_offset: int, optional
+            Offset value for IGA entity ids between parts.
         id_start: int, optional
+            Start ids for IGA entities.
         json_data: dict, optional
             JSON dictionary to create a ExportBoundaryFittedSplineParams object with provided parameters.
 
         Examples
         --------
-        >>> export_boundary_fitted_spline_params = ExportBoundaryFittedSplineParams(model = model)
+        >>> export_boundary_fitted_spline_params = prime.ExportBoundaryFittedSplineParams(model = model)
         """
         if json_data:
             self.__initialize(
@@ -225,10 +255,10 @@ class ExportBoundaryFittedSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("ExportBoundaryFittedSplineParams")["ExportBoundaryFittedSplineParams"]
+                    json_data = model._communicator.initialize_params("ExportBoundaryFittedSplineParams")["ExportBoundaryFittedSplineParams"]
                     self.__initialize(
-                        id_offset if id_offset is not None else ( ExportBoundaryFittedSplineParams.default_params["id_offset"] if "id_offset" in ExportBoundaryFittedSplineParams.default_params else json_data["idOffset"]),
-                        id_start if id_start is not None else ( ExportBoundaryFittedSplineParams.default_params["id_start"] if "id_start" in ExportBoundaryFittedSplineParams.default_params else json_data["idStart"]))
+                        id_offset if id_offset is not None else ( ExportBoundaryFittedSplineParams._default_params["id_offset"] if "id_offset" in ExportBoundaryFittedSplineParams._default_params else json_data["idOffset"]),
+                        id_start if id_start is not None else ( ExportBoundaryFittedSplineParams._default_params["id_start"] if "id_start" in ExportBoundaryFittedSplineParams._default_params else json_data["idStart"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -240,16 +270,31 @@ class ExportBoundaryFittedSplineParams(CoreObject):
     def set_default(
             id_offset: int = None,
             id_start: int = None):
+        """Sets the default values of ExportBoundaryFittedSplineParams.
+
+        Parameters
+        ----------
+        id_offset: int, optional
+            Offset value for IGA entity ids between parts.
+        id_start: int, optional
+            Start ids for IGA entities.
+        """
         args = locals()
-        [ExportBoundaryFittedSplineParams.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [ExportBoundaryFittedSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of ExportBoundaryFittedSplineParams.
+
+        Examples
+        --------
+        >>> ExportBoundaryFittedSplineParams.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportBoundaryFittedSplineParams.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportBoundaryFittedSplineParams._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["idOffset"] = self._id_offset
         json_data["idStart"] = self._id_start
@@ -263,7 +308,8 @@ class ExportBoundaryFittedSplineParams(CoreObject):
 
     @property
     def id_offset(self) -> int:
-        """        """
+        """Offset value for IGA entity ids between parts.
+        """
         return self._id_offset
 
     @id_offset.setter
@@ -272,7 +318,8 @@ class ExportBoundaryFittedSplineParams(CoreObject):
 
     @property
     def id_start(self) -> int:
-        """        """
+        """Start ids for IGA entities.
+        """
         return self._id_start
 
     @id_start.setter

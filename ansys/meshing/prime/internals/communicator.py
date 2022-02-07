@@ -6,7 +6,7 @@ class Communicator(object):
         pass
 
     @abstractmethod
-    def initialize_params(self, param_name: str) -> dict:
+    def initialize_params(self, param_name: str, *args) -> dict:
         pass
 
     @abstractmethod

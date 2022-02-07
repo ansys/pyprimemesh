@@ -15,7 +15,7 @@ class FileIO(_FileIO):
         self._model = model
         _FileIO.__init__(self, model)
 
-    def read_pmdat(self, file_name) -> FileReadResults:
+    def read_pmdat(self, file_name : str) -> FileReadResults:
         """Function that reads PRIME's database file.
 
         Read PRIME's database file from disk.

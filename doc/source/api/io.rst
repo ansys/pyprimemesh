@@ -11,3 +11,6 @@ data into PyPrime or extract data out of PyPrime.
    :toctree: _autosummary
    
    FileIO
+   FileReadResults
+   FileWriteResults
+   ExportBoundaryFittedSplineParams

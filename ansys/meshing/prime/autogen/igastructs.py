@@ -7,36 +7,34 @@ from ansys.meshing.prime.autogen.coreobject import *
 
 from ansys.meshing.prime.params.primestructs import *
 
-class IGASplineType(enum.IntEnum):
-    """    """
-    # Boundary fitted solid spline type
-    BOUNDARYFITTEDSOLIDSPLINE = 0
-
 class ControlPointSelection(enum.IntEnum):
-    """    """
-    # Manual Spline control point selection
+    """Control point selection type.
+    """
     MANUAL = 0
-    # Program controlled spline control point selection
+    """Manual Spline control point selection."""
     PROGRAMCONTROLLED = 1
+    """Program controlled spline control point selection."""
 
 class SplineRefinementType(enum.IntEnum):
-    """    """
-    # H refinement of spline
+    """Type of spline refinement. Currently, supports h-refinement and p-refinement.
+    """
     H = 0
-    # P refinement of spline
+    """H refinement of spline."""
     P = 1
+    """P refinement of spline."""
 
 class IGAResults(CoreObject):
-    """    """
-    default_params = {}
+    """Results of IGA operations.
+    """
+    _default_params = {}
 
     def __initialize(
             self,
             error_code: ErrorCode,
             warning_code: WarningCode,
             spline_ids: List[int]):
-        self._error_code = error_code
-        self._warning_code = warning_code
+        self._error_code = ErrorCode(error_code)
+        self._warning_code = WarningCode(warning_code)
         self._spline_ids = spline_ids
 
     def __init__(
@@ -47,21 +45,24 @@ class IGAResults(CoreObject):
             spline_ids: List[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes IGAResults
+        """Initializes the IGAResults.
 
         Parameters
         ----------
         model: Model
             Model to create a IGAResults object with default parameters.
         error_code: ErrorCode, optional
+            Error code if IGA operation is unsuccessful.
         warning_code: WarningCode, optional
+            Warning code if IGA operation is partially successful.
         spline_ids: List[int], optional
+            Ids of the created spline.
         json_data: dict, optional
             JSON dictionary to create a IGAResults object with provided parameters.
 
         Examples
         --------
-        >>> i_garesults = IGAResults(model = model)
+        >>> i_garesults = prime.IGAResults(model = model)
         """
         if json_data:
             self.__initialize(
@@ -79,11 +80,11 @@ class IGAResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("IGAResults")["IGAResults"]
+                    json_data = model._communicator.initialize_params("IGAResults")["IGAResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( IGAResults.default_params["error_code"] if "error_code" in IGAResults.default_params else ErrorCode(json_data["errorCode"])),
-                        warning_code if warning_code is not None else ( IGAResults.default_params["warning_code"] if "warning_code" in IGAResults.default_params else WarningCode(json_data["warningCode"])),
-                        spline_ids if spline_ids is not None else ( IGAResults.default_params["spline_ids"] if "spline_ids" in IGAResults.default_params else json_data["splineIds"]))
+                        error_code if error_code is not None else ( IGAResults._default_params["error_code"] if "error_code" in IGAResults._default_params else ErrorCode(json_data["errorCode"])),
+                        warning_code if warning_code is not None else ( IGAResults._default_params["warning_code"] if "warning_code" in IGAResults._default_params else WarningCode(json_data["warningCode"])),
+                        spline_ids if spline_ids is not None else ( IGAResults._default_params["spline_ids"] if "spline_ids" in IGAResults._default_params else json_data["splineIds"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -96,16 +97,33 @@ class IGAResults(CoreObject):
             error_code: ErrorCode = None,
             warning_code: WarningCode = None,
             spline_ids: List[int] = None):
+        """Sets the default values of IGAResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code if IGA operation is unsuccessful.
+        warning_code: WarningCode, optional
+            Warning code if IGA operation is partially successful.
+        spline_ids: List[int], optional
+            Ids of the created spline.
+        """
         args = locals()
-        [IGAResults.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [IGAResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of IGAResults.
+
+        Examples
+        --------
+        >>> IGAResults.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in IGAResults.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in IGAResults._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
         json_data["warningCode"] = self._warning_code
@@ -120,8 +138,7 @@ class IGAResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """
-        Error code if IGA operation is unsuccessful
+        """Error code if IGA operation is unsuccessful.
         """
         return self._error_code
 
@@ -131,8 +148,7 @@ class IGAResults(CoreObject):
 
     @property
     def warning_code(self) -> WarningCode:
-        """
-        Warning code if IGA operation is partially successful
+        """Warning code if IGA operation is partially successful.
         """
         return self._warning_code
 
@@ -142,8 +158,7 @@ class IGAResults(CoreObject):
 
     @property
     def spline_ids(self) -> List[int]:
-        """
-        Ids of the created spline
+        """Ids of the created spline.
         """
         return self._spline_ids
 
@@ -152,56 +167,51 @@ class IGAResults(CoreObject):
         self._spline_ids = value
 
 class IGASpline(CoreObject):
-    """    """
-    default_params = {}
+    """Information of the spline.
+    """
+    _default_params = {}
 
     def __initialize(
             self,
-            id: int,
-            cell_zonelet_ids: List[int]):
+            id: int):
         self._id = id
-        self._cell_zonelet_ids = cell_zonelet_ids
 
     def __init__(
             self,
             model: CommunicationManager=None,
             id: int = None,
-            cell_zonelet_ids: List[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes IGASpline
+        """Initializes the IGASpline.
 
         Parameters
         ----------
         model: Model
             Model to create a IGASpline object with default parameters.
         id: int, optional
-        cell_zonelet_ids: List[int], optional
+            Unique id of the spline.
         json_data: dict, optional
             JSON dictionary to create a IGASpline object with provided parameters.
 
         Examples
         --------
-        >>> i_gaspline = IGASpline(model = model)
+        >>> i_gaspline = prime.IGASpline(model = model)
         """
         if json_data:
             self.__initialize(
-                json_data["id"],
-                json_data["cellZoneletIds"])
+                json_data["id"])
         else:
-            all_field_specified = all(arg is not None for arg in [id, cell_zonelet_ids])
+            all_field_specified = all(arg is not None for arg in [id])
             if all_field_specified:
                 self.__initialize(
-                    id,
-                    cell_zonelet_ids)
+                    id)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("IGASpline")["IGASpline"]
+                    json_data = model._communicator.initialize_params("IGASpline")["IGASpline"]
                     self.__initialize(
-                        id if id is not None else ( IGASpline.default_params["id"] if "id" in IGASpline.default_params else json_data["id"]),
-                        cell_zonelet_ids if cell_zonelet_ids is not None else ( IGASpline.default_params["cell_zonelet_ids"] if "cell_zonelet_ids" in IGASpline.default_params else json_data["cellZoneletIds"]))
+                        id if id is not None else ( IGASpline._default_params["id"] if "id" in IGASpline._default_params else json_data["id"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -211,33 +221,43 @@ class IGASpline(CoreObject):
 
     @staticmethod
     def set_default(
-            id: int = None,
-            cell_zonelet_ids: List[int] = None):
+            id: int = None):
+        """Sets the default values of IGASpline.
+
+        Parameters
+        ----------
+        id: int, optional
+            Unique id of the spline.
+        """
         args = locals()
-        [IGASpline.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [IGASpline._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of IGASpline.
+
+        Examples
+        --------
+        >>> IGASpline.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in IGASpline.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in IGASpline._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["id"] = self._id
-        json_data["cellZoneletIds"] = self._cell_zonelet_ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "id :  %s\ncell_zonelet_ids :  %s" % (self._id, self._cell_zonelet_ids)
+        message = "id :  %s" % (self._id)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def id(self) -> int:
-        """
-        Unique id of the spline
+        """Unique id of the spline.
         """
         return self._id
 
@@ -245,20 +265,10 @@ class IGASpline(CoreObject):
     def id(self, value: int):
         self._id = value
 
-    @property
-    def cell_zonelet_ids(self) -> List[int]:
-        """
-        Ids of the cell zonelets from which the structured hexmesh fitted Spline was created
-        """
-        return self._cell_zonelet_ids
-
-    @cell_zonelet_ids.setter
-    def cell_zonelet_ids(self, value: List[int]):
-        self._cell_zonelet_ids = value
-
 class BoundaryFittedSplineParams(CoreObject):
-    """    """
-    default_params = {}
+    """Boundary fitted spline fitting parameters.
+    """
+    _default_params = {}
 
     def __initialize(
             self,
@@ -283,7 +293,7 @@ class BoundaryFittedSplineParams(CoreObject):
         self._control_points_count_v = control_points_count_v
         self._control_points_count_w = control_points_count_w
         self._n_refine = n_refine
-        self._control_point_selection_type = control_point_selection_type
+        self._control_point_selection_type = ControlPointSelection(control_point_selection_type)
 
     def __init__(
             self,
@@ -301,29 +311,40 @@ class BoundaryFittedSplineParams(CoreObject):
             control_point_selection_type: ControlPointSelection = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes BoundaryFittedSplineParams
+        """Initializes the BoundaryFittedSplineParams.
 
         Parameters
         ----------
         model: Model
             Model to create a BoundaryFittedSplineParams object with default parameters.
         degree_u: int, optional
+            Degree of spline in u direction.
         degree_v: int, optional
+            Degree of spline in v direction.
         degree_w: int, optional
+            Degree of spline in w direction.
         refinement_fraction_u: float, optional
+            Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
         refinement_fraction_v: float, optional
+            Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
         refinement_fraction_w: float, optional
+            Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
         control_points_count_u: int, optional
+            Spline control points count in u direction. Used in manual control points selection mode.
         control_points_count_v: int, optional
+            Spline control points count in v direction. Used in manual control points selection mode.
         control_points_count_w: int, optional
+            Spline control points count in w direction. Used in manual control points selection mode.
         n_refine: int, optional
+            Spline refinement level for rendering.
         control_point_selection_type: ControlPointSelection, optional
+            Spline control points selection type.
         json_data: dict, optional
             JSON dictionary to create a BoundaryFittedSplineParams object with provided parameters.
 
         Examples
         --------
-        >>> boundary_fitted_spline_params = BoundaryFittedSplineParams(model = model)
+        >>> boundary_fitted_spline_params = prime.BoundaryFittedSplineParams(model = model)
         """
         if json_data:
             self.__initialize(
@@ -357,19 +378,19 @@ class BoundaryFittedSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("BoundaryFittedSplineParams")["BoundaryFittedSplineParams"]
+                    json_data = model._communicator.initialize_params("BoundaryFittedSplineParams")["BoundaryFittedSplineParams"]
                     self.__initialize(
-                        degree_u if degree_u is not None else ( BoundaryFittedSplineParams.default_params["degree_u"] if "degree_u" in BoundaryFittedSplineParams.default_params else json_data["degreeU"]),
-                        degree_v if degree_v is not None else ( BoundaryFittedSplineParams.default_params["degree_v"] if "degree_v" in BoundaryFittedSplineParams.default_params else json_data["degreeV"]),
-                        degree_w if degree_w is not None else ( BoundaryFittedSplineParams.default_params["degree_w"] if "degree_w" in BoundaryFittedSplineParams.default_params else json_data["degreeW"]),
-                        refinement_fraction_u if refinement_fraction_u is not None else ( BoundaryFittedSplineParams.default_params["refinement_fraction_u"] if "refinement_fraction_u" in BoundaryFittedSplineParams.default_params else json_data["refinementFractionU"]),
-                        refinement_fraction_v if refinement_fraction_v is not None else ( BoundaryFittedSplineParams.default_params["refinement_fraction_v"] if "refinement_fraction_v" in BoundaryFittedSplineParams.default_params else json_data["refinementFractionV"]),
-                        refinement_fraction_w if refinement_fraction_w is not None else ( BoundaryFittedSplineParams.default_params["refinement_fraction_w"] if "refinement_fraction_w" in BoundaryFittedSplineParams.default_params else json_data["refinementFractionW"]),
-                        control_points_count_u if control_points_count_u is not None else ( BoundaryFittedSplineParams.default_params["control_points_count_u"] if "control_points_count_u" in BoundaryFittedSplineParams.default_params else json_data["controlPointsCountU"]),
-                        control_points_count_v if control_points_count_v is not None else ( BoundaryFittedSplineParams.default_params["control_points_count_v"] if "control_points_count_v" in BoundaryFittedSplineParams.default_params else json_data["controlPointsCountV"]),
-                        control_points_count_w if control_points_count_w is not None else ( BoundaryFittedSplineParams.default_params["control_points_count_w"] if "control_points_count_w" in BoundaryFittedSplineParams.default_params else json_data["controlPointsCountW"]),
-                        n_refine if n_refine is not None else ( BoundaryFittedSplineParams.default_params["n_refine"] if "n_refine" in BoundaryFittedSplineParams.default_params else json_data["nRefine"]),
-                        control_point_selection_type if control_point_selection_type is not None else ( BoundaryFittedSplineParams.default_params["control_point_selection_type"] if "control_point_selection_type" in BoundaryFittedSplineParams.default_params else ControlPointSelection(json_data["controlPointSelectionType"])))
+                        degree_u if degree_u is not None else ( BoundaryFittedSplineParams._default_params["degree_u"] if "degree_u" in BoundaryFittedSplineParams._default_params else json_data["degreeU"]),
+                        degree_v if degree_v is not None else ( BoundaryFittedSplineParams._default_params["degree_v"] if "degree_v" in BoundaryFittedSplineParams._default_params else json_data["degreeV"]),
+                        degree_w if degree_w is not None else ( BoundaryFittedSplineParams._default_params["degree_w"] if "degree_w" in BoundaryFittedSplineParams._default_params else json_data["degreeW"]),
+                        refinement_fraction_u if refinement_fraction_u is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_u"] if "refinement_fraction_u" in BoundaryFittedSplineParams._default_params else json_data["refinementFractionU"]),
+                        refinement_fraction_v if refinement_fraction_v is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_v"] if "refinement_fraction_v" in BoundaryFittedSplineParams._default_params else json_data["refinementFractionV"]),
+                        refinement_fraction_w if refinement_fraction_w is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_w"] if "refinement_fraction_w" in BoundaryFittedSplineParams._default_params else json_data["refinementFractionW"]),
+                        control_points_count_u if control_points_count_u is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_u"] if "control_points_count_u" in BoundaryFittedSplineParams._default_params else json_data["controlPointsCountU"]),
+                        control_points_count_v if control_points_count_v is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_v"] if "control_points_count_v" in BoundaryFittedSplineParams._default_params else json_data["controlPointsCountV"]),
+                        control_points_count_w if control_points_count_w is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_w"] if "control_points_count_w" in BoundaryFittedSplineParams._default_params else json_data["controlPointsCountW"]),
+                        n_refine if n_refine is not None else ( BoundaryFittedSplineParams._default_params["n_refine"] if "n_refine" in BoundaryFittedSplineParams._default_params else json_data["nRefine"]),
+                        control_point_selection_type if control_point_selection_type is not None else ( BoundaryFittedSplineParams._default_params["control_point_selection_type"] if "control_point_selection_type" in BoundaryFittedSplineParams._default_params else ControlPointSelection(json_data["controlPointSelectionType"])))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -390,16 +411,49 @@ class BoundaryFittedSplineParams(CoreObject):
             control_points_count_w: int = None,
             n_refine: int = None,
             control_point_selection_type: ControlPointSelection = None):
+        """Sets the default values of BoundaryFittedSplineParams.
+
+        Parameters
+        ----------
+        degree_u: int, optional
+            Degree of spline in u direction.
+        degree_v: int, optional
+            Degree of spline in v direction.
+        degree_w: int, optional
+            Degree of spline in w direction.
+        refinement_fraction_u: float, optional
+            Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
+        refinement_fraction_v: float, optional
+            Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
+        refinement_fraction_w: float, optional
+            Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
+        control_points_count_u: int, optional
+            Spline control points count in u direction. Used in manual control points selection mode.
+        control_points_count_v: int, optional
+            Spline control points count in v direction. Used in manual control points selection mode.
+        control_points_count_w: int, optional
+            Spline control points count in w direction. Used in manual control points selection mode.
+        n_refine: int, optional
+            Spline refinement level for rendering.
+        control_point_selection_type: ControlPointSelection, optional
+            Spline control points selection type.
+        """
         args = locals()
-        [BoundaryFittedSplineParams.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [BoundaryFittedSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of BoundaryFittedSplineParams.
+
+        Examples
+        --------
+        >>> BoundaryFittedSplineParams.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in BoundaryFittedSplineParams.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in BoundaryFittedSplineParams._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["degreeU"] = self._degree_u
         json_data["degreeV"] = self._degree_v
@@ -422,8 +476,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def degree_u(self) -> int:
-        """
-        Degree of spline in u direction
+        """Degree of spline in u direction.
         """
         return self._degree_u
 
@@ -433,8 +486,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def degree_v(self) -> int:
-        """
-        Degree of spline in v direction
+        """Degree of spline in v direction.
         """
         return self._degree_v
 
@@ -444,8 +496,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def degree_w(self) -> int:
-        """
-        Degree of spline in w direction
+        """Degree of spline in w direction.
         """
         return self._degree_w
 
@@ -455,8 +506,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def refinement_fraction_u(self) -> float:
-        """
-        Refinement fraction of spline control points size with respect to input mesh node size in u direction. Used in program controlled control points selection mode
+        """Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
         """
         return self._refinement_fraction_u
 
@@ -466,8 +516,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def refinement_fraction_v(self) -> float:
-        """
-        Refinement fraction of spline control points size with respect to input mesh node size in v direction. Used in program controlled control points selection mode
+        """Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
         """
         return self._refinement_fraction_v
 
@@ -477,8 +526,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def refinement_fraction_w(self) -> float:
-        """
-        Refinement fraction of spline control points size with respect to input mesh node size in w direction. Used in program controlled control points selection mode
+        """Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
         """
         return self._refinement_fraction_w
 
@@ -488,8 +536,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_points_count_u(self) -> int:
-        """
-        Spline control points count in u direction
+        """Spline control points count in u direction. Used in manual control points selection mode.
         """
         return self._control_points_count_u
 
@@ -499,8 +546,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_points_count_v(self) -> int:
-        """
-        Spline control points count in v direction
+        """Spline control points count in v direction. Used in manual control points selection mode.
         """
         return self._control_points_count_v
 
@@ -510,8 +556,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_points_count_w(self) -> int:
-        """
-        Spline control points count in w direction
+        """Spline control points count in w direction. Used in manual control points selection mode.
         """
         return self._control_points_count_w
 
@@ -521,8 +566,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def n_refine(self) -> int:
-        """
-        Spline refinement level for rendering
+        """Spline refinement level for rendering.
         """
         return self._n_refine
 
@@ -532,8 +576,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_point_selection_type(self) -> ControlPointSelection:
-        """
-        Spline control point size selection type
+        """Spline control points selection type.
         """
         return self._control_point_selection_type
 
@@ -542,8 +585,9 @@ class BoundaryFittedSplineParams(CoreObject):
         self._control_point_selection_type = value
 
 class RefineSplineParams(CoreObject):
-    """    """
-    default_params = {}
+    """Spline refinement parameters.
+    """
+    _default_params = {}
 
     def __initialize(
             self,
@@ -554,7 +598,7 @@ class RefineSplineParams(CoreObject):
         self._refine_flag_u = refine_flag_u
         self._refine_flag_v = refine_flag_v
         self._refine_flag_w = refine_flag_w
-        self._spline_refinement_type = spline_refinement_type
+        self._spline_refinement_type = SplineRefinementType(spline_refinement_type)
 
     def __init__(
             self,
@@ -565,22 +609,26 @@ class RefineSplineParams(CoreObject):
             spline_refinement_type: SplineRefinementType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes RefineSplineParams
+        """Initializes the RefineSplineParams.
 
         Parameters
         ----------
         model: Model
             Model to create a RefineSplineParams object with default parameters.
         refine_flag_u: bool, optional
+            Checks whether refinement is applied in u direction.
         refine_flag_v: bool, optional
+            Checks whether refinement is applied in v direction.
         refine_flag_w: bool, optional
+            Checks whether refinement is applied in w direction.
         spline_refinement_type: SplineRefinementType, optional
+            Type of spline refinement. Currently, supports h-refinement and p-refinement.
         json_data: dict, optional
             JSON dictionary to create a RefineSplineParams object with provided parameters.
 
         Examples
         --------
-        >>> refine_spline_params = RefineSplineParams(model = model)
+        >>> refine_spline_params = prime.RefineSplineParams(model = model)
         """
         if json_data:
             self.__initialize(
@@ -600,12 +648,12 @@ class RefineSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("RefineSplineParams")["RefineSplineParams"]
+                    json_data = model._communicator.initialize_params("RefineSplineParams")["RefineSplineParams"]
                     self.__initialize(
-                        refine_flag_u if refine_flag_u is not None else ( RefineSplineParams.default_params["refine_flag_u"] if "refine_flag_u" in RefineSplineParams.default_params else json_data["refineFlagU"]),
-                        refine_flag_v if refine_flag_v is not None else ( RefineSplineParams.default_params["refine_flag_v"] if "refine_flag_v" in RefineSplineParams.default_params else json_data["refineFlagV"]),
-                        refine_flag_w if refine_flag_w is not None else ( RefineSplineParams.default_params["refine_flag_w"] if "refine_flag_w" in RefineSplineParams.default_params else json_data["refineFlagW"]),
-                        spline_refinement_type if spline_refinement_type is not None else ( RefineSplineParams.default_params["spline_refinement_type"] if "spline_refinement_type" in RefineSplineParams.default_params else SplineRefinementType(json_data["splineRefinementType"])))
+                        refine_flag_u if refine_flag_u is not None else ( RefineSplineParams._default_params["refine_flag_u"] if "refine_flag_u" in RefineSplineParams._default_params else json_data["refineFlagU"]),
+                        refine_flag_v if refine_flag_v is not None else ( RefineSplineParams._default_params["refine_flag_v"] if "refine_flag_v" in RefineSplineParams._default_params else json_data["refineFlagV"]),
+                        refine_flag_w if refine_flag_w is not None else ( RefineSplineParams._default_params["refine_flag_w"] if "refine_flag_w" in RefineSplineParams._default_params else json_data["refineFlagW"]),
+                        spline_refinement_type if spline_refinement_type is not None else ( RefineSplineParams._default_params["spline_refinement_type"] if "spline_refinement_type" in RefineSplineParams._default_params else SplineRefinementType(json_data["splineRefinementType"])))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -619,16 +667,35 @@ class RefineSplineParams(CoreObject):
             refine_flag_v: bool = None,
             refine_flag_w: bool = None,
             spline_refinement_type: SplineRefinementType = None):
+        """Sets the default values of RefineSplineParams.
+
+        Parameters
+        ----------
+        refine_flag_u: bool, optional
+            Checks whether refinement is applied in u direction.
+        refine_flag_v: bool, optional
+            Checks whether refinement is applied in v direction.
+        refine_flag_w: bool, optional
+            Checks whether refinement is applied in w direction.
+        spline_refinement_type: SplineRefinementType, optional
+            Type of spline refinement. Currently, supports h-refinement and p-refinement.
+        """
         args = locals()
-        [RefineSplineParams.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [RefineSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of RefineSplineParams.
+
+        Examples
+        --------
+        >>> RefineSplineParams.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in RefineSplineParams.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in RefineSplineParams._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["refineFlagU"] = self._refine_flag_u
         json_data["refineFlagV"] = self._refine_flag_v
@@ -644,8 +711,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def refine_flag_u(self) -> bool:
-        """
-        Whether refinement is applied in u direction
+        """Checks whether refinement is applied in u direction.
         """
         return self._refine_flag_u
 
@@ -655,8 +721,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def refine_flag_v(self) -> bool:
-        """
-        Whether refinement is applied in v direction
+        """Checks whether refinement is applied in v direction.
         """
         return self._refine_flag_v
 
@@ -666,8 +731,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def refine_flag_w(self) -> bool:
-        """
-        Whether refinement is applied in w direction
+        """Checks whether refinement is applied in w direction.
         """
         return self._refine_flag_w
 
@@ -677,8 +741,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def spline_refinement_type(self) -> SplineRefinementType:
-        """
-        Spline refinement type h/p
+        """Type of spline refinement. Currently, supports h-refinement and p-refinement.
         """
         return self._spline_refinement_type
 

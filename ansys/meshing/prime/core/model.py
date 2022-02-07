@@ -1,6 +1,11 @@
 from ansys.meshing.prime.autogen.model import Model as _Model
 from ansys.meshing.prime.core.part import Part
+from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.internals.communicator import Communicator
+
+from ansys.meshing.prime.autogen.modelstructs import (
+    GlobalSizingParams
+)
 
 from typing import List
 import json
@@ -12,8 +17,7 @@ class Model( _Model ):
         """ Initialize Model """
         _Model.__init__(self, comm, id, object_id, name)
         self._parts = []
-        self._size_controls = []
-        self._prism_controls = []
+        self._global_sf_params = GlobalSizingParams(model=self)
         self._default_part = None
         self._topo_data = None
         self._control_data = None
@@ -27,36 +31,26 @@ class Model( _Model ):
 
         Examples
         --------
-        >>> from ansys.meshing.prime import local_model
-        >>> model = local_model()
+        >>> from ansys.meshing.prime import Model
+        >>> model = client.model
         >>> model._sync_up_model()
         """
-        res = json.loads(_Model.get_child_objects_json(self))
+        res = json.loads(self._comm.serve("PrimeMesh::Model/GetChildObjectsJson",
+                         self._object_id, args={}))
         part_data = res["Parts"]
+        sc_data = res["SizeControl"]
+        sf_params = res["GlobalSizingParams"]
+
+        self._global_sf_params = GlobalSizingParams(model = self,
+                                                    min = sf_params[0],
+                                                    max = sf_params[1],
+                                                    growth_rate = sf_params[2])
         self._parts = [Part(self, part[0], part[1], part[2]) for part in part_data]
-        # support prism controls here and remove weld control
-        # self._weld_controls = [WeldControl(self, wc[0], wc[1]) for wc in wc_data]
-
-    def get_parts(self) -> List[Part]:
-        """Gets the list of parts of a model.
-
-        Returns
-        -------
-        List[Part]
-            Returns the list of parts.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import local_model
-            >>> model = local_model()
-            >>> parts = model.get_parts()
-        """
-        return self._parts
+        self._control_data = ControlData(self, -1, res["ControlData"], "")
+        self._control_data._update_size_controls(sc_data)
 
     def get_part_by_name(self, name: str) -> Part:
-        """Get the part by name.
-
-        Gets the part by name. Returns None if part doesn't exist for the given name.
+        """Gets the part by name. Returns None if part doesn't exist for the given name.
 
         Parameters
         ----------
@@ -70,8 +64,8 @@ class Model( _Model ):
 
         Examples
         --------
-            >>> from ansys.meshing.prime import local_model
-            >>> model = local_model()
+            >>> from ansys.meshing.prime import Model
+            >>> model = client.model
             >>> part = model.get_part_by_name("part.1")
         """
         for part in self._parts:
@@ -80,9 +74,7 @@ class Model( _Model ):
         return None
 
     def get_part(self, id : int) -> Part:
-        """Gets the part by id.
-
-        Gets the part by id. Returns None if part doesn't exist for the given id.
+        """Gets the part by id. Returns None if part doesn't exist for the given id.
 
         Parameters
         ----------
@@ -96,8 +88,8 @@ class Model( _Model ):
 
         Examples
         --------
-            >>> from ansys.meshing.prime import local_model
-            >>> model = local_model()
+            >>> from ansys.meshing.prime import Model
+            >>> model = client.model
             >>> part = model.get_part(2)
         """
         for part in self._parts:
@@ -105,8 +97,47 @@ class Model( _Model ):
                 return part
         return None
 
+    def get_global_sizing_params(self) -> GlobalSizingParams:
+        """Gets the GlobalSizingParams.
+
+        Returns
+        -------
+        GlobalSizingParams
+            Returns the GlobalSizingParams.
+
+        Examples
+        --------
+            >>> model = client.model
+            >>> sf_params = model.get_global_sizing_params()
+        """
+        return self._global_sf_params
+
+    def set_global_sizing_params(self, params : GlobalSizingParams):
+        """Sets the global sizing parameters.
+
+        Sets the global sizing params to initialize surfer parameters and various size control
+        parameters.
+
+        Parameters
+        ----------
+        params : GlobalSizingParams
+             Global sizing parameters.
+
+        Examples
+        --------
+
+        >>> model = client.model
+        >>> model.set_global_sizing_params(GlobalSizingParams(model=model,
+        ...                                          min=0.1,
+        ...                                          max=1.0,
+        ...                                          growth_rate=1.2))
+
+        """
+        _Model.set_global_sizing_params(self, params)
+        self._global_sf_params = params
+
     def __str__(self):
-        """ Prints the summary of the model.
+        """Prints the summary of the model.
 
         Returns
         -------
@@ -115,8 +146,8 @@ class Model( _Model ):
 
         Examples
         --------
-        >>> from ansys.meshing.prime import local_model
-        >>> model = local_model()
+        >>> from ansys.meshing.prime import Model
+        >>> model = client.model
         >>> print(model)
         """
         result = ""
@@ -124,6 +155,38 @@ class Model( _Model ):
         for part in self._parts:
             result += part.__str__() + "\n"
         return result
+
+    @property
+    def parts(self) -> List[Part]:
+        """Gets the list of parts of a model.
+
+        Returns
+        -------
+        List[Part]
+            Returns the list of parts.
+
+        Examples
+        --------
+            >>> from ansys.meshing.prime import Model
+            >>> model = client.model
+            >>> parts = model.parts
+        """
+        return self._parts
+
+    @property
+    def control_data(self) -> ControlData:
+        """Gets the control data of a model.
+
+        Returns
+        -------
+        ControlData
+            Returns the control data.
+
+        Examples
+        --------
+            >>> control_data = model.control_data
+        """
+        return self._control_data
 
     @property
     def python_logger(self):

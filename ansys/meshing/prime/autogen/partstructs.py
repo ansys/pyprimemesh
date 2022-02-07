@@ -10,7 +10,7 @@ from ansys.meshing.prime.params.primestructs import *
 class PartSummaryParams(CoreObject):
     """Parameters to control part summary results.
     """
-    default_params = {}
+    _default_params = {}
 
     def __initialize(
             self,
@@ -26,7 +26,7 @@ class PartSummaryParams(CoreObject):
             print_mesh: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes PartSummaryParams
+        """Initializes the PartSummaryParams.
 
         Parameters
         ----------
@@ -35,13 +35,13 @@ class PartSummaryParams(CoreObject):
         print_id: bool, optional
             Boolean to control print ids. The default is false.
         print_mesh: bool, optional
-            Boolean to control print mesh info. The default is true.
+            Boolean to control print mesh information. The default is true.
         json_data: dict, optional
             JSON dictionary to create a PartSummaryParams object with provided parameters.
 
         Examples
         --------
-        >>> part_summary_params = PartSummaryParams(model = model)
+        >>> part_summary_params = prime.PartSummaryParams(model = model)
         """
         if json_data:
             self.__initialize(
@@ -57,10 +57,10 @@ class PartSummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("PartSummaryParams")["PartSummaryParams"]
+                    json_data = model._communicator.initialize_params("PartSummaryParams")["PartSummaryParams"]
                     self.__initialize(
-                        print_id if print_id is not None else ( PartSummaryParams.default_params["print_id"] if "print_id" in PartSummaryParams.default_params else json_data["printId"]),
-                        print_mesh if print_mesh is not None else ( PartSummaryParams.default_params["print_mesh"] if "print_mesh" in PartSummaryParams.default_params else json_data["printMesh"]))
+                        print_id if print_id is not None else ( PartSummaryParams._default_params["print_id"] if "print_id" in PartSummaryParams._default_params else json_data["printId"]),
+                        print_mesh if print_mesh is not None else ( PartSummaryParams._default_params["print_mesh"] if "print_mesh" in PartSummaryParams._default_params else json_data["printMesh"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -72,16 +72,31 @@ class PartSummaryParams(CoreObject):
     def set_default(
             print_id: bool = None,
             print_mesh: bool = None):
+        """Sets the default values of PartSummaryParams.
+
+        Parameters
+        ----------
+        print_id: bool, optional
+            Boolean to control print ids. The default is false.
+        print_mesh: bool, optional
+            Boolean to control print mesh information. The default is true.
+        """
         args = locals()
-        [PartSummaryParams.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [PartSummaryParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of PartSummaryParams.
+
+        Examples
+        --------
+        >>> PartSummaryParams.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in PartSummaryParams.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in PartSummaryParams._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["printId"] = self._print_id
         json_data["printMesh"] = self._print_mesh
@@ -105,7 +120,7 @@ class PartSummaryParams(CoreObject):
 
     @property
     def print_mesh(self) -> bool:
-        """Boolean to control print mesh info. The default is true.
+        """Boolean to control print mesh information. The default is true.
         """
         return self._print_mesh
 
@@ -116,7 +131,7 @@ class PartSummaryParams(CoreObject):
 class PartSummaryResults(CoreObject):
     """Results of part summary.
     """
-    default_params = {}
+    _default_params = {}
 
     def __initialize(
             self,
@@ -195,7 +210,7 @@ class PartSummaryResults(CoreObject):
             n_unmeshed_topo_faces: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes PartSummaryResults
+        """Initializes the PartSummaryResults.
 
         Parameters
         ----------
@@ -204,11 +219,11 @@ class PartSummaryResults(CoreObject):
         message: str, optional
             Part summary text.
         n_topo_edges: int, optional
-            Number of topo edges.
+            Number of topoedges.
         n_topo_faces: int, optional
-            Number of topo faces.
+            Number of topofaces.
         n_topo_volumes: int, optional
-            Number of topo volumes.
+            Number of topovolumes.
         n_edge_zonelets: int, optional
             Number of edge zonelets.
         n_face_zonelets: int, optional
@@ -246,13 +261,13 @@ class PartSummaryResults(CoreObject):
         n_hex_cells: int, optional
             Number of hexahedral cells.
         n_unmeshed_topo_faces: int, optional
-            Number of unmeshed topo faces.
+            Number of unmeshed topofaces.
         json_data: dict, optional
             JSON dictionary to create a PartSummaryResults object with provided parameters.
 
         Examples
         --------
-        >>> part_summary_results = PartSummaryResults(model = model)
+        >>> part_summary_results = prime.PartSummaryResults(model = model)
         """
         if json_data:
             self.__initialize(
@@ -310,31 +325,31 @@ class PartSummaryResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model.communicator.initialize_params("PartSummaryResults")["PartSummaryResults"]
+                    json_data = model._communicator.initialize_params("PartSummaryResults")["PartSummaryResults"]
                     self.__initialize(
-                        message if message is not None else ( PartSummaryResults.default_params["message"] if "message" in PartSummaryResults.default_params else json_data["message"]),
-                        n_topo_edges if n_topo_edges is not None else ( PartSummaryResults.default_params["n_topo_edges"] if "n_topo_edges" in PartSummaryResults.default_params else json_data["nTopoEdges"]),
-                        n_topo_faces if n_topo_faces is not None else ( PartSummaryResults.default_params["n_topo_faces"] if "n_topo_faces" in PartSummaryResults.default_params else json_data["nTopoFaces"]),
-                        n_topo_volumes if n_topo_volumes is not None else ( PartSummaryResults.default_params["n_topo_volumes"] if "n_topo_volumes" in PartSummaryResults.default_params else json_data["nTopoVolumes"]),
-                        n_edge_zonelets if n_edge_zonelets is not None else ( PartSummaryResults.default_params["n_edge_zonelets"] if "n_edge_zonelets" in PartSummaryResults.default_params else json_data["nEdgeZonelets"]),
-                        n_face_zonelets if n_face_zonelets is not None else ( PartSummaryResults.default_params["n_face_zonelets"] if "n_face_zonelets" in PartSummaryResults.default_params else json_data["nFaceZonelets"]),
-                        n_cell_zonelets if n_cell_zonelets is not None else ( PartSummaryResults.default_params["n_cell_zonelets"] if "n_cell_zonelets" in PartSummaryResults.default_params else json_data["nCellZonelets"]),
-                        n_edge_zones if n_edge_zones is not None else ( PartSummaryResults.default_params["n_edge_zones"] if "n_edge_zones" in PartSummaryResults.default_params else json_data["nEdgeZones"]),
-                        n_face_zones if n_face_zones is not None else ( PartSummaryResults.default_params["n_face_zones"] if "n_face_zones" in PartSummaryResults.default_params else json_data["nFaceZones"]),
-                        n_volume_zones if n_volume_zones is not None else ( PartSummaryResults.default_params["n_volume_zones"] if "n_volume_zones" in PartSummaryResults.default_params else json_data["nVolumeZones"]),
-                        n_labels if n_labels is not None else ( PartSummaryResults.default_params["n_labels"] if "n_labels" in PartSummaryResults.default_params else json_data["nLabels"]),
-                        n_nodes if n_nodes is not None else ( PartSummaryResults.default_params["n_nodes"] if "n_nodes" in PartSummaryResults.default_params else json_data["nNodes"]),
-                        n_faces if n_faces is not None else ( PartSummaryResults.default_params["n_faces"] if "n_faces" in PartSummaryResults.default_params else json_data["nFaces"]),
-                        n_cells if n_cells is not None else ( PartSummaryResults.default_params["n_cells"] if "n_cells" in PartSummaryResults.default_params else json_data["nCells"]),
-                        n_tri_faces if n_tri_faces is not None else ( PartSummaryResults.default_params["n_tri_faces"] if "n_tri_faces" in PartSummaryResults.default_params else json_data["nTriFaces"]),
-                        n_poly_faces if n_poly_faces is not None else ( PartSummaryResults.default_params["n_poly_faces"] if "n_poly_faces" in PartSummaryResults.default_params else json_data["nPolyFaces"]),
-                        n_quad_faces if n_quad_faces is not None else ( PartSummaryResults.default_params["n_quad_faces"] if "n_quad_faces" in PartSummaryResults.default_params else json_data["nQuadFaces"]),
-                        n_tet_cells if n_tet_cells is not None else ( PartSummaryResults.default_params["n_tet_cells"] if "n_tet_cells" in PartSummaryResults.default_params else json_data["nTetCells"]),
-                        n_pyra_cells if n_pyra_cells is not None else ( PartSummaryResults.default_params["n_pyra_cells"] if "n_pyra_cells" in PartSummaryResults.default_params else json_data["nPyraCells"]),
-                        n_prism_cells if n_prism_cells is not None else ( PartSummaryResults.default_params["n_prism_cells"] if "n_prism_cells" in PartSummaryResults.default_params else json_data["nPrismCells"]),
-                        n_poly_cells if n_poly_cells is not None else ( PartSummaryResults.default_params["n_poly_cells"] if "n_poly_cells" in PartSummaryResults.default_params else json_data["nPolyCells"]),
-                        n_hex_cells if n_hex_cells is not None else ( PartSummaryResults.default_params["n_hex_cells"] if "n_hex_cells" in PartSummaryResults.default_params else json_data["nHexCells"]),
-                        n_unmeshed_topo_faces if n_unmeshed_topo_faces is not None else ( PartSummaryResults.default_params["n_unmeshed_topo_faces"] if "n_unmeshed_topo_faces" in PartSummaryResults.default_params else json_data["nUnmeshedTopoFaces"]))
+                        message if message is not None else ( PartSummaryResults._default_params["message"] if "message" in PartSummaryResults._default_params else json_data["message"]),
+                        n_topo_edges if n_topo_edges is not None else ( PartSummaryResults._default_params["n_topo_edges"] if "n_topo_edges" in PartSummaryResults._default_params else json_data["nTopoEdges"]),
+                        n_topo_faces if n_topo_faces is not None else ( PartSummaryResults._default_params["n_topo_faces"] if "n_topo_faces" in PartSummaryResults._default_params else json_data["nTopoFaces"]),
+                        n_topo_volumes if n_topo_volumes is not None else ( PartSummaryResults._default_params["n_topo_volumes"] if "n_topo_volumes" in PartSummaryResults._default_params else json_data["nTopoVolumes"]),
+                        n_edge_zonelets if n_edge_zonelets is not None else ( PartSummaryResults._default_params["n_edge_zonelets"] if "n_edge_zonelets" in PartSummaryResults._default_params else json_data["nEdgeZonelets"]),
+                        n_face_zonelets if n_face_zonelets is not None else ( PartSummaryResults._default_params["n_face_zonelets"] if "n_face_zonelets" in PartSummaryResults._default_params else json_data["nFaceZonelets"]),
+                        n_cell_zonelets if n_cell_zonelets is not None else ( PartSummaryResults._default_params["n_cell_zonelets"] if "n_cell_zonelets" in PartSummaryResults._default_params else json_data["nCellZonelets"]),
+                        n_edge_zones if n_edge_zones is not None else ( PartSummaryResults._default_params["n_edge_zones"] if "n_edge_zones" in PartSummaryResults._default_params else json_data["nEdgeZones"]),
+                        n_face_zones if n_face_zones is not None else ( PartSummaryResults._default_params["n_face_zones"] if "n_face_zones" in PartSummaryResults._default_params else json_data["nFaceZones"]),
+                        n_volume_zones if n_volume_zones is not None else ( PartSummaryResults._default_params["n_volume_zones"] if "n_volume_zones" in PartSummaryResults._default_params else json_data["nVolumeZones"]),
+                        n_labels if n_labels is not None else ( PartSummaryResults._default_params["n_labels"] if "n_labels" in PartSummaryResults._default_params else json_data["nLabels"]),
+                        n_nodes if n_nodes is not None else ( PartSummaryResults._default_params["n_nodes"] if "n_nodes" in PartSummaryResults._default_params else json_data["nNodes"]),
+                        n_faces if n_faces is not None else ( PartSummaryResults._default_params["n_faces"] if "n_faces" in PartSummaryResults._default_params else json_data["nFaces"]),
+                        n_cells if n_cells is not None else ( PartSummaryResults._default_params["n_cells"] if "n_cells" in PartSummaryResults._default_params else json_data["nCells"]),
+                        n_tri_faces if n_tri_faces is not None else ( PartSummaryResults._default_params["n_tri_faces"] if "n_tri_faces" in PartSummaryResults._default_params else json_data["nTriFaces"]),
+                        n_poly_faces if n_poly_faces is not None else ( PartSummaryResults._default_params["n_poly_faces"] if "n_poly_faces" in PartSummaryResults._default_params else json_data["nPolyFaces"]),
+                        n_quad_faces if n_quad_faces is not None else ( PartSummaryResults._default_params["n_quad_faces"] if "n_quad_faces" in PartSummaryResults._default_params else json_data["nQuadFaces"]),
+                        n_tet_cells if n_tet_cells is not None else ( PartSummaryResults._default_params["n_tet_cells"] if "n_tet_cells" in PartSummaryResults._default_params else json_data["nTetCells"]),
+                        n_pyra_cells if n_pyra_cells is not None else ( PartSummaryResults._default_params["n_pyra_cells"] if "n_pyra_cells" in PartSummaryResults._default_params else json_data["nPyraCells"]),
+                        n_prism_cells if n_prism_cells is not None else ( PartSummaryResults._default_params["n_prism_cells"] if "n_prism_cells" in PartSummaryResults._default_params else json_data["nPrismCells"]),
+                        n_poly_cells if n_poly_cells is not None else ( PartSummaryResults._default_params["n_poly_cells"] if "n_poly_cells" in PartSummaryResults._default_params else json_data["nPolyCells"]),
+                        n_hex_cells if n_hex_cells is not None else ( PartSummaryResults._default_params["n_hex_cells"] if "n_hex_cells" in PartSummaryResults._default_params else json_data["nHexCells"]),
+                        n_unmeshed_topo_faces if n_unmeshed_topo_faces is not None else ( PartSummaryResults._default_params["n_unmeshed_topo_faces"] if "n_unmeshed_topo_faces" in PartSummaryResults._default_params else json_data["nUnmeshedTopoFaces"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -367,16 +382,73 @@ class PartSummaryResults(CoreObject):
             n_poly_cells: int = None,
             n_hex_cells: int = None,
             n_unmeshed_topo_faces: int = None):
+        """Sets the default values of PartSummaryResults.
+
+        Parameters
+        ----------
+        message: str, optional
+            Part summary text.
+        n_topo_edges: int, optional
+            Number of topoedges.
+        n_topo_faces: int, optional
+            Number of topofaces.
+        n_topo_volumes: int, optional
+            Number of topovolumes.
+        n_edge_zonelets: int, optional
+            Number of edge zonelets.
+        n_face_zonelets: int, optional
+            Number of face zonelets.
+        n_cell_zonelets: int, optional
+            Number of cell zonelets.
+        n_edge_zones: int, optional
+            Number of edge zones.
+        n_face_zones: int, optional
+            Number of face zones.
+        n_volume_zones: int, optional
+            Number of volume zones.
+        n_labels: int, optional
+            Number of labels.
+        n_nodes: int, optional
+            Number of nodes.
+        n_faces: int, optional
+            Number of faces.
+        n_cells: int, optional
+            Number of cells.
+        n_tri_faces: int, optional
+            Number of triangular faces.
+        n_poly_faces: int, optional
+            Number of polygonal faces.
+        n_quad_faces: int, optional
+            Number of quadrilateral faces.
+        n_tet_cells: int, optional
+            Number of tetrahedral cells.
+        n_pyra_cells: int, optional
+            Number of pyramid cells.
+        n_prism_cells: int, optional
+            Number of prism cells.
+        n_poly_cells: int, optional
+            Number of polyhedral cells.
+        n_hex_cells: int, optional
+            Number of hexahedral cells.
+        n_unmeshed_topo_faces: int, optional
+            Number of unmeshed topofaces.
+        """
         args = locals()
-        [PartSummaryResults.default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [PartSummaryResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
+        """Prints the default values of PartSummaryResults.
+
+        Examples
+        --------
+        >>> PartSummaryResults.print_default()
+        """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in PartSummaryResults.default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in PartSummaryResults._default_params.items())
         print(message)
 
-    def jsonify(self) -> Dict[str, Any]:
+    def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["message"] = self._message
         json_data["nTopoEdges"] = self._n_topo_edges
@@ -421,7 +493,7 @@ class PartSummaryResults(CoreObject):
 
     @property
     def n_topo_edges(self) -> int:
-        """Number of topo edges.
+        """Number of topoedges.
         """
         return self._n_topo_edges
 
@@ -431,7 +503,7 @@ class PartSummaryResults(CoreObject):
 
     @property
     def n_topo_faces(self) -> int:
-        """Number of topo faces.
+        """Number of topofaces.
         """
         return self._n_topo_faces
 
@@ -441,7 +513,7 @@ class PartSummaryResults(CoreObject):
 
     @property
     def n_topo_volumes(self) -> int:
-        """Number of topo volumes.
+        """Number of topovolumes.
         """
         return self._n_topo_volumes
 
@@ -631,7 +703,7 @@ class PartSummaryResults(CoreObject):
 
     @property
     def n_unmeshed_topo_faces(self) -> int:
-        """Number of unmeshed topo faces.
+        """Number of unmeshed topofaces.
         """
         return self._n_unmeshed_topo_faces
 

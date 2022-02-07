@@ -46,8 +46,8 @@ class Part(_Part):
 
         Examples
         --------
-        >>> from ansys.meshing.prime import local_model
-        >>> model = local_model()
+        >>> from ansys.meshing.prime import Model
+        >>> model = client.model
         >>> part = model.get_part_by_name("Part.1")
         >>> print(part(print_mesh=True, print_id=True))
         """
@@ -75,8 +75,8 @@ class Part(_Part):
 
         Examples
         --------
-        >>> from ansys.meshing.prime import local_model
-        >>> model = local_model()
+        >>> from ansys.meshing.prime import Model
+        >>> model = client.model
         >>> part = model.get_part_by_name("Part.1")
         >>> print(part)
         """

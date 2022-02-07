@@ -48,8 +48,8 @@ class SurfaceQualitySummary( _SurfaceSearch):
 
         Examples
         --------
-        >>> from ansys.meshing.prime import local_model
-        >>> model = local_model()
+        >>> from ansys.meshing.prime import Model
+        >>> model = client.model
         >>> quality_summary = SurfaceQualitySummary(model=model, solver = SolverType.FLUENT)
         """
         self._model = model
@@ -86,8 +86,8 @@ class SurfaceQualitySummary( _SurfaceSearch):
 
         Examples
         --------
-        >>> from ansys.meshing.prime import local_model
-        >>> model = local_model()
+        >>> from ansys.meshing.prime import Model
+        >>> model = client.model
         >>> print(model)
         """
         self._qualityresults = _SurfaceSearch.get_surface_quality_summary(self, self._params)

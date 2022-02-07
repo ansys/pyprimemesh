@@ -1,7 +1,6 @@
 """ Auto-generated file. DO NOT MODIFY """
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
-from ansys.meshing.prime.params.primestructs import *
 from typing import List, Any
 
 class CoreObject(object):

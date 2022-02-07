@@ -1,11 +1,14 @@
 from functools import wraps
 
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode, WarningCode
+import re
 
 prime_error_messages = {
     ErrorCode.NOERROR : "Success",
     ErrorCode.UNKNOWN : "Unknown Error",
     ErrorCode.SIGSEGV : "Segmentation Violation",
+    ErrorCode.READPMDATFAILED : "Failed to read PMDAT.Kindly check the path or filename specified",
+    ErrorCode.FILENOTFOUND : "Incorrect File Path or Name. Kindly check your file name and path",
     ErrorCode.SURFERFAILED : "Surfer Failed",
     ErrorCode.SURFERWITHAUTOSIZINGFAILED : "Surfer with auto sizing Failed",
     ErrorCode.SURFERAUTOSIZEQUADUNSUPPORTED : "Program controlled surface meshing does not support quadrilateral mesh.",
@@ -15,13 +18,14 @@ prime_error_messages = {
     ErrorCode.SURFERINVALIDINPUT : "Surfer invalid input",
     ErrorCode.SURFERNONMANIFOLDEDGE : "Surfer non manifold edge",
     ErrorCode.SURFERQUADFAILED : "Surfer quad meshing failed",
+    ErrorCode.SURFERINVALIDCONSTANTSIZE : "Invalid size for constant size surface meshing",
     ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO : "Empty Topology provided to scaffolder",
     ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES : "No free faces found in current topology",
     ErrorCode.SCAFFOLDERBADINPUTPARAMS : "Wrong scaffolder params setup",
     ErrorCode.OUTOFMEMORY : "Out of memory",
     ErrorCode.INTERRUPTED : "Prime operation interrupted",
     ErrorCode.AUTOMESHFAILED : "Auto-Mesh Failed",
-    ErrorCode.INVALIDPRISMCONTROLS : "Conflict of prism settings on zonelets or invlaid prism controls selected.",
+    ErrorCode.INVALIDPRISMCONTROLS : "Conflict of prism settings on zonelets or invalid prism controls selected.",
     ErrorCode.ALREADYVOLUMEMESHED : "Already volume meshed",
     ErrorCode.VOLUMESNOTUPTODATE : "Volumes are not up to date. Update volumes and try again",
     ErrorCode.QUATRICMESHSUPPORTEDONLYFORTETS : "Volumes are not up to date. Update volumes and try again",
@@ -29,7 +33,7 @@ prime_error_messages = {
     ErrorCode.AITOVERLAPALONGMULTIFOUND : "Overlapping faces along mulit-connection found",
     ErrorCode.TRIANGULATIONFAILED : "Planar triangulation failed",
     ErrorCode.TOPOFACESREMESHFAILED : "Failed to Remesh some topo faces",
-    ErrorCode.PARTNOTFOUND : "Mesh Part not found",
+    ErrorCode.PARTNOTFOUND : "Part not found",
     ErrorCode.TOPODATANOTFOUND : "Topo Data not found",
     ErrorCode.SIZEFIELDNOTFOUND : "Size Field not found",
     ErrorCode.CADGEOMETRYNOTFOUND : "CAD Geometry not found",
@@ -90,6 +94,11 @@ prime_error_messages = {
     ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE : "Only triangular faces are supported.",
     ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE : "Only quadrilateral faces zonelets are supported.",
     ErrorCode.PARTNOTMESHED : "Part has unmeshed topofaces",
+    ErrorCode.INVALIDGLOBALMINMAX : "Invalid global min, max value.",
+    ErrorCode.INVALIDSIZECONTROLINPUTS : "Invalid size control input. Please verify sizing parameters of size control.",
+    ErrorCode.INVALIDSIZECONTROLSCOPE : "Invalid size control scope. Failed to evaluate scope for the size control.",
+    ErrorCode.INVALIDPROXIMITYSIZINGINPUT : "Invalid proximity sizing input. Elements per gap should be a positive value.",
+    ErrorCode.INVALIDCURVATURESIZINGINPUT : "Invalid curvature sizing input. Normal angle should be a positive value.",
     ErrorCode.TRANSFORMATIONFAILED : "Failed to transform",
     ErrorCode.SCALINGFAILED : "Failed to scale",
     ErrorCode.ALIGNMENTFAILED : "Failed to align",
@@ -115,7 +124,11 @@ prime_error_messages = {
     ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED : "Edge path computation failed.",
     ErrorCode.IGA_INCORRECTDEGREE : "Degree 0 not allowed.",
     ErrorCode.IGA_QUADRATICMESHINPUT : "Quadratic mesh is not supported for solid spline creation.",
-    ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED : "Failed to create uniform trimmed solid spline."
+    ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED : "Failed to create uniform trimmed solid spline.",
+    ErrorCode.AUTOMESHINVALIDMAXSIZE : "AutoMeshParams has invalid max size specified.",
+    ErrorCode.AUTOMESHHEXCOREFAILED : "Failed to create hexcore mesh.",
+    ErrorCode.INVALIDVOLUMECONTROLS : "Conflict of volume controls on volumes or invalid volume controls selected.",
+    ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND : "Part with mesh not found for surface quality check."
 }
 
 prime_warning_messages = {
@@ -127,26 +140,45 @@ prime_warning_messages = {
     WarningCode.SURFERDEGENERATEFACE : "Surfer Warning: Face has degenerate edge mesh",
     WarningCode.ALIGN_OPERATIONINTERRUPTED : "Align warning: Operation is interrupted by the user. Result can be inaccurate.",
     WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING : "Geometric face zonelet is not available for spline fitting.",
+    WarningCode.OVERRIDECURVATURESIZINGPARAMS : "Invalid curvature sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDESOFTSIZINGPARAMS : "Invalid soft sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDEHARDSIZINGPARAMS : "Invalid hard sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDEPROXIMITYSIZINGPARAMS : "Invalid proximity sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDEBOISIZINGPARAMS : "Invalid boi sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDEMESHEDSIZINGPARAMS : "Invalid meshed sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDESUGGESTEDNAME : "Control with the given name exist. Overriding it with unique name."
+
 }
 
 '''
 
 '''
-class PrimeRuntimeError(RuntimeError):
+class PrimeRuntimeError(Exception):
     def __init__(self, message):
-        self._message = message
+        super().__init__()
+        self._message = self.__process_message(message)
 
     def __str__(self) -> str:
         return self._message
+
+    def __process_message(self, message : str):
+        output_message = message
+        if "Invalid Parameter Type: " in message:
+            param_names = message[len("Invalid Parameter Type: "):].split(".")
+            output_message = "Invalid Parameter Type: " + param_names[0]
+            if (len(param_names) > 1):
+                for name in param_names[1:]:
+                    output_message += "." + re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
+        return output_message
 
     @property
     def message(self):
         return self._message
 
 
-class PrimeRuntimeWarning(RuntimeWarning):
+class PrimeRuntimeWarning(UserWarning):
     def __init__(self, message):
-        RuntimeWarning()
+        super().__init__()
         self._message = message
 
     def __str__(self) -> str:
@@ -207,9 +239,9 @@ def error_code_handler(_func=None):
             if result is not None:
                 if isinstance(result, dict):
                     error_code = result.get('errorCode', None)
-                    if error_code:
-                        if error_code > 0 and error_code in prime_error_messages:
-                            raise PrimeRuntimeError(prime_error_messages.get(error_code, f'Unrecogonized error code {error_code}'))
+                    if error_code is not None:
+                        if error_code > 0:
+                            raise PrimeRuntimeError(prime_error_messages.get(ErrorCode(error_code), f'Unrecogonized error code {error_code}'))
 
                     prime_warnings = []
                     single_warning = result.get('warningCode', None)
@@ -222,7 +254,7 @@ def error_code_handler(_func=None):
 
                     if prime_warnings:
                         import warnings
-                        [ warnings.warn(prime_warning_messages.get(w, f'Unrecogonized warning {w}'), PrimeRuntimeWarning) for w in prime_warnings ]
+                        [ warnings.warn(prime_warning_messages.get(WarningCode(w), f'Unrecogonized warning {w}'), PrimeRuntimeWarning) for w in prime_warnings ]
 
             return result
 
