@@ -3,10 +3,10 @@ from datetime import datetime
 
 from pyansys_sphinx_theme import pyansys_logo_black
 
-from ansys.product.library import __version__
+from ansys.meshing.prime import __version__
 
 # Project information
-project = 'ansys-product-library'
+project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
@@ -17,7 +17,7 @@ html_theme = 'pyansys_sphinx_theme'
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+    "github_url": "https://github.com/pyansys/pyprime",
     "show_prev_next": False
 }
 
@@ -49,7 +49,6 @@ numpydoc_xref_param_type = True
 
 # Consider enabling numpydoc validation. See:
 # https://numpydoc.readthedocs.io/en/latest/validation.html#
-numpydoc_validate = True
 numpydoc_validation_checks = {
     "GL06",  # Found unknown section
     "GL07",  # Sections are in the wrong order.
@@ -77,3 +76,7 @@ source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
+
+autosummary_generate = True
+autosummary_imported_members = True
+autosummary_ignore_module_all = False

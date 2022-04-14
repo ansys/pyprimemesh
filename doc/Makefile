@@ -22,3 +22,4 @@ help:
 # customized clean due to examples gallery
 clean:
 	rm -rf build
+	find . -type d -name "_autosummary" -exec rm -rf {} +

@@ -5,3 +5,7 @@ count = True
 max-complexity = 10
 max-line-length = 100
 statistics = True
+per-file-ignores = 
+    ansys/meshing/prime/autogen/*: F401, F403, E501
+    ansys/meshing/prime/params/primestructs.py: F401, F403
+    ansys/meshing/prime/internals/error_handling.py: E501

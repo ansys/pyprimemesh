@@ -1,66 +1,73 @@
-PyAnsys Library Template
-########################
+PyPrime Documentation 0.1.0
+============================
+--------------------------
+Introduction and Purpose 
+--------------------------
 
-This repository is a template repository where you can `Create a
-repository from a template`_ and create a new PyAnsys project that
-follows the guidelines specified in the `PyAnsys Developer's Guide`_.
+PyPrime is an integral part of PyAnsys effort to facilitate the use of Ansys technologies directly from Python. PyPrime consists of various python modules that help you to acquire geometry and generate surface and volume meshes for multiple solvers. PyPrime uses ansys.meshing.fm as primary module to acquire geometry data. For generating mesh, the primary module is ansys.meshing.prime. PyPrime enables you to: 
 
-The following sections should be filled and documented for your project.
+* Generate quad dominant and triangular surface meshes 
 
-.. _Create a repository from a template: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
-.. _PyAnsys Developer's Guide: https://github.com/pyansys/about
+* Generate surface meshes with various sizing options like volumetric, constant, and so on 
+
+* Generate volume meshes with linear and quadratic elements of various shapes like tetrahedra, hexahedra, pyramids, prisms 
+
+* Generate volume meshes with single process or distributed process 
+
+* Check mesh quality to provide the best solution for the problem and improve predictive capabilities 
+
+* Perform mesh diagnostics for free, multi-connected edges, self-intersection and overlapping faces in the model 
+
+* Modularize meshing algorithms, components, and services for easier reuse in other applications 
+
+* Expose micro services and APIs for meshing operations to promote meshing workflow prototyping 
+
+ 
+PyPrime integrates the meshing capabilities of the Ansys Prime directly into client applications. PyPrime package provides a Python-friendly interface to drive the software that manages the submission of low-level Prime commands, while exchanging data through high-performance gRPC interfaces. 
+
+PyPrime  enables you to serve the meshing needs of the industry providing solutions to complex issues. PyPrime along with the general-purpose Python code effortlessly manages your meshing needs. PyPrime is now an open source. Enjoy it! Contributions are welcome. 
+
+-----------
+Background 
+-----------
+
+PyPrime is based on PRIME gRPC, which helps Prime to be a server and seamlessly connect with the client and respond to the queries. 
+
+gRPC is a lightweight protocol from Google using universal RPC framework which helps it to run on any environment effortlessly. gRPC stands for grpc remote procedure call and is an open source. gRPC is built on universal RPC framework which is compatible with any environment and provides high performance. 
+
+PyPrime uses Prime gRPC to establish connection with the client and helps to call the prime APIs on the remote Prime instance. Prime gRPC  converts python statements into Prime commands and is transferred to prime instance in the server and enables communication between the client and Prime server. 
+
+---------------------
+Features of PyPrime 
+---------------------
+PyPrime comprises of many robust APIs which do many jobs just on calling the API once and APIs that just do one job on calling them. These APIs also enable you to query the model and allow you to build complex models based on the underlying queries. PyPrime has some distinct features that make them unique. They are: 
+
+* Easy to setup and execute 
+
+* Support simple and complex models
+
+* Supports CAD import 
+
+* Exports meshes in solver format 
+
+* Supports parallel processing like Distributed Parallel, Threaded Parallel, and multiple servers driven from python 
+
+------------------
+Quick Code
+------------------
+This section provides a brief idea on how PyPrime works: 
+
+To launch PyPrime: 
+
+>>> from ansys.meshing.prime import ( 
+>>>     launch_prime
+>>> ) 
+>>> with launch_prime(ip='127.0.0.1', port=50055) as prime: 
+>>>     model = prime.model 
 
 
-Project Overview
-----------------
-Provide a description of your PyAnsys Python library.
+To read a mesh file: 
 
-
-Installation
-------------
-Include installation directions.  Note that this README will be
-included in your PyPI package, so be sure to include ``pip``
-directions along with developer installation directions.  For example.
-
-Install <PyAnsys Library> with:
-
-.. code::
-
-   pip install ansys-<product/service>-<library>
-
-Alternatively, clone and install in development mode with:
-
-.. code::
-
-   git clone https://github.com/pyansys/
-   cd <PyAnsys-Library>
-   pip install -e .
-
-
-Documentation
--------------
-Include a link to the full sphinx documentation.  For example `PyAnsys <https://docs.pyansys.com/>`_
-
-
-Usage
------
-It's best to provide a sample code or even a figure demonstrating the usage of your library.  For example:
-
-.. code:: python
-
-   >>> from ansys.<product/service> import <library>
-   >>> my_object.<library>()
-   >>> my_object.foo()
-   'bar'
-
-
-Testing
--------
-You can feel free to include this at the README level or in CONTRIBUTING.md
-
-
-License
--------
-Be sure to point out your license (and any acknowledgments).  State
-that the full license can be found in the root directory of the
-repository.
+>>> file_io = prime.FileIO(model)
+>>> file_io.read_pmdat(r"E:\2box_inside_box.pmdat")
+>>> print(model)
