@@ -43,3 +43,6 @@ test-output.xml
 .\#*
 /.ipynb_checkpoints
 
+.tox
+.venv
+.vscode

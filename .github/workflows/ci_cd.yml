@@ -88,6 +88,7 @@ jobs:
       - name: Build HTML
         run: |
           pip install -r requirements_docs.txt
+          pip install -e .
           make -C doc html SPHINXOPTS="-W"
 
       - name: Build PDF Documentation

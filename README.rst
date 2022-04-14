@@ -1,5 +1,5 @@
-PyPRIME
-=======
+PyPrime Documentation 0.1.0
+============================
 --------------------------
 Introduction and Purpose 
 --------------------------
@@ -60,10 +60,10 @@ This section provides a brief idea on how PyPrime works:
 To launch PyPrime: 
 
 >>> from ansys.meshing.prime import ( 
->>> launch_prime
+>>>     launch_prime
 >>> ) 
 >>> with launch_prime(ip='127.0.0.1', port=50055) as prime: 
->>> model = prime.model 
+>>>     model = prime.model 
 
 
 To read a mesh file: 
@@ -71,13 +71,3 @@ To read a mesh file:
 >>> file_io = prime.FileIO(model)
 >>> file_io.read_pmdat(r"E:\2box_inside_box.pmdat")
 >>> print(model)
-
-
------------------------------
-Calling PyPrime Pythonically
------------------------------
-PyPrime APIs are called directly from Prime instance in a pythonic manner.  
-
-(To be added by Sourabh)
-
-
