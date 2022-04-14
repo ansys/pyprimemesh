@@ -1,9 +1,10 @@
 """ Auto-generated file. DO NOT MODIFY """
 import enum
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
+import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
@@ -15,39 +16,39 @@ class FaceConnectivityResults(CoreObject):
     def __initialize(
             self,
             error_code: ErrorCode,
-            face_zonelet_ids: List[int],
-            topo_face_ids: List[int],
-            mesh_face_ids: List[int],
-            face_zone_ids: List[int],
+            face_zonelet_ids: Iterable[int],
+            topo_face_ids: Iterable[int],
+            mesh_face_ids: Iterable[int],
+            face_zone_ids: Iterable[int],
             face_zone_names: List[str],
-            num_nodes_per_face_zonelet: List[int],
-            node_coords: List[float],
-            num_face_list_per_face_zonelet: List[int],
-            face_list: List[int]):
+            num_nodes_per_face_zonelet: Iterable[int],
+            node_coords: Iterable[float],
+            num_face_list_per_face_zonelet: Iterable[int],
+            face_list: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._face_zonelet_ids = face_zonelet_ids
-        self._topo_face_ids = topo_face_ids
-        self._mesh_face_ids = mesh_face_ids
-        self._face_zone_ids = face_zone_ids
+        self._face_zonelet_ids = face_zonelet_ids if isinstance(face_zonelet_ids, np.ndarray) else np.array(face_zonelet_ids, dtype=np.int32)
+        self._topo_face_ids = topo_face_ids if isinstance(topo_face_ids, np.ndarray) else np.array(topo_face_ids, dtype=np.int32)
+        self._mesh_face_ids = mesh_face_ids if isinstance(mesh_face_ids, np.ndarray) else np.array(mesh_face_ids, dtype=np.int32)
+        self._face_zone_ids = face_zone_ids if isinstance(face_zone_ids, np.ndarray) else np.array(face_zone_ids, dtype=np.int32)
         self._face_zone_names = face_zone_names
-        self._num_nodes_per_face_zonelet = num_nodes_per_face_zonelet
-        self._node_coords = node_coords
-        self._num_face_list_per_face_zonelet = num_face_list_per_face_zonelet
-        self._face_list = face_list
+        self._num_nodes_per_face_zonelet = num_nodes_per_face_zonelet if isinstance(num_nodes_per_face_zonelet, np.ndarray) else np.array(num_nodes_per_face_zonelet, dtype=np.int32)
+        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double)
+        self._num_face_list_per_face_zonelet = num_face_list_per_face_zonelet if isinstance(num_face_list_per_face_zonelet, np.ndarray) else np.array(num_face_list_per_face_zonelet, dtype=np.int32)
+        self._face_list = face_list if isinstance(face_list, np.ndarray) else np.array(face_list, dtype=np.int32)
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
-            face_zonelet_ids: List[int] = None,
-            topo_face_ids: List[int] = None,
-            mesh_face_ids: List[int] = None,
-            face_zone_ids: List[int] = None,
+            face_zonelet_ids: Iterable[int] = None,
+            topo_face_ids: Iterable[int] = None,
+            mesh_face_ids: Iterable[int] = None,
+            face_zone_ids: Iterable[int] = None,
             face_zone_names: List[str] = None,
-            num_nodes_per_face_zonelet: List[int] = None,
-            node_coords: List[float] = None,
-            num_face_list_per_face_zonelet: List[int] = None,
-            face_list: List[int] = None,
+            num_nodes_per_face_zonelet: Iterable[int] = None,
+            node_coords: Iterable[float] = None,
+            num_face_list_per_face_zonelet: Iterable[int] = None,
+            face_list: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the FaceConnectivityResults.
@@ -58,23 +59,23 @@ class FaceConnectivityResults(CoreObject):
             Model to create a FaceConnectivityResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the get face connectivity operation.
-        face_zonelet_ids: List[int], optional
+        face_zonelet_ids: Iterable[int], optional
             Face zonelet ids for which connectivity data is available.
-        topo_face_ids: List[int], optional
+        topo_face_ids: Iterable[int], optional
             TopoFace ids corresponding to each face zonelet id for topology based mesh.
-        mesh_face_ids: List[int], optional
+        mesh_face_ids: Iterable[int], optional
             Mesh face ids corresponding to each topoface.
-        face_zone_ids: List[int], optional
+        face_zone_ids: Iterable[int], optional
             Face zone id corresponding to each topoface or face zonelet.
         face_zone_names: List[str], optional
             Face zone name corresponding to each topoface or face zonelet.
-        num_nodes_per_face_zonelet: List[int], optional
+        num_nodes_per_face_zonelet: Iterable[int], optional
             Number of nodes per face zonelet.
-        node_coords: List[float], optional
+        node_coords: Iterable[float], optional
             Node coordinates describing faces of face zonelet.
-        num_face_list_per_face_zonelet: List[int], optional
+        num_face_list_per_face_zonelet: Iterable[int], optional
             Number of face list per face zonelet.
-        face_list: List[int], optional
+        face_list: Iterable[int], optional
             Face list describing connectivity of node coordinates.
         json_data: dict, optional
             JSON dictionary to create a FaceConnectivityResults object with provided parameters.
@@ -113,7 +114,7 @@ class FaceConnectivityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("FaceConnectivityResults")["FaceConnectivityResults"]
+                    json_data = model._communicator.initialize_params(model, "FaceConnectivityResults")["FaceConnectivityResults"]
                     self.__initialize(
                         error_code if error_code is not None else ( FaceConnectivityResults._default_params["error_code"] if "error_code" in FaceConnectivityResults._default_params else ErrorCode(json_data["errorCode"])),
                         face_zonelet_ids if face_zonelet_ids is not None else ( FaceConnectivityResults._default_params["face_zonelet_ids"] if "face_zonelet_ids" in FaceConnectivityResults._default_params else json_data["faceZoneletIDs"]),
@@ -135,38 +136,38 @@ class FaceConnectivityResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None,
-            face_zonelet_ids: List[int] = None,
-            topo_face_ids: List[int] = None,
-            mesh_face_ids: List[int] = None,
-            face_zone_ids: List[int] = None,
+            face_zonelet_ids: Iterable[int] = None,
+            topo_face_ids: Iterable[int] = None,
+            mesh_face_ids: Iterable[int] = None,
+            face_zone_ids: Iterable[int] = None,
             face_zone_names: List[str] = None,
-            num_nodes_per_face_zonelet: List[int] = None,
-            node_coords: List[float] = None,
-            num_face_list_per_face_zonelet: List[int] = None,
-            face_list: List[int] = None):
+            num_nodes_per_face_zonelet: Iterable[int] = None,
+            node_coords: Iterable[float] = None,
+            num_face_list_per_face_zonelet: Iterable[int] = None,
+            face_list: Iterable[int] = None):
         """Sets the default values of FaceConnectivityResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code associated with the get face connectivity operation.
-        face_zonelet_ids: List[int], optional
+        face_zonelet_ids: Iterable[int], optional
             Face zonelet ids for which connectivity data is available.
-        topo_face_ids: List[int], optional
+        topo_face_ids: Iterable[int], optional
             TopoFace ids corresponding to each face zonelet id for topology based mesh.
-        mesh_face_ids: List[int], optional
+        mesh_face_ids: Iterable[int], optional
             Mesh face ids corresponding to each topoface.
-        face_zone_ids: List[int], optional
+        face_zone_ids: Iterable[int], optional
             Face zone id corresponding to each topoface or face zonelet.
         face_zone_names: List[str], optional
             Face zone name corresponding to each topoface or face zonelet.
-        num_nodes_per_face_zonelet: List[int], optional
+        num_nodes_per_face_zonelet: Iterable[int], optional
             Number of nodes per face zonelet.
-        node_coords: List[float], optional
+        node_coords: Iterable[float], optional
             Node coordinates describing faces of face zonelet.
-        num_face_list_per_face_zonelet: List[int], optional
+        num_face_list_per_face_zonelet: Iterable[int], optional
             Number of face list per face zonelet.
-        face_list: List[int], optional
+        face_list: Iterable[int], optional
             Face list describing connectivity of node coordinates.
         """
         args = locals()
@@ -215,43 +216,43 @@ class FaceConnectivityResults(CoreObject):
         self._error_code = value
 
     @property
-    def face_zonelet_ids(self) -> List[int]:
+    def face_zonelet_ids(self) -> Iterable[int]:
         """Face zonelet ids for which connectivity data is available.
         """
         return self._face_zonelet_ids
 
     @face_zonelet_ids.setter
-    def face_zonelet_ids(self, value: List[int]):
+    def face_zonelet_ids(self, value: Iterable[int]):
         self._face_zonelet_ids = value
 
     @property
-    def topo_face_ids(self) -> List[int]:
+    def topo_face_ids(self) -> Iterable[int]:
         """TopoFace ids corresponding to each face zonelet id for topology based mesh.
         """
         return self._topo_face_ids
 
     @topo_face_ids.setter
-    def topo_face_ids(self, value: List[int]):
+    def topo_face_ids(self, value: Iterable[int]):
         self._topo_face_ids = value
 
     @property
-    def mesh_face_ids(self) -> List[int]:
+    def mesh_face_ids(self) -> Iterable[int]:
         """Mesh face ids corresponding to each topoface.
         """
         return self._mesh_face_ids
 
     @mesh_face_ids.setter
-    def mesh_face_ids(self, value: List[int]):
+    def mesh_face_ids(self, value: Iterable[int]):
         self._mesh_face_ids = value
 
     @property
-    def face_zone_ids(self) -> List[int]:
+    def face_zone_ids(self) -> Iterable[int]:
         """Face zone id corresponding to each topoface or face zonelet.
         """
         return self._face_zone_ids
 
     @face_zone_ids.setter
-    def face_zone_ids(self, value: List[int]):
+    def face_zone_ids(self, value: Iterable[int]):
         self._face_zone_ids = value
 
     @property
@@ -265,43 +266,43 @@ class FaceConnectivityResults(CoreObject):
         self._face_zone_names = value
 
     @property
-    def num_nodes_per_face_zonelet(self) -> List[int]:
+    def num_nodes_per_face_zonelet(self) -> Iterable[int]:
         """Number of nodes per face zonelet.
         """
         return self._num_nodes_per_face_zonelet
 
     @num_nodes_per_face_zonelet.setter
-    def num_nodes_per_face_zonelet(self, value: List[int]):
+    def num_nodes_per_face_zonelet(self, value: Iterable[int]):
         self._num_nodes_per_face_zonelet = value
 
     @property
-    def node_coords(self) -> List[float]:
+    def node_coords(self) -> Iterable[float]:
         """Node coordinates describing faces of face zonelet.
         """
         return self._node_coords
 
     @node_coords.setter
-    def node_coords(self, value: List[float]):
+    def node_coords(self, value: Iterable[float]):
         self._node_coords = value
 
     @property
-    def num_face_list_per_face_zonelet(self) -> List[int]:
+    def num_face_list_per_face_zonelet(self) -> Iterable[int]:
         """Number of face list per face zonelet.
         """
         return self._num_face_list_per_face_zonelet
 
     @num_face_list_per_face_zonelet.setter
-    def num_face_list_per_face_zonelet(self, value: List[int]):
+    def num_face_list_per_face_zonelet(self, value: Iterable[int]):
         self._num_face_list_per_face_zonelet = value
 
     @property
-    def face_list(self) -> List[int]:
+    def face_list(self) -> Iterable[int]:
         """Face list describing connectivity of node coordinates.
         """
         return self._face_list
 
     @face_list.setter
-    def face_list(self, value: List[int]):
+    def face_list(self, value: Iterable[int]):
         self._face_list = value
 
 class EdgeConnectivityResults(CoreObject):
@@ -312,39 +313,39 @@ class EdgeConnectivityResults(CoreObject):
     def __initialize(
             self,
             error_code: ErrorCode,
-            edge_zonelet_ids: List[int],
-            topo_edge_ids: List[int],
-            mesh_edge_ids: List[int],
-            topo_edge_types: List[int],
-            num_nodes_per_edge_zonelet: List[int],
-            node_coords: List[float],
-            num_edge_list_per_edge_zonelet: List[int],
-            edge_list: List[int],
-            num_edges_per_edge_zonelet: List[int]):
+            edge_zonelet_ids: Iterable[int],
+            topo_edge_ids: Iterable[int],
+            mesh_edge_ids: Iterable[int],
+            topo_edge_types: Iterable[int],
+            num_nodes_per_edge_zonelet: Iterable[int],
+            node_coords: Iterable[float],
+            num_edge_list_per_edge_zonelet: Iterable[int],
+            edge_list: Iterable[int],
+            num_edges_per_edge_zonelet: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._edge_zonelet_ids = edge_zonelet_ids
-        self._topo_edge_ids = topo_edge_ids
-        self._mesh_edge_ids = mesh_edge_ids
-        self._topo_edge_types = topo_edge_types
-        self._num_nodes_per_edge_zonelet = num_nodes_per_edge_zonelet
-        self._node_coords = node_coords
-        self._num_edge_list_per_edge_zonelet = num_edge_list_per_edge_zonelet
-        self._edge_list = edge_list
-        self._num_edges_per_edge_zonelet = num_edges_per_edge_zonelet
+        self._edge_zonelet_ids = edge_zonelet_ids if isinstance(edge_zonelet_ids, np.ndarray) else np.array(edge_zonelet_ids, dtype=np.int32)
+        self._topo_edge_ids = topo_edge_ids if isinstance(topo_edge_ids, np.ndarray) else np.array(topo_edge_ids, dtype=np.int32)
+        self._mesh_edge_ids = mesh_edge_ids if isinstance(mesh_edge_ids, np.ndarray) else np.array(mesh_edge_ids, dtype=np.int32)
+        self._topo_edge_types = topo_edge_types if isinstance(topo_edge_types, np.ndarray) else np.array(topo_edge_types, dtype=np.int32)
+        self._num_nodes_per_edge_zonelet = num_nodes_per_edge_zonelet if isinstance(num_nodes_per_edge_zonelet, np.ndarray) else np.array(num_nodes_per_edge_zonelet, dtype=np.int32)
+        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double)
+        self._num_edge_list_per_edge_zonelet = num_edge_list_per_edge_zonelet if isinstance(num_edge_list_per_edge_zonelet, np.ndarray) else np.array(num_edge_list_per_edge_zonelet, dtype=np.int32)
+        self._edge_list = edge_list if isinstance(edge_list, np.ndarray) else np.array(edge_list, dtype=np.int32)
+        self._num_edges_per_edge_zonelet = num_edges_per_edge_zonelet if isinstance(num_edges_per_edge_zonelet, np.ndarray) else np.array(num_edges_per_edge_zonelet, dtype=np.int32)
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
-            edge_zonelet_ids: List[int] = None,
-            topo_edge_ids: List[int] = None,
-            mesh_edge_ids: List[int] = None,
-            topo_edge_types: List[int] = None,
-            num_nodes_per_edge_zonelet: List[int] = None,
-            node_coords: List[float] = None,
-            num_edge_list_per_edge_zonelet: List[int] = None,
-            edge_list: List[int] = None,
-            num_edges_per_edge_zonelet: List[int] = None,
+            edge_zonelet_ids: Iterable[int] = None,
+            topo_edge_ids: Iterable[int] = None,
+            mesh_edge_ids: Iterable[int] = None,
+            topo_edge_types: Iterable[int] = None,
+            num_nodes_per_edge_zonelet: Iterable[int] = None,
+            node_coords: Iterable[float] = None,
+            num_edge_list_per_edge_zonelet: Iterable[int] = None,
+            edge_list: Iterable[int] = None,
+            num_edges_per_edge_zonelet: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the EdgeConnectivityResults.
@@ -355,23 +356,23 @@ class EdgeConnectivityResults(CoreObject):
             Model to create a EdgeConnectivityResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the get edge connectivity operation.
-        edge_zonelet_ids: List[int], optional
+        edge_zonelet_ids: Iterable[int], optional
             Edge zonelet ids for which connectivity data is available.
-        topo_edge_ids: List[int], optional
+        topo_edge_ids: Iterable[int], optional
             TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
-        mesh_edge_ids: List[int], optional
+        mesh_edge_ids: Iterable[int], optional
             Mesh edge ids corresponding to each topoedge.
-        topo_edge_types: List[int], optional
-            ToopEdge type corresponding to each topo edge.
-        num_nodes_per_edge_zonelet: List[int], optional
+        topo_edge_types: Iterable[int], optional
+            TopoEdge type corresponding to each topoedge.
+        num_nodes_per_edge_zonelet: Iterable[int], optional
             Number of nodes per edge zonelet.
-        node_coords: List[float], optional
+        node_coords: Iterable[float], optional
             Node coordinates describing edges of edge zonelet.
-        num_edge_list_per_edge_zonelet: List[int], optional
+        num_edge_list_per_edge_zonelet: Iterable[int], optional
             Number of edge list per edge zonelet.
-        edge_list: List[int], optional
-            Edge list describing connectivity of node coordinates
-        num_edges_per_edge_zonelet: List[int], optional
+        edge_list: Iterable[int], optional
+            Edge list describing connectivity of node coordinates.
+        num_edges_per_edge_zonelet: Iterable[int], optional
             Number of edges per edge zonelet.
         json_data: dict, optional
             JSON dictionary to create a EdgeConnectivityResults object with provided parameters.
@@ -410,7 +411,7 @@ class EdgeConnectivityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("EdgeConnectivityResults")["EdgeConnectivityResults"]
+                    json_data = model._communicator.initialize_params(model, "EdgeConnectivityResults")["EdgeConnectivityResults"]
                     self.__initialize(
                         error_code if error_code is not None else ( EdgeConnectivityResults._default_params["error_code"] if "error_code" in EdgeConnectivityResults._default_params else ErrorCode(json_data["errorCode"])),
                         edge_zonelet_ids if edge_zonelet_ids is not None else ( EdgeConnectivityResults._default_params["edge_zonelet_ids"] if "edge_zonelet_ids" in EdgeConnectivityResults._default_params else json_data["edgeZoneletIDs"]),
@@ -432,38 +433,38 @@ class EdgeConnectivityResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None,
-            edge_zonelet_ids: List[int] = None,
-            topo_edge_ids: List[int] = None,
-            mesh_edge_ids: List[int] = None,
-            topo_edge_types: List[int] = None,
-            num_nodes_per_edge_zonelet: List[int] = None,
-            node_coords: List[float] = None,
-            num_edge_list_per_edge_zonelet: List[int] = None,
-            edge_list: List[int] = None,
-            num_edges_per_edge_zonelet: List[int] = None):
+            edge_zonelet_ids: Iterable[int] = None,
+            topo_edge_ids: Iterable[int] = None,
+            mesh_edge_ids: Iterable[int] = None,
+            topo_edge_types: Iterable[int] = None,
+            num_nodes_per_edge_zonelet: Iterable[int] = None,
+            node_coords: Iterable[float] = None,
+            num_edge_list_per_edge_zonelet: Iterable[int] = None,
+            edge_list: Iterable[int] = None,
+            num_edges_per_edge_zonelet: Iterable[int] = None):
         """Sets the default values of EdgeConnectivityResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code associated with the get edge connectivity operation.
-        edge_zonelet_ids: List[int], optional
+        edge_zonelet_ids: Iterable[int], optional
             Edge zonelet ids for which connectivity data is available.
-        topo_edge_ids: List[int], optional
+        topo_edge_ids: Iterable[int], optional
             TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
-        mesh_edge_ids: List[int], optional
+        mesh_edge_ids: Iterable[int], optional
             Mesh edge ids corresponding to each topoedge.
-        topo_edge_types: List[int], optional
-            ToopEdge type corresponding to each topo edge.
-        num_nodes_per_edge_zonelet: List[int], optional
+        topo_edge_types: Iterable[int], optional
+            TopoEdge type corresponding to each topoedge.
+        num_nodes_per_edge_zonelet: Iterable[int], optional
             Number of nodes per edge zonelet.
-        node_coords: List[float], optional
+        node_coords: Iterable[float], optional
             Node coordinates describing edges of edge zonelet.
-        num_edge_list_per_edge_zonelet: List[int], optional
+        num_edge_list_per_edge_zonelet: Iterable[int], optional
             Number of edge list per edge zonelet.
-        edge_list: List[int], optional
-            Edge list describing connectivity of node coordinates
-        num_edges_per_edge_zonelet: List[int], optional
+        edge_list: Iterable[int], optional
+            Edge list describing connectivity of node coordinates.
+        num_edges_per_edge_zonelet: Iterable[int], optional
             Number of edges per edge zonelet.
         """
         args = locals()
@@ -512,93 +513,93 @@ class EdgeConnectivityResults(CoreObject):
         self._error_code = value
 
     @property
-    def edge_zonelet_ids(self) -> List[int]:
+    def edge_zonelet_ids(self) -> Iterable[int]:
         """Edge zonelet ids for which connectivity data is available.
         """
         return self._edge_zonelet_ids
 
     @edge_zonelet_ids.setter
-    def edge_zonelet_ids(self, value: List[int]):
+    def edge_zonelet_ids(self, value: Iterable[int]):
         self._edge_zonelet_ids = value
 
     @property
-    def topo_edge_ids(self) -> List[int]:
+    def topo_edge_ids(self) -> Iterable[int]:
         """TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
         """
         return self._topo_edge_ids
 
     @topo_edge_ids.setter
-    def topo_edge_ids(self, value: List[int]):
+    def topo_edge_ids(self, value: Iterable[int]):
         self._topo_edge_ids = value
 
     @property
-    def mesh_edge_ids(self) -> List[int]:
+    def mesh_edge_ids(self) -> Iterable[int]:
         """Mesh edge ids corresponding to each topoedge.
         """
         return self._mesh_edge_ids
 
     @mesh_edge_ids.setter
-    def mesh_edge_ids(self, value: List[int]):
+    def mesh_edge_ids(self, value: Iterable[int]):
         self._mesh_edge_ids = value
 
     @property
-    def topo_edge_types(self) -> List[int]:
-        """ToopEdge type corresponding to each topo edge.
+    def topo_edge_types(self) -> Iterable[int]:
+        """TopoEdge type corresponding to each topoedge.
         """
         return self._topo_edge_types
 
     @topo_edge_types.setter
-    def topo_edge_types(self, value: List[int]):
+    def topo_edge_types(self, value: Iterable[int]):
         self._topo_edge_types = value
 
     @property
-    def num_nodes_per_edge_zonelet(self) -> List[int]:
+    def num_nodes_per_edge_zonelet(self) -> Iterable[int]:
         """Number of nodes per edge zonelet.
         """
         return self._num_nodes_per_edge_zonelet
 
     @num_nodes_per_edge_zonelet.setter
-    def num_nodes_per_edge_zonelet(self, value: List[int]):
+    def num_nodes_per_edge_zonelet(self, value: Iterable[int]):
         self._num_nodes_per_edge_zonelet = value
 
     @property
-    def node_coords(self) -> List[float]:
+    def node_coords(self) -> Iterable[float]:
         """Node coordinates describing edges of edge zonelet.
         """
         return self._node_coords
 
     @node_coords.setter
-    def node_coords(self, value: List[float]):
+    def node_coords(self, value: Iterable[float]):
         self._node_coords = value
 
     @property
-    def num_edge_list_per_edge_zonelet(self) -> List[int]:
+    def num_edge_list_per_edge_zonelet(self) -> Iterable[int]:
         """Number of edge list per edge zonelet.
         """
         return self._num_edge_list_per_edge_zonelet
 
     @num_edge_list_per_edge_zonelet.setter
-    def num_edge_list_per_edge_zonelet(self, value: List[int]):
+    def num_edge_list_per_edge_zonelet(self, value: Iterable[int]):
         self._num_edge_list_per_edge_zonelet = value
 
     @property
-    def edge_list(self) -> List[int]:
-        """Edge list describing connectivity of node coordinates
+    def edge_list(self) -> Iterable[int]:
+        """Edge list describing connectivity of node coordinates.
         """
         return self._edge_list
 
     @edge_list.setter
-    def edge_list(self, value: List[int]):
+    def edge_list(self, value: Iterable[int]):
         self._edge_list = value
 
     @property
-    def num_edges_per_edge_zonelet(self) -> List[int]:
+    def num_edges_per_edge_zonelet(self) -> Iterable[int]:
         """Number of edges per edge zonelet.
         """
         return self._num_edges_per_edge_zonelet
 
     @num_edges_per_edge_zonelet.setter
-    def num_edges_per_edge_zonelet(self, value: List[int]):
+    def num_edges_per_edge_zonelet(self, value: Iterable[int]):
         self._num_edges_per_edge_zonelet = value
 
 class FaceAndEdgeConnectivityResults(CoreObject):
@@ -609,11 +610,11 @@ class FaceAndEdgeConnectivityResults(CoreObject):
     def __initialize(
             self,
             error_code: ErrorCode,
-            part_ids: List[int],
+            part_ids: Iterable[int],
             face_connectivity_result_per_part: List[FaceConnectivityResults],
             edge_connectivity_result_per_part: List[EdgeConnectivityResults]):
         self._error_code = ErrorCode(error_code)
-        self._part_ids = part_ids
+        self._part_ids = part_ids if isinstance(part_ids, np.ndarray) else np.array(part_ids, dtype=np.int32)
         self._face_connectivity_result_per_part = face_connectivity_result_per_part
         self._edge_connectivity_result_per_part = edge_connectivity_result_per_part
 
@@ -621,7 +622,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
-            part_ids: List[int] = None,
+            part_ids: Iterable[int] = None,
             face_connectivity_result_per_part: List[FaceConnectivityResults] = None,
             edge_connectivity_result_per_part: List[EdgeConnectivityResults] = None,
             json_data : dict = None,
@@ -634,7 +635,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
             Model to create a FaceAndEdgeConnectivityResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the get face and edge connectivity operation.
-        part_ids: List[int], optional
+        part_ids: Iterable[int], optional
             Part ids for which face and edge connectivity data is available.
         face_connectivity_result_per_part: List[FaceConnectivityResults], optional
             Face connectivity result per part.
@@ -665,7 +666,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("FaceAndEdgeConnectivityResults")["FaceAndEdgeConnectivityResults"]
+                    json_data = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityResults")["FaceAndEdgeConnectivityResults"]
                     self.__initialize(
                         error_code if error_code is not None else ( FaceAndEdgeConnectivityResults._default_params["error_code"] if "error_code" in FaceAndEdgeConnectivityResults._default_params else ErrorCode(json_data["errorCode"])),
                         part_ids if part_ids is not None else ( FaceAndEdgeConnectivityResults._default_params["part_ids"] if "part_ids" in FaceAndEdgeConnectivityResults._default_params else json_data["partIDs"]),
@@ -681,7 +682,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None,
-            part_ids: List[int] = None,
+            part_ids: Iterable[int] = None,
             face_connectivity_result_per_part: List[FaceConnectivityResults] = None,
             edge_connectivity_result_per_part: List[EdgeConnectivityResults] = None):
         """Sets the default values of FaceAndEdgeConnectivityResults.
@@ -690,7 +691,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
         ----------
         error_code: ErrorCode, optional
             Error code associated with the get face and edge connectivity operation.
-        part_ids: List[int], optional
+        part_ids: Iterable[int], optional
             Part ids for which face and edge connectivity data is available.
         face_connectivity_result_per_part: List[FaceConnectivityResults], optional
             Face connectivity result per part.
@@ -737,13 +738,13 @@ class FaceAndEdgeConnectivityResults(CoreObject):
         self._error_code = value
 
     @property
-    def part_ids(self) -> List[int]:
+    def part_ids(self) -> Iterable[int]:
         """Part ids for which face and edge connectivity data is available.
         """
         return self._part_ids
 
     @part_ids.setter
-    def part_ids(self, value: List[int]):
+    def part_ids(self, value: Iterable[int]):
         self._part_ids = value
 
     @property
@@ -816,7 +817,7 @@ class FaceAndEdgeConnectivityParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("FaceAndEdgeConnectivityParams")["FaceAndEdgeConnectivityParams"]
+                    json_data = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityParams")["FaceAndEdgeConnectivityParams"]
                     self.__initialize(
                         reorder_face_zonelets_mid_nodes if reorder_face_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_face_zonelets_mid_nodes"] if "reorder_face_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else json_data["reorderFaceZoneletsMidNodes"]),
                         reorder_edge_zonelets_mid_nodes if reorder_edge_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_edge_zonelets_mid_nodes"] if "reorder_edge_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else json_data["reorderEdgeZoneletsMidNodes"]))

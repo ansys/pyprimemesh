@@ -6,15 +6,40 @@ Getting Started
 
 Overview
 --------
-The PyPRIME project supports Pythonic access to Ansys' PRIME Meshing Engine.
+The PyPrime project supports Pythonic access to Ansys PRIME Meshing Engine.
 
 
 Installation
 ------------
-The ``ansys-meshing-prime`` package currently supports Python 3.6 through
-Python 3.9 on Windows, MacOS and Linux.
 
-Install PyPrime with:
+PyPrime requires the following prerequisites for the succesfull installation:
+
+Hardware Requirements
+----------------------
+
+PyPrime requires the following hardware prerequisites:
+
+Processor: 64-bit Intel or AMD system
+
+
+
+
+Software Requirements
+----------------------
+
+PyPrime requires you to install the following softwares for the successful installation of ansys-meshing-prime.
+
+Operating System: Windows,Linux
+
+Software: Python 3.6 to 3.9
+
+		  Ansys Workbench 2022 R2 and above versions
+
+
+Installing PyPrime
+-------------------
+
+PyPrime can be installed directly from PyPi as follows:
 
 .. code::
 
@@ -27,37 +52,33 @@ Alternatively, clone and install in development mode with:
    git clone https://github.com/pyansys/pyprime
    cd pyprime
    pip install -e .
-
-
-Documentation
--------------
-Include a link to the full sphinx documentation.  For example `PyAnsys <https://docs.pyansys.com/>`_
-
-
-Usage
------
-It's best to provide a sample code or even a figure demonstrating the usage of your library.  For example:
-
-.. code:: python
-
-   >>> from ansys.meshing.prime import launch_prime
-   >>> with launch_prime() as prime:
-   >>>     model = client.model
    
 
-Testing
--------
-You can feel free to include this at the README level or in CONTRIBUTING.md
+Ansys Software Requirements
+----------------------------
+PyPrime wants you to install the latest version of Ansys 2022 R2 locally.
 
 
-License
--------
-``PyPRIME`` is licensed under the MIT license.
 
-This module, ``ansys-meshing-prime`` makes no commercial claim over Ansys
-whatsoever.  This tool extends the functionality of ``PRIME`` by
-adding a Python interface to the PRIME service without changing the
-core behavior or license of the original software.  The use of ``PyPRIME`` requires a legally licensed
-local copy of Ansys.
+Verifying the Installation
+---------------------------
 
-To get a copy of Ansys, please visit `Ansys <https://www.ansys.com/>`_.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

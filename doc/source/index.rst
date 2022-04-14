@@ -14,3 +14,4 @@
    user_guide/index
    examples/index
    api/index
+   contributing/index

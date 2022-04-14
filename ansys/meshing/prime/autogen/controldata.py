@@ -19,6 +19,31 @@ class ControlData(CoreObject):
         self._name = name
         self._freeze()
 
+    def create_wrapper_control(self) -> List[Any]:
+        """ Creates wrapper control with defaults.
+
+
+        Returns
+        -------
+        WrapperControl
+            Returns the wrapper control.
+
+        Notes
+        -----
+        A wrapper control with defaults is created on calling this API.
+
+        Examples
+        --------
+        >>> wrapper_control = model.control_data.create_wrapper_control()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/CreateWrapperControl"
+        self._model._print_logs_before_command("create_wrapper_control", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_wrapper_control")
+        return result
+
     def create_size_control(self, type : SizingType) -> List[Any]:
         """ Creates size control for the given sizing type.
 
@@ -30,7 +55,7 @@ class ControlData(CoreObject):
 
         Returns
         -------
-        SizeControl *
+        SizeControl
             Returns the size control.
 
         Notes
@@ -39,37 +64,86 @@ class ControlData(CoreObject):
 
         Examples
         --------
-        >>> size_control = model.control_data.create_size_control(SizingType.Curvature)
+        >>> size_control = model.control_data.create_size_control(SizingType.CURVATURE)
 
         """
         args = {"type" : type}
         command_name = "PrimeMesh::ControlData/CreateSizeControl"
         self._model._print_logs_before_command("create_size_control", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("create_size_control")
         return result
 
-    def delete_control(self, id : int):
-        """ Deletes the control for the given id.
+    def create_prism_control(self) -> List[Any]:
+        """ Creates the PrismControl.
+
+
+        Returns
+        -------
+        PrismControl
+            Returns the PrismControl.
+
+
+        Examples
+        --------
+        >>> prism_control = model.control_data.create_prism_control()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/CreatePrismControl"
+        self._model._print_logs_before_command("create_prism_control", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_prism_control")
+        return result
+
+    def create_volume_control(self) -> List[Any]:
+        """ Creates the volume control.
+
+
+        Returns
+        -------
+        VolumeControl
+            Returns the volume control.
+
+        Examples
+        --------
+        >>> volume_control = model.control_data.create_volume_control()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/CreateVolumeControl"
+        self._model._print_logs_before_command("create_volume_control", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_volume_control")
+        return result
+
+    def delete_controls(self, control_ids : Iterable[int]) -> DeleteResults:
+        """ Delete the controls of the given ids.
 
 
         Parameters
         ----------
-        id : int
-            Id of a control.
+        control_ids : Iterable[int]
+            Ids of controls to be deleted.
+
+        Returns
+        -------
+        DeleteResults
+            Returns the DeleteResults.
 
         Examples
         --------
-        >>> model.control_data.delete_control(size_control.id)
+        >>> results = model.control_data.delete_controls([size_control.id, volume_control.id])
 
         """
-        args = {"id" : id}
-        command_name = "PrimeMesh::ControlData/DeleteControl"
-        self._model._print_logs_before_command("delete_control", args)
-        self._comm.serve(command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("delete_control")
+        args = {"control_ids" : control_ids}
+        command_name = "PrimeMesh::ControlData/DeleteControls"
+        self._model._print_logs_before_command("delete_controls", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("delete_controls", DeleteResults(model = self._model, json_data = result))
+        return DeleteResults(model = self._model, json_data = result)
 
-    def get_scope_face_zonelets(self, scope : ScopeDefinition, params : ScopeZoneletParams) -> List[int]:
+    def get_scope_face_zonelets(self, scope : ScopeDefinition, params : ScopeZoneletParams) -> Iterable[int]:
         """ Gets the face zonelet ids for the given scope.
 
 
@@ -82,7 +156,7 @@ class ControlData(CoreObject):
 
         Returns
         -------
-        List[int]
+        Iterable[int]
             Returns the ids of face zonelets.
 
         Examples
@@ -98,11 +172,11 @@ class ControlData(CoreObject):
         "params" : params._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeFaceZonelets"
         self._model._print_logs_before_command("get_scope_face_zonelets", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_scope_face_zonelets")
         return result
 
-    def get_scope_parts(self, scope : ScopeDefinition) -> List[int]:
+    def get_scope_parts(self, scope : ScopeDefinition) -> Iterable[int]:
         """ Gets the part ids for the given scope.
 
 
@@ -113,7 +187,7 @@ class ControlData(CoreObject):
 
         Returns
         -------
-        List[int]
+        Iterable[int]
             Returns the ids of parts.
 
         Examples
@@ -127,9 +201,68 @@ class ControlData(CoreObject):
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeParts"
         self._model._print_logs_before_command("get_scope_parts", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_scope_parts")
         return result
+
+    def check_prism_controls(self, part_id : int, prism_control_ids : Iterable[int], params : CheckPrismControlParams) -> CheckPrismControlResults:
+        """ Checks the prism controls for the given ids.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part.
+        prism_control_ids : Iterable[int]
+            List of prism control ids that will be checked.
+        params : CheckPrismControlParams
+            Parameters to check prism controls.
+
+        Returns
+        -------
+        CheckPrismControlResults
+            Returns CheckPrismControlResults.
+
+        Examples
+        --------
+        >>> results = model.control_data.check_prism_controls(part_id, prism_control_ids, CheckPrismControlParams(model=model))
+
+        """
+        args = {"part_id" : part_id,
+        "prism_control_ids" : prism_control_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::ControlData/CheckPrismControls"
+        self._model._print_logs_before_command("check_prism_controls", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("check_prism_controls", CheckPrismControlResults(model = self._model, json_data = result))
+        return CheckPrismControlResults(model = self._model, json_data = result)
+
+    def get_part_zonelets(self, scope : ScopeDefinition) -> List[PartZonelets]:
+        """ Creates an array of part zonelet structure using the input ScopeDefinition.
+
+
+        Parameters
+        ----------
+        scope : ScopeDefinition
+            Input ScopeDefinition.
+
+        Returns
+        -------
+        List[PartZonelets]
+            Returns a list of PartZonelets.
+
+
+        Examples
+        --------
+        >>> results = control_data.get_part_zonelets(scope)
+
+        """
+        args = {"scope" : scope._jsonify()}
+        command_name = "PrimeMesh::ControlData/GetPartZonelets"
+        self._model._print_logs_before_command("get_part_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_part_zonelets", [PartZonelets(model = self._model, json_data = data) for data in result])
+        return [PartZonelets(model = self._model, json_data = data) for data in result]
 
     @property
     def id(self):
@@ -140,8 +273,3 @@ class ControlData(CoreObject):
     def name(self):
         """ Get the name of ControlData."""
         return self._name
-
-    @name.setter
-    def name(self, name):
-        """ Set the name of ControlData. """
-        self._name = name

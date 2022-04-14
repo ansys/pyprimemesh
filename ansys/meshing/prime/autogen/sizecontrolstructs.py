@@ -1,9 +1,10 @@
 """ Auto-generated file. DO NOT MODIFY """
 import enum
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
+import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
@@ -18,6 +19,8 @@ class SizingType(enum.IntEnum):
     """Denotes the size control type is hard."""
     SOFT = 3
     """Denotes the size control type is soft."""
+    MESHED = 4
+    """Denotes the size control type is meshed."""
     BOI = 5
     """Denotes the size control type is body of influence."""
 
@@ -35,11 +38,13 @@ class CurvatureSizingParams(CoreObject):
             min: float,
             max: float,
             growth_rate: float,
-            normal_angle: float):
+            normal_angle: float,
+            use_cad_curvature: bool):
         self._min = min
         self._max = max
         self._growth_rate = growth_rate
         self._normal_angle = normal_angle
+        self._use_cad_curvature = use_cad_curvature
 
     def __init__(
             self,
@@ -48,6 +53,7 @@ class CurvatureSizingParams(CoreObject):
             max: float = None,
             growth_rate: float = None,
             normal_angle: float = None,
+            use_cad_curvature: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the CurvatureSizingParams.
@@ -64,6 +70,8 @@ class CurvatureSizingParams(CoreObject):
             Growth rate used for transitioning from one element size to neighbor element size.
         normal_angle: float, optional
             Maximum allowable angle at which one element edge may span.
+        use_cad_curvature: bool, optional
+            Option to enable use of CAD curvature for computing edge and face size.
         json_data: dict, optional
             JSON dictionary to create a CurvatureSizingParams object with provided parameters.
 
@@ -76,25 +84,28 @@ class CurvatureSizingParams(CoreObject):
                 json_data["min"],
                 json_data["max"],
                 json_data["growthRate"],
-                json_data["normalAngle"])
+                json_data["normalAngle"],
+                json_data["useCadCurvature"])
         else:
-            all_field_specified = all(arg is not None for arg in [min, max, growth_rate, normal_angle])
+            all_field_specified = all(arg is not None for arg in [min, max, growth_rate, normal_angle, use_cad_curvature])
             if all_field_specified:
                 self.__initialize(
                     min,
                     max,
                     growth_rate,
-                    normal_angle)
+                    normal_angle,
+                    use_cad_curvature)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("CurvatureSizingParams", model._object_id)["CurvatureSizingParams"]
+                    json_data = model._communicator.initialize_params(model, "CurvatureSizingParams")["CurvatureSizingParams"]
                     self.__initialize(
                         min if min is not None else ( CurvatureSizingParams._default_params["min"] if "min" in CurvatureSizingParams._default_params else json_data["min"]),
                         max if max is not None else ( CurvatureSizingParams._default_params["max"] if "max" in CurvatureSizingParams._default_params else json_data["max"]),
                         growth_rate if growth_rate is not None else ( CurvatureSizingParams._default_params["growth_rate"] if "growth_rate" in CurvatureSizingParams._default_params else json_data["growthRate"]),
-                        normal_angle if normal_angle is not None else ( CurvatureSizingParams._default_params["normal_angle"] if "normal_angle" in CurvatureSizingParams._default_params else json_data["normalAngle"]))
+                        normal_angle if normal_angle is not None else ( CurvatureSizingParams._default_params["normal_angle"] if "normal_angle" in CurvatureSizingParams._default_params else json_data["normalAngle"]),
+                        use_cad_curvature if use_cad_curvature is not None else ( CurvatureSizingParams._default_params["use_cad_curvature"] if "use_cad_curvature" in CurvatureSizingParams._default_params else json_data["useCadCurvature"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -107,7 +118,8 @@ class CurvatureSizingParams(CoreObject):
             min: float = None,
             max: float = None,
             growth_rate: float = None,
-            normal_angle: float = None):
+            normal_angle: float = None,
+            use_cad_curvature: bool = None):
         """Sets the default values of CurvatureSizingParams.
 
         Parameters
@@ -120,6 +132,8 @@ class CurvatureSizingParams(CoreObject):
             Growth rate used for transitioning from one element size to neighbor element size.
         normal_angle: float, optional
             Maximum allowable angle at which one element edge may span.
+        use_cad_curvature: bool, optional
+            Option to enable use of CAD curvature for computing edge and face size.
         """
         args = locals()
         [CurvatureSizingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -142,11 +156,12 @@ class CurvatureSizingParams(CoreObject):
         json_data["max"] = self._max
         json_data["growthRate"] = self._growth_rate
         json_data["normalAngle"] = self._normal_angle
+        json_data["useCadCurvature"] = self._use_cad_curvature
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "min :  %s\nmax :  %s\ngrowth_rate :  %s\nnormal_angle :  %s" % (self._min, self._max, self._growth_rate, self._normal_angle)
+        message = "min :  %s\nmax :  %s\ngrowth_rate :  %s\nnormal_angle :  %s\nuse_cad_curvature :  %s" % (self._min, self._max, self._growth_rate, self._normal_angle, self._use_cad_curvature)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -189,6 +204,16 @@ class CurvatureSizingParams(CoreObject):
     @normal_angle.setter
     def normal_angle(self, value: float):
         self._normal_angle = value
+
+    @property
+    def use_cad_curvature(self) -> bool:
+        """Option to enable use of CAD curvature for computing edge and face size.
+        """
+        return self._use_cad_curvature
+
+    @use_cad_curvature.setter
+    def use_cad_curvature(self, value: bool):
+        self._use_cad_curvature = value
 
 class ProximitySizingParams(CoreObject):
     """Size field using proximity size control computes edge and face sizes in `gaps` using the specified minimum number of element layers.
@@ -261,7 +286,7 @@ class ProximitySizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("ProximitySizingParams", model._object_id)["ProximitySizingParams"]
+                    json_data = model._communicator.initialize_params(model, "ProximitySizingParams")["ProximitySizingParams"]
                     self.__initialize(
                         min if min is not None else ( ProximitySizingParams._default_params["min"] if "min" in ProximitySizingParams._default_params else json_data["min"]),
                         max if max is not None else ( ProximitySizingParams._default_params["max"] if "max" in ProximitySizingParams._default_params else json_data["max"]),
@@ -431,7 +456,7 @@ class SoftSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("SoftSizingParams", model._object_id)["SoftSizingParams"]
+                    json_data = model._communicator.initialize_params(model, "SoftSizingParams")["SoftSizingParams"]
                     self.__initialize(
                         max if max is not None else ( SoftSizingParams._default_params["max"] if "max" in SoftSizingParams._default_params else json_data["max"]),
                         growth_rate if growth_rate is not None else ( SoftSizingParams._default_params["growth_rate"] if "growth_rate" in SoftSizingParams._default_params else json_data["growthRate"]))
@@ -505,7 +530,7 @@ class SoftSizingParams(CoreObject):
 class HardSizingParams(CoreObject):
     """Size field computed using hard size control enables you to maintain a uniform size based on the size specified.
 
-    The hard sizing will override any other size function specified.
+    The hard sizing will override any other specified size.
     """
     _default_params = {}
 
@@ -554,7 +579,7 @@ class HardSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("HardSizingParams", model._object_id)["HardSizingParams"]
+                    json_data = model._communicator.initialize_params(model, "HardSizingParams")["HardSizingParams"]
                     self.__initialize(
                         min if min is not None else ( HardSizingParams._default_params["min"] if "min" in HardSizingParams._default_params else json_data["min"]),
                         growth_rate if growth_rate is not None else ( HardSizingParams._default_params["growth_rate"] if "growth_rate" in HardSizingParams._default_params else json_data["growthRate"]))
@@ -625,6 +650,105 @@ class HardSizingParams(CoreObject):
     def growth_rate(self, value: float):
         self._growth_rate = value
 
+class MeshedSizingParams(CoreObject):
+    """Size field computed using meshed size control enables you to set the size based on existing sizes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            growth_rate: float):
+        self._growth_rate = growth_rate
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            growth_rate: float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MeshedSizingParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MeshedSizingParams object with default parameters.
+        growth_rate: float, optional
+            Growth rate used for transitioning from one element size to neighbor element size.
+        json_data: dict, optional
+            JSON dictionary to create a MeshedSizingParams object with provided parameters.
+
+        Examples
+        --------
+        >>> meshed_sizing_params = prime.MeshedSizingParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["growthRate"])
+        else:
+            all_field_specified = all(arg is not None for arg in [growth_rate])
+            if all_field_specified:
+                self.__initialize(
+                    growth_rate)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "MeshedSizingParams")["MeshedSizingParams"]
+                    self.__initialize(
+                        growth_rate if growth_rate is not None else ( MeshedSizingParams._default_params["growth_rate"] if "growth_rate" in MeshedSizingParams._default_params else json_data["growthRate"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            growth_rate: float = None):
+        """Sets the default values of MeshedSizingParams.
+
+        Parameters
+        ----------
+        growth_rate: float, optional
+            Growth rate used for transitioning from one element size to neighbor element size.
+        """
+        args = locals()
+        [MeshedSizingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Prints the default values of MeshedSizingParams.
+
+        Examples
+        --------
+        >>> MeshedSizingParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MeshedSizingParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["growthRate"] = self._growth_rate
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "growth_rate :  %s" % (self._growth_rate)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def growth_rate(self) -> float:
+        """Growth rate used for transitioning from one element size to neighbor element size.
+        """
+        return self._growth_rate
+
+    @growth_rate.setter
+    def growth_rate(self, value: float):
+        self._growth_rate = value
+
 class BoiSizingParams(CoreObject):
     """Size field computed using body of influence size control enables you to specify a body of influence(that is, a region for sizing control).
 
@@ -678,7 +802,7 @@ class BoiSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("BoiSizingParams", model._object_id)["BoiSizingParams"]
+                    json_data = model._communicator.initialize_params(model, "BoiSizingParams")["BoiSizingParams"]
                     self.__initialize(
                         max if max is not None else ( BoiSizingParams._default_params["max"] if "max" in BoiSizingParams._default_params else json_data["max"]),
                         growth_rate if growth_rate is not None else ( BoiSizingParams._default_params["growth_rate"] if "growth_rate" in BoiSizingParams._default_params else json_data["growthRate"]))
@@ -792,7 +916,7 @@ class SizeControlSummaryResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("SizeControlSummaryResult")["SizeControlSummaryResult"]
+                    json_data = model._communicator.initialize_params(model, "SizeControlSummaryResult")["SizeControlSummaryResult"]
                     self.__initialize(
                         message if message is not None else ( SizeControlSummaryResult._default_params["message"] if "message" in SizeControlSummaryResult._default_params else json_data["message"]))
         self._custom_params = kwargs
@@ -885,7 +1009,7 @@ class SizeControlSummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("SizeControlSummaryParams")["SizeControlSummaryParams"]
+                    json_data = model._communicator.initialize_params(model, "SizeControlSummaryParams")["SizeControlSummaryParams"]
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -974,7 +1098,7 @@ class SetSizingResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("SetSizingResults")["SetSizingResults"]
+                    json_data = model._communicator.initialize_params(model, "SetSizingResults")["SetSizingResults"]
                     self.__initialize(
                         warning_codes if warning_codes is not None else ( SetSizingResults._default_params["warning_codes"] if "warning_codes" in SetSizingResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]),
                         error_code if error_code is not None else ( SetSizingResults._default_params["error_code"] if "error_code" in SetSizingResults._default_params else ErrorCode(json_data["errorCode"])))

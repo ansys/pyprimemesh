@@ -1,39 +1,71 @@
 import PrimePyPrimeServer as Prime
-import json
-from ansys.meshing.prime import relaxed_json
+import ansys.meshing.prime.internals.json_utils as json
+from ansys.meshing.prime.internals.utils import get_cad_import_commands
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler
 )
 from ansys.meshing.prime.internals.communicator import Communicator
-
+import ansys.meshing.prime.internals.config as config
 global return_value
 return_value = ""
 
 class PrimeCommunicator(Communicator):
+
+    def __init__(self):
+        Prime.SetupForPyPrime_Beta(1)
+
     @error_code_handler
     @communicator_error_handler
-    def serve(self, command, *args, **kwargs) -> dict:
+    def serve(self, model, command, *args, **kwargs) -> dict:
         command = { "Command" : command }
-        binary = False
-        if(len(args) > 0 ):
+        if len(args) > 0:
             command.update({ "ObjectID" : args[0]})
-        if (kwargs is not None):
-            command.update({ "Args" : kwargs["args"]})
-            binary = kwargs.get("binary", False)
+        if kwargs is not None:
+            if "args" in kwargs:
+                command.update({ "Args" : kwargs["args"]})
 
-        if binary:
-            return relaxed_json.loads(Prime.ServeJsonBinary(json.dumps(command)).AsBytes())
+        if config.is_optimizing_numpy_arrays():
+            return json.loads(
+                        Prime.ServeJsonBinary(
+                            model._object_id,
+                            json.dumps(command)).AsBytes())
 
-        return json.loads(Prime.ServeJson(json.dumps(command)).Get())
+        return json.loads(
+                    Prime.ServeJson(model._object_id,
+                                    json.dumps(command)).Get())
 
-    def initialize_params(self, param_name: str, *args) -> dict:
-        command = { "ParamName" : param_name }
-        if(len(args) > 0 ):
-            command.update({ "ModelID" : args[0]})
-        return json.loads(Prime.GetParamDefaultJson(json.dumps(command)).Get())
+    def initialize_params(self, model, param_name: str) -> dict:
+        command = {
+            "ParamName" : param_name,
+        }
 
-    def run_on_server(self, recipe: str) -> dict:
+        with config.numpy_array_optimization_disabled():
+            res = json.loads(
+                    Prime.GetParamDefaultJson(model._object_id,
+                                              json.dumps(command)).Get())
+
+        return res
+
+    def run_on_server(self, model, recipe: str) -> dict:
         exec(recipe, globals())
         output = '{"Results" : "' + str(return_value) + '"}'
-        return json.loads(output)
+        with config.numpy_array_optimization_disabled():
+            result = json.loads(output)
+        return result
+
+    @error_code_handler
+    @communicator_error_handler
+    def import_cad(self, model, file_name: str, *args) -> dict:
+        params = { "filename" : file_name }
+        if (len(args) > 0 ):
+            params.update(args[0])
+        commands = get_cad_import_commands(params=json.dumps(params))
+        exec(commands, globals())
+        output = f'{{"Results": {json.dumps(return_value)}}}'
+        with config.numpy_array_optimization_disabled():
+            result = json.loads(output)
+        return result
+
+    def close(self):
+        pass

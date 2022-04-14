@@ -17,7 +17,7 @@ class BoundaryFittedSpline(CoreObject):
         self._comm = model._communicator
         command_name = "PrimeMesh::BoundaryFittedSpline/Construct"
         args = {"ModelID" : model._object_id , "MaxID" : -1 }
-        result = self._comm.serve(command_name, args=args)
+        result = self._comm.serve(model, command_name, args=args)
         self._object_id = result["ObjectIndex"]
         self._freeze()
 
@@ -28,9 +28,9 @@ class BoundaryFittedSpline(CoreObject):
     def __exit__(self, type, value, traceback) :
         """ Exit context for BoundaryFittedSpline. """
         command_name = "PrimeMesh::BoundaryFittedSpline/Destruct"
-        self._comm.serve(command_name, self._object_id, args={})
+        self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def create_boundary_fitted_spline(self, part_id : int, cell_zonelet_ids : List[int], boundary_fitted_spline_params : BoundaryFittedSplineParams) -> IGAResults:
+    def create_boundary_fitted_spline(self, part_id : int, cell_zonelet_ids : Iterable[int], boundary_fitted_spline_params : BoundaryFittedSplineParams) -> IGAResults:
         """ Create boundary fitted spline for structured hex-mesh.
 
         The hex-mesh can be structured in blocks but must be conformally connected.
@@ -41,7 +41,7 @@ class BoundaryFittedSpline(CoreObject):
         ----------
         part_id : int
             Id of the part.
-        cell_zonelet_ids : List[int]
+        cell_zonelet_ids : Iterable[int]
             Ids of the cell zonelets on which spline will be fit.
         boundary_fitted_spline_params : BoundaryFittedSplineParams
             Structure containing spline fitting parameters.
@@ -67,11 +67,11 @@ class BoundaryFittedSpline(CoreObject):
         "boundary_fitted_spline_params" : boundary_fitted_spline_params._jsonify()}
         command_name = "PrimeMesh::BoundaryFittedSpline/CreateBoundaryFittedSpline"
         self._model._print_logs_before_command("create_boundary_fitted_spline", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("create_boundary_fitted_spline", IGAResults(model = self._model, json_data = result))
         return IGAResults(model = self._model, json_data = result)
 
-    def refine_spline(self, part_id : int, spline_ids : List[int], refine_spline_params : RefineSplineParams) -> IGAResults:
+    def refine_spline(self, part_id : int, spline_ids : Iterable[int], refine_spline_params : RefineSplineParams) -> IGAResults:
         """ Refine boundary fitted splines.
 
         Currently h and p refinement are supported.
@@ -81,7 +81,7 @@ class BoundaryFittedSpline(CoreObject):
         ----------
         part_id : int
             Id of the part.
-        spline_ids : List[int]
+        spline_ids : Iterable[int]
             Ids of the splines on which refinement will be done.
         refine_spline_params : RefineSplineParams
             Structure containing parameters for spline refinement.
@@ -107,6 +107,6 @@ class BoundaryFittedSpline(CoreObject):
         "refine_spline_params" : refine_spline_params._jsonify()}
         command_name = "PrimeMesh::BoundaryFittedSpline/RefineSpline"
         self._model._print_logs_before_command("refine_spline", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("refine_spline", IGAResults(model = self._model, json_data = result))
         return IGAResults(model = self._model, json_data = result)

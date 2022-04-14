@@ -10,7 +10,7 @@ from ansys.meshing.prime.autogen.commontypes import (
     FaceQualityMeasure,
     SolverType
 )
-from typing import List
+from typing import List, Iterable
 
 class SurfaceQualitySummary( _SurfaceSearch):
     __doc__ = _SurfaceSearch.__doc__
@@ -21,7 +21,7 @@ class SurfaceQualitySummary( _SurfaceSearch):
                  scope: ScopeDefinition=None,
                  solver:  SolverType=None,
                  face_quality_measures: List[FaceQualityMeasure]=None,
-                 quality_limit: List[float]=None):
+                 quality_limit: Iterable[float]=None):
         """Initialize SurfaceQualitySummary.
 
         Constructor to initialize SurfaceQualitySummary object.
@@ -32,7 +32,7 @@ class SurfaceQualitySummary( _SurfaceSearch):
         model : CommunicationManager
             Communication manager to serve JSON API.
         parts : List[Part], optional
-            List of parts to scope the face zonelets to get surface quality summary.
+            List of parts used to scope face zonelets to get surface quality summary.
         scope : ScopeDefinition, optional
             Scope definition to scope the face zonelets to get surface quality summary.
             If specified will take precedence over parts. The default scope is face
@@ -40,10 +40,10 @@ class SurfaceQualitySummary( _SurfaceSearch):
         solver : SolverType, optional
             Grouping of face quality measures based on solver type. The default is MAPDL.
         face_quality_measures : List[FaceQualityMeasure], optional
-            List of face quality measures for which to get surface quality summary.
+            List of face quality measures used to get surface quality summary.
             If specified will ignore a group defined by solver type.
-        quality_limit : List[float], optional
-            List of quality limit per face quality measure. Uses default quality limit
+        quality_limit : Iterable[float], optional
+            Iterable of quality limit per face quality measure. Uses default quality limit
             if not specified.
 
         Examples
@@ -76,7 +76,7 @@ class SurfaceQualitySummary( _SurfaceSearch):
     def __str__(self) -> str:
         """Prints the suface quality summary.
 
-        Uses face_quality_measures, parts, scope, solver_type and quality_limit properties
+        Uses face quality measures, parts, scope, solver type and quality limit properties
         to print the surface quality summary.
 
         Returns

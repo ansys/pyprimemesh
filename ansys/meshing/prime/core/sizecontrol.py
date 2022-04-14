@@ -1,6 +1,6 @@
 from ansys.meshing.prime.autogen.sizecontrol import SizeControl as _SizeControl
 from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryParams
-from ansys.meshing.prime.autogen.controlstructs import SetNameResults
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 
 class SizeControl( _SizeControl ):
     """Size control is used to compute size field for volumetric surface meshing.
@@ -38,7 +38,7 @@ class SizeControl( _SizeControl ):
 
         """
         result = _SizeControl.set_suggested_name(self, name)
-        self._name = result.suggested_name
+        self._name = result.assigned_name
         return result
 
     @property

@@ -76,3 +76,7 @@ source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
+
+autosummary_generate = True
+autosummary_imported_members = True
+autosummary_ignore_module_all = False

@@ -17,7 +17,7 @@ class SizeField(CoreObject):
         self._comm = model._communicator
         command_name = "PrimeMesh::SizeField/Construct"
         args = {"ModelID" : model._object_id , "MaxID" : -1 }
-        result = self._comm.serve(command_name, args=args)
+        result = self._comm.serve(model, command_name, args=args)
         self._object_id = result["ObjectIndex"]
         self._freeze()
 
@@ -28,15 +28,15 @@ class SizeField(CoreObject):
     def __exit__(self, type, value, traceback) :
         """ Exit context for SizeField. """
         command_name = "PrimeMesh::SizeField/Destruct"
-        self._comm.serve(command_name, self._object_id, args={})
+        self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def compute_volumetric(self, size_control_ids : List[int]) -> VolumetricSizeFieldComputeResults:
+    def compute_volumetric(self, size_control_ids : Iterable[int]) -> VolumetricSizeFieldComputeResults:
         """ Computes the volumetric size field using given size control ids.
 
 
         Parameters
         ----------
-        size_control_ids : List[int]
+        size_control_ids : Iterable[int]
             Ids of size controls.
 
         Examples
@@ -48,6 +48,6 @@ class SizeField(CoreObject):
         args = {"size_control_ids" : size_control_ids}
         command_name = "PrimeMesh::SizeField/ComputeVolumetric"
         self._model._print_logs_before_command("compute_volumetric", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("compute_volumetric", VolumetricSizeFieldComputeResults(model = self._model, json_data = result))
         return VolumetricSizeFieldComputeResults(model = self._model, json_data = result)

@@ -88,8 +88,7 @@ class Part(_Part):
 
     @property
     def print_mesh(self) -> bool:
-        """True will get the mesh summary along with part summary.
-        The default is False.
+        """When True, prints the mesh summary along with part summary. The default is False.
         """
         return self._print_mesh
 
@@ -99,7 +98,7 @@ class Part(_Part):
 
     @property
     def print_id(self) -> bool:
-        """True will get id's of topo entities/zonelets along with part summary.
+        """When True, prints the id's of topoentities or zonelets along with part summary.
         The default is False.
         """
         return self._print_id

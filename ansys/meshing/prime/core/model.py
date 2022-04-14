@@ -2,13 +2,17 @@ from ansys.meshing.prime.autogen.model import Model as _Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.internals.communicator import Communicator
-
+from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
 from ansys.meshing.prime.autogen.modelstructs import (
-    GlobalSizingParams
+    GlobalSizingParams,
+    MergePartsParams,
+    MergePartsResults
 )
+from ansys.meshing.prime.autogen.primeconfig import ErrorCode
+from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 
-from typing import List
-import json
+from typing import List, Iterable
+import ansys.meshing.prime.internals.json_utils as json
 
 class Model( _Model ):
     __doc__ = _Model.__doc__
@@ -35,7 +39,7 @@ class Model( _Model ):
         >>> model = client.model
         >>> model._sync_up_model()
         """
-        res = json.loads(self._comm.serve("PrimeMesh::Model/GetChildObjectsJson",
+        res = json.loads(self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson",
                          self._object_id, args={}))
         part_data = res["Parts"]
         sc_data = res["SizeControl"]
@@ -48,6 +52,7 @@ class Model( _Model ):
         self._parts = [Part(self, part[0], part[1], part[2]) for part in part_data]
         self._control_data = ControlData(self, -1, res["ControlData"], "")
         self._control_data._update_size_controls(sc_data)
+        self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def get_part_by_name(self, name: str) -> Part:
         """Gets the part by name. Returns None if part doesn't exist for the given name.
@@ -96,6 +101,61 @@ class Model( _Model ):
             if(part.id == id):
                 return part
         return None
+
+    def merge_parts(self, part_ids : Iterable[int], params : MergePartsParams) -> MergePartsResults:
+        """ Merges given parts into one.
+
+
+        Parameters
+        ----------
+        part_ids : Iterable[int]
+            Ids of parts to be merged.
+        params : MergePartsParams
+            Parameters to merge parts.
+
+        Returns
+        -------
+        MergePartsResults
+            Returns the MergePartsResults.
+
+
+        Examples
+        --------
+        >>> params = prime.MergePartsParams(model = model)
+        >>> results = model.merge_parts(part_ids, params)
+
+        """
+        res = _Model.merge_parts(self, part_ids, params)
+        self._sync_up_model()
+        return res
+
+    def delete_parts(self, part_ids : Iterable[int]) -> DeleteResults:
+        """ Deletes the parts and its contents.
+
+
+        Parameters
+        ----------
+        part_ids : Iterable[int]
+            Ids of parts to be deleted.
+
+        Returns
+        -------
+        DeleteResults
+            Returns DeleteResults.
+
+
+        Examples
+        --------
+        >>> results = model.delete_parts(part_ids)
+
+        """
+        res = _Model.delete_parts(self, part_ids)
+        if (res.error_code == ErrorCode.NOERROR):
+            for id in part_ids:
+                for part in list(self._parts):
+                    if(part.id == id):
+                        self._parts.remove(part)
+        return res
 
     def get_global_sizing_params(self) -> GlobalSizingParams:
         """Gets the GlobalSizingParams.
@@ -189,11 +249,28 @@ class Model( _Model ):
         return self._control_data
 
     @property
+    def material_point_data(self) -> MaterialPointManager:
+        """Get Material Point Data.
+
+        MaterialPointManager is used to create, delete and manage material points.
+
+        Returns
+        -------
+        MaterialPointManager
+            Returns the material point manager.
+
+        Examples
+        --------
+            >>> mpt_data = model.material_point_data
+        """
+        return self._material_point_data
+
+    @property
     def python_logger(self):
-        """Get PRIME's Logger instance
+        """Get PRIME's Logger instance.
 
         PRIME's Logger instance can be used to control the verbosity
-        of messages printed by PRIME
+        of messages printed by PRIME.
 
         Returns
         -------

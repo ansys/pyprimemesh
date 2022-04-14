@@ -1,9 +1,10 @@
 """ Auto-generated file. DO NOT MODIFY """
 import enum
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
+import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
@@ -32,17 +33,17 @@ class IGAResults(CoreObject):
             self,
             error_code: ErrorCode,
             warning_code: WarningCode,
-            spline_ids: List[int]):
+            spline_ids: Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._warning_code = WarningCode(warning_code)
-        self._spline_ids = spline_ids
+        self._spline_ids = spline_ids if isinstance(spline_ids, np.ndarray) else np.array(spline_ids, dtype=np.int32)
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
             warning_code: WarningCode = None,
-            spline_ids: List[int] = None,
+            spline_ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the IGAResults.
@@ -55,7 +56,7 @@ class IGAResults(CoreObject):
             Error code if IGA operation is unsuccessful.
         warning_code: WarningCode, optional
             Warning code if IGA operation is partially successful.
-        spline_ids: List[int], optional
+        spline_ids: Iterable[int], optional
             Ids of the created spline.
         json_data: dict, optional
             JSON dictionary to create a IGAResults object with provided parameters.
@@ -80,7 +81,7 @@ class IGAResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("IGAResults")["IGAResults"]
+                    json_data = model._communicator.initialize_params(model, "IGAResults")["IGAResults"]
                     self.__initialize(
                         error_code if error_code is not None else ( IGAResults._default_params["error_code"] if "error_code" in IGAResults._default_params else ErrorCode(json_data["errorCode"])),
                         warning_code if warning_code is not None else ( IGAResults._default_params["warning_code"] if "warning_code" in IGAResults._default_params else WarningCode(json_data["warningCode"])),
@@ -96,7 +97,7 @@ class IGAResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_code: WarningCode = None,
-            spline_ids: List[int] = None):
+            spline_ids: Iterable[int] = None):
         """Sets the default values of IGAResults.
 
         Parameters
@@ -105,7 +106,7 @@ class IGAResults(CoreObject):
             Error code if IGA operation is unsuccessful.
         warning_code: WarningCode, optional
             Warning code if IGA operation is partially successful.
-        spline_ids: List[int], optional
+        spline_ids: Iterable[int], optional
             Ids of the created spline.
         """
         args = locals()
@@ -157,13 +158,13 @@ class IGAResults(CoreObject):
         self._warning_code = value
 
     @property
-    def spline_ids(self) -> List[int]:
+    def spline_ids(self) -> Iterable[int]:
         """Ids of the created spline.
         """
         return self._spline_ids
 
     @spline_ids.setter
-    def spline_ids(self, value: List[int]):
+    def spline_ids(self, value: Iterable[int]):
         self._spline_ids = value
 
 class IGASpline(CoreObject):
@@ -209,7 +210,7 @@ class IGASpline(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("IGASpline")["IGASpline"]
+                    json_data = model._communicator.initialize_params(model, "IGASpline")["IGASpline"]
                     self.__initialize(
                         id if id is not None else ( IGASpline._default_params["id"] if "id" in IGASpline._default_params else json_data["id"]))
         self._custom_params = kwargs
@@ -378,7 +379,7 @@ class BoundaryFittedSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("BoundaryFittedSplineParams")["BoundaryFittedSplineParams"]
+                    json_data = model._communicator.initialize_params(model, "BoundaryFittedSplineParams")["BoundaryFittedSplineParams"]
                     self.__initialize(
                         degree_u if degree_u is not None else ( BoundaryFittedSplineParams._default_params["degree_u"] if "degree_u" in BoundaryFittedSplineParams._default_params else json_data["degreeU"]),
                         degree_v if degree_v is not None else ( BoundaryFittedSplineParams._default_params["degree_v"] if "degree_v" in BoundaryFittedSplineParams._default_params else json_data["degreeV"]),
@@ -616,11 +617,11 @@ class RefineSplineParams(CoreObject):
         model: Model
             Model to create a RefineSplineParams object with default parameters.
         refine_flag_u: bool, optional
-            Checks whether refinement is applied in u direction.
+            Indicates whether refinement is applied in u direction.
         refine_flag_v: bool, optional
-            Checks whether refinement is applied in v direction.
+            Indicates whether refinement is applied in v direction.
         refine_flag_w: bool, optional
-            Checks whether refinement is applied in w direction.
+            Indicates whether refinement is applied in w direction.
         spline_refinement_type: SplineRefinementType, optional
             Type of spline refinement. Currently, supports h-refinement and p-refinement.
         json_data: dict, optional
@@ -648,7 +649,7 @@ class RefineSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params("RefineSplineParams")["RefineSplineParams"]
+                    json_data = model._communicator.initialize_params(model, "RefineSplineParams")["RefineSplineParams"]
                     self.__initialize(
                         refine_flag_u if refine_flag_u is not None else ( RefineSplineParams._default_params["refine_flag_u"] if "refine_flag_u" in RefineSplineParams._default_params else json_data["refineFlagU"]),
                         refine_flag_v if refine_flag_v is not None else ( RefineSplineParams._default_params["refine_flag_v"] if "refine_flag_v" in RefineSplineParams._default_params else json_data["refineFlagV"]),
@@ -672,11 +673,11 @@ class RefineSplineParams(CoreObject):
         Parameters
         ----------
         refine_flag_u: bool, optional
-            Checks whether refinement is applied in u direction.
+            Indicates whether refinement is applied in u direction.
         refine_flag_v: bool, optional
-            Checks whether refinement is applied in v direction.
+            Indicates whether refinement is applied in v direction.
         refine_flag_w: bool, optional
-            Checks whether refinement is applied in w direction.
+            Indicates whether refinement is applied in w direction.
         spline_refinement_type: SplineRefinementType, optional
             Type of spline refinement. Currently, supports h-refinement and p-refinement.
         """
@@ -711,7 +712,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def refine_flag_u(self) -> bool:
-        """Checks whether refinement is applied in u direction.
+        """Indicates whether refinement is applied in u direction.
         """
         return self._refine_flag_u
 
@@ -721,7 +722,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def refine_flag_v(self) -> bool:
-        """Checks whether refinement is applied in v direction.
+        """Indicates whether refinement is applied in v direction.
         """
         return self._refine_flag_v
 
@@ -731,7 +732,7 @@ class RefineSplineParams(CoreObject):
 
     @property
     def refine_flag_w(self) -> bool:
-        """Checks whether refinement is applied in w direction.
+        """Indicates whether refinement is applied in w direction.
         """
         return self._refine_flag_w
 

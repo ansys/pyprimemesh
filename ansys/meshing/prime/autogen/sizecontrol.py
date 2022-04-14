@@ -28,7 +28,7 @@ class SizeControl(CoreObject):
         Parameters
         ----------
         params : CurvatureSizingParams
-            Curvature sizing parameters.
+            Parameters that enables you to set the normal angle as the maximum allowable angle at which one element edge may span.
 
         Returns
         -------
@@ -47,7 +47,7 @@ class SizeControl(CoreObject):
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetCurvatureSizingParams"
         self._model._print_logs_before_command("set_curvature_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_curvature_sizing_params", SetSizingResults(model = self._model, json_data = result))
         return SetSizingResults(model = self._model, json_data = result)
 
@@ -58,7 +58,7 @@ class SizeControl(CoreObject):
         Parameters
         ----------
         params : SoftSizingParams
-            Soft sizing parameters.
+            Parameters that enables you to set the maximum size on scoped face zonelets.
 
         Returns
         -------
@@ -76,7 +76,7 @@ class SizeControl(CoreObject):
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetSoftSizingParams"
         self._model._print_logs_before_command("set_soft_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_soft_sizing_params", SetSizingResults(model = self._model, json_data = result))
         return SetSizingResults(model = self._model, json_data = result)
 
@@ -87,7 +87,7 @@ class SizeControl(CoreObject):
         Parameters
         ----------
         params : ProximitySizingParams
-            Proximity sizing parameters.
+            Parameters that enables you to specify number of elements in the gaps.
 
         Returns
         -------
@@ -105,7 +105,7 @@ class SizeControl(CoreObject):
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetProximitySizingParams"
         self._model._print_logs_before_command("set_proximity_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_proximity_sizing_params", SetSizingResults(model = self._model, json_data = result))
         return SetSizingResults(model = self._model, json_data = result)
 
@@ -116,7 +116,7 @@ class SizeControl(CoreObject):
         Parameters
         ----------
         params : HardSizingParams
-            Hard sizing parameters.
+            Parameters that enables you to set uniform size based on the specified size.
 
         Returns
         -------
@@ -134,18 +134,47 @@ class SizeControl(CoreObject):
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetHardSizingParams"
         self._model._print_logs_before_command("set_hard_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_hard_sizing_params", SetSizingResults(model = self._model, json_data = result))
         return SetSizingResults(model = self._model, json_data = result)
 
+    def set_meshed_sizing_params(self, params : MeshedSizingParams) -> SetSizingResults:
+        """ Sets the meshed sizing parameters to compute volumetric size field.
+
+
+        Parameters
+        ----------
+        params : MeshedSizingParams
+            Parameters that enables you to set the sizes based on existing sizes.
+
+        Returns
+        -------
+        SetSizingResults
+            Returns the SetSizingResults.
+
+
+        Examples
+        --------
+        >>> size_control.set_meshed_sizing_params(
+        >>>                  prime.MeshedSizingParams(model=model,
+        >>>                  growth_rate = 1.2))
+
+        """
+        args = {"params" : params._jsonify()}
+        command_name = "PrimeMesh::SizeControl/SetMeshedSizingParams"
+        self._model._print_logs_before_command("set_meshed_sizing_params", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_meshed_sizing_params", SetSizingResults(model = self._model, json_data = result))
+        return SetSizingResults(model = self._model, json_data = result)
+
     def set_boi_sizing_params(self, params : BoiSizingParams) -> SetSizingResults:
-        """ Sets the boi sizing parameters to compute volumetric size field.
+        """ Sets the body of influence sizing parameters to compute volumetric size field.
 
 
         Parameters
         ----------
         params : BoiSizingParams
-            Boi sizing parameters.
+            Parameters that enables you to set sizing on the body of influence region.
 
         Returns
         -------
@@ -163,7 +192,7 @@ class SizeControl(CoreObject):
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetBoiSizingParams"
         self._model._print_logs_before_command("set_boi_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_boi_sizing_params", SetSizingResults(model = self._model, json_data = result))
         return SetSizingResults(model = self._model, json_data = result)
 
@@ -185,7 +214,7 @@ class SizeControl(CoreObject):
         args = {}
         command_name = "PrimeMesh::SizeControl/GetCurvatureSizingParams"
         self._model._print_logs_before_command("get_curvature_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_curvature_sizing_params", CurvatureSizingParams(model = self._model, json_data = result))
         return CurvatureSizingParams(model = self._model, json_data = result)
 
@@ -207,7 +236,7 @@ class SizeControl(CoreObject):
         args = {}
         command_name = "PrimeMesh::SizeControl/GetSoftSizingParams"
         self._model._print_logs_before_command("get_soft_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_soft_sizing_params", SoftSizingParams(model = self._model, json_data = result))
         return SoftSizingParams(model = self._model, json_data = result)
 
@@ -229,7 +258,7 @@ class SizeControl(CoreObject):
         args = {}
         command_name = "PrimeMesh::SizeControl/GetProximitySizingParams"
         self._model._print_logs_before_command("get_proximity_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_proximity_sizing_params", ProximitySizingParams(model = self._model, json_data = result))
         return ProximitySizingParams(model = self._model, json_data = result)
 
@@ -251,12 +280,34 @@ class SizeControl(CoreObject):
         args = {}
         command_name = "PrimeMesh::SizeControl/GetHardSizingParams"
         self._model._print_logs_before_command("get_hard_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_hard_sizing_params", HardSizingParams(model = self._model, json_data = result))
         return HardSizingParams(model = self._model, json_data = result)
 
+    def get_meshed_sizing_params(self) -> MeshedSizingParams:
+        """ Gets the meshed sizing parameters of size control.
+
+
+        Returns
+        -------
+        MeshedSizingParams
+            Returns the MeshedSizingParams.
+
+
+        Examples
+        --------
+        >>> params = size_control.get_meshed_sizing_params()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::SizeControl/GetMeshedSizingParams"
+        self._model._print_logs_before_command("get_meshed_sizing_params", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_meshed_sizing_params", MeshedSizingParams(model = self._model, json_data = result))
+        return MeshedSizingParams(model = self._model, json_data = result)
+
     def get_boi_sizing_params(self) -> BoiSizingParams:
-        """ Gets the body of influnce sizing parameters of size control.
+        """ Gets the body of influence sizing parameters of size control.
 
 
         Returns
@@ -273,7 +324,7 @@ class SizeControl(CoreObject):
         args = {}
         command_name = "PrimeMesh::SizeControl/GetBoiSizingParams"
         self._model._print_logs_before_command("get_boi_sizing_params", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_boi_sizing_params", BoiSizingParams(model = self._model, json_data = result))
         return BoiSizingParams(model = self._model, json_data = result)
 
@@ -300,7 +351,7 @@ class SizeControl(CoreObject):
         args = {"name" : name}
         command_name = "PrimeMesh::SizeControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_suggested_name", SetNameResults(model = self._model, json_data = result))
         return SetNameResults(model = self._model, json_data = result)
 
@@ -331,7 +382,7 @@ class SizeControl(CoreObject):
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetScope"
         self._model._print_logs_before_command("set_scope", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_scope", SetScopeResults(model = self._model, json_data = result))
         return SetScopeResults(model = self._model, json_data = result)
 
@@ -353,7 +404,7 @@ class SizeControl(CoreObject):
         args = {}
         command_name = "PrimeMesh::SizeControl/GetScope"
         self._model._print_logs_before_command("get_scope", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_scope", ScopeDefinition(model = self._model, json_data = result))
         return ScopeDefinition(model = self._model, json_data = result)
 
@@ -379,7 +430,7 @@ class SizeControl(CoreObject):
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/GetSummary"
         self._model._print_logs_before_command("get_summary", args)
-        result = self._comm.serve(command_name, self._object_id, args=args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_summary", SizeControlSummaryResult(model = self._model, json_data = result))
         return SizeControlSummaryResult(model = self._model, json_data = result)
 
@@ -392,8 +443,3 @@ class SizeControl(CoreObject):
     def name(self):
         """ Get the name of SizeControl."""
         return self._name
-
-    @name.setter
-    def name(self, name):
-        """ Set the name of SizeControl. """
-        self._name = name

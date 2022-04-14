@@ -1,13 +1,14 @@
 """ Auto-generated file. DO NOT MODIFY """
 import enum
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
+import numpy as np
 
 
 class ErrorCode(enum.IntEnum):
-    """Please Document
+    """Error codes associated with the failure of PRIME operation.
     """
     NOERROR = 0
     UNKNOWN = 1
@@ -24,65 +25,29 @@ class ErrorCode(enum.IntEnum):
     """Invalid input for surface meshing."""
     SURFERQUADFAILED = 8
     """Quad surface meshing failed."""
-    SURFERWITHAUTOSIZINGFAILED = 9
-    """Surface meshing with auto sizing failed."""
     FACEZONELETSFEATURESNOTUPTODATE = 10
     """Face zonelets features are not up to date."""
     SURFERAUTOSIZEQUADUNSUPPORTED = 11
     """Auto sizing for quad meshing is not supported."""
     SURFERAUTOSIZEMUSTBEVOLUMETRIC = 12
     """Auto sizing must be of volumetric type."""
-    SURFERDEGENERATEFACE = 13
-    """Face is degenerated for surface meshing."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
-    MAPMESHINGFAILED = 15
-    """Please Document"""
-    CHECKSLICERINPUTFAILED = 17
-    """Please Document"""
-    SLICERINPUTFREEMULTIFACES = 18
-    """Please Document"""
-    SLICERINPUTOVERLAPPINGFACES = 19
-    """Please Document"""
-    SLICERINPUTINTERSECTINGFACES = 20
-    """Please Document"""
-    PRESLICERFAILED = 21
-    """Please Document"""
-    POSTSLICERFAILED = 22
-    """Please Document"""
-    SLICERPROJECTIONINTERSECTINGFACES = 23
-    """Please Document"""
-    SLICERFAILED = 24
-    """Please Document"""
-    IMPROVESLICEDPARTFAILED = 25
-    """Please Document"""
-    INFLATESLICECELLNODESFAILED = 26
-    """Please Document"""
-    DELETETRAPPEDSLICESFAILED = 27
-    """Please Document"""
-    CHECKSLICEDLAYERSFAILED = 28
-    """Please Document"""
     SURFERINVALIDCONSTANTSIZE = 40
     """Invalid size for constant size surface meshing."""
+    SURFERINVALIDMINORMAXSIZES = 41
+    """Invalid min or max size for surface meshing."""
+    SURFERINVALIDANGLES = 42
+    """Invalid Corner angle or min angle more than max angle specified for surface meshing"""
+    SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO = 43
+    """Smooth size transition option is not supported for topology surface meshing yet"""
+    LOCALSURFERINVALIDNUMRINGS = 44
+    """Invalid number of rings input for the local surface mesh operation."""
     SCAFFOLDERBADINPUTEMPTYTOPO = 50
     """Please Document"""
     SCAFFOLDERBADINPUTNOFREEFACES = 51
     """Please Document"""
     SCAFFOLDERBADINPUTPARAMS = 52
-    """Please Document"""
-    SHELLBLFAILED = 60
-    """Please Document"""
-    SHELLBLQUADS = 61
-    """Please Document"""
-    SHELLBLNOMESH = 62
-    """Please Document"""
-    SHELLBLFEWLAYERS = 63
-    """Please Document"""
-    SHELLBLWRONGTOPO = 64
-    """Please Document"""
-    OGRIDREFINEFAILED = 65
-    """Please Document"""
-    SPLITTOTRIFAILED = 66
     """Please Document"""
     AUTOMESHFAILED = 100
     """Please Document"""
@@ -100,26 +65,40 @@ class ErrorCode(enum.IntEnum):
     """Please Document"""
     AUTONODEMOVEFAILED = 107
     """Please Document"""
-    COMPUTEBODIESFAILED = 109
-    """Please Document"""
     ALREADYVOLUMEMESHED = 110
     """Please Document"""
     INVALIDPRISMCONTROLS = 111
-    """Please Document"""
+    """Invalid prism controls."""
     VOLUMESNOTUPTODATE = 112
     """Please Document"""
     QUATRICMESHSUPPORTEDONLYFORTETS = 113
     """Please Document"""
     NOACTIVESFFOUND = 114
     """Please Document"""
-    AUTOMESHSIZEFILEDTYPENOTSUPPORTED = 115
-    """Specified size field type is not supported for specified volume fill type."""
     AUTOMESHINVALIDMAXSIZE = 116
     """Invalid max size for auto volume meshing."""
     AUTOMESHHEXCOREFAILED = 117
     """Hex generation part of volume meshing failed."""
     INVALIDVOLUMECONTROLS = 118
     """Invalid volume controls specified for volume meshing."""
+    INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY = 123
+    """Invalid scope entity."""
+    INVALIDFIRSTASPECTRATIO = 124
+    """Invalid first aspect ratio."""
+    INVALIDLASTASPECTRATIO = 125
+    """Invalid last aspect ratio."""
+    INVALIDFIRSTHEIGHT = 126
+    """Invalid first height."""
+    INVALIDLAYERS = 127
+    """Invalid number of layers."""
+    INVALIDGROWTHRATE = 128
+    """Invalid growth rate."""
+    COMPUTEVOLUMESFAILED = 129
+    """Compute volumes failed."""
+    QUADRATICTETNOTSUPPORTEDINPARALLEL = 130
+    """Quadratic tetrahedal meshing is not supported in parallel mode."""
+    QUADRATICTETNOTSUPPORTEDWITHPRISMS = 131
+    """Quadratic tetrahedral meshing is not supported with prism."""
     OUTOFMEMORY = 200
     """Please Document"""
     INTERRUPTED = 201
@@ -129,34 +108,34 @@ class ErrorCode(enum.IntEnum):
     GETELEMENTCOUNTFAILED = 251
     """Please Document"""
     PARTNOTFOUND = 300
-    """Please Document"""
+    """Given part not found."""
     TOPODATANOTFOUND = 301
     """Please Document"""
     SIZEFIELDNOTFOUND = 302
     """Please Document"""
     ZONESARENOTOFSAMETYPE = 303
-    """Please Document"""
+    """Zones are not of same type."""
     PARTNOTMESHED = 304
     """Please Document"""
     INVALIDINPUTPART = 305
-    """Please Document"""
+    """Invalid input part."""
     CADGEOMETRYNOTFOUND = 306
     """Please Document"""
     VOLUMENOTFOUND = 307
     """Please Document"""
+    ZONENOTFOUND = 308
+    """Given zone not found."""
+    ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS = 309
+    """Entities should be added to zone using part it belongs."""
+    PARTDOESNOTHAVETOPOLOGY = 310
+    """Part does not have topology."""
+    ZONESARENOTSUPPORTEDFORCELLZONELETS = 311
+    """Zones are not supported for cell zonelets."""
     SPHEREATINVALIDNORMALNODESFAILED = 350
     """Please Document"""
     PROJECTONCADGEOMETRYFAILED = 351
     """Please Document"""
     SEPARATIONRESULTSFAILED = 360
-    """Please Document"""
-    STRUCTUREDBLOCKSEPARATIONFAILED = 361
-    """Please Document"""
-    MERGEFACEZONELETSRESULTSFAILED = 371
-    """Please Document"""
-    COPYFACEZONELETSRESULTSFAILED = 372
-    """Please Document"""
-    COPYEDGEZONELETSRESULTSFAILED = 373
     """Please Document"""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Please Document"""
@@ -172,33 +151,13 @@ class ErrorCode(enum.IntEnum):
     """Please Document"""
     READSIZEFIELDFAILED = 503
     """Please Document"""
-    WRITESIZEFIELDFAILED = 503
-    """Please Document"""
     READPMDBFAILED = 504
     """Please Document"""
     READCDBFAILED = 505
     """Please Document"""
     WRITECDBFAILED = 506
     """Please Document"""
-    READG2MFAILED = 507
-    """Please Document"""
-    WRITEM2GFAILED = 508
-    """Please Document"""
-    READNLAD2DFAILED = 509
-    """Please Document"""
-    WRITENLAD2DFAILED = 510
-    """Please Document"""
     PATHNOTFOUND = 511
-    """Please Document"""
-    READPROJFAILED = 512
-    """Please Document"""
-    WRITEPROJFAILED = 513
-    """Please Document"""
-    READMZPROJECTFAILED = 514
-    """Please Document"""
-    WRITEMZPROJECTFAILED = 515
-    """Please Document"""
-    WRITEBLOCKINGFAILED = 516
     """Please Document"""
     READKEYWORDFILEFAILED = 517
     """Please Document"""
@@ -208,204 +167,56 @@ class ErrorCode(enum.IntEnum):
     """Please Document"""
     INCLUDEKFILENOTFOUND = 520
     """Please Document"""
-    READVTKFAILED = 521
-    """Please Document"""
     READSIZECONTROLFAILED = 522
     """Please Document"""
     WRITESIZECONTROLFAILED = 523
     """Please Document"""
     FILENOTFOUND = 524
-    """Please Document"""
+    """File path or name not found."""
     READPMDATFAILED = 525
-    """Please Document"""
-    CREATECHECKPOINTFAILED = 550
-    """Please Document"""
-    RESTORECHECKPOINTFAILED = 551
-    """Please Document"""
-    CLEARCHECKPOINTFAILED = 552
-    """Please Document"""
+    """PMDAT file read failed."""
+    EXPORTFLUENTCASEFAILED = 526
+    """Export fluent case failed."""
+    VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE = 527
+    """Volume zones are not found to export fluent case."""
+    IMPORTFLUENTMESHINGMSHFAILED = 528
+    """Failed to import fluent meshing mesh file."""
+    IMPORTFLUENTCASEFAILED = 529
+    """Failed to import fluent case file."""
+    WRITEPMDATFAILED = 530
+    """Failed to write PMDAT file."""
+    EXPORTFLUENTMESHINGMSHFAILED = 531
+    """Export fluent meshing mesh failed."""
+    WRITESIZEFIELDFAILED = 532
+    """Writing size field failed."""
     UNDOFAILED = 570
     """Please Document"""
     REDOFAILED = 571
     """Please Document"""
-    WELDCONTROLNOTDEFINED = 600
-    """Please Document"""
-    WELDMESHERBADINPUTPARAMS = 601
-    """Please Document"""
-    WELDINPUTWELDEDGEEMPTY = 602
-    """Please Document"""
-    NEARBYENTITYNOTFOUND = 603
-    """Please Document"""
-    CREATETENTFACESFAILED = 604
-    """Please Document"""
-    WELDFACESCONNECTEDBADLY = 605
-    """Please Document"""
-    SPOTWELDLOCATIONSNOTPROVIDED = 606
-    """Please Document"""
-    SPOTWELDLOCATIONSINFOINCOMPLETE = 607
-    """Please Document"""
-    SPOTWELDCREATIONFAILED = 608
-    """Please Document"""
-    SPOTWELDNOFACESFOUNDWITHININPUTRADIUS = 609
-    """Please Document"""
-    SPOTWELDDESIREDNUMBEROFLAYERSNOTFOUND = 610
-    """Please Document"""
-    ORTHOGONALSPOTWELDNOTPOSSIBLE = 611
-    """Please Document"""
-    SPOTWELDSNAPTOEDGETOLNOTPROVIDED = 612
-    """Please Document"""
-    SPOTWELDLABELSNOTDEFINED = 613
-    """Please Document"""
-    SPOTWELDSNAPTOEDGEVIOLATESANGLETOL = 614
-    """Please Document"""
-    WELDLINETOOCLOSETOUPEGDE = 615
-    """Please Document"""
-    WELDINPUTEDGESDONTBELONGTOUPFACES = 616
-    """Please Document"""
-    WELDINPUTUPFACEEMPTY = 617
-    """Please Document"""
-    WELDINPUTDOWNFACEEMPTY = 618
-    """Please Document"""
-    WELDINPUTEDGELISTHASREPETITION = 619
-    """Please Document"""
-    WELDINPUTUPFACELISTHASREPETITION = 620
-    """Please Document"""
-    WELDINPUTDOWNFACELISTHASREPETITION = 621
-    """Please Document"""
-    WELDINPUTWELDEDGENOTCONTINUOUS = 622
-    """Please Document"""
-    WELDWRONGLAPWELDANGLEINPUT = 623
-    """Please Document"""
-    WELDREPLACESUPPRESSFAILURE = 624
-    """Please Document"""
-    SPOTWELDLOCATIONSOUTSIDEBBOX = 625
-    """Please Document"""
-    RIGIDWELDNOEXTENSIONFACESEXITS = 626
-    """Please Document"""
-    SPOTWELDINPUTMESHSIZENOTPROVIDED = 627
-    """Please Document"""
-    WELDUNABLETOFINDUPFACEEDGE = 628
-    """Please Document"""
-    WELDINTERSECTIONCONFIGURATIONNOTSUPPORTED = 629
-    """Please Document"""
-    WELDINTERSECTIONWORKSFOREXTENSIONONLY = 630
-    """Please Document"""
-    WELDINTERSECTIONGAPFILLINGFAILED = 631
-    """Please Document"""
-    WELDINTERSECTIONREQUIRESSUCCESSFULWELDCREATION = 632
-    """Please Document"""
-    WELDINTERSECTIONINVALIDWELDCONTROLID = 633
-    """Please Document"""
-    WELDINTERSECTIONNEEDSATLEASTTWOWELDS = 634
-    """Please Document"""
-    OCTFORESTCONSTRUCTIONFAILED = 700
-    """Please Document"""
-    CONFORMALHEXMESHINGPROJECTIONFAILED = 800
-    """Please Document"""
-    MECHMESHERFAILED = 900
-    """Please Document"""
-    INVALIDINPUTMODEL = 901
-    """Please Document"""
-    HARDNODENOTPRESERVED = 902
-    """Please Document"""
-    INTERSECTIONFAILED = 903
-    """Please Document"""
-    INVALIDFRACTUREMESH = 904
-    """Please Document"""
-    QUALITYIMPROVEMENTFAILED = 905
-    """Please Document"""
-    LARGESIZEDIFFERENCE = 906
-    """Please Document"""
-    LARGEPORTIONBADQUALITYELEMENTS = 907
-    """Please Document"""
-    ADAPTMESHSIZEFAILED = 908
-    """Please Document"""
-    INVALIDELEMENTS = 909
-    """Please Document"""
-    BADQUALITYELEMENTS = 910
-    """Please Document"""
-    QUADRATICEDGEPROJECTIONFAILED = 911
-    """Please Document"""
-    QUADRATICFACEPROJECTIONFAILED = 912
-    """Please Document"""
-    NULLPTR = 913
-    """Please Document"""
-    UNSUPPORTSIZEFIELDTYPE = 914
-    """Please Document"""
-    SPLITATHARDMIDNODE = 915
-    """Please Document"""
-    INPUTMESHSIZETOOCOARSE = 916
-    """Please Document"""
-    INPUTMESHQUALITYTOOBAD = 917
-    """Please Document"""
-    SMOOTHBADEDGEMIDPNTFAILED = 918
-    """Please Document"""
-    SIZEADAPTFAILURE = 919
-    """Please Document"""
-    INVERSEMAPPINGFAILURE = 920
-    """Please Document"""
-    LOADINGASSOCIATIONFAILED = 921
-    """Please Document"""
-    LOADINGGEOMETRYFAILED = 922
-    """Please Document"""
-    SELFMERGEFAILED = 923
-    """Please Document"""
-    NEWCRACKOUTSIDEOFREGION = 924
-    """Please Document"""
-    NEWCRACKTOOSHALLOW = 925
-    """Please Document"""
-    PROPERTYTABLEINVALIDTYPE = 1001
-    """Please Document"""
-    PACKPARTICLESNOWATERTIGHTREGION = 1100
-    """Please Document"""
     NOTSUPPORTEDFORTOPOLOGYPART = 1200
-    """Please Document"""
+    """Not supported for part with topology data."""
     NOTSUPPORTEDFORHIGHERORDERMESHPART = 1201
     """Please Document"""
     NOTSUPPORTEDFORNONTRIFACEZONE = 1202
-    """Please Document"""
+    """Only triangular face zone is supported."""
     NOTSUPPORTEDFORNONQUADFACEZONE = 1203
     """Please Document"""
     PREPAREFORSOLVERFAILED = 1300
     """Please Document"""
-    MORPHFIELD_INVALIDINPUTVECTORSSIZE = 1400
-    """Please Document"""
-    MORPHFIELD_SOLVEFIELDFAILED = 1401
-    """Please Document"""
-    MORPHFIELD_EVALUATIONFIELDFAILED = 1402
-    """Please Document"""
-    MORPHFIELD_INVALIDOPERATIONSORDER = 1404
-    """Please Document"""
-    MORPHFIELD_CANNOTREADMORPHFIELDFILE = 1405
-    """Please Document"""
-    MORPHFIELD_CANNOTWRITEMORPHFIELDFILE = 1406
-    """Please Document"""
-    MORPHFIELD_CANNOTCREATEMORPHFIELD = 1407
-    """Please Document"""
-    MORPHFIELD_CANNOTAPPLYMORPHFIELDFILE = 1408
-    """Please Document"""
-    MORPHFIELD_CANNOTGATHERDATA = 1409
-    """Please Document"""
-    MORPHER_COMPUTEBCS = 1410
-    """Please Document"""
-    MORPHER_MORPHSOLVE = 1411
-    """Please Document"""
-    MORPHER_MORPHAPPLYSOLUTION = 1412
-    """Please Document"""
-    MORPHER_MORPHALONGNORMALSSOLVEANDAPPLY = 1413
-    """Please Document"""
-    MORPHER_EXTERNALFIELDMORPHSOLVEANDAPPLY = 1414
-    """Please Document"""
-    MORPHER_BCSINCORRECTINPUTFORSYMMETRY = 1415
-    """Please Document"""
-    MORPHER_BCSPARTIDNOTPROVIDED = 1416
-    """Please Document"""
-    MORPHER_MORPHWITHTRANSFORMATIONSOLVEANDAPPLY = 1417
-    """Please Document"""
-    MORPHFIELD_APPLYFIELDFAILED = 1418
-    """Please Document"""
-    MORPHFIELD_SERIALIZATIONFAILED = 1419
-    """Please Document"""
+    MERGEPARTSFAILED = 1301
+    """Merge parts failed."""
+    MERGEPARTSWANDWOTOPO = 1302
+    """Merge parts with topology and parts without topology are not supported."""
+    SETNAMEFAILED = 1303
+    """Set name failed."""
+    CONTROLNOTFOUND = 1304
+    """Control not found."""
+    NOINPUT = 1305
+    """No input provided."""
+    DELETEPARTSFAILED = 1306
+    """Delete parts failed."""
+    DELETECONTROLSFAILED = 1307
+    """Delete controls failed."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
     INVALIDSIZECONTROLINPUTS = 1501
@@ -416,12 +227,16 @@ class ErrorCode(enum.IntEnum):
     """Invalid curvature sizing input."""
     INVALIDPROXIMITYSIZINGINPUT = 1504
     """Invalid proximity sizing input."""
-    EXTRACTFEATURESFAILED = 1600
-    """Please Document"""
+    INVALIDSCOPEENTITYTYPEINPUT = 1505
+    """Invalid input scope entity type."""
+    EXTRACTFEATURESBYANGLEFAILED = 1600
+    """Feature extraction by angle failed."""
     EXTRACTFEATURESBYEDGESFAILED = 1601
     """Please Document"""
     CREATEEDGEZONELETFAILED = 1602
     """Please Document"""
+    EXTRACTFEATURESBYINTERSECTIONFAILED = 1603
+    """Feature extraction by intersection failed."""
     NOSIDEFRONTFACES = 1700
     """Please Document"""
     NOTALLSIDEFRONTFACES = 1701
@@ -451,24 +266,6 @@ class ErrorCode(enum.IntEnum):
     VOLUMEMESH_MIDNODESNOTSUPPORTED = 1800
     """Please Document"""
     VOLUMEMESHNOTFOUND = 1801
-    """Please Document"""
-    MESHDISTRIBUTIONFAILED = 1802
-    """Please Document"""
-    UNOCONTROL_CONTROLNOTSTORED = 1900
-    """Please Document"""
-    UNOCONTROL_EMPTYCONTROLLIST = 1901
-    """Please Document"""
-    UNO_CANNOTOPENFILE = 1902
-    """Please Document"""
-    UNOCONTROL_DUPLICATEDNAMESINFILE = 1903
-    """Please Document"""
-    UNOCONTROL_NOTVALIDCONTROLINFILE = 1904
-    """Please Document"""
-    UNOCONTROL_GENERIC = 1905
-    """Please Document"""
-    UNOOPERATION_NOTVALIDOPERATIONINFILE = 1906
-    """Please Document"""
-    UNOOPERATION_NOTVALIDWORKFLOWINFILE = 1907
     """Please Document"""
     IGA_NURBSOPFAILED = 2400
     """Spline operation failed."""
@@ -506,52 +303,36 @@ class ErrorCode(enum.IntEnum):
     """Quadratic mesh is not supported for solid spline creation."""
     IGA_UNIFORMTRIMMEDNURBSFAILED = 2417
     """Uniform trimmed spline creation failed."""
-    IGA_NONCONFORMALHEXMESH = 2418
-    """Structured hex-mesh in non conformal."""
-    IGA_EMPTYSPLINEIDLIST = 2419
-    """Spline id list is empty."""
-    IGA_INVALIDREFINESPLINEPARAM = 2420
-    """Invalid refine spline parameters."""
-    MZMESHER_GEOMETRYTRANSFERFAILED = 2600
-    """Please Document"""
-    MZMESHER_BLOCKINGFAILED = 2601
-    """Please Document"""
-    MZMESHER_PRISMMESHINGFAILED = 2602
-    """Please Document"""
-    MZMESHER_MESHINGFAILED = 2603
-    """Please Document"""
-    MZMESHER_MESHTRANSFERFAILED = 2604
-    """Please Document"""
-    MZMESHER_SETMATCHCONTROLFAILED = 2605
-    """Please Document"""
-    SWEEPERINVALIDINPUT = 2705
-    """Please Document"""
-    SWEEPERINVALIDPARAMS = 2706
-    """Please Document"""
-    SWEEPERINTERSECTINGDIRECTIONS = 2707
-    """Please Document"""
-    SWEEPERCLOSEDBODYCOMPUTATIONFAILED = 2708
-    """Please Document"""
     PARTHASTOPOLOGY = 2800
-    """Please Document"""
-    SEARCHHOLESONFACEZONELETSFAILED = 2801
-    """Please Document"""
+    """Part has a topology."""
     SURFACESEARCHFAILED = 2802
-    """Please Document"""
+    """Part has a topology."""
     SURFACESEARCHPARTWITHMESHNOTFOUND = 2803
     """Part with mesh not found for surface quality check."""
-    NODESNOTFOUND = 2900
-    """Please Document"""
-    FILLHOLEFAILED = 2901
-    """Please Document"""
-    CREATEFACEZONELETSBYEDGEZONELETSFAILED = 2902
-    """Please Document"""
+    INVALIDPLANEPOINTS = 2804
+    """Invalid plane points, cannot define a plane."""
+    PLANECOLLINEARPOINTS = 2805
+    """Collinear or duplicate points given to define plane."""
+    INVALIDREGISTERID = 2806
+    """Invalid register id provided. Register ids between 1 to 28 are valid."""
+    INVALIDINPUTZONELETS = 2807
+    """Invalid input zonelets for surface search."""
+    VOLUMESEARCHPARTWITHMESHNOTFOUND = 2850
+    """Part with mesh not found for volume quality check."""
+    VOLUMESEARCHFAILED = 2851
+    """Volume search failed."""
+    INVALIDCELLQUALITYLIMIT = 2852
+    """Invalid cell quality limit."""
+    SUBTRACTZONELETSFAILED = 2903
+    """Unable to subtract cutters from input zonelets."""
     TRANSFORMATIONFAILED = 3000
     """Please Document"""
     SCALINGFAILED = 3001
     """Please Document"""
     ALIGNMENTFAILED = 3002
     """Please Document"""
+    INVALIDTRANSFORMATIONMATRIX = 3003
+    """Invalid transformation matrix."""
     DELETEMESHFACESFAILED = 3200
     """Please Document"""
     DELETEMESHFACES_TOPOLOGYNOTSUPPORTED = 3201
@@ -560,13 +341,15 @@ class ErrorCode(enum.IntEnum):
     """Please Document"""
     DELETEFRINGESANDOVERLAPSFAILED = 3203
     """Please Document"""
+    DELETEZONELETSCONNECTEDTOCELLS = 3204
+    """Cannot delete zonelets connected to volume mesh."""
+    DELETEZONELETSFAILED = 3205
+    """Delete zonelets failed."""
     MATERIALPOINTWITHSAMENAMEEXISTS = 3300
     """Please Document"""
     MATERIALPOINTWITHGIVENNAMEDOESNTEXIST = 3301
-    """Please Document"""
+    """Material point with the given name does not exist."""
     MATERIALPOINTWITHGIVENIDDOESNTEXIST = 3302
-    """Please Document"""
-    MATERIALPOINTWITHSAMEIDEXISTS = 3303
     """Please Document"""
     WRAPPERGLOBALSETTINGSNOTSET = 3400
     """Please Document"""
@@ -574,14 +357,14 @@ class ErrorCode(enum.IntEnum):
     """Please Document"""
     WRAPPERCONNECTFAILED = 3402
     """Please Document"""
-    WRAPPERFATALERROR = 3403
-    """Please Document"""
-    WRAPPERCOULDNOTSETUPFROMXMLFILE = 3404
-    """Please Document"""
     WRAPPERCOULDNOTEXTRACTINTERFACE = 3405
-    """Please Document"""
+    """Failed to extract wrapper interface."""
     WRAPPERLEAKPREVENTIONFAILED = 3406
-    """Please Document"""
+    """Wrapper leak prevention failed."""
+    WRAPPERUNSUPPORTEDWRAPREGION = 3407
+    """Wrap region option provided does not support wrap operation."""
+    WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED = 3408
+    """Live material points list provided for wrapper control is empty."""
     WRAPPERSURFACEHASHOLES = 3410
     """Please Document"""
     WRAPPEROCTREEREGIONINGFAILED = 3411
@@ -589,155 +372,114 @@ class ErrorCode(enum.IntEnum):
     WRAPPERPROJECTIONFAILED = 3412
     """Please Document"""
     WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST = 3413
-    """Please Document"""
+    """Live material point added to wrapper control doesn't exist."""
     WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST = 3414
     """Please Document"""
-    MESHEDITCANNOTMOVEMULTIPLENODES = 3500
-    """Please Document"""
-    MESHEDITNODEATEDGEBOUNDARY = 3501
-    """Please Document"""
-    MESHEDITINVALIDPOSITION = 3502
-    """Please Document"""
-    MESHEDITNOTSUPPORTEDFORHIGHERORDER = 3503
-    """Please Document"""
-    MESHEDITNOTINITIALIZED = 3504
-    """Please Document"""
-    MESHEDITNOTSUPPORTEDFORPARTSWITHVOLUMEMESH = 3505
-    """Please Document"""
-    MESHEDITSWAPEDGEFAILED = 3506
-    """Please Document"""
-    MESHEDITSWAPEDGEFAILED_FACESONDIFFERENTZONELET = 3507
-    """Please Document"""
-    MESHEDITSWAPEDGEFAILED_TGEDGEPRESENT = 3508
-    """Please Document"""
-    MESHEDITNODEMOVEMENTNOTINITIALIZED = 3509
-    """Please Document"""
-    MESHEDITPROJECTTOPLANENOTSUPPORTTOPOLOGY = 3510
-    """Please Document"""
-    MESHEDITMERGETRIFACESFAILED_UNSUPPORTEDFACES = 3511
-    """Please Document"""
-    MESHEDITMERGENODESFAILED = 3512
-    """Please Document"""
-    MESHEDITPOLYNOTSUPPORTED = 3513
-    """Please Document"""
-    VT_BADINPUT = 3600
-    """Please Document"""
-    VT_MERGEFACESFAILED = 3601
-    """Please Document"""
-    VT_MERGETHINSTRIPESFAILED = 3602
-    """Please Document"""
-    VT_MERGETHINEXTFAILED = 3603
-    """Please Document"""
-    VT_REPAIRSHARPCORNERANGLESFAILED = 3604
-    """Please Document"""
-    VT_PINCHFACESFAILED = 3605
-    """Please Document"""
-    VT_FILLHOLEFAILED = 3606
-    """Please Document"""
-    VT_FILLANNULARHOLEFAILED = 3607
-    """Please Document"""
-    VT_COLLAPSESHORTEDGESFAILED = 3608
-    """Please Document"""
-    MORPHFIELDMANAGER_GENERIC = 4000
-    """Please Document"""
-    MORPHFIELDMANAGER_INCORRECTINPUTBBOXES = 4001
-    """Please Document"""
-    MORPHFIELDMANAGER_INCORRECTSTOPRECORDING = 4002
-    """Please Document"""
-    MORPHFIELDMANAGER_FILEERROR = 4003
-    """Please Document"""
-    MORPHFIELDMANAGER_INCORRECTNAME = 4004
-    """Please Document"""
-    MORPHFIELDMANAGER_DUPLICATENAME = 4005
-    """Please Document"""
-    MORPHFIELDPLAYER_GENERIC = 5001
-    """Please Document"""
-    MORPHFIELDPLAYER_MORPHFIELDNOTINITIALIZED = 5002
-    """Please Document"""
-    MORPHFIELDPLAYER_MORPHFIELDALREADYINITIALIZED = 5003
-    """Please Document"""
-    MORPHFIELDPLAYER_SOLVEFAILED = 5004
-    """Please Document"""
-    MORPHFIELDPLAYER_INCORRECTNAME = 5005
-    """Please Document"""
-    MORPHFIELDPLAYER_DUPLICATENAME = 5006
-    """Please Document"""
-    MORPHFIELDPLAYER_ONLYTRANSFORMATIONSUPPORT = 5007
-    """Please Document"""
-    CREATENODEENTITIESFAILED = 5500
-    """Please Document"""
-    CREATEEDGEENTITIESFAILED = 5501
-    """Please Document"""
-    CREATEFACEENTITIESFAILED = 5502
-    """Please Document"""
-    EXPRESSION_MISSING_OPERATOR = 7100
-    """Please Document"""
-    EXPRESSION_UNSUPPORTED_OPERATOR = 7101
-    """Please Document"""
-    EXPRESSION_MISPLACED_OPERATOR = 7102
-    """Please Document"""
-    EXPRESSION_MISSING_VARIABLE_VALUE = 7103
-    """Please Document"""
-    EXPRESSION_ARITHMETIC_EXCEPTION = 7104
-    """Please Document"""
+    WRAPPERSIZINGMETHODNOTSUPPORTED = 3415
+    """Sizing method is not supported for wrapper."""
+    WRAPPERIMPROVEFAILED = 3416
+    """Wrapper improve quality failed."""
+    WRAPPERSIZEFIELDSNOTDEFINED = 3419
+    """No size field ids provided for wrapping."""
+    WRAPPERCONTROL_INVALIDGEOMETRYSCOPE = 3420
+    """Geometry scope specified under wrapper control is invalid."""
+    WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID = 3421
+    """Contact prevention specified under wrapper control doesn't exist."""
+    WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS = 3422
+    """Contact prevention control specified under wrapper is invalid."""
+    WRAPPERCONTROL_INVALIDLEAKPREVENTIONID = 3423
+    """Leak prevention specified under wrapper control doesn't exist."""
+    WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS = 3424
+    """Leak prevention control specified under wrapper is invalid."""
+    WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID = 3425
+    """Feature recovery control specified under wrapper control doesn't exist."""
+    WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE = 3426
+    """Dead material point cannot be same as live."""
+    INVALIDWRAPPERCONTROL = 3427
+    """Invalid wrapper control."""
+    SIZEFIELDTYPENOTSUPPORTED = 8001
+    """Provided Size Field Type is not supported by this operation."""
+    UNSUPPORTEDFILEEXTENSIONFORPMDAT = 9001
+    """Provided file extension is not supported. Supported extensions are .pmdat and .pmdat.gz"""
+    UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH = 9002
+    """Provided file extension is not supported. Supported extensions are .msh and .msh.gz"""
+    UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE = 9003
+    """Provided file extension is not supported. Supported extensions are .cas and .cas.gz"""
+    UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE = 9004
+    """Provided file extension is not supported. Supported extensions are .k and .key"""
+    UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD = 9005
+    """Provided file extension is not supported. Supported extensions are .sf and .sf.gz"""
+    UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD = 9006
+    """Provided file extension is not supported. Supported extensions are .psf and .psf.gz"""
+    UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB = 9007
+    """Provided file extension is not supported. Supported extension is .cdb"""
 
 class WarningCode(enum.IntEnum):
-    """Warning codes associated with failure of PRIME operation.
+    """Warning codes associated with the PRIME operation.
     """
     NOWARNING = 0
     UNKNOWN = 1
-    WELD_WIDTHADJUSTFAILED = 5
-    WELD_HEIGHTADJUSTFAILED = 6
-    WELD_INTERSECTIONFOUND = 7
-    SPOTWELD_FACELABELSNOTPROVIDED = 8
-    SPOTWELD_NOFACESWITHPROVIDEDLABELSEXITS = 9
-    SPOTWELD_RBEONTRIFACE = 10
-    WELD_WRONGINPUTTOLERANCE = 11
-    WELD_WRONGINPUTANGLE = 12
-    WELD_SHARPBENDINWELDCURVE = 13
-    SPOTWELD_DEGENERATEDBEAM = 14
-    WELD_PARTIALWELDCREATED = 15
-    WELD_NOEXTENSIONFACESDUETOCOINCIDENCE = 16
-    WELD_INTERSECTIONNEEDSATLEASTTWOWELDS = 17
-    WELD_INTERSECTIONGAPFILLINGINCOMPLETE = 18
-    WELD_HEIGHTADJUSTMENTNOTSUPPORTEDFORINTERSECTINGWELDS = 19
-    WELD_INTERSECTIONNOTSUPPORTEDFORTENTANDEXTENSION = 20
-    WELD_INTERSECTIONNOTSUPPORTEDAROUND3DFILLETSURFACE = 21
-    WELD_INTERSECTIONNOTSUPPORTEDFORINTERMITTENTSEAMWELDS = 22
-    WELD_SHEETTHICKNESSISTOOSMALL = 23
-    WELD_SEPARATEWELDFACESCREATED = 24
-    SURFER_AUTOSIZING_MULTITHREADINGNOTSUPPORTED = 101
     SURFER_QUADCLEANUP_MULTITHREADINGNOTSUPPORTED = 102
+    """Please Document."""
     OVERRIDECURVATURESIZINGPARAMS = 201
+    """Please Document."""
     OVERRIDESOFTSIZINGPARAMS = 202
+    """Please Document."""
     OVERRIDEHARDSIZINGPARAMS = 203
+    """Please Document."""
     OVERRIDEPROXIMITYSIZINGPARAMS = 204
+    """Please Document."""
     OVERRIDEBOISIZINGPARAMS = 205
+    """Please Document."""
     OVERRIDEMESHEDSIZINGPARAMS = 206
+    """Please Document."""
     OVERRIDESUGGESTEDNAME = 301
-    MORPHER_BIASINGNOMORPHNODES = 1600
-    MORPHER_MOVABLEEDGESUNSUPPORTED = 1601
-    MORPHER_ONSELECTIONWHILEMORPHING = 1602
-    MORPHFIELD_RECORDINGCANCELLED = 1700
-    MORPHFIELD_APPLYCANCELLED = 1701
-    UNOCONTROL_EMPTYCONTROLLIST = 1800
-    UNOCONTROL_CONTROLNOTSTORED = 1801
-    UNOCONTROL_NOCONTROLSINFILE = 1802
-    UNOCONTROL_DUPLICATEDNAMES = 1902
-    UNOCONTROL_INVALIDCONTROLFILE = 1803
-    UNOCONTROL_INVALIDSCOPETYPE = 1804
-    UNOCONTROL_INVALIDSCOPEENTITY = 1805
-    UNOCONTROL_INVALIDDATA = 1806
-    UNOCONTROL_INVALIDSCOPEENTITYSIZE = 1807
-    UNOOPERATION_NOOPERATIONSINFILE = 1808
-    UNOOPERATION_INVALIDOPERATIONFILE = 1809
-    UNOWORKFLOW_NOOPERATIONSINFILE = 1810
-    UNOWORKFLOW_INVALIDOPERATIONFILE = 1811
-    UNOWORKFLOW_NOWORKFLOWSINFILE = 1812
-    UNOWORKFLOW_INVALIDWORKFLOWFILE = 1813
+    """Override name by suggested name."""
+    OVERRIDESURFACESCOPEENTITY = 401
+    """Override surface scope entity."""
+    OVERRIDEVOLUMESCOPEENTITY = 402
+    """Override volume scope entity."""
     SURFERLAYEREDQUADFAILED = 1800
+    """Please Document."""
     SURFERDEGENERATEFACE = 1801
+    """Please Document."""
     ALIGN_OPERATIONINTERRUPTED = 1900
-    MORPHFIELDMANAGER_INCORRECTNAME = 4004
-    MORPHFIELDMANAGER_DUPLICATENAME = 4005
+    """Please Document."""
     IGA_NOGEOMZONELETFORSPLINEFITTING = 5001
+    """Please Document."""
+    NOHOLESFOUNDONPLANE = 5501
+    """Provides warning when no closed holes are found in the given face zonelets at given plane."""
+    NOVOLUMESCOMPUTED = 5600
+    """There are no volumes found."""
+    EXTERNALOPENFACEZONELETSFOUND = 5601
+    """External open face zonelets found when computing volumes."""
+    NOVOLUMESENCLOSINGMATERIALPOINT = 5602
+    """No computed volumes enclosing material point."""
+    EXTERNALOPENTOPOFACESFOUND = 5603
+    """External open topofaces found when computing topovolumes."""
+    WRAPPER_SIZECONTROLNOTDEFINED = 6001
+    """No size controls provided for wrapper."""
+    WRAPPER_SIZECONTROLNOTSUPPORTED = 6002
+    """Size control is not supported in wrapper."""
+    WRAPPER_SMALLERSIZEATFEAURES = 6003
+    """Size at features is smaller than base size."""
+    WRAPPER_SMALLERCONTACTPREVENTIONSIZE = 6004
+    """Contact prevention size is smaller than base size."""
+    MATERIALPOINTWITHSAMENAMEEXISTS = 6005
+    """Material point with the same name exists. Overriding with unique name."""
+    ENTITIESNOTBELONGTOANYZONE = 6201
+    """Entities do not belong to any zone."""
+    INVALIDENTITIESNOTADDEDTOZONE = 6202
+    """Entities with invalid id or type not added to zone."""
+    LOCALSURFERNOFACEREGISTERED = 7001
+    """No face registered with the given register id."""
+    MESHHASNONPOSITIVEVOLUMES = 7104
+    """Mesh has non positive volumes."""
+    MESHHASNONPOSITIVEAREAS = 7105
+    """Mesh has non positive areas."""
+    MESHHASINVALIDSHAPE = 7106
+    """Mesh has invalid shape."""
+    MESHHASLEFTHANDEDNESSFACES = 7107
+    """Mesh has invalid shape."""
+    DUPLICATEINPUT = 8001
+    """Duplicate items in input."""
