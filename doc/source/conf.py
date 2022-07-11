@@ -16,10 +16,7 @@ html_logo = pyansys_logo_black
 html_theme = 'pyansys_sphinx_theme'
 
 # specify the location of your github repo
-html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyprime",
-    "show_prev_next": False
-}
+html_theme_options = {"github_url": "https://github.com/pyansys/pyprime", "show_prev_next": False}
 
 # Sphinx extensions
 extensions = [
@@ -33,9 +30,7 @@ extensions = [
 # Intersphinx mapping
 intersphinx_mapping = {
     "python": ("https://docs.python.org/dev", None),
-
     # kept here as an example
-
     # "scipy": ("https://docs.scipy.org/doc/scipy/reference", None),
     # "numpy": ("https://numpy.org/devdocs", None),
     # "matplotlib": ("https://matplotlib.org/stable", None),

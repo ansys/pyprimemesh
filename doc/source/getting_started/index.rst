@@ -71,7 +71,7 @@ Verifying the Installation
 
 
 
-
+Note: You should not modify the auto-generated files in PyPrime.
 
 
 
