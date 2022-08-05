@@ -60,7 +60,7 @@ jobs:
           twine check dist/*
 
       - name: Install library
-        run: pip install dist/*
+        run: pip install dist/* --find-links deps
 
       # - name: Unit testing
       #   run: |
@@ -87,12 +87,11 @@ jobs:
           python-version: 3.8
 
       - name: Install library
-        run: pip install .
+        run: pip install . --find-links deps
 
       - name: Build HTML
         run: |
           pip install -r requirements_docs.txt
-          pip install -e .
           make -C doc html SPHINXOPTS="-W"
 
       - name: Build PDF Documentation
