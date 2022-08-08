@@ -1,3 +1,2 @@
-grpcio >= 1.26.0
-protobuf >= 3.12.2
+ansys-api-meshing-prime == 0.1.1
 numpy >= 1.14.0

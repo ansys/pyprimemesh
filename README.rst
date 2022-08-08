@@ -1,5 +1,5 @@
-PyPrime Documentation 0.1.0
-============================
+PyPrime Documentation
+=====================
 --------------------------
 Introduction and Purpose 
 --------------------------

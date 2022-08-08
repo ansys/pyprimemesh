@@ -48,9 +48,11 @@ PyPrime Community use the issue thread as a place to discuss and provide feedbac
 ----------------------
 Contributing New Code
 ----------------------
-If you have an idea for how to enhance PyPrime, consider first creating an issue as a feature request 
-which we can use as a discussion thread to work through how to implement the contribution.
+If you have an idea on how to enhance PyPrime, consider first creating the issue as a feature request 
+which we can use as a discussion thread to work on for implementing the contribution.
 Once you are ready to start coding, kindly see the Development Practices section for more details.
+
+Note: You should not modify the auto-genearted files in PyPrime.
 
 ----------
 Licensing
