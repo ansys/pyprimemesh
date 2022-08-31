@@ -6,9 +6,10 @@ on:
   pull_request:
   push:
     tags:
-      - "*"
+      - "v*"
     branches:
       - main
+      - release/*
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,11 +25,11 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install style requirements
         run: |
-          pip install -r requirements_style.txt --disable-pip-version-check
+          pip install -r requirements/requirements_style.txt
 
       - name: Codespell
         run: |
@@ -38,17 +39,42 @@ jobs:
         run: |
           make flake8
 
-  main:
-    name: Build and Testing
-    runs-on: ubuntu-latest
+  build:
+    name: Sanity check
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ['3.7', '3.8', '3.9']
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: ${{ matrix.python-version }}
 
+      - name: Linux pip cache
+        uses: actions/cache@v3
+        if: ${{ runner.os == 'Linux' }}
+        with:
+          path: ~/.cache/pip
+          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
+          restore-keys: |
+            Python-${{ runner.os }}-${{ matrix.python-version }}
+
+      - name: Windows pip cache
+        uses: actions/cache@v3
+        if: ${{ runner.os == 'Windows' }}
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
+          restore-keys: |
+            Python-${{ runner.os }}-${{ matrix.python-version }}
+      
       - name: Create wheel
         run: |
           pip install build
@@ -60,38 +86,39 @@ jobs:
           twine check dist/*
 
       - name: Install library
-        run: pip install dist/* --find-links deps
+        run: pip install dist/*
 
-      # - name: Unit testing
-      #   run: |
-      #     pip install -r requirements_test.txt
-      #     cd tests  # so we're testing the install, not local
-      #     pytest -vx
-
-      - name: Upload wheel
-        uses: actions/upload-artifact@v2
-        with:
-          name: PyPrime-client-wheel
-          path: dist/
-          retention-days: 7
+      - name: Test import
+        run: |
+          python -c "import ansys.meshing.prime"
 
   docs:
-    name: Build Documentation
+    name: Documentation
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      
+      # Used to only publish documentation when there is a push
+      - name: Get Bot Application Token
+        if: github.event_name == 'push'
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v1
+        with:
+          application_id: ${{ secrets.BOT_APPLICATION_ID }}
+          application_private_key: ${{ secrets.BOT_APPLICATION_PRIVATE_KEY }}
+      
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install library
-        run: pip install . --find-links deps
+        run: pip install .
 
       - name: Build HTML
         run: |
-          pip install -r requirements_docs.txt
+          pip install -r requirements/requirements_docs.txt
           make -C doc html SPHINXOPTS="-W"
 
       - name: Build PDF Documentation
@@ -103,20 +130,90 @@ jobs:
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v2
         with:
-          name: Documentation-html
+          name: pyprime-docs-html
           path: doc/build/html
           retention-days: 7
 
       - name: Upload PDF Documentation
         uses: actions/upload-artifact@v2
         with:
-          name: Documentation-pdf
+          name: pyprime-docs-pdf
           path: doc/build/latex/*.pdf
           retention-days: 7
+      
+      # Deploy Latest Release Documentation (Disabled)
+      # - name: Deploy Documentation
+      #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
+      #   uses: JamesIves/github-pages-deploy-action@v4.4.0
+      #   with:
+      #     repository-name: pyansys/pyprime-docs
+      #     token: ${{ steps.get_workflow_token.outputs.token }}
+      #     branch: gh-pages
+      #     folder: doc/build/html
+      #     clean: true
 
-  Release:
-    if: contains(github.ref, 'refs/tags')
-    needs: [main, style, docs]
+      # Deploy Latest Developer Documentation
+      - name: Deploy Documentation
+        if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
+        with:
+          repository-name: pyansys/pyprime-dev-docs
+          token: ${{ steps.get_workflow_token.outputs.token }}
+          branch: gh-pages
+          folder: doc/build/html
+          clean: true
+  
+  testing:
+    name: Test Validation
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
+          restore-keys: |
+            Python-${{ runner.os }}-${{ matrix.python-version }}
+      
+      - name: Build and Install PyPrime
+        run: |
+          pip install build
+          python -m build .
+          pip install dist/*
+      
+      - name: Run Unit Tests
+        run: |
+          pip install -r requirements/requirements_tests.txt
+          echo "Not running unit tests for now..."
+        env:
+          PYPRIME_LAUNCH_CONTAINER: 1
+          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+      
+      - name: Check package
+        run: |
+          pip install twine
+          twine check dist/*
+      
+      - name: Upload wheel
+        uses: actions/upload-artifact@v2
+        with:
+          name: pyprime-client-wheel
+          path: dist/
+          retention-days: 7
+          
+  release:
+    name: Release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: [testing, style, docs]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
@@ -127,42 +224,36 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: actions/download-artifact@v2
-        with:
-          name: ansys-product-library-wheel
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: Documentation-pdf
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: Documentation-html
-          path: ~/html
 
       # list current directory
       - name: List directory structure
         run: ls -R
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          BRANCH: gh-pages
-          FOLDER: ~/html
-          CLEAN: true
-
-      # note how we use the PyPI tokens
-      - name: Upload to Azure PyPi (disabled)
+      - name: Upload to Private PyPi
         run: |
           pip install twine
-          # twine upload --skip-existing ./**/*.whl
+          python -m twine upload --skip-existing ./**/*.whl
+          python -m twine upload --skip-existing ./**/*.tar.gz
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          TWINE_USERNAME: PAT
+          TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
+          TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/upload
 
+      # Upload to PyPI (Disabled)
+      # - name: Upload to Public PyPi
+      #   run: |
+      #     pip install twine
+      #     twine upload --skip-existing ./**/*.whl
+      #     twine upload --skip-existing ./**/*.tar.gz
+      #   env:
+      #     TWINE_USERNAME: __token__
+      #     TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
             ./**/*.whl
+            ./**/*.tar.gz
             ./**/*.zip
             ./**/*.pdf

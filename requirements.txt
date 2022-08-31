@@ -1,2 +1,0 @@
-ansys-api-meshing-prime == 0.1.1
-numpy >= 1.14.0

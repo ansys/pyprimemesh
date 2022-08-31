@@ -5,10 +5,6 @@ from io import open as io_open
 
 from setuptools import setup, find_namespace_packages
 
-install_requires = ['ansys-api-meshing-prime==0.1.1', 'numpy>=1.14.0']
-
-graphics_requires = ['pyvista>=0.32.0']
-
 # Use single source package versioning.  Follows:
 # https://packaging.python.org/guides/single-sourcing-package-version/
 #
@@ -51,13 +47,12 @@ setup(
     license='MIT',
     author='ANSYS, Inc.',  # this is required
     maintainer='PyAnsys developers',  # you can change this
-    # this email group works
     maintainer_email='pyansys.support@ansys.com',
-    # Include all install requirements here.  If you have a longer
-    # list, feel free just to create the list outside of ``setup`` and
-    # add it here.
-    install_requires=install_requires,
-    extras_require={'graphics': graphics_requires},
+    install_requires=[
+        'ansys-api-meshing-prime @ git+https://github.com/ansys/ansys-api-meshing-prime@v0.1.1',
+        'numpy>=1.14.0',
+    ],
+    extras_require={'graphics': ['pyvista>=0.32.0']},
     # Plan on supporting only the currently supported versions of Python
     python_requires='>=3.7, <3.10',
     # Less than critical but helpful
