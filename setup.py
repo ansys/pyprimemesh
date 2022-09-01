@@ -25,7 +25,7 @@ def read(rel_path):
         return fp.read()
 
 
-with open(os.path.join(HERE, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(HERE, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 
