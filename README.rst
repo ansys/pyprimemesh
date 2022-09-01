@@ -20,15 +20,25 @@ PyPrime
 
 Overview
 ---------
-PyPrime provides pythonic access to Prime server. PyPrime provides establishes seamless connection with Prime server and can access Prime APIs from the core  meshing libraries for your meshing requirements. 
+PyPrime provides pythonic access to Prime server. PyPrime provides establishes seamless connection
+with Prime server and can access Prime APIs from the core  meshing libraries for your meshing
+requirements. 
 
-PyPrime Support
-----------------
-'PyPrime Issues<https://github.com/pyansys/pyprime/issues>'_ helps you to create issues  and submit question related to PyPrime. You can also report bugs and  request for new features in PyPrime  Issues. For assistance, reach out to the PyPrime Support team at pyansys.support@ansys.com.
+Documentation and Issues
+------------------------
+For comprehensive information on PyPrime see the latest `documentation
+<https://dev.prime.docs.pyansys.com>`_
+
+If you have questions about PyPrime please post them to the `Discussion
+<https://github.com/pyansys/pyprime/discussions>`_ page. If you face discover and bugs or want to
+request for new features, please file an issue on our `Issues
+<https://github.com/pyansys/pyprime/issues>`_ page. For assistance, reach out to the PyAnsys
+Support team at `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
 Installation
--------------
-PyPrime installation requires  the successful installation of ansys-meshing-prime package. The ansys-meshing-prime package supports Python 3.7 to Python 3.9 on Windows and Linux operating sysytem.
+------------
+The ``ansys-meshing-prime`` package supports Python 3.7 to Python 3.9 on Windows and Linux
+operating system.
 
 PyPrime can be installed directly from PyPi as follows:
 
@@ -36,7 +46,7 @@ PyPrime can be installed directly from PyPi as follows:
 
   pip install ansys-meshing-prime
 
-.. note:: PyPrime is not available in PyPi now.
+.. note:: PyPrime is not available in PyPi at present.
 
 Alternatively, clone and install in development mode with:
 
@@ -47,12 +57,11 @@ Alternatively, clone and install in development mode with:
    pip install -e . --find-links deps
 
 Dependencies
--------------
-
+------------
 You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 
 Get Started
-------------
+-----------
 Launching PyPrime 
 
 To launch PyPrime:
@@ -64,7 +73,9 @@ To launch PyPrime:
 
 License and Acknowledgments
 ----------------------------
-
 PyPrime is licensed under the MIT license.
 
-PyPrime makes no commercial claim over Ansys whatsoever. This library extends the functionality of Prime by adding a Python interface to Prime server without changing the core behavior or license of the original software. The use of the Prime Server requires a legally licensed copy of Ansys Workbench.
+PyPrime makes no commercial claim over Ansys whatsoever. This library extends the functionality of
+Prime by adding a Python interface to Prime server without changing the core behavior or license
+of the original software. The use of the Prime Server requires a legally licensed copy of Ansys
+Workbench.
