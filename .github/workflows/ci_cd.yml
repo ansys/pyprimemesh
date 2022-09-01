@@ -86,7 +86,7 @@ jobs:
           twine check dist/*
 
       - name: Install library
-        run: pip install dist/*
+        run: pip install dist/* --find-links deps
 
       - name: Test import
         run: |
@@ -114,7 +114,7 @@ jobs:
           python-version: 3.9
 
       - name: Install library
-        run: pip install .
+        run: pip install . --find-links deps
 
       - name: Build HTML
         run: |
@@ -188,7 +188,7 @@ jobs:
         run: |
           pip install build
           python -m build .
-          pip install dist/*
+          pip install dist/* --find-links deps
       
       - name: Run Unit Tests
         run: |

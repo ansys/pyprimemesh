@@ -49,7 +49,7 @@ setup(
     maintainer='PyAnsys developers',  # you can change this
     maintainer_email='pyansys.support@ansys.com',
     install_requires=[
-        'ansys-api-meshing-prime @ git+https://github.com/ansys/ansys-api-meshing-prime@v0.1.1',
+        'ansys-api-meshing-prime==0.1.1',
         'numpy>=1.14.0',
     ],
     extras_require={'graphics': ['pyvista>=0.32.0']},
