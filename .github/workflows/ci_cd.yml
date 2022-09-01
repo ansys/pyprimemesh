@@ -45,7 +45,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
         python-version: ['3.7', '3.8', '3.9']
 
     runs-on: ${{ matrix.os }}
@@ -77,20 +77,11 @@ jobs:
       
       - name: Create wheel
         run: |
-          pip install build
-          python -m build -w
-
-      - name: Validate wheel
-        run: |
-          pip install twine
-          twine check dist/*
-
-      - name: Install library
-        run: pip install dist/* --find-links deps
+          pip install . --find-links deps
 
       - name: Test import
         run: |
-          python -c "import ansys.meshing.prime"
+          python -c "import ansys.meshing.prime as pyprime"
 
   docs:
     name: Documentation
@@ -114,11 +105,16 @@ jobs:
           python-version: 3.9
 
       - name: Install library
-        run: pip install . --find-links deps
+        run: |
+          pip install build
+          python -m build . -w
+          pip install dist/* --find-links deps
+
+      - name: Install documentation requirements
+      - run: pip install -r requirements/requirements_docs.txt
 
       - name: Build HTML
         run: |
-          pip install -r requirements/requirements_docs.txt
           make -C doc html SPHINXOPTS="-W"
 
       - name: Build PDF Documentation
