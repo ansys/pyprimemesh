@@ -67,7 +67,8 @@ Launching PyPrime
 To launch PyPrime:
 
 .. code:: python
-
+   
+   import ansys.meshing.prime as pyprime
    with pyprime.launch_prime() as session:
        model = session.model
 
