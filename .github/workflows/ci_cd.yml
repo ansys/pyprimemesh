@@ -111,7 +111,7 @@ jobs:
           pip install dist/* --find-links deps
 
       - name: Install documentation requirements
-      - run: pip install -r requirements/requirements_docs.txt
+        run: pip install -r requirements/requirements_docs.txt
 
       - name: Build HTML
         run: |
