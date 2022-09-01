@@ -22,7 +22,7 @@ Overview
 ---------
 PyPrime provides pythonic access to Prime server. PyPrime provides establishes seamless connection
 with Prime server and can access Prime APIs from the core  meshing libraries for your meshing
-requirements. 
+requirements.
 
 Documentation and Issues
 ------------------------
@@ -62,8 +62,9 @@ You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 
 Get Started
 -----------
-Launching PyPrime 
 
+Launching PyPrime
+~~~~~~~~~~~~~~~~~
 To launch PyPrime:
 
 .. code:: python
