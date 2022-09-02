@@ -40,7 +40,7 @@ Alternatively, clone and install in development mode with:
 ```bash
 git clone https://github.com/pyansys/pyprime
 cd pyprime
-pip install -e . --find-links deps
+pip install -e .[graphics] --find-links deps
 ```
 
 ## Dependencies
