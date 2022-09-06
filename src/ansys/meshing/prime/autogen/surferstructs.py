@@ -66,9 +66,9 @@ class SurferParams(CoreObject):
         generate_quads: bool, optional
             Option to generate quadrilateral surface mesh.
         smooth_size_transition: bool, optional
-            Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition. Notes: Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work. Notes: Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
+            Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
         enable_multi_threading: bool, optional
-            Option to perform surface meshing in parallel using multi threads.
+            Option to perform surface meshing in parallel using multithreads.
         json_data: dict, optional
             JSON dictionary to create a SurferParams object with provided parameters.
 
@@ -146,9 +146,9 @@ class SurferParams(CoreObject):
         generate_quads: bool, optional
             Option to generate quadrilateral surface mesh.
         smooth_size_transition: bool, optional
-            Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition. Notes: Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work. Notes: Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
+            Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
         enable_multi_threading: bool, optional
-            Option to perform surface meshing in parallel using multi threads.
+            Option to perform surface meshing in parallel using multithreads.
         """
         args = locals()
         [SurferParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -245,7 +245,12 @@ class SurferParams(CoreObject):
 
     @property
     def smooth_size_transition(self) -> bool:
-        """Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition. Notes: Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work. Notes: Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
+        """Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+
+        Notes
+         -----
+          - Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work.
+          - Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
         """
         return self._smooth_size_transition
 
@@ -255,7 +260,7 @@ class SurferParams(CoreObject):
 
     @property
     def enable_multi_threading(self) -> bool:
-        """Option to perform surface meshing in parallel using multi threads.
+        """Option to perform surface meshing in parallel using multithreads.
         """
         return self._enable_multi_threading
 

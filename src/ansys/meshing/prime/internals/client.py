@@ -1,9 +1,13 @@
 # Copyright 2023 ANSYS, Inc.
 # Unauthorized use, distribution, or duplication is prohibited.
+import os
 import logging
 from ansys.meshing.prime.internals.utils import terminate_process
 from ansys.meshing.prime.core.model import Model
 import ansys.meshing.prime.internals.defaults as defaults
+import ansys.meshing.prime.examples as examples
+import ansys.meshing.prime.internals.utils as utils
+import ansys.meshing.prime.internals.config as config
 
 __all__ = ['Client']
 
@@ -34,11 +38,12 @@ class Client(object):
 
                 channel = kwargs.get('channel', None)
                 if channel is not None:
-                    self._comm = GRPCCommunicator(channel=channel)
+                    self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
                 else:
                     self._comm = GRPCCommunicator(
                         ip=ip, port=port, timeout=timeout, credentials=credentials
                     )
+                    setattr(self, 'port', port)
             except ImportError as err:
                 logging.getLogger('PyPrime').error(
                     f'Failed to load grpc_communicator with message: {err.msg}'
@@ -81,7 +86,7 @@ class Client(object):
             return result['Results']
 
     def exit(self):
-        '''Close the connection with the server
+        '''Close the connection with the server.
 
         If the client had launched the server, then this will also
         kill the server process.
@@ -103,6 +108,17 @@ class Client(object):
             assert self._local == False
             terminate_process(self._process)
             self._process = None
+
+        if config.using_container():
+            container_name = getattr(self, 'container_name')
+            utils.stop_prime_github_container(container_name)
+        elif config.has_pim():
+            self.remote_instance.delete()
+            self.pim_client.close()
+
+        clear_examples = bool(int(os.environ.get('PYPRIME_CLEAR_EXAMPLES', '1')))
+        if clear_examples:
+            examples.clear_download_cache()
 
     def __enter__(self):
         return self

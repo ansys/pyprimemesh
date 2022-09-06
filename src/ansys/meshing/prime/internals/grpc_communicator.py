@@ -10,6 +10,7 @@ from ansys.meshing.prime.internals.error_handling import (
 from ansys.meshing.prime.internals.communicator import Communicator
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
+import ansys.meshing.prime.internals.grpc_utils as grpc_utils
 from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 from typing import Optional
 
@@ -54,10 +55,7 @@ class GRPCCommunicator(Communicator):
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
             ip_addr = f"{ip}:{port}"
-            channel_options = [
-                ('grpc.max_send_message_length', defaults.max_message_length()),
-                ('grpc.max_receive_message_length', defaults.max_message_length()),
-            ]
+            channel_options = grpc_utils.get_default_channel_args()
             if credentials is None:
                 self._channel = grpc.insecure_channel(ip_addr, options=channel_options)
             else:

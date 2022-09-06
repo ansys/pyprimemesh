@@ -8,6 +8,16 @@ import logging
 
 from ansys.meshing.prime.internals.client import Client
 import ansys.meshing.prime.internals.defaults as defaults
+import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.utils as utils
+
+try:
+    import ansys.platform.instancemanagement as pypim
+    from simple_upload_server.client import Client as FileClient
+
+    config.set_has_pim(pypim.is_configured())
+except ModuleNotFoundError:
+    pass
 
 __all__ = ['launch_prime', 'launch_server_process']
 
@@ -25,24 +35,6 @@ def get_install_locations():
     }
     if installed_versions:
         return installed_versions
-
-
-def port_in_use(port, host):
-    """Returns True when a port is in use at the given host.
-    Must actually "bind" the address.  Just checking if we can create
-    a socket is insufficient as it's possible to run into permission
-    errors like:
-    - An attempt was made to access a socket in a way forbidden by its
-      access permissions.
-    """
-    import socket
-
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        try:
-            sock.bind((host, port))
-            return False
-        except:
-            return True
 
 
 def get_pyprime_root():
@@ -149,12 +141,52 @@ def launch_server_process(
     return server
 
 
+def launch_remote_prime(
+    version: Optional[str] = None, timeout: float = defaults.connection_timeout()
+):
+    '''Create a remote instance of Prime server using PyPIM
+
+    This method is used in case of Ansys Labs to create a remote instance of prime.
+    This method also creates a file transfer service that is available on Ansys Labs
+    '''
+    if version is None:
+        version = 'latest'
+
+    pim = pypim.connect()
+    instance = pim.create_instance(product_name='prime', product_version=version)
+    instance.wait_for_ready()
+
+    channel = instance.build_grpc_channel(
+        options=[
+            ('grpc.max_send_message_length', defaults.max_message_length()),
+            ('grpc.max_receive_message_length', defaults.max_message_length()),
+        ]
+    )
+
+    client = Client(channel=channel, timeout=timeout)
+    file_service = FileClient(
+        token='token',
+        url=instance.services['http-simple-upload-server'].uri,
+        headers=instance.services['http-simple-upload-server'].headers,
+    )
+
+    client.pim_client = pim
+    client.remote_instance = instance
+    model = client.model
+    model._unfreeze()
+    setattr(model, 'file_service', file_service)
+    model._freeze()
+
+    return client
+
+
 def launch_prime(
     pyprime_root: Optional[str] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
     n_procs: Optional[int] = None,
+    version: Optional[str] = None,
     **kwargs,
 ):
     '''Launch an instance of PyPrime server and get a client for it.
@@ -188,6 +220,21 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the GRPC server.
     '''
+    if 'PYPRIME_LAUNCH_CONTAINER' in os.environ:
+        container_name = 'prime-server'
+        utils.launch_prime_github_container(port=port, name=container_name, version=version)
+        config.set_using_container(True)
+        client = Client(port=port, timeout=timeout)
+        client.container_name = container_name
+        return client
+
+    if config.has_pim():
+        return launch_remote_prime(version=version, timeout=timeout)
+
+    # Check for port availability on local host
+    if ip == defaults.ip():
+        port = utils.get_available_local_port(port)
+
     server = launch_server_process(
         pyprime_root=pyprime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
     )

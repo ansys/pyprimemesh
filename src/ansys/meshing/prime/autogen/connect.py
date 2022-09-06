@@ -11,8 +11,11 @@ class Connect(CoreObject):
     """Connect face zonelets.
 
     Perform surface connection using various connect algorithms on face zonelets.
-    Note: Connect operations like Join, Stitch and Intersect supports only computational mesh
-    (mesh with reasonable size and quality). Faceted geometry with stretched thin facets is not supported.
+
+    Notes
+    -----
+    Connect operations like Join, Stitch and Intersect supports only computational mesh
+    (mesh with reasonable size). Faceted mesh is not supported.
     """
 
     def __init__(self, model: CommunicationManager):

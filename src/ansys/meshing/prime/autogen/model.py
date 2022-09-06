@@ -11,9 +11,9 @@ import logging
 from ansys.meshing.prime.internals import utils
 
 class Model(CoreObject, CommunicationManager):
-    """Model is the nucleus of PRIME. Model forms the base and contains all the information about PRIME.
+    """Model is the nucleus of Prime. Model forms the base and contains all the information about Prime.
 
-    You can access any information in PRIME only through Model.
+    You can access any information in Prime only through Model.
     Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
     """
 
@@ -32,7 +32,7 @@ class Model(CoreObject, CommunicationManager):
         utils.print_logs_after_command(self._logger, command, args)
 
     def delete_parts(self, part_ids : Iterable[int]) -> DeleteResults:
-        """ Deletes the parts and its entities.
+        """ Delete the parts and its entities.
 
 
         Parameters
@@ -43,7 +43,7 @@ class Model(CoreObject, CommunicationManager):
         Returns
         -------
         DeleteResults
-            Returns the DeleteResults.
+            Return the DeleteResults.
 
 
         Examples
@@ -370,7 +370,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def get_zone_name(self, id : int) -> str:
-        """ Gets the name of given zone.
+        """ Get the name of given zone.
 
 
         Parameters
@@ -381,7 +381,7 @@ class Model(CoreObject, CommunicationManager):
         Returns
         -------
         str
-            Returns the name. Returns empty name if the id is invalid.
+            Return the name. Return empty name if the id is invalid.
 
 
         Examples

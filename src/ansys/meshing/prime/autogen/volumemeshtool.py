@@ -33,7 +33,7 @@ class VolumeMeshTool(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def improve_by_auto_node_move(self, part_id : int, cell_zonelets : Iterable[int], boundary_zonelets : Iterable[int], params : AutoNodeMoveParams) -> VolumeMeshToolResults:
-        """ Improves volme mesh by auto node move.
+        """ Improve volume mesh by auto node move.
 
 
         Parameters
@@ -50,7 +50,7 @@ class VolumeMeshTool(CoreObject):
         Returns
         -------
         VolumeMeshToolResults
-            Returns the VolumeMeshToolResults.
+            Return the VolumeMeshToolResults.
 
 
         Examples

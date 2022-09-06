@@ -67,6 +67,8 @@ from ansys.meshing.prime.internals.config import (
     numpy_array_optimization_disabled,
 )
 
+import ansys.meshing.prime.examples as examples
+
 __LOCAL_CLIENT = None
 
 

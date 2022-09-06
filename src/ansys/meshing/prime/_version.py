@@ -14,11 +14,9 @@ Print the version
 0.1.0.dev0
 
 """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 
 # major, minor, patch
-version_info = 0, 2, 0, 'dev0'
+version_info = 0, 2, 0, 'dev9'
 
 # Nice string for the version
 __version__ = '.'.join(map(str, version_info))

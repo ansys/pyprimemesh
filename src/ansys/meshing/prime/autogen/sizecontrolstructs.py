@@ -30,8 +30,8 @@ class CurvatureSizingParams(CoreObject):
     """Size field using curvature size control computes edge and face sizes using their size and normal angle parameters.
 
     The curvature size control uses the normal angle parameter as the maximum allowable angle that one element edge may span.
-    For example, a value of 5 implies that a division will be made when the angle change along the curve is 5 degrees;
-    hence, a 90 degree arc will be divided into approximately 18 segments
+    For example, a value of 5 implies that a division will be made when the angle change along the curve is 5 degrees.
+    Hence, a 90 degree arc will be divided into approximately 18 segments.
     """
     _default_params = {}
 

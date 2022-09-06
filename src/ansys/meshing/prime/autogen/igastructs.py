@@ -333,11 +333,11 @@ class BoundaryFittedSplineParams(CoreObject):
         refinement_fraction_w: float, optional
             Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
         control_points_count_u: int, optional
-            Spline control points count in u direction. Used in manual control points selection mode.
+            Spline control points count in U direction. Used in manual control points selection mode.
         control_points_count_v: int, optional
-            Spline control points count in v direction. Used in manual control points selection mode.
+            Spline control points count in V direction. Used in manual control points selection mode.
         control_points_count_w: int, optional
-            Spline control points count in w direction. Used in manual control points selection mode.
+            Spline control points count in W direction. Used in manual control points selection mode.
         n_refine: int, optional
             Spline refinement level for rendering.
         control_point_selection_type: ControlPointSelection, optional
@@ -431,11 +431,11 @@ class BoundaryFittedSplineParams(CoreObject):
         refinement_fraction_w: float, optional
             Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
         control_points_count_u: int, optional
-            Spline control points count in u direction. Used in manual control points selection mode.
+            Spline control points count in U direction. Used in manual control points selection mode.
         control_points_count_v: int, optional
-            Spline control points count in v direction. Used in manual control points selection mode.
+            Spline control points count in V direction. Used in manual control points selection mode.
         control_points_count_w: int, optional
-            Spline control points count in w direction. Used in manual control points selection mode.
+            Spline control points count in W direction. Used in manual control points selection mode.
         n_refine: int, optional
             Spline refinement level for rendering.
         control_point_selection_type: ControlPointSelection, optional
@@ -539,7 +539,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_points_count_u(self) -> int:
-        """Spline control points count in u direction. Used in manual control points selection mode.
+        """Spline control points count in U direction. Used in manual control points selection mode.
         """
         return self._control_points_count_u
 
@@ -549,7 +549,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_points_count_v(self) -> int:
-        """Spline control points count in v direction. Used in manual control points selection mode.
+        """Spline control points count in V direction. Used in manual control points selection mode.
         """
         return self._control_points_count_v
 
@@ -559,7 +559,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @property
     def control_points_count_w(self) -> int:
-        """Spline control points count in w direction. Used in manual control points selection mode.
+        """Spline control points count in W direction. Used in manual control points selection mode.
         """
         return self._control_points_count_w
 

@@ -3,17 +3,23 @@
 # Copyright 2023 ANSYS, Inc.
 # Unauthorized use, distribution, or duplication is prohibited.
 
+from contextlib import contextmanager
+
 __all__ = [
     'enable_optimizing_numpy_arrays',
     'disable_optimizing_numpy_arrays',
     'is_optimizing_numpy_arrays',
     'numpy_array_optimization_enabled',
     'numpy_array_optimization_disabled',
+    'set_using_container',
+    'using_container',
+    'set_has_pim',
+    'has_pim',
 ]
 
-from contextlib import contextmanager
-
 __DEFAULT_USE_BINARY = False
+__USING_CONTAINER = False
+__HAS_PIM = False
 
 
 def _optimize_vectors():
@@ -83,3 +89,23 @@ def numpy_array_optimization_disabled():
     _set_optimize_vectors(False)
     yield
     _set_optimize_vectors(old_value)
+
+
+def set_using_container(value: bool):
+    global __USING_CONTAINER
+    __USING_CONTAINER = value
+    return __USING_CONTAINER
+
+
+def using_container():
+    return __USING_CONTAINER
+
+
+def set_has_pim(value: bool):
+    global __HAS_PIM
+    __HAS_PIM = value
+    return __HAS_PIM
+
+
+def has_pim():
+    return __HAS_PIM
