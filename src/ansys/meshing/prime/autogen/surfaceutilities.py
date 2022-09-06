@@ -60,7 +60,7 @@ class SurfaceUtilities(CoreObject):
         return BoundingBox(model = self._model, json_data = result)
 
     def fill_holes_at_plane(self, part_id : int, face_zonelets : Iterable[int], plane_points : Iterable[float], params : FillHolesAtPlaneParams) -> FillHolesAtPlaneResults:
-        """ Fills holes in given face zonelets at given plane.
+        """ Fill holes in given face zonelets at given plane.
 
 
         Parameters
@@ -77,7 +77,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         FillHolesAtPlaneResults
-            Returns the FillHolesAtPlaneResults.
+            Return the FillHolesAtPlaneResults.
 
 
         Examples
@@ -97,7 +97,7 @@ class SurfaceUtilities(CoreObject):
         return FillHolesAtPlaneResults(model = self._model, json_data = result)
 
     def delete_unwetted_surfaces(self, face_zonelet_ids : Iterable[int], live_material_point_names : List[str], params : DeleteUnwettedParams) -> DeleteUnwettedResult:
-        """ Deletes unwetted surfaces based on material point list.
+        """ Delete unwetted surfaces based on material point list.
 
 
         Parameters
@@ -112,7 +112,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         DeleteUnwettedResult
-            Returns a DeleteUnwettedResult.
+            Return a DeleteUnwettedResult.
 
 
         Examples
@@ -130,7 +130,7 @@ class SurfaceUtilities(CoreObject):
         return DeleteUnwettedResult(model = self._model, json_data = result)
 
     def resolve_intersections(self, face_zonelet_ids : Iterable[int], params : ResolveIntersectionsParams) -> ResolveIntersectionResult:
-        """ Resolves facezonelets intersections
+        """ Resolve facezonelets intersections.
 
 
         Parameters
@@ -143,7 +143,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         ResolveIntersectionResult
-            Returns a ResolveIntersectionResult.
+            Return a ResolveIntersectionResult.
 
 
         Examples
@@ -160,7 +160,7 @@ class SurfaceUtilities(CoreObject):
         return ResolveIntersectionResult(model = self._model, json_data = result)
 
     def subtract_zonelets(self, part_id : int, zonelets : Iterable[int], cutters : List[PartZonelets], params : SubtractZoneletsParams) -> SubtractZoneletsResults:
-        """ Does a boolean subtract operation of cutter zonelets from specified input face zonelets. It is expected that input zonelets form a non-self intersecting, watertight volume. Each set of cutter zonelets should be non self-intersecting. If the cutters are also watertight, this function will always succeed.
+        """ Performs a boolean subtract operation of cutter zonelets from specified input face zonelets. It is expected that input zonelets form a non-self intersecting, watertight volume. Each set of cutter zonelets should be non self-intersecting. If the cutters are also watertight, this function will always succeed.
 
 
         Parameters
@@ -177,7 +177,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         SubtractZoneletsResults
-            Returns a SubtractZoneletsResults.
+            Return a SubtractZoneletsResults.
 
 
         Examples

@@ -76,7 +76,7 @@ class BoundaryFittedSpline(CoreObject):
     def refine_spline(self, part_id : int, spline_ids : Iterable[int], refine_spline_params : RefineSplineParams) -> IGAResults:
         """ Refine boundary fitted splines.
 
-        Currently h and p refinement are supported.
+        Now H and P refinement are supported.
         Refinement along one or more dimension can be suppressed using refinement parameters in the input.
 
         Parameters
@@ -84,7 +84,7 @@ class BoundaryFittedSpline(CoreObject):
         part_id : int
             Id of the part.
         spline_ids : Iterable[int]
-            Ids of the splines on which refinement will be done.
+            Ids of the splines on which refinement is performed.
         refine_spline_params : RefineSplineParams
             Structure containing parameters for spline refinement.
 

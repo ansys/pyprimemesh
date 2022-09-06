@@ -3,7 +3,47 @@
 # Copyright 2023 ANSYS, Inc.
 # Unauthorized use, distribution, or duplication is prohibited.
 
-__all__ = ['ip', 'port', 'connection_timeout', 'print_communicator_stats', 'max_message_length']
+__all__ = [
+    'ip',
+    'port',
+    'connection_timeout',
+    'print_communicator_stats',
+    'max_message_length',
+    'get_examples_path',
+    'get_examples_path_for_containers',
+    'get_output_path',
+    'get_output_path_for_containers',
+]
+
+import os
+
+try:
+    import appdirs
+
+    USER_DATA_PATH = os.getenv(
+        'PYPRIME_USER_DATA', appdirs.user_data_dir(appname='pyprime', appauthor=False)
+    )
+except ModuleNotFoundError:
+    # If appdirs is not installed, then try with tempfile.
+    # NOTE: This only occurs for ADO ARM Test runs
+    import tempfile
+
+    USER_DATA_PATH = os.getenv('PYPRIME_USER_DATA', os.path.join(tempfile.gettempdir(), 'pyprime'))
+
+if not os.path.exists(USER_DATA_PATH):  # pragma: no cover
+    os.makedirs(USER_DATA_PATH)
+
+EXAMPLES_PATH = os.path.join(USER_DATA_PATH, 'examples')
+if not os.path.exists(EXAMPLES_PATH):  # pragma: no cover
+    os.makedirs(EXAMPLES_PATH)
+
+LOCAL_OUTDIR = os.path.join(USER_DATA_PATH, 'output')
+if not os.path.exists(LOCAL_OUTDIR):  # pragma: no cover
+    os.makedirs(LOCAL_OUTDIR)
+
+CONTAINER_USER_DATA = '/data'
+CONTAINER_EXAMPLES = os.path.join(CONTAINER_USER_DATA, 'examples')
+CONTAINER_OUTDIR = os.path.join(CONTAINER_USER_DATA, 'output')
 
 __DEFAULT_IP = '127.0.0.1'
 __DEFAULT_PORT = 50055
@@ -35,3 +75,36 @@ def print_communicator_stats():
 def max_message_length():
     '''Gets the maximum message length for a grpc channel'''
     return __MAX_MESSAGE_LENGTH
+
+
+def get_examples_path():
+    '''Gets the client side default container path'''
+    return EXAMPLES_PATH
+
+
+def get_user_data_path():
+    '''Gets the client side default user data path'''
+    return USER_DATA_PATH
+
+
+def get_user_data_path_for_containers():
+    '''Gets the user data path for containers'''
+    return CONTAINER_USER_DATA
+
+
+def get_examples_path_for_containers():
+    '''Gets the server side default container path in case of containers
+
+    In case of a container, the user data directory is mounted within on the container image.
+    '''
+    return CONTAINER_EXAMPLES
+
+
+def get_output_path():
+    '''Gets the client side output directory used by containers'''
+    return LOCAL_OUTDIR
+
+
+def get_output_path_for_containers():
+    '''Gets the server side output directory used by containers'''
+    return CONTAINER_OUTDIR

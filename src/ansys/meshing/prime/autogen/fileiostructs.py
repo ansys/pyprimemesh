@@ -966,17 +966,17 @@ class CadRefacetingParams(CoreObject):
         model: Model
             Model to create a CadRefacetingParams object with default parameters.
         cad_faceter: CadFaceter, optional
-            Option to specify the available choices for faceter. The available options are Acis, Parasolid.
+            Specify the available choices for faceter. The available options are Acis, Parasolid.
         faceting_resolution: CadRefacetingResolution, optional
-            Option to set the faceting resolution.
+            Set the faceting resolution.
         custom_surface_deviation_tolerance: float, optional
-            Options to set custom tolerance setting for surface deviation in specified length unit.
+            Set custom tolerance for surface deviation in specified length unit.
         custom_normal_angle_tolerance: float, optional
-            Options to set custom tolerance setting for normal angle in degree.
+            Set custom tolerance for normal angle in degree.
         max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit, optional
-            Option to specify maximum edge size limit for faceting.
+            Specify maximum edge size limit for faceting.
         max_edge_size: float, optional
-            Option to set maximum edge size of the facets.
+            Set maximum edge size of the facets.
         json_data: dict, optional
             JSON dictionary to create a CadRefacetingParams object with provided parameters.
 
@@ -1034,17 +1034,17 @@ class CadRefacetingParams(CoreObject):
         Parameters
         ----------
         cad_faceter: CadFaceter, optional
-            Option to specify the available choices for faceter. The available options are Acis, Parasolid.
+            Specify the available choices for faceter. The available options are Acis, Parasolid.
         faceting_resolution: CadRefacetingResolution, optional
-            Option to set the faceting resolution.
+            Set the faceting resolution.
         custom_surface_deviation_tolerance: float, optional
-            Options to set custom tolerance setting for surface deviation in specified length unit.
+            Set custom tolerance for surface deviation in specified length unit.
         custom_normal_angle_tolerance: float, optional
-            Options to set custom tolerance setting for normal angle in degree.
+            Set custom tolerance for normal angle in degree.
         max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit, optional
-            Option to specify maximum edge size limit for faceting.
+            Specify maximum edge size limit for faceting.
         max_edge_size: float, optional
-            Option to set maximum edge size of the facets.
+            Set maximum edge size of the facets.
         """
         args = locals()
         [CadRefacetingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1079,7 +1079,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def cad_faceter(self) -> CadFaceter:
-        """Option to specify the available choices for faceter. The available options are Acis, Parasolid.
+        """Specify the available choices for faceter. The available options are Acis, Parasolid.
         """
         return self._cad_faceter
 
@@ -1089,7 +1089,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def faceting_resolution(self) -> CadRefacetingResolution:
-        """Option to set the faceting resolution.
+        """Set the faceting resolution.
         """
         return self._faceting_resolution
 
@@ -1099,7 +1099,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def custom_surface_deviation_tolerance(self) -> float:
-        """Options to set custom tolerance setting for surface deviation in specified length unit.
+        """Set custom tolerance for surface deviation in specified length unit.
         """
         return self._custom_surface_deviation_tolerance
 
@@ -1109,7 +1109,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def custom_normal_angle_tolerance(self) -> float:
-        """Options to set custom tolerance setting for normal angle in degree.
+        """Set custom tolerance for normal angle in degree.
         """
         return self._custom_normal_angle_tolerance
 
@@ -1119,7 +1119,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def max_edge_size_limit(self) -> CadRefacetingMaxEdgeSizeLimit:
-        """Option to specify maximum edge size limit for faceting.
+        """Specify maximum edge size limit for faceting.
         """
         return self._max_edge_size_limit
 
@@ -1129,7 +1129,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def max_edge_size(self) -> float:
-        """Option to set maximum edge size of the facets.
+        """Set maximum edge size of the facets.
         """
         return self._max_edge_size
 
@@ -1181,21 +1181,21 @@ class ImportCadParams(CoreObject):
         model: Model
             Model to create a ImportCadParams object with default parameters.
         append: bool, optional
-            Option to append imported CAD into existing model.
+            Append imported CAD into existing model when true.
         cad_reader_route: CadReaderRoute, optional
-            Option to specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+            Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
-            Option to create a part per CAD Model, Assembly, Part, Body, Group.
+            Create a part per CAD Model, Assembly, Part, Body, Group.
         geometry_transfer: bool, optional
             Option to enable transfer of geometry data (NURBS).
         length_unit: LengthUnit, optional
-            Option to specify length unit for import.
+            Specify length unit for import.
         refacet: bool, optional
-            Option to refine or coarsen the CAD faceting based on refaceting parameters.
+            Refine or coarsen the CAD faceting based on refaceting parameters when true.
         cad_refaceting_params: CadRefacetingParams, optional
-            Option to specify refaceting parameters.
+            Specify refaceting parameters.
         stitch_tolerance: float, optional
-            Option to stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+            Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
         json_data: dict, optional
             JSON dictionary to create a ImportCadParams object with provided parameters.
 
@@ -1261,21 +1261,21 @@ class ImportCadParams(CoreObject):
         Parameters
         ----------
         append: bool, optional
-            Option to append imported CAD into existing model.
+            Append imported CAD into existing model when true.
         cad_reader_route: CadReaderRoute, optional
-            Option to specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+            Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
-            Option to create a part per CAD Model, Assembly, Part, Body, Group.
+            Create a part per CAD Model, Assembly, Part, Body, Group.
         geometry_transfer: bool, optional
             Option to enable transfer of geometry data (NURBS).
         length_unit: LengthUnit, optional
-            Option to specify length unit for import.
+            Specify length unit for import.
         refacet: bool, optional
-            Option to refine or coarsen the CAD faceting based on refaceting parameters.
+            Refine or coarsen the CAD faceting based on refaceting parameters when true.
         cad_refaceting_params: CadRefacetingParams, optional
-            Option to specify refaceting parameters.
+            Specify refaceting parameters.
         stitch_tolerance: float, optional
-            Option to stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+            Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
         """
         args = locals()
         [ImportCadParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1312,7 +1312,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def append(self) -> bool:
-        """Option to append imported CAD into existing model.
+        """Append imported CAD into existing model when true.
         """
         return self._append
 
@@ -1322,7 +1322,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def cad_reader_route(self) -> CadReaderRoute:
-        """Option to specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+        """Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         """
         return self._cad_reader_route
 
@@ -1332,7 +1332,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def part_creation_type(self) -> PartCreationType:
-        """Option to create a part per CAD Model, Assembly, Part, Body, Group.
+        """Create a part per CAD Model, Assembly, Part, Body, Group.
         """
         return self._part_creation_type
 
@@ -1352,7 +1352,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def length_unit(self) -> LengthUnit:
-        """Option to specify length unit for import.
+        """Specify length unit for import.
         """
         return self._length_unit
 
@@ -1362,7 +1362,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def refacet(self) -> bool:
-        """Option to refine or coarsen the CAD faceting based on refaceting parameters.
+        """Refine or coarsen the CAD faceting based on refaceting parameters when true.
         """
         return self._refacet
 
@@ -1372,7 +1372,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def cad_refaceting_params(self) -> CadRefacetingParams:
-        """Option to specify refaceting parameters.
+        """Specify refaceting parameters.
         """
         return self._cad_refaceting_params
 
@@ -1382,7 +1382,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def stitch_tolerance(self) -> float:
-        """Option to stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+        """Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
         """
         return self._stitch_tolerance
 

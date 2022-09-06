@@ -124,13 +124,13 @@ class VolumeControl(CoreObject):
         return ScopeDefinition(model = self._model, json_data = result)
 
     def get_params(self) -> VolumeControlParams:
-        """ Gets the parameters of the volume control.
+        """ Get the parameters of the volume control.
 
 
         Returns
         -------
         VolumeControlParams
-            Returns parameters of the volume control.
+            Return parameters of the volume control.
 
 
         Examples

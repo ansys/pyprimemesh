@@ -20,13 +20,13 @@ from Python. PyPrime consists of various python modules that help you to acquire
 generate surface and volume meshes for multiple solvers. PyPrime uses ansys.meshing.fm as primary
 module to acquire geometry data. For generating mesh, the primary module is ansys.meshing.prime.
 
-PyPrime enables you to:
+PyPrime enables you to: 
 
 * Generate quad dominant and triangular surface meshes
-* Generate surface meshes with various sizing options like volumetric, constant, and so on
+* Generate surface meshes with various sizing options like volumetric, constant, and so on 
 * Generate volume meshes with linear and quadratic elements of various shapes like tetrahedra,
   hexahedra, pyramids, prisms
-* Generate volume meshes with single process or distributed process
+* Generate volume meshes with single process or distributed process 
 * Check mesh quality to provide the best solution for the problem and improve predictive
   capabilities
 * Perform mesh diagnostics for free, multi-connected edges, self-intersection and overlapping faces

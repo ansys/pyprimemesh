@@ -23,7 +23,7 @@ class PrismControl(CoreObject):
         self._freeze()
 
     def set_growth_params(self, prism_control_growth_params : PrismControlGrowthParams):
-        """ Sets growth parameters for prism control.
+        """ Set growth parameters for prism control.
 
 
         Parameters

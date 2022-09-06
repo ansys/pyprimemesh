@@ -59,13 +59,13 @@ class Part(CoreObject):
         return result
 
     def get_face_zonelets(self) -> Iterable[int]:
-        """ Gets the face zonelets of a part.
+        """ Get the face zonelets of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns the ids of face zonelets.
+            Return the ids of face zonelets.
 
 
         Examples
@@ -81,13 +81,13 @@ class Part(CoreObject):
         return result
 
     def get_cell_zonelets(self) -> Iterable[int]:
-        """ Gets the cell zonelet ids in the part.
+        """ Get the cell zonelet ids in the part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns the list of cell zonelet ids.
+            Return the ids of cell zonelets.
 
 
         Examples
@@ -104,13 +104,13 @@ class Part(CoreObject):
         return result
 
     def get_edge_zonelets(self) -> Iterable[int]:
-        """ Gets the edge zonelets of a part.
+        """ Get the edge zonelets of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns the ids of edge zonelets.
+            Return the ids of edge zonelets.
 
 
         Examples
@@ -418,7 +418,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns the ids of topoedges.
+            Return the ids of topoedges.
 
 
         Examples
@@ -450,7 +450,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns the ids of topofaces.
+            Return the ids of topofaces.
 
 
         Examples
@@ -469,7 +469,7 @@ class Part(CoreObject):
         return result
 
     def get_face_zonelets_of_volumes(self, volumes : Iterable[int]) -> Iterable[int]:
-        """ Gets the face zonelets of given volumes.
+        """ Get the face zonelets of given volumes.
 
 
         Parameters
@@ -480,7 +480,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns the ids of face zonelets.
+            Return the ids of face zonelets.
 
 
         Examples
@@ -524,7 +524,7 @@ class Part(CoreObject):
         return ComputeVolumesResults(model = self._model, json_data = result)
 
     def compute_topo_volumes(self, params : ComputeVolumesParams) -> ComputeTopoVolumesResults:
-        """ Computes topovolumes by identifying closed volumes defined by topofaces of the part.
+        """ Compute topovolumes by identifying closed volumes defined by topofaces of the part.
 
 
         Parameters
@@ -535,7 +535,7 @@ class Part(CoreObject):
         Returns
         -------
         ComputeTopoVolumesResults
-            Returns the ComputeTopoVolumesResults.
+            Return the ComputeTopoVolumesResults.
 
 
         Examples
@@ -552,13 +552,13 @@ class Part(CoreObject):
         return ComputeTopoVolumesResults(model = self._model, json_data = result)
 
     def get_volumes(self) -> Iterable[int]:
-        """ Gets all the volumes of the part.
+        """ Get all the volumes of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns ids of volumes.
+            Return ids of volumes.
 
 
         Examples
@@ -574,7 +574,7 @@ class Part(CoreObject):
         return result
 
     def delete_zonelets(self, zonelets : Iterable[int]) -> DeleteResults:
-        """ Deletes given face zonelets.
+        """ Delete given face zonelets.
 
 
         Parameters
@@ -585,7 +585,7 @@ class Part(CoreObject):
         Returns
         -------
         DeleteResults
-            Returns DeleteResults.
+            Return DeleteResults.
 
 
         Examples
@@ -601,13 +601,15 @@ class Part(CoreObject):
         return DeleteResults(model = self._model, json_data = result)
 
     def get_topo_faces(self) -> Iterable[int]:
-        """ Gets the topofaces of a part.
+        """ Get the topofaces of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns the ids of topofaces.
+            Return the ids of topofaces.
+
+Return the ids of topofaces.
 
 
         Examples
@@ -713,13 +715,13 @@ class Part(CoreObject):
         return AddToZoneResults(model = self._model, json_data = result)
 
     def get_face_zones(self) -> Iterable[int]:
-        """ Gets all the face zones of the part.
+        """ Get all the face zones of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns ids of face zones.
+            Return ids of face zones.
 
 
         Examples
@@ -735,13 +737,13 @@ class Part(CoreObject):
         return result
 
     def get_volume_zones(self) -> Iterable[int]:
-        """ Gets all the volume zones of the part.
+        """ Get all the volume zones of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Returns ids of volume zones.
+            Return ids of volume zones.
 
 
         Examples
@@ -844,7 +846,7 @@ class Part(CoreObject):
         Returns
         -------
         List[str]
-            List of labels.
+            Return labels on entities of part.
 
 
         Examples
@@ -910,9 +912,9 @@ class Part(CoreObject):
         return result
 
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
-        """ Gets the part summary.
+        """ Get the part summary.
 
-        Provides the part summary for the given parameters..
+        Provides the part summary for the given parameters.
 
         Parameters
         ----------
@@ -922,7 +924,7 @@ class Part(CoreObject):
         Returns
         -------
         PartSummaryResults
-            Returns the PartSummaryResults.
+            Return the PartSummaryResults.
 
         Examples
         --------

@@ -31,7 +31,7 @@ class ZoneType(enum.IntEnum):
     """Denotes the zone is volume zone."""
 
 class VolumeNamingType(enum.IntEnum):
-    """Indicates source types used to name volumes.
+    """Indicate source types used to name volumes.
     """
     BYFACELABEL = 1
     """Option to use face label name as source to name volumes."""

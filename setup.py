@@ -62,6 +62,7 @@ setup(
     install_requires=[
         'ansys-api-meshing-prime==0.1.1',
         'numpy>=1.14.0',
+        "appdirs>=1.4.0",
     ],
     extras_require={'graphics': ['pyvista>=0.32.0']},
     # Plan on supporting only the currently supported versions of Python

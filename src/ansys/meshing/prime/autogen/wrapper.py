@@ -8,7 +8,7 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any
 
 class Wrapper(CoreObject):
-    """Provides operations to generate surface mesh using wrapper technology.
+    """Provide operations to generate surface mesh using wrapper technology.
 
     """
 
@@ -68,14 +68,14 @@ class Wrapper(CoreObject):
         Parameters
         ----------
         part_id : int
-            ID of part.
+            Id of the part.
         params : WrapperImproveQualityParams
             Wrapper improve quality parameters.
 
         Returns
         -------
         WrapperImproveResult
-            Returns the Wrapper improve result.
+            Return the Wrapper improve result.
 
 
         Examples

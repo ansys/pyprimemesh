@@ -42,7 +42,7 @@ class WrapperControl(CoreObject):
         self._model._print_logs_after_command("set_geometry_scope")
 
     def set_leak_preventions(self, params : List[LeakPreventionParams]) -> SetLeakPreventionsResults:
-        """ Sets leak preventions to the wrapper control.
+        """ Set leak preventions to the wrapper control.
 
 
         Parameters
@@ -53,7 +53,7 @@ class WrapperControl(CoreObject):
         Returns
         -------
         SetLeakPreventionsResults
-            Returns the set leak prevention results.
+            Return the set leak prevention results.
 
         Examples
         --------
@@ -68,7 +68,7 @@ class WrapperControl(CoreObject):
         return SetLeakPreventionsResults(model = self._model, json_data = result)
 
     def set_contact_preventions(self, params : List[ContactPreventionParams]) -> SetContactPreventionsResults:
-        """ Sets contact preventions to the wrapper control.
+        """ Set contact preventions to the wrapper control.
 
 
         Parameters
@@ -79,7 +79,7 @@ class WrapperControl(CoreObject):
         Returns
         -------
         SetContactPreventionsResults
-            Returns the set contact prevention results.
+            Return the set contact prevention results.
 
         Examples
         --------
@@ -94,7 +94,7 @@ class WrapperControl(CoreObject):
         return SetContactPreventionsResults(model = self._model, json_data = result)
 
     def set_live_material_points(self, material_point_names : List[str]):
-        """ Sets live material points to the wrapper control.
+        """ Set live material points to the wrapper control.
 
 
         Parameters
@@ -114,7 +114,7 @@ class WrapperControl(CoreObject):
         self._model._print_logs_after_command("set_live_material_points")
 
     def set_feature_recoveries(self, params : List[FeatureRecoveryParams]) -> SetFeatureRecoveriesResults:
-        """ Sets feature recoveries to the wrapper control.
+        """ Set feature recoveries to the wrapper control.
 
 
         Parameters
@@ -125,7 +125,7 @@ class WrapperControl(CoreObject):
         Returns
         -------
         SetFeatureRecoveriesResults
-            Returns the set feature recoveries results.
+            Return the set feature recoveries results.
 
         Examples
         --------

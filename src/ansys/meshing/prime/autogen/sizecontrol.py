@@ -24,7 +24,7 @@ class SizeControl(CoreObject):
         self._freeze()
 
     def set_curvature_sizing_params(self, params : CurvatureSizingParams) -> SetSizingResults:
-        """ Sets the curvature sizing parameters to compute volumetric size field.
+        """ Set the curvature sizing parameters to compute volumetric size field.
 
 
         Parameters
@@ -35,7 +35,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetSizingResults
-            Returns the SetSizingResults.
+            Return the SetSizingResults.
 
 
         Examples
@@ -54,7 +54,7 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def set_soft_sizing_params(self, params : SoftSizingParams) -> SetSizingResults:
-        """ Sets the soft sizing parameters to compute volumetric size field.
+        """ Set the soft sizing parameters to compute volumetric size field.
 
 
         Parameters
@@ -65,7 +65,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetSizingResults
-            Returns the SetSizingResults.
+            Return the SetSizingResults.
 
 
         Examples
@@ -83,7 +83,7 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def set_proximity_sizing_params(self, params : ProximitySizingParams) -> SetSizingResults:
-        """ Sets the proximity sizing parameters to compute volumetric size field.
+        """ Set the proximity sizing parameters to compute volumetric size field.
 
 
         Parameters
@@ -94,7 +94,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetSizingResults
-            Returns the SetSizingResults.
+            Return the SetSizingResults.
 
 
         Examples
@@ -112,7 +112,7 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def set_hard_sizing_params(self, params : HardSizingParams) -> SetSizingResults:
-        """ Sets the hard sizing parameters to compute volumetric size field.
+        """ Set the hard sizing parameters to compute volumetric size field.
 
 
         Parameters
@@ -123,7 +123,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetSizingResults
-            Returns the SetSizingResults.
+            Return the SetSizingResults.
 
 
         Examples
@@ -141,7 +141,7 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def set_meshed_sizing_params(self, params : MeshedSizingParams) -> SetSizingResults:
-        """ Sets the meshed sizing parameters to compute volumetric size field.
+        """ Set the meshed sizing parameters to compute volumetric size field.
 
 
         Parameters
@@ -152,7 +152,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetSizingResults
-            Returns the SetSizingResults.
+            Return the SetSizingResults.
 
 
         Examples
@@ -170,7 +170,7 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def set_boi_sizing_params(self, params : BoiSizingParams) -> SetSizingResults:
-        """ Sets the body of influence sizing parameters to compute volumetric size field.
+        """ Set the body of influence sizing parameters to compute volumetric size field.
 
 
         Parameters
@@ -181,7 +181,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetSizingResults
-            Returns the SetSizingResults.
+            Return the SetSizingResults.
 
 
         Examples
@@ -199,13 +199,13 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def get_curvature_sizing_params(self) -> CurvatureSizingParams:
-        """ Gets the curvature sizing parameters of size control.
+        """ Get the curvature sizing parameters of size control.
 
 
         Returns
         -------
         CurvatureSizingParams
-            Returns the CurvatureSizingParams.
+            Return the CurvatureSizingParams.
 
 
         Examples
@@ -221,13 +221,13 @@ class SizeControl(CoreObject):
         return CurvatureSizingParams(model = self._model, json_data = result)
 
     def get_soft_sizing_params(self) -> SoftSizingParams:
-        """ Gets the soft sizing parameters of size control.
+        """ Get the soft sizing parameters of size control.
 
 
         Returns
         -------
         SoftSizingParams
-            Returns the SoftSizingParams.
+            Return the SoftSizingParams.
 
 
         Examples
@@ -243,13 +243,13 @@ class SizeControl(CoreObject):
         return SoftSizingParams(model = self._model, json_data = result)
 
     def get_proximity_sizing_params(self) -> ProximitySizingParams:
-        """ Gets the proximity sizing parameters of size control.
+        """ Get the proximity sizing parameters of size control.
 
 
         Returns
         -------
         ProximitySizingParams
-            Returns the ProximitySizingParams.
+            Return the ProximitySizingParams.
 
 
         Examples
@@ -265,13 +265,13 @@ class SizeControl(CoreObject):
         return ProximitySizingParams(model = self._model, json_data = result)
 
     def get_hard_sizing_params(self) -> HardSizingParams:
-        """ Gets the hard sizing parameters of size control.
+        """ Get the hard sizing parameters of size control.
 
 
         Returns
         -------
         HardSizingParams
-            Returns the HardSizingParams.
+            Return the HardSizingParams.
 
 
         Examples
@@ -287,13 +287,13 @@ class SizeControl(CoreObject):
         return HardSizingParams(model = self._model, json_data = result)
 
     def get_meshed_sizing_params(self) -> MeshedSizingParams:
-        """ Gets the meshed sizing parameters of size control.
+        """ Get the meshed sizing parameters of size control.
 
 
         Returns
         -------
         MeshedSizingParams
-            Returns the MeshedSizingParams.
+            Return the MeshedSizingParams.
 
 
         Examples
@@ -309,13 +309,13 @@ class SizeControl(CoreObject):
         return MeshedSizingParams(model = self._model, json_data = result)
 
     def get_boi_sizing_params(self) -> BoiSizingParams:
-        """ Gets the body of influence sizing parameters of size control.
+        """ Get the body of influence sizing parameters of size control.
 
 
         Returns
         -------
         BoiSizingParams
-            Returns the BoiSizingParams.
+            Return the BoiSizingParams.
 
 
         Examples
@@ -331,7 +331,7 @@ class SizeControl(CoreObject):
         return BoiSizingParams(model = self._model, json_data = result)
 
     def set_suggested_name(self, name : str) -> SetNameResults:
-        """ Sets the unique name for the size control based on the given suggested name.
+        """ Set the unique name for the size control based on the given suggested name.
 
 
         Parameters
@@ -342,7 +342,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetNameResults
-            Returns a name of the size control.
+            Return a name of the size control.
 
 
         Examples
@@ -358,7 +358,7 @@ class SizeControl(CoreObject):
         return SetNameResults(model = self._model, json_data = result)
 
     def set_scope(self, scope : ScopeDefinition) -> SetScopeResults:
-        """ Sets the scope for size control to evaluate.
+        """ Set the scope for size control to evaluate.
 
         Size control uses scope to evaluate entities for which size field needs to be computed.
 
@@ -370,7 +370,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SetScopeResults
-            Returns a SetScopeResults.
+            Return a SetScopeResults.
 
 
         Examples
@@ -389,13 +389,13 @@ class SizeControl(CoreObject):
         return SetScopeResults(model = self._model, json_data = result)
 
     def get_scope(self) -> ScopeDefinition:
-        """ Gets the scope used by size control to evaluate entities.
+        """ Get the scope used by size control to evaluate entities.
 
 
         Returns
         -------
         ScopeDefinition
-            Returns the ScopeDefinition.
+            Return the ScopeDefinition.
 
 
         Examples
@@ -411,7 +411,7 @@ class SizeControl(CoreObject):
         return ScopeDefinition(model = self._model, json_data = result)
 
     def get_summary(self, params : SizeControlSummaryParams) -> SizeControlSummaryResult:
-        """ Gets the size control summary along with the evaluated scope for the provided parameters..
+        """ Get the size control summary along with the evaluated scope for the provided parameters..
 
 
         Parameters
@@ -422,7 +422,7 @@ class SizeControl(CoreObject):
         Returns
         -------
         SizeControlSummaryResult
-            Returns the SizeControlSummaryResult.
+            Return the SizeControlSummaryResult.
 
         Examples
         --------

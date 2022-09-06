@@ -8,7 +8,7 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any
 
 class ControlData(CoreObject):
-    """ControlData acts as a container for all controls (size controls, prism controls, wrapper controls, etc).
+    """ControlData has all controls like size controls, prism controls, wrapper controls and more.
 
     """
 
@@ -146,7 +146,7 @@ class ControlData(CoreObject):
         return DeleteResults(model = self._model, json_data = result)
 
     def get_scope_face_zonelets(self, scope : ScopeDefinition, params : ScopeZoneletParams) -> Iterable[int]:
-        """ Gets the face zonelet ids for the given scope.
+        """ Get the face zonelet ids for the given scope.
 
 
         Parameters
@@ -159,7 +159,7 @@ class ControlData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns the ids of face zonelets.
+            Return the ids of face zonelets.
 
         Examples
         --------
@@ -179,7 +179,7 @@ class ControlData(CoreObject):
         return result
 
     def get_scope_parts(self, scope : ScopeDefinition) -> Iterable[int]:
-        """ Gets the part ids for the given scope.
+        """ Get the part ids for the given scope.
 
 
         Parameters
@@ -190,7 +190,7 @@ class ControlData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns the ids of parts.
+            Return the ids of parts.
 
         Examples
         --------
