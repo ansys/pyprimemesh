@@ -28,7 +28,8 @@ class Wrapper(_Wrapper):
         self._model = model
 
     def wrap(self, wrapper_control_id: int, params: WrapParams) -> WrapResult:
-        """Performs wrapping with specified controls in wrapper control and with provided parameters.
+        """Performs wrapping with specified controls in wrapper control and with provided
+        parameters.
 
 
         Parameters
