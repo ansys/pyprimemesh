@@ -8,7 +8,7 @@ updates:
       interval: "weekly"
     labels:
       - "Maintenance"
-      - "Dependencies"
+      - "dependencies"
     ignore:
       - dependency-name: "vtk"
       - dependency-name: "grpcio"
