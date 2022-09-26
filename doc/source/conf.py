@@ -1,7 +1,7 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 
-from pyansys_sphinx_theme import pyansys_logo_black
+from ansys_sphinx_theme import pyansys_logo_black
 
 from ansys.meshing.prime import __version__
 
@@ -11,12 +11,20 @@ copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
 
-# use the default pyansys logo
+# HTML options
+html_short_title = html_title = "PyPrime"
 html_logo = pyansys_logo_black
-html_theme = 'pyansys_sphinx_theme'
+html_theme = 'ansys_sphinx_theme'
 
 # specify the location of your github repo
-html_theme_options = {"github_url": "https://github.com/pyansys/pyprime", "show_prev_next": False}
+html_theme_options = {
+    "github_url": "https://github.com/pyansys/pyprime",
+    "show_prev_next": False,
+    "show_breadcrumbs": True,
+    "additional_breadcrumbs": [
+        ("PyAnsys", "https://docs.pyansys.com/"),
+    ],
+}
 
 # Sphinx extensions
 extensions = [
