@@ -10,7 +10,8 @@ Meshing a mixing elbow for a flow analysis
 Objective
 ~~~~~~~~~
 
-In this example, we will mesh a mixing elbow with polyhedral elements and wall boundary layer refinement.
+In this example, we will mesh a mixing elbow with polyhedral elements and wall boundary 
+layer refinement.
 We will use several meshing utilities available in the lucid class for convenience and ease.
 
 .. image:: ../../../images/elbow.gif
@@ -68,37 +69,36 @@ mesh_util.surface_mesh(min_size=5, max_size=20)
 # Volume mesh with polyhedral elements and boundary layer refinement.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Fill the volume with polyhedral and prism mesh specifying location and number of layers for prisms 
-# Expressions are used to define the surfaces to have prisms grown where "* !inlet !outlet" states "all not inlet or outlet".
+# Fill the volume with polyhedral and prism mesh specifying location and number of layers for prisms
+# Expressions are used to define the surfaces to have prisms grown where "* !inlet !outlet" 
+# states "all not inlet or outlet".
 mesh_util.volume_mesh(volume_fill_type=prime.VolumeFillType.POLY,
-    prism_surface_expression="* !inlet !outlet",
-    prism_layers=3
-    )
+    prism_surface_expression="* !inlet !outlet", prism_layers=3)
 
 ###############################################################################
 # Print statistics on generated mesh.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Display the mesh
-display=Graphics(model=model)
+display = Graphics(model=model)
 display()
 
 # Get meshed part
 part = model.get_part_by_name("flow_volume")
 
-# Get statistics on the mesh 
+# Get statistics on the mesh
 part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
 
 # Get element quality on all parts in the model
 search = prime.VolumeSearch(model=model)
-params = prime.VolumeQualitySummaryParams(model=model)
-results = search.get_volume_quality_summary(
-    prime.VolumeQualitySummaryParams(model=model, scope=prime.ScopeDefinition(model=model, part_expression="*"), 
-    cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS],quality_limit=[0.95]))
+params = prime.VolumeQualitySummaryParams(model=model,
+    scope=prime.ScopeDefinition(model=model, part_expression="*"),
+    cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS], quality_limit=[0.95])
+results = search.get_volume_quality_summary(params=params)
 
 # Print statistics on meshed part
 print(part_summary_res)
-print(results.quality_results_part[0].max_quality,results.quality_results_part[0].min_quality)
+print(results.quality_results_part[0].max_quality, results.quality_results_part[0].min_quality)
 
 ###############################################################################
 # Write a cas file for use in the Fluent solver.
