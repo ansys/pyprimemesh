@@ -10,9 +10,9 @@ Meshing a mixing elbow for a flow analysis
 Objective
 ~~~~~~~~~
 
-In this example, we will mesh a mixing elbow with polyhedral elements and wall boundary 
-layer refinement.
-We will use several meshing utilities available in the lucid class for convenience and ease.
+In this example, we will mesh a mixing elbow with polyhedral elements and wall boundary
+layer refinement. We will use several meshing utilities available in the lucid class for
+convenience and ease.
 
 .. image:: ../../../images/elbow.gif
    :align: center
@@ -70,7 +70,7 @@ mesh_util.surface_mesh(min_size=5, max_size=20)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Fill the volume with polyhedral and prism mesh specifying location and number of layers for prisms
-# Expressions are used to define the surfaces to have prisms grown where "* !inlet !outlet" 
+# Expressions are used to define the surfaces to have prisms grown where "* !inlet !outlet"
 # states "all not inlet or outlet".
 mesh_util.volume_mesh(volume_fill_type=prime.VolumeFillType.POLY,
     prism_surface_expression="* !inlet !outlet", prism_layers=3)
