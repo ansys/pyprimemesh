@@ -1,11 +1,11 @@
 import os
 import time
 import unittest
-from .arm_utils import get_input_files_location, is_running_in_arm
+from .arm_utils import get_input_files_location
 
 import ansys.meshing.prime as prime
 
-    
+
 class PrimeTestCase(unittest.TestCase):
     INPUT_FILES = get_input_files_location()
     _client = None
@@ -13,13 +13,11 @@ class PrimeTestCase(unittest.TestCase):
     @classmethod
     def startPyPrimeServer(cls, pyprime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
         if n_procs == 1:
-            client = prime.launch_prime(
-                            pyprime_root=pyprime_root,
-                            ip=ip, port=port)
+            client = prime.launch_prime(pyprime_root=pyprime_root, ip=ip, port=port)
         else:
             client = prime.launch_prime(
-                            pyprime_root=pyprime_root,
-                            ip=ip, port=port, n_procs=n_procs)
+                pyprime_root=pyprime_root, ip=ip, port=port, n_procs=n_procs
+            )
         return client
 
     @classmethod
@@ -31,25 +29,17 @@ class PrimeTestCase(unittest.TestCase):
         else:
             pyprime_root = os.environ.get('PYPRIME_INSTALL_ROOT', None)
             client = cls.startPyPrimeServer(pyprime_root=pyprime_root, ip=ip, port=port, n_procs=1)
-            
+
         return client
 
     @classmethod
     def setUpClass(cls) -> None:
-        if cls.INPUT_FILES is None:
-            raise ValueError(
-                'INPUT_FILES location needs to be set before we set up class for unit testing')
-
-        if 'PYPRIME_TEST_SERVER' in os.environ or not is_running_in_arm():
-            cls._client = cls.getRemoteClient()
-        else:
-            cls._client = None
-
+        cls._client = cls.getRemoteClient()
         if cls._client is not None:
             cls._client.__enter__()
             cls._model = cls._client.model
         else:
-            cls._model = prime.local_model()
+            raise ValueError("Cannot launch and connect to the server")
 
         return super().setUpClass()
 
@@ -62,9 +52,8 @@ class PrimeTestCase(unittest.TestCase):
     def setUp(self):
         self._startTime = time.time()
         return super().setUp()
-    
+
     def tearDown(self):
         self._endTime = time.time()
         self._timeTaken = self._endTime - self._startTime
         return super().tearDown()
-    

@@ -1,2 +1,2 @@
-from .test_case import PrimeTestCase
-from .test_runner import PrimeTextTestRunner
+from .case import PrimeTestCase
+from .runner import PrimeTextTestRunner
