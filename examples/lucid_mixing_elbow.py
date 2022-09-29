@@ -27,7 +27,6 @@ Procedure
 * Print statistics on generated mesh.
 * Write a cas file for use in the Fluent solver.
 * Exit the Prime session.
-
 """
 
 ###############################################################################
