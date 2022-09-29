@@ -406,7 +406,7 @@ class Graphics(object):
         [print(disp_mesh) for disp_mesh in sel_disp_mesh]
 
     def __show_ruler_callback(self, flag):
-        """ This function shows ruler on UI when clicked on ruler button"""
+        """This function shows ruler on UI when clicked on ruler button"""
         if self._plotter is not None:
             if self._ruler_visible and self._ruler_actor is not None:
                 self._plotter.remove_actor(self._ruler_actor)
