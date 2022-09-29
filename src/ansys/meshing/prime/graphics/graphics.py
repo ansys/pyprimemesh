@@ -339,9 +339,7 @@ class Graphics(object):
             number_of_edges=edge_facet_res.num_edges_per_edge_zonelet[index],
         )
         return disp_mesh
-
-                                    
-                                               
+                                                                           
     def __call__(self, parts=None, update=True, spline=False, scope: prime.ScopeDefinition = None):
         """ """
         self._parts = parts
@@ -367,11 +365,9 @@ class Graphics(object):
                 os.path.dirname(__file__), 'images', 'surface_body.png'
             )
         elif self._color_by_type == ColorByType.ZONE:
-            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
-                                                         
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')                                             
         else:
-            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'parts.png')
-                                                           
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'parts.png')                                                   
         r.SetFileName(color_by_type_icon_file)
         r.Update()
         image = r.GetOutput()
@@ -410,6 +406,7 @@ class Graphics(object):
         [print(disp_mesh) for disp_mesh in sel_disp_mesh]
 
     def __show_ruler_callback(self, flag):
+        """ This function shows ruler on UI when clicked on ruler button"""
         if self._plotter is not None:
             if self._ruler_visible and self._ruler_actor is not None:
                 self._plotter.remove_actor(self._ruler_actor)
@@ -446,8 +443,6 @@ class Graphics(object):
             self.__update_display_data()
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
-                                 
-
         [
             disp_mesh.add_to_plotter(self._plotter)
             for part_id, data in self._display_data.items()
@@ -462,22 +457,16 @@ class Graphics(object):
             border_size=3,
         )
         self._hideBt = self._plotter.add_checkbox_button_widget(
-            self.__hide_unhide_selection, position=(10, 650), size=30, border_size=3
-                                                                      
+            self.__hide_unhide_selection, position=(10, 650), size=30, border_size=3                                                            
         )
-        self._showEdgeBt = self._plotter.add_checkbox_button_widget(
-                                                                       
+        self._showEdgeBt = self._plotter.add_checkbox_button_widget(                                                         
             self.__show_edges_callback, value=False, position=(10, 600), size=30, border_size=3
         )
         # self._plotter.add_checkbox_button_widget(
         #                  self.__surface_mesh_callback, position=(1870, 700),
         #                  color_on='yellow', color_off='yellow', size = 30, border_size=3)
-        self._printInfoBt = self._plotter.add_checkbox_button_widget(
-                                                                   
-            self.__print_callback, position=(10, 550), size=30, border_size=3
-
-                                                                     
-                                                                        
+        self._printInfoBt = self._plotter.add_checkbox_button_widget(                                                       
+            self.__print_callback, position=(10, 550), size=30, border_size=3                                                               
         )
         self._showRulerBt = self._plotter.add_checkbox_button_widget(
             self.__show_ruler_callback, position=(10, 500), size = 30, border_size=3
@@ -538,14 +527,9 @@ class Graphics(object):
         # self._plotter.add_checkbox_button_widget(self.__surface_mesh_callback,
         #                  position=(1870, 700), color_on='yellow',
         #                  color_off='yellow', size = 30, border_size=3)
-        self._printInfoBt = self._plotter.add_checkbox_button_widget(
-                                                                    
-            self.__print_callback, position=(10, 550), size=30, border_size=3
-        
-                                                                     
-                                                                        
+        self._printInfoBt = self._plotter.add_checkbox_button_widget(                                                        
+            self.__print_callback, position=(10, 550), size=30, border_size=3                                                               
         )
-        
         self._showRulerBt = self._plotter.add_checkbox_button_widget(
             self.__show_ruler_callback, position=(10, 500), size = 30, border_size=3
         )
@@ -558,8 +542,7 @@ class Graphics(object):
     def __draw_scope_parts(self, update=False, scope: prime.ScopeDefinition = None):
         """ """
         self._plotter = pv.Plotter()
-        self._plotter.show_axes()
-                                 
+        self._plotter.show_axes()                        
         if os.getenv('PRIME_APP_RUN') and self._app is not None:
             app_g = self._app.Graphics().Get()
             app_g.Clear()
@@ -596,25 +579,18 @@ class Graphics(object):
         self._hideBt = self._plotter.add_checkbox_button_widget(
             self.__hide_unhide_selection, position=(10, 650), size=30, border_size=3
         )
-        self._showEdgeBt = self._plotter.add_checkbox_button_widget(
-                                                                       
+        self._showEdgeBt = self._plotter.add_checkbox_button_widget(                                                           
             self.__show_edges_callback, value=False, position=(10, 600), size=30, border_size=3
         )
         # self._plotter.add_checkbox_button_widget(self.__surface_mesh_callback,
         #                  position=(1870, 700), color_on='yellow',
         #                  color_off='yellow', size = 30, border_size=3)
-        self._printInfoBt = self._plotter.add_checkbox_button_widget(
-                                                                    
-            self.__print_callback, position=(10, 550), size=30, border_size=3
-
-                                                                     
-                                                                        
+        self._printInfoBt = self._plotter.add_checkbox_button_widget(                                                       
+            self.__print_callback, position=(10, 550), size=30, border_size=3                                                                
         )
-        
         self._showRulerBt = self._plotter.add_checkbox_button_widget(
             self.__show_ruler_callback, position=(10, 500), size = 30, border_size=3
         )
-        
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
@@ -625,8 +601,7 @@ class Graphics(object):
         vr = self._colorByTypeBt.GetRepresentation()
         vr.SetNumberOfStates(3)
         r = _vtk.vtkPNGReader()
-        color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
-                                                        
+        color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')                                               
         r.SetFileName(color_by_zone_icon_file)
         r.Update()
         image_1 = r.GetOutput()
@@ -642,8 +617,7 @@ class Graphics(object):
         hide_vr.SetButtonTexture(0, image_2)
         hide_vr.SetButtonTexture(1, image_2)
         show_edge_vr = self._showEdgeBt.GetRepresentation()
-        show_edges_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_edges.png')
-                                                              
+        show_edges_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_edges.png')                                                      
         show_edge_r = _vtk.vtkPNGReader()
         show_edge_r.SetFileName(show_edges_icon_file)
         show_edge_r.Update()
@@ -669,16 +643,6 @@ class Graphics(object):
         image_5 = show_ruler_r.GetOutput()
         show_ruler_vr.SetButtonTexture(0, image_5)
         show_ruler_vr.SetButtonTexture(1, image_5)
-                                                             
-                                                                      
-                                                              
-                                          
-                                                      
-                             
-                                          
-                                                  
-                                                  
-
 
     def get_color_by_type(self) -> ColorByType:
         """ """
