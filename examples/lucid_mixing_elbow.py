@@ -39,8 +39,8 @@ from ansys.meshing.prime.graphics import Graphics
 import os
 
 # start prime and get the model
-prime_session = prime.launch_prime()
-model = prime_session.model
+prime_client = prime.launch_prime()
+model = prime_client.model
 
 # instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model=model)
@@ -112,4 +112,4 @@ print(os.getcwd())
 # Exit the Prime session.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-prime_session.exit()
+prime_client.exit()
