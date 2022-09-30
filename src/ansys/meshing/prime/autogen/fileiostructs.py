@@ -1,8 +1,6 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import enum
-from typing import Dict, Any, List, Iterable
+from typing import Dict, Any, Union, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
@@ -1151,7 +1149,8 @@ class ImportCadParams(CoreObject):
             length_unit: LengthUnit,
             refacet: bool,
             cad_refaceting_params: CadRefacetingParams,
-            stitch_tolerance: float):
+            stitch_tolerance: float,
+            cad_update_parameters: Dict[str, Union[str, int, float, bool]]):
         self._append = append
         self._cad_reader_route = CadReaderRoute(cad_reader_route)
         self._part_creation_type = PartCreationType(part_creation_type)
@@ -1160,6 +1159,7 @@ class ImportCadParams(CoreObject):
         self._refacet = refacet
         self._cad_refaceting_params = cad_refaceting_params
         self._stitch_tolerance = stitch_tolerance
+        self._cad_update_parameters = cad_update_parameters
 
     def __init__(
             self,
@@ -1172,6 +1172,7 @@ class ImportCadParams(CoreObject):
             refacet: bool = None,
             cad_refaceting_params: CadRefacetingParams = None,
             stitch_tolerance: float = None,
+            cad_update_parameters: Dict[str, Union[str, int, float, bool]] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ImportCadParams.
@@ -1196,6 +1197,8 @@ class ImportCadParams(CoreObject):
             Specify refaceting parameters.
         stitch_tolerance: float, optional
             Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+        cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
+            Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
         json_data: dict, optional
             JSON dictionary to create a ImportCadParams object with provided parameters.
 
@@ -1212,9 +1215,10 @@ class ImportCadParams(CoreObject):
                 LengthUnit(json_data["lengthUnit"]),
                 json_data["refacet"],
                 CadRefacetingParams(model = model, json_data = json_data["cadRefacetingParams"]),
-                json_data["stitchTolerance"])
+                json_data["stitchTolerance"],
+                json_data["cadUpdateParameters"])
         else:
-            all_field_specified = all(arg is not None for arg in [append, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance])
+            all_field_specified = all(arg is not None for arg in [append, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance, cad_update_parameters])
             if all_field_specified:
                 self.__initialize(
                     append,
@@ -1224,7 +1228,8 @@ class ImportCadParams(CoreObject):
                     length_unit,
                     refacet,
                     cad_refaceting_params,
-                    stitch_tolerance)
+                    stitch_tolerance,
+                    cad_update_parameters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1238,7 +1243,8 @@ class ImportCadParams(CoreObject):
                         length_unit if length_unit is not None else ( ImportCadParams._default_params["length_unit"] if "length_unit" in ImportCadParams._default_params else LengthUnit(json_data["lengthUnit"])),
                         refacet if refacet is not None else ( ImportCadParams._default_params["refacet"] if "refacet" in ImportCadParams._default_params else json_data["refacet"]),
                         cad_refaceting_params if cad_refaceting_params is not None else ( ImportCadParams._default_params["cad_refaceting_params"] if "cad_refaceting_params" in ImportCadParams._default_params else CadRefacetingParams(model = model, json_data = json_data["cadRefacetingParams"])),
-                        stitch_tolerance if stitch_tolerance is not None else ( ImportCadParams._default_params["stitch_tolerance"] if "stitch_tolerance" in ImportCadParams._default_params else json_data["stitchTolerance"]))
+                        stitch_tolerance if stitch_tolerance is not None else ( ImportCadParams._default_params["stitch_tolerance"] if "stitch_tolerance" in ImportCadParams._default_params else json_data["stitchTolerance"]),
+                        cad_update_parameters if cad_update_parameters is not None else ( ImportCadParams._default_params["cad_update_parameters"] if "cad_update_parameters" in ImportCadParams._default_params else json_data["cadUpdateParameters"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1255,7 +1261,8 @@ class ImportCadParams(CoreObject):
             length_unit: LengthUnit = None,
             refacet: bool = None,
             cad_refaceting_params: CadRefacetingParams = None,
-            stitch_tolerance: float = None):
+            stitch_tolerance: float = None,
+            cad_update_parameters: Dict[str, Union[str, int, float, bool]] = None):
         """Set the default values of ImportCadParams.
 
         Parameters
@@ -1276,6 +1283,8 @@ class ImportCadParams(CoreObject):
             Specify refaceting parameters.
         stitch_tolerance: float, optional
             Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+        cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
+            Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
         """
         args = locals()
         [ImportCadParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1302,11 +1311,12 @@ class ImportCadParams(CoreObject):
         json_data["refacet"] = self._refacet
         json_data["cadRefacetingParams"] = self._cad_refaceting_params._jsonify()
         json_data["stitchTolerance"] = self._stitch_tolerance
+        json_data["cadUpdateParameters"] = self._cad_update_parameters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "append :  %s\ncad_reader_route :  %s\npart_creation_type :  %s\ngeometry_transfer :  %s\nlength_unit :  %s\nrefacet :  %s\ncad_refaceting_params :  %s\nstitch_tolerance :  %s" % (self._append, self._cad_reader_route, self._part_creation_type, self._geometry_transfer, self._length_unit, self._refacet, '{ ' + str(self._cad_refaceting_params) + ' }', self._stitch_tolerance)
+        message = "append :  %s\ncad_reader_route :  %s\npart_creation_type :  %s\ngeometry_transfer :  %s\nlength_unit :  %s\nrefacet :  %s\ncad_refaceting_params :  %s\nstitch_tolerance :  %s\ncad_update_parameters :  %s" % (self._append, self._cad_reader_route, self._part_creation_type, self._geometry_transfer, self._length_unit, self._refacet, '{ ' + str(self._cad_refaceting_params) + ' }', self._stitch_tolerance, self._cad_update_parameters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1390,6 +1400,16 @@ class ImportCadParams(CoreObject):
     def stitch_tolerance(self, value: float):
         self._stitch_tolerance = value
 
+    @property
+    def cad_update_parameters(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+        """
+        return self._cad_update_parameters
+
+    @cad_update_parameters.setter
+    def cad_update_parameters(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._cad_update_parameters = value
+
 class ImportCadResults(CoreObject):
     """Results associated with the CAD import.
     """
@@ -1397,13 +1417,16 @@ class ImportCadResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            cad_parameters: Dict[str, Union[str, int, float, bool]]):
         self._error_code = ErrorCode(error_code)
+        self._cad_parameters = cad_parameters
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
+            cad_parameters: Dict[str, Union[str, int, float, bool]] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ImportCadResults.
@@ -1414,6 +1437,8 @@ class ImportCadResults(CoreObject):
             Model to create a ImportCadResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
+        cad_parameters: Dict[str, Union[str, int, float, bool]], optional
+            Returns the parameters associated with CAD. Available only with WorkBench CAD Reader route.
         json_data: dict, optional
             JSON dictionary to create a ImportCadResults object with provided parameters.
 
@@ -1423,19 +1448,22 @@ class ImportCadResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"]),
+                json_data["cadParameters"])
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [error_code, cad_parameters])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    error_code,
+                    cad_parameters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     json_data = model._communicator.initialize_params(model, "ImportCadResults")["ImportCadResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( ImportCadResults._default_params["error_code"] if "error_code" in ImportCadResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( ImportCadResults._default_params["error_code"] if "error_code" in ImportCadResults._default_params else ErrorCode(json_data["errorCode"])),
+                        cad_parameters if cad_parameters is not None else ( ImportCadResults._default_params["cad_parameters"] if "cad_parameters" in ImportCadResults._default_params else json_data["cadParameters"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1445,13 +1473,16 @@ class ImportCadResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code: ErrorCode = None,
+            cad_parameters: Dict[str, Union[str, int, float, bool]] = None):
         """Set the default values of ImportCadResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
+        cad_parameters: Dict[str, Union[str, int, float, bool]], optional
+            Returns the parameters associated with CAD. Available only with WorkBench CAD Reader route.
         """
         args = locals()
         [ImportCadResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1471,11 +1502,12 @@ class ImportCadResults(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
+        json_data["cadParameters"] = self._cad_parameters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "error_code :  %s\ncad_parameters :  %s" % (self._error_code, self._cad_parameters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1488,6 +1520,16 @@ class ImportCadResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def cad_parameters(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Returns the parameters associated with CAD. Available only with WorkBench CAD Reader route.
+        """
+        return self._cad_parameters
+
+    @cad_parameters.setter
+    def cad_parameters(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._cad_parameters = value
 
 class ImportFluentMeshingMeshParams(CoreObject):
     """Parameters used to import fluent meshing mesh.

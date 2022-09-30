@@ -1,7 +1,5 @@
 '''PyPrime Client library
 '''
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime._version import __version__
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.core.part import Part
@@ -27,6 +25,7 @@ from ansys.meshing.prime.autogen.connect import Connect
 from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.autogen.deletetool import DeleteTool
 from ansys.meshing.prime.autogen.volumemeshtool import VolumeMeshTool
+from ansys.meshing.prime.autogen.topoutilities import TopoUtilities
 from ansys.meshing.prime.autogen.commontypes import *
 from ansys.meshing.prime.autogen.commonstructs import *
 from ansys.meshing.prime.autogen.modelstructs import *
@@ -57,6 +56,7 @@ from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, Prim
 from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.featureextraction import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
+from ansys.meshing.prime.autogen.topoutilitystructs import *
 from ansys.meshing.prime.core import lucid
 
 from ansys.meshing.prime.internals.config import (

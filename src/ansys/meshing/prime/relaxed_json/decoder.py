@@ -1,7 +1,5 @@
 """Implementation of Relaxed JSON Decoder
 """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from typing import Tuple, Any, Callable, Dict
 import re
 import numpy as np

@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from functools import wraps
 
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode, WarningCode
@@ -182,6 +180,7 @@ prime_error_messages = {
     ErrorCode.VOLUMESEARCHPARTWITHMESHNOTFOUND: "Part with mesh not found for volume quality check.",
     ErrorCode.VOLUMESEARCHFAILED: "Volume search failed.",
     ErrorCode.INVALIDCELLQUALITYLIMIT: "Invalid cell quality limit.",
+    ErrorCode.FILLHOLEFAILED: "Unable to create capping surface.",
     ErrorCode.INVALIDINPUTPART: "Part is invalid.",
     ErrorCode.INVALIDSCOPEENTITYTYPEINPUT: "Invalid input scope entity type.",
     ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS: "Entities should be added to zone using part it belongs.",

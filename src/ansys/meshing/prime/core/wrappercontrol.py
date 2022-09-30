@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.wrappercontrol import WrapperControl as _WrapperControl
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
