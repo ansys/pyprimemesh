@@ -10,8 +10,8 @@ Meshing a mid-surfaced bracket for a structural analysis
 Objective
 ~~~~~~~~~
 
-To create conformal surface mesh, we will scaffold topofaces/topoedges to connect
-all the surface bodies and mesh the bracket with quad elements.
+To create conformal surface mesh, we will scaffold topofaces/topoedges to 
+connect all the surface bodies and mesh the bracket with quad elements.
 
 
 Procedure
