@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from contextlib import contextmanager
 import os
 import logging
@@ -21,6 +19,27 @@ def to_camel_case(snake_str):
     return components[0] + ''.join(x.title() for x in components[1:])
 
 
+def get_child_processes(process):
+    children = []
+    cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
+    out = cmd.stdout.read().decode("utf-8")
+    cmd.wait()
+    for pid in out.split("\n")[:1]:
+        if pid.strip() == '':
+            break
+        ps_cmd = subprocess.Popen(
+            "ps -o cmd= {}".format(int(pid)), stdout=subprocess.PIPE, shell=True
+        )
+        ps_out = ps_cmd.stdout.read().decode("utf-8")
+        ps_cmd.wait()
+        cmd_name = ps_out.split()[0]
+        if "PrimeServer" in cmd_name:
+            children.append(int(pid))
+        else:
+            children += get_child_processes(int(pid))
+    return children
+
+
 def terminate_process(process):
     import sys
     import signal
@@ -28,6 +47,10 @@ def terminate_process(process):
     if sys.platform.startswith('win32'):
         # process.send_signal(signal.CTRL_C_EVENT)
         process.send_signal(signal.CTRL_BREAK_EVENT)
+    else:
+        for child in get_child_processes(process.pid):
+            os.kill(child, signal.SIGTERM)
+
     if process.stdin is not None:
         process.stdin.close()
     if process.stdout is not None:

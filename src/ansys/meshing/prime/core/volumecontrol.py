@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.volumecontrol import VolumeControl as _VolumeControl
 from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
 from ansys.meshing.prime.autogen.commonstructs import SetNameResults

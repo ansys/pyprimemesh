@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.coreobject import CoreObject
 from ansys.meshing.prime.autogen.surfer import Surfer as _Surfer
 from ansys.meshing.prime.autogen.surferstructs import (

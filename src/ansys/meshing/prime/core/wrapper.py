@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.wrapper import Wrapper as _Wrapper
 from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
 from ansys.meshing.prime.autogen.wrapperstructs import WrapResult as WrapResult

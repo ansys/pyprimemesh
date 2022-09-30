@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import PrimePyPrimeServer as Prime
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.internals.error_handling import (

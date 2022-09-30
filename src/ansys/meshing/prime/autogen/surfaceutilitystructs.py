@@ -1,8 +1,6 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import enum
-from typing import Dict, Any, List, Iterable
+from typing import Dict, Any, Union, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
@@ -1075,3 +1073,289 @@ class SubtractZoneletsResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class AddThicknessParams(CoreObject):
+    """Parameters to add thickness for a given plane.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            thickness: float,
+            reverse_face_normal: bool,
+            suggested_part_name: str,
+            fix_intersections: bool):
+        self._thickness = thickness
+        self._reverse_face_normal = reverse_face_normal
+        self._suggested_part_name = suggested_part_name
+        self._fix_intersections = fix_intersections
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            thickness: float = None,
+            reverse_face_normal: bool = None,
+            suggested_part_name: str = None,
+            fix_intersections: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the AddThicknessParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a AddThicknessParams object with default parameters.
+        thickness: float, optional
+            To assign the offset distance of inflation.
+        reverse_face_normal: bool, optional
+            To assign the direction of inflation.
+        suggested_part_name: str, optional
+            Suggested part name for created patching surfaces.
+        fix_intersections: bool, optional
+            Fix intersections in concave regions.
+        json_data: dict, optional
+            JSON dictionary to create a AddThicknessParams object with provided parameters.
+
+        Examples
+        --------
+        >>> add_thickness_params = prime.AddThicknessParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["thickness"],
+                json_data["reverseFaceNormal"],
+                json_data["suggestedPartName"],
+                json_data["fixIntersections"])
+        else:
+            all_field_specified = all(arg is not None for arg in [thickness, reverse_face_normal, suggested_part_name, fix_intersections])
+            if all_field_specified:
+                self.__initialize(
+                    thickness,
+                    reverse_face_normal,
+                    suggested_part_name,
+                    fix_intersections)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "AddThicknessParams")["AddThicknessParams"]
+                    self.__initialize(
+                        thickness if thickness is not None else ( AddThicknessParams._default_params["thickness"] if "thickness" in AddThicknessParams._default_params else json_data["thickness"]),
+                        reverse_face_normal if reverse_face_normal is not None else ( AddThicknessParams._default_params["reverse_face_normal"] if "reverse_face_normal" in AddThicknessParams._default_params else json_data["reverseFaceNormal"]),
+                        suggested_part_name if suggested_part_name is not None else ( AddThicknessParams._default_params["suggested_part_name"] if "suggested_part_name" in AddThicknessParams._default_params else json_data["suggestedPartName"]),
+                        fix_intersections if fix_intersections is not None else ( AddThicknessParams._default_params["fix_intersections"] if "fix_intersections" in AddThicknessParams._default_params else json_data["fixIntersections"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            thickness: float = None,
+            reverse_face_normal: bool = None,
+            suggested_part_name: str = None,
+            fix_intersections: bool = None):
+        """Set the default values of AddThicknessParams.
+
+        Parameters
+        ----------
+        thickness: float, optional
+            To assign the offset distance of inflation.
+        reverse_face_normal: bool, optional
+            To assign the direction of inflation.
+        suggested_part_name: str, optional
+            Suggested part name for created patching surfaces.
+        fix_intersections: bool, optional
+            Fix intersections in concave regions.
+        """
+        args = locals()
+        [AddThicknessParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of AddThicknessParams.
+
+        Examples
+        --------
+        >>> AddThicknessParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in AddThicknessParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["thickness"] = self._thickness
+        json_data["reverseFaceNormal"] = self._reverse_face_normal
+        json_data["suggestedPartName"] = self._suggested_part_name
+        json_data["fixIntersections"] = self._fix_intersections
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "thickness :  %s\nreverse_face_normal :  %s\nsuggested_part_name :  %s\nfix_intersections :  %s" % (self._thickness, self._reverse_face_normal, self._suggested_part_name, self._fix_intersections)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def thickness(self) -> float:
+        """To assign the offset distance of inflation.
+        """
+        return self._thickness
+
+    @thickness.setter
+    def thickness(self, value: float):
+        self._thickness = value
+
+    @property
+    def reverse_face_normal(self) -> bool:
+        """To assign the direction of inflation.
+        """
+        return self._reverse_face_normal
+
+    @reverse_face_normal.setter
+    def reverse_face_normal(self, value: bool):
+        self._reverse_face_normal = value
+
+    @property
+    def suggested_part_name(self) -> str:
+        """Suggested part name for created patching surfaces.
+        """
+        return self._suggested_part_name
+
+    @suggested_part_name.setter
+    def suggested_part_name(self, value: str):
+        self._suggested_part_name = value
+
+    @property
+    def fix_intersections(self) -> bool:
+        """Fix intersections in concave regions.
+        """
+        return self._fix_intersections
+
+    @fix_intersections.setter
+    def fix_intersections(self, value: bool):
+        self._fix_intersections = value
+
+class AddThicknessResults(CoreObject):
+    """Result structure associated with add thickness zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            part_id: int):
+        self._error_code = ErrorCode(error_code)
+        self._part_id = part_id
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            part_id: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the AddThicknessResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a AddThicknessResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        part_id: int, optional
+            The created thickness part id.
+        json_data: dict, optional
+            JSON dictionary to create a AddThicknessResults object with provided parameters.
+
+        Examples
+        --------
+        >>> add_thickness_results = prime.AddThicknessResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"]),
+                json_data["partId"])
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, part_id])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    part_id)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "AddThicknessResults")["AddThicknessResults"]
+                    self.__initialize(
+                        error_code if error_code is not None else ( AddThicknessResults._default_params["error_code"] if "error_code" in AddThicknessResults._default_params else ErrorCode(json_data["errorCode"])),
+                        part_id if part_id is not None else ( AddThicknessResults._default_params["part_id"] if "part_id" in AddThicknessResults._default_params else json_data["partId"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            part_id: int = None):
+        """Set the default values of AddThicknessResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        part_id: int, optional
+            The created thickness part id.
+        """
+        args = locals()
+        [AddThicknessResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of AddThicknessResults.
+
+        Examples
+        --------
+        >>> AddThicknessResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in AddThicknessResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["errorCode"] = self._error_code
+        json_data["partId"] = self._part_id
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\npart_id :  %s" % (self._error_code, self._part_id)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def part_id(self) -> int:
+        """The created thickness part id.
+        """
+        return self._part_id
+
+    @part_id.setter
+    def part_id(self, value: int):
+        self._part_id = value

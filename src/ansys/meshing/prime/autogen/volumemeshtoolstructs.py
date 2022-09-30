@@ -1,8 +1,6 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import enum
-from typing import Dict, Any, List, Iterable
+from typing import Dict, Any, Union, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
@@ -609,12 +607,14 @@ class SubtractVolumesParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            check_cutters: bool):
+        self._check_cutters = check_cutters
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            check_cutters: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SubtractVolumesParams.
@@ -623,6 +623,8 @@ class SubtractVolumesParams(CoreObject):
         ----------
         model: Model
             Model to create a SubtractVolumesParams object with default parameters.
+        check_cutters: bool, optional
+            Specifies whether cutters should be checked for intersections.
         json_data: dict, optional
             JSON dictionary to create a SubtractVolumesParams object with provided parameters.
 
@@ -631,17 +633,20 @@ class SubtractVolumesParams(CoreObject):
         >>> subtract_volumes_params = prime.SubtractVolumesParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["checkCutters"])
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [check_cutters])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    check_cutters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     json_data = model._communicator.initialize_params(model, "SubtractVolumesParams")["SubtractVolumesParams"]
-                    self.__initialize()
+                    self.__initialize(
+                        check_cutters if check_cutters is not None else ( SubtractVolumesParams._default_params["check_cutters"] if "check_cutters" in SubtractVolumesParams._default_params else json_data["checkCutters"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -650,9 +655,14 @@ class SubtractVolumesParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            check_cutters: bool = None):
         """Set the default values of SubtractVolumesParams.
 
+        Parameters
+        ----------
+        check_cutters: bool, optional
+            Specifies whether cutters should be checked for intersections.
         """
         args = locals()
         [SubtractVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -671,13 +681,24 @@ class SubtractVolumesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        json_data["checkCutters"] = self._check_cutters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "check_cutters :  %s" % (self._check_cutters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def check_cutters(self) -> bool:
+        """Specifies whether cutters should be checked for intersections.
+        """
+        return self._check_cutters
+
+    @check_cutters.setter
+    def check_cutters(self, value: bool):
+        self._check_cutters = value
 
 class SubtractVolumesResults(CoreObject):
     """Results of the volume subtract operation.

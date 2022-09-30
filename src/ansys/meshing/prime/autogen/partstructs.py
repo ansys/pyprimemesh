@@ -1,8 +1,6 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import enum
-from typing import Dict, Any, List, Iterable
+from typing import Dict, Any, Union, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
@@ -851,6 +849,226 @@ class ComputeVolumesParams(CoreObject):
     @material_point_names.setter
     def material_point_names(self, value: List[str]):
         self._material_point_names = value
+
+class ExtractTopoVolumesParams(CoreObject):
+    """Parameters to extract flow topovolumes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            zone_name: str):
+        self._zone_name = zone_name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            zone_name: str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExtractTopoVolumesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExtractTopoVolumesParams object with default parameters.
+        zone_name: str, optional
+            Specifies zone name to associate extracted flow topovolumes.
+        json_data: dict, optional
+            JSON dictionary to create a ExtractTopoVolumesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_topo_volumes_params = prime.ExtractTopoVolumesParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["zoneName"])
+        else:
+            all_field_specified = all(arg is not None for arg in [zone_name])
+            if all_field_specified:
+                self.__initialize(
+                    zone_name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "ExtractTopoVolumesParams")["ExtractTopoVolumesParams"]
+                    self.__initialize(
+                        zone_name if zone_name is not None else ( ExtractTopoVolumesParams._default_params["zone_name"] if "zone_name" in ExtractTopoVolumesParams._default_params else json_data["zoneName"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            zone_name: str = None):
+        """Set the default values of ExtractTopoVolumesParams.
+
+        Parameters
+        ----------
+        zone_name: str, optional
+            Specifies zone name to associate extracted flow topovolumes.
+        """
+        args = locals()
+        [ExtractTopoVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExtractTopoVolumesParams.
+
+        Examples
+        --------
+        >>> ExtractTopoVolumesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractTopoVolumesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["zoneName"] = self._zone_name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "zone_name :  %s" % (self._zone_name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def zone_name(self) -> str:
+        """Specifies zone name to associate extracted flow topovolumes.
+        """
+        return self._zone_name
+
+    @zone_name.setter
+    def zone_name(self, value: str):
+        self._zone_name = value
+
+class ExtractTopoVolumesResults(CoreObject):
+    """Parameters to extract flow topovolumes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            volumes: Iterable[int],
+            error_code: ErrorCode):
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32)
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            volumes: Iterable[int] = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExtractTopoVolumesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExtractTopoVolumesResults object with default parameters.
+        volumes: Iterable[int], optional
+            Ids of extracted flow topovolumes.
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
+        json_data: dict, optional
+            JSON dictionary to create a ExtractTopoVolumesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_topo_volumes_results = prime.ExtractTopoVolumesResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["volumes"],
+                ErrorCode(json_data["errorCode"]))
+        else:
+            all_field_specified = all(arg is not None for arg in [volumes, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    volumes,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "ExtractTopoVolumesResults")["ExtractTopoVolumesResults"]
+                    self.__initialize(
+                        volumes if volumes is not None else ( ExtractTopoVolumesResults._default_params["volumes"] if "volumes" in ExtractTopoVolumesResults._default_params else json_data["volumes"]),
+                        error_code if error_code is not None else ( ExtractTopoVolumesResults._default_params["error_code"] if "error_code" in ExtractTopoVolumesResults._default_params else ErrorCode(json_data["errorCode"])))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            volumes: Iterable[int] = None,
+            error_code: ErrorCode = None):
+        """Set the default values of ExtractTopoVolumesResults.
+
+        Parameters
+        ----------
+        volumes: Iterable[int], optional
+            Ids of extracted flow topovolumes.
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
+        """
+        args = locals()
+        [ExtractTopoVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExtractTopoVolumesResults.
+
+        Examples
+        --------
+        >>> ExtractTopoVolumesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractTopoVolumesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["volumes"] = self._volumes
+        json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "volumes :  %s\nerror_code :  %s" % (self._volumes, self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def volumes(self) -> Iterable[int]:
+        """Ids of extracted flow topovolumes.
+        """
+        return self._volumes
+
+    @volumes.setter
+    def volumes(self, value: Iterable[int]):
+        self._volumes = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
 
 class NamePatternParams(CoreObject):
     """Parameters to be used to match name pattern with names.

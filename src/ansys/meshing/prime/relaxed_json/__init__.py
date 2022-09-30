@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 __version__ = '1.0.0'
 
 __all__ = ['loads', 'dumps', 'JSONEncoder', 'JSONDecoder', 'JSONDecodeError']
