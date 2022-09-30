@@ -5,12 +5,13 @@
 Meshing a mid-surfaced bracket for a structural analysis
 =========================================================
 
-**Summary**: This example illustrates how to mesh a mid-surfaced bracket for a structural analysis.
+**Summary**: This example illustrates how to mesh a mid-surfaced bracket.
 
 Objective
 ~~~~~~~~~
 
-To create conformal surface mesh, we will scaffold topofaces/topoedges to connect all the surface bodies and mesh the bracket with quad elements. 
+To create conformal surface mesh, we will scaffold topofaces/topoedges to connect 
+all the surface bodies and mesh the bracket with quad elements. 
 
 
 Procedure
@@ -29,7 +30,6 @@ Procedure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import Graphics
 import os
 
 # Start prime and get the model
@@ -105,7 +105,7 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export_res = file_io.export_mapdl_cdb(
-    os.path.join(os.getcwd(),"bracket_mid_surface.cdb"), 
+    os.path.join(os.getcwd(), "bracket_mid_surface.cdb"), 
     prime.ExportMapdlCdbParams(model=model),
 )
 print(os.getcwd())
