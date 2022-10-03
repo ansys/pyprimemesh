@@ -107,7 +107,7 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 with tempfile.TemporaryDirectory() as temp_folder:
     mapdl_cdb = os.path.join(temp_folder, 'bracket_scaffold.cdb')
     file_io.export_mapdl_cdb(mapdl_cdb, params=prime.ExportMapdlCdbParams(model))
-    
+
     assert os.path.exists(mapdl_cdb)
     print(f'MAPDL case exported at {mapdl_cdb}')
 
