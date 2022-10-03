@@ -30,7 +30,7 @@ Procedure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 from ansys.meshing import prime
-import os
+import os, tempfile
 
 # Start prime and get the model
 prime_client = prime.launch_prime()
@@ -40,8 +40,8 @@ model = prime_client.model
 # Import geometry and review the part summary
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Download the geometry file
-bracket_file = prime.examples.download_file(r"bracket_mid_surface.scdoc")
+# Download the geometry file (.fmd file exported by SpaceClaim)
+bracket_file = prime.examples.download_bracket_fmd()
 
 # Import geometry and create part per CAD model for topology based connection
 file_io = prime.FileIO(model)
@@ -104,11 +104,12 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 # Write a cdb file for use in the APDL solver
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export_res = file_io.export_mapdl_cdb(
-    os.path.join(os.getcwd(), "bracket_mid_surface.cdb"),
-    prime.ExportMapdlCdbParams(model=model),
-)
-print(os.getcwd())
+with tempfile.TemporaryDirectory() as temp_folder:
+    mapdl_cdb = os.path.join(temp_folder, 'bracket_scaffold.cdb')
+    file_io.export_mapdl_cdb(mapdl_cdb, params=prime.ExportMapdlCdbParams(model))
+    
+    assert os.path.exists(mapdl_cdb)
+    print(f'MAPDL case exported at {mapdl_cdb}')
 
 ###############################################################################
 # Exit the Prime session
