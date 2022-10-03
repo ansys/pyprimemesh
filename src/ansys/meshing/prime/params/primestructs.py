@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.primeconfig import *
 from ansys.meshing.prime.autogen.commontypes import *
 from ansys.meshing.prime.autogen.commonstructs import *
@@ -26,3 +24,4 @@ from ansys.meshing.prime.autogen.deletetoolstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *
 from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
+from ansys.meshing.prime.autogen.topoutilitystructs import *

@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import json
 import numpy as np
 import ansys.meshing.prime.relaxed_json as relaxed_json

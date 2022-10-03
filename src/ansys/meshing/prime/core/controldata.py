@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.controldata import ControlData as _ControlData
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl

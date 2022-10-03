@@ -37,7 +37,9 @@ with pyprime.launch_prime() as session:
     _ = control.set_scope(pyprime.ScopeDefinition(model=model))
 
     field = pyprime.SizeField(model)
-    _ = field.compute_volumetric([control.id])
+    _ = field.compute_volumetric(
+        [control.id], pyprime.VolumetricSizeFieldComputeParams(enable_multi_threading=False)
+    )
 
     with pyprime.Surfer(model) as surfacemesher:
         _ = surfacemesher.mesh_topo_faces(

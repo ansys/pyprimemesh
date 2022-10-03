@@ -1,7 +1,5 @@
 '''The default configuration for the PyPrime library.
 '''
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 
 __all__ = [
     'ip',

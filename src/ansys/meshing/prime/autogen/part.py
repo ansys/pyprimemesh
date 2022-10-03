@@ -1,11 +1,9 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any
+from typing import List, Any, Union
 
 class Part(CoreObject):
     """Part contains zonelets and topoentities.
@@ -550,6 +548,36 @@ class Part(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("compute_topo_volumes", ComputeTopoVolumesResults(model = self._model, json_data = result))
         return ComputeTopoVolumesResults(model = self._model, json_data = result)
+
+    def extract_topo_volumes(self, topo_faces : Iterable[int], params : ExtractTopoVolumesParams) -> ExtractTopoVolumesResults:
+        """ Extract topovolumes connected to given cap topofaces.
+
+
+        Parameters
+        ----------
+        topo_faces : Iterable[int]
+            Ids of topofaces connected to topovolumes.
+        params : ExtractTopoVolumesParams
+            Parameters to compute topovolumes.
+
+        Returns
+        -------
+        ExtractTopoVolumesResults
+            Return the ExtractTopoVolumesResults.
+
+
+        Examples
+        --------
+        >>> results = part.extract_flow_topo_volumes(topo_faces, params)
+
+        """
+        args = {"topo_faces" : topo_faces,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/ExtractTopoVolumes"
+        self._model._print_logs_before_command("extract_topo_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("extract_topo_volumes", ExtractTopoVolumesResults(model = self._model, json_data = result))
+        return ExtractTopoVolumesResults(model = self._model, json_data = result)
 
     def get_volumes(self) -> Iterable[int]:
         """ Get all the volumes of the part.

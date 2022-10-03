@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.sizecontrol import SizeControl as _SizeControl
 from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryParams
 from ansys.meshing.prime.autogen.commonstructs import SetNameResults

@@ -1,11 +1,9 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any
+from typing import List, Any, Union
 
 class SizeField(CoreObject):
     """The size field is computed based on the size control defined.
@@ -32,7 +30,7 @@ class SizeField(CoreObject):
         command_name = "PrimeMesh::SizeField/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def compute_volumetric(self, size_control_ids : Iterable[int]) -> VolumetricSizeFieldComputeResults:
+    def compute_volumetric(self, size_control_ids : Iterable[int], volumetric_sizefield_params : VolumetricSizeFieldComputeParams) -> VolumetricSizeFieldComputeResults:
         """ Computes the volumetric size field using given size control ids.
 
 
@@ -44,10 +42,11 @@ class SizeField(CoreObject):
         Examples
         --------
         >>> size_field.compute_volumetric(
-        >>>           [size_control.id for size_control in model.control_data.size_controls]))
+        >>>           [size_control.id for size_control in model.control_data.size_controls], volumetric_sizefield_params))
 
         """
-        args = {"size_control_ids" : size_control_ids}
+        args = {"size_control_ids" : size_control_ids,
+        "volumetric_sizefield_params" : volumetric_sizefield_params._jsonify()}
         command_name = "PrimeMesh::SizeField/ComputeVolumetric"
         self._model._print_logs_before_command("compute_volumetric", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)

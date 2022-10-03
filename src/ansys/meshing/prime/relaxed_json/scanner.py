@@ -1,7 +1,5 @@
 """Implementation of Scanner for scanning bytes or bytearrays
 """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from typing import Callable, Tuple
 import re
 

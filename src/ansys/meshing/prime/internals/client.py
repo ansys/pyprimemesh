@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import os
 import logging
 from ansys.meshing.prime.internals.utils import terminate_process

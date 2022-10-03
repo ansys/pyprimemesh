@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from pyvista.plotting.plotting import Plotter
 import ansys.meshing.prime as prime
 import enum
