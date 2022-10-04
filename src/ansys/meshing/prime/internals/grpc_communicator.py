@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 __all__ = ['GRPCCommunicator']
 import grpc
 import ansys.meshing.prime.internals.json_utils as json

@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.model import Model as _Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.core.controldata import ControlData

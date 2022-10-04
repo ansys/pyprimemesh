@@ -1,8 +1,6 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import enum
-from typing import Dict, Any, List, Iterable
+from typing import Dict, Any, Union, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
@@ -304,6 +302,8 @@ class ErrorCode(enum.IntEnum):
     """Volume search failed."""
     INVALIDCELLQUALITYLIMIT = 2852
     """Invalid cell quality limit."""
+    FILLHOLEFAILED = 2901
+    """Unable to create capping surface."""
     SUBTRACTZONELETSFAILED = 2903
     """Unable to subtract cutters from input zonelets."""
     TRANSFORMATIONFAILED = 3000

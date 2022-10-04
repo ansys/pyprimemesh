@@ -1,9 +1,7 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
-from typing import List, Any
+from typing import List, Any, Union
 
 class CoreObject(object):
     """

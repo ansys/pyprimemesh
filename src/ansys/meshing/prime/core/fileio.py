@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
 from ansys.meshing.prime.autogen.fileiostructs import (
     FileReadParams,
@@ -198,16 +196,18 @@ class FileIO(_FileIO):
 
         Supported formats on Windows are:
 
-        \*.scdoc \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.dbs \*.sat
-        \*.sab \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml \*.prt\*
-        \*.asm\* \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm \*.asm
-        \*.sldprt \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
+        \*.scdoc \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
+        \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml \*.prt\* \*.asm\*
+        \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm \*.asm \*.sldprt
+        \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
 
         Supported formats on Linux are:
 
-        \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.dbs \*.sat \*.sab
-        \*.CATPart \*.CATProduct \*.iges \*.igs \*.ipt \*.iam \*.jt \*.x_t \*.x_b \*.step
-        \*.stp \*.stl \*.plmxml \*.tgf
+        \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
+        \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
+        \*.stl \*.plmxml \*.tgf
+
+        Please refer documentation for detailed list of supported formats.
 
         Parameters
         ----------

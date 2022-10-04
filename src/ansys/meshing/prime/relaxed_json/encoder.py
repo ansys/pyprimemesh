@@ -1,7 +1,5 @@
 '''Implementation of JSOnEncoder that can handle byte arrays
 '''
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import re
 import numpy as np
 

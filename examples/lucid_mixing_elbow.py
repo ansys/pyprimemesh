@@ -56,7 +56,7 @@ mixing_elbow = prime.examples.download_elbow_fmd()
 mesh_util.read(file_name=mixing_elbow)
 
 # Create face zones from imported labels on geometry for use in Fluent solver
-mesh_util.create_zones_from_labels(["inlet", "outlet"])
+mesh_util.create_zones_from_labels("inlet,outlet")
 
 ###############################################################################
 # Surface mesh geometry with curvature sizing.
@@ -70,10 +70,14 @@ mesh_util.surface_mesh(min_size=5, max_size=20)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Fill the volume with polyhedral and prism mesh specifying location and number of layers for prisms
+
 # Expressions are used to define the surfaces to have prisms grown where "* !inlet !outlet"
 # states "all not inlet or outlet".
-mesh_util.volume_mesh(volume_fill_type=prime.VolumeFillType.POLY,
-    prism_surface_expression="* !inlet !outlet", prism_layers=3)
+mesh_util.volume_mesh(
+    volume_fill_type=prime.VolumeFillType.POLY,
+    prism_surface_expression="* !inlet !outlet",
+    prism_layers=3,
+)
 
 ###############################################################################
 # Print statistics on generated mesh.
@@ -91,9 +95,12 @@ part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
 
 # Get element quality on all parts in the model
 search = prime.VolumeSearch(model=model)
-params = prime.VolumeQualitySummaryParams(model=model,
+params = prime.VolumeQualitySummaryParams(
+    model=model,
     scope=prime.ScopeDefinition(model=model, part_expression="*"),
-    cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS], quality_limit=[0.95])
+    cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS],
+    quality_limit=[0.95],
+)
 results = search.get_volume_quality_summary(params=params)
 
 # Print statistics on meshed part

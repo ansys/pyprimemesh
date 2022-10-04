@@ -1,54 +1,46 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
-from typing import List
+from typing import List, Iterable
 import ansys.meshing.prime as prime
 import os
 import enum
+import re
 
-# Formats supported for CAD import
-supported_cad = [
-    ".scdoc",
-    ".fmd",
-    ".agdb",
-    ".pmdb",
-    ".meshdat",
-    ".mechdat",
-    ".dsdb",
-    ".cmdb",
-    ".dbs",
-    ".sat",
-    ".sab",
-    ".dwg",
-    ".dxf",
-    ".model",
-    ".exp",
-    ".CATPart",
-    ".CATProduct",
-    ".cgr",
-    ".3dxml",
-    ".prt*",
-    ".asm*",
-    ".xpr*",
-    ".xas*",
-    ".iges",
-    ".igs",
-    ".ipt",
-    ".iam",
-    ".jt",
-    ".prt",
-    ".x_t",
-    ".x_b",
-    ".par",
-    ".psm",
-    ".asm",
-    ".sldprt",
-    ".sldasm",
-    ".step",
-    ".stp",
-    ".stl",
-    ".plmxml",
-    ".tgf",
-]
+
+def _match_pattern(pattern: str, name: str) -> bool:
+    pattern = "^" + pattern.replace("*", ".*").replace("?", ".") + "$"
+    x = re.search(pattern, name)
+    if x:
+        return True
+    else:
+        return False
+
+
+def _check_name_pattern(name_patterns: str, name: str) -> bool:
+    patterns = []
+    include_pattern = []
+    exclude_pattern = []
+    a = name_patterns.split(",")
+    for aa in a:
+        if len(aa) > 0:
+            b = aa.split(" ")
+            for bb in b:
+                if len(bb) > 0:
+                    patterns.append(bb)
+    for pattern in patterns:
+        pattern = pattern.strip()
+        if pattern.startswith("!"):
+            exclude_pattern.append(pattern[1:])
+        else:
+            include_pattern.append(pattern)
+
+    for pattern in exclude_pattern:
+        if _match_pattern(pattern, name):
+            return False
+
+    for pattern in include_pattern:
+        if _match_pattern(pattern, name):
+            return True
+
+    return False
 
 
 class LabelToZoneMethod(enum.IntEnum):
@@ -59,6 +51,226 @@ class LabelToZoneMethod(enum.IntEnum):
     Simple method to create zones from labels.
     Entities are queried using labels and zones created.
     """
+
+
+class _LucidScope:
+    def __init__(
+        self,
+        part_expression: str,
+        entity_expression: str,
+        scope_evaluation_type: prime.ScopeEvaluationType,
+        scope_entity_type: prime.ScopeEntity,
+    ):
+        self._part_expression = part_expression
+        self._entity_expression = entity_expression
+        self._evaluation_type = scope_evaluation_type
+        self._entity_type = scope_entity_type
+
+    def __str__(self) -> str:
+        return "#".join(
+            [
+                self._part_expression,
+                self._entity_expression,
+                str(int(self._evaluation_type)),
+                str(int(self._entity_type)),
+            ]
+        )
+
+    def get_scope_definition(self, model: prime.Model) -> prime.ScopeDefinition:
+        """Gets the scope definition of the scope.
+
+        Parameters
+        ----------
+        model : Model
+            Prime model.
+
+        Returns
+        -------
+        ScopeDefinition
+            Returns the scope definition.
+        """
+        label_exp: str = None
+        zone_exp: str = None
+        if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
+            label_exp = self._entity_expression
+        else:
+            zone_exp = self._entity_expression
+
+        sd = prime.ScopeDefinition(
+            model=model,
+            entity_type=self._entity_type,
+            evaluation_type=self._evaluation_type,
+            part_expression=self._part_expression,
+            label_expression=label_exp,
+            zone_expression=zone_exp,
+        )
+        return sd
+
+
+class SurfaceScope(_LucidScope):
+    """SurfaceScope is one of the classes in Lucid API.
+
+    This class is meant for beginners to meshing. This class is used to define
+    a scope for operation on surfaces.
+
+    """
+
+    def __init__(
+        self,
+        part_expression: str = "*",
+        entity_expression: str = "*",
+        scope_evaluation_type: prime.ScopeEvaluationType = prime.ScopeEvaluationType.LABELS,
+    ):
+        """Initialize SurfaceScope with the given part expression,
+        entity expression and scope evaluation type.
+
+        Parameters
+        ----------
+        part_expression : str
+            Part expression to scope parts while evaluating scope.
+        entity_expression : str
+            Label or zone expression to scope entities while evaluating scope.
+        scope_evaluation_type : prime.ScopeEvaluationType
+            Evaluation type to scope entities. The default is set to labels.
+        """
+        _LucidScope.__init__(
+            self,
+            part_expression,
+            entity_expression,
+            scope_evaluation_type,
+            prime.ScopeEntity.FACEZONELETS,
+        )
+
+    def get_parts(self, model: prime.Model) -> Iterable[int]:
+        """Gets the list of part ids in the scope.
+
+        Parameters
+        ----------
+        model : Model
+            Prime model.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of part ids.
+
+        Examples
+        --------
+            >>> from ansys.meshing.prime import Model, SurfaceScope
+            >>> model = client.model
+            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
+            >>> part_ids = su.get_parts()
+        """
+        sel_parts: Iterable[int] = []
+        for part in model.parts:
+            if _check_name_pattern(self._part_expression, part.name):
+                sel_parts.append(part.id)
+        return sel_parts
+
+    def get_face_zonelets(self, model: prime.Model, part_id: int) -> Iterable[int]:
+        """Gets the list of face zonelets for the given part in the scope.
+
+        Parameters
+        ----------
+        model : Model
+            Prime model.
+        part_id : int
+            Id of the part.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of zonelets.
+
+        Examples
+        --------
+            >>> from ansys.meshing.prime import Model, SurfaceScope
+            >>> model = client.model
+            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
+            >>> face_zonelets = su.get_face_zonelets(model, 2)
+        """
+        face_zonelets: Iterable[int] = []
+        part = model.get_part(part_id)
+        if part and _check_name_pattern(self._part_expression, part.name):
+            if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
+                face_zonelets = part.get_face_zonelets_of_label_name_pattern(
+                    self._entity_expression, prime.NamePatternParams(model)
+                )
+            else:
+                face_zonelets = part.get_face_zonelets_of_zone_name_pattern(
+                    self._entity_expression, prime.NamePatternParams(model)
+                )
+        return face_zonelets
+
+    def get_topo_faces(self, model: prime.Model, part_id: int) -> Iterable[int]:
+        """Gets the list of topofaces for the given part in the scope.
+
+        Parameters
+        ----------
+        model : Model
+            Prime model.
+        part_id : int
+            Id of the part.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of zonelets.
+
+        Examples
+        --------
+            >>> from ansys.meshing.prime import Model, SurfaceScope
+            >>> model = client.model
+            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
+            >>> topo_faces = su.get_topo_faces(model, 2)
+        """
+        topo_faces: Iterable[int] = []
+        part = model.get_part(part_id)
+        if part and _check_name_pattern(self._part_expression, part.name):
+            if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
+                topo_faces = part.get_topo_faces_of_label_name_pattern(
+                    self._entity_expression, prime.NamePatternParams(model)
+                )
+            else:
+                topo_faces = part.get_topo_faces_of_zone_name_pattern(
+                    self._entity_expression, prime.NamePatternParams(model)
+                )
+        return topo_faces
+
+
+class VolumeScope(_LucidScope):
+    """VolumeScope is one of the classes in Lucid API.
+
+    This class is meant for beginners to meshing. This class is used to define
+    a scope for operation on volumes.
+
+    """
+
+    def __init__(
+        self,
+        part_expression: str = "*",
+        entity_expression: str = "*",
+        scope_evaluation_type: prime.ScopeEvaluationType = prime.ScopeEvaluationType.ZONES,
+    ):
+        """Initialize VolumeScope with the given part expression, entity expression and scope
+        evaluation type.
+
+        Parameters
+        ----------
+        part_expression : str
+            Part expression to scope parts while evaluating scope.
+        entity_expression : str
+            Label or zone expression to scope entities while evaluating scope.
+        scope_evaluation_type : prime.ScopeEvaluationType
+            Evaluation type to scope entities. The default is set to zones.
+        """
+        _LucidScope.__init__(
+            self,
+            part_expression,
+            entity_expression,
+            scope_evaluation_type,
+            prime.ScopeEntity.VOLUME,
+        )
 
 
 class Mesh:
@@ -80,7 +292,7 @@ class Mesh:
 
         Parameters
         ----------
-        model: prime.Model
+        model : prime.Model
             Model on which the methods work.
         """
         self._model = model
@@ -101,24 +313,17 @@ class Mesh:
 
         Parameters
         ----------
-        file_name: str
+        file_name : str
             Path to file to be read or imported.
 
-        append: bool
+        append : bool
             Set it to True to append instead of overwrite.
 
-        cad_reader_route: prime.CadReaderRoute
+        cad_reader_route : prime.CadReaderRoute
             Route of CadReader.
         """
         filename, fileext = os.path.splitext(file_name)
-        if fileext in supported_cad:
-            prime.FileIO(self._model).import_cad(
-                file_name,
-                prime.ImportCadParams(
-                    self._model, append=append, cad_reader_route=cad_reader_route
-                ),
-            )
-        elif fileext == ".msh" or file_name[-7:] == ".msh.gz":
+        if fileext == ".msh" or file_name[-7:] == ".msh.gz":
             prime.FileIO(self._model).import_fluent_meshing_meshes(
                 [file_name], prime.ImportFluentMeshingMeshParams(self._model, append=append)
             )
@@ -135,7 +340,12 @@ class Mesh:
                 file_name, prime.FileReadParams(self._model, append=append)
             )
         else:
-            self._logger.error("Read '" + file_name + "' not supported file type.")
+            prime.FileIO(self._model).import_cad(
+                file_name,
+                prime.ImportCadParams(
+                    self._model, append=append, cad_reader_route=cad_reader_route
+                ),
+            )
 
     def write(self, file_name: str):
         """Write or export files of different formats based on file extension.
@@ -149,7 +359,7 @@ class Mesh:
 
         Parameters
         ----------
-        file_name: str
+        file_name : str
             Path of file to be written or exported.
         """
         filename, fileext = os.path.splitext(file_name)
@@ -170,7 +380,7 @@ class Mesh:
 
     def create_zones_from_labels(
         self,
-        labels: List[str] = None,
+        label_expression: str = None,
         conversion_method: LabelToZoneMethod = LabelToZoneMethod.SIMPLE,
     ):
         """Create zones from labels.
@@ -191,14 +401,21 @@ class Mesh:
 
         Parameters
         ----------
-        labels: List[str]
-            List of labels to be converted to zones.
+        label_expression : str
+            Expression for labels to be converted to zones.
 
         conversion_method : LabelToZoneMethod
             Method used to convert label to zones.
         """
         if conversion_method != LabelToZoneMethod.SIMPLE:
             self._logger.error("Invalid label to zone conversion method")
+
+        labels = []
+        for part in self._model.parts:
+            lbls = part.get_labels()
+            for l in lbls:
+                if l not in labels and _check_name_pattern(label_expression, l):
+                    labels.append(l)
 
         for label in labels:
             face_zone = None
@@ -221,12 +438,10 @@ class Mesh:
                             face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
                         part.add_zonelets_to_zone(face_zone.zone_id, in_face_zonelets)
 
-    def __variable_size_surface_mesh(self, min_size, max_size, generate_quads):
-        self._model.set_global_sizing_params(
-            prime.GlobalSizingParams(model=self._model, min=min_size, max=max_size, growth_rate=1.2)
-        )
-        for part in self._model.parts:
-            topofaces = part.get_topo_faces()
+    def __surface_mesh_on_active_sf(self, generate_quads: bool, scope: SurfaceScope):
+        part_ids = scope.get_parts(self._model)
+        for part_id in part_ids:
+            topofaces = scope.get_topo_faces(self._model, part_id)
             surfer = prime.Surfer(self._model)
             params = prime.SurferParams(
                 self._model,
@@ -234,6 +449,30 @@ class Mesh:
                 generate_quads=generate_quads,
             )
             if len(topofaces) > 0:
+                surfer.mesh_topo_faces(part_id=part_id, topo_faces=topofaces, params=params)
+            else:
+                tf = scope.get_face_zonelets(self._model, part_id)
+                if len(tf) > 0:
+                    te = []
+                    surfer.remesh_face_zonelets(part_id, tf, te, params)
+
+    def __variable_size_surface_mesh(
+        self, min_size: float, max_size: float, generate_quads: bool, scope: SurfaceScope
+    ):
+        self._model.set_global_sizing_params(
+            prime.GlobalSizingParams(model=self._model, min=min_size, max=max_size, growth_rate=1.2)
+        )
+        surfer = prime.Surfer(self._model)
+        params = prime.SurferParams(
+            self._model,
+            size_field_type=prime.SizeFieldType.VOLUMETRIC,
+            generate_quads=generate_quads,
+        )
+        part_ids = scope.get_parts(self._model)
+        for part_id in part_ids:
+            part = self._model.get_part(part_id)
+            topofaces = scope.get_topo_faces(self._model, part_id)
+            if len(topofaces) > 0:
                 sizecontrol1 = self._model.control_data.create_size_control(
                     prime.SizingType.CURVATURE
                 )
@@ -250,52 +489,70 @@ class Mesh:
                     )
                 )
                 sizefield = prime.SizeField(model=self._model)
-                res = sizefield.compute_volumetric(size_control_ids=[sizecontrol1.id])
+                res = sizefield.compute_volumetric(
+                    size_control_ids=[sizecontrol1.id],
+                    volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
+                        enable_multi_threading=False
+                    ),
+                )
                 surfer.mesh_topo_faces(part_id=part.id, topo_faces=topofaces, params=params)
                 self._model.delete_volumetric_size_fields([res.size_field_id])
             else:
-                tf = part.get_face_zonelets()
-                te = part.get_edge_zonelets()
-                sizecontrol1 = self._model.control_data.create_size_control(
-                    prime.SizingType.CURVATURE
-                )
-                sizecontrol1.set_curvature_sizing_params(
-                    prime.CurvatureSizingParams(
-                        model=self._model, min=min_size, max=max_size, growth_rate=1.2
+                tf = scope.get_face_zonelets(self._model, part_id)
+                if len(tf) > 0:
+                    te = []
+                    sizecontrol1 = self._model.control_data.create_size_control(
+                        prime.SizingType.CURVATURE
                     )
-                )
-                sizecontrol1.set_scope(
-                    prime.ScopeDefinition(
-                        model=self._model,
-                        entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS,
-                        part_expression=part.name,
+                    sizecontrol1.set_curvature_sizing_params(
+                        prime.CurvatureSizingParams(
+                            model=self._model, min=min_size, max=max_size, growth_rate=1.2
+                        )
                     )
-                )
-                sizefield = prime.SizeField(model=self._model)
-                res = sizefield.compute_volumetric(size_control_ids=[sizecontrol1.id])
-                surfer.remesh_face_zonelets(part.id, tf, te, params)
-                self._model.delete_volumetric_size_fields([res.size_field_id])
+                    sizecontrol1.set_scope(
+                        prime.ScopeDefinition(
+                            model=self._model,
+                            entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS,
+                            part_expression=part.name,
+                        )
+                    )
+                    sizefield = prime.SizeField(model=self._model)
+                    res = sizefield.compute_volumetric(
+                        size_control_ids=[sizecontrol1.id],
+                        volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
+                            enable_multi_threading=False
+                        ),
+                    )
+                    surfer.remesh_face_zonelets(part.id, tf, te, params)
+                    self._model.delete_volumetric_size_fields([res.size_field_id])
 
-    def __constant_size_surface_mesh(self, min_size, generate_quads):
-        for part in self._model.parts:
-            surfer = prime.Surfer(self._model)
-            topofaces = part.get_topo_faces()
+    def __constant_size_surface_mesh(
+        self, min_size: float, generate_quads: bool, scope: SurfaceScope
+    ):
+        part_ids = scope.get_parts(self._model)
+        surfer = prime.Surfer(self._model)
+        for part_id in part_ids:
+            topofaces = scope.get_topo_faces(self._model, part_id)
             params = prime.SurferParams(
                 self._model, constant_size=min_size, generate_quads=generate_quads
             )
             if len(topofaces) > 0:
-                surfer.mesh_topo_faces(part_id=part.id, topo_faces=topofaces, params=params)
+                surfer.mesh_topo_faces(part_id=part_id, topo_faces=topofaces, params=params)
             else:
-                tf = part.get_face_zonelets()
-                te = part.get_edge_zonelets()
-                surfer.remesh_face_zonelets(part.id, tf, te, params)
+                tf = scope.get_face_zonelets(self._model, part_id)
+                te = []
+                surfer.remesh_face_zonelets(part_id, tf, te, params)
 
     def surface_mesh(
-        self, min_size: float = None, max_size: float = None, generate_quads: bool = False
+        self,
+        min_size: float = None,
+        max_size: float = None,
+        generate_quads: bool = False,
+        scope: SurfaceScope = SurfaceScope(),
     ):
-        """Generate Surface mesh on the model.
+        """Generate Surface mesh on the given scope.
 
-        This method generates surface mesh on the entire model.
+        This method generates surface mesh on the given scope.
         The method is used to generate constant or variable size surface mesh.
         The method supports generating quad dominant or triangular elements.
 
@@ -310,14 +567,17 @@ class Mesh:
 
         Parameters
         ----------
-        min_size: float
+        min_size : float
             Minimum edge length of the mesh.
 
-        max_size: float
+        max_size : float
             Maximum edge length of the mesh.
 
         generate_quads : bool
             Generate quad dominant mesh or all triangular mesh.
+
+        scope : SurfaceScope
+            Scope for generating surface mesh.
         """
         if min_size == None and max_size == None:
             global_sizing = self._model.get_global_sizing_params()
@@ -325,17 +585,239 @@ class Mesh:
                 "Min or Max size not provided. Using max global size " + str(global_sizing.max)
             )
             self.__constant_size_surface_mesh(
-                min_size=global_sizing.max, generate_quads=generate_quads
+                min_size=global_sizing.max, generate_quads=generate_quads, scope=scope
             )
         elif min_size == None or max_size == None:
             if min_size is None:
-                self.__constant_size_surface_mesh(min_size=max_size, generate_quads=generate_quads)
+                self.__constant_size_surface_mesh(
+                    min_size=max_size, generate_quads=generate_quads, scope=scope
+                )
             else:
-                self.__constant_size_surface_mesh(min_size=min_size, generate_quads=generate_quads)
+                self.__constant_size_surface_mesh(
+                    min_size=min_size, generate_quads=generate_quads, scope=scope
+                )
         else:
             self.__variable_size_surface_mesh(
-                min_size=min_size, max_size=max_size, generate_quads=generate_quads
+                min_size=min_size, max_size=max_size, generate_quads=generate_quads, scope=scope
             )
+
+    def create_constant_size_control(
+        self,
+        control_name: str = "size_control",
+        size: float = 1.0,
+        scope: SurfaceScope = SurfaceScope(),
+    ):
+        """Generate constant size control on the given scope.
+
+        This method generates constant size control on the given scope.
+
+        Parameters
+        ----------
+        control_name : str
+            Name of the control.
+
+        size : float
+            Constant edge length of the mesh.
+
+        scope : SurfaceScope
+            Scope for creating size control.
+        """
+        global_sizes = self._model.get_global_sizing_params()
+        if global_sizes.max < size:
+            global_sizes.max = size
+        if global_sizes.min > size or global_sizes.min <= 0:
+            global_sizes.min = size
+        self._model.set_global_sizing_params(global_sizes)
+        sizecontrol = self._model.control_data.create_size_control(prime.SizingType.SOFT)
+        sizecontrol.set_soft_sizing_params(
+            prime.SoftSizingParams(
+                model=self._model, max=size, growth_rate=global_sizes.growth_rate
+            )
+        )
+        sizecontrol.set_scope(scope.get_scope_definition(self._model))
+        sizecontrol.set_suggested_name(control_name)
+
+    def create_curvature_size_control(
+        self,
+        control_name: str = "size_control",
+        min: float = 1.0,
+        max: float = 2.0,
+        scope: SurfaceScope = SurfaceScope(),
+    ):
+        """Generate curvature size control on the given scope.
+
+        This method generates curvature size control on the given scope.
+
+        Parameters
+        ----------
+        control_name : str
+            Name of the control.
+
+        min : float
+            Min edge length of the mesh.
+
+        max : float
+            Max edge length of the mesh.
+
+        scope : SurfaceScope
+            Scope for creating size control.
+        """
+        global_sizes = self._model.get_global_sizing_params()
+        if max < min:
+            t = max
+            max = min
+            min = t
+        if global_sizes.max < max:
+            global_sizes.max = max
+        if global_sizes.min > min or global_sizes.min <= 0:
+            global_sizes.min = min
+        self._model.set_global_sizing_params(global_sizes)
+        sizecontrol = self._model.control_data.create_size_control(prime.SizingType.CURVATURE)
+        sizecontrol.set_curvature_sizing_params(
+            prime.CurvatureSizingParams(
+                model=self._model, min=min, max=max, growth_rate=global_sizes.growth_rate
+            )
+        )
+        sizecontrol.set_scope(scope.get_scope_definition(self._model))
+        sizecontrol.set_suggested_name(control_name)
+
+    def surface_mesh_with_size_controls(
+        self,
+        size_control_names: str = "*",
+        generate_quads: bool = False,
+        scope: SurfaceScope = SurfaceScope(),
+    ):
+        """Generate Surface mesh on the given scope with the given size controls.
+
+        This method generates surface mesh on the given scope.
+        The method is used to generate surface mesh using the given size controls.
+        The method supports generating quad dominant or triangular elements.
+
+        Parameters
+        ----------
+        size_control_names : str
+            Name pattern for the size controls.
+
+        generate_quads : bool
+            Generate quad dominant mesh or all triangular mesh.
+
+        scope : SurfaceScope
+            Scope for generating surface mesh.
+        """
+        sizefield = prime.SizeField(model=self._model)
+        s_control_ids = []
+        s_controls = self._model.control_data.size_controls
+        for control in s_controls:
+            if _check_name_pattern(size_control_names, control.name):
+                s_control_ids.append(control.id)
+        if len(s_control_ids) > 0:
+            size_field_res = sizefield.compute_volumetric(
+                size_control_ids=s_control_ids,
+                volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
+                    enable_multi_threading=False
+                ),
+            )
+            self.__surface_mesh_on_active_sf(generate_quads=generate_quads, scope=scope)
+            self._model.delete_volumetric_size_fields([size_field_res.size_field_id])
+
+    def compute_volumes(self, part_expression: str = "*", create_zones_per_volume: bool = True):
+        """
+        Computes volumes in the parts defined by the part expression
+
+        Parameters
+        ----------
+        part_expression : str
+            Expression of parts where topology needs to be deleted.
+
+        create_zones_per_volume : bool
+            Creates volume zones for each volume when True.
+
+        """
+        params = prime.ComputeVolumesParams(
+            model=self._model, create_zone_per_volume=create_zones_per_volume
+        )
+        for part in self._model.parts:
+            if _check_name_pattern(part_expression, part.name):
+                if len(part.get_topo_faces()) > 0:
+                    part.compute_topo_volumes(params=params)
+                else:
+                    part.compute_closed_volumes(params=params)
+
+    def delete_topology(self, part_expression: str = "*", delete_edges: bool = True):
+        """
+        Deletes topology in the given part.
+
+        This method can be used to delete topology in the parts defined by the part expression.
+        If delete_edges is set to True, edge zonelets will be deleted.
+
+        Parameters
+        ----------
+        part_expression : str
+            Expression of parts where topology needs to be deleted.
+
+        delete_edges : bool
+            Edge zonelets are deleted when true.
+
+        """
+        for part in self._model.parts:
+            if _check_name_pattern(part_expression, part.name):
+                part.delete_topo_entities(
+                    prime.DeleteTopoEntitiesParams(
+                        model=self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+                    )
+                )
+                if delete_edges:
+                    part.delete_zonelets(part.get_edge_zonelets())
+
+    def __create_volume_controls(self, part: prime.Part, scope: VolumeScope) -> Iterable[int]:
+        volume_control_ids = []
+        if scope._evaluation_type == prime.ScopeEvaluationType.ZONES:
+            volume_zones_all = part.get_volume_zones()
+            volume_zones_to_mesh = []
+            if _check_name_pattern(scope._part_expression, part.name):
+                for volume_zone in volume_zones_all:
+                    if _check_name_pattern(
+                        scope._entity_expression, self._model.get_zone_name(volume_zone)
+                    ):
+                        volume_zones_to_mesh.append(volume_zone)
+
+            volume_zones_to_avoid = [v for v in volume_zones_all if v not in volume_zones_to_mesh]
+            scope_str = ", ".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
+
+            if len(scope_str) > 0:
+                volume_control_param_dead = prime.VolumeControlParams(
+                    model=self._model, cell_zonelet_type=prime.CellZoneletType.DEAD
+                )
+                volume_control_scope_dead = prime.ScopeDefinition(
+                    model=self._model,
+                    part_expression=part.name,
+                    label_expression="",
+                    zone_expression=scope_str,
+                    entity_type=prime.ScopeEntity.VOLUME,
+                    evaluation_type=prime.ScopeEvaluationType.ZONES,
+                )
+                volume_control_dead = self._model.control_data.create_volume_control()
+                volume_control_dead.set_params(volume_control_params=volume_control_param_dead)
+                volume_control_dead.set_scope(scope=volume_control_scope_dead)
+                volume_control_ids.append(volume_control_dead.id)
+
+            volume_control_param_fluid = prime.VolumeControlParams(
+                model=self._model, cell_zonelet_type=prime.CellZoneletType.FLUID
+            )
+            volume_control_scope_fluid = prime.ScopeDefinition(
+                model=self._model,
+                part_expression=part.name,
+                label_expression="",
+                zone_expression=scope._entity_expression,
+                entity_type=prime.ScopeEntity.VOLUME,
+                evaluation_type=prime.ScopeEvaluationType.ZONES,
+            )
+            volume_control_fluid = self._model.control_data.create_volume_control()
+            volume_control_fluid.set_params(volume_control_params=volume_control_param_fluid)
+            volume_control_fluid.set_scope(scope=volume_control_scope_fluid)
+            volume_control_ids.append(volume_control_fluid.id)
+
+        return volume_control_ids
 
     def volume_mesh(
         self,
@@ -344,6 +826,7 @@ class Mesh:
         prism_surface_expression: str = "*",
         prism_volume_expression: str = "*",
         growth_rate: float = 1.2,
+        scope: VolumeScope = VolumeScope(),
     ):
         """Generate Volume mesh on the model.
 
@@ -355,20 +838,23 @@ class Mesh:
         volume_fill_type : prime.VolumeFillType
             Type of volume elements to be generated.
 
-        prism_layers: int
+        prism_layers : int
             Number of prism layers to grow.
 
-        prism_label_expression: str
+        prism_label_expression : str
             Labels on surfaces from where prisms are grown.
             Default is to grow from all surfaces.
 
-        prism_volume_expression: str
+        prism_volume_expression : str
             Volumes or topovolumes into which prisms are grown.
             The expression evaluates to zone names and volumes
             or topovolumes are queried based on zones evaluated.
 
-        growth_rate: float
+        growth_rate : float
             Prism growth rate.
+
+        scope : VolumeScope
+            Scope of volumes to be meshed.
         """
         automesh_params = prime.AutoMeshParams(model=self._model)
         automesh_params.volume_fill_type = volume_fill_type
@@ -376,6 +862,9 @@ class Mesh:
         for part in self._model.parts:
             try:
                 prism_control = None
+                volume_control_ids = self.__create_volume_controls(part, scope)
+                if len(volume_control_ids) > 0:
+                    automesh_params.volume_control_ids = volume_control_ids
                 if prism_layers:
                     prism_control = self._model.control_data.create_prism_control()
                     prism_control.set_surface_scope(
@@ -400,14 +889,12 @@ class Mesh:
                         )
                     )
                     automesh_params.prism_control_ids = [prism_control.id]
-                if len(part.get_topo_faces()) == 0:
-                    self._logger.info("Computing and volume meshing zones in part " + part.name)
-                    part.compute_closed_volumes(
-                        params=prime.ComputeVolumesParams(self._model, create_zone_per_volume=True)
-                    )
+
                 automesh.mesh(part.id, automesh_params=automesh_params)
                 if prism_control:
                     self._model.control_data.delete_controls([prism_control.id])
+                if len(volume_control_ids) > 0:
+                    self._model.control_data.delete_controls(volume_control_ids)
             except:
                 self._logger.info(part.name + " not volume meshed.")
 
@@ -566,7 +1053,10 @@ class Mesh:
         Helper method to compute size field.
         """
         self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
-        result = field.compute_volumetric([size_control.id for size_control in size_controls])
+        result = field.compute_volumetric(
+            [size_control.id for size_control in size_controls],
+            prime.VolumetricSizeFieldComputeParams(enable_multi_threading=False),
+        )
         return result.size_field_id
 
     def __remesh_after_wrap(self, part: prime.Part):

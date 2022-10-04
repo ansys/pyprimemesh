@@ -1,5 +1,3 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 import os
 import sys
 import subprocess
@@ -220,6 +218,13 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the GRPC server.
     '''
+    if config.has_pim():
+        return launch_remote_prime(version=version, timeout=timeout)
+
+    # Check for port availability on local host
+    if ip == defaults.ip():
+        port = utils.get_available_local_port(port)
+
     if 'PYPRIME_LAUNCH_CONTAINER' in os.environ:
         container_name = 'prime-server'
         utils.launch_prime_github_container(port=port, name=container_name, version=version)
@@ -227,13 +232,6 @@ def launch_prime(
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
         return client
-
-    if config.has_pim():
-        return launch_remote_prime(version=version, timeout=timeout)
-
-    # Check for port availability on local host
-    if ip == defaults.ip():
-        port = utils.get_available_local_port(port)
 
     server = launch_server_process(
         pyprime_root=pyprime_root, ip=ip, port=port, n_procs=n_procs, **kwargs

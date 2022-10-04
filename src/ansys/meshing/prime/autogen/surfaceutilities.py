@@ -1,11 +1,9 @@
 """ Auto-generated file. DO NOT MODIFY """
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any
+from typing import List, Any, Union
 
 class SurfaceUtilities(CoreObject):
     """Performs various general surface utilities algorithms. For example, copy zonelets, resolve surface intersections.
@@ -194,3 +192,33 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("subtract_zonelets", SubtractZoneletsResults(model = self._model, json_data = result))
         return SubtractZoneletsResults(model = self._model, json_data = result)
+
+    def add_thickness(self, zonelets : Iterable[int], params : AddThicknessParams) -> AddThicknessResults:
+        """ Adds thickness to the selected list of face zonelet ids.
+
+
+        Parameters
+        ----------
+        zonelets : Iterable[int]
+            List of input face zonelet ids.
+        params : AddThicknessParams
+            Parameters to control the add thickness operation.
+
+        Returns
+        -------
+        AddThicknessResults
+            Returns the AddThicknessResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.add_thickness(zonelets, params)
+
+        """
+        args = {"zonelets" : zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/AddThickness"
+        self._model._print_logs_before_command("add_thickness", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("add_thickness", AddThicknessResults(model = self._model, json_data = result))
+        return AddThicknessResults(model = self._model, json_data = result)
