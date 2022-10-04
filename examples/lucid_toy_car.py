@@ -64,13 +64,13 @@ mesh_util.read(file_name=toy_car)
 
 # several objects are open surfaces (with holes)
 # coarse wrap to close holes and delete originals
-display(scope=prime.ScopeDefinition(model,part_expression="cabin,exhaust,engine"))
+display(scope=prime.ScopeDefinition(model, part_expression="cabin,exhaust,engine"))
 
-# we could use leakage detection to close these regions 
+# we could use leakage detection to close these regions
 # here we use a coarse wrap and disable feature edge refinement to walk over the holes
 # as this is not the final wrap we do not need to remesh after the wrap
 # wrapping each object in turn we avoid the coarse wrap bridging across narrow gaps
-coarse_wrap = {"cabin":1.5,"exhaust":0.6,"engine":1.5}
+coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
 for part_name in coarse_wrap:
     mesh_util.wrap(
         input_parts=part_name,
@@ -112,14 +112,14 @@ print('Number of free edges', diag_res.n_free_edges)
 print('Number of multi edges', diag_res.n_multi_edges)
 print('Number of self intersections', diag_res.n_self_intersections)
 
-face_quality_measures = [prime.FaceQualityMeasure.SKEWNESS,prime.FaceQualityMeasure.ASPECTRATIO]
+face_quality_measures = [prime.FaceQualityMeasure.SKEWNESS, prime.FaceQualityMeasure.ASPECTRATIO]
 quality_params = prime.SurfaceQualitySummaryParams(model = model, scope = scope,
-    face_quality_measures = face_quality_measures, quality_limit=[0.9,20])
+    face_quality_measures = face_quality_measures, quality_limit=[0.9, 20])
 quality = prime.SurfaceSearch(model)
 qual_summary_res = quality.get_surface_quality_summary(quality_params)
 
 for summary_res in qual_summary_res.quality_results:
-    print("\nMax value of ",summary_res.measure_name,": ", summary_res.max_quality)
+    print("\nMax value of ", summary_res.measure_name, ": ", summary_res.max_quality)
     print("Faces above limit: ", summary_res.n_found)
 
 ###############################################################################
@@ -127,7 +127,7 @@ for summary_res in qual_summary_res.quality_results:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # keep only the wrap surface
-toDelete=[part.id for part in model.parts if part.name != wrap_part.name]
+toDelete = [part.id for part in model.parts if part.name != wrap_part.name]
 model.delete_parts(toDelete)
 
 ###############################################################################
@@ -140,7 +140,7 @@ mesh_util.compute_volumes(part_expression=wrap_part.name)
 # volume zones exist ready for volume meshing and passing to the solver
 print(model)
 
-# the largest face zonelet 
+# the largest face zonelet
 volume = prime.lucid.VolumeScope(part_expression=wrap_part.name,
     entity_expression="tunnel*",
     scope_evaluation_type=prime.ScopeEvaluationType.ZONES)
@@ -167,16 +167,16 @@ mesh_util.create_zones_from_labels(all_labels)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## mesh checks
-vtool=prime.VolumeMeshTool(model=model)
-result=vtool.check_mesh(part_id=wrap_part.id, params = prime.CheckMeshParams(model=model))
+vtool = prime.VolumeMeshTool(model=model)
+result = vtool.check_mesh(part_id=wrap_part.id, params = prime.CheckMeshParams(model=model))
 
-print("Non positive volumes:",result.has_non_positive_volumes)
-print("Non positive areas:",result.has_non_positive_areas)
-print("Invalid shape:",result.has_invalid_shape)
-print("Left handed faces:",result.has_left_handed_faces)
+print("Non positive volumes:", result.has_non_positive_volumes)
+print("Non positive areas:", result.has_non_positive_areas)
+print("Invalid shape:", result.has_invalid_shape)
+print("Left handed faces:", result.has_left_handed_faces)
 
-quality=prime.VolumeSearch(model)
-qual_summary_res=quality.get_volume_quality_summary(
+quality = prime.VolumeSearch(model)
+qual_summary_res = quality.get_volume_quality_summary(
     prime.VolumeQualitySummaryParams(model = model, scope=scope,
     cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS], quality_limit=[0.95]))
 
@@ -190,7 +190,7 @@ print("\nNo. of faces : ", part_summary_res.n_faces)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mesh_util.write(os.path.join(os.getcwd(), "toy_car_lucid.cas"))
-print("\nCurrent working directory for exported files: ",os.getcwd())
+print("\nCurrent working directory for exported files: ", os.getcwd())
 
 ###############################################################################
 # Exit the Prime session.
