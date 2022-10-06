@@ -32,4 +32,3 @@ model.set_num_threads(settings["number_of_threads"])
 print(model.get_num_threads())
 
 ################################################################################
-
