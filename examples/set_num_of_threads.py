@@ -18,11 +18,10 @@ import ansys.meshing.prime as prime
 # start prime and get the model
 model = prime.launch_prime().model
 
-
 ###############################################################################
 # set number of threads for parallel processing
 settings = {
-    "number_of_threads" : 12
+    "number_of_threads": 12
 }
 
 model.set_num_threads(settings["number_of_threads"])
