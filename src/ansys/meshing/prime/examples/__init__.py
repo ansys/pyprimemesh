@@ -10,6 +10,9 @@ __all__ = [
     'download_elbow_pmdat',
     'download_elbow_fmd',
     'download_elbow_scdoc',
+    'download_toy_car_pmdat',
+    'download_toy_car_fmd',
+    'download_toy_car_scdoc',
 ]
 
 _DOWNLOADS = []
@@ -149,6 +152,140 @@ def download_elbow_scdoc(
     _DOWNLOADS.append(file)
     return file
 
+
+def download_toy_car_pmdat(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download PMDAT file for the toy car example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Raises
+    ------
+    ValueError
+        When the provided destination path does not exist on file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as pyprime
+    >>> import ansys.meshing.prime.examples as pyprime_examples
+    >>> with pyprime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     toy_car = pyprime_examples.download_toy_car_pmdat()
+    >>>     with pyprime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(toy_car, params=pyprime.FileReadParams(model))
+    >>>     print(model)
+    >>> pyprime_examples.clear_download_cache()
+    """
+    if destination is not None and not os.path.isdir(destination):
+        raise ValueError('destination directory provided does not exist')
+    file = download_file(
+        'toy_car.pmdat', 'pyprime', 'toy_car', destination=destination, force=force
+    )
+    _DOWNLOADS.append(file)
+    return file
+
+
+def download_toy_car_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download FMD file for the toy car example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Raises
+    ------
+    ValueError
+        When the provided destination path does not exist on file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as pyprime
+    >>> import ansys.meshing.prime.examples as pyprime_examples
+    >>> with pyprime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     toy_car = pyprime_examples.download_toy_car_fmd()
+    >>>     with pyprime.FileIO(model) as io:
+    >>>         _ = io.import_cad(toy_car, params=pyprime.ImportCADParams(model))
+    >>>     print(model)
+    >>> pyprime_examples.clear_download_cache()
+    """
+    if destination is not None and not os.path.isdir(destination):
+        raise ValueError('destination directory provided does not exist')
+    file = download_file(
+        'toy_car.fmd', 'pyprime', 'toy_car', destination=destination, force=force
+    )
+    _DOWNLOADS.append(file)
+    return file
+
+
+def download_toy_car_scdoc(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download SCDOC file for the toy car example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Raises
+    ------
+    ValueError
+        When the provided destination path does not exist on file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as pyprime
+    >>> import ansys.meshing.prime.examples as pyprime_examples
+    >>> with pyprime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     toy_car = pyprime_examples.download_toy_car_scdoc()
+    >>>     with pyprime.FileIO(model) as io:
+    >>>         _ = io.import_cad(toy_car, params=pyprime.ImportCADParams(model))
+    >>>     print(model)
+    >>> pyprime_examples.clear_download_cache()
+    """
+    if destination is not None and not os.path.isdir(destination):
+        raise ValueError('destination directory provided does not exist')
+    file = download_file(
+        'toy_car.scdoc', 'pyprime', 'toy_car', destination=destination, force=force
+    )
+    _DOWNLOADS.append(file)
+    return file
 
 def clear_download_cache():
     """Clears the cache of downloaded files"""
