@@ -3,6 +3,23 @@
 ==========
 User Guide
 ==========
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+	launching_pyprime
+	reading_writing
+	meshing
+	size_field
+	controls
+	features
+
+
+
+
+
+
 -------------
 Introduction
 -------------

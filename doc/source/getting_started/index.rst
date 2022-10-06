@@ -6,13 +6,13 @@ Getting Started
 
 Overview
 --------
-The PyPrime project supports Pythonic access to Ansys PRIME Meshing Engine.
+The PyPrime project supports Pythonic access to Ansys Prime Meshing Engine.
 
 
 Installation
 ------------
 
-PyPrime requires the following prerequisites for the succesfull installation:
+PyPrime requires the following prerequisites for the succesful installation:
 
 Hardware Requirements
 ----------------------
@@ -33,7 +33,7 @@ Operating System: Windows,Linux
 
 Software: Python 3.6 to 3.9
 
-		  Ansys Workbench 2022 R2 and above versions
+		  Ansys Workbench 2023 R1 and above versions
 
 
 Installing PyPrime
