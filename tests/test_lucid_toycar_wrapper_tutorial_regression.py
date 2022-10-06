@@ -7,8 +7,7 @@ import os
 class TestElbow(PrimeTestCase):
     def test_gearbox_tutorial(self):
         # downloads pmdat file
-        toy_car = prime.examples.download_toy_car_lucid_pmdat()  # add this to the downloads script
-        # toy_car = prime.examples.download_elbow_pmdat() #temp use elbow_pmdat to test this file
+        toy_car = prime.examples.download_toy_car_pmdat()
         # reads file
         fileIO = prime.FileIO(model=self._model)
         _ = fileIO.read_pmdat(toy_car, prime.FileReadParams(model=self._model))
