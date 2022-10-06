@@ -81,8 +81,6 @@ This way, it's not possible for you to push code that fails the style checks. Fo
   flake8...................................................................Passed
   codespell................................................................Passed
 
-.. _ref_index_api:
-
 ----------
 Licensing
 ----------
