@@ -20,7 +20,7 @@ You can clone the source repository from PyPrime GitHub and install the latest v
 
 >>> git clone https://github.com/pyansys/pyprime
 >>> cd pyprime
->>> pip install -e .
+>>> pip install -e .[graphics] --find-links deps
 
 ---------------
 Posting Issues
