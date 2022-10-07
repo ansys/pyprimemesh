@@ -1,3 +1,6 @@
+.. _ref_index_reading_writing:
+
+
 *************************************
 Reading and Writing Files in PyPrime 
 *************************************

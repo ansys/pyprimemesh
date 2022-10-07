@@ -1,3 +1,5 @@
+.. _ref_index_controls:
+
 ********************
 Controls in PyPrime
 ********************
