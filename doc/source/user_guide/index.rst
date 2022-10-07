@@ -8,12 +8,12 @@ User Guide
    :maxdepth: 1
    :hidden:
 
-	launching_pyprime
-	reading_writing
-	meshing
-	size_field
-	controls
-	features
+   launching_pyprime
+   reading_writing
+   meshing
+   size_field
+   controls
+   features
 
 
 -------------
