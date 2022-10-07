@@ -16,10 +16,6 @@ User Guide
 	features
 
 
-
-
-
-
 -------------
 Introduction
 -------------
