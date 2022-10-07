@@ -4,11 +4,14 @@
 Contributing
 =============
 
-PyPrime provides a platform for you to contribute your codes to the PyPrime repository. 
-Contributing section guides you to understand the PyPrime code repository. 
-Ansys maintains the PyPrime software package. Hence, any submitted code may undergo review before merging to the PyPrime repository.
-PyPrime Support community may help you to answer your queries and develop new features using PyPrime APIs as per your meshing needs. 
-PyPrime community encourages your questions and contributions to PyPrime repository.
+Overall guidance on contributing to a PyAnsys library appears in the
+`Contributing <https://dev.docs.pyansys.com/overview/contributing.html>`_ topic
+in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
+with it and all `Guidelines and Best Practices
+<https://dev.docs.pyansys.com/guidelines/index.html>`_ before attempting to
+contribute to PyPrime.
+ 
+The following contribution information is specific to PyPrime.
 
 ------------------------------
 Cloning the Source Repository
@@ -17,42 +20,64 @@ You can clone the source repository from PyPrime GitHub and install the latest v
 
 >>> git clone https://github.com/pyansys/pyprime
 >>> cd pyprime
->>> pip install -e .
-
-------------
-Questions
-------------
-PyPrime Community guides you with general or technical questions related to PyPrime, its applications and API usages. 
-Kindly create an issue at PyPrime Issues where the community or PyPrime developers can collectively address your questions.
-The PyPrime support team can be reached at “email id” .
- 
-Pyprime community members address your questions posted on the PyPrime Issues page at the earliest 
-with the needed expertise and resolution to the issue will be available in the issue page for future reference.
+>>> pip install -e .[graphics] --find-links deps
 
 ---------------
-Reporting Bugs
+Posting Issues
 ---------------
-PyPrime bugs or crashes can be reported at PyPrime Issues with an appropriate label. This helps the PyPrime community to promptly address it. 
-When reporting an issue, kindly provide an elaborate description of the issue, so that the PyPrime community can reproduce it. 
-Also, kindly provide tracebacks, screenshots, and sample files to help the PyPrime community address the issue.
+Use the `PyPrime Issues <https://github.com/pyansys/pyprime/issues>`_
+page to submit questions, report bugs, and request new features.
 
------------------
-Feature Requests
------------------
-PyPrime encourages you to submit ideas for enhancement to PyPrime community. 
-Kindly create an issue on the PyPrime Issues with a Feature Request label to suggest an enhancement. 
-Kindly provide a descriptive title and sufficient background information to help the PyPrime community implement the functionality.
-For example, if you would like to have a reader for a specific file format, kindly provide a link to documentation of that file format and provide some sample files with screenshots to work with. 
-PyPrime Community use the issue thread as a place to discuss and provide feedback.
+To reach the project support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
-----------------------
-Contributing New Code
-----------------------
-If you have an idea on how to enhance PyPrime, consider first creating the issue as a feature request 
+------------------------------
+Viewing PyPrime Documentation
+------------------------------
+Documentation for the latest stable release of PyPrime is hosted at
+`PyPrime Documentation <https://prime.docs.pyansys.com>`_.
+
+-----------------------------------------
+Code Structure and Contributing New Code
+-----------------------------------------
+Much of the PyPrime code base is auto-generated based on the Prime server.  For the auto-generated 
+code, contributions are therefore limited to raising issues and enhancement requests.  
+
+You should not modify files marked as auto-generated.
+
+Contributions from pull requests can be included elsewhere.  Specific areas that should be considered
+for contributions are:
+
+`PyPrime Examples <https://github.com/pyansys/pyprime/tree/main/examples>`_
+
+`Graphics Functionality <https://github.com/pyansys/pyprime/tree/main/src/ansys/meshing/prime/graphics>`_
+
+`High Level APIs <https://github.com/pyansys/pyprime/blob/main/src/ansys/meshing/prime/core/lucid.py>`_
+
+If you have an idea on how to enhance PyPrime, consider first creating an issue as a feature request 
 which we can use as a discussion thread to work on for implementing the contribution.
-Once you are ready to start coding, kindly see the Development Practices section for more details.
 
-Note: You should not modify the auto-genearted files in PyPrime.
+-----------
+Code Style
+-----------
+PyPrime follows PEP8 standard as outlined in the `PyAnsys Development Guide
+<https://dev.docs.pyansys.com>`_ and implements style checking using
+`pre-commit <https://pre-commit.com/>`_.
+
+To ensure your code meets minimum code styling standards, run::
+
+  pip install pre-commit
+  pre-commit run --all-files
+
+You can also install this as a pre-commit hook by running::
+
+  pre-commit install
+
+This way, it's not possible for you to push code that fails the style checks. For example::
+
+  $ pre-commit install
+  $ git commit -am "added my cool feature"
+  black....................................................................Passed
+  flake8...................................................................Passed
 
 ----------
 Licensing
