@@ -10,13 +10,13 @@ Examples
    :caption: Contents:
    :glob:
    
-   example_template
    bracket_scaffolding_case
    lucid_elbow_case
    elbow_case
    lucid_toy_car_case
    toy_car_case
-
+   ref_example_template
+   
 PyPrime provides some examples to guide you with using ansys-meshing-prime. 
 
 
@@ -33,4 +33,4 @@ PyPrime provides some examples to guide you with using ansys-meshing-prime.
 
 An example template is provided below:
 
-:ref:`**Example Template** <example_template>`
+:ref:`**Example Template** <ref_example_template>`
