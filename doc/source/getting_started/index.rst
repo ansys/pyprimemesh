@@ -12,7 +12,7 @@ The PyPrime project supports Pythonic access to Ansys Prime Meshing Engine.
 Installation
 ------------
 
-PyPrime requires the following prerequisites for the succesful installation:
+PyPrime requires the following prerequisites for the successful installation:
 
 Hardware Requirements
 ----------------------
@@ -56,7 +56,7 @@ Alternatively, clone and install in development mode with:
 
 Ansys Software Requirements
 ----------------------------
-PyPrime wants you to install the latest version of Ansys 2022 R2 locally.
+PyPrime wants you to install the latest version of Ansys 2023 R1 locally.
 
 
 
