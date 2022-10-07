@@ -60,7 +60,8 @@ model
 #
 # As in jupyter notebooks, if code is left unassigned at the end of a code block
 # (as with ``model`` in the previous block) the output will be generated and
-# printed to the screen according to its ``__repr__``.  Otherwise, you can use ``print()`` to output the ``__str__``.
+# printed to the screen according to its ``__repr__``.  Otherwise, you can use 
+# ``print()`` to output the ``__str__``.
 
 # more code...
 mesh_util.surface_mesh()
@@ -77,9 +78,9 @@ display()
 ###############################################################################
 # Making a Pull Request
 # ~~~~~~~~~~~~~~~~~~~~~
-# Once your example is complete and you've verified builds locally, you can make a pull request (PR).
-# Branches containing examples should be prefixed with `doc/` as per the branch
-# naming conventions found here: :ref:`contributing`.
+# Once your example is complete and you've verified builds locally, you can make a 
+# pull request (PR).  Branches containing examples should be prefixed with `doc/` 
+# as per the branch naming conventions found here: :ref:`contributing`.
 #
 # Note that you only need to create the python source example (.py).  The jupyter
 # notebook, the example html and the demo script will all be auto-generated via ``sphinx-gallery``.
