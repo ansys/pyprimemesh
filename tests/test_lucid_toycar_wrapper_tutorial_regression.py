@@ -1,6 +1,7 @@
 import ansys.meshing.prime as prime
 import unittest
 from .common import PrimeTestCase, PrimeTextTestRunner
+import math
 import os
 
 
@@ -63,9 +64,6 @@ class TestElbow(PrimeTestCase):
         self.assertEqual(diag_res.n_multi_edges, 0)
         # Validate number of self inter faces
         self.assertEqual(diag_res.n_self_intersections, 0)
-        print('Validate number of free edges', diag_res.n_free_edges)
-        print('Validate number of multi edges', diag_res.n_multi_edges)
-        print('Validate number of self inter faces', diag_res.n_self_intersections)
 
         face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
         quality = prime.SurfaceSearch(self._model)
@@ -78,31 +76,25 @@ class TestElbow(PrimeTestCase):
             )
         )
 
-        for summary_res in qual_summary_res.quality_results:
-            print("Max surface skewness : ", summary_res.max_quality)
-            print("no.of faces above 0.9 : ", summary_res.n_found)
+        # for summary_res in qual_summary_res.quality_results:
+        #     print("Max surface skewness : ", summary_res.max_quality)
+        #     print("no.of faces above 0.9 : ", summary_res.n_found)
 
         part_summary_res = wrapper_part.get_summary(
             prime.PartSummaryParams(model=self._model, print_id=False, print_mesh=True)
         )
-        print("No. of faces : ", part_summary_res.n_faces)
-
         # Validate number of tri faces
-        self.assertTrue(178102 * 0.98 <= part_summary_res.n_faces <= 178102 * 1.02)
+        self.assertTrue(math.isclose(178102.0, float(part_summary_res.n_faces), rel_tol=0.02))
 
         # delete unwanted parts
         toDelete = [part.id for part in self._model.parts if part.name != wrap_car.name]
         self._model.delete_parts(toDelete)
-
-        print("+++++++++++++++++++++++++++++++++++++++++++")
-        print(self._model)
 
         mesher.create_zones_from_labels(
             """tunnel,cabin,outer,component21,component22,component24,component25,
             engine,exhaust,ground,inlet,outlet,wheel_1,wheel_2,wheel_3,wheel_4"""
         )
 
-        mesher.write("toy_car_lucid_after_wrap3.pmdat")
         # volume mesh
         mesher.volume_mesh(
             prism_layers=3,
@@ -116,21 +108,16 @@ class TestElbow(PrimeTestCase):
         vtool = prime.VolumeMeshTool(model=self._model)
         result = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=self._model))
 
-        print(result.has_non_positive_volumes)
-        print(result.has_non_positive_areas)
-        print(result.has_invalid_shape)
-        print(result.has_left_handed_faces)
-
         # Validate quality check error code
         self.assertTrue(result.error_code == prime.ErrorCode.NOERROR)
         # result.hasNonPositiveVolumes
-        self.assertEqual(result.has_non_positive_volumes, 0)
+        self.assertEqual(result.has_non_positive_volumes, False)
         # result.hasNonPositiveAreas
-        self.assertEqual(result.has_non_positive_areas, 0)
+        self.assertEqual(result.has_non_positive_areas, False)
         # result.hasInvalidShape
-        self.assertEqual(result.has_invalid_shape, 0)
+        self.assertEqual(result.has_invalid_shape, False)
         # result.hasLeftHandedFaces
-        self.assertEqual(result.has_left_handed_faces, 0)
+        self.assertEqual(result.has_left_handed_faces, False)
 
         quality = prime.VolumeSearch(self._model)
         qual_summary_res = quality.get_volume_quality_summary(
@@ -148,7 +135,7 @@ class TestElbow(PrimeTestCase):
 
         # Validate number of cells
         self.assertTrue(
-            3420668 * 0.99 <= part_summary_res.n_cells <= 3420668 * 1.01,
+            3039283 * 0.99 <= part_summary_res.n_cells <= 3039283 * 1.01,
             msg=part_summary_res.n_cells,
         )
         # Validate maximum skewness 0.95
@@ -156,7 +143,7 @@ class TestElbow(PrimeTestCase):
         # Validate number of cells violating skewness 0.95
         if os.name == 'nt':
             self.assertTrue(
-                70 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 70 * 1.1
+                54 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 54 * 1.1
             )
         elif os.name == 'posix':
             self.assertTrue(
