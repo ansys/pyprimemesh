@@ -27,9 +27,9 @@ Processor: 64-bit Intel or AMD system
 Software Requirements
 ----------------------
 
-PyPrime requires you to install the following softwares for the successful installation of ansys-meshing-prime.
+PyPrime requires you to install the following softwares for the successful installation of ``ansys-meshing-prime``.  
 
-Operating System: Windows,Linux
+Operating System: Windows, Linux
 
 Software: Python 3.6 to 3.9
 
