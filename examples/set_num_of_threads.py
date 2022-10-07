@@ -16,13 +16,12 @@ Setup threads for parallel processing
 import ansys.meshing.prime as prime
 
 # start prime and get the model
-model = prime.launch_prime().model
+prime_client = prime.launch_prime()
+model = prime_client.model
 
 ###############################################################################
 # set number of threads for parallel processing
-settings = {
-    "number_of_threads": 12
-}
+settings = {"number_of_threads": 12}
 
 model.set_num_threads(settings["number_of_threads"])
 
@@ -30,4 +29,8 @@ model.set_num_threads(settings["number_of_threads"])
 # set number of threads for parallel processing
 print(model.get_num_threads())
 
-################################################################################
+###############################################################################
+# Exit the Prime session.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+prime_client.exit()
