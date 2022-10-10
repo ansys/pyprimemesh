@@ -15,6 +15,8 @@ __all__ = [
     'download_toy_car_pmdat',
     'download_toy_car_fmd',
     'download_toy_car_scdoc',
+    'download_pipe_tee_pmdat',
+    'download_pipe_tee_fmd',
 ]
 
 _DOWNLOADS = []
@@ -377,6 +379,97 @@ def download_toy_car_scdoc(
     )
     _DOWNLOADS.append(file)
     return file
+
+
+def download_pipe_tee_pmdat(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download PMDAT file for the pipe tee example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Raises
+    ------
+    ValueError
+        When the provided destination path does not exist on file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as pyprime
+    >>> import ansys.meshing.prime.examples as pyprime_examples
+    >>> with pyprime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pipe_tee = pyprime_examples.download_pipe_tee_pmdat()
+    >>>     with pyprime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pipe_tee, params=pyprime.FileReadParams(model))
+    >>>     print(model)
+    >>> pyprime_examples.clear_download_cache()
+    """
+    if destination is not None and not os.path.isdir(destination):
+        raise ValueError('destination directory provided does not exist')
+    file = download_file(
+        'pipe_tee.pmdat', 'pyprime', 'pipe_tee', destination=destination, force=force
+    )
+    _DOWNLOADS.append(file)
+    return file
+
+
+def download_pipe_tee_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download FMD file for the pipe tee example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Raises
+    ------
+    ValueError
+        When the provided destination path does not exist on file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as pyprime
+    >>> import ansys.meshing.prime.examples as pyprime_examples
+    >>> with pyprime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pipe_tee = pyprime_examples.download_pipe_tee_fmd()
+    >>>     with pyprime.FileIO(model) as io:
+    >>>         _ = io.import_cad(pipe_tee, params=pyprime.ImportCADParams(model))
+    >>>     print(model)
+    >>> pyprime_examples.clear_download_cache()
+    """
+    if destination is not None and not os.path.isdir(destination):
+        raise ValueError('destination directory provided does not exist')
+    file = download_file(
+        'pipe_tee.fmd', 'pyprime', 'pipe_tee', destination=destination, force=force
+    )
+    _DOWNLOADS.append(file)
+    return file
+
 
 def clear_download_cache():
     """Clears the cache of downloaded files"""
