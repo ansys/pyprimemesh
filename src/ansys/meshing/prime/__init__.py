@@ -57,8 +57,6 @@ from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.featureextraction import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
-from ansys.meshing.prime.core import lucid
-
 from ansys.meshing.prime.internals.config import (
     is_optimizing_numpy_arrays,
     enable_optimizing_numpy_arrays,
@@ -68,6 +66,8 @@ from ansys.meshing.prime.internals.config import (
 )
 
 import ansys.meshing.prime.examples as examples
+import ansys.meshing.prime.lucid as lucid
+
 
 __LOCAL_CLIENT = None
 
