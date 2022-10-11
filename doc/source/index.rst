@@ -46,7 +46,7 @@ PyPrime is now an open source. Enjoy it! Contributions are welcome.
 Background
 ----------
 
-PyPrime is based on PRIME gRPC, which helps Prime to be a server and seamlessly connect with the
+PyPrime is based on Prime gRPC, which helps Prime to be a server and seamlessly connect with the
 client and respond to the queries. ``gRPC`` is a lightweight protocol from Google using universal
 RPC framework which helps it to run on any environment effortlessly. gRPC stands for grpc remote
 procedure call and is an open source. gRPC is built on universal RPC framework which is compatible
