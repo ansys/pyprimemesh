@@ -1,3 +1,5 @@
+.. _ref_index_graphics:
+
 **********************************
 Interactive Graphics using PyVista
 **********************************
