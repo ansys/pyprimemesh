@@ -11,10 +11,10 @@ and structural thermal simulation.
 Objective
 ~~~~~~~~~
 
-In this example we will mesh the solids of a pipe T-section for a 
-structural thermal analysis using tetrahedral elements and use the 
-wrapper to extract the fluid domain and mesh using polyhedral cells with 
-prismatic boundary layers. 
+In this example we will mesh the solids of a pipe T-section for a
+structural thermal analysis using tetrahedral elements and use the
+wrapper to extract the fluid domain and mesh using polyhedral cells with
+prismatic boundary layers.
 
 To achieve these tasks we will use the high level API packaged with PyPrime called Lucid.
 
@@ -71,13 +71,13 @@ display()
 
 # Surface and volume mesh structural parts
 # specifying only min/max size performs a tri surface mesh with curvature refinement.
-mesh_util.surface_mesh(min_size=2.5,max_size=10)
+mesh_util.surface_mesh(min_size=2.5, max_size=10)
 
 # Providing no inputs creates a tetrahedral volume mesh for all closed regions in the model.
 mesh_util.volume_mesh()
 
 # Delete unwanted capping surfaces.
-toDelete=[part.id for part in model.parts if not part.get_volume_zones()]
+toDelete = [part.id for part in model.parts if not part.get_volume_zones()]
 
 if toDelete:
     model.delete_parts(toDelete)
@@ -90,7 +90,7 @@ display(update=True)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Writing a file with extension cdb exports the mesh in cdb format.
-mesh_util.write(os.path.join(os.getcwd(),r"t-junction-solids.cdb"))
+mesh_util.write(os.path.join(os.getcwd(), r"t-junction-solids.cdb"))
 
 ###############################################################################
 # Extract fluid by wrapping.
@@ -100,13 +100,13 @@ mesh_util.write(os.path.join(os.getcwd(),r"t-junction-solids.cdb"))
 mesh_util.read(cad_file)
 
 # Wrap internal region to extract CFD model with a constant size.
-wrap = mesh_util.wrap(min_size=6,region_extract=prime.WrapRegion.LARGESTINTERNAL)
+wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
 # View only the wrap.
 display(update=True, scope=prime.ScopeDefinition(model=model, part_expression=wrap.name))
 
 # Delete unwanted parts to leave only wrap.
-toDelete=[part.id for part in model.parts if part.name != wrap.name]
+toDelete = [part.id for part in model.parts if part.name != wrap.name]
 
 if toDelete:
     model.delete_parts(toDelete)
@@ -122,7 +122,7 @@ mesh_util.create_zones_from_labels("in1_inlet,in2_inlet,outlet_main")
 print(model)
 
 # Set global sizing to be used by the volume mesh.
-params=prime.GlobalSizingParams(model,min=6,max=50)
+params = prime.GlobalSizingParams(model, min=6, max=50)
 model.set_global_sizing_params(params)
 
 # Volume mesh wrap with prisms.
@@ -133,14 +133,14 @@ mesh_util.volume_mesh(prism_layers=5,
 
 # Display mesh without unwanted EdgeZonelets. You can clearly see the
 # prism layers that were specified by the Prism control.
-display(update=True,scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
 # Write a cas file for use in the Fluent solver.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Write CFD model.
-mesh_util.write(os.path.join(os.getcwd(),r"t-junction-fluid.cas"))
+mesh_util.write(os.path.join(os.getcwd(), r"t-junction-fluid.cas"))
 
 ###############################################################################
 # Exit the Prime session.
