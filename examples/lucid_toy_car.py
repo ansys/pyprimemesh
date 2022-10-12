@@ -1,5 +1,5 @@
 """
-.. _toy_car_wrap:
+.. _ref_toy_car_wrap:
 
 ===============================================
 Wrapping a toy car for a flow analysis

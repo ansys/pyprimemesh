@@ -1,5 +1,5 @@
 """
-.. _bracket_mid_surface_mesh:
+.. _ref_bracket_mid_surface_mesh:
 
 =========================================================
 Meshing a mid-surfaced bracket for a structural analysis
