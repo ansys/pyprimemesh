@@ -21,7 +21,7 @@ The model can be displayed using the :class:`Graphics <ansys.meshing.prime.graph
 
     **Entire model displayed**
 
-Providing a :class:`ScopeDefinition <ansys.meshing.prime>` will allow the display to be 
+Providing a :class:`ScopeDefinition <ansys.meshing.prime.ScopeDefinition>` will allow the display to be 
 limited to particular regions of the model.
 
 .. code:: python
