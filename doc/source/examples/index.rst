@@ -15,6 +15,7 @@ Examples
    elbow_case
    lucid_toy_car_case
    toy_car_case
+   pipe_tee_case
    example_template
    
 PyPrime provides some examples to guide you with using ansys-meshing-prime. 
@@ -29,6 +30,8 @@ PyPrime provides some examples to guide you with using ansys-meshing-prime.
 :ref:`**Lucid Toy Car Case** <lucid_toy_car_case>`
 
 :ref:`**Toy Car Case** <toy_car_case>`
+
+:ref:`**Pipe Tee Case** <ref_pipe_tee_mesh>`
 
 
 An example template is provided below:
