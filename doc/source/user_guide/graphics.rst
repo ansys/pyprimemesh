@@ -3,7 +3,7 @@
 **********************************
 Interactive Graphics using PyVista
 **********************************
-PyPrime provides support for interactive graphical visualisation using PyVista 
+PyPrime provides support for interactive graphical visualisation using `PyVista <https://docs.pyvista.org/>`
 if installed as a dependency.
 
 The model can be displayed using the :class:`Graphics <ansys.meshing.prime.graphics>` class.
