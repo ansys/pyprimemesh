@@ -10,6 +10,7 @@ User Guide
 
    launching_pyprime
    reading_writing
+   graphics
    meshing
    size_field
    controls
