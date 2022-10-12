@@ -17,6 +17,7 @@ The model can be displayed using the :class:`Graphics <ansys.meshing.prime.graph
 
 .. figure:: ../images/graphics.png
     :width: 400pt
+    :align: centre
 
     **Entire model displayed**
 
@@ -30,6 +31,7 @@ limited to particular regions of the model.
 
 .. figure:: ../images/graphics_part.png
     :width: 400pt
+    :align: centre
 
     **Single part displayed**
 
@@ -40,6 +42,7 @@ Graphics functionality is provided to help navigate the model and to
 carry out basic verifications.  These are:
 
 .. figure:: ../images/graphics_buttons.png
-    :width: 400pt
+    :width: 200pt
+    :align: centre
 
     **Graphics buttons**
