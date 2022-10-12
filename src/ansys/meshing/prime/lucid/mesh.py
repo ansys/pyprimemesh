@@ -1,46 +1,9 @@
-from typing import List, Iterable
 import ansys.meshing.prime as prime
+from .utils import check_name_pattern
+from .scope import SurfaceScope, VolumeScope
+from typing import List, Iterable
 import os
 import enum
-import re
-
-
-def _match_pattern(pattern: str, name: str) -> bool:
-    pattern = "^" + pattern.replace("*", ".*").replace("?", ".") + "$"
-    x = re.search(pattern, name)
-    if x:
-        return True
-    else:
-        return False
-
-
-def _check_name_pattern(name_patterns: str, name: str) -> bool:
-    patterns = []
-    include_pattern = []
-    exclude_pattern = []
-    a = name_patterns.split(",")
-    for aa in a:
-        if len(aa) > 0:
-            b = aa.split(" ")
-            for bb in b:
-                if len(bb) > 0:
-                    patterns.append(bb)
-    for pattern in patterns:
-        pattern = pattern.strip()
-        if pattern.startswith("!"):
-            exclude_pattern.append(pattern[1:])
-        else:
-            include_pattern.append(pattern)
-
-    for pattern in exclude_pattern:
-        if _match_pattern(pattern, name):
-            return False
-
-    for pattern in include_pattern:
-        if _match_pattern(pattern, name):
-            return True
-
-    return False
 
 
 class LabelToZoneMethod(enum.IntEnum):
@@ -51,226 +14,6 @@ class LabelToZoneMethod(enum.IntEnum):
     Simple method to create zones from labels.
     Entities are queried using labels and zones created.
     """
-
-
-class _LucidScope:
-    def __init__(
-        self,
-        part_expression: str,
-        entity_expression: str,
-        scope_evaluation_type: prime.ScopeEvaluationType,
-        scope_entity_type: prime.ScopeEntity,
-    ):
-        self._part_expression = part_expression
-        self._entity_expression = entity_expression
-        self._evaluation_type = scope_evaluation_type
-        self._entity_type = scope_entity_type
-
-    def __str__(self) -> str:
-        return "#".join(
-            [
-                self._part_expression,
-                self._entity_expression,
-                str(int(self._evaluation_type)),
-                str(int(self._entity_type)),
-            ]
-        )
-
-    def get_scope_definition(self, model: prime.Model) -> prime.ScopeDefinition:
-        """Gets the scope definition of the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-
-        Returns
-        -------
-        ScopeDefinition
-            Returns the scope definition.
-        """
-        label_exp: str = None
-        zone_exp: str = None
-        if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
-            label_exp = self._entity_expression
-        else:
-            zone_exp = self._entity_expression
-
-        sd = prime.ScopeDefinition(
-            model=model,
-            entity_type=self._entity_type,
-            evaluation_type=self._evaluation_type,
-            part_expression=self._part_expression,
-            label_expression=label_exp,
-            zone_expression=zone_exp,
-        )
-        return sd
-
-
-class SurfaceScope(_LucidScope):
-    """SurfaceScope is one of the classes in Lucid API.
-
-    This class is meant for beginners to meshing. This class is used to define
-    a scope for operation on surfaces.
-
-    """
-
-    def __init__(
-        self,
-        part_expression: str = "*",
-        entity_expression: str = "*",
-        scope_evaluation_type: prime.ScopeEvaluationType = prime.ScopeEvaluationType.LABELS,
-    ):
-        """Initialize SurfaceScope with the given part expression,
-        entity expression and scope evaluation type.
-
-        Parameters
-        ----------
-        part_expression : str
-            Part expression to scope parts while evaluating scope.
-        entity_expression : str
-            Label or zone expression to scope entities while evaluating scope.
-        scope_evaluation_type : prime.ScopeEvaluationType
-            Evaluation type to scope entities. The default is set to labels.
-        """
-        _LucidScope.__init__(
-            self,
-            part_expression,
-            entity_expression,
-            scope_evaluation_type,
-            prime.ScopeEntity.FACEZONELETS,
-        )
-
-    def get_parts(self, model: prime.Model) -> Iterable[int]:
-        """Gets the list of part ids in the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-
-        Returns
-        -------
-        Iterable[int]
-            Returns the list of part ids.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import Model, SurfaceScope
-            >>> model = client.model
-            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
-            >>> part_ids = su.get_parts()
-        """
-        sel_parts: Iterable[int] = []
-        for part in model.parts:
-            if _check_name_pattern(self._part_expression, part.name):
-                sel_parts.append(part.id)
-        return sel_parts
-
-    def get_face_zonelets(self, model: prime.Model, part_id: int) -> Iterable[int]:
-        """Gets the list of face zonelets for the given part in the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-        part_id : int
-            Id of the part.
-
-        Returns
-        -------
-        Iterable[int]
-            Returns the list of zonelets.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import Model, SurfaceScope
-            >>> model = client.model
-            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
-            >>> face_zonelets = su.get_face_zonelets(model, 2)
-        """
-        face_zonelets: Iterable[int] = []
-        part = model.get_part(part_id)
-        if part and _check_name_pattern(self._part_expression, part.name):
-            if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
-                face_zonelets = part.get_face_zonelets_of_label_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-            else:
-                face_zonelets = part.get_face_zonelets_of_zone_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-        return face_zonelets
-
-    def get_topo_faces(self, model: prime.Model, part_id: int) -> Iterable[int]:
-        """Gets the list of topofaces for the given part in the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-        part_id : int
-            Id of the part.
-
-        Returns
-        -------
-        Iterable[int]
-            Returns the list of zonelets.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import Model, SurfaceScope
-            >>> model = client.model
-            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
-            >>> topo_faces = su.get_topo_faces(model, 2)
-        """
-        topo_faces: Iterable[int] = []
-        part = model.get_part(part_id)
-        if part and _check_name_pattern(self._part_expression, part.name):
-            if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
-                topo_faces = part.get_topo_faces_of_label_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-            else:
-                topo_faces = part.get_topo_faces_of_zone_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-        return topo_faces
-
-
-class VolumeScope(_LucidScope):
-    """VolumeScope is one of the classes in Lucid API.
-
-    This class is meant for beginners to meshing. This class is used to define
-    a scope for operation on volumes.
-
-    """
-
-    def __init__(
-        self,
-        part_expression: str = "*",
-        entity_expression: str = "*",
-        scope_evaluation_type: prime.ScopeEvaluationType = prime.ScopeEvaluationType.ZONES,
-    ):
-        """Initialize VolumeScope with the given part expression, entity expression and scope
-        evaluation type.
-
-        Parameters
-        ----------
-        part_expression : str
-            Part expression to scope parts while evaluating scope.
-        entity_expression : str
-            Label or zone expression to scope entities while evaluating scope.
-        scope_evaluation_type : prime.ScopeEvaluationType
-            Evaluation type to scope entities. The default is set to zones.
-        """
-        _LucidScope.__init__(
-            self,
-            part_expression,
-            entity_expression,
-            scope_evaluation_type,
-            prime.ScopeEntity.VOLUME,
-        )
 
 
 class Mesh:
@@ -414,7 +157,7 @@ class Mesh:
         for part in self._model.parts:
             lbls = part.get_labels()
             for l in lbls:
-                if l not in labels and _check_name_pattern(label_expression, l):
+                if l not in labels and check_name_pattern(label_expression, l):
                     labels.append(l)
 
         for label in labels:
@@ -708,7 +451,7 @@ class Mesh:
         s_control_ids = []
         s_controls = self._model.control_data.size_controls
         for control in s_controls:
-            if _check_name_pattern(size_control_names, control.name):
+            if check_name_pattern(size_control_names, control.name):
                 s_control_ids.append(control.id)
         if len(s_control_ids) > 0:
             size_field_res = sizefield.compute_volumetric(
@@ -737,7 +480,7 @@ class Mesh:
             model=self._model, create_zone_per_volume=create_zones_per_volume
         )
         for part in self._model.parts:
-            if _check_name_pattern(part_expression, part.name):
+            if check_name_pattern(part_expression, part.name):
                 if len(part.get_topo_faces()) > 0:
                     part.compute_topo_volumes(params=params)
                 else:
@@ -760,7 +503,7 @@ class Mesh:
 
         """
         for part in self._model.parts:
-            if _check_name_pattern(part_expression, part.name):
+            if check_name_pattern(part_expression, part.name):
                 part.delete_topo_entities(
                     prime.DeleteTopoEntitiesParams(
                         model=self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
@@ -774,9 +517,9 @@ class Mesh:
         if scope._evaluation_type == prime.ScopeEvaluationType.ZONES:
             volume_zones_all = part.get_volume_zones()
             volume_zones_to_mesh = []
-            if _check_name_pattern(scope._part_expression, part.name):
+            if check_name_pattern(scope._part_expression, part.name):
                 for volume_zone in volume_zones_all:
-                    if _check_name_pattern(
+                    if check_name_pattern(
                         scope._entity_expression, self._model.get_zone_name(volume_zone)
                     ):
                         volume_zones_to_mesh.append(volume_zone)
