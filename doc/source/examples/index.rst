@@ -21,7 +21,7 @@ Examples
 PyPrime provides some examples to guide you with using ansys-meshing-prime. 
 
 
-:ref:`**Bracket Scaffolding Case** <bracket_mid_surface_mesh>`
+:ref:`**Bracket Scaffolding Case** <bracket_scaffolding_case>`
 
 :ref:`**Lucid Elbow Case** <lucid_elbow_case>`
 
