@@ -1,4 +1,4 @@
-.. _ref_pipe_tee_case:
+.. _pipe_tee_case:
 
 Pipe Tee Case
 =============
