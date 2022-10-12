@@ -51,7 +51,7 @@ for contributions are:
 
 `Graphics Functionality <https://github.com/pyansys/pyprime/tree/main/src/ansys/meshing/prime/graphics>`_
 
-`High Level APIs <https://github.com/pyansys/pyprime/blob/main/src/ansys/meshing/prime/core/lucid.py>`_
+`High Level APIs <https://github.com/pyansys/pyprime/blob/main/src/ansys/meshing/prime/lucid>`_
 
 If you have an idea on how to enhance PyPrime, consider first creating an issue as a feature request 
 which we can use as a discussion thread to work on for implementing the contribution.
