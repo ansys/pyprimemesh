@@ -31,7 +31,7 @@ PyPrime provides some examples to guide you with using ansys-meshing-prime.
 
 :ref:`**Toy Car Case** <toy_car_case>`
 
-:ref:`**Pipe Tee Case** <pipe_tee_mesh>`
+:ref:`**Pipe Tee Case** <pipe_tee_case>`
 
 
 An example template is provided below:
