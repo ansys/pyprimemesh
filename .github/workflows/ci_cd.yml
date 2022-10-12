@@ -4,6 +4,9 @@ name: GitHub CI
 # run only on main branch.  This avoids duplicated actions on PRs
 on:
   pull_request:
+    branches:
+      - main
+      - release/*
   push:
     tags:
       - "v*"
