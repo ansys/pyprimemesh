@@ -13,10 +13,10 @@ on:
 
 env:
     PACKAGE_NAME: PyPrime
-    #PYMAPDL_PORT: 21000  # default won't work on GitHub runners
-    #PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
+    PYMAPDL_PORT: 21000  # default won't work on GitHub runners
+    PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
     #PYMAPDL_START_INSTANCE: FALSE
-    #PYANSYS_OFF_SCREEN: True
+    PYANSYS_OFF_SCREEN: True
     DPF_START_SERVER: False
     DPF_PORT: 21002
     DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
