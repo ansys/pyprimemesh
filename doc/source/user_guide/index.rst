@@ -9,7 +9,7 @@ User Guide
    :hidden:
 
    launching_pyprime
-   reading_writing
+   fileio
    graphics
    meshing
    size_field
