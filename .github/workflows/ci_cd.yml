@@ -1,4 +1,4 @@
-# check spelling, codestyle
+    # check spelling, codestyle
 name: GitHub CI
 
 # run only on main branch.  This avoids duplicated actions on PRs
@@ -10,6 +10,26 @@ on:
     branches:
       - main
       - release/*
+
+env:
+    PACKAGE_NAME: PyPrime
+    #PYMAPDL_PORT: 21000  # default won't work on GitHub runners
+    #PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
+    #PYMAPDL_START_INSTANCE: FALSE
+    #PYANSYS_OFF_SCREEN: True
+    DPF_START_SERVER: False
+    DPF_PORT: 21002
+    DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
+    DOCKER_IMAGE_VERSION_DOCS_BUILD: v22.2.0
+    # Following env vars when changed will "reset" the mentioned cache,
+    # by changing the cache file name. It is rendered as ...-v%RESET_XXX%-...
+    # You should go up in number, if you go down (or repeat a previous value)
+    # you might end up reusing a previous cache if it haven't been deleted already.
+    # It applies 7 days retention policy by default.
+    RESET_PIP_CACHE: 1
+    RESET_EXAMPLES_CACHE: 1
+    RESET_DOC_BUILD_CACHE: 1
+    RESET_AUTOSUMMARY_CACHE: 1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -185,11 +205,38 @@ jobs:
           pip install build
           python -m build .
           pip install dist/*.whl --find-links deps
-      
+   
+      - name: Login in Github Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull, launch, and validate prime service #
+        run: .ci/start_mapdl.sh
+        env:
+          LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
+          MAPDL_IMAGE: ${{ env.DOCKER_PACKAGE }}:${{ matrix.prime-version }}             
+          
+      - name: Login in Github Container registry #
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: DPF Server Activation
+        run: |
+          docker run -d -v `pwd`:/dpf -p ${{ env.DPF_PORT }}:50054 ghcr.io/pyansys/dpf-core/dpf:v2021.1
+
       - name: Run Unit Tests
         run: |
           pip install -r requirements/requirements_tests.txt
+          docker run -d -v `pwd`:/dpf -p ${{ env.DPF_PORT }}:50054 ghcr.io/pyansys/dpf-core/dpf:v2021.1
           echo "Not running unit tests for now..."
+          xvfb-run pytest -v --durations=10 --maxfail=10  --reruns 7 --reruns-delay 3 --only-rerun MapdlExitedError  --cov=ansys.meshing.prime --cov-report=xml --cov-report=html
+
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}

@@ -1,12 +1,14 @@
+import os
+
+# os.environ.clear()
 import ansys.meshing.prime as prime
 import unittest
 from .common import PrimeTestCase, PrimeTextTestRunner
 import math
-import os
 
 
 class TestElbow(PrimeTestCase):
-    def test_gearbox_tutorial(self):
+    def test_toycar_tutorial(self):
         # downloads pmdat file
         toy_car = prime.examples.download_toy_car_pmdat()
         # reads file
@@ -143,7 +145,8 @@ class TestElbow(PrimeTestCase):
         # Validate number of cells violating skewness 0.95
         if os.name == 'nt':
             self.assertTrue(
-                54 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 54 * 1.1
+                54 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 54 * 1.1,
+                msg=qual_summary_res.quality_results_part[0].n_found,
             )
         elif os.name == 'posix':
             self.assertTrue(
