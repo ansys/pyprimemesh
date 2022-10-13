@@ -15,7 +15,13 @@ Also, exports Fluent meshing files with .msh,.CAS, .CDB extensions. You can save
 Native PMDAT Format
 ====================
 
-To be added.
+pmdat is the native file format for Prime that contains all data associated with the active model.
+
+This includes, geometry, mesh, topology, controls, labels and zones.
+
+The model data can be read from and written to this format using :func:`FileIO.read_pmdat() <ansys.meshing.prime.FileIO.read_pmdat>` and
+:func:`FileIO.write_pmdat() <ansys.meshing.prime.FileIO.write_pmdat>` with parameters defined in the
+:class:`FileReadParams() <ansys.meshing.prime.FileReadParams>` and :class:`FileWriteParams() <ansys.meshing.prime.FileWriteParams>`class.
 
 ==============
 Importing CAD
