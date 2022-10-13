@@ -24,13 +24,14 @@ The model data can be read from and written to this format using :func:`FileIO.r
 :class:`FileReadParams() <ansys.meshing.prime.FileReadParams>` and :class:`FileWriteParams() <ansys.meshing.prime.FileWriteParams>` classes respectively.
 
 .. code:: python
+    
     >>> from ansys.meshing import prime
-
+    
     Start prime and get the model
     
     >>> prime_client = prime.launch_prime()
     >>> model = prime_client.model
-
+    
     Download and read an example pmdat file
     
     >>> mixing_elbow = prime.examples.download_elbow_pmdat()
