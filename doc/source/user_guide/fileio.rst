@@ -15,7 +15,7 @@ Also, exports Fluent meshing files with .msh,.CAS, .CDB extensions. You can save
 Native PMDAT Format
 ====================
 
-pmdat is the native file format for Prime that contains all data associated with the active model.
+PMDAT is the native file format for Prime that contains all data associated with the active model.
 
 This includes, geometry, mesh, topology, controls, labels and zones.
 
