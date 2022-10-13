@@ -206,7 +206,7 @@ jobs:
           python -m build .
           pip install dist/*.whl --find-links deps
    
-      - name: Login in Github Container registry
+      - name: Login in Github Container registry #
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -218,13 +218,6 @@ jobs:
         env:
           LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
           MAPDL_IMAGE: ${{ env.DOCKER_PACKAGE }}:${{ matrix.prime-version }}             
-          
-      - name: Login in Github Container registry #
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ secrets.GH_USERNAME }}
-          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: DPF Server Activation
         run: |
