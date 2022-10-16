@@ -34,7 +34,13 @@ Geometry topology and mesh data in the :class:`Model <ansys.meshing.prime.Model>
 
     >>> model.parts
 
-Each :class:`part <ansys.meshing.prime.Model.Part>` can contain TopoEntities and Zonelets.
+Each :class:`part <ansys.meshing.prime.Model.Part>` can contain either TopoEntities or Zonelets.
+
+.. figure:: ../images/part_type.png
+    :width: 400pt
+    :align: center
+
+    **Part types**
   
 TopoEntities and Zonelets are characterized by dimension of entities.
   
@@ -72,9 +78,12 @@ A set of FaceZonelets that define a closed volume without containing any cell el
 
     **Zonelets**
   
-  Zones
-  -----
-  
-  Labels
-  ------
-  
+Zones
+-----
+
+Zonelets or TopoEntities can be further grouped into zones.  A zonelet or TopoEntity can only be present in a single zone.  In order to export a mesh to the Fluent solver zones are required to define boundary conditions.  When importing a Fluent solver model all zones will be defined as single zonelets.
+
+Labels
+------
+
+Labels allow overlapping groups of Zonelets or TopoEntities.  When importing CAD files any groups or named selections will generate labels.  When exporting to a mechanical solver file all labels are exported as collections.
