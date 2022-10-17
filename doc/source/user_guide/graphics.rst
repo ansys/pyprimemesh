@@ -35,7 +35,7 @@ limited to particular regions of the model.
 
     **Single part displayed**
 
-Selections can be made of FaceZonelets that are displayed.  If selections in the window are made,
+Selections can be made of displayed objects.  If selections in the window are made,
 information can be printed about them to the console.  Selections can also be hidden.
 
 Graphics functionality is provided to help navigate the model and to
