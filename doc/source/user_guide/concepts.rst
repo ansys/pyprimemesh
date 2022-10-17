@@ -59,7 +59,7 @@ The mesh generated on TopoEntities will be projected on geometry representation.
     :width: 400pt
     :align: center
 
-    **TopoEntities**
+    **TopoEntities schematic**
   
 Zonelets
 --------
@@ -76,7 +76,7 @@ A set of FaceZonelets that define a closed volume without containing any cell el
     :width: 400pt
     :align: center
 
-    **Zonelets**
+    **Zonelets schematic**
   
 Zones
 -----
