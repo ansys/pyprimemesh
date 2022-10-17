@@ -92,7 +92,7 @@ When you import CAD Model and specify Part Creation Type as Model, PyPrime inher
 The number of zones within a part is identical to the number of bodies within the CAD Model. 
 
 .. figure:: ../images/creation_model.png
-    :width: 400pt
+    :width: 200pt
     :align: center
 
     **Part creation by Model**
@@ -105,7 +105,7 @@ The number of zones within a part is identical to the number of bodies within th
 Assembly is the default Part Creation Type. The structure of imported CAD Model with Assembly level in Pyprime  looks as below: 
 
 .. figure:: ../images/creation_assembly.png
-    :width: 400pt
+    :width: 200pt
     :align: center
 
     **Part creation by Assembly**
@@ -118,7 +118,7 @@ The number of zones within a part is identical to the number of bodies within th
 The structure of imported CAD Model with Part Creation Type as Part in Pyprime is as follows: 
 
 .. figure:: ../images/creation_part.png
-    :width: 400pt
+    :width: 200pt
     :align: center
 
     **Part creation by Part**
@@ -127,7 +127,7 @@ Body
 ^^^^
 
 .. figure:: ../images/creation_body.png
-    :width: 400pt
+    :width: 200pt
     :align: center
 
     **Part creation by Body**
