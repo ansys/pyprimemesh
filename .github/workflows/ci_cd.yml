@@ -18,7 +18,7 @@ env:
     #PYMAPDL_START_INSTANCE: FALSE
     PYANSYS_OFF_SCREEN: True
     DPF_START_SERVER: False
-    DPF_PORT: 21002
+    DPF_PORT: 21000
     DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
     DOCKER_IMAGE_VERSION_DOCS_BUILD: v22.2.0
     # Following env vars when changed will "reset" the mentioned cache,
