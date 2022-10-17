@@ -150,7 +150,8 @@ class TestElbow(PrimeTestCase):
             )
         elif os.name == 'posix':
             self.assertTrue(
-                33 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 33 * 1.1
+                33 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 33 * 1.1,
+                msg=qual_summary_res.quality_results_part[0].n_found,
             )
 
 
