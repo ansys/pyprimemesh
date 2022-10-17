@@ -209,7 +209,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service #
-        run: docker run ${{ env.DOCKER_PACKAGE }}
+        run: docker pull ${{ env.DOCKER_PACKAGE }}
 #            docker pull ${{ env.DOCKER_PACKAGE }}
 #            docker run ${{ env.DOCKER_PACKAGE }}
 #            docker run --name prime --restart always --health-cmd="ps aux | grep \"[/]ansys_inc/.*ansys\.e.*grpc\" -q && echo 0 || echo 1" --health-interval=0.5s --health-retries=4 --health-timeout=0.5s --health-start-period=10s -e ANSYSLMD_LICENSE_FILE=1055@${{ secrets.LICENSE_SERVER }} -e ANSYS_LOCK="OFF" ${{ env.DOCKER_PACKAGE }}
