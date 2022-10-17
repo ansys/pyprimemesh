@@ -2,8 +2,6 @@ import os
 import unittest
 import xml.etree.ElementTree as ET
 
-from .arm_utils import is_running_in_arm
-
 
 def create_scenario_element(test, id):
     testName, className = str(test).split()
@@ -82,8 +80,6 @@ class PrimeTestResult(unittest.TestResult):
 
     def stopTestRun(self):
         super().stopTestRun()
-        if is_running_in_arm():
-            write_arm_scenarios(self)
 
 
 class PrimeTextTestResult(PrimeTestResult, unittest.TextTestResult):
