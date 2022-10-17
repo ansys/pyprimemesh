@@ -66,17 +66,17 @@ Refer `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ docum
 **Note**: You must install and configure Workbench CAD Readers/Plug-ins (Ansys Geometry Interfaces) while installing Ansys Workbench. 
  
 
-Part Management
----------------
+Part Management and Creation
+----------------------------
 
 PyPrime has options for part management within the product structure while importing a CAD (Computer Aided Design) model. 
 The CAD Model is the top in product hierarchy. A CAD Model can have one or more CAD assemblies. 
 The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. Typical CAD product structure is as follows: 
 
-The ``PartCreationType`` class decides whether to create part per
+The ``PartCreationType`` class decides whether to create a part per
 
- * CAD Model
+ * Model
 
  * Assembly
 
@@ -88,16 +88,16 @@ The ``PartCreationType`` class decides whether to create part per
 Model
 ^^^^^ 
 
-When you import CAD Model and specify Part Creation Type as Model, PyPrime inherits the Part name from CAD Model name. 
-The number of zones within a part is identical to the number of bodies within the CAD Model. 
+When you import CAD Model and specify Part Creation Type as Model, PyPrime creates a single Part that inherits its name from the CAD Model name. 
+The number of zones within the Part is identical to the number of bodies within the CAD Model. 
 
 .. figure:: ../images/creation_model.png
     :width: 200pt
     :align: center
 
-    **Part creation by Model**
+    **Part creation by Model (from SpaceClaim CAD structure to Prime part structure)**
 
-CAD Model with Assembly 
+Assembly 
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 When you import a CAD Model with Assembly level, PyPrime inherits the Part name from CAD Assembly name. 
@@ -108,7 +108,7 @@ Assembly is the default Part Creation Type. The structure of imported CAD Model 
     :width: 200pt
     :align: center
 
-    **Part creation by Assembly**
+    **Part creation by Assembly (from SpaceClaim CAD structure to Prime part structure)**
 
 Part 
 ^^^^
@@ -121,13 +121,16 @@ The structure of imported CAD Model with Part Creation Type as Part in Pyprime i
     :width: 200pt
     :align: center
 
-    **Part creation by Part**
+    **Part creation by Part (from SpaceClaim CAD structure to Prime part structure)**
 
 Body
 ^^^^
+
+When you import CAD Model and specify Part creation type Body, PyPrime inherits the Part name from 
+CAD Body name. The number of parts is identical to the number of bodies. 
 
 .. figure:: ../images/creation_body.png
     :width: 200pt
     :align: center
 
-    **Part creation by Body**
+    **Part creation by Body (from SpaceClaim CAD structure to Prime part structure)**
