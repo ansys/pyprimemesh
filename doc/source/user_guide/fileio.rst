@@ -50,7 +50,8 @@ CAD import routes available in PyPrime are Program Controlled, Native, SpaceClai
 
  * Program Controlled: Automatically choose the best route based on the CAD format. Program Controlled uses Native as available, SCDM for scdoc and Workbench for all the other formats.  
   
- * Native: Imports selected natively supported formats like ACIS ``(*.sat, *.sab)``, Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
+ * Native: Imports selected natively supported formats like FMD ``(*.fmd)``,ACIS ``(*.sat, *.sab)``, 
+ Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
  
  * SpaceClaim:  Uses SCDM to import supported CAD files from the SpaceClaim reader. Only Windows platform support the SpaceClaim file import.  
  
@@ -74,7 +75,7 @@ The CAD Model is the top in product hierarchy. A CAD Model can have one or more 
 The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. Typical CAD product structure is as follows: 
 
-The ``PartCreationType`` class decides whether to create a part per
+The ``PartCreationType`` class decides whether to create a part per:
 
  * Model
 
@@ -88,7 +89,7 @@ The ``PartCreationType`` class decides whether to create a part per
 Model
 ^^^^^ 
 
-When you import CAD Model and specify Part Creation Type as Model, PyPrime creates a single Part that inherits its name from the CAD Model name. 
+When you import a CAD Model and specify Part Creation Type as Model, PyPrime creates a single part that inherits its name from the CAD Model name. 
 The number of zones within the Part is identical to the number of bodies within the CAD Model. 
 
 .. figure:: ../images/creation_model.png
@@ -100,9 +101,10 @@ The number of zones within the Part is identical to the number of bodies within 
 Assembly 
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-When you import a CAD Model with Assembly level, PyPrime inherits the Part name from CAD Assembly name. 
-The number of zones within a part is identical to the number of bodies within the CAD Assembly.
-Assembly is the default Part Creation Type. The structure of imported CAD Model with Assembly level in Pyprime  looks as below: 
+When you import a CAD Model and specify Part Creation Type as Assembly, PyPrime creates a part
+per assembly where the part name is inherited from the CAD Assembly name.
+The number of zones within each part is identical to the number of bodies within the CAD Assembly.
+Assembly is the default Part Creation Type. The structure of imported CAD Model in Pyprime looks as below: 
 
 .. figure:: ../images/creation_assembly.png
     :width: 200pt
@@ -113,9 +115,10 @@ Assembly is the default Part Creation Type. The structure of imported CAD Model 
 Part 
 ^^^^
 
-When you import CAD Model and specify Part Creation Type as Part, PyPrime inherits the Part name from CAD Part name. 
+When you import CAD and specify Part Creation Type as Part, PyPrime creates a part
+per component that inherits the part name from the CAD Component name. 
 The number of zones within a part is identical to the number of bodies within the CAD Part.
-The structure of imported CAD Model with Part Creation Type as Part in Pyprime is as follows: 
+The structure of imported CAD with Part Creation Type as Part in Pyprime is as follows: 
 
 .. figure:: ../images/creation_part.png
     :width: 200pt
@@ -126,8 +129,8 @@ The structure of imported CAD Model with Part Creation Type as Part in Pyprime i
 Body
 ^^^^
 
-When you import CAD Model and specify Part creation type Body, PyPrime inherits the Part name from 
-CAD Body name. The number of parts is identical to the number of bodies. 
+When you import CAD and specify Part creation type Body, PyPrime creates a part
+per body that inherits the Part name from the CAD Body name. The number of parts is identical to the number of bodies. 
 
 .. figure:: ../images/creation_body.png
     :width: 200pt
