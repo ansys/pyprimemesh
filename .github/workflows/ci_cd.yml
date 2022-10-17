@@ -220,7 +220,8 @@ jobs:
       - name: Run Unit Tests
         run: |
           pip install -r requirements/requirements_tests.txt
-          xvfb-run pytest -v --durations=10 --maxfail=10  --reruns 7 --reruns-delay 3 --only-rerun MapdlExitedError  --cov=ansys.meshing.prime --cov-report=xml --cov-report=html
+          pytest tests
+#          xvfb-run pytest -v --durations=10 --maxfail=10  --reruns 7 --reruns-delay 3 --only-rerun MapdlExitedError  --cov=ansys.meshing.prime --cov-report=xml --cov-report=html
 
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
