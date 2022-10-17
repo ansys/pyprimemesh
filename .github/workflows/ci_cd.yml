@@ -13,12 +13,7 @@ on:
 
 env:
     PACKAGE_NAME: PyPrime
-    #PYMAPDL_PORT: 21000  # default won't work on GitHub runners
-    #PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
-    #PYMAPDL_START_INSTANCE: FALSE
     PYANSYS_OFF_SCREEN: True
-    DPF_START_SERVER: False
-    DPF_PORT: 21004
     DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
     DOCKER_IMAGE_VERSION_DOCS_BUILD: v22.2.0
     # Following env vars when changed will "reset" the mentioned cache,
@@ -213,21 +208,18 @@ jobs:
           username: pyansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Pull, launch, and validate prime service #
-#        run: .ci/start_mapdl.sh
-#        env:
-#          LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
-#          MAPDL_IMAGE: ${{ env.DOCKER_PACKAGE }}:${{ matrix.prime-version }}             
-
-      - name: DPF Server Activation
+      - name: Pull, launch, and validate prime service #
         run: |
-          docker run -d -v `pwd`:/dpf -p ${{ env.DPF_PORT }}:50054 ghcr.io/pyansys/dpf-core/dpf:v2021.1
+            docker pull ${{ env.DOCKER_PACKAGE }}
+            docer run ${{ env.DOCKER_PACKAGE }}
+            
+        env:
+          LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
+          #MAPDL_IMAGE: ${{ env.DOCKER_PACKAGE }}:${{ matrix.prime-version }}             
 
       - name: Run Unit Tests
         run: |
           pip install -r requirements/requirements_tests.txt
-          docker run -d -v `pwd`:/dpf -p ${{ env.DPF_PORT }}:50054 ghcr.io/pyansys/dpf-core/dpf:v2021.1
-          echo "Not running unit tests for now..."
           xvfb-run pytest -v --durations=10 --maxfail=10  --reruns 7 --reruns-delay 3 --only-rerun MapdlExitedError  --cov=ansys.meshing.prime --cov-report=xml --cov-report=html
 
         env:
