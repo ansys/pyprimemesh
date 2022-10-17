@@ -1,13 +1,14 @@
 import os
 import time
 import unittest
-from .arm_utils import get_input_files_location
+
+# from .arm_utils import get_input_files_location
 
 import ansys.meshing.prime as prime
 
 
 class PrimeTestCase(unittest.TestCase):
-    INPUT_FILES = get_input_files_location()
+    # INPUT_FILES = get_input_files_location()
     _client = None
 
     @classmethod
