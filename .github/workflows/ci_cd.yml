@@ -13,8 +13,8 @@ on:
 
 env:
     PACKAGE_NAME: PyPrime
-    PYMAPDL_PORT: 21000  # default won't work on GitHub runners
-    PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
+    #PYMAPDL_PORT: 21000  # default won't work on GitHub runners
+    #PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
     #PYMAPDL_START_INSTANCE: FALSE
     PYANSYS_OFF_SCREEN: True
     DPF_START_SERVER: False
@@ -26,10 +26,10 @@ env:
     # You should go up in number, if you go down (or repeat a previous value)
     # you might end up reusing a previous cache if it haven't been deleted already.
     # It applies 7 days retention policy by default.
-    RESET_PIP_CACHE: 1
-    RESET_EXAMPLES_CACHE: 1
-    RESET_DOC_BUILD_CACHE: 1
-    RESET_AUTOSUMMARY_CACHE: 1
+    #RESET_PIP_CACHE: 1
+    #RESET_EXAMPLES_CACHE: 1
+    #RESET_DOC_BUILD_CACHE: 1
+    #RESET_AUTOSUMMARY_CACHE: 1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -210,7 +210,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ secrets.GH_USERNAME }}
+          username: pyansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service #
