@@ -102,7 +102,7 @@ Assembly
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 When you import a CAD Model and specify Part Creation Type as Assembly, PyPrime creates a part
-per assembly where the part name is inherited from the CAD Assembly name.
+per CAD Assembly where the part name is inherited from the CAD Assembly name.
 The number of zones within each part is identical to the number of bodies within the CAD Assembly.
 Assembly is the default Part Creation Type. The structure of imported CAD Model in Pyprime looks as below: 
 
@@ -115,10 +115,10 @@ Assembly is the default Part Creation Type. The structure of imported CAD Model 
 Part 
 ^^^^
 
-When you import CAD and specify Part Creation Type as Part, PyPrime creates a part
-per component that inherits the part name from the CAD Component name. 
+When you import a CAD Model and specify Part Creation Type as Part, PyPrime creates a part
+per CAD Part that inherits the part name from the CAD Part name. 
 The number of zones within a part is identical to the number of bodies within the CAD Part.
-The structure of imported CAD with Part Creation Type as Part in Pyprime is as follows: 
+The structure of imported CAD Model with Part Creation Type as Part in Pyprime is as follows: 
 
 .. figure:: ../images/creation_part.png
     :width: 200pt
@@ -129,8 +129,8 @@ The structure of imported CAD with Part Creation Type as Part in Pyprime is as f
 Body
 ^^^^
 
-When you import CAD and specify Part creation type Body, PyPrime creates a part
-per body that inherits the Part name from the CAD Body name. The number of parts is identical to the number of bodies. 
+When you import a CAD Model and specify Part Creation Type as Body, PyPrime creates a part
+per CAD Body that inherits the part name from the CAD Body name. The number of parts is identical to the number of bodies. 
 
 .. figure:: ../images/creation_body.png
     :width: 200pt
