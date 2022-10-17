@@ -50,8 +50,7 @@ CAD import routes available in PyPrime are Program Controlled, Native, SpaceClai
 
  * Program Controlled: Automatically choose the best route based on the CAD format. Program Controlled uses Native as available, SCDM for scdoc and Workbench for all the other formats.  
   
- * Native: Imports selected natively supported formats like FMD ``(*.fmd)``,ACIS ``(*.sat, *.sab)``, 
- Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
+ * Native: Imports selected natively supported formats like FMD ``(*.fmd)``,ACIS ``(*.sat, *.sab)``, Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
  
  * SpaceClaim:  Uses SCDM to import supported CAD files from the SpaceClaim reader. Only Windows platform support the SpaceClaim file import.  
  
@@ -76,7 +75,7 @@ The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. Typical CAD product structure is as follows: 
 
 .. figure:: ../images/cad_structure.png
-    :width: 200pt
+    :width: 100pt
     :align: center
 
     **Example CAD structure**
