@@ -214,7 +214,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           pip install -r requirements/requirements_tests.txt
-          pytest tests -v
+          pytest -v tests
 
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
