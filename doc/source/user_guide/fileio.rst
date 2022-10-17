@@ -75,6 +75,12 @@ The CAD Model is the top in product hierarchy. A CAD Model can have one or more 
 The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. Typical CAD product structure is as follows: 
 
+.. figure:: ../images/cad_structure.png
+    :width: 200pt
+    :align: center
+
+    **Example CAD structure**
+
 The ``PartCreationType`` class decides whether to create a part per:
 
  * Model
