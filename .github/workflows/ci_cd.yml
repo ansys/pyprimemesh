@@ -12,19 +12,7 @@ on:
       - release/*
 
 env:
-    PACKAGE_NAME: PyPrime
-    PYANSYS_OFF_SCREEN: True
     DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
-    DOCKER_IMAGE_VERSION_DOCS_BUILD: v22.2.0
-    # Following env vars when changed will "reset" the mentioned cache,
-    # by changing the cache file name. It is rendered as ...-v%RESET_XXX%-...
-    # You should go up in number, if you go down (or repeat a previous value)
-    # you might end up reusing a previous cache if it haven't been deleted already.
-    # It applies 7 days retention policy by default.
-    #RESET_PIP_CACHE: 1
-    #RESET_EXAMPLES_CACHE: 1
-    #RESET_DOC_BUILD_CACHE: 1
-    #RESET_AUTOSUMMARY_CACHE: 1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
