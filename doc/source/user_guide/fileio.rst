@@ -70,9 +70,9 @@ Part Management and Creation
 ----------------------------
 
 PyPrime has options for part management within the product structure while importing a CAD (Computer Aided Design) model. 
-The CAD Model is the top in product hierarchy. A CAD Model can have one or more CAD assemblies. 
+The CAD model is the top in product hierarchy. A CAD model can have one or more CAD assemblies. 
 The CAD assembly or sub-assembly has different CAD parts.
-The CAD part has bodies or other geometric entities. Typical CAD product structure is as follows: 
+The CAD part has bodies or other geometric entities. A typical CAD product structure is as follows: 
 
 .. figure:: ../images/cad_structure.png
     :width: 100pt
@@ -80,7 +80,7 @@ The CAD part has bodies or other geometric entities. Typical CAD product structu
 
     **Example CAD structure**
 
-The ``PartCreationType`` class decides whether to create a part per:
+The :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` class decides whether to create a part per:
 
  * Model
 
@@ -94,8 +94,8 @@ The ``PartCreationType`` class decides whether to create a part per:
 Model
 ^^^^^ 
 
-When you import a CAD Model and specify Part Creation Type as Model, PyPrime creates a single part that inherits its name from the CAD Model name. 
-The number of zones within the Part is identical to the number of bodies within the CAD Model. 
+When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`MODEL <ansys.meshing.prime.PartCreationType.MODEL>`, a single part is created that inherits its name from the CAD model name. 
+The number of zones within the part is identical to the number of bodies within the CAD model.  As below:
 
 .. figure:: ../images/creation_model.png
     :width: 200pt
@@ -106,10 +106,8 @@ The number of zones within the Part is identical to the number of bodies within 
 Assembly 
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-When you import a CAD Model and specify Part Creation Type as Assembly, PyPrime creates a part
-per CAD Assembly where the part name is inherited from the CAD Assembly name.
-The number of zones within each part is identical to the number of bodies within the CAD Assembly.
-Assembly is the default Part Creation Type. The structure of imported CAD Model in Pyprime looks as below: 
+When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`ASSEMBLY <ansys.meshing.prime.PartCreationType.ASSEMBLY>`, a part per CAD assembly is created where the part name is inherited from the CAD assembly name.
+The number of zones within each part is identical to the number of bodies within the CAD assembly.  As below:
 
 .. figure:: ../images/creation_assembly.png
     :width: 200pt
@@ -120,10 +118,8 @@ Assembly is the default Part Creation Type. The structure of imported CAD Model 
 Part 
 ^^^^
 
-When you import a CAD Model and specify Part Creation Type as Part, PyPrime creates a part
-per CAD Part that inherits the part name from the CAD Part name. 
-The number of zones within a part is identical to the number of bodies within the CAD Part.
-The structure of imported CAD Model with Part Creation Type as Part in Pyprime is as follows: 
+When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`PART <ansys.meshing.prime.PartCreationType.PART>`, a part per CAD part is created that inherits the part name from the CAD part name. 
+The number of zones within a part is identical to the number of bodies within the CAD part.  As below:
 
 .. figure:: ../images/creation_part.png
     :width: 200pt
@@ -134,8 +130,8 @@ The structure of imported CAD Model with Part Creation Type as Part in Pyprime i
 Body
 ^^^^
 
-When you import a CAD Model and specify Part Creation Type as Body, PyPrime creates a part
-per CAD Body that inherits the part name from the CAD Body name. The number of parts is identical to the number of bodies. 
+When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`BODY <ansys.meshing.prime.PartCreationType.BODY>`, a part per CAD body is created that inherits the part name from the CAD body name. 
+The number of parts is identical to the number of bodies.  As below:
 
 .. figure:: ../images/creation_body.png
     :width: 200pt
