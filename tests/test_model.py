@@ -5,7 +5,7 @@ from .common import PrimeTestCase, PrimeTextTestRunner
 class TestModel(PrimeTestCase):
     def test_model_exists(self):
         model = self._model
-        self.assertTrue(model != None)
+        self.assertTrue(model != None, msg="Model does not exist")
 
 
 if __name__ == '__main__':

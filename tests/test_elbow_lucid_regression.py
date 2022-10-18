@@ -1,5 +1,6 @@
 import ansys.meshing.prime as pyprime
 import unittest
+import math
 from .common import PrimeTestCase, PrimeTextTestRunner
 
 
@@ -21,13 +22,29 @@ class TestElbow(PrimeTestCase):
         part = self._model.get_part_by_name("flow_volume")
         part_summary_res = part.get_summary(pyprime.PartSummaryParams(model=self._model))
         # validate number of face zones
-        self.assertEqual(part_summary_res.n_face_zones, 2)
+        self.assertEqual(
+            part_summary_res.n_face_zones,
+            2,
+            msg="Expected value: 2. Actual value: " + str(part_summary_res.n_face_zones),
+        )
         # validate number of tri faces
-        self.assertEqual(part_summary_res.n_tri_faces, 0)
+        self.assertEqual(
+            part_summary_res.n_tri_faces,
+            0,
+            msg="Expected value: 0. Actual value: " + str(part_summary_res.n_tri_faces),
+        )
         # validate number of poly faces
-        self.assertTrue(1964 * 0.98 <= part_summary_res.n_poly_faces <= 1964 * 1.02)
+        self.assertTrue(
+            math.isclose(1964.0, float(part_summary_res.n_poly_faces), rel_tol=0.02),
+            msg="Expected value: 1964, 2% tolerance. Actual value: "
+            + str(part_summary_res.n_poly_faces),
+        )
         # validate number of poly cells
-        self.assertTrue(7424 * 0.98 <= part_summary_res.n_poly_cells <= 7424 * 1.02)
+        self.assertTrue(
+            math.isclose(7424.0, float(part_summary_res.n_poly_cells), rel_tol=0.02),
+            msg="Expected value: 7424, 2% tolerance. Actual value: "
+            + str(part_summary_res.n_poly_cells),
+        )
 
 
 if __name__ == '__main__':

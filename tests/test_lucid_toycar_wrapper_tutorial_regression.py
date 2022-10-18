@@ -137,21 +137,25 @@ class TestElbow(PrimeTestCase):
 
         # Validate number of cells
         self.assertTrue(
-            3039283 * 0.99 <= part_summary_res.n_cells <= 3039283 * 1.01,
-            msg=part_summary_res.n_cells,
+            self.assertTrue(math.isclose(3039283.0, float(part_summary_res.n_cells), rel_tol=0.01)),
+            msg="",
         )
         # Validate maximum skewness 0.95
         self.assertTrue(qual_summary_res.quality_results_part[0].max_quality <= 1)
         # Validate number of cells violating skewness 0.95
         if os.name == 'nt':
             self.assertTrue(
-                54 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 54 * 1.1,
-                msg=qual_summary_res.quality_results_part[0].n_found,
+                math.isclose(
+                    54.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
+                ),
+                msg="",
             )
         elif os.name == 'posix':
             self.assertTrue(
-                33 * 0.9 <= qual_summary_res.quality_results_part[0].n_found <= 33 * 1.1,
-                msg=qual_summary_res.quality_results_part[0].n_found,
+                math.isclose(
+                    33.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
+                ),
+                msg="",
             )
 
 
