@@ -47,8 +47,10 @@ TopoEntities and Zonelets are characterized by dimension of entities.
 TopoEntities
 ------------
 
-TopoEntities represent connectivity information.  TopoEntities have geometric representation which may be defined by splines or facets.
-The mesh generated on TopoEntities will be projected on geometry representation.  There are four types of TopoEntities. They are:
+TopoEntities are created from importing CAD and represent connectivity information.  TopoEntities have geometric representation 
+which may be defined by splines or facets.  The mesh generated on TopoEntities will be projected on geometry representation.  
+
+There are four types of TopoEntities:
   
     * TopoNode: TopoEntity representing points.
     * TopoEdge: TopoEntity representing curves.
@@ -64,7 +66,9 @@ The mesh generated on TopoEntities will be projected on geometry representation.
 Zonelets
 --------
 
-Zonelets are a group of interconnected elements in a mesh. There are three types of Zonelets. They are:
+Zonelets are created from importing mesh files and are groups of interconnected elements in a mesh. 
+
+There are three types of Zonelets:
 
     * FaceZonelet: A group of interconnected face elements.
     * EdgeZonelet: A group of interconnected edge elements.
@@ -81,7 +85,7 @@ A set of FaceZonelets that define a closed volume without containing any cell el
 Zones
 -----
 
-Zonelets or TopoEntities can be further grouped into zones.  A zonelet or TopoEntity can only be present in a single zone.  In order to export a mesh to the Fluent solver zones are required to define boundary conditions.  When importing a Fluent solver model all zones will be defined as single zonelets.
+Zonelets or TopoEntities can be further grouped into zones.  A Zonelet or TopoEntity can only be present in a single zone.  In order to export a mesh to the Fluent solver zones are required to define boundary conditions.  When importing a Fluent solver model all zones will be defined as single zonelets.
 
 Labels
 ------
