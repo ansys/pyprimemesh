@@ -61,11 +61,26 @@ class TestElbow(PrimeTestCase):
         diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
         # Validate number of free edges
-        self.assertEqual(diag_res.n_free_edges, 0)
+        self.assertEqual(
+            diag_res.n_free_edges,
+            0,
+            msg="Validate number of free edges. Expected value: 0. Actual value: "
+            + str(diag_res.n_free_edges),
+        )
         # Validate number of multi edges
-        self.assertEqual(diag_res.n_multi_edges, 0)
+        self.assertEqual(
+            diag_res.n_multi_edges,
+            0,
+            msg="Validate number of multi edges. Expected value: 0. Actual value: "
+            + str(diag_res.n_multi_edges),
+        )
         # Validate number of self inter faces
-        self.assertEqual(diag_res.n_self_intersections, 0)
+        self.assertEqual(
+            diag_res.n_self_intersections,
+            0,
+            msg="Validate number of self inter faces. Expected value: 0. Actual value: "
+            + str(diag_res.n_self_intersections),
+        )
 
         face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
         quality = prime.SurfaceSearch(self._model)
@@ -113,13 +128,33 @@ class TestElbow(PrimeTestCase):
         # Validate quality check error code
         self.assertTrue(result.error_code == prime.ErrorCode.NOERROR)
         # result.hasNonPositiveVolumes
-        self.assertEqual(result.has_non_positive_volumes, False)
+        self.assertEqual(
+            result.has_non_positive_volumes,
+            False,
+            msg="result.has_non_positive_volumes Expected value: False. Actual value: "
+            + str(result.has_non_positive_volumes),
+        )
         # result.hasNonPositiveAreas
-        self.assertEqual(result.has_non_positive_areas, False)
+        self.assertEqual(
+            result.has_non_positive_areas,
+            False,
+            msg="result.has_non_positive_areas Expected value: False. Actual value: "
+            + str(result.has_non_positive_areas),
+        )
         # result.hasInvalidShape
-        self.assertEqual(result.has_invalid_shape, False)
+        self.assertEqual(
+            result.has_invalid_shape,
+            False,
+            msg="result.has_invalid_shape Expected value: False. Actual value: "
+            + str(result.has_invalid_shape),
+        )
         # result.hasLeftHandedFaces
-        self.assertEqual(result.has_left_handed_faces, False)
+        self.assertEqual(
+            result.has_left_handed_faces,
+            False,
+            msg="result.hasLeftHandedFaces Expected value: False. Actual value: "
+            + str(result.has_left_handed_faces),
+        )
 
         quality = prime.VolumeSearch(self._model)
         qual_summary_res = quality.get_volume_quality_summary(
@@ -138,24 +173,33 @@ class TestElbow(PrimeTestCase):
         # Validate number of cells
         self.assertTrue(
             self.assertTrue(math.isclose(3039283.0, float(part_summary_res.n_cells), rel_tol=0.01)),
-            msg="",
+            msg="Validate number of cells. Expected value: 3039283, 1% tolerance. Actual value: "
+            + str(part_summary_res.n_cells),
         )
         # Validate maximum skewness 0.95
-        self.assertTrue(qual_summary_res.quality_results_part[0].max_quality <= 1)
+        self.assertTrue(
+            qual_summary_res.quality_results_part[0].max_quality <= 1,
+            msg="Validate maximum skewness 0.95. Expected value: <1. Actual value: "
+            + str(qual_summary_res.quality_results_part[0].max_quality),
+        )
         # Validate number of cells violating skewness 0.95
         if os.name == 'nt':
             self.assertTrue(
                 math.isclose(
                     54.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
-                msg="",
+                msg="""Validate number of cells violating skewness 0.95.
+                 Expected value: 54, 10% tolerance. Actual value: """
+                + str(qual_summary_res.quality_results_part[0].n_found),
             )
         elif os.name == 'posix':
             self.assertTrue(
                 math.isclose(
                     33.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
-                msg="",
+                msg="""Validate number of cells violating skewness 0.95.
+                 Expected value: 33, 10% tolerance. Actual value: """
+                + str(qual_summary_res.quality_results_part[0].n_found),
             )
 
 

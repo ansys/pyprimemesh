@@ -25,24 +25,26 @@ class TestElbow(PrimeTestCase):
         self.assertEqual(
             part_summary_res.n_face_zones,
             2,
-            msg="Expected value: 2. Actual value: " + str(part_summary_res.n_face_zones),
+            msg="Validate number of face zones. Expected value: 2. Actual value: "
+            + str(part_summary_res.n_face_zones),
         )
         # validate number of tri faces
         self.assertEqual(
             part_summary_res.n_tri_faces,
             0,
-            msg="Expected value: 0. Actual value: " + str(part_summary_res.n_tri_faces),
+            msg="Validate number of tri faces. Expected value: 0. Actual value: "
+            + str(part_summary_res.n_tri_faces),
         )
         # validate number of poly faces
         self.assertTrue(
             math.isclose(1964.0, float(part_summary_res.n_poly_faces), rel_tol=0.02),
-            msg="Expected value: 1964, 2% tolerance. Actual value: "
+            msg="Validate number of poly faces. Expected value: 1964, 2% tolerance. Actual value: "
             + str(part_summary_res.n_poly_faces),
         )
         # validate number of poly cells
         self.assertTrue(
             math.isclose(7424.0, float(part_summary_res.n_poly_cells), rel_tol=0.02),
-            msg="Expected value: 7424, 2% tolerance. Actual value: "
+            msg="Validate number of poly cells. Expected value: 7424, 2% tolerance. Actual value: "
             + str(part_summary_res.n_poly_cells),
         )
 
