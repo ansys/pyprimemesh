@@ -172,7 +172,7 @@ class TestElbow(PrimeTestCase):
 
         # Validate number of cells
         self.assertTrue(
-            self.assertTrue(math.isclose(3039283.0, float(part_summary_res.n_cells), rel_tol=0.01)),
+            math.isclose(3039283.0, float(part_summary_res.n_cells), rel_tol=0.01),
             msg="Validate number of cells. Expected value: 3039283, 1% tolerance. Actual value: "
             + str(part_summary_res.n_cells),
         )
