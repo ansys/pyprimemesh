@@ -56,7 +56,7 @@ Once you imported the CAD file, you can display the model using graphics module 
     >>>     print(part_summary_res)
 
 And set the global sizing parameters to initialize size control parameters (with curvature refinement): 
-> Visit Controls_ section for more information.
+> Visit `controls`_ section for more information.
 
 .. code:: python
 
@@ -66,7 +66,7 @@ And set the global sizing parameters to initialize size control parameters (with
     >>>     size_control.set_scope(prime.ScopeDefinition(model))
 
 And compute the volumetric size field based on the size controls:
-> Visit SizeFieldTypes_ section for more information.
+> Visit `size_field`_ section for more information.
 
 .. code:: python
 
