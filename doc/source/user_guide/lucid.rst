@@ -14,7 +14,7 @@ Many common meshing tasks and workflows can be tackled easily using the function
 Below is an example of meshing the mixing elbow case for fluid flow analysis:
 
 .. code:: python
-
+    
     Start and connect to a Prime server
     
     >>> from ansys.meshing import prime
