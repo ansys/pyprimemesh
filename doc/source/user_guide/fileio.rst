@@ -1,9 +1,9 @@
 .. _ref_index_reading_writing:
 
 
-*************************************
-Reading and Writing Files in PyPrime 
-*************************************
+**************************
+Reading and Writing Files
+**************************
 
 The :class:`FileIO <ansys.meshing.prime.FileIO>` class is used for all file based data exchanges.
 
