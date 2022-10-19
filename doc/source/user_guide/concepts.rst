@@ -34,7 +34,7 @@ Geometry topology and mesh data in the :class:`Model <ansys.meshing.prime.Model>
 
     >>> model.parts
 
-Each :class:`part <ansys.meshing.prime.Model.Part>` can contain either TopoEntities or Zonelets.
+Each :class:`Part <ansys.meshing.prime.Model.Part>` can contain either TopoEntities or Zonelets.
 
 .. figure:: ../images/part_type.png
     :width: 400pt
