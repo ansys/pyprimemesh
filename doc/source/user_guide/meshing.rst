@@ -21,7 +21,7 @@ Surface meshing considers many parameters like size field type, min size, max si
 
 **Remeshing on the mesh-based geometry**
 
-.. figure:: ../images/simple-bracket-holes_stl.png
+.. image:: ../images/simple-bracket-holes_stl.png
     :align: center
     
 The following example shows you the procedure how to:
@@ -89,12 +89,12 @@ Finally, initialize surfer parameters and generate surface mesh on face zonelets
     >>>         params=surfer_params
     >>>     )
   
-.. figure:: ../images/simple-bracket-holes-mesh1.png
+.. image:: ../images/simple-bracket-holes_mesh1.png
     :align: center
  
 **Meshing on the topology-based geometry**
 
-.. figure:: ../images/simple-bracket-holes_scdoc.png
+.. image:: ../images/simple-bracket-holes_scdoc.png
     :align: center
 
 After importing topology-based geometry (.scdoc), you will apply the same procedure (
@@ -111,7 +111,7 @@ i.e.  create curvature size control and compute volumetric size field) as descri
     >>>     )
 
 
-.. figure:: ../images/simple-bracket-holes-mesh2.png
+.. image:: ../images/simple-bracket-holes_mesh2.png
     :align: center
 
 
