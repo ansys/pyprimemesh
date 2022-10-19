@@ -46,6 +46,8 @@ Firstly, you launch the prime instance as described earlier and import mesh-base
 
 Once you imported the CAD file, you can display the model using graphics module and print the statistics on the model:
 
+.. code:: python
+
     >>>     # Show model in graphic and get part summary
     >>>     display = Graphics(model)
     >>>     display(update=True)
@@ -56,6 +58,8 @@ Once you imported the CAD file, you can display the model using graphics module 
 And set the global sizing parameters to initialize size control parameters (with curvature refinement): 
 > Visit Controls_ section for more information.
 
+.. code:: python
+
     >>>     # Surface mesh size controls
     >>>     model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.27, max=5.5, growth_rate=1.2))
     >>>     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
@@ -64,6 +68,8 @@ And set the global sizing parameters to initialize size control parameters (with
 And compute the volumetric size field based on the size controls:
 > Visit SizeFieldTypes_ section for more information.
 
+.. code:: python
+
     >>>     size_field = prime.SizeField(model)
     >>>     res = size_field_compute_volumetric(
     >>>         size_control_ids=[size_control.id],
@@ -71,6 +77,8 @@ And compute the volumetric size field based on the size controls:
     >>>     )
 
 Finally, initialize surfer parameters and generate surface mesh on face zonelets:
+
+.. code:: python
 
     >>>     # Surface mesh with triangular elements
     >>>     surfer_params = prime.SurferParams(model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC)
