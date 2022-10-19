@@ -18,9 +18,10 @@ An example of expression usage is shown below:
 
 .. code:: python
     
+    >>> from ansys.meshing import prime
     >>> # first part in model 
     >>> part = model.parts[0]
-    >>> ScopeDefinition(model=model, part_expression=part.name)
+    >>> scope = prime.ScopeDefinition(model=model, part_expression=part.name)
     
     >>> # all parts except “solid”
-    >>> ScopeDefinition(model=model, part_expression=”* !solid”)
+    >>> scope = prime.ScopeDefinition(model=model, part_expression=”* !solid”)
