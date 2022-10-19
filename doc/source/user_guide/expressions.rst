@@ -14,11 +14,13 @@ Special characters currently used are “*”, “!” and spaces.  Examples of 
 * “!abc\*” collects all required entities with a name that is not starting with abc 
 * "\*abc,\*xyz" "\*abc \*xyz" (comma/space represents OR) collects all required entities with a name ending with abc or xyz 
 
+An example of expression usage is shown below:
+
 .. code:: python
-
+    
     >>> # first part in model 
-    >>> part=model.parts[0] 
-    >>> ScopeDefinition(model=model,part_expression=part.name) 
-
-    >>> # all parts except “solid” 
-    >>> ScopeDefinition(model=model,part_expression=”* !solid”) 
+    >>> part = model.parts[0]
+    >>> ScopeDefinition(model=model, part_expression=part.name)
+    
+    >>> # all parts except “solid”
+    >>> ScopeDefinition(model=model, part_expression=”* !solid”)
