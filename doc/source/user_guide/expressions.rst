@@ -17,16 +17,10 @@ Special characters currently used are “*”, “!” and spaces.  Examples of 
 An example of expression usage is shown below:
  
 .. code:: python
-
-    >>> from ansys.meshing import prime
-    >>> prime_client = prime.launch_prime()
-    >>> model = prime_client.model
-    
-    First part in model
     
     >>> part = model.parts[0]
+    >>> # First part in model
     >>> scope = prime.ScopeDefinition(model=model, part_expression=part.name)
     
-    All parts except solid
-    
-    >>> scope = prime.ScopeDefinition(model=model, part_expression=”* !solid”)
+    >>> # All parts except solid
+    >>> scope = prime.ScopeDefinition(model=model, part_expression=\”\* !solid\”)
