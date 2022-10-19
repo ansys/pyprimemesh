@@ -19,6 +19,9 @@ An example of expression usage is shown below:
 .. code:: python
     
     >>> from ansys.meshing import prime
+    >>> prime_client = prime.launch_prime()
+    >>> model = prime_client.model
+    
     >>> # first part in model 
     >>> part = model.parts[0]
     >>> scope = prime.ScopeDefinition(model=model, part_expression=part.name)
