@@ -12,6 +12,7 @@ mesh preparation.
 
    concepts
    launching_pyprime
+   lucid
    fileio
    graphics
    meshing
