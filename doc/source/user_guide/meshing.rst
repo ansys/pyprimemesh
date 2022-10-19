@@ -25,9 +25,10 @@ Surface meshing considers many parameters like size field type, min size, max si
     :align: center
     
 The following example shows you the procedure how to:
-    * Import geometry and visualize model
-    * Create curvature size control and compute volumetric size field
-    * Surface mesh
+
+* Import geometry and visualize model
+* Create curvature size control and compute volumetric size field
+* Surface mesh
     
 Firstly, you launch the prime instance as described earlier and import mesh-based geometry (.stl):
    
@@ -55,7 +56,8 @@ Once you imported the CAD file, you can display the model using graphics module 
     >>>     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
     >>>     print(part_summary_res)
 
-And set the global sizing parameters to initialize size control parameters (with curvature refinement): 
+And set the global sizing parameters to initialize size control parameters (with curvature refinement):
+
     Visit :ref:`ref_index_controls` section for more information.
 
 .. code:: python
@@ -66,6 +68,7 @@ And set the global sizing parameters to initialize size control parameters (with
     >>>     size_control.set_scope(prime.ScopeDefinition(model))
 
 And compute the volumetric size field based on the size controls:
+
     Visit :ref:`ref_index_size_field` section for more information.
 
 .. code:: python
