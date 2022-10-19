@@ -15,16 +15,18 @@ Special characters currently used are “*”, “!” and spaces.  Examples of 
 * "\*abc,\*xyz" "\*abc \*xyz" (comma/space represents OR) collects all required entities with a name ending with abc or xyz 
 
 An example of expression usage is shown below:
-
+ 
 .. code:: python
-    
+
     >>> from ansys.meshing import prime
     >>> prime_client = prime.launch_prime()
     >>> model = prime_client.model
     
-    >>> # first part in model 
+    First part in model
+    
     >>> part = model.parts[0]
     >>> scope = prime.ScopeDefinition(model=model, part_expression=part.name)
     
-    >>> # all parts except “solid”
+    All parts except solid
+    
     >>> scope = prime.ScopeDefinition(model=model, part_expression=”* !solid”)
