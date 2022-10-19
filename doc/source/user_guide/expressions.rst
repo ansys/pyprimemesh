@@ -23,4 +23,4 @@ An example of expression usage is shown below:
     >>> scope = prime.ScopeDefinition(model=model, part_expression=part.name)
     
     >>> # All parts except solid
-    >>> scope = prime.ScopeDefinition(model=model, part_expression=\”\* !solid\”)
+    >>> scope = prime.ScopeDefinition(model=model, part_expression="* !solid")
