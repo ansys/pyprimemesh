@@ -15,7 +15,7 @@ Special characters currently used are “*”, “!” and spaces.  Examples of 
 * "\*abc,\*xyz" "\*abc \*xyz" (comma/space represents OR) collects all required entities with a name ending with abc or xyz 
 
 .. code:: python
-    
+
     >>> # first part in model 
     >>> part=model.parts[0] 
     >>> ScopeDefinition(model=model,part_expression=part.name) 
