@@ -15,8 +15,8 @@ PMDAT is the native file format for Prime that contains all data associated with
 
 This includes, geometry, mesh, topology, controls, labels and zones.
 
-The model data can be read from and written to this format using :func:`FileIO.read_pmdat() <ansys.meshing.prime.FileIO.read_pmdat>` and
-:func:`FileIO.write_pmdat() <ansys.meshing.prime.FileIO.write_pmdat>` with parameters defined in the
+The model data can be read from and written to this format using the :func:`FileIO.read_pmdat() <ansys.meshing.prime.FileIO.read_pmdat>` and
+:func:`FileIO.write_pmdat() <ansys.meshing.prime.FileIO.write_pmdat>` functions with parameters defined in the
 :class:`FileReadParams <ansys.meshing.prime.FileReadParams>` and :class:`FileWriteParams <ansys.meshing.prime.FileWriteParams>` classes respectively.
 
 .. code:: python
@@ -38,10 +38,28 @@ The model data can be read from and written to this format using :func:`FileIO.r
 Importing CAD
 ==============
 
-PyPrime supports importing CAD files and appending of CAD files in a model.
-``FileIO.import_cad(filename,params)`` allows you to import the CAD files in PyPrime and set the options for importing the files.
-This function also allows you to append a CAD model with an existing model. 
-You may have to specify the import route for the CAD files depending on the imported files. 
+The :func:`FileIO.import_cad() <ansys.meshing.prime.FileIO.import_cad>` function allows you to import CAD files and set parameters for importing files using the :class:`ImportCadParams <ansys.meshing.prime.ImportCadParams>` class.  
+
+Appending CAD files
+-------------------
+
+The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` attribute allows you to append a CAD file to the model. 
+
+.. code:: python
+    
+    >>> params = prime.ImportCadParams(model=model, append=True)
+    >>> prime.FileIO(model).import_cad(file_name="cad_to_append.scdoc", params=params)
+     
+CAD Reader Routes
+-----------------
+
+You may require to specify the import route for the CAD files using the :class:`CadReaderRoute <ansys.meshing.prime.CadReaderRoute>` class.
+
+.. code:: python
+    
+    >>> params = prime.ImportCadParams(model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
+    >>> prime.FileIO(model).import_cad(file_name=mixing_elbow, params=params)
+
 CAD import routes available in PyPrime are Program Controlled, Native, SpaceClaim and Workbench. 
 
  * Program Controlled: Automatically choose the best route based on the CAD format. Program Controlled uses Native as available, SCDM for scdoc and Workbench for all the other formats.  
@@ -52,16 +70,41 @@ CAD import routes available in PyPrime are Program Controlled, Native, SpaceClai
  
  * Workbench: Uses Workbench to import supported CAD files from the Workbench reader. 
  
- 
-When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration and in application defaults are consistent
-in the deployed environment. 
-
 Refer `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ document to view the CAD supported for Workbench route on different platforms. 
 
+**Note**: When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration and in application defaults 
+are consistent in the deployed environment. 
 
 **Note**: You must install and configure Workbench CAD Readers/Plug-ins (Ansys Geometry Interfaces) while installing Ansys Workbench. 
  
+Parametric CAD
+--------------
 
+Parametric CAD update can be used during import for CAD files that have parameters defined that can be accessed by the Workbench CAD readers.  
+
+To get existing CAD parameters during import:
+
+.. code:: python
+    
+    >>> params = prime.ImportCadParams(model=model)
+    >>> params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
+    >>> result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
+    >>> print(result.cad_parameters)
+    
+    {'my_param': 1}
+    
+To set parameters to be used at import:
+
+.. code:: python
+    
+    >>> params = prime.ImportCadParams(model=model)
+    >>> params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
+    >>> params.cad_update_parameters = {'my_param': 2}
+    >>> result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
+    >>> print(result.cad_parameters)
+    
+    {'my_param': 2}
+   
 Part Management and Creation
 ----------------------------
 
@@ -100,7 +143,7 @@ The number of zones within the part is identical to the number of bodies within 
     **Part creation by Model (from SpaceClaim CAD structure to Prime part structure)**
 
 Assembly 
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`ASSEMBLY <ansys.meshing.prime.PartCreationType.ASSEMBLY>`, a part per CAD assembly is created where the part name is inherited from the CAD assembly name.
 The number of zones within each part is identical to the number of bodies within the CAD assembly.  As below:
