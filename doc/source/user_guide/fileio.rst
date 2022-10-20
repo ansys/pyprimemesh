@@ -71,7 +71,7 @@ The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. A typical CAD product structure is as follows: 
 
 .. figure:: ../images/cad_structure.png
-    :width: 100pt
+    :width: 191pt
     :align: center
 
     **Example CAD structure**
@@ -94,7 +94,7 @@ When you import a CAD model and specify the :class:`PartCreationType <ansys.mesh
 The number of zones within the part is identical to the number of bodies within the CAD model.  As below:
 
 .. figure:: ../images/creation_model.png
-    :width: 200pt
+    :width: 440pt
     :align: center
 
     **Part creation by Model (from SpaceClaim CAD structure to Prime part structure)**
@@ -106,7 +106,7 @@ When you import a CAD model and specify the :class:`PartCreationType <ansys.mesh
 The number of zones within each part is identical to the number of bodies within the CAD assembly.  As below:
 
 .. figure:: ../images/creation_assembly.png
-    :width: 200pt
+    :width: 365pt
     :align: center
 
     **Part creation by Assembly (from SpaceClaim CAD structure to Prime part structure)**
@@ -118,7 +118,7 @@ When you import a CAD model and specify the :class:`PartCreationType <ansys.mesh
 The number of zones within a part is identical to the number of bodies within the CAD part.  As below:
 
 .. figure:: ../images/creation_part.png
-    :width: 200pt
+    :width: 442pt
     :align: center
 
     **Part creation by Part (from SpaceClaim CAD structure to Prime part structure)**
@@ -130,7 +130,7 @@ When you import a CAD model and specify the :class:`PartCreationType <ansys.mesh
 The number of parts is identical to the number of bodies.  As below:
 
 .. figure:: ../images/creation_body.png
-    :width: 200pt
+    :width: 355pt
     :align: center
 
     **Part creation by Body (from SpaceClaim CAD structure to Prime part structure)**
