@@ -18,7 +18,7 @@ class TestElbow(PrimeTestCase):
 
         # several objects are open surfaces (with holes)
         # coarse wrap to close holes and delete originals
-        coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
+        coarse_wrap = {"cabin": 1.5, "exhaust": 0.5, "engine": 1.5}
         for part in coarse_wrap:
             mesher.wrap(
                 input_parts=part,
