@@ -51,11 +51,11 @@ file_io.import_cad(
         model=model,
         length_unit=prime.LengthUnit.MM,
         part_creation_type=prime.PartCreationType.MODEL,
-    )
+    ),
 )
 
 # Get part summary
-part = model.get_part_by_name('bracket_mid_surface')
+part = model.get_part_by_name('bracket_mid_surface-3')
 part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
 print(part_summary_res)
 
@@ -68,7 +68,8 @@ element_size = 0.5
 
 # Initialize connection tolerance and other parameters
 params = prime.ScaffolderParams(
-    model, absolute_dist_tol=0.1*element_size,
+    model,
+    absolute_dist_tol=0.1 * element_size,
     intersection_control_mask=prime.IntersectionMask.FACEFACEANDEDGEEDGE,
     constant_mesh_size=element_size,
 )
@@ -79,9 +80,7 @@ beams = []
 
 # Scaffold topofaces and/or topoedges with connection parameters
 scaffold_res = prime.Scaffolder(model, part.id).scaffold_topo_faces_and_beams(
-    topo_faces=faces,
-    topo_beams=beams,
-    params=params
+    topo_faces=faces, topo_beams=beams, params=params
 )
 print(scaffold_res)
 
