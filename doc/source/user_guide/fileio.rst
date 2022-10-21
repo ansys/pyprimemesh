@@ -11,7 +11,7 @@ The :class:`FileIO <ansys.meshing.prime.FileIO>` class is used for all file base
 Native PMDAT Format
 ====================
 
-PMDAT is the native file format for Prime that contains all data associated with the active model.
+PMDAT is the native file format for PyPrime that contains all data associated with the active model.
 
 This includes, geometry, mesh, topology, controls, labels and zones.
 
