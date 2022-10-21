@@ -7,6 +7,10 @@ from ansys.meshing.prime import __version__
 
 from sphinx_gallery.sorting import FileNameSortKey
 
+import pyvista
+
+import os
+
 # Project information
 project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -36,6 +40,13 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
     "sphinx_gallery.gen_gallery",
+    "jupyter_sphinx",
+    "notfound.extension",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
+    "sphinx.ext.extlinks",
+    "sphinx_autodoc_typehints",
+    "sphinxemoji.sphinxemoji",
 ]
 
 # Intersphinx mapping
@@ -52,6 +63,7 @@ intersphinx_mapping = {
 # numpydoc configuration
 numpydoc_show_class_members = False
 numpydoc_xref_param_type = True
+numpydoc_use_plots = True
 
 # Consider enabling numpydoc validation. See:
 # https://numpydoc.readthedocs.io/en/latest/validation.html#
@@ -90,6 +102,16 @@ autosummary_ignore_module_all = False
 
 exclude_patterns = ["../../examples/example_template.py"]
 
+# Enable screenshots for gallery for pyvista
+pyvista.BUILDING_GALLERY = True
+
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True
+
+# Save figures in specified directory
+pyvista.FIGURE_PATH = os.path.join(os.path.abspath("./images/"), "auto-generated/")
+if not os.path.exists(pyvista.FIGURE_PATH):
+    os.makedirs(pyvista.FIGURE_PATH)
 
 # Sphinx Gallery Options
 sphinx_gallery_conf = {
@@ -108,7 +130,7 @@ sphinx_gallery_conf = {
     # directory where function granular galleries are stored
     "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
-    "doc_module": "ansys-mapdl-core",
+    "doc_module": "ansys-meshing-prime",
     "image_scrapers": ("pyvista", "matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
