@@ -5,6 +5,8 @@ from ansys_sphinx_theme import pyansys_logo_black
 
 from ansys.meshing.prime import __version__
 
+from sphinx_gallery.sorting import FileNameSortKey
+
 # Project information
 project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -33,6 +35,7 @@ extensions = [
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
+    "sphinx_gallery.gen_gallery",
 ]
 
 # Intersphinx mapping
@@ -83,3 +86,30 @@ master_doc = 'index'
 autosummary_generate = True
 autosummary_imported_members = True
 autosummary_ignore_module_all = False
+
+
+exclude_patterns = ["../../examples/example_template.py"]
+
+
+# Sphinx Gallery Options
+sphinx_gallery_conf = {
+    # convert rst to md for ipynb
+    "pypandoc": True,
+    # path to your examples scripts
+    "examples_dirs": ["../../examples/"],
+    # path where to save gallery generated examples
+    "gallery_dirs": ["examples/gallery_examples"],
+    # Patter to search for example files
+    "filename_pattern": r"\.py",
+    # Remove the "Download all examples" button from the top level gallery
+    "download_all_examples": False,
+    # Sort gallery example by file name instead of number of lines (default)
+    "within_subsection_order": FileNameSortKey,
+    # directory where function granular galleries are stored
+    "backreferences_dir": None,
+    # Modules for which function level galleries are created.  In
+    "doc_module": "ansys-mapdl-core",
+    "image_scrapers": ("pyvista", "matplotlib"),
+    "ignore_pattern": "flycheck*",
+    "thumbnail_size": (350, 350),
+}

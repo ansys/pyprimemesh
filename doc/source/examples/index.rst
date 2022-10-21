@@ -18,6 +18,16 @@ Examples
    pipe_tee_case
    example_template
    
+.. === EXAMPLES Gallery ===
+
+
+..
+   We have to include this rather than include it in a tree.
+
+.. include:: gallery_examples/index.rst
+   :start-line: 2
+   
+   
 PyPrime provides some examples to guide you with using ansys-meshing-prime. 
 
 
