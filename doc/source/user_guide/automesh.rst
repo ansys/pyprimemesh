@@ -1,4 +1,4 @@
-.. _ref_index_automesh
+.. _ref_index_automesh:
 
 
 ******************
