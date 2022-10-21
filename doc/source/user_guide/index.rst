@@ -15,7 +15,8 @@ mesh preparation.
    lucid
    fileio
    graphics
-   meshing
+   surfer
+   automesh
    size_field
    controls
    features
