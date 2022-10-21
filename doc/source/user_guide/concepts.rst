@@ -93,10 +93,18 @@ A set of FaceZonelets that define a closed volume without containing any cell el
 Zones
 -----
 
-Zonelets or TopoEntities can be further grouped into zones.  A Zonelet or TopoEntity can only be present in a single zone.  In order to export a mesh to the Fluent solver zones are required to define boundary conditions.  When importing a Fluent solver model all zones will be defined as single zonelets.
+Zonelets or TopoEntities can be further grouped into zones.  A Zonelet or TopoEntity can only be present in a single zone.  
+
+In order to export a mesh to the Fluent solver (.msh, .cas) zones are required to define boundary conditions.  
+
+When importing a Fluent solver model each zone will be defined as a single zonelet.
 
 ------
 Labels
 ------
 
-Labels allow overlapping groups of Zonelets or TopoEntities.  When importing CAD files any groups or named selections will generate labels.  When exporting to a mechanical solver file all labels are exported as collections.
+Labels allow overlapping groups of Zonelets or TopoEntities.  
+
+When importing CAD files each group or named selection will generate a label.  
+
+When exporting to a mechanical solver file (.cdb) each label is exported as a collection.
