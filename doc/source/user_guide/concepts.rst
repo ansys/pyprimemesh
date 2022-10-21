@@ -8,7 +8,7 @@ Concepts and Model Structure
 Model 
 ------
 
-The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for Prime. It contains all information about the Prime session.  
+The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for PyPrime. It contains all information about the PyPrime session.  
 
 The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Client <ansys.meshing.prime.Client>` class as follows:
   
@@ -81,12 +81,14 @@ A set of FaceZonelets that define a closed volume without containing any cell el
     :align: center
 
     **Zonelets schematic**
-  
+
+-----
 Zones
 -----
 
 Zonelets or TopoEntities can be further grouped into zones.  A Zonelet or TopoEntity can only be present in a single zone.  In order to export a mesh to the Fluent solver zones are required to define boundary conditions.  When importing a Fluent solver model all zones will be defined as single zonelets.
 
+------
 Labels
 ------
 
