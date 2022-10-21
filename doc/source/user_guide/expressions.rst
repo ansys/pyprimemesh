@@ -2,7 +2,7 @@
 Expressions 
 ************
 
-Expressions can be used to gather entities needed for certain operations.  
+Expressions can be used to gather named entities needed for various operations.  
 
 Special characters currently used are “*”, “!” and spaces/commas.  These special characters can be used within a string as follows: 
 
