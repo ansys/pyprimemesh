@@ -10,6 +10,12 @@ Model
 
 The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for PyPrime. It contains all information about the PyPrime session.  
 
+.. figure:: ../images/model_structure.png
+    :width: 200pt
+    :align: center
+
+    **Model structure**
+    
 The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Client <ansys.meshing.prime.Client>` class as follows:
   
 .. code:: python
