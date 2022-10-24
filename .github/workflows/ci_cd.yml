@@ -112,6 +112,7 @@ jobs:
           pip install build
           python -m build . -w
           pip install dist/* --find-links deps
+          pip install sphinx-gallery
 
       - name: Install documentation requirements
         run: pip install -r requirements/requirements_docs.txt
