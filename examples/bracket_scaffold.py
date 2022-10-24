@@ -31,6 +31,7 @@ Procedure
 
 from ansys.meshing import prime
 import os, tempfile
+from ansys.meshing.prime.graphics import Graphics
 
 # Start prime and get the model
 prime_client = prime.launch_prime()
@@ -98,6 +99,9 @@ surfer_params = prime.SurferParams(
 
 # Surface mesh the part with given surface meshing parameters
 surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
+
+display = Graphics(model=model)
+display()
 
 ###############################################################################
 # Write a cdb file for use in the APDL solver

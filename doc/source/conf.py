@@ -100,7 +100,9 @@ autosummary_imported_members = True
 autosummary_ignore_module_all = False
 
 
-exclude_patterns = ["../../examples/example_template.py"]
+# exclude_patterns = [
+#    "examples/gallery_examples/example_template.rst" "examples/gallery_examples/mixing_elbow.rst"
+# ]
 
 # Enable screenshots for gallery for pyvista
 pyvista.BUILDING_GALLERY = True
@@ -118,11 +120,15 @@ sphinx_gallery_conf = {
     # convert rst to md for ipynb
     "pypandoc": True,
     # path to your examples scripts
-    "examples_dirs": ["../../examples/"],
+    "examples_dirs": ["../galleryexamples/"],
     # path where to save gallery generated examples
     "gallery_dirs": ["examples/gallery_examples"],
     # Patter to search for example files
     "filename_pattern": r"\.py",
+    # ignore mixing elbow and example template
+    "ignore_pattern": r"mixing_elbow",
+    # default thumbnail for no thumbnail generated
+    "default_thumb_file": "../galleryexamples/defaultthumb.png",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
