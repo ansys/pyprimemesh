@@ -1,9 +1,5 @@
 .. _ref_index_examples:
 
-
-========
-Examples
-========
 .. toctree::
    :hidden:
    :maxdepth: 2
