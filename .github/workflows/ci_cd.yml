@@ -114,7 +114,7 @@ jobs:
           pip install dist/* --find-links deps
           pip install sphinx-gallery
           pip install pyvista
-          pip install jupyter-sphinx
+          pip install jupyter_sphinx
 
       - name: Install documentation requirements
         run: pip install -r requirements/requirements_docs.txt
