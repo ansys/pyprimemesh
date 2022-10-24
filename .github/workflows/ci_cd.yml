@@ -117,6 +117,7 @@ jobs:
           pip install jupyter_sphinx
           pip install sphinx-notfound-page
           pip install sphinx-autodoc-typehints
+          pip install sphinxemoji
 
       - name: Install documentation requirements
         run: pip install -r requirements/requirements_docs.txt
