@@ -118,14 +118,6 @@ jobs:
         with:
           python-version: 3.7
 
-      - name: Cache pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-
       - name: Install library
         run: |
           pip install build
@@ -157,6 +149,9 @@ jobs:
           pip install sphinx-notfound-page
           pip install sphinx-autodoc-typehints
           pip install sphinxemoji
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v1
 
       - name: Build HTML
         run: |
