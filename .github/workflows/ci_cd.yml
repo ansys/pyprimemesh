@@ -151,12 +151,6 @@ jobs:
       - name: Install documentation requirements
         run: |
           pip install -r requirements/requirements_docs.txt
-          pip install sphinx-gallery
-          pip install pyvista
-          pip install jupyter_sphinx
-          pip install sphinx-notfound-page
-          pip install sphinx-autodoc-typehints
-          pip install sphinxemoji
 
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v1
