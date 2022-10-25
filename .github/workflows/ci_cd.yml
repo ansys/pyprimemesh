@@ -154,9 +154,8 @@ jobs:
 
       - name: Build HTML
         run: |
+           echo "hi"
 #          make -C doc html #SPHINXOPTS="-W"
-           print("hi")
-           print("yes")
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
