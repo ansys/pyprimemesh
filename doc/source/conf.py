@@ -120,7 +120,7 @@ sphinx_gallery_conf = {
     # convert rst to md for ipynb
     # "pypandoc": True,
     # path to your examples scripts
-    "examples_dirs": ["../../examples/galleryexamples/"],
+    "examples_dirs": ["../../examples/gallery/"],
     # path where to save gallery generated examples
     "gallery_dirs": ["examples/gallery_examples"],
     # Patter to search for example files
