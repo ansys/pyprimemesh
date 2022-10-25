@@ -124,15 +124,6 @@ jobs:
           python -m build . -w
           pip install dist/* --find-links deps
 
-      - name: Install packages for sphinx gallery
-        run: |
-          pip install sphinx-gallery
-          pip install pyvista
-          pip install jupyter_sphinx
-          pip install sphinx-notfound-page
-          pip install sphinx-autodoc-typehints
-          pip install sphinxemoji
-
       - name: Build and Install PyPrime
         run: |
           pip install build
@@ -150,12 +141,21 @@ jobs:
         run: docker pull ${{ env.DOCKER_PACKAGE }}
 
       - name: Install documentation requirements
-        run: pip install -r requirements/requirements_docs.txt
+        run: |
+          pip install -r requirements/requirements_docs.txt
+          pip install sphinx-gallery
+          pip install pyvista
+          pip install jupyter_sphinx
+          pip install sphinx-notfound-page
+          pip install sphinx-autodoc-typehints
+          pip install sphinxemoji
 
       - name: Build HTML
         run: |
            echo "hi"
 #          make -C doc html #SPHINXOPTS="-W"
+          pip install -r requirements/requirements_tests.txt
+          pytest -v tests
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
