@@ -112,12 +112,30 @@ jobs:
           pip install build
           python -m build . -w
           pip install dist/* --find-links deps
+
+      - name: Install packages for sphinx gallery
+        run: |
           pip install sphinx-gallery
           pip install pyvista
           pip install jupyter_sphinx
           pip install sphinx-notfound-page
           pip install sphinx-autodoc-typehints
           pip install sphinxemoji
+
+      - name: Build and Install PyPrime
+        run: |
+          python -m build .
+          pip install dist/*.whl --find-links deps
+
+      - name: Login in Github Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: pyansys-bot
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull, launch, and validate prime service
+        run: docker pull ${{ env.DOCKER_PACKAGE }}
 
       - name: Install documentation requirements
         run: pip install -r requirements/requirements_docs.txt
