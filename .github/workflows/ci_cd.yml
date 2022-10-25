@@ -127,6 +127,7 @@ jobs:
 
       - name: Build and Install PyPrime
         run: |
+          pip install build
           python -m build .
           pip install dist/*.whl --find-links deps
 
