@@ -118,11 +118,6 @@ jobs:
         with:
           python-version: 3.7
 
-      - name: Test virtual framebuffer
-        run: |
-          pip install -r .ci/requirements_test_xvfb.txt
-          xvfb-run python .ci/display_test.py
-
       - name: Install library
         run: |
           pip install build
