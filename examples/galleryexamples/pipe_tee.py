@@ -18,9 +18,9 @@ prismatic boundary layers.
 
 To achieve these tasks we will use the high level API packaged with PyPrime called Lucid.
 
-.. image:: ../images/pipe_tee.png
+.. image:: ../../../../../../source/images/pipe_tee.png
    :align: center
-   :height: 400
+   :height: 300
    :alt: Pipe tee mesh.
 
 Procedure
