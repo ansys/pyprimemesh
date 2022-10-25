@@ -146,6 +146,9 @@ jobs:
       - name: Build HTML
         run: |
           make -C doc html SPHINXOPTS="-W"
+        env:
+          PYPRIME_LAUNCH_CONTAINER: 1
+          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       - name: Build PDF Documentation
         run: |
