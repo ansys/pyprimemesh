@@ -104,11 +104,24 @@ jobs:
         with:
           application_id: ${{ secrets.BOT_APPLICATION_ID }}
           application_private_key: ${{ secrets.BOT_APPLICATION_PRIVATE_KEY }}
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
+          restore-keys: |
+            Python-${{ runner.os }}-${{ matrix.python-version }}
       
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.7
+
+      - name: Test virtual framebuffer
+        run: |
+          pip install -r .ci/requirements_test_xvfb.txt
+          xvfb-run python .ci/display_test.py
 
       - name: Install library
         run: |
@@ -146,7 +159,7 @@ jobs:
 
       - name: Build HTML
         run: |
-          make -C doc html SPHINXOPTS="-W"
+          make -C doc html #SPHINXOPTS="-W"
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
