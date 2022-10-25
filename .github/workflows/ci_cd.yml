@@ -135,6 +135,7 @@ jobs:
       - name: Install documentation requirements
         run: |
           pip install -r requirements/requirements_docs.txt
+          echo "installed required packages"
 
       - name: Build and Install PyPrime
         run: |
