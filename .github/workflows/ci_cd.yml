@@ -132,6 +132,10 @@ jobs:
           python -m build . -w
           pip install dist/* --find-links deps
 
+      - name: Install documentation requirements
+        run: |
+          pip install -r requirements/requirements_docs.txt
+
       - name: Build and Install PyPrime
         run: |
           pip install build
@@ -147,10 +151,6 @@ jobs:
 
       - name: Pull, launch, and validate prime service
         run: docker pull ${{ env.DOCKER_PACKAGE }}
-
-      - name: Install documentation requirements
-        run: |
-          pip install -r requirements/requirements_docs.txt
 
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v1
