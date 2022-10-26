@@ -129,7 +129,7 @@ sphinx_gallery_conf = {
     "ignore_pattern": r"mixing_elbow",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
-    # Sort gallery example by file name instead of number of lines (default) 
+    # Sort gallery example by file name instead of number of lines (default)
     "within_subsection_order": FileNameSortKey,
     # directory where function granular galleries are stored
     "backreferences_dir": None,
