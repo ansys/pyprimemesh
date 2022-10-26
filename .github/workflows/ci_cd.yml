@@ -120,11 +120,11 @@ jobs:
         run: |
           make -C doc html SPHINXOPTS="-W"
 
-      - name: Build PDF Documentation
-        run: |
-          sudo apt update
-          sudo apt-get install -y texlive-latex-extra latexmk
-          make -C doc latexpdf
+      # - name: Build PDF Documentation
+      #   run: |
+      #     sudo apt update
+      #     sudo apt-get install -y texlive-latex-extra latexmk
+      #     make -C doc latexpdf
 
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
@@ -133,12 +133,12 @@ jobs:
           path: doc/build/html
           retention-days: 7
 
-      - name: Upload PDF Documentation
-        uses: actions/upload-artifact@v3
-        with:
-          name: pyprime-docs-pdf
-          path: doc/build/latex/*.pdf
-          retention-days: 7
+      # - name: Upload PDF Documentation
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: pyprime-docs-pdf
+      #     path: doc/build/latex/*.pdf
+      #     retention-days: 7
       
       # Deploy Latest Release Documentation (Disabled)
       # - name: Deploy Documentation
