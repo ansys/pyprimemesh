@@ -94,8 +94,8 @@ class TestElbow(PrimeTestCase):
         )
 
         for summary_res in qual_summary_res.quality_results:
-             print("Max surface skewness : ", summary_res.max_quality)
-             print("no.of faces above 0.9 : ", summary_res.n_found)
+            print("Max surface skewness : ", summary_res.max_quality)
+            print("no.of faces above 0.9 : ", summary_res.n_found)
 
         part_summary_res = wrapper_part.get_summary(
             prime.PartSummaryParams(model=self._model, print_id=False, print_mesh=True)
