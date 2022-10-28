@@ -113,7 +113,7 @@ class TestElbow(PrimeTestCase):
         )
 
         # volume mesh
-        #mesher.compute_volumes()
+        mesher.compute_volumes()
         mesher.volume_mesh(
             prism_layers=3,
             prism_surface_expression="cabin*,component*,engine,exhaust,ground,outer,wheel*",
