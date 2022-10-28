@@ -19,7 +19,7 @@ The title should be changed to reflect the topic your example covers.
 
 New examples should be added as python scripts to:
 
-``pyprime/doc/galleryexamples/``
+``pyprime/examples/gallery``
 
 .. note::
    Avoid creating new folders unless absolutely necessary. If in doubt put the example
