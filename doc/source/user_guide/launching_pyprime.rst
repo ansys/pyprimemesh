@@ -35,7 +35,7 @@ is shown below, first launching a server from cmd line:
 
 .. code:: doscon
 
-    >>> runPrime.bat server -np 4 --ip 127.0.0.1 --port 50055
+    >>> "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
 
 And then connecting to the server from a PyPrime :class:`Client <ansys.meshing.prime.Client>` as follows:
 
@@ -58,11 +58,11 @@ If the :class:`Client <ansys.meshing.prime.Client>` launched the server, then th
 Running a python script in batch on the Server
 ==============================================
 
+A python script can br ran directly on the server from a Linux or Windows console.
+
 Here is an example on Windows for running a python script directly from the cmd line.
 
 .. code:: doscon
 
-    >>> runPrime.bat my_script.py
-
-The same can be done on Linux. 
+    >>> "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
 
