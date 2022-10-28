@@ -100,7 +100,8 @@ mesh_util.write(os.path.join(os.getcwd(), r"t-junction-solids.cdb"))
 mesh_util.read(cad_file)
 
 # Wrap internal region to extract CFD model with a constant size.
-wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL) #CAUSING ERRORS IN DOC
+wrap = mesh_util.wrap(min_size=3, region_extract=prime.WrapRegion.LARGESTINTERNAL) 
+#CAUSING ERRORS IN DOC, min size originally 6
 
 # View only the wrap.
 display(update=True, scope=prime.ScopeDefinition(model=model, part_expression=wrap.name))
