@@ -14,7 +14,7 @@ In this example, we will mesh a mixing elbow with polyhedral elements and wall b
 layer refinement. We will use several meshing utilities available in the lucid class for
 convenience and ease.
 
-.. image:: ../../../../../../source/images/elbow.png
+.. image:: ../../../images/elbow.png
    :align: center
    :width: 400
    :alt: Mixing elbow mesh.

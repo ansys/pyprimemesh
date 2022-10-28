@@ -12,7 +12,7 @@ Objective
 In this example, we will wrap a toy car and volume mesh with a tetrahedral mesh with prisms.
 We will use several meshing utilities available in the lucid class for convenience and ease.
 
-.. image:: ../../../../../../source/images/toy_car.png
+.. image:: ../../../images/toy_car.png
    :align: center
    :width: 400
    :alt: Toy car wrap.
