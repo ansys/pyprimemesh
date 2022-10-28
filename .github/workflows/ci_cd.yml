@@ -155,14 +155,11 @@ jobs:
           PYPRIME_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
-      - name: Build PDF Documentation
-        run: |
-          sudo apt update
-          sudo apt-get install -y texlive-latex-extra latexmk
-          make -C doc latexpdf
-        env:
-          PYPRIME_LAUNCH_CONTAINER: 1
-          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+      # - name: Build PDF Documentation
+      #  run: |
+      #    sudo apt update
+      #    sudo apt-get install -y texlive-latex-extra latexmk
+      #    make -C doc latexpdf
 
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
