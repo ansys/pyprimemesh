@@ -16,7 +16,7 @@ The function returns an instance of the PyPrime :class:`Client <ansys.meshing.pr
     >>> import ansys.meshing.prime as prime
     >>> prime_client = prime.launch_prime()
 
-This enables you to send commands to Ansys Prime Server and receive the response from the server.
+This enables you to send commands to the Ansys Prime Server and receive responses from the server.
 
 The :class:`Client <ansys.meshing.prime.Client>` can then be used to get the :attr:`model <ansys.meshing.prime.Client.model>` associated with the client instance.
 
