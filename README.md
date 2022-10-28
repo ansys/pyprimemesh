@@ -52,9 +52,9 @@ You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 To launch PyPrime:
 
 ```python
-import ansys.meshing.prime as pyprime
-with pyprime.launch_prime() as session:
-   model = session.model
+import ansys.meshing.prime as prime
+with prime.launch_prime() as prime_client:
+   model = prime_client.model
 ```
 
 ## License and Acknowledgments
