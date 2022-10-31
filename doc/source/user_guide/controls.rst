@@ -61,6 +61,6 @@ Prism cells creates either quadrilateral or triangular boundary faces, or both. 
 Volume Control
 -----------------
  
- Volume control helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
- It allows you to define the scope and generate the various types of volume mesh. 
+Volume control helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
+It allows you to define the scope and generate the various types of volume mesh. 
 
