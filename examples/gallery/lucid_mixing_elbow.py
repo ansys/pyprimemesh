@@ -21,24 +21,24 @@ convenience and ease.
 
 Procedure
 ~~~~~~~~~
-* Launch Prime instance and instantiate meshing utilities from lucid class
+* Launch Ansys Prime Server and instantiate meshing utilities from lucid class
 * Import geometry and create face zones from labels imported from geometry.
 * Surface mesh geometry with curvature sizing.
 * Volume mesh with polyhedral elements and boundary layer refinement.
 * Print statistics on generated mesh.
 * Write a cas file for use in the Fluent solver.
-* Exit the Prime session.
+* Exit the PyPrime session.
 """
 
 ###############################################################################
-# Import all necessary modules and launch an instance of Prime.
+# Import all necessary modules and launch an instance of Ansys Prime Server.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 from ansys.meshing import prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 
-# start prime and get the model
+# start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
@@ -62,30 +62,32 @@ mesh_util.create_zones_from_labels("inlet,outlet")
 # Surface mesh geometry with curvature sizing.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Surface mesh the geometry setting min and max sizing that will be used for curvature refinement
+# Surface mesh the geometry setting min and max sizing 
+# that will be used for curvature refinement
 mesh_util.surface_mesh(min_size=5, max_size=20)
 
 ###############################################################################
 # Volume mesh with polyhedral elements and boundary layer refinement.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Fill the volume with polyhedral and prism mesh specifying location and number of layers for prisms
+# Fill the volume with polyhedral and prism mesh 
+# specifying location and number of layers for prisms
 
-# Expressions are used to define the surfaces to have prisms grown where "* !inlet !outlet"
-# states "all not inlet or outlet".
+# Expressions are used to define the surfaces to have prisms grown 
+# where "* !inlet !outlet" states "all not inlet or outlet".
 mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
     prism_surface_expression="* !inlet !outlet",
     prism_layers=3,
 )
 
-###############################################################################
-# Print statistics on generated mesh.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 # Display the mesh
 display = Graphics(model=model)
 display()
+
+###############################################################################
+# Print statistics on generated mesh.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Get meshed part
 part = model.get_part_by_name("flow_volume")
@@ -115,7 +117,7 @@ mesh_util.write(os.path.join(os.getcwd(), "mixing_elbow.cas"))
 print(os.getcwd())
 
 ###############################################################################
-# Exit the Prime session.
+# Exit the PyPrime session.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
