@@ -1276,7 +1276,7 @@ class Mesh:
         params = prime.ScopeZoneletParams(model=self._model)
         zonelets = self._model.control_data.get_scope_face_zonelets(scope=scope, params=params)
         part_ids = self._model.control_data.get_scope_parts(scope=scope)
-        
+
         global_size_controls = []
         geodesic_global_size_controls = []
         computed_size_fields = []
