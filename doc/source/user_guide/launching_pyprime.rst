@@ -45,6 +45,9 @@ And then connecting to the server in python using a PyPrime :class:`Client <ansy
     >>> prime_client = prime.Client(ip="127.0.0.1", port=50055)
     >>> model = prime_client.model
 
+.. note::
+    Only a single client session can be connected to an active Ansys Prime Server instance at any time.
+
 
 =============================
 Disconnecting from the Server
