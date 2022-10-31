@@ -329,7 +329,10 @@ class Mesh:
                 + " and min global size " + str(global_sizing.min)
             )
             self.__variable_size_surface_mesh(
-                min_size=global_sizing.min, max_size=global_sizing.max, generate_quads=generate_quads, scope=scope
+                min_size=global_sizing.min, 
+                max_size=global_sizing.max, 
+                generate_quads=generate_quads, 
+                scope=scope
             )
         elif min_size == None or max_size == None:
             if min_size is None:
