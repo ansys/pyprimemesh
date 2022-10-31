@@ -39,17 +39,8 @@ Importing CAD
 ==============
 
 The :func:`FileIO.import_cad() <ansys.meshing.prime.FileIO.import_cad>` function allows you to import CAD files and set parameters for importing files using the :class:`ImportCadParams <ansys.meshing.prime.ImportCadParams>` class.  
-
-Appending CAD files
--------------------
-
-The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` attribute allows you to append a CAD file to the model. 
-
-.. code:: python
-    
-    >>> params = prime.ImportCadParams(model=model, append=True)
-    >>> prime.FileIO(model).import_cad(file_name="cad_to_append.scdoc", params=params)
-     
+ 
+ 
 CAD Reader Routes
 -----------------
 
@@ -72,11 +63,25 @@ CAD import routes available in PyPrime are Program Controlled, Native, SpaceClai
  
 Refer `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ document to view the CAD supported for Workbench route on different platforms. 
 
-**Note**: When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration and in application defaults 
-are consistent in the deployed environment. 
+.. note::
+    When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration and in application defaults 
+    are consistent in the deployed environment. 
 
-**Note**: You must install and configure Workbench CAD Readers/Plug-ins (Ansys Geometry Interfaces) while installing Ansys Workbench. 
+.. note:: 
+    You must install and configure Workbench CAD Readers/Plug-ins (Ansys Geometry Interfaces) while installing Ansys Workbench. 
  
+
+Appending CAD files
+-------------------
+
+The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` attribute allows you to append a CAD file to the model. 
+
+.. code:: python
+    
+    >>> params = prime.ImportCadParams(model=model, append=True)
+    >>> prime.FileIO(model).import_cad(file_name="cad_to_append.scdoc", params=params)
+    
+    
 Parametric CAD
 --------------
 
@@ -104,6 +109,7 @@ To set parameters to be used at import:
     >>> print(result.cad_parameters)
     
     {'my_param': 2}
+   
    
 Part Management and Creation
 ----------------------------
