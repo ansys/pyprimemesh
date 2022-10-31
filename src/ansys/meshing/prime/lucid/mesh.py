@@ -1407,7 +1407,7 @@ class Mesh:
             if zonelets:
                 for part_id in part_ids:
                     part = self._model.get_part(part_id)
-                    [part.delete_zonelets([zonelet]) for zonelet in zonelets if zonelet in part.get_face_zonelets()]
+                    [part.delete_zonelets([face]) for face in zonelets if face in part.get_face_zonelets()]
             if part_ids:
                 self._model.delete_parts(part_ids)
 
