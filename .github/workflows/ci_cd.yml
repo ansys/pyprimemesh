@@ -110,14 +110,6 @@ jobs:
         with:
           python-version: 3.7
 
-      - name: Cache pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-
       - name: Install library
         run: |
           pip install build
@@ -128,12 +120,6 @@ jobs:
         run: |
           pip install -r requirements/requirements_docs.txt
           echo "installed required packages"
-
-      - name: Build and Install PyPrime
-        run: |
-          pip install build
-          python -m build .
-          pip install dist/*.whl --find-links deps
 
       - name: Login in Github Container registry
         uses: docker/login-action@v2
@@ -156,10 +142,10 @@ jobs:
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
-      #  run: |
-      #    sudo apt update
-      #    sudo apt-get install -y texlive-latex-extra latexmk
-      #    make -C doc latexpdf
+      #   run: |
+      #     sudo apt update
+      #     sudo apt-get install -y texlive-latex-extra latexmk
+      #     make -C doc latexpdf
 
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
