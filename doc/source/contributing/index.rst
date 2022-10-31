@@ -39,7 +39,7 @@ Documentation for the latest stable release of PyPrime is hosted at
 -----------------------------------------
 Code Structure and Contributing New Code
 -----------------------------------------
-Much of the PyPrime code base is auto-generated based on the Prime server.  For the auto-generated 
+Much of the PyPrime code base is auto-generated based on the Ansys Prime server.  For the auto-generated 
 code, contributions are therefore limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.
