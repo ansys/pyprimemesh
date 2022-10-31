@@ -325,10 +325,11 @@ class Mesh:
         if min_size == None and max_size == None:
             global_sizing = self._model.get_global_sizing_params()
             self._logger.warning(
-                "Min or Max size not provided. Using max global size " + str(global_sizing.max)
+                "Min and Max size not provided. Using max global size " + str(global_sizing.max)
+                + " and min global size " + str(global_sizing.min)
             )
-            self.__constant_size_surface_mesh(
-                min_size=global_sizing.max, generate_quads=generate_quads, scope=scope
+            self.__variable_size_surface_mesh(
+                min_size=global_sizing.min, max_size=global_sizing.max, generate_quads=generate_quads, scope=scope
             )
         elif min_size == None or max_size == None:
             if min_size is None:
