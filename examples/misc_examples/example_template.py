@@ -43,7 +43,7 @@ prime_client = prime.launch_prime()
 model = prime_client.model
 
 # Your code goes here...
-mesh_util = prime.lucid.Mesh()
+mesh_util = prime.lucid.Mesh(model=model)
 example_file = prime.examples.download_elbow_fmd()
 mesh_util.read(example_file)
 model
@@ -64,8 +64,12 @@ model
 # ``print()`` to output the ``__str__``.
 
 # more code...
-mesh_util.surface_mesh()
-mesh_util.volume_mesh()
+mesh_util.surface_mesh(min_size=5, max_size=20)
+mesh_util.volume_mesh(
+    volume_fill_type=prime.VolumeFillType.POLY,
+    prism_surface_expression="* !inlet !outlet",
+    prism_layers=3,
+)
 
 ###############################################################################
 # Rendering graphics
