@@ -56,6 +56,11 @@ file_io.import_cad(
     ),
 )
 
+# Display the model to show edges by connection
+# Red: free; Black: double; Purple: triple
+display = Graphics(model=model)
+display()
+
 # Get part summary
 part = model.get_part_by_name('bracket_mid_surface-3')
 part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
