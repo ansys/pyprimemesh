@@ -33,18 +33,18 @@ Procedure
 
 ###############################################################################
 # Import all necessary modules and launch an instance of Ansys Prime Server.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 
-# start PyPrime and get the model
+# Start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
 display = Graphics(model)
 
-# instantiate meshing utilities from lucid class
+# Instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model)
 
 ###############################################################################
