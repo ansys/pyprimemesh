@@ -16,24 +16,24 @@ connect all the surface bodies and mesh the bracket with quad elements.
 
 Procedure
 ~~~~~~~~~
-* Launch Prime instance
+* Launch Ansys Prime Server
 * Import CAD geometry and create part per CAD model
 * Scaffold topofaces and topoedges with tolerance parameter
 * Surface mesh topofaces with constant size and generate quad elements
 * Write a cdb file for use in the APDL solver
-* Exit the Prime session
+* Exit the PyPrime session
 
 """
 
 ###############################################################################
-# Import all necessary modules and launch an instance of Prime
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import all necessary modules and launch an instance of Ansys Prime Server.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 from ansys.meshing import prime
 import os, tempfile
 from ansys.meshing.prime.graphics import Graphics
 
-# Start prime and get the model
+# Start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
@@ -44,7 +44,8 @@ model = prime_client.model
 # Download the geometry file (.fmd file exported by SpaceClaim)
 bracket_file = prime.examples.download_bracket_fmd()
 
-# Import geometry and create part per CAD model for topology based connection
+# Import geometry
+# Create part per CAD model for topology based connection
 file_io = prime.FileIO(model)
 file_io.import_cad(
     file_name=bracket_file,
@@ -100,6 +101,7 @@ surfer_params = prime.SurferParams(
 # Surface mesh the part with given surface meshing parameters
 surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
 
+# Display the mesh
 display = Graphics(model=model)
 display()
 
@@ -115,7 +117,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
     print(f'MAPDL case exported at {mapdl_cdb}')
 
 ###############################################################################
-# Exit the Prime session
-# ~~~~~~~~~~~~~~~~~~~~~~
+# Exit the PyPrime session
+# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
