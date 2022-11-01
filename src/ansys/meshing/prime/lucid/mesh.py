@@ -1370,7 +1370,7 @@ class Mesh:
         )
 
         volume_results = wrapped_part.compute_closed_volumes(
-            prime.ComputeVolumesParams(self._model)
+            prime.ComputeVolumesParams(model=self._model, create_zones_type=prime.CreateVolumeZonesType.PERVOLUME)
         )
         self._logger.info(str(volume_results.volumes) + " volumes found.")
 
