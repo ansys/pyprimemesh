@@ -3,7 +3,7 @@ import os
 # os.environ.clear()
 import ansys.meshing.prime as prime
 import unittest
-from common import PrimeTestCase, PrimeTextTestRunner
+from .common import PrimeTestCase, PrimeTextTestRunner
 import math
 
 
