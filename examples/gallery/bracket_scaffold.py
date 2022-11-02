@@ -1,13 +1,19 @@
 """
 .. _ref_bracket_mid_surface_mesh:
+
 =========================================================
 Meshing a mid-surfaced bracket for a structural analysis
 =========================================================
+
 **Summary**: This example illustrates how to mesh a mid-surfaced bracket.
+
 Objective
 ~~~~~~~~~
+
 To create conformal surface mesh, we will scaffold topofaces/topoedges to
 connect all the surface bodies and mesh the bracket with quad elements.
+
+
 Procedure
 ~~~~~~~~~
 * Launch Ansys Prime Server
@@ -16,6 +22,7 @@ Procedure
 * Surface mesh topofaces with constant size and generate quad elements
 * Write a cdb file for use in the APDL solver
 * Exit the PyPrime session
+
 """
 
 ###############################################################################
