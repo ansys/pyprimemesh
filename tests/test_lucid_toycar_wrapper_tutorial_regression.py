@@ -3,7 +3,7 @@ import os
 # os.environ.clear()
 import ansys.meshing.prime as prime
 import unittest
-from .common import PrimeTestCase, PrimeTextTestRunner
+from common import PrimeTestCase, PrimeTextTestRunner
 import math
 
 
@@ -173,21 +173,21 @@ class TestElbow(PrimeTestCase):
 
         # Validate number of cells
         self.assertTrue(
-            math.isclose(3039283.0, float(part_summary_res.n_cells), rel_tol=0.01),
-            msg="Validate number of cells. Expected value: 3039283, 1% tolerance. Actual value: "
+            math.isclose(3384800.0, float(part_summary_res.n_cells), rel_tol=0.01),
+            msg="Validate number of cells. Expected value: 3384800, 1% tolerance. Actual value: "
             + str(part_summary_res.n_cells),
         )
-        # Validate maximum skewness 0.95
+        # Volume mesh quality
         self.assertTrue(
-            qual_summary_res.quality_results_part[0].max_quality <= 1,
-            msg="Validate maximum skewness 0.95. Expected value: <1. Actual value: "
+            qual_summary_res.quality_results_part[0].max_quality < 1,
+            msg="Validate max skewness. Expected value: <1. Actual value: "
             + str(qual_summary_res.quality_results_part[0].max_quality),
         )
         # Validate number of cells violating skewness 0.95
         if os.name == 'nt':
             self.assertTrue(
                 math.isclose(
-                    54.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
+                    200.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
                 msg="""Validate number of cells violating skewness 0.95.
                  Expected value: 54, 10% tolerance. Actual value: """
@@ -196,7 +196,7 @@ class TestElbow(PrimeTestCase):
         elif os.name == 'posix':
             self.assertTrue(
                 math.isclose(
-                    33.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
+                    200.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
                 msg="""Validate number of cells violating skewness 0.95.
                  Expected value: 33, 10% tolerance. Actual value: """
