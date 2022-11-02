@@ -1,3 +1,3 @@
 Examples
 ========
-Here are a series of examples using Meshing with ``ansys-meshing-prime``.
+Here are a series of mesh preparation examples using ``ansys-meshing-prime``.
