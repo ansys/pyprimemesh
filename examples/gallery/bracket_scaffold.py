@@ -31,7 +31,6 @@ Procedure
 
 from ansys.meshing import prime
 import os, tempfile
-import sys
 from ansys.meshing.prime.graphics import Graphics
 
 # Start Ansys Prime Server, connect PyPrime client and get the model
@@ -59,11 +58,8 @@ file_io.import_cad(
 
 # Display the model to show edges by connection
 # Red: free; Black: double; Purple: triple
-save_stdout = sys.stdout
-sys.stdout = open('trash', 'w')
 display = Graphics(model=model)
 display()
-sys.stdout = save_stdout
 
 # Get part summary
 part = model.get_part_by_name('bracket_mid_surface-3')

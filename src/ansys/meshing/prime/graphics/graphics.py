@@ -472,7 +472,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        self.__update_bt_icons()
+        #self.__update_bt_icons()
         self._plotter.show()
 
     def __draw_parts(self, parts=[], update=False, spline=False):
