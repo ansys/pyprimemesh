@@ -190,7 +190,7 @@ class TestElbow(PrimeTestCase):
                     106.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
                 msg="""Validate number of cells violating skewness 0.95.
-                 Expected value: 54, 10% tolerance. Actual value: """
+                 Expected value: 106, 10% tolerance. Actual value: """
                 + str(qual_summary_res.quality_results_part[0].n_found),
             )
         elif os.name == 'posix':
@@ -199,7 +199,7 @@ class TestElbow(PrimeTestCase):
                     200.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
                 msg="""Validate number of cells violating skewness 0.95.
-                 Expected value: 33, 10% tolerance. Actual value: """
+                 Expected value: 200, 10% tolerance. Actual value: """
                 + str(qual_summary_res.quality_results_part[0].n_found),
             )
 
