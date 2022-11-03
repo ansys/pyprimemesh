@@ -173,7 +173,7 @@ class TestElbow(PrimeTestCase):
 
         # Validate number of cells
         self.assertTrue(
-            math.isclose(3384800.0, float(part_summary_res.n_cells), rel_tol=0.01),
+            math.isclose(3384800.0, float(part_summary_res.n_cells), rel_tol=0.10),
             msg="Validate number of cells. Expected value: 3384800, 1% tolerance. Actual value: "
             + str(part_summary_res.n_cells),
         )
@@ -187,7 +187,7 @@ class TestElbow(PrimeTestCase):
         if os.name == 'nt':
             self.assertTrue(
                 math.isclose(
-                    200.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
+                    106.0, float(qual_summary_res.quality_results_part[0].n_found), rel_tol=0.10
                 ),
                 msg="""Validate number of cells violating skewness 0.95.
                  Expected value: 54, 10% tolerance. Actual value: """
