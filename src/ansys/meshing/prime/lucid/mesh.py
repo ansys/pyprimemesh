@@ -822,7 +822,7 @@ class Mesh:
 
     def __create_contact_preventions(
         self,
-        contact_prevention_controls: List,
+        contact_prevention_params: List,
         contact_prevention_size: float,
         min_size: float,
         max_size: float,
@@ -863,7 +863,7 @@ class Mesh:
             geodesic_global_size_controls.append(geo_prox_size_control)
             for part in self._model.parts:
                 source = prime.ScopeDefinition(model=self._model, part_expression=part.name)
-                contact_prevention_controls.append(
+                contact_prevention_params.append(
                     prime.ContactPreventionParams(
                         model=self._model, source_scope=source, size=contact_prevention_size
                     )
@@ -874,7 +874,7 @@ class Mesh:
                         name_pattern_params=prime.NamePatternParams(self._model),
                     ):
                         source = prime.ScopeDefinition(model=self._model, label_expression=label)
-                        contact_prevention_controls.append(
+                        contact_prevention_params.append(
                             prime.ContactPreventionParams(
                                 model=self._model, source_scope=source, size=contact_prevention_size
                             )
@@ -885,9 +885,9 @@ class Mesh:
                 insufficient parts and labels identified to define contact."
             )
 
-    def __create_feature_recovery_controls(
+    def __create_feature_recovery_params(
         self,
-        feature_recovery_controls: List[prime.FeatureRecoveryParams],
+        feature_recovery_params: List[prime.FeatureRecoveryParams],
         extract_features: bool,
         create_intersection_loops: bool,
         use_existing_features: bool,
@@ -917,7 +917,7 @@ class Mesh:
                 enable_feature_octree_refinement=enable_feature_octree_refinement,
                 scope=feature_scope,
             )
-            feature_recovery_controls.append(extracted_feature_params)
+            feature_recovery_params.append(extracted_feature_params)
         if create_intersection_loops:
             for part in self._model.parts:
                 others = [item.name for item in self._model.parts if item.name != part.name]
@@ -940,14 +940,14 @@ class Mesh:
                     model=self._model, part_expression="*", label_expression="__intersect_loops__"
                 ),
             )
-            feature_recovery_controls.append(intersect_feature_params)
+            feature_recovery_params.append(intersect_feature_params)
         if use_existing_features:
             existing_feature_params = prime.FeatureRecoveryParams(
                 model=self._model,
                 enable_feature_octree_refinement=enable_feature_octree_refinement,
                 scope=scope,
             )
-            feature_recovery_controls.append(existing_feature_params)
+            feature_recovery_params.append(existing_feature_params)
 
     def __process_size_fields(
         self,
@@ -1122,9 +1122,9 @@ class Mesh:
         size_fields: List[prime.SizeField] = [],
         wrap_size_controls: List[prime.SizeControl] = [],
         remesh_size_controls: List[prime.SizeControl] = [],
-        feature_recovery_controls: List[prime.FeatureRecoveryParams] = [],
-        contact_prevention_controls: List[prime.ContactPreventionParams] = [],
-        leak_prevention_controls: List[prime.LeakPreventionParams] = [],
+        feature_recovery_params: List[prime.FeatureRecoveryParams] = [],
+        contact_prevention_params: List[prime.ContactPreventionParams] = [],
+        leak_prevention_params: List[prime.LeakPreventionParams] = [],
     ):
         """Wrap and remesh input.
 
@@ -1225,14 +1225,14 @@ class Mesh:
         remesh_size_controls : List[prime.SizeControl], optional
             Set remesh size controls to use.
 
-        feature_recovery_controls : List[prime.FeatureRecoveryParams], optional
-            Set feature recovery controls to use.
+        feature_recovery_params : List[prime.FeatureRecoveryParams], optional
+            Set feature recovery parameters to use.
 
-        contact_prevention_controls : List[prime.ContactPreventionParams], optional
-            Set contact prevention controls to use.
+        contact_prevention_params : List[prime.ContactPreventionParams], optional
+            Set contact prevention parameters to use.
 
-        leak_prevention_controls : List[prime.LeakPreventionParams], optional
-            Set leak prevention controls to use.
+        leak_prevention_params : List[prime.LeakPreventionParams], optional
+            Set leak prevention parameters to use.
 
         Returns
         -------
@@ -1307,7 +1307,7 @@ class Mesh:
         # Add contact preventions
         if contact_prevention_size:
             self.__create_contact_preventions(
-                contact_prevention_controls,
+                contact_prevention_params,
                 contact_prevention_size,
                 min_size,
                 max_size,
@@ -1315,12 +1315,12 @@ class Mesh:
                 geodesic_global_size_controls,
                 scope,
             )
-        if contact_prevention_controls:
-            wrapper_control.set_contact_preventions(contact_prevention_controls)
+        if contact_prevention_params:
+            wrapper_control.set_contact_preventions(contact_prevention_params)
 
         # Add feature recoveries
-        self.__create_feature_recovery_controls(
-            feature_recovery_controls=feature_recovery_controls,
+        self.__create_feature_recovery_params(
+            feature_recovery_params=feature_recovery_params,
             extract_features=extract_features,
             create_intersection_loops=create_intersection_loops,
             use_existing_features=use_existing_features,
@@ -1328,12 +1328,12 @@ class Mesh:
             enable_feature_octree_refinement=enable_feature_octree_refinement,
             scope=scope,
         )
-        if feature_recovery_controls:
-            wrapper_control.set_feature_recoveries(feature_recovery_controls)
+        if feature_recovery_params:
+            wrapper_control.set_feature_recoveries(feature_recovery_params)
 
         # Add leak preventions
-        if leak_prevention_controls:
-            wrapper_control.set_leak_preventions(leak_prevention_controls)
+        if leak_prevention_params:
+            wrapper_control.set_leak_preventions(leak_prevention_params)
 
         computed_size_fields += self.__process_size_fields(
             global_size_controls=global_size_controls,
@@ -1382,7 +1382,7 @@ class Mesh:
         self._model.control_data.delete_controls(
             [
                 control.id
-                for control in self._model.control_data.wrapper_controls
+                for control in [wrapper_control]
                 + global_size_controls
                 + geodesic_global_size_controls
             ]
