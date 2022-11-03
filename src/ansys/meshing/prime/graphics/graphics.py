@@ -5,7 +5,7 @@ import numpy as np
 import pyvista as pv
 from pyvista import _vtk
 import os
-
+import sys
 
 def compute_face_list_from_structured_nodes(nodes, dim):
     flist = []
@@ -447,32 +447,34 @@ class Graphics(object):
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
-        self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
-            self.__color_by_type_callback,
-            value=int(self._color_by_type) is ColorByType.ZONELET,
-            position=(10, 700),
-            size=30,
-            border_size=3,
-        )
-        self._hideBt = self._plotter.add_checkbox_button_widget(
-            self.__hide_unhide_selection, position=(10, 650), size=30, border_size=3
-        )
-        self._showEdgeBt = self._plotter.add_checkbox_button_widget(
-            self.__show_edges_callback, value=False, position=(10, 600), size=30, border_size=3
-        )
-        # self._plotter.add_checkbox_button_widget(
-        #                  self.__surface_mesh_callback, position=(1870, 700),
-        #                  color_on='yellow', color_off='yellow', size = 30, border_size=3)
-        self._printInfoBt = self._plotter.add_checkbox_button_widget(
-            self.__print_callback, position=(10, 550), size=30, border_size=3
-        )
-        self._showRulerBt = self._plotter.add_checkbox_button_widget(
-            self.__show_ruler_callback, position=(10, 500), size=30, border_size=3
-        )
+        if 'sphinx' not in sys.modules:
+            self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
+                self.__color_by_type_callback,
+                value=int(self._color_by_type) is ColorByType.ZONELET,
+                position=(10, 700),
+                size=30,
+                border_size=3,
+            )
+            self._hideBt = self._plotter.add_checkbox_button_widget(
+                self.__hide_unhide_selection, position=(10, 650), size=30, border_size=3
+            )
+            self._showEdgeBt = self._plotter.add_checkbox_button_widget(
+                self.__show_edges_callback, value=False, position=(10, 600), size=30, border_size=3
+            )
+            # self._plotter.add_checkbox_button_widget(
+            #                  self.__surface_mesh_callback, position=(1870, 700),
+            #                  color_on='yellow', color_off='yellow', size = 30, border_size=3)
+            self._printInfoBt = self._plotter.add_checkbox_button_widget(
+                self.__print_callback, position=(10, 550), size=30, border_size=3
+            )
+            self._showRulerBt = self._plotter.add_checkbox_button_widget(
+                self.__show_ruler_callback, position=(10, 500), size=30, border_size=3
+            )
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        #self.__update_bt_icons()
+        if 'sphinx' not in sys.modules:
+            self.__update_bt_icons()
         self._plotter.show()
 
     def __draw_parts(self, parts=[], update=False, spline=False):
