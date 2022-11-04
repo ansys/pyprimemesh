@@ -64,8 +64,7 @@ mesh_util.read(file_name=toy_car)
 
 # several objects are open surfaces (with holes)
 # coarse wrap to close holes and delete originals
-####display(scope=prime.ScopeDefinition(model, part_expression="cabin,exhaust,engine"))
-display()
+display(scope=prime.ScopeDefinition(model, part_expression="cabin,exhaust,engine"))
 
 # we could use leakage detection to close these regions
 # here we use a coarse wrap and disable feature edge refinement to walk over the holes
