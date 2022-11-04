@@ -4,34 +4,34 @@
 Meshing a Pipe T-section for structural thermal and fluid flow
 ---------------------------------------------------------------
 
-**Summary**: This example demonstrates how to mesh a pipe T-section for both fluid 
+**Summary**: This example demonstrates how to mesh a pipe T-section for both fluid
 and structural thermal simulation.
 
 
 Objective
 ---------
 
-In this example we will mesh the solids of a pipe T-section for a 
-structural thermal analysis using tetrahedral elements and use the 
-wrapper to extract the fluid domain and mesh using polyhedral cells with 
-prismatic boundary layers. 
+In this example we will mesh the solids of a pipe T-section for a
+structural thermal analysis using tetrahedral elements and use the
+wrapper to extract the fluid domain and mesh using polyhedral cells with
+prismatic boundary layers.
 
 .. figure:: ../../../images/pipe_tee.png
    :align: center
    :width: 400
-   
+
    **Thermal structural and fluid flow meshes**
 
 Procedure
 ---------
 
--   Launch Ansys Prime Server instance and connect client
--   Read CAD geometry
--   Mesh for structural thermal analysis
--   Write mesh for structural thermal analysis
--   Extract fluid by wrapping
--   Mesh with polyhedral and prisms
--   Write mesh for fluid simulation
+-   Launch Ansys Prime Server instance and connect client.
+-   Read CAD geometry.
+-   Mesh for structural thermal analysis.
+-   Write mesh for structural thermal analysis.
+-   Extract fluid by wrapping.
+-   Mesh with polyhedral and prisms.
+-   Write mesh for fluid simulation.
 
 """
 
@@ -133,7 +133,7 @@ display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="
 # You can clearly see the prism layers that were specified by the Prism control.
 
 # set global sizing
-params = prime.GlobalSizingParams(model,min=6, max=50)
+params = prime.GlobalSizingParams(model, min=6, max=50)
 model.set_global_sizing_params(params)
 
 mesh_util.create_zones_from_labels("outlet_main,in1_inlet,in2_inlet")
@@ -143,7 +143,7 @@ mesh_util.volume_mesh(prism_layers=5,
    prism_surface_expression="* !*inlet* !*outlet*",
    volume_fill_type=prime.VolumeFillType.POLY)
 
-display(update=True,scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
 # Write mesh for fluid flow analysis
