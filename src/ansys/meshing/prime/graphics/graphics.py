@@ -165,10 +165,6 @@ class Picker:
 
 class Graphics(object):
     """ """
-    if 'sphinx' not in sys.modules:
-        print("NO SPHINX NO SPHINX NO SPHINX NO SPHINX")
-    else:
-        print("YES SPHINX YES SPHINX YES SPHINX YES SPHINX")
 
     def __init__(self, model: prime.Model):
         """ """
