@@ -120,9 +120,13 @@ print("\nCurrent working directory for exported files: ", os.getcwd())
 mesh_util.read(file_name)
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
+toDelete = [part.id for part in model.parts if part.name!= wrap.name]
+
+if toDelete:
+    model.delete_parts(toDelete)
 print(model)
 
-display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display()
 
 ###############################################################################
 # Volume mesh fluid region
