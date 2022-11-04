@@ -48,7 +48,7 @@ from ansys.meshing.prime import lucid
 
 import os
 
-prime_client = prime.launch_prime(pyprime_root=r"D:\Users\AnsysDev\doc_fixes\meshing\Prime",ip="127.0.0.1",port=50056)
+prime_client = prime.launch_prime()
 model = prime_client.model
 mesh_util = lucid.Mesh(model)
 
@@ -73,14 +73,14 @@ print(model)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Surface mesh using curvature sizing.
 # Volume mesh with tetrahedral elements.
-# Delete unwanted capping surface geometries by deleting 
+# Delete unwanted capping surface geometries by deleting
 # parts that do not have any volume zones.
 # Display structural thermal mesh ready for export.
 
-mesh_util.surface_mesh(min_size=2.5,max_size=10)
+mesh_util.surface_mesh(min_size=2.5, max_size=10)
 mesh_util.volume_mesh()
 
-toDelete=[part.id for part in model.parts if not part.get_volume_zones()]
+toDelete = [part.id for part in model.parts if not part.get_volume_zones()]
 
 if toDelete:
     model.delete_parts(toDelete)
@@ -91,7 +91,7 @@ display()
 ###############################################################################
 # Write mesh for structural thermal analysis
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Labels will be exported to CDB as collections for use in 
+# Labels will be exported to CDB as collections for use in
 # applying load boundary conditions in the solver.
 
 mesh_util.write(os.path.join(os.getcwd(), "pipe_tee.cdb"))
@@ -100,7 +100,7 @@ print("\nCurrent working directory for exported files: ", os.getcwd())
 ###############################################################################
 # Extract fluid by wrapping
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# There is a small internal diameter change between flanges that 
+# There is a small internal diameter change between flanges that
 # can be dealt with in several ways:
 #
 #  * Connect the geometry to extract a volume and refine the
@@ -111,35 +111,37 @@ print("\nCurrent working directory for exported files: ", os.getcwd())
 # Here we will choose to wrap and walk over these features.
 #
 # We will start by reading in the geometry again.
-# Next we will use a constant size wrap to walk over the diameter change 
+# Next we will use a constant size wrap to walk over the diameter change
 # feature and extract the largest internal volume as the fluid.
-# By default the wrap will use all parts as input and delete the input 
+# By default the wrap will use all parts as input and delete the input
 # geometry after wrapping unless keep_input is set as True.
 # When displaying we can avoid displaying unnecessary edge zones.
 
 mesh_util.read(file_name)
-wrap = mesh_util.wrap(min_size=6,region_extract=prime.WrapRegion.LARGESTINTERNAL)
+wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
 print(model)
 
-display(update=True,scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
 # Volume mesh fluid region
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create zones for each label to be used for boundary conditions definitions.
 # Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
-# Let us visualize the generated volume mesh. 
+# Let us visualize the generated volume mesh.
 # You can clearly see the prism layers that were specified by the Prism control.
 
-# set global sizing 
-params=prime.GlobalSizingParams(model,min=6,max=50)
+# set global sizing
+params = prime.GlobalSizingParams(model,min=6, max=50)
 model.set_global_sizing_params(params)
 
 mesh_util.create_zones_from_labels("outlet_main,in1_inlet,in2_inlet")
 print(model)
 
-mesh_util.volume_mesh(prism_layers=5, prism_surface_expression="* !*inlet* !*outlet*", volume_fill_type=prime.VolumeFillType.POLY)
+mesh_util.volume_mesh(prism_layers=5,
+   prism_surface_expression="* !*inlet* !*outlet*",
+   volume_fill_type=prime.VolumeFillType.POLY)
 
 display(update=True,scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
