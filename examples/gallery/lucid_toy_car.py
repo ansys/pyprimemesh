@@ -46,7 +46,7 @@ model = prime_client.model
 display = Graphics(model)
 
 # instantiate meshing utilities from lucid class
-mesh_util = prime.lucid.Mesh(model)
+mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
 # Import geometry.
