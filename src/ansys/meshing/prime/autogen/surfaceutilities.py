@@ -57,6 +57,40 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("get_bounding_box_of_zonelets", BoundingBox(model = self._model, json_data = result))
         return BoundingBox(model = self._model, json_data = result)
 
+    def copy_face_zonelets(self, face_zonelets : Iterable[int], target_part_id : int, params : CopyZoneletsParams) -> CopyZoneletsResults:
+        """ Copy face zonelets.
+
+
+        Parameters
+        ----------
+        face_zonelets : Iterable[int]
+            Ids of face zonelets to be copied.
+        target_part_id : int
+            Part id to be used to move the copied zonelets.
+        params : CopyZoneletsParams
+            Parameters to copy face zonelets.
+
+        Returns
+        -------
+        CopyZoneletsResults
+            Returns the CopyZoneletsResults.
+
+
+        Examples
+        --------
+        >>>> surfaceutil = SurfaceUtilities(model = model)
+        >>>> surfaceutil = surfaceutil.copy_face_zonelets(face_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))
+
+        """
+        args = {"face_zonelets" : face_zonelets,
+        "target_part_id" : target_part_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/CopyFaceZonelets"
+        self._model._print_logs_before_command("copy_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("copy_face_zonelets", CopyZoneletsResults(model = self._model, json_data = result))
+        return CopyZoneletsResults(model = self._model, json_data = result)
+
     def fill_holes_at_plane(self, part_id : int, face_zonelets : Iterable[int], plane_points : Iterable[float], params : FillHolesAtPlaneParams) -> FillHolesAtPlaneResults:
         """ Fill holes in given face zonelets at given plane.
 
@@ -93,6 +127,40 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("fill_holes_at_plane", FillHolesAtPlaneResults(model = self._model, json_data = result))
         return FillHolesAtPlaneResults(model = self._model, json_data = result)
+
+    def create_cap_on_face_zonelets(self, part_id : int, face_zonelets : Iterable[int], params : CreateCapParams) -> CreateCapResults:
+        """ Create caps on the given face zonelets.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of part to associate face zonelets created to cap.
+        face_zonelets : Iterable[int]
+            Ids of face zonelets to be used to find caps.
+        params : CreateCapParams
+            Parameters to create caps.
+
+        Returns
+        -------
+        CreateCapResults
+            Returns the CreateCapResults.
+
+
+        Examples
+        --------
+        >>> params = prime.CreateCapParams(model = model)
+        >>> results = surface_utils.cap_face_zonelets(part_id, face_zonelets, params)
+
+        """
+        args = {"part_id" : part_id,
+        "face_zonelets" : face_zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/CreateCapOnFaceZonelets"
+        self._model._print_logs_before_command("create_cap_on_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_cap_on_face_zonelets", CreateCapResults(model = self._model, json_data = result))
+        return CreateCapResults(model = self._model, json_data = result)
 
     def delete_unwetted_surfaces(self, face_zonelet_ids : Iterable[int], live_material_point_names : List[str], params : DeleteUnwettedParams) -> DeleteUnwettedResult:
         """ Delete unwetted surfaces based on material point list.
@@ -192,6 +260,37 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("subtract_zonelets", SubtractZoneletsResults(model = self._model, json_data = result))
         return SubtractZoneletsResults(model = self._model, json_data = result)
+
+    def refine_at_contacts(self, part_ids : Iterable[int], params : RefineAtContactsParams) -> RefineAtContactsResults:
+        """ Refine face elements in contact with other parts.
+
+
+        Parameters
+        ----------
+        part_ids : Iterable[int]
+            Input part ids.
+        params : RefineAtContactsParams
+            Parameters to refine at contacts.
+
+        Returns
+        -------
+        RefineAtContactsResults
+            Returns the RefineAtContactsResults.
+
+
+        Examples
+        --------
+        >>> params = prime.RefineAtContactsParams(model = model)
+        >>> result = surf_utils.refine_at_contacts(part_ids, params)
+
+        """
+        args = {"part_ids" : part_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/RefineAtContacts"
+        self._model._print_logs_before_command("refine_at_contacts", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("refine_at_contacts", RefineAtContactsResults(model = self._model, json_data = result))
+        return RefineAtContactsResults(model = self._model, json_data = result)
 
     def add_thickness(self, zonelets : Iterable[int], params : AddThicknessParams) -> AddThicknessResults:
         """ Adds thickness to the selected list of face zonelet ids.
