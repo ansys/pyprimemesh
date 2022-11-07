@@ -10,6 +10,7 @@ from ansys.meshing.prime.autogen.modelstructs import (
 )
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
+from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 
 from typing import List, Iterable
 import ansys.meshing.prime.internals.json_utils as json
@@ -54,6 +55,23 @@ class Model(_Model):
         self._control_data = ControlData(self, -1, res["ControlData"], "")
         self._control_data._update_size_controls(sc_data)
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
+
+    def _add_part(self, id : int):
+        """Add a part that is present on server.
+        """
+        res = json.loads(
+            self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
+        )
+        part_data = res["Parts"]
+        new_part = None
+        for part in part_data:
+            if (part[0] == id):
+                new_part = Part(self, part[0], part[1], part[2])
+                self._parts.append(new_part)
+                break
+        if (new_part == None):
+            raise PrimeRuntimeError("Unable to create part", ErrorCode.PARTNOTFOUND)
+        
 
     def get_part_by_name(self, name: str) -> Part:
         """Gets the part by name. Returns None if part doesn't exist for the given name.

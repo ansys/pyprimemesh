@@ -50,7 +50,7 @@ class Wrapper(_Wrapper):
         """
         result = _Wrapper.wrap(self, wrapper_control_id, params)
         if result.error_code == ErrorCode.NOERROR:
-            self._model._sync_up_model()
+            self._model._add_part(result.id)
         return result
 
     def connect(
