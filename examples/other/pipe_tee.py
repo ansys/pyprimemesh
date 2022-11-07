@@ -126,10 +126,12 @@ params = prime.GlobalSizingParams(model, min=6, max=50)
 model.set_global_sizing_params(params)
 
 # Volume mesh wrap with prisms.
-mesh_util.volume_mesh(prism_layers=5,
+mesh_util.volume_mesh(
+    prism_layers=5,
     prism_surface_expression="* !*inlet !outlet*",
     scope=prime.lucid.VolumeScope(),
-    volume_fill_type=prime.VolumeFillType.POLY)
+    volume_fill_type=prime.VolumeFillType.POLY,
+)
 
 # Display mesh without unwanted EdgeZonelets. You can clearly see the
 # prism layers that were specified by the Prism control.

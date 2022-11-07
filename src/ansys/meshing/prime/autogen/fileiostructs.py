@@ -21,7 +21,7 @@ class CadReaderRoute(enum.IntEnum):
     """Denotes SpaceClaim as CAD reader route."""
 
 class PartCreationType(enum.IntEnum):
-    """Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body, Group.
+    """Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
     """
     MODEL = 0
     """Denotes a part per CAD Model."""
@@ -31,8 +31,6 @@ class PartCreationType(enum.IntEnum):
     """Denotes a part per CAD Part."""
     BODY = 3
     """Denotes a part per CAD Body."""
-    GROUP = 4
-    """Denotes a part per CAD Group."""
 
 class LengthUnit(enum.IntEnum):
     """Length units
@@ -1186,7 +1184,7 @@ class ImportCadParams(CoreObject):
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
-            Create a part per CAD Model, Assembly, Part, Body, Group.
+            Create a part per CAD Model, Assembly, Part, Body.
         geometry_transfer: bool, optional
             Option to enable transfer of geometry data (NURBS).
         length_unit: LengthUnit, optional
@@ -1272,7 +1270,7 @@ class ImportCadParams(CoreObject):
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
-            Create a part per CAD Model, Assembly, Part, Body, Group.
+            Create a part per CAD Model, Assembly, Part, Body.
         geometry_transfer: bool, optional
             Option to enable transfer of geometry data (NURBS).
         length_unit: LengthUnit, optional
@@ -1342,7 +1340,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def part_creation_type(self) -> PartCreationType:
-        """Create a part per CAD Model, Assembly, Part, Body, Group.
+        """Create a part per CAD Model, Assembly, Part, Body.
         """
         return self._part_creation_type
 

@@ -108,6 +108,8 @@ class ErrorCode(enum.IntEnum):
     """Quadratic tetrahedal meshing is not supported in parallel mode."""
     QUADRATICTETNOTSUPPORTEDWITHPRISMS = 131
     """Quadratic tetrahedral meshing is not supported with prism."""
+    EXTRACTVOLUMESFAILED = 132
+    """Extract volumes failed."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -146,6 +148,8 @@ class ErrorCode(enum.IntEnum):
     """Projection on CAD Geometry failed."""
     SEPARATIONRESULTSFAILED = 360
     """Separation failed."""
+    ZONELETSARENOTOFSAMEDIMENSION = 374
+    """Zonelets are not of same dimension."""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Size field computation failed."""
     INVALIDSIZECONTROLS = 401
@@ -224,6 +228,10 @@ class ErrorCode(enum.IntEnum):
     """Input provided is incomplete."""
     INVALIDINPUTZONELETS = 1309
     """Invalid input zonelets."""
+    MERGEZONELETSFAILED = 1310
+    """Merge zonelets failed."""
+    MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS = 1311
+    """Merge small zonelets option is supported for only face zonelets."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
     INVALIDSIZECONTROLINPUTS = 1501
@@ -248,6 +256,8 @@ class ErrorCode(enum.IntEnum):
     """Mid side nodes are not supported."""
     VOLUMEMESHNOTFOUND = 1801
     """Volume mesh not found."""
+    SPLITANDCOLLAPSEFACEELEMENTSFAILED = 2101
+    """Faield to split and collapse face element(s)."""
     IGA_NURBSOPFAILED = 2400
     """Spline operation failed."""
     IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE = 2401
@@ -306,6 +316,12 @@ class ErrorCode(enum.IntEnum):
     """Unable to create capping surface."""
     SUBTRACTZONELETSFAILED = 2903
     """Unable to subtract cutters from input zonelets."""
+    CREATECAPONFACEZONELETSFAILED = 2906
+    """Failed to create cap on face zonelets."""
+    UNITEZONELETSFAILED = 2907
+    """Failed to union input zonelets."""
+    REFINEATCONTACTSFAILED = 2908
+    """Failed to refine at contacts."""
     TRANSFORMATIONFAILED = 3000
     """Transformation failed."""
     SCALINGFAILED = 3001
@@ -384,6 +400,10 @@ class ErrorCode(enum.IntEnum):
     """Scope specified for close gaps is invalid."""
     WRAPPERCLOSEGAPSFAILED = 3442
     """Wrapper gap closing failed."""
+    CELLSEPARATIONFAILED = 6000
+    """Cell separation failed."""
+    NOCELLSSEPARATED = 6001
+    """No cells separated based on given input."""
     SIZEFIELDTYPENOTSUPPORTED = 8001
     """Provided Size Field Type is not supported by this operation."""
     UNSUPPORTEDFILEEXTENSIONFORPMDAT = 9001
@@ -458,6 +478,8 @@ class WarningCode(enum.IntEnum):
     """No computed volumes enclosing material point."""
     EXTERNALOPENTOPOFACESFOUND = 5603
     """External open topofaces found when computing topovolumes."""
+    FACEZONELETSWITHOUTVOLUMES = 5604
+    """Face zonelets have no volume associated to them."""
     WRAPPER_SIZECONTROLNOTDEFINED = 6001
     """No size controls provided for wrapper."""
     WRAPPER_SIZECONTROLNOTSUPPORTED = 6002
