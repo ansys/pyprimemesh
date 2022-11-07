@@ -32,8 +32,10 @@ Procedure
 """
 
 ###############################################################################
+# Launch Ansys Prime Server
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
@@ -50,11 +52,10 @@ mesh_util = prime.lucid.Mesh(model)
 ###############################################################################
 # Import geometry.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Download the toy car geometry file (.fmd file exported by SpaceClaim).
+# Import geometry.
 
-# Download the toy car geometry file (.fmd file exported by SpaceClaim)
 toy_car = prime.examples.download_toy_car_fmd()
-
-# Import geometry
 mesh_util.read(file_name=toy_car)
 
 ###############################################################################
