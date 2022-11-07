@@ -52,8 +52,8 @@ class SurfaceSearch(CoreObject):
 
         Examples
         --------
-        >>> surf_search = SurfaceSearch(model=model)
-        >>> results = surf_search.search_zonelets_by_quality(part_id, face_zonelets, register_id, SearchByQualityParams(model=model))
+        >>> surf_search = prime.SurfaceSearch(model=model)
+        >>> results = surf_search.search_zonelets_by_quality(part_id, face_zonelets, register_id, prime.SearchByQualityParams(model=model))
 
         """
         args = {"part_id" : part_id,

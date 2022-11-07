@@ -13,6 +13,10 @@ Objective
 To create conformal surface mesh, we will scaffold topofaces/topoedges to
 connect all the surface bodies and mesh the bracket with quad elements.
 
+.. image:: ../../../images/bracket_mid_surface_scaffold_w.png
+   :align: center
+   :width: 400
+   :alt: Scaffolding result in a wireframe representation.
 
 Procedure
 ~~~~~~~~~
@@ -38,8 +42,8 @@ prime_client = prime.launch_prime()
 model = prime_client.model
 
 ###############################################################################
-# Import geometry and review the part summary
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import geometry and create part per CAD model
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Download the geometry file (.fmd file exported by SpaceClaim)
 bracket_file = prime.examples.download_bracket_fmd()
@@ -56,15 +60,19 @@ file_io.import_cad(
     ),
 )
 
-# Display the model to show edges by connection
-# Red: free; Black: double; Purple: triple
-display = Graphics(model=model)
-display()
+###############################################################################
+# Review the part summary and display edge connectivity
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Get part summary
 part = model.get_part_by_name('bracket_mid_surface-3')
 part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
 print(part_summary_res)
+
+# Display the model to show edges by connection
+# Red: free; Black: double; Purple: triple
+display = Graphics(model=model)
+display()
 
 ###############################################################################
 # Scaffold topofaces and topoedges with tolerance parameter

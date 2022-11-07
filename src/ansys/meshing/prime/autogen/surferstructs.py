@@ -8,6 +8,14 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
+class AdvancedSurferSetup(enum.IntEnum):
+    """Define advanced settings for remeshing operation.
+    """
+    NONE = 0
+    """Option to define no advanced settings."""
+    WRAPPER = 1
+    """Option to define advanced settings for wrapper surfaces."""
+
 class SurferParams(CoreObject):
     """Parameters used to generate surface mesh.
     """
@@ -22,6 +30,8 @@ class SurferParams(CoreObject):
             constant_size: float,
             generate_quads: bool,
             smooth_size_transition: bool,
+            advanced_surfer_setup: AdvancedSurferSetup,
+            project_on_geometry: bool,
             enable_multi_threading: bool):
         self._size_field_type = SizeFieldType(size_field_type)
         self._min_size = min_size
@@ -30,6 +40,8 @@ class SurferParams(CoreObject):
         self._constant_size = constant_size
         self._generate_quads = generate_quads
         self._smooth_size_transition = smooth_size_transition
+        self._advanced_surfer_setup = AdvancedSurferSetup(advanced_surfer_setup)
+        self._project_on_geometry = project_on_geometry
         self._enable_multi_threading = enable_multi_threading
 
     def __init__(
@@ -42,6 +54,8 @@ class SurferParams(CoreObject):
             constant_size: float = None,
             generate_quads: bool = None,
             smooth_size_transition: bool = None,
+            advanced_surfer_setup: AdvancedSurferSetup = None,
+            project_on_geometry: bool = None,
             enable_multi_threading: bool = None,
             json_data : dict = None,
              **kwargs):
@@ -65,6 +79,10 @@ class SurferParams(CoreObject):
             Option to generate quadrilateral surface mesh.
         smooth_size_transition: bool, optional
             Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+        advanced_surfer_setup: AdvancedSurferSetup, optional
+            Option to define advanced settings for remeshing operation.
+        project_on_geometry: bool, optional
+            Option to project on CAD geometry when meshing.
         enable_multi_threading: bool, optional
             Option to perform surface meshing in parallel using multithreads.
         json_data: dict, optional
@@ -83,9 +101,11 @@ class SurferParams(CoreObject):
                 json_data["constantSize"],
                 json_data["generateQuads"],
                 json_data["smoothSizeTransition"],
+                AdvancedSurferSetup(json_data["advancedSurferSetup"]),
+                json_data["projectOnGeometry"],
                 json_data["enableMultiThreading"])
         else:
-            all_field_specified = all(arg is not None for arg in [size_field_type, min_size, max_size, growth_rate, constant_size, generate_quads, smooth_size_transition, enable_multi_threading])
+            all_field_specified = all(arg is not None for arg in [size_field_type, min_size, max_size, growth_rate, constant_size, generate_quads, smooth_size_transition, advanced_surfer_setup, project_on_geometry, enable_multi_threading])
             if all_field_specified:
                 self.__initialize(
                     size_field_type,
@@ -95,6 +115,8 @@ class SurferParams(CoreObject):
                     constant_size,
                     generate_quads,
                     smooth_size_transition,
+                    advanced_surfer_setup,
+                    project_on_geometry,
                     enable_multi_threading)
             else:
                 if model is None:
@@ -109,6 +131,8 @@ class SurferParams(CoreObject):
                         constant_size if constant_size is not None else ( SurferParams._default_params["constant_size"] if "constant_size" in SurferParams._default_params else json_data["constantSize"]),
                         generate_quads if generate_quads is not None else ( SurferParams._default_params["generate_quads"] if "generate_quads" in SurferParams._default_params else json_data["generateQuads"]),
                         smooth_size_transition if smooth_size_transition is not None else ( SurferParams._default_params["smooth_size_transition"] if "smooth_size_transition" in SurferParams._default_params else json_data["smoothSizeTransition"]),
+                        advanced_surfer_setup if advanced_surfer_setup is not None else ( SurferParams._default_params["advanced_surfer_setup"] if "advanced_surfer_setup" in SurferParams._default_params else AdvancedSurferSetup(json_data["advancedSurferSetup"])),
+                        project_on_geometry if project_on_geometry is not None else ( SurferParams._default_params["project_on_geometry"] if "project_on_geometry" in SurferParams._default_params else json_data["projectOnGeometry"]),
                         enable_multi_threading if enable_multi_threading is not None else ( SurferParams._default_params["enable_multi_threading"] if "enable_multi_threading" in SurferParams._default_params else json_data["enableMultiThreading"]))
         self._custom_params = kwargs
         if model is not None:
@@ -126,6 +150,8 @@ class SurferParams(CoreObject):
             constant_size: float = None,
             generate_quads: bool = None,
             smooth_size_transition: bool = None,
+            advanced_surfer_setup: AdvancedSurferSetup = None,
+            project_on_geometry: bool = None,
             enable_multi_threading: bool = None):
         """Set the default values of SurferParams.
 
@@ -145,6 +171,10 @@ class SurferParams(CoreObject):
             Option to generate quadrilateral surface mesh.
         smooth_size_transition: bool, optional
             Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+        advanced_surfer_setup: AdvancedSurferSetup, optional
+            Option to define advanced settings for remeshing operation.
+        project_on_geometry: bool, optional
+            Option to project on CAD geometry when meshing.
         enable_multi_threading: bool, optional
             Option to perform surface meshing in parallel using multithreads.
         """
@@ -172,12 +202,14 @@ class SurferParams(CoreObject):
         json_data["constantSize"] = self._constant_size
         json_data["generateQuads"] = self._generate_quads
         json_data["smoothSizeTransition"] = self._smooth_size_transition
+        json_data["advancedSurferSetup"] = self._advanced_surfer_setup
+        json_data["projectOnGeometry"] = self._project_on_geometry
         json_data["enableMultiThreading"] = self._enable_multi_threading
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "size_field_type :  %s\nmin_size :  %s\nmax_size :  %s\ngrowth_rate :  %s\nconstant_size :  %s\ngenerate_quads :  %s\nsmooth_size_transition :  %s\nenable_multi_threading :  %s" % (self._size_field_type, self._min_size, self._max_size, self._growth_rate, self._constant_size, self._generate_quads, self._smooth_size_transition, self._enable_multi_threading)
+        message = "size_field_type :  %s\nmin_size :  %s\nmax_size :  %s\ngrowth_rate :  %s\nconstant_size :  %s\ngenerate_quads :  %s\nsmooth_size_transition :  %s\nadvanced_surfer_setup :  %s\nproject_on_geometry :  %s\nenable_multi_threading :  %s" % (self._size_field_type, self._min_size, self._max_size, self._growth_rate, self._constant_size, self._generate_quads, self._smooth_size_transition, self._advanced_surfer_setup, self._project_on_geometry, self._enable_multi_threading)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -257,6 +289,26 @@ class SurferParams(CoreObject):
         self._smooth_size_transition = value
 
     @property
+    def advanced_surfer_setup(self) -> AdvancedSurferSetup:
+        """Option to define advanced settings for remeshing operation.
+        """
+        return self._advanced_surfer_setup
+
+    @advanced_surfer_setup.setter
+    def advanced_surfer_setup(self, value: AdvancedSurferSetup):
+        self._advanced_surfer_setup = value
+
+    @property
+    def project_on_geometry(self) -> bool:
+        """Option to project on CAD geometry when meshing.
+        """
+        return self._project_on_geometry
+
+    @project_on_geometry.setter
+    def project_on_geometry(self, value: bool):
+        self._project_on_geometry = value
+
+    @property
     def enable_multi_threading(self) -> bool:
         """Option to perform surface meshing in parallel using multithreads.
         """
@@ -273,13 +325,16 @@ class SurferResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            topofaces_not_projected_on_geometry: Iterable[int]):
         self._error_code = ErrorCode(error_code)
+        self._topofaces_not_projected_on_geometry = topofaces_not_projected_on_geometry if isinstance(topofaces_not_projected_on_geometry, np.ndarray) else np.array(topofaces_not_projected_on_geometry, dtype=np.int32)
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
+            topofaces_not_projected_on_geometry: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SurferResults.
@@ -290,6 +345,8 @@ class SurferResults(CoreObject):
             Model to create a SurferResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
+        topofaces_not_projected_on_geometry: Iterable[int], optional
+            Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
         json_data: dict, optional
             JSON dictionary to create a SurferResults object with provided parameters.
 
@@ -299,19 +356,22 @@ class SurferResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"]),
+                json_data["topofacesNotProjectedOnGeometry"])
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [error_code, topofaces_not_projected_on_geometry])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    error_code,
+                    topofaces_not_projected_on_geometry)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     json_data = model._communicator.initialize_params(model, "SurferResults")["SurferResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( SurferResults._default_params["error_code"] if "error_code" in SurferResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( SurferResults._default_params["error_code"] if "error_code" in SurferResults._default_params else ErrorCode(json_data["errorCode"])),
+                        topofaces_not_projected_on_geometry if topofaces_not_projected_on_geometry is not None else ( SurferResults._default_params["topofaces_not_projected_on_geometry"] if "topofaces_not_projected_on_geometry" in SurferResults._default_params else json_data["topofacesNotProjectedOnGeometry"]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -321,13 +381,16 @@ class SurferResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code: ErrorCode = None,
+            topofaces_not_projected_on_geometry: Iterable[int] = None):
         """Set the default values of SurferResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
+        topofaces_not_projected_on_geometry: Iterable[int], optional
+            Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
         """
         args = locals()
         [SurferResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -347,11 +410,12 @@ class SurferResults(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
+        json_data["topofacesNotProjectedOnGeometry"] = self._topofaces_not_projected_on_geometry
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "error_code :  %s\ntopofaces_not_projected_on_geometry :  %s" % (self._error_code, self._topofaces_not_projected_on_geometry)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -364,6 +428,16 @@ class SurferResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def topofaces_not_projected_on_geometry(self) -> Iterable[int]:
+        """Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
+        """
+        return self._topofaces_not_projected_on_geometry
+
+    @topofaces_not_projected_on_geometry.setter
+    def topofaces_not_projected_on_geometry(self, value: Iterable[int]):
+        self._topofaces_not_projected_on_geometry = value
 
 class LocalSurferParams(CoreObject):
     """Parameters to perform local surface remeshing.

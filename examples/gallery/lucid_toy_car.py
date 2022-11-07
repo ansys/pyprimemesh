@@ -12,14 +12,14 @@ Objective
 In this example, we will wrap a toy car and volume mesh with a tetrahedral mesh with prisms.
 We will use several meshing utilities available in the lucid class for convenience and ease.
 
-.. image:: ../../images/toy_car.png
+.. image:: ../../../images/toy_car.png
    :align: center
    :width: 400
    :alt: Toy car wrap.
 
 Procedure
 ~~~~~~~~~
-* Launch Prime instance and instantiate meshing utilities from lucid class.
+* Launch Ansys Prime Server instance and instantiate meshing utilities from lucid class.
 * Import geometry.
 * Coarse wrap parts with holes to cleanup.
 * Extract fluid region using wrapper.
@@ -33,29 +33,28 @@ Procedure
 """
 
 ###############################################################################
-# Import all necessary modules and launch an instance of Prime.
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import all necessary modules and launch an instance of Ansys Prime Server.
+# Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 
-# start prime and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
 display = Graphics(model)
 
-# instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model)
 
 ###############################################################################
 # Import geometry.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Download the toy car geometry file (.fmd file exported by SpaceClaim).
+# Import geometry.
 
-# Download the toy car geometry file (.fmd file exported by SpaceClaim)
 toy_car = prime.examples.download_toy_car_fmd()
-
-# Import geometry
 mesh_util.read(file_name=toy_car)
 
 ###############################################################################
@@ -211,7 +210,7 @@ mesh_util.write(os.path.join(os.getcwd(), "toy_car_lucid.cas"))
 print("\nCurrent working directory for exported files: ", os.getcwd())
 
 ###############################################################################
-# Exit the Prime session.
+# Exit the PyPrime session.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

@@ -36,6 +36,16 @@ class VolumeNamingType(enum.IntEnum):
     BYFACEZONE = 2
     """Option to use face zone name as source to name volumes."""
 
+class CreateVolumeZonesType(enum.IntEnum):
+    """Indicate type to create volume zones for volumes.
+    """
+    NONE = 0
+    """Option to not create volume zones."""
+    PERVOLUME = 1
+    """Option to create volume zone per volume. Suffix is added to volume zone name, if same name is identified for different volumes using face zonelets."""
+    PERNAMESOURCE = 2
+    """Option to create zone per name computed from face zonelets of volume. Single zone is created for multiple volumes if same zone name is identified using face zonelets for the volumes."""
+
 class BoundingBox(CoreObject):
     """Provides information about the definition of a bounding box.
     """
@@ -244,6 +254,158 @@ class BoundingBox(CoreObject):
     @zmax.setter
     def zmax(self, value: float):
         self._zmax = value
+
+class MergeZoneletsResults(CoreObject):
+    """Results associated with merge zonelets. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MergeZoneletsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MergeZoneletsResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a MergeZoneletsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> merge_zonelets_results = prime.MergeZoneletsResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "MergeZoneletsResults")["MergeZoneletsResults"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of MergeZoneletsResults.
+
+        """
+        args = locals()
+        [MergeZoneletsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MergeZoneletsResults.
+
+        Examples
+        --------
+        >>> MergeZoneletsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MergeZoneletsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class MergeZoneletsParams(CoreObject):
+    """Parameters to merge zonelets. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MergeZoneletsParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MergeZoneletsParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a MergeZoneletsParams object with provided parameters.
+
+        Examples
+        --------
+        >>> merge_zonelets_params = prime.MergeZoneletsParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "MergeZoneletsParams")["MergeZoneletsParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of MergeZoneletsParams.
+
+        """
+        args = locals()
+        [MergeZoneletsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MergeZoneletsParams.
+
+        Examples
+        --------
+        >>> MergeZoneletsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MergeZoneletsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
 
 class ComputeVolumesResults(CoreObject):
     """Results associated with compute volumes.
@@ -707,6 +869,193 @@ class ComputeTopoVolumesResults(CoreObject):
     def warning_codes(self, value: List[WarningCode]):
         self._warning_codes = value
 
+class ExtractVolumesResults(CoreObject):
+    """Results associated with compute volumes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            volumes: Iterable[int],
+            warning_codes: List[WarningCode],
+            assigned_zone_name: str,
+            face_zonelets_without_volumes: Iterable[int]):
+        self._error_code = ErrorCode(error_code)
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32)
+        self._warning_codes = warning_codes
+        self._assigned_zone_name = assigned_zone_name
+        self._face_zonelets_without_volumes = face_zonelets_without_volumes if isinstance(face_zonelets_without_volumes, np.ndarray) else np.array(face_zonelets_without_volumes, dtype=np.int32)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            volumes: Iterable[int] = None,
+            warning_codes: List[WarningCode] = None,
+            assigned_zone_name: str = None,
+            face_zonelets_without_volumes: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExtractVolumesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExtractVolumesResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
+        volumes: Iterable[int], optional
+            Ids of computed volumes.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the compute volumes.
+        assigned_zone_name: str, optional
+            Assigned name of zone for extracted flow volumes.
+        face_zonelets_without_volumes: Iterable[int], optional
+            Ids of face zonelets for which volumes were not extracted.
+        json_data: dict, optional
+            JSON dictionary to create a ExtractVolumesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_volumes_results = prime.ExtractVolumesResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"]),
+                json_data["volumes"],
+                [WarningCode(data) for data in json_data["warningCodes"]],
+                json_data["assignedZoneName"],
+                json_data["faceZoneletsWithoutVolumes"])
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, volumes, warning_codes, assigned_zone_name, face_zonelets_without_volumes])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    volumes,
+                    warning_codes,
+                    assigned_zone_name,
+                    face_zonelets_without_volumes)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "ExtractVolumesResults")["ExtractVolumesResults"]
+                    self.__initialize(
+                        error_code if error_code is not None else ( ExtractVolumesResults._default_params["error_code"] if "error_code" in ExtractVolumesResults._default_params else ErrorCode(json_data["errorCode"])),
+                        volumes if volumes is not None else ( ExtractVolumesResults._default_params["volumes"] if "volumes" in ExtractVolumesResults._default_params else json_data["volumes"]),
+                        warning_codes if warning_codes is not None else ( ExtractVolumesResults._default_params["warning_codes"] if "warning_codes" in ExtractVolumesResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]),
+                        assigned_zone_name if assigned_zone_name is not None else ( ExtractVolumesResults._default_params["assigned_zone_name"] if "assigned_zone_name" in ExtractVolumesResults._default_params else json_data["assignedZoneName"]),
+                        face_zonelets_without_volumes if face_zonelets_without_volumes is not None else ( ExtractVolumesResults._default_params["face_zonelets_without_volumes"] if "face_zonelets_without_volumes" in ExtractVolumesResults._default_params else json_data["faceZoneletsWithoutVolumes"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            volumes: Iterable[int] = None,
+            warning_codes: List[WarningCode] = None,
+            assigned_zone_name: str = None,
+            face_zonelets_without_volumes: Iterable[int] = None):
+        """Set the default values of ExtractVolumesResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
+        volumes: Iterable[int], optional
+            Ids of computed volumes.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the compute volumes.
+        assigned_zone_name: str, optional
+            Assigned name of zone for extracted flow volumes.
+        face_zonelets_without_volumes: Iterable[int], optional
+            Ids of face zonelets for which volumes were not extracted.
+        """
+        args = locals()
+        [ExtractVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExtractVolumesResults.
+
+        Examples
+        --------
+        >>> ExtractVolumesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractVolumesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["errorCode"] = self._error_code
+        json_data["volumes"] = self._volumes
+        json_data["warningCodes"] = [data for data in self._warning_codes]
+        json_data["assignedZoneName"] = self._assigned_zone_name
+        json_data["faceZoneletsWithoutVolumes"] = self._face_zonelets_without_volumes
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\nvolumes :  %s\nwarning_codes :  %s\nassigned_zone_name :  %s\nface_zonelets_without_volumes :  %s" % (self._error_code, self._volumes, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._assigned_zone_name, self._face_zonelets_without_volumes)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def volumes(self) -> Iterable[int]:
+        """Ids of computed volumes.
+        """
+        return self._volumes
+
+    @volumes.setter
+    def volumes(self, value: Iterable[int]):
+        self._volumes = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the compute volumes.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
+    @property
+    def assigned_zone_name(self) -> str:
+        """Assigned name of zone for extracted flow volumes.
+        """
+        return self._assigned_zone_name
+
+    @assigned_zone_name.setter
+    def assigned_zone_name(self, value: str):
+        self._assigned_zone_name = value
+
+    @property
+    def face_zonelets_without_volumes(self) -> Iterable[int]:
+        """Ids of face zonelets for which volumes were not extracted.
+        """
+        return self._face_zonelets_without_volumes
+
+    @face_zonelets_without_volumes.setter
+    def face_zonelets_without_volumes(self, value: Iterable[int]):
+        self._face_zonelets_without_volumes = value
+
 class ComputeVolumesParams(CoreObject):
     """Parameters to compute volumes.
     """
@@ -715,17 +1064,17 @@ class ComputeVolumesParams(CoreObject):
     def __initialize(
             self,
             volume_naming_type: VolumeNamingType,
-            create_zone_per_volume: bool,
+            create_zones_type: CreateVolumeZonesType,
             material_point_names: List[str]):
         self._volume_naming_type = VolumeNamingType(volume_naming_type)
-        self._create_zone_per_volume = create_zone_per_volume
+        self._create_zones_type = CreateVolumeZonesType(create_zones_type)
         self._material_point_names = material_point_names
 
     def __init__(
             self,
             model: CommunicationManager=None,
             volume_naming_type: VolumeNamingType = None,
-            create_zone_per_volume: bool = None,
+            create_zones_type: CreateVolumeZonesType = None,
             material_point_names: List[str] = None,
             json_data : dict = None,
              **kwargs):
@@ -736,9 +1085,9 @@ class ComputeVolumesParams(CoreObject):
         model: Model
             Model to create a ComputeVolumesParams object with default parameters.
         volume_naming_type: VolumeNamingType, optional
-            Indicates source type used to name volumes.
-        create_zone_per_volume: bool, optional
-            Option to create zone per volume computed using volume name.
+            Indicates source type used to compute zone name for volumes.
+        create_zones_type: CreateVolumeZonesType, optional
+            Option to control volume zone creation for volumes.
         material_point_names: List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
         json_data: dict, optional
@@ -751,14 +1100,14 @@ class ComputeVolumesParams(CoreObject):
         if json_data:
             self.__initialize(
                 VolumeNamingType(json_data["volumeNamingType"]),
-                json_data["createZonePerVolume"],
+                CreateVolumeZonesType(json_data["createZonesType"]),
                 json_data["materialPointNames"])
         else:
-            all_field_specified = all(arg is not None for arg in [volume_naming_type, create_zone_per_volume, material_point_names])
+            all_field_specified = all(arg is not None for arg in [volume_naming_type, create_zones_type, material_point_names])
             if all_field_specified:
                 self.__initialize(
                     volume_naming_type,
-                    create_zone_per_volume,
+                    create_zones_type,
                     material_point_names)
             else:
                 if model is None:
@@ -767,7 +1116,7 @@ class ComputeVolumesParams(CoreObject):
                     json_data = model._communicator.initialize_params(model, "ComputeVolumesParams")["ComputeVolumesParams"]
                     self.__initialize(
                         volume_naming_type if volume_naming_type is not None else ( ComputeVolumesParams._default_params["volume_naming_type"] if "volume_naming_type" in ComputeVolumesParams._default_params else VolumeNamingType(json_data["volumeNamingType"])),
-                        create_zone_per_volume if create_zone_per_volume is not None else ( ComputeVolumesParams._default_params["create_zone_per_volume"] if "create_zone_per_volume" in ComputeVolumesParams._default_params else json_data["createZonePerVolume"]),
+                        create_zones_type if create_zones_type is not None else ( ComputeVolumesParams._default_params["create_zones_type"] if "create_zones_type" in ComputeVolumesParams._default_params else CreateVolumeZonesType(json_data["createZonesType"])),
                         material_point_names if material_point_names is not None else ( ComputeVolumesParams._default_params["material_point_names"] if "material_point_names" in ComputeVolumesParams._default_params else json_data["materialPointNames"]))
         self._custom_params = kwargs
         if model is not None:
@@ -779,16 +1128,16 @@ class ComputeVolumesParams(CoreObject):
     @staticmethod
     def set_default(
             volume_naming_type: VolumeNamingType = None,
-            create_zone_per_volume: bool = None,
+            create_zones_type: CreateVolumeZonesType = None,
             material_point_names: List[str] = None):
         """Set the default values of ComputeVolumesParams.
 
         Parameters
         ----------
         volume_naming_type: VolumeNamingType, optional
-            Indicates source type used to name volumes.
-        create_zone_per_volume: bool, optional
-            Option to create zone per volume computed using volume name.
+            Indicates source type used to compute zone name for volumes.
+        create_zones_type: CreateVolumeZonesType, optional
+            Option to control volume zone creation for volumes.
         material_point_names: List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
         """
@@ -810,19 +1159,19 @@ class ComputeVolumesParams(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["volumeNamingType"] = self._volume_naming_type
-        json_data["createZonePerVolume"] = self._create_zone_per_volume
+        json_data["createZonesType"] = self._create_zones_type
         json_data["materialPointNames"] = self._material_point_names
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "volume_naming_type :  %s\ncreate_zone_per_volume :  %s\nmaterial_point_names :  %s" % (self._volume_naming_type, self._create_zone_per_volume, self._material_point_names)
+        message = "volume_naming_type :  %s\ncreate_zones_type :  %s\nmaterial_point_names :  %s" % (self._volume_naming_type, self._create_zones_type, self._material_point_names)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def volume_naming_type(self) -> VolumeNamingType:
-        """Indicates source type used to name volumes.
+        """Indicates source type used to compute zone name for volumes.
         """
         return self._volume_naming_type
 
@@ -831,14 +1180,14 @@ class ComputeVolumesParams(CoreObject):
         self._volume_naming_type = value
 
     @property
-    def create_zone_per_volume(self) -> bool:
-        """Option to create zone per volume computed using volume name.
+    def create_zones_type(self) -> CreateVolumeZonesType:
+        """Option to control volume zone creation for volumes.
         """
-        return self._create_zone_per_volume
+        return self._create_zones_type
 
-    @create_zone_per_volume.setter
-    def create_zone_per_volume(self, value: bool):
-        self._create_zone_per_volume = value
+    @create_zones_type.setter
+    def create_zones_type(self, value: CreateVolumeZonesType):
+        self._create_zones_type = value
 
     @property
     def material_point_names(self) -> List[str]:
@@ -849,6 +1198,127 @@ class ComputeVolumesParams(CoreObject):
     @material_point_names.setter
     def material_point_names(self, value: List[str]):
         self._material_point_names = value
+
+class ExtractVolumesParams(CoreObject):
+    """Parameters to extract flow volumes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            create_zone: bool,
+            suggested_zone_name: str):
+        self._create_zone = create_zone
+        self._suggested_zone_name = suggested_zone_name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            create_zone: bool = None,
+            suggested_zone_name: str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExtractVolumesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExtractVolumesParams object with default parameters.
+        create_zone: bool, optional
+            Option to create zone for flow volumes extracted.
+        suggested_zone_name: str, optional
+            Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+        json_data: dict, optional
+            JSON dictionary to create a ExtractVolumesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_volumes_params = prime.ExtractVolumesParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["createZone"],
+                json_data["suggestedZoneName"])
+        else:
+            all_field_specified = all(arg is not None for arg in [create_zone, suggested_zone_name])
+            if all_field_specified:
+                self.__initialize(
+                    create_zone,
+                    suggested_zone_name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "ExtractVolumesParams")["ExtractVolumesParams"]
+                    self.__initialize(
+                        create_zone if create_zone is not None else ( ExtractVolumesParams._default_params["create_zone"] if "create_zone" in ExtractVolumesParams._default_params else json_data["createZone"]),
+                        suggested_zone_name if suggested_zone_name is not None else ( ExtractVolumesParams._default_params["suggested_zone_name"] if "suggested_zone_name" in ExtractVolumesParams._default_params else json_data["suggestedZoneName"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            create_zone: bool = None,
+            suggested_zone_name: str = None):
+        """Set the default values of ExtractVolumesParams.
+
+        Parameters
+        ----------
+        create_zone: bool, optional
+            Option to create zone for flow volumes extracted.
+        suggested_zone_name: str, optional
+            Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+        """
+        args = locals()
+        [ExtractVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExtractVolumesParams.
+
+        Examples
+        --------
+        >>> ExtractVolumesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractVolumesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["createZone"] = self._create_zone
+        json_data["suggestedZoneName"] = self._suggested_zone_name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "create_zone :  %s\nsuggested_zone_name :  %s" % (self._create_zone, self._suggested_zone_name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def create_zone(self) -> bool:
+        """Option to create zone for flow volumes extracted.
+        """
+        return self._create_zone
+
+    @create_zone.setter
+    def create_zone(self, value: bool):
+        self._create_zone = value
+
+    @property
+    def suggested_zone_name(self) -> str:
+        """Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+        """
+        return self._suggested_zone_name
+
+    @suggested_zone_name.setter
+    def suggested_zone_name(self, value: str):
+        self._suggested_zone_name = value
 
 class ExtractTopoVolumesParams(CoreObject):
     """Parameters to extract flow topovolumes.
@@ -2509,3 +2979,307 @@ class RemoveLabelResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class DeleteVolumesParams(CoreObject):
+    """Parameters to delete volumes. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the DeleteVolumesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a DeleteVolumesParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a DeleteVolumesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> delete_volumes_params = prime.DeleteVolumesParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "DeleteVolumesParams")["DeleteVolumesParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of DeleteVolumesParams.
+
+        """
+        args = locals()
+        [DeleteVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of DeleteVolumesParams.
+
+        Examples
+        --------
+        >>> DeleteVolumesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in DeleteVolumesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class DeleteVolumesResults(CoreObject):
+    """Results associated with delete volumes operation. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the DeleteVolumesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a DeleteVolumesResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a DeleteVolumesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> delete_volumes_results = prime.DeleteVolumesResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "DeleteVolumesResults")["DeleteVolumesResults"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of DeleteVolumesResults.
+
+        """
+        args = locals()
+        [DeleteVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of DeleteVolumesResults.
+
+        Examples
+        --------
+        >>> DeleteVolumesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in DeleteVolumesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class MergeVolumesParams(CoreObject):
+    """Parameters to merge volumes. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MergeVolumesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MergeVolumesParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a MergeVolumesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> merge_volumes_params = prime.MergeVolumesParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "MergeVolumesParams")["MergeVolumesParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of MergeVolumesParams.
+
+        """
+        args = locals()
+        [MergeVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MergeVolumesParams.
+
+        Examples
+        --------
+        >>> MergeVolumesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MergeVolumesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class MergeVolumesResults(CoreObject):
+    """Results associated with merge volumes operation. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MergeVolumesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MergeVolumesResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a MergeVolumesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> merge_volumes_results = prime.MergeVolumesResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "MergeVolumesResults")["MergeVolumesResults"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of MergeVolumesResults.
+
+        """
+        args = locals()
+        [MergeVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MergeVolumesResults.
+
+        Examples
+        --------
+        >>> MergeVolumesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MergeVolumesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message

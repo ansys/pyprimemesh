@@ -141,6 +141,105 @@ class AutoMeshResults(CoreObject):
     def warning_codes(self, value: List[WarningCode]):
         self._warning_codes = value
 
+class PrismParams(CoreObject):
+    """Parameters to control prism mesh generation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            no_imprint_zonelets: Iterable[int]):
+        self._no_imprint_zonelets = no_imprint_zonelets if isinstance(no_imprint_zonelets, np.ndarray) else np.array(no_imprint_zonelets, dtype=np.int32)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            no_imprint_zonelets: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the PrismParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a PrismParams object with default parameters.
+        no_imprint_zonelets: Iterable[int], optional
+            Option to specify zonelets to skip prism imprint.
+        json_data: dict, optional
+            JSON dictionary to create a PrismParams object with provided parameters.
+
+        Examples
+        --------
+        >>> prism_params = prime.PrismParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["noImprintZonelets"])
+        else:
+            all_field_specified = all(arg is not None for arg in [no_imprint_zonelets])
+            if all_field_specified:
+                self.__initialize(
+                    no_imprint_zonelets)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "PrismParams")["PrismParams"]
+                    self.__initialize(
+                        no_imprint_zonelets if no_imprint_zonelets is not None else ( PrismParams._default_params["no_imprint_zonelets"] if "no_imprint_zonelets" in PrismParams._default_params else json_data["noImprintZonelets"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            no_imprint_zonelets: Iterable[int] = None):
+        """Set the default values of PrismParams.
+
+        Parameters
+        ----------
+        no_imprint_zonelets: Iterable[int], optional
+            Option to specify zonelets to skip prism imprint.
+        """
+        args = locals()
+        [PrismParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of PrismParams.
+
+        Examples
+        --------
+        >>> PrismParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in PrismParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["noImprintZonelets"] = self._no_imprint_zonelets
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "no_imprint_zonelets :  %s" % (self._no_imprint_zonelets)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def no_imprint_zonelets(self) -> Iterable[int]:
+        """Option to specify zonelets to skip prism imprint.
+        """
+        return self._no_imprint_zonelets
+
+    @no_imprint_zonelets.setter
+    def no_imprint_zonelets(self, value: Iterable[int]):
+        self._no_imprint_zonelets = value
+
 class TetParams(CoreObject):
     """Parameters to control tetrahedral mesh generation.
     """
@@ -251,12 +350,14 @@ class AutoMeshParams(CoreObject):
             max_size: float,
             prism_control_ids: Iterable[int],
             volume_fill_type: VolumeFillType,
+            prism: PrismParams,
             tet: TetParams,
             volume_control_ids: Iterable[int]):
         self._size_field_type = SizeFieldType(size_field_type)
         self._max_size = max_size
         self._prism_control_ids = prism_control_ids if isinstance(prism_control_ids, np.ndarray) else np.array(prism_control_ids, dtype=np.int32)
         self._volume_fill_type = VolumeFillType(volume_fill_type)
+        self._prism = prism
         self._tet = tet
         self._volume_control_ids = volume_control_ids if isinstance(volume_control_ids, np.ndarray) else np.array(volume_control_ids, dtype=np.int32)
 
@@ -267,6 +368,7 @@ class AutoMeshParams(CoreObject):
             max_size: float = None,
             prism_control_ids: Iterable[int] = None,
             volume_fill_type: VolumeFillType = None,
+            prism: PrismParams = None,
             tet: TetParams = None,
             volume_control_ids: Iterable[int] = None,
             json_data : dict = None,
@@ -285,6 +387,8 @@ class AutoMeshParams(CoreObject):
             Set prism control ids.
         volume_fill_type: VolumeFillType, optional
             Option to fill volume.
+        prism: PrismParams, optional
+            Prism control parameters.
         tet: TetParams, optional
             Parameters to control tetrahedral mesh generation.
         volume_control_ids: Iterable[int], optional
@@ -302,16 +406,18 @@ class AutoMeshParams(CoreObject):
                 json_data["maxSize"],
                 json_data["prismControlIds"],
                 VolumeFillType(json_data["volumeFillType"]),
+                PrismParams(model = model, json_data = json_data["prism"]),
                 TetParams(model = model, json_data = json_data["tet"]),
                 json_data["volumeControlIds"])
         else:
-            all_field_specified = all(arg is not None for arg in [size_field_type, max_size, prism_control_ids, volume_fill_type, tet, volume_control_ids])
+            all_field_specified = all(arg is not None for arg in [size_field_type, max_size, prism_control_ids, volume_fill_type, prism, tet, volume_control_ids])
             if all_field_specified:
                 self.__initialize(
                     size_field_type,
                     max_size,
                     prism_control_ids,
                     volume_fill_type,
+                    prism,
                     tet,
                     volume_control_ids)
             else:
@@ -324,6 +430,7 @@ class AutoMeshParams(CoreObject):
                         max_size if max_size is not None else ( AutoMeshParams._default_params["max_size"] if "max_size" in AutoMeshParams._default_params else json_data["maxSize"]),
                         prism_control_ids if prism_control_ids is not None else ( AutoMeshParams._default_params["prism_control_ids"] if "prism_control_ids" in AutoMeshParams._default_params else json_data["prismControlIds"]),
                         volume_fill_type if volume_fill_type is not None else ( AutoMeshParams._default_params["volume_fill_type"] if "volume_fill_type" in AutoMeshParams._default_params else VolumeFillType(json_data["volumeFillType"])),
+                        prism if prism is not None else ( AutoMeshParams._default_params["prism"] if "prism" in AutoMeshParams._default_params else PrismParams(model = model, json_data = json_data["prism"])),
                         tet if tet is not None else ( AutoMeshParams._default_params["tet"] if "tet" in AutoMeshParams._default_params else TetParams(model = model, json_data = json_data["tet"])),
                         volume_control_ids if volume_control_ids is not None else ( AutoMeshParams._default_params["volume_control_ids"] if "volume_control_ids" in AutoMeshParams._default_params else json_data["volumeControlIds"]))
         self._custom_params = kwargs
@@ -339,6 +446,7 @@ class AutoMeshParams(CoreObject):
             max_size: float = None,
             prism_control_ids: Iterable[int] = None,
             volume_fill_type: VolumeFillType = None,
+            prism: PrismParams = None,
             tet: TetParams = None,
             volume_control_ids: Iterable[int] = None):
         """Set the default values of AutoMeshParams.
@@ -353,6 +461,8 @@ class AutoMeshParams(CoreObject):
             Set prism control ids.
         volume_fill_type: VolumeFillType, optional
             Option to fill volume.
+        prism: PrismParams, optional
+            Prism control parameters.
         tet: TetParams, optional
             Parameters to control tetrahedral mesh generation.
         volume_control_ids: Iterable[int], optional
@@ -379,13 +489,14 @@ class AutoMeshParams(CoreObject):
         json_data["maxSize"] = self._max_size
         json_data["prismControlIds"] = self._prism_control_ids
         json_data["volumeFillType"] = self._volume_fill_type
+        json_data["prism"] = self._prism._jsonify()
         json_data["tet"] = self._tet._jsonify()
         json_data["volumeControlIds"] = self._volume_control_ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "size_field_type :  %s\nmax_size :  %s\nprism_control_ids :  %s\nvolume_fill_type :  %s\ntet :  %s\nvolume_control_ids :  %s" % (self._size_field_type, self._max_size, self._prism_control_ids, self._volume_fill_type, '{ ' + str(self._tet) + ' }', self._volume_control_ids)
+        message = "size_field_type :  %s\nmax_size :  %s\nprism_control_ids :  %s\nvolume_fill_type :  %s\nprism :  %s\ntet :  %s\nvolume_control_ids :  %s" % (self._size_field_type, self._max_size, self._prism_control_ids, self._volume_fill_type, '{ ' + str(self._prism) + ' }', '{ ' + str(self._tet) + ' }', self._volume_control_ids)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -428,6 +539,16 @@ class AutoMeshParams(CoreObject):
     @volume_fill_type.setter
     def volume_fill_type(self, value: VolumeFillType):
         self._volume_fill_type = value
+
+    @property
+    def prism(self) -> PrismParams:
+        """Prism control parameters.
+        """
+        return self._prism
+
+    @prism.setter
+    def prism(self, value: PrismParams):
+        self._prism = value
 
     @property
     def tet(self) -> TetParams:
