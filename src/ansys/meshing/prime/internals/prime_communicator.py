@@ -1,4 +1,4 @@
-import PrimePyPrimeServer as Prime
+import PrimePyAnsysPrimeServer as Prime
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
