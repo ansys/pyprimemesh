@@ -156,6 +156,7 @@ def download_elbow_scdoc(
     _DOWNLOADS.append(file)
     return file
 
+
 def download_bracket_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
@@ -195,7 +196,11 @@ def download_bracket_fmd(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'bracket_mid_surface.fmd', 'pyprime', 'bracket_scaffold', destination=destination, force=force
+        'bracket_mid_surface.fmd',
+        'pyprime',
+        'bracket_scaffold',
+        destination=destination,
+        force=force,
     )
     _DOWNLOADS.append(file)
     return file
@@ -240,7 +245,11 @@ def download_bracket_scdoc(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'bracket_mid_surface.scdoc', 'pyprime', 'bracket_scaffold', destination=destination, force=force
+        'bracket_mid_surface.scdoc',
+        'pyprime',
+        'bracket_scaffold',
+        destination=destination,
+        force=force,
     )
     _DOWNLOADS.append(file)
     return file
@@ -329,9 +338,7 @@ def download_toy_car_fmd(
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
-    file = download_file(
-        'toy_car.fmd', 'pyprime', 'toy_car', destination=destination, force=force
-    )
+    file = download_file('toy_car.fmd', 'pyprime', 'toy_car', destination=destination, force=force)
     _DOWNLOADS.append(file)
     return file
 

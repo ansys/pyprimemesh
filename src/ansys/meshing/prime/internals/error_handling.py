@@ -204,6 +204,12 @@ prime_error_messages = {
     ErrorCode.PLUGINLOADFAILURE: "Failed to load surface editor plugin.",
     ErrorCode.INPUTNOTCOMPLETE: "Input provided is incomplete.",
     ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS: "Remesh is not supported for periodic face zonelets.",
+    ErrorCode.EXTRACTVOLUMESFAILED: "Extract volumes failed.",
+    ErrorCode.REFINEATCONTACTSFAILED: "Failed to refine at contacts.",
+    ErrorCode.CREATECAPONFACEZONELETSFAILED: "Failed to create cap on face zonelets.",
+    ErrorCode.ZONELETSARENOTOFSAMEDIMENSION: "Zonelets are not of same dimension.",
+    ErrorCode.MERGEZONELETSFAILED: "Merge zonelets failed.",
+    ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS: "Merge small zonelets option is supported for only face zonelets.",
 }
 
 prime_warning_messages = {
@@ -242,6 +248,7 @@ prime_warning_messages = {
     WarningCode.MESHHASNONPOSITIVEAREAS: "Mesh has non positive areas.",
     WarningCode.MESHHASINVALIDSHAPE: "Mesh has invalid shape.",
     WarningCode.MESHHASLEFTHANDEDNESSFACES: "Mesh has left handed faces.",
+    WarningCode.FACEZONELETSWITHOUTVOLUMES: "Face zonelets have no volume associated to them.",
 }
 
 
