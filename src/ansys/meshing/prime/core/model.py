@@ -71,7 +71,6 @@ class Model(_Model):
                 break
         if (new_part == None):
             raise PrimeRuntimeError("Unable to create part", ErrorCode.PARTNOTFOUND)
-        
 
     def get_part_by_name(self, name: str) -> Part:
         """Gets the part by name. Returns None if part doesn't exist for the given name.
