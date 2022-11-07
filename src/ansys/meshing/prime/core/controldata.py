@@ -212,6 +212,17 @@ class ControlData(_ControlData):
     def _update_size_controls(self, sc_data: List):
         self._size_controls = [SizeControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
 
+    def _update_prism_controls(self, sc_data: List):
+        self._prism_controls = [PrismControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
+
+    def _update_wrapper_controls(self, sc_data: List):
+        self._wrapper_controls = [
+            WrapperControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data
+        ]
+
+    def _update_volume_controls(self, sc_data: List):
+        self._volume_controls = [VolumeControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
+
     def create_volume_control(self) -> VolumeControl:
         """Creates the volume control.
 
