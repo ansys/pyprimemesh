@@ -42,7 +42,7 @@ Procedure
 # Launch Ansys Prime Server instance and connect client.
 # Get the client model and instantiate meshing utilities from lucid class.
 
-import ansys.meshing.prime as prime
+from ansys.meshing import prime
 import ansys.meshing.prime.graphics as graphics
 from ansys.meshing.prime import lucid
 
