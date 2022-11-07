@@ -37,11 +37,10 @@ An example output for a CAD file containing a single part is shown below:
 .. code:: python
 
     >>> cad_file = prime.examples.download_elbow_scdoc()
-    >>> prime.FileIO(model).import_cad(file_name=cad_file,params=prime.ImportCadParams(model))
+    >>> params = prime.ImportCadParams(model)
+    >>> prime.FileIO(model).import_cad(file_name=cad_file, params=params)
     
     >>> print(model)
-    
-    >>> prime_client.exit()
     
 	Part Summary:
 

@@ -21,6 +21,8 @@ from ansys.meshing.prime.autogen.wrapperstructs import *
 from ansys.meshing.prime.autogen.materialpointmanagerstructs import *
 from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.deletetoolstructs import *
+from ansys.meshing.prime.autogen.splittoolstructs import *
+from ansys.meshing.prime.autogen.collapsetoolstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *
 from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *

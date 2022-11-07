@@ -8,6 +8,82 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
+class CopyZoneletsParams(CoreObject):
+    """Parameters to copy zonelets. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CopyZoneletsParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CopyZoneletsParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a CopyZoneletsParams object with provided parameters.
+
+        Examples
+        --------
+        >>> copy_zonelets_params = prime.CopyZoneletsParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "CopyZoneletsParams")["CopyZoneletsParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of CopyZoneletsParams.
+
+        """
+        args = locals()
+        [CopyZoneletsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CopyZoneletsParams.
+
+        Examples
+        --------
+        >>> CopyZoneletsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CopyZoneletsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
 class CopyZoneletsResults(CoreObject):
     """Result structure associated with copying zonelets.
     """
@@ -436,6 +512,203 @@ class FillHolesAtPlaneResults(CoreObject):
     @created_zone_id.setter
     def created_zone_id(self, value: int):
         self._created_zone_id = value
+
+class CreateCapParams(CoreObject):
+    """Parameters to create cap on face zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CreateCapParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CreateCapParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a CreateCapParams object with provided parameters.
+
+        Examples
+        --------
+        >>> create_cap_params = prime.CreateCapParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "CreateCapParams")["CreateCapParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of CreateCapParams.
+
+        """
+        args = locals()
+        [CreateCapParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CreateCapParams.
+
+        Examples
+        --------
+        >>> CreateCapParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateCapParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class CreateCapResults(CoreObject):
+    """Results associated with create cap on face zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            created_face_zonelets: Iterable[int]):
+        self._error_code = ErrorCode(error_code)
+        self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            created_face_zonelets: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CreateCapResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CreateCapResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
+        created_face_zonelets: Iterable[int], optional
+            Ids of cap face zonelets created.
+        json_data: dict, optional
+            JSON dictionary to create a CreateCapResults object with provided parameters.
+
+        Examples
+        --------
+        >>> create_cap_results = prime.CreateCapResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"]),
+                json_data["createdFaceZonelets"])
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, created_face_zonelets])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    created_face_zonelets)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "CreateCapResults")["CreateCapResults"]
+                    self.__initialize(
+                        error_code if error_code is not None else ( CreateCapResults._default_params["error_code"] if "error_code" in CreateCapResults._default_params else ErrorCode(json_data["errorCode"])),
+                        created_face_zonelets if created_face_zonelets is not None else ( CreateCapResults._default_params["created_face_zonelets"] if "created_face_zonelets" in CreateCapResults._default_params else json_data["createdFaceZonelets"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            created_face_zonelets: Iterable[int] = None):
+        """Set the default values of CreateCapResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
+        created_face_zonelets: Iterable[int], optional
+            Ids of cap face zonelets created.
+        """
+        args = locals()
+        [CreateCapResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CreateCapResults.
+
+        Examples
+        --------
+        >>> CreateCapResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateCapResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["errorCode"] = self._error_code
+        json_data["createdFaceZonelets"] = self._created_face_zonelets
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\ncreated_face_zonelets :  %s" % (self._error_code, self._created_face_zonelets)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def created_face_zonelets(self) -> Iterable[int]:
+        """Ids of cap face zonelets created.
+        """
+        return self._created_face_zonelets
+
+    @created_face_zonelets.setter
+    def created_face_zonelets(self, value: Iterable[int]):
+        self._created_face_zonelets = value
 
 class DeleteUnwettedParams(CoreObject):
     """DeleteUnwettedParams defines parameters for delete unwetted surfaces operation.
@@ -1067,6 +1340,466 @@ class SubtractZoneletsResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error Code associated with subtract operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+class SmoothDihedralFaceNodesParams(CoreObject):
+    """Parameters to smooth dihedral face nodes. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SmoothDihedralFaceNodesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SmoothDihedralFaceNodesParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SmoothDihedralFaceNodesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> smooth_dihedral_face_nodes_params = prime.SmoothDihedralFaceNodesParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesParams")["SmoothDihedralFaceNodesParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SmoothDihedralFaceNodesParams.
+
+        """
+        args = locals()
+        [SmoothDihedralFaceNodesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SmoothDihedralFaceNodesParams.
+
+        Examples
+        --------
+        >>> SmoothDihedralFaceNodesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SmoothDihedralFaceNodesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class SmoothDihedralFaceNodesResults(CoreObject):
+    """Results structure associated with smooth dihedral face nodes. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SmoothDihedralFaceNodesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SmoothDihedralFaceNodesResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SmoothDihedralFaceNodesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> smooth_dihedral_face_nodes_results = prime.SmoothDihedralFaceNodesResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesResults")["SmoothDihedralFaceNodesResults"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SmoothDihedralFaceNodesResults.
+
+        """
+        args = locals()
+        [SmoothDihedralFaceNodesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SmoothDihedralFaceNodesResults.
+
+        Examples
+        --------
+        >>> SmoothDihedralFaceNodesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SmoothDihedralFaceNodesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class RefineAtContactsParams(CoreObject):
+    """Parameters to refine face elements in contact.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            contact_tolerance: float,
+            relative_tolerance: bool,
+            refine_max_size: float,
+            project_on_geometry: bool):
+        self._contact_tolerance = contact_tolerance
+        self._relative_tolerance = relative_tolerance
+        self._refine_max_size = refine_max_size
+        self._project_on_geometry = project_on_geometry
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            contact_tolerance: float = None,
+            relative_tolerance: bool = None,
+            refine_max_size: float = None,
+            project_on_geometry: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the RefineAtContactsParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a RefineAtContactsParams object with default parameters.
+        contact_tolerance: float, optional
+            Maximum tolerance used to identify face elements as contacts.
+        relative_tolerance: bool, optional
+            Option to specify the contact tolerance is relative or absolute.
+        refine_max_size: float, optional
+            Maximum size used to refine contact face elements.
+        project_on_geometry: bool, optional
+            Project on geometry on remesh.
+        json_data: dict, optional
+            JSON dictionary to create a RefineAtContactsParams object with provided parameters.
+
+        Examples
+        --------
+        >>> refine_at_contacts_params = prime.RefineAtContactsParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["contactTolerance"],
+                json_data["relativeTolerance"],
+                json_data["refineMaxSize"],
+                json_data["projectOnGeometry"])
+        else:
+            all_field_specified = all(arg is not None for arg in [contact_tolerance, relative_tolerance, refine_max_size, project_on_geometry])
+            if all_field_specified:
+                self.__initialize(
+                    contact_tolerance,
+                    relative_tolerance,
+                    refine_max_size,
+                    project_on_geometry)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "RefineAtContactsParams")["RefineAtContactsParams"]
+                    self.__initialize(
+                        contact_tolerance if contact_tolerance is not None else ( RefineAtContactsParams._default_params["contact_tolerance"] if "contact_tolerance" in RefineAtContactsParams._default_params else json_data["contactTolerance"]),
+                        relative_tolerance if relative_tolerance is not None else ( RefineAtContactsParams._default_params["relative_tolerance"] if "relative_tolerance" in RefineAtContactsParams._default_params else json_data["relativeTolerance"]),
+                        refine_max_size if refine_max_size is not None else ( RefineAtContactsParams._default_params["refine_max_size"] if "refine_max_size" in RefineAtContactsParams._default_params else json_data["refineMaxSize"]),
+                        project_on_geometry if project_on_geometry is not None else ( RefineAtContactsParams._default_params["project_on_geometry"] if "project_on_geometry" in RefineAtContactsParams._default_params else json_data["projectOnGeometry"]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            contact_tolerance: float = None,
+            relative_tolerance: bool = None,
+            refine_max_size: float = None,
+            project_on_geometry: bool = None):
+        """Set the default values of RefineAtContactsParams.
+
+        Parameters
+        ----------
+        contact_tolerance: float, optional
+            Maximum tolerance used to identify face elements as contacts.
+        relative_tolerance: bool, optional
+            Option to specify the contact tolerance is relative or absolute.
+        refine_max_size: float, optional
+            Maximum size used to refine contact face elements.
+        project_on_geometry: bool, optional
+            Project on geometry on remesh.
+        """
+        args = locals()
+        [RefineAtContactsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of RefineAtContactsParams.
+
+        Examples
+        --------
+        >>> RefineAtContactsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in RefineAtContactsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["contactTolerance"] = self._contact_tolerance
+        json_data["relativeTolerance"] = self._relative_tolerance
+        json_data["refineMaxSize"] = self._refine_max_size
+        json_data["projectOnGeometry"] = self._project_on_geometry
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "contact_tolerance :  %s\nrelative_tolerance :  %s\nrefine_max_size :  %s\nproject_on_geometry :  %s" % (self._contact_tolerance, self._relative_tolerance, self._refine_max_size, self._project_on_geometry)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def contact_tolerance(self) -> float:
+        """Maximum tolerance used to identify face elements as contacts.
+        """
+        return self._contact_tolerance
+
+    @contact_tolerance.setter
+    def contact_tolerance(self, value: float):
+        self._contact_tolerance = value
+
+    @property
+    def relative_tolerance(self) -> bool:
+        """Option to specify the contact tolerance is relative or absolute.
+        """
+        return self._relative_tolerance
+
+    @relative_tolerance.setter
+    def relative_tolerance(self, value: bool):
+        self._relative_tolerance = value
+
+    @property
+    def refine_max_size(self) -> float:
+        """Maximum size used to refine contact face elements.
+        """
+        return self._refine_max_size
+
+    @refine_max_size.setter
+    def refine_max_size(self, value: float):
+        self._refine_max_size = value
+
+    @property
+    def project_on_geometry(self) -> bool:
+        """Project on geometry on remesh.
+        """
+        return self._project_on_geometry
+
+    @project_on_geometry.setter
+    def project_on_geometry(self, value: bool):
+        self._project_on_geometry = value
+
+class RefineAtContactsResults(CoreObject):
+    """Results structure associated with refine face elements in contact.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            n_refined: int,
+            size_field_id: int,
+            error_code: ErrorCode):
+        self._n_refined = n_refined
+        self._size_field_id = size_field_id
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            n_refined: int = None,
+            size_field_id: int = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the RefineAtContactsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a RefineAtContactsResults object with default parameters.
+        n_refined: int, optional
+            Number of face elements identified for refinement.
+        size_field_id: int, optional
+            Id of size field created to refine at contacts.
+        error_code: ErrorCode, optional
+            ErrorCode associated with the refine contacts operation.
+        json_data: dict, optional
+            JSON dictionary to create a RefineAtContactsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> refine_at_contacts_results = prime.RefineAtContactsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["nRefined"],
+                json_data["sizeFieldId"],
+                ErrorCode(json_data["errorCode"]))
+        else:
+            all_field_specified = all(arg is not None for arg in [n_refined, size_field_id, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    n_refined,
+                    size_field_id,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "RefineAtContactsResults")["RefineAtContactsResults"]
+                    self.__initialize(
+                        n_refined if n_refined is not None else ( RefineAtContactsResults._default_params["n_refined"] if "n_refined" in RefineAtContactsResults._default_params else json_data["nRefined"]),
+                        size_field_id if size_field_id is not None else ( RefineAtContactsResults._default_params["size_field_id"] if "size_field_id" in RefineAtContactsResults._default_params else json_data["sizeFieldId"]),
+                        error_code if error_code is not None else ( RefineAtContactsResults._default_params["error_code"] if "error_code" in RefineAtContactsResults._default_params else ErrorCode(json_data["errorCode"])))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            n_refined: int = None,
+            size_field_id: int = None,
+            error_code: ErrorCode = None):
+        """Set the default values of RefineAtContactsResults.
+
+        Parameters
+        ----------
+        n_refined: int, optional
+            Number of face elements identified for refinement.
+        size_field_id: int, optional
+            Id of size field created to refine at contacts.
+        error_code: ErrorCode, optional
+            ErrorCode associated with the refine contacts operation.
+        """
+        args = locals()
+        [RefineAtContactsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of RefineAtContactsResults.
+
+        Examples
+        --------
+        >>> RefineAtContactsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in RefineAtContactsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        json_data["nRefined"] = self._n_refined
+        json_data["sizeFieldId"] = self._size_field_id
+        json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "n_refined :  %s\nsize_field_id :  %s\nerror_code :  %s" % (self._n_refined, self._size_field_id, self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def n_refined(self) -> int:
+        """Number of face elements identified for refinement.
+        """
+        return self._n_refined
+
+    @n_refined.setter
+    def n_refined(self, value: int):
+        self._n_refined = value
+
+    @property
+    def size_field_id(self) -> int:
+        """Id of size field created to refine at contacts.
+        """
+        return self._size_field_id
+
+    @size_field_id.setter
+    def size_field_id(self, value: int):
+        self._size_field_id = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """ErrorCode associated with the refine contacts operation.
         """
         return self._error_code
 

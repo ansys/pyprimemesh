@@ -52,3 +52,15 @@ class CellQualityMeasure(enum.IntEnum):
     """Cell quality metric to check squish 2."""
     ELEMENTQUALITY = 50
     """The Element Quality metric ranges between 0 and 1. A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst)."""
+
+class SurfaceFeatureType(enum.IntEnum):
+    """Type of face edges considered as features.
+    """
+    NONE = 0
+    """None of face edges are considered as feature."""
+    ZONEBOUNDARY = 1
+    """Face edges at zone boundary are considered as feature."""
+    FEATURE = 2
+    """Face edges with normal angle more than threshold are considered as feature."""
+    FEATUREORZONEBOUNDARY = 3
+    """Face edges at zone boundary or with normal angle more than threshold are considered as feature."""

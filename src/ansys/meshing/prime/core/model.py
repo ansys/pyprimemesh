@@ -46,6 +46,9 @@ class Model(_Model):
         )
         part_data = res["Parts"]
         sc_data = res["SizeControl"]
+        pc_data = res["PrismControl"]
+        wc_data = res["WrapperControl"]
+        vc_data = res["VolumeControl"]
         sf_params = res["GlobalSizingParams"]
 
         self._global_sf_params = GlobalSizingParams(
@@ -54,6 +57,9 @@ class Model(_Model):
         self._parts = [Part(self, part[0], part[1], part[2]) for part in part_data]
         self._control_data = ControlData(self, -1, res["ControlData"], "")
         self._control_data._update_size_controls(sc_data)
+        self._control_data._update_prism_controls(pc_data)
+        self._control_data._update_wrapper_controls(wc_data)
+        self._control_data._update_volume_controls(vc_data)
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def _add_part(self, id : int):
