@@ -5,7 +5,6 @@ import numpy as np
 import pyvista as pv
 from pyvista import _vtk
 import os
-import sys
 from ansys.meshing.prime.internals import config
 
 def compute_face_list_from_structured_nodes(nodes, dim):
