@@ -38,7 +38,7 @@ After this preamble is complete, the first code block begins.
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 
-# start Prime server and get client model
+# start Ansys Prime Server and get client model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
@@ -46,7 +46,7 @@ model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 example_file = prime.examples.download_elbow_fmd()
 mesh_util.read(example_file)
-model
+print(model)
 
 ###############################################################################
 # Section Title
@@ -90,5 +90,5 @@ display()
 # notebook, the example html and the demo script will all be auto-generated via ``sphinx-gallery``.
 
 ###############################################################################
-# Stopping Prime
+# Stopping Ansys Prime Server
 prime_client.exit()
