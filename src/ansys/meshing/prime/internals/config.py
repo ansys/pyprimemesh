@@ -18,6 +18,7 @@ __all__ = [
 __DEFAULT_USE_BINARY = False
 __USING_CONTAINER = False
 __HAS_PIM = False
+__SPHINX_BUILD = False
 
 
 def _optimize_vectors():
@@ -97,6 +98,16 @@ def set_using_container(value: bool):
 
 def using_container():
     return __USING_CONTAINER
+
+
+def set_sphinx_build(value: bool):
+    global __SPHINX_BUILD
+    __SPHINX_BUILD = value
+    return __SPHINX_BUILD
+
+
+def sphinx_build():
+    return __SPHINX_BUILD
 
 
 def set_has_pim(value: bool):

@@ -233,6 +233,9 @@ def launch_prime(
         client.container_name = container_name
         return client
 
+    if 'PYPRIME_SPHINX_BUILD' in os.environ:
+        config.set_sphinx_build(True)
+
     server = launch_server_process(
         pyprime_root=pyprime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
     )

@@ -6,6 +6,7 @@ import pyvista as pv
 from pyvista import _vtk
 import os
 import sys
+from ansys.meshing.prime.internals import config
 
 def compute_face_list_from_structured_nodes(nodes, dim):
     flist = []
@@ -447,7 +448,7 @@ class Graphics(object):
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
-        if 'sphinx' not in sys.modules:
+        if config.sphinx_build() == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
                 value=int(self._color_by_type) is ColorByType.ZONELET,
@@ -473,7 +474,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        if 'sphinx' not in sys.modules:
+        if config.sphinx_build() == False:
             self.__update_bt_icons()
         self._plotter.show()
 
@@ -509,7 +510,7 @@ class Graphics(object):
                     or disp_mesh.type != DisplayMeshType.SPLINESURFACE
                 )
             ]
-        if 'sphinx' not in sys.modules:
+        if config.sphinx_build() == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
                 value=self._color_by_type is ColorByType.ZONELET,
@@ -535,7 +536,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        if 'sphinx' not in sys.modules:
+        if config.sphinx_build() == False:
             self.__update_bt_icons()
         self._plotter.show()
 
@@ -569,7 +570,7 @@ class Graphics(object):
                     if (disp_mesh._id in disp_ids)
                 ]
 
-        if 'sphinx' not in sys.modules:
+        if config.sphinx_build() == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
                 value=self._color_by_type is ColorByType.ZONELET,
@@ -595,7 +596,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        if 'sphinx' not in sys.modules:
+        if config.sphinx_build() == False:
             self.__update_bt_icons()
         self._plotter.show()
 
