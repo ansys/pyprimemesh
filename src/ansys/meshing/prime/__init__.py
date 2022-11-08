@@ -10,9 +10,9 @@ from ansys.meshing.prime.autogen.volumesearch import VolumeSearch
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
 from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.core.wrapper import Wrapper
+from ansys.meshing.prime.core.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
-from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.wrapperstructs import *
 from ansys.meshing.prime.autogen.scaffolder import Scaffolder
@@ -22,8 +22,8 @@ from ansys.meshing.prime.autogen.sizefield import SizeField
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.transform import Transform
 from ansys.meshing.prime.autogen.connect import Connect
-from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.autogen.deletetool import DeleteTool
+from ansys.meshing.prime.autogen.collapsetool import CollapseTool
 from ansys.meshing.prime.autogen.volumemeshtool import VolumeMeshTool
 from ansys.meshing.prime.autogen.topoutilities import TopoUtilities
 from ansys.meshing.prime.autogen.commontypes import *
@@ -51,6 +51,8 @@ from ansys.meshing.prime.internals.client import Client
 from ansys.meshing.prime.internals.launcher import *
 from ansys.meshing.prime.autogen.transformstructs import *
 from ansys.meshing.prime.autogen.deletetoolstructs import *
+from ansys.meshing.prime.autogen.splittoolstructs import *
+from ansys.meshing.prime.autogen.collapsetoolstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
 from ansys.meshing.prime.autogen.featureextractionstructs import *

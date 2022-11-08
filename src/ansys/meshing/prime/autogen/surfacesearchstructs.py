@@ -448,6 +448,158 @@ class SearchByFoldsResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+class SearchBySelfIntersectionParams(CoreObject):
+    """Parameters to search by face element intersection. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchBySelfIntersectionParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchBySelfIntersectionParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SearchBySelfIntersectionParams object with provided parameters.
+
+        Examples
+        --------
+        >>> search_by_self_intersection_params = prime.SearchBySelfIntersectionParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "SearchBySelfIntersectionParams")["SearchBySelfIntersectionParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SearchBySelfIntersectionParams.
+
+        """
+        args = locals()
+        [SearchBySelfIntersectionParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchBySelfIntersectionParams.
+
+        Examples
+        --------
+        >>> SearchBySelfIntersectionParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchBySelfIntersectionParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class SearchByIntersectionResults(CoreObject):
+    """Results associated with search by face element intersection. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchByIntersectionResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchByIntersectionResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SearchByIntersectionResults object with provided parameters.
+
+        Examples
+        --------
+        >>> search_by_intersection_results = prime.SearchByIntersectionResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "SearchByIntersectionResults")["SearchByIntersectionResults"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SearchByIntersectionResults.
+
+        """
+        args = locals()
+        [SearchByIntersectionResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchByIntersectionResults.
+
+        Examples
+        --------
+        >>> SearchByIntersectionResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchByIntersectionResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
 class SearchByQualityParams(CoreObject):
     """Parameters to control search by quality results.
     """
@@ -733,6 +885,158 @@ class SearchByQualityResults(CoreObject):
     @min_quality.setter
     def min_quality(self, value: float):
         self._min_quality = value
+
+class SearchByThinStripParams(CoreObject):
+    """Parameters to search by thin strip of face elements. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchByThinStripParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchByThinStripParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SearchByThinStripParams object with provided parameters.
+
+        Examples
+        --------
+        >>> search_by_thin_strip_params = prime.SearchByThinStripParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "SearchByThinStripParams")["SearchByThinStripParams"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SearchByThinStripParams.
+
+        """
+        args = locals()
+        [SearchByThinStripParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchByThinStripParams.
+
+        Examples
+        --------
+        >>> SearchByThinStripParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchByThinStripParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class SearchByThinStripResults(CoreObject):
+    """Results associated with search by thin strip of face elements. This is for internal use only.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchByThinStripResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchByThinStripResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SearchByThinStripResults object with provided parameters.
+
+        Examples
+        --------
+        >>> search_by_thin_strip_results = prime.SearchByThinStripResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    json_data = model._communicator.initialize_params(model, "SearchByThinStripResults")["SearchByThinStripResults"]
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SearchByThinStripResults.
+
+        """
+        args = locals()
+        [SearchByThinStripResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchByThinStripResults.
+
+        Examples
+        --------
+        >>> SearchByThinStripResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchByThinStripResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
 
 class SurfaceQualityResult(CoreObject):
     """Result of surface quality.
