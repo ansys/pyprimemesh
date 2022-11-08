@@ -18,7 +18,7 @@ __all__ = [
 __DEFAULT_USE_BINARY = False
 __USING_CONTAINER = False
 __HAS_PIM = False
-__SPHINX_BUILD = True
+__SPHINX_BUILD = False
 
 
 def _optimize_vectors():
