@@ -31,50 +31,49 @@ Procedure
 """
 
 ###############################################################################
-# Import all necessary modules and launch an instance of Ansys Prime Server.
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import all necessary modules.
+# Launch an instance of Ansys Prime Server.
+# Connect PyPrime client and get the model.
+# Instantiate meshing utilities from Lucid class.
 
 from ansys.meshing import prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 
-# start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
-
-# instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
-# Import geometry and create face zones from labels imported from geometry.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Download the elbow geometry file (.fmd file exported by SpaceClaim)
-mixing_elbow = prime.examples.download_elbow_fmd()
-
 # Import geometry
-mesh_util.read(file_name=mixing_elbow)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Download the elbow geometry file (.fmd file exported by SpaceClaim).
+# Import geometry.
+# Create face zones from labels imported from geometry for use in Fluent solver.
 
-# Create face zones from imported labels on geometry for use in Fluent solver
+mixing_elbow = prime.examples.download_elbow_fmd()
+mesh_util.read(file_name=mixing_elbow)
 mesh_util.create_zones_from_labels("inlet,outlet")
 
 ###############################################################################
-# Surface mesh geometry with curvature sizing.
+# Surface mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 # Surface mesh the geometry setting min and max sizing
-# that will be used for curvature refinement
+# that will be used for curvature refinement.
+
 mesh_util.surface_mesh(min_size=5, max_size=20)
 
 ###############################################################################
-# Volume mesh with polyhedral elements and boundary layer refinement.
+# Volume mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# Volume mesh with polyhedral elements and boundary layer refinement.
 # Fill the volume with polyhedral and prism mesh
-# specifying location and number of layers for prisms
-
+# specifying location and number of layers for prisms.
 # Expressions are used to define the surfaces to have prisms grown
 # where "* !inlet !outlet" states "all not inlet or outlet".
+
 mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
     prism_surface_expression="* !inlet !outlet",
@@ -110,14 +109,15 @@ print(part_summary_res)
 print(results.quality_results_part[0].max_quality, results.quality_results_part[0].min_quality)
 
 ###############################################################################
-# Write a cas file for use in the Fluent solver.
+# Write mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Write a cas file for use in the Fluent solver.
 
 mesh_util.write(os.path.join(os.getcwd(), "mixing_elbow.cas"))
 print(os.getcwd())
 
 ###############################################################################
-# Exit the PyPrime session.
+# Exit PyPrime session
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
