@@ -1,46 +1,9 @@
-from typing import List, Iterable
 import ansys.meshing.prime as prime
+from .utils import check_name_pattern
+from .scope import SurfaceScope, VolumeScope
+from typing import List, Iterable
 import os
 import enum
-import re
-
-
-def _match_pattern(pattern: str, name: str) -> bool:
-    pattern = "^" + pattern.replace("*", ".*").replace("?", ".") + "$"
-    x = re.search(pattern, name)
-    if x:
-        return True
-    else:
-        return False
-
-
-def _check_name_pattern(name_patterns: str, name: str) -> bool:
-    patterns = []
-    include_pattern = []
-    exclude_pattern = []
-    a = name_patterns.split(",")
-    for aa in a:
-        if len(aa) > 0:
-            b = aa.split(" ")
-            for bb in b:
-                if len(bb) > 0:
-                    patterns.append(bb)
-    for pattern in patterns:
-        pattern = pattern.strip()
-        if pattern.startswith("!"):
-            exclude_pattern.append(pattern[1:])
-        else:
-            include_pattern.append(pattern)
-
-    for pattern in exclude_pattern:
-        if _match_pattern(pattern, name):
-            return False
-
-    for pattern in include_pattern:
-        if _match_pattern(pattern, name):
-            return True
-
-    return False
 
 
 class LabelToZoneMethod(enum.IntEnum):
@@ -51,226 +14,6 @@ class LabelToZoneMethod(enum.IntEnum):
     Simple method to create zones from labels.
     Entities are queried using labels and zones created.
     """
-
-
-class _LucidScope:
-    def __init__(
-        self,
-        part_expression: str,
-        entity_expression: str,
-        scope_evaluation_type: prime.ScopeEvaluationType,
-        scope_entity_type: prime.ScopeEntity,
-    ):
-        self._part_expression = part_expression
-        self._entity_expression = entity_expression
-        self._evaluation_type = scope_evaluation_type
-        self._entity_type = scope_entity_type
-
-    def __str__(self) -> str:
-        return "#".join(
-            [
-                self._part_expression,
-                self._entity_expression,
-                str(int(self._evaluation_type)),
-                str(int(self._entity_type)),
-            ]
-        )
-
-    def get_scope_definition(self, model: prime.Model) -> prime.ScopeDefinition:
-        """Gets the scope definition of the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-
-        Returns
-        -------
-        ScopeDefinition
-            Returns the scope definition.
-        """
-        label_exp: str = None
-        zone_exp: str = None
-        if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
-            label_exp = self._entity_expression
-        else:
-            zone_exp = self._entity_expression
-
-        sd = prime.ScopeDefinition(
-            model=model,
-            entity_type=self._entity_type,
-            evaluation_type=self._evaluation_type,
-            part_expression=self._part_expression,
-            label_expression=label_exp,
-            zone_expression=zone_exp,
-        )
-        return sd
-
-
-class SurfaceScope(_LucidScope):
-    """SurfaceScope is one of the classes in Lucid API.
-
-    This class is meant for beginners to meshing. This class is used to define
-    a scope for operation on surfaces.
-
-    """
-
-    def __init__(
-        self,
-        part_expression: str = "*",
-        entity_expression: str = "*",
-        scope_evaluation_type: prime.ScopeEvaluationType = prime.ScopeEvaluationType.LABELS,
-    ):
-        """Initialize SurfaceScope with the given part expression,
-        entity expression and scope evaluation type.
-
-        Parameters
-        ----------
-        part_expression : str
-            Part expression to scope parts while evaluating scope.
-        entity_expression : str
-            Label or zone expression to scope entities while evaluating scope.
-        scope_evaluation_type : prime.ScopeEvaluationType
-            Evaluation type to scope entities. The default is set to labels.
-        """
-        _LucidScope.__init__(
-            self,
-            part_expression,
-            entity_expression,
-            scope_evaluation_type,
-            prime.ScopeEntity.FACEZONELETS,
-        )
-
-    def get_parts(self, model: prime.Model) -> Iterable[int]:
-        """Gets the list of part ids in the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-
-        Returns
-        -------
-        Iterable[int]
-            Returns the list of part ids.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import Model, SurfaceScope
-            >>> model = client.model
-            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
-            >>> part_ids = su.get_parts()
-        """
-        sel_parts: Iterable[int] = []
-        for part in model.parts:
-            if _check_name_pattern(self._part_expression, part.name):
-                sel_parts.append(part.id)
-        return sel_parts
-
-    def get_face_zonelets(self, model: prime.Model, part_id: int) -> Iterable[int]:
-        """Gets the list of face zonelets for the given part in the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-        part_id : int
-            Id of the part.
-
-        Returns
-        -------
-        Iterable[int]
-            Returns the list of zonelets.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import Model, SurfaceScope
-            >>> model = client.model
-            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
-            >>> face_zonelets = su.get_face_zonelets(model, 2)
-        """
-        face_zonelets: Iterable[int] = []
-        part = model.get_part(part_id)
-        if part and _check_name_pattern(self._part_expression, part.name):
-            if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
-                face_zonelets = part.get_face_zonelets_of_label_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-            else:
-                face_zonelets = part.get_face_zonelets_of_zone_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-        return face_zonelets
-
-    def get_topo_faces(self, model: prime.Model, part_id: int) -> Iterable[int]:
-        """Gets the list of topofaces for the given part in the scope.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model.
-        part_id : int
-            Id of the part.
-
-        Returns
-        -------
-        Iterable[int]
-            Returns the list of zonelets.
-
-        Examples
-        --------
-            >>> from ansys.meshing.prime import Model, SurfaceScope
-            >>> model = client.model
-            >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
-            >>> topo_faces = su.get_topo_faces(model, 2)
-        """
-        topo_faces: Iterable[int] = []
-        part = model.get_part(part_id)
-        if part and _check_name_pattern(self._part_expression, part.name):
-            if self._evaluation_type == prime.ScopeEvaluationType.LABELS:
-                topo_faces = part.get_topo_faces_of_label_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-            else:
-                topo_faces = part.get_topo_faces_of_zone_name_pattern(
-                    self._entity_expression, prime.NamePatternParams(model)
-                )
-        return topo_faces
-
-
-class VolumeScope(_LucidScope):
-    """VolumeScope is one of the classes in Lucid API.
-
-    This class is meant for beginners to meshing. This class is used to define
-    a scope for operation on volumes.
-
-    """
-
-    def __init__(
-        self,
-        part_expression: str = "*",
-        entity_expression: str = "*",
-        scope_evaluation_type: prime.ScopeEvaluationType = prime.ScopeEvaluationType.ZONES,
-    ):
-        """Initialize VolumeScope with the given part expression, entity expression and scope
-        evaluation type.
-
-        Parameters
-        ----------
-        part_expression : str
-            Part expression to scope parts while evaluating scope.
-        entity_expression : str
-            Label or zone expression to scope entities while evaluating scope.
-        scope_evaluation_type : prime.ScopeEvaluationType
-            Evaluation type to scope entities. The default is set to zones.
-        """
-        _LucidScope.__init__(
-            self,
-            part_expression,
-            entity_expression,
-            scope_evaluation_type,
-            prime.ScopeEntity.VOLUME,
-        )
 
 
 class Mesh:
@@ -414,7 +157,7 @@ class Mesh:
         for part in self._model.parts:
             lbls = part.get_labels()
             for l in lbls:
-                if l not in labels and _check_name_pattern(label_expression, l):
+                if l not in labels and check_name_pattern(label_expression, l):
                     labels.append(l)
 
         for label in labels:
@@ -437,6 +180,46 @@ class Mesh:
                         if face_zone == None:
                             face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
                         part.add_zonelets_to_zone(face_zone.zone_id, in_face_zonelets)
+
+    def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
+        """Merges given parts into one.
+
+        Parameters
+        ----------
+        parts_expression : str
+            Expression of parts to be merged.
+        new_name : str
+            New part name for the merged part.
+        """
+        part_ids = []
+        for part in self._model.parts:
+            if check_name_pattern(parts_expression, part.get_name()):
+                part_ids.append(part.id)
+
+        self._model.merge_parts(
+            part_ids=part_ids,
+            params=prime.MergePartsParams(self._model, merged_part_suggested_name=new_name),
+        )
+
+    def delete_topology(self, parts_expression: str = "*", delete_edges: bool = True):
+        """Delete topoentities of part.
+
+        Parameters
+        ----------
+        parts_expression : str
+            Expression of parts whose topology needs to be deleted.
+        delete_edges : bool
+            Check whether to delete the edges or not.
+        """
+        for part in self._model.parts:
+            if check_name_pattern(parts_expression, part.get_name()):
+                part.delete_topo_entities(
+                    prime.DeleteTopoEntitiesParams(
+                        self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+                    )
+                )
+                if delete_edges:
+                    part.delete_zonelets(part.get_edge_zonelets())
 
     def __surface_mesh_on_active_sf(self, generate_quads: bool, scope: SurfaceScope):
         part_ids = scope.get_parts(self._model)
@@ -708,7 +491,7 @@ class Mesh:
         s_control_ids = []
         s_controls = self._model.control_data.size_controls
         for control in s_controls:
-            if _check_name_pattern(size_control_names, control.name):
+            if check_name_pattern(size_control_names, control.name):
                 s_control_ids.append(control.id)
         if len(s_control_ids) > 0:
             size_field_res = sizefield.compute_volumetric(
@@ -719,6 +502,54 @@ class Mesh:
             )
             self.__surface_mesh_on_active_sf(generate_quads=generate_quads, scope=scope)
             self._model.delete_volumetric_size_fields([size_field_res.size_field_id])
+
+    def connect_faces(
+        self,
+        part_expression: str = "*",
+        face_labels: str = "*",
+        target_face_labels: str = "*",
+        tolerance: float = 0.05,
+    ):
+        """Connect face zonelets with given label name pattern within the given tolerance.
+
+        This method is used to connect face zonelets of given label name pattern to the
+        face zonelets given by target face labels within a given tolerance. Connect happens within
+        part. Face zonelets of a part are connected with face zonelets of the same part only.
+
+        Parameters
+        ----------
+        part_expression: str
+            Name pattern of parts used for connecting.
+        face_labels: str
+            Name pattern of face labels used for connecting.
+        target_face_labels: str
+            Name pattern of face labels with which you want to connect.
+        tolerance: float
+            Tolerance used for connection.
+        """
+        name_pattern_param = prime.NamePatternParams(self._model)
+        connect = prime.Connect(self._model)
+        for part in self._model.parts:
+            if check_name_pattern(part_expression, part.name):
+                join_faces_source = part.get_face_zonelets_of_label_name_pattern(
+                    face_labels, name_pattern_param
+                )
+                join_faces_target = part.get_face_zonelets_of_label_name_pattern(
+                    target_face_labels, name_pattern_param
+                )
+                if len(join_faces_source) > 0 and len(join_faces_target) > 0:
+                    connect.intersect_face_zonelets(
+                        part.id,
+                        face_zonelet_ids=join_faces_source,
+                        with_face_zonelet_ids=join_faces_target,
+                        params=prime.IntersectParams(self._model, tolerance=tolerance),
+                    )
+                    connect.join_face_zonelets(
+                        part.id,
+                        face_zonelet_ids=join_faces_source,
+                        with_face_zonelet_ids=join_faces_target,
+                        params=prime.JoinParams(self._model, tolerance=tolerance),
+                    )
 
     def compute_volumes(self, part_expression: str = "*", create_zones_per_volume: bool = True):
         """
@@ -733,11 +564,12 @@ class Mesh:
             Creates volume zones for each volume when True.
 
         """
-        params = prime.ComputeVolumesParams(
-            model=self._model, create_zone_per_volume=create_zones_per_volume
-        )
+        create_zones_type = prime.CreateVolumeZonesType.NONE
+        if create_zones_per_volume:
+            create_zones_type = prime.CreateVolumeZonesType.PERVOLUME
+        params = prime.ComputeVolumesParams(model=self._model, create_zones_type=create_zones_type)
         for part in self._model.parts:
-            if _check_name_pattern(part_expression, part.name):
+            if check_name_pattern(part_expression, part.name):
                 if len(part.get_topo_faces()) > 0:
                     part.compute_topo_volumes(params=params)
                 else:
@@ -760,7 +592,7 @@ class Mesh:
 
         """
         for part in self._model.parts:
-            if _check_name_pattern(part_expression, part.name):
+            if check_name_pattern(part_expression, part.name):
                 part.delete_topo_entities(
                     prime.DeleteTopoEntitiesParams(
                         model=self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
@@ -769,17 +601,55 @@ class Mesh:
                 if delete_edges:
                     part.delete_zonelets(part.get_edge_zonelets())
 
+    def __create_cap(self, part_id: int, face_zonelets: Iterable[int]):
+        su = prime.SurfaceUtilities(model=self._model)
+        res = su.create_cap_on_face_zonelets(
+            part_id=part_id,
+            face_zonelets=face_zonelets,
+            params=prime.CreateCapParams(model=self._model),
+        )
+        return res.created_face_zonelets
+
+    def __compute_flow_volume(
+        self, part_id: int, face_zonelets: Iterable[int], flow_volume_zone_name: str = "flow_volume"
+    ):
+        part = self._model.get_part(part_id)
+        if part:
+            params = prime.ExtractVolumesParams(
+                model=self._model, create_zone=True, suggested_zone_name=flow_volume_zone_name
+            )
+            res = part.extract_volumes(face_zonelets=face_zonelets, params=params)
+
+    def create_flow_volume(
+        self, flow_volume_zone_name: str = "flow_volume", cap_scope: SurfaceScope = SurfaceScope()
+    ):
+        """Create flow volume by the given face labels defining the boundary of the volume.
+
+        This method creates flow volumes for the given faces defining the boundary of the volume.
+
+        Parameters
+        ----------
+        flow_volume_zone_name: str
+            Suggested name for the volume zone of the created flow volume.
+        cap_scope: SurfaceScope
+            Scope defining the face zonelets where cap for flow volume needs to be created.
+        """
+        parts = cap_scope.get_parts(self._model)
+        for part in parts:
+            caps = self.__create_cap(part, cap_scope.get_face_zonelets(self._model, part))
+            if len(caps) > 0:
+                self.__compute_flow_volume(part, caps, flow_volume_zone_name)
+
     def __create_volume_controls(self, part: prime.Part, scope: VolumeScope) -> Iterable[int]:
         volume_control_ids = []
         if scope._evaluation_type == prime.ScopeEvaluationType.ZONES:
             volume_zones_all = part.get_volume_zones()
             volume_zones_to_mesh = []
-            if _check_name_pattern(scope._part_expression, part.name):
-                for volume_zone in volume_zones_all:
-                    if _check_name_pattern(
-                        scope._entity_expression, self._model.get_zone_name(volume_zone)
-                    ):
-                        volume_zones_to_mesh.append(volume_zone)
+            for volume_zone in volume_zones_all:
+                if check_name_pattern(
+                    scope._entity_expression, self._model.get_zone_name(volume_zone)
+                ):
+                    volume_zones_to_mesh.append(volume_zone)
 
             volume_zones_to_avoid = [v for v in volume_zones_all if v not in volume_zones_to_mesh]
             scope_str = ", ".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
@@ -822,6 +692,7 @@ class Mesh:
     def volume_mesh(
         self,
         volume_fill_type: prime.VolumeFillType = prime.VolumeFillType.TET,
+        quadratic: bool = False,
         prism_layers: int = None,
         prism_surface_expression: str = "*",
         prism_volume_expression: str = "*",
@@ -837,6 +708,10 @@ class Mesh:
         ----------
         volume_fill_type : prime.VolumeFillType
             Type of volume elements to be generated.
+
+        quadratic : bool
+            Option to generate quadratic mesh. It is not supported with parallel meshing.
+            It is only supported with pure tetrahedral mesh.
 
         prism_layers : int
             Number of prism layers to grow.
@@ -858,45 +733,48 @@ class Mesh:
         """
         automesh_params = prime.AutoMeshParams(model=self._model)
         automesh_params.volume_fill_type = volume_fill_type
+        if quadratic:
+            automesh_params.tet = prime.TetParams(self._model, True)
         automesh = prime.AutoMesh(self._model)
         for part in self._model.parts:
-            try:
-                prism_control = None
-                volume_control_ids = self.__create_volume_controls(part, scope)
-                if len(volume_control_ids) > 0:
-                    automesh_params.volume_control_ids = volume_control_ids
-                if prism_layers:
-                    prism_control = self._model.control_data.create_prism_control()
-                    prism_control.set_surface_scope(
-                        prime.ScopeDefinition(
-                            self._model,
-                            part_expression=part.name,
-                            label_expression=prism_surface_expression,
+            if check_name_pattern(scope._part_expression, part.name):
+                try:
+                    prism_control = None
+                    volume_control_ids = self.__create_volume_controls(part, scope)
+                    if len(volume_control_ids) > 0:
+                        automesh_params.volume_control_ids = volume_control_ids
+                    if prism_layers:
+                        prism_control = self._model.control_data.create_prism_control()
+                        prism_control.set_surface_scope(
+                            prime.ScopeDefinition(
+                                self._model,
+                                part_expression=part.name,
+                                label_expression=prism_surface_expression,
+                            )
                         )
-                    )
-                    prism_control.set_growth_params(
-                        prime.PrismControlGrowthParams(
-                            self._model, n_layers=prism_layers, growth_rate=growth_rate
+                        prism_control.set_growth_params(
+                            prime.PrismControlGrowthParams(
+                                self._model, n_layers=prism_layers, growth_rate=growth_rate
+                            )
                         )
-                    )
-                    prism_control.set_volume_scope(
-                        prime.ScopeDefinition(
-                            self._model,
-                            entity_type=prime.ScopeEntity.VOLUME,
-                            evaluation_type=prime.ScopeEvaluationType.ZONES,
-                            part_expression=part.name,
-                            zone_expression=prism_volume_expression,
+                        prism_control.set_volume_scope(
+                            prime.ScopeDefinition(
+                                self._model,
+                                entity_type=prime.ScopeEntity.VOLUME,
+                                evaluation_type=prime.ScopeEvaluationType.ZONES,
+                                part_expression=part.name,
+                                zone_expression=prism_volume_expression,
+                            )
                         )
-                    )
-                    automesh_params.prism_control_ids = [prism_control.id]
+                        automesh_params.prism_control_ids = [prism_control.id]
 
-                automesh.mesh(part.id, automesh_params=automesh_params)
-                if prism_control:
-                    self._model.control_data.delete_controls([prism_control.id])
-                if len(volume_control_ids) > 0:
-                    self._model.control_data.delete_controls(volume_control_ids)
-            except:
-                self._logger.info(part.name + " not volume meshed.")
+                    automesh.mesh(part.id, automesh_params=automesh_params)
+                    if prism_control:
+                        self._model.control_data.delete_controls([prism_control.id])
+                    if len(volume_control_ids) > 0:
+                        self._model.control_data.delete_controls(volume_control_ids)
+                except:
+                    self._logger.info(part.name + " not volume meshed.")
 
     def __setup_sizing_for_wrapper(
         self,
@@ -1079,7 +957,7 @@ class Mesh:
 
     def __create_contact_preventions(
         self,
-        contact_prevention_controls: List,
+        contact_prevention_params: List,
         contact_prevention_size: float,
         min_size: float,
         max_size: float,
@@ -1120,7 +998,7 @@ class Mesh:
             geodesic_global_size_controls.append(geo_prox_size_control)
             for part in self._model.parts:
                 source = prime.ScopeDefinition(model=self._model, part_expression=part.name)
-                contact_prevention_controls.append(
+                contact_prevention_params.append(
                     prime.ContactPreventionParams(
                         model=self._model, source_scope=source, size=contact_prevention_size
                     )
@@ -1131,7 +1009,7 @@ class Mesh:
                         name_pattern_params=prime.NamePatternParams(self._model),
                     ):
                         source = prime.ScopeDefinition(model=self._model, label_expression=label)
-                        contact_prevention_controls.append(
+                        contact_prevention_params.append(
                             prime.ContactPreventionParams(
                                 model=self._model, source_scope=source, size=contact_prevention_size
                             )
@@ -1142,9 +1020,9 @@ class Mesh:
                 insufficient parts and labels identified to define contact."
             )
 
-    def __create_feature_recovery_controls(
+    def __create_feature_recovery_params(
         self,
-        feature_recovery_controls: List[prime.FeatureRecoveryParams],
+        feature_recovery_params: List[prime.FeatureRecoveryParams],
         extract_features: bool,
         create_intersection_loops: bool,
         use_existing_features: bool,
@@ -1155,6 +1033,7 @@ class Mesh:
         features = prime.FeatureExtraction(self._model)
         if extract_features:
             face_zonelets_prime_array = self._model.control_data.get_part_zonelets(scope=scope)
+            extraced_features = {}
             for item in face_zonelets_prime_array:
                 res = features.extract_features_on_face_zonelets(
                     part_id=item.part_id,
@@ -1167,6 +1046,7 @@ class Mesh:
                         label_name="__extracted__features__",
                     ),
                 )
+                extraced_features[item.part_id] = res.new_edge_zonelets
             feature_scope = scope
             feature_scope.label_expression = "__extracted__features__"
             extracted_feature_params = prime.FeatureRecoveryParams(
@@ -1174,7 +1054,7 @@ class Mesh:
                 enable_feature_octree_refinement=enable_feature_octree_refinement,
                 scope=feature_scope,
             )
-            feature_recovery_controls.append(extracted_feature_params)
+            feature_recovery_params.append(extracted_feature_params)
         if create_intersection_loops:
             for part in self._model.parts:
                 others = [item.name for item in self._model.parts if item.name != part.name]
@@ -1197,14 +1077,15 @@ class Mesh:
                     model=self._model, part_expression="*", label_expression="__intersect_loops__"
                 ),
             )
-            feature_recovery_controls.append(intersect_feature_params)
+            feature_recovery_params.append(intersect_feature_params)
         if use_existing_features:
             existing_feature_params = prime.FeatureRecoveryParams(
                 model=self._model,
                 enable_feature_octree_refinement=enable_feature_octree_refinement,
                 scope=scope,
             )
-            feature_recovery_controls.append(existing_feature_params)
+            feature_recovery_params.append(existing_feature_params)
+        return extraced_features
 
     def __process_size_fields(
         self,
@@ -1364,6 +1245,7 @@ class Mesh:
         normal_angle: float = 18.0,
         input_parts: str = "*",
         input_labels: str = "*",
+        keep_inputs: bool = False,
         region_extract: prime.WrapRegion = prime.WrapRegion.EXTERNAL,
         material_point: List[float] = None,
         extract_features: bool = True,
@@ -1379,9 +1261,9 @@ class Mesh:
         size_fields: List[prime.SizeField] = [],
         wrap_size_controls: List[prime.SizeControl] = [],
         remesh_size_controls: List[prime.SizeControl] = [],
-        feature_recovery_controls: List[prime.FeatureRecoveryParams] = [],
-        contact_prevention_controls: List[prime.ContactPreventionParams] = [],
-        leak_prevention_controls: List[prime.LeakPreventionParams] = [],
+        feature_recovery_params: List[prime.FeatureRecoveryParams] = [],
+        contact_prevention_params: List[prime.ContactPreventionParams] = [],
+        leak_prevention_params: List[prime.LeakPreventionParams] = [],
     ):
         """Wrap and remesh input.
 
@@ -1406,12 +1288,16 @@ class Mesh:
         Parameters
         ----------
         input_parts : str
-            Parts to be wrapped
+            Parts to be wrapped.
             Default = "*"
 
         input_labels : str
-            Labels to be wrapped
+            Labels to be wrapped.
             Default = "*"
+
+        keep_inputs : bool
+            Retain inputs.
+            Default = False
 
         region_extract : prime.WrapRegion
             Set region to wrap.
@@ -1482,14 +1368,14 @@ class Mesh:
         remesh_size_controls : List[prime.SizeControl], optional
             Set remesh size controls to use.
 
-        feature_recovery_controls : List[prime.FeatureRecoveryParams], optional
-            Set feature recovery controls to use.
+        feature_recovery_params : List[prime.FeatureRecoveryParams], optional
+            Set feature recovery parameters to use.
 
-        contact_prevention_controls : List[prime.ContactPreventionParams], optional
-            Set contact prevention controls to use.
+        contact_prevention_params : List[prime.ContactPreventionParams], optional
+            Set contact prevention parameters to use.
 
-        leak_prevention_controls : List[prime.LeakPreventionParams], optional
-            Set leak prevention controls to use.
+        leak_prevention_params : List[prime.LeakPreventionParams], optional
+            Set leak prevention parameters to use.
 
         Returns
         -------
@@ -1524,6 +1410,10 @@ class Mesh:
                         self._model, delete_geom_zonelets=False, delete_mesh_zonelets=True
                     )
                 )
+
+        params = prime.ScopeZoneletParams(model=self._model)
+        zonelets = self._model.control_data.get_scope_face_zonelets(scope=scope, params=params)
+        part_ids = self._model.control_data.get_scope_parts(scope=scope)
 
         global_size_controls = []
         geodesic_global_size_controls = []
@@ -1564,7 +1454,7 @@ class Mesh:
         # Add contact preventions
         if contact_prevention_size:
             self.__create_contact_preventions(
-                contact_prevention_controls,
+                contact_prevention_params,
                 contact_prevention_size,
                 min_size,
                 max_size,
@@ -1572,12 +1462,12 @@ class Mesh:
                 geodesic_global_size_controls,
                 scope,
             )
-        if contact_prevention_controls:
-            wrapper_control.set_contact_preventions(contact_prevention_controls)
+        if contact_prevention_params:
+            wrapper_control.set_contact_preventions(contact_prevention_params)
 
         # Add feature recoveries
-        self.__create_feature_recovery_controls(
-            feature_recovery_controls=feature_recovery_controls,
+        extracted_features = self.__create_feature_recovery_params(
+            feature_recovery_params=feature_recovery_params,
             extract_features=extract_features,
             create_intersection_loops=create_intersection_loops,
             use_existing_features=use_existing_features,
@@ -1585,12 +1475,12 @@ class Mesh:
             enable_feature_octree_refinement=enable_feature_octree_refinement,
             scope=scope,
         )
-        if feature_recovery_controls:
-            wrapper_control.set_feature_recoveries(feature_recovery_controls)
+        if feature_recovery_params:
+            wrapper_control.set_feature_recoveries(feature_recovery_params)
 
         # Add leak preventions
-        if leak_prevention_controls:
-            wrapper_control.set_leak_preventions(leak_prevention_controls)
+        if leak_prevention_params:
+            wrapper_control.set_leak_preventions(leak_prevention_params)
 
         computed_size_fields += self.__process_size_fields(
             global_size_controls=global_size_controls,
@@ -1627,7 +1517,8 @@ class Mesh:
         )
 
         volume_results = wrapped_part.compute_closed_volumes(
-            prime.ComputeVolumesParams(self._model)
+            prime.ComputeVolumesParams(model=self._model,
+                create_zones_type=prime.CreateVolumeZonesType.PERVOLUME)
         )
         self._logger.info(str(volume_results.volumes) + " volumes found.")
 
@@ -1639,15 +1530,31 @@ class Mesh:
         self._model.control_data.delete_controls(
             [
                 control.id
-                for control in self._model.control_data.wrapper_controls
+                for control in [wrapper_control]
                 + global_size_controls
                 + geodesic_global_size_controls
             ]
         )
 
+        # delete extracted features
+        for part_id in extracted_features:
+            part = self._model.get_part(part_id)
+            part.delete_zonelets(extracted_features[part_id])
+
         # delete size fields
         if len(computed_size_fields) > 0:
             self._model.delete_volumetric_size_fields(computed_size_fields)
+
+        # retain or delete inputs
+        if not keep_inputs:
+            self._logger.info("Deleting inputs to wrap.")
+            if zonelets:
+                for part_id in part_ids:
+                    part = self._model.get_part(part_id)
+                    [part.delete_zonelets([face]) for face in zonelets
+                        if face in part.get_face_zonelets()]
+            if part_ids:
+                self._model.delete_parts(part_ids)
 
         self._logger.info("Wrap done.")
         return wrapped_part
