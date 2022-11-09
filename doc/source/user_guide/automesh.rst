@@ -7,9 +7,9 @@ Volumetric Meshing
 
 PyPrime enables you to have fully automated volume meshing. Automeshing enables you to automatically create the volume mesh using 
 the different mesh elements available. Auto mesh generates the volume mesh for all computed volumetric regions of the mesh object 
-(i.e. meshed topofaces). ``ansys.meshing.prime.AutoMesh`` class provides you with APIs to perform automeshing. 
+(That is, meshed topofaces). ``ansys.meshing.prime.AutoMesh`` class provides you with APIs to perform automeshing. 
 
-Following the computation of volumetric size field as well as generating surface mesh, you can create volume mesh with tetrahedrons 
+Computing the volumetric size field and generating surface mesh, you can create volume mesh with tetrahedrons 
 from the model:
 
 .. code:: python
@@ -22,7 +22,7 @@ from the model:
 Meshing with Polyhedrons and Prisms
 -----------------------------------
 
-The following example shows you the procedure how to:
+The following example shows you the procedure to:
 
 * Create prism control and specify boundary layer setting
 * Volume mesh with Polyhedral elements
