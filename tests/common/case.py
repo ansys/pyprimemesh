@@ -21,7 +21,7 @@ class PrimeTestCase(unittest.TestCase):
     @classmethod
     def getRemoteClient(cls):
         ip = os.environ.get('PYPRIME_IP', '127.0.0.1')
-        port = os.environ.get('PYPRIME_PORT', 50055)
+        port = int(os.environ.get('PYPRIME_PORT', '50055'))
         if 'PYPRIME_EXTERNAL_SERVER' in os.environ:
             client = prime.Client(ip=ip, port=port)
         else:
