@@ -189,8 +189,6 @@ class Graphics(object):
             self._app = __import__('PrimeApp')
         else:
             self.__update_display_data()
-        if 'PYPRIME_SPHINX_BUILD' in os.environ:
-            self._sphinx_build = True
 
     def __update_display_data(self):
         """ """
