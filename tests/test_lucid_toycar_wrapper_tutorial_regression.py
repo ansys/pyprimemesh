@@ -26,7 +26,6 @@ class TestElbow(PrimeTestCase):
                 remesh_postwrap=False,
                 enable_feature_octree_refinement=False,
             )
-            self._model.delete_parts([self._model.get_part_by_name(part).id])
         diag = prime.SurfaceSearch(self._model)
         diag_params = prime.SurfaceDiagnosticSummaryParams(
             self._model,
@@ -102,10 +101,6 @@ class TestElbow(PrimeTestCase):
         )
         # Validate number of tri faces
         self.assertTrue(math.isclose(178102.0, float(part_summary_res.n_faces), rel_tol=0.02))
-
-        # delete unwanted parts
-        toDelete = [part.id for part in self._model.parts if part.name != wrap_car.name]
-        self._model.delete_parts(toDelete)
 
         mesher.create_zones_from_labels(
             """tunnel,cabin,outer,component21,component22,component24,component25,
