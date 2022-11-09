@@ -49,6 +49,7 @@ __DEFAULT_CONNECTION_TIMEOUT = 10.0
 __DEFAULT_COMM_LOG = False
 __MAX_MESSAGE_LENGTH = 4194310
 
+SPHINX_BUILD = False
 
 def ip():
     '''Gets the default ip address used throughout the library.'''
@@ -106,3 +107,8 @@ def get_output_path():
 def get_output_path_for_containers():
     '''Gets the server side output directory used by containers'''
     return CONTAINER_OUTDIR
+
+
+def get_sphinx_build():
+    '''Gets the flag for if sphinx build is being used'''
+    return SPHINX_BUILD

@@ -5,7 +5,7 @@ import numpy as np
 import pyvista as pv
 from pyvista import _vtk
 import os
-from ansys.meshing.prime.internals import config
+from ansys.meshing.prime.internals import defaults
 
 def compute_face_list_from_structured_nodes(nodes, dim):
     flist = []
@@ -189,7 +189,7 @@ class Graphics(object):
         else:
             self.__update_display_data()
         if 'PYPRIME_SPHINX_BUILD' in os.environ:
-            config.set_sphinx_build(True)
+            defaults.SPHINX_BUILD = True
 
     def __update_display_data(self):
         """ """
@@ -449,7 +449,7 @@ class Graphics(object):
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
-        if config.sphinx_build() == False:
+        if defaults.SPHINX_BUILD == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
                 value=int(self._color_by_type) is ColorByType.ZONELET,
@@ -475,7 +475,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        if config.sphinx_build() == False:
+        if defaults.SPHINX_BUILD == False:
             self.__update_bt_icons()
         self._plotter.show()
 
@@ -511,7 +511,7 @@ class Graphics(object):
                     or disp_mesh.type != DisplayMeshType.SPLINESURFACE
                 )
             ]
-        if config.sphinx_build() == False:
+        if defaults.SPHINX_BUILD == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
                 value=self._color_by_type is ColorByType.ZONELET,
@@ -537,7 +537,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        if config.sphinx_build() == False:
+        if defaults.SPHINX_BUILD == False:
             self.__update_bt_icons()
         self._plotter.show()
 
@@ -571,7 +571,7 @@ class Graphics(object):
                     if (disp_mesh._id in disp_ids)
                 ]
 
-        if config.sphinx_build() == False:
+        if defaults.SPHINX_BUILD == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
                 value=self._color_by_type is ColorByType.ZONELET,
@@ -597,7 +597,7 @@ class Graphics(object):
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
         # self._plotter.window_size = [1920, 1017]
-        if config.sphinx_build() == False:
+        if defaults.SPHINX_BUILD == False:
             self.__update_bt_icons()
         self._plotter.show()
 
