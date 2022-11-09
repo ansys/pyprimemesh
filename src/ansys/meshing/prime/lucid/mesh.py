@@ -1257,12 +1257,12 @@ class Mesh:
         remesh_postwrap: bool = True,
         recompute_remesh_sizes: bool = False,
         use_existing_size_fields: bool = False,
-        size_fields: List[prime.SizeField] = [],
-        wrap_size_controls: List[prime.SizeControl] = [],
-        remesh_size_controls: List[prime.SizeControl] = [],
-        feature_recovery_params: List[prime.FeatureRecoveryParams] = [],
-        contact_prevention_params: List[prime.ContactPreventionParams] = [],
-        leak_prevention_params: List[prime.LeakPreventionParams] = [],
+        size_fields: List[prime.SizeField] = None,
+        wrap_size_controls: List[prime.SizeControl] = None,
+        remesh_size_controls: List[prime.SizeControl] = None,
+        feature_recovery_params: List[prime.FeatureRecoveryParams] = None,
+        contact_prevention_params: List[prime.ContactPreventionParams] = None,
+        leak_prevention_params: List[prime.LeakPreventionParams] = None,
     ):
         """Wrap and remesh input.
 
@@ -1389,6 +1389,19 @@ class Mesh:
         >>> mesh.write("/mesh_output.pmdat")
         >>> prime_session.exit()
         """
+        if size_fields is None:
+            size_fields = []
+        if wrap_size_controls is None:
+            wrap_size_controls = []
+        if remesh_size_controls is None:
+            remesh_size_controls = []
+        if feature_recovery_params is None:
+            feature_recovery_params = []
+        if contact_prevention_params is None:
+            contact_prevention_params = []
+        if leak_prevention_params is None:
+            leak_prevention_params = []
+
         global_sf = prime.GlobalSizingParams(model=self._model)
         scope = prime.ScopeDefinition(
             model=self._model,
