@@ -9,14 +9,14 @@ Examples
 --------
 Print the version
 
->>> from ansys.product import library
->>> print(library.__version__)
-0.1.0.dev0
+>>> from ansys.meshing import prime
+>>> print(prime.__version__)
+0.2.0.dev17
 
 """
 
 # major, minor, patch
-version_info = 0, 2, 0, 'dev15'
+version_info = 0, 2, 0, 'dev17'
 
 # Nice string for the version
 __version__ = '.'.join(map(str, version_info))

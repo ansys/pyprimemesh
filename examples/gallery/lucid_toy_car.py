@@ -19,43 +19,43 @@ We will use several meshing utilities available in the lucid class for convenien
 
 Procedure
 ~~~~~~~~~
-* Launch Prime instance and instantiate meshing utilities from lucid class.
+* Launch Ansys Prime Server instance and instantiate meshing utilities from lucid class.
 * Import geometry.
 * Coarse wrap parts with holes to cleanup.
 * Extract fluid region using wrapper.
 * Check wrap surface is closed and suitable quality.
-* Delete all unneeded parts.
-* Compute volumes and mesh only fluid with tetrahedral elements and boundary layer refinement.
+* Mesh only fluid with tetrahedral elements and boundary layer refinement.
 * Create face zones from labels imported from geometry.
 * Print statistics on generated mesh.
 * Write a cas file for use in the Fluent solver.
-* Exit the Prime session.
+* Exit the PyPrime session.
 """
 
 ###############################################################################
-# Import all necessary modules and launch an instance of Prime.
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import all necessary modules and launch an instance of Ansys Prime Server.
+# Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 
-# start prime and get the model
+# Start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
 display = Graphics(model=model)
 
-# instantiate meshing utilities from lucid class
+# Instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model)
 
 ###############################################################################
 # Import geometry.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Download the toy car geometry file (.fmd file exported by SpaceClaim).
+# Import geometry.
 
-# Download the toy car geometry file (.fmd file exported by SpaceClaim)
 toy_car = prime.examples.download_toy_car_fmd()
-
-# Import geometry
 mesh_util.read(file_name=toy_car)
 
 ###############################################################################
@@ -78,7 +78,6 @@ for part_name in coarse_wrap:
         remesh_postwrap=False,
         enable_feature_octree_refinement=False,
     )
-    model.delete_parts([model.get_part_by_name(part_name).id])
 
 ###############################################################################
 # Extract fluid region using wrapper.
@@ -131,20 +130,9 @@ for summary_res in qual_summary_res.quality_results:
     print("Faces above limit: ", summary_res.n_found)
 
 ###############################################################################
-# Delete all unneeded parts.
+# Mesh only fluid with tetrahedral elements and boundary layer refinement.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# keep only the wrap surface
-toDelete = [part.id for part in model.parts if part.name != wrap_part.name]
-model.delete_parts(toDelete)
-
-###############################################################################
-# Compute volumes and mesh only fluid with tetrahedral elements and boundary layer refinement.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-mesh_util.compute_volumes(part_expression=wrap_part.name)
-
-# only the wrap part is now present
 # volume zones exist ready for volume meshing and passing to the solver
 print(model)
 
@@ -211,7 +199,7 @@ mesh_util.write(os.path.join(os.getcwd(), "toy_car_lucid.cas"))
 print("\nCurrent working directory for exported files: ", os.getcwd())
 
 ###############################################################################
-# Exit the Prime session.
+# Exit the PyPrime session.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

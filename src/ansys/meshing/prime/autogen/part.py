@@ -248,7 +248,7 @@ class Part(CoreObject):
         return RemoveLabelResults(model = self._model, json_data = result)
 
     def get_face_zones_of_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get ids of zones with name matching the given name pattern.
+        """ Get ids of face zones with name matching the given name pattern.
 
 
         Parameters
@@ -261,7 +261,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return list of zone ids matching the zone name pattern.
+            Return list of face zone ids matching the zone name pattern.
 
 
         Examples
@@ -307,6 +307,37 @@ class Part(CoreObject):
         self._model._print_logs_before_command("get_face_zonelets_of_zone_name_pattern", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_face_zonelets_of_zone_name_pattern")
+        return result
+
+    def get_volumes_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Get volume ids of zones with name matching the given name pattern.
+
+
+        Parameters
+        ----------
+        zone_name_pattern : str
+            Name pattern to be matched with zone name.
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match zone name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Return volume ids of zones with name matching the name pattern.
+
+
+        Examples
+        --------
+        >>> name_pattern_params = prime.NamePatternParams(model = model)
+        >>> volumes = part.get_volumes_of_zone_name_pattern("body*", name_pattern_params)
+
+        """
+        args = {"zone_name_pattern" : zone_name_pattern,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetVolumesOfZoneNamePattern"
+        self._model._print_logs_before_command("get_volumes_of_zone_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volumes_of_zone_name_pattern")
         return result
 
     def get_topo_faces_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
@@ -510,7 +541,7 @@ class Part(CoreObject):
 
         Examples
         --------
-        >>> params = prime.ComputeVolumesParams(model = model, create_zone_per_volume = True)
+        >>> params = prime.ComputeVolumesParams(model = model, create_zones_type = prime.CreateVolumeZonesType.PERVOLUME)
         >>> results = part.compute_closed_volumes(params)
 
         """
@@ -520,6 +551,36 @@ class Part(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("compute_closed_volumes", ComputeVolumesResults(model = self._model, json_data = result))
         return ComputeVolumesResults(model = self._model, json_data = result)
+
+    def extract_volumes(self, face_zonelets : Iterable[int], params : ExtractVolumesParams) -> ExtractVolumesResults:
+        """ Extract volumes connected to given face zonelets.
+
+
+        Parameters
+        ----------
+        face_zonelets : Iterable[int]
+            Ids of face zonelets connected to volumes.
+        params : ExtractVolumesParams
+            Parameters to compute volumes.
+
+        Returns
+        -------
+        ExtractVolumesResults
+            Return the ExtractVolumesResults.
+
+
+        Examples
+        --------
+        >>> results = part.extract_volumes(face_zonelets, params)
+
+        """
+        args = {"face_zonelets" : face_zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/ExtractVolumes"
+        self._model._print_logs_before_command("extract_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("extract_volumes", ExtractVolumesResults(model = self._model, json_data = result))
+        return ExtractVolumesResults(model = self._model, json_data = result)
 
     def compute_topo_volumes(self, params : ComputeVolumesParams) -> ComputeTopoVolumesResults:
         """ Compute topovolumes by identifying closed volumes defined by topofaces of the part.
@@ -538,7 +599,7 @@ class Part(CoreObject):
 
         Examples
         --------
-        >>> params = prime.ComputeVolumesParams(model = model, create_zone_per_volume = True)
+        >>> params = prime.ComputeVolumesParams(model = model, create_zones_type = prime.CreateVolumeZonesType.PERVOLUME)
         >>> results = part.compute_topo_volumes(params)
 
         """
@@ -741,6 +802,33 @@ Return the ids of topofaces.
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("add_volumes_to_zone", AddToZoneResults(model = self._model, json_data = result))
         return AddToZoneResults(model = self._model, json_data = result)
+
+    def get_face_zone_of_zonelet(self, zonelet : int) -> int:
+        """ Gets the face zone of given zonelet.
+
+
+        Parameters
+        ----------
+        zonelet : int
+            Id of zonelet.
+
+        Returns
+        -------
+        int
+            Returns the id of face zone.
+
+
+        Examples
+        --------
+        >>> face_zone = part.get_face_zone_of_zonelet(zonelet)
+
+        """
+        args = {"zonelet" : zonelet}
+        command_name = "PrimeMesh::Part/GetFaceZoneOfZonelet"
+        self._model._print_logs_before_command("get_face_zone_of_zonelet", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_face_zone_of_zonelet")
+        return result
 
     def get_face_zones(self) -> Iterable[int]:
         """ Get all the face zones of the part.
