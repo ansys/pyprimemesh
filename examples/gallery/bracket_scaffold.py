@@ -5,7 +5,8 @@
 Meshing a mid-surfaced bracket for a structural analysis
 =========================================================
 
-**Summary**: This example illustrates how to use topology based connection to generate conformal surface mesh.
+**Summary**: This example illustrates how to use topology based connection 
+to generate conformal surface mesh.
 
 Objective
 ~~~~~~~~~
