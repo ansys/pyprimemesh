@@ -92,4 +92,4 @@ To read a mesh file:
        model = prime_client.model
 
        io = prime.FileIO(model)
-       _ = io.read_pmdat(r'E:\Temp\bix.pmdat', pyprime.FileReadParams(model=model))
+       _ = io.read_pmdat(r'E:\Temp\box.pmdat', pyprime.FileReadParams(model=model))
