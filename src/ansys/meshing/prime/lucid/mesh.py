@@ -1245,6 +1245,7 @@ class Mesh:
         normal_angle: float = 18.0,
         input_parts: str = "*",
         input_labels: str = "*",
+        keep_inputs: bool = False,
         region_extract: prime.WrapRegion = prime.WrapRegion.EXTERNAL,
         material_point: List[float] = None,
         extract_features: bool = True,
@@ -1287,12 +1288,16 @@ class Mesh:
         Parameters
         ----------
         input_parts : str
-            Parts to be wrapped
+            Parts to be wrapped.
             Default = "*"
 
         input_labels : str
-            Labels to be wrapped
+            Labels to be wrapped.
             Default = "*"
+
+        keep_inputs : bool
+            Retain inputs.
+            Default = False
 
         region_extract : prime.WrapRegion
             Set region to wrap.
@@ -1419,6 +1424,10 @@ class Mesh:
                     )
                 )
 
+        params = prime.ScopeZoneletParams(model=self._model)
+        zonelets = self._model.control_data.get_scope_face_zonelets(scope=scope, params=params)
+        part_ids = self._model.control_data.get_scope_parts(scope=scope)
+
         global_size_controls = []
         geodesic_global_size_controls = []
         computed_size_fields = []
@@ -1521,7 +1530,8 @@ class Mesh:
         )
 
         volume_results = wrapped_part.compute_closed_volumes(
-            prime.ComputeVolumesParams(self._model)
+            prime.ComputeVolumesParams(model=self._model,
+                create_zones_type=prime.CreateVolumeZonesType.PERVOLUME)
         )
         self._logger.info(str(volume_results.volumes) + " volumes found.")
 
@@ -1547,6 +1557,17 @@ class Mesh:
         # delete size fields
         if len(computed_size_fields) > 0:
             self._model.delete_volumetric_size_fields(computed_size_fields)
+
+        # retain or delete inputs
+        if not keep_inputs:
+            self._logger.info("Deleting inputs to wrap.")
+            if zonelets:
+                for part_id in part_ids:
+                    part = self._model.get_part(part_id)
+                    [part.delete_zonelets([face]) for face in zonelets
+                        if face in part.get_face_zonelets()]
+            if part_ids:
+                self._model.delete_parts(part_ids)
 
         self._logger.info("Wrap done.")
         return wrapped_part
