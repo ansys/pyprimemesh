@@ -1249,6 +1249,7 @@ class Mesh:
         normal_angle: float = 18.0,
         input_parts: str = "*",
         input_labels: str = "*",
+        keep_inputs: bool = False,
         region_extract: prime.WrapRegion = prime.WrapRegion.EXTERNAL,
         material_point: List[float] = None,
         extract_features: bool = True,
@@ -1261,12 +1262,12 @@ class Mesh:
         remesh_postwrap: bool = True,
         recompute_remesh_sizes: bool = False,
         use_existing_size_fields: bool = False,
-        size_fields: List[prime.SizeField] = [],
-        wrap_size_controls: List[prime.SizeControl] = [],
-        remesh_size_controls: List[prime.SizeControl] = [],
-        feature_recovery_params: List[prime.FeatureRecoveryParams] = [],
-        contact_prevention_params: List[prime.ContactPreventionParams] = [],
-        leak_prevention_params: List[prime.LeakPreventionParams] = [],
+        size_fields: List[prime.SizeField] = None,
+        wrap_size_controls: List[prime.SizeControl] = None,
+        remesh_size_controls: List[prime.SizeControl] = None,
+        feature_recovery_params: List[prime.FeatureRecoveryParams] = None,
+        contact_prevention_params: List[prime.ContactPreventionParams] = None,
+        leak_prevention_params: List[prime.LeakPreventionParams] = None,
     ):
         """Wrap and remesh input.
 
@@ -1291,12 +1292,16 @@ class Mesh:
         Parameters
         ----------
         input_parts : str
-            Parts to be wrapped
+            Parts to be wrapped.
             Default = "*"
 
         input_labels : str
-            Labels to be wrapped
+            Labels to be wrapped.
             Default = "*"
+
+        keep_inputs : bool
+            Retain inputs.
+            Default = False
 
         region_extract : prime.WrapRegion
             Set region to wrap.
@@ -1393,6 +1398,19 @@ class Mesh:
         >>> mesh.write("/mesh_output.pmdat")
         >>> prime_session.exit()
         """
+        if size_fields is None:
+            size_fields = []
+        if wrap_size_controls is None:
+            wrap_size_controls = []
+        if remesh_size_controls is None:
+            remesh_size_controls = []
+        if feature_recovery_params is None:
+            feature_recovery_params = []
+        if contact_prevention_params is None:
+            contact_prevention_params = []
+        if leak_prevention_params is None:
+            leak_prevention_params = []
+
         global_sf = prime.GlobalSizingParams(model=self._model)
         scope = prime.ScopeDefinition(
             model=self._model,
@@ -1409,6 +1427,10 @@ class Mesh:
                         self._model, delete_geom_zonelets=False, delete_mesh_zonelets=True
                     )
                 )
+
+        params = prime.ScopeZoneletParams(model=self._model)
+        zonelets = self._model.control_data.get_scope_face_zonelets(scope=scope, params=params)
+        part_ids = self._model.control_data.get_scope_parts(scope=scope)
 
         global_size_controls = []
         geodesic_global_size_controls = []
@@ -1512,7 +1534,8 @@ class Mesh:
         )
 
         volume_results = wrapped_part.compute_closed_volumes(
-            prime.ComputeVolumesParams(self._model)
+            prime.ComputeVolumesParams(model=self._model,
+                create_zones_type=prime.CreateVolumeZonesType.PERVOLUME)
         )
         self._logger.info(str(volume_results.volumes) + " volumes found.")
 
@@ -1538,6 +1561,17 @@ class Mesh:
         # delete size fields
         if len(computed_size_fields) > 0:
             self._model.delete_volumetric_size_fields(computed_size_fields)
+
+        # retain or delete inputs
+        if not keep_inputs:
+            self._logger.info("Deleting inputs to wrap.")
+            if zonelets:
+                for part_id in part_ids:
+                    part = self._model.get_part(part_id)
+                    [part.delete_zonelets([face]) for face in zonelets
+                        if face in part.get_face_zonelets()]
+            if part_ids:
+                self._model.delete_parts(part_ids)
 
         self._logger.info("Wrap done.")
         return wrapped_part
