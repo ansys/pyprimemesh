@@ -35,57 +35,65 @@ Procedure
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
+# From the PyPrime client get the model.
 # Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 
-# Start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
 display = Graphics(model=model)
 
-# Instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model)
 
 ###############################################################################
-# Import geometry.
+# Import Geometry
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Download the toy car geometry file (.fmd file exported by SpaceClaim).
-# Import geometry.
+# Import geometry and display everything except tunnel.
 
 toy_car = prime.examples.download_toy_car_fmd()
+
 mesh_util.read(file_name=toy_car)
 
+scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
+display(scope=scope)
+
 ###############################################################################
-# Coarse wrap parts with holes to cleanup.
+# Close Holes
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Several parts are open surfaces (with holes).
+# Coarse wrap to close holes and delete originals.
+# We could use leakage detection to close these regions.
+# Here we use a coarse wrap and disable feature edge refinement to walk over the holes.
+# As this is not the final wrap we do not need to remesh after the wrap.
+# Wrapping each object in turn we avoid the coarse wrap bridging across narrow gaps.
 
-# several objects are open surfaces (with holes)
-# coarse wrap to close holes and delete originals
-display(scope=prime.ScopeDefinition(model, part_expression="cabin,exhaust,engine"))
-
-# we could use leakage detection to close these regions
-# here we use a coarse wrap and disable feature edge refinement to walk over the holes
-# as this is not the final wrap we do not need to remesh after the wrap
-# wrapping each object in turn we avoid the coarse wrap bridging across narrow gaps
 coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
+
 for part_name in coarse_wrap:
-    mesh_util.wrap(
+    # Each open part before wrap
+    display(scope=prime.ScopeDefinition(model, part_expression=part_name))
+    closed_part = mesh_util.wrap(
         input_parts=part_name,
         max_size=coarse_wrap[part_name],
         remesh_postwrap=False,
         enable_feature_octree_refinement=False,
     )
+    # Closed part with no hole
+    display(scope=prime.ScopeDefinition(model, part_expression=closed_part.name))
 
 ###############################################################################
-# Extract fluid region using wrapper.
+# Extract Fluid using Wrapper
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Wrap full model and extract largest internal region as the fluid.
+# Create edges at intersecting regions to improve quality.
+# Refining mesh to avoid contact between different parts.
+# The new wrap object replaces all original geometry unless "keep_input"
+# is set to TRUE.  Volumes are generated from the wrap for use later.
 
-# wrap full model and extract largest internal region as the fluid
-# creating edges at intersecting regions to improve quality
-# refining mesh to avoid contact between different parts
 wrap_part = mesh_util.wrap(
     min_size=0.1,
     max_size=2.0,
@@ -94,16 +102,13 @@ wrap_part = mesh_util.wrap(
     contact_prevention_size=0.1,
 )
 
-# notice that no volume zones exist as yet for the wrap
-# volume zones must be computed to define regions to volume mesh
-# the model contains many geometry entities that are no longer needed
 print(model)
 
 ###############################################################################
-# Check wrap surface is closed and suitable quality.
+# Check Wrap
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Check wrap surface is closed and suitable quality to use as surface mesh.
 
-# check wrap surface has valid connectivity and quality to use as surface mesh
 scope = prime.ScopeDefinition(model=model, part_expression=wrap_part.name)
 diag = prime.SurfaceSearch(model)
 diag_params = prime.SurfaceDiagnosticSummaryParams(
