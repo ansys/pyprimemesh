@@ -15,7 +15,7 @@ PyPrime Documentation |version| BETA
 Introduction and Purpose
 ------------------------
 
-PyPrime is part of the `PyAnsys <pyansys_>`_ effort to facilitate the use of Ansys technologies directly
+PyPrime is part of the `PyAnsys <pyansys>`_ effort to facilitate the use of Ansys technologies directly
 from Python. PyPrime consists of various python modules that help you to acquire geometry and
 prepare surface and volume meshes for multiple solvers. Its primary package is ``ansys-meshing-prime``.
 
