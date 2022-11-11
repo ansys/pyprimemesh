@@ -111,6 +111,7 @@ print(model)
 
 scope = prime.ScopeDefinition(model=model, part_expression=wrap_part.name)
 diag = prime.SurfaceSearch(model)
+
 diag_params = prime.SurfaceDiagnosticSummaryParams(
     model,
     scope=scope,
@@ -118,7 +119,9 @@ diag_params = prime.SurfaceDiagnosticSummaryParams(
     compute_multi_edges=True,
     compute_self_intersections=True,
 )
+
 diag_res = diag.get_surface_diagnostic_summary(diag_params)
+
 print('Number of free edges', diag_res.n_free_edges)
 print('Number of multi edges', diag_res.n_multi_edges)
 print('Number of self intersections', diag_res.n_self_intersections)
@@ -127,6 +130,7 @@ face_quality_measures = [prime.FaceQualityMeasure.SKEWNESS, prime.FaceQualityMea
 quality_params = prime.SurfaceQualitySummaryParams(
     model=model, scope=scope, face_quality_measures=face_quality_measures, quality_limit=[0.9, 20]
 )
+
 quality = prime.SurfaceSearch(model)
 qual_summary_res = quality.get_surface_quality_summary(quality_params)
 
@@ -135,13 +139,15 @@ for summary_res in qual_summary_res.quality_results:
     print("Faces above limit: ", summary_res.n_found)
 
 ###############################################################################
-# Mesh only fluid with tetrahedral elements and boundary layer refinement.
+# Volume Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Mesh only fluid volume with tetrahedral elements and boundary layer refinement.
+# Not meshing other volumetric regions.
+# Volume zones exist already for volume meshing and passing to the solver.
+# The largest face zonelet is used by default to define volume zone names at creation.
 
-# volume zones exist ready for volume meshing and passing to the solver
 print(model)
 
-# the largest face zonelet
 volume = prime.lucid.VolumeScope(
     part_expression=wrap_part.name,
     entity_expression="tunnel*",
@@ -159,19 +165,20 @@ mesh_util.volume_mesh(
 display(update=True)
 
 ###############################################################################
-# Create face zones from labels imported from geometry.
+# Create Zones
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# Create face zones from labels imported from geometry.
 # last label will win so order can be important
+
 label_list = wrap_part.get_labels()
 all_labels = ",".join(label_list)
 mesh_util.create_zones_from_labels(all_labels)
 
 ###############################################################################
-# Print statistics on generated mesh.
+# Print Mesh Stats
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Print statistics on generated mesh.
 
-## mesh checks
 vtool = prime.VolumeMeshTool(model=model)
 result = vtool.check_mesh(part_id=wrap_part.id, params=prime.CheckMeshParams(model=model))
 
@@ -197,8 +204,9 @@ part_summary_res = wrap_part.get_summary(
 print("\nNo. of faces : ", part_summary_res.n_faces)
 
 ###############################################################################
-# Write a cas file for use in the Fluent solver.
+# Write Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Write a cas file for use in the Fluent solver.
 
 mesh_util.write(os.path.join(os.getcwd(), "toy_car_lucid.cas"))
 print("\nCurrent working directory for exported files: ", os.getcwd())
