@@ -44,7 +44,7 @@ import os
 # Start Ansys Prime Server, connect PyPrime client and get the model
 prime_client = prime.launch_prime()
 model = prime_client.model
-display = Graphics(model)
+display = Graphics(model=model)
 
 # Instantiate meshing utilities from lucid class
 mesh_util = prime.lucid.Mesh(model)
