@@ -19,7 +19,7 @@ prismatic boundary layers.
 
 .. figure:: ../../../images/pipe_tee.png
    :align: center
-   :width: 400
+   :width: 800
 
    **Thermal structural and fluid flow meshes**
 
