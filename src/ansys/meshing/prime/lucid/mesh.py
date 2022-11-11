@@ -365,10 +365,14 @@ class Mesh:
         if min_size == None and max_size == None:
             global_sizing = self._model.get_global_sizing_params()
             self._logger.warning(
-                "Min or Max size not provided. Using max global size " + str(global_sizing.max)
+                "Min and Max size not provided. Using max global size " + str(global_sizing.max)
+                + " and min global size " + str(global_sizing.min)
             )
-            self.__constant_size_surface_mesh(
-                min_size=global_sizing.max, generate_quads=generate_quads, scope=scope
+            self.__variable_size_surface_mesh(
+                min_size=global_sizing.min,
+                max_size=global_sizing.max,
+                generate_quads=generate_quads,
+                scope=scope
             )
         elif min_size == None or max_size == None:
             if min_size is None:
@@ -1258,12 +1262,12 @@ class Mesh:
         remesh_postwrap: bool = True,
         recompute_remesh_sizes: bool = False,
         use_existing_size_fields: bool = False,
-        size_fields: List[prime.SizeField] = [],
-        wrap_size_controls: List[prime.SizeControl] = [],
-        remesh_size_controls: List[prime.SizeControl] = [],
-        feature_recovery_params: List[prime.FeatureRecoveryParams] = [],
-        contact_prevention_params: List[prime.ContactPreventionParams] = [],
-        leak_prevention_params: List[prime.LeakPreventionParams] = [],
+        size_fields: List[prime.SizeField] = None,
+        wrap_size_controls: List[prime.SizeControl] = None,
+        remesh_size_controls: List[prime.SizeControl] = None,
+        feature_recovery_params: List[prime.FeatureRecoveryParams] = None,
+        contact_prevention_params: List[prime.ContactPreventionParams] = None,
+        leak_prevention_params: List[prime.LeakPreventionParams] = None,
     ):
         """Wrap and remesh input.
 
@@ -1394,6 +1398,19 @@ class Mesh:
         >>> mesh.write("/mesh_output.pmdat")
         >>> prime_session.exit()
         """
+        if size_fields is None:
+            size_fields = []
+        if wrap_size_controls is None:
+            wrap_size_controls = []
+        if remesh_size_controls is None:
+            remesh_size_controls = []
+        if feature_recovery_params is None:
+            feature_recovery_params = []
+        if contact_prevention_params is None:
+            contact_prevention_params = []
+        if leak_prevention_params is None:
+            leak_prevention_params = []
+
         global_sf = prime.GlobalSizingParams(model=self._model)
         scope = prime.ScopeDefinition(
             model=self._model,

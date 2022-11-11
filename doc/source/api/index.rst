@@ -10,3 +10,5 @@ This section gives an overview of the API of all of the classes, functions and a
    :toctree: _autosummary
    
    ansys.meshing.prime
+   ansys.meshing.prime.examples
+   ansys.meshing.prime.lucid
