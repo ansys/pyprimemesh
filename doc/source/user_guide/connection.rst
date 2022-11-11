@@ -1,8 +1,8 @@
-.. _ref_index_features:
+.. _ref_index_connection:
 
-*********
-Features
-*********
+**********
+Connection
+**********
 
 ========
 Connect
