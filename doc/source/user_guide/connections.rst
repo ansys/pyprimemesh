@@ -1,8 +1,8 @@
-.. _ref_index_connection:
+.. _ref_index_connections:
 
-**********
-Connection
-**********
+***********
+Connections
+***********
 
 ========
 Connect
