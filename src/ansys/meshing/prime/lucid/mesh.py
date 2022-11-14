@@ -146,6 +146,10 @@ class Mesh:
         create zones.  Label names will be combined if overlaps occur and
         separate zones created.
 
+        For example, if "LabelA" and "LabelB" had overlapping TopoFaces then
+        the following three zones would be created;
+        "LabelA", "LabelB" and "LabelA_LabelB" for the overlap.
+
         Parameters
         ----------
         label_expression : str
@@ -153,6 +157,12 @@ class Mesh:
 
         conversion_method : LabelToZoneMethod
             Method used to convert label to zones.
+
+        Examples
+        --------
+        >>> from ansys.meshing.prime import lucid
+        >>> mesh_util = lucid.Mesh(model)
+        >>> mesh_util.create_zones_from_labels()
         """
         if conversion_method != LabelToZoneMethod.SIMPLE:
             self._logger.error("Invalid label to zone conversion method")
@@ -1451,14 +1461,14 @@ class Mesh:
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> from ansys.meshing.prime.core import lucid
-        >>> prime_session = prime.launch_prime()
-        >>> model = prime_session.model
+        >>> from ansys.meshing.prime import lucid
+        >>> prime_client = prime.launch_prime()
+        >>> model = prime_client.model
         >>> mesh = lucid.Mesh(model)
         >>> mesh.read("/my_geometry.stl")
         >>> mesh.wrap(min_size=1, max_size=20, create_intersection_loops=True)
         >>> mesh.write("/mesh_output.pmdat")
-        >>> prime_session.exit()
+        >>> prime_client.exit()
         """
         if size_fields is None:
             size_fields = []
