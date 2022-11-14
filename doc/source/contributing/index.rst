@@ -4,6 +4,7 @@
 Contributing
 =============
 
+Contributing provides information on how you can contibute to PyPrime code.
 Overall guidance on contributing to a PyAnsys library appears in the
 `Contributing <https://dev.docs.pyansys.com/overview/contributing.html>`_ topic
 in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
@@ -11,7 +12,7 @@ with it and all `Guidelines and Best Practices
 <https://dev.docs.pyansys.com/guidelines/index.html>`_ before attempting to
 contribute to PyPrime.
  
-The following contribution information is specific to PyPrime.
+The following contribution information is specific to PyPrime:
 
 ------------------------------
 Cloning the Source Repository
@@ -25,6 +26,7 @@ You can clone the source repository from PyPrime GitHub and install the latest v
 ---------------
 Posting Issues
 ---------------
+
 Use the `PyPrime Issues <https://github.com/pyansys/pyprime/issues>`_
 page to submit questions, report bugs, and request new features.
 
@@ -37,10 +39,11 @@ Documentation for the latest stable release of PyPrime is hosted at
 `PyPrime Documentation <https://prime.docs.pyansys.com>`_.
 
 -----------------------------------------
-Code Structure and Contributing New Code
+Structuring Code  and Contributing New Code
 -----------------------------------------
-Much of the PyPrime code base is auto-generated based on the Prime server.  For the auto-generated 
-code, contributions are therefore limited to raising issues and enhancement requests.  
+
+Most of the PyPrime code base is auto-generated based on the Ansys Prime server.  For the auto-generated 
+code, contributions are limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.
 
@@ -53,12 +56,13 @@ for contributions are:
 
 `High Level APIs <https://github.com/pyansys/pyprime/blob/main/src/ansys/meshing/prime/lucid>`_
 
-If you have an idea on how to enhance PyPrime, consider first creating an issue as a feature request 
-which we can use as a discussion thread to work on for implementing the contribution.
+If you have an idea on how to enhance PyPrime, first create an issue as a feature request 
+which PyPrime team can use as a discussion thread to work on for implementing the contribution.
 
 -----------
 Code Style
 -----------
+
 PyPrime follows PEP8 standard as outlined in the `PyAnsys Development Guide
 <https://dev.docs.pyansys.com>`_ and implements style checking using
 `pre-commit <https://pre-commit.com/>`_.
@@ -82,7 +86,8 @@ This way, it's not possible for you to push code that fails the style checks. Fo
 ----------
 Licensing
 ----------
-All contributed code will be licensed under The MIT License found in the repository.
-If you did not write the code yourself, it is your responsibility to ensure that the existing license is compatible 
+
+All contributed code are licensed under The MIT License found in the repository.
+If you did not write the code yourself, ensure that the existing license is compatible 
 and included in the contributed files or you can obtain permission from the original author to relicense the code.
 
