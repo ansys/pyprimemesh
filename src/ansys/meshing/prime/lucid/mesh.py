@@ -142,6 +142,14 @@ class Mesh:
         The method finds the entities by labels and then adds them to the
         zone with the same name as label.
 
+        If no label_expression is provided then all labels will be flattened to
+        create zones.  Label names will be combined if overlaps occur and
+        separate zones created.
+
+        For example, if "LabelA" and "LabelB" had overlapping TopoFaces then
+        the following three zones would be created;
+        "LabelA", "LabelB" and "LabelA_LabelB" for the overlap.
+
         Parameters
         ----------
         label_expression : str
@@ -149,37 +157,101 @@ class Mesh:
 
         conversion_method : LabelToZoneMethod
             Method used to convert label to zones.
+
+        Examples
+        --------
+        >>> from ansys.meshing.prime import lucid
+        >>> mesh_util = lucid.Mesh(model)
+        >>> mesh_util.create_zones_from_labels()
         """
         if conversion_method != LabelToZoneMethod.SIMPLE:
             self._logger.error("Invalid label to zone conversion method")
 
-        labels = []
-        for part in self._model.parts:
-            lbls = part.get_labels()
-            for l in lbls:
-                if l not in labels and check_name_pattern(label_expression, l):
-                    labels.append(l)
-
-        for label in labels:
-            face_zone = None
+        if label_expression:
+            labels = []
             for part in self._model.parts:
-                topo_faces = part.get_topo_faces()
-                if len(topo_faces) > 0:
-                    in_topo_faces = part.get_topo_faces_of_label_name_pattern(
-                        label, prime.NamePatternParams(model=self._model)
-                    )
-                    if len(in_topo_faces) > 0:
-                        if face_zone == None:
-                            face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
-                        part.add_topo_entities_to_zone(face_zone.zone_id, in_topo_faces)
-                else:
-                    in_face_zonelets = part.get_face_zonelets_of_label_name_pattern(
-                        label, prime.NamePatternParams(model=self._model)
-                    )
-                    if len(in_face_zonelets) > 0:
-                        if face_zone == None:
-                            face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
-                        part.add_zonelets_to_zone(face_zone.zone_id, in_face_zonelets)
+                lbls = part.get_labels()
+                for l in lbls:
+                    if l not in labels and check_name_pattern(label_expression, l):
+                        labels.append(l)
+
+            for label in labels:
+                face_zone = None
+                for part in self._model.parts:
+                    topo_faces = part.get_topo_faces()
+                    if len(topo_faces) > 0:
+                        in_topo_faces = part.get_topo_faces_of_label_name_pattern(
+                            label, prime.NamePatternParams(model=self._model)
+                        )
+                        if len(in_topo_faces) > 0:
+                            if face_zone == None:
+                                face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
+                            part.add_topo_entities_to_zone(face_zone.zone_id, in_topo_faces)
+                    else:
+                        in_face_zonelets = part.get_face_zonelets_of_label_name_pattern(
+                            label, prime.NamePatternParams(model=self._model)
+                        )
+                        if len(in_face_zonelets) > 0:
+                            if face_zone == None:
+                                face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
+                            part.add_zonelets_to_zone(face_zone.zone_id, in_face_zonelets)
+        else:
+            labels = []
+            for part in self._model.parts:
+                labels += part.get_labels()
+            faces_of_label = {}
+            labels_of_face = {}
+            label_zone_definitions = {}
+            face_zones = []
+            all_topo = []
+            for part in self._model.parts:
+                for face in part.get_topo_faces():
+                    labels_of_face[face] = []
+                for face in part.get_face_zonelets():
+                    labels_of_face[face] = []
+            for label in labels:
+                faces = []
+                faces_of_label[label] = []
+                for part in self._model.parts:
+                    for zone in part.get_face_zones():
+                        face_zones.append(self._model.get_zone_name(zone))
+                    topo_faces = part.get_topo_faces()
+                    all_topo += topo_faces
+                    if topo_faces:
+                        faces += part.get_topo_faces_of_label_name_pattern(
+                            label_name_pattern=label,
+                            name_pattern_params=prime.NamePatternParams(self._model)
+                        )
+                    else:
+                        faces += part.get_face_zonelets_of_label_name_pattern(
+                            label_name_pattern=label,
+                            name_pattern_params=prime.NamePatternParams(self._model)
+                        )
+                if faces:
+                    faces_of_label[label] += faces
+                    [labels_of_face[face].append(label) for face in faces]
+            for face in labels_of_face:
+                name_exists = False
+                for zone_name in label_zone_definitions:
+                    if set(zone_name) == set(labels_of_face[face]):
+                        name_exists = True
+                        label_zone_definitions[zone_name].append(face)
+                if not name_exists:
+                    label_zone_definitions['_'.join(labels_of_face[face])] = [face]
+            # remove empty labels
+            label_zone_definitions.pop("")
+            self._logger.info("Labels to zones: "+str(label_zone_definitions))
+            for zone_name in label_zone_definitions:
+                if zone_name not in face_zones:
+                    self._model.create_zone(zone_name, prime.ZoneType.FACE)
+                for face in label_zone_definitions[zone_name]:
+                    for part in self._model.parts:
+                        if face in all_topo and face in part.get_topo_faces():
+                            part.add_topo_entities_to_zone(topo_entities=[face],
+                                zone_id=self._model.get_zone_by_name(zone_name=zone_name))
+                        elif face not in all_topo and face in part.get_face_zonelets():
+                            part.add_zonelets_to_zone(zonelets=[face],
+                                zone_id=self._model.get_zone_by_name(zone_name=zone_name))
 
     def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
         """Merges given parts into one.
@@ -1389,14 +1461,14 @@ class Mesh:
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> from ansys.meshing.prime.core import lucid
-        >>> prime_session = prime.launch_prime()
-        >>> model = prime_session.model
+        >>> from ansys.meshing.prime import lucid
+        >>> prime_client = prime.launch_prime()
+        >>> model = prime_client.model
         >>> mesh = lucid.Mesh(model)
         >>> mesh.read("/my_geometry.stl")
         >>> mesh.wrap(min_size=1, max_size=20, create_intersection_loops=True)
         >>> mesh.write("/mesh_output.pmdat")
-        >>> prime_session.exit()
+        >>> prime_client.exit()
         """
         if size_fields is None:
             size_fields = []
