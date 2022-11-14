@@ -177,7 +177,8 @@ mesh_util.volume_mesh(
     prism_volume_expression="tunnel*",
 )
 
-display(update=True)
+scope = prime.ScopeDefinition(model, label_expression="* !tunnel_unreferenced !inlet")
+display(update=True, scope=scope)
 
 ###############################################################################
 # Print Mesh Stats
