@@ -168,11 +168,13 @@ display(update=True)
 # Create Zones
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create face zones from labels imported from geometry.
-# last label will win so order can be important
+# Last label will win so order can be important.
 
 label_list = wrap_part.get_labels()
 all_labels = ",".join(label_list)
 mesh_util.create_zones_from_labels(all_labels)
+
+print(model)
 
 ###############################################################################
 # Print Mesh Stats
@@ -208,8 +210,11 @@ print("\nNo. of faces : ", part_summary_res.n_faces)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
 
-mesh_util.write(os.path.join(os.getcwd(), "toy_car_lucid.cas"))
-print("\nCurrent working directory for exported files: ", os.getcwd())
+mesh_file = os.path.join(os.getcwd(), "toy_car_lucid.cas")
+
+mesh_util.write(mesh_file)
+
+print("\nExported file:\n", mesh_file)
 
 ###############################################################################
 # Exit the PyPrime session.
