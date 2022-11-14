@@ -141,7 +141,7 @@ class Mesh:
 
         The method finds the entities by labels and then adds them to the
         zone with the same name as label.
-        
+
         If no label_expression is provided then all labels will be flattened to
         create zones.  Label names will be combined if overlaps occur and
         separate zones created.
@@ -188,7 +188,7 @@ class Mesh:
         else:
             labels = []
             for part in self._model.parts:
-                labels+=part.get_labels()
+                labels += part.get_labels()
             faces_of_label = {}
             labels_of_face = {}
             label_zone_definitions = {}
@@ -208,11 +208,15 @@ class Mesh:
                     topo_faces = part.get_topo_faces()
                     all_topo += topo_faces
                     if topo_faces:
-                        faces += part.get_topo_faces_of_label_name_pattern(label_name_pattern=label,
-                            name_pattern_params=prime.NamePatternParams(self._model))
+                        faces += part.get_topo_faces_of_label_name_pattern(
+                            label_name_pattern=label,
+                            name_pattern_params=prime.NamePatternParams(self._model)
+                        )
                     else:
-                        faces += part.get_face_zonelets_of_label_name_pattern(label_name_pattern=label,
-                            name_pattern_params=prime.NamePatternParams(self._model))
+                        faces += part.get_face_zonelets_of_label_name_pattern(
+                            label_name_pattern=label,
+                            name_pattern_params=prime.NamePatternParams(self._model)
+                        )
                 if faces:
                     faces_of_label[label] += faces
                     [labels_of_face[face].append(label) for face in faces]
@@ -220,7 +224,7 @@ class Mesh:
                 name_exists = False
                 for zone_name in label_zone_definitions:
                     if set(zone_name) == set(labels_of_face[face]):
-                        name_exists=True
+                        name_exists = True
                         label_zone_definitions[zone_name].append(face)
                 if not name_exists:
                     label_zone_definitions['_'.join(labels_of_face[face])] = [face]
