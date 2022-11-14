@@ -139,6 +139,21 @@ for summary_res in qual_summary_res.quality_results:
     print("Faces above limit: ", summary_res.n_found)
 
 ###############################################################################
+# Create Zones
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Create face zones from labels imported from geometry that can be used
+# in the solver to define boundary conditions.
+# If specifying individual labels to create zones the order is important.
+# Last label in the list will win.
+# Providing no label_expression will flatten all labels into zones.
+# For example, if "LabelA" and "LabelB" are overlapping three zones will
+# be created; "LabelA", "LabelB" and "LabelA_LabelB".
+
+mesh_util.create_zones_from_labels()
+
+print(model)
+
+###############################################################################
 # Volume Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Mesh only fluid volume with tetrahedral elements and boundary layer refinement.
@@ -158,23 +173,11 @@ volume = prime.lucid.VolumeScope(
 mesh_util.volume_mesh(
     scope=volume,
     prism_layers=3,
-    prism_surface_expression="cabin*,component*,engine*,exhaust*,ground*,outer*,wheel*",
+    prism_surface_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*",
     prism_volume_expression="tunnel*",
 )
 
 display(update=True)
-
-###############################################################################
-# Create Zones
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create face zones from labels imported from geometry.
-# Last label will win so order can be important.
-
-label_list = wrap_part.get_labels()
-all_labels = ",".join(label_list)
-mesh_util.create_zones_from_labels(all_labels)
-
-print(model)
 
 ###############################################################################
 # Print Mesh Stats
