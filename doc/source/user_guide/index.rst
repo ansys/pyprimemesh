@@ -25,9 +25,9 @@ mesh preparation.
 Overview
 ========
 The :func:`launch_prime() <ansys.meshing.prime.launch_prime>_` function
-within the ``ansys-meshing-prime`` library launches the Prime server and
+launches the Ansys Prime server from ``ansys-meshing-prime`` library and
 returns an instance of the :class:`Client <ansys.meshing.prime.Client>`. 
-This enables the user to send gRPC commands to Ansys Prime Server and receive the response 
+This enables you to send gRPC commands to Ansys Prime Server and receive the response 
 from the server.
 
 .. code:: python
