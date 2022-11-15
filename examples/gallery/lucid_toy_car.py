@@ -195,6 +195,8 @@ print("Invalid shape:", result.has_invalid_shape)
 print("Left handed faces:", result.has_left_handed_faces)
 
 quality = prime.VolumeSearch(model)
+scope = prime.ScopeDefinition(model, part_expression=wrap_part.name)
+
 qual_summary_res = quality.get_volume_quality_summary(
     prime.VolumeQualitySummaryParams(
         model=model,
@@ -203,6 +205,10 @@ qual_summary_res = quality.get_volume_quality_summary(
         quality_limit=[0.95],
     )
 )
+
+for summary_res in qual_summary_res.quality_results_part:
+    print("\nMax value of ", summary_res.measure_name, ": ", summary_res.max_quality)
+    print("Faces above limit: ", summary_res.n_found)
 
 part_summary_res = wrap_part.get_summary(
     prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
