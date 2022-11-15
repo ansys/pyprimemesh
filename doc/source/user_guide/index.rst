@@ -19,15 +19,15 @@ mesh preparation.
    automesh
    size_field
    controls
-   features
+   connections
    expressions
 
 Overview
 ========
 The :func:`launch_prime() <ansys.meshing.prime.launch_prime>_` function
 within the ``ansys-meshing-prime`` library launches the Ansys Prime server and
-returns an instance of the :class:`Client <ansys.meshing.prime.Client>`.
-This enables the user to send gRPC commands to Ansys Prime Server and receive the response
+returns an instance of the :class:`Client <ansys.meshing.prime.Client>`. 
+This enables the user to send gRPC commands to Ansys Prime Server and receive the response 
 from the server.
 
 .. code:: python
