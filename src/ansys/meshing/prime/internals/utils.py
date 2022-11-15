@@ -33,7 +33,7 @@ def get_child_processes(process):
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         cmd_name = ps_out.split()[0]
-        if "PrimeServer" in cmd_name:
+        if "AnsysPrimeServer" in cmd_name:
             children.append(int(pid))
         else:
             children += get_child_processes(int(pid))

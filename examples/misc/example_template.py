@@ -19,7 +19,7 @@ The title should be changed to reflect the topic your example covers.
 
 New examples should be added as python scripts to:
 
-``pyprime/examples/``
+``pyprime/examples/gallery``
 
 .. note::
    Avoid creating new folders unless absolutely necessary. If in doubt put the example
@@ -38,15 +38,15 @@ After this preamble is complete, the first code block begins.
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 
-# start Prime server and get client model
+# start Ansys Prime Server and get client model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
 # Your code goes here...
-mesh_util = prime.lucid.Mesh()
+mesh_util = prime.lucid.Mesh(model=model)
 example_file = prime.examples.download_elbow_fmd()
 mesh_util.read(example_file)
-model
+print(model)
 
 ###############################################################################
 # Section Title
@@ -64,8 +64,12 @@ model
 # ``print()`` to output the ``__str__``.
 
 # more code...
-mesh_util.surface_mesh()
-mesh_util.volume_mesh()
+mesh_util.surface_mesh(min_size=5, max_size=20)
+mesh_util.volume_mesh(
+    volume_fill_type=prime.VolumeFillType.POLY,
+    prism_surface_expression="* !inlet !outlet",
+    prism_layers=3,
+)
 
 ###############################################################################
 # Rendering graphics
@@ -86,5 +90,5 @@ display()
 # notebook, the example html and the demo script will all be auto-generated via ``sphinx-gallery``.
 
 ###############################################################################
-# Stopping Prime
+# Stopping Ansys Prime Server
 prime_client.exit()
