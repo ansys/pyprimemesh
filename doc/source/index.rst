@@ -5,7 +5,6 @@ PyPrime Documentation |version| BETA
    :hidden:
    :maxdepth: 3
 
-   self
    getting_started/index
    user_guide/index
    examples/index
