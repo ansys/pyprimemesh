@@ -239,7 +239,8 @@ class Mesh:
                 if not name_exists:
                     label_zone_definitions['_'.join(labels_of_face[face])] = [face]
             # remove empty labels
-            label_zone_definitions.pop("")
+            if "" in label_zone_definitions:
+                label_zone_definitions.pop("")
             self._logger.info("Labels to zones: "+str(label_zone_definitions))
             for zone_name in label_zone_definitions:
                 if zone_name not in face_zones:
