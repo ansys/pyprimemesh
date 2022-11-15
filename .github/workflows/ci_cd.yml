@@ -139,6 +139,7 @@ jobs:
           make -C doc html #SPHINXOPTS="-W"
         env:
           PYPRIME_LAUNCH_CONTAINER: 1
+          PYPRIME_SPHINX_BUILD: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
