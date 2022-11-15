@@ -7,18 +7,16 @@
 
 ## Overview
 
-PyPrime provides pythonic access to Prime server. PyPrime provides establishes seamless connection
-with Prime server and can access Prime APIs from the core  meshing libraries for your meshing
-requirements.
+PyPrime provides a python client to Ansys Prime Server. Ansys Prime Server delivers core Ansys meshing technology.
 
 ## Documentation and Issues
 
-For comprehensive information on PyPrime see the latest [documentation](
+For information on PyPrime see the latest [documentation](
 https://dev.prime.docs.pyansys.com)
 
 If you have questions about PyPrime please post them to the [Discussion](
-https://github.com/pyansys/pyprime/discussions) page. If you face discover and bugs or want to
-request for new features, please file an issue on our [Issues](
+https://github.com/pyansys/pyprime/discussions) page. If you have problems using PyPrime or want to
+request new features, please file an issue on our [Issues](
 https://github.com/pyansys/pyprime/issues) page. For assistance, reach out to the PyAnsys
 Support team at [pyansys.support@ansys.com](mailto:pyansys.support@ansys.com).
 
@@ -54,9 +52,9 @@ You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 To launch PyPrime:
 
 ```python
-import ansys.meshing.prime as pyprime
-with pyprime.launch_prime() as session:
-   model = session.model
+import ansys.meshing.prime as prime
+with prime.launch_prime() as prime_client:
+   model = prime_client.model
 ```
 
 ## License and Acknowledgments
@@ -64,6 +62,6 @@ with pyprime.launch_prime() as session:
 PyPrime is licensed under the MIT license.
 
 PyPrime makes no commercial claim over Ansys whatsoever. This library extends the functionality of
-Prime by adding a Python interface to Prime server without changing the core behavior or license
-of the original software. The use of the Prime Server requires a legally licensed copy of Ansys
+Ansys Prime Server by adding a Python interface without changing the core behavior or license
+of the original software. The use of Ansys Prime Server requires a legally licensed copy of Ansys
 Workbench.

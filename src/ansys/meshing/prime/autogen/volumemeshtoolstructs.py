@@ -707,16 +707,13 @@ class SubtractVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            processing_time: float):
+            error_code: ErrorCode):
         self._error_code = ErrorCode(error_code)
-        self._processing_time = processing_time
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
-            processing_time: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SubtractVolumesResults.
@@ -727,8 +724,6 @@ class SubtractVolumesResults(CoreObject):
             Model to create a SubtractVolumesResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
-        processing_time: float, optional
-            Time taken by the volume subtract operation.
         json_data: dict, optional
             JSON dictionary to create a SubtractVolumesResults object with provided parameters.
 
@@ -738,22 +733,19 @@ class SubtractVolumesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["processingTime"])
+                ErrorCode(json_data["errorCode"]))
         else:
-            all_field_specified = all(arg is not None for arg in [error_code, processing_time])
+            all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
                 self.__initialize(
-                    error_code,
-                    processing_time)
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     json_data = model._communicator.initialize_params(model, "SubtractVolumesResults")["SubtractVolumesResults"]
                     self.__initialize(
-                        error_code if error_code is not None else ( SubtractVolumesResults._default_params["error_code"] if "error_code" in SubtractVolumesResults._default_params else ErrorCode(json_data["errorCode"])),
-                        processing_time if processing_time is not None else ( SubtractVolumesResults._default_params["processing_time"] if "processing_time" in SubtractVolumesResults._default_params else json_data["processingTime"]))
+                        error_code if error_code is not None else ( SubtractVolumesResults._default_params["error_code"] if "error_code" in SubtractVolumesResults._default_params else ErrorCode(json_data["errorCode"])))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -763,16 +755,13 @@ class SubtractVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            processing_time: float = None):
+            error_code: ErrorCode = None):
         """Set the default values of SubtractVolumesResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
-        processing_time: float, optional
-            Time taken by the volume subtract operation.
         """
         args = locals()
         [SubtractVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -792,12 +781,11 @@ class SubtractVolumesResults(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         json_data["errorCode"] = self._error_code
-        json_data["processingTime"] = self._processing_time
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s\nprocessing_time :  %s" % (self._error_code, self._processing_time)
+        message = "error_code :  %s" % (self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -810,13 +798,3 @@ class SubtractVolumesResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
-
-    @property
-    def processing_time(self) -> float:
-        """Time taken by the volume subtract operation.
-        """
-        return self._processing_time
-
-    @processing_time.setter
-    def processing_time(self, value: float):
-        self._processing_time = value

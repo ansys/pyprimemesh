@@ -1,11 +1,10 @@
-PyPrime Documentation
-=====================
+PyPrime Documentation |version| BETA
+====================================
 
 .. toctree::
    :hidden:
    :maxdepth: 3
 
-   self
    getting_started/index
    user_guide/index
    examples/index
@@ -15,10 +14,9 @@ PyPrime Documentation
 Introduction and Purpose
 ------------------------
 
-PyPrime is an integral part of PyAnsys effort to facilitate the use of Ansys technologies directly
+PyPrime is part of the `PyAnsys <pyansys>`_ effort to facilitate the use of Ansys technologies directly
 from Python. PyPrime consists of various python modules that help you to acquire geometry and
-generate surface and volume meshes for multiple solvers. PyPrime uses ansys.meshing.fm as primary
-module to acquire geometry data. For generating mesh, the primary module is ansys.meshing.prime.
+prepare surface and volume meshes for multiple solvers. Its primary package is ``ansys-meshing-prime``.
 
 PyPrime enables you to: 
 
@@ -34,7 +32,7 @@ PyPrime enables you to:
 * Modularize meshing algorithms, components, and services for easier reuse in other applications
 * Expose micro services and APIs for meshing operations to promote meshing workflow prototyping
  
-PyPrime integrates the meshing capabilities of the Ansys Prime directly into client applications.
+PyPrime integrates the meshing capabilities of the Ansys Prime Server directly into client applications.
 PyPrime package provides a Python-friendly interface to drive the software that manages the
 submission of low-level Prime commands, while exchanging data through high-performance gRPC
 interfaces.
@@ -79,18 +77,18 @@ To launch PyPrime:
 
 .. code:: python
 
-   import ansys.meshing.prime as pyprime
-   with pyprime.launch_prime() as session:
-       model = session.model
+   import ansys.meshing.prime as prime
+   with prime.launch_prime() as prime_client:
+       model = prime_client.model
 
 
 To read a mesh file:
 
 .. code:: python
 
-   import ansys.meshing.prime as pyprime
-   with pyprime.launch_prime() as session:
-       model = session.model
+   import ansys.meshing.prime as prime
+   with prime.launch_prime() as prime_client:
+       model = prime_client.model
 
-       io = pyprime.FileIO(model)
-       _ = io.read_pmdat(r'E:\Temp\bix.pmdat', pyprime.FileReadParams(model=model))
+       io = prime.FileIO(model)
+       _ = io.read_pmdat(r'E:\Temp\box.pmdat', pyprime.FileReadParams(model=model))

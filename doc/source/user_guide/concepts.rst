@@ -29,7 +29,41 @@ The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Clie
 .. code:: python
 
     >>> print(model)
+    
+    Part Summary:
+    
+An example output for a CAD file containing a single part is shown below:
 
+.. code:: python
+
+    >>> cad_file = prime.examples.download_elbow_scdoc()
+    >>> params = prime.ImportCadParams(model)
+    >>> prime.FileIO(model).import_cad(file_name=cad_file, params=params)
+    
+    >>> print(model)
+    
+	Part Summary:
+
+	Part Name: flow_volume
+	Part ID: 2
+		13 Topo Edges
+		9 Topo Faces
+		1 Topo Volumes
+
+		0 Edge Zones
+			Edge Zone Name(s) : []
+		0 Face Zones
+			Face Zone Name(s) : []
+		1 Volume Zones
+			Volume Zone Name(s) : [volume]
+
+		2 Label(s)
+			Names: [inlet, outlet]
+
+		Bounding box (-203.2 -228.6 -50.8)
+					 (203.2 203.2 50.8)    
+        
+    
 ------
 Parts 
 ------

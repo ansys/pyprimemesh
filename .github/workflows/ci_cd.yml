@@ -14,6 +14,9 @@ on:
       - main
       - release/*
 
+env:
+    DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -114,11 +117,30 @@ jobs:
           pip install dist/* --find-links deps
 
       - name: Install documentation requirements
-        run: pip install -r requirements/requirements_docs.txt
+        run: |
+          pip install -r requirements/requirements_docs.txt
+          echo "installed required packages"
+
+      - name: Login in Github Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: pyansys-bot
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull, launch, and validate prime service
+        run: docker pull ${{ env.DOCKER_PACKAGE }}
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v1
 
       - name: Build HTML
         run: |
-          make -C doc html SPHINXOPTS="-W"
+          make -C doc html #SPHINXOPTS="-W"
+        env:
+          PYPRIME_LAUNCH_CONTAINER: 1
+          PYPRIME_SPHINX_BUILD: 1
+          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
       #   run: |
