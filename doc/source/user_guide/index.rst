@@ -19,7 +19,7 @@ mesh preparation.
    automesh
    size_field
    controls
-   features
+   connections
    expressions
 
 Overview
