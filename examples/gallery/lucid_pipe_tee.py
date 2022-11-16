@@ -2,7 +2,7 @@
 .. _ref_pipe_tee:
 
 ===============================================================
-Meshing a Pipe T-section for structural thermal and fluid flow
+Meshing a Pipe T-Section for Structural Thermal and Fluid Flow
 ===============================================================
 
 **Summary**: This example demonstrates how to mesh a pipe T-section for both fluid
@@ -54,7 +54,7 @@ model = prime_client.model
 mesh_util = lucid.Mesh(model)
 
 ###############################################################################
-# Read CAD geometry
+# Read CAD Geometry
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Download example FMD geometry file.
 # FMD format is exported from SpaceClaim and is compatible with Linux.
@@ -70,7 +70,7 @@ display()
 print(model)
 
 ###############################################################################
-# Mesh for structural thermal analysis
+# Mesh for Structural
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Surface mesh using curvature sizing.
 # Volume mesh with tetrahedral elements.
@@ -90,16 +90,18 @@ display = graphics.Graphics(model)
 display()
 
 ###############################################################################
-# Write mesh for structural thermal analysis
+# Write Structural Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Labels will be exported to CDB as collections for use in
 # applying load boundary conditions in the solver.
 
-mesh_util.write(os.path.join(os.getcwd(), "pipe_tee.cdb"))
-print("\nCurrent working directory for exported files: ", os.getcwd())
+struc_mesh = os.path.join(os.getcwd(), "pipe_tee.cdb")
+mesh_util.write(struc_mesh)
+
+print("\nExported Structural Mesh: ", struc_mesh)
 
 ###############################################################################
-# Extract fluid by wrapping
+# Extract Fluid by Wrapping
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # There is a small internal diameter change between flanges that
 # can be dealt with in several ways:
@@ -119,6 +121,7 @@ print("\nCurrent working directory for exported files: ", os.getcwd())
 # When displaying we can avoid displaying unnecessary edge zones.
 
 mesh_util.read(file_name)
+
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
 print(model)
@@ -126,7 +129,7 @@ print(model)
 display()
 
 ###############################################################################
-# Volume mesh fluid region
+# Volume Mesh Fluid
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create zones for each label to be used for boundary conditions definitions.
 # Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
@@ -147,12 +150,18 @@ mesh_util.volume_mesh(prism_layers=5,
 display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
-# Write mesh for fluid flow analysis
+# Write Fluid Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Write a MSH file for the Fluent solver.
 
-mesh_util.write(os.path.join(os.getcwd(), "pipe_tee.msh"))
-print("\nCurrent working directory for exported files: ", os.getcwd())
+fluid_mesh = os.path.join(os.getcwd(), "pipe_tee.msh")
 
+mesh_util.write(fluid_mesh)
+
+print("\nExported Fluid Mesh: ", fluid_mesh)
+
+###############################################################################
+# Exit PyPrime
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
