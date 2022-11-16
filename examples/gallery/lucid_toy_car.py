@@ -228,7 +228,7 @@ mesh_util.write(mesh_file)
 print("\nExported file:\n", mesh_file)
 
 ###############################################################################
-# Exit the PyPrime session.
+# Exit PyPrime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
