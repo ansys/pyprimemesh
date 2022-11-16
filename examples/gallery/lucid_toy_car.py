@@ -2,7 +2,7 @@
 .. _ref_toy_car_wrap:
 
 ===============================================
-Wrapping a toy car for a flow analysis
+Wrapping a Toy Car for a Flow Analysis
 ===============================================
 
 **Summary**: This example illustrates how to wrap a toy car for a flow analysis.
@@ -230,7 +230,7 @@ mesh_util.write(mesh_file)
 print("\nExported file:\n", mesh_file)
 
 ###############################################################################
-# Exit the PyPrime session.
+# Exit PyPrime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

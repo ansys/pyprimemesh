@@ -2,7 +2,7 @@
 .. _ref_mixing_elbow_mesh:
 
 ===============================================
-Meshing a mixing elbow for a flow analysis
+Meshing a Mixing Elbow for a Flow Analysis
 ===============================================
 
 **Summary**: This example illustrates how to mesh a mixing elbow for a flow analysis.
@@ -47,7 +47,7 @@ model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
-# Import geometry
+# Import Geometry
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Download the elbow geometry file (.fmd file exported by SpaceClaim).
 # Import geometry.
@@ -58,7 +58,7 @@ mesh_util.read(file_name=mixing_elbow)
 mesh_util.create_zones_from_labels("inlet,outlet")
 
 ###############################################################################
-# Surface mesh
+# Surface Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Surface mesh the geometry setting min and max sizing
 # that will be used for curvature refinement.
@@ -66,7 +66,7 @@ mesh_util.create_zones_from_labels("inlet,outlet")
 mesh_util.surface_mesh(min_size=5, max_size=20)
 
 ###############################################################################
-# Volume mesh
+# Volume Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Volume mesh with polyhedral elements and boundary layer refinement.
 # Fill the volume with polyhedral and prism mesh
@@ -85,7 +85,7 @@ display = Graphics(model=model)
 display()
 
 ###############################################################################
-# Print statistics on generated mesh.
+# Print Mesh Stats
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Get meshed part
@@ -109,7 +109,7 @@ print(part_summary_res)
 print(results.quality_results_part[0].max_quality, results.quality_results_part[0].min_quality)
 
 ###############################################################################
-# Write mesh
+# Write Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
 
@@ -117,7 +117,7 @@ mesh_util.write(os.path.join(os.getcwd(), "mixing_elbow.cas"))
 print(os.getcwd())
 
 ###############################################################################
-# Exit PyPrime session
+# Exit PyPrime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
