@@ -10,6 +10,10 @@ the different mesh elements available. Auto mesh generates the volume mesh for a
 (for example, meshed objects created from the imported geometry). :class:`AutoMesh <ansys.meshing.prime.AutoMesh>` provides you
 with APIs to perform automeshing.
 
+--------------------------------------
+Meshing with Second Order Tetrahedrons
+--------------------------------------
+
 The following example shows how to initialize automesh parameters and generate volume mesh on meshed topofaces:
 
 .. code:: python
