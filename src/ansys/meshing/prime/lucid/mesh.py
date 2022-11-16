@@ -220,12 +220,12 @@ class Mesh:
                     if topo_faces:
                         faces += part.get_topo_faces_of_label_name_pattern(
                             label_name_pattern=label,
-                            name_pattern_params=prime.NamePatternParams(self._model)
+                            name_pattern_params=prime.NamePatternParams(self._model),
                         )
                     else:
                         faces += part.get_face_zonelets_of_label_name_pattern(
                             label_name_pattern=label,
-                            name_pattern_params=prime.NamePatternParams(self._model)
+                            name_pattern_params=prime.NamePatternParams(self._model),
                         )
                 if faces:
                     faces_of_label[label] += faces
@@ -241,18 +241,22 @@ class Mesh:
             # remove empty labels
             if "" in label_zone_definitions:
                 label_zone_definitions.pop("")
-            self._logger.info("Labels to zones: "+str(label_zone_definitions))
+            self._logger.info("Labels to zones: " + str(label_zone_definitions))
             for zone_name in label_zone_definitions:
                 if zone_name not in face_zones:
                     self._model.create_zone(zone_name, prime.ZoneType.FACE)
                 for face in label_zone_definitions[zone_name]:
                     for part in self._model.parts:
                         if face in all_topo and face in part.get_topo_faces():
-                            part.add_topo_entities_to_zone(topo_entities=[face],
-                                zone_id=self._model.get_zone_by_name(zone_name=zone_name))
+                            part.add_topo_entities_to_zone(
+                                topo_entities=[face],
+                                zone_id=self._model.get_zone_by_name(zone_name=zone_name),
+                            )
                         elif face not in all_topo and face in part.get_face_zonelets():
-                            part.add_zonelets_to_zone(zonelets=[face],
-                                zone_id=self._model.get_zone_by_name(zone_name=zone_name))
+                            part.add_zonelets_to_zone(
+                                zonelets=[face],
+                                zone_id=self._model.get_zone_by_name(zone_name=zone_name),
+                            )
 
     def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
         """Merges given parts into one.
@@ -438,14 +442,16 @@ class Mesh:
         if min_size == None and max_size == None:
             global_sizing = self._model.get_global_sizing_params()
             self._logger.warning(
-                "Min and Max size not provided. Using max global size " + str(global_sizing.max)
-                + " and min global size " + str(global_sizing.min)
+                "Min and Max size not provided. Using max global size "
+                + str(global_sizing.max)
+                + " and min global size "
+                + str(global_sizing.min)
             )
             self.__variable_size_surface_mesh(
                 min_size=global_sizing.min,
                 max_size=global_sizing.max,
                 generate_quads=generate_quads,
-                scope=scope
+                scope=scope,
             )
         elif min_size == None or max_size == None:
             if min_size is None:
@@ -1607,8 +1613,9 @@ class Mesh:
         )
 
         volume_results = wrapped_part.compute_closed_volumes(
-            prime.ComputeVolumesParams(model=self._model,
-                create_zones_type=prime.CreateVolumeZonesType.PERVOLUME)
+            prime.ComputeVolumesParams(
+                model=self._model, create_zones_type=prime.CreateVolumeZonesType.PERVOLUME
+            )
         )
         self._logger.info(str(volume_results.volumes) + " volumes found.")
 
@@ -1641,8 +1648,11 @@ class Mesh:
             if zonelets:
                 for part_id in part_ids:
                     part = self._model.get_part(part_id)
-                    [part.delete_zonelets([face]) for face in zonelets
-                        if face in part.get_face_zonelets()]
+                    [
+                        part.delete_zonelets([face])
+                        for face in zonelets
+                        if face in part.get_face_zonelets()
+                    ]
             if part_ids:
                 self._model.delete_parts(part_ids)
 
