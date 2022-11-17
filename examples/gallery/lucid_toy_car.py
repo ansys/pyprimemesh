@@ -27,6 +27,7 @@ Procedure
 * Mesh only fluid with tetrahedral elements and boundary layer refinement.
 * Create face zones from labels imported from geometry.
 * Print statistics on generated mesh.
+* Improve mesh quality.
 * Write a cas file for use in the Fluent solver.
 * Exit the PyPrime session.
 """
@@ -160,8 +161,7 @@ print(model)
 # Not meshing other volumetric regions.
 # Volume zones exist already for volume meshing and passing to the solver.
 # The largest face zonelet is used by default to define volume zone names at creation.
-
-print(model)
+# After volume meshing we can see we have a cell zonelet in the part summary.
 
 volume = prime.lucid.VolumeScope(
     part_expression=wrap_part.name,
@@ -181,7 +181,10 @@ scope = prime.ScopeDefinition(
     model,
     label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*",
 )
+
 display(update=True, scope=scope)
+
+print(model)
 
 ###############################################################################
 # Print Mesh Stats
@@ -199,6 +202,12 @@ print("Left handed faces:", result.has_left_handed_faces)
 quality = prime.VolumeSearch(model)
 scope = prime.ScopeDefinition(model, part_expression=wrap_part.name)
 
+part_summary_res = wrap_part.get_summary(
+    prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+)
+
+print("\nNo. of cells : ", part_summary_res.n_cells)
+
 qual_summary_res = quality.get_volume_quality_summary(
     prime.VolumeQualitySummaryParams(
         model=model,
@@ -210,13 +219,50 @@ qual_summary_res = quality.get_volume_quality_summary(
 
 for summary_res in qual_summary_res.quality_results_part:
     print("\nMax value of ", summary_res.measure_name, ": ", summary_res.max_quality)
-    print("Faces above limit: ", summary_res.n_found)
+    print("Cells above limit: ", summary_res.n_found)
 
-part_summary_res = wrap_part.get_summary(
-    prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+###############################################################################
+# Improve Quality
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Mesh quality is poor.  We can use Auto-Node Move to improve the mesh.
+
+improve = prime.VolumeMeshTool(model=model)
+params = prime.AutoNodeMoveParams(
+   model=model,
+   quality_measure=prime.CellQualityMeasure.SKEWNESS,
+   target_quality=0.95,
+   dihedral_angle=90,
+   n_iterations_per_node=50,
+   restrict_boundary_nodes_along_surface=True,
+   n_attempts=10,
 )
 
-print("\nNo. of faces : ", part_summary_res.n_faces)
+improve.improve_by_auto_node_move(
+    part_id=wrap_part.id,
+    cell_zonelets=wrap_part.get_cell_zonelets(),
+    boundary_zonelets=wrap_part.get_face_zonelets(),
+    params=params,
+)
+
+result = vtool.check_mesh(part_id=wrap_part.id, params=prime.CheckMeshParams(model=model))
+
+print("Non positive volumes:", result.has_non_positive_volumes)
+print("Non positive areas:", result.has_non_positive_areas)
+print("Invalid shape:", result.has_invalid_shape)
+print("Left handed faces:", result.has_left_handed_faces)
+
+qual_summary_res = quality.get_volume_quality_summary(
+    prime.VolumeQualitySummaryParams(
+        model=model,
+        scope=scope,
+        cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS],
+        quality_limit=[0.95],
+    )
+)
+
+for summary_res in qual_summary_res.quality_results_part:
+    print("\nMax value of ", summary_res.measure_name, ": ", summary_res.max_quality)
+    print("Cells above limit: ", summary_res.n_found)
 
 ###############################################################################
 # Write Mesh
