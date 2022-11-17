@@ -9,7 +9,7 @@ Zonelet Connection
 ===================
 
 The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
-The three major operations for Zonelet Connection are Intersect, Stitch and Join. 
+The three major operations for Zonelet Connection are Intersect, Stitch and Join. You'd normally need to create a conformally connected surface mesh using join/intersect operations before generating the volume mesh. 
 
  - :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>`: Allows you to intersect the face zonelets of the part along the intersecting faces. 
 
