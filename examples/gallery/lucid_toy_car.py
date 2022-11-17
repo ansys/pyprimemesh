@@ -2,7 +2,7 @@
 .. _ref_toy_car_wrap:
 
 ===============================================
-Wrapping a toy car for a flow analysis
+Wrapping a Toy Car for a Flow Analysis
 ===============================================
 
 **Summary**: This example illustrates how to wrap a toy car for a flow analysis.
@@ -139,6 +139,21 @@ for summary_res in qual_summary_res.quality_results:
     print("Faces above limit: ", summary_res.n_found)
 
 ###############################################################################
+# Create Zones
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Create face zones from labels imported from geometry that can be used
+# in the solver to define boundary conditions.
+# If specifying individual labels to create zones the order is important.
+# Last label in the list will win.
+# Providing no label_expression will flatten all labels into zones.
+# For example, if "LabelA" and "LabelB" are overlapping three zones will
+# be created; "LabelA", "LabelB" and "LabelA_LabelB".
+
+mesh_util.create_zones_from_labels()
+
+print(model)
+
+###############################################################################
 # Volume Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Mesh only fluid volume with tetrahedral elements and boundary layer refinement.
@@ -158,21 +173,15 @@ volume = prime.lucid.VolumeScope(
 mesh_util.volume_mesh(
     scope=volume,
     prism_layers=3,
-    prism_surface_expression="cabin*,component*,engine*,exhaust*,ground*,outer*,wheel*",
+    prism_surface_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*",
     prism_volume_expression="tunnel*",
 )
 
-display(update=True)
-
-###############################################################################
-# Create Zones
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create face zones from labels imported from geometry.
-# last label will win so order can be important
-
-label_list = wrap_part.get_labels()
-all_labels = ",".join(label_list)
-mesh_util.create_zones_from_labels(all_labels)
+scope = prime.ScopeDefinition(
+    model,
+    label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*",
+)
+display(update=True, scope=scope)
 
 ###############################################################################
 # Print Mesh Stats
@@ -188,6 +197,8 @@ print("Invalid shape:", result.has_invalid_shape)
 print("Left handed faces:", result.has_left_handed_faces)
 
 quality = prime.VolumeSearch(model)
+scope = prime.ScopeDefinition(model, part_expression=wrap_part.name)
+
 qual_summary_res = quality.get_volume_quality_summary(
     prime.VolumeQualitySummaryParams(
         model=model,
@@ -196,6 +207,10 @@ qual_summary_res = quality.get_volume_quality_summary(
         quality_limit=[0.95],
     )
 )
+
+for summary_res in qual_summary_res.quality_results_part:
+    print("\nMax value of ", summary_res.measure_name, ": ", summary_res.max_quality)
+    print("Faces above limit: ", summary_res.n_found)
 
 part_summary_res = wrap_part.get_summary(
     prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
@@ -208,11 +223,14 @@ print("\nNo. of faces : ", part_summary_res.n_faces)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
 
-mesh_util.write(os.path.join(os.getcwd(), "toy_car_lucid.cas"))
-print("\nCurrent working directory for exported files: ", os.getcwd())
+mesh_file = os.path.join(os.getcwd(), "toy_car_lucid.cas")
+
+mesh_util.write(mesh_file)
+
+print("\nExported file:\n", mesh_file)
 
 ###############################################################################
-# Exit the PyPrime session.
+# Exit PyPrime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

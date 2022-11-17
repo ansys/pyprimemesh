@@ -62,20 +62,19 @@ class Model(_Model):
         self._control_data._update_volume_controls(vc_data)
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
-    def _add_part(self, id : int):
-        """Add a part that is present on server.
-        """
+    def _add_part(self, id: int):
+        """Add a part that is present on server."""
         res = json.loads(
             self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
         part_data = res["Parts"]
         new_part = None
         for part in part_data:
-            if (part[0] == id):
+            if part[0] == id:
                 new_part = Part(self, part[0], part[1], part[2])
                 self._parts.append(new_part)
                 break
-        if (new_part == None):
+        if new_part == None:
             raise PrimeRuntimeError("Unable to create part", ErrorCode.PARTNOTFOUND)
 
     def get_part_by_name(self, name: str) -> Part:

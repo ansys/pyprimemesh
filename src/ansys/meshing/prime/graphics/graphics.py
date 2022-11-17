@@ -7,6 +7,7 @@ from pyvista import _vtk
 import os
 from ansys.meshing.prime.internals import defaults
 
+
 def compute_face_list_from_structured_nodes(nodes, dim):
     flist = []
     for w in range(dim[2]):
