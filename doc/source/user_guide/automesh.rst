@@ -7,7 +7,7 @@ Volumetric Meshing
 
 The :class:`AutoMesh <ansys.meshing.prime.AutoMesh>` class enables you to 
 automatically create the volume mesh using different volume meshing algorithms. It generates the volume mesh for all computed 
-volumetric regions of the meshed object. For example, meshed objects created from the imported geometry.
+volumetric regions of the mesh object. For example, mesh objects created from the imported geometry.
 :func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` allows you to perform volume meshing with given meshing parameters.
 
 --------------------------------------
