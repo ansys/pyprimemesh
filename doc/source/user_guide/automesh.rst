@@ -5,10 +5,10 @@
 Volumetric Meshing
 ******************
 
-PyPrime enables you to have fully automated volume meshing. Automeshing enables you to automatically create the volume mesh using
-the different mesh elements available. Auto mesh generates the volume mesh for all computed volumetric regions of the mesh object
-(for example, meshed objects created from the imported geometry). :class:`AutoMesh <ansys.meshing.prime.AutoMesh>` provides you
-with APIs to perform automeshing.
+The :class:`AutoMesh <ansys.meshing.prime.AutoMesh>` class enables you to 
+automatically create the volume mesh using different volume meshing algorithms. It generates the volume mesh for all computed 
+volumetric regions of the meshed object. For example, meshed objects created from the imported geometry.
+:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` allows you to perform volume meshing with given meshing parameters.
 
 --------------------------------------
 Meshing with Second Order Tetrahedrons
