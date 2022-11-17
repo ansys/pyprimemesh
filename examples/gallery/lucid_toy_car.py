@@ -177,8 +177,10 @@ mesh_util.volume_mesh(
     prism_volume_expression="tunnel*",
 )
 
-scope = prime.ScopeDefinition(model,
-   label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*")
+scope = prime.ScopeDefinition(
+    model,
+    label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*",
+)
 display(update=True, scope=scope)
 
 ###############################################################################
