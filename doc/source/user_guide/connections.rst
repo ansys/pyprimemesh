@@ -4,20 +4,12 @@
 Connections
 ***********
 
-========
-Connect
-========
+===================
+Zonelet Connection
+===================
 
-The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model. Connect performs both faceted connections and topology-based connections on a surface. 
-
-.. note::
-    Connect operations like Join, Stitch and Intersect supports only computational mesh (mesh with reasonable size). Faceted mesh is not supported. 
-
-
-Zonelet Connections
---------------------
-
-Zonelet Connections connect the face zonelets using surface meshing. The three major operations for Zonelet Connection are Intersect, Stitch and Join. 
+The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
+The three major operations for Zonelet Connection are Intersect, Stitch and Join. You'd normally need to create a conformally connected surface mesh using join/intersect operations before generating the volume mesh. 
 
  - :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>`: Allows you to intersect the face zonelets of the part along the intersecting faces. 
 
@@ -26,13 +18,42 @@ Zonelet Connections connect the face zonelets using surface meshing. The three m
  - :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>`: Allows you to join a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
 
-Topology Based Connections
----------------------------
+.. note::
+    Connect operations support only computational mesh (mesh with reasonable size). Faceted geometry is not supported. 
 
-Topology Based Connections allows you to connect the topofaces, topoedges and so on.
 
-Scaffolding
-^^^^^^^^^^^
+==========================
+Topology Based Connection
+==========================
 
-Scaffolding creates conformal meshes on shared topologies to provide a better connection between the topofaces.
 The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology, handling the gaps and mismatches in the geometry.
+Topology based connection creates conformal meshes on shared topologies to provide a better connection between the topofaces.
+
+.. note::
+    Connectivity cannot be shared across multiple parts. 
+
+.. code:: python
+
+    >>> # Merge parts
+    >>> model.merge_parts(
+    >>>     part_ids=[part.id for part in model.parts],
+    >>>     params=prime.MergePartsParams(model)
+    >>> )
+    
+    >>> # Scaffold topofaces
+    >>> params = prime.ScaffolderParams(
+    >>>     model=model, 
+    >>>     absolute_dist_tol=0.01,
+    >>>     intersection_control_mask=prime.IntersectionMask.FACEFACEANDEDGEEDGE,
+    >>>     constant_mesh_size=0.1
+    >>> )
+    >>> scaffolder = prime.Scaffolder(model, part.id)
+    >>> res = scaffolder.scaffold_topo_faces_and_beams(
+    >>>     topo_faces=part.get_topo_faces(), 
+    >>>     topo_beams=[], 
+    >>>     params=params
+    >>> )
+    >>> print(res)
+
+    n_incomplete_topo_faces :  0
+    error_code :  ErrorCode.NOERROR
