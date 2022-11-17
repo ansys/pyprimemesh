@@ -106,7 +106,7 @@ results = search.get_volume_quality_summary(params=params)
 
 # Print statistics on meshed part
 print(part_summary_res)
-print("Maximum skewness: ", results.quality_results_part[0].max_quality)
+print("\nMaximum skewness: ", results.quality_results_part[0].max_quality)
 
 ###############################################################################
 # Write Mesh
