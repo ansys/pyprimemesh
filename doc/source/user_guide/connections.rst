@@ -27,9 +27,13 @@ Topology Based Connection
 ==========================
 
 The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology, handling the gaps and mismatches in the geometry.
-Scaffolding creates conformal meshes on shared topologies to provide a better connection between the topofaces.
+Topology based connection creates conformal meshes on shared topologies to provide a better connection between the topofaces.
+
+.. note::
+    Connectivity cannot be shared across multiple parts. 
 
 .. code:: python
+
     >>> # Merge parts
     >>> model.merge_parts(
     >>>     part_ids=[part.id for part in model.parts],
@@ -49,3 +53,7 @@ Scaffolding creates conformal meshes on shared topologies to provide a better co
     >>>     topo_beams=[], 
     >>>     params=params
     >>> )
+    >>> print(res)
+
+    n_incomplete_topo_faces :  0
+    error_code :  ErrorCode.NOERROR
