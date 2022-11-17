@@ -19,7 +19,7 @@ The three major operations for Zonelet Connection are Intersect, Stitch and Join
 
 
 .. note::
-    Connect operations support only computational mesh (mesh with reasonable size). Faceted mesh is not supported. 
+    Connect operations support only computational mesh (mesh with reasonable size). Faceted geometry is not supported. 
 
 
 ==========================
