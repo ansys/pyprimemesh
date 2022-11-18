@@ -4,7 +4,7 @@
 Size Fields
 ***********
 
-Size field type helps you to fetch the element size at a given location. The size field types available in PyPrime are: 
+ :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>`  helps you to fetch the element size at a given location. The size field types available in PyPrime are: 
 
 - Geometric-Computes sizes based on the existing boundary sizes. Sizes can gradually increase from minimum size to maximum size based on the growth rate. 
 
