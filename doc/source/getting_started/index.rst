@@ -25,6 +25,9 @@ PyPrime can be installed directly from PyPi as follows:
 
    pip install ansys-meshing-prime
 
+.. note::
+   PyPrime is not available on PyPi at present.
+
 Alternatively, clone and install in development mode with:
 
 .. code::
