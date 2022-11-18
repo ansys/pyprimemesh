@@ -141,7 +141,6 @@ params = prime.GlobalSizingParams(model, min=6, max=50)
 model.set_global_sizing_params(params)
 
 mesh_util.create_zones_from_labels("outlet_main,in1_inlet,in2_inlet")
-print(model)
 
 mesh_util.volume_mesh(
     prism_layers=5,
@@ -149,6 +148,7 @@ mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
 )
 
+print(model)
 display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
