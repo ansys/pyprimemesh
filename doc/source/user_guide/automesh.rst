@@ -8,24 +8,27 @@ Volumetric Meshing
 The :class:`AutoMesh <ansys.meshing.prime.AutoMesh>` class enables you to 
 automatically create the volume mesh using different volume meshing algorithms. It generates the volume mesh for all computed 
 volumetric regions of the mesh object. For example, mesh objects created from the imported geometry.
-:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` allows you to perform volume meshing with given meshing parameters.
+:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` allows you to perform volumetric meshing with given meshing parameters.
 
---------------------------------------
-Meshing with Second Order Tetrahedrons
---------------------------------------
+.. note::
+   The starting point for this volumetric meshing procedure is a valid surface mesh.
 
-The following example shows how to initialize automesh parameters and generate volume mesh on meshed topofaces:
+------------------------------
+Second Order Tetrahedral Mesh
+------------------------------
+
+The following example shows how to initialize :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` and generate volume mesh on meshed topofaces:
 
 .. code:: python
 
    >>> # Volume mesh with 2nd order tetrahedral elements
-   >>> automesher_params = prime.AutoMeshParams(
+   >>> automesh_param = prime.AutoMeshParams(
    >>>     model=model,
    >>>     max_size=1.0,
    >>>     volume_fill_type=prime.VolumeFillType.TET,
    >>>     tet=prime.TetParams(model=model, quadratic=True)
    >>> )
-   >>> print(automesher_params)
+   >>> print(automesh_param)
 
    size_field_type :  SizeFieldType.GEOMETRIC
    max_size :  1.0
@@ -35,16 +38,20 @@ The following example shows how to initialize automesh parameters and generate v
    tet :  { quadratic :  True }
    volume_control_ids :  []
 
-   >>> prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesher_params)
+   >>> prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_param)
 
------------------------------------
-Meshing with Polyhedrons and Prisms
------------------------------------
+
+----------------------------------
+Prism Controls for Polyhedral Mesh
+----------------------------------
+
+:class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control the prism mesh generation based on the face scope, volume scope and growth rate.
+Prism cells creates either quadrilateral or triangular boundary faces, or both. They can resolve a boundary layer region of a tetrahedral mesh.
 
 The following example shows you the procedure to:
 
 * Create prism control and specify boundary layer setting
-* Volume mesh with Polyhedral elements
+* Volume mesh with polyhedral elements
 * Check volume mesh quality based on cell quality measures
 
 .. code:: python
@@ -64,19 +71,15 @@ The following example shows you the procedure to:
    >>> prism_control.set_surface_scope(face_scope)
    >>> prism_control.set_volume_scope(volume_scope)
    >>> prism_control.set_growth_params(prime.PrismControlGrowthParams(model=model))
-
-.. code:: python
-
+   >>>
    >>> # Volume mesh with polyhedral elements
-   >>> automesher_params = prime.AutoMeshParams(
+   >>> automesh_param = prime.AutoMeshParams(
    >>>     model=model,
    >>>     volume_fill_type=prime.VolumeFillType.POLY,
    >>>     prism_control_ids=[prism_control.id]
    >>> )
-   >>> prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesher_params)
-
-.. code:: python
-
+   >>> prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_param)
+   >>>
    >>> # Volume search to check volume mesh quality
    >>> search = prime.VolumeSearch(model=model)
    >>> qual_params = prime.VolumeQualitySummaryParams(
@@ -95,3 +98,42 @@ The following example shows you the procedure to:
    Max. skewness :  0.795889
    Number of cells violating target skewness :  0
    Number of cells :  10630
+
+
+------------------------------
+Volume Specific Mesh Controls
+------------------------------
+
+:class:`VolumeControl <ansys.meshing.prime.VolumeControl>` class helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
+It allows you to define the scope and generate the various types of volume mesh.
+
+The following example shows you the procedure to:
+
+* Create volume control and set zone-specific parameters
+* Volume mesh with tetrahedral elements
+
+.. code:: python
+
+   >>> # Volume control
+   >>> volume_control = model.control_data.create_volume_control()
+   >>> volume_scope = prime.ScopeDefinition(
+   >>>     model=model,
+   >>>     evaluation_type=prime.ScopeEvaluationType.ZONES,
+   >>>     zone_expression="*"
+   >>> )
+   >>> volume_control.set_scope(volume_scope)
+   >>> volume_control.set_params(
+   >>>     prime.VolumeControlParams(
+   >>>         model=model,
+   >>>         cell_zonelet_type=prime.CellZoneletType.FLUID
+   >>>     )
+   >>> )
+   >>>
+   >>> # Volume mesh
+   >>> automesh_param = prime.AutoMeshParams(
+   >>>     model=model,
+   >>>     size_field_type=prime.SizeFieldType.VOLUMETRIC,
+   >>>     volume_fill_type=prime.VolumeFillType.TET,
+   >>>     volume_control_ids=[volume_control.id]
+   >>> )
+   >>> prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_param)
