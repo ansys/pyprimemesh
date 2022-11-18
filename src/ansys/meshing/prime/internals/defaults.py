@@ -49,7 +49,8 @@ __DEFAULT_CONNECTION_TIMEOUT = 10.0
 __DEFAULT_COMM_LOG = False
 __MAX_MESSAGE_LENGTH = 4194310
 
-SPHINX_BUILD = bool(int(os.getenv('PYPRIME_SPHINX_BUILD',  0)))
+SPHINX_BUILD = bool(int(os.getenv('PYPRIME_SPHINX_BUILD', 0)))
+
 
 def ip():
     '''Gets the default ip address used throughout the library.'''

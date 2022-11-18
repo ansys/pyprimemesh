@@ -1,10 +1,11 @@
-.. _ref_index_controls:
+.. _ref_index_sizing:
 
-********************
-Controls in PyPrime
-********************
+******
+Sizing
+******
 
-PyPrime provides various controls to help you refine your mesh to obtain the desired accuracy while meshing.
+PyPrime provides various sizing controls to help you refine your mesh to obtain the desired accuracy while meshing.
+
 
 ---------------
 Sizing Control
@@ -67,33 +68,44 @@ Body of Influence Sizing
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`BOI <ansys.meshing.prime.SizingType.BOI>`, sizes inside a closed volume scope should not cross a certain maximum value. The :class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` is used to specify following parameters: maximum size and growth rate.
 
 
-----------------
-Wrapper Control
-----------------
+-----------
+Size Fields
+-----------
 
-PyPrime provides :class:`WrapperControl <ansys.meshing.prime.WrapperControl>` class to extract a closed watertight surface used to create a volume mesh from geometry where the inputs:
+The :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class helps you to fetch the element size at a given location. The size field types available in PyPrime are: 
 
-* are not connected with overlaps
+ * Geometric
 
-* have holes, leaks or gaps
+ * Volumetric
 
-* have small features that need to be ignored or stepped over
+ * Geodesic
 
-:class:`Wrapper <ansys.meshing.prime.Wrapper>` class is used for extracting flow regions from large assemblies, forming closed clean volumes from medical imaging and many more.
+ * Constant
 
-
--------------
-Prism Control
--------------
-
-:class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control the prism mesh generation based on the face scope, volume scope and growth rate.
-Prism cells creates either quadrilateral or triangular boundary faces, or both. They can resolve a boundary layer region of a tetrahedral mesh.
+ * Meshedgeodesic
 
 
------------------
-Volume Control
------------------
+Geometric size field
+^^^^^^^^^^^^^^^^^^^^
 
-:class:`VolumeControl <ansys.meshing.prime.VolumeControl>` class helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
-It allows you to define the scope and generate the various types of volume mesh.
+When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`GEOMETRIC <ansys.meshing.prime.SizeFieldType.GEOMETRIC>`, size field is computed based on the existing boundary sizes. Sizes can gradually increase from minimum size to maximum size based on the growth rate.
 
+Volumetric size field
+^^^^^^^^^^^^^^^^^^^^^
+
+When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`VOLUMETRIC <ansys.meshing.prime.SizeFieldType.VOLUMETRIC>`, size field is computed based on the size controls specified.
+
+Geodesic size field
+^^^^^^^^^^^^^^^^^^^
+
+When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`GEODESIC <ansys.meshing.prime.SizeFieldType.GEODESIC>`, size field is computed on face nodes based on the size controls specified. Sizes are defined along a surface rather than the volume. Geodesic sizing enables you to confine sizes to surfaces and avoid problems like dead space refinement.
+
+Constant size field
+^^^^^^^^^^^^^^^^^^^
+
+When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`CONSTANT <ansys.meshing.prime.SizeFieldType.CONSTANT>`, size field is computed based on the size controls specified.
+
+Meshedgeodesic size field
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`MESHEDGEODESIC <ansys.meshing.prime.SizeFieldType.MESHEDGEODESIC>`, size field is computed using average mesh edge lengths and is diffused geodesical.

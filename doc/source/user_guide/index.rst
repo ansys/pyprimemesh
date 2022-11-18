@@ -17,14 +17,14 @@ mesh preparation.
    graphics
    surfer
    automesh
-   size_field
-   controls
+   sizing
    connections
+   mesh_diagnostics
    expressions
 
 Overview
 ========
-The :func:`launch_prime() <ansys.meshing.prime.launch_prime>_` function
+The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` function
 within the ``ansys-meshing-prime`` library launches the Ansys Prime server and
 returns an instance of the :class:`Client <ansys.meshing.prime.Client>`. 
 This enables the user to send gRPC commands to Ansys Prime Server and receive the response 
