@@ -13,9 +13,9 @@ volumetric regions of the mesh object. For example, mesh objects created from th
 .. note::
    The starting point for this volumetric meshing procedure is a valid surface mesh.
 
----------------------------------------
-Volumetric Meshing for Tetrahedral Mesh
----------------------------------------
+------------------------------
+Second Order Tetrahedral Mesh
+------------------------------
 
 The following example shows how to initialize :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` and generate volume mesh on meshed topofaces:
 
@@ -42,11 +42,8 @@ The following example shows how to initialize :class:`AutoMeshParams<ansys.meshi
 
 
 ----------------------------------
-Volumetric Meshing for Hybrid Mesh
+Prism Controls for Polyhedral Mesh
 ----------------------------------
-
-Prism Control
-^^^^^^^^^^^^^
 
 :class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control the prism mesh generation based on the face scope, volume scope and growth rate.
 Prism cells creates either quadrilateral or triangular boundary faces, or both. They can resolve a boundary layer region of a tetrahedral mesh.
@@ -54,7 +51,7 @@ Prism cells creates either quadrilateral or triangular boundary faces, or both. 
 The following example shows you the procedure to:
 
 * Create prism control and specify boundary layer setting
-* Volume mesh with Polyhedral elements
+* Volume mesh with polyhedral elements
 * Check volume mesh quality based on cell quality measures
 
 .. code:: python
@@ -103,12 +100,9 @@ The following example shows you the procedure to:
    Number of cells :  10630
 
 
---------------------------------------
+------------------------------
 Volume Specific Mesh Controls
---------------------------------------
-
-Volume Control
-^^^^^^^^^^^^^^
+------------------------------
 
 :class:`VolumeControl <ansys.meshing.prime.VolumeControl>` class helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
 It allows you to define the scope and generate the various types of volume mesh.
