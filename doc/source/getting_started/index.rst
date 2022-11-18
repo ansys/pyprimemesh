@@ -11,7 +11,7 @@ To use PyPrime, you must have a local installation of Ansys. The
 version of Ansys installed dictates the features available to you.
 
 For more information on getting a licensed copy of Ansys, visit
-`Ansys <ansys_>`_ .
+`Ansys <ansys>`.
 
 Installation
 ------------
