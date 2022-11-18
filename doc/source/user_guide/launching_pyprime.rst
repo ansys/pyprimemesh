@@ -13,8 +13,8 @@ The function returns an instance of the PyPrime :class:`Client <ansys.meshing.pr
 
 .. code:: python
 
-    >>> import ansys.meshing.prime as prime
-    >>> prime_client = prime.launch_prime()
+    import ansys.meshing.prime as prime
+    prime_client = prime.launch_prime()
 
 This enables you to send commands to the Ansys Prime Server and receive responses from the server.
 
@@ -22,7 +22,7 @@ The :class:`Client <ansys.meshing.prime.Client>` can then be used to get the :at
 
 .. code:: python
  
-    >>> model = prime_client.model
+    model = prime_client.model
 
 =======================================================================
 Launching Server from a Windows/Linux console and Connecting the Client
@@ -33,17 +33,17 @@ Ansys Prime Server can be launched from a Linux or Windows console and then conn
 A Windows example, starting the server in parallel mode on 4 nodes, and specifying the ip address and port,
 is shown below, first launching a server from cmd line:
 
-.. code:: doscon
+.. code:: shell-session
 
-    >>> "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
+    "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
 
 And then connecting to the server in python using a PyPrime :class:`Client <ansys.meshing.prime.Client>` as follows:
 
 .. code:: python
 
-    >>> import ansys.meshing.prime as prime
-    >>> prime_client = prime.Client(ip="127.0.0.1", port=50055)
-    >>> model = prime_client.model
+    import ansys.meshing.prime as prime
+    prime_client = prime.Client(ip="127.0.0.1", port=50055)
+    model = prime_client.model
 
 .. note::
     Only a single client session can be connected to an active Ansys Prime Server instance at any time.
@@ -65,7 +65,7 @@ A python script can be ran directly on the server from a Linux or Windows consol
 
 Here is an example on Windows for running a python script directly from the cmd line.
 
-.. code:: doscon
+.. code:: shell-session
 
-    >>> "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
+    "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
 
