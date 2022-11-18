@@ -17,8 +17,7 @@ mesh preparation.
    graphics
    surfer
    automesh
-   size_field
-   controls
+   sizing
    connections
    expressions
 
