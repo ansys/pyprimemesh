@@ -19,6 +19,7 @@ mesh preparation.
    automesh
    sizing
    connections
+   mesh_diagnostics
    expressions
 
 Overview
