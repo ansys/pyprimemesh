@@ -8,7 +8,7 @@ class TestElbow(PrimeTestCase):
     def test_elbow_lucid(self):
         # downloads pmdat file
         #elbow_lucid = pyprime.examples.download_elbow_pmdat()
-        elbow_lucid = pyprime.examples.download_elbow_fmd()
+        elbow_lucid = pyprime.examples.download_elbow_scdoc()
         # reads file
         fileIO = pyprime.FileIO(model=self._model)
         #_ = fileIO.read_pmdat(elbow_lucid, pyprime.FileReadParams(model=self._model))
