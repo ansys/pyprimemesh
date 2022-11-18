@@ -11,7 +11,7 @@ To use PyPrime, you must have a local installation of Ansys. The
 version of Ansys installed dictates the features available to you.
 
 For more information on getting a licensed copy of Ansys, visit
-`Ansys <ansys_>`_ .
+`Ansys <ansys>`.
 
 Installation
 ------------
@@ -24,6 +24,9 @@ PyPrime can be installed directly from PyPi as follows:
 .. code::
 
    pip install ansys-meshing-prime
+
+.. note::
+   PyPrime is not available on PyPi at present.
 
 Alternatively, clone and install in development mode with:
 
