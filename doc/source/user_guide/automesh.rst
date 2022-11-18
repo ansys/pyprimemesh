@@ -17,7 +17,7 @@ volumetric regions of the mesh object. For example, mesh objects created from th
 Volumetric Meshing for Tetrahedral Mesh
 ---------------------------------------
 
-The following example shows how to initialize automesh parameters and generate volume mesh on meshed topofaces:
+The following example shows how to initialize :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` and generate volume mesh on meshed topofaces:
 
 .. code:: python
 
