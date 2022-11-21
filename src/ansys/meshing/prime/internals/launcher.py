@@ -35,18 +35,18 @@ def get_install_locations():
         return installed_versions
 
 
-def get_pyprime_root():
+def get_ansys_prime_server_root():
     available_versions = get_install_locations()
     if not available_versions:
         return None
 
     version = max(available_versions.keys())
-    pyprime_root = available_versions[version]
-    return pyprime_root
+    root = available_versions[version]
+    return root
 
 
 def launch_server_process(
-    pyprime_root: Optional[str] = None,
+    prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     n_procs: Optional[int] = None,
@@ -56,7 +56,7 @@ def launch_server_process(
 
     Parameters
     ----------
-    pyprime_root: Optional[str]
+    prime_root: Optional[str]
         Root directory which contains the Ansys Prime Server.
     ip: str
         IP address to start the server at.  The default IP address is 127.0.0.1.
@@ -78,20 +78,20 @@ def launch_server_process(
     FileNotFoundError
         When there is an error in the file paths used to launch the server.
     '''
-    if pyprime_root is None:
-        pyprime_root = get_pyprime_root()
-        if pyprime_root is None:
+    if prime_root is None:
+        prime_root = get_ansys_prime_server_root()
+        if prime_root is None:
             raise FileNotFoundError('No valid Ansys Prime Server found to launch.')
     else:  # verify if the file exists
-        if not os.path.isdir(pyprime_root):
+        if not os.path.isdir(prime_root):
             raise FileNotFoundError('Invalid exec_file path.')
 
     script_ext = 'bat' if os.name == 'nt' else 'sh'
     run_prime_script = f'runPrime.{script_ext}'
 
-    exec_path = os.path.join(pyprime_root, run_prime_script)
+    exec_path = os.path.join(prime_root, run_prime_script)
     if not os.path.isfile(exec_path):
-        raise FileNotFoundError(f'{run_prime_script} not found in {pyprime_root}')
+        raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
 
     server_args = [exec_path, 'server']
 
@@ -110,7 +110,7 @@ def launch_server_process(
         raise ValueError('server option needs to be one of release, debug or python.')
 
     if enable_python_server == 'python':
-        script_dir = os.path.join(pyprime_root, 'scripts')
+        script_dir = os.path.join(prime_root, 'scripts')
         server_path = os.path.join(script_dir, 'PrimeGRPC.py')
         if not os.path.isfile(server_path):
             raise FileNotFoundError(f'PrimeGRPC.py not found in {script_dir}')
@@ -179,7 +179,7 @@ def launch_remote_prime(
 
 
 def launch_prime(
-    pyprime_root: Optional[str] = None,
+    prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
@@ -191,7 +191,7 @@ def launch_prime(
 
     Parameters
     ----------
-    pyprime_root: Optional[str]
+    prime_root: Optional[str]
         Root directory which contains the Ansys Prime Server.
     ip: str
         IP address to start the server at.  The default IP address is 127.0.0.1.
@@ -234,7 +234,7 @@ def launch_prime(
         return client
 
     server = launch_server_process(
-        pyprime_root=pyprime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
+        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
     )
 
     return Client(server_process=server, ip=ip, port=port, timeout=timeout)
