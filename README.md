@@ -7,15 +7,15 @@
 
 ## Overview
 
-PyPrime provides a python client to Ansys Prime Server. Ansys Prime Server delivers core Ansys meshing technology.
+PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server delivers core Ansys meshing technology.
 
 ## Documentation and Issues
 
-For information on PyPrime see the latest [documentation](
+For information on PyPrimeMesh see the latest [documentation](
 https://dev.prime.docs.pyansys.com)
 
-If you have questions about PyPrime please post them to the [Discussion](
-https://github.com/pyansys/pyprime/discussions) page. If you have problems using PyPrime or want to
+If you have questions about PyPrimeMesh please post them to the [Discussion](
+https://github.com/pyansys/pyprime/discussions) page. If you have problems using PyPrimeMesh or want to
 request new features, please file an issue on our [Issues](
 https://github.com/pyansys/pyprime/issues) page. For assistance, reach out to the PyAnsys
 Support team at [pyansys.support@ansys.com](mailto:pyansys.support@ansys.com).
@@ -25,13 +25,13 @@ Support team at [pyansys.support@ansys.com](mailto:pyansys.support@ansys.com).
 The `ansys-meshing-prime` package supports Python 3.7 to Python 3.9 on Windows and Linux
 operating system.
 
-PyPrime can be installed directly from PyPi as follows:
+PyPrimeMesh can be installed directly from PyPi as follows:
 
 ```bash
 pip install ansys-meshing-prime
 ```
 
-> **NOTE:** PyPrime is not available on PyPi at present.
+> **NOTE:** PyPrimeMesh is not available on PyPi at present.
 
 Alternatively, clone and install in development mode with:
 
@@ -47,9 +47,9 @@ You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 
 ## Get Started
 
-### Launching PyPrime
+### Launching PyPrimeMesh
 
-To launch PyPrime:
+To launch PyPrimeMesh:
 
 ```python
 import ansys.meshing.prime as prime
@@ -59,9 +59,9 @@ with prime.launch_prime() as prime_client:
 
 ## License and Acknowledgments
 
-PyPrime is licensed under the MIT license.
+PyPrimeMesh is licensed under the MIT license.
 
-PyPrime makes no commercial claim over Ansys whatsoever. This library extends the functionality of
+PyPrimeMesh makes no commercial claim over Ansys whatsoever. This library extends the functionality of
 Ansys Prime Server by adding a Python interface without changing the core behavior or license
 of the original software. The use of Ansys Prime Server requires a legally licensed copy of Ansys
 Workbench.
