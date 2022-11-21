@@ -11,7 +11,7 @@ __all__ = ['Client']
 
 
 class Client(object):
-    '''Client class for PyPrime.'''
+    '''Client class for PyPrimeMesh.'''
 
     def __init__(
         self,
@@ -43,14 +43,14 @@ class Client(object):
                     )
                     setattr(self, 'port', port)
             except ImportError as err:
-                logging.getLogger('PyPrime').error(
+                logging.getLogger('PyPrimeMesh').error(
                     f'Failed to load grpc_communicator with message: {err.msg}'
                 )
                 raise
             except ConnectionError:
                 self.exit()
 
-                logging.getLogger('PyPrime').error('Failed to connect to PRIME GRPC server')
+                logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
                 raise
         else:
             try:
@@ -58,7 +58,7 @@ class Client(object):
 
                 self._comm = PrimeCommunicator()
             except ImportError as err:
-                logging.getLogger('PyPrime').error(
+                logging.getLogger('PyPrimeMesh').error(
                     f'Failed to load prime_communicator with message: {err.msg}'
                 )
 
@@ -92,12 +92,12 @@ class Client(object):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> pyprime = prime.launch_prime() # This will launch a server process
-        >>> model = pyprime.model
+        >>> prime = prime.launch_prime() # This will launch a server process
+        >>> model = prime.model
         >>> fileio = prime.FileIO(model)
         >>> result = fileio.read_pmdat('example.pmdat', prime.FileReadParams(model=model))
         >>> print(result)
-        >>> pyprime.exit() # Sever connection with server and kill server
+        >>> prime.exit() # Sever connection with server and kill server
         '''
         if self._comm is not None:
             self._comm.close()

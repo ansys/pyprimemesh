@@ -52,12 +52,12 @@ def launch_server_process(
     n_procs: Optional[int] = None,
     **kw,
 ) -> subprocess.Popen:
-    '''Launch a server process for PyPrime server.
+    '''Launch a server process for Ansys Prime Server.
 
     Parameters
     ----------
     pyprime_root: Optional[str]
-        Root directory which contains the PyPrime server.
+        Root directory which contains the Ansys Prime Server.
     ip: str
         IP address to start the server at.  The default IP address is 127.0.0.1.
     port: int
@@ -81,7 +81,7 @@ def launch_server_process(
     if pyprime_root is None:
         pyprime_root = get_pyprime_root()
         if pyprime_root is None:
-            raise FileNotFoundError('No valid PyPrime server found to launch.')
+            raise FileNotFoundError('No valid Ansys Prime Server found to launch.')
     else:  # verify if the file exists
         if not os.path.isdir(pyprime_root):
             raise FileNotFoundError('Invalid exec_file path.')
@@ -134,7 +134,7 @@ def launch_server_process(
     if sys.platform.startswith('win32'):
         kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    logging.getLogger('PyPrime').info('Launching PyPrime Server')
+    logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
     server = subprocess.Popen(server_args, **kwargs)
     return server
 
@@ -187,12 +187,12 @@ def launch_prime(
     version: Optional[str] = None,
     **kwargs,
 ):
-    '''Launch an instance of PyPrime server and get a client for it.
+    '''Launch an instance of Ansys Prime Server and get a client for it.
 
     Parameters
     ----------
     pyprime_root: Optional[str]
-        Root directory which contains the PyPrime server.
+        Root directory which contains the Ansys Prime Server.
     ip: str
         IP address to start the server at.  The default IP address is 127.0.0.1.
     port: int
@@ -225,8 +225,8 @@ def launch_prime(
     if ip == defaults.ip():
         port = utils.get_available_local_port(port)
 
-    if 'PYPRIME_LAUNCH_CONTAINER' in os.environ:
-        container_name = 'prime-server'
+    if 'PYPRIMEMESH_LAUNCH_CONTAINER' in os.environ:
+        container_name = 'ansys-prime-server'
         utils.launch_prime_github_container(port=port, name=container_name, version=version)
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
