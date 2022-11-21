@@ -1,11 +1,11 @@
-"""PyPrime provides pythonic access to Prime server present in the Ansys Workbench install.
+"""PyPrimeMesh provides pythonic access to Prime server present in the Ansys Workbench install.
 
-PyPrime is an integral part of PyAnsys effort to facilitate the use of Ansys technologies directly
-from Python. PyPrime consists of various python modules that help you to acquire geometry and
-generate surface and volume meshes for multiple solvers. PyPrime uses ansys.meshing.fm as primary
+PyPrimeMesh is an integral part of PyAnsys effort to facilitate the use of Ansys technologies directly
+from Python. PyPrimeMesh consists of various python modules that help you to acquire geometry and
+generate surface and volume meshes for multiple solvers. PyPrimeMesh uses ansys.meshing.fm as primary
 module to acquire geometry data. For generating mesh, the primary module is ansys.meshing.prime.
 
-PyPrime enables you to:
+PyPrimeMesh enables you to:
 
 * Generate quad dominant and triangular surface meshes
 * Generate surface meshes with various sizing options like volumetric, constant, and so on
