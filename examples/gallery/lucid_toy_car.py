@@ -29,14 +29,14 @@ Procedure
 * Print statistics on generated mesh.
 * Improve mesh quality.
 * Write a cas file for use in the Fluent solver.
-* Exit the PyPrime session.
+* Exit the PyPrimeMesh session.
 """
 
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
-# From the PyPrime client get the model.
+# From the PyPrimeMesh client get the model.
 # Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
@@ -276,7 +276,7 @@ mesh_util.write(mesh_file)
 print("\nExported file:\n", mesh_file)
 
 ###############################################################################
-# Exit PyPrime
+# Exit PyPrimeMesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
