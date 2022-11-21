@@ -18,7 +18,7 @@ author = "Ansys Inc."
 release = version = __version__
 
 # HTML options
-html_short_title = html_title = "PyPrime"
+html_short_title = html_title = "PyPrimeMesh"
 html_logo = pyansys_logo_black
 html_theme = 'ansys_sphinx_theme'
 
