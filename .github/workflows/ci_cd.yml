@@ -138,8 +138,8 @@ jobs:
         run: |
           make -C doc html #SPHINXOPTS="-W"
         env:
-          PYPRIME_LAUNCH_CONTAINER: 1
-          PYPRIME_SPHINX_BUILD: 1
+          PYPRIMEMESH_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_SPHINX_BUILD: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
@@ -216,7 +216,7 @@ jobs:
           pip install -r requirements/requirements_tests.txt
           echo "Not running unit tests for now..."
         env:
-          PYPRIME_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
       
       - name: Check package
