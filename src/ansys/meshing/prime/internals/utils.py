@@ -101,11 +101,11 @@ def launch_prime_github_container(
     mount_host: str = defaults.get_user_data_path(),
     mount_image: str = defaults.get_user_data_path_for_containers(),
     port: int = defaults.port(),
-    name: str = 'prime-server',
+    name: str = 'ansys-prime-server',
     version: Optional[str] = None,
 ):
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
-    image_name = os.environ.get('PYPRIME_IMAGE_NAME', 'ghcr.io/pyansys/prime')
+    image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/pyansys/prime')
     if license_file is None:
         raise ValueError('Licensing information to launch container not found')
     if version is None:
