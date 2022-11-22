@@ -141,12 +141,12 @@ with given parameters.
 
 .. code:: python
 
-    >>> print("Number of tria faces : ", part_summary_res.n_tri_faces)
+    >>> print("Number of tri faces : ", part_summary_res.n_tri_faces)
     >>> print("Number of tet cells : ", part_summary_res.n_tet_cells)
     >>> print("Number of poly cells : ", part_summary_res.n_poly_cells)
     >>> print("Total number of cells : ", part_summary_res.n_cells)
 
-    Number of tria faces :  49430
+    Number of tri faces :  49430
     Number of tet cells :  254669
     Number of poly cells :  82760
     Total number of cells :  337429
