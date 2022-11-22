@@ -86,7 +86,7 @@ Firstly, start PyPrimeMesh client and import the faceted geometry (.stl):
     file_io = prime.FileIO(model)
     file_io.import_cad(input_file, params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM))
 
-After importing the CAD file, you can display the model using graphics module and print the statistics on the model:
+After importing the CAD file, you can display the model using graphics module:
 
 .. code:: python
 
@@ -99,6 +99,8 @@ After importing the CAD file, you can display the model using graphics module an
 .. figure:: ../images/simple-bracket-holes_stl.png
     :width: 300pt
     :align: center
+
+And print the results of part summary:
 
 .. code:: python
 

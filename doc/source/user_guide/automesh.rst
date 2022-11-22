@@ -28,6 +28,8 @@ The following example shows how to initialize :class:`AutoMeshParams<ansys.meshi
        tet=prime.TetParams(model=model, quadratic=True)
    )
 
+You can review the parameters for volume meshing:
+
 .. code:: python
 
    >>> print(automesh_params)
@@ -89,10 +91,35 @@ The following example shows you the procedure to:
    qual_params = prime.VolumeQualitySummaryParams(
        model=model,
        cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS],
-       quality_limit=[0.96]
+       quality_limit=[0.95]
    )
    qual_summary_res = search.get_volume_quality_summary(params=qual_params)
 
+You can print the result of volume quality summary:
+
+.. code:: python
+
+    >>> print(qual_summary_res)
+
+    error_code :  ErrorCode.NOERROR
+    quality_results_part :  [
+    cell_quality_measure :  CellQualityMeasure.SKEWNESS
+    measure_name :  Skewness
+    part_id :  2
+    quality_limit :  0.95
+    n_found :  0
+    max_quality :  0.795889
+    min_quality :  0.00163176]
+    message :  Skewness
+        Part ID: flow_volume
+        Quality Limit: 0.95
+            Number of failures: 0
+            Max Skew: 0.795889
+            Min Skew: 0.00163176
+    Summary Results:
+        Number of failures: 0
+        Max Skew: 0.795889
+        Min Skew: 0.00163176
 
 ------------------------------
 Volume Specific Mesh Controls
