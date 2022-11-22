@@ -64,7 +64,7 @@ CAD import routes available in PyPrime are Program Controlled, Native, SpaceClai
 Refer `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ document to view the CAD supported for Workbench route on different platforms. 
 
 .. note::
-    When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration and in application defaults 
+    When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration and in-application defaults 
     are consistent in the deployed environment.
 
 .. note::
