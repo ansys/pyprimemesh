@@ -46,9 +46,9 @@ class Mesh:
     ):
         """Read or import files of different formats based on file extension.
 
-        PyPrime's native file format has extension pmdat.
+        PyPrimeMesh's native file format has extension pmdat.
         The method supports the following:
-        * Reading PyPrime's native file format.
+        * Reading PyPrimeMesh's native file format.
         * Importing various CAD Formats.
         * Importing Fluent Meshing's msh file.
         * Importing Fluent cas file.
@@ -93,9 +93,9 @@ class Mesh:
     def write(self, file_name: str):
         """Write or export files of different formats based on file extension.
 
-        PyPrime's native file format has extension pmdat.
+        PyPrimeMesh's native file format has extension pmdat.
         The method supports the following:
-        * Writing PyPrime's native file format.
+        * Writing PyPrimeMesh's native file format.
         * Exporting Fluent Meshing's msh file.
         * Exporting Fluent cas file.
         * Exporting MAPDL cdb files.
@@ -135,7 +135,7 @@ class Mesh:
         Zones allow downstream setting of
         boundary conditions or material properties.
 
-        Zone names in PyPrime are translated into equivalent concepts in solver.
+        Zone names in PyPrimeMesh are translated into equivalent concepts in solver.
         Currently, only one method is available to convert zone to label.
         Currenly, only face zones are created.
 

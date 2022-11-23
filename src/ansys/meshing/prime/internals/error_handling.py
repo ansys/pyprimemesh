@@ -253,7 +253,7 @@ prime_warning_messages = {
 
 
 class PrimeRuntimeError(Exception):
-    '''Runtime error for PyPrime.'''
+    '''Runtime error for PyPrimeMesh.'''
 
     def __init__(self, message, error_code: ErrorCode = None):
         super().__init__()
@@ -283,7 +283,7 @@ class PrimeRuntimeError(Exception):
 
 
 class PrimeRuntimeWarning(UserWarning):
-    '''Runtime warning for PyPrime.'''
+    '''Runtime warning for PyPrimeMesh.'''
 
     def __init__(self, message):
         super().__init__()

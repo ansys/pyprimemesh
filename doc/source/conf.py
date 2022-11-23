@@ -18,13 +18,13 @@ author = "Ansys Inc."
 release = version = __version__
 
 # HTML options
-html_short_title = html_title = "PyPrime"
+html_short_title = html_title = "PyPrimeMesh"
 html_logo = pyansys_logo_black
 html_theme = 'ansys_sphinx_theme'
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyprime",
+    "github_url": "https://github.com/pyansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [

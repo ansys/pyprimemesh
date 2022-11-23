@@ -228,13 +228,13 @@ for summary_res in qual_summary_res.quality_results_part:
 
 improve = prime.VolumeMeshTool(model=model)
 params = prime.AutoNodeMoveParams(
-   model=model,
-   quality_measure=prime.CellQualityMeasure.SKEWNESS,
-   target_quality=0.95,
-   dihedral_angle=90,
-   n_iterations_per_node=50,
-   restrict_boundary_nodes_along_surface=True,
-   n_attempts=10,
+    model=model,
+    quality_measure=prime.CellQualityMeasure.SKEWNESS,
+    target_quality=0.95,
+    dihedral_angle=90,
+    n_iterations_per_node=50,
+    restrict_boundary_nodes_along_surface=True,
+    n_attempts=10,
 )
 
 improve.improve_by_auto_node_move(

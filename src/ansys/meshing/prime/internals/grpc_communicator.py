@@ -105,7 +105,9 @@ class GRPCCommunicator(Communicator):
             if defaults.print_communicator_stats():
                 import logging
 
-                logging.getLogger("PyPrime").info(f'Data Transfer: Received {len(message)} bytes')
+                logging.getLogger("PyPrimeMesh").info(
+                    f'Data Transfer: Received {len(message)} bytes'
+                )
             return json.loads(message)
         else:
             raise RuntimeError("No connection with server")
