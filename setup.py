@@ -53,7 +53,7 @@ setup(
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     long_description_content_type='text/x-rst',
-    url='https://github.com/pyansys/pyprime/',
+    url='https://github.com/pyansys/pyprimemesh/',
     license='MIT',
     author='ANSYS, Inc.',  # this is required
     maintainer='PyAnsys developers',  # you can change this
