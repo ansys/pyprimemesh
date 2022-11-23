@@ -41,8 +41,8 @@ def get_ansys_prime_server_root():
         return None
 
     version = max(available_versions.keys())
-    root = available_versions[version]
-    return root
+    prime_root = available_versions[version]
+    return prime_root
 
 
 def launch_server_process(
