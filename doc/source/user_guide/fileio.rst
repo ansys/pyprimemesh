@@ -12,7 +12,7 @@ The :class:`FileIO <ansys.meshing.prime.FileIO>` class is used for all file base
 Native PMDAT Format
 ====================
 
-PMDAT is the native file format for PyPrime that contains all data associated with the active model.
+PMDAT is the native file format for PyPrimeMesh that contains all data associated with the active model.
 
 This includes, geometry, mesh, topology, controls, labels and zones.
 
@@ -24,9 +24,9 @@ The model data can be read from and written to this format using the :func:`File
 
     from ansys.meshing import prime
 
-    # Start prime and get the model
-    prime_client = prime.launch_prime()
-    model = prime_client.model
+    # Start pyprimemesh and get the model
+    pyprimemesh_client = prime.launch_prime()
+    model = pyprimemesh_client.model
 
     # Download and read an example pmdat file
     mixing_elbow = prime.examples.download_elbow_pmdat()
@@ -51,7 +51,7 @@ You may require to specify the import route for the CAD files using the :class:`
     params = prime.ImportCadParams(model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
     prime.FileIO(model).import_cad(file_name=mixing_elbow, params=params)
 
-CAD import routes available in PyPrime are Program Controlled, Native, SpaceClaim and Workbench.
+CAD import routes available in PyPrimeMesh are Program Controlled, Native, SpaceClaim and Workbench.
 
  * Program Controlled: Automatically choose the best route based on the CAD format. Program Controlled uses Native as available, SCDM for scdoc and Workbench for all the other formats.  
 
@@ -120,7 +120,7 @@ To set parameters to be used at import:
 Part Management and Creation
 ----------------------------
 
-PyPrime has options for part management within the product structure while importing a CAD (Computer Aided Design) model. 
+PyPrimeMesh has options for part management within the product structure while importing a CAD (Computer Aided Design) model. 
 The CAD model is the top in product hierarchy. A CAD model can have one or more CAD assemblies.
 The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. A typical CAD product structure is as follows:
