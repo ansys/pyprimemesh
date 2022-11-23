@@ -24,7 +24,7 @@ html_theme = 'ansys_sphinx_theme'
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyprime",
+    "github_url": "https://github.com/pyansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [

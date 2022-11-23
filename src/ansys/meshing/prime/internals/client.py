@@ -114,7 +114,7 @@ class Client(object):
             self.remote_instance.delete()
             self.pim_client.close()
 
-        clear_examples = bool(int(os.environ.get('PYPRIME_CLEAR_EXAMPLES', '1')))
+        clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
         if clear_examples:
             examples.clear_download_cache()
 
