@@ -8,8 +8,9 @@ Connections
 Zonelet Connection
 ===================
 
+In order to successfully generate a volume mesh, a watertight, fully connected, surface mesh is required which may require Connect operations. They can also be used to conformally connect multiple watertight volumes to give shared Zonelets (and therefore connected volume mesh) between them.
 The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
-The three major operations for Zonelet Connection are Intersect, Stitch and Join. You'd normally need to create a conformally connected surface mesh using join/intersect operations before generating the volume mesh. 
+The three major operations for Zonelet Connection are Intersect, Stitch and Join. 
 
  - :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` allows you to intersect the face zonelets of the part along the intersecting faces. 
 
@@ -19,7 +20,7 @@ The three major operations for Zonelet Connection are Intersect, Stitch and Join
 
 
 .. note::
-    Connect operations support only computational mesh (mesh with reasonable size). Faceted geometry is not supported.
+    Connect operations support only computational mesh (i.e. mesh with reasonable size changes and quality). Faceted geometry (i.e. STL-like mesh which can have extreme size changes and many sliver elements) is not supported.
 
 The following example shows you the procedure to:
 
@@ -113,7 +114,7 @@ Topology Based Connection
 ==========================
 
 The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology, handling the gaps and mismatches in the geometry.
-Topology based connection creates conformal meshes on shared topologies to provide a better connection between the topofaces.
+Topology based connection creates shared topoedges between neighbouring topofaces so you can create connected mesh between topofaces.
 
 .. note::
     Connectivity cannot be shared across multiple parts. 
