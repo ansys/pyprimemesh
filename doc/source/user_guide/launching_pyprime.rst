@@ -1,15 +1,15 @@
 .. _ref_index_launching_pyprime:
 
-******************
-Launching PyPrime
-******************
+**********************
+Launching PyPrimeMesh
+**********************
 
 ==============================================
 Launching Server from within a Python Script
 ==============================================
 
 Ansys Prime Server can be launched using the :func:`launch_prime() <ansys.meshing.prime.launch_prime>` function.  
-The function returns an instance of the PyPrime :class:`Client <ansys.meshing.prime.Client>` that is connected to the launched server session.  
+The function returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` that is connected to the launched server session.  
 
 .. code:: python
 
@@ -37,7 +37,7 @@ is shown below, first launching a server from cmd line:
 
     "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
 
-And then connecting to the server in python using a PyPrime :class:`Client <ansys.meshing.prime.Client>` as follows:
+And then connecting to the server in python using a PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` as follows:
 
 .. code:: python
 

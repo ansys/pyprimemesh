@@ -152,7 +152,7 @@ The number of zones within the part is identical to the number of bodies within 
     :width: 220pt
     :align: center
 
-    **Part creation by Model (from SpaceClaim to PyPrime part structure)**
+    **Part creation by Model (from SpaceClaim to PyPrimeMesh part structure)**
 
 Assembly
 ^^^^^^^^
@@ -164,7 +164,7 @@ The number of zones within each part is identical to the number of bodies within
     :width: 183pt
     :align: center
 
-    **Part creation by Assembly (from SpaceClaim to PyPrime part structure)**
+    **Part creation by Assembly (from SpaceClaim to PyPrimeMesh part structure)**
 
 Part
 ^^^^
@@ -176,7 +176,7 @@ The number of zones within a part is identical to the number of bodies within th
     :width: 221pt
     :align: center
 
-    **Part creation by Part (from SpaceClaim to PyPrime part structure)**
+    **Part creation by Part (from SpaceClaim to PyPrimeMesh part structure)**
 
 Body
 ^^^^
@@ -188,7 +188,7 @@ The number of parts is identical to the number of bodies.  As below:
     :width: 178pt
     :align: center
 
-    **Part creation by Body (from SpaceClaim to PyPrime part structure)**
+    **Part creation by Body (from SpaceClaim to PyPrimeMesh part structure)**
 
 
 ==========================================
