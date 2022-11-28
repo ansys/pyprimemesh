@@ -6,7 +6,7 @@ Common Meshing Tasks and the Lucid class
 
 The :mod:`lucid <ansys.meshing.prime.lucid>` module defines high level methods to abstract and simplify common meshing tasks.  
 Methods contained here are intended to demonstrate how the low level API’s can be combined to execute meshing workflows flexibly 
-and with minimal need for user understanding of PyPrime specific concepts.  They use global automatic defaults where possible to 
+and with minimal need for user understanding of PyPrimeMesh specific concepts.  They use global automatic defaults where possible to 
 reduce the user effort in creating general purpose operations. 
 
 Many common meshing tasks and workflows can be tackled easily using the functions provided.  
