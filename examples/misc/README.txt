@@ -1,3 +1,3 @@
 Miscellaneous Examples
 ======================
-These examples demonstrate miscellaneous tips and tricks for using PyPrime.
+These examples demonstrate miscellaneous tips and tricks for using PyPrimeMesh.
