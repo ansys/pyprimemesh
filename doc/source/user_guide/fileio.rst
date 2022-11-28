@@ -24,9 +24,9 @@ The model data can be read from and written to this format using the :func:`File
 
     from ansys.meshing import prime
 
-    # Start pyprimemesh and get the model
-    pyprimemesh_client = prime.launch_prime()
-    model = pyprimemesh_client.model
+    # Start Ansys Prime Server and get the model
+    prime_client = prime.launch_prime()
+    model = prime_client.model
 
     # Download and read an example pmdat file
     mixing_elbow = prime.examples.download_elbow_pmdat()
@@ -57,7 +57,7 @@ CAD import routes available in PyPrimeMesh are Program Controlled, Native, Space
 
  * Native: Imports selected natively supported formats like FMD ``(*.fmd)``,ACIS ``(*.sat, *.sab)``, Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
 
- * SpaceClaim:  Uses SCDM to import supported CAD files from the SpaceClaim reader. Only Windows platform support the SpaceClaim file import.  
+ * SpaceClaim: Uses SCDM to import supported CAD files from the SpaceClaim reader. Only Windows platform support the SpaceClaim file import.  
 
  * Workbench: Uses Workbench to import supported CAD files from the Workbench reader.
 
@@ -125,7 +125,7 @@ The CAD model is the top in product hierarchy. A CAD model can have one or more 
 The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. A typical CAD product structure is as follows:
 
-.. figure:: ../images/cad_structure.png
+.. figure:: ../images/cad_structure(2).png
     :width: 96pt
     :align: center
 
@@ -148,7 +148,7 @@ Model
 When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`MODEL <ansys.meshing.prime.PartCreationType.MODEL>`, a single part is created that inherits its name from the CAD model name. 
 The number of zones within the part is identical to the number of bodies within the CAD model.  As below:
 
-.. figure:: ../images/creation_model.png
+.. figure:: ../images/creation_model(2).png
     :width: 220pt
     :align: center
 
@@ -160,7 +160,7 @@ Assembly
 When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`ASSEMBLY <ansys.meshing.prime.PartCreationType.ASSEMBLY>`, a part per CAD assembly is created where the part name is inherited from the CAD assembly name.
 The number of zones within each part is identical to the number of bodies within the CAD assembly.  As below:
 
-.. figure:: ../images/creation_assembly.png
+.. figure:: ../images/creation_assembly(2).png
     :width: 183pt
     :align: center
 
@@ -172,7 +172,7 @@ Part
 When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`PART <ansys.meshing.prime.PartCreationType.PART>`, a part per CAD part is created that inherits the part name from the CAD part name. 
 The number of zones within a part is identical to the number of bodies within the CAD part.  As below:
 
-.. figure:: ../images/creation_part.png
+.. figure:: ../images/creation_part(2).png
     :width: 221pt
     :align: center
 
@@ -184,20 +184,56 @@ Body
 When you import a CAD model and specify the :class:`PartCreationType <ansys.meshing.prime.PartCreationType>` attribute as :attr:`BODY <ansys.meshing.prime.PartCreationType.BODY>`, a part per CAD body is created that inherits the part name from the CAD body name. 
 The number of parts is identical to the number of bodies.  As below:
 
-.. figure:: ../images/creation_body.png
+.. figure:: ../images/creation_body(2).png
     :width: 178pt
     :align: center
 
     **Part creation by Body (from SpaceClaim to PyPrime part structure)**
 
+
 ==========================================
 Importing and Exporting Solver Mesh Files
 ==========================================
 
-To be added.
+Import Solver Mesh Files
+------------------------
+
+ - The :func:`FileIO.import_fluent_case() <ansys.meshing.prime.FileIO.import_fluent_case>` function allows you to import Fluent case ``(*.cas)`` file and set parameters for importing files using the :class:`ImportFluentCaseParams <ansys.meshing.prime.ImportFluentCaseParams>` class.
+
+ - The :func:`FileIO.import_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.import_fluent_meshing_meshes>` function allows you to import Fluent meshing's meshes ``(*.msh, *.msh.gz)`` file and set parameters for importing files using the :class:`ImportFluentMeshingMeshParams <ansys.meshing.prime.ImportFluentMeshingMeshParams>` class.
+ You can import multiple files in parallel using multithreading with optional parameter :attr:`enable_multi_threading <ansys.meshing.prime.ImportFluentMeshingMeshParams.enable_multi_threading>`.
+
+ - The :func:`FileIO.import_mapdl_cdb() <ansys.meshing.prime.FileIO.import_mapdl_cdb>` function allows you to import MAPDL ``(*.cdb)`` file and set parameters for importing files using the :class:`ImportMapdlCdbParams <ansys.meshing.prime.ImportMapdlCdbParams>` class. 
+ You can import quadratic mesh elements as linear with optional parameter :attr:`drop_mid_nodes <ansys.meshing.prime.ImportMapdlCdbParams.drop_mid_nodes>`.
+
+..note::
+    All import functions have the optional parameter to append imported file to existing model.
+
+Export Solver Mesh Files
+------------------------
+
+ - The :func:`FileIO.export_fluent_case() <ansys.meshing.prime.FileIO.export_fluent_case>` function allows you to export Fluent case ``(*.cas)`` file and set parameters for exporting files using the :class:`ExportFluentCaseParams <ansys.meshing.prime.ExportFluentCaseParams>` class.
+
+ - The :func:`FileIO.export_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.export_fluent_meshing_meshes>` function allows you to export Fluent meshing's meshes ``(*.msh)`` file and set parameters for exporting files using the :class:`ExportFluentMeshingMeshParams <ansys.meshing.prime.ExportFluentMeshingMeshParams>` class.
+
+ - The :func:`FileIO.export_mapdl_cdb() <ansys.meshing.prime.FileIO.export_mapdl_cdb>` function allows you to export MAPDL ``(*.cdb)`` file and set parameters for exporting files using the :class:`ExportMapdlCdbParams <ansys.meshing.prime.ExportMapdlCdbParams>` class.
+
+ - The :func:`FileIO.export_boundary_fitted_spline_kfile() <ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile>` function allows you to export IGA LS-DYNA keyword ``(*.k)`` file and set parameters for exporting boundary fitted splines using the :class:`ExportBoundaryFittedSplineParams <ansys.meshing.prime.ExportBoundaryFittedSplineParams>` class.
+
 
 =====================================
 Reading and Writing Size Field Files
 =====================================
 
-To be added.
+Native PSF format
+-----------------
+
+ - The :func:`FileIO.read_size_field() <ansys.meshing.prime.FileIO.read_size_field>` function allows you to read PRIME's size field ``(*.psf, *.psf.gz)`` file and set parameters for reading size field file using the :class:`ReadSizeFieldParams <ansys.meshing.prime.ReadSizeFieldParams>` class.
+
+ - The :func:`FileIO.write_size_field() <ansys.meshing.prime.FileIO.write_size_field>` function allows you to write PRIME's size field ``(*.psf)`` file and set parameters for writing size field file using the :class:`WriteSizeFieldParams <ansys.meshing.prime.WriteSizeFieldParams>` class.
+ You can write only active size fields into the file with optional parameter :attr:`write_only_active_size_fields <ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields>`.
+
+Fluent Meshing format
+---------------------
+
+The :func:`FileIO.import_fluent_meshing_size_field() <ansys.meshing.prime.FileIO.import_fluent_meshing_size_field>` function allows you to import Fluent Meshing's size field ``(*.sf, *.sf.gz)`` file.
