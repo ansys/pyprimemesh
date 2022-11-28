@@ -27,7 +27,7 @@ Procedure
 * Volume mesh with polyhedral elements and boundary layer refinement.
 * Print statistics on generated mesh.
 * Write a cas file for use in the Fluent solver.
-* Exit the PyPrime session.
+* Exit the PyPrimeMesh session.
 """
 
 ###############################################################################
@@ -35,7 +35,7 @@ Procedure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
 # Launch an instance of Ansys Prime Server.
-# Connect PyPrime client and get the model.
+# Connect PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from Lucid class.
 
 from ansys.meshing import prime
@@ -117,7 +117,7 @@ mesh_util.write(os.path.join(os.getcwd(), "mixing_elbow.cas"))
 print(os.getcwd())
 
 ###############################################################################
-# Exit PyPrime
+# Exit PyPrimeMesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
