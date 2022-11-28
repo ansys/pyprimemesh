@@ -1,4 +1,4 @@
-'''PyPrime Client library
+'''PyPrimeMesh Client library
 '''
 from ansys.meshing.prime._version import __version__
 from ansys.meshing.prime.core.model import Model

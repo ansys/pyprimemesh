@@ -87,7 +87,7 @@ jobs:
 
       - name: Test import
         run: |
-          python -c "import ansys.meshing.prime as pyprime"
+          python -c "import ansys.meshing.prime as pyprimemesh"
 
   docs:
     name: Documentation
@@ -138,8 +138,8 @@ jobs:
         run: |
           make -C doc html #SPHINXOPTS="-W"
         env:
-          PYPRIME_LAUNCH_CONTAINER: 1
-          PYPRIME_SPHINX_BUILD: 1
+          PYPRIMEMESH_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_SPHINX_BUILD: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
@@ -151,14 +151,14 @@ jobs:
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
         with:
-          name: pyprime-docs-html
+          name: pyprimemesh-docs-html
           path: doc/build/html
           retention-days: 7
 
       # - name: Upload PDF Documentation
       #   uses: actions/upload-artifact@v3
       #   with:
-      #     name: pyprime-docs-pdf
+      #     name: pyprimemesh-docs-pdf
       #     path: doc/build/latex/*.pdf
       #     retention-days: 7
       
@@ -167,7 +167,7 @@ jobs:
       #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
       #   uses: JamesIves/github-pages-deploy-action@v4.4.1
       #   with:
-      #     repository-name: pyansys/pyprime-docs
+      #     repository-name: pyansys/pyprimemesh-docs
       #     token: ${{ steps.get_workflow_token.outputs.token }}
       #     branch: gh-pages
       #     folder: doc/build/html
@@ -178,7 +178,7 @@ jobs:
         if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          repository-name: pyansys/pyprime-dev-docs
+          repository-name: pyansys/pyprimemesh-dev-docs
           token: ${{ steps.get_workflow_token.outputs.token }}
           branch: gh-pages
           folder: doc/build/html
@@ -205,7 +205,7 @@ jobs:
           restore-keys: |
             Python-${{ runner.os }}-${{ matrix.python-version }}
       
-      - name: Build and Install PyPrime
+      - name: Build and Install PyPrimeMesh
         run: |
           pip install build
           python -m build .
@@ -216,7 +216,7 @@ jobs:
           pip install -r requirements/requirements_tests.txt
           echo "Not running unit tests for now..."
         env:
-          PYPRIME_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
       
       - name: Check package
@@ -227,7 +227,7 @@ jobs:
       - name: Upload wheel
         uses: actions/upload-artifact@v3
         with:
-          name: pyprime-client-wheel
+          name: pyprimemesh-client-wheel
           path: dist/
           retention-days: 7
           

@@ -1,4 +1,4 @@
-"""Examples module for PyPrime
+"""Examples module for PyPrimeMesh
 """
 import os
 from typing import Union, Optional
@@ -48,15 +48,14 @@ def download_elbow_pmdat(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     elbow = pyprime_examples.download_elbow_pmdat()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(elbow, params=pyprime.FileReadParams(model))
+    >>>     elbow = prime_examples.download_elbow_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(elbow, params=prime.FileReadParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -93,15 +92,14 @@ def download_elbow_fmd(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     elbow = pyprime_examples.download_elbow_fmd()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(elbow, params=pyprime.ImportCADParams(model))
+    >>>     elbow = prime_examples.download_elbow_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -138,15 +136,14 @@ def download_elbow_scdoc(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     elbow = pyprime_examples.download_elbow_scdoc()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(elbow, params=pyprime.ImportCADParams(model))
+    >>>     elbow = prime_examples.download_elbow_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -183,15 +180,14 @@ def download_bracket_fmd(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     bracket = pyprime_examples.download_bracket_fmd()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(bracket, params=pyprime.ImportCADParams(model))
+    >>>     bracket = prime_examples.download_bracket_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -232,15 +228,14 @@ def download_bracket_scdoc(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     bracket = pyprime_examples.download_bracket_scdoc()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(bracket, params=pyprime.ImportCADParams(model))
+    >>>     bracket = prime_examples.download_bracket_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -281,15 +276,14 @@ def download_toy_car_pmdat(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     toy_car = pyprime_examples.download_toy_car_pmdat()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(toy_car, params=pyprime.FileReadParams(model))
+    >>>     toy_car = prime_examples.download_toy_car_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(toy_car, params=prime.FileReadParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -326,15 +320,14 @@ def download_toy_car_fmd(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     toy_car = pyprime_examples.download_toy_car_fmd()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(toy_car, params=pyprime.ImportCADParams(model))
+    >>>     toy_car = prime_examples.download_toy_car_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -369,15 +362,14 @@ def download_toy_car_scdoc(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     toy_car = pyprime_examples.download_toy_car_scdoc()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(toy_car, params=pyprime.ImportCADParams(model))
+    >>>     toy_car = prime_examples.download_toy_car_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -414,15 +406,14 @@ def download_pipe_tee_pmdat(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     pipe_tee = pyprime_examples.download_pipe_tee_pmdat()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(pipe_tee, params=pyprime.FileReadParams(model))
+    >>>     pipe_tee = prime_examples.download_pipe_tee_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pipe_tee, params=prime.FileReadParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -459,15 +450,14 @@ def download_pipe_tee_fmd(
 
     Examples
     --------
-    >>> import ansys.meshing.prime as pyprime
-    >>> import ansys.meshing.prime.examples as pyprime_examples
-    >>> with pyprime.launch_prime() as session:
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     pipe_tee = pyprime_examples.download_pipe_tee_fmd()
-    >>>     with pyprime.FileIO(model) as io:
-    >>>         _ = io.import_cad(pipe_tee, params=pyprime.ImportCADParams(model))
+    >>>     pipe_tee = prime_examples.download_pipe_tee_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
     >>>     print(model)
-    >>> pyprime_examples.clear_download_cache()
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')

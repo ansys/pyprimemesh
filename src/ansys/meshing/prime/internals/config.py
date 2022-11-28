@@ -1,4 +1,4 @@
-'''Configuration utility for the PyPrime library
+'''Configuration utility for the PyPrimeMesh library
 '''
 
 from contextlib import contextmanager
