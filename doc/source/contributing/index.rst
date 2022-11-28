@@ -9,14 +9,14 @@ Overall guidance on contributing to a PyAnsys library appears in the
 in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
 with it and all `Guidelines and Best Practices
 <https://dev.docs.pyansys.com/guidelines/index.html>`_ before attempting to
-contribute to PyPrime.
+contribute to PyPrimeMesh.
  
-The following contribution information is specific to PyPrime.
+The following contribution information is specific to PyPrimeMesh.
 
 ------------------------------
 Cloning the Source Repository
 ------------------------------
-You can clone the source repository from PyPrime GitHub and install the latest version in development mode by running:
+You can clone the source repository from PyPrimeMesh GitHub and install the latest version in development mode by running:
 
 >>> git clone https://github.com/pyansys/pyprime
 >>> cd pyprime
@@ -25,21 +25,21 @@ You can clone the source repository from PyPrime GitHub and install the latest v
 ---------------
 Posting Issues
 ---------------
-Use the `PyPrime Issues <https://github.com/pyansys/pyprime/issues>`_
+Use the `PyPrimeMesh Issues <https://github.com/pyansys/pyprimemesh/issues>`_
 page to submit questions, report bugs, and request new features.
 
 To reach the project support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
 ------------------------------
-Viewing PyPrime Documentation
+Viewing PyPrimeMesh Documentation
 ------------------------------
-Documentation for the latest stable release of PyPrime is hosted at
-`PyPrime Documentation <https://prime.docs.pyansys.com>`_.
+Documentation for the latest stable release of PyPrimeMesh is hosted at
+`PyPrimeMesh Documentation <https://prime.docs.pyansys.com>`_.
 
 -----------------------------------------
 Code Structure and Contributing New Code
 -----------------------------------------
-Much of the PyPrime code base is auto-generated based on the Prime server.  For the auto-generated 
+Much of the PyPrimeMesh code base is auto-generated based on the Prime server.  For the auto-generated 
 code, contributions are therefore limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.
@@ -47,19 +47,19 @@ You should not modify files marked as auto-generated.
 Contributions from pull requests can be included elsewhere.  Specific areas that should be considered
 for contributions are:
 
-`PyPrime Examples <https://github.com/pyansys/pyprime/tree/main/examples>`_
+`PyPrimeMesh Examples <https://github.com/pyansys/pyprimemesh/tree/main/examples>`_
 
-`Graphics Functionality <https://github.com/pyansys/pyprime/tree/main/src/ansys/meshing/prime/graphics>`_
+`Graphics Functionality <https://github.com/pyansys/pyprimemesh/tree/main/src/ansys/meshing/prime/graphics>`_
 
-`High Level APIs <https://github.com/pyansys/pyprime/blob/main/src/ansys/meshing/prime/lucid>`_
+`High Level APIs <https://github.com/pyansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_
 
-If you have an idea on how to enhance PyPrime, consider first creating an issue as a feature request 
+If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
 which we can use as a discussion thread to work on for implementing the contribution.
 
 -----------
 Code Style
 -----------
-PyPrime follows PEP8 standard as outlined in the `PyAnsys Development Guide
+PyPrimeMesh follows PEP8 standard as outlined in the `PyAnsys Development Guide
 <https://dev.docs.pyansys.com>`_ and implements style checking using
 `pre-commit <https://pre-commit.com/>`_.
 
