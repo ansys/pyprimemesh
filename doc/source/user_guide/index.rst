@@ -3,7 +3,7 @@
 ==========
 User Guide
 ==========
-This guide provides a general overview of using the PyPrime library for
+This guide provides a general overview of using the PyPrimeMesh library for
 mesh preparation.
 
 .. toctree::
