@@ -126,7 +126,7 @@ The CAD assembly or sub-assembly has different CAD parts.
 The CAD part has bodies or other geometric entities. A typical CAD product structure is as follows:
 
 .. figure:: ../images/cad_structure(2).png
-    :width: 96pt
+    :width: 100pt
     :align: center
 
     **Example CAD structure from SpaceClaim**
@@ -161,7 +161,7 @@ When you import a CAD model and specify the :class:`PartCreationType <ansys.mesh
 The number of zones within each part is identical to the number of bodies within the CAD assembly.  As below:
 
 .. figure:: ../images/creation_assembly(2).png
-    :width: 183pt
+    :width: 200pt
     :align: center
 
     **Part creation by Assembly (from SpaceClaim to PyPrimeMesh part structure)**
@@ -185,7 +185,7 @@ When you import a CAD model and specify the :class:`PartCreationType <ansys.mesh
 The number of parts is identical to the number of bodies.  As below:
 
 .. figure:: ../images/creation_body(2).png
-    :width: 178pt
+    :width: 200pt
     :align: center
 
     **Part creation by Body (from SpaceClaim to PyPrimeMesh part structure)**
@@ -200,13 +200,11 @@ Import Solver Mesh Files
 
  - The :func:`FileIO.import_fluent_case() <ansys.meshing.prime.FileIO.import_fluent_case>` function allows you to import Fluent case ``(*.cas)`` file and set parameters for importing files using the :class:`ImportFluentCaseParams <ansys.meshing.prime.ImportFluentCaseParams>` class.
 
- - The :func:`FileIO.import_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.import_fluent_meshing_meshes>` function allows you to import Fluent meshing's meshes ``(*.msh, *.msh.gz)`` file and set parameters for importing files using the :class:`ImportFluentMeshingMeshParams <ansys.meshing.prime.ImportFluentMeshingMeshParams>` class.
- You can import multiple files in parallel using multithreading with optional parameter :attr:`enable_multi_threading <ansys.meshing.prime.ImportFluentMeshingMeshParams.enable_multi_threading>`.
+ - The :func:`FileIO.import_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.import_fluent_meshing_meshes>` function allows you to import Fluent meshing's meshes ``(*.msh, *.msh.gz)`` file and set parameters for importing files using the :class:`ImportFluentMeshingMeshParams <ansys.meshing.prime.ImportFluentMeshingMeshParams>` class. You can import multiple files in parallel using multithreading with optional parameter :attr:`enable_multi_threading <ansys.meshing.prime.ImportFluentMeshingMeshParams.enable_multi_threading>`.
 
- - The :func:`FileIO.import_mapdl_cdb() <ansys.meshing.prime.FileIO.import_mapdl_cdb>` function allows you to import MAPDL ``(*.cdb)`` file and set parameters for importing files using the :class:`ImportMapdlCdbParams <ansys.meshing.prime.ImportMapdlCdbParams>` class. 
- You can import quadratic mesh elements as linear with optional parameter :attr:`drop_mid_nodes <ansys.meshing.prime.ImportMapdlCdbParams.drop_mid_nodes>`.
+ - The :func:`FileIO.import_mapdl_cdb() <ansys.meshing.prime.FileIO.import_mapdl_cdb>` function allows you to import MAPDL ``(*.cdb)`` file and set parameters for importing files using the :class:`ImportMapdlCdbParams <ansys.meshing.prime.ImportMapdlCdbParams>` class. You can import quadratic mesh elements as linear with optional parameter :attr:`drop_mid_nodes <ansys.meshing.prime.ImportMapdlCdbParams.drop_mid_nodes>`.
 
-..note::
+.. note::
     All import functions have the optional parameter to append imported file to existing model.
 
 Export Solver Mesh Files
@@ -230,8 +228,7 @@ Native PSF format
 
  - The :func:`FileIO.read_size_field() <ansys.meshing.prime.FileIO.read_size_field>` function allows you to read PRIME's size field ``(*.psf, *.psf.gz)`` file and set parameters for reading size field file using the :class:`ReadSizeFieldParams <ansys.meshing.prime.ReadSizeFieldParams>` class.
 
- - The :func:`FileIO.write_size_field() <ansys.meshing.prime.FileIO.write_size_field>` function allows you to write PRIME's size field ``(*.psf)`` file and set parameters for writing size field file using the :class:`WriteSizeFieldParams <ansys.meshing.prime.WriteSizeFieldParams>` class.
- You can write only active size fields into the file with optional parameter :attr:`write_only_active_size_fields <ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields>`.
+ - The :func:`FileIO.write_size_field() <ansys.meshing.prime.FileIO.write_size_field>` function allows you to write PRIME's size field ``(*.psf)`` file and set parameters for writing size field file using the :class:`WriteSizeFieldParams <ansys.meshing.prime.WriteSizeFieldParams>` class. You can write only active size fields into the file with optional parameter :attr:`write_only_active_size_fields <ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields>`.
 
 Fluent Meshing format
 ---------------------
