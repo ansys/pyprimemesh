@@ -12,11 +12,11 @@ In order to successfully generate a volume mesh, a watertight, fully connected, 
 The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
 The three major operations for Zonelet Connection are Intersect, Stitch and Join. 
 
- - :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` allows you to intersect the face zonelets of the part along the intersecting faces. 
+ - The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` function allows you to intersect the face zonelets of the part along the intersecting faces. 
 
- - :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` allows you to stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
+ - The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` function allows you to stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
 
- - :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` allows you to join a set of face zonelets to another set of face zonelets along the overlapping faces. 
+ - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` function allows you to join a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
 
 .. note::
@@ -67,6 +67,11 @@ You can check the surface mesh connectivity (visit :ref:`ref_index_mesh_diagnost
     n_multi_edges :  0
     n_duplicate_faces :  0
 
+And connect face zonelets in the model:
+
+.. note::
+    Only triangular faces are supported.
+
 .. code:: python
 
     join_params=prime.JoinParams(model)
@@ -93,9 +98,6 @@ You can check the surface mesh connectivity (visit :ref:`ref_index_mesh_diagnost
     # Check surface after connect operation
     diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
-.. note::
-    Only triangular faces are supported.
-
 The results of surface mesh connectivity after connect operation can be printed:
 
 .. code:: python
@@ -117,7 +119,7 @@ The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to pro
 Topology based connection creates shared topoedges between neighbouring topofaces so you can create connected mesh between topofaces.
 
 .. note::
-    Connectivity cannot be shared across multiple parts. 
+    Connectivity cannot be shared across multiple parts.
 
 .. code:: python
 
