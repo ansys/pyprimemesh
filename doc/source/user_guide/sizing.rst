@@ -4,7 +4,7 @@
 Sizing
 ******
 
-PyPrime provides various sizing controls to help you refine your mesh to obtain the desired accuracy while meshing.
+PyPrimeMesh provides various sizing controls to help you refine your mesh to obtain the desired accuracy while meshing.
 
 
 ---------------
@@ -13,7 +13,7 @@ Sizing Control
 
 When you mesh a model, you expect the mesh size to satisfy specific requirements at various locations in the mesh to provide accurate results.
 You must use optimal sizes while meshing to achieve maximum simulation accuracy at minimum computational cost.
-PyPrime specifies the sizing requirements using sizing controls. The sizing controls in PyPrime have the following:
+PyPrimeMesh specifies the sizing requirements using sizing controls. The sizing controls in PyPrimeMesh have the following:
 
 * Scope
 
@@ -72,7 +72,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 Size Fields
 -----------
 
-The :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class helps you to fetch the element size at a given location. The size field types available in PyPrime are: 
+The :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class helps you to fetch the element size at a given location. The size field types available in PyPrimeMesh are: 
 
  * Geometric
 

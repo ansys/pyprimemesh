@@ -26,7 +26,7 @@ prismatic boundary layers.
 Procedure
 ~~~~~~~~~~
 
--   Launch Ansys Prime Server instance and connect client.
+-   Launch Ansys Prime Server instance and connect PyPrimeMesh client.
 -   Read CAD geometry.
 -   Mesh for structural thermal analysis.
 -   Write mesh for structural thermal analysis.
@@ -163,7 +163,7 @@ mesh_util.write(fluid_mesh)
 print("\nExported Fluid Mesh: ", fluid_mesh)
 
 ###############################################################################
-# Exit PyPrime
+# Exit PyPrimeMesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

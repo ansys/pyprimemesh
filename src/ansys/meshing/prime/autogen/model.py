@@ -18,7 +18,7 @@ class Model(CoreObject, CommunicationManager):
     def __init__(self, comm, id: int, object_id: int, name: str):
         """ Initialize Model """
         self._comm = comm
-        self._logger = logging.getLogger("PyPrime")
+        self._logger = logging.getLogger("PyPrimeMesh")
         self._id = id
         self._object_id = object_id
         self._name = name

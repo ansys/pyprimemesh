@@ -26,7 +26,7 @@ Procedure
 * Scaffold topofaces and topoedges with tolerance parameter
 * Surface mesh topofaces with constant size and generate quad elements
 * Write a cdb file for use in the APDL solver
-* Exit the PyPrime session
+* Exit the PyPrimeMesh session
 
 """
 
@@ -35,7 +35,7 @@ Procedure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
 # Launch an instance of Ansys Prime Server.
-# Connect PyPrime client and get the model.
+# Connect PyPrimeMesh client and get the model.
 
 from ansys.meshing import prime
 import os, tempfile
@@ -138,7 +138,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
     print(f'MAPDL case exported at {mapdl_cdb}')
 
 ###############################################################################
-# Exit the PyPrime session
-# ~~~~~~~~~~~~~~~~~~~~~~~~
+# Exit the PyPrimeMesh session
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

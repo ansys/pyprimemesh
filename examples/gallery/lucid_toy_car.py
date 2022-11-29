@@ -29,14 +29,14 @@ Procedure
 * Print statistics on generated mesh.
 * Improve mesh quality.
 * Write a cas file for use in the Fluent solver.
-* Exit the PyPrime session.
+* Exit the PyPrimeMesh session.
 """
 
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
-# From the PyPrime client get the model.
+# From the PyPrimeMesh client get the model.
 # Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
@@ -228,13 +228,13 @@ for summary_res in qual_summary_res.quality_results_part:
 
 improve = prime.VolumeMeshTool(model=model)
 params = prime.AutoNodeMoveParams(
-   model=model,
-   quality_measure=prime.CellQualityMeasure.SKEWNESS,
-   target_quality=0.95,
-   dihedral_angle=90,
-   n_iterations_per_node=50,
-   restrict_boundary_nodes_along_surface=True,
-   n_attempts=10,
+    model=model,
+    quality_measure=prime.CellQualityMeasure.SKEWNESS,
+    target_quality=0.95,
+    dihedral_angle=90,
+    n_iterations_per_node=50,
+    restrict_boundary_nodes_along_surface=True,
+    n_attempts=10,
 )
 
 improve.improve_by_auto_node_move(
@@ -276,7 +276,7 @@ mesh_util.write(mesh_file)
 print("\nExported file:\n", mesh_file)
 
 ###############################################################################
-# Exit PyPrime
+# Exit PyPrimeMesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()
