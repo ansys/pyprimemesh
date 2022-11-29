@@ -42,30 +42,110 @@ Curvature Sizing
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`CURVATURE <ansys.meshing.prime.SizingType.CURVATURE>`, sizes on the scope are based on the local curvature, with the size being small when the local curvature is large and vice versa. The :class:`CurvatureSizingParams <ansys.meshing.prime.CurvatureSizingParams>` is used to specify following parameters: min/max size, growth rate and normal angle.
 
+.. code:: python
+
+    size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
+    size_control.set_curvature_sizing_params(
+        prime.CurvatureSizingParams(
+            model=model,
+            min=0.2,
+            max=2.0,
+            growth_rate=1.2
+        )
+    )
+    size_control.set_suggested_name("curv_control")
+    size_control.set_scope(prime.ScopeDefinition(model=model))
+
 Proximity Sizing
 ^^^^^^^^^^^^^^^^
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`PROXIMITY <ansys.meshing.prime.SizingType.PROXIMITY>`, sizes are based on the closeness of surfaces or edges specified in the scope. The :class:`ProximitySizingParams <ansys.meshing.prime.ProximitySizingParams>` is used to specify following parameters: min/max size, growth rate and the number of element per gap.
+
+.. code:: python
+
+    size_control = model.control_data.create_size_control(prime.SizingType.PROXIMITY)
+    size_control.set_proximity_sizing_params(
+        prime.ProximitySizingParams(
+            model=model,
+            min=0.1,
+            max=2.0,
+            growth_rate=1.2,
+            elements_per_gap=3.0
+        )
+    )
+    size_control.set_suggested_name("prox_control")
+    size_control.set_scope(prime.ScopeDefinition(model=model))
 
 Hard Sizing
 ^^^^^^^^^^^
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`HARD <ansys.meshing.prime.SizingType.HARD>`, sizes on the scope are based on a uniform value while meshing. The :class:`HardSizingParams <ansys.meshing.prime.HardSizingParams>` is used to specify following parameters: minimum size and growth rate.
 
+.. code:: python
+
+    size_control = model.control_data.create_size_control(prime.SizingType.HARD)
+    size_control.set_hard_sizing_params(
+        prime.HardSizingParams(
+            model=model,
+            min=0.2,
+            growth_rate=1.2
+        )
+    )
+    size_control.set_suggested_name("hard_control")
+    size_control.set_scope(prime.ScopeDefinition(model=model))
+
 Soft Sizing
 ^^^^^^^^^^^
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`SOFT <ansys.meshing.prime.SizingType.SOFT>`, sizes on the scope are based on a certain maximum value which should not exceed while meshing. The :class:`SoftSizingParams <ansys.meshing.prime.SoftSizingParams>` is used to specify following parameters: maximum size and growth rate.
+
+.. code:: python
+
+    size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
+    size_control.set_soft_sizing_params(
+        prime.SoftSizingParams(
+            model=model,
+            max=0.2,
+            growth_rate=1.2
+        )
+    )
+    size_control.set_suggested_name("soft_control")
+    size_control.set_scope(prime.ScopeDefinition(model=model))
 
 Meshed Sizing
 ^^^^^^^^^^^^^
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`MESHED <ansys.meshing.prime.SizingType.MESHED>`, sizes are based on existing local sizes. The :class:`MeshedSizingParams <ansys.meshing.prime.MeshedSizingParams>` class is used to specify growth rate.
 
+.. code:: python
+
+    size_control = model.control_data.create_size_control(prime.SizingType.MESHED)
+    size_control.set_meshed_sizing_params(
+        prime.MeshedSizingParams(
+            model=model,
+            growth_rate=1.2
+        )
+    )
+    size_control.set_suggested_name("meshed_control")
+    size_control.set_scope(prime.ScopeDefinition(model=model))
+
 Body of Influence Sizing
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`BOI <ansys.meshing.prime.SizingType.BOI>`, sizes inside a closed volume scope should not cross a certain maximum value. The :class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` is used to specify following parameters: maximum size and growth rate.
+
+.. code:: python
+
+    size_control = model.control_data.create_size_control(prime.SizingType.BOI)
+    size_control.set_boi_sizing_params(
+        prime.BoiSizingParams(
+            model=model,
+            max=20.0,
+            growth_rate=1.2
+        )
+    )
+    size_control.set_suggested_name("BOI_control")
+    size_control.set_scope(prime.ScopeDefinition(model=model))
 
 
 -----------
