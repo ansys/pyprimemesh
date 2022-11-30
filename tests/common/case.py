@@ -9,24 +9,22 @@ class PrimeTestCase(unittest.TestCase):
     _client = None
 
     @classmethod
-    def startPyPrimeServer(cls, pyprime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
+    def startAnsysPrimeServer(cls, prime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
         if n_procs == 1:
-            client = prime.launch_prime(pyprime_root=pyprime_root, ip=ip, port=port)
+            client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
         else:
-            client = prime.launch_prime(
-                pyprime_root=pyprime_root, ip=ip, port=port, n_procs=n_procs
-            )
+            client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port, n_procs=n_procs)
         return client
 
     @classmethod
     def getRemoteClient(cls):
-        ip = os.environ.get('PYPRIME_IP', '127.0.0.1')
-        port = int(os.environ.get('PYPRIME_PORT', '50055'))
-        if 'PYPRIME_EXTERNAL_SERVER' in os.environ:
+        ip = os.environ.get('PYPRIMEMESH_IP', '127.0.0.1')
+        port = int(os.environ.get('PYPRIMEMESH_PORT', '50055'))
+        if 'PYPRIMEMESH_EXTERNAL_SERVER' in os.environ:
             client = prime.Client(ip=ip, port=port)
         else:
-            pyprime_root = os.environ.get('PYPRIME_INSTALL_ROOT', None)
-            client = cls.startPyPrimeServer(pyprime_root=pyprime_root, ip=ip, port=port, n_procs=1)
+            prime_root = os.environ.get('PYPRIMEMESH_INSTALL_ROOT', None)
+            client = cls.startAnsysPrimeServer(prime_root=prime_root, ip=ip, port=port, n_procs=1)
 
         return client
 

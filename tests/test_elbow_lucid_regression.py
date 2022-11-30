@@ -1,4 +1,4 @@
-import ansys.meshing.prime as pyprime
+import ansys.meshing.prime as prime
 import unittest
 import math
 from .common import PrimeTestCase, PrimeTextTestRunner
@@ -7,22 +7,22 @@ from .common import PrimeTestCase, PrimeTextTestRunner
 class TestElbow(PrimeTestCase):
     def test_elbow_lucid(self):
         # downloads pmdat file
-        elbow_lucid = pyprime.examples.download_elbow_pmdat()
-        # elbow_lucid = pyprime.examples.download_elbow_scdoc()
+        elbow_lucid = prime.examples.download_elbow_pmdat()
+        # elbow_lucid = prime.examples.download_elbow_scdoc()
         # reads file
-        fileIO = pyprime.FileIO(model=self._model)
-        # _ = fileIO.read_pmdat(elbow_lucid, pyprime.FileReadParams(model=self._model))
-        mesher = pyprime.lucid.Mesh(self._model)
+        fileIO = prime.FileIO(model=self._model)
+        # _ = fileIO.read_pmdat(elbow_lucid, prime.FileReadParams(model=self._model))
+        mesher = prime.lucid.Mesh(self._model)
         mesher.read(file_name=elbow_lucid)
         mesher.create_zones_from_labels("inlet,outlet")
         mesher.surface_mesh(min_size=5, max_size=20)
         result = mesher.volume_mesh(
             prism_layers=3,
             prism_surface_expression="* !inlet !outlet",
-            volume_fill_type=pyprime.VolumeFillType.POLY,
+            volume_fill_type=prime.VolumeFillType.POLY,
         )
         part = self._model.get_part_by_name("flow_volume")
-        part_summary_res = part.get_summary(pyprime.PartSummaryParams(model=self._model))
+        part_summary_res = part.get_summary(prime.PartSummaryParams(model=self._model))
         # validate number of face zones
         self.assertEqual(
             part_summary_res.n_face_zones,
