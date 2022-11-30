@@ -2,7 +2,7 @@
 .. _ref_bracket_mid_surface_mesh:
 
 =========================================================
-Meshing a mid-surfaced bracket for a structural analysis
+Meshing a Mid-Surfaced Bracket for a Structural Analysis
 =========================================================
 
 **Summary**: This example illustrates how to use topology based connection
