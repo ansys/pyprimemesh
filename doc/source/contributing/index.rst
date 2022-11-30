@@ -39,7 +39,7 @@ Documentation for the latest stable release of PyPrimeMesh is hosted at
 -----------------------------------------
 Code Structure and Contributing New Code
 -----------------------------------------
-PyPrimeMesh code base is auto-generated based on the Ansys Prime Server.  For the auto-generated 
+PyPrimeMesh code base is primarily auto-generated based on the Ansys Prime Server.  For the auto-generated 
 code, contributions are limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.
@@ -54,7 +54,7 @@ for contributions are:
 `High Level APIs <https://github.com/pyansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_
 
 If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
-which PyPrimeMesh team can use as a discussion thread to work on for implementing the contribution.
+which the PyPrimeMesh team can use as a discussion thread to work on for implementing the contribution.
 
 -----------
 Code Style
