@@ -5,7 +5,7 @@ Contributing
 =============
 
 Overall guidance on contributing to a PyAnsys library appears in the
-`Contributing <https://dev.docs.pyansys.com/overview/contributing.html>`_ topic
+`Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ topic
 in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
 with it and all `Guidelines and Best Practices
 <https://dev.docs.pyansys.com/guidelines/index.html>`_ before attempting to
@@ -39,8 +39,8 @@ Documentation for the latest stable release of PyPrimeMesh is hosted at
 -----------------------------------------
 Code Structure and Contributing New Code
 -----------------------------------------
-Much of the PyPrimeMesh code base is auto-generated based on the Prime server.  For the auto-generated 
-code, contributions are therefore limited to raising issues and enhancement requests.  
+PyPrimeMesh code base is auto-generated based on the Ansys Prime Server.  For the auto-generated 
+code, contributions are limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.
 
@@ -54,7 +54,7 @@ for contributions are:
 `High Level APIs <https://github.com/pyansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_
 
 If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
-which we can use as a discussion thread to work on for implementing the contribution.
+which PyPrimeMesh team can use as a discussion thread to work on for implementing the contribution.
 
 -----------
 Code Style
