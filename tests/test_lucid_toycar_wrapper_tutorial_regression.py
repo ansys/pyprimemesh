@@ -8,6 +8,7 @@ import math
 
 
 class TestElbow(PrimeTestCase):
+    @unittest.skip
     def test_toycar_tutorial(self):
         # downloads pmdat file
         toy_car = prime.examples.download_toy_car_pmdat()

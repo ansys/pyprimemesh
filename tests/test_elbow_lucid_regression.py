@@ -7,13 +7,13 @@ from .common import PrimeTestCase, PrimeTextTestRunner
 class TestElbow(PrimeTestCase):
     def test_elbow_lucid(self):
         # downloads pmdat file
-        #elbow_lucid = pyprime.examples.download_elbow_pmdat()
-        elbow_lucid = pyprime.examples.download_elbow_scdoc()
+        elbow_lucid = pyprime.examples.download_elbow_pmdat()
+        # elbow_lucid = pyprime.examples.download_elbow_scdoc()
         # reads file
         fileIO = pyprime.FileIO(model=self._model)
-        #_ = fileIO.read_pmdat(elbow_lucid, pyprime.FileReadParams(model=self._model))
+        # _ = fileIO.read_pmdat(elbow_lucid, pyprime.FileReadParams(model=self._model))
         mesher = pyprime.lucid.Mesh(self._model)
-        mesher.read(file_name = elbow_lucid)
+        mesher.read(file_name=elbow_lucid)
         mesher.create_zones_from_labels("inlet,outlet")
         mesher.surface_mesh(min_size=5, max_size=20)
         result = mesher.volume_mesh(
@@ -45,7 +45,7 @@ class TestElbow(PrimeTestCase):
         )
         # validate number of poly cells
         self.assertTrue(
-            math.isclose(7424.0, float(part_summary_res.n_poly_cells), rel_tol=0.02),
+            math.isclose(7613.0, float(part_summary_res.n_poly_cells), rel_tol=0.02),
             msg="Validate number of poly cells. Expected value: 7424, 2% tolerance. Actual value: "
             + str(part_summary_res.n_poly_cells),
         )
