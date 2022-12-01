@@ -1634,9 +1634,9 @@ class Mesh:
         )
 
         # delete extracted features
-        for part_id, zonelets in extracted_features.items():
+        for part_id, zonelets_to_delete in extracted_features.items():
             part = self._model.get_part(part_id)
-            part.delete_zonelets(zonelets)
+            part.delete_zonelets(zonelets_to_delete)
 
         # delete size fields
         if len(computed_size_fields) > 0:
