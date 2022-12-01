@@ -1,4 +1,4 @@
-# check spelling, codestyle
+    # check spelling, codestyle
 name: GitHub CI
 
 # run only on main branch.  This avoids duplicated actions on PRs
@@ -210,11 +210,22 @@ jobs:
           pip install build
           python -m build .
           pip install dist/*.whl --find-links deps
-      
+   
+      - name: Login in Github Container registry #
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: pyansys-bot
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull, launch, and validate prime service #
+        run: docker pull ${{ env.DOCKER_PACKAGE }}          
+
       - name: Run Unit Tests
         run: |
           pip install -r requirements/requirements_tests.txt
-          echo "Not running unit tests for now..."
+          pytest -v tests
+
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
