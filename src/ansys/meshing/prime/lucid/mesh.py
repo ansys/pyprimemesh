@@ -1114,9 +1114,9 @@ class Mesh:
         scope: prime.ScopeDefinition,
     ):
         features = prime.FeatureExtraction(self._model)
+        extracted_features = dict()
         if extract_features:
             face_zonelets_prime_array = self._model.control_data.get_part_zonelets(scope=scope)
-            extraced_features = {}
             for item in face_zonelets_prime_array:
                 res = features.extract_features_on_face_zonelets(
                     part_id=item.part_id,
@@ -1129,7 +1129,7 @@ class Mesh:
                         label_name="__extracted__features__",
                     ),
                 )
-                extraced_features[item.part_id] = res.new_edge_zonelets
+                extracted_features[item.part_id] = res.new_edge_zonelets
             feature_scope = scope
             feature_scope.label_expression = "__extracted__features__"
             extracted_feature_params = prime.FeatureRecoveryParams(
@@ -1168,7 +1168,7 @@ class Mesh:
                 scope=scope,
             )
             feature_recovery_params.append(existing_feature_params)
-        return extraced_features
+        return extracted_features
 
     def __process_size_fields(
         self,
@@ -1634,9 +1634,9 @@ class Mesh:
         )
 
         # delete extracted features
-        for part_id in extracted_features:
+        for part_id, zonelets_to_delete in extracted_features.items():
             part = self._model.get_part(part_id)
-            part.delete_zonelets(extracted_features[part_id])
+            part.delete_zonelets(zonelets_to_delete)
 
         # delete size fields
         if len(computed_size_fields) > 0:
