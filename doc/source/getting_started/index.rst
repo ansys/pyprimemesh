@@ -32,8 +32,8 @@ Alternatively, clone and install in development mode with:
 
 .. code::
 
-   git clone https://github.com/pyansys/pyprime
-   cd pyprime
+   git clone https://github.com/pyansys/pyprimemesh
+   cd pyprimemesh
    pip install -e .[graphics] --find-links deps
 
 Dependencies
