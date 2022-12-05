@@ -33,6 +33,9 @@ The model data can be read from and written to this format using the :func:`File
     params = prime.FileReadParams(model=model)
     prime.FileIO(model).read_pmdat(file_name=mixing_elbow, file_read_params=params)
 
+.. tip::
+    Files can be read/imported based on file extension using the :func:`Mesh.read() <ansys.meshing.prime.lucid.Mesh.read>` in Lucid API. The method supports PyPrimeMesh's native format, various CAD formats and solver mesh files. 
+
 
 ==============
 Importing CAD
@@ -51,11 +54,17 @@ You may require to specify the import route for the CAD files using the :class:`
     params = prime.ImportCadParams(model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
     prime.FileIO(model).import_cad(file_name=mixing_elbow, params=params)
 
+Alternatively, you can use :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in Lucid API:
+
+.. code:: python
+    mesh_util = prime.lucid.Mesh(model=model)
+    mesh_util.read(file_name=mixing_elbow, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
+
 CAD import routes available in PyPrimeMesh are Program Controlled, Native, SpaceClaim and Workbench.
 
  * Program Controlled: Automatically choose the best route based on the CAD format. Program Controlled uses Native as available, SCDM for scdoc and Workbench for all the other formats.  
 
- * Native: Imports selected natively supported formats like FMD ``(*.fmd)``,ACIS ``(*.sat, *.sab)``, Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
+ * Native: Imports selected natively supported formats like FMD ``(*.fmd)``, ACIS ``(*.sat, *.sab)``, Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, STL ``(*.stl)``. 
 
  * SpaceClaim: Uses SCDM to import supported CAD files from the SpaceClaim reader. Only Windows platform support the SpaceClaim file import.  
 
@@ -81,6 +90,11 @@ The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` 
     params = prime.ImportCadParams(model=model, append=True)
     prime.FileIO(model).import_cad(file_name="cad_to_append.scdoc", params=params)
 
+Alternatively, you can use :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in Lucid API:
+
+.. code:: python
+    mesh_util = prime.lucid.Mesh(model=model)
+    mesh_util.read("cad_to_append.scdoc", append=True)
 
 Parametric CAD
 --------------
@@ -194,6 +208,9 @@ The number of parts is identical to the number of bodies.  As below:
 ==========================================
 Importing and Exporting Solver Mesh Files
 ==========================================
+
+.. tip::
+    File extensions such as CAS ``(*.cas)``, MSH ``(*.msh, *.msh.gz)``, CDB ``(*.cdb)`` can be imported using the :func:`Mesh.read() <ansys.meshing.prime.lucid.Mesh.read>` and exported using the :func:`Mesh.write() <ansys.meshing.prime.lucid.Mesh.write>` in Lucid API.
 
 Import Solver Mesh Files
 ------------------------

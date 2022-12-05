@@ -10,11 +10,14 @@ The :class:`Surfer <ansys.meshing.prime.Surfer>` class enables you to perform su
 different surface meshing algorithms on topofaces or face zonelets.
 Surface meshing considers many parameters like size field type, min size, max size, growth rate, transition type while meshing face zonelets or topofaces.
 
+.. tip::
+    Surface meshing with constant and variable sizing with tri/quad mesh can be generated using :func:`Mesh.surface_mesh() <ansys.meshing.prime.lucid.Mesh.surface_mesh>` in Lucid API.
+
 =================================
 Surface Meshing Geometry/Topology
 =================================
 
-The following example shows you the procedure how to:
+The following example shows you the procedure to:
 
 * Import topology-based geometry (.scdoc) and visualize the model
 * Surface mesh the TopoFaces with constant size
@@ -45,6 +48,8 @@ Firstly, start PyPrimeMesh client and import the CAD geometry (.scdoc):
     :width: 300pt
     :align: center
 
+    **CAD geometry imported**
+
 Initialize surfer parameters and generate surface mesh on TopoFaces:
 
 .. code:: python
@@ -61,11 +66,13 @@ Initialize surfer parameters and generate surface mesh on TopoFaces:
     :width: 300pt
     :align: center
 
+    **Surface mesh displayed**
+
 ==================
 Remeshing Surfaces
 ==================
 
-The following example shows you the procedure how to:
+The following example shows you the procedure to:
 
 * Import faceted geometry (.stl) and visualize the model
 * Create curvature size control and compute volumetric size field (visit :ref:`ref_index_sizing` section for more information.)
@@ -99,6 +106,8 @@ After importing the CAD file, you can display the model using graphics module:
 .. figure:: ../images/simple-bracket-holes_stl.png
     :width: 300pt
     :align: center
+
+    **Faceted geometry imported**
 
 And print the results of part summary:
 
@@ -168,4 +177,29 @@ Finally, initialize surfer parameters and generate surface mesh on face zonelets
 .. figure:: ../images/simple-bracket-holes_mesh1.png
     :width: 300pt
     :align: center
+
+    **Surface mesh displayed**
+
+
+Remeshing surface using Lucid class
+------------------------------------
+
+The following example shows you the method required to replicate the surface mesh results as shown above:
+
+.. code:: python
+
+    import ansys.meshing.prime as prime
+    prime_client = prime.launch_prime()
+    model = prime_client.model
+
+    # Instantiate the lucid class
+    mesh_util = prime.lucid.Mesh(model)
+
+    # Import CAD file (.stl)
+    input_file = r"D:/PyPrime/simple-bracket-holes.stl"
+    mesh_util.read(input_file)
+
+    # Surface mesh the geometry with curvature sizing
+    # Set min and max sizing that will be used for curvature refinement
+    mesh_util.surface_mesh(min_size=0.27, max_size=5.5)
 
