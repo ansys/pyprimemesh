@@ -1,4 +1,4 @@
-import os
+# import os
 
 # os.environ.clear()
 import ansys.meshing.prime as prime
