@@ -136,7 +136,7 @@ The following example shows you the method required to generate a poly prism mes
     mesh_util.volume_mesh(
         volume_fill_type=prime.VolumeFillType.POLY,
         prism_layers=5,
-        prism_label_expression="* !inlet !outlet"
+        prism_surface_expression="* !inlet !outlet"
     )
 
 
