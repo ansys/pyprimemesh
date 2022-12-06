@@ -83,7 +83,7 @@ class FileIO(_FileIO):
         file_name : str
             Path to write file on disk.
         file_write_params : FileWriteParams
-            Parameters to write PyPrimeMesh data file.
+            Parameters to write PyPrimeMesh's data file.
 
         Returns
         -------
