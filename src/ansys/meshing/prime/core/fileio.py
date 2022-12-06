@@ -130,9 +130,9 @@ class FileIO(_FileIO):
     def read_size_field(
         self, file_name: str, params: ReadSizeFieldParams
     ) -> SizeFieldFileReadResults:
-        """Read PyPrimeMesh's sizefield file from disk.
+        """Read PyPrimeMesh sizefield file from disk.
 
-        PyPrimeMesh's sizefield files have psf and psf.gz extension.
+        PyPrimeMesh sizefield files have psf and psf.gz extension.
 
         Parameters
         ----------
@@ -161,7 +161,7 @@ class FileIO(_FileIO):
         return result
 
     def write_size_field(self, file_name: str, params: WriteSizeFieldParams) -> FileWriteResults:
-        """Write PyPrimeMesh's sizefield (.psf) to file.
+        """Write PyPrimeMesh sizefield (.psf) to file.
 
         Parameters
         ----------
