@@ -37,9 +37,9 @@ class FileIO(_FileIO):
         _FileIO.__init__(self, model)
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
-        """Function that reads PRIME's database file.
+        """Function that reads PyPrimeMesh's data file.
 
-        PRIME's database files have pmdat extension.
+        PyPrimeMesh's data files have pmdat extension.
 
         Parameters
         ----------
@@ -75,7 +75,7 @@ class FileIO(_FileIO):
         return result
 
     def write_pmdat(self, file_name: str, file_write_params: FileWriteParams) -> FileWriteResults:
-        """Writes Prime mesh data file. Prime mesh data files have .pmdat extension.
+        """Writes PyPrimeMesh's data file. PyPrimeMesh's data files have .pmdat extension.
 
 
         Parameters
@@ -83,7 +83,7 @@ class FileIO(_FileIO):
         file_name : str
             Path to write file on disk.
         file_write_params : FileWriteParams
-            Parameters to write Prime mesh data file.
+            Parameters to write PyPrimeMesh data file.
 
         Returns
         -------
@@ -100,9 +100,9 @@ class FileIO(_FileIO):
         return result
 
     def import_fluent_meshing_size_field(self, file_name: str) -> SizeFieldFileReadResults:
-        """Import Fluent-Meshing's sizefield file from disk.
+        """Import Fluent Meshing sizefield file from disk.
 
-        Fluent-Meshing's sizefield files have sf and sf.gz extension.
+        Fluent Meshing sizefield files have sf and sf.gz extension.
 
         Parameters
         ----------
@@ -130,9 +130,9 @@ class FileIO(_FileIO):
     def read_size_field(
         self, file_name: str, params: ReadSizeFieldParams
     ) -> SizeFieldFileReadResults:
-        """Read PRIME's sizefield file from disk.
+        """Read PyPrimeMesh's sizefield file from disk.
 
-        PRIME's sizefield files have psf and psf.gz extension.
+        PyPrimeMesh's sizefield files have psf and psf.gz extension.
 
         Parameters
         ----------
@@ -161,7 +161,7 @@ class FileIO(_FileIO):
         return result
 
     def write_size_field(self, file_name: str, params: WriteSizeFieldParams) -> FileWriteResults:
-        """Write PRIME's sizefield (.psf) to file.
+        """Write PyPrimeMesh's sizefield (.psf) to file.
 
         Parameters
         ----------
@@ -245,7 +245,7 @@ class FileIO(_FileIO):
         file_names: List[str],
         import_fluent_meshing_mesh_params: ImportFluentMeshingMeshParams,
     ) -> ImportFluentMeshingMeshResults:
-        """Imports fluent meshing meshes of given files on disk.
+        """Imports Fluent Meshing meshes of given files on disk.
 
         Fluent Meshing mesh files have msh and msh.gz extension.
 
@@ -254,7 +254,7 @@ class FileIO(_FileIO):
         file_names : List[str]
             Full path of files to be imported.
         import_fluent_meshing_mesh_params : ImportFluentMeshingMeshParams
-            Parameters to import fluent meshing mesh.
+            Parameters to import Fluent Meshing mesh.
 
         Returns
         -------
@@ -286,7 +286,7 @@ class FileIO(_FileIO):
     def import_fluent_case(
         self, file_name: str, import_fluent_case_params: ImportFluentCaseParams
     ) -> ImportFluentCaseResults:
-        """Imports fluent case file on disk.
+        """Imports Fluent case file on disk.
 
         Fluent case files have cas extension.
 
