@@ -37,9 +37,9 @@ class FileIO(_FileIO):
         _FileIO.__init__(self, model)
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
-        """Function that reads PyPrimeMesh's data file.
+        """Function that reads PyPrimeMesh data file.
 
-        PyPrimeMesh's data files have pmdat extension.
+        PyPrimeMesh data files have pmdat extension.
 
         Parameters
         ----------
@@ -75,7 +75,7 @@ class FileIO(_FileIO):
         return result
 
     def write_pmdat(self, file_name: str, file_write_params: FileWriteParams) -> FileWriteResults:
-        """Writes PyPrimeMesh's data file. PyPrimeMesh's data files have .pmdat extension.
+        """Writes PyPrimeMesh data file. PyPrimeMesh data files have .pmdat extension.
 
 
         Parameters
@@ -83,7 +83,7 @@ class FileIO(_FileIO):
         file_name : str
             Path to write file on disk.
         file_write_params : FileWriteParams
-            Parameters to write PyPrimeMesh's data file.
+            Parameters to write PyPrimeMesh data file.
 
         Returns
         -------
