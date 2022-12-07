@@ -55,7 +55,7 @@ Prism Controls for Polyhedral Mesh
 ==================================
 
 :class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control the prism mesh generation based on the face scope, volume scope and growth rate.
-Prism cells creates either quadrilateral or triangular boundary faces, or both. They can resolve a boundary layer region of a tetrahedral mesh.
+You can use one or more prism controls. Each prism control definition is applied to one or more boundary zones, and then affects the height distribution and number of layers of the prism cells in the adjacent boundary layers.  
 
 The following example shows you the procedure to:
 
