@@ -14,7 +14,7 @@ volumetric regions of the mesh object. For example, mesh objects created from th
    The starting point for this volumetric meshing procedure is a valid surface mesh.
 
 .. tip::
-    Volume mesh with tetrahedrons, polyhedrons and prisms can be generated using :func:`Mesh.volume_mesh() <ansys.meshing.prime.lucid.Mesh.volume_mesh>` in Lucid API.
+    Volume mesh can be generated using :func:`Mesh.volume_mesh() <ansys.meshing.prime.lucid.Mesh.volume_mesh>` in Lucid API.
 
 =============================
 Second Order Tetrahedral Mesh
