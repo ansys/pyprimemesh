@@ -60,7 +60,7 @@ def download_elbow_pmdat(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'mixing_elbow.pmdat', 'pyprime', 'mixing_elbow', destination=destination, force=force
+        'mixing_elbow.pmdat', 'pyprimemesh', 'mixing_elbow', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
@@ -104,7 +104,7 @@ def download_elbow_fmd(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'mixing_elbow.fmd', 'pyprime', 'mixing_elbow', destination=destination, force=force
+        'mixing_elbow.fmd', 'pyprimemesh', 'mixing_elbow', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
@@ -148,7 +148,7 @@ def download_elbow_scdoc(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'mixing_elbow.scdoc', 'pyprime', 'mixing_elbow', destination=destination, force=force
+        'mixing_elbow.scdoc', 'pyprimemesh', 'mixing_elbow', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
@@ -193,7 +193,7 @@ def download_bracket_fmd(
         raise ValueError('destination directory provided does not exist')
     file = download_file(
         'bracket_mid_surface.fmd',
-        'pyprime',
+        'pyprimemesh',
         'bracket_scaffold',
         destination=destination,
         force=force,
@@ -241,7 +241,7 @@ def download_bracket_scdoc(
         raise ValueError('destination directory provided does not exist')
     file = download_file(
         'bracket_mid_surface.scdoc',
-        'pyprime',
+        'pyprimemesh',
         'bracket_scaffold',
         destination=destination,
         force=force,
@@ -288,7 +288,7 @@ def download_toy_car_pmdat(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'toy_car.pmdat', 'pyprime', 'toy_car', destination=destination, force=force
+        'toy_car.pmdat', 'pyprimemesh', 'toy_car', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
@@ -331,7 +331,9 @@ def download_toy_car_fmd(
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
-    file = download_file('toy_car.fmd', 'pyprime', 'toy_car', destination=destination, force=force)
+    file = download_file(
+        'toy_car.fmd', 'pyprimemesh', 'toy_car', destination=destination, force=force
+    )
     _DOWNLOADS.append(file)
     return file
 
@@ -374,7 +376,7 @@ def download_toy_car_scdoc(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'toy_car.scdoc', 'pyprime', 'toy_car', destination=destination, force=force
+        'toy_car.scdoc', 'pyprimemesh', 'toy_car', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
@@ -418,7 +420,7 @@ def download_pipe_tee_pmdat(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'pipe_tee.pmdat', 'pyprime', 'pipe_tee', destination=destination, force=force
+        'pipe_tee.pmdat', 'pyprimemesh', 'pipe_tee', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
@@ -462,7 +464,7 @@ def download_pipe_tee_fmd(
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
     file = download_file(
-        'pipe_tee.fmd', 'pyprime', 'pipe_tee', destination=destination, force=force
+        'pipe_tee.fmd', 'pyprimemesh', 'pipe_tee', destination=destination, force=force
     )
     _DOWNLOADS.append(file)
     return file
