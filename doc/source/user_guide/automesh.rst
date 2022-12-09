@@ -13,9 +13,12 @@ volumetric regions of the mesh object. For example, mesh objects created from th
 .. note::
    The starting point for this volumetric meshing procedure is a valid surface mesh.
 
-------------------------------
+.. tip::
+    Volume mesh can be generated using :func:`Mesh.volume_mesh() <ansys.meshing.prime.lucid.Mesh.volume_mesh>` in Lucid API.
+
+=============================
 Second Order Tetrahedral Mesh
-------------------------------
+=============================
 
 The following example shows how to initialize :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` and generate volume mesh on meshed topofaces:
 
@@ -47,12 +50,12 @@ You can review the parameters for volume meshing:
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
 
-----------------------------------
+==================================
 Prism Controls for Polyhedral Mesh
-----------------------------------
+==================================
 
 :class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control the prism mesh generation based on the face scope, volume scope and growth rate.
-Prism cells creates either quadrilateral or triangular boundary faces, or both. They can resolve a boundary layer region of a tetrahedral mesh.
+You can use one or more prism controls. Each prism control definition is applied to one or more boundary zones, and then affects the height distribution and number of layers of the prism cells in the adjacent boundary layers.  
 
 The following example shows you the procedure to:
 
@@ -121,9 +124,25 @@ You can print the result of volume quality summary:
         Max Skew: 0.795889
         Min Skew: 0.00163176
 
-------------------------------
+Prism Controls for Polyhedral Mesh using Lucid class
+----------------------------------------------------
+
+The following example shows you the method required to generate a poly prism mesh as shown above:
+
+.. code:: python
+
+    # Volume mesh with polyhedral elements
+    # Set prism layers parameter for boundary layer refinement
+    mesh_util.volume_mesh(
+        volume_fill_type=prime.VolumeFillType.POLY,
+        prism_layers=5,
+        prism_surface_expression="* !inlet !outlet"
+    )
+
+
+=============================
 Volume Specific Mesh Controls
-------------------------------
+=============================
 
 :class:`VolumeControl <ansys.meshing.prime.VolumeControl>` class helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
 It allows you to define the scope and generate the various types of volume mesh.
