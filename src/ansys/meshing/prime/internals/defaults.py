@@ -1,4 +1,4 @@
-'''The default configuration for the PyPrime library.
+'''The default configuration for the PyPrimeMesh library.
 '''
 
 __all__ = [
@@ -19,14 +19,16 @@ try:
     import appdirs
 
     USER_DATA_PATH = os.getenv(
-        'PYPRIME_USER_DATA', appdirs.user_data_dir(appname='pyprime', appauthor=False)
+        'PYPRIMEMESH_USER_DATA', appdirs.user_data_dir(appname='pyprimemesh', appauthor=False)
     )
 except ModuleNotFoundError:
     # If appdirs is not installed, then try with tempfile.
     # NOTE: This only occurs for ADO ARM Test runs
     import tempfile
 
-    USER_DATA_PATH = os.getenv('PYPRIME_USER_DATA', os.path.join(tempfile.gettempdir(), 'pyprime'))
+    USER_DATA_PATH = os.getenv(
+        'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), 'pyprimemesh')
+    )
 
 if not os.path.exists(USER_DATA_PATH):  # pragma: no cover
     os.makedirs(USER_DATA_PATH)
@@ -48,6 +50,8 @@ __DEFAULT_PORT = 50055
 __DEFAULT_CONNECTION_TIMEOUT = 10.0
 __DEFAULT_COMM_LOG = False
 __MAX_MESSAGE_LENGTH = 4194310
+
+SPHINX_BUILD = bool(int(os.getenv('PYPRIMEMESH_SPHINX_BUILD', 0)))
 
 
 def ip():
@@ -106,3 +110,8 @@ def get_output_path():
 def get_output_path_for_containers():
     '''Gets the server side output directory used by containers'''
     return CONTAINER_OUTDIR
+
+
+def get_sphinx_build():
+    '''Gets the flag for if sphinx build is being used'''
+    return SPHINX_BUILD

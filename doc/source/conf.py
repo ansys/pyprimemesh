@@ -5,6 +5,12 @@ from ansys_sphinx_theme import pyansys_logo_black
 
 from ansys.meshing.prime import __version__
 
+from sphinx_gallery.sorting import FileNameSortKey
+
+import pyvista
+
+import os
+
 # Project information
 project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -12,13 +18,13 @@ author = "Ansys Inc."
 release = version = __version__
 
 # HTML options
-html_short_title = html_title = "PyPrime"
+html_short_title = html_title = "PyPrimeMesh"
 html_logo = pyansys_logo_black
 html_theme = 'ansys_sphinx_theme'
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyprime",
+    "github_url": "https://github.com/pyansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
@@ -33,6 +39,14 @@ extensions = [
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
+    "sphinx_gallery.gen_gallery",
+    "jupyter_sphinx",
+    "notfound.extension",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
+    "sphinx.ext.extlinks",
+    "sphinx_autodoc_typehints",
+    "sphinxemoji.sphinxemoji",
 ]
 
 # Intersphinx mapping
@@ -49,6 +63,7 @@ intersphinx_mapping = {
 # numpydoc configuration
 numpydoc_show_class_members = False
 numpydoc_xref_param_type = True
+numpydoc_use_plots = True
 
 # Consider enabling numpydoc validation. See:
 # https://numpydoc.readthedocs.io/en/latest/validation.html#
@@ -83,3 +98,44 @@ master_doc = 'index'
 autosummary_generate = True
 autosummary_imported_members = True
 autosummary_ignore_module_all = False
+
+
+# exclude_patterns = [
+#    "examples/gallery_examples/example_template.rst" "examples/gallery_examples/mixing_elbow.rst"
+# ]
+
+# Enable screenshots for gallery for pyvista
+pyvista.BUILDING_GALLERY = True
+
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True
+
+# Save figures in specified directory
+pyvista.FIGURE_PATH = os.path.join(os.path.abspath("./images/"), "auto-generated/")
+if not os.path.exists(pyvista.FIGURE_PATH):
+    os.makedirs(pyvista.FIGURE_PATH)
+
+# Sphinx Gallery Options
+sphinx_gallery_conf = {
+    # convert rst to md for ipynb
+    # "pypandoc": True,
+    # path to your examples scripts
+    "examples_dirs": ["../../examples"],
+    # path where to save gallery generated examples
+    "gallery_dirs": ["examples/gallery_examples"],
+    # Patter to search for example files
+    "filename_pattern": r"\.py",
+    # ignore mixing elbow and example template
+    "ignore_pattern": "examples/other_examples",
+    # Remove the "Download all examples" button from the top level gallery
+    "download_all_examples": False,
+    # Sort gallery example by file name instead of number of lines (default)
+    "within_subsection_order": FileNameSortKey,
+    # directory where function granular galleries are stored
+    "backreferences_dir": None,
+    # Modules for which function level galleries are created.  In
+    "doc_module": "ansys-meshing-prime",
+    "image_scrapers": ("pyvista", "matplotlib"),
+    "ignore_pattern": "flycheck*",
+    "thumbnail_size": (350, 350),
+}

@@ -33,7 +33,7 @@ def get_child_processes(process):
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         cmd_name = ps_out.split()[0]
-        if "PrimeServer" in cmd_name:
+        if "AnsysPrimeServer" in cmd_name:
             children.append(int(pid))
         else:
             children += get_child_processes(int(pid))
@@ -101,11 +101,11 @@ def launch_prime_github_container(
     mount_host: str = defaults.get_user_data_path(),
     mount_image: str = defaults.get_user_data_path_for_containers(),
     port: int = defaults.port(),
-    name: str = 'prime-server',
+    name: str = 'ansys-prime-server',
     version: Optional[str] = None,
 ):
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
-    image_name = os.environ.get('PYPRIME_IMAGE_NAME', 'ghcr.io/pyansys/prime')
+    image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/pyansys/prime')
     if license_file is None:
         raise ValueError('Licensing information to launch container not found')
     if version is None:
