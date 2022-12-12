@@ -11,7 +11,7 @@ mesh preparation.
    :hidden:
 
    concepts
-   launching_pyprimemesh
+   launch_prime
    lucid
    fileio
    graphics
