@@ -5,65 +5,67 @@ Launching PyPrimeMesh
 **********************
 
 ==============================================
-Launching Server from within a Python Script
+Launching Server from within A Python Script
 ==============================================
 
-Ansys Prime Server can be launched using the :func:`launch_prime() <ansys.meshing.prime.launch_prime>` function.  
-The function returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` that is connected to the launched server session.  
+The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` function launches the Ansys Prime Server.  
+The function returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` connected to the launched server session.  
 
 .. code:: python
 
     import ansys.meshing.prime as prime
     prime_client = prime.launch_prime()
 
-This enables you to send commands to the Ansys Prime Server and receive responses from the server.
+You can send commands to the Ansys Prime Server and receive responses from the server.
 
-The :class:`Client <ansys.meshing.prime.Client>` can then be used to get the :attr:`model <ansys.meshing.prime.Client.model>` associated with the client instance.
+The :class:`Client <ansys.meshing.prime.Client>` is used to get the :attr:`model <ansys.meshing.prime.Client.model>` associated with the client instance.
 
 .. code:: python
  
     model = prime_client.model
 
-=======================================================================
-Launching Server from a Windows/Linux console and Connecting the Client
-=======================================================================
+===========================================================================
+Launching Server from A Windows or Linux Console and Connecting The Client
+===========================================================================
 
-Ansys Prime Server can be launched from a Linux or Windows console and then connected to, as needed.  
+Ansys Prime Server can be launched from a Linux or Windows using command prompt and then connected to the Client as needed.  
 
-A Windows example, starting the server in parallel mode on 4 nodes, and specifying the ip address and port,
-is shown below, first launching a server from cmd line:
+A Window's example to start the server in parallel mode on 4 nodes, specifying the IP address and port,
+is shown below:
 
-.. code:: shell-session
+#. Launch a server from command line:
 
-    "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
+    .. code:: shell-session
 
-And then connecting to the server in python using a PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` as follows:
+      "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
 
-.. code:: python
+#. Connect to the server in python using a PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` as follows:
 
-    import ansys.meshing.prime as prime
-    prime_client = prime.Client(ip="127.0.0.1", port=50055)
-    model = prime_client.model
+    .. code:: python
+
+      import ansys.meshing.prime as prime
+      prime_client = prime.Client(ip="127.0.0.1", port=50055)
+      model = prime_client.model
 
 .. note::
     Only a single client session can be connected to an active Ansys Prime Server instance at any time.
 
 
 =============================
-Disconnecting from the Server
+Disconnecting from The Server
 =============================
 
-The :func:`Client.exit() <ansys.meshing.prime.Client.exit>` function closes the connection with the server.
+The :func:`Client.exit() <ansys.meshing.prime.Client.exit>` function ends the connection with the server.
 
-If the :class:`Client <ansys.meshing.prime.Client>` launched the server, then this will also kill the server process.
+If the :class:`Client <ansys.meshing.prime.Client>` launched the server, then this terminates the server process.
 
 ==============================================
-Running a python script in batch on the Server
+Running a Python Script in Batch on The Server
 ==============================================
 
-A python script can be ran directly on the server from a Linux or Windows console.
+A python script can be run directly on the server from a Linux or Windows console.
 
-Here is an example on Windows for running a python script directly from the cmd line.
+Here is an example on Windows for running a python script directly from the command line.
 
 .. code:: shell-session
 
