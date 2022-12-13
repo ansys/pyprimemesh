@@ -31,6 +31,7 @@ PyPrimeMesh can be installed directly from PyPi as follows:
 Alternatively, you can clone this repository and install the client using
 
 .. code::
+
    git clone https://github.com/pyansys/pyprimemesh
    cd pyprimemesh
    pip install -e . --find-links deps
@@ -40,7 +41,8 @@ include some functionality that is important to development. To install
 everything useful in development, use the following command instead.
 
 .. code::
-   pip install -e .[all] --find-links deps
+
+    pip install -e .[all] --find-links deps
 
 Dependencies
 ------------
