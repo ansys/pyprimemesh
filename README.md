@@ -33,12 +33,20 @@ pip install ansys-meshing-prime
 
 > **NOTE:** PyPrimeMesh is not available on PyPi at present.
 
-Alternatively, clone and install in development mode with:
+Alternatively, you can clone this repository and install the client using
 
 ```bash
 git clone https://github.com/pyansys/pyprimemesh
 cd pyprimemesh
-pip install -e .[graphics] --find-links deps
+pip install -e . --find-links deps
+```
+
+The above command will only install basic version of the client. This will not
+include some functionality that is important to development. To install
+everything useful in development, use the following command instead.
+
+```bash
+pip install -e .[all] --find-links deps
 ```
 
 ## Dependencies

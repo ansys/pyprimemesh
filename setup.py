@@ -63,7 +63,7 @@ setup(
         'numpy>=1.14.0',
         "appdirs>=1.4.0",
     ],
-    extras_require={'graphics': ['pyvista>=0.32.0']},
+    extras_require={'graphics': ['pyvista>=0.32.0'], 'all': ['pyvista>=0.32.0']},
     # Plan on supporting only the currently supported versions of Python
     python_requires='>=3.7, <3.10',
     # Less than critical but helpful
