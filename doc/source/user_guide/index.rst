@@ -14,6 +14,7 @@ mesh preparation.
    launch_prime
    lucid
    fileio
+   logging
    graphics
    surfer
    automesh
