@@ -8,7 +8,7 @@ A logger can be attached to a session in order to handle streamed output from Py
 
 An example is shown below where the output is formatted as needed:
 
-.. code::
+.. code:: python
     import ansys.meshing.prime as prime
     import logging
 
