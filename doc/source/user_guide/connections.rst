@@ -32,20 +32,21 @@ Import the  model and delete topo-geom entities of part.
 
 .. code:: python
 
-         prime.FileIO(model).read_pmdat("D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model))
-         for part in model.parts:
-            topofaces = part.get_topo_faces()
-            if topofaces:
-                params = prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
-                part.delete_topo_entities(params)
+    prime.FileIO(model).read_pmdat("D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model))
+    for part in model.parts:
+        topofaces = part.get_topo_faces()
+        if topofaces:
+            params = prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
+            part.delete_topo_entities(params)
+
 Merge parts.
 
 .. code:: python
 
-         model.merge_parts(
-            part_ids=[part.id for part in model.parts],
-            params=prime.MergePartsParams(model)
-        )
+    model.merge_parts(
+        part_ids=[part.id for part in model.parts],
+        params=prime.MergePartsParams(model)
+    )
         
 Check surface before connect operation.
 
