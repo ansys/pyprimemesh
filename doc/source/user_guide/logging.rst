@@ -11,7 +11,7 @@ An example is shown below where the output is formatted as needed:
 .. code:: python
     import ansys.meshing.prime as prime
     import logging
-
+    
     prime_client = prime.launch_prime()
     model = prime_client.model
     
@@ -25,5 +25,4 @@ An example is shown below where the output is formatted as needed:
     
     # Add formatter to ch stream handler
     ch.setFormatter(formatter)
-    model.python_logger.addHandler(ch)   
-    
+    model.python_logger.addHandler(ch)
