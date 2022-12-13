@@ -14,6 +14,7 @@ mesh preparation.
    launching_pyprime
    lucid
    fileio
+   logging
    graphics
    surfer
    automesh
