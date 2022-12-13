@@ -8,7 +8,7 @@ Connections
 Zonelet Connection
 ===================
 
-In order to successfully generate a volume mesh, a watertight, fully connected, surface mesh is required which may require Connect operations. They can also be used to conformally connect multiple watertight volumes to give shared Zonelets (and therefore connected volume mesh) between them.
+Connect operations helps you create a watertight, fully connected, surface mesh for successful volume mesh generation. Connect operation conformally connects multiple watertight volumes providing shared zonelets (and therefore connected volume mesh) between them.
 The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
 The three major operations for Zonelet Connection are Intersect, Stitch and Join. 
 
@@ -20,31 +20,37 @@ The three major operations for Zonelet Connection are Intersect, Stitch and Join
 
 
 .. note::
-    Connect operations support only computational mesh (i.e. mesh with reasonable size changes and quality). Faceted geometry (i.e. STL-like mesh which can have extreme size changes and many sliver elements) is not supported.
+    Connect operations support only computational mesh ( That is, mesh with reasonable size changes and quality). Faceted geometry (That is, STL-like mesh which can have extreme size changes and many sliver elements) is not supported.
 
 The following example shows you the procedure to:
 
 * Import model and remove geometry topology from each part
 * Merge parts and check surface mesh connectivity
-* Perform Join/Intersect operation on face zonelets
+* Perform Join or Intersect operation on face zonelets
+
+Import the  model and delete topo-geom entities of part.
 
 .. code:: python
 
-    # Import model and delete topo-geom entities of part
-    prime.FileIO(model).read_pmdat("D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model))
-    for part in model.parts:
-        topofaces = part.get_topo_faces()
-        if topofaces:
-            params = prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
-            part.delete_topo_entities(params)
+         prime.FileIO(model).read_pmdat("D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model))
+         for part in model.parts:
+            topofaces = part.get_topo_faces()
+            if topofaces:
+                params = prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
+                part.delete_topo_entities(params)
+Merge parts.
 
-    # Merge parts
-    model.merge_parts(
-        part_ids=[part.id for part in model.parts],
-        params=prime.MergePartsParams(model)
-    )
+.. code:: python
 
-    # Check surface before connect operation
+         model.merge_parts(
+            part_ids=[part.id for part in model.parts],
+            params=prime.MergePartsParams(model)
+        )
+        
+Check surface before connect operation.
+
+.. code:: python
+    
     diag = prime.SurfaceSearch(model)
     diag_res = diag.get_surface_diagnostic_summary(
         prime.SurfaceDiagnosticSummaryParams(
@@ -55,7 +61,7 @@ The following example shows you the procedure to:
         )
     )
 
-You can check the surface mesh connectivity (visit :ref:`ref_index_mesh_diagnostics` section for more information.):
+You can check the surface mesh connectivity (refer :ref:`ref_index_mesh_diagnostics` for more information).
 
 .. code:: python
 
@@ -67,7 +73,7 @@ You can check the surface mesh connectivity (visit :ref:`ref_index_mesh_diagnost
     n_multi_edges :  0
     n_duplicate_faces :  0
 
-And connect face zonelets in the model:
+Connect face zonelets in the model.
 
 .. note::
     Only triangular faces are supported.
@@ -95,10 +101,13 @@ And connect face zonelets in the model:
             params=join_params
         )
 
-    # Check surface after connect operation
+Check surface after connect operation.
+
+.. code:: python
+
     diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
-The results of surface mesh connectivity after connect operation can be printed:
+The results of surface mesh connectivity after performing connect operation is printed below:
 
 .. code:: python
 
@@ -115,11 +124,11 @@ The results of surface mesh connectivity after connect operation can be printed:
 Topology Based Connection
 ==========================
 
-The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology, handling the gaps and mismatches in the geometry.
-Topology based connection creates shared topoedges between neighbouring topofaces so you can create connected mesh between topofaces.
+The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology. Also, handles the gaps and mismatches in the geometry.
+Topology based connection creates shared topoedges between neighbouring topofaces. Hence, you can create connected mesh between topofaces.
 
 .. note::
-    Connectivity cannot be shared across multiple parts.
+  Connectivity cannot be shared across multiple parts.
 
 .. code:: python
 
