@@ -18,7 +18,7 @@ For comprehensive information on PyPrimeMesh, refer the latest [documentation](
 https://dev.prime.docs.pyansys.com)
 
 For queries related to PyPrimeMesh, post them to the [Discussion](
-https://github.com/pyansys/pyprime/discussions) page. 
+https://github.com/pyansys/pyprimemesh/discussions) page.
 
 For bugs or enhancement request, file an issue on our [Issues](
 https://github.com/pyansys/pyprime/issues) page. 
