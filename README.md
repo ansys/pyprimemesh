@@ -21,7 +21,7 @@ For queries related to PyPrimeMesh, post them to the [Discussion](
 https://github.com/pyansys/pyprimemesh/discussions) page.
 
 For bugs or enhancement request, file an issue on our [Issues](
-https://github.com/pyansys/pyprime/issues) page. 
+https://github.com/pyansys/pyprimemesh/issues) page.
 
 For assistance, reach out to the PyAnsys
 Support team at [pyansys.support@ansys.com](mailto:pyansys.support@ansys.com).
