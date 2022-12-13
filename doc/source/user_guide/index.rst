@@ -11,9 +11,10 @@ mesh preparation.
    :hidden:
 
    concepts
-   launching_pyprime
+   launch_prime
    lucid
    fileio
+   logging
    graphics
    surfer
    automesh
