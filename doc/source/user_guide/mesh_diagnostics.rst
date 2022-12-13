@@ -103,8 +103,6 @@ The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class o
 
  * The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
 
- * The :attr:`SQUISH2 <ansys.meshing.prime.CellQualityMeasure.SQUISH2>` metric to check squish 2 for Polyhedral cell.
-
  * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY>` metric ranges between 0(worst) and 1(ideal).
 
 .. code:: python
