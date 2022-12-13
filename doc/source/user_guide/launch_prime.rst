@@ -69,3 +69,19 @@ Here is an example on Windows for running a python script directly from the cmd 
 
     "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
 
+=========================================
+Recommendations for Launching the Server
+=========================================
+
+While developing it can be convenient to use python context to launch the server so that if an exception occurs during runtime the server closes cleanly.  This prevents servers being spawned and left open blocking ports.  
+
+An example of how context can be used to manage the server lifecycle to make developing easier, is shown below.
+
+.. code:: python
+
+    import ansys.meshing.prime as prime
+    with prime.launch_prime() as prime_client:
+       model = prime_client.model
+       # Indented code to run...
+
+It is not required to use the :func:`Client.exit() <ansys.meshing.prime.Client.exit()>` function to close the server in this instance.
