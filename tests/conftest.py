@@ -1,5 +1,4 @@
 import os
-import time
 import xml.etree.ElementTree as ET
 
 import pytest

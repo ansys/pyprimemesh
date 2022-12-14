@@ -2,13 +2,12 @@
 
 # os.environ.clear()
 import math
-import unittest
 
 import ansys.meshing.prime as prime
 
 
 def test_toycar_tutorial(getRemoteClient):
-    
+
     model = getRemoteClient.model
     # downloads pmdat file
     toy_car = prime.examples.download_toy_car_pmdat()
@@ -68,7 +67,6 @@ def test_toycar_tutorial(getRemoteClient):
 
     # Validate number of self inter faces
     assert diag_res.n_self_intersections == 0
-
 
     face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
     quality = prime.SurfaceSearch(model)
