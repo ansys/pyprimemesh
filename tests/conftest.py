@@ -7,7 +7,6 @@ import pytest
 import ansys.meshing.prime as prime
 
 
-@pytest.fixture(scope="session", autouse=True)
 def startAnsysPrimeServer(prime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
     if n_procs == 1:
         client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
@@ -17,13 +16,14 @@ def startAnsysPrimeServer(prime_root=None, ip='127.0.0.1', port=50055, n_procs=1
 
 
 @pytest.fixture(scope="session", autouse=True)
-def getRemoteClient(startAnsysPrimeServer):
+def getRemoteClient():
     ip = os.environ.get('PYPRIMEMESH_IP', '127.0.0.1')
     port = int(os.environ.get('PYPRIMEMESH_PORT', '50055'))
     if 'PYPRIMEMESH_EXTERNAL_SERVER' in os.environ:
         client = prime.Client(ip=ip, port=port)
     else:
-        client = startAnsysPrimeServer
+        prime_root = os.environ.get('PYPRIMEMESH_INSTALL_ROOT', None)
+        client = startAnsysPrimeServer(prime_root=prime_root, ip=ip, port=port, n_procs=1)
     return client
 
 
@@ -32,7 +32,6 @@ def pytest_sessionfinish(session, exitstatus):
 
     def close_server(getRemoteClient):
         getRemoteClient.exit()
-
 
 
 def create_scenario_element(test, id):

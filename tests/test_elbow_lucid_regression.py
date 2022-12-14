@@ -23,28 +23,13 @@ def test_elbow_lucid(getRemoteClient):
     part = model.get_part_by_name("flow_volume")
     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
     # validate number of face zones
-    """self.assertEqual(
-        part_summary_res.n_face_zones,
-        2,
-        msg="Validate number of face zones. Expected value: 2. Actual value: "
-        + str(part_summary_res.n_face_zones),
-    )
+    assert part_summary_res.n_face_zones == 2
+
     # validate number of tri faces
-    self.assertEqual(
-        part_summary_res.n_tri_faces,
-        0,
-        msg="Validate number of tri faces. Expected value: 0. Actual value: "
-        + str(part_summary_res.n_tri_faces),
-    )
+    assert part_summary_res.n_tri_faces == 0
+
     # validate number of poly faces
-    self.assertTrue(
-        math.isclose(1964.0, float(part_summary_res.n_poly_faces), rel_tol=0.02),
-        msg="Validate number of poly faces. Expected value: 1964, 2% tolerance. Actual value: "
-        + str(part_summary_res.n_poly_faces),
-    )
+    assert math.isclose(1964.0, float(part_summary_res.n_poly_faces), rel_tol=0.02)
+
     # validate number of poly cells
-    self.assertTrue(
-        math.isclose(7613.0, float(part_summary_res.n_poly_cells), rel_tol=0.02),
-        msg="Validate number of poly cells. Expected value: 7424, 2% tolerance. Actual value: "
-        + str(part_summary_res.n_poly_cells),
-    )"""
+    assert math.isclose(7613.0, float(part_summary_res.n_poly_cells), rel_tol=0.02)
