@@ -6,9 +6,9 @@ import math
 import ansys.meshing.prime as prime
 
 
-def test_toycar_tutorial(getRemoteClient):
+def test_toycar_tutorial(get_remote_client):
 
-    model = getRemoteClient.model
+    model = get_remote_client.model
     # downloads pmdat file
     toy_car = prime.examples.download_toy_car_pmdat()
     # reads file
