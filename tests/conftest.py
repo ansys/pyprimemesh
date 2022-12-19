@@ -20,13 +20,13 @@ class RemoteClientManager:
         Parameters
         ----------
         prime_root : str, optional
-            Location of the prime installation, by default None
+            Location of the prime installation, by default ``None``.
         ip : str, optional
-            IP where the server is located, by default '127.0.0.1'
+            IP where the server is located, by default ``'127.0.0.1'``.
         port : int, optional
-            Port where the server is running, by default 50055
+            Port where the server is running, by default ``50055``.
         n_procs : int, optional
-            Number of distributed processes to spawn when running in distributed mode, by default 1
+            Number of distributed processes to spawn when running in distributed mode, by default ``1``.
         """
         if n_procs == 1:
             self.client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
@@ -36,9 +36,7 @@ class RemoteClientManager:
             )
 
     def start_remote_client(self):
-        """Starts the Ansys Prime remote client with the default
-        values.
-        """
+        """Starts the Ansys Prime remote client with the default values."""
         ip = os.environ.get('PYPRIMEMESH_IP', '127.0.0.1')
         port = int(os.environ.get('PYPRIMEMESH_PORT', '50055'))
         if 'PYPRIMEMESH_EXTERNAL_SERVER' in os.environ:
