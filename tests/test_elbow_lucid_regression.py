@@ -6,11 +6,9 @@ import ansys.meshing.prime as prime
 def test_elbow_lucid(get_remote_client):
     # downloads pmdat file
     elbow_lucid = prime.examples.download_elbow_pmdat()
-    # elbow_lucid = prime.examples.download_elbow_scdoc()
     # reads file
     model = get_remote_client.model
     fileIO = prime.FileIO(model=model)
-    # _ = fileIO.read_pmdat(elbow_lucid, prime.FileReadParams(model=self._model))
     mesher = prime.lucid.Mesh(model)
     mesher.read(file_name=elbow_lucid)
     mesher.create_zones_from_labels("inlet,outlet")

@@ -12,8 +12,7 @@ def test_toycar_tutorial(get_remote_client):
     # downloads pmdat file
     toy_car = prime.examples.download_toy_car_pmdat()
     # reads file
-    fileIO = prime.FileIO(model=model)
-    _ = fileIO.read_pmdat(toy_car, prime.FileReadParams(model=model))
+    _ = prime.FileIO(model=model).read_pmdat(toy_car, prime.FileReadParams(model=model))
     mesher = prime.lucid.Mesh(model)
 
     # several objects are open surfaces (with holes)
