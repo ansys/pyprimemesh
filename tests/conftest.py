@@ -26,7 +26,8 @@ class RemoteClientManager:
         port : int, optional
             Port where the server is running, by default ``50055``.
         n_procs : int, optional
-            Number of distributed processes to spawn when running in distributed mode, by default ``1``.
+            Number of distributed processes to spawn when running in distributed mode,
+            by default ``1``.
         """
         if n_procs == 1:
             self.client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
