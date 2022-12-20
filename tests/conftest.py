@@ -1,6 +1,73 @@
 import os
-import unittest
 import xml.etree.ElementTree as ET
+
+import pytest
+
+import ansys.meshing.prime as prime
+
+
+class RemoteClientManager:
+    """Manager class for starting and closing the remote client of
+    Prime.
+    """
+
+    def __init__(self) -> None:
+        self.client = None
+
+    def start_ansys_prime_server(self, prime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
+        """Initialization of the Ansys Prime server.
+
+        Parameters
+        ----------
+        prime_root : str, optional
+            Location of the prime installation, by default ``None``.
+        ip : str, optional
+            IP where the server is located, by default ``'127.0.0.1'``.
+        port : int, optional
+            Port where the server is running, by default ``50055``.
+        n_procs : int, optional
+            Number of distributed processes to spawn when running in distributed mode,
+            by default ``1``.
+        """
+        if n_procs == 1:
+            self.client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
+        else:
+            self.client = prime.launch_prime(
+                prime_root=prime_root, ip=ip, port=port, n_procs=n_procs
+            )
+
+    def start_remote_client(self):
+        """Starts the Ansys Prime remote client with the default values."""
+        ip = os.environ.get('PYPRIMEMESH_IP', '127.0.0.1')
+        port = int(os.environ.get('PYPRIMEMESH_PORT', '50055'))
+        if 'PYPRIMEMESH_EXTERNAL_SERVER' in os.environ:
+            self.client = prime.Client(ip=ip, port=port)
+        else:
+            prime_root = os.environ.get('PYPRIMEMESH_INSTALL_ROOT', None)
+            self.start_ansys_prime_server(prime_root=prime_root, ip=ip, port=port, n_procs=1)
+
+    def stop_remote_client(self):
+        """Stops the Ansys Prime client and server."""
+        self.client.exit()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def get_remote_client():
+    """Initializes and starts Ansys Prime. This funtion is automatically called
+    at the start of the test session and runs the code after the yield when the
+    tests finish their execution.
+
+    Yields
+    ------
+    Client
+        Initialized remote client of Ansys prime
+    """
+    client_manager = RemoteClientManager()
+    client_manager.start_remote_client()
+    yield client_manager.client
+
+    # runs when tests are done
+    client_manager.stop_remote_client()
 
 
 def create_scenario_element(test, id):
@@ -62,25 +129,3 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
         with open(xmlFileName, 'a') as scenario_log:
             scenario_log.write(xmlstr)
-
-
-class PrimeTestResult(unittest.TestResult):
-    def __init__(self, stream=None, descriptions=None, verbosity=None):
-        self.successes = []
-        super().__init__(stream, descriptions, verbosity)
-
-    def addSuccess(self, test):
-        self.successes.append(test)
-        return super().addSuccess(test)
-
-    # def startTestRun(self) -> None:
-    #     super().startTestRun()
-    #     from .test_case import setupTestingModule
-    #     setupTestingModule()
-
-    def stopTestRun(self):
-        super().stopTestRun()
-
-
-class PrimeTextTestResult(PrimeTestResult, unittest.TextTestResult):
-    pass

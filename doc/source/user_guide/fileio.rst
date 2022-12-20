@@ -57,6 +57,7 @@ You may require to specify the import route for the CAD files using the :class:`
 Alternatively, you can use :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in Lucid API:
 
 .. code:: python
+
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(file_name=mixing_elbow, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
 
@@ -93,6 +94,7 @@ The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` 
 Alternatively, you can use :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in Lucid API:
 
 .. code:: python
+
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read("cad_to_append.scdoc", append=True)
 

@@ -14,7 +14,7 @@ The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container 
     :width: 200pt
     :align: center
 
-    **Model structure**
+    **Model Structure**
 
 The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Client <ansys.meshing.prime.Client>` class as follows:
 
@@ -24,7 +24,7 @@ The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Clie
     prime_client = prime.launch_prime()
     model = prime_client.model
 
-An example output for a CAD file containing a single part is shown below:
+An example for importing a CAD file containing a single part is shown below:
 
 .. code:: python
 
@@ -77,7 +77,7 @@ or Zonelets (MeshPart created from faceted geometry and mesh import).
     :width: 400pt
     :align: center
 
-    **Part types**
+    **Part Types**
 
 TopoEntities and Zonelets are characterized by dimension of entities.
 
@@ -86,7 +86,7 @@ TopoEntities
 ------------
 
 TopoEntities are created from importing CAD and represent connectivity information.  TopoEntities have geometric representation
-which may be defined by splines or facets.  The mesh generated on TopoEntities will be projected on geometry representation.
+which may be defined by splines or facets.  The mesh generated on TopoEntities are projected on geometry representation.
 
 There are four types of TopoEntities:
 
@@ -105,13 +105,13 @@ There are four types of TopoEntities:
 Zonelets
 --------
 
-Zonelets are created from importing mesh files and are groups of interconnected elements in a mesh.
+Zonelets are created from importing mesh files and are groups of interconnected entities in a mesh.
 
 There are three types of Zonelets:
 
-    * FaceZonelet: A group of interconnected face elements.
-    * EdgeZonelet: A group of interconnected edge elements.
-    * CellZonelet: A group of interconnected cell elements.
+    * FaceZonelet: A group of interconnected faces.
+    * EdgeZonelet: A group of interconnected edges.
+    * CellZonelet: A group of interconnected cells.
 
 A set of FaceZonelets that define a closed volume without containing any cell elements is defined as a Volume.
 
@@ -119,7 +119,7 @@ A set of FaceZonelets that define a closed volume without containing any cell el
     :width: 400pt
     :align: center
 
-    **Zonelets schematic**
+    **Zonelets Schematic**
 
 -----
 Zones
@@ -127,9 +127,9 @@ Zones
 
 Zonelets or TopoEntities can be further grouped into zones.  A Zonelet or TopoEntity can only be present in a single zone.
 
-In order to export a mesh to the Fluent solver (.msh, .cas) zones are required to define boundary conditions.
+For exporting  a mesh to the Fluent solver (.msh, .cas), you should  define the  boundary conditions for the zones.
 
-When importing a Fluent solver model each zone will be defined as a single zonelet.
+When importing a Fluent solver model, each zone is defined as a single zonelet.
 
 ------
 Labels
@@ -137,6 +137,6 @@ Labels
 
 Labels allow overlapping groups of Zonelets or TopoEntities.
 
-When importing CAD files each group or named selection will generate a label.
+When importing CAD files, each group or named selection generates a label.
 
-When exporting to a mechanical solver file (.cdb) each label is exported as a collection.
+When exporting to a mechanical solver file (.cdb), each label is exported as a collection.
