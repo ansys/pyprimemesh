@@ -92,12 +92,12 @@ class Client(object):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> prime = prime.launch_prime() # This will launch a server process
-        >>> model = prime.model
+        >>> prime_client = prime.launch_prime() # This will launch a server process
+        >>> model = prime_client.model
         >>> fileio = prime.FileIO(model)
         >>> result = fileio.read_pmdat('example.pmdat', prime.FileReadParams(model=model))
         >>> print(result)
-        >>> prime.exit() # Sever connection with server and kill server
+        >>> prime_client.exit() # Sever connection with server and kill server
         '''
         if self._comm is not None:
             self._comm.close()
