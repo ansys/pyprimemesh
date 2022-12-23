@@ -3,7 +3,6 @@ import ansys.meshing.prime as prime
 
 def test_sizecontrol(get_remote_client):
     model = get_remote_client.model
-    fileIO = prime.FileIO(model=model)
 
     size_control = prime.SizeControl(model, 0, 0, "foo")
     assert size_control.name == "foo"
