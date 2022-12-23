@@ -30,6 +30,6 @@ def test_pipe_tee_junction(get_remote_client):
 
     # validate number of poly faces
     assert math.isclose(16717, float(part_summary_res.n_poly_faces), rel_tol=0.02)
-
+    # Style check fail with pre-commit
     # validate number of poly cells
     assert math.isclose(97341, float(part_summary_res.n_poly_cells), rel_tol=0.05)
