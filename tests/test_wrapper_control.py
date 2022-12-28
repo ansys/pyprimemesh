@@ -1,6 +1,4 @@
 import ansys.meshing.prime as prime
-
-
 def test_wrapper_control(get_remote_client):
 
     model = get_remote_client.model
@@ -43,7 +41,7 @@ def test_wrapper_control(get_remote_client):
     assert len(res_con_prev.ids) == 2
 
     # Test set leak preventions
-    wrapper_control = model.control_data.create_wrapper_control()
+    wrapper_control = prime.local_model().control_data.create_wrapper_control()
     scope1 = prime.ScopeDefinition(model=model, part_expression="frame1")
     leak_prev_params1 = prime.LeakPreventionParams(
         model=model, scope=scope1, max_hole_size=0.2, material_points=["cabin"]
@@ -57,7 +55,7 @@ def test_wrapper_control(get_remote_client):
     assert len(res_leak_prev.ids) == 2
 
     # Test set feature recoveries
-    wrapper_control = model.control_data.create_wrapper_control()
+    wrapper_control = prime.local_model().control_data.create_wrapper_control()
     scope = prime.ScopeDefinition(model=model, part_expression="*!tunnel")
     feat_params1 = prime.FeatureRecoveryParams(
         model=model, scope=scope, enable_feature_octree_refinement=True, size_at_features=0.3
@@ -70,7 +68,7 @@ def test_wrapper_control(get_remote_client):
 
     # Test set geometry scope
 
-    wrapper_control = model.control_data.create_wrapper_control()
+    wrapper_control = prime.local_model().control_data.create_wrapper_control()
     wrapper_control.set_geometry_scope(
         prime.ScopeDefinition(model=model, entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS)
     )
