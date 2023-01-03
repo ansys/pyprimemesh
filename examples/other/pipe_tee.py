@@ -16,7 +16,7 @@ structural thermal analysis using tetrahedral elements and use the
 wrapper to extract the fluid domain and mesh using polyhedral cells with
 prismatic boundary layers.
 
-To achieve these tasks we will use the high level API packaged with PyPrime called Lucid.
+To achieve these tasks we will use the high level API packaged with PyPrimeMesh called Lucid.
 
 .. image:: ../images/pipe_tee.png
    :align: center
