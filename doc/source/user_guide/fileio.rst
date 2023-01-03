@@ -101,7 +101,7 @@ Alternatively, you can use :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class 
 Parametric CAD
 --------------
 
-Parametric CAD update can be used while importing CAD files that have parameters defined and can be accessed by the Workbench CAD readers.  
+Parametric CAD update can be used while importing CAD files that have parameters defined which can be accessed by the Workbench CAD readers.  
 
 To get existing CAD parameters while importing:
 
@@ -245,9 +245,9 @@ Reading and Writing Size Field Files
 Native PSF format
 -----------------
 
- - The :func:`FileIO.read_size_field() <ansys.meshing.prime.FileIO.read_size_field>` function allows you to read Ansys Prime's size field ``(*.psf, *.psf.gz)`` file and set parameters for reading size field file using the :class:`ReadSizeFieldParams <ansys.meshing.prime.ReadSizeFieldParams>` class.
+ - The :func:`FileIO.read_size_field() <ansys.meshing.prime.FileIO.read_size_field>` function allows you to read Ansys Prime Server's size field ``(*.psf, *.psf.gz)`` file and set parameters for reading size field file using the :class:`ReadSizeFieldParams <ansys.meshing.prime.ReadSizeFieldParams>` class.
 
- - The :func:`FileIO.write_size_field() <ansys.meshing.prime.FileIO.write_size_field>` function allows you to write Ansys Prime's size field ``(*.psf)`` file and set parameters for writing size field file using the :class:`WriteSizeFieldParams <ansys.meshing.prime.WriteSizeFieldParams>` class. You can write only active size fields into the file with optional parameter :attr:`write_only_active_size_fields <ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields>`.
+ - The :func:`FileIO.write_size_field() <ansys.meshing.prime.FileIO.write_size_field>` function allows you to write Ansys Prime Server's size field ``(*.psf)`` file and set parameters for writing size field file using the :class:`WriteSizeFieldParams <ansys.meshing.prime.WriteSizeFieldParams>` class. You can write only active size fields into the file with optional parameter :attr:`write_only_active_size_fields <ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields>`.
 
 Fluent Meshing format
 ---------------------
