@@ -4,7 +4,7 @@ Expressions
 
 Expressions are used to gather named entities needed for various operations.  
 
-Special characters used are “*”, “!” and spaces or commas.  This special characters can be used within a string as follows: 
+Special characters used are “*”, “!” and spaces or commas.  The characters can be used within a string as follows: 
 
 * “abc\*” collects all required entities with a name starting with abc  
 * “\*abc” collects all required entities with a name ending with abc 
