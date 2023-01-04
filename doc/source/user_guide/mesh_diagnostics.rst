@@ -66,7 +66,7 @@ The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class o
 
  * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0(ideal) and 1(worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
+ * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller the Aspect Ratio,  higher the quality of an element.
 
  * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.FaceQualityMeasure.ELEMENTQUALITY>` metric ranges between 0(worst) and 1(ideal).
 
@@ -99,9 +99,9 @@ The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class o
 
  * The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between 0(ideal) and 1(worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
+ * The :attr:`ASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller Aspect Ratio,  higher the quality of an element.
 
- * The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
+ * The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric is greater than 1. The smaller Fluent Aspect Ratio, the higher the quality of an element.
 
  * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY>` metric ranges between 0(worst) and 1(ideal).
 
@@ -130,7 +130,7 @@ The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class o
 Mesh Counts
 -----------
 
-The :func:`Part.get_summary() <ansys.meshing.prime.Part.get_summary>` can be used to report number of nodes, faces or cells after meshing
+The :func:`Part.get_summary() <ansys.meshing.prime.Part.get_summary>` provides the number of nodes, faces or cells after meshing
 with given parameters.
 
 .. code:: python
@@ -154,8 +154,7 @@ with given parameters.
 Mesh Improvement
 ================
 
-If the metrics show that the mesh quality is low, the :class:`VolumeMeshTool <ansys.meshing.prime.VolumeMeshTool>` class provides various volume mesh improvement algorithms 
-for you to improve the mesh.
+When the metrics show that the mesh quality is low, the :class:`VolumeMeshTool <ansys.meshing.prime.VolumeMeshTool>` class provides various volume mesh improvement algorithms for you to improve the mesh.
 
 --------------
 Auto Node Move
@@ -189,7 +188,7 @@ with given parameters. In addition, you can validate the mesh using :func:`Volum
     vtool = prime.VolumeMeshTool(model=model)
     res = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
 
-The results of check mesh operation can be printed as below:
+The results of check mesh operation is shown below:
 
 .. code:: python
 
