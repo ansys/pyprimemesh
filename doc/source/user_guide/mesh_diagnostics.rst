@@ -66,7 +66,7 @@ The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class o
 
  * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0(ideal) and 1(worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller the Aspect Ratio,  higher the quality of an element.
+ * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller the Aspect Ratio, the higher the quality of an element.
 
  * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.FaceQualityMeasure.ELEMENTQUALITY>` metric ranges between 0(worst) and 1(ideal).
 
