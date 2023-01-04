@@ -10,8 +10,8 @@ Meshing a Mixing Elbow for a Flow Analysis
 Objective
 ~~~~~~~~~
 
-In this example, we will mesh a mixing elbow with polyhedral elements and wall boundary
-layer refinement. We will use several meshing utilities available in the lucid class for
+In this example, you can mesh a mixing elbow with polyhedral elements and wall boundary
+layer refinement. you use several meshing utilities available in the lucid class for
 convenience and ease.
 
 .. image:: ../../../images/elbow.png
@@ -33,10 +33,13 @@ Procedure
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import all necessary modules.
-# Launch an instance of Ansys Prime Server.
-# Connect PyPrimeMesh client and get the model.
-# Instantiate meshing utilities from Lucid class.
+#. Import all necessary modules.
+
+#. Launch an instance of Ansys Prime Server.
+
+#. Connect PyPrimeMesh client and get the model.
+
+#. Instantiate meshing utilities from Lucid class.
 
 from ansys.meshing import prime
 from ansys.meshing.prime.graphics import Graphics
@@ -49,9 +52,11 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Import Geometry
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Download the elbow geometry file (.fmd file exported by SpaceClaim).
-# Import geometry.
-# Create face zones from labels imported from geometry for use in Fluent solver.
+#. Download the elbow geometry file (.fmd file exported by SpaceClaim).
+
+#. Import geometry.
+
+#. Create face zones from labels imported from geometry for use in Fluent solver.
 
 mixing_elbow = prime.examples.download_elbow_fmd()
 mesh_util.read(file_name=mixing_elbow)
@@ -60,7 +65,7 @@ mesh_util.create_zones_from_labels("inlet,outlet")
 ###############################################################################
 # Surface Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Surface mesh the geometry setting min and max sizing
+#. Surface mesh the geometry setting min and max sizing
 # that will be used for curvature refinement.
 
 mesh_util.surface_mesh(min_size=5, max_size=20)
@@ -68,9 +73,11 @@ mesh_util.surface_mesh(min_size=5, max_size=20)
 ###############################################################################
 # Volume Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Volume mesh with polyhedral elements and boundary layer refinement.
-# Fill the volume with polyhedral and prism mesh
+#. Volume mesh with polyhedral elements and boundary layer refinement.
+
+#. Fill the volume with polyhedral and prism mesh
 # specifying location and number of layers for prisms.
+
 # Expressions are used to define the surfaces to have prisms grown
 # where "* !inlet !outlet" states "all not inlet or outlet".
 
@@ -85,7 +92,7 @@ display = Graphics(model=model)
 display()
 
 ###############################################################################
-# Print Mesh Stats
+# Print Mesh Statistics
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Get meshed part
