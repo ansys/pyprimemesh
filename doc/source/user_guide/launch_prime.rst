@@ -25,7 +25,7 @@ The :class:`Client <ansys.meshing.prime.Client>` gets the :attr:`model <ansys.me
     model = prime_client.model
 
 ===========================================================================
-Launching Server from A Windows or Linux console and Connecting the Client
+Launching Server from A Windows or Linux Console and Connecting the Client
 ===========================================================================
 
 Ansys Prime Server can be launched from a Linux or Windows from the Command Prompt and then connected to the Client as needed.  
