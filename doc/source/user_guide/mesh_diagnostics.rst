@@ -188,7 +188,7 @@ with given parameters. In addition, you can validate the mesh using :func:`Volum
     vtool = prime.VolumeMeshTool(model=model)
     res = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
 
-The results of check mesh operation is shown below:
+An example of the results of check mesh operation is shown below:
 
 .. code:: python
 
