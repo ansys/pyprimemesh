@@ -33,7 +33,7 @@ Firstly, start PyPrimeMesh client and import the CAD geometry (.scdoc):
     model = prime_client.model
 
     # Import CAD file
-    input_file = r"D:/PyPrime/simple-bracket-holes.scdoc"
+    input_file = r"D:/Examples/simple-bracket-holes.scdoc"
     file_io = prime.FileIO(model)
     file_io.import_cad(
         input_file,
@@ -89,7 +89,7 @@ Firstly, start PyPrimeMesh client and import the faceted geometry (.stl):
     model = prime_client.model
 
     # Import CAD file
-    input_file = r"D:/PyPrime/simple-bracket-holes.stl"
+    input_file = r"D:/Examples/simple-bracket-holes.stl"
     file_io = prime.FileIO(model)
     file_io.import_cad(input_file, params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM))
 
@@ -196,7 +196,7 @@ The following example shows you the method required to replicate the surface mes
     mesh_util = prime.lucid.Mesh(model)
 
     # Import CAD file (.stl)
-    input_file = r"D:/PyPrime/simple-bracket-holes.stl"
+    input_file = r"D:/Examples/simple-bracket-holes.stl"
     mesh_util.read(input_file)
 
     # Surface mesh the geometry with curvature sizing
