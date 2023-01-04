@@ -225,42 +225,6 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("resolve_intersections", ResolveIntersectionResult(model = self._model, json_data = result))
         return ResolveIntersectionResult(model = self._model, json_data = result)
 
-    def subtract_zonelets(self, part_id : int, zonelets : Iterable[int], cutters : List[PartZonelets], params : SubtractZoneletsParams) -> SubtractZoneletsResults:
-        """ Performs a boolean subtract operation of cutter zonelets from specified input face zonelets. It is expected that input zonelets form a non-self intersecting, watertight volume. Each set of cutter zonelets should be non self-intersecting. If the cutters are also watertight, this function will always succeed.
-
-
-        Parameters
-        ----------
-        part_id : int
-            Id of input part.
-        zonelets : Iterable[int]
-            List of input face zonelet ids.
-        cutters : PartZoneletsArray
-            Collection of face zonelet ids used to remove material from the input zonelets.
-        params : SubtractZoneletsParams
-            Parameters to control the subtract operation.
-
-        Returns
-        -------
-        SubtractZoneletsResults
-            Return a SubtractZoneletsResults.
-
-
-        Examples
-        --------
-        >>> result = surf_utils.subtract_zonelets(part_id, zonelet_id, cutters, params)
-
-        """
-        args = {"part_id" : part_id,
-        "zonelets" : zonelets,
-        "cutters" : [p._jsonify() for p in cutters],
-        "params" : params._jsonify()}
-        command_name = "PrimeMesh::SurfaceUtilities/SubtractZonelets"
-        self._model._print_logs_before_command("subtract_zonelets", args)
-        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("subtract_zonelets", SubtractZoneletsResults(model = self._model, json_data = result))
-        return SubtractZoneletsResults(model = self._model, json_data = result)
-
     def refine_at_contacts(self, part_ids : Iterable[int], params : RefineAtContactsParams) -> RefineAtContactsResults:
         """ Refine face elements in contact with other parts.
 
