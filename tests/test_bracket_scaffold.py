@@ -22,7 +22,6 @@ def test_bracket_scaffold(get_remote_client):
     #Validate topo faces and edges
     assert math.isclose(67, float(part_summary_res.n_topo_edges), rel_tol=0.05)
     assert math.isclose(9, float(part_summary_res.n_topo_faces), rel_tol=0.02)
-    
     # target element size
     element_size = 0.5
 
@@ -49,6 +48,7 @@ def test_bracket_scaffold(get_remote_client):
         constant_size=element_size,
         generate_quads=True
     )
-    surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
+    surfer_result = prime.Surfer(model).mesh_topo_faces(
+        part.id, topo_faces=faces, params=surfer_params)
     #Validate scaffold Operation
     assert surfer_result.error_code == prime.ErrorCode.NOERROR
