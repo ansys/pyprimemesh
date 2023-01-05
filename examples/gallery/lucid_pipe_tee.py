@@ -100,7 +100,7 @@ display()
 ###############################################################################
 # Write Structural Mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Labels are exported to CDB as collections for 
+# Labels are exported to CDB as collections for
 # applying load boundary conditions in the solver.
 
 struc_mesh = os.path.join(os.getcwd(), "pipe_tee.cdb")
