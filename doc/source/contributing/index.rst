@@ -18,8 +18,8 @@ Cloning the Source Repository
 ------------------------------
 You can clone the source repository from PyPrimeMesh GitHub and install the latest version in development mode by running:
 
->>> git clone https://github.com/pyansys/pyprime
->>> cd pyprime
+>>> git clone https://github.com/pyansys/pyprimemesh
+>>> cd pyprimemesh
 >>> pip install -e .[graphics] --find-links deps
 
 ---------------
