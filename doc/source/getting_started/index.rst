@@ -58,3 +58,5 @@ To launch PyPrimeMesh:
    import ansys.meshing.prime as prime
    with prime.launch_prime() as prime_client:
    	model = prime_client.model
+      
+.. note:: Only client APIs can be modified. You should not modify GRPC APIs.
