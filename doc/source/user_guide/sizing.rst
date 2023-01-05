@@ -105,7 +105,8 @@ Hard Sizing
 
 When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`HARD <ansys.meshing.prime.SizingType.HARD>`, sizes on the scope are based on a uniform value while meshing. The :class:`HardSizingParams <ansys.meshing.prime.HardSizingParams>` is used to specify following parameters: minimum size and growth rate. 
 
-Note: When you select Hard Sizing, it overrides all other specified size controls.
+.. Note::
+    When you select Hard Sizing, it overrides all other specified size controls.
 
 
 .. code:: python
