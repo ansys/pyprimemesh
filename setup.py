@@ -1,22 +1,5 @@
-"""PyPrimeMesh provides pythonic access to Prime server present in the Ansys Workbench install.
-
-PyPrimeMesh is an integral part of PyAnsys effort to facilitate the use of Ansys technologies
-directly from Python. PyPrimeMesh consists of various python modules that help you to acquire
-geometry and generate surface and volume meshes for multiple solvers.
-
-PyPrimeMesh enables you to:
-
-* Generate quad dominant and triangular surface meshes
-* Generate surface meshes with various sizing options like volumetric, constant, and so on
-* Generate volume meshes with linear and quadratic elements of various shapes like tetrahedra,
-  hexahedra, pyramids, prisms
-* Generate volume meshes with single process or distributed process
-* Check mesh quality to provide the best solution for the problem and improve predictive
-  capabilities
-* Perform mesh diagnostics for free, multi-connected edges, self-intersection and overlapping faces
-  in the model
-* Modularize meshing algorithms, components, and services for easier reuse in other applications
-* Expose micro services and APIs for meshing operations to promote meshing workflow prototyping
+"""PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server delivers core
+Ansys meshing technology.
 """
 
 DOCLINES = (__doc__ or '').split("\n")
@@ -33,6 +16,9 @@ from setuptools import setup, find_namespace_packages
 # while at the same time allowing the user to print the version from
 # the module
 HERE = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(HERE, 'README.md')) as f:
+    long_description = f.read()
+
 __version__ = None
 version_file = os.path.join(HERE, 'src', 'ansys', 'meshing', 'prime', '_version.py')
 with io_open(version_file, mode='r') as fd:
@@ -51,8 +37,8 @@ setup(
     package_dir={'': 'src'},
     version=__version__,
     description=DOCLINES[0],
-    long_description='\n'.join(DOCLINES[2:]),
-    long_description_content_type='text/x-rst',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/pyansys/pyprimemesh/',
     license='MIT',
     author='ANSYS, Inc.',  # this is required
