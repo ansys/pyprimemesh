@@ -86,8 +86,8 @@ def local_model() -> Model:
 
     NOTE: USE IN DEVELOPMENT ONLY
 
-    This imports the Prime server environment into the python process. It will
-    error unless proper environment is setup to support Prime Server.
+    This imports the Ansys Prime Server environment into the python process. It will
+    error unless proper environment is setup to support Ansys Prime Server.
     '''
     model = __get_local_client().model
     model._sync_up_model()  # For running python recipe directly on server, local model needs to be sync up with grpc model

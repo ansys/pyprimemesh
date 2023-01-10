@@ -297,10 +297,10 @@ class Model(_Model):
 
     @property
     def python_logger(self):
-        """Get PRIME's Logger instance.
+        """Get PyPrimeMesh's Logger instance.
 
-        PRIME's Logger instance can be used to control the verbosity
-        of messages printed by PRIME.
+        PyPrimeMesh's Logger instance can be used to control the verbosity
+        of messages printed by PyPrimeMesh.
 
         Returns
         -------
