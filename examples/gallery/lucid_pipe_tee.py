@@ -38,12 +38,12 @@ Procedure
 
 ###############################################################################
 # Launch Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Import all necessary modules.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# . Import all necessary modules.
 
-#. Launch Ansys Prime Server instance and connect client.
+# . Launch Ansys Prime Server instance and connect client.
 
-#. Get the client model and instantiate meshing utilities from lucid class.
+# . Get the client model and instantiate meshing utilities from lucid class.
 
 from ansys.meshing import prime
 import ansys.meshing.prime.graphics as graphics
@@ -57,12 +57,12 @@ mesh_util = lucid.Mesh(model)
 
 ###############################################################################
 # Read CAD Geometry
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Download example FMD geometry file.
+# ~~~~~~~~~~~~~~~~~
+# . Download example FMD geometry file.
 
 # FMD format is exported from SpaceClaim and is compatible with Linux.
 
-#. Read and display the geometry file.
+# . Read and display the geometry file.
 
 # The file contains several unmeshed parts as you would get after you imported from CAD.
 
@@ -76,15 +76,15 @@ print(model)
 
 ###############################################################################
 # Mesh for Structural
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Surface mesh using curvature sizing.
+# ~~~~~~~~~~~~~~~~~~~
+# . Surface mesh using curvature sizing.
 
-#. Volume mesh with tetrahedral elements.
+# . Volume mesh with tetrahedral elements.
 
-#. Delete unwanted capping surface geometries by deleting
+# . Delete unwanted capping surface geometries by deleting
 # parts that do not have any volume zones.
 
-#. Display structural thermal mesh ready for export.
+# . Display structural thermal mesh ready for export.
 
 mesh_util.surface_mesh(min_size=2.5, max_size=10)
 mesh_util.volume_mesh()
@@ -99,7 +99,7 @@ display()
 
 ###############################################################################
 # Write Structural Mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~
 # Labels are exported to CDB as collections for
 # applying load boundary conditions in the solver.
 
@@ -110,7 +110,7 @@ print("\nExported Structural Mesh: ", struc_mesh)
 
 ###############################################################################
 # Extract Fluid by Wrapping
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
 # You can deal with the small internal diameter change between flanges in several ways:
 #
 #  * Connect the geometry to extract a volume and refine the
@@ -120,9 +120,9 @@ print("\nExported Structural Mesh: ", struc_mesh)
 #
 # Here, you will choose to wrap and walk over these features.
 #
-#. Read in the geometry again.
+# . Read in the geometry again.
 
-#. Use a constant size wrap to walk over the diameter change
+# . Use a constant size wrap to walk over the diameter change
 # feature and extract the largest internal volume as the fluid.
 
 # By default, the wrap uses all parts as input and delete the input
@@ -139,12 +139,12 @@ display()
 
 ###############################################################################
 # Volume Mesh Fluid
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Create zones for each label to be used for boundary conditions definitions.
+# ~~~~~~~~~~~~~~~~~
+# . Create zones for each label to be used for boundary conditions definitions.
 
-#. Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
+# . Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
 
-#. Visualize the generated volume mesh.
+# . Visualize the generated volume mesh.
 # You can clearly see the prism layers that were specified by the Prism control.
 
 # set global sizing
@@ -164,7 +164,7 @@ display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="
 
 ###############################################################################
 # Write Fluid Mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~
 # Write a MSH file for the Fluent solver.
 
 fluid_mesh = os.path.join(os.getcwd(), "pipe_tee.msh")
@@ -175,6 +175,6 @@ print("\nExported Fluid Mesh: ", fluid_mesh)
 
 ###############################################################################
 # Exit PyPrimeMesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~
 
 prime_client.exit()
