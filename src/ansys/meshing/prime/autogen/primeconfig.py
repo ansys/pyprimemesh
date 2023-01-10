@@ -8,7 +8,7 @@ import numpy as np
 
 
 class ErrorCode(enum.IntEnum):
-    """Error codes associated with the failure of Prime operation.
+    """Error codes associated with the failure of PyPrimeMesh operation.
     """
     NOERROR = 0
     """No error."""
@@ -432,7 +432,7 @@ class ErrorCode(enum.IntEnum):
     """Tool zonelets do not form a watertight volume."""
 
 class WarningCode(enum.IntEnum):
-    """Warning codes associated with the Prime operation.
+    """Warning codes associated with the PyPrimeMesh operation.
     """
     NOWARNING = 0
     """No warnings."""
