@@ -1350,8 +1350,8 @@ class Mesh:
     ):
         """Wrap and remesh input.
 
-        Default behaviour is to perform an external wrap using curvature sizing
-        and extract features of any loaded objects in Prime.
+        Default behaviour is to perform an external wrap of all parts in the model
+        using curvature sizing and extracting features.
         The wrap is then remeshed to give a surface mesh for the extracted region.
 
         Geodesic sizing is used if only soft and curvature controls are set.
