@@ -82,6 +82,12 @@ def get_examples():
     toy_car = prime.examples.download_toy_car_pmdat()
     examples_dict["toy_car"] = toy_car
 
+    pipe_tee = prime.examples.download_pipe_tee_pmdat()
+    examples_dict["pipe_tee"] = pipe_tee
+
+    bracket = prime.examples.download_bracket_fmd()
+    examples_dict["bracket"] = bracket
+
     return examples_dict
 
 
