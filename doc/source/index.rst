@@ -41,20 +41,6 @@ PyPrimeMesh enables you to serve the meshing needs of the industry providing sol
 issues. PyPrimeMesh along with the general-purpose Python code effortlessly manages your meshing needs.
 PyPrimeMesh is now an open source. Enjoy it! Contributions are welcome.
 
-Background
-----------
-
-PyPrimeMesh is based on Prime gRPC, which helps Prime to be a server and seamlessly connect with the
-client and respond to the queries. ``gRPC`` is a lightweight protocol from Google using universal
-RPC framework which helps it to run on any environment effortlessly. gRPC stands for grpc remote
-procedure call and is an open source. gRPC is built on universal RPC framework which is compatible
-with any environment and provides high performance.
-
-PyPrimeMesh uses Prime gRPC to establish connection with the client and helps to call the prime APIs
-on the remote Prime instance. Prime gRPC  converts python statements into Prime commands and is
-transferred to prime instance in the server and enables communication between the client and Prime
-server.
-
 Features of PyPrimeMesh
 -------------------
 PyPrimeMesh comprises of many robust APIs which do many jobs just on calling the API once and APIs that
@@ -91,4 +77,4 @@ To read a mesh file:
        model = prime_client.model
 
        io = prime.FileIO(model)
-       _ = io.read_pmdat(r'E:\Temp\box.pmdat', pyprime.FileReadParams(model=model))
+       _ = io.read_pmdat(r'E:\Temp\box.pmdat', prime.FileReadParams(model=model))

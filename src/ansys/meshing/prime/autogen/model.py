@@ -9,9 +9,9 @@ import logging
 from ansys.meshing.prime.internals import utils
 
 class Model(CoreObject, CommunicationManager):
-    """Model is the nucleus of Prime. Model forms the base and contains all the information about Prime.
+    """Model is the nucleus of PyPrimeMesh. Model forms the base and contains all the information about PyPrimeMesh.
 
-    You can access any information in Prime only through Model.
+    You can access any information in PyPrimeMesh only through Model.
     Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
     """
 
