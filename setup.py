@@ -45,7 +45,7 @@ setup(
     maintainer='PyAnsys developers',  # you can change this
     maintainer_email='pyansys.support@ansys.com',
     install_requires=[
-        'ansys-api-meshing-prime==0.1.1',
+        'ansys-api-meshing-prime==0.1.1.dev0',
         'numpy>=1.14.0',
         "appdirs>=1.4.0",
     ],
