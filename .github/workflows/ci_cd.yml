@@ -205,6 +205,11 @@ jobs:
           restore-keys: |
             Python-${{ runner.os }}-${{ matrix.python-version }}
       
+      - name: Check for pre-commit
+        run: |
+          pip install pre-commit
+          pre-commit run --all-files --show-diff-on-failure
+
       - name: Build and Install PyPrimeMesh
         run: |
           pip install build
