@@ -32,7 +32,7 @@ class _LucidScope:
         Parameters
         ----------
         model : Model
-            Prime model.
+            PyPrimeMesh model.
 
         Returns
         -------
@@ -97,7 +97,7 @@ class SurfaceScope(_LucidScope):
         Parameters
         ----------
         model : Model
-            Prime model.
+            PyPrimeMesh model.
 
         Returns
         -------
@@ -123,7 +123,7 @@ class SurfaceScope(_LucidScope):
         Parameters
         ----------
         model : Model
-            Prime model.
+            PyPrimeMesh model.
         part_id : int
             Id of the part.
 
@@ -158,7 +158,7 @@ class SurfaceScope(_LucidScope):
         Parameters
         ----------
         model : Model
-            Prime model.
+            PyPrimeMesh model.
         part_id : int
             Id of the part.
 
