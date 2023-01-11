@@ -162,16 +162,15 @@ jobs:
       #     path: doc/build/latex/*.pdf
       #     retention-days: 7
       
-      # Deploy Latest Release Documentation (Disabled)
-      # - name: Deploy Documentation
-      #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
-      #   uses: JamesIves/github-pages-deploy-action@v4.4.1
-      #   with:
-      #     repository-name: pyansys/pyprimemesh-docs
-      #     token: ${{ steps.get_workflow_token.outputs.token }}
-      #     branch: gh-pages
-      #     folder: doc/build/html
-      #     clean: true
+      - name: Deploy Documentation
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          repository-name: pyansys/pyprimemesh-docs
+          token: ${{ steps.get_workflow_token.outputs.token }}
+          branch: gh-pages
+          folder: doc/build/html
+          clean: true
 
       # Deploy Latest Developer Documentation
       - name: Deploy Documentation
