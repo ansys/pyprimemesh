@@ -1,8 +1,8 @@
 import ansys.meshing.prime as prime
 
 
-def test_sizecontrol(get_remote_client):
-    elbow_lucid = prime.examples.download_elbow_fmd()
+def test_sizecontrol(get_remote_client, get_examples):
+    elbow_lucid = get_examples["elbow_lucid"]
     model = get_remote_client.model
     fileIO = prime.FileIO(model=model)
     mesher = prime.lucid.Mesh(model)

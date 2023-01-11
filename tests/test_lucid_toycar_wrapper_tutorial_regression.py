@@ -6,11 +6,11 @@ import math
 import ansys.meshing.prime as prime
 
 
-def test_toycar_tutorial(get_remote_client):
+def test_toycar_tutorial(get_remote_client, get_examples):
 
+    toy_car = get_examples["toy_car"]
     model = get_remote_client.model
-    # downloads pmdat file
-    toy_car = prime.examples.download_toy_car_pmdat()
+
     # reads file
     _ = prime.FileIO(model=model).read_pmdat(toy_car, prime.FileReadParams(model=model))
     mesher = prime.lucid.Mesh(model)
