@@ -12,7 +12,7 @@ PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server d
 ## Documentation and Issues
 
 For information on PyPrimeMesh, refer to the latest [documentation](
-https://dev.prime.docs.pyansys.com).
+https://prime.docs.pyansys.com).
 
 For queries related to PyPrimeMesh, post on the [Discussion](
 https://github.com/pyansys/pyprimemesh/discussions) page. 
