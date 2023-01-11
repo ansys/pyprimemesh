@@ -83,7 +83,7 @@ jobs:
       
       - name: Install Library
         run: |
-          pip install . --find-links deps
+          pip install .
 
       - name: Test import
         run: |
@@ -114,7 +114,7 @@ jobs:
         run: |
           pip install build
           python -m build . -w
-          pip install dist/* --find-links deps
+          pip install dist/*
 
       - name: Install documentation requirements
         run: |
@@ -214,7 +214,7 @@ jobs:
         run: |
           pip install build
           python -m build .
-          pip install dist/*.whl --find-links deps
+          pip install dist/*.whl
    
       - name: Login in Github Container registry #
         uses: docker/login-action@v2
