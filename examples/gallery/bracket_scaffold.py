@@ -11,7 +11,7 @@ to generate conformal surface mesh.
 Objective
 ~~~~~~~~~
 
-To create conformal surface mesh, we will scaffold topofaces or topoedges to
+To create conformal surface mesh,you can scaffold topofaces, topoedges or both to
 connect all the surface bodies and mesh the bracket with quad elements.
 
 .. image:: ../../../images/bracket_mid_surface_scaffold_w.png
@@ -93,7 +93,7 @@ display()
 #. Initialize connection tolerance
 # (which is smaller than target element size) and other parameters.
 
-#. Scaffold topofaces and/or topoedges with connection parameters.
+#. Scaffold topofaces, topoedges or both with connection parameters.
 
 # target element size
 element_size = 0.5
@@ -105,7 +105,7 @@ params = prime.ScaffolderParams(
     constant_mesh_size=element_size,
 )
 
-# Get existing topoface/topoedge ids
+# Get existing topoface or topoedge ids
 faces = part.get_topo_faces()
 beams = []
 
