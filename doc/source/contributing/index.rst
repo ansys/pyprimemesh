@@ -20,7 +20,7 @@ You can clone the source repository from PyPrimeMesh GitHub and install the late
 
 >>> git clone https://github.com/pyansys/pyprimemesh
 >>> cd pyprimemesh
->>> pip install -e .[graphics] --find-links deps
+>>> pip install -e .[graphics]
 
 ---------------
 Posting Issues
