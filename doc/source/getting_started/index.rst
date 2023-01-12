@@ -46,10 +46,11 @@ everything useful in development, use the following command instead.
 
 Dependencies
 ------------
+
 You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 
 Launching PyPrimeMesh
------------------
+---------------------
 
 To launch PyPrimeMesh:
 

@@ -1,12 +1,12 @@
 .. _ref_index_launching_pyprime:
 
-**********************
+*********************
 Launching PyPrimeMesh
-**********************
+*********************
 
-==============================================
+=====================================
 Launching Server from A Python Script
-==============================================
+=====================================
 
 The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` function launches the Ansys Prime Server.  
 The function returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` connected to the launched server session.  
@@ -24,9 +24,9 @@ The :class:`Client <ansys.meshing.prime.Client>` gets the :attr:`model <ansys.me
  
     model = prime_client.model
 
-===========================================================================
+==========================================================================
 Launching Server from A Windows or Linux Console and Connecting the Client
-===========================================================================
+==========================================================================
 
 Ansys Prime Server can be launched from a Linux or Windows from the Command Prompt and then connected to the Client as needed.  
 
@@ -51,9 +51,9 @@ An example to start the server in parallel mode on 4 nodes, specifying the IP ad
     Only a single client session can be connected to an active Ansys Prime Server instance at any time.
 
 
-==============================
+=============================
 Disconnecting from The Server
-==============================
+=============================
 
 The :func:`Client.exit() <ansys.meshing.prime.Client.exit>` function ends the connection with the server.
 
@@ -71,9 +71,9 @@ Here is an example on Windows for running a python script directly from the comm
 
     "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
 
-=========================================
+========================================
 Recommendations for Launching the Server
-=========================================
+========================================
 
 When developing, you can use python context to launch the server so that if an exception occurs during runtime the server closes cleanly.  This prevents servers being spawned and left open blocking ports.  
 
