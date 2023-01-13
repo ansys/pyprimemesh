@@ -42,8 +42,9 @@ setup(
     url='https://github.com/pyansys/pyprimemesh/',
     license='MIT',
     author='ANSYS, Inc.',  # this is required
+    author_email="pyansys.support@ansys.com",
     maintainer='PyAnsys developers',  # you can change this
-    maintainer_email='pyansys.support@ansys.com',
+    maintainer_email='pyansys.maintainers@ansys.com',
     install_requires=[
         'ansys-api-meshing-prime==0.1.1.dev0',
         'numpy>=1.14.0',
