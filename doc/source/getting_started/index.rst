@@ -34,7 +34,7 @@ Alternatively, you can clone this repository and install the client using
 
    git clone https://github.com/pyansys/pyprimemesh
    cd pyprimemesh
-   pip install -e . --find-links deps
+   pip install -e .
 
 The above command will only install basic version of the client. This will not
 include some functionality that is important to development. To install
@@ -42,14 +42,15 @@ everything useful in development, use the following command instead.
 
 .. code::
 
-    pip install -e .[all] --find-links deps
+    pip install -e .[all]
 
 Dependencies
 ------------
+
 You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
 
 Launching PyPrimeMesh
------------------
+---------------------
 
 To launch PyPrimeMesh:
 

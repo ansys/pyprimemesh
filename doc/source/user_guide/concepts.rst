@@ -1,12 +1,12 @@
 .. _ref_index_concepts:
 
-*****************************
+****************************
 Concepts and Model Structure
-*****************************
+****************************
 
-======
+=====
 Model
-======
+=====
 
 The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for PyPrimeMesh. It contains all information about the PyPrimeMesh session.  
 
@@ -60,9 +60,9 @@ An example for importing a CAD file containing a single part is shown below:
 					 (203.2 203.2 50.8)
 
 
-======
+=====
 Parts
-======
+=====
 
 Geometry topology and mesh data in the :class:`Model <ansys.meshing.prime.Model>` is stored within any number of :attr:`parts <ansys.meshing.prime.Model.parts>`.
 

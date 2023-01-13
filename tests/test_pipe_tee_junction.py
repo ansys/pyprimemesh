@@ -21,7 +21,8 @@ def test_pipe_tee_junction(get_remote_client):
     mesher.volume_mesh(
         prism_layers=5,
         prism_surface_expression="* !*inlet* !*outlet*",
-        volume_fill_type=prime.VolumeFillType.POLY)
+        volume_fill_type=prime.VolumeFillType.POLY,
+    )
     # Get statistics on the mesh
     part = model.get_part_by_name("__wrap__")
     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))

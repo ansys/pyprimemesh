@@ -1,8 +1,8 @@
 .. _ref_index_contributing:
 
-=============
+============
 Contributing
-=============
+============
 
 Overall guidance on contributing to a PyAnsys library appears in the
 `Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ topic
@@ -13,14 +13,14 @@ contribute to PyPrimeMesh.
  
 The following contribution information is specific to PyPrimeMesh.
 
-------------------------------
+-----------------------------
 Cloning the Source Repository
-------------------------------
+-----------------------------
 You can clone the source repository from PyPrimeMesh GitHub and install the latest version in development mode by running:
 
 >>> git clone https://github.com/pyansys/pyprimemesh
 >>> cd pyprimemesh
->>> pip install -e .[graphics] --find-links deps
+>>> pip install -e .[graphics]
 
 ---------------
 Posting Issues
@@ -30,15 +30,15 @@ page to submit questions, report bugs, and request new features.
 
 To reach the project support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
-------------------------------
+---------------------------------
 Viewing PyPrimeMesh Documentation
-------------------------------
+---------------------------------
 Documentation for the latest stable release of PyPrimeMesh is hosted at
 `PyPrimeMesh Documentation <https://prime.docs.pyansys.com>`_.
 
------------------------------------------
+----------------------------------------
 Code Structure and Contributing New Code
------------------------------------------
+----------------------------------------
 PyPrimeMesh code base is primarily auto-generated based on the Ansys Prime Server.  For the auto-generated 
 code, contributions are limited to raising issues and enhancement requests.  
 
@@ -56,9 +56,9 @@ for contributions are:
 If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
 which the PyPrimeMesh team can use as a discussion thread to work on for implementing the contribution.
 
------------
+----------
 Code Style
------------
+----------
 PyPrimeMesh follows PEP8 standard as outlined in the `PyAnsys Development Guide
 <https://dev.docs.pyansys.com>`_ and implements style checking using
 `pre-commit <https://pre-commit.com/>`_.
@@ -79,9 +79,9 @@ This way, it's not possible for you to push code that fails the style checks. Fo
   black....................................................................Passed
   flake8...................................................................Passed
 
-----------
+---------
 Licensing
-----------
+---------
 All contributed code will be licensed under The MIT License found in the repository.
 If you did not write the code yourself, it is your responsibility to ensure that the existing license is compatible 
 and included in the contributed files or you can obtain permission from the original author to relicense the code.

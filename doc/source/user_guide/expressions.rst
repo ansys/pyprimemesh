@@ -1,6 +1,6 @@
-************
-Expressions 
-************
+***********
+Expressions
+***********
 
 Expressions are used to gather named entities needed for various operations.  
 

@@ -1,9 +1,9 @@
 """
 .. _ref_bracket_mid_surface_mesh:
 
-=========================================================
+========================================================
 Meshing a Mid-Surfaced Bracket for a Structural Analysis
-=========================================================
+========================================================
 
 **Summary**: This example illustrates how to use topology based connection
 to generate conformal surface mesh.
@@ -32,12 +32,12 @@ Procedure
 
 ###############################################################################
 # Launch Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Import all necessary modules.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# . Import all necessary modules.
 
-#. Launch an instance of Ansys Prime Server.
+# . Launch an instance of Ansys Prime Server.
 
-#. Connect PyPrimeMesh client and get the model.
+# . Connect PyPrimeMesh client and get the model.
 
 from ansys.meshing import prime
 import os, tempfile
@@ -48,12 +48,12 @@ model = prime_client.model
 
 ###############################################################################
 # Import CAD geometry
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Download the bracket geometry file(.fmd file exported by SpaceClaim).
+# ~~~~~~~~~~~~~~~~~~~
+# . Download the bracket geometry file(.fmd file exported by SpaceClaim).
 
-#. Import CAD geometry.
+# . Import CAD geometry.
 
-#. Create part per CAD model for topology based connection.
+# . Create part per CAD model for topology based connection.
 
 bracket_file = prime.examples.download_bracket_fmd()
 
@@ -69,15 +69,15 @@ file_io.import_cad(
 
 ###############################################################################
 # Review the part
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Get the part summary.
+# ~~~~~~~~~~~~~~~
+# . Get the part summary.
 
-#. Display the model to show edges by connection.
+# . Display the model to show edges by connection.
 
-#. Use keyboard shortcuts to switch between
+# . Use keyboard shortcuts to switch between
 # surface (s) and wireframe (w) representation.
 
-#. Colour code for edge connectivity -
+# . Colour code for edge connectivity -
 # Red: free; Black: double; Purple: triple.
 
 part = model.get_part_by_name('bracket_mid_surface-3')
@@ -89,11 +89,11 @@ display()
 
 ###############################################################################
 # Connection
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Initialize connection tolerance
+# ~~~~~~~~~~
+# . Initialize connection tolerance
 # (which is smaller than target element size) and other parameters.
 
-#. Scaffold topofaces, topoedges or both with connection parameters.
+# . Scaffold topofaces, topoedges or both with connection parameters.
 
 # target element size
 element_size = 0.5
@@ -116,10 +116,10 @@ print(scaffold_res)
 
 ###############################################################################
 # Surface mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Initialize surface meshing parameters.
+# ~~~~~~~~~~~~
+# . Initialize surface meshing parameters.
 
-#. Mesh topofaces with constant size and generate quad elements.
+# . Mesh topofaces with constant size and generate quad elements.
 
 surfer_params = prime.SurferParams(
     model=model,
@@ -136,13 +136,12 @@ display()
 
 ###############################################################################
 # Write mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # Write a cdb file for use in the APDL solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mapdl_cdb = os.path.join(temp_folder, 'bracket_scaffold.cdb')
     file_io.export_mapdl_cdb(mapdl_cdb, params=prime.ExportMapdlCdbParams(model))
-
     assert os.path.exists(mapdl_cdb)
     print(f'MAPDL case exported at {mapdl_cdb}')
 

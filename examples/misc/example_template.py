@@ -73,7 +73,7 @@ mesh_util.volume_mesh(
 
 ###############################################################################
 # Rendering graphics
-# ~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~
 # If you display graphics the result will be auto-generated and
 # rendered in the page. Like so:
 display = Graphics(model)
@@ -91,4 +91,6 @@ display()
 
 ###############################################################################
 # Stopping Ansys Prime Server
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 prime_client.exit()
