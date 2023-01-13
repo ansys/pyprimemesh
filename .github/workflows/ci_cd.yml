@@ -117,7 +117,7 @@ jobs:
 
       - name: Test import
         run: |
-          python -c "import ansys.meshing.prime as pyprimemesh; printf('Successfully imported ansys.meshing.prime')"
+          python -c "import ansys.meshing.prime as pyprimemesh; print('Successfully imported ansys.meshing.prime')"
           python -c "from ansys.meshing.prime import __version__; print(__version__)"
 
   docs:
