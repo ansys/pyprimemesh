@@ -51,7 +51,7 @@ setup(
     ],
     extras_require={'graphics': ['pyvista>=0.32.0'], 'all': ['pyvista>=0.32.0']},
     # Plan on supporting only the currently supported versions of Python
-    python_requires='>=3.7, <3.10',
+    python_requires='>=3.7, <4',
     # Less than critical but helpful
     classifiers=[
         'Development Status :: 4 - Beta',
