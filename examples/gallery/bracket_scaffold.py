@@ -1,9 +1,9 @@
 """
 .. _ref_bracket_mid_surface_mesh:
 
-=========================================================
+========================================================
 Meshing a Mid-Surfaced Bracket for a Structural Analysis
-=========================================================
+========================================================
 
 **Summary**: This example illustrates how to use topology based connection
 to generate conformal surface mesh.
@@ -32,7 +32,7 @@ Procedure
 
 ###############################################################################
 # Launch Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
 # . Import all necessary modules.
 
 # . Launch an instance of Ansys Prime Server.
@@ -48,7 +48,7 @@ model = prime_client.model
 
 ###############################################################################
 # Import CAD geometry
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~
 # . Download the bracket geometry file(.fmd file exported by SpaceClaim).
 
 # . Import CAD geometry.
@@ -69,7 +69,7 @@ file_io.import_cad(
 
 ###############################################################################
 # Review the part
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~
 # . Get the part summary.
 
 # . Display the model to show edges by connection.
@@ -89,7 +89,7 @@ display()
 
 ###############################################################################
 # Connection
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # . Initialize connection tolerance
 # (which is smaller than target element size) and other parameters.
 
@@ -116,7 +116,7 @@ print(scaffold_res)
 
 ###############################################################################
 # Surface mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~
 # . Initialize surface meshing parameters.
 
 # . Mesh topofaces with constant size and generate quad elements.
@@ -136,13 +136,12 @@ display()
 
 ###############################################################################
 # Write mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # Write a cdb file for use in the APDL solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mapdl_cdb = os.path.join(temp_folder, 'bracket_scaffold.cdb')
     file_io.export_mapdl_cdb(mapdl_cdb, params=prime.ExportMapdlCdbParams(model))
-
     assert os.path.exists(mapdl_cdb)
     print(f'MAPDL case exported at {mapdl_cdb}')
 

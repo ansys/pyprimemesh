@@ -1,9 +1,9 @@
 """
 .. _ref_mixing_elbow_mesh:
 
-===============================================
+==========================================
 Meshing a Mixing Elbow for a Flow Analysis
-===============================================
+==========================================
 
 **Summary**: This example illustrates how to mesh a mixing elbow for a flow analysis.
 
@@ -32,7 +32,7 @@ Procedure
 
 ###############################################################################
 # Launch Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
 # . Import all necessary modules.
 
 # . Launch an instance of Ansys Prime Server.
@@ -43,7 +43,7 @@ Procedure
 
 from ansys.meshing import prime
 from ansys.meshing.prime.graphics import Graphics
-import os
+import os, tempfile
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -119,9 +119,11 @@ print("\nMaximum skewness: ", results.quality_results_part[0].max_quality)
 # Write Mesh
 # ~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
-
-mesh_util.write(os.path.join(os.getcwd(), "mixing_elbow.cas"))
-print(os.getcwd())
+with tempfile.TemporaryDirectory() as temp_folder:
+    mesh_file = os.path.join(temp_folder, "mixing_elbow.cas")
+    mesh_util.write(mesh_file)
+    assert os.path.exists(mesh_file)
+    print("\nExported file:\n", mesh_file)
 
 ###############################################################################
 # Exit PyPrimeMesh

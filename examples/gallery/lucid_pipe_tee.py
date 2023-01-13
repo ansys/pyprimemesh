@@ -49,7 +49,7 @@ from ansys.meshing import prime
 import ansys.meshing.prime.graphics as graphics
 from ansys.meshing.prime import lucid
 
-import os
+import os, tempfile
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -103,10 +103,10 @@ display()
 # Labels are exported to CDB as collections for
 # applying load boundary conditions in the solver.
 
-struc_mesh = os.path.join(os.getcwd(), "pipe_tee.cdb")
-mesh_util.write(struc_mesh)
-
-print("\nExported Structural Mesh: ", struc_mesh)
+with tempfile.TemporaryDirectory() as temp_folder:
+    structural_mesh = os.path.join(temp_folder, "pipe_tee.cdb")
+    mesh_util.write(structural_mesh)
+    print("\nExported Structural Mesh: ", structural_mesh)
 
 ###############################################################################
 # Extract Fluid by Wrapping
@@ -167,11 +167,11 @@ display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="
 # ~~~~~~~~~~~~~~~~
 # Write a MSH file for the Fluent solver.
 
-fluid_mesh = os.path.join(os.getcwd(), "pipe_tee.msh")
-
-mesh_util.write(fluid_mesh)
-
-print("\nExported Fluid Mesh: ", fluid_mesh)
+with tempfile.TemporaryDirectory() as temp_folder:
+    fluid_mesh = os.path.join(temp_folder, "pipe_tee.msh")
+    mesh_util.write(fluid_mesh)
+    assert os.path.exists(fluid_mesh)
+    print("\nExported Fluid Mesh: ", fluid_mesh)
 
 ###############################################################################
 # Exit PyPrimeMesh
