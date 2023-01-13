@@ -5,11 +5,8 @@ Contributing
 ============
 
 Overall guidance on contributing to a PyAnsys library appears in the
-`Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ topic
-in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
-with it and all `Guidelines and Best Practices
-<https://dev.docs.pyansys.com/guidelines/index.html>`_ before attempting to
-contribute to PyPrimeMesh.
+`Contributing <https://dev.docs.pyansys.com/dev/how-to/contributing.html>`_ topic
+in the *PyAnsys Developer's Guide*.
  
 The following contribution information is specific to PyPrimeMesh.
 
@@ -22,9 +19,9 @@ You can clone the source repository from PyPrimeMesh GitHub and install the late
 >>> cd pyprimemesh
 >>> pip install -e .[graphics]
 
----------------
+--------------
 Posting Issues
----------------
+--------------
 Use the `PyPrimeMesh Issues <https://github.com/pyansys/pyprimemesh/issues>`_
 page to submit questions, report bugs, and request new features.
 
