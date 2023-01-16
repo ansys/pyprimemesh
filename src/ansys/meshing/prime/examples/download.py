@@ -63,6 +63,7 @@ def download_file(
     Tuple[str, str]
         Tuple containing filepath to be used and the local filepath of the downloaded directory
         The two are different in case of containers.
+
     """
     url = _get_filepath_on_default_server(filename, *directory)
     local_path = _retrieve_data(url, filename, dest=destination, force=force)

@@ -38,6 +38,7 @@ class _LucidScope:
         -------
         ScopeDefinition
             Returns the scope definition.
+
         """
         label_exp: str = None
         zone_exp: str = None
@@ -82,6 +83,7 @@ class SurfaceScope(_LucidScope):
             Label or zone expression to scope entities while evaluating scope.
         scope_evaluation_type : prime.ScopeEvaluationType
             Evaluation type to scope entities. The default is set to labels.
+
         """
         _LucidScope.__init__(
             self,
@@ -110,6 +112,7 @@ class SurfaceScope(_LucidScope):
             >>> model = client.model
             >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
             >>> part_ids = su.get_parts()
+
         """
         sel_parts: Iterable[int] = []
         for part in model.parts:
@@ -138,6 +141,7 @@ class SurfaceScope(_LucidScope):
             >>> model = client.model
             >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
             >>> face_zonelets = su.get_face_zonelets(model, 2)
+
         """
         face_zonelets: Iterable[int] = []
         part = model.get_part(part_id)
@@ -173,6 +177,7 @@ class SurfaceScope(_LucidScope):
             >>> model = client.model
             >>> su = SurfaceScope("*", "*", prime.ScopeEvaluationType.LABELS)
             >>> topo_faces = su.get_topo_faces(model, 2)
+
         """
         topo_faces: Iterable[int] = []
         part = model.get_part(part_id)
@@ -213,6 +218,7 @@ class VolumeScope(_LucidScope):
             Label or zone expression to scope entities while evaluating scope.
         scope_evaluation_type : prime.ScopeEvaluationType
             Evaluation type to scope entities. The default is set to zones.
+
         """
         _LucidScope.__init__(
             self,

@@ -64,6 +64,7 @@ class Mesh:
 
         cad_reader_route : prime.CadReaderRoute
             Route of CadReader.
+
         """
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".msh" or file_name[-7:] == ".msh.gz":
@@ -104,6 +105,7 @@ class Mesh:
         ----------
         file_name : str
             Path of file to be written or exported.
+
         """
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".cdb":
@@ -163,6 +165,7 @@ class Mesh:
         >>> from ansys.meshing.prime import lucid
         >>> mesh_util = lucid.Mesh(model)
         >>> mesh_util.create_zones_from_labels()
+
         """
         if conversion_method != LabelToZoneMethod.SIMPLE:
             self._logger.error("Invalid label to zone conversion method")
@@ -267,6 +270,7 @@ class Mesh:
             Expression of parts to be merged.
         new_name : str
             New part name for the merged part.
+
         """
         part_ids = []
         for part in self._model.parts:
@@ -287,6 +291,7 @@ class Mesh:
             Expression of parts whose topology needs to be deleted.
         delete_edges : bool
             Check whether to delete the edges or not.
+
         """
         for part in self._model.parts:
             if check_name_pattern(parts_expression, part.get_name()):
@@ -438,6 +443,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for generating surface mesh.
+
         """
         if min_size == None and max_size == None:
             global_sizing = self._model.get_global_sizing_params()
@@ -487,6 +493,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for creating size control.
+
         """
         global_sizes = self._model.get_global_sizing_params()
         if global_sizes.max < size:
@@ -527,6 +534,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for creating size control.
+
         """
         global_sizes = self._model.get_global_sizing_params()
         if max < min:
@@ -569,6 +577,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for generating surface mesh.
+
         """
         sizefield = prime.SizeField(model=self._model)
         s_control_ids = []
@@ -609,6 +618,7 @@ class Mesh:
             Name pattern of face labels with which you want to connect.
         tolerance: float
             Tolerance used for connection.
+
         """
         name_pattern_param = prime.NamePatternParams(self._model)
         connect = prime.Connect(self._model)
@@ -716,6 +726,7 @@ class Mesh:
             Suggested name for the volume zone of the created flow volume.
         cap_scope: SurfaceScope
             Scope defining the face zonelets where cap for flow volume needs to be created.
+
         """
         parts = cap_scope.get_parts(self._model)
         for part in parts:
@@ -813,6 +824,7 @@ class Mesh:
 
         scope : VolumeScope
             Scope of volumes to be meshed.
+
         """
         automesh_params = prime.AutoMeshParams(model=self._model)
         automesh_params.volume_fill_type = volume_fill_type
@@ -1476,6 +1488,7 @@ class Mesh:
         >>> mesh.wrap(min_size=1, max_size=20, create_intersection_loops=True)
         >>> mesh.write("/mesh_output.pmdat")
         >>> prime_client.exit()
+
         """
         if size_fields is None:
             size_fields = []

@@ -34,7 +34,6 @@ for package in find_namespace_packages('src', include="ansys*"):
 setup(
     name='ansys-meshing-prime',
     packages=packages,
-    package_dir={'': 'src'},
     version=__version__,
     description=DOCLINES[0],
     long_description=long_description,
@@ -45,14 +44,16 @@ setup(
     author_email="pyansys.support@ansys.com",
     maintainer='PyAnsys developers',  # you can change this
     maintainer_email='pyansys.maintainers@ansys.com',
+    # Plan on supporting only the currently supported versions of Python
+    python_requires='>=3.7, <4',
     install_requires=[
-        'ansys-api-meshing-prime==0.1.1.dev0',
+        'ansys-api-meshing-prime==0.1.1',
         'numpy>=1.14.0',
         "appdirs>=1.4.0",
     ],
     extras_require={'graphics': ['pyvista>=0.32.0'], 'all': ['pyvista>=0.32.0']},
-    # Plan on supporting only the currently supported versions of Python
-    python_requires='>=3.7, <4',
+    package_dir={'': 'src'},
+    package_data={'': ['graphics/images/*.png']},
     # Less than critical but helpful
     classifiers=[
         'Development Status :: 4 - Beta',
