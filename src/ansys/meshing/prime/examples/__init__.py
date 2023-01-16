@@ -56,6 +56,7 @@ def download_elbow_pmdat(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.read_pmdat(elbow, params=prime.FileReadParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -100,6 +101,7 @@ def download_elbow_fmd(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -144,6 +146,7 @@ def download_elbow_scdoc(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -188,6 +191,7 @@ def download_bracket_fmd(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -236,6 +240,7 @@ def download_bracket_scdoc(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -284,6 +289,7 @@ def download_toy_car_pmdat(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.read_pmdat(toy_car, params=prime.FileReadParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -328,6 +334,7 @@ def download_toy_car_fmd(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -372,6 +379,7 @@ def download_toy_car_scdoc(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -416,6 +424,7 @@ def download_pipe_tee_pmdat(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.read_pmdat(pipe_tee, params=prime.FileReadParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
@@ -460,6 +469,7 @@ def download_pipe_tee_fmd(
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
     >>>     print(model)
+
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
