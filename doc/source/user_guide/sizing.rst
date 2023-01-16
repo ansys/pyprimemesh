@@ -7,9 +7,9 @@ Sizing
 PyPrimeMesh provides various sizing controls to help you refine your mesh to obtain the desired accuracy while meshing.
 
 
----------------
+--------------
 Sizing Control
----------------
+--------------
 
 When you mesh a model, you expect the mesh size to satisfy specific requirements at various locations in the mesh to provide accurate results.
 You must use optimal sizes while meshing to achieve maximum simulation accuracy at minimum computational cost.

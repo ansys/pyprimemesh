@@ -1,5 +1,5 @@
 PyPrimeMesh Documentation |version| BETA
-====================================
+========================================
 
 .. toctree::
    :hidden:
@@ -42,7 +42,8 @@ issues. PyPrimeMesh along with the general-purpose Python code effortlessly mana
 PyPrimeMesh is now an open source. Enjoy it! Contributions are welcome.
 
 Features of PyPrimeMesh
--------------------
+-----------------------
+
 PyPrimeMesh comprises of many robust APIs which do many jobs just on calling the API once and APIs that
 just do one job on calling them. These APIs also enable you to query the model and allow you to
 build complex models based on the underlying queries. PyPrimeMesh has some distinct features that make

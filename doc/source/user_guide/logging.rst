@@ -1,8 +1,8 @@
 .. _ref_index_logging:
 
-*****************************
+*******
 Logging
-*****************************
+*******
 
 A logger can be attached to a session in order to handle streamed output from PyPrimeMesh.  
 

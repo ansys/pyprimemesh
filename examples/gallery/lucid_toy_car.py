@@ -1,9 +1,9 @@
 """
 .. _ref_toy_car_wrap:
 
-===============================================
+======================================
 Wrapping a Toy Car for a Flow Analysis
-===============================================
+======================================
 
 **Summary**: This example illustrates how to wrap a toy car for a flow analysis.
 
@@ -34,14 +34,14 @@ Procedure
 
 ###############################################################################
 # Launch Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
 # From the PyPrimeMesh client get the model.
 # Instantiate meshing utilities from lucid class.
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
-import os
+import os, tempfile
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -51,7 +51,7 @@ mesh_util = prime.lucid.Mesh(model)
 
 ###############################################################################
 # Import Geometry
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~
 # Download the toy car geometry file (.fmd file exported by SpaceClaim).
 # Import geometry and display everything except tunnel.
 
@@ -64,7 +64,7 @@ display(scope=scope)
 
 ###############################################################################
 # Close Holes
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~
 # Several parts are open surfaces (with holes).
 # Coarse wrap to close holes and delete originals.
 # We could use leakage detection to close these regions.
@@ -88,7 +88,7 @@ for part_name in coarse_wrap:
 
 ###############################################################################
 # Extract Fluid using Wrapper
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Wrap full model and extract largest internal region as the fluid.
 # Create edges at intersecting regions to improve quality.
 # Refining mesh to avoid contact between different parts.
@@ -107,7 +107,7 @@ print(model)
 
 ###############################################################################
 # Check Wrap
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # Check wrap surface is closed and suitable quality to use as surface mesh.
 
 scope = prime.ScopeDefinition(model=model, part_expression=wrap_part.name)
@@ -141,7 +141,7 @@ for summary_res in qual_summary_res.quality_results:
 
 ###############################################################################
 # Create Zones
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~
 # Create face zones from labels imported from geometry that can be used
 # in the solver to define boundary conditions.
 # If specifying individual labels to create zones the order is important.
@@ -156,7 +156,7 @@ print(model)
 
 ###############################################################################
 # Volume Mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~
 # Mesh only fluid volume with tetrahedral elements and boundary layer refinement.
 # Not meshing other volumetric regions.
 # Volume zones exist already for volume meshing and passing to the solver.
@@ -188,7 +188,7 @@ print(model)
 
 ###############################################################################
 # Print Mesh Stats
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~
 # Print statistics on generated mesh.
 
 vtool = prime.VolumeMeshTool(model=model)
@@ -223,7 +223,7 @@ for summary_res in qual_summary_res.quality_results_part:
 
 ###############################################################################
 # Improve Quality
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~
 # Mesh quality is poor.  We can use Auto-Node Move to improve the mesh.
 
 improve = prime.VolumeMeshTool(model=model)
@@ -266,17 +266,16 @@ for summary_res in qual_summary_res.quality_results_part:
 
 ###############################################################################
 # Write Mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
-
-mesh_file = os.path.join(os.getcwd(), "toy_car_lucid.cas")
-
-mesh_util.write(mesh_file)
-
-print("\nExported file:\n", mesh_file)
+with tempfile.TemporaryDirectory() as temp_folder:
+    mesh_file = os.path.join(temp_folder, "toy_car_lucid.cas")
+    mesh_util.write(mesh_file)
+    assert os.path.exists(mesh_file)
+    print("\nExported file:\n", mesh_file)
 
 ###############################################################################
 # Exit PyPrimeMesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~
 
 prime_client.exit()

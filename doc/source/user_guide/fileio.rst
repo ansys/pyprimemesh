@@ -1,16 +1,16 @@
 .. _ref_index_reading_writing:
 
 
-**************************
+*************************
 Reading and Writing Files
-**************************
+*************************
 
 The :class:`FileIO <ansys.meshing.prime.FileIO>` class is used for all file based data exchanges.
 
 
-====================
+===================
 Native PMDAT Format
-====================
+===================
 
 PMDAT is the native file format for PyPrimeMesh that contains all data associated with the active model.
 
@@ -37,9 +37,9 @@ The model data can be read from and written to this format using the :func:`File
     Files can be read or imported based on file extension using the :func:`Mesh.read() <ansys.meshing.prime.lucid.Mesh.read>` in Lucid API. The method supports PyPrimeMesh's native format, various CAD formats and solver mesh files. 
 
 
-==============
+=============
 Importing CAD
-==============
+=============
 
 The :func:`FileIO.import_cad() <ansys.meshing.prime.FileIO.import_cad>` function allows you to import CAD files and set parameters for importing files using the :class:`ImportCadParams <ansys.meshing.prime.ImportCadParams>` class.  
 
@@ -207,9 +207,9 @@ The number of parts is identical to the number of bodies.  As below:
     **Part creation by Body (from SpaceClaim to PyPrimeMesh part structure)**
 
 
-==========================================
+=========================================
 Importing and Exporting Solver Mesh Files
-==========================================
+=========================================
 
 .. tip::
     File extensions such as CAS ``(*.cas)``, MSH ``(*.msh, *.msh.gz)``, CDB ``(*.cdb)`` can be imported using the :func:`Mesh.read() <ansys.meshing.prime.lucid.Mesh.read>` and exported using the :func:`Mesh.write() <ansys.meshing.prime.lucid.Mesh.write>` in Lucid API.
@@ -238,9 +238,9 @@ Export Solver Mesh Files
  - The :func:`FileIO.export_boundary_fitted_spline_kfile() <ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile>` function allows you to export IGA LS-DYNA keyword ``(*.k)`` file and set parameters for exporting boundary fitted splines using the :class:`ExportBoundaryFittedSplineParams <ansys.meshing.prime.ExportBoundaryFittedSplineParams>` class.
 
 
-=====================================
+====================================
 Reading and Writing Size Field Files
-=====================================
+====================================
 
 Native PSF format
 -----------------
