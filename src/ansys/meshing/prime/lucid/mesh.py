@@ -1028,7 +1028,7 @@ class Mesh:
         self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
         result = field.compute_volumetric(
             [size_control.id for size_control in size_controls],
-            prime.VolumetricSizeFieldComputeParams(enable_multi_threading=False),
+            prime.VolumetricSizeFieldComputeParams(model=self._model, enable_multi_threading=False),
         )
         return result.size_field_id
 
