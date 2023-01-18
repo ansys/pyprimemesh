@@ -3,9 +3,9 @@ import math
 import ansys.meshing.prime as prime
 
 
-def test_bracket_scaffold(get_remote_client):
+def test_bracket_scaffold(get_remote_client, get_examples):
     # downloads  file
-    bracket_file = prime.examples.download_bracket_fmd()
+    bracket_file = get_examples["bracket"]
     model = get_remote_client.model
     # import cad model
     file_io = prime.FileIO(model)

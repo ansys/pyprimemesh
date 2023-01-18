@@ -3,9 +3,9 @@ import math
 import ansys.meshing.prime as prime
 
 
-def test_elbow_lucid(get_remote_client):
+def test_elbow_lucid(get_remote_client, get_examples):
     # downloads pmdat file
-    elbow_lucid = prime.examples.download_elbow_pmdat()
+    elbow_lucid = get_examples["elbow_lucid"]
     # reads file
     model = get_remote_client.model
     fileIO = prime.FileIO(model=model)

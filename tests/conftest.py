@@ -70,6 +70,27 @@ def get_remote_client():
     client_manager.stop_remote_client()
 
 
+@pytest.fixture(scope="session", autouse=True)
+def get_examples():
+    """Downloads the prime examples for them to be available
+    in any test.
+    """
+    examples_dict = {}
+    elbow_lucid = prime.examples.download_elbow_pmdat()
+    examples_dict["elbow_lucid"] = elbow_lucid
+
+    toy_car = prime.examples.download_toy_car_pmdat()
+    examples_dict["toy_car"] = toy_car
+
+    pipe_tee = prime.examples.download_pipe_tee_pmdat()
+    examples_dict["pipe_tee"] = pipe_tee
+
+    bracket = prime.examples.download_bracket_fmd()
+    examples_dict["bracket"] = bracket
+
+    return examples_dict
+
+
 def create_scenario_element(test, id):
     testName, className = str(test).split()
     _, className = className.strip('()').split('.')

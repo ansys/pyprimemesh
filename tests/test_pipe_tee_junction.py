@@ -3,9 +3,9 @@ import math
 import ansys.meshing.prime as prime
 
 
-def test_pipe_tee_junction(get_remote_client):
+def test_pipe_tee_junction(get_remote_client, get_examples):
     # downloads pmdat file
-    pipe_tee = prime.examples.download_pipe_tee_pmdat()
+    pipe_tee = get_examples["pipe_tee"]
     # reads file
     model = get_remote_client.model
     fileIO = prime.FileIO(model=model)
