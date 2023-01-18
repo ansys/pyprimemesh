@@ -19,11 +19,11 @@ Installation
 The ``ansys-meshing-prime`` package currently supports Python 3.7
 to Python 3.11 on Windows and Linux operating systems.
 
-PyPrimeMesh can be installed directly from PyPi as follows:
+PyPrimeMesh can be installed with all dependencies directly from PyPi as follows:
 
 .. code::
 
-   pip install ansys-meshing-prime
+   pip install ansys-meshing-prime[all]
 
 Alternatively, you can clone this repository and install the client using
 

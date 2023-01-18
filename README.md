@@ -14,10 +14,10 @@ PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server d
 For information on PyPrimeMesh, refer to the latest [documentation](
 https://prime.docs.pyansys.com).
 
-For queries related to PyPrimeMesh, post on the [Discussion](
+For queries related to PyPrimeMesh, post on the [discussion](
 https://github.com/pyansys/pyprimemesh/discussions) page. 
 
-For bugs or enhancement requests, file an issue on our [Issues](
+For bugs or enhancement requests, file an issue on our [issues](
 https://github.com/pyansys/pyprimemesh/issues) page. 
 
 For assistance, reach out to the PyAnsys
@@ -28,10 +28,10 @@ Support team at [pyansys.support@ansys.com](mailto:pyansys.support@ansys.com).
 The `ansys-meshing-prime` package supports Python 3.7 to Python 3.11 on Windows and Linux
 operating system.
 
-PyPrimeMesh can be installed directly from PyPi as follows:
+PyPrimeMesh can be installed with all dependencies directly from PyPi as follows:
 
 ```bash
-pip install ansys-meshing-prime
+pip install ansys-meshing-prime[all]
 ```
 
 Alternatively, you can clone this repository and install the client using
