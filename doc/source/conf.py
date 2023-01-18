@@ -1,7 +1,7 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 
-from ansys_sphinx_theme import pyansys_logo_black
+from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
 
 from ansys.meshing.prime import __version__
 
@@ -21,6 +21,8 @@ release = version = __version__
 html_short_title = html_title = "PyPrimeMesh"
 html_logo = pyansys_logo_black
 html_theme = 'ansys_sphinx_theme'
+
+html_favicon = ansys_favicon
 
 # specify the location of your github repo
 html_theme_options = {
