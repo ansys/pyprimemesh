@@ -49,6 +49,8 @@ class Model(_Model):
         pc_data = res["PrismControl"]
         wc_data = res["WrapperControl"]
         vc_data = res["VolumeControl"]
+        if "PeriodicControl" in res:
+            percon_data = res["PeriodicControl"]
         sf_params = res["GlobalSizingParams"]
 
         self._global_sf_params = GlobalSizingParams(
@@ -60,6 +62,8 @@ class Model(_Model):
         self._control_data._update_prism_controls(pc_data)
         self._control_data._update_wrapper_controls(wc_data)
         self._control_data._update_volume_controls(vc_data)
+        if "PeriodicControl" in res:
+            self._control_data._update_periodic_controls(percon_data)
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def _add_part(self, id: int):

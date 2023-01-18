@@ -225,6 +225,36 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("resolve_intersections", ResolveIntersectionResult(model = self._model, json_data = result))
         return ResolveIntersectionResult(model = self._model, json_data = result)
 
+    def smooth_dihedral_face_nodes(self, zonelets : Iterable[int], params : SmoothDihedralFaceNodesParams) -> SmoothDihedralFaceNodesResults:
+        """ Performs a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.
+
+
+        Parameters
+        ----------
+        zonelets : Iterable[int]
+            List of input face zonelet ids.
+        params : SmoothDihedralFaceNodesParams
+            Parameters to control the smoothing operation.
+
+        Returns
+        -------
+        SmoothDihedralFaceNodesResults
+            Return a SmoothDihedralFaceNodesResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.smooth_dihedral_face_nodes(zonelets, params)
+
+        """
+        args = {"zonelets" : zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/SmoothDihedralFaceNodes"
+        self._model._print_logs_before_command("smooth_dihedral_face_nodes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("smooth_dihedral_face_nodes", SmoothDihedralFaceNodesResults(model = self._model, json_data = result))
+        return SmoothDihedralFaceNodesResults(model = self._model, json_data = result)
+
     def refine_at_contacts(self, part_ids : Iterable[int], params : RefineAtContactsParams) -> RefineAtContactsResults:
         """ Refine face elements in contact with other parts.
 

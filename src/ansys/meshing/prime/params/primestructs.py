@@ -24,6 +24,7 @@ from ansys.meshing.prime.autogen.deletetoolstructs import *
 from ansys.meshing.prime.autogen.splittoolstructs import *
 from ansys.meshing.prime.autogen.collapsetoolstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *
+from ansys.meshing.prime.autogen.periodiccontrolstructs import *
 from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *

@@ -18,7 +18,7 @@ class TopoFillHoleParams(CoreObject):
             edges_to_exclude: Iterable[int],
             suppress_boundary_after_hole_fill: bool,
             fill_annular_hole: bool):
-        self._edges_to_exclude = edges_to_exclude if isinstance(edges_to_exclude, np.ndarray) else np.array(edges_to_exclude, dtype=np.int32)
+        self._edges_to_exclude = edges_to_exclude if isinstance(edges_to_exclude, np.ndarray) else np.array(edges_to_exclude, dtype=np.int32) if edges_to_exclude is not None else None
         self._suppress_boundary_after_hole_fill = suppress_boundary_after_hole_fill
         self._fill_annular_hole = fill_annular_hole
 
@@ -51,9 +51,9 @@ class TopoFillHoleParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["edgesToExclude"],
-                json_data["suppressBoundaryAfterHoleFill"],
-                json_data["fillAnnularHole"])
+                json_data["edgesToExclude"] if "edgesToExclude" in json_data else None,
+                json_data["suppressBoundaryAfterHoleFill"] if "suppressBoundaryAfterHoleFill" in json_data else None,
+                json_data["fillAnnularHole"] if "fillAnnularHole" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [edges_to_exclude, suppress_boundary_after_hole_fill, fill_annular_hole])
             if all_field_specified:
@@ -65,11 +65,12 @@ class TopoFillHoleParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "TopoFillHoleParams")["TopoFillHoleParams"]
+                    param_json = model._communicator.initialize_params(model, "TopoFillHoleParams")
+                    json_data = param_json["TopoFillHoleParams"] if "TopoFillHoleParams" in param_json else {}
                     self.__initialize(
-                        edges_to_exclude if edges_to_exclude is not None else ( TopoFillHoleParams._default_params["edges_to_exclude"] if "edges_to_exclude" in TopoFillHoleParams._default_params else json_data["edgesToExclude"]),
-                        suppress_boundary_after_hole_fill if suppress_boundary_after_hole_fill is not None else ( TopoFillHoleParams._default_params["suppress_boundary_after_hole_fill"] if "suppress_boundary_after_hole_fill" in TopoFillHoleParams._default_params else json_data["suppressBoundaryAfterHoleFill"]),
-                        fill_annular_hole if fill_annular_hole is not None else ( TopoFillHoleParams._default_params["fill_annular_hole"] if "fill_annular_hole" in TopoFillHoleParams._default_params else json_data["fillAnnularHole"]))
+                        edges_to_exclude if edges_to_exclude is not None else ( TopoFillHoleParams._default_params["edges_to_exclude"] if "edges_to_exclude" in TopoFillHoleParams._default_params else (json_data["edgesToExclude"] if "edgesToExclude" in json_data else None)),
+                        suppress_boundary_after_hole_fill if suppress_boundary_after_hole_fill is not None else ( TopoFillHoleParams._default_params["suppress_boundary_after_hole_fill"] if "suppress_boundary_after_hole_fill" in TopoFillHoleParams._default_params else (json_data["suppressBoundaryAfterHoleFill"] if "suppressBoundaryAfterHoleFill" in json_data else None)),
+                        fill_annular_hole if fill_annular_hole is not None else ( TopoFillHoleParams._default_params["fill_annular_hole"] if "fill_annular_hole" in TopoFillHoleParams._default_params else (json_data["fillAnnularHole"] if "fillAnnularHole" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -110,9 +111,12 @@ class TopoFillHoleParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["edgesToExclude"] = self._edges_to_exclude
-        json_data["suppressBoundaryAfterHoleFill"] = self._suppress_boundary_after_hole_fill
-        json_data["fillAnnularHole"] = self._fill_annular_hole
+        if self._edges_to_exclude is not None:
+            json_data["edgesToExclude"] = self._edges_to_exclude
+        if self._suppress_boundary_after_hole_fill is not None:
+            json_data["suppressBoundaryAfterHoleFill"] = self._suppress_boundary_after_hole_fill
+        if self._fill_annular_hole is not None:
+            json_data["fillAnnularHole"] = self._fill_annular_hole
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -160,7 +164,7 @@ class TopoFillHoleResult(CoreObject):
             self,
             new_topo_faces_created: Iterable[int],
             error_code: ErrorCode):
-        self._new_topo_faces_created = new_topo_faces_created if isinstance(new_topo_faces_created, np.ndarray) else np.array(new_topo_faces_created, dtype=np.int32)
+        self._new_topo_faces_created = new_topo_faces_created if isinstance(new_topo_faces_created, np.ndarray) else np.array(new_topo_faces_created, dtype=np.int32) if new_topo_faces_created is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
@@ -189,8 +193,8 @@ class TopoFillHoleResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["newTopoFacesCreated"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["newTopoFacesCreated"] if "newTopoFacesCreated" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [new_topo_faces_created, error_code])
             if all_field_specified:
@@ -201,10 +205,11 @@ class TopoFillHoleResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "TopoFillHoleResult")["TopoFillHoleResult"]
+                    param_json = model._communicator.initialize_params(model, "TopoFillHoleResult")
+                    json_data = param_json["TopoFillHoleResult"] if "TopoFillHoleResult" in param_json else {}
                     self.__initialize(
-                        new_topo_faces_created if new_topo_faces_created is not None else ( TopoFillHoleResult._default_params["new_topo_faces_created"] if "new_topo_faces_created" in TopoFillHoleResult._default_params else json_data["newTopoFacesCreated"]),
-                        error_code if error_code is not None else ( TopoFillHoleResult._default_params["error_code"] if "error_code" in TopoFillHoleResult._default_params else ErrorCode(json_data["errorCode"])))
+                        new_topo_faces_created if new_topo_faces_created is not None else ( TopoFillHoleResult._default_params["new_topo_faces_created"] if "new_topo_faces_created" in TopoFillHoleResult._default_params else (json_data["newTopoFacesCreated"] if "newTopoFacesCreated" in json_data else None)),
+                        error_code if error_code is not None else ( TopoFillHoleResult._default_params["error_code"] if "error_code" in TopoFillHoleResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -242,8 +247,10 @@ class TopoFillHoleResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["newTopoFacesCreated"] = self._new_topo_faces_created
-        json_data["errorCode"] = self._error_code
+        if self._new_topo_faces_created is not None:
+            json_data["newTopoFacesCreated"] = self._new_topo_faces_created
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

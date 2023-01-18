@@ -61,9 +61,9 @@ class ScaffolderParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["absoluteDistTol"],
-                IntersectionMask(json_data["intersectionControlMask"]),
-                json_data["constantMeshSize"])
+                json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None,
+                IntersectionMask(json_data["intersectionControlMask"] if "intersectionControlMask" in json_data else None),
+                json_data["constantMeshSize"] if "constantMeshSize" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [absolute_dist_tol, intersection_control_mask, constant_mesh_size])
             if all_field_specified:
@@ -75,11 +75,12 @@ class ScaffolderParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ScaffolderParams")["ScaffolderParams"]
+                    param_json = model._communicator.initialize_params(model, "ScaffolderParams")
+                    json_data = param_json["ScaffolderParams"] if "ScaffolderParams" in param_json else {}
                     self.__initialize(
-                        absolute_dist_tol if absolute_dist_tol is not None else ( ScaffolderParams._default_params["absolute_dist_tol"] if "absolute_dist_tol" in ScaffolderParams._default_params else json_data["absoluteDistTol"]),
-                        intersection_control_mask if intersection_control_mask is not None else ( ScaffolderParams._default_params["intersection_control_mask"] if "intersection_control_mask" in ScaffolderParams._default_params else IntersectionMask(json_data["intersectionControlMask"])),
-                        constant_mesh_size if constant_mesh_size is not None else ( ScaffolderParams._default_params["constant_mesh_size"] if "constant_mesh_size" in ScaffolderParams._default_params else json_data["constantMeshSize"]))
+                        absolute_dist_tol if absolute_dist_tol is not None else ( ScaffolderParams._default_params["absolute_dist_tol"] if "absolute_dist_tol" in ScaffolderParams._default_params else (json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None)),
+                        intersection_control_mask if intersection_control_mask is not None else ( ScaffolderParams._default_params["intersection_control_mask"] if "intersection_control_mask" in ScaffolderParams._default_params else IntersectionMask(json_data["intersectionControlMask"] if "intersectionControlMask" in json_data else None)),
+                        constant_mesh_size if constant_mesh_size is not None else ( ScaffolderParams._default_params["constant_mesh_size"] if "constant_mesh_size" in ScaffolderParams._default_params else (json_data["constantMeshSize"] if "constantMeshSize" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -120,9 +121,12 @@ class ScaffolderParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["absoluteDistTol"] = self._absolute_dist_tol
-        json_data["intersectionControlMask"] = self._intersection_control_mask
-        json_data["constantMeshSize"] = self._constant_mesh_size
+        if self._absolute_dist_tol is not None:
+            json_data["absoluteDistTol"] = self._absolute_dist_tol
+        if self._intersection_control_mask is not None:
+            json_data["intersectionControlMask"] = self._intersection_control_mask
+        if self._constant_mesh_size is not None:
+            json_data["constantMeshSize"] = self._constant_mesh_size
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -199,8 +203,8 @@ class VolumetricScaffolderParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["absoluteDistTol"],
-                json_data["onlyCheckExactOverlaps"])
+                json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None,
+                json_data["onlyCheckExactOverlaps"] if "onlyCheckExactOverlaps" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [absolute_dist_tol, only_check_exact_overlaps])
             if all_field_specified:
@@ -211,10 +215,11 @@ class VolumetricScaffolderParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "VolumetricScaffolderParams")["VolumetricScaffolderParams"]
+                    param_json = model._communicator.initialize_params(model, "VolumetricScaffolderParams")
+                    json_data = param_json["VolumetricScaffolderParams"] if "VolumetricScaffolderParams" in param_json else {}
                     self.__initialize(
-                        absolute_dist_tol if absolute_dist_tol is not None else ( VolumetricScaffolderParams._default_params["absolute_dist_tol"] if "absolute_dist_tol" in VolumetricScaffolderParams._default_params else json_data["absoluteDistTol"]),
-                        only_check_exact_overlaps if only_check_exact_overlaps is not None else ( VolumetricScaffolderParams._default_params["only_check_exact_overlaps"] if "only_check_exact_overlaps" in VolumetricScaffolderParams._default_params else json_data["onlyCheckExactOverlaps"]))
+                        absolute_dist_tol if absolute_dist_tol is not None else ( VolumetricScaffolderParams._default_params["absolute_dist_tol"] if "absolute_dist_tol" in VolumetricScaffolderParams._default_params else (json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None)),
+                        only_check_exact_overlaps if only_check_exact_overlaps is not None else ( VolumetricScaffolderParams._default_params["only_check_exact_overlaps"] if "only_check_exact_overlaps" in VolumetricScaffolderParams._default_params else (json_data["onlyCheckExactOverlaps"] if "onlyCheckExactOverlaps" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -252,8 +257,10 @@ class VolumetricScaffolderParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["absoluteDistTol"] = self._absolute_dist_tol
-        json_data["onlyCheckExactOverlaps"] = self._only_check_exact_overlaps
+        if self._absolute_dist_tol is not None:
+            json_data["absoluteDistTol"] = self._absolute_dist_tol
+        if self._only_check_exact_overlaps is not None:
+            json_data["onlyCheckExactOverlaps"] = self._only_check_exact_overlaps
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -320,8 +327,8 @@ class ScaffolderResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["nIncompleteTopoFaces"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["nIncompleteTopoFaces"] if "nIncompleteTopoFaces" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [n_incomplete_topo_faces, error_code])
             if all_field_specified:
@@ -332,10 +339,11 @@ class ScaffolderResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ScaffolderResults")["ScaffolderResults"]
+                    param_json = model._communicator.initialize_params(model, "ScaffolderResults")
+                    json_data = param_json["ScaffolderResults"] if "ScaffolderResults" in param_json else {}
                     self.__initialize(
-                        n_incomplete_topo_faces if n_incomplete_topo_faces is not None else ( ScaffolderResults._default_params["n_incomplete_topo_faces"] if "n_incomplete_topo_faces" in ScaffolderResults._default_params else json_data["nIncompleteTopoFaces"]),
-                        error_code if error_code is not None else ( ScaffolderResults._default_params["error_code"] if "error_code" in ScaffolderResults._default_params else ErrorCode(json_data["errorCode"])))
+                        n_incomplete_topo_faces if n_incomplete_topo_faces is not None else ( ScaffolderResults._default_params["n_incomplete_topo_faces"] if "n_incomplete_topo_faces" in ScaffolderResults._default_params else (json_data["nIncompleteTopoFaces"] if "nIncompleteTopoFaces" in json_data else None)),
+                        error_code if error_code is not None else ( ScaffolderResults._default_params["error_code"] if "error_code" in ScaffolderResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -373,8 +381,10 @@ class ScaffolderResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["nIncompleteTopoFaces"] = self._n_incomplete_topo_faces
-        json_data["errorCode"] = self._error_code
+        if self._n_incomplete_topo_faces is not None:
+            json_data["nIncompleteTopoFaces"] = self._n_incomplete_topo_faces
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -412,7 +422,7 @@ class ScaffolderSplitResults(CoreObject):
             self,
             new_faces: Iterable[int],
             error_code: ErrorCode):
-        self._new_faces = new_faces if isinstance(new_faces, np.ndarray) else np.array(new_faces, dtype=np.int32)
+        self._new_faces = new_faces if isinstance(new_faces, np.ndarray) else np.array(new_faces, dtype=np.int32) if new_faces is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
@@ -441,8 +451,8 @@ class ScaffolderSplitResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["newFaces"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["newFaces"] if "newFaces" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [new_faces, error_code])
             if all_field_specified:
@@ -453,10 +463,11 @@ class ScaffolderSplitResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ScaffolderSplitResults")["ScaffolderSplitResults"]
+                    param_json = model._communicator.initialize_params(model, "ScaffolderSplitResults")
+                    json_data = param_json["ScaffolderSplitResults"] if "ScaffolderSplitResults" in param_json else {}
                     self.__initialize(
-                        new_faces if new_faces is not None else ( ScaffolderSplitResults._default_params["new_faces"] if "new_faces" in ScaffolderSplitResults._default_params else json_data["newFaces"]),
-                        error_code if error_code is not None else ( ScaffolderSplitResults._default_params["error_code"] if "error_code" in ScaffolderSplitResults._default_params else ErrorCode(json_data["errorCode"])))
+                        new_faces if new_faces is not None else ( ScaffolderSplitResults._default_params["new_faces"] if "new_faces" in ScaffolderSplitResults._default_params else (json_data["newFaces"] if "newFaces" in json_data else None)),
+                        error_code if error_code is not None else ( ScaffolderSplitResults._default_params["error_code"] if "error_code" in ScaffolderSplitResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -494,8 +505,10 @@ class ScaffolderSplitResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["newFaces"] = self._new_faces
-        json_data["errorCode"] = self._error_code
+        if self._new_faces is not None:
+            json_data["newFaces"] = self._new_faces
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -562,8 +575,8 @@ class ScaffolderMergeResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["nMerged"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["nMerged"] if "nMerged" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [n_merged, error_code])
             if all_field_specified:
@@ -574,10 +587,11 @@ class ScaffolderMergeResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ScaffolderMergeResults")["ScaffolderMergeResults"]
+                    param_json = model._communicator.initialize_params(model, "ScaffolderMergeResults")
+                    json_data = param_json["ScaffolderMergeResults"] if "ScaffolderMergeResults" in param_json else {}
                     self.__initialize(
-                        n_merged if n_merged is not None else ( ScaffolderMergeResults._default_params["n_merged"] if "n_merged" in ScaffolderMergeResults._default_params else json_data["nMerged"]),
-                        error_code if error_code is not None else ( ScaffolderMergeResults._default_params["error_code"] if "error_code" in ScaffolderMergeResults._default_params else ErrorCode(json_data["errorCode"])))
+                        n_merged if n_merged is not None else ( ScaffolderMergeResults._default_params["n_merged"] if "n_merged" in ScaffolderMergeResults._default_params else (json_data["nMerged"] if "nMerged" in json_data else None)),
+                        error_code if error_code is not None else ( ScaffolderMergeResults._default_params["error_code"] if "error_code" in ScaffolderMergeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -615,8 +629,10 @@ class ScaffolderMergeResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["nMerged"] = self._n_merged
-        json_data["errorCode"] = self._error_code
+        if self._n_merged is not None:
+            json_data["nMerged"] = self._n_merged
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

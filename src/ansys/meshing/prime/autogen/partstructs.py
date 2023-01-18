@@ -104,12 +104,12 @@ class BoundingBox(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["xmin"],
-                json_data["ymin"],
-                json_data["zmin"],
-                json_data["xmax"],
-                json_data["ymax"],
-                json_data["zmax"])
+                json_data["xmin"] if "xmin" in json_data else None,
+                json_data["ymin"] if "ymin" in json_data else None,
+                json_data["zmin"] if "zmin" in json_data else None,
+                json_data["xmax"] if "xmax" in json_data else None,
+                json_data["ymax"] if "ymax" in json_data else None,
+                json_data["zmax"] if "zmax" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [xmin, ymin, zmin, xmax, ymax, zmax])
             if all_field_specified:
@@ -124,14 +124,15 @@ class BoundingBox(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "BoundingBox")["BoundingBox"]
+                    param_json = model._communicator.initialize_params(model, "BoundingBox")
+                    json_data = param_json["BoundingBox"] if "BoundingBox" in param_json else {}
                     self.__initialize(
-                        xmin if xmin is not None else ( BoundingBox._default_params["xmin"] if "xmin" in BoundingBox._default_params else json_data["xmin"]),
-                        ymin if ymin is not None else ( BoundingBox._default_params["ymin"] if "ymin" in BoundingBox._default_params else json_data["ymin"]),
-                        zmin if zmin is not None else ( BoundingBox._default_params["zmin"] if "zmin" in BoundingBox._default_params else json_data["zmin"]),
-                        xmax if xmax is not None else ( BoundingBox._default_params["xmax"] if "xmax" in BoundingBox._default_params else json_data["xmax"]),
-                        ymax if ymax is not None else ( BoundingBox._default_params["ymax"] if "ymax" in BoundingBox._default_params else json_data["ymax"]),
-                        zmax if zmax is not None else ( BoundingBox._default_params["zmax"] if "zmax" in BoundingBox._default_params else json_data["zmax"]))
+                        xmin if xmin is not None else ( BoundingBox._default_params["xmin"] if "xmin" in BoundingBox._default_params else (json_data["xmin"] if "xmin" in json_data else None)),
+                        ymin if ymin is not None else ( BoundingBox._default_params["ymin"] if "ymin" in BoundingBox._default_params else (json_data["ymin"] if "ymin" in json_data else None)),
+                        zmin if zmin is not None else ( BoundingBox._default_params["zmin"] if "zmin" in BoundingBox._default_params else (json_data["zmin"] if "zmin" in json_data else None)),
+                        xmax if xmax is not None else ( BoundingBox._default_params["xmax"] if "xmax" in BoundingBox._default_params else (json_data["xmax"] if "xmax" in json_data else None)),
+                        ymax if ymax is not None else ( BoundingBox._default_params["ymax"] if "ymax" in BoundingBox._default_params else (json_data["ymax"] if "ymax" in json_data else None)),
+                        zmax if zmax is not None else ( BoundingBox._default_params["zmax"] if "zmax" in BoundingBox._default_params else (json_data["zmax"] if "zmax" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -181,12 +182,18 @@ class BoundingBox(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["xmin"] = self._xmin
-        json_data["ymin"] = self._ymin
-        json_data["zmin"] = self._zmin
-        json_data["xmax"] = self._xmax
-        json_data["ymax"] = self._ymax
-        json_data["zmax"] = self._zmax
+        if self._xmin is not None:
+            json_data["xmin"] = self._xmin
+        if self._ymin is not None:
+            json_data["ymin"] = self._ymin
+        if self._zmin is not None:
+            json_data["zmin"] = self._zmin
+        if self._xmax is not None:
+            json_data["xmax"] = self._xmax
+        if self._ymax is not None:
+            json_data["ymax"] = self._ymax
+        if self._zmax is not None:
+            json_data["zmax"] = self._zmax
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -256,17 +263,22 @@ class BoundingBox(CoreObject):
         self._zmax = value
 
 class MergeZoneletsResults(CoreObject):
-    """Results associated with merge zonelets. This is for internal use only.
+    """Results associated with merge zonelets.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            merged_zonelets: Iterable[int],
+            error_code: ErrorCode):
+        self._merged_zonelets = merged_zonelets if isinstance(merged_zonelets, np.ndarray) else np.array(merged_zonelets, dtype=np.int32) if merged_zonelets is not None else None
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            merged_zonelets: Iterable[int] = None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MergeZoneletsResults.
@@ -275,6 +287,10 @@ class MergeZoneletsResults(CoreObject):
         ----------
         model: Model
             Model to create a MergeZoneletsResults object with default parameters.
+        merged_zonelets: Iterable[int], optional
+            Ids of zonelets to which input zonelets are merged.
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
         json_data: dict, optional
             JSON dictionary to create a MergeZoneletsResults object with provided parameters.
 
@@ -283,17 +299,24 @@ class MergeZoneletsResults(CoreObject):
         >>> merge_zonelets_results = prime.MergeZoneletsResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["mergedZonelets"] if "mergedZonelets" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [merged_zonelets, error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    merged_zonelets,
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MergeZoneletsResults")["MergeZoneletsResults"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "MergeZoneletsResults")
+                    json_data = param_json["MergeZoneletsResults"] if "MergeZoneletsResults" in param_json else {}
+                    self.__initialize(
+                        merged_zonelets if merged_zonelets is not None else ( MergeZoneletsResults._default_params["merged_zonelets"] if "merged_zonelets" in MergeZoneletsResults._default_params else (json_data["mergedZonelets"] if "mergedZonelets" in json_data else None)),
+                        error_code if error_code is not None else ( MergeZoneletsResults._default_params["error_code"] if "error_code" in MergeZoneletsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -302,9 +325,17 @@ class MergeZoneletsResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            merged_zonelets: Iterable[int] = None,
+            error_code: ErrorCode = None):
         """Set the default values of MergeZoneletsResults.
 
+        Parameters
+        ----------
+        merged_zonelets: Iterable[int], optional
+            Ids of zonelets to which input zonelets are merged.
+        error_code: ErrorCode, optional
+            Error code associated with the failure of operation.
         """
         args = locals()
         [MergeZoneletsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -323,26 +354,55 @@ class MergeZoneletsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._merged_zonelets is not None:
+            json_data["mergedZonelets"] = self._merged_zonelets
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "merged_zonelets :  %s\nerror_code :  %s" % (self._merged_zonelets, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+    @property
+    def merged_zonelets(self) -> Iterable[int]:
+        """Ids of zonelets to which input zonelets are merged.
+        """
+        return self._merged_zonelets
+
+    @merged_zonelets.setter
+    def merged_zonelets(self, value: Iterable[int]):
+        self._merged_zonelets = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
 class MergeZoneletsParams(CoreObject):
-    """Parameters to merge zonelets. This is for internal use only.
+    """Parameters to merge zonelets.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            merge_small_zonelets_with_neighbors: bool,
+            element_count_limit: int):
+        self._merge_small_zonelets_with_neighbors = merge_small_zonelets_with_neighbors
+        self._element_count_limit = element_count_limit
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            merge_small_zonelets_with_neighbors: bool = None,
+            element_count_limit: int = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MergeZoneletsParams.
@@ -351,6 +411,10 @@ class MergeZoneletsParams(CoreObject):
         ----------
         model: Model
             Model to create a MergeZoneletsParams object with default parameters.
+        merge_small_zonelets_with_neighbors: bool, optional
+            Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+        element_count_limit: int, optional
+            Element count limit to identify small zonelets.
         json_data: dict, optional
             JSON dictionary to create a MergeZoneletsParams object with provided parameters.
 
@@ -359,17 +423,24 @@ class MergeZoneletsParams(CoreObject):
         >>> merge_zonelets_params = prime.MergeZoneletsParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["mergeSmallZoneletsWithNeighbors"] if "mergeSmallZoneletsWithNeighbors" in json_data else None,
+                json_data["elementCountLimit"] if "elementCountLimit" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [merge_small_zonelets_with_neighbors, element_count_limit])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    merge_small_zonelets_with_neighbors,
+                    element_count_limit)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MergeZoneletsParams")["MergeZoneletsParams"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "MergeZoneletsParams")
+                    json_data = param_json["MergeZoneletsParams"] if "MergeZoneletsParams" in param_json else {}
+                    self.__initialize(
+                        merge_small_zonelets_with_neighbors if merge_small_zonelets_with_neighbors is not None else ( MergeZoneletsParams._default_params["merge_small_zonelets_with_neighbors"] if "merge_small_zonelets_with_neighbors" in MergeZoneletsParams._default_params else (json_data["mergeSmallZoneletsWithNeighbors"] if "mergeSmallZoneletsWithNeighbors" in json_data else None)),
+                        element_count_limit if element_count_limit is not None else ( MergeZoneletsParams._default_params["element_count_limit"] if "element_count_limit" in MergeZoneletsParams._default_params else (json_data["elementCountLimit"] if "elementCountLimit" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -378,9 +449,17 @@ class MergeZoneletsParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            merge_small_zonelets_with_neighbors: bool = None,
+            element_count_limit: int = None):
         """Set the default values of MergeZoneletsParams.
 
+        Parameters
+        ----------
+        merge_small_zonelets_with_neighbors: bool, optional
+            Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+        element_count_limit: int, optional
+            Element count limit to identify small zonelets.
         """
         args = locals()
         [MergeZoneletsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -399,13 +478,37 @@ class MergeZoneletsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._merge_small_zonelets_with_neighbors is not None:
+            json_data["mergeSmallZoneletsWithNeighbors"] = self._merge_small_zonelets_with_neighbors
+        if self._element_count_limit is not None:
+            json_data["elementCountLimit"] = self._element_count_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "merge_small_zonelets_with_neighbors :  %s\nelement_count_limit :  %s" % (self._merge_small_zonelets_with_neighbors, self._element_count_limit)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def merge_small_zonelets_with_neighbors(self) -> bool:
+        """Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+        """
+        return self._merge_small_zonelets_with_neighbors
+
+    @merge_small_zonelets_with_neighbors.setter
+    def merge_small_zonelets_with_neighbors(self, value: bool):
+        self._merge_small_zonelets_with_neighbors = value
+
+    @property
+    def element_count_limit(self) -> int:
+        """Element count limit to identify small zonelets.
+        """
+        return self._element_count_limit
+
+    @element_count_limit.setter
+    def element_count_limit(self, value: int):
+        self._element_count_limit = value
 
 class ComputeVolumesResults(CoreObject):
     """Results associated with compute volumes.
@@ -421,10 +524,10 @@ class ComputeVolumesResults(CoreObject):
             external_open_face_zonelets: Iterable[int],
             warning_codes: List[WarningCode]):
         self._error_code = ErrorCode(error_code)
-        self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double)
-        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32)
-        self._material_point_volumes = material_point_volumes if isinstance(material_point_volumes, np.ndarray) else np.array(material_point_volumes, dtype=np.int32)
-        self._external_open_face_zonelets = external_open_face_zonelets if isinstance(external_open_face_zonelets, np.ndarray) else np.array(external_open_face_zonelets, dtype=np.int32)
+        self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double) if error_locations is not None else None
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
+        self._material_point_volumes = material_point_volumes if isinstance(material_point_volumes, np.ndarray) else np.array(material_point_volumes, dtype=np.int32) if material_point_volumes is not None else None
+        self._external_open_face_zonelets = external_open_face_zonelets if isinstance(external_open_face_zonelets, np.ndarray) else np.array(external_open_face_zonelets, dtype=np.int32) if external_open_face_zonelets is not None else None
         self._warning_codes = warning_codes
 
     def __init__(
@@ -465,12 +568,12 @@ class ComputeVolumesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["errorLocations"],
-                json_data["volumes"],
-                json_data["materialPointVolumes"],
-                json_data["externalOpenFaceZonelets"],
-                [WarningCode(data) for data in json_data["warningCodes"]])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["errorLocations"] if "errorLocations" in json_data else None,
+                json_data["volumes"] if "volumes" in json_data else None,
+                json_data["materialPointVolumes"] if "materialPointVolumes" in json_data else None,
+                json_data["externalOpenFaceZonelets"] if "externalOpenFaceZonelets" in json_data else None,
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, error_locations, volumes, material_point_volumes, external_open_face_zonelets, warning_codes])
             if all_field_specified:
@@ -485,14 +588,15 @@ class ComputeVolumesResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ComputeVolumesResults")["ComputeVolumesResults"]
+                    param_json = model._communicator.initialize_params(model, "ComputeVolumesResults")
+                    json_data = param_json["ComputeVolumesResults"] if "ComputeVolumesResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ComputeVolumesResults._default_params["error_code"] if "error_code" in ComputeVolumesResults._default_params else ErrorCode(json_data["errorCode"])),
-                        error_locations if error_locations is not None else ( ComputeVolumesResults._default_params["error_locations"] if "error_locations" in ComputeVolumesResults._default_params else json_data["errorLocations"]),
-                        volumes if volumes is not None else ( ComputeVolumesResults._default_params["volumes"] if "volumes" in ComputeVolumesResults._default_params else json_data["volumes"]),
-                        material_point_volumes if material_point_volumes is not None else ( ComputeVolumesResults._default_params["material_point_volumes"] if "material_point_volumes" in ComputeVolumesResults._default_params else json_data["materialPointVolumes"]),
-                        external_open_face_zonelets if external_open_face_zonelets is not None else ( ComputeVolumesResults._default_params["external_open_face_zonelets"] if "external_open_face_zonelets" in ComputeVolumesResults._default_params else json_data["externalOpenFaceZonelets"]),
-                        warning_codes if warning_codes is not None else ( ComputeVolumesResults._default_params["warning_codes"] if "warning_codes" in ComputeVolumesResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]))
+                        error_code if error_code is not None else ( ComputeVolumesResults._default_params["error_code"] if "error_code" in ComputeVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        error_locations if error_locations is not None else ( ComputeVolumesResults._default_params["error_locations"] if "error_locations" in ComputeVolumesResults._default_params else (json_data["errorLocations"] if "errorLocations" in json_data else None)),
+                        volumes if volumes is not None else ( ComputeVolumesResults._default_params["volumes"] if "volumes" in ComputeVolumesResults._default_params else (json_data["volumes"] if "volumes" in json_data else None)),
+                        material_point_volumes if material_point_volumes is not None else ( ComputeVolumesResults._default_params["material_point_volumes"] if "material_point_volumes" in ComputeVolumesResults._default_params else (json_data["materialPointVolumes"] if "materialPointVolumes" in json_data else None)),
+                        external_open_face_zonelets if external_open_face_zonelets is not None else ( ComputeVolumesResults._default_params["external_open_face_zonelets"] if "external_open_face_zonelets" in ComputeVolumesResults._default_params else (json_data["externalOpenFaceZonelets"] if "externalOpenFaceZonelets" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ComputeVolumesResults._default_params["warning_codes"] if "warning_codes" in ComputeVolumesResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -542,12 +646,18 @@ class ComputeVolumesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["errorLocations"] = self._error_locations
-        json_data["volumes"] = self._volumes
-        json_data["materialPointVolumes"] = self._material_point_volumes
-        json_data["externalOpenFaceZonelets"] = self._external_open_face_zonelets
-        json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._error_locations is not None:
+            json_data["errorLocations"] = self._error_locations
+        if self._volumes is not None:
+            json_data["volumes"] = self._volumes
+        if self._material_point_volumes is not None:
+            json_data["materialPointVolumes"] = self._material_point_volumes
+        if self._external_open_face_zonelets is not None:
+            json_data["externalOpenFaceZonelets"] = self._external_open_face_zonelets
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -632,12 +742,12 @@ class ComputeTopoVolumesResults(CoreObject):
             deleted_topo_volumes: Iterable[int],
             warning_codes: List[WarningCode]):
         self._error_code = ErrorCode(error_code)
-        self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double)
-        self._topo_volumes = topo_volumes if isinstance(topo_volumes, np.ndarray) else np.array(topo_volumes, dtype=np.int32)
-        self._material_point_topo_volumes = material_point_topo_volumes if isinstance(material_point_topo_volumes, np.ndarray) else np.array(material_point_topo_volumes, dtype=np.int32)
-        self._external_open_topo_faces = external_open_topo_faces if isinstance(external_open_topo_faces, np.ndarray) else np.array(external_open_topo_faces, dtype=np.int32)
-        self._new_topo_volumes = new_topo_volumes if isinstance(new_topo_volumes, np.ndarray) else np.array(new_topo_volumes, dtype=np.int32)
-        self._deleted_topo_volumes = deleted_topo_volumes if isinstance(deleted_topo_volumes, np.ndarray) else np.array(deleted_topo_volumes, dtype=np.int32)
+        self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double) if error_locations is not None else None
+        self._topo_volumes = topo_volumes if isinstance(topo_volumes, np.ndarray) else np.array(topo_volumes, dtype=np.int32) if topo_volumes is not None else None
+        self._material_point_topo_volumes = material_point_topo_volumes if isinstance(material_point_topo_volumes, np.ndarray) else np.array(material_point_topo_volumes, dtype=np.int32) if material_point_topo_volumes is not None else None
+        self._external_open_topo_faces = external_open_topo_faces if isinstance(external_open_topo_faces, np.ndarray) else np.array(external_open_topo_faces, dtype=np.int32) if external_open_topo_faces is not None else None
+        self._new_topo_volumes = new_topo_volumes if isinstance(new_topo_volumes, np.ndarray) else np.array(new_topo_volumes, dtype=np.int32) if new_topo_volumes is not None else None
+        self._deleted_topo_volumes = deleted_topo_volumes if isinstance(deleted_topo_volumes, np.ndarray) else np.array(deleted_topo_volumes, dtype=np.int32) if deleted_topo_volumes is not None else None
         self._warning_codes = warning_codes
 
     def __init__(
@@ -684,14 +794,14 @@ class ComputeTopoVolumesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["errorLocations"],
-                json_data["topoVolumes"],
-                json_data["materialPointTopoVolumes"],
-                json_data["externalOpenTopoFaces"],
-                json_data["newTopoVolumes"],
-                json_data["deletedTopoVolumes"],
-                [WarningCode(data) for data in json_data["warningCodes"]])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["errorLocations"] if "errorLocations" in json_data else None,
+                json_data["topoVolumes"] if "topoVolumes" in json_data else None,
+                json_data["materialPointTopoVolumes"] if "materialPointTopoVolumes" in json_data else None,
+                json_data["externalOpenTopoFaces"] if "externalOpenTopoFaces" in json_data else None,
+                json_data["newTopoVolumes"] if "newTopoVolumes" in json_data else None,
+                json_data["deletedTopoVolumes"] if "deletedTopoVolumes" in json_data else None,
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, error_locations, topo_volumes, material_point_topo_volumes, external_open_topo_faces, new_topo_volumes, deleted_topo_volumes, warning_codes])
             if all_field_specified:
@@ -708,16 +818,17 @@ class ComputeTopoVolumesResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ComputeTopoVolumesResults")["ComputeTopoVolumesResults"]
+                    param_json = model._communicator.initialize_params(model, "ComputeTopoVolumesResults")
+                    json_data = param_json["ComputeTopoVolumesResults"] if "ComputeTopoVolumesResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ComputeTopoVolumesResults._default_params["error_code"] if "error_code" in ComputeTopoVolumesResults._default_params else ErrorCode(json_data["errorCode"])),
-                        error_locations if error_locations is not None else ( ComputeTopoVolumesResults._default_params["error_locations"] if "error_locations" in ComputeTopoVolumesResults._default_params else json_data["errorLocations"]),
-                        topo_volumes if topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["topo_volumes"] if "topo_volumes" in ComputeTopoVolumesResults._default_params else json_data["topoVolumes"]),
-                        material_point_topo_volumes if material_point_topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["material_point_topo_volumes"] if "material_point_topo_volumes" in ComputeTopoVolumesResults._default_params else json_data["materialPointTopoVolumes"]),
-                        external_open_topo_faces if external_open_topo_faces is not None else ( ComputeTopoVolumesResults._default_params["external_open_topo_faces"] if "external_open_topo_faces" in ComputeTopoVolumesResults._default_params else json_data["externalOpenTopoFaces"]),
-                        new_topo_volumes if new_topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["new_topo_volumes"] if "new_topo_volumes" in ComputeTopoVolumesResults._default_params else json_data["newTopoVolumes"]),
-                        deleted_topo_volumes if deleted_topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["deleted_topo_volumes"] if "deleted_topo_volumes" in ComputeTopoVolumesResults._default_params else json_data["deletedTopoVolumes"]),
-                        warning_codes if warning_codes is not None else ( ComputeTopoVolumesResults._default_params["warning_codes"] if "warning_codes" in ComputeTopoVolumesResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]))
+                        error_code if error_code is not None else ( ComputeTopoVolumesResults._default_params["error_code"] if "error_code" in ComputeTopoVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        error_locations if error_locations is not None else ( ComputeTopoVolumesResults._default_params["error_locations"] if "error_locations" in ComputeTopoVolumesResults._default_params else (json_data["errorLocations"] if "errorLocations" in json_data else None)),
+                        topo_volumes if topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["topo_volumes"] if "topo_volumes" in ComputeTopoVolumesResults._default_params else (json_data["topoVolumes"] if "topoVolumes" in json_data else None)),
+                        material_point_topo_volumes if material_point_topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["material_point_topo_volumes"] if "material_point_topo_volumes" in ComputeTopoVolumesResults._default_params else (json_data["materialPointTopoVolumes"] if "materialPointTopoVolumes" in json_data else None)),
+                        external_open_topo_faces if external_open_topo_faces is not None else ( ComputeTopoVolumesResults._default_params["external_open_topo_faces"] if "external_open_topo_faces" in ComputeTopoVolumesResults._default_params else (json_data["externalOpenTopoFaces"] if "externalOpenTopoFaces" in json_data else None)),
+                        new_topo_volumes if new_topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["new_topo_volumes"] if "new_topo_volumes" in ComputeTopoVolumesResults._default_params else (json_data["newTopoVolumes"] if "newTopoVolumes" in json_data else None)),
+                        deleted_topo_volumes if deleted_topo_volumes is not None else ( ComputeTopoVolumesResults._default_params["deleted_topo_volumes"] if "deleted_topo_volumes" in ComputeTopoVolumesResults._default_params else (json_data["deletedTopoVolumes"] if "deletedTopoVolumes" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ComputeTopoVolumesResults._default_params["warning_codes"] if "warning_codes" in ComputeTopoVolumesResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -773,14 +884,22 @@ class ComputeTopoVolumesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["errorLocations"] = self._error_locations
-        json_data["topoVolumes"] = self._topo_volumes
-        json_data["materialPointTopoVolumes"] = self._material_point_topo_volumes
-        json_data["externalOpenTopoFaces"] = self._external_open_topo_faces
-        json_data["newTopoVolumes"] = self._new_topo_volumes
-        json_data["deletedTopoVolumes"] = self._deleted_topo_volumes
-        json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._error_locations is not None:
+            json_data["errorLocations"] = self._error_locations
+        if self._topo_volumes is not None:
+            json_data["topoVolumes"] = self._topo_volumes
+        if self._material_point_topo_volumes is not None:
+            json_data["materialPointTopoVolumes"] = self._material_point_topo_volumes
+        if self._external_open_topo_faces is not None:
+            json_data["externalOpenTopoFaces"] = self._external_open_topo_faces
+        if self._new_topo_volumes is not None:
+            json_data["newTopoVolumes"] = self._new_topo_volumes
+        if self._deleted_topo_volumes is not None:
+            json_data["deletedTopoVolumes"] = self._deleted_topo_volumes
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -882,10 +1001,10 @@ class ExtractVolumesResults(CoreObject):
             assigned_zone_name: str,
             face_zonelets_without_volumes: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32)
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
         self._warning_codes = warning_codes
         self._assigned_zone_name = assigned_zone_name
-        self._face_zonelets_without_volumes = face_zonelets_without_volumes if isinstance(face_zonelets_without_volumes, np.ndarray) else np.array(face_zonelets_without_volumes, dtype=np.int32)
+        self._face_zonelets_without_volumes = face_zonelets_without_volumes if isinstance(face_zonelets_without_volumes, np.ndarray) else np.array(face_zonelets_without_volumes, dtype=np.int32) if face_zonelets_without_volumes is not None else None
 
     def __init__(
             self,
@@ -922,11 +1041,11 @@ class ExtractVolumesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["volumes"],
-                [WarningCode(data) for data in json_data["warningCodes"]],
-                json_data["assignedZoneName"],
-                json_data["faceZoneletsWithoutVolumes"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["volumes"] if "volumes" in json_data else None,
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                json_data["assignedZoneName"] if "assignedZoneName" in json_data else None,
+                json_data["faceZoneletsWithoutVolumes"] if "faceZoneletsWithoutVolumes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, volumes, warning_codes, assigned_zone_name, face_zonelets_without_volumes])
             if all_field_specified:
@@ -940,13 +1059,14 @@ class ExtractVolumesResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractVolumesResults")["ExtractVolumesResults"]
+                    param_json = model._communicator.initialize_params(model, "ExtractVolumesResults")
+                    json_data = param_json["ExtractVolumesResults"] if "ExtractVolumesResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ExtractVolumesResults._default_params["error_code"] if "error_code" in ExtractVolumesResults._default_params else ErrorCode(json_data["errorCode"])),
-                        volumes if volumes is not None else ( ExtractVolumesResults._default_params["volumes"] if "volumes" in ExtractVolumesResults._default_params else json_data["volumes"]),
-                        warning_codes if warning_codes is not None else ( ExtractVolumesResults._default_params["warning_codes"] if "warning_codes" in ExtractVolumesResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]),
-                        assigned_zone_name if assigned_zone_name is not None else ( ExtractVolumesResults._default_params["assigned_zone_name"] if "assigned_zone_name" in ExtractVolumesResults._default_params else json_data["assignedZoneName"]),
-                        face_zonelets_without_volumes if face_zonelets_without_volumes is not None else ( ExtractVolumesResults._default_params["face_zonelets_without_volumes"] if "face_zonelets_without_volumes" in ExtractVolumesResults._default_params else json_data["faceZoneletsWithoutVolumes"]))
+                        error_code if error_code is not None else ( ExtractVolumesResults._default_params["error_code"] if "error_code" in ExtractVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        volumes if volumes is not None else ( ExtractVolumesResults._default_params["volumes"] if "volumes" in ExtractVolumesResults._default_params else (json_data["volumes"] if "volumes" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ExtractVolumesResults._default_params["warning_codes"] if "warning_codes" in ExtractVolumesResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        assigned_zone_name if assigned_zone_name is not None else ( ExtractVolumesResults._default_params["assigned_zone_name"] if "assigned_zone_name" in ExtractVolumesResults._default_params else (json_data["assignedZoneName"] if "assignedZoneName" in json_data else None)),
+                        face_zonelets_without_volumes if face_zonelets_without_volumes is not None else ( ExtractVolumesResults._default_params["face_zonelets_without_volumes"] if "face_zonelets_without_volumes" in ExtractVolumesResults._default_params else (json_data["faceZoneletsWithoutVolumes"] if "faceZoneletsWithoutVolumes" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -993,11 +1113,16 @@ class ExtractVolumesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["volumes"] = self._volumes
-        json_data["warningCodes"] = [data for data in self._warning_codes]
-        json_data["assignedZoneName"] = self._assigned_zone_name
-        json_data["faceZoneletsWithoutVolumes"] = self._face_zonelets_without_volumes
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._volumes is not None:
+            json_data["volumes"] = self._volumes
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._assigned_zone_name is not None:
+            json_data["assignedZoneName"] = self._assigned_zone_name
+        if self._face_zonelets_without_volumes is not None:
+            json_data["faceZoneletsWithoutVolumes"] = self._face_zonelets_without_volumes
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1065,9 +1190,11 @@ class ComputeVolumesParams(CoreObject):
             self,
             volume_naming_type: VolumeNamingType,
             create_zones_type: CreateVolumeZonesType,
+            priority_ordered_names: List[str],
             material_point_names: List[str]):
         self._volume_naming_type = VolumeNamingType(volume_naming_type)
         self._create_zones_type = CreateVolumeZonesType(create_zones_type)
+        self._priority_ordered_names = priority_ordered_names
         self._material_point_names = material_point_names
 
     def __init__(
@@ -1075,6 +1202,7 @@ class ComputeVolumesParams(CoreObject):
             model: CommunicationManager=None,
             volume_naming_type: VolumeNamingType = None,
             create_zones_type: CreateVolumeZonesType = None,
+            priority_ordered_names: List[str] = None,
             material_point_names: List[str] = None,
             json_data : dict = None,
              **kwargs):
@@ -1088,6 +1216,8 @@ class ComputeVolumesParams(CoreObject):
             Indicates source type used to compute zone name for volumes.
         create_zones_type: CreateVolumeZonesType, optional
             Option to control volume zone creation for volumes.
+        priority_ordered_names: List[str], optional
+            Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
         material_point_names: List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
         json_data: dict, optional
@@ -1099,25 +1229,29 @@ class ComputeVolumesParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                VolumeNamingType(json_data["volumeNamingType"]),
-                CreateVolumeZonesType(json_data["createZonesType"]),
-                json_data["materialPointNames"])
+                VolumeNamingType(json_data["volumeNamingType"] if "volumeNamingType" in json_data else None),
+                CreateVolumeZonesType(json_data["createZonesType"] if "createZonesType" in json_data else None),
+                json_data["priorityOrderedNames"] if "priorityOrderedNames" in json_data else None,
+                json_data["materialPointNames"] if "materialPointNames" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [volume_naming_type, create_zones_type, material_point_names])
+            all_field_specified = all(arg is not None for arg in [volume_naming_type, create_zones_type, priority_ordered_names, material_point_names])
             if all_field_specified:
                 self.__initialize(
                     volume_naming_type,
                     create_zones_type,
+                    priority_ordered_names,
                     material_point_names)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ComputeVolumesParams")["ComputeVolumesParams"]
+                    param_json = model._communicator.initialize_params(model, "ComputeVolumesParams")
+                    json_data = param_json["ComputeVolumesParams"] if "ComputeVolumesParams" in param_json else {}
                     self.__initialize(
-                        volume_naming_type if volume_naming_type is not None else ( ComputeVolumesParams._default_params["volume_naming_type"] if "volume_naming_type" in ComputeVolumesParams._default_params else VolumeNamingType(json_data["volumeNamingType"])),
-                        create_zones_type if create_zones_type is not None else ( ComputeVolumesParams._default_params["create_zones_type"] if "create_zones_type" in ComputeVolumesParams._default_params else CreateVolumeZonesType(json_data["createZonesType"])),
-                        material_point_names if material_point_names is not None else ( ComputeVolumesParams._default_params["material_point_names"] if "material_point_names" in ComputeVolumesParams._default_params else json_data["materialPointNames"]))
+                        volume_naming_type if volume_naming_type is not None else ( ComputeVolumesParams._default_params["volume_naming_type"] if "volume_naming_type" in ComputeVolumesParams._default_params else VolumeNamingType(json_data["volumeNamingType"] if "volumeNamingType" in json_data else None)),
+                        create_zones_type if create_zones_type is not None else ( ComputeVolumesParams._default_params["create_zones_type"] if "create_zones_type" in ComputeVolumesParams._default_params else CreateVolumeZonesType(json_data["createZonesType"] if "createZonesType" in json_data else None)),
+                        priority_ordered_names if priority_ordered_names is not None else ( ComputeVolumesParams._default_params["priority_ordered_names"] if "priority_ordered_names" in ComputeVolumesParams._default_params else (json_data["priorityOrderedNames"] if "priorityOrderedNames" in json_data else None)),
+                        material_point_names if material_point_names is not None else ( ComputeVolumesParams._default_params["material_point_names"] if "material_point_names" in ComputeVolumesParams._default_params else (json_data["materialPointNames"] if "materialPointNames" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1129,6 +1263,7 @@ class ComputeVolumesParams(CoreObject):
     def set_default(
             volume_naming_type: VolumeNamingType = None,
             create_zones_type: CreateVolumeZonesType = None,
+            priority_ordered_names: List[str] = None,
             material_point_names: List[str] = None):
         """Set the default values of ComputeVolumesParams.
 
@@ -1138,6 +1273,8 @@ class ComputeVolumesParams(CoreObject):
             Indicates source type used to compute zone name for volumes.
         create_zones_type: CreateVolumeZonesType, optional
             Option to control volume zone creation for volumes.
+        priority_ordered_names: List[str], optional
+            Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
         material_point_names: List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
         """
@@ -1158,14 +1295,19 @@ class ComputeVolumesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["volumeNamingType"] = self._volume_naming_type
-        json_data["createZonesType"] = self._create_zones_type
-        json_data["materialPointNames"] = self._material_point_names
+        if self._volume_naming_type is not None:
+            json_data["volumeNamingType"] = self._volume_naming_type
+        if self._create_zones_type is not None:
+            json_data["createZonesType"] = self._create_zones_type
+        if self._priority_ordered_names is not None:
+            json_data["priorityOrderedNames"] = self._priority_ordered_names
+        if self._material_point_names is not None:
+            json_data["materialPointNames"] = self._material_point_names
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "volume_naming_type :  %s\ncreate_zones_type :  %s\nmaterial_point_names :  %s" % (self._volume_naming_type, self._create_zones_type, self._material_point_names)
+        message = "volume_naming_type :  %s\ncreate_zones_type :  %s\npriority_ordered_names :  %s\nmaterial_point_names :  %s" % (self._volume_naming_type, self._create_zones_type, self._priority_ordered_names, self._material_point_names)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1188,6 +1330,16 @@ class ComputeVolumesParams(CoreObject):
     @create_zones_type.setter
     def create_zones_type(self, value: CreateVolumeZonesType):
         self._create_zones_type = value
+
+    @property
+    def priority_ordered_names(self) -> List[str]:
+        """Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+        """
+        return self._priority_ordered_names
+
+    @priority_ordered_names.setter
+    def priority_ordered_names(self, value: List[str]):
+        self._priority_ordered_names = value
 
     @property
     def material_point_names(self) -> List[str]:
@@ -1237,8 +1389,8 @@ class ExtractVolumesParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["createZone"],
-                json_data["suggestedZoneName"])
+                json_data["createZone"] if "createZone" in json_data else None,
+                json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [create_zone, suggested_zone_name])
             if all_field_specified:
@@ -1249,10 +1401,11 @@ class ExtractVolumesParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractVolumesParams")["ExtractVolumesParams"]
+                    param_json = model._communicator.initialize_params(model, "ExtractVolumesParams")
+                    json_data = param_json["ExtractVolumesParams"] if "ExtractVolumesParams" in param_json else {}
                     self.__initialize(
-                        create_zone if create_zone is not None else ( ExtractVolumesParams._default_params["create_zone"] if "create_zone" in ExtractVolumesParams._default_params else json_data["createZone"]),
-                        suggested_zone_name if suggested_zone_name is not None else ( ExtractVolumesParams._default_params["suggested_zone_name"] if "suggested_zone_name" in ExtractVolumesParams._default_params else json_data["suggestedZoneName"]))
+                        create_zone if create_zone is not None else ( ExtractVolumesParams._default_params["create_zone"] if "create_zone" in ExtractVolumesParams._default_params else (json_data["createZone"] if "createZone" in json_data else None)),
+                        suggested_zone_name if suggested_zone_name is not None else ( ExtractVolumesParams._default_params["suggested_zone_name"] if "suggested_zone_name" in ExtractVolumesParams._default_params else (json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1290,8 +1443,10 @@ class ExtractVolumesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["createZone"] = self._create_zone
-        json_data["suggestedZoneName"] = self._suggested_zone_name
+        if self._create_zone is not None:
+            json_data["createZone"] = self._create_zone
+        if self._suggested_zone_name is not None:
+            json_data["suggestedZoneName"] = self._suggested_zone_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1353,7 +1508,7 @@ class ExtractTopoVolumesParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["zoneName"])
+                json_data["zoneName"] if "zoneName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [zone_name])
             if all_field_specified:
@@ -1363,9 +1518,10 @@ class ExtractTopoVolumesParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractTopoVolumesParams")["ExtractTopoVolumesParams"]
+                    param_json = model._communicator.initialize_params(model, "ExtractTopoVolumesParams")
+                    json_data = param_json["ExtractTopoVolumesParams"] if "ExtractTopoVolumesParams" in param_json else {}
                     self.__initialize(
-                        zone_name if zone_name is not None else ( ExtractTopoVolumesParams._default_params["zone_name"] if "zone_name" in ExtractTopoVolumesParams._default_params else json_data["zoneName"]))
+                        zone_name if zone_name is not None else ( ExtractTopoVolumesParams._default_params["zone_name"] if "zone_name" in ExtractTopoVolumesParams._default_params else (json_data["zoneName"] if "zoneName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1400,7 +1556,8 @@ class ExtractTopoVolumesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["zoneName"] = self._zone_name
+        if self._zone_name is not None:
+            json_data["zoneName"] = self._zone_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1428,7 +1585,7 @@ class ExtractTopoVolumesResults(CoreObject):
             self,
             volumes: Iterable[int],
             error_code: ErrorCode):
-        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32)
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
@@ -1457,8 +1614,8 @@ class ExtractTopoVolumesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["volumes"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["volumes"] if "volumes" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [volumes, error_code])
             if all_field_specified:
@@ -1469,10 +1626,11 @@ class ExtractTopoVolumesResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractTopoVolumesResults")["ExtractTopoVolumesResults"]
+                    param_json = model._communicator.initialize_params(model, "ExtractTopoVolumesResults")
+                    json_data = param_json["ExtractTopoVolumesResults"] if "ExtractTopoVolumesResults" in param_json else {}
                     self.__initialize(
-                        volumes if volumes is not None else ( ExtractTopoVolumesResults._default_params["volumes"] if "volumes" in ExtractTopoVolumesResults._default_params else json_data["volumes"]),
-                        error_code if error_code is not None else ( ExtractTopoVolumesResults._default_params["error_code"] if "error_code" in ExtractTopoVolumesResults._default_params else ErrorCode(json_data["errorCode"])))
+                        volumes if volumes is not None else ( ExtractTopoVolumesResults._default_params["volumes"] if "volumes" in ExtractTopoVolumesResults._default_params else (json_data["volumes"] if "volumes" in json_data else None)),
+                        error_code if error_code is not None else ( ExtractTopoVolumesResults._default_params["error_code"] if "error_code" in ExtractTopoVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1510,8 +1668,10 @@ class ExtractTopoVolumesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["volumes"] = self._volumes
-        json_data["errorCode"] = self._error_code
+        if self._volumes is not None:
+            json_data["volumes"] = self._volumes
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1577,7 +1737,8 @@ class NamePatternParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "NamePatternParams")["NamePatternParams"]
+                    param_json = model._communicator.initialize_params(model, "NamePatternParams")
+                    json_data = param_json["NamePatternParams"] if "NamePatternParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -1654,8 +1815,8 @@ class PartSummaryParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["printId"],
-                json_data["printMesh"])
+                json_data["printId"] if "printId" in json_data else None,
+                json_data["printMesh"] if "printMesh" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [print_id, print_mesh])
             if all_field_specified:
@@ -1666,10 +1827,11 @@ class PartSummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "PartSummaryParams")["PartSummaryParams"]
+                    param_json = model._communicator.initialize_params(model, "PartSummaryParams")
+                    json_data = param_json["PartSummaryParams"] if "PartSummaryParams" in param_json else {}
                     self.__initialize(
-                        print_id if print_id is not None else ( PartSummaryParams._default_params["print_id"] if "print_id" in PartSummaryParams._default_params else json_data["printId"]),
-                        print_mesh if print_mesh is not None else ( PartSummaryParams._default_params["print_mesh"] if "print_mesh" in PartSummaryParams._default_params else json_data["printMesh"]))
+                        print_id if print_id is not None else ( PartSummaryParams._default_params["print_id"] if "print_id" in PartSummaryParams._default_params else (json_data["printId"] if "printId" in json_data else None)),
+                        print_mesh if print_mesh is not None else ( PartSummaryParams._default_params["print_mesh"] if "print_mesh" in PartSummaryParams._default_params else (json_data["printMesh"] if "printMesh" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1707,8 +1869,10 @@ class PartSummaryParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["printId"] = self._print_id
-        json_data["printMesh"] = self._print_mesh
+        if self._print_id is not None:
+            json_data["printId"] = self._print_id
+        if self._print_mesh is not None:
+            json_data["printMesh"] = self._print_mesh
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1880,29 +2044,29 @@ class PartSummaryResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["message"],
-                json_data["nTopoEdges"],
-                json_data["nTopoFaces"],
-                json_data["nTopoVolumes"],
-                json_data["nEdgeZonelets"],
-                json_data["nFaceZonelets"],
-                json_data["nCellZonelets"],
-                json_data["nEdgeZones"],
-                json_data["nFaceZones"],
-                json_data["nVolumeZones"],
-                json_data["nLabels"],
-                json_data["nNodes"],
-                json_data["nFaces"],
-                json_data["nCells"],
-                json_data["nTriFaces"],
-                json_data["nPolyFaces"],
-                json_data["nQuadFaces"],
-                json_data["nTetCells"],
-                json_data["nPyraCells"],
-                json_data["nPrismCells"],
-                json_data["nPolyCells"],
-                json_data["nHexCells"],
-                json_data["nUnmeshedTopoFaces"])
+                json_data["message"] if "message" in json_data else None,
+                json_data["nTopoEdges"] if "nTopoEdges" in json_data else None,
+                json_data["nTopoFaces"] if "nTopoFaces" in json_data else None,
+                json_data["nTopoVolumes"] if "nTopoVolumes" in json_data else None,
+                json_data["nEdgeZonelets"] if "nEdgeZonelets" in json_data else None,
+                json_data["nFaceZonelets"] if "nFaceZonelets" in json_data else None,
+                json_data["nCellZonelets"] if "nCellZonelets" in json_data else None,
+                json_data["nEdgeZones"] if "nEdgeZones" in json_data else None,
+                json_data["nFaceZones"] if "nFaceZones" in json_data else None,
+                json_data["nVolumeZones"] if "nVolumeZones" in json_data else None,
+                json_data["nLabels"] if "nLabels" in json_data else None,
+                json_data["nNodes"] if "nNodes" in json_data else None,
+                json_data["nFaces"] if "nFaces" in json_data else None,
+                json_data["nCells"] if "nCells" in json_data else None,
+                json_data["nTriFaces"] if "nTriFaces" in json_data else None,
+                json_data["nPolyFaces"] if "nPolyFaces" in json_data else None,
+                json_data["nQuadFaces"] if "nQuadFaces" in json_data else None,
+                json_data["nTetCells"] if "nTetCells" in json_data else None,
+                json_data["nPyraCells"] if "nPyraCells" in json_data else None,
+                json_data["nPrismCells"] if "nPrismCells" in json_data else None,
+                json_data["nPolyCells"] if "nPolyCells" in json_data else None,
+                json_data["nHexCells"] if "nHexCells" in json_data else None,
+                json_data["nUnmeshedTopoFaces"] if "nUnmeshedTopoFaces" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [message, n_topo_edges, n_topo_faces, n_topo_volumes, n_edge_zonelets, n_face_zonelets, n_cell_zonelets, n_edge_zones, n_face_zones, n_volume_zones, n_labels, n_nodes, n_faces, n_cells, n_tri_faces, n_poly_faces, n_quad_faces, n_tet_cells, n_pyra_cells, n_prism_cells, n_poly_cells, n_hex_cells, n_unmeshed_topo_faces])
             if all_field_specified:
@@ -1934,31 +2098,32 @@ class PartSummaryResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "PartSummaryResults")["PartSummaryResults"]
+                    param_json = model._communicator.initialize_params(model, "PartSummaryResults")
+                    json_data = param_json["PartSummaryResults"] if "PartSummaryResults" in param_json else {}
                     self.__initialize(
-                        message if message is not None else ( PartSummaryResults._default_params["message"] if "message" in PartSummaryResults._default_params else json_data["message"]),
-                        n_topo_edges if n_topo_edges is not None else ( PartSummaryResults._default_params["n_topo_edges"] if "n_topo_edges" in PartSummaryResults._default_params else json_data["nTopoEdges"]),
-                        n_topo_faces if n_topo_faces is not None else ( PartSummaryResults._default_params["n_topo_faces"] if "n_topo_faces" in PartSummaryResults._default_params else json_data["nTopoFaces"]),
-                        n_topo_volumes if n_topo_volumes is not None else ( PartSummaryResults._default_params["n_topo_volumes"] if "n_topo_volumes" in PartSummaryResults._default_params else json_data["nTopoVolumes"]),
-                        n_edge_zonelets if n_edge_zonelets is not None else ( PartSummaryResults._default_params["n_edge_zonelets"] if "n_edge_zonelets" in PartSummaryResults._default_params else json_data["nEdgeZonelets"]),
-                        n_face_zonelets if n_face_zonelets is not None else ( PartSummaryResults._default_params["n_face_zonelets"] if "n_face_zonelets" in PartSummaryResults._default_params else json_data["nFaceZonelets"]),
-                        n_cell_zonelets if n_cell_zonelets is not None else ( PartSummaryResults._default_params["n_cell_zonelets"] if "n_cell_zonelets" in PartSummaryResults._default_params else json_data["nCellZonelets"]),
-                        n_edge_zones if n_edge_zones is not None else ( PartSummaryResults._default_params["n_edge_zones"] if "n_edge_zones" in PartSummaryResults._default_params else json_data["nEdgeZones"]),
-                        n_face_zones if n_face_zones is not None else ( PartSummaryResults._default_params["n_face_zones"] if "n_face_zones" in PartSummaryResults._default_params else json_data["nFaceZones"]),
-                        n_volume_zones if n_volume_zones is not None else ( PartSummaryResults._default_params["n_volume_zones"] if "n_volume_zones" in PartSummaryResults._default_params else json_data["nVolumeZones"]),
-                        n_labels if n_labels is not None else ( PartSummaryResults._default_params["n_labels"] if "n_labels" in PartSummaryResults._default_params else json_data["nLabels"]),
-                        n_nodes if n_nodes is not None else ( PartSummaryResults._default_params["n_nodes"] if "n_nodes" in PartSummaryResults._default_params else json_data["nNodes"]),
-                        n_faces if n_faces is not None else ( PartSummaryResults._default_params["n_faces"] if "n_faces" in PartSummaryResults._default_params else json_data["nFaces"]),
-                        n_cells if n_cells is not None else ( PartSummaryResults._default_params["n_cells"] if "n_cells" in PartSummaryResults._default_params else json_data["nCells"]),
-                        n_tri_faces if n_tri_faces is not None else ( PartSummaryResults._default_params["n_tri_faces"] if "n_tri_faces" in PartSummaryResults._default_params else json_data["nTriFaces"]),
-                        n_poly_faces if n_poly_faces is not None else ( PartSummaryResults._default_params["n_poly_faces"] if "n_poly_faces" in PartSummaryResults._default_params else json_data["nPolyFaces"]),
-                        n_quad_faces if n_quad_faces is not None else ( PartSummaryResults._default_params["n_quad_faces"] if "n_quad_faces" in PartSummaryResults._default_params else json_data["nQuadFaces"]),
-                        n_tet_cells if n_tet_cells is not None else ( PartSummaryResults._default_params["n_tet_cells"] if "n_tet_cells" in PartSummaryResults._default_params else json_data["nTetCells"]),
-                        n_pyra_cells if n_pyra_cells is not None else ( PartSummaryResults._default_params["n_pyra_cells"] if "n_pyra_cells" in PartSummaryResults._default_params else json_data["nPyraCells"]),
-                        n_prism_cells if n_prism_cells is not None else ( PartSummaryResults._default_params["n_prism_cells"] if "n_prism_cells" in PartSummaryResults._default_params else json_data["nPrismCells"]),
-                        n_poly_cells if n_poly_cells is not None else ( PartSummaryResults._default_params["n_poly_cells"] if "n_poly_cells" in PartSummaryResults._default_params else json_data["nPolyCells"]),
-                        n_hex_cells if n_hex_cells is not None else ( PartSummaryResults._default_params["n_hex_cells"] if "n_hex_cells" in PartSummaryResults._default_params else json_data["nHexCells"]),
-                        n_unmeshed_topo_faces if n_unmeshed_topo_faces is not None else ( PartSummaryResults._default_params["n_unmeshed_topo_faces"] if "n_unmeshed_topo_faces" in PartSummaryResults._default_params else json_data["nUnmeshedTopoFaces"]))
+                        message if message is not None else ( PartSummaryResults._default_params["message"] if "message" in PartSummaryResults._default_params else (json_data["message"] if "message" in json_data else None)),
+                        n_topo_edges if n_topo_edges is not None else ( PartSummaryResults._default_params["n_topo_edges"] if "n_topo_edges" in PartSummaryResults._default_params else (json_data["nTopoEdges"] if "nTopoEdges" in json_data else None)),
+                        n_topo_faces if n_topo_faces is not None else ( PartSummaryResults._default_params["n_topo_faces"] if "n_topo_faces" in PartSummaryResults._default_params else (json_data["nTopoFaces"] if "nTopoFaces" in json_data else None)),
+                        n_topo_volumes if n_topo_volumes is not None else ( PartSummaryResults._default_params["n_topo_volumes"] if "n_topo_volumes" in PartSummaryResults._default_params else (json_data["nTopoVolumes"] if "nTopoVolumes" in json_data else None)),
+                        n_edge_zonelets if n_edge_zonelets is not None else ( PartSummaryResults._default_params["n_edge_zonelets"] if "n_edge_zonelets" in PartSummaryResults._default_params else (json_data["nEdgeZonelets"] if "nEdgeZonelets" in json_data else None)),
+                        n_face_zonelets if n_face_zonelets is not None else ( PartSummaryResults._default_params["n_face_zonelets"] if "n_face_zonelets" in PartSummaryResults._default_params else (json_data["nFaceZonelets"] if "nFaceZonelets" in json_data else None)),
+                        n_cell_zonelets if n_cell_zonelets is not None else ( PartSummaryResults._default_params["n_cell_zonelets"] if "n_cell_zonelets" in PartSummaryResults._default_params else (json_data["nCellZonelets"] if "nCellZonelets" in json_data else None)),
+                        n_edge_zones if n_edge_zones is not None else ( PartSummaryResults._default_params["n_edge_zones"] if "n_edge_zones" in PartSummaryResults._default_params else (json_data["nEdgeZones"] if "nEdgeZones" in json_data else None)),
+                        n_face_zones if n_face_zones is not None else ( PartSummaryResults._default_params["n_face_zones"] if "n_face_zones" in PartSummaryResults._default_params else (json_data["nFaceZones"] if "nFaceZones" in json_data else None)),
+                        n_volume_zones if n_volume_zones is not None else ( PartSummaryResults._default_params["n_volume_zones"] if "n_volume_zones" in PartSummaryResults._default_params else (json_data["nVolumeZones"] if "nVolumeZones" in json_data else None)),
+                        n_labels if n_labels is not None else ( PartSummaryResults._default_params["n_labels"] if "n_labels" in PartSummaryResults._default_params else (json_data["nLabels"] if "nLabels" in json_data else None)),
+                        n_nodes if n_nodes is not None else ( PartSummaryResults._default_params["n_nodes"] if "n_nodes" in PartSummaryResults._default_params else (json_data["nNodes"] if "nNodes" in json_data else None)),
+                        n_faces if n_faces is not None else ( PartSummaryResults._default_params["n_faces"] if "n_faces" in PartSummaryResults._default_params else (json_data["nFaces"] if "nFaces" in json_data else None)),
+                        n_cells if n_cells is not None else ( PartSummaryResults._default_params["n_cells"] if "n_cells" in PartSummaryResults._default_params else (json_data["nCells"] if "nCells" in json_data else None)),
+                        n_tri_faces if n_tri_faces is not None else ( PartSummaryResults._default_params["n_tri_faces"] if "n_tri_faces" in PartSummaryResults._default_params else (json_data["nTriFaces"] if "nTriFaces" in json_data else None)),
+                        n_poly_faces if n_poly_faces is not None else ( PartSummaryResults._default_params["n_poly_faces"] if "n_poly_faces" in PartSummaryResults._default_params else (json_data["nPolyFaces"] if "nPolyFaces" in json_data else None)),
+                        n_quad_faces if n_quad_faces is not None else ( PartSummaryResults._default_params["n_quad_faces"] if "n_quad_faces" in PartSummaryResults._default_params else (json_data["nQuadFaces"] if "nQuadFaces" in json_data else None)),
+                        n_tet_cells if n_tet_cells is not None else ( PartSummaryResults._default_params["n_tet_cells"] if "n_tet_cells" in PartSummaryResults._default_params else (json_data["nTetCells"] if "nTetCells" in json_data else None)),
+                        n_pyra_cells if n_pyra_cells is not None else ( PartSummaryResults._default_params["n_pyra_cells"] if "n_pyra_cells" in PartSummaryResults._default_params else (json_data["nPyraCells"] if "nPyraCells" in json_data else None)),
+                        n_prism_cells if n_prism_cells is not None else ( PartSummaryResults._default_params["n_prism_cells"] if "n_prism_cells" in PartSummaryResults._default_params else (json_data["nPrismCells"] if "nPrismCells" in json_data else None)),
+                        n_poly_cells if n_poly_cells is not None else ( PartSummaryResults._default_params["n_poly_cells"] if "n_poly_cells" in PartSummaryResults._default_params else (json_data["nPolyCells"] if "nPolyCells" in json_data else None)),
+                        n_hex_cells if n_hex_cells is not None else ( PartSummaryResults._default_params["n_hex_cells"] if "n_hex_cells" in PartSummaryResults._default_params else (json_data["nHexCells"] if "nHexCells" in json_data else None)),
+                        n_unmeshed_topo_faces if n_unmeshed_topo_faces is not None else ( PartSummaryResults._default_params["n_unmeshed_topo_faces"] if "n_unmeshed_topo_faces" in PartSummaryResults._default_params else (json_data["nUnmeshedTopoFaces"] if "nUnmeshedTopoFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2059,29 +2224,52 @@ class PartSummaryResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["message"] = self._message
-        json_data["nTopoEdges"] = self._n_topo_edges
-        json_data["nTopoFaces"] = self._n_topo_faces
-        json_data["nTopoVolumes"] = self._n_topo_volumes
-        json_data["nEdgeZonelets"] = self._n_edge_zonelets
-        json_data["nFaceZonelets"] = self._n_face_zonelets
-        json_data["nCellZonelets"] = self._n_cell_zonelets
-        json_data["nEdgeZones"] = self._n_edge_zones
-        json_data["nFaceZones"] = self._n_face_zones
-        json_data["nVolumeZones"] = self._n_volume_zones
-        json_data["nLabels"] = self._n_labels
-        json_data["nNodes"] = self._n_nodes
-        json_data["nFaces"] = self._n_faces
-        json_data["nCells"] = self._n_cells
-        json_data["nTriFaces"] = self._n_tri_faces
-        json_data["nPolyFaces"] = self._n_poly_faces
-        json_data["nQuadFaces"] = self._n_quad_faces
-        json_data["nTetCells"] = self._n_tet_cells
-        json_data["nPyraCells"] = self._n_pyra_cells
-        json_data["nPrismCells"] = self._n_prism_cells
-        json_data["nPolyCells"] = self._n_poly_cells
-        json_data["nHexCells"] = self._n_hex_cells
-        json_data["nUnmeshedTopoFaces"] = self._n_unmeshed_topo_faces
+        if self._message is not None:
+            json_data["message"] = self._message
+        if self._n_topo_edges is not None:
+            json_data["nTopoEdges"] = self._n_topo_edges
+        if self._n_topo_faces is not None:
+            json_data["nTopoFaces"] = self._n_topo_faces
+        if self._n_topo_volumes is not None:
+            json_data["nTopoVolumes"] = self._n_topo_volumes
+        if self._n_edge_zonelets is not None:
+            json_data["nEdgeZonelets"] = self._n_edge_zonelets
+        if self._n_face_zonelets is not None:
+            json_data["nFaceZonelets"] = self._n_face_zonelets
+        if self._n_cell_zonelets is not None:
+            json_data["nCellZonelets"] = self._n_cell_zonelets
+        if self._n_edge_zones is not None:
+            json_data["nEdgeZones"] = self._n_edge_zones
+        if self._n_face_zones is not None:
+            json_data["nFaceZones"] = self._n_face_zones
+        if self._n_volume_zones is not None:
+            json_data["nVolumeZones"] = self._n_volume_zones
+        if self._n_labels is not None:
+            json_data["nLabels"] = self._n_labels
+        if self._n_nodes is not None:
+            json_data["nNodes"] = self._n_nodes
+        if self._n_faces is not None:
+            json_data["nFaces"] = self._n_faces
+        if self._n_cells is not None:
+            json_data["nCells"] = self._n_cells
+        if self._n_tri_faces is not None:
+            json_data["nTriFaces"] = self._n_tri_faces
+        if self._n_poly_faces is not None:
+            json_data["nPolyFaces"] = self._n_poly_faces
+        if self._n_quad_faces is not None:
+            json_data["nQuadFaces"] = self._n_quad_faces
+        if self._n_tet_cells is not None:
+            json_data["nTetCells"] = self._n_tet_cells
+        if self._n_pyra_cells is not None:
+            json_data["nPyraCells"] = self._n_pyra_cells
+        if self._n_prism_cells is not None:
+            json_data["nPrismCells"] = self._n_prism_cells
+        if self._n_poly_cells is not None:
+            json_data["nPolyCells"] = self._n_poly_cells
+        if self._n_hex_cells is not None:
+            json_data["nHexCells"] = self._n_hex_cells
+        if self._n_unmeshed_topo_faces is not None:
+            json_data["nUnmeshedTopoFaces"] = self._n_unmeshed_topo_faces
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2358,8 +2546,8 @@ class DeleteTopoEntitiesParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["deleteGeomZonelets"],
-                json_data["deleteMeshZonelets"])
+                json_data["deleteGeomZonelets"] if "deleteGeomZonelets" in json_data else None,
+                json_data["deleteMeshZonelets"] if "deleteMeshZonelets" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [delete_geom_zonelets, delete_mesh_zonelets])
             if all_field_specified:
@@ -2370,10 +2558,11 @@ class DeleteTopoEntitiesParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteTopoEntitiesParams")["DeleteTopoEntitiesParams"]
+                    param_json = model._communicator.initialize_params(model, "DeleteTopoEntitiesParams")
+                    json_data = param_json["DeleteTopoEntitiesParams"] if "DeleteTopoEntitiesParams" in param_json else {}
                     self.__initialize(
-                        delete_geom_zonelets if delete_geom_zonelets is not None else ( DeleteTopoEntitiesParams._default_params["delete_geom_zonelets"] if "delete_geom_zonelets" in DeleteTopoEntitiesParams._default_params else json_data["deleteGeomZonelets"]),
-                        delete_mesh_zonelets if delete_mesh_zonelets is not None else ( DeleteTopoEntitiesParams._default_params["delete_mesh_zonelets"] if "delete_mesh_zonelets" in DeleteTopoEntitiesParams._default_params else json_data["deleteMeshZonelets"]))
+                        delete_geom_zonelets if delete_geom_zonelets is not None else ( DeleteTopoEntitiesParams._default_params["delete_geom_zonelets"] if "delete_geom_zonelets" in DeleteTopoEntitiesParams._default_params else (json_data["deleteGeomZonelets"] if "deleteGeomZonelets" in json_data else None)),
+                        delete_mesh_zonelets if delete_mesh_zonelets is not None else ( DeleteTopoEntitiesParams._default_params["delete_mesh_zonelets"] if "delete_mesh_zonelets" in DeleteTopoEntitiesParams._default_params else (json_data["deleteMeshZonelets"] if "deleteMeshZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2411,8 +2600,10 @@ class DeleteTopoEntitiesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["deleteGeomZonelets"] = self._delete_geom_zonelets
-        json_data["deleteMeshZonelets"] = self._delete_mesh_zonelets
+        if self._delete_geom_zonelets is not None:
+            json_data["deleteGeomZonelets"] = self._delete_geom_zonelets
+        if self._delete_mesh_zonelets is not None:
+            json_data["deleteMeshZonelets"] = self._delete_mesh_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2474,7 +2665,7 @@ class DeleteTopoEntitiesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -2484,9 +2675,10 @@ class DeleteTopoEntitiesResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteTopoEntitiesResults")["DeleteTopoEntitiesResults"]
+                    param_json = model._communicator.initialize_params(model, "DeleteTopoEntitiesResults")
+                    json_data = param_json["DeleteTopoEntitiesResults"] if "DeleteTopoEntitiesResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( DeleteTopoEntitiesResults._default_params["error_code"] if "error_code" in DeleteTopoEntitiesResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( DeleteTopoEntitiesResults._default_params["error_code"] if "error_code" in DeleteTopoEntitiesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2521,7 +2713,8 @@ class DeleteTopoEntitiesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2578,8 +2771,8 @@ class AddToZoneResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                [WarningCode(data) for data in json_data["warningCodes"]])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, warning_codes])
             if all_field_specified:
@@ -2590,10 +2783,11 @@ class AddToZoneResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "AddToZoneResults")["AddToZoneResults"]
+                    param_json = model._communicator.initialize_params(model, "AddToZoneResults")
+                    json_data = param_json["AddToZoneResults"] if "AddToZoneResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( AddToZoneResults._default_params["error_code"] if "error_code" in AddToZoneResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_codes if warning_codes is not None else ( AddToZoneResults._default_params["warning_codes"] if "warning_codes" in AddToZoneResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]))
+                        error_code if error_code is not None else ( AddToZoneResults._default_params["error_code"] if "error_code" in AddToZoneResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( AddToZoneResults._default_params["warning_codes"] if "warning_codes" in AddToZoneResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2631,8 +2825,10 @@ class AddToZoneResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2699,8 +2895,8 @@ class RemoveZoneResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                [WarningCode(data) for data in json_data["warningCodes"]])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, warning_codes])
             if all_field_specified:
@@ -2711,10 +2907,11 @@ class RemoveZoneResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "RemoveZoneResults")["RemoveZoneResults"]
+                    param_json = model._communicator.initialize_params(model, "RemoveZoneResults")
+                    json_data = param_json["RemoveZoneResults"] if "RemoveZoneResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( RemoveZoneResults._default_params["error_code"] if "error_code" in RemoveZoneResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_codes if warning_codes is not None else ( RemoveZoneResults._default_params["warning_codes"] if "warning_codes" in RemoveZoneResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]))
+                        error_code if error_code is not None else ( RemoveZoneResults._default_params["error_code"] if "error_code" in RemoveZoneResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( RemoveZoneResults._default_params["warning_codes"] if "warning_codes" in RemoveZoneResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2752,8 +2949,10 @@ class RemoveZoneResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2815,7 +3014,7 @@ class AddLabelResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -2825,9 +3024,10 @@ class AddLabelResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "AddLabelResults")["AddLabelResults"]
+                    param_json = model._communicator.initialize_params(model, "AddLabelResults")
+                    json_data = param_json["AddLabelResults"] if "AddLabelResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( AddLabelResults._default_params["error_code"] if "error_code" in AddLabelResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( AddLabelResults._default_params["error_code"] if "error_code" in AddLabelResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2862,7 +3062,8 @@ class AddLabelResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2914,7 +3115,7 @@ class RemoveLabelResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -2924,9 +3125,10 @@ class RemoveLabelResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "RemoveLabelResults")["RemoveLabelResults"]
+                    param_json = model._communicator.initialize_params(model, "RemoveLabelResults")
+                    json_data = param_json["RemoveLabelResults"] if "RemoveLabelResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( RemoveLabelResults._default_params["error_code"] if "error_code" in RemoveLabelResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( RemoveLabelResults._default_params["error_code"] if "error_code" in RemoveLabelResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2961,7 +3163,8 @@ class RemoveLabelResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2981,17 +3184,22 @@ class RemoveLabelResults(CoreObject):
         self._error_code = value
 
 class DeleteVolumesParams(CoreObject):
-    """Parameters to delete volumes. This is for internal use only.
+    """Parameters to delete volumes.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            delete_small_volumes: bool,
+            volume_limit: float):
+        self._delete_small_volumes = delete_small_volumes
+        self._volume_limit = volume_limit
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            delete_small_volumes: bool = None,
+            volume_limit: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the DeleteVolumesParams.
@@ -3000,6 +3208,10 @@ class DeleteVolumesParams(CoreObject):
         ----------
         model: Model
             Model to create a DeleteVolumesParams object with default parameters.
+        delete_small_volumes: bool, optional
+            Option to delete only volumes smaller than provided volume limit.
+        volume_limit: float, optional
+            Maximum volume limit to identify smaller volumes to be deleted.
         json_data: dict, optional
             JSON dictionary to create a DeleteVolumesParams object with provided parameters.
 
@@ -3008,17 +3220,24 @@ class DeleteVolumesParams(CoreObject):
         >>> delete_volumes_params = prime.DeleteVolumesParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["deleteSmallVolumes"] if "deleteSmallVolumes" in json_data else None,
+                json_data["volumeLimit"] if "volumeLimit" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [delete_small_volumes, volume_limit])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    delete_small_volumes,
+                    volume_limit)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteVolumesParams")["DeleteVolumesParams"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "DeleteVolumesParams")
+                    json_data = param_json["DeleteVolumesParams"] if "DeleteVolumesParams" in param_json else {}
+                    self.__initialize(
+                        delete_small_volumes if delete_small_volumes is not None else ( DeleteVolumesParams._default_params["delete_small_volumes"] if "delete_small_volumes" in DeleteVolumesParams._default_params else (json_data["deleteSmallVolumes"] if "deleteSmallVolumes" in json_data else None)),
+                        volume_limit if volume_limit is not None else ( DeleteVolumesParams._default_params["volume_limit"] if "volume_limit" in DeleteVolumesParams._default_params else (json_data["volumeLimit"] if "volumeLimit" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3027,9 +3246,17 @@ class DeleteVolumesParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            delete_small_volumes: bool = None,
+            volume_limit: float = None):
         """Set the default values of DeleteVolumesParams.
 
+        Parameters
+        ----------
+        delete_small_volumes: bool, optional
+            Option to delete only volumes smaller than provided volume limit.
+        volume_limit: float, optional
+            Maximum volume limit to identify smaller volumes to be deleted.
         """
         args = locals()
         [DeleteVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3048,26 +3275,55 @@ class DeleteVolumesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._delete_small_volumes is not None:
+            json_data["deleteSmallVolumes"] = self._delete_small_volumes
+        if self._volume_limit is not None:
+            json_data["volumeLimit"] = self._volume_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "delete_small_volumes :  %s\nvolume_limit :  %s" % (self._delete_small_volumes, self._volume_limit)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+    @property
+    def delete_small_volumes(self) -> bool:
+        """Option to delete only volumes smaller than provided volume limit.
+        """
+        return self._delete_small_volumes
+
+    @delete_small_volumes.setter
+    def delete_small_volumes(self, value: bool):
+        self._delete_small_volumes = value
+
+    @property
+    def volume_limit(self) -> float:
+        """Maximum volume limit to identify smaller volumes to be deleted.
+        """
+        return self._volume_limit
+
+    @volume_limit.setter
+    def volume_limit(self, value: float):
+        self._volume_limit = value
+
 class DeleteVolumesResults(CoreObject):
-    """Results associated with delete volumes operation. This is for internal use only.
+    """Results associated with delete volumes operation.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            deleted_volumes: Iterable[int],
+            error_code: ErrorCode):
+        self._deleted_volumes = deleted_volumes if isinstance(deleted_volumes, np.ndarray) else np.array(deleted_volumes, dtype=np.int32) if deleted_volumes is not None else None
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            deleted_volumes: Iterable[int] = None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the DeleteVolumesResults.
@@ -3076,6 +3332,10 @@ class DeleteVolumesResults(CoreObject):
         ----------
         model: Model
             Model to create a DeleteVolumesResults object with default parameters.
+        deleted_volumes: Iterable[int], optional
+            Ids of deleted volumes.
+        error_code: ErrorCode, optional
+            Error code associated with the volume deletion operation.
         json_data: dict, optional
             JSON dictionary to create a DeleteVolumesResults object with provided parameters.
 
@@ -3084,17 +3344,24 @@ class DeleteVolumesResults(CoreObject):
         >>> delete_volumes_results = prime.DeleteVolumesResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["deletedVolumes"] if "deletedVolumes" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [deleted_volumes, error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    deleted_volumes,
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteVolumesResults")["DeleteVolumesResults"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "DeleteVolumesResults")
+                    json_data = param_json["DeleteVolumesResults"] if "DeleteVolumesResults" in param_json else {}
+                    self.__initialize(
+                        deleted_volumes if deleted_volumes is not None else ( DeleteVolumesResults._default_params["deleted_volumes"] if "deleted_volumes" in DeleteVolumesResults._default_params else (json_data["deletedVolumes"] if "deletedVolumes" in json_data else None)),
+                        error_code if error_code is not None else ( DeleteVolumesResults._default_params["error_code"] if "error_code" in DeleteVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3103,9 +3370,17 @@ class DeleteVolumesResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            deleted_volumes: Iterable[int] = None,
+            error_code: ErrorCode = None):
         """Set the default values of DeleteVolumesResults.
 
+        Parameters
+        ----------
+        deleted_volumes: Iterable[int], optional
+            Ids of deleted volumes.
+        error_code: ErrorCode, optional
+            Error code associated with the volume deletion operation.
         """
         args = locals()
         [DeleteVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3124,16 +3399,40 @@ class DeleteVolumesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._deleted_volumes is not None:
+            json_data["deletedVolumes"] = self._deleted_volumes
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "deleted_volumes :  %s\nerror_code :  %s" % (self._deleted_volumes, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+    @property
+    def deleted_volumes(self) -> Iterable[int]:
+        """Ids of deleted volumes.
+        """
+        return self._deleted_volumes
+
+    @deleted_volumes.setter
+    def deleted_volumes(self, value: Iterable[int]):
+        self._deleted_volumes = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the volume deletion operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
 class MergeVolumesParams(CoreObject):
-    """Parameters to merge volumes. This is for internal use only.
+    """Parameters to merge volumes.
     """
     _default_params = {}
 
@@ -3169,7 +3468,8 @@ class MergeVolumesParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MergeVolumesParams")["MergeVolumesParams"]
+                    param_json = model._communicator.initialize_params(model, "MergeVolumesParams")
+                    json_data = param_json["MergeVolumesParams"] if "MergeVolumesParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -3209,17 +3509,22 @@ class MergeVolumesParams(CoreObject):
         return message
 
 class MergeVolumesResults(CoreObject):
-    """Results associated with merge volumes operation. This is for internal use only.
+    """Results associated with merge volumes operation.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            merged_volumes: Iterable[int],
+            error_code: ErrorCode):
+        self._merged_volumes = merged_volumes if isinstance(merged_volumes, np.ndarray) else np.array(merged_volumes, dtype=np.int32) if merged_volumes is not None else None
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            merged_volumes: Iterable[int] = None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MergeVolumesResults.
@@ -3228,6 +3533,10 @@ class MergeVolumesResults(CoreObject):
         ----------
         model: Model
             Model to create a MergeVolumesResults object with default parameters.
+        merged_volumes: Iterable[int], optional
+            Ids of volumes to which input volumes are merged.
+        error_code: ErrorCode, optional
+            Error code associated with the volume merge operation.
         json_data: dict, optional
             JSON dictionary to create a MergeVolumesResults object with provided parameters.
 
@@ -3236,17 +3545,24 @@ class MergeVolumesResults(CoreObject):
         >>> merge_volumes_results = prime.MergeVolumesResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["mergedVolumes"] if "mergedVolumes" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [merged_volumes, error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    merged_volumes,
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MergeVolumesResults")["MergeVolumesResults"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "MergeVolumesResults")
+                    json_data = param_json["MergeVolumesResults"] if "MergeVolumesResults" in param_json else {}
+                    self.__initialize(
+                        merged_volumes if merged_volumes is not None else ( MergeVolumesResults._default_params["merged_volumes"] if "merged_volumes" in MergeVolumesResults._default_params else (json_data["mergedVolumes"] if "mergedVolumes" in json_data else None)),
+                        error_code if error_code is not None else ( MergeVolumesResults._default_params["error_code"] if "error_code" in MergeVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3255,9 +3571,17 @@ class MergeVolumesResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            merged_volumes: Iterable[int] = None,
+            error_code: ErrorCode = None):
         """Set the default values of MergeVolumesResults.
 
+        Parameters
+        ----------
+        merged_volumes: Iterable[int], optional
+            Ids of volumes to which input volumes are merged.
+        error_code: ErrorCode, optional
+            Error code associated with the volume merge operation.
         """
         args = locals()
         [MergeVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3276,10 +3600,34 @@ class MergeVolumesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._merged_volumes is not None:
+            json_data["mergedVolumes"] = self._merged_volumes
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "merged_volumes :  %s\nerror_code :  %s" % (self._merged_volumes, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def merged_volumes(self) -> Iterable[int]:
+        """Ids of volumes to which input volumes are merged.
+        """
+        return self._merged_volumes
+
+    @merged_volumes.setter
+    def merged_volumes(self, value: Iterable[int]):
+        self._merged_volumes = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the volume merge operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value

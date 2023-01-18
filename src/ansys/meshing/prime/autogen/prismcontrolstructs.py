@@ -15,6 +15,8 @@ class PrismControlOffsetType(enum.IntEnum):
     """Option to grow prism layers with uniform offset height based on first height."""
     ASPECTRATIO = 1
     """Option to grow prism layers based on first aspect ratio specified."""
+    LASTRATIO = 2
+    """Option to grow prism layers based on first height and last aspect ratio."""
 
 class PrismControlGrowthParams(CoreObject):
     """Growth parameters for prism control.
@@ -28,12 +30,14 @@ class PrismControlGrowthParams(CoreObject):
             growth_rate: float,
             first_height: float,
             first_aspect_ratio: float,
+            last_aspect_ratio: float,
             min_aspect_ratio: float):
         self._offset_type = PrismControlOffsetType(offset_type)
         self._n_layers = n_layers
         self._growth_rate = growth_rate
         self._first_height = first_height
         self._first_aspect_ratio = first_aspect_ratio
+        self._last_aspect_ratio = last_aspect_ratio
         self._min_aspect_ratio = min_aspect_ratio
 
     def __init__(
@@ -44,6 +48,7 @@ class PrismControlGrowthParams(CoreObject):
             growth_rate: float = None,
             first_height: float = None,
             first_aspect_ratio: float = None,
+            last_aspect_ratio: float = None,
             min_aspect_ratio: float = None,
             json_data : dict = None,
              **kwargs):
@@ -63,6 +68,8 @@ class PrismControlGrowthParams(CoreObject):
             Height to be used for first layer and adjust following layer height based on other settings. It is used when prism control offset type is UNIFORM.
         first_aspect_ratio: float, optional
             Aspect ratio to be used to compute first layer height. It is used only when prism control offset type is ASPECTRATIO.
+        last_aspect_ratio: float, optional
+            Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
         min_aspect_ratio: float, optional
             Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
         json_data: dict, optional
@@ -74,14 +81,15 @@ class PrismControlGrowthParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                PrismControlOffsetType(json_data["offsetType"]),
-                json_data["nLayers"],
-                json_data["growthRate"],
-                json_data["firstHeight"],
-                json_data["firstAspectRatio"],
-                json_data["minAspectRatio"])
+                PrismControlOffsetType(json_data["offsetType"] if "offsetType" in json_data else None),
+                json_data["nLayers"] if "nLayers" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None,
+                json_data["firstHeight"] if "firstHeight" in json_data else None,
+                json_data["firstAspectRatio"] if "firstAspectRatio" in json_data else None,
+                json_data["lastAspectRatio"] if "lastAspectRatio" in json_data else None,
+                json_data["minAspectRatio"] if "minAspectRatio" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [offset_type, n_layers, growth_rate, first_height, first_aspect_ratio, min_aspect_ratio])
+            all_field_specified = all(arg is not None for arg in [offset_type, n_layers, growth_rate, first_height, first_aspect_ratio, last_aspect_ratio, min_aspect_ratio])
             if all_field_specified:
                 self.__initialize(
                     offset_type,
@@ -89,19 +97,22 @@ class PrismControlGrowthParams(CoreObject):
                     growth_rate,
                     first_height,
                     first_aspect_ratio,
+                    last_aspect_ratio,
                     min_aspect_ratio)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "PrismControlGrowthParams")["PrismControlGrowthParams"]
+                    param_json = model._communicator.initialize_params(model, "PrismControlGrowthParams")
+                    json_data = param_json["PrismControlGrowthParams"] if "PrismControlGrowthParams" in param_json else {}
                     self.__initialize(
-                        offset_type if offset_type is not None else ( PrismControlGrowthParams._default_params["offset_type"] if "offset_type" in PrismControlGrowthParams._default_params else PrismControlOffsetType(json_data["offsetType"])),
-                        n_layers if n_layers is not None else ( PrismControlGrowthParams._default_params["n_layers"] if "n_layers" in PrismControlGrowthParams._default_params else json_data["nLayers"]),
-                        growth_rate if growth_rate is not None else ( PrismControlGrowthParams._default_params["growth_rate"] if "growth_rate" in PrismControlGrowthParams._default_params else json_data["growthRate"]),
-                        first_height if first_height is not None else ( PrismControlGrowthParams._default_params["first_height"] if "first_height" in PrismControlGrowthParams._default_params else json_data["firstHeight"]),
-                        first_aspect_ratio if first_aspect_ratio is not None else ( PrismControlGrowthParams._default_params["first_aspect_ratio"] if "first_aspect_ratio" in PrismControlGrowthParams._default_params else json_data["firstAspectRatio"]),
-                        min_aspect_ratio if min_aspect_ratio is not None else ( PrismControlGrowthParams._default_params["min_aspect_ratio"] if "min_aspect_ratio" in PrismControlGrowthParams._default_params else json_data["minAspectRatio"]))
+                        offset_type if offset_type is not None else ( PrismControlGrowthParams._default_params["offset_type"] if "offset_type" in PrismControlGrowthParams._default_params else PrismControlOffsetType(json_data["offsetType"] if "offsetType" in json_data else None)),
+                        n_layers if n_layers is not None else ( PrismControlGrowthParams._default_params["n_layers"] if "n_layers" in PrismControlGrowthParams._default_params else (json_data["nLayers"] if "nLayers" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( PrismControlGrowthParams._default_params["growth_rate"] if "growth_rate" in PrismControlGrowthParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
+                        first_height if first_height is not None else ( PrismControlGrowthParams._default_params["first_height"] if "first_height" in PrismControlGrowthParams._default_params else (json_data["firstHeight"] if "firstHeight" in json_data else None)),
+                        first_aspect_ratio if first_aspect_ratio is not None else ( PrismControlGrowthParams._default_params["first_aspect_ratio"] if "first_aspect_ratio" in PrismControlGrowthParams._default_params else (json_data["firstAspectRatio"] if "firstAspectRatio" in json_data else None)),
+                        last_aspect_ratio if last_aspect_ratio is not None else ( PrismControlGrowthParams._default_params["last_aspect_ratio"] if "last_aspect_ratio" in PrismControlGrowthParams._default_params else (json_data["lastAspectRatio"] if "lastAspectRatio" in json_data else None)),
+                        min_aspect_ratio if min_aspect_ratio is not None else ( PrismControlGrowthParams._default_params["min_aspect_ratio"] if "min_aspect_ratio" in PrismControlGrowthParams._default_params else (json_data["minAspectRatio"] if "minAspectRatio" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -116,6 +127,7 @@ class PrismControlGrowthParams(CoreObject):
             growth_rate: float = None,
             first_height: float = None,
             first_aspect_ratio: float = None,
+            last_aspect_ratio: float = None,
             min_aspect_ratio: float = None):
         """Set the default values of PrismControlGrowthParams.
 
@@ -131,6 +143,8 @@ class PrismControlGrowthParams(CoreObject):
             Height to be used for first layer and adjust following layer height based on other settings. It is used when prism control offset type is UNIFORM.
         first_aspect_ratio: float, optional
             Aspect ratio to be used to compute first layer height. It is used only when prism control offset type is ASPECTRATIO.
+        last_aspect_ratio: float, optional
+            Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
         min_aspect_ratio: float, optional
             Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
         """
@@ -151,17 +165,25 @@ class PrismControlGrowthParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["offsetType"] = self._offset_type
-        json_data["nLayers"] = self._n_layers
-        json_data["growthRate"] = self._growth_rate
-        json_data["firstHeight"] = self._first_height
-        json_data["firstAspectRatio"] = self._first_aspect_ratio
-        json_data["minAspectRatio"] = self._min_aspect_ratio
+        if self._offset_type is not None:
+            json_data["offsetType"] = self._offset_type
+        if self._n_layers is not None:
+            json_data["nLayers"] = self._n_layers
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        if self._first_height is not None:
+            json_data["firstHeight"] = self._first_height
+        if self._first_aspect_ratio is not None:
+            json_data["firstAspectRatio"] = self._first_aspect_ratio
+        if self._last_aspect_ratio is not None:
+            json_data["lastAspectRatio"] = self._last_aspect_ratio
+        if self._min_aspect_ratio is not None:
+            json_data["minAspectRatio"] = self._min_aspect_ratio
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "offset_type :  %s\nn_layers :  %s\ngrowth_rate :  %s\nfirst_height :  %s\nfirst_aspect_ratio :  %s\nmin_aspect_ratio :  %s" % (self._offset_type, self._n_layers, self._growth_rate, self._first_height, self._first_aspect_ratio, self._min_aspect_ratio)
+        message = "offset_type :  %s\nn_layers :  %s\ngrowth_rate :  %s\nfirst_height :  %s\nfirst_aspect_ratio :  %s\nlast_aspect_ratio :  %s\nmin_aspect_ratio :  %s" % (self._offset_type, self._n_layers, self._growth_rate, self._first_height, self._first_aspect_ratio, self._last_aspect_ratio, self._min_aspect_ratio)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -214,6 +236,16 @@ class PrismControlGrowthParams(CoreObject):
     @first_aspect_ratio.setter
     def first_aspect_ratio(self, value: float):
         self._first_aspect_ratio = value
+
+    @property
+    def last_aspect_ratio(self) -> float:
+        """Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
+        """
+        return self._last_aspect_ratio
+
+    @last_aspect_ratio.setter
+    def last_aspect_ratio(self, value: float):
+        self._last_aspect_ratio = value
 
     @property
     def min_aspect_ratio(self) -> float:

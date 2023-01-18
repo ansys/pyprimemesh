@@ -41,7 +41,7 @@ class MergePartsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["mergedPartSuggestedName"])
+                json_data["mergedPartSuggestedName"] if "mergedPartSuggestedName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [merged_part_suggested_name])
             if all_field_specified:
@@ -51,9 +51,10 @@ class MergePartsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MergePartsParams")["MergePartsParams"]
+                    param_json = model._communicator.initialize_params(model, "MergePartsParams")
+                    json_data = param_json["MergePartsParams"] if "MergePartsParams" in param_json else {}
                     self.__initialize(
-                        merged_part_suggested_name if merged_part_suggested_name is not None else ( MergePartsParams._default_params["merged_part_suggested_name"] if "merged_part_suggested_name" in MergePartsParams._default_params else json_data["mergedPartSuggestedName"]))
+                        merged_part_suggested_name if merged_part_suggested_name is not None else ( MergePartsParams._default_params["merged_part_suggested_name"] if "merged_part_suggested_name" in MergePartsParams._default_params else (json_data["mergedPartSuggestedName"] if "mergedPartSuggestedName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -88,7 +89,8 @@ class MergePartsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["mergedPartSuggestedName"] = self._merged_part_suggested_name
+        if self._merged_part_suggested_name is not None:
+            json_data["mergedPartSuggestedName"] = self._merged_part_suggested_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -150,9 +152,9 @@ class MergePartsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["mergedPartAssignedName"],
-                json_data["mergedPartId"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["mergedPartAssignedName"] if "mergedPartAssignedName" in json_data else None,
+                json_data["mergedPartId"] if "mergedPartId" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, merged_part_assigned_name, merged_part_id])
             if all_field_specified:
@@ -164,11 +166,12 @@ class MergePartsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MergePartsResults")["MergePartsResults"]
+                    param_json = model._communicator.initialize_params(model, "MergePartsResults")
+                    json_data = param_json["MergePartsResults"] if "MergePartsResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( MergePartsResults._default_params["error_code"] if "error_code" in MergePartsResults._default_params else ErrorCode(json_data["errorCode"])),
-                        merged_part_assigned_name if merged_part_assigned_name is not None else ( MergePartsResults._default_params["merged_part_assigned_name"] if "merged_part_assigned_name" in MergePartsResults._default_params else json_data["mergedPartAssignedName"]),
-                        merged_part_id if merged_part_id is not None else ( MergePartsResults._default_params["merged_part_id"] if "merged_part_id" in MergePartsResults._default_params else json_data["mergedPartId"]))
+                        error_code if error_code is not None else ( MergePartsResults._default_params["error_code"] if "error_code" in MergePartsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        merged_part_assigned_name if merged_part_assigned_name is not None else ( MergePartsResults._default_params["merged_part_assigned_name"] if "merged_part_assigned_name" in MergePartsResults._default_params else (json_data["mergedPartAssignedName"] if "mergedPartAssignedName" in json_data else None)),
+                        merged_part_id if merged_part_id is not None else ( MergePartsResults._default_params["merged_part_id"] if "merged_part_id" in MergePartsResults._default_params else (json_data["mergedPartId"] if "mergedPartId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -209,9 +212,12 @@ class MergePartsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["mergedPartAssignedName"] = self._merged_part_assigned_name
-        json_data["mergedPartId"] = self._merged_part_id
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._merged_part_assigned_name is not None:
+            json_data["mergedPartAssignedName"] = self._merged_part_assigned_name
+        if self._merged_part_id is not None:
+            json_data["mergedPartId"] = self._merged_part_id
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -293,9 +299,9 @@ class GlobalSizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["min"],
-                json_data["max"],
-                json_data["growthRate"])
+                json_data["min"] if "min" in json_data else None,
+                json_data["max"] if "max" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [min, max, growth_rate])
             if all_field_specified:
@@ -307,11 +313,12 @@ class GlobalSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "GlobalSizingParams")["GlobalSizingParams"]
+                    param_json = model._communicator.initialize_params(model, "GlobalSizingParams")
+                    json_data = param_json["GlobalSizingParams"] if "GlobalSizingParams" in param_json else {}
                     self.__initialize(
-                        min if min is not None else ( GlobalSizingParams._default_params["min"] if "min" in GlobalSizingParams._default_params else json_data["min"]),
-                        max if max is not None else ( GlobalSizingParams._default_params["max"] if "max" in GlobalSizingParams._default_params else json_data["max"]),
-                        growth_rate if growth_rate is not None else ( GlobalSizingParams._default_params["growth_rate"] if "growth_rate" in GlobalSizingParams._default_params else json_data["growthRate"]))
+                        min if min is not None else ( GlobalSizingParams._default_params["min"] if "min" in GlobalSizingParams._default_params else (json_data["min"] if "min" in json_data else None)),
+                        max if max is not None else ( GlobalSizingParams._default_params["max"] if "max" in GlobalSizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( GlobalSizingParams._default_params["growth_rate"] if "growth_rate" in GlobalSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -352,9 +359,12 @@ class GlobalSizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["min"] = self._min
-        json_data["max"] = self._max
-        json_data["growthRate"] = self._growth_rate
+        if self._min is not None:
+            json_data["min"] = self._min
+        if self._max is not None:
+            json_data["max"] = self._max
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -436,9 +446,9 @@ class CreateZoneResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["zoneID"],
-                json_data["assignedName"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["zoneID"] if "zoneID" in json_data else None,
+                json_data["assignedName"] if "assignedName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, zone_id, assigned_name])
             if all_field_specified:
@@ -450,11 +460,12 @@ class CreateZoneResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CreateZoneResults")["CreateZoneResults"]
+                    param_json = model._communicator.initialize_params(model, "CreateZoneResults")
+                    json_data = param_json["CreateZoneResults"] if "CreateZoneResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( CreateZoneResults._default_params["error_code"] if "error_code" in CreateZoneResults._default_params else ErrorCode(json_data["errorCode"])),
-                        zone_id if zone_id is not None else ( CreateZoneResults._default_params["zone_id"] if "zone_id" in CreateZoneResults._default_params else json_data["zoneID"]),
-                        assigned_name if assigned_name is not None else ( CreateZoneResults._default_params["assigned_name"] if "assigned_name" in CreateZoneResults._default_params else json_data["assignedName"]))
+                        error_code if error_code is not None else ( CreateZoneResults._default_params["error_code"] if "error_code" in CreateZoneResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        zone_id if zone_id is not None else ( CreateZoneResults._default_params["zone_id"] if "zone_id" in CreateZoneResults._default_params else (json_data["zoneID"] if "zoneID" in json_data else None)),
+                        assigned_name if assigned_name is not None else ( CreateZoneResults._default_params["assigned_name"] if "assigned_name" in CreateZoneResults._default_params else (json_data["assignedName"] if "assignedName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -495,9 +506,12 @@ class CreateZoneResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["zoneID"] = self._zone_id
-        json_data["assignedName"] = self._assigned_name
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._zone_id is not None:
+            json_data["zoneID"] = self._zone_id
+        if self._assigned_name is not None:
+            json_data["assignedName"] = self._assigned_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -569,7 +583,7 @@ class DeleteZoneResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -579,9 +593,10 @@ class DeleteZoneResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteZoneResults")["DeleteZoneResults"]
+                    param_json = model._communicator.initialize_params(model, "DeleteZoneResults")
+                    json_data = param_json["DeleteZoneResults"] if "DeleteZoneResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( DeleteZoneResults._default_params["error_code"] if "error_code" in DeleteZoneResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( DeleteZoneResults._default_params["error_code"] if "error_code" in DeleteZoneResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -616,7 +631,8 @@ class DeleteZoneResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
