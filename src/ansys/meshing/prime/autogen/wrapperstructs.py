@@ -35,8 +35,8 @@ class WrapParams(CoreObject):
             imprint_iterations: int):
         self._sizing_method = SizeFieldType(sizing_method)
         self._base_size = base_size
-        self._size_control_ids = size_control_ids if isinstance(size_control_ids, np.ndarray) else np.array(size_control_ids, dtype=np.int32)
-        self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32)
+        self._size_control_ids = size_control_ids if isinstance(size_control_ids, np.ndarray) else np.array(size_control_ids, dtype=np.int32) if size_control_ids is not None else None
+        self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32) if size_field_ids is not None else None
         self._wrap_region = WrapRegion(wrap_region)
         self._number_of_threads = number_of_threads
         self._imprint_relative_range = imprint_relative_range
@@ -86,14 +86,14 @@ class WrapParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                SizeFieldType(json_data["sizingMethod"]),
-                json_data["baseSize"],
-                json_data["sizeControlIDs"],
-                json_data["sizeFieldIDs"],
-                WrapRegion(json_data["wrapRegion"]),
-                json_data["numberOfThreads"],
-                json_data["imprintRelativeRange"],
-                json_data["imprintIterations"])
+                SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None),
+                json_data["baseSize"] if "baseSize" in json_data else None,
+                json_data["sizeControlIDs"] if "sizeControlIDs" in json_data else None,
+                json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None,
+                WrapRegion(json_data["wrapRegion"] if "wrapRegion" in json_data else None),
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
+                json_data["imprintRelativeRange"] if "imprintRelativeRange" in json_data else None,
+                json_data["imprintIterations"] if "imprintIterations" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [sizing_method, base_size, size_control_ids, size_field_ids, wrap_region, number_of_threads, imprint_relative_range, imprint_iterations])
             if all_field_specified:
@@ -110,16 +110,17 @@ class WrapParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WrapParams")["WrapParams"]
+                    param_json = model._communicator.initialize_params(model, "WrapParams")
+                    json_data = param_json["WrapParams"] if "WrapParams" in param_json else {}
                     self.__initialize(
-                        sizing_method if sizing_method is not None else ( WrapParams._default_params["sizing_method"] if "sizing_method" in WrapParams._default_params else SizeFieldType(json_data["sizingMethod"])),
-                        base_size if base_size is not None else ( WrapParams._default_params["base_size"] if "base_size" in WrapParams._default_params else json_data["baseSize"]),
-                        size_control_ids if size_control_ids is not None else ( WrapParams._default_params["size_control_ids"] if "size_control_ids" in WrapParams._default_params else json_data["sizeControlIDs"]),
-                        size_field_ids if size_field_ids is not None else ( WrapParams._default_params["size_field_ids"] if "size_field_ids" in WrapParams._default_params else json_data["sizeFieldIDs"]),
-                        wrap_region if wrap_region is not None else ( WrapParams._default_params["wrap_region"] if "wrap_region" in WrapParams._default_params else WrapRegion(json_data["wrapRegion"])),
-                        number_of_threads if number_of_threads is not None else ( WrapParams._default_params["number_of_threads"] if "number_of_threads" in WrapParams._default_params else json_data["numberOfThreads"]),
-                        imprint_relative_range if imprint_relative_range is not None else ( WrapParams._default_params["imprint_relative_range"] if "imprint_relative_range" in WrapParams._default_params else json_data["imprintRelativeRange"]),
-                        imprint_iterations if imprint_iterations is not None else ( WrapParams._default_params["imprint_iterations"] if "imprint_iterations" in WrapParams._default_params else json_data["imprintIterations"]))
+                        sizing_method if sizing_method is not None else ( WrapParams._default_params["sizing_method"] if "sizing_method" in WrapParams._default_params else SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None)),
+                        base_size if base_size is not None else ( WrapParams._default_params["base_size"] if "base_size" in WrapParams._default_params else (json_data["baseSize"] if "baseSize" in json_data else None)),
+                        size_control_ids if size_control_ids is not None else ( WrapParams._default_params["size_control_ids"] if "size_control_ids" in WrapParams._default_params else (json_data["sizeControlIDs"] if "sizeControlIDs" in json_data else None)),
+                        size_field_ids if size_field_ids is not None else ( WrapParams._default_params["size_field_ids"] if "size_field_ids" in WrapParams._default_params else (json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None)),
+                        wrap_region if wrap_region is not None else ( WrapParams._default_params["wrap_region"] if "wrap_region" in WrapParams._default_params else WrapRegion(json_data["wrapRegion"] if "wrapRegion" in json_data else None)),
+                        number_of_threads if number_of_threads is not None else ( WrapParams._default_params["number_of_threads"] if "number_of_threads" in WrapParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
+                        imprint_relative_range if imprint_relative_range is not None else ( WrapParams._default_params["imprint_relative_range"] if "imprint_relative_range" in WrapParams._default_params else (json_data["imprintRelativeRange"] if "imprintRelativeRange" in json_data else None)),
+                        imprint_iterations if imprint_iterations is not None else ( WrapParams._default_params["imprint_iterations"] if "imprint_iterations" in WrapParams._default_params else (json_data["imprintIterations"] if "imprintIterations" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -175,14 +176,22 @@ class WrapParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["sizingMethod"] = self._sizing_method
-        json_data["baseSize"] = self._base_size
-        json_data["sizeControlIDs"] = self._size_control_ids
-        json_data["sizeFieldIDs"] = self._size_field_ids
-        json_data["wrapRegion"] = self._wrap_region
-        json_data["numberOfThreads"] = self._number_of_threads
-        json_data["imprintRelativeRange"] = self._imprint_relative_range
-        json_data["imprintIterations"] = self._imprint_iterations
+        if self._sizing_method is not None:
+            json_data["sizingMethod"] = self._sizing_method
+        if self._base_size is not None:
+            json_data["baseSize"] = self._base_size
+        if self._size_control_ids is not None:
+            json_data["sizeControlIDs"] = self._size_control_ids
+        if self._size_field_ids is not None:
+            json_data["sizeFieldIDs"] = self._size_field_ids
+        if self._wrap_region is not None:
+            json_data["wrapRegion"] = self._wrap_region
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
+        if self._imprint_relative_range is not None:
+            json_data["imprintRelativeRange"] = self._imprint_relative_range
+        if self._imprint_iterations is not None:
+            json_data["imprintIterations"] = self._imprint_iterations
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -319,10 +328,10 @@ class WrapResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                [WarningCode(data) for data in json_data["warningCodes"]],
-                ErrorCode(json_data["errorCode"]),
-                json_data["id"],
-                json_data["name"])
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["id"] if "id" in json_data else None,
+                json_data["name"] if "name" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [warning_codes, error_code, id, name])
             if all_field_specified:
@@ -335,12 +344,13 @@ class WrapResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WrapResult")["WrapResult"]
+                    param_json = model._communicator.initialize_params(model, "WrapResult")
+                    json_data = param_json["WrapResult"] if "WrapResult" in param_json else {}
                     self.__initialize(
-                        warning_codes if warning_codes is not None else ( WrapResult._default_params["warning_codes"] if "warning_codes" in WrapResult._default_params else [WarningCode(data) for data in json_data["warningCodes"]]),
-                        error_code if error_code is not None else ( WrapResult._default_params["error_code"] if "error_code" in WrapResult._default_params else ErrorCode(json_data["errorCode"])),
-                        id if id is not None else ( WrapResult._default_params["id"] if "id" in WrapResult._default_params else json_data["id"]),
-                        name if name is not None else ( WrapResult._default_params["name"] if "name" in WrapResult._default_params else json_data["name"]))
+                        warning_codes if warning_codes is not None else ( WrapResult._default_params["warning_codes"] if "warning_codes" in WrapResult._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        error_code if error_code is not None else ( WrapResult._default_params["error_code"] if "error_code" in WrapResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        id if id is not None else ( WrapResult._default_params["id"] if "id" in WrapResult._default_params else (json_data["id"] if "id" in json_data else None)),
+                        name if name is not None else ( WrapResult._default_params["name"] if "name" in WrapResult._default_params else (json_data["name"] if "name" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -384,10 +394,14 @@ class WrapResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["warningCodes"] = [data for data in self._warning_codes]
-        json_data["errorCode"] = self._error_code
-        json_data["id"] = self._id
-        json_data["name"] = self._name
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._id is not None:
+            json_data["id"] = self._id
+        if self._name is not None:
+            json_data["name"] = self._name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -519,17 +533,17 @@ class WrapperImproveQualityParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["targetSkewness"],
-                json_data["islandCount"],
-                json_data["islandTol"],
-                json_data["overlapCount"],
-                json_data["overlapTol"],
-                json_data["resolveSpikes"],
-                json_data["resolveIntersections"],
-                json_data["inflateDihedralFaceNodes"],
-                json_data["resolveInvalidNodeNormals"],
-                json_data["aggressively"],
-                json_data["numberOfThreads"])
+                json_data["targetSkewness"] if "targetSkewness" in json_data else None,
+                json_data["islandCount"] if "islandCount" in json_data else None,
+                json_data["islandTol"] if "islandTol" in json_data else None,
+                json_data["overlapCount"] if "overlapCount" in json_data else None,
+                json_data["overlapTol"] if "overlapTol" in json_data else None,
+                json_data["resolveSpikes"] if "resolveSpikes" in json_data else None,
+                json_data["resolveIntersections"] if "resolveIntersections" in json_data else None,
+                json_data["inflateDihedralFaceNodes"] if "inflateDihedralFaceNodes" in json_data else None,
+                json_data["resolveInvalidNodeNormals"] if "resolveInvalidNodeNormals" in json_data else None,
+                json_data["aggressively"] if "aggressively" in json_data else None,
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [target_skewness, island_count, island_tol, overlap_count, overlap_tol, resolve_spikes, resolve_intersections, inflate_dihedral_face_nodes, resolve_invalid_node_normals, aggressively, number_of_threads])
             if all_field_specified:
@@ -549,19 +563,20 @@ class WrapperImproveQualityParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WrapperImproveQualityParams")["WrapperImproveQualityParams"]
+                    param_json = model._communicator.initialize_params(model, "WrapperImproveQualityParams")
+                    json_data = param_json["WrapperImproveQualityParams"] if "WrapperImproveQualityParams" in param_json else {}
                     self.__initialize(
-                        target_skewness if target_skewness is not None else ( WrapperImproveQualityParams._default_params["target_skewness"] if "target_skewness" in WrapperImproveQualityParams._default_params else json_data["targetSkewness"]),
-                        island_count if island_count is not None else ( WrapperImproveQualityParams._default_params["island_count"] if "island_count" in WrapperImproveQualityParams._default_params else json_data["islandCount"]),
-                        island_tol if island_tol is not None else ( WrapperImproveQualityParams._default_params["island_tol"] if "island_tol" in WrapperImproveQualityParams._default_params else json_data["islandTol"]),
-                        overlap_count if overlap_count is not None else ( WrapperImproveQualityParams._default_params["overlap_count"] if "overlap_count" in WrapperImproveQualityParams._default_params else json_data["overlapCount"]),
-                        overlap_tol if overlap_tol is not None else ( WrapperImproveQualityParams._default_params["overlap_tol"] if "overlap_tol" in WrapperImproveQualityParams._default_params else json_data["overlapTol"]),
-                        resolve_spikes if resolve_spikes is not None else ( WrapperImproveQualityParams._default_params["resolve_spikes"] if "resolve_spikes" in WrapperImproveQualityParams._default_params else json_data["resolveSpikes"]),
-                        resolve_intersections if resolve_intersections is not None else ( WrapperImproveQualityParams._default_params["resolve_intersections"] if "resolve_intersections" in WrapperImproveQualityParams._default_params else json_data["resolveIntersections"]),
-                        inflate_dihedral_face_nodes if inflate_dihedral_face_nodes is not None else ( WrapperImproveQualityParams._default_params["inflate_dihedral_face_nodes"] if "inflate_dihedral_face_nodes" in WrapperImproveQualityParams._default_params else json_data["inflateDihedralFaceNodes"]),
-                        resolve_invalid_node_normals if resolve_invalid_node_normals is not None else ( WrapperImproveQualityParams._default_params["resolve_invalid_node_normals"] if "resolve_invalid_node_normals" in WrapperImproveQualityParams._default_params else json_data["resolveInvalidNodeNormals"]),
-                        aggressively if aggressively is not None else ( WrapperImproveQualityParams._default_params["aggressively"] if "aggressively" in WrapperImproveQualityParams._default_params else json_data["aggressively"]),
-                        number_of_threads if number_of_threads is not None else ( WrapperImproveQualityParams._default_params["number_of_threads"] if "number_of_threads" in WrapperImproveQualityParams._default_params else json_data["numberOfThreads"]))
+                        target_skewness if target_skewness is not None else ( WrapperImproveQualityParams._default_params["target_skewness"] if "target_skewness" in WrapperImproveQualityParams._default_params else (json_data["targetSkewness"] if "targetSkewness" in json_data else None)),
+                        island_count if island_count is not None else ( WrapperImproveQualityParams._default_params["island_count"] if "island_count" in WrapperImproveQualityParams._default_params else (json_data["islandCount"] if "islandCount" in json_data else None)),
+                        island_tol if island_tol is not None else ( WrapperImproveQualityParams._default_params["island_tol"] if "island_tol" in WrapperImproveQualityParams._default_params else (json_data["islandTol"] if "islandTol" in json_data else None)),
+                        overlap_count if overlap_count is not None else ( WrapperImproveQualityParams._default_params["overlap_count"] if "overlap_count" in WrapperImproveQualityParams._default_params else (json_data["overlapCount"] if "overlapCount" in json_data else None)),
+                        overlap_tol if overlap_tol is not None else ( WrapperImproveQualityParams._default_params["overlap_tol"] if "overlap_tol" in WrapperImproveQualityParams._default_params else (json_data["overlapTol"] if "overlapTol" in json_data else None)),
+                        resolve_spikes if resolve_spikes is not None else ( WrapperImproveQualityParams._default_params["resolve_spikes"] if "resolve_spikes" in WrapperImproveQualityParams._default_params else (json_data["resolveSpikes"] if "resolveSpikes" in json_data else None)),
+                        resolve_intersections if resolve_intersections is not None else ( WrapperImproveQualityParams._default_params["resolve_intersections"] if "resolve_intersections" in WrapperImproveQualityParams._default_params else (json_data["resolveIntersections"] if "resolveIntersections" in json_data else None)),
+                        inflate_dihedral_face_nodes if inflate_dihedral_face_nodes is not None else ( WrapperImproveQualityParams._default_params["inflate_dihedral_face_nodes"] if "inflate_dihedral_face_nodes" in WrapperImproveQualityParams._default_params else (json_data["inflateDihedralFaceNodes"] if "inflateDihedralFaceNodes" in json_data else None)),
+                        resolve_invalid_node_normals if resolve_invalid_node_normals is not None else ( WrapperImproveQualityParams._default_params["resolve_invalid_node_normals"] if "resolve_invalid_node_normals" in WrapperImproveQualityParams._default_params else (json_data["resolveInvalidNodeNormals"] if "resolveInvalidNodeNormals" in json_data else None)),
+                        aggressively if aggressively is not None else ( WrapperImproveQualityParams._default_params["aggressively"] if "aggressively" in WrapperImproveQualityParams._default_params else (json_data["aggressively"] if "aggressively" in json_data else None)),
+                        number_of_threads if number_of_threads is not None else ( WrapperImproveQualityParams._default_params["number_of_threads"] if "number_of_threads" in WrapperImproveQualityParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -626,17 +641,28 @@ class WrapperImproveQualityParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["targetSkewness"] = self._target_skewness
-        json_data["islandCount"] = self._island_count
-        json_data["islandTol"] = self._island_tol
-        json_data["overlapCount"] = self._overlap_count
-        json_data["overlapTol"] = self._overlap_tol
-        json_data["resolveSpikes"] = self._resolve_spikes
-        json_data["resolveIntersections"] = self._resolve_intersections
-        json_data["inflateDihedralFaceNodes"] = self._inflate_dihedral_face_nodes
-        json_data["resolveInvalidNodeNormals"] = self._resolve_invalid_node_normals
-        json_data["aggressively"] = self._aggressively
-        json_data["numberOfThreads"] = self._number_of_threads
+        if self._target_skewness is not None:
+            json_data["targetSkewness"] = self._target_skewness
+        if self._island_count is not None:
+            json_data["islandCount"] = self._island_count
+        if self._island_tol is not None:
+            json_data["islandTol"] = self._island_tol
+        if self._overlap_count is not None:
+            json_data["overlapCount"] = self._overlap_count
+        if self._overlap_tol is not None:
+            json_data["overlapTol"] = self._overlap_tol
+        if self._resolve_spikes is not None:
+            json_data["resolveSpikes"] = self._resolve_spikes
+        if self._resolve_intersections is not None:
+            json_data["resolveIntersections"] = self._resolve_intersections
+        if self._inflate_dihedral_face_nodes is not None:
+            json_data["inflateDihedralFaceNodes"] = self._inflate_dihedral_face_nodes
+        if self._resolve_invalid_node_normals is not None:
+            json_data["resolveInvalidNodeNormals"] = self._resolve_invalid_node_normals
+        if self._aggressively is not None:
+            json_data["aggressively"] = self._aggressively
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -808,11 +834,11 @@ class WrapperImproveResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["nSkewFound"],
-                json_data["remainingSkewFaces"],
-                json_data["nFaceIntersectionsFound"],
-                json_data["unresolvedFaceIntersections"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["nSkewFound"] if "nSkewFound" in json_data else None,
+                json_data["remainingSkewFaces"] if "remainingSkewFaces" in json_data else None,
+                json_data["nFaceIntersectionsFound"] if "nFaceIntersectionsFound" in json_data else None,
+                json_data["unresolvedFaceIntersections"] if "unresolvedFaceIntersections" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, n_skew_found, remaining_skew_faces, n_face_intersections_found, unresolved_face_intersections])
             if all_field_specified:
@@ -826,13 +852,14 @@ class WrapperImproveResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WrapperImproveResult")["WrapperImproveResult"]
+                    param_json = model._communicator.initialize_params(model, "WrapperImproveResult")
+                    json_data = param_json["WrapperImproveResult"] if "WrapperImproveResult" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( WrapperImproveResult._default_params["error_code"] if "error_code" in WrapperImproveResult._default_params else ErrorCode(json_data["errorCode"])),
-                        n_skew_found if n_skew_found is not None else ( WrapperImproveResult._default_params["n_skew_found"] if "n_skew_found" in WrapperImproveResult._default_params else json_data["nSkewFound"]),
-                        remaining_skew_faces if remaining_skew_faces is not None else ( WrapperImproveResult._default_params["remaining_skew_faces"] if "remaining_skew_faces" in WrapperImproveResult._default_params else json_data["remainingSkewFaces"]),
-                        n_face_intersections_found if n_face_intersections_found is not None else ( WrapperImproveResult._default_params["n_face_intersections_found"] if "n_face_intersections_found" in WrapperImproveResult._default_params else json_data["nFaceIntersectionsFound"]),
-                        unresolved_face_intersections if unresolved_face_intersections is not None else ( WrapperImproveResult._default_params["unresolved_face_intersections"] if "unresolved_face_intersections" in WrapperImproveResult._default_params else json_data["unresolvedFaceIntersections"]))
+                        error_code if error_code is not None else ( WrapperImproveResult._default_params["error_code"] if "error_code" in WrapperImproveResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        n_skew_found if n_skew_found is not None else ( WrapperImproveResult._default_params["n_skew_found"] if "n_skew_found" in WrapperImproveResult._default_params else (json_data["nSkewFound"] if "nSkewFound" in json_data else None)),
+                        remaining_skew_faces if remaining_skew_faces is not None else ( WrapperImproveResult._default_params["remaining_skew_faces"] if "remaining_skew_faces" in WrapperImproveResult._default_params else (json_data["remainingSkewFaces"] if "remainingSkewFaces" in json_data else None)),
+                        n_face_intersections_found if n_face_intersections_found is not None else ( WrapperImproveResult._default_params["n_face_intersections_found"] if "n_face_intersections_found" in WrapperImproveResult._default_params else (json_data["nFaceIntersectionsFound"] if "nFaceIntersectionsFound" in json_data else None)),
+                        unresolved_face_intersections if unresolved_face_intersections is not None else ( WrapperImproveResult._default_params["unresolved_face_intersections"] if "unresolved_face_intersections" in WrapperImproveResult._default_params else (json_data["unresolvedFaceIntersections"] if "unresolvedFaceIntersections" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -879,11 +906,16 @@ class WrapperImproveResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["nSkewFound"] = self._n_skew_found
-        json_data["remainingSkewFaces"] = self._remaining_skew_faces
-        json_data["nFaceIntersectionsFound"] = self._n_face_intersections_found
-        json_data["unresolvedFaceIntersections"] = self._unresolved_face_intersections
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._n_skew_found is not None:
+            json_data["nSkewFound"] = self._n_skew_found
+        if self._remaining_skew_faces is not None:
+            json_data["remainingSkewFaces"] = self._remaining_skew_faces
+        if self._n_face_intersections_found is not None:
+            json_data["nFaceIntersectionsFound"] = self._n_face_intersections_found
+        if self._unresolved_face_intersections is not None:
+            json_data["unresolvedFaceIntersections"] = self._unresolved_face_intersections
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -996,11 +1028,11 @@ class WrapperCloseGapsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ScopeDefinition(model = model, json_data = json_data["target"]),
-                json_data["gapSize"],
-                json_data["materialPointName"],
-                json_data["suggestedPartName"],
-                json_data["numberOfThreads"])
+                ScopeDefinition(model = model, json_data = json_data["target"] if "target" in json_data else None),
+                json_data["gapSize"] if "gapSize" in json_data else None,
+                json_data["materialPointName"] if "materialPointName" in json_data else None,
+                json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [target, gap_size, material_point_name, suggested_part_name, number_of_threads])
             if all_field_specified:
@@ -1014,13 +1046,14 @@ class WrapperCloseGapsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WrapperCloseGapsParams")["WrapperCloseGapsParams"]
+                    param_json = model._communicator.initialize_params(model, "WrapperCloseGapsParams")
+                    json_data = param_json["WrapperCloseGapsParams"] if "WrapperCloseGapsParams" in param_json else {}
                     self.__initialize(
-                        target if target is not None else ( WrapperCloseGapsParams._default_params["target"] if "target" in WrapperCloseGapsParams._default_params else ScopeDefinition(model = model, json_data = json_data["target"])),
-                        gap_size if gap_size is not None else ( WrapperCloseGapsParams._default_params["gap_size"] if "gap_size" in WrapperCloseGapsParams._default_params else json_data["gapSize"]),
-                        material_point_name if material_point_name is not None else ( WrapperCloseGapsParams._default_params["material_point_name"] if "material_point_name" in WrapperCloseGapsParams._default_params else json_data["materialPointName"]),
-                        suggested_part_name if suggested_part_name is not None else ( WrapperCloseGapsParams._default_params["suggested_part_name"] if "suggested_part_name" in WrapperCloseGapsParams._default_params else json_data["suggestedPartName"]),
-                        number_of_threads if number_of_threads is not None else ( WrapperCloseGapsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperCloseGapsParams._default_params else json_data["numberOfThreads"]))
+                        target if target is not None else ( WrapperCloseGapsParams._default_params["target"] if "target" in WrapperCloseGapsParams._default_params else ScopeDefinition(model = model, json_data = (json_data["target"] if "target" in json_data else None))),
+                        gap_size if gap_size is not None else ( WrapperCloseGapsParams._default_params["gap_size"] if "gap_size" in WrapperCloseGapsParams._default_params else (json_data["gapSize"] if "gapSize" in json_data else None)),
+                        material_point_name if material_point_name is not None else ( WrapperCloseGapsParams._default_params["material_point_name"] if "material_point_name" in WrapperCloseGapsParams._default_params else (json_data["materialPointName"] if "materialPointName" in json_data else None)),
+                        suggested_part_name if suggested_part_name is not None else ( WrapperCloseGapsParams._default_params["suggested_part_name"] if "suggested_part_name" in WrapperCloseGapsParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
+                        number_of_threads if number_of_threads is not None else ( WrapperCloseGapsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperCloseGapsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1067,11 +1100,16 @@ class WrapperCloseGapsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["target"] = self._target._jsonify()
-        json_data["gapSize"] = self._gap_size
-        json_data["materialPointName"] = self._material_point_name
-        json_data["suggestedPartName"] = self._suggested_part_name
-        json_data["numberOfThreads"] = self._number_of_threads
+        if self._target is not None:
+            json_data["target"] = self._target._jsonify()
+        if self._gap_size is not None:
+            json_data["gapSize"] = self._gap_size
+        if self._material_point_name is not None:
+            json_data["materialPointName"] = self._material_point_name
+        if self._suggested_part_name is not None:
+            json_data["suggestedPartName"] = self._suggested_part_name
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1168,8 +1206,8 @@ class WrapperCloseGapsResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["partId"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["partId"] if "partId" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, part_id])
             if all_field_specified:
@@ -1180,10 +1218,11 @@ class WrapperCloseGapsResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WrapperCloseGapsResult")["WrapperCloseGapsResult"]
+                    param_json = model._communicator.initialize_params(model, "WrapperCloseGapsResult")
+                    json_data = param_json["WrapperCloseGapsResult"] if "WrapperCloseGapsResult" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( WrapperCloseGapsResult._default_params["error_code"] if "error_code" in WrapperCloseGapsResult._default_params else ErrorCode(json_data["errorCode"])),
-                        part_id if part_id is not None else ( WrapperCloseGapsResult._default_params["part_id"] if "part_id" in WrapperCloseGapsResult._default_params else json_data["partId"]))
+                        error_code if error_code is not None else ( WrapperCloseGapsResult._default_params["error_code"] if "error_code" in WrapperCloseGapsResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        part_id if part_id is not None else ( WrapperCloseGapsResult._default_params["part_id"] if "part_id" in WrapperCloseGapsResult._default_params else (json_data["partId"] if "partId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1221,8 +1260,10 @@ class WrapperCloseGapsResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["partId"] = self._part_id
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._part_id is not None:
+            json_data["partId"] = self._part_id
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

@@ -66,6 +66,42 @@ class SurfaceSearch(CoreObject):
         self._model._print_logs_after_command("search_zonelets_by_quality", SearchByQualityResults(model = self._model, json_data = result))
         return SearchByQualityResults(model = self._model, json_data = result)
 
+    def search_zonelets_by_self_intersections(self, part_id : int, face_zonelets : Iterable[int], register_id : int, params : SearchBySelfIntersectionParams) -> SearchByIntersectionResults:
+        """ Search face zonelets to identify face elements intersecting with each other.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of part.
+        face_zonelets : Iterable[int]
+            Ids of face zonelets.
+        register_id : int
+            Id of register.
+        params : SearchBySelfIntersectionParams
+            Parameters used to identify face elements by self intersection.
+
+        Returns
+        -------
+        SearchByIntersectionResults
+            Returns the SearchByIntersectionResults.
+
+        Examples
+        --------
+        >>> surf_search = SurfaceSearch(model=model)
+        >>> results = surf_search.search_zonelets_by_self_intersections(part_id, face_zonelets, register_id, params)
+
+        """
+        args = {"part_id" : part_id,
+        "face_zonelets" : face_zonelets,
+        "register_id" : register_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsBySelfIntersections"
+        self._model._print_logs_before_command("search_zonelets_by_self_intersections", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("search_zonelets_by_self_intersections", SearchByIntersectionResults(model = self._model, json_data = result))
+        return SearchByIntersectionResults(model = self._model, json_data = result)
+
     def search_zonelets_by_spikes(self, part_id : int, face_zonelets : Iterable[int], register_id : int, params : SearchBySpikeParams) -> SearchBySpikeResults:
         """ Search face zonelets to identify spikes.
 
@@ -140,6 +176,42 @@ class SurfaceSearch(CoreObject):
         self._model._print_logs_after_command("search_zonelets_by_folds", SearchByFoldsResults(model = self._model, json_data = result))
         return SearchByFoldsResults(model = self._model, json_data = result)
 
+    def search_zonelets_by_thin_strips(self, part_id : int, face_zonelets : Iterable[int], register_id : int, params : SearchByThinStripParams) -> SearchByThinStripResults:
+        """ Search face zonelets to identify face element of thin strips(single layer of triangles between features).
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of part.
+        face_zonelets : Iterable[int]
+            Ids of face zonelets.
+        register_id : int
+            Id of register.
+        params : SearchByThinStripParams
+            Parameters used to identify face elements of thin strips.
+
+        Returns
+        -------
+        SearchByThinStripResults
+            Returns the SearchByThinStripResults.
+
+        Examples
+        --------
+        >>> surf_search = SurfaceSearch(model=model)
+        >>> results = surf_search.search_zonelets_by_thin_strips(part_id, face_zonelets, register_id, params)
+
+        """
+        args = {"part_id" : part_id,
+        "face_zonelets" : face_zonelets,
+        "register_id" : register_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsByThinStrips"
+        self._model._print_logs_before_command("search_zonelets_by_thin_strips", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("search_zonelets_by_thin_strips", SearchByThinStripResults(model = self._model, json_data = result))
+        return SearchByThinStripResults(model = self._model, json_data = result)
+
     def get_surface_quality_summary(self, params : SurfaceQualitySummaryParams) -> SurfaceQualitySummaryResults:
         """ Gets the surface quality summary.
 
@@ -196,3 +268,37 @@ class SurfaceSearch(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_surface_diagnostic_summary", SurfaceDiagnosticSummaryResults(model = self._model, json_data = result))
         return SurfaceDiagnosticSummaryResults(model = self._model, json_data = result)
+
+    def get_search_info_by_register_id(self, face_zonelets : Iterable[int], register_id : int, params : SearchInfoByRegisterIdParams) -> SearchInfoByRegisterIdResults:
+        """ Gets search information regarding registered face elements of provided zonelets using a register id.
+
+
+        Parameters
+        ----------
+        face_zonelets : Iterable[int]
+            Ids of the face zonelets to search in.
+        register_id : int
+            An integer register id.
+        params : SearchInfoByRegisterIdParams
+            Parameters for retrieveing information on registered faces.
+
+        Returns
+        -------
+        SearchInfoByRegisterIdResults
+            Returns the SearchInfoByRegisterIdResults.
+
+        Examples
+        --------
+        >>> surf_search = SurfaceSearch(model=model)
+        >>> params = prime.SearchInfoByRegisterIdParams(model=model)
+        >>> results = surf_search.get_search_info_by_register_id(face_zonelets, register_id, params)
+
+        """
+        args = {"face_zonelets" : face_zonelets,
+        "register_id" : register_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceSearch/GetSearchInfoByRegisterId"
+        self._model._print_logs_before_command("get_search_info_by_register_id", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_search_info_by_register_id", SearchInfoByRegisterIdResults(model = self._model, json_data = result))
+        return SearchInfoByRegisterIdResults(model = self._model, json_data = result)

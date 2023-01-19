@@ -36,7 +36,7 @@ class IGAResults(CoreObject):
             spline_ids: Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._warning_code = WarningCode(warning_code)
-        self._spline_ids = spline_ids if isinstance(spline_ids, np.ndarray) else np.array(spline_ids, dtype=np.int32)
+        self._spline_ids = spline_ids if isinstance(spline_ids, np.ndarray) else np.array(spline_ids, dtype=np.int32) if spline_ids is not None else None
 
     def __init__(
             self,
@@ -67,9 +67,9 @@ class IGAResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                WarningCode(json_data["warningCode"]),
-                json_data["splineIds"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                WarningCode(json_data["warningCode"] if "warningCode" in json_data else None),
+                json_data["splineIds"] if "splineIds" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, warning_code, spline_ids])
             if all_field_specified:
@@ -81,11 +81,12 @@ class IGAResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "IGAResults")["IGAResults"]
+                    param_json = model._communicator.initialize_params(model, "IGAResults")
+                    json_data = param_json["IGAResults"] if "IGAResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( IGAResults._default_params["error_code"] if "error_code" in IGAResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_code if warning_code is not None else ( IGAResults._default_params["warning_code"] if "warning_code" in IGAResults._default_params else WarningCode(json_data["warningCode"])),
-                        spline_ids if spline_ids is not None else ( IGAResults._default_params["spline_ids"] if "spline_ids" in IGAResults._default_params else json_data["splineIds"]))
+                        error_code if error_code is not None else ( IGAResults._default_params["error_code"] if "error_code" in IGAResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_code if warning_code is not None else ( IGAResults._default_params["warning_code"] if "warning_code" in IGAResults._default_params else WarningCode(json_data["warningCode"] if "warningCode" in json_data else None)),
+                        spline_ids if spline_ids is not None else ( IGAResults._default_params["spline_ids"] if "spline_ids" in IGAResults._default_params else (json_data["splineIds"] if "splineIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -126,9 +127,12 @@ class IGAResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["warningCode"] = self._warning_code
-        json_data["splineIds"] = self._spline_ids
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_code is not None:
+            json_data["warningCode"] = self._warning_code
+        if self._spline_ids is not None:
+            json_data["splineIds"] = self._spline_ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -200,7 +204,7 @@ class IGASpline(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["id"])
+                json_data["id"] if "id" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [id])
             if all_field_specified:
@@ -210,9 +214,10 @@ class IGASpline(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "IGASpline")["IGASpline"]
+                    param_json = model._communicator.initialize_params(model, "IGASpline")
+                    json_data = param_json["IGASpline"] if "IGASpline" in param_json else {}
                     self.__initialize(
-                        id if id is not None else ( IGASpline._default_params["id"] if "id" in IGASpline._default_params else json_data["id"]))
+                        id if id is not None else ( IGASpline._default_params["id"] if "id" in IGASpline._default_params else (json_data["id"] if "id" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -247,7 +252,8 @@ class IGASpline(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["id"] = self._id
+        if self._id is not None:
+            json_data["id"] = self._id
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -349,17 +355,17 @@ class BoundaryFittedSplineParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["degreeU"],
-                json_data["degreeV"],
-                json_data["degreeW"],
-                json_data["refinementFractionU"],
-                json_data["refinementFractionV"],
-                json_data["refinementFractionW"],
-                json_data["controlPointsCountU"],
-                json_data["controlPointsCountV"],
-                json_data["controlPointsCountW"],
-                json_data["nRefine"],
-                ControlPointSelection(json_data["controlPointSelectionType"]))
+                json_data["degreeU"] if "degreeU" in json_data else None,
+                json_data["degreeV"] if "degreeV" in json_data else None,
+                json_data["degreeW"] if "degreeW" in json_data else None,
+                json_data["refinementFractionU"] if "refinementFractionU" in json_data else None,
+                json_data["refinementFractionV"] if "refinementFractionV" in json_data else None,
+                json_data["refinementFractionW"] if "refinementFractionW" in json_data else None,
+                json_data["controlPointsCountU"] if "controlPointsCountU" in json_data else None,
+                json_data["controlPointsCountV"] if "controlPointsCountV" in json_data else None,
+                json_data["controlPointsCountW"] if "controlPointsCountW" in json_data else None,
+                json_data["nRefine"] if "nRefine" in json_data else None,
+                ControlPointSelection(json_data["controlPointSelectionType"] if "controlPointSelectionType" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [degree_u, degree_v, degree_w, refinement_fraction_u, refinement_fraction_v, refinement_fraction_w, control_points_count_u, control_points_count_v, control_points_count_w, n_refine, control_point_selection_type])
             if all_field_specified:
@@ -379,19 +385,20 @@ class BoundaryFittedSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "BoundaryFittedSplineParams")["BoundaryFittedSplineParams"]
+                    param_json = model._communicator.initialize_params(model, "BoundaryFittedSplineParams")
+                    json_data = param_json["BoundaryFittedSplineParams"] if "BoundaryFittedSplineParams" in param_json else {}
                     self.__initialize(
-                        degree_u if degree_u is not None else ( BoundaryFittedSplineParams._default_params["degree_u"] if "degree_u" in BoundaryFittedSplineParams._default_params else json_data["degreeU"]),
-                        degree_v if degree_v is not None else ( BoundaryFittedSplineParams._default_params["degree_v"] if "degree_v" in BoundaryFittedSplineParams._default_params else json_data["degreeV"]),
-                        degree_w if degree_w is not None else ( BoundaryFittedSplineParams._default_params["degree_w"] if "degree_w" in BoundaryFittedSplineParams._default_params else json_data["degreeW"]),
-                        refinement_fraction_u if refinement_fraction_u is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_u"] if "refinement_fraction_u" in BoundaryFittedSplineParams._default_params else json_data["refinementFractionU"]),
-                        refinement_fraction_v if refinement_fraction_v is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_v"] if "refinement_fraction_v" in BoundaryFittedSplineParams._default_params else json_data["refinementFractionV"]),
-                        refinement_fraction_w if refinement_fraction_w is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_w"] if "refinement_fraction_w" in BoundaryFittedSplineParams._default_params else json_data["refinementFractionW"]),
-                        control_points_count_u if control_points_count_u is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_u"] if "control_points_count_u" in BoundaryFittedSplineParams._default_params else json_data["controlPointsCountU"]),
-                        control_points_count_v if control_points_count_v is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_v"] if "control_points_count_v" in BoundaryFittedSplineParams._default_params else json_data["controlPointsCountV"]),
-                        control_points_count_w if control_points_count_w is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_w"] if "control_points_count_w" in BoundaryFittedSplineParams._default_params else json_data["controlPointsCountW"]),
-                        n_refine if n_refine is not None else ( BoundaryFittedSplineParams._default_params["n_refine"] if "n_refine" in BoundaryFittedSplineParams._default_params else json_data["nRefine"]),
-                        control_point_selection_type if control_point_selection_type is not None else ( BoundaryFittedSplineParams._default_params["control_point_selection_type"] if "control_point_selection_type" in BoundaryFittedSplineParams._default_params else ControlPointSelection(json_data["controlPointSelectionType"])))
+                        degree_u if degree_u is not None else ( BoundaryFittedSplineParams._default_params["degree_u"] if "degree_u" in BoundaryFittedSplineParams._default_params else (json_data["degreeU"] if "degreeU" in json_data else None)),
+                        degree_v if degree_v is not None else ( BoundaryFittedSplineParams._default_params["degree_v"] if "degree_v" in BoundaryFittedSplineParams._default_params else (json_data["degreeV"] if "degreeV" in json_data else None)),
+                        degree_w if degree_w is not None else ( BoundaryFittedSplineParams._default_params["degree_w"] if "degree_w" in BoundaryFittedSplineParams._default_params else (json_data["degreeW"] if "degreeW" in json_data else None)),
+                        refinement_fraction_u if refinement_fraction_u is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_u"] if "refinement_fraction_u" in BoundaryFittedSplineParams._default_params else (json_data["refinementFractionU"] if "refinementFractionU" in json_data else None)),
+                        refinement_fraction_v if refinement_fraction_v is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_v"] if "refinement_fraction_v" in BoundaryFittedSplineParams._default_params else (json_data["refinementFractionV"] if "refinementFractionV" in json_data else None)),
+                        refinement_fraction_w if refinement_fraction_w is not None else ( BoundaryFittedSplineParams._default_params["refinement_fraction_w"] if "refinement_fraction_w" in BoundaryFittedSplineParams._default_params else (json_data["refinementFractionW"] if "refinementFractionW" in json_data else None)),
+                        control_points_count_u if control_points_count_u is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_u"] if "control_points_count_u" in BoundaryFittedSplineParams._default_params else (json_data["controlPointsCountU"] if "controlPointsCountU" in json_data else None)),
+                        control_points_count_v if control_points_count_v is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_v"] if "control_points_count_v" in BoundaryFittedSplineParams._default_params else (json_data["controlPointsCountV"] if "controlPointsCountV" in json_data else None)),
+                        control_points_count_w if control_points_count_w is not None else ( BoundaryFittedSplineParams._default_params["control_points_count_w"] if "control_points_count_w" in BoundaryFittedSplineParams._default_params else (json_data["controlPointsCountW"] if "controlPointsCountW" in json_data else None)),
+                        n_refine if n_refine is not None else ( BoundaryFittedSplineParams._default_params["n_refine"] if "n_refine" in BoundaryFittedSplineParams._default_params else (json_data["nRefine"] if "nRefine" in json_data else None)),
+                        control_point_selection_type if control_point_selection_type is not None else ( BoundaryFittedSplineParams._default_params["control_point_selection_type"] if "control_point_selection_type" in BoundaryFittedSplineParams._default_params else ControlPointSelection(json_data["controlPointSelectionType"] if "controlPointSelectionType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -456,17 +463,28 @@ class BoundaryFittedSplineParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["degreeU"] = self._degree_u
-        json_data["degreeV"] = self._degree_v
-        json_data["degreeW"] = self._degree_w
-        json_data["refinementFractionU"] = self._refinement_fraction_u
-        json_data["refinementFractionV"] = self._refinement_fraction_v
-        json_data["refinementFractionW"] = self._refinement_fraction_w
-        json_data["controlPointsCountU"] = self._control_points_count_u
-        json_data["controlPointsCountV"] = self._control_points_count_v
-        json_data["controlPointsCountW"] = self._control_points_count_w
-        json_data["nRefine"] = self._n_refine
-        json_data["controlPointSelectionType"] = self._control_point_selection_type
+        if self._degree_u is not None:
+            json_data["degreeU"] = self._degree_u
+        if self._degree_v is not None:
+            json_data["degreeV"] = self._degree_v
+        if self._degree_w is not None:
+            json_data["degreeW"] = self._degree_w
+        if self._refinement_fraction_u is not None:
+            json_data["refinementFractionU"] = self._refinement_fraction_u
+        if self._refinement_fraction_v is not None:
+            json_data["refinementFractionV"] = self._refinement_fraction_v
+        if self._refinement_fraction_w is not None:
+            json_data["refinementFractionW"] = self._refinement_fraction_w
+        if self._control_points_count_u is not None:
+            json_data["controlPointsCountU"] = self._control_points_count_u
+        if self._control_points_count_v is not None:
+            json_data["controlPointsCountV"] = self._control_points_count_v
+        if self._control_points_count_w is not None:
+            json_data["controlPointsCountW"] = self._control_points_count_w
+        if self._n_refine is not None:
+            json_data["nRefine"] = self._n_refine
+        if self._control_point_selection_type is not None:
+            json_data["controlPointSelectionType"] = self._control_point_selection_type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -633,10 +651,10 @@ class RefineSplineParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["refineFlagU"],
-                json_data["refineFlagV"],
-                json_data["refineFlagW"],
-                SplineRefinementType(json_data["splineRefinementType"]))
+                json_data["refineFlagU"] if "refineFlagU" in json_data else None,
+                json_data["refineFlagV"] if "refineFlagV" in json_data else None,
+                json_data["refineFlagW"] if "refineFlagW" in json_data else None,
+                SplineRefinementType(json_data["splineRefinementType"] if "splineRefinementType" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [refine_flag_u, refine_flag_v, refine_flag_w, spline_refinement_type])
             if all_field_specified:
@@ -649,12 +667,13 @@ class RefineSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "RefineSplineParams")["RefineSplineParams"]
+                    param_json = model._communicator.initialize_params(model, "RefineSplineParams")
+                    json_data = param_json["RefineSplineParams"] if "RefineSplineParams" in param_json else {}
                     self.__initialize(
-                        refine_flag_u if refine_flag_u is not None else ( RefineSplineParams._default_params["refine_flag_u"] if "refine_flag_u" in RefineSplineParams._default_params else json_data["refineFlagU"]),
-                        refine_flag_v if refine_flag_v is not None else ( RefineSplineParams._default_params["refine_flag_v"] if "refine_flag_v" in RefineSplineParams._default_params else json_data["refineFlagV"]),
-                        refine_flag_w if refine_flag_w is not None else ( RefineSplineParams._default_params["refine_flag_w"] if "refine_flag_w" in RefineSplineParams._default_params else json_data["refineFlagW"]),
-                        spline_refinement_type if spline_refinement_type is not None else ( RefineSplineParams._default_params["spline_refinement_type"] if "spline_refinement_type" in RefineSplineParams._default_params else SplineRefinementType(json_data["splineRefinementType"])))
+                        refine_flag_u if refine_flag_u is not None else ( RefineSplineParams._default_params["refine_flag_u"] if "refine_flag_u" in RefineSplineParams._default_params else (json_data["refineFlagU"] if "refineFlagU" in json_data else None)),
+                        refine_flag_v if refine_flag_v is not None else ( RefineSplineParams._default_params["refine_flag_v"] if "refine_flag_v" in RefineSplineParams._default_params else (json_data["refineFlagV"] if "refineFlagV" in json_data else None)),
+                        refine_flag_w if refine_flag_w is not None else ( RefineSplineParams._default_params["refine_flag_w"] if "refine_flag_w" in RefineSplineParams._default_params else (json_data["refineFlagW"] if "refineFlagW" in json_data else None)),
+                        spline_refinement_type if spline_refinement_type is not None else ( RefineSplineParams._default_params["spline_refinement_type"] if "spline_refinement_type" in RefineSplineParams._default_params else SplineRefinementType(json_data["splineRefinementType"] if "splineRefinementType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -698,10 +717,14 @@ class RefineSplineParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["refineFlagU"] = self._refine_flag_u
-        json_data["refineFlagV"] = self._refine_flag_v
-        json_data["refineFlagW"] = self._refine_flag_w
-        json_data["splineRefinementType"] = self._spline_refinement_type
+        if self._refine_flag_u is not None:
+            json_data["refineFlagU"] = self._refine_flag_u
+        if self._refine_flag_v is not None:
+            json_data["refineFlagV"] = self._refine_flag_v
+        if self._refine_flag_w is not None:
+            json_data["refineFlagW"] = self._refine_flag_w
+        if self._spline_refinement_type is not None:
+            json_data["splineRefinementType"] = self._spline_refinement_type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

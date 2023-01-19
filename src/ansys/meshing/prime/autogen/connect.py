@@ -109,6 +109,42 @@ class Connect(CoreObject):
         self._model._print_logs_after_command("join_face_zonelets", ConnectResults(model = self._model, json_data = result))
         return ConnectResults(model = self._model, json_data = result)
 
+    def subtract_volumes(self, part_id : int, target_volumes : Iterable[int], cutter_volumes : Iterable[int], params : SubtractVolumesParams) -> SubtractVolumesResults:
+        """ Subtract cutter volumes from target volumes.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of a part.
+        target_volumes : Iterable[int]
+            Ids of target volumes.
+        cutter_volumes : Iterable[int]
+            Ids of cutter volumes.
+        params : SubtractVolumesParams
+            Parameters to control subtraction of volumes.
+
+        Returns
+        -------
+        SubtractVolumesResults
+            Returns the SubtractVolumesResults.
+
+
+        Examples
+        --------
+        >>> results = connect.subtract_volumes(part_id, target_volumes, cutter_volumes, params)
+
+        """
+        args = {"part_id" : part_id,
+        "target_volumes" : target_volumes,
+        "cutter_volumes" : cutter_volumes,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Connect/SubtractVolumes"
+        self._model._print_logs_before_command("subtract_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("subtract_volumes", SubtractVolumesResults(model = self._model, json_data = result))
+        return SubtractVolumesResults(model = self._model, json_data = result)
+
     def stitch_face_zonelets(self, part_id : int, face_zonelet_ids : Iterable[int], with_face_zonelet_ids : Iterable[int], params : StitchParams) -> ConnectResults:
         """ Stitches a set of face zonelets with another set of face zones.
 

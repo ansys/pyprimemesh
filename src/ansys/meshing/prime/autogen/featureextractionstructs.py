@@ -66,12 +66,12 @@ class ExtractFeatureParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["replace"],
-                json_data["featureAngle"],
-                json_data["separateFeatures"],
-                json_data["separationAngle"],
-                json_data["disconnectWithFaces"],
-                json_data["labelName"])
+                json_data["replace"] if "replace" in json_data else None,
+                json_data["featureAngle"] if "featureAngle" in json_data else None,
+                json_data["separateFeatures"] if "separateFeatures" in json_data else None,
+                json_data["separationAngle"] if "separationAngle" in json_data else None,
+                json_data["disconnectWithFaces"] if "disconnectWithFaces" in json_data else None,
+                json_data["labelName"] if "labelName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [replace, feature_angle, separate_features, separation_angle, disconnect_with_faces, label_name])
             if all_field_specified:
@@ -86,14 +86,15 @@ class ExtractFeatureParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractFeatureParams")["ExtractFeatureParams"]
+                    param_json = model._communicator.initialize_params(model, "ExtractFeatureParams")
+                    json_data = param_json["ExtractFeatureParams"] if "ExtractFeatureParams" in param_json else {}
                     self.__initialize(
-                        replace if replace is not None else ( ExtractFeatureParams._default_params["replace"] if "replace" in ExtractFeatureParams._default_params else json_data["replace"]),
-                        feature_angle if feature_angle is not None else ( ExtractFeatureParams._default_params["feature_angle"] if "feature_angle" in ExtractFeatureParams._default_params else json_data["featureAngle"]),
-                        separate_features if separate_features is not None else ( ExtractFeatureParams._default_params["separate_features"] if "separate_features" in ExtractFeatureParams._default_params else json_data["separateFeatures"]),
-                        separation_angle if separation_angle is not None else ( ExtractFeatureParams._default_params["separation_angle"] if "separation_angle" in ExtractFeatureParams._default_params else json_data["separationAngle"]),
-                        disconnect_with_faces if disconnect_with_faces is not None else ( ExtractFeatureParams._default_params["disconnect_with_faces"] if "disconnect_with_faces" in ExtractFeatureParams._default_params else json_data["disconnectWithFaces"]),
-                        label_name if label_name is not None else ( ExtractFeatureParams._default_params["label_name"] if "label_name" in ExtractFeatureParams._default_params else json_data["labelName"]))
+                        replace if replace is not None else ( ExtractFeatureParams._default_params["replace"] if "replace" in ExtractFeatureParams._default_params else (json_data["replace"] if "replace" in json_data else None)),
+                        feature_angle if feature_angle is not None else ( ExtractFeatureParams._default_params["feature_angle"] if "feature_angle" in ExtractFeatureParams._default_params else (json_data["featureAngle"] if "featureAngle" in json_data else None)),
+                        separate_features if separate_features is not None else ( ExtractFeatureParams._default_params["separate_features"] if "separate_features" in ExtractFeatureParams._default_params else (json_data["separateFeatures"] if "separateFeatures" in json_data else None)),
+                        separation_angle if separation_angle is not None else ( ExtractFeatureParams._default_params["separation_angle"] if "separation_angle" in ExtractFeatureParams._default_params else (json_data["separationAngle"] if "separationAngle" in json_data else None)),
+                        disconnect_with_faces if disconnect_with_faces is not None else ( ExtractFeatureParams._default_params["disconnect_with_faces"] if "disconnect_with_faces" in ExtractFeatureParams._default_params else (json_data["disconnectWithFaces"] if "disconnectWithFaces" in json_data else None)),
+                        label_name if label_name is not None else ( ExtractFeatureParams._default_params["label_name"] if "label_name" in ExtractFeatureParams._default_params else (json_data["labelName"] if "labelName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -143,12 +144,18 @@ class ExtractFeatureParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["replace"] = self._replace
-        json_data["featureAngle"] = self._feature_angle
-        json_data["separateFeatures"] = self._separate_features
-        json_data["separationAngle"] = self._separation_angle
-        json_data["disconnectWithFaces"] = self._disconnect_with_faces
-        json_data["labelName"] = self._label_name
+        if self._replace is not None:
+            json_data["replace"] = self._replace
+        if self._feature_angle is not None:
+            json_data["featureAngle"] = self._feature_angle
+        if self._separate_features is not None:
+            json_data["separateFeatures"] = self._separate_features
+        if self._separation_angle is not None:
+            json_data["separationAngle"] = self._separation_angle
+        if self._disconnect_with_faces is not None:
+            json_data["disconnectWithFaces"] = self._disconnect_with_faces
+        if self._label_name is not None:
+            json_data["labelName"] = self._label_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -229,7 +236,7 @@ class ExtractFeatureResults(CoreObject):
             new_edge_zonelets: Iterable[int]):
         self._processing_time = processing_time
         self._error_code = ErrorCode(error_code)
-        self._new_edge_zonelets = new_edge_zonelets if isinstance(new_edge_zonelets, np.ndarray) else np.array(new_edge_zonelets, dtype=np.int32)
+        self._new_edge_zonelets = new_edge_zonelets if isinstance(new_edge_zonelets, np.ndarray) else np.array(new_edge_zonelets, dtype=np.int32) if new_edge_zonelets is not None else None
 
     def __init__(
             self,
@@ -260,9 +267,9 @@ class ExtractFeatureResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["processingTime"],
-                ErrorCode(json_data["errorCode"]),
-                json_data["newEdgeZonelets"])
+                json_data["processingTime"] if "processingTime" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["newEdgeZonelets"] if "newEdgeZonelets" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [processing_time, error_code, new_edge_zonelets])
             if all_field_specified:
@@ -274,11 +281,12 @@ class ExtractFeatureResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractFeatureResults")["ExtractFeatureResults"]
+                    param_json = model._communicator.initialize_params(model, "ExtractFeatureResults")
+                    json_data = param_json["ExtractFeatureResults"] if "ExtractFeatureResults" in param_json else {}
                     self.__initialize(
-                        processing_time if processing_time is not None else ( ExtractFeatureResults._default_params["processing_time"] if "processing_time" in ExtractFeatureResults._default_params else json_data["processingTime"]),
-                        error_code if error_code is not None else ( ExtractFeatureResults._default_params["error_code"] if "error_code" in ExtractFeatureResults._default_params else ErrorCode(json_data["errorCode"])),
-                        new_edge_zonelets if new_edge_zonelets is not None else ( ExtractFeatureResults._default_params["new_edge_zonelets"] if "new_edge_zonelets" in ExtractFeatureResults._default_params else json_data["newEdgeZonelets"]))
+                        processing_time if processing_time is not None else ( ExtractFeatureResults._default_params["processing_time"] if "processing_time" in ExtractFeatureResults._default_params else (json_data["processingTime"] if "processingTime" in json_data else None)),
+                        error_code if error_code is not None else ( ExtractFeatureResults._default_params["error_code"] if "error_code" in ExtractFeatureResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        new_edge_zonelets if new_edge_zonelets is not None else ( ExtractFeatureResults._default_params["new_edge_zonelets"] if "new_edge_zonelets" in ExtractFeatureResults._default_params else (json_data["newEdgeZonelets"] if "newEdgeZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -319,9 +327,12 @@ class ExtractFeatureResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["processingTime"] = self._processing_time
-        json_data["errorCode"] = self._error_code
-        json_data["newEdgeZonelets"] = self._new_edge_zonelets
+        if self._processing_time is not None:
+            json_data["processingTime"] = self._processing_time
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._new_edge_zonelets is not None:
+            json_data["newEdgeZonelets"] = self._new_edge_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -370,7 +381,7 @@ class ExtractedFeatureIds(CoreObject):
             part_id: int,
             new_edge_zonelets: Iterable[int]):
         self._part_id = part_id
-        self._new_edge_zonelets = new_edge_zonelets if isinstance(new_edge_zonelets, np.ndarray) else np.array(new_edge_zonelets, dtype=np.int32)
+        self._new_edge_zonelets = new_edge_zonelets if isinstance(new_edge_zonelets, np.ndarray) else np.array(new_edge_zonelets, dtype=np.int32) if new_edge_zonelets is not None else None
 
     def __init__(
             self,
@@ -398,8 +409,8 @@ class ExtractedFeatureIds(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["partId"],
-                json_data["newEdgeZonelets"])
+                json_data["partId"] if "partId" in json_data else None,
+                json_data["newEdgeZonelets"] if "newEdgeZonelets" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [part_id, new_edge_zonelets])
             if all_field_specified:
@@ -410,10 +421,11 @@ class ExtractedFeatureIds(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExtractedFeatureIds")["ExtractedFeatureIds"]
+                    param_json = model._communicator.initialize_params(model, "ExtractedFeatureIds")
+                    json_data = param_json["ExtractedFeatureIds"] if "ExtractedFeatureIds" in param_json else {}
                     self.__initialize(
-                        part_id if part_id is not None else ( ExtractedFeatureIds._default_params["part_id"] if "part_id" in ExtractedFeatureIds._default_params else json_data["partId"]),
-                        new_edge_zonelets if new_edge_zonelets is not None else ( ExtractedFeatureIds._default_params["new_edge_zonelets"] if "new_edge_zonelets" in ExtractedFeatureIds._default_params else json_data["newEdgeZonelets"]))
+                        part_id if part_id is not None else ( ExtractedFeatureIds._default_params["part_id"] if "part_id" in ExtractedFeatureIds._default_params else (json_data["partId"] if "partId" in json_data else None)),
+                        new_edge_zonelets if new_edge_zonelets is not None else ( ExtractedFeatureIds._default_params["new_edge_zonelets"] if "new_edge_zonelets" in ExtractedFeatureIds._default_params else (json_data["newEdgeZonelets"] if "newEdgeZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -451,8 +463,10 @@ class ExtractedFeatureIds(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["partId"] = self._part_id
-        json_data["newEdgeZonelets"] = self._new_edge_zonelets
+        if self._part_id is not None:
+            json_data["partId"] = self._part_id
+        if self._new_edge_zonelets is not None:
+            json_data["newEdgeZonelets"] = self._new_edge_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -514,7 +528,7 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["labelName"])
+                json_data["labelName"] if "labelName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [label_name])
             if all_field_specified:
@@ -524,9 +538,10 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CreateIntersectionEdgeLoopsParams")["CreateIntersectionEdgeLoopsParams"]
+                    param_json = model._communicator.initialize_params(model, "CreateIntersectionEdgeLoopsParams")
+                    json_data = param_json["CreateIntersectionEdgeLoopsParams"] if "CreateIntersectionEdgeLoopsParams" in param_json else {}
                     self.__initialize(
-                        label_name if label_name is not None else ( CreateIntersectionEdgeLoopsParams._default_params["label_name"] if "label_name" in CreateIntersectionEdgeLoopsParams._default_params else json_data["labelName"]))
+                        label_name if label_name is not None else ( CreateIntersectionEdgeLoopsParams._default_params["label_name"] if "label_name" in CreateIntersectionEdgeLoopsParams._default_params else (json_data["labelName"] if "labelName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -561,7 +576,8 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["labelName"] = self._label_name
+        if self._label_name is not None:
+            json_data["labelName"] = self._label_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -623,9 +639,9 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["processingTime"],
-                ErrorCode(json_data["errorCode"]),
-                [ExtractedFeatureIds(model = model, json_data = data) for data in json_data["extractedIds"]])
+                json_data["processingTime"] if "processingTime" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [ExtractedFeatureIds(model = model, json_data = data) for data in json_data["extractedIds"]] if "extractedIds" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [processing_time, error_code, extracted_ids])
             if all_field_specified:
@@ -637,11 +653,12 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CreateIntersectionEdgeLoopsResults")["CreateIntersectionEdgeLoopsResults"]
+                    param_json = model._communicator.initialize_params(model, "CreateIntersectionEdgeLoopsResults")
+                    json_data = param_json["CreateIntersectionEdgeLoopsResults"] if "CreateIntersectionEdgeLoopsResults" in param_json else {}
                     self.__initialize(
-                        processing_time if processing_time is not None else ( CreateIntersectionEdgeLoopsResults._default_params["processing_time"] if "processing_time" in CreateIntersectionEdgeLoopsResults._default_params else json_data["processingTime"]),
-                        error_code if error_code is not None else ( CreateIntersectionEdgeLoopsResults._default_params["error_code"] if "error_code" in CreateIntersectionEdgeLoopsResults._default_params else ErrorCode(json_data["errorCode"])),
-                        extracted_ids if extracted_ids is not None else ( CreateIntersectionEdgeLoopsResults._default_params["extracted_ids"] if "extracted_ids" in CreateIntersectionEdgeLoopsResults._default_params else [ExtractedFeatureIds(model = model, json_data = data) for data in json_data["extractedIds"]]))
+                        processing_time if processing_time is not None else ( CreateIntersectionEdgeLoopsResults._default_params["processing_time"] if "processing_time" in CreateIntersectionEdgeLoopsResults._default_params else (json_data["processingTime"] if "processingTime" in json_data else None)),
+                        error_code if error_code is not None else ( CreateIntersectionEdgeLoopsResults._default_params["error_code"] if "error_code" in CreateIntersectionEdgeLoopsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        extracted_ids if extracted_ids is not None else ( CreateIntersectionEdgeLoopsResults._default_params["extracted_ids"] if "extracted_ids" in CreateIntersectionEdgeLoopsResults._default_params else [ExtractedFeatureIds(model = model, json_data = data) for data in (json_data["extractedIds"] if "extractedIds" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -682,9 +699,12 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["processingTime"] = self._processing_time
-        json_data["errorCode"] = self._error_code
-        json_data["extractedIds"] = [data._jsonify() for data in self._extracted_ids]
+        if self._processing_time is not None:
+            json_data["processingTime"] = self._processing_time
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._extracted_ids is not None:
+            json_data["extractedIds"] = [data._jsonify() for data in self._extracted_ids]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

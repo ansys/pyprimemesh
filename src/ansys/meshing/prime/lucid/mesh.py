@@ -357,7 +357,7 @@ class Mesh:
                 res = sizefield.compute_volumetric(
                     size_control_ids=[sizecontrol1.id],
                     volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
-                        enable_multi_threading=False
+                        model=self._model, enable_multi_threading=False
                     ),
                 )
                 surfer.mesh_topo_faces(part_id=part.id, topo_faces=topofaces, params=params)
@@ -385,7 +385,7 @@ class Mesh:
                     res = sizefield.compute_volumetric(
                         size_control_ids=[sizecontrol1.id],
                         volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
-                            enable_multi_threading=False
+                            model=self._model, enable_multi_threading=False
                         ),
                     )
                     surfer.remesh_face_zonelets(part.id, tf, te, params)
@@ -589,7 +589,7 @@ class Mesh:
             size_field_res = sizefield.compute_volumetric(
                 size_control_ids=s_control_ids,
                 volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
-                    enable_multi_threading=False
+                    model=self._model, enable_multi_threading=False
                 ),
             )
             self.__surface_mesh_on_active_sf(generate_quads=generate_quads, scope=scope)
@@ -1028,7 +1028,7 @@ class Mesh:
         self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
         result = field.compute_volumetric(
             [size_control.id for size_control in size_controls],
-            prime.VolumetricSizeFieldComputeParams(enable_multi_threading=False),
+            prime.VolumetricSizeFieldComputeParams(model=self._model, enable_multi_threading=False),
         )
         return result.size_field_id
 

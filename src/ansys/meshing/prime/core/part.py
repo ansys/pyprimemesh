@@ -1,5 +1,6 @@
 from ansys.meshing.prime.autogen.part import Part as _Part
 from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
 
 from typing import Any
 
@@ -86,6 +87,30 @@ class Part(_Part):
         params.print_id = self._print_id
         result = _Part.get_summary(self, params)
         return result.message
+
+    def set_suggested_name(self, name: str) -> SetNameResults:
+        """Sets the unique name for the part based on the given suggested name.
+
+
+        Parameters
+        ----------
+        name : str
+            Suggested name for the part.
+
+        Returns
+        -------
+        SetNameResults
+            Returns the results with assigned name of the part.
+
+
+        Examples
+        --------
+        >>> part.set_suggested_name("part1")
+
+        """
+        result = _Part.set_suggested_name(self, name)
+        self._name = result.assigned_name
+        return result
 
     @property
     def print_mesh(self) -> bool:
