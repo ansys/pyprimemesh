@@ -1,4 +1,3 @@
-    # check spelling, codestyle
 name: GitHub CI
 
 # run only on main branch.  This avoids duplicated actions on PRs
@@ -34,17 +33,11 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-      - name: Install style requirements
-        run: |
-          pip install -r requirements/requirements_style.txt
+      - name: "Install pre-commit"
+        run: pip install pre-commit
 
-      - name: Codespell
-        run: |
-          make codespell
-
-      - name: flake8
-        run: |
-          make flake8
+      - name: "Run pre-commit"
+        run: pre-commit run --all-files --show-diff-on-failure
 
   build:
     name: Build the package

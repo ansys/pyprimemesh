@@ -7,7 +7,7 @@ DOCLINES = (__doc__ or '').split("\n")
 import os
 from io import open as io_open
 
-from setuptools import setup, find_namespace_packages
+from setuptools import find_namespace_packages, setup
 
 # Use single source package versioning.  Follows:
 # https://packaging.python.org/guides/single-sourcing-package-version/

@@ -1,8 +1,10 @@
 """Implementation of Relaxed JSON Decoder
 """
-from typing import Tuple, Any, Callable, Dict
 import re
+from typing import Any, Callable, Dict, Tuple
+
 import numpy as np
+
 from . import scanner
 
 __all__ = ['JSONDecoder', 'JSONDecodeError']

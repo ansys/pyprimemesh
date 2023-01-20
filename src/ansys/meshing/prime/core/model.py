@@ -1,19 +1,19 @@
-from ansys.meshing.prime.autogen.model import Model as _Model
-from ansys.meshing.prime.core.part import Part
-from ansys.meshing.prime.core.controldata import ControlData
-from ansys.meshing.prime.internals.communicator import Communicator
+from typing import Iterable, List
+
+import ansys.meshing.prime.internals.json_utils as json
+from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
+from ansys.meshing.prime.autogen.model import Model as _Model
 from ansys.meshing.prime.autogen.modelstructs import (
     GlobalSizingParams,
     MergePartsParams,
     MergePartsResults,
 )
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
-from ansys.meshing.prime.autogen.commonstructs import DeleteResults
+from ansys.meshing.prime.core.controldata import ControlData
+from ansys.meshing.prime.core.part import Part
+from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
-
-from typing import List, Iterable
-import ansys.meshing.prime.internals.json_utils as json
 
 
 class Model(_Model):

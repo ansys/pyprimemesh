@@ -1,20 +1,24 @@
-from ansys.meshing.prime.autogen.wrapper import Wrapper as _Wrapper
-from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
-from ansys.meshing.prime.autogen.wrapperstructs import WrapResult as WrapResult
-from ansys.meshing.prime.autogen.wrapperstructs import WrapperCloseGapsParams
-from ansys.meshing.prime.autogen.wrapperstructs import WrapperCloseGapsResult
-from ansys.meshing.prime.core.model import Model
-from ansys.meshing.prime.core.part import Part
-from ansys.meshing.prime.autogen.partstructs import NamePatternParams
-from ansys.meshing.prime.autogen.modelstructs import MergePartsParams
-from ansys.meshing.prime.autogen.connectstructs import IntersectParams
+from typing import List
+
+import numpy as np
+
 from ansys.meshing.prime.autogen.connect import Connect
+from ansys.meshing.prime.autogen.connectstructs import IntersectParams
+from ansys.meshing.prime.autogen.controlstructs import ScopeDefinition as ScopeDefinition
+from ansys.meshing.prime.autogen.modelstructs import MergePartsParams
+from ansys.meshing.prime.autogen.partstructs import NamePatternParams
 from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.autogen.surfaceutilitystructs import ResolveIntersectionsParams
+from ansys.meshing.prime.autogen.wrapper import Wrapper as _Wrapper
+from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
+from ansys.meshing.prime.autogen.wrapperstructs import (
+    WrapperCloseGapsParams,
+    WrapperCloseGapsResult,
+)
+from ansys.meshing.prime.autogen.wrapperstructs import WrapResult as WrapResult
+from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
-from ansys.meshing.prime.autogen.controlstructs import ScopeDefinition as ScopeDefinition
-from typing import List
-import numpy as np
 
 
 class Wrapper(_Wrapper):

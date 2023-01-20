@@ -53,7 +53,7 @@ class RemoteClientManager:
 
 @pytest.fixture(scope="session", autouse=True)
 def get_remote_client():
-    """Initializes and starts Ansys Prime. This funtion is automatically called
+    """Initializes and starts Ansys Prime. This function is automatically called
     at the start of the test session and runs the code after the yield when the
     tests finish their execution.
 

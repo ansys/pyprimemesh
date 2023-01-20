@@ -1,13 +1,13 @@
-import os
-import sys
-import subprocess
-from typing import Optional
 import logging
+import os
+import subprocess
+import sys
+from typing import Optional
 
-from ansys.meshing.prime.internals.client import Client
-import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
+from ansys.meshing.prime.internals.client import Client
 
 try:
     import ansys.platform.instancemanagement as pypim

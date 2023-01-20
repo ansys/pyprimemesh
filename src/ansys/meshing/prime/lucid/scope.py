@@ -1,6 +1,8 @@
-import ansys.meshing.prime as prime
-from .utils import check_name_pattern
 from typing import Iterable
+
+import ansys.meshing.prime as prime
+
+from .utils import check_name_pattern
 
 
 class _LucidScope:

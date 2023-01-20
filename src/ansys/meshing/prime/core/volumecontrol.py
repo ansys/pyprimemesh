@@ -1,6 +1,6 @@
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.volumecontrol import VolumeControl as _VolumeControl
 from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 
 
 class VolumeControl(_VolumeControl):

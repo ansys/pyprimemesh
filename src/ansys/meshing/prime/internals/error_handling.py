@@ -1,7 +1,7 @@
+import re
 from functools import wraps
 
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode, WarningCode
-import re
 
 prime_error_messages = {
     ErrorCode.NOERROR: "Success.",

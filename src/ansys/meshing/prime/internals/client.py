@@ -1,11 +1,12 @@
-import os
 import logging
-from ansys.meshing.prime.internals.utils import terminate_process
-from ansys.meshing.prime.core.model import Model
-import ansys.meshing.prime.internals.defaults as defaults
+import os
+
 import ansys.meshing.prime.examples as examples
-import ansys.meshing.prime.internals.utils as utils
 import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.defaults as defaults
+import ansys.meshing.prime.internals.utils as utils
+from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 

@@ -1,10 +1,12 @@
-from pyvista.plotting.plotting import Plotter
-import ansys.meshing.prime as prime
 import enum
+import os
+
 import numpy as np
 import pyvista as pv
 from pyvista import _vtk
-import os
+from pyvista.plotting.plotting import Plotter
+
+import ansys.meshing.prime as prime
 from ansys.meshing.prime.internals import defaults
 
 

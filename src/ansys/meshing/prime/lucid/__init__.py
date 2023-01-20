@@ -1,4 +1,4 @@
 '''High level helper functions for PyPrimeMesh
 '''
-from .mesh import Mesh, LabelToZoneMethod
+from .mesh import LabelToZoneMethod, Mesh
 from .scope import SurfaceScope, VolumeScope
