@@ -4,7 +4,9 @@ import numpy as np
 
 from ansys.meshing.prime.autogen.connect import Connect
 from ansys.meshing.prime.autogen.connectstructs import IntersectParams
-from ansys.meshing.prime.autogen.controlstructs import ScopeDefinition as ScopeDefinition
+from ansys.meshing.prime.autogen.controlstructs import (
+    ScopeDefinition as ScopeDefinition,
+)
 from ansys.meshing.prime.autogen.modelstructs import MergePartsParams
 from ansys.meshing.prime.autogen.partstructs import NamePatternParams
 from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities

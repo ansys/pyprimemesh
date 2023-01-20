@@ -65,7 +65,10 @@ from ansys.meshing.prime.internals.config import (
     numpy_array_optimization_disabled,
     numpy_array_optimization_enabled,
 )
-from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
+from ansys.meshing.prime.internals.error_handling import (
+    PrimeRuntimeError,
+    PrimeRuntimeWarning,
+)
 from ansys.meshing.prime.internals.launcher import *
 
 __LOCAL_CLIENT = None

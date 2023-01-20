@@ -33,7 +33,9 @@ class Client(object):
         self._comm = None
         if not local:
             try:
-                from ansys.meshing.prime.internals.grpc_communicator import GRPCCommunicator
+                from ansys.meshing.prime.internals.grpc_communicator import (
+                    GRPCCommunicator,
+                )
 
                 channel = kwargs.get('channel', None)
                 if channel is not None:
@@ -55,7 +57,9 @@ class Client(object):
                 raise
         else:
             try:
-                from ansys.meshing.prime.internals.prime_communicator import PrimeCommunicator
+                from ansys.meshing.prime.internals.prime_communicator import (
+                    PrimeCommunicator,
+                )
 
                 self._comm = PrimeCommunicator()
             except ImportError as err:
