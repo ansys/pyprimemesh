@@ -22,7 +22,7 @@ An example is shown below where the output is formatted as needed:
    ch.setLevel(logging.DEBUG)
 
    # Create formatter for message output
-   formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+   formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
    # Add formatter to ch stream handler
    ch.setFormatter(formatter)

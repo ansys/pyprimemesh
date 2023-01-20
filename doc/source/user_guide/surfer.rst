@@ -37,12 +37,12 @@ Firstly, start PyPrimeMesh client and import the CAD geometry (.scdoc):
     file_io = prime.FileIO(model)
     file_io.import_cad(
         input_file,
-        params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM)
+        params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM),
     )
     # Show model in graphic
     display = Graphics(model)
     display(update=True)
-    part = model.get_part_by_name('simple-bracket-holes')
+    part = model.get_part_by_name("simple-bracket-holes")
 
 .. figure:: ../images/simple-bracket-holes_scdoc.png
     :width: 300pt
@@ -57,9 +57,7 @@ Initialize surfer parameters and generate surface mesh on TopoFaces:
     # Surface mesh with triangular elements of uniform size
     surfer_params = prime.SurferParams(model=model, constant_size=1.0)
     surfer_result = prime.Surfer(model).mesh_topo_faces(
-        part.id,
-        topo_faces=part.get_topo_faces(),
-        params=surfer_params
+        part.id, topo_faces=part.get_topo_faces(), params=surfer_params
     )
 
 .. figure:: ../images/simple-bracket-holes_mesh3.png
@@ -91,7 +89,10 @@ Firstly, start PyPrimeMesh client and import the faceted geometry (.stl):
     # Import CAD file
     input_file = r"D:/Examples/simple-bracket-holes.stl"
     file_io = prime.FileIO(model)
-    file_io.import_cad(input_file, params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM))
+    file_io.import_cad(
+        input_file,
+        params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM),
+    )
 
 After importing the CAD file, you can display the model using graphics module:
 
@@ -100,7 +101,7 @@ After importing the CAD file, you can display the model using graphics module:
     # Show model in graphic and get part summary
     display = Graphics(model)
     display(update=True)
-    part = model.get_part_by_name('simple-bracket-holes')
+    part = model.get_part_by_name("simple-bracket-holes")
     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
 
 .. figure:: ../images/simple-bracket-holes_stl.png
@@ -111,7 +112,7 @@ After importing the CAD file, you can display the model using graphics module:
 
 And print the results of part summary:
 
-.. code:: python
+.. code:: pycon
 
     >>> print(part_summary_res)
 
@@ -147,7 +148,9 @@ And set the global sizing parameters to initialize size control parameters (with
 .. code:: python
 
     # Surface mesh size controls
-    model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.27, max=5.5, growth_rate=1.2))
+    model.set_global_sizing_params(
+        prime.GlobalSizingParams(model, min=0.27, max=5.5, growth_rate=1.2)
+    )
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
     size_control.set_scope(prime.ScopeDefinition(model))
 
@@ -158,7 +161,9 @@ And compute the volumetric size field based on the size controls:
     size_field = prime.SizeField(model)
     res = size_field_compute_volumetric(
         size_control_ids=[size_control.id],
-        volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(model, enable_multi_threading=False)
+        volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
+            model, enable_multi_threading=False
+        ),
     )
 
 Finally, initialize surfer parameters and generate surface mesh on face zonelets:
@@ -166,12 +171,14 @@ Finally, initialize surfer parameters and generate surface mesh on face zonelets
 .. code:: python
 
     # Surface mesh with triangular elements
-    surfer_params = prime.SurferParams(model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC)
+    surfer_params = prime.SurferParams(
+        model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC
+    )
     surfer_result = prime.Surfer(model).remesh_face_zonelets(
         part_id=part.id,
         face_zonelets=part.get_face_zonelets(),
         edge_zonelets=part.get_edge_zonelets(),
-        params=surfer_params
+        params=surfer_params,
     )
 
 .. figure:: ../images/simple-bracket-holes_mesh1.png
@@ -189,6 +196,7 @@ The following example shows you the method required to replicate the surface mes
 .. code:: python
 
     import ansys.meshing.prime as prime
+
     prime_client = prime.launch_prime()
     model = prime_client.model
 

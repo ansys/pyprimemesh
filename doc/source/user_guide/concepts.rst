@@ -21,6 +21,7 @@ The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Clie
 .. code:: python
 
     import ansys.meshing.prime as prime
+
     prime_client = prime.launch_prime()
     model = prime_client.model
 
@@ -34,7 +35,7 @@ An example for importing a CAD file containing a single part is shown below:
 
 :class:`Model <ansys.meshing.prime.Model>` can be printed to give a summary of the current session.
 
-.. code:: python
+.. code:: pycon
 
     >>> print(model)
 

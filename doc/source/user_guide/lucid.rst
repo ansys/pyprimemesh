@@ -14,33 +14,33 @@ Many common meshing tasks and workflows can be tackled easily using the function
 Below is an example of meshing the mixing elbow case for fluid flow analysis:
 
 .. code:: python
-    
     # Start and connect to a Prime server
-    
+
     from ansys.meshing import prime
+
     prime_client = prime.launch_prime()
     model = prime_client.model
-    
+
     # Instantiate the lucid class
-    
+
     mesh_util = prime.lucid.Mesh(model=model)
-    
+
     # Read the geometry
-    
+
     mesh_util.read("mixing_elbow.scdoc")
-    
+
     # Mesh the geometry with a poly prism mesh
-    
+
     mesh_util.surface_mesh(min_size=5, max_size=20)
-    
+
     mesh_util.volume_mesh(
         volume_fill_type=prime.VolumeFillType.POLY,
         prism_surface_expression="* !inlet !outlet",
         prism_layers=3,
     )
-    
+
     # Prepare and write the model for the Fluent solver
-    
+
     mesh_util.create_zones_from_labels()
     mesh_util.write("mixing_elbow.cas")
 

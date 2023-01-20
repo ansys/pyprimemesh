@@ -1,8 +1,4 @@
-exclude: |
-    (?x)^(
-      src/ansys/meshing/prime/autogen/|
-      doc/source/
-    )
+exclude: src/ansys/meshing/prime/autogen/
 
 repos:
 

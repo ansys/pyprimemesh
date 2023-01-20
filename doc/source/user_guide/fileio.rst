@@ -51,7 +51,9 @@ You may require to specify the import route for the CAD files using the :class:`
 
 .. code:: python
 
-    params = prime.ImportCadParams(model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
+    params = prime.ImportCadParams(
+        model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM
+    )
     prime.FileIO(model).import_cad(file_name=mixing_elbow, params=params)
 
 Alternatively, you can use :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in Lucid API:
@@ -111,7 +113,7 @@ To get existing CAD parameters while importing:
     params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
     result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
 
-.. code:: python
+.. code:: pycon
 
     >>> print(result.cad_parameters)
 
@@ -123,10 +125,10 @@ To set parameters used for import:
 
     params = prime.ImportCadParams(model=model)
     params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
-    params.cad_update_parameters = {'my_param': 2}
+    params.cad_update_parameters = {"my_param": 2}
     result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
 
-.. code:: python
+.. code:: pycon
 
     >>> print(result.cad_parameters)
 

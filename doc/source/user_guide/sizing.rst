@@ -46,12 +46,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
     size_control.set_curvature_sizing_params(
-        prime.CurvatureSizingParams(
-            model=model,
-            min=0.2,
-            max=2.0,
-            growth_rate=1.2
-        )
+        prime.CurvatureSizingParams(model=model, min=0.2, max=2.0, growth_rate=1.2)
     )
     size_control.set_suggested_name("curv_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -66,11 +61,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
     size_control = model.control_data.create_size_control(prime.SizingType.PROXIMITY)
     size_control.set_proximity_sizing_params(
         prime.ProximitySizingParams(
-            model=model,
-            min=0.1,
-            max=2.0,
-            growth_rate=1.2,
-            elements_per_gap=3.0
+            model=model, min=0.1, max=2.0, growth_rate=1.2, elements_per_gap=3.0
         )
     )
     size_control.set_suggested_name("prox_control")
@@ -85,11 +76,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 
     size_control = model.control_data.create_size_control(prime.SizingType.HARD)
     size_control.set_hard_sizing_params(
-        prime.HardSizingParams(
-            model=model,
-            min=0.2,
-            growth_rate=1.2
-        )
+        prime.HardSizingParams(model=model, min=0.2, growth_rate=1.2)
     )
     size_control.set_suggested_name("hard_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -103,11 +90,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 
     size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
     size_control.set_soft_sizing_params(
-        prime.SoftSizingParams(
-            model=model,
-            max=0.2,
-            growth_rate=1.2
-        )
+        prime.SoftSizingParams(model=model, max=0.2, growth_rate=1.2)
     )
     size_control.set_suggested_name("soft_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -121,10 +104,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 
     size_control = model.control_data.create_size_control(prime.SizingType.MESHED)
     size_control.set_meshed_sizing_params(
-        prime.MeshedSizingParams(
-            model=model,
-            growth_rate=1.2
-        )
+        prime.MeshedSizingParams(model=model, growth_rate=1.2)
     )
     size_control.set_suggested_name("meshed_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -138,11 +118,7 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 
     size_control = model.control_data.create_size_control(prime.SizingType.BOI)
     size_control.set_boi_sizing_params(
-        prime.BoiSizingParams(
-            model=model,
-            max=20.0,
-            growth_rate=1.2
-        )
+        prime.BoiSizingParams(model=model, max=20.0, growth_rate=1.2)
     )
     size_control.set_suggested_name("BOI_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
