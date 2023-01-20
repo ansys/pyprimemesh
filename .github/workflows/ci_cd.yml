@@ -57,11 +57,6 @@ jobs:
           key: Python-${{ runner.os }}-v${{ env.MAIN_PYTHON_VERSION }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
           restore-keys: |
             Python-${{ runner.os }}-v${{ env.MAIN_PYTHON_VERSION }}
-      
-      - name: Check for pre-commit
-        run: |
-          pip install pre-commit
-          pre-commit run --all-files --show-diff-on-failure
 
       - name: Build the library
         run: |

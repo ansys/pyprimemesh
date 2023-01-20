@@ -83,7 +83,9 @@ def __get_local_client() -> Client:
 
 def local_model() -> Model:
     '''Get Local model
+
     NOTE: USE IN DEVELOPMENT ONLY
+
     This imports the Ansys Prime Server environment into the python process. It will
     error unless proper environment is setup to support Ansys Prime Server.
     '''
