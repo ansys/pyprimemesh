@@ -1,4 +1,8 @@
-exclude: src/ansys/meshing/prime/autogen/
+exclude: |
+    (?x)^(
+      src/ansys/meshing/prime/autogen/|
+      src/ansys/meshing/prime/__init__.py
+    )
 
 repos:
 
