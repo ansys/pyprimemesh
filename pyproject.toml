@@ -1,13 +1,55 @@
 [build-system]
-requires = [ 
-    "setuptools>=59.2.0",
-    "wheel>=0.37.0",
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "ansys-meshing-prime"
+version = "0.3.dev0"
+description = "PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server delivers core Ansys meshing technology."
+readme = "README.md"
+requires-python = ">=3.7,<4"
+license = {file = "LICENSE"}
+authors = [{name = "ANSYS, Inc.", email = "pyansys.support@ansys.com"}]
+maintainers = [{name = "PyAnsys developers", email = "pyansys.maintainers@ansys.com"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
 ]
-build-backend = "setuptools.build_meta"
+
+dependencies = [
+  "ansys-api-meshing-prime==0.1.1",
+  "numpy>=1.14.0",
+  "appdirs>=1.4.0",
+  "importlib-metadata>=4.0,<5; python_version<='3.8'",
+]
+
+[project.optional-dependencies]
+graphics = [
+  "pyvista>=0.32.0",
+]
+tests = []
+doc = []
+all = [
+  "pyvista>=0.32.0",
+]
+
+[project.urls]
+Source = "https://github.com/pyansys/pyprimemesh"
+Documentation = "https://prime.docs.pyansys.com"
+
+
+[tool.flit.module]
+name = "ansys.meshing.prime"
 
 [tool.black]
 line-length = 100
-target-version = ['py37', 'py38', 'py39']
+target-version = ['py37', 'py38', 'py39', 'py310']
 skip-string-normalization = true
 exclude = '''
 /(
