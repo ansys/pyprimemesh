@@ -5,30 +5,37 @@ Connections
 ***********
 
 ==================
-Zonelet Connection
+Zonelet connection
 ==================
 
-Connect operations helps you create a watertight, fully connected, surface mesh for successful volume mesh generation. Connect operation conformally connects multiple watertight volumes providing shared zonelets (and therefore connected volume mesh) between them.
-The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
-The three major operations for Zonelet Connection are Intersect, Stitch and Join. 
+Connect operations help you to create a watertight, fully connected surface mesh for successful volume mesh generation.
+Connect operations conformally connect multiple watertight volumes providing shared zonelets (and therefore connected
+volume mesh) between them. The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets
+in a part, volume, or model using various connect algorithms.
 
- - The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` function allows you to intersect the face zonelets of the part along the intersecting faces. 
+There are three major operations for zonelet connections: 
 
- - The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` function allows you to stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
+ - The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` method allows you
+   to intersect the face zonelets of the part along the intersecting faces. 
 
- - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` function allows you to join a set of face zonelets to another set of face zonelets along the overlapping faces. 
+ - The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` method allows you to
+   stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
+
+ - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` method allows you to join
+   a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
 
 .. note::
-    Connect operations support only computational mesh ( That is, mesh with reasonable size changes and quality). Faceted geometry (That is, STL-like mesh which can have extreme size changes and many sliver elements) is not supported.
+    Connect operations support only computational mesh, which is mesh with reasonable size changes and quality.
+    Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, is not supported.
 
-The following example shows you the procedure to:
+The following example shows how to perform these steps:
 
-* Import model and remove geometry topology from each part
-* Merge parts and check surface mesh connectivity
-* Perform Join or Intersect operation on face zonelets
+* Import model and remove geometry topology from each part.
+* Merge parts and check surface mesh connectivity.
+* Perform the join or intersect operation on face zonelets.
 
-Import the  model and delete topo-geom entities of part.
+Import the model and delete topo-geometric entities from each part:
 
 .. code:: python
 
@@ -39,7 +46,8 @@ Import the  model and delete topo-geom entities of part.
             params = prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
             part.delete_topo_entities(params)
 
-Merge parts.
+
+Merge the parts.
 
 .. code:: python
 
@@ -48,7 +56,8 @@ Merge parts.
         params=prime.MergePartsParams(model)
     )
         
-Check surface before connect operation.
+
+Check the surface before performing the connect operation.
 
 .. code:: python
     
@@ -62,7 +71,10 @@ Check surface before connect operation.
         )
     )
 
-You can check the surface mesh connectivity (refer :ref:`ref_index_mesh_diagnostics` for more information).
+
+For more information on checking the surface mesh connectivity, see :ref:`ref_index_mesh_diagnostics`.
+
+Print the results of the surface mesh connectivity before performing the connect operation:
 
 .. code:: python
 
@@ -74,7 +86,8 @@ You can check the surface mesh connectivity (refer :ref:`ref_index_mesh_diagnost
     n_multi_edges :  0
     n_duplicate_faces :  0
 
-Connect face zonelets in the model.
+
+Connect face zonelets in the model:
 
 .. note::
     Only triangular faces are supported.
@@ -102,13 +115,15 @@ Connect face zonelets in the model.
             params=join_params
         )
 
-Check surface after connect operation.
+
+Check the surface after performing the connect operation:
 
 .. code:: python
 
     diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
-The results of surface mesh connectivity after performing connect operation is printed below:
+
+Print the results of the surface mesh connectivity after performing the connect operation:
 
 .. code:: python
 
@@ -122,14 +137,19 @@ The results of surface mesh connectivity after performing connect operation is p
 
 
 =========================
-Topology Based Connection
+Topology-based connection
 =========================
 
-The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology. Also, handles the gaps and mismatches in the geometry.
-Topology based connection creates shared topoedges between neighbouring topofaces. Hence, you can create connected mesh between topofaces.
+The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection
+using faceted geometry and topology. This class also handles the gaps and mismatches in the geometry.
+
+Topology-based connection creates shared topoedges between neighbouring topofaces. Hence, you can
+create connected mesh between topofaces.
 
 .. note::
   Connectivity cannot be shared across multiple parts.
+
+This code merges parts and scaffold topofaces:
 
 .. code:: python
 
@@ -154,7 +174,7 @@ Topology based connection creates shared topoedges between neighbouring topoface
         params=params
     )
 
-You can check the number of topofaces failed in scaffold operation by printing the results:
+This code prints the results so that you can check the number of topofaces failed in the scaffold operation:
 
 .. code:: python
 
@@ -162,3 +182,4 @@ You can check the number of topofaces failed in scaffold operation by printing t
 
     n_incomplete_topo_faces :  0
     error_code :  ErrorCode.NOERROR
+

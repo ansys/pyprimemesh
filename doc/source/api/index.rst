@@ -1,10 +1,10 @@
 .. _ref_index_api:
 
 =============
-API Reference
+API reference
 =============
 
-This section gives an overview of the API of all of the classes, functions and attributes present in PyPrimeMesh.
+This section gives an overview of all API classes, methods, and parameterss present in PyPrimeMesh.
 
 .. autosummary::
    :toctree: _autosummary
