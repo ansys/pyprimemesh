@@ -19,5 +19,11 @@ def test_sizecontrol(get_remote_client, get_examples):
 
     # change the name and check if it is working as intended
     result = size_control.set_suggested_name('bar')
+
+    assert str(size_control) == (
+        "\nSize Control Summary: \n    Name : bar\n    ID : 1\n    Type : Curvature\n    "
+        "Min : -1\n    Max : -1\n    Growth Rate : 1.2\n    Normal Angle : 18\n    Scope "
+        "(Used labels to evaluate Face zonelets) : \n"
+    )
     assert result.assigned_name != ''
     assert result.assigned_name == size_control.name
