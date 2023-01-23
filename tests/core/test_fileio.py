@@ -7,13 +7,11 @@ from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 
 
-def test_read_pdmat(get_remote_client):
+def test_io_pdmat(get_remote_client, get_examples):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
     file_read_params = prime.FileReadParams(model=model)
-    pmdat_path = prime.examples.download_elbow_pmdat(
-        destination=os.path.abspath(os.path.abspath("./tests/core/test_files/")), force=True
-    )
+    pmdat_path = get_examples["elbow_lucid"]
 
     # Wrong extension
     with pytest.raises(PrimeRuntimeError) as prime_error:
@@ -45,3 +43,65 @@ def test_read_pdmat(get_remote_client):
         file_read_params,
     )
     assert results.error_code == ErrorCode.NOERROR
+
+    # export
+    results = file_io.write_pmdat(
+        os.path.abspath("./tests/core/test_files/write_file.pmdat"),
+        prime.FileWriteParams(model=model),
+    )
+    assert results.error_code == ErrorCode.NOERROR
+
+
+def test_io_cdb(get_remote_client, get_examples):
+    model = get_remote_client.model
+    file_io = prime.FileIO(model=model)
+    file_read_params = prime.FileReadParams(model=model)
+    pmdat_path = get_examples["elbow_lucid"]
+
+    # export
+    params = prime.ExportMapdlCdbParams(model=model)
+    results = file_io.export_mapdl_cdb(os.path.abspath("./tests/core/test_files/file.cdb"), params)
+    assert results.error_code == ErrorCode.NOERROR
+
+    results = file_io.import_mapdl_cdb(os.path.abspath("./tests/core/test_files/file.cdb"), params)
+
+
+def test_io_fluent_case(get_remote_client, get_examples):
+    # need appropiate file for this test
+    model = get_remote_client.model
+    file_io = prime.FileIO(model=model)
+    file_read_params = prime.FileReadParams(model=model)
+    pmdat_path = get_examples["elbow_lucid"]
+    params = prime.ExportFluentCaseParams(model=model)
+    results = file_io.export_fluent_case(
+        os.path.abspath("./tests/core/test_files/file.cas"), params
+    )
+
+
+def test_io_cbd(get_remote_client, get_examples):
+    model = get_remote_client.model
+    file_io = prime.FileIO(model=model)
+    file_read_params = prime.FileReadParams(model=model)
+    pmdat_path = get_examples["elbow_lucid"]
+
+    # export
+    params = prime.ExportMapdlCdbParams(model=model)
+    results = file_io.export_mapdl_cdb(os.path.abspath("./tests/core/test_files/file.cdb"), params)
+    assert results.error_code == ErrorCode.NOERROR
+
+    # import TODO: fails
+    params = prime.ImportMapdlCdbParams(model=model)
+    results = file_io.import_mapdl_cdb(os.path.abspath("./tests/core/test_files/file.cdb"), params)
+    assert results.error_code == ErrorCode.NOERROR
+
+
+def test_export_kfile(get_remote_client, get_examples):
+    model = get_remote_client.model
+    file_io = prime.FileIO(model=model)
+    file_read_params = prime.FileReadParams(model=model)
+    pmdat_path = get_examples["elbow_lucid"]
+
+    results = file_io.export_boundary_fitted_spline_k_file(
+        os.path.abspath("./tests/core/test_files/file.kfile"),
+        prime.ExportBoundaryFittedSplineParams(model=model),
+    )
