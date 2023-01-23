@@ -13,6 +13,7 @@ geodesical
 hexahedra
 Meshedgeodesic
 multithreading
+PyVista
 topoedges
 topofaces
 relicense
@@ -22,4 +23,4 @@ remeshing
 tetrahedra
 TopoEntities
 Zonelets
-zonlets
+zonelets

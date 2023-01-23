@@ -67,7 +67,7 @@ On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 :attr:`PROXIMITY <ansys.meshing.prime.SizingType.PROXIMITY>` parameter sizes based on the closeness of
 the surfaces or edges specified in the scope. This code shows how to use the
 :class:`ProximitySizingParams <ansys.meshing.prime.ProximitySizingParams>` class to specify the
-minimun and maximum size, growth rate, and the number of element per gap:
+minimum and maximum size, growth rate, and the number of element per gap:
 
 .. code:: python
 

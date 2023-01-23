@@ -4,7 +4,7 @@
 API reference
 =============
 
-This section gives an overview of all API classes, methods, and parameterss present in PyPrimeMesh.
+This section gives an overview of all API classes, methods, and parameters present in PyPrimeMesh.
 
 .. autosummary::
    :toctree: _autosummary
