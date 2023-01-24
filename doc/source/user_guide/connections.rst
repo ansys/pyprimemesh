@@ -4,9 +4,9 @@
 Connections
 ***********
 
-===================
+==================
 Zonelet Connection
-===================
+==================
 
 Connect operations helps you create a watertight, fully connected, surface mesh for successful volume mesh generation. Connect operation conformally connects multiple watertight volumes providing shared zonelets (and therefore connected volume mesh) between them.
 The :class:`Connect <ansys.meshing.prime.Connect>` class allows you to connect the face zonelets in a part, volume, or model using various connect algorithms.
@@ -121,9 +121,9 @@ The results of surface mesh connectivity after performing connect operation is p
     n_duplicate_faces :  0
 
 
-==========================
+=========================
 Topology Based Connection
-==========================
+=========================
 
 The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection using faceted geometry and topology. Also, handles the gaps and mismatches in the geometry.
 Topology based connection creates shared topoedges between neighbouring topofaces. Hence, you can create connected mesh between topofaces.

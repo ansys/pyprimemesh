@@ -56,10 +56,10 @@ class DeleteFringesAndOverlapsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["fringeElementCount"],
-                json_data["overlapElementCount"],
-                json_data["deleteFringes"],
-                json_data["deleteOverlaps"])
+                json_data["fringeElementCount"] if "fringeElementCount" in json_data else None,
+                json_data["overlapElementCount"] if "overlapElementCount" in json_data else None,
+                json_data["deleteFringes"] if "deleteFringes" in json_data else None,
+                json_data["deleteOverlaps"] if "deleteOverlaps" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [fringe_element_count, overlap_element_count, delete_fringes, delete_overlaps])
             if all_field_specified:
@@ -72,12 +72,13 @@ class DeleteFringesAndOverlapsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteFringesAndOverlapsParams")["DeleteFringesAndOverlapsParams"]
+                    param_json = model._communicator.initialize_params(model, "DeleteFringesAndOverlapsParams")
+                    json_data = param_json["DeleteFringesAndOverlapsParams"] if "DeleteFringesAndOverlapsParams" in param_json else {}
                     self.__initialize(
-                        fringe_element_count if fringe_element_count is not None else ( DeleteFringesAndOverlapsParams._default_params["fringe_element_count"] if "fringe_element_count" in DeleteFringesAndOverlapsParams._default_params else json_data["fringeElementCount"]),
-                        overlap_element_count if overlap_element_count is not None else ( DeleteFringesAndOverlapsParams._default_params["overlap_element_count"] if "overlap_element_count" in DeleteFringesAndOverlapsParams._default_params else json_data["overlapElementCount"]),
-                        delete_fringes if delete_fringes is not None else ( DeleteFringesAndOverlapsParams._default_params["delete_fringes"] if "delete_fringes" in DeleteFringesAndOverlapsParams._default_params else json_data["deleteFringes"]),
-                        delete_overlaps if delete_overlaps is not None else ( DeleteFringesAndOverlapsParams._default_params["delete_overlaps"] if "delete_overlaps" in DeleteFringesAndOverlapsParams._default_params else json_data["deleteOverlaps"]))
+                        fringe_element_count if fringe_element_count is not None else ( DeleteFringesAndOverlapsParams._default_params["fringe_element_count"] if "fringe_element_count" in DeleteFringesAndOverlapsParams._default_params else (json_data["fringeElementCount"] if "fringeElementCount" in json_data else None)),
+                        overlap_element_count if overlap_element_count is not None else ( DeleteFringesAndOverlapsParams._default_params["overlap_element_count"] if "overlap_element_count" in DeleteFringesAndOverlapsParams._default_params else (json_data["overlapElementCount"] if "overlapElementCount" in json_data else None)),
+                        delete_fringes if delete_fringes is not None else ( DeleteFringesAndOverlapsParams._default_params["delete_fringes"] if "delete_fringes" in DeleteFringesAndOverlapsParams._default_params else (json_data["deleteFringes"] if "deleteFringes" in json_data else None)),
+                        delete_overlaps if delete_overlaps is not None else ( DeleteFringesAndOverlapsParams._default_params["delete_overlaps"] if "delete_overlaps" in DeleteFringesAndOverlapsParams._default_params else (json_data["deleteOverlaps"] if "deleteOverlaps" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -121,10 +122,14 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["fringeElementCount"] = self._fringe_element_count
-        json_data["overlapElementCount"] = self._overlap_element_count
-        json_data["deleteFringes"] = self._delete_fringes
-        json_data["deleteOverlaps"] = self._delete_overlaps
+        if self._fringe_element_count is not None:
+            json_data["fringeElementCount"] = self._fringe_element_count
+        if self._overlap_element_count is not None:
+            json_data["overlapElementCount"] = self._overlap_element_count
+        if self._delete_fringes is not None:
+            json_data["deleteFringes"] = self._delete_fringes
+        if self._delete_overlaps is not None:
+            json_data["deleteOverlaps"] = self._delete_overlaps
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -211,8 +216,8 @@ class DeleteFringesAndOverlapsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["nDeleted"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["nDeleted"] if "nDeleted" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, n_deleted])
             if all_field_specified:
@@ -223,10 +228,11 @@ class DeleteFringesAndOverlapsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteFringesAndOverlapsResults")["DeleteFringesAndOverlapsResults"]
+                    param_json = model._communicator.initialize_params(model, "DeleteFringesAndOverlapsResults")
+                    json_data = param_json["DeleteFringesAndOverlapsResults"] if "DeleteFringesAndOverlapsResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( DeleteFringesAndOverlapsResults._default_params["error_code"] if "error_code" in DeleteFringesAndOverlapsResults._default_params else ErrorCode(json_data["errorCode"])),
-                        n_deleted if n_deleted is not None else ( DeleteFringesAndOverlapsResults._default_params["n_deleted"] if "n_deleted" in DeleteFringesAndOverlapsResults._default_params else json_data["nDeleted"]))
+                        error_code if error_code is not None else ( DeleteFringesAndOverlapsResults._default_params["error_code"] if "error_code" in DeleteFringesAndOverlapsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        n_deleted if n_deleted is not None else ( DeleteFringesAndOverlapsResults._default_params["n_deleted"] if "n_deleted" in DeleteFringesAndOverlapsResults._default_params else (json_data["nDeleted"] if "nDeleted" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -264,8 +270,10 @@ class DeleteFringesAndOverlapsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["nDeleted"] = self._n_deleted
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._n_deleted is not None:
+            json_data["nDeleted"] = self._n_deleted
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

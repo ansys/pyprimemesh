@@ -81,11 +81,11 @@ class CurvatureSizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["min"],
-                json_data["max"],
-                json_data["growthRate"],
-                json_data["normalAngle"],
-                json_data["useCadCurvature"])
+                json_data["min"] if "min" in json_data else None,
+                json_data["max"] if "max" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None,
+                json_data["normalAngle"] if "normalAngle" in json_data else None,
+                json_data["useCadCurvature"] if "useCadCurvature" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [min, max, growth_rate, normal_angle, use_cad_curvature])
             if all_field_specified:
@@ -99,13 +99,14 @@ class CurvatureSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CurvatureSizingParams")["CurvatureSizingParams"]
+                    param_json = model._communicator.initialize_params(model, "CurvatureSizingParams")
+                    json_data = param_json["CurvatureSizingParams"] if "CurvatureSizingParams" in param_json else {}
                     self.__initialize(
-                        min if min is not None else ( CurvatureSizingParams._default_params["min"] if "min" in CurvatureSizingParams._default_params else json_data["min"]),
-                        max if max is not None else ( CurvatureSizingParams._default_params["max"] if "max" in CurvatureSizingParams._default_params else json_data["max"]),
-                        growth_rate if growth_rate is not None else ( CurvatureSizingParams._default_params["growth_rate"] if "growth_rate" in CurvatureSizingParams._default_params else json_data["growthRate"]),
-                        normal_angle if normal_angle is not None else ( CurvatureSizingParams._default_params["normal_angle"] if "normal_angle" in CurvatureSizingParams._default_params else json_data["normalAngle"]),
-                        use_cad_curvature if use_cad_curvature is not None else ( CurvatureSizingParams._default_params["use_cad_curvature"] if "use_cad_curvature" in CurvatureSizingParams._default_params else json_data["useCadCurvature"]))
+                        min if min is not None else ( CurvatureSizingParams._default_params["min"] if "min" in CurvatureSizingParams._default_params else (json_data["min"] if "min" in json_data else None)),
+                        max if max is not None else ( CurvatureSizingParams._default_params["max"] if "max" in CurvatureSizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( CurvatureSizingParams._default_params["growth_rate"] if "growth_rate" in CurvatureSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
+                        normal_angle if normal_angle is not None else ( CurvatureSizingParams._default_params["normal_angle"] if "normal_angle" in CurvatureSizingParams._default_params else (json_data["normalAngle"] if "normalAngle" in json_data else None)),
+                        use_cad_curvature if use_cad_curvature is not None else ( CurvatureSizingParams._default_params["use_cad_curvature"] if "use_cad_curvature" in CurvatureSizingParams._default_params else (json_data["useCadCurvature"] if "useCadCurvature" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -152,11 +153,16 @@ class CurvatureSizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["min"] = self._min
-        json_data["max"] = self._max
-        json_data["growthRate"] = self._growth_rate
-        json_data["normalAngle"] = self._normal_angle
-        json_data["useCadCurvature"] = self._use_cad_curvature
+        if self._min is not None:
+            json_data["min"] = self._min
+        if self._max is not None:
+            json_data["max"] = self._max
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        if self._normal_angle is not None:
+            json_data["normalAngle"] = self._normal_angle
+        if self._use_cad_curvature is not None:
+            json_data["useCadCurvature"] = self._use_cad_curvature
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -273,12 +279,12 @@ class ProximitySizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["min"],
-                json_data["max"],
-                json_data["growthRate"],
-                json_data["elementsPerGap"],
-                json_data["ignoreSelfProximity"],
-                json_data["ignoreOrientation"])
+                json_data["min"] if "min" in json_data else None,
+                json_data["max"] if "max" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None,
+                json_data["elementsPerGap"] if "elementsPerGap" in json_data else None,
+                json_data["ignoreSelfProximity"] if "ignoreSelfProximity" in json_data else None,
+                json_data["ignoreOrientation"] if "ignoreOrientation" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [min, max, growth_rate, elements_per_gap, ignore_self_proximity, ignore_orientation])
             if all_field_specified:
@@ -293,14 +299,15 @@ class ProximitySizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ProximitySizingParams")["ProximitySizingParams"]
+                    param_json = model._communicator.initialize_params(model, "ProximitySizingParams")
+                    json_data = param_json["ProximitySizingParams"] if "ProximitySizingParams" in param_json else {}
                     self.__initialize(
-                        min if min is not None else ( ProximitySizingParams._default_params["min"] if "min" in ProximitySizingParams._default_params else json_data["min"]),
-                        max if max is not None else ( ProximitySizingParams._default_params["max"] if "max" in ProximitySizingParams._default_params else json_data["max"]),
-                        growth_rate if growth_rate is not None else ( ProximitySizingParams._default_params["growth_rate"] if "growth_rate" in ProximitySizingParams._default_params else json_data["growthRate"]),
-                        elements_per_gap if elements_per_gap is not None else ( ProximitySizingParams._default_params["elements_per_gap"] if "elements_per_gap" in ProximitySizingParams._default_params else json_data["elementsPerGap"]),
-                        ignore_self_proximity if ignore_self_proximity is not None else ( ProximitySizingParams._default_params["ignore_self_proximity"] if "ignore_self_proximity" in ProximitySizingParams._default_params else json_data["ignoreSelfProximity"]),
-                        ignore_orientation if ignore_orientation is not None else ( ProximitySizingParams._default_params["ignore_orientation"] if "ignore_orientation" in ProximitySizingParams._default_params else json_data["ignoreOrientation"]))
+                        min if min is not None else ( ProximitySizingParams._default_params["min"] if "min" in ProximitySizingParams._default_params else (json_data["min"] if "min" in json_data else None)),
+                        max if max is not None else ( ProximitySizingParams._default_params["max"] if "max" in ProximitySizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( ProximitySizingParams._default_params["growth_rate"] if "growth_rate" in ProximitySizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
+                        elements_per_gap if elements_per_gap is not None else ( ProximitySizingParams._default_params["elements_per_gap"] if "elements_per_gap" in ProximitySizingParams._default_params else (json_data["elementsPerGap"] if "elementsPerGap" in json_data else None)),
+                        ignore_self_proximity if ignore_self_proximity is not None else ( ProximitySizingParams._default_params["ignore_self_proximity"] if "ignore_self_proximity" in ProximitySizingParams._default_params else (json_data["ignoreSelfProximity"] if "ignoreSelfProximity" in json_data else None)),
+                        ignore_orientation if ignore_orientation is not None else ( ProximitySizingParams._default_params["ignore_orientation"] if "ignore_orientation" in ProximitySizingParams._default_params else (json_data["ignoreOrientation"] if "ignoreOrientation" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -350,12 +357,18 @@ class ProximitySizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["min"] = self._min
-        json_data["max"] = self._max
-        json_data["growthRate"] = self._growth_rate
-        json_data["elementsPerGap"] = self._elements_per_gap
-        json_data["ignoreSelfProximity"] = self._ignore_self_proximity
-        json_data["ignoreOrientation"] = self._ignore_orientation
+        if self._min is not None:
+            json_data["min"] = self._min
+        if self._max is not None:
+            json_data["max"] = self._max
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        if self._elements_per_gap is not None:
+            json_data["elementsPerGap"] = self._elements_per_gap
+        if self._ignore_self_proximity is not None:
+            json_data["ignoreSelfProximity"] = self._ignore_self_proximity
+        if self._ignore_orientation is not None:
+            json_data["ignoreOrientation"] = self._ignore_orientation
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -466,8 +479,8 @@ class SoftSizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["max"],
-                json_data["growthRate"])
+                json_data["max"] if "max" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [max, growth_rate])
             if all_field_specified:
@@ -478,10 +491,11 @@ class SoftSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SoftSizingParams")["SoftSizingParams"]
+                    param_json = model._communicator.initialize_params(model, "SoftSizingParams")
+                    json_data = param_json["SoftSizingParams"] if "SoftSizingParams" in param_json else {}
                     self.__initialize(
-                        max if max is not None else ( SoftSizingParams._default_params["max"] if "max" in SoftSizingParams._default_params else json_data["max"]),
-                        growth_rate if growth_rate is not None else ( SoftSizingParams._default_params["growth_rate"] if "growth_rate" in SoftSizingParams._default_params else json_data["growthRate"]))
+                        max if max is not None else ( SoftSizingParams._default_params["max"] if "max" in SoftSizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( SoftSizingParams._default_params["growth_rate"] if "growth_rate" in SoftSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -519,8 +533,10 @@ class SoftSizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["max"] = self._max
-        json_data["growthRate"] = self._growth_rate
+        if self._max is not None:
+            json_data["max"] = self._max
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -589,8 +605,8 @@ class HardSizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["min"],
-                json_data["growthRate"])
+                json_data["min"] if "min" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [min, growth_rate])
             if all_field_specified:
@@ -601,10 +617,11 @@ class HardSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "HardSizingParams")["HardSizingParams"]
+                    param_json = model._communicator.initialize_params(model, "HardSizingParams")
+                    json_data = param_json["HardSizingParams"] if "HardSizingParams" in param_json else {}
                     self.__initialize(
-                        min if min is not None else ( HardSizingParams._default_params["min"] if "min" in HardSizingParams._default_params else json_data["min"]),
-                        growth_rate if growth_rate is not None else ( HardSizingParams._default_params["growth_rate"] if "growth_rate" in HardSizingParams._default_params else json_data["growthRate"]))
+                        min if min is not None else ( HardSizingParams._default_params["min"] if "min" in HardSizingParams._default_params else (json_data["min"] if "min" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( HardSizingParams._default_params["growth_rate"] if "growth_rate" in HardSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -642,8 +659,10 @@ class HardSizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["min"] = self._min
-        json_data["growthRate"] = self._growth_rate
+        if self._min is not None:
+            json_data["min"] = self._min
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -705,7 +724,7 @@ class MeshedSizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["growthRate"])
+                json_data["growthRate"] if "growthRate" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [growth_rate])
             if all_field_specified:
@@ -715,9 +734,10 @@ class MeshedSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MeshedSizingParams")["MeshedSizingParams"]
+                    param_json = model._communicator.initialize_params(model, "MeshedSizingParams")
+                    json_data = param_json["MeshedSizingParams"] if "MeshedSizingParams" in param_json else {}
                     self.__initialize(
-                        growth_rate if growth_rate is not None else ( MeshedSizingParams._default_params["growth_rate"] if "growth_rate" in MeshedSizingParams._default_params else json_data["growthRate"]))
+                        growth_rate if growth_rate is not None else ( MeshedSizingParams._default_params["growth_rate"] if "growth_rate" in MeshedSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -752,7 +772,8 @@ class MeshedSizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["growthRate"] = self._growth_rate
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -812,8 +833,8 @@ class BoiSizingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["max"],
-                json_data["growthRate"])
+                json_data["max"] if "max" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [max, growth_rate])
             if all_field_specified:
@@ -824,10 +845,11 @@ class BoiSizingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "BoiSizingParams")["BoiSizingParams"]
+                    param_json = model._communicator.initialize_params(model, "BoiSizingParams")
+                    json_data = param_json["BoiSizingParams"] if "BoiSizingParams" in param_json else {}
                     self.__initialize(
-                        max if max is not None else ( BoiSizingParams._default_params["max"] if "max" in BoiSizingParams._default_params else json_data["max"]),
-                        growth_rate if growth_rate is not None else ( BoiSizingParams._default_params["growth_rate"] if "growth_rate" in BoiSizingParams._default_params else json_data["growthRate"]))
+                        max if max is not None else ( BoiSizingParams._default_params["max"] if "max" in BoiSizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( BoiSizingParams._default_params["growth_rate"] if "growth_rate" in BoiSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -865,8 +887,10 @@ class BoiSizingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["max"] = self._max
-        json_data["growthRate"] = self._growth_rate
+        if self._max is not None:
+            json_data["max"] = self._max
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -928,7 +952,7 @@ class SizeControlSummaryResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["message"])
+                json_data["message"] if "message" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [message])
             if all_field_specified:
@@ -938,9 +962,10 @@ class SizeControlSummaryResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SizeControlSummaryResult")["SizeControlSummaryResult"]
+                    param_json = model._communicator.initialize_params(model, "SizeControlSummaryResult")
+                    json_data = param_json["SizeControlSummaryResult"] if "SizeControlSummaryResult" in param_json else {}
                     self.__initialize(
-                        message if message is not None else ( SizeControlSummaryResult._default_params["message"] if "message" in SizeControlSummaryResult._default_params else json_data["message"]))
+                        message if message is not None else ( SizeControlSummaryResult._default_params["message"] if "message" in SizeControlSummaryResult._default_params else (json_data["message"] if "message" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -975,7 +1000,8 @@ class SizeControlSummaryResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["message"] = self._message
+        if self._message is not None:
+            json_data["message"] = self._message
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1031,7 +1057,8 @@ class SizeControlSummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SizeControlSummaryParams")["SizeControlSummaryParams"]
+                    param_json = model._communicator.initialize_params(model, "SizeControlSummaryParams")
+                    json_data = param_json["SizeControlSummaryParams"] if "SizeControlSummaryParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -1108,8 +1135,8 @@ class SetSizingResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                [WarningCode(data) for data in json_data["warningCodes"]],
-                ErrorCode(json_data["errorCode"]))
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [warning_codes, error_code])
             if all_field_specified:
@@ -1120,10 +1147,11 @@ class SetSizingResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SetSizingResults")["SetSizingResults"]
+                    param_json = model._communicator.initialize_params(model, "SetSizingResults")
+                    json_data = param_json["SetSizingResults"] if "SetSizingResults" in param_json else {}
                     self.__initialize(
-                        warning_codes if warning_codes is not None else ( SetSizingResults._default_params["warning_codes"] if "warning_codes" in SetSizingResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]),
-                        error_code if error_code is not None else ( SetSizingResults._default_params["error_code"] if "error_code" in SetSizingResults._default_params else ErrorCode(json_data["errorCode"])))
+                        warning_codes if warning_codes is not None else ( SetSizingResults._default_params["warning_codes"] if "warning_codes" in SetSizingResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        error_code if error_code is not None else ( SetSizingResults._default_params["error_code"] if "error_code" in SetSizingResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1161,8 +1189,10 @@ class SetSizingResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["warningCodes"] = [data for data in self._warning_codes]
-        json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

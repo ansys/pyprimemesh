@@ -1,9 +1,9 @@
 """
 .. _ref_pipe_tee_mesh:
 
-=================================================================
+================================================================
 Meshing a pipe tee for both flow and thermal structural analysis
-=================================================================
+================================================================
 
 **Summary**: This example demonstrates how to mesh a pipe T-section for both fluid
 and structural thermal simulation.
@@ -36,7 +36,7 @@ Procedure
 """
 
 ###############################################################################
-# Import all necessary modules and launch an instance of Prime.
+# Import all necessary modules and launch an instance of Prime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 import ansys.meshing.prime as prime
@@ -51,8 +51,8 @@ model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
-# Import CAD geometry.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import CAD geometry
+# ~~~~~~~~~~~~~~~~~~~
 
 # Download the pipe tee geometry file (.fmd file exported by SpaceClaim).
 cad_file = prime.examples.download_pipe_tee_fmd()
@@ -66,8 +66,8 @@ display = Graphics(model)
 display()
 
 ###############################################################################
-# Mesh for structural.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Mesh for structural
+# ~~~~~~~~~~~~~~~~~~~
 
 # Surface and volume mesh structural parts
 # specifying only min/max size performs a tri surface mesh with curvature refinement.
@@ -93,8 +93,8 @@ display(update=True)
 mesh_util.write(os.path.join(os.getcwd(), r"t-junction-solids.cdb"))
 
 ###############################################################################
-# Extract fluid by wrapping.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Extract fluid by wrapping
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Reread cad.
 mesh_util.read(cad_file)
@@ -112,8 +112,8 @@ if toDelete:
     model.delete_parts(toDelete)
 
 ###############################################################################
-# Mesh with polyhedral and prisms.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Mesh with polyhedral and prisms
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Compute volume zones and create zones from labels for use in the Fluent solver.
 mesh_util.compute_volumes()
@@ -138,14 +138,14 @@ mesh_util.volume_mesh(
 display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
-# Write a cas file for use in the Fluent solver.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Write a cas file for use in the Fluent solver
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Write CFD model.
 mesh_util.write(os.path.join(os.getcwd(), r"t-junction-fluid.cas"))
 
 ###############################################################################
-# Exit the Prime session.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Exit the Prime session
+# ~~~~~~~~~~~~~~~~~~~~~~
 
 prime_client.exit()

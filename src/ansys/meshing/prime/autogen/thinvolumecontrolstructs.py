@@ -45,7 +45,8 @@ class ThinVolumeMeshParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ThinVolumeMeshParams")["ThinVolumeMeshParams"]
+                    param_json = model._communicator.initialize_params(model, "ThinVolumeMeshParams")
+                    json_data = param_json["ThinVolumeMeshParams"] if "ThinVolumeMeshParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:

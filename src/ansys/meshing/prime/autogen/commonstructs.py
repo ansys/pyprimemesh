@@ -18,7 +18,7 @@ class PartZonelets(CoreObject):
             part_id: int,
             face_zonelets: Iterable[int]):
         self._part_id = part_id
-        self._face_zonelets = face_zonelets if isinstance(face_zonelets, np.ndarray) else np.array(face_zonelets, dtype=np.int32)
+        self._face_zonelets = face_zonelets if isinstance(face_zonelets, np.ndarray) else np.array(face_zonelets, dtype=np.int32) if face_zonelets is not None else None
 
     def __init__(
             self,
@@ -46,8 +46,8 @@ class PartZonelets(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["partID"],
-                json_data["faceZonelets"])
+                json_data["partID"] if "partID" in json_data else None,
+                json_data["faceZonelets"] if "faceZonelets" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [part_id, face_zonelets])
             if all_field_specified:
@@ -58,10 +58,11 @@ class PartZonelets(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "PartZonelets")["PartZonelets"]
+                    param_json = model._communicator.initialize_params(model, "PartZonelets")
+                    json_data = param_json["PartZonelets"] if "PartZonelets" in param_json else {}
                     self.__initialize(
-                        part_id if part_id is not None else ( PartZonelets._default_params["part_id"] if "part_id" in PartZonelets._default_params else json_data["partID"]),
-                        face_zonelets if face_zonelets is not None else ( PartZonelets._default_params["face_zonelets"] if "face_zonelets" in PartZonelets._default_params else json_data["faceZonelets"]))
+                        part_id if part_id is not None else ( PartZonelets._default_params["part_id"] if "part_id" in PartZonelets._default_params else (json_data["partID"] if "partID" in json_data else None)),
+                        face_zonelets if face_zonelets is not None else ( PartZonelets._default_params["face_zonelets"] if "face_zonelets" in PartZonelets._default_params else (json_data["faceZonelets"] if "faceZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -99,8 +100,10 @@ class PartZonelets(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["partID"] = self._part_id
-        json_data["faceZonelets"] = self._face_zonelets
+        if self._part_id is not None:
+            json_data["partID"] = self._part_id
+        if self._face_zonelets is not None:
+            json_data["faceZonelets"] = self._face_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -172,9 +175,9 @@ class SetNameResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                WarningCode(json_data["warningCode"]),
-                json_data["assignedName"],
-                ErrorCode(json_data["errorCode"]))
+                WarningCode(json_data["warningCode"] if "warningCode" in json_data else None),
+                json_data["assignedName"] if "assignedName" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [warning_code, assigned_name, error_code])
             if all_field_specified:
@@ -186,11 +189,12 @@ class SetNameResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SetNameResults")["SetNameResults"]
+                    param_json = model._communicator.initialize_params(model, "SetNameResults")
+                    json_data = param_json["SetNameResults"] if "SetNameResults" in param_json else {}
                     self.__initialize(
-                        warning_code if warning_code is not None else ( SetNameResults._default_params["warning_code"] if "warning_code" in SetNameResults._default_params else WarningCode(json_data["warningCode"])),
-                        assigned_name if assigned_name is not None else ( SetNameResults._default_params["assigned_name"] if "assigned_name" in SetNameResults._default_params else json_data["assignedName"]),
-                        error_code if error_code is not None else ( SetNameResults._default_params["error_code"] if "error_code" in SetNameResults._default_params else ErrorCode(json_data["errorCode"])))
+                        warning_code if warning_code is not None else ( SetNameResults._default_params["warning_code"] if "warning_code" in SetNameResults._default_params else WarningCode(json_data["warningCode"] if "warningCode" in json_data else None)),
+                        assigned_name if assigned_name is not None else ( SetNameResults._default_params["assigned_name"] if "assigned_name" in SetNameResults._default_params else (json_data["assignedName"] if "assignedName" in json_data else None)),
+                        error_code if error_code is not None else ( SetNameResults._default_params["error_code"] if "error_code" in SetNameResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -231,9 +235,12 @@ class SetNameResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["warningCode"] = self._warning_code
-        json_data["assignedName"] = self._assigned_name
-        json_data["errorCode"] = self._error_code
+        if self._warning_code is not None:
+            json_data["warningCode"] = self._warning_code
+        if self._assigned_name is not None:
+            json_data["assignedName"] = self._assigned_name
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -305,7 +312,7 @@ class DeleteResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -315,9 +322,10 @@ class DeleteResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteResults")["DeleteResults"]
+                    param_json = model._communicator.initialize_params(model, "DeleteResults")
+                    json_data = param_json["DeleteResults"] if "DeleteResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( DeleteResults._default_params["error_code"] if "error_code" in DeleteResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( DeleteResults._default_params["error_code"] if "error_code" in DeleteResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -352,7 +360,8 @@ class DeleteResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

@@ -71,13 +71,13 @@ class VolumeQualityResultsPart(CoreObject):
         """
         if json_data:
             self.__initialize(
-                CellQualityMeasure(json_data["cellQualityMeasure"]),
-                json_data["measureName"],
-                json_data["partId"],
-                json_data["qualityLimit"],
-                json_data["nFound"],
-                json_data["maxQuality"],
-                json_data["minQuality"])
+                CellQualityMeasure(json_data["cellQualityMeasure"] if "cellQualityMeasure" in json_data else None),
+                json_data["measureName"] if "measureName" in json_data else None,
+                json_data["partId"] if "partId" in json_data else None,
+                json_data["qualityLimit"] if "qualityLimit" in json_data else None,
+                json_data["nFound"] if "nFound" in json_data else None,
+                json_data["maxQuality"] if "maxQuality" in json_data else None,
+                json_data["minQuality"] if "minQuality" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [cell_quality_measure, measure_name, part_id, quality_limit, n_found, max_quality, min_quality])
             if all_field_specified:
@@ -93,15 +93,16 @@ class VolumeQualityResultsPart(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "VolumeQualityResultsPart")["VolumeQualityResultsPart"]
+                    param_json = model._communicator.initialize_params(model, "VolumeQualityResultsPart")
+                    json_data = param_json["VolumeQualityResultsPart"] if "VolumeQualityResultsPart" in param_json else {}
                     self.__initialize(
-                        cell_quality_measure if cell_quality_measure is not None else ( VolumeQualityResultsPart._default_params["cell_quality_measure"] if "cell_quality_measure" in VolumeQualityResultsPart._default_params else CellQualityMeasure(json_data["cellQualityMeasure"])),
-                        measure_name if measure_name is not None else ( VolumeQualityResultsPart._default_params["measure_name"] if "measure_name" in VolumeQualityResultsPart._default_params else json_data["measureName"]),
-                        part_id if part_id is not None else ( VolumeQualityResultsPart._default_params["part_id"] if "part_id" in VolumeQualityResultsPart._default_params else json_data["partId"]),
-                        quality_limit if quality_limit is not None else ( VolumeQualityResultsPart._default_params["quality_limit"] if "quality_limit" in VolumeQualityResultsPart._default_params else json_data["qualityLimit"]),
-                        n_found if n_found is not None else ( VolumeQualityResultsPart._default_params["n_found"] if "n_found" in VolumeQualityResultsPart._default_params else json_data["nFound"]),
-                        max_quality if max_quality is not None else ( VolumeQualityResultsPart._default_params["max_quality"] if "max_quality" in VolumeQualityResultsPart._default_params else json_data["maxQuality"]),
-                        min_quality if min_quality is not None else ( VolumeQualityResultsPart._default_params["min_quality"] if "min_quality" in VolumeQualityResultsPart._default_params else json_data["minQuality"]))
+                        cell_quality_measure if cell_quality_measure is not None else ( VolumeQualityResultsPart._default_params["cell_quality_measure"] if "cell_quality_measure" in VolumeQualityResultsPart._default_params else CellQualityMeasure(json_data["cellQualityMeasure"] if "cellQualityMeasure" in json_data else None)),
+                        measure_name if measure_name is not None else ( VolumeQualityResultsPart._default_params["measure_name"] if "measure_name" in VolumeQualityResultsPart._default_params else (json_data["measureName"] if "measureName" in json_data else None)),
+                        part_id if part_id is not None else ( VolumeQualityResultsPart._default_params["part_id"] if "part_id" in VolumeQualityResultsPart._default_params else (json_data["partId"] if "partId" in json_data else None)),
+                        quality_limit if quality_limit is not None else ( VolumeQualityResultsPart._default_params["quality_limit"] if "quality_limit" in VolumeQualityResultsPart._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)),
+                        n_found if n_found is not None else ( VolumeQualityResultsPart._default_params["n_found"] if "n_found" in VolumeQualityResultsPart._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        max_quality if max_quality is not None else ( VolumeQualityResultsPart._default_params["max_quality"] if "max_quality" in VolumeQualityResultsPart._default_params else (json_data["maxQuality"] if "maxQuality" in json_data else None)),
+                        min_quality if min_quality is not None else ( VolumeQualityResultsPart._default_params["min_quality"] if "min_quality" in VolumeQualityResultsPart._default_params else (json_data["minQuality"] if "minQuality" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -154,13 +155,20 @@ class VolumeQualityResultsPart(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["cellQualityMeasure"] = self._cell_quality_measure
-        json_data["measureName"] = self._measure_name
-        json_data["partId"] = self._part_id
-        json_data["qualityLimit"] = self._quality_limit
-        json_data["nFound"] = self._n_found
-        json_data["maxQuality"] = self._max_quality
-        json_data["minQuality"] = self._min_quality
+        if self._cell_quality_measure is not None:
+            json_data["cellQualityMeasure"] = self._cell_quality_measure
+        if self._measure_name is not None:
+            json_data["measureName"] = self._measure_name
+        if self._part_id is not None:
+            json_data["partId"] = self._part_id
+        if self._quality_limit is not None:
+            json_data["qualityLimit"] = self._quality_limit
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._max_quality is not None:
+            json_data["maxQuality"] = self._max_quality
+        if self._min_quality is not None:
+            json_data["minQuality"] = self._min_quality
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -282,9 +290,9 @@ class VolumeQualitySummaryResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                [VolumeQualityResultsPart(model = model, json_data = data) for data in json_data["qualityResultsPart"]],
-                json_data["message"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [VolumeQualityResultsPart(model = model, json_data = data) for data in json_data["qualityResultsPart"]] if "qualityResultsPart" in json_data else None,
+                json_data["message"] if "message" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, quality_results_part, message])
             if all_field_specified:
@@ -296,11 +304,12 @@ class VolumeQualitySummaryResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "VolumeQualitySummaryResults")["VolumeQualitySummaryResults"]
+                    param_json = model._communicator.initialize_params(model, "VolumeQualitySummaryResults")
+                    json_data = param_json["VolumeQualitySummaryResults"] if "VolumeQualitySummaryResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( VolumeQualitySummaryResults._default_params["error_code"] if "error_code" in VolumeQualitySummaryResults._default_params else ErrorCode(json_data["errorCode"])),
-                        quality_results_part if quality_results_part is not None else ( VolumeQualitySummaryResults._default_params["quality_results_part"] if "quality_results_part" in VolumeQualitySummaryResults._default_params else [VolumeQualityResultsPart(model = model, json_data = data) for data in json_data["qualityResultsPart"]]),
-                        message if message is not None else ( VolumeQualitySummaryResults._default_params["message"] if "message" in VolumeQualitySummaryResults._default_params else json_data["message"]))
+                        error_code if error_code is not None else ( VolumeQualitySummaryResults._default_params["error_code"] if "error_code" in VolumeQualitySummaryResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        quality_results_part if quality_results_part is not None else ( VolumeQualitySummaryResults._default_params["quality_results_part"] if "quality_results_part" in VolumeQualitySummaryResults._default_params else [VolumeQualityResultsPart(model = model, json_data = data) for data in (json_data["qualityResultsPart"] if "qualityResultsPart" in json_data else None)]),
+                        message if message is not None else ( VolumeQualitySummaryResults._default_params["message"] if "message" in VolumeQualitySummaryResults._default_params else (json_data["message"] if "message" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -341,9 +350,12 @@ class VolumeQualitySummaryResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["qualityResultsPart"] = [data._jsonify() for data in self._quality_results_part]
-        json_data["message"] = self._message
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._quality_results_part is not None:
+            json_data["qualityResultsPart"] = [data._jsonify() for data in self._quality_results_part]
+        if self._message is not None:
+            json_data["message"] = self._message
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -394,7 +406,7 @@ class VolumeQualitySummaryParams(CoreObject):
             quality_limit: Iterable[float]):
         self._cell_quality_measures = cell_quality_measures
         self._scope = scope
-        self._quality_limit = quality_limit if isinstance(quality_limit, np.ndarray) else np.array(quality_limit, dtype=np.double)
+        self._quality_limit = quality_limit if isinstance(quality_limit, np.ndarray) else np.array(quality_limit, dtype=np.double) if quality_limit is not None else None
 
     def __init__(
             self,
@@ -425,9 +437,9 @@ class VolumeQualitySummaryParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                [CellQualityMeasure(data) for data in json_data["cellQualityMeasures"]],
-                ScopeDefinition(model = model, json_data = json_data["scope"]),
-                json_data["qualityLimit"])
+                [CellQualityMeasure(data) for data in json_data["cellQualityMeasures"]] if "cellQualityMeasures" in json_data else None,
+                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None),
+                json_data["qualityLimit"] if "qualityLimit" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [cell_quality_measures, scope, quality_limit])
             if all_field_specified:
@@ -439,11 +451,12 @@ class VolumeQualitySummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "VolumeQualitySummaryParams")["VolumeQualitySummaryParams"]
+                    param_json = model._communicator.initialize_params(model, "VolumeQualitySummaryParams")
+                    json_data = param_json["VolumeQualitySummaryParams"] if "VolumeQualitySummaryParams" in param_json else {}
                     self.__initialize(
-                        cell_quality_measures if cell_quality_measures is not None else ( VolumeQualitySummaryParams._default_params["cell_quality_measures"] if "cell_quality_measures" in VolumeQualitySummaryParams._default_params else [CellQualityMeasure(data) for data in json_data["cellQualityMeasures"]]),
-                        scope if scope is not None else ( VolumeQualitySummaryParams._default_params["scope"] if "scope" in VolumeQualitySummaryParams._default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
-                        quality_limit if quality_limit is not None else ( VolumeQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in VolumeQualitySummaryParams._default_params else json_data["qualityLimit"]))
+                        cell_quality_measures if cell_quality_measures is not None else ( VolumeQualitySummaryParams._default_params["cell_quality_measures"] if "cell_quality_measures" in VolumeQualitySummaryParams._default_params else [CellQualityMeasure(data) for data in (json_data["cellQualityMeasures"] if "cellQualityMeasures" in json_data else None)]),
+                        scope if scope is not None else ( VolumeQualitySummaryParams._default_params["scope"] if "scope" in VolumeQualitySummaryParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))),
+                        quality_limit if quality_limit is not None else ( VolumeQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in VolumeQualitySummaryParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -484,9 +497,12 @@ class VolumeQualitySummaryParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["cellQualityMeasures"] = [data for data in self._cell_quality_measures]
-        json_data["scope"] = self._scope._jsonify()
-        json_data["qualityLimit"] = self._quality_limit
+        if self._cell_quality_measures is not None:
+            json_data["cellQualityMeasures"] = [data for data in self._cell_quality_measures]
+        if self._scope is not None:
+            json_data["scope"] = self._scope._jsonify()
+        if self._quality_limit is not None:
+            json_data["qualityLimit"] = self._quality_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

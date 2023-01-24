@@ -64,6 +64,7 @@ class Mesh:
 
         cad_reader_route : prime.CadReaderRoute
             Route of CadReader.
+
         """
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".msh" or file_name[-7:] == ".msh.gz":
@@ -104,6 +105,7 @@ class Mesh:
         ----------
         file_name : str
             Path of file to be written or exported.
+
         """
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".cdb":
@@ -163,6 +165,7 @@ class Mesh:
         >>> from ansys.meshing.prime import lucid
         >>> mesh_util = lucid.Mesh(model)
         >>> mesh_util.create_zones_from_labels()
+
         """
         if conversion_method != LabelToZoneMethod.SIMPLE:
             self._logger.error("Invalid label to zone conversion method")
@@ -267,6 +270,7 @@ class Mesh:
             Expression of parts to be merged.
         new_name : str
             New part name for the merged part.
+
         """
         part_ids = []
         for part in self._model.parts:
@@ -287,6 +291,7 @@ class Mesh:
             Expression of parts whose topology needs to be deleted.
         delete_edges : bool
             Check whether to delete the edges or not.
+
         """
         for part in self._model.parts:
             if check_name_pattern(parts_expression, part.get_name()):
@@ -352,7 +357,7 @@ class Mesh:
                 res = sizefield.compute_volumetric(
                     size_control_ids=[sizecontrol1.id],
                     volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
-                        enable_multi_threading=False
+                        model=self._model, enable_multi_threading=False
                     ),
                 )
                 surfer.mesh_topo_faces(part_id=part.id, topo_faces=topofaces, params=params)
@@ -380,7 +385,7 @@ class Mesh:
                     res = sizefield.compute_volumetric(
                         size_control_ids=[sizecontrol1.id],
                         volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
-                            enable_multi_threading=False
+                            model=self._model, enable_multi_threading=False
                         ),
                     )
                     surfer.remesh_face_zonelets(part.id, tf, te, params)
@@ -438,6 +443,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for generating surface mesh.
+
         """
         if min_size == None and max_size == None:
             global_sizing = self._model.get_global_sizing_params()
@@ -487,6 +493,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for creating size control.
+
         """
         global_sizes = self._model.get_global_sizing_params()
         if global_sizes.max < size:
@@ -527,6 +534,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for creating size control.
+
         """
         global_sizes = self._model.get_global_sizing_params()
         if max < min:
@@ -569,6 +577,7 @@ class Mesh:
 
         scope : SurfaceScope
             Scope for generating surface mesh.
+
         """
         sizefield = prime.SizeField(model=self._model)
         s_control_ids = []
@@ -580,7 +589,7 @@ class Mesh:
             size_field_res = sizefield.compute_volumetric(
                 size_control_ids=s_control_ids,
                 volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
-                    enable_multi_threading=False
+                    model=self._model, enable_multi_threading=False
                 ),
             )
             self.__surface_mesh_on_active_sf(generate_quads=generate_quads, scope=scope)
@@ -609,6 +618,7 @@ class Mesh:
             Name pattern of face labels with which you want to connect.
         tolerance: float
             Tolerance used for connection.
+
         """
         name_pattern_param = prime.NamePatternParams(self._model)
         connect = prime.Connect(self._model)
@@ -716,6 +726,7 @@ class Mesh:
             Suggested name for the volume zone of the created flow volume.
         cap_scope: SurfaceScope
             Scope defining the face zonelets where cap for flow volume needs to be created.
+
         """
         parts = cap_scope.get_parts(self._model)
         for part in parts:
@@ -813,6 +824,7 @@ class Mesh:
 
         scope : VolumeScope
             Scope of volumes to be meshed.
+
         """
         automesh_params = prime.AutoMeshParams(model=self._model)
         automesh_params.volume_fill_type = volume_fill_type
@@ -1016,7 +1028,7 @@ class Mesh:
         self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
         result = field.compute_volumetric(
             [size_control.id for size_control in size_controls],
-            prime.VolumetricSizeFieldComputeParams(enable_multi_threading=False),
+            prime.VolumetricSizeFieldComputeParams(model=self._model, enable_multi_threading=False),
         )
         return result.size_field_id
 
@@ -1350,8 +1362,8 @@ class Mesh:
     ):
         """Wrap and remesh input.
 
-        Default behaviour is to perform an external wrap using curvature sizing
-        and extract features of any loaded objects in Prime.
+        Default behaviour is to perform an external wrap of all parts in the model
+        using curvature sizing and extracting features.
         The wrap is then remeshed to give a surface mesh for the extracted region.
 
         Geodesic sizing is used if only soft and curvature controls are set.
@@ -1476,6 +1488,7 @@ class Mesh:
         >>> mesh.wrap(min_size=1, max_size=20, create_intersection_loops=True)
         >>> mesh.write("/mesh_output.pmdat")
         >>> prime_client.exit()
+
         """
         if size_fields is None:
             size_fields = []

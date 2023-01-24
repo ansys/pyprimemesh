@@ -87,11 +87,11 @@ class ScopeDefinition(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ScopeEntity(json_data["entityType"]),
-                ScopeEvaluationType(json_data["evaluationType"]),
-                json_data["partExpression"],
-                json_data["labelExpression"],
-                json_data["zoneExpression"])
+                ScopeEntity(json_data["entityType"] if "entityType" in json_data else None),
+                ScopeEvaluationType(json_data["evaluationType"] if "evaluationType" in json_data else None),
+                json_data["partExpression"] if "partExpression" in json_data else None,
+                json_data["labelExpression"] if "labelExpression" in json_data else None,
+                json_data["zoneExpression"] if "zoneExpression" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [entity_type, evaluation_type, part_expression, label_expression, zone_expression])
             if all_field_specified:
@@ -105,13 +105,14 @@ class ScopeDefinition(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ScopeDefinition")["ScopeDefinition"]
+                    param_json = model._communicator.initialize_params(model, "ScopeDefinition")
+                    json_data = param_json["ScopeDefinition"] if "ScopeDefinition" in param_json else {}
                     self.__initialize(
-                        entity_type if entity_type is not None else ( ScopeDefinition._default_params["entity_type"] if "entity_type" in ScopeDefinition._default_params else ScopeEntity(json_data["entityType"])),
-                        evaluation_type if evaluation_type is not None else ( ScopeDefinition._default_params["evaluation_type"] if "evaluation_type" in ScopeDefinition._default_params else ScopeEvaluationType(json_data["evaluationType"])),
-                        part_expression if part_expression is not None else ( ScopeDefinition._default_params["part_expression"] if "part_expression" in ScopeDefinition._default_params else json_data["partExpression"]),
-                        label_expression if label_expression is not None else ( ScopeDefinition._default_params["label_expression"] if "label_expression" in ScopeDefinition._default_params else json_data["labelExpression"]),
-                        zone_expression if zone_expression is not None else ( ScopeDefinition._default_params["zone_expression"] if "zone_expression" in ScopeDefinition._default_params else json_data["zoneExpression"]))
+                        entity_type if entity_type is not None else ( ScopeDefinition._default_params["entity_type"] if "entity_type" in ScopeDefinition._default_params else ScopeEntity(json_data["entityType"] if "entityType" in json_data else None)),
+                        evaluation_type if evaluation_type is not None else ( ScopeDefinition._default_params["evaluation_type"] if "evaluation_type" in ScopeDefinition._default_params else ScopeEvaluationType(json_data["evaluationType"] if "evaluationType" in json_data else None)),
+                        part_expression if part_expression is not None else ( ScopeDefinition._default_params["part_expression"] if "part_expression" in ScopeDefinition._default_params else (json_data["partExpression"] if "partExpression" in json_data else None)),
+                        label_expression if label_expression is not None else ( ScopeDefinition._default_params["label_expression"] if "label_expression" in ScopeDefinition._default_params else (json_data["labelExpression"] if "labelExpression" in json_data else None)),
+                        zone_expression if zone_expression is not None else ( ScopeDefinition._default_params["zone_expression"] if "zone_expression" in ScopeDefinition._default_params else (json_data["zoneExpression"] if "zoneExpression" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -158,11 +159,16 @@ class ScopeDefinition(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["entityType"] = self._entity_type
-        json_data["evaluationType"] = self._evaluation_type
-        json_data["partExpression"] = self._part_expression
-        json_data["labelExpression"] = self._label_expression
-        json_data["zoneExpression"] = self._zone_expression
+        if self._entity_type is not None:
+            json_data["entityType"] = self._entity_type
+        if self._evaluation_type is not None:
+            json_data["evaluationType"] = self._evaluation_type
+        if self._part_expression is not None:
+            json_data["partExpression"] = self._part_expression
+        if self._label_expression is not None:
+            json_data["labelExpression"] = self._label_expression
+        if self._zone_expression is not None:
+            json_data["zoneExpression"] = self._zone_expression
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -269,10 +275,10 @@ class LeakPreventionParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["materialPoints"],
-                ScopeDefinition(model = model, json_data = json_data["scope"]),
-                json_data["maxHoleSize"],
-                json_data["nExpansionLayers"])
+                json_data["materialPoints"] if "materialPoints" in json_data else None,
+                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None),
+                json_data["maxHoleSize"] if "maxHoleSize" in json_data else None,
+                json_data["nExpansionLayers"] if "nExpansionLayers" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [material_points, scope, max_hole_size, n_expansion_layers])
             if all_field_specified:
@@ -285,12 +291,13 @@ class LeakPreventionParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "LeakPreventionParams")["LeakPreventionParams"]
+                    param_json = model._communicator.initialize_params(model, "LeakPreventionParams")
+                    json_data = param_json["LeakPreventionParams"] if "LeakPreventionParams" in param_json else {}
                     self.__initialize(
-                        material_points if material_points is not None else ( LeakPreventionParams._default_params["material_points"] if "material_points" in LeakPreventionParams._default_params else json_data["materialPoints"]),
-                        scope if scope is not None else ( LeakPreventionParams._default_params["scope"] if "scope" in LeakPreventionParams._default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
-                        max_hole_size if max_hole_size is not None else ( LeakPreventionParams._default_params["max_hole_size"] if "max_hole_size" in LeakPreventionParams._default_params else json_data["maxHoleSize"]),
-                        n_expansion_layers if n_expansion_layers is not None else ( LeakPreventionParams._default_params["n_expansion_layers"] if "n_expansion_layers" in LeakPreventionParams._default_params else json_data["nExpansionLayers"]))
+                        material_points if material_points is not None else ( LeakPreventionParams._default_params["material_points"] if "material_points" in LeakPreventionParams._default_params else (json_data["materialPoints"] if "materialPoints" in json_data else None)),
+                        scope if scope is not None else ( LeakPreventionParams._default_params["scope"] if "scope" in LeakPreventionParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))),
+                        max_hole_size if max_hole_size is not None else ( LeakPreventionParams._default_params["max_hole_size"] if "max_hole_size" in LeakPreventionParams._default_params else (json_data["maxHoleSize"] if "maxHoleSize" in json_data else None)),
+                        n_expansion_layers if n_expansion_layers is not None else ( LeakPreventionParams._default_params["n_expansion_layers"] if "n_expansion_layers" in LeakPreventionParams._default_params else (json_data["nExpansionLayers"] if "nExpansionLayers" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -334,10 +341,14 @@ class LeakPreventionParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["materialPoints"] = self._material_points
-        json_data["scope"] = self._scope._jsonify()
-        json_data["maxHoleSize"] = self._max_hole_size
-        json_data["nExpansionLayers"] = self._n_expansion_layers
+        if self._material_points is not None:
+            json_data["materialPoints"] = self._material_points
+        if self._scope is not None:
+            json_data["scope"] = self._scope._jsonify()
+        if self._max_hole_size is not None:
+            json_data["maxHoleSize"] = self._max_hole_size
+        if self._n_expansion_layers is not None:
+            json_data["nExpansionLayers"] = self._n_expansion_layers
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -396,7 +407,7 @@ class SetLeakPreventionsResults(CoreObject):
             error_code: ErrorCode,
             ids: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32)
+        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32) if ids is not None else None
 
     def __init__(
             self,
@@ -424,8 +435,8 @@ class SetLeakPreventionsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["ids"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["ids"] if "ids" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, ids])
             if all_field_specified:
@@ -436,10 +447,11 @@ class SetLeakPreventionsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SetLeakPreventionsResults")["SetLeakPreventionsResults"]
+                    param_json = model._communicator.initialize_params(model, "SetLeakPreventionsResults")
+                    json_data = param_json["SetLeakPreventionsResults"] if "SetLeakPreventionsResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SetLeakPreventionsResults._default_params["error_code"] if "error_code" in SetLeakPreventionsResults._default_params else ErrorCode(json_data["errorCode"])),
-                        ids if ids is not None else ( SetLeakPreventionsResults._default_params["ids"] if "ids" in SetLeakPreventionsResults._default_params else json_data["ids"]))
+                        error_code if error_code is not None else ( SetLeakPreventionsResults._default_params["error_code"] if "error_code" in SetLeakPreventionsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        ids if ids is not None else ( SetLeakPreventionsResults._default_params["ids"] if "ids" in SetLeakPreventionsResults._default_params else (json_data["ids"] if "ids" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -477,8 +489,10 @@ class SetLeakPreventionsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["ids"] = self._ids
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._ids is not None:
+            json_data["ids"] = self._ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -550,9 +564,9 @@ class ContactPreventionParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ScopeDefinition(model = model, json_data = json_data["sourceScope"]),
-                ScopeDefinition(model = model, json_data = json_data["targetScope"]),
-                json_data["size"])
+                ScopeDefinition(model = model, json_data = json_data["sourceScope"] if "sourceScope" in json_data else None),
+                ScopeDefinition(model = model, json_data = json_data["targetScope"] if "targetScope" in json_data else None),
+                json_data["size"] if "size" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [source_scope, target_scope, size])
             if all_field_specified:
@@ -564,11 +578,12 @@ class ContactPreventionParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ContactPreventionParams")["ContactPreventionParams"]
+                    param_json = model._communicator.initialize_params(model, "ContactPreventionParams")
+                    json_data = param_json["ContactPreventionParams"] if "ContactPreventionParams" in param_json else {}
                     self.__initialize(
-                        source_scope if source_scope is not None else ( ContactPreventionParams._default_params["source_scope"] if "source_scope" in ContactPreventionParams._default_params else ScopeDefinition(model = model, json_data = json_data["sourceScope"])),
-                        target_scope if target_scope is not None else ( ContactPreventionParams._default_params["target_scope"] if "target_scope" in ContactPreventionParams._default_params else ScopeDefinition(model = model, json_data = json_data["targetScope"])),
-                        size if size is not None else ( ContactPreventionParams._default_params["size"] if "size" in ContactPreventionParams._default_params else json_data["size"]))
+                        source_scope if source_scope is not None else ( ContactPreventionParams._default_params["source_scope"] if "source_scope" in ContactPreventionParams._default_params else ScopeDefinition(model = model, json_data = (json_data["sourceScope"] if "sourceScope" in json_data else None))),
+                        target_scope if target_scope is not None else ( ContactPreventionParams._default_params["target_scope"] if "target_scope" in ContactPreventionParams._default_params else ScopeDefinition(model = model, json_data = (json_data["targetScope"] if "targetScope" in json_data else None))),
+                        size if size is not None else ( ContactPreventionParams._default_params["size"] if "size" in ContactPreventionParams._default_params else (json_data["size"] if "size" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -609,9 +624,12 @@ class ContactPreventionParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["sourceScope"] = self._source_scope._jsonify()
-        json_data["targetScope"] = self._target_scope._jsonify()
-        json_data["size"] = self._size
+        if self._source_scope is not None:
+            json_data["sourceScope"] = self._source_scope._jsonify()
+        if self._target_scope is not None:
+            json_data["targetScope"] = self._target_scope._jsonify()
+        if self._size is not None:
+            json_data["size"] = self._size
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -660,7 +678,7 @@ class SetContactPreventionsResults(CoreObject):
             error_code: ErrorCode,
             ids: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32)
+        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32) if ids is not None else None
 
     def __init__(
             self,
@@ -688,8 +706,8 @@ class SetContactPreventionsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["ids"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["ids"] if "ids" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, ids])
             if all_field_specified:
@@ -700,10 +718,11 @@ class SetContactPreventionsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SetContactPreventionsResults")["SetContactPreventionsResults"]
+                    param_json = model._communicator.initialize_params(model, "SetContactPreventionsResults")
+                    json_data = param_json["SetContactPreventionsResults"] if "SetContactPreventionsResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SetContactPreventionsResults._default_params["error_code"] if "error_code" in SetContactPreventionsResults._default_params else ErrorCode(json_data["errorCode"])),
-                        ids if ids is not None else ( SetContactPreventionsResults._default_params["ids"] if "ids" in SetContactPreventionsResults._default_params else json_data["ids"]))
+                        error_code if error_code is not None else ( SetContactPreventionsResults._default_params["error_code"] if "error_code" in SetContactPreventionsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        ids if ids is not None else ( SetContactPreventionsResults._default_params["ids"] if "ids" in SetContactPreventionsResults._default_params else (json_data["ids"] if "ids" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -741,8 +760,10 @@ class SetContactPreventionsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["ids"] = self._ids
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._ids is not None:
+            json_data["ids"] = self._ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -814,9 +835,9 @@ class FeatureRecoveryParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ScopeDefinition(model = model, json_data = json_data["scope"]),
-                json_data["enableFeatureOctreeRefinement"],
-                json_data["sizeAtFeatures"])
+                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None),
+                json_data["enableFeatureOctreeRefinement"] if "enableFeatureOctreeRefinement" in json_data else None,
+                json_data["sizeAtFeatures"] if "sizeAtFeatures" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [scope, enable_feature_octree_refinement, size_at_features])
             if all_field_specified:
@@ -828,11 +849,12 @@ class FeatureRecoveryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FeatureRecoveryParams")["FeatureRecoveryParams"]
+                    param_json = model._communicator.initialize_params(model, "FeatureRecoveryParams")
+                    json_data = param_json["FeatureRecoveryParams"] if "FeatureRecoveryParams" in param_json else {}
                     self.__initialize(
-                        scope if scope is not None else ( FeatureRecoveryParams._default_params["scope"] if "scope" in FeatureRecoveryParams._default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
-                        enable_feature_octree_refinement if enable_feature_octree_refinement is not None else ( FeatureRecoveryParams._default_params["enable_feature_octree_refinement"] if "enable_feature_octree_refinement" in FeatureRecoveryParams._default_params else json_data["enableFeatureOctreeRefinement"]),
-                        size_at_features if size_at_features is not None else ( FeatureRecoveryParams._default_params["size_at_features"] if "size_at_features" in FeatureRecoveryParams._default_params else json_data["sizeAtFeatures"]))
+                        scope if scope is not None else ( FeatureRecoveryParams._default_params["scope"] if "scope" in FeatureRecoveryParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))),
+                        enable_feature_octree_refinement if enable_feature_octree_refinement is not None else ( FeatureRecoveryParams._default_params["enable_feature_octree_refinement"] if "enable_feature_octree_refinement" in FeatureRecoveryParams._default_params else (json_data["enableFeatureOctreeRefinement"] if "enableFeatureOctreeRefinement" in json_data else None)),
+                        size_at_features if size_at_features is not None else ( FeatureRecoveryParams._default_params["size_at_features"] if "size_at_features" in FeatureRecoveryParams._default_params else (json_data["sizeAtFeatures"] if "sizeAtFeatures" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -873,9 +895,12 @@ class FeatureRecoveryParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["scope"] = self._scope._jsonify()
-        json_data["enableFeatureOctreeRefinement"] = self._enable_feature_octree_refinement
-        json_data["sizeAtFeatures"] = self._size_at_features
+        if self._scope is not None:
+            json_data["scope"] = self._scope._jsonify()
+        if self._enable_feature_octree_refinement is not None:
+            json_data["enableFeatureOctreeRefinement"] = self._enable_feature_octree_refinement
+        if self._size_at_features is not None:
+            json_data["sizeAtFeatures"] = self._size_at_features
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -923,7 +948,7 @@ class SetFeatureRecoveriesResults(CoreObject):
             self,
             ids: Iterable[int],
             error_code: ErrorCode):
-        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32)
+        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32) if ids is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
@@ -952,8 +977,8 @@ class SetFeatureRecoveriesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["ids"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["ids"] if "ids" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [ids, error_code])
             if all_field_specified:
@@ -964,10 +989,11 @@ class SetFeatureRecoveriesResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SetFeatureRecoveriesResults")["SetFeatureRecoveriesResults"]
+                    param_json = model._communicator.initialize_params(model, "SetFeatureRecoveriesResults")
+                    json_data = param_json["SetFeatureRecoveriesResults"] if "SetFeatureRecoveriesResults" in param_json else {}
                     self.__initialize(
-                        ids if ids is not None else ( SetFeatureRecoveriesResults._default_params["ids"] if "ids" in SetFeatureRecoveriesResults._default_params else json_data["ids"]),
-                        error_code if error_code is not None else ( SetFeatureRecoveriesResults._default_params["error_code"] if "error_code" in SetFeatureRecoveriesResults._default_params else ErrorCode(json_data["errorCode"])))
+                        ids if ids is not None else ( SetFeatureRecoveriesResults._default_params["ids"] if "ids" in SetFeatureRecoveriesResults._default_params else (json_data["ids"] if "ids" in json_data else None)),
+                        error_code if error_code is not None else ( SetFeatureRecoveriesResults._default_params["error_code"] if "error_code" in SetFeatureRecoveriesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1005,8 +1031,10 @@ class SetFeatureRecoveriesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["ids"] = self._ids
-        json_data["errorCode"] = self._error_code
+        if self._ids is not None:
+            json_data["ids"] = self._ids
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1072,7 +1100,8 @@ class ScopeZoneletParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ScopeZoneletParams")["ScopeZoneletParams"]
+                    param_json = model._communicator.initialize_params(model, "ScopeZoneletParams")
+                    json_data = param_json["ScopeZoneletParams"] if "ScopeZoneletParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -1149,8 +1178,8 @@ class SetScopeResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                WarningCode(json_data["warningCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                WarningCode(json_data["warningCode"] if "warningCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code, warning_code])
             if all_field_specified:
@@ -1161,10 +1190,11 @@ class SetScopeResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SetScopeResults")["SetScopeResults"]
+                    param_json = model._communicator.initialize_params(model, "SetScopeResults")
+                    json_data = param_json["SetScopeResults"] if "SetScopeResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SetScopeResults._default_params["error_code"] if "error_code" in SetScopeResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_code if warning_code is not None else ( SetScopeResults._default_params["warning_code"] if "warning_code" in SetScopeResults._default_params else WarningCode(json_data["warningCode"])))
+                        error_code if error_code is not None else ( SetScopeResults._default_params["error_code"] if "error_code" in SetScopeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_code if warning_code is not None else ( SetScopeResults._default_params["warning_code"] if "warning_code" in SetScopeResults._default_params else WarningCode(json_data["warningCode"] if "warningCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1202,8 +1232,10 @@ class SetScopeResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["warningCode"] = self._warning_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_code is not None:
+            json_data["warningCode"] = self._warning_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

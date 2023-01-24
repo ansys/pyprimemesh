@@ -35,6 +35,7 @@ prime_error_messages = {
     ErrorCode.INTERRUPTED: "Prime operation interrupted.",
     ErrorCode.AUTOMESHFAILED: "Auto-Mesh failed.",
     ErrorCode.INVALIDPRISMCONTROLS: "Conflict of prism settings on zonelets or invalid prism controls selected.",
+    ErrorCode.PERIODICSURFACESNOTSUPPORTEDFORPRISMS: "Periodic surfaces selected for prism generation, not supported.",
     ErrorCode.ALREADYVOLUMEMESHED: "Already volume meshed.",
     ErrorCode.VOLUMESNOTUPTODATE: "Volumes are not up to date. Update volumes and try again.",
     ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS: "Quadratic meshing is supported only for tetrahedrons.",
@@ -54,6 +55,7 @@ prime_error_messages = {
     ErrorCode.INVALIDPLANEPOINTS: "Invalid plane points. You need to provide 3 points (9 coordinates).",
     ErrorCode.PLANECOLLINEARPOINTS: "Collinear or duplicate points given to define plane.",
     ErrorCode.INVALIDREGISTERID: "Invalid register id provided. Register ids between 1 to 28 are valid.",
+    ErrorCode.SURFACEFEATURETYPENOTSUPPORTED: "Surface search for provided feature type is not supported.",
     ErrorCode.DELETEZONELETSCONNECTEDTOCELLS: "Cannot delete face zonelets connected to volume mesh.",
     ErrorCode.DELETEZONELETSFAILED: "Delete zonelets failed.",
     ErrorCode.PROJECTONCADGEOMETRYFAILED: "Projection on CAD geometry failed.",
@@ -206,10 +208,26 @@ prime_error_messages = {
     ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS: "Remesh is not supported for periodic face zonelets.",
     ErrorCode.EXTRACTVOLUMESFAILED: "Extract volumes failed.",
     ErrorCode.REFINEATCONTACTSFAILED: "Failed to refine at contacts.",
+    ErrorCode.RECOVERPERIODICSURFACESFAILED: "Failed to recover periodic surfaces.",
+    ErrorCode.RECOVERPERIODICSURFACESINVALIDSCOPE: "Source face zonelets are empty. Invalid scope input.",
+    ErrorCode.CHECKPERIODICPAIRSFAILED: "Failed to recover periodic surfaces. No matching periodic face pair found. Check the inputs.",
+    ErrorCode.PERIODICSURFACESEDGESMISMATCH: "Failed to recover periodic surfaces. Edge entities do not match on periodic source and target surfaces.",
     ErrorCode.CREATECAPONFACEZONELETSFAILED: "Failed to create cap on face zonelets.",
+    ErrorCode.INTERSECTIONINTARGETVOLUMES: "Found overlapping or intersecting target volumes.",
+    ErrorCode.INTERSECTIONINCUTTERVOLUMES: "Found overlapping or intersecting cutter volumes.",
+    ErrorCode.SUBTRACTVOLUMEFAILED: "Failed to subtract volumes.",
     ErrorCode.ZONELETSARENOTOFSAMEDIMENSION: "Zonelets are not of same dimension.",
     ErrorCode.MERGEZONELETSFAILED: "Merge zonelets failed.",
     ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS: "Merge small zonelets option is supported for only face zonelets.",
+    ErrorCode.INVALIDINPUTVOLUMES: "Invalid input volumes.",
+    ErrorCode.MATCHEDMESHOPTIONINVALID: "Invalid option chosen to connect two different parts.",
+    ErrorCode.COLOCATEMATCHEDNODESFAILED: "Colocation of matched nodes failed.",
+    ErrorCode.IMPRINTBOUNDARYNODESFAILED: "Imprint of boundary nodes failed.",
+    ErrorCode.IMPRINTBOUNDARYEDGESFAILED: "Imprint of boundary edges failed.",
+    ErrorCode.SPLITINTERSECTINGBOUNDARYEDGESFAILED: "Splitting of intersecting boundary edges failed.",
+    ErrorCode.MATCHINTERIORFAILED: "Matching of interior region of overlap failed.",
+    ErrorCode.TOLERANCEVALUEINVALID: "Invalid tolerance value specified.",
+    ErrorCode.SOURCEORTARGETNOTSPECIFIED: "No target or source faces specified.",
 }
 
 prime_warning_messages = {
@@ -249,16 +267,18 @@ prime_warning_messages = {
     WarningCode.MESHHASINVALIDSHAPE: "Mesh has invalid shape.",
     WarningCode.MESHHASLEFTHANDEDNESSFACES: "Mesh has left handed faces.",
     WarningCode.FACEZONELETSWITHOUTVOLUMES: "Face zonelets have no volume associated to them.",
+    WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES: "Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets.",
 }
 
 
 class PrimeRuntimeError(Exception):
     '''Runtime error for PyPrimeMesh.'''
 
-    def __init__(self, message, error_code: ErrorCode = None):
+    def __init__(self, message, error_code: ErrorCode = None, error_locations=None):
         super().__init__()
         self._message = self.__process_message(message)
         self._error_code = error_code
+        self._error_locations = error_locations
 
     def __str__(self) -> str:
         return self._message
@@ -275,11 +295,18 @@ class PrimeRuntimeError(Exception):
 
     @property
     def message(self):
+        """Error message to be reported."""
         return self._message
 
     @property
     def error_code(self) -> ErrorCode:
+        """Error code representing the error."""
         return self._error_code
+
+    @property
+    def error_locations(self) -> list:
+        """Locations associated with the error."""
+        return self._error_locations
 
 
 class PrimeRuntimeWarning(UserWarning):
@@ -294,6 +321,7 @@ class PrimeRuntimeWarning(UserWarning):
 
     @property
     def message(self):
+        """Warning message to be reported."""
         return self._message
 
 
@@ -355,13 +383,29 @@ def error_code_handler(_func=None):
             if result is not None:
                 if isinstance(result, dict):
                     error_code = result.get('errorCode', None)
+                    error_location_arr = result.get('errorLocations', None)
+                    error_locations = (
+                        [
+                            error_location_arr[i : i + 3]
+                            for i in range(0, len(error_location_arr), 3)
+                        ]
+                        if error_location_arr is not None
+                        else []
+                    )
                     if error_code is not None:
                         if error_code > 0:
+                            error_location_msg = (
+                                f'\nError Locations: {error_locations}'
+                                if len(error_locations) > 0
+                                else f''
+                            )
                             raise PrimeRuntimeError(
                                 prime_error_messages.get(
                                     ErrorCode(error_code), f'Unrecogonized error code {error_code}'
-                                ),
+                                )
+                                + error_location_msg,
                                 ErrorCode(error_code),
+                                error_locations,
                             )
 
                     prime_warnings = []
