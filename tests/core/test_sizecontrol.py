@@ -1,18 +1,11 @@
 import ansys.meshing.prime as prime
 
 
-def test_sizecontrol(get_remote_client, get_examples):
+def test_sizecontrol(initialized_model_elbow):
     """Test the regular usage of SizeControl Class."""
 
     # load example from fixture
-    elbow_lucid = get_examples["elbow_lucid"]
-
-    # initialize model from fixture
-    model = get_remote_client.model
-
-    # init mesher and load the example
-    mesher = prime.lucid.Mesh(model)
-    mesher.read(file_name=elbow_lucid)
+    model, _ = initialized_model_elbow
 
     # create a SizeControl object from the model
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
