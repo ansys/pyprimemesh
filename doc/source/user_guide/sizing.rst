@@ -43,7 +43,7 @@ Curvature sizing
 On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the :attr:`CURVATURE <ansys.meshing.prime.SizingType.CURVATURE>`
 parameter sizes based on the scope based on the local curvature. The size is small when the local curvature is large and vice versa.
 This code shows how to use the :class:`CurvatureSizingParams <ansys.meshing.prime.CurvatureSizingParams>` class to specify
-the mininum and maximum size, growth rate, and normal angle:
+the minimum and maximum size, growth rate, and normal angle:
 
 .. code:: python
 

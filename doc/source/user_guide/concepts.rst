@@ -135,7 +135,7 @@ Zones
 
 Zonelets or TopoEntities can be further grouped into zones. A zonelet or TopoEntity can only be present in a single zone.
 
-When exporting a mesh (.msh, .cas) file to the Fluent solver, you should define the boundary conditions for the zones.
+When exporting a mesh (MSH or CAS) file to the Fluent solver, you should define the boundary conditions for the zones.
 
 When importing a Fluent solver model, each zone is defined as a single zonelet.
 

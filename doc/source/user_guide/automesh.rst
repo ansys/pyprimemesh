@@ -36,7 +36,7 @@ and generate the volume mesh on meshed topofaces:
    )
 
 
-This code prints the automesh parameters so that you can review them:
+This code prints the automatic mesh parameters so that you can review them:
 
 .. code:: python
 
@@ -137,7 +137,7 @@ This code prints the volume quality summary:
 Prism controls for polyhedral mesh using the Lucid module
 ---------------------------------------------------------
 
-This example shows how to generate the preceding poly prims method using the Lucid module:
+This example shows how to generate the preceding poly prism method using the Lucid module:
 
 .. code:: python
 

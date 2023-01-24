@@ -11,7 +11,9 @@ Fluent Meshing
 Fluent Meshing's
 geodesical
 hexahedra
+Lucid
 Meshedgeodesic
+Meshing's
 multithreading
 PyVista
 topoedges
@@ -21,6 +23,9 @@ Remesh
 remesh
 remeshing
 tetrahedra
+Topo
 TopoEntities
+Zonelet
+zonelet
 Zonelets
 zonelets

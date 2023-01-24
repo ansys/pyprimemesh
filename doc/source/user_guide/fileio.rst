@@ -40,9 +40,9 @@ and :class:`FileWriteParams <ansys.meshing.prime.FileWriteParams>` classes respe
     method in the Lucid API. The method supports PyPrimeMesh's native format, various CAD formats, and solver mesh files. 
 
 
-=============
-Importing CAD
-=============
+================
+Import CAD files
+================
 
 The :func:`FileIO.import_cad() <ansys.meshing.prime.FileIO.import_cad>` method allows
 you to import CAD files and set parameters for importing files using the
@@ -92,8 +92,8 @@ To view the CAD supported for the Workbench route on different platforms, see
     while installing Ansys Workbench. 
 
 
-Appending CAD files
--------------------
+Append CAD files
+----------------
 
 The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` parameter allows
 you to append a CAD file to the model: 
@@ -111,8 +111,8 @@ the Lucid API:
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read("cad_to_append.scdoc", append=True)
 
-Parametric CAD
---------------
+Parametric CAD update
+---------------------
 
 Parametric CAD update can be used while importing CAD files that have parameters defined that
 can be accessed by Workbench CAD readers.  
@@ -131,7 +131,7 @@ This code gets existing CAD parameters while importing:
 
     {'my_param': 1}
 
-This code sets parameters used for the import:
+This code sets the parameters that are used for the import:
 
 .. code:: python
 
@@ -227,9 +227,9 @@ from the CAD body name. The number of parts is identical to the number of bodies
     **Part creation by body (from SpaceClaim to PyPrimeMesh part structure)**
 
 
-=========================================
-Importing and exporting solver mesh files
-=========================================
+===================================
+Import and export solver mesh files
+===================================
 
 .. tip::
     File extensions such as CAS ``(*.cas)``, MSH ``(*.msh, *.msh.gz)``, and CDB ``(*.cdb)`` can be imported
@@ -259,7 +259,7 @@ Import solver mesh files
 .. note::
     All import methods have the optional parameter to append imported files to an existing model.
 
-Export Solver Mesh Files
+Export solver mesh files
 ------------------------
 
  - The :func:`FileIO.export_fluent_case() <ansys.meshing.prime.FileIO.export_fluent_case>` method allows you to
@@ -279,9 +279,9 @@ Export Solver Mesh Files
    splines using the :class:`ExportBoundaryFittedSplineParams <ansys.meshing.prime.ExportBoundaryFittedSplineParams>` class.
 
 
-====================================
-Reading and writing size field files
-====================================
+===============================
+Read and write size field files
+===============================
 
 Native PSF format
 -----------------

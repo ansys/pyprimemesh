@@ -24,7 +24,7 @@ The following example shows how to perform these steps:
 * Import topology-based geometry (SCDOC) files and visualize the model.
 * Surface mesh the topofaces with constant size.
 
-Sart the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
+Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
 .. code:: python
 
@@ -53,7 +53,7 @@ Sart the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
     **CAD geometry imported**
 
-Initialize surfer parameters and generate surface mesh on topoFaces:
+Initialize surfer parameters and generate surface mesh on topofaces:
 
 .. code:: python
 
@@ -192,8 +192,8 @@ Initialize surfer parameters and generate a surface mesh on face zonelets:
     **Surface mesh displayed**
 
 
-Remesh surface using Lucid module
----------------------------------
+Remesh surface using the Lucid module
+-------------------------------------
 
 This code shows how to replicate the preceding surface mesh results by remeshing
 the surface using the Lucid module:

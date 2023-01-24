@@ -29,6 +29,7 @@ There are three major operations for zonelet connections:
     Connect operations support only computational mesh, which is mesh with reasonable size changes and quality.
     Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, is not supported.
 
+
 The following example shows how to perform these steps:
 
 * Import model and remove geometry topology from each part.
@@ -174,7 +175,8 @@ This code merges parts and scaffold topofaces:
         params=params
     )
 
-This code prints the results so that you can check the number of topofaces failed in the scaffold operation:
+This code prints the results so that you can check the number of topofaces that failed
+in the scaffold operation:
 
 .. code:: python
 

@@ -24,7 +24,7 @@ diagnosing surface connectivity for the given scope and controls:
 
 * Free face edges
 
-* Multi face eEdges
+* Multi face edges
 
 * Self intersections
 
@@ -67,7 +67,7 @@ Face metrics
 ------------
 
 The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class offers various types
-of face quality measures to check face quality metrics.
+of measures to check face quality metrics.
 
  * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0 (ideal) and 1 (worst).
 
@@ -109,7 +109,7 @@ Cell metrics
 ------------
 
 The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class offers various types
-of cell quality measures to check cell quality metrics.
+of measures to check cell quality metrics.
 
  * The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between
    0 (ideal) and 1 (worst).
