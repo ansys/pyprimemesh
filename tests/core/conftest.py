@@ -5,6 +5,12 @@ import ansys.meshing.prime as prime
 
 @pytest.fixture(scope="module")
 def initialized_model_elbow(get_remote_client, get_examples):
+    """Gets the elbow example and initializes the model and its mesher.
+
+    Returns
+    -------
+    Initialized model and the mesher of the model.
+    """
     # load example from fixture
     elbow_lucid = get_examples["elbow_lucid"]
 
@@ -17,6 +23,12 @@ def initialized_model_elbow(get_remote_client, get_examples):
 
 @pytest.fixture(scope="module")
 def initialized_model_toycar(get_remote_client, get_examples):
+    """Gets the toy car example and initializes the model and its mesher.
+
+    Returns
+    -------
+    Initialized model and the mesher of the model.
+    """
     # load example from fixture
     toy_car = get_examples["toy_car"]
 

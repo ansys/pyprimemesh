@@ -1,3 +1,4 @@
+"""This module tests the different methods in Surfer class."""
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 
