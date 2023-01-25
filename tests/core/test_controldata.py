@@ -25,8 +25,17 @@ def test_controldata(initialized_model_elbow):
     assert volume_control_test.name != ('' or None)
     assert volume_control.name == volume_control_test.name
 
-    # error on server side
-    periodic_control = controldata.create_periodic_control()
-    periodic_control_test = controldata.get_periodic_control_by_name(periodic_control.name)
-    assert periodic_control_test.name != ('' or None)
-    assert periodic_control.name == periodic_control_test.name
+    # error on server side:
+    # ansys.meshing.prime.internals.error_handling.PrimeRuntimeError:
+    # Could not find method PrimeMesh::ControlData/CreatePeriodicControl
+
+    # periodic_control = controldata.create_periodic_control()
+    # periodic_control_test = controldata.get_periodic_control_by_name(periodic_control.name)
+    # assert periodic_control_test.name != ('' or None)
+    # assert periodic_control.name == periodic_control_test.name
+
+    assert controldata.wrapper_controls == [wrapper_control]
+    assert controldata.size_controls == [size_control]
+    assert controldata.volume_controls == [volume_control]
+    assert controldata.prism_controls == [prism_control]
+    # assert controldata.periodic_controls == [periodic_control]
