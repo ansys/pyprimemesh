@@ -1,6 +1,6 @@
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.volumecontrol import VolumeControl as _VolumeControl
 from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 
 
 class VolumeControl(_VolumeControl):
@@ -14,6 +14,7 @@ class VolumeControl(_VolumeControl):
 
     def __str__(self) -> str:
         params = VolumeControlParams(model=self._model)
+        # function get_summary() not implemented
         result = _VolumeControl.get_summary(self, params)
         return result.message
 
