@@ -111,7 +111,6 @@ jobs:
   docs:
     name: Documentation
     runs-on: ubuntu-latest
-    needs: [ build ]
     steps:
       - uses: actions/checkout@v3
       
@@ -129,11 +128,6 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: pyprimemesh-client
-          path: dist
-
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -144,7 +138,7 @@ jobs:
             
       - name: Install Library
         run: |
-          pip install ansys-meshing-prime --find-links dist --pre
+          pip install -e .[all]
 
       - name: Install documentation requirements
         run: |
