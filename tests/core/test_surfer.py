@@ -25,10 +25,13 @@ def test_remesh_face_zonelets_locally(initialized_model_elbow):
     surfer = prime.Surfer(model)
     local_surfer_params = prime.LocalSurferParams(model)
 
-    # TODO: returns empty list
-    face_zonelets = model.parts[0].get_face_zonelets()
-    part_id = model.parts[0].id
-    results = surfer.remesh_face_zonelets_locally(part_id, face_zonelets, 4, local_surfer_params)
+    part = model.parts[0]
+    part.delete_topo_entities(
+        prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=True)
+    )
+    face_zonelets = part.get_face_zonelets()
+    print(face_zonelets)
+    results = surfer.remesh_face_zonelets_locally(part.id, face_zonelets, 1, local_surfer_params)
     assert results.error_code == ErrorCode.NOERROR
 
 
@@ -39,14 +42,15 @@ def test_remesh_face_zonelets(initialized_model_elbow):
 
     surfer = prime.Surfer(model)
     surfer_params = prime.SurferParams(model)
-    part_id = model.parts[0].id
-    # TODO: returns empty list
-    face_zonelets = model.parts[0].get_face_zonelets()
-    edge_zonelets = model.parts[0].get_edge_zonelets()
-    # Error: Not supported for part with topology data
-    # results = surfer.remesh_face_zonelets(part_id,
-    #                        face_zonelets, edge_zonelets, surfer_params)
-    # assert results.error_code == ErrorCode.NOERROR
+    part = model.parts[0]
+    part.delete_topo_entities(
+        prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=True)
+    )
+    face_zonelets = part.get_face_zonelets()
+    edge_zonelets = part.get_edge_zonelets()
+
+    results = surfer.remesh_face_zonelets(part.id, face_zonelets, edge_zonelets, surfer_params)
+    assert results.error_code == ErrorCode.NOERROR
 
 
 def test_initialize_surfer_params_for_wrapper(initialized_model_elbow):
