@@ -4,9 +4,9 @@
 Logging
 *******
 
-A logger can be attached to a session in order to handle streamed output from PyPrimeMesh.  
+A logger can be attached to a session to handle streamed output from PyPrimeMesh.  
 
-An example is shown below where the output is formatted as needed:
+This code attaches a logger and formats the output as needed:
 
 .. code:: python
 
