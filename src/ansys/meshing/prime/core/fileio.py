@@ -1,30 +1,30 @@
+from typing import List
+
+import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
 from ansys.meshing.prime.autogen.fileiostructs import (
+    ExportBoundaryFittedSplineParams,
+    ExportFluentCaseParams,
+    ExportFluentMeshingMeshParams,
+    ExportMapdlCdbParams,
+    ExportMapdlCdbResults,
     FileReadParams,
     FileReadResults,
     FileWriteParams,
     FileWriteResults,
+    ImportCadParams,
+    ImportCadResults,
+    ImportFluentCaseParams,
+    ImportFluentCaseResults,
+    ImportFluentMeshingMeshParams,
+    ImportFluentMeshingMeshResults,
+    ImportMapdlCdbParams,
+    ImportMapdlCdbResults,
     ReadSizeFieldParams,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
-    ImportCadParams,
-    ImportCadResults,
-    ExportMapdlCdbParams,
-    ExportMapdlCdbResults,
-    ImportFluentMeshingMeshParams,
-    ImportFluentMeshingMeshResults,
-    ImportFluentCaseParams,
-    ImportFluentCaseResults,
-    ImportMapdlCdbParams,
-    ImportMapdlCdbResults,
-    ExportFluentCaseParams,
-    ExportFluentMeshingMeshParams,
-    ExportBoundaryFittedSplineParams,
 )
 from ansys.meshing.prime.core.model import Model
-import ansys.meshing.prime.internals.utils as utils
-from typing import List
-
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -318,34 +318,6 @@ class FileIO(_FileIO):
             result = _FileIO.import_fluent_case(self, temp_file_name, import_fluent_case_params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
-        return result
-
-    def export_fluent_case(
-        self, file_name: str, export_fluent_case_params: ExportFluentCaseParams
-    ) -> FileWriteResults:
-        """Exports Fluent case file. Fluent case files have cas extension.
-
-        Parameters
-        ----------
-        file_name : str
-            Path to file on disk.
-        export_fluent_case_params : ExportFluentCaseParams
-            Parameters to export fluent case file.
-
-        Returns
-        -------
-        FileWriteResults
-            Returns the FileWriteResults structure.
-
-        Examples
-        --------
-        >>> file_io = FileIO(model=model)
-        >>> results = file_io.export_fluent_case(
-                        "/tmp/fluent.cas",
-                        prime.ExportFluentCaseParams(model=model))
-        """
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_fluent_case(temp_file_name, export_fluent_case_params)
         return result
 
     def import_mapdl_cdb(
