@@ -160,7 +160,7 @@ jobs:
             
       - name: Install library and documentation requirements
         run: |
-          pip install -e .[all, doc]
+          pip install -e .[all,doc]
 
       - name: Login in Github Container registry
         uses: docker/login-action@v2
@@ -260,7 +260,7 @@ jobs:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         run: |
-          pip install -e .[tests]
+          pip install -e .[all,tests]
           pytest -v tests
 
   release:
