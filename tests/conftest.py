@@ -29,11 +29,15 @@ class RemoteClientManager:
             Number of distributed processes to spawn when running in distributed mode,
             by default ``1``.
         """
+        if 'PYPRIMEMESH_LAUNCH_CONTAINER' in os.environ:
+            version = os.environ.get('PYPRIMEMESH_CONTAINER_TAG', None)
         if n_procs == 1:
-            self.client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
+            self.client = prime.launch_prime(
+                prime_root=prime_root, ip=ip, port=port, version=version
+            )
         else:
             self.client = prime.launch_prime(
-                prime_root=prime_root, ip=ip, port=port, n_procs=n_procs
+                prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, version=version
             )
 
     def start_remote_client(self):
