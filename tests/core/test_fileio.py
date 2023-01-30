@@ -22,13 +22,13 @@ def test_io_pdmat(get_remote_client, get_examples):
         assert "file extension is not supported" in str(prime_error.value)
 
     # Non existent path
-    with pytest.raises(PrimeRuntimeError) as prime_error:
+    with pytest.raises(FileNotFoundError) as prime_error:
 
         _ = file_io.read_pmdat(
             "/nonexistent/file.pmdat",
             file_read_params,
         )
-        assert "Incorrect File Path or Name" in str(prime_error.value)
+        # assert "Incorrect File Path or Name" in str(prime_error.value)
 
     # Empty file
     with pytest.raises(PrimeRuntimeError) as prime_error:
@@ -111,7 +111,7 @@ def test_export_kfile(get_remote_client, get_examples):
         os.path.abspath("./tests/core/test_files/file_test.k"),
         prime.ExportBoundaryFittedSplineParams(model=model),
     )
-    assert results == ErrorCode.NOERROR
+    assert results.error_code == ErrorCode.NOERROR
 
 
 def test_io_sf(get_remote_client):
