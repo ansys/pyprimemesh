@@ -186,6 +186,7 @@ jobs:
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
+          PYPRIMEMESH_CONTAINER_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
