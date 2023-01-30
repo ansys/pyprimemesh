@@ -47,7 +47,6 @@ from ansys.meshing.prime.autogen.featureextraction import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
 
-from ansys.meshing.prime._version import __version__
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.core.fileio import FileIO
