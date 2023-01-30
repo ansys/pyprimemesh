@@ -63,6 +63,7 @@ Merge the parts.
 Check the surface before performing the connect operation.
 
 .. code:: python
+
     diag = prime.SurfaceSearch(model)
     diag_res = diag.get_surface_diagnostic_summary(
         prime.SurfaceDiagnosticSummaryParams(
