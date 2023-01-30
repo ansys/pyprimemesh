@@ -13,6 +13,15 @@ version of Ansys installed dictates the features available to you.
 For more information on getting a licensed copy of Ansys, visit
 `Ansys <ansys>`.
 
+Note: PyPrimeMesh client release has one to one compatibility with Ansys Prime Server release. That is, PyPrimeMesh client is only compatible with its corresponding Ansys Prime Server. See the below table:
+
+===========================  ===========================
+PyPrimeMesh Client Release   Ansys Prime Server Release
+===========================  ===========================
+0.2.0                        23.1.0 (23R1) 
+0.3.0                        23.1.1 (23R1 SP1)
+===========================  ===========================
+
 Installation
 ------------
 
