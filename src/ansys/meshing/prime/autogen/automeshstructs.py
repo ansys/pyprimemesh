@@ -4,8 +4,6 @@ from typing import Dict, Any, Union, List, Iterable
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.internals import utils
 from ansys.meshing.prime.autogen.coreobject import *
-from ansys.meshing.prime.autogen.commontypes import *
-from ansys.meshing.prime.autogen.primeconfig import *
 
 import numpy as np
 
