@@ -59,7 +59,6 @@ Merge the parts.
     model.merge_parts(
         part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
     )
-        
 
 Check the surface before performing the connect operation.
 

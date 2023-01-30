@@ -220,6 +220,6 @@ the surface using the Lucid module:
     mesh_util.read(input_file)
 
     # Surface mesh the geometry with curvature sizing
-    # Set mininum and maximum sizing to use for curvature refinement
+    # Set minimum and maximum sizing to use for curvature refinement
     mesh_util.surface_mesh(min_size=0.27, max_size=5.5)
 
