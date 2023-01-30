@@ -46,7 +46,7 @@ def test_io_pdmat(get_remote_client, get_examples):
 
     # export
     results = file_io.write_pmdat(
-        os.path.abspath("./tests/core/test_files/write_file.pmdat"),
+        os.path.abspath("./tests/core/test_files/file_test.pmdat"),
         prime.FileWriteParams(model=model),
     )
     assert results.error_code == ErrorCode.NOERROR
@@ -102,13 +102,16 @@ def test_io_fluent_case(get_remote_client):
 def test_export_kfile(get_remote_client, get_examples):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
-    file_read_params = prime.FileReadParams(model=model)
     pmdat_path = get_examples["elbow_lucid"]
 
-    """results = file_io.export_boundary_fitted_spline_kfile(
-        os.path.abspath("./tests/core/test_files/file.kfile"),
+    # init mesher and load the example
+    mesher = prime.lucid.Mesh(model)
+    mesher.read(file_name=pmdat_path)
+    results = file_io.export_boundary_fitted_spline_kfile(
+        os.path.abspath("./tests/core/test_files/file_test.k"),
         prime.ExportBoundaryFittedSplineParams(model=model),
-    )"""
+    )
+    assert results == ErrorCode.NOERROR
 
 
 def test_io_sf(get_remote_client):

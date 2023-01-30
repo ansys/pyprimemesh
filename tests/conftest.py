@@ -150,3 +150,16 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
         with open(xmlFileName, 'a') as scenario_log:
             scenario_log.write(xmlstr)
+
+
+def pytest_sessionfinish(session, exitstatus):
+    """Generated files cleanup."""
+    files_list = []
+    files_list.append(os.path.abspath("./tests/core/test_files/file_test.pmdat"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cdb"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cas"))
+    files_list.append(os.path.abspath("./tests/core/test_files/file_test.k"))
+    files_list.append(os.path.abspath("./tests/core/test_files/box_test.psf"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex_test.msh"))
+
+    [os.remove(file) for file in files_list if os.path.isfile(file)]
