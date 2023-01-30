@@ -66,12 +66,12 @@ class AutoNodeMoveParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                CellQualityMeasure(json_data["qualityMeasure"]),
-                json_data["targetQuality"],
-                json_data["dihedralAngle"],
-                json_data["nIterationsPerNode"],
-                json_data["restrictBoundaryNodesAlongSurface"],
-                json_data["nAttempts"])
+                CellQualityMeasure(json_data["qualityMeasure"] if "qualityMeasure" in json_data else None),
+                json_data["targetQuality"] if "targetQuality" in json_data else None,
+                json_data["dihedralAngle"] if "dihedralAngle" in json_data else None,
+                json_data["nIterationsPerNode"] if "nIterationsPerNode" in json_data else None,
+                json_data["restrictBoundaryNodesAlongSurface"] if "restrictBoundaryNodesAlongSurface" in json_data else None,
+                json_data["nAttempts"] if "nAttempts" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [quality_measure, target_quality, dihedral_angle, n_iterations_per_node, restrict_boundary_nodes_along_surface, n_attempts])
             if all_field_specified:
@@ -86,14 +86,15 @@ class AutoNodeMoveParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "AutoNodeMoveParams")["AutoNodeMoveParams"]
+                    param_json = model._communicator.initialize_params(model, "AutoNodeMoveParams")
+                    json_data = param_json["AutoNodeMoveParams"] if "AutoNodeMoveParams" in param_json else {}
                     self.__initialize(
-                        quality_measure if quality_measure is not None else ( AutoNodeMoveParams._default_params["quality_measure"] if "quality_measure" in AutoNodeMoveParams._default_params else CellQualityMeasure(json_data["qualityMeasure"])),
-                        target_quality if target_quality is not None else ( AutoNodeMoveParams._default_params["target_quality"] if "target_quality" in AutoNodeMoveParams._default_params else json_data["targetQuality"]),
-                        dihedral_angle if dihedral_angle is not None else ( AutoNodeMoveParams._default_params["dihedral_angle"] if "dihedral_angle" in AutoNodeMoveParams._default_params else json_data["dihedralAngle"]),
-                        n_iterations_per_node if n_iterations_per_node is not None else ( AutoNodeMoveParams._default_params["n_iterations_per_node"] if "n_iterations_per_node" in AutoNodeMoveParams._default_params else json_data["nIterationsPerNode"]),
-                        restrict_boundary_nodes_along_surface if restrict_boundary_nodes_along_surface is not None else ( AutoNodeMoveParams._default_params["restrict_boundary_nodes_along_surface"] if "restrict_boundary_nodes_along_surface" in AutoNodeMoveParams._default_params else json_data["restrictBoundaryNodesAlongSurface"]),
-                        n_attempts if n_attempts is not None else ( AutoNodeMoveParams._default_params["n_attempts"] if "n_attempts" in AutoNodeMoveParams._default_params else json_data["nAttempts"]))
+                        quality_measure if quality_measure is not None else ( AutoNodeMoveParams._default_params["quality_measure"] if "quality_measure" in AutoNodeMoveParams._default_params else CellQualityMeasure(json_data["qualityMeasure"] if "qualityMeasure" in json_data else None)),
+                        target_quality if target_quality is not None else ( AutoNodeMoveParams._default_params["target_quality"] if "target_quality" in AutoNodeMoveParams._default_params else (json_data["targetQuality"] if "targetQuality" in json_data else None)),
+                        dihedral_angle if dihedral_angle is not None else ( AutoNodeMoveParams._default_params["dihedral_angle"] if "dihedral_angle" in AutoNodeMoveParams._default_params else (json_data["dihedralAngle"] if "dihedralAngle" in json_data else None)),
+                        n_iterations_per_node if n_iterations_per_node is not None else ( AutoNodeMoveParams._default_params["n_iterations_per_node"] if "n_iterations_per_node" in AutoNodeMoveParams._default_params else (json_data["nIterationsPerNode"] if "nIterationsPerNode" in json_data else None)),
+                        restrict_boundary_nodes_along_surface if restrict_boundary_nodes_along_surface is not None else ( AutoNodeMoveParams._default_params["restrict_boundary_nodes_along_surface"] if "restrict_boundary_nodes_along_surface" in AutoNodeMoveParams._default_params else (json_data["restrictBoundaryNodesAlongSurface"] if "restrictBoundaryNodesAlongSurface" in json_data else None)),
+                        n_attempts if n_attempts is not None else ( AutoNodeMoveParams._default_params["n_attempts"] if "n_attempts" in AutoNodeMoveParams._default_params else (json_data["nAttempts"] if "nAttempts" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -143,12 +144,18 @@ class AutoNodeMoveParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["qualityMeasure"] = self._quality_measure
-        json_data["targetQuality"] = self._target_quality
-        json_data["dihedralAngle"] = self._dihedral_angle
-        json_data["nIterationsPerNode"] = self._n_iterations_per_node
-        json_data["restrictBoundaryNodesAlongSurface"] = self._restrict_boundary_nodes_along_surface
-        json_data["nAttempts"] = self._n_attempts
+        if self._quality_measure is not None:
+            json_data["qualityMeasure"] = self._quality_measure
+        if self._target_quality is not None:
+            json_data["targetQuality"] = self._target_quality
+        if self._dihedral_angle is not None:
+            json_data["dihedralAngle"] = self._dihedral_angle
+        if self._n_iterations_per_node is not None:
+            json_data["nIterationsPerNode"] = self._n_iterations_per_node
+        if self._restrict_boundary_nodes_along_surface is not None:
+            json_data["restrictBoundaryNodesAlongSurface"] = self._restrict_boundary_nodes_along_surface
+        if self._n_attempts is not None:
+            json_data["nAttempts"] = self._n_attempts
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -254,7 +261,8 @@ class CheckMeshParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CheckMeshParams")["CheckMeshParams"]
+                    param_json = model._communicator.initialize_params(model, "CheckMeshParams")
+                    json_data = param_json["CheckMeshParams"] if "CheckMeshParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -326,7 +334,7 @@ class VolumeMeshToolResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["error_code"]))
+                ErrorCode(json_data["error_code"] if "error_code" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -336,9 +344,10 @@ class VolumeMeshToolResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "VolumeMeshToolResults")["VolumeMeshToolResults"]
+                    param_json = model._communicator.initialize_params(model, "VolumeMeshToolResults")
+                    json_data = param_json["VolumeMeshToolResults"] if "VolumeMeshToolResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( VolumeMeshToolResults._default_params["error_code"] if "error_code" in VolumeMeshToolResults._default_params else ErrorCode(json_data["error_code"])))
+                        error_code if error_code is not None else ( VolumeMeshToolResults._default_params["error_code"] if "error_code" in VolumeMeshToolResults._default_params else ErrorCode(json_data["error_code"] if "error_code" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -373,7 +382,8 @@ class VolumeMeshToolResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["error_code"] = self._error_code
+        if self._error_code is not None:
+            json_data["error_code"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -450,12 +460,12 @@ class CheckMeshResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["hasNonPositiveVolumes"],
-                json_data["hasNonPositiveAreas"],
-                json_data["hasInvalidShape"],
-                json_data["hasLeftHandedFaces"],
-                ErrorCode(json_data["errorCode"]),
-                [WarningCode(data) for data in json_data["warningCodes"]])
+                json_data["hasNonPositiveVolumes"] if "hasNonPositiveVolumes" in json_data else None,
+                json_data["hasNonPositiveAreas"] if "hasNonPositiveAreas" in json_data else None,
+                json_data["hasInvalidShape"] if "hasInvalidShape" in json_data else None,
+                json_data["hasLeftHandedFaces"] if "hasLeftHandedFaces" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [has_non_positive_volumes, has_non_positive_areas, has_invalid_shape, has_left_handed_faces, error_code, warning_codes])
             if all_field_specified:
@@ -470,14 +480,15 @@ class CheckMeshResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CheckMeshResults")["CheckMeshResults"]
+                    param_json = model._communicator.initialize_params(model, "CheckMeshResults")
+                    json_data = param_json["CheckMeshResults"] if "CheckMeshResults" in param_json else {}
                     self.__initialize(
-                        has_non_positive_volumes if has_non_positive_volumes is not None else ( CheckMeshResults._default_params["has_non_positive_volumes"] if "has_non_positive_volumes" in CheckMeshResults._default_params else json_data["hasNonPositiveVolumes"]),
-                        has_non_positive_areas if has_non_positive_areas is not None else ( CheckMeshResults._default_params["has_non_positive_areas"] if "has_non_positive_areas" in CheckMeshResults._default_params else json_data["hasNonPositiveAreas"]),
-                        has_invalid_shape if has_invalid_shape is not None else ( CheckMeshResults._default_params["has_invalid_shape"] if "has_invalid_shape" in CheckMeshResults._default_params else json_data["hasInvalidShape"]),
-                        has_left_handed_faces if has_left_handed_faces is not None else ( CheckMeshResults._default_params["has_left_handed_faces"] if "has_left_handed_faces" in CheckMeshResults._default_params else json_data["hasLeftHandedFaces"]),
-                        error_code if error_code is not None else ( CheckMeshResults._default_params["error_code"] if "error_code" in CheckMeshResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_codes if warning_codes is not None else ( CheckMeshResults._default_params["warning_codes"] if "warning_codes" in CheckMeshResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]))
+                        has_non_positive_volumes if has_non_positive_volumes is not None else ( CheckMeshResults._default_params["has_non_positive_volumes"] if "has_non_positive_volumes" in CheckMeshResults._default_params else (json_data["hasNonPositiveVolumes"] if "hasNonPositiveVolumes" in json_data else None)),
+                        has_non_positive_areas if has_non_positive_areas is not None else ( CheckMeshResults._default_params["has_non_positive_areas"] if "has_non_positive_areas" in CheckMeshResults._default_params else (json_data["hasNonPositiveAreas"] if "hasNonPositiveAreas" in json_data else None)),
+                        has_invalid_shape if has_invalid_shape is not None else ( CheckMeshResults._default_params["has_invalid_shape"] if "has_invalid_shape" in CheckMeshResults._default_params else (json_data["hasInvalidShape"] if "hasInvalidShape" in json_data else None)),
+                        has_left_handed_faces if has_left_handed_faces is not None else ( CheckMeshResults._default_params["has_left_handed_faces"] if "has_left_handed_faces" in CheckMeshResults._default_params else (json_data["hasLeftHandedFaces"] if "hasLeftHandedFaces" in json_data else None)),
+                        error_code if error_code is not None else ( CheckMeshResults._default_params["error_code"] if "error_code" in CheckMeshResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( CheckMeshResults._default_params["warning_codes"] if "warning_codes" in CheckMeshResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -527,12 +538,18 @@ class CheckMeshResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["hasNonPositiveVolumes"] = self._has_non_positive_volumes
-        json_data["hasNonPositiveAreas"] = self._has_non_positive_areas
-        json_data["hasInvalidShape"] = self._has_invalid_shape
-        json_data["hasLeftHandedFaces"] = self._has_left_handed_faces
-        json_data["errorCode"] = self._error_code
-        json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._has_non_positive_volumes is not None:
+            json_data["hasNonPositiveVolumes"] = self._has_non_positive_volumes
+        if self._has_non_positive_areas is not None:
+            json_data["hasNonPositiveAreas"] = self._has_non_positive_areas
+        if self._has_invalid_shape is not None:
+            json_data["hasInvalidShape"] = self._has_invalid_shape
+        if self._has_left_handed_faces is not None:
+            json_data["hasLeftHandedFaces"] = self._has_left_handed_faces
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

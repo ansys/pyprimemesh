@@ -113,7 +113,7 @@ class FileReadParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["append"])
+                json_data["append"] if "append" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [append])
             if all_field_specified:
@@ -123,9 +123,10 @@ class FileReadParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FileReadParams")["FileReadParams"]
+                    param_json = model._communicator.initialize_params(model, "FileReadParams")
+                    json_data = param_json["FileReadParams"] if "FileReadParams" in param_json else {}
                     self.__initialize(
-                        append if append is not None else ( FileReadParams._default_params["append"] if "append" in FileReadParams._default_params else json_data["append"]))
+                        append if append is not None else ( FileReadParams._default_params["append"] if "append" in FileReadParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -160,7 +161,8 @@ class FileReadParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["append"] = self._append
+        if self._append is not None:
+            json_data["append"] = self._append
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -189,7 +191,7 @@ class SizeFieldFileReadResults(CoreObject):
             error_code: ErrorCode,
             size_field_ids: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32)
+        self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32) if size_field_ids is not None else None
 
     def __init__(
             self,
@@ -217,8 +219,8 @@ class SizeFieldFileReadResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["sizeFieldIds"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["sizeFieldIds"] if "sizeFieldIds" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, size_field_ids])
             if all_field_specified:
@@ -229,10 +231,11 @@ class SizeFieldFileReadResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SizeFieldFileReadResults")["SizeFieldFileReadResults"]
+                    param_json = model._communicator.initialize_params(model, "SizeFieldFileReadResults")
+                    json_data = param_json["SizeFieldFileReadResults"] if "SizeFieldFileReadResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SizeFieldFileReadResults._default_params["error_code"] if "error_code" in SizeFieldFileReadResults._default_params else ErrorCode(json_data["errorCode"])),
-                        size_field_ids if size_field_ids is not None else ( SizeFieldFileReadResults._default_params["size_field_ids"] if "size_field_ids" in SizeFieldFileReadResults._default_params else json_data["sizeFieldIds"]))
+                        error_code if error_code is not None else ( SizeFieldFileReadResults._default_params["error_code"] if "error_code" in SizeFieldFileReadResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        size_field_ids if size_field_ids is not None else ( SizeFieldFileReadResults._default_params["size_field_ids"] if "size_field_ids" in SizeFieldFileReadResults._default_params else (json_data["sizeFieldIds"] if "sizeFieldIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -270,8 +273,10 @@ class SizeFieldFileReadResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["sizeFieldIds"] = self._size_field_ids
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._size_field_ids is not None:
+            json_data["sizeFieldIds"] = self._size_field_ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -333,7 +338,7 @@ class FileReadResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -343,9 +348,10 @@ class FileReadResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FileReadResults")["FileReadResults"]
+                    param_json = model._communicator.initialize_params(model, "FileReadResults")
+                    json_data = param_json["FileReadResults"] if "FileReadResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( FileReadResults._default_params["error_code"] if "error_code" in FileReadResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( FileReadResults._default_params["error_code"] if "error_code" in FileReadResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -380,7 +386,8 @@ class FileReadResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -436,7 +443,8 @@ class FileWriteParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FileWriteParams")["FileWriteParams"]
+                    param_json = model._communicator.initialize_params(model, "FileWriteParams")
+                    json_data = param_json["FileWriteParams"] if "FileWriteParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -508,7 +516,7 @@ class FileWriteResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -518,9 +526,10 @@ class FileWriteResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FileWriteResults")["FileWriteResults"]
+                    param_json = model._communicator.initialize_params(model, "FileWriteResults")
+                    json_data = param_json["FileWriteResults"] if "FileWriteResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( FileWriteResults._default_params["error_code"] if "error_code" in FileWriteResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( FileWriteResults._default_params["error_code"] if "error_code" in FileWriteResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -555,7 +564,8 @@ class FileWriteResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -607,7 +617,7 @@ class ReadSizeFieldParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["append"])
+                json_data["append"] if "append" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [append])
             if all_field_specified:
@@ -617,9 +627,10 @@ class ReadSizeFieldParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ReadSizeFieldParams")["ReadSizeFieldParams"]
+                    param_json = model._communicator.initialize_params(model, "ReadSizeFieldParams")
+                    json_data = param_json["ReadSizeFieldParams"] if "ReadSizeFieldParams" in param_json else {}
                     self.__initialize(
-                        append if append is not None else ( ReadSizeFieldParams._default_params["append"] if "append" in ReadSizeFieldParams._default_params else json_data["append"]))
+                        append if append is not None else ( ReadSizeFieldParams._default_params["append"] if "append" in ReadSizeFieldParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -654,7 +665,8 @@ class ReadSizeFieldParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["append"] = self._append
+        if self._append is not None:
+            json_data["append"] = self._append
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -706,7 +718,7 @@ class WriteSizeFieldParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["writeOnlyActiveSizeFields"])
+                json_data["writeOnlyActiveSizeFields"] if "writeOnlyActiveSizeFields" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [write_only_active_size_fields])
             if all_field_specified:
@@ -716,9 +728,10 @@ class WriteSizeFieldParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "WriteSizeFieldParams")["WriteSizeFieldParams"]
+                    param_json = model._communicator.initialize_params(model, "WriteSizeFieldParams")
+                    json_data = param_json["WriteSizeFieldParams"] if "WriteSizeFieldParams" in param_json else {}
                     self.__initialize(
-                        write_only_active_size_fields if write_only_active_size_fields is not None else ( WriteSizeFieldParams._default_params["write_only_active_size_fields"] if "write_only_active_size_fields" in WriteSizeFieldParams._default_params else json_data["writeOnlyActiveSizeFields"]))
+                        write_only_active_size_fields if write_only_active_size_fields is not None else ( WriteSizeFieldParams._default_params["write_only_active_size_fields"] if "write_only_active_size_fields" in WriteSizeFieldParams._default_params else (json_data["writeOnlyActiveSizeFields"] if "writeOnlyActiveSizeFields" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -753,7 +766,8 @@ class WriteSizeFieldParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["writeOnlyActiveSizeFields"] = self._write_only_active_size_fields
+        if self._write_only_active_size_fields is not None:
+            json_data["writeOnlyActiveSizeFields"] = self._write_only_active_size_fields
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -809,7 +823,8 @@ class ExportFluentCaseParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExportFluentCaseParams")["ExportFluentCaseParams"]
+                    param_json = model._communicator.initialize_params(model, "ExportFluentCaseParams")
+                    json_data = param_json["ExportFluentCaseParams"] if "ExportFluentCaseParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -885,7 +900,8 @@ class ExportFluentMeshingMeshParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExportFluentMeshingMeshParams")["ExportFluentMeshingMeshParams"]
+                    param_json = model._communicator.initialize_params(model, "ExportFluentMeshingMeshParams")
+                    json_data = param_json["ExportFluentMeshingMeshParams"] if "ExportFluentMeshingMeshParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -982,12 +998,12 @@ class CadRefacetingParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                CadFaceter(json_data["cadFaceter"]),
-                CadRefacetingResolution(json_data["facetingResolution"]),
-                json_data["customSurfaceDeviationTolerance"],
-                json_data["customNormalAngleTolerance"],
-                CadRefacetingMaxEdgeSizeLimit(json_data["maxEdgeSizeLimit"]),
-                json_data["maxEdgeSize"])
+                CadFaceter(json_data["cadFaceter"] if "cadFaceter" in json_data else None),
+                CadRefacetingResolution(json_data["facetingResolution"] if "facetingResolution" in json_data else None),
+                json_data["customSurfaceDeviationTolerance"] if "customSurfaceDeviationTolerance" in json_data else None,
+                json_data["customNormalAngleTolerance"] if "customNormalAngleTolerance" in json_data else None,
+                CadRefacetingMaxEdgeSizeLimit(json_data["maxEdgeSizeLimit"] if "maxEdgeSizeLimit" in json_data else None),
+                json_data["maxEdgeSize"] if "maxEdgeSize" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [cad_faceter, faceting_resolution, custom_surface_deviation_tolerance, custom_normal_angle_tolerance, max_edge_size_limit, max_edge_size])
             if all_field_specified:
@@ -1002,14 +1018,15 @@ class CadRefacetingParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CadRefacetingParams")["CadRefacetingParams"]
+                    param_json = model._communicator.initialize_params(model, "CadRefacetingParams")
+                    json_data = param_json["CadRefacetingParams"] if "CadRefacetingParams" in param_json else {}
                     self.__initialize(
-                        cad_faceter if cad_faceter is not None else ( CadRefacetingParams._default_params["cad_faceter"] if "cad_faceter" in CadRefacetingParams._default_params else CadFaceter(json_data["cadFaceter"])),
-                        faceting_resolution if faceting_resolution is not None else ( CadRefacetingParams._default_params["faceting_resolution"] if "faceting_resolution" in CadRefacetingParams._default_params else CadRefacetingResolution(json_data["facetingResolution"])),
-                        custom_surface_deviation_tolerance if custom_surface_deviation_tolerance is not None else ( CadRefacetingParams._default_params["custom_surface_deviation_tolerance"] if "custom_surface_deviation_tolerance" in CadRefacetingParams._default_params else json_data["customSurfaceDeviationTolerance"]),
-                        custom_normal_angle_tolerance if custom_normal_angle_tolerance is not None else ( CadRefacetingParams._default_params["custom_normal_angle_tolerance"] if "custom_normal_angle_tolerance" in CadRefacetingParams._default_params else json_data["customNormalAngleTolerance"]),
-                        max_edge_size_limit if max_edge_size_limit is not None else ( CadRefacetingParams._default_params["max_edge_size_limit"] if "max_edge_size_limit" in CadRefacetingParams._default_params else CadRefacetingMaxEdgeSizeLimit(json_data["maxEdgeSizeLimit"])),
-                        max_edge_size if max_edge_size is not None else ( CadRefacetingParams._default_params["max_edge_size"] if "max_edge_size" in CadRefacetingParams._default_params else json_data["maxEdgeSize"]))
+                        cad_faceter if cad_faceter is not None else ( CadRefacetingParams._default_params["cad_faceter"] if "cad_faceter" in CadRefacetingParams._default_params else CadFaceter(json_data["cadFaceter"] if "cadFaceter" in json_data else None)),
+                        faceting_resolution if faceting_resolution is not None else ( CadRefacetingParams._default_params["faceting_resolution"] if "faceting_resolution" in CadRefacetingParams._default_params else CadRefacetingResolution(json_data["facetingResolution"] if "facetingResolution" in json_data else None)),
+                        custom_surface_deviation_tolerance if custom_surface_deviation_tolerance is not None else ( CadRefacetingParams._default_params["custom_surface_deviation_tolerance"] if "custom_surface_deviation_tolerance" in CadRefacetingParams._default_params else (json_data["customSurfaceDeviationTolerance"] if "customSurfaceDeviationTolerance" in json_data else None)),
+                        custom_normal_angle_tolerance if custom_normal_angle_tolerance is not None else ( CadRefacetingParams._default_params["custom_normal_angle_tolerance"] if "custom_normal_angle_tolerance" in CadRefacetingParams._default_params else (json_data["customNormalAngleTolerance"] if "customNormalAngleTolerance" in json_data else None)),
+                        max_edge_size_limit if max_edge_size_limit is not None else ( CadRefacetingParams._default_params["max_edge_size_limit"] if "max_edge_size_limit" in CadRefacetingParams._default_params else CadRefacetingMaxEdgeSizeLimit(json_data["maxEdgeSizeLimit"] if "maxEdgeSizeLimit" in json_data else None)),
+                        max_edge_size if max_edge_size is not None else ( CadRefacetingParams._default_params["max_edge_size"] if "max_edge_size" in CadRefacetingParams._default_params else (json_data["maxEdgeSize"] if "maxEdgeSize" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1059,12 +1076,18 @@ class CadRefacetingParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["cadFaceter"] = self._cad_faceter
-        json_data["facetingResolution"] = self._faceting_resolution
-        json_data["customSurfaceDeviationTolerance"] = self._custom_surface_deviation_tolerance
-        json_data["customNormalAngleTolerance"] = self._custom_normal_angle_tolerance
-        json_data["maxEdgeSizeLimit"] = self._max_edge_size_limit
-        json_data["maxEdgeSize"] = self._max_edge_size
+        if self._cad_faceter is not None:
+            json_data["cadFaceter"] = self._cad_faceter
+        if self._faceting_resolution is not None:
+            json_data["facetingResolution"] = self._faceting_resolution
+        if self._custom_surface_deviation_tolerance is not None:
+            json_data["customSurfaceDeviationTolerance"] = self._custom_surface_deviation_tolerance
+        if self._custom_normal_angle_tolerance is not None:
+            json_data["customNormalAngleTolerance"] = self._custom_normal_angle_tolerance
+        if self._max_edge_size_limit is not None:
+            json_data["maxEdgeSizeLimit"] = self._max_edge_size_limit
+        if self._max_edge_size is not None:
+            json_data["maxEdgeSize"] = self._max_edge_size
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1206,15 +1229,15 @@ class ImportCadParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["append"],
-                CadReaderRoute(json_data["cadReaderRoute"]),
-                PartCreationType(json_data["partCreationType"]),
-                json_data["geometryTransfer"],
-                LengthUnit(json_data["lengthUnit"]),
-                json_data["refacet"],
-                CadRefacetingParams(model = model, json_data = json_data["cadRefacetingParams"]),
-                json_data["stitchTolerance"],
-                json_data["cadUpdateParameters"])
+                json_data["append"] if "append" in json_data else None,
+                CadReaderRoute(json_data["cadReaderRoute"] if "cadReaderRoute" in json_data else None),
+                PartCreationType(json_data["partCreationType"] if "partCreationType" in json_data else None),
+                json_data["geometryTransfer"] if "geometryTransfer" in json_data else None,
+                LengthUnit(json_data["lengthUnit"] if "lengthUnit" in json_data else None),
+                json_data["refacet"] if "refacet" in json_data else None,
+                CadRefacetingParams(model = model, json_data = json_data["cadRefacetingParams"] if "cadRefacetingParams" in json_data else None),
+                json_data["stitchTolerance"] if "stitchTolerance" in json_data else None,
+                json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [append, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance, cad_update_parameters])
             if all_field_specified:
@@ -1232,17 +1255,18 @@ class ImportCadParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportCadParams")["ImportCadParams"]
+                    param_json = model._communicator.initialize_params(model, "ImportCadParams")
+                    json_data = param_json["ImportCadParams"] if "ImportCadParams" in param_json else {}
                     self.__initialize(
-                        append if append is not None else ( ImportCadParams._default_params["append"] if "append" in ImportCadParams._default_params else json_data["append"]),
-                        cad_reader_route if cad_reader_route is not None else ( ImportCadParams._default_params["cad_reader_route"] if "cad_reader_route" in ImportCadParams._default_params else CadReaderRoute(json_data["cadReaderRoute"])),
-                        part_creation_type if part_creation_type is not None else ( ImportCadParams._default_params["part_creation_type"] if "part_creation_type" in ImportCadParams._default_params else PartCreationType(json_data["partCreationType"])),
-                        geometry_transfer if geometry_transfer is not None else ( ImportCadParams._default_params["geometry_transfer"] if "geometry_transfer" in ImportCadParams._default_params else json_data["geometryTransfer"]),
-                        length_unit if length_unit is not None else ( ImportCadParams._default_params["length_unit"] if "length_unit" in ImportCadParams._default_params else LengthUnit(json_data["lengthUnit"])),
-                        refacet if refacet is not None else ( ImportCadParams._default_params["refacet"] if "refacet" in ImportCadParams._default_params else json_data["refacet"]),
-                        cad_refaceting_params if cad_refaceting_params is not None else ( ImportCadParams._default_params["cad_refaceting_params"] if "cad_refaceting_params" in ImportCadParams._default_params else CadRefacetingParams(model = model, json_data = json_data["cadRefacetingParams"])),
-                        stitch_tolerance if stitch_tolerance is not None else ( ImportCadParams._default_params["stitch_tolerance"] if "stitch_tolerance" in ImportCadParams._default_params else json_data["stitchTolerance"]),
-                        cad_update_parameters if cad_update_parameters is not None else ( ImportCadParams._default_params["cad_update_parameters"] if "cad_update_parameters" in ImportCadParams._default_params else json_data["cadUpdateParameters"]))
+                        append if append is not None else ( ImportCadParams._default_params["append"] if "append" in ImportCadParams._default_params else (json_data["append"] if "append" in json_data else None)),
+                        cad_reader_route if cad_reader_route is not None else ( ImportCadParams._default_params["cad_reader_route"] if "cad_reader_route" in ImportCadParams._default_params else CadReaderRoute(json_data["cadReaderRoute"] if "cadReaderRoute" in json_data else None)),
+                        part_creation_type if part_creation_type is not None else ( ImportCadParams._default_params["part_creation_type"] if "part_creation_type" in ImportCadParams._default_params else PartCreationType(json_data["partCreationType"] if "partCreationType" in json_data else None)),
+                        geometry_transfer if geometry_transfer is not None else ( ImportCadParams._default_params["geometry_transfer"] if "geometry_transfer" in ImportCadParams._default_params else (json_data["geometryTransfer"] if "geometryTransfer" in json_data else None)),
+                        length_unit if length_unit is not None else ( ImportCadParams._default_params["length_unit"] if "length_unit" in ImportCadParams._default_params else LengthUnit(json_data["lengthUnit"] if "lengthUnit" in json_data else None)),
+                        refacet if refacet is not None else ( ImportCadParams._default_params["refacet"] if "refacet" in ImportCadParams._default_params else (json_data["refacet"] if "refacet" in json_data else None)),
+                        cad_refaceting_params if cad_refaceting_params is not None else ( ImportCadParams._default_params["cad_refaceting_params"] if "cad_refaceting_params" in ImportCadParams._default_params else CadRefacetingParams(model = model, json_data = (json_data["cadRefacetingParams"] if "cadRefacetingParams" in json_data else None))),
+                        stitch_tolerance if stitch_tolerance is not None else ( ImportCadParams._default_params["stitch_tolerance"] if "stitch_tolerance" in ImportCadParams._default_params else (json_data["stitchTolerance"] if "stitchTolerance" in json_data else None)),
+                        cad_update_parameters if cad_update_parameters is not None else ( ImportCadParams._default_params["cad_update_parameters"] if "cad_update_parameters" in ImportCadParams._default_params else (json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1301,15 +1325,24 @@ class ImportCadParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["append"] = self._append
-        json_data["cadReaderRoute"] = self._cad_reader_route
-        json_data["partCreationType"] = self._part_creation_type
-        json_data["geometryTransfer"] = self._geometry_transfer
-        json_data["lengthUnit"] = self._length_unit
-        json_data["refacet"] = self._refacet
-        json_data["cadRefacetingParams"] = self._cad_refaceting_params._jsonify()
-        json_data["stitchTolerance"] = self._stitch_tolerance
-        json_data["cadUpdateParameters"] = self._cad_update_parameters
+        if self._append is not None:
+            json_data["append"] = self._append
+        if self._cad_reader_route is not None:
+            json_data["cadReaderRoute"] = self._cad_reader_route
+        if self._part_creation_type is not None:
+            json_data["partCreationType"] = self._part_creation_type
+        if self._geometry_transfer is not None:
+            json_data["geometryTransfer"] = self._geometry_transfer
+        if self._length_unit is not None:
+            json_data["lengthUnit"] = self._length_unit
+        if self._refacet is not None:
+            json_data["refacet"] = self._refacet
+        if self._cad_refaceting_params is not None:
+            json_data["cadRefacetingParams"] = self._cad_refaceting_params._jsonify()
+        if self._stitch_tolerance is not None:
+            json_data["stitchTolerance"] = self._stitch_tolerance
+        if self._cad_update_parameters is not None:
+            json_data["cadUpdateParameters"] = self._cad_update_parameters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1446,8 +1479,8 @@ class ImportCadResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["cadParameters"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["cadParameters"] if "cadParameters" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, cad_parameters])
             if all_field_specified:
@@ -1458,10 +1491,11 @@ class ImportCadResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportCadResults")["ImportCadResults"]
+                    param_json = model._communicator.initialize_params(model, "ImportCadResults")
+                    json_data = param_json["ImportCadResults"] if "ImportCadResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ImportCadResults._default_params["error_code"] if "error_code" in ImportCadResults._default_params else ErrorCode(json_data["errorCode"])),
-                        cad_parameters if cad_parameters is not None else ( ImportCadResults._default_params["cad_parameters"] if "cad_parameters" in ImportCadResults._default_params else json_data["cadParameters"]))
+                        error_code if error_code is not None else ( ImportCadResults._default_params["error_code"] if "error_code" in ImportCadResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        cad_parameters if cad_parameters is not None else ( ImportCadResults._default_params["cad_parameters"] if "cad_parameters" in ImportCadResults._default_params else (json_data["cadParameters"] if "cadParameters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1499,8 +1533,10 @@ class ImportCadResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["cadParameters"] = self._cad_parameters
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._cad_parameters is not None:
+            json_data["cadParameters"] = self._cad_parameters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1567,8 +1603,8 @@ class ImportFluentMeshingMeshParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["append"],
-                json_data["enableMultiThreading"])
+                json_data["append"] if "append" in json_data else None,
+                json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [append, enable_multi_threading])
             if all_field_specified:
@@ -1579,10 +1615,11 @@ class ImportFluentMeshingMeshParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportFluentMeshingMeshParams")["ImportFluentMeshingMeshParams"]
+                    param_json = model._communicator.initialize_params(model, "ImportFluentMeshingMeshParams")
+                    json_data = param_json["ImportFluentMeshingMeshParams"] if "ImportFluentMeshingMeshParams" in param_json else {}
                     self.__initialize(
-                        append if append is not None else ( ImportFluentMeshingMeshParams._default_params["append"] if "append" in ImportFluentMeshingMeshParams._default_params else json_data["append"]),
-                        enable_multi_threading if enable_multi_threading is not None else ( ImportFluentMeshingMeshParams._default_params["enable_multi_threading"] if "enable_multi_threading" in ImportFluentMeshingMeshParams._default_params else json_data["enableMultiThreading"]))
+                        append if append is not None else ( ImportFluentMeshingMeshParams._default_params["append"] if "append" in ImportFluentMeshingMeshParams._default_params else (json_data["append"] if "append" in json_data else None)),
+                        enable_multi_threading if enable_multi_threading is not None else ( ImportFluentMeshingMeshParams._default_params["enable_multi_threading"] if "enable_multi_threading" in ImportFluentMeshingMeshParams._default_params else (json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1620,8 +1657,10 @@ class ImportFluentMeshingMeshParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["append"] = self._append
-        json_data["enableMultiThreading"] = self._enable_multi_threading
+        if self._append is not None:
+            json_data["append"] = self._append
+        if self._enable_multi_threading is not None:
+            json_data["enableMultiThreading"] = self._enable_multi_threading
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1660,7 +1699,7 @@ class ImportFluentMeshingMeshResults(CoreObject):
             error_code: ErrorCode,
             new_parts_created: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._new_parts_created = new_parts_created if isinstance(new_parts_created, np.ndarray) else np.array(new_parts_created, dtype=np.int32)
+        self._new_parts_created = new_parts_created if isinstance(new_parts_created, np.ndarray) else np.array(new_parts_created, dtype=np.int32) if new_parts_created is not None else None
 
     def __init__(
             self,
@@ -1688,8 +1727,8 @@ class ImportFluentMeshingMeshResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["newPartsCreated"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["newPartsCreated"] if "newPartsCreated" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, new_parts_created])
             if all_field_specified:
@@ -1700,10 +1739,11 @@ class ImportFluentMeshingMeshResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportFluentMeshingMeshResults")["ImportFluentMeshingMeshResults"]
+                    param_json = model._communicator.initialize_params(model, "ImportFluentMeshingMeshResults")
+                    json_data = param_json["ImportFluentMeshingMeshResults"] if "ImportFluentMeshingMeshResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ImportFluentMeshingMeshResults._default_params["error_code"] if "error_code" in ImportFluentMeshingMeshResults._default_params else ErrorCode(json_data["errorCode"])),
-                        new_parts_created if new_parts_created is not None else ( ImportFluentMeshingMeshResults._default_params["new_parts_created"] if "new_parts_created" in ImportFluentMeshingMeshResults._default_params else json_data["newPartsCreated"]))
+                        error_code if error_code is not None else ( ImportFluentMeshingMeshResults._default_params["error_code"] if "error_code" in ImportFluentMeshingMeshResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        new_parts_created if new_parts_created is not None else ( ImportFluentMeshingMeshResults._default_params["new_parts_created"] if "new_parts_created" in ImportFluentMeshingMeshResults._default_params else (json_data["newPartsCreated"] if "newPartsCreated" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1741,8 +1781,10 @@ class ImportFluentMeshingMeshResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["newPartsCreated"] = self._new_parts_created
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._new_parts_created is not None:
+            json_data["newPartsCreated"] = self._new_parts_created
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1804,7 +1846,7 @@ class ImportFluentCaseParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["append"])
+                json_data["append"] if "append" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [append])
             if all_field_specified:
@@ -1814,9 +1856,10 @@ class ImportFluentCaseParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportFluentCaseParams")["ImportFluentCaseParams"]
+                    param_json = model._communicator.initialize_params(model, "ImportFluentCaseParams")
+                    json_data = param_json["ImportFluentCaseParams"] if "ImportFluentCaseParams" in param_json else {}
                     self.__initialize(
-                        append if append is not None else ( ImportFluentCaseParams._default_params["append"] if "append" in ImportFluentCaseParams._default_params else json_data["append"]))
+                        append if append is not None else ( ImportFluentCaseParams._default_params["append"] if "append" in ImportFluentCaseParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1851,7 +1894,8 @@ class ImportFluentCaseParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["append"] = self._append
+        if self._append is not None:
+            json_data["append"] = self._append
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1903,7 +1947,7 @@ class ImportFluentCaseResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -1913,9 +1957,10 @@ class ImportFluentCaseResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportFluentCaseResults")["ImportFluentCaseResults"]
+                    param_json = model._communicator.initialize_params(model, "ImportFluentCaseResults")
+                    json_data = param_json["ImportFluentCaseResults"] if "ImportFluentCaseResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ImportFluentCaseResults._default_params["error_code"] if "error_code" in ImportFluentCaseResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( ImportFluentCaseResults._default_params["error_code"] if "error_code" in ImportFluentCaseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1950,7 +1995,8 @@ class ImportFluentCaseResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2005,8 +2051,8 @@ class ImportMapdlCdbParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["dropMidNodes"],
-                json_data["append"])
+                json_data["dropMidNodes"] if "dropMidNodes" in json_data else None,
+                json_data["append"] if "append" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [drop_mid_nodes, append])
             if all_field_specified:
@@ -2017,10 +2063,11 @@ class ImportMapdlCdbParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportMapdlCdbParams")["ImportMapdlCdbParams"]
+                    param_json = model._communicator.initialize_params(model, "ImportMapdlCdbParams")
+                    json_data = param_json["ImportMapdlCdbParams"] if "ImportMapdlCdbParams" in param_json else {}
                     self.__initialize(
-                        drop_mid_nodes if drop_mid_nodes is not None else ( ImportMapdlCdbParams._default_params["drop_mid_nodes"] if "drop_mid_nodes" in ImportMapdlCdbParams._default_params else json_data["dropMidNodes"]),
-                        append if append is not None else ( ImportMapdlCdbParams._default_params["append"] if "append" in ImportMapdlCdbParams._default_params else json_data["append"]))
+                        drop_mid_nodes if drop_mid_nodes is not None else ( ImportMapdlCdbParams._default_params["drop_mid_nodes"] if "drop_mid_nodes" in ImportMapdlCdbParams._default_params else (json_data["dropMidNodes"] if "dropMidNodes" in json_data else None)),
+                        append if append is not None else ( ImportMapdlCdbParams._default_params["append"] if "append" in ImportMapdlCdbParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2056,8 +2103,10 @@ class ImportMapdlCdbParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["dropMidNodes"] = self._drop_mid_nodes
-        json_data["append"] = self._append
+        if self._drop_mid_nodes is not None:
+            json_data["dropMidNodes"] = self._drop_mid_nodes
+        if self._append is not None:
+            json_data["append"] = self._append
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2121,7 +2170,7 @@ class ImportMapdlCdbResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -2131,9 +2180,10 @@ class ImportMapdlCdbResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ImportMapdlCdbResults")["ImportMapdlCdbResults"]
+                    param_json = model._communicator.initialize_params(model, "ImportMapdlCdbResults")
+                    json_data = param_json["ImportMapdlCdbResults"] if "ImportMapdlCdbResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ImportMapdlCdbResults._default_params["error_code"] if "error_code" in ImportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( ImportMapdlCdbResults._default_params["error_code"] if "error_code" in ImportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2168,7 +2218,8 @@ class ImportMapdlCdbResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2224,7 +2275,8 @@ class ExportMapdlCdbParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExportMapdlCdbParams")["ExportMapdlCdbParams"]
+                    param_json = model._communicator.initialize_params(model, "ExportMapdlCdbParams")
+                    json_data = param_json["ExportMapdlCdbParams"] if "ExportMapdlCdbParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -2296,7 +2348,7 @@ class ExportMapdlCdbResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -2306,9 +2358,10 @@ class ExportMapdlCdbResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExportMapdlCdbResults")["ExportMapdlCdbResults"]
+                    param_json = model._communicator.initialize_params(model, "ExportMapdlCdbResults")
+                    json_data = param_json["ExportMapdlCdbResults"] if "ExportMapdlCdbResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ExportMapdlCdbResults._default_params["error_code"] if "error_code" in ExportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( ExportMapdlCdbResults._default_params["error_code"] if "error_code" in ExportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2343,7 +2396,8 @@ class ExportMapdlCdbResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2400,8 +2454,8 @@ class ExportBoundaryFittedSplineParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["idOffset"],
-                json_data["idStart"])
+                json_data["idOffset"] if "idOffset" in json_data else None,
+                json_data["idStart"] if "idStart" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [id_offset, id_start])
             if all_field_specified:
@@ -2412,10 +2466,11 @@ class ExportBoundaryFittedSplineParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ExportBoundaryFittedSplineParams")["ExportBoundaryFittedSplineParams"]
+                    param_json = model._communicator.initialize_params(model, "ExportBoundaryFittedSplineParams")
+                    json_data = param_json["ExportBoundaryFittedSplineParams"] if "ExportBoundaryFittedSplineParams" in param_json else {}
                     self.__initialize(
-                        id_offset if id_offset is not None else ( ExportBoundaryFittedSplineParams._default_params["id_offset"] if "id_offset" in ExportBoundaryFittedSplineParams._default_params else json_data["idOffset"]),
-                        id_start if id_start is not None else ( ExportBoundaryFittedSplineParams._default_params["id_start"] if "id_start" in ExportBoundaryFittedSplineParams._default_params else json_data["idStart"]))
+                        id_offset if id_offset is not None else ( ExportBoundaryFittedSplineParams._default_params["id_offset"] if "id_offset" in ExportBoundaryFittedSplineParams._default_params else (json_data["idOffset"] if "idOffset" in json_data else None)),
+                        id_start if id_start is not None else ( ExportBoundaryFittedSplineParams._default_params["id_start"] if "id_start" in ExportBoundaryFittedSplineParams._default_params else (json_data["idStart"] if "idStart" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2453,8 +2508,10 @@ class ExportBoundaryFittedSplineParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["idOffset"] = self._id_offset
-        json_data["idStart"] = self._id_start
+        if self._id_offset is not None:
+            json_data["idOffset"] = self._id_offset
+        if self._id_start is not None:
+            json_data["idStart"] = self._id_start
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

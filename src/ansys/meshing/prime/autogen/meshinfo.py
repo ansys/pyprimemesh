@@ -63,3 +63,36 @@ class MeshInfo(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_face_and_edge_connectivity", FaceAndEdgeConnectivityResults(model = self._model, json_data = result))
         return FaceAndEdgeConnectivityResults(model = self._model, json_data = result)
+
+    def get_statistics_of_cell_zonelets(self, cell_zonelets : Iterable[int], params : CellStatisticsParams) -> CellStatisticsResults:
+        """ Gets cell statistics of given cell zonelets using provided cell statistics parameters.
+
+
+        Parameters
+        ----------
+        cell_zonelets : Iterable[int]
+            Ids of cell zonelets for which statistics are calculated.
+        params : CellStatisticsParams
+            Parameters to get cells statistics.
+
+        Returns
+        -------
+        CellStatisticsResults
+            Returns the CellStatisticsResults.
+
+
+        Examples
+        --------
+        >>> mesh_info = prime.MeshInfo(model)
+        >>> part = model.get_part_by_name("part_name")
+        >>> result = mesh_info.get_statistics_of_cell_zonelets(part.get_cell_zonelets(),
+        >>>                  prime.CellStatisticsParams(model=model))
+
+        """
+        args = {"cell_zonelets" : cell_zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::MeshInfo/GetStatisticsOfCellZonelets"
+        self._model._print_logs_before_command("get_statistics_of_cell_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_statistics_of_cell_zonelets", CellStatisticsResults(model = self._model, json_data = result))
+        return CellStatisticsResults(model = self._model, json_data = result)

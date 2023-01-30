@@ -8,6 +8,168 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
+class SmoothType(enum.IntEnum):
+    """Indicates the the type of operation to be performed during the smooth dihedral face nodes operation.
+    """
+    SMOOTH = 1
+    """Performs smoothing during the operation."""
+    INFLATE = 2
+    """Performs inflation during the operation."""
+
+class SphereAtInvalidNormalNodeParams(CoreObject):
+    """Parameters to create a sphere at nodes with invalid average face normal. The sphere creation is expected to correct the face normal at the node.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SphereAtInvalidNormalNodeParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SphereAtInvalidNormalNodeParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SphereAtInvalidNormalNodeParams object with provided parameters.
+
+        Examples
+        --------
+        >>> sphere_at_invalid_normal_node_params = prime.SphereAtInvalidNormalNodeParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SphereAtInvalidNormalNodeParams")
+                    json_data = param_json["SphereAtInvalidNormalNodeParams"] if "SphereAtInvalidNormalNodeParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SphereAtInvalidNormalNodeParams.
+
+        """
+        args = locals()
+        [SphereAtInvalidNormalNodeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SphereAtInvalidNormalNodeParams.
+
+        Examples
+        --------
+        >>> SphereAtInvalidNormalNodeParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SphereAtInvalidNormalNodeParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class SphereAtInvalidNormalNodeResults(CoreObject):
+    """Results associated with create sphere at invalid normal nodes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SphereAtInvalidNormalNodeResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SphereAtInvalidNormalNodeResults object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SphereAtInvalidNormalNodeResults object with provided parameters.
+
+        Examples
+        --------
+        >>> sphere_at_invalid_normal_node_results = prime.SphereAtInvalidNormalNodeResults(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SphereAtInvalidNormalNodeResults")
+                    json_data = param_json["SphereAtInvalidNormalNodeResults"] if "SphereAtInvalidNormalNodeResults" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SphereAtInvalidNormalNodeResults.
+
+        """
+        args = locals()
+        [SphereAtInvalidNormalNodeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SphereAtInvalidNormalNodeResults.
+
+        Examples
+        --------
+        >>> SphereAtInvalidNormalNodeResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SphereAtInvalidNormalNodeResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
 class CopyZoneletsParams(CoreObject):
     """Parameters to copy zonelets. This is for internal use only.
     """
@@ -45,7 +207,8 @@ class CopyZoneletsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CopyZoneletsParams")["CopyZoneletsParams"]
+                    param_json = model._communicator.initialize_params(model, "CopyZoneletsParams")
+                    json_data = param_json["CopyZoneletsParams"] if "CopyZoneletsParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -94,7 +257,7 @@ class CopyZoneletsResults(CoreObject):
             error_code: ErrorCode,
             copied_zonelets: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._copied_zonelets = copied_zonelets if isinstance(copied_zonelets, np.ndarray) else np.array(copied_zonelets, dtype=np.int32)
+        self._copied_zonelets = copied_zonelets if isinstance(copied_zonelets, np.ndarray) else np.array(copied_zonelets, dtype=np.int32) if copied_zonelets is not None else None
 
     def __init__(
             self,
@@ -122,8 +285,8 @@ class CopyZoneletsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["copiedZonelets"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["copiedZonelets"] if "copiedZonelets" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, copied_zonelets])
             if all_field_specified:
@@ -134,10 +297,11 @@ class CopyZoneletsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CopyZoneletsResults")["CopyZoneletsResults"]
+                    param_json = model._communicator.initialize_params(model, "CopyZoneletsResults")
+                    json_data = param_json["CopyZoneletsResults"] if "CopyZoneletsResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( CopyZoneletsResults._default_params["error_code"] if "error_code" in CopyZoneletsResults._default_params else ErrorCode(json_data["errorCode"])),
-                        copied_zonelets if copied_zonelets is not None else ( CopyZoneletsResults._default_params["copied_zonelets"] if "copied_zonelets" in CopyZoneletsResults._default_params else json_data["copiedZonelets"]))
+                        error_code if error_code is not None else ( CopyZoneletsResults._default_params["error_code"] if "error_code" in CopyZoneletsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        copied_zonelets if copied_zonelets is not None else ( CopyZoneletsResults._default_params["copied_zonelets"] if "copied_zonelets" in CopyZoneletsResults._default_params else (json_data["copiedZonelets"] if "copiedZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -175,8 +339,10 @@ class CopyZoneletsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["copiedZonelets"] = self._copied_zonelets
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._copied_zonelets is not None:
+            json_data["copiedZonelets"] = self._copied_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -233,7 +399,7 @@ class FillHolesAtPlaneParams(CoreObject):
         create_zone: bool, optional
             Option to create a face zone for the zonelets created to fill holes.
         suggested_zone_name: str, optional
-            Suggested name to be set on merged part. Default name will be used if empty name is suggested.
+            Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
         json_data: dict, optional
             JSON dictionary to create a FillHolesAtPlaneParams object with provided parameters.
 
@@ -243,8 +409,8 @@ class FillHolesAtPlaneParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["createZone"],
-                json_data["suggestedZoneName"])
+                json_data["createZone"] if "createZone" in json_data else None,
+                json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [create_zone, suggested_zone_name])
             if all_field_specified:
@@ -255,10 +421,11 @@ class FillHolesAtPlaneParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FillHolesAtPlaneParams")["FillHolesAtPlaneParams"]
+                    param_json = model._communicator.initialize_params(model, "FillHolesAtPlaneParams")
+                    json_data = param_json["FillHolesAtPlaneParams"] if "FillHolesAtPlaneParams" in param_json else {}
                     self.__initialize(
-                        create_zone if create_zone is not None else ( FillHolesAtPlaneParams._default_params["create_zone"] if "create_zone" in FillHolesAtPlaneParams._default_params else json_data["createZone"]),
-                        suggested_zone_name if suggested_zone_name is not None else ( FillHolesAtPlaneParams._default_params["suggested_zone_name"] if "suggested_zone_name" in FillHolesAtPlaneParams._default_params else json_data["suggestedZoneName"]))
+                        create_zone if create_zone is not None else ( FillHolesAtPlaneParams._default_params["create_zone"] if "create_zone" in FillHolesAtPlaneParams._default_params else (json_data["createZone"] if "createZone" in json_data else None)),
+                        suggested_zone_name if suggested_zone_name is not None else ( FillHolesAtPlaneParams._default_params["suggested_zone_name"] if "suggested_zone_name" in FillHolesAtPlaneParams._default_params else (json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -277,7 +444,7 @@ class FillHolesAtPlaneParams(CoreObject):
         create_zone: bool, optional
             Option to create a face zone for the zonelets created to fill holes.
         suggested_zone_name: str, optional
-            Suggested name to be set on merged part. Default name will be used if empty name is suggested.
+            Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
         """
         args = locals()
         [FillHolesAtPlaneParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -296,8 +463,10 @@ class FillHolesAtPlaneParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["createZone"] = self._create_zone
-        json_data["suggestedZoneName"] = self._suggested_zone_name
+        if self._create_zone is not None:
+            json_data["createZone"] = self._create_zone
+        if self._suggested_zone_name is not None:
+            json_data["suggestedZoneName"] = self._suggested_zone_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -318,7 +487,7 @@ class FillHolesAtPlaneParams(CoreObject):
 
     @property
     def suggested_zone_name(self) -> str:
-        """Suggested name to be set on merged part. Default name will be used if empty name is suggested.
+        """Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
         """
         return self._suggested_zone_name
 
@@ -340,7 +509,7 @@ class FillHolesAtPlaneResults(CoreObject):
             created_zone_id: int):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
-        self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32)
+        self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32) if created_face_zonelets is not None else None
         self._assigned_zone_name = assigned_zone_name
         self._created_zone_id = created_zone_id
 
@@ -379,11 +548,11 @@ class FillHolesAtPlaneResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                [WarningCode(data) for data in json_data["warningCodes"]],
-                json_data["createdFaceZonelets"],
-                json_data["assignedZoneName"],
-                json_data["createdZoneId"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                json_data["createdFaceZonelets"] if "createdFaceZonelets" in json_data else None,
+                json_data["assignedZoneName"] if "assignedZoneName" in json_data else None,
+                json_data["createdZoneId"] if "createdZoneId" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, warning_codes, created_face_zonelets, assigned_zone_name, created_zone_id])
             if all_field_specified:
@@ -397,13 +566,14 @@ class FillHolesAtPlaneResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FillHolesAtPlaneResults")["FillHolesAtPlaneResults"]
+                    param_json = model._communicator.initialize_params(model, "FillHolesAtPlaneResults")
+                    json_data = param_json["FillHolesAtPlaneResults"] if "FillHolesAtPlaneResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( FillHolesAtPlaneResults._default_params["error_code"] if "error_code" in FillHolesAtPlaneResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_codes if warning_codes is not None else ( FillHolesAtPlaneResults._default_params["warning_codes"] if "warning_codes" in FillHolesAtPlaneResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]),
-                        created_face_zonelets if created_face_zonelets is not None else ( FillHolesAtPlaneResults._default_params["created_face_zonelets"] if "created_face_zonelets" in FillHolesAtPlaneResults._default_params else json_data["createdFaceZonelets"]),
-                        assigned_zone_name if assigned_zone_name is not None else ( FillHolesAtPlaneResults._default_params["assigned_zone_name"] if "assigned_zone_name" in FillHolesAtPlaneResults._default_params else json_data["assignedZoneName"]),
-                        created_zone_id if created_zone_id is not None else ( FillHolesAtPlaneResults._default_params["created_zone_id"] if "created_zone_id" in FillHolesAtPlaneResults._default_params else json_data["createdZoneId"]))
+                        error_code if error_code is not None else ( FillHolesAtPlaneResults._default_params["error_code"] if "error_code" in FillHolesAtPlaneResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( FillHolesAtPlaneResults._default_params["warning_codes"] if "warning_codes" in FillHolesAtPlaneResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        created_face_zonelets if created_face_zonelets is not None else ( FillHolesAtPlaneResults._default_params["created_face_zonelets"] if "created_face_zonelets" in FillHolesAtPlaneResults._default_params else (json_data["createdFaceZonelets"] if "createdFaceZonelets" in json_data else None)),
+                        assigned_zone_name if assigned_zone_name is not None else ( FillHolesAtPlaneResults._default_params["assigned_zone_name"] if "assigned_zone_name" in FillHolesAtPlaneResults._default_params else (json_data["assignedZoneName"] if "assignedZoneName" in json_data else None)),
+                        created_zone_id if created_zone_id is not None else ( FillHolesAtPlaneResults._default_params["created_zone_id"] if "created_zone_id" in FillHolesAtPlaneResults._default_params else (json_data["createdZoneId"] if "createdZoneId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -450,11 +620,16 @@ class FillHolesAtPlaneResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["warningCodes"] = [data for data in self._warning_codes]
-        json_data["createdFaceZonelets"] = self._created_face_zonelets
-        json_data["assignedZoneName"] = self._assigned_zone_name
-        json_data["createdZoneId"] = self._created_zone_id
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._created_face_zonelets is not None:
+            json_data["createdFaceZonelets"] = self._created_face_zonelets
+        if self._assigned_zone_name is not None:
+            json_data["assignedZoneName"] = self._assigned_zone_name
+        if self._created_zone_id is not None:
+            json_data["createdZoneId"] = self._created_zone_id
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -550,7 +725,8 @@ class CreateCapParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CreateCapParams")["CreateCapParams"]
+                    param_json = model._communicator.initialize_params(model, "CreateCapParams")
+                    json_data = param_json["CreateCapParams"] if "CreateCapParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -599,7 +775,7 @@ class CreateCapResults(CoreObject):
             error_code: ErrorCode,
             created_face_zonelets: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32)
+        self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32) if created_face_zonelets is not None else None
 
     def __init__(
             self,
@@ -627,8 +803,8 @@ class CreateCapResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["createdFaceZonelets"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["createdFaceZonelets"] if "createdFaceZonelets" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, created_face_zonelets])
             if all_field_specified:
@@ -639,10 +815,11 @@ class CreateCapResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CreateCapResults")["CreateCapResults"]
+                    param_json = model._communicator.initialize_params(model, "CreateCapResults")
+                    json_data = param_json["CreateCapResults"] if "CreateCapResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( CreateCapResults._default_params["error_code"] if "error_code" in CreateCapResults._default_params else ErrorCode(json_data["errorCode"])),
-                        created_face_zonelets if created_face_zonelets is not None else ( CreateCapResults._default_params["created_face_zonelets"] if "created_face_zonelets" in CreateCapResults._default_params else json_data["createdFaceZonelets"]))
+                        error_code if error_code is not None else ( CreateCapResults._default_params["error_code"] if "error_code" in CreateCapResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        created_face_zonelets if created_face_zonelets is not None else ( CreateCapResults._default_params["created_face_zonelets"] if "created_face_zonelets" in CreateCapResults._default_params else (json_data["createdFaceZonelets"] if "createdFaceZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -680,8 +857,10 @@ class CreateCapResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["createdFaceZonelets"] = self._created_face_zonelets
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._created_face_zonelets is not None:
+            json_data["createdFaceZonelets"] = self._created_face_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -747,7 +926,8 @@ class DeleteUnwettedParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteUnwettedParams")["DeleteUnwettedParams"]
+                    param_json = model._communicator.initialize_params(model, "DeleteUnwettedParams")
+                    json_data = param_json["DeleteUnwettedParams"] if "DeleteUnwettedParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -819,7 +999,7 @@ class DeleteUnwettedResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -829,9 +1009,10 @@ class DeleteUnwettedResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "DeleteUnwettedResult")["DeleteUnwettedResult"]
+                    param_json = model._communicator.initialize_params(model, "DeleteUnwettedResult")
+                    json_data = param_json["DeleteUnwettedResult"] if "DeleteUnwettedResult" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( DeleteUnwettedResult._default_params["error_code"] if "error_code" in DeleteUnwettedResult._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( DeleteUnwettedResult._default_params["error_code"] if "error_code" in DeleteUnwettedResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -866,7 +1047,8 @@ class DeleteUnwettedResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -918,7 +1100,7 @@ class ResolveIntersectionsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["numberOfThreads"])
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [number_of_threads])
             if all_field_specified:
@@ -928,9 +1110,10 @@ class ResolveIntersectionsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ResolveIntersectionsParams")["ResolveIntersectionsParams"]
+                    param_json = model._communicator.initialize_params(model, "ResolveIntersectionsParams")
+                    json_data = param_json["ResolveIntersectionsParams"] if "ResolveIntersectionsParams" in param_json else {}
                     self.__initialize(
-                        number_of_threads if number_of_threads is not None else ( ResolveIntersectionsParams._default_params["number_of_threads"] if "number_of_threads" in ResolveIntersectionsParams._default_params else json_data["numberOfThreads"]))
+                        number_of_threads if number_of_threads is not None else ( ResolveIntersectionsParams._default_params["number_of_threads"] if "number_of_threads" in ResolveIntersectionsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -965,7 +1148,8 @@ class ResolveIntersectionsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["numberOfThreads"] = self._number_of_threads
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1017,7 +1201,7 @@ class ResolveIntersectionResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -1027,9 +1211,10 @@ class ResolveIntersectionResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ResolveIntersectionResult")["ResolveIntersectionResult"]
+                    param_json = model._communicator.initialize_params(model, "ResolveIntersectionResult")
+                    json_data = param_json["ResolveIntersectionResult"] if "ResolveIntersectionResult" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ResolveIntersectionResult._default_params["error_code"] if "error_code" in ResolveIntersectionResult._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( ResolveIntersectionResult._default_params["error_code"] if "error_code" in ResolveIntersectionResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1064,7 +1249,8 @@ class ResolveIntersectionResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1083,45 +1269,69 @@ class ResolveIntersectionResult(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
-class SmoothDihedralFaceNodesParams(CoreObject):
-    """Parameters to smooth dihedral face nodes. This is for internal use only.
+class SubtractZoneletsParams(CoreObject):
+    """Parameters to use when subtracting zonelets.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            retain_cutter: bool,
+            extract_edges: bool,
+            trace_edges: bool):
+        self._retain_cutter = retain_cutter
+        self._extract_edges = extract_edges
+        self._trace_edges = trace_edges
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            retain_cutter: bool = None,
+            extract_edges: bool = None,
+            trace_edges: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SmoothDihedralFaceNodesParams.
+        """Initializes the SubtractZoneletsParams.
 
         Parameters
         ----------
         model: Model
-            Model to create a SmoothDihedralFaceNodesParams object with default parameters.
+            Model to create a SubtractZoneletsParams object with default parameters.
+        retain_cutter: bool, optional
+            Retain the zonelets used for removal.
+        extract_edges: bool, optional
+            Extract edges of intersection during subtract.
+        trace_edges: bool, optional
+            Trace edges of intersection on target. Only works if extractEdges is true.
         json_data: dict, optional
-            JSON dictionary to create a SmoothDihedralFaceNodesParams object with provided parameters.
+            JSON dictionary to create a SubtractZoneletsParams object with provided parameters.
 
         Examples
         --------
-        >>> smooth_dihedral_face_nodes_params = prime.SmoothDihedralFaceNodesParams(model = model)
+        >>> subtract_zonelets_params = prime.SubtractZoneletsParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["retainCutter"] if "retainCutter" in json_data else None,
+                json_data["extractEdges"] if "extractEdges" in json_data else None,
+                json_data["traceEdges"] if "traceEdges" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [retain_cutter, extract_edges, trace_edges])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    retain_cutter,
+                    extract_edges,
+                    trace_edges)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesParams")["SmoothDihedralFaceNodesParams"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "SubtractZoneletsParams")
+                    json_data = param_json["SubtractZoneletsParams"] if "SubtractZoneletsParams" in param_json else {}
+                    self.__initialize(
+                        retain_cutter if retain_cutter is not None else ( SubtractZoneletsParams._default_params["retain_cutter"] if "retain_cutter" in SubtractZoneletsParams._default_params else (json_data["retainCutter"] if "retainCutter" in json_data else None)),
+                        extract_edges if extract_edges is not None else ( SubtractZoneletsParams._default_params["extract_edges"] if "extract_edges" in SubtractZoneletsParams._default_params else (json_data["extractEdges"] if "extractEdges" in json_data else None)),
+                        trace_edges if trace_edges is not None else ( SubtractZoneletsParams._default_params["trace_edges"] if "trace_edges" in SubtractZoneletsParams._default_params else (json_data["traceEdges"] if "traceEdges" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1130,9 +1340,291 @@ class SmoothDihedralFaceNodesParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            retain_cutter: bool = None,
+            extract_edges: bool = None,
+            trace_edges: bool = None):
+        """Set the default values of SubtractZoneletsParams.
+
+        Parameters
+        ----------
+        retain_cutter: bool, optional
+            Retain the zonelets used for removal.
+        extract_edges: bool, optional
+            Extract edges of intersection during subtract.
+        trace_edges: bool, optional
+            Trace edges of intersection on target. Only works if extractEdges is true.
+        """
+        args = locals()
+        [SubtractZoneletsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SubtractZoneletsParams.
+
+        Examples
+        --------
+        >>> SubtractZoneletsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SubtractZoneletsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._retain_cutter is not None:
+            json_data["retainCutter"] = self._retain_cutter
+        if self._extract_edges is not None:
+            json_data["extractEdges"] = self._extract_edges
+        if self._trace_edges is not None:
+            json_data["traceEdges"] = self._trace_edges
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "retain_cutter :  %s\nextract_edges :  %s\ntrace_edges :  %s" % (self._retain_cutter, self._extract_edges, self._trace_edges)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def retain_cutter(self) -> bool:
+        """Retain the zonelets used for removal.
+        """
+        return self._retain_cutter
+
+    @retain_cutter.setter
+    def retain_cutter(self, value: bool):
+        self._retain_cutter = value
+
+    @property
+    def extract_edges(self) -> bool:
+        """Extract edges of intersection during subtract.
+        """
+        return self._extract_edges
+
+    @extract_edges.setter
+    def extract_edges(self, value: bool):
+        self._extract_edges = value
+
+    @property
+    def trace_edges(self) -> bool:
+        """Trace edges of intersection on target. Only works if extractEdges is true.
+        """
+        return self._trace_edges
+
+    @trace_edges.setter
+    def trace_edges(self, value: bool):
+        self._trace_edges = value
+
+class SubtractZoneletsResults(CoreObject):
+    """Results structure associated with subtracting zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            processing_time: float,
+            error_code: ErrorCode):
+        self._processing_time = processing_time
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            processing_time: float = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SubtractZoneletsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SubtractZoneletsResults object with default parameters.
+        processing_time: float, optional
+            Processing time for subtract operation.
+        error_code: ErrorCode, optional
+            Error Code associated with subtract operation.
+        json_data: dict, optional
+            JSON dictionary to create a SubtractZoneletsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> subtract_zonelets_results = prime.SubtractZoneletsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["processingTime"] if "processingTime" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [processing_time, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    processing_time,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SubtractZoneletsResults")
+                    json_data = param_json["SubtractZoneletsResults"] if "SubtractZoneletsResults" in param_json else {}
+                    self.__initialize(
+                        processing_time if processing_time is not None else ( SubtractZoneletsResults._default_params["processing_time"] if "processing_time" in SubtractZoneletsResults._default_params else (json_data["processingTime"] if "processingTime" in json_data else None)),
+                        error_code if error_code is not None else ( SubtractZoneletsResults._default_params["error_code"] if "error_code" in SubtractZoneletsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            processing_time: float = None,
+            error_code: ErrorCode = None):
+        """Set the default values of SubtractZoneletsResults.
+
+        Parameters
+        ----------
+        processing_time: float, optional
+            Processing time for subtract operation.
+        error_code: ErrorCode, optional
+            Error Code associated with subtract operation.
+        """
+        args = locals()
+        [SubtractZoneletsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SubtractZoneletsResults.
+
+        Examples
+        --------
+        >>> SubtractZoneletsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SubtractZoneletsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._processing_time is not None:
+            json_data["processingTime"] = self._processing_time
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "processing_time :  %s\nerror_code :  %s" % (self._processing_time, self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def processing_time(self) -> float:
+        """Processing time for subtract operation.
+        """
+        return self._processing_time
+
+    @processing_time.setter
+    def processing_time(self, value: float):
+        self._processing_time = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error Code associated with subtract operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+class SmoothDihedralFaceNodesParams(CoreObject):
+    """Parameters to smooth dihedral face nodes.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            min_dihedral_angle: float,
+            tolerance: float,
+            type: SmoothType):
+        self._min_dihedral_angle = min_dihedral_angle
+        self._tolerance = tolerance
+        self._type = SmoothType(type)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            min_dihedral_angle: float = None,
+            tolerance: float = None,
+            type: SmoothType = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SmoothDihedralFaceNodesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SmoothDihedralFaceNodesParams object with default parameters.
+        min_dihedral_angle: float, optional
+            Minimum angle to be used to identify dihedral faces.
+        tolerance: float, optional
+            Tolerance relative to local mesh size to control smooth movement of nodes.
+        type: SmoothType, optional
+            Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+        json_data: dict, optional
+            JSON dictionary to create a SmoothDihedralFaceNodesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> smooth_dihedral_face_nodes_params = prime.SmoothDihedralFaceNodesParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["minDihedralAngle"] if "minDihedralAngle" in json_data else None,
+                json_data["tolerance"] if "tolerance" in json_data else None,
+                SmoothType(json_data["type"] if "type" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [min_dihedral_angle, tolerance, type])
+            if all_field_specified:
+                self.__initialize(
+                    min_dihedral_angle,
+                    tolerance,
+                    type)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesParams")
+                    json_data = param_json["SmoothDihedralFaceNodesParams"] if "SmoothDihedralFaceNodesParams" in param_json else {}
+                    self.__initialize(
+                        min_dihedral_angle if min_dihedral_angle is not None else ( SmoothDihedralFaceNodesParams._default_params["min_dihedral_angle"] if "min_dihedral_angle" in SmoothDihedralFaceNodesParams._default_params else (json_data["minDihedralAngle"] if "minDihedralAngle" in json_data else None)),
+                        tolerance if tolerance is not None else ( SmoothDihedralFaceNodesParams._default_params["tolerance"] if "tolerance" in SmoothDihedralFaceNodesParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)),
+                        type if type is not None else ( SmoothDihedralFaceNodesParams._default_params["type"] if "type" in SmoothDihedralFaceNodesParams._default_params else SmoothType(json_data["type"] if "type" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            min_dihedral_angle: float = None,
+            tolerance: float = None,
+            type: SmoothType = None):
         """Set the default values of SmoothDihedralFaceNodesParams.
 
+        Parameters
+        ----------
+        min_dihedral_angle: float, optional
+            Minimum angle to be used to identify dihedral faces.
+        tolerance: float, optional
+            Tolerance relative to local mesh size to control smooth movement of nodes.
+        type: SmoothType, optional
+            Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
         """
         args = locals()
         [SmoothDihedralFaceNodesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1151,26 +1643,67 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._min_dihedral_angle is not None:
+            json_data["minDihedralAngle"] = self._min_dihedral_angle
+        if self._tolerance is not None:
+            json_data["tolerance"] = self._tolerance
+        if self._type is not None:
+            json_data["type"] = self._type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "min_dihedral_angle :  %s\ntolerance :  %s\ntype :  %s" % (self._min_dihedral_angle, self._tolerance, self._type)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+    @property
+    def min_dihedral_angle(self) -> float:
+        """Minimum angle to be used to identify dihedral faces.
+        """
+        return self._min_dihedral_angle
+
+    @min_dihedral_angle.setter
+    def min_dihedral_angle(self, value: float):
+        self._min_dihedral_angle = value
+
+    @property
+    def tolerance(self) -> float:
+        """Tolerance relative to local mesh size to control smooth movement of nodes.
+        """
+        return self._tolerance
+
+    @tolerance.setter
+    def tolerance(self, value: float):
+        self._tolerance = value
+
+    @property
+    def type(self) -> SmoothType:
+        """Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+        """
+        return self._type
+
+    @type.setter
+    def type(self, value: SmoothType):
+        self._type = value
+
 class SmoothDihedralFaceNodesResults(CoreObject):
-    """Results structure associated with smooth dihedral face nodes. This is for internal use only.
+    """Results structure associated with smooth dihedral face nodes.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            n_nodes_smoothed: int,
+            error_code: ErrorCode):
+        self._n_nodes_smoothed = n_nodes_smoothed
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            n_nodes_smoothed: int = None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SmoothDihedralFaceNodesResults.
@@ -1179,6 +1712,10 @@ class SmoothDihedralFaceNodesResults(CoreObject):
         ----------
         model: Model
             Model to create a SmoothDihedralFaceNodesResults object with default parameters.
+        n_nodes_smoothed: int, optional
+            Number of dihedral face nodes smoothed.
+        error_code: ErrorCode, optional
+            Error Code associated with creating offset surface.
         json_data: dict, optional
             JSON dictionary to create a SmoothDihedralFaceNodesResults object with provided parameters.
 
@@ -1187,17 +1724,24 @@ class SmoothDihedralFaceNodesResults(CoreObject):
         >>> smooth_dihedral_face_nodes_results = prime.SmoothDihedralFaceNodesResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["nNodesSmoothed"] if "nNodesSmoothed" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [n_nodes_smoothed, error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    n_nodes_smoothed,
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesResults")["SmoothDihedralFaceNodesResults"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesResults")
+                    json_data = param_json["SmoothDihedralFaceNodesResults"] if "SmoothDihedralFaceNodesResults" in param_json else {}
+                    self.__initialize(
+                        n_nodes_smoothed if n_nodes_smoothed is not None else ( SmoothDihedralFaceNodesResults._default_params["n_nodes_smoothed"] if "n_nodes_smoothed" in SmoothDihedralFaceNodesResults._default_params else (json_data["nNodesSmoothed"] if "nNodesSmoothed" in json_data else None)),
+                        error_code if error_code is not None else ( SmoothDihedralFaceNodesResults._default_params["error_code"] if "error_code" in SmoothDihedralFaceNodesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1206,9 +1750,17 @@ class SmoothDihedralFaceNodesResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            n_nodes_smoothed: int = None,
+            error_code: ErrorCode = None):
         """Set the default values of SmoothDihedralFaceNodesResults.
 
+        Parameters
+        ----------
+        n_nodes_smoothed: int, optional
+            Number of dihedral face nodes smoothed.
+        error_code: ErrorCode, optional
+            Error Code associated with creating offset surface.
         """
         args = locals()
         [SmoothDihedralFaceNodesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1227,13 +1779,37 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._n_nodes_smoothed is not None:
+            json_data["nNodesSmoothed"] = self._n_nodes_smoothed
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "n_nodes_smoothed :  %s\nerror_code :  %s" % (self._n_nodes_smoothed, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def n_nodes_smoothed(self) -> int:
+        """Number of dihedral face nodes smoothed.
+        """
+        return self._n_nodes_smoothed
+
+    @n_nodes_smoothed.setter
+    def n_nodes_smoothed(self, value: int):
+        self._n_nodes_smoothed = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error Code associated with creating offset surface.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
 
 class RefineAtContactsParams(CoreObject):
     """Parameters to refine face elements in contact.
@@ -1283,10 +1859,10 @@ class RefineAtContactsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["contactTolerance"],
-                json_data["relativeTolerance"],
-                json_data["refineMaxSize"],
-                json_data["projectOnGeometry"])
+                json_data["contactTolerance"] if "contactTolerance" in json_data else None,
+                json_data["relativeTolerance"] if "relativeTolerance" in json_data else None,
+                json_data["refineMaxSize"] if "refineMaxSize" in json_data else None,
+                json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [contact_tolerance, relative_tolerance, refine_max_size, project_on_geometry])
             if all_field_specified:
@@ -1299,12 +1875,13 @@ class RefineAtContactsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "RefineAtContactsParams")["RefineAtContactsParams"]
+                    param_json = model._communicator.initialize_params(model, "RefineAtContactsParams")
+                    json_data = param_json["RefineAtContactsParams"] if "RefineAtContactsParams" in param_json else {}
                     self.__initialize(
-                        contact_tolerance if contact_tolerance is not None else ( RefineAtContactsParams._default_params["contact_tolerance"] if "contact_tolerance" in RefineAtContactsParams._default_params else json_data["contactTolerance"]),
-                        relative_tolerance if relative_tolerance is not None else ( RefineAtContactsParams._default_params["relative_tolerance"] if "relative_tolerance" in RefineAtContactsParams._default_params else json_data["relativeTolerance"]),
-                        refine_max_size if refine_max_size is not None else ( RefineAtContactsParams._default_params["refine_max_size"] if "refine_max_size" in RefineAtContactsParams._default_params else json_data["refineMaxSize"]),
-                        project_on_geometry if project_on_geometry is not None else ( RefineAtContactsParams._default_params["project_on_geometry"] if "project_on_geometry" in RefineAtContactsParams._default_params else json_data["projectOnGeometry"]))
+                        contact_tolerance if contact_tolerance is not None else ( RefineAtContactsParams._default_params["contact_tolerance"] if "contact_tolerance" in RefineAtContactsParams._default_params else (json_data["contactTolerance"] if "contactTolerance" in json_data else None)),
+                        relative_tolerance if relative_tolerance is not None else ( RefineAtContactsParams._default_params["relative_tolerance"] if "relative_tolerance" in RefineAtContactsParams._default_params else (json_data["relativeTolerance"] if "relativeTolerance" in json_data else None)),
+                        refine_max_size if refine_max_size is not None else ( RefineAtContactsParams._default_params["refine_max_size"] if "refine_max_size" in RefineAtContactsParams._default_params else (json_data["refineMaxSize"] if "refineMaxSize" in json_data else None)),
+                        project_on_geometry if project_on_geometry is not None else ( RefineAtContactsParams._default_params["project_on_geometry"] if "project_on_geometry" in RefineAtContactsParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1348,10 +1925,14 @@ class RefineAtContactsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["contactTolerance"] = self._contact_tolerance
-        json_data["relativeTolerance"] = self._relative_tolerance
-        json_data["refineMaxSize"] = self._refine_max_size
-        json_data["projectOnGeometry"] = self._project_on_geometry
+        if self._contact_tolerance is not None:
+            json_data["contactTolerance"] = self._contact_tolerance
+        if self._relative_tolerance is not None:
+            json_data["relativeTolerance"] = self._relative_tolerance
+        if self._refine_max_size is not None:
+            json_data["refineMaxSize"] = self._refine_max_size
+        if self._project_on_geometry is not None:
+            json_data["projectOnGeometry"] = self._project_on_geometry
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1443,9 +2024,9 @@ class RefineAtContactsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["nRefined"],
-                json_data["sizeFieldId"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["nRefined"] if "nRefined" in json_data else None,
+                json_data["sizeFieldId"] if "sizeFieldId" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [n_refined, size_field_id, error_code])
             if all_field_specified:
@@ -1457,11 +2038,12 @@ class RefineAtContactsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "RefineAtContactsResults")["RefineAtContactsResults"]
+                    param_json = model._communicator.initialize_params(model, "RefineAtContactsResults")
+                    json_data = param_json["RefineAtContactsResults"] if "RefineAtContactsResults" in param_json else {}
                     self.__initialize(
-                        n_refined if n_refined is not None else ( RefineAtContactsResults._default_params["n_refined"] if "n_refined" in RefineAtContactsResults._default_params else json_data["nRefined"]),
-                        size_field_id if size_field_id is not None else ( RefineAtContactsResults._default_params["size_field_id"] if "size_field_id" in RefineAtContactsResults._default_params else json_data["sizeFieldId"]),
-                        error_code if error_code is not None else ( RefineAtContactsResults._default_params["error_code"] if "error_code" in RefineAtContactsResults._default_params else ErrorCode(json_data["errorCode"])))
+                        n_refined if n_refined is not None else ( RefineAtContactsResults._default_params["n_refined"] if "n_refined" in RefineAtContactsResults._default_params else (json_data["nRefined"] if "nRefined" in json_data else None)),
+                        size_field_id if size_field_id is not None else ( RefineAtContactsResults._default_params["size_field_id"] if "size_field_id" in RefineAtContactsResults._default_params else (json_data["sizeFieldId"] if "sizeFieldId" in json_data else None)),
+                        error_code if error_code is not None else ( RefineAtContactsResults._default_params["error_code"] if "error_code" in RefineAtContactsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1502,9 +2084,12 @@ class RefineAtContactsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["nRefined"] = self._n_refined
-        json_data["sizeFieldId"] = self._size_field_id
-        json_data["errorCode"] = self._error_code
+        if self._n_refined is not None:
+            json_data["nRefined"] = self._n_refined
+        if self._size_field_id is not None:
+            json_data["sizeFieldId"] = self._size_field_id
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1591,10 +2176,10 @@ class AddThicknessParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["thickness"],
-                json_data["reverseFaceNormal"],
-                json_data["suggestedPartName"],
-                json_data["fixIntersections"])
+                json_data["thickness"] if "thickness" in json_data else None,
+                json_data["reverseFaceNormal"] if "reverseFaceNormal" in json_data else None,
+                json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
+                json_data["fixIntersections"] if "fixIntersections" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [thickness, reverse_face_normal, suggested_part_name, fix_intersections])
             if all_field_specified:
@@ -1607,12 +2192,13 @@ class AddThicknessParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "AddThicknessParams")["AddThicknessParams"]
+                    param_json = model._communicator.initialize_params(model, "AddThicknessParams")
+                    json_data = param_json["AddThicknessParams"] if "AddThicknessParams" in param_json else {}
                     self.__initialize(
-                        thickness if thickness is not None else ( AddThicknessParams._default_params["thickness"] if "thickness" in AddThicknessParams._default_params else json_data["thickness"]),
-                        reverse_face_normal if reverse_face_normal is not None else ( AddThicknessParams._default_params["reverse_face_normal"] if "reverse_face_normal" in AddThicknessParams._default_params else json_data["reverseFaceNormal"]),
-                        suggested_part_name if suggested_part_name is not None else ( AddThicknessParams._default_params["suggested_part_name"] if "suggested_part_name" in AddThicknessParams._default_params else json_data["suggestedPartName"]),
-                        fix_intersections if fix_intersections is not None else ( AddThicknessParams._default_params["fix_intersections"] if "fix_intersections" in AddThicknessParams._default_params else json_data["fixIntersections"]))
+                        thickness if thickness is not None else ( AddThicknessParams._default_params["thickness"] if "thickness" in AddThicknessParams._default_params else (json_data["thickness"] if "thickness" in json_data else None)),
+                        reverse_face_normal if reverse_face_normal is not None else ( AddThicknessParams._default_params["reverse_face_normal"] if "reverse_face_normal" in AddThicknessParams._default_params else (json_data["reverseFaceNormal"] if "reverseFaceNormal" in json_data else None)),
+                        suggested_part_name if suggested_part_name is not None else ( AddThicknessParams._default_params["suggested_part_name"] if "suggested_part_name" in AddThicknessParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
+                        fix_intersections if fix_intersections is not None else ( AddThicknessParams._default_params["fix_intersections"] if "fix_intersections" in AddThicknessParams._default_params else (json_data["fixIntersections"] if "fixIntersections" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1656,10 +2242,14 @@ class AddThicknessParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["thickness"] = self._thickness
-        json_data["reverseFaceNormal"] = self._reverse_face_normal
-        json_data["suggestedPartName"] = self._suggested_part_name
-        json_data["fixIntersections"] = self._fix_intersections
+        if self._thickness is not None:
+            json_data["thickness"] = self._thickness
+        if self._reverse_face_normal is not None:
+            json_data["reverseFaceNormal"] = self._reverse_face_normal
+        if self._suggested_part_name is not None:
+            json_data["suggestedPartName"] = self._suggested_part_name
+        if self._fix_intersections is not None:
+            json_data["fixIntersections"] = self._fix_intersections
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1746,8 +2336,8 @@ class AddThicknessResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["partId"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["partId"] if "partId" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, part_id])
             if all_field_specified:
@@ -1758,10 +2348,11 @@ class AddThicknessResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "AddThicknessResults")["AddThicknessResults"]
+                    param_json = model._communicator.initialize_params(model, "AddThicknessResults")
+                    json_data = param_json["AddThicknessResults"] if "AddThicknessResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( AddThicknessResults._default_params["error_code"] if "error_code" in AddThicknessResults._default_params else ErrorCode(json_data["errorCode"])),
-                        part_id if part_id is not None else ( AddThicknessResults._default_params["part_id"] if "part_id" in AddThicknessResults._default_params else json_data["partId"]))
+                        error_code if error_code is not None else ( AddThicknessResults._default_params["error_code"] if "error_code" in AddThicknessResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        part_id if part_id is not None else ( AddThicknessResults._default_params["part_id"] if "part_id" in AddThicknessResults._default_params else (json_data["partId"] if "partId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1799,8 +2390,10 @@ class AddThicknessResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["partId"] = self._part_id
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._part_id is not None:
+            json_data["partId"] = self._part_id
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

@@ -55,6 +55,34 @@ class MaterialPointManager(CoreObject):
         self._model._print_logs_after_command("create_material_point", CreateMaterialPointResults(model = self._model, json_data = result))
         return CreateMaterialPointResults(model = self._model, json_data = result)
 
+    def delete_material_point(self, name : str) -> DeleteMaterialPointResults:
+        """ Deletes material point identified with the given name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the material point to be deleted.
+
+        Returns
+        -------
+        DeleteMaterialPointResults
+            Returns the DeleteMaterialPointResults.
+
+
+        Examples
+        --------
+        >>> model = prime.local_model()
+        >>> results = model.material_point_data.delete_material_point("fluid")
+
+        """
+        args = {"name" : name}
+        command_name = "PrimeMesh::MaterialPointManager/DeleteMaterialPoint"
+        self._model._print_logs_before_command("delete_material_point", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("delete_material_point", DeleteMaterialPointResults(model = self._model, json_data = result))
+        return DeleteMaterialPointResults(model = self._model, json_data = result)
+
     @property
     def id(self):
         """ Get the id of MaterialPointManager."""

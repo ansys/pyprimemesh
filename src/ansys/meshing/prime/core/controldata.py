@@ -3,6 +3,7 @@ from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
+from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import SizingType
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
@@ -24,6 +25,7 @@ class ControlData(_ControlData):
         self._size_controls = []
         self._prism_controls = []
         self._volume_controls = []
+        self._periodic_controls = []
         _ControlData.__init__(self, model, id, object_id, name)
 
     def get_wrapper_control_by_name(self, name) -> WrapperControl:
@@ -207,6 +209,10 @@ class ControlData(_ControlData):
                     if volume_control.id == id:
                         self._volume_controls.remove(volume_control)
                         break
+                for periodic_control in self._periodic_controls:
+                    if periodic_control.id == id:
+                        self._periodic_controls.remove(periodic_control)
+                        break
         return res
 
     def _update_size_controls(self, sc_data: List):
@@ -223,12 +229,17 @@ class ControlData(_ControlData):
     def _update_volume_controls(self, sc_data: List):
         self._volume_controls = [VolumeControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
 
+    def _update_periodic_controls(self, sc_data: List):
+        self._periodic_controls = [
+            PeriodicControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data
+        ]
+
     def create_volume_control(self) -> VolumeControl:
         """Creates the volume control.
 
         Returns
         -------
-        VolumeControl *
+        VolumeControl
             Returns the volume control.
 
         Examples
@@ -252,7 +263,7 @@ class ControlData(_ControlData):
 
         Returns
         -------
-        SizeControl *
+        VolumeControl
             Returns the volume control.
 
         Examples
@@ -326,3 +337,60 @@ class ControlData(_ControlData):
 
         """
         return self._wrapper_controls
+
+    def create_periodic_control(self) -> PeriodicControl:
+        """Creates the periodic control.
+
+        Returns
+        -------
+        PeriodicControl
+            Returns the periodic control.
+
+        Examples
+        --------
+        >>> periodic_control = model.control_data.create_periodic_control()
+
+        """
+        res = _ControlData.create_periodic_control(self)
+        new_control = PeriodicControl(self._model, res[0], res[1], res[2])
+        self._periodic_controls.append(new_control)
+        return new_control
+
+    def get_periodic_control_by_name(self, name: str) -> PeriodicControl:
+        """Gets the periodic control by name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the periodic control.
+
+        Returns
+        -------
+        PeriodicControl
+            Returns the periodic control.
+
+        Examples
+        --------
+        >>> periodic_control = model.control_data.get_periodic_control_by_name("PeriodicControl-1")
+
+        """
+        for periodic_control in self._periodic_controls:
+            if periodic_control.name == name:
+                return periodic_control
+        return None
+
+    @property
+    def periodic_controls(self) -> List[PeriodicControl]:
+        """Get the periodic controls.
+
+        Returns
+        -------
+        List[PeriodicControl]
+            Returns the list of periodic controls.
+
+        Examples
+        --------
+            >>> periodic_controls = model.control_data.periodic_controls
+        """
+        return self._periodic_controls

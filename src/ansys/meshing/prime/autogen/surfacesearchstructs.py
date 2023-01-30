@@ -8,6 +8,16 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
+class ThinStripType(enum.IntEnum):
+    """The type to identify strip of face elements as thin strips using shape formed by features around the strip of face elements.
+    """
+    ALL = 0
+    """Thin strips of all shapes."""
+    EXCLUDEVSHAPE = 1
+    """Thin strips of all, but not v shape."""
+    VSHAPE = 2
+    """Thin strips of v shape only."""
+
 class SearchBySpikeParams(CoreObject):
     """Parameters to control spike detection.
     """
@@ -41,7 +51,7 @@ class SearchBySpikeParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["spikeAngle"])
+                json_data["spikeAngle"] if "spikeAngle" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [spike_angle])
             if all_field_specified:
@@ -51,9 +61,10 @@ class SearchBySpikeParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchBySpikeParams")["SearchBySpikeParams"]
+                    param_json = model._communicator.initialize_params(model, "SearchBySpikeParams")
+                    json_data = param_json["SearchBySpikeParams"] if "SearchBySpikeParams" in param_json else {}
                     self.__initialize(
-                        spike_angle if spike_angle is not None else ( SearchBySpikeParams._default_params["spike_angle"] if "spike_angle" in SearchBySpikeParams._default_params else json_data["spikeAngle"]))
+                        spike_angle if spike_angle is not None else ( SearchBySpikeParams._default_params["spike_angle"] if "spike_angle" in SearchBySpikeParams._default_params else (json_data["spikeAngle"] if "spikeAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -88,7 +99,8 @@ class SearchBySpikeParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["spikeAngle"] = self._spike_angle
+        if self._spike_angle is not None:
+            json_data["spikeAngle"] = self._spike_angle
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -135,7 +147,7 @@ class SearchBySpikeResults(CoreObject):
         n_found: int, optional
             Number of spikes detected.
         error_code: ErrorCode, optional
-            ErrorCode associated with search spikes operation.
+            Error code associated with search spikes operation.
         json_data: dict, optional
             JSON dictionary to create a SearchBySpikeResults object with provided parameters.
 
@@ -145,8 +157,8 @@ class SearchBySpikeResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["nFound"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["nFound"] if "nFound" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [n_found, error_code])
             if all_field_specified:
@@ -157,10 +169,11 @@ class SearchBySpikeResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchBySpikeResults")["SearchBySpikeResults"]
+                    param_json = model._communicator.initialize_params(model, "SearchBySpikeResults")
+                    json_data = param_json["SearchBySpikeResults"] if "SearchBySpikeResults" in param_json else {}
                     self.__initialize(
-                        n_found if n_found is not None else ( SearchBySpikeResults._default_params["n_found"] if "n_found" in SearchBySpikeResults._default_params else json_data["nFound"]),
-                        error_code if error_code is not None else ( SearchBySpikeResults._default_params["error_code"] if "error_code" in SearchBySpikeResults._default_params else ErrorCode(json_data["errorCode"])))
+                        n_found if n_found is not None else ( SearchBySpikeResults._default_params["n_found"] if "n_found" in SearchBySpikeResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        error_code if error_code is not None else ( SearchBySpikeResults._default_params["error_code"] if "error_code" in SearchBySpikeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -179,7 +192,7 @@ class SearchBySpikeResults(CoreObject):
         n_found: int, optional
             Number of spikes detected.
         error_code: ErrorCode, optional
-            ErrorCode associated with search spikes operation.
+            Error code associated with search spikes operation.
         """
         args = locals()
         [SearchBySpikeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -198,8 +211,10 @@ class SearchBySpikeResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["nFound"] = self._n_found
-        json_data["errorCode"] = self._error_code
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -220,7 +235,7 @@ class SearchBySpikeResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """ErrorCode associated with search spikes operation.
+        """Error code associated with search spikes operation.
         """
         return self._error_code
 
@@ -261,7 +276,7 @@ class SearchByFoldsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["criticalAngle"])
+                json_data["criticalAngle"] if "criticalAngle" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [critical_angle])
             if all_field_specified:
@@ -271,9 +286,10 @@ class SearchByFoldsParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByFoldsParams")["SearchByFoldsParams"]
+                    param_json = model._communicator.initialize_params(model, "SearchByFoldsParams")
+                    json_data = param_json["SearchByFoldsParams"] if "SearchByFoldsParams" in param_json else {}
                     self.__initialize(
-                        critical_angle if critical_angle is not None else ( SearchByFoldsParams._default_params["critical_angle"] if "critical_angle" in SearchByFoldsParams._default_params else json_data["criticalAngle"]))
+                        critical_angle if critical_angle is not None else ( SearchByFoldsParams._default_params["critical_angle"] if "critical_angle" in SearchByFoldsParams._default_params else (json_data["criticalAngle"] if "criticalAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -308,7 +324,8 @@ class SearchByFoldsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["criticalAngle"] = self._critical_angle
+        if self._critical_angle is not None:
+            json_data["criticalAngle"] = self._critical_angle
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -355,7 +372,7 @@ class SearchByFoldsResults(CoreObject):
         n_found: int, optional
             Number of folds identified.
         error_code: ErrorCode, optional
-            ErrorCode associated with search folds operation.
+            Error code associated with search folds operation.
         json_data: dict, optional
             JSON dictionary to create a SearchByFoldsResults object with provided parameters.
 
@@ -365,8 +382,8 @@ class SearchByFoldsResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["nFound"],
-                ErrorCode(json_data["errorCode"]))
+                json_data["nFound"] if "nFound" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [n_found, error_code])
             if all_field_specified:
@@ -377,10 +394,11 @@ class SearchByFoldsResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByFoldsResults")["SearchByFoldsResults"]
+                    param_json = model._communicator.initialize_params(model, "SearchByFoldsResults")
+                    json_data = param_json["SearchByFoldsResults"] if "SearchByFoldsResults" in param_json else {}
                     self.__initialize(
-                        n_found if n_found is not None else ( SearchByFoldsResults._default_params["n_found"] if "n_found" in SearchByFoldsResults._default_params else json_data["nFound"]),
-                        error_code if error_code is not None else ( SearchByFoldsResults._default_params["error_code"] if "error_code" in SearchByFoldsResults._default_params else ErrorCode(json_data["errorCode"])))
+                        n_found if n_found is not None else ( SearchByFoldsResults._default_params["n_found"] if "n_found" in SearchByFoldsResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        error_code if error_code is not None else ( SearchByFoldsResults._default_params["error_code"] if "error_code" in SearchByFoldsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -399,7 +417,7 @@ class SearchByFoldsResults(CoreObject):
         n_found: int, optional
             Number of folds identified.
         error_code: ErrorCode, optional
-            ErrorCode associated with search folds operation.
+            Error code associated with search folds operation.
         """
         args = locals()
         [SearchByFoldsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -418,8 +436,10 @@ class SearchByFoldsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["nFound"] = self._n_found
-        json_data["errorCode"] = self._error_code
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -440,7 +460,7 @@ class SearchByFoldsResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """ErrorCode associated with search folds operation.
+        """Error code associated with search folds operation.
         """
         return self._error_code
 
@@ -449,7 +469,7 @@ class SearchByFoldsResults(CoreObject):
         self._error_code = value
 
 class SearchBySelfIntersectionParams(CoreObject):
-    """Parameters to search by face element intersection. This is for internal use only.
+    """Parameters to search by face element intersection.
     """
     _default_params = {}
 
@@ -485,7 +505,8 @@ class SearchBySelfIntersectionParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchBySelfIntersectionParams")["SearchBySelfIntersectionParams"]
+                    param_json = model._communicator.initialize_params(model, "SearchBySelfIntersectionParams")
+                    json_data = param_json["SearchBySelfIntersectionParams"] if "SearchBySelfIntersectionParams" in param_json else {}
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
@@ -525,17 +546,22 @@ class SearchBySelfIntersectionParams(CoreObject):
         return message
 
 class SearchByIntersectionResults(CoreObject):
-    """Results associated with search by face element intersection. This is for internal use only.
+    """Results associated with search by face element intersection (face elements interfering with each other).
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            n_found: int,
+            error_code: ErrorCode):
+        self._n_found = n_found
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            n_found: int = None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SearchByIntersectionResults.
@@ -544,6 +570,10 @@ class SearchByIntersectionResults(CoreObject):
         ----------
         model: Model
             Model to create a SearchByIntersectionResults object with default parameters.
+        n_found: int, optional
+            Number of face elements identified by intersection(face elements interfering with each other).
+        error_code: ErrorCode, optional
+            Error code associated with search intersection operation.
         json_data: dict, optional
             JSON dictionary to create a SearchByIntersectionResults object with provided parameters.
 
@@ -552,17 +582,24 @@ class SearchByIntersectionResults(CoreObject):
         >>> search_by_intersection_results = prime.SearchByIntersectionResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["nFound"] if "nFound" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [n_found, error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    n_found,
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByIntersectionResults")["SearchByIntersectionResults"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "SearchByIntersectionResults")
+                    json_data = param_json["SearchByIntersectionResults"] if "SearchByIntersectionResults" in param_json else {}
+                    self.__initialize(
+                        n_found if n_found is not None else ( SearchByIntersectionResults._default_params["n_found"] if "n_found" in SearchByIntersectionResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        error_code if error_code is not None else ( SearchByIntersectionResults._default_params["error_code"] if "error_code" in SearchByIntersectionResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -571,9 +608,17 @@ class SearchByIntersectionResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            n_found: int = None,
+            error_code: ErrorCode = None):
         """Set the default values of SearchByIntersectionResults.
 
+        Parameters
+        ----------
+        n_found: int, optional
+            Number of face elements identified by intersection(face elements interfering with each other).
+        error_code: ErrorCode, optional
+            Error code associated with search intersection operation.
         """
         args = locals()
         [SearchByIntersectionResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -592,13 +637,37 @@ class SearchByIntersectionResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "n_found :  %s\nerror_code :  %s" % (self._n_found, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def n_found(self) -> int:
+        """Number of face elements identified by intersection(face elements interfering with each other).
+        """
+        return self._n_found
+
+    @n_found.setter
+    def n_found(self, value: int):
+        self._n_found = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with search intersection operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
 
 class SearchByQualityParams(CoreObject):
     """Parameters to control search by quality results.
@@ -638,8 +707,8 @@ class SearchByQualityParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["qualityLimit"],
-                FaceQualityMeasure(json_data["faceQualityMeasure"]))
+                json_data["qualityLimit"] if "qualityLimit" in json_data else None,
+                FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [quality_limit, face_quality_measure])
             if all_field_specified:
@@ -650,10 +719,11 @@ class SearchByQualityParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByQualityParams")["SearchByQualityParams"]
+                    param_json = model._communicator.initialize_params(model, "SearchByQualityParams")
+                    json_data = param_json["SearchByQualityParams"] if "SearchByQualityParams" in param_json else {}
                     self.__initialize(
-                        quality_limit if quality_limit is not None else ( SearchByQualityParams._default_params["quality_limit"] if "quality_limit" in SearchByQualityParams._default_params else json_data["qualityLimit"]),
-                        face_quality_measure if face_quality_measure is not None else ( SearchByQualityParams._default_params["face_quality_measure"] if "face_quality_measure" in SearchByQualityParams._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"])))
+                        quality_limit if quality_limit is not None else ( SearchByQualityParams._default_params["quality_limit"] if "quality_limit" in SearchByQualityParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)),
+                        face_quality_measure if face_quality_measure is not None else ( SearchByQualityParams._default_params["face_quality_measure"] if "face_quality_measure" in SearchByQualityParams._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -691,8 +761,10 @@ class SearchByQualityParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["qualityLimit"] = self._quality_limit
-        json_data["faceQualityMeasure"] = self._face_quality_measure
+        if self._quality_limit is not None:
+            json_data["qualityLimit"] = self._quality_limit
+        if self._face_quality_measure is not None:
+            json_data["faceQualityMeasure"] = self._face_quality_measure
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -769,10 +841,10 @@ class SearchByQualityResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["nFound"],
-                ErrorCode(json_data["errorCode"]),
-                json_data["maxQuality"],
-                json_data["minQuality"])
+                json_data["nFound"] if "nFound" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["maxQuality"] if "maxQuality" in json_data else None,
+                json_data["minQuality"] if "minQuality" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [n_found, error_code, max_quality, min_quality])
             if all_field_specified:
@@ -785,12 +857,13 @@ class SearchByQualityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByQualityResults")["SearchByQualityResults"]
+                    param_json = model._communicator.initialize_params(model, "SearchByQualityResults")
+                    json_data = param_json["SearchByQualityResults"] if "SearchByQualityResults" in param_json else {}
                     self.__initialize(
-                        n_found if n_found is not None else ( SearchByQualityResults._default_params["n_found"] if "n_found" in SearchByQualityResults._default_params else json_data["nFound"]),
-                        error_code if error_code is not None else ( SearchByQualityResults._default_params["error_code"] if "error_code" in SearchByQualityResults._default_params else ErrorCode(json_data["errorCode"])),
-                        max_quality if max_quality is not None else ( SearchByQualityResults._default_params["max_quality"] if "max_quality" in SearchByQualityResults._default_params else json_data["maxQuality"]),
-                        min_quality if min_quality is not None else ( SearchByQualityResults._default_params["min_quality"] if "min_quality" in SearchByQualityResults._default_params else json_data["minQuality"]))
+                        n_found if n_found is not None else ( SearchByQualityResults._default_params["n_found"] if "n_found" in SearchByQualityResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        error_code if error_code is not None else ( SearchByQualityResults._default_params["error_code"] if "error_code" in SearchByQualityResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        max_quality if max_quality is not None else ( SearchByQualityResults._default_params["max_quality"] if "max_quality" in SearchByQualityResults._default_params else (json_data["maxQuality"] if "maxQuality" in json_data else None)),
+                        min_quality if min_quality is not None else ( SearchByQualityResults._default_params["min_quality"] if "min_quality" in SearchByQualityResults._default_params else (json_data["minQuality"] if "minQuality" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -834,10 +907,14 @@ class SearchByQualityResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["nFound"] = self._n_found
-        json_data["errorCode"] = self._error_code
-        json_data["maxQuality"] = self._max_quality
-        json_data["minQuality"] = self._min_quality
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._max_quality is not None:
+            json_data["maxQuality"] = self._max_quality
+        if self._min_quality is not None:
+            json_data["minQuality"] = self._min_quality
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -887,17 +964,25 @@ class SearchByQualityResults(CoreObject):
         self._min_quality = value
 
 class SearchByThinStripParams(CoreObject):
-    """Parameters to search by thin strip of face elements. This is for internal use only.
+    """Parameters to search by thin strip of face elements.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            strip_height_limit: float,
+            quality_limit: float,
+            face_quality_measure: FaceQualityMeasure):
+        self._strip_height_limit = strip_height_limit
+        self._quality_limit = quality_limit
+        self._face_quality_measure = FaceQualityMeasure(face_quality_measure)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            strip_height_limit: float = None,
+            quality_limit: float = None,
+            face_quality_measure: FaceQualityMeasure = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SearchByThinStripParams.
@@ -906,6 +991,12 @@ class SearchByThinStripParams(CoreObject):
         ----------
         model: Model
             Model to create a SearchByThinStripParams object with default parameters.
+        strip_height_limit: float, optional
+            Absolute height limit to ignore strips with height more than provided limit.
+        quality_limit: float, optional
+            Quality limit used for search strip of face elements.
+        face_quality_measure: FaceQualityMeasure, optional
+            Quality measure used for search strip of face elements.
         json_data: dict, optional
             JSON dictionary to create a SearchByThinStripParams object with provided parameters.
 
@@ -914,17 +1005,27 @@ class SearchByThinStripParams(CoreObject):
         >>> search_by_thin_strip_params = prime.SearchByThinStripParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["stripHeightLimit"] if "stripHeightLimit" in json_data else None,
+                json_data["qualityLimit"] if "qualityLimit" in json_data else None,
+                FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [strip_height_limit, quality_limit, face_quality_measure])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    strip_height_limit,
+                    quality_limit,
+                    face_quality_measure)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByThinStripParams")["SearchByThinStripParams"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "SearchByThinStripParams")
+                    json_data = param_json["SearchByThinStripParams"] if "SearchByThinStripParams" in param_json else {}
+                    self.__initialize(
+                        strip_height_limit if strip_height_limit is not None else ( SearchByThinStripParams._default_params["strip_height_limit"] if "strip_height_limit" in SearchByThinStripParams._default_params else (json_data["stripHeightLimit"] if "stripHeightLimit" in json_data else None)),
+                        quality_limit if quality_limit is not None else ( SearchByThinStripParams._default_params["quality_limit"] if "quality_limit" in SearchByThinStripParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)),
+                        face_quality_measure if face_quality_measure is not None else ( SearchByThinStripParams._default_params["face_quality_measure"] if "face_quality_measure" in SearchByThinStripParams._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -933,9 +1034,20 @@ class SearchByThinStripParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            strip_height_limit: float = None,
+            quality_limit: float = None,
+            face_quality_measure: FaceQualityMeasure = None):
         """Set the default values of SearchByThinStripParams.
 
+        Parameters
+        ----------
+        strip_height_limit: float, optional
+            Absolute height limit to ignore strips with height more than provided limit.
+        quality_limit: float, optional
+            Quality limit used for search strip of face elements.
+        face_quality_measure: FaceQualityMeasure, optional
+            Quality measure used for search strip of face elements.
         """
         args = locals()
         [SearchByThinStripParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -954,26 +1066,67 @@ class SearchByThinStripParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._strip_height_limit is not None:
+            json_data["stripHeightLimit"] = self._strip_height_limit
+        if self._quality_limit is not None:
+            json_data["qualityLimit"] = self._quality_limit
+        if self._face_quality_measure is not None:
+            json_data["faceQualityMeasure"] = self._face_quality_measure
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "strip_height_limit :  %s\nquality_limit :  %s\nface_quality_measure :  %s" % (self._strip_height_limit, self._quality_limit, self._face_quality_measure)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+    @property
+    def strip_height_limit(self) -> float:
+        """Absolute height limit to ignore strips with height more than provided limit.
+        """
+        return self._strip_height_limit
+
+    @strip_height_limit.setter
+    def strip_height_limit(self, value: float):
+        self._strip_height_limit = value
+
+    @property
+    def quality_limit(self) -> float:
+        """Quality limit used for search strip of face elements.
+        """
+        return self._quality_limit
+
+    @quality_limit.setter
+    def quality_limit(self, value: float):
+        self._quality_limit = value
+
+    @property
+    def face_quality_measure(self) -> FaceQualityMeasure:
+        """Quality measure used for search strip of face elements.
+        """
+        return self._face_quality_measure
+
+    @face_quality_measure.setter
+    def face_quality_measure(self, value: FaceQualityMeasure):
+        self._face_quality_measure = value
+
 class SearchByThinStripResults(CoreObject):
-    """Results associated with search by thin strip of face elements. This is for internal use only.
+    """Results associated with search by thin strip of face elements.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            n_found: int,
+            error_code: ErrorCode):
+        self._n_found = n_found
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            n_found: int = None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SearchByThinStripResults.
@@ -982,6 +1135,10 @@ class SearchByThinStripResults(CoreObject):
         ----------
         model: Model
             Model to create a SearchByThinStripResults object with default parameters.
+        n_found: int, optional
+            Number of face elements identified as thin strips.
+        error_code: ErrorCode, optional
+            Error code associated with search thin strips operation.
         json_data: dict, optional
             JSON dictionary to create a SearchByThinStripResults object with provided parameters.
 
@@ -990,17 +1147,24 @@ class SearchByThinStripResults(CoreObject):
         >>> search_by_thin_strip_results = prime.SearchByThinStripResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["nFound"] if "nFound" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [n_found, error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    n_found,
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SearchByThinStripResults")["SearchByThinStripResults"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "SearchByThinStripResults")
+                    json_data = param_json["SearchByThinStripResults"] if "SearchByThinStripResults" in param_json else {}
+                    self.__initialize(
+                        n_found if n_found is not None else ( SearchByThinStripResults._default_params["n_found"] if "n_found" in SearchByThinStripResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        error_code if error_code is not None else ( SearchByThinStripResults._default_params["error_code"] if "error_code" in SearchByThinStripResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1009,9 +1173,17 @@ class SearchByThinStripResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            n_found: int = None,
+            error_code: ErrorCode = None):
         """Set the default values of SearchByThinStripResults.
 
+        Parameters
+        ----------
+        n_found: int, optional
+            Number of face elements identified as thin strips.
+        error_code: ErrorCode, optional
+            Error code associated with search thin strips operation.
         """
         args = locals()
         [SearchByThinStripResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1030,13 +1202,37 @@ class SearchByThinStripResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "n_found :  %s\nerror_code :  %s" % (self._n_found, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def n_found(self) -> int:
+        """Number of face elements identified as thin strips.
+        """
+        return self._n_found
+
+    @n_found.setter
+    def n_found(self, value: int):
+        self._n_found = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with search thin strips operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
 
 class SurfaceQualityResult(CoreObject):
     """Result of surface quality.
@@ -1096,12 +1292,12 @@ class SurfaceQualityResult(CoreObject):
         """
         if json_data:
             self.__initialize(
-                FaceQualityMeasure(json_data["faceQualityMeasure"]),
-                json_data["measureName"],
-                json_data["qualityLimit"],
-                json_data["nFound"],
-                json_data["maxQuality"],
-                json_data["minQuality"])
+                FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None),
+                json_data["measureName"] if "measureName" in json_data else None,
+                json_data["qualityLimit"] if "qualityLimit" in json_data else None,
+                json_data["nFound"] if "nFound" in json_data else None,
+                json_data["maxQuality"] if "maxQuality" in json_data else None,
+                json_data["minQuality"] if "minQuality" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [face_quality_measure, measure_name, quality_limit, n_found, max_quality, min_quality])
             if all_field_specified:
@@ -1116,14 +1312,15 @@ class SurfaceQualityResult(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurfaceQualityResult")["SurfaceQualityResult"]
+                    param_json = model._communicator.initialize_params(model, "SurfaceQualityResult")
+                    json_data = param_json["SurfaceQualityResult"] if "SurfaceQualityResult" in param_json else {}
                     self.__initialize(
-                        face_quality_measure if face_quality_measure is not None else ( SurfaceQualityResult._default_params["face_quality_measure"] if "face_quality_measure" in SurfaceQualityResult._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"])),
-                        measure_name if measure_name is not None else ( SurfaceQualityResult._default_params["measure_name"] if "measure_name" in SurfaceQualityResult._default_params else json_data["measureName"]),
-                        quality_limit if quality_limit is not None else ( SurfaceQualityResult._default_params["quality_limit"] if "quality_limit" in SurfaceQualityResult._default_params else json_data["qualityLimit"]),
-                        n_found if n_found is not None else ( SurfaceQualityResult._default_params["n_found"] if "n_found" in SurfaceQualityResult._default_params else json_data["nFound"]),
-                        max_quality if max_quality is not None else ( SurfaceQualityResult._default_params["max_quality"] if "max_quality" in SurfaceQualityResult._default_params else json_data["maxQuality"]),
-                        min_quality if min_quality is not None else ( SurfaceQualityResult._default_params["min_quality"] if "min_quality" in SurfaceQualityResult._default_params else json_data["minQuality"]))
+                        face_quality_measure if face_quality_measure is not None else ( SurfaceQualityResult._default_params["face_quality_measure"] if "face_quality_measure" in SurfaceQualityResult._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None)),
+                        measure_name if measure_name is not None else ( SurfaceQualityResult._default_params["measure_name"] if "measure_name" in SurfaceQualityResult._default_params else (json_data["measureName"] if "measureName" in json_data else None)),
+                        quality_limit if quality_limit is not None else ( SurfaceQualityResult._default_params["quality_limit"] if "quality_limit" in SurfaceQualityResult._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)),
+                        n_found if n_found is not None else ( SurfaceQualityResult._default_params["n_found"] if "n_found" in SurfaceQualityResult._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        max_quality if max_quality is not None else ( SurfaceQualityResult._default_params["max_quality"] if "max_quality" in SurfaceQualityResult._default_params else (json_data["maxQuality"] if "maxQuality" in json_data else None)),
+                        min_quality if min_quality is not None else ( SurfaceQualityResult._default_params["min_quality"] if "min_quality" in SurfaceQualityResult._default_params else (json_data["minQuality"] if "minQuality" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1173,12 +1370,18 @@ class SurfaceQualityResult(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["faceQualityMeasure"] = self._face_quality_measure
-        json_data["measureName"] = self._measure_name
-        json_data["qualityLimit"] = self._quality_limit
-        json_data["nFound"] = self._n_found
-        json_data["maxQuality"] = self._max_quality
-        json_data["minQuality"] = self._min_quality
+        if self._face_quality_measure is not None:
+            json_data["faceQualityMeasure"] = self._face_quality_measure
+        if self._measure_name is not None:
+            json_data["measureName"] = self._measure_name
+        if self._quality_limit is not None:
+            json_data["qualityLimit"] = self._quality_limit
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._max_quality is not None:
+            json_data["maxQuality"] = self._max_quality
+        if self._min_quality is not None:
+            json_data["minQuality"] = self._min_quality
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1290,9 +1493,9 @@ class SurfaceQualitySummaryResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                [SurfaceQualityResult(model = model, json_data = data) for data in json_data["qualityResults"]],
-                json_data["summary"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [SurfaceQualityResult(model = model, json_data = data) for data in json_data["qualityResults"]] if "qualityResults" in json_data else None,
+                json_data["summary"] if "summary" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, quality_results, summary])
             if all_field_specified:
@@ -1304,11 +1507,12 @@ class SurfaceQualitySummaryResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurfaceQualitySummaryResults")["SurfaceQualitySummaryResults"]
+                    param_json = model._communicator.initialize_params(model, "SurfaceQualitySummaryResults")
+                    json_data = param_json["SurfaceQualitySummaryResults"] if "SurfaceQualitySummaryResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SurfaceQualitySummaryResults._default_params["error_code"] if "error_code" in SurfaceQualitySummaryResults._default_params else ErrorCode(json_data["errorCode"])),
-                        quality_results if quality_results is not None else ( SurfaceQualitySummaryResults._default_params["quality_results"] if "quality_results" in SurfaceQualitySummaryResults._default_params else [SurfaceQualityResult(model = model, json_data = data) for data in json_data["qualityResults"]]),
-                        summary if summary is not None else ( SurfaceQualitySummaryResults._default_params["summary"] if "summary" in SurfaceQualitySummaryResults._default_params else json_data["summary"]))
+                        error_code if error_code is not None else ( SurfaceQualitySummaryResults._default_params["error_code"] if "error_code" in SurfaceQualitySummaryResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        quality_results if quality_results is not None else ( SurfaceQualitySummaryResults._default_params["quality_results"] if "quality_results" in SurfaceQualitySummaryResults._default_params else [SurfaceQualityResult(model = model, json_data = data) for data in (json_data["qualityResults"] if "qualityResults" in json_data else None)]),
+                        summary if summary is not None else ( SurfaceQualitySummaryResults._default_params["summary"] if "summary" in SurfaceQualitySummaryResults._default_params else (json_data["summary"] if "summary" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1349,9 +1553,12 @@ class SurfaceQualitySummaryResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["qualityResults"] = [data._jsonify() for data in self._quality_results]
-        json_data["summary"] = self._summary
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._quality_results is not None:
+            json_data["qualityResults"] = [data._jsonify() for data in self._quality_results]
+        if self._summary is not None:
+            json_data["summary"] = self._summary
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1402,7 +1609,7 @@ class SurfaceQualitySummaryParams(CoreObject):
             quality_limit: Iterable[float]):
         self._face_quality_measures = face_quality_measures
         self._scope = scope
-        self._quality_limit = quality_limit if isinstance(quality_limit, np.ndarray) else np.array(quality_limit, dtype=np.double)
+        self._quality_limit = quality_limit if isinstance(quality_limit, np.ndarray) else np.array(quality_limit, dtype=np.double) if quality_limit is not None else None
 
     def __init__(
             self,
@@ -1433,9 +1640,9 @@ class SurfaceQualitySummaryParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                [FaceQualityMeasure(data) for data in json_data["faceQualityMeasures"]],
-                ScopeDefinition(model = model, json_data = json_data["scope"]),
-                json_data["qualityLimit"])
+                [FaceQualityMeasure(data) for data in json_data["faceQualityMeasures"]] if "faceQualityMeasures" in json_data else None,
+                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None),
+                json_data["qualityLimit"] if "qualityLimit" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [face_quality_measures, scope, quality_limit])
             if all_field_specified:
@@ -1447,11 +1654,12 @@ class SurfaceQualitySummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurfaceQualitySummaryParams")["SurfaceQualitySummaryParams"]
+                    param_json = model._communicator.initialize_params(model, "SurfaceQualitySummaryParams")
+                    json_data = param_json["SurfaceQualitySummaryParams"] if "SurfaceQualitySummaryParams" in param_json else {}
                     self.__initialize(
-                        face_quality_measures if face_quality_measures is not None else ( SurfaceQualitySummaryParams._default_params["face_quality_measures"] if "face_quality_measures" in SurfaceQualitySummaryParams._default_params else [FaceQualityMeasure(data) for data in json_data["faceQualityMeasures"]]),
-                        scope if scope is not None else ( SurfaceQualitySummaryParams._default_params["scope"] if "scope" in SurfaceQualitySummaryParams._default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
-                        quality_limit if quality_limit is not None else ( SurfaceQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in SurfaceQualitySummaryParams._default_params else json_data["qualityLimit"]))
+                        face_quality_measures if face_quality_measures is not None else ( SurfaceQualitySummaryParams._default_params["face_quality_measures"] if "face_quality_measures" in SurfaceQualitySummaryParams._default_params else [FaceQualityMeasure(data) for data in (json_data["faceQualityMeasures"] if "faceQualityMeasures" in json_data else None)]),
+                        scope if scope is not None else ( SurfaceQualitySummaryParams._default_params["scope"] if "scope" in SurfaceQualitySummaryParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))),
+                        quality_limit if quality_limit is not None else ( SurfaceQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in SurfaceQualitySummaryParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1492,9 +1700,12 @@ class SurfaceQualitySummaryParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["faceQualityMeasures"] = [data for data in self._face_quality_measures]
-        json_data["scope"] = self._scope._jsonify()
-        json_data["qualityLimit"] = self._quality_limit
+        if self._face_quality_measures is not None:
+            json_data["faceQualityMeasures"] = [data for data in self._face_quality_measures]
+        if self._scope is not None:
+            json_data["scope"] = self._scope._jsonify()
+        if self._quality_limit is not None:
+            json_data["qualityLimit"] = self._quality_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1586,11 +1797,11 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["nSelfIntersections"],
-                json_data["nFreeEdges"],
-                json_data["nMultiEdges"],
-                json_data["nDuplicateFaces"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["nSelfIntersections"] if "nSelfIntersections" in json_data else None,
+                json_data["nFreeEdges"] if "nFreeEdges" in json_data else None,
+                json_data["nMultiEdges"] if "nMultiEdges" in json_data else None,
+                json_data["nDuplicateFaces"] if "nDuplicateFaces" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, n_self_intersections, n_free_edges, n_multi_edges, n_duplicate_faces])
             if all_field_specified:
@@ -1604,13 +1815,14 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurfaceDiagnosticSummaryResults")["SurfaceDiagnosticSummaryResults"]
+                    param_json = model._communicator.initialize_params(model, "SurfaceDiagnosticSummaryResults")
+                    json_data = param_json["SurfaceDiagnosticSummaryResults"] if "SurfaceDiagnosticSummaryResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SurfaceDiagnosticSummaryResults._default_params["error_code"] if "error_code" in SurfaceDiagnosticSummaryResults._default_params else ErrorCode(json_data["errorCode"])),
-                        n_self_intersections if n_self_intersections is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_self_intersections"] if "n_self_intersections" in SurfaceDiagnosticSummaryResults._default_params else json_data["nSelfIntersections"]),
-                        n_free_edges if n_free_edges is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_free_edges"] if "n_free_edges" in SurfaceDiagnosticSummaryResults._default_params else json_data["nFreeEdges"]),
-                        n_multi_edges if n_multi_edges is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_multi_edges"] if "n_multi_edges" in SurfaceDiagnosticSummaryResults._default_params else json_data["nMultiEdges"]),
-                        n_duplicate_faces if n_duplicate_faces is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_duplicate_faces"] if "n_duplicate_faces" in SurfaceDiagnosticSummaryResults._default_params else json_data["nDuplicateFaces"]))
+                        error_code if error_code is not None else ( SurfaceDiagnosticSummaryResults._default_params["error_code"] if "error_code" in SurfaceDiagnosticSummaryResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        n_self_intersections if n_self_intersections is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_self_intersections"] if "n_self_intersections" in SurfaceDiagnosticSummaryResults._default_params else (json_data["nSelfIntersections"] if "nSelfIntersections" in json_data else None)),
+                        n_free_edges if n_free_edges is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_free_edges"] if "n_free_edges" in SurfaceDiagnosticSummaryResults._default_params else (json_data["nFreeEdges"] if "nFreeEdges" in json_data else None)),
+                        n_multi_edges if n_multi_edges is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_multi_edges"] if "n_multi_edges" in SurfaceDiagnosticSummaryResults._default_params else (json_data["nMultiEdges"] if "nMultiEdges" in json_data else None)),
+                        n_duplicate_faces if n_duplicate_faces is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_duplicate_faces"] if "n_duplicate_faces" in SurfaceDiagnosticSummaryResults._default_params else (json_data["nDuplicateFaces"] if "nDuplicateFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1657,11 +1869,16 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["nSelfIntersections"] = self._n_self_intersections
-        json_data["nFreeEdges"] = self._n_free_edges
-        json_data["nMultiEdges"] = self._n_multi_edges
-        json_data["nDuplicateFaces"] = self._n_duplicate_faces
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._n_self_intersections is not None:
+            json_data["nSelfIntersections"] = self._n_self_intersections
+        if self._n_free_edges is not None:
+            json_data["nFreeEdges"] = self._n_free_edges
+        if self._n_multi_edges is not None:
+            json_data["nMultiEdges"] = self._n_multi_edges
+        if self._n_duplicate_faces is not None:
+            json_data["nDuplicateFaces"] = self._n_duplicate_faces
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1773,11 +1990,11 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ScopeDefinition(model = model, json_data = json_data["scope"]),
-                json_data["computeSelfIntersections"],
-                json_data["computeFreeEdges"],
-                json_data["computeMultiEdges"],
-                json_data["computeDuplicateFaces"])
+                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None),
+                json_data["computeSelfIntersections"] if "computeSelfIntersections" in json_data else None,
+                json_data["computeFreeEdges"] if "computeFreeEdges" in json_data else None,
+                json_data["computeMultiEdges"] if "computeMultiEdges" in json_data else None,
+                json_data["computeDuplicateFaces"] if "computeDuplicateFaces" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [scope, compute_self_intersections, compute_free_edges, compute_multi_edges, compute_duplicate_faces])
             if all_field_specified:
@@ -1791,13 +2008,14 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurfaceDiagnosticSummaryParams")["SurfaceDiagnosticSummaryParams"]
+                    param_json = model._communicator.initialize_params(model, "SurfaceDiagnosticSummaryParams")
+                    json_data = param_json["SurfaceDiagnosticSummaryParams"] if "SurfaceDiagnosticSummaryParams" in param_json else {}
                     self.__initialize(
-                        scope if scope is not None else ( SurfaceDiagnosticSummaryParams._default_params["scope"] if "scope" in SurfaceDiagnosticSummaryParams._default_params else ScopeDefinition(model = model, json_data = json_data["scope"])),
-                        compute_self_intersections if compute_self_intersections is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_self_intersections"] if "compute_self_intersections" in SurfaceDiagnosticSummaryParams._default_params else json_data["computeSelfIntersections"]),
-                        compute_free_edges if compute_free_edges is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_free_edges"] if "compute_free_edges" in SurfaceDiagnosticSummaryParams._default_params else json_data["computeFreeEdges"]),
-                        compute_multi_edges if compute_multi_edges is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_multi_edges"] if "compute_multi_edges" in SurfaceDiagnosticSummaryParams._default_params else json_data["computeMultiEdges"]),
-                        compute_duplicate_faces if compute_duplicate_faces is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_duplicate_faces"] if "compute_duplicate_faces" in SurfaceDiagnosticSummaryParams._default_params else json_data["computeDuplicateFaces"]))
+                        scope if scope is not None else ( SurfaceDiagnosticSummaryParams._default_params["scope"] if "scope" in SurfaceDiagnosticSummaryParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))),
+                        compute_self_intersections if compute_self_intersections is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_self_intersections"] if "compute_self_intersections" in SurfaceDiagnosticSummaryParams._default_params else (json_data["computeSelfIntersections"] if "computeSelfIntersections" in json_data else None)),
+                        compute_free_edges if compute_free_edges is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_free_edges"] if "compute_free_edges" in SurfaceDiagnosticSummaryParams._default_params else (json_data["computeFreeEdges"] if "computeFreeEdges" in json_data else None)),
+                        compute_multi_edges if compute_multi_edges is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_multi_edges"] if "compute_multi_edges" in SurfaceDiagnosticSummaryParams._default_params else (json_data["computeMultiEdges"] if "computeMultiEdges" in json_data else None)),
+                        compute_duplicate_faces if compute_duplicate_faces is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_duplicate_faces"] if "compute_duplicate_faces" in SurfaceDiagnosticSummaryParams._default_params else (json_data["computeDuplicateFaces"] if "computeDuplicateFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1844,11 +2062,16 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["scope"] = self._scope._jsonify()
-        json_data["computeSelfIntersections"] = self._compute_self_intersections
-        json_data["computeFreeEdges"] = self._compute_free_edges
-        json_data["computeMultiEdges"] = self._compute_multi_edges
-        json_data["computeDuplicateFaces"] = self._compute_duplicate_faces
+        if self._scope is not None:
+            json_data["scope"] = self._scope._jsonify()
+        if self._compute_self_intersections is not None:
+            json_data["computeSelfIntersections"] = self._compute_self_intersections
+        if self._compute_free_edges is not None:
+            json_data["computeFreeEdges"] = self._compute_free_edges
+        if self._compute_multi_edges is not None:
+            json_data["computeMultiEdges"] = self._compute_multi_edges
+        if self._compute_duplicate_faces is not None:
+            json_data["computeDuplicateFaces"] = self._compute_duplicate_faces
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1906,3 +2129,250 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
     @compute_duplicate_faces.setter
     def compute_duplicate_faces(self, value: bool):
         self._compute_duplicate_faces = value
+
+class SearchInfoByRegisterIdParams(CoreObject):
+    """Parameters to retrieve information on registered faces.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchInfoByRegisterIdParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchInfoByRegisterIdParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a SearchInfoByRegisterIdParams object with provided parameters.
+
+        Examples
+        --------
+        >>> search_info_by_register_id_params = prime.SearchInfoByRegisterIdParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SearchInfoByRegisterIdParams")
+                    json_data = param_json["SearchInfoByRegisterIdParams"] if "SearchInfoByRegisterIdParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of SearchInfoByRegisterIdParams.
+
+        """
+        args = locals()
+        [SearchInfoByRegisterIdParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchInfoByRegisterIdParams.
+
+        Examples
+        --------
+        >>> SearchInfoByRegisterIdParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchInfoByRegisterIdParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class SearchInfoByRegisterIdResults(CoreObject):
+    """Result structure containing information on registered face elements.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            n_found: int,
+            locations_found: Iterable[float],
+            face_zonelets_found: Iterable[int]):
+        self._error_code = ErrorCode(error_code)
+        self._n_found = n_found
+        self._locations_found = locations_found if isinstance(locations_found, np.ndarray) else np.array(locations_found, dtype=np.double) if locations_found is not None else None
+        self._face_zonelets_found = face_zonelets_found if isinstance(face_zonelets_found, np.ndarray) else np.array(face_zonelets_found, dtype=np.int32) if face_zonelets_found is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            n_found: int = None,
+            locations_found: Iterable[float] = None,
+            face_zonelets_found: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchInfoByRegisterIdResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchInfoByRegisterIdResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with the retreiving information based on register id.
+        n_found: int, optional
+            Number of registered face elements.
+        locations_found: Iterable[float], optional
+            Locations of each cluster of registered face elements.
+        face_zonelets_found: Iterable[int], optional
+            Ids of the face zonelets containing atleast one registered face element.
+        json_data: dict, optional
+            JSON dictionary to create a SearchInfoByRegisterIdResults object with provided parameters.
+
+        Examples
+        --------
+        >>> search_info_by_register_id_results = prime.SearchInfoByRegisterIdResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["nFound"] if "nFound" in json_data else None,
+                json_data["locationsFound"] if "locationsFound" in json_data else None,
+                json_data["faceZoneletsFound"] if "faceZoneletsFound" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, n_found, locations_found, face_zonelets_found])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    n_found,
+                    locations_found,
+                    face_zonelets_found)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SearchInfoByRegisterIdResults")
+                    json_data = param_json["SearchInfoByRegisterIdResults"] if "SearchInfoByRegisterIdResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( SearchInfoByRegisterIdResults._default_params["error_code"] if "error_code" in SearchInfoByRegisterIdResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        n_found if n_found is not None else ( SearchInfoByRegisterIdResults._default_params["n_found"] if "n_found" in SearchInfoByRegisterIdResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        locations_found if locations_found is not None else ( SearchInfoByRegisterIdResults._default_params["locations_found"] if "locations_found" in SearchInfoByRegisterIdResults._default_params else (json_data["locationsFound"] if "locationsFound" in json_data else None)),
+                        face_zonelets_found if face_zonelets_found is not None else ( SearchInfoByRegisterIdResults._default_params["face_zonelets_found"] if "face_zonelets_found" in SearchInfoByRegisterIdResults._default_params else (json_data["faceZoneletsFound"] if "faceZoneletsFound" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            n_found: int = None,
+            locations_found: Iterable[float] = None,
+            face_zonelets_found: Iterable[int] = None):
+        """Set the default values of SearchInfoByRegisterIdResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the retreiving information based on register id.
+        n_found: int, optional
+            Number of registered face elements.
+        locations_found: Iterable[float], optional
+            Locations of each cluster of registered face elements.
+        face_zonelets_found: Iterable[int], optional
+            Ids of the face zonelets containing atleast one registered face element.
+        """
+        args = locals()
+        [SearchInfoByRegisterIdResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchInfoByRegisterIdResults.
+
+        Examples
+        --------
+        >>> SearchInfoByRegisterIdResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchInfoByRegisterIdResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._locations_found is not None:
+            json_data["locationsFound"] = self._locations_found
+        if self._face_zonelets_found is not None:
+            json_data["faceZoneletsFound"] = self._face_zonelets_found
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\nn_found :  %s\nlocations_found :  %s\nface_zonelets_found :  %s" % (self._error_code, self._n_found, self._locations_found, self._face_zonelets_found)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the retreiving information based on register id.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def n_found(self) -> int:
+        """Number of registered face elements.
+        """
+        return self._n_found
+
+    @n_found.setter
+    def n_found(self, value: int):
+        self._n_found = value
+
+    @property
+    def locations_found(self) -> Iterable[float]:
+        """Locations of each cluster of registered face elements.
+        """
+        return self._locations_found
+
+    @locations_found.setter
+    def locations_found(self, value: Iterable[float]):
+        self._locations_found = value
+
+    @property
+    def face_zonelets_found(self) -> Iterable[int]:
+        """Ids of the face zonelets containing atleast one registered face element.
+        """
+        return self._face_zonelets_found
+
+    @face_zonelets_found.setter
+    def face_zonelets_found(self, value: Iterable[int]):
+        self._face_zonelets_found = value

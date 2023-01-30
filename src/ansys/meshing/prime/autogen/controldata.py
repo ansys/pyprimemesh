@@ -117,6 +117,27 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("create_volume_control")
         return result
 
+    def create_periodic_control(self) -> List[Any]:
+        """ Creates the periodic control.
+
+
+        Returns
+        -------
+        PeriodicControl
+            Returns the periodic control.
+
+        Examples
+        --------
+        >>> periodic_control = model.control_data.create_periodic_control()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/CreatePeriodicControl"
+        self._model._print_logs_before_command("create_periodic_control", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_periodic_control")
+        return result
+
     def delete_controls(self, control_ids : Iterable[int]) -> DeleteResults:
         """ Delete the controls of the given ids.
 

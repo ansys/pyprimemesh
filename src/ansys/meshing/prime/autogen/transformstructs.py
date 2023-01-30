@@ -41,7 +41,7 @@ class TransformResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
@@ -51,9 +51,10 @@ class TransformResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "TransformResults")["TransformResults"]
+                    param_json = model._communicator.initialize_params(model, "TransformResults")
+                    json_data = param_json["TransformResults"] if "TransformResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( TransformResults._default_params["error_code"] if "error_code" in TransformResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( TransformResults._default_params["error_code"] if "error_code" in TransformResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -88,7 +89,8 @@ class TransformResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -115,7 +117,7 @@ class TransformParams(CoreObject):
     def __initialize(
             self,
             transformation_matrix: Iterable[float]):
-        self._transformation_matrix = transformation_matrix if isinstance(transformation_matrix, np.ndarray) else np.array(transformation_matrix, dtype=np.double)
+        self._transformation_matrix = transformation_matrix if isinstance(transformation_matrix, np.ndarray) else np.array(transformation_matrix, dtype=np.double) if transformation_matrix is not None else None
 
     def __init__(
             self,
@@ -140,7 +142,7 @@ class TransformParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["transformationMatrix"])
+                json_data["transformationMatrix"] if "transformationMatrix" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [transformation_matrix])
             if all_field_specified:
@@ -150,9 +152,10 @@ class TransformParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "TransformParams")["TransformParams"]
+                    param_json = model._communicator.initialize_params(model, "TransformParams")
+                    json_data = param_json["TransformParams"] if "TransformParams" in param_json else {}
                     self.__initialize(
-                        transformation_matrix if transformation_matrix is not None else ( TransformParams._default_params["transformation_matrix"] if "transformation_matrix" in TransformParams._default_params else json_data["transformationMatrix"]))
+                        transformation_matrix if transformation_matrix is not None else ( TransformParams._default_params["transformation_matrix"] if "transformation_matrix" in TransformParams._default_params else (json_data["transformationMatrix"] if "transformationMatrix" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -187,7 +190,8 @@ class TransformParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["transformationMatrix"] = self._transformation_matrix
+        if self._transformation_matrix is not None:
+            json_data["transformationMatrix"] = self._transformation_matrix
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

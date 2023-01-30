@@ -94,16 +94,16 @@ class SurferParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                SizeFieldType(json_data["sizeFieldType"]),
-                json_data["minSize"],
-                json_data["maxSize"],
-                json_data["growthRate"],
-                json_data["constantSize"],
-                json_data["generateQuads"],
-                json_data["smoothSizeTransition"],
-                AdvancedSurferSetup(json_data["advancedSurferSetup"]),
-                json_data["projectOnGeometry"],
-                json_data["enableMultiThreading"])
+                SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None),
+                json_data["minSize"] if "minSize" in json_data else None,
+                json_data["maxSize"] if "maxSize" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None,
+                json_data["constantSize"] if "constantSize" in json_data else None,
+                json_data["generateQuads"] if "generateQuads" in json_data else None,
+                json_data["smoothSizeTransition"] if "smoothSizeTransition" in json_data else None,
+                AdvancedSurferSetup(json_data["advancedSurferSetup"] if "advancedSurferSetup" in json_data else None),
+                json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None,
+                json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [size_field_type, min_size, max_size, growth_rate, constant_size, generate_quads, smooth_size_transition, advanced_surfer_setup, project_on_geometry, enable_multi_threading])
             if all_field_specified:
@@ -122,18 +122,19 @@ class SurferParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurferParams")["SurferParams"]
+                    param_json = model._communicator.initialize_params(model, "SurferParams")
+                    json_data = param_json["SurferParams"] if "SurferParams" in param_json else {}
                     self.__initialize(
-                        size_field_type if size_field_type is not None else ( SurferParams._default_params["size_field_type"] if "size_field_type" in SurferParams._default_params else SizeFieldType(json_data["sizeFieldType"])),
-                        min_size if min_size is not None else ( SurferParams._default_params["min_size"] if "min_size" in SurferParams._default_params else json_data["minSize"]),
-                        max_size if max_size is not None else ( SurferParams._default_params["max_size"] if "max_size" in SurferParams._default_params else json_data["maxSize"]),
-                        growth_rate if growth_rate is not None else ( SurferParams._default_params["growth_rate"] if "growth_rate" in SurferParams._default_params else json_data["growthRate"]),
-                        constant_size if constant_size is not None else ( SurferParams._default_params["constant_size"] if "constant_size" in SurferParams._default_params else json_data["constantSize"]),
-                        generate_quads if generate_quads is not None else ( SurferParams._default_params["generate_quads"] if "generate_quads" in SurferParams._default_params else json_data["generateQuads"]),
-                        smooth_size_transition if smooth_size_transition is not None else ( SurferParams._default_params["smooth_size_transition"] if "smooth_size_transition" in SurferParams._default_params else json_data["smoothSizeTransition"]),
-                        advanced_surfer_setup if advanced_surfer_setup is not None else ( SurferParams._default_params["advanced_surfer_setup"] if "advanced_surfer_setup" in SurferParams._default_params else AdvancedSurferSetup(json_data["advancedSurferSetup"])),
-                        project_on_geometry if project_on_geometry is not None else ( SurferParams._default_params["project_on_geometry"] if "project_on_geometry" in SurferParams._default_params else json_data["projectOnGeometry"]),
-                        enable_multi_threading if enable_multi_threading is not None else ( SurferParams._default_params["enable_multi_threading"] if "enable_multi_threading" in SurferParams._default_params else json_data["enableMultiThreading"]))
+                        size_field_type if size_field_type is not None else ( SurferParams._default_params["size_field_type"] if "size_field_type" in SurferParams._default_params else SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None)),
+                        min_size if min_size is not None else ( SurferParams._default_params["min_size"] if "min_size" in SurferParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
+                        max_size if max_size is not None else ( SurferParams._default_params["max_size"] if "max_size" in SurferParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( SurferParams._default_params["growth_rate"] if "growth_rate" in SurferParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
+                        constant_size if constant_size is not None else ( SurferParams._default_params["constant_size"] if "constant_size" in SurferParams._default_params else (json_data["constantSize"] if "constantSize" in json_data else None)),
+                        generate_quads if generate_quads is not None else ( SurferParams._default_params["generate_quads"] if "generate_quads" in SurferParams._default_params else (json_data["generateQuads"] if "generateQuads" in json_data else None)),
+                        smooth_size_transition if smooth_size_transition is not None else ( SurferParams._default_params["smooth_size_transition"] if "smooth_size_transition" in SurferParams._default_params else (json_data["smoothSizeTransition"] if "smoothSizeTransition" in json_data else None)),
+                        advanced_surfer_setup if advanced_surfer_setup is not None else ( SurferParams._default_params["advanced_surfer_setup"] if "advanced_surfer_setup" in SurferParams._default_params else AdvancedSurferSetup(json_data["advancedSurferSetup"] if "advancedSurferSetup" in json_data else None)),
+                        project_on_geometry if project_on_geometry is not None else ( SurferParams._default_params["project_on_geometry"] if "project_on_geometry" in SurferParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)),
+                        enable_multi_threading if enable_multi_threading is not None else ( SurferParams._default_params["enable_multi_threading"] if "enable_multi_threading" in SurferParams._default_params else (json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -195,16 +196,26 @@ class SurferParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["sizeFieldType"] = self._size_field_type
-        json_data["minSize"] = self._min_size
-        json_data["maxSize"] = self._max_size
-        json_data["growthRate"] = self._growth_rate
-        json_data["constantSize"] = self._constant_size
-        json_data["generateQuads"] = self._generate_quads
-        json_data["smoothSizeTransition"] = self._smooth_size_transition
-        json_data["advancedSurferSetup"] = self._advanced_surfer_setup
-        json_data["projectOnGeometry"] = self._project_on_geometry
-        json_data["enableMultiThreading"] = self._enable_multi_threading
+        if self._size_field_type is not None:
+            json_data["sizeFieldType"] = self._size_field_type
+        if self._min_size is not None:
+            json_data["minSize"] = self._min_size
+        if self._max_size is not None:
+            json_data["maxSize"] = self._max_size
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        if self._constant_size is not None:
+            json_data["constantSize"] = self._constant_size
+        if self._generate_quads is not None:
+            json_data["generateQuads"] = self._generate_quads
+        if self._smooth_size_transition is not None:
+            json_data["smoothSizeTransition"] = self._smooth_size_transition
+        if self._advanced_surfer_setup is not None:
+            json_data["advancedSurferSetup"] = self._advanced_surfer_setup
+        if self._project_on_geometry is not None:
+            json_data["projectOnGeometry"] = self._project_on_geometry
+        if self._enable_multi_threading is not None:
+            json_data["enableMultiThreading"] = self._enable_multi_threading
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -328,7 +339,7 @@ class SurferResults(CoreObject):
             error_code: ErrorCode,
             topofaces_not_projected_on_geometry: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._topofaces_not_projected_on_geometry = topofaces_not_projected_on_geometry if isinstance(topofaces_not_projected_on_geometry, np.ndarray) else np.array(topofaces_not_projected_on_geometry, dtype=np.int32)
+        self._topofaces_not_projected_on_geometry = topofaces_not_projected_on_geometry if isinstance(topofaces_not_projected_on_geometry, np.ndarray) else np.array(topofaces_not_projected_on_geometry, dtype=np.int32) if topofaces_not_projected_on_geometry is not None else None
 
     def __init__(
             self,
@@ -356,8 +367,8 @@ class SurferResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["topofacesNotProjectedOnGeometry"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["topofacesNotProjectedOnGeometry"] if "topofacesNotProjectedOnGeometry" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, topofaces_not_projected_on_geometry])
             if all_field_specified:
@@ -368,10 +379,11 @@ class SurferResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SurferResults")["SurferResults"]
+                    param_json = model._communicator.initialize_params(model, "SurferResults")
+                    json_data = param_json["SurferResults"] if "SurferResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SurferResults._default_params["error_code"] if "error_code" in SurferResults._default_params else ErrorCode(json_data["errorCode"])),
-                        topofaces_not_projected_on_geometry if topofaces_not_projected_on_geometry is not None else ( SurferResults._default_params["topofaces_not_projected_on_geometry"] if "topofaces_not_projected_on_geometry" in SurferResults._default_params else json_data["topofacesNotProjectedOnGeometry"]))
+                        error_code if error_code is not None else ( SurferResults._default_params["error_code"] if "error_code" in SurferResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        topofaces_not_projected_on_geometry if topofaces_not_projected_on_geometry is not None else ( SurferResults._default_params["topofaces_not_projected_on_geometry"] if "topofaces_not_projected_on_geometry" in SurferResults._default_params else (json_data["topofacesNotProjectedOnGeometry"] if "topofacesNotProjectedOnGeometry" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -409,8 +421,10 @@ class SurferResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["topofacesNotProjectedOnGeometry"] = self._topofaces_not_projected_on_geometry
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._topofaces_not_projected_on_geometry is not None:
+            json_data["topofacesNotProjectedOnGeometry"] = self._topofaces_not_projected_on_geometry
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -502,13 +516,13 @@ class LocalSurferParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                SizeFieldType(json_data["sizeFieldType"]),
-                json_data["minSize"],
-                json_data["maxSize"],
-                json_data["growthRate"],
-                json_data["constantSize"],
-                json_data["smoothBoundary"],
-                json_data["nRings"])
+                SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None),
+                json_data["minSize"] if "minSize" in json_data else None,
+                json_data["maxSize"] if "maxSize" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None,
+                json_data["constantSize"] if "constantSize" in json_data else None,
+                json_data["smoothBoundary"] if "smoothBoundary" in json_data else None,
+                json_data["nRings"] if "nRings" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [size_field_type, min_size, max_size, growth_rate, constant_size, smooth_boundary, n_rings])
             if all_field_specified:
@@ -524,15 +538,16 @@ class LocalSurferParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "LocalSurferParams")["LocalSurferParams"]
+                    param_json = model._communicator.initialize_params(model, "LocalSurferParams")
+                    json_data = param_json["LocalSurferParams"] if "LocalSurferParams" in param_json else {}
                     self.__initialize(
-                        size_field_type if size_field_type is not None else ( LocalSurferParams._default_params["size_field_type"] if "size_field_type" in LocalSurferParams._default_params else SizeFieldType(json_data["sizeFieldType"])),
-                        min_size if min_size is not None else ( LocalSurferParams._default_params["min_size"] if "min_size" in LocalSurferParams._default_params else json_data["minSize"]),
-                        max_size if max_size is not None else ( LocalSurferParams._default_params["max_size"] if "max_size" in LocalSurferParams._default_params else json_data["maxSize"]),
-                        growth_rate if growth_rate is not None else ( LocalSurferParams._default_params["growth_rate"] if "growth_rate" in LocalSurferParams._default_params else json_data["growthRate"]),
-                        constant_size if constant_size is not None else ( LocalSurferParams._default_params["constant_size"] if "constant_size" in LocalSurferParams._default_params else json_data["constantSize"]),
-                        smooth_boundary if smooth_boundary is not None else ( LocalSurferParams._default_params["smooth_boundary"] if "smooth_boundary" in LocalSurferParams._default_params else json_data["smoothBoundary"]),
-                        n_rings if n_rings is not None else ( LocalSurferParams._default_params["n_rings"] if "n_rings" in LocalSurferParams._default_params else json_data["nRings"]))
+                        size_field_type if size_field_type is not None else ( LocalSurferParams._default_params["size_field_type"] if "size_field_type" in LocalSurferParams._default_params else SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None)),
+                        min_size if min_size is not None else ( LocalSurferParams._default_params["min_size"] if "min_size" in LocalSurferParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
+                        max_size if max_size is not None else ( LocalSurferParams._default_params["max_size"] if "max_size" in LocalSurferParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( LocalSurferParams._default_params["growth_rate"] if "growth_rate" in LocalSurferParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
+                        constant_size if constant_size is not None else ( LocalSurferParams._default_params["constant_size"] if "constant_size" in LocalSurferParams._default_params else (json_data["constantSize"] if "constantSize" in json_data else None)),
+                        smooth_boundary if smooth_boundary is not None else ( LocalSurferParams._default_params["smooth_boundary"] if "smooth_boundary" in LocalSurferParams._default_params else (json_data["smoothBoundary"] if "smoothBoundary" in json_data else None)),
+                        n_rings if n_rings is not None else ( LocalSurferParams._default_params["n_rings"] if "n_rings" in LocalSurferParams._default_params else (json_data["nRings"] if "nRings" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -585,13 +600,20 @@ class LocalSurferParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["sizeFieldType"] = self._size_field_type
-        json_data["minSize"] = self._min_size
-        json_data["maxSize"] = self._max_size
-        json_data["growthRate"] = self._growth_rate
-        json_data["constantSize"] = self._constant_size
-        json_data["smoothBoundary"] = self._smooth_boundary
-        json_data["nRings"] = self._n_rings
+        if self._size_field_type is not None:
+            json_data["sizeFieldType"] = self._size_field_type
+        if self._min_size is not None:
+            json_data["minSize"] = self._min_size
+        if self._max_size is not None:
+            json_data["maxSize"] = self._max_size
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        if self._constant_size is not None:
+            json_data["constantSize"] = self._constant_size
+        if self._smooth_boundary is not None:
+            json_data["smoothBoundary"] = self._smooth_boundary
+        if self._n_rings is not None:
+            json_data["nRings"] = self._n_rings
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -708,8 +730,8 @@ class LocalSurferResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                [WarningCode(data) for data in json_data["warningCodes"]])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, warning_codes])
             if all_field_specified:
@@ -720,10 +742,11 @@ class LocalSurferResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "LocalSurferResults")["LocalSurferResults"]
+                    param_json = model._communicator.initialize_params(model, "LocalSurferResults")
+                    json_data = param_json["LocalSurferResults"] if "LocalSurferResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( LocalSurferResults._default_params["error_code"] if "error_code" in LocalSurferResults._default_params else ErrorCode(json_data["errorCode"])),
-                        warning_codes if warning_codes is not None else ( LocalSurferResults._default_params["warning_codes"] if "warning_codes" in LocalSurferResults._default_params else [WarningCode(data) for data in json_data["warningCodes"]]))
+                        error_code if error_code is not None else ( LocalSurferResults._default_params["error_code"] if "error_code" in LocalSurferResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( LocalSurferResults._default_params["warning_codes"] if "warning_codes" in LocalSurferResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -761,8 +784,10 @@ class LocalSurferResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

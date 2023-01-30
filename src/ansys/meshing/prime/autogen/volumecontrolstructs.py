@@ -41,7 +41,7 @@ class VolumeControlParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                CellZoneletType(json_data["cellZoneletType"]))
+                CellZoneletType(json_data["cellZoneletType"] if "cellZoneletType" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [cell_zonelet_type])
             if all_field_specified:
@@ -51,9 +51,10 @@ class VolumeControlParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "VolumeControlParams")["VolumeControlParams"]
+                    param_json = model._communicator.initialize_params(model, "VolumeControlParams")
+                    json_data = param_json["VolumeControlParams"] if "VolumeControlParams" in param_json else {}
                     self.__initialize(
-                        cell_zonelet_type if cell_zonelet_type is not None else ( VolumeControlParams._default_params["cell_zonelet_type"] if "cell_zonelet_type" in VolumeControlParams._default_params else CellZoneletType(json_data["cellZoneletType"])))
+                        cell_zonelet_type if cell_zonelet_type is not None else ( VolumeControlParams._default_params["cell_zonelet_type"] if "cell_zonelet_type" in VolumeControlParams._default_params else CellZoneletType(json_data["cellZoneletType"] if "cellZoneletType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -88,7 +89,8 @@ class VolumeControlParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["cellZoneletType"] = self._cell_zonelet_type
+        if self._cell_zonelet_type is not None:
+            json_data["cellZoneletType"] = self._cell_zonelet_type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

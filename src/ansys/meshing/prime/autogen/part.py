@@ -56,6 +56,33 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_name")
         return result
 
+    def set_suggested_name(self, name : str) -> SetNameResults:
+        """ Sets the unique name for the part based on the suggested name.
+
+
+        Parameters
+        ----------
+        name : str
+            Suggested name for the part.
+
+        Returns
+        -------
+        SetNameResults
+            Returns the SetNameResults.
+
+
+        Examples
+        --------
+        >>> part.set_suggested_name("part1")
+
+        """
+        args = {"name" : name}
+        command_name = "PrimeMesh::Part/SetSuggestedName"
+        self._model._print_logs_before_command("set_suggested_name", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_suggested_name", SetNameResults(model = self._model, json_data = result))
+        return SetNameResults(model = self._model, json_data = result)
+
     def get_face_zonelets(self) -> Iterable[int]:
         """ Get the face zonelets of a part.
 
@@ -278,6 +305,37 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_face_zones_of_name_pattern")
         return result
 
+    def get_volume_zones_of_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Get ids of volume zones with name matching the given name pattern.
+
+
+        Parameters
+        ----------
+        zone_name_pattern : str
+            Name pattern to be matched with zone name.
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match zone name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns a list of volume zone ids matching the zone name pattern.
+
+
+        Examples
+        --------
+        >>> name_pattern_params = prime.NamePatternParams(model = model)
+        >>> zones = part.get_volume_zones_of_name_pattern("solid*", name_pattern_params)
+
+        """
+        args = {"zone_name_pattern" : zone_name_pattern,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetVolumeZonesOfNamePattern"
+        self._model._print_logs_before_command("get_volume_zones_of_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volume_zones_of_name_pattern")
+        return result
+
     def get_face_zonelets_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
         """ Get ids of face zonelets of zones with name matching the given name pattern.
 
@@ -497,6 +555,99 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_topo_faces_of_label_name_pattern")
         return result
 
+    def merge_zonelets(self, zonelets : Iterable[int], params : MergeZoneletsParams) -> MergeZoneletsResults:
+        """ Merge zonelets.
+
+
+        Parameters
+        ----------
+        zonelets : Iterable[int]
+            Ids of zonelets to be merged.
+        params : MergeZoneletsParams
+            Parameters to merge zonelets.
+
+        Returns
+        -------
+        MergeZoneletsResults
+            Returns the MergeZoneletsResults.
+
+
+        Examples
+        --------
+        params = prime.MergeZoneletsParams(model = model)
+        results = part.merge_zonelets(zonelets, params)
+
+        """
+        args = {"zonelets" : zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/MergeZonelets"
+        self._model._print_logs_before_command("merge_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("merge_zonelets", MergeZoneletsResults(model = self._model, json_data = result))
+        return MergeZoneletsResults(model = self._model, json_data = result)
+
+    def merge_volumes(self, volumes : Iterable[int], params : MergeVolumesParams) -> MergeVolumesResults:
+        """ Merge volumes by removing shared face zonelets.
+
+
+        Parameters
+        ----------
+        volumes : Iterable[int]
+            Ids of volumes to be merged.
+        params : MergeVolumesParams
+            Parameters to merge volumes.
+
+        Returns
+        -------
+        MergeVolumesResults
+            Returns the MergeVolumesResults.
+
+
+        Examples
+        --------
+        params = prime.MergeVolumesParams(model = model)
+        results = part.merge_volumes(volumes, params)
+
+        """
+        args = {"volumes" : volumes,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/MergeVolumes"
+        self._model._print_logs_before_command("merge_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("merge_volumes", MergeVolumesResults(model = self._model, json_data = result))
+        return MergeVolumesResults(model = self._model, json_data = result)
+
+    def delete_volumes(self, volumes : Iterable[int], params : DeleteVolumesParams) -> DeleteVolumesResults:
+        """ Delete volumes by deleting its face zonelets.
+
+
+        Parameters
+        ----------
+        volumes : Iterable[int]
+            Ids of volumes to be deleted.
+        params : DeleteVolumesParams
+            Parameters to delete volumes.
+
+        Returns
+        -------
+        DeleteVolumesResults
+            Returns the DeleteVolumesResults.
+
+
+        Examples
+        --------
+        params = prime.DeleteVolumesParams(model = model)
+        results = part.delete_volumes(volumes, params)
+
+        """
+        args = {"volumes" : volumes,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/DeleteVolumes"
+        self._model._print_logs_before_command("delete_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("delete_volumes", DeleteVolumesResults(model = self._model, json_data = result))
+        return DeleteVolumesResults(model = self._model, json_data = result)
+
     def get_face_zonelets_of_volumes(self, volumes : Iterable[int]) -> Iterable[int]:
         """ Get the face zonelets of given volumes.
 
@@ -639,6 +790,33 @@ class Part(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("extract_topo_volumes", ExtractTopoVolumesResults(model = self._model, json_data = result))
         return ExtractTopoVolumesResults(model = self._model, json_data = result)
+
+    def get_volumes_of_face_zonelet(self, face_zonelet : int) -> Iterable[int]:
+        """ Get volume ids of given face zonelet.
+
+
+        Parameters
+        ----------
+        face_zonelet : int
+            Id of face zonelet.
+
+        Returns
+        -------
+        Iterable[int]
+            Return volume ids of given face zonelet.
+
+
+        Examples
+        --------
+        >>> volumes = part.get_volumes_of_face_zonelet(face_zonelet)
+
+        """
+        args = {"face_zonelet" : face_zonelet}
+        command_name = "PrimeMesh::Part/GetVolumesOfFaceZonelet"
+        self._model._print_logs_before_command("get_volumes_of_face_zonelet", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volumes_of_face_zonelet")
+        return result
 
     def get_volumes(self) -> Iterable[int]:
         """ Get all the volumes of the part.
@@ -802,6 +980,33 @@ Return the ids of topofaces.
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("add_volumes_to_zone", AddToZoneResults(model = self._model, json_data = result))
         return AddToZoneResults(model = self._model, json_data = result)
+
+    def get_volume_zone_of_volume(self, volume : int) -> int:
+        """ Gets the volume zone of given volume.
+
+
+        Parameters
+        ----------
+        volume : int
+            Id of volume.
+
+        Returns
+        -------
+        int
+            Returns the id of volume zone.
+
+
+        Examples
+        --------
+        >>> volume_zone = part.get_volume_zone_of_volume(volume)
+
+        """
+        args = {"volume" : volume}
+        command_name = "PrimeMesh::Part/GetVolumeZoneOfVolume"
+        self._model._print_logs_before_command("get_volume_zone_of_volume", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volume_zone_of_volume")
+        return result
 
     def get_face_zone_of_zonelet(self, zonelet : int) -> int:
         """ Gets the face zone of given zonelet.

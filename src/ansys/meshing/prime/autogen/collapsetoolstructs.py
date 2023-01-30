@@ -56,10 +56,10 @@ class CollapseParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                SurfaceFeatureType(json_data["featureType"]),
-                json_data["collapseRatio"],
-                json_data["preserveQuality"],
-                json_data["targetSkewness"])
+                SurfaceFeatureType(json_data["featureType"] if "featureType" in json_data else None),
+                json_data["collapseRatio"] if "collapseRatio" in json_data else None,
+                json_data["preserveQuality"] if "preserveQuality" in json_data else None,
+                json_data["targetSkewness"] if "targetSkewness" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [feature_type, collapse_ratio, preserve_quality, target_skewness])
             if all_field_specified:
@@ -72,12 +72,13 @@ class CollapseParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CollapseParams")["CollapseParams"]
+                    param_json = model._communicator.initialize_params(model, "CollapseParams")
+                    json_data = param_json["CollapseParams"] if "CollapseParams" in param_json else {}
                     self.__initialize(
-                        feature_type if feature_type is not None else ( CollapseParams._default_params["feature_type"] if "feature_type" in CollapseParams._default_params else SurfaceFeatureType(json_data["featureType"])),
-                        collapse_ratio if collapse_ratio is not None else ( CollapseParams._default_params["collapse_ratio"] if "collapse_ratio" in CollapseParams._default_params else json_data["collapseRatio"]),
-                        preserve_quality if preserve_quality is not None else ( CollapseParams._default_params["preserve_quality"] if "preserve_quality" in CollapseParams._default_params else json_data["preserveQuality"]),
-                        target_skewness if target_skewness is not None else ( CollapseParams._default_params["target_skewness"] if "target_skewness" in CollapseParams._default_params else json_data["targetSkewness"]))
+                        feature_type if feature_type is not None else ( CollapseParams._default_params["feature_type"] if "feature_type" in CollapseParams._default_params else SurfaceFeatureType(json_data["featureType"] if "featureType" in json_data else None)),
+                        collapse_ratio if collapse_ratio is not None else ( CollapseParams._default_params["collapse_ratio"] if "collapse_ratio" in CollapseParams._default_params else (json_data["collapseRatio"] if "collapseRatio" in json_data else None)),
+                        preserve_quality if preserve_quality is not None else ( CollapseParams._default_params["preserve_quality"] if "preserve_quality" in CollapseParams._default_params else (json_data["preserveQuality"] if "preserveQuality" in json_data else None)),
+                        target_skewness if target_skewness is not None else ( CollapseParams._default_params["target_skewness"] if "target_skewness" in CollapseParams._default_params else (json_data["targetSkewness"] if "targetSkewness" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -121,10 +122,14 @@ class CollapseParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["featureType"] = self._feature_type
-        json_data["collapseRatio"] = self._collapse_ratio
-        json_data["preserveQuality"] = self._preserve_quality
-        json_data["targetSkewness"] = self._target_skewness
+        if self._feature_type is not None:
+            json_data["featureType"] = self._feature_type
+        if self._collapse_ratio is not None:
+            json_data["collapseRatio"] = self._collapse_ratio
+        if self._preserve_quality is not None:
+            json_data["preserveQuality"] = self._preserve_quality
+        if self._target_skewness is not None:
+            json_data["targetSkewness"] = self._target_skewness
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -216,9 +221,9 @@ class CollapseResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["nCollapsed"],
-                json_data["nSplits"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["nCollapsed"] if "nCollapsed" in json_data else None,
+                json_data["nSplits"] if "nSplits" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, n_collapsed, n_splits])
             if all_field_specified:
@@ -230,11 +235,12 @@ class CollapseResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "CollapseResults")["CollapseResults"]
+                    param_json = model._communicator.initialize_params(model, "CollapseResults")
+                    json_data = param_json["CollapseResults"] if "CollapseResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( CollapseResults._default_params["error_code"] if "error_code" in CollapseResults._default_params else ErrorCode(json_data["errorCode"])),
-                        n_collapsed if n_collapsed is not None else ( CollapseResults._default_params["n_collapsed"] if "n_collapsed" in CollapseResults._default_params else json_data["nCollapsed"]),
-                        n_splits if n_splits is not None else ( CollapseResults._default_params["n_splits"] if "n_splits" in CollapseResults._default_params else json_data["nSplits"]))
+                        error_code if error_code is not None else ( CollapseResults._default_params["error_code"] if "error_code" in CollapseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        n_collapsed if n_collapsed is not None else ( CollapseResults._default_params["n_collapsed"] if "n_collapsed" in CollapseResults._default_params else (json_data["nCollapsed"] if "nCollapsed" in json_data else None)),
+                        n_splits if n_splits is not None else ( CollapseResults._default_params["n_splits"] if "n_splits" in CollapseResults._default_params else (json_data["nSplits"] if "nSplits" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -275,9 +281,12 @@ class CollapseResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["nCollapsed"] = self._n_collapsed
-        json_data["nSplits"] = self._n_splits
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._n_collapsed is not None:
+            json_data["nCollapsed"] = self._n_collapsed
+        if self._n_splits is not None:
+            json_data["nSplits"] = self._n_splits
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
