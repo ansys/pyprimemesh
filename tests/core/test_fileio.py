@@ -16,7 +16,7 @@ def test_io_pdmat(get_remote_client, get_examples):
     # Wrong extension
     with pytest.raises(PrimeRuntimeError) as prime_error:
         _ = file_io.read_pmdat(
-            "file.pdmat",
+            os.path.abspath("./tests/core/test_files/file.pdmat"),
             file_read_params,
         )
         assert "file extension is not supported" in str(prime_error.value)
