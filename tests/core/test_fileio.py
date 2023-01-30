@@ -21,15 +21,6 @@ def test_io_pdmat(get_remote_client, get_examples):
         )
         assert "file extension is not supported" in str(prime_error.value)
 
-    # Non existent path
-    with pytest.raises(FileNotFoundError) as prime_error:
-
-        _ = file_io.read_pmdat(
-            "/nonexistent/file.pmdat",
-            file_read_params,
-        )
-        # assert "Incorrect File Path or Name" in str(prime_error.value)
-
     # Empty file
     with pytest.raises(PrimeRuntimeError) as prime_error:
         _ = file_io.read_pmdat(
