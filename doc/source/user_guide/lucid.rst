@@ -1,17 +1,18 @@
 .. _ref_index_lucid:
 
-****************************************
-Common Meshing Tasks and the Lucid class
-****************************************
+*****************************************
+Common meshing tasks and the Lucid module
+*****************************************
 
-The :mod:`lucid <ansys.meshing.prime.lucid>` module defines high level methods to abstract and simplify common meshing tasks.  
-Methods contained here are intended to demonstrate how the low level API’s can be combined to execute meshing workflows flexibly 
-and with minimal need for user understanding of PyPrimeMesh specific concepts.  They use global automatic defaults where possible to 
-reduce the user effort in creating general purpose operations. 
+The :mod:`lucid <ansys.meshing.prime.lucid>` module defines high-level methods to abstract
+and simplify common meshing tasks. Methods contained in this module are intended to demonstrate
+how the low-level APIs can be combined to execute meshing workflows flexibly and with minimal
+need for understanding PyPrimeMesh-specific concepts. The methods use global automatic defaults
+where possible to reduce effort in creating general purpose operations.
 
 Many common meshing tasks and workflows can be tackled easily using the functions provided.  
 
-Below is an example of meshing the mixing elbow case for fluid flow analysis:
+Here is an example of meshing the mixing elbow case for a fluid flow analysis:
 
 .. code:: python
     # Start and connect to a Prime server
