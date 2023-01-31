@@ -153,7 +153,7 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
 
 def pytest_sessionfinish(session, exitstatus):
-    """Generated files cleanup."""
+    """Cleanup generated files."""
     files_list = []
     files_list.append(os.path.abspath("./tests/core/test_files/file_test.pmdat"))
     files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cdb"))
