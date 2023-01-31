@@ -40,11 +40,15 @@ Import the model and delete topo-geometric entities from each part:
 
 .. code:: python
 
-    prime.FileIO(model).read_pmdat("D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model))
+    prime.FileIO(model).read_pmdat(
+        "D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model)
+    )
     for part in model.parts:
         topofaces = part.get_topo_faces()
         if topofaces:
-            params = prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
+            params = prime.DeleteTopoEntitiesParams(
+                model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+            )
             part.delete_topo_entities(params)
 
 
@@ -53,15 +57,13 @@ Merge the parts.
 .. code:: python
 
     model.merge_parts(
-        part_ids=[part.id for part in model.parts],
-        params=prime.MergePartsParams(model)
+        part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
     )
-        
 
 Check the surface before performing the connect operation.
 
 .. code:: python
-    
+
     diag = prime.SurfaceSearch(model)
     diag_res = diag.get_surface_diagnostic_summary(
         prime.SurfaceDiagnosticSummaryParams(
@@ -77,7 +79,7 @@ For more information on checking the surface mesh connectivity, see :ref:`ref_in
 
 Print the results of the surface mesh connectivity before performing the connect operation:
 
-.. code:: python
+.. code:: pycon
 
     >>> print(diag_res)
 
@@ -95,25 +97,25 @@ Connect face zonelets in the model:
 
 .. code:: python
 
-    join_params=prime.JoinParams(model)
-    inter_params=prime.IntersectParams(model)
+    join_params = prime.JoinParams(model)
+    inter_params = prime.IntersectParams(model)
     join_params.tolerance = 0.1
     part_id = model.parts[0].id
     faces = model.parts[0].get_face_zonelets()
 
     for face in faces:
-        other_faces=[other for other in faces if face != other]
+        other_faces = [other for other in faces if face != other]
         prime.Connect(model).intersect_face_zonelets(
             part_id=part_id,
             face_zonelet_ids=[face],
             with_face_zonelet_ids=other_faces,
-            params=inter_params
+            params=inter_params,
         )
         prime.Connect(model).join_face_zonelets(
             part_id=part_id,
             face_zonelet_ids=[face],
             with_face_zonelet_ids=other_faces,
-            params=join_params
+            params=join_params,
         )
 
 
@@ -126,7 +128,7 @@ Check the surface after performing the connect operation:
 
 Print the results of the surface mesh connectivity after performing the connect operation:
 
-.. code:: python
+.. code:: pycon
 
     >>> print(diag_res)
 
@@ -156,8 +158,7 @@ This code merges parts and scaffold topofaces:
 
     # Merge parts
     model.merge_parts(
-        part_ids=[part.id for part in model.parts],
-        params=prime.MergePartsParams(model)
+        part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
     )
 
     # Scaffold topofaces
@@ -165,20 +166,18 @@ This code merges parts and scaffold topofaces:
         model=model,
         absolute_dist_tol=0.01,
         intersection_control_mask=prime.IntersectionMask.FACEFACEANDEDGEEDGE,
-        constant_mesh_size=0.1
+        constant_mesh_size=0.1,
     )
 
     scaffolder = prime.Scaffolder(model, part.id)
     res = scaffolder.scaffold_topo_faces_and_beams(
-        topo_faces=part.get_topo_faces(),
-        topo_beams=[],
-        params=params
+        topo_faces=part.get_topo_faces(), topo_beams=[], params=params
     )
 
 This code prints the results so that you can check the number of topofaces that failed
 in the scaffold operation:
 
-.. code:: python
+.. code:: pycon
 
     >>> print(res)
 

@@ -1,10 +1,12 @@
-from pyvista.plotting.plotting import Plotter
-import ansys.meshing.prime as prime
 import enum
+import os
+
 import numpy as np
 import pyvista as pv
 from pyvista import _vtk
-import os
+from pyvista.plotting.plotting import Plotter
+
+import ansys.meshing.prime as prime
 from ansys.meshing.prime.internals import defaults
 
 
@@ -54,7 +56,7 @@ class ColorByType(enum.IntEnum):
     PART = 2
 
 
-''' bright color pallete '''
+''' bright color palette '''
 '''color_matrix = np.array([
 [0.99609375, 0.76171875, 0.0703125],
 [0.96484375, 0.62109375, 0.12109375],
@@ -73,7 +75,7 @@ class ColorByType(enum.IntEnum):
 [0.59765625, 0.5, 0.9765625] ]) * 255 '''
 
 
-''' winter color pallete '''
+''' winter color palette '''
 '''color_matrix = np.array([
 [0.2734375, 0.71875, 0.8671875],
 [0.2734375, 0.90234375, 0.86328125],
@@ -91,7 +93,7 @@ class ColorByType(enum.IntEnum):
 [0.2734375, 0.91015625, 0.9765625],
 [0.2734375, 0.99609375, 0.6171875] ]) * 255'''
 
-''' light fall color pallete '''
+''' light fall color palette '''
 color_matrix = np.array(
     [
         [155, 186, 126],

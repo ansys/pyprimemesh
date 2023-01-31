@@ -39,8 +39,10 @@ Procedure
 
 # . Connect PyPrimeMesh client and get the model.
 
+import os
+import tempfile
+
 from ansys.meshing import prime
-import os, tempfile
 from ansys.meshing.prime.graphics import Graphics
 
 prime_client = prime.launch_prime()
