@@ -162,4 +162,6 @@ def pytest_sessionfinish(session, exitstatus):
     files_list.append(os.path.abspath("./tests/core/test_files/box_test.psf"))
     files_list.append(os.path.abspath("./tests/core/test_files/hex_test.msh"))
 
-    [os.remove(file) for file in files_list if os.path.isfile(file)]
+    for file in files_list:
+        if os.path.isfile(file):
+            os.remove(file)
