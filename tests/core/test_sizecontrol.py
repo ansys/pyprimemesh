@@ -15,7 +15,7 @@ def test_sizecontrol(initialized_model_elbow):
 
     assert str(size_control) == (
         "\nSize Control Summary: \n    Name : bar\n    ID : 1\n    Type : Curvature\n    "
-        "Min : -1\n    Max : -1\n    Growth Rate : 1.2\n    Normal Angle : 18\n    Scope "
+        "Min : 2\n    Max : 20\n    Growth Rate : 1.2\n    Normal Angle : 18\n    Scope "
         "(Used labels to evaluate Face zonelets) : \n"
     )
     assert result.assigned_name != ''
