@@ -1,9 +1,11 @@
-import ansys.meshing.prime as prime
-from .utils import check_name_pattern
-from .scope import SurfaceScope, VolumeScope
-from typing import List, Iterable
-import os
 import enum
+import os
+from typing import Iterable, List
+
+import ansys.meshing.prime as prime
+
+from .scope import SurfaceScope, VolumeScope
+from .utils import check_name_pattern
 
 
 class LabelToZoneMethod(enum.IntEnum):
@@ -139,7 +141,7 @@ class Mesh:
 
         Zone names in PyPrimeMesh are translated into equivalent concepts in solver.
         Currently, only one method is available to convert zone to label.
-        Currenly, only face zones are created.
+        Currently, only face zones are created.
 
         The method finds the entities by labels and then adds them to the
         zone with the same name as label.

@@ -1,11 +1,12 @@
 import PrimePyAnsysPrimeServer as Prime
+
+import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.json_utils as json
+from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
-from ansys.meshing.prime.internals.communicator import Communicator
-import ansys.meshing.prime.internals.config as config
 
 global return_value
 return_value = ""

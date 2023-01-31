@@ -1,7 +1,7 @@
+import re
 from functools import wraps
 
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode, WarningCode
-import re
 
 prime_error_messages = {
     ErrorCode.NOERROR: "Success.",
@@ -28,7 +28,7 @@ prime_error_messages = {
     ErrorCode.SURFERINVALIDCONSTANTSIZE: "Invalid size for constant size surface meshing.",
     ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO: "Empty Topology provided to scaffolder.",
     ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES: "No free faces found in current topology.",
-    ErrorCode.SCAFFOLDERBADINPUTPARAMS: "Invalid scaffolder paramaters setup.",
+    ErrorCode.SCAFFOLDERBADINPUTPARAMS: "Invalid scaffolder parameters setup.",
     ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL: "Absolute distance tolerance must be a positive double and smaller than constant mesh size.",
     ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE: "Constant mesh must be a positive double.",
     ErrorCode.OUTOFMEMORY: "Out of memory.",

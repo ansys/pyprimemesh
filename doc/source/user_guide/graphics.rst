@@ -8,11 +8,11 @@ if this package is installed as a dependency.
 
 This code shows how to display the model using the :class:`Graphics <ansys.meshing.prime.graphics>` class:
 
-.. code:: python
+.. code:: pycon
 
     >>> from ansys.meshing.prime.graphics import Graphics
     >>> import ansys.meshing.prime as prime
-    >>> display=Graphics(model)
+    >>> display = Graphics(model)
     >>> display()
 
 
@@ -25,10 +25,10 @@ This code shows how to display the model using the :class:`Graphics <ansys.meshi
 Using the :class:`ScopeDefinition <ansys.meshing.prime.ScopeDefinition>` class allows
 you to limit the display to particular regions of the model:
 
-.. code:: python
+.. code:: pycon
 
-    >>> # Display the first part only
-    >>> display(scope=prime.ScopeDefinition(model,part_expression=model.parts[0].name))
+    >>> # display the first part only
+    >>> display(scope=prime.ScopeDefinition(model, part_expression=model.parts[0].name))
 
 
 .. figure:: ../images/graphics_part.png

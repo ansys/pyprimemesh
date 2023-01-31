@@ -1,15 +1,12 @@
 """Sphinx documentation configuration file."""
+import os
 from datetime import datetime
 
-from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
-
-from ansys.meshing.prime import __version__
-
+import pyvista
+from ansys_sphinx_theme import ansys_favicon, pyansys_logo_black
 from sphinx_gallery.sorting import FileNameSortKey
 
-import pyvista
-
-import os
+from ansys.meshing.prime import __version__
 
 # Project information
 project = 'ansys-meshing-prime'
@@ -125,7 +122,7 @@ sphinx_gallery_conf = {
     "examples_dirs": ["../../examples"],
     # path where to save gallery generated examples
     "gallery_dirs": ["examples/gallery_examples"],
-    # Patter to search for example files
+    # Pattern to search for example files
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
     "ignore_pattern": "examples/other_examples",

@@ -1,4 +1,6 @@
-import os, tempfile
+import os
+import tempfile
+
 import ansys.meshing.prime as prime
 import ansys.meshing.prime.graphics as pyprime_graphics
 

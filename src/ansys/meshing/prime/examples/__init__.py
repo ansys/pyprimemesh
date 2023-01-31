@@ -1,7 +1,8 @@
 """Examples module for PyPrimeMesh
 """
 import os
-from typing import Union, Optional
+from typing import Optional, Union
+
 from .download import download_file
 
 __all__ = [

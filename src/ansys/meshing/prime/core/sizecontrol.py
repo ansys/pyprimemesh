@@ -1,6 +1,6 @@
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.sizecontrol import SizeControl as _SizeControl
 from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryParams
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 
 
 class SizeControl(_SizeControl):
