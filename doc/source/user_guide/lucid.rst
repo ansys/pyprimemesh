@@ -18,7 +18,7 @@ Here is an example of meshing the mixing elbow case for a fluid flow analysis:
 
     from ansys.meshing import prime
 
-    # Start and connect to a Prime server
+    # Start and connect to an Ansys Prime Server instance
     prime_client = prime.launch_prime()
     model = prime_client.model
 
