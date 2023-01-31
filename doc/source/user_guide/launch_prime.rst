@@ -16,6 +16,7 @@ connected to the launched server session:
 .. code:: python
 
     import ansys.meshing.prime as prime
+
     prime_client = prime.launch_prime()
 
 You can send commands to the Ansys Prime server and receive responses from the server.
@@ -24,8 +25,7 @@ The :class:`Client <ansys.meshing.prime.Client>` class gets the :attr:`model <an
 parameter associated with the client instance:
 
 .. code:: python
- 
-    model = prime_client.model
+ model = prime_client.model
 
 ====================================================================
 Launch server from a Windows or Linux console and connect the client
@@ -47,6 +47,7 @@ This example starts the server in parallel mode on four nodes and specifies the 
    .. code:: python
 
       import ansys.meshing.prime as prime
+
       prime_client = prime.Client(ip="127.0.0.1", port=50055)
       model = prime_client.model
 
@@ -88,9 +89,10 @@ This code example shows how to manage the server lifecycle using context to make
 .. code:: python
 
     import ansys.meshing.prime as prime
+
     with prime.launch_prime() as prime_client:
-       model = prime_client.model
-       # Indented code to run...
+        model = prime_client.model
+        # Indented code to run...
 
 
 Using the :func:`Client.exit() <ansys.meshing.prime.Client.exit()>` method to close the server in this instance is not required.

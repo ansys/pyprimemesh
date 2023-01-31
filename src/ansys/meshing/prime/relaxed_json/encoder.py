@@ -1,6 +1,7 @@
 '''Implementation of JSOnEncoder that can handle byte arrays
 '''
 import re
+
 import numpy as np
 
 ESCAPE = re.compile(r'[\x00-\x1f\\"\b\f\n\r\t]')

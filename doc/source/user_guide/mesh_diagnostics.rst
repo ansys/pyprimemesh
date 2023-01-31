@@ -49,12 +49,12 @@ This code checks to see if a wrap surface is closed:
 
 This code prints the results of the surface diagnostic summary:
 
-.. code:: python
+.. code:: pycon
 
-    >>> print('Number of duplicate faces : ', diag_res.n_duplicate_faces)
-    >>> print('Number of free edges : ', diag_res.n_free_edges)
-    >>> print('Number of multi edges : ', diag_res.n_multi_edges)
-    >>> print('Number of self intersections : ', diag_res.n_self_intersections)
+    >>> print("Number of duplicate faces : ", diag_res.n_duplicate_faces)
+    >>> print("Number of free edges : ", diag_res.n_free_edges)
+    >>> print("Number of multi edges : ", diag_res.n_multi_edges)
+    >>> print("Number of self intersections : ", diag_res.n_self_intersections)
 
     Number of duplicate faces :  0
     Number of free edges :  0
@@ -88,14 +88,14 @@ This code gets face quality measures:
         model=model,
         scope=prime.ScopeDefinition(model=model, part_expression="wrap"),
         face_quality_measures=[face_quality_measures],
-        quality_limit=[0.9]
+        quality_limit=[0.9],
     )
     qual_summary_res = quality.get_surface_quality_summary(quality_params)
 
 
 This code prints face quality summary results:
 
-.. code:: python
+.. code:: pycon
 
     >>> print("Maximum surface skewness : ", qual_summary_res.quality_results[0].max_quality)
     >>> print("Number of faces above limit : ", qual_summary_res.quality_results[0].n_found)
@@ -134,16 +134,18 @@ This code gets cell quality measures:
         model=model,
         scope=prime.ScopeDefinition(model=model, part_expression="wrap"),
         cell_quality_measures=[cell_quality_measures],
-        quality_limit=[0.95]
+        quality_limit=[0.95],
     )
     qual_summary_res = quality.get_volume_quality_summary(quality_params)
 
 This code prints cell quality summary results:
 
-.. code:: python
+.. code:: pycon
 
     >>> print("Maximum skewness : ", qual_summary_res.quality_results_part[0].max_quality)
-    >>> print("Number of cells above limit : ", qual_summary_res.quality_results_part[0].n_found)
+    >>> print(
+    ...     "Number of cells above limit : ", qual_summary_res.quality_results_part[0].n_found
+    ... )
 
     Maximum skewness :  0.948388
     Number of cells above limit :  0
@@ -160,12 +162,14 @@ This code gets mesh counts:
 
 .. code:: python
 
-    part_summary_res = part.get_summary(prime.PartSummaryParams(model=model, print_id=False, print_mesh=True))
+    part_summary_res = part.get_summary(
+        prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+    )
 
 
 This code prints mesh counts:
 
-.. code:: python
+.. code:: pycon
 
     >>> print("Number of tri faces : ", part_summary_res.n_tri_faces)
     >>> print("Number of tet cells : ", part_summary_res.n_tet_cells)
@@ -223,7 +227,7 @@ This code improves and checks the volume mesh:
 
 This code prints the results of the check mesh operation:
 
-.. code:: python
+.. code:: pycon
 
     >>> print("Non positive volumes:", result.has_non_positive_volumes)
     >>> print("Non positive areas:", result.has_non_positive_areas)

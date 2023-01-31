@@ -32,13 +32,13 @@ and generate the volume mesh on meshed topofaces:
        model=model,
        max_size=1.0,
        volume_fill_type=prime.VolumeFillType.TET,
-       tet=prime.TetParams(model=model, quadratic=True)
+       tet=prime.TetParams(model=model, quadratic=True),
    )
 
 
 This code prints the automatic mesh parameters so that you can review them:
 
-.. code:: python
+.. code:: pycon
 
    >>> print(automesh_params)
 
@@ -79,13 +79,11 @@ This example shows how to perform these steps:
    prism_control = model.control_data.create_prism_control()
    face_scope = prime.ScopeDefinition(
        model=model,
-       entity_type = prime.ScopeEntity.FACEZONELETS,
-       label_expression="* !inlet !outlet"
+       entity_type=prime.ScopeEntity.FACEZONELETS,
+       label_expression="* !inlet !outlet",
    )
    volume_scope = prime.ScopeDefinition(
-       model=model,
-       entity_type = prime.ScopeEntity.VOLUME,
-       label_expression="*"
+       model=model, entity_type=prime.ScopeEntity.VOLUME, label_expression="*"
    )
    prism_control.set_surface_scope(face_scope)
    prism_control.set_volume_scope(volume_scope)
@@ -95,7 +93,7 @@ This example shows how to perform these steps:
    automesh_params = prime.AutoMeshParams(
        model=model,
        volume_fill_type=prime.VolumeFillType.POLY,
-       prism_control_ids=[prism_control.id]
+       prism_control_ids=[prism_control.id],
    )
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
@@ -104,13 +102,13 @@ This example shows how to perform these steps:
    qual_params = prime.VolumeQualitySummaryParams(
        model=model,
        cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS],
-       quality_limit=[0.95]
+       quality_limit=[0.95],
    )
    qual_summary_res = search.get_volume_quality_summary(params=qual_params)
 
 This code prints the volume quality summary:
 
-.. code:: python
+.. code:: pycon
 
     >>> print(qual_summary_res)
 
@@ -146,7 +144,7 @@ This example shows how to generate the preceding poly prism method using the Luc
     mesh_util.volume_mesh(
         volume_fill_type=prime.VolumeFillType.POLY,
         prism_layers=5,
-        prism_surface_expression="* !inlet !outlet"
+        prism_surface_expression="* !inlet !outlet",
     )
 
 
@@ -168,15 +166,12 @@ This example shows how to perform these steps:
    # Volume control
    volume_control = model.control_data.create_volume_control()
    volume_scope = prime.ScopeDefinition(
-       model=model,
-       evaluation_type=prime.ScopeEvaluationType.ZONES,
-       zone_expression="*"
+       model=model, evaluation_type=prime.ScopeEvaluationType.ZONES, zone_expression="*"
    )
    volume_control.set_scope(volume_scope)
    volume_control.set_params(
        prime.VolumeControlParams(
-           model=model,
-           cell_zonelet_type=prime.CellZoneletType.FLUID
+           model=model, cell_zonelet_type=prime.CellZoneletType.FLUID
        )
    )
 
@@ -185,7 +180,7 @@ This example shows how to perform these steps:
        model=model,
        size_field_type=prime.SizeFieldType.VOLUMETRIC,
        volume_fill_type=prime.VolumeFillType.TET,
-       volume_control_ids=[volume_control.id]
+       volume_control_ids=[volume_control.id],
    )
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
