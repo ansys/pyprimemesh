@@ -261,7 +261,10 @@ jobs:
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         run: |
           pip install -e .[all,tests]
-          pytest -v tests
+          coverage run -m --source=src/ansys/meshing/prime/core,src/ansys/meshing/prime/lucid --module pytest -vv .
+          
+      - uses: codecov/codecov-action@v3
+        name: 'Upload coverage to CodeCov'
 
   release:
     name: Release
