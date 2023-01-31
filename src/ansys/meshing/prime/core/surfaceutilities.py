@@ -1,6 +1,12 @@
-from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities as _SurfaceUtilities
-from ansys.meshing.prime.autogen.surfaceutilitystructs import AddThicknessParams as AddParams
-from ansys.meshing.prime.autogen.surfaceutilitystructs import AddThicknessResults as AddResults
+from ansys.meshing.prime.autogen.surfaceutilities import (
+    SurfaceUtilities as _SurfaceUtilities,
+)
+from ansys.meshing.prime.autogen.surfaceutilitystructs import (
+    AddThicknessParams as AddParams,
+)
+from ansys.meshing.prime.autogen.surfaceutilitystructs import (
+    AddThicknessResults as AddResults,
+)
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 from ansys.meshing.prime.params.primestructs import Iterable as Iterable

@@ -1,9 +1,11 @@
-import ansys.meshing.prime as prime
-from .utils import check_name_pattern
-from .scope import SurfaceScope, VolumeScope
-from typing import List, Iterable
-import os
 import enum
+import os
+from typing import Iterable, List
+
+import ansys.meshing.prime as prime
+
+from .scope import SurfaceScope, VolumeScope
+from .utils import check_name_pattern
 
 
 class LabelToZoneMethod(enum.IntEnum):
@@ -139,7 +141,7 @@ class Mesh:
 
         Zone names in PyPrimeMesh are translated into equivalent concepts in solver.
         Currently, only one method is available to convert zone to label.
-        Currenly, only face zones are created.
+        Currently, only face zones are created.
 
         The method finds the entities by labels and then adds them to the
         zone with the same name as label.
@@ -1263,21 +1265,7 @@ class Mesh:
         if remesh_postwrap and wrapped_part:
             if not use_existing_size_fields and (global_size_controls + remesh_size_controls):
                 if recompute_remesh_sizes:
-                    face_zonelets_prime_array = self._model.control_data.get_part_zonelets(
-                        scope=remesh_scope
-                    )
-                    for item in face_zonelets_prime_array:
-                        res = features.extract_features_on_face_zonelets(
-                            part_id=item.part_id,
-                            face_zonelets=item.face_zonelets,
-                            params=prime.ExtractFeatureParams(
-                                model=self._model,
-                                feature_angle=feature_angle,
-                                separation_angle=20,
-                                replace=True,
-                                label_name="__wrap_remesh__features__",
-                            ),
-                        )
+
                     if is_geodesic:
                         self._logger.info(
                             "Recomputing sizing after geodesic wrap:"
