@@ -14,7 +14,8 @@ on:
       - release/*
 
 env:
-  DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
+  DOCKER_IMAGE_NAME: ghcr.io/pyansys/prime
+  DOCKER_IMAGE_TAG: '23.1.0'
   MAIN_PYTHON_VERSION: '3.9'
 
 concurrency:
@@ -158,7 +159,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service
-        run: docker pull ${{ env.DOCKER_PACKAGE }}
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v1
@@ -169,6 +170,7 @@ jobs:
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
+          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
 
       # - name: Build PDF Documentation
@@ -241,11 +243,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Ansys Prime Server
-        run: docker pull ${{ env.DOCKER_PACKAGE }}          
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
 
       - name: Install library with testing requirements and run tests
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         run: |
           pip install -e .[all,tests]
