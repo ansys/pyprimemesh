@@ -39,9 +39,10 @@ Procedure
 # Import all necessary modules and launch an instance of Prime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+import os
+
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
-import os
 
 # Start prime and get the model.
 prime_client = prime.launch_prime()

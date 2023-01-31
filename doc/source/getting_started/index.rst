@@ -49,7 +49,7 @@ To install a basic version of the client, use this command instead:
 
 .. code::
 
-    pip install -e .
+   pip install -e .
 
 
 Dependencies
@@ -62,9 +62,10 @@ Launch PyPrimeMesh
 
 To launch PyPrimeMesh, use this code:
 
-.. code::
+.. code:: python
 
    import ansys.meshing.prime as prime
+
    with prime.launch_prime() as prime_client:
-   	model = prime_client.model
+       model = prime_client.model
 

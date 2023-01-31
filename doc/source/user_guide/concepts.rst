@@ -23,6 +23,7 @@ This code shows how the :class:`Model <ansys.meshing.prime.Model>` class is acce
 .. code:: python
 
     import ansys.meshing.prime as prime
+
     prime_client = prime.launch_prime()
     model = prime_client.model
 
@@ -39,7 +40,7 @@ This code imports a CAD file containing a single part:
 The code prints the :class:`Model <ansys.meshing.prime.Model>` class to obtain a summary
 of the current session:
 
-.. code:: python
+.. code:: pycon
 
     >>> print(model)
 

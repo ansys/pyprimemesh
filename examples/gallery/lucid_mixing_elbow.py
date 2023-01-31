@@ -41,9 +41,11 @@ Procedure
 
 # . Instantiate meshing utilities from Lucid class.
 
+import os
+import tempfile
+
 from ansys.meshing import prime
 from ansys.meshing.prime.graphics import Graphics
-import os, tempfile
 
 prime_client = prime.launch_prime()
 model = prime_client.model

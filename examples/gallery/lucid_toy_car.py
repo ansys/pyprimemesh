@@ -39,9 +39,11 @@ Procedure
 # From the PyPrimeMesh client get the model.
 # Instantiate meshing utilities from lucid class.
 
+import os
+import tempfile
+
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
-import os, tempfile
 
 prime_client = prime.launch_prime()
 model = prime_client.model
