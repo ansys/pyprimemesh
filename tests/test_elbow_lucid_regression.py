@@ -5,6 +5,7 @@ import ansys.meshing.prime as prime
 
 
 def test_elbow_lucid(get_remote_client, get_examples):
+    """Tests an use case with the elbow example."""
     # downloads pmdat file
     elbow_lucid = get_examples["elbow_lucid"]
     # reads file
