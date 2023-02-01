@@ -1,3 +1,4 @@
+"""Integration test for the elbow example."""
 import math
 
 import ansys.meshing.prime as prime

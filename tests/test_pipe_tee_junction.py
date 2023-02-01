@@ -1,9 +1,12 @@
+"""Integration test for pipe tee example."""
 import math
 
 import ansys.meshing.prime as prime
 
 
 def test_pipe_tee_junction(get_remote_client, get_examples):
+    """Tests an use case with the pipe tee example"""
+
     # downloads pmdat file
     pipe_tee = get_examples["pipe_tee"]
     # reads file

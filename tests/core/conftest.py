@@ -1,3 +1,4 @@
+"""Fixtures for the core modules."""
 import pytest
 
 import ansys.meshing.prime as prime

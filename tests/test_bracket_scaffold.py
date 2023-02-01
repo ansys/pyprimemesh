@@ -1,9 +1,11 @@
+"""Integration test for the bracket scaffold example."""
 import math
 
 import ansys.meshing.prime as prime
 
 
 def test_bracket_scaffold(get_remote_client, get_examples):
+    """Tests an use case with the bracket scaffold example."""
     # downloads  file
     bracket_file = get_examples["bracket"]
     model = get_remote_client.model

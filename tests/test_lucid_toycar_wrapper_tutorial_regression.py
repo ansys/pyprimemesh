@@ -1,12 +1,11 @@
-# import os
-
-# os.environ.clear()
+"""Integration test for the toy car example."""
 import math
 
 import ansys.meshing.prime as prime
 
 
 def test_toycar_tutorial(get_remote_client, get_examples):
+    """Tests an use case with the toy car example."""
 
     toy_car = get_examples["toy_car"]
     model = get_remote_client.model
