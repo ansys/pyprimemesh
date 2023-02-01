@@ -21,7 +21,6 @@ def test_bracket_scaffold(get_remote_client, get_examples):
     )
     part = model.get_part_by_name('bracket_mid_surface-3')
     part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
-    print(part_summary_res)
     # Validate topo faces and edges
     assert math.isclose(67, float(part_summary_res.n_topo_edges), rel_tol=0.05)
     assert math.isclose(9, float(part_summary_res.n_topo_faces), rel_tol=0.02)
@@ -41,7 +40,6 @@ def test_bracket_scaffold(get_remote_client, get_examples):
     scaffold_res = prime.Scaffolder(model, part.id).scaffold_topo_faces_and_beams(
         topo_faces=faces, topo_beams=beams, params=params
     )
-    print(scaffold_res)
     # Validate scaffold Operation
     assert scaffold_res.error_code == prime.ErrorCode.NOERROR
     # Mesh topofaces with constant size and generate quad elements.
