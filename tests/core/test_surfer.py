@@ -30,7 +30,6 @@ def test_remesh_face_zonelets_locally(initialized_model_elbow):
         prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=True)
     )
     face_zonelets = part.get_face_zonelets()
-    print(face_zonelets)
     results = surfer.remesh_face_zonelets_locally(part.id, face_zonelets, 1, local_surfer_params)
     assert results.error_code == ErrorCode.NOERROR
 
