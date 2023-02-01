@@ -4,7 +4,7 @@ from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 
 
 def test_mesh_topo_faces(initialized_model_elbow):
-
+    """Test the meshing for topo faces."""
     # load example from fixture
     model, mesher = initialized_model_elbow
     mesher.surface_mesh(min_size=1, max_size=200)
@@ -18,6 +18,7 @@ def test_mesh_topo_faces(initialized_model_elbow):
 
 
 def test_remesh_face_zonelets_locally(initialized_model_elbow):
+    """Test the remeshing of face zonelets locally."""
     # load example from fixture
     model, mesher = initialized_model_elbow
     mesher.surface_mesh(min_size=1, max_size=200)
@@ -35,6 +36,7 @@ def test_remesh_face_zonelets_locally(initialized_model_elbow):
 
 
 def test_remesh_face_zonelets(initialized_model_elbow):
+    """Test the remeshing of face zonelets."""
     # load example from fixture
     model, mesher = initialized_model_elbow
     mesher.surface_mesh(min_size=1, max_size=200)
@@ -53,6 +55,7 @@ def test_remesh_face_zonelets(initialized_model_elbow):
 
 
 def test_initialize_surfer_params_for_wrapper(initialized_model_elbow):
+    """Test the initialization of surfer parameters."""
     model, _ = initialized_model_elbow
     surfer = prime.Surfer(model)
     surfer_params = surfer.initialize_surfer_params_for_wrapper()
