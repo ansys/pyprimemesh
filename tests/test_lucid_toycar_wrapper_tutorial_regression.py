@@ -108,7 +108,7 @@ def test_toycar_tutorial(get_remote_client, get_examples):
     result = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
 
     # Validate quality check error code
-    assert result.error_code == prime.ErrorCode.NOERROR
+    assert result.error_code is prime.ErrorCode.NOERROR
     # result.hasNonPositiveVolumes
     assert not result.has_non_positive_volumes
 
