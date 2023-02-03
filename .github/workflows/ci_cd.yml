@@ -112,7 +112,7 @@ jobs:
 
   testing:
     name: Run Unit Tests
-    needs: [ smoke ]
+    needs: [ smoke-tests ]
     runs-on: ubuntu-latest
 
     steps:
