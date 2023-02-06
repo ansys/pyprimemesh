@@ -14,7 +14,7 @@ PyPrimeMesh documentation |version| - BETA
 Introduction
 ------------
 
-PyPrimeMesh is part of the `PyAnsys <pyansys>`_ effort to facilitate the use of Ansys technologies directly
+PyPrimeMesh is part of the `PyAnsys <https"//docs.pyansys.com>`_ effort to facilitate the use of Ansys technologies directly
 from Python. PyPrimeMesh consists of various Python modules that help you to acquire geometry and
 prepare surface and volume meshes for multiple solvers. Its primary package is ``ansys-meshing-prime``.
 
