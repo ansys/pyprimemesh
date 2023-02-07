@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 import pyvista
-from ansys_sphinx_theme import ansys_favicon, pyansys_logo_black
+from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
@@ -13,6 +13,7 @@ project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
+cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
 
 # HTML options
 html_short_title = html_title = "PyPrimeMesh"
@@ -22,12 +23,34 @@ html_theme = 'ansys_sphinx_theme'
 html_favicon = ansys_favicon
 
 # specify the location of your github repo
+html_context = {
+    "github_user": "pyansys",
+    "github_repo": "pyprimemesh",
+    "github_version": "main",
+    "doc_path": "doc/source",
+}
+
+# specify the location of your github repo
 html_theme_options = {
+    "switcher": {
+        "json_url": f"https://{cname}/release/versions.json",
+        "version_match": get_version_match(__version__),
+    },
+    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/pyansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
+    "collapse_navigation": True,
+    "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
+    ],
+    "icon_links": [
+        {
+            "name": "Support",
+            "url": "https://github.com/pyansys/pyprimemesh/discussions",
+            "icon": "fa fa-comment fa-fw",
+        },
     ],
 }
 
