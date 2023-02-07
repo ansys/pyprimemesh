@@ -6,7 +6,7 @@ from ansys.meshing.prime.params.primestructs import SizingType
 
 @pytest.mark.skip(reason="Periodic control is broken in Prime server version <= 23.1")
 def test_periodic_control(initialized_model_elbow):
-    """Tests the methods and properties from control data class and control classes."""
+    """Tests the methods and properties in periodic control."""
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
@@ -35,7 +35,7 @@ def test_periodic_control(initialized_model_elbow):
 
 
 def test_wrapper_control(initialized_model_elbow):
-    """Tests the methods and properties from control data class and control classes."""
+    """Tests the methods and properties in wrapper control."""
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
@@ -58,6 +58,7 @@ def test_wrapper_control(initialized_model_elbow):
 
 
 def test_size_control(initialized_model_elbow):
+    """Tests the methods and properties in size control."""
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
@@ -80,6 +81,7 @@ def test_size_control(initialized_model_elbow):
 
 
 def test_prism_control(initialized_model_elbow):
+    """Tests the methods and properties in prism control."""
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
     # prism control tests
