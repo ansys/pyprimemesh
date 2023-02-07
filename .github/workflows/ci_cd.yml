@@ -17,6 +17,7 @@ on:
 env:
   DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
   MAIN_PYTHON_VERSION: '3.9'
+  DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -192,38 +193,22 @@ jobs:
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
         with:
-          name: pyprimemesh-docs-html
+          name: documentation-html
           path: doc/build/html
           retention-days: 7
 
-      # - name: Upload PDF Documentation
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: pyprimemesh-docs-pdf
-      #     path: doc/build/latex/*.pdf
-      #     retention-days: 7
-      
-      - name: Deploy Documentation
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+  upload_docs_release:
+    name: Upload release documentation
+    runs-on: ubuntu-latest
+    needs: [docs]
+    steps:
+      - name: Deploy the stable documentation
+        uses: pyansys/actions/doc-deploy-stable@v3
         with:
-          repository-name: pyansys/pyprimemesh-docs
-          token: ${{ steps.get_workflow_token.outputs.token }}
-          branch: gh-pages
-          folder: doc/build/html
-          clean: true
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-      # Deploy Latest Developer Documentation
-      - name: Deploy Documentation
-        if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
-        with:
-          repository-name: pyansys/pyprimemesh-dev-docs
-          token: ${{ steps.get_workflow_token.outputs.token }}
-          branch: gh-pages
-          folder: doc/build/html
-          clean: true
-  
   testing:
     name: Run Unit Tests
     needs: [ smoke ]
