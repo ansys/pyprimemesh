@@ -14,7 +14,7 @@ def test_mesh_topo_faces(initialized_model_elbow):
     surfer = prime.Surfer(model)
     surfer_params = prime.SurferParams(model)
     results = surfer.mesh_topo_faces(2, topo_faces, surfer_params)
-    assert results.error_code == ErrorCode.NOERROR
+    assert results.error_code is ErrorCode.NOERROR
 
 
 def test_remesh_face_zonelets_locally(initialized_model_elbow):
@@ -32,7 +32,7 @@ def test_remesh_face_zonelets_locally(initialized_model_elbow):
     )
     face_zonelets = part.get_face_zonelets()
     results = surfer.remesh_face_zonelets_locally(part.id, face_zonelets, 1, local_surfer_params)
-    assert results.error_code == ErrorCode.NOERROR
+    assert results.error_code is ErrorCode.NOERROR
 
 
 def test_remesh_face_zonelets(initialized_model_elbow):
@@ -51,7 +51,7 @@ def test_remesh_face_zonelets(initialized_model_elbow):
     edge_zonelets = part.get_edge_zonelets()
 
     results = surfer.remesh_face_zonelets(part.id, face_zonelets, edge_zonelets, surfer_params)
-    assert results.error_code == ErrorCode.NOERROR
+    assert results.error_code is ErrorCode.NOERROR
 
 
 def test_initialize_surfer_params_for_wrapper(initialized_model_elbow):
