@@ -101,6 +101,7 @@ def test_prism_control(initialized_model_elbow):
 
 
 def test_volume_control(initialized_model_elbow):
+    """Tests the methods and properties in volume control."""
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
