@@ -43,7 +43,7 @@ def test_wrapper_control(initialized_model_elbow):
     wrapper_control = test_control_data.create_wrapper_control()
     wrapper_control_test = test_control_data.get_wrapper_control_by_name(wrapper_control.name)
     assert wrapper_control_test.name != ('' or None)
-    assert wrapper_control_test.name == 'WrapperControl1'
+    assert wrapper_control_test.name == wrapper_control.name
 
     wrapper_control_test.set_suggested_name("foo")
     assert wrapper_control_test.name == "foo"
