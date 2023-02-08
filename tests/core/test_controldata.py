@@ -1,10 +1,7 @@
 """Tests for all control modules."""
-import pytest
-
 from ansys.meshing.prime.params.primestructs import SizingType
 
 
-@pytest.mark.skip(reason="Periodic control is broken in Prime server version <= 23.1")
 def test_periodic_control(initialized_model_elbow):
     """Tests the methods and properties in periodic control."""
     model, _ = initialized_model_elbow
