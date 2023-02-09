@@ -1,9 +1,9 @@
-# Copyright 2023 ANSYS, Inc.
-# Unauthorized use, distribution, or duplication is prohibited.
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.periodiccontrol import (
     PeriodicControl as _PeriodicControl,
 )
+
+# isort: split
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.periodiccontrolstructs import PeriodicControlParams
 
 
