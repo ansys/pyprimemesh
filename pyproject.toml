@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-meshing-prime"
-version = "0.3.0.dev1"
+version = "0.3.0.dev2"
 description = "PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server delivers core Ansys meshing technology."
 readme = "README.md"
 requires-python = ">=3.7,<4"
