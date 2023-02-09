@@ -1,6 +1,8 @@
 from ansys.meshing.prime.autogen.surfaceutilities import (
     SurfaceUtilities as _SurfaceUtilities,
 )
+
+# isort: split
 from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     AddThicknessParams as AddParams,
 )

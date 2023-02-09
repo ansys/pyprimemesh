@@ -1,6 +1,9 @@
-from ansys.meshing.prime.autogen.primeconfig import *  # isort:skip
-from ansys.meshing.prime.autogen.commontypes import *  # isort:skip
-from ansys.meshing.prime.autogen.commonstructs import *  # isort:skip
+# isort: off
+from ansys.meshing.prime.autogen.primeconfig import *
+from ansys.meshing.prime.autogen.commontypes import *
+from ansys.meshing.prime.autogen.commonstructs import *
+
+# isort: on
 from ansys.meshing.prime.autogen.automeshstructs import *
 from ansys.meshing.prime.autogen.collapsetoolstructs import *
 from ansys.meshing.prime.autogen.connectstructs import *

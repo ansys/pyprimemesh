@@ -2,6 +2,10 @@ from typing import List
 
 import numpy as np
 
+# isort: split
+from ansys.meshing.prime.autogen.wrapper import Wrapper as _Wrapper
+
+# isort: split
 from ansys.meshing.prime.autogen.connect import Connect
 from ansys.meshing.prime.autogen.connectstructs import IntersectParams
 from ansys.meshing.prime.autogen.controlstructs import (
@@ -11,7 +15,6 @@ from ansys.meshing.prime.autogen.modelstructs import MergePartsParams
 from ansys.meshing.prime.autogen.partstructs import NamePatternParams
 from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.autogen.surfaceutilitystructs import ResolveIntersectionsParams
-from ansys.meshing.prime.autogen.wrapper import Wrapper as _Wrapper
 from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
 from ansys.meshing.prime.autogen.wrapperstructs import (
     WrapperCloseGapsParams,
