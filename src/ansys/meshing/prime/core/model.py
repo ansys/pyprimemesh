@@ -1,9 +1,12 @@
 from typing import Iterable, List
 
+# isort: split
+from ansys.meshing.prime.autogen.model import Model as _Model
+
+# isort: split
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
-from ansys.meshing.prime.autogen.model import Model as _Model
 from ansys.meshing.prime.autogen.modelstructs import (
     GlobalSizingParams,
     MergePartsParams,
