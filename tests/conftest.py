@@ -95,7 +95,7 @@ def get_examples():
 @pytest.fixture(scope="session", autouse=True)
 def get_testfiles():
     """Downloads unit test files"""
-    download_test_examples("./tests/core/test_files")
+    download_test_examples(os.path.abspath("./tests/core/test_files"))
 
 
 def create_scenario_element(test, id):
