@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 import pytest
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.examples import download_test_examples
 
 
 class RemoteClientManager:
@@ -91,6 +92,12 @@ def get_examples():
     return examples_dict
 
 
+@pytest.fixture(scope="session", autouse=True)
+def get_testfiles():
+    """Downloads unit test files"""
+    download_test_examples("./tests/core/test_files")
+
+
 def create_scenario_element(test, id):
     testName, className = str(test).split()
     _, className = className.strip('()').split('.')
@@ -155,6 +162,17 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 def pytest_sessionfinish(session, exitstatus):
     """Cleanup generated files."""
     files_list = []
+
+    files_list.append(os.path.abspath("./tests/core/test_files/file.pmdat"))
+    files_list.append(os.path.abspath("./tests/core/test_files/file.pdmat"))
+    files_list.append(os.path.abspath("./tests/core/test_files/file.cas"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex.cdb"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex.cas"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex.fmd"))
+    files_list.append(os.path.abspath("./tests/core/test_files/box.psf"))
+    files_list.append(os.path.abspath("./tests/core/test_files/box.sf"))
+    files_list.append(os.path.abspath("./tests/core/test_files/hex.msh"))
+
     files_list.append(os.path.abspath("./tests/core/test_files/file_test.pmdat"))
     files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cdb"))
     files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cas"))

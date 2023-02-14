@@ -4,6 +4,7 @@ import os
 from typing import Optional, Union
 
 from .download import download_file
+from .unit_test_examples import download_test_examples
 
 __all__ = [
     'clear_download_cache',
