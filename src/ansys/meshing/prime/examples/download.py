@@ -67,7 +67,7 @@ def download_file(
 
     """
 
-    if not os.path.isdir(destination):
+    if destination is not None and not os.path.isdir(destination):
         os.mkdir(destination)
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
