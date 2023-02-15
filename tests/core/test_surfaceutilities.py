@@ -14,6 +14,6 @@ def test_surface_utilities(initialized_model_elbow):
 
     # add some thickness to the selected face zonelets
     surf_utils_params = prime.AddThicknessParams(model, 0.3, False)
-    # TODO: Function is broken
+
     result = surf_utils.add_thickness(face_zonelets, surf_utils_params)
     assert result.error_code is ErrorCode.NOERROR
