@@ -60,8 +60,7 @@ def download_elbow_pmdat(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'mixing_elbow.pmdat', 'pyprimemesh', 'mixing_elbow', destination=destination, force=force
     )
@@ -105,8 +104,7 @@ def download_elbow_fmd(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'mixing_elbow.fmd', 'pyprimemesh', 'mixing_elbow', destination=destination, force=force
     )
@@ -150,8 +148,7 @@ def download_elbow_scdoc(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'mixing_elbow.scdoc', 'pyprimemesh', 'mixing_elbow', destination=destination, force=force
     )
@@ -195,8 +192,7 @@ def download_bracket_fmd(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'bracket_mid_surface.fmd',
         'pyprimemesh',
@@ -244,8 +240,7 @@ def download_bracket_scdoc(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'bracket_mid_surface.scdoc',
         'pyprimemesh',
@@ -293,8 +288,7 @@ def download_toy_car_pmdat(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'toy_car.pmdat', 'pyprimemesh', 'toy_car', destination=destination, force=force
     )
@@ -338,8 +332,7 @@ def download_toy_car_fmd(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'toy_car.fmd', 'pyprimemesh', 'toy_car', destination=destination, force=force
     )
@@ -383,8 +376,7 @@ def download_toy_car_scdoc(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'toy_car.scdoc', 'pyprimemesh', 'toy_car', destination=destination, force=force
     )
@@ -428,8 +420,7 @@ def download_pipe_tee_pmdat(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'pipe_tee.pmdat', 'pyprimemesh', 'pipe_tee', destination=destination, force=force
     )
@@ -473,8 +464,7 @@ def download_pipe_tee_fmd(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+
     file = download_file(
         'pipe_tee.fmd', 'pyprimemesh', 'pipe_tee', destination=destination, force=force
     )

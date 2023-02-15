@@ -66,6 +66,12 @@ def download_file(
         The two are different in case of containers.
 
     """
+
+    if not os.path.isdir(destination):
+        os.mkdir(destination)
+    if destination is not None and not os.path.isdir(destination):
+        raise ValueError('destination directory provided does not exist')
+
     url = _get_filepath_on_default_server(filename, *directory)
     local_path = _retrieve_data(url, filename, dest=destination, force=force)
     return local_path

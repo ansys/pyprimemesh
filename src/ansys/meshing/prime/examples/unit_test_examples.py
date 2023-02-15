@@ -52,8 +52,6 @@ def download_test_examples(
     >>>     print(model)
 
     """
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
 
     unit_test_paths = [
         download_file(
