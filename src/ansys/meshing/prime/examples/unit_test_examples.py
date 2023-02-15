@@ -19,7 +19,7 @@ FILE_NAMES = [
 def download_test_examples(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the mixing elbow example
+    """Download files necessary for unit testing.
 
     Parameters
     ----------
@@ -32,13 +32,8 @@ def download_test_examples(
 
     Returns
     -------
-    str
-        Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
+    List[str]
+        Local paths to the downloaded files
 
     Examples
     --------
@@ -46,10 +41,8 @@ def download_test_examples(
     >>> import ansys.meshing.prime.examples as prime_examples
     >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     elbow = prime_examples.download_elbow_fmd()
-    >>>     with prime.FileIO(model) as io:
-    >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
-    >>>     print(model)
+    >>>     examples = prime_examples.unit_test_examples.download_test_examples()
+
 
     """
 

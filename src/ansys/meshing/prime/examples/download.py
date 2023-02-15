@@ -66,9 +66,11 @@ def download_file(
         The two are different in case of containers.
 
     """
-
+    # if destination is not a dir create it
     if destination is not None and not os.path.isdir(destination):
         os.mkdir(destination)
+
+    # check if it was able to create the dir
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
 
