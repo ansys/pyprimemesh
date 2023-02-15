@@ -11,10 +11,6 @@ def test_periodic_control(initialized_model_elbow):
     periodic_control_test = test_control_data.get_periodic_control_by_name("test")
     assert periodic_control_test is None
 
-    # TODO: error on server side:
-    # ansys.meshing.prime.internals.error_handling.PrimeRuntimeError:
-    # Could not find method PrimeMesh::controldata/CreatePeriodicControl
-
     periodic_control = test_control_data.create_periodic_control()
     periodic_control_test = test_control_data.get_periodic_control_by_name(periodic_control.name)
     assert periodic_control_test.name != ('' or None)

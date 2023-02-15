@@ -1,11 +1,9 @@
 """Tests for surfaceutilities module."""
-import pytest
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 
 
-@pytest.mark.skip(reason="method add_thickness isn't working properly")
 def test_surface_utilities(initialized_model_elbow):
     """Tests the SurfaceUtilities class initialization and methods."""
     model, mesher = initialized_model_elbow
