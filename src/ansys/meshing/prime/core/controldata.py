@@ -1,7 +1,10 @@
 from typing import Iterable, List
 
-from ansys.meshing.prime.autogen.commonstructs import DeleteResults
+# isort: split
 from ansys.meshing.prime.autogen.controldata import ControlData as _ControlData
+
+# isort: split
+from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl

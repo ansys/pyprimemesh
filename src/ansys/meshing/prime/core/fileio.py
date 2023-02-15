@@ -1,7 +1,10 @@
 from typing import List
 
-import ansys.meshing.prime.internals.utils as utils
+# isort: split
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
+
+# isort: split
+import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,

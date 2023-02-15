@@ -1,7 +1,10 @@
 from typing import Any
 
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
+# isort: split
 from ansys.meshing.prime.autogen.part import Part as _Part
+
+# isort: split
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
 from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
 
 

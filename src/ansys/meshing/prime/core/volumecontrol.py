@@ -1,5 +1,7 @@
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.volumecontrol import VolumeControl as _VolumeControl
+
+# isort: split
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults
 from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
 
 
