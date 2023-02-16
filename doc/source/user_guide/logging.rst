@@ -8,7 +8,7 @@ A logger can be attached to a session to handle streamed output from PyPrimeMesh
 
 This code attaches a logger and formats the output as needed:
 
-.. code:: python
+.. code-block:: python
 
    import ansys.meshing.prime as prime
    import logging
