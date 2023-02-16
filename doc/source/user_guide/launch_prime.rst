@@ -25,7 +25,8 @@ The :class:`Client <ansys.meshing.prime.Client>` class gets the :attr:`model <an
 parameter associated with the client instance:
 
 .. code:: python
- model = prime_client.model
+    model = prime_client.model
+
 
 ====================================================================
 Launch server from a Windows or Linux console and connect the client
