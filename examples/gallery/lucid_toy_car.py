@@ -58,7 +58,7 @@ mesh_util = prime.lucid.Mesh(model)
 # Import geometry and display everything except tunnel.
 
 # For Windows OS users scdoc is also available:
-# mixing_elbow = prime.examples.download_toy_car_scdoc()
+# toy_car = prime.examples.download_toy_car_scdoc()
 
 toy_car = prime.examples.download_toy_car_fmd()
 
