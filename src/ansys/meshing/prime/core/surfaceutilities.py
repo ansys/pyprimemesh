@@ -1,3 +1,4 @@
+"""Utilities module for surface operations."""
 from ansys.meshing.prime.autogen.surfaceutilities import (
     SurfaceUtilities as _SurfaceUtilities,
 )
@@ -15,16 +16,21 @@ from ansys.meshing.prime.params.primestructs import Iterable as Iterable
 
 
 class SurfaceUtilities(_SurfaceUtilities):
-    """Performs various general surface utilities algorithms. For example, add thickness."""
+    """Performs various general surface utilities algorithms. For example, add thickness.
+
+    Parameters
+    ----------
+    model : Model
+        Server model in which to perform the operations.
+    """
 
     def __init__(self, model: Model):
-        """__init__(Model self, int id, int object_id, char* name)"""
+        """Initialize the superclass and Model variable."""
         _SurfaceUtilities.__init__(self, model)
         self._model = model
 
     def add_thickness(self, zonelets: Iterable[int], params: AddParams) -> AddResults:
-        """Adds thickness to the selected list of face zonelet ids.
-
+        """Thickens the selected list of face zonelet ids.
 
         Parameters
         ----------
