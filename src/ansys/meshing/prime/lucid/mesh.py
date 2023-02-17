@@ -812,8 +812,8 @@ class Mesh:
         prism_layers : int
             Number of prism layers to grow.
 
-        prism_label_expression : str
-            Labels on surfaces from where prisms are grown.
+        prism_surface_expression : str
+            Facezonelets or topofaces from which prisms are grown.
             Default is to grow from all surfaces.
 
         prism_volume_expression : str
