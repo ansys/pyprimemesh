@@ -19,8 +19,6 @@ class WrapperControl(_WrapperControl):
         Object ID of the control.
     name : str
         Name of the WrapperControl
-    local : bool, optional
-        Unused, by default False
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
