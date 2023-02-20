@@ -29,3 +29,16 @@
 - name: testing
   description: Anything related to testing
   color: 5802B8
+
+- name: graphics
+  description: Graphics issue.
+  color: 5903A8
+
+- name: limitation
+  description: Current limitation.
+  color: 7983A8
+
+
+- name: triage
+  description: Need some assessment.
+  color: f78a50
