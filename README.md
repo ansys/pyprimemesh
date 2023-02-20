@@ -51,7 +51,7 @@ pip install -e .
 
 ## Dependencies
 
-You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
+You must have a licensed copy of the latest version of Ansys 2023 R1 locally. Ansys Prime Server requires CFD Prepost, Prepost or Advanced Meshing license to run.
 
 ## Get Started
 
