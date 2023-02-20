@@ -51,7 +51,7 @@ pip install -e .
 
 ## Dependencies
 
-You must have Ansys 2023 R1 or latest version installed for Ansys Prime Server (optionally CAD readers can be configured).  Ansys Prime Server requires a Preppost or CFD Preppost to run.
+You must have Ansys 2023 R1 or newer version installed for Ansys Prime Server (optionally CAD readers can be configured).  Ansys Prime Server requires a Preppost or CFD Preppost license to run.
 
 ## Get Started
 
