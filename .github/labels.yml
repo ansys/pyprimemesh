@@ -38,7 +38,10 @@
   description: Current limitation.
   color: 7983A8
 
-
 - name: triage
   description: Need some assessment.
+  color: f78a50
+
+- name: top priority
+  description: Must be fixed promptly.
   color: f78a50
