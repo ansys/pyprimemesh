@@ -34,18 +34,18 @@ def download_elbow_pmdat(
         Destination for the file to be downloaded.
         If nothing is provided, the default path in app data is used
     force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+        If ``True``, the file is always downloaded.
+        Otherwise, an existing file in the cache may be re-used.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded file.
 
     Raises
     ------
     ValueError
-        When the provided destination path does not exist on file
+        Exception is raised when the provided destination path does not exist.
 
     Examples
     --------
