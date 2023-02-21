@@ -76,16 +76,16 @@ def get_examples():
     in any test.
     """
     examples_dict = {}
-    elbow_lucid = prime.examples.download_elbow_pmdat()
+    elbow_lucid = prime.examples.get_file("mixing_elbow", "pmdat", "mixing_elbow")
     examples_dict["elbow_lucid"] = elbow_lucid
 
-    toy_car = prime.examples.download_toy_car_pmdat()
+    toy_car = prime.examples.get_file("toy_car", "pmdat", "toy_car")
     examples_dict["toy_car"] = toy_car
 
-    pipe_tee = prime.examples.download_pipe_tee_pmdat()
+    pipe_tee = prime.examples.get_file("pipe_tee", "pmdat", "pipe_tee")
     examples_dict["pipe_tee"] = pipe_tee
 
-    bracket = prime.examples.download_bracket_fmd()
+    bracket = prime.examples.get_file("bracket_mid_surface", "fmd", "bracket_scaffold")
     examples_dict["bracket"] = bracket
 
     return examples_dict
