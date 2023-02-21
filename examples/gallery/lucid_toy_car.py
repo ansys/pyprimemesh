@@ -57,8 +57,7 @@ mesh_util = prime.lucid.Mesh(model)
 # Download the toy car geometry file (.fmd file exported by SpaceClaim).
 # Import geometry and display everything except tunnel.
 
-toy_car = prime.examples.download_toy_car_fmd()
-
+toy_car = prime.examples.get_file("toy_car", "pmdat", "toy_car")
 mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")

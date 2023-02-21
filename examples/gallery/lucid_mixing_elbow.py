@@ -59,8 +59,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 # . Import geometry.
 
 # . Create face zones from labels imported from geometry for use in Fluent solver.
-
-mixing_elbow = prime.examples.download_elbow_fmd()
+mixing_elbow = prime.examples.get_file("mixing_elbow", "pmdat", "mixing_elbow")
 mesh_util.read(file_name=mixing_elbow)
 mesh_util.create_zones_from_labels("inlet,outlet")
 

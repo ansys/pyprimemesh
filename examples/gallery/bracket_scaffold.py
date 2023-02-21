@@ -57,7 +57,7 @@ model = prime_client.model
 
 # . Create part per CAD model for topology based connection.
 
-bracket_file = prime.examples.download_bracket_fmd()
+bracket_file = prime.examples.get_file("bracket_mid_surface", "fmd", "bracket_scaffold")
 
 file_io = prime.FileIO(model)
 file_io.import_cad(
