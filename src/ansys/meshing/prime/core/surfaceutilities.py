@@ -9,9 +9,22 @@ from ansys.meshing.prime.autogen.surfaceutilitystructs import (
 from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     AddThicknessResults as AddResults,
 )
+from ansys.meshing.prime.autogen.surfaceutilitystructs import (
+    CreateBOIParams as CreateBOIParams,
+)
+from ansys.meshing.prime.autogen.surfaceutilitystructs import (
+    CreateBOIResults as CreateBOIResults,
+)
+from ansys.meshing.prime.autogen.surfaceutilitystructs import (
+    CreateContactPatchParams as CPP,
+)
+from ansys.meshing.prime.autogen.surfaceutilitystructs import (
+    CreateContactPatchResults as CPR,
+)
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 from ansys.meshing.prime.params.primestructs import Iterable as Iterable
+from ansys.meshing.prime.params.primestructs import ScopeDefinition as SD
 
 
 class SurfaceUtilities(_SurfaceUtilities):
@@ -45,6 +58,62 @@ class SurfaceUtilities(_SurfaceUtilities):
 
         """
         result = _SurfaceUtilities.add_thickness(self, zonelets, params)
+        if result.error_code == ErrorCode.NOERROR:
+            self._model._sync_up_model()
+        return result
+
+    def create_boi(self, scope: SD, params: CreateBOIParams) -> CreateBOIResults:
+        """Creates BOI to the selected list of face zonelet ids.
+
+
+        Parameters
+        ----------
+        scope : ScopeDefinition
+            Scope of zonelets.
+        params : CreateBOIParams
+            Parameters to control the BOI creation operation.
+
+        Returns
+        -------
+        CreateBOIResults
+            Returns the BOIResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.create_surface_boi(zonelets, params)
+
+        """
+        result = _SurfaceUtilities.create_boi(self, scope, params)
+        if result.error_code == ErrorCode.NOERROR:
+            self._model._sync_up_model()
+        return result
+
+    def create_contact_patch(self, source_scope: SD, target_scope: SD, params: CPP) -> CPR:
+        """Creates contact patches.
+
+
+        Parameters
+        ----------
+        source_scope : ScopeDefinition
+            Scope of source zonelets.
+        target_scope : ScopeDefinition
+            Scope of target zonelets which is to be offsetted for contact patch creation.
+        params : CreateContactPatchParams
+            Parameters to control the contact patch creation operation.
+
+        Returns
+        -------
+        CreateContactPatchResults
+            Returns the CreateContactPatchResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.create_contact_patch(zonelets, params)
+
+        """
+        result = _SurfaceUtilities.create_contact_patch(self, source_scope, target_scope, params)
         if result.error_code == ErrorCode.NOERROR:
             self._model._sync_up_model()
         return result

@@ -467,6 +467,7 @@ class WrapperImproveQualityParams(CoreObject):
             inflate_dihedral_face_nodes: bool,
             resolve_invalid_node_normals: bool,
             aggressively: bool,
+            sharp_angle: float,
             number_of_threads: int):
         self._target_skewness = target_skewness
         self._island_count = island_count
@@ -478,6 +479,7 @@ class WrapperImproveQualityParams(CoreObject):
         self._inflate_dihedral_face_nodes = inflate_dihedral_face_nodes
         self._resolve_invalid_node_normals = resolve_invalid_node_normals
         self._aggressively = aggressively
+        self._sharp_angle = sharp_angle
         self._number_of_threads = number_of_threads
 
     def __init__(
@@ -493,6 +495,7 @@ class WrapperImproveQualityParams(CoreObject):
             inflate_dihedral_face_nodes: bool = None,
             resolve_invalid_node_normals: bool = None,
             aggressively: bool = None,
+            sharp_angle: float = None,
             number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
@@ -522,6 +525,8 @@ class WrapperImproveQualityParams(CoreObject):
             Control to resolve invalid node normals by inflating opposite nodes or not.
         aggressively: bool, optional
             Control to improve surfaces aggressively or not.
+        sharp_angle: float, optional
+            Maximum off feature sharp node angle.
         number_of_threads: int, optional
             Number of threads for multithreading.
         json_data: dict, optional
@@ -543,9 +548,10 @@ class WrapperImproveQualityParams(CoreObject):
                 json_data["inflateDihedralFaceNodes"] if "inflateDihedralFaceNodes" in json_data else None,
                 json_data["resolveInvalidNodeNormals"] if "resolveInvalidNodeNormals" in json_data else None,
                 json_data["aggressively"] if "aggressively" in json_data else None,
+                json_data["sharpAngle"] if "sharpAngle" in json_data else None,
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [target_skewness, island_count, island_tol, overlap_count, overlap_tol, resolve_spikes, resolve_intersections, inflate_dihedral_face_nodes, resolve_invalid_node_normals, aggressively, number_of_threads])
+            all_field_specified = all(arg is not None for arg in [target_skewness, island_count, island_tol, overlap_count, overlap_tol, resolve_spikes, resolve_intersections, inflate_dihedral_face_nodes, resolve_invalid_node_normals, aggressively, sharp_angle, number_of_threads])
             if all_field_specified:
                 self.__initialize(
                     target_skewness,
@@ -558,6 +564,7 @@ class WrapperImproveQualityParams(CoreObject):
                     inflate_dihedral_face_nodes,
                     resolve_invalid_node_normals,
                     aggressively,
+                    sharp_angle,
                     number_of_threads)
             else:
                 if model is None:
@@ -576,6 +583,7 @@ class WrapperImproveQualityParams(CoreObject):
                         inflate_dihedral_face_nodes if inflate_dihedral_face_nodes is not None else ( WrapperImproveQualityParams._default_params["inflate_dihedral_face_nodes"] if "inflate_dihedral_face_nodes" in WrapperImproveQualityParams._default_params else (json_data["inflateDihedralFaceNodes"] if "inflateDihedralFaceNodes" in json_data else None)),
                         resolve_invalid_node_normals if resolve_invalid_node_normals is not None else ( WrapperImproveQualityParams._default_params["resolve_invalid_node_normals"] if "resolve_invalid_node_normals" in WrapperImproveQualityParams._default_params else (json_data["resolveInvalidNodeNormals"] if "resolveInvalidNodeNormals" in json_data else None)),
                         aggressively if aggressively is not None else ( WrapperImproveQualityParams._default_params["aggressively"] if "aggressively" in WrapperImproveQualityParams._default_params else (json_data["aggressively"] if "aggressively" in json_data else None)),
+                        sharp_angle if sharp_angle is not None else ( WrapperImproveQualityParams._default_params["sharp_angle"] if "sharp_angle" in WrapperImproveQualityParams._default_params else (json_data["sharpAngle"] if "sharpAngle" in json_data else None)),
                         number_of_threads if number_of_threads is not None else ( WrapperImproveQualityParams._default_params["number_of_threads"] if "number_of_threads" in WrapperImproveQualityParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -596,6 +604,7 @@ class WrapperImproveQualityParams(CoreObject):
             inflate_dihedral_face_nodes: bool = None,
             resolve_invalid_node_normals: bool = None,
             aggressively: bool = None,
+            sharp_angle: float = None,
             number_of_threads: int = None):
         """Set the default values of WrapperImproveQualityParams.
 
@@ -621,6 +630,8 @@ class WrapperImproveQualityParams(CoreObject):
             Control to resolve invalid node normals by inflating opposite nodes or not.
         aggressively: bool, optional
             Control to improve surfaces aggressively or not.
+        sharp_angle: float, optional
+            Maximum off feature sharp node angle.
         number_of_threads: int, optional
             Number of threads for multithreading.
         """
@@ -661,13 +672,15 @@ class WrapperImproveQualityParams(CoreObject):
             json_data["resolveInvalidNodeNormals"] = self._resolve_invalid_node_normals
         if self._aggressively is not None:
             json_data["aggressively"] = self._aggressively
+        if self._sharp_angle is not None:
+            json_data["sharpAngle"] = self._sharp_angle
         if self._number_of_threads is not None:
             json_data["numberOfThreads"] = self._number_of_threads
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "target_skewness :  %s\nisland_count :  %s\nisland_tol :  %s\noverlap_count :  %s\noverlap_tol :  %s\nresolve_spikes :  %s\nresolve_intersections :  %s\ninflate_dihedral_face_nodes :  %s\nresolve_invalid_node_normals :  %s\naggressively :  %s\nnumber_of_threads :  %s" % (self._target_skewness, self._island_count, self._island_tol, self._overlap_count, self._overlap_tol, self._resolve_spikes, self._resolve_intersections, self._inflate_dihedral_face_nodes, self._resolve_invalid_node_normals, self._aggressively, self._number_of_threads)
+        message = "target_skewness :  %s\nisland_count :  %s\nisland_tol :  %s\noverlap_count :  %s\noverlap_tol :  %s\nresolve_spikes :  %s\nresolve_intersections :  %s\ninflate_dihedral_face_nodes :  %s\nresolve_invalid_node_normals :  %s\naggressively :  %s\nsharp_angle :  %s\nnumber_of_threads :  %s" % (self._target_skewness, self._island_count, self._island_tol, self._overlap_count, self._overlap_tol, self._resolve_spikes, self._resolve_intersections, self._inflate_dihedral_face_nodes, self._resolve_invalid_node_normals, self._aggressively, self._sharp_angle, self._number_of_threads)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -770,6 +783,16 @@ class WrapperImproveQualityParams(CoreObject):
     @aggressively.setter
     def aggressively(self, value: bool):
         self._aggressively = value
+
+    @property
+    def sharp_angle(self) -> float:
+        """Maximum off feature sharp node angle.
+        """
+        return self._sharp_angle
+
+    @sharp_angle.setter
+    def sharp_angle(self, value: float):
+        self._sharp_angle = value
 
     @property
     def number_of_threads(self) -> int:
