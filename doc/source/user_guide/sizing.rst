@@ -45,7 +45,7 @@ parameter sizes based on the scope based on the local curvature. The size is sma
 This code shows how to use the :class:`CurvatureSizingParams <ansys.meshing.prime.CurvatureSizingParams>` class to specify
 the minimum and maximum size, growth rate, and normal angle:
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
     size_control.set_curvature_sizing_params(
@@ -64,7 +64,7 @@ the surfaces or edges specified in the scope. This code shows how to use the
 :class:`ProximitySizingParams <ansys.meshing.prime.ProximitySizingParams>` class to specify the
 minimum and maximum size, growth rate, and the number of element per gap:
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.PROXIMITY)
     size_control.set_proximity_sizing_params(
@@ -84,7 +84,7 @@ On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 value while meshing. This code shows how to use the :class:`HardSizingParams <ansys.meshing.prime.HardSizingParams>`
 class to specify the minimum size and growth rate.
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.HARD)
     size_control.set_hard_sizing_params(
@@ -103,7 +103,7 @@ certain maximum value that should not be exceeded while meshing. This code shows
 to use the :class:`SoftSizingParams <ansys.meshing.prime.SoftSizingParams>` class to specify
 the maximum size and growth rate:
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
     size_control.set_soft_sizing_params(
@@ -121,7 +121,7 @@ On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 This example shows how to use The :class:`MeshedSizingParams <ansys.meshing.prime.MeshedSizingParams>`
 class to specify the growth rate:
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.MESHED)
     size_control.set_meshed_sizing_params(
@@ -139,7 +139,7 @@ On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting The
 that is not to exceed a certain maximum value. This code shows how to use the
 :class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` class to specify the maximum size and growth rate.
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.BOI)
     size_control.set_boi_sizing_params(
