@@ -30,14 +30,14 @@ to Python 3.11 on Windows and Linux operating systems.
 
 You can install PyPrimeMesh with all dependencies directly from PyPI with this code:
 
-.. code::
+.. code-block::
 
    pip install ansys-meshing-prime[all]
 
 
 Alternatively, you can clone this repository and install the client using this code:
 
-.. code::
+.. code-block::
 
    git clone https://github.com/pyansys/pyprimemesh
    cd pyprimemesh
@@ -47,7 +47,7 @@ Alternatively, you can clone this repository and install the client using this c
 The preceding code installs all features that are important to development.
 To install a basic version of the client, use this command instead:
 
-.. code::
+.. code-block::
 
    pip install -e .
 
@@ -62,7 +62,7 @@ Launch PyPrimeMesh
 
 To launch PyPrimeMesh, use this code:
 
-.. code:: python
+.. code-block:: python
 
    import ansys.meshing.prime as prime
 
