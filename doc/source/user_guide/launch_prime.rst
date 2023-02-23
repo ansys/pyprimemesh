@@ -13,7 +13,7 @@ The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method launches th
 This method returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` class
 connected to the launched server session:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
 
@@ -24,8 +24,10 @@ You can send commands to the Ansys Prime server and receive responses from the s
 The :class:`Client <ansys.meshing.prime.Client>` class gets the :attr:`model <ansys.meshing.prime.Client.model>`
 parameter associated with the client instance:
 
-.. code:: python
- model = prime_client.model
+.. code-block:: python
+
+   model = prime_client.model
+
 
 ====================================================================
 Launch server from a Windows or Linux console and connect the client
@@ -37,14 +39,14 @@ This example starts the server in parallel mode on four nodes and specifies the 
 
 #. Launch the server from a command line:
 
-   .. code:: shell-session
+   .. code-block:: shell-session
 
       "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
       
       
 #. Connect to the server in Python using a the :class:`Client <ansys.meshing.prime.Client>` class:
 
-   .. code:: python
+   .. code-block:: python
 
       import ansys.meshing.prime as prime
 
@@ -72,7 +74,7 @@ You can run a Python script directly on the server from a Linux or Windows conso
 
 Here is a Windows code example for running a Python script directly from the command line:
 
-.. code:: shell-session
+.. code-block:: shell-session
 
     "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
 
@@ -86,7 +88,7 @@ This prevents servers being spawned and left open blocking ports.
 
 This code example shows how to manage the server lifecycle using context to make development easier:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
 

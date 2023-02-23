@@ -1017,7 +1017,7 @@ class Mesh:
             self._logger.info("Name: '" + control.name + "' Type: '" + ctrl_type + "'")
             if ctrl_type not in geodesic_types:
                 geodesic = False
-                self._logger.info("Please note: VOLUMETRIC method used.")
+                self._logger.info("Note: VOLUMETRIC method used.")
                 return geodesic
         return geodesic
 

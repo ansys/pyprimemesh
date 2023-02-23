@@ -29,7 +29,7 @@ the Ansys Prime server and returns an instance of the :class:`Client <ansys.mesh
 class. You can then send gRPC commands to the Ansys Prime server and receive responses 
 from it.
 
-.. code:: python
+.. code-block:: python
 
     from ansys.meshing.prime import launch_prime
 
