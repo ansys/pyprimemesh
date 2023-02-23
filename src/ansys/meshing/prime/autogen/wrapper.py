@@ -43,7 +43,7 @@ class Wrapper(CoreObject):
         Returns
         -------
         WrapResult
-            Returns the Wrap Results.
+            Returns the WrapResult.
 
 
         Examples

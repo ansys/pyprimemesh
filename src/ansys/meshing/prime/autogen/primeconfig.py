@@ -36,6 +36,8 @@ class ErrorCode(enum.IntEnum):
     """Auto sizing must be of volumetric type."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
+    FREEZEMESHERROR = 30
+    """Cannot remesh freezed mesh."""
     SURFERINVALIDCONSTANTSIZE = 40
     """Invalid size for constant size surface meshing."""
     SURFERINVALIDMINORMAXSIZES = 41
@@ -158,6 +160,28 @@ class ErrorCode(enum.IntEnum):
     """Separation failed."""
     ZONELETSARENOTOFSAMEDIMENSION = 374
     """Zonelets are not of same dimension."""
+    ADDTHICKNESSRESULTSFAILED = 380
+    """Adding thickness failed."""
+    BOIRESULTSFAILED = 381
+    """BOI creation failed."""
+    CREATEBOI_INVALIDSCALE = 382
+    """BOI creation failed. Scale factors should not be less than one."""
+    CREATEBOI_INVALIDFLOWDIRECTION = 383
+    """BOI creation failed. Invalid flow or wake direction."""
+    CREATEBOI_IVALIDWRAPMESHSIZE = 384
+    """BOI creation failed. Wrap cannot be performed with invalid mesh size."""
+    CREATEBOI_INVALIDWAKELEVELS = 385
+    """BOI creation failed. Invalid wake levels input."""
+    CREATEBOI_INVALIDTYPEFORWRAP = 386
+    """BOI creation failed. Wrapping is invalid for this BOI type."""
+    CREATECONTACTPATCH_INVALIDOFFSETDISTANCE = 387
+    """Contact patch creation process failed. Scale factors should not be less than zero."""
+    CREATECONTACTPATCH_INVALIDTOLERANCEVALUE = 390
+    """Contact patch creation process failed. Tolerance value should not be less than zero."""
+    CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS = 388
+    """Contact patch creation process failed. Invalid contact patch creation axis."""
+    CONTACTPATCHRESULTSFAILED = 389
+    """Contact patch creation process failed. Check the inputs."""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Size field computation failed."""
     INVALIDSIZECONTROLS = 401
