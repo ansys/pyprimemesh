@@ -30,7 +30,7 @@ diagnosing surface connectivity for the given scope and controls:
 
 This code checks to see if a wrap surface is closed:
 
-.. code:: python
+.. code-block:: python
 
     # Check wrap surface is closed
     scope = prime.ScopeDefinition(model=model, part_expression="wrap")
@@ -49,7 +49,7 @@ This code checks to see if a wrap surface is closed:
 
 This code prints the results of the surface diagnostic summary:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print("Number of duplicate faces : ", diag_res.n_duplicate_faces)
     >>> print("Number of free edges : ", diag_res.n_free_edges)
@@ -80,7 +80,7 @@ of measures to check face quality metrics.
 
 This code gets face quality measures:
 
-.. code:: python
+.. code-block:: python
 
     face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
     quality = prime.SurfaceSearch(model)
@@ -95,7 +95,7 @@ This code gets face quality measures:
 
 This code prints face quality summary results:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print("Maximum surface skewness : ", qual_summary_res.quality_results[0].max_quality)
     >>> print("Number of faces above limit : ", qual_summary_res.quality_results[0].n_found)
@@ -126,7 +126,7 @@ of measures to check cell quality metrics.
 
 This code gets cell quality measures:
 
-.. code:: python
+.. code-block:: python
 
     cell_quality_measures = prime.CellQualityMeasure.SKEWNESS
     quality = prime.VolumeSearch(model)
@@ -140,7 +140,7 @@ This code gets cell quality measures:
 
 This code prints cell quality summary results:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print("Maximum skewness : ", qual_summary_res.quality_results_part[0].max_quality)
     >>> print(
@@ -160,7 +160,7 @@ number of nodes, faces, or cells after meshing with the given parameters.
 
 This code gets mesh counts:
 
-.. code:: python
+.. code-block:: python
 
     part_summary_res = part.get_summary(
         prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
@@ -169,7 +169,7 @@ This code gets mesh counts:
 
 This code prints mesh counts:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print("Number of tri faces : ", part_summary_res.n_tri_faces)
     >>> print("Number of tet cells : ", part_summary_res.n_tet_cells)
@@ -200,7 +200,7 @@ method with given parameters. In addition, you can check the mesh using the
 
 This code improves and checks the volume mesh:
 
-.. code:: python
+.. code-block:: python
 
     # Auto node move
     perform_anm = prime.VolumeMeshTool(model=model)
@@ -227,7 +227,7 @@ This code improves and checks the volume mesh:
 
 This code prints the results of the check mesh operation:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print("Non positive volumes:", result.has_non_positive_volumes)
     >>> print("Non positive areas:", result.has_non_positive_areas)

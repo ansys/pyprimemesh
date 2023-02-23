@@ -61,7 +61,7 @@ Here is a brief example of how you use PyPrimeMesh:
 
 To launch PyPrimeMesh, you use this code:
 
-.. code:: python
+.. code-block:: python
 
    import ansys.meshing.prime as prime
 
@@ -71,7 +71,7 @@ To launch PyPrimeMesh, you use this code:
 
 To read a mesh file, you use this code:
 
-.. code:: python
+.. code-block:: python
 
    import ansys.meshing.prime as prime
 

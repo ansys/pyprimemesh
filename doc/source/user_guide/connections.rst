@@ -38,7 +38,7 @@ The following example shows how to perform these steps:
 
 Import the model and delete topo-geometric entities from each part:
 
-.. code:: python
+.. code-block:: python
 
     prime.FileIO(model).read_pmdat(
         "D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model)
@@ -54,7 +54,7 @@ Import the model and delete topo-geometric entities from each part:
 
 Merge the parts.
 
-.. code:: python
+.. code-block:: python
 
     model.merge_parts(
         part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
@@ -62,7 +62,7 @@ Merge the parts.
 
 Check the surface before performing the connect operation.
 
-.. code:: python
+.. code-block:: python
 
     diag = prime.SurfaceSearch(model)
     diag_res = diag.get_surface_diagnostic_summary(
@@ -79,7 +79,7 @@ For more information on checking the surface mesh connectivity, see :ref:`ref_in
 
 Print the results of the surface mesh connectivity before performing the connect operation:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(diag_res)
 
@@ -95,7 +95,7 @@ Connect face zonelets in the model:
 .. note::
     Only triangular faces are supported.
 
-.. code:: python
+.. code-block:: python
 
     join_params = prime.JoinParams(model)
     inter_params = prime.IntersectParams(model)
@@ -121,14 +121,14 @@ Connect face zonelets in the model:
 
 Check the surface after performing the connect operation:
 
-.. code:: python
+.. code-block:: python
 
     diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
 
 Print the results of the surface mesh connectivity after performing the connect operation:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(diag_res)
 
@@ -154,7 +154,7 @@ create connected mesh between topofaces.
 
 This code merges parts and scaffold topofaces:
 
-.. code:: python
+.. code-block:: python
 
     # Merge parts
     model.merge_parts(
@@ -177,7 +177,7 @@ This code merges parts and scaffold topofaces:
 This code prints the results so that you can check the number of topofaces that failed
 in the scaffold operation:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(res)
 
