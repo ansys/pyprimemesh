@@ -57,7 +57,12 @@ mesh_util = prime.lucid.Mesh(model)
 # Download the toy car geometry file (.fmd file exported by SpaceClaim).
 # Import geometry and display everything except tunnel.
 
+
+# For Windows OS users scdoc is also available:
+# toy_car = prime.examples.download_toy_car_scdoc()
+
 toy_car = prime.examples.get_file("toy_car", "pmdat", "toy_car")
+
 mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
@@ -269,6 +274,7 @@ for summary_res in qual_summary_res.quality_results_part:
 # Write Mesh
 # ~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
+
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "toy_car_lucid.cas")
     mesh_util.write(mesh_file)
