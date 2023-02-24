@@ -48,7 +48,7 @@ def get_file(
         Extension of the file.
     destination: Optional[str]
         Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
+       The default is ``None`` in which case the default path in app data is used.
     force: bool
         If true, the file is always downloaded.
         Otherwise, an existing file in the cache may be re-used.

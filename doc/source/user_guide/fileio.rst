@@ -22,7 +22,7 @@ The model data can be read from and written to the PMDAT format using the
 with parameters defined in the :class:`FileReadParams <ansys.meshing.prime.FileReadParams>`
 and :class:`FileWriteParams <ansys.meshing.prime.FileWriteParams>` classes respectively.
 
-.. code:: python
+.. code-block:: python
 
     from ansys.meshing import prime
 
@@ -54,7 +54,7 @@ CAD reader routes
 
 You can specify the import route for CAD files using the :class:`CadReaderRoute <ansys.meshing.prime.CadReaderRoute>` class.
 
-.. code:: python
+.. code-block:: python
 
     params = prime.ImportCadParams(
         model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM
@@ -63,7 +63,7 @@ You can specify the import route for CAD files using the :class:`CadReaderRoute 
 
 Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in the Lucid API:
 
-.. code:: python
+.. code-block:: python
 
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(file_name=mixing_elbow, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
@@ -100,7 +100,7 @@ Append CAD files
 The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` parameter allows
 you to append a CAD file to the model: 
 
-.. code:: python
+.. code-block:: python
 
     params = prime.ImportCadParams(model=model, append=True)
     prime.FileIO(model).import_cad(file_name="cad_to_append.scdoc", params=params)
@@ -108,7 +108,7 @@ you to append a CAD file to the model:
 Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in
 the Lucid API:
 
-.. code:: python
+.. code-block:: python
 
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read("cad_to_append.scdoc", append=True)
@@ -121,13 +121,13 @@ can be accessed by Workbench CAD readers.
 
 This code gets existing CAD parameters while importing:
 
-.. code:: python
+.. code-block:: python
 
     params = prime.ImportCadParams(model=model)
     params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
     result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(result.cad_parameters)
 
@@ -135,14 +135,14 @@ This code gets existing CAD parameters while importing:
 
 This code sets the parameters that are used for the import:
 
-.. code:: python
+.. code-block:: python
 
     params = prime.ImportCadParams(model=model)
     params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
     params.cad_update_parameters = {"my_param": 2}
     result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(result.cad_parameters)
 
