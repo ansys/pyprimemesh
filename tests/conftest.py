@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 import pytest
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.examples import Examples
 
 
 class RemoteClientManager:
@@ -75,17 +76,18 @@ def get_examples():
     """Downloads the prime examples for them to be available
     in any test.
     """
+
     examples_dict = {}
-    elbow_lucid = prime.examples.get_file("mixing_elbow", "pmdat", "mixing_elbow")
+    elbow_lucid = prime.examples.get_file(Examples.ELBOW_PMDAT)
     examples_dict["elbow_lucid"] = elbow_lucid
 
-    toy_car = prime.examples.get_file("toy_car", "pmdat", "toy_car")
+    toy_car = prime.examples.get_file(Examples.TOY_CAR_PMDAT)
     examples_dict["toy_car"] = toy_car
 
-    pipe_tee = prime.examples.get_file("pipe_tee", "pmdat", "pipe_tee")
+    pipe_tee = prime.examples.get_file(Examples.PIPE_TEE_PMDAT)
     examples_dict["pipe_tee"] = pipe_tee
 
-    bracket = prime.examples.get_file("bracket_mid_surface", "fmd", "bracket_scaffold")
+    bracket = prime.examples.get_file(Examples.BRACKET_FMD)
     examples_dict["bracket"] = bracket
 
     return examples_dict
