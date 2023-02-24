@@ -51,6 +51,7 @@ import tempfile
 import ansys.meshing.prime.graphics as graphics
 from ansys.meshing import prime
 from ansys.meshing.prime import lucid
+from ansys.meshing.prime.examples import Examples
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -66,7 +67,7 @@ mesh_util = lucid.Mesh(model)
 # . Read and display the geometry file.
 
 # The file contains several unmeshed parts as you would get after you imported from CAD.
-file_name = prime.examples.get_file("pipe_tee", "pmdat", "pipe_tee")
+file_name = prime.examples.get_file(Examples.PIPE_TEE_PMDAT)
 mesh_util.read(file_name)
 
 display = graphics.Graphics(model)

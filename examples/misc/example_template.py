@@ -36,6 +36,7 @@ After this preamble is complete, the first code block begins.
 """
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.examples import Examples
 from ansys.meshing.prime.graphics import Graphics
 
 # start Ansys Prime Server and get client model
@@ -44,7 +45,7 @@ model = prime_client.model
 
 # Your code goes here...
 mesh_util = prime.lucid.Mesh(model=model)
-mixing_elbow = prime.examples.get_file("mixing_elbow", "fmd", "mixing_elbow")
+mixing_elbow = prime.examples.get_file(Examples.ELBOW_PMDAT)
 mesh_util.read(mixing_elbow)
 print(model)
 
