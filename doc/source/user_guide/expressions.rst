@@ -19,7 +19,7 @@ class. The :attr:`part_expression <ansys.meshing.prime.ScopeDefinition.part_expr
 is used to gather part entities to define a scope. You can provide the exact part name or use
 expressions for more complex entity collections. 
  
-.. code:: pycon
+.. code-block:: pycon
     
     >>> part = model.parts[0]
     >>> # First part in model
