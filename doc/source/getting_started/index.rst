@@ -10,8 +10,7 @@ that provides core Ansys meshing technology.
 To use PyPrimeMesh, you must have a local installation of Ansys. The
 version of Ansys installed dictates the features available to you.
 
-For more information on getting a licensed copy of Ansys, visit
-`Ansys <ansys>`.
+For more information on getting a licensed copy of Ansys, visit `Ansys <https://www.ansys.com/>`_.
 
 Note: PyPrimeMesh client release has one to one compatibility with Ansys Prime Server release. That is, PyPrimeMesh client is only compatible with its corresponding Ansys Prime Server. See the below table:
 
@@ -19,7 +18,8 @@ Note: PyPrimeMesh client release has one to one compatibility with Ansys Prime S
 PyPrimeMesh Client Release   Ansys Prime Server Release
 ===========================  ===========================
 0.2.0                        23.1.0 (23R1) 
-0.3.0                        23.1.1 (23R1 SP1)
+0.3.0                        23.1.1 (23R1 SP1)  
+0.4.0                        23.2.0 (23R2)
 ===========================  ===========================
 
 Installation
