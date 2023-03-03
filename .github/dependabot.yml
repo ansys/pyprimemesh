@@ -7,7 +7,7 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "Maintenance"
+      - "maintenance"
       - "dependencies"
     ignore:
       - dependency-name: "vtk"

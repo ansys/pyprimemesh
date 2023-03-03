@@ -812,8 +812,8 @@ class Mesh:
         prism_layers : int
             Number of prism layers to grow.
 
-        prism_label_expression : str
-            Labels on surfaces from where prisms are grown.
+        prism_surface_expression : str
+            Facezonelets or topofaces from which prisms are grown.
             Default is to grow from all surfaces.
 
         prism_volume_expression : str
@@ -1017,7 +1017,7 @@ class Mesh:
             self._logger.info("Name: '" + control.name + "' Type: '" + ctrl_type + "'")
             if ctrl_type not in geodesic_types:
                 geodesic = False
-                self._logger.info("Please note: VOLUMETRIC method used.")
+                self._logger.info("Note: VOLUMETRIC method used.")
                 return geodesic
         return geodesic
 

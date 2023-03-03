@@ -20,7 +20,7 @@ It contains all information about the PyPrimeMesh session.
 This code shows how the :class:`Model <ansys.meshing.prime.Model>` class is accessed from the
 :class:`Client <ansys.meshing.prime.Client>` class:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
 
@@ -30,7 +30,7 @@ This code shows how the :class:`Model <ansys.meshing.prime.Model>` class is acce
 
 This code imports a CAD file containing a single part:
 
-.. code:: python
+.. code-block:: python
 
     cad_file = prime.examples.download_elbow_scdoc()
     params = prime.ImportCadParams(model)
@@ -40,7 +40,7 @@ This code imports a CAD file containing a single part:
 The code prints the :class:`Model <ansys.meshing.prime.Model>` class to obtain a summary
 of the current session:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(model)
 
@@ -73,7 +73,7 @@ Parts
 Geometry topology and mesh data in the :class:`Model <ansys.meshing.prime.Model>` class is stored
 within any number of :attr:`parts <ansys.meshing.prime.Model.parts>` parameters:
 
-.. code:: python
+.. code-block:: python
 
     model.parts
 
