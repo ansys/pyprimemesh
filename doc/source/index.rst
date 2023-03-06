@@ -22,8 +22,8 @@ PyPrimeMesh enables you to perform these tasks:
 
 * Generate quad dominant and triangular surface meshes.
 * Generate surface meshes with various sizing options like volumetric and constant.
-* Generate volume meshes with linear and quadratic elements of various shapes like tetrahedra,
-  hexahedra, pyramids, and prisms.
+* Generate volume meshes with linear and quadratic elements of various shapes like tetrahedra, polyhedra,
+  hexcore, pyramids, and prisms.
 * Generate volume meshes with a single process or distributed process.
 * Check mesh quality to provide the best solution for the problem and improve predictive
   capabilities.
@@ -61,7 +61,7 @@ Here is a brief example of how you use PyPrimeMesh:
 
 To launch PyPrimeMesh, you use this code:
 
-.. code:: python
+.. code-block:: python
 
    import ansys.meshing.prime as prime
 
@@ -71,7 +71,7 @@ To launch PyPrimeMesh, you use this code:
 
 To read a mesh file, you use this code:
 
-.. code:: python
+.. code-block:: python
 
    import ansys.meshing.prime as prime
 

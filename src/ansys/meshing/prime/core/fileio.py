@@ -218,7 +218,7 @@ class FileIO(_FileIO):
         \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
         \*.stl \*.plmxml \*.tgf
 
-        Please refer documentation for detailed list of supported formats.
+        Refer documentation for detailed list of supported formats.
 
         Parameters
         ----------
