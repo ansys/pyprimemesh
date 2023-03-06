@@ -55,7 +55,7 @@ model = prime_client.model
 # Create part per CAD model for topology based connection.
 
 # For Windows OS users scdoc is also available:
-# bracket_file = prime.examples.download_bracket_scdoc(Examples.BRACKET_SCDOC)
+# bracket_file = prime.examples.get_file(Examples.BRACKET_SCDOC)
 
 bracket_file = prime.examples.get_file(Examples.BRACKET_FMD)
 

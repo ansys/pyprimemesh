@@ -22,7 +22,7 @@ class Examples(Enum):
     TOY_CAR_SCDOC = {"filename": "toy_car.scdoc", "git_folder": "toy_car"}
     PIPE_TEE_PMDAT = {"filename": "pipe_tee.pmdat", "git_folder": "pipe_tee"}
     PIPE_TEE_FMD = {"filename": "pipe_tee.fmd", "git_folder": "pipe_tee"}
-
+PIPE_TEE_SCDOC = {"filename": "pipe_tee.scdoc", "git_folder": "pipe_tee"}
 
 _DOWNLOADS = []
 

@@ -45,7 +45,7 @@ model = prime_client.model
 
 # Your code goes here...
 mesh_util = prime.lucid.Mesh(model=model)
-mixing_elbow = prime.examples.get_file(Examples.ELBOW_PMDAT)
+mixing_elbow = prime.examples.get_file(Examples.ELBOW_FMD)
 mesh_util.read(mixing_elbow)
 print(model)
 

@@ -67,7 +67,9 @@ mesh_util = lucid.Mesh(model)
 # . Read and display the geometry file.
 
 # The file contains several unmeshed parts as you would get after you imported from CAD.
-file_name = prime.examples.get_file(Examples.PIPE_TEE_PMDAT)
+# For Windows OS users scdoc is also available:
+# file_name = prime.examples.get_file(Examples.PIPE_TEE_SCDOC)
+file_name = prime.examples.get_file(Examples.PIPE_TEE_FMD)
 mesh_util.read(file_name)
 
 display = graphics.Graphics(model)
