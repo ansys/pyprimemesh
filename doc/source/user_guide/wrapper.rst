@@ -5,16 +5,33 @@
 Surface Wrapping
 ****************
 
+Geometries migrated from various CAD packages often contain gaps and overlaps between the surfaces due to alogorithm and tolerance differences of the CAD packages.
+Surface wrapping provides the ability to create reliable meshes for such geometries without extensive manual clean up and reduces the time required for preprocessing.
 
-PyPrimeMesh provides operations to extract a closed watertight surface used to create a volume mesh from geometry where the inputs: 
+The :class:`Wrapper <ansys.meshing.prime.Wrapper>` allows you to extract a closed watertight surface used to create a volume mesh from geometry where the inputs: 
 
- - are not connected with overlaps 
- - have holes, leaks or gaps. 
- - have small features that need to be ignored or stepped over 
- 
-The :class:`Wrapper <ansys.meshing.prime.Wrapper>` allows you to extract flow regions from large assemblies, form closed clean volumes from medical imaging and many more.
+ - are not connected with overlaps
+ - have holes, leaks or gaps
+ - have small features that need to be ignored or walked over
 
-The procedure to perform surface wrapping on a model are as follows:
+The wrapping operation uses an appropriate material point to identify the relevant surfaces of the selected objects. A coarse Cartesian grid is overlaid on the selected objects 
+to create a contiguous region. This Cartesian grid is used to automatically clean the input geometry and to create the watertight representation. The Cartesian grid is then refined 
+based on the size functions to better represent the selected objects. The intersection between the Cartesian grid and the input geometry is calculated and the intersecting cells are 
+identified and marked. 
+
+A watertight faceted representation (defined by quad faces of the Cartesian mesh) is created of the boundaries between the region(s) of interest (identified 
+via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a Wrapper surface closely 
+representing the input geometry. The edges are imprinted on the wrapped zones, and individual zones are recovered and rezoned based on the original geometry object(s).
+
+The Wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions/size field.
+
+.. figure:: ../images/wrapper.png
+    :width: 400pt
+    :align: center
+
+    **Schematic Representation of Wrapping Process**
+
+The basic PyPrimeMesh Wrapper based workflow follows these steps:
 
 1. Import geometry.
 
@@ -33,7 +50,7 @@ The procedure to perform surface wrapping on a model are as follows:
 
    size_control = model.control_data.create_size_control(sizing_type=prime.SizingType.CURVATURE)
    size_control.set_curvature_sizing_params(prime.CurvatureSizingParams(model=model, min=0.2, max=1., normal_angle=18.0))
-   size_control.set_suggested_name("global")
+   size_control.set_suggested_name("curv_global")
    size_control.set_scope(prime.ScopeDefinition(model=model, part_expression="*"))
 
 3.	Define the material points. Material points are used to define fluid regions or seal regions depending on the status live/dead.
@@ -50,7 +67,7 @@ A 3D coordinate describes the position of the material point.
       )
    )
 
-4.	Create the wrapper control. Scope refers to which entities should be wrapped.
+4.	Create the Wrapper control. Scope refers to which entities should be wrapped.
 
 .. code:: python
 
@@ -79,7 +96,7 @@ A 3D coordinate describes the position of the material point.
          )
       )
 
-6.	Define the scope and refinement controls for feature recovery.
+6.	Add feature recovery control.
 
 .. code:: python
 
@@ -113,7 +130,6 @@ A 3D coordinate describes the position of the material point.
 
    size_control2 = model.control_data.create_size_control(sizing_type=prime.SizingType.HARD)
    size_control2.set_hard_sizing_params(prime.HardSizingParams(model=model, min=0.8))
-   size_control2.set_suggested_name("sz2")
    size_control2.set_scope(prime.ScopeDefinition(model=model, part_expression="*", entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS))
 
    SF1 = prime.SizeField(model)
@@ -136,3 +152,28 @@ A 3D coordinate describes the position of the material point.
 
    wrapper.improve_quality(part_id=wrapper_part.id, params=prime.WrapperImproveQualityParams(model=model, target_skewness=0.9))
 
+
+Surface wrapping using Lucid class
+-----------------------------------
+
+The following example shows you the method required to replicate the surface mesh results as shown above:
+
+.. code:: python
+
+   model = prime_client.model
+   mesh_util = prime.lucid.Mesh(model)
+   input_file = r"D:/PyPrimeMesh/cylinder_with_flange.pmdat"
+   mesh_util.read(input_file)
+
+   size_control2 = model.control_data.create_size_control(sizing_type=prime.SizingType.HARD)
+   size_control2.set_hard_sizing_params(prime.HardSizingParams(model=model, min=0.8))
+   size_control2.set_scope(prime.ScopeDefinition(model=model))
+
+   mesh_util.wrap(
+      min_size=0.2,
+      max_size=1.,
+      input_parts="flange,pipe",
+      use_existing_features=True,
+      recompute_remesh_sizes=True,
+      remesh_size_controls=[size_control2]
+   )
