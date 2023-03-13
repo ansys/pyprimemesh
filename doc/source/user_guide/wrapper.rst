@@ -5,7 +5,7 @@
 Surface Wrapping
 ****************
 
-Geometries migrated from various CAD packages often contain gaps and overlaps between the surfaces due to alogorithm and tolerance differences of the CAD packages.
+Geometries migrated from various CAD packages often contain gaps and overlaps between the surfaces due to algorithm and tolerance differences of the CAD packages.
 Surface wrapping provides the ability to create reliable meshes for such geometries without extensive manual clean up and reduces the time required for preprocessing.
 
 The :class:`Wrapper <ansys.meshing.prime.Wrapper>` allows you to extract a closed watertight surface used to create a volume mesh from geometry where the inputs: 
@@ -19,9 +19,9 @@ to create a contiguous region. This Cartesian grid is used to automatically clea
 based on the size functions to better represent the selected objects. The intersection between the Cartesian grid and the input geometry is calculated and the intersecting cells are 
 identified and marked. 
 
-A watertight faceted representation (defined by quad faces of the Cartesian mesh) is created of the boundaries between the region(s) of interest (identified 
+A watertight faceted representation (defined by quad faces of the Cartesian mesh) is created of the boundaries between the regions of interest (identified 
 via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a Wrapper surface closely 
-representing the input geometry. The edges are imprinted on the wrapped zones, and individual zones are recovered and rezoned based on the original geometry object(s).
+representing the input geometry. The edges are imprinted on the wrapped zones, and individual zones are recovered and rezoned based on the original geometry objects.
 
 The Wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions/size field.
 
@@ -42,7 +42,7 @@ The basic PyPrimeMesh Wrapper based workflow follows these steps:
    file_io = prime.FileIO(model)
    file_io.read_pmdat(input_file, prime.FileReadParams(model=model))
 
-2. Define global sizing parameters and size controls with curvature refinement. Sizes will be used for Wrapper Octree construction.
+2. Define global sizing parameters and size controls with curvature refinement. Sizes are used for Wrapper Octree construction.
 
 .. code:: python
 
@@ -156,7 +156,7 @@ A 3D coordinate describes the position of the material point.
 Surface wrapping using Lucid class
 -----------------------------------
 
-The following example shows you the method required to replicate the surface mesh results as shown above:
+The following example shows you the method required to replicate the preceding surface mesh results:
 
 .. code:: python
 
