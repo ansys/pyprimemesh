@@ -11,10 +11,13 @@ Fluent Meshing
 Fluent Meshing's
 geodesical
 hexahedra
+hexcore
 Lucid
 Meshedgeodesic
 Meshing's
 multithreading
+Octree
+polyhedra
 PyVista
 topoedges
 topofaces
