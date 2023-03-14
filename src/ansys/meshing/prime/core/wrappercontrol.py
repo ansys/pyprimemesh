@@ -1,6 +1,8 @@
 from ansys.meshing.prime.autogen.wrappercontrol import WrapperControl as _WrapperControl
-from ansys.meshing.prime.internals.comm_manager import CommunicationManager
+
+# isort: split
 from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
+from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
 
 class WrapperControl(_WrapperControl):

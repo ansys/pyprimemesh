@@ -1,40 +1,46 @@
 .. _ref_index_concepts:
 
 ****************************
-Concepts and Model Structure
+Concepts and model structure
 ****************************
 
 =====
 Model
 =====
 
-The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for PyPrimeMesh. It contains all information about the PyPrimeMesh session.  
+The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for PyPrimeMesh.
+It contains all information about the PyPrimeMesh session.  
 
 .. figure:: ../images/model_structure.png
     :width: 200pt
     :align: center
 
-    **Model Structure**
+    **Model structure**
 
-The :class:`Model <ansys.meshing.prime.Model>` is accessed from the :class:`Client <ansys.meshing.prime.Client>` class as follows:
+This code shows how the :class:`Model <ansys.meshing.prime.Model>` class is accessed from the
+:class:`Client <ansys.meshing.prime.Client>` class:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
+
     prime_client = prime.launch_prime()
     model = prime_client.model
 
-An example for importing a CAD file containing a single part is shown below:
 
-.. code:: python
+This code imports a CAD file containing a single part:
+
+.. code-block:: python
 
     cad_file = prime.examples.download_elbow_scdoc()
     params = prime.ImportCadParams(model)
     prime.FileIO(model).import_cad(file_name=cad_file, params=params)
 
-:class:`Model <ansys.meshing.prime.Model>` can be printed to give a summary of the current session.
 
-.. code:: python
+The code prints the :class:`Model <ansys.meshing.prime.Model>` class to obtain a summary
+of the current session:
+
+.. code-block:: pycon
 
     >>> print(model)
 
@@ -64,36 +70,39 @@ An example for importing a CAD file containing a single part is shown below:
 Parts
 =====
 
-Geometry topology and mesh data in the :class:`Model <ansys.meshing.prime.Model>` is stored within any number of :attr:`parts <ansys.meshing.prime.Model.parts>`.
+Geometry topology and mesh data in the :class:`Model <ansys.meshing.prime.Model>` class is stored
+within any number of :attr:`parts <ansys.meshing.prime.Model.parts>` parameters:
 
-.. code:: python
+.. code-block:: python
 
     model.parts
 
-Each :class:`Part <ansys.meshing.prime.Part>` can contain either TopoEntities (TopoPart created from CAD geometry import)
-or Zonelets (MeshPart created from faceted geometry and mesh import).
+Each :class:`Part <ansys.meshing.prime.Part>` class can contain *TopoEntities* or *zonelets*.
+TopoEntities are Topo parts created from CAD geometry imports. Zonelets are mesh parts created
+from faceted geometry and mesh imports.
 
 .. figure:: ../images/part_type.png
     :width: 400pt
     :align: center
 
-    **Part Types**
+    **Part types**
 
-TopoEntities and Zonelets are characterized by dimension of entities.
+TopoEntities and zonelets are characterized by the dimension of entities.
 
 ------------
 TopoEntities
 ------------
 
-TopoEntities are created from importing CAD and represent connectivity information.  TopoEntities have geometric representation
-which may be defined by splines or facets.  The mesh generated on TopoEntities are projected on geometry representation.
+TopoEntities are created from importing a CAD geometry and represent connectivity information.
+TopoEntities have geometric representation that can be defined by splines or facets. The mesh
+generated on TopoEntities are projected on the geometry representation.
 
 There are four types of TopoEntities:
 
-    * TopoNode: TopoEntity representing points.
-    * TopoEdge: TopoEntity representing curves.
-    * TopoFace: TopoEntity representing surfaces.
-    * TopoVolume: TopoEntity representing volumes.
+    * TopoNode: TopoEntity representing points
+    * TopoEdge: TopoEntity representing curves
+    * TopoFace: TopoEntity representing surfaces
+    * TopoVolume: TopoEntity representing volumes
 
 .. figure:: ../images/TopoEntities.png
     :width: 400pt
@@ -107,27 +116,27 @@ Zonelets
 
 Zonelets are created from importing mesh files and are groups of interconnected entities in a mesh.
 
-There are three types of Zonelets:
+There are three types of zonelets:
 
-    * FaceZonelet: A group of interconnected faces.
-    * EdgeZonelet: A group of interconnected edges.
-    * CellZonelet: A group of interconnected cells.
+    * FaceZonelet: A group of interconnected faces
+    * EdgeZonelet: A group of interconnected edges
+    * CellZonelet: A group of interconnected cells
 
-A set of FaceZonelets that define a closed volume without containing any cell elements is defined as a Volume.
+A *volume* is a set of face zonelets that define a closed volume without containing any cell elements.
 
 .. figure:: ../images/Zonelets(2).png
     :width: 400pt
     :align: center
 
-    **Zonelets Schematic**
+    **Zonelets schematic**
 
 -----
 Zones
 -----
 
-Zonelets or TopoEntities can be further grouped into zones.  A Zonelet or TopoEntity can only be present in a single zone.
+Zonelets or TopoEntities can be further grouped into zones. A zonelet or TopoEntity can only be present in a single zone.
 
-For exporting  a mesh to the Fluent solver (.msh, .cas), you should  define the  boundary conditions for the zones.
+When exporting a mesh (MSH or CAS) file to the Fluent solver, you should define the boundary conditions for the zones.
 
 When importing a Fluent solver model, each zone is defined as a single zonelet.
 
@@ -135,8 +144,8 @@ When importing a Fluent solver model, each zone is defined as a single zonelet.
 Labels
 ------
 
-Labels allow overlapping groups of Zonelets or TopoEntities.
+Labels allow overlapping groups of zonelets or TopoEntities.
 
 When importing CAD files, each group or named selection generates a label.
 
-When exporting to a mechanical solver file (.cdb), each label is exported as a collection.
+When exporting to a Mechanical solver (.cdb) file, each label is exported as a collection.

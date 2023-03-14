@@ -3,28 +3,30 @@
 
 
 ***************
-Surface Meshing
+Surface meshing
 ***************
 
 The :class:`Surfer <ansys.meshing.prime.Surfer>` class enables you to perform surface meshing using
-different surface meshing algorithms on topofaces or face zonelets.
-Surface meshing considers many parameters like size field type, min size, max size, growth rate, transition type while meshing face zonelets or topofaces.
+different surface meshing algorithms on topofaces or face zonelets. Surface meshing considers many
+parameters, such as like size field type, minimum size, maximum size, growth rate, and transition type,
+while meshing face zonelets or topofaces.
 
 .. tip::
-    Surface meshing with constant and variable sizing with tri/quad mesh can be generated using :func:`Mesh.surface_mesh() <ansys.meshing.prime.lucid.Mesh.surface_mesh>` in Lucid API.
+    Surface meshing with constant and variable sizing with tri/quad mesh can be generated using
+    the :func:`Mesh.surface_mesh() <ansys.meshing.prime.lucid.Mesh.surface_mesh>` method in the Lucid API.
 
 =================================
-Surface Meshing Geometry/Topology
+Surface meshing geometry/topology
 =================================
 
-The following example shows you the procedure to:
+The following example shows how to perform these steps:
 
-* Import topology-based geometry (.scdoc) and visualize the model
-* Surface mesh the TopoFaces with constant size
+* Import topology-based geometry (SCDOC) files and visualize the model.
+* Surface mesh the topofaces with constant size.
 
-Firstly, start PyPrimeMesh client and import the CAD geometry (.scdoc):
+Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
     from ansys.meshing.prime.graphics import Graphics
@@ -37,12 +39,13 @@ Firstly, start PyPrimeMesh client and import the CAD geometry (.scdoc):
     file_io = prime.FileIO(model)
     file_io.import_cad(
         input_file,
-        params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM)
+        params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM),
     )
     # Show model in graphic
     display = Graphics(model)
     display(update=True)
-    part = model.get_part_by_name('simple-bracket-holes')
+    part = model.get_part_by_name("simple-bracket-holes")
+
 
 .. figure:: ../images/simple-bracket-holes_scdoc.png
     :width: 300pt
@@ -50,17 +53,16 @@ Firstly, start PyPrimeMesh client and import the CAD geometry (.scdoc):
 
     **CAD geometry imported**
 
-Initialize surfer parameters and generate surface mesh on TopoFaces:
+Initialize surfer parameters and generate surface mesh on topofaces:
 
-.. code:: python
+.. code-block:: python
 
     # Surface mesh with triangular elements of uniform size
     surfer_params = prime.SurferParams(model=model, constant_size=1.0)
     surfer_result = prime.Surfer(model).mesh_topo_faces(
-        part.id,
-        topo_faces=part.get_topo_faces(),
-        params=surfer_params
+        part.id, topo_faces=part.get_topo_faces(), params=surfer_params
     )
+
 
 .. figure:: ../images/simple-bracket-holes_mesh3.png
     :width: 300pt
@@ -68,19 +70,20 @@ Initialize surfer parameters and generate surface mesh on TopoFaces:
 
     **Surface mesh displayed**
 
-==================
-Remeshing Surfaces
-==================
+===============
+Remesh surfaces
+===============
 
-The following example shows you the procedure to:
+This example shows you to perform these steps:
 
-* Import faceted geometry (.stl) and visualize the model
-* Create curvature size control and compute volumetric size field (visit :ref:`ref_index_sizing` section for more information.)
-* Remesh the STL surface mesh
+* Import a faceted geometry (STL) file and visualize the model.
+* Create curvature size control and compute a volumetric size field. (For more information,
+  see :ref:`ref_index_sizing`.)
+* Remesh the STL surface mesh.
 
-Firstly, start PyPrimeMesh client and import the faceted geometry (.stl):
+Start the PyPrimeMesh client and import the faceted geometry (STL) file:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
     from ansys.meshing.prime.graphics import Graphics
@@ -91,17 +94,22 @@ Firstly, start PyPrimeMesh client and import the faceted geometry (.stl):
     # Import CAD file
     input_file = r"D:/Examples/simple-bracket-holes.stl"
     file_io = prime.FileIO(model)
-    file_io.import_cad(input_file, params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM))
+    file_io.import_cad(
+        input_file,
+        params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM),
+    )
 
-After importing the CAD file, you can display the model using graphics module:
 
-.. code:: python
+Now that the CAD file is imported, display the model using graphics module:
+
+.. code-block:: python
 
     # Show model in graphic and get part summary
     display = Graphics(model)
     display(update=True)
-    part = model.get_part_by_name('simple-bracket-holes')
+    part = model.get_part_by_name("simple-bracket-holes")
     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
+
 
 .. figure:: ../images/simple-bracket-holes_stl.png
     :width: 300pt
@@ -109,9 +117,9 @@ After importing the CAD file, you can display the model using graphics module:
 
     **Faceted geometry imported**
 
-And print the results of part summary:
+Print the results of part summary:
 
-.. code:: python
+.. code-block:: pycon
 
     >>> print(part_summary_res)
 
@@ -142,37 +150,47 @@ And print the results of part summary:
             2124 Faces
             0 Cells
 
-And set the global sizing parameters to initialize size control parameters (with curvature refinement):
 
-.. code:: python
+Set the global sizing parameters to initialize size control parameters (with curvature refinement):
+
+.. code-block:: python
 
     # Surface mesh size controls
-    model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.27, max=5.5, growth_rate=1.2))
+    model.set_global_sizing_params(
+        prime.GlobalSizingParams(model, min=0.27, max=5.5, growth_rate=1.2)
+    )
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
     size_control.set_scope(prime.ScopeDefinition(model))
 
-And compute the volumetric size field based on the size controls:
 
-.. code:: python
+Compute the volumetric size field based on the size controls:
+
+.. code-block:: python
 
     size_field = prime.SizeField(model)
     res = size_field_compute_volumetric(
         size_control_ids=[size_control.id],
-        volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(model, enable_multi_threading=False)
+        volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
+            model, enable_multi_threading=False
+        ),
     )
 
-Finally, initialize surfer parameters and generate surface mesh on face zonelets:
 
-.. code:: python
+Initialize surfer parameters and generate a surface mesh on face zonelets:
+
+.. code-block:: python
 
     # Surface mesh with triangular elements
-    surfer_params = prime.SurferParams(model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC)
+    surfer_params = prime.SurferParams(
+        model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC
+    )
     surfer_result = prime.Surfer(model).remesh_face_zonelets(
         part_id=part.id,
         face_zonelets=part.get_face_zonelets(),
         edge_zonelets=part.get_edge_zonelets(),
-        params=surfer_params
+        params=surfer_params,
     )
+
 
 .. figure:: ../images/simple-bracket-holes_mesh1.png
     :width: 300pt
@@ -181,25 +199,27 @@ Finally, initialize surfer parameters and generate surface mesh on face zonelets
     **Surface mesh displayed**
 
 
-Remeshing surface using Lucid class
-------------------------------------
+Remesh surface using the Lucid module
+-------------------------------------
 
-The following example shows you the method required to replicate the surface mesh results as shown above:
+This code shows how to replicate the preceding surface mesh results by remeshing
+the surface using the Lucid module:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
+
     prime_client = prime.launch_prime()
     model = prime_client.model
 
-    # Instantiate the lucid class
+    # Instantiate the Lucid module
     mesh_util = prime.lucid.Mesh(model)
 
-    # Import CAD file (.stl)
+    # Import CAD (STL) file
     input_file = r"D:/Examples/simple-bracket-holes.stl"
     mesh_util.read(input_file)
 
     # Surface mesh the geometry with curvature sizing
-    # Set min and max sizing that will be used for curvature refinement
+    # Set minimum and maximum sizing to use for curvature refinement
     mesh_util.surface_mesh(min_size=0.27, max_size=5.5)
 

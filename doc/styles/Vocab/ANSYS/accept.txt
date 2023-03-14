@@ -1,0 +1,35 @@
+ANSYS
+Ansys
+ansys
+PyPrimeMesh
+abc
+xyz
+APIs
+BETA
+conformally
+Fluent Meshing
+Fluent Meshing's
+geodesical
+hexahedra
+hexcore
+Lucid
+Meshedgeodesic
+Meshing's
+multithreading
+Octree
+polyhedra
+PyVista
+topoedges
+topofaces
+relicense
+Remesh
+remesh
+remeshing
+tetrahedra
+Topo
+topo
+TopoEntities
+Zonelet
+zonelet
+Zonelets
+zonelets

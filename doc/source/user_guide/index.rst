@@ -1,10 +1,9 @@
 .. _ref_index_user_guide:
 
 ==========
-User Guide
+User guide
 ==========
-This guide provides a general overview of using the PyPrimeMesh library for
-mesh preparation.
+This section provides an overview of how you use PyPrimeMesh for mesh preparation.
 
 .. toctree::
    :maxdepth: 1
@@ -25,13 +24,12 @@ mesh preparation.
 
 Overview
 ========
-The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` function
-within the ``ansys-meshing-prime`` library launches the Ansys Prime server and
-returns an instance of the :class:`Client <ansys.meshing.prime.Client>`. 
-This enables the user to send gRPC commands to Ansys Prime Server and receive the response 
-from the server.
+The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method in PyPrimeMesh launches
+the Ansys Prime server and returns an instance of the :class:`Client <ansys.meshing.prime.Client>`
+class. You can then send gRPC commands to the Ansys Prime server and receive responses 
+from it.
 
-.. code:: python
+.. code-block:: python
 
     from ansys.meshing.prime import launch_prime
 

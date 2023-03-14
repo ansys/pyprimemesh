@@ -1,6 +1,6 @@
 '''PyPrimeMesh Client library
 '''
-from ansys.meshing.prime._version import __version__
+# isort: skip_file
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.core.fileio import FileIO
@@ -13,6 +13,7 @@ from ansys.meshing.prime.core.wrapper import Wrapper
 from ansys.meshing.prime.core.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
+
 from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.wrapperstructs import *
 from ansys.meshing.prime.autogen.scaffolder import Scaffolder
@@ -47,18 +48,19 @@ from ansys.meshing.prime.autogen.prismcontrolstructs import *
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.autogen.connectstructs import *
 from ansys.meshing.prime.autogen.surfaceutilitystructs import *
-from ansys.meshing.prime.internals.client import Client
-from ansys.meshing.prime.internals.launcher import *
 from ansys.meshing.prime.autogen.transformstructs import *
 from ansys.meshing.prime.autogen.deletetoolstructs import *
 from ansys.meshing.prime.autogen.splittoolstructs import *
 from ansys.meshing.prime.autogen.collapsetoolstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *
-from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
 from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.featureextraction import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
+
+from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
+from ansys.meshing.prime.internals.client import Client
+from ansys.meshing.prime.internals.launcher import *
 from ansys.meshing.prime.internals.config import (
     is_optimizing_numpy_arrays,
     enable_optimizing_numpy_arrays,
@@ -70,6 +72,17 @@ from ansys.meshing.prime.internals.config import (
 import ansys.meshing.prime.examples as examples
 import ansys.meshing.prime.lucid as lucid
 
+# Version
+# ------------------------------------------------------------------------------
+
+try:
+    import importlib.metadata as importlib_metadata
+except ModuleNotFoundError:  # pragma: no cover
+    import importlib_metadata  # type: ignore
+
+__version__ = importlib_metadata.version(__name__.replace(".", "-"))
+
+# ------------------------------------------------------------------------------
 
 __LOCAL_CLIENT = None
 

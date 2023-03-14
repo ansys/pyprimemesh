@@ -2,7 +2,7 @@ __version__ = '1.0.0'
 
 __all__ = ['loads', 'dumps', 'JSONEncoder', 'JSONDecoder', 'JSONDecodeError']
 
-from .decoder import JSONDecoder, JSONDecodeError
+from .decoder import JSONDecodeError, JSONDecoder
 from .encoder import JSONEncoder
 
 _default_encoder = JSONEncoder(

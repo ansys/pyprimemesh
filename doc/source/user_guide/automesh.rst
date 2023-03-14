@@ -2,38 +2,43 @@
 
 
 ******************
-Volumetric Meshing
+Volumetric meshing
 ******************
 
 The :class:`AutoMesh <ansys.meshing.prime.AutoMesh>` class enables you to
-automatically create the volume mesh using different volume meshing algorithms. It generates the volume mesh for all computed 
-volumetric regions of the mesh object. For example, mesh objects created from the imported geometry.
-:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` allows you to perform volumetric meshing with given meshing parameters.
+automatically create the volume mesh using different volume meshing algorithms. This class
+generates the volume mesh for all computed volumetric regions of the mesh object.
+For example, it creates mesh objects from the imported geometry. The
+:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` method allows you to perform
+volumetric meshing with given meshing parameters.
 
 .. note::
-   The starting point for this volumetric meshing procedure is a valid surface mesh.
+   The starting point for the volumetric meshing procedure is a valid surface mesh.
 
 .. tip::
-    Volume mesh can be generated using :func:`Mesh.volume_mesh() <ansys.meshing.prime.lucid.Mesh.volume_mesh>` in Lucid API.
+    Volume mesh can be generated using the :func:`Mesh.volume_mesh() <ansys.meshing.prime.lucid.Mesh.volume_mesh>`
+    method in the Lucid API.
 
 =============================
-Second Order Tetrahedral Mesh
+Second-order tetrahedral mesh
 =============================
 
-The following example shows how to initialize :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` and generate volume mesh on meshed topofaces:
+This code shows how to initialize the :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` class
+and generate the volume mesh on meshed topofaces:
 
-.. code:: python
+.. code-block:: python
 
    automesh_params = prime.AutoMeshParams(
        model=model,
        max_size=1.0,
        volume_fill_type=prime.VolumeFillType.TET,
-       tet=prime.TetParams(model=model, quadratic=True)
+       tet=prime.TetParams(model=model, quadratic=True),
    )
 
-You can review the parameters for volume meshing:
 
-.. code:: python
+This code prints the automatic mesh parameters so that you can review them:
+
+.. code-block:: pycon
 
    >>> print(automesh_params)
 
@@ -45,37 +50,40 @@ You can review the parameters for volume meshing:
    tet :  { quadratic :  True }
    volume_control_ids :  []
 
-.. code:: python
+
+This code generates the volume mesh:
+
+.. code-block:: python
 
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
 
 ==================================
-Prism Controls for Polyhedral Mesh
+Prism controls for polyhedral mesh
 ==================================
 
-:class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control the prism mesh generation based on the face scope, volume scope and growth rate.
-You can use one or more prism controls. Each prism control definition is applied to one or more boundary zones, and then affects the height distribution and number of layers of the prism cells in the adjacent boundary layers.  
+The :class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control prism mesh generation
+based on the face scope, volume scope and growth rate. You can use one or more prism controls. Each prism control
+definition is applied to one or more boundary zones and affects the height distribution and number of layers of
+the prism cells in the adjacent boundary layers.  
 
-The following example shows you the procedure to:
+This example shows how to perform these steps:
 
-* Create prism control and specify boundary layer setting
-* Volume mesh with polyhedral elements
-* Check volume mesh quality based on cell quality measures (visit :ref:`ref_index_mesh_diagnostics` section for more information.)
+* Create the prism control and specify the boundary layer setting.
+* Perform volume meshing with polyhedral elements.
+* Check volume mesh quality based on cell quality measures. (For more information, see :ref:`ref_index_mesh_diagnostics`.)
 
-.. code:: python
+.. code-block:: python
 
    # Prism control
    prism_control = model.control_data.create_prism_control()
    face_scope = prime.ScopeDefinition(
        model=model,
-       entity_type = prime.ScopeEntity.FACEZONELETS,
-       label_expression="* !inlet !outlet"
+       entity_type=prime.ScopeEntity.FACEZONELETS,
+       label_expression="* !inlet !outlet",
    )
    volume_scope = prime.ScopeDefinition(
-       model=model,
-       entity_type = prime.ScopeEntity.VOLUME,
-       label_expression="*"
+       model=model, entity_type=prime.ScopeEntity.VOLUME, label_expression="*"
    )
    prism_control.set_surface_scope(face_scope)
    prism_control.set_volume_scope(volume_scope)
@@ -85,7 +93,7 @@ The following example shows you the procedure to:
    automesh_params = prime.AutoMeshParams(
        model=model,
        volume_fill_type=prime.VolumeFillType.POLY,
-       prism_control_ids=[prism_control.id]
+       prism_control_ids=[prism_control.id],
    )
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
@@ -94,13 +102,13 @@ The following example shows you the procedure to:
    qual_params = prime.VolumeQualitySummaryParams(
        model=model,
        cell_quality_measures=[prime.CellQualityMeasure.SKEWNESS],
-       quality_limit=[0.95]
+       quality_limit=[0.95],
    )
    qual_summary_res = search.get_volume_quality_summary(params=qual_params)
 
-You can print the result of volume quality summary:
+This code prints the volume quality summary:
 
-.. code:: python
+.. code-block:: pycon
 
     >>> print(qual_summary_res)
 
@@ -124,48 +132,46 @@ You can print the result of volume quality summary:
         Max Skew: 0.795889
         Min Skew: 0.00163176
 
-Prism Controls for Polyhedral Mesh using Lucid class
-----------------------------------------------------
+Prism controls for polyhedral mesh using the Lucid module
+---------------------------------------------------------
 
-The following example shows you the method required to generate a poly prism mesh as shown above:
+This example shows how to generate the preceding poly prism method using the Lucid module:
 
-.. code:: python
+.. code-block:: python
 
     # Volume mesh with polyhedral elements
     # Set prism layers parameter for boundary layer refinement
     mesh_util.volume_mesh(
         volume_fill_type=prime.VolumeFillType.POLY,
         prism_layers=5,
-        prism_surface_expression="* !inlet !outlet"
+        prism_surface_expression="* !inlet !outlet",
     )
 
 
 =============================
-Volume Specific Mesh Controls
+Volume-specific mesh controls
 =============================
 
-:class:`VolumeControl <ansys.meshing.prime.VolumeControl>` class helps you to control volume mesh zonelet (fluids, solid, dead) and elements (tetrahedrons, polyhedrons and so on).
-It allows you to define the scope and generate the various types of volume mesh.
+The :class:`VolumeControl <ansys.meshing.prime.VolumeControl>` class helps you to control volume mesh zonelets and elements.
+Volume mesh zonelets include fluids, solid, and dead. Elements include tetrahedrons and polyhedrons. This class
+allows you to define the scope and generate the various types of volume mesh.
 
-The following example shows you the procedure to:
+This example shows how to perform these steps:
 
-* Create volume control and set zone-specific parameters
-* Volume mesh with tetrahedral elements
+* Create volume control and set zone-specific parameters.
+* Perform volume meshing with tetrahedral elements.
 
-.. code:: python
+.. code-block:: python
 
    # Volume control
    volume_control = model.control_data.create_volume_control()
    volume_scope = prime.ScopeDefinition(
-       model=model,
-       evaluation_type=prime.ScopeEvaluationType.ZONES,
-       zone_expression="*"
+       model=model, evaluation_type=prime.ScopeEvaluationType.ZONES, zone_expression="*"
    )
    volume_control.set_scope(volume_scope)
    volume_control.set_params(
        prime.VolumeControlParams(
-           model=model,
-           cell_zonelet_type=prime.CellZoneletType.FLUID
+           model=model, cell_zonelet_type=prime.CellZoneletType.FLUID
        )
    )
 
@@ -174,6 +180,7 @@ The following example shows you the procedure to:
        model=model,
        size_field_type=prime.SizeFieldType.VOLUMETRIC,
        volume_fill_type=prime.VolumeFillType.TET,
-       volume_control_ids=[volume_control.id]
+       volume_control_ids=[volume_control.id],
    )
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
+

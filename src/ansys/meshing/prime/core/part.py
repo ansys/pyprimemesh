@@ -1,8 +1,11 @@
-from ansys.meshing.prime.autogen.part import Part as _Part
-from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
-from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
-
 from typing import Any
+
+# isort: split
+from ansys.meshing.prime.autogen.part import Part as _Part
+
+# isort: split
+from ansys.meshing.prime.autogen.commonstructs import SetNameResults as SetNameResults
+from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
 
 
 class Part(_Part):

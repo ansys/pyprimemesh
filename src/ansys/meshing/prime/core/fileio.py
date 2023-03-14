@@ -1,30 +1,33 @@
+from typing import List
+
+# isort: split
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
+
+# isort: split
+import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileiostructs import (
+    ExportBoundaryFittedSplineParams,
+    ExportFluentCaseParams,
+    ExportFluentMeshingMeshParams,
+    ExportMapdlCdbParams,
+    ExportMapdlCdbResults,
     FileReadParams,
     FileReadResults,
     FileWriteParams,
     FileWriteResults,
+    ImportCadParams,
+    ImportCadResults,
+    ImportFluentCaseParams,
+    ImportFluentCaseResults,
+    ImportFluentMeshingMeshParams,
+    ImportFluentMeshingMeshResults,
+    ImportMapdlCdbParams,
+    ImportMapdlCdbResults,
     ReadSizeFieldParams,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
-    ImportCadParams,
-    ImportCadResults,
-    ExportMapdlCdbParams,
-    ExportMapdlCdbResults,
-    ImportFluentMeshingMeshParams,
-    ImportFluentMeshingMeshResults,
-    ImportFluentCaseParams,
-    ImportFluentCaseResults,
-    ImportMapdlCdbParams,
-    ImportMapdlCdbResults,
-    ExportFluentCaseParams,
-    ExportFluentMeshingMeshParams,
-    ExportBoundaryFittedSplineParams,
 )
 from ansys.meshing.prime.core.model import Model
-import ansys.meshing.prime.internals.utils as utils
-from typing import List
-
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -207,7 +210,7 @@ class FileIO(_FileIO):
         \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
         \*.stl \*.plmxml \*.tgf
 
-        Please refer documentation for detailed list of supported formats.
+        Refer documentation for detailed list of supported formats.
 
         Parameters
         ----------
