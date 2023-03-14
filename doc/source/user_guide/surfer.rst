@@ -8,7 +8,7 @@ Surface meshing
 
 The :class:`Surfer <ansys.meshing.prime.Surfer>` class enables you to perform surface meshing using
 different surface meshing algorithms on topofaces or face zonelets. Surface meshing considers many
-parameters like size field type, minimum size, maximum size, growth rate, and transition type,
+parameters, such as size field type, minimum size, maximum size, growth rate, and transition type,
 while meshing face zonelets or topofaces.
 
 .. tip::
