@@ -168,7 +168,7 @@ Compute the volumetric size field based on the size controls:
 .. code-block:: python
 
     size_field = prime.SizeField(model)
-    res = size_field_compute_volumetric(
+    res = size_field.compute_volumetric(
         size_control_ids=[size_control.id],
         volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
             model, enable_multi_threading=False
