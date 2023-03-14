@@ -16,6 +16,7 @@ Lucid
 Meshedgeodesic
 Meshing's
 multithreading
+Octree
 polyhedra
 PyVista
 topoedges
