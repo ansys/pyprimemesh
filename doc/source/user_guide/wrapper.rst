@@ -8,24 +8,24 @@ Surface Wrapping
 Geometries migrated from various CAD packages often contain gaps and overlaps between the surfaces due to algorithm and tolerance differences of the CAD packages.
 Surface wrapping provides the ability to create reliable meshes for such geometries without extensive manual clean up and reduces the time required for preprocessing.
 
-The :class:`Wrapper <ansys.meshing.prime.Wrapper>` allows you to extract a closed watertight surface used to create a volume mesh from geometry where the inputs: 
+The :class:`Wrapper <ansys.meshing.prime.Wrapper>` allows you to extract a closed watertight surface used to create a volume mesh from geometry where the inputs:
 
  - are not connected with overlaps
  - have holes, leaks or gaps
  - have small features that need to be ignored or walked over
 
-The wrapping operation uses an appropriate material point to identify the relevant surfaces of the selected objects. A coarse Cartesian grid is overlaid on the selected objects 
-to create a contiguous region. This Cartesian grid is used to automatically clean the input geometry and to create the watertight representation. The Cartesian grid is then refined 
-based on the size functions to better represent the selected objects. The intersection between the Cartesian grid and the input geometry is calculated and the intersecting cells are 
-identified and marked. 
+The wrapping operation uses an appropriate material point to identify the relevant surfaces of the selected objects. A coarse Cartesian grid is overlaid on the selected objects
+to create a contiguous region. This Cartesian grid is used to automatically clean the input geometry and to create the watertight representation. The Cartesian grid is then refined
+based on the size functions to better represent the selected objects. The intersection between the Cartesian grid and the input geometry is calculated and the intersecting cells are
+identified and marked.
 
-A watertight faceted representation (defined by quad faces of the Cartesian mesh) is created of the boundaries between the regions of interest (identified 
-via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a Wrapper surface closely 
+A watertight faceted representation (defined by quad faces of the Cartesian mesh) is created of the boundaries between the regions of interest (identified
+via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a Wrapper surface closely
 representing the input geometry. The edges are imprinted on the wrapped zones, and individual zones are recovered and rezoned based on the original geometry objects.
 
 The Wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions/size field.
 
-.. figure:: ../images/wrapper.png
+.. figure:: ../images/wrapper_schematic.png
     :width: 400pt
     :align: center
 
