@@ -1,11 +1,12 @@
-import os
 import logging
-from ansys.meshing.prime.internals.utils import terminate_process
-from ansys.meshing.prime.core.model import Model
-import ansys.meshing.prime.internals.defaults as defaults
+import os
+
 import ansys.meshing.prime.examples as examples
-import ansys.meshing.prime.internals.utils as utils
 import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.defaults as defaults
+import ansys.meshing.prime.internals.utils as utils
+from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 
@@ -32,7 +33,9 @@ class Client(object):
         self._comm = None
         if not local:
             try:
-                from ansys.meshing.prime.internals.grpc_communicator import GRPCCommunicator
+                from ansys.meshing.prime.internals.grpc_communicator import (
+                    GRPCCommunicator,
+                )
 
                 channel = kwargs.get('channel', None)
                 if channel is not None:
@@ -54,7 +57,9 @@ class Client(object):
                 raise
         else:
             try:
-                from ansys.meshing.prime.internals.prime_communicator import PrimeCommunicator
+                from ansys.meshing.prime.internals.prime_communicator import (
+                    PrimeCommunicator,
+                )
 
                 self._comm = PrimeCommunicator()
             except ImportError as err:

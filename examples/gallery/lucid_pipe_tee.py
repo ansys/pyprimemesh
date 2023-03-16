@@ -45,11 +45,12 @@ Procedure
 
 # . Get the client model and instantiate meshing utilities from lucid class.
 
-from ansys.meshing import prime
-import ansys.meshing.prime.graphics as graphics
-from ansys.meshing.prime import lucid
+import os
+import tempfile
 
-import os, tempfile
+import ansys.meshing.prime.graphics as graphics
+from ansys.meshing import prime
+from ansys.meshing.prime import lucid
 
 prime_client = prime.launch_prime()
 model = prime_client.model

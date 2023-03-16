@@ -1,13 +1,17 @@
-from ansys.meshing.prime.autogen.coreobject import CoreObject
+from typing import Iterable
+
+# isort: split
 from ansys.meshing.prime.autogen.surfer import Surfer as _Surfer
+
+# isort: split
+from ansys.meshing.prime.autogen.coreobject import CoreObject
 from ansys.meshing.prime.autogen.surferstructs import (
-    SurferParams,
-    SurferResults,
     LocalSurferParams,
     LocalSurferResults,
+    SurferParams,
+    SurferResults,
 )
 from ansys.meshing.prime.core.model import Model
-from typing import Iterable
 
 
 class Surfer(CoreObject):

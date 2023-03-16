@@ -42,7 +42,7 @@ The basic PyPrimeMesh Wrapper based workflow follows these steps:
    file_io = prime.FileIO(model)
    file_io.read_pmdat(input_file, prime.FileReadParams(model=model))
 
-2. Define global sizing parameters and size controls with curvature refinement. Sizes are used for Wrapper octree construction.
+2. Define global sizing parameters and size controls with curvature refinement. Sizes are used for Wrapper Octree construction.
 
 .. code:: python
 

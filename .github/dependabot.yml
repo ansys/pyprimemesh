@@ -2,12 +2,12 @@
 version: 2
 updates:
   - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/requirements" # Location of package manifests
+    directory: "/"
     insecure-external-code-execution: allow
     schedule:
       interval: "weekly"
     labels:
-      - "Maintenance"
+      - "maintenance"
       - "dependencies"
     ignore:
       - dependency-name: "vtk"

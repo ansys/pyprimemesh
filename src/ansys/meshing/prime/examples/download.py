@@ -1,7 +1,8 @@
 import os
 import urllib.request
-from urllib.parse import urljoin
 from typing import Optional
+from urllib.parse import urljoin
+
 import ansys.meshing.prime.internals.defaults as defaults
 
 __all__ = ['download_file']

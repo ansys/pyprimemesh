@@ -27,7 +27,7 @@ class StitchType(enum.IntEnum):
     """Stitch surfaces at free boundary edges."""
 
 class MatchedMeshOption(enum.IntEnum):
-    """Type to specify treatment of matched mesh. This is for internal use only.
+    """Type to specify treatment of matched mesh.
     """
     NONE = 0
     """No action to be taken for matched mesh."""
@@ -919,17 +919,31 @@ class StitchParams(CoreObject):
         self._type = value
 
 class MeshMatchParams(CoreObject):
-    """Parameters to match surface mesh. This is for internal use only.
+    """Parameters to match surface mesh.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            use_absolute_tolerance: bool,
+            gap_tolerance: float,
+            side_tolerance: float,
+            check_interior: bool,
+            matched_mesh_option: MatchedMeshOption):
+        self._use_absolute_tolerance = use_absolute_tolerance
+        self._gap_tolerance = gap_tolerance
+        self._side_tolerance = side_tolerance
+        self._check_interior = check_interior
+        self._matched_mesh_option = MatchedMeshOption(matched_mesh_option)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            use_absolute_tolerance: bool = None,
+            gap_tolerance: float = None,
+            side_tolerance: float = None,
+            check_interior: bool = None,
+            matched_mesh_option: MatchedMeshOption = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MeshMatchParams.
@@ -938,6 +952,16 @@ class MeshMatchParams(CoreObject):
         ----------
         model: Model
             Model to create a MeshMatchParams object with default parameters.
+        use_absolute_tolerance: bool, optional
+            When true, gap tolerance and side tolerance provided are absolute values.
+        gap_tolerance: float, optional
+            Gap tolerance between faces to be matched.
+        side_tolerance: float, optional
+            Side tolerance for matching to the side edges.
+        check_interior: bool, optional
+            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        matched_mesh_option: MatchedMeshOption, optional
+            Option for treatment of matched mesh.
         json_data: dict, optional
             JSON dictionary to create a MeshMatchParams object with provided parameters.
 
@@ -946,18 +970,33 @@ class MeshMatchParams(CoreObject):
         >>> mesh_match_params = prime.MeshMatchParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["gapTolerance"] if "gapTolerance" in json_data else None,
+                json_data["sideTolerance"] if "sideTolerance" in json_data else None,
+                json_data["checkInterior"] if "checkInterior" in json_data else None,
+                MatchedMeshOption(json_data["matchedMeshOption"] if "matchedMeshOption" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [use_absolute_tolerance, gap_tolerance, side_tolerance, check_interior, matched_mesh_option])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    use_absolute_tolerance,
+                    gap_tolerance,
+                    side_tolerance,
+                    check_interior,
+                    matched_mesh_option)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     param_json = model._communicator.initialize_params(model, "MeshMatchParams")
                     json_data = param_json["MeshMatchParams"] if "MeshMatchParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( MeshMatchParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in MeshMatchParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        gap_tolerance if gap_tolerance is not None else ( MeshMatchParams._default_params["gap_tolerance"] if "gap_tolerance" in MeshMatchParams._default_params else (json_data["gapTolerance"] if "gapTolerance" in json_data else None)),
+                        side_tolerance if side_tolerance is not None else ( MeshMatchParams._default_params["side_tolerance"] if "side_tolerance" in MeshMatchParams._default_params else (json_data["sideTolerance"] if "sideTolerance" in json_data else None)),
+                        check_interior if check_interior is not None else ( MeshMatchParams._default_params["check_interior"] if "check_interior" in MeshMatchParams._default_params else (json_data["checkInterior"] if "checkInterior" in json_data else None)),
+                        matched_mesh_option if matched_mesh_option is not None else ( MeshMatchParams._default_params["matched_mesh_option"] if "matched_mesh_option" in MeshMatchParams._default_params else MatchedMeshOption(json_data["matchedMeshOption"] if "matchedMeshOption" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -966,9 +1005,26 @@ class MeshMatchParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            use_absolute_tolerance: bool = None,
+            gap_tolerance: float = None,
+            side_tolerance: float = None,
+            check_interior: bool = None,
+            matched_mesh_option: MatchedMeshOption = None):
         """Set the default values of MeshMatchParams.
 
+        Parameters
+        ----------
+        use_absolute_tolerance: bool, optional
+            When true, gap tolerance and side tolerance provided are absolute values.
+        gap_tolerance: float, optional
+            Gap tolerance between faces to be matched.
+        side_tolerance: float, optional
+            Side tolerance for matching to the side edges.
+        check_interior: bool, optional
+            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        matched_mesh_option: MatchedMeshOption, optional
+            Option for treatment of matched mesh.
         """
         args = locals()
         [MeshMatchParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -987,27 +1043,90 @@ class MeshMatchParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._gap_tolerance is not None:
+            json_data["gapTolerance"] = self._gap_tolerance
+        if self._side_tolerance is not None:
+            json_data["sideTolerance"] = self._side_tolerance
+        if self._check_interior is not None:
+            json_data["checkInterior"] = self._check_interior
+        if self._matched_mesh_option is not None:
+            json_data["matchedMeshOption"] = self._matched_mesh_option
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "use_absolute_tolerance :  %s\ngap_tolerance :  %s\nside_tolerance :  %s\ncheck_interior :  %s\nmatched_mesh_option :  %s" % (self._use_absolute_tolerance, self._gap_tolerance, self._side_tolerance, self._check_interior, self._matched_mesh_option)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+    @property
+    def use_absolute_tolerance(self) -> bool:
+        """When true, gap tolerance and side tolerance provided are absolute values.
+        """
+        return self._use_absolute_tolerance
+
+    @use_absolute_tolerance.setter
+    def use_absolute_tolerance(self, value: bool):
+        self._use_absolute_tolerance = value
+
+    @property
+    def gap_tolerance(self) -> float:
+        """Gap tolerance between faces to be matched.
+        """
+        return self._gap_tolerance
+
+    @gap_tolerance.setter
+    def gap_tolerance(self, value: float):
+        self._gap_tolerance = value
+
+    @property
+    def side_tolerance(self) -> float:
+        """Side tolerance for matching to the side edges.
+        """
+        return self._side_tolerance
+
+    @side_tolerance.setter
+    def side_tolerance(self, value: float):
+        self._side_tolerance = value
+
+    @property
+    def check_interior(self) -> bool:
+        """When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        """
+        return self._check_interior
+
+    @check_interior.setter
+    def check_interior(self, value: bool):
+        self._check_interior = value
+
+    @property
+    def matched_mesh_option(self) -> MatchedMeshOption:
+        """Option for treatment of matched mesh.
+        """
+        return self._matched_mesh_option
+
+    @matched_mesh_option.setter
+    def matched_mesh_option(self, value: MatchedMeshOption):
+        self._matched_mesh_option = value
+
 class MeshMatchResults(CoreObject):
-    """Results associated with the mesh match operations. This is for internal use only.
+    """Results associated with the mesh match operations.
     """
     _default_params = {}
 
     def __initialize(
             self,
+            matched_area: float,
             error_code: ErrorCode):
+        self._matched_area = matched_area
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            matched_area: float = None,
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
@@ -1017,6 +1136,8 @@ class MeshMatchResults(CoreObject):
         ----------
         model: Model
             Model to create a MeshMatchResults object with default parameters.
+        matched_area: float, optional
+            The total area of matched regions from both source and target faces.
         error_code: ErrorCode, optional
             Error Code associated with failure of mesh match operation.
         json_data: dict, optional
@@ -1028,11 +1149,13 @@ class MeshMatchResults(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["matchedArea"] if "matchedArea" in json_data else None,
                 ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [matched_area, error_code])
             if all_field_specified:
                 self.__initialize(
+                    matched_area,
                     error_code)
             else:
                 if model is None:
@@ -1041,6 +1164,7 @@ class MeshMatchResults(CoreObject):
                     param_json = model._communicator.initialize_params(model, "MeshMatchResults")
                     json_data = param_json["MeshMatchResults"] if "MeshMatchResults" in param_json else {}
                     self.__initialize(
+                        matched_area if matched_area is not None else ( MeshMatchResults._default_params["matched_area"] if "matched_area" in MeshMatchResults._default_params else (json_data["matchedArea"] if "matchedArea" in json_data else None)),
                         error_code if error_code is not None else ( MeshMatchResults._default_params["error_code"] if "error_code" in MeshMatchResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -1051,11 +1175,14 @@ class MeshMatchResults(CoreObject):
 
     @staticmethod
     def set_default(
+            matched_area: float = None,
             error_code: ErrorCode = None):
         """Set the default values of MeshMatchResults.
 
         Parameters
         ----------
+        matched_area: float, optional
+            The total area of matched regions from both source and target faces.
         error_code: ErrorCode, optional
             Error Code associated with failure of mesh match operation.
         """
@@ -1076,15 +1203,27 @@ class MeshMatchResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._matched_area is not None:
+            json_data["matchedArea"] = self._matched_area
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "matched_area :  %s\nerror_code :  %s" % (self._matched_area, self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def matched_area(self) -> float:
+        """The total area of matched regions from both source and target faces.
+        """
+        return self._matched_area
+
+    @matched_area.setter
+    def matched_area(self, value: float):
+        self._matched_area = value
 
     @property
     def error_code(self) -> ErrorCode:
