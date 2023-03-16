@@ -148,4 +148,4 @@ Labels allow overlapping groups of zonelets or TopoEntities.
 
 When importing CAD files, each group or named selection generates a label.
 
-When exporting to a Mechanical solver (.cdb) file, each label is exported as a collection.
+When exporting to a Mechanical solver (.cdb) file, each label is exported as a component.
