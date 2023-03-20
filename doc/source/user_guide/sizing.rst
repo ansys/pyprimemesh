@@ -74,7 +74,13 @@ minimum and maximum size, growth rate, and the number of element per gap:
     size_control = model.control_data.create_size_control(prime.SizingType.PROXIMITY)
     size_control.set_proximity_sizing_params(
         prime.ProximitySizingParams(
-            model=model, min=0.1, max=2.0, growth_rate=1.2, elements_per_gap=3.0
+            model=model,
+            min=0.1,
+            max=2.0,
+            growth_rate=1.2,
+            elements_per_gap=3.0,
+            ignore_orientation=True,
+            ignore_self_proximity=False,
         )
     )
     size_control.set_suggested_name("prox_control")
