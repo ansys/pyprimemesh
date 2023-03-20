@@ -1,7 +1,11 @@
+from typing import Iterable, List
+
+# isort: split
 from ansys.meshing.prime.autogen.model import Model as _Model
-from ansys.meshing.prime.core.part import Part
-from ansys.meshing.prime.core.controldata import ControlData
-from ansys.meshing.prime.internals.communicator import Communicator
+
+# isort: split
+import ansys.meshing.prime.internals.json_utils as json
+from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
 from ansys.meshing.prime.autogen.modelstructs import (
     GlobalSizingParams,
@@ -9,11 +13,11 @@ from ansys.meshing.prime.autogen.modelstructs import (
     MergePartsResults,
 )
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
-from ansys.meshing.prime.autogen.commonstructs import DeleteResults
+from ansys.meshing.prime.autogen.topodata import TopoData
+from ansys.meshing.prime.core.controldata import ControlData
+from ansys.meshing.prime.core.part import Part
+from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
-
-from typing import List, Iterable
-import ansys.meshing.prime.internals.json_utils as json
 
 
 class Model(_Model):
@@ -49,6 +53,8 @@ class Model(_Model):
         pc_data = res["PrismControl"]
         wc_data = res["WrapperControl"]
         vc_data = res["VolumeControl"]
+        if "PeriodicControl" in res:
+            percon_data = res["PeriodicControl"]
         sf_params = res["GlobalSizingParams"]
 
         self._global_sf_params = GlobalSizingParams(
@@ -60,6 +66,9 @@ class Model(_Model):
         self._control_data._update_prism_controls(pc_data)
         self._control_data._update_wrapper_controls(wc_data)
         self._control_data._update_volume_controls(vc_data)
+        self._topo_data = TopoData(self, -1, res["TopoData"], "")
+        if "PeriodicControl" in res:
+            self._control_data._update_periodic_controls(percon_data)
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def _add_part(self, id: int):
@@ -264,6 +273,21 @@ class Model(_Model):
         return self._parts
 
     @property
+    def topo_data(self) -> TopoData:
+        """Gets the topodata of a model.
+
+        Returns
+        -------
+        TopoData
+            Returns the topodata.
+
+        Examples
+        --------
+            >>> topo_data=model.topo_data
+        """
+        return self._topo_data
+
+    @property
     def control_data(self) -> ControlData:
         """Gets the control data of a model.
 
@@ -297,10 +321,10 @@ class Model(_Model):
 
     @property
     def python_logger(self):
-        """Get PRIME's Logger instance.
+        """Get PyPrimeMesh's Logger instance.
 
-        PRIME's Logger instance can be used to control the verbosity
-        of messages printed by PRIME.
+        PyPrimeMesh's Logger instance can be used to control the verbosity
+        of messages printed by PyPrimeMesh.
 
         Returns
         -------

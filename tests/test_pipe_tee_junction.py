@@ -3,9 +3,9 @@ import math
 import ansys.meshing.prime as prime
 
 
-def test_pipe_tee_junction(get_remote_client):
+def test_pipe_tee_junction(get_remote_client, get_examples):
     # downloads pmdat file
-    pipe_tee = prime.examples.download_pipe_tee_pmdat()
+    pipe_tee = get_examples["pipe_tee"]
     # reads file
     model = get_remote_client.model
     fileIO = prime.FileIO(model=model)
@@ -21,7 +21,8 @@ def test_pipe_tee_junction(get_remote_client):
     mesher.volume_mesh(
         prism_layers=5,
         prism_surface_expression="* !*inlet* !*outlet*",
-        volume_fill_type=prime.VolumeFillType.POLY)
+        volume_fill_type=prime.VolumeFillType.POLY,
+    )
     # Get statistics on the mesh
     part = model.get_part_by_name("__wrap__")
     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))

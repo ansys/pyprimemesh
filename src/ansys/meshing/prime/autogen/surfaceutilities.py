@@ -225,6 +225,36 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("resolve_intersections", ResolveIntersectionResult(model = self._model, json_data = result))
         return ResolveIntersectionResult(model = self._model, json_data = result)
 
+    def smooth_dihedral_face_nodes(self, zonelets : Iterable[int], params : SmoothDihedralFaceNodesParams) -> SmoothDihedralFaceNodesResults:
+        """ Performs a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.
+
+
+        Parameters
+        ----------
+        zonelets : Iterable[int]
+            List of input face zonelet ids.
+        params : SmoothDihedralFaceNodesParams
+            Parameters to control the smoothing operation.
+
+        Returns
+        -------
+        SmoothDihedralFaceNodesResults
+            Return a SmoothDihedralFaceNodesResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.smooth_dihedral_face_nodes(zonelets, params)
+
+        """
+        args = {"zonelets" : zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/SmoothDihedralFaceNodes"
+        self._model._print_logs_before_command("smooth_dihedral_face_nodes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("smooth_dihedral_face_nodes", SmoothDihedralFaceNodesResults(model = self._model, json_data = result))
+        return SmoothDihedralFaceNodesResults(model = self._model, json_data = result)
+
     def refine_at_contacts(self, part_ids : Iterable[int], params : RefineAtContactsParams) -> RefineAtContactsResults:
         """ Refine face elements in contact with other parts.
 
@@ -285,3 +315,66 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("add_thickness", AddThicknessResults(model = self._model, json_data = result))
         return AddThicknessResults(model = self._model, json_data = result)
+
+    def create_boi(self, scope : ScopeDefinition, params : CreateBOIParams) -> CreateBOIResults:
+        """ Creates BOI to the selected list of face zonelet ids.
+
+
+        Parameters
+        ----------
+        scope : ScopeDefinition
+            Scope of zonelets.
+        params : CreateBOIParams
+            Parameters to control the BOI creation operation.
+
+        Returns
+        -------
+        CreateBOIResults
+            Returns the BOIResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.create_surface_boi(zonelets, params)
+
+        """
+        args = {"scope" : scope._jsonify(),
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/CreateBOI"
+        self._model._print_logs_before_command("create_boi", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_boi", CreateBOIResults(model = self._model, json_data = result))
+        return CreateBOIResults(model = self._model, json_data = result)
+
+    def create_contact_patch(self, source_scope : ScopeDefinition, target_scope : ScopeDefinition, params : CreateContactPatchParams) -> CreateContactPatchResults:
+        """ Creates contact patches.
+
+
+        Parameters
+        ----------
+        source_scope : ScopeDefinition
+            Scope of source zonelets.
+        target_scope : ScopeDefinition
+            Scope of target zonelets which is to be offsetted for contact patch creation.
+        params : CreateContactPatchParams
+            Parameters to control the contact patch creation operation.
+
+        Returns
+        -------
+        CreateContactPatchResults
+            Returns the CreateContactPatchResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.create_contact_patch(zonelets, params)
+
+        """
+        args = {"source_scope" : source_scope._jsonify(),
+        "target_scope" : target_scope._jsonify(),
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/CreateContactPatch"
+        self._model._print_logs_before_command("create_contact_patch", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_contact_patch", CreateContactPatchResults(model = self._model, json_data = result))
+        return CreateContactPatchResults(model = self._model, json_data = result)

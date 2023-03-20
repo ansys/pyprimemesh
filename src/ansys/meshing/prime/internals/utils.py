@@ -1,13 +1,12 @@
-from contextlib import contextmanager
-import os
 import logging
+import os
 import shutil
 import subprocess
+from contextlib import contextmanager
 from typing import Optional
 
-import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.config as config
-
+import ansys.meshing.prime.internals.defaults as defaults
 
 _LOCAL_PORTS = []
 
@@ -41,8 +40,8 @@ def get_child_processes(process):
 
 
 def terminate_process(process):
-    import sys
     import signal
+    import sys
 
     if sys.platform.startswith('win32'):
         # process.send_signal(signal.CTRL_C_EVENT)
@@ -109,7 +108,7 @@ def launch_prime_github_container(
     if license_file is None:
         raise ValueError('Licensing information to launch container not found')
     if version is None:
-        version = 'latest'
+        version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
     docker_command = [
         'docker',
         'run',

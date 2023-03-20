@@ -8,6 +8,231 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
+class CellStatisticsParams(CoreObject):
+    """Parameters used to calculate cell statistics.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            get_volume: bool):
+        self._get_volume = get_volume
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            get_volume: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CellStatisticsParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CellStatisticsParams object with default parameters.
+        get_volume: bool, optional
+            Provides option to compute and get cumulative cell volume.
+        json_data: dict, optional
+            JSON dictionary to create a CellStatisticsParams object with provided parameters.
+
+        Examples
+        --------
+        >>> cell_statistics_params = prime.CellStatisticsParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["getVolume"] if "getVolume" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [get_volume])
+            if all_field_specified:
+                self.__initialize(
+                    get_volume)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CellStatisticsParams")
+                    json_data = param_json["CellStatisticsParams"] if "CellStatisticsParams" in param_json else {}
+                    self.__initialize(
+                        get_volume if get_volume is not None else ( CellStatisticsParams._default_params["get_volume"] if "get_volume" in CellStatisticsParams._default_params else (json_data["getVolume"] if "getVolume" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            get_volume: bool = None):
+        """Set the default values of CellStatisticsParams.
+
+        Parameters
+        ----------
+        get_volume: bool, optional
+            Provides option to compute and get cumulative cell volume.
+        """
+        args = locals()
+        [CellStatisticsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CellStatisticsParams.
+
+        Examples
+        --------
+        >>> CellStatisticsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CellStatisticsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._get_volume is not None:
+            json_data["getVolume"] = self._get_volume
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "get_volume :  %s" % (self._get_volume)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def get_volume(self) -> bool:
+        """Provides option to compute and get cumulative cell volume.
+        """
+        return self._get_volume
+
+    @get_volume.setter
+    def get_volume(self, value: bool):
+        self._get_volume = value
+
+class CellStatisticsResults(CoreObject):
+    """Results of cell statistics information.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            volume: float,
+            error_code: ErrorCode):
+        self._volume = volume
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            volume: float = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CellStatisticsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CellStatisticsResults object with default parameters.
+        volume: float, optional
+            Cumulative volume of all the cell elements of selected entities.
+        error_code: ErrorCode, optional
+            Error code associated with the cell statistics function.
+        json_data: dict, optional
+            JSON dictionary to create a CellStatisticsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> cell_statistics_results = prime.CellStatisticsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["volume"] if "volume" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [volume, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    volume,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CellStatisticsResults")
+                    json_data = param_json["CellStatisticsResults"] if "CellStatisticsResults" in param_json else {}
+                    self.__initialize(
+                        volume if volume is not None else ( CellStatisticsResults._default_params["volume"] if "volume" in CellStatisticsResults._default_params else (json_data["volume"] if "volume" in json_data else None)),
+                        error_code if error_code is not None else ( CellStatisticsResults._default_params["error_code"] if "error_code" in CellStatisticsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            volume: float = None,
+            error_code: ErrorCode = None):
+        """Set the default values of CellStatisticsResults.
+
+        Parameters
+        ----------
+        volume: float, optional
+            Cumulative volume of all the cell elements of selected entities.
+        error_code: ErrorCode, optional
+            Error code associated with the cell statistics function.
+        """
+        args = locals()
+        [CellStatisticsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CellStatisticsResults.
+
+        Examples
+        --------
+        >>> CellStatisticsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CellStatisticsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._volume is not None:
+            json_data["volume"] = self._volume
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "volume :  %s\nerror_code :  %s" % (self._volume, self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def volume(self) -> float:
+        """Cumulative volume of all the cell elements of selected entities.
+        """
+        return self._volume
+
+    @volume.setter
+    def volume(self, value: float):
+        self._volume = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the cell statistics function.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
 class FaceConnectivityResults(CoreObject):
     """Result of the face connectivity information.
     """
@@ -26,15 +251,15 @@ class FaceConnectivityResults(CoreObject):
             num_face_list_per_face_zonelet: Iterable[int],
             face_list: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._face_zonelet_ids = face_zonelet_ids if isinstance(face_zonelet_ids, np.ndarray) else np.array(face_zonelet_ids, dtype=np.int32)
-        self._topo_face_ids = topo_face_ids if isinstance(topo_face_ids, np.ndarray) else np.array(topo_face_ids, dtype=np.int32)
-        self._mesh_face_ids = mesh_face_ids if isinstance(mesh_face_ids, np.ndarray) else np.array(mesh_face_ids, dtype=np.int32)
-        self._face_zone_ids = face_zone_ids if isinstance(face_zone_ids, np.ndarray) else np.array(face_zone_ids, dtype=np.int32)
+        self._face_zonelet_ids = face_zonelet_ids if isinstance(face_zonelet_ids, np.ndarray) else np.array(face_zonelet_ids, dtype=np.int32) if face_zonelet_ids is not None else None
+        self._topo_face_ids = topo_face_ids if isinstance(topo_face_ids, np.ndarray) else np.array(topo_face_ids, dtype=np.int32) if topo_face_ids is not None else None
+        self._mesh_face_ids = mesh_face_ids if isinstance(mesh_face_ids, np.ndarray) else np.array(mesh_face_ids, dtype=np.int32) if mesh_face_ids is not None else None
+        self._face_zone_ids = face_zone_ids if isinstance(face_zone_ids, np.ndarray) else np.array(face_zone_ids, dtype=np.int32) if face_zone_ids is not None else None
         self._face_zone_names = face_zone_names
-        self._num_nodes_per_face_zonelet = num_nodes_per_face_zonelet if isinstance(num_nodes_per_face_zonelet, np.ndarray) else np.array(num_nodes_per_face_zonelet, dtype=np.int32)
-        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double)
-        self._num_face_list_per_face_zonelet = num_face_list_per_face_zonelet if isinstance(num_face_list_per_face_zonelet, np.ndarray) else np.array(num_face_list_per_face_zonelet, dtype=np.int32)
-        self._face_list = face_list if isinstance(face_list, np.ndarray) else np.array(face_list, dtype=np.int32)
+        self._num_nodes_per_face_zonelet = num_nodes_per_face_zonelet if isinstance(num_nodes_per_face_zonelet, np.ndarray) else np.array(num_nodes_per_face_zonelet, dtype=np.int32) if num_nodes_per_face_zonelet is not None else None
+        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double) if node_coords is not None else None
+        self._num_face_list_per_face_zonelet = num_face_list_per_face_zonelet if isinstance(num_face_list_per_face_zonelet, np.ndarray) else np.array(num_face_list_per_face_zonelet, dtype=np.int32) if num_face_list_per_face_zonelet is not None else None
+        self._face_list = face_list if isinstance(face_list, np.ndarray) else np.array(face_list, dtype=np.int32) if face_list is not None else None
 
     def __init__(
             self,
@@ -86,16 +311,16 @@ class FaceConnectivityResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["faceZoneletIDs"],
-                json_data["topoFaceIDs"],
-                json_data["meshFaceIDs"],
-                json_data["faceZoneIDs"],
-                json_data["faceZoneNames"],
-                json_data["numNodesPerFaceZonelet"],
-                json_data["nodeCoords"],
-                json_data["numFaceListPerFaceZonelet"],
-                json_data["faceList"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["faceZoneletIDs"] if "faceZoneletIDs" in json_data else None,
+                json_data["topoFaceIDs"] if "topoFaceIDs" in json_data else None,
+                json_data["meshFaceIDs"] if "meshFaceIDs" in json_data else None,
+                json_data["faceZoneIDs"] if "faceZoneIDs" in json_data else None,
+                json_data["faceZoneNames"] if "faceZoneNames" in json_data else None,
+                json_data["numNodesPerFaceZonelet"] if "numNodesPerFaceZonelet" in json_data else None,
+                json_data["nodeCoords"] if "nodeCoords" in json_data else None,
+                json_data["numFaceListPerFaceZonelet"] if "numFaceListPerFaceZonelet" in json_data else None,
+                json_data["faceList"] if "faceList" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, face_zonelet_ids, topo_face_ids, mesh_face_ids, face_zone_ids, face_zone_names, num_nodes_per_face_zonelet, node_coords, num_face_list_per_face_zonelet, face_list])
             if all_field_specified:
@@ -114,18 +339,19 @@ class FaceConnectivityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FaceConnectivityResults")["FaceConnectivityResults"]
+                    param_json = model._communicator.initialize_params(model, "FaceConnectivityResults")
+                    json_data = param_json["FaceConnectivityResults"] if "FaceConnectivityResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( FaceConnectivityResults._default_params["error_code"] if "error_code" in FaceConnectivityResults._default_params else ErrorCode(json_data["errorCode"])),
-                        face_zonelet_ids if face_zonelet_ids is not None else ( FaceConnectivityResults._default_params["face_zonelet_ids"] if "face_zonelet_ids" in FaceConnectivityResults._default_params else json_data["faceZoneletIDs"]),
-                        topo_face_ids if topo_face_ids is not None else ( FaceConnectivityResults._default_params["topo_face_ids"] if "topo_face_ids" in FaceConnectivityResults._default_params else json_data["topoFaceIDs"]),
-                        mesh_face_ids if mesh_face_ids is not None else ( FaceConnectivityResults._default_params["mesh_face_ids"] if "mesh_face_ids" in FaceConnectivityResults._default_params else json_data["meshFaceIDs"]),
-                        face_zone_ids if face_zone_ids is not None else ( FaceConnectivityResults._default_params["face_zone_ids"] if "face_zone_ids" in FaceConnectivityResults._default_params else json_data["faceZoneIDs"]),
-                        face_zone_names if face_zone_names is not None else ( FaceConnectivityResults._default_params["face_zone_names"] if "face_zone_names" in FaceConnectivityResults._default_params else json_data["faceZoneNames"]),
-                        num_nodes_per_face_zonelet if num_nodes_per_face_zonelet is not None else ( FaceConnectivityResults._default_params["num_nodes_per_face_zonelet"] if "num_nodes_per_face_zonelet" in FaceConnectivityResults._default_params else json_data["numNodesPerFaceZonelet"]),
-                        node_coords if node_coords is not None else ( FaceConnectivityResults._default_params["node_coords"] if "node_coords" in FaceConnectivityResults._default_params else json_data["nodeCoords"]),
-                        num_face_list_per_face_zonelet if num_face_list_per_face_zonelet is not None else ( FaceConnectivityResults._default_params["num_face_list_per_face_zonelet"] if "num_face_list_per_face_zonelet" in FaceConnectivityResults._default_params else json_data["numFaceListPerFaceZonelet"]),
-                        face_list if face_list is not None else ( FaceConnectivityResults._default_params["face_list"] if "face_list" in FaceConnectivityResults._default_params else json_data["faceList"]))
+                        error_code if error_code is not None else ( FaceConnectivityResults._default_params["error_code"] if "error_code" in FaceConnectivityResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        face_zonelet_ids if face_zonelet_ids is not None else ( FaceConnectivityResults._default_params["face_zonelet_ids"] if "face_zonelet_ids" in FaceConnectivityResults._default_params else (json_data["faceZoneletIDs"] if "faceZoneletIDs" in json_data else None)),
+                        topo_face_ids if topo_face_ids is not None else ( FaceConnectivityResults._default_params["topo_face_ids"] if "topo_face_ids" in FaceConnectivityResults._default_params else (json_data["topoFaceIDs"] if "topoFaceIDs" in json_data else None)),
+                        mesh_face_ids if mesh_face_ids is not None else ( FaceConnectivityResults._default_params["mesh_face_ids"] if "mesh_face_ids" in FaceConnectivityResults._default_params else (json_data["meshFaceIDs"] if "meshFaceIDs" in json_data else None)),
+                        face_zone_ids if face_zone_ids is not None else ( FaceConnectivityResults._default_params["face_zone_ids"] if "face_zone_ids" in FaceConnectivityResults._default_params else (json_data["faceZoneIDs"] if "faceZoneIDs" in json_data else None)),
+                        face_zone_names if face_zone_names is not None else ( FaceConnectivityResults._default_params["face_zone_names"] if "face_zone_names" in FaceConnectivityResults._default_params else (json_data["faceZoneNames"] if "faceZoneNames" in json_data else None)),
+                        num_nodes_per_face_zonelet if num_nodes_per_face_zonelet is not None else ( FaceConnectivityResults._default_params["num_nodes_per_face_zonelet"] if "num_nodes_per_face_zonelet" in FaceConnectivityResults._default_params else (json_data["numNodesPerFaceZonelet"] if "numNodesPerFaceZonelet" in json_data else None)),
+                        node_coords if node_coords is not None else ( FaceConnectivityResults._default_params["node_coords"] if "node_coords" in FaceConnectivityResults._default_params else (json_data["nodeCoords"] if "nodeCoords" in json_data else None)),
+                        num_face_list_per_face_zonelet if num_face_list_per_face_zonelet is not None else ( FaceConnectivityResults._default_params["num_face_list_per_face_zonelet"] if "num_face_list_per_face_zonelet" in FaceConnectivityResults._default_params else (json_data["numFaceListPerFaceZonelet"] if "numFaceListPerFaceZonelet" in json_data else None)),
+                        face_list if face_list is not None else ( FaceConnectivityResults._default_params["face_list"] if "face_list" in FaceConnectivityResults._default_params else (json_data["faceList"] if "faceList" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -187,16 +413,26 @@ class FaceConnectivityResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["faceZoneletIDs"] = self._face_zonelet_ids
-        json_data["topoFaceIDs"] = self._topo_face_ids
-        json_data["meshFaceIDs"] = self._mesh_face_ids
-        json_data["faceZoneIDs"] = self._face_zone_ids
-        json_data["faceZoneNames"] = self._face_zone_names
-        json_data["numNodesPerFaceZonelet"] = self._num_nodes_per_face_zonelet
-        json_data["nodeCoords"] = self._node_coords
-        json_data["numFaceListPerFaceZonelet"] = self._num_face_list_per_face_zonelet
-        json_data["faceList"] = self._face_list
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._face_zonelet_ids is not None:
+            json_data["faceZoneletIDs"] = self._face_zonelet_ids
+        if self._topo_face_ids is not None:
+            json_data["topoFaceIDs"] = self._topo_face_ids
+        if self._mesh_face_ids is not None:
+            json_data["meshFaceIDs"] = self._mesh_face_ids
+        if self._face_zone_ids is not None:
+            json_data["faceZoneIDs"] = self._face_zone_ids
+        if self._face_zone_names is not None:
+            json_data["faceZoneNames"] = self._face_zone_names
+        if self._num_nodes_per_face_zonelet is not None:
+            json_data["numNodesPerFaceZonelet"] = self._num_nodes_per_face_zonelet
+        if self._node_coords is not None:
+            json_data["nodeCoords"] = self._node_coords
+        if self._num_face_list_per_face_zonelet is not None:
+            json_data["numFaceListPerFaceZonelet"] = self._num_face_list_per_face_zonelet
+        if self._face_list is not None:
+            json_data["faceList"] = self._face_list
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -323,15 +559,15 @@ class EdgeConnectivityResults(CoreObject):
             edge_list: Iterable[int],
             num_edges_per_edge_zonelet: Iterable[int]):
         self._error_code = ErrorCode(error_code)
-        self._edge_zonelet_ids = edge_zonelet_ids if isinstance(edge_zonelet_ids, np.ndarray) else np.array(edge_zonelet_ids, dtype=np.int32)
-        self._topo_edge_ids = topo_edge_ids if isinstance(topo_edge_ids, np.ndarray) else np.array(topo_edge_ids, dtype=np.int32)
-        self._mesh_edge_ids = mesh_edge_ids if isinstance(mesh_edge_ids, np.ndarray) else np.array(mesh_edge_ids, dtype=np.int32)
-        self._topo_edge_types = topo_edge_types if isinstance(topo_edge_types, np.ndarray) else np.array(topo_edge_types, dtype=np.int32)
-        self._num_nodes_per_edge_zonelet = num_nodes_per_edge_zonelet if isinstance(num_nodes_per_edge_zonelet, np.ndarray) else np.array(num_nodes_per_edge_zonelet, dtype=np.int32)
-        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double)
-        self._num_edge_list_per_edge_zonelet = num_edge_list_per_edge_zonelet if isinstance(num_edge_list_per_edge_zonelet, np.ndarray) else np.array(num_edge_list_per_edge_zonelet, dtype=np.int32)
-        self._edge_list = edge_list if isinstance(edge_list, np.ndarray) else np.array(edge_list, dtype=np.int32)
-        self._num_edges_per_edge_zonelet = num_edges_per_edge_zonelet if isinstance(num_edges_per_edge_zonelet, np.ndarray) else np.array(num_edges_per_edge_zonelet, dtype=np.int32)
+        self._edge_zonelet_ids = edge_zonelet_ids if isinstance(edge_zonelet_ids, np.ndarray) else np.array(edge_zonelet_ids, dtype=np.int32) if edge_zonelet_ids is not None else None
+        self._topo_edge_ids = topo_edge_ids if isinstance(topo_edge_ids, np.ndarray) else np.array(topo_edge_ids, dtype=np.int32) if topo_edge_ids is not None else None
+        self._mesh_edge_ids = mesh_edge_ids if isinstance(mesh_edge_ids, np.ndarray) else np.array(mesh_edge_ids, dtype=np.int32) if mesh_edge_ids is not None else None
+        self._topo_edge_types = topo_edge_types if isinstance(topo_edge_types, np.ndarray) else np.array(topo_edge_types, dtype=np.int32) if topo_edge_types is not None else None
+        self._num_nodes_per_edge_zonelet = num_nodes_per_edge_zonelet if isinstance(num_nodes_per_edge_zonelet, np.ndarray) else np.array(num_nodes_per_edge_zonelet, dtype=np.int32) if num_nodes_per_edge_zonelet is not None else None
+        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double) if node_coords is not None else None
+        self._num_edge_list_per_edge_zonelet = num_edge_list_per_edge_zonelet if isinstance(num_edge_list_per_edge_zonelet, np.ndarray) else np.array(num_edge_list_per_edge_zonelet, dtype=np.int32) if num_edge_list_per_edge_zonelet is not None else None
+        self._edge_list = edge_list if isinstance(edge_list, np.ndarray) else np.array(edge_list, dtype=np.int32) if edge_list is not None else None
+        self._num_edges_per_edge_zonelet = num_edges_per_edge_zonelet if isinstance(num_edges_per_edge_zonelet, np.ndarray) else np.array(num_edges_per_edge_zonelet, dtype=np.int32) if num_edges_per_edge_zonelet is not None else None
 
     def __init__(
             self,
@@ -383,16 +619,16 @@ class EdgeConnectivityResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["edgeZoneletIDs"],
-                json_data["topoEdgeIDs"],
-                json_data["meshEdgeIDs"],
-                json_data["topoEdgeTypes"],
-                json_data["numNodesPerEdgeZonelet"],
-                json_data["nodeCoords"],
-                json_data["numEdgeListPerEdgeZonelet"],
-                json_data["edgeList"],
-                json_data["numEdgesPerEdgeZonelet"])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["edgeZoneletIDs"] if "edgeZoneletIDs" in json_data else None,
+                json_data["topoEdgeIDs"] if "topoEdgeIDs" in json_data else None,
+                json_data["meshEdgeIDs"] if "meshEdgeIDs" in json_data else None,
+                json_data["topoEdgeTypes"] if "topoEdgeTypes" in json_data else None,
+                json_data["numNodesPerEdgeZonelet"] if "numNodesPerEdgeZonelet" in json_data else None,
+                json_data["nodeCoords"] if "nodeCoords" in json_data else None,
+                json_data["numEdgeListPerEdgeZonelet"] if "numEdgeListPerEdgeZonelet" in json_data else None,
+                json_data["edgeList"] if "edgeList" in json_data else None,
+                json_data["numEdgesPerEdgeZonelet"] if "numEdgesPerEdgeZonelet" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, edge_zonelet_ids, topo_edge_ids, mesh_edge_ids, topo_edge_types, num_nodes_per_edge_zonelet, node_coords, num_edge_list_per_edge_zonelet, edge_list, num_edges_per_edge_zonelet])
             if all_field_specified:
@@ -411,18 +647,19 @@ class EdgeConnectivityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "EdgeConnectivityResults")["EdgeConnectivityResults"]
+                    param_json = model._communicator.initialize_params(model, "EdgeConnectivityResults")
+                    json_data = param_json["EdgeConnectivityResults"] if "EdgeConnectivityResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( EdgeConnectivityResults._default_params["error_code"] if "error_code" in EdgeConnectivityResults._default_params else ErrorCode(json_data["errorCode"])),
-                        edge_zonelet_ids if edge_zonelet_ids is not None else ( EdgeConnectivityResults._default_params["edge_zonelet_ids"] if "edge_zonelet_ids" in EdgeConnectivityResults._default_params else json_data["edgeZoneletIDs"]),
-                        topo_edge_ids if topo_edge_ids is not None else ( EdgeConnectivityResults._default_params["topo_edge_ids"] if "topo_edge_ids" in EdgeConnectivityResults._default_params else json_data["topoEdgeIDs"]),
-                        mesh_edge_ids if mesh_edge_ids is not None else ( EdgeConnectivityResults._default_params["mesh_edge_ids"] if "mesh_edge_ids" in EdgeConnectivityResults._default_params else json_data["meshEdgeIDs"]),
-                        topo_edge_types if topo_edge_types is not None else ( EdgeConnectivityResults._default_params["topo_edge_types"] if "topo_edge_types" in EdgeConnectivityResults._default_params else json_data["topoEdgeTypes"]),
-                        num_nodes_per_edge_zonelet if num_nodes_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_nodes_per_edge_zonelet"] if "num_nodes_per_edge_zonelet" in EdgeConnectivityResults._default_params else json_data["numNodesPerEdgeZonelet"]),
-                        node_coords if node_coords is not None else ( EdgeConnectivityResults._default_params["node_coords"] if "node_coords" in EdgeConnectivityResults._default_params else json_data["nodeCoords"]),
-                        num_edge_list_per_edge_zonelet if num_edge_list_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_edge_list_per_edge_zonelet"] if "num_edge_list_per_edge_zonelet" in EdgeConnectivityResults._default_params else json_data["numEdgeListPerEdgeZonelet"]),
-                        edge_list if edge_list is not None else ( EdgeConnectivityResults._default_params["edge_list"] if "edge_list" in EdgeConnectivityResults._default_params else json_data["edgeList"]),
-                        num_edges_per_edge_zonelet if num_edges_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_edges_per_edge_zonelet"] if "num_edges_per_edge_zonelet" in EdgeConnectivityResults._default_params else json_data["numEdgesPerEdgeZonelet"]))
+                        error_code if error_code is not None else ( EdgeConnectivityResults._default_params["error_code"] if "error_code" in EdgeConnectivityResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        edge_zonelet_ids if edge_zonelet_ids is not None else ( EdgeConnectivityResults._default_params["edge_zonelet_ids"] if "edge_zonelet_ids" in EdgeConnectivityResults._default_params else (json_data["edgeZoneletIDs"] if "edgeZoneletIDs" in json_data else None)),
+                        topo_edge_ids if topo_edge_ids is not None else ( EdgeConnectivityResults._default_params["topo_edge_ids"] if "topo_edge_ids" in EdgeConnectivityResults._default_params else (json_data["topoEdgeIDs"] if "topoEdgeIDs" in json_data else None)),
+                        mesh_edge_ids if mesh_edge_ids is not None else ( EdgeConnectivityResults._default_params["mesh_edge_ids"] if "mesh_edge_ids" in EdgeConnectivityResults._default_params else (json_data["meshEdgeIDs"] if "meshEdgeIDs" in json_data else None)),
+                        topo_edge_types if topo_edge_types is not None else ( EdgeConnectivityResults._default_params["topo_edge_types"] if "topo_edge_types" in EdgeConnectivityResults._default_params else (json_data["topoEdgeTypes"] if "topoEdgeTypes" in json_data else None)),
+                        num_nodes_per_edge_zonelet if num_nodes_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_nodes_per_edge_zonelet"] if "num_nodes_per_edge_zonelet" in EdgeConnectivityResults._default_params else (json_data["numNodesPerEdgeZonelet"] if "numNodesPerEdgeZonelet" in json_data else None)),
+                        node_coords if node_coords is not None else ( EdgeConnectivityResults._default_params["node_coords"] if "node_coords" in EdgeConnectivityResults._default_params else (json_data["nodeCoords"] if "nodeCoords" in json_data else None)),
+                        num_edge_list_per_edge_zonelet if num_edge_list_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_edge_list_per_edge_zonelet"] if "num_edge_list_per_edge_zonelet" in EdgeConnectivityResults._default_params else (json_data["numEdgeListPerEdgeZonelet"] if "numEdgeListPerEdgeZonelet" in json_data else None)),
+                        edge_list if edge_list is not None else ( EdgeConnectivityResults._default_params["edge_list"] if "edge_list" in EdgeConnectivityResults._default_params else (json_data["edgeList"] if "edgeList" in json_data else None)),
+                        num_edges_per_edge_zonelet if num_edges_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_edges_per_edge_zonelet"] if "num_edges_per_edge_zonelet" in EdgeConnectivityResults._default_params else (json_data["numEdgesPerEdgeZonelet"] if "numEdgesPerEdgeZonelet" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -484,16 +721,26 @@ class EdgeConnectivityResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["edgeZoneletIDs"] = self._edge_zonelet_ids
-        json_data["topoEdgeIDs"] = self._topo_edge_ids
-        json_data["meshEdgeIDs"] = self._mesh_edge_ids
-        json_data["topoEdgeTypes"] = self._topo_edge_types
-        json_data["numNodesPerEdgeZonelet"] = self._num_nodes_per_edge_zonelet
-        json_data["nodeCoords"] = self._node_coords
-        json_data["numEdgeListPerEdgeZonelet"] = self._num_edge_list_per_edge_zonelet
-        json_data["edgeList"] = self._edge_list
-        json_data["numEdgesPerEdgeZonelet"] = self._num_edges_per_edge_zonelet
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._edge_zonelet_ids is not None:
+            json_data["edgeZoneletIDs"] = self._edge_zonelet_ids
+        if self._topo_edge_ids is not None:
+            json_data["topoEdgeIDs"] = self._topo_edge_ids
+        if self._mesh_edge_ids is not None:
+            json_data["meshEdgeIDs"] = self._mesh_edge_ids
+        if self._topo_edge_types is not None:
+            json_data["topoEdgeTypes"] = self._topo_edge_types
+        if self._num_nodes_per_edge_zonelet is not None:
+            json_data["numNodesPerEdgeZonelet"] = self._num_nodes_per_edge_zonelet
+        if self._node_coords is not None:
+            json_data["nodeCoords"] = self._node_coords
+        if self._num_edge_list_per_edge_zonelet is not None:
+            json_data["numEdgeListPerEdgeZonelet"] = self._num_edge_list_per_edge_zonelet
+        if self._edge_list is not None:
+            json_data["edgeList"] = self._edge_list
+        if self._num_edges_per_edge_zonelet is not None:
+            json_data["numEdgesPerEdgeZonelet"] = self._num_edges_per_edge_zonelet
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -614,7 +861,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
             face_connectivity_result_per_part: List[FaceConnectivityResults],
             edge_connectivity_result_per_part: List[EdgeConnectivityResults]):
         self._error_code = ErrorCode(error_code)
-        self._part_ids = part_ids if isinstance(part_ids, np.ndarray) else np.array(part_ids, dtype=np.int32)
+        self._part_ids = part_ids if isinstance(part_ids, np.ndarray) else np.array(part_ids, dtype=np.int32) if part_ids is not None else None
         self._face_connectivity_result_per_part = face_connectivity_result_per_part
         self._edge_connectivity_result_per_part = edge_connectivity_result_per_part
 
@@ -650,10 +897,10 @@ class FaceAndEdgeConnectivityResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]),
-                json_data["partIDs"],
-                [FaceConnectivityResults(model = model, json_data = data) for data in json_data["faceConnectivityResultPerPart"]],
-                [EdgeConnectivityResults(model = model, json_data = data) for data in json_data["edgeConnectivityResultPerPart"]])
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["partIDs"] if "partIDs" in json_data else None,
+                [FaceConnectivityResults(model = model, json_data = data) for data in json_data["faceConnectivityResultPerPart"]] if "faceConnectivityResultPerPart" in json_data else None,
+                [EdgeConnectivityResults(model = model, json_data = data) for data in json_data["edgeConnectivityResultPerPart"]] if "edgeConnectivityResultPerPart" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [error_code, part_ids, face_connectivity_result_per_part, edge_connectivity_result_per_part])
             if all_field_specified:
@@ -666,12 +913,13 @@ class FaceAndEdgeConnectivityResults(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityResults")["FaceAndEdgeConnectivityResults"]
+                    param_json = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityResults")
+                    json_data = param_json["FaceAndEdgeConnectivityResults"] if "FaceAndEdgeConnectivityResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( FaceAndEdgeConnectivityResults._default_params["error_code"] if "error_code" in FaceAndEdgeConnectivityResults._default_params else ErrorCode(json_data["errorCode"])),
-                        part_ids if part_ids is not None else ( FaceAndEdgeConnectivityResults._default_params["part_ids"] if "part_ids" in FaceAndEdgeConnectivityResults._default_params else json_data["partIDs"]),
-                        face_connectivity_result_per_part if face_connectivity_result_per_part is not None else ( FaceAndEdgeConnectivityResults._default_params["face_connectivity_result_per_part"] if "face_connectivity_result_per_part" in FaceAndEdgeConnectivityResults._default_params else [FaceConnectivityResults(model = model, json_data = data) for data in json_data["faceConnectivityResultPerPart"]]),
-                        edge_connectivity_result_per_part if edge_connectivity_result_per_part is not None else ( FaceAndEdgeConnectivityResults._default_params["edge_connectivity_result_per_part"] if "edge_connectivity_result_per_part" in FaceAndEdgeConnectivityResults._default_params else [EdgeConnectivityResults(model = model, json_data = data) for data in json_data["edgeConnectivityResultPerPart"]]))
+                        error_code if error_code is not None else ( FaceAndEdgeConnectivityResults._default_params["error_code"] if "error_code" in FaceAndEdgeConnectivityResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        part_ids if part_ids is not None else ( FaceAndEdgeConnectivityResults._default_params["part_ids"] if "part_ids" in FaceAndEdgeConnectivityResults._default_params else (json_data["partIDs"] if "partIDs" in json_data else None)),
+                        face_connectivity_result_per_part if face_connectivity_result_per_part is not None else ( FaceAndEdgeConnectivityResults._default_params["face_connectivity_result_per_part"] if "face_connectivity_result_per_part" in FaceAndEdgeConnectivityResults._default_params else [FaceConnectivityResults(model = model, json_data = data) for data in (json_data["faceConnectivityResultPerPart"] if "faceConnectivityResultPerPart" in json_data else None)]),
+                        edge_connectivity_result_per_part if edge_connectivity_result_per_part is not None else ( FaceAndEdgeConnectivityResults._default_params["edge_connectivity_result_per_part"] if "edge_connectivity_result_per_part" in FaceAndEdgeConnectivityResults._default_params else [EdgeConnectivityResults(model = model, json_data = data) for data in (json_data["edgeConnectivityResultPerPart"] if "edgeConnectivityResultPerPart" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -715,10 +963,14 @@ class FaceAndEdgeConnectivityResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
-        json_data["partIDs"] = self._part_ids
-        json_data["faceConnectivityResultPerPart"] = [data._jsonify() for data in self._face_connectivity_result_per_part]
-        json_data["edgeConnectivityResultPerPart"] = [data._jsonify() for data in self._edge_connectivity_result_per_part]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._part_ids is not None:
+            json_data["partIDs"] = self._part_ids
+        if self._face_connectivity_result_per_part is not None:
+            json_data["faceConnectivityResultPerPart"] = [data._jsonify() for data in self._face_connectivity_result_per_part]
+        if self._edge_connectivity_result_per_part is not None:
+            json_data["edgeConnectivityResultPerPart"] = [data._jsonify() for data in self._edge_connectivity_result_per_part]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -805,8 +1057,8 @@ class FaceAndEdgeConnectivityParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["reorderFaceZoneletsMidNodes"],
-                json_data["reorderEdgeZoneletsMidNodes"])
+                json_data["reorderFaceZoneletsMidNodes"] if "reorderFaceZoneletsMidNodes" in json_data else None,
+                json_data["reorderEdgeZoneletsMidNodes"] if "reorderEdgeZoneletsMidNodes" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [reorder_face_zonelets_mid_nodes, reorder_edge_zonelets_mid_nodes])
             if all_field_specified:
@@ -817,10 +1069,11 @@ class FaceAndEdgeConnectivityParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityParams")["FaceAndEdgeConnectivityParams"]
+                    param_json = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityParams")
+                    json_data = param_json["FaceAndEdgeConnectivityParams"] if "FaceAndEdgeConnectivityParams" in param_json else {}
                     self.__initialize(
-                        reorder_face_zonelets_mid_nodes if reorder_face_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_face_zonelets_mid_nodes"] if "reorder_face_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else json_data["reorderFaceZoneletsMidNodes"]),
-                        reorder_edge_zonelets_mid_nodes if reorder_edge_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_edge_zonelets_mid_nodes"] if "reorder_edge_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else json_data["reorderEdgeZoneletsMidNodes"]))
+                        reorder_face_zonelets_mid_nodes if reorder_face_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_face_zonelets_mid_nodes"] if "reorder_face_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else (json_data["reorderFaceZoneletsMidNodes"] if "reorderFaceZoneletsMidNodes" in json_data else None)),
+                        reorder_edge_zonelets_mid_nodes if reorder_edge_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_edge_zonelets_mid_nodes"] if "reorder_edge_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else (json_data["reorderEdgeZoneletsMidNodes"] if "reorderEdgeZoneletsMidNodes" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -858,8 +1111,10 @@ class FaceAndEdgeConnectivityParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["reorderFaceZoneletsMidNodes"] = self._reorder_face_zonelets_mid_nodes
-        json_data["reorderEdgeZoneletsMidNodes"] = self._reorder_edge_zonelets_mid_nodes
+        if self._reorder_face_zonelets_mid_nodes is not None:
+            json_data["reorderFaceZoneletsMidNodes"] = self._reorder_face_zonelets_mid_nodes
+        if self._reorder_edge_zonelets_mid_nodes is not None:
+            json_data["reorderEdgeZoneletsMidNodes"] = self._reorder_edge_zonelets_mid_nodes
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

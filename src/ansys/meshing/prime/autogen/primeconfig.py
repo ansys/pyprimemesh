@@ -8,7 +8,7 @@ import numpy as np
 
 
 class ErrorCode(enum.IntEnum):
-    """Error codes associated with the failure of Prime operation.
+    """Error codes associated with the failure of PyPrimeMesh operation.
     """
     NOERROR = 0
     """No error."""
@@ -36,6 +36,8 @@ class ErrorCode(enum.IntEnum):
     """Auto sizing must be of volumetric type."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
+    FREEZEMESHERROR = 30
+    """Cannot remesh freezed mesh."""
     SURFERINVALIDCONSTANTSIZE = 40
     """Invalid size for constant size surface meshing."""
     SURFERINVALIDMINORMAXSIZES = 41
@@ -48,6 +50,12 @@ class ErrorCode(enum.IntEnum):
     """Invalid number of rings input for the local surface mesh operation."""
     SURFERCANNOTREMESHPERIODICZONELETS = 45
     """Cannot remesh periodic face zonelets."""
+    SUBTRACTVOLUMEFAILED = 47
+    """Failed to subtract volumes."""
+    INTERSECTIONINTARGETVOLUMES = 48
+    """Found overlapping or intersecting target volumes."""
+    INTERSECTIONINCUTTERVOLUMES = 49
+    """Found overlapping or intersecting cutter volumes."""
     SCAFFOLDERBADINPUTEMPTYTOPO = 50
     """Incorrect input. No topo faces or edges in input."""
     SCAFFOLDERBADINPUTNOFREEFACES = 51
@@ -110,6 +118,8 @@ class ErrorCode(enum.IntEnum):
     """Quadratic tetrahedral meshing is not supported with prism."""
     EXTRACTVOLUMESFAILED = 132
     """Extract volumes failed."""
+    PERIODICSURFACESNOTSUPPORTEDFORPRISMS = 135
+    """Periodic surfaces selected for prism generation are not supported."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -150,6 +160,28 @@ class ErrorCode(enum.IntEnum):
     """Separation failed."""
     ZONELETSARENOTOFSAMEDIMENSION = 374
     """Zonelets are not of same dimension."""
+    ADDTHICKNESSRESULTSFAILED = 380
+    """Adding thickness failed."""
+    BOIRESULTSFAILED = 381
+    """BOI creation failed."""
+    CREATEBOI_INVALIDSCALE = 382
+    """BOI creation failed. Scale factors should not be less than one."""
+    CREATEBOI_INVALIDFLOWDIRECTION = 383
+    """BOI creation failed. Invalid flow or wake direction."""
+    CREATEBOI_IVALIDWRAPMESHSIZE = 384
+    """BOI creation failed. Wrap cannot be performed with invalid mesh size."""
+    CREATEBOI_INVALIDWAKELEVELS = 385
+    """BOI creation failed. Invalid wake levels input."""
+    CREATEBOI_INVALIDTYPEFORWRAP = 386
+    """BOI creation failed. Wrapping is invalid for this BOI type."""
+    CREATECONTACTPATCH_INVALIDOFFSETDISTANCE = 387
+    """Contact patch creation process failed. Scale factors should not be less than zero."""
+    CREATECONTACTPATCH_INVALIDTOLERANCEVALUE = 390
+    """Contact patch creation process failed. Tolerance value should not be less than zero."""
+    CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS = 388
+    """Contact patch creation process failed. Invalid contact patch creation axis."""
+    CONTACTPATCHRESULTSFAILED = 389
+    """Contact patch creation process failed. Check the inputs."""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Size field computation failed."""
     INVALIDSIZECONTROLS = 401
@@ -202,6 +234,22 @@ class ErrorCode(enum.IntEnum):
     """Writing size field failed."""
     MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH = 533
     """Mesh not found to export fluent meshing mesh."""
+    MATCHEDMESHOPTIONINVALID = 850
+    """Invalid option chosen to connect two different parts."""
+    COLOCATEMATCHEDNODESFAILED = 851
+    """Colocation of matched nodes failed."""
+    IMPRINTBOUNDARYNODESFAILED = 852
+    """Imprint of boundary nodes failed."""
+    IMPRINTBOUNDARYEDGESFAILED = 853
+    """Imprint of boundary edges failed."""
+    SPLITINTERSECTINGBOUNDARYEDGESFAILED = 854
+    """Splitting of intersecting boundary edges failed."""
+    MATCHINTERIORFAILED = 855
+    """Matching of interior region of overlap failed."""
+    TOLERANCEVALUEINVALID = 856
+    """Invalid tolerance value specified."""
+    SOURCEORTARGETNOTSPECIFIED = 857
+    """No target or source faces specified."""
     NOTSUPPORTEDFORTOPOLOGYPART = 1200
     """Not supported for part with topology data."""
     NOTSUPPORTEDFORHIGHERORDERMESHPART = 1201
@@ -232,6 +280,8 @@ class ErrorCode(enum.IntEnum):
     """Merge zonelets failed."""
     MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS = 1311
     """Merge small zonelets option is supported for only face zonelets."""
+    INVALIDINPUTVOLUMES = 1312
+    """Invalid input volumes."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
     INVALIDSIZECONTROLINPUTS = 1501
@@ -306,6 +356,8 @@ class ErrorCode(enum.IntEnum):
     """Collinear or duplicate points given to define plane."""
     INVALIDREGISTERID = 2806
     """Invalid register id provided. Register ids between 1 to 28 are valid."""
+    SURFACEFEATURETYPENOTSUPPORTED = 2807
+    """Surface search for provided feature type is not supported."""
     VOLUMESEARCHPARTWITHMESHNOTFOUND = 2850
     """Part with mesh not found for volume quality check."""
     VOLUMESEARCHFAILED = 2851
@@ -322,6 +374,14 @@ class ErrorCode(enum.IntEnum):
     """Failed to union input zonelets."""
     REFINEATCONTACTSFAILED = 2908
     """Failed to refine at contacts."""
+    RECOVERPERIODICSURFACESFAILED = 2909
+    """Unable to recover periodic surfaces."""
+    RECOVERPERIODICSURFACESINVALIDSCOPE = 2910
+    """Invalid scope input for periodic surface recovery."""
+    CHECKPERIODICPAIRSFAILED = 2911
+    """Could not find a matching periodic face pair."""
+    PERIODICSURFACESEDGESMISMATCH = 2912
+    """Edge entities do not match on periodic source and target surfaces."""
     TRANSFORMATIONFAILED = 3000
     """Transformation failed."""
     SCALINGFAILED = 3001
@@ -432,7 +492,7 @@ class ErrorCode(enum.IntEnum):
     """Tool zonelets do not form a watertight volume."""
 
 class WarningCode(enum.IntEnum):
-    """Warning codes associated with the Prime operation.
+    """Warning codes associated with the PyPrimeMesh operation.
     """
     NOWARNING = 0
     """No warnings."""
@@ -480,6 +540,8 @@ class WarningCode(enum.IntEnum):
     """External open topofaces found when computing topovolumes."""
     FACEZONELETSWITHOUTVOLUMES = 5604
     """Face zonelets have no volume associated to them."""
+    JOINEDZONELETSFROMMULTIPLEVOLUMES = 5605
+    """Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets."""
     WRAPPER_SIZECONTROLNOTDEFINED = 6001
     """No size controls provided for wrapper."""
     WRAPPER_SIZECONTROLNOTSUPPORTED = 6002

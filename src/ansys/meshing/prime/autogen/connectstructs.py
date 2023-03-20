@@ -26,13 +26,15 @@ class StitchType(enum.IntEnum):
     FREEFREE = 1
     """Stitch surfaces at free boundary edges."""
 
-class MatchNodesOption(enum.IntEnum):
-    """Type to specify treatment of matched nodes. This is for internal use only.
+class MatchedMeshOption(enum.IntEnum):
+    """Type to specify treatment of matched mesh.
     """
+    NONE = 0
+    """No action to be taken for matched mesh."""
     TRIMONESIDE = 3
-    """Delete the matching faces on one side and merge the matching nodes at mid location (works only within a single part). This is for internal use only."""
+    """Delete matched faces on one side and merge matched nodes at middle locations (works only within a single part)."""
     TRIMTWOSIDES = 4
-    """Delete the matching faces on both sides and merge the matching nodes at mid location (works only within a single part). This is for internal use only."""
+    """Delete matched faces on both sides and merge matched nodes at middle locations (works only within a single part)."""
 
 class ConnectResults(CoreObject):
     """Results associated with the connection operations.
@@ -41,13 +43,16 @@ class ConnectResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ConnectResults.
@@ -58,6 +63,8 @@ class ConnectResults(CoreObject):
             Model to create a ConnectResults object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the operation.
         json_data: dict, optional
             JSON dictionary to create a ConnectResults object with provided parameters.
 
@@ -67,19 +74,23 @@ class ConnectResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"]))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    error_code,
+                    warning_codes)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "ConnectResults")["ConnectResults"]
+                    param_json = model._communicator.initialize_params(model, "ConnectResults")
+                    json_data = param_json["ConnectResults"] if "ConnectResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ConnectResults._default_params["error_code"] if "error_code" in ConnectResults._default_params else ErrorCode(json_data["errorCode"])))
+                        error_code if error_code is not None else ( ConnectResults._default_params["error_code"] if "error_code" in ConnectResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ConnectResults._default_params["warning_codes"] if "warning_codes" in ConnectResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -89,13 +100,16 @@ class ConnectResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
         """Set the default values of ConnectResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the operation.
         """
         args = locals()
         [ConnectResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -114,12 +128,15 @@ class ConnectResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["errorCode"] = self._error_code
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "error_code :  %s\nwarning_codes :  %s" % (self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -132,6 +149,16 @@ class ConnectResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the operation.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
 
 class IntersectParams(CoreObject):
     """Parameters used for intersection.
@@ -176,9 +203,9 @@ class IntersectParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["tolerance"],
-                json_data["useAbsoluteTolerance"],
-                json_data["remesh"])
+                json_data["tolerance"] if "tolerance" in json_data else None,
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["remesh"] if "remesh" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [tolerance, use_absolute_tolerance, remesh])
             if all_field_specified:
@@ -190,11 +217,12 @@ class IntersectParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "IntersectParams")["IntersectParams"]
+                    param_json = model._communicator.initialize_params(model, "IntersectParams")
+                    json_data = param_json["IntersectParams"] if "IntersectParams" in param_json else {}
                     self.__initialize(
-                        tolerance if tolerance is not None else ( IntersectParams._default_params["tolerance"] if "tolerance" in IntersectParams._default_params else json_data["tolerance"]),
-                        use_absolute_tolerance if use_absolute_tolerance is not None else ( IntersectParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in IntersectParams._default_params else json_data["useAbsoluteTolerance"]),
-                        remesh if remesh is not None else ( IntersectParams._default_params["remesh"] if "remesh" in IntersectParams._default_params else json_data["remesh"]))
+                        tolerance if tolerance is not None else ( IntersectParams._default_params["tolerance"] if "tolerance" in IntersectParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)),
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( IntersectParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in IntersectParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        remesh if remesh is not None else ( IntersectParams._default_params["remesh"] if "remesh" in IntersectParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -235,9 +263,12 @@ class IntersectParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["tolerance"] = self._tolerance
-        json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
-        json_data["remesh"] = self._remesh
+        if self._tolerance is not None:
+            json_data["tolerance"] = self._tolerance
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._remesh is not None:
+            json_data["remesh"] = self._remesh
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -329,11 +360,11 @@ class JoinParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["tolerance"],
-                json_data["useAbsoluteTolerance"],
-                json_data["remesh"],
-                json_data["matchAngle"],
-                json_data["overlapZoneName"])
+                json_data["tolerance"] if "tolerance" in json_data else None,
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["remesh"] if "remesh" in json_data else None,
+                json_data["matchAngle"] if "matchAngle" in json_data else None,
+                json_data["overlapZoneName"] if "overlapZoneName" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [tolerance, use_absolute_tolerance, remesh, match_angle, overlap_zone_name])
             if all_field_specified:
@@ -347,13 +378,14 @@ class JoinParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "JoinParams")["JoinParams"]
+                    param_json = model._communicator.initialize_params(model, "JoinParams")
+                    json_data = param_json["JoinParams"] if "JoinParams" in param_json else {}
                     self.__initialize(
-                        tolerance if tolerance is not None else ( JoinParams._default_params["tolerance"] if "tolerance" in JoinParams._default_params else json_data["tolerance"]),
-                        use_absolute_tolerance if use_absolute_tolerance is not None else ( JoinParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in JoinParams._default_params else json_data["useAbsoluteTolerance"]),
-                        remesh if remesh is not None else ( JoinParams._default_params["remesh"] if "remesh" in JoinParams._default_params else json_data["remesh"]),
-                        match_angle if match_angle is not None else ( JoinParams._default_params["match_angle"] if "match_angle" in JoinParams._default_params else json_data["matchAngle"]),
-                        overlap_zone_name if overlap_zone_name is not None else ( JoinParams._default_params["overlap_zone_name"] if "overlap_zone_name" in JoinParams._default_params else json_data["overlapZoneName"]))
+                        tolerance if tolerance is not None else ( JoinParams._default_params["tolerance"] if "tolerance" in JoinParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)),
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( JoinParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in JoinParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        remesh if remesh is not None else ( JoinParams._default_params["remesh"] if "remesh" in JoinParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)),
+                        match_angle if match_angle is not None else ( JoinParams._default_params["match_angle"] if "match_angle" in JoinParams._default_params else (json_data["matchAngle"] if "matchAngle" in json_data else None)),
+                        overlap_zone_name if overlap_zone_name is not None else ( JoinParams._default_params["overlap_zone_name"] if "overlap_zone_name" in JoinParams._default_params else (json_data["overlapZoneName"] if "overlapZoneName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -400,11 +432,16 @@ class JoinParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["tolerance"] = self._tolerance
-        json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
-        json_data["remesh"] = self._remesh
-        json_data["matchAngle"] = self._match_angle
-        json_data["overlapZoneName"] = self._overlap_zone_name
+        if self._tolerance is not None:
+            json_data["tolerance"] = self._tolerance
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._remesh is not None:
+            json_data["remesh"] = self._remesh
+        if self._match_angle is not None:
+            json_data["matchAngle"] = self._match_angle
+        if self._overlap_zone_name is not None:
+            json_data["overlapZoneName"] = self._overlap_zone_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -463,6 +500,231 @@ class JoinParams(CoreObject):
     def overlap_zone_name(self, value: str):
         self._overlap_zone_name = value
 
+class SubtractVolumesParams(CoreObject):
+    """Parameters to control the volume subtract operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            ignore_face_zonelets: Iterable[int],
+            check_cutters: bool):
+        self._ignore_face_zonelets = ignore_face_zonelets if isinstance(ignore_face_zonelets, np.ndarray) else np.array(ignore_face_zonelets, dtype=np.int32) if ignore_face_zonelets is not None else None
+        self._check_cutters = check_cutters
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            ignore_face_zonelets: Iterable[int] = None,
+            check_cutters: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SubtractVolumesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SubtractVolumesParams object with default parameters.
+        ignore_face_zonelets: Iterable[int], optional
+            Face zonelet ids that subtract volumes should not remove.(For example, periodic or fluid cap zonelets)
+        check_cutters: bool, optional
+            Option to handle overlapping or intersecting cutter volumes.
+        json_data: dict, optional
+            JSON dictionary to create a SubtractVolumesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> subtract_volumes_params = prime.SubtractVolumesParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["ignoreFaceZonelets"] if "ignoreFaceZonelets" in json_data else None,
+                json_data["checkCutters"] if "checkCutters" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [ignore_face_zonelets, check_cutters])
+            if all_field_specified:
+                self.__initialize(
+                    ignore_face_zonelets,
+                    check_cutters)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SubtractVolumesParams")
+                    json_data = param_json["SubtractVolumesParams"] if "SubtractVolumesParams" in param_json else {}
+                    self.__initialize(
+                        ignore_face_zonelets if ignore_face_zonelets is not None else ( SubtractVolumesParams._default_params["ignore_face_zonelets"] if "ignore_face_zonelets" in SubtractVolumesParams._default_params else (json_data["ignoreFaceZonelets"] if "ignoreFaceZonelets" in json_data else None)),
+                        check_cutters if check_cutters is not None else ( SubtractVolumesParams._default_params["check_cutters"] if "check_cutters" in SubtractVolumesParams._default_params else (json_data["checkCutters"] if "checkCutters" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            ignore_face_zonelets: Iterable[int] = None,
+            check_cutters: bool = None):
+        """Set the default values of SubtractVolumesParams.
+
+        Parameters
+        ----------
+        ignore_face_zonelets: Iterable[int], optional
+            Face zonelet ids that subtract volumes should not remove.(For example, periodic or fluid cap zonelets)
+        check_cutters: bool, optional
+            Option to handle overlapping or intersecting cutter volumes.
+        """
+        args = locals()
+        [SubtractVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SubtractVolumesParams.
+
+        Examples
+        --------
+        >>> SubtractVolumesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SubtractVolumesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._ignore_face_zonelets is not None:
+            json_data["ignoreFaceZonelets"] = self._ignore_face_zonelets
+        if self._check_cutters is not None:
+            json_data["checkCutters"] = self._check_cutters
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "ignore_face_zonelets :  %s\ncheck_cutters :  %s" % (self._ignore_face_zonelets, self._check_cutters)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def ignore_face_zonelets(self) -> Iterable[int]:
+        """Face zonelet ids that subtract volumes should not remove.(For example, periodic or fluid cap zonelets)
+        """
+        return self._ignore_face_zonelets
+
+    @ignore_face_zonelets.setter
+    def ignore_face_zonelets(self, value: Iterable[int]):
+        self._ignore_face_zonelets = value
+
+    @property
+    def check_cutters(self) -> bool:
+        """Option to handle overlapping or intersecting cutter volumes.
+        """
+        return self._check_cutters
+
+    @check_cutters.setter
+    def check_cutters(self, value: bool):
+        self._check_cutters = value
+
+class SubtractVolumesResults(CoreObject):
+    """Results of the volume subtract operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode):
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SubtractVolumesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SubtractVolumesResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with the volume subtract operation.
+        json_data: dict, optional
+            JSON dictionary to create a SubtractVolumesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> subtract_volumes_results = prime.SubtractVolumesResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code])
+            if all_field_specified:
+                self.__initialize(
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SubtractVolumesResults")
+                    json_data = param_json["SubtractVolumesResults"] if "SubtractVolumesResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( SubtractVolumesResults._default_params["error_code"] if "error_code" in SubtractVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None):
+        """Set the default values of SubtractVolumesResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the volume subtract operation.
+        """
+        args = locals()
+        [SubtractVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SubtractVolumesResults.
+
+        Examples
+        --------
+        >>> SubtractVolumesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SubtractVolumesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s" % (self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the volume subtract operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
 class StitchParams(CoreObject):
     """Parameters used for stitch operation.
     """
@@ -516,11 +778,11 @@ class StitchParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["tolerance"],
-                json_data["useAbsoluteTolerance"],
-                json_data["remesh"],
-                json_data["enableMultiThreading"],
-                StitchType(json_data["type"]))
+                json_data["tolerance"] if "tolerance" in json_data else None,
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["remesh"] if "remesh" in json_data else None,
+                json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None,
+                StitchType(json_data["type"] if "type" in json_data else None))
         else:
             all_field_specified = all(arg is not None for arg in [tolerance, use_absolute_tolerance, remesh, enable_multi_threading, type])
             if all_field_specified:
@@ -534,13 +796,14 @@ class StitchParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "StitchParams")["StitchParams"]
+                    param_json = model._communicator.initialize_params(model, "StitchParams")
+                    json_data = param_json["StitchParams"] if "StitchParams" in param_json else {}
                     self.__initialize(
-                        tolerance if tolerance is not None else ( StitchParams._default_params["tolerance"] if "tolerance" in StitchParams._default_params else json_data["tolerance"]),
-                        use_absolute_tolerance if use_absolute_tolerance is not None else ( StitchParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in StitchParams._default_params else json_data["useAbsoluteTolerance"]),
-                        remesh if remesh is not None else ( StitchParams._default_params["remesh"] if "remesh" in StitchParams._default_params else json_data["remesh"]),
-                        enable_multi_threading if enable_multi_threading is not None else ( StitchParams._default_params["enable_multi_threading"] if "enable_multi_threading" in StitchParams._default_params else json_data["enableMultiThreading"]),
-                        type if type is not None else ( StitchParams._default_params["type"] if "type" in StitchParams._default_params else StitchType(json_data["type"])))
+                        tolerance if tolerance is not None else ( StitchParams._default_params["tolerance"] if "tolerance" in StitchParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)),
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( StitchParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in StitchParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        remesh if remesh is not None else ( StitchParams._default_params["remesh"] if "remesh" in StitchParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)),
+                        enable_multi_threading if enable_multi_threading is not None else ( StitchParams._default_params["enable_multi_threading"] if "enable_multi_threading" in StitchParams._default_params else (json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)),
+                        type if type is not None else ( StitchParams._default_params["type"] if "type" in StitchParams._default_params else StitchType(json_data["type"] if "type" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -587,11 +850,16 @@ class StitchParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["tolerance"] = self._tolerance
-        json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
-        json_data["remesh"] = self._remesh
-        json_data["enableMultiThreading"] = self._enable_multi_threading
-        json_data["type"] = self._type
+        if self._tolerance is not None:
+            json_data["tolerance"] = self._tolerance
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._remesh is not None:
+            json_data["remesh"] = self._remesh
+        if self._enable_multi_threading is not None:
+            json_data["enableMultiThreading"] = self._enable_multi_threading
+        if self._type is not None:
+            json_data["type"] = self._type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -651,17 +919,31 @@ class StitchParams(CoreObject):
         self._type = value
 
 class MeshMatchParams(CoreObject):
-    """Parameter to match surface mesh. This is for internal use only.
+    """Parameters to match surface mesh.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            use_absolute_tolerance: bool,
+            gap_tolerance: float,
+            side_tolerance: float,
+            check_interior: bool,
+            matched_mesh_option: MatchedMeshOption):
+        self._use_absolute_tolerance = use_absolute_tolerance
+        self._gap_tolerance = gap_tolerance
+        self._side_tolerance = side_tolerance
+        self._check_interior = check_interior
+        self._matched_mesh_option = MatchedMeshOption(matched_mesh_option)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            use_absolute_tolerance: bool = None,
+            gap_tolerance: float = None,
+            side_tolerance: float = None,
+            check_interior: bool = None,
+            matched_mesh_option: MatchedMeshOption = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MeshMatchParams.
@@ -670,6 +952,16 @@ class MeshMatchParams(CoreObject):
         ----------
         model: Model
             Model to create a MeshMatchParams object with default parameters.
+        use_absolute_tolerance: bool, optional
+            When true, gap tolerance and side tolerance provided are absolute values.
+        gap_tolerance: float, optional
+            Gap tolerance between faces to be matched.
+        side_tolerance: float, optional
+            Side tolerance for matching to the side edges.
+        check_interior: bool, optional
+            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        matched_mesh_option: MatchedMeshOption, optional
+            Option for treatment of matched mesh.
         json_data: dict, optional
             JSON dictionary to create a MeshMatchParams object with provided parameters.
 
@@ -678,17 +970,33 @@ class MeshMatchParams(CoreObject):
         >>> mesh_match_params = prime.MeshMatchParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["gapTolerance"] if "gapTolerance" in json_data else None,
+                json_data["sideTolerance"] if "sideTolerance" in json_data else None,
+                json_data["checkInterior"] if "checkInterior" in json_data else None,
+                MatchedMeshOption(json_data["matchedMeshOption"] if "matchedMeshOption" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [use_absolute_tolerance, gap_tolerance, side_tolerance, check_interior, matched_mesh_option])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    use_absolute_tolerance,
+                    gap_tolerance,
+                    side_tolerance,
+                    check_interior,
+                    matched_mesh_option)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "MeshMatchParams")["MeshMatchParams"]
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "MeshMatchParams")
+                    json_data = param_json["MeshMatchParams"] if "MeshMatchParams" in param_json else {}
+                    self.__initialize(
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( MeshMatchParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in MeshMatchParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        gap_tolerance if gap_tolerance is not None else ( MeshMatchParams._default_params["gap_tolerance"] if "gap_tolerance" in MeshMatchParams._default_params else (json_data["gapTolerance"] if "gapTolerance" in json_data else None)),
+                        side_tolerance if side_tolerance is not None else ( MeshMatchParams._default_params["side_tolerance"] if "side_tolerance" in MeshMatchParams._default_params else (json_data["sideTolerance"] if "sideTolerance" in json_data else None)),
+                        check_interior if check_interior is not None else ( MeshMatchParams._default_params["check_interior"] if "check_interior" in MeshMatchParams._default_params else (json_data["checkInterior"] if "checkInterior" in json_data else None)),
+                        matched_mesh_option if matched_mesh_option is not None else ( MeshMatchParams._default_params["matched_mesh_option"] if "matched_mesh_option" in MeshMatchParams._default_params else MatchedMeshOption(json_data["matchedMeshOption"] if "matchedMeshOption" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -697,9 +1005,26 @@ class MeshMatchParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            use_absolute_tolerance: bool = None,
+            gap_tolerance: float = None,
+            side_tolerance: float = None,
+            check_interior: bool = None,
+            matched_mesh_option: MatchedMeshOption = None):
         """Set the default values of MeshMatchParams.
 
+        Parameters
+        ----------
+        use_absolute_tolerance: bool, optional
+            When true, gap tolerance and side tolerance provided are absolute values.
+        gap_tolerance: float, optional
+            Gap tolerance between faces to be matched.
+        side_tolerance: float, optional
+            Side tolerance for matching to the side edges.
+        check_interior: bool, optional
+            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        matched_mesh_option: MatchedMeshOption, optional
+            Option for treatment of matched mesh.
         """
         args = locals()
         [MeshMatchParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -718,10 +1043,194 @@ class MeshMatchParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._gap_tolerance is not None:
+            json_data["gapTolerance"] = self._gap_tolerance
+        if self._side_tolerance is not None:
+            json_data["sideTolerance"] = self._side_tolerance
+        if self._check_interior is not None:
+            json_data["checkInterior"] = self._check_interior
+        if self._matched_mesh_option is not None:
+            json_data["matchedMeshOption"] = self._matched_mesh_option
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "use_absolute_tolerance :  %s\ngap_tolerance :  %s\nside_tolerance :  %s\ncheck_interior :  %s\nmatched_mesh_option :  %s" % (self._use_absolute_tolerance, self._gap_tolerance, self._side_tolerance, self._check_interior, self._matched_mesh_option)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def use_absolute_tolerance(self) -> bool:
+        """When true, gap tolerance and side tolerance provided are absolute values.
+        """
+        return self._use_absolute_tolerance
+
+    @use_absolute_tolerance.setter
+    def use_absolute_tolerance(self, value: bool):
+        self._use_absolute_tolerance = value
+
+    @property
+    def gap_tolerance(self) -> float:
+        """Gap tolerance between faces to be matched.
+        """
+        return self._gap_tolerance
+
+    @gap_tolerance.setter
+    def gap_tolerance(self, value: float):
+        self._gap_tolerance = value
+
+    @property
+    def side_tolerance(self) -> float:
+        """Side tolerance for matching to the side edges.
+        """
+        return self._side_tolerance
+
+    @side_tolerance.setter
+    def side_tolerance(self, value: float):
+        self._side_tolerance = value
+
+    @property
+    def check_interior(self) -> bool:
+        """When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        """
+        return self._check_interior
+
+    @check_interior.setter
+    def check_interior(self, value: bool):
+        self._check_interior = value
+
+    @property
+    def matched_mesh_option(self) -> MatchedMeshOption:
+        """Option for treatment of matched mesh.
+        """
+        return self._matched_mesh_option
+
+    @matched_mesh_option.setter
+    def matched_mesh_option(self, value: MatchedMeshOption):
+        self._matched_mesh_option = value
+
+class MeshMatchResults(CoreObject):
+    """Results associated with the mesh match operations.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            matched_area: float,
+            error_code: ErrorCode):
+        self._matched_area = matched_area
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            matched_area: float = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MeshMatchResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MeshMatchResults object with default parameters.
+        matched_area: float, optional
+            The total area of matched regions from both source and target faces.
+        error_code: ErrorCode, optional
+            Error Code associated with failure of mesh match operation.
+        json_data: dict, optional
+            JSON dictionary to create a MeshMatchResults object with provided parameters.
+
+        Examples
+        --------
+        >>> mesh_match_results = prime.MeshMatchResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["matchedArea"] if "matchedArea" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [matched_area, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    matched_area,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MeshMatchResults")
+                    json_data = param_json["MeshMatchResults"] if "MeshMatchResults" in param_json else {}
+                    self.__initialize(
+                        matched_area if matched_area is not None else ( MeshMatchResults._default_params["matched_area"] if "matched_area" in MeshMatchResults._default_params else (json_data["matchedArea"] if "matchedArea" in json_data else None)),
+                        error_code if error_code is not None else ( MeshMatchResults._default_params["error_code"] if "error_code" in MeshMatchResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            matched_area: float = None,
+            error_code: ErrorCode = None):
+        """Set the default values of MeshMatchResults.
+
+        Parameters
+        ----------
+        matched_area: float, optional
+            The total area of matched regions from both source and target faces.
+        error_code: ErrorCode, optional
+            Error Code associated with failure of mesh match operation.
+        """
+        args = locals()
+        [MeshMatchResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MeshMatchResults.
+
+        Examples
+        --------
+        >>> MeshMatchResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MeshMatchResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._matched_area is not None:
+            json_data["matchedArea"] = self._matched_area
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "matched_area :  %s\nerror_code :  %s" % (self._matched_area, self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def matched_area(self) -> float:
+        """The total area of matched regions from both source and target faces.
+        """
+        return self._matched_area
+
+    @matched_area.setter
+    def matched_area(self, value: float):
+        self._matched_area = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error Code associated with failure of mesh match operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value

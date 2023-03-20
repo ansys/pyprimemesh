@@ -1,32 +1,36 @@
 .. _ref_index_mesh_diagnostics:
 
 ****************
-Mesh Diagnostics
+Mesh diagnostics
 ****************
 
 ===========================
-Mesh Statistics and Quality
+Mesh statistics and quality
 ===========================
 
-You can use a set of quality metrics to measure the mesh quality. The :class:`SurfaceSearch <ansys.meshing.prime.SurfaceSearch>` and :class:`VolumeSearch <ansys.meshing.prime.VolumeSearch>` classes
-allow you to check surface and volume mesh quality, respectively.
+You can use a set of quality metrics to measure the mesh quality. The :class:`SurfaceSearch <ansys.meshing.prime.SurfaceSearch>`
+and :class:`VolumeSearch <ansys.meshing.prime.VolumeSearch>` classes allow you to check surface and volume mesh quality, respectively.
 
 ------------------
-Connectivity Check
+Connectivity check
 ------------------
 
-Surface diagnostics are important prior to generating a volume mesh. You can inquire surface diagnostic summary by using :func:`SurfaceSearch.get_surface_diagnostic_summary() <ansys.meshing.prime.SurfaceSearch.get_surface_diagnostic_summary>`.
-The :class:`SurfaceDiagnosticSummaryParams <ansys.meshing.prime.SurfaceDiagnosticSummaryParams>` class provides the capability to diagnose surface connectivity for the given scope and controls.
+Surface diagnostics are important prior to generating a volume mesh. You can get a surface diagnostic summary by using
+the :func:`SurfaceSearch.get_surface_diagnostic_summary() <ansys.meshing.prime.SurfaceSearch.get_surface_diagnostic_summary>`
+method. The :class:`SurfaceDiagnosticSummaryParams <ansys.meshing.prime.SurfaceDiagnosticSummaryParams>` class provides for
+diagnosing surface connectivity for the given scope and controls:
 
-* Duplicate Faces
+* Duplicate faces
 
-* Free Face Edges
+* Free face edges
 
-* Multi Faces Edges
+* Multi face edges
 
-* Self Intersections
+* Self intersections
 
-.. code:: python
+This code checks to see if a wrap surface is closed:
+
+.. code-block:: python
 
     # Check wrap surface is closed
     scope = prime.ScopeDefinition(model=model, part_expression="wrap")
@@ -43,14 +47,14 @@ The :class:`SurfaceDiagnosticSummaryParams <ansys.meshing.prime.SurfaceDiagnosti
 
     diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
-The results of surface diagnostic summary can be printed as below:
+This code prints the results of the surface diagnostic summary:
 
-.. code:: python
+.. code-block:: pycon
 
-    >>> print('Number of duplicate faces : ', diag_res.n_duplicate_faces)
-    >>> print('Number of free edges : ', diag_res.n_free_edges)
-    >>> print('Number of multi edges : ', diag_res.n_multi_edges)
-    >>> print('Number of self intersections : ', diag_res.n_self_intersections)
+    >>> print("Number of duplicate faces : ", diag_res.n_duplicate_faces)
+    >>> print("Number of free edges : ", diag_res.n_free_edges)
+    >>> print("Number of multi edges : ", diag_res.n_multi_edges)
+    >>> print("Number of self intersections : ", diag_res.n_self_intersections)
 
     Number of duplicate faces :  0
     Number of free edges :  0
@@ -59,18 +63,24 @@ The results of surface diagnostic summary can be printed as below:
 
 
 ------------
-Face Metrics
+Face metrics
 ------------
 
-The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class offers various type of face quality measures to check face quality metrics.
+The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class offers various types
+of measures to check face quality metrics.
 
- * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0(ideal) and 1(worst).
+ * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0 (ideal) and 1 (worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
+ * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller
+   the aspect ratio, the higher the quality of an element.
 
- * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.FaceQualityMeasure.ELEMENTQUALITY>` metric ranges between 0(worst) and 1(ideal).
+ * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.FaceQualityMeasure.ELEMENTQUALITY>` metric ranges between
+   0 (worst) and 1 (ideal).
 
-.. code:: python
+
+This code gets face quality measures:
+
+.. code-block:: python
 
     face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
     quality = prime.SurfaceSearch(model)
@@ -78,11 +88,14 @@ The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class o
         model=model,
         scope=prime.ScopeDefinition(model=model, part_expression="wrap"),
         face_quality_measures=[face_quality_measures],
-        quality_limit=[0.9]
+        quality_limit=[0.9],
     )
     qual_summary_res = quality.get_surface_quality_summary(quality_params)
 
-.. code:: python
+
+This code prints face quality summary results:
+
+.. code-block:: pycon
 
     >>> print("Maximum surface skewness : ", qual_summary_res.quality_results[0].max_quality)
     >>> print("Number of faces above limit : ", qual_summary_res.quality_results[0].n_found)
@@ -92,20 +105,28 @@ The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class o
 
 
 ------------
-Cell Metrics
+Cell metrics
 ------------
 
-The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class offers various type of cell quality measures to check cell quality metrics.
+The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class offers various types
+of measures to check cell quality metrics.
 
- * The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between 0(ideal) and 1(worst).
+ * The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between
+   0 (ideal) and 1 (worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
+ * The :attr:`ASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.ASPECTRATIO>` metric
+   is greater than 1. The smaller the aspect ratio, the higher the quality of an element.
 
- * The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric is greater than 1. The smaller it is, the higher the quality of an element is.
+ * The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric
+   is greater than 1. The smaller the Fluent aspect ratio, the higher the quality of an element.
 
- * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY>` metric ranges between 0(worst) and 1(ideal).
+ * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY>` metric ranges
+   between 0 (worst) and 1 (ideal).
 
-.. code:: python
+
+This code gets cell quality measures:
+
+.. code-block:: python
 
     cell_quality_measures = prime.CellQualityMeasure.SKEWNESS
     quality = prime.VolumeSearch(model)
@@ -113,31 +134,42 @@ The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class o
         model=model,
         scope=prime.ScopeDefinition(model=model, part_expression="wrap"),
         cell_quality_measures=[cell_quality_measures],
-        quality_limit=[0.95]
+        quality_limit=[0.95],
     )
     qual_summary_res = quality.get_volume_quality_summary(quality_params)
 
-.. code:: python
+This code prints cell quality summary results:
+
+.. code-block:: pycon
 
     >>> print("Maximum skewness : ", qual_summary_res.quality_results_part[0].max_quality)
-    >>> print("Number of cells above limit : ", qual_summary_res.quality_results_part[0].n_found)
+    >>> print(
+    ...     "Number of cells above limit : ", qual_summary_res.quality_results_part[0].n_found
+    ... )
 
     Maximum skewness :  0.948388
     Number of cells above limit :  0
 
 
 -----------
-Mesh Counts
+Mesh counts
 -----------
 
-The :func:`Part.get_summary() <ansys.meshing.prime.Part.get_summary>` can be used to report number of nodes, faces or cells after meshing
-with given parameters.
+The :func:`Part.get_summary() <ansys.meshing.prime.Part.get_summary>` method provides the
+number of nodes, faces, or cells after meshing with the given parameters.
 
-.. code:: python
+This code gets mesh counts:
 
-    part_summary_res = part.get_summary(prime.PartSummaryParams(model=model, print_id=False, print_mesh=True))
+.. code-block:: python
 
-.. code:: python
+    part_summary_res = part.get_summary(
+        prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+    )
+
+
+This code prints mesh counts:
+
+.. code-block:: pycon
 
     >>> print("Number of tri faces : ", part_summary_res.n_tri_faces)
     >>> print("Number of tet cells : ", part_summary_res.n_tet_cells)
@@ -151,22 +183,26 @@ with given parameters.
 
 
 ================
-Mesh Improvement
+Mesh improvement
 ================
 
-If the metrics show that the mesh quality is low, the :class:`VolumeMeshTool <ansys.meshing.prime.VolumeMeshTool>` class provides various volume mesh improvement algorithms 
-for you to improve the mesh.
+When the metrics show that the mesh quality is low, the :class:`VolumeMeshTool <ansys.meshing.prime.VolumeMeshTool>`
+class provides various volume mesh improvement algorithms for improving the mesh.
 
 --------------
-Auto Node Move
+Auto node move
 --------------
 
-You can improve volume mesh by auto node move using :func:`VolumeMeshTool.improve_by_auto_node_move() <ansys.meshing.prime.VolumeMeshTool.improve_by_auto_node_move>` 
-with given parameters. In addition, you can validate the mesh using :func:`VolumeMeshTool.check_mesh() <ansys.meshing.prime.VolumeMeshTool.check_mesh>`.
+You can improve volume mesh by auto node move using the
+:func:`VolumeMeshTool.improve_by_auto_node_move() <ansys.meshing.prime.VolumeMeshTool.improve_by_auto_node_move>`
+method with given parameters. In addition, you can check the mesh using the
+:func:`VolumeMeshTool.check_mesh() <ansys.meshing.prime.VolumeMeshTool.check_mesh>` method.
 
-.. code:: python
+This code improves and checks the volume mesh:
 
-    # Auto Node Move
+.. code-block:: python
+
+    # Auto node move
     perform_anm = prime.VolumeMeshTool(model=model)
     anm_params = prime.AutoNodeMoveParams(
         model=model,
@@ -185,13 +221,13 @@ with given parameters. In addition, you can validate the mesh using :func:`Volum
         params=anm_params,
     )
 
-    # mesh check
+    # Mesh check
     vtool = prime.VolumeMeshTool(model=model)
     res = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
 
-The results of check mesh operation can be printed as below:
+This code prints the results of the check mesh operation:
 
-.. code:: python
+.. code-block:: pycon
 
     >>> print("Non positive volumes:", result.has_non_positive_volumes)
     >>> print("Non positive areas:", result.has_non_positive_areas)

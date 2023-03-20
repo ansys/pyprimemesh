@@ -41,7 +41,7 @@ class SplitParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["splitRatio"])
+                json_data["splitRatio"] if "splitRatio" in json_data else None)
         else:
             all_field_specified = all(arg is not None for arg in [split_ratio])
             if all_field_specified:
@@ -51,9 +51,10 @@ class SplitParams(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    json_data = model._communicator.initialize_params(model, "SplitParams")["SplitParams"]
+                    param_json = model._communicator.initialize_params(model, "SplitParams")
+                    json_data = param_json["SplitParams"] if "SplitParams" in param_json else {}
                     self.__initialize(
-                        split_ratio if split_ratio is not None else ( SplitParams._default_params["split_ratio"] if "split_ratio" in SplitParams._default_params else json_data["splitRatio"]))
+                        split_ratio if split_ratio is not None else ( SplitParams._default_params["split_ratio"] if "split_ratio" in SplitParams._default_params else (json_data["splitRatio"] if "splitRatio" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -88,7 +89,8 @@ class SplitParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        json_data["splitRatio"] = self._split_ratio
+        if self._split_ratio is not None:
+            json_data["splitRatio"] = self._split_ratio
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 

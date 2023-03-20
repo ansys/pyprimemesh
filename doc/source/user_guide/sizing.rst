@@ -7,9 +7,10 @@ Sizing
 PyPrimeMesh provides various sizing controls to help you define how the mesh size is distributed on a surface or within the volume.
 
 
----------------
-Sizing Control
----------------
+--------------
+Sizing control
+--------------
+
 
 Mesh quality and resolution are important factors for capturing physics accurately and efficiently. Size controls allows you to get the desired mesh distribution.
 PyPrimeMesh specifies the sizing requirements using sizing controls. The sizing controls in PyPrimeMesh have the following:
@@ -18,7 +19,7 @@ PyPrimeMesh specifies the sizing requirements using sizing controls. The sizing 
 
 * Maximum rate of change of size
 
-* Range within which the sizes should be, on or within the scope
+* Range within which the sizes should be on or within the scope
 
 
 The :class:`SizingType <ansys.meshing.prime.SizingType>` has various control types to define sizing requirements:
@@ -33,25 +34,22 @@ The :class:`SizingType <ansys.meshing.prime.SizingType>` has various control typ
 
  * Meshed
 
- * Body of Influence
+ * Body of influence
 
 
-Curvature Sizing
+Curvature sizing
 ^^^^^^^^^^^^^^^^
 
-When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`CURVATURE <ansys.meshing.prime.SizingType.CURVATURE>`, sizes on the scope are based on the local curvature, with the size being small when the local curvature is large and vice versa. The :class:`CurvatureSizingParams <ansys.meshing.prime.CurvatureSizingParams>` is used to specify following parameters: min/max size, growth rate and normal angle.
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the :attr:`CURVATURE <ansys.meshing.prime.SizingType.CURVATURE>`
+parameter sizes based on the scope based on the local curvature. The size is small when the local curvature is large and vice versa.
+This code shows how to use the :class:`CurvatureSizingParams <ansys.meshing.prime.CurvatureSizingParams>` class to specify
+the minimum and maximum size, growth rate, and normal angle:
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
     size_control.set_curvature_sizing_params(
-        prime.CurvatureSizingParams(
-            model=model,
-            min=0.2,
-            max=2.0,
-            normal_angle=18.0,
-            growth_rate=1.2
-        )
+    prime.CurvatureSizingParams(model=model, min=0.2, max=2.0, growth_rate=1.2)
     )
     size_control.set_suggested_name("curv_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -62,28 +60,21 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
 
 The normal angle parameter is the maximum allowable angle that one element edge may span. For example, a value of 5 implies that a division are made when the angle change along the curve is 5 degrees. Hence, a 90 degree arc is divided into approximately 18 segments.
 
-Proximity Sizing
+Proximity sizing
 ^^^^^^^^^^^^^^^^
 
-When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`PROXIMITY <ansys.meshing.prime.SizingType.PROXIMITY>`, sizes in gaps are set using the specified minimum number of element layers. Here, a gap is defined in one of two ways:
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
+:attr:`PROXIMITY <ansys.meshing.prime.SizingType.PROXIMITY>` parameter sizes based on the closeness of
+the surfaces or edges specified in the scope. This code shows how to use the
+:class:`ProximitySizingParams <ansys.meshing.prime.ProximitySizingParams>` class to specify the
+minimum and maximum size, growth rate, and the number of element per gap:
 
-* The area between two opposing boundary edges of a face
-
-* The internal volumetric region between two faces
-
-The :class:`ProximitySizingParams <ansys.meshing.prime.ProximitySizingParams>` is used to specify following parameters: minsize, max size, growth rate and the number of element per gap.
-
-
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.PROXIMITY)
     size_control.set_proximity_sizing_params(
         prime.ProximitySizingParams(
-            model=model,
-            min=0.1,
-            max=2.0,
-            growth_rate=1.2,
-            elements_per_gap=3.0
+            model=model, min=0.1, max=2.0, growth_rate=1.2, elements_per_gap=3.0
         )
     )
     size_control.set_suggested_name("prox_control")
@@ -99,44 +90,40 @@ The :class:`ProximitySizingParams <ansys.meshing.prime.ProximitySizingParams>` i
     :width: 400pt
     :align: center  
 
-Hard Sizing
+
+Hard sizing
 ^^^^^^^^^^^
 
-When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`HARD <ansys.meshing.prime.SizingType.HARD>`, sizes on the scope are based on a uniform value while meshing. The :class:`HardSizingParams <ansys.meshing.prime.HardSizingParams>` is used to specify following parameters: minimum size and growth rate. 
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
+:attr:`HARD <ansys.meshing.prime.SizingType.HARD>` parameter sizes on the scope based on a uniform
+value while meshing. This code shows how to use the :class:`HardSizingParams <ansys.meshing.prime.HardSizingParams>`
+class to specify the minimum size and growth rate.
 
-.. Note::
-    When you select Hard Sizing, it overrides all other specified size controls.
 
-
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.HARD)
     size_control.set_hard_sizing_params(
-        prime.HardSizingParams(
-            model=model,
-            min=0.2,
-            growth_rate=1.2
-        )
+        prime.HardSizingParams(model=model, min=0.2, growth_rate=1.2)
     )
     size_control.set_suggested_name("hard_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
 
-Soft Sizing
+
+Soft sizing
 ^^^^^^^^^^^
 
-When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`SOFT <ansys.meshing.prime.SizingType.SOFT>`, sizes on the scope are based on a certain maximum value which should not exceed while meshing. The :class:`SoftSizingParams <ansys.meshing.prime.SoftSizingParams>` is used to specify following parameters: maximum size and growth rate.
+On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
+:attr:`SOFT <ansys.meshing.prime.SizingType.SOFT>` parameter sizes on the scope based on a
+certain maximum value that should not be exceeded while meshing. This code shows how
+to use the :class:`SoftSizingParams <ansys.meshing.prime.SoftSizingParams>` class to specify
+the maximum size and growth rate:
 
-When you select soft sizing for edges and/or faces, the other size controls affects the size. The minimum size on the zonelet is determined based on the influence of other size controls. Otherwise, a uniform size is maintained. A soft sizing is ignored in a region where other sizing controls specify smaller sizes.
-
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
     size_control.set_soft_sizing_params(
-        prime.SoftSizingParams(
-            model=model,
-            max=0.2,
-            growth_rate=1.2
-        )
+        prime.SoftSizingParams(model=model, max=0.2, growth_rate=1.2)
     )
     size_control.set_suggested_name("soft_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -145,19 +132,20 @@ When you select soft sizing for edges and/or faces, the other size controls aff
     :width: 400pt
     :align: center
 
-Meshed Sizing
+
+Meshed sizing
 ^^^^^^^^^^^^^
 
-When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`MESHED <ansys.meshing.prime.SizingType.MESHED>`, sizes are based on existing local sizes. The :class:`MeshedSizingParams <ansys.meshing.prime.MeshedSizingParams>` class is used to specify growth rate.
+On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
+:attr:`MESHED <ansys.meshing.prime.SizingType.MESHED>` parameter sizes based on existing local sizes.
+This example shows how to use The :class:`MeshedSizingParams <ansys.meshing.prime.MeshedSizingParams>`
+class to specify the growth rate:
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.MESHED)
     size_control.set_meshed_sizing_params(
-        prime.MeshedSizingParams(
-            model=model,
-            growth_rate=1.2
-        )
+        prime.MeshedSizingParams(model=model, growth_rate=1.2)
     )
     size_control.set_suggested_name("meshed_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -166,20 +154,20 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
     :width: 400pt
     :align: center
 
-Body of Influence Sizing
+
+Body of influence sizing
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribute as :attr:`BOI <ansys.meshing.prime.SizingType.BOI>`, sizes inside a closed volume scope should not cross a certain maximum value. The set of face zones selected to define the body of influence should form a geometrically closed region. If an open region is used as a body of influence, the sizing is processed as a soft sizing. The :class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` is used to specify following parameters: maximum size and growth rate.
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting The
+:attr:`BOI <ansys.meshing.prime.SizingType.BOI>` parameter sizes inside a closed volume scope
+that is not to exceed a certain maximum value. This code shows how to use the
+:class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` class to specify the maximum size and growth rate.
 
-.. code:: python
+.. code-block:: python
 
     size_control = model.control_data.create_size_control(prime.SizingType.BOI)
     size_control.set_boi_sizing_params(
-        prime.BoiSizingParams(
-            model=model,
-            max=20.0,
-            growth_rate=1.2
-        )
+        prime.BoiSizingParams(model=model, max=20.0, growth_rate=1.2)
     )
     size_control.set_suggested_name("BOI_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -189,10 +177,12 @@ When you select the :class:`SizingType <ansys.meshing.prime.SizingType>` attribu
     :align: center
 
 -----------
-Size Fields
+Size fields
 -----------
 
-Size fields are efficient representations of the size requirements that handle size-at-location. All surface and volume meshing functions in PyPrimeMesh work using size fields. The size field types available in PyPrimeMesh are: 
+The :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class helps you to fetch the element size
+at a given location. These size field types are available in PyPrimeMesh: 
+
 
 * Constant 
 
@@ -207,10 +197,13 @@ Size fields are efficient representations of the size requirements that handle s
 Volumetric and  Geodesic Size fields can process and respect the size control you define. Volumetric size field can be computed using :attr:`Compute volumetric <ansys.meshing.prime.SizeField.compute_volumetric>` and then surface and volume meshing can be applied. The remaining size field types are computed as part of various surface and volume meshing operations.
 
 
+
 Constant size field
 ^^^^^^^^^^^^^^^^^^^
-
-When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`CONSTANT <ansys.meshing.prime.SizeFieldType.CONSTANT>`, size field is computed based on uniform sizing.
+  
+On the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
+:attr:`CONSTANT <ansys.meshing.prime.SizeFieldType.CONSTANT>` parameter computes the size field
+based on the size controls specified.
 
 .. figure:: ../images/constantsize1.png
     :width: 400pt
@@ -220,15 +213,23 @@ When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` a
     :width: 400pt
     :align: center
 
+
 Volumetric size field
 ^^^^^^^^^^^^^^^^^^^^^
 
-When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`VOLUMETRIC <ansys.meshing.prime.SizeFieldType.VOLUMETRIC>`, size field is computed based on the size controls specified. 
+In the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
+:attr:`VOLUMETRIC <ansys.meshing.prime.SizeFieldType.VOLUMETRIC>` parameter computes the size field
+based on the size controls specified.
+
 
 Geodesic size field
 ^^^^^^^^^^^^^^^^^^^
 
-When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`GEODESIC <ansys.meshing.prime.SizeFieldType.GEODESIC>`, size field is computed on face nodes based on the size controls specified. Sizes are defined along a surface rather than the volume. Geodesic sizing enables you to confine sizes to surfaces and avoid problems like dead space refinement.
+In the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
+:attr:`GEODESIC <ansys.meshing.prime.SizeFieldType.GEODESIC>` parameter computes the size field
+on face nodes based on the size controls specified. Sizes are defined along a surface rather than
+the volume. Geodesic sizing enables you to confine sizes to surfaces and avoid problems like
+dead space refinement.
 
 .. figure:: ../images/meshvolumetricsize.png
     :width: 400pt
@@ -238,19 +239,27 @@ When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` a
     :width: 400pt
     :align: center
 
+
 Geometric size field
 ^^^^^^^^^^^^^^^^^^^^
-
-When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`GEOMETRIC <ansys.meshing.prime.SizeFieldType.GEOMETRIC>`, size field is computed based on the existing boundary sizes. Sizes can gradually increase from minimum size to maximum size based on the growth rate.
+In the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
+:attr:`GEOMETRIC <ansys.meshing.prime.SizeFieldType.GEOMETRIC>` parameter computes the size field
+based on existing boundary sizes. Sizes can gradually increase from the minimum size to the
+maximum size based on the growth rate.
 
 .. figure:: ../images/geometricsize.png
     :width: 400pt
     :align: center
 
+
+
+
 Meshedgeodesic size field
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` attribute as :attr:`MESHEDGEODESIC <ansys.meshing.prime.SizeFieldType.MESHEDGEODESIC>`, size field is computed using average mesh edge lengths and is diffused geodesical.
+In the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
+:attr:`MESHEDGEODESIC <ansys.meshing.prime.SizeFieldType.MESHEDGEODESIC>` parameter computes
+the size field using average mesh edge lengths and is diffused geodesical.
 
 .. figure:: ../images/meshedgeodesic.png
     :width: 400pt
@@ -259,3 +268,4 @@ When you select the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` a
 .. figure:: ../images/meshedgeodesic1.png
     :width: 400pt
     :align: center
+

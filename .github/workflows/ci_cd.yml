@@ -1,4 +1,3 @@
-    # check spelling, codestyle
 name: GitHub CI
 
 # run only on main branch.  This avoids duplicated actions on PRs
@@ -15,111 +14,80 @@ on:
       - release/*
 
 env:
-    DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
+  DOCKER_IMAGE_NAME: ghcr.io/pyansys/prime
+  DOCKER_IMAGE_TAG: '23.2.0.dev3'
+  MAIN_PYTHON_VERSION: '3.9'
+  PACKAGE_NAME: 'ansys-meshing-prime'
+  PACKAGE_NAMESPACE: 'ansys.meshing.prime'
+  DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+
   style:
-    name: Style Check
+    name: Code style
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: PyAnsys code style checks
+        uses: pyansys/actions/code-style@v3
         with:
-          python-version: 3.9
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-      - name: Install style requirements
-        run: |
-          pip install -r requirements/requirements_style.txt
+  docs-style:
+    name: Documentation Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: PyAnsys documentation style checks
+        uses: pyansys/actions/doc-style@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Codespell
-        run: |
-          make codespell
-
-      - name: flake8
-        run: |
-          make flake8
-
-  build:
-    name: Sanity check
-
+  smoke-tests:
+    name: Build and Smoke tests
+    runs-on: ${{ matrix.os }}
+    needs: [style]
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
-        python-version: ['3.7', '3.8', '3.9']
-
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Build wheelhouse and perform smoke test
+        uses: pyansys/actions/build-wheelhouse@v3
         with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
+          operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
-      - name: Linux pip cache
-        uses: actions/cache@v3
-        if: ${{ runner.os == 'Linux' }}
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
+  macos-build:
+    name: Build and Smoke tests (macOS)
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: macos-latest
+    needs: [style]
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
-      - name: Windows pip cache
-        uses: actions/cache@v3
-        if: ${{ runner.os == 'Windows' }}
+    steps:
+      - name: Build wheelhouse and perform smoke test
+        uses: pyansys/actions/build-wheelhouse@v3
         with:
-          path: ~\AppData\Local\pip\Cache
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-      
-      - name: Install Library
-        run: |
-          pip install . --find-links deps
-
-      - name: Test import
-        run: |
-          python -c "import ansys.meshing.prime as pyprimemesh"
+          library-name: ${{ env.PACKAGE_NAME }}
+          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
+          operating-system: ${{ runner.os }}
+          python-version: ${{ matrix.python-version }}
 
   docs:
     name: Documentation
     runs-on: ubuntu-latest
-
+    needs: [docs-style]
     steps:
-      - uses: actions/checkout@v3
-      
-      # Used to only publish documentation when there is a push
-      - name: Get Bot Application Token
-        if: github.event_name == 'push'
-        id: get_workflow_token
-        uses: peter-murray/workflow-application-token-action@v2
-        with:
-          application_id: ${{ secrets.BOT_APPLICATION_ID }}
-          application_private_key: ${{ secrets.BOT_APPLICATION_PRIVATE_KEY }}
-      
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.7
-
-      - name: Install library
-        run: |
-          pip install build
-          python -m build . -w
-          pip install dist/* --find-links deps
-
-      - name: Install documentation requirements
-        run: |
-          pip install -r requirements/requirements_docs.txt
-          echo "installed required packages"
 
       - name: Login in Github Container registry
         uses: docker/login-action@v2
@@ -129,163 +97,101 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service
-        run: docker pull ${{ env.DOCKER_PACKAGE }}
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v1
 
-      - name: Build HTML
-        run: |
-          make -C doc html #SPHINXOPTS="-W"
+      - name: "Run Ansys documentation building action"
+        uses: pyansys/actions/doc-build@v3
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
+          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
-
-      # - name: Build PDF Documentation
-      #   run: |
-      #     sudo apt update
-      #     sudo apt-get install -y texlive-latex-extra latexmk
-      #     make -C doc latexpdf
-
-      - name: Upload HTML Documentation
-        uses: actions/upload-artifact@v3
         with:
-          name: pyprimemesh-docs-html
-          path: doc/build/html
-          retention-days: 7
+          # By default, also '-W --keep-going'... we should eventually solve the warnings in the build process.
+          sphinxopts: '-j auto'
 
-      # - name: Upload PDF Documentation
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: pyprimemesh-docs-pdf
-      #     path: doc/build/latex/*.pdf
-      #     retention-days: 7
-      
-      # Deploy Latest Release Documentation (Disabled)
-      # - name: Deploy Documentation
-      #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
-      #   uses: JamesIves/github-pages-deploy-action@v4.4.1
-      #   with:
-      #     repository-name: pyansys/pyprimemesh-docs
-      #     token: ${{ steps.get_workflow_token.outputs.token }}
-      #     branch: gh-pages
-      #     folder: doc/build/html
-      #     clean: true
-
-      # Deploy Latest Developer Documentation
-      - name: Deploy Documentation
-        if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
-        with:
-          repository-name: pyansys/pyprimemesh-dev-docs
-          token: ${{ steps.get_workflow_token.outputs.token }}
-          branch: gh-pages
-          folder: doc/build/html
-          clean: true
-  
   testing:
-    name: Test Validation
-    needs: [build]
+    name: Run Unit Tests
+    needs: [ smoke-tests ]
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-
-      - name: Cache pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/requirements_*.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-      
-      - name: Build and Install PyPrimeMesh
-        run: |
-          pip install build
-          python -m build .
-          pip install dist/*.whl --find-links deps
-   
-      - name: Login in Github Container registry #
+      - name: Login in Github Container registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: pyansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pull, launch, and validate prime service #
-        run: docker pull ${{ env.DOCKER_PACKAGE }}          
+      - name: Pull Ansys Prime Server
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
 
-      - name: Run Unit Tests
-        run: |
-          pip install -r requirements/requirements_tests.txt
-          pytest -v tests
-
+      - name: "Run pytest"
+        uses: pyansys/actions/tests-pytest@v3
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
-      
-      - name: Check package
-        run: |
-          pip install twine
-          twine check dist/*
-      
-      - name: Upload wheel
-        uses: actions/upload-artifact@v3
         with:
-          name: pyprimemesh-client-wheel
-          path: dist/
-          retention-days: 7
+          pytest-markers: "-vv"
+          pytest-extra-args: "--cov=ansys.meshing.prime --cov-report=term --cov-report=html:.cov/html --cov-report=html:.cov/xml"
           
-  release:
-    name: Release
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    needs: [testing, style, docs]
+      - uses: codecov/codecov-action@v3
+        name: 'Upload coverage to CodeCov'
+
+  package:
+    name: Package library
+    needs: [testing, docs]
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Build library source and wheel artifacts
+        uses: pyansys/actions/build-library@v3
         with:
-          python-version: 3.9
+          library-name: ${{ env.PACKAGE_NAME }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-      - uses: actions/checkout@v3
-
-      - uses: actions/download-artifact@v3
-
-      # list current directory
-      - name: List directory structure
-        run: ls -R
-
-      - name: Upload to Private PyPi
-        run: |
-          pip install twine
-          python -m twine upload --skip-existing ./**/*.whl
-          python -m twine upload --skip-existing ./**/*.tar.gz
-        env:
-          TWINE_USERNAME: PAT
-          TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
-          TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/upload
-
-      # Upload to PyPI (Disabled)
-      # - name: Upload to Public PyPi
-      #   run: |
-      #     pip install twine
-      #     twine upload --skip-existing ./**/*.whl
-      #     twine upload --skip-existing ./**/*.tar.gz
-      #   env:
-      #     TWINE_USERNAME: __token__
-      #     TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-          
-      - name: Release
-        uses: softprops/action-gh-release@v1
+  release:
+    name: Release project
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: [package, macos-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release to the public PyPI repository
+        uses: pyansys/actions/release-pypi-public@v3
         with:
-          files: |
-            ./**/*.whl
-            ./**/*.tar.gz
-            ./**/*.zip
-            ./**/*.pdf
+          library-name: ${{ env.PACKAGE_NAME }}
+          twine-username: "__token__"
+          twine-token: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Release to GitHub
+        uses: pyansys/actions/release-github@v3
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+
+  upload_dev_docs:
+    name: Upload dev documentation
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [package]
+    steps:
+      - name: Deploy the latest documentation
+        uses: pyansys/actions/doc-deploy-dev@v3
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  upload_docs_release:
+    name: Upload release documentation
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - name: Deploy the stable documentation
+        uses: pyansys/actions/doc-deploy-stable@v3
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
