@@ -49,7 +49,7 @@ the minimum and maximum size, growth rate, and normal angle:
 
     size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
     size_control.set_curvature_sizing_params(
-    prime.CurvatureSizingParams(model=model, min=0.2, max=2.0, growth_rate=1.2)
+        prime.CurvatureSizingParams(model=model, min=0.2, max=2.0, growth_rate=1.2)
     )
     size_control.set_suggested_name("curv_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
@@ -85,7 +85,6 @@ minimum and maximum size, growth rate, and the number of element per gap:
     )
     size_control.set_suggested_name("prox_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
-    
 .. figure:: ../images/proximity.png
     :width: 400pt
     :align: center     
@@ -133,7 +132,6 @@ the maximum size and growth rate:
     )
     size_control.set_suggested_name("soft_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
-    
 .. figure:: ../images/softandhardsize.png
     :width: 400pt
     :align: center
@@ -155,7 +153,6 @@ class to specify the growth rate:
     )
     size_control.set_suggested_name("meshed_control")
     size_control.set_scope(prime.ScopeDefinition(model=model))
-    
 .. figure:: ../images/meshedsizing.png
     :width: 400pt
     :align: center
