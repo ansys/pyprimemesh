@@ -11,8 +11,7 @@ PyPrimeMesh provides various sizing controls to help you define how the mesh siz
 Sizing Control
 ---------------
 
-When you mesh a model, you expect the mesh size to satisfy specific requirements at various locations in the model.
-You must use optimal sizes while meshing to achieve resonable simulation accuracy at low computational cost.
+Mesh quality and resolution are important factors for capturing physics accurately and efficiently. Size controls allows you to get the desired mesh distribution.
 PyPrimeMesh specifies the sizing requirements using sizing controls. The sizing controls in PyPrimeMesh have the following:
 
 * Scope
