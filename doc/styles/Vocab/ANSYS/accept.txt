@@ -33,3 +33,6 @@ Zonelet
 zonelet
 Zonelets
 zonelets
+ignore_self_proximity
+ignore_orientation
+meshedgeodesic
