@@ -8,7 +8,7 @@ Surface meshing
 
 The :class:`Surfer <ansys.meshing.prime.Surfer>` class enables you to perform surface meshing using
 different surface meshing algorithms on topofaces or face zonelets. Surface meshing considers many
-parameters, such as like size field type, minimum size, maximum size, growth rate, and transition type,
+parameters, such as size field type, minimum size, maximum size, growth rate, and transition type,
 while meshing face zonelets or topofaces.
 
 .. tip::
@@ -168,7 +168,7 @@ Compute the volumetric size field based on the size controls:
 .. code-block:: python
 
     size_field = prime.SizeField(model)
-    res = size_field_compute_volumetric(
+    res = size_field.compute_volumetric(
         size_control_ids=[size_control.id],
         volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
             model, enable_multi_threading=False
