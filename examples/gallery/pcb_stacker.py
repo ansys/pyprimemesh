@@ -10,7 +10,7 @@ Objective
 In this example, you can mesh the solids of a printed circuit board,
 using the stacker method, for a structural thermal analysis
 using predominantly hexahedral elements.
-.. figure:: ../../../images/pcb.png
+.. figure:: ../../../images/pcb_stacker.png
    :align: center
    :width: 800
    **Thermal structural mesh**
