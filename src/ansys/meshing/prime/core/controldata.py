@@ -47,7 +47,7 @@ class ControlData(_ControlData):
 
         Examples
         --------
-        >>> wrapper_control = model.control_data.get_wrapper_control_by_name("wrappercontol-1")
+        >>> wrapper_control = model.control_data.get_wrapper_control_by_name("wrappercontrol-1")
 
         """
         for wc in self._wrapper_controls:
