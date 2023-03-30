@@ -16,6 +16,7 @@ class VolumeControl(_VolumeControl):
 
     def __str__(self) -> str:
         params = VolumeControlParams(model=self._model)
+        # TODO: function get_summary() not implemented
         result = _VolumeControl.get_summary(self, params)
         return result.message
 
