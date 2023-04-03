@@ -51,7 +51,6 @@ import tempfile
 import ansys.meshing.prime.graphics as graphics
 from ansys.meshing import prime
 from ansys.meshing.prime import lucid
-from ansys.meshing.prime.examples import Examples
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -68,8 +67,8 @@ mesh_util = lucid.Mesh(model)
 
 # The file contains several unmeshed parts as you would get after you imported from CAD.
 # For Windows OS users scdoc is also available:
-# file_name = prime.examples.get_file(Examples.PIPE_TEE_SCDOC)
-file_name = prime.examples.get_file(Examples.PIPE_TEE_FMD)
+# file_name = prime.examples.download_pipe_tee_scdoc()
+file_name = prime.examples.download_pipe_tee_fmd()
 mesh_util.read(file_name)
 
 display = graphics.Graphics(model)

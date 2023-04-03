@@ -41,7 +41,6 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.examples import Examples
 from ansys.meshing.prime.graphics import Graphics
 
 prime_client = prime.launch_prime()
@@ -55,9 +54,9 @@ model = prime_client.model
 # Create part per CAD model for topology based connection.
 
 # For Windows OS users scdoc is also available:
-# bracket_file = prime.examples.get_file(Examples.BRACKET_SCDOC)
+# bracket_file = prime.examples.download_bracket_scdoc()
 
-bracket_file = prime.examples.get_file(Examples.BRACKET_FMD)
+bracket_file = prime.examples.download_bracket_fmd()
 
 file_io = prime.FileIO(model)
 file_io.import_cad(

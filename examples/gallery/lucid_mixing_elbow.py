@@ -42,7 +42,6 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.examples import Examples
 from ansys.meshing.prime.graphics import Graphics
 
 prime_client = prime.launch_prime()
@@ -58,10 +57,10 @@ mesh_util = prime.lucid.Mesh(model=model)
 
 
 # For Windows OS users scdoc is also available:
-# mixing_elbow = prime.examples.get_file(Examples.ELBOW_SCDOC)
+# mixing_elbow = prime.examples.download_elbow_scdoc()
 
 # . Create face zones from labels imported from geometry for use in Fluent solver.
-mixing_elbow = prime.examples.get_file(Examples.ELBOW_FMD)
+mixing_elbow = prime.examples.download_elbow_fmd()
 
 mesh_util.read(file_name=mixing_elbow)
 mesh_util.create_zones_from_labels("inlet,outlet")

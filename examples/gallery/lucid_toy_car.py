@@ -43,7 +43,6 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.examples import Examples
 from ansys.meshing.prime.graphics import Graphics
 
 prime_client = prime.launch_prime()
@@ -60,9 +59,9 @@ mesh_util = prime.lucid.Mesh(model)
 
 
 # For Windows OS users scdoc is also available:
-# toy_car = prime.examples.get_file(Examples.TOY_CAR_SCDOC)
+# toy_car = prime.examples.download_toy_car_scdoc()
 
-toy_car = prime.examples.get_file(Examples.TOY_CAR_FMD)
+toy_car = prime.examples.download_toy_car_fmd()
 
 mesh_util.read(file_name=toy_car)
 

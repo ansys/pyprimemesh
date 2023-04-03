@@ -75,3 +75,259 @@ def get_file(
     )
     _DOWNLOADS.append(file)
     return file
+
+
+def download_elbow_pmdat():
+    """Download PMDAT file for the mixing elbow example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     elbow = prime_examples.download_elbow_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(elbow, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.ELBOW_PMDAT)
+
+
+def download_elbow_fmd():
+    """Download FMD file for the mixing elbow example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     elbow = prime_examples.download_elbow_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.ELBOW_FMD)
+
+
+def download_elbow_scdoc():
+    """Download SCDOC file for the mixing elbow example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+    Raises
+    ------
+    ValueError
+        When the provided destination path does not exist on file
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     elbow = prime_examples.download_elbow_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.ELBOW_SCDOC)
+
+
+def download_bracket_fmd():
+    """Download FMD file for the bracket scaffold example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     bracket = prime_examples.download_bracket_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.BRACKET_FMD)
+
+
+def download_bracket_scdoc():
+    """Download SCDOC file for the bracket scaffold example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     bracket = prime_examples.download_bracket_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.BRACKET_SCDOC)
+
+
+def download_toy_car_pmdat():
+    """Download PMDAT file for the toy car example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     toy_car = prime_examples.download_toy_car_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(toy_car, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.TOY_CAR_PMDAT)
+
+
+def download_toy_car_fmd():
+    """Download FMD file for the toy car example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     toy_car = prime_examples.download_toy_car_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.TOY_CAR_FMD)
+
+
+def download_toy_car_scdoc():
+    """Download SCDOC file for the toy car example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     toy_car = prime_examples.download_toy_car_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.TOY_CAR_SCDOC)
+
+
+def download_pipe_tee_pmdat():
+    """Download PMDAT file for the pipe tee example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pipe_tee = prime_examples.download_pipe_tee_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pipe_tee, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.PIPE_TEE_PMDAT)
+
+
+def download_pipe_tee_fmd():
+    """Download FMD file for the pipe tee example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pipe_tee = prime_examples.download_pipe_tee_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.PIPE_TEE_FMD)
+
+
+def download_pipe_tee_scdoc():
+    """Download SCDOC file for the pipe tee example
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pipe_tee = prime_examples.download_pipe_tee_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.PIPE_TEE_SCDOC)
