@@ -1,7 +1,9 @@
+"""Integration test for wrapper control."""
 import ansys.meshing.prime as prime
 
 
 def test_wrapper_control(get_remote_client):
+    """Tests an use case that needs the wrapper control."""
 
     model = get_remote_client.model
     model.set_global_sizing_params(
