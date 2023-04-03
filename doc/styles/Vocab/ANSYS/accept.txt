@@ -18,6 +18,7 @@ Meshing's
 multithreading
 Octree
 polyhedra
+Preppost
 PyVista
 topoedges
 topofaces
@@ -33,3 +34,6 @@ Zonelet
 zonelet
 Zonelets
 zonelets
+ignore_self_proximity
+ignore_orientation
+meshedgeodesic
