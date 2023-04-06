@@ -44,46 +44,69 @@ class BOIType(enum.IntEnum):
     OFFSETSURFACE = 2
     """Surface BOI type for BOI creation."""
 
-class SphereAtInvalidNormalNodeParams(CoreObject):
-    """Parameters to create a sphere at nodes with invalid average face normal. The sphere creation is expected to correct the face normal at the node.
+class FixInvalidNormalNodeParams(CoreObject):
+    """Parameters to fix invalid average face normal at nodes by creating a nugget.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            nugget_size: float,
+            nugget_mesh_size: float,
+            label: str):
+        self._nugget_size = nugget_size
+        self._nugget_mesh_size = nugget_mesh_size
+        self._label = label
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            nugget_size: float = None,
+            nugget_mesh_size: float = None,
+            label: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SphereAtInvalidNormalNodeParams.
+        """Initializes the FixInvalidNormalNodeParams.
 
         Parameters
         ----------
         model: Model
-            Model to create a SphereAtInvalidNormalNodeParams object with default parameters.
+            Model to create a FixInvalidNormalNodeParams object with default parameters.
+        nugget_size: float, optional
+            Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+        nugget_mesh_size: float, optional
+            Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+        label: str, optional
+            Label to set on new face zonelets created.
         json_data: dict, optional
-            JSON dictionary to create a SphereAtInvalidNormalNodeParams object with provided parameters.
+            JSON dictionary to create a FixInvalidNormalNodeParams object with provided parameters.
 
         Examples
         --------
-        >>> sphere_at_invalid_normal_node_params = prime.SphereAtInvalidNormalNodeParams(model = model)
+        >>> fix_invalid_normal_node_params = prime.FixInvalidNormalNodeParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["nuggetSize"] if "nuggetSize" in json_data else None,
+                json_data["nuggetMeshSize"] if "nuggetMeshSize" in json_data else None,
+                json_data["label"] if "label" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [nugget_size, nugget_mesh_size, label])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    nugget_size,
+                    nugget_mesh_size,
+                    label)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    param_json = model._communicator.initialize_params(model, "SphereAtInvalidNormalNodeParams")
-                    json_data = param_json["SphereAtInvalidNormalNodeParams"] if "SphereAtInvalidNormalNodeParams" in param_json else {}
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "FixInvalidNormalNodeParams")
+                    json_data = param_json["FixInvalidNormalNodeParams"] if "FixInvalidNormalNodeParams" in param_json else {}
+                    self.__initialize(
+                        nugget_size if nugget_size is not None else ( FixInvalidNormalNodeParams._default_params["nugget_size"] if "nugget_size" in FixInvalidNormalNodeParams._default_params else (json_data["nuggetSize"] if "nuggetSize" in json_data else None)),
+                        nugget_mesh_size if nugget_mesh_size is not None else ( FixInvalidNormalNodeParams._default_params["nugget_mesh_size"] if "nugget_mesh_size" in FixInvalidNormalNodeParams._default_params else (json_data["nuggetMeshSize"] if "nuggetMeshSize" in json_data else None)),
+                        label if label is not None else ( FixInvalidNormalNodeParams._default_params["label"] if "label" in FixInvalidNormalNodeParams._default_params else (json_data["label"] if "label" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -92,75 +115,129 @@ class SphereAtInvalidNormalNodeParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
-        """Set the default values of SphereAtInvalidNormalNodeParams.
+    def set_default(
+            nugget_size: float = None,
+            nugget_mesh_size: float = None,
+            label: str = None):
+        """Set the default values of FixInvalidNormalNodeParams.
 
+        Parameters
+        ----------
+        nugget_size: float, optional
+            Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+        nugget_mesh_size: float, optional
+            Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+        label: str, optional
+            Label to set on new face zonelets created.
         """
         args = locals()
-        [SphereAtInvalidNormalNodeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [FixInvalidNormalNodeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of SphereAtInvalidNormalNodeParams.
+        """Print the default values of FixInvalidNormalNodeParams.
 
         Examples
         --------
-        >>> SphereAtInvalidNormalNodeParams.print_default()
+        >>> FixInvalidNormalNodeParams.print_default()
         """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SphereAtInvalidNormalNodeParams._default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FixInvalidNormalNodeParams._default_params.items())
         print(message)
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._nugget_size is not None:
+            json_data["nuggetSize"] = self._nugget_size
+        if self._nugget_mesh_size is not None:
+            json_data["nuggetMeshSize"] = self._nugget_mesh_size
+        if self._label is not None:
+            json_data["label"] = self._label
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "nugget_size :  %s\nnugget_mesh_size :  %s\nlabel :  %s" % (self._nugget_size, self._nugget_mesh_size, self._label)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
-class SphereAtInvalidNormalNodeResults(CoreObject):
-    """Results associated with create sphere at invalid normal nodes.
+    @property
+    def nugget_size(self) -> float:
+        """Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+        """
+        return self._nugget_size
+
+    @nugget_size.setter
+    def nugget_size(self, value: float):
+        self._nugget_size = value
+
+    @property
+    def nugget_mesh_size(self) -> float:
+        """Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+        """
+        return self._nugget_mesh_size
+
+    @nugget_mesh_size.setter
+    def nugget_mesh_size(self, value: float):
+        self._nugget_mesh_size = value
+
+    @property
+    def label(self) -> str:
+        """Label to set on new face zonelets created.
+        """
+        return self._label
+
+    @label.setter
+    def label(self, value: str):
+        self._label = value
+
+class FixInvalidNormalNodeResults(CoreObject):
+    """Results associated with fix invalid average face normal at nodes.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            error_code: ErrorCode):
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SphereAtInvalidNormalNodeResults.
+        """Initializes the FixInvalidNormalNodeResults.
 
         Parameters
         ----------
         model: Model
-            Model to create a SphereAtInvalidNormalNodeResults object with default parameters.
+            Model to create a FixInvalidNormalNodeResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a SphereAtInvalidNormalNodeResults object with provided parameters.
+            JSON dictionary to create a FixInvalidNormalNodeResults object with provided parameters.
 
         Examples
         --------
-        >>> sphere_at_invalid_normal_node_results = prime.SphereAtInvalidNormalNodeResults(model = model)
+        >>> fix_invalid_normal_node_results = prime.FixInvalidNormalNodeResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    param_json = model._communicator.initialize_params(model, "SphereAtInvalidNormalNodeResults")
-                    json_data = param_json["SphereAtInvalidNormalNodeResults"] if "SphereAtInvalidNormalNodeResults" in param_json else {}
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "FixInvalidNormalNodeResults")
+                    json_data = param_json["FixInvalidNormalNodeResults"] if "FixInvalidNormalNodeResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( FixInvalidNormalNodeResults._default_params["error_code"] if "error_code" in FixInvalidNormalNodeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -169,34 +246,51 @@ class SphereAtInvalidNormalNodeResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
-        """Set the default values of SphereAtInvalidNormalNodeResults.
+    def set_default(
+            error_code: ErrorCode = None):
+        """Set the default values of FixInvalidNormalNodeResults.
 
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
         """
         args = locals()
-        [SphereAtInvalidNormalNodeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [FixInvalidNormalNodeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of SphereAtInvalidNormalNodeResults.
+        """Print the default values of FixInvalidNormalNodeResults.
 
         Examples
         --------
-        >>> SphereAtInvalidNormalNodeResults.print_default()
+        >>> FixInvalidNormalNodeResults.print_default()
         """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SphereAtInvalidNormalNodeResults._default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FixInvalidNormalNodeResults._default_params.items())
         print(message)
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "error_code :  %s" % (self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
 
 class CopyZoneletsParams(CoreObject):
     """Parameters to copy zonelets. This is for internal use only.

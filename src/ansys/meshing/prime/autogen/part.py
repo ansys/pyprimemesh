@@ -76,6 +76,8 @@ class Part(CoreObject):
         >>> part.set_suggested_name("part1")
 
         """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::Part/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
@@ -173,6 +175,10 @@ class Part(CoreObject):
         >>> part.add_labels_on_zonelets(labels, zonelets)
 
         """
+        if not isinstance(labels, List):
+            raise TypeError("Invalid argument type passed for labels, valid argument type is List[str].")
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
         args = {"labels" : labels,
         "zonelets" : zonelets}
         command_name = "PrimeMesh::Part/AddLabelsOnZonelets"
@@ -204,6 +210,10 @@ class Part(CoreObject):
         >>> part.remove_labels_from_zonelets(labels, zonelets)
 
         """
+        if not isinstance(labels, List):
+            raise TypeError("Invalid argument type passed for labels, valid argument type is List[str].")
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
         args = {"labels" : labels,
         "zonelets" : zonelets}
         command_name = "PrimeMesh::Part/RemoveLabelsFromZonelets"
@@ -235,6 +245,10 @@ class Part(CoreObject):
         >>> part.add_labels_on_topo_entities(labels, topo_entities)
 
         """
+        if not isinstance(labels, List):
+            raise TypeError("Invalid argument type passed for labels, valid argument type is List[str].")
+        if not isinstance(topo_entities, Iterable):
+            raise TypeError("Invalid argument type passed for topo_entities, valid argument type is Iterable[int].")
         args = {"labels" : labels,
         "topo_entities" : topo_entities}
         command_name = "PrimeMesh::Part/AddLabelsOnTopoEntities"
@@ -266,6 +280,10 @@ class Part(CoreObject):
         >>> part.remove_labels_from_topo_entities(labels, topo_entities)
 
         """
+        if not isinstance(labels, List):
+            raise TypeError("Invalid argument type passed for labels, valid argument type is List[str].")
+        if not isinstance(topo_entities, Iterable):
+            raise TypeError("Invalid argument type passed for topo_entities, valid argument type is Iterable[int].")
         args = {"labels" : labels,
         "topo_entities" : topo_entities}
         command_name = "PrimeMesh::Part/RemoveLabelsFromTopoEntities"
@@ -297,6 +315,10 @@ class Part(CoreObject):
         >>> zones = part.get_face_zones_of_name_pattern("wall*", name_pattern_params)
 
         """
+        if not isinstance(zone_name_pattern, str):
+            raise TypeError("Invalid argument type passed for zone_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetFaceZonesOfNamePattern"
@@ -328,6 +350,10 @@ class Part(CoreObject):
         >>> zones = part.get_volume_zones_of_name_pattern("solid*", name_pattern_params)
 
         """
+        if not isinstance(zone_name_pattern, str):
+            raise TypeError("Invalid argument type passed for zone_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetVolumeZonesOfNamePattern"
@@ -359,6 +385,10 @@ class Part(CoreObject):
         >>> face_zonelets = part.get_face_zonelets_of_zone_name_pattern("wall*", name_pattern_params)
 
         """
+        if not isinstance(zone_name_pattern, str):
+            raise TypeError("Invalid argument type passed for zone_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetFaceZoneletsOfZoneNamePattern"
@@ -390,6 +420,10 @@ class Part(CoreObject):
         >>> volumes = part.get_volumes_of_zone_name_pattern("body*", name_pattern_params)
 
         """
+        if not isinstance(zone_name_pattern, str):
+            raise TypeError("Invalid argument type passed for zone_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetVolumesOfZoneNamePattern"
@@ -421,6 +455,10 @@ class Part(CoreObject):
         >>> topo_faces = part.get_topo_faces_of_zone_name_pattern("wall*", name_pattern_params)
 
         """
+        if not isinstance(zone_name_pattern, str):
+            raise TypeError("Invalid argument type passed for zone_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetTopoFacesOfZoneNamePattern"
@@ -452,6 +490,10 @@ class Part(CoreObject):
         >>> edge_zonelets = part.get_edge_zonelets_of_label_name_pattern("wall*", name_pattern_params)
 
         """
+        if not isinstance(label_name_pattern, str):
+            raise TypeError("Invalid argument type passed for label_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetEdgeZoneletsOfLabelNamePattern"
@@ -483,6 +525,10 @@ class Part(CoreObject):
         >>> face_zonelets = part.get_face_zonelets_of_label_name_pattern("wall*", name_pattern_params)
 
         """
+        if not isinstance(label_name_pattern, str):
+            raise TypeError("Invalid argument type passed for label_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetFaceZoneletsOfLabelNamePattern"
@@ -515,6 +561,10 @@ class Part(CoreObject):
         >>>                   params = prime.NamePatternParams(model=model))
 
         """
+        if not isinstance(label_name_pattern, str):
+            raise TypeError("Invalid argument type passed for label_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetTopoEdgesOfLabelNamePattern"
@@ -547,6 +597,10 @@ class Part(CoreObject):
         >>>                   params = prime.NamePatternParams(model=model))
 
         """
+        if not isinstance(label_name_pattern, str):
+            raise TypeError("Invalid argument type passed for label_name_pattern, valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for name_pattern_params, valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetTopoFacesOfLabelNamePattern"
@@ -578,6 +632,10 @@ class Part(CoreObject):
         results = part.merge_zonelets(zonelets, params)
 
         """
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, MergeZoneletsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is MergeZoneletsParams.")
         args = {"zonelets" : zonelets,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Part/MergeZonelets"
@@ -609,6 +667,10 @@ class Part(CoreObject):
         results = part.merge_volumes(volumes, params)
 
         """
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for volumes, valid argument type is Iterable[int].")
+        if not isinstance(params, MergeVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is MergeVolumesParams.")
         args = {"volumes" : volumes,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Part/MergeVolumes"
@@ -640,6 +702,10 @@ class Part(CoreObject):
         results = part.delete_volumes(volumes, params)
 
         """
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for volumes, valid argument type is Iterable[int].")
+        if not isinstance(params, DeleteVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteVolumesParams.")
         args = {"volumes" : volumes,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Part/DeleteVolumes"
@@ -668,6 +734,8 @@ class Part(CoreObject):
         >>> face_zonelets = part.get_face_zonelets_of_volumes(volumes)
 
         """
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for volumes, valid argument type is Iterable[int].")
         args = {"volumes" : volumes}
         command_name = "PrimeMesh::Part/GetFaceZoneletsOfVolumes"
         self._model._print_logs_before_command("get_face_zonelets_of_volumes", args)
@@ -696,6 +764,8 @@ class Part(CoreObject):
         >>> results = part.compute_closed_volumes(params)
 
         """
+        if not isinstance(params, ComputeVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ComputeVolumesParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/ComputeClosedVolumes"
         self._model._print_logs_before_command("compute_closed_volumes", args)
@@ -725,6 +795,10 @@ class Part(CoreObject):
         >>> results = part.extract_volumes(face_zonelets, params)
 
         """
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, ExtractVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ExtractVolumesParams.")
         args = {"face_zonelets" : face_zonelets,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Part/ExtractVolumes"
@@ -754,6 +828,8 @@ class Part(CoreObject):
         >>> results = part.compute_topo_volumes(params)
 
         """
+        if not isinstance(params, ComputeVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ComputeVolumesParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/ComputeTopoVolumes"
         self._model._print_logs_before_command("compute_topo_volumes", args)
@@ -783,6 +859,10 @@ class Part(CoreObject):
         >>> results = part.extract_flow_topo_volumes(topo_faces, params)
 
         """
+        if not isinstance(topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+        if not isinstance(params, ExtractTopoVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ExtractTopoVolumesParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Part/ExtractTopoVolumes"
@@ -811,6 +891,8 @@ class Part(CoreObject):
         >>> volumes = part.get_volumes_of_face_zonelet(face_zonelet)
 
         """
+        if not isinstance(face_zonelet, int):
+            raise TypeError("Invalid argument type passed for face_zonelet, valid argument type is int.")
         args = {"face_zonelet" : face_zonelet}
         command_name = "PrimeMesh::Part/GetVolumesOfFaceZonelet"
         self._model._print_logs_before_command("get_volumes_of_face_zonelet", args)
@@ -840,6 +922,35 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_volumes")
         return result
 
+    def get_adjacent_volumes_of_volumes(self, volumes : Iterable[int]) -> Iterable[int]:
+        """ Get the adjacent volumes for the provided volume ids.
+
+
+        Parameters
+        ----------
+        volumes : Iterable[int]
+            Ids of the volume.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of adjacent volume ids.
+
+
+        Examples
+        --------
+        >>> adjacent_volumes_of_volumes = part.get_adjacent_volumes_of_volumes(volumes)
+
+        """
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for volumes, valid argument type is Iterable[int].")
+        args = {"volumes" : volumes}
+        command_name = "PrimeMesh::Part/GetAdjacentVolumesOfVolumes"
+        self._model._print_logs_before_command("get_adjacent_volumes_of_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_adjacent_volumes_of_volumes")
+        return result
+
     def delete_zonelets(self, zonelets : Iterable[int]) -> DeleteResults:
         """ Delete given face zonelets.
 
@@ -860,6 +971,8 @@ class Part(CoreObject):
         >>> results = part.delete_zonelets(zonelets)
 
         """
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
         args = {"zonelets" : zonelets}
         command_name = "PrimeMesh::Part/DeleteZonelets"
         self._model._print_logs_before_command("delete_zonelets", args)
@@ -891,6 +1004,28 @@ Return the ids of topofaces.
         self._model._print_logs_after_command("get_topo_faces")
         return result
 
+    def get_topo_volumes(self) -> Iterable[int]:
+        """ Get topovolumes of part.
+
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of topovolume ids.
+
+
+        Examples
+        --------
+        >>> results = part.get_topo_volumes()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Part/GetTopoVolumes"
+        self._model._print_logs_before_command("get_topo_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_topo_volumes")
+        return result
+
     def add_topo_entities_to_zone(self, zone_id : int, topo_entities : Iterable[int]) -> AddToZoneResults:
         """ Add topoentities to zone.
 
@@ -913,6 +1048,10 @@ Return the ids of topofaces.
         >>> results = part.add_topo_entities_to_zone(zone_id, topo_entities)
 
         """
+        if not isinstance(zone_id, int):
+            raise TypeError("Invalid argument type passed for zone_id, valid argument type is int.")
+        if not isinstance(topo_entities, Iterable):
+            raise TypeError("Invalid argument type passed for topo_entities, valid argument type is Iterable[int].")
         args = {"zone_id" : zone_id,
         "topo_entities" : topo_entities}
         command_name = "PrimeMesh::Part/AddTopoEntitiesToZone"
@@ -943,6 +1082,10 @@ Return the ids of topofaces.
         >>> results = part.add_zonelets_to_zone(zone_id, zonelets)
 
         """
+        if not isinstance(zone_id, int):
+            raise TypeError("Invalid argument type passed for zone_id, valid argument type is int.")
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
         args = {"zone_id" : zone_id,
         "zonelets" : zonelets}
         command_name = "PrimeMesh::Part/AddZoneletsToZone"
@@ -973,6 +1116,10 @@ Return the ids of topofaces.
         >>> results = part.add_volumes_to_zone(zone_id, volumes)
 
         """
+        if not isinstance(zone_id, int):
+            raise TypeError("Invalid argument type passed for zone_id, valid argument type is int.")
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for volumes, valid argument type is Iterable[int].")
         args = {"zone_id" : zone_id,
         "volumes" : volumes}
         command_name = "PrimeMesh::Part/AddVolumesToZone"
@@ -1001,6 +1148,8 @@ Return the ids of topofaces.
         >>> volume_zone = part.get_volume_zone_of_volume(volume)
 
         """
+        if not isinstance(volume, int):
+            raise TypeError("Invalid argument type passed for volume, valid argument type is int.")
         args = {"volume" : volume}
         command_name = "PrimeMesh::Part/GetVolumeZoneOfVolume"
         self._model._print_logs_before_command("get_volume_zone_of_volume", args)
@@ -1028,11 +1177,42 @@ Return the ids of topofaces.
         >>> face_zone = part.get_face_zone_of_zonelet(zonelet)
 
         """
+        if not isinstance(zonelet, int):
+            raise TypeError("Invalid argument type passed for zonelet, valid argument type is int.")
         args = {"zonelet" : zonelet}
         command_name = "PrimeMesh::Part/GetFaceZoneOfZonelet"
         self._model._print_logs_before_command("get_face_zone_of_zonelet", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_face_zone_of_zonelet")
+        return result
+
+    def get_adjacent_face_zonelets_of_face_zonelets(self, face_zonelets : Iterable[int]) -> Iterable[int]:
+        """ Gets the adjacent facezonelets for the provided facezonelet ids.
+
+
+        Parameters
+        ----------
+        face_zonelets : Iterable[int]
+            Ids of facezonelets.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of adjacent facezonelet ids.
+
+
+        Examples
+        --------
+        >>> face_zonelets_of_face_zonelet = part.get_adjacent_face_zonelets_of_face_zonelets(face_zonelets)
+
+        """
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        args = {"face_zonelets" : face_zonelets}
+        command_name = "PrimeMesh::Part/GetAdjacentFaceZoneletsOfFaceZonelets"
+        self._model._print_logs_before_command("get_adjacent_face_zonelets_of_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_adjacent_face_zonelets_of_face_zonelets")
         return result
 
     def get_face_zones(self) -> Iterable[int]:
@@ -1099,6 +1279,8 @@ Return the ids of topofaces.
         >>> part.remove_zone_on_volumes(volumes)
 
         """
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for volumes, valid argument type is Iterable[int].")
         args = {"volumes" : volumes}
         command_name = "PrimeMesh::Part/RemoveZoneOnVolumes"
         self._model._print_logs_before_command("remove_zone_on_volumes", args)
@@ -1126,6 +1308,8 @@ Return the ids of topofaces.
         >>> part.remove_zone_on_zonelets(zonelets)
 
         """
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
         args = {"zonelets" : zonelets}
         command_name = "PrimeMesh::Part/RemoveZoneOnZonelets"
         self._model._print_logs_before_command("remove_zone_on_zonelets", args)
@@ -1153,6 +1337,8 @@ Return the ids of topofaces.
         >>> part.remove_zone_on_topo_entities(topo_entities)
 
         """
+        if not isinstance(topo_entities, Iterable):
+            raise TypeError("Invalid argument type passed for topo_entities, valid argument type is Iterable[int].")
         args = {"topo_entities" : topo_entities}
         command_name = "PrimeMesh::Part/RemoveZoneOnTopoEntities"
         self._model._print_logs_before_command("remove_zone_on_topo_entities", args)
@@ -1202,6 +1388,8 @@ Return the ids of topofaces.
         >>> results = part.delete_topo_entities(params)
 
         """
+        if not isinstance(params, DeleteTopoEntitiesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteTopoEntitiesParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/DeleteTopoEntities"
         self._model._print_logs_before_command("delete_topo_entities", args)
@@ -1252,6 +1440,8 @@ Return the ids of topofaces.
         >>> results = part.get_summary(PartSummaryParams(model=model))
 
         """
+        if not isinstance(params, PartSummaryParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is PartSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/GetSummary"
         self._model._print_logs_before_command("get_summary", args)

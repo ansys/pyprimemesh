@@ -52,6 +52,8 @@ class VolumeSearch(CoreObject):
         >>> results = vol_search.get_volume_quality_summary(VolumeQualitySummaryParams(model=model))
 
         """
+        if not isinstance(params, VolumeQualitySummaryParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is VolumeQualitySummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeSearch/GetVolumeQualitySummary"
         self._model._print_logs_before_command("get_volume_quality_summary", args)
