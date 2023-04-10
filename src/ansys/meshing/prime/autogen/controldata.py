@@ -67,6 +67,8 @@ class ControlData(CoreObject):
         >>> size_control = model.control_data.create_size_control(SizingType.CURVATURE)
 
         """
+        if not isinstance(type, SizingType):
+            raise TypeError("Invalid argument type passed for type, valid argument type is SizingType.")
         args = {"type" : type}
         command_name = "PrimeMesh::ControlData/CreateSizeControl"
         self._model._print_logs_before_command("create_size_control", args)
@@ -94,6 +96,28 @@ class ControlData(CoreObject):
         self._model._print_logs_before_command("create_prism_control", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("create_prism_control")
+        return result
+
+    def create_thin_volume_control(self) -> List[Any]:
+        """ Creates the ThinVolumeControl.
+
+
+        Returns
+        -------
+        ThinVolumeControl
+            Returns the ThinVolumeControl.
+
+
+        Examples
+        --------
+        >>> thin_volume_control = model.control_data.create_thin_volume_control()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/CreateThinVolumeControl"
+        self._model._print_logs_before_command("create_thin_volume_control", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_thin_volume_control")
         return result
 
     def create_volume_control(self) -> List[Any]:
@@ -157,6 +181,8 @@ class ControlData(CoreObject):
         >>> results = model.control_data.delete_controls([size_control.id, volume_control.id])
 
         """
+        if not isinstance(control_ids, Iterable):
+            raise TypeError("Invalid argument type passed for control_ids, valid argument type is Iterable[int].")
         args = {"control_ids" : control_ids}
         command_name = "PrimeMesh::ControlData/DeleteControls"
         self._model._print_logs_before_command("delete_controls", args)
@@ -189,6 +215,10 @@ class ControlData(CoreObject):
         >>>                 prime.ScopeZoneletParams(model =model))
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+        if not isinstance(params, ScopeZoneletParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ScopeZoneletParams.")
         args = {"scope" : scope._jsonify(),
         "params" : params._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeFaceZonelets"
@@ -219,6 +249,8 @@ class ControlData(CoreObject):
         >>>                 prime.ScopeZoneletParams(model =model))
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeParts"
         self._model._print_logs_before_command("get_scope_parts", args)
@@ -246,6 +278,8 @@ class ControlData(CoreObject):
         >>> results = control_data.get_part_zonelets(scope)
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetPartZonelets"
         self._model._print_logs_before_command("get_part_zonelets", args)

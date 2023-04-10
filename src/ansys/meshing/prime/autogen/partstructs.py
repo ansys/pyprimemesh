@@ -3437,12 +3437,17 @@ class MergeVolumesParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            merge_to_neighbor_volume: bool,
+            neighbor_volumes: Iterable[int]):
+        self._merge_to_neighbor_volume = merge_to_neighbor_volume
+        self._neighbor_volumes = neighbor_volumes if isinstance(neighbor_volumes, np.ndarray) else np.array(neighbor_volumes, dtype=np.int32) if neighbor_volumes is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            merge_to_neighbor_volume: bool = None,
+            neighbor_volumes: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MergeVolumesParams.
@@ -3451,6 +3456,10 @@ class MergeVolumesParams(CoreObject):
         ----------
         model: Model
             Model to create a MergeVolumesParams object with default parameters.
+        merge_to_neighbor_volume: bool, optional
+            Option to merge given volumes to their neighbor volume.
+        neighbor_volumes: Iterable[int], optional
+            Ids of volume that are neighbors to given volumes for merging.
         json_data: dict, optional
             JSON dictionary to create a MergeVolumesParams object with provided parameters.
 
@@ -3459,18 +3468,24 @@ class MergeVolumesParams(CoreObject):
         >>> merge_volumes_params = prime.MergeVolumesParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["mergeToNeighborVolume"] if "mergeToNeighborVolume" in json_data else None,
+                json_data["neighborVolumes"] if "neighborVolumes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [merge_to_neighbor_volume, neighbor_volumes])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    merge_to_neighbor_volume,
+                    neighbor_volumes)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeVolumesParams")
                     json_data = param_json["MergeVolumesParams"] if "MergeVolumesParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        merge_to_neighbor_volume if merge_to_neighbor_volume is not None else ( MergeVolumesParams._default_params["merge_to_neighbor_volume"] if "merge_to_neighbor_volume" in MergeVolumesParams._default_params else (json_data["mergeToNeighborVolume"] if "mergeToNeighborVolume" in json_data else None)),
+                        neighbor_volumes if neighbor_volumes is not None else ( MergeVolumesParams._default_params["neighbor_volumes"] if "neighbor_volumes" in MergeVolumesParams._default_params else (json_data["neighborVolumes"] if "neighborVolumes" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3479,9 +3494,17 @@ class MergeVolumesParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            merge_to_neighbor_volume: bool = None,
+            neighbor_volumes: Iterable[int] = None):
         """Set the default values of MergeVolumesParams.
 
+        Parameters
+        ----------
+        merge_to_neighbor_volume: bool, optional
+            Option to merge given volumes to their neighbor volume.
+        neighbor_volumes: Iterable[int], optional
+            Ids of volume that are neighbors to given volumes for merging.
         """
         args = locals()
         [MergeVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3500,13 +3523,37 @@ class MergeVolumesParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._merge_to_neighbor_volume is not None:
+            json_data["mergeToNeighborVolume"] = self._merge_to_neighbor_volume
+        if self._neighbor_volumes is not None:
+            json_data["neighborVolumes"] = self._neighbor_volumes
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "merge_to_neighbor_volume :  %s\nneighbor_volumes :  %s" % (self._merge_to_neighbor_volume, self._neighbor_volumes)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def merge_to_neighbor_volume(self) -> bool:
+        """Option to merge given volumes to their neighbor volume.
+        """
+        return self._merge_to_neighbor_volume
+
+    @merge_to_neighbor_volume.setter
+    def merge_to_neighbor_volume(self, value: bool):
+        self._merge_to_neighbor_volume = value
+
+    @property
+    def neighbor_volumes(self) -> Iterable[int]:
+        """Ids of volume that are neighbors to given volumes for merging.
+        """
+        return self._neighbor_volumes
+
+    @neighbor_volumes.setter
+    def neighbor_volumes(self, value: Iterable[int]):
+        self._neighbor_volumes = value
 
 class MergeVolumesResults(CoreObject):
     """Results associated with merge volumes operation.

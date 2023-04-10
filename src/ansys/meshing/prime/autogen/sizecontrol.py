@@ -44,6 +44,8 @@ class SizeControl(CoreObject):
         >>>                  normal_angle = 18))
 
         """
+        if not isinstance(params, CurvatureSizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CurvatureSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetCurvatureSizingParams"
         self._model._print_logs_before_command("set_curvature_sizing_params", args)
@@ -73,6 +75,8 @@ class SizeControl(CoreObject):
         >>>                  max = 1.0, growth_rate = 1.2))
 
         """
+        if not isinstance(params, SoftSizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is SoftSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetSoftSizingParams"
         self._model._print_logs_before_command("set_soft_sizing_params", args)
@@ -102,6 +106,8 @@ class SizeControl(CoreObject):
         >>>                  min = 0.1, max = 1.0, growth_rate = 1.2))
 
         """
+        if not isinstance(params, ProximitySizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ProximitySizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetProximitySizingParams"
         self._model._print_logs_before_command("set_proximity_sizing_params", args)
@@ -131,6 +137,8 @@ class SizeControl(CoreObject):
         >>>                  min = 0.1, growth_rate = 1.2))
 
         """
+        if not isinstance(params, HardSizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is HardSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetHardSizingParams"
         self._model._print_logs_before_command("set_hard_sizing_params", args)
@@ -160,6 +168,8 @@ class SizeControl(CoreObject):
         >>>                  growth_rate = 1.2))
 
         """
+        if not isinstance(params, MeshedSizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is MeshedSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetMeshedSizingParams"
         self._model._print_logs_before_command("set_meshed_sizing_params", args)
@@ -189,6 +199,8 @@ class SizeControl(CoreObject):
         >>>                  max = 0.1, growth_rate = 1.2))
 
         """
+        if not isinstance(params, BoiSizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is BoiSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetBoiSizingParams"
         self._model._print_logs_before_command("set_boi_sizing_params", args)
@@ -348,6 +360,8 @@ class SizeControl(CoreObject):
         >>> size_control.set_suggested_name("control1")
 
         """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::SizeControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
@@ -379,6 +393,8 @@ class SizeControl(CoreObject):
         >>>                        label_expression = "inlet"))
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetScope"
         self._model._print_logs_before_command("set_scope", args)
@@ -427,6 +443,8 @@ class SizeControl(CoreObject):
         >>> results = size_control.get_summary(prime.SizeControlSummaryParams(model=model))
 
         """
+        if not isinstance(params, SizeControlSummaryParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is SizeControlSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/GetSummary"
         self._model._print_logs_before_command("get_summary", args)
