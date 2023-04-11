@@ -11,10 +11,14 @@ Fluent Meshing
 Fluent Meshing's
 geodesical
 hexahedra
+hexcore
 Lucid
 Meshedgeodesic
 Meshing's
 multithreading
+Octree
+polyhedra
+Preppost
 PyVista
 topoedges
 topofaces
@@ -30,3 +34,6 @@ Zonelet
 zonelet
 Zonelets
 zonelets
+ignore_self_proximity
+ignore_orientation
+meshedgeodesic

@@ -1,12 +1,11 @@
-# import os
-
-# os.environ.clear()
+"""Integration test for the toy car example."""
 import math
 
 import ansys.meshing.prime as prime
 
 
 def test_toycar_tutorial(get_remote_client, get_examples):
+    """Tests an use case with the toy car example."""
 
     toy_car = get_examples["toy_car"]
     model = get_remote_client.model
@@ -78,10 +77,6 @@ def test_toycar_tutorial(get_remote_client, get_examples):
         )
     )
 
-    for summary_res in qual_summary_res.quality_results:
-        print("Max surface skewness : ", summary_res.max_quality)
-        print("no.of faces above 0.9 : ", summary_res.n_found)
-
     part_summary_res = wrapper_part.get_summary(
         prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
     )
@@ -108,7 +103,7 @@ def test_toycar_tutorial(get_remote_client, get_examples):
     result = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
 
     # Validate quality check error code
-    assert result.error_code == prime.ErrorCode.NOERROR
+    assert result.error_code is prime.ErrorCode.NOERROR
     # result.hasNonPositiveVolumes
     assert not result.has_non_positive_volumes
 
