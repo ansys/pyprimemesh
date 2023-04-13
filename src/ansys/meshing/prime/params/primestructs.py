@@ -15,6 +15,8 @@ from ansys.meshing.prime.autogen.igastructs import *
 from ansys.meshing.prime.autogen.materialpointmanagerstructs import *
 from ansys.meshing.prime.autogen.meshinfostructs import *
 from ansys.meshing.prime.autogen.modelstructs import *
+from ansys.meshing.prime.autogen.morpherbcsstructs import *
+from ansys.meshing.prime.autogen.morpherstructs import *
 from ansys.meshing.prime.autogen.partstructs import *
 from ansys.meshing.prime.autogen.periodiccontrolstructs import *
 from ansys.meshing.prime.autogen.prismcontrolstructs import *
@@ -25,9 +27,11 @@ from ansys.meshing.prime.autogen.splittoolstructs import *
 from ansys.meshing.prime.autogen.surfacesearchstructs import *
 from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.surferstructs import *
+from ansys.meshing.prime.autogen.thinvolumecontrolstructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
 from ansys.meshing.prime.autogen.transformstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.volumesearchstructs import *
+from ansys.meshing.prime.autogen.volumesweeperstructs import *
 from ansys.meshing.prime.autogen.wrapperstructs import *

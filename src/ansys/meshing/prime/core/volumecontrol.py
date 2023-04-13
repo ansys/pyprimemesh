@@ -38,6 +38,7 @@ class VolumeControl(_VolumeControl):
             Class data in string format.
         """
         params = VolumeControlParams(model=self._model)
+        # TODO: function get_summary() not implemented
         result = _VolumeControl.get_summary(self, params)
         return result.message
 

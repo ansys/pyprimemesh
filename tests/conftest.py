@@ -1,3 +1,4 @@
+"""General fixtures to use in all test modules."""
 import os
 import xml.etree.ElementTree as ET
 
