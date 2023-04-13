@@ -118,8 +118,14 @@ class ErrorCode(enum.IntEnum):
     """Quadratic tetrahedral meshing is not supported with prism."""
     EXTRACTVOLUMESFAILED = 132
     """Extract volumes failed."""
+    MERGEVOLUMESFAILED = 133
+    """Merge volumes failed."""
+    DELETEVOLUMESFAILED = 134
+    """Delete volumes failed."""
     PERIODICSURFACESNOTSUPPORTEDFORPRISMS = 135
     """Periodic surfaces selected for prism generation are not supported."""
+    INVALIDNEIGHBORVOLUMES = 136
+    """Invalid neighbor volumes selected to merge volumes."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -282,6 +288,12 @@ class ErrorCode(enum.IntEnum):
     """Merge small zonelets option is supported for only face zonelets."""
     INVALIDINPUTVOLUMES = 1312
     """Invalid input volumes."""
+    MORPHER_COMPUTEBCS = 1410
+    """Failed to compute boundary conditions."""
+    MORPHER_MATCHMORPHINVALIDSOURCEINPUT = 1450
+    """Invalid source input for match morphing."""
+    MORPHER_BCPAIRINPUTTYPEMISMATCH = 1451
+    """Entity type does not match with input for defined boundary condition pair."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
     INVALIDSIZECONTROLINPUTS = 1501
@@ -490,6 +502,44 @@ class ErrorCode(enum.IntEnum):
     """Tool zonelets form a self intersecting volume."""
     TOOLZONELETS_NOTWATERTIGHT = 10005
     """Tool zonelets do not form a watertight volume."""
+    STACKER_INVALIDINPUTVOLUMES = 10101
+    """Invalid input volumes provided to stacker."""
+    STACKER_INVALIDPARAMS = 10102
+    """Invalid parameters provided to stacker."""
+    STACKER_FACESEPARATIONFAILED = 10103
+    """Stacker failed to separate base face."""
+    STACKER_FAILED = 10104
+    """Stacker failed to mesh the model."""
+    STACKER_NOFACEFOUNDINVOLUMES = 10105
+    """No faces are found in the specified volumes."""
+    STACKER_MESHEDFACESFOUND = 10106
+    """Some faces in the input model have existing mesh."""
+    STACKER_INVALIDBASEFACEINPUT = 10107
+    """Base face list input is invalid."""
+    STACKER_NONSTACKABLEVOLUMESFOUND = 10109
+    """Some volumes are not aligned in the stacking direction."""
+    STACKER_INCORRECTBODYDEFINITION = 10110
+    """Some bodies are intersecting or incorrectly defined."""
+    STACKER_BASEFACEUNMESHED = 10111
+    """Base face list input has unmeshed topofaces."""
+    INVALIDTHINVOLUMECONTROLS = 12010
+    """Invalid input provided. Invalid thin volume control."""
+    THINVOLUMECONTROLINVALIDSOURCESCOPE = 12020
+    """Invalid input provided. Source scope not found."""
+    THINVOLUMECONTROLINVALIDTARGETSCOPE = 12040
+    """Invalid input provided. Target scope not found."""
+    THINVOLUMECONTROLINVALIDSCOPE = 12060
+    """Invalid input provided. Source scope and target scope cannot be same."""
+    THINVOLUMECONTROLINVALIDSOURCESCOPEENTITY = 12080
+    """Invalid input provided. Invalid source scope entity."""
+    THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY = 12100
+    """Invalid input provided. Invalid target scope entity."""
+    THINVOLUMECONTROLINVALIDNUMBEROFLAYER = 12120
+    """Invalid input provided. Number of layer in thin volume mesh should be greater than 0."""
+    THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED = 12140
+    """Thin volume mesh controls not supported for part with topology data."""
+    MICROSTRUCTUREINVALIDELEMENTTYPE = 13000
+    """Invalid input provided. Invalid Element Type."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.

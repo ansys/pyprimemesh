@@ -51,6 +51,10 @@ class Wrapper(CoreObject):
         >>> results = wrapper.wrap(wrapper_control_id, params)
 
         """
+        if not isinstance(wrapper_control_id, int):
+            raise TypeError("Invalid argument type passed for wrapper_control_id, valid argument type is int.")
+        if not isinstance(params, WrapParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is WrapParams.")
         args = {"wrapper_control_id" : wrapper_control_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/Wrap"
@@ -81,6 +85,10 @@ class Wrapper(CoreObject):
         >>> result = wrapper.improve_quality(part_id, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(params, WrapperImproveQualityParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperImproveQualityParams.")
         args = {"part_id" : part_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/ImproveQuality"
@@ -111,6 +119,10 @@ class Wrapper(CoreObject):
         >>> result = wrapper.close_gaps(scope, params)
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+        if not isinstance(params, WrapperCloseGapsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperCloseGapsParams.")
         args = {"scope" : scope._jsonify(),
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/CloseGaps"
