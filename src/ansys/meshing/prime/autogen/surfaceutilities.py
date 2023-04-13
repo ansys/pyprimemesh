@@ -50,12 +50,54 @@ class SurfaceUtilities(CoreObject):
         >>> bounding_box = surface_utilities.get_bounding_box_of_zonelets(zonelets)
 
         """
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
         args = {"zonelets" : zonelets}
         command_name = "PrimeMesh::SurfaceUtilities/GetBoundingBoxOfZonelets"
         self._model._print_logs_before_command("get_bounding_box_of_zonelets", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_bounding_box_of_zonelets", BoundingBox(model = self._model, json_data = result))
         return BoundingBox(model = self._model, json_data = result)
+
+    def fix_invalid_normal_nodes_of_face_zonelets(self, part_id : int, face_zonelets : Iterable[int], params : FixInvalidNormalNodeParams) -> FixInvalidNormalNodeResults:
+        """ Create nuggets to fix invalid normal at nodes of the given face zonelets.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Part id of the given face zonelets. Nuggets created are associated to the given part.
+        face_zonelets : Iterable[int]
+            Ids of face zonelets used to find invalid normal nodes.
+        params : FixInvalidNormalNodeParams
+            Parameters to find invalid normal nodes and fix them.
+
+        Returns
+        -------
+        FixInvalidNormalNodeResults
+            Returns the FixInvalidNormalNodeResults.
+
+
+        Examples
+        --------
+        >>> params = prime.FixInvalidNormalNodeParams(model = model)
+        >>> results = surface_utils.fix_invalid_normal_nodes_of_face_zonelets(part_id, face_zonelets, params)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, FixInvalidNormalNodeParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is FixInvalidNormalNodeParams.")
+        args = {"part_id" : part_id,
+        "face_zonelets" : face_zonelets,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/FixInvalidNormalNodesOfFaceZonelets"
+        self._model._print_logs_before_command("fix_invalid_normal_nodes_of_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("fix_invalid_normal_nodes_of_face_zonelets", FixInvalidNormalNodeResults(model = self._model, json_data = result))
+        return FixInvalidNormalNodeResults(model = self._model, json_data = result)
 
     def copy_face_zonelets(self, face_zonelets : Iterable[int], target_part_id : int, params : CopyZoneletsParams) -> CopyZoneletsResults:
         """ Copy face zonelets.
@@ -82,6 +124,12 @@ class SurfaceUtilities(CoreObject):
         >>>> surfaceutil = surfaceutil.copy_face_zonelets(face_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))
 
         """
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(target_part_id, int):
+            raise TypeError("Invalid argument type passed for target_part_id, valid argument type is int.")
+        if not isinstance(params, CopyZoneletsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CopyZoneletsParams.")
         args = {"face_zonelets" : face_zonelets,
         "target_part_id" : target_part_id,
         "params" : params._jsonify()}
@@ -118,6 +166,14 @@ class SurfaceUtilities(CoreObject):
         >>> results = surface_utils.fill_holes_at_plane(part_id, face_zonelets, plane_points, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(plane_points, Iterable):
+            raise TypeError("Invalid argument type passed for plane_points, valid argument type is Iterable[float].")
+        if not isinstance(params, FillHolesAtPlaneParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is FillHolesAtPlaneParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "plane_points" : plane_points,
@@ -153,6 +209,12 @@ class SurfaceUtilities(CoreObject):
         >>> results = surface_utils.cap_face_zonelets(part_id, face_zonelets, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, CreateCapParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CreateCapParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "params" : params._jsonify()}
@@ -186,6 +248,12 @@ class SurfaceUtilities(CoreObject):
         >>> result = surf_utils.delete_unwetted_surfaces(zonelets, live_mpt_names, prime.DeleteUnwettedParams(model))
 
         """
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(live_material_point_names, List):
+            raise TypeError("Invalid argument type passed for live_material_point_names, valid argument type is List[str].")
+        if not isinstance(params, DeleteUnwettedParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteUnwettedParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "live_material_point_names" : live_material_point_names,
         "params" : params._jsonify()}
@@ -217,6 +285,10 @@ class SurfaceUtilities(CoreObject):
         >>> result = surf_utils.resolve_intersections(zonelets, prime.ResolveIntersectionsParams(model))
 
         """
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, ResolveIntersectionsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ResolveIntersectionsParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceUtilities/ResolveIntersections"
@@ -247,6 +319,10 @@ class SurfaceUtilities(CoreObject):
         >>> result = surf_utils.smooth_dihedral_face_nodes(zonelets, params)
 
         """
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, SmoothDihedralFaceNodesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is SmoothDihedralFaceNodesParams.")
         args = {"zonelets" : zonelets,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceUtilities/SmoothDihedralFaceNodes"
@@ -278,6 +354,10 @@ class SurfaceUtilities(CoreObject):
         >>> result = surf_utils.refine_at_contacts(part_ids, params)
 
         """
+        if not isinstance(part_ids, Iterable):
+            raise TypeError("Invalid argument type passed for part_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, RefineAtContactsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is RefineAtContactsParams.")
         args = {"part_ids" : part_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceUtilities/RefineAtContacts"
@@ -308,6 +388,10 @@ class SurfaceUtilities(CoreObject):
         >>> result = surf_utils.add_thickness(zonelets, params)
 
         """
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, AddThicknessParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is AddThicknessParams.")
         args = {"zonelets" : zonelets,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceUtilities/AddThickness"
@@ -316,14 +400,14 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("add_thickness", AddThicknessResults(model = self._model, json_data = result))
         return AddThicknessResults(model = self._model, json_data = result)
 
-    def create_boi(self, scope : ScopeDefinition, params : CreateBOIParams) -> CreateBOIResults:
+    def create_boi(self, face_zonelet_ids : Iterable[int], params : CreateBOIParams) -> CreateBOIResults:
         """ Creates BOI to the selected list of face zonelet ids.
 
 
         Parameters
         ----------
-        scope : ScopeDefinition
-            Scope of zonelets.
+        face_zonelet_ids : Iterable[int]
+            List of input face zonelet ids.
         params : CreateBOIParams
             Parameters to control the BOI creation operation.
 
@@ -335,10 +419,14 @@ class SurfaceUtilities(CoreObject):
 
         Examples
         --------
-        >>> result = surf_utils.create_surface_boi(zonelets, params)
+        >>> result = surf_utils.create_boi(zonelets, params)
 
         """
-        args = {"scope" : scope._jsonify(),
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, CreateBOIParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CreateBOIParams.")
+        args = {"face_zonelet_ids" : face_zonelet_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceUtilities/CreateBOI"
         self._model._print_logs_before_command("create_boi", args)
@@ -346,16 +434,16 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("create_boi", CreateBOIResults(model = self._model, json_data = result))
         return CreateBOIResults(model = self._model, json_data = result)
 
-    def create_contact_patch(self, source_scope : ScopeDefinition, target_scope : ScopeDefinition, params : CreateContactPatchParams) -> CreateContactPatchResults:
-        """ Creates contact patches.
+    def create_contact_patch(self, source_zonelets : Iterable[int], target_zonelets : Iterable[int], params : CreateContactPatchParams) -> CreateContactPatchResults:
+        """ Creates contact patch by offsetting the target zonelets.
 
 
         Parameters
         ----------
-        source_scope : ScopeDefinition
-            Scope of source zonelets.
-        target_scope : ScopeDefinition
-            Scope of target zonelets which is to be offsetted for contact patch creation.
+        source_zonelets : Iterable[int]
+            Source face zonelet ids.
+        target_zonelets : Iterable[int]
+            Target face zonelet ids.
         params : CreateContactPatchParams
             Parameters to control the contact patch creation operation.
 
@@ -370,8 +458,14 @@ class SurfaceUtilities(CoreObject):
         >>> result = surf_utils.create_contact_patch(zonelets, params)
 
         """
-        args = {"source_scope" : source_scope._jsonify(),
-        "target_scope" : target_scope._jsonify(),
+        if not isinstance(source_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for source_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(target_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for target_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, CreateContactPatchParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CreateContactPatchParams.")
+        args = {"source_zonelets" : source_zonelets,
+        "target_zonelets" : target_zonelets,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceUtilities/CreateContactPatch"
         self._model._print_logs_before_command("create_contact_patch", args)
