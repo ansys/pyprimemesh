@@ -122,7 +122,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
 # By default, the wrap uses all parts as input and deletes the input
 # geometry after wrapping unless keep_input is set as True.
 
-mesh_util.read(pipe_tee)
+mesh_util.read(file_name)
 
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
