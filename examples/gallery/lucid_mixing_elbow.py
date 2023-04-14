@@ -59,7 +59,6 @@ mesh_util = prime.lucid.Mesh(model=model)
 # For Windows OS users scdoc is also available:
 # mixing_elbow = prime.examples.download_elbow_scdoc()
 
-# . Create face zones from labels imported from geometry for use in Fluent solver.
 mixing_elbow = prime.examples.download_elbow_fmd()
 
 mesh_util.read(file_name=mixing_elbow)
