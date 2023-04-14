@@ -42,7 +42,6 @@ class SurfaceUtilities(_SurfaceUtilities):
         _SurfaceUtilities.__init__(self, model)
         self._model = model
 
-
     def add_thickness(
         self, zonelets: Iterable[int], params: AddThicknessParams
     ) -> AddThicknessResults:
