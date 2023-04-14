@@ -76,6 +76,7 @@ def get_examples():
     """Downloads the prime examples for them to be available
     in any test.
     """
+
     examples_dict = {}
     elbow_lucid = prime.examples.download_elbow_pmdat()
     examples_dict["elbow_lucid"] = elbow_lucid
