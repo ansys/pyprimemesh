@@ -61,10 +61,8 @@ mesh_util = lucid.Mesh(model)
 # FMD format is exported from SpaceClaim and is compatible with Linux.
 # Read and display the geometry file.
 # The file contains several unmeshed parts as you would get after you imported from CAD.
-
 # For Windows OS users scdoc is also available:
 # pipe_tee = prime.examples.download_pipe_tee_scdoc()
-
 pipe_tee = prime.examples.download_pipe_tee_fmd()
 mesh_util.read(pipe_tee)
 
