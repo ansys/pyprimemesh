@@ -57,6 +57,12 @@ class DeleteTool(CoreObject):
         >>>                                       model=model))
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, DeleteFringesAndOverlapsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteFringesAndOverlapsParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "params" : params._jsonify()}
