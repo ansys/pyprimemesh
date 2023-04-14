@@ -59,6 +59,14 @@ class VolumeMeshTool(CoreObject):
         >>>                                prime.AutoNodeMoveParams(model =model))
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(cell_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for cell_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(boundary_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for boundary_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, AutoNodeMoveParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is AutoNodeMoveParams.")
         args = {"part_id" : part_id,
         "cell_zonelets" : cell_zonelets,
         "boundary_zonelets" : boundary_zonelets,
@@ -92,6 +100,10 @@ class VolumeMeshTool(CoreObject):
         >>>                                prime.CheckMeshParams(model =model))
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(params, CheckMeshParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CheckMeshParams.")
         args = {"part_id" : part_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeMeshTool/CheckMesh"

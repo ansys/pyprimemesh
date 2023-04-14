@@ -62,6 +62,12 @@ class BoundaryFittedSpline(CoreObject):
         >>> results = boundary_fitted_spline.create_boundary_fitted_spline(part_id, cell_zonelet_ids, boundary_fitted_spline_params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(cell_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for cell_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(boundary_fitted_spline_params, BoundaryFittedSplineParams):
+            raise TypeError("Invalid argument type passed for boundary_fitted_spline_params, valid argument type is BoundaryFittedSplineParams.")
         args = {"part_id" : part_id,
         "cell_zonelet_ids" : cell_zonelet_ids,
         "boundary_fitted_spline_params" : boundary_fitted_spline_params._jsonify()}
@@ -102,6 +108,12 @@ class BoundaryFittedSpline(CoreObject):
         >>> results = boundary_fitted_spline.refine_spline(part_id, spline_ids, refine_spline_params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(spline_ids, Iterable):
+            raise TypeError("Invalid argument type passed for spline_ids, valid argument type is Iterable[int].")
+        if not isinstance(refine_spline_params, RefineSplineParams):
+            raise TypeError("Invalid argument type passed for refine_spline_params, valid argument type is RefineSplineParams.")
         args = {"part_id" : part_id,
         "spline_ids" : spline_ids,
         "refine_spline_params" : refine_spline_params._jsonify()}

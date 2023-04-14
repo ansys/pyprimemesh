@@ -35,6 +35,8 @@ class VolumeControl(CoreObject):
         >>>                  cell_zonelet_type = prime.CellZoneletType.FLUID))
 
         """
+        if not isinstance(volume_control_params, VolumeControlParams):
+            raise TypeError("Invalid argument type passed for volume_control_params, valid argument type is VolumeControlParams.")
         args = {"volume_control_params" : volume_control_params._jsonify()}
         command_name = "PrimeMesh::VolumeControl/SetParams"
         self._model._print_logs_before_command("set_params", args)
@@ -65,6 +67,8 @@ class VolumeControl(CoreObject):
         >>>                        zone_expression = "vol_in"))
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::VolumeControl/SetScope"
         self._model._print_logs_before_command("set_scope", args)
@@ -92,6 +96,8 @@ class VolumeControl(CoreObject):
         >>> volume_control.set_suggested_name("control1")
 
         """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::VolumeControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
