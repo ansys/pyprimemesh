@@ -62,9 +62,9 @@ mesh_util = lucid.Mesh(model)
 # Read and display the geometry file.
 # The file contains several unmeshed parts as you would get after you imported from CAD.
 # For Windows OS users scdoc is also available:
-# file_name = prime.examples.download_pipe_tee_scdoc()
-file_name = prime.examples.download_pipe_tee_fmd()
-mesh_util.read(file_name)
+# pipe_tee = prime.examples.download_pipe_tee_scdoc()
+pipe_tee = prime.examples.download_pipe_tee_fmd()
+mesh_util.read(pipe_tee)
 
 display = graphics.Graphics(model)
 display()
@@ -122,7 +122,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
 # By default, the wrap uses all parts as input and deletes the input
 # geometry after wrapping unless keep_input is set as True.
 
-mesh_util.read(file_name)
+mesh_util.read(pipe_tee)
 
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
