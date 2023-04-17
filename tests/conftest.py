@@ -5,7 +5,6 @@ import xml.etree.ElementTree as ET
 import pytest
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.examples import download_test_examples
 
 
 class RemoteClientManager:
@@ -92,12 +91,6 @@ def get_examples():
     examples_dict["bracket"] = bracket
 
     return examples_dict
-
-
-@pytest.fixture(scope="session", autouse=True)
-def get_testfiles():
-    """Downloads unit test files"""
-    download_test_examples(os.path.abspath("./tests/core/test_files"))
 
 
 def create_scenario_element(test, id):
