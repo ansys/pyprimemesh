@@ -1,7 +1,7 @@
 import os
 from typing import Optional, Union
 
-from .download import download_file
+from .download_utilities import download_file
 
 FILE_NAMES = [
     "box.psf",

@@ -12,3 +12,4 @@ from .examples import (
     download_toy_car_pmdat,
     download_toy_car_scdoc,
 )
+from .unit_test_examples import download_test_examples
