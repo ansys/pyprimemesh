@@ -300,6 +300,8 @@ class Model(_Model):
         --------
             >>> control_data = model.control_data
         """
+        if self._control_data is None:
+            self._sync_up_model()
         return self._control_data
 
     @property
@@ -317,6 +319,8 @@ class Model(_Model):
         --------
             >>> mpt_data = model.material_point_data
         """
+        if self._material_point_data is None:
+            self._sync_up_model()
         return self._material_point_data
 
     @property
