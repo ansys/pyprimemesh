@@ -1,3 +1,4 @@
+"""Module containing managing logic of the Prime Model."""
 from typing import Iterable, List
 
 # isort: split
@@ -21,10 +22,28 @@ from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 
 
 class Model(_Model):
+    """Model is the nucleus of Prime.
+
+    Model forms the base and contains all the information about Prime.
+    You can access any information in Prime only through Model.
+    Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+
+    Parameters
+    ----------
+    comm : Communicator
+        Communicator to connect with the server.
+    id : int
+        ID of the model.
+    object_id : int
+        Object ID of the model.
+    name : str
+        Name of the model.
+    """
+
     __doc__ = _Model.__doc__
 
     def __init__(self, comm: Communicator, id: int, object_id: int, name: str):
-        """Initialize Model"""
+        """Initialize the model and the parameters."""
         _Model.__init__(self, comm, id, object_id, name)
         self._parts = []
         self._global_sf_params = GlobalSizingParams(model=self)
@@ -35,7 +54,7 @@ class Model(_Model):
         self._freeze()
 
     def _sync_up_model(self):
-        """Synchronizes client model with the server model.
+        """Synchronize client model with the server model.
 
         Updates proxy child objects of the client model with the child objects of the server model.
 
@@ -72,7 +91,18 @@ class Model(_Model):
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def _add_part(self, id: int):
-        """Add a part that is present on server."""
+        """Add a part that is present on server.
+
+        Parameters
+        ----------
+        id : int
+            ID of the part
+
+        Raises
+        ------
+        PrimeRuntimeError
+            Raise if unable to create the part.
+        """
         res = json.loads(
             self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
@@ -87,7 +117,7 @@ class Model(_Model):
             raise PrimeRuntimeError("Unable to create part", ErrorCode.PARTNOTFOUND)
 
     def get_part_by_name(self, name: str) -> Part:
-        """Gets the part by name. Returns None if part doesn't exist for the given name.
+        """Get the part by name. Returns None if part doesn't exist for the given name.
 
         Parameters
         ----------
@@ -111,7 +141,7 @@ class Model(_Model):
         return None
 
     def get_part(self, id: int) -> Part:
-        """Gets the part by id. Returns None if part doesn't exist for the given id.
+        """Get the part by id. Returns None if part doesn't exist for the given id.
 
         Parameters
         ----------
@@ -121,7 +151,7 @@ class Model(_Model):
         Returns
         -------
         Part
-            Returns the part.
+            Return the part.
 
         Examples
         --------
@@ -135,8 +165,7 @@ class Model(_Model):
         return None
 
     def merge_parts(self, part_ids: Iterable[int], params: MergePartsParams) -> MergePartsResults:
-        """Merges given parts into one.
-
+        """Merge given parts into one.
 
         Parameters
         ----------
@@ -148,7 +177,7 @@ class Model(_Model):
         Returns
         -------
         MergePartsResults
-            Returns the MergePartsResults.
+            Return the MergePartsResults.
 
 
         Examples
@@ -169,8 +198,7 @@ class Model(_Model):
         return res
 
     def delete_parts(self, part_ids: Iterable[int]) -> DeleteResults:
-        """Deletes the parts and its contents.
-
+        """Delete the parts and its contents.
 
         Parameters
         ----------
@@ -180,7 +208,7 @@ class Model(_Model):
         Returns
         -------
         DeleteResults
-            Returns DeleteResults.
+            Return DeleteResults.
 
 
         Examples
@@ -197,12 +225,12 @@ class Model(_Model):
         return res
 
     def get_global_sizing_params(self) -> GlobalSizingParams:
-        """Gets the GlobalSizingParams.
+        """Get the GlobalSizingParams.
 
-        Returns
+        Return
         -------
         GlobalSizingParams
-            Returns the GlobalSizingParams.
+            Return the GlobalSizingParams.
 
         Examples
         --------
@@ -212,9 +240,9 @@ class Model(_Model):
         return self._global_sf_params
 
     def set_global_sizing_params(self, params: GlobalSizingParams):
-        """Sets the global sizing parameters.
+        """Set the global sizing parameters.
 
-        Sets the global sizing params to initialize surfer parameters and various size control
+        Set the global sizing params to initialize surfer parameters and various size control
         parameters.
 
         Parameters
@@ -224,24 +252,22 @@ class Model(_Model):
 
         Examples
         --------
-
         >>> model = client.model
         >>> model.set_global_sizing_params(GlobalSizingParams(model=model,
         ...                                          min=0.1,
         ...                                          max=1.0,
         ...                                          growth_rate=1.2))
-
         """
         _Model.set_global_sizing_params(self, params)
         self._global_sf_params = params
 
     def __str__(self):
-        """Prints the summary of the model.
+        """Print the summary of the model.
 
         Returns
         -------
         str
-            Returns the summary of the model.
+            Return the summary of the model.
 
         Examples
         --------
@@ -257,12 +283,12 @@ class Model(_Model):
 
     @property
     def parts(self) -> List[Part]:
-        """Gets the list of parts of a model.
+        """Get the list of parts of a model.
 
         Returns
         -------
         List[Part]
-            Returns the list of parts.
+            Return the list of parts.
 
         Examples
         --------
@@ -289,12 +315,12 @@ class Model(_Model):
 
     @property
     def control_data(self) -> ControlData:
-        """Gets the control data of a model.
+        """Get the control data of a model.
 
         Returns
         -------
         ControlData
-            Returns the control data.
+            Return the control data.
 
         Examples
         --------
@@ -313,7 +339,7 @@ class Model(_Model):
         Returns
         -------
         MaterialPointManager
-            Returns the material point manager.
+            Return the material point manager.
 
         Examples
         --------
@@ -333,7 +359,7 @@ class Model(_Model):
         Returns
         -------
         Logger
-             Returns logging.Logger instance.
+             Return logging.Logger instance.
 
         Examples
         --------
