@@ -33,6 +33,8 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_geometry_scope(scope)
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetGeometryScope"
         self._model._print_logs_before_command("set_geometry_scope", args)
@@ -58,6 +60,8 @@ class WrapperControl(CoreObject):
         >>> set_leak_prev_results = wrapper_control.set_leak_preventions([params])
 
         """
+        if not isinstance(params, List):
+            raise TypeError("Invalid argument type passed for params, valid argument type is List[LeakPreventionParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetLeakPreventions"
         self._model._print_logs_before_command("set_leak_preventions", args)
@@ -84,6 +88,8 @@ class WrapperControl(CoreObject):
         >>> set_cont_prev_results = wrapper_control.set_contact_preventions([params])
 
         """
+        if not isinstance(params, List):
+            raise TypeError("Invalid argument type passed for params, valid argument type is List[ContactPreventionParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetContactPreventions"
         self._model._print_logs_before_command("set_contact_preventions", args)
@@ -105,6 +111,8 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_live_material_points(["Fluid1"])
 
         """
+        if not isinstance(material_point_names, List):
+            raise TypeError("Invalid argument type passed for material_point_names, valid argument type is List[str].")
         args = {"material_point_names" : material_point_names}
         command_name = "PrimeMesh::WrapperControl/SetLiveMaterialPoints"
         self._model._print_logs_before_command("set_live_material_points", args)
@@ -130,6 +138,8 @@ class WrapperControl(CoreObject):
         >>> set_feat_rec_results = wrapper_control.set_feature_recoveries([params])
 
         """
+        if not isinstance(params, List):
+            raise TypeError("Invalid argument type passed for params, valid argument type is List[FeatureRecoveryParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetFeatureRecoveries"
         self._model._print_logs_before_command("set_feature_recoveries", args)
@@ -151,6 +161,8 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_suggested_wrapper_part_name("wrap")
 
         """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::WrapperControl/SetSuggestedWrapperPartName"
         self._model._print_logs_before_command("set_suggested_wrapper_part_name", args)
@@ -177,6 +189,8 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_suggested_name("wrapper_control1")
 
         """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::WrapperControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
@@ -242,6 +256,8 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_shadow_geometry_scope(scope)
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetShadowGeometryScope"
         self._model._print_logs_before_command("set_shadow_geometry_scope", args)

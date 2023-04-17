@@ -26,7 +26,7 @@ Second-order tetrahedral mesh
 This code shows how to initialize the :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` class
 and generate the volume mesh on meshed topofaces:
 
-.. code:: python
+.. code-block:: python
 
    automesh_params = prime.AutoMeshParams(
        model=model,
@@ -38,7 +38,7 @@ and generate the volume mesh on meshed topofaces:
 
 This code prints the automatic mesh parameters so that you can review them:
 
-.. code:: pycon
+.. code-block:: pycon
 
    >>> print(automesh_params)
 
@@ -53,7 +53,7 @@ This code prints the automatic mesh parameters so that you can review them:
 
 This code generates the volume mesh:
 
-.. code:: python
+.. code-block:: python
 
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
@@ -73,7 +73,7 @@ This example shows how to perform these steps:
 * Perform volume meshing with polyhedral elements.
 * Check volume mesh quality based on cell quality measures. (For more information, see :ref:`ref_index_mesh_diagnostics`.)
 
-.. code:: python
+.. code-block:: python
 
    # Prism control
    prism_control = model.control_data.create_prism_control()
@@ -108,7 +108,7 @@ This example shows how to perform these steps:
 
 This code prints the volume quality summary:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(qual_summary_res)
 
@@ -137,7 +137,7 @@ Prism controls for polyhedral mesh using the Lucid module
 
 This example shows how to generate the preceding poly prism method using the Lucid module:
 
-.. code:: python
+.. code-block:: python
 
     # Volume mesh with polyhedral elements
     # Set prism layers parameter for boundary layer refinement
@@ -161,7 +161,7 @@ This example shows how to perform these steps:
 * Create volume control and set zone-specific parameters.
 * Perform volume meshing with tetrahedral elements.
 
-.. code:: python
+.. code-block:: python
 
    # Volume control
    volume_control = model.control_data.create_volume_control()

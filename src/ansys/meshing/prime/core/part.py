@@ -1,3 +1,4 @@
+"""Module containing Part class."""
 from typing import Any
 
 # isort: split
@@ -9,22 +10,25 @@ from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
 
 
 class Part(_Part):
+    """
+    Defines and modifies the parts of a model.
+
+    Parameters
+    ----------
+    model: ansys.meshing.prime.Model
+        Model in which part is created
+    id: int
+        Id of the part provided by server
+    object_id: int
+        Object id provided by the server
+    name: str
+        Part name
+    """
+
     __doc__ = _Part.__doc__
 
     def __init__(self, model, id: int, object_id: int, name: str):
-        """Initialize Part
-
-        Parameters
-        ----------
-        model: ansys.meshing.prime.Model
-            Model in which part is created
-        id: int
-            Id of the part provided by server
-        object_id: int
-            Object id provided by the server
-        name: str
-            Part name
-        """
+        """Initialize Part."""
         self._model = model
         self._print_mesh = False
         self._print_id = False
@@ -69,14 +73,14 @@ class Part(_Part):
         return result.message
 
     def __str__(self) -> str:
-        """Prints the summary of a part.
+        """Print the summary of a part.
 
         Uses print_mesh and print_id properties to control the the summary of a part.
 
         Returns
         -------
         str
-            Returns the summary of a part.
+            Return the summary of a part.
 
         Examples
         --------
@@ -92,8 +96,7 @@ class Part(_Part):
         return result.message
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """Sets the unique name for the part based on the given suggested name.
-
+        """Set the unique name for the part based on the given suggested name.
 
         Parameters
         ----------
@@ -103,7 +106,7 @@ class Part(_Part):
         Returns
         -------
         SetNameResults
-            Returns the results with assigned name of the part.
+            Return the results with assigned name of the part.
 
 
         Examples
@@ -122,11 +125,20 @@ class Part(_Part):
 
     @print_mesh.setter
     def print_mesh(self, value: bool):
+        """Print the mesh of the part.
+
+        Parameters
+        ----------
+        value : bool
+            _description_
+        """
         self._print_mesh = value
 
     @property
     def print_id(self) -> bool:
-        """When True, prints the id's of topoentities or zonelets along with part summary.
+        """Print the id's of topoentities.
+
+        When True, prints the id's of topoentities or zonelets along with part summary.
         The default is False.
         """
         return self._print_id

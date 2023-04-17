@@ -39,11 +39,9 @@ Procedure
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
-# . Import all necessary modules.
-
-# . Launch Ansys Prime Server instance and connect client.
-
-# . Get the client model and instantiate meshing utilities from lucid class.
+# Import all necessary modules.
+# Launch Ansys Prime Server instance and connect client.
+# Get the client model and instantiate meshing utilities from lucid class.
 
 import os
 import tempfile
@@ -59,16 +57,14 @@ mesh_util = lucid.Mesh(model)
 ###############################################################################
 # Read CAD Geometry
 # ~~~~~~~~~~~~~~~~~
-# . Download example FMD geometry file.
-
+# Download example FMD geometry file.
 # FMD format is exported from SpaceClaim and is compatible with Linux.
-
-# . Read and display the geometry file.
-
+# Read and display the geometry file.
 # The file contains several unmeshed parts as you would get after you imported from CAD.
-
-file_name = prime.examples.download_pipe_tee_fmd()
-mesh_util.read(file_name)
+# For Windows OS users scdoc is also available:
+# pipe_tee = prime.examples.download_pipe_tee_scdoc()
+pipe_tee = prime.examples.download_pipe_tee_fmd()
+mesh_util.read(pipe_tee)
 
 display = graphics.Graphics(model)
 display()
@@ -78,14 +74,11 @@ print(model)
 ###############################################################################
 # Mesh for Structural
 # ~~~~~~~~~~~~~~~~~~~
-# . Surface mesh using curvature sizing.
-
-# . Volume mesh with tetrahedral elements.
-
-# . Delete unwanted capping surface geometries by deleting
+# Surface mesh using curvature sizing.
+# Volume mesh with tetrahedral elements.
+# Delete unwanted capping surface geometries by deleting
 # parts that do not have any volume zones.
-
-# . Display structural thermal mesh ready for export.
+# Display structural thermal mesh ready for export.
 
 mesh_util.surface_mesh(min_size=2.5, max_size=10)
 mesh_util.volume_mesh()
@@ -101,7 +94,7 @@ display()
 ###############################################################################
 # Write Structural Mesh
 # ~~~~~~~~~~~~~~~~~~~~~
-# Labels are exported to CDB as collections for
+# Labels are exported to CDB as components for
 # applying load boundary conditions in the solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
@@ -121,16 +114,15 @@ with tempfile.TemporaryDirectory() as temp_folder:
 #
 # Here, you will choose to wrap and walk over these features.
 #
-# . Read in the geometry again.
-
-# . Use a constant size wrap to walk over the diameter change
+# Read in the geometry again.
+#
+# Use a constant size wrap to walk over the diameter change
 # feature and extract the largest internal volume as the fluid.
-
-# By default, the wrap uses all parts as input and delete the input
+#
+# By default, the wrap uses all parts as input and deletes the input
 # geometry after wrapping unless keep_input is set as True.
-# When displaying, you can avoid displaying unnecessary edge zones.
 
-mesh_util.read(file_name)
+mesh_util.read(pipe_tee)
 
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
@@ -141,11 +133,10 @@ display()
 ###############################################################################
 # Volume Mesh Fluid
 # ~~~~~~~~~~~~~~~~~
-# . Create zones for each label to be used for boundary conditions definitions.
-
-# . Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
-
-# . Visualize the generated volume mesh.
+# Create zones for each label to be used for boundary conditions definitions.
+# Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
+# Visualize the generated volume mesh.
+# When displaying, you can avoid displaying unnecessary edge zones.
 # You can clearly see the prism layers that were specified by the Prism control.
 
 # set global sizing

@@ -44,8 +44,8 @@ model = prime_client.model
 
 # Your code goes here...
 mesh_util = prime.lucid.Mesh(model=model)
-example_file = prime.examples.download_elbow_fmd()
-mesh_util.read(example_file)
+mixing_elbow = prime.examples.download_elbow_fmd()
+mesh_util.read(mixing_elbow)
 print(model)
 
 ###############################################################################
@@ -84,7 +84,7 @@ display()
 # ~~~~~~~~~~~~~~~~~~~~~
 # Once your example is complete and you've verified builds locally, you can make a
 # pull request (PR).  Branches containing examples should be prefixed with `doc/`
-# as per the branch naming conventions found here: :ref:`contributing`.
+# as per the branch naming conventions found here: :ref:`ref_index_contributing`.
 #
 # Note that you only need to create the python source example (.py).  The jupyter
 # notebook, the example html and the demo script will all be auto-generated via ``sphinx-gallery``.

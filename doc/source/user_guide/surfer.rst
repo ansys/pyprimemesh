@@ -8,7 +8,7 @@ Surface meshing
 
 The :class:`Surfer <ansys.meshing.prime.Surfer>` class enables you to perform surface meshing using
 different surface meshing algorithms on topofaces or face zonelets. Surface meshing considers many
-parameters, such as like size field type, minimum size, maximum size, growth rate, and transition type,
+parameters, such as size field type, minimum size, maximum size, growth rate, and transition type,
 while meshing face zonelets or topofaces.
 
 .. tip::
@@ -26,7 +26,7 @@ The following example shows how to perform these steps:
 
 Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
     from ansys.meshing.prime.graphics import Graphics
@@ -55,7 +55,7 @@ Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
 Initialize surfer parameters and generate surface mesh on topofaces:
 
-.. code:: python
+.. code-block:: python
 
     # Surface mesh with triangular elements of uniform size
     surfer_params = prime.SurferParams(model=model, constant_size=1.0)
@@ -83,7 +83,7 @@ This example shows you to perform these steps:
 
 Start the PyPrimeMesh client and import the faceted geometry (STL) file:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
     from ansys.meshing.prime.graphics import Graphics
@@ -102,7 +102,7 @@ Start the PyPrimeMesh client and import the faceted geometry (STL) file:
 
 Now that the CAD file is imported, display the model using graphics module:
 
-.. code:: python
+.. code-block:: python
 
     # Show model in graphic and get part summary
     display = Graphics(model)
@@ -119,7 +119,7 @@ Now that the CAD file is imported, display the model using graphics module:
 
 Print the results of part summary:
 
-.. code:: pycon
+.. code-block:: pycon
 
     >>> print(part_summary_res)
 
@@ -153,7 +153,7 @@ Print the results of part summary:
 
 Set the global sizing parameters to initialize size control parameters (with curvature refinement):
 
-.. code:: python
+.. code-block:: python
 
     # Surface mesh size controls
     model.set_global_sizing_params(
@@ -165,10 +165,10 @@ Set the global sizing parameters to initialize size control parameters (with cur
 
 Compute the volumetric size field based on the size controls:
 
-.. code:: python
+.. code-block:: python
 
     size_field = prime.SizeField(model)
-    res = size_field_compute_volumetric(
+    res = size_field.compute_volumetric(
         size_control_ids=[size_control.id],
         volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(
             model, enable_multi_threading=False
@@ -178,7 +178,7 @@ Compute the volumetric size field based on the size controls:
 
 Initialize surfer parameters and generate a surface mesh on face zonelets:
 
-.. code:: python
+.. code-block:: python
 
     # Surface mesh with triangular elements
     surfer_params = prime.SurferParams(
@@ -205,7 +205,7 @@ Remesh surface using the Lucid module
 This code shows how to replicate the preceding surface mesh results by remeshing
 the surface using the Lucid module:
 
-.. code:: python
+.. code-block:: python
 
     import ansys.meshing.prime as prime
 
