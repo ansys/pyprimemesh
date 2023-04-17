@@ -1,3 +1,4 @@
+"""Module containing file input and output related classes and methods."""
 from typing import List
 
 # isort: split
@@ -32,15 +33,23 @@ from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
 class FileIO(_FileIO):
+    """Input and output managing class.
+
+    Parameters
+    ----------
+    model : Model
+        Server model where to create and modify WrapperControls from.
+    """
+
     __doc__ = _FileIO.__doc__
 
     def __init__(self, model: Model):
-        """__init__(FileIO self, Model model)"""
+        """Initialize model and parent class."""
         self._model = model
         _FileIO.__init__(self, model)
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
-        """Function that reads PyPrimeMesh data file.
+        """Read PyPrimeMesh data file.
 
         PyPrimeMesh data files have pmdat extension.
 
@@ -54,7 +63,7 @@ class FileIO(_FileIO):
         Returns
         -------
         FileReadResults
-            Returns FileReadResults.
+            Return FileReadResults.
 
         Notes
         -----
@@ -78,8 +87,7 @@ class FileIO(_FileIO):
         return result
 
     def write_pmdat(self, file_name: str, file_write_params: FileWriteParams) -> FileWriteResults:
-        """Writes PyPrimeMesh data file. PyPrimeMesh data files have .pmdat extension.
-
+        """Write PyPrimeMesh data file. PyPrimeMesh data files have .pmdat extension.
 
         Parameters
         ----------
@@ -91,7 +99,7 @@ class FileIO(_FileIO):
         Returns
         -------
         FileWriteResults
-            Returns the FileWriteResults structure.
+            Return the FileWriteResults structure.
 
         Examples
         --------
@@ -193,7 +201,7 @@ class FileIO(_FileIO):
         return result
 
     def import_cad(self, file_name: str, params: ImportCadParams) -> ImportCadResults:
-        """Function that imports CAD file.
+        r"""Open CAD file.
 
         Import CAD file from disk.
 
@@ -223,7 +231,7 @@ class FileIO(_FileIO):
         Returns
         -------
         ImportCadResults
-             Returns ImportCadResults.
+             Return ImportCadResults.
 
         Examples
         --------
@@ -248,7 +256,7 @@ class FileIO(_FileIO):
         file_names: List[str],
         import_fluent_meshing_mesh_params: ImportFluentMeshingMeshParams,
     ) -> ImportFluentMeshingMeshResults:
-        """Imports Fluent Meshing meshes of given files on disk.
+        """Import Fluent Meshing meshes of given files on disk.
 
         Fluent Meshing mesh files have msh and msh.gz extension.
 
@@ -262,7 +270,7 @@ class FileIO(_FileIO):
         Returns
         -------
         ImportFluentMeshingMeshResults
-            Returns the FileReadResults.
+            Return the FileReadResults.
 
 
         Notes
@@ -289,7 +297,7 @@ class FileIO(_FileIO):
     def import_fluent_case(
         self, file_name: str, import_fluent_case_params: ImportFluentCaseParams
     ) -> ImportFluentCaseResults:
-        """Imports Fluent case file on disk.
+        """Import Fluent case file on disk.
 
         Fluent case files have cas extension.
 
@@ -303,7 +311,7 @@ class FileIO(_FileIO):
         Returns
         -------
         ImportFluentCaseResults
-            Returns the ImportFluentCaseResults.
+            Return the ImportFluentCaseResults.
 
 
         Notes
@@ -323,10 +331,38 @@ class FileIO(_FileIO):
                 self._model._sync_up_model()
         return result
 
+    def export_fluent_case(
+        self, file_name: str, export_fluent_case_params: ExportFluentCaseParams
+    ) -> FileWriteResults:
+        """Export Fluent case file. Fluent case files have cas extension.
+
+        Parameters
+        ----------
+        file_name : str
+            Path to file on disk.
+        export_fluent_case_params : ExportFluentCaseParams
+            Parameters to export fluent case file.
+
+        Returns
+        -------
+        FileWriteResults
+            Return the FileWriteResults structure.
+
+        Examples
+        --------
+        >>> file_io = FileIO(model=model)
+        >>> results = file_io.export_fluent_case(
+                        "/tmp/fluent.cas",
+                        prime.ExportFluentCaseParams(model=model))
+        """
+        with utils.file_write_context(self._model, file_name) as temp_file_name:
+            result = super().export_fluent_case(temp_file_name, export_fluent_case_params)
+        return result
+
     def import_mapdl_cdb(
         self, file_name: str, params: ImportMapdlCdbParams
     ) -> ImportMapdlCdbResults:
-        """Function that imports MAPDL CDB file(cdb).
+        """Open MAPDL CDB file(cdb).
 
         Parameters
         ----------
@@ -338,7 +374,7 @@ class FileIO(_FileIO):
         Returns
         -------
         ImportMapdlCdbResults
-            Returns ImportMapdlCdbResults.
+            Return ImportMapdlCdbResults.
 
         Notes
         -----
@@ -363,7 +399,7 @@ class FileIO(_FileIO):
     def export_mapdl_cdb(
         self, file_name: str, params: ExportMapdlCdbParams
     ) -> ExportMapdlCdbResults:
-        """Function that exports MAPDL CDB file(cdb).
+        """Export MAPDL CDB file(cdb).
 
         Parameters
         ----------
@@ -375,7 +411,7 @@ class FileIO(_FileIO):
         Returns
         -------
         ExportMapdlCdbResults
-            Returns ExportMapdlCdbResults.
+            Return ExportMapdlCdbResults.
 
         Notes
         -----
@@ -398,7 +434,7 @@ class FileIO(_FileIO):
     def export_fluent_case(
         self, file_name: str, export_fluent_case_params: ExportFluentCaseParams
     ) -> FileWriteResults:
-        """Exports Fluent case file. Fluent case files have cas extension.
+        """Export Fluent case file. Fluent case files have cas extension.
 
         Parameters
         ----------
@@ -410,7 +446,7 @@ class FileIO(_FileIO):
         Returns
         -------
         FileWriteResults
-            Returns the FileWriteResults structure.
+            Return the FileWriteResults structure.
 
         Examples
         --------
@@ -437,7 +473,7 @@ class FileIO(_FileIO):
         Returns
         -------
         FileWriteResults
-            Returns the FileWriteResults structure.
+            Return the FileWriteResults structure.
 
         Examples
         --------
@@ -464,7 +500,7 @@ class FileIO(_FileIO):
         Returns
         -------
         FileWriteResults
-            Returns FileWriteResults.
+            Return FileWriteResults.
 
         Examples
         --------
