@@ -7,7 +7,10 @@ from pyvista import _vtk
 from pyvista.plotting.plotting import Plotter
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics.trame_gui import TrameVisualizer
 from ansys.meshing.prime.internals import defaults
+
+pv.OFF_SCREEN = True
 
 
 def compute_face_list_from_structured_nodes(nodes, dim):
@@ -479,7 +482,10 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+
+        visualizer = TrameVisualizer()
+        visualizer.set_scene(self._plotter)
+        visualizer.show()
 
     def __draw_parts(self, parts=[], update=False, spline=False):
         """ """
