@@ -12,7 +12,7 @@ def test_empty_control_data(get_remote_client):
     size_control = model.control_data.create_size_control(sizing_type=SizingType.SOFT)
 
     result = size_control.set_suggested_name('bar')
-    assert result.assigned_name != ''  # results in false
+    assert result.assigned_name != ''
     assert result.assigned_name == size_control.name
 
 
