@@ -43,11 +43,11 @@ def get_file(
 
     Parameters
     ----------
-    example: Examples
+    example: examples.Examples
         Known example to download from database
     destination: Optional[str]
         Destination for the file to be downloaded.
-       The default is ``None`` in which case the default path in app data is used.
+        The default is ``None`` in which case the default path in app data is used.
     force: bool
         If true, the file is always downloaded.
         Otherwise, an existing file in the cache may be re-used.
@@ -61,7 +61,6 @@ def get_file(
     ------
     ValueError
         When the provided destination path does not exist on file
-
     """
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
