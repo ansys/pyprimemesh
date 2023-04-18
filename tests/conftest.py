@@ -1,5 +1,6 @@
 """General fixtures to use in all test modules."""
 import os
+import shutil
 import xml.etree.ElementTree as ET
 
 import pytest
@@ -97,6 +98,7 @@ def get_examples():
 @pytest.fixture(scope="session", autouse=True)
 def get_testfiles():
     """Downloads unit test files"""
+    os.mkdir(os.path.abspath("./tests/core/test_files/"))
     download_test_examples(destination=str(os.path.abspath("./tests/core/test_files/")))
 
 
@@ -163,26 +165,4 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
 def pytest_sessionfinish(session, exitstatus):
     """Cleanup generated files."""
-    files_list = []
-
-    files_list.append(os.path.abspath("./tests/core/test_files/file.pmdat"))
-    files_list.append(os.path.abspath("./tests/core/test_files/file.pdmat"))
-    files_list.append(os.path.abspath("./tests/core/test_files/file.cas"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex.cdb"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex.cas"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex.fmd"))
-    files_list.append(os.path.abspath("./tests/core/test_files/box.psf"))
-    files_list.append(os.path.abspath("./tests/core/test_files/box.sf"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex.msh"))
-
-    files_list.append(os.path.abspath("./tests/core/test_files/file_test.pmdat"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cdb"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex_test.cas"))
-    files_list.append(os.path.abspath("./tests/core/test_files/file_test.k"))
-    files_list.append(os.path.abspath("./tests/core/test_files/box_test.psf"))
-    files_list.append(os.path.abspath("./tests/core/test_files/hex_test.msh"))
-
-    for file in files_list:
-        if os.path.isfile(file):
-            os.remove(file)
-    os.rmdir(os.path.abspath("./tests/core/test_files"))
+    shutil.rmtree("./tests/core/test_files/")
