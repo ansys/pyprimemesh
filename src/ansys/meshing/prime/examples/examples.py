@@ -43,7 +43,7 @@ def get_file(
 
     Parameters
     ----------
-    example: examples.Examples
+    example: Examples
         Known example to download from database
     destination: Optional[str]
         Destination for the file to be downloaded.
@@ -229,7 +229,7 @@ def download_bracket_fmd(
     >>>     print(model)
 
     """
-    return get_file(Examples.BRACKET_FMD)
+    return get_file(Examples.BRACKET_FMD, destination, force)
 
 
 def download_bracket_scdoc(
@@ -268,7 +268,7 @@ def download_bracket_scdoc(
     >>>     print(model)
 
     """
-    return get_file(Examples.BRACKET_SCDOC)
+    return get_file(Examples.BRACKET_SCDOC, destination, force)
 
 
 def download_toy_car_pmdat(
@@ -307,7 +307,7 @@ def download_toy_car_pmdat(
     >>>     print(model)
 
     """
-    return get_file(Examples.TOY_CAR_PMDAT)
+    return get_file(Examples.TOY_CAR_PMDAT, destination, force)
 
 
 def download_toy_car_fmd(
@@ -346,7 +346,7 @@ def download_toy_car_fmd(
     >>>     print(model)
 
     """
-    return get_file(Examples.TOY_CAR_FMD)
+    return get_file(Examples.TOY_CAR_FMD, destination, force)
 
 
 def download_toy_car_scdoc(
@@ -385,7 +385,7 @@ def download_toy_car_scdoc(
     >>>     print(model)
 
     """
-    return get_file(Examples.TOY_CAR_SCDOC)
+    return get_file(Examples.TOY_CAR_SCDOC, destination, force)
 
 
 def download_pipe_tee_pmdat(
@@ -424,7 +424,7 @@ def download_pipe_tee_pmdat(
     >>>     print(model)
 
     """
-    return get_file(Examples.PIPE_TEE_PMDAT)
+    return get_file(Examples.PIPE_TEE_PMDAT, destination, force)
 
 
 def download_pipe_tee_fmd(
@@ -463,7 +463,7 @@ def download_pipe_tee_fmd(
     >>>     print(model)
 
     """
-    return get_file(Examples.PIPE_TEE_FMD)
+    return get_file(Examples.PIPE_TEE_FMD, destination, force)
 
 
 def download_pipe_tee_scdoc(
@@ -502,4 +502,4 @@ def download_pipe_tee_scdoc(
     >>>     print(model)
 
     """
-    return get_file(Examples.PIPE_TEE_SCDOC)
+    return get_file(Examples.PIPE_TEE_SCDOC, destination, force)
