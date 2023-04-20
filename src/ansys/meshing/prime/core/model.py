@@ -227,7 +227,7 @@ class Model(_Model):
     def get_global_sizing_params(self) -> GlobalSizingParams:
         """Get the GlobalSizingParams.
 
-        Return
+        Returns
         -------
         GlobalSizingParams
             Return the GlobalSizingParams.
