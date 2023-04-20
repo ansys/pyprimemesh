@@ -139,7 +139,6 @@ jobs:
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         with:
           pytest-markers: "-vv"
-          pytest-extra-args: ""
           
       - uses: codecov/codecov-action@v3
         name: 'Upload coverage to CodeCov'
