@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch name
-        uses: pyansys/actions/branch-name-style@v4
+        uses: pyansys/actions/branch-name-style@main
 
   style:
     name: Code style
