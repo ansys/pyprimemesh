@@ -180,13 +180,15 @@ class ErrorCode(enum.IntEnum):
     """BOI creation failed. Invalid wake levels input."""
     CREATEBOI_INVALIDTYPEFORWRAP = 386
     """BOI creation failed. Wrapping is invalid for this BOI type."""
-    CREATECONTACTPATCH_INVALIDOFFSETDISTANCE = 387
+    CREATEBOI_INVALIDSCOPE = 387
+    """BOI creation failed. Invalid face zonelets as input."""
+    CREATECONTACTPATCH_INVALIDOFFSETDISTANCE = 388
     """Contact patch creation process failed. Scale factors should not be less than zero."""
-    CREATECONTACTPATCH_INVALIDTOLERANCEVALUE = 390
+    CREATECONTACTPATCH_INVALIDTOLERANCEVALUE = 389
     """Contact patch creation process failed. Tolerance value should not be less than zero."""
-    CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS = 388
+    CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS = 390
     """Contact patch creation process failed. Invalid contact patch creation axis."""
-    CONTACTPATCHRESULTSFAILED = 389
+    CONTACTPATCHRESULTSFAILED = 391
     """Contact patch creation process failed. Check the inputs."""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Size field computation failed."""
@@ -240,6 +242,18 @@ class ErrorCode(enum.IntEnum):
     """Writing size field failed."""
     MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH = 533
     """Mesh not found to export fluent meshing mesh."""
+    EXPORTSTLFAILEDWITHTOPOLOGY = 553
+    """Export STL not supported for part with topology data."""
+    EXPORTSTLFAILEDWITHQUADFACES = 554
+    """Export STL not supported for mesh with quad faces."""
+    EXPORTSTLFAILEDWITHPOLYFACES = 555
+    """Export STL not supported for mesh with poly faces."""
+    EXPORTSTLFAILEDWITHHIGHERORDERMESH = 556
+    """Export STL not supported for higher order mesh."""
+    EXPORTSTLFAILEDWITHEMPTYPARTIDLIST = 557
+    """Export STL failed. List of part ids is empty."""
+    EXPORTSTLFAILEDWITHINCORRECTPARTID = 558
+    """Export STL failed. Part id is incorrect."""
     MATCHEDMESHOPTIONINVALID = 850
     """Invalid option chosen to connect two different parts."""
     COLOCATEMATCHEDNODESFAILED = 851
@@ -356,6 +370,8 @@ class ErrorCode(enum.IntEnum):
     """Quadratic mesh is not supported for solid spline creation."""
     IGA_UNIFORMTRIMMEDNURBSFAILED = 2417
     """Uniform trimmed spline creation failed."""
+    IGA_QUADTOSPLINEBASISFAILED = 2421
+    """Quad to spline operation failed."""
     PARTHASTOPOLOGY = 2800
     """Part has a topology."""
     SURFACESEARCHFAILED = 2802
