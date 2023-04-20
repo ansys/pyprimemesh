@@ -124,6 +124,7 @@ prime_error_messages = {
     ErrorCode.IGA_PERIODICKNOTVECTORCONVERSIONFAILED: "Periodic knot vector conversion failed.",
     ErrorCode.IGA_HREFINEMENTFAILED: "H refinement failed.",
     ErrorCode.IGA_PREFINEMENTFAILED: "P refinement failed.",
+    ErrorCode.IGA_QUADTOSPLINEBASISFAILED: "Quad to spline operation failed.",
     ErrorCode.BOIRESULTSFAILED: "BOI creation failed.",
     ErrorCode.CREATEBOI_INVALIDSCALE: "BOI creation failed. Scale factors should not be less than one.",
     ErrorCode.CREATEBOI_INVALIDFLOWDIRECTION: "BOI creation failed. Invalid flow or wake direction.",
@@ -263,6 +264,12 @@ prime_error_messages = {
     ErrorCode.THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY: "Invalid target scope entity.",
     ErrorCode.THINVOLUMECONTROLINVALIDNUMBEROFLAYER: "Number of layer in thin volume mesh should be greater than 0.",
     ErrorCode.THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED: "Thin volume mesh controls not supported for part with topology data.",
+    ErrorCode.EXPORTSTLFAILEDWITHTOPOLOGY: "Export STL not supported for part with topology data.",
+    ErrorCode.EXPORTSTLFAILEDWITHQUADFACES: "Export STL not supported for mesh with quad faces.",
+    ErrorCode.EXPORTSTLFAILEDWITHPOLYFACES: "Export STL not supported for mesh with poly faces.",
+    ErrorCode.EXPORTSTLFAILEDWITHHIGHERORDERMESH: "Export STL not supported for higher order mesh.",
+    ErrorCode.EXPORTSTLFAILEDWITHEMPTYPARTIDLIST: "Export STL failed. List of part ids is empty.",
+    ErrorCode.EXPORTSTLFAILEDWITHINCORRECTPARTID: "Export STL failed. Part id is incorrect.",
 }
 
 prime_warning_messages = {
