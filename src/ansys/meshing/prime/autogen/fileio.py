@@ -463,6 +463,105 @@ class FileIO(CoreObject):
         self._model._print_logs_after_command("export_fluent_meshing_mesh", FileWriteResults(model = self._model, json_data = result))
         return FileWriteResults(model = self._model, json_data = result)
 
+    def import_lsdyna_keyword_file(self, file_name : str, import_params : ImportLSDynaKeywordFileParams) -> FileReadResults:
+        """ Imports LS-DYNA Keyword file.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        import_params : ImportLSDynaKeywordFileParams
+            Parameters for LS-DYNA Keyword file import.
+
+        Returns
+        -------
+        FileReadResults
+            Returns FileReadResults.
+
+        Examples
+        --------
+        >>> results = file_io.import_lsdyna_keyword_file(file_name, ImportLSDynaKeywordFileParams(model = model))
+
+        """
+        if not isinstance(file_name, str):
+            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+        if not isinstance(import_params, ImportLSDynaKeywordFileParams):
+            raise TypeError("Invalid argument type passed for import_params, valid argument type is ImportLSDynaKeywordFileParams.")
+        args = {"file_name" : file_name,
+        "import_params" : import_params._jsonify()}
+        command_name = "PrimeMesh::FileIO/ImportLSDynaKeywordFile"
+        self._model._print_logs_before_command("import_lsdyna_keyword_file", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("import_lsdyna_keyword_file", FileReadResults(model = self._model, json_data = result))
+        return FileReadResults(model = self._model, json_data = result)
+
+    def export_lsdyna_keyword_file(self, file_name : str, export_params : ExportLSDynaKeywordFileParams) -> FileWriteResults:
+        """ Export FEA LS-DYNA Keyword file for solid, or surface mesh, or both.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        export_params : ExportLSDynaKeywordFileParams
+            Parameters for FEA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        FileWriteResults
+            Returns FileWriteResults.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_keyword_file(file_name, ExportLSDynaKeywordFileParams(model = model))
+
+        """
+        if not isinstance(file_name, str):
+            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+        if not isinstance(export_params, ExportLSDynaKeywordFileParams):
+            raise TypeError("Invalid argument type passed for export_params, valid argument type is ExportLSDynaKeywordFileParams.")
+        args = {"file_name" : file_name,
+        "export_params" : export_params._jsonify()}
+        command_name = "PrimeMesh::FileIO/ExportLSDynaKeywordFile"
+        self._model._print_logs_before_command("export_lsdyna_keyword_file", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("export_lsdyna_keyword_file", FileWriteResults(model = self._model, json_data = result))
+        return FileWriteResults(model = self._model, json_data = result)
+
+    def export_lsdyna_iga_keyword_file(self, file_name : str, export_params : ExportLSDynaIgaKeywordFileParams) -> FileWriteResults:
+        """ Export IGA LS-DYNA Keyword file for solid, or surface splines, or both.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        export_params : ExportLSDynaIgaKeywordFileParams
+            Parameters for IGA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        FileWriteResults
+            Returns FileWriteResults.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_iga_keyword_file(file_name, ExportLSDynaIgaKeywordFileParams(model = model))
+
+        """
+        if not isinstance(file_name, str):
+            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+        if not isinstance(export_params, ExportLSDynaIgaKeywordFileParams):
+            raise TypeError("Invalid argument type passed for export_params, valid argument type is ExportLSDynaIgaKeywordFileParams.")
+        args = {"file_name" : file_name,
+        "export_params" : export_params._jsonify()}
+        command_name = "PrimeMesh::FileIO/ExportLSDynaIgaKeywordFile"
+        self._model._print_logs_before_command("export_lsdyna_iga_keyword_file", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("export_lsdyna_iga_keyword_file", FileWriteResults(model = self._model, json_data = result))
+        return FileWriteResults(model = self._model, json_data = result)
+
     def export_boundary_fitted_spline_kfile(self, file_name : str, export_params : ExportBoundaryFittedSplineParams) -> FileWriteResults:
         """ Export IGA LS-DYNA Keyword file for boundary fitted spline.
 
@@ -535,3 +634,47 @@ class FileIO(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("import_cad", ImportCadResults(model = self._model, json_data = result))
         return ImportCadResults(model = self._model, json_data = result)
+
+    def export_stl(self, file_name : str, params : ExportSTLParams) -> FileWriteResults:
+        """ Export STL file.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Path to file on disk.
+        params : ExportSTLParams
+            Parameters for writing the file.
+
+        Returns
+        -------
+        FileWriteResults
+            Returns the FileWriteResults.
+
+
+        Notes
+        -----
+        This API does not support Unicode paths now.
+
+        Examples
+        --------
+        >>> import ansys.meshing.prime as prime
+        >>> model = prime.local_model()
+        >>> fileio = prime.FileIO(model=model)
+        >>> out_file_path = r"/tmp/output.stl"
+        >>> part_ids = [part.id for part in model.parts]
+        >>> export_stl_params=prime.ExportSTLParams(model=model,part_ids=part_ids)
+        >>> results = fileio.export_stl(out_file_path,export_stl_params)
+
+        """
+        if not isinstance(file_name, str):
+            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+        if not isinstance(params, ExportSTLParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is ExportSTLParams.")
+        args = {"file_name" : file_name,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::FileIO/ExportSTL"
+        self._model._print_logs_before_command("export_stl", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("export_stl", FileWriteResults(model = self._model, json_data = result))
+        return FileWriteResults(model = self._model, json_data = result)
