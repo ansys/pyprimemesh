@@ -15,14 +15,22 @@ class Examples(Enum):
     ELBOW_PMDAT = {"filename": "mixing_elbow.pmdat", "git_folder": "mixing_elbow"}
     ELBOW_FMD = {"filename": "mixing_elbow.fmd", "git_folder": "mixing_elbow"}
     ELBOW_SCDOC = {"filename": "mixing_elbow.scdoc", "git_folder": "mixing_elbow"}
+    ELBOW_DSCO = {"filename": "mixing_elbow.dsco", "git_folder": "mixing_elbow"}
     BRACKET_FMD = {"filename": "bracket_mid_surface.fmd", "git_folder": "bracket_scaffold"}
     BRACKET_SCDOC = {"filename": "bracket_mid_surface.scdoc", "git_folder": "bracket_scaffold"}
+    BRACKET_DSCO = {"filename": "bracket_mid_surface.dsco", "git_folder": "bracket_scaffold"}
     TOY_CAR_PMDAT = {"filename": "toy_car.pmdat", "git_folder": "toy_car"}
     TOY_CAR_FMD = {"filename": "toy_car.fmd", "git_folder": "toy_car"}
     TOY_CAR_SCDOC = {"filename": "toy_car.scdoc", "git_folder": "toy_car"}
+    TOY_CAR_DSCO = {"filename": "toy_car.dsco", "git_folder": "toy_car"}
     PIPE_TEE_PMDAT = {"filename": "pipe_tee.pmdat", "git_folder": "pipe_tee"}
     PIPE_TEE_FMD = {"filename": "pipe_tee.fmd", "git_folder": "pipe_tee"}
     PIPE_TEE_SCDOC = {"filename": "pipe_tee.scdoc", "git_folder": "pipe_tee"}
+    PIPE_TEE_DSCO = {"filename": "pipe_tee.dsco", "git_folder": "pipe_tee"}
+    DEFORMED_BLADE_FMD = {"filename": "blade_deformed.fmd", "git_folder": "turbine_blade"}
+    DEFORMED_BLADE_SCDOC = {"filename": "blade_deformed.scdoc", "git_folder": "turbine_blade"}
+    DEFORMED_BLADE_DSCO = {"filename": "blade_deformed.dsco", "git_folder": "turbine_blade"}
+    TURBINE_BLADE_CDB = {"filename": "blade.cdb", "git_folder": "turbine_blade"}
 
 
 _DOWNLOADS = []
