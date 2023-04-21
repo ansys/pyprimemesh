@@ -819,7 +819,10 @@ def download_turbine_blade_cdb(
     >>>     model = session.model
     >>>     turbine_blade_mesh = prime_examples.download_turbine_blade_cdb()
     >>>     with prime.FileIO(model) as io:
-    >>>         _ = io.import_mapdl_cdb(turbine_blade_mesh, params=prime.ImportMapdlCdbParams(model))
+    >>>         _ = io.import_mapdl_cdb(
+    >>>             turbine_blade_mesh,
+    >>>             params=prime.ImportMapdlCdbParams(model),
+    >>>         )
     >>>     print(model)
 
     """
