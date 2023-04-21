@@ -3,6 +3,7 @@ import pyvista as pv
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics.graphics import Picker, compute_distance
 
 pv.OFF_SCREEN = True
 IMAGE_RESULTS_DIR = "../../image_cache_dir/results/"
@@ -23,4 +24,29 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
     )
 
     display = Graphics(model)
+
+    mesh_data = display.get_face_mesh_data()
+    assert mesh_data != None
+
+    plotter = pv.Plotter()
+
+    # test picker
+    picker = Picker(plotter, display)
+    selections = picker.selections
+    picker.clear_selection()
+    assert len(selections) == 0
+    picker.ignore(ignore_pick=True)
+    assert picker._ignore == True
+
+    # Can't run picker calls, but ideally we should test it
+    # picker()
+
+    # test graphics class
+    # can't test most callback functions automatically
     display()
+
+
+def test_compute_distance():
+    point1 = [1, 1, 3]
+    point2 = [1, 1, 1]
+    assert compute_distance(point1=point1, point2=point2) == 2.0
