@@ -137,7 +137,7 @@ class Picker:
     def ignore(self, ignore_pick):
         self._ignore = ignore_pick
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs):  # pragma: no cover
         if self._ignore:
             return
         picked_pt = np.array(self.plotter.pick_mouse_position())
@@ -188,7 +188,7 @@ class Graphics(object):
         self._printInfoBt: _vtk.vtkButtonWidget = None
         self._showRulerBt: _vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
-        if os.getenv('PRIME_APP_RUN'):
+        if os.getenv('PRIME_APP_RUN'):  # pragma: no cover
             self._app = __import__('PrimeApp')
         else:
             self.__update_display_data()
@@ -436,7 +436,7 @@ class Graphics(object):
 
     def show(self, update=False):
         """ """
-        if os.getenv('PRIME_APP_RUN') and self._app is not None:
+        if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
             app_g.DisplayModel()
             app_g.FitToScreen()
@@ -483,7 +483,7 @@ class Graphics(object):
 
     def __draw_parts(self, parts=[], update=False, spline=False):
         """ """
-        if os.getenv('PRIME_APP_RUN') and self._app is not None:
+        if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
             app_g.Clear()
             [app_g.DrawPart(part) for part in parts]
@@ -547,7 +547,7 @@ class Graphics(object):
         """ """
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
-        if os.getenv('PRIME_APP_RUN') and self._app is not None:
+        if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
             app_g.Clear()
         elif update == True:
