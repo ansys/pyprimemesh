@@ -73,7 +73,7 @@ sweeper = prime.VolumeSweeper(model)
 
 stacker_params = prime.MeshStackerParams(
     model=model,
-    direction=[0,1,0],
+    direction=[0, 1, 0],
     max_offset_size=1.0,
     delete_base=True,
 )
@@ -86,9 +86,9 @@ createbase_results = sweeper.create_base_face(
 
 base_faces = createbase_results.base_face_ids
 
-part.add_labels_on_topo_entities(["base_faces"],base_faces)
+part.add_labels_on_topo_entities(["base_faces"], base_faces)
 
-scope = prime.ScopeDefinition(model=model,label_expression="base_faces")
+scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 
 display(scope=scope)
 
@@ -103,7 +103,7 @@ base_scope = prime.lucid.SurfaceScope(
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
 )
 
-mesh_util.surface_mesh(min_size=0.5,scope=base_scope,generate_quads=True)
+mesh_util.surface_mesh(min_size=0.5, scope=base_scope, generate_quads=True)
 
 display(scope=scope)
 
