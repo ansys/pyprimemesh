@@ -29,6 +29,7 @@ permissions: write-all
 
 jobs:
   branch-name:
+    if: github.event_name == 'pull_request'
     name: Check the name of the branch
     runs-on: ubuntu-latest
     steps:
