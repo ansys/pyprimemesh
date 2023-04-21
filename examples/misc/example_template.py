@@ -32,13 +32,14 @@ Example file names should be in the format:
 
 ``example_name.py``
 
-Supporting input files for the example such as CAD file assets must be created by Ansys, more importantly, must run
-on Linux for containers and CI pipeline. However, additional files can be included for Windows but not used in example.
-For instance, comments can be added for the additional files as reference to CAD import capability.
+Supporting input files for the example such as CAD file assets must be created by Ansys, more
+importantly, must run on Linux for containers and CI pipeline. However, additional files can be
+included for Windows but not used in example. For instance, comments can be added for the additional
+files as reference to CAD import capability.
 
-Supporting input files should be added in `Github Example Data Repository <https://github.com/pyansys/example-data>`_ :
+Supporting input files should be added in:
 
-``pyprimemesh/example_folder``
+`Github Example Data Repository <https://github.com/pyansys/example-data/pyprimemesh>`_
 
 Referencing files as enum and creating download function in:
 
@@ -57,7 +58,7 @@ model = prime_client.model
 # Your code goes here...
 mesh_util = prime.lucid.Mesh(model=model)
 
-# For Windoes OS users scdoc is also available:
+# For Windows OS users scdoc is also available:
 # mixing_elbow = prime.examples.download_elbow_scdoc()
 mixing_elbow = prime.examples.download_elbow_fmd()
 mesh_util.read(mixing_elbow)
