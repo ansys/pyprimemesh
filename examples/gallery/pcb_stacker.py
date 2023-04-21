@@ -48,9 +48,6 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Import geometry.
 # Display imported geometry.
 
-# For Windows OS users scdoc is also available:
-# pcb_geometry = prime.examples.download_pcb_scdoc()
-
 pcb_geometry = prime.examples.download_pcb_pmdat()
 
 mesh_util.read(file_name=pcb_geometry)
