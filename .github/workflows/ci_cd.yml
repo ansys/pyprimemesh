@@ -138,7 +138,8 @@ jobs:
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         with:
-          pytest-markers: "-vv"
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          requires-xvfb: true
           
       - uses: codecov/codecov-action@v3
         name: 'Upload coverage to CodeCov'
