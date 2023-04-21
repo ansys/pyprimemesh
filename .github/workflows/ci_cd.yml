@@ -28,6 +28,12 @@ concurrency:
 permissions: write-all
 
 jobs:
+  branch-name:
+    name: Check the name of the branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name
+        uses: pyansys/actions/branch-name-style@main
 
   style:
     name: Code style
