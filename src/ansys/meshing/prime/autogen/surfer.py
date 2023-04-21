@@ -55,6 +55,12 @@ class Surfer(CoreObject):
         >>> results = surfer.remesh_face_zonelets(face_zonelets, edge_zonelets, params)
 
         """
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(edge_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for edge_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, SurferParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is SurferParams.")
         args = {"face_zonelets" : face_zonelets,
         "edge_zonelets" : edge_zonelets,
         "params" : params._jsonify()}
@@ -86,6 +92,10 @@ class Surfer(CoreObject):
         >>> results = surfer.mesh_topo_faces(topo_faces, params)
 
         """
+        if not isinstance(topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+        if not isinstance(params, SurferParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is SurferParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Surfer/MeshTopoFaces"
@@ -140,6 +150,12 @@ class Surfer(CoreObject):
         >>> results = surfer.remesh_face_zonelets_locally(face_zonelets, register_id, local_surfer_params)
 
         """
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(register_id, int):
+            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+        if not isinstance(local_surfer_params, LocalSurferParams):
+            raise TypeError("Invalid argument type passed for local_surfer_params, valid argument type is LocalSurferParams.")
         args = {"face_zonelets" : face_zonelets,
         "register_id" : register_id,
         "local_surfer_params" : local_surfer_params._jsonify()}

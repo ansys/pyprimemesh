@@ -57,6 +57,7 @@ mesh_util = prime.lucid.Mesh(model)
 # Download the toy car geometry file (.fmd file exported by SpaceClaim).
 # Import geometry and display everything except tunnel.
 
+
 # For Windows OS users scdoc is also available:
 # toy_car = prime.examples.download_toy_car_scdoc()
 

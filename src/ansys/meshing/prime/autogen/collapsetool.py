@@ -61,6 +61,16 @@ class CollapseTool(CoreObject):
         prime.CollapseParams(model=model))
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(register_id, int):
+            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+        if not isinstance(split_params, SplitParams):
+            raise TypeError("Invalid argument type passed for split_params, valid argument type is SplitParams.")
+        if not isinstance(collapse_params, CollapseParams):
+            raise TypeError("Invalid argument type passed for collapse_params, valid argument type is CollapseParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,

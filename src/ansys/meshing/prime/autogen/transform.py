@@ -55,6 +55,12 @@ class Transform(CoreObject):
         >>> results = surface_utilities.transform_zonelets(part.id, zonelets, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
+        if not isinstance(params, TransformParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is TransformParams.")
         args = {"part_id" : part_id,
         "zonelets" : zonelets,
         "params" : params._jsonify()}
