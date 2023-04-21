@@ -53,7 +53,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 source_mesh = prime.examples.download_turbine_blade_cdb()
 target_geometry = prime.examples.download_deformed_blade_fmd()
 mesh_util.read(file_name=target_geometry)
-mesh_util.read(file_name=source_mesh,append=True)
+mesh_util.read(file_name=source_mesh, append=True)
 
 display = Graphics(model)
 display()
