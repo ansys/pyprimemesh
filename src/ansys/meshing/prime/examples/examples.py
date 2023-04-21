@@ -103,11 +103,6 @@ def download_elbow_pmdat(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -141,11 +136,6 @@ def download_elbow_fmd(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -182,11 +172,6 @@ def download_elbow_scdoc(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -220,11 +205,6 @@ def download_elbow_dsco(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -260,11 +240,6 @@ def download_bracket_fmd(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -298,11 +273,6 @@ def download_bracket_scdoc(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -338,11 +308,6 @@ def download_bracket_dsco(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -376,11 +341,6 @@ def download_toy_car_pmdat(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -416,11 +376,6 @@ def download_toy_car_fmd(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -454,11 +409,6 @@ def download_toy_car_scdoc(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -494,11 +444,6 @@ def download_toy_car_dsco(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -532,11 +477,6 @@ def download_pipe_tee_pmdat(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -572,11 +512,6 @@ def download_pipe_tee_fmd(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -610,11 +545,6 @@ def download_pipe_tee_scdoc(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -650,11 +580,6 @@ def download_pipe_tee_dsco(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -688,11 +613,6 @@ def download_deformed_blade_fmd(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -728,11 +648,6 @@ def download_deformed_blade_scdoc(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -767,11 +682,6 @@ def download_deformed_blade_dsco(
     str
         Local path to the downloaded file
 
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
-
     Examples
     --------
     >>> import ansys.meshing.prime as prime
@@ -805,11 +715,6 @@ def download_turbine_blade_cdb(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
@@ -847,11 +752,6 @@ def download_pcb_pmdat(
     -------
     str
         Local path to the downloaded file
-
-    Raises
-    ------
-    ValueError
-        When the provided destination path does not exist on file
 
     Examples
     --------
