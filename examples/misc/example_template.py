@@ -32,18 +32,33 @@ Example file names should be in the format:
 
 ``example_name.py``
 
+Supporting input files for the example such as CAD file assets must be created by Ansys, more importantly, must run
+on Linux for containers and CI pipeline. However, additional files can be included for Windows but not used in example.
+For instance, comments can be added for the additional files as reference to CAD import capability.
+
+Supporting input files should be added in `Github Example Data Repository <https://github.com/pyansys/example-data>`_ :
+
+``pyprimemesh/example_folder``
+
+Referencing files as enum and creating download function in:
+
+``pyprimemesh/examples.py``
+
 After this preamble is complete, the first code block begins.
 """
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 
-# start Ansys Prime Server and get client model
+# Start Ansys Prime Server and get client model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
 # Your code goes here...
 mesh_util = prime.lucid.Mesh(model=model)
+
+# For Windoes OS users scdoc is also available:
+# mixing_elbow = prime.examples.download_elbow_scdoc()
 mixing_elbow = prime.examples.download_elbow_fmd()
 mesh_util.read(mixing_elbow)
 print(model)
