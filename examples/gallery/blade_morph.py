@@ -18,7 +18,7 @@ and match morph the mesh to the geometry.
    :align: center
    :width: 800
    **Turbine blade hexahedral mesh**
-   
+
 Procedure
 ~~~~~~~~~~
 -   Launch Ansys Prime Server instance and connect PyPrimeMesh client.
