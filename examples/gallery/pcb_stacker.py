@@ -1,10 +1,13 @@
 """
 .. _ref_pcb:
-=====================================
+
+====================================
 Meshing a PCB for Structural Thermal
-=====================================
+====================================
+
 **Summary**: This example demonstrates how to mesh a printed circuit board
 for structural thermal simulation using the stacker method.
+
 Objective
 ~~~~~~~~~~
 In this example, you can mesh the solids of a printed circuit board,
@@ -14,14 +17,15 @@ using predominantly hexahedral elements.
    :align: center
    :width: 800
    **Thermal structural mesh**
+
 Procedure
 ~~~~~~~~~~
--   Launch Ansys Prime Server instance and connect PyPrimeMesh client.
--   Read CAD geometry.
--   Create a base face, projecting edge loops and imprinting to capture geometry.
--   Surface mesh the base face with quad elements.
--   Stack the base face mesh through the volumes to create mainly hexahedral volume mesh.
--   Write mesh for structural thermal analysis.
+* Launch Ansys Prime Server instance and connect PyPrimeMesh client.
+* Read CAD geometry.
+* Create a base face, projecting edge loops and imprinting to capture geometry.
+* Surface mesh the base face with quad elements.
+* Stack the base face mesh through the volumes to create mainly hexahedral volume mesh.
+* Write mesh for structural thermal analysis.
 """
 
 ###############################################################################
