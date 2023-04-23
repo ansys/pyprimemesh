@@ -12,4 +12,5 @@ from .examples import (
     download_toy_car_pmdat,
     download_toy_car_scdoc,
     download_turbine_blade_cdb,
+    download_deformed_blade_fmd,
 )
