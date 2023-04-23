@@ -14,10 +14,10 @@ Objective
 
 In this example, you can append a CDB mesh with a CAD geometry
 and match morph the mesh to the geometry.
-.. figure:: ../../../images/turbine_blade.png
+.. image:: ../../../images/turbine_blade.png
    :align: center
    :width: 800
-   **Turbine blade hexahedral mesh**
+   :alt: Turbine blade hexahedral mesh
 
 Procedure
 ~~~~~~~~~~
@@ -26,6 +26,7 @@ Procedure
 * Define the mesh source faces and the target geometry faces to match morph.
 * Match morph the turbine blade mesh to the new CAD geometry shape.
 * Write mesh for structural analysis.
+
 """
 
 ###############################################################################
