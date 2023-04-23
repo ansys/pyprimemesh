@@ -14,10 +14,11 @@ Objective
 
 In this example, you can append a CDB mesh with a CAD geometry
 and match morph the mesh to the geometry.
+
 .. image:: ../../../images/turbine_blade.png
    :align: center
    :width: 800
-   :alt: Turbine blade hexahedral mesh
+   :alt: Turbine blade hexahedral mesh.
 
 Procedure
 ~~~~~~~~~~
