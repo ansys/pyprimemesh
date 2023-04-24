@@ -7,7 +7,7 @@ from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 
 
-def test_io_pdmat(get_remote_client, get_examples):
+def test_io_pdmat(get_remote_client, get_examples, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
     file_read_params = prime.FileReadParams(model=model)
@@ -36,14 +36,15 @@ def test_io_pdmat(get_remote_client, get_examples):
     assert results.error_code == ErrorCode.NOERROR
 
     # export
+    export_path = str(tmp_path) + "/file_test.pmdat"
     results = file_io.write_pmdat(
-        os.path.abspath("./tests/core/test_files/file_test.pmdat"),
+        os.path.abspath(export_path),
         prime.FileWriteParams(model=model),
     )
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_cdb(get_remote_client, get_examples):
+def test_io_cdb(get_remote_client, get_examples, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
@@ -56,22 +57,21 @@ def test_io_cdb(get_remote_client, get_examples):
 
     # export
     export_params = prime.ExportMapdlCdbParams(model=model)
-    results = file_io.export_mapdl_cdb(
-        os.path.abspath("./tests/core/test_files/hex_test.cdb"), export_params
-    )
+    export_path = str(tmp_path) + "/hex_test.cdb"
+    results = file_io.export_mapdl_cdb(os.path.abspath(export_path), export_params)
     assert results.error_code == ErrorCode.NOERROR
 
     # Remove first 2 lines since they are going to be different
     with open("./tests/core/test_files/hex.cdb", 'r') as file:
         import_file_str = file.read().split("\n", 2)[2]
 
-    with open("./tests/core/test_files/hex_test.cdb", 'r') as file:
+    with open(export_path, 'r') as file:
         export_file_str = file.read().split("\n", 2)[2]
 
     assert import_file_str == export_file_str
 
 
-def test_io_fluent_case(get_remote_client):
+def test_io_fluent_case(get_remote_client, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
@@ -83,14 +83,13 @@ def test_io_fluent_case(get_remote_client):
     assert results.error_code == ErrorCode.NOERROR
 
     # export
+    export_path = str(tmp_path) + "/hex_test.cas"
     export_params = prime.ExportFluentCaseParams(model=model)
-    results = file_io.export_fluent_case(
-        os.path.abspath("./tests/core/test_files/hex_test.cas"), export_params
-    )
+    results = file_io.export_fluent_case(os.path.abspath(export_path), export_params)
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_export_kfile(get_remote_client, get_examples):
+def test_export_kfile(get_remote_client, get_examples, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
     pmdat_path = get_examples["elbow_lucid"]
@@ -98,8 +97,10 @@ def test_export_kfile(get_remote_client, get_examples):
     # init mesher and load the example
     mesher = prime.lucid.Mesh(model)
     mesher.read(file_name=pmdat_path)
+    export_path = str(tmp_path) + "/file_test.k"
+
     results = file_io.export_boundary_fitted_spline_kfile(
-        os.path.abspath("./tests/core/test_files/file_test.k"),
+        os.path.abspath(export_path),
         prime.ExportBoundaryFittedSplineParams(model=model),
     )
     assert results.error_code == ErrorCode.NOERROR
@@ -116,7 +117,7 @@ def test_io_sf(get_remote_client):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_psf(get_remote_client):
+def test_io_psf(get_remote_client, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
@@ -127,9 +128,8 @@ def test_io_psf(get_remote_client):
     assert results.error_code == ErrorCode.NOERROR
 
     export_params = prime.WriteSizeFieldParams(model=model)
-    results = file_io.write_size_field(
-        os.path.abspath("./tests/core/test_files/box_test.psf"), export_params
-    )
+    export_path = str(tmp_path) + "/box_test.psf"
+    results = file_io.write_size_field(os.path.abspath(export_path), export_params)
     assert results.error_code == ErrorCode.NOERROR
 
 
@@ -142,7 +142,7 @@ def test_io_cad(get_remote_client):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_fluent_mesh(get_remote_client):
+def test_io_fluent_mesh(get_remote_client, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
@@ -153,7 +153,6 @@ def test_io_fluent_mesh(get_remote_client):
     assert results.error_code == ErrorCode.NOERROR
 
     import_params = prime.ExportFluentMeshingMeshParams(model=model)
-    results = file_io.export_fluent_meshing_mesh(
-        os.path.abspath("./tests/core/test_files/hex_test.msh"), import_params
-    )
+    export_path = str(tmp_path) + "/hex_test.msh"
+    results = file_io.export_fluent_meshing_mesh(os.path.abspath(export_path), import_params)
     assert results.error_code == ErrorCode.NOERROR
