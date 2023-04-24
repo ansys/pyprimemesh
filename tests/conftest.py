@@ -46,7 +46,7 @@ class RemoteClientManager:
             self.client = prime.Client(ip=ip, port=port)
         else:
             prime_root = os.environ.get('PYPRIMEMESH_INSTALL_ROOT', None)
-            self.start_ansys_prime_server(prime_root=prime_root, ip=ip, port=port, n_procs=1)
+            self.start_ansys_prime_server(prime_root=prime_root, ip=ip, port=port)
 
     def stop_remote_client(self):
         """Stops the Ansys Prime client and server."""
