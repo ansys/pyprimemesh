@@ -195,12 +195,17 @@ class PrismStairStep(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            check_proximity: bool,
+            gap_factor_scale: float):
+        self._check_proximity = check_proximity
+        self._gap_factor_scale = gap_factor_scale
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            check_proximity: bool = None,
+            gap_factor_scale: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the PrismStairStep.
@@ -209,6 +214,10 @@ class PrismStairStep(CoreObject):
         ----------
         model: Model
             Model to create a PrismStairStep object with default parameters.
+        check_proximity: bool, optional
+            Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+        gap_factor_scale: float, optional
+            Scale factor for prism proximity detection gap factor.
         json_data: dict, optional
             JSON dictionary to create a PrismStairStep object with provided parameters.
 
@@ -217,18 +226,24 @@ class PrismStairStep(CoreObject):
         >>> prism_stair_step = prime.PrismStairStep(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["checkProximity"] if "checkProximity" in json_data else None,
+                json_data["gapFactorScale"] if "gapFactorScale" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [check_proximity, gap_factor_scale])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    check_proximity,
+                    gap_factor_scale)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     param_json = model._communicator.initialize_params(model, "PrismStairStep")
                     json_data = param_json["PrismStairStep"] if "PrismStairStep" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        check_proximity if check_proximity is not None else ( PrismStairStep._default_params["check_proximity"] if "check_proximity" in PrismStairStep._default_params else (json_data["checkProximity"] if "checkProximity" in json_data else None)),
+                        gap_factor_scale if gap_factor_scale is not None else ( PrismStairStep._default_params["gap_factor_scale"] if "gap_factor_scale" in PrismStairStep._default_params else (json_data["gapFactorScale"] if "gapFactorScale" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -237,9 +252,17 @@ class PrismStairStep(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            check_proximity: bool = None,
+            gap_factor_scale: float = None):
         """Set the default values of PrismStairStep.
 
+        Parameters
+        ----------
+        check_proximity: bool, optional
+            Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+        gap_factor_scale: float, optional
+            Scale factor for prism proximity detection gap factor.
         """
         args = locals()
         [PrismStairStep._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -258,13 +281,37 @@ class PrismStairStep(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._check_proximity is not None:
+            json_data["checkProximity"] = self._check_proximity
+        if self._gap_factor_scale is not None:
+            json_data["gapFactorScale"] = self._gap_factor_scale
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "check_proximity :  %s\ngap_factor_scale :  %s" % (self._check_proximity, self._gap_factor_scale)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def check_proximity(self) -> bool:
+        """Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+        """
+        return self._check_proximity
+
+    @check_proximity.setter
+    def check_proximity(self, value: bool):
+        self._check_proximity = value
+
+    @property
+    def gap_factor_scale(self) -> float:
+        """Scale factor for prism proximity detection gap factor.
+        """
+        return self._gap_factor_scale
+
+    @gap_factor_scale.setter
+    def gap_factor_scale(self, value: float):
+        self._gap_factor_scale = value
 
 class PrismParams(CoreObject):
     """Parameters to control prism mesh generation.

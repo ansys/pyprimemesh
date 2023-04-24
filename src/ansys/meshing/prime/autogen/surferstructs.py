@@ -23,22 +23,28 @@ class SurferParams(CoreObject):
 
     def __initialize(
             self,
+            max_angle: float,
             size_field_type: SizeFieldType,
             min_size: float,
             max_size: float,
             growth_rate: float,
             constant_size: float,
             generate_quads: bool,
+            check_non_manifolds: bool,
+            avoid_corner_triangles: bool,
             smooth_size_transition: bool,
             advanced_surfer_setup: AdvancedSurferSetup,
             project_on_geometry: bool,
             enable_multi_threading: bool):
+        self._max_angle = max_angle
         self._size_field_type = SizeFieldType(size_field_type)
         self._min_size = min_size
         self._max_size = max_size
         self._growth_rate = growth_rate
         self._constant_size = constant_size
         self._generate_quads = generate_quads
+        self._check_non_manifolds = check_non_manifolds
+        self._avoid_corner_triangles = avoid_corner_triangles
         self._smooth_size_transition = smooth_size_transition
         self._advanced_surfer_setup = AdvancedSurferSetup(advanced_surfer_setup)
         self._project_on_geometry = project_on_geometry
@@ -47,12 +53,15 @@ class SurferParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
+            max_angle: float = None,
             size_field_type: SizeFieldType = None,
             min_size: float = None,
             max_size: float = None,
             growth_rate: float = None,
             constant_size: float = None,
             generate_quads: bool = None,
+            check_non_manifolds: bool = None,
+            avoid_corner_triangles: bool = None,
             smooth_size_transition: bool = None,
             advanced_surfer_setup: AdvancedSurferSetup = None,
             project_on_geometry: bool = None,
@@ -65,6 +74,8 @@ class SurferParams(CoreObject):
         ----------
         model: Model
             Model to create a SurferParams object with default parameters.
+        max_angle: float, optional
+            Maximum feature angle limit to be used to identify and preserve features.
         size_field_type: SizeFieldType, optional
             Size field type used to generate surface mesh.
         min_size: float, optional
@@ -77,6 +88,10 @@ class SurferParams(CoreObject):
             Size used in constant size surface meshing.
         generate_quads: bool, optional
             Option to generate quadrilateral surface mesh.
+        check_non_manifolds: bool, optional
+            Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+        avoid_corner_triangles: bool, optional
+            Option to avoid corner triangles(with all three boundary nodes) generated.
         smooth_size_transition: bool, optional
             Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
         advanced_surfer_setup: AdvancedSurferSetup, optional
@@ -94,26 +109,32 @@ class SurferParams(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["maxAngle"] if "maxAngle" in json_data else None,
                 SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None),
                 json_data["minSize"] if "minSize" in json_data else None,
                 json_data["maxSize"] if "maxSize" in json_data else None,
                 json_data["growthRate"] if "growthRate" in json_data else None,
                 json_data["constantSize"] if "constantSize" in json_data else None,
                 json_data["generateQuads"] if "generateQuads" in json_data else None,
+                json_data["checkNonManifolds"] if "checkNonManifolds" in json_data else None,
+                json_data["avoidCornerTriangles"] if "avoidCornerTriangles" in json_data else None,
                 json_data["smoothSizeTransition"] if "smoothSizeTransition" in json_data else None,
                 AdvancedSurferSetup(json_data["advancedSurferSetup"] if "advancedSurferSetup" in json_data else None),
                 json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None,
                 json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [size_field_type, min_size, max_size, growth_rate, constant_size, generate_quads, smooth_size_transition, advanced_surfer_setup, project_on_geometry, enable_multi_threading])
+            all_field_specified = all(arg is not None for arg in [max_angle, size_field_type, min_size, max_size, growth_rate, constant_size, generate_quads, check_non_manifolds, avoid_corner_triangles, smooth_size_transition, advanced_surfer_setup, project_on_geometry, enable_multi_threading])
             if all_field_specified:
                 self.__initialize(
+                    max_angle,
                     size_field_type,
                     min_size,
                     max_size,
                     growth_rate,
                     constant_size,
                     generate_quads,
+                    check_non_manifolds,
+                    avoid_corner_triangles,
                     smooth_size_transition,
                     advanced_surfer_setup,
                     project_on_geometry,
@@ -125,12 +146,15 @@ class SurferParams(CoreObject):
                     param_json = model._communicator.initialize_params(model, "SurferParams")
                     json_data = param_json["SurferParams"] if "SurferParams" in param_json else {}
                     self.__initialize(
+                        max_angle if max_angle is not None else ( SurferParams._default_params["max_angle"] if "max_angle" in SurferParams._default_params else (json_data["maxAngle"] if "maxAngle" in json_data else None)),
                         size_field_type if size_field_type is not None else ( SurferParams._default_params["size_field_type"] if "size_field_type" in SurferParams._default_params else SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None)),
                         min_size if min_size is not None else ( SurferParams._default_params["min_size"] if "min_size" in SurferParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
                         max_size if max_size is not None else ( SurferParams._default_params["max_size"] if "max_size" in SurferParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
                         growth_rate if growth_rate is not None else ( SurferParams._default_params["growth_rate"] if "growth_rate" in SurferParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
                         constant_size if constant_size is not None else ( SurferParams._default_params["constant_size"] if "constant_size" in SurferParams._default_params else (json_data["constantSize"] if "constantSize" in json_data else None)),
                         generate_quads if generate_quads is not None else ( SurferParams._default_params["generate_quads"] if "generate_quads" in SurferParams._default_params else (json_data["generateQuads"] if "generateQuads" in json_data else None)),
+                        check_non_manifolds if check_non_manifolds is not None else ( SurferParams._default_params["check_non_manifolds"] if "check_non_manifolds" in SurferParams._default_params else (json_data["checkNonManifolds"] if "checkNonManifolds" in json_data else None)),
+                        avoid_corner_triangles if avoid_corner_triangles is not None else ( SurferParams._default_params["avoid_corner_triangles"] if "avoid_corner_triangles" in SurferParams._default_params else (json_data["avoidCornerTriangles"] if "avoidCornerTriangles" in json_data else None)),
                         smooth_size_transition if smooth_size_transition is not None else ( SurferParams._default_params["smooth_size_transition"] if "smooth_size_transition" in SurferParams._default_params else (json_data["smoothSizeTransition"] if "smoothSizeTransition" in json_data else None)),
                         advanced_surfer_setup if advanced_surfer_setup is not None else ( SurferParams._default_params["advanced_surfer_setup"] if "advanced_surfer_setup" in SurferParams._default_params else AdvancedSurferSetup(json_data["advancedSurferSetup"] if "advancedSurferSetup" in json_data else None)),
                         project_on_geometry if project_on_geometry is not None else ( SurferParams._default_params["project_on_geometry"] if "project_on_geometry" in SurferParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)),
@@ -144,12 +168,15 @@ class SurferParams(CoreObject):
 
     @staticmethod
     def set_default(
+            max_angle: float = None,
             size_field_type: SizeFieldType = None,
             min_size: float = None,
             max_size: float = None,
             growth_rate: float = None,
             constant_size: float = None,
             generate_quads: bool = None,
+            check_non_manifolds: bool = None,
+            avoid_corner_triangles: bool = None,
             smooth_size_transition: bool = None,
             advanced_surfer_setup: AdvancedSurferSetup = None,
             project_on_geometry: bool = None,
@@ -158,6 +185,8 @@ class SurferParams(CoreObject):
 
         Parameters
         ----------
+        max_angle: float, optional
+            Maximum feature angle limit to be used to identify and preserve features.
         size_field_type: SizeFieldType, optional
             Size field type used to generate surface mesh.
         min_size: float, optional
@@ -170,6 +199,10 @@ class SurferParams(CoreObject):
             Size used in constant size surface meshing.
         generate_quads: bool, optional
             Option to generate quadrilateral surface mesh.
+        check_non_manifolds: bool, optional
+            Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+        avoid_corner_triangles: bool, optional
+            Option to avoid corner triangles(with all three boundary nodes) generated.
         smooth_size_transition: bool, optional
             Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
         advanced_surfer_setup: AdvancedSurferSetup, optional
@@ -196,6 +229,8 @@ class SurferParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._max_angle is not None:
+            json_data["maxAngle"] = self._max_angle
         if self._size_field_type is not None:
             json_data["sizeFieldType"] = self._size_field_type
         if self._min_size is not None:
@@ -208,6 +243,10 @@ class SurferParams(CoreObject):
             json_data["constantSize"] = self._constant_size
         if self._generate_quads is not None:
             json_data["generateQuads"] = self._generate_quads
+        if self._check_non_manifolds is not None:
+            json_data["checkNonManifolds"] = self._check_non_manifolds
+        if self._avoid_corner_triangles is not None:
+            json_data["avoidCornerTriangles"] = self._avoid_corner_triangles
         if self._smooth_size_transition is not None:
             json_data["smoothSizeTransition"] = self._smooth_size_transition
         if self._advanced_surfer_setup is not None:
@@ -220,9 +259,19 @@ class SurferParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "size_field_type :  %s\nmin_size :  %s\nmax_size :  %s\ngrowth_rate :  %s\nconstant_size :  %s\ngenerate_quads :  %s\nsmooth_size_transition :  %s\nadvanced_surfer_setup :  %s\nproject_on_geometry :  %s\nenable_multi_threading :  %s" % (self._size_field_type, self._min_size, self._max_size, self._growth_rate, self._constant_size, self._generate_quads, self._smooth_size_transition, self._advanced_surfer_setup, self._project_on_geometry, self._enable_multi_threading)
+        message = "max_angle :  %s\nsize_field_type :  %s\nmin_size :  %s\nmax_size :  %s\ngrowth_rate :  %s\nconstant_size :  %s\ngenerate_quads :  %s\ncheck_non_manifolds :  %s\navoid_corner_triangles :  %s\nsmooth_size_transition :  %s\nadvanced_surfer_setup :  %s\nproject_on_geometry :  %s\nenable_multi_threading :  %s" % (self._max_angle, self._size_field_type, self._min_size, self._max_size, self._growth_rate, self._constant_size, self._generate_quads, self._check_non_manifolds, self._avoid_corner_triangles, self._smooth_size_transition, self._advanced_surfer_setup, self._project_on_geometry, self._enable_multi_threading)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def max_angle(self) -> float:
+        """Maximum feature angle limit to be used to identify and preserve features.
+        """
+        return self._max_angle
+
+    @max_angle.setter
+    def max_angle(self, value: float):
+        self._max_angle = value
 
     @property
     def size_field_type(self) -> SizeFieldType:
@@ -283,6 +332,26 @@ class SurferParams(CoreObject):
     @generate_quads.setter
     def generate_quads(self, value: bool):
         self._generate_quads = value
+
+    @property
+    def check_non_manifolds(self) -> bool:
+        """Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+        """
+        return self._check_non_manifolds
+
+    @check_non_manifolds.setter
+    def check_non_manifolds(self, value: bool):
+        self._check_non_manifolds = value
+
+    @property
+    def avoid_corner_triangles(self) -> bool:
+        """Option to avoid corner triangles(with all three boundary nodes) generated.
+        """
+        return self._avoid_corner_triangles
+
+    @avoid_corner_triangles.setter
+    def avoid_corner_triangles(self, value: bool):
+        self._avoid_corner_triangles = value
 
     @property
     def smooth_size_transition(self) -> bool:
