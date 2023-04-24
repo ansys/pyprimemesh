@@ -1,6 +1,5 @@
 """General fixtures to use in all test modules."""
 import os
-import shutil
 import xml.etree.ElementTree as ET
 
 import pytest
@@ -98,7 +97,8 @@ def get_examples():
 @pytest.fixture(scope="session", autouse=True)
 def get_testfiles():
     """Downloads unit test files"""
-    os.mkdir(os.path.abspath("./tests/core/test_files/"))
+    if not os.path.exists("./tests/core/test_files/"):
+        os.mkdir(os.path.abspath("./tests/core/test_files/"))
     download_test_examples(destination=str(os.path.abspath("./tests/core/test_files/")))
 
 
@@ -165,4 +165,4 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
 def pytest_sessionfinish(session, exitstatus):
     """Cleanup generated files."""
-    shutil.rmtree("./tests/core/test_files/")
+    os.rmdir(os.path.abspath("./tests/core/test_files/"))

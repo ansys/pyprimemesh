@@ -4,7 +4,7 @@ import os
 from enum import Enum
 from typing import Optional, Union
 
-from .download_utilities import download_file
+from .download_utilities import DownloadManager
 
 __all__ = ['clear_download_cache', 'get_file', 'Examples']
 
@@ -26,12 +26,6 @@ class Examples(Enum):
 
 
 _DOWNLOADS = []
-
-
-def clear_download_cache():
-    """Clears the cache of downloaded files"""
-    [os.remove(_file) for _file in _DOWNLOADS]
-    _DOWNLOADS.clear()
 
 
 def get_file(
@@ -64,16 +58,17 @@ def get_file(
     ValueError
         When the provided destination path does not exist on file
     """
+    download_manager = DownloadManager()
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
-    file = download_file(
+    file = download_manager.download_file(
         example.value["filename"],
         'pyprimemesh',
         example.value["git_folder"],
         destination=destination,
         force=force,
     )
-    _DOWNLOADS.append(file)
+
     return file
 
 

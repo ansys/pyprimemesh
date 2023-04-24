@@ -1,7 +1,7 @@
 import os
 from typing import Optional, Union
 
-from .download_utilities import download_file
+from .download_utilities import DownloadManager
 
 FILE_NAMES = [
     "box.psf",
@@ -46,11 +46,11 @@ def download_test_examples(
 
     """
 
+    download_manager = DownloadManager()
     unit_test_paths = [
-        download_file(
+        download_manager.download_file(
             file, 'pyprimemesh', 'unit_test_examples', destination=destination, force=force
         )
         for file in FILE_NAMES
     ]
-
     return unit_test_paths

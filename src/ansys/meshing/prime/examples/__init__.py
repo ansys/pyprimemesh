@@ -1,4 +1,4 @@
-from .examples import *
+from .download_utilities import DownloadManager
 from .examples import (
     download_bracket_fmd,
     download_bracket_scdoc,
