@@ -940,6 +940,107 @@ class ExportFluentMeshingMeshParams(CoreObject):
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
+class ExportSTLParams(CoreObject):
+    """Parameters to export STL file.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            part_ids: Iterable[int]):
+        self._part_ids = part_ids if isinstance(part_ids, np.ndarray) else np.array(part_ids, dtype=np.int32) if part_ids is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            part_ids: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExportSTLParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExportSTLParams object with default parameters.
+        part_ids: Iterable[int], optional
+            Ids of parts to export.
+        json_data: dict, optional
+            JSON dictionary to create a ExportSTLParams object with provided parameters.
+
+        Examples
+        --------
+        >>> export_stlparams = prime.ExportSTLParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["partIds"] if "partIds" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [part_ids])
+            if all_field_specified:
+                self.__initialize(
+                    part_ids)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExportSTLParams")
+                    json_data = param_json["ExportSTLParams"] if "ExportSTLParams" in param_json else {}
+                    self.__initialize(
+                        part_ids if part_ids is not None else ( ExportSTLParams._default_params["part_ids"] if "part_ids" in ExportSTLParams._default_params else (json_data["partIds"] if "partIds" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            part_ids: Iterable[int] = None):
+        """Set the default values of ExportSTLParams.
+
+        Parameters
+        ----------
+        part_ids: Iterable[int], optional
+            Ids of parts to export.
+        """
+        args = locals()
+        [ExportSTLParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExportSTLParams.
+
+        Examples
+        --------
+        >>> ExportSTLParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportSTLParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._part_ids is not None:
+            json_data["partIds"] = self._part_ids
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "part_ids :  %s" % (self._part_ids)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def part_ids(self) -> Iterable[int]:
+        """Ids of parts to export.
+        """
+        return self._part_ids
+
+    @part_ids.setter
+    def part_ids(self, value: Iterable[int]):
+        self._part_ids = value
+
 class CadRefacetingParams(CoreObject):
     """Parameters to refacet CAD during import.
     """
@@ -2415,6 +2516,331 @@ class ExportMapdlCdbResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class ImportLSDynaKeywordFileParams(CoreObject):
+    """Parameters to control LS-DYNA keyword file import settings.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            drop_mid_nodes: bool,
+            append: bool):
+        self._drop_mid_nodes = drop_mid_nodes
+        self._append = append
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            drop_mid_nodes: bool = None,
+            append: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ImportLSDynaKeywordFileParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ImportLSDynaKeywordFileParams object with default parameters.
+        drop_mid_nodes: bool, optional
+            Option to import quadratic mesh elements as linear skipping the mid nodes.
+        append: bool, optional
+            Option to append imported k file into existing model.
+        json_data: dict, optional
+            JSON dictionary to create a ImportLSDynaKeywordFileParams object with provided parameters.
+
+        Examples
+        --------
+        >>> import_lsdyna_keyword_file_params = prime.ImportLSDynaKeywordFileParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["dropMidNodes"] if "dropMidNodes" in json_data else None,
+                json_data["append"] if "append" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [drop_mid_nodes, append])
+            if all_field_specified:
+                self.__initialize(
+                    drop_mid_nodes,
+                    append)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ImportLSDynaKeywordFileParams")
+                    json_data = param_json["ImportLSDynaKeywordFileParams"] if "ImportLSDynaKeywordFileParams" in param_json else {}
+                    self.__initialize(
+                        drop_mid_nodes if drop_mid_nodes is not None else ( ImportLSDynaKeywordFileParams._default_params["drop_mid_nodes"] if "drop_mid_nodes" in ImportLSDynaKeywordFileParams._default_params else (json_data["dropMidNodes"] if "dropMidNodes" in json_data else None)),
+                        append if append is not None else ( ImportLSDynaKeywordFileParams._default_params["append"] if "append" in ImportLSDynaKeywordFileParams._default_params else (json_data["append"] if "append" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            drop_mid_nodes: bool = None,
+            append: bool = None):
+        """Set the default values of ImportLSDynaKeywordFileParams.
+
+        Parameters
+        ----------
+        drop_mid_nodes: bool, optional
+            Option to import quadratic mesh elements as linear skipping the mid nodes.
+        append: bool, optional
+            Option to append imported k file into existing model.
+        """
+        args = locals()
+        [ImportLSDynaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ImportLSDynaKeywordFileParams.
+
+        Examples
+        --------
+        >>> ImportLSDynaKeywordFileParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ImportLSDynaKeywordFileParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._drop_mid_nodes is not None:
+            json_data["dropMidNodes"] = self._drop_mid_nodes
+        if self._append is not None:
+            json_data["append"] = self._append
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "drop_mid_nodes :  %s\nappend :  %s" % (self._drop_mid_nodes, self._append)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def drop_mid_nodes(self) -> bool:
+        """Option to import quadratic mesh elements as linear skipping the mid nodes.
+        """
+        return self._drop_mid_nodes
+
+    @drop_mid_nodes.setter
+    def drop_mid_nodes(self, value: bool):
+        self._drop_mid_nodes = value
+
+    @property
+    def append(self) -> bool:
+        """Option to append imported k file into existing model.
+        """
+        return self._append
+
+    @append.setter
+    def append(self, value: bool):
+        self._append = value
+
+class ExportLSDynaKeywordFileParams(CoreObject):
+    """Parameters to control LS-DYNA keyword file export settings.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            part_ids: Iterable[int]):
+        self._part_ids = part_ids if isinstance(part_ids, np.ndarray) else np.array(part_ids, dtype=np.int32) if part_ids is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            part_ids: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExportLSDynaKeywordFileParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExportLSDynaKeywordFileParams object with default parameters.
+        part_ids: Iterable[int], optional
+            Option to export only specified parts.
+        json_data: dict, optional
+            JSON dictionary to create a ExportLSDynaKeywordFileParams object with provided parameters.
+
+        Examples
+        --------
+        >>> export_lsdyna_keyword_file_params = prime.ExportLSDynaKeywordFileParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["partIds"] if "partIds" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [part_ids])
+            if all_field_specified:
+                self.__initialize(
+                    part_ids)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExportLSDynaKeywordFileParams")
+                    json_data = param_json["ExportLSDynaKeywordFileParams"] if "ExportLSDynaKeywordFileParams" in param_json else {}
+                    self.__initialize(
+                        part_ids if part_ids is not None else ( ExportLSDynaKeywordFileParams._default_params["part_ids"] if "part_ids" in ExportLSDynaKeywordFileParams._default_params else (json_data["partIds"] if "partIds" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            part_ids: Iterable[int] = None):
+        """Set the default values of ExportLSDynaKeywordFileParams.
+
+        Parameters
+        ----------
+        part_ids: Iterable[int], optional
+            Option to export only specified parts.
+        """
+        args = locals()
+        [ExportLSDynaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExportLSDynaKeywordFileParams.
+
+        Examples
+        --------
+        >>> ExportLSDynaKeywordFileParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportLSDynaKeywordFileParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._part_ids is not None:
+            json_data["partIds"] = self._part_ids
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "part_ids :  %s" % (self._part_ids)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def part_ids(self) -> Iterable[int]:
+        """Option to export only specified parts.
+        """
+        return self._part_ids
+
+    @part_ids.setter
+    def part_ids(self, value: Iterable[int]):
+        self._part_ids = value
+
+class ExportLSDynaIgaKeywordFileParams(CoreObject):
+    """Parameters for exporting LS-Dyna IGA keyword file.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            part_ids: Iterable[int]):
+        self._part_ids = part_ids if isinstance(part_ids, np.ndarray) else np.array(part_ids, dtype=np.int32) if part_ids is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            part_ids: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExportLSDynaIgaKeywordFileParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExportLSDynaIgaKeywordFileParams object with default parameters.
+        part_ids: Iterable[int], optional
+        json_data: dict, optional
+            JSON dictionary to create a ExportLSDynaIgaKeywordFileParams object with provided parameters.
+
+        Examples
+        --------
+        >>> export_lsdyna_iga_keyword_file_params = prime.ExportLSDynaIgaKeywordFileParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["partIds"] if "partIds" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [part_ids])
+            if all_field_specified:
+                self.__initialize(
+                    part_ids)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExportLSDynaIgaKeywordFileParams")
+                    json_data = param_json["ExportLSDynaIgaKeywordFileParams"] if "ExportLSDynaIgaKeywordFileParams" in param_json else {}
+                    self.__initialize(
+                        part_ids if part_ids is not None else ( ExportLSDynaIgaKeywordFileParams._default_params["part_ids"] if "part_ids" in ExportLSDynaIgaKeywordFileParams._default_params else (json_data["partIds"] if "partIds" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            part_ids: Iterable[int] = None):
+        """Set the default values of ExportLSDynaIgaKeywordFileParams.
+
+        Parameters
+        ----------
+        part_ids: Iterable[int], optional
+        """
+        args = locals()
+        [ExportLSDynaIgaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExportLSDynaIgaKeywordFileParams.
+
+        Examples
+        --------
+        >>> ExportLSDynaIgaKeywordFileParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportLSDynaIgaKeywordFileParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._part_ids is not None:
+            json_data["partIds"] = self._part_ids
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "part_ids :  %s" % (self._part_ids)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def part_ids(self) -> Iterable[int]:
+        """
+        Option to export only specified parts.
+        """
+        return self._part_ids
+
+    @part_ids.setter
+    def part_ids(self, value: Iterable[int]):
+        self._part_ids = value
 
 class ExportBoundaryFittedSplineParams(CoreObject):
     """Parameters for exporting boundary fitted splines.
