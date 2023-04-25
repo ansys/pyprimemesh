@@ -236,7 +236,7 @@ class FileIO(_FileIO):
         >>> results = file_io.import_mapdl_cdb("/tmp/file.cdb", params)
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_mapdl_cdb(self, temp_file_name, params)
+            result = super().import_mapdl_cdb(temp_file_name, params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
@@ -313,7 +313,7 @@ class FileIO(_FileIO):
         """
         with utils.file_read_context_list(self._model, file_names) as temp_file_names:
             result = super().import_fluent_meshing_meshes(
-                self, temp_file_names, import_fluent_meshing_mesh_params
+                temp_file_names, import_fluent_meshing_mesh_params
             )
         if result.error_code == ErrorCode.NOERROR:
             self._model._sync_up_model()
@@ -351,7 +351,7 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_fluent_case(self, temp_file_name, import_fluent_case_params)
+            result = super().import_fluent_case(temp_file_name, import_fluent_case_params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
@@ -437,7 +437,7 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_lsdyna_keyword_file(self, temp_file_name, import_params)
+            result = super().import_lsdyna_keyword_file(temp_file_name, import_params)
             self._model._sync_up_model()
         return result
 
@@ -572,7 +572,7 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            import_result = super().import_cad(self, temp_file_name, params)
+            import_result = super().import_cad(temp_file_name, params)
             if import_result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return import_result
