@@ -50,7 +50,7 @@ class FileIO(_FileIO):
     def __init__(self, model: Model):
         """Initialize model and parent class."""
         self._model = model
-        super().__init__(self, model)
+        super().__init__(model)
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
         """Read PyPrimeMesh data file.
