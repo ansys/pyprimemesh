@@ -28,9 +28,16 @@ max_offset_size provides the maximum stack size allowed for stacking. Size_contr
 delete_base  provides you an option to delete the base face after stacking. 
 Also, MeshStackerParams has parameters like origin to specify the origin coordinates of the Stacker. direction specifies the direction vector of the stacker.
 
+Stacker has the following limitations:
+
+-	Stacker works only on 2.5D models.
+
+- Stacker allows only conformal meshing.	
+
+
 The below example shows how to perform stacking on a 2.5 D model:
 
-1. Start the PyPrimeMesh client and read the model.
+Start the PyPrimeMesh client and read the model.
 
 .. code-block:: python
 
@@ -41,23 +48,20 @@ The below example shows how to perform stacking on a 2.5 D model:
     res = file_io.import_fluent_meshing_meshes([r"E:\Test\thin_disc_cadfacets.msh"], prime.ImportFluentMeshingMeshParams(model = model))
     print (res)
     print (model)
-    
-2. Get the part by name.   
-
-.. code-block:: python
-
     part = model.get_part_by_name("thin_disc")
-    print (part)
+    print (part)    
     
-3.	Set the global sizing parameters.
+Set the global sizing parameters.
+
+.. note::
+Stacker uses global max size by default if you are not providing the max size.
 
 .. code-block:: python
 
   model.set_global_sizing_params(prime.GlobalSizingParams(model=model, min=0.15, max=0.5, growth_rate=1.2))
   deleted = model.delete_volumetric_size_fields(model.get_active_volumetric_size_fields())
-  print (deleted)
   
-4.	Set the stacker parameters. 
+Set the stacker parameters. 
 
 .. code-block:: python
 
@@ -71,14 +75,14 @@ The below example shows how to perform stacking on a 2.5 D model:
 .. note::
   lateral_defeature_tolerance and stacking_defeature_tolerance values should be set to (global min size/4).
  
-5.	Create base face for stacker.
+Create base face for stacker.
 
 .. code-block:: python
    
   createbase_results = sweeper.create_base_face(part.id, part.get_topo_volumes(), stacker_params)
   print (createbase_results)
 
-6.	Compute volumetric size field. 
+Compute volumetric size field. 
 
 .. code-block:: python
   
@@ -88,49 +92,16 @@ The below example shows how to perform stacking on a 2.5 D model:
   computed_volume = SF1.compute_volumetric(size_control_ids_new, prime.VolumetricSizeFieldComputeParams(model))
   print (computed_volume)
   
-7.	Perform surface meshing on the base face of the model.
+Perform surface meshing on the base face of the model.
 
 .. code-block:: python
 
   surfer = prime.Surfer(model)
   meshbase_result = surfer.mesh_topo_faces(part.id, baseFaces, params = prime.SurferParams( model = model,size_field_type = prime.SizeFieldType.VOLUMETRIC, generate_quads = True))
   print (meshbase_result)
-  
-8.	Delete the size controls and existing size fields. 
-
-.. code-block:: python
-
- if len(size_control_ids_new) > 0 :
-        model.control_data.delete_controls(size_control_ids_new)
- SF = model.delete_volumetric_size_fields(model.get_active_volumetric_sizefields())
- print (SF)
  
-9. Stack the base face.
+Stack the base face.
 
 .. code-block:: python
  
- stackbase_results = sweeper.stack_base_face(part.id, baseFaces, part.get_topo_volumes(), stacker_params)
-  
-
---------------
-Best Practices
---------------
-
-The best practices to be considered while working with stacker are:
-
--	Stacker uses global max size by default if you are not providing the max size.
-
-------------
-Limitations
-------------
-
-Stacker has the following limitations:
-
--	Stacker works only on 2.5D models.
-
-- Stacker allows only conformal meshing.	
-
-
-    
-    
-    
+ stackbase_results = sweeper.stack_base_face(part.id, baseFaces, part.get_topo_volumes(), stacker_params)    
