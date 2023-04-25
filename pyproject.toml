@@ -62,7 +62,7 @@ name = "ansys.meshing.prime"
 
 [tool.black]
 line-length = 100
-target-version = ['py37', 'py38', 'py39', 'py310']
+target-version = ['py38', 'py39', 'py310']
 skip-string-normalization = true
 exclude = '''
 /(
