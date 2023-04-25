@@ -85,7 +85,7 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().read_pmdat(self, temp_file_name, file_read_params)
+            result = super().read_pmdat(temp_file_name, file_read_params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
