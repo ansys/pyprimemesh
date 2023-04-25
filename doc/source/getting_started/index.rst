@@ -26,7 +26,7 @@ PyPrimeMesh Client Release   Ansys Prime Server Release
 Installation
 ------------
 
-The ``ansys-meshing-prime`` package currently supports Python 3.7
+The ``ansys-meshing-prime`` package currently supports Python 3.8
 to Python 3.11 on Windows and Linux operating systems.
 
 You can install PyPrimeMesh with all dependencies directly from PyPI with this code:
