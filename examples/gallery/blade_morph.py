@@ -78,12 +78,14 @@ target = target_part.get_topo_faces()
 ###############################################################################
 # Match Morph Mesh
 # ~~~~~~~~~~~~~~~~
+# Set the target type to be for topoface as the target is geometry.
 
 morpher = prime.Morpher(model)
 match_pair = prime.MatchPair(
     model=model,
     source_surfaces=source,
     target_surfaces=target,
+    target_type=prime.MatchPairTargetType.TOPOFACE,
 )
 
 params = prime.MatchMorphParams(model)
