@@ -32,10 +32,16 @@ Example file names should be in the format:
 
 ``example_name.py``
 
-Supporting input files for the example, such as CAD or mesh file assets, must be either original content or have appropriate licensing and ownership permissions from their respective owners.  If the input files are used within the example script provided they must be capable of running in the CI pipeline.  This means that only files that can be read using the native file formats and CAD readers can be used in the scripted examples.
-importantly, must run on Linux for containers and CI pipeline. However, additional files can be
-included for Windows but not used in example. For instance, comments can be added for the additional
-files as reference to CAD import capability.
+Supporting input files for the example, such as CAD or mesh file assets, must be either original content 
+or have appropriate licensing and ownership permissions from their respective owners. If the input files 
+are used within the example script provided they must be capable of running in the CI pipeline.
+This means that only files that can be read using the native file formats and CAD readers can be used 
+in the scripted examples.
+
+The recommended data formats to be included in the example are:
+ - .pmdat
+ - .fmd
+ - .scdoc or .dsco (supported on Windows OS)
 
 Supporting input files should be added in:
 
@@ -44,6 +50,10 @@ Supporting input files should be added in:
 Referencing files as enum and creating download function in:
 
 ``pyprimemesh/examples.py``
+
+Also adding download function to:
+
+``pyprimemesh/examples/__init__.py``
 
 After this preamble is complete, the first code block begins.
 """
