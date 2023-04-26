@@ -496,6 +496,7 @@ class Graphics(object):
         self._show_selector()
 
     def _show_selector(self):
+        """Chooses between using Trame or Python visualizer."""
         if self._use_trame:
             visualizer = TrameVisualizer()
             visualizer.set_scene(self._plotter)
