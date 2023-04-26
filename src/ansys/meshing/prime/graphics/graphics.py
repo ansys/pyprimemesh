@@ -7,10 +7,8 @@ from pyvista import _vtk
 from pyvista.plotting.plotting import Plotter
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics.trame_gui import TrameVisualizer
+from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
 from ansys.meshing.prime.internals import defaults
-
-pv.OFF_SCREEN = True
 
 
 def compute_face_list_from_structured_nodes(nodes, dim):
@@ -172,7 +170,7 @@ class Picker:
 class Graphics(object):
     """ """
 
-    def __init__(self, model: prime.Model):
+    def __init__(self, model: prime.Model, use_trame: bool = False):
         """ """
         self._model = model
         self._display_data = {}
@@ -191,6 +189,19 @@ class Graphics(object):
         self._printInfoBt: _vtk.vtkButtonWidget = None
         self._showRulerBt: _vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
+        self._use_trame = use_trame
+        self._pv_off_screen_original = bool(pv.OFF_SCREEN)
+
+        if self._use_trame and _HAS_TRAME:
+            # avoids GUI window popping up
+            pv.OFF_SCREEN = True
+        elif self._use_trame and not _HAS_TRAME:
+            # TODO: Use logger to raise warning messages
+            warn_msg = (
+                "'use_trame' is active but Trame dependencies are not installed."
+                "Consider installing 'pyvista[trame]' to use this functionality."
+            )
+            print(warn_msg)
         if os.getenv('PRIME_APP_RUN'):
             self._app = __import__('PrimeApp')
         else:
@@ -482,10 +493,16 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
+        self._show_selector()
 
-        visualizer = TrameVisualizer()
-        visualizer.set_scene(self._plotter)
-        visualizer.show()
+    def _show_selector(self):
+        if self._use_trame:
+            visualizer = TrameVisualizer()
+            visualizer.set_scene(self._plotter)
+            visualizer.show()
+        else:
+            self._plotter.show()
+        pv.OFF_SCREEN = self._pv_off_screen_original
 
     def __draw_parts(self, parts=[], update=False, spline=False):
         """ """
@@ -547,7 +564,7 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
 
     def __draw_scope_parts(self, update=False, scope: prime.ScopeDefinition = None):
         """ """
@@ -607,7 +624,7 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
 
     def __update_bt_icons(self):
         vr = self._colorByTypeBt.GetRepresentation()
