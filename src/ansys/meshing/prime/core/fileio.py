@@ -228,7 +228,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> #connect client to server and get model from it
+        >>> # connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
@@ -562,7 +562,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> #connect client to server and get model from it
+        >>> # connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
