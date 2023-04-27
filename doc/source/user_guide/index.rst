@@ -17,6 +17,7 @@ This section provides an overview of how you use PyPrimeMesh for mesh preparatio
    graphics
    surfer
    automesh
+   stacker
    sizing
    connections
    mesh_diagnostics

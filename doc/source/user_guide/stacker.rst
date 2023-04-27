@@ -1,107 +1,128 @@
-=======
-Stacker
-=======
-Stacker creates a volume mesh on 2.5 D models, stacking faces or edge zonelets one above the other in layers. 
-Stacker stacks each of the input topovolumes individually. A geometry is stackable only when there is a direction called stacking direction,
-to which all surfaces are either perpendicular or parallel. 
-A 2.5 D or stackable geometry is any closed volume or set of closed volumes that can be obtained by successive extrusion 
-of a series of 2D geometries, along the area normal of the 2D geometries. 
-
-Stacker workflow involves the following:
-
--	create imprints of model edges on the base face 
-
-- meshes the imprinted base face 
-
-- extrudes the base face mesh at the selected origin by stacking the face in layers one over the other along the specified direction to generate a volume mesh.
+.. _ref_index_stacker:
 
 
 
-create_base_face(self, topo_volume_ids : Iterable[int], params : MeshStackerParams) -> MeshStackerResults creates a face at the origin perpendicular 
-to the specified direction.
-Also, imprints model edges on the face, repairs the edges within the lateral_defeature_tolerance and duplicates the size controls on the base face. 
-Stacker then performs surface meshing on the base face. 
+***************
+Volume Sweeping
+***************
 
-stack_base_face(self, base_face_ids : Iterable[int], topo_volume_ids : Iterable[int], params : MeshStackerParams) -> MeshStackerResult creates the volume mesh stacking
-the meshed faced one over the other forming layers along the given direction. stacking_defeature_tolerance provides the distance tolerances between the stacker layers.
-max_offset_size provides the maximum stack size allowed for stacking. Size_control_ids allow you to provide the size controls for the stacker. 
-delete_base  provides you an option to delete the base face after stacking. 
-Also, MeshStackerParams has parameters like origin to specify the origin coordinates of the Stacker. direction specifies the direction vector of the stacker.
-
-Stacker has the following limitations:
-
--	Stacker works only on 2.5D models.
-
-- Stacker allows only conformal meshing.	
-
-
-The below example shows how to perform stacking on a 2.5 D model:
-
-Start the PyPrimeMesh client and read the model.
-
-.. code-block:: python
-
-    import ansys.meshing.prime  as prime
-    client = prime.launch_prime(timeout=20) 
-    model = client.model
-    file_io = prime.FileIO(model)
-    res = file_io.import_fluent_meshing_meshes([r"E:\Test\thin_disc_cadfacets.msh"], prime.ImportFluentMeshingMeshParams(model = model))
-    print (res)
-    print (model)
-    part = model.get_part_by_name("thin_disc")
-    print (part)    
-    
-Set the global sizing parameters.
+The :class:`VolumeSweeper <ansys.meshing.prime.VolumeSweeper>` class creates a volume mesh on 2.5D models, stacking faces
+or edge zonelets one above the other in layers. This volume sweeping technology stacks each of the input topovolumes individually.
 
 .. note::
-Stacker uses global max size by default if you are not providing the max size.
+  A 2.5D or stackable geometry is any closed volume or set of closed volumes that can be obtained by successive extrusion of a series of 2D geometries, along the area normal of the 2D geometries.
+
+  A geometry is stackable only when there is a direction called stacking direction, to which all surfaces are either perpendicular or parallel.
+
+.. warning::
+  The hex-dominant mesh created by the volume sweeping methods can only be applied to 2.5D models. Only conformal meshing is supported.
+
+
+======================================
+Hex-dominant meshing for 2.5D geometry
+=======================================
+
+Volume sweeping workflow involves the following:
+
+*	Create imprints of model edges on the base face.
+* Surface mesh the imprinted base face.
+* Extrude the base face mesh at the selected origin by stacking the face layer by layer along the specified direction to generate a volume mesh.
+
+Set the global sizing parameters:
 
 .. code-block:: python
 
   model.set_global_sizing_params(prime.GlobalSizingParams(model=model, min=0.15, max=0.5, growth_rate=1.2))
-  deleted = model.delete_volumetric_size_fields(model.get_active_volumetric_size_fields())
-  
-Set the stacker parameters. 
+  model.delete_volumetric_size_fields(model.get_active_volumetric_size_fields())
+  part = model.parts[0]
+
+Define stacker parameters:
+ - Set origin and direction vector for stacking orientation
+ - Option to set defeature tolerance for edge imprints
+ - Option to set maximum stack size allowed for stacking
+ - Option to delete base face after stacking
+
+.. note::
+  Default global max size is used for stacking parameters if you are not providing the max size.
+
+  Default values of lateral_defeature_tolerance and stacking_defeature_tolerance are set to (global min size/4).
 
 .. code-block:: python
 
   sweeper = prime.VolumeSweeper(model)
   stacker_params = prime.MeshStackerParams(
-        origin = [2.02832, 0.0, -0.122448], direction = [0., 1., 0.], lateral_defeature_tolerance = 0.1, stacking_defeature_tolerance = 0.1,
-        max_offset_size = 0.5, delete_base = True, size_control_ids = [])
-  print (stacker_params)
-  
- 
-.. note::
-  lateral_defeature_tolerance and stacking_defeature_tolerance values should be set to (global min size/4).
- 
-Create base face for stacker.
+    model=model,
+    direction=[0., 1., 0.],
+    max_offset_size=0.5,
+    delete_base=True
+  )
 
-.. code-block:: python
-   
-  createbase_results = sweeper.create_base_face(part.id, part.get_topo_volumes(), stacker_params)
-  print (createbase_results)
+Print the results of stacker parameters so that you can review them:
 
-Compute volumetric size field. 
+.. code-block:: pycon
 
-.. code-block:: python
-  
-  baseFaces = createbase_results.base_face_ids
-  size_control_ids_new = createbase_results.size_control_ids
-  SF1 = prime.SizeField(model)
-  computed_volume = SF1.compute_volumetric(size_control_ids_new, prime.VolumetricSizeFieldComputeParams(model))
-  print (computed_volume)
-  
-Perform surface meshing on the base face of the model.
+  >>> print (stacker_params)
+
+  origin :  [0. 0. 0.]
+  direction :  [0. 1. 0.]
+  lateral_defeature_tolerance :  0.0375
+  stacking_defeature_tolerance :  0.0375
+  max_offset_size :  0.5
+  size_control_ids :  []
+  delete_base :  True
+
+
+Create base face:
 
 .. code-block:: python
 
-  surfer = prime.Surfer(model)
-  meshbase_result = surfer.mesh_topo_faces(part.id, baseFaces, params = prime.SurferParams( model = model,size_field_type = prime.SizeFieldType.VOLUMETRIC, generate_quads = True))
-  print (meshbase_result)
- 
-Stack the base face.
+  createbase_results = sweeper.create_base_face(
+    part_id=part.id,
+    topo_volume_ids=part.get_topo_volumes(),
+    params=stacker_params
+  )
+
+  base_faces = createbase_results.base_face_ids
+
+Compute volumetric size field and perform surface meshing on the base face:
 
 .. code-block:: python
- 
- stackbase_results = sweeper.stack_base_face(part.id, baseFaces, part.get_topo_volumes(), stacker_params)    
+
+  size_field = prime.SizeField(model)
+  res = size_field.compute_volumetric(
+    size_control_ids=createbase_results.size_control_ids,
+    volumetric_sizefield_params=prime.VolumetricSizeFieldComputeParams(model)
+  )
+  surfer_params = prime.SurferParams(
+    model=model,
+    size_field_type=prime.SizeFieldType.VOLUMETRIC,
+    generate_quads=True
+  )
+  meshbase_result = prime.Surfer(model).mesh_topo_faces(
+    part_id=part.id,
+    topo_faces=base_faces,
+    params=surfer_params
+  )
+
+.. figure:: ../images/meshbase_result.png
+  :width: 300pt
+  :aligh: center
+
+  **Base face meshed**
+
+Stack the base face:
+
+.. code-block:: python
+
+  stackbase_results = sweeper.stack_base_face(
+  part_id=part.id,
+  base_face_ids=base_faces,
+  topo_volume_ids=part.get_topo_volumes(),
+  params=stacker_params
+  )
+
+.. figure:: ../images/stackbase_results.png
+  :width: 300pt
+  :aligh: center
+
+  **Stack base meshed**
