@@ -15,23 +15,31 @@ or edge zonelets one above the other in layers. This volume sweeping technology 
   A geometry is stackable only when there is a direction called stacking direction, to which all surfaces are either perpendicular or parallel.
 
 .. warning::
-  The hex-dominant mesh created by the volume sweeping methods can only be applied to 2.5D models. Only conformal meshing is supported.
+  The hex-dominant mesh created by this "Stacker" method can only be applied to 2.5D models. Only conformal mesh within a part is supported.
+
+
+"Stacker" workflow involves the following:
+
+*	Create imprints of model edges on the base face.
+* Surface mesh the imprinted base face.
+* Extrude the base face mesh at the selected origin by stacking the face layer by layer along the specified direction to generate a volume mesh.
+
+.. figure:: ../images/stacker_workflow.png
+  :width: 400pt
+  :align: center
+
+  **Example of Stacker Workflow**
 
 
 ======================================
 Hex-dominant meshing for 2.5D geometry
 =======================================
 
-Volume sweeping workflow involves the following:
-
-*	Create imprints of model edges on the base face.
-* Surface mesh the imprinted base face.
-* Extrude the base face mesh at the selected origin by stacking the face layer by layer along the specified direction to generate a volume mesh.
-
-Set the global sizing parameters:
+The following example shows how to mesh a thin disc using "Stacker" method:
 
 .. code-block:: python
 
+  # Set the global sizing parameters after importing the model
   model.set_global_sizing_params(
       prime.GlobalSizingParams(model=model, min=0.15, max=0.5, growth_rate=1.2)
   )
@@ -40,7 +48,7 @@ Set the global sizing parameters:
 
 Define stacker parameters:
  - Set origin and direction vector for stacking orientation
- - Option to set defeature tolerance for edge imprints
+ - Option to set defeaturing tolerance for edge imprints
  - Option to set maximum stack size allowed for stacking
  - Option to delete base face after stacking
 
