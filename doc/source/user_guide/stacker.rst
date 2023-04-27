@@ -47,7 +47,7 @@ Define stacker parameters:
 .. note::
   Default global max size is used for stacking parameters if you are not providing the max size.
 
-  Default values of lateral_defeature_tolerance and stacking_defeature_tolerance are set to (global min size/4).
+  Default :attr:`lateral_defeature_tolerance <ansys.meshing.prime.MeshStackerParams.lateral_defeature_tolerance>` and :attr:`stacking_defeature_tolerance <ansys.meshing.prime.MeshStackerParams.stacking_defeature_tolerance>` are set to (global min size/4).
 
 .. code-block:: python
 
