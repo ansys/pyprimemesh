@@ -1,11 +1,15 @@
 """
 .. _ref_how_to_add_an_example_reference_key:
 
+============================
 Adding a New Gallery Example
-----------------------------
-This example demonstrates how to add new examples as well as being a template that can
-be used in their creation.
+============================
 
+**Summary**: This example demonstrates how to add new examples as well as being a template
+that can be used in their creation.
+
+Prerequisite
+~~~~~~~~~~~~
 This block comment should be included at the top of any new example. Each example
 should have a reference tag/key in the form:
 
