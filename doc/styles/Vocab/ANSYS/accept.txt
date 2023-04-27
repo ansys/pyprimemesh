@@ -38,3 +38,6 @@ ignore_self_proximity
 ignore_orientation
 meshedgeodesic
 stackable
+Defeature
+defeature
+defeaturing
