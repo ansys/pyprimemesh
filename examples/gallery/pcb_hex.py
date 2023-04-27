@@ -6,15 +6,15 @@ Meshing a PCB for Structural Thermal
 ====================================
 
 **Summary**: This example demonstrates how to mesh a printed circuit board
-for structural thermal simulation using the stacker method.
+with mainly hexahedral elements for structural thermal simulation using the volume sweeper.
 
 Objective
 ~~~~~~~~~~
 In this example, you can mesh the solids of a printed circuit board,
-using the stacker method, for a structural thermal analysis
+using the volume sweeper, for a structural thermal analysis
 using predominantly hexahedral elements.
 
-.. image:: ../../../images/pcb_stacker.png
+.. image:: ../../../images/pcb_hex.png
    :align: center
    :width: 800
    :alt: Thermal structural mesh.
@@ -53,9 +53,11 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Import geometry.
 # Display imported geometry.
 
-pcb_geometry = prime.examples.download_pcb_pmdat()
+# For Windows OS users scdoc is also available.
+# In order to read the geometry as connected with shared topology the WORKBENCH cad reader route must be used:
+# mesh_util.read(file_name=prime.examples.download_pcb_scdoc(), cad_reader_route=prime.CadReaderRoute.WORKBENCH)
 
-mesh_util.read(file_name=pcb_geometry)
+mesh_util.read(file_name=prime.examples.download_pcb_pmdat())
 
 display = Graphics(model)
 display()
@@ -67,7 +69,9 @@ display()
 # -   Set direction vector used to define stacking.
 # -   Set max offset size for mesh layers created by stacker.
 # -   Set the base faces to be deleted after stacking.
+#
 # Create base face from part and volumes.
+#
 # Define a label for the generated base faces and display.
 
 part = model.parts[0]
