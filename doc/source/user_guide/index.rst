@@ -16,6 +16,7 @@ This section provides an overview of how you use PyPrimeMesh for mesh preparatio
    logging
    graphics
    surfer
+   wrapper
    automesh
    stacker
    sizing

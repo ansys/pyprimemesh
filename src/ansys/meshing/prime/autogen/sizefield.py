@@ -45,6 +45,10 @@ class SizeField(CoreObject):
         >>>           [size_control.id for size_control in model.control_data.size_controls], volumetric_sizefield_params))
 
         """
+        if not isinstance(size_control_ids, Iterable):
+            raise TypeError("Invalid argument type passed for size_control_ids, valid argument type is Iterable[int].")
+        if not isinstance(volumetric_sizefield_params, VolumetricSizeFieldComputeParams):
+            raise TypeError("Invalid argument type passed for volumetric_sizefield_params, valid argument type is VolumetricSizeFieldComputeParams.")
         args = {"size_control_ids" : size_control_ids,
         "volumetric_sizefield_params" : volumetric_sizefield_params._jsonify()}
         command_name = "PrimeMesh::SizeField/ComputeVolumetric"

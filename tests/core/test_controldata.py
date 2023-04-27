@@ -1,9 +1,24 @@
 """Tests for all control modules."""
-from ansys.meshing.prime.params.primestructs import SizingType
+from ansys.meshing.prime import Model, SizingType
+
+
+def test_empty_control_data(get_remote_client):
+    """Tests the case where we have an empty model"""
+    model: Model = get_remote_client.model
+
+    assert model.control_data != None
+    assert model.material_point_data != None
+
+    size_control = model.control_data.create_size_control(sizing_type=SizingType.SOFT)
+
+    result = size_control.set_suggested_name('bar')
+    assert result.assigned_name != ''
+    assert result.assigned_name == size_control.name
 
 
 def test_periodic_control(initialized_model_elbow):
     """Tests the methods and properties in periodic control."""
+    model: Model
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
@@ -29,6 +44,7 @@ def test_periodic_control(initialized_model_elbow):
 
 def test_wrapper_control(initialized_model_elbow):
     """Tests the methods and properties in wrapper control."""
+    model: Model
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
@@ -52,6 +68,7 @@ def test_wrapper_control(initialized_model_elbow):
 
 def test_size_control(initialized_model_elbow):
     """Tests the methods and properties in size control."""
+    model: Model
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 
@@ -75,6 +92,7 @@ def test_size_control(initialized_model_elbow):
 
 def test_prism_control(initialized_model_elbow):
     """Tests the methods and properties in prism control."""
+    model: Model
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
     # prism control tests
@@ -95,6 +113,7 @@ def test_prism_control(initialized_model_elbow):
 
 def test_volume_control(initialized_model_elbow):
     """Tests the methods and properties in volume control."""
+    model: Model
     model, _ = initialized_model_elbow
     test_control_data = model.control_data
 

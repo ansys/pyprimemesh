@@ -7,6 +7,7 @@ from ansys.meshing.prime.autogen.controldata import ControlData as _ControlData
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
+from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
@@ -27,6 +28,7 @@ class ControlData(_ControlData):
         self._wrapper_controls = []
         self._size_controls = []
         self._prism_controls = []
+        self._thin_volume_controls = []
         self._volume_controls = []
         self._periodic_controls = []
         _ControlData.__init__(self, model, id, object_id, name)
@@ -103,6 +105,26 @@ class ControlData(_ControlData):
         self._prism_controls.append(new_prism_control)
         return new_prism_control
 
+    def create_thin_volume_control(self) -> ThinVolumeControl:
+        """Creates a ThinVolumeControl.
+
+
+        Returns
+        -------
+        ThinVolumeControl
+            Returns ThinVolumeControl.
+
+
+        Examples
+        --------
+        >>> thin_volume_control = model.control_data.create_thin_volume_control()
+
+        """
+        res = _ControlData.create_thin_volume_control(self)
+        new_thin_volume_control = ThinVolumeControl(self._model, res[0], res[1], res[2])
+        self._thin_volume_controls.append(new_thin_volume_control)
+        return new_thin_volume_control
+
     def create_wrapper_control(self) -> WrapperControl:
         """Creates wrapper control with defaults.
 
@@ -174,6 +196,31 @@ class ControlData(_ControlData):
                 return prism_control
         return None
 
+    def get_thin_volume_control_by_name(self, name: str) -> ThinVolumeControl:
+        """Gets the thin volume control with the given name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the thin volume control.
+
+        Returns
+        -------
+        ThinVolumeControl
+            Returns the thin volume control.
+
+        Examples
+        --------
+        >>> contorl_data = model.control_data
+        >>> thin_volume_control = control_data.get_thin_volume_control_by_name(
+                                                     "ThinVolumeControl-1")
+        """
+        for thin_volume_control in self._thin_volume_controls:
+            if thin_volume_control.name == name:
+                return thin_volume_control
+        return None
+
     def delete_controls(self, control_ids: Iterable[int]) -> DeleteResults:
         """Deletes the control for the given id.
 
@@ -208,6 +255,10 @@ class ControlData(_ControlData):
                     if prism_control.id == id:
                         self._prism_controls.remove(prism_control)
                         break
+                for thin_volume_control in self._thin_volume_controls:
+                    if thin_volume_control.id == id:
+                        self._thin_volume_controls.remove(thin_volume_control)
+                        break
                 for volume_control in self._volume_controls:
                     if volume_control.id == id:
                         self._volume_controls.remove(volume_control)
@@ -218,23 +269,24 @@ class ControlData(_ControlData):
                         break
         return res
 
-    def _update_size_controls(self, sc_data: List):
-        self._size_controls = [SizeControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
+    def _update_size_controls(self, c_data: List):
+        self._size_controls = [SizeControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
-    def _update_prism_controls(self, sc_data: List):
-        self._prism_controls = [PrismControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
+    def _update_prism_controls(self, c_data: List):
+        self._prism_controls = [PrismControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
-    def _update_wrapper_controls(self, sc_data: List):
-        self._wrapper_controls = [
-            WrapperControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data
-        ]
+    def _update_wrapper_controls(self, c_data: List):
+        self._wrapper_controls = [WrapperControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
-    def _update_volume_controls(self, sc_data: List):
-        self._volume_controls = [VolumeControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data]
+    def _update_volume_controls(self, c_data: List):
+        self._volume_controls = [VolumeControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
-    def _update_periodic_controls(self, sc_data: List):
-        self._periodic_controls = [
-            PeriodicControl(self._model, sc[0], sc[1], sc[2]) for sc in sc_data
+    def _update_periodic_controls(self, c_data: List):
+        self._periodic_controls = [PeriodicControl(self._model, c[0], c[1], c[2]) for c in c_data]
+
+    def _update_thin_volume_controls(self, c_data: List):
+        self._thin_volume_controls = [
+            ThinVolumeControl(self._model, c[0], c[1], c[2]) for c in c_data
         ]
 
     def create_volume_control(self) -> VolumeControl:
@@ -324,6 +376,22 @@ class ControlData(_ControlData):
 
         """
         return self._prism_controls
+
+    @property
+    def thin_volume_controls(self) -> List[ThinVolumeControl]:
+        """Get the thin volume controls.
+
+        Returns
+        -------
+        List[ThinVolumeControl]
+            Returns the list of thin volume controls.
+
+        Examples
+        --------
+        >>> thin_volume_control = model.control_data.thin_volume_controls
+
+        """
+        return self._thin_volume_controls
 
     @property
     def wrapper_controls(self) -> List[WrapperControl]:
