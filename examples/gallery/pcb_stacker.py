@@ -14,7 +14,7 @@ In this example, you can mesh the solids of a printed circuit board,
 using the volume sweeper, for a structural thermal analysis
 using predominantly hexahedral elements.
 
-.. image:: ../../../images/pcb_hex.png
+.. image:: ../../../images/pcb_stacker.png
    :align: center
    :width: 800
    :alt: Thermal structural mesh.
@@ -54,8 +54,13 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Display imported geometry.
 
 # For Windows OS users scdoc is also available.
-# In order to read the geometry as connected with shared topology the WORKBENCH cad reader route must be used:
-# mesh_util.read(file_name=prime.examples.download_pcb_scdoc(), cad_reader_route=prime.CadReaderRoute.WORKBENCH)
+# In order to read the geometry as connected with shared topology
+# the WORKBENCH cad reader route must be used:
+# 
+# mesh_util.read(
+#     file_name=prime.examples.download_pcb_scdoc(),
+#     cad_reader_route=prime.CadReaderRoute.WORKBENCH,
+# )
 
 mesh_util.read(file_name=prime.examples.download_pcb_pmdat())
 
