@@ -79,6 +79,8 @@ target = target_part.get_topo_faces()
 # Match Morph Mesh
 # ~~~~~~~~~~~~~~~~
 # Set the target type to be for topoface as the target is geometry.
+# The source face zonelets of source_part will be morphed to the
+# target topo faces of the geometry.
 
 morpher = prime.Morpher(model)
 match_pair = prime.MatchPair(
@@ -103,13 +105,10 @@ morpher.match_morph(
 # display the morphed mesh
 display()
 
-# delete geometry as no longer needed ready for export
-model.delete_parts([target_part.id])
-
 ###############################################################################
 # Write Mesh
 # ~~~~~~~~~~
-# Write morphed cdb file.
+# Write morphed cdb file. The geometry will be ignored exporting to CDB.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "morphed_turbine_blade.cdb")
