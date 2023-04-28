@@ -51,12 +51,14 @@ mesh_util = prime.lucid.Mesh(model=model)
 # ~~~~~~~~~~~~~~~
 # Download the pcb geometry file (.fmd file exported by SpaceClaim).
 # Import geometry.
-# Display imported geometry.
+# Display imported geometry.  Purple edges indicate that the geometry is
+# connected and the topology is shared between the different volumes.
+# This will mean the mesh will also be connected between volumes.
 
 # For Windows OS users scdoc is also available.
 # In order to read the geometry as connected with shared topology
 # the WORKBENCH cad reader route must be used:
-# 
+
 # mesh_util.read(
 #     file_name=prime.examples.download_pcb_scdoc(),
 #     cad_reader_route=prime.CadReaderRoute.WORKBENCH,
@@ -78,6 +80,8 @@ display()
 # Create base face from part and volumes.
 #
 # Define a label for the generated base faces and display.
+# When coloured by ZONELET the display shows the imprints
+# on the base face.
 
 part = model.parts[0]
 sweeper = prime.VolumeSweeper(model)
