@@ -20,9 +20,9 @@ or edge zonelets one above the other in layers. This volume sweeping technology 
 
 "Stacker" workflow involves the following:
 
-*	Create imprints of model edges on the base face.
-* Surface mesh the imprinted base face.
-* Extrude the base face mesh at the selected origin by stacking the face layer by layer along the specified direction to generate a volume mesh.
+ - Create imprints of model edges on the base face.
+ - Surface mesh the imprinted base face.
+ - Extrude the base face mesh at the selected origin by stacking the face layer by layer along the specified direction to generate a volume mesh.
 
 .. figure:: ../images/stacker_workflow.png
   :width: 400pt
@@ -31,9 +31,8 @@ or edge zonelets one above the other in layers. This volume sweeping technology 
   **Example of Stacker Workflow**
 
 
-======================================
 Hex-dominant meshing for 2.5D geometry
-=======================================
+---------------------------------------
 
 The following example shows how to mesh a thin disc using "Stacker" method:
 
@@ -47,10 +46,11 @@ The following example shows how to mesh a thin disc using "Stacker" method:
   part = model.parts[0]
 
 Define stacker parameters:
- - Set origin and direction vector for stacking orientation
- - Option to set defeaturing tolerance for edge imprints
- - Option to set maximum stack size allowed for stacking
- - Option to delete base face after stacking
+
+* Set origin and direction vector for stacking orientation
+* Option to set defeaturing tolerance for edge imprints
+* Option to set maximum stack size allowed for stacking
+* Option to delete base face after stacking
 
 .. note::
   Default global max size is used for stacking parameters if you are not providing the max size.
@@ -107,7 +107,7 @@ Compute volumetric size field and perform surface meshing on the base face:
 
 .. figure:: ../images/meshbase_result.png
   :width: 300pt
-  :aligh: center
+  :align: center
 
   **Base face meshed**
 
@@ -124,6 +124,6 @@ Stack the base face:
 
 .. figure:: ../images/stackbase_results.png
   :width: 300pt
-  :aligh: center
+  :align: center
 
   **Stack base meshed**
