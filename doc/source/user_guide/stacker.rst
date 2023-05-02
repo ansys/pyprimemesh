@@ -25,7 +25,7 @@ or edge zonelets one above the other in layers. This volume sweeping technology 
  - Extrude the base face mesh at the selected origin by stacking the face layer by layer along the specified direction to generate a volume mesh.
 
 .. figure:: ../images/stacker_workflow.png
-  :width: 400pt
+  :width: 800pt
   :align: center
 
   **Example of Stacker Workflow**
@@ -106,7 +106,7 @@ Compute volumetric size field and perform surface meshing on the base face:
   )
 
 .. figure:: ../images/meshbase_result.png
-  :width: 300pt
+  :width: 600pt
   :align: center
 
   **Base face meshed**
@@ -123,7 +123,7 @@ Stack the base face:
   )
 
 .. figure:: ../images/stackbase_results.png
-  :width: 300pt
+  :width: 600pt
   :align: center
 
   **Stack base meshed**
