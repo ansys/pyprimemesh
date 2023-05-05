@@ -2,16 +2,16 @@
 .. _ref_bracket_mid_surface_mesh:
 
 ========================================================
-Meshing a Mid-Surfaced Bracket for a Structural Analysis
+Meshing a mid-surfaced bracket for a structural analysis
 ========================================================
 
-**Summary**: This example illustrates how to use topology based connection
+**Summary**: This example demonstrates how to use topology-based connection
 to generate conformal surface mesh.
 
 Objective
 ~~~~~~~~~
 
-To create conformal surface mesh,you can scaffold topofaces, topoedges or both to
+To create conformal surface mesh, you can scaffold topofaces, topoedges, or both to
 connect all the surface bodies and mesh the bracket with quad elements.
 
 .. image:: ../../../images/bracket_mid_surface_scaffold_w.png
@@ -21,21 +21,21 @@ connect all the surface bodies and mesh the bracket with quad elements.
 
 Procedure
 ~~~~~~~~~
-* Launch Ansys Prime Server
-* Import CAD geometry and create part per CAD model
-* Scaffold topofaces and topoedges with tolerance parameter
-* Surface mesh topofaces with constant size and generate quad elements
-* Write a cdb file for use in the APDL solver
-* Exit the PyPrimeMesh session
+* Launch Ansys Prime Server.
+* Import the CAD geometry and create the part per the CAD model.
+* Scaffold topofaces and topoedges with a tolerance parameter.
+* Surface mesh topofaces with a constant size and generate quad elements.
+* Write a CDB file for use in the APDL solver.
+* Exit the PyPrimeMesh session.
 
 """
 
 ###############################################################################
-# Launch Ansys Prime Server
+# Launch Ansys Prime server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch an instance of Ansys Prime Server.
-# Connect PyPrimeMesh client and get the model.
+# Launch an instance of Ansys Prime server.
+# Connect the PyPrimeMesh client and get the model.
 
 import os
 import tempfile
@@ -49,11 +49,11 @@ model = prime_client.model
 ###############################################################################
 # Import CAD geometry
 # ~~~~~~~~~~~~~~~~~~~
-# Download the bracket geometry file(.fmd file exported by SpaceClaim).
-# Import CAD geometry.
-# Create part per CAD model for topology based connection.
+# Download the bracket geometry (FMD) file exported by SpaceClaim.
+# Import the CAD geometry.
+# Create the part per the CAD model for the topology-based connection.
 
-# For Windows OS users scdoc is also available:
+# For Windows OS users, scdoc is also available:
 # bracket_file = prime.examples.download_bracket_scdoc()
 
 bracket_file = prime.examples.download_bracket_fmd()
@@ -74,8 +74,8 @@ file_io.import_cad(
 # Get the part summary.
 # Display the model to show edges by connection.
 # Use keyboard shortcuts to switch between
-# surface (s) and wireframe (w) representation.
-# Colour code for edge connectivity -
+# the surface (s) and wireframe (w) representation.
+# Color code for edge connectivity:
 # Red: free; Black: double; Purple: triple.
 
 part = model.get_part_by_name('bracket_mid_surface-3')
@@ -88,11 +88,11 @@ display()
 ###############################################################################
 # Connection
 # ~~~~~~~~~~
-# Initialize connection tolerance
-# (which is smaller than target element size) and other parameters.
-# Scaffold topofaces, topoedges or both with connection parameters.
+# Initialize the connection tolerance and other parameters. (The connection
+# tolerance is smaller than the target element size.)
+# Scaffold the topofaces, topoedges, or both with connection parameters.
 
-# target element size
+# Target element size
 element_size = 0.5
 
 params = prime.ScaffolderParams(
@@ -102,7 +102,7 @@ params = prime.ScaffolderParams(
     constant_mesh_size=element_size,
 )
 
-# Get existing topoface or topoedge ids
+# Get existing topoface or topoedge IDs
 faces = part.get_topo_faces()
 beams = []
 
@@ -115,7 +115,7 @@ print(scaffold_res)
 # Surface mesh
 # ~~~~~~~~~~~~
 # Initialize surface meshing parameters.
-# Mesh topofaces with constant size and generate quad elements.
+# Mesh topofaces with the constant size and generate quad elements.
 
 surfer_params = prime.SurferParams(
     model=model,
@@ -133,7 +133,7 @@ display()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~
-# Write a cdb file for use in the APDL solver.
+# Write a CDB file for use in the APDL solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mapdl_cdb = os.path.join(temp_folder, 'bracket_scaffold.cdb')

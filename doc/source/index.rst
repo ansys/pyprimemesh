@@ -1,5 +1,5 @@
-PyPrimeMesh documentation |version| - BETA
-==========================================
+PyPrimeMesh documentation |version|
+===================================
 
 .. toctree::
    :hidden:

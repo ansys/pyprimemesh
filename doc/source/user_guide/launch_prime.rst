@@ -10,7 +10,7 @@ Launch server from a Python script
 
 The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method launches the Ansys Prime server.  
 
-This method returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` class
+This code returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` class
 connected to the launched server session:
 
 .. code-block:: python
@@ -19,7 +19,7 @@ connected to the launched server session:
 
     prime_client = prime.launch_prime()
 
-You can send commands to the Ansys Prime server and receive responses from the server.
+You can send commands to the Ansys Prime server and receive responses from it.
 
 The :class:`Client <ansys.meshing.prime.Client>` class gets the :attr:`model <ansys.meshing.prime.Client.model>`
 parameter associated with the client instance:

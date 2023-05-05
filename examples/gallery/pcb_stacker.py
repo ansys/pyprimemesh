@@ -1,18 +1,17 @@
 """
 .. _ref_pcb:
 
-====================================
-Meshing a PCB for Structural Thermal
-====================================
+=============================================
+Meshing a PCB for structural thermal analysis
+=============================================
 
-**Summary**: This example demonstrates how to mesh a printed circuit board
-for structural thermal simulation using the stacker method.
+**Summary**: This example demonstrates how to mesh a PCB (printed circuit
+board) for structural thermal simulation using the stacker method.
 
 Objective
 ~~~~~~~~~~
-In this example, you can mesh the solids of a printed circuit board,
-using the stacker method, for a structural thermal analysis
-using predominantly hexahedral elements.
+This example meshes the solids of a PCB using the stacker method for a
+structural thermal analysis using predominantly hexahedral elements.
 
 .. image:: ../../../images/pcb_stacker.png
    :align: center
@@ -21,20 +20,20 @@ using predominantly hexahedral elements.
 
 Procedure
 ~~~~~~~~~~
-* Launch Ansys Prime Server instance and connect PyPrimeMesh client.
-* Read CAD geometry.
-* Create a base face, projecting edge loops and imprinting to capture geometry.
+* Launch an Ansys Prime server instance and connect the PyPrimeMesh client.
+* Read the CAD geometry.
+* Create a base face, projecting edge loops and imprinting to capture the geometry.
 * Surface mesh the base face with quad elements.
 * Stack the base face mesh through the volumes to create mainly hexahedral volume mesh.
-* Write mesh for structural thermal analysis.
+* Write the mesh for the structural thermal analysis.
 """
 
 ###############################################################################
-# Launch Ansys Prime Server
+# Launch Ansys Prime server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch Ansys Prime Server instance and connect client.
-# Get the client model and instantiate meshing utilities from Lucid class.
+# Launch the Ansys Prime Server instance and connect the client.
+# Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
 import os
 import tempfile
@@ -47,11 +46,11 @@ model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
-# Import Geometry
+# Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the pcb geometry file (.fmd file exported by SpaceClaim).
-# Import geometry.
-# Display imported geometry.
+# Download the PCB's geometry (FMD) file exported by SpaceClaim.
+# Import the geometry.
+# Display the imported geometry.
 
 pcb_geometry = prime.examples.download_pcb_pmdat()
 
@@ -61,13 +60,15 @@ display = Graphics(model)
 display()
 
 ###############################################################################
-# Create Base Face
+# Create base face
 # ~~~~~~~~~~~~~~~~
 # Define stacker parameters:
-# -   Set direction vector used to define stacking.
-# -   Set max offset size for mesh layers created by stacker.
-# -   Set the base faces to be deleted after stacking.
-# Create base face from part and volumes.
+#
+# - Set the direction vector for defining stacking.
+# - Set the maximum offset size for mesh layers created by the stacker method.
+# - Set the base faces to delete after stacking.
+#
+# Create the base face from the part and volumes.
 # Define a label for the generated base faces and display.
 
 part = model.parts[0]
@@ -95,7 +96,7 @@ scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 display(scope=scope)
 
 ###############################################################################
-# Surface Mesh Base Face
+# Surface mesh base face
 # ~~~~~~~~~~~~~~~~~~~~~~
 # Quad surface mesh the generated base faces for stacking.
 
@@ -110,10 +111,10 @@ mesh_util.surface_mesh(min_size=0.5, scope=base_scope, generate_quads=True)
 display(scope=scope)
 
 ###############################################################################
-# Stack Base Face
+# Stack base face
 # ~~~~~~~~~~~~~~~~~~~~~~
-# Create mainly hexahedral volume mesh using stacker.
-# Display volume mesh.
+# Create mainly hexahedral volume mesh using the stacker method.
+# Display the volume mesh.
 
 stackbase_results = sweeper.stack_base_face(
     part_id=part.id,
@@ -125,9 +126,9 @@ stackbase_results = sweeper.stack_base_face(
 display()
 
 ###############################################################################
-# Write Mesh
+# Write mesh
 # ~~~~~~~~~~
-# Write a cdb file.
+# Write a CDB file.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "pcb.cdb")

@@ -9,7 +9,7 @@ description = "PyPrimeMesh provides a python client to Ansys Prime Server. Ansys
 readme = "README.md"
 requires-python = ">=3.7,<4"
 license = {file = "LICENSE"}
-authors = [{name = "ANSYS, Inc.", email = "pyansys.support@ansys.com"}]
+authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 maintainers = [{name = "PyAnsys developers", email = "pyansys.maintainers@ansys.com"}]
 classifiers = [
     "Development Status :: 4 - Beta",

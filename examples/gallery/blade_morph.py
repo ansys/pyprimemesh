@@ -2,7 +2,7 @@
 .. _ref_turbine_blade:
 
 ============================================================
-Morphing A Hexahedral Mesh Of A Turbine Blade To A New Shape
+Morphing a hexahedral mesh of a turbine blade to a new shape
 ============================================================
 
 **Summary**: This example demonstrates how to morph a structural
@@ -12,8 +12,8 @@ defined by a target geometry file.
 Objective
 ~~~~~~~~~~
 
-In this example, you can append a CDB mesh with a CAD geometry
-and match morph the mesh to the geometry.
+This example appends a CDB mesh with a CAD geometry
+and match morphes the mesh to the geometry.
 
 .. image:: ../../../images/turbine_blade.png
    :align: center
@@ -22,20 +22,20 @@ and match morph the mesh to the geometry.
 
 Procedure
 ~~~~~~~~~~
-* Launch Ansys Prime Server instance and connect PyPrimeMesh client.
-* Read mesh and append new CAD geometry shape.
+* Launch an Ansys Prime server instance and connect the PyPrimeMesh client.
+* Read the mesh and append the new CAD geometry shape.
 * Define the mesh source faces and the target geometry faces to match morph.
 * Match morph the turbine blade mesh to the new CAD geometry shape.
-* Write mesh for structural analysis.
+* Write the mesh for structural analysis.
 
 """
 
 ###############################################################################
-# Launch Ansys Prime Server
+# Launch Ansys Prime server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch Ansys Prime Server instance and connect client.
-# Get the client model and instantiate meshing utilities from Lucid class.
+# Launch the Ansys Prime server instance and connect the client.
+# Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
 import os
 import tempfile
@@ -48,13 +48,13 @@ model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
-# Read Files
+# Read files
 # ~~~~~~~~~~
 # Download the turbine blade mesh file and CAD geometry.
-# Read mesh and append geometry.
-# Display source and target.
+# Read the mesh and append the geometry.
+# Display the source and the target.
 
-# For Windows OS users scdoc is also available for geometry:
+# For Windows OS users, scdoc is also available for geometry:
 # target_geometry = prime.examples.download_turbine_blade_target_scdoc()
 
 source_mesh = prime.examples.download_turbine_blade_cdb()
@@ -67,7 +67,7 @@ display()
 print(model)
 
 ###############################################################################
-# Define Source and Target Faces
+# Define source and target faces
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 source_part = model.get_part_by_name("blade")
@@ -76,10 +76,10 @@ source = source_part.get_face_zonelets()
 target = target_part.get_topo_faces()
 
 ###############################################################################
-# Match Morph Mesh
+# Match morph mesh
 # ~~~~~~~~~~~~~~~~
-# Set the target type to be for topoface as the target is geometry.
-# The source face zonelets of source_part will be morphed to the
+# Set the target type to be for topoface because the target is geometry.
+# Morph the source face zonelets of ``source_part`` to the
 # target topo faces of the geometry.
 
 morpher = prime.Morpher(model)
@@ -102,13 +102,14 @@ morpher.match_morph(
     solve_params=solver_params,
 )
 
-# display the morphed mesh
+# Display the morphed mesh
 display()
 
 ###############################################################################
-# Write Mesh
+# Write mesh
 # ~~~~~~~~~~
-# Write morphed cdb file. The geometry will be ignored exporting to CDB.
+# Write the morphed CDB file. The geometry is ignored when exporting to a CDB
+# file.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "morphed_turbine_blade.cdb")

@@ -8,11 +8,11 @@ Surface Wrapping
 Geometries migrated from various CAD packages often contain gaps and overlaps between the surfaces due to algorithm and tolerance differences of the CAD packages.
 Surface wrapping provides the ability to create reliable meshes for such geometries without extensive manual clean up and reduces the time required for preprocessing.
 
-The :class:`Wrapper <ansys.meshing.prime.Wrapper>` allows you to extract a closed watertight surface used to create a volume mesh from geometry where the inputs:
+The :class:`Wrapper <ansys.meshing.prime.Wrapper>` class allows you to extract a closed watertight surface used to create a volume mesh from geometry where the inputs:
 
- - are not connected with overlaps
- - have holes, leaks or gaps
- - have small features that need to be ignored or walked over
+- Are not connected with overlaps
+- Have holes, leaks, or gaps
+- Have small features that need to be ignored or walked over
 
 The wrapping operation uses an appropriate material point to identify the relevant surfaces of the selected objects. A coarse Cartesian grid is overlaid on the selected objects
 to create a contiguous region. This Cartesian grid is used to automatically clean the input geometry and to create the watertight representation. The Cartesian grid is then refined
@@ -20,20 +20,20 @@ based on the size functions to better represent the selected objects. The inters
 identified and marked.
 
 A watertight faceted representation (defined by quad faces of the Cartesian mesh) is created of the boundaries between the regions of interest (identified
-via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a Wrapper surface closely
+via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a wrapper surface closely
 representing the input geometry. The edges are imprinted on the wrapped zones, and individual zones are recovered and rezoned based on the original geometry objects.
 
-The Wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions/size field.
+The wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions/size field.
 
 .. figure:: ../images/wrapper_schematic.png
     :width: 400pt
     :align: center
 
-    **Schematic Representation of Wrapping Process**
+    **Schematic representation of wrapping process**
 
-The basic PyPrimeMesh Wrapper based workflow follows these steps:
+The basic PyPrimeMesh wrapper-based workflow follows these steps:
 
-1. Import geometry.
+1. Import the geometry:
 
 .. code:: python
 
@@ -42,7 +42,7 @@ The basic PyPrimeMesh Wrapper based workflow follows these steps:
    file_io = prime.FileIO(model)
    file_io.read_pmdat(input_file, prime.FileReadParams(model=model))
 
-2. Define global sizing parameters and size controls with curvature refinement. Sizes are used for Wrapper Octree construction.
+2. Define global sizing parameters and size controls with curvature refinement. Sizes are used for wrapper Octree construction.
 
 .. code:: python
 
@@ -59,8 +59,9 @@ The basic PyPrimeMesh Wrapper based workflow follows these steps:
    size_control.set_suggested_name("curv_global")
    size_control.set_scope(prime.ScopeDefinition(model=model, part_expression="*"))
 
-3.	Define the material points. Material points are used to define fluid regions or seal regions depending on the status live/dead.
-A 3D coordinate describes the position of the material point.
+3. Define the material points. Material points are used to define fluid regions or seal regions
+   depending on whether the status is ``LIVE`` or ``DEAD``. A 3D coordinate describes the
+   position of the material point.
 
 .. code:: python
 
@@ -72,7 +73,7 @@ A 3D coordinate describes the position of the material point.
        ),
    )
 
-4.	Create the Wrapper control. Scope refers to which entities should be wrapped.
+4. Create the wrapper control. The `scope`` refers to which entities should be wrapped.
 
 .. code:: python
 
@@ -88,7 +89,7 @@ A 3D coordinate describes the position of the material point.
    )
    wrapper_control.set_live_material_points(["Mpt"])
 
-5.	Extract features with angle and face zonelets boundary for feature capture.
+5. Extract features with angle and face zonelets boundary for feature capture:
 
 .. code:: python
 
@@ -107,7 +108,7 @@ A 3D coordinate describes the position of the material point.
            ),
        )
 
-6.	Add feature recovery control.
+6. Add feature recovery control:
 
 .. code:: python
 
@@ -119,7 +120,7 @@ A 3D coordinate describes the position of the material point.
    )
    wrapper_control.set_feature_recoveries([feature_params])
 
-7.	Wrap the model.
+7. Wrap the model:
 
 .. code:: python
 
@@ -128,12 +129,13 @@ A 3D coordinate describes the position of the material point.
    res = wrapper.wrap(wrapper_control_id=wrapper_control.id, params=wrap_params)
    wrapper_part = model.get_part(res.id)
 
-8.	Apply diagnostics to compute free edges, multi edges, self-intersections, duplicate faces after wrap. (visit :ref:`ref_index_mesh_diagnostics` section for more information)
+8. Apply diagnostics to compute free edges, multi edges, self-intersections,
+   and duplicate faces after wrap. For more information, see :ref:`ref_index_mesh_diagnostics`.
 
-9. Remesh the model. (visit :ref:`ref_index_surfer` section for more information)
+9. Remesh the model. For more information, see :ref:`ref_index_surfer`.
 
 .. Note::
-   You can import Fluent Meshing's size field file for remesh. (visit :ref:`ref_index_reading_writing` section for more information)
+   You can import Fluent Meshing's size field file for remesh. For more information, see :ref:`ref_index_reading_writing`.
 
 .. code:: python
 
@@ -168,7 +170,7 @@ A 3D coordinate describes the position of the material point.
        wrapper_part.id, face_zonelets=fz1, edge_zonelets=ez1, params=surfer_params
    )
 
-10. Improve surface quality and resolve connectivity issues.
+10. Improve surface quality and resolve connectivity issues:
 
 .. code:: python
 
@@ -178,10 +180,10 @@ A 3D coordinate describes the position of the material point.
    )
 
 
-Surface wrapping using Lucid class
------------------------------------
+Surface wrapping using the ``lucid`` class
+------------------------------------------
 
-The following example shows you the method required to replicate the preceding surface mesh results:
+This example shows you the method required to replicate the preceding surface mesh results:
 
 .. code:: python
 

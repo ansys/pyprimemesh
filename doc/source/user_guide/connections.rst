@@ -15,14 +15,14 @@ in a part, volume, or model using various connect algorithms.
 
 There are three major operations for zonelet connections: 
 
- - The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` method allows you
-   to intersect the face zonelets of the part along the intersecting faces. 
+- The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` method allows you
+  to intersect the face zonelets of the part along the intersecting faces. 
 
- - The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` method allows you to
-   stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
+- The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` method allows you to
+  stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
 
- - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` method allows you to join
-   a set of face zonelets to another set of face zonelets along the overlapping faces. 
+- The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` method allows you to join
+  a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
 
 .. note::
@@ -30,13 +30,13 @@ There are three major operations for zonelet connections:
     Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, is not supported.
 
 
-The following example shows how to perform these steps:
+The following example shows how to accomplish these tasks:
 
-* Import model and remove geometry topology from each part.
-* Merge parts and check surface mesh connectivity.
+* Import the model and delete geometry topology from each part.
+* Merge the parts and check the surface mesh connectivity.
 * Perform the join or intersect operation on face zonelets.
 
-Import the model and delete topo-geometric entities from each part:
+#. Import the model and delete topo-geometric entities from each part:
 
 .. code-block:: python
 
@@ -52,7 +52,7 @@ Import the model and delete topo-geometric entities from each part:
             part.delete_topo_entities(params)
 
 
-Merge the parts.
+#. Merge the parts.
 
 .. code-block:: python
 
@@ -60,7 +60,7 @@ Merge the parts.
         part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
     )
 
-Check the surface before performing the connect operation.
+#. Check the surface before performing the connect operation.
 
 .. code-block:: python
 
@@ -75,9 +75,9 @@ Check the surface before performing the connect operation.
     )
 
 
-For more information on checking the surface mesh connectivity, see :ref:`ref_index_mesh_diagnostics`.
+   For more information on checking the surface mesh connectivity, see :ref:`ref_index_mesh_diagnostics`.
 
-Print the results of the surface mesh connectivity before performing the connect operation:
+#. Print the results of the surface mesh connectivity before performing the connect operation:
 
 .. code-block:: pycon
 
@@ -90,7 +90,7 @@ Print the results of the surface mesh connectivity before performing the connect
     n_duplicate_faces :  0
 
 
-Connect face zonelets in the model:
+#. Connect face zonelets in the model:
 
 .. note::
     Only triangular faces are supported.
@@ -119,14 +119,14 @@ Connect face zonelets in the model:
         )
 
 
-Check the surface after performing the connect operation:
+#. Check the surface after performing the connect operation:
 
 .. code-block:: python
 
     diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
 
-Print the results of the surface mesh connectivity after performing the connect operation:
+#. Print the results of the surface mesh connectivity after performing the connect operation:
 
 .. code-block:: pycon
 
