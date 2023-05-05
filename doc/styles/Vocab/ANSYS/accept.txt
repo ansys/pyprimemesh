@@ -5,7 +5,7 @@ PyPrimeMesh
 abc
 xyz
 APIs
-BETA
+Boolean
 conformally
 Fluent Meshing
 Fluent Meshing's

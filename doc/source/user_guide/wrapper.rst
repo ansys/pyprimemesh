@@ -2,7 +2,7 @@
 
 
 ****************
-Surface Wrapping
+Surface wrapping
 ****************
 
 Geometries migrated from various CAD packages often contain gaps and overlaps between the surfaces due to algorithm and tolerance differences of the CAD packages.

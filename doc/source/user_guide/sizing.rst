@@ -84,7 +84,7 @@ and :attr:`ignore_orientation <ansys.meshing.prime.ProximitySizingParams.ignore_
 parameters are also considered for proximity sizing. The ``ignore_self_proximity`` parameter
 is set to ``True`` if proximity between faces in the same face zonelet is to be ignored. The
 ``ignore_orientation`` parameter allows you to ignore the face normal orientation during the
-proximity calculation. This boolean parameter is set to ``False`` by default. In general,
+proximity calculation. This Boolean parameter is set to ``False`` by default. In general,
 the proximity depends on the direction of face normals.
 
 This example explains the use of the ``ignore_orientation`` parameter for face proximity.
