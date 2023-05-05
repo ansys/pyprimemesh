@@ -37,3 +37,6 @@ zonelets
 ignore_self_proximity
 ignore_orientation
 meshedgeodesic
+Defeature
+defeature
+defeaturing
