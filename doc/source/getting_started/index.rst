@@ -16,7 +16,7 @@ For more information on getting a licensed copy of Ansys, visit the `Ansys websi
    The PyPrimeMesh client release has one-to-one compatibility with the Ansys Prime server release.
    That is, PyPrimeMesh client is only compatible with its corresponding Ansys Prime server.
 
-This table provides compatiblity information:
+This table provides compatibility information:
 
 ===========================  ===========================
 PyPrimeMesh client release   Ansys Prime server release
