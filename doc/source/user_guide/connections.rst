@@ -38,105 +38,105 @@ The following example shows how to accomplish these tasks:
 
 #. Import the model and delete topo-geometric entities from each part:
 
-.. code-block:: python
+   .. code-block:: python
 
-    prime.FileIO(model).read_pmdat(
-        "D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model)
-    )
-    for part in model.parts:
-        topofaces = part.get_topo_faces()
-        if topofaces:
-            params = prime.DeleteTopoEntitiesParams(
-                model, delete_geom_zonelets=True, delete_mesh_zonelets=False
-            )
-            part.delete_topo_entities(params)
+       prime.FileIO(model).read_pmdat(
+           "D:/Temp/mesh.pmdat", file_read_params=prime.FileReadParams(model)
+       )
+       for part in model.parts:
+           topofaces = part.get_topo_faces()
+           if topofaces:
+               params = prime.DeleteTopoEntitiesParams(
+                   model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+               )
+               part.delete_topo_entities(params)
 
 
 #. Merge the parts.
 
-.. code-block:: python
+   .. code-block:: python
 
-    model.merge_parts(
-        part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
-    )
+       model.merge_parts(
+           part_ids=[part.id for part in model.parts], params=prime.MergePartsParams(model)
+       )
 
 #. Check the surface before performing the connect operation.
 
-.. code-block:: python
+   .. code-block:: python
 
-    diag = prime.SurfaceSearch(model)
-    diag_res = diag.get_surface_diagnostic_summary(
-        prime.SurfaceDiagnosticSummaryParams(
-            model,
-            scope=prime.ScopeDefinition(model=model, part_expression="*"),
-            compute_free_edges=True,
-            compute_multi_edges=True,
-        )
-    )
+       diag = prime.SurfaceSearch(model)
+       diag_res = diag.get_surface_diagnostic_summary(
+           prime.SurfaceDiagnosticSummaryParams(
+               model,
+               scope=prime.ScopeDefinition(model=model, part_expression="*"),
+               compute_free_edges=True,
+               compute_multi_edges=True,
+           )
+       )
 
 
    For more information on checking the surface mesh connectivity, see :ref:`ref_index_mesh_diagnostics`.
 
 #. Print the results of the surface mesh connectivity before performing the connect operation:
 
-.. code-block:: pycon
+   .. code-block:: pycon
 
-    >>> print(diag_res)
+       >>> print(diag_res)
 
-    error_code :  ErrorCode.NOERROR
-    n_self_intersections :  342
-    n_free_edges :  564
-    n_multi_edges :  0
-    n_duplicate_faces :  0
+       error_code :  ErrorCode.NOERROR
+       n_self_intersections :  342
+       n_free_edges :  564
+       n_multi_edges :  0
+       n_duplicate_faces :  0
 
 
 #. Connect face zonelets in the model:
 
-.. note::
-    Only triangular faces are supported.
+   .. note::
+      Only triangular faces are supported.
 
-.. code-block:: python
+   .. code-block:: python
 
-    join_params = prime.JoinParams(model)
-    inter_params = prime.IntersectParams(model)
-    join_params.tolerance = 0.1
-    part_id = model.parts[0].id
-    faces = model.parts[0].get_face_zonelets()
+       join_params = prime.JoinParams(model)
+       inter_params = prime.IntersectParams(model)
+       join_params.tolerance = 0.1
+       part_id = model.parts[0].id
+       faces = model.parts[0].get_face_zonelets()
 
-    for face in faces:
-        other_faces = [other for other in faces if face != other]
-        prime.Connect(model).intersect_face_zonelets(
-            part_id=part_id,
-            face_zonelet_ids=[face],
-            with_face_zonelet_ids=other_faces,
-            params=inter_params,
-        )
-        prime.Connect(model).join_face_zonelets(
-            part_id=part_id,
-            face_zonelet_ids=[face],
-            with_face_zonelet_ids=other_faces,
-            params=join_params,
-        )
+       for face in faces:
+           other_faces = [other for other in faces if face != other]
+           prime.Connect(model).intersect_face_zonelets(
+               part_id=part_id,
+               face_zonelet_ids=[face],
+               with_face_zonelet_ids=other_faces,
+               params=inter_params,
+           )
+           prime.Connect(model).join_face_zonelets(
+               part_id=part_id,
+               face_zonelet_ids=[face],
+               with_face_zonelet_ids=other_faces,
+               params=join_params,
+           )
 
 
 #. Check the surface after performing the connect operation:
 
-.. code-block:: python
+   .. code-block:: python
 
-    diag_res = diag.get_surface_diagnostic_summary(diag_params)
+       diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
 
 #. Print the results of the surface mesh connectivity after performing the connect operation:
 
-.. code-block:: pycon
+   .. code-block:: pycon
 
-    >>> print(diag_res)
+       >>> print(diag_res)
 
-    error_code :  ErrorCode.NOERROR
-    n_self_intersections :  0
-    n_free_edges :  448
-    n_multi_edges :  9
-    n_duplicate_faces :  0
+       error_code :  ErrorCode.NOERROR
+       n_self_intersections :  0
+       n_free_edges :  448
+       n_multi_edges :  9
+       n_duplicate_faces :  0
 
 
 =========================
