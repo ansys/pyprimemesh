@@ -64,15 +64,14 @@ The following example shows how to accomplish these tasks:
 
 .. code-block:: python
 
-    diag = prime.SurfaceSearch(model)
-    diag_res = diag.get_surface_diagnostic_summary(
-        prime.SurfaceDiagnosticSummaryParams(
-            model,
-            scope=prime.ScopeDefinition(model=model, part_expression="*"),
-            compute_free_edges=True,
-            compute_multi_edges=True,
-        )
+    diag_params = prime.SurfaceDiagnosticSummaryParams(
+        model,
+        scope=prime.ScopeDefinition(model=model, part_expression="*"),
+        compute_free_edges=True,
+        compute_multi_edges=True,
     )
+    diag = prime.SurfaceSearch(model)
+    diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
 
    For more information on checking the surface mesh connectivity, see :ref:`ref_index_mesh_diagnostics`.
