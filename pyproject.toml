@@ -37,7 +37,8 @@ tests = [
   "pytest==7.3.1",
   "pytest-cov==4.0.0",
   "pytest-pyvista==0.1.8",
-  "pyvista[trame]==0.38"
+  "pyvista[trame]==0.38",
+  "ipywidgets",
 ]
 doc = [
   "ansys-sphinx-theme==0.9.8",
