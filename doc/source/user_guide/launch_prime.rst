@@ -83,8 +83,9 @@ Here is a Windows code example for running a Python script directly from the com
 Recommendations for launching the server
 ========================================
 
-When developing, you can use Python context to launch the server so that if an exception occurs during runtime the server closes cleanly.
-This prevents servers being spawned and left open blocking ports. 
+When developing, you can use Python context to launch the server so that if an exception
+occurs during runtime the server closes cleanly. This prevents servers being spawned and
+left open blocking ports. 
 
 This code example shows how to manage the server lifecycle using context to make development easier:
 
