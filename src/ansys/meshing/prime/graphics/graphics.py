@@ -506,7 +506,6 @@ class Graphics(object):
             visualizer.show()
         else:
             self._plotter.show()
-        pv.OFF_SCREEN = self._pv_off_screen_original
 
     def __draw_parts(self, parts=[], update=False, spline=False):
         """ """
