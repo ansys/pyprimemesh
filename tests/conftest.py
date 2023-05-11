@@ -1,3 +1,4 @@
+"""General fixtures to use in all test modules."""
 import os
 import xml.etree.ElementTree as ET
 
@@ -44,7 +45,7 @@ class RemoteClientManager:
             self.client = prime.Client(ip=ip, port=port)
         else:
             prime_root = os.environ.get('PYPRIMEMESH_INSTALL_ROOT', None)
-            self.start_ansys_prime_server(prime_root=prime_root, ip=ip, port=port, n_procs=1)
+            self.start_ansys_prime_server(prime_root=prime_root, ip=ip, port=port)
 
     def stop_remote_client(self):
         """Stops the Ansys Prime client and server."""
@@ -53,7 +54,7 @@ class RemoteClientManager:
 
 @pytest.fixture(scope="session", autouse=True)
 def get_remote_client():
-    """Initializes and starts Ansys Prime. This funtion is automatically called
+    """Initializes and starts Ansys Prime Server. This function is automatically called
     at the start of the test session and runs the code after the yield when the
     tests finish their execution.
 
@@ -75,6 +76,7 @@ def get_examples():
     """Downloads the prime examples for them to be available
     in any test.
     """
+
     examples_dict = {}
     elbow_lucid = prime.examples.download_elbow_pmdat()
     examples_dict["elbow_lucid"] = elbow_lucid

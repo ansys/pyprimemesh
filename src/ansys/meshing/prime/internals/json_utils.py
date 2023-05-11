@@ -1,8 +1,10 @@
 import json
-import numpy as np
-import ansys.meshing.prime.relaxed_json as relaxed_json
-import ansys.meshing.prime.internals.config as config
 from typing import Union
+
+import numpy as np
+
+import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.relaxed_json as relaxed_json
 
 __all__ = ['loads', 'dumps']
 

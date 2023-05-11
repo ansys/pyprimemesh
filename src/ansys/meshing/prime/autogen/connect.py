@@ -62,6 +62,14 @@ class Connect(CoreObject):
         >>> results = connect.intersect_face_zonelets (part_id, face_zonelet_ids, with_face_zonelet_ids, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(with_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, IntersectParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is IntersectParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -99,6 +107,14 @@ class Connect(CoreObject):
         >>> results = connect.join_face_zonelets (part_id, face_zonelet_ids, with_face_zonelet_ids, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(with_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, JoinParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is JoinParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -135,6 +151,14 @@ class Connect(CoreObject):
         >>> results = connect.subtract_volumes(part_id, target_volumes, cutter_volumes, params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(target_volumes, Iterable):
+            raise TypeError("Invalid argument type passed for target_volumes, valid argument type is Iterable[int].")
+        if not isinstance(cutter_volumes, Iterable):
+            raise TypeError("Invalid argument type passed for cutter_volumes, valid argument type is Iterable[int].")
+        if not isinstance(params, SubtractVolumesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is SubtractVolumesParams.")
         args = {"part_id" : part_id,
         "target_volumes" : target_volumes,
         "cutter_volumes" : cutter_volumes,
@@ -172,6 +196,14 @@ class Connect(CoreObject):
         >>> results = connect.stitch_face_zonelets (part_id, face_zonelet_ids, with_face_zonelet_ids, stitch_params)
 
         """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(with_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, StitchParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is StitchParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -181,3 +213,48 @@ class Connect(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("stitch_face_zonelets", ConnectResults(model = self._model, json_data = result))
         return ConnectResults(model = self._model, json_data = result)
+
+    def mesh_match_within_part_face_zonelets(self, part_id : int, source_face_zonelet_ids : Iterable[int], target_face_zonelet_ids : Iterable[int], params : MeshMatchParams) -> MeshMatchResults:
+        """ Perform mesh matching between overlapping face zonelets within a single part. Matched mesh can then be colocated, merged or removed as directed.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part.
+        source_face_zonelet_ids : Iterable[int]
+            Ids of source face zonelets to be mesh matched.
+        target_face_zonelet_ids : Iterable[int]
+            Ids of target face zonelets to be mesh matched.
+        params : MeshMatchParams
+            Parameters for mesh matching.
+
+        Returns
+        -------
+        MeshMatchResults
+            Returns the MeshMatchResults.
+
+
+        Examples
+        --------
+        connect = Connect(model = model)
+        connect.mesh_match_within_part_face_zonelets(part.id, source_face_zonelet_ids, target_face_zonelet_ids, match_mesh_params)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(source_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for source_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(target_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for target_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, MeshMatchParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is MeshMatchParams.")
+        args = {"part_id" : part_id,
+        "source_face_zonelet_ids" : source_face_zonelet_ids,
+        "target_face_zonelet_ids" : target_face_zonelet_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Connect/MeshMatchWithinPartFaceZonelets"
+        self._model._print_logs_before_command("mesh_match_within_part_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("mesh_match_within_part_face_zonelets", MeshMatchResults(model = self._model, json_data = result))
+        return MeshMatchResults(model = self._model, json_data = result)

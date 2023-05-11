@@ -36,6 +36,8 @@ class ErrorCode(enum.IntEnum):
     """Auto sizing must be of volumetric type."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
+    FREEZEMESHERROR = 30
+    """Cannot remesh freezed mesh."""
     SURFERINVALIDCONSTANTSIZE = 40
     """Invalid size for constant size surface meshing."""
     SURFERINVALIDMINORMAXSIZES = 41
@@ -116,8 +118,14 @@ class ErrorCode(enum.IntEnum):
     """Quadratic tetrahedral meshing is not supported with prism."""
     EXTRACTVOLUMESFAILED = 132
     """Extract volumes failed."""
+    MERGEVOLUMESFAILED = 133
+    """Merge volumes failed."""
+    DELETEVOLUMESFAILED = 134
+    """Delete volumes failed."""
     PERIODICSURFACESNOTSUPPORTEDFORPRISMS = 135
     """Periodic surfaces selected for prism generation are not supported."""
+    INVALIDNEIGHBORVOLUMES = 136
+    """Invalid neighbor volumes selected to merge volumes."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -158,6 +166,30 @@ class ErrorCode(enum.IntEnum):
     """Separation failed."""
     ZONELETSARENOTOFSAMEDIMENSION = 374
     """Zonelets are not of same dimension."""
+    ADDTHICKNESSRESULTSFAILED = 380
+    """Adding thickness failed."""
+    BOIRESULTSFAILED = 381
+    """BOI creation failed."""
+    CREATEBOI_INVALIDSCALE = 382
+    """BOI creation failed. Scale factors should not be less than one."""
+    CREATEBOI_INVALIDFLOWDIRECTION = 383
+    """BOI creation failed. Invalid flow or wake direction."""
+    CREATEBOI_IVALIDWRAPMESHSIZE = 384
+    """BOI creation failed. Wrap cannot be performed with invalid mesh size."""
+    CREATEBOI_INVALIDWAKELEVELS = 385
+    """BOI creation failed. Invalid wake levels input."""
+    CREATEBOI_INVALIDTYPEFORWRAP = 386
+    """BOI creation failed. Wrapping is invalid for this BOI type."""
+    CREATEBOI_INVALIDSCOPE = 387
+    """BOI creation failed. Invalid face zonelets as input."""
+    CREATECONTACTPATCH_INVALIDOFFSETDISTANCE = 388
+    """Contact patch creation process failed. Scale factors should not be less than zero."""
+    CREATECONTACTPATCH_INVALIDTOLERANCEVALUE = 389
+    """Contact patch creation process failed. Tolerance value should not be less than zero."""
+    CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS = 390
+    """Contact patch creation process failed. Invalid contact patch creation axis."""
+    CONTACTPATCHRESULTSFAILED = 391
+    """Contact patch creation process failed. Check the inputs."""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Size field computation failed."""
     INVALIDSIZECONTROLS = 401
@@ -210,6 +242,18 @@ class ErrorCode(enum.IntEnum):
     """Writing size field failed."""
     MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH = 533
     """Mesh not found to export fluent meshing mesh."""
+    EXPORTSTLFAILEDWITHTOPOLOGY = 553
+    """Export STL not supported for part with topology data."""
+    EXPORTSTLFAILEDWITHQUADFACES = 554
+    """Export STL not supported for mesh with quad faces."""
+    EXPORTSTLFAILEDWITHPOLYFACES = 555
+    """Export STL not supported for mesh with poly faces."""
+    EXPORTSTLFAILEDWITHHIGHERORDERMESH = 556
+    """Export STL not supported for higher order mesh."""
+    EXPORTSTLFAILEDWITHEMPTYPARTIDLIST = 557
+    """Export STL failed. List of part ids is empty."""
+    EXPORTSTLFAILEDWITHINCORRECTPARTID = 558
+    """Export STL failed. Part id is incorrect."""
     MATCHEDMESHOPTIONINVALID = 850
     """Invalid option chosen to connect two different parts."""
     COLOCATEMATCHEDNODESFAILED = 851
@@ -258,6 +302,12 @@ class ErrorCode(enum.IntEnum):
     """Merge small zonelets option is supported for only face zonelets."""
     INVALIDINPUTVOLUMES = 1312
     """Invalid input volumes."""
+    MORPHER_COMPUTEBCS = 1410
+    """Failed to compute boundary conditions."""
+    MORPHER_MATCHMORPHINVALIDSOURCEINPUT = 1450
+    """Invalid source input for match morphing."""
+    MORPHER_BCPAIRINPUTTYPEMISMATCH = 1451
+    """Entity type does not match with input for defined boundary condition pair."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
     INVALIDSIZECONTROLINPUTS = 1501
@@ -320,6 +370,8 @@ class ErrorCode(enum.IntEnum):
     """Quadratic mesh is not supported for solid spline creation."""
     IGA_UNIFORMTRIMMEDNURBSFAILED = 2417
     """Uniform trimmed spline creation failed."""
+    IGA_QUADTOSPLINEBASISFAILED = 2421
+    """Quad to spline operation failed."""
     PARTHASTOPOLOGY = 2800
     """Part has a topology."""
     SURFACESEARCHFAILED = 2802
@@ -466,6 +518,44 @@ class ErrorCode(enum.IntEnum):
     """Tool zonelets form a self intersecting volume."""
     TOOLZONELETS_NOTWATERTIGHT = 10005
     """Tool zonelets do not form a watertight volume."""
+    STACKER_INVALIDINPUTVOLUMES = 10101
+    """Invalid input volumes provided to stacker."""
+    STACKER_INVALIDPARAMS = 10102
+    """Invalid parameters provided to stacker."""
+    STACKER_FACESEPARATIONFAILED = 10103
+    """Stacker failed to separate base face."""
+    STACKER_FAILED = 10104
+    """Stacker failed to mesh the model."""
+    STACKER_NOFACEFOUNDINVOLUMES = 10105
+    """No faces are found in the specified volumes."""
+    STACKER_MESHEDFACESFOUND = 10106
+    """Some faces in the input model have existing mesh."""
+    STACKER_INVALIDBASEFACEINPUT = 10107
+    """Base face list input is invalid."""
+    STACKER_NONSTACKABLEVOLUMESFOUND = 10109
+    """Some volumes are not aligned in the stacking direction."""
+    STACKER_INCORRECTBODYDEFINITION = 10110
+    """Some bodies are intersecting or incorrectly defined."""
+    STACKER_BASEFACEUNMESHED = 10111
+    """Base face list input has unmeshed topofaces."""
+    INVALIDTHINVOLUMECONTROLS = 12010
+    """Invalid input provided. Invalid thin volume control."""
+    THINVOLUMECONTROLINVALIDSOURCESCOPE = 12020
+    """Invalid input provided. Source scope not found."""
+    THINVOLUMECONTROLINVALIDTARGETSCOPE = 12040
+    """Invalid input provided. Target scope not found."""
+    THINVOLUMECONTROLINVALIDSCOPE = 12060
+    """Invalid input provided. Source scope and target scope cannot be same."""
+    THINVOLUMECONTROLINVALIDSOURCESCOPEENTITY = 12080
+    """Invalid input provided. Invalid source scope entity."""
+    THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY = 12100
+    """Invalid input provided. Invalid target scope entity."""
+    THINVOLUMECONTROLINVALIDNUMBEROFLAYER = 12120
+    """Invalid input provided. Number of layer in thin volume mesh should be greater than 0."""
+    THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED = 12140
+    """Thin volume mesh controls not supported for part with topology data."""
+    MICROSTRUCTUREINVALIDELEMENTTYPE = 13000
+    """Invalid input provided. Invalid Element Type."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.

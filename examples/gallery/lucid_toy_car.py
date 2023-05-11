@@ -39,9 +39,11 @@ Procedure
 # From the PyPrimeMesh client get the model.
 # Instantiate meshing utilities from lucid class.
 
+import os
+import tempfile
+
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
-import os, tempfile
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -54,6 +56,10 @@ mesh_util = prime.lucid.Mesh(model)
 # ~~~~~~~~~~~~~~~
 # Download the toy car geometry file (.fmd file exported by SpaceClaim).
 # Import geometry and display everything except tunnel.
+
+
+# For Windows OS users scdoc is also available:
+# toy_car = prime.examples.download_toy_car_scdoc()
 
 toy_car = prime.examples.download_toy_car_fmd()
 
@@ -268,6 +274,7 @@ for summary_res in qual_summary_res.quality_results_part:
 # Write Mesh
 # ~~~~~~~~~~
 # Write a cas file for use in the Fluent solver.
+
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "toy_car_lucid.cas")
     mesh_util.write(mesh_file)

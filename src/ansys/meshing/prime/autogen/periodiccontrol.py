@@ -58,6 +58,8 @@ class PeriodicControl(CoreObject):
         >>>                     center=[0,0,0], axis=[0,1,0], angle=180))
 
         """
+        if not isinstance(periodic_control_params, PeriodicControlParams):
+            raise TypeError("Invalid argument type passed for periodic_control_params, valid argument type is PeriodicControlParams.")
         args = {"periodic_control_params" : periodic_control_params._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/SetParams"
         self._model._print_logs_before_command("set_params", args)
@@ -84,6 +86,8 @@ class PeriodicControl(CoreObject):
         >>> periodic_control.set_suggested_name("control1")
 
         """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::PeriodicControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
@@ -138,6 +142,8 @@ class PeriodicControl(CoreObject):
         >>> periodic_control.set_scope(surface_scope)
 
         """
+        if not isinstance(scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/SetScope"
         self._model._print_logs_before_command("set_scope", args)
@@ -164,6 +170,8 @@ class PeriodicControl(CoreObject):
         >>> results = periodic_control.get_summary(prime.PeriodicControlSummaryParams(model=model))
 
         """
+        if not isinstance(params, PeriodicControlSummaryParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is PeriodicControlSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/GetSummary"
         self._model._print_logs_before_command("get_summary", args)

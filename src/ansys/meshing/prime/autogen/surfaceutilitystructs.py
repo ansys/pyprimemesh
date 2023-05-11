@@ -16,46 +16,97 @@ class SmoothType(enum.IntEnum):
     INFLATE = 2
     """Performs inflation during the operation."""
 
-class SphereAtInvalidNormalNodeParams(CoreObject):
-    """Parameters to create a sphere at nodes with invalid average face normal. The sphere creation is expected to correct the face normal at the node.
+class FlowDirection(enum.IntEnum):
+    """Flow or wake direction for BOI creation.
+    """
+    X = 1
+    """Flow or wake inflation in the X direction for BOI creation."""
+    Y = 2
+    """Flow or wake inflation in the Y direction for BOI creation."""
+    Z = 3
+    """Flow or wake inflation in the Z direction for BOI creation."""
+
+class ContactPatchAxis(enum.IntEnum):
+    """Flow or wake direction for BOI creation.
+    """
+    X = 1
+    """Flow or wake inflation in the X direction for BOI creation."""
+    Y = 2
+    """Flow or wake inflation in the Y direction for BOI creation."""
+    Z = 3
+    """Flow or wake inflation in the Z direction for BOI creation."""
+
+class BOIType(enum.IntEnum):
+    """BOI type for BOI creation.
+    """
+    OFFSETBOX = 1
+    """Box BOI type for BOI creation."""
+    OFFSETSURFACE = 2
+    """Surface BOI type for BOI creation."""
+
+class FixInvalidNormalNodeParams(CoreObject):
+    """Parameters to fix invalid average face normal at nodes by creating a nugget.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            nugget_size: float,
+            nugget_mesh_size: float,
+            label: str):
+        self._nugget_size = nugget_size
+        self._nugget_mesh_size = nugget_mesh_size
+        self._label = label
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            nugget_size: float = None,
+            nugget_mesh_size: float = None,
+            label: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SphereAtInvalidNormalNodeParams.
+        """Initializes the FixInvalidNormalNodeParams.
 
         Parameters
         ----------
         model: Model
-            Model to create a SphereAtInvalidNormalNodeParams object with default parameters.
+            Model to create a FixInvalidNormalNodeParams object with default parameters.
+        nugget_size: float, optional
+            Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+        nugget_mesh_size: float, optional
+            Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+        label: str, optional
+            Label to set on new face zonelets created.
         json_data: dict, optional
-            JSON dictionary to create a SphereAtInvalidNormalNodeParams object with provided parameters.
+            JSON dictionary to create a FixInvalidNormalNodeParams object with provided parameters.
 
         Examples
         --------
-        >>> sphere_at_invalid_normal_node_params = prime.SphereAtInvalidNormalNodeParams(model = model)
+        >>> fix_invalid_normal_node_params = prime.FixInvalidNormalNodeParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["nuggetSize"] if "nuggetSize" in json_data else None,
+                json_data["nuggetMeshSize"] if "nuggetMeshSize" in json_data else None,
+                json_data["label"] if "label" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [nugget_size, nugget_mesh_size, label])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    nugget_size,
+                    nugget_mesh_size,
+                    label)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    param_json = model._communicator.initialize_params(model, "SphereAtInvalidNormalNodeParams")
-                    json_data = param_json["SphereAtInvalidNormalNodeParams"] if "SphereAtInvalidNormalNodeParams" in param_json else {}
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "FixInvalidNormalNodeParams")
+                    json_data = param_json["FixInvalidNormalNodeParams"] if "FixInvalidNormalNodeParams" in param_json else {}
+                    self.__initialize(
+                        nugget_size if nugget_size is not None else ( FixInvalidNormalNodeParams._default_params["nugget_size"] if "nugget_size" in FixInvalidNormalNodeParams._default_params else (json_data["nuggetSize"] if "nuggetSize" in json_data else None)),
+                        nugget_mesh_size if nugget_mesh_size is not None else ( FixInvalidNormalNodeParams._default_params["nugget_mesh_size"] if "nugget_mesh_size" in FixInvalidNormalNodeParams._default_params else (json_data["nuggetMeshSize"] if "nuggetMeshSize" in json_data else None)),
+                        label if label is not None else ( FixInvalidNormalNodeParams._default_params["label"] if "label" in FixInvalidNormalNodeParams._default_params else (json_data["label"] if "label" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -64,75 +115,129 @@ class SphereAtInvalidNormalNodeParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
-        """Set the default values of SphereAtInvalidNormalNodeParams.
+    def set_default(
+            nugget_size: float = None,
+            nugget_mesh_size: float = None,
+            label: str = None):
+        """Set the default values of FixInvalidNormalNodeParams.
 
+        Parameters
+        ----------
+        nugget_size: float, optional
+            Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+        nugget_mesh_size: float, optional
+            Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+        label: str, optional
+            Label to set on new face zonelets created.
         """
         args = locals()
-        [SphereAtInvalidNormalNodeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [FixInvalidNormalNodeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of SphereAtInvalidNormalNodeParams.
+        """Print the default values of FixInvalidNormalNodeParams.
 
         Examples
         --------
-        >>> SphereAtInvalidNormalNodeParams.print_default()
+        >>> FixInvalidNormalNodeParams.print_default()
         """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SphereAtInvalidNormalNodeParams._default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FixInvalidNormalNodeParams._default_params.items())
         print(message)
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._nugget_size is not None:
+            json_data["nuggetSize"] = self._nugget_size
+        if self._nugget_mesh_size is not None:
+            json_data["nuggetMeshSize"] = self._nugget_mesh_size
+        if self._label is not None:
+            json_data["label"] = self._label
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "nugget_size :  %s\nnugget_mesh_size :  %s\nlabel :  %s" % (self._nugget_size, self._nugget_mesh_size, self._label)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
-class SphereAtInvalidNormalNodeResults(CoreObject):
-    """Results associated with create sphere at invalid normal nodes.
+    @property
+    def nugget_size(self) -> float:
+        """Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+        """
+        return self._nugget_size
+
+    @nugget_size.setter
+    def nugget_size(self, value: float):
+        self._nugget_size = value
+
+    @property
+    def nugget_mesh_size(self) -> float:
+        """Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+        """
+        return self._nugget_mesh_size
+
+    @nugget_mesh_size.setter
+    def nugget_mesh_size(self, value: float):
+        self._nugget_mesh_size = value
+
+    @property
+    def label(self) -> str:
+        """Label to set on new face zonelets created.
+        """
+        return self._label
+
+    @label.setter
+    def label(self, value: str):
+        self._label = value
+
+class FixInvalidNormalNodeResults(CoreObject):
+    """Results associated with fix invalid average face normal at nodes.
     """
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            error_code: ErrorCode):
+        self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SphereAtInvalidNormalNodeResults.
+        """Initializes the FixInvalidNormalNodeResults.
 
         Parameters
         ----------
         model: Model
-            Model to create a SphereAtInvalidNormalNodeResults object with default parameters.
+            Model to create a FixInvalidNormalNodeResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a SphereAtInvalidNormalNodeResults object with provided parameters.
+            JSON dictionary to create a FixInvalidNormalNodeResults object with provided parameters.
 
         Examples
         --------
-        >>> sphere_at_invalid_normal_node_results = prime.SphereAtInvalidNormalNodeResults(model = model)
+        >>> fix_invalid_normal_node_results = prime.FixInvalidNormalNodeResults(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [error_code])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    error_code)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    param_json = model._communicator.initialize_params(model, "SphereAtInvalidNormalNodeResults")
-                    json_data = param_json["SphereAtInvalidNormalNodeResults"] if "SphereAtInvalidNormalNodeResults" in param_json else {}
-                    self.__initialize()
+                    param_json = model._communicator.initialize_params(model, "FixInvalidNormalNodeResults")
+                    json_data = param_json["FixInvalidNormalNodeResults"] if "FixInvalidNormalNodeResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( FixInvalidNormalNodeResults._default_params["error_code"] if "error_code" in FixInvalidNormalNodeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -141,34 +246,51 @@ class SphereAtInvalidNormalNodeResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
-        """Set the default values of SphereAtInvalidNormalNodeResults.
+    def set_default(
+            error_code: ErrorCode = None):
+        """Set the default values of FixInvalidNormalNodeResults.
 
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
         """
         args = locals()
-        [SphereAtInvalidNormalNodeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [FixInvalidNormalNodeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of SphereAtInvalidNormalNodeResults.
+        """Print the default values of FixInvalidNormalNodeResults.
 
         Examples
         --------
-        >>> SphereAtInvalidNormalNodeResults.print_default()
+        >>> FixInvalidNormalNodeResults.print_default()
         """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SphereAtInvalidNormalNodeResults._default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FixInvalidNormalNodeResults._default_params.items())
         print(message)
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "error_code :  %s" % (self._error_code)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
 
 class CopyZoneletsParams(CoreObject):
     """Parameters to copy zonelets. This is for internal use only.
@@ -2415,6 +2537,755 @@ class AddThicknessResults(CoreObject):
     @property
     def part_id(self) -> int:
         """The created thickness part id.
+        """
+        return self._part_id
+
+    @part_id.setter
+    def part_id(self, value: int):
+        self._part_id = value
+
+class CreateBOIParams(CoreObject):
+    """Parameters used for BOI surface creation in the given axis.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            boi_type: BOIType,
+            perform_initial_wrap: bool,
+            wrap_size: float,
+            flow_dir: FlowDirection,
+            side_scale: float,
+            wake_scale: float,
+            wake_levels: int,
+            suggested_part_name: str,
+            suggested_label_prefix: str,
+            number_of_threads: int):
+        self._boi_type = BOIType(boi_type)
+        self._perform_initial_wrap = perform_initial_wrap
+        self._wrap_size = wrap_size
+        self._flow_dir = FlowDirection(flow_dir)
+        self._side_scale = side_scale
+        self._wake_scale = wake_scale
+        self._wake_levels = wake_levels
+        self._suggested_part_name = suggested_part_name
+        self._suggested_label_prefix = suggested_label_prefix
+        self._number_of_threads = number_of_threads
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            boi_type: BOIType = None,
+            perform_initial_wrap: bool = None,
+            wrap_size: float = None,
+            flow_dir: FlowDirection = None,
+            side_scale: float = None,
+            wake_scale: float = None,
+            wake_levels: int = None,
+            suggested_part_name: str = None,
+            suggested_label_prefix: str = None,
+            number_of_threads: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CreateBOIParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CreateBOIParams object with default parameters.
+        boi_type: BOIType, optional
+            Type of BOI offsetting.
+        perform_initial_wrap: bool, optional
+            Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+        wrap_size: float, optional
+            Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+        flow_dir: FlowDirection, optional
+            Assigns the offset direction of inflation.
+        side_scale: float, optional
+            BOI side scaling factor.
+        wake_scale: float, optional
+            BOI flow direction scaling factor.
+        wake_levels: int, optional
+            BOI levels.
+        suggested_part_name: str, optional
+            Suggested part name for created BOI surfaces.
+        suggested_label_prefix: str, optional
+            Suggested label name for created BOI surfaces.
+        number_of_threads: int, optional
+            Number of threads for multithreading.
+        json_data: dict, optional
+            JSON dictionary to create a CreateBOIParams object with provided parameters.
+
+        Examples
+        --------
+        >>> create_boiparams = prime.CreateBOIParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                BOIType(json_data["boiType"] if "boiType" in json_data else None),
+                json_data["performInitialWrap"] if "performInitialWrap" in json_data else None,
+                json_data["wrapSize"] if "wrapSize" in json_data else None,
+                FlowDirection(json_data["flowDir"] if "flowDir" in json_data else None),
+                json_data["sideScale"] if "sideScale" in json_data else None,
+                json_data["wakeScale"] if "wakeScale" in json_data else None,
+                json_data["wakeLevels"] if "wakeLevels" in json_data else None,
+                json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
+                json_data["suggestedLabelPrefix"] if "suggestedLabelPrefix" in json_data else None,
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [boi_type, perform_initial_wrap, wrap_size, flow_dir, side_scale, wake_scale, wake_levels, suggested_part_name, suggested_label_prefix, number_of_threads])
+            if all_field_specified:
+                self.__initialize(
+                    boi_type,
+                    perform_initial_wrap,
+                    wrap_size,
+                    flow_dir,
+                    side_scale,
+                    wake_scale,
+                    wake_levels,
+                    suggested_part_name,
+                    suggested_label_prefix,
+                    number_of_threads)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CreateBOIParams")
+                    json_data = param_json["CreateBOIParams"] if "CreateBOIParams" in param_json else {}
+                    self.__initialize(
+                        boi_type if boi_type is not None else ( CreateBOIParams._default_params["boi_type"] if "boi_type" in CreateBOIParams._default_params else BOIType(json_data["boiType"] if "boiType" in json_data else None)),
+                        perform_initial_wrap if perform_initial_wrap is not None else ( CreateBOIParams._default_params["perform_initial_wrap"] if "perform_initial_wrap" in CreateBOIParams._default_params else (json_data["performInitialWrap"] if "performInitialWrap" in json_data else None)),
+                        wrap_size if wrap_size is not None else ( CreateBOIParams._default_params["wrap_size"] if "wrap_size" in CreateBOIParams._default_params else (json_data["wrapSize"] if "wrapSize" in json_data else None)),
+                        flow_dir if flow_dir is not None else ( CreateBOIParams._default_params["flow_dir"] if "flow_dir" in CreateBOIParams._default_params else FlowDirection(json_data["flowDir"] if "flowDir" in json_data else None)),
+                        side_scale if side_scale is not None else ( CreateBOIParams._default_params["side_scale"] if "side_scale" in CreateBOIParams._default_params else (json_data["sideScale"] if "sideScale" in json_data else None)),
+                        wake_scale if wake_scale is not None else ( CreateBOIParams._default_params["wake_scale"] if "wake_scale" in CreateBOIParams._default_params else (json_data["wakeScale"] if "wakeScale" in json_data else None)),
+                        wake_levels if wake_levels is not None else ( CreateBOIParams._default_params["wake_levels"] if "wake_levels" in CreateBOIParams._default_params else (json_data["wakeLevels"] if "wakeLevels" in json_data else None)),
+                        suggested_part_name if suggested_part_name is not None else ( CreateBOIParams._default_params["suggested_part_name"] if "suggested_part_name" in CreateBOIParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
+                        suggested_label_prefix if suggested_label_prefix is not None else ( CreateBOIParams._default_params["suggested_label_prefix"] if "suggested_label_prefix" in CreateBOIParams._default_params else (json_data["suggestedLabelPrefix"] if "suggestedLabelPrefix" in json_data else None)),
+                        number_of_threads if number_of_threads is not None else ( CreateBOIParams._default_params["number_of_threads"] if "number_of_threads" in CreateBOIParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            boi_type: BOIType = None,
+            perform_initial_wrap: bool = None,
+            wrap_size: float = None,
+            flow_dir: FlowDirection = None,
+            side_scale: float = None,
+            wake_scale: float = None,
+            wake_levels: int = None,
+            suggested_part_name: str = None,
+            suggested_label_prefix: str = None,
+            number_of_threads: int = None):
+        """Set the default values of CreateBOIParams.
+
+        Parameters
+        ----------
+        boi_type: BOIType, optional
+            Type of BOI offsetting.
+        perform_initial_wrap: bool, optional
+            Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+        wrap_size: float, optional
+            Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+        flow_dir: FlowDirection, optional
+            Assigns the offset direction of inflation.
+        side_scale: float, optional
+            BOI side scaling factor.
+        wake_scale: float, optional
+            BOI flow direction scaling factor.
+        wake_levels: int, optional
+            BOI levels.
+        suggested_part_name: str, optional
+            Suggested part name for created BOI surfaces.
+        suggested_label_prefix: str, optional
+            Suggested label name for created BOI surfaces.
+        number_of_threads: int, optional
+            Number of threads for multithreading.
+        """
+        args = locals()
+        [CreateBOIParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CreateBOIParams.
+
+        Examples
+        --------
+        >>> CreateBOIParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateBOIParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._boi_type is not None:
+            json_data["boiType"] = self._boi_type
+        if self._perform_initial_wrap is not None:
+            json_data["performInitialWrap"] = self._perform_initial_wrap
+        if self._wrap_size is not None:
+            json_data["wrapSize"] = self._wrap_size
+        if self._flow_dir is not None:
+            json_data["flowDir"] = self._flow_dir
+        if self._side_scale is not None:
+            json_data["sideScale"] = self._side_scale
+        if self._wake_scale is not None:
+            json_data["wakeScale"] = self._wake_scale
+        if self._wake_levels is not None:
+            json_data["wakeLevels"] = self._wake_levels
+        if self._suggested_part_name is not None:
+            json_data["suggestedPartName"] = self._suggested_part_name
+        if self._suggested_label_prefix is not None:
+            json_data["suggestedLabelPrefix"] = self._suggested_label_prefix
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "boi_type :  %s\nperform_initial_wrap :  %s\nwrap_size :  %s\nflow_dir :  %s\nside_scale :  %s\nwake_scale :  %s\nwake_levels :  %s\nsuggested_part_name :  %s\nsuggested_label_prefix :  %s\nnumber_of_threads :  %s" % (self._boi_type, self._perform_initial_wrap, self._wrap_size, self._flow_dir, self._side_scale, self._wake_scale, self._wake_levels, self._suggested_part_name, self._suggested_label_prefix, self._number_of_threads)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def boi_type(self) -> BOIType:
+        """Type of BOI offsetting.
+        """
+        return self._boi_type
+
+    @boi_type.setter
+    def boi_type(self, value: BOIType):
+        self._boi_type = value
+
+    @property
+    def perform_initial_wrap(self) -> bool:
+        """Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+        """
+        return self._perform_initial_wrap
+
+    @perform_initial_wrap.setter
+    def perform_initial_wrap(self, value: bool):
+        self._perform_initial_wrap = value
+
+    @property
+    def wrap_size(self) -> float:
+        """Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+        """
+        return self._wrap_size
+
+    @wrap_size.setter
+    def wrap_size(self, value: float):
+        self._wrap_size = value
+
+    @property
+    def flow_dir(self) -> FlowDirection:
+        """Assigns the offset direction of inflation.
+        """
+        return self._flow_dir
+
+    @flow_dir.setter
+    def flow_dir(self, value: FlowDirection):
+        self._flow_dir = value
+
+    @property
+    def side_scale(self) -> float:
+        """BOI side scaling factor.
+        """
+        return self._side_scale
+
+    @side_scale.setter
+    def side_scale(self, value: float):
+        self._side_scale = value
+
+    @property
+    def wake_scale(self) -> float:
+        """BOI flow direction scaling factor.
+        """
+        return self._wake_scale
+
+    @wake_scale.setter
+    def wake_scale(self, value: float):
+        self._wake_scale = value
+
+    @property
+    def wake_levels(self) -> int:
+        """BOI levels.
+        """
+        return self._wake_levels
+
+    @wake_levels.setter
+    def wake_levels(self, value: int):
+        self._wake_levels = value
+
+    @property
+    def suggested_part_name(self) -> str:
+        """Suggested part name for created BOI surfaces.
+        """
+        return self._suggested_part_name
+
+    @suggested_part_name.setter
+    def suggested_part_name(self, value: str):
+        self._suggested_part_name = value
+
+    @property
+    def suggested_label_prefix(self) -> str:
+        """Suggested label name for created BOI surfaces.
+        """
+        return self._suggested_label_prefix
+
+    @suggested_label_prefix.setter
+    def suggested_label_prefix(self, value: str):
+        self._suggested_label_prefix = value
+
+    @property
+    def number_of_threads(self) -> int:
+        """Number of threads for multithreading.
+        """
+        return self._number_of_threads
+
+    @number_of_threads.setter
+    def number_of_threads(self, value: int):
+        self._number_of_threads = value
+
+class CreateBOIResults(CoreObject):
+    """Result structure associated with BOI creation of zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            part_id: int):
+        self._error_code = ErrorCode(error_code)
+        self._part_id = part_id
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            part_id: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CreateBOIResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CreateBOIResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        part_id: int, optional
+            The BOI part id.
+        json_data: dict, optional
+            JSON dictionary to create a CreateBOIResults object with provided parameters.
+
+        Examples
+        --------
+        >>> create_boiresults = prime.CreateBOIResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["partId"] if "partId" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, part_id])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    part_id)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CreateBOIResults")
+                    json_data = param_json["CreateBOIResults"] if "CreateBOIResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( CreateBOIResults._default_params["error_code"] if "error_code" in CreateBOIResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        part_id if part_id is not None else ( CreateBOIResults._default_params["part_id"] if "part_id" in CreateBOIResults._default_params else (json_data["partId"] if "partId" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            part_id: int = None):
+        """Set the default values of CreateBOIResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        part_id: int, optional
+            The BOI part id.
+        """
+        args = locals()
+        [CreateBOIResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CreateBOIResults.
+
+        Examples
+        --------
+        >>> CreateBOIResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateBOIResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._part_id is not None:
+            json_data["partId"] = self._part_id
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\npart_id :  %s" % (self._error_code, self._part_id)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def part_id(self) -> int:
+        """The BOI part id.
+        """
+        return self._part_id
+
+    @part_id.setter
+    def part_id(self, value: int):
+        self._part_id = value
+
+class CreateContactPatchParams(CoreObject):
+    """Parameters used for contact patch creation in the given axis.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            contact_patch_axis: ContactPatchAxis,
+            offset_distance: float,
+            grouping_tolerance: float,
+            suggested_part_name: str,
+            suggested_label_prefix: str):
+        self._contact_patch_axis = ContactPatchAxis(contact_patch_axis)
+        self._offset_distance = offset_distance
+        self._grouping_tolerance = grouping_tolerance
+        self._suggested_part_name = suggested_part_name
+        self._suggested_label_prefix = suggested_label_prefix
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            contact_patch_axis: ContactPatchAxis = None,
+            offset_distance: float = None,
+            grouping_tolerance: float = None,
+            suggested_part_name: str = None,
+            suggested_label_prefix: str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CreateContactPatchParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CreateContactPatchParams object with default parameters.
+        contact_patch_axis: ContactPatchAxis, optional
+            Assigns the contact patch direction.
+        offset_distance: float, optional
+            Source offset distance value.
+        grouping_tolerance: float, optional
+            Tolerance distance value to group regions for contact patch creation.
+        suggested_part_name: str, optional
+            Suggested part name for created contact patch surfaces.
+        suggested_label_prefix: str, optional
+            Suggested label name for created contact patch surfaces.
+        json_data: dict, optional
+            JSON dictionary to create a CreateContactPatchParams object with provided parameters.
+
+        Examples
+        --------
+        >>> create_contact_patch_params = prime.CreateContactPatchParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ContactPatchAxis(json_data["contactPatchAxis"] if "contactPatchAxis" in json_data else None),
+                json_data["offsetDistance"] if "offsetDistance" in json_data else None,
+                json_data["groupingTolerance"] if "groupingTolerance" in json_data else None,
+                json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
+                json_data["suggestedLabelPrefix"] if "suggestedLabelPrefix" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [contact_patch_axis, offset_distance, grouping_tolerance, suggested_part_name, suggested_label_prefix])
+            if all_field_specified:
+                self.__initialize(
+                    contact_patch_axis,
+                    offset_distance,
+                    grouping_tolerance,
+                    suggested_part_name,
+                    suggested_label_prefix)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CreateContactPatchParams")
+                    json_data = param_json["CreateContactPatchParams"] if "CreateContactPatchParams" in param_json else {}
+                    self.__initialize(
+                        contact_patch_axis if contact_patch_axis is not None else ( CreateContactPatchParams._default_params["contact_patch_axis"] if "contact_patch_axis" in CreateContactPatchParams._default_params else ContactPatchAxis(json_data["contactPatchAxis"] if "contactPatchAxis" in json_data else None)),
+                        offset_distance if offset_distance is not None else ( CreateContactPatchParams._default_params["offset_distance"] if "offset_distance" in CreateContactPatchParams._default_params else (json_data["offsetDistance"] if "offsetDistance" in json_data else None)),
+                        grouping_tolerance if grouping_tolerance is not None else ( CreateContactPatchParams._default_params["grouping_tolerance"] if "grouping_tolerance" in CreateContactPatchParams._default_params else (json_data["groupingTolerance"] if "groupingTolerance" in json_data else None)),
+                        suggested_part_name if suggested_part_name is not None else ( CreateContactPatchParams._default_params["suggested_part_name"] if "suggested_part_name" in CreateContactPatchParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
+                        suggested_label_prefix if suggested_label_prefix is not None else ( CreateContactPatchParams._default_params["suggested_label_prefix"] if "suggested_label_prefix" in CreateContactPatchParams._default_params else (json_data["suggestedLabelPrefix"] if "suggestedLabelPrefix" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            contact_patch_axis: ContactPatchAxis = None,
+            offset_distance: float = None,
+            grouping_tolerance: float = None,
+            suggested_part_name: str = None,
+            suggested_label_prefix: str = None):
+        """Set the default values of CreateContactPatchParams.
+
+        Parameters
+        ----------
+        contact_patch_axis: ContactPatchAxis, optional
+            Assigns the contact patch direction.
+        offset_distance: float, optional
+            Source offset distance value.
+        grouping_tolerance: float, optional
+            Tolerance distance value to group regions for contact patch creation.
+        suggested_part_name: str, optional
+            Suggested part name for created contact patch surfaces.
+        suggested_label_prefix: str, optional
+            Suggested label name for created contact patch surfaces.
+        """
+        args = locals()
+        [CreateContactPatchParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CreateContactPatchParams.
+
+        Examples
+        --------
+        >>> CreateContactPatchParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateContactPatchParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._contact_patch_axis is not None:
+            json_data["contactPatchAxis"] = self._contact_patch_axis
+        if self._offset_distance is not None:
+            json_data["offsetDistance"] = self._offset_distance
+        if self._grouping_tolerance is not None:
+            json_data["groupingTolerance"] = self._grouping_tolerance
+        if self._suggested_part_name is not None:
+            json_data["suggestedPartName"] = self._suggested_part_name
+        if self._suggested_label_prefix is not None:
+            json_data["suggestedLabelPrefix"] = self._suggested_label_prefix
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "contact_patch_axis :  %s\noffset_distance :  %s\ngrouping_tolerance :  %s\nsuggested_part_name :  %s\nsuggested_label_prefix :  %s" % (self._contact_patch_axis, self._offset_distance, self._grouping_tolerance, self._suggested_part_name, self._suggested_label_prefix)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def contact_patch_axis(self) -> ContactPatchAxis:
+        """Assigns the contact patch direction.
+        """
+        return self._contact_patch_axis
+
+    @contact_patch_axis.setter
+    def contact_patch_axis(self, value: ContactPatchAxis):
+        self._contact_patch_axis = value
+
+    @property
+    def offset_distance(self) -> float:
+        """Source offset distance value.
+        """
+        return self._offset_distance
+
+    @offset_distance.setter
+    def offset_distance(self, value: float):
+        self._offset_distance = value
+
+    @property
+    def grouping_tolerance(self) -> float:
+        """Tolerance distance value to group regions for contact patch creation.
+        """
+        return self._grouping_tolerance
+
+    @grouping_tolerance.setter
+    def grouping_tolerance(self, value: float):
+        self._grouping_tolerance = value
+
+    @property
+    def suggested_part_name(self) -> str:
+        """Suggested part name for created contact patch surfaces.
+        """
+        return self._suggested_part_name
+
+    @suggested_part_name.setter
+    def suggested_part_name(self, value: str):
+        self._suggested_part_name = value
+
+    @property
+    def suggested_label_prefix(self) -> str:
+        """Suggested label name for created contact patch surfaces.
+        """
+        return self._suggested_label_prefix
+
+    @suggested_label_prefix.setter
+    def suggested_label_prefix(self, value: str):
+        self._suggested_label_prefix = value
+
+class CreateContactPatchResults(CoreObject):
+    """Result structure associated with created contact patch zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            part_id: int):
+        self._error_code = ErrorCode(error_code)
+        self._part_id = part_id
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            part_id: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CreateContactPatchResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CreateContactPatchResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with the contact patch creation operation.
+        part_id: int, optional
+            Contact patch part id.
+        json_data: dict, optional
+            JSON dictionary to create a CreateContactPatchResults object with provided parameters.
+
+        Examples
+        --------
+        >>> create_contact_patch_results = prime.CreateContactPatchResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["partId"] if "partId" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, part_id])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    part_id)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CreateContactPatchResults")
+                    json_data = param_json["CreateContactPatchResults"] if "CreateContactPatchResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( CreateContactPatchResults._default_params["error_code"] if "error_code" in CreateContactPatchResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        part_id if part_id is not None else ( CreateContactPatchResults._default_params["part_id"] if "part_id" in CreateContactPatchResults._default_params else (json_data["partId"] if "partId" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            part_id: int = None):
+        """Set the default values of CreateContactPatchResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the contact patch creation operation.
+        part_id: int, optional
+            Contact patch part id.
+        """
+        args = locals()
+        [CreateContactPatchResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CreateContactPatchResults.
+
+        Examples
+        --------
+        >>> CreateContactPatchResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateContactPatchResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._part_id is not None:
+            json_data["partId"] = self._part_id
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\npart_id :  %s" % (self._error_code, self._part_id)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the contact patch creation operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def part_id(self) -> int:
+        """Contact patch part id.
         """
         return self._part_id
 

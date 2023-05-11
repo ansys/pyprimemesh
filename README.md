@@ -51,7 +51,7 @@ pip install -e .
 
 ## Dependencies
 
-You must have a licensed copy of the latest version of Ansys 2023 R1 locally.
+You must have Ansys 2023 R1 or newer versions installed for Ansys Prime Server (optionally, CAD readers can be configured).  Ansys Prime Server requires a Preppost or CFD Preppost license to run.
 
 ## Get Started
 
@@ -61,8 +61,9 @@ To launch PyPrimeMesh:
 
 ```python
 import ansys.meshing.prime as prime
+
 with prime.launch_prime() as prime_client:
-   model = prime_client.model
+    model = prime_client.model
 ```
 
 ## License and Acknowledgments

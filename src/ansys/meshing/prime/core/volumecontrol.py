@@ -1,25 +1,49 @@
+"""Module containing VolumeControl related classes and methods."""
 from ansys.meshing.prime.autogen.volumecontrol import VolumeControl as _VolumeControl
-from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
+
+# isort: split
 from ansys.meshing.prime.autogen.commonstructs import SetNameResults
+from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
 
 
 class VolumeControl(_VolumeControl):
-    """Volume control is used to define the scope and type of volume mesh to be generated."""
+    """Volume control is used to define the scope and type of volume mesh to be generated.
+
+    Parameters
+    ----------
+    model : CommunicationManager
+        Server model where to create and modify VolumeControls from.
+    id : int
+        ID of the control.
+    object_id : int
+        Object ID of the control.
+    name : str
+        Name of the VolumeControl
+    local : bool, optional
+        Unused, by default False
+    """
 
     def __init__(self, model, id, object_id, name, local=False):
-        """__init__(Model self, int id, int object_id, char* name)"""
+        """Initialize the superclass and Model variable."""
         _VolumeControl.__init__(self, model, id, object_id, name)
         self._model = model
         self._name = name
 
     def __str__(self) -> str:
+        """Representation of the class in string format.
+
+        Returns
+        -------
+        str
+            Class data in string format.
+        """
         params = VolumeControlParams(model=self._model)
+        # TODO: function get_summary() not implemented
         result = _VolumeControl.get_summary(self, params)
         return result.message
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """Sets the unique name for the volume control based on the given suggested name.
-
+        """Set the unique name for the volume control based on the given suggested name.
 
         Parameters
         ----------
@@ -43,7 +67,7 @@ class VolumeControl(_VolumeControl):
 
     @property
     def name(self):
-        """Gets the name of volume control.
+        """Get the name of volume control.
 
         Returns
         -------

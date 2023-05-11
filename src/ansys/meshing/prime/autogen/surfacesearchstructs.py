@@ -972,10 +972,14 @@ class SearchByThinStripParams(CoreObject):
             self,
             strip_height_limit: float,
             quality_limit: float,
-            face_quality_measure: FaceQualityMeasure):
+            face_quality_measure: FaceQualityMeasure,
+            feature_type: SurfaceFeatureType,
+            feature_angle: float):
         self._strip_height_limit = strip_height_limit
         self._quality_limit = quality_limit
         self._face_quality_measure = FaceQualityMeasure(face_quality_measure)
+        self._feature_type = SurfaceFeatureType(feature_type)
+        self._feature_angle = feature_angle
 
     def __init__(
             self,
@@ -983,6 +987,8 @@ class SearchByThinStripParams(CoreObject):
             strip_height_limit: float = None,
             quality_limit: float = None,
             face_quality_measure: FaceQualityMeasure = None,
+            feature_type: SurfaceFeatureType = None,
+            feature_angle: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the SearchByThinStripParams.
@@ -997,6 +1003,10 @@ class SearchByThinStripParams(CoreObject):
             Quality limit used for search strip of face elements.
         face_quality_measure: FaceQualityMeasure, optional
             Quality measure used for search strip of face elements.
+        feature_type: SurfaceFeatureType, optional
+            Used to identify thin strip of face elements based on the provided feature type.
+        feature_angle: float, optional
+            Angle used to identify angle based features.
         json_data: dict, optional
             JSON dictionary to create a SearchByThinStripParams object with provided parameters.
 
@@ -1008,14 +1018,18 @@ class SearchByThinStripParams(CoreObject):
             self.__initialize(
                 json_data["stripHeightLimit"] if "stripHeightLimit" in json_data else None,
                 json_data["qualityLimit"] if "qualityLimit" in json_data else None,
-                FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None))
+                FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None),
+                SurfaceFeatureType(json_data["featureType"] if "featureType" in json_data else None),
+                json_data["featureAngle"] if "featureAngle" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [strip_height_limit, quality_limit, face_quality_measure])
+            all_field_specified = all(arg is not None for arg in [strip_height_limit, quality_limit, face_quality_measure, feature_type, feature_angle])
             if all_field_specified:
                 self.__initialize(
                     strip_height_limit,
                     quality_limit,
-                    face_quality_measure)
+                    face_quality_measure,
+                    feature_type,
+                    feature_angle)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1025,7 +1039,9 @@ class SearchByThinStripParams(CoreObject):
                     self.__initialize(
                         strip_height_limit if strip_height_limit is not None else ( SearchByThinStripParams._default_params["strip_height_limit"] if "strip_height_limit" in SearchByThinStripParams._default_params else (json_data["stripHeightLimit"] if "stripHeightLimit" in json_data else None)),
                         quality_limit if quality_limit is not None else ( SearchByThinStripParams._default_params["quality_limit"] if "quality_limit" in SearchByThinStripParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)),
-                        face_quality_measure if face_quality_measure is not None else ( SearchByThinStripParams._default_params["face_quality_measure"] if "face_quality_measure" in SearchByThinStripParams._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None)))
+                        face_quality_measure if face_quality_measure is not None else ( SearchByThinStripParams._default_params["face_quality_measure"] if "face_quality_measure" in SearchByThinStripParams._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None)),
+                        feature_type if feature_type is not None else ( SearchByThinStripParams._default_params["feature_type"] if "feature_type" in SearchByThinStripParams._default_params else SurfaceFeatureType(json_data["featureType"] if "featureType" in json_data else None)),
+                        feature_angle if feature_angle is not None else ( SearchByThinStripParams._default_params["feature_angle"] if "feature_angle" in SearchByThinStripParams._default_params else (json_data["featureAngle"] if "featureAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1037,7 +1053,9 @@ class SearchByThinStripParams(CoreObject):
     def set_default(
             strip_height_limit: float = None,
             quality_limit: float = None,
-            face_quality_measure: FaceQualityMeasure = None):
+            face_quality_measure: FaceQualityMeasure = None,
+            feature_type: SurfaceFeatureType = None,
+            feature_angle: float = None):
         """Set the default values of SearchByThinStripParams.
 
         Parameters
@@ -1048,6 +1066,10 @@ class SearchByThinStripParams(CoreObject):
             Quality limit used for search strip of face elements.
         face_quality_measure: FaceQualityMeasure, optional
             Quality measure used for search strip of face elements.
+        feature_type: SurfaceFeatureType, optional
+            Used to identify thin strip of face elements based on the provided feature type.
+        feature_angle: float, optional
+            Angle used to identify angle based features.
         """
         args = locals()
         [SearchByThinStripParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1072,11 +1094,15 @@ class SearchByThinStripParams(CoreObject):
             json_data["qualityLimit"] = self._quality_limit
         if self._face_quality_measure is not None:
             json_data["faceQualityMeasure"] = self._face_quality_measure
+        if self._feature_type is not None:
+            json_data["featureType"] = self._feature_type
+        if self._feature_angle is not None:
+            json_data["featureAngle"] = self._feature_angle
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "strip_height_limit :  %s\nquality_limit :  %s\nface_quality_measure :  %s" % (self._strip_height_limit, self._quality_limit, self._face_quality_measure)
+        message = "strip_height_limit :  %s\nquality_limit :  %s\nface_quality_measure :  %s\nfeature_type :  %s\nfeature_angle :  %s" % (self._strip_height_limit, self._quality_limit, self._face_quality_measure, self._feature_type, self._feature_angle)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1109,6 +1135,26 @@ class SearchByThinStripParams(CoreObject):
     @face_quality_measure.setter
     def face_quality_measure(self, value: FaceQualityMeasure):
         self._face_quality_measure = value
+
+    @property
+    def feature_type(self) -> SurfaceFeatureType:
+        """Used to identify thin strip of face elements based on the provided feature type.
+        """
+        return self._feature_type
+
+    @feature_type.setter
+    def feature_type(self, value: SurfaceFeatureType):
+        self._feature_type = value
+
+    @property
+    def feature_angle(self) -> float:
+        """Angle used to identify angle based features.
+        """
+        return self._feature_angle
+
+    @feature_angle.setter
+    def feature_angle(self, value: float):
+        self._feature_angle = value
 
 class SearchByThinStripResults(CoreObject):
     """Results associated with search by thin strip of face elements.
@@ -2376,3 +2422,228 @@ class SearchInfoByRegisterIdResults(CoreObject):
     @face_zonelets_found.setter
     def face_zonelets_found(self, value: Iterable[int]):
         self._face_zonelets_found = value
+
+class CheckFaceDeviationParams(CoreObject):
+    """Parameters used for check face deviation operations.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            distance: float):
+        self._distance = distance
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            distance: float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CheckFaceDeviationParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CheckFaceDeviationParams object with default parameters.
+        distance: float, optional
+            Distance above which deviated entities are collected.
+        json_data: dict, optional
+            JSON dictionary to create a CheckFaceDeviationParams object with provided parameters.
+
+        Examples
+        --------
+        >>> check_face_deviation_params = prime.CheckFaceDeviationParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["distance"] if "distance" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [distance])
+            if all_field_specified:
+                self.__initialize(
+                    distance)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CheckFaceDeviationParams")
+                    json_data = param_json["CheckFaceDeviationParams"] if "CheckFaceDeviationParams" in param_json else {}
+                    self.__initialize(
+                        distance if distance is not None else ( CheckFaceDeviationParams._default_params["distance"] if "distance" in CheckFaceDeviationParams._default_params else (json_data["distance"] if "distance" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            distance: float = None):
+        """Set the default values of CheckFaceDeviationParams.
+
+        Parameters
+        ----------
+        distance: float, optional
+            Distance above which deviated entities are collected.
+        """
+        args = locals()
+        [CheckFaceDeviationParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CheckFaceDeviationParams.
+
+        Examples
+        --------
+        >>> CheckFaceDeviationParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CheckFaceDeviationParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._distance is not None:
+            json_data["distance"] = self._distance
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "distance :  %s" % (self._distance)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def distance(self) -> float:
+        """Distance above which deviated entities are collected.
+        """
+        return self._distance
+
+    @distance.setter
+    def distance(self, value: float):
+        self._distance = value
+
+class CheckFaceDeviationResults(CoreObject):
+    """Result structure associated with the check face deviation operations.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            n_deviated: int,
+            maximum_deviation: float):
+        self._n_deviated = n_deviated
+        self._maximum_deviation = maximum_deviation
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            n_deviated: int = None,
+            maximum_deviation: float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CheckFaceDeviationResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CheckFaceDeviationResults object with default parameters.
+        n_deviated: int, optional
+            Number of faces with deviation.
+        maximum_deviation: float, optional
+            Maximum deviation found.
+        json_data: dict, optional
+            JSON dictionary to create a CheckFaceDeviationResults object with provided parameters.
+
+        Examples
+        --------
+        >>> check_face_deviation_results = prime.CheckFaceDeviationResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["nDeviated"] if "nDeviated" in json_data else None,
+                json_data["maximumDeviation"] if "maximumDeviation" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [n_deviated, maximum_deviation])
+            if all_field_specified:
+                self.__initialize(
+                    n_deviated,
+                    maximum_deviation)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CheckFaceDeviationResults")
+                    json_data = param_json["CheckFaceDeviationResults"] if "CheckFaceDeviationResults" in param_json else {}
+                    self.__initialize(
+                        n_deviated if n_deviated is not None else ( CheckFaceDeviationResults._default_params["n_deviated"] if "n_deviated" in CheckFaceDeviationResults._default_params else (json_data["nDeviated"] if "nDeviated" in json_data else None)),
+                        maximum_deviation if maximum_deviation is not None else ( CheckFaceDeviationResults._default_params["maximum_deviation"] if "maximum_deviation" in CheckFaceDeviationResults._default_params else (json_data["maximumDeviation"] if "maximumDeviation" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            n_deviated: int = None,
+            maximum_deviation: float = None):
+        """Set the default values of CheckFaceDeviationResults.
+
+        Parameters
+        ----------
+        n_deviated: int, optional
+            Number of faces with deviation.
+        maximum_deviation: float, optional
+            Maximum deviation found.
+        """
+        args = locals()
+        [CheckFaceDeviationResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CheckFaceDeviationResults.
+
+        Examples
+        --------
+        >>> CheckFaceDeviationResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CheckFaceDeviationResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._n_deviated is not None:
+            json_data["nDeviated"] = self._n_deviated
+        if self._maximum_deviation is not None:
+            json_data["maximumDeviation"] = self._maximum_deviation
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "n_deviated :  %s\nmaximum_deviation :  %s" % (self._n_deviated, self._maximum_deviation)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def n_deviated(self) -> int:
+        """Number of faces with deviation.
+        """
+        return self._n_deviated
+
+    @n_deviated.setter
+    def n_deviated(self, value: int):
+        self._n_deviated = value
+
+    @property
+    def maximum_deviation(self) -> float:
+        """Maximum deviation found.
+        """
+        return self._maximum_deviation
+
+    @maximum_deviation.setter
+    def maximum_deviation(self, value: float):
+        self._maximum_deviation = value
