@@ -4,22 +4,22 @@
 Getting started
 ===============
 
-PyPrimeMesh supports a Python client for the Ansys Prime server
-that provides core Ansys meshing technology.
+PyPrimeMesh is a Python client for Ansys Prime Server,
+which provides core Ansys meshing technology.
 
-To use PyPrimeMesh, you must have a local installation of Ansys. The
-version of Ansys that you have installed dictates the features available to you.
+To use PyPrimeMesh, you must have a local installation of Ansys 2023 R1 or later.
+The Ansys version that you have installed dictates the features available to you.
 
 For more information on getting a licensed copy of Ansys, visit the `Ansys website <https://www.ansys.com/>`_.
 
 .. note::
-   The PyPrimeMesh client release has one-to-one compatibility with the Ansys Prime server release.
-   That is, PyPrimeMesh client is only compatible with its corresponding Ansys Prime server.
+   The PyPrimeMesh client release has one-to-one compatibility with the Ansys Prime Server release.
+   That is, the PyPrimeMesh client is only compatible with its corresponding Ansys Prime Server.
 
 This table provides compatibility information:
 
 ===========================  ===========================
-PyPrimeMesh client release   Ansys Prime server release
+PyPrimeMesh client release   Ansys Prime Server release
 ===========================  ===========================
 0.2.0                        23.1.0 (2023 R1) 
 0.3.0                        23.1.1 (2023 R1 SP1)  
@@ -59,9 +59,9 @@ To install a basic version of the client, use this command instead:
 Dependencies
 ------------
 
-You must have Ansys 2023 R1 or later installed for the Ansys Prime server.
-(Optionally, CAD readers can be configured.) The Ansys Prime server requires
-a PrepPost or a Mechanical or Fluids PrepPost (CFD) license to run.
+You must have Ansys 2023 R1 or later installed to have access to Ansys Prime
+Server. Optionally, CAD readers can be configured. Ansys Prime Server requires
+an Ansys Mechanical PrepPost or Fluids PrepPost (CFD) license to run.
 
 Launch PyPrimeMesh
 ------------------

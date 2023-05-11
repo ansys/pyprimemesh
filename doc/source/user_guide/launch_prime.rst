@@ -8,7 +8,7 @@ Launching PyPrimeMesh
 Launch server from a Python script
 ==================================
 
-The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method launches the Ansys Prime server.  
+The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method launches Ansys Prime Server.  
 
 This code returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` class
 connected to the launched server session:
@@ -19,7 +19,7 @@ connected to the launched server session:
 
     prime_client = prime.launch_prime()
 
-You can send commands to the Ansys Prime server and receive responses from it.
+You can send commands to Ansys Prime Server and receive responses from it.
 
 The :class:`Client <ansys.meshing.prime.Client>` class gets the :attr:`model <ansys.meshing.prime.Client.model>`
 parameter associated with the client instance:
@@ -33,7 +33,7 @@ parameter associated with the client instance:
 Launch server from a Windows or Linux console and connect the client
 ====================================================================
 
-You can launch the Ansys Prime server on Linux or Windows from a command prompt and then connect to the client as needed.  
+You can launch Ansys Prime Server on Linux or Windows from a command prompt and then connect to the client as needed.  
 
 This example starts the server in parallel mode on four nodes and specifies the IP address and port on Windows:
 
@@ -55,7 +55,7 @@ This example starts the server in parallel mode on four nodes and specifies the 
 
 
 .. note::
-    Only a single client session can be connected to an active Ansys Prime server instance at any time.
+    Only a single client session can be connected to an active Ansys Prime Server instance at any time.
 
 
 ==========================

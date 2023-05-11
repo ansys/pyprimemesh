@@ -32,7 +32,7 @@ PyPrimeMesh enables you to perform these tasks:
 * Modularize meshing algorithms, components, and services for easier reuse in other applications.
 * Expose microservices and APIs for meshing operations to promote meshing workflow prototyping.
  
-PyPrimeMesh integrates the meshing capabilities of the Ansys Prime server directly into client apps.
+PyPrimeMesh integrates the meshing capabilities of Ansys Prime Server directly into client apps.
 PyPrimeMesh provides a Python-friendly interface to drive the software that manages the
 submission of low-level Prime commands, while exchanging data through high-performance gRPC
 interfaces.

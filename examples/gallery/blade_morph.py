@@ -22,7 +22,7 @@ and match morphes the mesh to the geometry.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime server instance and connect the PyPrimeMesh client.
+* Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
 * Read the mesh and append the new CAD geometry shape.
 * Define the mesh source faces and the target geometry faces to match morph.
 * Match morph the turbine blade mesh to the new CAD geometry shape.
@@ -31,10 +31,10 @@ Procedure
 """
 
 ###############################################################################
-# Launch Ansys Prime server
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch the Ansys Prime server instance and connect the client.
+# Launch the Ansys Prime Server instance and connect the client.
 # Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
 import os

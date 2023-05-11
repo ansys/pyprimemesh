@@ -43,7 +43,7 @@ released versions.
 --------------------------------
 Code structure and contributions
 --------------------------------
-The PyPrimeMesh code base is primarily auto-generated based on the Ansys Prime server. For the auto-generated 
+The PyPrimeMesh code base is primarily auto-generated from Ansys Prime Server. For the auto-generated 
 code, contributions are limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.

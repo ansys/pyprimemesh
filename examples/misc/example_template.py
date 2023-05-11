@@ -38,7 +38,7 @@ After this preamble is the first code block:
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 
-# Start Ansys Prime server instance and get client model
+# Start Ansys Prime Server instance and get client model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
@@ -94,7 +94,7 @@ display()
 # topic in the *PyAnsys Developer's Guide*.
 
 ###############################################################################
-# Stop Ansys Prime server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Stop Ansys Prime Server
+# ~~~~~~~~~~~~~~~~~~~~~~~
 #
 prime_client.exit()

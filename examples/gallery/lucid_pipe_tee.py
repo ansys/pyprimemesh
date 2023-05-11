@@ -26,7 +26,7 @@ prismatic boundary layers.
 Procedure
 ~~~~~~~~~~
 
--   Launch an Ansys Prime server instance and connect the PyPrimeMesh client.
+-   Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
 -   Read the CAD geometry.
 -   Mesh for the structural thermal analysis.
 -   Write the mesh for the structural thermal analysis.
@@ -37,10 +37,10 @@ Procedure
 """
 
 ###############################################################################
-# Launch Ansys Prime server
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch the Ansys Prime server instance and connect the client.
+# Launch the Ansys Prime Server instance and connect the client.
 # Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
 import os

@@ -21,7 +21,7 @@ convenience and ease.
 
 Procedure
 ~~~~~~~~~
-* Launch the Ansys Prime server and instantiate meshing utilities from the ``lucid`` class.
+* Launch Ansys Prime Server and instantiate meshing utilities from the ``lucid`` class.
 * Import the geometry and create face zones from labels imported from the geometry.
 * Surface mesh geometry with curvature sizing.
 * Volume mesh with polyhedral elements and boundary layer refinement.
@@ -31,10 +31,10 @@ Procedure
 """
 
 ###############################################################################
-# Launch Ansys Prime server
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch an instance of the Ansys Prime server.
+# Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
 

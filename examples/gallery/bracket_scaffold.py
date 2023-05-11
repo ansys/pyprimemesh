@@ -31,10 +31,10 @@ Procedure
 """
 
 ###############################################################################
-# Launch Ansys Prime server
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch an instance of Ansys Prime server.
+# Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 
 import os

@@ -19,7 +19,7 @@ It uses several meshing utilities available in the ``lucid`` class for convenien
 
 Procedure
 ~~~~~~~~~
-* Launch an Ansys Prime server instance and instantiate the meshing utilities
+* Launch an Ansys Prime Server instance and instantiate the meshing utilities
   from the ``lucid`` class.
 * Import the geometry.
 * Coarse wrap parts with holes to clean up.
@@ -34,9 +34,9 @@ Procedure
 """
 
 ###############################################################################
-# Launch Ansys Prime server
+# Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import all necessary modules and launch an instance of the Ansys Prime server.
+# Import all necessary modules and launch an instance of Ansys Prime Server.
 # From the PyPrimeMesh client get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
 

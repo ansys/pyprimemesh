@@ -7,7 +7,7 @@
 
 ## Overview
 
-PyPrimeMesh provides a Python client to the Ansys Prime server. The Ansys Prime server
+PyPrimeMesh is a Python client to Ansys Prime Server, which
 delivers core Ansys meshing technology.
 
 ## Documentation and Issues
@@ -18,7 +18,7 @@ https://prime.docs.pyansys.com).
 For queries related to PyPrimeMesh, post on the [PyPrimeMesh Discussions](
 https://github.com/pyansys/pyprimemesh/discussions) page. 
 
-For bugs or enhancement requests, file an issue on the [PyPrimeMesh Issues](
+For bugs or enhancement requests, post an issue on the [PyPrimeMesh Issues](
 https://github.com/pyansys/pyprimemesh/issues) page. 
 
 For assistance, reach out to the support team at
@@ -54,9 +54,9 @@ pip install -e .
 
 ## Dependencies
 
-You must have Ansys 2023 R1 or later installed for the Ansys Prime server.
-(Optionally, CAD readers can be configured.) The Ansys Prime server requires
-a PrepPost or a Mechanical or Fluids PrepPost (CFD) license to run.
+You must have Ansys 2023 R1 or later installed for access to Ansys Prime Server.
+Optionally, CAD readers can be configured. Ansys Prime Server requires
+an Ansys Mechanical PrepPost or Fluids PrepPost (CFD) license to run.
 
 ## Get Started
 
@@ -76,6 +76,6 @@ with prime.launch_prime() as prime_client:
 PyPrimeMesh is licensed under the MIT license.
 
 PyPrimeMesh makes no commercial claim over Ansys whatsoever. This library extends the functionality of
-the Ansys Prime server by adding a Python interface without changing the core behavior or license
-of the original software. The use of the Ansys Prime server requires a legally licensed copy of Ansys
-Workbench.
+Ansys Prime Server by adding a Python interface without changing the core behavior or license
+of the original software. The use of Ansys Prime Server requires a legally licensed copy of Ansys
+2023 or later.
