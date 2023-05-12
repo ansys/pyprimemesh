@@ -1,19 +1,19 @@
 """
 .. _ref_pipe_tee:
 
-===============================================================
-Meshing a Pipe T-Section for Structural Thermal and Fluid Flow
-===============================================================
+=======================================================================
+Meshing a pipe T-section for structural thermal and fluid flow analysis
+=======================================================================
 
-**Summary**: This example demonstrates how to mesh a pipe T-section for both fluid
-and structural thermal simulation.
+**Summary**: This example demonstrates how to mesh a pipe T-section for both
+structural thermal and fluid flow simulation.
 
 
 Objective
 ~~~~~~~~~~
 
-In this example, you can mesh the solids of a pipe T-section for a
-structural thermal analysis using tetrahedral elements and use the
+This example meshes the solids of a pipe T-section for a
+structural thermal analysis using tetrahedral elements and uses the
 wrapper to extract the fluid domain and mesh using polyhedral cells with
 prismatic boundary layers.
 
@@ -26,13 +26,13 @@ prismatic boundary layers.
 Procedure
 ~~~~~~~~~~
 
--   Launch Ansys Prime Server instance and connect PyPrimeMesh client.
--   Read CAD geometry.
--   Mesh for structural thermal analysis.
--   Write mesh for structural thermal analysis.
--   Extract fluid by wrapping.
+-   Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
+-   Read the CAD geometry.
+-   Mesh for the structural thermal analysis.
+-   Write the mesh for the structural thermal analysis.
+-   Extract the fluid by wrapping.
 -   Mesh with polyhedral and prisms.
--   Write mesh for fluid simulation.
+-   Write the mesh for the fluid simulation.
 
 """
 
@@ -40,8 +40,8 @@ Procedure
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules.
-# Launch Ansys Prime Server instance and connect client.
-# Get the client model and instantiate meshing utilities from lucid class.
+# Launch the Ansys Prime Server instance and connect the client.
+# Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
 import os
 import tempfile
@@ -55,13 +55,14 @@ model = prime_client.model
 mesh_util = lucid.Mesh(model)
 
 ###############################################################################
-# Read CAD Geometry
+# Read CAD geometry
 # ~~~~~~~~~~~~~~~~~
-# Download example FMD geometry file.
-# FMD format is exported from SpaceClaim and is compatible with Linux.
+# Download the example FMD geometry file.
+# The FMD  file format is exported from SpaceClaim and is compatible with Linux.
 # Read and display the geometry file.
-# The file contains several unmeshed parts as you would get after you imported from CAD.
-# For Windows OS users scdoc is also available:
+# The file contains several unmeshed parts, which is what you would get after you
+# import from a CAD file.
+# For Windows OS users, scdoc is also available:
 # pipe_tee = prime.examples.download_pipe_tee_scdoc()
 pipe_tee = prime.examples.download_pipe_tee_fmd()
 mesh_util.read(pipe_tee)
@@ -72,7 +73,7 @@ display()
 print(model)
 
 ###############################################################################
-# Mesh for Structural
+# Mesh for structural
 # ~~~~~~~~~~~~~~~~~~~
 # Surface mesh using curvature sizing.
 # Volume mesh with tetrahedral elements.
@@ -92,9 +93,9 @@ display = graphics.Graphics(model)
 display()
 
 ###############################################################################
-# Write Structural Mesh
+# Write structural mesh
 # ~~~~~~~~~~~~~~~~~~~~~
-# Labels are exported to CDB as components for
+# Labels are exported to the CDB file as components for
 # applying load boundary conditions in the solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
@@ -107,12 +108,12 @@ with tempfile.TemporaryDirectory() as temp_folder:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # You can deal with the small internal diameter change between flanges in several ways:
 #
-#  * Connect the geometry to extract a volume and refine the
-#    mesh around this detail to capture.
-#  * Modify the geometry to remove the feature.
-#  * Wrap to extract the internal flow volume and walk over the feature.
+# * Connect the geometry to extract a volume and refine the
+#   mesh around this detail to capture.
+# * Modify the geometry to remove the feature.
+# * Wrap to extract the internal flow volume and walk over the feature.
 #
-# Here, you will choose to wrap and walk over these features.
+# This example wraps and walks over these features.
 #
 # Read in the geometry again.
 #
@@ -120,7 +121,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
 # feature and extract the largest internal volume as the fluid.
 #
 # By default, the wrap uses all parts as input and deletes the input
-# geometry after wrapping unless keep_input is set as True.
+# geometry after wrapping unless ``keep_input`` is set as ``True``.
 
 mesh_util.read(pipe_tee)
 
@@ -131,10 +132,10 @@ print(model)
 display()
 
 ###############################################################################
-# Volume Mesh Fluid
+# Volume mesh fluid
 # ~~~~~~~~~~~~~~~~~
-# Create zones for each label to be used for boundary conditions definitions.
-# Volume mesh with prism polyhedral not growing prisms from inlets and outlets.
+# Create zones for each label to use for boundary condition definitions.
+# Volume mesh with prism polyhedral, not growing prisms from inlets and outlets.
 # Visualize the generated volume mesh.
 # When displaying, you can avoid displaying unnecessary edge zones.
 # You can clearly see the prism layers that were specified by the Prism control.
@@ -155,7 +156,7 @@ print(model)
 display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 
 ###############################################################################
-# Write Fluid Mesh
+# Write fluid mesh
 # ~~~~~~~~~~~~~~~~
 # Write a MSH file for the Fluent solver.
 

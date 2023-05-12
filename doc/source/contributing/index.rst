@@ -1,12 +1,13 @@
 .. _ref_index_contributing:
 
-============
-Contributing
-============
+==========
+Contribute
+==========
 
 Overall guidance on contributing to a PyAnsys library appears in the
-`Contributing <https://dev.docs.pyansys.com/dev/how-to/contributing.html>`_ topic
-in the *PyAnsys Developer's Guide*.
+`Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ topic
+in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
+with this guide before attempting to contribute to PyPrimeMesh.
  
 The following contribution information is specific to PyPrimeMesh.
 
@@ -26,7 +27,7 @@ Post issues
 Use the `PyPrimeMesh Issues <https://github.com/pyansys/pyprimemesh/issues>`_
 page to submit questions, report bugs, and request new features.
 
-To reach the support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
+To reach the support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
 ------------------------------
 View PyPrimeMesh documentation
@@ -34,10 +35,15 @@ View PyPrimeMesh documentation
 Documentation for the latest stable release of PyPrimeMesh is hosted at
 `PyPrimeMesh Documentation <https://prime.docs.pyansys.com>`_.
 
+In the upper right corner of the documentation's title bar, there is an option
+for switching from viewing the documentation for the latest stable release
+to viewing the documentation for the development version or previously
+released versions.
+
 --------------------------------
 Code structure and contributions
 --------------------------------
-The PyPrimeMesh code base is primarily auto-generated based on the Ansys Prime server. For the auto-generated 
+The PyPrimeMesh code base is primarily auto-generated from Ansys Prime Server. For the auto-generated 
 code, contributions are limited to raising issues and enhancement requests.  
 
 You should not modify files marked as auto-generated.
