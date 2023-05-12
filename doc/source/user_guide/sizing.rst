@@ -6,42 +6,32 @@ Sizing
 
 PyPrimeMesh provides various sizing controls to help you define how the mesh size is distributed on a surface or within the volume.
 
-
 --------------
 Sizing control
 --------------
-
 
 Mesh quality and resolution are important factors for capturing physics accurately and efficiently. Size controls allows you to get the desired mesh distribution.
 PyPrimeMesh specifies the sizing requirements using sizing controls. The sizing controls in PyPrimeMesh have the following:
 
 * Scope
-
 * Maximum rate of change of size
-
 * Range within which the sizes should be on or within the scope
 
 
-The :class:`SizingType <ansys.meshing.prime.SizingType>` has various control types to define sizing requirements:
+The :class:`SizingType <ansys.meshing.prime.SizingType>` class has control types for defining sizing requirements:
 
- * Curvature
-
- * Proximity
-
- * Hard
-
- * Soft
-
- * Meshed
-
- * Body of influence
-
+* Curvature
+* Proximity
+* Hard
+* Soft
+* Meshed
+* Body of influence
 
 Curvature sizing
 ^^^^^^^^^^^^^^^^
 
 In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the :attr:`CURVATURE <ansys.meshing.prime.SizingType.CURVATURE>`
-parameter sizes based on the scope based on the local curvature. The size is small when the local curvature is large and vice versa.
+parameter sizes based on the scope on the local curvature. The size is small when the local curvature is large and vice versa.
 This code shows how to use the :class:`CurvatureSizingParams <ansys.meshing.prime.CurvatureSizingParams>` class to specify
 the minimum and maximum size, growth rate, and normal angle:
 
@@ -89,7 +79,18 @@ minimum and maximum size, growth rate, and the number of element per gap:
     :width: 400pt
     :align: center     
     
-:attr:`ignore_self_proximity <ansys.meshing.prime.ProximitySizingParams.ignore_self_proximity>` and :attr:`ignore_orientation <ansys.meshing.prime.ProximitySizingParams.ignore_orientation>` are also considered for Proximity Sizing. ignore_self_proximity is set to True if proximity between faces in the same face zonelet is to be ignored. ignore_orientation allows you to ignore the face normal orientation during the proximity calculation. This option is enabled by default. In general, the proximity depends on the direction of face normals. An example is shown below to explain the use of the ignore_orientation option for Face Proximity. The normals on the grooved box point inward. With default setting, the proximity size function does not refine the surface along the entire groove length. When the ignore_orientation is True, the surface will be refined along the groove length." 
+The :attr:`ignore_self_proximity <ansys.meshing.prime.ProximitySizingParams.ignore_self_proximity>`
+and :attr:`ignore_orientation <ansys.meshing.prime.ProximitySizingParams.ignore_orientation>`
+parameters are also considered for proximity sizing. The ``ignore_self_proximity`` parameter
+is set to ``True`` if proximity between faces in the same face zonelet is to be ignored. The
+``ignore_orientation`` parameter allows you to ignore the face normal orientation during the
+proximity calculation. This Boolean parameter is set to ``False`` by default. In general,
+the proximity depends on the direction of face normals.
+
+This example explains the use of the ``ignore_orientation`` parameter for face proximity.
+The normals on the grooved box point inward. With the default setting of ``False``, the 
+proximity size function does not refine the surface along the entire groove length.
+If the ``ignore_orientation`` is set to ``True``, the surface is refined along the groove length 
 
 .. figure:: ../images/proximityorientation.png
     :width: 400pt
@@ -102,7 +103,7 @@ Hard sizing
 In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 :attr:`HARD <ansys.meshing.prime.SizingType.HARD>` parameter sizes on the scope based on a uniform
 value while meshing. This code shows how to use the :class:`HardSizingParams <ansys.meshing.prime.HardSizingParams>`
-class to specify the minimum size and growth rate.
+class to specify the minimum size and growth rate:
 
 
 .. code-block:: python
@@ -118,7 +119,7 @@ class to specify the minimum size and growth rate.
 Soft sizing
 ^^^^^^^^^^^
 
-On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 :attr:`SOFT <ansys.meshing.prime.SizingType.SOFT>` parameter sizes on the scope based on a
 certain maximum value that should not be exceeded while meshing. This code shows how
 to use the :class:`SoftSizingParams <ansys.meshing.prime.SoftSizingParams>` class to specify
@@ -140,9 +141,9 @@ the maximum size and growth rate:
 Meshed sizing
 ^^^^^^^^^^^^^
 
-On the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 :attr:`MESHED <ansys.meshing.prime.SizingType.MESHED>` parameter sizes based on existing local sizes.
-This example shows how to use The :class:`MeshedSizingParams <ansys.meshing.prime.MeshedSizingParams>`
+This example shows how to use the :class:`MeshedSizingParams <ansys.meshing.prime.MeshedSizingParams>`
 class to specify the growth rate:
 
 .. code-block:: python
@@ -161,10 +162,10 @@ class to specify the growth rate:
 Body of influence sizing
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting The
+In the :class:`SizingType <ansys.meshing.prime.SizingType>` class, selecting the
 :attr:`BOI <ansys.meshing.prime.SizingType.BOI>` parameter sizes inside a closed volume scope
 that is not to exceed a certain maximum value. This code shows how to use the
-:class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` class to specify the maximum size and growth rate.
+:class:`BoiSizingParams <ansys.meshing.prime.BoiSizingParams>` class to specify the maximum size and growth rate:
 
 .. code-block:: python
 
@@ -187,24 +188,21 @@ The :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class helps you t
 at a given location. These size field types are available in PyPrimeMesh: 
 
 
-* Constant 
+* ``Constant``
+* ``Volumetric``
+* ``Geodesic``
+* ``Geometric``
+* ``Meshedgeodesic``
 
-* Volumetric 
-
-* Geodesic 
-
-* Geometric 
-
-* Meshedgeodesic 
-
-Volumetric and  Geodesic Size fields can process and respect the size control you define. Volumetric size field can be computed using :attr:`Compute volumetric <ansys.meshing.prime.SizeField.compute_volumetric>` and then surface and volume meshing can be applied. The remaining size field types are computed as part of various surface and volume meshing operations.
-
-
+The ``Volumetric`` and  ``Geodesic`` size fields can process and respect the size control that you define.
+The ``Volumetric`` size field can be computed using the :attr:`Compute volumetric <ansys.meshing.prime.SizeField.compute_volumetric>`
+method and then surface and volume meshing can be applied. The remaining size field types are computed as
+part of various surface and volume meshing operations.
 
 Constant size field
 ^^^^^^^^^^^^^^^^^^^
   
-On the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
+In the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
 :attr:`CONSTANT <ansys.meshing.prime.SizeFieldType.CONSTANT>` parameter computes the size field
 based on the size controls specified.
 
