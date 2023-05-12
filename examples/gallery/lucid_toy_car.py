@@ -2,15 +2,15 @@
 .. _ref_toy_car_wrap:
 
 ======================================
-Wrapping a Toy Car for a Flow Analysis
+Wrapping a toy car for a flow analysis
 ======================================
 
-**Summary**: This example illustrates how to wrap a toy car for a flow analysis.
+**Summary**: This example demonstrates how to wrap a toy car for a flow analysis.
 
 Objective
 ~~~~~~~~~
-In this example, we will wrap a toy car and volume mesh with a tetrahedral mesh with prisms.
-We will use several meshing utilities available in the lucid class for convenience and ease.
+This example wraps a toy car and volume meshes with a tetrahedral mesh with prisms.
+It uses several meshing utilities available in the ``lucid`` class for convenience and ease.
 
 .. image:: ../../../images/toy_car.png
    :align: center
@@ -19,16 +19,17 @@ We will use several meshing utilities available in the lucid class for convenien
 
 Procedure
 ~~~~~~~~~
-* Launch Ansys Prime Server instance and instantiate meshing utilities from lucid class.
-* Import geometry.
-* Coarse wrap parts with holes to cleanup.
-* Extract fluid region using wrapper.
-* Check wrap surface is closed and suitable quality.
+* Launch an Ansys Prime Server instance and instantiate the meshing utilities
+  from the ``lucid`` class.
+* Import the geometry.
+* Coarse wrap parts with holes to clean up.
+* Extract the fluid region using a wrapper.
+* Check that the wrap surface is closed and that the quality is suitable.
 * Mesh only fluid with tetrahedral elements and boundary layer refinement.
-* Create face zones from labels imported from geometry.
-* Print statistics on generated mesh.
-* Improve mesh quality.
-* Write a cas file for use in the Fluent solver.
+* Create face zones from labels imported from the geometry.
+* Print statistics on the generated mesh.
+* Improve the mesh quality.
+* Write a CAS file for use in the Fluent solver.
 * Exit the PyPrimeMesh session.
 """
 
@@ -37,7 +38,7 @@ Procedure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
 # From the PyPrimeMesh client get the model.
-# Instantiate meshing utilities from lucid class.
+# Instantiate meshing utilities from the ``lucid`` class.
 
 import os
 import tempfile
@@ -52,13 +53,13 @@ display = Graphics(model=model)
 mesh_util = prime.lucid.Mesh(model)
 
 ###############################################################################
-# Import Geometry
+# Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the toy car geometry file (.fmd file exported by SpaceClaim).
-# Import geometry and display everything except tunnel.
+# Download the toy car geometry (FMD) file exported by SpaceClaim.
+# Import the geometry and display everything except the tunnel.
 
 
-# For Windows OS users scdoc is also available:
+# For Windows OS users, scdoc is also available:
 # toy_car = prime.examples.download_toy_car_scdoc()
 
 toy_car = prime.examples.download_toy_car_fmd()
@@ -69,14 +70,14 @@ scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
 display(scope=scope)
 
 ###############################################################################
-# Close Holes
+# Close holes
 # ~~~~~~~~~~~
 # Several parts are open surfaces (with holes).
-# Coarse wrap to close holes and delete originals.
-# We could use leakage detection to close these regions.
-# Here we use a coarse wrap and disable feature edge refinement to walk over the holes.
-# As this is not the final wrap we do not need to remesh after the wrap.
-# Wrapping each object in turn we avoid the coarse wrap bridging across narrow gaps.
+# Coarse wrap to close the holes and delete the originals.
+# You could use leakage detection to close these regions.
+# This example uses a coarse wrap and disables feature edge refinement to walk over the holes.
+# As this is not the final wrap, the example does not remesh after the wrap.
+# Wrapping each object in turn avoids coarse wrap bridging across narrow gaps.
 
 coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
 
@@ -93,13 +94,13 @@ for part_name in coarse_wrap:
     display(scope=prime.ScopeDefinition(model, part_expression=closed_part.name))
 
 ###############################################################################
-# Extract Fluid using Wrapper
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Wrap full model and extract largest internal region as the fluid.
-# Create edges at intersecting regions to improve quality.
-# Refining mesh to avoid contact between different parts.
-# The new wrap object replaces all original geometry unless "keep_input"
-# is set to TRUE.  Volumes are generated from the wrap for use later.
+# Extract fluid using a wrapper
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Wrap the full model and extract the largest internal region as the fluid.
+# Create edges at intersecting regions to improve the quality.
+# Refine mesh to avoid contact between different parts.
+# The new wrap object replaces all original geometry unless ``keep_input``
+# is set to ``True``.  Volumes are generated from the wrap for use later.
 
 wrap_part = mesh_util.wrap(
     min_size=0.1,
@@ -112,9 +113,10 @@ wrap_part = mesh_util.wrap(
 print(model)
 
 ###############################################################################
-# Check Wrap
+# Check wrap
 # ~~~~~~~~~~
-# Check wrap surface is closed and suitable quality to use as surface mesh.
+# Check that the wrap surface is closed and that the quality is suitable to use
+# as surface mesh.
 
 scope = prime.ScopeDefinition(model=model, part_expression=wrap_part.name)
 diag = prime.SurfaceSearch(model)
@@ -146,28 +148,28 @@ for summary_res in qual_summary_res.quality_results:
     print("Faces above limit: ", summary_res.n_found)
 
 ###############################################################################
-# Create Zones
+# Create zones
 # ~~~~~~~~~~~~
-# Create face zones from labels imported from geometry that can be used
+# Create face zones from labels imported from the geometry that can be used
 # in the solver to define boundary conditions.
-# If specifying individual labels to create zones the order is important.
-# Last label in the list will win.
-# Providing no label_expression will flatten all labels into zones.
-# For example, if "LabelA" and "LabelB" are overlapping three zones will
-# be created; "LabelA", "LabelB" and "LabelA_LabelB".
+# If specifying individual labels to create zones, the order is important.
+# The last label in the list wins.
+# Providing no ``label_expression`` flattens all labels into zones.
+# For example, if ``LabelA`` and ``LabelB`` are overlapping, three zones are
+# createdL ``LabelA``, ``LabelB``, and ``LabelA_LabelB``.
 
 mesh_util.create_zones_from_labels()
 
 print(model)
 
 ###############################################################################
-# Volume Mesh
+# Volume mesh
 # ~~~~~~~~~~~
 # Mesh only fluid volume with tetrahedral elements and boundary layer refinement.
-# Not meshing other volumetric regions.
+# This example does not mesh other volumetric regions.
 # Volume zones exist already for volume meshing and passing to the solver.
 # The largest face zonelet is used by default to define volume zone names at creation.
-# After volume meshing we can see we have a cell zonelet in the part summary.
+# After volume meshing, you can see that you have a cell zonelet in the part summary.
 
 volume = prime.lucid.VolumeScope(
     part_expression=wrap_part.name,
@@ -175,7 +177,7 @@ volume = prime.lucid.VolumeScope(
     scope_evaluation_type=prime.ScopeEvaluationType.ZONES,
 )
 
-# using expressions to define which surfaces to grow inflation layers from
+# Use expressions to define which surfaces to grow inflation layers from
 mesh_util.volume_mesh(
     scope=volume,
     prism_layers=3,
@@ -193,9 +195,9 @@ display(update=True, scope=scope)
 print(model)
 
 ###############################################################################
-# Print Mesh Stats
+# Print mesh stats
 # ~~~~~~~~~~~~~~~~
-# Print statistics on generated mesh.
+# Print statistics on the generated mesh.
 
 vtool = prime.VolumeMeshTool(model=model)
 result = vtool.check_mesh(part_id=wrap_part.id, params=prime.CheckMeshParams(model=model))
@@ -228,9 +230,10 @@ for summary_res in qual_summary_res.quality_results_part:
     print("Cells above limit: ", summary_res.n_found)
 
 ###############################################################################
-# Improve Quality
+# Improve quality
 # ~~~~~~~~~~~~~~~
-# Mesh quality is poor.  We can use Auto-Node Move to improve the mesh.
+# Because the mesh quality is poor, use the ``improve_by_auto_node_move`` method
+# to improve the mesh.
 
 improve = prime.VolumeMeshTool(model=model)
 params = prime.AutoNodeMoveParams(
@@ -271,9 +274,9 @@ for summary_res in qual_summary_res.quality_results_part:
     print("Cells above limit: ", summary_res.n_found)
 
 ###############################################################################
-# Write Mesh
+# Write mesh
 # ~~~~~~~~~~
-# Write a cas file for use in the Fluent solver.
+# Write a CAS file for use in the Fluent solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "toy_car_lucid.cas")

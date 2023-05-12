@@ -11,22 +11,22 @@ must have a reference tag in this format:
 
 ``.. _ref_my_example:``
 
-The ``.. _ref_`` is necessary. Everything that follows is your reference tag. As
-convention, we keep all references all in ``snake_case``.
+The ``.. _ref_`` is necessary. Everything that follows is your reference tag.
+Keep all references in `snake case`.
 
 This section should give a brief overview of what the example is about and/or demonstrates.
 The title should be changed to reflect the topic your example covers.
 
-New examples should be added as python scripts to:
+New examples should be added as Python scripts to:
 
 ``pyprimemesh/examples/gallery``
 
 .. note::
-   Avoid creating new folders unless absolutely necessary. If in doubt put the example
+   Avoid creating new folders unless absolutely necessary. If in doubt, put the example
    in the folder closest to what it is doing and its precise location can be advised
    on in the pull request. If you *must* create a new folder, make sure to add a
-   ``README.txt`` containing a reference, a title and a single sentence description of the folder.
-   Otherwise the new folder will be ignored by Sphinx.
+   ``README.txt`` file containing a reference, a title, and a single sentence describing the folder.
+   Otherwise, the new folder is ignored by Sphinx.
 
 Example file names should be in the format:
 
@@ -52,17 +52,23 @@ mesh_util.read(mixing_elbow)
 print(model)
 
 ###############################################################################
-# Section Title
-# ~~~~~~~~~~~~~
-# Code blocks can be broken up with text "sections" which are interpreted as
-# restructured text.
+# Create sections
+# ~~~~~~~~~~~~~~~
+# You can break up code blocks in titled sections that provide descriptive text.
+# When Sphinx is used to generate the documentation, this content is interpreted
+# as ReStructured Text (RST).
 #
-# This will also be translated into a markdown cell in the generated jupyter notebook.
-# Sections can contain any information you may have regarding the example
-# such as step-by-step comments or notes regarding motivations etc.
+# .. note::
+# You only need to create the Python (PY) files for the example. The
+# ``sphinx-gallery`` extension automatically generates the Jupyter
+# notebook, the HTML files for the documentation, and the demo script.
 #
-# As in jupyter notebooks, if code is left unassigned at the end of a code block
-# (as with ``model`` in the previous block) the output will be generated and
+# Sections can contain any information that you may have regarding the example,
+# such as step-by-step comments and information on motivations. In the generated
+# Jupyter notebook, this text is translated into a markdown cell.
+#
+# As in Jupyter notebooks, if code is left unassigned at the end of a code block
+# (as with ``model`` in the previous block), the output is generated and
 # printed to the screen according to its ``__repr__``.  Otherwise, you can use
 # ``print()`` to output the ``__str__``.
 
@@ -75,25 +81,23 @@ mesh_util.volume_mesh(
 )
 
 ###############################################################################
-# Rendering graphics
-# ~~~~~~~~~~~~~~~~~~
-# If you display graphics the result will be auto-generated and
-# rendered in the page. Like so:
+# Render graphics
+# ~~~~~~~~~~~~~~~
+# If you display graphics, the result is auto-generated and
+# rendered on the page:
 display = Graphics(model)
 display()
 
 ###############################################################################
-# Making a Pull Request
-# ~~~~~~~~~~~~~~~~~~~~~
+# Make a pull request
+# ~~~~~~~~~~~~~~~~~~~
 # Once your example is complete and you've verified builds locally, you can make a
 # pull request (PR).  Branches containing examples should be prefixed with `doc/`
-# as per the branch naming conventions found here: :ref:`ref_index_contributing`.
-#
-# Note that you only need to create the python source example (.py).  The jupyter
-# notebook, the example html and the demo script will all be auto-generated via ``sphinx-gallery``.
+# as per the branch-naming conventions found in the :ref:`ref_index_contributing`
+# topic in the *PyAnsys Developer's Guide*.
 
 ###############################################################################
-# Stopping Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Stop Ansys Prime Server
+# ~~~~~~~~~~~~~~~~~~~~~~~
 #
 prime_client.exit()
