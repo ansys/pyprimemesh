@@ -71,7 +71,7 @@ This example shows how to perform these steps:
 
 * Create the prism control and specify the boundary layer setting.
 * Perform volume meshing with polyhedral elements.
-* Check volume mesh quality based on cell quality measures. (For more information, see :ref:`ref_index_mesh_diagnostics`.)
+* Check volume mesh quality based on cell quality measures. For more information, see :ref:`ref_index_mesh_diagnostics`.
 
 .. code-block:: python
 
