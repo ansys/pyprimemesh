@@ -7,19 +7,13 @@ xyz
 APIs
 BETA
 conformally
-Defeature
-defeature
-defeaturing
 Fluent Meshing
 Fluent Meshing's
 geodesical
 hexahedra
 hexcore
-ignore_self_proximity
-ignore_orientation
 Lucid
 Meshedgeodesic
-meshedgeodesic
 Meshing's
 multithreading
 Octree
@@ -35,9 +29,8 @@ remeshing
 tetrahedra
 Topo
 topo
-topoedges
 TopoEntities
-topofaces
 Zonelet
 zonelet
 Zonelets
+zonelets
