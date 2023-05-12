@@ -3,8 +3,8 @@
 
 Adding a new example
 --------------------
-This example demonstrates how to add new examples and serves as a template that
-you can use in their creation.
+**Summary**: This example demonstrates how to add new examples and serves as a template
+that you can use in their creation.
 
 A block comment must be included at the top of any new example. Each example
 must have a reference tag in this format:
@@ -31,6 +31,31 @@ New examples should be added as Python scripts to:
 Example file names should be in the format:
 
 ``example_name.py``
+
+.. note::
+    Supporting input files for the example, such as CAD or mesh file assets, must be either original
+    content or have appropriate licensing and ownership permissions from their respective owners. If
+    the input files are used within the example script provided they must be capable of running in
+    the CI pipeline. This means that only files that can be read using the native file formats and
+    CAD readers can be used in the scripted examples.
+
+The recommended data formats to be included in the example are:
+
+* .pmdat
+* .fmd
+* .scdoc or .dsco (supported on Windows OS)
+
+Supporting input files should be added in:
+
+`Github Example Data Repository <https://github.com/pyansys/example-data/tree/master/pyprimemesh>`_
+
+Referencing files as enum and creating download function in:
+
+``pyprimemesh/examples.py``
+
+Also adding download function to:
+
+``pyprimemesh/examples/__init__.py``
 
 After this preamble is the first code block:
 """
