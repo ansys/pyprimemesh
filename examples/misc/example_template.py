@@ -1,17 +1,13 @@
 """
 .. _ref_how_to_add_an_example_reference_key:
 
-============================
-Adding a New Gallery Example
-============================
+Adding a new example
+--------------------
+This example demonstrates how to add new examples and serves as a template
+that you can use in their creation.
 
-**Summary**: This example demonstrates how to add new examples as well as being a template
-that can be used in their creation.
-
-Prerequisite
-~~~~~~~~~~~~
-This block comment should be included at the top of any new example. Each example
-should have a reference tag/key in the form:
+A block comment must be included at the top of any new example. Each example
+must have a reference tag in this format:
 
 ``.. _ref_my_example:``
 
@@ -61,13 +57,13 @@ Also adding download function to:
 
 ``pyprimemesh/examples/__init__.py``
 
-After this preamble is complete, the first code block begins.
+After this preamble is the first code block:
 """
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 
-# Start Ansys Prime Server and get client model
+# Start Ansys Prime Server instance and get client model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
