@@ -4,7 +4,6 @@ import os
 import numpy as np
 import pyvista as pv
 import vtk
-from pyvista import _vtk
 from pyvista.plotting.plotting import Plotter
 
 import ansys.meshing.prime as prime
@@ -184,11 +183,11 @@ class Graphics(object):
         self._app = None
         self._ruler_visible = False
         self._ruler_actor = None
-        self._colorByTypeBt: _vtk.vtkButtonWidget = None
-        self._hideBt: _vtk.vtkButtonWidget = None
-        self._showEdgeBt: _vtk.vtkButtonWidget = None
-        self._printInfoBt: _vtk.vtkButtonWidget = None
-        self._showRulerBt: _vtk.vtkButtonWidget = None
+        self._colorByTypeBt: vtk.vtkButtonWidget = None
+        self._hideBt: vtk.vtkButtonWidget = None
+        self._showEdgeBt: vtk.vtkButtonWidget = None
+        self._printInfoBt: vtk.vtkButtonWidget = None
+        self._showRulerBt: vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
         self._use_trame = use_trame
 
