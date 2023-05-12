@@ -21,11 +21,8 @@ method. The :class:`SurfaceDiagnosticSummaryParams <ansys.meshing.prime.SurfaceD
 diagnosing surface connectivity for the given scope and controls:
 
 * Duplicate faces
-
 * Free face edges
-
 * Multi face edges
-
 * Self intersections
 
 This code checks to see if a wrap surface is closed:
@@ -69,14 +66,13 @@ Face metrics
 The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class offers various types
 of measures to check face quality metrics.
 
- * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0 (ideal) and 1 (worst).
+* The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0 (ideal) and 1 (worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller
-   the aspect ratio, the higher the quality of an element.
+* The :attr:`ASPECTRATIO <ansys.meshing.prime.FaceQualityMeasure.ASPECTRATIO>` metric is greater than 1. The smaller
+  the aspect ratio, the higher the quality of an element.
 
- * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.FaceQualityMeasure.ELEMENTQUALITY>` metric ranges between
-   0 (worst) and 1 (ideal).
-
+* The :attr:`ELEMENTQUALITY <ansys.meshing.prime.FaceQualityMeasure.ELEMENTQUALITY>` metric ranges between
+  0 (worst) and 1 (ideal).
 
 This code gets face quality measures:
 
@@ -111,17 +107,17 @@ Cell metrics
 The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class offers various types
 of measures to check cell quality metrics.
 
- * The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between
-   0 (ideal) and 1 (worst).
+* The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between
+  0 (ideal) and 1 (worst).
 
- * The :attr:`ASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.ASPECTRATIO>` metric
-   is greater than 1. The smaller the aspect ratio, the higher the quality of an element.
+* The :attr:`ASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.ASPECTRATIO>` metric
+  is greater than 1. The smaller the aspect ratio, the higher the quality of an element.
 
- * The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric
-   is greater than 1. The smaller the Fluent aspect ratio, the higher the quality of an element.
+* The :attr:`FLUENTASPECTRATIO <ansys.meshing.prime.CellQualityMeasure.FLUENTASPECTRATIO>` metric
+  is greater than 1. The smaller the Fluent aspect ratio, the higher the quality of an element.
 
- * The :attr:`ELEMENTQUALITY <ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY>` metric ranges
-   between 0 (worst) and 1 (ideal).
+* The :attr:`ELEMENTQUALITY <ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY>` metric ranges
+  between 0 (worst) and 1 (ideal).
 
 
 This code gets cell quality measures:

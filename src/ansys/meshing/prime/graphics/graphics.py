@@ -3,10 +3,11 @@ import os
 
 import numpy as np
 import pyvista as pv
-from pyvista import _vtk
+import vtk
 from pyvista.plotting.plotting import Plotter
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
 from ansys.meshing.prime.internals import defaults
 
 
@@ -169,7 +170,7 @@ class Picker:
 class Graphics(object):
     """ """
 
-    def __init__(self, model: prime.Model):
+    def __init__(self, model: prime.Model, use_trame: bool = False):
         """ """
         self._model = model
         self._display_data = {}
@@ -182,12 +183,20 @@ class Graphics(object):
         self._app = None
         self._ruler_visible = False
         self._ruler_actor = None
-        self._colorByTypeBt: _vtk.vtkButtonWidget = None
-        self._hideBt: _vtk.vtkButtonWidget = None
-        self._showEdgeBt: _vtk.vtkButtonWidget = None
-        self._printInfoBt: _vtk.vtkButtonWidget = None
-        self._showRulerBt: _vtk.vtkButtonWidget = None
+        self._colorByTypeBt: vtk.vtkButtonWidget = None
+        self._hideBt: vtk.vtkButtonWidget = None
+        self._showEdgeBt: vtk.vtkButtonWidget = None
+        self._printInfoBt: vtk.vtkButtonWidget = None
+        self._showRulerBt: vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
+        self._use_trame = use_trame
+
+        if self._use_trame and not _HAS_TRAME:
+            warn_msg = (
+                "'use_trame' is active but Trame dependencies are not installed."
+                "Consider installing 'pyvista[trame]' to use this functionality."
+            )
+            self._model._logger.warning(warn_msg)
         if os.getenv('PRIME_APP_RUN'):
             self._app = __import__('PrimeApp')
         else:
@@ -360,7 +369,7 @@ class Graphics(object):
         vr = self._colorByTypeBt.GetRepresentation()
         state = vr.GetState()
         self._color_by_type = ColorByType(state)
-        r = _vtk.vtkPNGReader()
+        r = vtk.vtkPNGReader()
         color_by_type_icon_file = ""
         if self._color_by_type == ColorByType.ZONELET:
             color_by_type_icon_file = os.path.join(
@@ -443,6 +452,12 @@ class Graphics(object):
             return
         if update == True:
             self.__update_display_data()
+
+        # if we use trame, activate OFF_SCREEN before initializing plotter
+        pv_off_screen_original = None
+        if self._use_trame:
+            pv_off_screen_original = pv.OFF_SCREEN
+            pv.OFF_SCREEN = True
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
         [
@@ -476,10 +491,20 @@ class Graphics(object):
             )
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
-        # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
+        if self._use_trame:
+            pv.OFF_SCREEN = pv_off_screen_original
+
+    def _show_selector(self):
+        """Chooses between using Trame or Python visualizer."""
+        if self._use_trame:
+            visualizer = TrameVisualizer()
+            visualizer.set_scene(self._plotter)
+            visualizer.show()
+        else:
+            self._plotter.show()
 
     def __draw_parts(self, parts=[], update=False, spline=False):
         """ """
@@ -541,7 +566,7 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
 
     def __draw_scope_parts(self, update=False, scope: prime.ScopeDefinition = None):
         """ """
@@ -601,12 +626,12 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
 
     def __update_bt_icons(self):
         vr = self._colorByTypeBt.GetRepresentation()
         vr.SetNumberOfStates(3)
-        r = _vtk.vtkPNGReader()
+        r = vtk.vtkPNGReader()
         color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
         r.SetFileName(color_by_zone_icon_file)
         r.Update()
@@ -616,7 +641,7 @@ class Graphics(object):
         hide_unhide_icon_file = os.path.join(
             os.path.dirname(__file__), 'images', 'invert_visibility.png'
         )
-        hide_r = _vtk.vtkPNGReader()
+        hide_r = vtk.vtkPNGReader()
         hide_r.SetFileName(hide_unhide_icon_file)
         hide_r.Update()
         image_2 = hide_r.GetOutput()
@@ -624,7 +649,7 @@ class Graphics(object):
         hide_vr.SetButtonTexture(1, image_2)
         show_edge_vr = self._showEdgeBt.GetRepresentation()
         show_edges_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_edges.png')
-        show_edge_r = _vtk.vtkPNGReader()
+        show_edge_r = vtk.vtkPNGReader()
         show_edge_r.SetFileName(show_edges_icon_file)
         show_edge_r.Update()
         image_3 = show_edge_r.GetOutput()
@@ -634,7 +659,7 @@ class Graphics(object):
         print_info_icon_file = os.path.join(
             os.path.dirname(__file__), 'images', 'selectioninfo.png'
         )
-        print_info_r = _vtk.vtkPNGReader()
+        print_info_r = vtk.vtkPNGReader()
         print_info_r.SetFileName(print_info_icon_file)
         print_info_r.Update()
         image_4 = print_info_r.GetOutput()
@@ -642,7 +667,7 @@ class Graphics(object):
         print_info_vr.SetButtonTexture(1, image_4)
         show_ruler_vr = self._showRulerBt.GetRepresentation()
         show_ruler_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_ruler.png')
-        show_ruler_r = _vtk.vtkPNGReader()
+        show_ruler_r = vtk.vtkPNGReader()
         show_ruler_r.SetFileName(show_ruler_icon_file)
         show_ruler_r.Update()
         image_5 = show_ruler_r.GetOutput()
