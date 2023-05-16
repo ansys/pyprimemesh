@@ -46,7 +46,7 @@ html_theme_options = {
         "version_match": get_version_match(__version__),
     },
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
-    "github_url": "https://github.com/pyansys/pyprimemesh",
+    "github_url": "https://github.com/ansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "collapse_navigation": True,
@@ -57,7 +57,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/pyansys/pyprimemesh/discussions",
+            "url": "https://github.com/ansys/pyprimemesh/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],

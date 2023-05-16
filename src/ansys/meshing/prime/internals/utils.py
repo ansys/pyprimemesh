@@ -104,7 +104,7 @@ def launch_prime_github_container(
     version: Optional[str] = None,
 ):
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
-    image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/pyansys/prime')
+    image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
     if license_file is None:
         raise ValueError('Licensing information to launch container not found')
     if version is None:

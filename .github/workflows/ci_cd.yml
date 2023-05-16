@@ -14,7 +14,7 @@ on:
       - release/*
 
 env:
-  DOCKER_IMAGE_NAME: ghcr.io/pyansys/prime
+  DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
   DOCKER_IMAGE_TAG: '23.2.0.dev6'
   MAIN_PYTHON_VERSION: '3.9'
   PACKAGE_NAME: 'ansys-meshing-prime'
@@ -34,14 +34,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch name
-        uses: pyansys/actions/branch-name-style@main
+        uses: ansys/actions/branch-name-style@main
 
   style:
     name: Code style
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
-        uses: pyansys/actions/code-style@v3
+        uses: ansys/actions/code-style@v3
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: pyansys/actions/doc-style@v3
+        uses: ansys/actions/doc-style@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,7 +66,7 @@ jobs:
 
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: pyansys/actions/build-wheelhouse@v3
+        uses: ansys/actions/build-wheelhouse@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
@@ -85,7 +85,7 @@ jobs:
 
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: pyansys/actions/build-wheelhouse@v3
+        uses: ansys/actions/build-wheelhouse@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
@@ -102,7 +102,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: pyansys-bot
+          username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service
@@ -112,7 +112,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v2
 
       - name: "Run Ansys documentation building action"
-        uses: pyansys/actions/doc-build@v3
+        uses: ansys/actions/doc-build@v3
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
@@ -132,14 +132,14 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: pyansys-bot
+          username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Ansys Prime Server
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
 
       - name: "Run pytest"
-        uses: pyansys/actions/tests-pytest@v3
+        uses: ansys/actions/tests-pytest@v3
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
@@ -157,7 +157,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
-        uses: pyansys/actions/build-library@v3
+        uses: ansys/actions/build-library@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -169,14 +169,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Release to the public PyPI repository
-        uses: pyansys/actions/release-pypi-public@v3
+        uses: ansys/actions/release-pypi-public@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: Release to GitHub
-        uses: pyansys/actions/release-github@v3
+        uses: ansys/actions/release-github@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -187,7 +187,7 @@ jobs:
     needs: [package]
     steps:
       - name: Deploy the latest documentation
-        uses: pyansys/actions/doc-deploy-dev@v3
+        uses: ansys/actions/doc-deploy-dev@v3
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -199,7 +199,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: pyansys/actions/doc-deploy-stable@v3
+        uses: ansys/actions/doc-deploy-stable@v3
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
