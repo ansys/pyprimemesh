@@ -17,7 +17,7 @@ class RemoteClientManager:
         self.client = None
 
     def start_ansys_prime_server(self, prime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
-        """Initialization of the Ansys Prime server.
+        """Initialization of Ansys Prime Server.
 
         Parameters
         ----------
@@ -62,7 +62,7 @@ def get_remote_client():
     Yields
     ------
     Client
-        Initialized remote client of Ansys prime
+        Initialized remote client of Ansys Prime Server.
     """
     client_manager = RemoteClientManager()
     client_manager.start_remote_client()
