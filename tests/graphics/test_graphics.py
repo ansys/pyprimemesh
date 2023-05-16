@@ -1,4 +1,6 @@
 """Module for testing plotter related functions."""
+from pathlib import Path
+
 import pyvista as pv
 
 import ansys.meshing.prime as prime
@@ -6,7 +8,7 @@ from ansys.meshing.prime.graphics import Graphics
 from ansys.meshing.prime.graphics.graphics import Picker, compute_distance
 
 pv.OFF_SCREEN = True
-IMAGE_RESULTS_DIR = "../../image_cache_dir/results/"
+IMAGE_RESULTS_DIR = Path(Path(__file__).parent, "image_cache", "results")
 
 
 def test_plotter(get_remote_client, get_examples, verify_image_cache):
