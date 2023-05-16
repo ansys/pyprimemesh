@@ -7,15 +7,14 @@ name = "ansys-meshing-prime"
 version = "0.4.0.dev7"
 description = "PyPrimeMesh is a Python client to Ansys Prime Server, which delivers core Ansys meshing technology."
 readme = "README.md"
-requires-python = ">=3.7,<4"
+requires-python = ">=3.8,<4"
 license = {file = "LICENSE"}
 authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
-maintainers = [{name = "PyAnsys developers", email = "pyansys.core@ansys.com"}]
+maintainers =  [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 classifiers = [
     "Development Status :: 4 - Beta",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -65,7 +64,7 @@ name = "ansys.meshing.prime"
 
 [tool.black]
 line-length = 100
-target-version = ['py37', 'py38', 'py39', 'py310']
+target-version = ['py38', 'py39', 'py310', 'py311']
 skip-string-normalization = true
 exclude = '''
 /(

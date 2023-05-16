@@ -26,8 +26,9 @@ For assistance, reach out to the support team at
 
 ## Installation
 
-The ``ansys-meshing-prime`` package supports Python 3.7 to Python 3.11 on
-the Windows and Linux operating systems.
+The `ansys-meshing-prime` package supports Python 3.8 to Python 3.11 on the Windows and Linux
+operating systems.
+
 
 PyPrimeMesh can be installed with all dependencies directly from PyPi by running
 this command:
