@@ -17,14 +17,14 @@ Clone the repository
 You can clone the PyPrimeMesh repository from GitHub and install the latest version in
 development mode with this code:
 
->>> git clone https://github.com/pyansys/pyprimemesh
+>>> git clone https://github.com/ansys/pyprimemesh
 >>> cd pyprimemesh
 >>> pip install -e .[graphics]
 
 -----------
 Post issues
 -----------
-Use the `PyPrimeMesh Issues <https://github.com/pyansys/pyprimemesh/issues>`_
+Use the `PyPrimeMesh Issues <https://github.com/ansys/pyprimemesh/issues>`_
 page to submit questions, report bugs, and request new features.
 
 To reach the support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
@@ -51,11 +51,11 @@ You should not modify files marked as auto-generated.
 Contributions from pull requests can be included elsewhere. Specific areas that should be considered
 for contributions are:
 
-- `PyPrimeMesh examples <https://github.com/pyansys/pyprimemesh/tree/main/examples>`_
+- `PyPrimeMesh examples <https://github.com/ansys/pyprimemesh/tree/main/examples>`_
 
-- `Graphics Functionality <https://github.com/pyansys/pyprimemesh/tree/main/src/ansys/meshing/prime/graphics>`_
+- `Graphics Functionality <https://github.com/ansys/pyprimemesh/tree/main/src/ansys/meshing/prime/graphics>`_
 
-- `High-level APIs <https://github.com/pyansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_
+- `High-level APIs <https://github.com/ansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_
 
 
 If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
