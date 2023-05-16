@@ -55,7 +55,7 @@ all = [
 ]
 
 [project.urls]
-Source = "https://github.com/pyansys/pyprimemesh"
+Source = "https://github.com/ansys/pyprimemesh"
 Documentation = "https://prime.docs.pyansys.com"
 
 

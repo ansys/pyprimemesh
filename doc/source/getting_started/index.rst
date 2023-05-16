@@ -43,7 +43,7 @@ Alternatively, you can clone this repository and install the client using these 
 
 .. code-block::
 
-   git clone https://github.com/pyansys/pyprimemesh
+   git clone https://github.com/ansys/pyprimemesh
    cd pyprimemesh
    pip install -e .[all]
 
