@@ -15,7 +15,7 @@ on:
       - release/*
 
 env:
-  DOCKER_PACKAGE: ghcr.io/pyansys/prime:latest
+  DOCKER_PACKAGE: ghcr.io/ansys/prime:23.1.0
   MAIN_PYTHON_VERSION: '3.9'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
 
@@ -286,7 +286,7 @@ jobs:
         env:
           TWINE_USERNAME: PAT
           TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
-          TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/upload
+          TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/ansys/_packaging/ansys/pypi/upload
 
       - name: Upload to Public PyPi
         run: |

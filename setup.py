@@ -7,7 +7,7 @@ DOCLINES = (__doc__ or '').split("\n")
 import os
 from io import open as io_open
 
-from setuptools import setup, find_namespace_packages
+from setuptools import find_namespace_packages, setup
 
 # Use single source package versioning.  Follows:
 # https://packaging.python.org/guides/single-sourcing-package-version/
@@ -38,7 +38,7 @@ setup(
     description=DOCLINES[0],
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/pyansys/pyprimemesh/',
+    url='https://github.com/ansys/pyprimemesh/',
     license='MIT',
     author='ANSYS, Inc.',  # this is required
     author_email="pyansys.support@ansys.com",
