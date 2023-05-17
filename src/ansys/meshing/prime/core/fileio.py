@@ -10,11 +10,8 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
-    ExportLSDynaIgaKeywordFileParams,
-    ExportLSDynaKeywordFileParams,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
-    ExportSTLParams,
     FileReadParams,
     FileReadResults,
     FileWriteParams,
@@ -25,7 +22,6 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportFluentCaseResults,
     ImportFluentMeshingMeshParams,
     ImportFluentMeshingMeshResults,
-    ImportLSDynaKeywordFileParams,
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
@@ -50,7 +46,7 @@ class FileIO(_FileIO):
     def __init__(self, model: Model):
         """Initialize model and parent class."""
         self._model = model
-        super().__init__(model)
+        _FileIO.__init__(self, model)
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
         """Read PyPrimeMesh data file.
@@ -85,7 +81,7 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().read_pmdat(temp_file_name, file_read_params)
+            result = _FileIO.read_pmdat(self, temp_file_name, file_read_params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
@@ -204,6 +200,165 @@ class FileIO(_FileIO):
             result = super().write_size_field(temp_file_name, params)
         return result
 
+    def import_cad(self, file_name: str, params: ImportCadParams) -> ImportCadResults:
+        r"""Open CAD file.
+
+        Import CAD file from disk.
+
+        Supported formats on Windows are:
+
+        \*.scdoc \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
+        \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml \*.prt\* \*.asm\*
+        \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm \*.asm \*.sldprt
+        \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
+
+        Supported formats on Linux are:
+
+        \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
+        \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
+        \*.stl \*.plmxml \*.tgf
+
+        Refer documentation for detailed list of supported formats.
+
+        Parameters
+        ----------
+        file_name : str
+             Path to file on disk.
+
+        params : ImportCadParams
+             Parameters to control CAD import options
+
+        Returns
+        -------
+        ImportCadResults
+             Return ImportCadResults.
+
+        Examples
+        --------
+        >>> import ansys.meshing.prime as prime
+        >>> #connect client to server and get model from it
+        >>> client = prime.Client(ip="localhost", port=50060)
+        >>> model = client.model
+        >>> file_io = prime.FileIO(model=model)
+        >>> params = ImportCadParams(model=model)
+        >>> results = file_io.import_cad(
+                        "/tmp/my_cad.x_t", params=params)
+
+        """
+        with utils.file_read_context(self._model, file_name) as temp_file_name:
+            import_result = _FileIO.import_cad(self, temp_file_name, params)
+            if import_result.error_code == ErrorCode.NOERROR:
+                self._model._sync_up_model()
+        return import_result
+
+    def import_fluent_meshing_meshes(
+        self,
+        file_names: List[str],
+        import_fluent_meshing_mesh_params: ImportFluentMeshingMeshParams,
+    ) -> ImportFluentMeshingMeshResults:
+        """Import Fluent Meshing meshes of given files on disk.
+
+        Fluent Meshing mesh files have msh and msh.gz extension.
+
+        Parameters
+        ----------
+        file_names : List[str]
+            Full path of files to be imported.
+        import_fluent_meshing_mesh_params : ImportFluentMeshingMeshParams
+            Parameters to import Fluent Meshing mesh.
+
+        Returns
+        -------
+        ImportFluentMeshingMeshResults
+            Return the FileReadResults.
+
+
+        Notes
+        -----
+        This API does not support Unicode paths now.
+
+        Examples
+        --------
+        >>> file_io = prime.FileIO(model=model)
+        >>> params = prime.ImportFluentMeshingMeshParams(model=model)
+        >>> results = file_io.import_fluent_meshing_meshes(
+                        ["/tmp/mesh.msh", "/tmp/mesh1.msh"],
+                        params)
+
+        """
+        with utils.file_read_context_list(self._model, file_names) as temp_file_names:
+            result = _FileIO.import_fluent_meshing_meshes(
+                self, temp_file_names, import_fluent_meshing_mesh_params
+            )
+        if result.error_code == ErrorCode.NOERROR:
+            self._model._sync_up_model()
+        return result
+
+    def import_fluent_case(
+        self, file_name: str, import_fluent_case_params: ImportFluentCaseParams
+    ) -> ImportFluentCaseResults:
+        """Import Fluent case file on disk.
+
+        Fluent case files have cas extension.
+
+        Parameters
+        ----------
+        file_name : str
+            Path to file on disk.
+        import_fluent_case_params : ImportFluentCaseParams
+            Parameters to import fluent case file.
+
+        Returns
+        -------
+        ImportFluentCaseResults
+            Return the ImportFluentCaseResults.
+
+
+        Notes
+        -----
+        This API does not support Unicode paths now.
+
+        Examples
+        --------
+        >>> file_io = prime.FileIO(model=model)
+        >>> params = prime.ImportFluentCaseParams(model=model)
+        >>> results = file_io.import_fluent_case("/tmp/fluent.cas", params)
+
+        """
+        with utils.file_read_context(self._model, file_name) as temp_file_name:
+            result = _FileIO.import_fluent_case(self, temp_file_name, import_fluent_case_params)
+            if result.error_code == ErrorCode.NOERROR:
+                self._model._sync_up_model()
+        return result
+
+    def export_fluent_case(
+        self, file_name: str, export_fluent_case_params: ExportFluentCaseParams
+    ) -> FileWriteResults:
+        """Export Fluent case file. Fluent case files have cas extension.
+
+        Parameters
+        ----------
+        file_name : str
+            Path to file on disk.
+        export_fluent_case_params : ExportFluentCaseParams
+            Parameters to export fluent case file.
+
+        Returns
+        -------
+        FileWriteResults
+            Return the FileWriteResults structure.
+
+        Examples
+        --------
+        >>> file_io = FileIO(model=model)
+        >>> results = file_io.export_fluent_case(
+                        "/tmp/fluent.cas",
+                        prime.ExportFluentCaseParams(model=model))
+        """
+        with utils.file_write_context(self._model, file_name) as temp_file_name:
+            result = super().export_fluent_case(temp_file_name, export_fluent_case_params)
+        return result
+
     def import_mapdl_cdb(
         self, file_name: str, params: ImportMapdlCdbParams
     ) -> ImportMapdlCdbResults:
@@ -228,7 +383,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> # connect client to server and get model from it
+        >>> #connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
@@ -236,7 +391,7 @@ class FileIO(_FileIO):
         >>> results = file_io.import_mapdl_cdb("/tmp/file.cdb", params)
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_mapdl_cdb(temp_file_name, params)
+            result = _FileIO.import_mapdl_cdb(self, temp_file_name, params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
@@ -276,86 +431,6 @@ class FileIO(_FileIO):
             result = super().export_mapdl_cdb(temp_file_name, params)
         return result
 
-    def import_fluent_meshing_meshes(
-        self,
-        file_names: List[str],
-        import_fluent_meshing_mesh_params: ImportFluentMeshingMeshParams,
-    ) -> ImportFluentMeshingMeshResults:
-        """Import Fluent Meshing meshes of given files on disk.
-
-        Fluent Meshing mesh files have msh and msh.gz extension.
-
-        Parameters
-        ----------
-        file_names : List[str]
-            Full path of files to be imported.
-        import_fluent_meshing_mesh_params : ImportFluentMeshingMeshParams
-            Parameters to import Fluent Meshing mesh.
-
-        Returns
-        -------
-        ImportFluentMeshingMeshResults
-            Return the FileReadResults.
-
-
-        Notes
-        -----
-        This API does not support Unicode paths now.
-
-        Examples
-        --------
-        >>> file_io = prime.FileIO(model=model)
-        >>> params = prime.ImportFluentMeshingMeshParams(model=model)
-        >>> results = file_io.import_fluent_meshing_meshes(
-                        ["/tmp/mesh.msh", "/tmp/mesh1.msh"],
-                        params)
-
-        """
-        with utils.file_read_context_list(self._model, file_names) as temp_file_names:
-            result = super().import_fluent_meshing_meshes(
-                temp_file_names, import_fluent_meshing_mesh_params
-            )
-        if result.error_code == ErrorCode.NOERROR:
-            self._model._sync_up_model()
-        return result
-
-    def import_fluent_case(
-        self, file_name: str, import_fluent_case_params: ImportFluentCaseParams
-    ) -> ImportFluentCaseResults:
-        """Import Fluent case file on disk.
-
-        Fluent case files have cas extension.
-
-        Parameters
-        ----------
-        file_name : str
-            Path to file on disk.
-        import_fluent_case_params : ImportFluentCaseParams
-            Parameters to import fluent case file.
-
-        Returns
-        -------
-        ImportFluentCaseResults
-            Return the ImportFluentCaseResults.
-
-
-        Notes
-        -----
-        This API does not support Unicode paths now.
-
-        Examples
-        --------
-        >>> file_io = prime.FileIO(model=model)
-        >>> params = prime.ImportFluentCaseParams(model=model)
-        >>> results = file_io.import_fluent_case("/tmp/fluent.cas", params)
-
-        """
-        with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_fluent_case(temp_file_name, import_fluent_case_params)
-            if result.error_code == ErrorCode.NOERROR:
-                self._model._sync_up_model()
-        return result
-
     def export_fluent_case(
         self, file_name: str, export_fluent_case_params: ExportFluentCaseParams
     ) -> FileWriteResults:
@@ -376,9 +451,8 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> file_io = FileIO(model=model)
-        >>> results = file_io.export_fluent_case(
-                        "/tmp/fluent.cas",
-                        prime.ExportFluentCaseParams(model=model))
+        >>> results = file_io.export_fluent_case("/tmp/fluent.cas",
+                                                 prime.ExportFluentCaseParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
             result = super().export_fluent_case(temp_file_name, export_fluent_case_params)
@@ -411,94 +485,6 @@ class FileIO(_FileIO):
             result = super().export_fluent_meshing_mesh(temp_file_name, export_fluent_mesh_params)
         return result
 
-    def import_lsdyna_keyword_file(
-        self, file_name: str, import_params: ImportLSDynaKeywordFileParams
-    ) -> FileReadResults:
-        """Import LS-DYNA Keyword file.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Name of the file.
-        import_params : ImportLSDynaKeywordFileParams
-            Parameters for LS-DYNA Keyword file import.
-
-        Returns
-        -------
-        FileReadResults
-            Returns FileReadResults.
-
-        Examples
-        --------
-        >>> results = file_io.import_lsdyna_keyword_file(
-                        file_name,
-                        ImportLSDynaKeywordFileParams(model = model))
-
-        """
-        with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_lsdyna_keyword_file(temp_file_name, import_params)
-            self._model._sync_up_model()
-        return result
-
-    def export_lsdyna_keyword_file(
-        self, file_name: str, export_params: ExportLSDynaKeywordFileParams
-    ) -> FileWriteResults:
-        """Export FEA LS-DYNA Keyword file for solid, or surface mesh, or both.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Name of the file.
-        export_params : ExportLSDynaKeywordFileParams
-            Parameters for FEA LS-DYNA Keyword file export.
-
-        Returns
-        -------
-        FileWriteResults
-            Returns FileWriteResults.
-
-        Examples
-        --------
-        >>> results = file_io.export_lsdyna_keyword_file(
-                        file_name,
-                        ExportLSDynaKeywordFileParams(model = model))
-
-        """
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_lsdyna_keyword_file(temp_file_name, export_params)
-        return result
-
-    def export_lsdyna_iga_keyword_file(
-        self, file_name: str, export_params: ExportLSDynaIgaKeywordFileParams
-    ) -> FileWriteResults:
-        """Export IGA LS-DYNA Keyword file for solid, or surface splines, or both.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Name of the file.
-        export_params : ExportLSDynaIgaKeywordFileParams
-            Parameters for IGA LS-DYNA Keyword file export.
-
-        Returns
-        -------
-        FileWriteResults
-            Returns FileWriteResults.
-
-        Examples
-        --------
-        >>> results = file_io.export_lsdyna_iga_keyword_file(
-                        file_name,
-                        ExportLSDynaIgaKeywordFileParams(model = model))
-
-        """
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_lsdyna_iga_keyword_file(temp_file_name, export_params)
-        return result
-
     def export_boundary_fitted_spline_kfile(
         self, file_name: str, export_params: ExportBoundaryFittedSplineParams
     ) -> FileWriteResults:
@@ -524,91 +510,4 @@ class FileIO(_FileIO):
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
             result = super().export_boundary_fitted_spline_kfile(temp_file_name, export_params)
-        return result
-
-    def import_cad(self, file_name: str, params: ImportCadParams) -> ImportCadResults:
-        r"""Open CAD file.
-
-        Import CAD file from disk.
-
-        Supported formats on Windows are:
-
-        \*.scdoc \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
-        \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml \*.prt\* \*.asm\*
-        \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm \*.asm \*.sldprt
-        \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
-
-        Supported formats on Linux are:
-
-        \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
-        \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
-        \*.stl \*.plmxml \*.tgf
-
-        Refer documentation for detailed list of supported formats.
-
-        Parameters
-        ----------
-        file_name : str
-             Path to file on disk.
-
-        params : ImportCadParams
-             Parameters to control CAD import options
-
-        Returns
-        -------
-        ImportCadResults
-             Return ImportCadResults.
-
-        Examples
-        --------
-        >>> import ansys.meshing.prime as prime
-        >>> # connect client to server and get model from it
-        >>> client = prime.Client(ip="localhost", port=50060)
-        >>> model = client.model
-        >>> file_io = prime.FileIO(model=model)
-        >>> params = ImportCadParams(model=model)
-        >>> results = file_io.import_cad(
-                        "/tmp/my_cad.x_t", params=params)
-
-        """
-        with utils.file_read_context(self._model, file_name) as temp_file_name:
-            import_result = super().import_cad(temp_file_name, params)
-            if import_result.error_code == ErrorCode.NOERROR:
-                self._model._sync_up_model()
-        return import_result
-
-    def export_stl(self, file_name: str, params: ExportSTLParams) -> FileWriteResults:
-        """Export STL file.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Path to file on disk.
-        params : ExportSTLParams
-            Parameters for writing the file.
-
-        Returns
-        -------
-        FileWriteResults
-            Returns the FileWriteResults.
-
-
-        Notes
-        -----
-        This API does not support Unicode paths now.
-
-        Examples
-        --------
-        >>> import ansys.meshing.prime as prime
-        >>> model = prime.local_model()
-        >>> fileio = prime.FileIO(model=model)
-        >>> out_file_path = r"/tmp/output.stl"
-        >>> part_ids = [part.id for part in model.parts]
-        >>> export_stl_params=prime.ExportSTLParams(model=model,part_ids=part_ids)
-        >>> results = fileio.export_stl(out_file_path,export_stl_params)
-
-        """
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_stl(temp_file_name, params)
         return result
