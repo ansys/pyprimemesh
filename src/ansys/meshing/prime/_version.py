@@ -11,12 +11,12 @@ Print the version
 
 >>> from ansys.meshing import prime
 >>> print(prime.__version__)
-0.2.0
+0.2.1
 
 """
 
 # major, minor, patch
-version_info = 0, 2, 0
+version_info = 0, 2, 1
 
 # Nice string for the version
 __version__ = '.'.join(map(str, version_info))
