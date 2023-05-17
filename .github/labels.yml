@@ -49,7 +49,3 @@
 - name: aps
   description: aps.
   color: db8af7
-
-- name: ado
-  description: ado.
-  color: d0cef7
