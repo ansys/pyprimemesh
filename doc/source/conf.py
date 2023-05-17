@@ -24,7 +24,7 @@ html_favicon = ansys_favicon
 
 # specify the location of your github repo
 html_context = {
-    "github_user": "pyansys",
+    "github_user": "ansys",
     "github_repo": "pyprimemesh",
     "github_version": "main",
     "doc_path": "doc/source",
