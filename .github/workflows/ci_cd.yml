@@ -167,7 +167,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: pyansys-bot
+          username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service
@@ -203,7 +203,7 @@ jobs:
     needs: [docs]
     steps:
       - name: Deploy the stable documentation
-        uses: pyansys/actions/doc-deploy-stable@v3
+        uses: ansys/actions/doc-deploy-stable@v4
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -243,7 +243,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: pyansys-bot
+          username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Ansys Prime Server
