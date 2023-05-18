@@ -42,28 +42,22 @@ def check_name_pattern(name_patterns: str, name: str) -> bool:
         True if all found.
     """
     patterns = []
-    include_pattern = []
-    exclude_pattern = []
     a = name_patterns.split(",")
     for aa in a:
-        if len(aa) > 0:
-            b = aa.split(" ")
-            for bb in b:
-                if len(bb) > 0:
-                    patterns.append(bb)
+        patterns.append(aa)
+
     for pattern in patterns:
-        pattern = pattern.strip()
-        if pattern.startswith("!"):
-            exclude_pattern.append(pattern[1:])
-        else:
-            include_pattern.append(pattern)
-
-    for pattern in exclude_pattern:
-        if match_pattern(pattern, name):
-            return False
-
-    for pattern in include_pattern:
-        if match_pattern(pattern, name):
-            return True
+        bb = pattern.split("!")
+        if match_pattern(bb[0].strip(), name):
+            if len(bb) > 1:
+                nv = False
+                for nvbb in bb[1:]:
+                    if match_pattern(nvbb.strip(), name):
+                        nv = True
+                        break
+                if not nv:
+                    return True
+            else:
+                return True
 
     return False

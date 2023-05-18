@@ -47,7 +47,7 @@ The recommended data formats to be included in the example are:
 
 Supporting input files should be added in:
 
-`Github Example Data Repository <https://github.com/pyansys/example-data/tree/master/pyprimemesh>`_
+`Github Example Data Repository <https://github.com/ansys/example-data/tree/master/pyprimemesh>`_
 
 Referencing files as enum and creating download function in:
 

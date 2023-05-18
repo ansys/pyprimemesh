@@ -748,7 +748,7 @@ class Mesh:
                     volume_zones_to_mesh.append(volume_zone)
 
             volume_zones_to_avoid = [v for v in volume_zones_all if v not in volume_zones_to_mesh]
-            scope_str = ", ".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
+            scope_str = ",".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
 
             if len(scope_str) > 0:
                 volume_control_param_dead = prime.VolumeControlParams(
