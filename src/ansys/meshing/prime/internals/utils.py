@@ -108,7 +108,7 @@ def launch_prime_github_container(
     if license_file is None:
         raise ValueError('Licensing information to launch container not found')
     if version is None:
-        version = 'latest'
+        version = '23.1.0'
     docker_command = [
         'docker',
         'run',
