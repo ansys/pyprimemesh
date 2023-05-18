@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 import pytest
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.examples import download_test_examples
 
 
 class RemoteClientManager:
@@ -93,6 +94,14 @@ def get_examples():
     return examples_dict
 
 
+@pytest.fixture(scope="session", autouse=True)
+def get_testfiles():
+    """Downloads unit test files"""
+    if not os.path.exists("./tests/core/test_files/"):
+        os.mkdir(os.path.abspath("./tests/core/test_files/"))
+    download_test_examples(destination=str(os.path.abspath("./tests/core/test_files/")))
+
+
 def create_scenario_element(test, id):
     testName, className = str(test).split()
     _, className = className.strip('()').split('.')
@@ -152,3 +161,8 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
         with open(xmlFileName, 'a') as scenario_log:
             scenario_log.write(xmlstr)
+
+
+def pytest_sessionfinish(session, exitstatus):
+    """Cleanup generated folder."""
+    os.rmdir(os.path.abspath("./tests/core/test_files/"))

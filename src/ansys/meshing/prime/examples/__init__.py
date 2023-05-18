@@ -1,4 +1,4 @@
-from .examples import *
+from .download_utilities import DownloadManager
 from .examples import (
     download_bracket_dsco,
     download_bracket_fmd,
@@ -21,3 +21,4 @@ from .examples import (
     download_toy_car_scdoc,
     download_turbine_blade_cdb,
 )
+from .unit_test_examples import download_test_examples
