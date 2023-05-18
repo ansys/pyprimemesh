@@ -279,7 +279,7 @@ prime_error_messages = {
     ErrorCode.EXPORTSTLFAILEDWITHEMPTYPARTIDLIST: "Export STL failed. List of part ids is empty.",
     ErrorCode.EXPORTSTLFAILEDWITHINCORRECTPARTID: "Export STL failed. Part id is incorrect.",
     ErrorCode.SOURCEFACINGCELLZONELETS: "Source face zonelets facing existing volume mesh.",
-    ErrorCode.TARGETWITHCELLZONELETS: "Target face zonelets with volume mesh on both side.",
+    ErrorCode.TARGETWITHCELLZONELETS: "Target face zonelets with volume mesh on both sides.",
     ErrorCode.SIDEZONELETSNOTFIT: "Side face zonelets are not sweepable for thin volume mesh.",
     ErrorCode.SOURCETARGETZONELETSNOTFIT: "Source and target zonelets do not fit to thin volume mesh.",
 }
