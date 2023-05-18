@@ -237,7 +237,7 @@ jobs:
 
       - name: Install Library
         run: |
-          pip install ansys-meshing-prime --find-links dist
+          pip install .
           
       - name: Login in Github Container registry
         uses: docker/login-action@v2
