@@ -1,7 +1,8 @@
 import os
 import urllib.request
-from urllib.parse import urljoin
 from typing import Optional
+from urllib.parse import urljoin
+
 import ansys.meshing.prime.internals.defaults as defaults
 
 __all__ = ['download_file']
@@ -16,7 +17,7 @@ def _joinurl(base, *paths):
 
 
 def _get_default_server_and_joiner():
-    return 'https://github.com/pyansys/example-data/raw/master', _joinurl
+    return 'https://github.com/ansys/example-data/raw/master', _joinurl
 
 
 def _get_filepath_on_default_server(filename: str, *directory: str):
