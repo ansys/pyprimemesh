@@ -8,15 +8,6 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
 
-
-def get_version_match(semver: str) -> str:
-    """Ad-hoc method from ansys-sphinx-theme"""
-    if "dev" in semver:
-        return "dev"
-    major, minor, _ = semver.split(".")
-    return ".".join([major, minor])
-
-
 # Project information
 project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
