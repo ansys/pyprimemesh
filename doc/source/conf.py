@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 import pyvista
-from ansys_sphinx_theme import ansys_favicon, pyansys_logo_black
+from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
