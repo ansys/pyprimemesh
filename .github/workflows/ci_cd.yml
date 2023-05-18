@@ -157,7 +157,7 @@ jobs:
             
       - name: Install Library
         run: |
-          pip install ansys-meshing-prime --find-links dist
+          pip install .
 
       - name: Install documentation requirements
         run: |
