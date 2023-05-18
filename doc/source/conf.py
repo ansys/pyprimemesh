@@ -3,19 +3,10 @@ import os
 from datetime import datetime
 
 import pyvista
-from ansys_sphinx_theme import ansys_favicon, pyansys_logo_black
+from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
-
-
-def get_version_match(semver: str) -> str:
-    """Ad-hoc method from ansys-sphinx-theme"""
-    if "dev" in semver:
-        return "dev"
-    major, minor, _ = semver.split(".")
-    return ".".join([major, minor])
-
 
 # Project information
 project = 'ansys-meshing-prime'
@@ -42,9 +33,10 @@ html_context = {
 # specify the location of your github repo
 html_theme_options = {
     "switcher": {
-        "json_url": f"https://{cname}/release/versions.json",
+        "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
     },
+    "check_switcher": False,
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/ansys/pyprimemesh",
     "show_prev_next": False,
