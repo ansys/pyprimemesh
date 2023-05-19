@@ -108,7 +108,7 @@ def launch_prime_github_container(
     if license_file is None:
         raise ValueError('Licensing information to launch container not found')
     if version is None:
-        version = '23.1.0'
+        version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', '23.1.0')
     docker_command = [
         'docker',
         'run',
