@@ -273,15 +273,15 @@ jobs:
       - name: List directory structure
         run: ls -R
 
-      - name: Upload to Private PyPi
-        run: |
-          pip install twine
-          python -m twine upload --skip-existing ./**/*.whl
-          python -m twine upload --skip-existing ./**/*.tar.gz
-        env:
-          TWINE_USERNAME: PAT
-          TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
-          TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/ansys/_packaging/ansys/pypi/upload
+      # - name: Upload to Private PyPi
+      #   run: |
+      #     pip install twine
+      #     python -m twine upload --skip-existing ./**/*.whl
+      #     python -m twine upload --skip-existing ./**/*.tar.gz
+      #   env:
+      #     TWINE_USERNAME: PAT
+      #     TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
+      #     TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/ansys/_packaging/ansys/pypi/upload
 
       - name: Upload to Public PyPi
         run: |
