@@ -24,7 +24,7 @@ html_favicon = ansys_favicon
 
 # specify the location of your github repo
 html_context = {
-    "github_user": "pyansys",
+    "github_user": "ansys",
     "github_repo": "pyprimemesh",
     "github_version": "main",
     "doc_path": "doc/source",
@@ -38,7 +38,7 @@ html_theme_options = {
     },
     "check_switcher": False,
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
-    "github_url": "https://github.com/pyansys/pyprimemesh",
+    "github_url": "https://github.com/ansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "collapse_navigation": True,
@@ -49,7 +49,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/pyansys/pyprimemesh/discussions",
+            "url": "https://github.com/ansys/pyprimemesh/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],
