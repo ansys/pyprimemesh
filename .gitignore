@@ -47,3 +47,8 @@ test-output.xml
 .tox
 .venv
 .vscode
+
+# Exclude PNGs except those from doc and src/graphics folders
+*.png
+!doc/*.png
+!src/ansys/meshing/prime/graphics/*.png
