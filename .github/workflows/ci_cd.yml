@@ -20,6 +20,7 @@ env:
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
+  RESET_IMAGE_CACHE: 0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -123,6 +124,13 @@ jobs:
       - name: Pull Ansys Prime Server
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
 
+      - name: Restore images cache
+        uses: actions/cache@v3
+        with:
+          path: tests/graphics/image_cache
+          key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
+          restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
+
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v4
         env:
@@ -130,9 +138,17 @@ jobs:
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         with:
-          pytest-markers: "-vv"
-          pytest-extra-args: "--cov=ansys.meshing.prime --cov-report=term --cov-report=html:.cov/html --cov-report=html:.cov/xml"
-          
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          requires-xvfb: true
+      
+      - name: Upload PyVista generated images (cache and results)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-pyvista-images-${{ runner.os }}
+          path: tests/graphics/image_cache
+          retention-days: 7
+      
       - uses: codecov/codecov-action@v3
         name: 'Upload coverage to CodeCov'
 
