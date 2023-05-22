@@ -43,7 +43,7 @@ class ThinVolumeControl(CoreObject):
         self._model._print_logs_after_command("set_thin_volume_mesh_params")
 
     def set_source_scope(self, entities : ScopeDefinition) -> SetScopeResults:
-        """ Sets the source of thin volume control scope.
+        """ Sets the source surface scope of thin volume control.
 
 
         Parameters
@@ -72,7 +72,7 @@ class ThinVolumeControl(CoreObject):
         return SetScopeResults(model = self._model, json_data = result)
 
     def set_target_scope(self, entities : ScopeDefinition) -> SetScopeResults:
-        """ Sets the target of thin volume control scope.
+        """ Sets the target surface scope of thin volume control.
 
 
         Parameters

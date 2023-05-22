@@ -30,14 +30,12 @@ class MorphSolveParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self,
-            abs_purge_tol: float):
-        self._abs_purge_tol = abs_purge_tol
+            self):
+        pass
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            abs_purge_tol: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the MorphSolveParams.
@@ -46,8 +44,6 @@ class MorphSolveParams(CoreObject):
         ----------
         model: Model
             Model to create a MorphSolveParams object with default parameters.
-        abs_purge_tol: float, optional
-            Absolute purge tolerance.
         json_data: dict, optional
             JSON dictionary to create a MorphSolveParams object with provided parameters.
 
@@ -56,21 +52,18 @@ class MorphSolveParams(CoreObject):
         >>> morph_solve_params = prime.MorphSolveParams(model = model)
         """
         if json_data:
-            self.__initialize(
-                json_data["absPurgeTol"] if "absPurgeTol" in json_data else None)
+            self.__initialize()
         else:
-            all_field_specified = all(arg is not None for arg in [abs_purge_tol])
+            all_field_specified = all(arg is not None for arg in [])
             if all_field_specified:
-                self.__initialize(
-                    abs_purge_tol)
+                self.__initialize()
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     param_json = model._communicator.initialize_params(model, "MorphSolveParams")
                     json_data = param_json["MorphSolveParams"] if "MorphSolveParams" in param_json else {}
-                    self.__initialize(
-                        abs_purge_tol if abs_purge_tol is not None else ( MorphSolveParams._default_params["abs_purge_tol"] if "abs_purge_tol" in MorphSolveParams._default_params else (json_data["absPurgeTol"] if "absPurgeTol" in json_data else None)))
+                    self.__initialize()
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -79,14 +72,9 @@ class MorphSolveParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default(
-            abs_purge_tol: float = None):
+    def set_default():
         """Set the default values of MorphSolveParams.
 
-        Parameters
-        ----------
-        abs_purge_tol: float, optional
-            Absolute purge tolerance.
         """
         args = locals()
         [MorphSolveParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -105,25 +93,13 @@ class MorphSolveParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        if self._abs_purge_tol is not None:
-            json_data["absPurgeTol"] = self._abs_purge_tol
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "abs_purge_tol :  %s" % (self._abs_purge_tol)
+        message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
-
-    @property
-    def abs_purge_tol(self) -> float:
-        """Absolute purge tolerance.
-        """
-        return self._abs_purge_tol
-
-    @abs_purge_tol.setter
-    def abs_purge_tol(self, value: float):
-        self._abs_purge_tol = value
 
 class MatchMorphParams(CoreObject):
     """MatchMorphParams describes the parameters required for match morphing.
