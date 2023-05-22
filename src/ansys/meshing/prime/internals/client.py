@@ -121,7 +121,8 @@ class Client(object):
 
         clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
         if clear_examples:
-            examples.clear_download_cache()
+            download_manager = examples.DownloadManager()
+            download_manager.clear_download_cache()
 
     def __enter__(self):
         return self
