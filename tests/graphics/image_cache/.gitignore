@@ -1,0 +1,2 @@
+# avoid uploading PNGs from the cache
+*.png
