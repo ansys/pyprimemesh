@@ -18,7 +18,7 @@ def test_read(mesh):
     mesh.read(os.path.abspath("./tests/core/test_files/hex.cas"))
 
     # causes docker error
-    # mesh.read(os.path.abspath("./tests/core/test_files/file.pmdat"))
+    mesh.read(os.path.abspath("./tests/core/test_files/file.pmdat"))
     # missing CAD file
 
 
