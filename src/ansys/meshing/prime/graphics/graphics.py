@@ -11,6 +11,7 @@ from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
 from ansys.meshing.prime.internals import defaults
 
 
+# TODO: nodes parameter is unused.
 def compute_face_list_from_structured_nodes(nodes, dim):
     flist = []
     for w in range(dim[2]):
@@ -679,7 +680,7 @@ class Graphics(object):
         return self._color_by_type
 
 
-class _DisplayMesh(object):
+class _DisplayMesh(object):  # pragma: no cover
     """ """
 
     def __init__(
