@@ -19,7 +19,8 @@ try:
     import appdirs
 
     USER_DATA_PATH = os.getenv(
-        'PYPRIMEMESH_USER_DATA', appdirs.user_data_dir(appname='pyprimemesh', appauthor=False)
+        'PYPRIMEMESH_USER_DATA',
+        appdirs.user_data_dir(appname='ansys_meshing_prime', appauthor='Ansys'),
     )
 except ModuleNotFoundError:
     # If appdirs is not installed, then try with tempfile.
@@ -27,7 +28,7 @@ except ModuleNotFoundError:
     import tempfile
 
     USER_DATA_PATH = os.getenv(
-        'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), 'pyprimemesh')
+        'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), 'ansys_meshing_prime')
     )
 
 if not os.path.exists(USER_DATA_PATH):  # pragma: no cover
