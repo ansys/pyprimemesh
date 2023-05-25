@@ -31,7 +31,7 @@ dependencies = [
 
 [project.optional-dependencies]
 graphics = [
-  "pyvista>=0.32.0",
+  "pyvista>=0.32.0, <=0.38.6",
 ]
 tests = [
   "pytest==7.2.1",
@@ -50,7 +50,7 @@ doc = [
   "sphinxemoji==0.2.0",
 ]
 all = [
-  "pyvista>=0.32.0",
+  "pyvista>=0.32.0, <=0.38.6",
 ]
 
 [project.urls]
