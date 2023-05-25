@@ -50,7 +50,7 @@ doc = [
   "sphinxemoji==0.2.0",
 ]
 all = [
-  "pyvista>=0.32.0, <0.38.6",
+  "pyvista>=0.32.0, <=0.38.6",
 ]
 
 [project.urls]
