@@ -25,14 +25,11 @@ def test_child_process():
 
 
 def test_terminate_process():
-    process = subprocess.Popen(['ls'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    pid = process.pid()
+    process = subprocess.Popen('ls -la', shell=True)
+    pid = process.pid
     # process is object
     terminate_process(process)
-
-    try:
-        os.kill(pid, 0)
-    except OSError:
+    if process.poll() is not None:
         assert True
     else:
         assert False
