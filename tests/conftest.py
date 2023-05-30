@@ -165,4 +165,6 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
 def pytest_sessionfinish(session, exitstatus):
     """Cleanup generated folder."""
-    os.rmdir(os.path.abspath("./tests/core/test_files/"))
+    test_files_path = os.path.abspath("./tests/core/test_files/")
+    if os.path.exists(test_files_path):
+        os.rmdir(test_files_path)
