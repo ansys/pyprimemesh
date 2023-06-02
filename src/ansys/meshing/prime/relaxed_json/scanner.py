@@ -1,5 +1,4 @@
-"""Implementation of Scanner for scanning bytes or bytearrays
-"""
+"""Implementation of Scanner for scanning bytes or bytearrays."""
 import re
 from typing import Callable, Tuple
 
@@ -9,6 +8,25 @@ NUMBER_RE = re.compile(
 
 
 def make_scanner(context) -> Callable[[str, int], Tuple[str, int]]:
+    """Make a scanner for bytes or bytearrays.
+
+    Parameters
+    ----------
+    context : _type_
+        Context needed to know the types.
+
+    Returns
+    -------
+    Callable[[str, int], Tuple[str, int]]
+        Function that scans byte or a bytearray.
+
+    Raises
+    ------
+    StopIteration
+        Stop the current iteration.
+    StopIteration
+        Stop the current iteration.
+    """
     parse_object = context.parse_object
     parse_array = context.parse_array
     parse_string = context.parse_string

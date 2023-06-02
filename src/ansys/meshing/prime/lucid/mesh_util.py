@@ -264,7 +264,7 @@ class Mesh:
                             )
 
     def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
-        """Merges given parts into one.
+        """Merge given parts into one.
 
         Parameters
         ----------

@@ -1,3 +1,5 @@
+"""Module for client communication implementations."""
+
 import logging
 import os
 
@@ -12,7 +14,26 @@ __all__ = ['Client']
 
 
 class Client(object):
-    '''Client class for PyPrimeMesh.'''
+    """Client class for PyPrimeMesh.
+
+    Parameters
+    ----------
+    server_process : Any, optional
+        Server process in the system, by default None.
+    ip : str, optional
+        IP where server is located, by default defaults.ip().
+    port : int, optional
+        Port where server is deployed, by default defaults.port().
+    timeout : float, optional
+        Maximum time to wait for connection, by default defaults.connection_timeout().
+    credentials : Any, optional
+        Credentials to connect to server, by default None.
+
+    Raises
+    ------
+    ValueError
+        Failed to load communicator.
+    """
 
     def __init__(
         self,
@@ -24,6 +45,7 @@ class Client(object):
         credentials=None,
         **kwargs,
     ):
+        """Initialize client."""
         self._default_model: Model = None
         local = kwargs.get('local', False)
         if local and server_process is not None:
@@ -69,27 +91,27 @@ class Client(object):
 
     @property
     def model(self):
-        '''Gets model associated with the client.'''
+        """Get model associated with the client."""
         if self._default_model is None:
             # This assumes that the Model is always object id 1....
             self._default_model = Model(self._comm, 1, 1, "Default")
         return self._default_model
 
     def run_on_server(self, recipe: str):
-        '''Run a recipe on server.
+        """Run a recipe on server.
 
         Parameters
         ----------
         recipe: str
             Recipe to run on the server. This needs to be a valid
             python script.
-        '''
+        """
         if self._comm is not None:
             result = self._comm.run_on_server(recipe)
             return result['Results']
 
     def exit(self):
-        '''Close the connection with the server.
+        """Close the connection with the server.
 
         If the client had launched the server, then this will also
         kill the server process.
@@ -103,7 +125,7 @@ class Client(object):
         >>> result = fileio.read_pmdat('example.pmdat', prime.FileReadParams(model=model))
         >>> print(result)
         >>> prime_client.exit() # Sever connection with server and kill server
-        '''
+        """
         if self._comm is not None:
             self._comm.close()
             self._comm = None
@@ -125,7 +147,9 @@ class Client(object):
             download_manager.clear_download_cache()
 
     def __enter__(self):
+        """Open client."""
         return self
 
     def __exit__(self, type, value, traceback):
+        """Close communication with server when deleting the instance."""
         self.exit()

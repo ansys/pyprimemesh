@@ -1,3 +1,4 @@
+"""Module for communications with gRPC server."""
 __all__ = ['GRPCCommunicator']
 from typing import Optional
 
@@ -8,6 +9,7 @@ import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.grpc_utils as grpc_utils
 import ansys.meshing.prime.internals.json_utils as json
+from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
@@ -44,6 +46,25 @@ def get_response(response_iterator, separator):
 
 
 class GRPCCommunicator(Communicator):
+    """Manages communication with gRPC server.
+
+    Parameters
+    ----------
+    ip : Optional[str], optional
+        IP where server is located, by default None.
+    port : Optional[int], optional
+        Port where server is deployed, by default None.
+    timeout : float, optional
+        Maximum time to wait for connection, by default 10.0.
+    credentials : Any, optional
+        Credentials to connect to server, by default None.
+
+    Raises
+    ------
+    ConnectionError
+        Couldn't connect to server.
+    """
+
     def __init__(
         self,
         ip: Optional[str] = None,
@@ -52,6 +73,7 @@ class GRPCCommunicator(Communicator):
         credentials=None,
         **kwargs,
     ):
+        """Initialize server connection."""
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
             ip_addr = f"{ip}:{port}"
@@ -71,7 +93,26 @@ class GRPCCommunicator(Communicator):
 
     @error_code_handler
     @communicator_error_handler
-    def serve(self, model, command, *args, **kwargs) -> dict:
+    def serve(self, model: Model, command: str, *args, **kwargs) -> dict:
+        """Serve model and commands to server.
+
+        Parameters
+        ----------
+        model : Model
+            Model to serve.
+        command : str
+            Command to send to the server.
+
+        Returns
+        -------
+        dict
+            Response from server.
+
+        Raises
+        ------
+        RuntimeError
+            Can't connect to server.
+        """
         if self._stub is not None:
             command = {"Command": command}
             if len(args) > 0:
@@ -114,7 +155,26 @@ class GRPCCommunicator(Communicator):
         else:
             raise RuntimeError("No connection with server")
 
-    def initialize_params(self, model, param_name: str, *args) -> dict:
+    def initialize_params(self, model: Model, param_name: str, *args) -> dict:
+        """Initialize parameters in server side.
+
+        Parameters
+        ----------
+        model : Model
+            Model in which to initialize params.
+        param_name : str
+            Parameter to initialize
+
+        Returns
+        -------
+        dict
+            Response from server.
+
+        Raises
+        ------
+        RuntimeError
+            Can't connect to server.
+        """
         if self._stub is not None:
             command = {"ParamName": param_name}
             with config.numpy_array_optimization_disabled():
@@ -134,7 +194,30 @@ class GRPCCommunicator(Communicator):
         else:
             raise RuntimeError("No connection with server")
 
-    def run_on_server(self, model, recipe: str) -> dict:
+    def run_on_server(self, model: Model, recipe: str) -> dict:
+        """Run command on server.
+
+        Run a given command in a given model on the server.
+
+        Parameters
+        ----------
+        model : core.Model
+            Model you want to modify
+        recipe : str
+            Commands you want to perform
+
+        Returns
+        -------
+        dict
+            Result from server side.
+
+        Raises
+        ------
+        RuntimeError
+            Bad response from server.
+        RuntimeError
+            Can't connect to server.
+        """
         if self._stub is not None:
             commands = recipe
             response = self._stub.RunOnServer(
@@ -157,10 +240,12 @@ class GRPCCommunicator(Communicator):
             raise RuntimeError("No connection with server")
 
     def close(self):
+        """Close opened channels."""
         self._stub = None
         if self._channel is not None:
             self._channel.close()
             self._channel = None
 
     def __del__(self):
+        """Close communication when deleting the instance."""
         self.close()

@@ -45,12 +45,36 @@ class _CustomBinaryJSONEncoder(relaxed_json.JSONEncoder):
 
 
 def loads(s: Union[str, bytes, bytearray], *args, **kwargs):
+    """Load JSON from string.
+
+    Parameters
+    ----------
+    s : Union[str, bytes, bytearray]
+        Input string.
+
+    Returns
+    -------
+    json
+        Object converted to JSON.
+    """
     if config.is_optimizing_numpy_arrays():
         return relaxed_json.loads(s, *args, **kwargs)
     return json.loads(s, *args, **kwargs)
 
 
 def dumps(obj, *args, **kwargs):
+    """Dump JSON to object.
+
+    Parameters
+    ----------
+    obj : Any
+        Input object.
+
+    Returns
+    -------
+    Object
+        Json converted to object.
+    """
     if config.is_optimizing_numpy_arrays():
         kwargs.setdefault('cls', _CustomBinaryJSONEncoder)
         return relaxed_json.dumps(obj, *args, **kwargs)

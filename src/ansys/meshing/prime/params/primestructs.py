@@ -1,3 +1,4 @@
+"""Module for imports of autogen modules."""
 # isort: off
 from ansys.meshing.prime.autogen.primeconfig import *
 from ansys.meshing.prime.autogen.commontypes import *

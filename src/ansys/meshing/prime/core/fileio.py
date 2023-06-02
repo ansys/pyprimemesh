@@ -489,7 +489,6 @@ class FileIO(_FileIO):
     def export_stl(self, file_name: str, params: ExportSTLParams) -> FileWriteResults:
         """Export STL file.
 
-
         Parameters
         ----------
         file_name : str
@@ -501,7 +500,6 @@ class FileIO(_FileIO):
         -------
         FileWriteResults
             Returns the FileWriteResults.
-
 
         Notes
         -----

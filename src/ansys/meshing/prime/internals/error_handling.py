@@ -1,3 +1,4 @@
+"""Module for error handling in PyPrime."""
 import re
 from functools import wraps
 
@@ -326,18 +327,42 @@ prime_warning_messages = {
 
 
 class PrimeRuntimeError(Exception):
-    '''Runtime error for PyPrimeMesh.'''
+    """Runtime error for PyPrimeMesh.
 
-    def __init__(self, message, error_code: ErrorCode = None, error_locations=None):
+    Parameters
+    ----------
+    message : str
+        Error message to show.
+    error_code : ErrorCode, optional
+        ID of the error, by default None.
+    error_locations : Any, optional
+        Location of the error, by default None.
+    """
+
+    def __init__(self, message: str, error_code: ErrorCode = None, error_locations=None):
+        """Initialize error message."""
         super().__init__()
         self._message = self.__process_message(message)
         self._error_code = error_code
         self._error_locations = error_locations
 
     def __str__(self) -> str:
+        """Transform message to string."""
         return self._message
 
     def __process_message(self, message: str):
+        """Process the message to be digested by the error class.
+
+        Parameters
+        ----------
+        message : str
+            Message to process.
+
+        Returns
+        -------
+        str
+            Processed message.
+        """
         output_message = message
         if "Invalid Parameter Type: " in message:
             param_names = message[len("Invalid Parameter Type: ") :].split(".")
@@ -364,13 +389,21 @@ class PrimeRuntimeError(Exception):
 
 
 class PrimeRuntimeWarning(UserWarning):
-    '''Runtime warning for PyPrimeMesh.'''
+    """Runtime warning for PyPrimeMesh.
+
+    Parameters
+    ----------
+    message : str
+        Message to show.
+    """
 
     def __init__(self, message):
+        """Initialize warning message."""
         super().__init__()
         self._message = message
 
     def __str__(self) -> str:
+        """Transform message to string."""
         return self._message
 
     @property
@@ -388,6 +421,24 @@ def communicator_error_handler(
     warning_token='warning_msg',
     error_token='err_msg',
 ):
+    """Create decorator to be used in error handling.
+
+    Parameters
+    ----------
+    _func : Func, optional
+        Function to use as decorator, by default None.
+    expected_token : str, optional
+        Token to expect in response result, by default 'Results'
+    server_error_token : str, optional
+        Token from server error, by default 'ServerError'
+    info_token : str, optional
+        Information message, by default 'info_msg'
+    warning_token : str, optional
+        Warning message, by default 'warning_msg'
+    error_token : str, optional
+        Error message, by default 'err_msg'
+    """
+
     def decorator_handle_errors(func):
         @wraps(func)
         def wrapper_handle_errors(*args, **kwargs):
@@ -424,6 +475,14 @@ def communicator_error_handler(
 
 
 def error_code_handler(_func=None):
+    """Decode errors from server.
+
+    Parameters
+    ----------
+    _func : Func, optional
+        Decorator to apply to error code, by default None.
+    """
+
     def decorator_error_code(func):
         @wraps(func)
         def wrapper_error_code(*args, **kwargs):
@@ -496,6 +555,16 @@ def error_code_handler(_func=None):
 
 
 def apply_if(decorator, condition):
+    """Apply function based on condition.
+
+    Parameters
+    ----------
+    decorator : Func
+        Function to apply.
+    condition : bool
+        Condition to check.
+    """
+
     def decorator_apply_if(func):
         if not condition:
             return func
