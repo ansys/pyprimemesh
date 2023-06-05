@@ -28,7 +28,6 @@ class Surfer(CoreObject):
 
     def __init__(self, model: Model):
         """Initialize surfer instance."""
-
         self._model = model
 
     def mesh_topo_faces(
@@ -152,7 +151,9 @@ class Surfer(CoreObject):
             return surfer.initialize_surfer_params_for_wrapper()
 
     def __enter__(self):
+        """Run initializing context manager."""
         return self
 
     def __exit__(self, type, value, traceback):
+        """Run when closing the context manager."""
         pass

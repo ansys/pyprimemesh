@@ -1,3 +1,4 @@
+"""Module for Control Data."""
 from typing import Iterable, List
 
 # isort: split

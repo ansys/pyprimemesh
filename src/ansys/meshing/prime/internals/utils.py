@@ -165,7 +165,8 @@ def launch_prime_github_container(
     mount_host : str, optional
         IP where to mount the container, by default defaults.get_user_data_path()
     mount_image : str, optional
-        Name of the path to mount the container, by default defaults.get_user_data_path_for_containers()
+        Name of the path to mount the container,
+        by default defaults.get_user_data_path_for_containers()
     port : int, optional
         Port to expose, by default defaults.port()
     name : str, optional

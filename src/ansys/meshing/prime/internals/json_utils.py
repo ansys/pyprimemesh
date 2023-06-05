@@ -1,3 +1,4 @@
+"""Module for JSON util functions."""
 import json
 from typing import Union
 
@@ -10,11 +11,35 @@ __all__ = ['loads', 'dumps']
 
 
 def try_process_as_iterable(obj):
+    """Try if an object is an iterable and return it's list.
+
+    Parameters
+    ----------
+    obj : Any
+        Object to test.
+
+    Returns
+    -------
+    List
+        List of the object.
+    """
     iterable = iter(obj)
     return list(iterable)
 
 
 def try_process_numpy_array(obj):
+    """Try if an object is a np.array and return it's list.
+
+    Parameters
+    ----------
+    obj : Any
+        Object to test.
+
+    Returns
+    -------
+    bool, List
+        Whether the object is np.array and List of the object.
+    """
     if isinstance(obj, np.ndarray):
         return True, obj.tolist()
     return False, obj

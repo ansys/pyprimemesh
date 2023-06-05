@@ -45,14 +45,14 @@ class Communicator(object):
 
     @abstractmethod
     def run_on_server(self, model, recipe: str) -> dict:
-        """Initialize parameters in server side.
+        """Run command in server side.
 
         Parameters
         ----------
         model : Model
-            Model in which to initialize params.
-        param_name : str
-            Parameter to initialize
+            Model in which to run commands.
+        recipe : str
+            Command to run.
 
         Returns
         -------
