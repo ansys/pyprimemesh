@@ -20,7 +20,6 @@ from ansys.meshing.prime.autogen.wrapperstructs import *
 from ansys.meshing.prime.autogen.scaffolder import Scaffolder
 from ansys.meshing.prime.autogen.automesh import AutoMesh
 from ansys.meshing.prime.autogen.boundaryfittednurbs import BoundaryFittedSpline
-from ansys.meshing.prime.autogen.quadtospline import QuadToSpline
 from ansys.meshing.prime.autogen.sizefield import SizeField
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.transform import Transform
