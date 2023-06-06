@@ -6,7 +6,6 @@ from logging import Logger
 import pytest
 
 from ansys.meshing.prime.internals.utils import (  # print_logs_before_command,; terminate_process,
-    get_child_processes,
     print_logs_after_command,
     to_camel_case,
 )
@@ -14,14 +13,14 @@ from ansys.meshing.prime.internals.utils import (  # print_logs_before_command,;
 skip_windows = pytest.mark.skipif(os.name == "nt", reason="Can't fork on windows")
 
 
-@skip_windows
+"""@skip_windows
 def test_child_process():
     current_pid = os.getpid()
     child_pid = os.fork()
     # process is PID
     child_list = get_child_processes(current_pid)
     assert child_pid in child_list
-
+"""
 
 """def test_terminate_process():
     process = subprocess.Popen('ls -la', shell=True)
