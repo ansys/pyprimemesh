@@ -1,8 +1,6 @@
 """Module for abstract communicator."""
 from abc import abstractmethod
 
-from ansys.meshing.prime.core.model import Model
-
 
 class Communicator(object):
     """Abstract class for the server communicator."""
@@ -62,7 +60,7 @@ class Communicator(object):
         pass
 
     @abstractmethod
-    def import_cad(self, model: Model, file_name: str, *args) -> dict:
+    def import_cad(self, model, file_name: str, *args) -> dict:
         """Import CAD file from local.
 
         Parameters
