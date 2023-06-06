@@ -1,14 +1,13 @@
 import os
-import subprocess
+
+# import subprocess
 from logging import Logger
 
 import pytest
 
-from ansys.meshing.prime.internals.utils import (
+from ansys.meshing.prime.internals.utils import (  # print_logs_before_command,; terminate_process,
     get_child_processes,
     print_logs_after_command,
-    print_logs_before_command,
-    terminate_process,
     to_camel_case,
 )
 
