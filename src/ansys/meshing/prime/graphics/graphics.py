@@ -307,7 +307,7 @@ class Graphics(object):
         spline = part.get_spline(spline_id)
         dim = spline.control_points_count
         nodes = spline.control_points
-        face_list = compute_face_list_from_structured_nodes(nodes, dim)
+        face_list = compute_face_list_from_structured_nodes(dim)
         display_mesh_type = DisplayMeshType.SPLINECONTROLPOINTS
         id = spline.id
         disp_mesh = _DisplayMesh(
@@ -344,7 +344,7 @@ class Graphics(object):
         spline = part.get_spline(spline_id)
         dim = spline.spline_points_count
         nodes = spline.spline_points
-        face_list = compute_face_list_from_structured_nodes(nodes, dim)
+        face_list = compute_face_list_from_structured_nodes(dim)
         display_mesh_type = DisplayMeshType.SPLINESURFACE
         id = spline.id
         disp_mesh = _DisplayMesh(
