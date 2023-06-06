@@ -8,7 +8,6 @@ from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
-from ansys.meshing.prime.core.model import Model
 
 _LOCAL_PORTS = []
 
@@ -217,7 +216,7 @@ def stop_prime_github_container(name):
 
 
 @contextmanager
-def file_read_context(model: Model, file_name: str):
+def file_read_context(model, file_name: str):
     """Upload context.
 
     Upload a context to a model.
@@ -310,7 +309,7 @@ def get_available_local_port(init_port: int = defaults.port()):
 
 
 @contextmanager
-def file_read_context_list(model: Model, file_names: List[str]):
+def file_read_context_list(model, file_names: List[str]):
     """Upload context.
 
     Upload a context to a model.
@@ -349,7 +348,7 @@ def file_read_context_list(model: Model, file_names: List[str]):
 
 
 @contextmanager
-def file_write_context(model: Model, file_name: str):
+def file_write_context(model, file_name: str):
     """Download context.
 
     Download context from model and write it to a local file.
