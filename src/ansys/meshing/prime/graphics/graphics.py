@@ -148,7 +148,7 @@ class Picker:
         Graphics class to provide the callbacks.
     """
 
-    def __init__(self, plotter: pv.Plotter, graphics: Graphics):
+    def __init__(self, plotter: pv.Plotter, graphics):
         """Initialize picker."""
         self.plotter = plotter
         self._graphics = graphics
