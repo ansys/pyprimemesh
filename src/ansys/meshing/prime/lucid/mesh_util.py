@@ -284,27 +284,6 @@ class Mesh:
             params=prime.MergePartsParams(self._model, merged_part_suggested_name=new_name),
         )
 
-    def delete_topology(self, parts_expression: str = "*", delete_edges: bool = True):
-        """Delete topoentities of part.
-
-        Parameters
-        ----------
-        parts_expression : str
-            Expression of parts whose topology needs to be deleted.
-        delete_edges : bool
-            Check whether to delete the edges or not.
-
-        """
-        for part in self._model.parts:
-            if check_name_pattern(parts_expression, part.get_name()):
-                part.delete_topo_entities(
-                    prime.DeleteTopoEntitiesParams(
-                        self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
-                    )
-                )
-                if delete_edges:
-                    part.delete_zonelets(part.get_edge_zonelets())
-
     def __surface_mesh_on_active_sf(self, generate_quads: bool, scope: SurfaceScope):
         part_ids = scope.get_parts(self._model)
         for part_id in part_ids:

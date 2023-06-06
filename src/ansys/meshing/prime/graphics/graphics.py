@@ -11,6 +11,7 @@ from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
 from ansys.meshing.prime.internals import defaults
 
 
+# TODO: nodes parameter is unused.
 def compute_face_list_from_structured_nodes(nodes, dim):
     flist = []
     for w in range(dim[2]):
@@ -191,7 +192,7 @@ class Graphics(object):
         self._sphinx_build = defaults.get_sphinx_build()
         self._use_trame = use_trame
 
-        if self._use_trame and not _HAS_TRAME:
+        if self._use_trame and not _HAS_TRAME:  # pragma: no cover
             warn_msg = (
                 "'use_trame' is active but Trame dependencies are not installed."
                 "Consider installing 'pyvista[trame]' to use this functionality."
@@ -364,7 +365,7 @@ class Graphics(object):
         else:
             self.show(update)
 
-    def __color_by_type_callback(self, flag):
+    def __color_by_type_callback(self, flag):  # pragma: no cover
         """ """
         vr = self._colorByTypeBt.GetRepresentation()
         state = vr.GetState()
@@ -390,7 +391,7 @@ class Graphics(object):
             for disp_mesh in data["faces"]
         ]
 
-    def __hide_unhide_selection(self, flag):
+    def __hide_unhide_selection(self, flag):  # pragma: no cover
         """ """
         sel_disp_mesh = self._picker.selections
         if len(sel_disp_mesh) > 0:
@@ -404,7 +405,7 @@ class Graphics(object):
                 for disp_mesh in data["faces"]
             ]
 
-    def __show_edges_callback(self, flag):
+    def __show_edges_callback(self, flag):  # pragma: no cover
         [
             disp_mesh.show_edges(flag)
             for part_id, data in self._display_data.items()
@@ -412,11 +413,11 @@ class Graphics(object):
             for disp_mesh in data["faces"]
         ]
 
-    def __print_callback(self, flag):
+    def __print_callback(self, flag):  # pragma: no cover
         sel_disp_mesh = self._picker.selections
         [print(disp_mesh) for disp_mesh in sel_disp_mesh]
 
-    def __show_ruler_callback(self, flag):
+    def __show_ruler_callback(self, flag):  # pragma: no cover
         """This function shows ruler on UI when clicked on ruler button"""
         if self._plotter is not None:
             if self._ruler_visible and self._ruler_actor is not None:
@@ -455,7 +456,7 @@ class Graphics(object):
 
         # if we use trame, activate OFF_SCREEN before initializing plotter
         pv_off_screen_original = None
-        if self._use_trame:
+        if self._use_trame:  # pragma: no cover
             pv_off_screen_original = pv.OFF_SCREEN
             pv.OFF_SCREEN = True
         self._plotter = pv.Plotter()
@@ -494,12 +495,12 @@ class Graphics(object):
         if self._sphinx_build == False:
             self.__update_bt_icons()
         self._show_selector()
-        if self._use_trame:
+        if self._use_trame:  # pragma: no cover
             pv.OFF_SCREEN = pv_off_screen_original
 
     def _show_selector(self):
         """Chooses between using Trame or Python visualizer."""
-        if self._use_trame:
+        if self._use_trame:  # pragma: no cover
             visualizer = TrameVisualizer()
             visualizer.set_scene(self._plotter)
             visualizer.show()
@@ -679,7 +680,7 @@ class Graphics(object):
         return self._color_by_type
 
 
-class _DisplayMesh(object):
+class _DisplayMesh(object):  # pragma: no cover
     """ """
 
     def __init__(
