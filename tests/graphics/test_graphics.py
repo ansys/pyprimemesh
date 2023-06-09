@@ -64,5 +64,5 @@ def test_compute_face_list():
     dim.append(2)
     dim.append(2)
     dim.append(2)
-    flist = compute_face_list_from_structured_nodes(nodes, dim)
+    flist = compute_face_list_from_structured_nodes(dim)
     assert len(flist) == 30

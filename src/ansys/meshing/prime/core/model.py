@@ -300,7 +300,7 @@ class Model(_Model):
 
     @property
     def topo_data(self) -> TopoData:
-        """Gets the topodata of a model.
+        """Get the topodata of a model.
 
         Returns
         -------

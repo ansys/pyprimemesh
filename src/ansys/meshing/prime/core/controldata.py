@@ -1,3 +1,4 @@
+"""Module for Control Data."""
 from typing import Iterable, List
 
 # isort: split
@@ -17,13 +18,26 @@ from ansys.meshing.prime.params.primestructs import SizingType
 
 
 class ControlData(_ControlData):
-    """ControlData acts as a container for all controls (size controls, prism controls,
+    """ControlData acts as a container for all controls.
+
+    ControlData acts as a container for all controls (size controls, prism controls,
     wrapper controls, etc).
+
+    Parameters
+    ----------
+    model : CommunicationManager
+        Communicator with the server.
+    id : int
+        ID of the model.
+    object_id : int
+        ID of the object.
+    name : str
+        Name of the control.
 
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
-        """Initializes ControlData"""
+        """Initialize ControlData."""
         self._model = model
         self._wrapper_controls = []
         self._size_controls = []
@@ -34,8 +48,7 @@ class ControlData(_ControlData):
         _ControlData.__init__(self, model, id, object_id, name)
 
     def get_wrapper_control_by_name(self, name) -> WrapperControl:
-        """Gets the wrapper control by name.
-
+        """Get the wrapper control by name.
 
         Parameters
         ----------
@@ -58,8 +71,7 @@ class ControlData(_ControlData):
         return None
 
     def create_size_control(self, sizing_type: SizingType) -> SizeControl:
-        """Creates size control for the given sizing type.
-
+        """Create size control for the given sizing type.
 
         Parameters
         ----------
@@ -86,8 +98,7 @@ class ControlData(_ControlData):
         return new_size_control
 
     def create_prism_control(self) -> PrismControl:
-        """Creates a PrismControl.
-
+        """Create a PrismControl.
 
         Returns
         -------
@@ -106,14 +117,12 @@ class ControlData(_ControlData):
         return new_prism_control
 
     def create_thin_volume_control(self) -> ThinVolumeControl:
-        """Creates a ThinVolumeControl.
-
+        """Create a ThinVolumeControl.
 
         Returns
         -------
         ThinVolumeControl
             Returns ThinVolumeControl.
-
 
         Examples
         --------
@@ -126,8 +135,7 @@ class ControlData(_ControlData):
         return new_thin_volume_control
 
     def create_wrapper_control(self) -> WrapperControl:
-        """Creates wrapper control with defaults.
-
+        """Create wrapper control with defaults.
 
         Returns
         -------
@@ -149,8 +157,7 @@ class ControlData(_ControlData):
         return new_control
 
     def get_size_control_by_name(self, name: str) -> SizeControl:
-        """Gets the size control by name.
-
+        """Get the size control by name.
 
         Parameters
         ----------
@@ -173,8 +180,7 @@ class ControlData(_ControlData):
         return None
 
     def get_prism_control_by_name(self, name: str) -> PrismControl:
-        """Gets the prism control by name.
-
+        """Get the prism control by name.
 
         Parameters
         ----------
@@ -197,8 +203,7 @@ class ControlData(_ControlData):
         return None
 
     def get_thin_volume_control_by_name(self, name: str) -> ThinVolumeControl:
-        """Gets the thin volume control with the given name.
-
+        """Get the thin volume control with the given name.
 
         Parameters
         ----------
@@ -222,8 +227,7 @@ class ControlData(_ControlData):
         return None
 
     def delete_controls(self, control_ids: Iterable[int]) -> DeleteResults:
-        """Deletes the control for the given id.
-
+        """Delete the control for the given id.
 
         Parameters
         ----------
@@ -290,7 +294,7 @@ class ControlData(_ControlData):
         ]
 
     def create_volume_control(self) -> VolumeControl:
-        """Creates the volume control.
+        """Create the volume control.
 
         Returns
         -------
@@ -308,8 +312,7 @@ class ControlData(_ControlData):
         return new_control
 
     def get_volume_control_by_name(self, name: str) -> VolumeControl:
-        """Gets the volume control by name.
-
+        """Get the volume control by name.
 
         Parameters
         ----------
@@ -410,7 +413,7 @@ class ControlData(_ControlData):
         return self._wrapper_controls
 
     def create_periodic_control(self) -> PeriodicControl:
-        """Creates the periodic control.
+        """Create the periodic control.
 
         Returns
         -------
@@ -428,8 +431,7 @@ class ControlData(_ControlData):
         return new_control
 
     def get_periodic_control_by_name(self, name: str) -> PeriodicControl:
-        """Gets the periodic control by name.
-
+        """Get the periodic control by name.
 
         Parameters
         ----------
