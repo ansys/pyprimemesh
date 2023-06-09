@@ -62,7 +62,7 @@ class GRPCCommunicator(Communicator):
     Raises
     ------
     ConnectionError
-        Couldn't connect to server.
+        Could not connect to server.
     """
 
     def __init__(
@@ -111,7 +111,7 @@ class GRPCCommunicator(Communicator):
         Raises
         ------
         RuntimeError
-            Can't connect to server.
+            Can not connect to server.
         """
         if self._stub is not None:
             command = {"Command": command}
@@ -173,7 +173,7 @@ class GRPCCommunicator(Communicator):
         Raises
         ------
         RuntimeError
-            Can't connect to server.
+            Can not connect to server.
         """
         if self._stub is not None:
             command = {"ParamName": param_name}
@@ -216,7 +216,7 @@ class GRPCCommunicator(Communicator):
         RuntimeError
             Bad response from server.
         RuntimeError
-            Can't connect to server.
+            Can not connect to server.
         """
         if self._stub is not None:
             commands = recipe

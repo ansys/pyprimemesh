@@ -111,7 +111,7 @@ def set_using_container(value: bool):
     Returns
     -------
     bool
-        USING_CONTAINER flag
+        USING_CONTAINER flag.
     """
     global __USING_CONTAINER
     __USING_CONTAINER = value
@@ -124,7 +124,7 @@ def using_container():
     Returns
     -------
     bool
-        `USING_CONTAINER flag.`
+        `USING_CONTAINER` flag.
     """
     return __USING_CONTAINER
 
@@ -140,7 +140,7 @@ def set_has_pim(value: bool):
     Returns
     -------
     bool
-        `HAS_PIM` flag
+        `HAS_PIM` flag.
     """
     global __HAS_PIM
     __HAS_PIM = value

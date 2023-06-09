@@ -428,15 +428,15 @@ def communicator_error_handler(
     _func : Func, optional
         Function to use as decorator, by default None.
     expected_token : str, optional
-        Token to expect in response result, by default 'Results'
+        Token to expect in response result, by default 'Results'.
     server_error_token : str, optional
-        Token from server error, by default 'ServerError'
+        Token from server error, by default 'ServerError'.
     info_token : str, optional
-        Information message, by default 'info_msg'
+        Information message, by default 'info_msg'.
     warning_token : str, optional
-        Warning message, by default 'warning_msg'
+        Warning message, by default 'warning_msg'.
     error_token : str, optional
-        Error message, by default 'err_msg'
+        Error message, by default 'err_msg'.
     """
 
     def decorator_handle_errors(func):

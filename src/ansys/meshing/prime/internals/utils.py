@@ -23,7 +23,7 @@ def to_camel_case(snake_str):
     Returns
     -------
     str
-        string converted to camelCase.
+        String converted to camelCase.
     """
     components = snake_str.split('_')
     # We capitalize the first letter of each component except the first one
@@ -162,16 +162,16 @@ def launch_prime_github_container(
     Parameters
     ----------
     mount_host : str, optional
-        IP where to mount the container, by default defaults.get_user_data_path()
+        IP where to mount the container, by default defaults.get_user_data_path().
     mount_image : str, optional
         Name of the path to mount the container,
-        by default defaults.get_user_data_path_for_containers()
+        by default defaults.get_user_data_path_for_containers().
     port : int, optional
-        Port to expose, by default defaults.port()
+        Port to expose, by default defaults.port().
     name : str, optional
-        Name of the container, by default 'ansys-prime-server'
+        Name of the container, by default 'ansys-prime-server'.
     version : Optional[str], optional
-        Version of the container to retrieve, by default None
+        Version of the container to retrieve, by default None.
 
     Raises
     ------

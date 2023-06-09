@@ -59,7 +59,7 @@ class PrimeCommunicator(Communicator):
         model : Model
             Model in which to initialize params.
         param_name : str
-            Parameter to initialize
+            Parameter to initialize.
 
         Returns
         -------
