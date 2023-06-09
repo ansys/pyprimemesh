@@ -37,7 +37,7 @@ def get_child_processes(process):
     Parameters
     ----------
     process : int
-        PID of the parent process
+        PID of the parent process.
 
     Returns
     -------

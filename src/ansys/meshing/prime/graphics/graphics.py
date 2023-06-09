@@ -172,7 +172,7 @@ class Picker:
         Parameters
         ----------
         ignore_pick : Any
-            Pick to ignore
+            Pick to ignore.
         """
         self._ignore = ignore_pick
 
@@ -844,7 +844,7 @@ class _DisplayMesh(object):  # pragma: no cover
     type : DisplayMeshType
         Type of the mesh.
     id : int
-        ID of the mesh
+        ID of the mesh.
     part_id : int
         Id of the part to mesh.
     graphics : Graphics

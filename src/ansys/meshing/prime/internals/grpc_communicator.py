@@ -202,9 +202,9 @@ class GRPCCommunicator(Communicator):
         Parameters
         ----------
         model : core.Model
-            Model you want to modify
+            Model you want to modify.
         recipe : str
-            Commands you want to perform
+            Commands you want to perform.
 
         Returns
         -------
