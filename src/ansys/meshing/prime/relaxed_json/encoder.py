@@ -120,19 +120,19 @@ class JSONEncoder:
     Parameters
     ----------
     skipkeys : bool, optional
-        Skip keys, by default False
+        Skip keys, by default False.
     ensure_ascii : bool, optional
-        Ensure that we use ASCII characters, by default True
+        Ensure that we use ASCII characters, by default True.
     check_circular : bool, optional
-        Check circular loops, by default True
+        Check circular loops, by default True.
     allow_nan : bool, optional
-        Allow not number values, by default True
+        Allow not number values, by default True.
     sort_keys : bool, optional
-        Order the keys, by default False
+        Order the keys, by default False.
     separators : Any, optional
-        String separators, by default None
+        String separators, by default None.
     default : Any, optional
-        Default error message, by default None
+        Default error message, by default None.
     """
 
     item_separator = b','

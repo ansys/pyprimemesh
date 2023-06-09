@@ -375,17 +375,17 @@ class JSONDecoder:
 
     Parameters
     ----------
-    object_hook : _type_, optional
+    object_hook : Any, optional
         Unused parameter, by default None
-    parse_float : _type_, optional
+    parse_float : String or float, optional
         Parses float values, by default None
-    parse_int : _type_, optional
+    parse_int : String or int, optional
         Parses int values, by default None
-    parse_constant : _type_, optional
+    parse_constant : Any, optional
         Parses constant values, by default Noneor_CONSTANTS.__getitem__
     strict : bool, optional
         Unused parameter, by default True
-    object_pairs_hook : _type_, optional
+    object_pairs_hook : Any, optional
         Unused parameter, by default None
     """
 
@@ -447,7 +447,7 @@ class JSONDecoder:
         s : bytesorbytearray
             Information to decode.
         _w : str, optional
-            White space regex, by default WHITESPACE.match
+            White space regex, by default WHITESPACE.match.
 
         Returns
         -------
@@ -457,7 +457,7 @@ class JSONDecoder:
         Raises
         ------
         JSONDecodeError
-            _description_
+            Document malformed.
         """
         obj, end = self.raw_decode(s, _w(s, 0).end())
         end = _w(s, end).end()

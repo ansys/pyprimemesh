@@ -12,7 +12,7 @@ def make_scanner(context) -> Callable[[str, int], Tuple[str, int]]:
 
     Parameters
     ----------
-    context : _type_
+    context : JSONDecoder
         Context needed to know the types.
 
     Returns

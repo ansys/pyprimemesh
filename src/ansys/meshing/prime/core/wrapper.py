@@ -33,7 +33,7 @@ class Wrapper(_Wrapper):
     Parameters
     ----------
     model : Model
-        _description_
+        Model where to apply the wrapping.
     """
 
     def __init__(self, model: Model):
