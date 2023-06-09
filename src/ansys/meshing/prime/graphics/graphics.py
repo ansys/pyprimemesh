@@ -301,7 +301,7 @@ class Graphics(object):
         Returns
         -------
         _DisplayMesh
-            displayed mesh.
+            Displayed mesh.
         """
         part = self._model.get_part(part_id)
         spline = part.get_spline(spline_id)
@@ -338,7 +338,7 @@ class Graphics(object):
         Returns
         -------
         _DisplayMesh
-            displayed mesh.
+            Displayed mesh.
         """
         part = self._model.get_part(part_id)
         spline = part.get_spline(spline_id)
@@ -379,7 +379,7 @@ class Graphics(object):
         Returns
         -------
         _DisplayMesh
-            displayed mesh.
+            Displayed mesh.
         """
         part = self._model.get_part(part_id)
         node_start = 3 * np.sum(face_facet_res.num_nodes_per_face_zonelet[0:index])
