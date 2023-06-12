@@ -1,5 +1,4 @@
-"""Implementation of Relaxed JSON Decoder
-"""
+"""Implementation of Relaxed JSON Decoder."""
 import re
 from typing import Any, Callable, Dict, Tuple
 
@@ -23,7 +22,20 @@ _CONSTANTS = {
 
 
 class JSONDecodeError(ValueError):
+    """Errors for JSONDecode class.
+
+    Parameters
+    ----------
+    msg : str
+        Error message
+    document : bytesorbytearray
+        Document where the error is happening.
+    pos : int
+        Position where the error is happening.
+    """
+
     def __init__(self, msg: str, document: bytes or bytearray, pos: int):
+        """Initialize error handler."""
         lineno = document.count(b'\n', 0, pos) + 1
         colno = pos - document.rfind(b'\n', 0, pos)
         error_msg = f"{msg}: line {lineno} column {colno} (char {pos})"
@@ -51,6 +63,8 @@ BACKSLASH = {
 
 
 def then(first, continuation):
+    """Iterate function."""
+
     def _then(dct):
         dct = first(dct)
         return continuation(dct)
@@ -81,14 +95,17 @@ TYPEDATA = {
 
 
 def scan_string(str: bytes or bytearray, end: int, _b=BACKSLASH, _m=STRINGCHUNK.match):
-    """Scan the string s for a JSON string. End is the index of the
+    """Scan the string s for a JSON string.
+
+    Scan the string s for a JSON string. End is the index of the
     character in s after the quote that started the JSON string.
     Unescapes all valid JSON string escape sequences and raises ValueError
     on attempt to decode an invalid string. If strict is False then literal
     control characters are allowed in the string.
 
     Returns a tuple of the decoded string and the index of the character in s
-    after the end quote."""
+    after the end quote.
+    """
     chunks = bytearray()
     begin = end - 1
     while 1:
@@ -131,6 +148,25 @@ def scan_string(str: bytes or bytearray, end: int, _b=BACKSLASH, _m=STRINGCHUNK.
 
 
 def decode_bytes(s, end):
+    """Decode bytes object to JSON object.
+
+    Parameters
+    ----------
+    s : Any
+        Object to decode.
+    end : int
+        Final position.
+
+    Returns
+    -------
+    np.array
+        Array with decoded values.
+
+    Raises
+    ------
+    JSONDecodeError
+        Invalid values.
+    """
     begin = end - 1
     size = int.from_bytes(bytes(s[end : end + 8]), byteorder='big')
     end += 8
@@ -156,10 +192,39 @@ def decode_object(
     scan_once: Callable[[str, int], Tuple[str, int]],
     object_hook: Callable[[Dict[str, Any]], Any],
     object_pairs_hook,
-    memo,
+    memo: Dict,
     _w=WHITESPACE.match,
     _ws=WHITESPACE_STR,
 ):
+    """Decode generic object to JSON object.
+
+    Parameters
+    ----------
+    str_and_idx : Tuple[str, int]
+        String and index to decode.
+    scan_once : Callable[[str, int], Tuple[str, int]]
+        Scanner for bytes and bytearray.
+    object_hook : Callable[[Dict[str, Any]], Any]
+        Objects that are related.
+    object_pairs_hook : Any
+        Objects that are related.
+    memo : Dict
+        Needed for backwards compatibility.
+    _w : str, optional
+        Whitespace regex, by default WHITESPACE.match.
+    _ws : str, optional
+        Whitespace string, by default WHITESPACE_STR.
+
+    Returns
+    -------
+    Tuple
+        Decoded pairs and end index.
+
+    Raises
+    ------
+    JSONDecodeError
+        Unexpected value.
+    """
     s, end = str_and_idx
     pairs = []
     pairs_append = pairs.append
@@ -244,6 +309,31 @@ def decode_array(
     _w=WHITESPACE.match,
     _ws=WHITESPACE_STR,
 ):
+    """Decode array to JSON object.
+
+    Parameters
+    ----------
+    str_and_idx : Tuple[str, int]
+        string and index to decode.
+    scan_once : Callable[[str, int], Tuple[str, int]]
+        Scanner for bytes and bytearray.
+    _w : str, optional
+        Whitespace regex, by default WHITESPACE.match.
+    _ws : str, optional
+        Whitespace string, by default WHITESPACE_STR.
+
+    Returns
+    -------
+    Tuple
+        Decoded values and end index.
+
+    Raises
+    ------
+    JSONDecodeError
+        Unexpected value.
+    JSONDecodeError
+        Unexpected delimiter.
+    """
     s, end = str_and_idx
     values = []
     nextchar = bytes(s[end : end + 1])
@@ -281,6 +371,24 @@ def decode_array(
 
 
 class JSONDecoder:
+    """Decode object to JSON format.
+
+    Parameters
+    ----------
+    object_hook : Any, optional
+        Unused parameter, by default None
+    parse_float : String or float, optional
+        Parses float values, by default None
+    parse_int : String or int, optional
+        Parses int values, by default None
+    parse_constant : Any, optional
+        Parses constant values, by default Noneor_CONSTANTS.__getitem__
+    strict : bool, optional
+        Unused parameter, by default True
+    object_pairs_hook : Any, optional
+        Unused parameter, by default None
+    """
+
     def __init__(
         self,
         *,
@@ -291,6 +399,7 @@ class JSONDecoder:
         strict=True,
         object_pairs_hook=None,
     ):
+        """Initialize JSON decoder."""
         self.object_hook = object_hook or None
         self.parse_float = parse_float or float
         self.parse_int = parse_int or int
@@ -305,6 +414,25 @@ class JSONDecoder:
         self.scan_once = scanner.make_scanner(self)
 
     def raw_decode(self, s: bytes or bytearray, idx: int) -> Tuple[Any, int]:
+        """Decode bytes or bytearray to a JSON object.
+
+        Parameters
+        ----------
+        s : bytesorbytearray
+            Information to decode.
+        idx : int
+            Position to decode.
+
+        Returns
+        -------
+        Tuple[Any, int]
+            JSON object and final position.
+
+        Raises
+        ------
+        JSONDecodeError
+            Unexpected value.
+        """
         try:
             obj, end = self.scan_once(s, idx)
         except StopIteration as err:
@@ -312,6 +440,25 @@ class JSONDecoder:
         return obj, end
 
     def decode(self, s: bytes or bytearray, _w=WHITESPACE.match) -> Any:
+        """Decode bytes or bytearray to a JSON object.
+
+        Parameters
+        ----------
+        s : bytesorbytearray
+            Information to decode.
+        _w : str, optional
+            White space regex, by default WHITESPACE.match.
+
+        Returns
+        -------
+        Any
+            JSON object.
+
+        Raises
+        ------
+        JSONDecodeError
+            Document malformed.
+        """
         obj, end = self.raw_decode(s, _w(s, 0).end())
         end = _w(s, end).end()
         if end != len(s):

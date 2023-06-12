@@ -1,9 +1,10 @@
+"""Module for general utils of the project."""
 import logging
 import os
 import shutil
 import subprocess
 from contextlib import contextmanager
-from typing import Optional
+from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -12,6 +13,18 @@ _LOCAL_PORTS = []
 
 
 def to_camel_case(snake_str):
+    """Transform snake_case string to camelCase.
+
+    Parameters
+    ----------
+    snake_str : str
+        snake_case string.
+
+    Returns
+    -------
+    str
+        String converted to camelCase.
+    """
     components = snake_str.split('_')
     # We capitalize the first letter of each component except the first one
     # with the 'title' method and join them together.
@@ -19,6 +32,18 @@ def to_camel_case(snake_str):
 
 
 def get_child_processes(process):
+    """Get child processes of a process.
+
+    Parameters
+    ----------
+    process : int
+        PID of the parent process.
+
+    Returns
+    -------
+    List
+        PIDs of the processes.
+    """
     children = []
     cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
     out = cmd.stdout.read().decode("utf-8")
@@ -39,7 +64,14 @@ def get_child_processes(process):
     return children
 
 
-def terminate_process(process):
+def terminate_process(process: subprocess):
+    """Terminates the given process.
+
+    Parameters
+    ----------
+    process : subprocess
+        Process to kill.
+    """
     import signal
     import sys
 
@@ -61,6 +93,17 @@ def terminate_process(process):
 
 
 def print_logs_before_command(logger: logging.Logger, command: str, args):
+    """Print logs before running command.
+
+    Parameters
+    ----------
+    logger : logging.Logger
+        Logger where to print.
+    command : str
+        Command to run.
+    args : str
+        Arguments of the command.
+    """
     logger.info("Executing " + command)
     if logger.isEnabledFor(logging.DEBUG):
         logger.debug("Command: " + command)
@@ -81,6 +124,17 @@ def print_logs_before_command(logger: logging.Logger, command: str, args):
 
 
 def print_logs_after_command(logger: logging.Logger, command: str, ret):
+    """Print logs after running command.
+
+    Parameters
+    ----------
+    logger : logging.Logger
+        Logger where to print.
+    command : str
+        Command to run.
+    ret : str
+        type of the return of the command.
+    """
     logger.info("Finished " + command)
     if logger.isEnabledFor(logging.DEBUG):
         logger.debug("Return: ")
@@ -103,6 +157,27 @@ def launch_prime_github_container(
     name: str = 'ansys-prime-server',
     version: Optional[str] = None,
 ):
+    """Launch a given container.
+
+    Parameters
+    ----------
+    mount_host : str, optional
+        IP where to mount the container, by default defaults.get_user_data_path().
+    mount_image : str, optional
+        Name of the path to mount the container,
+        by default defaults.get_user_data_path_for_containers().
+    port : int, optional
+        Port to expose, by default defaults.port().
+    name : str, optional
+        Name of the container, by default 'ansys-prime-server'.
+    version : Optional[str], optional
+        Version of the container to retrieve, by default None.
+
+    Raises
+    ------
+    ValueError
+        License is not available.
+    """
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
     image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
     if license_file is None:
@@ -130,11 +205,34 @@ def launch_prime_github_container(
 
 
 def stop_prime_github_container(name):
+    """Stop a running container.
+
+    Parameters
+    ----------
+    name : str
+        Name of the container.
+    """
     subprocess.run(['docker', 'stop', f'{name}'], stdout=subprocess.DEVNULL)
 
 
 @contextmanager
-def file_read_context(model, file_name):
+def file_read_context(model, file_name: str):
+    """Upload context.
+
+    Upload a context to a model.
+
+    Parameters
+    ----------
+    model : Model
+        Model where to upload the context.
+    file_names : str
+        File containing the context.
+
+    Yields
+    ------
+    str
+        File name of the context.
+    """
     if config.using_container():
         base_file_name = os.path.basename(file_name)
         temp_file_name = os.path.join(defaults.get_examples_path(), base_file_name)
@@ -157,12 +255,26 @@ def file_read_context(model, file_name):
 
 
 def port_in_use(port, host=defaults.ip()):
-    """Returns True when a port is in use at the given host.
+    """Return True when a port is in use.
+
+    Returns True when a port is in use at the given host.
     Must actually "bind" the address.  Just checking if we can create
     a socket is insufficient as it's possible to run into permission
     errors like:
     - An attempt was made to access a socket in a way forbidden by its
       access permissions.
+
+    Parameters
+    ----------
+    port : int
+        Port you want to check.
+    host : str, optional
+        IP you want to check, by default defaults.ip().
+
+    Returns
+    -------
+    Bool
+        Whether the port is available or not.
     """
     import socket
 
@@ -175,6 +287,20 @@ def port_in_use(port, host=defaults.ip()):
 
 
 def get_available_local_port(init_port: int = defaults.port()):
+    """Get available port.
+
+    Checks which ports are available and return the first one available.
+
+    Parameters
+    ----------
+    init_port : int, optional
+        Port from where to start searching, by default defaults.port().
+
+    Returns
+    -------
+    int
+        Available port.
+    """
     port = init_port
     while port_in_use(port) or port in _LOCAL_PORTS:
         port += 1
@@ -183,7 +309,23 @@ def get_available_local_port(init_port: int = defaults.port()):
 
 
 @contextmanager
-def file_read_context_list(model, file_names):
+def file_read_context_list(model, file_names: List[str]):
+    """Upload context.
+
+    Upload a context to a model.
+
+    Parameters
+    ----------
+    model : Model
+        Model where to upload the context.
+    file_names : List[str]
+        Files that compose the context.
+
+    Yields
+    ------
+    List[str]
+        List of the context files.
+    """
     if config.using_container():
         base_names = [os.path.basename(file) for file in file_names]
         temp_names = [os.path.join(defaults.get_examples_path(), base) for base in base_names]
@@ -206,7 +348,23 @@ def file_read_context_list(model, file_names):
 
 
 @contextmanager
-def file_write_context(model, file_name):
+def file_write_context(model, file_name: str):
+    """Download context.
+
+    Download context from model and write it to a local file.
+
+    Parameters
+    ----------
+    model : Model
+        Model from which to download context.
+    file_name : str
+        Name of the file.
+
+    Yields
+    ------
+    str
+        File name.
+    """
     if config.using_container():
         base_file_name = os.path.basename(file_name)
         temp_file_name = os.path.join(defaults.get_output_path_for_containers(), base_file_name)

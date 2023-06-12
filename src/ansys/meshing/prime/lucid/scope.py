@@ -1,3 +1,4 @@
+"""Module for Lucid Scope for operation on surfaces functionality."""
 from typing import Iterable
 
 from ansys.meshing.prime.autogen.controlstructs import (
@@ -35,7 +36,7 @@ class _LucidScope:
         )
 
     def get_scope_definition(self, model: Model) -> ScopeDefinition:
-        """Gets the scope definition of the scope.
+        """Get the scope definition of the scope.
 
         Parameters
         ----------
@@ -80,7 +81,9 @@ class SurfaceScope(_LucidScope):
         entity_expression: str = "*",
         scope_evaluation_type: ScopeEvaluationType = ScopeEvaluationType.LABELS,
     ):
-        """Initialize SurfaceScope with the given part expression,
+        """Initialize SurfaceScope.
+
+        Initialize SurfaceScope with the given part expression,
         entity expression and scope evaluation type.
 
         Parameters
@@ -102,7 +105,7 @@ class SurfaceScope(_LucidScope):
         )
 
     def get_parts(self, model: Model) -> Iterable[int]:
-        """Gets the list of part ids in the scope.
+        """Get the list of part ids in the scope.
 
         Parameters
         ----------
@@ -129,7 +132,7 @@ class SurfaceScope(_LucidScope):
         return sel_parts
 
     def get_face_zonelets(self, model: Model, part_id: int) -> Iterable[int]:
-        """Gets the list of face zonelets for the given part in the scope.
+        """Get the list of face zonelets for the given part in the scope.
 
         Parameters
         ----------
@@ -165,7 +168,7 @@ class SurfaceScope(_LucidScope):
         return face_zonelets
 
     def get_topo_faces(self, model: Model, part_id: int) -> Iterable[int]:
-        """Gets the list of topofaces for the given part in the scope.
+        """Get the list of topofaces for the given part in the scope.
 
         Parameters
         ----------
@@ -215,7 +218,9 @@ class VolumeScope(_LucidScope):
         entity_expression: str = "*",
         scope_evaluation_type: ScopeEvaluationType = ScopeEvaluationType.ZONES,
     ):
-        """Initialize VolumeScope with the given part expression, entity expression and scope
+        """Initialize VolumeScope.
+
+        Initialize VolumeScope with the given part expression, entity expression and scope
         evaluation type.
 
         Parameters

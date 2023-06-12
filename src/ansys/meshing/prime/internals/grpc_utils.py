@@ -1,7 +1,15 @@
+"""Module for gRPC utils."""
 import ansys.meshing.prime.internals.defaults as defaults
 
 
 def get_default_channel_args():
+    """Return default channel arguments for gRPC.
+
+    Returns
+    -------
+    List
+        List with channel parameters.
+    """
     return [
         # ('grpc.keepalive_time_ms', 60000), # 1 minute
         ('grpc.keepalive_timeout_ms', 10000),  # 10 seconds

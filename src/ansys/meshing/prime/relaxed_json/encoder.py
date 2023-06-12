@@ -1,5 +1,4 @@
-'''Implementation of JSOnEncoder that can handle byte arrays
-'''
+"""Implementation of JSOnEncoder that can handle byte arrays."""
 import re
 
 import numpy as np
@@ -62,13 +61,13 @@ def _get_numpy_dtype(current_dtype):
 
 
 def _check_if_byteorder_needs_to_change(dtype_: np.dtype):
-    '''Check if we need to change the byteorder of a numpy array
+    """Check if we need to change the byteorder of a numpy array.
 
     The wire format for numpy arrays is always in bigendian to ensure
     cross-platform compatibility. Hence, this check ensures that we switch the
     dtype of an ndarray only when the existing dtype does not have a byteorder
     defined or if the defined byteorder is little-endian.
-    '''
+    """
     import sys
 
     if dtype_.byteorder == '<' or dtype_.byteorder == '|':
@@ -79,7 +78,7 @@ def _check_if_byteorder_needs_to_change(dtype_: np.dtype):
 
 
 def py_encode_basestring(s):
-    """Return a bytearray JSON representation of a Python string"""
+    """Return a bytearray JSON representation of a Python string."""
 
     def replace(match):
         return ESCAPE_DCT[match.group(0)]
@@ -91,7 +90,7 @@ encode_basestring = py_encode_basestring
 
 
 def py_encode_basestring_ascii(s):
-    """Return an ASCII-only bytearray JSON representation of a Python string"""
+    """Return an ASCII-only bytearray JSON representation of a Python string."""
 
     def replace(match):
         s = match.group(0)
@@ -116,6 +115,26 @@ encode_basestring_ascii = py_encode_basestring_ascii
 
 
 class JSONEncoder:
+    """Class to encode Object to JSON format.
+
+    Parameters
+    ----------
+    skipkeys : bool, optional
+        Skip keys, by default False.
+    ensure_ascii : bool, optional
+        Ensure that we use ASCII characters, by default True.
+    check_circular : bool, optional
+        Check circular loops, by default True.
+    allow_nan : bool, optional
+        Allow not number values, by default True.
+    sort_keys : bool, optional
+        Order the keys, by default False.
+    separators : Any, optional
+        String separators, by default None.
+    default : Any, optional
+        Default error message, by default None.
+    """
+
     item_separator = b','
     key_separator = b':'
 
@@ -130,7 +149,7 @@ class JSONEncoder:
         separators=None,
         default=None,
     ):
-        '''Constructor of JSON Encoder'''
+        """Initialize of JSON Encoder."""
         self.skipkeys = skipkeys
         self.ensure_ascii = ensure_ascii
         self.check_circular = check_circular
@@ -142,12 +161,26 @@ class JSONEncoder:
             self.default = default
 
     def default(self, obj):
+        """Raise default error.
+
+        Parameters
+        ----------
+        obj : Any
+            Object that is not serializable.
+
+        Raises
+        ------
+        TypeError
+            Raise the error with the proper type
+        """
         raise TypeError(f'Object of type {type(obj)} is not JSON serializable')
 
     def encode(self, obj):
-        '''Return a bytearray containing JSON representation of
-        Python Data structure, with the vector extension
-        '''
+        """Return a bytearray containing JSON.
+
+        Return a bytearray containing JSON representation of Python Data
+        structure, with the vector extension
+        """
         # This is for extremely simple cases and benchmarks.
         if isinstance(obj, str):
             if self.ensure_ascii:
@@ -162,9 +195,7 @@ class JSONEncoder:
         return b''.join(chunks)
 
     def iterencode(self, obj):
-        '''Encode the given object and yield the bytearray representation
-        as available
-        '''
+        """Encode the given object and yield the bytearray representationas available."""
         if self.check_circular:
             markers = {}
         else:

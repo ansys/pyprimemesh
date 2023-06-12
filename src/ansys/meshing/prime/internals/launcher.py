@@ -1,3 +1,4 @@
+"""Helper module for launching the server."""
 import logging
 import os
 import subprocess
@@ -52,7 +53,7 @@ def launch_server_process(
     n_procs: Optional[int] = None,
     **kw,
 ) -> subprocess.Popen:
-    '''Launch a server process for Ansys Prime Server.
+    """Launch a server process for Ansys Prime Server.
 
     Parameters
     ----------
@@ -77,7 +78,7 @@ def launch_server_process(
     ------
     FileNotFoundError
         When there is an error in the file paths used to launch the server.
-    '''
+    """
     if prime_root is None:
         prime_root = get_ansys_prime_server_root()
         if prime_root is None:
@@ -142,11 +143,11 @@ def launch_server_process(
 def launch_remote_prime(
     version: Optional[str] = None, timeout: float = defaults.connection_timeout()
 ):
-    '''Create a remote instance of Prime server using PyPIM
+    """Create a remote instance of Prime server using PyPIM.
 
     This method is used in case of Ansys Labs to create a remote instance of prime.
     This method also creates a file transfer service that is available on Ansys Labs
-    '''
+    """
     if version is None:
         version = 'latest'
 
@@ -187,7 +188,7 @@ def launch_prime(
     version: Optional[str] = None,
     **kwargs,
 ):
-    '''Launch an instance of Ansys Prime Server and get a client for it.
+    """Launch an instance of Ansys Prime Server and get a client for it.
 
     Parameters
     ----------
@@ -217,7 +218,7 @@ def launch_prime(
         When there is an error in file paths used to launch the server.
     ConnectionError
         When there is an error in connecting to the GRPC server.
-    '''
+    """
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
 

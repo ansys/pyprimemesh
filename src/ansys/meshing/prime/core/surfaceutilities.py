@@ -73,8 +73,7 @@ class SurfaceUtilities(_SurfaceUtilities):
     def create_boi(
         self, face_zonelet_ids: Iterable[int], params: CreateBOIParams
     ) -> CreateBOIResults:
-        """Creates BOI to the selected list of face zonelet ids.
-
+        """Create BOI to the selected list of face zonelet ids.
 
         Parameters
         ----------
@@ -105,8 +104,7 @@ class SurfaceUtilities(_SurfaceUtilities):
         target_zonelets: Iterable[int],
         params: CreateContactPatchParams,
     ) -> CreateContactPatchResults:
-        """Creates contact patch by offsetting the target zonelets.
-
+        """Create contact patch by offsetting the target zonelets.
 
         Parameters
         ----------

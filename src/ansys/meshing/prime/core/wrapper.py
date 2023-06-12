@@ -1,3 +1,4 @@
+"""Module for wrapper class."""
 from typing import List
 
 import numpy as np
@@ -27,16 +28,24 @@ from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 
 
 class Wrapper(_Wrapper):
-    """Provides operations to generate surface mesh using wrapper technology."""
+    """Provide operations to generate surface mesh using wrapper technology.
+
+    Parameters
+    ----------
+    model : Model
+        Model where to apply the wrapping.
+    """
 
     def __init__(self, model: Model):
-        """__init__(Model self, int id, int object_id, char* name)"""
+        """Initialize wrapper and model."""
         _Wrapper.__init__(self, model)
         self._model = model
 
     def wrap(self, wrapper_control_id: int, params: WrapParams) -> WrapResult:
-        """Performs wrapping with specified controls in wrapper control and with provided
-            parameters.
+        """Perform wrapping with specified controls.
+
+        Performs wrapping with specified controls in wrapper control and with provided
+        parameters.
 
 
         Parameters
@@ -69,8 +78,10 @@ class Wrapper(_Wrapper):
         source_parts: List[Part],
         source_labels: List[str],
     ):
-        """Performs label controlled connection of wrapper part face zonelets to face zonelets of
-            source parts.
+        """Perform label controlled connection.
+
+        Performs label controlled connection of wrapper part face zonelets to face zonelets of
+        source parts.
 
 
         Parameters
@@ -140,8 +151,10 @@ class Wrapper(_Wrapper):
     def close_gaps(
         self, scope: ScopeDefinition, params: WrapperCloseGapsParams
     ) -> WrapperCloseGapsResult:
-        """Close gaps create patching surfaces within the face zonelets specified
-            by scope using gap size.
+        """Close gaps.
+
+        Close gaps create patching surfaces within the face zonelets specified
+        by scope using gap size.
 
 
         Parameters
