@@ -3,8 +3,16 @@ import os
 import pytest
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.autogen.primeconfig import ErrorCode
-from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
+from ansys.meshing.prime import ErrorCode, PrimeRuntimeError
+
+
+def test_io_file_not_found_error(get_remote_client):
+    model = get_remote_client.model
+    with prime.FileIO(model) as io:
+        file_name = r'/doesnotexist/file.pmdat'
+        with pytest.raises(FileNotFoundError) as error:
+            _ = io.read_pmdat(file_name, prime.FileReadParams(model=model))
+            assert f'Given file name "{file_name}" is not found on local disk' in str(error.value)
 
 
 def test_io_pdmat(get_remote_client, get_examples, tmp_path):
