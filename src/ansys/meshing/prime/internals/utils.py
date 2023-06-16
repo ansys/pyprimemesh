@@ -233,7 +233,7 @@ def file_read_context(model, file_name: str):
     str
         File name of the context.
     """
-    if not os.path.exists(file_name):
+    if config.file_existence_check_enabled() and not os.path.exists(file_name):
         raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
         base_file_name = os.path.basename(file_name)
@@ -328,6 +328,12 @@ def file_read_context_list(model, file_names: List[str]):
     List[str]
         List of the context files.
     """
+    if config.file_existence_check_enabled() and not all(
+        os.path.exists(file) for file in file_names
+    ):
+        raise FileNotFoundError(
+            f'Atleast one of the files given for read is missing from local disk'
+        )
     if config.using_container():
         base_names = [os.path.basename(file) for file in file_names]
         temp_names = [os.path.join(defaults.get_examples_path(), base) for base in base_names]
