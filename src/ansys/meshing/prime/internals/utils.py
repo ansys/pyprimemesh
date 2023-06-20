@@ -233,6 +233,8 @@ def file_read_context(model, file_name: str):
     str
         File name of the context.
     """
+    if not os.path.exists(file_name):
+        raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
         base_file_name = os.path.basename(file_name)
         temp_file_name = os.path.join(defaults.get_examples_path(), base_file_name)
