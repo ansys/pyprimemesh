@@ -28,11 +28,11 @@ class PrimeLogger(object, metaclass=SingletonType):
     to_file : bool, optional
         Whether to include the logs in a file or not, by default False
     """
+
     _logger = None
 
     def __init__(self, to_file: bool = False):
         """Logger initializer."""
-
         self._logger = logging.getLogger("PyPrimeMesh")
         self._logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
