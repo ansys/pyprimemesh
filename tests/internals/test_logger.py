@@ -14,8 +14,16 @@ def test_logger(tmp_path):
     logger.error(msg)
 
     now = datetime.datetime.now()
+
+    # Another call to singleton, should be configured already
+    prime_logger_setup_2 = PrimeLogger()
+    logger_2 = prime_logger_setup_2.get_logger()
+    msg_2 = "this is another error"
+    logger_2.error(msg_2)
+
+    # Assert we are using a singleton.
     with open(logs_path + '/log_' + now.strftime("%Y-%m-%d") + '.log', 'r') as file:
-        for line in file:
-            pass
-        last_line = line
-        assert msg in last_line
+        line_1 = file.readline()
+        assert msg in line_1
+        line_2 = file.readline()
+        assert msg_2 in line_2
