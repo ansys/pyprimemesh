@@ -8,6 +8,7 @@ from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
+from ansys.meshing.prime.internals.logger import LOG as logger
 
 _LOCAL_PORTS = []
 
@@ -92,13 +93,11 @@ def terminate_process(process: subprocess):
     process.wait()
 
 
-def print_logs_before_command(logger: logging.Logger, command: str, args):
+def print_logs_before_command(command: str, args):
     """Print logs before running command.
 
     Parameters
     ----------
-    logger : logging.Logger
-        Logger where to print.
     command : str
         Command to run.
     args : str
@@ -123,13 +122,11 @@ def print_logs_before_command(logger: logging.Logger, command: str, args):
         logger.debug("")
 
 
-def print_logs_after_command(logger: logging.Logger, command: str, ret):
+def print_logs_after_command(command: str, ret):
     """Print logs after running command.
 
     Parameters
     ----------
-    logger : logging.Logger
-        Logger where to print.
     command : str
         Command to run.
     ret : str
