@@ -32,6 +32,10 @@ __all__ = [
     "download_saddle_bracket_fmd",
     "download_saddle_bracket_scdoc",
     "download_saddle_bracket_dsco",
+    "download_f1_rw_drs_stl",
+    "download_f1_rw_enclosure_stl",
+    "download_f1_rw_end_plates_stl",
+    "download_f1_rw_main_plane_stl",
 ]
 
 
@@ -62,6 +66,10 @@ class Examples(Enum):
     SADDLE_BRACKET_FMD = {"filename": "saddle_bracket.fmd", "git_folder": "saddle_bracket"}
     SADDLE_BRACKET_SCDOC = {"filename": "saddle_bracket.scdoc", "git_folder": "saddle_bracket"}
     SADDLE_BRACKET_DSCO = {"filename": "saddle_bracket.dsco", "git_folder": "saddle_bracket"}
+    F1_RW_DRS_STL = {"filename": "f1_rw_drs.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_END_PLATES_STL = {"filename": "f1_rw_enclosure.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_ENCLOSURE_STL = {"filename": "f1_rw_end_plates.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_MAIN_PLANE_STL = {"filename": "f1_rw_main_plane.stl", "git_folder": "f1_rear_wing"}
 
 
 _DOWNLOADS = []
@@ -968,3 +976,139 @@ def download_saddle_bracket_dsco(
 
     """
     return get_file(Examples.SADDLE_BRACKET_DSCO, destination, force)
+
+
+def download_f1_rw_drs_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_drs = prime_examples.download_f1_rw_drs_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_DRS_STL, destination, force)
+
+
+def download_f1_rw_enclosure_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_enclosure = prime_examples.download_f1_rw_enclosure_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_ENCLOSURE_STL, destination, force)
+
+
+def download_f1_rw_end_plates_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_end_plates = prime_examples.download_f1_rw_end_plates_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_END_PLATES_STL, destination, force)
+
+
+def download_f1_rw_main_plane_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_main_plane = prime_examples.download_f1_rw_main_plane_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_MAIN_PLANE_STL, destination, force)
