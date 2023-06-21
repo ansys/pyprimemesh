@@ -31,28 +31,17 @@ class PrimeLogger(object, metaclass=SingletonType):
 
     _logger = None
 
-    def __init__(self, to_file: bool = False):
+    def __init__(self, logger_name: str = "PyPrimeMesh"):
         """Logger initializer."""
-        self._logger = logging.getLogger("PyPrimeMesh")
+        self._logger = logging.getLogger(logger_name)
         self._logger.setLevel(logging.DEBUG)
-        formatter = logging.Formatter(
+        self.formatter = logging.Formatter(
             '%(asctime)s \t [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s'
         )
-
-        # save to file
-        if to_file:
-            now = datetime.datetime.now()
-            dirname = "./.log"
-            if not os.path.isdir(dirname):
-                os.mkdir(dirname)
-            fileHandler = logging.FileHandler(dirname + "/log_" + now.strftime("%Y-%m-%d") + ".log")
-            fileHandler.setFormatter(formatter)
-            self._logger.addHandler(fileHandler)
-
         # stdout
-        streamHandler = logging.StreamHandler()
-        streamHandler.setFormatter(formatter)
-        self._logger.addHandler(streamHandler)
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(self.formatter)
+        self._logger.addHandler(stream_handler)
 
     def get_logger(self):
         """Getter for the logger.
@@ -63,6 +52,23 @@ class PrimeLogger(object, metaclass=SingletonType):
             The logger.
         """
         return self._logger
+
+    def add_file_handler(self, logs_dir: str = "./.log"):
+        """Save logs to a file.
+
+        Save logs to a file in addition of printing to stdout.
+
+        Parameters
+        ----------
+        logs_dir : str, optional
+            Directory of the logs, by default "./.log"
+        """
+        now = datetime.datetime.now()
+        if not os.path.isdir(logs_dir):
+            os.mkdir(logs_dir)
+        file_handler = logging.FileHandler(logs_dir + "/log_" + now.strftime("%Y-%m-%d") + ".log")
+        file_handler.setFormatter(self.formatter)
+        self._logger.addHandler(file_handler)
 
 
 LOG = PrimeLogger().get_logger()
