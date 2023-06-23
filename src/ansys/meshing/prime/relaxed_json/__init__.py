@@ -30,39 +30,40 @@ def dumps(
     sort_keys=False,
     **kw,
 ):
-    """Serialize ``obj`` to a JSON formatted ``str``.
+    """Serialize an object to a JSON-formatted string.
 
-    If ``skipkeys`` is true then ``dict`` keys that are not basic types
-    (``str``, ``int``, ``float``, ``bool``, ``None``) will be skipped
+    If ``skipkeys`` is ``True``, ``dict`` keys that are not basic types
+    (``str``, ``int``, ``float``, ``bool``, and ``None``) are skipped
     instead of raising a ``TypeError``.
 
-    If ``ensure_ascii`` is false, then the return value can contain non-ASCII
-    characters if they appear in strings contained in ``obj``. Otherwise, all
+    If ``ensure_ascii`` is ``False``, the return value can contain non-ASCII
+    characters if they appear in strings contained in the object. Otherwise, all
     such characters are escaped in JSON strings.
 
-    If ``check_circular`` is false, then the circular reference check
-    for container types will be skipped and a circular reference will
-    result in an ``RecursionError`` (or worse).
+    If ``check_circular`` is ``False``, the circular reference check
+    for container types is skipped and a circular reference
+    results in an ``RecursionError`` (or worse).
 
-    If ``allow_nan`` is false, then it will be a ``ValueError`` to
-    serialize out of range ``float`` values (``nan``, ``inf``, ``-inf``) in
+    If ``allow_nan`` is ``False``, it is a ``ValueError`` to
+    serialize out-of-range float values (``nan``, ``inf``, and ``-inf``) in
     strict compliance of the JSON specification, instead of using the
-    JavaScript equivalents (``NaN``, ``Infinity``, ``-Infinity``).
+    JavaScript equivalents (``NaN``, ``Infinity``, and ``-Infinity``).
 
     If specified, ``separators`` should be an ``(item_separator, key_separator)``
-    tuple.  The default is ``(', ', ': ')`` if *indent* is ``None`` and
-    ``(',', ': ')`` otherwise.  To get the most compact JSON representation,
+    tuple. The default is ``(', ', ': ')`` if *indent* is ``None`` and
+    ``(',', ': ')`` otherwise. To get the most compact JSON representation,
     you should specify ``(',', ':')`` to eliminate whitespace.
 
     ``default(obj)`` is a function that should return a serializable version
-    of obj or raise TypeError. The default simply raises TypeError.
+    of the object or raise a ``TypeError``. The default simply raises a
+    ``TypeError``.
 
-    If *sort_keys* is true (default: ``False``), then the output of
-    dictionaries will be sorted by key.
+    If ``sort_keys`` is ``True`` rather than the default of ``False``, the
+    output of the dictionaries are sorted by key.
 
-    To use a custom ``JSONEncoder`` subclass (e.g. one that overrides the
+    To use a custom ``JSONEncoder`` subclass (one that overrides the
     ``.default()`` method to serialize additional types), specify it with
-    the ``cls`` kwarg; otherwise ``JSONEncoder`` is used.
+    the ``cls`` kwarg. Otherwise ``JSONEncoder`` is used.
 
     """
     # cached encoder

@@ -11,7 +11,7 @@ except ModuleNotFoundError:  # pragma: no cover
 
 
 class TrameVisualizer:
-    """Defines the view layout for the Trame visualizer"""
+    """Defines the view layout for the Trame visualizer."""
 
     def __init__(self) -> None:
         """Initialize the server and server-related variables."""

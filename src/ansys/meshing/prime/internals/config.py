@@ -70,7 +70,7 @@ def disable_optimizing_numpy_arrays():
 
 
 def is_optimizing_numpy_arrays():
-    """Determin if serialization of numpy arrays is enabled.
+    """Determine if serialization of numpy arrays is enabled.
 
     The default for optimization is always ``True``.
 
@@ -132,7 +132,7 @@ def using_container():
 def set_has_pim(value: bool):
     """Set the `HAS_PIM` flag.
 
-    PIM (Product Instance Mananger) provides a gRPC API that
+    PIM (Product Instance Manager) provides a gRPC API that
     enables both library and app developers to start a product in
     a remote environment and communicate with its API.
 

@@ -42,7 +42,7 @@ def get_child_processes(process):
     Returns
     -------
     List
-        Processs IDs of the processes.
+        Process IDs of the processes.
     """
     children = []
     cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
@@ -262,7 +262,7 @@ def port_in_use(port, host=defaults.ip()):
     This method must actually check is is a "bind" of the port to the
     address. Just checking if a socket can be created is insufficient
     because it's possible to run into permission errors like this one:
-    
+
     - An attempt was made to access a socket in a way forbidden by its
       access permissions.
 
