@@ -1,65 +1,99 @@
 """
 .. _ref_how_to_add_an_example_reference_key:
 
-Adding a New Gallery Example
-----------------------------
-This example demonstrates how to add new examples as well as being a template that can
-be used in their creation.
+Adding a new example
+--------------------
+**Summary**: This example demonstrates how to add new examples and serves as a template
+that you can use in their creation.
 
-This block comment should be included at the top of any new example. Each example
-should have a reference tag/key in the form:
+A block comment must be included at the top of any new example. Each example
+must have a reference tag in this format:
 
 ``.. _ref_my_example:``
 
-The ``.. _ref_`` is necessary. Everything that follows is your reference tag. As
-convention, we keep all references all in ``snake_case``.
+The ``.. _ref_`` is necessary. Everything that follows is your reference tag.
+Keep all references in `snake case`.
 
 This section should give a brief overview of what the example is about and/or demonstrates.
 The title should be changed to reflect the topic your example covers.
 
-New examples should be added as python scripts to:
+New examples should be added as Python scripts to:
 
 ``pyprimemesh/examples/gallery``
 
 .. note::
-   Avoid creating new folders unless absolutely necessary. If in doubt put the example
+   Avoid creating new folders unless absolutely necessary. If in doubt, put the example
    in the folder closest to what it is doing and its precise location can be advised
    on in the pull request. If you *must* create a new folder, make sure to add a
-   ``README.txt`` containing a reference, a title and a single sentence description of the folder.
-   Otherwise the new folder will be ignored by Sphinx.
+   ``README.txt`` file containing a reference, a title, and a single sentence describing the folder.
+   Otherwise, the new folder is ignored by Sphinx.
 
 Example file names should be in the format:
 
 ``example_name.py``
 
-After this preamble is complete, the first code block begins.
+.. note::
+    Supporting input files for the example, such as CAD or mesh file assets, must be either original
+    content or have appropriate licensing and ownership permissions from their respective owners. If
+    the input files are used within the example script provided they must be capable of running in
+    the CI pipeline. This means that only files that can be read using the native file formats and
+    CAD readers can be used in the scripted examples.
+
+The recommended data formats to be included in the example are:
+
+* .pmdat
+* .fmd
+* .scdoc or .dsco (supported on Windows OS)
+
+Supporting input files should be added in:
+
+`Github Example Data Repository <https://github.com/ansys/example-data/tree/master/pyprimemesh>`_
+
+Referencing files as enum and creating download function in:
+
+``pyprimemesh/examples.py``
+
+Also adding download function to:
+
+``pyprimemesh/examples/__init__.py``
+
+After this preamble is the first code block:
 """
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 
-# start Ansys Prime Server and get client model
+# Start Ansys Prime Server instance and get client model
 prime_client = prime.launch_prime()
 model = prime_client.model
 
 # Your code goes here...
 mesh_util = prime.lucid.Mesh(model=model)
+
+# For Windows OS users scdoc is also available:
+# mixing_elbow = prime.examples.download_elbow_scdoc()
 mixing_elbow = prime.examples.download_elbow_fmd()
 mesh_util.read(mixing_elbow)
 print(model)
 
 ###############################################################################
-# Section Title
-# ~~~~~~~~~~~~~
-# Code blocks can be broken up with text "sections" which are interpreted as
-# restructured text.
+# Create sections
+# ~~~~~~~~~~~~~~~
+# You can break up code blocks in titled sections that provide descriptive text.
+# When Sphinx is used to generate the documentation, this content is interpreted
+# as ReStructured Text (RST).
 #
-# This will also be translated into a markdown cell in the generated jupyter notebook.
-# Sections can contain any information you may have regarding the example
-# such as step-by-step comments or notes regarding motivations etc.
+# .. note::
+# You only need to create the Python (PY) files for the example. The
+# ``sphinx-gallery`` extension automatically generates the Jupyter
+# notebook, the HTML files for the documentation, and the demo script.
 #
-# As in jupyter notebooks, if code is left unassigned at the end of a code block
-# (as with ``model`` in the previous block) the output will be generated and
+# Sections can contain any information that you may have regarding the example,
+# such as step-by-step comments and information on motivations. In the generated
+# Jupyter notebook, this text is translated into a markdown cell.
+#
+# As in Jupyter notebooks, if code is left unassigned at the end of a code block
+# (as with ``model`` in the previous block), the output is generated and
 # printed to the screen according to its ``__repr__``.  Otherwise, you can use
 # ``print()`` to output the ``__str__``.
 
@@ -72,25 +106,23 @@ mesh_util.volume_mesh(
 )
 
 ###############################################################################
-# Rendering graphics
-# ~~~~~~~~~~~~~~~~~~
-# If you display graphics the result will be auto-generated and
-# rendered in the page. Like so:
+# Render graphics
+# ~~~~~~~~~~~~~~~
+# If you display graphics, the result is auto-generated and
+# rendered on the page:
 display = Graphics(model)
 display()
 
 ###############################################################################
-# Making a Pull Request
-# ~~~~~~~~~~~~~~~~~~~~~
+# Make a pull request
+# ~~~~~~~~~~~~~~~~~~~
 # Once your example is complete and you've verified builds locally, you can make a
 # pull request (PR).  Branches containing examples should be prefixed with `doc/`
-# as per the branch naming conventions found here: :ref:`ref_index_contributing`.
-#
-# Note that you only need to create the python source example (.py).  The jupyter
-# notebook, the example html and the demo script will all be auto-generated via ``sphinx-gallery``.
+# as per the branch-naming conventions found in the :ref:`ref_index_contributing`
+# topic in the *PyAnsys Developer's Guide*.
 
 ###############################################################################
-# Stopping Ansys Prime Server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Stop Ansys Prime Server
+# ~~~~~~~~~~~~~~~~~~~~~~~
 #
 prime_client.exit()

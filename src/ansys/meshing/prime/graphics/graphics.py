@@ -1,16 +1,32 @@
+"""Module for graphics related implementations."""
 import enum
 import os
+from typing import List
 
 import numpy as np
 import pyvista as pv
-from pyvista import _vtk
+import vtk
 from pyvista.plotting.plotting import Plotter
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
 from ansys.meshing.prime.internals import defaults
 
 
-def compute_face_list_from_structured_nodes(nodes, dim):
+# TODO: nodes parameter is unused.
+def compute_face_list_from_structured_nodes(dim):
+    """Compute the distances from the nodes.
+
+    Parameters
+    ----------
+    dim : List[int]
+        Number of elements in each dimension.
+
+    Returns
+    -------
+    List
+        List with the faces.
+    """
     flist = []
     for w in range(dim[2]):
         for u in range(dim[0] - 1):
@@ -42,6 +58,8 @@ def compute_face_list_from_structured_nodes(nodes, dim):
 
 
 class DisplayMeshType(enum.IntEnum):
+    """Types of meshes to display."""
+
     TOPOFACE = 0
     TOPOEDGE = 1
     FACEZONELET = 2
@@ -51,6 +69,8 @@ class DisplayMeshType(enum.IntEnum):
 
 
 class ColorByType(enum.IntEnum):
+    """Zone types."""
+
     ZONE = 0
     ZONELET = 1
     PART = 2
@@ -112,12 +132,24 @@ color_matrix = np.array(
 
 
 def compute_distance(point1, point2):
+    """Compute the distance between two points."""
     dist = np.linalg.norm(np.array(point2) - np.array(point1))
     return dist
 
 
 class Picker:
-    def __init__(self, plotter, graphics):
+    """Class for selecting items from the display with the mouse.
+
+    Parameters
+    ----------
+    plotter : Plotter
+        PyVista plotter to manipulate.
+    graphics : Graphics
+        Graphics class to provide the callbacks.
+    """
+
+    def __init__(self, plotter: pv.Plotter, graphics):
+        """Initialize picker."""
         self.plotter = plotter
         self._graphics = graphics
         self._selected_disp_mesh: list[_DisplayMesh] = []
@@ -126,18 +158,26 @@ class Picker:
 
     @property
     def selections(self):
-        """To access all the selected disp mesh when done."""
+        """Access all the selected disp mesh when done."""
         return self._selected_disp_mesh
 
     def clear_selection(self):
-        """ """
+        """Clear picked selections in the display."""
         [disp_mesh.deselect() for disp_mesh in self._selected_disp_mesh]
         self._selected_disp_mesh.clear()
 
     def ignore(self, ignore_pick):
+        """Setter for ignore_pick.
+
+        Parameters
+        ----------
+        ignore_pick : Any
+            Pick to ignore.
+        """
         self._ignore = ignore_pick
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs):  # pragma: no cover
+        """Code to run when something is clicked in the display."""
         if self._ignore:
             return
         picked_pt = np.array(self.plotter.pick_mouse_position())
@@ -167,10 +207,18 @@ class Picker:
 
 
 class Graphics(object):
-    """ """
+    """Class to manage graphics in PyPrime.
 
-    def __init__(self, model: prime.Model):
-        """ """
+    Parameters
+    ----------
+    model : prime.Model
+        Model to show.
+    use_trame : bool, optional
+        Whether to use Trame visualizer or not, by default False.
+    """
+
+    def __init__(self, model: prime.Model, use_trame: bool = False):
+        """Initialize graphics."""
         self._model = model
         self._display_data = {}
         self._display_spline_data = {}
@@ -182,19 +230,27 @@ class Graphics(object):
         self._app = None
         self._ruler_visible = False
         self._ruler_actor = None
-        self._colorByTypeBt: _vtk.vtkButtonWidget = None
-        self._hideBt: _vtk.vtkButtonWidget = None
-        self._showEdgeBt: _vtk.vtkButtonWidget = None
-        self._printInfoBt: _vtk.vtkButtonWidget = None
-        self._showRulerBt: _vtk.vtkButtonWidget = None
+        self._colorByTypeBt: vtk.vtkButtonWidget = None
+        self._hideBt: vtk.vtkButtonWidget = None
+        self._showEdgeBt: vtk.vtkButtonWidget = None
+        self._printInfoBt: vtk.vtkButtonWidget = None
+        self._showRulerBt: vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
-        if os.getenv('PRIME_APP_RUN'):
+        self._use_trame = use_trame
+
+        if self._use_trame and not _HAS_TRAME:  # pragma: no cover
+            warn_msg = (
+                "'use_trame' is active but Trame dependencies are not installed."
+                "Consider installing 'pyvista[trame]' to use this functionality."
+            )
+            self._model._logger.warning(warn_msg)
+        if os.getenv('PRIME_APP_RUN'):  # pragma: no cover
             self._app = __import__('PrimeApp')
         else:
             self.__update_display_data()
 
     def __update_display_data(self):
-        """ """
+        """Update the objects displayed in the visualizer."""
         part_ids = [part.id for part in self._model.parts]
         mesh_info = prime.MeshInfo(self._model)
         self._display_data.clear()
@@ -233,11 +289,25 @@ class Graphics(object):
             self._display_data[part_id] = data
 
     def __get_ctrl_point_display_mesh_object(self, part_id, spline_id):
+        """Calculate the control points in a display.
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part where to show the edges.
+        spline_id : prime.EdgeConnectivityResults
+            Results of the face connectivity.
+
+        Returns
+        -------
+        _DisplayMesh
+            Displayed mesh.
+        """
         part = self._model.get_part(part_id)
         spline = part.get_spline(spline_id)
         dim = spline.control_points_count
         nodes = spline.control_points
-        face_list = compute_face_list_from_structured_nodes(nodes, dim)
+        face_list = compute_face_list_from_structured_nodes(dim)
         display_mesh_type = DisplayMeshType.SPLINECONTROLPOINTS
         id = spline.id
         disp_mesh = _DisplayMesh(
@@ -256,11 +326,25 @@ class Graphics(object):
         return disp_mesh
 
     def __get_spline_surf_display_mesh_object(self, part_id, spline_id):
+        """Calculate the splines in a display.
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part where to show the edges.
+        spline_id : prime.EdgeConnectivityResults
+            Results of the face connectivity.
+
+        Returns
+        -------
+        _DisplayMesh
+            Displayed mesh.
+        """
         part = self._model.get_part(part_id)
         spline = part.get_spline(spline_id)
         dim = spline.spline_points_count
         nodes = spline.spline_points
-        face_list = compute_face_list_from_structured_nodes(nodes, dim)
+        face_list = compute_face_list_from_structured_nodes(dim)
         display_mesh_type = DisplayMeshType.SPLINESURFACE
         id = spline.id
         disp_mesh = _DisplayMesh(
@@ -281,7 +365,22 @@ class Graphics(object):
     def __get_face_display_mesh_object(
         self, part_id: int, face_facet_res: prime.FaceConnectivityResults, index: int
     ):
-        """ """
+        """Display the faces in an object.
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part where to show the edges.
+        face_facet_res : prime.EdgeConnectivityResults
+            Results of the face connectivity.
+        index : int
+            Index of the topological edges list.
+
+        Returns
+        -------
+        _DisplayMesh
+            Displayed mesh.
+        """
         part = self._model.get_part(part_id)
         node_start = 3 * np.sum(face_facet_res.num_nodes_per_face_zonelet[0:index])
         num_node_coords = 3 * face_facet_res.num_nodes_per_face_zonelet[index]
@@ -313,7 +412,22 @@ class Graphics(object):
     def __get_edge_display_mesh_object(
         self, part_id: int, edge_facet_res: prime.EdgeConnectivityResults, index: int
     ):
-        """ """
+        """Display the edges in an object.
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part where to show the edges.
+        edge_facet_res : prime.EdgeConnectivityResults
+            Results of the edge connectivity.
+        index : int
+            Index of the topological edges list.
+
+        Returns
+        -------
+        _DisplayMesh
+            displayed mesh.
+        """
         part = self._model.get_part(part_id)
         node_start = 3 * np.sum(edge_facet_res.num_nodes_per_edge_zonelet[0:index])
         num_node_coords = 3 * edge_facet_res.num_nodes_per_edge_zonelet[index]
@@ -342,12 +456,27 @@ class Graphics(object):
         )
         return disp_mesh
 
-    def __call__(self, parts=None, update=True, spline=False, scope: prime.ScopeDefinition = None):
-        """ """
+    def __call__(
+        self,
+        parts: List = None,
+        update: bool = True,
+        spline: bool = False,
+        scope: prime.ScopeDefinition = None,
+    ):
+        """Show the appropriate display based on the parameters.
+
+        Parameters
+        ----------
+        parts : Any, optional
+            Parts to show, by default None.
+        update : bool, optional
+            Whether to update the display or not, by default True.
+        spline : bool, optional
+            Whether to use splines or not, by default False.
+        scope : prime.ScopeDefinition, optional
+            Scope of the parts, by default None.
+        """
         self._parts = parts
-        # if(spline):
-        #     self.__draw_spline(update)
-        # el
         if scope != None:
             self.__draw_scope_parts(update, scope)
         elif parts != None:
@@ -355,12 +484,12 @@ class Graphics(object):
         else:
             self.show(update)
 
-    def __color_by_type_callback(self, flag):
-        """ """
+    def __color_by_type_callback(self):  # pragma: no cover
+        """Determine the color of a type in the callback."""
         vr = self._colorByTypeBt.GetRepresentation()
         state = vr.GetState()
         self._color_by_type = ColorByType(state)
-        r = _vtk.vtkPNGReader()
+        r = vtk.vtkPNGReader()
         color_by_type_icon_file = ""
         if self._color_by_type == ColorByType.ZONELET:
             color_by_type_icon_file = os.path.join(
@@ -381,8 +510,8 @@ class Graphics(object):
             for disp_mesh in data["faces"]
         ]
 
-    def __hide_unhide_selection(self, flag):
-        """ """
+    def __hide_unhide_selection(self):  # pragma: no cover
+        """Hide or unhide the clicked component."""
         sel_disp_mesh = self._picker.selections
         if len(sel_disp_mesh) > 0:
             [disp_mesh.hide(self._plotter) for disp_mesh in sel_disp_mesh]
@@ -395,7 +524,7 @@ class Graphics(object):
                 for disp_mesh in data["faces"]
             ]
 
-    def __show_edges_callback(self, flag):
+    def __show_edges_callback(self, flag):  # pragma: no cover
         [
             disp_mesh.show_edges(flag)
             for part_id, data in self._display_data.items()
@@ -403,12 +532,12 @@ class Graphics(object):
             for disp_mesh in data["faces"]
         ]
 
-    def __print_callback(self, flag):
+    def __print_callback(self, flag):  # pragma: no cover
         sel_disp_mesh = self._picker.selections
         [print(disp_mesh) for disp_mesh in sel_disp_mesh]
 
-    def __show_ruler_callback(self, flag):
-        """This function shows ruler on UI when clicked on ruler button"""
+    def __show_ruler_callback(self, flag):  # pragma: no cover
+        """Show ruler on UI when clicked on ruler button."""
         if self._plotter is not None:
             if self._ruler_visible and self._ruler_actor is not None:
                 self._plotter.remove_actor(self._ruler_actor)
@@ -425,7 +554,13 @@ class Graphics(object):
                 self._ruler_visible = True
 
     def get_face_mesh_data(self):
-        """ """
+        """Get the mesh data from a face.
+
+        Returns
+        -------
+        List
+            Data for the mesh of the faces.
+        """
         face_mesh_data = [
             disp_mesh
             for part_id, data in self._display_data.items()
@@ -435,14 +570,26 @@ class Graphics(object):
         return face_mesh_data
 
     def show(self, update=False):
-        """ """
-        if os.getenv('PRIME_APP_RUN') and self._app is not None:
+        """Show the current set display.
+
+        Parameters
+        ----------
+        update : bool, optional
+            Whether to update the display or not, by default False.
+        """
+        if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
             app_g.DisplayModel()
             app_g.FitToScreen()
             return
         if update == True:
             self.__update_display_data()
+
+        # if we use trame, activate OFF_SCREEN before initializing plotter
+        pv_off_screen_original = None
+        if self._use_trame:  # pragma: no cover
+            pv_off_screen_original = pv.OFF_SCREEN
+            pv.OFF_SCREEN = True
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
         [
@@ -476,14 +623,34 @@ class Graphics(object):
             )
         self._picker = Picker(self._plotter, self)
         self._plotter.track_click_position(self._picker, side='left')
-        # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
+        if self._use_trame:  # pragma: no cover
+            pv.OFF_SCREEN = pv_off_screen_original
 
-    def __draw_parts(self, parts=[], update=False, spline=False):
-        """ """
-        if os.getenv('PRIME_APP_RUN') and self._app is not None:
+    def _show_selector(self):
+        """Chooses between using Trame or Python visualizer."""
+        if self._use_trame:  # pragma: no cover
+            visualizer = TrameVisualizer()
+            visualizer.set_scene(self._plotter)
+            visualizer.show()
+        else:
+            self._plotter.show()
+
+    def __draw_parts(self, parts: List = [], update: bool = False, spline: bool = False):
+        """Draws the given parts in the display.
+
+        Parameters
+        ----------
+        parts : list, optional
+            Parts to display, by default [].
+        update : bool, optional
+             Whether to update the display or not, by default False.
+        spline : bool, optional
+            Whether to use splines or not, by default False.
+        """
+        if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
             app_g.Clear()
             [app_g.DrawPart(part) for part in parts]
@@ -541,13 +708,21 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
 
     def __draw_scope_parts(self, update=False, scope: prime.ScopeDefinition = None):
-        """ """
+        """Draws the scope of the parts.
+
+        Parameters
+        ----------
+        update : bool, optional
+            Whether to update the display or not, by default False.
+        scope : prime.ScopeDefinition, optional
+            Definition of the scopes, by default None.
+        """
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
-        if os.getenv('PRIME_APP_RUN') and self._app is not None:
+        if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
             app_g.Clear()
         elif update == True:
@@ -601,12 +776,13 @@ class Graphics(object):
         # self._plotter.window_size = [1920, 1017]
         if self._sphinx_build == False:
             self.__update_bt_icons()
-        self._plotter.show()
+        self._show_selector()
 
     def __update_bt_icons(self):
+        """Update the icons on display."""
         vr = self._colorByTypeBt.GetRepresentation()
         vr.SetNumberOfStates(3)
-        r = _vtk.vtkPNGReader()
+        r = vtk.vtkPNGReader()
         color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
         r.SetFileName(color_by_zone_icon_file)
         r.Update()
@@ -616,7 +792,7 @@ class Graphics(object):
         hide_unhide_icon_file = os.path.join(
             os.path.dirname(__file__), 'images', 'invert_visibility.png'
         )
-        hide_r = _vtk.vtkPNGReader()
+        hide_r = vtk.vtkPNGReader()
         hide_r.SetFileName(hide_unhide_icon_file)
         hide_r.Update()
         image_2 = hide_r.GetOutput()
@@ -624,7 +800,7 @@ class Graphics(object):
         hide_vr.SetButtonTexture(1, image_2)
         show_edge_vr = self._showEdgeBt.GetRepresentation()
         show_edges_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_edges.png')
-        show_edge_r = _vtk.vtkPNGReader()
+        show_edge_r = vtk.vtkPNGReader()
         show_edge_r.SetFileName(show_edges_icon_file)
         show_edge_r.Update()
         image_3 = show_edge_r.GetOutput()
@@ -634,7 +810,7 @@ class Graphics(object):
         print_info_icon_file = os.path.join(
             os.path.dirname(__file__), 'images', 'selectioninfo.png'
         )
-        print_info_r = _vtk.vtkPNGReader()
+        print_info_r = vtk.vtkPNGReader()
         print_info_r.SetFileName(print_info_icon_file)
         print_info_r.Update()
         image_4 = print_info_r.GetOutput()
@@ -642,7 +818,7 @@ class Graphics(object):
         print_info_vr.SetButtonTexture(1, image_4)
         show_ruler_vr = self._showRulerBt.GetRepresentation()
         show_ruler_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_ruler.png')
-        show_ruler_r = _vtk.vtkPNGReader()
+        show_ruler_r = vtk.vtkPNGReader()
         show_ruler_r.SetFileName(show_ruler_icon_file)
         show_ruler_r.Update()
         image_5 = show_ruler_r.GetOutput()
@@ -650,12 +826,48 @@ class Graphics(object):
         show_ruler_vr.SetButtonTexture(1, image_5)
 
     def get_color_by_type(self) -> ColorByType:
-        """ """
+        """Get the color by the zone type.
+
+        Returns
+        -------
+        ColorByType
+            The color type.
+        """
         return self._color_by_type
 
 
-class _DisplayMesh(object):
-    """ """
+class _DisplayMesh(object):  # pragma: no cover
+    """Helper class to display meshes in the plotter.
+
+    Parameters
+    ----------
+    type : DisplayMeshType
+        Type of the mesh.
+    id : int
+        ID of the mesh.
+    part_id : int
+        Id of the part to mesh.
+    graphics : Graphics
+        Instance of the Graphics class.
+    model : prime.Model
+        Model to show.
+    vertices : np.array
+        Vertices of the mesh.
+    facet_list : np.array
+        List of faces of the model.
+    has_mesh : bool
+        Whether the model is meshed or not.
+    zone_id : int, optional
+        ID of the zone, by default 0.
+    zone_name : str, optional
+        Name of the zone, by default "".
+    part_name : str, optional
+        Name of the part, by default "".
+    topo_edge_type : int, optional
+        Type of the topological edge, by default 0.
+    number_of_edges : int, optional
+        Number of edges in the model, by default 0.
+    """
 
     def __init__(
         self,
@@ -673,7 +885,7 @@ class _DisplayMesh(object):
         topo_edge_type: int = 0,
         number_of_edges: int = 0,
     ):
-        """ """
+        """Initialize parameters to display."""
         self._type = type
         self._id = id
         self._part_id = part_id
@@ -715,7 +927,13 @@ class _DisplayMesh(object):
         return msg
 
     def add_to_plotter(self, plotter: Plotter):
-        """ """
+        """Add elements to the plotter.
+
+        Parameters
+        ----------
+        plotter : Plotter
+            Elements of another plotter to add.
+        """
         if self._type == DisplayMeshType.TOPOFACE or self._type == DisplayMeshType.FACEZONELET:
             if self._poly_data == None:
                 surf = pv.PolyData(self._vertices, self._facet_list)
@@ -788,7 +1006,13 @@ class _DisplayMesh(object):
                 )
 
     def get_face_color(self):
-        """ """
+        """Get color of the faces.
+
+        Returns
+        -------
+        List
+            Color of the faces.
+        """
         type = self._graphics.get_color_by_type()
         num_colors = int(color_matrix.size / 3)
         if type == ColorByType.ZONELET:
@@ -799,7 +1023,13 @@ class _DisplayMesh(object):
             return color_matrix[self._zone_id % num_colors].tolist()
 
     def get_edge_color(self):
-        """ """
+        """Get color of the edges.
+
+        Returns
+        -------
+        List
+            Colors list.
+        """
         num_colors = int(color_matrix.size / 3)
         if self._type == DisplayMeshType.EDGEZONELET:
             return color_matrix[self._id % num_colors].tolist()
@@ -860,7 +1090,13 @@ class _DisplayMesh(object):
             prop.SetEdgeVisibility(not prop.GetEdgeVisibility())
 
     def set_color_by_type(self, type: ColorByType):
-        """ """
+        """Set the color based on the zone type.
+
+        Parameters
+        ----------
+        type : ColorByType
+            Type of the zone.
+        """
         if self._type == DisplayMeshType.TOPOFACE or self._type == DisplayMeshType.FACEZONELET:
             if self._poly_data != None:
                 fcolor = np.array(self.get_face_color())

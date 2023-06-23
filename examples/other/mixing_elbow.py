@@ -1,3 +1,4 @@
+"""Mixing elbow example."""
 import os
 import tempfile
 

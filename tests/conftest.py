@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 import pytest
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.examples import download_test_examples
 
 
 class RemoteClientManager:
@@ -16,7 +17,7 @@ class RemoteClientManager:
         self.client = None
 
     def start_ansys_prime_server(self, prime_root=None, ip='127.0.0.1', port=50055, n_procs=1):
-        """Initialization of the Ansys Prime server.
+        """Initialization of Ansys Prime Server.
 
         Parameters
         ----------
@@ -61,7 +62,7 @@ def get_remote_client():
     Yields
     ------
     Client
-        Initialized remote client of Ansys prime
+        Initialized remote client of Ansys Prime Server.
     """
     client_manager = RemoteClientManager()
     client_manager.start_remote_client()
@@ -91,6 +92,14 @@ def get_examples():
     examples_dict["bracket"] = bracket
 
     return examples_dict
+
+
+@pytest.fixture(scope="session", autouse=True)
+def get_testfiles():
+    """Downloads unit test files"""
+    if not os.path.exists("./tests/core/test_files/"):
+        os.mkdir(os.path.abspath("./tests/core/test_files/"))
+    download_test_examples(destination=str(os.path.abspath("./tests/core/test_files/")))
 
 
 def create_scenario_element(test, id):
@@ -152,3 +161,10 @@ def write_arm_scenarios(result, scenarioLogName='scenario.log'):
 
         with open(xmlFileName, 'a') as scenario_log:
             scenario_log.write(xmlstr)
+
+
+def pytest_sessionfinish(session, exitstatus):
+    """Cleanup generated folder."""
+    tmp_path = os.path.abspath("./tests/core/test_files/")
+    if os.path.exists(tmp_path):
+        os.rmdir(tmp_path)

@@ -18,6 +18,7 @@ This section provides an overview of how you use PyPrimeMesh for mesh preparatio
    surfer
    wrapper
    automesh
+   stacker
    sizing
    connections
    mesh_diagnostics
@@ -26,8 +27,8 @@ This section provides an overview of how you use PyPrimeMesh for mesh preparatio
 Overview
 ========
 The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method in PyPrimeMesh launches
-the Ansys Prime server and returns an instance of the :class:`Client <ansys.meshing.prime.Client>`
-class. You can then send gRPC commands to the Ansys Prime server and receive responses 
+Ansys Prime Server and returns an instance of the :class:`Client <ansys.meshing.prime.Client>`
+class. You can then send gRPC commands to Ansys Prime Server and receive responses 
 from it.
 
 .. code-block:: python

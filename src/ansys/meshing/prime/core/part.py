@@ -130,7 +130,7 @@ class Part(_Part):
         Parameters
         ----------
         value : bool
-            _description_
+            Whether to print the mesh or not.
         """
         self._print_mesh = value
 

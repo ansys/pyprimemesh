@@ -4,18 +4,17 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-meshing-prime"
-version = "0.4.0.dev7"
-description = "PyPrimeMesh provides a python client to Ansys Prime Server. Ansys Prime Server delivers core Ansys meshing technology."
+version = "0.4.0.dev8"
+description = "PyPrimeMesh is a Python client to Ansys Prime Server, which delivers core Ansys meshing technology."
 readme = "README.md"
-requires-python = ">=3.7,<4"
+requires-python = ">=3.8,<4"
 license = {file = "LICENSE"}
-authors = [{name = "ANSYS, Inc.", email = "pyansys.support@ansys.com"}]
-maintainers = [{name = "PyAnsys developers", email = "pyansys.maintainers@ansys.com"}]
+authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
+maintainers =  [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 classifiers = [
     "Development Status :: 4 - Beta",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -34,16 +33,18 @@ graphics = [
   "pyvista>=0.32.0",
 ]
 tests = [
-  "pytest==7.3.1",
-  "pytest-cov==4.0.0",
+  "pytest==7.3.2",
+  "pytest-cov==4.1.0",
+  "pytest-pyvista==0.1.8",
+  "pyvista[trame]==0.39.1"
 ]
 doc = [
-  "ansys-sphinx-theme==0.9.8",
+  "ansys-sphinx-theme==0.9.9",
   "jupyter-sphinx==0.4.0",
   "numpydoc==1.5.0",
-  "pyvista==0.38.5",
-  "Sphinx==6.1.3",
-  "sphinx-autodoc-typehints==1.23.0",
+  "Sphinx==7.0.1",
+  "pyvista==0.39.1",
+  "sphinx-autodoc-typehints==1.23.2",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.13.0",
   "sphinx-notfound-page==0.8.3",
@@ -54,7 +55,7 @@ all = [
 ]
 
 [project.urls]
-Source = "https://github.com/pyansys/pyprimemesh"
+Source = "https://github.com/ansys/pyprimemesh"
 Documentation = "https://prime.docs.pyansys.com"
 
 
@@ -63,7 +64,7 @@ name = "ansys.meshing.prime"
 
 [tool.black]
 line-length = 100
-target-version = ['py37', 'py38', 'py39', 'py310']
+target-version = ['py38', 'py39', 'py310', 'py311']
 skip-string-normalization = true
 exclude = '''
 /(
@@ -86,3 +87,10 @@ exclude = '''
   | doc
 )/
 '''
+[tool.pytest.ini_options]
+minversion = "7.1"
+addopts = "-ra --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internals --cov=ansys.meshing.prime.lucid --cov=ansys.meshing.prime.graphics --cov-report=term --cov-report=html:.cov/html --image_cache_dir tests/graphics/image_cache --add_missing_images"
+testpaths = [
+    "tests",
+]
+

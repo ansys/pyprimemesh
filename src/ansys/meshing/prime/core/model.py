@@ -19,6 +19,7 @@ from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
+from ansys.meshing.prime.internals.logger import LOG
 
 
 class Model(_Model):
@@ -300,7 +301,7 @@ class Model(_Model):
 
     @property
     def topo_data(self) -> TopoData:
-        """Gets the topodata of a model.
+        """Get the topodata of a model.
 
         Returns
         -------
@@ -368,4 +369,4 @@ class Model(_Model):
         >>> model.python_logger.setLevel(logging.DEBUG)
 
         """
-        return self._logger
+        return LOG

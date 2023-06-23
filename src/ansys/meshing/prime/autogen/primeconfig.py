@@ -67,7 +67,7 @@ class ErrorCode(enum.IntEnum):
     SCAFFOLDERINVALIDCONSTANTMESHSIZE = 54
     """Invalid constant mesh size input for scaffold operation."""
     AUTOMESHFAILED = 100
-    """Auto mesh failed."""
+    """Auto meshing failed."""
     AITOVERLAPALONGMULTIFOUND = 101
     """Topology identification failed because of overlapping faces."""
     TRIANGULATIONFAILED = 102
@@ -98,6 +98,14 @@ class ErrorCode(enum.IntEnum):
     """Hex generation part of volume meshing failed."""
     INVALIDVOLUMECONTROLS = 118
     """Invalid volume controls specified for volume meshing."""
+    SOURCEFACINGCELLZONELETS = 119
+    """Source face zonelets facing existing volume mesh."""
+    TARGETWITHCELLZONELETS = 120
+    """Target face zonelets with volume mesh on both side."""
+    SIDEZONELETSNOTFIT = 121
+    """Side face zonelets are not sweepable for thin volume mesh."""
+    SOURCETARGETZONELETSNOTFIT = 122
+    """Source and target zonelets do not fit to thin volume mesh."""
     INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY = 123
     """Invalid scope entity."""
     INVALIDFIRSTASPECTRATIO = 124
@@ -126,6 +134,18 @@ class ErrorCode(enum.IntEnum):
     """Periodic surfaces selected for prism generation are not supported."""
     INVALIDNEIGHBORVOLUMES = 136
     """Invalid neighbor volumes selected to merge volumes."""
+    THINVOLUMEMESHFAILED = 137
+    """Thin volume meshing failed."""
+    PRISMMESHFAILED = 138
+    """Prism meshing failed."""
+    AUTOMESHINITFAILED = 139
+    """Auto mesh initialization failed."""
+    POLYMESHFAILED = 140
+    """Poly meshing failed."""
+    PYRAMIDMESHFAILED = 141
+    """Pyramid meshing failed."""
+    DELETEMESHFAILED = 142
+    """Deleting mesh failed."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -538,22 +558,26 @@ class ErrorCode(enum.IntEnum):
     """Some bodies are intersecting or incorrectly defined."""
     STACKER_BASEFACEUNMESHED = 10111
     """Base face list input has unmeshed topofaces."""
-    INVALIDTHINVOLUMECONTROLS = 12010
-    """Invalid input provided. Invalid thin volume control."""
-    THINVOLUMECONTROLINVALIDSOURCESCOPE = 12020
-    """Invalid input provided. Source scope not found."""
-    THINVOLUMECONTROLINVALIDTARGETSCOPE = 12040
-    """Invalid input provided. Target scope not found."""
-    THINVOLUMECONTROLINVALIDSCOPE = 12060
-    """Invalid input provided. Source scope and target scope cannot be same."""
-    THINVOLUMECONTROLINVALIDSOURCESCOPEENTITY = 12080
-    """Invalid input provided. Invalid source scope entity."""
-    THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY = 12100
-    """Invalid input provided. Invalid target scope entity."""
-    THINVOLUMECONTROLINVALIDNUMBEROFLAYER = 12120
-    """Invalid input provided. Number of layer in thin volume mesh should be greater than 0."""
-    THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED = 12140
+    INVALIDTHINVOLUMECONTROLS = 12101
+    """Invalid input provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDSOURCESCOPE = 12102
+    """Invalid source scope provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDTARGETSCOPE = 12103
+    """Invalid target scope provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDSCOPE = 12104
+    """Same source and target scope provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDSOURCESCOPEENTITY = 12105
+    """Invalid source scope entity provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY = 12106
+    """Invalid target scope entity provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDNUMBEROFLAYER = 12107
+    """Invalid number of layers provided for thin volume control."""
+    THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED = 12108
     """Thin volume mesh controls not supported for part with topology data."""
+    THINVOLUMECONTROLINVALIDVOLUMESCOPE = 12109
+    """Invalid volume scope provided for thin volume control."""
+    THINVOLUMECONTROLINVALIDCONTROL = 12110
+    """Same face scope is set as target for multiple thin volume controls."""
     MICROSTRUCTUREINVALIDELEMENTTYPE = 13000
     """Invalid input provided. Invalid Element Type."""
 

@@ -14,12 +14,13 @@ on:
       - release/*
 
 env:
-  DOCKER_IMAGE_NAME: ghcr.io/pyansys/prime
-  DOCKER_IMAGE_TAG: '23.2.0.dev6'
+  DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
+  DOCKER_IMAGE_TAG: '23.2.0.dev8'
   MAIN_PYTHON_VERSION: '3.9'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
+  RESET_IMAGE_CACHE: 0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -34,14 +35,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch name
-        uses: pyansys/actions/branch-name-style@main
+        uses: ansys/actions/branch-name-style@main
 
   style:
     name: Code style
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
-        uses: pyansys/actions/code-style@v3
+        uses: ansys/actions/code-style@v4
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -50,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: pyansys/actions/doc-style@v3
+        uses: ansys/actions/doc-style@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -61,35 +62,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
-
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+        should-release:
+          - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
+        exclude:
+          - should-release: false
+            os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: pyansys/actions/build-wheelhouse@v3
+        uses: ansys/actions/build-wheelhouse@v4
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
-
-  macos-build:
-    name: Build and Smoke tests (macOS)
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    runs-on: macos-latest
-    needs: [style]
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
-
-    steps:
-      - name: Build wheelhouse and perform smoke test
-        uses: pyansys/actions/build-wheelhouse@v3
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
-          operating-system: ${{ runner.os }}
           python-version: ${{ matrix.python-version }}
 
   docs:
@@ -102,7 +88,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: pyansys-bot
+          username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service
@@ -112,7 +98,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v2
 
       - name: "Run Ansys documentation building action"
-        uses: pyansys/actions/doc-build@v3
+        uses: ansys/actions/doc-build@v4
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
@@ -132,22 +118,37 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: pyansys-bot
+          username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Ansys Prime Server
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
 
+      - name: Restore images cache
+        uses: actions/cache@v3
+        with:
+          path: tests/graphics/image_cache
+          key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
+          restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
+
       - name: "Run pytest"
-        uses: pyansys/actions/tests-pytest@v3
+        uses: ansys/actions/tests-pytest@v4
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         with:
-          pytest-markers: "-vv"
-          pytest-extra-args: "--cov=ansys.meshing.prime --cov-report=term --cov-report=html:.cov/html --cov-report=html:.cov/xml"
-          
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          requires-xvfb: true
+      
+      - name: Upload PyVista generated images (cache and results)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-pyvista-images-${{ runner.os }}
+          path: tests/graphics/image_cache
+          retention-days: 7
+      
       - uses: codecov/codecov-action@v3
         name: 'Upload coverage to CodeCov'
 
@@ -157,7 +158,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
-        uses: pyansys/actions/build-library@v3
+        uses: ansys/actions/build-library@v4
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -165,18 +166,18 @@ jobs:
   release:
     name: Release project
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    needs: [package, macos-build]
+    needs: [package]
     runs-on: ubuntu-latest
     steps:
       - name: Release to the public PyPI repository
-        uses: pyansys/actions/release-pypi-public@v3
+        uses: ansys/actions/release-pypi-public@v4
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: Release to GitHub
-        uses: pyansys/actions/release-github@v3
+        uses: ansys/actions/release-github@v4
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -187,7 +188,7 @@ jobs:
     needs: [package]
     steps:
       - name: Deploy the latest documentation
-        uses: pyansys/actions/doc-deploy-dev@v3
+        uses: ansys/actions/doc-deploy-dev@v4
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -199,7 +200,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: pyansys/actions/doc-deploy-stable@v3
+        uses: ansys/actions/doc-deploy-stable@v4
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}

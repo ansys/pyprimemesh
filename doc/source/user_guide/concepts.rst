@@ -79,15 +79,14 @@ within any number of :attr:`parts <ansys.meshing.prime.Model.parts>` parameters:
 
 Each :class:`Part <ansys.meshing.prime.Part>` class can contain *TopoEntities* or *zonelets*.
 TopoEntities are Topo parts created from CAD geometry imports. Zonelets are mesh parts created
-from faceted geometry and mesh imports.
+from faceted geometry and mesh imports. TopoEntities and zonelets are characterized by the
+dimension of entities.
 
 .. figure:: ../images/part_type.png
     :width: 400pt
     :align: center
 
     **Part types**
-
-TopoEntities and zonelets are characterized by the dimension of entities.
 
 ------------
 TopoEntities
@@ -99,10 +98,10 @@ generated on TopoEntities are projected on the geometry representation.
 
 There are four types of TopoEntities:
 
-    * TopoNode: TopoEntity representing points
-    * TopoEdge: TopoEntity representing curves
-    * TopoFace: TopoEntity representing surfaces
-    * TopoVolume: TopoEntity representing volumes
+- TopoNode: TopoEntity representing points
+- TopoEdge: TopoEntity representing curves
+- TopoFace: TopoEntity representing surfaces
+- TopoVolume: TopoEntity representing volumes
 
 .. figure:: ../images/TopoEntities.png
     :width: 400pt
@@ -118,9 +117,9 @@ Zonelets are created from importing mesh files and are groups of interconnected 
 
 There are three types of zonelets:
 
-    * FaceZonelet: A group of interconnected faces
-    * EdgeZonelet: A group of interconnected edges
-    * CellZonelet: A group of interconnected cells
+- FaceZonelet: A group of interconnected faces
+- EdgeZonelet: A group of interconnected edges
+- CellZonelet: A group of interconnected cells
 
 A *volume* is a set of face zonelets that define a closed volume without containing any cell elements.
 
@@ -148,4 +147,4 @@ Labels allow overlapping groups of zonelets or TopoEntities.
 
 When importing CAD files, each group or named selection generates a label.
 
-When exporting to a Mechanical solver (.cdb) file, each label is exported as a component.
+When exporting to a Mechanical solver (CDB) file, each label is exported as a component.

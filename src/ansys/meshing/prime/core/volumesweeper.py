@@ -1,3 +1,4 @@
+"""Module for VolumeSweeper operations."""
 from ansys.meshing.prime.autogen.volumesweeper import VolumeSweeper as _Sweeper
 
 # isort: split
@@ -11,21 +12,30 @@ from ansys.meshing.prime.core.model import Model
 
 
 class VolumeSweeper(_Sweeper):
+    """VolumeSweeper class.
 
-    """VolumeSweeper class provide functions to volume mesh a given set of topovolumes by sweeping
+    VolumeSweeper class provide functions to volume mesh a given set of topovolumes by sweeping
     or stacking a set of face and edge zonelets.
-    Provide operations to generate volume mesh using stacker technology."""
+    Provide operations to generate volume mesh using stacker technology.
+
+    Parameters
+    ----------
+    model : Model
+        Model where to apply the operations.
+    """
 
     __doc__ = _Sweeper.__doc__
 
     def __init__(self, model: Model):
-        """__init__(Sweeper self, Model model)"""
+        """Initialize model in volume sweeper."""
         self._model = model
 
     def create_base_face(
         self, part_id: int, topo_volume_ids: Iterable[int], params: MeshStackerParams
     ) -> MeshStackerResults:
-        """Creates a face at the specified origin and perpendicular to the specified direction.
+        """Create a face at the specified origin.
+
+        Creates a face at the specified origin and perpendicular to the specified direction.
         Also, imprint model edges on the face, make necessary edge repairs, and duplicate relevant
         size controls on the base face.
 
@@ -60,7 +70,9 @@ class VolumeSweeper(_Sweeper):
         topo_volume_ids: Iterable[int],
         params: MeshStackerParams,
     ) -> MeshStackerResults:
-        """Generate volume mesh stacking a meshed face, layer by layer, along the given
+        """Generate volume mesh stacking a meshed face.
+
+        Generate volume mesh stacking a meshed face, layer by layer, along the given
         direction. Calculates the stack layers using size controls and global size parameters.
 
 

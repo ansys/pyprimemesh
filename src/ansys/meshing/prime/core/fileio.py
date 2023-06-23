@@ -10,8 +10,6 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
-    ExportLSDynaIgaKeywordFileParams,
-    ExportLSDynaKeywordFileParams,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -25,7 +23,6 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportFluentCaseResults,
     ImportFluentMeshingMeshParams,
     ImportFluentMeshingMeshResults,
-    ImportLSDynaKeywordFileParams,
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
@@ -411,94 +408,6 @@ class FileIO(_FileIO):
             result = super().export_fluent_meshing_mesh(temp_file_name, export_fluent_mesh_params)
         return result
 
-    def import_lsdyna_keyword_file(
-        self, file_name: str, import_params: ImportLSDynaKeywordFileParams
-    ) -> FileReadResults:
-        """Import LS-DYNA Keyword file.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Name of the file.
-        import_params : ImportLSDynaKeywordFileParams
-            Parameters for LS-DYNA Keyword file import.
-
-        Returns
-        -------
-        FileReadResults
-            Returns FileReadResults.
-
-        Examples
-        --------
-        >>> results = file_io.import_lsdyna_keyword_file(
-                        file_name,
-                        ImportLSDynaKeywordFileParams(model = model))
-
-        """
-        with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_lsdyna_keyword_file(temp_file_name, import_params)
-            self._model._sync_up_model()
-        return result
-
-    def export_lsdyna_keyword_file(
-        self, file_name: str, export_params: ExportLSDynaKeywordFileParams
-    ) -> FileWriteResults:
-        """Export FEA LS-DYNA Keyword file for solid, or surface mesh, or both.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Name of the file.
-        export_params : ExportLSDynaKeywordFileParams
-            Parameters for FEA LS-DYNA Keyword file export.
-
-        Returns
-        -------
-        FileWriteResults
-            Returns FileWriteResults.
-
-        Examples
-        --------
-        >>> results = file_io.export_lsdyna_keyword_file(
-                        file_name,
-                        ExportLSDynaKeywordFileParams(model = model))
-
-        """
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_lsdyna_keyword_file(temp_file_name, export_params)
-        return result
-
-    def export_lsdyna_iga_keyword_file(
-        self, file_name: str, export_params: ExportLSDynaIgaKeywordFileParams
-    ) -> FileWriteResults:
-        """Export IGA LS-DYNA Keyword file for solid, or surface splines, or both.
-
-
-        Parameters
-        ----------
-        file_name : str
-            Name of the file.
-        export_params : ExportLSDynaIgaKeywordFileParams
-            Parameters for IGA LS-DYNA Keyword file export.
-
-        Returns
-        -------
-        FileWriteResults
-            Returns FileWriteResults.
-
-        Examples
-        --------
-        >>> results = file_io.export_lsdyna_iga_keyword_file(
-                        file_name,
-                        ExportLSDynaIgaKeywordFileParams(model = model))
-
-        """
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_lsdyna_iga_keyword_file(temp_file_name, export_params)
-        return result
-
     def export_boundary_fitted_spline_kfile(
         self, file_name: str, export_params: ExportBoundaryFittedSplineParams
     ) -> FileWriteResults:
@@ -580,7 +489,6 @@ class FileIO(_FileIO):
     def export_stl(self, file_name: str, params: ExportSTLParams) -> FileWriteResults:
         """Export STL file.
 
-
         Parameters
         ----------
         file_name : str
@@ -592,7 +500,6 @@ class FileIO(_FileIO):
         -------
         FileWriteResults
             Returns the FileWriteResults.
-
 
         Notes
         -----

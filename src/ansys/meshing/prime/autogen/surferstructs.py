@@ -529,6 +529,8 @@ class LocalSurferParams(CoreObject):
 
     def __initialize(
             self,
+            min_angle: float,
+            max_angle: float,
             size_field_type: SizeFieldType,
             min_size: float,
             max_size: float,
@@ -536,6 +538,8 @@ class LocalSurferParams(CoreObject):
             constant_size: float,
             smooth_boundary: bool,
             n_rings: int):
+        self._min_angle = min_angle
+        self._max_angle = max_angle
         self._size_field_type = SizeFieldType(size_field_type)
         self._min_size = min_size
         self._max_size = max_size
@@ -547,6 +551,8 @@ class LocalSurferParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
+            min_angle: float = None,
+            max_angle: float = None,
             size_field_type: SizeFieldType = None,
             min_size: float = None,
             max_size: float = None,
@@ -562,6 +568,10 @@ class LocalSurferParams(CoreObject):
         ----------
         model: Model
             Model to create a LocalSurferParams object with default parameters.
+        min_angle: float, optional
+            Minimum feature angle limit used to identify and preserve features.
+        max_angle: float, optional
+            Maximum feature angle limit used to identify and preserve features.
         size_field_type: SizeFieldType, optional
             Size field type used to generate surface mesh.
         min_size: float, optional
@@ -585,6 +595,8 @@ class LocalSurferParams(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["minAngle"] if "minAngle" in json_data else None,
+                json_data["maxAngle"] if "maxAngle" in json_data else None,
                 SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None),
                 json_data["minSize"] if "minSize" in json_data else None,
                 json_data["maxSize"] if "maxSize" in json_data else None,
@@ -593,9 +605,11 @@ class LocalSurferParams(CoreObject):
                 json_data["smoothBoundary"] if "smoothBoundary" in json_data else None,
                 json_data["nRings"] if "nRings" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [size_field_type, min_size, max_size, growth_rate, constant_size, smooth_boundary, n_rings])
+            all_field_specified = all(arg is not None for arg in [min_angle, max_angle, size_field_type, min_size, max_size, growth_rate, constant_size, smooth_boundary, n_rings])
             if all_field_specified:
                 self.__initialize(
+                    min_angle,
+                    max_angle,
                     size_field_type,
                     min_size,
                     max_size,
@@ -610,6 +624,8 @@ class LocalSurferParams(CoreObject):
                     param_json = model._communicator.initialize_params(model, "LocalSurferParams")
                     json_data = param_json["LocalSurferParams"] if "LocalSurferParams" in param_json else {}
                     self.__initialize(
+                        min_angle if min_angle is not None else ( LocalSurferParams._default_params["min_angle"] if "min_angle" in LocalSurferParams._default_params else (json_data["minAngle"] if "minAngle" in json_data else None)),
+                        max_angle if max_angle is not None else ( LocalSurferParams._default_params["max_angle"] if "max_angle" in LocalSurferParams._default_params else (json_data["maxAngle"] if "maxAngle" in json_data else None)),
                         size_field_type if size_field_type is not None else ( LocalSurferParams._default_params["size_field_type"] if "size_field_type" in LocalSurferParams._default_params else SizeFieldType(json_data["sizeFieldType"] if "sizeFieldType" in json_data else None)),
                         min_size if min_size is not None else ( LocalSurferParams._default_params["min_size"] if "min_size" in LocalSurferParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
                         max_size if max_size is not None else ( LocalSurferParams._default_params["max_size"] if "max_size" in LocalSurferParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
@@ -626,6 +642,8 @@ class LocalSurferParams(CoreObject):
 
     @staticmethod
     def set_default(
+            min_angle: float = None,
+            max_angle: float = None,
             size_field_type: SizeFieldType = None,
             min_size: float = None,
             max_size: float = None,
@@ -637,6 +655,10 @@ class LocalSurferParams(CoreObject):
 
         Parameters
         ----------
+        min_angle: float, optional
+            Minimum feature angle limit used to identify and preserve features.
+        max_angle: float, optional
+            Maximum feature angle limit used to identify and preserve features.
         size_field_type: SizeFieldType, optional
             Size field type used to generate surface mesh.
         min_size: float, optional
@@ -669,6 +691,10 @@ class LocalSurferParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._min_angle is not None:
+            json_data["minAngle"] = self._min_angle
+        if self._max_angle is not None:
+            json_data["maxAngle"] = self._max_angle
         if self._size_field_type is not None:
             json_data["sizeFieldType"] = self._size_field_type
         if self._min_size is not None:
@@ -687,9 +713,29 @@ class LocalSurferParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "size_field_type :  %s\nmin_size :  %s\nmax_size :  %s\ngrowth_rate :  %s\nconstant_size :  %s\nsmooth_boundary :  %s\nn_rings :  %s" % (self._size_field_type, self._min_size, self._max_size, self._growth_rate, self._constant_size, self._smooth_boundary, self._n_rings)
+        message = "min_angle :  %s\nmax_angle :  %s\nsize_field_type :  %s\nmin_size :  %s\nmax_size :  %s\ngrowth_rate :  %s\nconstant_size :  %s\nsmooth_boundary :  %s\nn_rings :  %s" % (self._min_angle, self._max_angle, self._size_field_type, self._min_size, self._max_size, self._growth_rate, self._constant_size, self._smooth_boundary, self._n_rings)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def min_angle(self) -> float:
+        """Minimum feature angle limit used to identify and preserve features.
+        """
+        return self._min_angle
+
+    @min_angle.setter
+    def min_angle(self, value: float):
+        self._min_angle = value
+
+    @property
+    def max_angle(self) -> float:
+        """Maximum feature angle limit used to identify and preserve features.
+        """
+        return self._max_angle
+
+    @max_angle.setter
+    def max_angle(self, value: float):
+        self._max_angle = value
 
     @property
     def size_field_type(self) -> SizeFieldType:

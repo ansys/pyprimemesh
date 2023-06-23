@@ -76,17 +76,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Suggest to add labels
-      uses: peter-evans/create-or-update-comment@v2
+      uses: peter-evans/create-or-update-comment@v3
       # Execute only when no labels have been applied to the pull request
       if: toJSON(github.event.pull_request.labels.*.name) == '{}'
       with:
         issue-number: ${{ github.event.pull_request.number }}
         body: |
           Please add one of the following labels to add this contribution to the Release Notes :point_down:
-          - [bug](https://github.com/pyansys/pyprimemesh/pulls?q=label%3Abug+)
-          - [documentation](https://github.com/pyansys/pyprimemesh/pulls?q=label%3Adocumentation+)
-          - [enhancement](https://github.com/pyansys/pyprimemesh/pulls?q=label%3Aenhancement+)
-          - [good first issue](https://github.com/pyansys/pyprimemesh/pulls?q=label%3Agood+first+issue)
-          - [maintenance](https://github.com/pyansys/pyprimemesh/pulls?q=label%3Amaintenance+)
-          - [release](https://github.com/pyansys/pyprimemesh/pulls?q=label%3Arelease+)
-          - [testing](https://github.com/pyansys/pyprimemesh/pulls?q=label%Atesting+)
+          - [bug](https://github.com/ansys/pyprimemesh/pulls?q=label%3Abug+)
+          - [documentation](https://github.com/pansys/pyprimemesh/pulls?q=label%3Adocumentation+)
+          - [enhancement](https://github.com/ansys/pyprimemesh/pulls?q=label%3Aenhancement+)
+          - [good first issue](https://github.com/ansys/pyprimemesh/pulls?q=label%3Agood+first+issue)
+          - [maintenance](https://github.com/ansys/pyprimemesh/pulls?q=label%3Amaintenance+)
+          - [release](https://github.com/ansys/pyprimemesh/pulls?q=label%3Arelease+)
+          - [testing](https://github.com/ansys/pyprimemesh/pulls?q=label%Atesting+)

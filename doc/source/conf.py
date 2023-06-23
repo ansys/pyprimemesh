@@ -3,19 +3,10 @@ import os
 from datetime import datetime
 
 import pyvista
-from ansys_sphinx_theme import ansys_favicon, pyansys_logo_black
+from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
-
-
-def get_version_match(semver: str) -> str:
-    """Ad-hoc method from ansys-sphinx-theme"""
-    if "dev" in semver:
-        return "dev"
-    major, minor, _ = semver.split(".")
-    return ".".join([major, minor])
-
 
 # Project information
 project = 'ansys-meshing-prime'
@@ -33,7 +24,7 @@ html_favicon = ansys_favicon
 
 # specify the location of your github repo
 html_context = {
-    "github_user": "pyansys",
+    "github_user": "ansys",
     "github_repo": "pyprimemesh",
     "github_version": "main",
     "doc_path": "doc/source",
@@ -42,11 +33,12 @@ html_context = {
 # specify the location of your github repo
 html_theme_options = {
     "switcher": {
-        "json_url": f"https://{cname}/release/versions.json",
+        "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
     },
+    "check_switcher": False,
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
-    "github_url": "https://github.com/pyansys/pyprimemesh",
+    "github_url": "https://github.com/ansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "collapse_navigation": True,
@@ -57,7 +49,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/pyansys/pyprimemesh/discussions",
+            "url": "https://github.com/ansys/pyprimemesh/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],

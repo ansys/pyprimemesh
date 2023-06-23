@@ -1,3 +1,4 @@
+"""Module for meshing util functions."""
 import enum
 import os
 from typing import Iterable, List
@@ -264,7 +265,7 @@ class Mesh:
                             )
 
     def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
-        """Merges given parts into one.
+        """Merge given parts into one.
 
         Parameters
         ----------
@@ -283,27 +284,6 @@ class Mesh:
             part_ids=part_ids,
             params=prime.MergePartsParams(self._model, merged_part_suggested_name=new_name),
         )
-
-    def delete_topology(self, parts_expression: str = "*", delete_edges: bool = True):
-        """Delete topoentities of part.
-
-        Parameters
-        ----------
-        parts_expression : str
-            Expression of parts whose topology needs to be deleted.
-        delete_edges : bool
-            Check whether to delete the edges or not.
-
-        """
-        for part in self._model.parts:
-            if check_name_pattern(parts_expression, part.get_name()):
-                part.delete_topo_entities(
-                    prime.DeleteTopoEntitiesParams(
-                        self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
-                    )
-                )
-                if delete_edges:
-                    part.delete_zonelets(part.get_edge_zonelets())
 
     def __surface_mesh_on_active_sf(self, generate_quads: bool, scope: SurfaceScope):
         part_ids = scope.get_parts(self._model)
@@ -647,8 +627,7 @@ class Mesh:
                     )
 
     def compute_volumes(self, part_expression: str = "*", create_zones_per_volume: bool = True):
-        """
-        Computes volumes in the parts defined by the part expression
+        """Compute volumes in the parts defined by the part expression.
 
         Parameters
         ----------
@@ -671,8 +650,7 @@ class Mesh:
                     part.compute_closed_volumes(params=params)
 
     def delete_topology(self, part_expression: str = "*", delete_edges: bool = True):
-        """
-        Deletes topology in the given part.
+        """Delete topology in the given part.
 
         This method can be used to delete topology in the parts defined by the part expression.
         If delete_edges is set to True, edge zonelets will be deleted.
@@ -748,7 +726,7 @@ class Mesh:
                     volume_zones_to_mesh.append(volume_zone)
 
             volume_zones_to_avoid = [v for v in volume_zones_all if v not in volume_zones_to_mesh]
-            scope_str = ", ".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
+            scope_str = ",".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
 
             if len(scope_str) > 0:
                 volume_control_param_dead = prime.VolumeControlParams(
@@ -1003,9 +981,7 @@ class Mesh:
         return min_size, max_size
 
     def __is_size_field_type_geodesic(self, controls: List[prime.SizeControl]):
-        """
-        Checks if the size field type is geodesic.
-        """
+        """Check if the size field type is geodesic."""
         geodesic = True
         geodesic_types = ["Curvature", "Soft"]
         self._logger.info("Size controls: " + str([control.name for control in controls]))
@@ -1024,9 +1000,7 @@ class Mesh:
     def __compute_size_field(
         self, size_controls: List[prime.SizeControl], field: prime.SizeField
     ) -> int:
-        """
-        Helper method to compute size field.
-        """
+        """Help method to compute size field."""
         self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
         result = field.compute_volumetric(
             [size_control.id for size_control in size_controls],
@@ -1035,9 +1009,7 @@ class Mesh:
         return result.size_field_id
 
     def __remesh_after_wrap(self, part: prime.Part):
-        """
-        Surface mesh after wrapping.
-        """
+        """Surface mesh after wrapping."""
         surfer = prime.Surfer(self._model)
         feature_edges = part.get_edge_zonelets_of_label_name_pattern(
             label_name_pattern="___wrapper_feature_path___",
@@ -1063,7 +1035,8 @@ class Mesh:
         scope: str,
     ):
         """
-        Creates contact prevention controls for all parts.
+        Create contact prevention controls for all parts.
+
         Proximity size control created for remeshing.
         """
         all_parts_labels = len(self._model.parts)
