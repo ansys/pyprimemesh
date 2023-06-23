@@ -24,9 +24,9 @@ class Mesh:
     """Provides methods for users who are new to meshing.
 
     This class also serves as a tutorial for commonly used meshing workflows.
-    
+
     The ``Mesh`` class provides these functionalities:
-    
+
     * Surface meshing with constant and variable sizing with triangle
       or quad dominant mesh
     * Volume meshing with prism, tetrahedral, and polyhedral elements
@@ -51,7 +51,7 @@ class Mesh:
         self, file_name: str, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
     ):
         """Read or import files of different formats based on file extensions.
-      
+
         This method supports reading and importing these file formats:
 
         * Reading PyPrimeMesh's native PMDAT files
@@ -100,7 +100,7 @@ class Mesh:
         """Write or export files of different formats based on file extensions.
 
         This method supports writing and exporting these file formats:
-    
+
         * Writing PyPrimeMesh's native PMDAT files
         * Exporting Fluent Meshing's MSH files
         * Exporting Fluent's CAS files
@@ -406,12 +406,12 @@ class Mesh:
         size. It supports generating quad dominant or triangular elements.
 
         If minimum and maximum sizes are provided, a variable size mesh is generated
-        between the mininum size and maximum size by applying sizes based on curvature.
+        between the minimum size and maximum size by applying sizes based on curvature.
 
         If only the minimum size or maximum size is provided, a constant size mesh
         is generated with the provided size.
 
-        If neither mininum size or maximum size is provided, the global maximum setting
+        If neither minimum size or maximum size is provided, the global maximum setting
         is used to generate a constant size mesh.
 
         Parameters
@@ -502,7 +502,7 @@ class Mesh:
         control_name : str, optional
             Name of the control. The default is ``"size_control"``.
         min : float, optional
-            Mininum edge length of the mesh. The default is ``1.0``.
+            Minimum edge length of the mesh. The default is ``1.0``.
         max : float
             Maximum edge length of the mesh. The default is ``2.0``.
         scope : SurfaceScope
@@ -624,7 +624,7 @@ class Mesh:
         ----------
         part_expression : str, optional
             Expression of the parts where the topology must be deleted.
-            The default is ``"*"``. 
+            The default is ``"*"``.
         create_zones_per_volume : bool, optional
             Whether to create volume zones for each volume. The default
             is ``True``.
@@ -762,7 +762,7 @@ class Mesh:
         growth_rate: float = 1.2,
         scope: VolumeScope = VolumeScope(),
     ):
-        """Generate a volume mesh on the model.      
+        """Generate a volume mesh on the model.
 
         Parameters
         ----------
@@ -1317,10 +1317,10 @@ class Mesh:
         If minimum and maximum sizes are provided, variable size mesh is generated
         between the minimum size and maximum size by applying sizes based on curvature.
 
-        If either mininum size or maximum size is provided, constant size mesh
+        If either minimum size or maximum size is provided, constant size mesh
         is generated with the provided size.
 
-        If neither minimum size or maximum size is provided, global mininum and
+        If neither minimum size or maximum size is provided, global minimum and
         maximum settings are used to generate a variable size mesh based on curvature.
 
         Parameters

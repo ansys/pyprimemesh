@@ -151,7 +151,7 @@ def download_elbow_fmd(
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
-    force : bool, optinal
+    force : bool, optional
         Whether to always download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
@@ -480,7 +480,7 @@ def download_toy_car_dsco(
         Whether to always download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
-    
+
     Returns
     -------
     str

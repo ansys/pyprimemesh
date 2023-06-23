@@ -42,7 +42,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
 
     def add_file(self, file_path: str):
         """Add the path for a downloaded example file to a list.
-        
+
         This list is used to keep track of where example files are
         downloaded so that a global cleanup of these files can be
         performed when the client is closed.
