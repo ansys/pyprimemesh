@@ -1,4 +1,4 @@
-"""Module containing Part class."""
+"""Module containing the ``Part`` class."""
 from typing import Any
 
 # isort: split
@@ -16,13 +16,13 @@ class Part(_Part):
     Parameters
     ----------
     model: ansys.meshing.prime.Model
-        Model in which part is created
+        Model in which the part is created.
     id: int
-        Id of the part provided by server
+        ID of the part provided by the server.
     object_id: int
-        Object id provided by the server
+        Object ID provided by the server.
     name: str
-        Part name
+        Part name.
     """
 
     __doc__ = _Part.__doc__
@@ -35,23 +35,24 @@ class Part(_Part):
         _Part.__init__(self, model, id, object_id, name)
 
     def __call__(self, *args: Any, **kwds: Any) -> str:
-        """Callable interface of the Part.
+        """Get a summary of the part.
 
-        Gets summary of the part using supported keyword arguments as given below.
+        This method provides a callable interface of the part for getting a part summary
+        using supported keyword arguments.
 
         Parameters
         ----------
         print_mesh : bool, optional
-            Passing True will get the mesh summary along with part summary.
-            The default is False.
-        peint_id : bool, optional
-            Passing True will get id's of topo entities/zonelets along with part summary.
-            The default is False.
+            Whether to get the mesh summary along with the part summary. The default is
+            ``False``.
+        print_id : bool, optional
+            Whether to get IDs of TopEntities or zonelets along with the part summary.
+            The default is ``False``.
 
         Returns
         -------
         str
-            Returns the summary of part.
+            Summary of the part.
 
         Examples
         --------
@@ -75,12 +76,13 @@ class Part(_Part):
     def __str__(self) -> str:
         """Print the summary of a part.
 
-        Uses print_mesh and print_id properties to control the the summary of a part.
+        This method uses the ``print_mesh`` and ``print_id`` properties
+        to control the summary of a part.
 
         Returns
         -------
         str
-            Return the summary of a part.
+            Summary of the part.
 
         Examples
         --------
@@ -96,7 +98,7 @@ class Part(_Part):
         return result.message
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """Set the unique name for the part based on the given suggested name.
+        """Set the unique name for the part to a suggested name.
 
         Parameters
         ----------
@@ -106,7 +108,7 @@ class Part(_Part):
         Returns
         -------
         SetNameResults
-            Return the results with assigned name of the part.
+            Newly suggested name for the part.
 
 
         Examples
@@ -120,7 +122,7 @@ class Part(_Part):
 
     @property
     def print_mesh(self) -> bool:
-        """When True, prints the mesh summary along with part summary. The default is False."""
+        """Whether the mesh summary is set to print along with the part summary."""
         return self._print_mesh
 
     @print_mesh.setter
@@ -130,16 +132,14 @@ class Part(_Part):
         Parameters
         ----------
         value : bool
-            Whether to print the mesh or not.
+            Whether to print the mesh.
         """
         self._print_mesh = value
 
     @property
     def print_id(self) -> bool:
-        """Print the id's of topoentities.
-
-        When True, prints the id's of topoentities or zonelets along with part summary.
-        The default is False.
+        """Whether the IDs of TopoEntities or zonelets are set to print along
+        with the part summary.
         """
         return self._print_id
 

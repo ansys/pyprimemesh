@@ -1,4 +1,4 @@
-"""Module containing PeriodicControl related classes and methods."""
+"""Module containing classes and methods related to periodic control."""
 
 from ansys.meshing.prime.autogen.periodiccontrol import (
     PeriodicControl as _PeriodicControl,
@@ -10,30 +10,30 @@ from ansys.meshing.prime.autogen.periodiccontrolstructs import PeriodicControlPa
 
 
 class PeriodicControl(_PeriodicControl):
-    """Periodic control is used to define the scope and transformation for periodic surfaces.
+    """Defines the scope and transformation for periodic surfaces.
 
     Parameters
     ----------
     model : CommunicationManager
-        Server model where to create and modify PeriodicControls from.
+        Server model to create and modify periodic controls from.
     id : int
         ID of the control.
     object_id : int
         Object ID of the control.
     name : str
-        Name of the PeriodicControl
+        Name of the periodic control.
     local : bool, optional
-        Unused, by default False
+        Unused. The default is ``False``.
     """
 
     def __init__(self, model, id, object_id, name, local=False):
-        """Initialize class variables and superclass."""
+        """Initialize class variables and the superclass."""
         _PeriodicControl.__init__(self, model, id, object_id, name)
         self._model = model
         self._name = name
 
     def __str__(self) -> str:
-        """Representation of the class in string format.
+        """Get a representation of the class in string format.
 
         Returns
         -------
@@ -45,7 +45,7 @@ class PeriodicControl(_PeriodicControl):
         return result.message
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """Set the unique name for the periodic control based on the given suggested name.
+        """Set the unique name for the periodic control to a suggested name.
 
         Parameters
         ----------
@@ -55,7 +55,7 @@ class PeriodicControl(_PeriodicControl):
         Returns
         -------
         SetNameResults
-            Returns a name of the periodic control.
+            Newly suggested name of the periodic control.
 
         Examples
         --------
@@ -73,7 +73,7 @@ class PeriodicControl(_PeriodicControl):
         Returns
         -------
         str
-            Returns the name of the periodic control.
+            Name of the periodic control.
 
         Examples
         --------

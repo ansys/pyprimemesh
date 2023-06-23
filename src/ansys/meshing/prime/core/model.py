@@ -1,4 +1,4 @@
-"""Module containing managing logic of the Prime Model."""
+"""Module containing the managing logic of the Prime model."""
 from typing import Iterable, List
 
 # isort: split
@@ -23,16 +23,17 @@ from ansys.meshing.prime.internals.logger import LOG
 
 
 class Model(_Model):
-    """Model is the nucleus of Prime.
+    """Contains all information about Ansys Prime Server.
 
-    Model forms the base and contains all the information about Prime.
-    You can access any information in Prime only through Model.
-    Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+    This class provides the nucleus of Ansys meshing technology. You can access
+    any information in Ansys Prime Server only through the ``Model`` class.
+    Using this class, you can query topo data, control data, parts, size fields,
+    and more.
 
     Parameters
     ----------
     comm : Communicator
-        Communicator to connect with the server.
+        Communicator to connect with the Ansys Prime server.
     id : int
         ID of the model.
     object_id : int
@@ -55,9 +56,10 @@ class Model(_Model):
         self._freeze()
 
     def _sync_up_model(self):
-        """Synchronize client model with the server model.
+        """Synchronize the client model with the server model.
 
-        Updates proxy child objects of the client model with the child objects of the server model.
+        This method Updates proxy child objects of the client model with the
+        child objects of the server model.
 
         Examples
         --------
@@ -92,12 +94,12 @@ class Model(_Model):
         self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def _add_part(self, id: int):
-        """Add a part that is present on server.
+        """Add a part that is present on the server.
 
         Parameters
         ----------
         id : int
-            ID of the part
+            ID of the part.
 
         Raises
         ------
@@ -118,7 +120,7 @@ class Model(_Model):
             raise PrimeRuntimeError("Unable to create part", ErrorCode.PARTNOTFOUND)
 
     def get_part_by_name(self, name: str) -> Part:
-        """Get the part by name. Returns None if part doesn't exist for the given name.
+        """Get the part by name.
 
         Parameters
         ----------
@@ -128,7 +130,7 @@ class Model(_Model):
         Returns
         -------
         Part
-            Returns the part.
+            Part or ``None`` if the given part name doesn't exist.
 
         Examples
         --------
@@ -142,17 +144,17 @@ class Model(_Model):
         return None
 
     def get_part(self, id: int) -> Part:
-        """Get the part by id. Returns None if part doesn't exist for the given id.
+        """Get the part by ID.
 
         Parameters
         ----------
         id : int
-            Id of the part.
+            ID of the part.
 
         Returns
         -------
         Part
-            Return the part.
+            Part or ``None`` if the given part ID doesn't exist.
 
         Examples
         --------
@@ -166,19 +168,19 @@ class Model(_Model):
         return None
 
     def merge_parts(self, part_ids: Iterable[int], params: MergePartsParams) -> MergePartsResults:
-        """Merge given parts into one.
+        """Merge multiple parts into a single part.
 
         Parameters
         ----------
         part_ids : Iterable[int]
-            Ids of parts to be merged.
+            IDs of the parts to merge.
         params : MergePartsParams
-            Parameters to merge parts.
+            Parameters for merging parts.
 
         Returns
         -------
         MergePartsResults
-            Return the MergePartsResults.
+            Results for merging the parts into a single part.
 
 
         Examples
@@ -199,17 +201,17 @@ class Model(_Model):
         return res
 
     def delete_parts(self, part_ids: Iterable[int]) -> DeleteResults:
-        """Delete the parts and its contents.
+        """Delete parts and their contents.
 
         Parameters
         ----------
         part_ids : Iterable[int]
-            Ids of parts to be deleted.
+            IDs of parts to delete.
 
         Returns
         -------
         DeleteResults
-            Return DeleteResults.
+            Results from deleting parts and their contents.
 
 
         Examples
@@ -226,12 +228,12 @@ class Model(_Model):
         return res
 
     def get_global_sizing_params(self) -> GlobalSizingParams:
-        """Get the GlobalSizingParams.
+        """Get global sizing parameters.
 
         Returns
         -------
         GlobalSizingParams
-            Return the GlobalSizingParams.
+            Global sizing parameters.
 
         Examples
         --------
@@ -241,15 +243,13 @@ class Model(_Model):
         return self._global_sf_params
 
     def set_global_sizing_params(self, params: GlobalSizingParams):
-        """Set the global sizing parameters.
-
-        Set the global sizing params to initialize surfer parameters and various size control
-        parameters.
+        """Set global sizing parameters.
 
         Parameters
         ----------
         params : GlobalSizingParams
-             Global sizing parameters.
+            Global sizing parameters for initializing surfer parameters and
+            various size control parameters.
 
         Examples
         --------
@@ -268,7 +268,7 @@ class Model(_Model):
         Returns
         -------
         str
-            Return the summary of the model.
+            Summary of the model.
 
         Examples
         --------
@@ -284,12 +284,12 @@ class Model(_Model):
 
     @property
     def parts(self) -> List[Part]:
-        """Get the list of parts of a model.
+        """Get the list of parts for the model.
 
         Returns
         -------
         List[Part]
-            Return the list of parts.
+            List of parts for the model.
 
         Examples
         --------
@@ -301,12 +301,12 @@ class Model(_Model):
 
     @property
     def topo_data(self) -> TopoData:
-        """Get the topodata of a model.
+        """Get the TopoData for the model.
 
         Returns
         -------
         TopoData
-            Returns the topodata.
+            TopoData for the model.
 
         Examples
         --------
@@ -316,12 +316,12 @@ class Model(_Model):
 
     @property
     def control_data(self) -> ControlData:
-        """Get the control data of a model.
+        """Get the control data for the model.
 
         Returns
         -------
         ControlData
-            Return the control data.
+            Control data for the model.
 
         Examples
         --------
@@ -333,14 +333,14 @@ class Model(_Model):
 
     @property
     def material_point_data(self) -> MaterialPointManager:
-        """Get Material Point Data.
+        """Get material point data for the model.
 
-        MaterialPointManager is used to create, delete and manage material points.
+        The Material Point Manager is used to create, delete, and manage material points.
 
         Returns
         -------
         MaterialPointManager
-            Return the material point manager.
+            Material Point Manager.
 
         Examples
         --------
@@ -352,15 +352,15 @@ class Model(_Model):
 
     @property
     def python_logger(self):
-        """Get PyPrimeMesh's Logger instance.
+        """Get PyPrimeMesh's logger instance.
 
-        PyPrimeMesh's Logger instance can be used to control the verbosity
+        PyPrimeMesh's logger instance can be used to control the verbosity
         of messages printed by PyPrimeMesh.
 
         Returns
         -------
-        Logger
-             Return logging.Logger instance.
+        logging.Logger
+            PyPrimeMesh's logger instance.
 
         Examples
         --------

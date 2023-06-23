@@ -1,4 +1,4 @@
-"""Module containing file input and output related classes and methods."""
+"""Module for mangaging file inputs and outputs."""
 from typing import List
 
 # isort: split
@@ -34,12 +34,12 @@ from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
 class FileIO(_FileIO):
-    """Input and output managing class.
+    """Manages file inputs and outputs.
 
     Parameters
     ----------
     model : Model
-        Server model where to create and modify WrapperControls from.
+        Server model from which to create and modify wrapper controls.
     """
 
     __doc__ = _FileIO.__doc__
@@ -50,25 +50,23 @@ class FileIO(_FileIO):
         super().__init__(model)
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
-        """Read PyPrimeMesh data file.
-
-        PyPrimeMesh data files have pmdat extension.
+        """Read a PyPrimeMesh data (PMDAT) file.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the data file on disk.
         file_read_params : FileReadParams
-            Parameter to read a file.
+            Parameters for reading the data file.
 
         Returns
         -------
         FileReadResults
-            Return FileReadResults.
+            Results from reading the data file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -88,19 +86,19 @@ class FileIO(_FileIO):
         return result
 
     def write_pmdat(self, file_name: str, file_write_params: FileWriteParams) -> FileWriteResults:
-        """Write PyPrimeMesh data file. PyPrimeMesh data files have .pmdat extension.
+        """Write a PyPrimeMesh data (PMDAT) file.
 
         Parameters
         ----------
         file_name : str
-            Path to write file on disk.
+            Path for writing the data file on disk.
         file_write_params : FileWriteParams
-            Parameters to write PyPrimeMesh data file.
+            Parameters for writing the data file.
 
         Returns
         -------
         FileWriteResults
-            Return the FileWriteResults structure.
+            Results from writing the data file.
 
         Examples
         --------
@@ -112,23 +110,21 @@ class FileIO(_FileIO):
         return result
 
     def import_fluent_meshing_size_field(self, file_name: str) -> SizeFieldFileReadResults:
-        """Import Fluent Meshing sizefield file from disk.
-
-        Fluent Meshing sizefield files have sf and sf.gz extension.
+        """Import a Fluent Meshing size field (SF and SF.GZ) file from disk.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk
+            Path to the size field file on disk.
 
         Returns
         -------
         SizeFieldFileReadResults
-            Return the SizeFieldFileReadResults.
+            Results from reading the size field file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -142,25 +138,23 @@ class FileIO(_FileIO):
     def read_size_field(
         self, file_name: str, params: ReadSizeFieldParams
     ) -> SizeFieldFileReadResults:
-        """Read PyPrimeMesh sizefield file from disk.
-
-        PyPrimeMesh sizefield files have psf and psf.gz extension.
+        """Read a PyPrimeMesh size field (PSF and PSF.GZ) file from disk.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the size field file on disk.
         params : ReadSizeFieldParams
-            Parameters to read size field file.
+            Parameters for reading size field file.
 
         Returns
         -------
         SizeFieldFileReadResults
-            Return the SizeFieldFileReadResults.
+            Results from reading the size field file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -173,23 +167,23 @@ class FileIO(_FileIO):
         return result
 
     def write_size_field(self, file_name: str, params: WriteSizeFieldParams) -> FileWriteResults:
-        """Write PyPrimeMesh sizefield (.psf) to file.
+        """Write a PyPrimeMesh size field (PSF) file to a file on disk.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the size field file on disk.
         params : WriteSizeFieldParams
-            Parameters to write size field file.
+            Parameters for writing the size field file.
 
         Returns
         -------
         FileWriteResults
-            Return the FileWriteResults.
+            Results from writing the size field file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -204,23 +198,23 @@ class FileIO(_FileIO):
     def import_mapdl_cdb(
         self, file_name: str, params: ImportMapdlCdbParams
     ) -> ImportMapdlCdbResults:
-        """Open MAPDL CDB file(cdb).
+        """Import an MAPDL CDB file.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the CDB file on disk.
         params : ImportMapdlCdbParams
-            Parameter to import a CDB file.
+            Parameters for importing the CDB file.
 
         Returns
         -------
         ImportMapdlCdbResults
-            Return ImportMapdlCdbResults.
+            Results from importing the CDB file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -241,23 +235,23 @@ class FileIO(_FileIO):
     def export_mapdl_cdb(
         self, file_name: str, params: ExportMapdlCdbParams
     ) -> ExportMapdlCdbResults:
-        """Export MAPDL CDB file(cdb).
+        """Export an MAPDL CDB file.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the CDB file on disk.
         params : ExportMapdlCdbParams
-            Parameter to export a CDB file.
+            Parameters for exporting the CDB file.
 
         Returns
         -------
         ExportMapdlCdbResults
-            Return ExportMapdlCdbResults.
+            Results from exporting the CDB file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -278,26 +272,24 @@ class FileIO(_FileIO):
         file_names: List[str],
         import_fluent_meshing_mesh_params: ImportFluentMeshingMeshParams,
     ) -> ImportFluentMeshingMeshResults:
-        """Import Fluent Meshing meshes of given files on disk.
-
-        Fluent Meshing mesh files have msh and msh.gz extension.
+        """Import Fluent Meshing's mesh (MS and MSH.GZ) files from disk.
 
         Parameters
         ----------
         file_names : List[str]
-            Full path of files to be imported.
+            List of full path for the mesh files to import.
         import_fluent_meshing_mesh_params : ImportFluentMeshingMeshParams
-            Parameters to import Fluent Meshing mesh.
+            Parameters for importing the mesh files.
 
         Returns
         -------
         ImportFluentMeshingMeshResults
-            Return the FileReadResults.
+            Results from importing the mesh files.
 
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -319,26 +311,24 @@ class FileIO(_FileIO):
     def import_fluent_case(
         self, file_name: str, import_fluent_case_params: ImportFluentCaseParams
     ) -> ImportFluentCaseResults:
-        """Import Fluent case file on disk.
-
-        Fluent case files have cas extension.
+        """Import a Fluent case (CAS) file from disk.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the case file on disk.
         import_fluent_case_params : ImportFluentCaseParams
-            Parameters to import fluent case file.
+            Parameters for importing the case file.
 
         Returns
         -------
         ImportFluentCaseResults
-            Return the ImportFluentCaseResults.
+            Results from importing the case file.
 
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------
@@ -356,19 +346,19 @@ class FileIO(_FileIO):
     def export_fluent_case(
         self, file_name: str, export_fluent_case_params: ExportFluentCaseParams
     ) -> FileWriteResults:
-        """Export Fluent case file. Fluent case files have cas extension.
+        """Export a Fluent case (CAS) file.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the case file on disk.
         export_fluent_case_params : ExportFluentCaseParams
-            Parameters to export fluent case file.
+            Parameters for exporting the case file.
 
         Returns
         -------
         FileWriteResults
-            Return the FileWriteResults structure.
+            Results from exporting the case file.
 
         Examples
         --------
@@ -384,19 +374,19 @@ class FileIO(_FileIO):
     def export_fluent_meshing_mesh(
         self, file_name: str, export_fluent_mesh_params: ExportFluentMeshingMeshParams
     ) -> FileWriteResults:
-        """Export Fluent Meshing mesh file. Fluent Meshing mesh files have .msh extension.
+        """Export a Fluent Meshing mesh (MSH) file.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the mesh file on disk.
         export_fluent_mesh_params : ExportFluentMeshingMeshParams
-            Parameters to export Fluent Meshing mesh file.
+            Parameters for exporting the mesh file.
 
         Returns
         -------
         FileWriteResults
-            Return the FileWriteResults structure.
+            Results from exporting the mesh file.
 
         Examples
         --------
@@ -411,19 +401,19 @@ class FileIO(_FileIO):
     def export_boundary_fitted_spline_kfile(
         self, file_name: str, export_params: ExportBoundaryFittedSplineParams
     ) -> FileWriteResults:
-        """Export IGA LS-DYNA Keyword file for boundary fitted spline.
+        """Export the IGA LS-DYNA keyword file for a boundary fitted spline.
 
         Parameters
         ----------
         file_name : str
-            Name of the file.
+            Name of the keyword file.
         export_params : ExportBoundaryFittedSplineParams
-            Parameters for IGA LS-DYNA Keyword file export.
+            Parameters for exporting the keyword file.
 
         Returns
         -------
         FileWriteResults
-            Return FileWriteResults.
+            Results from exporting the keyword file.
 
         Examples
         --------
@@ -436,37 +426,35 @@ class FileIO(_FileIO):
         return result
 
     def import_cad(self, file_name: str, params: ImportCadParams) -> ImportCadResults:
-        r"""Open CAD file.
+        r"""Import a CAD file from disk.
 
-        Import CAD file from disk.
-
-        Supported formats on Windows are:
+        Supported CAD file formats on Windows are:
 
         \*.scdoc \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
         \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml \*.prt\* \*.asm\*
         \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm \*.asm \*.sldprt
         \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
 
-        Supported formats on Linux are:
+        Supported CAD file formats on Linux are:
 
         \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
         \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
         \*.stl \*.plmxml \*.tgf
 
-        Refer documentation for detailed list of supported formats.
+        See the documentation for a comprehensive list of supported formats.
 
         Parameters
         ----------
         file_name : str
-             Path to file on disk.
+            Path to the CAD file on disk.
 
         params : ImportCadParams
-             Parameters to control CAD import options
+            Parameters for importing the CAD file.
 
         Returns
         -------
         ImportCadResults
-             Return ImportCadResults.
+            Results from importing the CAD file.
 
         Examples
         --------
@@ -487,23 +475,23 @@ class FileIO(_FileIO):
         return import_result
 
     def export_stl(self, file_name: str, params: ExportSTLParams) -> FileWriteResults:
-        """Export STL file.
+        """Export an STL file.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk.
+            Path to the STL file on disk.
         params : ExportSTLParams
-            Parameters for writing the file.
+            Parameters for exporting the STL file.
 
         Returns
         -------
         FileWriteResults
-            Returns the FileWriteResults.
+            Results from exporting the STL file.
 
         Notes
         -----
-        This API does not support Unicode paths now.
+        This method does not support Unicode paths.
 
         Examples
         --------

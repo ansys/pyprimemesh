@@ -1,4 +1,4 @@
-"""Module for VolumeSweeper operations."""
+"""Module for volume sweeper operations."""
 from ansys.meshing.prime.autogen.volumesweeper import VolumeSweeper as _Sweeper
 
 # isort: split
@@ -12,22 +12,21 @@ from ansys.meshing.prime.core.model import Model
 
 
 class VolumeSweeper(_Sweeper):
-    """VolumeSweeper class.
-
-    VolumeSweeper class provide functions to volume mesh a given set of topovolumes by sweeping
-    or stacking a set of face and edge zonelets.
-    Provide operations to generate volume mesh using stacker technology.
+    """Provides operations to generate volume meshes using stacker technology.
+    
+    TopoVolumes are volume meshed by sweeping or stacking a set of face
+    and edge zonelets.
 
     Parameters
     ----------
     model : Model
-        Model where to apply the operations.
+        Model to apply the operations to.
     """
 
     __doc__ = _Sweeper.__doc__
 
     def __init__(self, model: Model):
-        """Initialize model in volume sweeper."""
+        """Initialize the model in the volume sweeper."""
         self._model = model
 
     def create_base_face(
@@ -35,24 +34,24 @@ class VolumeSweeper(_Sweeper):
     ) -> MeshStackerResults:
         """Create a face at the specified origin.
 
-        Creates a face at the specified origin and perpendicular to the specified direction.
-        Also, imprint model edges on the face, make necessary edge repairs, and duplicate relevant
+        This method creates a face at the specified origin and perpendicular to the specified direction.
+        Also, it imprints model edges on the face, makes necessary edge repairs, and duplicates relevant
         size controls on the base face.
 
 
         Parameters
         ----------
         part_id : int
-            Id of part.
+            ID of part.
         topo_volume_ids : Iterable[int]
-            Ids of volumes that need to be meshed.
+            IDs of the volumes to mesh.
         params : MeshStackerParams
             Mesh stacker parameters.
 
         Returns
         -------
         MeshStackerResults
-            Returns the MeshStackerResults.
+            Results from creating the face.
 
 
         Examples
@@ -70,27 +69,28 @@ class VolumeSweeper(_Sweeper):
         topo_volume_ids: Iterable[int],
         params: MeshStackerParams,
     ) -> MeshStackerResults:
-        """Generate volume mesh stacking a meshed face.
+        """Generate volume mesh by stacking a meshed face.
 
-        Generate volume mesh stacking a meshed face, layer by layer, along the given
-        direction. Calculates the stack layers using size controls and global size parameters.
+        This method generates volume mesh by stacking a meshed face, layer by layer, along
+        the given direction. It calculates the stack layers using size controls and global
+        size parameters.
 
 
         Parameters
         ----------
         part_id : int
-            Id of part.
+            ID of the part.
         base_face_ids: Iterable[int]
-            Ids of base faces to be stacked.
+            IDs of the base faces to stack.
         topo_volume_ids : Iterable[int]
-            Ids of volumes that need to be meshed.
+            IDs of the volumes to mesh.
         params : MeshStackerParams
             Mesh stacker parameters.
 
         Returns
         -------
         MeshStackerResults
-            Returns the MeshStackerResults.
+            Results from generating the volume mesh.
 
 
         Examples
