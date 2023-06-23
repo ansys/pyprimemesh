@@ -24,7 +24,7 @@ Second-order tetrahedral mesh
 =============================
 
 This code shows how to initialize the :class:`AutoMeshParams<ansys.meshing.prime.AutoMeshParams>` class
-and generate the volume mesh on meshed topofaces:
+and generate the volume mesh on meshed TopoFaces:
 
 .. code-block:: python
 
