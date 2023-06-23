@@ -27,6 +27,7 @@ __all__ = [
     "download_pipe_tee_dsco",
     "download_toy_car_scdoc",
     "download_pcb_pmdat",
+    "download_pcb_scdoc",
 ]
 
 
@@ -53,6 +54,7 @@ class Examples(Enum):
     DEFORMED_BLADE_DSCO = {"filename": "blade_deformed.dsco", "git_folder": "turbine_blade"}
     TURBINE_BLADE_CDB = {"filename": "blade.cdb", "git_folder": "turbine_blade"}
     PCB_PMDAT = {"filename": "pcb_stacker.pmdat", "git_folder": "pcb"}
+    PCB_SCDOC = {"filename": "pcb_stacker.scdoc", "git_folder": "pcb"}
 
 
 _DOWNLOADS = []
@@ -782,3 +784,37 @@ def download_pcb_pmdat(
 
     """
     return get_file(Examples.PCB_PMDAT, destination, force)
+
+
+def download_pcb_scdoc(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download SCDOC file for the pcb example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pcb = prime_examples.download_pcb_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(pcb, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.PCB_SCDOC, destination, force)
