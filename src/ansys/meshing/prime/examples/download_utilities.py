@@ -11,7 +11,7 @@ __all__ = ['DownloadManager']
 
 class DownloadManagerMeta(type):
     """
-    This is a thread-safe implementation of Singleton, from
+    This class provides a thread-safe implementation of ``Singleton`` from
     https://refactoring.guru/design-patterns/singleton/python/example#example-1
     """
 
@@ -31,27 +31,31 @@ class DownloadManagerMeta(type):
 
 
 class DownloadManager(metaclass=DownloadManagerMeta):
-    """Singleton class to manage the file downloads of the module.
-    Local paths are saved in this class so we can do a global cleanup when
-    closing the client.
+    """Provides for managing downloads of example files.
+
+    Local paths are saved in this class so that a global cleanup
+    of example files can be performed when the client is closed.
     """
 
     def __init__(self):
         self.downloads_list = []
 
     def add_file(self, file_path: str):
-        """Adds downloaded file path to a list to keep track of where the downloaded
-        files are. This will be used for cleaning up the downloads.
+        """Add the path for a downloaded example file to a list.
+        
+        This list is used to keep track of where example files are
+        downloaded so that a global cleanup of these files can be
+        performed when the client is closed.
 
         Parameters
         ----------
         file_path : str
-            Local path of the downloaded file.
+            Local path of the downloaded example file.
         """
         self.downloads_list.append(file_path)
 
     def clear_download_cache(self):
-        """Removes the downloaded files from the local."""
+        """Remove downloaded example files from the local path."""
         for file in self.downloads_list:
             os.remove(file)
         self.downloads_list.clear()
@@ -59,24 +63,28 @@ class DownloadManager(metaclass=DownloadManagerMeta):
     def download_file(
         self, filename: str, *directory: str, destination: Optional[str] = None, force: bool = False
     ) -> str:
-        """Download a file from PyAnsys examples Github repo
+        """Download an example file from the PyPrimeMesh repository.
 
         Parameters
         ----------
-        filename: str
-            Name of the file to download
-        destination: Optional[str]
-            Optional destination to download the directory to
-        force: bool
-            Flag to force download even if the file exists in cache
-        directory: tuple[str]
-            Path under the PyAnsys Github examples repo
+        filename : str
+            Name of the example file to download.
+        destination : str, optional
+            Path to download the example file to. The default
+            is ``None``, in which case the default path for app data
+            is used.
+        force : bool, optional
+            Whether to always download the example file. The default is
+            ``False``, in which case if the example file is cached, it
+            is reused.
+        directory : tuple[str]
+            Path under the PyAnsys Github examples repository.
 
         Returns
         -------
-        Tuple[str, str]
-            Tuple containing filepath to be used and the local filepath of the downloaded directory
-            The two are different in case of containers.
+        tuple[str, str]
+            Tuple containing the filepath to use and the local filepath of the downloaded
+            directory. The two are different in case of containers.
 
         """
         # if destination is not a dir create it

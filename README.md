@@ -12,8 +12,8 @@ delivers core Ansys meshing technology.
 
 ## Documentation and Issues
 
-For information on PyPrimeMesh, refer to the latest [documentation](
-https://prime.docs.pyansys.com).
+For information on PyPrimeMesh, refer to the [documentation](
+https://prime.docs.pyansys.com) for the latest stable version.
 
 For queries related to PyPrimeMesh, post on the [PyPrimeMesh Discussions](
 https://github.com/ansys/pyprimemesh/discussions) page. 
@@ -79,4 +79,4 @@ PyPrimeMesh is licensed under the MIT license.
 PyPrimeMesh makes no commercial claim over Ansys whatsoever. This library extends the functionality of
 Ansys Prime Server by adding a Python interface without changing the core behavior or license
 of the original software. The use of Ansys Prime Server requires a legally licensed copy of Ansys
-2023 or later.
+2023 R1 or later.
