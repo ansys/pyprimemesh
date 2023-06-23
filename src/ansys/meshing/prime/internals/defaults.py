@@ -1,4 +1,4 @@
-"""The default configuration for the PyPrimeMesh library."""
+"""Default configuration for PyPrimeMesh."""
 
 __all__ = [
     'ip',
@@ -55,7 +55,7 @@ SPHINX_BUILD = bool(int(os.getenv('PYPRIMEMESH_SPHINX_BUILD', 0)))
 
 
 def ip():
-    """Get the default ip address used throughout the library."""
+    """Get the default IP address used throughout the library."""
     return __DEFAULT_IP
 
 
@@ -80,12 +80,12 @@ def max_message_length():
 
 
 def get_examples_path():
-    """Get the client side default container path."""
+    """Get the client-side default container path."""
     return EXAMPLES_PATH
 
 
 def get_user_data_path():
-    """Get the client side default user data path."""
+    """Get the client-side default user data path."""
     return USER_DATA_PATH
 
 
@@ -95,20 +95,20 @@ def get_user_data_path_for_containers():
 
 
 def get_examples_path_for_containers():
-    """Get the server side default container path in case of containers.
+    """Get the server-side default container path in case of containers.
 
-    In case of a container, the user data directory is mounted within on the container image.
+    In case of a container, the user data directory is mounted within the container image.
     """
     return CONTAINER_EXAMPLES
 
 
 def get_output_path():
-    """Get the client side output directory used by containers."""
+    """Get the client-side output directory used by containers."""
     return LOCAL_OUTDIR
 
 
 def get_output_path_for_containers():
-    """Get the server side output directory used by containers."""
+    """Get the server-side output directory used by containers."""
     return CONTAINER_OUTDIR
 
 

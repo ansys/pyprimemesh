@@ -1,4 +1,4 @@
-"""Module for Prime server communications."""
+"""Module for Prime Server communications."""
 import PrimePyAnsysPrimeServer as Prime
 
 import ansys.meshing.prime.internals.config as config
@@ -14,28 +14,28 @@ return_value = ""
 
 
 class PrimeCommunicator(Communicator):
-    """Communicator class to communicate with the Prime server."""
+    """Provides for communicating with Ansys Prime Server."""
 
     def __init__(self):
-        """Initialize prime communicator."""
+        """Initialize the communicator."""
         Prime.SetupForPyPrime_Beta(1)
 
     @error_code_handler
     @communicator_error_handler
     def serve(self, model, command, *args, **kwargs) -> dict:
-        """Serve model and commands to server.
+        """Serve the model and send a command to the server.
 
         Parameters
         ----------
         model : Model
             Model to serve.
         command : str
-            Command to send to the server.
+            Command to send.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
         """
         command = {"Command": command}
         if len(args) > 0:
@@ -52,19 +52,19 @@ class PrimeCommunicator(Communicator):
         return json.loads(Prime.ServeJson(model._object_id, json.dumps(command)).Get())
 
     def initialize_params(self, model, param_name: str) -> dict:
-        """Initialize parameters in server side.
+        """Initialize parameters on the server side.
 
         Parameters
         ----------
         model : Model
-            Model in which to initialize params.
+            Model to initialize parameters on.
         param_name : str
             Parameter to initialize.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
         """
         command = {
             "ParamName": param_name,
@@ -76,19 +76,19 @@ class PrimeCommunicator(Communicator):
         return res
 
     def run_on_server(self, model, recipe: str) -> dict:
-        """Run operation on the server.
+        """Run recipe on a model on the server.
 
         Parameters
         ----------
         model : Model
-            Model in which to run the commands.
-        param_name : str
-            Parameter to run.
+            Model to run recipe on.
+        recipe : str
+            Recipe to run.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
         """
         exec(recipe, globals())
         output = '{"Results" : "' + str(return_value) + '"}'

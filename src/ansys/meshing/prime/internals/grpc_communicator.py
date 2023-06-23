@@ -1,4 +1,4 @@
-"""Module for communications with gRPC server."""
+"""Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
 from typing import Optional
 
@@ -46,18 +46,18 @@ def get_response(response_iterator, separator):
 
 
 class GRPCCommunicator(Communicator):
-    """Manages communication with gRPC server.
+    """Manages communication with the gRPC server.
 
     Parameters
     ----------
     ip : Optional[str], optional
-        IP where server is located, by default None.
+        IP address where the server is located. The default is ``None``.
     port : Optional[int], optional
-        Port where server is deployed, by default None.
+        Port where the server is deployed. The default is ``None``.
     timeout : float, optional
-        Maximum time to wait for connection, by default 10.0.
+        Maximum time to wait for connection. The default is ``10.0``.
     credentials : Any, optional
-        Credentials to connect to server, by default None.
+        Credentials for connecting to the server. The default is ``None``.
 
     Raises
     ------
@@ -73,7 +73,7 @@ class GRPCCommunicator(Communicator):
         credentials=None,
         **kwargs,
     ):
-        """Initialize server connection."""
+        """Initialize the server connection."""
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
             ip_addr = f"{ip}:{port}"
@@ -94,19 +94,19 @@ class GRPCCommunicator(Communicator):
     @error_code_handler
     @communicator_error_handler
     def serve(self, model: Model, command: str, *args, **kwargs) -> dict:
-        """Serve model and commands to server.
+        """Serve model and send a command to the server.
 
         Parameters
         ----------
         model : Model
             Model to serve.
         command : str
-            Command to send to the server.
+            Command to send.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
 
         Raises
         ------
@@ -156,19 +156,19 @@ class GRPCCommunicator(Communicator):
             raise RuntimeError("No connection with server")
 
     def initialize_params(self, model: Model, param_name: str, *args) -> dict:
-        """Initialize parameters in server side.
+        """Initialize parameters on the server side.
 
         Parameters
         ----------
         model : Model
-            Model in which to initialize params.
+            Model to initialize parameters on.
         param_name : str
-            Parameter to initialize
+            Parameter to initialize.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
 
         Raises
         ------
@@ -195,21 +195,21 @@ class GRPCCommunicator(Communicator):
             raise RuntimeError("No connection with server")
 
     def run_on_server(self, model: Model, recipe: str) -> dict:
-        """Run command on server.
+        """Run commands on the server.
 
-        Run a given command in a given model on the server.
+        Run commands on a model on the server.
 
         Parameters
         ----------
         model : core.Model
-            Model you want to modify.
+            Model to run commands on.
         recipe : str
-            Commands you want to perform.
+            Commands to run.
 
         Returns
         -------
         dict
-            Result from server side.
+            Result from the server side.
 
         Raises
         ------

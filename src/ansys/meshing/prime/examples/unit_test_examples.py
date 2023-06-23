@@ -24,18 +24,18 @@ def download_test_examples(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to download the test example files to. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
-        ``False``, in which case if the example file is cached, it
-        is reused.
+        Whether to always download the test example files. The default is
+        ``False``, in which case if the test example files are cached, they
+        are reused.
 
     Returns
     -------
     List[str]
-        Local paths to the downloaded example files.
+        Local paths to the downloaded test example files.
 
     Examples
     --------

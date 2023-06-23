@@ -1,4 +1,4 @@
-"""Module for error handling in PyPrime."""
+"""Module for error handling in PyPrimeMesh."""
 import re
 from functools import wraps
 
@@ -327,27 +327,27 @@ prime_warning_messages = {
 
 
 class PrimeRuntimeError(Exception):
-    """Runtime error for PyPrimeMesh.
+    """Provides runtime errors for PyPrimeMesh.
 
     Parameters
     ----------
     message : str
         Error message to show.
     error_code : ErrorCode, optional
-        ID of the error, by default None.
+        ID of the error. The default is ``None``.
     error_locations : Any, optional
-        Location of the error, by default None.
+        Location of the error. The default is ``None``.
     """
 
     def __init__(self, message: str, error_code: ErrorCode = None, error_locations=None):
-        """Initialize error message."""
+        """Initialize the error message."""
         super().__init__()
         self._message = self.__process_message(message)
         self._error_code = error_code
         self._error_locations = error_locations
 
     def __str__(self) -> str:
-        """Transform message to string."""
+        """Transform the message to a string."""
         return self._message
 
     def __process_message(self, message: str):
@@ -389,7 +389,7 @@ class PrimeRuntimeError(Exception):
 
 
 class PrimeRuntimeWarning(UserWarning):
-    """Runtime warning for PyPrimeMesh.
+    """Provides the runtime warning for PyPrimeMesh.
 
     Parameters
     ----------
@@ -398,12 +398,12 @@ class PrimeRuntimeWarning(UserWarning):
     """
 
     def __init__(self, message):
-        """Initialize warning message."""
+        """Initialize the warning message."""
         super().__init__()
         self._message = message
 
     def __str__(self) -> str:
-        """Transform message to string."""
+        """Transform the message to a string."""
         return self._message
 
     @property
@@ -415,28 +415,28 @@ class PrimeRuntimeWarning(UserWarning):
 def communicator_error_handler(
     _func=None,
     *,
-    expected_token='Results',
-    server_error_token='ServerError',
-    info_token='info_msg',
-    warning_token='warning_msg',
-    error_token='err_msg',
+    expected_token="Results",
+    server_error_token="ServerError",
+    info_token="info_msg",
+    warning_token="warning_msg",
+    error_token="err_msg",
 ):
-    """Create decorator to be used in error handling.
+    """Create a decorator to use in error handling.
 
     Parameters
     ----------
     _func : Func, optional
-        Function to use as decorator, by default None.
+        Function to use as decorator. The default is ``None``.
     expected_token : str, optional
-        Token to expect in response result, by default 'Results'.
+        Token to expect in the response result. The default is ""Results"".
     server_error_token : str, optional
-        Token from server error, by default 'ServerError'.
+        Token from the server error. The default is ``"ServerError"``.
     info_token : str, optional
-        Information message, by default 'info_msg'.
+        Information message. The default is ``"info_msg"``.
     warning_token : str, optional
-        Warning message, by default 'warning_msg'.
+        Warning message. The default is ``"warning_msg"``.
     error_token : str, optional
-        Error message, by default 'err_msg'.
+        Error message. The default is ``"err_msg"``.
     """
 
     def decorator_handle_errors(func):
@@ -475,12 +475,12 @@ def communicator_error_handler(
 
 
 def error_code_handler(_func=None):
-    """Decode errors from server.
+    """Decode errors from the server.
 
     Parameters
     ----------
     _func : Func, optional
-        Decorator to apply to error code, by default None.
+        Decorator to apply to the error code. The default is ``None``.
     """
 
     def decorator_error_code(func):
@@ -555,7 +555,7 @@ def error_code_handler(_func=None):
 
 
 def apply_if(decorator, condition):
-    """Apply function based on condition.
+    """Apply a function based on a condition.
 
     Parameters
     ----------

@@ -11,8 +11,8 @@ __all__ = ['DownloadManager']
 
 class DownloadManagerMeta(type):
     """
-    This class provides a thread-safe implementation of ``Singleton`` from
-    https://refactoring.guru/design-patterns/singleton/python/example#example-1
+    Provides a thread-safe implementation of ``Singleton`` from
+    https://refactoring.guru/design-patterns/singleton/python/example#example-1.
     """
 
     _instances = {}
@@ -20,7 +20,7 @@ class DownloadManagerMeta(type):
 
     def __call__(cls, *args, **kwargs):
         """
-        Possible changes to the value of the `__init__` argument do not affect
+        Possible changes to the value of the ``__init__`` argument do not affect
         the returned instance.
         """
         with cls._lock:
@@ -31,7 +31,7 @@ class DownloadManagerMeta(type):
 
 
 class DownloadManager(metaclass=DownloadManagerMeta):
-    """Provides for managing downloads of example files.
+    """Manages downloads of example files.
 
     Local paths are saved in this class so that a global cleanup
     of example files can be performed when the client is closed.
@@ -43,7 +43,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
     def add_file(self, file_path: str):
         """Add the path for a downloaded example file to a list.
 
-        This list is used to keep track of where example files are
+        This list keeps track of where example files are
         downloaded so that a global cleanup of these files can be
         performed when the client is closed.
 
