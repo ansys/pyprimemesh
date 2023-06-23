@@ -18,6 +18,7 @@ hexcore
 ignore_self_proximity
 ignore_orientation
 Lucid
+lucid
 Meshedgeodesic
 meshedgeodesic
 Meshing's
@@ -36,9 +37,9 @@ stackable
 tetrahedra
 Topo
 topo
-topoedges
+topoEdges
 TopoEntities
-topofaces
+TopoFaces
 Zonelet
 zonelet
 Zonelets

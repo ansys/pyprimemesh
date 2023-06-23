@@ -33,7 +33,7 @@ There are three major operations for zonelet connections:
 The following example shows how to accomplish these tasks:
 
 * Import the model and delete geometry topology from each part.
-* Merge the parts and check the surface mesh connectivity.
+* Merge the parts and verify the surface mesh connectivity.
 * Perform the join or intersect operation on face zonelets.
 
 #. Import the model and delete topo-geometric entities from each part:
@@ -174,7 +174,7 @@ This code merges parts and scaffold topofaces:
         topo_faces=part.get_topo_faces(), topo_beams=[], params=params
     )
 
-This code prints the results so that you can check the number of topofaces that failed
+This code prints the results so that you can verify the number of TopoFaces that failed
 in the scaffold operation:
 
 .. code-block:: pycon

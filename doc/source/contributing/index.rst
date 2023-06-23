@@ -55,7 +55,7 @@ PyPrimeMesh repository:
   of how you use PyPrimeMesh.
 
 - `graphics <https://github.com/ansys/pyprimemesh/tree/main/src/ansys/meshing/prime/graphics>`_,
-  which provides graphics functionality and image files.
+  which provides graphics capabilities and image files.
 
 - `lucid <https://github.com/ansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_, which
   provides high-level APIs.
