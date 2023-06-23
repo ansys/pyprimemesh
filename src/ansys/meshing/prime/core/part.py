@@ -138,9 +138,7 @@ class Part(_Part):
 
     @property
     def print_id(self) -> bool:
-        """Whether the IDs of TopoEntities or zonelets are set to print along
-        with the part summary.
-        """
+        """Whether IDs of TopoEntities or zonelets are set to print along with the part summary."""
         return self._print_id
 
     @print_id.setter

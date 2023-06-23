@@ -13,7 +13,7 @@ from ansys.meshing.prime.core.model import Model
 
 class VolumeSweeper(_Sweeper):
     """Provides operations to generate volume meshes using stacker technology.
-    
+
     TopoVolumes are volume meshed by sweeping or stacking a set of face
     and edge zonelets.
 
@@ -34,9 +34,9 @@ class VolumeSweeper(_Sweeper):
     ) -> MeshStackerResults:
         """Create a face at the specified origin.
 
-        This method creates a face at the specified origin and perpendicular to the specified direction.
-        Also, it imprints model edges on the face, makes necessary edge repairs, and duplicates relevant
-        size controls on the base face.
+        This method creates a face at the specified origin and perpendicular to the
+        specified direction. Also, it imprints model edges on the face, makes necessary
+        edge repairs, and duplicates relevant size controls on the base face.
 
 
         Parameters
