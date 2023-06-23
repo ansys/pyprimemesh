@@ -5,13 +5,14 @@
 Meshing a PCB for structural thermal analysis
 =============================================
 
-**Summary**: This example demonstrates how to mesh a PCB (printed circuit
-board) for structural thermal simulation using the stacker method.
+**Summary**: This example demonstrates how to mesh a printed circuit board
+with mainly hexahedral elements for structural thermal simulation using the volume sweeper.
 
 Objective
 ~~~~~~~~~~
-This example meshes the solids of a PCB using the stacker method for a
-structural thermal analysis using predominantly hexahedral elements.
+In this example, you can mesh the solids of a printed circuit board,
+using the volume sweeper, for a structural thermal analysis
+using predominantly hexahedral elements.
 
 .. image:: ../../../images/pcb_stacker.png
    :align: center
@@ -48,16 +49,28 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the PCB's geometry (FMD) file exported by SpaceClaim.
-# Import the geometry.
-# Display the imported geometry.
+# Download the pcb geometry file (.pmdat).
+# Import geometry.
+# Display imported geometry.  Purple edges indicate that the geometry is
+# connected and the topology is shared between the different volumes.
+# This will mean the mesh will also be connected between volumes.
 
-pcb_geometry = prime.examples.download_pcb_pmdat()
+# For Windows OS users scdoc is also available.
+# In order to read the geometry as connected with shared topology
+# the WORKBENCH cad reader route must be used:
 
-mesh_util.read(file_name=pcb_geometry)
+# mesh_util.read(
+#     file_name=prime.examples.download_pcb_scdoc(),
+#     cad_reader_route=prime.CadReaderRoute.WORKBENCH,
+# )
+
+mesh_util.read(file_name=prime.examples.download_pcb_pmdat())
 
 display = Graphics(model)
 display()
+
+sizing_params = prime.GlobalSizingParams(model=model, min=0.5, max=1.0)
+model.set_global_sizing_params(params=sizing_params)
 
 ###############################################################################
 # Create base face
@@ -70,6 +83,8 @@ display()
 #
 # Create the base face from the part and volumes.
 # Define a label for the generated base faces and display.
+# When coloured by ZONELET the display shows the imprints
+# on the base face.
 
 part = model.parts[0]
 sweeper = prime.VolumeSweeper(model)
