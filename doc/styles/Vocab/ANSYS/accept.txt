@@ -37,7 +37,7 @@ stackable
 tetrahedra
 Topo
 topo
-topoEdges
+TopoEdges
 TopoEntities
 TopoFaces
 Zonelet
