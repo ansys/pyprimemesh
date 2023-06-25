@@ -158,7 +158,7 @@ auto_mesh_params.volume_fill_type = prime.VolumeFillType.TET
 # Display volume mesh.
 
 volume_mesh = prime.AutoMesh(model=model)
-result_vol = volume_mesh.mesh(part.id,auto_mesh_params)
+result_vol = volume_mesh.mesh(part_id=part.id, automesh_params=auto_mesh_params)
 print(part.get_summary(prime.PartSummaryParams(model)))
 
 display()
