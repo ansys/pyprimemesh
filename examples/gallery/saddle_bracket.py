@@ -74,7 +74,7 @@ display()
 # ~~~~~~~~~~~~~~~~~~~~~~
 # Mesh the source faces for the thin volume control with quads.
 
-scope=prime.lucid.SurfaceScope(
+scope = prime.lucid.SurfaceScope(
     part_expression="*",
     entity_expression="source_thin",
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
@@ -107,7 +107,7 @@ display()
 part = model.parts[0]
 part.delete_topo_entities(
     prime.DeleteTopoEntitiesParams(
-        model,
+        model=model,
         delete_geom_zonelets=True,
         delete_mesh_zonelets=False,
     )
@@ -135,7 +135,7 @@ thin_vol_ctrl.set_source_scope(
 thin_vol_ctrl.set_target_scope(
     prime.ScopeDefinition(
         model=model,
-        label_expression="target_thin"
+        label_expression="target_thin",
     )
 )
 
@@ -157,8 +157,8 @@ auto_mesh_params.volume_fill_type = prime.VolumeFillType.TET
 # Print mesh summary.
 # Display volume mesh.
 
-volume_mesh=prime.AutoMesh(model=model)
-result_vol= volume_mesh.mesh(part.id,auto_mesh_params)
+volume_mesh = prime.AutoMesh(model=model)
+result_vol = volume_mesh.mesh(part.id,auto_mesh_params)
 print(part.get_summary(prime.PartSummaryParams(model)))
 
 display()
