@@ -93,7 +93,29 @@ display()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Mesh unmeshed faces with tri elements.
 
+part = model.parts[0]
+
+all_faces = part.get_topo_faces()
+meshed_faces = part.get_topo_faces_of_label_name_pattern(
+    label_name_pattern="source_thin",
+    name_pattern_params=prime.NamePatternParams(model),
+)
+
+unmeshed_faces = [face for face in all_faces if face not in meshed_faces]
+
+part.add_labels_on_topo_entities(
+    labels=["unmeshed_faces"],
+    topo_entities=unmeshed_faces,
+)
+
+scope=prime.lucid.SurfaceScope(
+    part_expression="*",
+    entity_expression="unmeshed_faces",
+    scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
+)
+
 mesh_util.surface_mesh(
+    scope=scope,
     min_size=2.0,
 )
 
@@ -104,7 +126,6 @@ display()
 # ~~~~~~~~~~~~~~~
 # Delete topology to leave only the surface mesh.
 
-part = model.parts[0]
 part.delete_topo_entities(
     prime.DeleteTopoEntitiesParams(
         model=model,
