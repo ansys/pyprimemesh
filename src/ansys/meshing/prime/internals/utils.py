@@ -329,7 +329,7 @@ def file_read_context_list(model, file_names: List[str]):
         List of the context files.
     """
     if config.file_existence_check_enabled():
-        for file in filenames:
+        for file in file_names:
             if not os.path.exists(file):
                 error_msg = f"File {file} given for read is missing from local disk."
                 raise FileNotFoundError(error_msg)
