@@ -16,13 +16,13 @@ from .examples import (
     download_pipe_tee_fmd,
     download_pipe_tee_pmdat,
     download_pipe_tee_scdoc,
+    download_saddle_bracket_dsco,
+    download_saddle_bracket_fmd,
+    download_saddle_bracket_scdoc,
     download_toy_car_dsco,
     download_toy_car_fmd,
     download_toy_car_pmdat,
     download_toy_car_scdoc,
     download_turbine_blade_cdb,
-    download_saddle_bracket_dsco,
-    download_saddle_bracket_fmd,
-    download_saddle_bracket_scdoc,
 )
 from .unit_test_examples import download_test_examples
