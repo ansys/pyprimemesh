@@ -108,7 +108,7 @@ part.add_labels_on_topo_entities(
     topo_entities=unmeshed_faces,
 )
 
-scope=prime.lucid.SurfaceScope(
+scope = prime.lucid.SurfaceScope(
     part_expression="*",
     entity_expression="unmeshed_faces",
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
