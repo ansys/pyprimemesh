@@ -23,10 +23,15 @@ __all__ = [
     "download_toy_car_scdoc",
     "download_toy_car_dsco",
     "download_pipe_tee_fmd",
-    "download_pipe_tee_fmd",
+    "download_pipe_tee_pmdat",
+    "download_pipe_tee_scdoc",
     "download_pipe_tee_dsco",
-    "download_toy_car_scdoc",
+    "download_turbine_blade_cdb",
     "download_pcb_pmdat",
+    "download_pcb_scdoc",
+    "download_saddle_bracket_fmd",
+    "download_saddle_bracket_scdoc",
+    "download_saddle_bracket_dsco",
 ]
 
 
@@ -53,6 +58,10 @@ class Examples(Enum):
     DEFORMED_BLADE_DSCO = {"filename": "blade_deformed.dsco", "git_folder": "turbine_blade"}
     TURBINE_BLADE_CDB = {"filename": "blade.cdb", "git_folder": "turbine_blade"}
     PCB_PMDAT = {"filename": "pcb_stacker.pmdat", "git_folder": "pcb"}
+    PCB_SCDOC = {"filename": "pcb_stacker.scdoc", "git_folder": "pcb"}
+    SADDLE_BRACKET_FMD = {"filename": "saddle_bracket.fmd", "git_folder": "saddle_bracket"}
+    SADDLE_BRACKET_SCDOC = {"filename": "saddle_bracket.scdoc", "git_folder": "saddle_bracket"}
+    SADDLE_BRACKET_DSCO = {"filename": "saddle_bracket.dsco", "git_folder": "saddle_bracket"}
 
 
 _DOWNLOADS = []
@@ -782,3 +791,140 @@ def download_pcb_pmdat(
 
     """
     return get_file(Examples.PCB_PMDAT, destination, force)
+
+
+def download_pcb_scdoc(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download SCDOC file for the pcb example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     pcb = prime_examples.download_pcb_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(pcb, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.PCB_SCDOC, destination, force)
+
+
+def download_saddle_bracket_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download FMD file for the saddle bracket example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     saddle_bracket = prime_examples.download_saddle_bracket_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(saddle_bracket, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+
+    return get_file(Examples.SADDLE_BRACKET_FMD, destination, force)
+
+
+def download_saddle_bracket_scdoc(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download SCDOC file for the saddle bracket example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     saddle_bracket = prime_examples.download_saddle_bracket_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(saddle_bracket, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.SADDLE_BRACKET_SCDOC, destination, force)
+
+
+def download_saddle_bracket_dsco(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download DSCO file for the saddle bracket example
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used
+    force: bool
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be re-used.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     saddle_bracket = prime_examples.download_saddle_bracket_dsco()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(saddle_bracket, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.SADDLE_BRACKET_DSCO, destination, force)
