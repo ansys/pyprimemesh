@@ -15,7 +15,8 @@ def test_io_file_not_found_error(get_remote_client, get_examples):
             assert f'Given file name "{file_name}" is not found on local disk' in str(error.value)
 
         files = [r'/doesnotexist/file.pmdat', get_examples["elbow_lucid"]]
-        with pytest.raises(FileNotFoundError) as error:
+        error_msg = "File /doesnotexist/file.pmdat given for read is missing from local disk."
+        with pytest.raises(FileNotFoundError, match=error_msg) as error:
             _ = io.import_fluent_meshing_meshes(
                 files, prime.ImportFluentMeshingMeshParams(model=model)
             )
