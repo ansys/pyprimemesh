@@ -17,6 +17,7 @@ __all__ = [
 __DEFAULT_USE_BINARY = False
 __USING_CONTAINER = False
 __HAS_PIM = False
+__FILE_CHECK = True
 
 
 def _optimize_vectors():
@@ -160,3 +161,32 @@ def has_pim():
         Value for the ``HAS_PIM`` flag.
     """
     return __HAS_PIM
+
+
+def file_existence_check_enabled():
+    """Get config to enable checking if files exist.
+
+    Returns
+    -------
+    bool
+        Option to check if files exist before reading them.
+    """
+    return __FILE_CHECK
+
+
+def set_file_existence_check(value: bool):
+    """Set option to enable checking if files exist.
+
+    Parameters
+    ----------
+    value : bool
+        Value to set the option with.
+
+    Returns
+    -------
+    bool
+        Option to check if files exist before reading them.
+    """
+    global __FILE_CHECK
+    __FILE_CHECK = value
+    return __FILE_CHECK
