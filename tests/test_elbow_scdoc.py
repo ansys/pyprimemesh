@@ -1,4 +1,5 @@
 import os
+import platform
 import tempfile
 
 import pytest
@@ -7,7 +8,7 @@ from ansys.meshing import prime
 from ansys.meshing.prime.graphics import Graphics
 
 
-@pytest.mark.windows_only
+@pytest.mark.skipif(platform.system() != 'Windows', reason="Windows specific test.")
 def test_elbow_lucid(get_remote_client, get_examples):
     """Tests an use case with the elbow example."""
 

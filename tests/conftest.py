@@ -1,14 +1,11 @@
 """General fixtures to use in all test modules."""
 import os
-import platform
 import xml.etree.ElementTree as ET
 
 import pytest
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.examples import download_test_examples
-
-windows_only = pytest.mark.skipif(platform.system() != 'nt', reason="Flaky Mac tests")
 
 
 class RemoteClientManager:
