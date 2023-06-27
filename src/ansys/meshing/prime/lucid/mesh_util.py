@@ -1,4 +1,4 @@
-"""Module for meshing util functions."""
+"""Module for meshing utility functions."""
 import enum
 import os
 from typing import Iterable, List
@@ -10,36 +10,39 @@ from .utils import check_name_pattern
 
 
 class LabelToZoneMethod(enum.IntEnum):
-    """Method to create zones from labels."""
+    """Provides for creating zones from labels."""
 
     SIMPLE = 0
     """
-    Simple method to create zones from labels.
-    Entities are queried using labels and zones created.
+    Simple method for creating zones from labels.
+
+    Entities are queried using labels, and zones are created.
     """
 
 
 class Mesh:
-    """Mesh is one of the classes in Lucid API.
+    """Provides methods for users who are new to meshing.
 
-    This class is meant for beginners to meshing.
-    It also serves as a tutorial for commonly used meshing workflows.
+    This class also serves as a tutorial for commonly used meshing workflows.
 
-    The following functionalities are provided by this class:
-    * Surface meshing with constant and variable sizing with triangle or quad dominant mesh.
-    * Volume meshing with prism, tetrahedral and polyhedral elements.
-    * Surface wrapping.
-    * Helper method to create zones from labels.
-    * Helper methods for reading and writing files.
+    The ``Mesh`` class provides these functionalities:
+
+    * Surface meshing with constant and variable sizing with triangle
+      or quad dominant mesh
+    * Volume meshing with prism, tetrahedral, and polyhedral elements
+    * Surface wrapping
+    * Helper method for creating zones from labels
+    * Helper methods for reading and writing files
+
     """
 
     def __init__(self, model: prime.Model):
-        """Initialize mesher using model.
+        """Initialize the mesher using a model.
 
         Parameters
         ----------
         model : prime.Model
-            Model on which the methods work.
+            Model that the methods are to work on.
         """
         self._model = model
         self._logger = model.python_logger
@@ -47,26 +50,25 @@ class Mesh:
     def read(
         self, file_name: str, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
     ):
-        """Read or import files of different formats based on file extension.
+        """Read or import files of different formats based on file extensions.
 
-        PyPrimeMesh's native file format has extension pmdat.
-        The method supports the following:
-        * Reading PyPrimeMesh's native file format.
-        * Importing various CAD Formats.
-        * Importing Fluent Meshing's msh file.
-        * Importing Fluent cas file.
-        * Importing MAPDL cdb files.
+        This method supports reading and importing these file formats:
+
+        * Reading PyPrimeMesh's native PMDAT files
+        * Importing various types of CAD files
+        * Importing Fluent Meshing's MSH files
+        * Importing Fluent's CAS files
+        * Importing MAPDL's CDB files
 
         Parameters
         ----------
         file_name : str
-            Path to file to be read or imported.
-
-        append : bool
-            Set it to True to append instead of overwrite.
-
-        cad_reader_route : prime.CadReaderRoute
-            Route of CadReader.
+            Path to the file to read or import.
+        append : bool, optional
+            Whether to append to the file. The default is ``False``, in which case
+             the file is overwritten.
+        cad_reader_route : prime.CadReaderRoute, optional
+            Route of the CAD reader. The default is ``None``.
 
         """
         filename, fileext = os.path.splitext(file_name)
@@ -95,19 +97,19 @@ class Mesh:
             )
 
     def write(self, file_name: str):
-        """Write or export files of different formats based on file extension.
+        """Write or export files of different formats based on file extensions.
 
-        PyPrimeMesh's native file format has extension pmdat.
-        The method supports the following:
-        * Writing PyPrimeMesh's native file format.
-        * Exporting Fluent Meshing's msh file.
-        * Exporting Fluent cas file.
-        * Exporting MAPDL cdb files.
+        This method supports writing and exporting these file formats:
+
+        * Writing PyPrimeMesh's native PMDAT files
+        * Exporting Fluent Meshing's MSH files
+        * Exporting Fluent's CAS files
+        * Exporting MAPDL's CDB files.
 
         Parameters
         ----------
         file_name : str
-            Path of file to be written or exported.
+            Path of the file to write or export.
 
         """
         filename, fileext = os.path.splitext(file_name)
@@ -137,31 +139,31 @@ class Mesh:
         Zones are where material properties and boundary conditions
         can be set in respective solvers.
 
-        Zones allow downstream setting of
-        boundary conditions or material properties.
+        Zones allow downstream setting of boundary conditions or material properties.
 
-        Zone names in PyPrimeMesh are translated into equivalent concepts in solver.
-        Currently, only one method is available to convert zone to label.
-        Currently, only face zones are created.
+        Zone names in PyPrimeMesh are translated into equivalent concepts in the solver.
+        Currently, only one method is available to convert a zone to a label, and
+        only face zones are created.
 
-        The method finds the entities by labels and then adds them to the
-        zone with the same name as label.
+        The ``create_zones_from_labels`` method finds the entities by labels
+        and then adds them to zones with the same names as the labels.
 
-        If no label_expression is provided then all labels will be flattened to
-        create zones.  Label names will be combined if overlaps occur and
-        separate zones created.
+        If the ``label_expression`` parameter is not provided, all labels are
+        flattened to create zones. If overlaps occur, label names are combined, and
+        separate zones are created.
 
-        For example, if "LabelA" and "LabelB" had overlapping TopoFaces then
-        the following three zones would be created;
-        "LabelA", "LabelB" and "LabelA_LabelB" for the overlap.
+        For example, if "LabelA" and "LabelB" have overlapping TopoFaces,
+        these zones are created: ``"LabelA"``, ``"LabelB"``, and
+        ``"LabelA_LabelB"`` for the overlap.
 
         Parameters
         ----------
-        label_expression : str
-            Expression for labels to be converted to zones.
-
-        conversion_method : LabelToZoneMethod
-            Method used to convert label to zones.
+        label_expression : str, optional
+            Expression for the labels to convert to zones. The
+            default is ``None``.
+        conversion_method : LabelToZoneMethod, optional
+            Method for converting the labels to zones. The default
+            is ``LabelToZoneMethod.SIMPLE``.
 
         Examples
         --------
@@ -265,14 +267,15 @@ class Mesh:
                             )
 
     def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
-        """Merge given parts into one.
+        """Merge multiple parts into a single part.
 
         Parameters
         ----------
-        parts_expression : str
-            Expression of parts to be merged.
-        new_name : str
-            New part name for the merged part.
+        parts_expression : str, optional
+            Expression of the parts to merge. The default is ``"*"``.
+        new_name : str, optional
+            Name of the new part that is created from the merged parts.
+            The default is ``"merged_part"``.
 
         """
         part_ids = []
@@ -397,34 +400,31 @@ class Mesh:
         generate_quads: bool = False,
         scope: SurfaceScope = SurfaceScope(),
     ):
-        """Generate Surface mesh on the given scope.
+        """Generate a surface mesh on a scope.
 
-        This method generates surface mesh on the given scope.
-        The method is used to generate constant or variable size surface mesh.
-        The method supports generating quad dominant or triangular elements.
+        This method is used to generate a surface mesh of a constant or variable
+        size. It supports generating quad dominant or triangular elements.
 
-        If min size and max size are provided, variable size mesh is generated
-        between min size and max size by applying sizes based on curvature.
+        If minimum and maximum sizes are provided, a variable size mesh is generated
+        between the minimum size and maximum size by applying sizes based on curvature.
 
-        If either of min size or max size is provided, constant size mesh
-        will be generated with the provided size.
+        If only the minimum size or maximum size is provided, a constant size mesh
+        is generated with the provided size.
 
-        If neither of min size or max size is provided, global max setting is used to
-        generate a constant size mesh.
+        If neither minimum size or maximum size is provided, the global maximum setting
+        is used to generate a constant size mesh.
 
         Parameters
         ----------
-        min_size : float
-            Minimum edge length of the mesh.
-
-        max_size : float
-            Maximum edge length of the mesh.
-
-        generate_quads : bool
-            Generate quad dominant mesh or all triangular mesh.
-
+        min_size : float, optional
+            Minimum edge length of the mesh. The default is ``None``.
+        max_size : float, optional
+            Maximum edge length of the mesh. The default is ``None``.
+        generate_quads : bool, optional
+            Whether to generate a quad dominant mesh. The default is
+            ``False``, in which case a triangular mesh is generated.
         scope : SurfaceScope
-            Scope for generating surface mesh.
+            Scope for generating the surface mesh.
 
         """
         if min_size == None and max_size == None:
@@ -461,20 +461,16 @@ class Mesh:
         size: float = 1.0,
         scope: SurfaceScope = SurfaceScope(),
     ):
-        """Generate constant size control on the given scope.
-
-        This method generates constant size control on the given scope.
+        """Generate constant size control on a scope.
 
         Parameters
         ----------
         control_name : str
             Name of the control.
-
-        size : float
-            Constant edge length of the mesh.
-
+        size : float, optional
+            Constant edge length of the mesh. The default is ``1.0``.
         scope : SurfaceScope
-            Scope for creating size control.
+            Scope for creating the size control.
 
         """
         global_sizes = self._model.get_global_sizing_params()
@@ -499,23 +495,18 @@ class Mesh:
         max: float = 2.0,
         scope: SurfaceScope = SurfaceScope(),
     ):
-        """Generate curvature size control on the given scope.
-
-        This method generates curvature size control on the given scope.
+        """Generate a curvature size control on a scope.
 
         Parameters
         ----------
-        control_name : str
-            Name of the control.
-
-        min : float
-            Min edge length of the mesh.
-
+        control_name : str, optional
+            Name of the control. The default is ``"size_control"``.
+        min : float, optional
+            Minimum edge length of the mesh. The default is ``1.0``.
         max : float
-            Max edge length of the mesh.
-
+            Maximum edge length of the mesh. The default is ``2.0``.
         scope : SurfaceScope
-            Scope for creating size control.
+            Scope for creating the size control.
 
         """
         global_sizes = self._model.get_global_sizing_params()
@@ -543,22 +534,19 @@ class Mesh:
         generate_quads: bool = False,
         scope: SurfaceScope = SurfaceScope(),
     ):
-        """Generate Surface mesh on the given scope with the given size controls.
+        """Generate a surface mesh on a scope using the given size controls.
 
-        This method generates surface mesh on the given scope.
-        The method is used to generate surface mesh using the given size controls.
-        The method supports generating quad dominant or triangular elements.
+        This method supports generating quad dominant or triangular elements.
 
         Parameters
         ----------
-        size_control_names : str
-            Name pattern for the size controls.
-
-        generate_quads : bool
-            Generate quad dominant mesh or all triangular mesh.
-
+        size_control_names : str, optional
+            Name pattern for the size controls. The default is ``"*"``.
+        generate_quads : bool, optional
+            Whether to generate a quad dominant mesh. The default is
+            ``False``, in which case a triangular mesh is generated.
         scope : SurfaceScope
-            Scope for generating surface mesh.
+            Scope for generating the surface mesh.
 
         """
         sizefield = prime.SizeField(model=self._model)
@@ -584,22 +572,25 @@ class Mesh:
         target_face_labels: str = "*",
         tolerance: float = 0.05,
     ):
-        """Connect face zonelets with given label name pattern within the given tolerance.
+        """Connect face zonelets with a label name pattern within a given tolerance.
 
-        This method is used to connect face zonelets of given label name pattern to the
-        face zonelets given by target face labels within a given tolerance. Connect happens within
-        part. Face zonelets of a part are connected with face zonelets of the same part only.
+        This method connects face zonelets with a label name pattern to
+        face zonelets with target face labels within a given tolerance. The connection
+        happens within the part. Face zonelets of a part are connected with face zonelets
+        of the same part only.
 
         Parameters
         ----------
-        part_expression: str
-            Name pattern of parts used for connecting.
-        face_labels: str
-            Name pattern of face labels used for connecting.
-        target_face_labels: str
-            Name pattern of face labels with which you want to connect.
-        tolerance: float
-            Tolerance used for connection.
+        part_expression : str, optional
+            Name pattern of the parts to use for connecting the face zonelets. The
+            default is ``"*"``.
+        face_labels : str, optional
+            Name pattern of the face labels used for connecting the face zonelets.
+            The default is ``"*"``.
+        target_face_labels : str, optional
+            Name pattern of the face labels to connect. The default is ``"*"``.
+        tolerance: float, optional
+            Tolerance for the connection. The default is ``0.05``.
 
         """
         name_pattern_param = prime.NamePatternParams(self._model)
@@ -631,11 +622,12 @@ class Mesh:
 
         Parameters
         ----------
-        part_expression : str
-            Expression of parts where topology needs to be deleted.
-
-        create_zones_per_volume : bool
-            Creates volume zones for each volume when True.
+        part_expression : str, optional
+            Expression of the parts where the topology must be deleted.
+            The default is ``"*"``.
+        create_zones_per_volume : bool, optional
+            Whether to create volume zones for each volume. The default
+            is ``True``.
 
         """
         create_zones_type = prime.CreateVolumeZonesType.NONE
@@ -650,18 +642,15 @@ class Mesh:
                     part.compute_closed_volumes(params=params)
 
     def delete_topology(self, part_expression: str = "*", delete_edges: bool = True):
-        """Delete topology in the given part.
-
-        This method can be used to delete topology in the parts defined by the part expression.
-        If delete_edges is set to True, edge zonelets will be deleted.
+        """Delete topology in one or more parts.
 
         Parameters
         ----------
-        part_expression : str
-            Expression of parts where topology needs to be deleted.
-
-        delete_edges : bool
-            Edge zonelets are deleted when true.
+        part_expression : str, optional
+            Expression of the parts where the topology must be deleted.
+            The default is ``"*"``.
+        delete_edges : bool, optional
+            Whether to delete edge zonelets. The default is ``True``.
 
         """
         for part in self._model.parts:
@@ -696,16 +685,16 @@ class Mesh:
     def create_flow_volume(
         self, flow_volume_zone_name: str = "flow_volume", cap_scope: SurfaceScope = SurfaceScope()
     ):
-        """Create flow volume by the given face labels defining the boundary of the volume.
-
-        This method creates flow volumes for the given faces defining the boundary of the volume.
+        """Create flow volume by the face labels defining the boundary of the volume.
 
         Parameters
         ----------
-        flow_volume_zone_name: str
-            Suggested name for the volume zone of the created flow volume.
-        cap_scope: SurfaceScope
-            Scope defining the face zonelets where cap for flow volume needs to be created.
+        flow_volume_zone_name : str, optional
+            Name for the volume zone of the created flow volume. The default is
+            ``"flow_volume"``.
+        cap_scope : SurfaceScope
+            Scope defining the face zonelets where the cap for flow volume must
+            be created.
 
         """
         parts = cap_scope.get_parts(self._model)
@@ -773,37 +762,31 @@ class Mesh:
         growth_rate: float = 1.2,
         scope: VolumeScope = VolumeScope(),
     ):
-        """Generate Volume mesh on the model.
-
-        This method can be used to generate volume mesh on the entire model.
-        If prism layers parameter is set, prism layers are generated.
+        """Generate a volume mesh on the model.
 
         Parameters
         ----------
         volume_fill_type : prime.VolumeFillType
-            Type of volume elements to be generated.
-
-        quadratic : bool
-            Option to generate quadratic mesh. It is not supported with parallel meshing.
-            It is only supported with pure tetrahedral mesh.
-
-        prism_layers : int
-            Number of prism layers to grow.
-
-        prism_surface_expression : str
-            Facezonelets or topofaces from which prisms are grown.
-            Default is to grow from all surfaces.
-
-        prism_volume_expression : str
-            Volumes or topovolumes into which prisms are grown.
-            The expression evaluates to zone names and volumes
-            or topovolumes are queried based on zones evaluated.
-
-        growth_rate : float
-            Prism growth rate.
-
+            Type of volume elements to generate.
+        quadratic : bool, optional
+            Whether to generate a quadratic mesh. The default is ``False``.
+            A quadratic mesh is not supported with parallel meshing.
+            It is only supported with a pure tetrahedral mesh.
+        prism_layers : int, optional
+            Number of prism layers to grow. The default is ``None``.
+            If a value for prism layers is specified, prism layers are generated.
+        prism_surface_expression : str, optional
+            Face zonelets or TopoFaces to grow prisms from. The default is
+            ``"*"``, in which case prisms are grown from all surfaces.
+        prism_volume_expression : str, optional
+            Volumes or TopoVolumes to grow prisms in.
+            The default is ``"*"``. This expression evaluates
+            to zone names and volumes, or TopoVolumes are queried
+            based on the zones evaluated.
+        growth_rate : float, optional
+            Prism growth rate. The default is ``1.2``.
         scope : VolumeScope
-            Scope of volumes to be meshed.
+            Scope of volumes to mesh.
 
         """
         automesh_params = prime.AutoMeshParams(model=self._model)
@@ -1000,7 +983,7 @@ class Mesh:
     def __compute_size_field(
         self, size_controls: List[prime.SizeControl], field: prime.SizeField
     ) -> int:
-        """Help method to compute size field."""
+        """Compute size field using the helper method."""
         self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
         result = field.compute_volumetric(
             [size_control.id for size_control in size_controls],
@@ -1037,7 +1020,7 @@ class Mesh:
         """
         Create contact prevention controls for all parts.
 
-        Proximity size control created for remeshing.
+        A proximity size control is created for remeshing.
         """
         all_parts_labels = len(self._model.parts)
         all_parts_labels += sum([len(part.get_labels()) for part in self._model.parts])
@@ -1321,117 +1304,87 @@ class Mesh:
         contact_prevention_params: List[prime.ContactPreventionParams] = None,
         leak_prevention_params: List[prime.LeakPreventionParams] = None,
     ):
-        """Wrap and remesh input.
+        """Wrap and remesh the input.
 
-        Default behaviour is to perform an external wrap of all parts in the model
-        using curvature sizing and extracting features.
-        The wrap is then remeshed to give a surface mesh for the extracted region.
+        The default behavior is to perform an external wrap of all parts in the model
+        using curvature sizing and extracting features. The wrap is then remeshed
+        to provide a surface mesh for the extracted region.
 
-        Geodesic sizing is used if only soft and curvature controls are set.
-        If contact prevention size is set and geodesic sizing is available then contact detection
-        is used globally.
+        Geodesic sizing is used only if soft and curvature controls are set.
+        If contact prevention size is set and geodesic sizing is available, contact
+        detection is used globally.
 
-        If min_size and max_size is provided, variable size mesh is generated
-        between min_size and max_size by applying sizes based on curvature.
+        If minimum and maximum sizes are provided, variable size mesh is generated
+        between the minimum size and maximum size by applying sizes based on curvature.
 
-        If either of min_size or max_size is provided, constant size mesh
-        will be generated with the provided size.
+        If either minimum size or maximum size is provided, constant size mesh
+        is generated with the provided size.
 
-        If neither of min_size or max_size is provided, global min and max settings are used to
-        generate a variable size mesh based on curvature.
-
+        If neither minimum size or maximum size is provided, global minimum and
+        maximum settings are used to generate a variable size mesh based on curvature.
 
         Parameters
         ----------
-        input_parts : str
-            Parts to be wrapped.
-            Default = "*"
-
-        input_labels : str
-            Labels to be wrapped.
-            Default = "*"
-
-        keep_inputs : bool
-            Retain inputs.
-            Default = False
-
-        region_extract : prime.WrapRegion
-            Set region to wrap.
-            Default = prime.WrapRegion.EXTERNAL
-
-        material_point : List[float], optional
-            Material point needed if region extraction method set to material point.
-
-        min_size: float, optional
-            Minimum edge length of the mesh.
-
-        max_size: float, optional
-            Maximum edge length of the mesh.
-
-        growth_rate : float
-            Default = 1.2
-
+        min_size : float, optional
+            Minimum edge length of the mesh. The default is ``None``.
+        max_size : float, optional
+            Maximum edge length of the mesh. The default is ``None``.
+        growth_rate : float, optional
+            Growth rate. The default is ``1.2``.
         elements_per_gap : float, optional
             Global proximity size control elements per gap with self proximity.
-
-        normal_angle : float
-            Global curvature size control normal angle.
-            Default = 18.0
-
-        create_intersection_loops: bool
-            Create intersection loops between all parts.
-            Default = False
-
-        use_existing_features: bool
-            Maintain existing features on parts.
-            Default = False
-
-        extract_features: bool
-            Extract feature edges using feature angle.
-            Default = True
-
-        feature_angle: float
-            Angle used to extract features.
-            Default = 40.0
-
-        enable_feature_octree_refinement: bool
-            Apply refinement to feature edges during wrap.
-            Default = True
-
-        contact_prevention_size: float, optional
+            The default is ``None``.
+        normal_angle : float, optional
+            Global curvature size control normal angle. The default is ``18.0``.
+        input_parts : str, optional
+            Parts to wrap. The default is ``"*"``.
+        input_labels : str
+            Labels to wrap. The default is ``"*"``.
+        keep_inputs : bool, optional
+            Whether to retain inputs. The default is ``False``.
+        region_extract : prime.WrapRegion
+            Region to wrap. The default is ``prime.WrapRegion.EXTERNAL``.
+        material_point : List[float], optional
+            Material point if the region extraction method is set to
+            material point. The default is ``None``.
+        extract_features : bool, optional
+            Whether to extract feature edges using the feature angle. The
+            default is ``True``.
+        create_intersection_loops : bool, optional
+            Whether to create intersection loops between all parts.
+            The default is ``False``.
+        use_existing_features : bool, optional
+            Whether to maintain existing features on parts. The
+            default is ``False``.
+        enable_feature_octree_refinement: bool, optional
+            Whether to apply refinement to feature edges during the wrap.
+            The default is ``True``.
+        feature_angle : float, optional
+            Angle to use for extracting features. The default is ``40.0``.
+        contact_prevention_size : float, optional
             Global proximity size controls between all parts.
-
-        number_of_threads: int, optional
-
-        remesh_postwrap : bool
-            Remesh wrap.
-            Default = True
-
-        recompute_remesh_sizes : bool
-            Recompute sizes from global controls using the wrap surface.
-            Default = False
-
-        use_existing_size_fields : bool
-            Use precomputed size fields.
-            Default = False
-
+            The default is ``None``.
+        number_of_threads : int, optional
+            Number of threads. The default is ``None``.
+        remesh_postwrap : bool, optional
+            Whether to remesh the wrap. The default is ``True``.
+        recompute_remesh_sizes : bool, optional
+            Whether to recompute sizes from global controls using
+            the wrap surface. The default is ``False``.
+        use_existing_size_fields : bool, optional
+            Whether to use precomputed size fields. The default is ``False``.
         size_fields : List[prime.SizeField], optional
-            Set size fields to use.
-
+            List of size fields to use. The default is ``None``.
         wrap_size_controls : List[prime.SizeControl], optional
-            Set wrap size controls to use.
-
+            List of wrap size controls to use. The default is ``None``.
         remesh_size_controls : List[prime.SizeControl], optional
-            Set remesh size controls to use.
-
+            List of remesh size controls to use. The default is ``None``.
         feature_recovery_params : List[prime.FeatureRecoveryParams], optional
-            Set feature recovery parameters to use.
-
+            List of feature recovery parameters to use. The default is ``None``.
         contact_prevention_params : List[prime.ContactPreventionParams], optional
-            Set contact prevention parameters to use.
-
+            List of contact prevention parameters to use. The default is ``None``.
         leak_prevention_params : List[prime.LeakPreventionParams], optional
-            Set leak prevention parameters to use.
+            List of leak prevention parameters to use.  The default is ``None``.
 
         Returns
         -------
@@ -1472,7 +1425,7 @@ class Mesh:
             entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS,
         )
 
-        # Delete topology and work only only on zonelets for now
+        # Delete topology and work only on zonelets for now
         for part in self._model.parts:
             if len(part.get_topo_faces()) > 0:
                 part.delete_topo_entities(

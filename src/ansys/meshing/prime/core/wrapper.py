@@ -1,4 +1,4 @@
-"""Module for wrapper class."""
+"""Module for the wrapper class."""
 from typing import List
 
 import numpy as np
@@ -28,37 +28,37 @@ from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 
 
 class Wrapper(_Wrapper):
-    """Provide operations to generate surface mesh using wrapper technology.
+    """Provides operations for generating a surface mesh using wrapper technology.
 
     Parameters
     ----------
     model : Model
-        Model where to apply the wrapping.
+        Model to apply wrapping to.
     """
 
     def __init__(self, model: Model):
-        """Initialize wrapper and model."""
+        """Initialize the wrapper and model."""
         _Wrapper.__init__(self, model)
         self._model = model
 
     def wrap(self, wrapper_control_id: int, params: WrapParams) -> WrapResult:
-        """Perform wrapping with specified controls.
+        """Perform wrapping with specified controls and given parameters.
 
-        Performs wrapping with specified controls in wrapper control and with provided
-        parameters.
+        This method performs wrapping with specified controls in the wrapper control
+        and with given parameters.
 
 
         Parameters
         ----------
         wrapper_control_id : int
-            Id of wrapper control.
+            ID of the wrapper control.
         params : WrapParams
-            Wrap Parameters.
+            Wrap parameters.
 
         Returns
         -------
         WrapResult
-            Returns the Wrap Results.
+            Wrap results.
 
 
         Examples
@@ -78,22 +78,22 @@ class Wrapper(_Wrapper):
         source_parts: List[Part],
         source_labels: List[str],
     ):
-        """Perform label controlled connection.
+        """Perform a label-controlled connection.
 
-        Performs label controlled connection of wrapper part face zonelets to face zonelets of
-        source parts.
+        This method performs a label-controlled connection of wrapper part face zonelets to
+        face zonelets of source parts.
 
 
         Parameters
         ----------
         wrapper_part : Part
-            wrapper part.
+            Wrapper part.
         target_labels : List[str]
-            target zonelet labels to be connected.
+            List of target zonelet labels to connect.
         source_parts : List[Part]
-           source parts to be connected with.
+           List of source parts to connect with.
         source_labels : List[Part]
-           source zonelet labels to be connected.
+           List of source zonelet labels to connect.
 
 
         Examples
@@ -153,21 +153,21 @@ class Wrapper(_Wrapper):
     ) -> WrapperCloseGapsResult:
         """Close gaps.
 
-        Close gaps create patching surfaces within the face zonelets specified
+        Closing gaps creates patching surfaces within the face zonelets specified
         by scope using gap size.
 
 
         Parameters
         ----------
         scope : ScopeDefinition
-            Scope definition of face zonelets.
+            Scope definition of the face zonelets.
         params : WrapperCloseGapsParams
-            Wrapper close gaps parameters.
+            Wrapper providing close gap parameters.
 
         Returns
         -------
         WrapperCloseGapsResult
-            Returns the WrapperCloseGapsResult.
+            Results from the wrapper for closing gaps.
 
 
         Examples

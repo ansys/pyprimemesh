@@ -3,11 +3,11 @@ from abc import abstractmethod
 
 
 class Communicator(object):
-    """Abstract class for the server communicator."""
+    """Provides the abstract class for the server communicator."""
 
     @abstractmethod
     def serve(self, model, command, *args, **kwargs) -> dict:
-        """Serve model and commands to server.
+        """Serve the model and send a command to the server.
 
         Parameters
         ----------
@@ -19,54 +19,54 @@ class Communicator(object):
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
         """
         pass
 
     @abstractmethod
     def initialize_params(self, model, param_name: str, *args) -> dict:
-        """Initialize parameters in server side.
+        """Initialize parameters on the server side.
 
         Parameters
         ----------
         model : Model
-            Model in which to initialize params.
+            Model to initialize parameter on.
         param_name : str
-            Parameter to initialize
+            Parameter to initialize.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
         """
         pass
 
     @abstractmethod
     def run_on_server(self, model, recipe: str) -> dict:
-        """Run command in server side.
+        """Run the command on the server side.
 
         Parameters
         ----------
         model : Model
-            Model in which to run commands.
+            Model to run commands on.
         recipe : str
             Command to run.
 
         Returns
         -------
         dict
-            Response from server.
+            Response from the server.
         """
         pass
 
     @abstractmethod
     def import_cad(self, model, file_name: str, *args) -> dict:
-        """Import CAD file from local.
+        """Import a CAD file from local.
 
         Parameters
         ----------
         model : Model
-            Model to which import.
+            Model to import.
         file_name : str
             Name of the CAD file.
 

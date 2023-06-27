@@ -1,4 +1,4 @@
-"""Module for general utils of the project."""
+"""Module for general utilities of the project."""
 import logging
 import os
 import shutil
@@ -37,12 +37,12 @@ def get_child_processes(process):
     Parameters
     ----------
     process : int
-        PID of the parent process.
+        Process ID of the parent process.
 
     Returns
     -------
     List
-        PIDs of the processes.
+        Process IDs of the processes.
     """
     children = []
     cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
@@ -65,12 +65,12 @@ def get_child_processes(process):
 
 
 def terminate_process(process: subprocess):
-    """Terminates the given process.
+    """Terminates a process.
 
     Parameters
     ----------
     process : subprocess
-        Process to kill.
+        Process to terminate.
     """
     import signal
     import sys
@@ -93,12 +93,12 @@ def terminate_process(process: subprocess):
 
 
 def print_logs_before_command(logger: logging.Logger, command: str, args):
-    """Print logs before running command.
+    """Print logs before running a command.
 
     Parameters
     ----------
     logger : logging.Logger
-        Logger where to print.
+        Logger to print to.
     command : str
         Command to run.
     args : str
@@ -124,16 +124,16 @@ def print_logs_before_command(logger: logging.Logger, command: str, args):
 
 
 def print_logs_after_command(logger: logging.Logger, command: str, ret):
-    """Print logs after running command.
+    """Print logs after running a command.
 
     Parameters
     ----------
     logger : logging.Logger
-        Logger where to print.
+        Logger to print to.
     command : str
         Command to run.
     ret : str
-        type of the return of the command.
+        Return type of the command.
     """
     logger.info("Finished " + command)
     if logger.isEnabledFor(logging.DEBUG):
@@ -154,24 +154,24 @@ def launch_prime_github_container(
     mount_host: str = defaults.get_user_data_path(),
     mount_image: str = defaults.get_user_data_path_for_containers(),
     port: int = defaults.port(),
-    name: str = 'ansys-prime-server',
+    name: str = "ansys-prime-server",
     version: Optional[str] = None,
 ):
-    """Launch a given container.
+    """Launch a container.
 
     Parameters
     ----------
     mount_host : str, optional
-        IP where to mount the container, by default defaults.get_user_data_path().
+        IP address for the container to mount. The default is ``defaults.get_user_data_path()``.
     mount_image : str, optional
-        Name of the path to mount the container,
-        by default defaults.get_user_data_path_for_containers().
+        Name of the path to the container to mount. The default is
+        ``defaults.get_user_data_path_for_containers()``.
     port : int, optional
-        Port to expose, by default defaults.port().
+        Port to expose. The default is ``defaults.port()``.
     name : str, optional
-        Name of the container, by default 'ansys-prime-server'.
-    version : Optional[str], optional
-        Version of the container to retrieve, by default None.
+        Name of the container. The default is ``"ansys-prime-server"``.
+    version : str, optional
+        Version of the container to retrieve. The default is ``None``.
 
     Raises
     ------
@@ -219,21 +219,21 @@ def stop_prime_github_container(name):
 def file_read_context(model, file_name: str):
     """Upload context.
 
-    Upload a context to a model.
+    Upload context to a model.
 
     Parameters
     ----------
     model : Model
-        Model where to upload the context.
-    file_names : str
-        File containing the context.
+        Model to upload the context to.
+    file_name : str
+        Name of the file containing the context.
 
     Yields
     ------
     str
         File name of the context.
     """
-    if not os.path.exists(file_name):
+    if config.file_existence_check_enabled() and not os.path.exists(file_name):
         raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
         base_file_name = os.path.basename(file_name)
@@ -257,26 +257,26 @@ def file_read_context(model, file_name: str):
 
 
 def port_in_use(port, host=defaults.ip()):
-    """Return True when a port is in use.
+    """Check if a port is in use on a given host.
 
-    Returns True when a port is in use at the given host.
-    Must actually "bind" the address.  Just checking if we can create
-    a socket is insufficient as it's possible to run into permission
-    errors like:
+    This method must actually check is is a "bind" of the port to the
+    address. Just checking if a socket can be created is insufficient
+    because it's possible to run into permission errors like this one:
+
     - An attempt was made to access a socket in a way forbidden by its
       access permissions.
 
     Parameters
     ----------
     port : int
-        Port you want to check.
+        Port to check.
     host : str, optional
-        IP you want to check, by default defaults.ip().
+        IP address to check. The default is ``defaults.ip()``.
 
     Returns
     -------
-    Bool
-        Whether the port is available or not.
+    bool
+        ``True`` if the port is in use, ``False`` if the port is available.
     """
     import socket
 
@@ -289,19 +289,17 @@ def port_in_use(port, host=defaults.ip()):
 
 
 def get_available_local_port(init_port: int = defaults.port()):
-    """Get available port.
-
-    Checks which ports are available and return the first one available.
+    """Get which ports are available and return the first one.
 
     Parameters
     ----------
     init_port : int, optional
-        Port from where to start searching, by default defaults.port().
+        Port to start the search from. The default is ``defaults.port()```.
 
     Returns
     -------
     int
-        Available port.
+        First available port.
     """
     port = init_port
     while port_in_use(port) or port in _LOCAL_PORTS:
@@ -314,20 +312,25 @@ def get_available_local_port(init_port: int = defaults.port()):
 def file_read_context_list(model, file_names: List[str]):
     """Upload context.
 
-    Upload a context to a model.
+    Upload context to a model.
 
     Parameters
     ----------
     model : Model
-        Model where to upload the context.
+        Model to upload context to.
     file_names : List[str]
-        Files that compose the context.
+        List of files with the context.
 
     Yields
     ------
     List[str]
-        List of the context files.
+        List of context files.
     """
+    if config.file_existence_check_enabled():
+        for file in file_names:
+            if not os.path.exists(file):
+                error_msg = f"File {file} given for read is missing from local disk."
+                raise FileNotFoundError(error_msg)
     if config.using_container():
         base_names = [os.path.basename(file) for file in file_names]
         temp_names = [os.path.join(defaults.get_examples_path(), base) for base in base_names]
@@ -353,19 +356,19 @@ def file_read_context_list(model, file_names: List[str]):
 def file_write_context(model, file_name: str):
     """Download context.
 
-    Download context from model and write it to a local file.
+    Download context from a model and write it to a local file.
 
     Parameters
     ----------
     model : Model
-        Model from which to download context.
+        Model to download context from.
     file_name : str
-        Name of the file.
+        Name of the file to write the context to.
 
     Yields
     ------
     str
-        File name.
+        Name of the file to which context has been written.
     """
     if config.using_container():
         base_file_name = os.path.basename(file_name)

@@ -7,30 +7,30 @@ from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryPar
 
 
 class SizeControl(_SizeControl):
-    """Compute size field for volumetric surface meshing.
+    """Compute the size field for a volumetric surface meshing.
 
     Parameters
     ----------
     model : CommunicationManager
-        Server model where to create and modify SizeControls from.
+        Server model to create and modify size controls from.
     id : int
-        ID of the control.
+        ID of the size control.
     object_id : int
-        Object ID of the control.
+        Object ID of the size control.
     name : str
-        Name of the SizeControl
+        Name of the size control.
     local : bool, optional
-        Unused, by default False
+        Unused. The default is ``False``.
     """
 
     def __init__(self, model, id, object_id, name, local=False):
-        """Initialize class variables and superclass."""
+        """Initialize class variables and the superclass."""
         _SizeControl.__init__(self, model, id, object_id, name)
         self._model = model
         self._name = name
 
     def __str__(self) -> str:
-        """Representation of the class in string format.
+        """Get a representation of the class in string format.
 
         Returns
         -------
@@ -42,7 +42,7 @@ class SizeControl(_SizeControl):
         return result.message
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """Set the unique name for the size control based on the given suggested name.
+        """Set the unique name for the size control to a suggested name.
 
         Parameters
         ----------
@@ -52,7 +52,7 @@ class SizeControl(_SizeControl):
         Returns
         -------
         SetNameResults
-            Returns a name of the size control.
+            Newly suggested name for the size control.
 
 
         Examples
@@ -71,7 +71,7 @@ class SizeControl(_SizeControl):
         Returns
         -------
         str
-            Returns a name of the size control.
+            Name of the size control.
 
         Examples
         --------

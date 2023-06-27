@@ -7,26 +7,24 @@ import os
 
 
 class SingletonType(type):
-    """Singleton helper class for the Logger."""
+    """Provides the singleton helper class for the logger."""
 
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
-        """Call to redirect new instances to single instance."""
+        """Call to redirect new instances to the singleton instance."""
         if cls not in cls._instances:
             cls._instances[cls] = super(SingletonType, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
 class PrimeLogger(object, metaclass=SingletonType):
-    """Singleton logger for PyPrimeMesh.
-
-    Logger for PyPrimeMesh library.
+    """Provides the singleton logger for PyPrimeMesh.
 
     Parameters
     ----------
     to_file : bool, optional
-        Whether to include the logs in a file or not, by default False
+        Whether to include the logs in a file. The default is ``False``.
     """
 
     _logger = None
@@ -44,24 +42,22 @@ class PrimeLogger(object, metaclass=SingletonType):
         self._logger.addHandler(stream_handler)
 
     def get_logger(self):
-        """Getter for the logger.
+        """Get the logger.
 
         Returns
         -------
         Logger
-            The logger.
+            Logger.
         """
         return self._logger
 
     def add_file_handler(self, logs_dir: str = "./.log"):
-        """Save logs to a file.
-
-        Save logs to a file in addition of printing to stdout.
+        """Save logs to a file in addition to printing them to stdout.
 
         Parameters
         ----------
         logs_dir : str, optional
-            Directory of the logs, by default "./.log"
+            Directory of the logs. The default is ``"./.log"``.
         """
         now = datetime.datetime.now()
         if not os.path.isdir(logs_dir):

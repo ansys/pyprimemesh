@@ -57,22 +57,22 @@ def launch_server_process(
 
     Parameters
     ----------
-    prime_root: Optional[str]
-        Root directory which contains the Ansys Prime Server.
+    prime_root : str, optional
+        Root directory for Ansys Prime Server.
     ip: str
-        IP address to start the server at.  The default IP address is 127.0.0.1.
+        IP address to start the server at. The default is ``127.0.0.1``.
     port: int
-        Port at which the server is started. The default port is 50055.
+        Port at which the server is started. The default is ``50055``.
     n_procs: Optional[int]
-        When running in distributed mode, specify the number of distributed
-        processes to spawn. Process marked as Node 0 will host the GRPC
-        server. If None is specified, server will be launched as the only
-        process (normal mode).
+        When running in distributed mode, the number of distributed
+        processes to spawn. The default is ``None``, in which case
+        the server is launched as the only process (normal mode). The
+        process marked as ``Node 0`` hosts the gRPC server.
 
     Returns
     -------
     subprocess.Popen
-        The instance of the subprocess that is launched.
+        Instance of the subprocess that is launched.
 
     Raises
     ------
@@ -143,10 +143,10 @@ def launch_server_process(
 def launch_remote_prime(
     version: Optional[str] = None, timeout: float = defaults.connection_timeout()
 ):
-    """Create a remote instance of Prime server using PyPIM.
+    """Create a remote instance of Ansys Prime Server using PyPIM.
 
-    This method is used in case of Ansys Labs to create a remote instance of prime.
-    This method also creates a file transfer service that is available on Ansys Labs
+    This method is used if Ansys Lab creates a remote instance of Ansys Prime Server.
+    This method creates a file transfer service that is available on Ansys Lab.
     """
     if version is None:
         version = 'latest'
@@ -193,31 +193,31 @@ def launch_prime(
     Parameters
     ----------
     prime_root: Optional[str]
-        Root directory which contains the Ansys Prime Server.
+        Root directory for Ansys Prime Server.
     ip: str
-        IP address to start the server at.  The default IP address is 127.0.0.1.
+        IP address to start the server at. The default is ``127.0.0.1``.
     port: int
-        Port at which the server is started.  The default port is 50055.
+        Port at which the server is started. The default is ``50055``.
     timeout: float
         Maximum time in seconds to wait for the client to connect to the server.
-        The default is 10.0 seconds
+        The default is ``10.0``.
     n_procs: Optional[int]
-        When running in distributed mode, specify the number of distributed
-        processes to spawn. Process marked as Node 0 will host the GRPC
-        server. If None is specified, server will be launched as the only
-        process (normal mode).
+        When running in distributed mode, the number of distributed
+        processes to spawn. The default is ``None``, in which case
+        the server is launched as the only process (normal mode). The
+        process marked as ``Node 0`` hosts the gRPC server.
 
     Returns
     -------
     Client
-        The instance of the client that is connected to the launched server.
+        Instance of the client that is connected to the launched server.
 
     Raises
     ------
     FileNotFoundError
         When there is an error in file paths used to launch the server.
     ConnectionError
-        When there is an error in connecting to the GRPC server.
+        When there is an error in connecting to the gRPC server.
     """
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)

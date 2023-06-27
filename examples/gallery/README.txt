@@ -1,3 +1,3 @@
-Examples
-========
-Here are a series of mesh preparation examples using PyPrimeMesh.
+Mesh preparation examples
+=========================
+These examples show how to use PyPrimeMesh to prepare meshes.
