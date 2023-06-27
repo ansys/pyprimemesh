@@ -1,11 +1,14 @@
 """General fixtures to use in all test modules."""
 import os
+import platform
 import xml.etree.ElementTree as ET
 
 import pytest
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.examples import download_test_examples
+
+windows_only = pytest.mark.skipif(platform.system() != 'nt', reason="Flaky Mac tests")
 
 
 class RemoteClientManager:
@@ -90,6 +93,9 @@ def get_examples():
 
     bracket = prime.examples.download_bracket_fmd()
     examples_dict["bracket"] = bracket
+
+    mixing_elbow_windows = prime.examples.download_elbow_scdoc()
+    examples_dict["elbow_lucid_scdoc"] = mixing_elbow_windows
 
     return examples_dict
 
