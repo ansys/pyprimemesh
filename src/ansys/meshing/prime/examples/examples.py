@@ -1,4 +1,4 @@
-"""Examples module for PyPrimeMesh
+"""Examples module for PyPrimeMesh.
 """
 import os
 from enum import Enum
@@ -36,7 +36,7 @@ __all__ = [
 
 
 class Examples(Enum):
-    """Contains the available PyPrimeMesh examples to download."""
+    """Contains the PyPrimeMesh examples available for download."""
 
     ELBOW_PMDAT = {"filename": "mixing_elbow.pmdat", "git_folder": "mixing_elbow"}
     ELBOW_FMD = {"filename": "mixing_elbow.fmd", "git_folder": "mixing_elbow"}
@@ -72,28 +72,30 @@ def get_file(
     destination: Optional[str] = None,
     force: bool = False,
 ) -> Union[str, os.PathLike]:
-    """Downloads example files from git.
+    """Download a PyPrimeMesh example file from the GitHub repository.
 
     Parameters
     ----------
-    example: Examples
-        Known example to download from database
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        The default is ``None`` in which case the default path in app data is used.
-    force: bool
-        If true, the file is always downloaded.
-        Otherwise, an existing file in the cache may be re-used.
+    example : Examples
+        Name of the example file to download.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Raises
     ------
     ValueError
-        When the provided destination path does not exist on file
+        When the provided destination path for the example file does not exist.
     """
     download_manager = DownloadManager()
     if destination is not None and not os.path.isdir(destination):
@@ -112,21 +114,23 @@ def get_file(
 def download_elbow_pmdat(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download PMDAT file for the mixing elbow example
+    """Download the PMDAT file for the mixing elbow example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -146,21 +150,23 @@ def download_elbow_pmdat(
 def download_elbow_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the mixing elbow example
+    """Download the FMD file for the mixing elbow example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -181,21 +187,23 @@ def download_elbow_fmd(
 def download_elbow_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the mixing elbow example
+    """Download the SCDOC file for the mixing elbow example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -215,21 +223,23 @@ def download_elbow_scdoc(
 def download_elbow_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the mixing elbow example
+    """Download the DSCO file for the mixing elbow example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -249,21 +259,23 @@ def download_elbow_dsco(
 def download_bracket_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the bracket scaffold example
+    """Download the FMD file for the bracket scaffold example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -283,21 +295,23 @@ def download_bracket_fmd(
 def download_bracket_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the bracket scaffold example
+    """Download the SCDOC file for the bracket scaffold example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -317,21 +331,23 @@ def download_bracket_scdoc(
 def download_bracket_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the bracket scaffold example
+    """Download the DSCO file for the bracket scaffold example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -351,21 +367,23 @@ def download_bracket_dsco(
 def download_toy_car_pmdat(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download PMDAT file for the toy car example
+    """Download the PMDAT file for the toy car example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -385,21 +403,23 @@ def download_toy_car_pmdat(
 def download_toy_car_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the toy car example
+    """Download the FMD file for the toy car example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -419,21 +439,23 @@ def download_toy_car_fmd(
 def download_toy_car_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the toy car example
+    """Download the SCDOC file for the toy car example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -453,21 +475,23 @@ def download_toy_car_scdoc(
 def download_toy_car_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the toy car example
+    """Download the DSCO file for the toy car example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -487,21 +511,23 @@ def download_toy_car_dsco(
 def download_pipe_tee_pmdat(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download PMDAT file for the pipe tee example
+    """Download the PMDAT file for the pipe tee example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -521,21 +547,23 @@ def download_pipe_tee_pmdat(
 def download_pipe_tee_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the pipe tee example
+    """Download the FMD file for the pipe tee example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -555,21 +583,23 @@ def download_pipe_tee_fmd(
 def download_pipe_tee_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the pipe tee example
+    """Download the SCDOC file for the pipe tee example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -589,21 +619,23 @@ def download_pipe_tee_scdoc(
 def download_pipe_tee_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the pipe tee example
+    """Download the DSCO file for the pipe tee example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -623,21 +655,23 @@ def download_pipe_tee_dsco(
 def download_deformed_blade_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the turbine blade example
+    """Download the FMD file for the turbine blade example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -657,21 +691,23 @@ def download_deformed_blade_fmd(
 def download_deformed_blade_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the turbine blade example
+    """Download the SCDOC file for the turbine blade example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -691,21 +727,23 @@ def download_deformed_blade_scdoc(
 def download_deformed_blade_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the turbine blade example
+    """Download the DSCO file for the turbine blade example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -725,21 +763,21 @@ def download_deformed_blade_dsco(
 def download_turbine_blade_cdb(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download CDB file for the turbine blade example
+    """Download the CDB file for the turbine blade example.
 
-    Parameters
-    ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------
@@ -762,21 +800,23 @@ def download_turbine_blade_cdb(
 def download_pcb_pmdat(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download PMDAT file for the pcb example
+    """Download the PMDAT file for the PCB example.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded example file.
 
     Examples
     --------

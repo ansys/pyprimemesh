@@ -1,4 +1,4 @@
-"""Configuration utility for the PyPrimeMesh library."""
+"""Configuration utility for PyPrimeMesh."""
 
 from contextlib import contextmanager
 
@@ -21,22 +21,22 @@ __FILE_CHECK = True
 
 
 def _optimize_vectors():
-    """Get the value of flag to optimize vectors."""
+    """Get the value of the flag for optimizing vectors."""
     return __DEFAULT_USE_BINARY
 
 
 def _set_optimize_vectors(optimize_vectors: bool):
-    """Set optimize vectors flag.
+    """Set the flag for optimizing vectors.
 
     Parameters
     ----------
     optimize_vectors : bool
-        Whether to optimize the vectors or not.
+        Whether to optimize vectors.
 
     Raises
     ------
     ValueError
-        Value is not boolean.
+        Value is not Boolean.
     """
     global __DEFAULT_USE_BINARY
     if not isinstance(optimize_vectors, bool):
@@ -48,12 +48,12 @@ def _set_optimize_vectors(optimize_vectors: bool):
 def enable_optimizing_numpy_arrays():
     """Enable optimizing numpy arrays over the wire.
 
-    This will allow the library to optimize serialization of numpy arrays
-    to allow faster deserialization. This can cause the data transferred
+    This method allows the library to optimize serialization of numpy arrays
+    for faster deserialization. This can cause the data transferred
     over the network to increase slightly unless the array is of a very
     large size. Consider enabling this option to improve performance if
-    your workflow is not limited by network bandwidth for performance. By
-    default, optimization is always turned on.
+    your workflow is not limited by network bandwidth for performance. The
+    default for optimization is always ``True``.
     """
     _set_optimize_vectors(True)
 
@@ -61,19 +61,19 @@ def enable_optimizing_numpy_arrays():
 def disable_optimizing_numpy_arrays():
     """Disable optimizing numpy arrays over the wire.
 
-    This will disable serialization optimization for numpy arrays when
+    This method disables serialization optimization for numpy arrays when
     sending them over the wire. Typically, this is needed in case the
     performance is limited by a saturated network. Disabling this flag
     can provide some benefit for data transferred over the wire for
-    most arrays. By default, optimization is always turned on.
+    most arrays. The default for optimization is always ``True``.
     """
     _set_optimize_vectors(False)
 
 
 def is_optimizing_numpy_arrays():
-    """Query if serialization of numpy arrays is turned on.
+    """Determine if serialization of numpy arrays is enabled.
 
-    By default, this is always turned on.
+    The default for optimization is always ``True``.
 
     Returns
     -------
@@ -102,17 +102,17 @@ def numpy_array_optimization_disabled():
 
 
 def set_using_container(value: bool):
-    """Set USING_CONTAINER flag to `value`.
+    """Set the ``USING_CONTAINER`` flag to ``value``.
 
     Parameters
     ----------
     value : bool
-        Whether to use container or not.
+        Whether to use a container.
 
     Returns
     -------
     bool
-        USING_CONTAINER flag.
+        Value for the ``USING_CONTAINER`` flag.
     """
     global __USING_CONTAINER
     __USING_CONTAINER = value
@@ -120,12 +120,12 @@ def set_using_container(value: bool):
 
 
 def using_container():
-    """Get the `USING_CONTAINER` flag.
+    """Get the value for the ``USING_CONTAINER`` flag.
 
     Returns
     -------
     bool
-        `USING_CONTAINER` flag.
+        Value for the ``USING_CONTAINER`` flag.
     """
     return __USING_CONTAINER
 
@@ -133,15 +133,19 @@ def using_container():
 def set_has_pim(value: bool):
     """Set the `HAS_PIM` flag.
 
+    PIM (Product Instance Manager) provides a gRPC API that
+    enables both library and app developers to start a product in
+    a remote environment and communicate with its API.
+
     Parameters
     ----------
     value : bool
-        Whether to set the `HAS_PIM` flag or not.
+        Value for setting the ``HAS_PIM`` flag.
 
     Returns
     -------
     bool
-        `HAS_PIM` flag.
+        Value for the ``HAS_PIM`` flag.
     """
     global __HAS_PIM
     __HAS_PIM = value
@@ -149,12 +153,12 @@ def set_has_pim(value: bool):
 
 
 def has_pim():
-    """Get the `HAS_PIM` flag.
+    """Get the ``HAS_PIM`` flag.
 
     Returns
     -------
     bool
-        `HAS_PIM` flag.
+        Value for the ``HAS_PIM`` flag.
     """
     return __HAS_PIM
 

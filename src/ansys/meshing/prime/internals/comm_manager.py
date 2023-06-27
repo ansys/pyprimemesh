@@ -3,21 +3,21 @@ from ansys.meshing.prime.internals.communicator import Communicator
 
 
 class CommunicationManager:
-    """Wrapper class for communicator.
+    """Provides the wrapper class for the communicator.
 
     Parameters
     ----------
     comm : Communicator
-        Wrapped Communicator class.
+        Wrapped ``Communicator`` class.
     """
 
     def __init__(self, comm: Communicator):
-        """Initialize Communicator."""
+        """Initialize the communicator."""
         self._comm = comm
 
     @property
     def _communicator(self):
-        """Getter for communicator.
+        """Getter for the communicator.
 
         Returns
         -------

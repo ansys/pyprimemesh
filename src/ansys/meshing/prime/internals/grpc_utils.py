@@ -1,9 +1,9 @@
-"""Module for gRPC utils."""
+"""Module for gRPC utilities."""
 import ansys.meshing.prime.internals.defaults as defaults
 
 
 def get_default_channel_args():
-    """Return default channel arguments for gRPC.
+    """Get default channel arguments for gRPC.
 
     Returns
     -------

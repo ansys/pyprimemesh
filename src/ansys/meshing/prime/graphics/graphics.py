@@ -1,4 +1,4 @@
-"""Module for graphics related implementations."""
+"""Module for graphics-related implementations."""
 import enum
 import os
 from typing import List
@@ -20,7 +20,7 @@ def compute_face_list_from_structured_nodes(dim):
     Parameters
     ----------
     dim : List[int]
-        Number of elements in each dimension.
+        List with the number of elements in each dimension.
 
     Returns
     -------
@@ -58,7 +58,7 @@ def compute_face_list_from_structured_nodes(dim):
 
 
 class DisplayMeshType(enum.IntEnum):
-    """Types of meshes to display."""
+    """Contains the mesh types to display."""
 
     TOPOFACE = 0
     TOPOEDGE = 1
@@ -69,7 +69,7 @@ class DisplayMeshType(enum.IntEnum):
 
 
 class ColorByType(enum.IntEnum):
-    """Zone types."""
+    """Contains the zone types to display."""
 
     ZONE = 0
     ZONELET = 1
@@ -138,18 +138,18 @@ def compute_distance(point1, point2):
 
 
 class Picker:
-    """Class for selecting items from the display with the mouse.
+    """Contains the items that can be selected from the display with the mouse.
 
     Parameters
     ----------
     plotter : Plotter
         PyVista plotter to manipulate.
     graphics : Graphics
-        Graphics class to provide the callbacks.
+        Class for providing callbacks.
     """
 
     def __init__(self, plotter: pv.Plotter, graphics):
-        """Initialize picker."""
+        """Initialize the picker."""
         self.plotter = plotter
         self._graphics = graphics
         self._selected_disp_mesh: list[_DisplayMesh] = []
@@ -158,11 +158,11 @@ class Picker:
 
     @property
     def selections(self):
-        """Access all the selected disp mesh when done."""
+        """All selected meshes in the display."""
         return self._selected_disp_mesh
 
     def clear_selection(self):
-        """Clear picked selections in the display."""
+        """Clear all picked selections in the display."""
         [disp_mesh.deselect() for disp_mesh in self._selected_disp_mesh]
         self._selected_disp_mesh.clear()
 
@@ -172,12 +172,12 @@ class Picker:
         Parameters
         ----------
         ignore_pick : Any
-            Pick to ignore.
+            Picked selection to ignore.
         """
         self._ignore = ignore_pick
 
     def __call__(self, *args, **kwargs):  # pragma: no cover
-        """Code to run when something is clicked in the display."""
+        """Call the code to run when something is clicked in the display."""
         if self._ignore:
             return
         picked_pt = np.array(self.plotter.pick_mouse_position())
@@ -207,14 +207,14 @@ class Picker:
 
 
 class Graphics(object):
-    """Class to manage graphics in PyPrime.
+    """Manages graphics in PyPrime.
 
     Parameters
     ----------
     model : prime.Model
         Model to show.
     use_trame : bool, optional
-        Whether to use Trame visualizer or not, by default False.
+        Whether to use the Trame visualizer. The default is ``False``.
     """
 
     def __init__(self, model: prime.Model, use_trame: bool = False):
@@ -294,7 +294,7 @@ class Graphics(object):
         Parameters
         ----------
         part_id : int
-            ID of the part where to show the edges.
+            ID of the part to show the edges on.
         spline_id : prime.EdgeConnectivityResults
             Results of the face connectivity.
 
@@ -331,7 +331,7 @@ class Graphics(object):
         Parameters
         ----------
         part_id : int
-            ID of the part where to show the edges.
+            ID of the part to show the edges on.
         spline_id : prime.EdgeConnectivityResults
             Results of the face connectivity.
 
@@ -370,11 +370,11 @@ class Graphics(object):
         Parameters
         ----------
         part_id : int
-            ID of the part where to show the edges.
+            ID of the part to show the edges on.
         face_facet_res : prime.EdgeConnectivityResults
             Results of the face connectivity.
         index : int
-            Index of the topological edges list.
+            Index of the TopoEdges list.
 
         Returns
         -------
@@ -417,11 +417,11 @@ class Graphics(object):
         Parameters
         ----------
         part_id : int
-            ID of the part where to show the edges.
+            ID of the part with the edges to display.
         edge_facet_res : prime.EdgeConnectivityResults
             Results of the edge connectivity.
         index : int
-            Index of the topological edges list.
+            Index of the TopoEdges list.
 
         Returns
         -------
@@ -463,18 +463,18 @@ class Graphics(object):
         spline: bool = False,
         scope: prime.ScopeDefinition = None,
     ):
-        """Show the appropriate display based on the parameters.
+        """Show the appropriate display based on parameters.
 
         Parameters
         ----------
         parts : Any, optional
-            Parts to show, by default None.
+            Parts to show. The default is ``None``.
         update : bool, optional
-            Whether to update the display or not, by default True.
+            Whether to update the display. The default is ``True``.
         spline : bool, optional
-            Whether to use splines or not, by default False.
+            Whether to use splines. The default is ``False``.
         scope : prime.ScopeDefinition, optional
-            Scope of the parts, by default None.
+            Scope of the parts. The default is ``None``.
         """
         self._parts = parts
         if scope != None:
@@ -537,7 +537,7 @@ class Graphics(object):
         [print(disp_mesh) for disp_mesh in sel_disp_mesh]
 
     def __show_ruler_callback(self, flag):  # pragma: no cover
-        """Show ruler on UI when clicked on ruler button."""
+        """Show a ruler on the UI when ruler button is clicked."""
         if self._plotter is not None:
             if self._ruler_visible and self._ruler_actor is not None:
                 self._plotter.remove_actor(self._ruler_actor)
@@ -559,7 +559,7 @@ class Graphics(object):
         Returns
         -------
         List
-            Data for the mesh of the faces.
+            Mesh data for the face.
         """
         face_mesh_data = [
             disp_mesh
@@ -575,7 +575,7 @@ class Graphics(object):
         Parameters
         ----------
         update : bool, optional
-            Whether to update the display or not, by default False.
+            Whether to update the display. The default is ``False``.
         """
         if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
@@ -639,16 +639,16 @@ class Graphics(object):
             self._plotter.show()
 
     def __draw_parts(self, parts: List = [], update: bool = False, spline: bool = False):
-        """Draws the given parts in the display.
+        """Draw parts in the display.
 
         Parameters
         ----------
         parts : list, optional
-            Parts to display, by default [].
+            List of parts to display. The default is ``[]``.
         update : bool, optional
-             Whether to update the display or not, by default False.
+             Whether to update the display. The default is ``False``.
         spline : bool, optional
-            Whether to use splines or not, by default False.
+            Whether to use splines. The default is ``False``.
         """
         if os.getenv('PRIME_APP_RUN') and self._app is not None:  # pragma: no cover
             app_g = self._app.Graphics().Get()
@@ -716,9 +716,9 @@ class Graphics(object):
         Parameters
         ----------
         update : bool, optional
-            Whether to update the display or not, by default False.
+            Whether to update the display. The default is ``False``.
         scope : prime.ScopeDefinition, optional
-            Definition of the scopes, by default None.
+            Definition of the scopes. The default is ``None``.
         """
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
@@ -826,18 +826,18 @@ class Graphics(object):
         show_ruler_vr.SetButtonTexture(1, image_5)
 
     def get_color_by_type(self) -> ColorByType:
-        """Get the color by the zone type.
+        """Get the color by zone type.
 
         Returns
         -------
         ColorByType
-            The color type.
+            Color by zone type.
         """
         return self._color_by_type
 
 
 class _DisplayMesh(object):  # pragma: no cover
-    """Helper class to display meshes in the plotter.
+    """Provides a helper class for displaying meshes in the plotter.
 
     Parameters
     ----------
@@ -846,9 +846,9 @@ class _DisplayMesh(object):  # pragma: no cover
     id : int
         ID of the mesh.
     part_id : int
-        Id of the part to mesh.
+        ID of the part to mesh.
     graphics : Graphics
-        Instance of the Graphics class.
+        Instance of the ``Graphics`` class.
     model : prime.Model
         Model to show.
     vertices : np.array
@@ -856,17 +856,17 @@ class _DisplayMesh(object):  # pragma: no cover
     facet_list : np.array
         List of faces of the model.
     has_mesh : bool
-        Whether the model is meshed or not.
+        Whether the model is meshed.
     zone_id : int, optional
-        ID of the zone, by default 0.
+        ID of the zone. The default is ``0``.
     zone_name : str, optional
-        Name of the zone, by default "".
+        Name of the zone. The default is ``""``.
     part_name : str, optional
-        Name of the part, by default "".
+        Name of the part. The default is ``""``.
     topo_edge_type : int, optional
-        Type of the topological edge, by default 0.
+        Type of the TopoEdge. The default is ``0``.
     number_of_edges : int, optional
-        Number of edges in the model, by default 0.
+        Number of edges in the model. The default is ``0``.
     """
 
     def __init__(
@@ -885,7 +885,7 @@ class _DisplayMesh(object):  # pragma: no cover
         topo_edge_type: int = 0,
         number_of_edges: int = 0,
     ):
-        """Initialize parameters to display."""
+        """Initialize the parameters to display."""
         self._type = type
         self._id = id
         self._part_id = part_id
@@ -1006,12 +1006,12 @@ class _DisplayMesh(object):  # pragma: no cover
                 )
 
     def get_face_color(self):
-        """Get color of the faces.
+        """Get the colors of faces.
 
         Returns
         -------
         List
-            Color of the faces.
+            List of colors for faces.
         """
         type = self._graphics.get_color_by_type()
         num_colors = int(color_matrix.size / 3)
@@ -1023,12 +1023,12 @@ class _DisplayMesh(object):  # pragma: no cover
             return color_matrix[self._zone_id % num_colors].tolist()
 
     def get_edge_color(self):
-        """Get color of the edges.
+        """Get the colors of edges.
 
         Returns
         -------
         List
-            Colors list.
+            List of colors for edges.
         """
         num_colors = int(color_matrix.size / 3)
         if self._type == DisplayMeshType.EDGEZONELET:
@@ -1095,7 +1095,7 @@ class _DisplayMesh(object):  # pragma: no cover
         Parameters
         ----------
         type : ColorByType
-            Type of the zone.
+            Color by zone type.
         """
         if self._type == DisplayMeshType.TOPOFACE or self._type == DisplayMeshType.FACEZONELET:
             if self._poly_data != None:

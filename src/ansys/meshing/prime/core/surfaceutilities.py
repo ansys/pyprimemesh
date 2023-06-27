@@ -29,35 +29,35 @@ from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 
 
 class SurfaceUtilities(_SurfaceUtilities):
-    """Performs various general surface utilities algorithms. For example, add thickness.
+    """Performs various general surface utilities algorithms, such as adding thickness.
 
     Parameters
     ----------
     model : Model
-        Server model in which to perform the operations.
+        Server model in which to perform operations.
     """
 
     def __init__(self, model: Model):
-        """Initialize the superclass and Model variable."""
+        """Initialize the superclass and ``model`` variable."""
         _SurfaceUtilities.__init__(self, model)
         self._model = model
 
     def add_thickness(
         self, zonelets: Iterable[int], params: AddThicknessParams
     ) -> AddThicknessResults:
-        """Thickens the selected list of face zonelet ids.
+        """Add thicknesss to input face zonelets.
 
         Parameters
         ----------
         zonelets : Iterable[int]
-            List of input face zonelet ids.
+            List of input face zonelet IDs.
         params : AddThicknessParams
-            Parameters to control the add thickness operation.
+            Parameters for controlling the addition of thickness.
 
         Returns
         -------
         AddThicknessResults
-            Returns the AddThicknessResults.
+            Results for adding thickness.
 
 
         Examples
@@ -73,19 +73,19 @@ class SurfaceUtilities(_SurfaceUtilities):
     def create_boi(
         self, face_zonelet_ids: Iterable[int], params: CreateBOIParams
     ) -> CreateBOIResults:
-        """Create BOI to the selected list of face zonelet ids.
+        """Create BOI to input face zonelets.
 
         Parameters
         ----------
         face_zonelet_ids : Iterable[int]
-            List of input face zonelet ids.
+            List of input face zonelet IDs.
         params : CreateBOIParams
-            Parameters to control the BOI creation operation.
+            Parameters for controlling BOI creation.
 
         Returns
         -------
         CreateBOIResults
-            Returns the BOIResults.
+            Results from creating BOI.
 
 
         Examples
@@ -104,21 +104,21 @@ class SurfaceUtilities(_SurfaceUtilities):
         target_zonelets: Iterable[int],
         params: CreateContactPatchParams,
     ) -> CreateContactPatchResults:
-        """Create contact patch by offsetting the target zonelets.
+        """Create a contact patch by offsetting the target zonelets.
 
         Parameters
         ----------
         source_zonelets : Iterable[int]
-            Source face zonelet ids.
+            IDS for the source face zonelets.
         target_zonelets : Iterable[int]
-            Target face zonelet ids.
+            IDs for the target face zonelets.
         params : CreateContactPatchParams
-            Parameters to control the contact patch creation operation.
+            Parameters for controlling the contact patch creation.
 
         Returns
         -------
         CreateContactPatchResults
-            Returns the CreateContactPatchResults.
+            Results from creating the contact patch.
 
 
         Examples
