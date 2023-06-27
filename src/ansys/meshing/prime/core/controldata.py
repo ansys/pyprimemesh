@@ -1,4 +1,4 @@
-"""Module for Control Data."""
+"""Module for control data."""
 from typing import Iterable, List
 
 # isort: split
@@ -18,10 +18,10 @@ from ansys.meshing.prime.params.primestructs import SizingType
 
 
 class ControlData(_ControlData):
-    """ControlData acts as a container for all controls.
+    """Contains all controls.
 
-    ControlData acts as a container for all controls (size controls, prism controls,
-    wrapper controls, etc).
+    This class contains all controls, including size controls, prism controls,
+    and wrapper controls.
 
     Parameters
     ----------
@@ -37,7 +37,7 @@ class ControlData(_ControlData):
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
-        """Initialize ControlData."""
+        """Initialize the ``ControlData`` class."""
         self._model = model
         self._wrapper_controls = []
         self._size_controls = []
@@ -58,7 +58,7 @@ class ControlData(_ControlData):
         Returns
         -------
         WrapperControl
-            Returns the wrapper control.
+            Wrapper control.
 
         Examples
         --------
@@ -71,21 +71,21 @@ class ControlData(_ControlData):
         return None
 
     def create_size_control(self, sizing_type: SizingType) -> SizeControl:
-        """Create size control for the given sizing type.
+        """Create a size control for a sizing type.
 
         Parameters
         ----------
         type : SizingType
-            Sizing type used to create a size control.
+            Sizing type for creating the size control.
 
         Returns
         -------
         SizeControl
-            Returns the size control.
+            Size control.
 
         Notes
         -----
-        An empty size control is created on calling this API.
+        An empty size control is created on calling this method.
 
         Examples
         --------
@@ -98,12 +98,12 @@ class ControlData(_ControlData):
         return new_size_control
 
     def create_prism_control(self) -> PrismControl:
-        """Create a PrismControl.
+        """Create a prism control.
 
         Returns
         -------
         PrismControl
-            Returns PrismControl.
+            Prism control.
 
 
         Examples
@@ -117,12 +117,12 @@ class ControlData(_ControlData):
         return new_prism_control
 
     def create_thin_volume_control(self) -> ThinVolumeControl:
-        """Create a ThinVolumeControl.
+        """Create a thin volume control.
 
         Returns
         -------
         ThinVolumeControl
-            Returns ThinVolumeControl.
+            Thin volume control.
 
         Examples
         --------
@@ -135,16 +135,16 @@ class ControlData(_ControlData):
         return new_thin_volume_control
 
     def create_wrapper_control(self) -> WrapperControl:
-        """Create wrapper control with defaults.
+        """Create a wrapper control with default values.
 
         Returns
         -------
         WrapperControl
-            Returns the wrapper control.
+            Wrapper control.
 
         Notes
         -----
-        A wrapper control with defaults is created on calling this API.
+        A wrapper control with default values is created on calling this method.
 
         Examples
         --------
@@ -157,7 +157,7 @@ class ControlData(_ControlData):
         return new_control
 
     def get_size_control_by_name(self, name: str) -> SizeControl:
-        """Get the size control by name.
+        """Get a size control by name.
 
         Parameters
         ----------
@@ -167,7 +167,7 @@ class ControlData(_ControlData):
         Returns
         -------
         SizeControl
-            Returns the size control.
+            Size control.
 
         Examples
         --------
@@ -180,7 +180,7 @@ class ControlData(_ControlData):
         return None
 
     def get_prism_control_by_name(self, name: str) -> PrismControl:
-        """Get the prism control by name.
+        """Get a prism control by name.
 
         Parameters
         ----------
@@ -190,7 +190,7 @@ class ControlData(_ControlData):
         Returns
         -------
         PrismControl
-            Returns the prism control.
+            Prism control.
 
         Examples
         --------
@@ -203,7 +203,7 @@ class ControlData(_ControlData):
         return None
 
     def get_thin_volume_control_by_name(self, name: str) -> ThinVolumeControl:
-        """Get the thin volume control with the given name.
+        """Get a thin volume control by name.
 
         Parameters
         ----------
@@ -213,7 +213,7 @@ class ControlData(_ControlData):
         Returns
         -------
         ThinVolumeControl
-            Returns the thin volume control.
+            Thin volume control.
 
         Examples
         --------
@@ -227,17 +227,17 @@ class ControlData(_ControlData):
         return None
 
     def delete_controls(self, control_ids: Iterable[int]) -> DeleteResults:
-        """Delete the control for the given id.
+        """Delete the control for one or more IDs.
 
         Parameters
         ----------
         control_ids : Iterable[int]
-            List of control ids.
+            List of control IDs.
 
         Returns
         -------
         DeleteResults
-            Returns the DeleteResults.
+            Delete results.
 
         Examples
         --------
@@ -294,12 +294,12 @@ class ControlData(_ControlData):
         ]
 
     def create_volume_control(self) -> VolumeControl:
-        """Create the volume control.
+        """Create a volume control.
 
         Returns
         -------
         VolumeControl
-            Returns the volume control.
+            Volume control.
 
         Examples
         --------
@@ -312,7 +312,7 @@ class ControlData(_ControlData):
         return new_control
 
     def get_volume_control_by_name(self, name: str) -> VolumeControl:
-        """Get the volume control by name.
+        """Get a volume control by name.
 
         Parameters
         ----------
@@ -322,7 +322,7 @@ class ControlData(_ControlData):
         Returns
         -------
         VolumeControl
-            Returns the volume control.
+            Volume control.
 
         Examples
         --------
@@ -341,7 +341,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[SizeControl]
-            Returns the list of size controls.
+            List of size controls.
 
         Examples
         --------
@@ -356,7 +356,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[VolumeControl]
-            Returns the list of volume controls.
+            List of volume controls.
 
         Examples
         --------
@@ -371,7 +371,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[PrismControl]
-            Returns the list of prism controls.
+            List of prism controls.
 
         Examples
         --------
@@ -387,7 +387,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[ThinVolumeControl]
-            Returns the list of thin volume controls.
+            List of thin volume controls.
 
         Examples
         --------
@@ -403,7 +403,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[WrapperControl]
-            Returns the list of wrapper controls.
+            List of wrapper controls.
 
         Examples
         --------
@@ -413,12 +413,12 @@ class ControlData(_ControlData):
         return self._wrapper_controls
 
     def create_periodic_control(self) -> PeriodicControl:
-        """Create the periodic control.
+        """Create a periodic control.
 
         Returns
         -------
         PeriodicControl
-            Returns the periodic control.
+            Periodic control.
 
         Examples
         --------
@@ -431,7 +431,7 @@ class ControlData(_ControlData):
         return new_control
 
     def get_periodic_control_by_name(self, name: str) -> PeriodicControl:
-        """Get the periodic control by name.
+        """Get a periodic control by name.
 
         Parameters
         ----------
@@ -441,7 +441,7 @@ class ControlData(_ControlData):
         Returns
         -------
         PeriodicControl
-            Returns the periodic control.
+            Periodic control.
 
         Examples
         --------
@@ -460,7 +460,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[PeriodicControl]
-            Returns the list of periodic controls.
+            List of periodic controls.
 
         Examples
         --------

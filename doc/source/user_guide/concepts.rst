@@ -78,7 +78,7 @@ within any number of :attr:`parts <ansys.meshing.prime.Model.parts>` parameters:
     model.parts
 
 Each :class:`Part <ansys.meshing.prime.Part>` class can contain *TopoEntities* or *zonelets*.
-TopoEntities are Topo parts created from CAD geometry imports. Zonelets are mesh parts created
+TopoEntities are *TopoParts* created from CAD geometry imports. Zonelets are mesh parts created
 from faceted geometry and mesh imports. TopoEntities and zonelets are characterized by the
 dimension of entities.
 

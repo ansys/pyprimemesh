@@ -19,21 +19,23 @@ FILE_NAMES = [
 def download_test_examples(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download files necessary for unit testing.
+    """Download the example files necessary for unit testing.
 
     Parameters
     ----------
-    destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
-    force: bool
-        If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+    destination : str, optional
+        Path to download the test example files to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to always download the test example files. The default is
+        ``False``, in which case if the test example files are cached, they
+        are reused.
 
     Returns
     -------
     List[str]
-        Local paths to the downloaded files
+        Local paths to the downloaded test example files.
 
     Examples
     --------

@@ -9,11 +9,11 @@ Mesh statistics and quality
 ===========================
 
 You can use a set of quality metrics to measure the mesh quality. The :class:`SurfaceSearch <ansys.meshing.prime.SurfaceSearch>`
-and :class:`VolumeSearch <ansys.meshing.prime.VolumeSearch>` classes allow you to check surface and volume mesh quality, respectively.
+and :class:`VolumeSearch <ansys.meshing.prime.VolumeSearch>` classes allow you to verify surface and volume mesh quality, respectively.
 
-------------------
-Connectivity check
-------------------
+-------------------
+Connectivity checks
+-------------------
 
 Surface diagnostics are important prior to generating a volume mesh. You can get a surface diagnostic summary by using
 the :func:`SurfaceSearch.get_surface_diagnostic_summary() <ansys.meshing.prime.SurfaceSearch.get_surface_diagnostic_summary>`
@@ -25,11 +25,11 @@ diagnosing surface connectivity for the given scope and controls:
 * Multi face edges
 * Self intersections
 
-This code checks to see if a wrap surface is closed:
+This code determines if a wrap surface is closed:
 
 .. code-block:: python
 
-    # Check wrap surface is closed
+    # Check if wrap surface is closed
     scope = prime.ScopeDefinition(model=model, part_expression="wrap")
     diag = prime.SurfaceSearch(model)
 
@@ -64,7 +64,7 @@ Face metrics
 ------------
 
 The :class:`FaceQualityMeasure <ansys.meshing.prime.FaceQualityMeasure>` class offers various types
-of measures to check face quality metrics.
+of measures to verify face quality metrics.
 
 * The :attr:`SKEWNESS <ansys.meshing.prime.FaceQualityMeasure.SKEWNESS>` metric ranges between 0 (ideal) and 1 (worst).
 
@@ -105,7 +105,7 @@ Cell metrics
 ------------
 
 The :class:`CellQualityMeasure <ansys.meshing.prime.CellQualityMeasure>` class offers various types
-of measures to check cell quality metrics.
+of measures to verify cell quality metrics.
 
 * The :attr:`SKEWNESS <ansys.meshing.prime.CellQualityMeasure.SKEWNESS>` metric ranges between
   0 (ideal) and 1 (worst).
@@ -191,7 +191,7 @@ Auto node move
 
 You can improve volume mesh by auto node move using the
 :func:`VolumeMeshTool.improve_by_auto_node_move() <ansys.meshing.prime.VolumeMeshTool.improve_by_auto_node_move>`
-method with given parameters. In addition, you can check the mesh using the
+method with given parameters. In addition, you can verify the mesh using the
 :func:`VolumeMeshTool.check_mesh() <ansys.meshing.prime.VolumeMeshTool.check_mesh>` method.
 
 This code improves and checks the volume mesh:
@@ -217,11 +217,11 @@ This code improves and checks the volume mesh:
         params=anm_params,
     )
 
-    # Mesh check
+    # Mesh checking
     vtool = prime.VolumeMeshTool(model=model)
     res = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
 
-This code prints the results of the check mesh operation:
+This code prints the results of checking mesh operation:
 
 .. code-block:: pycon
 

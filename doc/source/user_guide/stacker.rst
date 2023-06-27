@@ -3,11 +3,13 @@
 
 
 ***************
-Volume Sweeping
+Volume sweeping
 ***************
+.. vale off
 
 The :class:`VolumeSweeper <ansys.meshing.prime.VolumeSweeper>` class creates a volume mesh on 2.5D models, stacking faces
 or edge zonelets one above the other in layers. This volume sweeping technology stacks each of the input topovolumes individually.
+.. vale on
 
 .. note::
   A 2.5D or stackable geometry is any closed volume or set of closed volumes that can be obtained by successive extrusion of a series of 2D geometries, along the area normal of the 2D geometries.

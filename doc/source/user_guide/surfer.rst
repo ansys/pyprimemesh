@@ -7,9 +7,9 @@ Surface meshing
 ***************
 
 The :class:`Surfer <ansys.meshing.prime.Surfer>` class enables you to perform surface meshing using
-different surface meshing algorithms on topofaces or face zonelets. Surface meshing considers many
+different surface meshing algorithms on *TopoFaces* or face zonelets. Surface meshing considers many
 parameters, such as size field type, minimum size, maximum size, growth rate, and transition type,
-while meshing face zonelets or topofaces.
+while meshing *TopoFaces* or face zonelets.
 
 .. tip::
     Surface meshing with constant and variable sizing with tri/quad mesh can be generated using
@@ -22,7 +22,7 @@ Surface meshing geometry/topology
 The following example shows how to perform these steps:
 
 * Import topology-based geometry (SCDOC) files and visualize the model.
-* Surface mesh the topofaces with constant size.
+* Surface mesh the TopoFaces with constant size.
 
 Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
@@ -53,7 +53,7 @@ Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 
     **CAD geometry imported**
 
-Initialize surfer parameters and generate surface mesh on topofaces:
+Initialize surfer parameters and generate surface mesh on TopoFaces:
 
 .. code-block:: python
 

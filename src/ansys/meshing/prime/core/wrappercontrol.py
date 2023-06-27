@@ -7,27 +7,27 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
 
 class WrapperControl(_WrapperControl):
-    """Wrapper Control to describe all parameters and controls used for wrapping.
+    """Provides all parameters and controls used for wrapping.
 
     Parameters
     ----------
     model : CommunicationManager
-        Server model where to create and modify WrapperControls from.
+        Server model to create and modify wrapper controls from.
     id : int
-        ID of the control.
+        ID of the wrapper control.
     object_id : int
-        Object ID of the control.
+        Object ID of the wrapper control.
     name : str
-        Name of the WrapperControl
+        Name of the wrapper control
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
-        """Initialize the superclass and Model variable."""
+        """Initialize the superclass and the ''Model'' variable."""
         self._model = model
         _WrapperControl.__init__(self, model, id, object_id, name)
 
     def __str__(self) -> str:
-        """Representation of the class in string format.
+        """Get a representation of the class in string format.
 
         Returns
         -------
@@ -37,7 +37,7 @@ class WrapperControl(_WrapperControl):
         return "Not implemented yet"
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """Set the unique name for the wrapper control based on the given suggested name.
+        """Set the unique name for the wrapper control based on a suggested name.
 
         Parameters
         ----------
@@ -47,7 +47,7 @@ class WrapperControl(_WrapperControl):
         Returns
         -------
         SetNameResults
-            Returns the results with assigned name of the wrapper control.
+            Newly assigned name of the wrapper control.
 
 
         Examples
@@ -61,12 +61,12 @@ class WrapperControl(_WrapperControl):
 
     @property
     def name(self):
-        """Get the name of wrapper control.
+        """Get the name of the wrapper control.
 
         Returns
         -------
         str
-            Returns a name of the wrapper control.
+            Name of the wrapper control.
 
         Examples
         --------

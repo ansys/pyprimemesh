@@ -14,25 +14,25 @@ __all__ = ['Client']
 
 
 class Client(object):
-    """Client class for PyPrimeMesh.
+    """Provides the ``Client`` class for PyPrimeMesh.
 
     Parameters
     ----------
     server_process : Any, optional
-        Server process in the system, by default None.
+        Server process in the system. The default is ``None``.
     ip : str, optional
-        IP where server is located, by default defaults.ip().
+        IP address where the server is located. The default is ``defaults.ip()``.
     port : int, optional
-        Port where server is deployed, by default defaults.port().
+        Port where the server is deployed. The default is ``defaults.port()``.
     timeout : float, optional
-        Maximum time to wait for connection, by default defaults.connection_timeout().
+        Maximum time to wait for connection. The default is ``defaults.connection_timeout()``.
     credentials : Any, optional
-        Credentials to connect to server, by default None.
+        Credentials to connect to the server. The default is ``None``.
 
     Raises
     ------
     ValueError
-        Failed to load communicator.
+        Failed to load the communicator.
     """
 
     def __init__(
@@ -45,7 +45,7 @@ class Client(object):
         credentials=None,
         **kwargs,
     ):
-        """Initialize client."""
+        """Initialize the client."""
         self._default_model: Model = None
         local = kwargs.get('local', False)
         if local and server_process is not None:
@@ -91,20 +91,19 @@ class Client(object):
 
     @property
     def model(self):
-        """Get model associated with the client."""
+        """Get the model associated with the client."""
         if self._default_model is None:
             # This assumes that the Model is always object id 1....
             self._default_model = Model(self._comm, 1, 1, "Default")
         return self._default_model
 
     def run_on_server(self, recipe: str):
-        """Run a recipe on server.
+        """Run a recipe on the server.
 
         Parameters
         ----------
         recipe: str
-            Recipe to run on the server. This needs to be a valid
-            python script.
+            Recipe to run. This must be a valid Python script.
         """
         if self._comm is not None:
             result = self._comm.run_on_server(recipe)
@@ -113,18 +112,18 @@ class Client(object):
     def exit(self):
         """Close the connection with the server.
 
-        If the client had launched the server, then this will also
-        kill the server process.
+        If the client has launched the server, this method also
+        kills the server process.
 
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> prime_client = prime.launch_prime() # This will launch a server process
+        >>> prime_client = prime.launch_prime() # This launches a server process.
         >>> model = prime_client.model
         >>> fileio = prime.FileIO(model)
         >>> result = fileio.read_pmdat('example.pmdat', prime.FileReadParams(model=model))
         >>> print(result)
-        >>> prime_client.exit() # Sever connection with server and kill server
+        >>> prime_client.exit() # Sever connection with server and kill the server.
         """
         if self._comm is not None:
             self._comm.close()
@@ -151,5 +150,5 @@ class Client(object):
         return self
 
     def __exit__(self, type, value, traceback):
-        """Close communication with server when deleting the instance."""
+        """Close communication with the server when deleting the instance."""
         self.exit()

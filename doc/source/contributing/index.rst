@@ -48,14 +48,17 @@ code, contributions are limited to raising issues and enhancement requests.
 
 You should not modify files marked as auto-generated.
 
-Contributions from pull requests can be included elsewhere. Specific areas that should be considered
-for contributions are:
+Contributions from pull requests can be included in files in these directories of the
+PyPrimeMesh repository:
 
-- `PyPrimeMesh examples <https://github.com/ansys/pyprimemesh/tree/main/examples>`_
+- `examples <https://github.com/ansys/pyprimemesh/tree/main/examples>`_, which provides examples
+  of how you use PyPrimeMesh.
 
-- `Graphics Functionality <https://github.com/ansys/pyprimemesh/tree/main/src/ansys/meshing/prime/graphics>`_
+- `graphics <https://github.com/ansys/pyprimemesh/tree/main/src/ansys/meshing/prime/graphics>`_,
+  which provides graphics capabilities and image files.
 
-- `High-level APIs <https://github.com/ansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_
+- `lucid <https://github.com/ansys/pyprimemesh/blob/main/src/ansys/meshing/prime/lucid>`_, which
+  provides high-level APIs.
 
 
 If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
@@ -68,16 +71,17 @@ PyPrimeMesh follows PEP8 standard as outlined in the `PyAnsys Development Guide
 <https://dev.docs.pyansys.com>`_ and implements style checking using
 `pre-commit <https://pre-commit.com/>`_.
 
-To ensure your code meets minimum code styling standards, run this code::
+To ensure your code meets minimum code styling standards, run these commands::
 
   pip install pre-commit
   pre-commit run --all-files
 
-You can also install this as a pre-commit hook by running this code::
+You can also install this as a pre-commit hook by running this command::
 
   pre-commit install
 
-This way, it's not possible for you to push code that fails the style checks. For example::
+This way, it's not possible for you to push code that fails the style checks. For example,
+call code styling standards must pass::
 
   $ pre-commit install
   $ git commit -am "added my cool feature"

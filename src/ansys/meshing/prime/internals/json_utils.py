@@ -1,4 +1,4 @@
-"""Module for JSON util functions."""
+"""Module for JSON utility functions."""
 import json
 from typing import Union
 
@@ -11,7 +11,7 @@ __all__ = ['loads', 'dumps']
 
 
 def try_process_as_iterable(obj):
-    """Try if an object is an iterable and return it's list.
+    """Try if an object is an iterable and return its list.
 
     Parameters
     ----------
@@ -28,7 +28,7 @@ def try_process_as_iterable(obj):
 
 
 def try_process_numpy_array(obj):
-    """Try if an object is a np.array and return it's list.
+    """Try if an object is a numpy array and return its list.
 
     Parameters
     ----------
@@ -37,8 +37,8 @@ def try_process_numpy_array(obj):
 
     Returns
     -------
-    bool, List
-        Whether the object is np.array and List of the object.
+    bool, list
+        Whether the object is a numpy array and the list of the object.
     """
     if isinstance(obj, np.ndarray):
         return True, obj.tolist()
@@ -70,7 +70,7 @@ class _CustomBinaryJSONEncoder(relaxed_json.JSONEncoder):
 
 
 def loads(s: Union[str, bytes, bytearray], *args, **kwargs):
-    """Load JSON from string.
+    """Load JSON from an input string.
 
     Parameters
     ----------
@@ -88,7 +88,7 @@ def loads(s: Union[str, bytes, bytearray], *args, **kwargs):
 
 
 def dumps(obj, *args, **kwargs):
-    """Dump JSON to object.
+    """Dump JSON to an object.
 
     Parameters
     ----------
@@ -98,7 +98,7 @@ def dumps(obj, *args, **kwargs):
     Returns
     -------
     Object
-        Json converted to object.
+        JSON converted to an object.
     """
     if config.is_optimizing_numpy_arrays():
         kwargs.setdefault('cls', _CustomBinaryJSONEncoder)
