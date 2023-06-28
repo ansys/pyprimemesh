@@ -200,7 +200,7 @@ def launch_prime(
         Port at which the server is started. The default is ``50055``.
     timeout: float
         Maximum time in seconds to wait for the client to connect to the server.
-        The default is ``10.0``.
+        The default is ``20.0``.
     n_procs: Optional[int]
         When running in distributed mode, the number of distributed
         processes to spawn. The default is ``None``, in which case
