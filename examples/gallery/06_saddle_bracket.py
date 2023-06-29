@@ -100,9 +100,10 @@ part.delete_topo_entities(
 # Specify source and target faces for the thin volume using imported labels.
 # Set the number of layers of cells through the thickness of the thin solid to be 4.
 # To request a fully hexahedral mesh the side faces must be imprinted.
+# If regions of the model cannot be meshed with hex cells then tetrahedral and
+# pyramid cells will be used locally. 
 
 auto_mesh_params = prime.AutoMeshParams(model=model)
-thin_vol_ctrls_ids = []
 thin_vol_ctrl = model.control_data.create_thin_volume_control()
 
 thin_vol_ctrl.set_source_scope(
@@ -126,8 +127,7 @@ thin_params = prime.ThinVolumeMeshParams(
 )
 
 thin_vol_ctrl.set_thin_volume_mesh_params(thin_volume_mesh_params=thin_params)
-thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
-auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids
+auto_mesh_params.thin_volume_control_ids = [thin_vol_ctrl.id]
 auto_mesh_params.volume_fill_type = prime.VolumeFillType.TET
 
 ###############################################################################
