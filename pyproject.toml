@@ -36,7 +36,7 @@ tests = [
   "pytest==7.4.0",
   "pytest-cov==4.1.0",
   "pytest-pyvista==0.1.8",
-  "pyvista[trame]==0.39.1"
+  "pyvista[trame]==0.40.0"
 ]
 doc = [
   "ansys-sphinx-theme==0.9.9",
@@ -44,7 +44,7 @@ doc = [
   "numpydoc==1.5.0",
   "Sphinx==7.0.1",
   "pyvista==0.39.1",
-  "sphinx-autodoc-typehints==1.23.2",
+  "sphinx-autodoc-typehints==1.23.3",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.13.0",
   "sphinx-notfound-page==0.8.3",
