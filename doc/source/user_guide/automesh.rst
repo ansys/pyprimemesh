@@ -221,6 +221,10 @@ The below example shows how to perform thin volume meshing:
    file_io = prime.FileIO(model) 
    res = file_io.read_pmdat(r"E:\Test\pipe2_thin_volume_mesh.pmdat", prime.FileReadParams(model = model)) 
 
+.. figure:: ../images/thinvol.png
+  :width: 800pt
+  :align: center
+
 * Create a thin volume control and set source and target. 
 
 .. code-block:: python
@@ -238,6 +242,7 @@ The below example shows how to perform thin volume meshing:
 .. code-block:: python
 
    thin_vol_ctrl.set_thin_volume_mesh_params(prime.ThinVolumeMeshParams(model = model, 
+                                                                        n_layers = 3,	 
                                                                         ignore_extra_source=False, 
                                                                         no_side_imprint=False)) 
    thin_vol_ctrls_ids.append(thin_vol_ctrl.id) 
@@ -249,13 +254,11 @@ The below example shows how to perform thin volume meshing:
 
 Layers of thin volume mesh created between the source and target surfaces with side imprints. Here, thin volume meshing imprints layers of quad on the side surface of the model and the rest of the model is  filled with tet or quad mesh.
 
-.. figure:: ../images/Thinvol_imprints.png
-  :width: 800pt
-  :align: center
-
 .. code-block:: python
 
-   part_summary_res = part.get_summary(prime.PartSummaryParams(model = model, print_id = False, print_mesh = True)) 
+   part_summary_res = part.get_summary(prime.PartSummaryParams(model = model,
+                                                               print_id = False, 
+                                                               print_mesh = True)) 
    print(part_summary_res)
 
    Part Name: pipe2 
@@ -289,7 +292,12 @@ Layers of thin volume mesh created between the source and target surfaces with s
         8865 Tet Cells 
         10019 Cells 
 
-Layers of thin volume mesh created between the Source and Target without side imprints. Here, thin volume meshing creates specified layer of tetrahedral mesh on the side surface for the specified number of ignore rings.
+
+Layers of thin volume mesh created between the Source and Target without side imprints. Here, n_layers provide the number of layers to be created between the source and the target. n_ignore_rings provide the number of rings of layers to be  ignored at the side when  there are no side imprints. 
+
+.. figure:: ../images/thinvol_imprints.png
+  :width: 800pt
+  :align: center
 
 .. code-block:: python
 
@@ -338,4 +346,8 @@ Layers of thin volume mesh created between the Source and Target without side im
         150 Pyramid Cells 
         9923 Tet Cells 
         13235 Cells 
+
+.. figure:: ../images/thinvol_withoutimprints.png
+  :width: 800pt
+  :align: center
 
