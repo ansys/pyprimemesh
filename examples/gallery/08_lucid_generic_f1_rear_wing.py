@@ -76,7 +76,7 @@ display = Graphics(model)
 ###############################################################################
 # Merge parts
 # ~~~~~~~~~~~~~~~~~~~
-# Establish the Global Size parameter to regulate mesh refinement.
+# Establish the global size parameter to regulate mesh refinement.
 # Merge all individual parts into a unified part named `f1_car_rear_wing`.
 
 # Define Global sizes
