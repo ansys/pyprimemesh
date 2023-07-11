@@ -153,7 +153,9 @@ curv_size_control_global.set_suggested_name("curvature_global")
 # Compute volumetric sizefield
 compute_size = prime.SizeField(model)
 vol_sf_params = prime.VolumetricSizeFieldComputeParams(model)
-compute_size.compute_volumetric([curv_size_control.id, curv_size_control_global.id], volumetric_sizefield_params=vol_sf_params)
+compute_size.compute_volumetric(
+    [curv_size_control.id, curv_size_control_global.id], volumetric_sizefield_params=vol_sf_params
+)
 
 
 ###############################################################################
