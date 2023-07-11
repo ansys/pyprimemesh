@@ -115,7 +115,7 @@ surf_report = surf_diag.get_surface_diagnostic_summary(
 print(f"Total number of free edges present is {surf_report.n_free_edges}")
 
 ###############################################################################
-# Define local size-control and Generate size-field
+# Define local size-control and generate size-field
 # ~~~~~~~~~~~~~~~~~~~
 # In order to accurately represent the physics of the DRS wing, a limitation of 8 mm
 # is imposed on the mesh size of the wing.
