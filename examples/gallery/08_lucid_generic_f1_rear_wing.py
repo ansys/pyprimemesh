@@ -159,7 +159,7 @@ compute_size.compute_volumetric(
 
 
 ###############################################################################
-# Generate Surface Mesh
+# Generate surface mesh
 # ~~~~~~~~~~~~~~~~~~~
 #
 # Create a surface mesh for the rear wing using the defined size controls.
