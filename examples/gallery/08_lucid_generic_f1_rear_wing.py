@@ -25,7 +25,7 @@ Procedure
 ~~~~~~~~~~
 * Launch an Ansys Prime Server instance and instantiate the meshing utilities
   from the ``lucid`` class.
-* Import the STL geometry file for each component of the F1 rear wing.
+* Import and append the STL geometry files for each part of the F1 rear wing.
 * Merge all imported components into a single part.
 * Use the connect operation to join the components together.
 * Define local size controls on aero surfaces.
