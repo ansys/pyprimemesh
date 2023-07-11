@@ -72,8 +72,7 @@ for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane
     mesh_util.read(file_name, append=True)
 
 display = Graphics(model)
-scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
-display(scope)
+
 ###############################################################################
 # Merge Parts
 # ~~~~~~~~~~~~~~~~~~~
