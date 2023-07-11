@@ -138,7 +138,7 @@ curv_scope = prime.ScopeDefinition(
 curv_size_control.set_scope(curv_scope)
 curv_size_control.set_suggested_name("curvature_drs")
 
-# Global Curvature size control on all face zones of the rear wing
+# Global curvature size control on all face zones of the rear wing
 curv_size_control_global = model.control_data.create_size_control(prime.SizingType.CURVATURE)
 curv_size_params_global = prime.CurvatureSizingParams(model, normal_angle=18, min=8)
 curv_size_control_global.set_curvature_sizing_params(curv_size_params_global)
