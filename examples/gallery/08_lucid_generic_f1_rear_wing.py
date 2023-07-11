@@ -63,13 +63,9 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Import each geometry from the example folder.
 # Display the imported geometry.
 
-
 f1_rw_drs = prime.examples.download_f1_rw_drs_stl()
-
 f1_rw_enclosure = prime.examples.download_f1_rw_enclosure_stl()
-
 f1_rw_end_plates = prime.examples.download_f1_rw_end_plates_stl()
-
 f1_rw_main_plane = prime.examples.download_f1_rw_main_plane_stl()
 
 for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane]:
