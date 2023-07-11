@@ -9,7 +9,7 @@ import numpy as np
 from ansys.meshing.prime.params.primestructs import *
 
 class ThinVolumeMeshParams(CoreObject):
-    """Parameters to generate thin volume mesh. This is for internal use only.
+    """Parameters to generate thin volume mesh.
     """
     _default_params = {}
 

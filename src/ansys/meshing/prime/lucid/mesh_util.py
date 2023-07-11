@@ -776,8 +776,8 @@ class Mesh:
             Number of prism layers to grow. The default is ``None``.
             If a value for prism layers is specified, prism layers are generated.
         prism_surface_expression : str, optional
-            Face zonelets or TopoFaces to grow prisms from. The default is
-            ``"*"``, in which case prisms are grown from all surfaces.
+            Face zones or TopoFaces to grow prisms from. The default is ``"*"``,
+            in which case prisms are grown from all surfaces.
         prism_volume_expression : str, optional
             Volumes or TopoVolumes to grow prisms in.
             The default is ``"*"``. This expression evaluates
