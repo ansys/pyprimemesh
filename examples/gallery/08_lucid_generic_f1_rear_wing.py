@@ -212,7 +212,7 @@ volume_control_1.set_scope(
 # A prism control can be used to define inflation layers on the external aero surfaces.
 # Specify the aero surfaces using labels, here prism scope is defined on zones associated
 # with labels ``*drs*`` and ``*plane*``.
-# The growth for the prism layer is control by defining offset type to
+# The growth for the prism layer is controlled by defining the offset type to
 # be ``uniform`` with a first height of 0.5mm .
 
 prism_control = model.control_data.create_prism_control()
