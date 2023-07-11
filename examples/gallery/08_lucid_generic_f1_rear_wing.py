@@ -59,7 +59,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the Generic F1 rear wing geometries (stl) files exported from SpaceClaim.
+# Download the Generic F1 rear wing geometries (stl files).
 # Import each geometry from the example folder.
 # Display the imported geometry.
 
