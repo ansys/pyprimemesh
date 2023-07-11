@@ -86,7 +86,7 @@ model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4, max=32, gr
 for part in model.parts:
     part.add_labels_on_zonelets([part.name.split(".")[0]], part.get_face_zonelets())
 
-# Merge Parts
+# Merge parts
 merge_params = prime.MergePartsParams(model, merged_part_suggested_name="f1_car_rear_wing")
 merge_result = model.merge_parts([part.id for part in model.parts], merge_params)
 part = model.get_part_by_name(merge_result.merged_part_assigned_name)
