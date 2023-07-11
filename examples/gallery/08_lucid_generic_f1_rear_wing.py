@@ -125,7 +125,7 @@ print(f"Total number of free edges present is {surf_report.n_free_edges}")
 # wing, curvature control is defined with a normal angle of 18 degrees.
 # A volumetric size field is then computed based on the defined size controls.
 
-# local Curvature size control for DRS
+# Local curvature size control for DRS
 curv_size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
 curv_size_params = prime.CurvatureSizingParams(model, normal_angle=18, max=4)
 curv_size_control.set_curvature_sizing_params(curv_size_params)
