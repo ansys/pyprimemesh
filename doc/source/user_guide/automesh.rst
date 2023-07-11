@@ -185,84 +185,66 @@ This example shows how to perform these steps:
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
 
-********************
-Thin Volume Meshing
-********************
+=========================
+Thin volume mesh controls
+=========================
 
-Thin Volume Meshing creates prisms from a source face mesh projecting to a target with the specified number of layers. Thin Volume Meshing can be applied only on meshed surfaces.  
+The :class:`ThinVolumeControl <ansys.meshing.prime.ThinVolumeControl>` class creates prisms from a source face mesh projecting to a target with the specified number of layers. 
 
-Some points to remember while performing Thin Volume Meshing: 
+..Note::
+    Thin volume controls can only be applied on the meshed surfaces.
 
-* Thin Volume meshing does not support topology. 
+Some guidelines for the thin volume mesh controls: 
 
-* Source and target face zonelets should not be the same. 
+ - Source and target face zonelets should not be the same. 
+ - The number of prism layers to be created between Source and Target must be greater than zero. 
+ - A Source face zonelet cannot be target later. 
+ - A source can only belong to two thin volume controls. 
+ - Always choose the one with most features as the source. 
+ - Targets cannot be adjacent to regions with cells whereas Source can. 
+ - Sides of the new thin volume control cannot be adjacent to region with cells. 
+ - Sides of one thin volume control can only be a Source to another thin volume control. 
 
-* The number of prism layers to be created between Source and Target must be greater than zero. 
-
-* A Source face zonelet cannot be target later. 
-
-* A source can only belong to two thin volume controls. 
-
-* Always choose the one with most features as the source. 
-
-* Targets cannot be adjacent to regions with cells whereas Source can. 
-
-* Sides of the new thin volume control cannot be adjacent to region with cells. 
-
-* Sides of one thin volume control can only be a Source to another thin volume control. 
-
-The below example shows how to perform thin volume meshing: 
-
-* Get the model. 
-
-.. code-block:: python
-
-   model = client.model 
-   file_io = prime.FileIO(model) 
-   res = file_io.read_pmdat(r"E:\Test\pipe2_thin_volume_mesh.pmdat", prime.FileReadParams(model = model)) 
-
-.. figure:: ../images/thinvol.png
-  :width: 800pt
-  :align: center
+The below example shows how to: 
 
 * Create a thin volume control and set source and target. 
+* Set the thin volume mesh parameters and perform volume meshing.
 
 .. code-block:: python
 
-   auto_mesh_params = prime.AutoMeshParams(model=model) 
-   thin_vol_ctrls_ids = [] 
-   thin_vol_ctrl = model.control_data.create_thin_volume_control() 
-   thin_vol_ctrl.set_source_scope(prime.ScopeDefinition(model,
-                                                        label_expression="thin_src")) 
-   thin_vol_ctrl.set_target_scope(prime.ScopeDefinition(model,
-                                                        label_expression="thin_trg")) 
-
-* Set the thin volume mesh parameters and perform thin volume meshing. 
-
-.. code-block:: python
-
-   thin_vol_ctrl.set_thin_volume_mesh_params(prime.ThinVolumeMeshParams(model = model, 
-                                                                        n_layers = 3,	 
-                                                                        ignore_extra_source=False, 
-                                                                        no_side_imprint=False)) 
-   thin_vol_ctrls_ids.append(thin_vol_ctrl.id) 
-   auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids 
-   generate_vol=prime.AutoMesh(model=model) 
-   part=model.get_part_by_name("pipe2") 
-   result_vol= generate_vol.mesh(part.id, 
-                                 auto_mesh_params) 
-
-Layers of thin volume mesh created between the source and target surfaces with side imprints. Here, thin volume meshing imprints layers of quad on the side surface of the model and the rest of the model is  filled with tet or quad mesh.
+   auto_mesh_params = prime.AutoMeshParams(model=model)
+   thin_vol_ctrls_ids = []
+   thin_vol_ctrl = model.control_data.create_thin_volume_control()
+   thin_vol_ctrl.set_source_scope(
+       prime.ScopeDefinition(model, label_expression="thin_src")
+   )
+   thin_vol_ctrl.set_target_scope(
+       prime.ScopeDefinition(model, label_expression="thin_trg")
+   )
 
 .. code-block:: python
 
-   part_summary_res = part.get_summary(prime.PartSummaryParams(model = model,
-                                                               print_id = False, 
-                                                               print_mesh = True)) 
-   print(part_summary_res)
+   thin_vol_ctrl.set_thin_volume_mesh_params(
+       prime.ThinVolumeMeshParams(
+           model=model, n_layers=3, ignore_extra_source=False, no_side_imprint=False
+       )
+   )
+   thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
+   auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids
+   part = model.get_part_by_name("pipe2")
+   prime.AutoMesh(model).mesh(part.id, auto_mesh_params)
+   part_summary_res = part.get_summary(
+       prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+   )
 
-   Part Name: pipe2 
-   Part ID: 2 
+Layers of thin volume mesh created between the source and target surfaces with side imprints. Here, thin volume meshing imprints layers of quad on the side surface of the model and the rest of the model is filled with tet or quad mesh.
+
+.. code-block:: pycon
+
+    >>> print(part_summary_res)
+
+    Part Name: pipe2 
+    Part ID: 2 
 
     0 Edge Zonelets 
     6 Face Zonelets 
@@ -301,29 +283,34 @@ Layers of thin volume mesh created between the Source and Target without side im
 
 .. code-block:: python
 
-   thin_vol_ctrl.set_thin_volume_mesh_params(prime.ThinVolumeMeshParams( 
-                                                                        model = model,  
-                                                                        n_layers = 3,	 
-                                                                        no_side_imprint=True, 
-                                                                        n_ignore_rings=1, 
-                                                                        ignore_extra_source=False)) 
-      thin_vol_ctrls_ids.append(thin_vol_ctrl.id) 
-      auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids 
-      generate_vol=prime.AutoMesh(model=model) 
-      part=model.get_part_by_name("pipe2") 
-      result_vol= generate_vol.mesh(part.id,auto_mesh_params) 
-      part_summary_res = part.get_summary(prime.PartSummaryParams(model = model,  
-                                                                  print_id = False,  
-                                                                  print_mesh = True)) 
-      print(part_summary_res) 
+    thin_vol_ctrl.set_thin_volume_mesh_params(
+        prime.ThinVolumeMeshParams(
+            model=model,
+            n_layers=3,
+            no_side_imprint=True,
+            n_ignore_rings=1,
+            ignore_extra_source=False,
+        )
+    )
+    thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
+    auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids
+    part = model.get_part_by_name("pipe2")
+    prime.AutoMesh(model).mesh(part.id, auto_mesh_params)
+    part_summary_res = part.get_summary(
+        prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+    )
 
-      Part Name: pipe2 
-      Part ID: 2 
-      0 Edge Zonelets 
-      6 Face Zonelets 
-      2 Cell Zonelets 
-      0 Edge Zones 
-        Edge Zone Name(s) : [] 
+.. code-block:: pycon
+
+    >>> print(part_summary_res)
+
+    Part Name: pipe2 
+    Part ID: 2 
+    0 Edge Zonelets 
+    6 Face Zonelets 
+    2 Cell Zonelets 
+    0 Edge Zones 
+    Edge Zone Name(s) : [] 
       1 Face Zones 
         Face Zone Name(s) : [fluid] 
       2 Volume Zones 
