@@ -222,11 +222,17 @@ The below example shows how to:
        prime.ScopeDefinition(model, label_expression="thin_trg")
    )
 
+Layers of thin volume mesh created between the source and target surfaces with side imprints. :attr:`ThinVolumeMeshParams.n_layers <ansys.meshing.prime.ThinVolumeMeshParams.n_layers>` provides the number of layers to be created between the source and the target.
+Here, thin volume meshing imprints layers of quad on the side surface of the model and the rest of the model is filled with tet or quad mesh.
+
 .. code-block:: python
 
    thin_vol_ctrl.set_thin_volume_mesh_params(
        prime.ThinVolumeMeshParams(
-           model=model, n_layers=3, ignore_extra_source=False, no_side_imprint=False
+           model=model,
+           n_layers=3,
+           ignore_extra_source=False,
+           no_side_imprint=False,
        )
    )
    thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
@@ -237,49 +243,12 @@ The below example shows how to:
        prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
    )
 
-Layers of thin volume mesh created between the source and target surfaces with side imprints. Here, thin volume meshing imprints layers of quad on the side surface of the model and the rest of the model is filled with tet or quad mesh.
-
-.. code-block:: pycon
-
-    >>> print(part_summary_res)
-
-    Part Name: pipe2 
-    Part ID: 2 
-
-    0 Edge Zonelets 
-    6 Face Zonelets 
-    2 Cell Zonelets 
-
-    0 Edge Zones 
-        Edge Zone Name(s) : [] 
-    1 Face Zones 
-        Face Zone Name(s) : [fluid] 
-    2 Volume Zones 
-        Volume Zone Name(s) : [fluid.1, thin_trg] 
-    3 Label(s) 
-        Names: [fluid, thin_src, thin_trg] 
-    Bounding box (-20 -9.94712 -9.95118) 
-                 (20 9.98601 9.9862) 
-
-    Mesh Summary: 
-        2473 Nodes 
-        0 Poly Faces 
-        50 Quad Faces 
-        2582 Tri Faces 
-        2632 Faces 
-        0 Poly Cells 
-        0 Hex Cells 
-        1154 Prism Cells
-        0 Pyramid Cells 
-        8865 Tet Cells 
-        10019 Cells 
-
-
-Layers of thin volume mesh created between the Source and Target without side imprints. Here, n_layers provide the number of layers to be created between the source and the target. n_ignore_rings provide the number of rings of layers to be  ignored at the side when  there are no side imprints. 
-
 .. figure:: ../images/thinvol_imprints.png
   :width: 800pt
   :align: center
+
+
+Layers of thin volume mesh created between the Source and Target without side imprints.
 
 .. code-block:: python
 
@@ -287,9 +256,8 @@ Layers of thin volume mesh created between the Source and Target without side im
         prime.ThinVolumeMeshParams(
             model=model,
             n_layers=3,
-            no_side_imprint=True,
-            n_ignore_rings=1,
             ignore_extra_source=False,
+            no_side_imprint=True,
         )
     )
     thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
@@ -299,40 +267,6 @@ Layers of thin volume mesh created between the Source and Target without side im
     part_summary_res = part.get_summary(
         prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
     )
-
-.. code-block:: pycon
-
-    >>> print(part_summary_res)
-
-    Part Name: pipe2 
-    Part ID: 2 
-    0 Edge Zonelets 
-    6 Face Zonelets 
-    2 Cell Zonelets 
-    0 Edge Zones 
-    Edge Zone Name(s) : [] 
-      1 Face Zones 
-        Face Zone Name(s) : [fluid] 
-      2 Volume Zones 
-        Volume Zone Name(s) : [fluid.1, thin_trg] 
-      3 Label(s) 
-        Names: [fluid, thin_src, thin_trg]  
-    Bounding box (-20 -9.95603 -9.95119) 
-                 (20 10 10) 
-
-    Mesh Summary: 
-
-        3714 Nodes 
-        0 Poly Faces 
-        0 Quad Faces 
-        2710 Tri Faces 
-        2710 Faces 
-        0 Poly Cells 
-        0 Hex Cells 
-        3162 Prism Cells 
-        150 Pyramid Cells 
-        9923 Tet Cells 
-        13235 Cells 
 
 .. figure:: ../images/thinvol_withoutimprints.png
   :width: 800pt
