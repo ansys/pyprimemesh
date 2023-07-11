@@ -79,7 +79,7 @@ display = Graphics(model)
 # Establish the global size parameter to regulate mesh refinement.
 # Merge all individual parts into a unified part named `f1_car_rear_wing`.
 
-# Define Global sizes
+# Define global sizes
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4, max=32, growth_rate=1.2))
 
 # Create label per part
