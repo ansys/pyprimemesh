@@ -60,7 +60,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Import geometry
 # ~~~~~~~~~~~~~~~
 # Download the Generic F1 rear wing geometries (stl files).
-# Import each geometry from the example folder.
+# Import each geometry and append to the model.
 # Display the imported geometry.
 
 f1_rw_drs = prime.examples.download_f1_rw_drs_stl()
@@ -73,7 +73,7 @@ for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane
 
 display = Graphics(model)
 scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
-
+display(scope)
 ###############################################################################
 # Merge Parts
 # ~~~~~~~~~~~~~~~~~~~
@@ -124,19 +124,7 @@ print(f"Total number of free edges present is {surf_report.n_free_edges}")
 # mesh according to the curvature of the DRS surfaces.
 # Additionally, to accurately capture the curved surfaces of other sections of the
 # wing, curvature control is defined with a normal angle of 18 degrees.
-# A volumetric size field is then computed based on the defined size control.
-
-# Local Curvature size control on all components
-curv_size_control_global = model.control_data.create_size_control(prime.SizingType.CURVATURE)
-curv_size_params_global = prime.CurvatureSizingParams(model, normal_angle=18, min=8)
-curv_size_control_global.set_curvature_sizing_params(curv_size_params_global)
-curv_scope = prime.ScopeDefinition(
-    model,
-    entity_type=prime.ScopeEntity.FACEZONELETS,
-    part_expression="f1_car_rear_wing*",
-)
-curv_size_control_global.set_scope(curv_scope)
-curv_size_control_global.set_suggested_name("curvature_global")
+# A volumetric size field is then computed based on the defined size controls.
 
 # local Curvature size control for DRS
 curv_size_control = model.control_data.create_size_control(prime.SizingType.CURVATURE)
@@ -150,6 +138,18 @@ curv_scope = prime.ScopeDefinition(
 )
 curv_size_control.set_scope(curv_scope)
 curv_size_control.set_suggested_name("curvature_drs")
+
+# Global Curvature size control on all face zones of the rear wing
+curv_size_control_global = model.control_data.create_size_control(prime.SizingType.CURVATURE)
+curv_size_params_global = prime.CurvatureSizingParams(model, normal_angle=18, min=8)
+curv_size_control_global.set_curvature_sizing_params(curv_size_params_global)
+curv_scope = prime.ScopeDefinition(
+    model,
+    entity_type=prime.ScopeEntity.FACEZONELETS,
+    part_expression="f1_car_rear_wing*",
+)
+curv_size_control_global.set_scope(curv_scope)
+curv_size_control_global.set_suggested_name("curvature_global")
 
 # Compute volumetric sizefield
 compute_size = prime.SizeField(model)
