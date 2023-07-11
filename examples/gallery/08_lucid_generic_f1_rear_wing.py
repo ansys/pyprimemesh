@@ -245,7 +245,7 @@ prism_control.set_growth_params(
 ###############################################################################
 # Generate Volume Mesh
 # ~~~~~~~~~~~~~~~~~~~
-# Volume mesh with polyhedral elements and boundary layer refinement.
+# Volume mesh with hexcore polyhedral elements and boundary layer refinement.
 
 volume_mesh = prime.AutoMesh(model)
 auto_mesh_param = prime.AutoMeshParams(
