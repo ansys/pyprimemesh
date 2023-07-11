@@ -209,7 +209,7 @@ volume_control_1.set_scope(
 ###############################################################################
 # Define Prism Controls
 # ~~~~~~~~~~~~~~~~~~~
-# Prism control can be used to define inflation layers on the external aero surfaces.
+# A prism control can be used to define inflation layers on the external aero surfaces.
 # Specify the aero surfaces using labels, here prism scope is defined on zones associated
 # with labels ``*drs*`` and ``*plane*``.
 # The growth for the prism layer is control by defining offset type to
