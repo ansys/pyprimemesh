@@ -11,10 +11,10 @@ STL file model.
 Objective
 ~~~~~~~~~~
 
-The given example demonstrates the interconnection between various elements of the rear wing of
-a generic F1 car, along with volume meshes, utilizing a poly-hexcore mesh containing prisms.To
-simplify the process and enhance convenience, multiple meshing utilities provided in the
-"lucid" class are employed.
+The example demonstrates how to connect various parts of a rear wing from
+a generic F1 car and volume mesh the resulting model using a poly-hexcore mesh containing prisms.
+To simplify the process and enhance convenience, multiple meshing utilities provided in the
+"lucid" class are used.
 
 .. image:: ../../../images/generic_rear_wing.png
    :align: center
