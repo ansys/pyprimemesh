@@ -74,7 +74,7 @@ for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane
 display = Graphics(model)
 
 ###############################################################################
-# Merge Parts
+# Merge parts
 # ~~~~~~~~~~~~~~~~~~~
 # Establish the Global Size parameter to regulate mesh refinement.
 # Merge all individual parts into a unified part named `f1_car_rear_wing`.
