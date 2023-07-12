@@ -184,7 +184,7 @@ for label in part.get_labels():
 mesh_util.compute_volumes(part_expression=part.name, create_zones_per_volume=True)
 
 ###############################################################################
-# Define Volume Controls
+# Define volume controls
 # ~~~~~~~~~~~~~~~~~~~
 # In order to prevent the generation of a volume mesh within the solid wing,
 # the type of a volume zone within the rear wing can be defined as "dead".
