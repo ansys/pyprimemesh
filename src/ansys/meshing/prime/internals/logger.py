@@ -58,7 +58,7 @@ class PrimeLogger(object, metaclass=SingletonType):
             Stream to output the log output to stream
         """
         # stdout
-        stream_handler = logging.StreamHandler()
+        stream_handler = logging.StreamHandler(stream)
         stream_handler.setFormatter(self._formatter)
         self._logger.addHandler(stream_handler)
 
