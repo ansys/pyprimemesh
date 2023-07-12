@@ -92,7 +92,7 @@ merge_result = model.merge_parts([part.id for part in model.parts], merge_params
 part = model.get_part_by_name(merge_result.merged_part_assigned_name)
 
 ###############################################################################
-# Mesh Connect
+# Mesh connect
 # ~~~~~~~~~~~~~~~~~~~
 # In order to generate a volume mesh for a closed domain, it is necessary to ensure
 # that the components of the rear wing are properly connected.
