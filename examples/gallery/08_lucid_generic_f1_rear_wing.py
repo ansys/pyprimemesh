@@ -297,7 +297,7 @@ display(
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~
-# Export as cas file for External Aero Simulations
+# Export as cas file for external aero simulations
 
 with tempfile.TemporaryDirectory() as temp_folder:
     print(temp_folder)
