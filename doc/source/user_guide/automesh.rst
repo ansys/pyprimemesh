@@ -222,42 +222,12 @@ The below example shows how to:
        prime.ScopeDefinition(model, label_expression="thin_trg")
    )
 
-Layers of thin volume mesh created between the source and target surfaces with side imprints. :attr:`ThinVolumeMeshParams.n_layers <ansys.meshing.prime.ThinVolumeMeshParams.n_layers>` provides the number of layers to be created between the source and the target.
-Here, thin volume meshing imprints layers of quad on the side surface of the model and the rest of the model is filled with tet or quad mesh.
-
-.. code-block:: python
-
-   thin_vol_ctrl.set_thin_volume_mesh_params(
-       prime.ThinVolumeMeshParams(
-           model=model,
-           n_layers=3,
-           ignore_extra_source=False,
-           no_side_imprint=False,
-       )
-   )
-   thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
-   auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids
-   part = model.get_part_by_name("pipe2")
-   prime.AutoMesh(model).mesh(part.id, auto_mesh_params)
-   part_summary_res = part.get_summary(
-       prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
-   )
-
-.. figure:: ../images/thinvol_imprints.png
-  :width: 800pt
-  :align: center
-
-
-Layers of thin volume mesh created between the Source and Target without side imprints.
-
 .. code-block:: python
 
     thin_vol_ctrl.set_thin_volume_mesh_params(
         prime.ThinVolumeMeshParams(
             model=model,
             n_layers=3,
-            ignore_extra_source=False,
-            no_side_imprint=True,
         )
     )
     thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
@@ -267,6 +237,8 @@ Layers of thin volume mesh created between the Source and Target without side im
     part_summary_res = part.get_summary(
         prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
     )
+
+Layers of thin volume mesh created between the source and target surfaces.
 
 .. figure:: ../images/thinvol_withoutimprints.png
   :width: 800pt
