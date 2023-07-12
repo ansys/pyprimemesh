@@ -244,7 +244,7 @@ prism_control.set_growth_params(
 )
 
 ###############################################################################
-# Generate Volume Mesh
+# Generate volume mesh
 # ~~~~~~~~~~~~~~~~~~~
 # Volume mesh with hexcore polyhedral elements and boundary layer refinement.
 
