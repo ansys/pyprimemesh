@@ -285,7 +285,7 @@ print(
     results.quality_results_part[0].max_quality,
 )
 
-# Mesh Check
+# Mesh check
 result = prime.VolumeMeshTool(model).check_mesh(part.id, params=prime.CheckMeshParams(model))
 print("\nMesh Check", result, sep="\n")
 
