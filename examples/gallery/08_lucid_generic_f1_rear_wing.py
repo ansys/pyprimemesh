@@ -288,9 +288,7 @@ result = prime.VolumeMeshTool(model).check_mesh(part.id, params=prime.CheckMeshP
 print("\nMesh Check", result, sep="\n")
 
 scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
-display(
-    scope=scope,
-)
+display(scope=scope)
 
 ###############################################################################
 # Write mesh
