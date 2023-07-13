@@ -166,7 +166,6 @@ compute_size.compute_volumetric(
 ###############################################################################
 # Generate surface mesh
 # ~~~~~~~~~~~~~~~~~~~
-#
 # Create a surface mesh for the rear wing using the defined size controls.
 # To facilitate the definition of boundary conditions on the surfaces in the solver,
 # generate face zones by utilizing the existing labels found in the rear wing model.
