@@ -163,7 +163,6 @@ compute_size.compute_volumetric(
     [curv_size_control.id, curv_size_control_global.id], volumetric_sizefield_params=vol_sf_params
 )
 
-
 ###############################################################################
 # Generate surface mesh
 # ~~~~~~~~~~~~~~~~~~~
