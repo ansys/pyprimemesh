@@ -104,7 +104,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
     print("\nExported Structural Mesh: ", structural_mesh)
 
 ###############################################################################
-# Extract Fluid by Wrapping
+# Extract fluid by wrapping
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # You can deal with the small internal diameter change between flanges in several ways:
 #
