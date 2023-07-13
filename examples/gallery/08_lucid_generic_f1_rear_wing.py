@@ -71,7 +71,6 @@ f1_rw_main_plane = prime.examples.download_f1_rw_main_plane_stl()
 for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane]:
     mesh_util.read(file_name, append=True)
 
-
 # display the rear wing geometry without the enclosure
 display = Graphics(model)
 scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
