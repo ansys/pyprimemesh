@@ -197,7 +197,7 @@ mesh_util.compute_volumes(part_expression=part.name, create_zones_per_volume=Tru
 # for "f1_rw_enclosure".
 
 volume_control = model.control_data.create_volume_control()
-volume_control_1.set_params(
+volume_control.set_params(
     prime.VolumeControlParams(
         model,
         cell_zonelet_type=prime.CellZoneletType.DEAD,
