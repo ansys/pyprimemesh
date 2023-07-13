@@ -179,7 +179,7 @@ for label in part.get_labels():
     mesh_util.create_zones_from_labels(label_expression=label)
 
 ###############################################################################
-# Compute Volumetric Regions
+# Compute volumetric regions
 # ~~~~~~~~~~~~~~~~~~~
 # Compute the volume zones.
 
