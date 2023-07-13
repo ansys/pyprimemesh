@@ -203,7 +203,7 @@ volume_control.set_params(
         cell_zonelet_type=prime.CellZoneletType.DEAD,
     )
 )
-volume_control_1.set_scope(
+volume_control.set_scope(
     prime.ScopeDefinition(
         model, evaluation_type=prime.ScopeEvaluationType.ZONES, zone_expression="* !f1_rw_enclosure"
     )
