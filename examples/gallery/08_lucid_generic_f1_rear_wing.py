@@ -174,7 +174,7 @@ mesh_util.surface_mesh_with_size_controls(size_control_names="*curvature*")
 scope = prime.ScopeDefinition(model, label_expression="* !*enclosure*")
 display(scope=scope)
 
-# Create face-zones per label
+# Create face zones per label
 for label in part.get_labels():
     mesh_util.create_zones_from_labels(label_expression=label)
 
