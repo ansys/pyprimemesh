@@ -578,6 +578,10 @@ class ErrorCode(enum.IntEnum):
     """Invalid volume scope provided for thin volume control."""
     THINVOLUMECONTROLINVALIDCONTROL = 12110
     """Same face scope is set as target for multiple thin volume controls."""
+    THINVOLUMECONTROLSAMESOURCEFORMORETHANTWOCONTROL = 12111
+    """Same face scope is set as source for more than two thin volume controls."""
+    THINVOLUMEMESHNOTSUPPORTEDWITHFACEBASEDDATABASE = 12112
+    """Thin volume mesh is not supported with face based database."""
     MICROSTRUCTUREINVALIDELEMENTTYPE = 13000
     """Invalid input provided. Invalid Element Type."""
 

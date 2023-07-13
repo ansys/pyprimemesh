@@ -293,7 +293,7 @@ class FixInvalidNormalNodeResults(CoreObject):
         self._error_code = value
 
 class CopyZoneletsParams(CoreObject):
-    """Parameters to copy zonelets.
+    """Parameters to copy zonelets. This is for internal use only.
     """
     _default_params = {}
 
