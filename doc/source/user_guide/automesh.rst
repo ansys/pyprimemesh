@@ -201,7 +201,7 @@ Some guidelines for the thin volume mesh controls:
  - A source face zonelet cannot be a target face zonelet in a subsequent control. 
  - A source can only belong to two thin volume controls. 
  - Always choose the one with most features as the source. 
- - Target faces cannot be adjacent to regions with cells whereas source faces can. 
+ - Target face zonelets cannot be adjacent to regions with cells whereas source face zonelets can. 
  - Sides of the new thin volume control cannot be adjacent to region with cells. 
  - Sides of one thin volume control can only be a Source to another thin volume control. 
 
