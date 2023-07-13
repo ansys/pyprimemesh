@@ -127,6 +127,7 @@ print(f"Total number of free edges present is {surf_report.n_free_edges}")
 # mesh according to the curvature of the DRS surfaces.
 # Additionally, to accurately capture the curved surfaces of other sections of the
 # wing, curvature control is defined with a normal angle of 18 degrees.
+# These controls are used during surface mesh generation.
 # A volumetric size field is then computed based on the defined size controls.
 
 # Local curvature size control for DRS
