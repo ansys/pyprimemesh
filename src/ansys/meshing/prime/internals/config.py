@@ -12,12 +12,15 @@ __all__ = [
     'using_container',
     'set_has_pim',
     'has_pim',
+    'enable_log_output',
 ]
 
 __DEFAULT_USE_BINARY = False
 __USING_CONTAINER = False
 __HAS_PIM = False
 __FILE_CHECK = True
+
+from ansys.meshing.prime.internals.logger import PrimeLogger
 
 
 def _optimize_vectors():
@@ -190,3 +193,16 @@ def set_file_existence_check(value: bool):
     global __FILE_CHECK
     __FILE_CHECK = value
     return __FILE_CHECK
+
+
+def enable_log_output(stream=None):
+    """Enable logger output to given stream.
+
+    If stream is not specified, sys.stderr is used.
+
+    Parameters
+    ----------
+    stream: TextIO, optional
+        Stream to output the log output to stream
+    """
+    PrimeLogger().enable_output(stream)
