@@ -129,7 +129,7 @@ print(f"Total number of free edges present is {surf_report.n_free_edges}")
 # wing, curvature control is defined with a normal angle of 18 degrees.
 # These controls are used during surface mesh generation.
 # A volumetric size-field is then computed based on the defined size controls.
-# The volumetric size-field plays a crucial role in controlling 
+# The volumetric size-field plays a crucial role in controlling
 # the growth and refinement of the volume mesh.
 
 # Local curvature size control for DRS
