@@ -197,7 +197,7 @@ The :class:`ThinVolumeControl <ansys.meshing.prime.ThinVolumeControl>` class cre
 Some guidelines for the thin volume mesh controls: 
 
  - Source and target face zonelets should not be the same. 
- - The number of prism layers to be created between Source and Target must be greater than zero. 
+ - The number of prism layers to be created between source and target must be greater than zero. 
  - A Source face zonelet cannot be target later. 
  - A source can only belong to two thin volume controls. 
  - Always choose the one with most features as the source. 
