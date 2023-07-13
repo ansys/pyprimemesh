@@ -33,13 +33,9 @@ class PrimeLogger(object, metaclass=SingletonType):
         """Logger initializer."""
         self._logger = logging.getLogger(logger_name)
         self._logger.setLevel(logging.DEBUG)
-        self.formatter = logging.Formatter(
+        self._formatter = logging.Formatter(
             '%(asctime)s \t [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s'
         )
-        # stdout
-        stream_handler = logging.StreamHandler()
-        stream_handler.setFormatter(self.formatter)
-        self._logger.addHandler(stream_handler)
 
     def get_logger(self):
         """Get the logger.
@@ -50,6 +46,21 @@ class PrimeLogger(object, metaclass=SingletonType):
             Logger.
         """
         return self._logger
+
+    def enable_output(self, stream=None):
+        """Enable logger output to given stream.
+
+        If stream is not specified, sys.stderr is used.
+
+        Parameters
+        ----------
+        stream: TextIO, optional
+            Stream to output the log output to stream
+        """
+        # stdout
+        stream_handler = logging.StreamHandler(stream)
+        stream_handler.setFormatter(self._formatter)
+        self._logger.addHandler(stream_handler)
 
     def add_file_handler(self, logs_dir: str = "./.log"):
         """Save logs to a file in addition to printing them to stdout.
@@ -63,7 +74,7 @@ class PrimeLogger(object, metaclass=SingletonType):
         if not os.path.isdir(logs_dir):
             os.mkdir(logs_dir)
         file_handler = logging.FileHandler(logs_dir + "/log_" + now.strftime("%Y-%m-%d") + ".log")
-        file_handler.setFormatter(self.formatter)
+        file_handler.setFormatter(self._formatter)
         self._logger.addHandler(file_handler)
 
 
