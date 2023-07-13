@@ -256,7 +256,7 @@ auto_mesh_param = prime.AutoMeshParams(
     prism_control_ids=[prism_control.id],
     size_field_type=prime.SizeFieldType.VOLUMETRIC,
     volume_fill_type=prime.VolumeFillType.HEXCOREPOLY,
-    volume_control_ids=[volume_control_1.id],
+    volume_control_ids=[volume_control.id],
 )
 volume_mesh.mesh(part.id, auto_mesh_param)
 
