@@ -1009,12 +1009,14 @@ class WrapperCloseGapsParams(CoreObject):
             gap_size: float,
             material_point_name: str,
             suggested_part_name: str,
-            number_of_threads: int):
+            number_of_threads: int,
+            merge_to_geom: bool):
         self._target = target
         self._gap_size = gap_size
         self._material_point_name = material_point_name
         self._suggested_part_name = suggested_part_name
         self._number_of_threads = number_of_threads
+        self._merge_to_geom = merge_to_geom
 
     def __init__(
             self,
@@ -1024,6 +1026,7 @@ class WrapperCloseGapsParams(CoreObject):
             material_point_name: str = None,
             suggested_part_name: str = None,
             number_of_threads: int = None,
+            merge_to_geom: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the WrapperCloseGapsParams.
@@ -1042,6 +1045,8 @@ class WrapperCloseGapsParams(CoreObject):
             Suggested part name for created patching surfaces.
         number_of_threads: int, optional
             Number of threads for multithreading.
+        merge_to_geom: bool, optional
+            Merges the created gap closure elements to the nearest input geometry.
         json_data: dict, optional
             JSON dictionary to create a WrapperCloseGapsParams object with provided parameters.
 
@@ -1055,16 +1060,18 @@ class WrapperCloseGapsParams(CoreObject):
                 json_data["gapSize"] if "gapSize" in json_data else None,
                 json_data["materialPointName"] if "materialPointName" in json_data else None,
                 json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
-                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
+                json_data["mergeToGeom"] if "mergeToGeom" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [target, gap_size, material_point_name, suggested_part_name, number_of_threads])
+            all_field_specified = all(arg is not None for arg in [target, gap_size, material_point_name, suggested_part_name, number_of_threads, merge_to_geom])
             if all_field_specified:
                 self.__initialize(
                     target,
                     gap_size,
                     material_point_name,
                     suggested_part_name,
-                    number_of_threads)
+                    number_of_threads,
+                    merge_to_geom)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1076,7 +1083,8 @@ class WrapperCloseGapsParams(CoreObject):
                         gap_size if gap_size is not None else ( WrapperCloseGapsParams._default_params["gap_size"] if "gap_size" in WrapperCloseGapsParams._default_params else (json_data["gapSize"] if "gapSize" in json_data else None)),
                         material_point_name if material_point_name is not None else ( WrapperCloseGapsParams._default_params["material_point_name"] if "material_point_name" in WrapperCloseGapsParams._default_params else (json_data["materialPointName"] if "materialPointName" in json_data else None)),
                         suggested_part_name if suggested_part_name is not None else ( WrapperCloseGapsParams._default_params["suggested_part_name"] if "suggested_part_name" in WrapperCloseGapsParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
-                        number_of_threads if number_of_threads is not None else ( WrapperCloseGapsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperCloseGapsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
+                        number_of_threads if number_of_threads is not None else ( WrapperCloseGapsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperCloseGapsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
+                        merge_to_geom if merge_to_geom is not None else ( WrapperCloseGapsParams._default_params["merge_to_geom"] if "merge_to_geom" in WrapperCloseGapsParams._default_params else (json_data["mergeToGeom"] if "mergeToGeom" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1090,7 +1098,8 @@ class WrapperCloseGapsParams(CoreObject):
             gap_size: float = None,
             material_point_name: str = None,
             suggested_part_name: str = None,
-            number_of_threads: int = None):
+            number_of_threads: int = None,
+            merge_to_geom: bool = None):
         """Set the default values of WrapperCloseGapsParams.
 
         Parameters
@@ -1105,6 +1114,8 @@ class WrapperCloseGapsParams(CoreObject):
             Suggested part name for created patching surfaces.
         number_of_threads: int, optional
             Number of threads for multithreading.
+        merge_to_geom: bool, optional
+            Merges the created gap closure elements to the nearest input geometry.
         """
         args = locals()
         [WrapperCloseGapsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1133,11 +1144,13 @@ class WrapperCloseGapsParams(CoreObject):
             json_data["suggestedPartName"] = self._suggested_part_name
         if self._number_of_threads is not None:
             json_data["numberOfThreads"] = self._number_of_threads
+        if self._merge_to_geom is not None:
+            json_data["mergeToGeom"] = self._merge_to_geom
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "target :  %s\ngap_size :  %s\nmaterial_point_name :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s" % ('{ ' + str(self._target) + ' }', self._gap_size, self._material_point_name, self._suggested_part_name, self._number_of_threads)
+        message = "target :  %s\ngap_size :  %s\nmaterial_point_name :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s\nmerge_to_geom :  %s" % ('{ ' + str(self._target) + ' }', self._gap_size, self._material_point_name, self._suggested_part_name, self._number_of_threads, self._merge_to_geom)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1190,6 +1203,16 @@ class WrapperCloseGapsParams(CoreObject):
     @number_of_threads.setter
     def number_of_threads(self, value: int):
         self._number_of_threads = value
+
+    @property
+    def merge_to_geom(self) -> bool:
+        """Merges the created gap closure elements to the nearest input geometry.
+        """
+        return self._merge_to_geom
+
+    @merge_to_geom.setter
+    def merge_to_geom(self, value: bool):
+        self._merge_to_geom = value
 
 class WrapperCloseGapsResult(CoreObject):
     """Result structure associated with close gaps operation.

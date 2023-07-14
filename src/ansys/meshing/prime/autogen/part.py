@@ -1440,7 +1440,7 @@ Return the ids of topofaces.
         self._model._print_logs_after_command("get_splines")
         return result
 
-    def get_uspline_surface(self) -> IGAUSplineSurf:
+    def get_unstructured_spline_surface(self) -> IGAUSplineSurf:
         """ Gets the unstructured surface spline for the part.
 
 
@@ -1453,14 +1453,14 @@ Return the ids of topofaces.
         Examples
         --------
         >>> from ansys.meshing.prime import Part
-        >>> spline = part.GetUSplineSurface()
+        >>> spline = part.GetUnstructuredSplineSurface()
 
         """
         args = {}
-        command_name = "PrimeMesh::Part/GetUSplineSurface"
-        self._model._print_logs_before_command("get_uspline_surface", args)
+        command_name = "PrimeMesh::Part/GetUnstructuredSplineSurface"
+        self._model._print_logs_before_command("get_unstructured_spline_surface", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("get_uspline_surface", IGAUSplineSurf(model = self._model, json_data = result))
+        self._model._print_logs_after_command("get_unstructured_spline_surface", IGAUSplineSurf(model = self._model, json_data = result))
         return IGAUSplineSurf(model = self._model, json_data = result)
 
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
