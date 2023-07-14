@@ -191,7 +191,7 @@ Thin volume mesh controls
 
 The :class:`ThinVolumeControl <ansys.meshing.prime.ThinVolumeControl>` class creates prisms from a source face mesh projecting to a target with the specified number of layers. 
 
-..Note::
+.. note::
     Thin volume controls can only be applied on the meshed surfaces.
 
 Some guidelines for the thin volume mesh controls: 
@@ -212,18 +212,15 @@ The below example shows how to:
 
 .. code-block:: python
 
-   auto_mesh_params = prime.AutoMeshParams(model=model)
-   thin_vol_ctrls_ids = []
-   thin_vol_ctrl = model.control_data.create_thin_volume_control()
-   thin_vol_ctrl.set_source_scope(
-       prime.ScopeDefinition(model, label_expression="thin_src")
-   )
-   thin_vol_ctrl.set_target_scope(
-       prime.ScopeDefinition(model, label_expression="thin_trg")
-   )
-
-.. code-block:: python
-
+    part = model.get_part_by_name("pipe")
+    thin_vol_ctrls_ids = []
+    thin_vol_ctrl = model.control_data.create_thin_volume_control()
+    thin_vol_ctrl.set_source_scope(
+        prime.ScopeDefinition(model, label_expression="thin_src")
+    )
+    thin_vol_ctrl.set_target_scope(
+        prime.ScopeDefinition(model, label_expression="thin_trg")
+    )
     thin_vol_ctrl.set_thin_volume_mesh_params(
         prime.ThinVolumeMeshParams(
             model=model,
@@ -231,12 +228,13 @@ The below example shows how to:
         )
     )
     thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
-    auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids
-    part = model.get_part_by_name("pipe2")
-    prime.AutoMesh(model).mesh(part.id, auto_mesh_params)
-    part_summary_res = part.get_summary(
-        prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
+
+    # Volume mesh
+    auto_mesh_params = prime.AutoMeshParams(
+        model=model,
+        thin_volume_control_ids=thin_vol_ctrls_ids,
     )
+    prime.AutoMesh(model).mesh(part.id, auto_mesh_params)
 
 Layers of thin volume mesh created between the source and target surfaces.
 
