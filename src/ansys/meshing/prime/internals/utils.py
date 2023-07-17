@@ -10,6 +10,25 @@ import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 
 _LOCAL_PORTS = []
+_PRIME_CONTAINER_COUNT = 0
+
+
+def make_unique_container_name(name: str):
+    """Make a unique container name.
+
+    Parameters
+    ----------
+    name : str
+        Original name prefix that is provided.
+
+    Returns
+    -------
+    str
+        Unique name with a numeric integer added as suffix.
+    """
+    global _PRIME_CONTAINER_COUNT
+    _PRIME_CONTAINER_COUNT = _PRIME_CONTAINER_COUNT + 1
+    return f'{name}-{_PRIME_CONTAINER_COUNT}'
 
 
 def to_camel_case(snake_str):
