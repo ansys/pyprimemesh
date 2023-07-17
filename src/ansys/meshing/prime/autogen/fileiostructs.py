@@ -1265,6 +1265,7 @@ class ImportCadParams(CoreObject):
     def __initialize(
             self,
             append: bool,
+            ansys_release: str,
             cad_reader_route: CadReaderRoute,
             part_creation_type: PartCreationType,
             geometry_transfer: bool,
@@ -1274,6 +1275,7 @@ class ImportCadParams(CoreObject):
             stitch_tolerance: float,
             cad_update_parameters: Dict[str, Union[str, int, float, bool]]):
         self._append = append
+        self._ansys_release = ansys_release
         self._cad_reader_route = CadReaderRoute(cad_reader_route)
         self._part_creation_type = PartCreationType(part_creation_type)
         self._geometry_transfer = geometry_transfer
@@ -1287,6 +1289,7 @@ class ImportCadParams(CoreObject):
             self,
             model: CommunicationManager=None,
             append: bool = None,
+            ansys_release: str = None,
             cad_reader_route: CadReaderRoute = None,
             part_creation_type: PartCreationType = None,
             geometry_transfer: bool = None,
@@ -1305,6 +1308,8 @@ class ImportCadParams(CoreObject):
             Model to create a ImportCadParams object with default parameters.
         append: bool, optional
             Append imported CAD into existing model when true.
+        ansys_release: str, optional
+            Configures the Ansys release to be used for loading CAD data through non Native route.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1331,6 +1336,7 @@ class ImportCadParams(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["append"] if "append" in json_data else None,
+                json_data["ansysRelease"] if "ansysRelease" in json_data else None,
                 CadReaderRoute(json_data["cadReaderRoute"] if "cadReaderRoute" in json_data else None),
                 PartCreationType(json_data["partCreationType"] if "partCreationType" in json_data else None),
                 json_data["geometryTransfer"] if "geometryTransfer" in json_data else None,
@@ -1340,10 +1346,11 @@ class ImportCadParams(CoreObject):
                 json_data["stitchTolerance"] if "stitchTolerance" in json_data else None,
                 json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [append, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance, cad_update_parameters])
+            all_field_specified = all(arg is not None for arg in [append, ansys_release, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance, cad_update_parameters])
             if all_field_specified:
                 self.__initialize(
                     append,
+                    ansys_release,
                     cad_reader_route,
                     part_creation_type,
                     geometry_transfer,
@@ -1360,6 +1367,7 @@ class ImportCadParams(CoreObject):
                     json_data = param_json["ImportCadParams"] if "ImportCadParams" in param_json else {}
                     self.__initialize(
                         append if append is not None else ( ImportCadParams._default_params["append"] if "append" in ImportCadParams._default_params else (json_data["append"] if "append" in json_data else None)),
+                        ansys_release if ansys_release is not None else ( ImportCadParams._default_params["ansys_release"] if "ansys_release" in ImportCadParams._default_params else (json_data["ansysRelease"] if "ansysRelease" in json_data else None)),
                         cad_reader_route if cad_reader_route is not None else ( ImportCadParams._default_params["cad_reader_route"] if "cad_reader_route" in ImportCadParams._default_params else CadReaderRoute(json_data["cadReaderRoute"] if "cadReaderRoute" in json_data else None)),
                         part_creation_type if part_creation_type is not None else ( ImportCadParams._default_params["part_creation_type"] if "part_creation_type" in ImportCadParams._default_params else PartCreationType(json_data["partCreationType"] if "partCreationType" in json_data else None)),
                         geometry_transfer if geometry_transfer is not None else ( ImportCadParams._default_params["geometry_transfer"] if "geometry_transfer" in ImportCadParams._default_params else (json_data["geometryTransfer"] if "geometryTransfer" in json_data else None)),
@@ -1378,6 +1386,7 @@ class ImportCadParams(CoreObject):
     @staticmethod
     def set_default(
             append: bool = None,
+            ansys_release: str = None,
             cad_reader_route: CadReaderRoute = None,
             part_creation_type: PartCreationType = None,
             geometry_transfer: bool = None,
@@ -1392,6 +1401,8 @@ class ImportCadParams(CoreObject):
         ----------
         append: bool, optional
             Append imported CAD into existing model when true.
+        ansys_release: str, optional
+            Configures the Ansys release to be used for loading CAD data through non Native route.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1428,6 +1439,8 @@ class ImportCadParams(CoreObject):
         json_data = {}
         if self._append is not None:
             json_data["append"] = self._append
+        if self._ansys_release is not None:
+            json_data["ansysRelease"] = self._ansys_release
         if self._cad_reader_route is not None:
             json_data["cadReaderRoute"] = self._cad_reader_route
         if self._part_creation_type is not None:
@@ -1448,7 +1461,7 @@ class ImportCadParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "append :  %s\ncad_reader_route :  %s\npart_creation_type :  %s\ngeometry_transfer :  %s\nlength_unit :  %s\nrefacet :  %s\ncad_refaceting_params :  %s\nstitch_tolerance :  %s\ncad_update_parameters :  %s" % (self._append, self._cad_reader_route, self._part_creation_type, self._geometry_transfer, self._length_unit, self._refacet, '{ ' + str(self._cad_refaceting_params) + ' }', self._stitch_tolerance, self._cad_update_parameters)
+        message = "append :  %s\nansys_release :  %s\ncad_reader_route :  %s\npart_creation_type :  %s\ngeometry_transfer :  %s\nlength_unit :  %s\nrefacet :  %s\ncad_refaceting_params :  %s\nstitch_tolerance :  %s\ncad_update_parameters :  %s" % (self._append, self._ansys_release, self._cad_reader_route, self._part_creation_type, self._geometry_transfer, self._length_unit, self._refacet, '{ ' + str(self._cad_refaceting_params) + ' }', self._stitch_tolerance, self._cad_update_parameters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1461,6 +1474,16 @@ class ImportCadParams(CoreObject):
     @append.setter
     def append(self, value: bool):
         self._append = value
+
+    @property
+    def ansys_release(self) -> str:
+        """Configures the Ansys release to be used for loading CAD data through non Native route.
+        """
+        return self._ansys_release
+
+    @ansys_release.setter
+    def ansys_release(self, value: str):
+        self._ansys_release = value
 
     @property
     def cad_reader_route(self) -> CadReaderRoute:

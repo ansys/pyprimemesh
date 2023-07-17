@@ -5,11 +5,11 @@
 ***************
 Volume sweeping
 ***************
-.. vale off
+
 
 The :class:`VolumeSweeper <ansys.meshing.prime.VolumeSweeper>` class creates a volume mesh on 2.5D models, stacking faces
 or edge zonelets one above the other in layers. This volume sweeping technology stacks each of the input topovolumes individually.
-.. vale on
+
 
 .. note::
   A 2.5D or stackable geometry is any closed volume or set of closed volumes that can be obtained by successive extrusion of a series of 2D geometries, along the area normal of the 2D geometries.
@@ -17,10 +17,10 @@ or edge zonelets one above the other in layers. This volume sweeping technology 
   A geometry is stackable only when there is a direction called stacking direction, to which all surfaces are either perpendicular or parallel.
 
 .. warning::
-  The hex-dominant mesh created by this "Stacker" method can only be applied to 2.5D models. Only conformal mesh within a part is supported.
+  The hex-dominant mesh created by volume sweeper can only be applied to 2.5D models. Only conformal mesh within a part is supported.
 
 
-"Stacker" workflow involves the following:
+Volume sweeping workflow involves the following:
 
  - Create imprints of model edges on the base face.
  - Surface mesh the imprinted base face.
@@ -30,13 +30,13 @@ or edge zonelets one above the other in layers. This volume sweeping technology 
   :width: 800pt
   :align: center
 
-  **Example of Stacker Workflow**
+  **Example of Volume Sweeping Workflow**
 
 
 Hex-dominant meshing for 2.5D geometry
 ---------------------------------------
 
-The following example shows how to mesh a thin disc using "Stacker" method:
+The following example shows how to mesh a thin disc using volume sweeper:
 
 .. code-block:: python
 
@@ -47,7 +47,7 @@ The following example shows how to mesh a thin disc using "Stacker" method:
   model.delete_volumetric_size_fields(model.get_active_volumetric_size_fields())
   part = model.parts[0]
 
-Define stacker parameters:
+Define stacking parameters:
 
 * Set origin and direction vector for stacking orientation
 * Option to set defeaturing tolerance for edge imprints
@@ -66,7 +66,7 @@ Define stacker parameters:
       model=model, direction=[0.0, 1.0, 0.0], max_offset_size=0.5, delete_base=True
   )
 
-Print the results of stacker parameters so that you can review them:
+Print the results of stacking parameters so that you can review them:
 
 .. code-block:: pycon
 

@@ -19,6 +19,7 @@ This section provides an overview of how you use PyPrimeMesh for mesh preparatio
    wrapper
    automesh
    stacker
+   matchmorph
    sizing
    connections
    mesh_diagnostics

@@ -18,16 +18,16 @@ try:
     import appdirs
 
     USER_DATA_PATH = os.getenv(
-        'PYPRIMEMESH_USER_DATA',
-        appdirs.user_data_dir(appname='ansys_meshing_prime', appauthor='Ansys'),
+        'PYPRIMEMESH_USER_DATA', appdirs.user_data_dir(appname='pyprimemesh', appauthor=False)
     )
 except ModuleNotFoundError:
     # If appdirs is not installed, then try with tempfile.
     # NOTE: This only occurs for ADO ARM Test runs
     import tempfile
 
+    USER_NAME = os.getenv('USERNAME', os.getenv('USER', 'pyprimemesh'))
     USER_DATA_PATH = os.getenv(
-        'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), 'ansys_meshing_prime')
+        'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), USER_NAME)
     )
 
 if not os.path.exists(USER_DATA_PATH):  # pragma: no cover

@@ -36,6 +36,277 @@ class MatchedMeshOption(enum.IntEnum):
     TRIMTWOSIDES = 4
     """Delete matched faces on both sides and merge matched nodes at middle locations (works only within a single part)."""
 
+class OverlapPairs(CoreObject):
+    """Provides ids of a pair of overlapping face zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            zone_id0: int,
+            zone_id1: int):
+        self._zone_id0 = zone_id0
+        self._zone_id1 = zone_id1
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            zone_id0: int = None,
+            zone_id1: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the OverlapPairs.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a OverlapPairs object with default parameters.
+        zone_id0: int, optional
+            Id of one overlapping face zonelet.
+        zone_id1: int, optional
+            Id of other overlapping face zonelet.
+        json_data: dict, optional
+            JSON dictionary to create a OverlapPairs object with provided parameters.
+
+        Examples
+        --------
+        >>> overlap_pairs = prime.OverlapPairs(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["zoneId0"] if "zoneId0" in json_data else None,
+                json_data["zoneId1"] if "zoneId1" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [zone_id0, zone_id1])
+            if all_field_specified:
+                self.__initialize(
+                    zone_id0,
+                    zone_id1)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "OverlapPairs")
+                    json_data = param_json["OverlapPairs"] if "OverlapPairs" in param_json else {}
+                    self.__initialize(
+                        zone_id0 if zone_id0 is not None else ( OverlapPairs._default_params["zone_id0"] if "zone_id0" in OverlapPairs._default_params else (json_data["zoneId0"] if "zoneId0" in json_data else None)),
+                        zone_id1 if zone_id1 is not None else ( OverlapPairs._default_params["zone_id1"] if "zone_id1" in OverlapPairs._default_params else (json_data["zoneId1"] if "zoneId1" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            zone_id0: int = None,
+            zone_id1: int = None):
+        """Set the default values of OverlapPairs.
+
+        Parameters
+        ----------
+        zone_id0: int, optional
+            Id of one overlapping face zonelet.
+        zone_id1: int, optional
+            Id of other overlapping face zonelet.
+        """
+        args = locals()
+        [OverlapPairs._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of OverlapPairs.
+
+        Examples
+        --------
+        >>> OverlapPairs.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in OverlapPairs._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._zone_id0 is not None:
+            json_data["zoneId0"] = self._zone_id0
+        if self._zone_id1 is not None:
+            json_data["zoneId1"] = self._zone_id1
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "zone_id0 :  %s\nzone_id1 :  %s" % (self._zone_id0, self._zone_id1)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def zone_id0(self) -> int:
+        """Id of one overlapping face zonelet.
+        """
+        return self._zone_id0
+
+    @zone_id0.setter
+    def zone_id0(self, value: int):
+        self._zone_id0 = value
+
+    @property
+    def zone_id1(self) -> int:
+        """Id of other overlapping face zonelet.
+        """
+        return self._zone_id1
+
+    @zone_id1.setter
+    def zone_id1(self, value: int):
+        self._zone_id1 = value
+
+class OverlapSearchResults(CoreObject):
+    """Provides ids of a pair of overlapping face zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            n_pairs: int,
+            overlap_pairs: List[OverlapPairs],
+            error_code: ErrorCode):
+        self._n_pairs = n_pairs
+        self._overlap_pairs = overlap_pairs
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            n_pairs: int = None,
+            overlap_pairs: List[OverlapPairs] = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the OverlapSearchResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a OverlapSearchResults object with default parameters.
+        n_pairs: int, optional
+            Number of pairs.
+        overlap_pairs: List[OverlapPairs], optional
+            Ids corresponding to pairs of overlapping face zonelets.
+        error_code: ErrorCode, optional
+            Error Code associated with failure of operation.
+        json_data: dict, optional
+            JSON dictionary to create a OverlapSearchResults object with provided parameters.
+
+        Examples
+        --------
+        >>> overlap_search_results = prime.OverlapSearchResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["nPairs"] if "nPairs" in json_data else None,
+                [OverlapPairs(model = model, json_data = data) for data in json_data["overlapPairs"]] if "overlapPairs" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [n_pairs, overlap_pairs, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    n_pairs,
+                    overlap_pairs,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "OverlapSearchResults")
+                    json_data = param_json["OverlapSearchResults"] if "OverlapSearchResults" in param_json else {}
+                    self.__initialize(
+                        n_pairs if n_pairs is not None else ( OverlapSearchResults._default_params["n_pairs"] if "n_pairs" in OverlapSearchResults._default_params else (json_data["nPairs"] if "nPairs" in json_data else None)),
+                        overlap_pairs if overlap_pairs is not None else ( OverlapSearchResults._default_params["overlap_pairs"] if "overlap_pairs" in OverlapSearchResults._default_params else [OverlapPairs(model = model, json_data = data) for data in (json_data["overlapPairs"] if "overlapPairs" in json_data else None)]),
+                        error_code if error_code is not None else ( OverlapSearchResults._default_params["error_code"] if "error_code" in OverlapSearchResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            n_pairs: int = None,
+            overlap_pairs: List[OverlapPairs] = None,
+            error_code: ErrorCode = None):
+        """Set the default values of OverlapSearchResults.
+
+        Parameters
+        ----------
+        n_pairs: int, optional
+            Number of pairs.
+        overlap_pairs: List[OverlapPairs], optional
+            Ids corresponding to pairs of overlapping face zonelets.
+        error_code: ErrorCode, optional
+            Error Code associated with failure of operation.
+        """
+        args = locals()
+        [OverlapSearchResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of OverlapSearchResults.
+
+        Examples
+        --------
+        >>> OverlapSearchResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in OverlapSearchResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._n_pairs is not None:
+            json_data["nPairs"] = self._n_pairs
+        if self._overlap_pairs is not None:
+            json_data["overlapPairs"] = [data._jsonify() for data in self._overlap_pairs]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "n_pairs :  %s\noverlap_pairs :  %s\nerror_code :  %s" % (self._n_pairs, '[' + ''.join('\n' + str(data) for data in self._overlap_pairs) + ']', self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def n_pairs(self) -> int:
+        """Number of pairs.
+        """
+        return self._n_pairs
+
+    @n_pairs.setter
+    def n_pairs(self, value: int):
+        self._n_pairs = value
+
+    @property
+    def overlap_pairs(self) -> List[OverlapPairs]:
+        """Ids corresponding to pairs of overlapping face zonelets.
+        """
+        return self._overlap_pairs
+
+    @overlap_pairs.setter
+    def overlap_pairs(self, value: List[OverlapPairs]):
+        self._overlap_pairs = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error Code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
 class ConnectResults(CoreObject):
     """Results associated with the connection operations.
     """
