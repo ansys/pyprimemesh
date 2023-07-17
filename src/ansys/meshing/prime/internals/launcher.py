@@ -226,7 +226,7 @@ def launch_prime(
     if ip == defaults.ip():
         port = utils.get_available_local_port(port)
 
-    if 'PYPRIMEMESH_LAUNCH_CONTAINER' in os.environ:
+    if bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0'))):
         container_name = 'ansys-prime-server'
         utils.launch_prime_github_container(port=port, name=container_name, version=version)
         config.set_using_container(True)
