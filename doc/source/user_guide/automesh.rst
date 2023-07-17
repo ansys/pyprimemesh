@@ -184,3 +184,61 @@ This example shows how to perform these steps:
    )
    prime.AutoMesh(model).mesh(part_id=part.id, automesh_params=automesh_params)
 
+
+=========================
+Thin volume mesh controls
+=========================
+
+The :class:`ThinVolumeControl <ansys.meshing.prime.ThinVolumeControl>` class creates prisms from a source face mesh projecting to a target with the specified number of layers. 
+
+.. note::
+    Thin volume controls can only be applied on the meshed surfaces.
+
+Some guidelines for the thin volume mesh controls: 
+
+ - Source and target face zonelets should not be the same. 
+ - The number of prism layers to be created between source and target must be greater than zero. 
+ - A source face zonelet cannot be a target face zonelet in a subsequent control. 
+ - A source can only belong to two thin volume controls. 
+ - Always choose the one with most features as the source. 
+ - Target face zonelets cannot be adjacent to regions with cells whereas source face zonelets can. 
+ - Sides of the new thin volume control cannot be adjacent to regions with existing cells. 
+ - Sides of one thin volume control can only be a source to another thin volume control. 
+
+The below example shows how to: 
+
+* Create a thin volume control and set source and target. 
+* Set the thin volume mesh parameters and perform volume meshing.
+
+.. code-block:: python
+
+    part = model.get_part_by_name("pipe")
+    thin_vol_ctrls_ids = []
+    thin_vol_ctrl = model.control_data.create_thin_volume_control()
+    thin_vol_ctrl.set_source_scope(
+        prime.ScopeDefinition(model, label_expression="thin_src")
+    )
+    thin_vol_ctrl.set_target_scope(
+        prime.ScopeDefinition(model, label_expression="thin_trg")
+    )
+    thin_vol_ctrl.set_thin_volume_mesh_params(
+        prime.ThinVolumeMeshParams(
+            model=model,
+            n_layers=3,
+        )
+    )
+    thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
+
+    # Volume mesh
+    auto_mesh_params = prime.AutoMeshParams(
+        model=model,
+        thin_volume_control_ids=thin_vol_ctrls_ids,
+    )
+    prime.AutoMesh(model).mesh(part.id, auto_mesh_params)
+
+Layers of thin volume mesh created between the source and target surfaces.
+
+.. figure:: ../images/thinvol_withoutimprints.png
+  :width: 800pt
+  :align: center
+

@@ -91,6 +91,9 @@ def get_examples():
     bracket = prime.examples.download_bracket_fmd()
     examples_dict["bracket"] = bracket
 
+    mixing_elbow_windows = prime.examples.download_elbow_scdoc()
+    examples_dict["elbow_lucid_scdoc"] = mixing_elbow_windows
+
     return examples_dict
 
 

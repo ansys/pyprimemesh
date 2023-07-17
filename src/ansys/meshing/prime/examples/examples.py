@@ -32,6 +32,10 @@ __all__ = [
     "download_saddle_bracket_fmd",
     "download_saddle_bracket_scdoc",
     "download_saddle_bracket_dsco",
+    "download_f1_rw_drs_stl",
+    "download_f1_rw_enclosure_stl",
+    "download_f1_rw_end_plates_stl",
+    "download_f1_rw_main_plane_stl",
 ]
 
 
@@ -62,6 +66,10 @@ class Examples(Enum):
     SADDLE_BRACKET_FMD = {"filename": "saddle_bracket.fmd", "git_folder": "saddle_bracket"}
     SADDLE_BRACKET_SCDOC = {"filename": "saddle_bracket.scdoc", "git_folder": "saddle_bracket"}
     SADDLE_BRACKET_DSCO = {"filename": "saddle_bracket.dsco", "git_folder": "saddle_bracket"}
+    F1_RW_DRS_STL = {"filename": "f1_rw_drs.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_END_PLATES_STL = {"filename": "f1_rw_enclosure.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_ENCLOSURE_STL = {"filename": "f1_rw_end_plates.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_MAIN_PLANE_STL = {"filename": "f1_rw_main_plane.stl", "git_folder": "f1_rear_wing"}
 
 
 _DOWNLOADS = []
@@ -77,13 +85,13 @@ def get_file(
     Parameters
     ----------
     example : Examples
-        Name of the example file to download.
+        Name of the example file to be downloaded.
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -119,11 +127,11 @@ def download_elbow_pmdat(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -155,11 +163,11 @@ def download_elbow_fmd(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -192,11 +200,11 @@ def download_elbow_scdoc(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -228,11 +236,11 @@ def download_elbow_dsco(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -264,11 +272,11 @@ def download_bracket_fmd(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -300,11 +308,11 @@ def download_bracket_scdoc(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -336,11 +344,11 @@ def download_bracket_dsco(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -372,11 +380,11 @@ def download_toy_car_pmdat(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -408,11 +416,11 @@ def download_toy_car_fmd(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -444,11 +452,11 @@ def download_toy_car_scdoc(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -480,11 +488,11 @@ def download_toy_car_dsco(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -516,11 +524,11 @@ def download_pipe_tee_pmdat(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -552,11 +560,11 @@ def download_pipe_tee_fmd(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to  download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -588,11 +596,11 @@ def download_pipe_tee_scdoc(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -624,11 +632,11 @@ def download_pipe_tee_dsco(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -660,11 +668,11 @@ def download_deformed_blade_fmd(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -696,11 +704,11 @@ def download_deformed_blade_scdoc(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -732,11 +740,11 @@ def download_deformed_blade_dsco(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -766,11 +774,11 @@ def download_turbine_blade_cdb(
     """Download the CDB file for the turbine blade example.
 
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -805,11 +813,11 @@ def download_pcb_pmdat(
     Parameters
     ----------
     destination : str, optional
-        Path to download the example file to. The default
+        Path to which you download the example file. The default
         is ``None``, in which case the default path for app data
         is used.
     force : bool, optional
-        Whether to always download the example file. The default is
+        Option to download the example file. The default is
         ``False``, in which case if the example file is cached, it
         is reused.
 
@@ -836,21 +844,22 @@ def download_pcb_pmdat(
 def download_pcb_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the pcb example
+    """Download SCDOC file for the pcb example.
 
     Parameters
     ----------
     destination: Optional[str]
         Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
+        If nothing is provided, the default path in app data is used.
     force: bool
+        Option to download the file.
         If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+        If false, an existing file in the cache may be reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded file.
 
     Examples
     --------
@@ -876,15 +885,16 @@ def download_saddle_bracket_fmd(
     ----------
     destination: Optional[str]
         Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
+        If nothing is provided, the default path in app data is used.
     force: bool
+        Option to download the file.
         If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+        If false, an existing file in the cache may be reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded file.
 
     Examples
     --------
@@ -905,21 +915,22 @@ def download_saddle_bracket_fmd(
 def download_saddle_bracket_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the saddle bracket example
+    """Download SCDOC file for the saddle bracket example.
 
     Parameters
     ----------
     destination: Optional[str]
         Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
+        If nothing is provided, the default path in app data is used.
     force: bool
+        Option to download the file.
         If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+        If false, an existing file in the cache may be reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded file.
 
     Examples
     --------
@@ -939,21 +950,22 @@ def download_saddle_bracket_scdoc(
 def download_saddle_bracket_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the saddle bracket example
+    """Download DSCO file for the saddle bracket example.
 
     Parameters
     ----------
     destination: Optional[str]
         Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used
+        If nothing is provided, the default path in app data is used.
     force: bool
+        Option to download the file.
         If true, the file is always downloaded.
-        If false, an existing file in the cache may be re-used.
+        If false, an existing file in the cache may be reused.
 
     Returns
     -------
     str
-        Local path to the downloaded file
+        Local path to the downloaded file.
 
     Examples
     --------
@@ -968,3 +980,143 @@ def download_saddle_bracket_dsco(
 
     """
     return get_file(Examples.SADDLE_BRACKET_DSCO, destination, force)
+
+
+def download_f1_rw_drs_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_drs = prime_examples.download_f1_rw_drs_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_DRS_STL, destination, force)
+
+
+def download_f1_rw_enclosure_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_enclosure = prime_examples.download_f1_rw_enclosure_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_ENCLOSURE_STL, destination, force)
+
+
+def download_f1_rw_end_plates_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_end_plates = prime_examples.download_f1_rw_end_plates_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_END_PLATES_STL, destination, force)
+
+
+def download_f1_rw_main_plane_stl(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download STL file for the generic f1 rear wing example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     f1_rw_main_plane = prime_examples.download_f1_rw_main_plane_stl()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.F1_RW_MAIN_PLANE_STL, destination, force)

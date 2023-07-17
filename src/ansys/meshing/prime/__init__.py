@@ -76,6 +76,7 @@ from ansys.meshing.prime.internals.config import (
     disable_optimizing_numpy_arrays,
     numpy_array_optimization_enabled,
     numpy_array_optimization_disabled,
+    enable_log_output,
 )
 
 import ansys.meshing.prime.examples as examples

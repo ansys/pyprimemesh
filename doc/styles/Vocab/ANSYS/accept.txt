@@ -41,6 +41,7 @@ stacker
 stackable
 Sweeper
 sweeper
+tet
 tetrahedra
 Topo
 topo
