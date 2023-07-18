@@ -1,6 +1,7 @@
 '''PyPrimeMesh Client library
 '''
 # isort: skip_file
+from ansys.meshing.prime._version import __version__
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.core.fileio import FileIO
@@ -83,17 +84,6 @@ from ansys.meshing.prime.internals.config import (
 import ansys.meshing.prime.examples as examples
 import ansys.meshing.prime.lucid as lucid
 
-# Version
-# ------------------------------------------------------------------------------
-
-try:
-    import importlib.metadata as importlib_metadata
-except ModuleNotFoundError:  # pragma: no cover
-    import importlib_metadata  # type: ignore
-
-__version__ = importlib_metadata.version(__name__.replace(".", "-"))
-
-# ------------------------------------------------------------------------------
 
 __LOCAL_CLIENT = None
 
