@@ -210,6 +210,7 @@ class Mesh:
             faces_of_label = {}
             labels_of_face = {}
             label_zone_definitions = {}
+            lists_of_labels = []
             face_zones = []
             all_topo = []
             for part in self._model.parts:
@@ -240,11 +241,13 @@ class Mesh:
                     [labels_of_face[face].append(label) for face in faces]
             for face in labels_of_face:
                 name_exists = False
-                for zone_name in label_zone_definitions:
-                    if set(zone_name) == set(labels_of_face[face]):
+                for label_list in lists_of_labels:
+                    zone_name = '_'.join(labels_of_face[face])
+                    if set(label_list) == set(labels_of_face[face]):
                         name_exists = True
                         label_zone_definitions[zone_name].append(face)
                 if not name_exists:
+                    lists_of_labels.append(labels_of_face[face])
                     label_zone_definitions['_'.join(labels_of_face[face])] = [face]
             # remove empty labels
             if "" in label_zone_definitions:
