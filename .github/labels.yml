@@ -31,21 +31,25 @@
   color: 5802B8
 
 - name: graphics
-  description: Graphics issue.
+  description: Anything related to graphics
   color: 5903A8
 
+- name: lucid
+  description: Anything related to lucid
+  color: 062f67
+
 - name: limitation
-  description: Current limitation.
+  description: Current limitation
   color: 7983A8
 
 - name: triage
-  description: Need some assessment.
+  description: Need some assessment
   color: f78a50
 
 - name: top priority
-  description: Must be fixed promptly.
+  description: Must be fixed promptly
   color: ab8a50
 
 - name: aps
-  description: aps.
+  description: Anything related to Ansys Prime Server
   color: db8af7
