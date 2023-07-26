@@ -137,7 +137,6 @@ jobs:
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          requires-xvfb: true
       
       - name: Upload PyVista generated images (cache and results)
         if: always()
