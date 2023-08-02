@@ -9,15 +9,13 @@ updates:
     labels:
       - "maintenance"
       - "dependencies"
-    ignore:
-      - dependency-name: "vtk"
-      - dependency-name: "grpcio"
     groups:
       general-dependencies:
         patterns:
           - "*"
         exclude-patterns:
-          - "sphinx*"
+          - "*sphinx*"
+          - "numpydoc"
           - "pyvista*"
           - "pytest*"
       test-dependencies:
@@ -25,7 +23,8 @@ updates:
           -"pytest*"
       doc-dependencies:
         patterns:
-          -"sphinx*"
+          - "*sphinx*"
+          - "numpydoc"
       pyvista:
         patterns:
           -"pyvista*"
