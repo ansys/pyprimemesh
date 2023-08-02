@@ -22,13 +22,13 @@ updates:
           - "pytest*"
       test-dependencies:
         patterns:
-          -"pytest*"
+          - "pytest*"
       doc-dependencies:
         patterns:
-          -"sphinx*"
+          - "sphinx*"
       pyvista:
         patterns:
-          -"pyvista*"
+          - "pyvista*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
