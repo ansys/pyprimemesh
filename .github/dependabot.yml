@@ -12,7 +12,23 @@ updates:
     ignore:
       - dependency-name: "vtk"
       - dependency-name: "grpcio"
-
+    groups:
+      general-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "sphinx*"
+          - "pyvista*"
+          - "pytest*"
+      test-dependencies:
+        patterns:
+          -"pytest*"
+      doc-dependencies:
+        patterns:
+          -"sphinx*"
+      pyvista:
+        patterns:
+          -"pyvista*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
