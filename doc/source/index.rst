@@ -57,6 +57,7 @@ and execute, has some distinct features:
 
 Quick code
 ----------
+
 Here is a brief example of how you use PyPrimeMesh:
 
 To launch PyPrimeMesh, you use this code:
@@ -83,6 +84,7 @@ To read a mesh file, you use this code:
 
 Documentation and issues
 ------------------------
+
 Documentation for the latest stable release of PyPrimeMesh is hosted at `PyPrimeMesh documentation
 <https://prime.docs.pyansys.com/version/stable/>`_.
 
