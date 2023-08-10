@@ -10,19 +10,28 @@
 PyPrimeMesh is a Python client to Ansys Prime Server, which
 delivers core Ansys meshing technology.
 
-## Documentation and Issues
+## Documentation and issues
 
-For information on PyPrimeMesh, refer to the [documentation](
-https://prime.docs.pyansys.com) for the latest stable version.
+Documentation for the latest stable release of PyPrimeMesh is hosted at
+[PyPrimeMesh documentation](https://prime.docs.pyansys.com/version/stable/).
 
-For queries related to PyPrimeMesh, post on the [PyPrimeMesh Discussions](
-https://github.com/ansys/pyprimemesh/discussions) page. 
+In the upper right corner of the documentation's title bar, there is an option
+for switching from viewing the documentation for the latest stable release
+to viewing the documentation for the development version or previously
+released versions.
 
-For bugs or enhancement requests, post an issue on the [PyPrimeMesh Issues](
-https://github.com/ansys/pyprimemesh/issues) page. 
+You can also [view](https://cheatsheets.docs.pyansys.com/pyprimemesh_cheat_sheet.png) or
+[download](https://cheatsheets.docs.pyansys.com/pyprimemesh_cheat_sheet.pdf) the
+PyPrimeMesh cheat sheet. This one-page reference provides syntax rules and commands
+for using PyPrimeMesh.
 
-For assistance, reach out to the support team at
-[pyansys.core@ansys.com](mailto:pyansys.core@ansys.com).
+On the [PyPrimeMesh Issues](https://github.com/ansys/pyprimemesh/issues) page,
+you can create issues to report bugs and request new features. On the
+[PyPrimeMesh Discussions](https://github.com/ansys/pyprimemesh/discussions) page or the
+[Discussions](https://discuss.ansys.com/) page on the Ansys Developer portal,
+you can post questions, share ideas, and get community feedback. 
+
+To reach the project support team, email [pyansys.core@ansys.com](mailtto:pyansys.core@ansys.com).
 
 ## Installation
 
@@ -59,9 +68,9 @@ You must have Ansys 2023 R1 or later installed for access to Ansys Prime Server.
 Optionally, CAD readers can be configured. Ansys Prime Server requires
 an Ansys Mechanical PrepPost or Fluids PrepPost (CFD) license to run.
 
-## Get Started
+## Get started
 
-### Launching PyPrimeMesh
+### Launch PyPrimeMesh
 
 To launch PyPrimeMesh, use this code:
 
@@ -72,7 +81,7 @@ with prime.launch_prime() as prime_client:
     model = prime_client.model
 ```
 
-## License and Acknowledgments
+## License and aknowledgments
 
 PyPrimeMesh is licensed under the MIT license.
 
