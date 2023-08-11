@@ -9,10 +9,25 @@ updates:
     labels:
       - "maintenance"
       - "dependencies"
-    ignore:
-      - dependency-name: "vtk"
-      - dependency-name: "grpcio"
-
+    groups:
+      general-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "*sphinx*"
+          - "numpydoc"
+          - "pyvista*"
+          - "pytest*"
+      test-dependencies:
+        patterns:
+          - "pytest*"
+      doc-dependencies:
+        patterns:
+          - "*sphinx*"
+          - "numpydoc"
+      pyvista:
+        patterns:
+          - "pyvista*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
