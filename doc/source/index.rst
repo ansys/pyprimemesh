@@ -57,6 +57,7 @@ and execute, has some distinct features:
 
 Quick code
 ----------
+
 Here is a brief example of how you use PyPrimeMesh:
 
 To launch PyPrimeMesh, you use this code:
@@ -80,3 +81,25 @@ To read a mesh file, you use this code:
 
        io = prime.FileIO(model)
        _ = io.read_pmdat(r"E:\Temp\box.pmdat", prime.FileReadParams(model=model))
+
+Documentation and issues
+------------------------
+
+Documentation for the latest stable release of PyPrimeMesh is hosted at `PyPrimeMesh documentation
+<https://prime.docs.pyansys.com/version/stable/>`_.
+
+In the upper right corner of the documentation's title bar, there is an option for switching from
+viewing the documentation for the latest stable release to viewing the documentation for the
+development version or previously released versions.
+
+You can also `view <https://cheatsheets.docs.pyansys.com/pyprimemesh_cheat_sheet.png>`_ or
+`download <https://cheatsheets.docs.pyansys.com/pyprimemesh_cheat_sheet.pdf>`_ the
+PyPrimeMesh cheat sheet. This one-page reference provides syntax rules and commands
+for using PyPrimeMesh. 
+
+On the `PyPrimeMesh Issues <https://github.com/ansys/pyprimemesh/issues>`_ page,
+you can create issues to report bugs and request new features. On the `PyPrimeMesh Discussions
+<https://github.com/ansys/pyprimemesh/discussions>`_ page or the `Discussions <https://discuss.ansys.com/>`_
+page on the Ansys Developer portal, you can post questions, share ideas, and get community feedback. 
+
+To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
