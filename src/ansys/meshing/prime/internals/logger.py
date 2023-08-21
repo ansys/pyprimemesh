@@ -29,10 +29,10 @@ class PrimeLogger(object, metaclass=SingletonType):
 
     _logger = None
 
-    def __init__(self, logger_name: str = "PyPrimeMesh"):
+    def __init__(self, level: int = logging.ERROR, logger_name: str = "PyPrimeMesh"):
         """Logger initializer."""
         self._logger = logging.getLogger(logger_name)
-        self._logger.setLevel(logging.DEBUG)
+        self._logger.setLevel(level)
         self._formatter = logging.Formatter(
             '%(asctime)s \t [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s'
         )
@@ -46,6 +46,16 @@ class PrimeLogger(object, metaclass=SingletonType):
             Logger.
         """
         return self._logger
+
+    def set_level(self, level: int):
+        """Set logger output level.
+
+        Parameters
+        ----------
+        level : int
+            Level of the logger.
+        """
+        self._logger.setLevel(level=level)
 
     def enable_output(self, stream=None):
         """Enable logger output to given stream.
@@ -76,6 +86,3 @@ class PrimeLogger(object, metaclass=SingletonType):
         file_handler = logging.FileHandler(logs_dir + "/log_" + now.strftime("%Y-%m-%d") + ".log")
         file_handler.setFormatter(self._formatter)
         self._logger.addHandler(file_handler)
-
-
-LOG = PrimeLogger().get_logger()
