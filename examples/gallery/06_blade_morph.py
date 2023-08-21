@@ -70,7 +70,7 @@ print(model)
 # Define source and target faces
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-source_part = model.get_part_by_name("blade")
+source_part = model.get_part(3)
 target_part = model.get_part_by_name("blade_deformed")
 source = source_part.get_face_zonelets()
 target = target_part.get_topo_faces()
