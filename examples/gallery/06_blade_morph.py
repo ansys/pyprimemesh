@@ -59,8 +59,9 @@ mesh_util = prime.lucid.Mesh(model=model)
 
 source_mesh = prime.examples.download_turbine_blade_cdb()
 target_geometry = prime.examples.download_deformed_blade_fmd()
-mesh_util.read(file_name=target_geometry)
-mesh_util.read(file_name=source_mesh, append=True)
+mesh_util.read(file_name=source_mesh)
+mesh_util.read(file_name=target_geometry, append=True)
+
 
 display = Graphics(model)
 display()
@@ -70,8 +71,8 @@ print(model)
 # Define source and target faces
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-source_part = model.get_part(3)
-target_part = model.get_part_by_name("blade_deformed")
+source_part = model.get_part(2)
+target_part = model.get_part(3)
 source = source_part.get_face_zonelets()
 target = target_part.get_topo_faces()
 
