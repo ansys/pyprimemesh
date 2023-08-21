@@ -19,7 +19,7 @@ from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
-from ansys.meshing.prime.internals.logger import LOG
+from ansys.meshing.prime.internals.logger import PrimeLogger
 
 
 class Model(_Model):
@@ -369,4 +369,4 @@ class Model(_Model):
         >>> model.python_logger.setLevel(logging.DEBUG)
 
         """
-        return LOG
+        return PrimeLogger().get_logger()
