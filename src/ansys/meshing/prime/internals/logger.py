@@ -31,8 +31,8 @@ class PrimeLogger(object, metaclass=SingletonType):
 
     def __init__(self, level: int = logging.ERROR, logger_name: str = "PyPrimeMesh"):
         """Logger initializer."""
-        self._logger = logging.getLogger(level)
-        self._logger.setLevel(logging.DEBUG)
+        self._logger = logging.getLogger(logger_name)
+        self._logger.setLevel(level)
         self._formatter = logging.Formatter(
             '%(asctime)s \t [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s'
         )
