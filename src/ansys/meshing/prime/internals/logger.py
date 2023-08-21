@@ -86,6 +86,3 @@ class PrimeLogger(object, metaclass=SingletonType):
         file_handler = logging.FileHandler(logs_dir + "/log_" + now.strftime("%Y-%m-%d") + ".log")
         file_handler.setFormatter(self._formatter)
         self._logger.addHandler(file_handler)
-
-
-LOG = PrimeLogger().get_logger()
