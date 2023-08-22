@@ -484,7 +484,7 @@ class Graphics(object):
         else:
             self.show(update)
 
-    def __color_by_type_callback(self):  # pragma: no cover
+    def __color_by_type_callback(self, button_value: bool):  # pragma: no cover
         """Determine the color of a type in the callback."""
         vr = self._colorByTypeBt.GetRepresentation()
         state = vr.GetState()
@@ -510,7 +510,7 @@ class Graphics(object):
             for disp_mesh in data["faces"]
         ]
 
-    def __hide_unhide_selection(self):  # pragma: no cover
+    def __hide_unhide_selection(self, button_value: bool):  # pragma: no cover
         """Hide or unhide the clicked component."""
         sel_disp_mesh = self._picker.selections
         if len(sel_disp_mesh) > 0:
@@ -601,7 +601,6 @@ class Graphics(object):
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
-                value=int(self._color_by_type) is ColorByType.ZONELET,
                 position=(10, 700),
                 size=30,
                 border_size=3,
@@ -683,7 +682,6 @@ class Graphics(object):
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
-                value=self._color_by_type is ColorByType.ZONELET,
                 position=(10, 700),
                 size=30,
                 border_size=3,
@@ -751,7 +749,6 @@ class Graphics(object):
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
-                value=self._color_by_type is ColorByType.ZONELET,
                 position=(10, 700),
                 size=30,
                 border_size=3,
