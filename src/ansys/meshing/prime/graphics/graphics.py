@@ -598,7 +598,6 @@ class Graphics(object):
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
-        pv.MultiBlock(polydata).plot()
         self._plotter.add_mesh(pv.MultiBlock(polydata))
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
