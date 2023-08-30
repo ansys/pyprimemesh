@@ -592,12 +592,14 @@ class Graphics(object):
             pv.OFF_SCREEN = True
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
-        [
-            disp_mesh.add_to_plotter(self._plotter)
+        polydata = [
+            disp_mesh.poly_data
             for part_id, data in self._display_data.items()
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
+        pv.MultiBlock(polydata).plot()
+        self._plotter.add_mesh(pv.MultiBlock(polydata))
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
@@ -624,6 +626,8 @@ class Graphics(object):
         self._plotter.track_click_position(self._picker, side='left')
         if self._sphinx_build == False:
             self.__update_bt_icons()
+
+        self._plotter.enable_mesh_picking(callback=self.picker_callback, use_actor=True, show=False)
         self._show_selector()
         if self._use_trame:  # pragma: no cover
             pv.OFF_SCREEN = pv_off_screen_original
@@ -636,6 +640,10 @@ class Graphics(object):
             visualizer.show()
         else:
             self._plotter.show()
+
+    def picker_callback(self, actor: "pv.Actor"):
+        """Call for the picker."""
+        print("hello")
 
     def __draw_parts(self, parts: List = [], update: bool = False, spline: bool = False):
         """Draw parts in the display.
@@ -660,16 +668,16 @@ class Graphics(object):
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
         if spline:
-            [
-                disp_mesh.add_to_plotter(self._plotter)
+            polydata = [
+                disp_mesh.poly_data
                 for part_id, data in self._display_data.items()
                 if (part_id in parts)
                 for key, disp_mesh_data in data.items()
                 for disp_mesh in disp_mesh_data
             ]
         else:
-            [
-                disp_mesh.add_to_plotter(self._plotter)
+            polydata = [
+                disp_mesh.poly_data
                 for part_id, data in self._display_data.items()
                 if (part_id in parts)
                 for key, disp_mesh_data in data.items()
@@ -679,6 +687,9 @@ class Graphics(object):
                     or disp_mesh.type != DisplayMeshType.SPLINESURFACE
                 )
             ]
+        pv.MultiBlock(polydata).plot()
+        self._plotter.add_mesh(pv.MultiBlock(polydata))
+
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
@@ -740,11 +751,11 @@ class Graphics(object):
                 disp_data = self._display_data[part_id]["faces"]
 
             if disp_data is not None:
-                [
-                    disp_mesh.add_to_plotter(self._plotter)
-                    for disp_mesh in disp_data
-                    if (disp_mesh._id in disp_ids)
+                polydata = [
+                    disp_mesh.poly_data for disp_mesh in disp_data if (disp_mesh._id in disp_ids)
                 ]
+                pv.MultiBlock(polydata).plot()
+                self._plotter.add_mesh(pv.MultiBlock(polydata), picking=True)
 
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
@@ -901,11 +912,12 @@ class _DisplayMesh(object):  # pragma: no cover
         self._zone_id = zone_id
         self._zone_name = zone_name
         self._part_name = part_name
+        self._multiblock = pv.MultiBlock()
         # self.__update()
 
     @property
     def poly_data(self):
-        return self._poly_data
+        return pv.PolyData(self._vertices, self._facet_list)
 
     def __str__(self):
         if self._type == DisplayMeshType.TOPOFACE or self._type == DisplayMeshType.FACEZONELET:
