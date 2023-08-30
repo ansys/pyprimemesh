@@ -11,6 +11,7 @@ from pyvista.plotting.plotting import Plotter
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
 from ansys.meshing.prime.internals import defaults
+from ansys.meshing.prime.internals.logger import PrimeLogger
 
 
 # TODO: nodes parameter is unused.
@@ -237,6 +238,8 @@ class Graphics(object):
         self._showRulerBt: vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
         self._use_trame = use_trame
+        self._multiblock = pv.MultiBlock()
+        self._multiblock_actor = None
 
         if self._use_trame and not _HAS_TRAME:  # pragma: no cover
             warn_msg = (
@@ -525,12 +528,7 @@ class Graphics(object):
             ]
 
     def __show_edges_callback(self, flag):  # pragma: no cover
-        [
-            disp_mesh.show_edges(flag)
-            for part_id, data in self._display_data.items()
-            if data.get("faces") != None
-            for disp_mesh in data["faces"]
-        ]
+        self._multiblock_actor.prop.show_edges = flag
 
     def __print_callback(self, flag):  # pragma: no cover
         sel_disp_mesh = self._picker.selections
@@ -598,7 +596,8 @@ class Graphics(object):
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
-        self._plotter.add_mesh(pv.MultiBlock(polydata))
+        self._multiblock.extend(polydata)
+        self._multiblock_actor = self._plotter.add_mesh(self._multiblock)
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__color_by_type_callback,
@@ -626,6 +625,7 @@ class Graphics(object):
         if self._sphinx_build == False:
             self.__update_bt_icons()
 
+        # in case you need to use picking
         self._plotter.enable_mesh_picking(callback=self.picker_callback, use_actor=True, show=False)
         self._show_selector()
         if self._use_trame:  # pragma: no cover
@@ -642,7 +642,7 @@ class Graphics(object):
 
     def picker_callback(self, actor: "pv.Actor"):
         """Call for the picker."""
-        print("hello")
+        PrimeLogger().get_logger().info("Mesh picked.")
 
     def __draw_parts(self, parts: List = [], update: bool = False, spline: bool = False):
         """Draw parts in the display.
@@ -686,8 +686,8 @@ class Graphics(object):
                     or disp_mesh.type != DisplayMeshType.SPLINESURFACE
                 )
             ]
-        pv.MultiBlock(polydata).plot()
-        self._plotter.add_mesh(pv.MultiBlock(polydata))
+        self._multiblock.extend(polydata)
+        self._multiblock_actor = self._plotter.add_mesh(self._multiblock)
 
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
@@ -753,8 +753,8 @@ class Graphics(object):
                 polydata = [
                     disp_mesh.poly_data for disp_mesh in disp_data if (disp_mesh._id in disp_ids)
                 ]
-                pv.MultiBlock(polydata).plot()
-                self._plotter.add_mesh(pv.MultiBlock(polydata), picking=True)
+                self._multiblock.extend(polydata)
+                self._multiblock_actor = self._plotter.add_mesh(self._multiblock)
 
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
