@@ -64,7 +64,6 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_gallery.gen_gallery",
     "jupyter_sphinx",
-    "notfound.extension",
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
     "sphinx.ext.extlinks",
@@ -74,7 +73,7 @@ extensions = [
 
 # Intersphinx mapping
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/dev", None),
+    "python": ("https://docs.python.org/3", None),
     # kept here as an example
     # "scipy": ("https://docs.scipy.org/doc/scipy/reference", None),
     # "numpy": ("https://numpy.org/devdocs", None),
