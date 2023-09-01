@@ -792,12 +792,14 @@ class ExportFluentCaseParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            cff_format: bool):
+        self._cff_format = cff_format
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            cff_format: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ExportFluentCaseParams.
@@ -806,6 +808,8 @@ class ExportFluentCaseParams(CoreObject):
         ----------
         model: Model
             Model to create a ExportFluentCaseParams object with default parameters.
+        cff_format: bool, optional
+            Option to specify whether to export Fluent case file in CFF format (.cas.h5) or legacy format (.cas, .cas.gz).
         json_data: dict, optional
             JSON dictionary to create a ExportFluentCaseParams object with provided parameters.
 
@@ -814,18 +818,21 @@ class ExportFluentCaseParams(CoreObject):
         >>> export_fluent_case_params = prime.ExportFluentCaseParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["cffFormat"] if "cffFormat" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [cff_format])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    cff_format)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExportFluentCaseParams")
                     json_data = param_json["ExportFluentCaseParams"] if "ExportFluentCaseParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        cff_format if cff_format is not None else ( ExportFluentCaseParams._default_params["cff_format"] if "cff_format" in ExportFluentCaseParams._default_params else (json_data["cffFormat"] if "cffFormat" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -834,9 +841,14 @@ class ExportFluentCaseParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            cff_format: bool = None):
         """Set the default values of ExportFluentCaseParams.
 
+        Parameters
+        ----------
+        cff_format: bool, optional
+            Option to specify whether to export Fluent case file in CFF format (.cas.h5) or legacy format (.cas, .cas.gz).
         """
         args = locals()
         [ExportFluentCaseParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -855,13 +867,25 @@ class ExportFluentCaseParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._cff_format is not None:
+            json_data["cffFormat"] = self._cff_format
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "cff_format :  %s" % (self._cff_format)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def cff_format(self) -> bool:
+        """Option to specify whether to export Fluent case file in CFF format (.cas.h5) or legacy format (.cas, .cas.gz).
+        """
+        return self._cff_format
+
+    @cff_format.setter
+    def cff_format(self, value: bool):
+        self._cff_format = value
 
 class ExportFluentMeshingMeshParams(CoreObject):
     """Parameters used to export fluent meshing mesh.
@@ -1273,7 +1297,8 @@ class ImportCadParams(CoreObject):
             refacet: bool,
             cad_refaceting_params: CadRefacetingParams,
             stitch_tolerance: float,
-            cad_update_parameters: Dict[str, Union[str, int, float, bool]]):
+            cad_update_parameters: Dict[str, Union[str, int, float, bool]],
+            validate_shared_topology: bool):
         self._append = append
         self._ansys_release = ansys_release
         self._cad_reader_route = CadReaderRoute(cad_reader_route)
@@ -1284,6 +1309,7 @@ class ImportCadParams(CoreObject):
         self._cad_refaceting_params = cad_refaceting_params
         self._stitch_tolerance = stitch_tolerance
         self._cad_update_parameters = cad_update_parameters
+        self._validate_shared_topology = validate_shared_topology
 
     def __init__(
             self,
@@ -1298,6 +1324,7 @@ class ImportCadParams(CoreObject):
             cad_refaceting_params: CadRefacetingParams = None,
             stitch_tolerance: float = None,
             cad_update_parameters: Dict[str, Union[str, int, float, bool]] = None,
+            validate_shared_topology: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ImportCadParams.
@@ -1309,7 +1336,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.1', '241', 'v241', '24R1'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1326,6 +1353,8 @@ class ImportCadParams(CoreObject):
             Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
         cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
             Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+        validate_shared_topology: bool, optional
+            Specify whether to validate the shared topology information.
         json_data: dict, optional
             JSON dictionary to create a ImportCadParams object with provided parameters.
 
@@ -1344,9 +1373,10 @@ class ImportCadParams(CoreObject):
                 json_data["refacet"] if "refacet" in json_data else None,
                 CadRefacetingParams(model = model, json_data = json_data["cadRefacetingParams"] if "cadRefacetingParams" in json_data else None),
                 json_data["stitchTolerance"] if "stitchTolerance" in json_data else None,
-                json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None)
+                json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None,
+                json_data["validateSharedTopology"] if "validateSharedTopology" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [append, ansys_release, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance, cad_update_parameters])
+            all_field_specified = all(arg is not None for arg in [append, ansys_release, cad_reader_route, part_creation_type, geometry_transfer, length_unit, refacet, cad_refaceting_params, stitch_tolerance, cad_update_parameters, validate_shared_topology])
             if all_field_specified:
                 self.__initialize(
                     append,
@@ -1358,7 +1388,8 @@ class ImportCadParams(CoreObject):
                     refacet,
                     cad_refaceting_params,
                     stitch_tolerance,
-                    cad_update_parameters)
+                    cad_update_parameters,
+                    validate_shared_topology)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1375,7 +1406,8 @@ class ImportCadParams(CoreObject):
                         refacet if refacet is not None else ( ImportCadParams._default_params["refacet"] if "refacet" in ImportCadParams._default_params else (json_data["refacet"] if "refacet" in json_data else None)),
                         cad_refaceting_params if cad_refaceting_params is not None else ( ImportCadParams._default_params["cad_refaceting_params"] if "cad_refaceting_params" in ImportCadParams._default_params else CadRefacetingParams(model = model, json_data = (json_data["cadRefacetingParams"] if "cadRefacetingParams" in json_data else None))),
                         stitch_tolerance if stitch_tolerance is not None else ( ImportCadParams._default_params["stitch_tolerance"] if "stitch_tolerance" in ImportCadParams._default_params else (json_data["stitchTolerance"] if "stitchTolerance" in json_data else None)),
-                        cad_update_parameters if cad_update_parameters is not None else ( ImportCadParams._default_params["cad_update_parameters"] if "cad_update_parameters" in ImportCadParams._default_params else (json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None)))
+                        cad_update_parameters if cad_update_parameters is not None else ( ImportCadParams._default_params["cad_update_parameters"] if "cad_update_parameters" in ImportCadParams._default_params else (json_data["cadUpdateParameters"] if "cadUpdateParameters" in json_data else None)),
+                        validate_shared_topology if validate_shared_topology is not None else ( ImportCadParams._default_params["validate_shared_topology"] if "validate_shared_topology" in ImportCadParams._default_params else (json_data["validateSharedTopology"] if "validateSharedTopology" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1394,7 +1426,8 @@ class ImportCadParams(CoreObject):
             refacet: bool = None,
             cad_refaceting_params: CadRefacetingParams = None,
             stitch_tolerance: float = None,
-            cad_update_parameters: Dict[str, Union[str, int, float, bool]] = None):
+            cad_update_parameters: Dict[str, Union[str, int, float, bool]] = None,
+            validate_shared_topology: bool = None):
         """Set the default values of ImportCadParams.
 
         Parameters
@@ -1402,7 +1435,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.1', '241', 'v241', '24R1'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1419,6 +1452,8 @@ class ImportCadParams(CoreObject):
             Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
         cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
             Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+        validate_shared_topology: bool, optional
+            Specify whether to validate the shared topology information.
         """
         args = locals()
         [ImportCadParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1457,11 +1492,13 @@ class ImportCadParams(CoreObject):
             json_data["stitchTolerance"] = self._stitch_tolerance
         if self._cad_update_parameters is not None:
             json_data["cadUpdateParameters"] = self._cad_update_parameters
+        if self._validate_shared_topology is not None:
+            json_data["validateSharedTopology"] = self._validate_shared_topology
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "append :  %s\nansys_release :  %s\ncad_reader_route :  %s\npart_creation_type :  %s\ngeometry_transfer :  %s\nlength_unit :  %s\nrefacet :  %s\ncad_refaceting_params :  %s\nstitch_tolerance :  %s\ncad_update_parameters :  %s" % (self._append, self._ansys_release, self._cad_reader_route, self._part_creation_type, self._geometry_transfer, self._length_unit, self._refacet, '{ ' + str(self._cad_refaceting_params) + ' }', self._stitch_tolerance, self._cad_update_parameters)
+        message = "append :  %s\nansys_release :  %s\ncad_reader_route :  %s\npart_creation_type :  %s\ngeometry_transfer :  %s\nlength_unit :  %s\nrefacet :  %s\ncad_refaceting_params :  %s\nstitch_tolerance :  %s\ncad_update_parameters :  %s\nvalidate_shared_topology :  %s" % (self._append, self._ansys_release, self._cad_reader_route, self._part_creation_type, self._geometry_transfer, self._length_unit, self._refacet, '{ ' + str(self._cad_refaceting_params) + ' }', self._stitch_tolerance, self._cad_update_parameters, self._validate_shared_topology)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1477,7 +1514,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def ansys_release(self) -> str:
-        """Configures the Ansys release to be used for loading CAD data through non Native route.
+        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.1', '241', 'v241', '24R1'.
         """
         return self._ansys_release
 
@@ -1564,6 +1601,16 @@ class ImportCadParams(CoreObject):
     @cad_update_parameters.setter
     def cad_update_parameters(self, value: Dict[str, Union[str, int, float, bool]]):
         self._cad_update_parameters = value
+
+    @property
+    def validate_shared_topology(self) -> bool:
+        """Specify whether to validate the shared topology information.
+        """
+        return self._validate_shared_topology
+
+    @validate_shared_topology.setter
+    def validate_shared_topology(self, value: bool):
+        self._validate_shared_topology = value
 
 class ImportCadResults(CoreObject):
     """Results associated with the CAD import.

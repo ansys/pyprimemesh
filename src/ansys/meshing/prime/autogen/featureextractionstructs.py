@@ -20,13 +20,15 @@ class ExtractFeatureParams(CoreObject):
             separate_features: bool,
             separation_angle: float,
             disconnect_with_faces: bool,
-            label_name: str):
+            label_name: str,
+            number_of_threads: int):
         self._replace = replace
         self._feature_angle = feature_angle
         self._separate_features = separate_features
         self._separation_angle = separation_angle
         self._disconnect_with_faces = disconnect_with_faces
         self._label_name = label_name
+        self._number_of_threads = number_of_threads
 
     def __init__(
             self,
@@ -37,6 +39,7 @@ class ExtractFeatureParams(CoreObject):
             separation_angle: float = None,
             disconnect_with_faces: bool = None,
             label_name: str = None,
+            number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ExtractFeatureParams.
@@ -57,6 +60,8 @@ class ExtractFeatureParams(CoreObject):
             Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
         label_name: str, optional
             Label name to be assigned to extracted features.
+        number_of_threads: int, optional
+            Number of threads used for multithreading.
         json_data: dict, optional
             JSON dictionary to create a ExtractFeatureParams object with provided parameters.
 
@@ -71,9 +76,10 @@ class ExtractFeatureParams(CoreObject):
                 json_data["separateFeatures"] if "separateFeatures" in json_data else None,
                 json_data["separationAngle"] if "separationAngle" in json_data else None,
                 json_data["disconnectWithFaces"] if "disconnectWithFaces" in json_data else None,
-                json_data["labelName"] if "labelName" in json_data else None)
+                json_data["labelName"] if "labelName" in json_data else None,
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [replace, feature_angle, separate_features, separation_angle, disconnect_with_faces, label_name])
+            all_field_specified = all(arg is not None for arg in [replace, feature_angle, separate_features, separation_angle, disconnect_with_faces, label_name, number_of_threads])
             if all_field_specified:
                 self.__initialize(
                     replace,
@@ -81,7 +87,8 @@ class ExtractFeatureParams(CoreObject):
                     separate_features,
                     separation_angle,
                     disconnect_with_faces,
-                    label_name)
+                    label_name,
+                    number_of_threads)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -94,7 +101,8 @@ class ExtractFeatureParams(CoreObject):
                         separate_features if separate_features is not None else ( ExtractFeatureParams._default_params["separate_features"] if "separate_features" in ExtractFeatureParams._default_params else (json_data["separateFeatures"] if "separateFeatures" in json_data else None)),
                         separation_angle if separation_angle is not None else ( ExtractFeatureParams._default_params["separation_angle"] if "separation_angle" in ExtractFeatureParams._default_params else (json_data["separationAngle"] if "separationAngle" in json_data else None)),
                         disconnect_with_faces if disconnect_with_faces is not None else ( ExtractFeatureParams._default_params["disconnect_with_faces"] if "disconnect_with_faces" in ExtractFeatureParams._default_params else (json_data["disconnectWithFaces"] if "disconnectWithFaces" in json_data else None)),
-                        label_name if label_name is not None else ( ExtractFeatureParams._default_params["label_name"] if "label_name" in ExtractFeatureParams._default_params else (json_data["labelName"] if "labelName" in json_data else None)))
+                        label_name if label_name is not None else ( ExtractFeatureParams._default_params["label_name"] if "label_name" in ExtractFeatureParams._default_params else (json_data["labelName"] if "labelName" in json_data else None)),
+                        number_of_threads if number_of_threads is not None else ( ExtractFeatureParams._default_params["number_of_threads"] if "number_of_threads" in ExtractFeatureParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -109,7 +117,8 @@ class ExtractFeatureParams(CoreObject):
             separate_features: bool = None,
             separation_angle: float = None,
             disconnect_with_faces: bool = None,
-            label_name: str = None):
+            label_name: str = None,
+            number_of_threads: int = None):
         """Set the default values of ExtractFeatureParams.
 
         Parameters
@@ -126,6 +135,8 @@ class ExtractFeatureParams(CoreObject):
             Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
         label_name: str, optional
             Label name to be assigned to extracted features.
+        number_of_threads: int, optional
+            Number of threads used for multithreading.
         """
         args = locals()
         [ExtractFeatureParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -156,11 +167,13 @@ class ExtractFeatureParams(CoreObject):
             json_data["disconnectWithFaces"] = self._disconnect_with_faces
         if self._label_name is not None:
             json_data["labelName"] = self._label_name
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "replace :  %s\nfeature_angle :  %s\nseparate_features :  %s\nseparation_angle :  %s\ndisconnect_with_faces :  %s\nlabel_name :  %s" % (self._replace, self._feature_angle, self._separate_features, self._separation_angle, self._disconnect_with_faces, self._label_name)
+        message = "replace :  %s\nfeature_angle :  %s\nseparate_features :  %s\nseparation_angle :  %s\ndisconnect_with_faces :  %s\nlabel_name :  %s\nnumber_of_threads :  %s" % (self._replace, self._feature_angle, self._separate_features, self._separation_angle, self._disconnect_with_faces, self._label_name, self._number_of_threads)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -223,6 +236,16 @@ class ExtractFeatureParams(CoreObject):
     @label_name.setter
     def label_name(self, value: str):
         self._label_name = value
+
+    @property
+    def number_of_threads(self) -> int:
+        """Number of threads used for multithreading.
+        """
+        return self._number_of_threads
+
+    @number_of_threads.setter
+    def number_of_threads(self, value: int):
+        self._number_of_threads = value
 
 class ExtractFeatureResults(CoreObject):
     """Result of edge zonelet extraction by angle.
