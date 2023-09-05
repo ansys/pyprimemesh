@@ -29,6 +29,7 @@ from ansys.meshing.prime.autogen.surfacesearchstructs import *
 from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.surferstructs import *
 from ansys.meshing.prime.autogen.thinvolumecontrolstructs import *
+from ansys.meshing.prime.autogen.topodatastructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
 from ansys.meshing.prime.autogen.transformstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *

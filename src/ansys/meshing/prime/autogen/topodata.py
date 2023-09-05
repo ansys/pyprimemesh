@@ -222,6 +222,41 @@ class TopoData(CoreObject):
         self._model._print_logs_after_command("get_adjacent_topo_edges_of_topo_edges")
         return result
 
+    def delete_mesh_on_topo_faces(self, topo_faces : Iterable[int], params : DeleteMeshParams) -> DeleteMeshResults:
+        """ Delete mesh on the provided topofaces.
+
+
+        Parameters
+        ----------
+        topo_faces : Iterable[int]
+            Ids of topofaces.
+        params : DeleteMeshParams
+            Parameters to delete mesh on topofaces.
+
+        Returns
+        -------
+        DeleteMeshResults
+            Returns the DeleteMeshResults.
+
+
+        Examples
+        --------
+        >>> params = prime.DeleteMeshParams(model = model)
+        >>> result = topo_data.delete_mesh_on_topo_faces(top_faces, params)
+
+        """
+        if not isinstance(topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+        if not isinstance(params, DeleteMeshParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteMeshParams.")
+        args = {"topo_faces" : topo_faces,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::TopoData/DeleteMeshOnTopoFaces"
+        self._model._print_logs_before_command("delete_mesh_on_topo_faces", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("delete_mesh_on_topo_faces", DeleteMeshResults(model = self._model, json_data = result))
+        return DeleteMeshResults(model = self._model, json_data = result)
+
     @property
     def id(self):
         """ Get the id of TopoData."""

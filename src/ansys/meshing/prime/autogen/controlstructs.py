@@ -1263,3 +1263,127 @@ class SetScopeResults(CoreObject):
     @warning_code.setter
     def warning_code(self, value: WarningCode):
         self._warning_code = value
+
+class SetParamsResults(CoreObject):
+    """Results associated with the set parameters operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            warning_code: WarningCode):
+        self._error_code = ErrorCode(error_code)
+        self._warning_code = WarningCode(warning_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            warning_code: WarningCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SetParamsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SetParamsResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with the set parameters operation.
+        warning_code: WarningCode, optional
+            Warning code associated with the set parameters operation.
+        json_data: dict, optional
+            JSON dictionary to create a SetParamsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> set_params_results = prime.SetParamsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                WarningCode(json_data["warningCode"] if "warningCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, warning_code])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    warning_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SetParamsResults")
+                    json_data = param_json["SetParamsResults"] if "SetParamsResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( SetParamsResults._default_params["error_code"] if "error_code" in SetParamsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_code if warning_code is not None else ( SetParamsResults._default_params["warning_code"] if "warning_code" in SetParamsResults._default_params else WarningCode(json_data["warningCode"] if "warningCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            warning_code: WarningCode = None):
+        """Set the default values of SetParamsResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with the set parameters operation.
+        warning_code: WarningCode, optional
+            Warning code associated with the set parameters operation.
+        """
+        args = locals()
+        [SetParamsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SetParamsResults.
+
+        Examples
+        --------
+        >>> SetParamsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SetParamsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_code is not None:
+            json_data["warningCode"] = self._warning_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\nwarning_code :  %s" % (self._error_code, self._warning_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the set parameters operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def warning_code(self) -> WarningCode:
+        """Warning code associated with the set parameters operation.
+        """
+        return self._warning_code
+
+    @warning_code.setter
+    def warning_code(self, value: WarningCode):
+        self._warning_code = value
