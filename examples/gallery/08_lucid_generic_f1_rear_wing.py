@@ -78,7 +78,7 @@ display(scope=scope)
 
 ###############################################################################
 # Merge parts
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~
 # Establish the global size parameter to regulate mesh refinement.
 # Merge all individual parts into a unified part named `f1_car_rear_wing`.
 
@@ -96,7 +96,7 @@ part = model.get_part_by_name(merge_result.merged_part_assigned_name)
 
 ###############################################################################
 # Mesh connect
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~
 # In order to generate a volume mesh for a closed domain, it is necessary to ensure
 # that the components of the rear wing are properly connected.
 # To achieve this, perform a connect operation using labels to join the components of
@@ -119,7 +119,7 @@ print(f"Total number of free edges present is {surf_report.n_free_edges}")
 
 ###############################################################################
 # Define local size-control and generate size-field
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # In order to accurately represent the physics of the DRS wing, a limitation of 8 mm
 # is imposed on the mesh size of the wing.
 # This is accomplished by implementing curvature size control, which refines the
@@ -165,7 +165,7 @@ compute_size.compute_volumetric(
 
 ###############################################################################
 # Generate surface mesh
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~
 # Create a surface mesh for the rear wing using the defined size controls.
 # To facilitate the definition of boundary conditions on the surfaces in the solver,
 # generate face zones by utilizing the existing labels found in the rear wing model.
@@ -180,14 +180,14 @@ for label in part.get_labels():
 
 ###############################################################################
 # Compute volumetric regions
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Compute the volume zones.
 
 mesh_util.compute_volumes(part_expression=part.name, create_zones_per_volume=True)
 
 ###############################################################################
 # Define volume controls
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~
 # In order to prevent the generation of a volume mesh within the solid wing,
 # the type of a volume zone within the rear wing can be defined as "dead".
 # To accomplish this, Volume Control is utilized to assign the type for the
@@ -211,7 +211,7 @@ volume_control.set_scope(
 
 ###############################################################################
 # Define prism controls
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~
 # A prism control can be used to define inflation layers on the external aero surfaces.
 # Specify the aero surfaces using labels, here prism scope is defined on zones associated
 # with labels ``*drs*`` and ``*plane*``.
@@ -247,7 +247,7 @@ prism_control.set_growth_params(
 
 ###############################################################################
 # Generate volume mesh
-# ~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~
 # Volume mesh with hexcore polyhedral elements and boundary layer refinement.
 
 volume_mesh = prime.AutoMesh(model)
