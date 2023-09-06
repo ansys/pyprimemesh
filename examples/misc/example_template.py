@@ -84,9 +84,9 @@ print(model)
 # as ReStructured Text (RST).
 #
 # .. note::
-# You only need to create the Python (PY) files for the example. The
-# ``sphinx-gallery`` extension automatically generates the Jupyter
-# notebook, the HTML files for the documentation, and the demo script.
+#   You only need to create the Python (PY) files for the example. The
+#   ``sphinx-gallery`` extension automatically generates the Jupyter
+#   notebook, the HTML files for the documentation, and the demo script.
 #
 # Sections can contain any information that you may have regarding the example,
 # such as step-by-step comments and information on motivations. In the generated
