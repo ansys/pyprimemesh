@@ -65,6 +65,7 @@ from ansys.meshing.prime.autogen.featureextraction import *
 from ansys.meshing.prime.autogen.thinvolumecontrolstructs import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.volumesweeperstructs import *
+from ansys.meshing.prime.autogen.topodatastructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
 from ansys.meshing.prime.autogen.morpherstructs import *
 from ansys.meshing.prime.autogen.morpherbcsstructs import *

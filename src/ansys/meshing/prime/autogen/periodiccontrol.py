@@ -42,7 +42,7 @@ class PeriodicControl(CoreObject):
         self._model._print_logs_after_command("get_params", PeriodicControlParams(model = self._model, json_data = result))
         return PeriodicControlParams(model = self._model, json_data = result)
 
-    def set_params(self, periodic_control_params : PeriodicControlParams):
+    def set_params(self, periodic_control_params : PeriodicControlParams) -> SetParamsResults:
         """ Set the periodic control parameters.
 
 
@@ -63,8 +63,9 @@ class PeriodicControl(CoreObject):
         args = {"periodic_control_params" : periodic_control_params._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/SetParams"
         self._model._print_logs_before_command("set_params", args)
-        self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("set_params")
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_params", SetParamsResults(model = self._model, json_data = result))
+        return SetParamsResults(model = self._model, json_data = result)
 
     def set_suggested_name(self, name : str) -> SetNameResults:
         """ Sets the unique name for the periodic control based on the suggested name.

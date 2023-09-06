@@ -430,6 +430,8 @@ class ErrorCode(enum.IntEnum):
     """Could not find a matching periodic face pair."""
     PERIODICSURFACESEDGESMISMATCH = 2912
     """Edge entities do not match on periodic source and target surfaces."""
+    PERIODICRECOVERYFORALREADYVOLUMEMESHEDPART = 2913
+    """Periodic recovery unsupported for already volume meshed part."""
     TRANSFORMATIONFAILED = 3000
     """Transformation failed."""
     SCALINGFAILED = 3001
@@ -519,7 +521,7 @@ class ErrorCode(enum.IntEnum):
     UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH = 9002
     """Provided file extension is not supported. Supported extensions are .msh and .msh.gz."""
     UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE = 9003
-    """Provided file extension is not supported. Supported extensions are .cas and .cas.gz."""
+    """Provided file extension is not supported. Supported extensions are .cas, .cas.gz and .cas.h5."""
     UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE = 9004
     """Provided file extension is not supported. Supported extensions are .k and .key."""
     UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD = 9005
@@ -582,8 +584,16 @@ class ErrorCode(enum.IntEnum):
     """Same face scope is set as source for more than two thin volume controls."""
     THINVOLUMEMESHNOTSUPPORTEDWITHFACEBASEDDATABASE = 12112
     """Thin volume mesh is not supported with face based database."""
+    INVALIDCONTROLPARAMS = 12201
+    """Invalid control parameters."""
     MICROSTRUCTUREINVALIDELEMENTTYPE = 13000
     """Invalid input provided. Invalid Element Type."""
+    MICROSTRUCTUREINVALIDSHAPETYPE = 13001
+    """Invalid input provided. Invalid Shape."""
+    MICROSTRUCTUREWRONGAPICALLSEQUENCE = 13002
+    """Wrong API call sequence."""
+    MICROSTRUCTUREBADSHAPEPROPERTIES = 13003
+    """Bad shape properties."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.
@@ -614,6 +624,8 @@ class WarningCode(enum.IntEnum):
     """Override volume scope entity."""
     MAXOFPRISMCONTROLSMINASPECTRATIO = 403
     """Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls."""
+    PARTNOTINPARTSCOPE = 601
+    """Selected part is not in the part scope of the periodic control."""
     SURFERLAYEREDQUADFAILED = 1800
     """Layered quad failed with surfer."""
     SURFERDEGENERATEFACE = 1801

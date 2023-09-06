@@ -472,3 +472,37 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("create_contact_patch", CreateContactPatchResults(model = self._model, json_data = result))
         return CreateContactPatchResults(model = self._model, json_data = result)
+
+    def stretch_free_boundaries(self, face_zonelet_ids : Iterable[int], params : StretchFreeBoundariesParams) -> StretchFreeBoundariesResults:
+        """ Stretches free boundaries of each zonelet.
+
+
+        Parameters
+        ----------
+        face_zonelet_ids : Iterable[int]
+            Ids of face zonelets.
+        params : StretchFreeBoundariesParams
+            Parameters to control stretch free boundaries operation.
+
+        Returns
+        -------
+        StretchFreeBoundariesResults
+            Returns the StretchFreeBoundariesResults.
+
+
+        Examples
+        --------
+        >>> result = surf_utils.stretch_free_boundaries(face_zonelet_ids, params)
+
+        """
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, StretchFreeBoundariesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is StretchFreeBoundariesParams.")
+        args = {"face_zonelet_ids" : face_zonelet_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/StretchFreeBoundaries"
+        self._model._print_logs_before_command("stretch_free_boundaries", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("stretch_free_boundaries", StretchFreeBoundariesResults(model = self._model, json_data = result))
+        return StretchFreeBoundariesResults(model = self._model, json_data = result)
