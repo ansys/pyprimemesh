@@ -10,7 +10,9 @@
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
+
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics import Graphics
 import time
 
 prime_client = prime.launch_prime(timeout=60)
@@ -25,8 +27,8 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Define the number of layers per solid and the size in mm 
 # of the quad-dominant mesh on the base size
 
-number_of_layers_per_solid= 6
-base_face_size=0.35
+number_of_layers_per_solid= 5
+base_face_size=0.4
 cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/geometry_ready.pmdb'
 
 ###############################################################################
@@ -39,6 +41,7 @@ cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_G
 mesh_util.read(
     file_name=cad_file,
     cad_reader_route=prime.CadReaderRoute.WORKBENCH)
+display = Graphics(model)
 display()
 
 ###############################################################################
@@ -64,6 +67,7 @@ for label in part.get_labels():
                                                 label_expression=label+"*")
         soft_size_control.set_scope(soft_size_scope)
         soft_size_control.set_suggested_name(label)
+        # Append the id of the edge sizing to the edge sizings' ids' list
         ids.append(soft_size_control.id)
 
 ###############################################################################
@@ -131,7 +135,7 @@ stackbase_results = sweeper.stack_base_face(
     base_face_ids=base_faces,
     topo_volume_ids=model.get_part_by_name(part.name).get_topo_volumes(),
     params=stacker_params)
-
+display()
 
 ###############################################################################
 # Setup the zone naming before the mesh output
@@ -139,7 +143,7 @@ stackbase_results = sweeper.stack_base_face(
 # Delete the unnecessary topo entities.
 # Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the walls surrounding the solid will be named "wall_A").
 # Convert the labels to mesh zones.
-
+ 
 part.delete_topo_entities(params=prime.DeleteTopoEntitiesParams(model,
                                                                 delete_geom_zonelets=True,
                                                                 delete_mesh_zonelets=False))
