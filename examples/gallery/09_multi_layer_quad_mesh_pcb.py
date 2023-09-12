@@ -27,9 +27,6 @@ Procedure
 * Exit the PyPrimeMesh session.
 """
 
-
-
-
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
