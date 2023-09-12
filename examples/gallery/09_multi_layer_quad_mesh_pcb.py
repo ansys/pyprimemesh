@@ -1,4 +1,31 @@
-# Copyright ANSYS, Inc. All Rights Reserved.
+"""
+.. _ref_generic_f1_rw:
+
+================================================================
+Meshing a generic PCB geometry with multiple number of layers
+================================================================
+
+**Summary**: This example showcases the process of generating a mesh for a generic PCB geometry setting the base size and the number of layers.
+
+Objective
+~~~~~~~~~~
+
+The example demonstrates how to connect various parts of a rear wing from||||||||||||||||||||||||||||||||||||||||||||
+a generic F1 car and volume mesh the resulting model using a poly-hexcore mesh containing prisms.||||||||||||||||||||||||||||||||||||||||||||
+To simplify the process and enhance convenience, multiple meshing utilities provided in the||||||||||||||||||||||||||||||||||||||||||||
+"lucid" class are used.||||||||||||||||||||||||||||||||||||||||||||
+
+.. image:: ../../../images/generic_rear_wing.png||||||||||||||||||||||||||||||||||||||||||||
+   :align: center
+   :width: 800
+   :alt: Generic F1 rear wing.
+
+Procedure
+~~~~~~~~~~
+* Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
+* Write a `.cas` file for use in the Fluent solver.
+* Exit the PyPrimeMesh session.
+"""
 
 
 
