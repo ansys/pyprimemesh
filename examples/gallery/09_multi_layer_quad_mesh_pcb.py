@@ -118,7 +118,7 @@ base_scope = prime.lucid.SurfaceScope(
     part_expression=part.name,
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,)
 # Generate the surface mesh on the base face.
-mesh_util.surface_mesh_with_size_controls(size_control_names="base_face_size", 
+mesh_util_controls = mesh_util.surface_mesh_with_size_controls(size_control_names="base_face_size", 
                                           scope=base_scope, 
                                           generate_quads=True)
 display()
@@ -151,17 +151,15 @@ for volume in part.get_volumes():
     volume_zone_name = "wall_"+model.get_zone_name(part.get_volume_zone_of_volume(volume))
     label_zonelets = part.get_face_zonelets_of_volumes([volume])
     part.add_labels_on_zonelets([volume_zone_name], label_zonelets)
-mesh_util.create_zones_from_labels()
+mesh_util_create_zones = mesh_util.create_zones_from_labels()
 
 ###############################################################################
 # Output the mesh
 # ~~~~~~~~~~~~~~~~
 
 format='.cas'
-output_mesh = cad_file.replace('.scdoc',format).replace('.dsco',format).replace('.pmdb',format)
+output_mesh = cad_file.replace('.scdoc',format).replace('.dsco',format).replace('.pmdb',format).replace('.fmd',format)
 mesh_util.write(output_mesh)
-
-
 
 ###############################################################################
 # Exit PyPrimeMesh
