@@ -13,6 +13,8 @@
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
+import os
+import tempfile
 import time
 
 prime_client = prime.launch_prime(timeout=60)
@@ -29,7 +31,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 
 number_of_layers_per_solid= 5
 base_face_size=0.4
-cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/geometry_ready.pmdb'
+cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/CADs/multi_layer_quad_mesh_pcb.pmdb'
 
 ###############################################################################
 # Import geometry
@@ -154,13 +156,15 @@ for volume in part.get_volumes():
 mesh_util_create_zones = mesh_util.create_zones_from_labels()
 
 ###############################################################################
-# Output the mesh
+# Output the mesh in .cas format
 # ~~~~~~~~~~~~~~~~
 
-format='.cas'
-output_mesh = cad_file.replace('.scdoc',format).replace('.dsco',format).replace('.pmdb',format).replace('.fmd',format)
-mesh_util.write(output_mesh)
-
+with tempfile.TemporaryDirectory() as temp_folder:
+    mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
+    mesh_util.write(mesh_file)
+    assert os.path.exists(mesh_file)
+    print("\nExported file:\n", mesh_file)
+#mesh_util.write(cad_file.replace('pmdb','cas'))
 ###############################################################################
 # Exit PyPrimeMesh
 # ~~~~~~~~~~~~~~~~
