@@ -46,11 +46,8 @@ import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
 import os
 import tempfile
-import time
 
 prime_client = prime.launch_prime(timeout=60)
-start=time.time()
-
 model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
