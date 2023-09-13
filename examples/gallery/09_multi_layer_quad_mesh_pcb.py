@@ -1,5 +1,5 @@
 """
-.. _ref_generic_f1_rw:
+.. _ref_multi_layer_pcb_mesh:
 
 ================================================================
 Meshing a generic PCB geometry with multiple number of hexa layers
