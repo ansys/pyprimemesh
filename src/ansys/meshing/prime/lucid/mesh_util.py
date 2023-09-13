@@ -76,7 +76,7 @@ class Mesh:
             prime.FileIO(self._model).import_fluent_meshing_meshes(
                 [file_name], prime.ImportFluentMeshingMeshParams(self._model, append=append)
             )
-        elif fileext == ".cas":
+        elif fileext == ".cas" or file_name[-7:] == ".cas.gz" or file_name[-7:] == ".cas.h5":
             prime.FileIO(self._model).import_fluent_case(
                 file_name, prime.ImportFluentCaseParams(self._model, append=append)
             )
@@ -105,6 +105,7 @@ class Mesh:
         * Exporting Fluent Meshing's MSH files
         * Exporting Fluent's CAS files
         * Exporting MAPDL's CDB files.
+        * Exporting STL files.
 
         Parameters
         ----------
@@ -117,13 +118,22 @@ class Mesh:
             prime.FileIO(self._model).export_mapdl_cdb(
                 file_name, prime.ExportMapdlCdbParams(self._model)
             )
-        elif fileext == ".cas":
+        elif fileext == ".cas" or file_name[-7:] == ".cas.gz":
             prime.FileIO(self._model).export_fluent_case(
-                file_name, prime.ExportFluentCaseParams(self._model)
+                file_name, prime.ExportFluentCaseParams(self._model, cff_format=False)
+            )
+        elif file_name[-7:] == ".cas.h5":
+            prime.FileIO(self._model).export_fluent_case(
+                file_name, prime.ExportFluentCaseParams(self._model, cff_format=True)
             )
         elif fileext == ".msh" or file_name[-7:] == ".msh.gz":
             prime.FileIO(self._model).export_fluent_meshing_mesh(
                 file_name, prime.ExportFluentMeshingMeshParams(self._model)
+            )
+        elif fileext == ".stl":
+            part_ids = [part.id for part in self._model.parts]
+            prime.FileIO(self._model).export_stl(
+                file_name, prime.ExportSTLParams(self._model, part_ids)
             )
         else:
             prime.FileIO(self._model).write_pmdat(file_name, prime.FileWriteParams(self._model))
