@@ -1154,7 +1154,7 @@ def download_multi_layer_quad_mesh_pcb_dsco(
     >>> import ansys.meshing.prime.examples as prime_examples
     >>> with prime.launch_prime() as session:
     >>>     model = session.model
-    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_****()
+    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_dsco()
     >>>     with prime.FileIO(model) as io:
     >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
     >>>     print(model)
