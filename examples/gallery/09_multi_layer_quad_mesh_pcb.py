@@ -5,7 +5,7 @@
 Meshing a generic PCB geometry with multiple number of hexa layers
 ================================================================
 
-**Summary**: This example showcases the process of generating a mesh for a generic PCB geometry giving the possibbility to set the base size and the number of layers for each solid.
+**Summary**: This example showcases the process of generating a mesh for a generic PCB geometry giving the possibbility to set the base mesh size and the number of layers for each solid.
 
 Objective
 ~~~~~~~~~~
@@ -14,7 +14,7 @@ The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry
 This script allows to easily setup the mesh size of the base face (xy plane in this example) and the number of mesh layers along the sweep direction (z axis in this example).
 The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim (as shown in the description image).
 These named selections will allow specifying the number of mesh elements to be generated along such edges.
-To simplify the process and enhance convenience, multiple meshing utilities provided in the "lucid" class are used.
+To simplify the process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are used.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb.png
    :align: center
@@ -23,6 +23,7 @@ To simplify the process and enhance convenience, multiple meshing utilities prov
 
 Procedure
 ~~~~~~~~~~
+* Import the fundamental libraries that are necessary top run the script
 * Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
 * Define the main mesh parameters: base size and number of layers along the sweep direction. 
 * Import the CAD geometry.
@@ -36,9 +37,9 @@ Procedure
 """
 
 ###############################################################################
-# Launch Ansys Prime Server
+# Import all necessary modules
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import all necessary modules.
+# Notice that pyvista library must be installed to be able to run the visualization tools included in this script
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
@@ -48,6 +49,12 @@ from ansys.meshing.prime.graphics import Graphics
 import os
 import tempfile
 
+###############################################################################
+# Lanuch Prime server and instantiate the ``lucid`` class
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# Launch an instance of Ansys Prime Server.
+# Connect the PyPrimeMesh client and get the model.
+# Instantiate meshing utilities from the ``lucid`` class.
 prime_client = prime.launch_prime(timeout=60)
 model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
@@ -88,14 +95,16 @@ part=model.parts[0]
 for label in part.get_labels():
     # Check whether the named selection's name starts with the string "edge"
     if label.startswith('edge'):
-        # Extract the edge's length splitting its name at every "_" string and collect the second-last number
+        # Extract the edge's length splitting its name at every "_" string 
+        # and collect the second-last number
         length = float(label.split("_")[-2])
         soft_size_control=model.control_data.create_size_control(prime.SizingType.SOFT)
         soft_size_params = prime.SoftSizingParams(model = model,max=length/number_of_layers_per_solid)
         soft_size_control.set_soft_sizing_params(soft_size_params)
-        soft_size_scope=prime.ScopeDefinition(model,part_expression=part.name,
-                                                entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS,
-                                                label_expression=label+"*")
+        soft_size_scope=prime.ScopeDefinition(model,
+                                              part_expression=part.name,
+                                              entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS,
+                                              label_expression=label+"*")
         soft_size_control.set_scope(soft_size_scope)
         soft_size_control.set_suggested_name(label)
         # Append the id of the edge sizing to the edge sizings' ids' list
@@ -127,7 +136,6 @@ stacker_params = prime.MeshStackerParams(
 # Mesh the base face.
 # Display the base face.
 
-
 soft_size_control=model.control_data.create_size_control(prime.SizingType.SOFT)
 soft_size_params = prime.SoftSizingParams(model = model,max=base_face_size)
 soft_size_control.set_soft_sizing_params(soft_size_params)
@@ -149,9 +157,15 @@ base_scope = prime.lucid.SurfaceScope(
     part_expression=part.name,
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,)
 # Generate the surface mesh on the base face.
-mesh_util_controls = mesh_util.surface_mesh_with_size_controls(size_control_names="base_face_size", 
-                                          scope=base_scope, 
-                                          generate_quads=True)
+mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
+                                                        size_control_names="base_face_size", 
+                                                        scope=base_scope, 
+                                                        generate_quads=True)
+
+###############################################################################
+# Display the meshed base face in a pyvista environment
+# ~~~~~~~~~~~~~~~
+
 display()
 
 ###############################################################################
