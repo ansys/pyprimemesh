@@ -185,8 +185,9 @@ for volume in part.get_volumes():
 mesh_util_create_zones = mesh_util.create_zones_from_labels()
 
 ###############################################################################
-# Output the mesh in .cas format
+# Mesh output
 # ~~~~~~~~~~~~~~~~
+# Output the mesh in .cas format
 
 # with tempfile.TemporaryDirectory() as temp_folder:
 #     mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
