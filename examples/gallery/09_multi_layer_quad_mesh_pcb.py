@@ -2,27 +2,34 @@
 .. _ref_generic_f1_rw:
 
 ================================================================
-Meshing a generic PCB geometry with multiple number of layers
+Meshing a generic PCB geometry with multiple number of hexa layers
 ================================================================
 
-**Summary**: This example showcases the process of generating a mesh for a generic PCB geometry setting the base size and the number of layers.
+**Summary**: This example showcases the process of generating a mesh for a generic PCB geometry giving the possibbility to set the base size and the number of layers for each solid.
 
 Objective
 ~~~~~~~~~~
 
-The example demonstrates how to connect various parts of a rear wing from||||||||||||||||||||||||||||||||||||||||||||
-a generic F1 car and volume mesh the resulting model using a poly-hexcore mesh containing prisms.||||||||||||||||||||||||||||||||||||||||||||
-To simplify the process and enhance convenience, multiple meshing utilities provided in the||||||||||||||||||||||||||||||||||||||||||||
-"lucid" class are used.||||||||||||||||||||||||||||||||||||||||||||
+The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the stacker technology.
+This script allows to easily setup the mesh size of the base face (xy plane in this example) and the number of mesh layers along the sweep direction (z axis in this example).
+The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim. These named selections will allow specifying the number of mesh elements to be generated along such edges.
+To simplify the process and enhance convenience, multiple meshing utilities provided in the "lucid" class are used.
 
-.. image:: ../../../images/generic_rear_wing.png||||||||||||||||||||||||||||||||||||||||||||
+.. image:: ../../../images/multi_layer_quad_mesh_pcb.png
    :align: center
    :width: 800
-   :alt: Generic F1 rear wing.
+   :alt: Generic PCB geometry.
 
 Procedure
 ~~~~~~~~~~
 * Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
+* Define the main mesh parameters: base size and number of layers along the sweep direction. 
+* Import the CAD geometry.
+* Define the edge sizing along the sweep direction (based on pre-existing edges named selections).
+* Define the parameters for the volume sweeper.
+* Setup, generate, and mesh the base face.
+* Stack the base face along the sweep direction.
+* Setup the zone naming before the mesh output.
 * Write a `.cas` file for use in the Fluent solver.
 * Exit the PyPrimeMesh session.
 """
@@ -53,8 +60,8 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Define the number of layers per solid and the size in mm 
 # of the quad-dominant mesh on the base size
 
-number_of_layers_per_solid= 5
-base_face_size=0.4
+number_of_layers_per_solid= 3
+base_face_size=0.7
 cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/CADs/multi_layer_quad_mesh_pcb.pmdb'
 
 ###############################################################################
@@ -114,7 +121,7 @@ stacker_params = prime.MeshStackerParams(
     )
 
 ###############################################################################
-# Define Controls for base face meshing
+# Setup, generate, and mesh the base face 
 # ~~~~~~~~~~~~~~~
 # Create a soft sizing control. 
 # Assign the previously defined base_face_size to the soft sizing.
@@ -183,12 +190,14 @@ mesh_util_create_zones = mesh_util.create_zones_from_labels()
 # Output the mesh in .cas format
 # ~~~~~~~~~~~~~~~~
 
-with tempfile.TemporaryDirectory() as temp_folder:
-    mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
-    mesh_util.write(mesh_file)
-    assert os.path.exists(mesh_file)
-    print("\nExported file:\n", mesh_file)
-#mesh_util.write(cad_file.replace('pmdb','cas'))
+# with tempfile.TemporaryDirectory() as temp_folder:
+#     mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
+#     mesh_util.write(mesh_file)
+#     assert os.path.exists(mesh_file)
+#     print("\nExported file:\n", mesh_file)
+
+mesh_util.write(cad_file.replace('pmdb','cas'))
+
 ###############################################################################
 # Exit PyPrimeMesh
 # ~~~~~~~~~~~~~~~~
