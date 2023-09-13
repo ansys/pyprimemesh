@@ -12,7 +12,8 @@ Objective
 
 The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the stacker technology.
 This script allows to easily setup the mesh size of the base face (xy plane in this example) and the number of mesh layers along the sweep direction (z axis in this example).
-The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim. These named selections will allow specifying the number of mesh elements to be generated along such edges.
+The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim (as shown in the description image).
+These named selections will allow specifying the number of mesh elements to be generated along such edges.
 To simplify the process and enhance convenience, multiple meshing utilities provided in the "lucid" class are used.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb.png
