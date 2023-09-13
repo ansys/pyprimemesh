@@ -28,5 +28,9 @@ from .examples import (
     download_toy_car_pmdat,
     download_toy_car_scdoc,
     download_turbine_blade_cdb,
+    download_multi_layer_quad_mesh_pcb_dsco,
+    download_multi_layer_quad_mesh_pcb_pmdb,
+    download_multi_layer_quad_mesh_pcb_fmd,
+    download_multi_layer_quad_mesh_pcb_scdoc,
 )
 from .unit_test_examples import download_test_examples

@@ -36,6 +36,10 @@ __all__ = [
     "download_f1_rw_enclosure_stl",
     "download_f1_rw_end_plates_stl",
     "download_f1_rw_main_plane_stl",
+    "download_multi_layer_quad_mesh_pcb_dsco",
+    "download_multi_layer_quad_mesh_pcb_pmdb",
+    "download_multi_layer_quad_mesh_pcb_fmd",
+    "download_multi_layer_quad_mesh_pcb_scdoc",
 ]
 
 
@@ -70,7 +74,10 @@ class Examples(Enum):
     F1_RW_END_PLATES_STL = {"filename": "f1_rw_enclosure.stl", "git_folder": "f1_rear_wing"}
     F1_RW_ENCLOSURE_STL = {"filename": "f1_rw_end_plates.stl", "git_folder": "f1_rear_wing"}
     F1_RW_MAIN_PLANE_STL = {"filename": "f1_rw_main_plane.stl", "git_folder": "f1_rear_wing"}
-
+    MULTI_LAYER_MESH_PCB_DSCO = {"filename": "multi_layer_quad_mesh_pcb.dsco", "git_folder": "multi_layer_quad_mesh_pcb"}
+    MULTI_LAYER_MESH_PCB_PMDB = {"filename": "multi_layer_quad_mesh_pcb.pmdb", "git_folder": "multi_layer_quad_mesh_pcb"}
+    MULTI_LAYER_MESH_PCB_FMD = {"filename": "multi_layer_quad_mesh_pcb.fmd", "git_folder": "multi_layer_quad_mesh_pcb"}
+    MULTI_LAYER_MESH_PCB_SCDOC = {"filename": "multi_layer_quad_mesh_pcb.scdoc", "git_folder": "multi_layer_quad_mesh_pcb"}
 
 _DOWNLOADS = []
 
@@ -1120,3 +1127,38 @@ def download_f1_rw_main_plane_stl(
 
     """
     return get_file(Examples.F1_RW_MAIN_PLANE_STL, destination, force)
+
+def download_multi_layer_quad_mesh_pcb_dsco(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the file for the multi layer PCB meshin tutorial in .dsco format.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_****()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.MULTI_LAYER_MESH_PCB_DSCO, destination, force)
+ 
