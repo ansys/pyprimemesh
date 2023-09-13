@@ -99,7 +99,8 @@ for label in part.get_labels():
         # and collect the second-last number
         length = float(label.split("_")[-2])
         soft_size_control=model.control_data.create_size_control(prime.SizingType.SOFT)
-        soft_size_params = prime.SoftSizingParams(model = model,max=length/number_of_layers_per_solid)
+        soft_size_params = prime.SoftSizingParams(model = model,
+                                                  max=length/number_of_layers_per_solid)
         soft_size_control.set_soft_sizing_params(soft_size_params)
         soft_size_scope=prime.ScopeDefinition(model,
                                               part_expression=part.name,
@@ -136,6 +137,7 @@ stacker_params = prime.MeshStackerParams(
 # Mesh the base face.
 # Display the base face.
 
+# Setup the necessary parameters for the generation of the base face.
 soft_size_control=model.control_data.create_size_control(prime.SizingType.SOFT)
 soft_size_params = prime.SoftSizingParams(model = model,max=base_face_size)
 soft_size_control.set_soft_sizing_params(soft_size_params)
@@ -155,7 +157,8 @@ scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 base_scope = prime.lucid.SurfaceScope(
     entity_expression="base_faces",
     part_expression=part.name,
-    scope_evaluation_type=prime.ScopeEvaluationType.LABELS,)
+    scope_evaluation_type=prime.ScopeEvaluationType.LABELS)
+
 # Generate the surface mesh on the base face.
 mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
                                                         size_control_names="base_face_size", 
