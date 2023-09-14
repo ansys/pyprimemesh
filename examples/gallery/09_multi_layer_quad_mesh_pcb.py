@@ -45,7 +45,7 @@ Procedure
 # Instantiate meshing utilities from the ``lucid`` class.
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+#from ansys.meshing.prime.graphics import Graphics
 import os
 import tempfile
 
@@ -85,8 +85,8 @@ mesh_util.read(
 # Display the imported CAD in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
-display = Graphics(model)
-display()
+#display = Graphics(model)
+#display()
 
 ###############################################################################
 # Define edge sizing constraints
@@ -176,7 +176,7 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 # Display the meshed base face in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
-display()
+#display()
 
 ###############################################################################
 # Stack the base face using the volume sweeper.
@@ -195,7 +195,7 @@ stackbase_results = sweeper.stack_base_face(
 # Display the final PCB mesh in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
-display()
+#display()
 
 ###############################################################################
 # Setup the zone naming before the mesh output
