@@ -1162,3 +1162,104 @@ def download_multi_layer_quad_mesh_pcb_dsco(
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_DSCO, destination, force)
  
+def download_multi_layer_quad_mesh_pcb_pmdb(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the file for the multi layer PCB meshin tutorial in .pmdb format.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_pmdb()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.MULTI_LAYER_MESH_PCB_PMDB, destination, force)
+
+def download_multi_layer_quad_mesh_pcb_scdoc(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the file for the multi layer PCB meshin tutorial in .scdoc format.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.MULTI_LAYER_MESH_PCB_SCDOC, destination, force)
+
+def download_multi_layer_quad_mesh_pcb_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the file for the multi layer PCB meshin tutorial in .fmd format.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.MULTI_LAYER_MESH_PCB_FMD, destination, force)
