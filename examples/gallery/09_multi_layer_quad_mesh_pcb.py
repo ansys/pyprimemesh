@@ -67,7 +67,8 @@ mesh_util = prime.lucid.Mesh(model=model)
 
 layers_per_solid = 3 #number of hexa mesh layers in each solid
 base_face_size = 0.7 #the surface mesh size in mm on the base face 
-cad_file = 'C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/CADs/multi_layer_quad_mesh_pcb.pmdb'
+#cad_file = r'C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/CADs/multi_layer_quad_mesh_pcb.pmdb'
+cad_file=r"D:/multi_layer_quad_mesh_pcb.pmdb"
 
 ###############################################################################
 # Import geometry
@@ -77,8 +78,7 @@ cad_file = 'C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME
 # Display the imported geometry.
 
 mesh_util.read(
-    file_name = cad_file,
-    cad_reader_route = prime.CadReaderRoute.WORKBENCH)
+    file_name = cad_file)#cad_reader_route = prime.CadReaderRoute.WORKBENCH)
 
 
 ###############################################################################
