@@ -50,7 +50,7 @@ import os
 import tempfile
 
 ###############################################################################
-# Lanuch Prime server and instantiate the ``lucid`` class
+# Lanuch Prime server and instantiate the lucid class
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
@@ -65,8 +65,8 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Define the number of layers per solid and the size in mm 
 # of the quad-dominant mesh on the base size
 
-number_of_layers_per_solid= 3
-base_face_size=0.7
+layers_per_solid= 3 #number of hexa mesh layers in each solid
+base_face_size=0.7 #the surface mesh size in mm on the base face 
 cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/CADs/multi_layer_quad_mesh_pcb.pmdb'
 
 ###############################################################################
@@ -79,6 +79,12 @@ cad_file='C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_G
 mesh_util.read(
     file_name=cad_file,
     cad_reader_route=prime.CadReaderRoute.WORKBENCH)
+
+
+###############################################################################
+# Display the imported CAD in the pyvista environment
+# ~~~~~~~~~~~~~~~
+
 display = Graphics(model)
 display()
 
@@ -100,7 +106,7 @@ for label in part.get_labels():
         length = float(label.split("_")[-2])
         soft_size_control=model.control_data.create_size_control(prime.SizingType.SOFT)
         soft_size_params = prime.SoftSizingParams(model = model,
-                                                  max=length/number_of_layers_per_solid)
+                                                  max=length/layers_per_solid)
         soft_size_control.set_soft_sizing_params(soft_size_params)
         soft_size_scope=prime.ScopeDefinition(model,
                                               part_expression=part.name,
@@ -118,15 +124,16 @@ for label in part.get_labels():
 # Setup the geometric tolerances for lateral and stacking defeature.
 # Append the ids of the soft local sizings that have been previously-defined on the edges.
 
+# Instantiate the volume sweeper
 sweeper = prime.VolumeSweeper(model)
+# Define the parameters for stacker
 stacker_params = prime.MeshStackerParams(
     model=model,
-    direction=[0, 0, 1],
-    delete_base=True,
+    direction=[0, 0, 1],# define the sweep direction for the mesh
+    delete_base=True,# delete the base face in the end of stacker
     lateral_defeature_tolerance=0.001,
     stacking_defeature_tolerance=0.001,
-    size_control_ids=ids
-    )
+    size_control_ids=ids)# list of control ids to be respected by the stacker
 
 ###############################################################################
 # Setup, generate, and mesh the base face 
@@ -144,7 +151,7 @@ soft_size_control.set_soft_sizing_params(soft_size_params)
 soft_size_scope=prime.ScopeDefinition(model,part_expression=part.name,
                                     entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS)
 soft_size_control.set_scope(soft_size_scope)
-soft_size_control.set_suggested_name("base_face_size")
+soft_size_control.set_suggested_name("b_f_size")
 
 # Create the base face appending the the stacker mesh parameters.
 createbase_results = sweeper.create_base_face(
@@ -161,12 +168,12 @@ base_scope = prime.lucid.SurfaceScope(
 
 # Generate the surface mesh on the base face.
 mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
-                                                        size_control_names="base_face_size", 
+                                                        size_control_names="b_f_size", 
                                                         scope=base_scope, 
                                                         generate_quads=True)
 
 ###############################################################################
-# Display the meshed base face in a pyvista environment
+# Display the meshed base face in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
 display()
@@ -183,6 +190,11 @@ stackbase_results = sweeper.stack_base_face(
     base_face_ids=base_faces,
     topo_volume_ids=model.get_part_by_name(part.name).get_topo_volumes(),
     params=stacker_params)
+
+###############################################################################
+# Display the final PCB mesh in the pyvista environment
+# ~~~~~~~~~~~~~~~
+
 display()
 
 ###############################################################################
@@ -192,9 +204,10 @@ display()
 # Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the walls surrounding the solid will be named "wall_A").
 # Convert the labels to mesh zones.
  
-part.delete_topo_entities(params=prime.DeleteTopoEntitiesParams(model,
-                                                                delete_geom_zonelets=True,
-                                                                delete_mesh_zonelets=False))
+part.delete_topo_entities(params=prime.DeleteTopoEntitiesParams(
+                                                            model,
+                                                            delete_geom_zonelets=True,
+                                                            delete_mesh_zonelets=False))
 for volume in part.get_volumes():
     volume_zone_name = "wall_"+model.get_zone_name(part.get_volume_zone_of_volume(volume))
     label_zonelets = part.get_face_zonelets_of_volumes([volume])
@@ -204,7 +217,7 @@ mesh_util_create_zones = mesh_util.create_zones_from_labels()
 ###############################################################################
 # Mesh output
 # ~~~~~~~~~~~~~~~~
-# Output the mesh in .cas format
+# Create a temporary folder and use it to output the mesh in .cas format.
 
 # with tempfile.TemporaryDirectory() as temp_folder:
 #     mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
