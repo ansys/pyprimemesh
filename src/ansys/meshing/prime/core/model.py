@@ -262,6 +262,13 @@ class Model(_Model):
         _Model.set_global_sizing_params(self, params)
         self._global_sf_params = params
 
+    def plot(self):
+        """Plot the model mesh."""
+        # Lazy import to avoid circular imports.
+        from ansys.meshing.prime.graphics.simple_plotter import plot
+
+        plot(self)
+
     def __str__(self):
         """Print the summary of the model.
 

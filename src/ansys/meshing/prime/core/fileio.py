@@ -29,7 +29,6 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
 )
-from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -44,7 +43,7 @@ class FileIO(_FileIO):
 
     __doc__ = _FileIO.__doc__
 
-    def __init__(self, model: Model):
+    def __init__(self, model: "Model"):
         """Initialize model and parent class."""
         self._model = model
         super().__init__(model)
