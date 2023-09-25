@@ -32,5 +32,6 @@ from .examples import (
     download_multi_layer_quad_mesh_pcb_pmdb,
     download_multi_layer_quad_mesh_pcb_fmd,
     download_multi_layer_quad_mesh_pcb_scdoc,
+    download_multi_layer_quad_mesh_pcb_pmdat,
 )
 from .unit_test_examples import download_test_examples

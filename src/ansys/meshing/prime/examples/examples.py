@@ -40,6 +40,7 @@ __all__ = [
     "download_multi_layer_quad_mesh_pcb_pmdb",
     "download_multi_layer_quad_mesh_pcb_fmd",
     "download_multi_layer_quad_mesh_pcb_scdoc",
+    "download_multi_layer_quad_mesh_pcb_pmdat",
 ]
 
 
@@ -78,6 +79,7 @@ class Examples(Enum):
     MULTI_LAYER_MESH_PCB_PMDB = {"filename": "multi_layer_quad_mesh_pcb.pmdb", "git_folder": "multi_layer_quad_mesh_pcb"}
     MULTI_LAYER_MESH_PCB_FMD = {"filename": "multi_layer_quad_mesh_pcb.fmd", "git_folder": "multi_layer_quad_mesh_pcb"}
     MULTI_LAYER_MESH_PCB_SCDOC = {"filename": "multi_layer_quad_mesh_pcb.scdoc", "git_folder": "multi_layer_quad_mesh_pcb"}
+    MULTI_LAYER_MESH_PCB_PMDAT = {"filename": "multi_layer_quad_mesh_pcb.pmdat", "git_folder": "multi_layer_quad_mesh_pcb"}
 
 _DOWNLOADS = []
 
@@ -1263,3 +1265,37 @@ def download_multi_layer_quad_mesh_pcb_fmd(
 
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_FMD, destination, force)
+
+def download_multi_layer_quad_mesh_pcb_pmdat(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the file for the multi layer PCB meshin tutorial in .pmdat format.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(cad_file, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.MULTI_LAYER_MESH_PCB_PMDAT, destination, force)
