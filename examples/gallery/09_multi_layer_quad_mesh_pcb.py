@@ -74,7 +74,7 @@ cad_file=prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
 layers_per_solid = 4 #number of hexa mesh layers in each solid
 base_face_size = 0.5 #the surface mesh size in mm on the base face 
 # Chose whether to display or not to Display the CAD/mesh at every stage 
-display_intermediate_steps=True#Use True/False
+display_intermediate_steps=False#Use True/False
 
 
 ###############################################################################
@@ -230,13 +230,13 @@ mesh_util_create_zones = mesh_util.create_zones_from_labels()
 # ~~~~~~~~~~~~~~~~
 # Create a temporary folder and use it to output the mesh in .cas format.
 
-# with tempfile.TemporaryDirectory() as temp_folder:
-#     mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
-#     mesh_util.write(mesh_file)
-#     assert os.path.exists(mesh_file)
-#     print("\nExported file:\n", mesh_file)
-
-mesh_util.write('D:/prime_test_pcb_mesh.cas')
+with tempfile.TemporaryDirectory() as temp_folder:
+    mesh_file = os.path.join(temp_folder, 'multi_layer_quad_mesh_pcb.cas')
+    mesh_util.write(mesh_file)
+    assert os.path.exists(mesh_file)
+    print("\nExported file:\n", mesh_file)
+#Otherwise, specify a path on your local machine:
+# mesh_util.write('local/path/to/your/mesh_file.cas')
 
 ###############################################################################
 # Exit PyPrimeMesh
