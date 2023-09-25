@@ -39,7 +39,7 @@ Procedure
 ###############################################################################
 # Import all necessary modules
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
-# Notice that pyvista library must be installed to be able to run the visualization tools included in this script
+# Notice that PyVista library must be installed to be able to run the visualization tools included in this script
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
@@ -50,55 +50,58 @@ import os
 import tempfile
 
 ###############################################################################
-# Lanuch Prime server and instantiate the lucid class
+# Launch Prime server and instantiate the lucid class
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
-prime_client = prime.launch_prime(timeout=60)
+
+prime_client = prime.launch_prime()
 model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
-# Define mesh settings
+# Define CAD file and mesh settings
 # ~~~~~~~~~~~~~~~
 # Define the number of layers per solid 
 # Define the size in mm of the quad-dominant mesh on the base size
 # Define the path to the CAD file to be meshed
 
-layers_per_solid = 4 #number of hexa mesh layers in each solid
-base_face_size = 0.5 #the surface mesh size in mm on the base face 
-# Download the example CAD file using prime.examples functions
-# Else, write the path to the desired CAD file on your machine 
+# Download the example CAD file using prime.examples function. Else, write the 
+# path to the desired CAD file on your machine.
 # .scdoc/.dsco/.pmdb/ are supported
 cad_file=prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
+layers_per_solid = 4 #number of hexa mesh layers in each solid
+base_face_size = 0.5 #the surface mesh size in mm on the base face 
+# Chose whether to display or not to Display the CAD/mesh at every stage 
+display_intermediate_steps=True#Use True/False
+
 
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
 # Import the geometry into Prime server
-# Use the WORKBENCH CadReaderRoute to ensure that the shared topology is kept
+# Use the WORKBENCH CadReaderRoute to ensure that the shared topology is kept.
 # If you are using .scdoc/.dsco/.pmdb
 
+mesh_util.read(file_name=cad_file)
 # Use the following command to open .scdoc/.dsco/.pmdb
 # mesh_util.read(
 #     file_name = cad_file,
 #     cad_reader_route = prime.CadReaderRoute.WORKBENCH)
 
-mesh_util.read(file_name=cad_file)
-
 ###############################################################################
-# Display the imported CAD in the pyvista environment
+# Display the imported CAD in a PyVista window
 # ~~~~~~~~~~~~~~~
-
-display = Graphics(model)
-display()
+if display_intermediate_steps:
+    display = Graphics(model)
+    display()
 
 ###############################################################################
 # Define edge sizing constraints
 # ~~~~~~~~~~~~~~~
 # Set generic global sizing from 0.002mm and 2mm.
-# Extract the the edges length from the named selections such as edge_1_0.50_mm (extract 0.5 mm length) or edge_23_0.27_mm (extract 0.27mm length).
+# Extract the the edges length from the named selections such as "edge_1_0.50_mm" (extract 0.5 mm length) or "edge_23_0.27_mm" (extract 0.27mm length).
 # Assign, on each edge, a size equal to the edge's length divided by the pre-defined number of layers per solid.
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model,min=0.002,max=2.))
@@ -179,10 +182,11 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
                                                         generate_quads=True)
 
 ###############################################################################
-# Display the meshed base face in the pyvista environment
+# Display the meshed base face in a PyVista window
 # ~~~~~~~~~~~~~~~
 
-display()
+if display_intermediate_steps:
+    display()
 
 ###############################################################################
 # Stack the base face using the volume sweeper.
@@ -198,10 +202,11 @@ stackbase_results = sweeper.stack_base_face(
     params = stacker_params)
 
 ###############################################################################
-# Display the final PCB mesh in the pyvista environment
+# Display the final PCB mesh in a PyVista window
 # ~~~~~~~~~~~~~~~
 
-display()
+if display_intermediate_steps:
+    display()
 
 ###############################################################################
 # Setup the zone naming before the mesh output
