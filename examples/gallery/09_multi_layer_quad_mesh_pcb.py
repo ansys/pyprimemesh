@@ -74,7 +74,7 @@ cad_file=prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
 layers_per_solid = 4 #number of hexa mesh layers in each solid
 base_face_size = 0.5 #the surface mesh size in mm on the base face 
 # Chose whether to display or not to Display the CAD/mesh at every stage 
-display_intermediate_steps=False#Use True/False
+display_intermediate_steps=True#Use True/False
 
 
 ###############################################################################
@@ -101,8 +101,10 @@ if display_intermediate_steps:
 # Define edge sizing constraints
 # ~~~~~~~~~~~~~~~
 # Set generic global sizing from 0.002mm and 2mm.
-# Extract the the edges length from the named selections such as "edge_1_0.50_mm" (extract 0.5 mm length) or "edge_23_0.27_mm" (extract 0.27mm length).
-# Assign, on each edge, a size equal to the edge's length divided by the pre-defined number of layers per solid.
+# Extract the the edges length from the named selections such as "edge_1_0.50_mm" 
+# (extract 0.5 mm length) or "edge_23_0.27_mm" (extract 0.27mm length).
+# Assign, on each edge, a size equal to the edge's length divided by the 
+# pre-defined number of layers per solid.
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model,min=0.002,max=2.))
 ids=[]
@@ -131,7 +133,9 @@ for label in part.get_labels():
 # ~~~~~~~~~~~~~~~
 # Set the sweep direction vector.
 # Setup the geometric tolerances for lateral and stacking defeature.
-# Append the ids of the soft local sizings that have been previously-defined on the edges.
+# Select the sweep direction as z axis (0,0,1).
+# Append the ids of the soft local sizings that have been previously-defined on
+# the edges.
 
 # Instantiate the volume sweeper
 sweeper = prime.VolumeSweeper(model)
@@ -191,7 +195,8 @@ if display_intermediate_steps:
 ###############################################################################
 # Stack the base face using the volume sweeper.
 # ~~~~~~~~~~~~~~~
-# Use volume sweeper to stack the base face along the previously-defined sweep direction.
+# Use volume sweeper to stack the base face along the previously-defined sweep 
+# direction.
 # Include the previously-defined stacker parameters.
 # Display the final volume mesh.
 
@@ -212,17 +217,24 @@ if display_intermediate_steps:
 # Setup the zone naming before the mesh output
 # ~~~~~~~~~~~~~~~
 # Delete the unnecessary topo entities.
-# Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the walls surrounding the solid will be named "wall_A").
+# Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the 
+# walls surrounding the solid will be named "wall_A").
 # Convert the labels to mesh zones.
- 
-part.delete_topo_entities(params = prime.DeleteTopoEntitiesParams(
-                                                            model,
-                                                            delete_geom_zonelets=True,
-                                                            delete_mesh_zonelets=False))
+
+#Define deletion parameters
+deletion_params=prime.DeleteTopoEntitiesParams(model,
+                                              delete_geom_zonelets=True,
+                                              delete_mesh_zonelets=False)
+# Delete un-necessary geometrical entities.
+part.delete_topo_entities(deletion_params)
+# Rename the walls surrounding any volume of the mesh by appending the string "wall_" 
+# to the solid's name. i.e. If a solid is named "my_solid", the surrounding walls will 
+# be named "wall_my_solid".
 for volume in part.get_volumes():
     volume_zone_name = "wall_"+model.get_zone_name(part.get_volume_zone_of_volume(volume))
     label_zonelets = part.get_face_zonelets_of_volumes([volume])
     part.add_labels_on_zonelets([volume_zone_name], label_zonelets)
+# Convert labels into mesh zones to be used in the solver.
 mesh_util_create_zones = mesh_util.create_zones_from_labels()
 
 ###############################################################################
