@@ -45,7 +45,7 @@ Procedure
 # Instantiate meshing utilities from the ``lucid`` class.
 
 import ansys.meshing.prime as prime
-#from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import Graphics
 import os
 import tempfile
 
@@ -62,34 +62,37 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Define mesh settings
 # ~~~~~~~~~~~~~~~
-# Define the number of layers per solid and the size in mm 
-# of the quad-dominant mesh on the base size
+# Define the number of layers per solid 
+# Define the size in mm of the quad-dominant mesh on the base size
+# Define the path to the CAD file to be meshed
 
-layers_per_solid = 3 #number of hexa mesh layers in each solid
-base_face_size = 0.7 #the surface mesh size in mm on the base face 
-#cad_file = r'C:/Users/gpappala/OneDrive - ANSYS, Inc/Documents/WIP/ANSYS/PY_PRIME_GIT_HUB_EXAMPLE/CADs/multi_layer_quad_mesh_pcb.pmdb'
-cad_file=r'D:/multi_layer_quad_mesh_pcb.pmdat'
+layers_per_solid = 4 #number of hexa mesh layers in each solid
+base_face_size = 0.5 #the surface mesh size in mm on the base face 
+# Download the example CAD file using prime.examples functions
+# Else, write the path to the desired CAD file on your machine 
+# .scdoc/.dsco/.pmdb/ are supported
+cad_file=prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
 
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the generic sample pcb geometry.
-# Use the WORKBENCH CadReaderRoute to ensure that the shared topology is kept.
-# Display the imported geometry.
+# Import the geometry into Prime server
+# Use the WORKBENCH CadReaderRoute to ensure that the shared topology is kept
+# If you are using .scdoc/.dsco/.pmdb
 
-#Use the following command to open .scdoc/.dsco/.pmdb
+# Use the following command to open .scdoc/.dsco/.pmdb
 # mesh_util.read(
 #     file_name = cad_file,
 #     cad_reader_route = prime.CadReaderRoute.WORKBENCH)
 
-mesh_util.read(file_name = cad_file)
+mesh_util.read(file_name=cad_file)
 
 ###############################################################################
 # Display the imported CAD in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
-#display = Graphics(model)
-#display()
+display = Graphics(model)
+display()
 
 ###############################################################################
 # Define edge sizing constraints
@@ -179,7 +182,7 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 # Display the meshed base face in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
-#display()
+display()
 
 ###############################################################################
 # Stack the base face using the volume sweeper.
@@ -198,7 +201,7 @@ stackbase_results = sweeper.stack_base_face(
 # Display the final PCB mesh in the pyvista environment
 # ~~~~~~~~~~~~~~~
 
-#display()
+display()
 
 ###############################################################################
 # Setup the zone naming before the mesh output
@@ -228,7 +231,7 @@ mesh_util_create_zones = mesh_util.create_zones_from_labels()
 #     assert os.path.exists(mesh_file)
 #     print("\nExported file:\n", mesh_file)
 
-mesh_util.write(cad_file.replace('pmdat','cas'))
+mesh_util.write('D:/prime_test_pcb_mesh.cas')
 
 ###############################################################################
 # Exit PyPrimeMesh
