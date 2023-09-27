@@ -12,8 +12,9 @@ Objective
 
 The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the stacker technology.
 This script allows to easily setup the mesh size of the base face (xy plane in this example) and the number of mesh layers along the sweep direction (z axis in this example).
-The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim (as shown in the description image).
-These named selections will allow specifying the number of mesh elements to be generated along such edges.
+The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim. 
+Have a close look at the Discovery's tree's snapshot that is provided in the image below to understand the model's organization.
+Edges named selections will allow specifying the number of mesh elements to be generated along the sweep direction.
 To simplify the process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are used.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb.png
@@ -52,10 +53,10 @@ Procedure
 ###############################################################################
 # Import all necessary modules
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
-# Notice that PyVista library must be installed to be able to run the visualization tools included in this script
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
+# Notice that PyVista library must be installed to be able to run the visualization tools included in this script.
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import Graphics
@@ -76,13 +77,14 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Define CAD file and mesh settings
 # ~~~~~~~~~~~~~~~
-# Define the number of layers per solid 
-# Define the size in mm of the quad-dominant mesh on the base size
-# Define the path to the CAD file to be meshed
-
+# Define the number of layers per solid.
+# Define the size in mm of the quad-dominant mesh on the base size.
+# Define the path to the CAD file to be meshed.
 # Download the example CAD file using prime.examples function. Else, write the 
-# path to the desired CAD file on your machine.
-# .scdoc/.dsco/.pmdb/ are supported
+# path to the desired CAD file on your machine. 
+# .scdoc/.dsco/.pmdb/ are supported.
+
+# cad_file='/path/to/any/cad/file.dsco'
 cad_file=prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
 layers_per_solid = 4 #number of hexa mesh layers in each solid
 base_face_size = 0.5 #the surface mesh size in mm on the base face 
@@ -93,9 +95,9 @@ display_intermediate_steps=True#Use True/False
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Import the geometry into Prime server
+# Import the geometry into Prime server.
 # Use the WORKBENCH CadReaderRoute to ensure that the shared topology is kept.
-# If you are using .scdoc/.dsco/.pmdb
+# If you are using .scdoc/.dsco/.pmdb.
 
 mesh_util.read(file_name=cad_file)
 # Use the following command to open .scdoc/.dsco/.pmdb
@@ -119,18 +121,23 @@ if display_intermediate_steps:
 # Assign, on each edge, a size equal to the edge's length divided by the 
 # pre-defined number of layers per solid.
 
+# Set generic global sizing from 0.002mm and 2mm.
 model.set_global_sizing_params(prime.GlobalSizingParams(model,min=0.002,max=2.))
 ids=[]
+# collect the imported geometry
 part = model.parts[0]
 for label in part.get_labels():
     # Check whether the named selection's name starts with the string "edge"
     if label.startswith('edge'):
         # Extract the edge's length splitting its name at every "_" string 
         # and collect the second-last number
-        length = float(label.split("_")[-2])
+        length = float(label.split("_")[-2])# get 0.27 from "edge_23_0.27_mm"
+        # Initialize a constant-size mesh control (SOFT)
         soft_size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
+        # Assign a mesh size equal to the edge's length/number of mesh layers 
         soft_size_params = prime.SoftSizingParams(model = model,
                                                   max = length/layers_per_solid)
+        # Finilize the creation of mesh sizing 
         soft_size_control.set_soft_sizing_params(soft_size_params)
         soft_size_scope = prime.ScopeDefinition(model,
                                               part_expression = part.name,
@@ -192,7 +199,7 @@ base_scope = prime.lucid.SurfaceScope(
     part_expression = part.name,
     scope_evaluation_type = prime.ScopeEvaluationType.LABELS)
 
-# Generate the surface mesh on the base face.
+# Generate the quad-dominant surface mesh on the base face.
 mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
                                                         size_control_names="b_f_size", 
                                                         scope=base_scope, 
@@ -213,6 +220,7 @@ if display_intermediate_steps:
 # Include the previously-defined stacker parameters.
 # Display the final volume mesh.
 
+# Use the stack_base_face function di generate the volume mesh
 stackbase_results = sweeper.stack_base_face(
     part_id = model.get_part_by_name(part.name).id,
     base_face_ids = base_faces,
