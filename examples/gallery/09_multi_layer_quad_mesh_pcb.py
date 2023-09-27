@@ -21,9 +21,22 @@ To simplify the process and enhance convenience, multiple meshing utilities prov
    :width: 800
    :alt: Generic PCB geometry.
 
+The resulting mesh will look as follows:
+
+.. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png
+   :align: center
+   :width: 600
+   :alt: Generic PCB geometry meshed.
+
+.. image:: ../../../images/multi_layer_quad_mesh_pcb.png
+   :align: center
+   :width: 600
+   :alt: Generic PCB geometry meshed, zoom in.
+
+
 Procedure
 ~~~~~~~~~~
-* Import the fundamental libraries that are necessary top run the script
+* Import the fundamental libraries that are necessary to run the script
 * Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
 * Define the main mesh parameters: base size and number of layers along the sweep direction. 
 * Import the CAD geometry.
