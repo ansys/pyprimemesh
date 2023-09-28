@@ -91,12 +91,17 @@ class GRPCCommunicator(Communicator):
             ) from err
 
         self._stub = prime_pb2_grpc.PrimeStub(self._channel)
-        response = self._stub.Initialize(prime_pb2.InitializeRequest())
-        message = json.loads(response.data)
-        if 'ServerError' in message:
-            raise ConnectionError(message['ServerError'])
-        elif 'Results' in message:
-            self._models = message['Results']
+        try:
+            response = self._stub.Initialize(prime_pb2.InitializeRequest())
+            message = json.loads(response.data)
+            if 'ServerError' in message:
+                raise ConnectionError(message['ServerError'])
+            elif 'Results' in message:
+                self._models = message['Results']
+        except ConnectionError:
+            raise
+        except:
+            pass
 
     @error_code_handler
     @communicator_error_handler
