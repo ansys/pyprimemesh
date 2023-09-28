@@ -75,6 +75,7 @@ class GRPCCommunicator(Communicator):
     ):
         """Initialize the server connection."""
         self._channel = kwargs.get('channel', None)
+        self._models = []
         if self._channel is None:
             ip_addr = f"{ip}:{port}"
             channel_options = grpc_utils.get_default_channel_args()
@@ -90,6 +91,12 @@ class GRPCCommunicator(Communicator):
             ) from err
 
         self._stub = prime_pb2_grpc.PrimeStub(self._channel)
+        response = self._stub.Initialize(prime_pb2.InitializeRequest())
+        message = json.loads(response.data)
+        if 'ServerError' in message:
+            raise ConnectionError(message['ServerError'])
+        elif 'Results' in message:
+            self._models = message['Results']
 
     @error_code_handler
     @communicator_error_handler
@@ -249,3 +256,8 @@ class GRPCCommunicator(Communicator):
     def __del__(self):
         """Close communication when deleting the instance."""
         self.close()
+
+    @property
+    def models(self):
+        """List of models available."""
+        return self._models

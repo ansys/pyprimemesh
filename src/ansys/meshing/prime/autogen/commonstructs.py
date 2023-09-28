@@ -379,3 +379,251 @@ class DeleteResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class CopyZoneletsParams(CoreObject):
+    """Parameters to copy zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            copy_zones: bool):
+        self._copy_zones = copy_zones
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            copy_zones: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CopyZoneletsParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CopyZoneletsParams object with default parameters.
+        copy_zones: bool, optional
+            Option to copy zones of input zonelets to corresponding copied zonelets.
+        json_data: dict, optional
+            JSON dictionary to create a CopyZoneletsParams object with provided parameters.
+
+        Examples
+        --------
+        >>> copy_zonelets_params = prime.CopyZoneletsParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["copyZones"] if "copyZones" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [copy_zones])
+            if all_field_specified:
+                self.__initialize(
+                    copy_zones)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CopyZoneletsParams")
+                    json_data = param_json["CopyZoneletsParams"] if "CopyZoneletsParams" in param_json else {}
+                    self.__initialize(
+                        copy_zones if copy_zones is not None else ( CopyZoneletsParams._default_params["copy_zones"] if "copy_zones" in CopyZoneletsParams._default_params else (json_data["copyZones"] if "copyZones" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            copy_zones: bool = None):
+        """Set the default values of CopyZoneletsParams.
+
+        Parameters
+        ----------
+        copy_zones: bool, optional
+            Option to copy zones of input zonelets to corresponding copied zonelets.
+        """
+        args = locals()
+        [CopyZoneletsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CopyZoneletsParams.
+
+        Examples
+        --------
+        >>> CopyZoneletsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CopyZoneletsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._copy_zones is not None:
+            json_data["copyZones"] = self._copy_zones
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "copy_zones :  %s" % (self._copy_zones)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def copy_zones(self) -> bool:
+        """Option to copy zones of input zonelets to corresponding copied zonelets.
+        """
+        return self._copy_zones
+
+    @copy_zones.setter
+    def copy_zones(self, value: bool):
+        self._copy_zones = value
+
+class CopyZoneletsResults(CoreObject):
+    """Result structure associated with copying zonelets.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            copied_zonelets: Iterable[int],
+            copied_face_zonelets: Iterable[int]):
+        self._error_code = ErrorCode(error_code)
+        self._copied_zonelets = copied_zonelets if isinstance(copied_zonelets, np.ndarray) else np.array(copied_zonelets, dtype=np.int32) if copied_zonelets is not None else None
+        self._copied_face_zonelets = copied_face_zonelets if isinstance(copied_face_zonelets, np.ndarray) else np.array(copied_face_zonelets, dtype=np.int32) if copied_face_zonelets is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            copied_zonelets: Iterable[int] = None,
+            copied_face_zonelets: Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the CopyZoneletsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a CopyZoneletsResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        copied_zonelets: Iterable[int], optional
+            Ids of the copied zonelets.
+        copied_face_zonelets: Iterable[int], optional
+            Ids of the copied bounding faces of cell zonelets.
+        json_data: dict, optional
+            JSON dictionary to create a CopyZoneletsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> copy_zonelets_results = prime.CopyZoneletsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["copiedZonelets"] if "copiedZonelets" in json_data else None,
+                json_data["copiedFaceZonelets"] if "copiedFaceZonelets" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, copied_zonelets, copied_face_zonelets])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    copied_zonelets,
+                    copied_face_zonelets)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CopyZoneletsResults")
+                    json_data = param_json["CopyZoneletsResults"] if "CopyZoneletsResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( CopyZoneletsResults._default_params["error_code"] if "error_code" in CopyZoneletsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        copied_zonelets if copied_zonelets is not None else ( CopyZoneletsResults._default_params["copied_zonelets"] if "copied_zonelets" in CopyZoneletsResults._default_params else (json_data["copiedZonelets"] if "copiedZonelets" in json_data else None)),
+                        copied_face_zonelets if copied_face_zonelets is not None else ( CopyZoneletsResults._default_params["copied_face_zonelets"] if "copied_face_zonelets" in CopyZoneletsResults._default_params else (json_data["copiedFaceZonelets"] if "copiedFaceZonelets" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            copied_zonelets: Iterable[int] = None,
+            copied_face_zonelets: Iterable[int] = None):
+        """Set the default values of CopyZoneletsResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        copied_zonelets: Iterable[int], optional
+            Ids of the copied zonelets.
+        copied_face_zonelets: Iterable[int], optional
+            Ids of the copied bounding faces of cell zonelets.
+        """
+        args = locals()
+        [CopyZoneletsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of CopyZoneletsResults.
+
+        Examples
+        --------
+        >>> CopyZoneletsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CopyZoneletsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._copied_zonelets is not None:
+            json_data["copiedZonelets"] = self._copied_zonelets
+        if self._copied_face_zonelets is not None:
+            json_data["copiedFaceZonelets"] = self._copied_face_zonelets
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\ncopied_zonelets :  %s\ncopied_face_zonelets :  %s" % (self._error_code, self._copied_zonelets, self._copied_face_zonelets)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def copied_zonelets(self) -> Iterable[int]:
+        """Ids of the copied zonelets.
+        """
+        return self._copied_zonelets
+
+    @copied_zonelets.setter
+    def copied_zonelets(self, value: Iterable[int]):
+        self._copied_zonelets = value
+
+    @property
+    def copied_face_zonelets(self) -> Iterable[int]:
+        """Ids of the copied bounding faces of cell zonelets.
+        """
+        return self._copied_face_zonelets
+
+    @copied_face_zonelets.setter
+    def copied_face_zonelets(self, value: Iterable[int]):
+        self._copied_face_zonelets = value

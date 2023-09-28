@@ -74,6 +74,7 @@ class Model(_Model):
         sc_data = res["SizeControl"]
         pc_data = res["PrismControl"]
         wc_data = res["WrapperControl"]
+        mc_data = res["WrapperControl"]
         vc_data = res["VolumeControl"]
         if "PeriodicControl" in res:
             percon_data = res["PeriodicControl"]
@@ -87,6 +88,7 @@ class Model(_Model):
         self._control_data._update_size_controls(sc_data)
         self._control_data._update_prism_controls(pc_data)
         self._control_data._update_wrapper_controls(wc_data)
+        self._control_data._update_multi_zone_controls(mc_data)
         self._control_data._update_volume_controls(vc_data)
         self._topo_data = TopoData(self, -1, res["TopoData"], "")
         if "PeriodicControl" in res:
