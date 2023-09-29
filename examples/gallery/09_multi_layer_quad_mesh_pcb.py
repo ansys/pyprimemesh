@@ -64,7 +64,8 @@ selections).
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
-# Notice that PyVista library must be installed to be able to run the visualization tools included in this script.
+# Notice that PyVista library must be installed to be able to run the visualization tools included
+# in this script.
 
 import os
 import tempfile
