@@ -13,14 +13,14 @@ Objective
 ~~~~~~~~~~
 
 The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the
-stacker technology. This script allows to easily setup the mesh size of the base face (xy plane 
+stacker technology. This script allows to easily setup the mesh size of the base face (xy plane
 in this example) and the number of mesh layers along the sweep direction (z axis in this example).
 The CAD edges along the z direction have been assigned with a named selection at CAD level in Ansys
 Discovery/SpaceClaim. Have a close look at the Discovery's tree's snapshot that is provided in the
-image below to understand the model's organization. Share topology in Discovery/SpaceClaim 
+image below to understand the model's organization. Share topology in Discovery/SpaceClaim
 guarantees the generation of a conformal mesh between the solids. Edges named selections will allow
-specifying the number of mesh elements to be generated along the sweep direction. To simplify the 
-process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are 
+specifying the number of mesh elements to be generated along the sweep direction. To simplify the
+process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are
 used.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb.png
@@ -30,10 +30,10 @@ used.
 
 The resulting mesh with 3 layers per solid will look as follows:
 
-.. image:: ../../../images/multi_layer_quad_mesh_pcb_3.png 
+.. image:: ../../../images/multi_layer_quad_mesh_pcb_3.png
    :align: center
    :width: 500
-   :alt: Generic PCB geometry meshed.   
+   :alt: Generic PCB geometry meshed.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png
    :align: center
@@ -44,10 +44,12 @@ The resulting mesh with 3 layers per solid will look as follows:
 Procedure
 ~~~~~~~~~~
 * Import the fundamental libraries that are necessary to run the script
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
-* Define the main mesh parameters: base size and number of layers along the sweep direction. 
+* Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid``
+class.
+* Define the main mesh parameters: base size and number of layers along the sweep direction.
 * Import the CAD geometry.
-* Define the edge sizing along the sweep direction (based on pre-existing edges named selections).
+* Define the edge sizing along the sweep direction (based on pre-existing edges named
+selections).
 * Define the parameters for the volume sweeper.
 * Setup, generate, and mesh the base face.
 * Stack the base face along the sweep direction.
