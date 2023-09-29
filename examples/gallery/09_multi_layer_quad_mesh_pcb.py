@@ -14,6 +14,7 @@ The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry
 This script allows to easily setup the mesh size of the base face (xy plane in this example) and the number of mesh layers along the sweep direction (z axis in this example).
 The CAD adges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim. 
 Have a close look at the Discovery's tree's snapshot that is provided in the image below to understand the model's organization.
+Share topology in Discovery/SpaceClaim guarantees the generation of a conformal mesh between the solids.
 Edges named selections will allow specifying the number of mesh elements to be generated along the sweep direction.
 To simplify the process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are used.
 
