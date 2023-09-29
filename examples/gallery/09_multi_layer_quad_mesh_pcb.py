@@ -5,20 +5,23 @@
 Meshing a generic PCB geometry with multiple number of hexa layers
 ================================================================
 
-**Summary**: This example showcases the process of generating a mesh for                           
+**Summary**: This example showcases the process of generating a mesh for
 a generic PCB geometry giving the possibbility to set the base mesh size
 and the number of layers for each solid.
 
 Objective
 ~~~~~~~~~~
 
-The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the stacker technology.
-This script allows to easily setup the mesh size of the base face (xy plane in this example) and the number of mesh layers along the sweep direction (z axis in this example).
-The CAD edges along the z direction have been assigned with a named selection at CAD level in Ansys Discovery/SpaceClaim. 
-Have a close look at the Discovery's tree's snapshot that is provided in the image below to understand the model's organization.
-Share topology in Discovery/SpaceClaim guarantees the generation of a conformal mesh between the solids.
-Edges named selections will allow specifying the number of mesh elements to be generated along the sweep direction.
-To simplify the process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are used.
+The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the
+stacker technology. This script allows to easily setup the mesh size of the base face (xy plane 
+in this example) and the number of mesh layers along the sweep direction (z axis in this example).
+The CAD edges along the z direction have been assigned with a named selection at CAD level in Ansys
+Discovery/SpaceClaim. Have a close look at the Discovery's tree's snapshot that is provided in the
+image below to understand the model's organization. Share topology in Discovery/SpaceClaim 
+guarantees the generation of a conformal mesh between the solids. Edges named selections will allow
+specifying the number of mesh elements to be generated along the sweep direction. To simplify the 
+process and enhance convenience, multiple meshing utilities provided in the ``lucid`` class are 
+used.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb.png
    :align: center
