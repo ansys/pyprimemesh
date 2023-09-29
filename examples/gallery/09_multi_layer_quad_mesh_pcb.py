@@ -26,12 +26,12 @@ The resulting mesh with 3 layers per solid will look as follows:
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb_1.png
    :align: center
-   :width: 600
+   :width: 500
    :alt: Generic PCB geometry meshed.   
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png
    :align: center
-   :width: 600
+   :width: 500
    :alt: Generic PCB geometry meshed, zoom in.
 
 
