@@ -935,6 +935,7 @@ class AutoMeshParams(CoreObject):
             max_size: float,
             prism_control_ids: Iterable[int],
             thin_volume_control_ids: Iterable[int],
+            multi_zone_control_ids: Iterable[int],
             volume_fill_type: VolumeFillType,
             prism: PrismParams,
             tet: TetParams,
@@ -945,6 +946,7 @@ class AutoMeshParams(CoreObject):
         self._max_size = max_size
         self._prism_control_ids = prism_control_ids if isinstance(prism_control_ids, np.ndarray) else np.array(prism_control_ids, dtype=np.int32) if prism_control_ids is not None else None
         self._thin_volume_control_ids = thin_volume_control_ids if isinstance(thin_volume_control_ids, np.ndarray) else np.array(thin_volume_control_ids, dtype=np.int32) if thin_volume_control_ids is not None else None
+        self._multi_zone_control_ids = multi_zone_control_ids if isinstance(multi_zone_control_ids, np.ndarray) else np.array(multi_zone_control_ids, dtype=np.int32) if multi_zone_control_ids is not None else None
         self._volume_fill_type = VolumeFillType(volume_fill_type)
         self._prism = prism
         self._tet = tet
@@ -959,6 +961,7 @@ class AutoMeshParams(CoreObject):
             max_size: float = None,
             prism_control_ids: Iterable[int] = None,
             thin_volume_control_ids: Iterable[int] = None,
+            multi_zone_control_ids: Iterable[int] = None,
             volume_fill_type: VolumeFillType = None,
             prism: PrismParams = None,
             tet: TetParams = None,
@@ -981,6 +984,8 @@ class AutoMeshParams(CoreObject):
             Set prism control ids.
         thin_volume_control_ids: Iterable[int], optional
             Set thin volume control ids.
+        multi_zone_control_ids: Iterable[int], optional
+            Set MultiZone control ids.
         volume_fill_type: VolumeFillType, optional
             Option to fill volume.
         prism: PrismParams, optional
@@ -1006,6 +1011,7 @@ class AutoMeshParams(CoreObject):
                 json_data["maxSize"] if "maxSize" in json_data else None,
                 json_data["prismControlIds"] if "prismControlIds" in json_data else None,
                 json_data["thinVolumeControlIds"] if "thinVolumeControlIds" in json_data else None,
+                json_data["multiZoneControlIds"] if "multiZoneControlIds" in json_data else None,
                 VolumeFillType(json_data["volumeFillType"] if "volumeFillType" in json_data else None),
                 PrismParams(model = model, json_data = json_data["prism"] if "prism" in json_data else None),
                 TetParams(model = model, json_data = json_data["tet"] if "tet" in json_data else None),
@@ -1013,13 +1019,14 @@ class AutoMeshParams(CoreObject):
                 json_data["volumeControlIds"] if "volumeControlIds" in json_data else None,
                 json_data["periodicControlIds"] if "periodicControlIds" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [size_field_type, max_size, prism_control_ids, thin_volume_control_ids, volume_fill_type, prism, tet, hexcore, volume_control_ids, periodic_control_ids])
+            all_field_specified = all(arg is not None for arg in [size_field_type, max_size, prism_control_ids, thin_volume_control_ids, multi_zone_control_ids, volume_fill_type, prism, tet, hexcore, volume_control_ids, periodic_control_ids])
             if all_field_specified:
                 self.__initialize(
                     size_field_type,
                     max_size,
                     prism_control_ids,
                     thin_volume_control_ids,
+                    multi_zone_control_ids,
                     volume_fill_type,
                     prism,
                     tet,
@@ -1037,6 +1044,7 @@ class AutoMeshParams(CoreObject):
                         max_size if max_size is not None else ( AutoMeshParams._default_params["max_size"] if "max_size" in AutoMeshParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
                         prism_control_ids if prism_control_ids is not None else ( AutoMeshParams._default_params["prism_control_ids"] if "prism_control_ids" in AutoMeshParams._default_params else (json_data["prismControlIds"] if "prismControlIds" in json_data else None)),
                         thin_volume_control_ids if thin_volume_control_ids is not None else ( AutoMeshParams._default_params["thin_volume_control_ids"] if "thin_volume_control_ids" in AutoMeshParams._default_params else (json_data["thinVolumeControlIds"] if "thinVolumeControlIds" in json_data else None)),
+                        multi_zone_control_ids if multi_zone_control_ids is not None else ( AutoMeshParams._default_params["multi_zone_control_ids"] if "multi_zone_control_ids" in AutoMeshParams._default_params else (json_data["multiZoneControlIds"] if "multiZoneControlIds" in json_data else None)),
                         volume_fill_type if volume_fill_type is not None else ( AutoMeshParams._default_params["volume_fill_type"] if "volume_fill_type" in AutoMeshParams._default_params else VolumeFillType(json_data["volumeFillType"] if "volumeFillType" in json_data else None)),
                         prism if prism is not None else ( AutoMeshParams._default_params["prism"] if "prism" in AutoMeshParams._default_params else PrismParams(model = model, json_data = (json_data["prism"] if "prism" in json_data else None))),
                         tet if tet is not None else ( AutoMeshParams._default_params["tet"] if "tet" in AutoMeshParams._default_params else TetParams(model = model, json_data = (json_data["tet"] if "tet" in json_data else None))),
@@ -1056,6 +1064,7 @@ class AutoMeshParams(CoreObject):
             max_size: float = None,
             prism_control_ids: Iterable[int] = None,
             thin_volume_control_ids: Iterable[int] = None,
+            multi_zone_control_ids: Iterable[int] = None,
             volume_fill_type: VolumeFillType = None,
             prism: PrismParams = None,
             tet: TetParams = None,
@@ -1074,6 +1083,8 @@ class AutoMeshParams(CoreObject):
             Set prism control ids.
         thin_volume_control_ids: Iterable[int], optional
             Set thin volume control ids.
+        multi_zone_control_ids: Iterable[int], optional
+            Set MultiZone control ids.
         volume_fill_type: VolumeFillType, optional
             Option to fill volume.
         prism: PrismParams, optional
@@ -1112,6 +1123,8 @@ class AutoMeshParams(CoreObject):
             json_data["prismControlIds"] = self._prism_control_ids
         if self._thin_volume_control_ids is not None:
             json_data["thinVolumeControlIds"] = self._thin_volume_control_ids
+        if self._multi_zone_control_ids is not None:
+            json_data["multiZoneControlIds"] = self._multi_zone_control_ids
         if self._volume_fill_type is not None:
             json_data["volumeFillType"] = self._volume_fill_type
         if self._prism is not None:
@@ -1128,7 +1141,7 @@ class AutoMeshParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "size_field_type :  %s\nmax_size :  %s\nprism_control_ids :  %s\nthin_volume_control_ids :  %s\nvolume_fill_type :  %s\nprism :  %s\ntet :  %s\nhexcore :  %s\nvolume_control_ids :  %s\nperiodic_control_ids :  %s" % (self._size_field_type, self._max_size, self._prism_control_ids, self._thin_volume_control_ids, self._volume_fill_type, '{ ' + str(self._prism) + ' }', '{ ' + str(self._tet) + ' }', '{ ' + str(self._hexcore) + ' }', self._volume_control_ids, self._periodic_control_ids)
+        message = "size_field_type :  %s\nmax_size :  %s\nprism_control_ids :  %s\nthin_volume_control_ids :  %s\nmulti_zone_control_ids :  %s\nvolume_fill_type :  %s\nprism :  %s\ntet :  %s\nhexcore :  %s\nvolume_control_ids :  %s\nperiodic_control_ids :  %s" % (self._size_field_type, self._max_size, self._prism_control_ids, self._thin_volume_control_ids, self._multi_zone_control_ids, self._volume_fill_type, '{ ' + str(self._prism) + ' }', '{ ' + str(self._tet) + ' }', '{ ' + str(self._hexcore) + ' }', self._volume_control_ids, self._periodic_control_ids)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1171,6 +1184,16 @@ class AutoMeshParams(CoreObject):
     @thin_volume_control_ids.setter
     def thin_volume_control_ids(self, value: Iterable[int]):
         self._thin_volume_control_ids = value
+
+    @property
+    def multi_zone_control_ids(self) -> Iterable[int]:
+        """Set MultiZone control ids.
+        """
+        return self._multi_zone_control_ids
+
+    @multi_zone_control_ids.setter
+    def multi_zone_control_ids(self, value: Iterable[int]):
+        self._multi_zone_control_ids = value
 
     @property
     def volume_fill_type(self) -> VolumeFillType:

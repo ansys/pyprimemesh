@@ -24,6 +24,16 @@ class SplineRefinementType(enum.IntEnum):
     P = 1
     """P refinement of spline."""
 
+class SplineFeatureCaptureType(enum.IntEnum):
+    """Options to capture features in spline.
+    """
+    IGNORE = 0
+    """Ignores feature capture in spline."""
+    BYANGLE = 1
+    """Uses angle for capturing features in spline."""
+    BYEDGES = 2
+    """Use edges for capturing features in spline."""
+
 class IGAResults(CoreObject):
     """Results of IGA operations.
     """
@@ -272,7 +282,7 @@ class IGASpline(CoreObject):
     def id(self, value: int):
         self._id = value
 
-class IGAUSplineSurf(CoreObject):
+class IGAUnstructuredSplineSurf(CoreObject):
     """Information of unstructured spline surface.
     """
     _default_params = {}
@@ -315,12 +325,12 @@ class IGAUSplineSurf(CoreObject):
             shell_thickness: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the IGAUSplineSurf.
+        """Initializes the IGAUnstructuredSplineSurf.
 
         Parameters
         ----------
         model: Model
-            Model to create a IGAUSplineSurf object with default parameters.
+            Model to create a IGAUnstructuredSplineSurf object with default parameters.
         id: int, optional
             Id of the unstructured spline surface.
         spline_refinement_level: int, optional
@@ -342,11 +352,11 @@ class IGAUSplineSurf(CoreObject):
         shell_thickness: float, optional
             Thickness of shell.
         json_data: dict, optional
-            JSON dictionary to create a IGAUSplineSurf object with provided parameters.
+            JSON dictionary to create a IGAUnstructuredSplineSurf object with provided parameters.
 
         Examples
         --------
-        >>> iga_uspline_surf = prime.IGAUSplineSurf(model = model)
+        >>> iga_unstructured_spline_surf = prime.IGAUnstructuredSplineSurf(model = model)
         """
         if json_data:
             self.__initialize(
@@ -378,19 +388,19 @@ class IGAUSplineSurf(CoreObject):
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    param_json = model._communicator.initialize_params(model, "IGAUSplineSurf")
-                    json_data = param_json["IGAUSplineSurf"] if "IGAUSplineSurf" in param_json else {}
+                    param_json = model._communicator.initialize_params(model, "IGAUnstructuredSplineSurf")
+                    json_data = param_json["IGAUnstructuredSplineSurf"] if "IGAUnstructuredSplineSurf" in param_json else {}
                     self.__initialize(
-                        id if id is not None else ( IGAUSplineSurf._default_params["id"] if "id" in IGAUSplineSurf._default_params else (json_data["id"] if "id" in json_data else None)),
-                        spline_refinement_level if spline_refinement_level is not None else ( IGAUSplineSurf._default_params["spline_refinement_level"] if "spline_refinement_level" in IGAUSplineSurf._default_params else (json_data["splineRefinementLevel"] if "splineRefinementLevel" in json_data else None)),
-                        control_points if control_points is not None else ( IGAUSplineSurf._default_params["control_points"] if "control_points" in IGAUSplineSurf._default_params else (json_data["controlPoints"] if "controlPoints" in json_data else None)),
-                        spline_points if spline_points is not None else ( IGAUSplineSurf._default_params["spline_points"] if "spline_points" in IGAUSplineSurf._default_params else (json_data["splinePoints"] if "splinePoints" in json_data else None)),
-                        bad_spline_points_indices if bad_spline_points_indices is not None else ( IGAUSplineSurf._default_params["bad_spline_points_indices"] if "bad_spline_points_indices" in IGAUSplineSurf._default_params else (json_data["badSplinePointsIndices"] if "badSplinePointsIndices" in json_data else None)),
-                        deviation_array if deviation_array is not None else ( IGAUSplineSurf._default_params["deviation_array"] if "deviation_array" in IGAUSplineSurf._default_params else (json_data["deviationArray"] if "deviationArray" in json_data else None)),
-                        invalid_jacobian_elements_count if invalid_jacobian_elements_count is not None else ( IGAUSplineSurf._default_params["invalid_jacobian_elements_count"] if "invalid_jacobian_elements_count" in IGAUSplineSurf._default_params else (json_data["invalidJacobianElementsCount"] if "invalidJacobianElementsCount" in json_data else None)),
-                        average_mesh_size if average_mesh_size is not None else ( IGAUSplineSurf._default_params["average_mesh_size"] if "average_mesh_size" in IGAUSplineSurf._default_params else (json_data["averageMeshSize"] if "averageMeshSize" in json_data else None)),
-                        elements_count if elements_count is not None else ( IGAUSplineSurf._default_params["elements_count"] if "elements_count" in IGAUSplineSurf._default_params else (json_data["elementsCount"] if "elementsCount" in json_data else None)),
-                        shell_thickness if shell_thickness is not None else ( IGAUSplineSurf._default_params["shell_thickness"] if "shell_thickness" in IGAUSplineSurf._default_params else (json_data["shellThickness"] if "shellThickness" in json_data else None)))
+                        id if id is not None else ( IGAUnstructuredSplineSurf._default_params["id"] if "id" in IGAUnstructuredSplineSurf._default_params else (json_data["id"] if "id" in json_data else None)),
+                        spline_refinement_level if spline_refinement_level is not None else ( IGAUnstructuredSplineSurf._default_params["spline_refinement_level"] if "spline_refinement_level" in IGAUnstructuredSplineSurf._default_params else (json_data["splineRefinementLevel"] if "splineRefinementLevel" in json_data else None)),
+                        control_points if control_points is not None else ( IGAUnstructuredSplineSurf._default_params["control_points"] if "control_points" in IGAUnstructuredSplineSurf._default_params else (json_data["controlPoints"] if "controlPoints" in json_data else None)),
+                        spline_points if spline_points is not None else ( IGAUnstructuredSplineSurf._default_params["spline_points"] if "spline_points" in IGAUnstructuredSplineSurf._default_params else (json_data["splinePoints"] if "splinePoints" in json_data else None)),
+                        bad_spline_points_indices if bad_spline_points_indices is not None else ( IGAUnstructuredSplineSurf._default_params["bad_spline_points_indices"] if "bad_spline_points_indices" in IGAUnstructuredSplineSurf._default_params else (json_data["badSplinePointsIndices"] if "badSplinePointsIndices" in json_data else None)),
+                        deviation_array if deviation_array is not None else ( IGAUnstructuredSplineSurf._default_params["deviation_array"] if "deviation_array" in IGAUnstructuredSplineSurf._default_params else (json_data["deviationArray"] if "deviationArray" in json_data else None)),
+                        invalid_jacobian_elements_count if invalid_jacobian_elements_count is not None else ( IGAUnstructuredSplineSurf._default_params["invalid_jacobian_elements_count"] if "invalid_jacobian_elements_count" in IGAUnstructuredSplineSurf._default_params else (json_data["invalidJacobianElementsCount"] if "invalidJacobianElementsCount" in json_data else None)),
+                        average_mesh_size if average_mesh_size is not None else ( IGAUnstructuredSplineSurf._default_params["average_mesh_size"] if "average_mesh_size" in IGAUnstructuredSplineSurf._default_params else (json_data["averageMeshSize"] if "averageMeshSize" in json_data else None)),
+                        elements_count if elements_count is not None else ( IGAUnstructuredSplineSurf._default_params["elements_count"] if "elements_count" in IGAUnstructuredSplineSurf._default_params else (json_data["elementsCount"] if "elementsCount" in json_data else None)),
+                        shell_thickness if shell_thickness is not None else ( IGAUnstructuredSplineSurf._default_params["shell_thickness"] if "shell_thickness" in IGAUnstructuredSplineSurf._default_params else (json_data["shellThickness"] if "shellThickness" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -410,7 +420,7 @@ class IGAUSplineSurf(CoreObject):
             average_mesh_size: float = None,
             elements_count: int = None,
             shell_thickness: float = None):
-        """Set the default values of IGAUSplineSurf.
+        """Set the default values of IGAUnstructuredSplineSurf.
 
         Parameters
         ----------
@@ -436,18 +446,18 @@ class IGAUSplineSurf(CoreObject):
             Thickness of shell.
         """
         args = locals()
-        [IGAUSplineSurf._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [IGAUnstructuredSplineSurf._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of IGAUSplineSurf.
+        """Print the default values of IGAUnstructuredSplineSurf.
 
         Examples
         --------
-        >>> IGAUSplineSurf.print_default()
+        >>> IGAUnstructuredSplineSurf.print_default()
         """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in IGAUSplineSurf._default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in IGAUnstructuredSplineSurf._default_params.items())
         print(message)
 
     def _jsonify(self) -> Dict[str, Any]:
@@ -912,40 +922,40 @@ class BoundaryFittedSplineParams(CoreObject):
         self._control_point_selection_type = value
 
 class QuadToSplineParams(CoreObject):
-    """Parameters to control conversion quadrilateral to spline.
+    """Parameters to control conversion of quadrilateral mesh to spline.
     """
     _default_params = {}
 
     def __initialize(
             self,
-            keep_feature: bool,
-            feature_mode: bool,
+            feature_capture_type: SplineFeatureCaptureType,
             feature_angle: float,
             corner_angle: float,
-            pillow: bool,
             shell_thickness: float,
             solid_shell: bool,
-            continuity: int):
-        self._keep_feature = keep_feature
-        self._feature_mode = feature_mode
+            separate_by_zone: bool,
+            zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]],
+            project_on_geometry: bool):
+        self._feature_capture_type = SplineFeatureCaptureType(feature_capture_type)
         self._feature_angle = feature_angle
         self._corner_angle = corner_angle
-        self._pillow = pillow
         self._shell_thickness = shell_thickness
         self._solid_shell = solid_shell
-        self._continuity = continuity
+        self._separate_by_zone = separate_by_zone
+        self._zone_name_shell_thickness_pairs = zone_name_shell_thickness_pairs
+        self._project_on_geometry = project_on_geometry
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            keep_feature: bool = None,
-            feature_mode: bool = None,
+            feature_capture_type: SplineFeatureCaptureType = None,
             feature_angle: float = None,
             corner_angle: float = None,
-            pillow: bool = None,
             shell_thickness: float = None,
             solid_shell: bool = None,
-            continuity: int = None,
+            separate_by_zone: bool = None,
+            zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]] = None,
+            project_on_geometry: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the QuadToSplineParams.
@@ -954,22 +964,22 @@ class QuadToSplineParams(CoreObject):
         ----------
         model: Model
             Model to create a QuadToSplineParams object with default parameters.
-        keep_feature: bool, optional
-            Option to turn on or off feature capture.
-        feature_mode: bool, optional
-            Feature extract options.
+        feature_capture_type: SplineFeatureCaptureType, optional
+            Feature capture options.
         feature_angle: float, optional
             Angle to capture the feature.
         corner_angle: float, optional
             Corner angle of the feature.
-        pillow: bool, optional
-            Option to turn on or off pillow feature.
         shell_thickness: float, optional
             Thickness of shell.
         solid_shell: bool, optional
             Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
-        continuity: int, optional
-            Continuity options. 0 creates C0 continuity spline. 1 creates C1 continuity spline.
+        separate_by_zone: bool, optional
+            Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
+        zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
+            Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+        project_on_geometry: bool, optional
+            Option to project on geometry.
         json_data: dict, optional
             JSON dictionary to create a QuadToSplineParams object with provided parameters.
 
@@ -979,26 +989,26 @@ class QuadToSplineParams(CoreObject):
         """
         if json_data:
             self.__initialize(
-                json_data["keepFeature"] if "keepFeature" in json_data else None,
-                json_data["featureMode"] if "featureMode" in json_data else None,
+                SplineFeatureCaptureType(json_data["featureCaptureType"] if "featureCaptureType" in json_data else None),
                 json_data["featureAngle"] if "featureAngle" in json_data else None,
                 json_data["cornerAngle"] if "cornerAngle" in json_data else None,
-                json_data["pillow"] if "pillow" in json_data else None,
                 json_data["shellThickness"] if "shellThickness" in json_data else None,
                 json_data["solidShell"] if "solidShell" in json_data else None,
-                json_data["continuity"] if "continuity" in json_data else None)
+                json_data["separateByZone"] if "separateByZone" in json_data else None,
+                json_data["zoneNameShellThicknessPairs"] if "zoneNameShellThicknessPairs" in json_data else None,
+                json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [keep_feature, feature_mode, feature_angle, corner_angle, pillow, shell_thickness, solid_shell, continuity])
+            all_field_specified = all(arg is not None for arg in [feature_capture_type, feature_angle, corner_angle, shell_thickness, solid_shell, separate_by_zone, zone_name_shell_thickness_pairs, project_on_geometry])
             if all_field_specified:
                 self.__initialize(
-                    keep_feature,
-                    feature_mode,
+                    feature_capture_type,
                     feature_angle,
                     corner_angle,
-                    pillow,
                     shell_thickness,
                     solid_shell,
-                    continuity)
+                    separate_by_zone,
+                    zone_name_shell_thickness_pairs,
+                    project_on_geometry)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1006,14 +1016,14 @@ class QuadToSplineParams(CoreObject):
                     param_json = model._communicator.initialize_params(model, "QuadToSplineParams")
                     json_data = param_json["QuadToSplineParams"] if "QuadToSplineParams" in param_json else {}
                     self.__initialize(
-                        keep_feature if keep_feature is not None else ( QuadToSplineParams._default_params["keep_feature"] if "keep_feature" in QuadToSplineParams._default_params else (json_data["keepFeature"] if "keepFeature" in json_data else None)),
-                        feature_mode if feature_mode is not None else ( QuadToSplineParams._default_params["feature_mode"] if "feature_mode" in QuadToSplineParams._default_params else (json_data["featureMode"] if "featureMode" in json_data else None)),
+                        feature_capture_type if feature_capture_type is not None else ( QuadToSplineParams._default_params["feature_capture_type"] if "feature_capture_type" in QuadToSplineParams._default_params else SplineFeatureCaptureType(json_data["featureCaptureType"] if "featureCaptureType" in json_data else None)),
                         feature_angle if feature_angle is not None else ( QuadToSplineParams._default_params["feature_angle"] if "feature_angle" in QuadToSplineParams._default_params else (json_data["featureAngle"] if "featureAngle" in json_data else None)),
                         corner_angle if corner_angle is not None else ( QuadToSplineParams._default_params["corner_angle"] if "corner_angle" in QuadToSplineParams._default_params else (json_data["cornerAngle"] if "cornerAngle" in json_data else None)),
-                        pillow if pillow is not None else ( QuadToSplineParams._default_params["pillow"] if "pillow" in QuadToSplineParams._default_params else (json_data["pillow"] if "pillow" in json_data else None)),
                         shell_thickness if shell_thickness is not None else ( QuadToSplineParams._default_params["shell_thickness"] if "shell_thickness" in QuadToSplineParams._default_params else (json_data["shellThickness"] if "shellThickness" in json_data else None)),
                         solid_shell if solid_shell is not None else ( QuadToSplineParams._default_params["solid_shell"] if "solid_shell" in QuadToSplineParams._default_params else (json_data["solidShell"] if "solidShell" in json_data else None)),
-                        continuity if continuity is not None else ( QuadToSplineParams._default_params["continuity"] if "continuity" in QuadToSplineParams._default_params else (json_data["continuity"] if "continuity" in json_data else None)))
+                        separate_by_zone if separate_by_zone is not None else ( QuadToSplineParams._default_params["separate_by_zone"] if "separate_by_zone" in QuadToSplineParams._default_params else (json_data["separateByZone"] if "separateByZone" in json_data else None)),
+                        zone_name_shell_thickness_pairs if zone_name_shell_thickness_pairs is not None else ( QuadToSplineParams._default_params["zone_name_shell_thickness_pairs"] if "zone_name_shell_thickness_pairs" in QuadToSplineParams._default_params else (json_data["zoneNameShellThicknessPairs"] if "zoneNameShellThicknessPairs" in json_data else None)),
+                        project_on_geometry if project_on_geometry is not None else ( QuadToSplineParams._default_params["project_on_geometry"] if "project_on_geometry" in QuadToSplineParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1023,34 +1033,34 @@ class QuadToSplineParams(CoreObject):
 
     @staticmethod
     def set_default(
-            keep_feature: bool = None,
-            feature_mode: bool = None,
+            feature_capture_type: SplineFeatureCaptureType = None,
             feature_angle: float = None,
             corner_angle: float = None,
-            pillow: bool = None,
             shell_thickness: float = None,
             solid_shell: bool = None,
-            continuity: int = None):
+            separate_by_zone: bool = None,
+            zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]] = None,
+            project_on_geometry: bool = None):
         """Set the default values of QuadToSplineParams.
 
         Parameters
         ----------
-        keep_feature: bool, optional
-            Option to turn on or off feature capture.
-        feature_mode: bool, optional
-            Feature extract options.
+        feature_capture_type: SplineFeatureCaptureType, optional
+            Feature capture options.
         feature_angle: float, optional
             Angle to capture the feature.
         corner_angle: float, optional
             Corner angle of the feature.
-        pillow: bool, optional
-            Option to turn on or off pillow feature.
         shell_thickness: float, optional
             Thickness of shell.
         solid_shell: bool, optional
             Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
-        continuity: int, optional
-            Continuity options. 0 creates C0 continuity spline. 1 creates C1 continuity spline.
+        separate_by_zone: bool, optional
+            Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
+        zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
+            Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+        project_on_geometry: bool, optional
+            Option to project on geometry.
         """
         args = locals()
         [QuadToSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1069,49 +1079,39 @@ class QuadToSplineParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        if self._keep_feature is not None:
-            json_data["keepFeature"] = self._keep_feature
-        if self._feature_mode is not None:
-            json_data["featureMode"] = self._feature_mode
+        if self._feature_capture_type is not None:
+            json_data["featureCaptureType"] = self._feature_capture_type
         if self._feature_angle is not None:
             json_data["featureAngle"] = self._feature_angle
         if self._corner_angle is not None:
             json_data["cornerAngle"] = self._corner_angle
-        if self._pillow is not None:
-            json_data["pillow"] = self._pillow
         if self._shell_thickness is not None:
             json_data["shellThickness"] = self._shell_thickness
         if self._solid_shell is not None:
             json_data["solidShell"] = self._solid_shell
-        if self._continuity is not None:
-            json_data["continuity"] = self._continuity
+        if self._separate_by_zone is not None:
+            json_data["separateByZone"] = self._separate_by_zone
+        if self._zone_name_shell_thickness_pairs is not None:
+            json_data["zoneNameShellThicknessPairs"] = self._zone_name_shell_thickness_pairs
+        if self._project_on_geometry is not None:
+            json_data["projectOnGeometry"] = self._project_on_geometry
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "keep_feature :  %s\nfeature_mode :  %s\nfeature_angle :  %s\ncorner_angle :  %s\npillow :  %s\nshell_thickness :  %s\nsolid_shell :  %s\ncontinuity :  %s" % (self._keep_feature, self._feature_mode, self._feature_angle, self._corner_angle, self._pillow, self._shell_thickness, self._solid_shell, self._continuity)
+        message = "feature_capture_type :  %s\nfeature_angle :  %s\ncorner_angle :  %s\nshell_thickness :  %s\nsolid_shell :  %s\nseparate_by_zone :  %s\nzone_name_shell_thickness_pairs :  %s\nproject_on_geometry :  %s" % (self._feature_capture_type, self._feature_angle, self._corner_angle, self._shell_thickness, self._solid_shell, self._separate_by_zone, self._zone_name_shell_thickness_pairs, self._project_on_geometry)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
-    def keep_feature(self) -> bool:
-        """Option to turn on or off feature capture.
+    def feature_capture_type(self) -> SplineFeatureCaptureType:
+        """Feature capture options.
         """
-        return self._keep_feature
+        return self._feature_capture_type
 
-    @keep_feature.setter
-    def keep_feature(self, value: bool):
-        self._keep_feature = value
-
-    @property
-    def feature_mode(self) -> bool:
-        """Feature extract options.
-        """
-        return self._feature_mode
-
-    @feature_mode.setter
-    def feature_mode(self, value: bool):
-        self._feature_mode = value
+    @feature_capture_type.setter
+    def feature_capture_type(self, value: SplineFeatureCaptureType):
+        self._feature_capture_type = value
 
     @property
     def feature_angle(self) -> float:
@@ -1134,16 +1134,6 @@ class QuadToSplineParams(CoreObject):
         self._corner_angle = value
 
     @property
-    def pillow(self) -> bool:
-        """Option to turn on or off pillow feature.
-        """
-        return self._pillow
-
-    @pillow.setter
-    def pillow(self, value: bool):
-        self._pillow = value
-
-    @property
     def shell_thickness(self) -> float:
         """Thickness of shell.
         """
@@ -1164,14 +1154,34 @@ class QuadToSplineParams(CoreObject):
         self._solid_shell = value
 
     @property
-    def continuity(self) -> int:
-        """Continuity options. 0 creates C0 continuity spline. 1 creates C1 continuity spline.
+    def separate_by_zone(self) -> bool:
+        """Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
         """
-        return self._continuity
+        return self._separate_by_zone
 
-    @continuity.setter
-    def continuity(self, value: int):
-        self._continuity = value
+    @separate_by_zone.setter
+    def separate_by_zone(self, value: bool):
+        self._separate_by_zone = value
+
+    @property
+    def zone_name_shell_thickness_pairs(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+        """
+        return self._zone_name_shell_thickness_pairs
+
+    @zone_name_shell_thickness_pairs.setter
+    def zone_name_shell_thickness_pairs(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._zone_name_shell_thickness_pairs = value
+
+    @property
+    def project_on_geometry(self) -> bool:
+        """Option to project on geometry.
+        """
+        return self._project_on_geometry
+
+    @project_on_geometry.setter
+    def project_on_geometry(self, value: bool):
+        self._project_on_geometry = value
 
 class RefineSplineParams(CoreObject):
     """Spline refinement parameters.

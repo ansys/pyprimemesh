@@ -111,3 +111,47 @@ class VolumeMeshTool(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("check_mesh", CheckMeshResults(model = self._model, json_data = result))
         return CheckMeshResults(model = self._model, json_data = result)
+
+    def copy_cell_zonelets(self, cell_zonelets : Iterable[int], target_part_id : int, params : CopyZoneletsParams) -> CopyZoneletsResults:
+        """ Copy cell zonelets and face zonelets connected to the cell zonelets.
+
+
+        Parameters
+        ----------
+        cell_zonelets : Iterable[int]
+            Ids of cell zonelets to be copied.
+        target_part_id : int
+            Part id used to move the copied zonelets.
+        params : CopyZoneletsParams
+            Parameters to copy cell zonelets.
+
+        Returns
+        -------
+        CopyZoneletsResults
+            Returns the CopyZoneletsResults.
+
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>>> results = volume_mesh_tool.copy_cell_zonelets(cell_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))
+
+        """
+        if not isinstance(cell_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for cell_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(target_part_id, int):
+            raise TypeError("Invalid argument type passed for target_part_id, valid argument type is int.")
+        if not isinstance(params, CopyZoneletsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is CopyZoneletsParams.")
+        args = {"cell_zonelets" : cell_zonelets,
+        "target_part_id" : target_part_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::VolumeMeshTool/CopyCellZonelets"
+        self._model._print_beta_api_warning("copy_cell_zonelets")
+        self._model._print_logs_before_command("copy_cell_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("copy_cell_zonelets", CopyZoneletsResults(model = self._model, json_data = result))
+        return CopyZoneletsResults(model = self._model, json_data = result)
