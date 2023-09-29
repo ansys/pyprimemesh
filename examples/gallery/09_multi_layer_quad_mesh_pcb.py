@@ -5,7 +5,9 @@
 Meshing a generic PCB geometry with multiple number of hexa layers
 ================================================================
 
-**Summary**: This example showcases the process of generating a mesh for a generic PCB geometry giving the possibbility to set the base mesh size and the number of layers for each solid.
+**Summary**: This example showcases the process of generating a mesh for 
+a generic PCB geometry giving the possibbility to set the base mesh size
+and the number of layers for each solid.
 
 Objective
 ~~~~~~~~~~
