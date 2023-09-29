@@ -22,14 +22,14 @@ To simplify the process and enhance convenience, multiple meshing utilities prov
    :width: 800
    :alt: Generic PCB geometry.
 
-The resulting mesh will look as follows:
+The resulting mesh with 3 layers per solid will look as follows:
 
-.. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png
+.. image:: ../../../images/multi_layer_quad_mesh_pcb_1.png
    :align: center
    :width: 600
-   :alt: Generic PCB geometry meshed.
+   :alt: Generic PCB geometry meshed.   
 
-.. image:: ../../../images/multi_layer_quad_mesh_pcb.png
+.. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png
    :align: center
    :width: 600
    :alt: Generic PCB geometry meshed, zoom in.
