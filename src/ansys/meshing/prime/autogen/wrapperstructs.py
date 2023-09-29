@@ -468,6 +468,7 @@ class WrapperImproveQualityParams(CoreObject):
             resolve_invalid_node_normals: bool,
             aggressively: bool,
             sharp_angle: float,
+            geom_zonelets: Iterable[int],
             number_of_threads: int):
         self._target_skewness = target_skewness
         self._island_count = island_count
@@ -480,6 +481,7 @@ class WrapperImproveQualityParams(CoreObject):
         self._resolve_invalid_node_normals = resolve_invalid_node_normals
         self._aggressively = aggressively
         self._sharp_angle = sharp_angle
+        self._geom_zonelets = geom_zonelets if isinstance(geom_zonelets, np.ndarray) else np.array(geom_zonelets, dtype=np.int32) if geom_zonelets is not None else None
         self._number_of_threads = number_of_threads
 
     def __init__(
@@ -496,6 +498,7 @@ class WrapperImproveQualityParams(CoreObject):
             resolve_invalid_node_normals: bool = None,
             aggressively: bool = None,
             sharp_angle: float = None,
+            geom_zonelets: Iterable[int] = None,
             number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
@@ -527,6 +530,8 @@ class WrapperImproveQualityParams(CoreObject):
             Control to improve surfaces aggressively or not.
         sharp_angle: float, optional
             Maximum off feature sharp node angle.
+        geom_zonelets: Iterable[int], optional
+            Associated underlying geometry zonelet ids.
         number_of_threads: int, optional
             Number of threads for multithreading.
         json_data: dict, optional
@@ -549,9 +554,10 @@ class WrapperImproveQualityParams(CoreObject):
                 json_data["resolveInvalidNodeNormals"] if "resolveInvalidNodeNormals" in json_data else None,
                 json_data["aggressively"] if "aggressively" in json_data else None,
                 json_data["sharpAngle"] if "sharpAngle" in json_data else None,
+                json_data["geomZonelets"] if "geomZonelets" in json_data else None,
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [target_skewness, island_count, island_tol, overlap_count, overlap_tol, resolve_spikes, resolve_intersections, inflate_dihedral_face_nodes, resolve_invalid_node_normals, aggressively, sharp_angle, number_of_threads])
+            all_field_specified = all(arg is not None for arg in [target_skewness, island_count, island_tol, overlap_count, overlap_tol, resolve_spikes, resolve_intersections, inflate_dihedral_face_nodes, resolve_invalid_node_normals, aggressively, sharp_angle, geom_zonelets, number_of_threads])
             if all_field_specified:
                 self.__initialize(
                     target_skewness,
@@ -565,6 +571,7 @@ class WrapperImproveQualityParams(CoreObject):
                     resolve_invalid_node_normals,
                     aggressively,
                     sharp_angle,
+                    geom_zonelets,
                     number_of_threads)
             else:
                 if model is None:
@@ -584,6 +591,7 @@ class WrapperImproveQualityParams(CoreObject):
                         resolve_invalid_node_normals if resolve_invalid_node_normals is not None else ( WrapperImproveQualityParams._default_params["resolve_invalid_node_normals"] if "resolve_invalid_node_normals" in WrapperImproveQualityParams._default_params else (json_data["resolveInvalidNodeNormals"] if "resolveInvalidNodeNormals" in json_data else None)),
                         aggressively if aggressively is not None else ( WrapperImproveQualityParams._default_params["aggressively"] if "aggressively" in WrapperImproveQualityParams._default_params else (json_data["aggressively"] if "aggressively" in json_data else None)),
                         sharp_angle if sharp_angle is not None else ( WrapperImproveQualityParams._default_params["sharp_angle"] if "sharp_angle" in WrapperImproveQualityParams._default_params else (json_data["sharpAngle"] if "sharpAngle" in json_data else None)),
+                        geom_zonelets if geom_zonelets is not None else ( WrapperImproveQualityParams._default_params["geom_zonelets"] if "geom_zonelets" in WrapperImproveQualityParams._default_params else (json_data["geomZonelets"] if "geomZonelets" in json_data else None)),
                         number_of_threads if number_of_threads is not None else ( WrapperImproveQualityParams._default_params["number_of_threads"] if "number_of_threads" in WrapperImproveQualityParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -605,6 +613,7 @@ class WrapperImproveQualityParams(CoreObject):
             resolve_invalid_node_normals: bool = None,
             aggressively: bool = None,
             sharp_angle: float = None,
+            geom_zonelets: Iterable[int] = None,
             number_of_threads: int = None):
         """Set the default values of WrapperImproveQualityParams.
 
@@ -632,6 +641,8 @@ class WrapperImproveQualityParams(CoreObject):
             Control to improve surfaces aggressively or not.
         sharp_angle: float, optional
             Maximum off feature sharp node angle.
+        geom_zonelets: Iterable[int], optional
+            Associated underlying geometry zonelet ids.
         number_of_threads: int, optional
             Number of threads for multithreading.
         """
@@ -674,13 +685,15 @@ class WrapperImproveQualityParams(CoreObject):
             json_data["aggressively"] = self._aggressively
         if self._sharp_angle is not None:
             json_data["sharpAngle"] = self._sharp_angle
+        if self._geom_zonelets is not None:
+            json_data["geomZonelets"] = self._geom_zonelets
         if self._number_of_threads is not None:
             json_data["numberOfThreads"] = self._number_of_threads
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "target_skewness :  %s\nisland_count :  %s\nisland_tol :  %s\noverlap_count :  %s\noverlap_tol :  %s\nresolve_spikes :  %s\nresolve_intersections :  %s\ninflate_dihedral_face_nodes :  %s\nresolve_invalid_node_normals :  %s\naggressively :  %s\nsharp_angle :  %s\nnumber_of_threads :  %s" % (self._target_skewness, self._island_count, self._island_tol, self._overlap_count, self._overlap_tol, self._resolve_spikes, self._resolve_intersections, self._inflate_dihedral_face_nodes, self._resolve_invalid_node_normals, self._aggressively, self._sharp_angle, self._number_of_threads)
+        message = "target_skewness :  %s\nisland_count :  %s\nisland_tol :  %s\noverlap_count :  %s\noverlap_tol :  %s\nresolve_spikes :  %s\nresolve_intersections :  %s\ninflate_dihedral_face_nodes :  %s\nresolve_invalid_node_normals :  %s\naggressively :  %s\nsharp_angle :  %s\ngeom_zonelets :  %s\nnumber_of_threads :  %s" % (self._target_skewness, self._island_count, self._island_tol, self._overlap_count, self._overlap_tol, self._resolve_spikes, self._resolve_intersections, self._inflate_dihedral_face_nodes, self._resolve_invalid_node_normals, self._aggressively, self._sharp_angle, self._geom_zonelets, self._number_of_threads)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -793,6 +806,16 @@ class WrapperImproveQualityParams(CoreObject):
     @sharp_angle.setter
     def sharp_angle(self, value: float):
         self._sharp_angle = value
+
+    @property
+    def geom_zonelets(self) -> Iterable[int]:
+        """Associated underlying geometry zonelet ids.
+        """
+        return self._geom_zonelets
+
+    @geom_zonelets.setter
+    def geom_zonelets(self, value: Iterable[int]):
+        self._geom_zonelets = value
 
     @property
     def number_of_threads(self) -> int:
@@ -1010,13 +1033,15 @@ class WrapperCloseGapsParams(CoreObject):
             material_point_name: str,
             suggested_part_name: str,
             number_of_threads: int,
-            create_new_part: bool):
+            create_new_part: bool,
+            resolution_factor: float):
         self._target = target
         self._gap_size = gap_size
         self._material_point_name = material_point_name
         self._suggested_part_name = suggested_part_name
         self._number_of_threads = number_of_threads
         self._create_new_part = create_new_part
+        self._resolution_factor = resolution_factor
 
     def __init__(
             self,
@@ -1027,6 +1052,7 @@ class WrapperCloseGapsParams(CoreObject):
             suggested_part_name: str = None,
             number_of_threads: int = None,
             create_new_part: bool = None,
+            resolution_factor: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the WrapperCloseGapsParams.
@@ -1047,6 +1073,8 @@ class WrapperCloseGapsParams(CoreObject):
             Number of threads for multithreading.
         create_new_part: bool, optional
             Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+        resolution_factor: float, optional
+            Factor to resolve the smallest gap for the given gap size.
         json_data: dict, optional
             JSON dictionary to create a WrapperCloseGapsParams object with provided parameters.
 
@@ -1061,9 +1089,10 @@ class WrapperCloseGapsParams(CoreObject):
                 json_data["materialPointName"] if "materialPointName" in json_data else None,
                 json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
-                json_data["createNewPart"] if "createNewPart" in json_data else None)
+                json_data["createNewPart"] if "createNewPart" in json_data else None,
+                json_data["resolutionFactor"] if "resolutionFactor" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [target, gap_size, material_point_name, suggested_part_name, number_of_threads, create_new_part])
+            all_field_specified = all(arg is not None for arg in [target, gap_size, material_point_name, suggested_part_name, number_of_threads, create_new_part, resolution_factor])
             if all_field_specified:
                 self.__initialize(
                     target,
@@ -1071,7 +1100,8 @@ class WrapperCloseGapsParams(CoreObject):
                     material_point_name,
                     suggested_part_name,
                     number_of_threads,
-                    create_new_part)
+                    create_new_part,
+                    resolution_factor)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1084,7 +1114,8 @@ class WrapperCloseGapsParams(CoreObject):
                         material_point_name if material_point_name is not None else ( WrapperCloseGapsParams._default_params["material_point_name"] if "material_point_name" in WrapperCloseGapsParams._default_params else (json_data["materialPointName"] if "materialPointName" in json_data else None)),
                         suggested_part_name if suggested_part_name is not None else ( WrapperCloseGapsParams._default_params["suggested_part_name"] if "suggested_part_name" in WrapperCloseGapsParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
                         number_of_threads if number_of_threads is not None else ( WrapperCloseGapsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperCloseGapsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
-                        create_new_part if create_new_part is not None else ( WrapperCloseGapsParams._default_params["create_new_part"] if "create_new_part" in WrapperCloseGapsParams._default_params else (json_data["createNewPart"] if "createNewPart" in json_data else None)))
+                        create_new_part if create_new_part is not None else ( WrapperCloseGapsParams._default_params["create_new_part"] if "create_new_part" in WrapperCloseGapsParams._default_params else (json_data["createNewPart"] if "createNewPart" in json_data else None)),
+                        resolution_factor if resolution_factor is not None else ( WrapperCloseGapsParams._default_params["resolution_factor"] if "resolution_factor" in WrapperCloseGapsParams._default_params else (json_data["resolutionFactor"] if "resolutionFactor" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1099,7 +1130,8 @@ class WrapperCloseGapsParams(CoreObject):
             material_point_name: str = None,
             suggested_part_name: str = None,
             number_of_threads: int = None,
-            create_new_part: bool = None):
+            create_new_part: bool = None,
+            resolution_factor: float = None):
         """Set the default values of WrapperCloseGapsParams.
 
         Parameters
@@ -1116,6 +1148,8 @@ class WrapperCloseGapsParams(CoreObject):
             Number of threads for multithreading.
         create_new_part: bool, optional
             Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+        resolution_factor: float, optional
+            Factor to resolve the smallest gap for the given gap size.
         """
         args = locals()
         [WrapperCloseGapsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1146,11 +1180,13 @@ class WrapperCloseGapsParams(CoreObject):
             json_data["numberOfThreads"] = self._number_of_threads
         if self._create_new_part is not None:
             json_data["createNewPart"] = self._create_new_part
+        if self._resolution_factor is not None:
+            json_data["resolutionFactor"] = self._resolution_factor
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "target :  %s\ngap_size :  %s\nmaterial_point_name :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s\ncreate_new_part :  %s" % ('{ ' + str(self._target) + ' }', self._gap_size, self._material_point_name, self._suggested_part_name, self._number_of_threads, self._create_new_part)
+        message = "target :  %s\ngap_size :  %s\nmaterial_point_name :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s\ncreate_new_part :  %s\nresolution_factor :  %s" % ('{ ' + str(self._target) + ' }', self._gap_size, self._material_point_name, self._suggested_part_name, self._number_of_threads, self._create_new_part, self._resolution_factor)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1213,6 +1249,16 @@ class WrapperCloseGapsParams(CoreObject):
     @create_new_part.setter
     def create_new_part(self, value: bool):
         self._create_new_part = value
+
+    @property
+    def resolution_factor(self) -> float:
+        """Factor to resolve the smallest gap for the given gap size.
+        """
+        return self._resolution_factor
+
+    @resolution_factor.setter
+    def resolution_factor(self, value: float):
+        self._resolution_factor = value
 
 class WrapperCloseGapsResult(CoreObject):
     """Result structure associated with close gaps operation.

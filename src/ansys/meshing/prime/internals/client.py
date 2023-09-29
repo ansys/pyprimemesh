@@ -91,7 +91,14 @@ class Client(object):
 
     @property
     def model(self):
-        """Get the model associated with the client."""
+        """Get model associated with the client."""
+        if self._default_model is None and hasattr(self._comm, 'models'):
+            if self._comm.models:
+                model_info = self._comm.models[0]
+                self._default_model = Model(
+                    self._comm, model_info['id'], model_info['index'], "Default"
+                )
+
         if self._default_model is None:
             # This assumes that the Model is always object id 1....
             self._default_model = Model(self._comm, 1, 1, "Default")

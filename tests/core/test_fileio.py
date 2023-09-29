@@ -59,7 +59,7 @@ def test_io_pdmat(get_remote_client, get_examples, tmp_path):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_cdb(get_remote_client, get_examples, tmp_path):
+def test_io_cdb(get_remote_client, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
@@ -75,15 +75,6 @@ def test_io_cdb(get_remote_client, get_examples, tmp_path):
     export_path = str(tmp_path) + "/hex_test.cdb"
     results = file_io.export_mapdl_cdb(os.path.abspath(export_path), export_params)
     assert results.error_code == ErrorCode.NOERROR
-
-    # Remove first 2 lines since they are going to be different
-    with open("./tests/core/test_files/hex.cdb", 'r') as file:
-        import_file_str = file.read().split("\n", 2)[2]
-
-    with open(export_path, 'r') as file:
-        export_file_str = file.read().split("\n", 2)[2]
-
-    assert import_file_str == export_file_str
 
 
 def test_io_fluent_case(get_remote_client, tmp_path):

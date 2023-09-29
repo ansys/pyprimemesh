@@ -132,6 +132,11 @@ prime_error_messages = {
     ErrorCode.IGA_HREFINEMENTFAILED: "H refinement failed.",
     ErrorCode.IGA_PREFINEMENTFAILED: "P refinement failed.",
     ErrorCode.IGA_QUADTOSPLINEBASISFAILED: "Quad to spline operation failed.",
+    ErrorCode.MULTIZONEMESHER_BLOCKINGFAILED: "MultiZone blocking failed.",
+    ErrorCode.MULTIZONEMESHER_MESHINGFAILED: "MultiZone meshing failed.",
+    ErrorCode.MULTIZONEMESHER_MESHTRANSFERFAILED: "Mesh transfer from ICEM to Prime failed.",
+    ErrorCode.MULTIZONEMESHER_USERINPUTTOPOLOGYMISSING: "Topology not found. Create topology, mesh it and try again.",
+    ErrorCode.MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER: "Incorrect volume scope provided.",
     ErrorCode.BOIRESULTSFAILED: "BOI creation failed.",
     ErrorCode.CREATEBOI_INVALIDSCALE: "BOI creation failed. Scale factors should not be less than one.",
     ErrorCode.CREATEBOI_INVALIDFLOWDIRECTION: "BOI creation failed. Invalid flow or wake direction.",
@@ -186,6 +191,7 @@ prime_error_messages = {
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE: "Gap size specified for close gaps should be positive double.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE: "Scope specified for close gaps is invalid.",
     ErrorCode.WRAPPERCLOSEGAPSFAILED: "Wrapper gap closing failed.",
+    ErrorCode.WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR: "Resolution Factor should be greater than 0 but less than or equal to 1.",
     ErrorCode.AUTOMESHINVALIDMAXSIZE: "AutoMeshParams has invalid max size specified.",
     ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY: "Invalid scope entity.",
     ErrorCode.INVALIDFIRSTASPECTRATIO: "Invalid first aspect ratio.",
@@ -325,6 +331,7 @@ prime_warning_messages = {
     WarningCode.MESHHASLEFTHANDEDNESSFACES: "Mesh has left handed faces.",
     WarningCode.FACEZONELETSWITHOUTVOLUMES: "Face zonelets have no volume associated to them.",
     WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES: "Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets.",
+    WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
 }
 
 
