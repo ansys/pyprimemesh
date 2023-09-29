@@ -59,10 +59,11 @@ Procedure
 # Instantiate meshing utilities from the ``lucid`` class.
 # Notice that PyVista library must be installed to be able to run the visualization tools included in this script.
 
-import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
 import os
 import tempfile
+
+import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics import Graphics
 
 ###############################################################################
 # Launch Prime server and instantiate the lucid class
@@ -81,16 +82,16 @@ mesh_util = prime.lucid.Mesh(model=model)
 # Define the number of layers per solid.
 # Define the size in mm of the quad-dominant mesh on the base size.
 # Define the path to the CAD file to be meshed.
-# Download the example CAD file using prime.examples function. Else, write the 
-# path to the desired CAD file on your machine. 
+# Download the example CAD file using prime.examples function. Else, write the
+# path to the desired CAD file on your machine.
 # .scdoc/.dsco/.pmdb/ are supported.
 
 # cad_file='/path/to/any/cad/file.dsco'
-cad_file=prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
-layers_per_solid = 4 #number of hexa mesh layers in each solid
-base_face_size = 0.5 #the surface mesh size in mm on the base face 
-# Chose whether to display or not to Display the CAD/mesh at every stage 
-display_intermediate_steps=True#Use True/False
+cad_file = prime.examples.download_multi_layer_quad_mesh_pcb_pmdat()
+layers_per_solid = 4  # number of hexa mesh layers in each solid
+base_face_size = 0.5  # the surface mesh size in mm on the base face
+# Chose whether to display or not to Display the CAD/mesh at every stage
+display_intermediate_steps = True  # Use True/False
 
 
 ###############################################################################
@@ -117,33 +118,34 @@ if display_intermediate_steps:
 # Define edge sizing constraints
 # ~~~~~~~~~~~~~~~
 # Set generic global sizing from 0.002mm and 2mm.
-# Extract the the edges length from the named selections such as "edge_1_0.50_mm" 
+# Extract the the edges length from the named selections such as "edge_1_0.50_mm"
 # (extract 0.5 mm length) or "edge_23_0.27_mm" (extract 0.27mm length).
-# Assign, on each edge, a size equal to the edge's length divided by the 
+# Assign, on each edge, a size equal to the edge's length divided by the
 # pre-defined number of layers per solid.
 
 # Set generic global sizing from 0.002mm and 2mm.
-model.set_global_sizing_params(prime.GlobalSizingParams(model,min=0.002,max=2.))
-ids=[]
+model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.002, max=2.0))
+ids = []
 # collect the imported geometry
 part = model.parts[0]
 for label in part.get_labels():
     # Check whether the named selection's name starts with the string "edge"
     if label.startswith('edge'):
-        # Extract the edge's length splitting its name at every "_" string 
+        # Extract the edge's length splitting its name at every "_" string
         # and collect the second-last number
-        length = float(label.split("_")[-2])# get 0.27 from "edge_23_0.27_mm"
+        length = float(label.split("_")[-2])  # get 0.27 from "edge_23_0.27_mm"
         # Initialize a constant-size mesh control (SOFT)
         soft_size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
-        # Assign a mesh size equal to the edge's length/number of mesh layers 
-        soft_size_params = prime.SoftSizingParams(model = model,
-                                                  max = length/layers_per_solid)
-        # Finilize the creation of mesh sizing 
+        # Assign a mesh size equal to the edge's length/number of mesh layers
+        soft_size_params = prime.SoftSizingParams(model=model, max=length / layers_per_solid)
+        # Finilize the creation of mesh sizing
         soft_size_control.set_soft_sizing_params(soft_size_params)
-        soft_size_scope = prime.ScopeDefinition(model,
-                                              part_expression = part.name,
-                                              entity_type = prime.ScopeEntity.FACEANDEDGEZONELETS,
-                                              label_expression=label+"*")
+        soft_size_scope = prime.ScopeDefinition(
+            model,
+            part_expression=part.name,
+            entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS,
+            label_expression=label + "*",
+        )
         soft_size_control.set_scope(soft_size_scope)
         soft_size_control.set_suggested_name(label)
         # Append the id of the edge sizing to the edge sizings' ids' list
@@ -162,49 +164,52 @@ for label in part.get_labels():
 sweeper = prime.VolumeSweeper(model)
 # Define the parameters for stacker
 stacker_params = prime.MeshStackerParams(
-    model = model,
-    direction = [0, 0, 1],# define the sweep direction for the mesh
-    delete_base = True,# delete the base face in the end of stacker
-    lateral_defeature_tolerance = 0.001,
-    stacking_defeature_tolerance = 0.001,
-    size_control_ids = ids)# list of control ids to be respected by the stacker
+    model=model,
+    direction=[0, 0, 1],  # define the sweep direction for the mesh
+    delete_base=True,  # delete the base face in the end of stacker
+    lateral_defeature_tolerance=0.001,
+    stacking_defeature_tolerance=0.001,
+    size_control_ids=ids,
+)  # list of control ids to be respected by the stacker
 
 ###############################################################################
-# Setup, generate, and mesh the base face 
+# Setup, generate, and mesh the base face
 # ~~~~~~~~~~~~~~~
-# Create a soft sizing control. 
+# Create a soft sizing control.
 # Assign the previously defined base_face_size to the soft sizing.
-# Create the base face. 
+# Create the base face.
 # Mesh the base face.
 # Display the base face.
 
 # Setup the necessary parameters for the generation of the base face.
-soft_size_control=model.control_data.create_size_control(prime.SizingType.SOFT)
-soft_size_params = prime.SoftSizingParams(model = model,max=base_face_size)
+soft_size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
+soft_size_params = prime.SoftSizingParams(model=model, max=base_face_size)
 soft_size_control.set_soft_sizing_params(soft_size_params)
-soft_size_scope = prime.ScopeDefinition(model,part_expression=part.name,
-                                    entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS)
+soft_size_scope = prime.ScopeDefinition(
+    model, part_expression=part.name, entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS
+)
 soft_size_control.set_scope(soft_size_scope)
 soft_size_control.set_suggested_name("b_f_size")
 
 # Create the base face appending the the stacker mesh parameters.
 createbase_results = sweeper.create_base_face(
-    part_id = model.get_part_by_name(part.name).id,
-    topo_volume_ids = model.get_part_by_name(part.name).get_topo_volumes(),
-    params=stacker_params)
+    part_id=model.get_part_by_name(part.name).id,
+    topo_volume_ids=model.get_part_by_name(part.name).get_topo_volumes(),
+    params=stacker_params,
+)
 base_faces = createbase_results.base_face_ids
 model.get_part_by_name(part.name).add_labels_on_topo_entities(["base_faces"], base_faces)
 scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 base_scope = prime.lucid.SurfaceScope(
-    entity_expression = "base_faces",
-    part_expression = part.name,
-    scope_evaluation_type = prime.ScopeEvaluationType.LABELS)
+    entity_expression="base_faces",
+    part_expression=part.name,
+    scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
+)
 
 # Generate the quad-dominant surface mesh on the base face.
 mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
-                                                        size_control_names="b_f_size", 
-                                                        scope=base_scope, 
-                                                        generate_quads=True)
+    size_control_names="b_f_size", scope=base_scope, generate_quads=True
+)
 
 ###############################################################################
 # Display the meshed base face in a PyVista window
@@ -216,17 +221,18 @@ if display_intermediate_steps:
 ###############################################################################
 # Stack the base face using the volume sweeper.
 # ~~~~~~~~~~~~~~~
-# Use volume sweeper to stack the base face along the previously-defined sweep 
+# Use volume sweeper to stack the base face along the previously-defined sweep
 # direction.
 # Include the previously-defined stacker parameters.
 # Display the final volume mesh.
 
 # Use the stack_base_face function di generate the volume mesh
 stackbase_results = sweeper.stack_base_face(
-    part_id = model.get_part_by_name(part.name).id,
-    base_face_ids = base_faces,
-    topo_volume_ids = model.get_part_by_name(part.name).get_topo_volumes(),
-    params = stacker_params)
+    part_id=model.get_part_by_name(part.name).id,
+    base_face_ids=base_faces,
+    topo_volume_ids=model.get_part_by_name(part.name).get_topo_volumes(),
+    params=stacker_params,
+)
 
 ###############################################################################
 # Display the final PCB mesh in a PyVista window
@@ -239,21 +245,21 @@ if display_intermediate_steps:
 # Setup the zone naming before the mesh output
 # ~~~~~~~~~~~~~~~
 # Delete the unnecessary topo entities.
-# Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the 
+# Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the
 # walls surrounding the solid will be named "wall_A").
 # Convert the labels to mesh zones.
 
-#Define deletion parameters
-deletion_params=prime.DeleteTopoEntitiesParams(model,
-                                              delete_geom_zonelets=True,
-                                              delete_mesh_zonelets=False)
+# Define deletion parameters
+deletion_params = prime.DeleteTopoEntitiesParams(
+    model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+)
 # Delete un-necessary geometrical entities.
 part.delete_topo_entities(deletion_params)
-# Rename the walls surrounding any volume of the mesh by appending the string 
-# "wall_" to the solid's name. i.e. If a solid is named "my_solid", the 
+# Rename the walls surrounding any volume of the mesh by appending the string
+# "wall_" to the solid's name. i.e. If a solid is named "my_solid", the
 # surrounding walls will be named "wall_my_solid".
 for volume in part.get_volumes():
-    volume_zone_name = "wall_"+model.get_zone_name(part.get_volume_zone_of_volume(volume))
+    volume_zone_name = "wall_" + model.get_zone_name(part.get_volume_zone_of_volume(volume))
     label_zonelets = part.get_face_zonelets_of_volumes([volume])
     part.add_labels_on_zonelets([volume_zone_name], label_zonelets)
 # Convert labels into mesh zones to be used in the solver.
@@ -269,7 +275,7 @@ with tempfile.TemporaryDirectory() as temp_folder:
     mesh_util.write(mesh_file)
     assert os.path.exists(mesh_file)
     print("\nExported file:\n", mesh_file)
-#Otherwise, specify a path on your local machine:
+# Otherwise, specify a path on your local machine:
 # mesh_util.write('local/path/to/your/mesh_file.cas')
 
 ###############################################################################

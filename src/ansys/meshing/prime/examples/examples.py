@@ -75,11 +75,27 @@ class Examples(Enum):
     F1_RW_END_PLATES_STL = {"filename": "f1_rw_enclosure.stl", "git_folder": "f1_rear_wing"}
     F1_RW_ENCLOSURE_STL = {"filename": "f1_rw_end_plates.stl", "git_folder": "f1_rear_wing"}
     F1_RW_MAIN_PLANE_STL = {"filename": "f1_rw_main_plane.stl", "git_folder": "f1_rear_wing"}
-    MULTI_LAYER_MESH_PCB_DSCO = {"filename": "multi_layer_quad_mesh_pcb.dsco", "git_folder": "multi_layer_quad_mesh_pcb"}
-    MULTI_LAYER_MESH_PCB_PMDB = {"filename": "multi_layer_quad_mesh_pcb.pmdb", "git_folder": "multi_layer_quad_mesh_pcb"}
-    MULTI_LAYER_MESH_PCB_FMD = {"filename": "multi_layer_quad_mesh_pcb.fmd", "git_folder": "multi_layer_quad_mesh_pcb"}
-    MULTI_LAYER_MESH_PCB_SCDOC = {"filename": "multi_layer_quad_mesh_pcb.scdoc", "git_folder": "multi_layer_quad_mesh_pcb"}
-    MULTI_LAYER_MESH_PCB_PMDAT = {"filename": "multi_layer_quad_mesh_pcb.pmdat", "git_folder": "multi_layer_quad_mesh_pcb"}
+    MULTI_LAYER_MESH_PCB_DSCO = {
+        "filename": "multi_layer_quad_mesh_pcb.dsco",
+        "git_folder": "multi_layer_quad_mesh_pcb",
+    }
+    MULTI_LAYER_MESH_PCB_PMDB = {
+        "filename": "multi_layer_quad_mesh_pcb.pmdb",
+        "git_folder": "multi_layer_quad_mesh_pcb",
+    }
+    MULTI_LAYER_MESH_PCB_FMD = {
+        "filename": "multi_layer_quad_mesh_pcb.fmd",
+        "git_folder": "multi_layer_quad_mesh_pcb",
+    }
+    MULTI_LAYER_MESH_PCB_SCDOC = {
+        "filename": "multi_layer_quad_mesh_pcb.scdoc",
+        "git_folder": "multi_layer_quad_mesh_pcb",
+    }
+    MULTI_LAYER_MESH_PCB_PMDAT = {
+        "filename": "multi_layer_quad_mesh_pcb.pmdat",
+        "git_folder": "multi_layer_quad_mesh_pcb",
+    }
+
 
 _DOWNLOADS = []
 
@@ -1130,6 +1146,7 @@ def download_f1_rw_main_plane_stl(
     """
     return get_file(Examples.F1_RW_MAIN_PLANE_STL, destination, force)
 
+
 def download_multi_layer_quad_mesh_pcb_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
@@ -1163,7 +1180,8 @@ def download_multi_layer_quad_mesh_pcb_dsco(
 
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_DSCO, destination, force)
- 
+
+
 def download_multi_layer_quad_mesh_pcb_pmdb(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
@@ -1197,6 +1215,7 @@ def download_multi_layer_quad_mesh_pcb_pmdb(
 
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_PMDB, destination, force)
+
 
 def download_multi_layer_quad_mesh_pcb_scdoc(
     destination: Optional[str] = None, force: bool = False
@@ -1232,6 +1251,7 @@ def download_multi_layer_quad_mesh_pcb_scdoc(
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_SCDOC, destination, force)
 
+
 def download_multi_layer_quad_mesh_pcb_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
@@ -1265,6 +1285,7 @@ def download_multi_layer_quad_mesh_pcb_fmd(
 
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_FMD, destination, force)
+
 
 def download_multi_layer_quad_mesh_pcb_pmdat(
     destination: Optional[str] = None, force: bool = False

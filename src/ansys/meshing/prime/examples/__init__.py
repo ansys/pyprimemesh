@@ -14,6 +14,11 @@ from .examples import (
     download_f1_rw_enclosure_stl,
     download_f1_rw_end_plates_stl,
     download_f1_rw_main_plane_stl,
+    download_multi_layer_quad_mesh_pcb_dsco,
+    download_multi_layer_quad_mesh_pcb_fmd,
+    download_multi_layer_quad_mesh_pcb_pmdat,
+    download_multi_layer_quad_mesh_pcb_pmdb,
+    download_multi_layer_quad_mesh_pcb_scdoc,
     download_pcb_pmdat,
     download_pcb_scdoc,
     download_pipe_tee_dsco,
@@ -28,10 +33,5 @@ from .examples import (
     download_toy_car_pmdat,
     download_toy_car_scdoc,
     download_turbine_blade_cdb,
-    download_multi_layer_quad_mesh_pcb_dsco,
-    download_multi_layer_quad_mesh_pcb_pmdb,
-    download_multi_layer_quad_mesh_pcb_fmd,
-    download_multi_layer_quad_mesh_pcb_scdoc,
-    download_multi_layer_quad_mesh_pcb_pmdat,
 )
 from .unit_test_examples import download_test_examples
