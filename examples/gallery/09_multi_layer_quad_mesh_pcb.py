@@ -25,12 +25,12 @@ To simplify the process and enhance convenience, multiple meshing utilities prov
 
 The resulting mesh with 3 layers per solid will look as follows:
 
-.. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png 
+.. image:: ../../../images/multi_layer_quad_mesh_pcb_3.png 
    :align: center
    :width: 500
    :alt: Generic PCB geometry meshed.   
 
-.. image:: ../../../images/multi_layer_quad_mesh_pcb_3.png
+.. image:: ../../../images/multi_layer_quad_mesh_pcb_2.png
    :align: center
    :width: 500
    :alt: Generic PCB geometry meshed, zoom in.
@@ -249,9 +249,9 @@ deletion_params=prime.DeleteTopoEntitiesParams(model,
                                               delete_mesh_zonelets=False)
 # Delete un-necessary geometrical entities.
 part.delete_topo_entities(deletion_params)
-# Rename the walls surrounding any volume of the mesh by appending the string "wall_" 
-# to the solid's name. i.e. If a solid is named "my_solid", the surrounding walls will 
-# be named "wall_my_solid".
+# Rename the walls surrounding any volume of the mesh by appending the string 
+# "wall_" to the solid's name. i.e. If a solid is named "my_solid", the 
+# surrounding walls will be named "wall_my_solid".
 for volume in part.get_volumes():
     volume_zone_name = "wall_"+model.get_zone_name(part.get_volume_zone_of_volume(volume))
     label_zonelets = part.get_face_zonelets_of_volumes([volume])
