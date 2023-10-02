@@ -1235,6 +1235,28 @@ Return the ids of topofaces.
         self._model._print_logs_after_command("get_adjacent_face_zonelets_of_face_zonelets")
         return result
 
+    def get_edge_zones(self) -> Iterable[int]:
+        """ Get all the edge zones of the part.
+
+
+        Returns
+        -------
+        Iterable[int]
+            Return ids of edge zones.
+
+
+        Examples
+        --------
+        >>> edge_zones = part.get_edge_zones()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Part/GetEdgeZones"
+        self._model._print_logs_before_command("get_edge_zones", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_edge_zones")
+        return result
+
     def get_face_zones(self) -> Iterable[int]:
         """ Get all the face zones of the part.
 
@@ -1440,15 +1462,19 @@ Return the ids of topofaces.
         self._model._print_logs_after_command("get_splines")
         return result
 
-    def get_unstructured_spline_surface(self) -> IGAUSplineSurf:
+    def get_unstructured_spline_surface(self) -> IGAUnstructuredSplineSurf:
         """ Gets the unstructured surface spline for the part.
 
 
         Returns
         -------
-        IGAUSplineSurf
+        IGAUnstructuredSplineSurf
             Returns the surface spline structure.
 
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
 
         Examples
         --------
@@ -1458,10 +1484,11 @@ Return the ids of topofaces.
         """
         args = {}
         command_name = "PrimeMesh::Part/GetUnstructuredSplineSurface"
+        self._model._print_beta_api_warning("get_unstructured_spline_surface")
         self._model._print_logs_before_command("get_unstructured_spline_surface", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("get_unstructured_spline_surface", IGAUSplineSurf(model = self._model, json_data = result))
-        return IGAUSplineSurf(model = self._model, json_data = result)
+        self._model._print_logs_after_command("get_unstructured_spline_surface", IGAUnstructuredSplineSurf(model = self._model, json_data = result))
+        return IGAUnstructuredSplineSurf(model = self._model, json_data = result)
 
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
         """ Get the part summary.

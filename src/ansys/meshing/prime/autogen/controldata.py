@@ -44,6 +44,32 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("create_wrapper_control")
         return result
 
+    def create_multi_zone_control(self) -> List[Any]:
+        """ Creates MultiZone control with defaults.
+
+
+        Returns
+        -------
+        MultiZoneControl
+            Returns the MultiZone control.
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> multizone_control = model.control_data.create_multizone_control()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/CreateMultiZoneControl"
+        self._model._print_beta_api_warning("create_multi_zone_control")
+        self._model._print_logs_before_command("create_multi_zone_control", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_multi_zone_control")
+        return result
+
     def create_size_control(self, type : SizingType) -> List[Any]:
         """ Creates size control for the given sizing type.
 

@@ -29,7 +29,7 @@ class QuadToSpline(CoreObject):
         command_name = "PrimeMesh::QuadToSpline/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def convert_quad_to_spline__beta(self, part_id : int, quad_mesh_face_zonelet_ids : Iterable[int], topo_face_ids : Iterable[int], topo_edge_ids : Iterable[int], quad_to_spline_params : QuadToSplineParams) -> IGAResults:
+    def convert_quad_to_spline(self, part_id : int, quad_mesh_face_zonelet_ids : Iterable[int], topo_face_ids : Iterable[int], quad_to_spline_params : QuadToSplineParams) -> IGAResults:
         """ Converts fully quad mesh with topology to spline with the given conversion parameters.
 
 
@@ -41,8 +41,6 @@ class QuadToSpline(CoreObject):
             Ids of the face zonelets of quad mesh.
         topo_face_ids : Iterable[int]
             Ids of topofaces.
-        topo_edge_ids : Iterable[int]
-            Ids of topoedges.
         quad_to_spline_params : QuadToSplineParams
             Parameters to convert quad to spline.
 
@@ -52,9 +50,13 @@ class QuadToSpline(CoreObject):
             Returns the IGAResults structure.
 
 
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
         Examples
         --------
-        >>> results = quadToSpline.ConvertQuadToSpline(part_id, quad_mesh_face_zonelet_ids, geometric_face_zonelet_ids, geometric_edge_zonelet_ids, quad_to_spline_params)
+        >>> results = quadToSpline.ConvertQuadToSpline(part_id, quad_mesh_face_zonelet_ids, topo_face_ids, quad_to_spline_params)
 
         """
         if not isinstance(part_id, int):
@@ -63,17 +65,15 @@ class QuadToSpline(CoreObject):
             raise TypeError("Invalid argument type passed for quad_mesh_face_zonelet_ids, valid argument type is Iterable[int].")
         if not isinstance(topo_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for topo_face_ids, valid argument type is Iterable[int].")
-        if not isinstance(topo_edge_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_edge_ids, valid argument type is Iterable[int].")
         if not isinstance(quad_to_spline_params, QuadToSplineParams):
             raise TypeError("Invalid argument type passed for quad_to_spline_params, valid argument type is QuadToSplineParams.")
         args = {"part_id" : part_id,
         "quad_mesh_face_zonelet_ids" : quad_mesh_face_zonelet_ids,
         "topo_face_ids" : topo_face_ids,
-        "topo_edge_ids" : topo_edge_ids,
         "quad_to_spline_params" : quad_to_spline_params._jsonify()}
-        command_name = "PrimeMesh::QuadToSpline/ConvertQuadToSpline_Beta"
-        self._model._print_logs_before_command("convert_quad_to_spline__beta", args)
+        command_name = "PrimeMesh::QuadToSpline/ConvertQuadToSpline"
+        self._model._print_beta_api_warning("convert_quad_to_spline")
+        self._model._print_logs_before_command("convert_quad_to_spline", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("convert_quad_to_spline__beta", IGAResults(model = self._model, json_data = result))
+        self._model._print_logs_after_command("convert_quad_to_spline", IGAResults(model = self._model, json_data = result))
         return IGAResults(model = self._model, json_data = result)

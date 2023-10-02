@@ -9,6 +9,7 @@ from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
+from ansys.meshing.prime.core.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
@@ -20,7 +21,7 @@ from ansys.meshing.prime.params.primestructs import SizingType
 class ControlData(_ControlData):
     """Contains all controls.
 
-    This class contains all controls, including size controls, prism controls,
+    This class contains all controls, including size controls, prism controls, multizone controls
     and wrapper controls.
 
     Parameters
@@ -40,6 +41,7 @@ class ControlData(_ControlData):
         """Initialize the ``ControlData`` class."""
         self._model = model
         self._wrapper_controls = []
+        self._mz_controls = []
         self._size_controls = []
         self._prism_controls = []
         self._thin_volume_controls = []
@@ -68,6 +70,29 @@ class ControlData(_ControlData):
         for wc in self._wrapper_controls:
             if wc.name == name:
                 return wc
+        return None
+
+    def get_multi_zone_control_by_name(self, name) -> MultiZoneControl:
+        """Get the multizone control by name.
+
+        Parameters
+        ------------
+        name : str
+            Name of the multizone control.
+
+        Returns
+        -------
+        MultiZoneControl
+            Returns the multizone control.
+
+        Examples
+        --------
+        >>> multi_zone_control = model.control_data.get_multi_zone_control_by_name("mzcontrol-1")
+
+        """
+        for mc in self._mz_controls:
+            if mc.name == name:
+                return mc
         return None
 
     def create_size_control(self, sizing_type: SizingType) -> SizeControl:
@@ -154,6 +179,24 @@ class ControlData(_ControlData):
         res = _ControlData.create_wrapper_control(self)
         new_control = WrapperControl(self._model, res[0], res[1], res[2])
         self._wrapper_controls.append(new_control)
+        return new_control
+
+    def create_multi_zone_control(self) -> MultiZoneControl:
+        """Create multizone control with defaults.
+
+        Returns
+        -------
+        multizone
+            Returns the multizone control.
+
+        Examples
+        --------
+        >>> multizone = model.control_data.create_wrapper_control()
+
+        """
+        res = _ControlData.create_multi_zone_control(self)
+        new_control = MultiZoneControl(self._model, res[0], res[1], res[2])
+        self._mz_controls.append(new_control)
         return new_control
 
     def get_size_control_by_name(self, name: str) -> SizeControl:
@@ -271,6 +314,10 @@ class ControlData(_ControlData):
                     if periodic_control.id == id:
                         self._periodic_controls.remove(periodic_control)
                         break
+                for multi_zone_control in self._mz_controls:
+                    if multi_zone_control.id == id:
+                        self._mz_controls.remove(multi_zone_control)
+                        break
         return res
 
     def _update_size_controls(self, c_data: List):
@@ -281,6 +328,9 @@ class ControlData(_ControlData):
 
     def _update_wrapper_controls(self, c_data: List):
         self._wrapper_controls = [WrapperControl(self._model, c[0], c[1], c[2]) for c in c_data]
+
+    def _update_multi_zone_controls(self, c_data: List):
+        self._mz_controls = [MultiZoneControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
     def _update_volume_controls(self, c_data: List):
         self._volume_controls = [VolumeControl(self._model, c[0], c[1], c[2]) for c in c_data]
@@ -411,6 +461,21 @@ class ControlData(_ControlData):
 
         """
         return self._wrapper_controls
+
+    def multi_zone_controls(self) -> List[MultiZoneControl]:
+        """Get the multizone controls.
+
+        Returns
+        -------
+        List[MultiZoneControl]
+            Returns the list of mutlizone controls.
+
+        Examples
+        --------
+        >>> multi_zone_control = model.control_data.mz_controls
+
+        """
+        return self._mz_controls
 
     def create_periodic_control(self) -> PeriodicControl:
         """Create a periodic control.

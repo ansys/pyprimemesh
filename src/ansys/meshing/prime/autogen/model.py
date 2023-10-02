@@ -29,6 +29,9 @@ class Model(CoreObject, CommunicationManager):
     def _print_logs_after_command(self, command, args = None):
         utils.print_logs_after_command(self._logger, command, args)
 
+    def _print_beta_api_warning(self, command):
+        utils.print_beta_api_warning(self._logger, command)
+
     def delete_parts(self, part_ids : Iterable[int]) -> DeleteResults:
         """ Delete the parts and its entities.
 
