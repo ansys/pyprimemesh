@@ -40,9 +40,9 @@ tests = [
   "pyvista[trame]==0.42.2"
 ]
 doc = [
-  "ansys-sphinx-theme==0.11.2",
+  "ansys-sphinx-theme==0.12.1",
   "jupyter-sphinx==0.4.0",
-  "numpydoc==1.5.0",
+  "numpydoc==1.6.0",
   "Sphinx==7.2.6",
   "pyvista==0.42.2",
   "sphinx-autodoc-typehints==1.24.0",
