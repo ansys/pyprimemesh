@@ -392,6 +392,16 @@ class ErrorCode(enum.IntEnum):
     """Uniform trimmed spline creation failed."""
     IGA_QUADTOSPLINEBASISFAILED = 2421
     """Quad to spline operation failed."""
+    MULTIZONEMESHER_BLOCKINGFAILED = 2601
+    """Creating MultiZone blocking failed."""
+    MULTIZONEMESHER_MESHINGFAILED = 2603
+    """Generating MultiZone mesh failed."""
+    MULTIZONEMESHER_MESHTRANSFERFAILED = 2604
+    """MultiZone mesh transfer failed."""
+    MULTIZONEMESHER_USERINPUTTOPOLOGYMISSING = 2610
+    """Input does not have topology for MultiZone mesh."""
+    MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER = 2612
+    """No volumes for geometry import."""
     PARTHASTOPOLOGY = 2800
     """Part has a topology."""
     SURFACESEARCHFAILED = 2802
@@ -510,6 +520,8 @@ class ErrorCode(enum.IntEnum):
     """Scope specified for close gaps is invalid."""
     WRAPPERCLOSEGAPSFAILED = 3442
     """Wrapper gap closing failed."""
+    WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR = 3443
+    """Resolution Factor should be greater than 0 but less than or equal to 1."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -674,3 +686,5 @@ class WarningCode(enum.IntEnum):
     """Mesh has invalid shape."""
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
+    MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
+    """MultiZone warning codes"""

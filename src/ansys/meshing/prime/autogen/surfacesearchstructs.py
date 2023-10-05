@@ -468,6 +468,130 @@ class SearchByFoldsResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+class SearchByInvalidNormalsResults(CoreObject):
+    """Results structure associated with search invalid normals operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            n_found: int,
+            error_code: ErrorCode):
+        self._n_found = n_found
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            n_found: int = None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the SearchByInvalidNormalsResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a SearchByInvalidNormalsResults object with default parameters.
+        n_found: int, optional
+            Number of invalid normals identified.
+        error_code: ErrorCode, optional
+            Error code associated with search invalid normals operation.
+        json_data: dict, optional
+            JSON dictionary to create a SearchByInvalidNormalsResults object with provided parameters.
+
+        Examples
+        --------
+        >>> search_by_invalid_normals_results = prime.SearchByInvalidNormalsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["nFound"] if "nFound" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [n_found, error_code])
+            if all_field_specified:
+                self.__initialize(
+                    n_found,
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SearchByInvalidNormalsResults")
+                    json_data = param_json["SearchByInvalidNormalsResults"] if "SearchByInvalidNormalsResults" in param_json else {}
+                    self.__initialize(
+                        n_found if n_found is not None else ( SearchByInvalidNormalsResults._default_params["n_found"] if "n_found" in SearchByInvalidNormalsResults._default_params else (json_data["nFound"] if "nFound" in json_data else None)),
+                        error_code if error_code is not None else ( SearchByInvalidNormalsResults._default_params["error_code"] if "error_code" in SearchByInvalidNormalsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            n_found: int = None,
+            error_code: ErrorCode = None):
+        """Set the default values of SearchByInvalidNormalsResults.
+
+        Parameters
+        ----------
+        n_found: int, optional
+            Number of invalid normals identified.
+        error_code: ErrorCode, optional
+            Error code associated with search invalid normals operation.
+        """
+        args = locals()
+        [SearchByInvalidNormalsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of SearchByInvalidNormalsResults.
+
+        Examples
+        --------
+        >>> SearchByInvalidNormalsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SearchByInvalidNormalsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._n_found is not None:
+            json_data["nFound"] = self._n_found
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "n_found :  %s\nerror_code :  %s" % (self._n_found, self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def n_found(self) -> int:
+        """Number of invalid normals identified.
+        """
+        return self._n_found
+
+    @n_found.setter
+    def n_found(self, value: int):
+        self._n_found = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with search invalid normals operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
 class SearchBySelfIntersectionParams(CoreObject):
     """Parameters to search by face element intersection.
     """

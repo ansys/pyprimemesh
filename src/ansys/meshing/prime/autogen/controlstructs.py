@@ -1387,3 +1387,591 @@ class SetParamsResults(CoreObject):
     @warning_code.setter
     def warning_code(self, value: WarningCode):
         self._warning_code = value
+
+class MultiZoneSweepMeshParams(CoreObject):
+    """Defines MultiZone thin sweep mesh control parameters.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            source_and_target_scope: ScopeDefinition,
+            sweep_mesh_size: float,
+            n_divisions: int,
+            thin_sweep: bool):
+        self._source_and_target_scope = source_and_target_scope
+        self._sweep_mesh_size = sweep_mesh_size
+        self._n_divisions = n_divisions
+        self._thin_sweep = thin_sweep
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            source_and_target_scope: ScopeDefinition = None,
+            sweep_mesh_size: float = None,
+            n_divisions: int = None,
+            thin_sweep: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MultiZoneSweepMeshParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MultiZoneSweepMeshParams object with default parameters.
+        source_and_target_scope: ScopeDefinition, optional
+            Source and target faces used to determine the direction of sweep in MultiZone meshing.
+        sweep_mesh_size: float, optional
+            Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+        n_divisions: int, optional
+            Number of divisions in the sweep direction.
+        thin_sweep: bool, optional
+            Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+        json_data: dict, optional
+            JSON dictionary to create a MultiZoneSweepMeshParams object with provided parameters.
+
+        Examples
+        --------
+        >>> multi_zone_sweep_mesh_params = prime.MultiZoneSweepMeshParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ScopeDefinition(model = model, json_data = json_data["sourceAndTargetScope"] if "sourceAndTargetScope" in json_data else None),
+                json_data["sweepMeshSize"] if "sweepMeshSize" in json_data else None,
+                json_data["nDivisions"] if "nDivisions" in json_data else None,
+                json_data["thinSweep"] if "thinSweep" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [source_and_target_scope, sweep_mesh_size, n_divisions, thin_sweep])
+            if all_field_specified:
+                self.__initialize(
+                    source_and_target_scope,
+                    sweep_mesh_size,
+                    n_divisions,
+                    thin_sweep)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MultiZoneSweepMeshParams")
+                    json_data = param_json["MultiZoneSweepMeshParams"] if "MultiZoneSweepMeshParams" in param_json else {}
+                    self.__initialize(
+                        source_and_target_scope if source_and_target_scope is not None else ( MultiZoneSweepMeshParams._default_params["source_and_target_scope"] if "source_and_target_scope" in MultiZoneSweepMeshParams._default_params else ScopeDefinition(model = model, json_data = (json_data["sourceAndTargetScope"] if "sourceAndTargetScope" in json_data else None))),
+                        sweep_mesh_size if sweep_mesh_size is not None else ( MultiZoneSweepMeshParams._default_params["sweep_mesh_size"] if "sweep_mesh_size" in MultiZoneSweepMeshParams._default_params else (json_data["sweepMeshSize"] if "sweepMeshSize" in json_data else None)),
+                        n_divisions if n_divisions is not None else ( MultiZoneSweepMeshParams._default_params["n_divisions"] if "n_divisions" in MultiZoneSweepMeshParams._default_params else (json_data["nDivisions"] if "nDivisions" in json_data else None)),
+                        thin_sweep if thin_sweep is not None else ( MultiZoneSweepMeshParams._default_params["thin_sweep"] if "thin_sweep" in MultiZoneSweepMeshParams._default_params else (json_data["thinSweep"] if "thinSweep" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            source_and_target_scope: ScopeDefinition = None,
+            sweep_mesh_size: float = None,
+            n_divisions: int = None,
+            thin_sweep: bool = None):
+        """Set the default values of MultiZoneSweepMeshParams.
+
+        Parameters
+        ----------
+        source_and_target_scope: ScopeDefinition, optional
+            Source and target faces used to determine the direction of sweep in MultiZone meshing.
+        sweep_mesh_size: float, optional
+            Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+        n_divisions: int, optional
+            Number of divisions in the sweep direction.
+        thin_sweep: bool, optional
+            Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+        """
+        args = locals()
+        [MultiZoneSweepMeshParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MultiZoneSweepMeshParams.
+
+        Examples
+        --------
+        >>> MultiZoneSweepMeshParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MultiZoneSweepMeshParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._source_and_target_scope is not None:
+            json_data["sourceAndTargetScope"] = self._source_and_target_scope._jsonify()
+        if self._sweep_mesh_size is not None:
+            json_data["sweepMeshSize"] = self._sweep_mesh_size
+        if self._n_divisions is not None:
+            json_data["nDivisions"] = self._n_divisions
+        if self._thin_sweep is not None:
+            json_data["thinSweep"] = self._thin_sweep
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "source_and_target_scope :  %s\nsweep_mesh_size :  %s\nn_divisions :  %s\nthin_sweep :  %s" % ('{ ' + str(self._source_and_target_scope) + ' }', self._sweep_mesh_size, self._n_divisions, self._thin_sweep)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def source_and_target_scope(self) -> ScopeDefinition:
+        """Source and target faces used to determine the direction of sweep in MultiZone meshing.
+        """
+        return self._source_and_target_scope
+
+    @source_and_target_scope.setter
+    def source_and_target_scope(self, value: ScopeDefinition):
+        self._source_and_target_scope = value
+
+    @property
+    def sweep_mesh_size(self) -> float:
+        """Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+        """
+        return self._sweep_mesh_size
+
+    @sweep_mesh_size.setter
+    def sweep_mesh_size(self, value: float):
+        self._sweep_mesh_size = value
+
+    @property
+    def n_divisions(self) -> int:
+        """Number of divisions in the sweep direction.
+        """
+        return self._n_divisions
+
+    @n_divisions.setter
+    def n_divisions(self, value: int):
+        self._n_divisions = value
+
+    @property
+    def thin_sweep(self) -> bool:
+        """Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+        """
+        return self._thin_sweep
+
+    @thin_sweep.setter
+    def thin_sweep(self, value: bool):
+        self._thin_sweep = value
+
+class MultiZoneEdgeBiasingParams(CoreObject):
+    """Defines MultiZone edge biasing control parameters.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            face_scope: ScopeDefinition,
+            edge_scope: ScopeDefinition,
+            bias_factor: float,
+            n_divisions: int):
+        self._face_scope = face_scope
+        self._edge_scope = edge_scope
+        self._bias_factor = bias_factor
+        self._n_divisions = n_divisions
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            face_scope: ScopeDefinition = None,
+            edge_scope: ScopeDefinition = None,
+            bias_factor: float = None,
+            n_divisions: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MultiZoneEdgeBiasingParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MultiZoneEdgeBiasingParams object with default parameters.
+        face_scope: ScopeDefinition, optional
+            Reference face zonelets to control mesh clustering orientation.
+        edge_scope: ScopeDefinition, optional
+            Edge zonelets to control the expanse of edge biasing.
+        bias_factor: float, optional
+            Bias factor used for MultiZone edge biasing control.
+        n_divisions: int, optional
+            Number of divisions on the section where edge biasing is done.
+        json_data: dict, optional
+            JSON dictionary to create a MultiZoneEdgeBiasingParams object with provided parameters.
+
+        Examples
+        --------
+        >>> multi_zone_edge_biasing_params = prime.MultiZoneEdgeBiasingParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ScopeDefinition(model = model, json_data = json_data["faceScope"] if "faceScope" in json_data else None),
+                ScopeDefinition(model = model, json_data = json_data["edgeScope"] if "edgeScope" in json_data else None),
+                json_data["biasFactor"] if "biasFactor" in json_data else None,
+                json_data["nDivisions"] if "nDivisions" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [face_scope, edge_scope, bias_factor, n_divisions])
+            if all_field_specified:
+                self.__initialize(
+                    face_scope,
+                    edge_scope,
+                    bias_factor,
+                    n_divisions)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MultiZoneEdgeBiasingParams")
+                    json_data = param_json["MultiZoneEdgeBiasingParams"] if "MultiZoneEdgeBiasingParams" in param_json else {}
+                    self.__initialize(
+                        face_scope if face_scope is not None else ( MultiZoneEdgeBiasingParams._default_params["face_scope"] if "face_scope" in MultiZoneEdgeBiasingParams._default_params else ScopeDefinition(model = model, json_data = (json_data["faceScope"] if "faceScope" in json_data else None))),
+                        edge_scope if edge_scope is not None else ( MultiZoneEdgeBiasingParams._default_params["edge_scope"] if "edge_scope" in MultiZoneEdgeBiasingParams._default_params else ScopeDefinition(model = model, json_data = (json_data["edgeScope"] if "edgeScope" in json_data else None))),
+                        bias_factor if bias_factor is not None else ( MultiZoneEdgeBiasingParams._default_params["bias_factor"] if "bias_factor" in MultiZoneEdgeBiasingParams._default_params else (json_data["biasFactor"] if "biasFactor" in json_data else None)),
+                        n_divisions if n_divisions is not None else ( MultiZoneEdgeBiasingParams._default_params["n_divisions"] if "n_divisions" in MultiZoneEdgeBiasingParams._default_params else (json_data["nDivisions"] if "nDivisions" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            face_scope: ScopeDefinition = None,
+            edge_scope: ScopeDefinition = None,
+            bias_factor: float = None,
+            n_divisions: int = None):
+        """Set the default values of MultiZoneEdgeBiasingParams.
+
+        Parameters
+        ----------
+        face_scope: ScopeDefinition, optional
+            Reference face zonelets to control mesh clustering orientation.
+        edge_scope: ScopeDefinition, optional
+            Edge zonelets to control the expanse of edge biasing.
+        bias_factor: float, optional
+            Bias factor used for MultiZone edge biasing control.
+        n_divisions: int, optional
+            Number of divisions on the section where edge biasing is done.
+        """
+        args = locals()
+        [MultiZoneEdgeBiasingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MultiZoneEdgeBiasingParams.
+
+        Examples
+        --------
+        >>> MultiZoneEdgeBiasingParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MultiZoneEdgeBiasingParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._face_scope is not None:
+            json_data["faceScope"] = self._face_scope._jsonify()
+        if self._edge_scope is not None:
+            json_data["edgeScope"] = self._edge_scope._jsonify()
+        if self._bias_factor is not None:
+            json_data["biasFactor"] = self._bias_factor
+        if self._n_divisions is not None:
+            json_data["nDivisions"] = self._n_divisions
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "face_scope :  %s\nedge_scope :  %s\nbias_factor :  %s\nn_divisions :  %s" % ('{ ' + str(self._face_scope) + ' }', '{ ' + str(self._edge_scope) + ' }', self._bias_factor, self._n_divisions)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def face_scope(self) -> ScopeDefinition:
+        """Reference face zonelets to control mesh clustering orientation.
+        """
+        return self._face_scope
+
+    @face_scope.setter
+    def face_scope(self, value: ScopeDefinition):
+        self._face_scope = value
+
+    @property
+    def edge_scope(self) -> ScopeDefinition:
+        """Edge zonelets to control the expanse of edge biasing.
+        """
+        return self._edge_scope
+
+    @edge_scope.setter
+    def edge_scope(self, value: ScopeDefinition):
+        self._edge_scope = value
+
+    @property
+    def bias_factor(self) -> float:
+        """Bias factor used for MultiZone edge biasing control.
+        """
+        return self._bias_factor
+
+    @bias_factor.setter
+    def bias_factor(self, value: float):
+        self._bias_factor = value
+
+    @property
+    def n_divisions(self) -> int:
+        """Number of divisions on the section where edge biasing is done.
+        """
+        return self._n_divisions
+
+    @n_divisions.setter
+    def n_divisions(self, value: int):
+        self._n_divisions = value
+
+class MultiZoneMapMeshParams(CoreObject):
+    """Define controlling parameters for the map mesh using MultiZone.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            scope: ScopeDefinition):
+        self._scope = scope
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            scope: ScopeDefinition = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MultiZoneMapMeshParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MultiZoneMapMeshParams object with default parameters.
+        scope: ScopeDefinition, optional
+            Scope used for MultiZone map mesh control.
+        json_data: dict, optional
+            JSON dictionary to create a MultiZoneMapMeshParams object with provided parameters.
+
+        Examples
+        --------
+        >>> multi_zone_map_mesh_params = prime.MultiZoneMapMeshParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [scope])
+            if all_field_specified:
+                self.__initialize(
+                    scope)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MultiZoneMapMeshParams")
+                    json_data = param_json["MultiZoneMapMeshParams"] if "MultiZoneMapMeshParams" in param_json else {}
+                    self.__initialize(
+                        scope if scope is not None else ( MultiZoneMapMeshParams._default_params["scope"] if "scope" in MultiZoneMapMeshParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            scope: ScopeDefinition = None):
+        """Set the default values of MultiZoneMapMeshParams.
+
+        Parameters
+        ----------
+        scope: ScopeDefinition, optional
+            Scope used for MultiZone map mesh control.
+        """
+        args = locals()
+        [MultiZoneMapMeshParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MultiZoneMapMeshParams.
+
+        Examples
+        --------
+        >>> MultiZoneMapMeshParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MultiZoneMapMeshParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._scope is not None:
+            json_data["scope"] = self._scope._jsonify()
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "scope :  %s" % ('{ ' + str(self._scope) + ' }')
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def scope(self) -> ScopeDefinition:
+        """Scope used for MultiZone map mesh control.
+        """
+        return self._scope
+
+    @scope.setter
+    def scope(self, value: ScopeDefinition):
+        self._scope = value
+
+class MultiZoneParams(CoreObject):
+    """Parameters for MultiZone meshing.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            max_size: float,
+            min_size: float,
+            growth_rate: float):
+        self._max_size = max_size
+        self._min_size = min_size
+        self._growth_rate = growth_rate
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            max_size: float = None,
+            min_size: float = None,
+            growth_rate: float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MultiZoneParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MultiZoneParams object with default parameters.
+        max_size: float, optional
+            Defines global maximum mesh size.
+        min_size: float, optional
+            Defines global minimum mesh size.
+        growth_rate: float, optional
+            Defines growth rate.
+        json_data: dict, optional
+            JSON dictionary to create a MultiZoneParams object with provided parameters.
+
+        Examples
+        --------
+        >>> multi_zone_params = prime.MultiZoneParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["maxSize"] if "maxSize" in json_data else None,
+                json_data["minSize"] if "minSize" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [max_size, min_size, growth_rate])
+            if all_field_specified:
+                self.__initialize(
+                    max_size,
+                    min_size,
+                    growth_rate)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MultiZoneParams")
+                    json_data = param_json["MultiZoneParams"] if "MultiZoneParams" in param_json else {}
+                    self.__initialize(
+                        max_size if max_size is not None else ( MultiZoneParams._default_params["max_size"] if "max_size" in MultiZoneParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
+                        min_size if min_size is not None else ( MultiZoneParams._default_params["min_size"] if "min_size" in MultiZoneParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( MultiZoneParams._default_params["growth_rate"] if "growth_rate" in MultiZoneParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            max_size: float = None,
+            min_size: float = None,
+            growth_rate: float = None):
+        """Set the default values of MultiZoneParams.
+
+        Parameters
+        ----------
+        max_size: float, optional
+            Defines global maximum mesh size.
+        min_size: float, optional
+            Defines global minimum mesh size.
+        growth_rate: float, optional
+            Defines growth rate.
+        """
+        args = locals()
+        [MultiZoneParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MultiZoneParams.
+
+        Examples
+        --------
+        >>> MultiZoneParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MultiZoneParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._max_size is not None:
+            json_data["maxSize"] = self._max_size
+        if self._min_size is not None:
+            json_data["minSize"] = self._min_size
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "max_size :  %s\nmin_size :  %s\ngrowth_rate :  %s" % (self._max_size, self._min_size, self._growth_rate)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def max_size(self) -> float:
+        """Defines global maximum mesh size.
+        """
+        return self._max_size
+
+    @max_size.setter
+    def max_size(self, value: float):
+        self._max_size = value
+
+    @property
+    def min_size(self) -> float:
+        """Defines global minimum mesh size.
+        """
+        return self._min_size
+
+    @min_size.setter
+    def min_size(self, value: float):
+        self._min_size = value
+
+    @property
+    def growth_rate(self) -> float:
+        """Defines growth rate.
+        """
+        return self._growth_rate
+
+    @growth_rate.setter
+    def growth_rate(self, value: float):
+        self._growth_rate = value

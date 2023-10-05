@@ -29,12 +29,14 @@ class ZoneType(enum.IntEnum):
     """Denotes the zone is volume zone."""
 
 class VolumeNamingType(enum.IntEnum):
-    """Indicate source types used to name volumes.
+    """Indicate source types used to name volume zones.
     """
     BYFACELABEL = 1
-    """Option to use face label name as source to name volumes."""
+    """Option to use face label name as source to name volume zones."""
     BYFACEZONE = 2
-    """Option to use face zone name as source to name volumes."""
+    """Option to use face zone name as source to name volume zones."""
+    BYFACENORMALS = 4
+    """Option to use face normal as source to name volume zones. Here, the volume zones with face normal into the volume are considered as dead and volume zones with face normal outwards from the volume are considered as solid.."""
 
 class CreateVolumeZonesType(enum.IntEnum):
     """Indicate type to create volume zones for volumes.

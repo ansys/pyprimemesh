@@ -208,6 +208,46 @@ class SurfaceSearch(CoreObject):
         self._model._print_logs_after_command("search_zonelets_by_folds", SearchByFoldsResults(model = self._model, json_data = result))
         return SearchByFoldsResults(model = self._model, json_data = result)
 
+    def search_zonelets_by_invalid_normals(self, part_id : int, face_zonelets : Iterable[int], register_id : int) -> SearchByInvalidNormalsResults:
+        """ Search face zonelets to identify faces with invalid normals.
+
+        Search face zonelets to identify faces with invalid normals.
+
+        Parameters
+        ----------
+        part_id : int
+            Id of part.
+        face_zonelets : Iterable[int]
+            Ids of face zonelets.
+        register_id : int
+            Id of register.
+
+        Returns
+        -------
+        SearchByInvalidNormalsResults
+            Returns the SearchByInvalidNormalsResults.
+
+        Examples
+        --------
+        >>> surf_search = SurfaceSearch(model=model)
+        >>> results = surf_search.search_zonelets_by_invalid_normals(part_id, face_zonelets, register_id)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+        if not isinstance(register_id, int):
+            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+        args = {"part_id" : part_id,
+        "face_zonelets" : face_zonelets,
+        "register_id" : register_id}
+        command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsByInvalidNormals"
+        self._model._print_logs_before_command("search_zonelets_by_invalid_normals", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("search_zonelets_by_invalid_normals", SearchByInvalidNormalsResults(model = self._model, json_data = result))
+        return SearchByInvalidNormalsResults(model = self._model, json_data = result)
+
     def search_zonelets_by_thin_strips(self, part_id : int, face_zonelets : Iterable[int], register_id : int, params : SearchByThinStripParams) -> SearchByThinStripResults:
         """ Search face zonelets to identify face element of thin strips(single layer of triangles between features).
 
