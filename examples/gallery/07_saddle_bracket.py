@@ -117,6 +117,7 @@ scope = prime.lucid.SurfaceScope(
 mesh_util.surface_mesh(
     scope=scope,
     min_size=2.0,
+    generate_quads=True,
 )
 
 display()
@@ -163,7 +164,7 @@ thin_vol_ctrl.set_target_scope(
 thin_params = prime.ThinVolumeMeshParams(
     model=model,
     n_layers=4,
-    no_side_imprint=False,
+    imprint_sides=True,
 )
 
 thin_vol_ctrl.set_thin_volume_mesh_params(thin_volume_mesh_params=thin_params)
