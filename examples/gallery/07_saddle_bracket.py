@@ -117,7 +117,6 @@ scope = prime.lucid.SurfaceScope(
 mesh_util.surface_mesh(
     scope=scope,
     min_size=2.0,
-    generate_quads=True,
 )
 
 display()
