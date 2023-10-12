@@ -1,12 +1,12 @@
 """
 .. _ref_saddle_thin_hex:
 
-========================================================
+==================================================
 Meshing a saddle bracket for a structural analysis
-========================================================
+==================================================
 
 **Summary**: This example demonstrates how to mesh a thin
-solid with hexahedral elements.
+solid with hexahedral and prism cells.
 
 Objective
 ~~~~~~~~~
@@ -26,7 +26,7 @@ Procedure
 * Surface mesh the remaining unmeshed TopoFaces with tri.
 * Delete the topology.
 * Define volume meshing controls to use thin volume meshing.
-* Volume mesh with hexahedral cells.
+* Volume mesh with hexahedral and prism cells.
 * Write a CDB file for use in the APDL solver.
 * Exit the PyPrimeMesh session.
 
@@ -91,7 +91,10 @@ display()
 ###############################################################################
 # Surface mesh unmeshed faces
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Mesh unmeshed faces with tri elements.
+# Mesh unmeshed faces with tri surface mesh.  Tri surface mesh on the target
+# and side faces is used to show more clearly that the result of the thin
+# volume control is a hex mesh that is imprinted up to the side faces.
+# All quads could be used for the surface mesh to simplify the process.
 
 part = model.parts[0]
 
@@ -124,7 +127,8 @@ display()
 ###############################################################################
 # Delete topology
 # ~~~~~~~~~~~~~~~
-# Delete topology to leave only the surface mesh.
+# Delete topology to leave only the surface mesh.  This is necessary for the
+# thin volume control to be used.
 
 part.delete_topo_entities(
     prime.DeleteTopoEntitiesParams(
@@ -140,7 +144,13 @@ part.delete_topo_entities(
 # Define volume meshing controls to use thin volume meshing.
 # Specify source and target faces for the thin volume using imported labels.
 # Set the number of layers of cells through the thickness of the thin solid to be 4.
-# To request a fully hexahedral mesh the side faces must be imprinted.
+# To create a fully hexahedral and prism mesh the side faces must be imprinted on
+# the side faces.  If needed, a buffer region at the sides of the volume can be
+# defined where the volume fill type used for the volume mesh parameters will be
+# used to infill.  This is useful on more complex geometries, where it provides
+# more robustness of the method.  To create a buffer region set ``imprint_sides``
+# to False and specify how many rings of cells to ignore at the sides
+# using ``n_ignore_rings``.
 
 auto_mesh_params = prime.AutoMeshParams(model=model)
 thin_vol_ctrls_ids = []
@@ -163,7 +173,7 @@ thin_vol_ctrl.set_target_scope(
 thin_params = prime.ThinVolumeMeshParams(
     model=model,
     n_layers=4,
-    no_side_imprint=False,
+    imprint_sides=True,
 )
 
 thin_vol_ctrl.set_thin_volume_mesh_params(thin_volume_mesh_params=thin_params)
@@ -174,7 +184,7 @@ auto_mesh_params.volume_fill_type = prime.VolumeFillType.TET
 ###############################################################################
 # Generate volume mesh
 # ~~~~~~~~~~~~~~~~~~~~
-# Volume mesh to obtain hexahedral cells.
+# Volume mesh to obtain hexahedral and prism mesh.
 # Print mesh summary.
 # Display volume mesh.
 
