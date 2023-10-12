@@ -80,6 +80,14 @@ class CadRefacetingMaxEdgeSizeLimit(enum.IntEnum):
     RELATIVE = 2
     """Denotes relative maximum edge size limit for CAD faceting."""
 
+class CdbSimulationType(enum.IntEnum):
+    """Simulation Type for CDB export.
+    """
+    IMPLICIT = 0
+    """Implicit simulation."""
+    EXPLICIT = 1
+    """Explicit Simulation."""
+
 class FileReadParams(CoreObject):
     """Parameters to read file.
     """
@@ -2415,12 +2423,29 @@ class ExportMapdlCdbParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            material_properties: str,
+            boundary_conditions: str,
+            write_cells: bool,
+            enable_face_based_labels: bool,
+            write_by_zones: bool,
+            simulation_type: CdbSimulationType):
+        self._material_properties = material_properties
+        self._boundary_conditions = boundary_conditions
+        self._write_cells = write_cells
+        self._enable_face_based_labels = enable_face_based_labels
+        self._write_by_zones = write_by_zones
+        self._simulation_type = CdbSimulationType(simulation_type)
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            material_properties: str = None,
+            boundary_conditions: str = None,
+            write_cells: bool = None,
+            enable_face_based_labels: bool = None,
+            write_by_zones: bool = None,
+            simulation_type: CdbSimulationType = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the ExportMapdlCdbParams.
@@ -2429,6 +2454,18 @@ class ExportMapdlCdbParams(CoreObject):
         ----------
         model: Model
             Model to create a ExportMapdlCdbParams object with default parameters.
+        material_properties: str, optional
+            Materials in CDB format that will be added to the file.
+        boundary_conditions: str, optional
+            Boundary conditions in CDB format that will be appended to the file.
+        write_cells: bool, optional
+            Option to write out cells as part of the file.
+        enable_face_based_labels: bool, optional
+            Option to write element components for labels.
+        write_by_zones: bool, optional
+            Option to write zones in the file.
+        simulation_type: CdbSimulationType, optional
+            Simulation type for the file.
         json_data: dict, optional
             JSON dictionary to create a ExportMapdlCdbParams object with provided parameters.
 
@@ -2437,18 +2474,36 @@ class ExportMapdlCdbParams(CoreObject):
         >>> export_mapdl_cdb_params = prime.ExportMapdlCdbParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["materialProperties"] if "materialProperties" in json_data else None,
+                json_data["boundaryConditions"] if "boundaryConditions" in json_data else None,
+                json_data["writeCells"] if "writeCells" in json_data else None,
+                json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None,
+                json_data["writeByZones"] if "writeByZones" in json_data else None,
+                CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [material_properties, boundary_conditions, write_cells, enable_face_based_labels, write_by_zones, simulation_type])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    material_properties,
+                    boundary_conditions,
+                    write_cells,
+                    enable_face_based_labels,
+                    write_by_zones,
+                    simulation_type)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExportMapdlCdbParams")
                     json_data = param_json["ExportMapdlCdbParams"] if "ExportMapdlCdbParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        material_properties if material_properties is not None else ( ExportMapdlCdbParams._default_params["material_properties"] if "material_properties" in ExportMapdlCdbParams._default_params else (json_data["materialProperties"] if "materialProperties" in json_data else None)),
+                        boundary_conditions if boundary_conditions is not None else ( ExportMapdlCdbParams._default_params["boundary_conditions"] if "boundary_conditions" in ExportMapdlCdbParams._default_params else (json_data["boundaryConditions"] if "boundaryConditions" in json_data else None)),
+                        write_cells if write_cells is not None else ( ExportMapdlCdbParams._default_params["write_cells"] if "write_cells" in ExportMapdlCdbParams._default_params else (json_data["writeCells"] if "writeCells" in json_data else None)),
+                        enable_face_based_labels if enable_face_based_labels is not None else ( ExportMapdlCdbParams._default_params["enable_face_based_labels"] if "enable_face_based_labels" in ExportMapdlCdbParams._default_params else (json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None)),
+                        write_by_zones if write_by_zones is not None else ( ExportMapdlCdbParams._default_params["write_by_zones"] if "write_by_zones" in ExportMapdlCdbParams._default_params else (json_data["writeByZones"] if "writeByZones" in json_data else None)),
+                        simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2457,9 +2512,29 @@ class ExportMapdlCdbParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            material_properties: str = None,
+            boundary_conditions: str = None,
+            write_cells: bool = None,
+            enable_face_based_labels: bool = None,
+            write_by_zones: bool = None,
+            simulation_type: CdbSimulationType = None):
         """Set the default values of ExportMapdlCdbParams.
 
+        Parameters
+        ----------
+        material_properties: str, optional
+            Materials in CDB format that will be added to the file.
+        boundary_conditions: str, optional
+            Boundary conditions in CDB format that will be appended to the file.
+        write_cells: bool, optional
+            Option to write out cells as part of the file.
+        enable_face_based_labels: bool, optional
+            Option to write element components for labels.
+        write_by_zones: bool, optional
+            Option to write zones in the file.
+        simulation_type: CdbSimulationType, optional
+            Simulation type for the file.
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2478,13 +2553,85 @@ class ExportMapdlCdbParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._material_properties is not None:
+            json_data["materialProperties"] = self._material_properties
+        if self._boundary_conditions is not None:
+            json_data["boundaryConditions"] = self._boundary_conditions
+        if self._write_cells is not None:
+            json_data["writeCells"] = self._write_cells
+        if self._enable_face_based_labels is not None:
+            json_data["enableFaceBasedLabels"] = self._enable_face_based_labels
+        if self._write_by_zones is not None:
+            json_data["writeByZones"] = self._write_by_zones
+        if self._simulation_type is not None:
+            json_data["simulationType"] = self._simulation_type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "material_properties :  %s\nboundary_conditions :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nsimulation_type :  %s" % (self._material_properties, self._boundary_conditions, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._simulation_type)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def material_properties(self) -> str:
+        """Materials in CDB format that will be added to the file.
+        """
+        return self._material_properties
+
+    @material_properties.setter
+    def material_properties(self, value: str):
+        self._material_properties = value
+
+    @property
+    def boundary_conditions(self) -> str:
+        """Boundary conditions in CDB format that will be appended to the file.
+        """
+        return self._boundary_conditions
+
+    @boundary_conditions.setter
+    def boundary_conditions(self, value: str):
+        self._boundary_conditions = value
+
+    @property
+    def write_cells(self) -> bool:
+        """Option to write out cells as part of the file.
+        """
+        return self._write_cells
+
+    @write_cells.setter
+    def write_cells(self, value: bool):
+        self._write_cells = value
+
+    @property
+    def enable_face_based_labels(self) -> bool:
+        """Option to write element components for labels.
+        """
+        return self._enable_face_based_labels
+
+    @enable_face_based_labels.setter
+    def enable_face_based_labels(self, value: bool):
+        self._enable_face_based_labels = value
+
+    @property
+    def write_by_zones(self) -> bool:
+        """Option to write zones in the file.
+        """
+        return self._write_by_zones
+
+    @write_by_zones.setter
+    def write_by_zones(self, value: bool):
+        self._write_by_zones = value
+
+    @property
+    def simulation_type(self) -> CdbSimulationType:
+        """Simulation type for the file.
+        """
+        return self._simulation_type
+
+    @simulation_type.setter
+    def simulation_type(self, value: CdbSimulationType):
+        self._simulation_type = value
 
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
@@ -2586,6 +2733,83 @@ class ExportMapdlCdbResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class ExportLSDynaIgaKeywordFileParams(CoreObject):
+    """Parameters for exporting LS-Dyna IGA keyword file.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ExportLSDynaIgaKeywordFileParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ExportLSDynaIgaKeywordFileParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a ExportLSDynaIgaKeywordFileParams object with provided parameters.
+
+        Examples
+        --------
+        >>> export_lsdyna_iga_keyword_file_params = prime.ExportLSDynaIgaKeywordFileParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExportLSDynaIgaKeywordFileParams")
+                    json_data = param_json["ExportLSDynaIgaKeywordFileParams"] if "ExportLSDynaIgaKeywordFileParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of ExportLSDynaIgaKeywordFileParams.
+
+        """
+        args = locals()
+        [ExportLSDynaIgaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ExportLSDynaIgaKeywordFileParams.
+
+        Examples
+        --------
+        >>> ExportLSDynaIgaKeywordFileParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportLSDynaIgaKeywordFileParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
 
 class ExportBoundaryFittedSplineParams(CoreObject):
     """Parameters for exporting boundary fitted splines.
@@ -2710,3 +2934,181 @@ class ExportBoundaryFittedSplineParams(CoreObject):
     @id_start.setter
     def id_start(self, value: int):
         self._id_start = value
+
+class ImportAbaqusParams(CoreObject):
+    """Parameters for importing Abaqus solver input files.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ImportAbaqusParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ImportAbaqusParams object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a ImportAbaqusParams object with provided parameters.
+
+        Examples
+        --------
+        >>> import_abaqus_params = prime.ImportAbaqusParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ImportAbaqusParams")
+                    json_data = param_json["ImportAbaqusParams"] if "ImportAbaqusParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of ImportAbaqusParams.
+
+        """
+        args = locals()
+        [ImportAbaqusParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ImportAbaqusParams.
+
+        Examples
+        --------
+        >>> ImportAbaqusParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ImportAbaqusParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+class ImportAbaqusResults(CoreObject):
+    """Results of Abaqus import operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode):
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the ImportAbaqusResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ImportAbaqusResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        json_data: dict, optional
+            JSON dictionary to create a ImportAbaqusResults object with provided parameters.
+
+        Examples
+        --------
+        >>> import_abaqus_results = prime.ImportAbaqusResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code])
+            if all_field_specified:
+                self.__initialize(
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ImportAbaqusResults")
+                    json_data = param_json["ImportAbaqusResults"] if "ImportAbaqusResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( ImportAbaqusResults._default_params["error_code"] if "error_code" in ImportAbaqusResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None):
+        """Set the default values of ImportAbaqusResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        """
+        args = locals()
+        [ImportAbaqusResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ImportAbaqusResults.
+
+        Examples
+        --------
+        >>> ImportAbaqusResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ImportAbaqusResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s" % (self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value

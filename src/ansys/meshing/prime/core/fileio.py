@@ -17,6 +17,8 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     FileReadResults,
     FileWriteParams,
     FileWriteResults,
+    ImportAbaqusParams,
+    ImportAbaqusResults,
     ImportCadParams,
     ImportCadResults,
     ImportFluentCaseParams,
@@ -107,6 +109,36 @@ class FileIO(_FileIO):
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
             result = super().write_pmdat(temp_file_name, file_write_params)
+        return result
+
+    def import_abaqus_inp(self, file_name: str, params: ImportAbaqusParams) -> ImportAbaqusResults:
+        """(BETA FEATURE) Import a Abaqus file.
+
+        This is a beta feature to import abaqus files as dead mesh and also store
+        simulation-specific information into Prime in the form of JSON documents.
+
+        Parameters
+        ----------
+        file_name : str
+            Name of file to import.
+        params : ImportAbaqusParams
+            Parameters to specify options during import.
+
+        Returns
+        -------
+        ImportAbaqusResults
+            Returns the results of the abaqus database import.
+
+
+        Examples
+        --------
+        >>> results = file_io.import_abaqus(r"/tmp/file.inp")
+
+        """
+        with utils.file_read_context(self._model, file_name) as temp_file_name:
+            result = super().import_abaqus_inp(temp_file_name, params)
+            if result.error_code == ErrorCode.NOERROR:
+                self._model._sync_up_model()
         return result
 
     def import_fluent_meshing_size_field(self, file_name: str) -> SizeFieldFileReadResults:

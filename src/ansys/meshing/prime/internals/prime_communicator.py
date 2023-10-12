@@ -19,6 +19,12 @@ class PrimeCommunicator(Communicator):
     def __init__(self):
         """Initialize the communicator."""
         Prime.SetupForPyPrime_Beta(1)
+        self._models = []
+        message = json.loads(Prime.GetModelInfo().Get())
+        if 'ServerError' in message:
+            raise ConnectionError(message['ServerError'])
+        elif 'Results' in message:
+            self._models = message['Results']
 
     @error_code_handler
     @communicator_error_handler
@@ -97,5 +103,10 @@ class PrimeCommunicator(Communicator):
         return result
 
     def close(self):
-        """Close the communicator."""
-        pass
+        """Close session."""
+        Prime.Finalize()
+
+    @property
+    def models(self):
+        """List of models available."""
+        return self._models
