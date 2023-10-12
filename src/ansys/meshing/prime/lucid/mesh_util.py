@@ -839,8 +839,8 @@ class Mesh:
                             )
                         )
                         automesh_params.prism_control_ids = [prism_control.id]
-
-                    automesh.mesh(part.id, automesh_params=automesh_params)
+                    if part.get_topo_volumes() or part.get_volumes():
+                        automesh.mesh(part.id, automesh_params=automesh_params)
                     if prism_control:
                         self._model.control_data.delete_controls([prism_control.id])
                     if len(volume_control_ids) > 0:
