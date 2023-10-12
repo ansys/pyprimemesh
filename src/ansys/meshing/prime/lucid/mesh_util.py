@@ -846,7 +846,8 @@ class Mesh:
                     if len(volume_control_ids) > 0:
                         self._model.control_data.delete_controls(volume_control_ids)
                 except:
-                    #self._logger.info(part.name + " not volume meshed.")
+                    failed_parts.append(part.name)
+
         if failed_parts:
             partStr = ",".join(failed_parts)
             errorStr = f"Failed parts [{partStr}]"
