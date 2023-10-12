@@ -802,6 +802,7 @@ class Mesh:
             Scope of volumes to mesh.
 
         """
+        failed_parts = []
         automesh_params = prime.AutoMeshParams(model=self._model)
         automesh_params.volume_fill_type = volume_fill_type
         if quadratic:
@@ -845,7 +846,11 @@ class Mesh:
                     if len(volume_control_ids) > 0:
                         self._model.control_data.delete_controls(volume_control_ids)
                 except:
-                    self._logger.info(part.name + " not volume meshed.")
+                    #self._logger.info(part.name + " not volume meshed.")
+        if failed_parts:
+            partStr = ",".join(failed_parts)
+            errorStr = f"Failed parts [{partStr}]"
+            raise prime.PrimeRuntimeError(errorStr)
 
     def __setup_sizing_for_wrapper(
         self,
