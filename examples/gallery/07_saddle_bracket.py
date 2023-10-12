@@ -1,9 +1,9 @@
 """
 .. _ref_saddle_thin_hex:
 
-========================================================
+==================================================
 Meshing a saddle bracket for a structural analysis
-========================================================
+==================================================
 
 **Summary**: This example demonstrates how to mesh a thin
 solid with hexahedral and prism cells.
