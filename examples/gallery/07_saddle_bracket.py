@@ -93,7 +93,7 @@ display()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Mesh unmeshed faces with tri surface mesh.  Tri surface mesh on the target
 # and side faces is used to show more clearly that the result of the thin
-# volume control is a hex mesh that is imprinted upto the side faces.
+# volume control is a hex mesh that is imprinted up to the side faces.
 # All quads could be used for the surface mesh to simplify the process.
 
 part = model.parts[0]
