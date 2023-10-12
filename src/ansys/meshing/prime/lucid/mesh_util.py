@@ -841,6 +841,11 @@ class Mesh:
                         automesh_params.prism_control_ids = [prism_control.id]
                     if part.get_topo_volumes() or part.get_volumes():
                         automesh.mesh(part.id, automesh_params=automesh_params)
+                    else:
+                        self._logger.warning(
+                            "No volumes to mesh in part '"
+                            + part.name + "'."
+                        )
                     if prism_control:
                         self._model.control_data.delete_controls([prism_control.id])
                     if len(volume_control_ids) > 0:
