@@ -242,7 +242,7 @@ Import solver mesh files
 ------------------------
 
  - The :func:`FileIO.import_fluent_case() <ansys.meshing.prime.FileIO.import_fluent_case>` method allows you
-   to import Fluent case ``(*.cas)`` files and set parameters for importing files using the
+   to import Fluent case ``(*.cas, *.cas.gz, *.cas.h5)`` files and set parameters for importing files using the
    :class:`ImportFluentCaseParams <ansys.meshing.prime.ImportFluentCaseParams>` class.
 
  - The :func:`FileIO.import_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.import_fluent_meshing_meshes>` method
@@ -265,7 +265,7 @@ Export solver mesh files
 ------------------------
 
  - The :func:`FileIO.export_fluent_case() <ansys.meshing.prime.FileIO.export_fluent_case>` method allows you to
-   export Fluent case ``(*.cas)`` files and set parameters for exporting files using the
+   export Fluent case ``(*.cas, *.cas.gz, *.cas.h5)`` files and set parameters for exporting files using the
    :class:`ExportFluentCaseParams <ansys.meshing.prime.ExportFluentCaseParams>` class.
 
  - The :func:`FileIO.export_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.export_fluent_meshing_meshes>` method
