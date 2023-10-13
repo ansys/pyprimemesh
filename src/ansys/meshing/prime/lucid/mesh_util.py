@@ -807,8 +807,11 @@ class Mesh:
         if quadratic:
             automesh_params.tet = prime.TetParams(self._model, True)
         automesh = prime.AutoMesh(self._model)
-        for part in self._model.parts:
-            if check_name_pattern(scope._part_expression, part.name):
+        parts_with_volumes = [part for part in self._model.parts if part.get_volumes() or part.get_topo_volumes()]
+        parts_without_volumes = [part for part in self._model.parts if part not in parts_with_volumes]
+        self._logger.info(str([part.name for part in parts_without_volumes]) + " no volumes to mesh.")
+        for part in parts_with_volumes:
+            if check_name_pattern(scope._part_expression, part.name) and scope._entity_expression!="*":
                 try:
                     prism_control = None
                     volume_control_ids = self.__create_volume_controls(part, scope)
@@ -845,7 +848,53 @@ class Mesh:
                     if len(volume_control_ids) > 0:
                         self._model.control_data.delete_controls(volume_control_ids)
                 except:
-                    self._logger.info(part.name + " not volume meshed.")
+                    errorStr = "Error meshing part '" + part.name + "'"
+                    raise prime.PrimeRuntimeError(errorStr)
+            elif check_name_pattern(scope._part_expression, part.name):
+                if scope._evaluation_type == prime.ScopeEvaluationType.ZONES:
+                    entities = [self._model.get_zone_name(zone_id) for zone_id in part.get_volume_zones()]
+                if scope._evaluation_type == prime.ScopeEvaluationType.LABELS:
+                    entities = part.get_labels()
+                for entity in entities:
+                    try:
+                        prism_control = None
+                        entity_scope = prime.lucid.VolumeScope(part.name, entity, scope._evaluation_type)
+                        volume_control_ids = self.__create_volume_controls(part, entity_scope)
+                        if len(volume_control_ids) > 0:
+                            automesh_params.volume_control_ids = volume_control_ids
+                        if prism_layers:
+                            prism_control = self._model.control_data.create_prism_control()
+                            prism_control.set_surface_scope(
+                                prime.ScopeDefinition(
+                                    self._model,
+                                    part_expression=part.name,
+                                    label_expression=prism_surface_expression,
+                                )
+                            )
+                            prism_control.set_growth_params(
+                                prime.PrismControlGrowthParams(
+                                    self._model, n_layers=prism_layers, growth_rate=growth_rate
+                                )
+                            )
+                            prism_control.set_volume_scope(
+                                prime.ScopeDefinition(
+                                    self._model,
+                                    entity_type=prime.ScopeEntity.VOLUME,
+                                    evaluation_type=prime.ScopeEvaluationType.ZONES,
+                                    part_expression=part.name,
+                                    zone_expression=prism_volume_expression,
+                                )
+                            )
+                            automesh_params.prism_control_ids = [prism_control.id]
+
+                        automesh.mesh(part.id, automesh_params=automesh_params)
+                        if prism_control:
+                            self._model.control_data.delete_controls([prism_control.id])
+                        if len(volume_control_ids) > 0:
+                            self._model.control_data.delete_controls(volume_control_ids)
+                    except:
+                        errorStr = "Error meshing " + entity + " in part " + part.name
+                        raise prime.PrimeRuntimeError(errorStr)
 
     def __setup_sizing_for_wrapper(
         self,
