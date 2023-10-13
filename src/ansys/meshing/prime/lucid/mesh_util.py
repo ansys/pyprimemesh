@@ -813,11 +813,13 @@ class Mesh:
         parts_without_volumes = [
             part for part in self._model.parts if part not in parts_with_volumes
         ]
-        self._logger.info(str([part.name for part in parts_without_volumes]) + " no volumes to mesh.")
+        self._logger.info(
+            str([part.name for part in parts_without_volumes]) + " no volumes to mesh."
+        )
         for part in parts_with_volumes:
             if (
                 check_name_pattern(scope._part_expression, part.name)
-                and scope._entity_expression!="*"
+                and scope._entity_expression != "*"
             ):
                 try:
                     prism_control = None
