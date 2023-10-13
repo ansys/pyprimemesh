@@ -807,11 +807,18 @@ class Mesh:
         if quadratic:
             automesh_params.tet = prime.TetParams(self._model, True)
         automesh = prime.AutoMesh(self._model)
-        parts_with_volumes = [part for part in self._model.parts if part.get_volumes() or part.get_topo_volumes()]
-        parts_without_volumes = [part for part in self._model.parts if part not in parts_with_volumes]
+        parts_with_volumes = [
+            part for part in self._model.parts if part.get_volumes() or part.get_topo_volumes()
+        ]
+        parts_without_volumes = [
+            part for part in self._model.parts if part not in parts_with_volumes
+        ]
         self._logger.info(str([part.name for part in parts_without_volumes]) + " no volumes to mesh.")
         for part in parts_with_volumes:
-            if check_name_pattern(scope._part_expression, part.name) and scope._entity_expression!="*":
+            if (
+                check_name_pattern(scope._part_expression, part.name)
+                and scope._entity_expression!="*"
+            ):
                 try:
                     prism_control = None
                     volume_control_ids = self.__create_volume_controls(part, scope)
@@ -852,13 +859,17 @@ class Mesh:
                     raise prime.PrimeRuntimeError(errorStr)
             elif check_name_pattern(scope._part_expression, part.name):
                 if scope._evaluation_type == prime.ScopeEvaluationType.ZONES:
-                    entities = [self._model.get_zone_name(zone_id) for zone_id in part.get_volume_zones()]
+                    entities = [
+                        self._model.get_zone_name(zone_id) for zone_id in part.get_volume_zones()
+                    ]
                 if scope._evaluation_type == prime.ScopeEvaluationType.LABELS:
                     entities = part.get_labels()
                 for entity in entities:
                     try:
                         prism_control = None
-                        entity_scope = prime.lucid.VolumeScope(part.name, entity, scope._evaluation_type)
+                        entity_scope = prime.lucid.VolumeScope(
+                            part.name, entity, scope._evaluation_type
+                        )
                         volume_control_ids = self.__create_volume_controls(part, entity_scope)
                         if len(volume_control_ids) > 0:
                             automesh_params.volume_control_ids = volume_control_ids
