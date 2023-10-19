@@ -41,6 +41,9 @@ __all__ = [
     "download_multi_layer_quad_mesh_pcb_fmd",
     "download_multi_layer_quad_mesh_pcb_scdoc",
     "download_multi_layer_quad_mesh_pcb_pmdat",
+    "download_block_model_scdoc",
+    "download_block_model_fmd",
+    "download_block_model_pmdat",
 ]
 
 
@@ -95,6 +98,9 @@ class Examples(Enum):
         "filename": "multi_layer_quad_mesh_pcb.pmdat",
         "git_folder": "multi_layer_quad_mesh_pcb",
     }
+    BLOCK_MODEL_SCDOC = {"filename": "pyprime_block_import.scdoc", "git_folder": "block_model"}
+    BLOCK_MODEL_FMD = {"filename": "pyprime_block_import.fmd", "git_folder": "block_model"}
+    BLOCK_MODEL_PMDAT = {"filename": "pyprime_block_import.pmdat", "git_folder": "block_model"}
 
 
 _DOWNLOADS = []
@@ -1035,7 +1041,7 @@ def download_f1_rw_drs_stl(
     >>>     model = session.model
     >>>     f1_rw_drs = prime_examples.download_f1_rw_drs_stl()
     >>>     with prime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>         _ = io.import_cad(f1_rw_drs, params=prime.ImportCADParams(model))
     >>>     print(model)
 
     """
@@ -1070,7 +1076,7 @@ def download_f1_rw_enclosure_stl(
     >>>     model = session.model
     >>>     f1_rw_enclosure = prime_examples.download_f1_rw_enclosure_stl()
     >>>     with prime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>         _ = io.import_cad(f1_rw_enclosure, params=prime.ImportCADParams(model))
     >>>     print(model)
 
     """
@@ -1105,7 +1111,7 @@ def download_f1_rw_end_plates_stl(
     >>>     model = session.model
     >>>     f1_rw_end_plates = prime_examples.download_f1_rw_end_plates_stl()
     >>>     with prime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>         _ = io.import_cad(f1_rw_end_plates, params=prime.ImportCADParams(model))
     >>>     print(model)
 
     """
@@ -1140,7 +1146,7 @@ def download_f1_rw_main_plane_stl(
     >>>     model = session.model
     >>>     f1_rw_main_plane = prime_examples.download_f1_rw_main_plane_stl()
     >>>     with prime.FileIO(model) as io:
-    >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+    >>>         _ = io.import_cad(f1_rw_main_plane, params=prime.ImportCADParams(model))
     >>>     print(model)
 
     """
@@ -1320,3 +1326,108 @@ def download_multi_layer_quad_mesh_pcb_pmdat(
 
     """
     return get_file(Examples.MULTI_LAYER_MESH_PCB_PMDAT, destination, force)
+
+
+def download_block_model_scdoc(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download CAD file for the block model example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     block_model = prime_examples.download_block_model_scdoc()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(block_model, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.BLOCK_MODEL_SCDOC, destination, force)
+
+
+def download_block_model_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download CAD file for the block model example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     block_model = prime_examples.download_block_model_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(block_model, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.BLOCK_MODEL_FMD, destination, force)
+
+
+def download_block_model_pmdat(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download PMDAT file for the block model example.
+
+    Parameters
+    ----------
+    destination: Optional[str]
+        Destination for the file to be downloaded.
+        If nothing is provided, the default path in app data is used.
+    force: bool
+        Option to download the file.
+        If true, the file is always downloaded.
+        If false, an existing file in the cache may be reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     block_model = prime_examples.download_block_model_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(block_model, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.BLOCK_MODEL_PMDAT, destination, force)
