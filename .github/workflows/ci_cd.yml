@@ -15,7 +15,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '24.1.0.dev7'
+  DOCKER_IMAGE_TAG: '24.1.0.dev8'
   MAIN_PYTHON_VERSION: '3.9'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
