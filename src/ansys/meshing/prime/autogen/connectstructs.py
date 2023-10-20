@@ -26,6 +26,14 @@ class StitchType(enum.IntEnum):
     FREEFREE = 1
     """Stitch surfaces at free boundary edges."""
 
+class MergeNodeType(enum.IntEnum):
+    """Type of nodes to be merged.
+    """
+    ALLALL = 0
+    """Merge any type of nodes with any type of nodes."""
+    FREEFREE = 1
+    """Merge only free nodes with free nodes."""
+
 class MatchedMeshOption(enum.IntEnum):
     """Type to specify treatment of matched mesh.
     """
@@ -440,10 +448,14 @@ class IntersectParams(CoreObject):
             self,
             tolerance: float,
             use_absolute_tolerance: bool,
-            remesh: bool):
+            remesh: bool,
+            collapse_feature_angle: float,
+            collapse_target_skewness: float):
         self._tolerance = tolerance
         self._use_absolute_tolerance = use_absolute_tolerance
         self._remesh = remesh
+        self._collapse_feature_angle = collapse_feature_angle
+        self._collapse_target_skewness = collapse_target_skewness
 
     def __init__(
             self,
@@ -451,6 +463,8 @@ class IntersectParams(CoreObject):
             tolerance: float = None,
             use_absolute_tolerance: bool = None,
             remesh: bool = None,
+            collapse_feature_angle: float = None,
+            collapse_target_skewness: float = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the IntersectParams.
@@ -465,6 +479,10 @@ class IntersectParams(CoreObject):
             True if tolerance provided is absolute value.
         remesh: bool, optional
             Local remesh at the intersection.
+        collapse_feature_angle: float, optional
+            Angle to preserve features while performing collapse in improve operation.
+        collapse_target_skewness: float, optional
+            Perform collapse on faces with skewness above the provided target skewness.
         json_data: dict, optional
             JSON dictionary to create a IntersectParams object with provided parameters.
 
@@ -476,14 +494,18 @@ class IntersectParams(CoreObject):
             self.__initialize(
                 json_data["tolerance"] if "tolerance" in json_data else None,
                 json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
-                json_data["remesh"] if "remesh" in json_data else None)
+                json_data["remesh"] if "remesh" in json_data else None,
+                json_data["collapseFeatureAngle"] if "collapseFeatureAngle" in json_data else None,
+                json_data["collapseTargetSkewness"] if "collapseTargetSkewness" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [tolerance, use_absolute_tolerance, remesh])
+            all_field_specified = all(arg is not None for arg in [tolerance, use_absolute_tolerance, remesh, collapse_feature_angle, collapse_target_skewness])
             if all_field_specified:
                 self.__initialize(
                     tolerance,
                     use_absolute_tolerance,
-                    remesh)
+                    remesh,
+                    collapse_feature_angle,
+                    collapse_target_skewness)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -493,7 +515,9 @@ class IntersectParams(CoreObject):
                     self.__initialize(
                         tolerance if tolerance is not None else ( IntersectParams._default_params["tolerance"] if "tolerance" in IntersectParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)),
                         use_absolute_tolerance if use_absolute_tolerance is not None else ( IntersectParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in IntersectParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
-                        remesh if remesh is not None else ( IntersectParams._default_params["remesh"] if "remesh" in IntersectParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)))
+                        remesh if remesh is not None else ( IntersectParams._default_params["remesh"] if "remesh" in IntersectParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)),
+                        collapse_feature_angle if collapse_feature_angle is not None else ( IntersectParams._default_params["collapse_feature_angle"] if "collapse_feature_angle" in IntersectParams._default_params else (json_data["collapseFeatureAngle"] if "collapseFeatureAngle" in json_data else None)),
+                        collapse_target_skewness if collapse_target_skewness is not None else ( IntersectParams._default_params["collapse_target_skewness"] if "collapse_target_skewness" in IntersectParams._default_params else (json_data["collapseTargetSkewness"] if "collapseTargetSkewness" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -505,7 +529,9 @@ class IntersectParams(CoreObject):
     def set_default(
             tolerance: float = None,
             use_absolute_tolerance: bool = None,
-            remesh: bool = None):
+            remesh: bool = None,
+            collapse_feature_angle: float = None,
+            collapse_target_skewness: float = None):
         """Set the default values of IntersectParams.
 
         Parameters
@@ -516,6 +542,10 @@ class IntersectParams(CoreObject):
             True if tolerance provided is absolute value.
         remesh: bool, optional
             Local remesh at the intersection.
+        collapse_feature_angle: float, optional
+            Angle to preserve features while performing collapse in improve operation.
+        collapse_target_skewness: float, optional
+            Perform collapse on faces with skewness above the provided target skewness.
         """
         args = locals()
         [IntersectParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -540,11 +570,15 @@ class IntersectParams(CoreObject):
             json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
         if self._remesh is not None:
             json_data["remesh"] = self._remesh
+        if self._collapse_feature_angle is not None:
+            json_data["collapseFeatureAngle"] = self._collapse_feature_angle
+        if self._collapse_target_skewness is not None:
+            json_data["collapseTargetSkewness"] = self._collapse_target_skewness
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "tolerance :  %s\nuse_absolute_tolerance :  %s\nremesh :  %s" % (self._tolerance, self._use_absolute_tolerance, self._remesh)
+        message = "tolerance :  %s\nuse_absolute_tolerance :  %s\nremesh :  %s\ncollapse_feature_angle :  %s\ncollapse_target_skewness :  %s" % (self._tolerance, self._use_absolute_tolerance, self._remesh, self._collapse_feature_angle, self._collapse_target_skewness)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -577,6 +611,26 @@ class IntersectParams(CoreObject):
     @remesh.setter
     def remesh(self, value: bool):
         self._remesh = value
+
+    @property
+    def collapse_feature_angle(self) -> float:
+        """Angle to preserve features while performing collapse in improve operation.
+        """
+        return self._collapse_feature_angle
+
+    @collapse_feature_angle.setter
+    def collapse_feature_angle(self, value: float):
+        self._collapse_feature_angle = value
+
+    @property
+    def collapse_target_skewness(self) -> float:
+        """Perform collapse on faces with skewness above the provided target skewness.
+        """
+        return self._collapse_target_skewness
+
+    @collapse_target_skewness.setter
+    def collapse_target_skewness(self, value: float):
+        self._collapse_target_skewness = value
 
 class JoinParams(CoreObject):
     """Parameters used for join.
@@ -1188,3 +1242,248 @@ class StitchParams(CoreObject):
     @type.setter
     def type(self, value: StitchType):
         self._type = value
+
+class MergeBoundaryNodesParams(CoreObject):
+    """Parameters used for the merge boundary nodes operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            tolerance: float,
+            use_absolute_tolerance: bool,
+            merge_node_type: MergeNodeType):
+        self._tolerance = tolerance
+        self._use_absolute_tolerance = use_absolute_tolerance
+        self._merge_node_type = MergeNodeType(merge_node_type)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            tolerance: float = None,
+            use_absolute_tolerance: bool = None,
+            merge_node_type: MergeNodeType = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MergeBoundaryNodesParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MergeBoundaryNodesParams object with default parameters.
+        tolerance: float, optional
+        use_absolute_tolerance: bool, optional
+        merge_node_type: MergeNodeType, optional
+        json_data: dict, optional
+            JSON dictionary to create a MergeBoundaryNodesParams object with provided parameters.
+
+        Examples
+        --------
+        >>> merge_boundary_nodes_params = prime.MergeBoundaryNodesParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["tolerance"] if "tolerance" in json_data else None,
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                MergeNodeType(json_data["mergeNodeType"] if "mergeNodeType" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [tolerance, use_absolute_tolerance, merge_node_type])
+            if all_field_specified:
+                self.__initialize(
+                    tolerance,
+                    use_absolute_tolerance,
+                    merge_node_type)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MergeBoundaryNodesParams")
+                    json_data = param_json["MergeBoundaryNodesParams"] if "MergeBoundaryNodesParams" in param_json else {}
+                    self.__initialize(
+                        tolerance if tolerance is not None else ( MergeBoundaryNodesParams._default_params["tolerance"] if "tolerance" in MergeBoundaryNodesParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)),
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( MergeBoundaryNodesParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in MergeBoundaryNodesParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        merge_node_type if merge_node_type is not None else ( MergeBoundaryNodesParams._default_params["merge_node_type"] if "merge_node_type" in MergeBoundaryNodesParams._default_params else MergeNodeType(json_data["mergeNodeType"] if "mergeNodeType" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            tolerance: float = None,
+            use_absolute_tolerance: bool = None,
+            merge_node_type: MergeNodeType = None):
+        """Set the default values of MergeBoundaryNodesParams.
+
+        Parameters
+        ----------
+        tolerance: float, optional
+        use_absolute_tolerance: bool, optional
+        merge_node_type: MergeNodeType, optional
+        """
+        args = locals()
+        [MergeBoundaryNodesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MergeBoundaryNodesParams.
+
+        Examples
+        --------
+        >>> MergeBoundaryNodesParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MergeBoundaryNodesParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._tolerance is not None:
+            json_data["tolerance"] = self._tolerance
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._merge_node_type is not None:
+            json_data["mergeNodeType"] = self._merge_node_type
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "tolerance :  %s\nuse_absolute_tolerance :  %s\nmerge_node_type :  %s" % (self._tolerance, self._use_absolute_tolerance, self._merge_node_type)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def tolerance(self) -> float:
+        """
+        Distance tolerance for merging boundary nodes.
+        """
+        return self._tolerance
+
+    @tolerance.setter
+    def tolerance(self, value: float):
+        self._tolerance = value
+
+    @property
+    def use_absolute_tolerance(self) -> bool:
+        """
+        Indicates whether the tolerance provided is an absolute value or not.
+        """
+        return self._use_absolute_tolerance
+
+    @use_absolute_tolerance.setter
+    def use_absolute_tolerance(self, value: bool):
+        self._use_absolute_tolerance = value
+
+    @property
+    def merge_node_type(self) -> MergeNodeType:
+        """
+        Type depending on the type of nodes to be merged.
+        """
+        return self._merge_node_type
+
+    @merge_node_type.setter
+    def merge_node_type(self, value: MergeNodeType):
+        self._merge_node_type = value
+
+class MergeBoundaryNodesResults(CoreObject):
+    """Results associated with the merge nodes operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode):
+        self._error_code = ErrorCode(error_code)
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the MergeBoundaryNodesResults.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a MergeBoundaryNodesResults object with default parameters.
+        error_code: ErrorCode, optional
+            Error Code associated with failure of merge nodes operation.
+        json_data: dict, optional
+            JSON dictionary to create a MergeBoundaryNodesResults object with provided parameters.
+
+        Examples
+        --------
+        >>> merge_boundary_nodes_results = prime.MergeBoundaryNodesResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code])
+            if all_field_specified:
+                self.__initialize(
+                    error_code)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "MergeBoundaryNodesResults")
+                    json_data = param_json["MergeBoundaryNodesResults"] if "MergeBoundaryNodesResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( MergeBoundaryNodesResults._default_params["error_code"] if "error_code" in MergeBoundaryNodesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None):
+        """Set the default values of MergeBoundaryNodesResults.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error Code associated with failure of merge nodes operation.
+        """
+        args = locals()
+        [MergeBoundaryNodesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of MergeBoundaryNodesResults.
+
+        Examples
+        --------
+        >>> MergeBoundaryNodesResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MergeBoundaryNodesResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s" % (self._error_code)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error Code associated with failure of merge nodes operation.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value

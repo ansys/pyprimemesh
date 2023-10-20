@@ -78,7 +78,8 @@ class MaterialPointManager(CoreObject):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> results = model.material_point_data.delete_material_point("fluid")
 
         """

@@ -92,7 +92,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of face zonelets.
+            Return the ids of face zonelets. Returns an empty list for a topology part.
 
 
         Examples
@@ -114,7 +114,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of cell zonelets.
+            Return the ids of cell zonelets. Returns an empty list for a topology part.
 
 
         Examples
@@ -137,7 +137,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of edge zonelets.
+            Return the ids of edge zonelets. Returns an empty list for a topology part.
 
 
         Examples
@@ -376,7 +376,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return face zonelet ids of zones with name matching the name pattern.
+            Return face zonelet ids of zones with name matching the name pattern. Returns an empty list for a topology part.
 
 
         Examples
@@ -411,7 +411,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return volume ids of zones with name matching the name pattern.
+            Return volume ids of zones with name matching the name pattern. Returns an empty list for a topology part.
 
 
         Examples
@@ -481,7 +481,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return edge zonelet ids of labels with name matching the name pattern.
+            Return edge zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
 
 
         Examples
@@ -516,7 +516,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return face zonelet ids of labels with name matching the name pattern.
+            Return face zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
 
 
         Examples

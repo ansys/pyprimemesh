@@ -684,6 +684,8 @@ class CreateCapParams(CoreObject):
     def __str__(self) -> str:
         message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
 
 class CreateCapResults(CoreObject):
@@ -885,6 +887,8 @@ class DeleteUnwettedParams(CoreObject):
     def __str__(self) -> str:
         message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
 
 class DeleteUnwettedResult(CoreObject):
@@ -3167,6 +3171,8 @@ class StretchFreeBoundariesParams(CoreObject):
     def __str__(self) -> str:
         message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
 
 class StretchFreeBoundariesResults(CoreObject):

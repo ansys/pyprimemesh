@@ -70,6 +70,9 @@ from ansys.meshing.prime.autogen.topodatastructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
 from ansys.meshing.prime.autogen.morpherstructs import *
 from ansys.meshing.prime.autogen.morpherbcsstructs import *
+from ansys.meshing.prime.autogen.autoquadmesher import *
+from ansys.meshing.prime.autogen.autoquadmesherstructs import *
+from ansys.meshing.prime.autogen.toposearchstructs import *
 
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
 from ansys.meshing.prime.internals.client import Client

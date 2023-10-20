@@ -213,3 +213,53 @@ class Connect(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("stitch_face_zonelets", ConnectResults(model = self._model, json_data = result))
         return ConnectResults(model = self._model, json_data = result)
+
+    def merge_boundary_nodes(self, part_id : int, face_zonelet_ids : Iterable[int], with_face_zonelet_ids : Iterable[int], params : MergeBoundaryNodesParams) -> MergeBoundaryNodesResults:
+        """ Merges boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part where merging has to take place.
+        face_zonelet_ids : Iterable[int]
+            Ids of the source face zonelets.
+        with_face_zonelet_ids : Iterable[int]
+            Ids of the target face zonelets.
+        params : MergeBoundaryNodesParams
+            Parameters for merging boundary nodes.
+
+        Returns
+        -------
+        MergeBoundaryNodesResults
+            Returns the MergeBoundaryNodesResults.
+
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> connect = Connect(model = model)
+        >>> results = connect.MergeBoundaryNodes(2, [2,3], [4,5], params)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(with_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, MergeBoundaryNodesParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is MergeBoundaryNodesParams.")
+        args = {"part_id" : part_id,
+        "face_zonelet_ids" : face_zonelet_ids,
+        "with_face_zonelet_ids" : with_face_zonelet_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Connect/MergeBoundaryNodes"
+        self._model._print_beta_api_warning("merge_boundary_nodes")
+        self._model._print_logs_before_command("merge_boundary_nodes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("merge_boundary_nodes", MergeBoundaryNodesResults(model = self._model, json_data = result))
+        return MergeBoundaryNodesResults(model = self._model, json_data = result)

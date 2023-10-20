@@ -935,7 +935,9 @@ class QuadToSplineParams(CoreObject):
             solid_shell: bool,
             separate_by_zone: bool,
             zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]],
-            project_on_geometry: bool):
+            project_on_geometry: bool,
+            use_projection_scope: bool,
+            projection_scope: ScopeDefinition):
         self._feature_capture_type = SplineFeatureCaptureType(feature_capture_type)
         self._feature_angle = feature_angle
         self._corner_angle = corner_angle
@@ -944,6 +946,8 @@ class QuadToSplineParams(CoreObject):
         self._separate_by_zone = separate_by_zone
         self._zone_name_shell_thickness_pairs = zone_name_shell_thickness_pairs
         self._project_on_geometry = project_on_geometry
+        self._use_projection_scope = use_projection_scope
+        self._projection_scope = projection_scope
 
     def __init__(
             self,
@@ -956,6 +960,8 @@ class QuadToSplineParams(CoreObject):
             separate_by_zone: bool = None,
             zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]] = None,
             project_on_geometry: bool = None,
+            use_projection_scope: bool = None,
+            projection_scope: ScopeDefinition = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the QuadToSplineParams.
@@ -966,20 +972,33 @@ class QuadToSplineParams(CoreObject):
             Model to create a QuadToSplineParams object with default parameters.
         feature_capture_type: SplineFeatureCaptureType, optional
             Feature capture options.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         feature_angle: float, optional
             Angle to capture the feature.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         corner_angle: float, optional
             Corner angle of the feature.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         shell_thickness: float, optional
             Thickness of shell.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         solid_shell: bool, optional
             Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         separate_by_zone: bool, optional
             Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
             Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
         project_on_geometry: bool, optional
             Option to project on geometry.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        use_projection_scope: bool, optional
+            Option to use projection scope.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        projection_scope: ScopeDefinition, optional
+            Scope to evaluate entities for projection.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         json_data: dict, optional
             JSON dictionary to create a QuadToSplineParams object with provided parameters.
 
@@ -996,9 +1015,11 @@ class QuadToSplineParams(CoreObject):
                 json_data["solidShell"] if "solidShell" in json_data else None,
                 json_data["separateByZone"] if "separateByZone" in json_data else None,
                 json_data["zoneNameShellThicknessPairs"] if "zoneNameShellThicknessPairs" in json_data else None,
-                json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)
+                json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None,
+                json_data["useProjectionScope"] if "useProjectionScope" in json_data else None,
+                ScopeDefinition(model = model, json_data = json_data["projectionScope"] if "projectionScope" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [feature_capture_type, feature_angle, corner_angle, shell_thickness, solid_shell, separate_by_zone, zone_name_shell_thickness_pairs, project_on_geometry])
+            all_field_specified = all(arg is not None for arg in [feature_capture_type, feature_angle, corner_angle, shell_thickness, solid_shell, separate_by_zone, zone_name_shell_thickness_pairs, project_on_geometry, use_projection_scope, projection_scope])
             if all_field_specified:
                 self.__initialize(
                     feature_capture_type,
@@ -1008,7 +1029,9 @@ class QuadToSplineParams(CoreObject):
                     solid_shell,
                     separate_by_zone,
                     zone_name_shell_thickness_pairs,
-                    project_on_geometry)
+                    project_on_geometry,
+                    use_projection_scope,
+                    projection_scope)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1023,7 +1046,9 @@ class QuadToSplineParams(CoreObject):
                         solid_shell if solid_shell is not None else ( QuadToSplineParams._default_params["solid_shell"] if "solid_shell" in QuadToSplineParams._default_params else (json_data["solidShell"] if "solidShell" in json_data else None)),
                         separate_by_zone if separate_by_zone is not None else ( QuadToSplineParams._default_params["separate_by_zone"] if "separate_by_zone" in QuadToSplineParams._default_params else (json_data["separateByZone"] if "separateByZone" in json_data else None)),
                         zone_name_shell_thickness_pairs if zone_name_shell_thickness_pairs is not None else ( QuadToSplineParams._default_params["zone_name_shell_thickness_pairs"] if "zone_name_shell_thickness_pairs" in QuadToSplineParams._default_params else (json_data["zoneNameShellThicknessPairs"] if "zoneNameShellThicknessPairs" in json_data else None)),
-                        project_on_geometry if project_on_geometry is not None else ( QuadToSplineParams._default_params["project_on_geometry"] if "project_on_geometry" in QuadToSplineParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)))
+                        project_on_geometry if project_on_geometry is not None else ( QuadToSplineParams._default_params["project_on_geometry"] if "project_on_geometry" in QuadToSplineParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)),
+                        use_projection_scope if use_projection_scope is not None else ( QuadToSplineParams._default_params["use_projection_scope"] if "use_projection_scope" in QuadToSplineParams._default_params else (json_data["useProjectionScope"] if "useProjectionScope" in json_data else None)),
+                        projection_scope if projection_scope is not None else ( QuadToSplineParams._default_params["projection_scope"] if "projection_scope" in QuadToSplineParams._default_params else ScopeDefinition(model = model, json_data = (json_data["projectionScope"] if "projectionScope" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1040,7 +1065,9 @@ class QuadToSplineParams(CoreObject):
             solid_shell: bool = None,
             separate_by_zone: bool = None,
             zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]] = None,
-            project_on_geometry: bool = None):
+            project_on_geometry: bool = None,
+            use_projection_scope: bool = None,
+            projection_scope: ScopeDefinition = None):
         """Set the default values of QuadToSplineParams.
 
         Parameters
@@ -1061,6 +1088,10 @@ class QuadToSplineParams(CoreObject):
             Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
         project_on_geometry: bool, optional
             Option to project on geometry.
+        use_projection_scope: bool, optional
+            Option to use projection scope.
+        projection_scope: ScopeDefinition, optional
+            Scope to evaluate entities for projection.
         """
         args = locals()
         [QuadToSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1095,17 +1126,22 @@ class QuadToSplineParams(CoreObject):
             json_data["zoneNameShellThicknessPairs"] = self._zone_name_shell_thickness_pairs
         if self._project_on_geometry is not None:
             json_data["projectOnGeometry"] = self._project_on_geometry
+        if self._use_projection_scope is not None:
+            json_data["useProjectionScope"] = self._use_projection_scope
+        if self._projection_scope is not None:
+            json_data["projectionScope"] = self._projection_scope._jsonify()
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "feature_capture_type :  %s\nfeature_angle :  %s\ncorner_angle :  %s\nshell_thickness :  %s\nsolid_shell :  %s\nseparate_by_zone :  %s\nzone_name_shell_thickness_pairs :  %s\nproject_on_geometry :  %s" % (self._feature_capture_type, self._feature_angle, self._corner_angle, self._shell_thickness, self._solid_shell, self._separate_by_zone, self._zone_name_shell_thickness_pairs, self._project_on_geometry)
+        message = "feature_capture_type :  %s\nfeature_angle :  %s\ncorner_angle :  %s\nshell_thickness :  %s\nsolid_shell :  %s\nseparate_by_zone :  %s\nzone_name_shell_thickness_pairs :  %s\nproject_on_geometry :  %s\nuse_projection_scope :  %s\nprojection_scope :  %s" % (self._feature_capture_type, self._feature_angle, self._corner_angle, self._shell_thickness, self._solid_shell, self._separate_by_zone, self._zone_name_shell_thickness_pairs, self._project_on_geometry, self._use_projection_scope, '{ ' + str(self._projection_scope) + ' }')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def feature_capture_type(self) -> SplineFeatureCaptureType:
         """Feature capture options.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._feature_capture_type
 
@@ -1116,6 +1152,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def feature_angle(self) -> float:
         """Angle to capture the feature.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._feature_angle
 
@@ -1126,6 +1163,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def corner_angle(self) -> float:
         """Corner angle of the feature.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._corner_angle
 
@@ -1136,6 +1174,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def shell_thickness(self) -> float:
         """Thickness of shell.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._shell_thickness
 
@@ -1146,6 +1185,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def solid_shell(self) -> bool:
         """Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._solid_shell
 
@@ -1156,6 +1196,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def separate_by_zone(self) -> bool:
         """Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._separate_by_zone
 
@@ -1176,12 +1217,35 @@ class QuadToSplineParams(CoreObject):
     @property
     def project_on_geometry(self) -> bool:
         """Option to project on geometry.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._project_on_geometry
 
     @project_on_geometry.setter
     def project_on_geometry(self, value: bool):
         self._project_on_geometry = value
+
+    @property
+    def use_projection_scope(self) -> bool:
+        """Option to use projection scope.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._use_projection_scope
+
+    @use_projection_scope.setter
+    def use_projection_scope(self, value: bool):
+        self._use_projection_scope = value
+
+    @property
+    def projection_scope(self) -> ScopeDefinition:
+        """Scope to evaluate entities for projection.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._projection_scope
+
+    @projection_scope.setter
+    def projection_scope(self, value: ScopeDefinition):
+        self._projection_scope = value
 
 class RefineSplineParams(CoreObject):
     """Spline refinement parameters.

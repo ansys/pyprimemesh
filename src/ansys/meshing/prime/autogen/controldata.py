@@ -70,6 +70,32 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("create_multi_zone_control")
         return result
 
+    def get_multi_zone_controls(self) -> Iterable[int]:
+        """ Get ids of all the MultiZone controls.
+
+
+        Returns
+        -------
+        Iterable[int]
+            Return all the MultiZone controls ids.
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> MultiZoneControls = model.control_data.get_multi_zone_controls()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ControlData/GetMultiZoneControls"
+        self._model._print_beta_api_warning("get_multi_zone_controls")
+        self._model._print_logs_before_command("get_multi_zone_controls", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_multi_zone_controls")
+        return result
+
     def create_size_control(self, type : SizingType) -> List[Any]:
         """ Creates size control for the given sizing type.
 

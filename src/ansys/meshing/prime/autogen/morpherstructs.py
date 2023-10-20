@@ -99,6 +99,8 @@ class MorphSolveParams(CoreObject):
     def __str__(self) -> str:
         message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
 
 class MatchMorphParams(CoreObject):
@@ -176,6 +178,8 @@ class MatchMorphParams(CoreObject):
     def __str__(self) -> str:
         message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
 
 class MatchMorphResults(CoreObject):

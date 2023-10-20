@@ -181,7 +181,7 @@ def print_beta_api_warning(logger: logging.Logger, command: str):
     """
     if logger.isEnabledFor(logging.WARNING):
         logger.warning(
-            f"This API {command} is a Beta. API Behaviorand implementation may change in future."
+            f"This API {command} is a Beta. API Behavior and implementation may change in future."
         )
 
 

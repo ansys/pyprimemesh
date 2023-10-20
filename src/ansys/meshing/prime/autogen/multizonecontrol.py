@@ -156,13 +156,13 @@ class MultiZoneControl(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_edge_biasing_params")
 
-    def set_multi_zone_params(self, params : MultiZoneParams):
+    def set_multi_zone_sizing_params(self, params : MultiZoneSizingParams):
         """ Sets the MultiZone parameters.
 
 
         Parameters
         ----------
-        params : MultiZoneParams
+        params : MultiZoneSizingParams
             Parameters required for MultiZone mesh.
 
         Notes
@@ -174,14 +174,14 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_multi_zone_params(params)
 
         """
-        if not isinstance(params, MultiZoneParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MultiZoneParams.")
+        if not isinstance(params, MultiZoneSizingParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is MultiZoneSizingParams.")
         args = {"params" : params._jsonify()}
-        command_name = "PrimeMesh::MultiZoneControl/SetMultiZoneParams"
-        self._model._print_beta_api_warning("set_multi_zone_params")
-        self._model._print_logs_before_command("set_multi_zone_params", args)
+        command_name = "PrimeMesh::MultiZoneControl/SetMultiZoneSizingParams"
+        self._model._print_beta_api_warning("set_multi_zone_sizing_params")
+        self._model._print_logs_before_command("set_multi_zone_sizing_params", args)
         self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("set_multi_zone_params")
+        self._model._print_logs_after_command("set_multi_zone_sizing_params")
 
     @property
     def id(self):
