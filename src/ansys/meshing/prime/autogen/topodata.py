@@ -239,6 +239,10 @@ class TopoData(CoreObject):
             Returns the DeleteMeshResults.
 
 
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
         Examples
         --------
         >>> params = prime.DeleteMeshParams(model = model)
@@ -252,6 +256,7 @@ class TopoData(CoreObject):
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::TopoData/DeleteMeshOnTopoFaces"
+        self._model._print_beta_api_warning("delete_mesh_on_topo_faces")
         self._model._print_logs_before_command("delete_mesh_on_topo_faces", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("delete_mesh_on_topo_faces", DeleteMeshResults(model = self._model, json_data = result))

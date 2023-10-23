@@ -6,6 +6,7 @@ from ansys.meshing.prime.autogen.commonstructs import *
 
 # isort: on
 from ansys.meshing.prime.autogen.automeshstructs import *
+from ansys.meshing.prime.autogen.autoquadmesherstructs import *
 from ansys.meshing.prime.autogen.collapsetoolstructs import *
 from ansys.meshing.prime.autogen.connectstructs import *
 from ansys.meshing.prime.autogen.controlstructs import *
@@ -30,6 +31,7 @@ from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.surferstructs import *
 from ansys.meshing.prime.autogen.thinvolumecontrolstructs import *
 from ansys.meshing.prime.autogen.topodatastructs import *
+from ansys.meshing.prime.autogen.toposearchstructs import *
 from ansys.meshing.prime.autogen.topoutilitystructs import *
 from ansys.meshing.prime.autogen.transformstructs import *
 from ansys.meshing.prime.autogen.volumecontrolstructs import *

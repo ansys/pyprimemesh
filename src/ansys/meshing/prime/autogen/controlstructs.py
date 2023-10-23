@@ -1138,6 +1138,8 @@ class ScopeZoneletParams(CoreObject):
     def __str__(self) -> str:
         message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
 
 class SetScopeResults(CoreObject):
@@ -1421,12 +1423,16 @@ class MultiZoneSweepMeshParams(CoreObject):
             Model to create a MultiZoneSweepMeshParams object with default parameters.
         source_and_target_scope: ScopeDefinition, optional
             Source and target faces used to determine the direction of sweep in MultiZone meshing.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         sweep_mesh_size: float, optional
             Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         n_divisions: int, optional
             Number of divisions in the sweep direction.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         thin_sweep: bool, optional
             Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         json_data: dict, optional
             JSON dictionary to create a MultiZoneSweepMeshParams object with provided parameters.
 
@@ -1521,6 +1527,7 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def source_and_target_scope(self) -> ScopeDefinition:
         """Source and target faces used to determine the direction of sweep in MultiZone meshing.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._source_and_target_scope
 
@@ -1531,6 +1538,7 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def sweep_mesh_size(self) -> float:
         """Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._sweep_mesh_size
 
@@ -1541,6 +1549,7 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def n_divisions(self) -> int:
         """Number of divisions in the sweep direction.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._n_divisions
 
@@ -1551,6 +1560,7 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def thin_sweep(self) -> bool:
         """Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._thin_sweep
 
@@ -1591,12 +1601,16 @@ class MultiZoneEdgeBiasingParams(CoreObject):
             Model to create a MultiZoneEdgeBiasingParams object with default parameters.
         face_scope: ScopeDefinition, optional
             Reference face zonelets to control mesh clustering orientation.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         edge_scope: ScopeDefinition, optional
             Edge zonelets to control the expanse of edge biasing.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         bias_factor: float, optional
             Bias factor used for MultiZone edge biasing control.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         n_divisions: int, optional
             Number of divisions on the section where edge biasing is done.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         json_data: dict, optional
             JSON dictionary to create a MultiZoneEdgeBiasingParams object with provided parameters.
 
@@ -1691,6 +1705,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def face_scope(self) -> ScopeDefinition:
         """Reference face zonelets to control mesh clustering orientation.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._face_scope
 
@@ -1701,6 +1716,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def edge_scope(self) -> ScopeDefinition:
         """Edge zonelets to control the expanse of edge biasing.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._edge_scope
 
@@ -1711,6 +1727,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def bias_factor(self) -> float:
         """Bias factor used for MultiZone edge biasing control.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._bias_factor
 
@@ -1721,6 +1738,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def n_divisions(self) -> int:
         """Number of divisions on the section where edge biasing is done.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._n_divisions
 
@@ -1752,6 +1770,7 @@ class MultiZoneMapMeshParams(CoreObject):
             Model to create a MultiZoneMapMeshParams object with default parameters.
         scope: ScopeDefinition, optional
             Scope used for MultiZone map mesh control.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         json_data: dict, optional
             JSON dictionary to create a MultiZoneMapMeshParams object with provided parameters.
 
@@ -1822,6 +1841,7 @@ class MultiZoneMapMeshParams(CoreObject):
     @property
     def scope(self) -> ScopeDefinition:
         """Scope used for MultiZone map mesh control.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._scope
 
@@ -1829,7 +1849,7 @@ class MultiZoneMapMeshParams(CoreObject):
     def scope(self, value: ScopeDefinition):
         self._scope = value
 
-class MultiZoneParams(CoreObject):
+class MultiZoneSizingParams(CoreObject):
     """Parameters for MultiZone meshing.
     """
     _default_params = {}
@@ -1838,10 +1858,12 @@ class MultiZoneParams(CoreObject):
             self,
             max_size: float,
             min_size: float,
-            growth_rate: float):
+            growth_rate: float,
+            use_volumetric_size_field: bool):
         self._max_size = max_size
         self._min_size = min_size
         self._growth_rate = growth_rate
+        self._use_volumetric_size_field = use_volumetric_size_field
 
     def __init__(
             self,
@@ -1849,49 +1871,59 @@ class MultiZoneParams(CoreObject):
             max_size: float = None,
             min_size: float = None,
             growth_rate: float = None,
+            use_volumetric_size_field: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MultiZoneParams.
+        """Initializes the MultiZoneSizingParams.
 
         Parameters
         ----------
         model: Model
-            Model to create a MultiZoneParams object with default parameters.
+            Model to create a MultiZoneSizingParams object with default parameters.
         max_size: float, optional
             Defines global maximum mesh size.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         min_size: float, optional
             Defines global minimum mesh size.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         growth_rate: float, optional
             Defines growth rate.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        use_volumetric_size_field: bool, optional
+            Defines whether to use size field for MultiZone meshing.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         json_data: dict, optional
-            JSON dictionary to create a MultiZoneParams object with provided parameters.
+            JSON dictionary to create a MultiZoneSizingParams object with provided parameters.
 
         Examples
         --------
-        >>> multi_zone_params = prime.MultiZoneParams(model = model)
+        >>> multi_zone_sizing_params = prime.MultiZoneSizingParams(model = model)
         """
         if json_data:
             self.__initialize(
                 json_data["maxSize"] if "maxSize" in json_data else None,
                 json_data["minSize"] if "minSize" in json_data else None,
-                json_data["growthRate"] if "growthRate" in json_data else None)
+                json_data["growthRate"] if "growthRate" in json_data else None,
+                json_data["useVolumetricSizeField"] if "useVolumetricSizeField" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [max_size, min_size, growth_rate])
+            all_field_specified = all(arg is not None for arg in [max_size, min_size, growth_rate, use_volumetric_size_field])
             if all_field_specified:
                 self.__initialize(
                     max_size,
                     min_size,
-                    growth_rate)
+                    growth_rate,
+                    use_volumetric_size_field)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
                 else:
-                    param_json = model._communicator.initialize_params(model, "MultiZoneParams")
-                    json_data = param_json["MultiZoneParams"] if "MultiZoneParams" in param_json else {}
+                    param_json = model._communicator.initialize_params(model, "MultiZoneSizingParams")
+                    json_data = param_json["MultiZoneSizingParams"] if "MultiZoneSizingParams" in param_json else {}
                     self.__initialize(
-                        max_size if max_size is not None else ( MultiZoneParams._default_params["max_size"] if "max_size" in MultiZoneParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
-                        min_size if min_size is not None else ( MultiZoneParams._default_params["min_size"] if "min_size" in MultiZoneParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
-                        growth_rate if growth_rate is not None else ( MultiZoneParams._default_params["growth_rate"] if "growth_rate" in MultiZoneParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
+                        max_size if max_size is not None else ( MultiZoneSizingParams._default_params["max_size"] if "max_size" in MultiZoneSizingParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
+                        min_size if min_size is not None else ( MultiZoneSizingParams._default_params["min_size"] if "min_size" in MultiZoneSizingParams._default_params else (json_data["minSize"] if "minSize" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( MultiZoneSizingParams._default_params["growth_rate"] if "growth_rate" in MultiZoneSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)),
+                        use_volumetric_size_field if use_volumetric_size_field is not None else ( MultiZoneSizingParams._default_params["use_volumetric_size_field"] if "use_volumetric_size_field" in MultiZoneSizingParams._default_params else (json_data["useVolumetricSizeField"] if "useVolumetricSizeField" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1903,8 +1935,9 @@ class MultiZoneParams(CoreObject):
     def set_default(
             max_size: float = None,
             min_size: float = None,
-            growth_rate: float = None):
-        """Set the default values of MultiZoneParams.
+            growth_rate: float = None,
+            use_volumetric_size_field: bool = None):
+        """Set the default values of MultiZoneSizingParams.
 
         Parameters
         ----------
@@ -1914,20 +1947,22 @@ class MultiZoneParams(CoreObject):
             Defines global minimum mesh size.
         growth_rate: float, optional
             Defines growth rate.
+        use_volumetric_size_field: bool, optional
+            Defines whether to use size field for MultiZone meshing.
         """
         args = locals()
-        [MultiZoneParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+        [MultiZoneSizingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of MultiZoneParams.
+        """Print the default values of MultiZoneSizingParams.
 
         Examples
         --------
-        >>> MultiZoneParams.print_default()
+        >>> MultiZoneSizingParams.print_default()
         """
         message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MultiZoneParams._default_params.items())
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in MultiZoneSizingParams._default_params.items())
         print(message)
 
     def _jsonify(self) -> Dict[str, Any]:
@@ -1938,17 +1973,20 @@ class MultiZoneParams(CoreObject):
             json_data["minSize"] = self._min_size
         if self._growth_rate is not None:
             json_data["growthRate"] = self._growth_rate
+        if self._use_volumetric_size_field is not None:
+            json_data["useVolumetricSizeField"] = self._use_volumetric_size_field
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "max_size :  %s\nmin_size :  %s\ngrowth_rate :  %s" % (self._max_size, self._min_size, self._growth_rate)
+        message = "max_size :  %s\nmin_size :  %s\ngrowth_rate :  %s\nuse_volumetric_size_field :  %s" % (self._max_size, self._min_size, self._growth_rate, self._use_volumetric_size_field)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def max_size(self) -> float:
         """Defines global maximum mesh size.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._max_size
 
@@ -1959,6 +1997,7 @@ class MultiZoneParams(CoreObject):
     @property
     def min_size(self) -> float:
         """Defines global minimum mesh size.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._min_size
 
@@ -1969,9 +2008,21 @@ class MultiZoneParams(CoreObject):
     @property
     def growth_rate(self) -> float:
         """Defines growth rate.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._growth_rate
 
     @growth_rate.setter
     def growth_rate(self, value: float):
         self._growth_rate = value
+
+    @property
+    def use_volumetric_size_field(self) -> bool:
+        """Defines whether to use size field for MultiZone meshing.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._use_volumetric_size_field
+
+    @use_volumetric_size_field.setter
+    def use_volumetric_size_field(self, value: bool):
+        self._use_volumetric_size_field = value

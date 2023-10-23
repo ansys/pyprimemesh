@@ -135,6 +135,8 @@ class Wrapper(_Wrapper):
             # intersect
             connect = Connect(self._model)
             params = IntersectParams(model=self._model)
+            params.collapse_feature_angle = 179
+            params.collapse_target_skewness = 0.9
             res = connect.intersect_face_zonelets(
                 part_id=merged_part_res.merged_part_id,
                 face_zonelet_ids=face_zonelet_ids,

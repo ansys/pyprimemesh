@@ -38,6 +38,10 @@ class ErrorCode(enum.IntEnum):
     """Non manifold edge for meshing."""
     FREEZEMESHERROR = 30
     """Cannot remesh freezed mesh."""
+    REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART = 31
+    """Remesh face zonelets is not supported for topology part."""
+    REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART = 32
+    """Remesh face zonelets locally is not supported for topology part."""
     SURFERINVALIDCONSTANTSIZE = 40
     """Invalid size for constant size surface meshing."""
     SURFERINVALIDMINORMAXSIZES = 41
@@ -298,6 +302,12 @@ class ErrorCode(enum.IntEnum):
     """Only triangular face zone is supported."""
     NOTSUPPORTEDFORNONQUADFACEZONE = 1203
     """Operation supports only quads."""
+    ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART = 1205
+    """Adding provided entities is not supported for part with topology data."""
+    MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART = 1206
+    """Merge zonelets is not supported for part with topology data."""
+    MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART = 1207
+    """Merge volumes is not supported for part with topology data."""
     MERGEPARTSFAILED = 1301
     """Merge parts failed."""
     MERGEPARTSWANDWOTOPO = 1302
@@ -400,8 +410,12 @@ class ErrorCode(enum.IntEnum):
     """MultiZone mesh transfer failed."""
     MULTIZONEMESHER_USERINPUTTOPOLOGYMISSING = 2610
     """Input does not have topology for MultiZone mesh."""
+    MULTIZONEMESHER_MULTIPLECONTROLSNOTSUPPORTED = 2611
+    """MultiZone mesh does not support multiple controls."""
     MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER = 2612
     """No volumes for geometry import."""
+    MULTIZONEMESHER_NOVOLUMESSCOPEDINCURRENTPART = 2613
+    """No volumes for geometry import in the current part."""
     PARTHASTOPOLOGY = 2800
     """Part has a topology."""
     SURFACESEARCHFAILED = 2802
@@ -542,6 +556,8 @@ class ErrorCode(enum.IntEnum):
     """Provided file extension is not supported. Supported extensions are .psf and .psf.gz."""
     UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB = 9007
     """Provided file extension is not supported. Supported extension is .cdb."""
+    INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT = 9009
+    """Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 ."""
     PLUGINLOADFAILURE = 10001
     """Failed to load Surface Editor plugin."""
     TARGETZONELETS_SELFINTERSECTING = 10002
@@ -606,6 +622,12 @@ class ErrorCode(enum.IntEnum):
     """Wrong API call sequence."""
     MICROSTRUCTUREBADSHAPEPROPERTIES = 13003
     """Bad shape properties."""
+    AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
+    """Autoquadmesher error codes.
+    This parameter is a Beta. Parameter behavior and name may change in future."""
+    AUTOQUADMESHER_INVALIDMINMAXSIZES = 15001
+    """Difference in maximum value and minimum value is negative.
+    This parameter is a Beta. Parameter behavior and name may change in future."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.

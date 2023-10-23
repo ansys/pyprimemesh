@@ -289,7 +289,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> model.start_distributed_meshing()
 
         """
@@ -318,7 +319,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> results = model.create_zone("wall", prime.ZoneType.FACE)
 
         """
@@ -351,7 +353,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> results = model.delete_zone(1)
 
         """
@@ -381,7 +384,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> zone_id = model.get_zone_by_name("inlet")
 
         """
@@ -411,7 +415,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> name = model.get_zone_name(id)
 
         """
@@ -443,7 +448,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model()
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> results = model.set_suggested_zone_name(id = 5, name = "zone1")
 
         """
