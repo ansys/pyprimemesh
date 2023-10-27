@@ -44,7 +44,7 @@ doc = [
   "jupyter-sphinx==0.4.0",
   "numpydoc==1.6.0",
   "Sphinx==7.2.6",
-  "pyvista==0.42.2",
+  "pyvista==0.42.3",
   "sphinx-autodoc-typehints==1.24.0",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.14.0",
