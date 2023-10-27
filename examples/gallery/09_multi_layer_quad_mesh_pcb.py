@@ -10,7 +10,7 @@ a generic PCB geometry giving the possibbility to set the base mesh size
 and the number of layers for each solid.
 
 Objective
-~~~~~~~~~
+~~~~~~~~~~
 
 The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the
 stacker technology. This script allows to easily setup the mesh size of the base face (xy plane
@@ -42,20 +42,20 @@ The resulting mesh with 3 layers per solid will look as follows:
 
 
 Procedure
-~~~~~~~~~
-* Import the fundamental libraries that are necessary to run the script
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid``
-class.
-* Define the main mesh parameters: base size and number of layers along the sweep direction.
-* Import the CAD geometry.
-* Define the edge sizing along the sweep direction (based on pre-existing edges named
-selections).
-* Define the parameters for the volume sweeper.
-* Setup, generate, and mesh the base face.
-* Stack the base face along the sweep direction.
-* Setup the zone naming before the mesh output.
-* Write a `.cas` file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+~~~~~~~~~~
+-   Import the fundamental libraries that are necessary to run the script
+-   Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid``
+    class.
+-   Define the main mesh parameters: base size and number of layers along the sweep direction.
+-   Import the CAD geometry.
+-   Define the edge sizing along the sweep direction (based on pre-existing edges named
+    selections).
+-   Define the parameters for the volume sweeper.
+-   Setup, generate, and mesh the base face.
+-   Stack the base face along the sweep direction.
+-   Setup the zone naming before the mesh output.
+-   Write a `.cas` file for use in the Fluent solver.
+-   Exit the PyPrimeMesh session.
 
 """
 
