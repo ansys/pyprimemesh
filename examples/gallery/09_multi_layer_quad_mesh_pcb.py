@@ -1,16 +1,16 @@
 """
 .. _ref_multi_layer_pcb_mesh:
 
-================================================================
+==================================================================
 Meshing a generic PCB geometry with multiple number of hexa layers
-================================================================
+==================================================================
 
 **Summary**: This example showcases the process of generating a mesh for
 a generic PCB geometry giving the possibbility to set the base mesh size
 and the number of layers for each solid.
 
 Objective
-~~~~~~~~~~
+~~~~~~~~~
 
 The example demonstrates how to use PyPrimeMesh to discretize a PCB CAD geometry by means of the
 stacker technology. This script allows to easily setup the mesh size of the base face (xy plane
@@ -42,7 +42,7 @@ The resulting mesh with 3 layers per solid will look as follows:
 
 
 Procedure
-~~~~~~~~~~
+~~~~~~~~~
 * Import the fundamental libraries that are necessary to run the script
 * Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid``
 class.
@@ -60,7 +60,7 @@ selections).
 
 ###############################################################################
 # Import all necessary modules
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
@@ -75,7 +75,7 @@ from ansys.meshing.prime.graphics import Graphics
 
 ###############################################################################
 # Launch Prime server and instantiate the lucid class
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
@@ -86,7 +86,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
 # Define CAD file and mesh settings
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Define the number of layers per solid.
 # Define the size in mm of the quad-dominant mesh on the base size.
 # Define the path to the CAD file to be meshed.
@@ -117,14 +117,14 @@ mesh_util.read(file_name=cad_file)
 
 ###############################################################################
 # Display the imported CAD in a PyVista window
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if display_intermediate_steps:
     display = Graphics(model)
     display()
 
 ###############################################################################
 # Define edge sizing constraints
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Set generic global sizing from 0.002mm and 2mm.
 # Extract the the edges length from the named selections such as "edge_1_0.50_mm"
 # (extract 0.5 mm length) or "edge_23_0.27_mm" (extract 0.27mm length).
@@ -161,7 +161,7 @@ for label in part.get_labels():
 
 ###############################################################################
 # Define Controls for volume sweeper
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Set the sweep direction vector.
 # Setup the geometric tolerances for lateral and stacking defeature.
 # Select the sweep direction as z axis (0,0,1).
@@ -182,7 +182,7 @@ stacker_params = prime.MeshStackerParams(
 
 ###############################################################################
 # Setup, generate, and mesh the base face
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a soft sizing control.
 # Assign the previously defined base_face_size to the soft sizing.
 # Create the base face.
@@ -221,14 +221,14 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 
 ###############################################################################
 # Display the meshed base face in a PyVista window
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if display_intermediate_steps:
     display()
 
 ###############################################################################
-# Stack the base face using the volume sweeper.
-# ~~~~~~~~~~~~~~~
+# Stack the base face using the volume sweeper
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Use volume sweeper to stack the base face along the previously-defined sweep
 # direction.
 # Include the previously-defined stacker parameters.
@@ -244,14 +244,14 @@ stackbase_results = sweeper.stack_base_face(
 
 ###############################################################################
 # Display the final PCB mesh in a PyVista window
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if display_intermediate_steps:
     display()
 
 ###############################################################################
 # Setup the zone naming before the mesh output
-# ~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Delete the unnecessary topo entities.
 # Name the walls of "solid" as "wall_solid" (ex if the solid's name is "A", the
 # walls surrounding the solid will be named "wall_A").
@@ -275,7 +275,7 @@ mesh_util_create_zones = mesh_util.create_zones_from_labels()
 
 ###############################################################################
 # Mesh output
-# ~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~
 # Create a temporary folder and use it to output the mesh in .cas format.
 
 with tempfile.TemporaryDirectory() as temp_folder:
