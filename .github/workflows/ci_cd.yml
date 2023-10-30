@@ -43,6 +43,8 @@ jobs:
         uses: ansys/actions/code-style@v4
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          vale-config: "doc/.vale.ini"
+          vale-version: "2.29.6"
 
   docs-style:
     name: Documentation Style Check

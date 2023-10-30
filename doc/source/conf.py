@@ -38,6 +38,7 @@ html_theme_options = {
     },
     "check_switcher": False,
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
+    "navigation_with_keys": False,
     "github_url": "https://github.com/ansys/pyprimemesh",
     "show_prev_next": False,
     "show_breadcrumbs": True,
