@@ -83,7 +83,8 @@ Four CAD import routes are available in PyPrimeMesh:
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
 
 .. note::
-Program Controlled and SpaceClaim route imports JT files containing only faceted data. Workbench and Native does not support importing JT files containing only faceted data.
+    Program Controlled and SpaceClaim route imports JT files containing only faceted data. Workbench and
+    Native does not support importing JT files containing only faceted data.
 
 To view the CAD supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
