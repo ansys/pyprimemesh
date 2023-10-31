@@ -76,7 +76,7 @@ class ControlData(_ControlData):
         """Get the multizone control by name.
 
         Parameters
-        ------------
+        ----------
         name : str
             Name of the multizone control.
 
