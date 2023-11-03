@@ -55,7 +55,7 @@ class AutoQuadMesher(CoreObject):
         Examples
         --------
         >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.DetectAndTreatFeatures(part_id, topo_face_ids, params);
+        >>> results = autoQuadMesher.detect_and_treat_features(part_id, topo_face_ids, params);
 
         """
         if not isinstance(part_id, int):
@@ -100,7 +100,7 @@ class AutoQuadMesher(CoreObject):
         Examples
         --------
         >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.RepairTopology(part_id, topo_face_ids, params);
+        >>> results = autoQuadMesher.repair_topology(part_id, topo_face_ids, params);
 
         """
         if not isinstance(part_id, int):
@@ -145,7 +145,7 @@ class AutoQuadMesher(CoreObject):
         Examples
         --------
         >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.DefeatureTopology(part_id, topo_face_ids, params);
+        >>> results = autoQuadMesher.defeature_topology(part_id, topo_face_ids, params);
 
         """
         if not isinstance(part_id, int):
@@ -190,7 +190,7 @@ class AutoQuadMesher(CoreObject):
         Examples
         --------
         >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.OptimizeQuadMesh(part_id, topo_face_ids, params);
+        >>> results = autoQuadMesher.optimize_quad_mesh(part_id, topo_face_ids, params);
 
         """
         if not isinstance(part_id, int):
@@ -235,7 +235,7 @@ class AutoQuadMesher(CoreObject):
         Examples
         --------
         >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.CheckTopology(part_id, topo_face_ids, params);
+        >>> results = autoQuadMesher.check_topology(part_id, topo_face_ids, params);
 
         """
         if not isinstance(part_id, int):
