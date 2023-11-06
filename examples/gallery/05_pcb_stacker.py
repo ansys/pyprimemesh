@@ -10,9 +10,8 @@ with mainly hexahedral elements for structural thermal simulation using the volu
 
 Objective
 ~~~~~~~~~~
-In this example, you can mesh the solids of a printed circuit board,
-using the volume sweeper, for a structural thermal analysis
-using predominantly hexahedral elements.
+This example uses the volume sweeper to mesh the solids of a printed circuit board for a
+structural thermal analysis using predominantly hexahedral elements.
 
 .. image:: ../../../images/pcb_stacker.png
    :align: center
@@ -25,7 +24,7 @@ Procedure
 * Read the CAD geometry.
 * Create a base face, projecting edge loops and imprinting to capture the geometry.
 * Surface mesh the base face with quad elements.
-* Stack the base face mesh through the volumes to create mainly hexahedral volume mesh.
+* Stack the base face mesh through the volumes to create a mainly hexahedral volume mesh.
 * Write the mesh for the structural thermal analysis.
 """
 
@@ -49,15 +48,15 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the pcb geometry file (.pmdat).
-# Import geometry.
-# Display imported geometry.  Purple edges indicate that the geometry is
+# Download the PCB geometry (PMDAT) file.
+# Import the geometry.
+# Display the imported geometry. Purple edges indicate that the geometry is
 # connected and the topology is shared between the different volumes.
-# This will mean the mesh will also be connected between volumes.
+# This means that the mesh is also to be connected between volumes.
 
-# For Windows OS users scdoc is also available.
-# In order to read the geometry as connected with shared topology
-# the WORKBENCH cad reader route must be used:
+# For Windows OS users, SCDOC files are also available.
+# To read the geometry as connected with shared topology, you must use
+# the Workbench ``CadReaderRoute``:
 
 # mesh_util.read(
 #     file_name=prime.examples.download_pcb_scdoc(),
@@ -83,7 +82,7 @@ model.set_global_sizing_params(params=sizing_params)
 #
 # Create the base face from the part and volumes.
 # Define a label for the generated base faces and display.
-# When coloured by ZONELET the display shows the imprints
+# When coloured by zonelet, the display shows the imprints
 # on the base face.
 
 part = model.parts[0]
@@ -128,7 +127,7 @@ display(scope=scope)
 ###############################################################################
 # Stack base face
 # ~~~~~~~~~~~~~~~~~~~~~~
-# Create mainly hexahedral volume mesh using the stacker method.
+# Create a mainly hexahedral volume mesh using the stacker method.
 # Display the volume mesh.
 
 stackbase_results = sweeper.stack_base_face(

@@ -74,9 +74,12 @@ file_io.import_cad(
 # Get the part summary.
 # Display the model to show edges by connection.
 # Use keyboard shortcuts to switch between
-# the surface (s) and wireframe (w) representation.
+# the surface (``s``) and wireframe (``w``) representations.
 # Color code for edge connectivity:
-# Red: free; Black: double; Purple: triple.
+# 
+# - Red: free
+# - Black: double
+# - Purple: triple
 
 part = model.get_part_by_name('bracket_mid_surface-3')
 part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))

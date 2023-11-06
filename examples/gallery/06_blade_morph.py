@@ -13,7 +13,7 @@ Objective
 ~~~~~~~~~~
 
 This example appends a CDB mesh with a CAD geometry
-and match morphes the mesh to the geometry.
+and match morphs the mesh to the geometry.
 
 .. image:: ../../../images/turbine_blade.png
    :align: center
@@ -81,7 +81,7 @@ target = target_part.get_topo_faces()
 # ~~~~~~~~~~~~~~~~
 # Set the target type to be for topoface because the target is geometry.
 # Morph the source face zonelets of ``source_part`` to the
-# target topo faces of the geometry.
+# target topofaces of the geometry.
 
 morpher = prime.Morpher(model)
 match_pair = prime.MatchPair(
