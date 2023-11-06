@@ -5,7 +5,7 @@
 Meshing a generic PCB geometry with multiple hexa layers
 ========================================================
 
-**Summary**: This example demostrates how to set the base mesh size and number of
+**Summary**: This example demonstrates how to set the base mesh size and number of
 layers for each solid in a generic PCB geometry and then generate a mesh.
 
 Objective
@@ -19,9 +19,9 @@ Discovery/SpaceClaim.
 
 The following image provides a snapshot of the Discovery tree to help you to understand the model's
 organization. Share topology in Discovery/SpaceClaim guarantees the generation of a conformal mesh
-between the solids. Named selections of edges allow you to specify the number of mesh elements to generate
-along the sweep direction. To simplify the process and enhance convenience, this example uses multiple
-meshing utilities provided in the ``lucid`` class.
+between the solids. Named selections of edges allow you to specify the number of mesh elements to
+generate along the sweep direction. To simplify the process and enhance convenience, this example
+uses multiple meshing utilities provided in the ``lucid`` class.
 
 .. image:: ../../../images/multi_layer_quad_mesh_pcb.png
    :align: center
@@ -46,7 +46,8 @@ Procedure
 -   Import the fundamental libraries that are necessary to run the script.
 -   Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid``
     class.
--   Define the main mesh parameters, which are the base size and number of layers along the sweep direction.
+-   Define the main mesh parameters, which are the base size and number of layers along the
+    sweep direction.
 -   Import the CAD geometry.
 -   Define the edge sizing along the sweep direction (based on pre-existing edges named
     selections).

@@ -76,7 +76,7 @@ file_io.import_cad(
 # Use keyboard shortcuts to switch between
 # the surface (``s``) and wireframe (``w``) representations.
 # Color code for edge connectivity:
-# 
+#
 # - Red: free
 # - Black: double
 # - Purple: triple
