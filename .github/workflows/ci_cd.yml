@@ -85,7 +85,7 @@ jobs:
     steps:
 
       - name: Login in Github Container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ansys-bot
@@ -114,7 +114,7 @@ jobs:
 
     steps:
       - name: Login in Github Container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ansys-bot
