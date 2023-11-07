@@ -170,7 +170,19 @@ compute_size.compute_volumetric(
 # To facilitate the definition of boundary conditions on the surfaces in the solver,
 # generate face zones by utilizing the existing labels found in the rear wing model.
 
-mesh_util.surface_mesh_with_size_controls(size_control_names="*curvature*")
+surface_mesh = prime.Surfer(model)
+surface_params = prime.SurferParams(
+    model,
+    size_field_type=prime.SizeFieldType.VOLUMETRIC,
+)
+
+surface_mesh.remesh_face_zonelets(
+    part_id=part.id,
+    face_zonelets=part.get_face_zonelets(),
+    edge_zonelets=part.get_edge_zonelets(),
+    params=surface_params,
+)
+
 scope = prime.ScopeDefinition(model, label_expression="* !*enclosure*")
 display(scope=scope)
 
