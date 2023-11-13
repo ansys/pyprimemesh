@@ -15,7 +15,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '24.1.0.dev9'
+  DOCKER_IMAGE_TAG: '24.1.0.dev10'
   MAIN_PYTHON_VERSION: '3.9'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
@@ -85,7 +85,7 @@ jobs:
     steps:
 
       - name: Login in Github Container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ansys-bot
@@ -114,7 +114,7 @@ jobs:
 
     steps:
       - name: Login in Github Container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ansys-bot

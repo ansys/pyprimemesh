@@ -5,16 +5,16 @@
 Meshing a generic F1 car rear wing for external aero simulation
 ================================================================
 
-**Summary**: This example showcases the process of generating a mesh for a generic F1 rear wing
+**Summary**: This example demonstrates how to generate a mesh for a generic F1 rear wing
 STL file model.
 
 Objective
 ~~~~~~~~~~
 
-The example demonstrates how to connect various parts of a rear wing from
-a generic F1 car and volume mesh the resulting model using a poly-hexcore mesh containing prisms.
-To simplify the process and enhance convenience, multiple meshing utilities provided in the
-"lucid" class are used.
+The example connects various parts of a rear wing from a generic F1 car
+and volume meshes the resulting model using a poly-hexcore mesh containing prisms.
+To simplify the process and enhance convenience, this example uses multiple
+meshing utilities provided in the ``lucid`` class.
 
 .. image:: ../../../images/generic_rear_wing.png
    :align: center
@@ -30,11 +30,11 @@ Procedure
 * Use the connect operation to join the components together.
 * Define local size controls on aero surfaces.
 * Generate a surface mesh with curvature sizing.
-* Compute volume zones and define fluid zone type.
-* Define boundary layer definition.
+* Compute volume zones and define the fluid zone type.
+* Define the boundary layer.
 * Generate a volume mesh using poly-hexcore elements and apply boundary layer refinement.
 * Print statistics on the generated mesh.
-* Write a `.cas` file for use in the Fluent solver.
+* Write a CAS file for use in the Fluent solver.
 * Exit the PyPrimeMesh session.
 """
 
@@ -59,7 +59,7 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the generic F1 rear wing geometries (stl files).
+# Download the generic F1 rear wing geometries (STL files).
 # Import each geometry and append to the model.
 # Display the imported geometry.
 
@@ -80,7 +80,7 @@ display(scope=scope)
 # Merge parts
 # ~~~~~~~~~~~
 # Establish the global size parameter to regulate mesh refinement.
-# Merge all individual parts into a unified part named `f1_car_rear_wing`.
+# Merge all individual parts into a unified part named ``f1_car_rear_wing``.
 
 # Define global sizes
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4, max=32, growth_rate=1.2))
@@ -97,7 +97,7 @@ part = model.get_part_by_name(merge_result.merged_part_assigned_name)
 ###############################################################################
 # Mesh connect
 # ~~~~~~~~~~~~
-# In order to generate a volume mesh for a closed domain, it is necessary to ensure
+# To generate a volume mesh for a closed domain, it is necessary to ensure
 # that the components of the rear wing are properly connected.
 # To achieve this, perform a connect operation using labels to join the components of
 # the rear wing.
@@ -118,17 +118,17 @@ surf_report = surf_diag.get_surface_diagnostic_summary(
 print(f"Total number of free edges present is {surf_report.n_free_edges}")
 
 ###############################################################################
-# Define local size-control and generate size-field
+# Define local size control and generate size-field
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# In order to accurately represent the physics of the DRS wing, a limitation of 8 mm
+# To accurately represent the physics of the DRS wing, a limitation of 8 mm
 # is imposed on the mesh size of the wing.
-# This is accomplished by implementing curvature size control, which refines the
+# This is accomplished by implementing a curvature size control, which refines the
 # mesh according to the curvature of the DRS surfaces.
 # Additionally, to accurately capture the curved surfaces of other sections of the
 # wing, curvature control is defined with a normal angle of 18 degrees.
 # These controls are used during surface mesh generation.
-# A volumetric size-field is then computed based on the defined size controls.
-# The volumetric size-field plays a crucial role in controlling
+# A volumetric size field is then computed based on the defined size controls.
+# The volumetric size field plays a crucial role in controlling
 # the growth and refinement of the volume mesh.
 
 # Local curvature size control for DRS
@@ -188,13 +188,13 @@ mesh_util.compute_volumes(part_expression=part.name, create_zones_per_volume=Tru
 ###############################################################################
 # Define volume controls
 # ~~~~~~~~~~~~~~~~~~~~~~
-# In order to prevent the generation of a volume mesh within the solid wing,
-# the type of a volume zone within the rear wing can be defined as "dead".
+# To prevent the generation of a volume mesh within the solid wing,
+# the type of a volume zone within the rear wing can be defined as "dead."
 # To accomplish this, Volume Control is utilized to assign the type for the
 # specific volume zone.
 # Expressions are employed to define the volume zones that need to be filled, with
-# "* !f1_rw_enclosure" indicating that it applies to all volume zones except
-# for "f1_rw_enclosure".
+# ``* !f1_rw_enclosure`` indicating that it applies to all volume zones except
+# for ``f1_rw_enclosure``.
 
 volume_control = model.control_data.create_volume_control()
 volume_control.set_params(
@@ -213,7 +213,7 @@ volume_control.set_scope(
 # Define prism controls
 # ~~~~~~~~~~~~~~~~~~~~~
 # A prism control can be used to define inflation layers on the external aero surfaces.
-# Specify the aero surfaces using labels, here prism scope is defined on zones associated
+# Specify the aero surfaces using labels. Here prism scope is defined on zones associated
 # with labels ``*drs*`` and ``*plane*``.
 # The growth for the prism layer is controlled by defining the offset type to
 # be ``uniform`` with a first height of 0.5mm .
@@ -283,13 +283,13 @@ results = search.get_volume_quality_summary(params=params)
 # Print statistics on meshed part
 print(part_summary_res)
 print(
-    "\nMaximum inverse-orthoginal quality of the Volume Mesh : ",
+    "\nMaximum inverse-orthoginal quality of the volume mesh : ",
     results.quality_results_part[0].max_quality,
 )
 
 # Mesh check
 result = prime.VolumeMeshTool(model).check_mesh(part.id, params=prime.CheckMeshParams(model))
-print("\nMesh Check", result, sep="\n")
+print("\nMesh check", result, sep="\n")
 
 scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
 display(scope=scope)
@@ -297,7 +297,7 @@ display(scope=scope)
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~
-# Export as cas file for external aero simulations
+# Export as CAS file for external aero simulations.
 
 with tempfile.TemporaryDirectory() as temp_folder:
     print(temp_folder)

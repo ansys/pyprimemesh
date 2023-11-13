@@ -660,6 +660,8 @@ class WarningCode(enum.IntEnum):
     """Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls."""
     PARTNOTINPARTSCOPE = 601
     """Selected part is not in the part scope of the periodic control."""
+    NUMERICPARTNAMERENAMETOALPHANUMERIC = 701
+    """Numeric part name renamed to alphanumeric name."""
     SURFERLAYEREDQUADFAILED = 1800
     """Layered quad failed with surfer."""
     SURFERDEGENERATEFACE = 1801
