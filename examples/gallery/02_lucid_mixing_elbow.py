@@ -11,7 +11,7 @@ Objective
 ~~~~~~~~~
 
 This example meshes a mixing elbow with polyhedral elements and wall boundary
-layer refinement. You use several meshing utilities available in the ``lucid`` class for
+layer refinement. It uses several meshing utilities available in the ``lucid`` class for
 convenience and ease.
 
 .. image:: ../../../images/elbow.png
@@ -68,7 +68,7 @@ mesh_util.create_zones_from_labels("inlet,outlet")
 # Surface mesh
 # ~~~~~~~~~~~~
 # Surface mesh the geometry setting minimum and maximum sizing
-# to be used for curvature refinement.
+# to use for curvature refinement.
 
 mesh_util.surface_mesh(min_size=5, max_size=20)
 

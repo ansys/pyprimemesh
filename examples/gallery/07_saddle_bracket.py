@@ -11,7 +11,7 @@ solid with hexahedral and prism cells.
 Objective
 ~~~~~~~~~
 
-To create a mainly hexahedral mesh on a thin solid volume.
+This example creates a mainly hexahedral mesh on a thin solid volume.
 
 .. image:: ../../../images/saddle_bracket.png
    :align: center
@@ -23,7 +23,7 @@ Procedure
 * Launch Ansys Prime Server.
 * Import the CAD geometry.
 * Quad surface mesh the source face.
-* Surface mesh the remaining unmeshed TopoFaces with tri.
+* Surface mesh the remaining unmeshed TopoFaces with tri surface mesh.
 * Delete the topology.
 * Define volume meshing controls to use thin volume meshing.
 * Volume mesh with hexahedral and prism cells.
@@ -145,11 +145,11 @@ part.delete_topo_entities(
 # Specify source and target faces for the thin volume using imported labels.
 # Set the number of layers of cells through the thickness of the thin solid to be 4.
 # To create a fully hexahedral and prism mesh the side faces must be imprinted on
-# the side faces.  If needed, a buffer region at the sides of the volume can be
-# defined where the volume fill type used for the volume mesh parameters will be
-# used to infill.  This is useful on more complex geometries, where it provides
-# more robustness of the method.  To create a buffer region set ``imprint_sides``
-# to False and specify how many rings of cells to ignore at the sides
+# the side faces. If needed, a buffer region at the sides of the volume can be
+# defined where the volume fill type used for the volume mesh parameters is
+# used to infill. This is useful on more complex geometries, where it provides
+# more robustness of the method. To create a buffer region set ``imprint_sides``
+# to ``False`` and specify how many rings of cells to ignore at the sides
 # using ``n_ignore_rings``.
 
 auto_mesh_params = prime.AutoMeshParams(model=model)
