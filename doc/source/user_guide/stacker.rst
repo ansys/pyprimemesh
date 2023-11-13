@@ -92,7 +92,7 @@ Create base face:
   base_faces = createbase_results.base_face_ids
 
 .. warning::
-  The topovolume should has unmeshed topofaces.
+  The topovolume cannot have meshed topofaces.
 
 Compute volumetric size field and perform surface meshing on the base face:
 
