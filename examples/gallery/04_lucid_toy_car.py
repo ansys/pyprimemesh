@@ -76,7 +76,7 @@ display(scope=scope)
 # Coarse wrap to close the holes and delete the originals.
 # You could use leakage detection to close these regions.
 # This example uses a coarse wrap and disables feature edge refinement to walk over the holes.
-# As this is not the final wrap, the example does not remesh after the wrap.
+# As this is not the final wrap, this example does not remesh after the wrap.
 # Wrapping each object in turn avoids coarse wrap bridging across narrow gaps.
 
 coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
@@ -156,7 +156,7 @@ for summary_res in qual_summary_res.quality_results:
 # The last label in the list wins.
 # Providing no ``label_expression`` flattens all labels into zones.
 # For example, if ``LabelA`` and ``LabelB`` are overlapping, three zones are
-# createdL ``LabelA``, ``LabelB``, and ``LabelA_LabelB``.
+# created: ``LabelA``, ``LabelB``, and ``LabelA_LabelB``.
 
 mesh_util.create_zones_from_labels()
 

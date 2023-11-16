@@ -500,13 +500,16 @@ class FileWriteResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the FileWriteResults.
@@ -517,6 +520,8 @@ class FileWriteResults(CoreObject):
             Model to create a FileWriteResults object with default parameters.
         error_code: ErrorCode, optional
             Error code if file write operation is unsuccessful.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the file write operation.
         json_data: dict, optional
             JSON dictionary to create a FileWriteResults object with provided parameters.
 
@@ -526,12 +531,14 @@ class FileWriteResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    error_code,
+                    warning_codes)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -539,7 +546,8 @@ class FileWriteResults(CoreObject):
                     param_json = model._communicator.initialize_params(model, "FileWriteResults")
                     json_data = param_json["FileWriteResults"] if "FileWriteResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( FileWriteResults._default_params["error_code"] if "error_code" in FileWriteResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+                        error_code if error_code is not None else ( FileWriteResults._default_params["error_code"] if "error_code" in FileWriteResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( FileWriteResults._default_params["warning_codes"] if "warning_codes" in FileWriteResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -549,13 +557,16 @@ class FileWriteResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
         """Set the default values of FileWriteResults.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code if file write operation is unsuccessful.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the file write operation.
         """
         args = locals()
         [FileWriteResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -576,11 +587,13 @@ class FileWriteResults(CoreObject):
         json_data = {}
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "error_code :  %s\nwarning_codes :  %s" % (self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -593,6 +606,16 @@ class FileWriteResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the file write operation.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
 
 class ReadSizeFieldParams(CoreObject):
     """Parameters used to read size field file.
@@ -2460,16 +2483,22 @@ class ExportMapdlCdbParams(CoreObject):
             Model to create a ExportMapdlCdbParams object with default parameters.
         material_properties: str, optional
             Materials in CDB format that will be added to the file.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         boundary_conditions: str, optional
             Boundary conditions in CDB format that will be appended to the file.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         write_cells: bool, optional
             Option to write out cells as part of the file.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         enable_face_based_labels: bool, optional
             Option to write element components for labels.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         write_by_zones: bool, optional
             Option to write zones in the file.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
+            This parameter is a Beta. Parameter behavior and name may change in future.
         json_data: dict, optional
             JSON dictionary to create a ExportMapdlCdbParams object with provided parameters.
 
@@ -2580,6 +2609,7 @@ class ExportMapdlCdbParams(CoreObject):
     @property
     def material_properties(self) -> str:
         """Materials in CDB format that will be added to the file.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._material_properties
 
@@ -2590,6 +2620,7 @@ class ExportMapdlCdbParams(CoreObject):
     @property
     def boundary_conditions(self) -> str:
         """Boundary conditions in CDB format that will be appended to the file.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._boundary_conditions
 
@@ -2600,6 +2631,7 @@ class ExportMapdlCdbParams(CoreObject):
     @property
     def write_cells(self) -> bool:
         """Option to write out cells as part of the file.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._write_cells
 
@@ -2610,6 +2642,7 @@ class ExportMapdlCdbParams(CoreObject):
     @property
     def enable_face_based_labels(self) -> bool:
         """Option to write element components for labels.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._enable_face_based_labels
 
@@ -2620,6 +2653,7 @@ class ExportMapdlCdbParams(CoreObject):
     @property
     def write_by_zones(self) -> bool:
         """Option to write zones in the file.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._write_by_zones
 
@@ -2630,6 +2664,7 @@ class ExportMapdlCdbParams(CoreObject):
     @property
     def simulation_type(self) -> CdbSimulationType:
         """Simulation type for the file.
+        This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._simulation_type
 

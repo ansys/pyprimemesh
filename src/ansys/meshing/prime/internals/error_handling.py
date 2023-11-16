@@ -324,6 +324,7 @@ prime_warning_messages = {
     WarningCode.OVERRIDEVOLUMESCOPEENTITY: "Invalid volume scope entity, override by volume.",
     WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO: "Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls.",
     WarningCode.PARTNOTINPARTSCOPE: "The selected part is not in the part scope of the periodic control.",
+    WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC: "Numeric part name renamed to alphanumeric name.",
     WarningCode.OVERRIDESUGGESTEDNAME: "Given name not available. Overriding it with unique name.",
     WarningCode.WRAPPER_SIZECONTROLNOTDEFINED: "No size controls provided for wrapper. Global sizes will be used.",
     WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED: "Size control is not supported in wrapper. Skipping it.",
