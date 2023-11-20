@@ -194,7 +194,7 @@ print("\nExported file:\n", mesh_file_cas)
 # is converted to a mesh part by deleting the topo entities. Here , while deleting the topology
 # we are deleting the geom data (face) and retaining the mesh data for solve purpose.
 # When deleting the topoogy , the TopoPart is converted to MeshPart and the topo entities
-# are converted to their respective zonelet type in MeshPart, this is shown asfollows
+# are converted to their respective zonelet type in MeshPart, this is shown as follows;
 #
 # * **01 TopoVolumes ->  01 Cell Zonelets**
 # * **08 TopoFaces ->  08 Face Zonelets**
