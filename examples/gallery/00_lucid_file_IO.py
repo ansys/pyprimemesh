@@ -223,25 +223,6 @@ for part in model.parts:
 print(model)
 
 ###############################################################################
-# Reading Ansys MAPDL (.cdb) format mesh file
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Read the exported MADP mesh format file, it would be observed that the labels are
-# exported as components of nodes. The face zonelets associated with the label are merged to one.
-# Similarly the face-zonelets that are not associated with the label are merged.
-# Display the imported geometry.
-#
-# .. image:: ../../../images/00_import_cdb.png
-#   :align: center
-#   :width: 800
-#   :alt: After import of cdb mesh file.
-#
-
-mesh_util.read(mesh_file_cdb, append=False)
-print(model)
-display()
-
-
-###############################################################################
 # Reading Ansys Fluent (.cas) format mesh file
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Read the exported Fluent format mesh file.
