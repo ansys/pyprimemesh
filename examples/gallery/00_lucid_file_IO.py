@@ -73,11 +73,11 @@ mesh_util = prime.lucid.Mesh(model=model)
 # and TopoVolumes.
 #
 # * TopoEdge represent the curves/edges present in the CAD.
-#   In this case there are **08 edges** present in SpaceClaim are imported
-#   as **08 TopoEdges**.
+#   In this case there are **17 edges** present in SpaceClaim are imported
+#   as **17 TopoEdges**.
 #
 # * TopoFace represent the surfaces/faces present in the CAD.
-#   The **17 CAD Faces** present in SpaceClaim are imported as **17 Topofaces** in
+#   The **8 CAD Faces** present in SpaceClaim are imported as **8 Topofaces** in
 #   PyPrimeMesh.
 #
 # * TopoVolume represent the solid volumes present in the CAD.
