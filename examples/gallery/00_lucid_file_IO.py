@@ -126,7 +126,7 @@ display(scope=prime.ScopeDefinition(model, label_expression="my_group"))
 mesh_util.volume_mesh()
 
 ###############################################################################
-# Export mesh  as PyPrimeMesh (.pmdat) native format mesh file
+# Export mesh as PyPrimeMesh (.pmdat) native format mesh file
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # PyPrimeMesh allows user to export mesh in its native format name pmdat.
 # This configuration allows retaining the topology data along with mesh data.
