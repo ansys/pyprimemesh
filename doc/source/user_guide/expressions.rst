@@ -10,7 +10,7 @@ can be used within a string as follows:
 * ``abc\*`` collects all required entities with a name starting with abc.
 * ``\*abc`` collects all required entities with a name ending with abc.
 * ``\*abc*`` collects all required entities with a name containing abc.
-* ``!abc\*`` collects all required entities with a name that is not starting with ab.
+* ``!abc\*`` collects all required entities with a name that is not starting with abc.
 * ``\*abc,\*xyz`` ``\*abc \*xyz`` collects all required entities with a name ending with abc or xyz. A comma or a space represents ```OR``. 
 
 The following example uses expressions in the :class:`ScopeDefinition <ansys.meshing.prime.ScopeDefinition>`
