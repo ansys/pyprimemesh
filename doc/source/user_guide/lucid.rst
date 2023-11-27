@@ -91,9 +91,9 @@ This example shows you the method required to replicate the preceding surface me
    )
 
 
-    # Surface mesh the geometry with curvature sizing
-    # Set minimum and maximum sizing to use for curvature refinement
-    mesh_util.surface_mesh(min_size=0.27, max_size=5.5)
+   # Surface mesh the geometry with curvature sizing
+   # Set minimum and maximum sizing to use for curvature refinement
+   mesh_util.surface_mesh(min_size=0.27, max_size=5.5)
 
 Prism controls for polyhedral mesh using the Lucid module
 ---------------------------------------------------------
