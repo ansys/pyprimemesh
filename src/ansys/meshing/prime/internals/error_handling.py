@@ -299,6 +299,7 @@ prime_error_messages = {
     ErrorCode.SOURCETARGETZONELETSNOTFIT: "Source and target zonelets do not fit to thin volume mesh.",
     ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Min size is more than max size.",
     ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contains negative value.",
+    ErrorCode.INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT: "Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 .",
 }
 
 prime_warning_messages = {
