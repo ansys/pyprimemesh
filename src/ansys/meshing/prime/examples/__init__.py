@@ -1,5 +1,8 @@
 from .download_utilities import DownloadManager
 from .examples import (
+    download_block_model_fmd,
+    download_block_model_pmdat,
+    download_block_model_scdoc,
     download_bracket_dsco,
     download_bracket_fmd,
     download_bracket_scdoc,
