@@ -44,8 +44,7 @@ Here is an example of meshing the mixing elbow case for a fluid flow analysis:
 Remesh surface using the Lucid module
 -------------------------------------
 
-This code shows how to replicate the preceding surface mesh results by remeshing
-the surface using the Lucid module:
+This code shows how to remesh the surface using the Lucid module:
 
 .. code-block:: python
 
@@ -64,7 +63,7 @@ the surface using the Lucid module:
 Surface wrapping using the ``lucid.Mesh`` class
 -----------------------------------------------
 
-This example shows you the method required to replicate the preceding surface mesh results:
+This example shows you surface wrapping using lucid to get the desired surface mesh results:
 
 .. code:: python
 
@@ -98,7 +97,7 @@ This example shows you the method required to replicate the preceding surface me
 Prism controls for polyhedral mesh using the Lucid module
 ---------------------------------------------------------
 
-This example shows how to generate the preceding poly prism method using the Lucid module:
+This example shows how to generate poly prism method using the Lucid module:
 
 .. code-block:: python
 
