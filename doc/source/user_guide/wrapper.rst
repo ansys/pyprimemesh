@@ -180,31 +180,3 @@ The basic PyPrimeMesh wrapper-based workflow follows these steps:
    )
 
 
-Surface wrapping using the ``lucid.Mesh`` class
------------------------------------------------
-
-This example shows you the method required to replicate the preceding surface mesh results:
-
-.. code:: python
-
-   model = prime_client.model
-   mesh_util = prime.lucid.Mesh(model)
-   input_file = r"D:/PyPrimeMesh/cylinder_with_flange.pmdat"
-   mesh_util.read(input_file)
-
-   # Create size control for remeshing
-   size_control2 = model.control_data.create_size_control(
-       sizing_type=prime.SizingType.HARD
-   )
-   size_control2.set_hard_sizing_params(prime.HardSizingParams(model=model, min=0.8))
-   size_control2.set_scope(prime.ScopeDefinition(model=model))
-
-   # Wrap and remesh the input parts
-   mesh_util.wrap(
-       min_size=0.2,
-       max_size=1.0,
-       input_parts="flange,pipe",
-       use_existing_features=True,
-       recompute_remesh_sizes=True,
-       remesh_size_controls=[size_control2],
-   )

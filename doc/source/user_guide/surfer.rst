@@ -197,29 +197,3 @@ Initialize surfer parameters and generate a surface mesh on face zonelets:
     :align: center
 
     **Surface mesh displayed**
-
-
-Remesh surface using the Lucid module
--------------------------------------
-
-This code shows how to replicate the preceding surface mesh results by remeshing
-the surface using the Lucid module:
-
-.. code-block:: python
-
-    import ansys.meshing.prime as prime
-
-    prime_client = prime.launch_prime()
-    model = prime_client.model
-
-    # Instantiate the Lucid module
-    mesh_util = prime.lucid.Mesh(model)
-
-    # Import CAD (STL) file
-    input_file = r"D:/Examples/simple-bracket-holes.stl"
-    mesh_util.read(input_file)
-
-    # Surface mesh the geometry with curvature sizing
-    # Set minimum and maximum sizing to use for curvature refinement
-    mesh_util.surface_mesh(min_size=0.27, max_size=5.5)
-
