@@ -37,11 +37,7 @@ class MaterialPointManager(CoreObject):
         CreateMaterialPointResults
             Returns the result with material point name and id.
 
-        Notes
-        -----
-        A material point is created on calling this API.
-
-        Examples
+            Examples
         --------
         >>> material_point_results = model.control_data.create_material_point("Fluid", [1.0,2,0,3.0], params)
 
