@@ -6,7 +6,7 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any, Union
 
 class MaterialPointManager(CoreObject):
-    """Provides functions for material point creation, deletion and queries.
+    """Provide functions for material point creation, deletion and queries.
 
     """
 
@@ -26,11 +26,11 @@ class MaterialPointManager(CoreObject):
         Parameters
         ----------
         suggested_name : str
-            A name suggestion for material point.
+            Name suggested for the material point.
         coords : Iterable[float]
-            Coordinates of material point.
+            Coordinates of the material point.
         params : CreateMaterialPointParams
-            Parameters to material point.
+            Parameters used to create material point.
 
         Returns
         -------
@@ -62,7 +62,7 @@ class MaterialPointManager(CoreObject):
         return CreateMaterialPointResults(model = self._model, json_data = result)
 
     def delete_material_point(self, name : str) -> DeleteMaterialPointResults:
-        """ Deletes material point identified with the given name.
+        """ Deletes material point with the given name.
 
 
         Parameters
