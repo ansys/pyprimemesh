@@ -21,16 +21,16 @@ The prerequisites required for preparing Input CAD Model for Quad to Spline conv
 
 IGA Quad to spline performs the following:
 
-#. 	Execute quad to spline operation using any of the following options:
+1. 	Execute quad to spline operation using any of the following options:
     -	When you provide Ignore Features, ignores all the features while converting the input geometry to spline.
     -	When you provide Use Angle, captures the provided angle while creating the spline for the input geometry.
     -	When you provide Use Edges, uses the provided edges while creating spline for the input geometry.
 
-#.	Checks if any Negative Jacobian values are present while creating splines.
+2.	Checks if any Negative Jacobian values are present while creating splines.
 
-#.	Export Splines as LS-DYNA IGA K file if no Negative Jacobian values are present in the input geometry.
+3.	Export Splines as LS-DYNA IGA K file if no Negative Jacobian values are present in the input geometry.
 
-#.	Provides the file to the LS-DYNA IGA solver.
+4.	Provides the file to the LS-DYNA IGA solver.
 
 
 The below example shows IGA Quad to spline conversion:
@@ -69,9 +69,10 @@ The below example shows IGA Quad to spline conversion:
         summary_res = part.get_summary(prime.PartSummaryParams(model = model, print_id = False, print_mesh = True))
         print(summary_res)
 
-Output:
+**Output:**
 
 .. code-block:: pycon
+
    Part Name: midsurface_-_body.2edgefillet
    Part ID: 2
     72 Topo Edges
@@ -139,7 +140,7 @@ Output:
    print("geom topoedges")
    print(geom_topoedges)   
 
-Output:
+**Output:**
 
 .. code-block:: pycon
 
@@ -164,7 +165,7 @@ Output:
    unstructured_spline_fitting = QuadToSpline18p.convert_quad_to_spline(input_scope, quad_to_spline_params)
    print("Quad to Spline fitting status: ",unstructured_spline_fitting)
 
-Output:
+**Output:**
 
 .. code-block:: pycon
 
@@ -181,7 +182,7 @@ Output:
    unstructured_spline_surface = mesh_part.get_unstructured_spline_surface()
    print(unstructured_spline_surface) 
 
-Output:
+**Output:**
 
 .. code-block:: pycon
 
@@ -211,6 +212,7 @@ Output:
    print("Spline points count: ", spline_points_count)
    print("Max Deviation: ", max_abs_deviation)
 
+**Output:**
 .. code-block:: pycon
 
    Invalid/Negative Jacobian count:  0
