@@ -19,7 +19,7 @@ The prerequisites required for preparing Input CAD Model for Quad to Spline conv
 
 *	Perform mesh edit operations to reduce the triangles.
 
-IGA Quad to spline performs the following:
+IGA Quad to Spline performs the following:
 
 1. 	Execute quad to spline operation using any of the following options:
     -	When you provide Ignore Features, ignores all the features while converting the input geometry to spline.
