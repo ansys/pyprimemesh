@@ -50,6 +50,9 @@ The below example shows how MultiZone Method can be applied on a body:
  
    error_code :  ErrorCode.NOERROR
 
+.. figure:: ../images/multizone_model.png
+    :width: 400pt
+    :align: center
 
 2. Initialize the MultiZone control. MultiZone control sets the parameters and controls used for MultiZone meshing.  
 
@@ -116,6 +119,14 @@ The below example shows how MultiZone Method can be applied on a body:
     error_code :  ErrorCode.NOERROR
     warning_codes :  []
     error_locations :  []
+
+.. figure:: ../images/multizone_sizing.png
+    :width: 400pt
+    :align: center
+
+.. figure:: ../images/multizone_meshing.png
+    :width: 400pt
+    :align: center
 
 Some points to remember while performing MultiZone Meshing: 
 
