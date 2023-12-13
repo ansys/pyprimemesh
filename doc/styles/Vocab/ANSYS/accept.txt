@@ -13,6 +13,7 @@ hexahedra
 hexcore
 ignore_orientation
 ignore_self_proximity
+IGA
 [Ll]ucid
 Material Point Manager
 [Mm]eshedgeodesic
