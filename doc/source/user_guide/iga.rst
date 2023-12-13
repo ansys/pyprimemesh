@@ -42,7 +42,8 @@ The below example shows IGA Quad to spline conversion:
 .. code-block:: python
 
    file_io = prime.FileIO(model)
-   res = file_io.read_pmdat(r"E:\Test\non_confidential_inner pillar_input_merged_sliverface_quad.pmdat", prime.FileReadParams(model = model))
+   res = file_io.read_pmdat(r"E:\Test\non_confidential_inner pillar_input_merged_sliverface_quad.pmdat", 
+                            prime.FileReadParams(model = model))
    g= Graphics(model)
    g()
 
@@ -63,12 +64,16 @@ The below example shows IGA Quad to spline conversion:
     if(len(part.get_topo_faces())>0):
         geom_part_name = part.name
         print(geom_part_name)
-        summary_res = part.get_summary(prime.PartSummaryParams(model = model, print_id = False, print_mesh = True))
+        summary_res = part.get_summary(prime.PartSummaryParams(model = model, 
+                                                                print_id = False, 
+                                                                print_mesh = True))
         print(summary_res)
     else:
         mesh_part_name = part.name
         print(mesh_part_name)
-        summary_res = part.get_summary(prime.PartSummaryParams(model = model, print_id = False, print_mesh = True))
+        summary_res = part.get_summary(prime.PartSummaryParams(model = model, 
+                                                               print_id = False, 
+                                                               print_mesh = True))
         print(summary_res)
 
 **Output:**
@@ -163,7 +168,9 @@ The below example shows IGA Quad to spline conversion:
    quad_to_spline_params.corner_angle = 40
    quad_to_spline_params.project_on_geometry = False
    quad_to_spline_params.separate_by_zone = True
-   quad_to_spline_params.zone_name_shell_thickness_pairs = {zone_name1: shell_thickness_zone1, zone_name2: shell_thickness_zone2, zone_name3: shell_thickness_zone3}
+   quad_to_spline_params.zone_name_shell_thickness_pairs = {zone_name1: shell_thickness_zone1,
+                                                            zone_name2: shell_thickness_zone2, 
+                                                            zone_name3: shell_thickness_zone3}
    unstructured_spline_fitting = QuadToSpline18p.convert_quad_to_spline(input_scope, quad_to_spline_params)
    print("Quad to Spline fitting status: ",unstructured_spline_fitting)
 
@@ -215,6 +222,7 @@ The below example shows IGA Quad to spline conversion:
    print("Max Deviation: ", max_abs_deviation)
 
 **Output:**
+
 .. code-block:: pycon
 
    Invalid/Negative Jacobian count:  0
