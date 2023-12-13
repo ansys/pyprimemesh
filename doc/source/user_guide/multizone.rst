@@ -65,23 +65,23 @@ The below example shows how MultiZone Method can be applied on a body:
 
 .. code-block:: python
 
-    MZVolParams1 = prime.ScopeDefinition(model = model,
+    MZVolParams = prime.ScopeDefinition(model = model,
                                           entity_type=prime.ScopeEntity.VOLUME, 
                                           evaluation_type=prime.ScopeEvaluationType.ZONES, 
                                           part_expression=”*”, 
                                           label_expression=”*”,
                                           zone_expression=”solid1”) 
 
-    multizone_control.set_volume_scope(MZVolParams1) 
+    multizone_control.set_volume_scope(MZVolParams) 
 
-    MZSurfParams1 = prime.ScopeDefinition(model=model,
+    MZSurfParams = prime.ScopeDefinition(model=model,
                                           entity_type=prime.ScopeEntity.FACEZONELETS. 
                                           evaluation_type = prime.ScopeEvaluationType.ZONES, 
                                           part_expression=”*”, 
                                           label_expression=”*”, 
                                           zone_expression=”*”) 
 
-     multizone_control.set_surface_scope(MZSurfParams1) 
+     multizone_control.set_surface_scope(MZSurfParams) 
 
 4. Sets the MultiZone sizing parameters to initialize multizone sizing control parameters.
 
@@ -138,8 +138,16 @@ Some points to remember while performing MultiZone Meshing:
 * When you use the MultiZone mesh method in combination with other mesh methods in a multibody part, the bodies are meshed with conformally. 
   For example, in the model below, the multibody part meshes with the MultiZone Method and AutoMesh.
 
+  .. figure:: ../images/multizone_automesh.png
+    :width: 400pt
+    :align: center
+
 * Sometimes MultiZone is not automatically able to decompose a geometry into sweepable regions, though such decomposition may be possible. 
   For example, in the model below the MultiZone mesh produces free mesh.  
+
+  .. figure:: ../images/multizone_freemesh.png
+    :width: 400pt
+    :align: center
 
 * When you scope the source and target faces to MultiZone, MultiZone automates the geometry decomposition and generates the pure hex mesh 
   into sweepable regions to produce a purely hex mesh. In the below images, if the faces highlighted in green 
