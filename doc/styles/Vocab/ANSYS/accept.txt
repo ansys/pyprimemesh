@@ -18,6 +18,7 @@ Material Point Manager
 [Mm]eshedgeodesic
 Meshing's
 [Mm]orpher
+multibody
 multithreading
 MultiZone
 Octree
@@ -33,6 +34,7 @@ remeshing
 stackable
 [Ss]tacker
 [Ss]weeper
+[Ss]weepable
 tet
 tetrahedra
 [Tt]opo
