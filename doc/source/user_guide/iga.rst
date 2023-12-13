@@ -4,12 +4,14 @@
 IGA
 ****
 
+ *This is a Beta feature. API Behavior and Implementation may change in future.*
+
 Isogeometric Analysis (IGA) is a new approach using NURBS to capture the CAD geometry accurately than the FE analysis.
 The FE analysis discretize the CAD geometry approximately into smaller elements to capture the features. 
 This approximation may affect the accuracy of the result and increase the computational cost.
 IGA uses spline to exactly represent the  CAD geometry to analyse the geometry and solver solves on the splines. 
 
- In PyPrimeMesh, IGA-Quad to Spline allows you to extract control points and splines based on the input quadrilateral surface mesh and export it as LS-DYNA IGA K file for the IGA solver.
+In PyPrimeMesh, IGA-Quad to Spline allows you to extract control points and splines based on the input quadrilateral surface mesh and export it as LS-DYNA IGA K file for the IGA solver.
 
 The prerequisites required for preparing Input CAD Model for Quad to Spline conversion:
 
