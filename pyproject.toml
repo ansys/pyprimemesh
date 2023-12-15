@@ -47,7 +47,7 @@ doc = [
   "pyvista==0.42.3",
   "sphinx-autodoc-typehints==1.25.2",
   "sphinx-copybutton==0.5.2",
-  "sphinx-gallery==0.14.0",
+  "sphinx-gallery==0.15.0",
   "sphinx-notfound-page==1.0.0",
   "sphinxemoji==0.2.0",
 ]
