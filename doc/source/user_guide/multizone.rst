@@ -89,7 +89,7 @@ The below example shows how MultiZone control can be applied on a body:
 
     multizone_control.set_surface_scope(MZSurfParams)
 
-4. Sets the MultiZone sizing parameters to initialize multizone sizing control parameters.
+4. Sets the MultiZone sizing parameters to initialize MultiZone sizing control parameters.
 
 
 .. note::

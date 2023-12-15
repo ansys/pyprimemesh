@@ -1,6 +1,8 @@
 abc
 (?i)Ansys
 (?i)Apis
+AutoMesh
+automesh
 Boolean
 CAD
 conformally
@@ -22,6 +24,7 @@ multibody
 multithreading
 MultiZone
 Octree
+params
 PMDAT
 polyhedra
 PrepPost
@@ -31,6 +34,8 @@ relicense
 [Rr]emesh
 remeshing
 [Ss]erver
+SizeField
+sizefield
 stackable
 [Ss]tacker
 [Ss]weeper
