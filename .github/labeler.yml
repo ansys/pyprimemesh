@@ -1,8 +1,11 @@
 documentation:
-- any-glob-to-any-file: ['doc/source/**/*', 'README.md']
+- changed-files:
+  - any-glob-to-any-file: ['doc/source/**/*', 'README.md']
 
 maintenance:
-- any-glob-to-any-file: ['.github/**/*', '.flake8','pyproject.toml', 'tox.ini', '.pre-commit-config.yaml']
+- changed-files:
+  - any-glob-to-any-file: ['.github/**/*', '.flake8','pyproject.toml', 'tox.ini', '.pre-commit-config.yaml']
 
 testing:
-- any-glob-to-any-file: ['tests/*']
+- changed-files:
+  - any-glob-to-any-file: ['tests/*']
