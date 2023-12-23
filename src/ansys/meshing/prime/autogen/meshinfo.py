@@ -31,7 +31,7 @@ class MeshInfo(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def get_face_and_edge_connectivity(self, part_ids : Iterable[int], params : FaceAndEdgeConnectivityParams) -> FaceAndEdgeConnectivityResults:
-        """ Gets the connectivity of face and edge zonelets of the given part ids.
+        """ Get the connectivity of face and edge zonelets of the given part ids.
 
         Connectivity result is used in graphics rendering.
 
@@ -69,7 +69,7 @@ class MeshInfo(CoreObject):
         return FaceAndEdgeConnectivityResults(model = self._model, json_data = result)
 
     def get_statistics_of_cell_zonelets(self, cell_zonelets : Iterable[int], params : CellStatisticsParams) -> CellStatisticsResults:
-        """ Gets cell statistics of given cell zonelets using provided cell statistics parameters.
+        """ Get cell statistics of the given cell zonelets using provided cell statistics parameters.
 
 
         Parameters
