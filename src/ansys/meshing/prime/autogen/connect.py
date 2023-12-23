@@ -17,7 +17,7 @@ class Connect(CoreObject):
     """
 
     def __init__(self, model: CommunicationManager):
-        """ Initialize Connect """
+        """ Initialize Connect. """
         self._model = model
         self._comm = model._communicator
         command_name = "PrimeMesh::Connect/Construct"
@@ -215,7 +215,7 @@ class Connect(CoreObject):
         return ConnectResults(model = self._model, json_data = result)
 
     def merge_boundary_nodes(self, part_id : int, face_zonelet_ids : Iterable[int], with_face_zonelet_ids : Iterable[int], params : MergeBoundaryNodesParams) -> MergeBoundaryNodesResults:
-        """ Merges boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
+        """ Merge boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
 
 
         Parameters
