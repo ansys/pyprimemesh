@@ -30,7 +30,7 @@ class Morpher(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def match_morph(self, part_id : int, match_pairs : List[MatchPair], match_morph_params : MatchMorphParams, bc_params : MorphBCParams, solve_params : MorphSolveParams) -> MatchMorphResults:
-        """ Match source and target zonelets defined by match pairs with prescribed boundary conditions for each pair. Also, solves boundary condition parameters to define uniform surface and volume regions in source neighborhood.
+        """ Match source and target zonelets defined by match pairs with prescribed boundary conditions for each pair. Also, solve boundary condition parameters to define uniform surface and volume regions in source neighborhood.
 
 
         Parameters
