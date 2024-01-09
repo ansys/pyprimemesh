@@ -80,7 +80,7 @@ To read a mesh file, you use this code:
        model = prime_client.model
 
        io = prime.FileIO(model)
-       _ = io.read_pmdat(r"E:\Temp\box.pmdat", prime.FileReadParams(model=model))
+       res = io.read_pmdat(r"E:\Temp\box.pmdat", prime.FileReadParams(model=model))
 
 Documentation and issues
 ------------------------

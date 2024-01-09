@@ -1,6 +1,6 @@
 name: Labeler
 on:
-  pull_request_target:
+  pull_request:
   push:
     branches: [ main ]
     paths:
@@ -32,10 +32,10 @@ jobs:
 
     # Label based on modified files
     - name: Label based on changed files
-      uses: actions/labeler@v4
+      uses: actions/labeler@v5
       with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        sync-labels: ''
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        sync-labels: true
 
     # Label based on branch name
     - uses: actions-ecosystem/action-add-labels@v1
