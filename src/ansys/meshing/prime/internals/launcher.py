@@ -100,6 +100,8 @@ def launch_server_process(
         kw = {}
 
     enable_python_server = kw.get('server', 'release')
+    scheduler = kw.get('scheduler', None)
+
     if not isinstance(enable_python_server, str):
         raise ValueError(
             'Hidden option to run python server needs to be a string.'
@@ -125,6 +127,9 @@ def launch_server_process(
     if n_procs is not None and isinstance(n_procs, int):
         server_args.append(f'-np')
         server_args.append(f'{n_procs}')
+        if scheduler is not None:
+            server_args.append(f'--scheduler')
+            server_args.append(f'{scheduler}')
 
     kwargs = {
         'stdin': subprocess.DEVNULL,
