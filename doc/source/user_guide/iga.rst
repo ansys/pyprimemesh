@@ -1,8 +1,8 @@
 .. _ref_index_IGA:
 
-****
-IGA
-****
+*********************
+Isogeometric analysis
+*********************
 
  *This is a Beta feature. API Behavior and Implementation may change in future.*
 
@@ -42,9 +42,8 @@ The below example shows IGA Quad to spline conversion:
 .. code-block:: python
 
    file_io = prime.FileIO(model)
-   res = file_io.read_pmdat(r"E:\Test\non_confidential_inner pillar_input_merged_sliverface_quad.pmdat", 
-                            prime.FileReadParams(model = model))
-   g= Graphics(model)
+   res = file_io.read_pmdat(r"pillar.pmdat", prime.FileReadParams(model=model))
+   g = Graphics(model)
    g()
 
 .. figure:: ../images/model_iga.png
@@ -61,20 +60,24 @@ The below example shows IGA Quad to spline conversion:
    shell_thickness_zone3 = 1.2
    cad_mesh_part = model.parts
    for part in cad_mesh_part:
-    if(len(part.get_topo_faces())>0):
-        geom_part_name = part.name
-        print(geom_part_name)
-        summary_res = part.get_summary(prime.PartSummaryParams(model = model, 
-                                                                print_id = False, 
-                                                                print_mesh = True))
-        print(summary_res)
-    else:
-        mesh_part_name = part.name
-        print(mesh_part_name)
-        summary_res = part.get_summary(prime.PartSummaryParams(model = model, 
-                                                               print_id = False, 
-                                                               print_mesh = True))
-        print(summary_res)
+      if(len(part.get_topo_faces())>0):
+         geom_part_name = part.name
+         print(geom_part_name)
+         summary_res = part.get_summary(prime.PartSummaryParams(
+             model=model,
+             print_id=False,
+             print_mesh=True,
+         ))
+         print(summary_res)
+      else:
+         mesh_part_name = part.name
+         print(mesh_part_name)
+         summary_res = part.get_summary(prime.PartSummaryParams(
+            model=model,
+            print_id=False,
+            print_mesh=True,
+         ))
+         print(summary_res)
 
 **Output:**
 
@@ -139,7 +142,7 @@ The below example shows IGA Quad to spline conversion:
 
 .. code-block:: python
 
-   input_scope = prime.ScopeDefinition(model, part_expression = mesh_part.name)
+   input_scope = prime.ScopeDefinition(model, part_expression=mesh_part.name)
    geom_topofaces = geom_part.get_topo_faces()
    geom_topoedges = geom_part.get_topo_edges()
    print("geom topofaces")
@@ -172,7 +175,7 @@ The below example shows IGA Quad to spline conversion:
                                                             zone_name2: shell_thickness_zone2, 
                                                             zone_name3: shell_thickness_zone3}
    unstructured_spline_fitting = QuadToSpline18p.convert_quad_to_spline(input_scope, quad_to_spline_params)
-   print("Quad to Spline fitting status: ",unstructured_spline_fitting)
+   print("Quad to Spline fitting status: ", unstructured_spline_fitting)
 
 **Output:**
 
