@@ -165,7 +165,7 @@ The below example shows IGA Quad to spline conversion:
    Spline points count:  78984.0
    Max Deviation:  1.27418
 
-7.	Write the created .k file to the specified location and export to LS-Dyna.
+7.	Write the created .k file to the specified location and export to LS-DYNA.
 
 .. code-block:: python
 
