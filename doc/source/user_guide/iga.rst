@@ -52,12 +52,6 @@ The below example shows IGA Quad to spline conversion:
 
 .. code-block:: python
 
-   zone_name1 = "zone1_thk_0.8"
-   zone_name2 = "zone2_thk_1.0"
-   zone_name3 = "zone3_thk_1.2"
-   shell_thickness_zone1 = 0.8
-   shell_thickness_zone2 = 1.0
-   shell_thickness_zone3 = 1.2
    cad_mesh_part = model.parts
    for part in cad_mesh_part:
       if(len(part.get_topo_faces())>0):
@@ -68,7 +62,7 @@ The below example shows IGA Quad to spline conversion:
              print_id=False,
              print_mesh=True,
          ))
-         print(summary_res)
+         print("Geometry Part")
       else:
          mesh_part_name = part.name
          print(mesh_part_name)
@@ -77,66 +71,13 @@ The below example shows IGA Quad to spline conversion:
             print_id=False,
             print_mesh=True,
          ))
-         print(summary_res)
+         print("Mesh Part")
 
 **Output:**
 
 .. code-block:: pycon
-
-   Part Name: midsurface_-_body.2edgefillet
-   Part ID: 2
-    72 Topo Edges
-    14 Topo Faces
-    0 Topo Volumes
-
-    0 Edge Zones
-        Edge Zone Name(s) : []
-    3 Face Zones
-        Face Zone Name(s) : [zone1_thk_0.8, zone3_thk_1.2, zone2_thk_1.0]
-    0 Volume Zones
-        Volume Zone Name(s) : []
-
-    8 Label(s)
-        Names: [__VTFeatureLabel:offsetFace__, __circular_hole_edges__, __frozen_mesh__, __frozen_topo__, __hole_edges__, __non-circular_hole_edges__, __unconnected_edges__, __unconnected_faces__]
-
-    Bounding box (-63.2441 -13.8281 20.0093)
-                 (-39.0606 116.038 461.873)
-
-    Mesh Summary:
-        2376 Nodes
-        0 Poly Faces
-        2194 Quad Faces
-        0 Tri Faces
-        2194 Faces
-        0 Cells
-    0 out of 14 TopoFaces are unmeshed
-
-  n_topo_edges :  72
-  n_topo_faces :  14
-  n_topo_volumes :  0
-  n_edge_zonelets :  0
-  n_face_zonelets :  0
-  n_cell_zonelets :  0
-  n_edge_zones :  0
-  n_face_zones :  3
-  n_volume_zones :  0
-  n_labels :  8
-  n_nodes :  2376
-  n_faces :  2194
-  n_cells :  0
-  n_tri_faces :  0
-  n_poly_faces :  0
-  n_quad_faces :  2194
-  n_tet_cells :  0
-  n_pyra_cells :  0
-  n_prism_cells :  0
-  n_poly_cells :  0
-  n_hex_cells :  0
-  n_unmeshed_topo_faces :  0
-  meshpart id
-  2
-  GeomPart id
-  2
+    
+   Geometry Part
 
 3. Define the input scope for the geometry or mesh part.
 
@@ -145,36 +86,27 @@ The below example shows IGA Quad to spline conversion:
    input_scope = prime.ScopeDefinition(model, part_expression=mesh_part.name)
    geom_topofaces = geom_part.get_topo_faces()
    geom_topoedges = geom_part.get_topo_edges()
-   print("geom topofaces")
-   print(geom_topofaces)   
-   print("geom topoedges")
-   print(geom_topoedges)   
-
-**Output:**
-
-.. code-block:: pycon
-
-   geom topofaces
-   [13040, 2265, 2130, 2157, 2227, 2461, 2365, 2231, 2361, 2367, 2465, 13071, 2523, 13104]
-   geom topoedges
-   [215, 454, 1388, 216, 217, 444, 259, 2098, 1381, 469, 2092, 449, 218, 2406, 260, 261, 262, 263, 264, 1385, 463, 2086, 482, 2136,
-    368, 447, 2235, 13131, 448, 450, 2307, 2292, 2023, 1393, 2280, 2315, 2080, 1395, 2376, 1380, 2027, 13221, 2031, 2484, 2015, 2019, 
-    2172, 7146, 2166, 2178, 2184, 2192, 2274, 2286, 2301, 2382, 2388, 2394, 2400, 2414, 2472, 2478, 2490, 13185, 13239, 13179, 3276, 13209, 13167, 13191, 13197, 13149]
 
 4. Initialize QuadToSpline and provide the required parameters in QuadToSplineParams to perform the quad to spline conversion.
 
 .. code-block:: python
 
-   QuadToSpline18p = prime.QuadToSpline(model)
+   zone_name_1 = "zone1_thk_0.8"
+   zone_name_2 = "zone2_thk_1.0"
+   zone_name_3 = "zone3_thk_1.2"
+   shell_thickness_zone_1 = 0.8
+   shell_thickness_zone_2 = 1.0
+   shell_thickness_zone_3 = 1.2
+   QuadToSpline = prime.QuadToSpline(model)
    quad_to_spline_params = prime.QuadToSplineParams(model)
    quad_to_spline_params.feature_capture_type = prime.SplineFeatureCaptureType.BYANGLE
    quad_to_spline_params.corner_angle = 40
    quad_to_spline_params.project_on_geometry = False
    quad_to_spline_params.separate_by_zone = True
-   quad_to_spline_params.zone_name_shell_thickness_pairs = {zone_name1: shell_thickness_zone1,
-                                                            zone_name2: shell_thickness_zone2, 
-                                                            zone_name3: shell_thickness_zone3}
-   unstructured_spline_fitting = QuadToSpline18p.convert_quad_to_spline(input_scope, quad_to_spline_params)
+   quad_to_spline_params.zone_name_shell_thickness_pairs = {zone_name_1: shell_thickness_zone_1,
+                                                            zone_name_2: shell_thickness_zone_2, 
+                                                            zone_name_3: shell_thickness_zone_3}
+   unstructured_spline_fitting = QuadToSpline.convert_quad_to_spline(input_scope, quad_to_spline_params)
    print("Quad to Spline fitting status: ", unstructured_spline_fitting)
 
 **Output:**
@@ -235,9 +167,10 @@ The below example shows IGA Quad to spline conversion:
 
 7.	Write the created .k file to the specified location and export to LS-Dyna.
 
-   .. code-block:: python
+.. code-block:: python
 
-      lsdyna_iga_export_result = prime.FileIO(model).export_lsdyna_iga_keyword_file((r"E:\Test\newspline.k"), prime.ExportLSDynaIgaKeywordFileParams(model))
+   lsdyna_iga_export_result = prime.FileIO(model).export_lsdyna_iga_keyword_file((r"E:\Test\newspline.k"), 
+   prime.ExportLSDynaIgaKeywordFileParams(model))
 
 
 
