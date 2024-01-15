@@ -151,7 +151,7 @@ Some points to remember while performing MultiZone Meshing:
 * Sometimes MultiZone is not automatically able to decompose a geometry into sweepable regions, though such decomposition may be possible. 
   For example, in the model below the MultiZone mesh produces free mesh.  
 
-  .. figure:: ../images/multizone_freemesh.png
+  .. figure:: ../images/multizone_freemeshpng.png
     :width: 400pt
     :align: center
 
@@ -159,4 +159,7 @@ Some points to remember while performing MultiZone Meshing:
   into sweepable regions to produce a purely hex mesh. In the below images, if the faces highlighted in green 
   color are scoped as source and target faces, MultiZone produces a purely hex mesh on the source and target faces.
 
+  .. figure:: ../images/multizone_source_target.png
+    :width: 400pt
+    :align: center
 
