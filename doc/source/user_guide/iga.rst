@@ -24,6 +24,7 @@ The prerequisites required for preparing Input CAD Model for Quad to Spline conv
 IGA Quad to Spline performs the following:
 
 1. 	Execute quad to spline operation using any of the following options:
+
     -	When you provide Ignore Features, ignores all the features while converting the input geometry to spline.
     -	When you provide Use Angle, captures the provided angle while creating the spline for the input geometry.
     -	When you provide Use Edges, uses the provided edges while creating spline for the input geometry.
