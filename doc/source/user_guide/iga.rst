@@ -58,19 +58,19 @@ The below example shows IGA Quad to spline conversion:
          geom_part_name = part.name
          print(geom_part_name)
          summary_res = part.get_summary(prime.PartSummaryParams(
-             model=model,
-             print_id=False,
-             print_mesh=True,
+                       model=model,
+                       print_id=False,
+                       print_mesh=True,
          ))
          print("Geometry Part")
       else:
          mesh_part_name = part.name
          print(mesh_part_name)
          summary_res = part.get_summary(prime.PartSummaryParams(
-            model=model,
-            print_id=False,
-            print_mesh=True,
-         ))
+                       model=model,
+                       print_id=False,
+                      print_mesh=True,
+          ))
          print("Mesh Part")
 
 **Output:**
