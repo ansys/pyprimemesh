@@ -158,8 +158,8 @@ The below example shows IGA Quad to spline conversion:
    negative_jacobian = unstructured_spline_surface.invalid_jacobian_elements_count
    deviation_array = unstructured_spline_surface.deviation_array
    max_abs_deviation = max(deviation_array)
-   control_points_count = len(unstructured_spline_surface.control_points)/3
-   spline_points_count = len(unstructured_spline_surface.spline_points)/3
+   control_points_count = len(unstructured_spline_surface.control_points) / 3
+   spline_points_count = len(unstructured_spline_surface.spline_points) / 3
    print("Invalid/Negative Jacobian count: ", negative_jacobian)
    print("Control points count: ", control_points_count)
    print("Spline points count: ", spline_points_count)
