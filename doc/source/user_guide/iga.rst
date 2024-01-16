@@ -59,18 +59,18 @@ The below example shows IGA Quad to spline conversion:
          geom_part_name = part.name
          print(geom_part_name)
          summary_res = part.get_summary(prime.PartSummaryParams(
-                       model=model,
-                       print_id=False,
-                       print_mesh=True,
+                           model=model,
+                           print_id=False,
+                           print_mesh=True,
          ))
          print("Geometry Part")
       else:
          mesh_part_name = part.name
          print(mesh_part_name)
          summary_res = part.get_summary(prime.PartSummaryParams(
-                       model=model,
-                       print_id=False,
-                      print_mesh=True,
+                           model=model,
+                           print_id=False,
+                          print_mesh=True,
           ))
          print("Mesh Part")
 
@@ -104,9 +104,11 @@ The below example shows IGA Quad to spline conversion:
    quad_to_spline_params.corner_angle = 40
    quad_to_spline_params.project_on_geometry = False
    quad_to_spline_params.separate_by_zone = True
-   quad_to_spline_params.zone_name_shell_thickness_pairs = {zone_name_1: shell_thickness_zone_1,
+   quad_to_spline_params.zone_name_shell_thickness_pairs = {
+                                                            zone_name_1: shell_thickness_zone_1,
                                                             zone_name_2: shell_thickness_zone_2, 
-                                                            zone_name_3: shell_thickness_zone_3}
+                                                            zone_name_3: shell_thickness_zone_3
+                                                            }
    unstructured_spline_fitting = QuadToSpline.convert_quad_to_spline(input_scope, quad_to_spline_params)
    print("Quad to Spline fitting status: ", unstructured_spline_fitting)
 
@@ -171,4 +173,4 @@ The below example shows IGA Quad to spline conversion:
 .. code-block:: python
 
    lsdyna_iga_export_result = prime.FileIO(model).export_lsdyna_iga_keyword_file((r"E:\Test\newspline.k"), 
-   prime.ExportLSDynaIgaKeywordFileParams(model))
+                                    prime.ExportLSDynaIgaKeywordFileParams(model))
