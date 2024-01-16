@@ -133,7 +133,7 @@ The below example shows IGA Quad to spline conversion:
 
    spline1 = unstructured_spline_fitting.spline_ids
    unstructured_spline_surface = mesh_part.get_unstructured_spline_surface()
-   print(unstructured_spline_surface) 
+   print(unstructured_spline_surface)
 
 **Output:**
 
