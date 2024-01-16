@@ -30,7 +30,7 @@ class FeatureExtraction(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def extract_features_on_face_zonelets(self, part_id : int, face_zonelets : Iterable[int], params : ExtractFeatureParams) -> ExtractFeatureResults:
-        """ Extract edges by angle and face zonelet boundary using given extract feature parameters.
+        """ Extract edges by angle and face zonelet boundary using the given extract feature parameters.
 
 
         Parameters
@@ -45,7 +45,7 @@ class FeatureExtraction(CoreObject):
         Returns
         -------
         ExtractFeatureResults
-            Returns a ExtractFeatureResults.
+            Returns the ExtractFeatureResults.
 
 
         Examples
@@ -69,7 +69,7 @@ class FeatureExtraction(CoreObject):
         return ExtractFeatureResults(model = self._model, json_data = result)
 
     def create_intersection_edge_loops(self, part_face_zonelets : List[PartZonelets], intersecting_part_face_zonelets : List[PartZonelets], params : CreateIntersectionEdgeLoopsParams) -> CreateIntersectionEdgeLoopsResults:
-        """ Finds the edge zonelets formed by intersection of two face zonelets. Performs n to n intersection of face zonelets present in part face zonelets with those in intersecting part face zonelets depending on the input parameters. Order of input does not matter.
+        """ Find the edge zonelets formed by intersection of two face zonelets. Perform n to n intersection of face zonelets present in part face zonelets with those in intersecting part face zonelets depending on the input parameters. Order of input does not matter.
 
 
         Parameters
