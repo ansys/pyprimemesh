@@ -1,11 +1,14 @@
 abc
 (?i)Ansys
 (?i)Apis
+AutoMesh
+automesh
 Boolean
 CAD
 conformally
 [Dd]efeature
 defeaturing
+discretize
 Fluent Meshing
 Fluent Meshing's
 geodesical
@@ -13,13 +16,18 @@ hexahedra
 hexcore
 ignore_orientation
 ignore_self_proximity
+IGA
+[Ii]sogeometric
 [Ll]ucid
 Material Point Manager
 [Mm]eshedgeodesic
 Meshing's
 [Mm]orpher
+multibody
 multithreading
+MultiZone
 Octree
+params
 PMDAT
 polyhedra
 PrepPost
@@ -29,9 +37,12 @@ relicense
 [Rr]emesh
 remeshing
 [Ss]erver
+SizeField
+sizefield
 stackable
 [Ss]tacker
 [Ss]weeper
+[Ss]weepable
 tet
 tetrahedra
 [Tt]opo
