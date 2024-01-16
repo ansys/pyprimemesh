@@ -1,6 +1,8 @@
 abc
 (?i)Ansys
 (?i)Apis
+AutoMesh
+automesh
 Boolean
 CAD
 conformally
@@ -18,8 +20,11 @@ Material Point Manager
 [Mm]eshedgeodesic
 Meshing's
 [Mm]orpher
+multibody
 multithreading
+MultiZone
 Octree
+params
 PMDAT
 polyhedra
 PrepPost
@@ -29,9 +34,12 @@ relicense
 [Rr]emesh
 remeshing
 [Ss]erver
+SizeField
+sizefield
 stackable
 [Ss]tacker
 [Ss]weeper
+[Ss]weepable
 tet
 tetrahedra
 [Tt]opo
