@@ -53,12 +53,14 @@ class CollapseTool(CoreObject):
 
         Examples
         --------
-        collapse_tool = prime.CollapseTool(model = model)
-        results = collapse_tool.split_and_collapse_on_zonelets(part.id,
-        part.get_face_zonelets(),
-        register_id,
-        prime.SplitParams(model=model),
-        prime.CollapseParams(model=model))
+        >>> collapse_tool = prime.CollapseTool(model = model)
+        >>> results = collapse_tool.split_and_collapse_on_zonelets(
+        >>>     part_id=part.id,
+        >>>     face_zonelets=part.get_face_zonelets(),
+        >>>     register_id=register_id,
+        >>>     split_params=prime.SplitParams(model=model),
+        >>>     collapse_params=prime.CollapseParams(model=model),
+        >>> )
 
         """
         if not isinstance(part_id, int):

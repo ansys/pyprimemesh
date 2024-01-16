@@ -41,7 +41,7 @@ class ThinVolumeMeshParams(CoreObject):
         imprint_sides: bool, optional
             Checks whether to imprint quad faces on side zonelets.
         n_ignore_rings: int, optional
-            Number of layers to ignore when no imprint on sides.
+            Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
         json_data: dict, optional
             JSON dictionary to create a ThinVolumeMeshParams object with provided parameters.
 
@@ -92,7 +92,7 @@ class ThinVolumeMeshParams(CoreObject):
         imprint_sides: bool, optional
             Checks whether to imprint quad faces on side zonelets.
         n_ignore_rings: int, optional
-            Number of layers to ignore when no imprint on sides.
+            Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
         """
         args = locals()
         [ThinVolumeMeshParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -147,7 +147,7 @@ class ThinVolumeMeshParams(CoreObject):
 
     @property
     def n_ignore_rings(self) -> int:
-        """Number of layers to ignore when no imprint on sides.
+        """Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
         """
         return self._n_ignore_rings
 
