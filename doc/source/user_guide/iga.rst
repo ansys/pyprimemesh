@@ -110,7 +110,7 @@ The below example shows IGA Quad to spline conversion:
    quad_to_spline_params.separate_by_zone = True
    quad_to_spline_params.zone_name_shell_thickness_pairs = {
        zone_name_1: shell_thickness_zone_1,
-       zone_name_2: shell_thickness_zone_2, 
+       zone_name_2: shell_thickness_zone_2,
        zone_name_3: shell_thickness_zone_3,
    }
    unstructured_spline_fitting = QuadToSpline.convert_quad_to_spline(
