@@ -8,6 +8,7 @@ CAD
 conformally
 [Dd]efeature
 defeaturing
+discretize
 Fluent Meshing
 Fluent Meshing's
 geodesical
@@ -15,6 +16,8 @@ hexahedra
 hexcore
 ignore_orientation
 ignore_self_proximity
+IGA
+[Ii]sogeometric
 [Ll]ucid
 Material Point Manager
 [Mm]eshedgeodesic
