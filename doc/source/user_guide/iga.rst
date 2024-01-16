@@ -63,9 +63,9 @@ The below example shows IGA Quad to spline conversion:
                    model=model,
                    print_id=False,
                    print_mesh=True,
-              )
-          )
-          print("Geometry Part")
+               )
+           )
+           print("Geometry Part")
        else:
            mesh_part_name = part.name
            print(mesh_part_name)
