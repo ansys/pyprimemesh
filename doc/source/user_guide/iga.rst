@@ -178,5 +178,6 @@ The below example shows IGA Quad to spline conversion:
 
 .. code-block:: python
 
-   lsdyna_iga_export_result = prime.FileIO(model).export_lsdyna_iga_keyword_file((r"E:\Test\newspline.k"), 
-                                    prime.ExportLSDynaIgaKeywordFileParams(model))
+   lsdyna_iga_export_result = prime.FileIO(model).export_lsdyna_iga_keyword_file(
+       r"E:\Test\newspline.k", prime.ExportLSDynaIgaKeywordFileParams(model)
+   )
