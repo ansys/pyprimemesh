@@ -58,10 +58,11 @@ The below example shows IGA Quad to spline conversion:
       if(len(part.get_topo_faces())>0):
          geom_part_name = part.name
          print(geom_part_name)
-         summary_res = part.get_summary(prime.PartSummaryParams(
-                           model=model,
-                           print_id=False,
-                           print_mesh=True,
+         summary_res = part.get_summary(
+            prime.PartSummaryParams(
+               model=model,
+               print_id=False,
+               print_mesh=True,
          ))
          print("Geometry Part")
       else:
