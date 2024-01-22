@@ -66,18 +66,6 @@ The :func:`Client.exit() <ansys.meshing.prime.Client.exit>` method ends the conn
 
 If the :class:`Client <ansys.meshing.prime.Client>` class launched the server, then this terminates the server process.
 
-==========================================
-Run a Python script in batch on the server
-==========================================
-
-You can run a Python script directly on the server from a Linux or Windows console.
-
-Here is a Windows code example for running a Python script directly from the command line:
-
-.. code-block:: shell-session
-
-    "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
-
 
 ========================================
 Recommendations for launching the server
