@@ -50,6 +50,7 @@ doc = [
   "sphinx-gallery==0.15.0",
   "sphinx-notfound-page==1.0.0",
   "sphinxemoji==0.2.0",
+  "sphinx-markdown-builder==0.6.6",
 ]
 all = [
   "pyvista>=0.32.0",
