@@ -4,6 +4,7 @@ import enum
 
 import numpy as np
 import pyvista as pv
+from beartype.typing import Dict, List, Union
 
 from ansys.meshing.prime.autogen.coreobject import CommunicationManager
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
@@ -61,6 +62,48 @@ class Mesh(MeshInfo):
     def model(self):
         return self._model
 
+    def compute_face_list_from_structured_nodes(self, dim):
+        """Compute the distances from the nodes.
+
+        Parameters
+        ----------
+        dim : List[int]
+            List with the number of elements in each dimension.
+
+        Returns
+        -------
+        List
+            List with the faces.
+        """
+        flist = []
+        for w in range(dim[2]):
+            for u in range(dim[0] - 1):
+                for v in range(dim[1] - 1):
+                    flist.append(4)
+                    flist.append(u + v * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + 1 + v * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + 1 + (v + 1) * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + (v + 1) * dim[0] + w * dim[0] * dim[1])
+
+        for v in range(dim[1]):
+            for u in range(dim[0] - 1):
+                for w in range(dim[2] - 1):
+                    flist.append(4)
+                    flist.append(u + v * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + 1 + v * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + 1 + v * dim[0] + (w + 1) * dim[0] * dim[1])
+                    flist.append(u + v * dim[0] + (w + 1) * dim[0] * dim[1])
+
+        for u in range(dim[0]):
+            for v in range(dim[1] - 1):
+                for w in range(dim[2] - 1):
+                    flist.append(4)
+                    flist.append(u + v * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + (v + 1) * dim[0] + w * dim[0] * dim[1])
+                    flist.append(u + (v + 1) * dim[0] + (w + 1) * dim[0] * dim[1])
+                    flist.append(u + v * dim[0] + (w + 1) * dim[0] * dim[1])
+        return flist
+
     def get_face_color(self, model_type: ColorByType):
         """Get the colors of faces.
 
@@ -104,32 +147,63 @@ class Mesh(MeshInfo):
             else:
                 return color_matrix[self._id % num_colors].tolist()
 
+    def _get_vertices_and_faces(
+        self, connectivity_results: Union[FaceConnectivityResults, EdgeConnectivityResults], index
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """Calculates the vertices and faces of the mesh.
+
+        Parameters
+        ----------
+        connectivity_results : Union[FaceConnectivityResults, EdgeConnectivityResults]
+            _description_
+        index : _type_
+            _description_
+
+        Returns
+        -------
+        Tuple[np.ndarray, np.ndarray]
+            _description_
+        """
+        node_start = 3 * np.sum(connectivity_results.num_nodes_per_face_zonelet[0:index])
+        num_node_coords = 3 * connectivity_results.num_nodes_per_face_zonelet[index]
+        face_list_start = np.sum(connectivity_results.num_face_list_per_face_zonelet[0:index])
+        num_face_list = connectivity_results.num_face_list_per_face_zonelet[index]
+        vertices = connectivity_results.node_coords[
+            node_start : node_start + num_node_coords
+        ].reshape((-1, 3))
+        faces = connectivity_results.edge_list[face_list_start : face_list_start + num_face_list]
+        return vertices, faces
+
     def get_face_polydata(self, part_id: int, face_facet_res: FaceConnectivityResults, index: int):
-        part = self._model.get_part(part_id)
-        node_start = 3 * np.sum(face_facet_res.num_nodes_per_face_zonelet[0:index])
-        num_node_coords = 3 * face_facet_res.num_nodes_per_face_zonelet[index]
-        face_list_start = np.sum(face_facet_res.num_face_list_per_face_zonelet[0:index])
-        num_face_list = face_facet_res.num_face_list_per_face_zonelet[index]
-        has_mesh = True
+        """Get the polydata object of the faces.
+
+        Parameters
+        ----------
+        part_id : int
+            _description_
+        face_facet_res : FaceConnectivityResults
+            _description_
+        index : int
+            _description_
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
+
+        vertices, faces = self._get_vertices_and_faces(face_facet_res, index)
         if face_facet_res.topo_face_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOFACE
-            id = face_facet_res.topo_face_ids[index]
-            has_mesh = face_facet_res.mesh_face_ids[index] > 0
         else:
             display_mesh_type = DisplayMeshType.FACEZONELET
-            id = face_facet_res.face_zonelet_ids[index]
-
-        vertices = face_facet_res.node_coords[node_start : node_start + num_node_coords].reshape(
-            (-1, 3)
-        )
-        faces = face_facet_res.edge_list[face_list_start : face_list_start + num_face_list]
 
         if (
             display_mesh_type == DisplayMeshType.TOPOFACE
             or display_mesh_type == DisplayMeshType.FACEZONELET
         ):
             surf = pv.PolyData(vertices, faces)
-            fcolor = np.array(self.get_face_color())
+            fcolor = np.array(self.get_face_color(ColorByType.PART))
             colors = np.tile(fcolor, (surf.n_faces, 1))
             surf["colors"] = colors
             surf.disp_mesh = self
@@ -137,24 +211,24 @@ class Mesh(MeshInfo):
                 return surf
 
     def get_edge_polydata(self, part_id: int, edge_facet_res: EdgeConnectivityResults, index: int):
-        part = self._model.get_part(part_id)
-        node_start = 3 * np.sum(edge_facet_res.num_nodes_per_edge_zonelet[0:index])
-        num_node_coords = 3 * edge_facet_res.num_nodes_per_edge_zonelet[index]
-        edge_list_start = np.sum(edge_facet_res.num_edge_list_per_edge_zonelet[0:index])
-        num_edge_list = edge_facet_res.num_edge_list_per_edge_zonelet[index]
-        has_mesh = True
-        if edge_facet_res.topo_edge_ids[index] > 0:
-            display_mesh_type = DisplayMeshType.TOPOEDGE
-            id = edge_facet_res.topo_edge_ids[index]
-            has_mesh = edge_facet_res.mesh_edge_ids[index] > 0
-        else:
-            display_mesh_type = DisplayMeshType.EDGEZONELET
-            id = edge_facet_res.edge_zonelet_ids[index]
+        """Get the polydata object of the edges.
+
+        Parameters
+        ----------
+        part_id : int
+            _description_
+        edge_facet_res : EdgeConnectivityResults
+            _description_
+        index : int
+            _description_
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
+        vertices, facet_list = self._get_vertices_and_faces(edge_facet_res, index)
         edge = pv.PolyData()
-        vertices = edge_facet_res.node_coords[node_start : node_start + num_node_coords].reshape(
-            (-1, 3)
-        )
-        faces = edge_facet_res.edge_list[edge_list_start : edge_list_start + num_edge_list]
         n_edges = edge_facet_res.num_edges_per_edge_zonelet[index]
         edge.points = vertices
         cells = np.full((n_edges, 3), 2, dtype=np.int_)
@@ -175,22 +249,97 @@ class Mesh(MeshInfo):
         colors = np.tile(ecolor, (n_edges, 1))
         edge["colors"] = colors
         edge.disp_mesh = self
-        if self._poly_data.n_points > 0:
+        if edge.n_points > 0:
             return edge
 
-    def as_polydata(self):
+    def get_spline_cp_polydata(self, part_id: int, spline_id: int):
+        """Get the polydata object of the spline control points.
+
+        Parameters
+        ----------
+        part_id : int
+            _description_
+        spline_id : int
+            _description_
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
+        part = self._model.get_part(part_id)
+        spline = part.get_spline(spline_id)
+        dim = spline.control_points_count
+        vertices = spline.control_points
+        faces = self.compute_face_list_from_structured_nodes(dim)
+        surf = pv.PolyData(vertices, faces)
+        fcolor = np.array([0, 0, 255])
+        colors = np.tile(fcolor, (surf.n_faces, 1))
+        surf["colors"] = colors
+        surf.disp_mesh = self
+        if surf.n_points > 0:
+            return surf
+
+    def get_spline_surface_polydata(self, part_id: int, spline_id: int):
+        """Get the polydata object of the spline surface.
+
+        Parameters
+        ----------
+        part_id : int
+            _description_
+        spline_id : int
+            _description_
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
+        part = self._model.get_part(part_id)
+        spline = part.get_spline(spline_id)
+        dim = spline.spline_points_count
+        vertices = spline.spline_points
+        faces = self.compute_face_list_from_structured_nodes(dim)
+        surf = pv.PolyData(vertices, faces)
+        fcolor = np.array(color_matrix[1])
+        colors = np.tile(fcolor, (surf.n_faces, 1))
+        surf["colors"] = colors
+        surf.disp_mesh = self
+        if surf.n_points > 0:
+            return surf
+
+    def as_polydata(self) -> Dict[int, Dict[str, List[pv.PolyData]]]:
         """Return the mesh as a ``pv.PolyData`` object."""
         part_ids = [part.id for part in self._model.parts]
         facet_result = self.get_face_and_edge_connectivity(
             part_ids, FaceAndEdgeConnectivityParams(model=self._model)
         )
-        edge_list = []
-        face_list = []
-        spline_points_list = []
-        spline_surface_list = []
-
+        parts_polydata = []
         for i, part_id in enumerate(self._facet_result.part_ids):
             part = self._model.get_part(part_id)
-            face_list.append(
-                self.get_face_polydata(part_id, facet_result.face_connectivity_results, i)
-            )
+            splines = part.get_splines()
+            part_polydata = {}
+            face_polydata_list = [
+                self.get_face_polydata(part_id, face_fet_result, j)
+                for face_fet_result in facet_result.face_connectivity_results_per_part
+                for j in range(0, len(face_fet_result.face_zonelet_ids))
+            ]
+
+            edge_polydata_list = [
+                self.get_edge_polydata(part_id, facet_result.edge_connectivity_results_per_part, j)
+                for edge_facet_result in facet_result.edge_connectivity_results_per_part
+                for j in range(0, len(edge_facet_result.edge_zonelet_ids))
+            ]
+
+            spline_cp_polydata_list = [self.get_spline_cp_polydata(part_ids[i], j) for j in splines]
+
+            spline_surface_polydata_list = [
+                self.get_spline_surface_polydata(part_ids[i], j) for j in splines
+            ]
+
+            part_polydata["faces"] = face_polydata_list
+            part_polydata["edges"] = edge_polydata_list
+            part_polydata["ctrlpts"] = spline_cp_polydata_list
+            part_polydata["splinesurf"] = spline_surface_polydata_list
+            parts_polydata[part_id] = part_polydata
+        return parts_polydata

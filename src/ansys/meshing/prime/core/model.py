@@ -16,6 +16,7 @@ from ansys.meshing.prime.autogen.modelstructs import (
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.topodata import TopoData
 from ansys.meshing.prime.core.controldata import ControlData
+from ansys.meshing.prime.core.mesh import Mesh
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
@@ -372,3 +373,18 @@ class Model(_Model):
 
         """
         return PrimeLogger().get_logger()
+
+    def as_polydata(self):
+        """Get the model as a polydata.
+
+        Returns
+        -------
+        vtk.vtkPolyData
+            Polydata of the model.
+
+        Examples
+        --------
+            >>> polydata = model.as_polydata()
+        """
+        model_mesh = Mesh(self)
+        return model_mesh.as_polydata()
