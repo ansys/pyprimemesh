@@ -58,7 +58,6 @@ html_theme_options = {
 
 # Sphinx extensions
 extensions = [
-    'sphinx.ext.autosectionlabel',
     'sphinx_markdown_builder',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
