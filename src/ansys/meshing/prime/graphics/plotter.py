@@ -6,6 +6,8 @@ from beartype.typing import Any, Dict, List, Optional, Union
 
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
+from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
 
 color_matrix = np.array(
     [
@@ -37,6 +39,9 @@ class PrimePlotter(PlotterInterface):
         self, use_trame: Optional[bool] = None, allow_picking: Optional[bool] = False
     ) -> None:
         super().__init__(use_trame, allow_picking)
+        self._info_actor_map = {}
+        self.add_widget(ToogleEdges(self))
+        self.add_widget(ColorByTypeWidget(self))
 
     def get_zone_colors(self) -> np.ndarray:
         pass
@@ -82,6 +87,8 @@ class PrimePlotter(PlotterInterface):
                         face_mesh_part.mesh, show_edges=True, color=colors, pickable=True
                     )
                     face_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = face_mesh_part
+                    self._info_actor_map[actor] = face_mesh_info
             if "edges" in part_polydata.keys():
                 for edge_mesh_part in part_polydata["edges"]:
                     actor = self._pl.scene.add_mesh(
@@ -91,6 +98,8 @@ class PrimePlotter(PlotterInterface):
                         line_width=4,
                     )
                     edge_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = edge_mesh_part
+
             if "ctrlpoints" in part_polydata.keys():
                 for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
                     actor = self._pl.scene.add_mesh(
@@ -103,6 +112,8 @@ class PrimePlotter(PlotterInterface):
                         edge_color=[0, 0, 255],
                     )
                     ctrlpoint_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = ctrlpoint_mesh_part
+
             if "splines" in part_polydata.keys():
                 for spline_mesh_part in part_polydata["splines"]:
                     actor = self._pl.scene.add_mesh(
@@ -113,6 +124,7 @@ class PrimePlotter(PlotterInterface):
                         pickable=False,
                     )
                     spline_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = spline_mesh_part
 
     def add_list(
         self,
