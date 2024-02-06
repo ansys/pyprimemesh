@@ -58,11 +58,19 @@ class DisplayMeshType(enum.IntEnum):
 
 class DisplayMeshInfo:
     def __init__(
-        self, id=0, part_id=0, zone_id=0, display_mesh_type=DisplayMeshType.FACEZONELET
+        self,
+        id=0,
+        part_id=0,
+        part_name=None,
+        zone_id=0,
+        zone_name=None,
+        display_mesh_type=DisplayMeshType.FACEZONELET,
     ) -> None:
         self.id = id
         self.part_id = part_id
         self.zone_id = zone_id
+        self.part_name = part_name
+        self.zone_name = zone_name
         self.display_mesh_type = display_mesh_type
 
 
@@ -252,7 +260,12 @@ class Mesh(MeshInfo):
 
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf), DisplayMeshInfo(
-                id, part_id, face_facet_res.face_zone_ids[index], display_mesh_type
+                id=id,
+                part_id=part_id,
+                zone_id=face_facet_res.face_zone_ids[index],
+                display_mesh_type=display_mesh_type,
+                part_name=part.name,
+                zone_name=face_facet_res.face_zone_names[index],
             )
 
     def get_edge_polydata(self, part_id: int, edge_facet_res: EdgeConnectivityResults, index: int):

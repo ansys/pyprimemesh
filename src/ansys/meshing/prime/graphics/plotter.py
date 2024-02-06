@@ -8,6 +8,7 @@ from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
+from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
 
 color_matrix = np.array(
@@ -44,6 +45,7 @@ class PrimePlotter(PlotterInterface):
         self.add_widget(ToogleEdges(self))
         self.add_widget(ColorByTypeWidget(self))
         self.add_widget(HidePicked(self))
+        self.add_widget(PickedInfo(self))
 
     def get_zone_colors(self) -> np.ndarray:
         pass
