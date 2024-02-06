@@ -7,6 +7,7 @@ from beartype.typing import Any, Dict, List, Optional, Union
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
+from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
 
 color_matrix = np.array(
@@ -42,6 +43,7 @@ class PrimePlotter(PlotterInterface):
         self._info_actor_map = {}
         self.add_widget(ToogleEdges(self))
         self.add_widget(ColorByTypeWidget(self))
+        self.add_widget(HidePicked(self))
 
     def get_zone_colors(self) -> np.ndarray:
         pass
@@ -95,6 +97,7 @@ class PrimePlotter(PlotterInterface):
                         edge_mesh_part.mesh,
                         # scalars="colors",
                         rgb=True,
+                        pickable=False,
                         line_width=4,
                     )
                     edge_mesh_part.actor = actor
