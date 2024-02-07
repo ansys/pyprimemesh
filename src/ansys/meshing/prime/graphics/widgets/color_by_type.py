@@ -1,3 +1,4 @@
+"""Module for ColorByTypeWidget."""
 import enum
 import os
 
@@ -34,7 +35,16 @@ class ColorByType(enum.IntEnum):
 
 
 class ColorByTypeWidget(PlotterWidget):
+    """Initialize the color by type button widget. This widget allows the user to
+    change the color of the mesh based on the zone, zonelet or part.
+
+    Parameters
+    ----------
+    plotter_helper : Plotter
+        Plotter object to use.
+    """
     def __init__(self, plotter_helper: "Plotter") -> None:
+        """ColorByTypeWidget constructor."""
         super().__init__(plotter_helper._pl.scene)
         self.plotter_helper = plotter_helper
         self._object_actors_map = self.plotter_helper._object_to_actors_map
@@ -46,6 +56,7 @@ class ColorByTypeWidget(PlotterWidget):
         self._color_type = ColorByType.ZONE
 
     def callback(self, state) -> None:
+        """Callback function for the button widget."""
         color_type = ColorByType(self._button.GetRepresentation().GetState())
         for actor, object in self._object_actors_map.items():
             if actor in self.plotter_helper._info_actor_map:
@@ -54,7 +65,13 @@ class ColorByTypeWidget(PlotterWidget):
                 self.update(color_type)
 
     def update(self, color_type=ColorByType.ZONE) -> None:
-        """Define the configuration and representation of the button widget button."""
+        """Define the configuration and representation of the button widget button.
+        
+        Parameters
+        ----------
+        color_type : ColorByType, optional
+            Color type to use, by default ColorByType.ZONE.
+        """
         vr = self._button.GetRepresentation()
         icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
 
@@ -72,8 +89,15 @@ class ColorByTypeWidget(PlotterWidget):
         vr.SetButtonTexture(1, image)
         vr.SetButtonTexture(2, image)
 
-    def set_color_by_type(self, color_type, mesh_info: DisplayMeshInfo):
+    def set_color_by_type(self, color_type: ColorByType, mesh_info: DisplayMeshInfo):
         """Get the colors of faces.
+
+        Parameters
+        ----------
+        color_type : ColorByType
+            Color type to use.
+        mesh_info : DisplayMeshInfo
+            Mesh info that generates an appropiate color.
 
         Returns
         -------

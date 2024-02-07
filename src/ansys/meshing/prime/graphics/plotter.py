@@ -7,7 +7,8 @@ from beartype.typing import Any, Dict, List, Optional, Union
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
-from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
+from ansys.meshing.prime.graphics.widgets.color_by_type import \
+    ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
@@ -38,9 +39,20 @@ class ColorByType(enum.IntEnum):
 
 
 class PrimePlotter(PlotterInterface):
+    """Create a plotter for PyPrimeMesh models. This plotter is a wrapper around the
+    PyAnsys generic plotter with additional functionality for PyPrimeMesh.
+
+    Parameters
+    ----------
+    use_trame : Optional[bool], optional.
+        Whether to use trame or not, by default None.
+    allow_picking : Optional[bool], optional.
+        Whether to allow picking ot not, by default True.
+    """
     def __init__(
         self, use_trame: Optional[bool] = None, allow_picking: Optional[bool] = True
     ) -> None:
+        """PrimePlotter constructor."""
         super().__init__(use_trame, allow_picking)
 
         # info of the actor to pass to picked info widget
@@ -52,38 +64,65 @@ class PrimePlotter(PlotterInterface):
 
     @property
     def info_actor_map(self) -> Dict:
+        """Get the info actor map for picked info widget.
+
+        Returns
+        -------
+        Dict
+            Info actor map.
+        """
         return self._info_actor_map
 
     @info_actor_map.setter
     def info_actor_map(self, value: Dict) -> None:
+        """Set the info actor map for picked info widget.
+
+        Parameters
+        ----------
+        value : Dict
+            Info actor map.
+        """
         self._info_actor_map = value
 
-    def widget_color_mock(self, type: str) -> ColorByType:
-        if type == "zone":
-            return ColorByType.ZONE
-        elif type == "zonelet":
-            return ColorByType.ZONELET
-        elif type == "part":
-            return ColorByType.PART
-
     def get_scalar_colors(self, mesh_info: DisplayMeshInfo) -> np.ndarray:
-        type = mesh_info.display_mesh_type
+        """Get the scalar colors for the mesh.
+
+        Parameters
+        ----------
+        mesh_info : DisplayMeshInfo
+            Mesh info that generates an appropiate color.
+
+        Returns
+        -------
+        np.ndarray
+            Scalar colors for the mesh.
+        """
+        mesh_type = mesh_info.display_mesh_type
         num_colors = int(color_matrix.size / 3)
-        if type == ColorByType.ZONELET:
+        if mesh_type == ColorByType.ZONELET:
             return color_matrix[mesh_info.id % num_colors].tolist()
-        elif type == ColorByType.PART:
+        elif mesh_type == ColorByType.PART:
             return color_matrix[mesh_info.part_id % num_colors].tolist()
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
-    def add_model(self, model, scope=None):
+    def add_model(self, model: Model, scope: prime.ScopeDefinition = None) -> None:
+        """Add a Prime model to the plotter.
+
+        Parameters
+        ----------
+        model : _type_
+            _description_
+        scope : _type_, optional
+            _description_, by default None
+        """
         model_pd = model.as_polydata()
         if scope is None:
             self.add_model_pd(model_pd)
         else:
             self.add_scope(model, scope)
 
-    def add_model_pd(self, model_pd):
+    def add_model_pd(self, model_pd: Dict) -> None:
         """Add a model to the plotter.
 
         Parameters
@@ -134,7 +173,7 @@ class PrimePlotter(PlotterInterface):
                     }
                     self.add(spline_mesh_part, **plottin_options)
 
-    def add_scope(self, model, scope):
+    def add_scope(self, model: Model, scope: prime.ScopeDefinition) -> None:
         """Add a scope to the plotter.
 
         Parameters
@@ -163,14 +202,6 @@ class PrimePlotter(PlotterInterface):
         ----------
         plotting_list : List[Any]
             List of objects you want to plot.
-        merge_component : bool, default: False
-            Whether to merge the component into a single dataset. When
-            ``True``, all the individual bodies are effectively combined
-            into a single dataset without any hierarchy.
-        merge_bodies : bool, default: False
-            Whether to merge each body into a single dataset. When ``True``,
-            all the faces of each individual body are effectively combined
-            into a single dataset without separating faces.
         filter : str, default: None
             Regular expression with the desired name or names you want to include in the plotter.
         **plotting_options : dict, default: None
@@ -180,7 +211,18 @@ class PrimePlotter(PlotterInterface):
         for object in plotting_list:
             _ = self.add(object, filter, **plotting_options)
 
-    def add(self, object, scope=None, filter=None, **plotting_options):
+    def add(self, object: Any, scope: prime.ScopeDefinition = None, filter: str = None, **plotting_options):
+        """Add an object to the plotter.
+
+        Parameters
+        ----------
+        object : Any
+            Object to add to the plotter.
+        scope : prime.ScopeDefinition, optional
+            Scope you want to plot, by default None.
+        filter : str, optional
+            Regular expression with the desired name or names you want to include in the plotter, by default None.
+        """
         if isinstance(object, Model):
             self.add_model(object, scope)
         elif isinstance(object, List):

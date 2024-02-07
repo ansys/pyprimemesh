@@ -1,3 +1,4 @@
+"""This module contains the HidePicked class."""
 import os
 
 from ansys.visualizer import Plotter
@@ -6,7 +7,16 @@ from vtk import vtkButtonWidget, vtkPNGReader
 
 
 class HidePicked(PlotterWidget):
+    """Initialize the hide picked button widget. This widget allows the user to hide
+    the picked mesh objects.
+
+    Parameters
+    ----------
+    plotter_helper : Plotter
+        Plotter where to apply this widget.
+    """
     def __init__(self, plotter_helper: "Plotter") -> None:
+        """HidePicked constructor."""
         super().__init__(plotter_helper._pl.scene)
         self.plotter_helper = plotter_helper
         self._picked_list = self.plotter_helper._picked_list
@@ -22,9 +32,10 @@ class HidePicked(PlotterWidget):
         self._removed_actors = []
 
     def callback(self, state: bool) -> None:
+        """Callback function for the button widget."""
         if state:
             for meshobject in self._picked_list:
-                self.plotter_helper._pl.scene.remove_actor(meshobject.actor)
+                self.plotter_helper.pv_interface.scene.remove_actor(meshobject.actor)
                 self._removed_actors.append(meshobject.actor)
         else:
             for actor in self._removed_actors:
@@ -32,13 +43,13 @@ class HidePicked(PlotterWidget):
 
     def update(self) -> None:
         """Define the configuration and representation of the button widget button."""
-        show_point_vr = self._button.GetRepresentation()
-        show_point_icon_file = os.path.join(
+        vr = self._button.GetRepresentation()
+        icon_file = os.path.join(
             os.path.dirname(__file__), "images", "invert_visibility.png"
         )
-        show_point_r = vtkPNGReader()
-        show_point_r.SetFileName(show_point_icon_file)
-        show_point_r.Update()
-        image = show_point_r.GetOutput()
-        show_point_vr.SetButtonTexture(0, image)
-        show_point_vr.SetButtonTexture(1, image)
+        r = vtkPNGReader()
+        r.SetFileName(icon_file)
+        r.Update()
+        image = r.GetOutput()
+        vr.SetButtonTexture(0, image)
+        vr.SetButtonTexture(1, image)
