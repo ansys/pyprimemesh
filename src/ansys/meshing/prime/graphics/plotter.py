@@ -38,7 +38,7 @@ class ColorByType(enum.IntEnum):
 
 class PrimePlotter(PlotterInterface):
     def __init__(
-        self, use_trame: Optional[bool] = None, allow_picking: Optional[bool] = False
+        self, use_trame: Optional[bool] = None, allow_picking: Optional[bool] = True
     ) -> None:
         super().__init__(use_trame, allow_picking)
         self._info_actor_map = {}
@@ -74,8 +74,7 @@ class PrimePlotter(PlotterInterface):
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
-    def add_model(self, model):
-        # type: (Model) -> None
+    def add_model(self, model, scope=None):
         """Add a model to the plotter.
 
         Parameters
@@ -83,53 +82,64 @@ class PrimePlotter(PlotterInterface):
         model : Model
             Model to add to the plotter.
         """
+        scope_ids = []
+        if scope is not None:
+            parts = self._model.control_data.get_scope_parts(scope)
+            for part_id in parts:
+                scope_ids.append(part_id)
         for part_id, part_polydata in model.as_polydata().items():
-            if "faces" in part_polydata.keys():
-                for face_mesh_part, face_mesh_info in part_polydata["faces"]:
-                    colors = self.get_scalar_colors(face_mesh_info)
-                    actor = self._pl.scene.add_mesh(
-                        face_mesh_part.mesh, show_edges=True, color=colors, pickable=True
-                    )
-                    face_mesh_part.actor = actor
-                    self._object_to_actors_map[actor] = face_mesh_part
-                    self._info_actor_map[actor] = face_mesh_info
-            if "edges" in part_polydata.keys():
-                for edge_mesh_part in part_polydata["edges"]:
-                    actor = self._pl.scene.add_mesh(
-                        edge_mesh_part.mesh,
-                        # scalars="colors",
-                        rgb=True,
-                        pickable=False,
-                        line_width=4,
-                    )
-                    edge_mesh_part.actor = actor
-                    self._object_to_actors_map[actor] = edge_mesh_part
+            # proceed if scope won't be used or if the part is in the scope
+            if scope is None or part_id in scope_ids:
+                if "faces" in part_polydata.keys():
+                    for face_mesh_part, face_mesh_info in part_polydata["faces"]:
+                        colors = self.get_scalar_colors(face_mesh_info)
+                        actor = self.pv_interface.scene.add_mesh(
+                            face_mesh_part.mesh, show_edges=True, color=colors, pickable=True
+                        )
+                        face_mesh_part.actor = actor
+                        self._object_to_actors_map[actor] = face_mesh_part
+                        self._info_actor_map[actor] = face_mesh_info
+                if "edges" in part_polydata.keys():
+                    for edge_mesh_part in part_polydata["edges"]:
+                        actor = self.pv_interface.scene.add_mesh(
+                            edge_mesh_part.mesh,
+                            # scalars="colors",
+                            rgb=True,
+                            pickable=False,
+                            line_width=4,
+                        )
+                        edge_mesh_part.actor = actor
+                        self._object_to_actors_map[actor] = edge_mesh_part
 
-            if "ctrlpoints" in part_polydata.keys():
-                for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
-                    actor = self._pl.scene.add_mesh(
-                        ctrlpoint_mesh_part.mesh,
-                        show_edges=True,
-                        # scalars="colors",
-                        rgb=True,
-                        pickable=False,
-                        style='wireframe',
-                        edge_color=[0, 0, 255],
-                    )
-                    ctrlpoint_mesh_part.actor = actor
-                    self._object_to_actors_map[actor] = ctrlpoint_mesh_part
+                if "ctrlpoints" in part_polydata.keys():
+                    for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
+                        actor = self.pv_interface.scene.add_mesh(
+                            ctrlpoint_mesh_part.mesh,
+                            show_edges=True,
+                            # scalars="colors",
+                            rgb=True,
+                            pickable=False,
+                            style='wireframe',
+                            edge_color=[0, 0, 255],
+                        )
+                        ctrlpoint_mesh_part.actor = actor
+                        self._object_to_actors_map[actor] = ctrlpoint_mesh_part
 
-            if "splines" in part_polydata.keys():
-                for spline_mesh_part in part_polydata["splines"]:
-                    actor = self._pl.scene.add_mesh(
-                        spline_mesh_part.mesh,
-                        show_edges=False,
-                        # scalars="colors",
-                        rgb=True,
-                        pickable=False,
-                    )
-                    spline_mesh_part.actor = actor
-                    self._object_to_actors_map[actor] = spline_mesh_part
+                if "splines" in part_polydata.keys():
+                    for spline_mesh_part in part_polydata["splines"]:
+                        actor = self._pl.scene.add_mesh(
+                            spline_mesh_part.mesh,
+                            show_edges=False,
+                            # scalars="colors",
+                            rgb=True,
+                            pickable=False,
+                        )
+                        spline_mesh_part.actor = actor
+                        self._object_to_actors_map[actor] = spline_mesh_part
+
+    def add_scope(self, scope, model):
+        parts = model.control_data.get_scope_parts(scope)
+        scope_def = scope
 
     def add_list(
         self,
@@ -164,9 +174,9 @@ class PrimePlotter(PlotterInterface):
         for object in plotting_list:
             _ = self.add(object, filter, **plotting_options)
 
-    def add(self, object, filter=None, **plotting_options):
+    def add(self, object, scope=None, filter=None, **plotting_options):
         if isinstance(object, Model):
-            self.add_model(object)
+            self.add_model(object, scope)
         elif isinstance(object, List):
             self.add_list(object, filter, **plotting_options)
         else:

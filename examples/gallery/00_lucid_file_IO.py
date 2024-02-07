@@ -46,7 +46,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -95,7 +95,9 @@ mesh_util = prime.lucid.Mesh(model=model)
 mesh_util.read(file_name=prime.examples.download_block_model_fmd())
 # mesh_util.read(file_name=prime.examples.download_block_model_scdoc())
 print(model)
-display = Graphics(model)
+display = PrimePlotter()
+display.add_model(model)
+display.plot()
 
 ###############################################################################
 # Generate Mesh
@@ -119,8 +121,10 @@ display = Graphics(model)
 # as the default meshing algorithms.
 
 mesh_util.surface_mesh(min_size=2.0)
-display = Graphics(model)
-display()
+display = PrimePlotter()
+display.add_model(model)
+display.plot()
+
 part = model.get_part_by_name("pyprime_block_import")
 display(scope=prime.ScopeDefinition(model, label_expression="my_group"))
 mesh_util.volume_mesh()

@@ -41,7 +41,7 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -85,8 +85,9 @@ part = model.get_part_by_name('bracket_mid_surface-3')
 part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
 print(part_summary_res)
 
-display = Graphics(model=model)
-display()
+display = PrimePlotter()
+display.add_model(model)
+display.plot()
 
 ###############################################################################
 # Connection
@@ -130,8 +131,9 @@ surfer_params = prime.SurferParams(
 surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
 
 # Display the mesh
-display = Graphics(model=model)
-display()
+pl = PrimePlotter()
+pl.add(model)
+pl.plot()
 
 ###############################################################################
 # Write mesh

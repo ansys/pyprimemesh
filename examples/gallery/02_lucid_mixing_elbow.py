@@ -88,8 +88,9 @@ mesh_util.volume_mesh(
 )
 
 # Display the mesh
-display = Graphics(model=model)
-display()
+pl = PrimePlotter()
+pl.add(model)
+pl.plot()
 
 ###############################################################################
 # Print mesh statistics

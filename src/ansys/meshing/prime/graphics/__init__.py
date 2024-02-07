@@ -1,1 +1,1 @@
-from ansys.meshing.prime.graphics.graphics import Graphics
+from ansys.meshing.prime.graphics.plotter import PrimePlotter
