@@ -84,7 +84,7 @@ class PrimePlotter(PlotterInterface):
         """
         scope_ids = []
         if scope is not None:
-            parts = self._model.control_data.get_scope_parts(scope)
+            parts = model.control_data.get_scope_parts(scope)
             for part_id in parts:
                 scope_ids.append(part_id)
         for part_id, part_polydata in model.as_polydata().items():
@@ -136,10 +136,6 @@ class PrimePlotter(PlotterInterface):
                         )
                         spline_mesh_part.actor = actor
                         self._object_to_actors_map[actor] = spline_mesh_part
-
-    def add_scope(self, scope, model):
-        parts = model.control_data.get_scope_parts(scope)
-        scope_def = scope
 
     def add_list(
         self,

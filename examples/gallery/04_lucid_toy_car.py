@@ -44,11 +44,11 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
-display = Graphics(model=model)
+display = PrimePlotter()
 
 mesh_util = prime.lucid.Mesh(model)
 
