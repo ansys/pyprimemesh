@@ -388,3 +388,23 @@ class Model(_Model):
         """
         model_mesh = Mesh(self)
         return model_mesh.as_polydata()
+
+    def get_scoped_polydata(self, scope):
+        """Get the scoped polydata of the model.
+
+        Parameters
+        ----------
+        scope : Scope
+            Scope of the model.
+
+        Returns
+        -------
+        vtk.vtkPolyData
+            Scoped polydata of the model.
+
+        Examples
+        --------
+            >>> scoped_polydata = model.get_scoped_polydata(scope)
+        """
+        model_mesh = Mesh(self)
+        return model_mesh.get_scoped_polydata(scope)

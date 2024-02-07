@@ -7,6 +7,7 @@ import pyvista as pv
 from ansys.visualizer import MeshObjectPlot
 from beartype.typing import Dict, List, Tuple, Union
 
+import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.coreobject import CommunicationManager
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.meshinfostructs import (
@@ -78,6 +79,9 @@ class Mesh(MeshInfo):
     def __init__(self, model: CommunicationManager):
         super().__init__(model)
         self._model = model
+        self._unfreeze()
+        self._parts_polydata = {}
+        self._freeze()
 
     @property
     def model(self):
@@ -367,6 +371,33 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
+    def get_scoped_polydata(self, scope):
+        if not self._parts_polydata:
+            self.as_polydata()
+        parts = self._model.control_data.get_scope_parts(scope)
+        scoped_pd = {}
+        scope_def = scope
+        for part_id in parts:
+            part = self._model.get_part(part_id)
+            scope_def.part_expression = part.name
+            disp_data = None
+            disp_ids = []
+            if scope.entity_type == prime.ScopeEntity.FACEZONELETS:
+                disp_ids = self._model.control_data.get_scope_face_zonelets(
+                    scope=scope_def, params=prime.ScopeZoneletParams(model=self._model)
+                )
+                disp_data = self._parts_polydata[part_id]["faces"]
+
+            if disp_data is not None:
+                temp_pd = []
+                for disp_mesh in disp_data:
+                    if disp_mesh[1].id in disp_ids:
+                        temp_pd.append(disp_mesh)
+                temp_key = {}
+                temp_key["faces"] = temp_pd
+                scoped_pd[part_id] = temp_key
+        return scoped_pd
+
     def as_polydata(self) -> Dict[int, Dict[str, List[(pv.PolyData, Part)]]]:
         """Return the mesh as a ``pv.PolyData`` object."""
         part_ids = [part.id for part in self._model.parts]
@@ -400,8 +431,8 @@ class Mesh(MeshInfo):
             part_polydata["edges"] = edge_polydata_list
             part_polydata["ctrlpts"] = spline_cp_polydata_list
             part_polydata["splinesurf"] = spline_surface_polydata_list
-            parts_polydata[part_id] = part_polydata
-        return parts_polydata
+            self._parts_polydata[part_id] = part_polydata
+        return self._parts_polydata
 
     @property
     def id(self):

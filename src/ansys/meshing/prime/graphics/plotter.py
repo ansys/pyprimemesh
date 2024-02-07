@@ -4,6 +4,7 @@ import numpy as np
 from ansys.visualizer import MeshObjectPlot, PlotterInterface
 from beartype.typing import Any, Dict, List, Optional, Union
 
+import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
@@ -75,6 +76,13 @@ class PrimePlotter(PlotterInterface):
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
     def add_model(self, model, scope=None):
+        model_pd = model.as_polydata()
+        if scope is None:
+            self.add_model_pd(model_pd)
+        else:
+            self.add_scope(model, model_pd, scope)
+
+    def add_model_pd(self, model_pd):
         """Add a model to the plotter.
 
         Parameters
@@ -82,60 +90,67 @@ class PrimePlotter(PlotterInterface):
         model : Model
             Model to add to the plotter.
         """
-        scope_ids = []
-        if scope is not None:
-            parts = model.control_data.get_scope_parts(scope)
-            for part_id in parts:
-                scope_ids.append(part_id)
-        for part_id, part_polydata in model.as_polydata().items():
+        for part_id, part_polydata in model_pd.items():
             # proceed if scope won't be used or if the part is in the scope
-            if scope is None or part_id in scope_ids:
-                if "faces" in part_polydata.keys():
-                    for face_mesh_part, face_mesh_info in part_polydata["faces"]:
-                        colors = self.get_scalar_colors(face_mesh_info)
-                        actor = self.pv_interface.scene.add_mesh(
-                            face_mesh_part.mesh, show_edges=True, color=colors, pickable=True
-                        )
-                        face_mesh_part.actor = actor
-                        self._object_to_actors_map[actor] = face_mesh_part
-                        self._info_actor_map[actor] = face_mesh_info
-                if "edges" in part_polydata.keys():
-                    for edge_mesh_part in part_polydata["edges"]:
-                        actor = self.pv_interface.scene.add_mesh(
-                            edge_mesh_part.mesh,
-                            # scalars="colors",
-                            rgb=True,
-                            pickable=False,
-                            line_width=4,
-                        )
-                        edge_mesh_part.actor = actor
-                        self._object_to_actors_map[actor] = edge_mesh_part
+            if "faces" in part_polydata.keys():
+                for face_mesh_part, face_mesh_info in part_polydata["faces"]:
+                    colors = self.get_scalar_colors(face_mesh_info)
+                    actor = self.pv_interface.scene.add_mesh(
+                        face_mesh_part.mesh, show_edges=True, color=colors, pickable=True
+                    )
+                    face_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = face_mesh_part
+                    self._info_actor_map[actor] = face_mesh_info
+            if "edges" in part_polydata.keys():
+                for edge_mesh_part in part_polydata["edges"]:
+                    actor = self.pv_interface.scene.add_mesh(
+                        edge_mesh_part.mesh,
+                        # scalars="colors",
+                        rgb=True,
+                        pickable=False,
+                        line_width=4,
+                    )
+                    edge_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = edge_mesh_part
 
-                if "ctrlpoints" in part_polydata.keys():
-                    for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
-                        actor = self.pv_interface.scene.add_mesh(
-                            ctrlpoint_mesh_part.mesh,
-                            show_edges=True,
-                            # scalars="colors",
-                            rgb=True,
-                            pickable=False,
-                            style='wireframe',
-                            edge_color=[0, 0, 255],
-                        )
-                        ctrlpoint_mesh_part.actor = actor
-                        self._object_to_actors_map[actor] = ctrlpoint_mesh_part
+            if "ctrlpoints" in part_polydata.keys():
+                for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
+                    actor = self.pv_interface.scene.add_mesh(
+                        ctrlpoint_mesh_part.mesh,
+                        show_edges=True,
+                        # scalars="colors",
+                        rgb=True,
+                        pickable=False,
+                        style='wireframe',
+                        edge_color=[0, 0, 255],
+                    )
+                    ctrlpoint_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = ctrlpoint_mesh_part
 
-                if "splines" in part_polydata.keys():
-                    for spline_mesh_part in part_polydata["splines"]:
-                        actor = self._pl.scene.add_mesh(
-                            spline_mesh_part.mesh,
-                            show_edges=False,
-                            # scalars="colors",
-                            rgb=True,
-                            pickable=False,
-                        )
-                        spline_mesh_part.actor = actor
-                        self._object_to_actors_map[actor] = spline_mesh_part
+            if "splines" in part_polydata.keys():
+                for spline_mesh_part in part_polydata["splines"]:
+                    actor = self._pl.scene.add_mesh(
+                        spline_mesh_part.mesh,
+                        show_edges=False,
+                        # scalars="colors",
+                        rgb=True,
+                        pickable=False,
+                    )
+                    spline_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = spline_mesh_part
+
+    def add_scope(self, model, model_pd, scope):
+        """Add a scope to the plotter.
+
+        Parameters
+        ----------
+        model : Model
+            Model to add to the plotter.
+        scope : str
+            Scope to add to the plotter.
+        """
+        model_pd = model.get_scoped_polydata(scope)
+        self.add_model_pd(model_pd)
 
     def add_list(
         self,
