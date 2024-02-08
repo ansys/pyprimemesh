@@ -7,7 +7,8 @@ from beartype.typing import Any, Dict, List, Optional, Union
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
-from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
+from ansys.meshing.prime.graphics.widgets.color_by_type import \
+    ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
@@ -146,32 +147,41 @@ class PrimePlotter(PlotterInterface):
 
             if "edges" in part_polydata.keys():
                 for edge_mesh_part in part_polydata["edges"]:
-                    plotting_options = {
-                        "show_edges": True,
-                        "rgb": True,
-                        "pickable": False,
-                    }
-                    self.add(edge_mesh_part, **plotting_options)
+                    actor = self.pv_interface.scene.add_mesh(
+                        edge_mesh_part.mesh,
+                        # scalars="colors",
+                        rgb=True,
+                        pickable=False,
+                        line_width=4,
+                    )
+                    edge_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = edge_mesh_part
 
             if "ctrlpoints" in part_polydata.keys():
                 for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
-                    plotting_options = {
-                        "show_edges": True,
-                        "rgb": True,
-                        "pickable": False,
-                        "style": 'wireframe',
-                        "edge_color": [0, 0, 255],
-                    }
-                    self.add(ctrlpoint_mesh_part, **plotting_options)
+                    actor = self.pv_interface.scene.add_mesh(
+                        ctrlpoint_mesh_part.mesh,
+                        show_edges=True,
+                        # scalars="colors",
+                        rgb=True,
+                        pickable=False,
+                        style='wireframe',
+                        edge_color=[0, 0, 255],
+                    )
+                    ctrlpoint_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = ctrlpoint_mesh_part
 
             if "splines" in part_polydata.keys():
                 for spline_mesh_part in part_polydata["splines"]:
-                    plottin_options = {
-                        "show_edges": False,
-                        "rgb": True,
-                        "pickable": False,
-                    }
-                    self.add(spline_mesh_part, **plottin_options)
+                    actor = self._pl.scene.add_mesh(
+                        spline_mesh_part.mesh,
+                        show_edges=False,
+                        # scalars="colors",
+                        rgb=True,
+                        pickable=False,
+                    )
+                    spline_mesh_part.actor = actor
+                    self._object_to_actors_map[actor] = spline_mesh_part
 
     def add_scope(self, model: Model, scope: prime.ScopeDefinition) -> None:
         """Add a scope to the plotter.
