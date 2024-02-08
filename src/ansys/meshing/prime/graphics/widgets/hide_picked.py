@@ -15,6 +15,7 @@ class HidePicked(PlotterWidget):
     plotter_helper : Plotter
         Plotter where to apply this widget.
     """
+
     def __init__(self, plotter_helper: "Plotter") -> None:
         """HidePicked constructor."""
         super().__init__(plotter_helper._pl.scene)
@@ -44,9 +45,7 @@ class HidePicked(PlotterWidget):
     def update(self) -> None:
         """Define the configuration and representation of the button widget button."""
         vr = self._button.GetRepresentation()
-        icon_file = os.path.join(
-            os.path.dirname(__file__), "images", "invert_visibility.png"
-        )
+        icon_file = os.path.join(os.path.dirname(__file__), "images", "invert_visibility.png")
         r = vtkPNGReader()
         r.SetFileName(icon_file)
         r.Update()

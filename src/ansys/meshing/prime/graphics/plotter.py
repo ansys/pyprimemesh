@@ -7,8 +7,7 @@ from beartype.typing import Any, Dict, List, Optional, Union
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
-from ansys.meshing.prime.graphics.widgets.color_by_type import \
-    ColorByTypeWidget
+from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
@@ -49,6 +48,7 @@ class PrimePlotter(PlotterInterface):
     allow_picking : Optional[bool], optional.
         Whether to allow picking ot not, by default True.
     """
+
     def __init__(
         self, use_trame: Optional[bool] = None, allow_picking: Optional[bool] = True
     ) -> None:
@@ -211,7 +211,13 @@ class PrimePlotter(PlotterInterface):
         for object in plotting_list:
             _ = self.add(object, filter, **plotting_options)
 
-    def add(self, object: Any, scope: prime.ScopeDefinition = None, filter: str = None, **plotting_options):
+    def add(
+        self,
+        object: Any,
+        scope: prime.ScopeDefinition = None,
+        filter: str = None,
+        **plotting_options,
+    ):
         """Add an object to the plotter.
 
         Parameters

@@ -43,6 +43,7 @@ class ColorByTypeWidget(PlotterWidget):
     plotter_helper : Plotter
         Plotter object to use.
     """
+
     def __init__(self, plotter_helper: "Plotter") -> None:
         """ColorByTypeWidget constructor."""
         super().__init__(plotter_helper._pl.scene)
@@ -66,7 +67,7 @@ class ColorByTypeWidget(PlotterWidget):
 
     def update(self, color_type=ColorByType.ZONE) -> None:
         """Define the configuration and representation of the button widget button.
-        
+
         Parameters
         ----------
         color_type : ColorByType, optional
