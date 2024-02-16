@@ -20,6 +20,8 @@ from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
 from ansys.meshing.prime.autogen.wrapperstructs import (
     WrapperCloseGapsParams,
     WrapperCloseGapsResult,
+    WrapperPatchFlowRegionsParams,
+    WrapperPatchFlowRegionsResult,
 )
 from ansys.meshing.prime.autogen.wrapperstructs import WrapResult as WrapResult
 from ansys.meshing.prime.core.model import Model
@@ -143,8 +145,8 @@ class Wrapper(_Wrapper):
                 with_face_zonelet_ids=with_face_zonelet_ids,
                 params=params,
             )
-            np.append(modified_zonelets, face_zonelet_ids)
-            np.append(modified_zonelets, with_face_zonelet_ids)
+            modified_zonelets = np.append(modified_zonelets, face_zonelet_ids)
+            modified_zonelets = np.append(modified_zonelets, with_face_zonelet_ids)
         surf_utils = SurfaceUtilities(self._model)
         surf_utils.resolve_intersections(
             face_zonelet_ids=modified_zonelets, params=ResolveIntersectionsParams(model=self._model)
@@ -180,4 +182,40 @@ class Wrapper(_Wrapper):
         result = _Wrapper.close_gaps(self, scope, params)
         if result.error_code == ErrorCode.NOERROR:
             self._model._sync_up_model()
+        return result
+
+    def patch_flow_regions(
+        self, live_material_point: str, params: WrapperPatchFlowRegionsParams
+    ) -> WrapperPatchFlowRegionsResult:
+        """Patch flow regions.
+
+        Patch flow regions create patching surfaces for regions identified
+        by dead regions from wrapper patch holes parameters.
+
+
+        Parameters
+        ----------
+        live_material_point : str
+            Name of live material point.
+        params : WrapperPatchFlowRegionsParams
+            Parameters to define patch flow regions operation.
+
+        Returns
+        -------
+        WrapperPatchFlowRegionsResult
+            Returns the WrapperPatchFlowRegionsResult.
+
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> results = wrapper.PatchFlowRegions(live_material_point, params)
+
+        """
+        result = _Wrapper.patch_flow_regions(self, live_material_point, params)
+        if result.error_code == ErrorCode.NOERROR:
+            self._model._add_part(result.id)
         return result

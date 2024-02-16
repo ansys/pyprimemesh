@@ -130,3 +130,42 @@ class Wrapper(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("close_gaps", WrapperCloseGapsResult(model = self._model, json_data = result))
         return WrapperCloseGapsResult(model = self._model, json_data = result)
+
+    def patch_flow_regions(self, live_material_point : str, params : WrapperPatchFlowRegionsParams) -> WrapperPatchFlowRegionsResult:
+        """ Patch flow regions create patching surfaces for regions identified by dead regions from wrapper patch holes parameters.
+
+
+        Parameters
+        ----------
+        live_material_point : str
+            Name of live material point.
+        params : WrapperPatchFlowRegionsParams
+            Parameters to define patch flow regions operation.
+
+        Returns
+        -------
+        WrapperPatchFlowRegionsResult
+            Returns the WrapperPatchFlowRegionsResult.
+
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> results = wrapper.PatchFlowRegions(live_material_point, params)
+
+        """
+        if not isinstance(live_material_point, str):
+            raise TypeError("Invalid argument type passed for live_material_point, valid argument type is str.")
+        if not isinstance(params, WrapperPatchFlowRegionsParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperPatchFlowRegionsParams.")
+        args = {"live_material_point" : live_material_point,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Wrapper/PatchFlowRegions"
+        self._model._print_beta_api_warning("patch_flow_regions")
+        self._model._print_logs_before_command("patch_flow_regions", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("patch_flow_regions", WrapperPatchFlowRegionsResult(model = self._model, json_data = result))
+        return WrapperPatchFlowRegionsResult(model = self._model, json_data = result)

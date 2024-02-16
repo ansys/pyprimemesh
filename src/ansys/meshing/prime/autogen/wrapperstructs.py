@@ -1383,3 +1383,511 @@ class WrapperCloseGapsResult(CoreObject):
     @part_id.setter
     def part_id(self, value: int):
         self._part_id = value
+
+class DeadRegion(CoreObject):
+    """DeadRegion defines a dead region for patch flow regions operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            face_zonelet_ids: Iterable[int],
+            dead_material_points: List[str],
+            hole_size: float):
+        self._face_zonelet_ids = face_zonelet_ids if isinstance(face_zonelet_ids, np.ndarray) else np.array(face_zonelet_ids, dtype=np.int32) if face_zonelet_ids is not None else None
+        self._dead_material_points = dead_material_points
+        self._hole_size = hole_size
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            face_zonelet_ids: Iterable[int] = None,
+            dead_material_points: List[str] = None,
+            hole_size: float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the DeadRegion.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a DeadRegion object with default parameters.
+        face_zonelet_ids: Iterable[int], optional
+            Face zonelets enclosing dead region.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        dead_material_points: List[str], optional
+            Material points to identify dead region.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        hole_size: float, optional
+            Maximum hole size used for patching.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        json_data: dict, optional
+            JSON dictionary to create a DeadRegion object with provided parameters.
+
+        Examples
+        --------
+        >>> dead_region = prime.DeadRegion(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["faceZoneletIds"] if "faceZoneletIds" in json_data else None,
+                json_data["deadMaterialPoints"] if "deadMaterialPoints" in json_data else None,
+                json_data["holeSize"] if "holeSize" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [face_zonelet_ids, dead_material_points, hole_size])
+            if all_field_specified:
+                self.__initialize(
+                    face_zonelet_ids,
+                    dead_material_points,
+                    hole_size)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "DeadRegion")
+                    json_data = param_json["DeadRegion"] if "DeadRegion" in param_json else {}
+                    self.__initialize(
+                        face_zonelet_ids if face_zonelet_ids is not None else ( DeadRegion._default_params["face_zonelet_ids"] if "face_zonelet_ids" in DeadRegion._default_params else (json_data["faceZoneletIds"] if "faceZoneletIds" in json_data else None)),
+                        dead_material_points if dead_material_points is not None else ( DeadRegion._default_params["dead_material_points"] if "dead_material_points" in DeadRegion._default_params else (json_data["deadMaterialPoints"] if "deadMaterialPoints" in json_data else None)),
+                        hole_size if hole_size is not None else ( DeadRegion._default_params["hole_size"] if "hole_size" in DeadRegion._default_params else (json_data["holeSize"] if "holeSize" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            face_zonelet_ids: Iterable[int] = None,
+            dead_material_points: List[str] = None,
+            hole_size: float = None):
+        """Set the default values of DeadRegion.
+
+        Parameters
+        ----------
+        face_zonelet_ids: Iterable[int], optional
+            Face zonelets enclosing dead region.
+        dead_material_points: List[str], optional
+            Material points to identify dead region.
+        hole_size: float, optional
+            Maximum hole size used for patching.
+        """
+        args = locals()
+        [DeadRegion._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of DeadRegion.
+
+        Examples
+        --------
+        >>> DeadRegion.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in DeadRegion._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._face_zonelet_ids is not None:
+            json_data["faceZoneletIds"] = self._face_zonelet_ids
+        if self._dead_material_points is not None:
+            json_data["deadMaterialPoints"] = self._dead_material_points
+        if self._hole_size is not None:
+            json_data["holeSize"] = self._hole_size
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "face_zonelet_ids :  %s\ndead_material_points :  %s\nhole_size :  %s" % (self._face_zonelet_ids, self._dead_material_points, self._hole_size)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def face_zonelet_ids(self) -> Iterable[int]:
+        """Face zonelets enclosing dead region.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._face_zonelet_ids
+
+    @face_zonelet_ids.setter
+    def face_zonelet_ids(self, value: Iterable[int]):
+        self._face_zonelet_ids = value
+
+    @property
+    def dead_material_points(self) -> List[str]:
+        """Material points to identify dead region.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._dead_material_points
+
+    @dead_material_points.setter
+    def dead_material_points(self, value: List[str]):
+        self._dead_material_points = value
+
+    @property
+    def hole_size(self) -> float:
+        """Maximum hole size used for patching.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._hole_size
+
+    @hole_size.setter
+    def hole_size(self, value: float):
+        self._hole_size = value
+
+class WrapperPatchFlowRegionsParams(CoreObject):
+    """
+    WrapperPatchFlowRegionsParams to define parameters for patch flow regions operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            base_size: float,
+            suggested_part_name: str,
+            number_of_threads: int,
+            dead_regions: List[DeadRegion]):
+        self._base_size = base_size
+        self._suggested_part_name = suggested_part_name
+        self._number_of_threads = number_of_threads
+        self._dead_regions = dead_regions
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            base_size: float = None,
+            suggested_part_name: str = None,
+            number_of_threads: int = None,
+            dead_regions: List[DeadRegion] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the WrapperPatchFlowRegionsParams.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a WrapperPatchFlowRegionsParams object with default parameters.
+        base_size: float, optional
+            Base size to define octree.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        suggested_part_name: str, optional
+            Suggested part name for created patching surfaces.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        number_of_threads: int, optional
+            Number of threads for multithreading.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        dead_regions: List[DeadRegion], optional
+            Array of dead region pairs.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        json_data: dict, optional
+            JSON dictionary to create a WrapperPatchFlowRegionsParams object with provided parameters.
+
+        Examples
+        --------
+        >>> wrapper_patch_flow_regions_params = prime.WrapperPatchFlowRegionsParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["baseSize"] if "baseSize" in json_data else None,
+                json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
+                json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
+                [DeadRegion(model = model, json_data = data) for data in json_data["deadRegions"]] if "deadRegions" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [base_size, suggested_part_name, number_of_threads, dead_regions])
+            if all_field_specified:
+                self.__initialize(
+                    base_size,
+                    suggested_part_name,
+                    number_of_threads,
+                    dead_regions)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "WrapperPatchFlowRegionsParams")
+                    json_data = param_json["WrapperPatchFlowRegionsParams"] if "WrapperPatchFlowRegionsParams" in param_json else {}
+                    self.__initialize(
+                        base_size if base_size is not None else ( WrapperPatchFlowRegionsParams._default_params["base_size"] if "base_size" in WrapperPatchFlowRegionsParams._default_params else (json_data["baseSize"] if "baseSize" in json_data else None)),
+                        suggested_part_name if suggested_part_name is not None else ( WrapperPatchFlowRegionsParams._default_params["suggested_part_name"] if "suggested_part_name" in WrapperPatchFlowRegionsParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
+                        number_of_threads if number_of_threads is not None else ( WrapperPatchFlowRegionsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperPatchFlowRegionsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
+                        dead_regions if dead_regions is not None else ( WrapperPatchFlowRegionsParams._default_params["dead_regions"] if "dead_regions" in WrapperPatchFlowRegionsParams._default_params else [DeadRegion(model = model, json_data = data) for data in (json_data["deadRegions"] if "deadRegions" in json_data else None)]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            base_size: float = None,
+            suggested_part_name: str = None,
+            number_of_threads: int = None,
+            dead_regions: List[DeadRegion] = None):
+        """Set the default values of WrapperPatchFlowRegionsParams.
+
+        Parameters
+        ----------
+        base_size: float, optional
+            Base size to define octree.
+        suggested_part_name: str, optional
+            Suggested part name for created patching surfaces.
+        number_of_threads: int, optional
+            Number of threads for multithreading.
+        dead_regions: List[DeadRegion], optional
+            Array of dead region pairs.
+        """
+        args = locals()
+        [WrapperPatchFlowRegionsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of WrapperPatchFlowRegionsParams.
+
+        Examples
+        --------
+        >>> WrapperPatchFlowRegionsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in WrapperPatchFlowRegionsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._base_size is not None:
+            json_data["baseSize"] = self._base_size
+        if self._suggested_part_name is not None:
+            json_data["suggestedPartName"] = self._suggested_part_name
+        if self._number_of_threads is not None:
+            json_data["numberOfThreads"] = self._number_of_threads
+        if self._dead_regions is not None:
+            json_data["deadRegions"] = [data._jsonify() for data in self._dead_regions]
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "base_size :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s\ndead_regions :  %s" % (self._base_size, self._suggested_part_name, self._number_of_threads, '[' + ''.join('\n' + str(data) for data in self._dead_regions) + ']')
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def base_size(self) -> float:
+        """Base size to define octree.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._base_size
+
+    @base_size.setter
+    def base_size(self, value: float):
+        self._base_size = value
+
+    @property
+    def suggested_part_name(self) -> str:
+        """Suggested part name for created patching surfaces.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._suggested_part_name
+
+    @suggested_part_name.setter
+    def suggested_part_name(self, value: str):
+        self._suggested_part_name = value
+
+    @property
+    def number_of_threads(self) -> int:
+        """Number of threads for multithreading.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._number_of_threads
+
+    @number_of_threads.setter
+    def number_of_threads(self, value: int):
+        self._number_of_threads = value
+
+    @property
+    def dead_regions(self) -> List[DeadRegion]:
+        """Array of dead region pairs.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._dead_regions
+
+    @dead_regions.setter
+    def dead_regions(self, value: List[DeadRegion]):
+        self._dead_regions = value
+
+class WrapperPatchFlowRegionsResult(CoreObject):
+    """Result structure associated with patch holes operation.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            warning_codes: List[WarningCode],
+            error_code: ErrorCode,
+            id: int,
+            name: str):
+        self._warning_codes = warning_codes
+        self._error_code = ErrorCode(error_code)
+        self._id = id
+        self._name = name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            warning_codes: List[WarningCode] = None,
+            error_code: ErrorCode = None,
+            id: int = None,
+            name: str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initializes the WrapperPatchFlowRegionsResult.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a WrapperPatchFlowRegionsResult object with default parameters.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the patch holes operation.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        error_code: ErrorCode, optional
+            Error code associated with a patch holes operation.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        id: int, optional
+            Id of part created with hole patches.
+            This parameter is a Beta. Parameter behavior and name may change in future.
+        name: str, optional
+            Name of part created with hole patches.
+        json_data: dict, optional
+            JSON dictionary to create a WrapperPatchFlowRegionsResult object with provided parameters.
+
+        Examples
+        --------
+        >>> wrapper_patch_flow_regions_result = prime.WrapperPatchFlowRegionsResult(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["id"] if "id" in json_data else None,
+                json_data["name"] if "name" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [warning_codes, error_code, id, name])
+            if all_field_specified:
+                self.__initialize(
+                    warning_codes,
+                    error_code,
+                    id,
+                    name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                else:
+                    param_json = model._communicator.initialize_params(model, "WrapperPatchFlowRegionsResult")
+                    json_data = param_json["WrapperPatchFlowRegionsResult"] if "WrapperPatchFlowRegionsResult" in param_json else {}
+                    self.__initialize(
+                        warning_codes if warning_codes is not None else ( WrapperPatchFlowRegionsResult._default_params["warning_codes"] if "warning_codes" in WrapperPatchFlowRegionsResult._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        error_code if error_code is not None else ( WrapperPatchFlowRegionsResult._default_params["error_code"] if "error_code" in WrapperPatchFlowRegionsResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        id if id is not None else ( WrapperPatchFlowRegionsResult._default_params["id"] if "id" in WrapperPatchFlowRegionsResult._default_params else (json_data["id"] if "id" in json_data else None)),
+                        name if name is not None else ( WrapperPatchFlowRegionsResult._default_params["name"] if "name" in WrapperPatchFlowRegionsResult._default_params else (json_data["name"] if "name" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            warning_codes: List[WarningCode] = None,
+            error_code: ErrorCode = None,
+            id: int = None,
+            name: str = None):
+        """Set the default values of WrapperPatchFlowRegionsResult.
+
+        Parameters
+        ----------
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the patch holes operation.
+        error_code: ErrorCode, optional
+            Error code associated with a patch holes operation.
+        id: int, optional
+            Id of part created with hole patches.
+        name: str, optional
+            Name of part created with hole patches.
+        """
+        args = locals()
+        [WrapperPatchFlowRegionsResult._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of WrapperPatchFlowRegionsResult.
+
+        Examples
+        --------
+        >>> WrapperPatchFlowRegionsResult.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in WrapperPatchFlowRegionsResult._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._id is not None:
+            json_data["id"] = self._id
+        if self._name is not None:
+            json_data["name"] = self._name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "warning_codes :  %s\nerror_code :  %s\nid :  %s\nname :  %s" % ('[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._error_code, self._id, self._name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the patch holes operation.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with a patch holes operation.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def id(self) -> int:
+        """Id of part created with hole patches.
+        This parameter is a Beta. Parameter behavior and name may change in future.
+        """
+        return self._id
+
+    @id.setter
+    def id(self, value: int):
+        self._id = value
+
+    @property
+    def name(self) -> str:
+        """Name of part created with hole patches.
+        """
+        return self._name
+
+    @name.setter
+    def name(self, value: str):
+        self._name = value
