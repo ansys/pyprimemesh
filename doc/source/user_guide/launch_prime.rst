@@ -76,7 +76,7 @@ Here is a Windows code example for running a Python script directly from the com
 
 .. code-block:: shell-session
 
-    "%AWP_ROOT231%\meshing\Prime\runPrime.bat" my_script.py
+    "%AWP_ROOT241%\meshing\Prime\runPrime.bat" my_script.py
 
 
 ========================================
