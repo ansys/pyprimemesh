@@ -41,7 +41,7 @@ This example starts the server in parallel mode on four nodes and specifies the 
 
    .. code-block:: shell-session
 
-      "%AWP_ROOT231%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
+      "%AWP_ROOT241%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
       
       
 #. Connect to the server in Python using the :class:`Client <ansys.meshing.prime.Client>` class:
