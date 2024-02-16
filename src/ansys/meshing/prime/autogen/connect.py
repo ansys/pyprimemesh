@@ -17,7 +17,7 @@ class Connect(CoreObject):
     """
 
     def __init__(self, model: CommunicationManager):
-        """ Initialize Connect. """
+        """ Initialize Connect """
         self._model = model
         self._comm = model._communicator
         command_name = "PrimeMesh::Connect/Construct"
@@ -126,7 +126,7 @@ class Connect(CoreObject):
         return ConnectResults(model = self._model, json_data = result)
 
     def subtract_volumes(self, part_id : int, target_volumes : Iterable[int], cutter_volumes : Iterable[int], params : SubtractVolumesParams) -> SubtractVolumesResults:
-        """ Subtract cutter volumes from target volumes.
+        """ Subtract cutter volumes from target volumes. Volumes should be computed prior to calling this function.
 
 
         Parameters
@@ -215,7 +215,7 @@ class Connect(CoreObject):
         return ConnectResults(model = self._model, json_data = result)
 
     def merge_boundary_nodes(self, part_id : int, face_zonelet_ids : Iterable[int], with_face_zonelet_ids : Iterable[int], params : MergeBoundaryNodesParams) -> MergeBoundaryNodesResults:
-        """ Merge boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
+        """ Merges boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
 
 
         Parameters
@@ -263,3 +263,53 @@ class Connect(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("merge_boundary_nodes", MergeBoundaryNodesResults(model = self._model, json_data = result))
         return MergeBoundaryNodesResults(model = self._model, json_data = result)
+
+    def fuse_face_zonelets(self, part_id : int, source_face_zonelet_ids : Iterable[int], target_face_zonelet_ids : Iterable[int], params : FuseParams) -> FuseResults:
+        """ Perform fuse between overlapping face zonelets within a single part. Surfaces that are fused can then be colocated, merged or removed as directed.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part.
+        source_face_zonelet_ids : Iterable[int]
+            Ids of source face zonelets to be fused.
+        target_face_zonelet_ids : Iterable[int]
+            Ids of target face zonelets to be fused.
+        params : FuseParams
+            Parameters for fuse operation.
+
+        Returns
+        -------
+        FuseResults
+            Returns the FuseResults.
+
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        connect = Connect(model = model)
+        connect.fuse_face_zonelets(part.id, source_face_zonelet_ids, target_face_zonelet_ids, fuse_params)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+        if not isinstance(source_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for source_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(target_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for target_face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, FuseParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is FuseParams.")
+        args = {"part_id" : part_id,
+        "source_face_zonelet_ids" : source_face_zonelet_ids,
+        "target_face_zonelet_ids" : target_face_zonelet_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Connect/FuseFaceZonelets"
+        self._model._print_beta_api_warning("fuse_face_zonelets")
+        self._model._print_logs_before_command("fuse_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("fuse_face_zonelets", FuseResults(model = self._model, json_data = result))
+        return FuseResults(model = self._model, json_data = result)

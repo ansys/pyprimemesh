@@ -30,7 +30,7 @@ class SurfaceUtilities(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def get_bounding_box_of_zonelets(self, zonelets : Iterable[int]) -> BoundingBox:
-        """ Gets bounding box of given zonelets.
+        """ Get bounding box of given zonelets.
 
 
         Parameters
@@ -157,7 +157,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         FillHolesAtPlaneResults
-            Return the FillHolesAtPlaneResults.
+            Returns the FillHolesAtPlaneResults.
 
 
         Examples
@@ -240,7 +240,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         DeleteUnwettedResult
-            Return a DeleteUnwettedResult.
+            Returns a DeleteUnwettedResult.
 
 
         Examples
@@ -277,7 +277,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         ResolveIntersectionResult
-            Return a ResolveIntersectionResult.
+            Returns a ResolveIntersectionResult.
 
 
         Examples
@@ -298,7 +298,7 @@ class SurfaceUtilities(CoreObject):
         return ResolveIntersectionResult(model = self._model, json_data = result)
 
     def smooth_dihedral_face_nodes(self, zonelets : Iterable[int], params : SmoothDihedralFaceNodesParams) -> SmoothDihedralFaceNodesResults:
-        """ Performs a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.
+        """ Perform a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.
 
 
         Parameters
@@ -311,7 +311,7 @@ class SurfaceUtilities(CoreObject):
         Returns
         -------
         SmoothDihedralFaceNodesResults
-            Return a SmoothDihedralFaceNodesResults.
+            Returns a SmoothDihedralFaceNodesResults.
 
 
         Examples
@@ -367,7 +367,7 @@ class SurfaceUtilities(CoreObject):
         return RefineAtContactsResults(model = self._model, json_data = result)
 
     def add_thickness(self, zonelets : Iterable[int], params : AddThicknessParams) -> AddThicknessResults:
-        """ Adds thickness to the selected list of face zonelet ids.
+        """ Add thickness to the selected list of face zonelet ids.
 
 
         Parameters
@@ -401,7 +401,7 @@ class SurfaceUtilities(CoreObject):
         return AddThicknessResults(model = self._model, json_data = result)
 
     def create_boi(self, face_zonelet_ids : Iterable[int], params : CreateBOIParams) -> CreateBOIResults:
-        """ Creates BOI to the selected list of face zonelet ids.
+        """ Create BOI to the selected list of face zonelet ids.
 
 
         Parameters
@@ -435,7 +435,7 @@ class SurfaceUtilities(CoreObject):
         return CreateBOIResults(model = self._model, json_data = result)
 
     def create_contact_patch(self, source_zonelets : Iterable[int], target_zonelets : Iterable[int], params : CreateContactPatchParams) -> CreateContactPatchResults:
-        """ Creates contact patch by offsetting the target zonelets.
+        """ Create contact patch by offsetting the target zonelets.
 
 
         Parameters
@@ -474,7 +474,7 @@ class SurfaceUtilities(CoreObject):
         return CreateContactPatchResults(model = self._model, json_data = result)
 
     def stretch_free_boundaries(self, face_zonelet_ids : Iterable[int], params : StretchFreeBoundariesParams) -> StretchFreeBoundariesResults:
-        """ Stretches free boundaries of each zonelet.
+        """ Stretch free boundaries of each zonelet.
 
 
         Parameters

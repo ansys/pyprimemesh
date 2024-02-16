@@ -12,7 +12,7 @@ class BoundaryFittedSpline(CoreObject):
     """
 
     def __init__(self, model: CommunicationManager):
-        """ Initialize BoundaryFittedSpline. """
+        """ Initialize BoundaryFittedSpline """
         self._model = model
         self._comm = model._communicator
         command_name = "PrimeMesh::BoundaryFittedSpline/Construct"
@@ -31,7 +31,7 @@ class BoundaryFittedSpline(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def create_boundary_fitted_spline(self, part_id : int, cell_zonelet_ids : Iterable[int], boundary_fitted_spline_params : BoundaryFittedSplineParams) -> IGAResults:
-        """ Creates boundary fitted spline for structured hex-mesh.
+        """ Create boundary fitted spline for structured hex-mesh.
 
         The hex-mesh can be structured in blocks but must be conformally connected.
         That is, each block must have six sided volume and must be connected to other blocks through unique face.
@@ -95,7 +95,7 @@ class BoundaryFittedSpline(CoreObject):
         Returns
         -------
         IGAResults
-            Returns the IGAResults structure.
+            Returns the IGAResults Structure.
 
 
         Examples

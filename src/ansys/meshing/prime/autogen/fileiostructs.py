@@ -19,6 +19,8 @@ class CadReaderRoute(enum.IntEnum):
     """Denotes WorkBench as CAD reader route."""
     SPACECLAIM = 3
     """Denotes SpaceClaim as CAD reader route."""
+    DISCOVERY = 4
+    """Denotes Discovery as CAD reader route."""
 
 class PartCreationType(enum.IntEnum):
     """Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
@@ -1371,7 +1373,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.1', '241', 'v241', '24R1'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1470,7 +1472,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.1', '241', 'v241', '24R1'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1549,7 +1551,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def ansys_release(self) -> str:
-        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.1', '241', 'v241', '24R1'.
+        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
         """
         return self._ansys_release
 

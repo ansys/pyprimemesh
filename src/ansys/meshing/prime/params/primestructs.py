@@ -38,4 +38,5 @@ from ansys.meshing.prime.autogen.volumecontrolstructs import *
 from ansys.meshing.prime.autogen.volumemeshtoolstructs import *
 from ansys.meshing.prime.autogen.volumesearchstructs import *
 from ansys.meshing.prime.autogen.volumesweeperstructs import *
+from ansys.meshing.prime.autogen.vtcomposerstructs import *
 from ansys.meshing.prime.autogen.wrapperstructs import *

@@ -62,7 +62,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteResults(model = self, json_data = result)
 
     def merge_parts(self, part_ids : Iterable[int], params : MergePartsParams) -> MergePartsResults:
-        """ Merge given parts into one.
+        """ Merges given parts into one.
 
 
         Parameters
@@ -97,7 +97,7 @@ class Model(CoreObject, CommunicationManager):
         return MergePartsResults(model = self, json_data = result)
 
     def set_global_sizing_params(self, params : GlobalSizingParams) -> SetSizingResults:
-        """ Set the global sizing parameters to initialize surfer parameters and various size control parameters.
+        """ Sets the global sizing parameters to initialize surfer parameters and various size control parameters.
 
 
         Parameters
@@ -169,7 +169,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def activate_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Activate the sizefields with the given sizefield ids.
+        """ Activate the sizefields identified by the given sizefield ids.
 
 
         Parameters
@@ -192,7 +192,7 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("activate_volumetric_size_fields")
 
     def deactivate_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Deactivate the sizefields with the given sizefield ids.
+        """ Deactivate the sizefields identified by the given sizefield ids.
 
 
         Parameters
@@ -215,7 +215,7 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("deactivate_volumetric_size_fields")
 
     def delete_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Delete the sizefields with the given sizefield ids.
+        """ Delete the sizefields identified by the given sizefield ids.
 
 
         Parameters
@@ -337,7 +337,7 @@ class Model(CoreObject, CommunicationManager):
         return CreateZoneResults(model = self, json_data = result)
 
     def delete_zone(self, zone_id : int) -> DeleteZoneResults:
-        """ Deletes zone with the given id.
+        """ Deletes zone identified with the given id.
 
 
         Parameters
@@ -368,7 +368,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteZoneResults(model = self, json_data = result)
 
     def get_zone_by_name(self, zone_name : str) -> int:
-        """ Gets the zone with the provided name.
+        """ Gets the zone by name.
 
 
         Parameters
@@ -410,7 +410,7 @@ class Model(CoreObject, CommunicationManager):
         Returns
         -------
         str
-            Return the zone name. Return empty name if the id is invalid.
+            Return the name. Return empty name if the id is invalid.
 
 
         Examples
@@ -430,7 +430,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def set_suggested_zone_name(self, id : int, name : str) -> SetNameResults:
-        """ Sets the unique name for zone with given id based on the suggested name.
+        """ Sets the unique name for zone with given id based on the given suggested name.
 
 
         Parameters
