@@ -33,19 +33,19 @@ graphics = [
   "pyvista>=0.32.0",
 ]
 tests = [
-  "pytest==8.0.0",
+  "pytest==8.0.1",
   "pytest-cov==4.1.0",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.0.0",
   "pyvista[trame]==0.43.1"
 ]
 doc = [
-  "ansys-sphinx-theme==0.13.1",
+  "ansys-sphinx-theme==0.13.4",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.6.0",
   "Sphinx==7.2.6",
   "pyvista==0.43.1",
-  "sphinx-autodoc-typehints==1.25.3",
+  "sphinx-autodoc-typehints==2.0.0",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.15.0",
   "sphinx-notfound-page==1.0.0",
