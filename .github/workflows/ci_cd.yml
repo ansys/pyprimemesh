@@ -15,7 +15,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '24.1.0.dev10'
+  DOCKER_IMAGE_TAG: '24.2.0.dev2'
   MAIN_PYTHON_VERSION: '3.9'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
@@ -124,7 +124,7 @@ jobs:
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
 
       - name: Restore images cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: tests/graphics/image_cache
           key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
@@ -147,7 +147,7 @@ jobs:
           path: tests/graphics/image_cache
           retention-days: 7
       
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         name: 'Upload coverage to CodeCov'
 
   package:

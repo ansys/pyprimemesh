@@ -278,18 +278,18 @@ class ErrorCode(enum.IntEnum):
     """Export STL failed. List of part ids is empty."""
     EXPORTSTLFAILEDWITHINCORRECTPARTID = 558
     """Export STL failed. Part id is incorrect."""
-    MATCHEDMESHOPTIONINVALID = 850
+    FUSEOPTIONINVALID = 850
     """Invalid option chosen to connect two different parts."""
-    COLOCATEMATCHEDNODESFAILED = 851
-    """Colocation of matched nodes failed."""
+    COLOCATEFUSEDNODESFAILED = 851
+    """Colocation of fused nodes failed."""
     IMPRINTBOUNDARYNODESFAILED = 852
     """Imprint of boundary nodes failed."""
     IMPRINTBOUNDARYEDGESFAILED = 853
     """Imprint of boundary edges failed."""
     SPLITINTERSECTINGBOUNDARYEDGESFAILED = 854
     """Splitting of intersecting boundary edges failed."""
-    MATCHINTERIORFAILED = 855
-    """Matching of interior region of overlap failed."""
+    FUSEINTERIORFAILED = 855
+    """Fusing interior region of overlap failed."""
     TOLERANCEVALUEINVALID = 856
     """Invalid tolerance value specified."""
     SOURCEORTARGETNOTSPECIFIED = 857
@@ -536,6 +536,18 @@ class ErrorCode(enum.IntEnum):
     """Wrapper gap closing failed."""
     WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR = 3443
     """Resolution Factor should be greater than 0 but less than or equal to 1."""
+    WRAPPERLEAKINGFLUIDREGIONS = 3444
+    """Two or more fluid regions leaking into each other.
+    This parameter is a Beta. Parameter behavior and name may change in future."""
+    WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE = 3445
+    """Hole size specified for dead region should be positive double.
+    This parameter is a Beta. Parameter behavior and name may change in future."""
+    WRAPPERPATCHFLOWREGIONS_FAILED = 3446
+    """Unable to create patch surfaces.
+    This parameter is a Beta. Parameter behavior and name may change in future."""
+    WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE = 3447
+    """Too small hole size provided for dead region.
+    This parameter is a Beta. Parameter behavior and name may change in future."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -684,6 +696,8 @@ class WarningCode(enum.IntEnum):
     """Face zonelets have no volume associated to them."""
     JOINEDZONELETSFROMMULTIPLEVOLUMES = 5605
     """Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets."""
+    FAILEDTOUPDATEVOLUMES = 5606
+    """Volumes are not updated after performing the operation. Compute the volumes again."""
     WRAPPER_SIZECONTROLNOTDEFINED = 6001
     """No size controls provided for wrapper."""
     WRAPPER_SIZECONTROLNOTSUPPORTED = 6002
@@ -708,6 +722,10 @@ class WarningCode(enum.IntEnum):
     """Mesh has invalid shape."""
     MESHHASLEFTHANDEDNESSFACES = 7107
     """Mesh has invalid shape."""
+    NOCADGEOMETRYFOUND = 7500
+    """CAD geometry not found for some or all topo entities. Skipped projection for those topo entities."""
+    NOCADGEOMETRYPROJECTONFACETS = 7501
+    """CAD geometry not found for some or all topo entities. Projected on facets for those topo entites."""
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
