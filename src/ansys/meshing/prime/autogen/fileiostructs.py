@@ -2484,7 +2484,7 @@ class ExportMapdlCdbParams(CoreObject):
         model: Model
             Model to create a ExportMapdlCdbParams object with default parameters.
         material_properties: str, optional
-            Materials in CDB format that will be added to the file.
+            Materials in CDB format to be added to the file.
             This parameter is a Beta. Parameter behavior and name may change in future.
         boundary_conditions: str, optional
             Boundary conditions in CDB format that will be appended to the file.
@@ -2559,7 +2559,7 @@ class ExportMapdlCdbParams(CoreObject):
         Parameters
         ----------
         material_properties: str, optional
-            Materials in CDB format that will be added to the file.
+            Materials in CDB format to be added to the file.
         boundary_conditions: str, optional
             Boundary conditions in CDB format that will be appended to the file.
         write_cells: bool, optional
@@ -2610,7 +2610,7 @@ class ExportMapdlCdbParams(CoreObject):
 
     @property
     def material_properties(self) -> str:
-        """Materials in CDB format that will be added to the file.
+        """Materials in CDB format to be added to the file.
         This parameter is a Beta. Parameter behavior and name may change in future.
         """
         return self._material_properties
@@ -2776,7 +2776,7 @@ class ExportMapdlCdbResults(CoreObject):
         self._error_code = value
 
 class ExportLSDynaIgaKeywordFileParams(CoreObject):
-    """Parameters for exporting LS-Dyna IGA keyword file.
+    """Parameters for exporting LS-DYNA IGA keyword file.
     """
     _default_params = {}
 

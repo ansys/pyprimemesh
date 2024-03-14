@@ -46,6 +46,7 @@ prime_error_messages = {
     ErrorCode.INVALIDPRISMCONTROLS: "Conflict of prism settings on zonelets or invalid prism controls selected.",
     ErrorCode.PERIODICSURFACESNOTSUPPORTEDFORPRISMS: "Periodic surfaces selected for prism generation, not supported.",
     ErrorCode.ALREADYVOLUMEMESHED: "Already volume meshed.",
+    ErrorCode.INCREMENTALVOLUMEMESHINGNOTSUPPORTED: "Incremental volume meshing is not supported.",
     ErrorCode.VOLUMESNOTUPTODATE: "Volumes are not up to date. Update volumes and try again.",
     ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS: "Quadratic meshing is supported only for tetrahedrons.",
     ErrorCode.NOACTIVESFFOUND: "Active size fields are not available.",
@@ -63,6 +64,7 @@ prime_error_messages = {
     ErrorCode.MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
     ErrorCode.MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
     ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART: "Not supported for part with higher order mesh.",
+    ErrorCode.NOTSUPPORTEDFORPOLYMESHPART: "Not supported for part with poly mesh.",
     ErrorCode.SPHEREATINVALIDNORMALNODESFAILED: "Sphere creation at invalid normal nodes failed.",
     ErrorCode.INVALIDPLANEPOINTS: "Invalid plane points. You need to provide 3 points (9 coordinates).",
     ErrorCode.PLANECOLLINEARPOINTS: "Collinear or duplicate points given to define plane.",
@@ -197,6 +199,7 @@ prime_error_messages = {
     ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE: "Hole size specified for dead region should be positive double.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_FAILED: "Failed to create patching surfaces.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Too small hole size provided for dead region.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE: "Base size specified for patching should be positive double.",
     ErrorCode.INVALIDWRAPPERCONTROL: "Invalid wrapper control.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE: "Gap size specified for close gaps should be positive double.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE: "Scope specified for close gaps is invalid.",
@@ -303,6 +306,7 @@ prime_error_messages = {
     ErrorCode.SOURCETARGETZONELETSNOTFIT: "Source and target zonelets do not fit to thin volume mesh.",
     ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Min size is more than max size.",
     ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contains negative value.",
+    ErrorCode.FACEZONELETSHAVECELLSCONNECTED: "Face zonelets have cells connected.",
 }
 
 prime_warning_messages = {
@@ -346,9 +350,15 @@ prime_warning_messages = {
     WarningCode.FACEZONELETSWITHOUTVOLUMES: "Face zonelets have no volume associated to them.",
     WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES: "Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets.",
     WarningCode.FAILEDTOUPDATEVOLUMES: "Volumes are not updated after performing the operation.  Compute the volumes again.",
+    WarningCode.UNPROCESSEDKEYWORDSINABAQUSFILE: "Some keywords are not processed. Check the unprocessed keywords in the summary log of the import results.",
+    WarningCode.EXPORTMAPDLANALYSISSETTINGSFAILED: "Export of analysis settings to separate file failed.",
+    WarningCode.WRITINGCONTACTPAIRSSKIPPED: "Writing of contact pairs skipped due to no surface or surface interaction definition.",
+    WarningCode.WRITINGTIESSKIPPED: "Writing of ties skipepd due to no surface definition.",
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
     WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topo entities. Skipped projection for those topo entities.",
     WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topo entities. Projected on facets for those topo entities.",
+    WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use Fuse operation to remove it.",
+    WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use Intersect operation to remove it.",
 }
 
 

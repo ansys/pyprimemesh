@@ -506,3 +506,42 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("stretch_free_boundaries", StretchFreeBoundariesResults(model = self._model, json_data = result))
         return StretchFreeBoundariesResults(model = self._model, json_data = result)
+
+    def triangulate_face_zonelets(self, face_zonelet_ids : Iterable[int], params : TriangulateParams) -> TriangulateResults:
+        """ Split faces in zonelets to get triangular faces.
+
+
+        Parameters
+        ----------
+        face_zonelet_ids : Iterable[int]
+            Ids of face zonelets.
+        params : TriangulateParams
+            Parameters to control the split operation.
+
+        Returns
+        -------
+        TriangulateResults
+            Returns the TriangulateResults.
+
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> result = surf_utils.triangulate_face_zonelets(face_zonelet_ids, params)
+
+        """
+        if not isinstance(face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+        if not isinstance(params, TriangulateParams):
+            raise TypeError("Invalid argument type passed for params, valid argument type is TriangulateParams.")
+        args = {"face_zonelet_ids" : face_zonelet_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/TriangulateFaceZonelets"
+        self._model._print_beta_api_warning("triangulate_face_zonelets")
+        self._model._print_logs_before_command("triangulate_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("triangulate_face_zonelets", TriangulateResults(model = self._model, json_data = result))
+        return TriangulateResults(model = self._model, json_data = result)

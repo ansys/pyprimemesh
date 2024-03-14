@@ -1901,10 +1901,14 @@ class FuseResults(CoreObject):
             self,
             fused_pairs: int,
             fused_area: float,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode],
+            intersecting_locations: Iterable[float]):
         self._fused_pairs = fused_pairs
         self._fused_area = fused_area
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
+        self._intersecting_locations = intersecting_locations if isinstance(intersecting_locations, np.ndarray) else np.array(intersecting_locations, dtype=np.double) if intersecting_locations is not None else None
 
     def __init__(
             self,
@@ -1912,6 +1916,8 @@ class FuseResults(CoreObject):
             fused_pairs: int = None,
             fused_area: float = None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            intersecting_locations: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
         """Initializes the FuseResults.
@@ -1926,6 +1932,10 @@ class FuseResults(CoreObject):
             The total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
             Error Code associated with failure of fuse operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with fuse operation.
+        intersecting_locations: Iterable[float], optional
+            Contains locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersectingLocations will be in multiples of three. For example, zero, three, six, nine and so on. Each triplet corresponds to coordinates in x, y and z. For example, if the intersectingLocations contains (a, b, c, d, e, f), then (a, b, c) will represent the first location and (d, e, f) will represent the second location.
         json_data: dict, optional
             JSON dictionary to create a FuseResults object with provided parameters.
 
@@ -1937,14 +1947,18 @@ class FuseResults(CoreObject):
             self.__initialize(
                 json_data["fusedPairs"] if "fusedPairs" in json_data else None,
                 json_data["fusedArea"] if "fusedArea" in json_data else None,
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code])
+            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code, warning_codes, intersecting_locations])
             if all_field_specified:
                 self.__initialize(
                     fused_pairs,
                     fused_area,
-                    error_code)
+                    error_code,
+                    warning_codes,
+                    intersecting_locations)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass model or specify all properties")
@@ -1954,7 +1968,9 @@ class FuseResults(CoreObject):
                     self.__initialize(
                         fused_pairs if fused_pairs is not None else ( FuseResults._default_params["fused_pairs"] if "fused_pairs" in FuseResults._default_params else (json_data["fusedPairs"] if "fusedPairs" in json_data else None)),
                         fused_area if fused_area is not None else ( FuseResults._default_params["fused_area"] if "fused_area" in FuseResults._default_params else (json_data["fusedArea"] if "fusedArea" in json_data else None)),
-                        error_code if error_code is not None else ( FuseResults._default_params["error_code"] if "error_code" in FuseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+                        error_code if error_code is not None else ( FuseResults._default_params["error_code"] if "error_code" in FuseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( FuseResults._default_params["warning_codes"] if "warning_codes" in FuseResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        intersecting_locations if intersecting_locations is not None else ( FuseResults._default_params["intersecting_locations"] if "intersecting_locations" in FuseResults._default_params else (json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1966,7 +1982,9 @@ class FuseResults(CoreObject):
     def set_default(
             fused_pairs: int = None,
             fused_area: float = None,
-            error_code: ErrorCode = None):
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            intersecting_locations: Iterable[float] = None):
         """Set the default values of FuseResults.
 
         Parameters
@@ -1977,6 +1995,10 @@ class FuseResults(CoreObject):
             The total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
             Error Code associated with failure of fuse operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with fuse operation.
+        intersecting_locations: Iterable[float], optional
+            Contains locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersectingLocations will be in multiples of three. For example, zero, three, six, nine and so on. Each triplet corresponds to coordinates in x, y and z. For example, if the intersectingLocations contains (a, b, c, d, e, f), then (a, b, c) will represent the first location and (d, e, f) will represent the second location.
         """
         args = locals()
         [FuseResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2001,11 +2023,15 @@ class FuseResults(CoreObject):
             json_data["fusedArea"] = self._fused_area
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._intersecting_locations is not None:
+            json_data["intersectingLocations"] = self._intersecting_locations
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s" % (self._fused_pairs, self._fused_area, self._error_code)
+        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s\nwarning_codes :  %s\nintersecting_locations :  %s" % (self._fused_pairs, self._fused_area, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._intersecting_locations)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -2038,3 +2064,23 @@ class FuseResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with fuse operation.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
+    @property
+    def intersecting_locations(self) -> Iterable[float]:
+        """Contains locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersectingLocations will be in multiples of three. For example, zero, three, six, nine and so on. Each triplet corresponds to coordinates in x, y and z. For example, if the intersectingLocations contains (a, b, c, d, e, f), then (a, b, c) will represent the first location and (d, e, f) will represent the second location.
+        """
+        return self._intersecting_locations
+
+    @intersecting_locations.setter
+    def intersecting_locations(self, value: Iterable[float]):
+        self._intersecting_locations = value
