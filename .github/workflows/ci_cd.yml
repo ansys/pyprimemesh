@@ -15,11 +15,11 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '24.2.0.dev2'
-  MAIN_PYTHON_VERSION: '3.9'
-  PACKAGE_NAME: 'ansys-meshing-prime'
-  PACKAGE_NAMESPACE: 'ansys.meshing.prime'
-  DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
+  DOCKER_IMAGE_TAG: "24.2.0.dev4"
+  MAIN_PYTHON_VERSION: "3.9"
+  PACKAGE_NAME: "ansys-meshing-prime"
+  PACKAGE_NAMESPACE: "ansys.meshing.prime"
+  DOCUMENTATION_CNAME: "prime.docs.pyansys.com"
   RESET_IMAGE_CACHE: 0
 
 concurrency:
@@ -63,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
         should-release:
           - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
         exclude:
@@ -83,7 +83,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [docs-style]
     steps:
-
       - name: Login in Github Container registry
         uses: docker/login-action@v3
         with:
@@ -109,7 +108,7 @@ jobs:
 
   testing:
     name: Run Unit Tests
-    needs: [ smoke-tests ]
+    needs: [smoke-tests]
     runs-on: ubuntu-latest
 
     steps:
@@ -121,7 +120,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Ansys Prime Server
-        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}          
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Restore images cache
         uses: actions/cache@v4
@@ -138,7 +137,7 @@ jobs:
           ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-      
+
       - name: Upload PyVista generated images (cache and results)
         if: always()
         uses: actions/upload-artifact@v4
@@ -146,9 +145,9 @@ jobs:
           name: pytest-pyvista-images-${{ runner.os }}
           path: tests/graphics/image_cache
           retention-days: 7
-      
+
       - uses: codecov/codecov-action@v4
-        name: 'Upload coverage to CodeCov'
+        name: "Upload coverage to CodeCov"
 
   package:
     name: Package library
