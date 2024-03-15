@@ -1920,7 +1920,7 @@ class FuseResults(CoreObject):
             intersecting_locations: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FuseResults.
+        """Initialize a ``FuseResults`` object.
 
         Parameters
         ----------
