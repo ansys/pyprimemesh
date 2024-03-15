@@ -68,7 +68,7 @@ class OverlapPairs(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a OverlapPairs object with default parameters.
+            Model to create a ``OverlapPairs`` object with default parameters.
         zone_id0: int, optional
             Id of one overlapping face zonelet.
         zone_id1: int, optional
@@ -195,7 +195,7 @@ class OverlapSearchResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a OverlapSearchResults object with default parameters.
+            Model to create a ``OverlapSearchResults`` object with default parameters.
         n_pairs: int, optional
             Number of pairs.
         overlap_pairs: List[OverlapPairs], optional
@@ -339,7 +339,7 @@ class ConnectResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ConnectResults object with default parameters.
+            Model to create a ``ConnectResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         warning_codes: List[WarningCode], optional
@@ -472,7 +472,7 @@ class IntersectParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a IntersectParams object with default parameters.
+            Model to create a ``IntersectParams`` object with default parameters.
         tolerance: float, optional
             Intersection tolerance.
         use_absolute_tolerance: bool, optional
@@ -665,7 +665,7 @@ class JoinParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a JoinParams object with default parameters.
+            Model to create a ``JoinParams`` object with default parameters.
         tolerance: float, optional
             Overlap tolerance between overlapping zonelets.
         use_absolute_tolerance: bool, optional
@@ -852,7 +852,7 @@ class SubtractVolumesParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a SubtractVolumesParams object with default parameters.
+            Model to create a ``SubtractVolumesParams`` object with default parameters.
         ignore_face_zonelets: Iterable[int], optional
             Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
@@ -998,7 +998,7 @@ class SubtractVolumesResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a SubtractVolumesResults object with default parameters.
+            Model to create a ``SubtractVolumesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
         warning_codes: List[WarningCode], optional
@@ -1131,7 +1131,7 @@ class StitchParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a StitchParams object with default parameters.
+            Model to create a ``StitchParams`` object with default parameters.
         tolerance: float, optional
             Distance tolerance for stitching boundaries.
         use_absolute_tolerance: bool, optional
@@ -1318,7 +1318,7 @@ class MergeBoundaryNodesParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a MergeBoundaryNodesParams object with default parameters.
+            Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
         tolerance: float, optional
         use_absolute_tolerance: bool, optional
         merge_node_type: MergeNodeType, optional
@@ -1456,7 +1456,7 @@ class MergeBoundaryNodesResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a MergeBoundaryNodesResults object with default parameters.
+            Model to create a ``MergeBoundaryNodesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of merge nodes operation.
         json_data: dict, optional
@@ -1590,7 +1590,7 @@ class FuseParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a FuseParams object with default parameters.
+            Model to create a ``FuseParams`` object with default parameters.
         use_absolute_tolerance: bool, optional
             When true, gap tolerance and side tolerance provided are absolute values.
         gap_tolerance: float, optional
@@ -1925,7 +1925,7 @@ class FuseResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a FuseResults object with default parameters.
+            Model to create a ``FuseResults`` object with default parameters.
         fused_pairs: int, optional
             Number of face region pairs that were fused.
         fused_area: float, optional

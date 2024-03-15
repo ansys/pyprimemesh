@@ -111,7 +111,7 @@ class FileReadParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a FileReadParams object with default parameters.
+            Model to create a ``FileReadParams`` object with default parameters.
         append: bool, optional
             Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
         json_data: dict, optional
@@ -215,7 +215,7 @@ class SizeFieldFileReadResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a SizeFieldFileReadResults object with default parameters.
+            Model to create a ``SizeFieldFileReadResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code if size field file read operation was unsuccessful.
         size_field_ids: Iterable[int], optional
@@ -336,7 +336,7 @@ class FileReadResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a FileReadResults object with default parameters.
+            Model to create a ``FileReadResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code if file read operation was unsuccessful.
         json_data: dict, optional
@@ -435,7 +435,7 @@ class FileWriteParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a FileWriteParams object with default parameters.
+            Model to create a ``FileWriteParams`` object with default parameters.
         json_data: dict, optional
             JSON dictionary to create a ``FileWriteParams`` object with provided parameters.
 
@@ -519,7 +519,7 @@ class FileWriteResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a FileWriteResults object with default parameters.
+            Model to create a ``FileWriteResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code if file write operation is unsuccessful.
         warning_codes: List[WarningCode], optional
@@ -640,7 +640,7 @@ class ReadSizeFieldParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ReadSizeFieldParams object with default parameters.
+            Model to create a ``ReadSizeFieldParams`` object with default parameters.
         append: bool, optional
             Option to append the size fields from file.
         json_data: dict, optional
@@ -741,7 +741,7 @@ class WriteSizeFieldParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a WriteSizeFieldParams object with default parameters.
+            Model to create a ``WriteSizeFieldParams`` object with default parameters.
         write_only_active_size_fields: bool, optional
             Option to write only active size fields into the file.
         json_data: dict, optional
@@ -842,7 +842,7 @@ class ExportFluentCaseParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportFluentCaseParams object with default parameters.
+            Model to create a ``ExportFluentCaseParams`` object with default parameters.
         cff_format: bool, optional
             Option to specify whether to export Fluent case file in CFF format (.cas.h5) or legacy format (.cas, .cas.gz).
         json_data: dict, optional
@@ -941,7 +941,7 @@ class ExportFluentMeshingMeshParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportFluentMeshingMeshParams object with default parameters.
+            Model to create a ``ExportFluentMeshingMeshParams`` object with default parameters.
         json_data: dict, optional
             JSON dictionary to create a ``ExportFluentMeshingMeshParams`` object with provided parameters.
 
@@ -1022,7 +1022,7 @@ class ExportSTLParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportSTLParams object with default parameters.
+            Model to create a ``ExportSTLParams`` object with default parameters.
         part_ids: Iterable[int], optional
             Ids of parts to export.
         json_data: dict, optional
@@ -1138,7 +1138,7 @@ class CadRefacetingParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a CadRefacetingParams object with default parameters.
+            Model to create a ``CadRefacetingParams`` object with default parameters.
         cad_faceter: CadFaceter, optional
             Specify the available choices for faceter. The available options are Acis, Parasolid.
         faceting_resolution: CadRefacetingResolution, optional
@@ -1369,7 +1369,7 @@ class ImportCadParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportCadParams object with default parameters.
+            Model to create a ``ImportCadParams`` object with default parameters.
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
@@ -1673,7 +1673,7 @@ class ImportCadResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportCadResults object with default parameters.
+            Model to create a ``ImportCadResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         cad_parameters: Dict[str, Union[str, int, float, bool]], optional
@@ -1797,7 +1797,7 @@ class ImportFluentMeshingMeshParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportFluentMeshingMeshParams object with default parameters.
+            Model to create a ``ImportFluentMeshingMeshParams`` object with default parameters.
         append: bool, optional
             Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
         enable_multi_threading: bool, optional
@@ -1921,7 +1921,7 @@ class ImportFluentMeshingMeshResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportFluentMeshingMeshResults object with default parameters.
+            Model to create a ``ImportFluentMeshingMeshResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         new_parts_created: Iterable[int], optional
@@ -2042,7 +2042,7 @@ class ImportFluentCaseParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportFluentCaseParams object with default parameters.
+            Model to create a ``ImportFluentCaseParams`` object with default parameters.
         append: bool, optional
             Option to append imported case instead of resetting model to imported case.
         json_data: dict, optional
@@ -2143,7 +2143,7 @@ class ImportFluentCaseResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportFluentCaseResults object with default parameters.
+            Model to create a ``ImportFluentCaseResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
@@ -2247,7 +2247,7 @@ class ImportMapdlCdbParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportMapdlCdbParams object with default parameters.
+            Model to create a ``ImportMapdlCdbParams`` object with default parameters.
         drop_mid_nodes: bool, optional
         append: bool, optional
         json_data: dict, optional
@@ -2366,7 +2366,7 @@ class ImportMapdlCdbResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportMapdlCdbResults object with default parameters.
+            Model to create a ``ImportMapdlCdbResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
@@ -2482,7 +2482,7 @@ class ExportMapdlCdbParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportMapdlCdbParams object with default parameters.
+            Model to create a ``ExportMapdlCdbParams`` object with default parameters.
         material_properties: str, optional
             Materials in CDB format to be added to the file.
             This is a beta parameter. The behavior and name may change in the future.
@@ -2695,7 +2695,7 @@ class ExportMapdlCdbResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportMapdlCdbResults object with default parameters.
+            Model to create a ``ExportMapdlCdbResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
@@ -2794,7 +2794,7 @@ class ExportLSDynaIgaKeywordFileParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportLSDynaIgaKeywordFileParams object with default parameters.
+            Model to create a ``ExportLSDynaIgaKeywordFileParams`` object with default parameters.
         json_data: dict, optional
             JSON dictionary to create a ``ExportLSDynaIgaKeywordFileParams`` object with provided parameters.
 
@@ -2878,7 +2878,7 @@ class ExportBoundaryFittedSplineParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ExportBoundaryFittedSplineParams object with default parameters.
+            Model to create a ``ExportBoundaryFittedSplineParams`` object with default parameters.
         id_offset: int, optional
             Offset value for IGA entity ids between parts.
         id_start: int, optional
@@ -2997,7 +2997,7 @@ class ImportAbaqusParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportAbaqusParams object with default parameters.
+            Model to create a ``ImportAbaqusParams`` object with default parameters.
         json_data: dict, optional
             JSON dictionary to create a ``ImportAbaqusParams`` object with provided parameters.
 
@@ -3078,7 +3078,7 @@ class ImportAbaqusResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to create a ImportAbaqusResults object with default parameters.
+            Model to create a ``ImportAbaqusResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
