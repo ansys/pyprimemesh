@@ -514,7 +514,7 @@ class SurfaceUtilities(CoreObject):
         Parameters
         ----------
         face_zonelet_ids : Iterable[int]
-            IDs of face zonelets.
+            Ids of face zonelets.
         params : TriangulateParams
             Parameters to control the split operation.
 

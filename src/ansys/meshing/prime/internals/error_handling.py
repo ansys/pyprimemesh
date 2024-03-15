@@ -357,8 +357,8 @@ prime_warning_messages = {
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
     WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topoentities. Skipped projection for those topoentities.",
     WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topoentities. Mesh node projected on facets for those topoentities.",
-    WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use fuse operation to remove it.",
-    WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use intersect operation to remove it.",
+    WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use Fuse operation to remove it.",
+    WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use Intersect operation to remove it.",
 }
 
 

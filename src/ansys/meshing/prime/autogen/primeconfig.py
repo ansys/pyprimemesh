@@ -690,9 +690,9 @@ class WarningCode(enum.IntEnum):
     ALIGN_OPERATIONINTERRUPTED = 1900
     """Align operation interrupted."""
     FUSEOVERLAPREMOVALINCOMPLETE = 4500
-    """Self intersections found. Use fuse operation to remove it."""
+    """Self intersections found. Use Fuse operation to remove it."""
     REMOVEOVERLAPWITHINTERSECT = 4501
-    """Self intersections found. Use intersect operation to remove it."""
+    """Self intersections found. Use Intersect operation to remove it."""
     IGA_NOGEOMZONELETFORSPLINEFITTING = 5001
     """Invalid input for IGA."""
     NOHOLESFOUNDONPLANE = 5501
