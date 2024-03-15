@@ -2067,7 +2067,7 @@ class FuseResults(CoreObject):
 
     @property
     def warning_codes(self) -> List[WarningCode]:
-        """Warning codes associated with fuse operation.
+        """Warning codes associated with the fuse operation.
         """
         return self._warning_codes
 
