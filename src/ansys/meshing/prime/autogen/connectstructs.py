@@ -63,18 +63,18 @@ class OverlapPairs(CoreObject):
             zone_id1: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the OverlapPairs.
+        """Initialize a ``OverlapPairs`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a OverlapPairs object with default parameters.
+            Model to create a ``OverlapPairs`` object with default parameters.
         zone_id0: int, optional
             Id of one overlapping face zonelet.
         zone_id1: int, optional
             Id of other overlapping face zonelet.
         json_data: dict, optional
-            JSON dictionary to create a OverlapPairs object with provided parameters.
+            JSON dictionary to create a ``OverlapPairs`` object with provided parameters.
 
         Examples
         --------
@@ -92,7 +92,7 @@ class OverlapPairs(CoreObject):
                     zone_id1)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "OverlapPairs")
                     json_data = param_json["OverlapPairs"] if "OverlapPairs" in param_json else {}
@@ -110,7 +110,7 @@ class OverlapPairs(CoreObject):
     def set_default(
             zone_id0: int = None,
             zone_id1: int = None):
-        """Set the default values of OverlapPairs.
+        """Set the default values of the ``OverlapPairs`` object.
 
         Parameters
         ----------
@@ -124,7 +124,7 @@ class OverlapPairs(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of OverlapPairs.
+        """Print the default values of ``OverlapPairs`` object.
 
         Examples
         --------
@@ -190,12 +190,12 @@ class OverlapSearchResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the OverlapSearchResults.
+        """Initialize a ``OverlapSearchResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a OverlapSearchResults object with default parameters.
+            Model to create a ``OverlapSearchResults`` object with default parameters.
         n_pairs: int, optional
             Number of pairs.
         overlap_pairs: List[OverlapPairs], optional
@@ -203,7 +203,7 @@ class OverlapSearchResults(CoreObject):
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a OverlapSearchResults object with provided parameters.
+            JSON dictionary to create a ``OverlapSearchResults`` object with provided parameters.
 
         Examples
         --------
@@ -223,7 +223,7 @@ class OverlapSearchResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "OverlapSearchResults")
                     json_data = param_json["OverlapSearchResults"] if "OverlapSearchResults" in param_json else {}
@@ -243,7 +243,7 @@ class OverlapSearchResults(CoreObject):
             n_pairs: int = None,
             overlap_pairs: List[OverlapPairs] = None,
             error_code: ErrorCode = None):
-        """Set the default values of OverlapSearchResults.
+        """Set the default values of the ``OverlapSearchResults`` object.
 
         Parameters
         ----------
@@ -259,7 +259,7 @@ class OverlapSearchResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of OverlapSearchResults.
+        """Print the default values of ``OverlapSearchResults`` object.
 
         Examples
         --------
@@ -334,18 +334,18 @@ class ConnectResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ConnectResults.
+        """Initialize a ``ConnectResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ConnectResults object with default parameters.
+            Model to create a ``ConnectResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the operation.
         json_data: dict, optional
-            JSON dictionary to create a ConnectResults object with provided parameters.
+            JSON dictionary to create a ``ConnectResults`` object with provided parameters.
 
         Examples
         --------
@@ -363,7 +363,7 @@ class ConnectResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ConnectResults")
                     json_data = param_json["ConnectResults"] if "ConnectResults" in param_json else {}
@@ -381,7 +381,7 @@ class ConnectResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of ConnectResults.
+        """Set the default values of the ``ConnectResults`` object.
 
         Parameters
         ----------
@@ -395,7 +395,7 @@ class ConnectResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ConnectResults.
+        """Print the default values of ``ConnectResults`` object.
 
         Examples
         --------
@@ -467,12 +467,12 @@ class IntersectParams(CoreObject):
             collapse_target_skewness: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the IntersectParams.
+        """Initialize a ``IntersectParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a IntersectParams object with default parameters.
+            Model to create a ``IntersectParams`` object with default parameters.
         tolerance: float, optional
             Intersection tolerance.
         use_absolute_tolerance: bool, optional
@@ -484,7 +484,7 @@ class IntersectParams(CoreObject):
         collapse_target_skewness: float, optional
             Perform collapse on faces with skewness above the provided target skewness.
         json_data: dict, optional
-            JSON dictionary to create a IntersectParams object with provided parameters.
+            JSON dictionary to create a ``IntersectParams`` object with provided parameters.
 
         Examples
         --------
@@ -508,7 +508,7 @@ class IntersectParams(CoreObject):
                     collapse_target_skewness)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "IntersectParams")
                     json_data = param_json["IntersectParams"] if "IntersectParams" in param_json else {}
@@ -532,7 +532,7 @@ class IntersectParams(CoreObject):
             remesh: bool = None,
             collapse_feature_angle: float = None,
             collapse_target_skewness: float = None):
-        """Set the default values of IntersectParams.
+        """Set the default values of the ``IntersectParams`` object.
 
         Parameters
         ----------
@@ -552,7 +552,7 @@ class IntersectParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of IntersectParams.
+        """Print the default values of ``IntersectParams`` object.
 
         Examples
         --------
@@ -660,12 +660,12 @@ class JoinParams(CoreObject):
             overlap_zone_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the JoinParams.
+        """Initialize a ``JoinParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a JoinParams object with default parameters.
+            Model to create a ``JoinParams`` object with default parameters.
         tolerance: float, optional
             Overlap tolerance between overlapping zonelets.
         use_absolute_tolerance: bool, optional
@@ -677,7 +677,7 @@ class JoinParams(CoreObject):
         overlap_zone_name: str, optional
             Zone id to be assigned to overlap zonelets belonging to different zones.
         json_data: dict, optional
-            JSON dictionary to create a JoinParams object with provided parameters.
+            JSON dictionary to create a ``JoinParams`` object with provided parameters.
 
         Examples
         --------
@@ -701,7 +701,7 @@ class JoinParams(CoreObject):
                     overlap_zone_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "JoinParams")
                     json_data = param_json["JoinParams"] if "JoinParams" in param_json else {}
@@ -725,7 +725,7 @@ class JoinParams(CoreObject):
             remesh: bool = None,
             match_angle: float = None,
             overlap_zone_name: str = None):
-        """Set the default values of JoinParams.
+        """Set the default values of the ``JoinParams`` object.
 
         Parameters
         ----------
@@ -745,7 +745,7 @@ class JoinParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of JoinParams.
+        """Print the default values of ``JoinParams`` object.
 
         Examples
         --------
@@ -847,21 +847,21 @@ class SubtractVolumesParams(CoreObject):
             keep_cutters: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SubtractVolumesParams.
+        """Initialize a ``SubtractVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SubtractVolumesParams object with default parameters.
+            Model to create a ``SubtractVolumesParams`` object with default parameters.
         ignore_face_zonelets: Iterable[int], optional
             Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
             Option to analyze overlapping or intersecting cutter volumes.
         keep_cutters: bool, optional
             Option to retain cutter volumes.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a SubtractVolumesParams object with provided parameters.
+            JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -881,7 +881,7 @@ class SubtractVolumesParams(CoreObject):
                     keep_cutters)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SubtractVolumesParams")
                     json_data = param_json["SubtractVolumesParams"] if "SubtractVolumesParams" in param_json else {}
@@ -901,7 +901,7 @@ class SubtractVolumesParams(CoreObject):
             ignore_face_zonelets: Iterable[int] = None,
             check_cutters: bool = None,
             keep_cutters: bool = None):
-        """Set the default values of SubtractVolumesParams.
+        """Set the default values of the ``SubtractVolumesParams`` object.
 
         Parameters
         ----------
@@ -917,7 +917,7 @@ class SubtractVolumesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractVolumesParams.
+        """Print the default values of ``SubtractVolumesParams`` object.
 
         Examples
         --------
@@ -966,7 +966,7 @@ class SubtractVolumesParams(CoreObject):
     @property
     def keep_cutters(self) -> bool:
         """Option to retain cutter volumes.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._keep_cutters
 
@@ -993,18 +993,18 @@ class SubtractVolumesResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SubtractVolumesResults.
+        """Initialize a ``SubtractVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SubtractVolumesResults object with default parameters.
+            Model to create a ``SubtractVolumesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the volume subtract operation.
         json_data: dict, optional
-            JSON dictionary to create a SubtractVolumesResults object with provided parameters.
+            JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1022,7 +1022,7 @@ class SubtractVolumesResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SubtractVolumesResults")
                     json_data = param_json["SubtractVolumesResults"] if "SubtractVolumesResults" in param_json else {}
@@ -1040,7 +1040,7 @@ class SubtractVolumesResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of SubtractVolumesResults.
+        """Set the default values of the ``SubtractVolumesResults`` object.
 
         Parameters
         ----------
@@ -1054,7 +1054,7 @@ class SubtractVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractVolumesResults.
+        """Print the default values of ``SubtractVolumesResults`` object.
 
         Examples
         --------
@@ -1126,12 +1126,12 @@ class StitchParams(CoreObject):
             type: StitchType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the StitchParams.
+        """Initialize a ``StitchParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a StitchParams object with default parameters.
+            Model to create a ``StitchParams`` object with default parameters.
         tolerance: float, optional
             Distance tolerance for stitching boundaries.
         use_absolute_tolerance: bool, optional
@@ -1143,7 +1143,7 @@ class StitchParams(CoreObject):
         type: StitchType, optional
             Stitch type depending on nature of surface boundary edges to be stitched.
         json_data: dict, optional
-            JSON dictionary to create a StitchParams object with provided parameters.
+            JSON dictionary to create a ``StitchParams`` object with provided parameters.
 
         Examples
         --------
@@ -1167,7 +1167,7 @@ class StitchParams(CoreObject):
                     type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "StitchParams")
                     json_data = param_json["StitchParams"] if "StitchParams" in param_json else {}
@@ -1191,7 +1191,7 @@ class StitchParams(CoreObject):
             remesh: bool = None,
             enable_multi_threading: bool = None,
             type: StitchType = None):
-        """Set the default values of StitchParams.
+        """Set the default values of the ``StitchParams`` object.
 
         Parameters
         ----------
@@ -1211,7 +1211,7 @@ class StitchParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StitchParams.
+        """Print the default values of ``StitchParams`` object.
 
         Examples
         --------
@@ -1313,17 +1313,17 @@ class MergeBoundaryNodesParams(CoreObject):
             merge_node_type: MergeNodeType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeBoundaryNodesParams.
+        """Initialize a ``MergeBoundaryNodesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeBoundaryNodesParams object with default parameters.
+            Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
         tolerance: float, optional
         use_absolute_tolerance: bool, optional
         merge_node_type: MergeNodeType, optional
         json_data: dict, optional
-            JSON dictionary to create a MergeBoundaryNodesParams object with provided parameters.
+            JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1343,7 +1343,7 @@ class MergeBoundaryNodesParams(CoreObject):
                     merge_node_type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeBoundaryNodesParams")
                     json_data = param_json["MergeBoundaryNodesParams"] if "MergeBoundaryNodesParams" in param_json else {}
@@ -1363,7 +1363,7 @@ class MergeBoundaryNodesParams(CoreObject):
             tolerance: float = None,
             use_absolute_tolerance: bool = None,
             merge_node_type: MergeNodeType = None):
-        """Set the default values of MergeBoundaryNodesParams.
+        """Set the default values of the ``MergeBoundaryNodesParams`` object.
 
         Parameters
         ----------
@@ -1376,7 +1376,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeBoundaryNodesParams.
+        """Print the default values of ``MergeBoundaryNodesParams`` object.
 
         Examples
         --------
@@ -1451,16 +1451,16 @@ class MergeBoundaryNodesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeBoundaryNodesResults.
+        """Initialize a ``MergeBoundaryNodesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeBoundaryNodesResults object with default parameters.
+            Model to create a ``MergeBoundaryNodesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of merge nodes operation.
         json_data: dict, optional
-            JSON dictionary to create a MergeBoundaryNodesResults object with provided parameters.
+            JSON dictionary to create a ``MergeBoundaryNodesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1476,7 +1476,7 @@ class MergeBoundaryNodesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeBoundaryNodesResults")
                     json_data = param_json["MergeBoundaryNodesResults"] if "MergeBoundaryNodesResults" in param_json else {}
@@ -1492,7 +1492,7 @@ class MergeBoundaryNodesResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of MergeBoundaryNodesResults.
+        """Set the default values of the ``MergeBoundaryNodesResults`` object.
 
         Parameters
         ----------
@@ -1504,7 +1504,7 @@ class MergeBoundaryNodesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeBoundaryNodesResults.
+        """Print the default values of ``MergeBoundaryNodesResults`` object.
 
         Examples
         --------
@@ -1585,12 +1585,12 @@ class FuseParams(CoreObject):
             fuse_edges_only: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FuseParams.
+        """Initialize a ``FuseParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FuseParams object with default parameters.
+            Model to create a ``FuseParams`` object with default parameters.
         use_absolute_tolerance: bool, optional
             When true, gap tolerance and side tolerance provided are absolute values.
         gap_tolerance: float, optional
@@ -1615,9 +1615,9 @@ class FuseParams(CoreObject):
             Faces zonelets with angle less than the provided value are considered for fuse operation.
         fuse_edges_only: bool, optional
             Fuse edges only.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a FuseParams object with provided parameters.
+            JSON dictionary to create a ``FuseParams`` object with provided parameters.
 
         Examples
         --------
@@ -1655,7 +1655,7 @@ class FuseParams(CoreObject):
                     fuse_edges_only)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FuseParams")
                     json_data = param_json["FuseParams"] if "FuseParams" in param_json else {}
@@ -1693,7 +1693,7 @@ class FuseParams(CoreObject):
             separate: bool = None,
             angle: float = None,
             fuse_edges_only: bool = None):
-        """Set the default values of FuseParams.
+        """Set the default values of the ``FuseParams`` object.
 
         Parameters
         ----------
@@ -1727,7 +1727,7 @@ class FuseParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FuseParams.
+        """Print the default values of ``FuseParams`` object.
 
         Examples
         --------
@@ -1884,7 +1884,7 @@ class FuseParams(CoreObject):
     @property
     def fuse_edges_only(self) -> bool:
         """Fuse edges only.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._fuse_edges_only
 
@@ -1901,10 +1901,14 @@ class FuseResults(CoreObject):
             self,
             fused_pairs: int,
             fused_area: float,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode],
+            intersecting_locations: Iterable[float]):
         self._fused_pairs = fused_pairs
         self._fused_area = fused_area
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
+        self._intersecting_locations = intersecting_locations if isinstance(intersecting_locations, np.ndarray) else np.array(intersecting_locations, dtype=np.double) if intersecting_locations is not None else None
 
     def __init__(
             self,
@@ -1912,22 +1916,28 @@ class FuseResults(CoreObject):
             fused_pairs: int = None,
             fused_area: float = None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            intersecting_locations: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FuseResults.
+        """Initialize a ``FuseResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FuseResults object with default parameters.
+            Model to create a ``FuseResults`` object with default parameters.
         fused_pairs: int, optional
-            The number of face region pairs that were fused.
+            Number of face region pairs that were fused.
         fused_area: float, optional
-            The total area of fused regions from both source and target faces.
+            Total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
-            Error Code associated with failure of fuse operation.
+            Error code associated with failure of the fuse operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the fuse operation.
+        intersecting_locations: Iterable[float], optional
+            Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
         json_data: dict, optional
-            JSON dictionary to create a FuseResults object with provided parameters.
+            JSON dictionary to create a ``FuseResults`` object with provided parameters.
 
         Examples
         --------
@@ -1937,24 +1947,30 @@ class FuseResults(CoreObject):
             self.__initialize(
                 json_data["fusedPairs"] if "fusedPairs" in json_data else None,
                 json_data["fusedArea"] if "fusedArea" in json_data else None,
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code])
+            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code, warning_codes, intersecting_locations])
             if all_field_specified:
                 self.__initialize(
                     fused_pairs,
                     fused_area,
-                    error_code)
+                    error_code,
+                    warning_codes,
+                    intersecting_locations)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FuseResults")
                     json_data = param_json["FuseResults"] if "FuseResults" in param_json else {}
                     self.__initialize(
                         fused_pairs if fused_pairs is not None else ( FuseResults._default_params["fused_pairs"] if "fused_pairs" in FuseResults._default_params else (json_data["fusedPairs"] if "fusedPairs" in json_data else None)),
                         fused_area if fused_area is not None else ( FuseResults._default_params["fused_area"] if "fused_area" in FuseResults._default_params else (json_data["fusedArea"] if "fusedArea" in json_data else None)),
-                        error_code if error_code is not None else ( FuseResults._default_params["error_code"] if "error_code" in FuseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+                        error_code if error_code is not None else ( FuseResults._default_params["error_code"] if "error_code" in FuseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( FuseResults._default_params["warning_codes"] if "warning_codes" in FuseResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        intersecting_locations if intersecting_locations is not None else ( FuseResults._default_params["intersecting_locations"] if "intersecting_locations" in FuseResults._default_params else (json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1966,24 +1982,30 @@ class FuseResults(CoreObject):
     def set_default(
             fused_pairs: int = None,
             fused_area: float = None,
-            error_code: ErrorCode = None):
-        """Set the default values of FuseResults.
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            intersecting_locations: Iterable[float] = None):
+        """Set the default values of the ``FuseResults`` object.
 
         Parameters
         ----------
         fused_pairs: int, optional
-            The number of face region pairs that were fused.
+            Number of face region pairs that were fused.
         fused_area: float, optional
-            The total area of fused regions from both source and target faces.
+            Total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
-            Error Code associated with failure of fuse operation.
+            Error code associated with failure of the fuse operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the fuse operation.
+        intersecting_locations: Iterable[float], optional
+            Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
         """
         args = locals()
         [FuseResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of FuseResults.
+        """Print the default values of ``FuseResults`` object.
 
         Examples
         --------
@@ -2001,17 +2023,21 @@ class FuseResults(CoreObject):
             json_data["fusedArea"] = self._fused_area
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._intersecting_locations is not None:
+            json_data["intersectingLocations"] = self._intersecting_locations
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s" % (self._fused_pairs, self._fused_area, self._error_code)
+        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s\nwarning_codes :  %s\nintersecting_locations :  %s" % (self._fused_pairs, self._fused_area, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._intersecting_locations)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def fused_pairs(self) -> int:
-        """The number of face region pairs that were fused.
+        """Number of face region pairs that were fused.
         """
         return self._fused_pairs
 
@@ -2021,7 +2047,7 @@ class FuseResults(CoreObject):
 
     @property
     def fused_area(self) -> float:
-        """The total area of fused regions from both source and target faces.
+        """Total area of fused regions from both source and target faces.
         """
         return self._fused_area
 
@@ -2031,10 +2057,30 @@ class FuseResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """Error Code associated with failure of fuse operation.
+        """Error code associated with failure of the fuse operation.
         """
         return self._error_code
 
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the fuse operation.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
+    @property
+    def intersecting_locations(self) -> Iterable[float]:
+        """Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+        """
+        return self._intersecting_locations
+
+    @intersecting_locations.setter
+    def intersecting_locations(self, value: Iterable[float]):
+        self._intersecting_locations = value
