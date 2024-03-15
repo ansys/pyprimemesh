@@ -135,7 +135,7 @@ class FixInvalidNormalNodeParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FixInvalidNormalNodeParams.
+        """Print the default values of ``FixInvalidNormalNodeParams`` object.
 
         Examples
         --------
@@ -260,7 +260,7 @@ class FixInvalidNormalNodeResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FixInvalidNormalNodeResults.
+        """Print the default values of ``FixInvalidNormalNodeResults`` object.
 
         Examples
         --------
@@ -372,7 +372,7 @@ class FillHolesAtPlaneParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FillHolesAtPlaneParams.
+        """Print the default values of ``FillHolesAtPlaneParams`` object.
 
         Examples
         --------
@@ -529,7 +529,7 @@ class FillHolesAtPlaneResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FillHolesAtPlaneResults.
+        """Print the default values of ``FillHolesAtPlaneResults`` object.
 
         Examples
         --------
@@ -666,7 +666,7 @@ class CreateCapParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateCapParams.
+        """Print the default values of ``CreateCapParams`` object.
 
         Examples
         --------
@@ -768,7 +768,7 @@ class CreateCapResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateCapResults.
+        """Print the default values of ``CreateCapResults`` object.
 
         Examples
         --------
@@ -869,7 +869,7 @@ class DeleteUnwettedParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteUnwettedParams.
+        """Print the default values of ``DeleteUnwettedParams`` object.
 
         Examples
         --------
@@ -960,7 +960,7 @@ class DeleteUnwettedResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteUnwettedResult.
+        """Print the default values of ``DeleteUnwettedResult`` object.
 
         Examples
         --------
@@ -1061,7 +1061,7 @@ class ResolveIntersectionsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ResolveIntersectionsParams.
+        """Print the default values of ``ResolveIntersectionsParams`` object.
 
         Examples
         --------
@@ -1162,7 +1162,7 @@ class ResolveIntersectionResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ResolveIntersectionResult.
+        """Print the default values of ``ResolveIntersectionResult`` object.
 
         Examples
         --------
@@ -1285,7 +1285,7 @@ class SubtractZoneletsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractZoneletsParams.
+        """Print the default values of ``SubtractZoneletsParams`` object.
 
         Examples
         --------
@@ -1421,7 +1421,7 @@ class SubtractZoneletsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractZoneletsResults.
+        """Print the default values of ``SubtractZoneletsResults`` object.
 
         Examples
         --------
@@ -1556,7 +1556,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SmoothDihedralFaceNodesParams.
+        """Print the default values of ``SmoothDihedralFaceNodesParams`` object.
 
         Examples
         --------
@@ -1692,7 +1692,7 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SmoothDihedralFaceNodesResults.
+        """Print the default values of ``SmoothDihedralFaceNodesResults`` object.
 
         Examples
         --------
@@ -1838,7 +1838,7 @@ class RefineAtContactsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RefineAtContactsParams.
+        """Print the default values of ``RefineAtContactsParams`` object.
 
         Examples
         --------
@@ -1997,7 +1997,7 @@ class RefineAtContactsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RefineAtContactsResults.
+        """Print the default values of ``RefineAtContactsResults`` object.
 
         Examples
         --------
@@ -2155,7 +2155,7 @@ class AddThicknessParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AddThicknessParams.
+        """Print the default values of ``AddThicknessParams`` object.
 
         Examples
         --------
@@ -2303,7 +2303,7 @@ class AddThicknessResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AddThicknessResults.
+        """Print the default values of ``AddThicknessResults`` object.
 
         Examples
         --------
@@ -2515,7 +2515,7 @@ class CreateBOIParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateBOIParams.
+        """Print the default values of ``CreateBOIParams`` object.
 
         Examples
         --------
@@ -2735,7 +2735,7 @@ class CreateBOIResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateBOIResults.
+        """Print the default values of ``CreateBOIResults`` object.
 
         Examples
         --------
@@ -2892,7 +2892,7 @@ class CreateContactPatchParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateContactPatchParams.
+        """Print the default values of ``CreateContactPatchParams`` object.
 
         Examples
         --------
@@ -3052,7 +3052,7 @@ class CreateContactPatchResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateContactPatchResults.
+        """Print the default values of ``CreateContactPatchResults`` object.
 
         Examples
         --------
@@ -3153,7 +3153,7 @@ class StretchFreeBoundariesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StretchFreeBoundariesParams.
+        """Print the default values of ``StretchFreeBoundariesParams`` object.
 
         Examples
         --------
@@ -3244,7 +3244,7 @@ class StretchFreeBoundariesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StretchFreeBoundariesResults.
+        """Print the default values of ``StretchFreeBoundariesResults`` object.
 
         Examples
         --------
@@ -3333,7 +3333,7 @@ class TriangulateParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TriangulateParams.
+        """Print the default values of ``TriangulateParams`` object.
 
         Examples
         --------
@@ -3437,7 +3437,7 @@ class TriangulateResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TriangulateResults.
+        """Print the default values of ``TriangulateResults`` object.
 
         Examples
         --------

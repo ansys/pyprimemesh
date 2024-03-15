@@ -124,7 +124,7 @@ class OverlapPairs(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of OverlapPairs.
+        """Print the default values of ``OverlapPairs`` object.
 
         Examples
         --------
@@ -259,7 +259,7 @@ class OverlapSearchResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of OverlapSearchResults.
+        """Print the default values of ``OverlapSearchResults`` object.
 
         Examples
         --------
@@ -395,7 +395,7 @@ class ConnectResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ConnectResults.
+        """Print the default values of ``ConnectResults`` object.
 
         Examples
         --------
@@ -552,7 +552,7 @@ class IntersectParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of IntersectParams.
+        """Print the default values of ``IntersectParams`` object.
 
         Examples
         --------
@@ -745,7 +745,7 @@ class JoinParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of JoinParams.
+        """Print the default values of ``JoinParams`` object.
 
         Examples
         --------
@@ -917,7 +917,7 @@ class SubtractVolumesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractVolumesParams.
+        """Print the default values of ``SubtractVolumesParams`` object.
 
         Examples
         --------
@@ -1054,7 +1054,7 @@ class SubtractVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractVolumesResults.
+        """Print the default values of ``SubtractVolumesResults`` object.
 
         Examples
         --------
@@ -1211,7 +1211,7 @@ class StitchParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StitchParams.
+        """Print the default values of ``StitchParams`` object.
 
         Examples
         --------
@@ -1376,7 +1376,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeBoundaryNodesParams.
+        """Print the default values of ``MergeBoundaryNodesParams`` object.
 
         Examples
         --------
@@ -1504,7 +1504,7 @@ class MergeBoundaryNodesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeBoundaryNodesResults.
+        """Print the default values of ``MergeBoundaryNodesResults`` object.
 
         Examples
         --------
@@ -1727,7 +1727,7 @@ class FuseParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FuseParams.
+        """Print the default values of ``FuseParams`` object.
 
         Examples
         --------
@@ -1927,7 +1927,7 @@ class FuseResults(CoreObject):
         model: Model
             Model to use to create a FuseResults object with default parameters.
         fused_pairs: int, optional
-            The number of face region pairs that were fused.
+            Number of face region pairs that were fused.
         fused_area: float, optional
             Total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
@@ -1990,7 +1990,7 @@ class FuseResults(CoreObject):
         Parameters
         ----------
         fused_pairs: int, optional
-            The number of face region pairs that were fused.
+            Number of face region pairs that were fused.
         fused_area: float, optional
             Total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
@@ -2005,7 +2005,7 @@ class FuseResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FuseResults.
+        """Print the default values of ``FuseResults`` object.
 
         Examples
         --------
@@ -2037,7 +2037,7 @@ class FuseResults(CoreObject):
 
     @property
     def fused_pairs(self) -> int:
-        """The number of face region pairs that were fused.
+        """Number of face region pairs that were fused.
         """
         return self._fused_pairs
 

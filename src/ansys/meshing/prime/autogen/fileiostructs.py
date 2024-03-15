@@ -159,7 +159,7 @@ class FileReadParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FileReadParams.
+        """Print the default values of ``FileReadParams`` object.
 
         Examples
         --------
@@ -271,7 +271,7 @@ class SizeFieldFileReadResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SizeFieldFileReadResults.
+        """Print the default values of ``SizeFieldFileReadResults`` object.
 
         Examples
         --------
@@ -384,7 +384,7 @@ class FileReadResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FileReadResults.
+        """Print the default values of ``FileReadResults`` object.
 
         Examples
         --------
@@ -473,7 +473,7 @@ class FileWriteParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FileWriteParams.
+        """Print the default values of ``FileWriteParams`` object.
 
         Examples
         --------
@@ -575,7 +575,7 @@ class FileWriteResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FileWriteResults.
+        """Print the default values of ``FileWriteResults`` object.
 
         Examples
         --------
@@ -688,7 +688,7 @@ class ReadSizeFieldParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ReadSizeFieldParams.
+        """Print the default values of ``ReadSizeFieldParams`` object.
 
         Examples
         --------
@@ -789,7 +789,7 @@ class WriteSizeFieldParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WriteSizeFieldParams.
+        """Print the default values of ``WriteSizeFieldParams`` object.
 
         Examples
         --------
@@ -890,7 +890,7 @@ class ExportFluentCaseParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportFluentCaseParams.
+        """Print the default values of ``ExportFluentCaseParams`` object.
 
         Examples
         --------
@@ -979,7 +979,7 @@ class ExportFluentMeshingMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportFluentMeshingMeshParams.
+        """Print the default values of ``ExportFluentMeshingMeshParams`` object.
 
         Examples
         --------
@@ -1070,7 +1070,7 @@ class ExportSTLParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportSTLParams.
+        """Print the default values of ``ExportSTLParams`` object.
 
         Examples
         --------
@@ -1226,7 +1226,7 @@ class CadRefacetingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CadRefacetingParams.
+        """Print the default values of ``CadRefacetingParams`` object.
 
         Examples
         --------
@@ -1497,7 +1497,7 @@ class ImportCadParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportCadParams.
+        """Print the default values of ``ImportCadParams`` object.
 
         Examples
         --------
@@ -1729,7 +1729,7 @@ class ImportCadResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportCadResults.
+        """Print the default values of ``ImportCadResults`` object.
 
         Examples
         --------
@@ -1853,7 +1853,7 @@ class ImportFluentMeshingMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportFluentMeshingMeshParams.
+        """Print the default values of ``ImportFluentMeshingMeshParams`` object.
 
         Examples
         --------
@@ -1977,7 +1977,7 @@ class ImportFluentMeshingMeshResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportFluentMeshingMeshResults.
+        """Print the default values of ``ImportFluentMeshingMeshResults`` object.
 
         Examples
         --------
@@ -2090,7 +2090,7 @@ class ImportFluentCaseParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportFluentCaseParams.
+        """Print the default values of ``ImportFluentCaseParams`` object.
 
         Examples
         --------
@@ -2191,7 +2191,7 @@ class ImportFluentCaseResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportFluentCaseResults.
+        """Print the default values of ``ImportFluentCaseResults`` object.
 
         Examples
         --------
@@ -2299,7 +2299,7 @@ class ImportMapdlCdbParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportMapdlCdbParams.
+        """Print the default values of ``ImportMapdlCdbParams`` object.
 
         Examples
         --------
@@ -2414,7 +2414,7 @@ class ImportMapdlCdbResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportMapdlCdbResults.
+        """Print the default values of ``ImportMapdlCdbResults`` object.
 
         Examples
         --------
@@ -2484,10 +2484,10 @@ class ExportMapdlCdbParams(CoreObject):
         model: Model
             Model to use to create a ExportMapdlCdbParams object with default parameters.
         material_properties: str, optional
-            Materials in CDB format to add to the file.
+            Materials in CDB format to be added to the file.
             This is a beta parameter. The behavior and name may change in the future.
         boundary_conditions: str, optional
-            Boundary conditions in CDB format to add to the file.
+            Boundary conditions in CDB format to be added to the file.
             This is a beta parameter. The behavior and name may change in the future.
         write_cells: bool, optional
             Option to write out cells as part of the file.
@@ -2559,9 +2559,9 @@ class ExportMapdlCdbParams(CoreObject):
         Parameters
         ----------
         material_properties: str, optional
-            Materials in CDB format to add to the file.
+            Materials in CDB format to be added to the file.
         boundary_conditions: str, optional
-            Boundary conditions in CDB format to add to the file.
+            Boundary conditions in CDB format to be added to the file.
         write_cells: bool, optional
             Option to write out cells as part of the file.
         enable_face_based_labels: bool, optional
@@ -2576,7 +2576,7 @@ class ExportMapdlCdbParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportMapdlCdbParams.
+        """Print the default values of ``ExportMapdlCdbParams`` object.
 
         Examples
         --------
@@ -2610,7 +2610,7 @@ class ExportMapdlCdbParams(CoreObject):
 
     @property
     def material_properties(self) -> str:
-        """Materials in CDB format to add to the file.
+        """Materials in CDB format to be added to the file.
         This is a beta parameter. The behavior and name may change in the future.
         """
         return self._material_properties
@@ -2621,7 +2621,7 @@ class ExportMapdlCdbParams(CoreObject):
 
     @property
     def boundary_conditions(self) -> str:
-        """Boundary conditions in CDB format to add to the file.
+        """Boundary conditions in CDB format to be added to the file.
         This is a beta parameter. The behavior and name may change in the future.
         """
         return self._boundary_conditions
@@ -2743,7 +2743,7 @@ class ExportMapdlCdbResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportMapdlCdbResults.
+        """Print the default values of ``ExportMapdlCdbResults`` object.
 
         Examples
         --------
@@ -2832,7 +2832,7 @@ class ExportLSDynaIgaKeywordFileParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportLSDynaIgaKeywordFileParams.
+        """Print the default values of ``ExportLSDynaIgaKeywordFileParams`` object.
 
         Examples
         --------
@@ -2934,7 +2934,7 @@ class ExportBoundaryFittedSplineParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExportBoundaryFittedSplineParams.
+        """Print the default values of ``ExportBoundaryFittedSplineParams`` object.
 
         Examples
         --------
@@ -3035,7 +3035,7 @@ class ImportAbaqusParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportAbaqusParams.
+        """Print the default values of ``ImportAbaqusParams`` object.
 
         Examples
         --------
@@ -3126,7 +3126,7 @@ class ImportAbaqusResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ImportAbaqusResults.
+        """Print the default values of ``ImportAbaqusResults`` object.
 
         Examples
         --------
