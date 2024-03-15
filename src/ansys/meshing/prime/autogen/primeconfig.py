@@ -542,19 +542,19 @@ class ErrorCode(enum.IntEnum):
     """Resolution Factor should be greater than 0 but less than or equal to 1."""
     WRAPPERLEAKINGFLUIDREGIONS = 3444
     """Two or more fluid regions leaking into each other.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
     WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE = 3445
     """Hole size specified for dead region should be positive double.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
     WRAPPERPATCHFLOWREGIONS_FAILED = 3446
     """Unable to create patch surfaces.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
     WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE = 3447
     """Too small hole size provided for dead region.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
     WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE = 3448
     """Base size specified for patching should be positive double.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -645,10 +645,10 @@ class ErrorCode(enum.IntEnum):
     """Bad shape properties."""
     AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
     """Autoquadmesher error codes.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
     AUTOQUADMESHER_INVALIDMINMAXSIZES = 15001
     """Difference in maximum value and minimum value is negative.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+    This is a beta parameter. The behavior and name may change in the future."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.
@@ -690,9 +690,9 @@ class WarningCode(enum.IntEnum):
     ALIGN_OPERATIONINTERRUPTED = 1900
     """Align operation interrupted."""
     FUSEOVERLAPREMOVALINCOMPLETE = 4500
-    """Self intersections found. Use Fuse operation to remove it."""
+    """Self intersections found. Use fuse operation to remove it."""
     REMOVEOVERLAPWITHINTERSECT = 4501
-    """Self intersections found. Use Intersect operation to remove it."""
+    """Self intersections found. Use intersect operation to remove it."""
     IGA_NOGEOMZONELETFORSPLINEFITTING = 5001
     """Invalid input for IGA."""
     NOHOLESFOUNDONPLANE = 5501
@@ -742,7 +742,7 @@ class WarningCode(enum.IntEnum):
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
     UNPROCESSEDKEYWORDSINABAQUSFILE = 11001
-    """Unprocessed Abaqus keywords found."""
+    """Unprocessed Abaqus keywords have been found."""
     EXPORTMAPDLANALYSISSETTINGSFAILED = 11101
     """Export MAPDL analysis settings failed."""
     WRITINGCONTACTPAIRSSKIPPED = 11102

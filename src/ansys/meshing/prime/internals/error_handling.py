@@ -59,10 +59,10 @@ prime_error_messages = {
     ErrorCode.CADGEOMETRYNOTFOUND: "CAD Geometry not found.",
     ErrorCode.VOLUMENOTFOUND: "Volume not found.",
     ErrorCode.ZONENOTFOUND: "Zone not found.",
-    ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
+    ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology-based operation.",
     ErrorCode.ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try add_topo_entities_to_zone in part.",
-    ErrorCode.MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
-    ErrorCode.MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
+    ErrorCode.MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology-based operation.",
+    ErrorCode.MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology-based operation.",
     ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART: "Not supported for part with higher order mesh.",
     ErrorCode.NOTSUPPORTEDFORPOLYMESHPART: "Not supported for part with poly mesh.",
     ErrorCode.SPHEREATINVALIDNORMALNODESFAILED: "Sphere creation at invalid normal nodes failed.",
@@ -198,7 +198,7 @@ prime_error_messages = {
     ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE: "Dead material point cannot be same as live.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE: "Hole size specified for dead region should be positive double.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_FAILED: "Failed to create patching surfaces.",
-    ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Too small hole size provided for dead region.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Provide hole size is too small hole for dead region.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE: "Base size specified for patching should be positive double.",
     ErrorCode.INVALIDWRAPPERCONTROL: "Invalid wrapper control.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE: "Gap size specified for close gaps should be positive double.",
@@ -304,8 +304,8 @@ prime_error_messages = {
     ErrorCode.TARGETWITHCELLZONELETS: "Target face zonelets with volume mesh on both sides.",
     ErrorCode.SIDEZONELETSNOTFIT: "Side face zonelets are not sweepable for thin volume mesh.",
     ErrorCode.SOURCETARGETZONELETSNOTFIT: "Source and target zonelets do not fit to thin volume mesh.",
-    ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Min size is more than max size.",
-    ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contains negative value.",
+    ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Minimum size is more than maximum size.",
+    ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contain one or more negative values.",
     ErrorCode.FACEZONELETSHAVECELLSCONNECTED: "Face zonelets have cells connected.",
 }
 
@@ -357,8 +357,8 @@ prime_warning_messages = {
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
     WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topo entities. Skipped projection for those topo entities.",
     WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topo entities. Projected on facets for those topo entities.",
-    WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use Fuse operation to remove it.",
-    WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use Intersect operation to remove it.",
+    WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use fuse operation to remove it.",
+    WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use intersect operation to remove it.",
 }
 
 
