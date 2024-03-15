@@ -1994,7 +1994,7 @@ class FuseResults(CoreObject):
         fused_area: float, optional
             The total area of fused regions from both source and target faces.
         error_code: ErrorCode, optional
-            Error Code associated with failure of fuse operation.
+            Error code associated with failure of the fuse operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with fuse operation.
         intersecting_locations: Iterable[float], optional
