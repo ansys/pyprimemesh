@@ -3277,7 +3277,7 @@ class StretchFreeBoundariesResults(CoreObject):
         self._error_code = value
 
 class TriangulateParams(CoreObject):
-    """Parameters used for triangulation operation.
+    """Provides the parameters used for triangulation operation.
     """
     _default_params = {}
 
