@@ -66,7 +66,7 @@ prime_error_messages = {
     ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART: "Not supported for part with higher order mesh.",
     ErrorCode.NOTSUPPORTEDFORPOLYMESHPART: "Not supported for part with poly mesh.",
     ErrorCode.SPHEREATINVALIDNORMALNODESFAILED: "Sphere creation at invalid normal nodes failed.",
-    ErrorCode.INVALIDPLANEPOINTS: "Invalid plane points. You need to provide 3 points (9 coordinates).",
+    ErrorCode.INVALIDPLANEPOINTS: "Invalid plane points. You must provide 3 points (9 coordinates).",
     ErrorCode.PLANECOLLINEARPOINTS: "Collinear or duplicate points given to define plane.",
     ErrorCode.INVALIDREGISTERID: "Invalid register id provided. Register ids between 1 to 28 are valid.",
     ErrorCode.SURFACEFEATURETYPENOTSUPPORTED: "Surface search for provided feature type is not supported.",
