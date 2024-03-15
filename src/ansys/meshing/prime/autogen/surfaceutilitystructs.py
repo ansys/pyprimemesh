@@ -71,7 +71,7 @@ class FixInvalidNormalNodeParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a FixInvalidNormalNodeParams object with default parameters.
+            Model to create a FixInvalidNormalNodeParams object with default parameters.
         nugget_size: float, optional
             Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
         nugget_mesh_size: float, optional
@@ -79,7 +79,7 @@ class FixInvalidNormalNodeParams(CoreObject):
         label: str, optional
             Label to set on new face zonelets created.
         json_data: dict, optional
-            JSON dictionary to use to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
+            JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
 
         Examples
         --------
@@ -212,11 +212,11 @@ class FixInvalidNormalNodeResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a FixInvalidNormalNodeResults object with default parameters.
+            Model to create a FixInvalidNormalNodeResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
+            JSON dictionary to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
 
         Examples
         --------
@@ -316,13 +316,13 @@ class FillHolesAtPlaneParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a FillHolesAtPlaneParams object with default parameters.
+            Model to create a FillHolesAtPlaneParams object with default parameters.
         create_zone: bool, optional
             Option to create a face zone for the zonelets created to fill holes.
         suggested_zone_name: str, optional
             Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
         json_data: dict, optional
-            JSON dictionary to use to create a ``FillHolesAtPlaneParams`` object with provided parameters.
+            JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
 
         Examples
         --------
@@ -449,7 +449,7 @@ class FillHolesAtPlaneResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a FillHolesAtPlaneResults object with default parameters.
+            Model to create a FillHolesAtPlaneResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         warning_codes: List[WarningCode], optional
@@ -461,7 +461,7 @@ class FillHolesAtPlaneResults(CoreObject):
         created_zone_id: int, optional
             Id assigned to zone created.
         json_data: dict, optional
-            JSON dictionary to use to create a ``FillHolesAtPlaneResults`` object with provided parameters.
+            JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
 
         Examples
         --------
@@ -628,9 +628,9 @@ class CreateCapParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a CreateCapParams object with default parameters.
+            Model to create a CreateCapParams object with default parameters.
         json_data: dict, optional
-            JSON dictionary to use to create a ``CreateCapParams`` object with provided parameters.
+            JSON dictionary to create a ``CreateCapParams`` object with provided parameters.
 
         Examples
         --------
@@ -712,13 +712,13 @@ class CreateCapResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a CreateCapResults object with default parameters.
+            Model to create a CreateCapResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         created_face_zonelets: Iterable[int], optional
             Ids of cap face zonelets created.
         json_data: dict, optional
-            JSON dictionary to use to create a ``CreateCapResults`` object with provided parameters.
+            JSON dictionary to create a ``CreateCapResults`` object with provided parameters.
 
         Examples
         --------
@@ -831,9 +831,9 @@ class DeleteUnwettedParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a DeleteUnwettedParams object with default parameters.
+            Model to create a DeleteUnwettedParams object with default parameters.
         json_data: dict, optional
-            JSON dictionary to use to create a ``DeleteUnwettedParams`` object with provided parameters.
+            JSON dictionary to create a ``DeleteUnwettedParams`` object with provided parameters.
 
         Examples
         --------
@@ -912,11 +912,11 @@ class DeleteUnwettedResult(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a DeleteUnwettedResult object with default parameters.
+            Model to create a DeleteUnwettedResult object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with delete unwetted surfaces operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``DeleteUnwettedResult`` object with provided parameters.
+            JSON dictionary to create a ``DeleteUnwettedResult`` object with provided parameters.
 
         Examples
         --------
@@ -1013,11 +1013,11 @@ class ResolveIntersectionsParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a ResolveIntersectionsParams object with default parameters.
+            Model to create a ResolveIntersectionsParams object with default parameters.
         number_of_threads: int, optional
             Number of threads for resolve intersections multithreaded operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``ResolveIntersectionsParams`` object with provided parameters.
+            JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1114,11 +1114,11 @@ class ResolveIntersectionResult(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a ResolveIntersectionResult object with default parameters.
+            Model to create a ResolveIntersectionResult object with default parameters.
         error_code: ErrorCode, optional
             Errror code associated with a resolve intersections operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``ResolveIntersectionResult`` object with provided parameters.
+            JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
         Examples
         --------
@@ -1221,7 +1221,7 @@ class SubtractZoneletsParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a SubtractZoneletsParams object with default parameters.
+            Model to create a SubtractZoneletsParams object with default parameters.
         retain_cutter: bool, optional
             Retain the zonelets used for removal.
         extract_edges: bool, optional
@@ -1229,7 +1229,7 @@ class SubtractZoneletsParams(CoreObject):
         trace_edges: bool, optional
             Trace edges of intersection on target. Only works if extractEdges is true.
         json_data: dict, optional
-            JSON dictionary to use to create a ``SubtractZoneletsParams`` object with provided parameters.
+            JSON dictionary to create a ``SubtractZoneletsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1365,13 +1365,13 @@ class SubtractZoneletsResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a SubtractZoneletsResults object with default parameters.
+            Model to create a SubtractZoneletsResults object with default parameters.
         processing_time: float, optional
             Processing time for subtract operation.
         error_code: ErrorCode, optional
             Error Code associated with subtract operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``SubtractZoneletsResults`` object with provided parameters.
+            JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
 
         Examples
         --------
@@ -1492,7 +1492,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a SmoothDihedralFaceNodesParams object with default parameters.
+            Model to create a SmoothDihedralFaceNodesParams object with default parameters.
         min_dihedral_angle: float, optional
             Minimum angle to be used to identify dihedral faces.
         tolerance: float, optional
@@ -1500,7 +1500,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
         type: SmoothType, optional
             Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
         json_data: dict, optional
-            JSON dictionary to use to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
+            JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1636,13 +1636,13 @@ class SmoothDihedralFaceNodesResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a SmoothDihedralFaceNodesResults object with default parameters.
+            Model to create a SmoothDihedralFaceNodesResults object with default parameters.
         n_nodes_smoothed: int, optional
             Number of dihedral face nodes smoothed.
         error_code: ErrorCode, optional
             Error Code associated with creating offset surface.
         json_data: dict, optional
-            JSON dictionary to use to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
+            JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1766,7 +1766,7 @@ class RefineAtContactsParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a RefineAtContactsParams object with default parameters.
+            Model to create a RefineAtContactsParams object with default parameters.
         contact_tolerance: float, optional
             Maximum tolerance used to identify face elements as contacts.
         relative_tolerance: bool, optional
@@ -1776,7 +1776,7 @@ class RefineAtContactsParams(CoreObject):
         project_on_geometry: bool, optional
             Project on geometry on remesh.
         json_data: dict, optional
-            JSON dictionary to use to create a ``RefineAtContactsParams`` object with provided parameters.
+            JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1933,7 +1933,7 @@ class RefineAtContactsResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a RefineAtContactsResults object with default parameters.
+            Model to create a RefineAtContactsResults object with default parameters.
         n_refined: int, optional
             Number of face elements identified for refinement.
         size_field_id: int, optional
@@ -1941,7 +1941,7 @@ class RefineAtContactsResults(CoreObject):
         error_code: ErrorCode, optional
             ErrorCode associated with the refine contacts operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``RefineAtContactsResults`` object with provided parameters.
+            JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
 
         Examples
         --------
@@ -2083,7 +2083,7 @@ class AddThicknessParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a AddThicknessParams object with default parameters.
+            Model to create a AddThicknessParams object with default parameters.
         thickness: float, optional
             To assign the offset distance of inflation.
         reverse_face_normal: bool, optional
@@ -2093,7 +2093,7 @@ class AddThicknessParams(CoreObject):
         fix_intersections: bool, optional
             Fix intersections in concave regions.
         json_data: dict, optional
-            JSON dictionary to use to create a ``AddThicknessParams`` object with provided parameters.
+            JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
 
         Examples
         --------
@@ -2247,13 +2247,13 @@ class AddThicknessResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a AddThicknessResults object with default parameters.
+            Model to create a AddThicknessResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         part_id: int, optional
             The created thickness part id.
         json_data: dict, optional
-            JSON dictionary to use to create a ``AddThicknessResults`` object with provided parameters.
+            JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
 
         Examples
         --------
@@ -2395,7 +2395,7 @@ class CreateBOIParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a CreateBOIParams object with default parameters.
+            Model to create a CreateBOIParams object with default parameters.
         boi_type: BOIType, optional
             Type of BOI offsetting.
         perform_initial_wrap: bool, optional
@@ -2417,7 +2417,7 @@ class CreateBOIParams(CoreObject):
         number_of_threads: int, optional
             Number of threads for multithreading.
         json_data: dict, optional
-            JSON dictionary to use to create a ``CreateBOIParams`` object with provided parameters.
+            JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
 
         Examples
         --------
@@ -2679,13 +2679,13 @@ class CreateBOIResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a CreateBOIResults object with default parameters.
+            Model to create a CreateBOIResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         part_id: int, optional
             The BOI part id.
         json_data: dict, optional
-            JSON dictionary to use to create a ``CreateBOIResults`` object with provided parameters.
+            JSON dictionary to create a ``CreateBOIResults`` object with provided parameters.
 
         Examples
         --------
@@ -2812,7 +2812,7 @@ class CreateContactPatchParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a CreateContactPatchParams object with default parameters.
+            Model to create a CreateContactPatchParams object with default parameters.
         contact_patch_axis: ContactPatchAxis, optional
             Assigns the contact patch direction.
         offset_distance: float, optional
@@ -2824,7 +2824,7 @@ class CreateContactPatchParams(CoreObject):
         suggested_label_prefix: str, optional
             Suggested label name for created contact patch surfaces.
         json_data: dict, optional
-            JSON dictionary to use to create a ``CreateContactPatchParams`` object with provided parameters.
+            JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
 
         Examples
         --------
@@ -2996,13 +2996,13 @@ class CreateContactPatchResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a CreateContactPatchResults object with default parameters.
+            Model to create a CreateContactPatchResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the contact patch creation operation.
         part_id: int, optional
             Contact patch part id.
         json_data: dict, optional
-            JSON dictionary to use to create a ``CreateContactPatchResults`` object with provided parameters.
+            JSON dictionary to create a ``CreateContactPatchResults`` object with provided parameters.
 
         Examples
         --------
@@ -3115,9 +3115,9 @@ class StretchFreeBoundariesParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a StretchFreeBoundariesParams object with default parameters.
+            Model to create a StretchFreeBoundariesParams object with default parameters.
         json_data: dict, optional
-            JSON dictionary to use to create a ``StretchFreeBoundariesParams`` object with provided parameters.
+            JSON dictionary to create a ``StretchFreeBoundariesParams`` object with provided parameters.
 
         Examples
         --------
@@ -3196,11 +3196,11 @@ class StretchFreeBoundariesResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a StretchFreeBoundariesResults object with default parameters.
+            Model to create a StretchFreeBoundariesResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``StretchFreeBoundariesResults`` object with provided parameters.
+            JSON dictionary to create a ``StretchFreeBoundariesResults`` object with provided parameters.
 
         Examples
         --------
@@ -3295,9 +3295,9 @@ class TriangulateParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a TriangulateParams object with default parameters.
+            Model to create a TriangulateParams object with default parameters.
         json_data: dict, optional
-            JSON dictionary to use to create a ``TriangulateParams`` object with provided parameters.
+            JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
 
         Examples
         --------
@@ -3379,7 +3379,7 @@ class TriangulateResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a TriangulateResults object with default parameters.
+            Model to create a TriangulateResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of the operation.
             This is a beta parameter. The behavior and name may change in the future.
@@ -3387,7 +3387,7 @@ class TriangulateResults(CoreObject):
             Number of faces that were triangulated.
             This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to use to create a ``TriangulateResults`` object with provided parameters.
+            JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
 
         Examples
         --------

@@ -68,13 +68,13 @@ class OverlapPairs(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a OverlapPairs object with default parameters.
+            Model to create a OverlapPairs object with default parameters.
         zone_id0: int, optional
             Id of one overlapping face zonelet.
         zone_id1: int, optional
             Id of other overlapping face zonelet.
         json_data: dict, optional
-            JSON dictionary to use to create a ``OverlapPairs`` object with provided parameters.
+            JSON dictionary to create a ``OverlapPairs`` object with provided parameters.
 
         Examples
         --------
@@ -195,7 +195,7 @@ class OverlapSearchResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a OverlapSearchResults object with default parameters.
+            Model to create a OverlapSearchResults object with default parameters.
         n_pairs: int, optional
             Number of pairs.
         overlap_pairs: List[OverlapPairs], optional
@@ -203,7 +203,7 @@ class OverlapSearchResults(CoreObject):
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``OverlapSearchResults`` object with provided parameters.
+            JSON dictionary to create a ``OverlapSearchResults`` object with provided parameters.
 
         Examples
         --------
@@ -339,13 +339,13 @@ class ConnectResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a ConnectResults object with default parameters.
+            Model to create a ConnectResults object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``ConnectResults`` object with provided parameters.
+            JSON dictionary to create a ``ConnectResults`` object with provided parameters.
 
         Examples
         --------
@@ -472,7 +472,7 @@ class IntersectParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a IntersectParams object with default parameters.
+            Model to create a IntersectParams object with default parameters.
         tolerance: float, optional
             Intersection tolerance.
         use_absolute_tolerance: bool, optional
@@ -484,7 +484,7 @@ class IntersectParams(CoreObject):
         collapse_target_skewness: float, optional
             Perform collapse on faces with skewness above the provided target skewness.
         json_data: dict, optional
-            JSON dictionary to use to create a ``IntersectParams`` object with provided parameters.
+            JSON dictionary to create a ``IntersectParams`` object with provided parameters.
 
         Examples
         --------
@@ -665,7 +665,7 @@ class JoinParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a JoinParams object with default parameters.
+            Model to create a JoinParams object with default parameters.
         tolerance: float, optional
             Overlap tolerance between overlapping zonelets.
         use_absolute_tolerance: bool, optional
@@ -677,7 +677,7 @@ class JoinParams(CoreObject):
         overlap_zone_name: str, optional
             Zone id to be assigned to overlap zonelets belonging to different zones.
         json_data: dict, optional
-            JSON dictionary to use to create a ``JoinParams`` object with provided parameters.
+            JSON dictionary to create a ``JoinParams`` object with provided parameters.
 
         Examples
         --------
@@ -852,7 +852,7 @@ class SubtractVolumesParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a SubtractVolumesParams object with default parameters.
+            Model to create a SubtractVolumesParams object with default parameters.
         ignore_face_zonelets: Iterable[int], optional
             Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
@@ -861,7 +861,7 @@ class SubtractVolumesParams(CoreObject):
             Option to retain cutter volumes.
             This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to use to create a ``SubtractVolumesParams`` object with provided parameters.
+            JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -998,13 +998,13 @@ class SubtractVolumesResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a SubtractVolumesResults object with default parameters.
+            Model to create a SubtractVolumesResults object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the volume subtract operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``SubtractVolumesResults`` object with provided parameters.
+            JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1131,7 +1131,7 @@ class StitchParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a StitchParams object with default parameters.
+            Model to create a StitchParams object with default parameters.
         tolerance: float, optional
             Distance tolerance for stitching boundaries.
         use_absolute_tolerance: bool, optional
@@ -1143,7 +1143,7 @@ class StitchParams(CoreObject):
         type: StitchType, optional
             Stitch type depending on nature of surface boundary edges to be stitched.
         json_data: dict, optional
-            JSON dictionary to use to create a ``StitchParams`` object with provided parameters.
+            JSON dictionary to create a ``StitchParams`` object with provided parameters.
 
         Examples
         --------
@@ -1318,12 +1318,12 @@ class MergeBoundaryNodesParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a MergeBoundaryNodesParams object with default parameters.
+            Model to create a MergeBoundaryNodesParams object with default parameters.
         tolerance: float, optional
         use_absolute_tolerance: bool, optional
         merge_node_type: MergeNodeType, optional
         json_data: dict, optional
-            JSON dictionary to use to create a ``MergeBoundaryNodesParams`` object with provided parameters.
+            JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1456,11 +1456,11 @@ class MergeBoundaryNodesResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a MergeBoundaryNodesResults object with default parameters.
+            Model to create a MergeBoundaryNodesResults object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of merge nodes operation.
         json_data: dict, optional
-            JSON dictionary to use to create a ``MergeBoundaryNodesResults`` object with provided parameters.
+            JSON dictionary to create a ``MergeBoundaryNodesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1590,7 +1590,7 @@ class FuseParams(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a FuseParams object with default parameters.
+            Model to create a FuseParams object with default parameters.
         use_absolute_tolerance: bool, optional
             When true, gap tolerance and side tolerance provided are absolute values.
         gap_tolerance: float, optional
@@ -1617,7 +1617,7 @@ class FuseParams(CoreObject):
             Fuse edges only.
             This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to use to create a ``FuseParams`` object with provided parameters.
+            JSON dictionary to create a ``FuseParams`` object with provided parameters.
 
         Examples
         --------
@@ -1925,7 +1925,7 @@ class FuseResults(CoreObject):
         Parameters
         ----------
         model: Model
-            Model to use to create a FuseResults object with default parameters.
+            Model to create a FuseResults object with default parameters.
         fused_pairs: int, optional
             Number of face region pairs that were fused.
         fused_area: float, optional
@@ -1937,7 +1937,7 @@ class FuseResults(CoreObject):
         intersecting_locations: Iterable[float], optional
             Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
         json_data: dict, optional
-            JSON dictionary to use to create a ``FuseResults`` object with provided parameters.
+            JSON dictionary to create a ``FuseResults`` object with provided parameters.
 
         Examples
         --------
