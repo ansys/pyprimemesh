@@ -1,18 +1,20 @@
+"""Module for MAPDL cdb export utilities."""
+
 ########################### [TODO] ##################################
-# [TODO] code quality of this file is not upto PyPrimeMesh standards,
+# [TODO] code quality of this file is not up to PyPrimeMesh standards,
 # please move the code to cpp or improve the code quality
 ########################### [TODO] ##################################
 
-import os
-import math
 import json
+import math
+import os
 from typing import Tuple
+
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.params.primestructs import ExportMapdlCdbParams
 
 __all__ = [
-    'generate_config_commands'
-    'generate_mapdl_commands',
+    'generate_config_commands' 'generate_mapdl_commands',
 ]
 
 
@@ -28,15 +30,12 @@ class _FormatEntities:
 
     def __init__(self, card_format="LONG"):
         self._card_format = card_format
-        self._format_map = {
-            "SHORT": 10,
-            "LONG": 20
-        }
+        self._format_map = {"SHORT": 10, "LONG": 20}
 
     def field_int(self, num):
         field_len = self._format_map[self._card_format]
         if len(str(num)) <= field_len:
-            blank_space = field_len-len(str(num))
+            blank_space = field_len - len(str(num))
             field = ' ' * blank_space + str(num)
         else:
             field = self.field_exp(num)
@@ -46,7 +45,7 @@ class _FormatEntities:
         field_len = self._format_map[self._card_format]
         if field_len < 7:
             field_len = 7
-        s = "%.*e" % (field_len-7, f)
+        s = "%.*e" % (field_len - 7, f)
         mantissa, exp = s.split('e')
         sign = ' '
         if f < 0:
@@ -57,7 +56,7 @@ class _FormatEntities:
     def field_float(self, num):
         field_len = self._format_map[self._card_format]
         if len(str(num)) <= field_len:
-            blank_space = field_len-len(str(num))
+            blank_space = field_len - len(str(num))
             field = ' ' * blank_space + str(num)
         else:
             if abs(float(num)) < 1000:
@@ -67,10 +66,10 @@ class _FormatEntities:
             else:
                 field = self.field_exp(num)
             # if len(str(round(float(num), 2))) <= field_len:
-                # blank_space = field_len - len(str(num))
-                # field = ' ' * blank_space + str(num)[:field_len]
+            # blank_space = field_len - len(str(num))
+            # field = ' ' * blank_space + str(num)[:field_len]
             # else:
-                # field = self.field_exp(num)
+            # field = self.field_exp(num)
         return field
 
     def field_str(self, string):
@@ -84,11 +83,11 @@ class _FormatEntities:
 
     def field_less_1_str(self, string):
         field_len = self._format_map[self._card_format]
-        if len(string) <= field_len-1:
-            blank_space = field_len-1 - len(string)
+        if len(string) <= field_len - 1:
+            blank_space = field_len - 1 - len(string)
             field = ' ' * blank_space + str(string)
         else:
-            field = string[0:field_len-1]
+            field = string[0 : field_len - 1]
         return field
 
 
@@ -114,8 +113,7 @@ class _TimePointsProcessor:
         time_pt_data = self._time_data
         time_pt_commands = ''
         for time_pt_table_name, time_pt_table_data in time_pt_data.items():
-            time_pt_commands += self._get_commands(
-                time_pt_table_name, time_pt_table_data)
+            time_pt_commands += self._get_commands(time_pt_table_name, time_pt_table_data)
         if os.path.isfile(self._file_name) and time_pt_commands != "":
             self.write_timepoint_table_to_file(time_pt_commands)
         else:
@@ -138,13 +136,12 @@ class _TimePointsProcessor:
                 f"Warning: timepoint table with argument generate is not processed."
             )
         pt_data = time_pt_table_data['Data']['time_points']
-        formatter_pt_data = [
-            f"{self._formatter.field_str(pt)}" for pt in pt_data]
+        formatter_pt_data = [f"{self._formatter.field_str(pt)}" for pt in pt_data]
         all_values = []
         all_values.extend(formatter_pt_data)
         format_output = ""
         for i in range(0, len(all_values), 4):
-            values = all_values[i:i+4]
+            values = all_values[i : i + 4]
             format_output += ''.join(values) + '\n'
         mapdl_commands += f"*DIM, {time_pt_table_name}, ARRAY, {len(pt_data)}, 1, 1,\n"
         mapdl_commands += f"*PREAD, {time_pt_table_name}, {len(pt_data)}\n"
@@ -177,24 +174,19 @@ class _OutputIntervalProcessor:
                 f"Interval Tables are not written to the file"
             )
 
-    def get_commands(
-        self,
-        time_pt_table_name,
-        number_interval,
-        delta_time,
-        step_start_time
-    ):
+    def get_commands(self, time_pt_table_name, number_interval, delta_time, step_start_time):
         mapdl_commands = ''
-        formatter_pt_data = [step_start_time+i*delta_time /
-                             number_interval for i in range(1, number_interval+1)]
+        formatter_pt_data = [
+            step_start_time + i * delta_time / number_interval
+            for i in range(1, number_interval + 1)
+        ]
         formatter_pt_data = sorted(list(set(formatter_pt_data)))
-        formatter_pt_data = [self._formatter.field_float(
-            i) for i in formatter_pt_data]
+        formatter_pt_data = [self._formatter.field_float(i) for i in formatter_pt_data]
         all_values = []
         all_values.extend(formatter_pt_data)
         format_output = ""
         for i in range(0, len(all_values), 4):
-            values = all_values[i:i+4]
+            values = all_values[i : i + 4]
             format_output += ''.join(values) + '\n'
         mapdl_commands += f"*DIM, {time_pt_table_name}, ARRAY, {len(formatter_pt_data)}, 1, 1,\n"
         mapdl_commands += f"*PREAD, {time_pt_table_name}, {len(formatter_pt_data)}\n"
@@ -206,10 +198,19 @@ class _OutputIntervalProcessor:
 class _AmplitudeProcessor:
     _amplitude_file = ""
     _amplitude_count = 0
-    __slots__ = ('_amplitudes_data', '_step_start_time', '_step_end_time',
-                 '_scale_factor', '_relative_value', '_step_time',
-                 '_definition', '_modified_amplitude_name', '_formatter',
-                 '_model', '_logger')
+    __slots__ = (
+        '_amplitudes_data',
+        '_step_start_time',
+        '_step_end_time',
+        '_scale_factor',
+        '_relative_value',
+        '_step_time',
+        '_definition',
+        '_modified_amplitude_name',
+        '_formatter',
+        '_model',
+        '_logger',
+    )
 
     def __init__(self, model: prime.Model, data):
         self._amplitudes_data = data
@@ -239,8 +240,7 @@ class _AmplitudeProcessor:
         amplitude_commands = ''
         for ampl_name, ampl_table_data in amplitudes_data.items():
             self._modified_amplitude_name = ampl_name
-            amplitude_commands += self._get_commands(
-                ampl_name, ampl_table_data)
+            amplitude_commands += self._get_commands(ampl_name, ampl_table_data)
         return amplitude_commands
 
     def get_mapdl_commands_for_amplitude(
@@ -250,11 +250,12 @@ class _AmplitudeProcessor:
         applied_on,
         step_start_time=0.0,
         step_end_time=1.0,
-        scale_factor=1.0
+        scale_factor=1.0,
     ):
         _AmplitudeProcessor._amplitude_count += 1
-        self._modified_amplitude_name = modified_amplitude_name + \
-            "_" + str(_AmplitudeProcessor._amplitude_count)
+        self._modified_amplitude_name = (
+            modified_amplitude_name + "_" + str(_AmplitudeProcessor._amplitude_count)
+        )
         # self._logger.info(f"scale_factor = {scale_factor}")
         # self._logger.info(f"step_start_time = {step_start_time}")
         # self._logger.info(f"step_end_time = {step_end_time}")
@@ -265,12 +266,12 @@ class _AmplitudeProcessor:
         amplitude_commands = ''
         if amplitude_name not in amplitudes_data.keys():
             self._logger.warning(
-                f"Amplitude table '{amplitude_name}' is not defined with *AMPLITUDE.")
+                f"Amplitude table '{amplitude_name}' is not defined with *AMPLITUDE."
+            )
             return amplitude_commands
         for ampl_name, ampl_table_data in amplitudes_data.items():
             if amplitude_name == ampl_name:
-                amplitude_commands += self._get_commands(
-                    ampl_name, ampl_table_data, applied_on)
+                amplitude_commands += self._get_commands(ampl_name, ampl_table_data, applied_on)
                 break
         return amplitude_commands
 
@@ -289,25 +290,30 @@ class _AmplitudeProcessor:
             begin = 0.0
             self._definition = 'TABULAR'
             if 'Parameters' in ampl_table_data and ampl_table_data['Parameters'] is not None:
-                if "VALUE" in ampl_table_data['Parameters'] and ampl_table_data[
-                        'Parameters']["VALUE"] == "RELATIVE":
+                if (
+                    "VALUE" in ampl_table_data['Parameters']
+                    and ampl_table_data['Parameters']["VALUE"] == "RELATIVE"
+                ):
                     self._relative_value = False
-                if "TIME" in ampl_table_data['Parameters'] and ampl_table_data[
-                        'Parameters']["TIME"] == "TOTAL TIME":
+                if (
+                    "TIME" in ampl_table_data['Parameters']
+                    and ampl_table_data['Parameters']["TIME"] == "TOTAL TIME"
+                ):
                     self._step_time = False
                 if "FIXED INTERVAL" in ampl_table_data['Parameters']:
-                    interval = float(
-                        ampl_table_data['Parameters']["FIXED INTERVAL"])
+                    interval = float(ampl_table_data['Parameters']["FIXED INTERVAL"])
                 if "BEGIN" in ampl_table_data['Parameters']:
                     begin = float(ampl_table_data['Parameters']["BEGIN"])
                 if "SMOOTH" in ampl_table_data['Parameters']:
                     self._logger.warning(
                         f"Warning: SMOOTH Parameter on Amplitude table '{amplitude_name}' "
-                        f"is not processed")
+                        f"is not processed"
+                    )
                 if "INPUT" in ampl_table_data['Parameters']:
                     self._logger.warning(
                         f"Warning: INPUT Parameter on Amplitude table '{amplitude_name}' "
-                        f"is not processed")
+                        f"is not processed"
+                    )
                     return amplitude_commands
                 if "DEFINITION" not in ampl_table_data['Parameters']:
                     self._definition = 'TABULAR'
@@ -320,17 +326,21 @@ class _AmplitudeProcessor:
             amplitude_commands += "\n"
             if self._definition == 'TABULAR':
                 amplitude_commands += self._process_tabular_data(
-                    amplitude_name, ampl_table_data['Data'])
+                    amplitude_name, ampl_table_data['Data']
+                )
             elif self._definition == 'EQUALLY SPACED':
                 amplitude_commands += self._process_equally_spaced_data(
-                    amplitude_name, ampl_table_data['Data'], begin, interval)
+                    amplitude_name, ampl_table_data['Data'], begin, interval
+                )
             elif self._definition == 'PERIODIC':
                 amplitude_commands += self._process_periodic_data(
-                    amplitude_name, ampl_table_data['Data'])
+                    amplitude_name, ampl_table_data['Data']
+                )
             else:
                 self._logger.warning(
                     f"Warning: *AMPLITUDE ('{amplitude_name}') with DEFINITION type "
-                    f"{ampl_table_data['Parameters']['DEFINITION']} is not processed")
+                    f"{ampl_table_data['Parameters']['DEFINITION']} is not processed"
+                )
         return amplitude_commands
 
     def _process_periodic_amplitude_table(self, name, magn, freq):
@@ -385,7 +395,7 @@ class _AmplitudeProcessor:
         if "number_of_terms" in data:
             terms = int(data["number_of_terms"])
         if "circular_frequency" in data:
-            freq = float(data["circular_frequency"])*180/math.pi
+            freq = float(data["circular_frequency"]) * 180 / math.pi
         if "t0" in data:
             t0 = float(data["t0"])
         if "A0" in data:
@@ -398,13 +408,15 @@ class _AmplitudeProcessor:
             self._logger.warning(
                 f"Warning: multiple Sine terms for Amplitude Table '{amplitude_name}' "
                 f"is not processed. please check the table created with name: "
-                f"{self._modified_amplitude_name}")
+                f"{self._modified_amplitude_name}"
+            )
         for i, pt in enumerate(zip(A, B)):
             if i == 0 and float(pt[0]) != 0:
                 self._logger.warning(
                     f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
                     f" please check the table created with name: "
-                    f"{self._modified_amplitude_name}")
+                    f"{self._modified_amplitude_name}"
+                )
             if i == 0 and float(pt[1]) != 1:
                 self._logger.warning(
                     f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
@@ -412,16 +424,11 @@ class _AmplitudeProcessor:
                     f"created with name: {self._modified_amplitude_name}"
                 )
         amplitude_commands += self._process_periodic_amplitude_table(
-            self._modified_amplitude_name, self._scale_factor, freq)
+            self._modified_amplitude_name, self._scale_factor, freq
+        )
         return amplitude_commands
 
-    def _process_equally_spaced_data(
-        self,
-        amplitude_name,
-        ampl_table_data,
-        begin,
-        interval
-    ):
+    def _process_equally_spaced_data(self, amplitude_name, ampl_table_data, begin, interval):
         amplitude_commands = ""
         data_lines = ampl_table_data
         formatted_amp = []
@@ -434,15 +441,15 @@ class _AmplitudeProcessor:
                     for value in amp
                 ]
             else:
-                formatted_amp = [
-                    f"{self._formatter.field_float(float(value))}" for value in amp]
-        initial_time_skip = (self._step_end_time-self._step_start_time)*1e-5
+                formatted_amp = [f"{self._formatter.field_float(float(value))}" for value in amp]
+        initial_time_skip = (self._step_end_time - self._step_start_time) * 1e-5
         # if 'time_or_frequency' in data_lines:
         # time = data_lines['time_or_frequency']
         if interval is None:
             self._logger.warning(
                 f"Warning: FIXED INTERVAL Parameter is not provided on Amplitude table "
-                f"'{amplitude_name}' table is not processed")
+                f"'{amplitude_name}' table is not processed"
+            )
             return amplitude_commands
         if not self._step_time:
             formatted_time = [
@@ -455,13 +462,11 @@ class _AmplitudeProcessor:
                 for i in range(0, len(formatted_amp))
             ]
             if self._step_start_time != 0.0:
-                ff = self._formatter.field_float(
-                    float(formatted_time[0])+initial_time_skip)
+                ff = self._formatter.field_float(float(formatted_time[0]) + initial_time_skip)
                 formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(
-                1, f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -473,7 +478,7 @@ class _AmplitudeProcessor:
         all_values.extend(formatted_amp)
         format_output = ''
         for i in range(0, len(all_values), 4):
-            values = all_values[i:i+4]
+            values = all_values[i : i + 4]
             format_output += ''.join(values) + '\n'
         man = self._modified_amplitude_name
         amplitude_commands += f"*DIM, {man}, TABLE, {len(formatted_amp)}, 1, 1,\n"
@@ -496,27 +501,23 @@ class _AmplitudeProcessor:
                     for value in amp
                 ]
             else:
-                formatted_amp = [
-                    f"{self._formatter.field_float(float(value))}" for value in amp]
-        initial_time_skip = (self._step_end_time-self._step_start_time)*1e-5
+                formatted_amp = [f"{self._formatter.field_float(float(value))}" for value in amp]
+        initial_time_skip = (self._step_end_time - self._step_start_time) * 1e-5
         if 'time_or_frequency' in data_lines:
             time = data_lines['time_or_frequency']
             if not self._step_time:
-                formatted_time = [
-                    f"{self._formatter.field_float(float(value))}" for value in time]
+                formatted_time = [f"{self._formatter.field_float(float(value))}" for value in time]
             else:
                 formatted_time = [
                     f"{self._formatter.field_float(float(value)+self._step_start_time)}"
                     for value in time
                 ]
                 if self._step_start_time != 0.0:
-                    ff = self._formatter.field_float(
-                        float(formatted_time[0])+initial_time_skip)
+                    ff = self._formatter.field_float(float(formatted_time[0]) + initial_time_skip)
                     formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(
-                1, f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -528,7 +529,7 @@ class _AmplitudeProcessor:
         all_values.extend(formatted_amp)
         format_output = ''
         for i in range(0, len(all_values), 4):
-            values = all_values[i:i+4]
+            values = all_values[i : i + 4]
             format_output += ''.join(values) + '\n'
         man = self._modified_amplitude_name
         amplitude_commands += f"*DIM, {man}, TABLE, {len(formatted_amp)}, 1, 1,\n"
@@ -539,9 +540,16 @@ class _AmplitudeProcessor:
 
 
 class _MaterialProcessor:
-    __slots__ = ('_raw_materials_data', '_zone_data', '_mat_id',
-                 '_material_linked_to_zone_type', '_cohezive_zone_thickness_data',
-                 '_property_function_map', '_model', '_logger')
+    __slots__ = (
+        '_raw_materials_data',
+        '_zone_data',
+        '_mat_id',
+        '_material_linked_to_zone_type',
+        '_cohezive_zone_thickness_data',
+        '_property_function_map',
+        '_model',
+        '_logger',
+    )
 
     def __init__(self, model: prime.Model, raw_materials_data, zone_data):
         self._raw_materials_data = raw_materials_data
@@ -564,9 +572,7 @@ class _MaterialProcessor:
         for zone in self._zone_data:
             zone_details = self._zone_data[zone]
             if 'Type' not in zone_details:
-                self._logger.warning(
-                    f'Warning: Type is not specified for zone {zone}'
-                )
+                self._logger.warning(f'Warning: Type is not specified for zone {zone}')
                 continue
             if zone_details['Type'] not in ['Shell', 'Solid', 'Cohesive', 'Beam']:
                 self._logger.warning(
@@ -576,24 +582,26 @@ class _MaterialProcessor:
                 self._logger.info(zone_details['Type'])
                 continue
             if 'Material' not in zone_details:
-                self._logger.warning(
-                    f'Warning: Material is not specified for zone {zone}'
-                )
+                self._logger.warning(f'Warning: Material is not specified for zone {zone}')
                 continue
             if zone_details['Type'] == 'Cohesive':
                 self._cohezive_zone_thickness_data[zone_details['Material']] = {
-                    'ThicknessMode': None, 'Thickness': 1.0}
+                    'ThicknessMode': None,
+                    'Thickness': 1.0,
+                }
                 if 'ThicknessMode' in zone_details:
-                    self._cohezive_zone_thickness_data[
-                        zone_details['Material']
-                    ]['ThicknessMode'] = zone_details['ThicknessMode']
+                    self._cohezive_zone_thickness_data[zone_details['Material']][
+                        'ThicknessMode'
+                    ] = zone_details['ThicknessMode']
                 if 'Thickness' in zone_details:
-                    self._cohezive_zone_thickness_data[
-                        zone_details['Material']
-                    ]['Thickness'] = zone_details['Thickness']
+                    self._cohezive_zone_thickness_data[zone_details['Material']][
+                        'Thickness'
+                    ] = zone_details['Thickness']
             if zone_details['Material'] in self._material_linked_to_zone_type:
                 if self._material_linked_to_zone_type[zone_details['Material']] in [
-                    'Shell', 'Solid', 'beam'
+                    'Shell',
+                    'Solid',
+                    'beam',
                 ]:
                     if zone_details['Type'] == 'Cohesive':
                         self._logger.warning(
@@ -604,11 +612,10 @@ class _MaterialProcessor:
                     if zone_details['Type'] in ['Shell', 'Solid', 'beam']:
                         self._logger.warning(
                             f"Warning: Material:'{zone_details['Material']}' is used for "
-                            f"{zone_details['Type']} and cohesive")
+                            f"{zone_details['Type']} and cohesive"
+                        )
             else:
-                self._material_linked_to_zone_type[
-                    zone_details['Material']
-                ] = zone_details['Type']
+                self._material_linked_to_zone_type[zone_details['Material']] = zone_details['Type']
 
     def get_all_material_commands(self):
         mapdl_text_data_list = []
@@ -624,22 +631,26 @@ class _MaterialProcessor:
     def _get_mat_comands(self, material):
         mat_data = self._raw_materials_data[material]
         self._mat_id = mat_data['id']
-        processed_entities = ['DENSITY', 'ELASTIC', 'PLASTIC',
-                              'Parameters', "HYPERELASTIC", "DAMPING",
-                              "EXPANSION"
-                              ]
+        processed_entities = [
+            'DENSITY',
+            'ELASTIC',
+            'PLASTIC',
+            'Parameters',
+            "HYPERELASTIC",
+            "DAMPING",
+            "EXPANSION",
+        ]
         # self._logger.info(mat_data)
         mapdl_text_data = f"! material '{material}' \n"
         if "Parameters" in mat_data:
-            self._logger.warning(
-                f"Parameter on Material {material} are not processed."
-            )
+            self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
             if prop == 'id':
                 continue
             elif prop not in processed_entities:
                 self._logger.warning(
-                    f"The property {prop} for Material {material} is not processed.")
+                    f"The property {prop} for Material {material} is not processed."
+                )
                 continue
             function = self._property_function_map[prop]
             mapdl_text_data += function(mat_data[prop], material, self._mat_id)
@@ -675,16 +686,21 @@ class _MaterialProcessor:
             zero = float(property_dict['Parameters']['ZERO'])
         if 'TYPE' in property_dict['Parameters']:
             exp_type = property_dict['Parameters']['TYPE']
-        if 'DEPENDENCIES' in property_dict['Parameters'] or 'PORE FLUID' in property_dict[
-                'Parameters'] or 'USER' in property_dict['Parameters']:
+        if (
+            'DEPENDENCIES' in property_dict['Parameters']
+            or 'PORE FLUID' in property_dict['Parameters']
+            or 'USER' in property_dict['Parameters']
+        ):
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
-                f"*EXPANSION are not processed for material {material}")
+                f"*EXPANSION are not processed for material {material}"
+            )
             return ''
         if exp_type == 'SHORT FIBER' or exp_type == 'ANISO':
             self._logger.warning(
                 f"*EXPANSION of type SHORT FIBER and ANISO are "
-                f"not processed for material {material}.")
+                f"not processed for material {material}."
+            )
             return ''
         if 'ZERO' in property_dict['Parameters']:
             expansion_data += f"MP,REFT,{mat_id},{zero}"
@@ -702,13 +718,13 @@ class _MaterialProcessor:
         if exp_type == 'ORTHO':
             if 'A11' in property_dict['Data']:
                 ctexs = property_dict['Data']['A11']
-            cteys = ['0.0']*len(ctexs)
+            cteys = ['0.0'] * len(ctexs)
             if 'A22' in property_dict['Data']:
                 cteys = property_dict['Data']['A22']
-            ctezs = ['0.0']*len(ctexs)
+            ctezs = ['0.0'] * len(ctexs)
             if 'A33' in property_dict['Data']:
                 ctezs = property_dict['Data']['A33']
-            temperature = [None]*len(ctexs)
+            temperature = [None] * len(ctexs)
             if 'Temperature' in property_dict['Data']:
                 temperature = property_dict['Data']['Temperature']
             expansion_data += f"TB, CTE, {mat_id},,,\n"
@@ -722,19 +738,13 @@ class _MaterialProcessor:
     def _process_damping_data(self, property_dict, material, mat_id):
         damping_data = ''
         if property_dict['Parameters'] is None:
-            self._logger.warning(
-                f"*DAMPING does not have parameters to process."
-            )
+            self._logger.warning(f"*DAMPING does not have parameters to process.")
         if 'ALPHA' in property_dict['Parameters']:
             damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
         if float(property_dict['Parameters']['BETA']) != 0.0:
-            self._logger.warning(
-                f"Parameter {'BETA'} on *DAMPING is not processed."
-            )
+            self._logger.warning(f"Parameter {'BETA'} on *DAMPING is not processed.")
         if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
-            self._logger.warning(
-                f"Parameter {'COMPOSITE'} on *DAMPING is not processed."
-            )
+            self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
         damping_data += f"\n"
         return damping_data
 
@@ -747,7 +757,8 @@ class _MaterialProcessor:
             temperature = property_dict['Data']['Temperature']
             if len(density) != len(temperature):
                 self._logger.warning(
-                    f"data values on *DENSITY are not consistent for material {material}.")
+                    f"data values on *DENSITY are not consistent for material {material}."
+                )
         if len(density) > 1:
             self._logger.warning(
                 f"there are multiple data values on *DENSITY, "
@@ -774,10 +785,12 @@ class _MaterialProcessor:
                 temperature = property_dict['Data']['Temperature']
                 if len(youngs_mod) != len(temperature):
                     self._logger.warning(
-                        f"data values on *ELASTIC are not consistent for material {material}.")
+                        f"data values on *ELASTIC are not consistent for material {material}."
+                    )
             if len(youngs_mod) != len(nu):
                 self._logger.warning(
-                    f"data values on *ELASTIC are not consistent for material {material}.")
+                    f"data values on *ELASTIC are not consistent for material {material}."
+                )
             if len(youngs_mod) > 1:
                 self._logger.warning(
                     f"there are multiple data values on *ELASTIC, "
@@ -816,10 +829,12 @@ class _MaterialProcessor:
                 temperature = property_dict['Data']['Temperature']
                 if len(knn) != len(temperature):
                     self._logger.warning(
-                        f"data values on *ELASTIC are not consistent for material {material}.")
+                        f"data values on *ELASTIC are not consistent for material {material}."
+                    )
             if len(knn) != len(kss):
                 self._logger.warning(
-                    f"data values on *ELASTIC are not consistent for material {material}.")
+                    f"data values on *ELASTIC are not consistent for material {material}."
+                )
             if len(knn) > 1:
                 self._logger.warning(
                     f"there are multiple data values on *ELASTIC, "
@@ -839,7 +854,8 @@ class _MaterialProcessor:
         else:
             self._logger.warning(
                 f"Elastic Modulus with type = "
-                f"{property_dict['Parameters']['TYPE']} is not processed.")
+                f"{property_dict['Parameters']['TYPE']} is not processed."
+            )
             return ''
         return elastic_modulus
 
@@ -861,13 +877,15 @@ class _MaterialProcessor:
         if 'Temperature' in property_dict['Data']:
             temperature = property_dict['Data']['Temperature']
             unique_temperatures = len(list(set(temperature)))
-            data_points = len(strains)/unique_temperatures
+            data_points = len(strains) / unique_temperatures
             if len(stresses) != len(temperature):
                 self._logger.warning(
-                    f"data values on *PLASTIC are not consistent for material {material}.")
+                    f"data values on *PLASTIC are not consistent for material {material}."
+                )
         if len(stresses) != len(strains):
             self._logger.warning(
-                f"data values on *PLASTIC are not consistent for material {material}.")
+                f"data values on *PLASTIC are not consistent for material {material}."
+            )
         plastic_data += f"TB,PLAS,{mat_id},,{int(data_points)},MISO\n"
         curr_temp = None
         for i, strain in enumerate(strains):
@@ -882,9 +900,11 @@ class _MaterialProcessor:
     def _process_hyperelastic_data(self, property_dict, material, mat_id):
         hyperelastic_data = ''
         param_keys = property_dict["Parameters"].keys()
-        if ('REDUCED POLYNOMIAL' not in param_keys
-                and 'YEOH' not in param_keys
-                and 'NEO HOOKE' not in param_keys):
+        if (
+            'REDUCED POLYNOMIAL' not in param_keys
+            and 'YEOH' not in param_keys
+            and 'NEO HOOKE' not in param_keys
+        ):
             self._logger.warning(
                 f"Only parameter REDUCED POLYNOMIAL, "
                 f"YEOH and NEO HOOKE is processed, "
@@ -900,7 +920,8 @@ class _MaterialProcessor:
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
-                    f"temperature is not provided for HYPERELASTIC material: {material}.")
+                    f"temperature is not provided for HYPERELASTIC material: {material}."
+                )
                 temp_data_points = 1
                 temperature = [None]
             if 'C10' in property_dict['Data'].keys():
@@ -908,7 +929,7 @@ class _MaterialProcessor:
                 if 'D1' in property_dict['Data'].keys():
                     d1 = property_dict['Data']['D1']
                 else:
-                    d1 = [0.0]*len(c10)
+                    d1 = [0.0] * len(c10)
             hyperelastic_data += f"TB,HYPE,{mat_id},,,NEO\n"
             for i in range(len(temperature)):
                 if temperature[i] is not None:
@@ -920,7 +941,8 @@ class _MaterialProcessor:
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
-                    f"temperature is not provided for HYPERELASTIC material: {material}.")
+                    f"temperature is not provided for HYPERELASTIC material: {material}."
+                )
                 temp_data_points = 1
                 temperature = [None]
             number_of_constants = 3
@@ -930,21 +952,21 @@ class _MaterialProcessor:
                 if 'D1' in property_dict['Data'].keys():
                     d1 = property_dict['Data']['D1']
                 else:
-                    d1 = [0.0]*len(c10)
+                    d1 = [0.0] * len(c10)
             if 'C20' in property_dict['Data'].keys():
                 number_of_constants = 2
                 c20 = property_dict['Data']['C20']
                 if 'D2' in property_dict['Data'].keys():
                     d2 = property_dict['Data']['D2']
                 else:
-                    d2 = [0.0]*len(c20)
+                    d2 = [0.0] * len(c20)
             if 'C30' in property_dict['Data'].keys():
                 number_of_constants = 3
                 c30 = property_dict['Data']['C30']
                 if 'D3' in property_dict['Data'].keys():
                     d3 = property_dict['Data']['D3']
                 else:
-                    d3 = [0.0]*len(c30)
+                    d3 = [0.0] * len(c30)
             hyperelastic_data += f"TB,HYPE,{mat_id},,{number_of_constants},YEOH\n"
             for i in range(len(temperature)):
                 if temperature[i] is not None:
@@ -965,8 +987,8 @@ class _MaterialProcessor:
         #         temp_data_points = len(temperature)
         #     else:
         #         self._logger.warning(
-            # f"temperature is not provided for HYPERELASTIC material: {material}."
-            # )
+        # f"temperature is not provided for HYPERELASTIC material: {material}."
+        # )
         #         temp_data_points = 1
         #         temperature = [None]
         hyperelastic_data += f"\n"
@@ -975,8 +997,13 @@ class _MaterialProcessor:
 
 
 class _JointMaterialProcessor:
-    __slots__ = ('_raw_joint_materials_data', '_mat_id', '_property_function_map',
-                 '_model', '_logger')
+    __slots__ = (
+        '_raw_joint_materials_data',
+        '_mat_id',
+        '_property_function_map',
+        '_model',
+        '_logger',
+    )
 
     def __init__(self, model: prime.Model, raw_joint_materials_data):
         self._raw_joint_materials_data = raw_joint_materials_data
@@ -1004,15 +1031,14 @@ class _JointMaterialProcessor:
         # self._logger.info(mat_data)
         mapdl_text_data = f"! material '{material}' \n"
         if "Parameters" in mat_data:
-            self._logger.warning(
-                f"Parameter on Material {material} are not processed."
-            )
+            self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
             if prop == 'id' or prop == "CONNECTOR CONSTITUTIVE REFERENCE":
                 continue
             elif prop not in processed_entities:
                 self._logger.warning(
-                    f"The property {prop} for Material {material} is not processed.")
+                    f"The property {prop} for Material {material} is not processed."
+                )
                 continue
             function = self._property_function_map[prop]
             mapdl_text_data += function(mat_data[prop], material, self._mat_id)
@@ -1035,7 +1061,7 @@ class _JointMaterialProcessor:
         return mapdl_text_data
 
     def get_new_point(self, pt_d, d1, f1, d2, f2):
-        new_f = f1 + (pt_d-d1)*(f1-f2)/(d1-d2)
+        new_f = f1 + (pt_d - d1) * (f1 - f2) / (d1 - d2)
         new_d = pt_d
         return new_d, new_f
 
@@ -1061,7 +1087,8 @@ class _JointMaterialProcessor:
             if 'Parameters' not in comp_data:
                 self._logger.warning(
                     f"Parameter on Connector elasticity for "
-                    f"Material {material} is not available.")
+                    f"Material {material} is not available."
+                )
             else:
                 if 'NONLINEAR' in comp_data['Parameters']:
                     all_linear = False
@@ -1071,7 +1098,8 @@ class _JointMaterialProcessor:
             if 'Parameters' not in comp_data:
                 self._logger.warning(
                     f"Parameter on Connector elasticity for "
-                    f"Material {material} is not available.")
+                    f"Material {material} is not available."
+                )
             else:
                 if 'RIGID' not in comp_data['Parameters']:
                     all_rigid = False
@@ -1085,11 +1113,11 @@ class _JointMaterialProcessor:
                 if 'Parameters' not in comp_data:
                     self._logger.warning(
                         f"Parameter on Connector elasticity for "
-                        f"Material {material} is not available.")
+                        f"Material {material} is not available."
+                    )
                 else:
                     if 'RIGID' in comp_data['Parameters']:
-                        ff = comps_linear_mapping[comp_data['Parameters']
-                                                  ['COMPONENT']]
+                        ff = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
                         elasticity_data += f"TBDATA, {ff}, 1e8\n"
                         continue
                     if 'NONLINEAR' in comp_data['Parameters']:
@@ -1103,7 +1131,8 @@ class _JointMaterialProcessor:
                                 self._logger.warning(
                                     f"Data for Connector elasticity for Material {material}, "
                                     f"is not conststent with tempereture, "
-                                    f"values are not processed")
+                                    f"values are not processed"
+                                )
                             else:
                                 temp_val = None
                                 elasticity_temporary_data = ""
@@ -1116,15 +1145,17 @@ class _JointMaterialProcessor:
                                 for d, f, t in zip(relative_disp, stiff, temperatures):
                                     if temp_val != float(t):
                                         counter = 0
-                                    if (sign_changed == False
+                                    if (
+                                        sign_changed == False
                                         and counter == 0
-                                            and super_counter != 0):
+                                        and super_counter != 0
+                                    ):
                                         d_temp, f_temp = self.get_new_point(
                                             1e-5,
-                                            relative_disp[super_counter-2],
-                                            stiff[super_counter-2],
-                                            relative_disp[super_counter-1],
-                                            stiff[super_counter-1]
+                                            relative_disp[super_counter - 2],
+                                            stiff[super_counter - 2],
+                                            relative_disp[super_counter - 1],
+                                            stiff[super_counter - 1],
                                         )
                                         elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                         point_added = True
@@ -1143,8 +1174,8 @@ class _JointMaterialProcessor:
                                             -1e-5,
                                             relative_disp[super_counter],
                                             stiff[super_counter],
-                                            relative_disp[super_counter+1],
-                                            stiff[super_counter+1]
+                                            relative_disp[super_counter + 1],
+                                            stiff[super_counter + 1],
                                         )
                                         elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                         point_added = True
@@ -1155,7 +1186,8 @@ class _JointMaterialProcessor:
                                     elasticity_temporary_data += f"TBPT,,{d},{f}\n"
                                     if reached_positive:
                                         d_temp, f_temp = self.get_new_point(
-                                            1e-5, d_previous, f_previous, d, f)
+                                            1e-5, d_previous, f_previous, d, f
+                                        )
                                         elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                         reached_positive = False
                                         point_added = True
@@ -1165,20 +1197,19 @@ class _JointMaterialProcessor:
                                     super_counter += 1
                                 if sign_changed == False:
                                     d_temp, f_temp = self.get_new_point(
-                                        1e-5, relative_disp[-2],
-                                        stiff[-2], relative_disp[-1], stiff[-1]
+                                        1e-5,
+                                        relative_disp[-2],
+                                        stiff[-2],
+                                        relative_disp[-1],
+                                        stiff[-1],
                                     )
                                     elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                     point_added = True
                                 if point_added == False:
-                                    points = int(
-                                        len(stiff)/len(list(set(temperatures))))
+                                    points = int(len(stiff) / len(list(set(temperatures))))
                                 else:
-                                    points = int(
-                                        len(stiff)/len(list(set(temperatures)))) + 1
-                                clms = comps_nonlinear_mapping[
-                                    comp_data['Parameters']['COMPONENT']
-                                ]
+                                    points = int(len(stiff) / len(list(set(temperatures)))) + 1
+                                clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                                 elasticity_data += f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
                                 elasticity_data += elasticity_temporary_data
                         else:
@@ -1193,8 +1224,11 @@ class _JointMaterialProcessor:
                                     starts_with_negative = True
                                 elif counter == 0 and d >= 0:
                                     d_temp, f_temp = self.get_new_point(
-                                        -1e-5, relative_disp[0], stiff[0],
-                                        relative_disp[1], stiff[1]
+                                        -1e-5,
+                                        relative_disp[0],
+                                        stiff[0],
+                                        relative_disp[1],
+                                        stiff[1],
                                     )
                                     elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                     point_added = True
@@ -1208,7 +1242,8 @@ class _JointMaterialProcessor:
 
                                 if reached_positive:
                                     d_temp, f_temp = self.get_new_point(
-                                        1e-5, d_previous, f_previous, d, f)
+                                        1e-5, d_previous, f_previous, d, f
+                                    )
                                     elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                     point_added = True
                                     reached_positive = False
@@ -1217,8 +1252,7 @@ class _JointMaterialProcessor:
                                 counter += 1
                             if sign_changed == False:
                                 d_temp, f_temp = self.get_new_point(
-                                    1e-5, relative_disp[-2], stiff[-2],
-                                    relative_disp[-1], stiff[-1]
+                                    1e-5, relative_disp[-2], stiff[-2], relative_disp[-1], stiff[-1]
                                 )
                                 elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
                                 point_added = True
@@ -1234,7 +1268,8 @@ class _JointMaterialProcessor:
                             self._logger.warning(
                                 f"Data for Connector elasticity for Material {material}, "
                                 f"has multiple stiffness values, "
-                                f"tempereture dependent values are not processed")
+                                f"tempereture dependent values are not processed"
+                            )
                         clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                         elasticity_data += f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
                         elasticity_data += f"TBPT, , -1.0, -{comp_data['Data']['Stiffness'][0]}\n"
@@ -1245,9 +1280,9 @@ class _JointMaterialProcessor:
                             self._logger.warning(
                                 f"Data for Connector elasticity for Material {material}, "
                                 f"has multiple stiffness values, "
-                                f"tempereture dependent values are not processed")
-                        clms = comps_linear_mapping[comp_data['Parameters']
-                                                    ['COMPONENT']]
+                                f"tempereture dependent values are not processed"
+                            )
+                        clms = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
                         cds = comp_data['Data']['Stiffness'][0]
                         elasticity_data += f"TBDATA, {clms}, {cds}\n"
         else:
@@ -1294,15 +1329,16 @@ class _JointMaterialProcessor:
         for comp_data in property_dict:
             if 'Parameters' not in comp_data:
                 self._logger.warning(
-                    f"Parameter on Connector damping for "
-                    f"Material {material} is not available.")
+                    f"Parameter on Connector damping for " f"Material {material} is not available."
+                )
             else:
                 if 'TYPE' in comp_data['Parameters']:
                     if comp_data['Parameters']['TYPE'] != "VISCOUS":
                         self._logger.warning(
                             f"Parameter TYPE on Connector damping for Material {material}"
                             f" is {comp_data['Parameters']['TYPE']}, "
-                            f"only TYPE= VISCOUS is processed.")
+                            f"only TYPE= VISCOUS is processed."
+                        )
                 if 'NONLINEAR' in comp_data['Parameters']:
                     # self._logger.info('nonlinear')
                     relative_disp = comp_data['Data']["velocity"]
@@ -1325,8 +1361,7 @@ class _JointMaterialProcessor:
                                     temp_val = float(t)
                                 damp_temporary_data += f"TBPT,,{d},{f}\n"
                             s1 = int(len(damp) / len(list(set(temperatures))))
-                            s2 = comps_nonlinear_mapping[comp_data['Parameters']
-                                                         ['COMPONENT']]
+                            s2 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                             damping_data += f"TB, JOIN, {mat_id}, , {s1}, {s2}\n"
                             damping_data += damp_temporary_data
                     else:
@@ -1334,8 +1369,7 @@ class _JointMaterialProcessor:
                         for d, f in zip(relative_disp, damp):
                             damp_temporary_data += f"TBPT,,{d},{f}\n"
                         s1 = len(damp)
-                        s2 = comps_nonlinear_mapping[comp_data['Parameters']
-                                                     ['COMPONENT']]
+                        s2 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                         damping_data += f"TB, JOIN, {mat_id}, , {s1}, {s2}\n"
                         damping_data += damp_temporary_data
                     # self._logger.info(damping_data)
@@ -1347,8 +1381,7 @@ class _JointMaterialProcessor:
                             f"has multiple damping values, "
                             f"tempereture dependent values are not processed"
                         )
-                    s1 = comps_nonlinear_mapping[comp_data['Parameters']
-                                                 ['COMPONENT']]
+                    s1 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                     damping_data += f"TB, JOIN, {mat_id}, 1, 3, {s1}\n"
                     damping_data += f"TBPT, , -1.0, -{comp_data['Data']['damping_coeff'][0]}\n"
                     damping_data += f"TBPT, , 0.0, 0.0\n"
@@ -1359,15 +1392,15 @@ class _JointMaterialProcessor:
                         self._logger.warning(
                             f"Data for Connector elasticity for Material {material}, "
                             f"has multiple damping values, "
-                            f"tempereture dependent values are not processed")
-                    s1 = comps_linear_mapping[comp_data['Parameters']
-                                              ['COMPONENT']]
+                            f"tempereture dependent values are not processed"
+                        )
+                    s1 = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
                     s2 = comp_data['Data']['damping_coeff'][0]
                     damping_data += f"TBDATA, {s1}, {s2}\n"
         return damping_data
 
     def _precess_ref_length(self, property_dict):
-        ref_length = ['']*6
+        ref_length = [''] * 6
         property_dict = property_dict[0]
         comp1_str = "Length1"
         comp2_str = "Length2"
@@ -1394,17 +1427,19 @@ class _JointMaterialProcessor:
 
 
 class _BoundaryProcessor:
-    __slots__ = ('_simulation_data', '_boundaries_data', '_step_start_time',
-                 '_step_end_time', '_ddele_added', '_ampl_commands',
-                 '_model', '_logger')
+    __slots__ = (
+        '_simulation_data',
+        '_boundaries_data',
+        '_step_start_time',
+        '_step_end_time',
+        '_ddele_added',
+        '_ampl_commands',
+        '_model',
+        '_logger',
+    )
 
     def __init__(
-        self,
-        model: prime.Model,
-        data,
-        step_start_time=0.0,
-        step_end_time=1.0,
-        sim_data=None
+        self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0, sim_data=None
     ):
         self._simulation_data = sim_data
         self._boundaries_data = data
@@ -1472,8 +1507,7 @@ class _BoundaryProcessor:
                 modified_amplitude_name = "AMPL_BOUNDARY"
                 applied_on = str(data_line['node_set'])
                 ampl_processor = _AmplitudeProcessor(
-                    self._model,
-                    self._simulation_data["Amplitude"]
+                    self._model, self._simulation_data["Amplitude"]
                 )
                 ampl_commands = ampl_processor.get_mapdl_commands_for_amplitude(
                     amplitude,
@@ -1481,7 +1515,7 @@ class _BoundaryProcessor:
                     applied_on,
                     step_start_time=self._step_start_time,
                     step_end_time=self._step_end_time,
-                    scale_factor=mag
+                    scale_factor=mag,
                 )
                 self._ampl_commands += ampl_commands
                 # ampl_processor.write_amplitude_table_to_file(ampl_commands)
@@ -1503,16 +1537,9 @@ class _BoundaryProcessor:
 
 
 class _DloadProcessor:
-    __slots__ = ('_dloads_data', '_step_start_time', '_step_end_time',
-                 '_model', '_logger')
+    __slots__ = ('_dloads_data', '_step_start_time', '_step_end_time', '_model', '_logger')
 
-    def __init__(
-        self,
-        model: prime.Model,
-        data,
-        step_start_time=0.0,
-        step_end_time=1.0
-    ):
+    def __init__(self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0):
         self._dloads_data = data
         self._step_start_time = step_start_time
         self._step_end_time = step_end_time
@@ -1538,13 +1565,9 @@ class _DloadProcessor:
                 if params['OP'] == 'NEW':
                     op = 'NEW'
                 if len(params) > 1:
-                    self._logger.warning(
-                        f"Warning: parameter on DLOAD keyword are not processed"
-                    )
+                    self._logger.warning(f"Warning: parameter on DLOAD keyword are not processed")
             else:
-                self._logger.warning(
-                    f"Warning: parameter on DLOAD keyword are not processed"
-                )
+                self._logger.warning(f"Warning: parameter on DLOAD keyword are not processed")
         data_lines = dload_data['Data']
         for data_line in data_lines:
             if len(data_line) == 0:
@@ -1573,10 +1596,19 @@ class _DloadProcessor:
 
 
 class _CloadProcessor:
-    __slots__ = ('_simulation_data', '_modal_load_vectors', '_step_MSUP',
-                 '_cloads_data', '_step_start_time', '_step_end_time',
-                 '_fedele_added', '_load_vestors_in_current_step',
-                 '_ampl_commands', '_model', '_logger')
+    __slots__ = (
+        '_simulation_data',
+        '_modal_load_vectors',
+        '_step_MSUP',
+        '_cloads_data',
+        '_step_start_time',
+        '_step_end_time',
+        '_fedele_added',
+        '_load_vestors_in_current_step',
+        '_ampl_commands',
+        '_model',
+        '_logger',
+    )
 
     def __init__(
         self,
@@ -1586,7 +1618,7 @@ class _CloadProcessor:
         step_end_time=1.0,
         step_MSUP=False,
         modal_load_vectors={},
-        sim_data=None
+        sim_data=None,
     ):
         self._simulation_data = sim_data
         self._modal_load_vectors = modal_load_vectors
@@ -1616,9 +1648,7 @@ class _CloadProcessor:
             cload_commands += self._get_commands(cload_data)
         if self._step_MSUP:
             for i in list(
-                set(
-                    self._modal_load_vectors.keys()
-                ).difference(
+                set(self._modal_load_vectors.keys()).difference(
                     set(self._load_vestors_in_current_step)
                 )
             ):
@@ -1662,14 +1692,15 @@ class _CloadProcessor:
                 modified_amplitude_name = "AMPL_CLOAD"
                 applied_on = str(data_line['node_set'])
                 ampl_processor = _AmplitudeProcessor(
-                    self._model,
-                    self._simulation_data["Amplitude"]
+                    self._model, self._simulation_data["Amplitude"]
                 )
                 ampl_commands = ampl_processor.get_mapdl_commands_for_amplitude(
-                    amplitude, modified_amplitude_name, applied_on,
+                    amplitude,
+                    modified_amplitude_name,
+                    applied_on,
                     step_start_time=self._step_start_time,
                     step_end_time=self._step_end_time,
-                    scale_factor=mag
+                    scale_factor=mag,
                 )
                 self._ampl_commands += ampl_commands
                 # ampl_processor.write_amplitude_table_to_file(ampl_commands)
@@ -1696,8 +1727,16 @@ class _CloadProcessor:
 
 
 class _ConnectorMotionProcessor:
-    __slots__ = ('_simulation_data', '_connector_motions_data', '_step_start_time',
-                 '_step_end_time', '_fedele_added', '_ampl_commands', '_model', '_logger')
+    __slots__ = (
+        '_simulation_data',
+        '_connector_motions_data',
+        '_step_start_time',
+        '_step_end_time',
+        '_fedele_added',
+        '_ampl_commands',
+        '_model',
+        '_logger',
+    )
 
     def __init__(
         self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0, sim_data=None
@@ -1718,8 +1757,7 @@ class _ConnectorMotionProcessor:
         connector_motions_data = self._connector_motions_data
         connector_motion_commands = ''
         for connector_motion_data in connector_motions_data:
-            connector_motion_commands += self._get_commands(
-                connector_motion_data)
+            connector_motion_commands += self._get_commands(connector_motion_data)
         return connector_motion_commands
 
     def get_connector_motion_commands_by_id(self, connector_motion_id):
@@ -1767,9 +1805,7 @@ class _ConnectorMotionProcessor:
                 # self._logger.info("Tabular Load condition is not processed.")
                 amplitude = params['AMPLITUDE']
             if 'LOAD CASE' in params:
-                self._logger.warning(
-                    f"Load Case in Connector Motion is not processed."
-                )
+                self._logger.warning(f"Load Case in Connector Motion is not processed.")
             if 'TYPE' in params:
                 connnector_motion_type = params['TYPE']
             if 'FIXED' in params:
@@ -1787,8 +1823,7 @@ class _ConnectorMotionProcessor:
                 modified_amplitude_name = "AMPL_CONNECTOR_MOTION"
                 applied_on = str(data_line['element_number_or_set'])
                 ampl_processor = _AmplitudeProcessor(
-                    self._model,
-                    self._simulation_data["Amplitude"]
+                    self._model, self._simulation_data["Amplitude"]
                 )
                 ampl_commands = ampl_processor.get_mapdl_commands_for_amplitude(
                     amplitude,
@@ -1796,7 +1831,7 @@ class _ConnectorMotionProcessor:
                     applied_on,
                     step_start_time=self._step_start_time,
                     step_end_time=self._step_end_time,
-                    scale_factor=mag
+                    scale_factor=mag,
                 )
                 # ampl_processor.write_amplitude_table_to_file(ampl_commands)
             if data_line['element_number_or_set'].isnumeric() == False:
@@ -1826,10 +1861,19 @@ class _ConnectorMotionProcessor:
 
 
 class _BaseMotionProcessor:
-    __slots__ = ('_simulation_data', '_modal_load_vectors', '_step_MSUP',
-                 '_base_motions_data', '_step_start_time', '_step_end_time',
-                 '_fedele_added', '_load_vestors_in_current_step',
-                 '_ampl_commands', '_model', '_logger')
+    __slots__ = (
+        '_simulation_data',
+        '_modal_load_vectors',
+        '_step_MSUP',
+        '_base_motions_data',
+        '_step_start_time',
+        '_step_end_time',
+        '_fedele_added',
+        '_load_vestors_in_current_step',
+        '_ampl_commands',
+        '_model',
+        '_logger',
+    )
 
     def __init__(
         self,
@@ -1839,7 +1883,7 @@ class _BaseMotionProcessor:
         step_end_time=1.0,
         step_MSUP=False,
         modal_load_vectors={},
-        sim_data=None
+        sim_data=None,
     ):
         self._simulation_data = sim_data
         self._modal_load_vectors = modal_load_vectors
@@ -1869,9 +1913,7 @@ class _BaseMotionProcessor:
             base_motion_commands += self._get_commands(base_motion_data)
         if self._step_MSUP:
             for i in list(
-                set(
-                    self._modal_load_vectors.keys()
-                ).difference(
+                set(self._modal_load_vectors.keys()).difference(
                     set(self._load_vestors_in_current_step)
                 )
             ):
@@ -1909,9 +1951,7 @@ class _BaseMotionProcessor:
                 )
                 return base_motion_commands
             if 'LOAD CASE' in params:
-                self._logger.warning(
-                    f"Load Case in base Motion is not processed."
-                )
+                self._logger.warning(f"Load Case in base Motion is not processed.")
             if 'TYPE' in params:
                 connnector_motion_type = params['TYPE']
             if 'DOF' in params:
@@ -1923,19 +1963,16 @@ class _BaseMotionProcessor:
         # Processing the Base Motion
         if amplitude is not None:
             # modified_amplitude_name = f"{amplitude}_{data_line['node_set']}"
-            modified_amplitude_name = "AMPL_BASE_MOTION_"+connnector_motion_type
+            modified_amplitude_name = "AMPL_BASE_MOTION_" + connnector_motion_type
             applied_on = base_name
-            ampl_processor = _AmplitudeProcessor(
-                self._model,
-                self._simulation_data["Amplitude"]
-            )
+            ampl_processor = _AmplitudeProcessor(self._model, self._simulation_data["Amplitude"])
             ampl_commands = ampl_processor.get_mapdl_commands_for_amplitude(
                 amplitude,
                 modified_amplitude_name,
                 applied_on,
                 step_start_time=self._step_start_time,
                 step_end_time=self._step_end_time,
-                scale_factor=scale
+                scale_factor=scale,
             )
             self._ampl_commands += ampl_commands
             # ampl_processor.write_amplitude_table_to_file(ampl_commands)
@@ -1961,8 +1998,7 @@ class _BaseMotionProcessor:
 
 
 class _GeneralContactProcessing:
-    __slots__ = ('_general_contact_data',
-                 '_surface_interaction_data', '_model', '_logger')
+    __slots__ = ('_general_contact_data', '_surface_interaction_data', '_model', '_logger')
 
     def __init__(self, model: prime.Model, cont_data, surf_interaction_data):
         self._general_contact_data = cont_data
@@ -1975,8 +2011,7 @@ class _GeneralContactProcessing:
         if type(self._general_contact_data) == dict:
             self._logger.info(self._general_contact_data)
             self._logger.info("dict")
-            gen_c_commands += self._get_gen_c_commands(
-                self._general_contact_data)
+            gen_c_commands += self._get_gen_c_commands(self._general_contact_data)
         if type(self._general_contact_data) == list:
             for item in self._general_contact_data:
                 self._logger.info(item)
@@ -1997,18 +2032,17 @@ class _GeneralContactProcessing:
             self._logger.warning(
                 f"Argument on *CONTACT is not processed, please check the definitions"
             )
-        if ("ContactPropertyAssignment" in data
-                and data["ContactPropertyAssignment"] is not None):
+        if "ContactPropertyAssignment" in data and data["ContactPropertyAssignment"] is not None:
             prop_assign = data["ContactPropertyAssignment"]
             if 'Data' in prop_assign and prop_assign['Data']:
                 prop_data = prop_assign['Data'][0]
                 if 'surface1' in prop_data or 'surface2' in prop_data:
                     self._logger.warning(
-                        "the surfaces on CONTACT PROPERTY ASSIGNMENT are not processed")
+                        "the surfaces on CONTACT PROPERTY ASSIGNMENT are not processed"
+                    )
                 if 'surface_interaction' in prop_data:
                     surf_interaction_processor = _SurfaceInteractionProcessing(
-                        self._model,
-                        self._surface_interaction_data
+                        self._model, self._surface_interaction_data
                     )
                     fric = surf_interaction_processor._get_friction_value_for_interaction(
                         prop_data['surface_interaction']
@@ -2127,22 +2161,39 @@ class _GlobalDampingProcessing:
             elif analysis == "STEADY STATE DYNAMICS":
                 damping_commands += f"DMPSTR, {structural}\n"
             # elif analysis == "FREQUENCY":
-                # damping_commands += f"DMPSTR, {structural}\n"
+            # damping_commands += f"DMPSTR, {structural}\n"
             else:
                 self._logger.warning(
-                    'Global damping under STEP is not processed. Please check the results')
+                    'Global damping under STEP is not processed. Please check the results'
+                )
         return damping_commands
 
 
 class _StepProcessor:
-    __slots__ = ('_simulation_data', '_steps_data', '_curr_step', '_analysis_sequence',
-                 '_assign_analysis', '_time', '_step_counter', '_ninterval_counter',
-                 '_previous_analysis', '_step_start_time', '_step_end_time',
-                 '_previous_modal_resvec', '_step_MSUP', '_nrm_key',
-                 '_modal_load_vectors', '_ninterval_mapdl_commands',
-                 '_cload_ampl_commands', '_base_motion_ampl_commands',
-                 '_boundary_ampl_commands', '_connector_motion_ampl_commands',
-                 '_model', '_logger')
+    __slots__ = (
+        '_simulation_data',
+        '_steps_data',
+        '_curr_step',
+        '_analysis_sequence',
+        '_assign_analysis',
+        '_time',
+        '_step_counter',
+        '_ninterval_counter',
+        '_previous_analysis',
+        '_step_start_time',
+        '_step_end_time',
+        '_previous_modal_resvec',
+        '_step_MSUP',
+        '_nrm_key',
+        '_modal_load_vectors',
+        '_ninterval_mapdl_commands',
+        '_cload_ampl_commands',
+        '_base_motion_ampl_commands',
+        '_boundary_ampl_commands',
+        '_connector_motion_ampl_commands',
+        '_model',
+        '_logger',
+    )
 
     def __init__(self, model: prime.Model, data, sim_data):
         self._simulation_data = sim_data
@@ -2201,7 +2252,7 @@ class _StepProcessor:
             self._analysis_sequence.append(analysis_type)
 
     def get_static_analysis_data(self, static_data):
-        "Gets static analysis details"
+        """Get static analysis details."""
         static_analysis_commands = ''
         # self._logger.info(static_data)
         if type(static_data) == list:
@@ -2228,10 +2279,10 @@ class _StepProcessor:
                 max_time_increment = time_period
         max_output_intervals = self.get_maximum_output_interval()
         if max_output_intervals != 0:
-            if time_increment > (time_period/max_output_intervals):
-                time_increment = (time_period/max_output_intervals)
-            if max_time_increment > (time_period/max_output_intervals):
-                max_time_increment = (time_period/max_output_intervals)
+            if time_increment > (time_period / max_output_intervals):
+                time_increment = time_period / max_output_intervals
+            if max_time_increment > (time_period / max_output_intervals):
+                max_time_increment = time_period / max_output_intervals
         time_interval_val = self.get_output_time_interval()
         if time_interval_val != 0.0:
             time_increment = time_interval_val
@@ -2261,7 +2312,7 @@ class _StepProcessor:
         return static_analysis_commands
 
     def get_modal_dynamic_analysis_data(self, dynamic_data):
-        "Get modal Dynamic analysis details"
+        """Get modal dynamic analysis details."""
         dynamic_analysis_commands = ''
         self._step_MSUP = True
         if type(dynamic_data) == list:
@@ -2284,21 +2335,21 @@ class _StepProcessor:
                 time_period = float(data['time_period'])
         # max_output_intervals = self.get_maximum_output_interval()
         # if max_output_intervals != 0:
-            # if time_increment > (time_period/max_output_intervals):
-                # time_increment = (time_period/max_output_intervals)
-            # if max_time_increment > (time_period/max_output_intervals):
-                # max_time_increment = (time_period/max_output_intervals)
+        # if time_increment > (time_period/max_output_intervals):
+        # time_increment = (time_period/max_output_intervals)
+        # if max_time_increment > (time_period/max_output_intervals):
+        # max_time_increment = (time_period/max_output_intervals)
         # time_interval_val = self.get_output_time_interval()
         # if time_interval_val != 0:
-            # time_increment = time_interval_val
-            # min_time_increment = time_interval_val
-            # max_time_increment = time_interval_val
-            # # if time_increment > time_interval_val:
-                # # time_increment = time_interval_val
-            # # if min_time_increment > time_interval_val:
-                # # min_time_increment = time_interval_val
-            # # if max_time_increment > time_interval_val:
-                # # max_time_increment = time_interval_val
+        # time_increment = time_interval_val
+        # min_time_increment = time_interval_val
+        # max_time_increment = time_interval_val
+        # # if time_increment > time_interval_val:
+        # # time_increment = time_interval_val
+        # # if min_time_increment > time_interval_val:
+        # # min_time_increment = time_interval_val
+        # # if max_time_increment > time_interval_val:
+        # # max_time_increment = time_interval_val
         if 'Parameters' in dynamic_data:
             data = dynamic_data['Parameters']
             if data:
@@ -2335,13 +2386,12 @@ class _StepProcessor:
             dynamic_analysis_commands += (
                 f'/ASSIGN, RST, step_{self._step_counter}_transient_analysis, RST\n'
             )
-            self._assign_analysis.append(
-                f'step_{self._step_counter}_transient_analysis')
+            self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
         if self._previous_analysis != "MODAL DYNAMIC":
             dynamic_analysis_commands += f'ANTYPE, TRANSIENT\n'
             dynamic_analysis_commands += f'TRNOPT, '
-            if "FREQUENCY" in self._analysis_sequence[:self._step_counter]:
+            if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
                 dynamic_analysis_commands += f'MSUP'
                 self._step_MSUP = True
                 has_modal_output, has_velocities = self.check_modal_output()
@@ -2366,7 +2416,7 @@ class _StepProcessor:
         return dynamic_analysis_commands
 
     def get_dynamic_analysis_data(self, dynamic_data):
-        "Get Dynamic analysis details"
+        """Get dynamic analysis details."""
         dynamic_analysis_commands = ''
         self._step_MSUP = False
         if type(dynamic_data) == list:
@@ -2393,12 +2443,12 @@ class _StepProcessor:
                 max_time_increment = time_period
         max_output_intervals = self.get_maximum_output_interval()
         if max_output_intervals != 0:
-            if time_increment > (time_period/max_output_intervals):
-                time_increment = (time_period/max_output_intervals)
-            if max_time_increment > (time_period/max_output_intervals):
-                max_time_increment = (time_period/max_output_intervals)
+            if time_increment > (time_period / max_output_intervals):
+                time_increment = time_period / max_output_intervals
+            if max_time_increment > (time_period / max_output_intervals):
+                max_time_increment = time_period / max_output_intervals
             # if time_increment == max_time_increment:
-                # min_time_increment = time_increment
+            # min_time_increment = time_increment
         time_interval_val = self.get_output_time_interval()
         if time_interval_val != 0:
             time_increment = time_interval_val
@@ -2446,13 +2496,12 @@ class _StepProcessor:
             dynamic_analysis_commands += (
                 f'/ASSIGN, RST, step_{self._step_counter}_transient_analysis, RST\n'
             )
-            self._assign_analysis.append(
-                f'step_{self._step_counter}_transient_analysis')
+            self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
         if self._previous_analysis != "DYNAMIC" and self._previous_analysis != "STATIC":
             dynamic_analysis_commands += f'ANTYPE, TRANSIENT\n'
             dynamic_analysis_commands += f'TRNOPT, '
-            if "FREQUENCY" in self._analysis_sequence[:self._step_counter]:
+            if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
                 dynamic_analysis_commands += f'MSUP\n'
                 self._step_MSUP = True
             else:
@@ -2471,8 +2520,8 @@ class _StepProcessor:
         return dynamic_analysis_commands
 
     def get_frequency_analysis_data(self, frequency_data):
-        "Get Frequency analysis details"
-        # This is to reset the counter of time when modal analyis is there.
+        """Get frequency analysis details."""
+        # This is to reset the counter of time when modal analysis is there.
         self._time = 0.0
         frequency_analysis_commands = ''
         if type(frequency_data) == list:
@@ -2543,8 +2592,7 @@ class _StepProcessor:
             frequency_analysis_commands += (
                 f'/ASSIGN, RST, step_{self._step_counter}_modal_analysis, RST\n'
             )
-            self._assign_analysis.append(
-                f'step_{self._step_counter}_modal_analysis')
+            self._assign_analysis.append(f'step_{self._step_counter}_modal_analysis')
             frequency_analysis_commands += f'/SOLU\n'
         if self._previous_analysis != 'FREQUENCY':
             frequency_analysis_commands += f'ANTYPE, MODAL\n'
@@ -2569,7 +2617,7 @@ class _StepProcessor:
         return frequency_analysis_commands
 
     def get_steady_state_dynamics_data(self, steady_state_dynamics_data):
-        "Get Frequency analysis details"
+        """Get steady state dynamic details."""
         self._step_MSUP = False
         steady_state_dynamics_analysis_commands = ''
         if type(steady_state_dynamics_data) == list:
@@ -2602,35 +2650,33 @@ class _StepProcessor:
             steady_state_dynamics_analysis_commands += (
                 f'/ASSIGN, RST, step_{self._step_counter}_harmonic_analysis, RST\n'
             )
-            self._assign_analysis.append(
-                f'step_{self._step_counter}_harmonic_analysis')
+            self._assign_analysis.append(f'step_{self._step_counter}_harmonic_analysis')
             steady_state_dynamics_analysis_commands += f'/SOLU\n'
         if self._previous_analysis != "STEADY STATE DYNAMICS":
             steady_state_dynamics_analysis_commands += f'ANTYPE, HARMONIC\n'
         steady_state_dynamics_analysis_commands += f'HARFRQ, {min_frequency}, {max_frequency}\n'
         steady_state_dynamics_analysis_commands += f'NSUB, {npoints-1}\n'
-        if "FREQUENCY" in self._analysis_sequence[:self._step_counter]:
+        if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
             # steady_state_dynamics_analysis_commands += f'MSUP\n'
             self._step_MSUP = True
         if self._previous_analysis != "STEADY STATE DYNAMICS":
             steady_state_dynamics_analysis_commands += f'HROUT, OFF\n'
             steady_state_dynamics_analysis_commands += f'KBC, 1\n'
             steady_state_dynamics_analysis_commands += f'HROPT, '
-            if "FREQUENCY" in self._analysis_sequence[:self._step_counter]:
+            if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
                 steady_state_dynamics_analysis_commands += f'MSUP\n'
                 # self._step_MSUP = True
                 has_modal_output, has_velocities = self.check_modal_output()
                 if has_modal_output:
                     steady_state_dynamics_analysis_commands += f' , , , YES'
                 # if has_velocities:
-                    # steady_state_dynamics_analysis_commands += f' , , '
+                # steady_state_dynamics_analysis_commands += f' , , '
             else:
                 steady_state_dynamics_analysis_commands += f'FULL\n'
             if res_modes:
                 steady_state_dynamics_analysis_commands += f'RESVEC, {res_modes}\n'
         if self._analysis_sequence.count("STEADY STATE DYNAMICS") > 1:
-            rpm = self._step_counter - \
-                self._analysis_sequence.index("STEADY STATE DYNAMICS") + 1
+            rpm = self._step_counter - self._analysis_sequence.index("STEADY STATE DYNAMICS") + 1
             steady_state_dynamics_analysis_commands += f'MRPM, {rpm}\n'
         steady_state_dynamics_analysis_commands += f'\n'
         self._previous_analysis = "STEADY STATE DYNAMICS"
@@ -2656,7 +2702,8 @@ class _StepProcessor:
                                 self._logger.warning(
                                     f"'TIME INTERVAL' argument on output keywords "
                                     f"has multiple values in different OUTPUT keywords, "
-                                    f"minimum is used while solving")
+                                    f"minimum is used while solving"
+                                )
                             time_interval = new_time_interval
         return time_interval
 
@@ -2710,7 +2757,7 @@ class _StepProcessor:
         return self._ninterval_mapdl_commands
 
     def get_output_analysis_data(self, output_data):
-        "Get analysis output settings"
+        """Get analysis output settings."""
         output_analysis_commands = ''
         if not isinstance(output_data, list):
             return output_analysis_commands
@@ -2725,7 +2772,7 @@ class _StepProcessor:
                             f"used in *OUTPUT commands. Only first one will be used"
                         )
                     time_points = parameters['TIME POINT']
-        # above lines to be checked because of limitiation on ansys OUTRES commnads.
+        # above lines to be checked because of limitation on ansys OUTRES commands.
         if len(output_data) > 0:
             output_analysis_commands += "\n"
             output_analysis_commands += "OUTRES, ERASE\n"
@@ -2751,7 +2798,7 @@ class _StepProcessor:
                         sc = self._step_counter
                         ninc = self._ninterval_counter
                         ninterval = f"NINTERVAL_STEP_{sc}_N_{ninc}"
-                        delta_time = self._step_end_time-self._step_start_time
+                        delta_time = self._step_end_time - self._step_start_time
                         # int_processor = _OutputIntervalProcessor(self._model)
                         ninterval_mapdl_commands = _OutputIntervalProcessor(
                             self._model
@@ -2759,7 +2806,7 @@ class _StepProcessor:
                             ninterval,
                             int(parameters['NUMBER INTERVAL']),
                             delta_time,
-                            self._step_start_time
+                            self._step_start_time,
                         )
                         self._ninterval_mapdl_commands += ninterval_mapdl_commands
                         # int_processor.write_interval_points_table_to_file(
@@ -2777,7 +2824,7 @@ class _StepProcessor:
                 if 'TIME INTERVAL' in parameters:
                     time_interval = float(parameters['TIME INTERVAL'])
             if time_interval and minimum_time_interval:
-                nfreq = int(time_interval/minimum_time_interval)
+                nfreq = int(time_interval / minimum_time_interval)
             if 'Data' in output and output['Data'] is not None:
                 if 'ModalOutput' in output['Data']:
                     output_analysis_commands += "MCFOPT, 1, , "
@@ -2825,12 +2872,14 @@ class _StepProcessor:
                                             nodeout['Parameters'] is not None
                                             and 'NSET' in nodeout['Parameters']
                                         ):
-                                            output_analysis_commands += nodeout[
-                                                'Parameters']['NSET']
+                                            output_analysis_commands += nodeout['Parameters'][
+                                                'NSET'
+                                            ]
                                 output_analysis_commands += ', ,\n'
                             else:
                                 self._logger.warning(
-                                    f"warning: node output key '{key}' is not processed.")
+                                    f"warning: node output key '{key}' is not processed."
+                                )
                 if 'ElementOutput' in output['Data']:
                     for elemout in output['Data']['ElementOutput']:
                         # elemout = output['ElementOutput']
@@ -2856,8 +2905,9 @@ class _StepProcessor:
                                             elemout['Parameters'] is not None
                                             and 'ELSET' in elemout['Parameters']
                                         ):
-                                            output_analysis_commands += elemout[
-                                                'Parameters']['ELSET']
+                                            output_analysis_commands += elemout['Parameters'][
+                                                'ELSET'
+                                            ]
                                 elif key == "CTF":
                                     output_analysis_commands += "MISC, "
                                     if time_points is not None:
@@ -2877,8 +2927,9 @@ class _StepProcessor:
                                             elemout['Parameters'] is not None
                                             and 'ELSET' in elemout['Parameters']
                                         ):
-                                            output_analysis_commands += elemout[
-                                                'Parameters']['ELSET']
+                                            output_analysis_commands += elemout['Parameters'][
+                                                'ELSET'
+                                            ]
                                 elif key == "NFORC":
                                     output_analysis_commands += "NLOAD, "
                                     if time_points is not None:
@@ -2898,12 +2949,14 @@ class _StepProcessor:
                                             elemout['Parameters'] is not None
                                             and 'ELSET' in elemout['Parameters']
                                         ):
-                                            output_analysis_commands += elemout[
-                                                'Parameters']['ELSET']
+                                            output_analysis_commands += elemout['Parameters'][
+                                                'ELSET'
+                                            ]
                                 output_analysis_commands += ', ,\n'
                             else:
                                 self._logger.warning(
-                                    f"warning: element output key '{key}' is not processed.")
+                                    f"warning: element output key '{key}' is not processed."
+                                )
                         if (
                             elemout['Parameters'] is not None
                             and 'POSITION' in elemout['Parameters']
@@ -2929,8 +2982,10 @@ class _StepProcessor:
             5: 'MY',
             6: 'MZ',
         }
-        if ("STEADY STATE DYNAMICS" in self._analysis_sequence
-                or "MODAL DYNAMIC" in self._analysis_sequence):
+        if (
+            "STEADY STATE DYNAMICS" in self._analysis_sequence
+            or "MODAL DYNAMIC" in self._analysis_sequence
+        ):
             count_load_vectors = 0
             # vector_commands += f'FDELE, ALL, ALL \n'
             # vector_commands += f'SFDELE, ALL, ALL \n'
@@ -2938,7 +2993,7 @@ class _StepProcessor:
             # vector_commands += f'ACEL, 0, 0, 0 \n'
             # vector_commands += f'\n'
             temp_count = 0
-            for step_data in steps_data[self._step_counter:]:
+            for step_data in steps_data[self._step_counter :]:
                 if self._previous_modal_resvec == None:
                     if temp_count != 0:
                         vector_commands += 'SOLVE\n'
@@ -2969,12 +3024,12 @@ class _StepProcessor:
                                 vector_commands += f'SFEDELE, ALL, ALL, ALL \n'
                                 vector_commands += f'ACEL, 0, 0, 0 \n'
                                 vector_commands += f'\n'
-                            vector_commands += (
-                                f"F, {data_line['node_set']}, {dof_map[dof]}, 1\n"
-                            )
+                            vector_commands += f"F, {data_line['node_set']}, {dof_map[dof]}, 1\n"
                             count_load_vectors += 1
                         self._modal_load_vectors[count_load_vectors] = {
-                            'SET': data_line['node_set'], "COMP": dof_map[dof]}
+                            'SET': data_line['node_set'],
+                            "COMP": dof_map[dof],
+                        }
                 if "BaseMotion" in step_data:
                     base_motions_data = step_data['BaseMotion']
                     for base_motion_data in base_motions_data:
@@ -3000,9 +3055,11 @@ class _StepProcessor:
                         vector_commands += f"F, {base_name}, {dof_map[dof]}, 1\n"
                         count_load_vectors += 1
                         self._modal_load_vectors[count_load_vectors] = {
-                            'SET': base_name, "COMP": dof_map[dof]}
+                            'SET': base_name,
+                            "COMP": dof_map[dof],
+                        }
         # else:
-            # vector_commands += 'SOLVE\n'
+        # vector_commands += 'SOLVE\n'
         return vector_commands
 
     def get_step_base_motion_data(self, base_motions_data):
@@ -3016,7 +3073,7 @@ class _StepProcessor:
             self._step_end_time,
             self._step_MSUP,
             self._modal_load_vectors,
-            sim_data=self._simulation_data
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of cloads instead of single base_motion
         base_motion_commands = ''
@@ -3033,7 +3090,7 @@ class _StepProcessor:
             connector_motions_data,
             self._step_start_time,
             self._step_end_time,
-            sim_data=self._simulation_data
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of cloads instead of single connector_motion
         connector_motion_commands = ''
@@ -3052,7 +3109,7 @@ class _StepProcessor:
             self._step_end_time,
             self._step_MSUP,
             self._modal_load_vectors,
-            sim_data=self._simulation_data
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of cloads instead of single Cload
         cload_commands = ''
@@ -3062,10 +3119,7 @@ class _StepProcessor:
 
     def get_step_dload_data(self, dloads_data):
         dload_processor = _DloadProcessor(
-            self._model,
-            dloads_data,
-            self._step_start_time,
-            self._step_end_time
+            self._model, dloads_data, self._step_start_time, self._step_end_time
         )
         # TODO this needs to be in List of cloads instead of single Cload
         dload_commands = ''
@@ -3078,7 +3132,7 @@ class _StepProcessor:
             boundaries_data,
             self._step_start_time,
             self._step_end_time,
-            sim_data=self._simulation_data
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of boundaries instead of single Boundary
         boundary_commands = ''
@@ -3087,11 +3141,10 @@ class _StepProcessor:
         return boundary_commands
 
     def get_global_damping_commnads(self, global_damping_data):
-        global_damping_processor = _GlobalDampingProcessing(
-            self._model, global_damping_data
-        )
+        global_damping_processor = _GlobalDampingProcessing(self._model, global_damping_data)
         global_damping_commands = global_damping_processor.get_global_damping_commands(
-            self._previous_analysis, self._step_MSUP)
+            self._previous_analysis, self._step_MSUP
+        )
         return global_damping_commands
 
     def _get_current_step_analysis_type(self, step_data):
@@ -3102,7 +3155,7 @@ class _StepProcessor:
         # if "Static" in step_data:
         #     mapdl_step_commands = 'antype, static\n'
         # else:
-        #     self._logger.warning("Analysis, type is not processsed")
+        #     self._logger.warning("Analysis, type is not processed")
         #     pass
         return mapdl_step_commands
 
@@ -3128,12 +3181,22 @@ class _StepProcessor:
             'Dload': self.get_step_dload_data,
             'Frequency': self.get_frequency_analysis_data,
             'SteadyStateDynamics': self.get_steady_state_dynamics_data,
-            'GlobalDamping': self.get_global_damping_commnads
+            'GlobalDamping': self.get_global_damping_commnads,
         }
-        keys = ['Static', 'Dynamic', 'ModalDynamic',
-                'Frequency', 'SteadyStateDynamics', 'GlobalDamping',
-                'Cload', 'Boundary', 'ConnectorMotion',
-                'BaseMotion', 'Dload', 'Output']
+        keys = [
+            'Static',
+            'Dynamic',
+            'ModalDynamic',
+            'Frequency',
+            'SteadyStateDynamics',
+            'GlobalDamping',
+            'Cload',
+            'Boundary',
+            'ConnectorMotion',
+            'BaseMotion',
+            'Dload',
+            'Output',
+        ]
         mapdl_step_commands = ''
         # self._logger.info(step_data.keys())
         for key in keys:
@@ -3183,8 +3246,8 @@ class _StepProcessor:
             mapdl_step_commands += self.create_modal_vectors()
             # pass
         # if 'SteadyStateDynamics' in step_data:
-            # # TODO use load vectors
-            # pass
+        # # TODO use load vectors
+        # pass
         mapdl_step_commands += 'SOLVE\n'
         return mapdl_step_commands
 
@@ -3211,15 +3274,16 @@ class _StepProcessor:
 
 
 class _AxialTempCorrection:
-    __slots__ = ('_connector_sections', '_connector_behavior', '_element_wise_csys',
-                 '_model', '_logger')
+    __slots__ = (
+        '_connector_sections',
+        '_connector_behavior',
+        '_element_wise_csys',
+        '_model',
+        '_logger',
+    )
 
     def __init__(
-        self,
-        model: prime.Model,
-        connector_sections,
-        connector_behavior,
-        element_wise_csys=False
+        self, model: prime.Model, connector_sections, connector_behavior, element_wise_csys=False
     ):
         self._connector_sections = connector_sections
         self._connector_behavior = connector_behavior
@@ -3238,17 +3302,14 @@ class _AxialTempCorrection:
                     axial_modification_string += f"\n"
                     axial_modification_string += f"esel,s,mat,,{behavior_data['id']}\n"
                     axial_modification_string += f"eid = ELNEXT(0)\n"
-                    axial_modification_string += self._modify_element_type(
-                        behavior_data)
-                    axial_modification_string += self._modify_section_type(
-                        behavior_data)
-                    axial_modification_string += self._modify_section_data(
-                        behavior_data)
+                    axial_modification_string += self._modify_element_type(behavior_data)
+                    axial_modification_string += self._modify_section_type(behavior_data)
+                    axial_modification_string += self._modify_section_data(behavior_data)
                     axial_modification_string += 'allsel\n'
                 else:
                     axial_modification_string += f"\n! Warning: the connector section "
                     f"'{section}' does not have behavior associated with it. "
-                    f"these elemnets are not processed\n"
+                    f"these elements are not processed\n"
         return axial_modification_string
 
     def _modify_element_type(self, behavior_data):
@@ -3271,11 +3332,10 @@ class _AxialTempCorrection:
         secdata_string = ''
         if "CONNECTOR CONSTITUTIVE REFERENCE" in behavior_data:
             secdata_string += self._modify_section_type(behavior_data)
-            joint_a_processor = _JointMaterialProcessor(
-                self._model, self._connector_behavior
-            )
+            joint_a_processor = _JointMaterialProcessor(self._model, self._connector_behavior)
             ref_lens = joint_a_processor._precess_ref_length(
-                behavior_data["CONNECTOR CONSTITUTIVE REFERENCE"])
+                behavior_data["CONNECTOR CONSTITUTIVE REFERENCE"]
+            )
             secdata_string += 'SECDATA'
             for ref_len in ref_lens:
                 secdata_string += f',{ref_len}'
@@ -3284,7 +3344,7 @@ class _AxialTempCorrection:
 
 
 def generate_config_commands(params: ExportMapdlCdbParams) -> str:
-    """Generates the configuration commands to be added to the CDB file.
+    """Generate the configuration commands to be added to the CDB file.
 
     Parameters
     ----------
@@ -3319,8 +3379,9 @@ def generate_config_commands(params: ExportMapdlCdbParams) -> str:
 
 
 def generate_mapdl_commands(
-        model: prime.Model, simulation_data: str, params: ExportMapdlCdbParams) -> Tuple[str, str]:
-    """Generates the additional MAPDL commands to be added to the CDB export file.
+    model: prime.Model, simulation_data: str, params: ExportMapdlCdbParams
+) -> Tuple[str, str]:
+    """Generate the additional MAPDL commands to be added to the CDB export file.
 
     Parameters
     ----------
@@ -3348,17 +3409,15 @@ def generate_mapdl_commands(
         return all_mat_cmds, analysis_settings
     if "Materials" in json_simulation_data and json_simulation_data["Materials"] is not None:
         mp = _MaterialProcessor(
-            model,
-            json_simulation_data["Materials"],
-            json_simulation_data["Zones"]
+            model, json_simulation_data["Materials"], json_simulation_data["Zones"]
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
-    if ("ConnectorBehavior" in json_simulation_data
-            and json_simulation_data["ConnectorBehavior"] is not None):
-        jmp = _JointMaterialProcessor(
-            model, json_simulation_data["ConnectorBehavior"]
-        )
+    if (
+        "ConnectorBehavior" in json_simulation_data
+        and json_simulation_data["ConnectorBehavior"] is not None
+    ):
+        jmp = _JointMaterialProcessor(model, json_simulation_data["ConnectorBehavior"])
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
     general_contact_cmds = ''
@@ -3374,20 +3433,16 @@ def generate_mapdl_commands(
     # if "Amplitude" in json_simulation_data:
     #     ampl_cmds += '/PREP7\n'
     if "TimePoint" in json_simulation_data:
-        timepoint_processor = _TimePointsProcessor(model,
-                                                   json_simulation_data["TimePoint"])
+        timepoint_processor = _TimePointsProcessor(model, json_simulation_data["TimePoint"])
         ampl_cmds += timepoint_processor.get_all_timepoints_commands()
     if "TimePoints" in json_simulation_data:
-        timepoints_processor = _TimePointsProcessor(model,
-                                                    json_simulation_data["TimePoints"])
+        timepoints_processor = _TimePointsProcessor(model, json_simulation_data["TimePoints"])
         ampl_cmds += timepoints_processor.get_all_timepoints_commands()
     pre_step_boun_cmds = ''
     boundary_ampl_cmds = ''
     if "Boundary" in json_simulation_data:
         boundary_processor = _BoundaryProcessor(
-            model,
-            json_simulation_data["Boundary"],
-            sim_data=json_simulation_data
+            model, json_simulation_data["Boundary"], sim_data=json_simulation_data
         )
         pre_step_boun_cmds = boundary_processor.get_all_boundary_commands()
         boundary_ampl_cmds = boundary_processor.get_ampl_commands()
@@ -3399,9 +3454,7 @@ def generate_mapdl_commands(
     base_motion_ampl_commands = ''
     if "Step" in json_simulation_data:
         steps_data = _StepProcessor(
-            model,
-            json_simulation_data["Step"],
-            sim_data=json_simulation_data
+            model, json_simulation_data["Step"], sim_data=json_simulation_data
         )
         step_settings = steps_data.get_all_steps()
         ninterval_mapdl_commands = steps_data.get_ninterval_mapdl_commands()
@@ -3444,7 +3497,7 @@ def generate_mapdl_commands(
     if general_contact_cmds:
         analysis_settings += general_contact_cmds
         analysis_settings += '!-------------------------------------------------\n'
-    if (params.pre_solution_settings != None):
+    if params.pre_solution_settings != None:
         analysis_settings += params.pre_solution_settings
         analysis_settings += '\n'
     analysis_settings += pre_step_boun_cmds
