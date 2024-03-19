@@ -455,7 +455,6 @@ class FileIO(_FileIO):
     ) -> FileWriteResults:
         """ Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.
 
-
         Parameters
         ----------
         file_name : str
@@ -479,7 +478,6 @@ class FileIO(_FileIO):
         )
 
         """
-
         with utils.file_write_context(self._model, file_name) as temp_file_name:
             part_id = 1
             if (len(self._model.parts) > 0):
