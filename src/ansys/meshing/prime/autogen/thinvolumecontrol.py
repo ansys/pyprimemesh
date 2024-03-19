@@ -35,7 +35,7 @@ class ThinVolumeControl(CoreObject):
 
         """
         if not isinstance(thin_volume_mesh_params, ThinVolumeMeshParams):
-            raise TypeError("Invalid argument type passed for thin_volume_mesh_params, valid argument type is ThinVolumeMeshParams.")
+            raise TypeError("Invalid argument type passed for 'thin_volume_mesh_params'. Valid argument type is ThinVolumeMeshParams.")
         args = {"thin_volume_mesh_params" : thin_volume_mesh_params._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetThinVolumeMeshParams"
         self._model._print_logs_before_command("set_thin_volume_mesh_params", args)
@@ -63,7 +63,7 @@ class ThinVolumeControl(CoreObject):
 
         """
         if not isinstance(entities, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for entities, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetSourceScope"
         self._model._print_logs_before_command("set_source_scope", args)
@@ -92,7 +92,7 @@ class ThinVolumeControl(CoreObject):
 
         """
         if not isinstance(entities, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for entities, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetTargetScope"
         self._model._print_logs_before_command("set_target_scope", args)

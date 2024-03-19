@@ -47,11 +47,11 @@ class MaterialPointManager(CoreObject):
 
         """
         if not isinstance(suggested_name, str):
-            raise TypeError("Invalid argument type passed for suggested_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
         if not isinstance(coords, Iterable):
-            raise TypeError("Invalid argument type passed for coords, valid argument type is Iterable[float].")
+            raise TypeError("Invalid argument type passed for 'coords'. Valid argument type is Iterable[float].")
         if not isinstance(params, CreateMaterialPointParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CreateMaterialPointParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateMaterialPointParams.")
         args = {"suggested_name" : suggested_name,
         "coords" : coords,
         "params" : params._jsonify()}
@@ -84,7 +84,7 @@ class MaterialPointManager(CoreObject):
 
         """
         if not isinstance(name, str):
-            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::MaterialPointManager/DeleteMaterialPoint"
         self._model._print_logs_before_command("delete_material_point", args)

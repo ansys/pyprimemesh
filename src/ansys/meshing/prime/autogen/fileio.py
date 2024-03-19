@@ -63,9 +63,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(file_read_params, FileReadParams):
-            raise TypeError("Invalid argument type passed for file_read_params, valid argument type is FileReadParams.")
+            raise TypeError("Invalid argument type passed for 'file_read_params'. Valid argument type is FileReadParams.")
         args = {"file_name" : file_name,
         "file_read_params" : file_read_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ReadPMDAT"
@@ -97,9 +97,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(file_write_params, FileWriteParams):
-            raise TypeError("Invalid argument type passed for file_write_params, valid argument type is FileWriteParams.")
+            raise TypeError("Invalid argument type passed for 'file_write_params'. Valid argument type is FileWriteParams.")
         args = {"file_name" : file_name,
         "file_write_params" : file_write_params._jsonify()}
         command_name = "PrimeMesh::FileIO/WritePMDAT"
@@ -127,7 +127,7 @@ class FileIO(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -136,7 +136,7 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(partId, int):
-            raise TypeError("Invalid argument type passed for partId, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'partId'. Valid argument type is int.")
         args = {"partId" : partId}
         command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
         self._model._print_beta_api_warning("get_abaqus_simulation_data")
@@ -165,7 +165,7 @@ class FileIO(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -173,9 +173,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(params, ImportAbaqusParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ImportAbaqusParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ImportAbaqusParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::FileIO/ImportAbaqusInp"
@@ -212,7 +212,7 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         args = {"file_name" : file_name}
         command_name = "PrimeMesh::FileIO/ImportFluentMeshingSizeField"
         self._model._print_logs_before_command("import_fluent_meshing_size_field", args)
@@ -250,9 +250,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(params, ReadSizeFieldParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ReadSizeFieldParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ReadSizeFieldParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::FileIO/ReadSizeField"
@@ -290,9 +290,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(params, WriteSizeFieldParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WriteSizeFieldParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WriteSizeFieldParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::FileIO/WriteSizeField"
@@ -334,9 +334,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(params, ImportMapdlCdbParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ImportMapdlCdbParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ImportMapdlCdbParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::FileIO/ImportMapdlCdb"
@@ -378,9 +378,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(params, ExportMapdlCdbParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ExportMapdlCdbParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExportMapdlCdbParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::FileIO/ExportMapdlCdb"
@@ -419,9 +419,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_names, List):
-            raise TypeError("Invalid argument type passed for file_names, valid argument type is List[str].")
+            raise TypeError("Invalid argument type passed for 'file_names'. Valid argument type is List[str].")
         if not isinstance(import_fluent_meshing_mesh_params, ImportFluentMeshingMeshParams):
-            raise TypeError("Invalid argument type passed for import_fluent_meshing_mesh_params, valid argument type is ImportFluentMeshingMeshParams.")
+            raise TypeError("Invalid argument type passed for 'import_fluent_meshing_mesh_params'. Valid argument type is ImportFluentMeshingMeshParams.")
         args = {"file_names" : file_names,
         "import_fluent_meshing_mesh_params" : import_fluent_meshing_mesh_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ImportFluentMeshingMeshes"
@@ -460,9 +460,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(import_fluent_case_params, ImportFluentCaseParams):
-            raise TypeError("Invalid argument type passed for import_fluent_case_params, valid argument type is ImportFluentCaseParams.")
+            raise TypeError("Invalid argument type passed for 'import_fluent_case_params'. Valid argument type is ImportFluentCaseParams.")
         args = {"file_name" : file_name,
         "import_fluent_case_params" : import_fluent_case_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ImportFluentCase"
@@ -495,9 +495,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(export_fluent_case_params, ExportFluentCaseParams):
-            raise TypeError("Invalid argument type passed for export_fluent_case_params, valid argument type is ExportFluentCaseParams.")
+            raise TypeError("Invalid argument type passed for 'export_fluent_case_params'. Valid argument type is ExportFluentCaseParams.")
         args = {"file_name" : file_name,
         "export_fluent_case_params" : export_fluent_case_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ExportFluentCase"
@@ -529,15 +529,53 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(export_fluent_mesh_params, ExportFluentMeshingMeshParams):
-            raise TypeError("Invalid argument type passed for export_fluent_mesh_params, valid argument type is ExportFluentMeshingMeshParams.")
+            raise TypeError("Invalid argument type passed for 'export_fluent_mesh_params'. Valid argument type is ExportFluentMeshingMeshParams.")
         args = {"file_name" : file_name,
         "export_fluent_mesh_params" : export_fluent_mesh_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ExportFluentMeshingMesh"
         self._model._print_logs_before_command("export_fluent_meshing_mesh", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("export_fluent_meshing_mesh", FileWriteResults(model = self._model, json_data = result))
+        return FileWriteResults(model = self._model, json_data = result)
+
+    def export_lsdyna_keyword_file(self, file_name : str, export_params : ExportLSDynaKeywordFileParams) -> FileWriteResults:
+        """ Export FEA LS-DYNA Keyword file for solid, surface mesh or both.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        export_params : ExportLSDynaKeywordFileParams
+            Parameters for FEA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        FileWriteResults
+            Returns FileWriteResults.
+
+        Notes
+        -----
+        This is a Beta API. The Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_keyword_file(file_name, ExportLSDynaKeywordFileParams(model = model))
+
+        """
+        if not isinstance(file_name, str):
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
+        if not isinstance(export_params, ExportLSDynaKeywordFileParams):
+            raise TypeError("Invalid argument type passed for 'export_params'. Valid argument type is ExportLSDynaKeywordFileParams.")
+        args = {"file_name" : file_name,
+        "export_params" : export_params._jsonify()}
+        command_name = "PrimeMesh::FileIO/ExportLSDynaKeywordFile"
+        self._model._print_beta_api_warning("export_lsdyna_keyword_file")
+        self._model._print_logs_before_command("export_lsdyna_keyword_file", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("export_lsdyna_keyword_file", FileWriteResults(model = self._model, json_data = result))
         return FileWriteResults(model = self._model, json_data = result)
 
     def export_lsdyna_iga_keyword_file(self, file_name : str, export_params : ExportLSDynaIgaKeywordFileParams) -> FileWriteResults:
@@ -558,7 +596,7 @@ class FileIO(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -566,9 +604,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(export_params, ExportLSDynaIgaKeywordFileParams):
-            raise TypeError("Invalid argument type passed for export_params, valid argument type is ExportLSDynaIgaKeywordFileParams.")
+            raise TypeError("Invalid argument type passed for 'export_params'. Valid argument type is ExportLSDynaIgaKeywordFileParams.")
         args = {"file_name" : file_name,
         "export_params" : export_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ExportLSDynaIgaKeywordFile"
@@ -600,9 +638,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(export_params, ExportBoundaryFittedSplineParams):
-            raise TypeError("Invalid argument type passed for export_params, valid argument type is ExportBoundaryFittedSplineParams.")
+            raise TypeError("Invalid argument type passed for 'export_params'. Valid argument type is ExportBoundaryFittedSplineParams.")
         args = {"file_name" : file_name,
         "export_params" : export_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ExportBoundaryFittedSplineKFile"
@@ -640,9 +678,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(import_cad_params, ImportCadParams):
-            raise TypeError("Invalid argument type passed for import_cad_params, valid argument type is ImportCadParams.")
+            raise TypeError("Invalid argument type passed for 'import_cad_params'. Valid argument type is ImportCadParams.")
         args = {"file_name" : file_name,
         "import_cad_params" : import_cad_params._jsonify()}
         command_name = "PrimeMesh::FileIO/ImportCAD"
@@ -682,9 +720,9 @@ class FileIO(CoreObject):
 
         """
         if not isinstance(file_name, str):
-            raise TypeError("Invalid argument type passed for file_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
         if not isinstance(params, ExportSTLParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ExportSTLParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExportSTLParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::FileIO/ExportSTL"

@@ -24,16 +24,16 @@ class MergePartsParams(CoreObject):
             merged_part_suggested_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergePartsParams.
+        """Initialize a ``MergePartsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergePartsParams object with default parameters.
+            Model to create a ``MergePartsParams`` object with default parameters.
         merged_part_suggested_name: str, optional
             Suggested name to be set on merged part. First in alphabetical order of given part names will be used, when empty name is given.
         json_data: dict, optional
-            JSON dictionary to create a MergePartsParams object with provided parameters.
+            JSON dictionary to create a ``MergePartsParams`` object with provided parameters.
 
         Examples
         --------
@@ -49,7 +49,7 @@ class MergePartsParams(CoreObject):
                     merged_part_suggested_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergePartsParams")
                     json_data = param_json["MergePartsParams"] if "MergePartsParams" in param_json else {}
@@ -65,7 +65,7 @@ class MergePartsParams(CoreObject):
     @staticmethod
     def set_default(
             merged_part_suggested_name: str = None):
-        """Set the default values of MergePartsParams.
+        """Set the default values of the ``MergePartsParams`` object.
 
         Parameters
         ----------
@@ -77,7 +77,7 @@ class MergePartsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergePartsParams.
+        """Print the default values of ``MergePartsParams`` object.
 
         Examples
         --------
@@ -131,12 +131,12 @@ class MergePartsResults(CoreObject):
             merged_part_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergePartsResults.
+        """Initialize a ``MergePartsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergePartsResults object with default parameters.
+            Model to create a ``MergePartsResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         merged_part_assigned_name: str, optional
@@ -144,7 +144,7 @@ class MergePartsResults(CoreObject):
         merged_part_id: int, optional
             Id assigned to merged part.
         json_data: dict, optional
-            JSON dictionary to create a MergePartsResults object with provided parameters.
+            JSON dictionary to create a ``MergePartsResults`` object with provided parameters.
 
         Examples
         --------
@@ -164,7 +164,7 @@ class MergePartsResults(CoreObject):
                     merged_part_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergePartsResults")
                     json_data = param_json["MergePartsResults"] if "MergePartsResults" in param_json else {}
@@ -184,7 +184,7 @@ class MergePartsResults(CoreObject):
             error_code: ErrorCode = None,
             merged_part_assigned_name: str = None,
             merged_part_id: int = None):
-        """Set the default values of MergePartsResults.
+        """Set the default values of the ``MergePartsResults`` object.
 
         Parameters
         ----------
@@ -200,7 +200,7 @@ class MergePartsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergePartsResults.
+        """Print the default values of ``MergePartsResults`` object.
 
         Examples
         --------
@@ -278,12 +278,12 @@ class GlobalSizingParams(CoreObject):
             growth_rate: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the GlobalSizingParams.
+        """Initialize a ``GlobalSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a GlobalSizingParams object with default parameters.
+            Model to create a ``GlobalSizingParams`` object with default parameters.
         min: float, optional
             Minimum value of global sizing parameters.
         max: float, optional
@@ -291,7 +291,7 @@ class GlobalSizingParams(CoreObject):
         growth_rate: float, optional
             Growth rate of global sizing parameters.
         json_data: dict, optional
-            JSON dictionary to create a GlobalSizingParams object with provided parameters.
+            JSON dictionary to create a ``GlobalSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -311,7 +311,7 @@ class GlobalSizingParams(CoreObject):
                     growth_rate)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "GlobalSizingParams")
                     json_data = param_json["GlobalSizingParams"] if "GlobalSizingParams" in param_json else {}
@@ -331,7 +331,7 @@ class GlobalSizingParams(CoreObject):
             min: float = None,
             max: float = None,
             growth_rate: float = None):
-        """Set the default values of GlobalSizingParams.
+        """Set the default values of the ``GlobalSizingParams`` object.
 
         Parameters
         ----------
@@ -347,7 +347,7 @@ class GlobalSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of GlobalSizingParams.
+        """Print the default values of ``GlobalSizingParams`` object.
 
         Examples
         --------
@@ -425,12 +425,12 @@ class CreateZoneResults(CoreObject):
             assigned_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateZoneResults.
+        """Initialize a ``CreateZoneResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateZoneResults object with default parameters.
+            Model to create a ``CreateZoneResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the create zone operation.
         zone_id: int, optional
@@ -438,7 +438,7 @@ class CreateZoneResults(CoreObject):
         assigned_name: str, optional
             Assigned name of newly created zone.
         json_data: dict, optional
-            JSON dictionary to create a CreateZoneResults object with provided parameters.
+            JSON dictionary to create a ``CreateZoneResults`` object with provided parameters.
 
         Examples
         --------
@@ -458,7 +458,7 @@ class CreateZoneResults(CoreObject):
                     assigned_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateZoneResults")
                     json_data = param_json["CreateZoneResults"] if "CreateZoneResults" in param_json else {}
@@ -478,7 +478,7 @@ class CreateZoneResults(CoreObject):
             error_code: ErrorCode = None,
             zone_id: int = None,
             assigned_name: str = None):
-        """Set the default values of CreateZoneResults.
+        """Set the default values of the ``CreateZoneResults`` object.
 
         Parameters
         ----------
@@ -494,7 +494,7 @@ class CreateZoneResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateZoneResults.
+        """Print the default values of ``CreateZoneResults`` object.
 
         Examples
         --------
@@ -566,16 +566,16 @@ class DeleteZoneResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteZoneResults.
+        """Initialize a ``DeleteZoneResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteZoneResults object with default parameters.
+            Model to create a ``DeleteZoneResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the delete zone operation.
         json_data: dict, optional
-            JSON dictionary to create a DeleteZoneResults object with provided parameters.
+            JSON dictionary to create a ``DeleteZoneResults`` object with provided parameters.
 
         Examples
         --------
@@ -591,7 +591,7 @@ class DeleteZoneResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteZoneResults")
                     json_data = param_json["DeleteZoneResults"] if "DeleteZoneResults" in param_json else {}
@@ -607,7 +607,7 @@ class DeleteZoneResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteZoneResults.
+        """Set the default values of the ``DeleteZoneResults`` object.
 
         Parameters
         ----------
@@ -619,7 +619,7 @@ class DeleteZoneResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteZoneResults.
+        """Print the default values of ``DeleteZoneResults`` object.
 
         Examples
         --------

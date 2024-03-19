@@ -24,16 +24,16 @@ class TransformResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the TransformResults.
+        """Initialize a ``TransformResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a TransformResults object with default parameters.
+            Model to create a ``TransformResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a TransformResults object with provided parameters.
+            JSON dictionary to create a ``TransformResults`` object with provided parameters.
 
         Examples
         --------
@@ -49,7 +49,7 @@ class TransformResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "TransformResults")
                     json_data = param_json["TransformResults"] if "TransformResults" in param_json else {}
@@ -65,7 +65,7 @@ class TransformResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of TransformResults.
+        """Set the default values of the ``TransformResults`` object.
 
         Parameters
         ----------
@@ -77,7 +77,7 @@ class TransformResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TransformResults.
+        """Print the default values of ``TransformResults`` object.
 
         Examples
         --------
@@ -125,16 +125,16 @@ class TransformParams(CoreObject):
             transformation_matrix: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the TransformParams.
+        """Initialize a ``TransformParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a TransformParams object with default parameters.
+            Model to create a ``TransformParams`` object with default parameters.
         transformation_matrix: Iterable[float], optional
             Transformation matrix(4x4) to be used to transform.
         json_data: dict, optional
-            JSON dictionary to create a TransformParams object with provided parameters.
+            JSON dictionary to create a ``TransformParams`` object with provided parameters.
 
         Examples
         --------
@@ -150,7 +150,7 @@ class TransformParams(CoreObject):
                     transformation_matrix)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "TransformParams")
                     json_data = param_json["TransformParams"] if "TransformParams" in param_json else {}
@@ -166,7 +166,7 @@ class TransformParams(CoreObject):
     @staticmethod
     def set_default(
             transformation_matrix: Iterable[float] = None):
-        """Set the default values of TransformParams.
+        """Set the default values of the ``TransformParams`` object.
 
         Parameters
         ----------
@@ -178,7 +178,7 @@ class TransformParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TransformParams.
+        """Print the default values of ``TransformParams`` object.
 
         Examples
         --------

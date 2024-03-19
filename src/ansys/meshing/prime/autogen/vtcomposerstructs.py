@@ -24,16 +24,16 @@ class VTComposerParams(CoreObject):
             thin_stripes_tol: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VTComposerParams.
+        """Initialize a ``VTComposerParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VTComposerParams object with default parameters.
+            Model to create a ``VTComposerParams`` object with default parameters.
         thin_stripes_tol: float, optional
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a VTComposerParams object with provided parameters.
+            JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
 
         Examples
         --------
@@ -49,7 +49,7 @@ class VTComposerParams(CoreObject):
                     thin_stripes_tol)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VTComposerParams")
                     json_data = param_json["VTComposerParams"] if "VTComposerParams" in param_json else {}
@@ -65,7 +65,7 @@ class VTComposerParams(CoreObject):
     @staticmethod
     def set_default(
             thin_stripes_tol: float = None):
-        """Set the default values of VTComposerParams.
+        """Set the default values of the ``VTComposerParams`` object.
 
         Parameters
         ----------
@@ -76,7 +76,7 @@ class VTComposerParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VTComposerParams.
+        """Print the default values of ``VTComposerParams`` object.
 
         Examples
         --------
@@ -100,7 +100,7 @@ class VTComposerParams(CoreObject):
 
     @property
     def thin_stripes_tol(self) -> float:
-        """        This parameter is a Beta. Parameter behavior and name may change in future.
+        """        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._thin_stripes_tol
 
@@ -124,16 +124,16 @@ class VTComposerResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VTComposerResults.
+        """Initialize a ``VTComposerResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VTComposerResults object with default parameters.
+            Model to create a ``VTComposerResults`` object with default parameters.
         error_code: ErrorCode, optional
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a VTComposerResults object with provided parameters.
+            JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
 
         Examples
         --------
@@ -149,7 +149,7 @@ class VTComposerResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VTComposerResults")
                     json_data = param_json["VTComposerResults"] if "VTComposerResults" in param_json else {}
@@ -165,7 +165,7 @@ class VTComposerResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of VTComposerResults.
+        """Set the default values of the ``VTComposerResults`` object.
 
         Parameters
         ----------
@@ -176,7 +176,7 @@ class VTComposerResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VTComposerResults.
+        """Print the default values of ``VTComposerResults`` object.
 
         Examples
         --------
@@ -200,7 +200,7 @@ class VTComposerResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """        This parameter is a Beta. Parameter behavior and name may change in future.
+        """        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._error_code
 

@@ -39,12 +39,12 @@ class AutoNodeMoveParams(CoreObject):
             n_attempts: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AutoNodeMoveParams.
+        """Initialize a ``AutoNodeMoveParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AutoNodeMoveParams object with default parameters.
+            Model to create a ``AutoNodeMoveParams`` object with default parameters.
         quality_measure: CellQualityMeasure, optional
             Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
         target_quality: float, optional
@@ -58,7 +58,7 @@ class AutoNodeMoveParams(CoreObject):
         n_attempts: int, optional
             Number of attempts to improve specified quality measure by node movement.
         json_data: dict, optional
-            JSON dictionary to create a AutoNodeMoveParams object with provided parameters.
+            JSON dictionary to create a ``AutoNodeMoveParams`` object with provided parameters.
 
         Examples
         --------
@@ -84,7 +84,7 @@ class AutoNodeMoveParams(CoreObject):
                     n_attempts)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AutoNodeMoveParams")
                     json_data = param_json["AutoNodeMoveParams"] if "AutoNodeMoveParams" in param_json else {}
@@ -110,7 +110,7 @@ class AutoNodeMoveParams(CoreObject):
             n_iterations_per_node: int = None,
             restrict_boundary_nodes_along_surface: bool = None,
             n_attempts: int = None):
-        """Set the default values of AutoNodeMoveParams.
+        """Set the default values of the ``AutoNodeMoveParams`` object.
 
         Parameters
         ----------
@@ -132,7 +132,7 @@ class AutoNodeMoveParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AutoNodeMoveParams.
+        """Print the default values of ``AutoNodeMoveParams`` object.
 
         Examples
         --------
@@ -238,14 +238,14 @@ class CheckMeshParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CheckMeshParams.
+        """Initialize a ``CheckMeshParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CheckMeshParams object with default parameters.
+            Model to create a ``CheckMeshParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a CheckMeshParams object with provided parameters.
+            JSON dictionary to create a ``CheckMeshParams`` object with provided parameters.
 
         Examples
         --------
@@ -259,7 +259,7 @@ class CheckMeshParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CheckMeshParams")
                     json_data = param_json["CheckMeshParams"] if "CheckMeshParams" in param_json else {}
@@ -273,7 +273,7 @@ class CheckMeshParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of CheckMeshParams.
+        """Set the default values of the ``CheckMeshParams`` object.
 
         """
         args = locals()
@@ -281,7 +281,7 @@ class CheckMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CheckMeshParams.
+        """Print the default values of ``CheckMeshParams`` object.
 
         Examples
         --------
@@ -319,16 +319,16 @@ class VolumeMeshToolResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VolumeMeshToolResults.
+        """Initialize a ``VolumeMeshToolResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VolumeMeshToolResults object with default parameters.
+            Model to create a ``VolumeMeshToolResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the volume mesh tool operation.
         json_data: dict, optional
-            JSON dictionary to create a VolumeMeshToolResults object with provided parameters.
+            JSON dictionary to create a ``VolumeMeshToolResults`` object with provided parameters.
 
         Examples
         --------
@@ -344,7 +344,7 @@ class VolumeMeshToolResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VolumeMeshToolResults")
                     json_data = param_json["VolumeMeshToolResults"] if "VolumeMeshToolResults" in param_json else {}
@@ -360,7 +360,7 @@ class VolumeMeshToolResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of VolumeMeshToolResults.
+        """Set the default values of the ``VolumeMeshToolResults`` object.
 
         Parameters
         ----------
@@ -372,7 +372,7 @@ class VolumeMeshToolResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VolumeMeshToolResults.
+        """Print the default values of ``VolumeMeshToolResults`` object.
 
         Examples
         --------
@@ -435,12 +435,12 @@ class CheckMeshResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CheckMeshResults.
+        """Initialize a ``CheckMeshResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CheckMeshResults object with default parameters.
+            Model to create a ``CheckMeshResults`` object with default parameters.
         has_non_positive_volumes: bool, optional
             Indicates whether mesh has non positive volumes.
         has_non_positive_areas: bool, optional
@@ -454,7 +454,7 @@ class CheckMeshResults(CoreObject):
         warning_codes: List[WarningCode], optional
             Warning codes associated with the check grid operation.
         json_data: dict, optional
-            JSON dictionary to create a CheckMeshResults object with provided parameters.
+            JSON dictionary to create a ``CheckMeshResults`` object with provided parameters.
 
         Examples
         --------
@@ -480,7 +480,7 @@ class CheckMeshResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CheckMeshResults")
                     json_data = param_json["CheckMeshResults"] if "CheckMeshResults" in param_json else {}
@@ -506,7 +506,7 @@ class CheckMeshResults(CoreObject):
             has_left_handed_faces: bool = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of CheckMeshResults.
+        """Set the default values of the ``CheckMeshResults`` object.
 
         Parameters
         ----------
@@ -528,7 +528,7 @@ class CheckMeshResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CheckMeshResults.
+        """Print the default values of ``CheckMeshResults`` object.
 
         Examples
         --------

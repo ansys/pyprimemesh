@@ -27,18 +27,18 @@ class PartZonelets(CoreObject):
             face_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PartZonelets.
+        """Initialize a ``PartZonelets`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PartZonelets object with default parameters.
+            Model to create a ``PartZonelets`` object with default parameters.
         part_id: int, optional
             Id of part.
         face_zonelets: Iterable[int], optional
             List of face zonelet ids available in the part.
         json_data: dict, optional
-            JSON dictionary to create a PartZonelets object with provided parameters.
+            JSON dictionary to create a ``PartZonelets`` object with provided parameters.
 
         Examples
         --------
@@ -56,7 +56,7 @@ class PartZonelets(CoreObject):
                     face_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PartZonelets")
                     json_data = param_json["PartZonelets"] if "PartZonelets" in param_json else {}
@@ -74,7 +74,7 @@ class PartZonelets(CoreObject):
     def set_default(
             part_id: int = None,
             face_zonelets: Iterable[int] = None):
-        """Set the default values of PartZonelets.
+        """Set the default values of the ``PartZonelets`` object.
 
         Parameters
         ----------
@@ -88,7 +88,7 @@ class PartZonelets(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PartZonelets.
+        """Print the default values of ``PartZonelets`` object.
 
         Examples
         --------
@@ -154,12 +154,12 @@ class SetNameResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetNameResults.
+        """Initialize a ``SetNameResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetNameResults object with default parameters.
+            Model to create a ``SetNameResults`` object with default parameters.
         warning_code: WarningCode, optional
             Warning code associated with the set name of given entity.
         assigned_name: str, optional
@@ -167,7 +167,7 @@ class SetNameResults(CoreObject):
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a SetNameResults object with provided parameters.
+            JSON dictionary to create a ``SetNameResults`` object with provided parameters.
 
         Examples
         --------
@@ -187,7 +187,7 @@ class SetNameResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetNameResults")
                     json_data = param_json["SetNameResults"] if "SetNameResults" in param_json else {}
@@ -207,7 +207,7 @@ class SetNameResults(CoreObject):
             warning_code: WarningCode = None,
             assigned_name: str = None,
             error_code: ErrorCode = None):
-        """Set the default values of SetNameResults.
+        """Set the default values of the ``SetNameResults`` object.
 
         Parameters
         ----------
@@ -223,7 +223,7 @@ class SetNameResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetNameResults.
+        """Print the default values of ``SetNameResults`` object.
 
         Examples
         --------
@@ -295,16 +295,16 @@ class DeleteResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteResults.
+        """Initialize a ``DeleteResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteResults object with default parameters.
+            Model to create a ``DeleteResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a DeleteResults object with provided parameters.
+            JSON dictionary to create a ``DeleteResults`` object with provided parameters.
 
         Examples
         --------
@@ -320,7 +320,7 @@ class DeleteResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteResults")
                     json_data = param_json["DeleteResults"] if "DeleteResults" in param_json else {}
@@ -336,7 +336,7 @@ class DeleteResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteResults.
+        """Set the default values of the ``DeleteResults`` object.
 
         Parameters
         ----------
@@ -348,7 +348,7 @@ class DeleteResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteResults.
+        """Print the default values of ``DeleteResults`` object.
 
         Examples
         --------
@@ -396,16 +396,16 @@ class CopyZoneletsParams(CoreObject):
             copy_zones: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CopyZoneletsParams.
+        """Initialize a ``CopyZoneletsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CopyZoneletsParams object with default parameters.
+            Model to create a ``CopyZoneletsParams`` object with default parameters.
         copy_zones: bool, optional
             Option to copy zones of input zonelets to corresponding copied zonelets.
         json_data: dict, optional
-            JSON dictionary to create a CopyZoneletsParams object with provided parameters.
+            JSON dictionary to create a ``CopyZoneletsParams`` object with provided parameters.
 
         Examples
         --------
@@ -421,7 +421,7 @@ class CopyZoneletsParams(CoreObject):
                     copy_zones)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CopyZoneletsParams")
                     json_data = param_json["CopyZoneletsParams"] if "CopyZoneletsParams" in param_json else {}
@@ -437,7 +437,7 @@ class CopyZoneletsParams(CoreObject):
     @staticmethod
     def set_default(
             copy_zones: bool = None):
-        """Set the default values of CopyZoneletsParams.
+        """Set the default values of the ``CopyZoneletsParams`` object.
 
         Parameters
         ----------
@@ -449,7 +449,7 @@ class CopyZoneletsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CopyZoneletsParams.
+        """Print the default values of ``CopyZoneletsParams`` object.
 
         Examples
         --------
@@ -503,12 +503,12 @@ class CopyZoneletsResults(CoreObject):
             copied_face_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CopyZoneletsResults.
+        """Initialize a ``CopyZoneletsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CopyZoneletsResults object with default parameters.
+            Model to create a ``CopyZoneletsResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         copied_zonelets: Iterable[int], optional
@@ -516,7 +516,7 @@ class CopyZoneletsResults(CoreObject):
         copied_face_zonelets: Iterable[int], optional
             Ids of the copied bounding faces of cell zonelets.
         json_data: dict, optional
-            JSON dictionary to create a CopyZoneletsResults object with provided parameters.
+            JSON dictionary to create a ``CopyZoneletsResults`` object with provided parameters.
 
         Examples
         --------
@@ -536,7 +536,7 @@ class CopyZoneletsResults(CoreObject):
                     copied_face_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CopyZoneletsResults")
                     json_data = param_json["CopyZoneletsResults"] if "CopyZoneletsResults" in param_json else {}
@@ -556,7 +556,7 @@ class CopyZoneletsResults(CoreObject):
             error_code: ErrorCode = None,
             copied_zonelets: Iterable[int] = None,
             copied_face_zonelets: Iterable[int] = None):
-        """Set the default values of CopyZoneletsResults.
+        """Set the default values of the ``CopyZoneletsResults`` object.
 
         Parameters
         ----------
@@ -572,7 +572,7 @@ class CopyZoneletsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CopyZoneletsResults.
+        """Print the default values of ``CopyZoneletsResults`` object.
 
         Examples
         --------

@@ -55,7 +55,7 @@ class ControlData(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -81,7 +81,7 @@ class ControlData(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -120,7 +120,7 @@ class ControlData(CoreObject):
 
         """
         if not isinstance(type, SizingType):
-            raise TypeError("Invalid argument type passed for type, valid argument type is SizingType.")
+            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is SizingType.")
         args = {"type" : type}
         command_name = "PrimeMesh::ControlData/CreateSizeControl"
         self._model._print_logs_before_command("create_size_control", args)
@@ -234,7 +234,7 @@ class ControlData(CoreObject):
 
         """
         if not isinstance(control_ids, Iterable):
-            raise TypeError("Invalid argument type passed for control_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'control_ids'. Valid argument type is Iterable[int].")
         args = {"control_ids" : control_ids}
         command_name = "PrimeMesh::ControlData/DeleteControls"
         self._model._print_logs_before_command("delete_controls", args)
@@ -268,9 +268,9 @@ class ControlData(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         if not isinstance(params, ScopeZoneletParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ScopeZoneletParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ScopeZoneletParams.")
         args = {"scope" : scope._jsonify(),
         "params" : params._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeFaceZonelets"
@@ -302,7 +302,7 @@ class ControlData(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeParts"
         self._model._print_logs_before_command("get_scope_parts", args)
@@ -331,7 +331,7 @@ class ControlData(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetPartZonelets"
         self._model._print_logs_before_command("get_part_zonelets", args)

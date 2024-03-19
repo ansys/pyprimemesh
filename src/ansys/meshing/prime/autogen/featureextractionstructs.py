@@ -42,12 +42,12 @@ class ExtractFeatureParams(CoreObject):
             number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractFeatureParams.
+        """Initialize a ``ExtractFeatureParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractFeatureParams object with default parameters.
+            Model to create a ``ExtractFeatureParams`` object with default parameters.
         replace: bool, optional
             Option to replace existing edge zonelets with new extracted edge zonelets.
         feature_angle: float, optional
@@ -63,7 +63,7 @@ class ExtractFeatureParams(CoreObject):
         number_of_threads: int, optional
             Number of threads used for multithreading.
         json_data: dict, optional
-            JSON dictionary to create a ExtractFeatureParams object with provided parameters.
+            JSON dictionary to create a ``ExtractFeatureParams`` object with provided parameters.
 
         Examples
         --------
@@ -91,7 +91,7 @@ class ExtractFeatureParams(CoreObject):
                     number_of_threads)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractFeatureParams")
                     json_data = param_json["ExtractFeatureParams"] if "ExtractFeatureParams" in param_json else {}
@@ -119,7 +119,7 @@ class ExtractFeatureParams(CoreObject):
             disconnect_with_faces: bool = None,
             label_name: str = None,
             number_of_threads: int = None):
-        """Set the default values of ExtractFeatureParams.
+        """Set the default values of the ``ExtractFeatureParams`` object.
 
         Parameters
         ----------
@@ -143,7 +143,7 @@ class ExtractFeatureParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractFeatureParams.
+        """Print the default values of ``ExtractFeatureParams`` object.
 
         Examples
         --------
@@ -269,12 +269,12 @@ class ExtractFeatureResults(CoreObject):
             new_edge_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractFeatureResults.
+        """Initialize a ``ExtractFeatureResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractFeatureResults object with default parameters.
+            Model to create a ``ExtractFeatureResults`` object with default parameters.
         processing_time: float, optional
             Time taken for edge extraction.
         error_code: ErrorCode, optional
@@ -282,7 +282,7 @@ class ExtractFeatureResults(CoreObject):
         new_edge_zonelets: Iterable[int], optional
             Ids of new edge zonelets extracted.
         json_data: dict, optional
-            JSON dictionary to create a ExtractFeatureResults object with provided parameters.
+            JSON dictionary to create a ``ExtractFeatureResults`` object with provided parameters.
 
         Examples
         --------
@@ -302,7 +302,7 @@ class ExtractFeatureResults(CoreObject):
                     new_edge_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractFeatureResults")
                     json_data = param_json["ExtractFeatureResults"] if "ExtractFeatureResults" in param_json else {}
@@ -322,7 +322,7 @@ class ExtractFeatureResults(CoreObject):
             processing_time: float = None,
             error_code: ErrorCode = None,
             new_edge_zonelets: Iterable[int] = None):
-        """Set the default values of ExtractFeatureResults.
+        """Set the default values of the ``ExtractFeatureResults`` object.
 
         Parameters
         ----------
@@ -338,7 +338,7 @@ class ExtractFeatureResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractFeatureResults.
+        """Print the default values of ``ExtractFeatureResults`` object.
 
         Examples
         --------
@@ -413,18 +413,18 @@ class ExtractedFeatureIds(CoreObject):
             new_edge_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractedFeatureIds.
+        """Initialize a ``ExtractedFeatureIds`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractedFeatureIds object with default parameters.
+            Model to create a ``ExtractedFeatureIds`` object with default parameters.
         part_id: int, optional
             Id of the part from which edge zonelets are extracted.
         new_edge_zonelets: Iterable[int], optional
             Ids of new edge zonelets extracted.
         json_data: dict, optional
-            JSON dictionary to create a ExtractedFeatureIds object with provided parameters.
+            JSON dictionary to create a ``ExtractedFeatureIds`` object with provided parameters.
 
         Examples
         --------
@@ -442,7 +442,7 @@ class ExtractedFeatureIds(CoreObject):
                     new_edge_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractedFeatureIds")
                     json_data = param_json["ExtractedFeatureIds"] if "ExtractedFeatureIds" in param_json else {}
@@ -460,7 +460,7 @@ class ExtractedFeatureIds(CoreObject):
     def set_default(
             part_id: int = None,
             new_edge_zonelets: Iterable[int] = None):
-        """Set the default values of ExtractedFeatureIds.
+        """Set the default values of the ``ExtractedFeatureIds`` object.
 
         Parameters
         ----------
@@ -474,7 +474,7 @@ class ExtractedFeatureIds(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractedFeatureIds.
+        """Print the default values of ``ExtractedFeatureIds`` object.
 
         Examples
         --------
@@ -534,16 +534,16 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
             label_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateIntersectionEdgeLoopsParams.
+        """Initialize a ``CreateIntersectionEdgeLoopsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateIntersectionEdgeLoopsParams object with default parameters.
+            Model to create a ``CreateIntersectionEdgeLoopsParams`` object with default parameters.
         label_name: str, optional
             Label name to be assigned to extracted features.
         json_data: dict, optional
-            JSON dictionary to create a CreateIntersectionEdgeLoopsParams object with provided parameters.
+            JSON dictionary to create a ``CreateIntersectionEdgeLoopsParams`` object with provided parameters.
 
         Examples
         --------
@@ -559,7 +559,7 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
                     label_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateIntersectionEdgeLoopsParams")
                     json_data = param_json["CreateIntersectionEdgeLoopsParams"] if "CreateIntersectionEdgeLoopsParams" in param_json else {}
@@ -575,7 +575,7 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
     @staticmethod
     def set_default(
             label_name: str = None):
-        """Set the default values of CreateIntersectionEdgeLoopsParams.
+        """Set the default values of the ``CreateIntersectionEdgeLoopsParams`` object.
 
         Parameters
         ----------
@@ -587,7 +587,7 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateIntersectionEdgeLoopsParams.
+        """Print the default values of ``CreateIntersectionEdgeLoopsParams`` object.
 
         Examples
         --------
@@ -641,12 +641,12 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
             extracted_ids: List[ExtractedFeatureIds] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateIntersectionEdgeLoopsResults.
+        """Initialize a ``CreateIntersectionEdgeLoopsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateIntersectionEdgeLoopsResults object with default parameters.
+            Model to create a ``CreateIntersectionEdgeLoopsResults`` object with default parameters.
         processing_time: float, optional
             Time taken to extract edges formed by intersecting faces.
         error_code: ErrorCode, optional
@@ -654,7 +654,7 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
         extracted_ids: List[ExtractedFeatureIds], optional
             List of ExtractedFeatureIds that contains ids of extracted edges.
         json_data: dict, optional
-            JSON dictionary to create a CreateIntersectionEdgeLoopsResults object with provided parameters.
+            JSON dictionary to create a ``CreateIntersectionEdgeLoopsResults`` object with provided parameters.
 
         Examples
         --------
@@ -674,7 +674,7 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
                     extracted_ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateIntersectionEdgeLoopsResults")
                     json_data = param_json["CreateIntersectionEdgeLoopsResults"] if "CreateIntersectionEdgeLoopsResults" in param_json else {}
@@ -694,7 +694,7 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
             processing_time: float = None,
             error_code: ErrorCode = None,
             extracted_ids: List[ExtractedFeatureIds] = None):
-        """Set the default values of CreateIntersectionEdgeLoopsResults.
+        """Set the default values of the ``CreateIntersectionEdgeLoopsResults`` object.
 
         Parameters
         ----------
@@ -710,7 +710,7 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateIntersectionEdgeLoopsResults.
+        """Print the default values of ``CreateIntersectionEdgeLoopsResults`` object.
 
         Examples
         --------

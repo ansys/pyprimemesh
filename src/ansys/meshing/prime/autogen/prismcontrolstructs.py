@@ -52,12 +52,12 @@ class PrismControlGrowthParams(CoreObject):
             min_aspect_ratio: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PrismControlGrowthParams.
+        """Initialize a ``PrismControlGrowthParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PrismControlGrowthParams object with default parameters.
+            Model to create a ``PrismControlGrowthParams`` object with default parameters.
         offset_type: PrismControlOffsetType, optional
             Offset type controls the method that is used to compute prism layer heights. The following options are supported.The aspect ratio option takes first aspect ratio, number of layers and growth rate. It ignores first height as input.The uniform option takes first height, number of layers and growth rate. It ignores first aspect ratio as input.Aspect ratio is ratio of prism base to height.
         n_layers: int, optional
@@ -73,7 +73,7 @@ class PrismControlGrowthParams(CoreObject):
         min_aspect_ratio: float, optional
             Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
         json_data: dict, optional
-            JSON dictionary to create a PrismControlGrowthParams object with provided parameters.
+            JSON dictionary to create a ``PrismControlGrowthParams`` object with provided parameters.
 
         Examples
         --------
@@ -101,7 +101,7 @@ class PrismControlGrowthParams(CoreObject):
                     min_aspect_ratio)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PrismControlGrowthParams")
                     json_data = param_json["PrismControlGrowthParams"] if "PrismControlGrowthParams" in param_json else {}
@@ -129,7 +129,7 @@ class PrismControlGrowthParams(CoreObject):
             first_aspect_ratio: float = None,
             last_aspect_ratio: float = None,
             min_aspect_ratio: float = None):
-        """Set the default values of PrismControlGrowthParams.
+        """Set the default values of the ``PrismControlGrowthParams`` object.
 
         Parameters
         ----------
@@ -153,7 +153,7 @@ class PrismControlGrowthParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PrismControlGrowthParams.
+        """Print the default values of ``PrismControlGrowthParams`` object.
 
         Examples
         --------

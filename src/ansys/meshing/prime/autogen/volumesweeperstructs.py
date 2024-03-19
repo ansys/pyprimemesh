@@ -42,12 +42,12 @@ class MeshStackerResults(CoreObject):
             size_control_ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MeshStackerResults.
+        """Initialize a ``MeshStackerResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MeshStackerResults object with default parameters.
+            Model to create a ``MeshStackerResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the operation.
         error_codes_per_topo_volume: Iterable[int], optional
@@ -63,7 +63,7 @@ class MeshStackerResults(CoreObject):
         size_control_ids: Iterable[int], optional
             List of ids of newly created size controls.
         json_data: dict, optional
-            JSON dictionary to create a MeshStackerResults object with provided parameters.
+            JSON dictionary to create a ``MeshStackerResults`` object with provided parameters.
 
         Examples
         --------
@@ -91,7 +91,7 @@ class MeshStackerResults(CoreObject):
                     size_control_ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MeshStackerResults")
                     json_data = param_json["MeshStackerResults"] if "MeshStackerResults" in param_json else {}
@@ -119,7 +119,7 @@ class MeshStackerResults(CoreObject):
             small_features: Iterable[int] = None,
             base_face_ids: Iterable[int] = None,
             size_control_ids: Iterable[int] = None):
-        """Set the default values of MeshStackerResults.
+        """Set the default values of the ``MeshStackerResults`` object.
 
         Parameters
         ----------
@@ -143,7 +143,7 @@ class MeshStackerResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MeshStackerResults.
+        """Print the default values of ``MeshStackerResults`` object.
 
         Examples
         --------
@@ -281,12 +281,12 @@ class MeshStackerParams(CoreObject):
             delete_base: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MeshStackerParams.
+        """Initialize a ``MeshStackerParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MeshStackerParams object with default parameters.
+            Model to create a ``MeshStackerParams`` object with default parameters.
         origin: Iterable[float], optional
             Origin coordinate list of stacker.
         direction: Iterable[float], optional
@@ -302,7 +302,7 @@ class MeshStackerParams(CoreObject):
         delete_base: bool, optional
             Option to delete base face at the end of stacking. The default is false.
         json_data: dict, optional
-            JSON dictionary to create a MeshStackerParams object with provided parameters.
+            JSON dictionary to create a ``MeshStackerParams`` object with provided parameters.
 
         Examples
         --------
@@ -330,7 +330,7 @@ class MeshStackerParams(CoreObject):
                     delete_base)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MeshStackerParams")
                     json_data = param_json["MeshStackerParams"] if "MeshStackerParams" in param_json else {}
@@ -358,7 +358,7 @@ class MeshStackerParams(CoreObject):
             max_offset_size: float = None,
             size_control_ids: Iterable[int] = None,
             delete_base: bool = None):
-        """Set the default values of MeshStackerParams.
+        """Set the default values of the ``MeshStackerParams`` object.
 
         Parameters
         ----------
@@ -382,7 +382,7 @@ class MeshStackerParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MeshStackerParams.
+        """Print the default values of ``MeshStackerParams`` object.
 
         Examples
         --------

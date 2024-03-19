@@ -38,12 +38,12 @@ class MorphBCParams(CoreObject):
             morph_region_box_extension: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MorphBCParams.
+        """Initialize a ``MorphBCParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MorphBCParams object with default parameters.
+            Model to create a ``MorphBCParams`` object with default parameters.
         morph_region_method: BCsVolumetricModality, optional
             Indicate options to identify morphable regions in the input volumetric mesh.
         morphable_layers: int, optional
@@ -51,7 +51,7 @@ class MorphBCParams(CoreObject):
         morph_region_box_extension: float, optional
             Percentage extension for the volumetric box.
         json_data: dict, optional
-            JSON dictionary to create a MorphBCParams object with provided parameters.
+            JSON dictionary to create a ``MorphBCParams`` object with provided parameters.
 
         Examples
         --------
@@ -71,7 +71,7 @@ class MorphBCParams(CoreObject):
                     morph_region_box_extension)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MorphBCParams")
                     json_data = param_json["MorphBCParams"] if "MorphBCParams" in param_json else {}
@@ -91,7 +91,7 @@ class MorphBCParams(CoreObject):
             morph_region_method: BCsVolumetricModality = None,
             morphable_layers: int = None,
             morph_region_box_extension: float = None):
-        """Set the default values of MorphBCParams.
+        """Set the default values of the ``MorphBCParams`` object.
 
         Parameters
         ----------
@@ -107,7 +107,7 @@ class MorphBCParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MorphBCParams.
+        """Print the default values of ``MorphBCParams`` object.
 
         Examples
         --------

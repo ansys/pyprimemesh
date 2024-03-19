@@ -30,12 +30,12 @@ class PeriodicControlParams(CoreObject):
             angle: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PeriodicControlParams.
+        """Initialize a ``PeriodicControlParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PeriodicControlParams object with default parameters.
+            Model to create a ``PeriodicControlParams`` object with default parameters.
         center: Iterable[float], optional
             Center coordinates.
         axis: Iterable[float], optional
@@ -43,7 +43,7 @@ class PeriodicControlParams(CoreObject):
         angle: float, optional
             Angle in degrees.
         json_data: dict, optional
-            JSON dictionary to create a PeriodicControlParams object with provided parameters.
+            JSON dictionary to create a ``PeriodicControlParams`` object with provided parameters.
 
         Examples
         --------
@@ -63,7 +63,7 @@ class PeriodicControlParams(CoreObject):
                     angle)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PeriodicControlParams")
                     json_data = param_json["PeriodicControlParams"] if "PeriodicControlParams" in param_json else {}
@@ -83,7 +83,7 @@ class PeriodicControlParams(CoreObject):
             center: Iterable[float] = None,
             axis: Iterable[float] = None,
             angle: float = None):
-        """Set the default values of PeriodicControlParams.
+        """Set the default values of the ``PeriodicControlParams`` object.
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class PeriodicControlParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PeriodicControlParams.
+        """Print the default values of ``PeriodicControlParams`` object.
 
         Examples
         --------
@@ -171,16 +171,16 @@ class PeriodicControlSummaryResult(CoreObject):
             message: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PeriodicControlSummaryResult.
+        """Initialize a ``PeriodicControlSummaryResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PeriodicControlSummaryResult object with default parameters.
+            Model to create a ``PeriodicControlSummaryResult`` object with default parameters.
         message: str, optional
             String with the periodic control summary.
         json_data: dict, optional
-            JSON dictionary to create a PeriodicControlSummaryResult object with provided parameters.
+            JSON dictionary to create a ``PeriodicControlSummaryResult`` object with provided parameters.
 
         Examples
         --------
@@ -196,7 +196,7 @@ class PeriodicControlSummaryResult(CoreObject):
                     message)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PeriodicControlSummaryResult")
                     json_data = param_json["PeriodicControlSummaryResult"] if "PeriodicControlSummaryResult" in param_json else {}
@@ -212,7 +212,7 @@ class PeriodicControlSummaryResult(CoreObject):
     @staticmethod
     def set_default(
             message: str = None):
-        """Set the default values of PeriodicControlSummaryResult.
+        """Set the default values of the ``PeriodicControlSummaryResult`` object.
 
         Parameters
         ----------
@@ -224,7 +224,7 @@ class PeriodicControlSummaryResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PeriodicControlSummaryResult.
+        """Print the default values of ``PeriodicControlSummaryResult`` object.
 
         Examples
         --------
@@ -270,14 +270,14 @@ class PeriodicControlSummaryParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PeriodicControlSummaryParams.
+        """Initialize a ``PeriodicControlSummaryParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PeriodicControlSummaryParams object with default parameters.
+            Model to create a ``PeriodicControlSummaryParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a PeriodicControlSummaryParams object with provided parameters.
+            JSON dictionary to create a ``PeriodicControlSummaryParams`` object with provided parameters.
 
         Examples
         --------
@@ -291,7 +291,7 @@ class PeriodicControlSummaryParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PeriodicControlSummaryParams")
                     json_data = param_json["PeriodicControlSummaryParams"] if "PeriodicControlSummaryParams" in param_json else {}
@@ -305,7 +305,7 @@ class PeriodicControlSummaryParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of PeriodicControlSummaryParams.
+        """Set the default values of the ``PeriodicControlSummaryParams`` object.
 
         """
         args = locals()
@@ -313,7 +313,7 @@ class PeriodicControlSummaryParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PeriodicControlSummaryParams.
+        """Print the default values of ``PeriodicControlSummaryParams`` object.
 
         Examples
         --------

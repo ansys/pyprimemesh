@@ -56,12 +56,12 @@ class CurvatureSizingParams(CoreObject):
             use_cad_curvature: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CurvatureSizingParams.
+        """Initialize a ``CurvatureSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CurvatureSizingParams object with default parameters.
+            Model to create a ``CurvatureSizingParams`` object with default parameters.
         min: float, optional
             Minimum size used for computing edge and face size using curavture size control.
         max: float, optional
@@ -73,7 +73,7 @@ class CurvatureSizingParams(CoreObject):
         use_cad_curvature: bool, optional
             Option to enable use of CAD curvature for computing edge and face size.
         json_data: dict, optional
-            JSON dictionary to create a CurvatureSizingParams object with provided parameters.
+            JSON dictionary to create a ``CurvatureSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -97,7 +97,7 @@ class CurvatureSizingParams(CoreObject):
                     use_cad_curvature)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CurvatureSizingParams")
                     json_data = param_json["CurvatureSizingParams"] if "CurvatureSizingParams" in param_json else {}
@@ -121,7 +121,7 @@ class CurvatureSizingParams(CoreObject):
             growth_rate: float = None,
             normal_angle: float = None,
             use_cad_curvature: bool = None):
-        """Set the default values of CurvatureSizingParams.
+        """Set the default values of the ``CurvatureSizingParams`` object.
 
         Parameters
         ----------
@@ -141,7 +141,7 @@ class CurvatureSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CurvatureSizingParams.
+        """Print the default values of ``CurvatureSizingParams`` object.
 
         Examples
         --------
@@ -252,12 +252,12 @@ class ProximitySizingParams(CoreObject):
             ignore_orientation: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ProximitySizingParams.
+        """Initialize a ``ProximitySizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ProximitySizingParams object with default parameters.
+            Model to create a ``ProximitySizingParams`` object with default parameters.
         min: float, optional
             Minimum size used for computing edge and face size using proximity size control.
         max: float, optional
@@ -271,7 +271,7 @@ class ProximitySizingParams(CoreObject):
         ignore_orientation: bool, optional
             The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
         json_data: dict, optional
-            JSON dictionary to create a ProximitySizingParams object with provided parameters.
+            JSON dictionary to create a ``ProximitySizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -297,7 +297,7 @@ class ProximitySizingParams(CoreObject):
                     ignore_orientation)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ProximitySizingParams")
                     json_data = param_json["ProximitySizingParams"] if "ProximitySizingParams" in param_json else {}
@@ -323,7 +323,7 @@ class ProximitySizingParams(CoreObject):
             elements_per_gap: float = None,
             ignore_self_proximity: bool = None,
             ignore_orientation: bool = None):
-        """Set the default values of ProximitySizingParams.
+        """Set the default values of the ``ProximitySizingParams`` object.
 
         Parameters
         ----------
@@ -345,7 +345,7 @@ class ProximitySizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ProximitySizingParams.
+        """Print the default values of ``ProximitySizingParams`` object.
 
         Examples
         --------
@@ -460,18 +460,18 @@ class SoftSizingParams(CoreObject):
             growth_rate: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SoftSizingParams.
+        """Initialize a ``SoftSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SoftSizingParams object with default parameters.
+            Model to create a ``SoftSizingParams`` object with default parameters.
         max: float, optional
             Maximum size used for computing edge and face size using soft size control.
         growth_rate: float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         json_data: dict, optional
-            JSON dictionary to create a SoftSizingParams object with provided parameters.
+            JSON dictionary to create a ``SoftSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -489,7 +489,7 @@ class SoftSizingParams(CoreObject):
                     growth_rate)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SoftSizingParams")
                     json_data = param_json["SoftSizingParams"] if "SoftSizingParams" in param_json else {}
@@ -507,7 +507,7 @@ class SoftSizingParams(CoreObject):
     def set_default(
             max: float = None,
             growth_rate: float = None):
-        """Set the default values of SoftSizingParams.
+        """Set the default values of the ``SoftSizingParams`` object.
 
         Parameters
         ----------
@@ -521,7 +521,7 @@ class SoftSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SoftSizingParams.
+        """Print the default values of ``SoftSizingParams`` object.
 
         Examples
         --------
@@ -586,18 +586,18 @@ class HardSizingParams(CoreObject):
             growth_rate: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the HardSizingParams.
+        """Initialize a ``HardSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a HardSizingParams object with default parameters.
+            Model to create a ``HardSizingParams`` object with default parameters.
         min: float, optional
             Minimum size used for computing edge and face size using hard size control.
         growth_rate: float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         json_data: dict, optional
-            JSON dictionary to create a HardSizingParams object with provided parameters.
+            JSON dictionary to create a ``HardSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -615,7 +615,7 @@ class HardSizingParams(CoreObject):
                     growth_rate)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "HardSizingParams")
                     json_data = param_json["HardSizingParams"] if "HardSizingParams" in param_json else {}
@@ -633,7 +633,7 @@ class HardSizingParams(CoreObject):
     def set_default(
             min: float = None,
             growth_rate: float = None):
-        """Set the default values of HardSizingParams.
+        """Set the default values of the ``HardSizingParams`` object.
 
         Parameters
         ----------
@@ -647,7 +647,7 @@ class HardSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of HardSizingParams.
+        """Print the default values of ``HardSizingParams`` object.
 
         Examples
         --------
@@ -707,16 +707,16 @@ class MeshedSizingParams(CoreObject):
             growth_rate: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MeshedSizingParams.
+        """Initialize a ``MeshedSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MeshedSizingParams object with default parameters.
+            Model to create a ``MeshedSizingParams`` object with default parameters.
         growth_rate: float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         json_data: dict, optional
-            JSON dictionary to create a MeshedSizingParams object with provided parameters.
+            JSON dictionary to create a ``MeshedSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -732,7 +732,7 @@ class MeshedSizingParams(CoreObject):
                     growth_rate)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MeshedSizingParams")
                     json_data = param_json["MeshedSizingParams"] if "MeshedSizingParams" in param_json else {}
@@ -748,7 +748,7 @@ class MeshedSizingParams(CoreObject):
     @staticmethod
     def set_default(
             growth_rate: float = None):
-        """Set the default values of MeshedSizingParams.
+        """Set the default values of the ``MeshedSizingParams`` object.
 
         Parameters
         ----------
@@ -760,7 +760,7 @@ class MeshedSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MeshedSizingParams.
+        """Print the default values of ``MeshedSizingParams`` object.
 
         Examples
         --------
@@ -814,18 +814,18 @@ class BoiSizingParams(CoreObject):
             growth_rate: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the BoiSizingParams.
+        """Initialize a ``BoiSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a BoiSizingParams object with default parameters.
+            Model to create a ``BoiSizingParams`` object with default parameters.
         max: float, optional
             Maximum size used for computing edge and face size using boi size control.
         growth_rate: float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         json_data: dict, optional
-            JSON dictionary to create a BoiSizingParams object with provided parameters.
+            JSON dictionary to create a ``BoiSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -843,7 +843,7 @@ class BoiSizingParams(CoreObject):
                     growth_rate)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "BoiSizingParams")
                     json_data = param_json["BoiSizingParams"] if "BoiSizingParams" in param_json else {}
@@ -861,7 +861,7 @@ class BoiSizingParams(CoreObject):
     def set_default(
             max: float = None,
             growth_rate: float = None):
-        """Set the default values of BoiSizingParams.
+        """Set the default values of the ``BoiSizingParams`` object.
 
         Parameters
         ----------
@@ -875,7 +875,7 @@ class BoiSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of BoiSizingParams.
+        """Print the default values of ``BoiSizingParams`` object.
 
         Examples
         --------
@@ -935,16 +935,16 @@ class SizeControlSummaryResult(CoreObject):
             message: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SizeControlSummaryResult.
+        """Initialize a ``SizeControlSummaryResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SizeControlSummaryResult object with default parameters.
+            Model to create a ``SizeControlSummaryResult`` object with default parameters.
         message: str, optional
             Size control summary text.
         json_data: dict, optional
-            JSON dictionary to create a SizeControlSummaryResult object with provided parameters.
+            JSON dictionary to create a ``SizeControlSummaryResult`` object with provided parameters.
 
         Examples
         --------
@@ -960,7 +960,7 @@ class SizeControlSummaryResult(CoreObject):
                     message)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SizeControlSummaryResult")
                     json_data = param_json["SizeControlSummaryResult"] if "SizeControlSummaryResult" in param_json else {}
@@ -976,7 +976,7 @@ class SizeControlSummaryResult(CoreObject):
     @staticmethod
     def set_default(
             message: str = None):
-        """Set the default values of SizeControlSummaryResult.
+        """Set the default values of the ``SizeControlSummaryResult`` object.
 
         Parameters
         ----------
@@ -988,7 +988,7 @@ class SizeControlSummaryResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SizeControlSummaryResult.
+        """Print the default values of ``SizeControlSummaryResult`` object.
 
         Examples
         --------
@@ -1034,14 +1034,14 @@ class SizeControlSummaryParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SizeControlSummaryParams.
+        """Initialize a ``SizeControlSummaryParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SizeControlSummaryParams object with default parameters.
+            Model to create a ``SizeControlSummaryParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a SizeControlSummaryParams object with provided parameters.
+            JSON dictionary to create a ``SizeControlSummaryParams`` object with provided parameters.
 
         Examples
         --------
@@ -1055,7 +1055,7 @@ class SizeControlSummaryParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SizeControlSummaryParams")
                     json_data = param_json["SizeControlSummaryParams"] if "SizeControlSummaryParams" in param_json else {}
@@ -1069,7 +1069,7 @@ class SizeControlSummaryParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of SizeControlSummaryParams.
+        """Set the default values of the ``SizeControlSummaryParams`` object.
 
         """
         args = locals()
@@ -1077,7 +1077,7 @@ class SizeControlSummaryParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SizeControlSummaryParams.
+        """Print the default values of ``SizeControlSummaryParams`` object.
 
         Examples
         --------
@@ -1118,18 +1118,18 @@ class SetSizingResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetSizingResults.
+        """Initialize a ``SetSizingResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetSizingResults object with default parameters.
+            Model to create a ``SetSizingResults`` object with default parameters.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the set sizing parameters.
         error_code: ErrorCode, optional
             Error code associated with the set sizing parameters.
         json_data: dict, optional
-            JSON dictionary to create a SetSizingResults object with provided parameters.
+            JSON dictionary to create a ``SetSizingResults`` object with provided parameters.
 
         Examples
         --------
@@ -1147,7 +1147,7 @@ class SetSizingResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetSizingResults")
                     json_data = param_json["SetSizingResults"] if "SetSizingResults" in param_json else {}
@@ -1165,7 +1165,7 @@ class SetSizingResults(CoreObject):
     def set_default(
             warning_codes: List[WarningCode] = None,
             error_code: ErrorCode = None):
-        """Set the default values of SetSizingResults.
+        """Set the default values of the ``SetSizingResults`` object.
 
         Parameters
         ----------
@@ -1179,7 +1179,7 @@ class SetSizingResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetSizingResults.
+        """Print the default values of ``SetSizingResults`` object.
 
         Examples
         --------

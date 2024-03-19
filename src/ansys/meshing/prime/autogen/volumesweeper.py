@@ -52,9 +52,9 @@ class VolumeSweeper(CoreObject):
 
         """
         if not isinstance(topo_volume_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_volume_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_volume_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, MeshStackerParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MeshStackerParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MeshStackerParams.")
         args = {"topo_volume_ids" : topo_volume_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeSweeper/CreateBaseFace"
@@ -88,11 +88,11 @@ class VolumeSweeper(CoreObject):
 
         """
         if not isinstance(base_face_ids, Iterable):
-            raise TypeError("Invalid argument type passed for base_face_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'base_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(topo_volume_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_volume_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_volume_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, MeshStackerParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MeshStackerParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MeshStackerParams.")
         args = {"base_face_ids" : base_face_ids,
         "topo_volume_ids" : topo_volume_ids,
         "params" : params._jsonify()}
