@@ -63,13 +63,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, IntersectParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is IntersectParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is IntersectParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -108,13 +108,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, JoinParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is JoinParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is JoinParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -152,13 +152,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(target_volumes, Iterable):
-            raise TypeError("Invalid argument type passed for target_volumes, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'target_volumes'. Valid argument type is Iterable[int].")
         if not isinstance(cutter_volumes, Iterable):
-            raise TypeError("Invalid argument type passed for cutter_volumes, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'cutter_volumes'. Valid argument type is Iterable[int].")
         if not isinstance(params, SubtractVolumesParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SubtractVolumesParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SubtractVolumesParams.")
         args = {"part_id" : part_id,
         "target_volumes" : target_volumes,
         "cutter_volumes" : cutter_volumes,
@@ -197,13 +197,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, StitchParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is StitchParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is StitchParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -237,7 +237,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -246,13 +246,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, MergeBoundaryNodesParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MergeBoundaryNodesParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MergeBoundaryNodesParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -287,7 +287,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -296,13 +296,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(source_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for source_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'source_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(target_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for target_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'target_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, FuseParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is FuseParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is FuseParams.")
         args = {"part_id" : part_id,
         "source_face_zonelet_ids" : source_face_zonelet_ids,
         "target_face_zonelet_ids" : target_face_zonelet_ids,

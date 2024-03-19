@@ -90,6 +90,26 @@ class CdbSimulationType(enum.IntEnum):
     EXPLICIT = 1
     """Explicit Simulation."""
 
+class LSDynaFileFormatType(enum.IntEnum):
+    """Provides the format type to write the LS-DYNA file.
+    """
+    REGULAR = 0
+    """Option to select 8-char width format to write ids for elements and nodes.
+    This is a beta parameter. The behavior and name may change in the future."""
+    I10 = 1
+    """Option to select 10-char width format to write ids for elements and nodes.
+    This is a beta parameter. The behavior and name may change in the future."""
+
+class LSDynaAnalysisType(enum.IntEnum):
+    """Provides the LS-DYNA analysis type.
+    """
+    DOORSLAM = 0
+    """Option to select doorslam as LS-DYNA analysis type.
+    This is a beta parameter. The behavior and name may change in the future."""
+    SEATBELT = 1
+    """Option to select Seatbelt as LS-DYNA analysis type.
+    This is a beta parameter. The behavior and name may change in the future."""
+
 class FileReadParams(CoreObject):
     """Parameters to read file.
     """
@@ -2453,28 +2473,40 @@ class ExportMapdlCdbParams(CoreObject):
 
     def __initialize(
             self,
+            config_settings: str,
+            pre_solution_settings: str,
             material_properties: str,
             boundary_conditions: str,
+            analysis_settings: str,
             write_cells: bool,
             enable_face_based_labels: bool,
             write_by_zones: bool,
-            simulation_type: CdbSimulationType):
+            simulation_type: CdbSimulationType,
+            analysis_settings_file_name: str):
+        self._config_settings = config_settings
+        self._pre_solution_settings = pre_solution_settings
         self._material_properties = material_properties
         self._boundary_conditions = boundary_conditions
+        self._analysis_settings = analysis_settings
         self._write_cells = write_cells
         self._enable_face_based_labels = enable_face_based_labels
         self._write_by_zones = write_by_zones
         self._simulation_type = CdbSimulationType(simulation_type)
+        self._analysis_settings_file_name = analysis_settings_file_name
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            config_settings: str = None,
+            pre_solution_settings: str = None,
             material_properties: str = None,
             boundary_conditions: str = None,
+            analysis_settings: str = None,
             write_cells: bool = None,
             enable_face_based_labels: bool = None,
             write_by_zones: bool = None,
             simulation_type: CdbSimulationType = None,
+            analysis_settings_file_name: str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbParams`` object.
@@ -2483,11 +2515,20 @@ class ExportMapdlCdbParams(CoreObject):
         ----------
         model: Model
             Model to create a ``ExportMapdlCdbParams`` object with default parameters.
+        config_settings: str, optional
+            MAPDL configuration settings in CDB format to be added at the beginning of the file.
+            This is a beta parameter. The behavior and name may change in the future.
+        pre_solution_settings: str, optional
+            MAPDL Settings in CDB format to be added before the solution block in the file.
+            This is a beta parameter. The behavior and name may change in the future.
         material_properties: str, optional
             Materials in CDB format to be added to the file.
             This is a beta parameter. The behavior and name may change in the future.
         boundary_conditions: str, optional
             Boundary conditions in CDB format to be added to the file.
+            This is a beta parameter. The behavior and name may change in the future.
+        analysis_settings: str, optional
+            MAPDL analysis settings in CDB format to be added after the solution block in the file. Note: Boundary conditions can be included into analysis settings.
             This is a beta parameter. The behavior and name may change in the future.
         write_cells: bool, optional
             Option to write out cells as part of the file.
@@ -2500,6 +2541,9 @@ class ExportMapdlCdbParams(CoreObject):
             This is a beta parameter. The behavior and name may change in the future.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
+            This is a beta parameter. The behavior and name may change in the future.
+        analysis_settings_file_name: str, optional
+            File path to export mapdl analysis settings.
             This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
             JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
@@ -2510,22 +2554,30 @@ class ExportMapdlCdbParams(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["configSettings"] if "configSettings" in json_data else None,
+                json_data["preSolutionSettings"] if "preSolutionSettings" in json_data else None,
                 json_data["materialProperties"] if "materialProperties" in json_data else None,
                 json_data["boundaryConditions"] if "boundaryConditions" in json_data else None,
+                json_data["analysisSettings"] if "analysisSettings" in json_data else None,
                 json_data["writeCells"] if "writeCells" in json_data else None,
                 json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None,
                 json_data["writeByZones"] if "writeByZones" in json_data else None,
-                CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None))
+                CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None),
+                json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [material_properties, boundary_conditions, write_cells, enable_face_based_labels, write_by_zones, simulation_type])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, simulation_type, analysis_settings_file_name])
             if all_field_specified:
                 self.__initialize(
+                    config_settings,
+                    pre_solution_settings,
                     material_properties,
                     boundary_conditions,
+                    analysis_settings,
                     write_cells,
                     enable_face_based_labels,
                     write_by_zones,
-                    simulation_type)
+                    simulation_type,
+                    analysis_settings_file_name)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -2533,12 +2585,16 @@ class ExportMapdlCdbParams(CoreObject):
                     param_json = model._communicator.initialize_params(model, "ExportMapdlCdbParams")
                     json_data = param_json["ExportMapdlCdbParams"] if "ExportMapdlCdbParams" in param_json else {}
                     self.__initialize(
+                        config_settings if config_settings is not None else ( ExportMapdlCdbParams._default_params["config_settings"] if "config_settings" in ExportMapdlCdbParams._default_params else (json_data["configSettings"] if "configSettings" in json_data else None)),
+                        pre_solution_settings if pre_solution_settings is not None else ( ExportMapdlCdbParams._default_params["pre_solution_settings"] if "pre_solution_settings" in ExportMapdlCdbParams._default_params else (json_data["preSolutionSettings"] if "preSolutionSettings" in json_data else None)),
                         material_properties if material_properties is not None else ( ExportMapdlCdbParams._default_params["material_properties"] if "material_properties" in ExportMapdlCdbParams._default_params else (json_data["materialProperties"] if "materialProperties" in json_data else None)),
                         boundary_conditions if boundary_conditions is not None else ( ExportMapdlCdbParams._default_params["boundary_conditions"] if "boundary_conditions" in ExportMapdlCdbParams._default_params else (json_data["boundaryConditions"] if "boundaryConditions" in json_data else None)),
+                        analysis_settings if analysis_settings is not None else ( ExportMapdlCdbParams._default_params["analysis_settings"] if "analysis_settings" in ExportMapdlCdbParams._default_params else (json_data["analysisSettings"] if "analysisSettings" in json_data else None)),
                         write_cells if write_cells is not None else ( ExportMapdlCdbParams._default_params["write_cells"] if "write_cells" in ExportMapdlCdbParams._default_params else (json_data["writeCells"] if "writeCells" in json_data else None)),
                         enable_face_based_labels if enable_face_based_labels is not None else ( ExportMapdlCdbParams._default_params["enable_face_based_labels"] if "enable_face_based_labels" in ExportMapdlCdbParams._default_params else (json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None)),
                         write_by_zones if write_by_zones is not None else ( ExportMapdlCdbParams._default_params["write_by_zones"] if "write_by_zones" in ExportMapdlCdbParams._default_params else (json_data["writeByZones"] if "writeByZones" in json_data else None)),
-                        simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)))
+                        simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)),
+                        analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2548,20 +2604,30 @@ class ExportMapdlCdbParams(CoreObject):
 
     @staticmethod
     def set_default(
+            config_settings: str = None,
+            pre_solution_settings: str = None,
             material_properties: str = None,
             boundary_conditions: str = None,
+            analysis_settings: str = None,
             write_cells: bool = None,
             enable_face_based_labels: bool = None,
             write_by_zones: bool = None,
-            simulation_type: CdbSimulationType = None):
+            simulation_type: CdbSimulationType = None,
+            analysis_settings_file_name: str = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
 
         Parameters
         ----------
+        config_settings: str, optional
+            MAPDL configuration settings in CDB format to be added at the beginning of the file.
+        pre_solution_settings: str, optional
+            MAPDL Settings in CDB format to be added before the solution block in the file.
         material_properties: str, optional
             Materials in CDB format to be added to the file.
         boundary_conditions: str, optional
             Boundary conditions in CDB format to be added to the file.
+        analysis_settings: str, optional
+            MAPDL analysis settings in CDB format to be added after the solution block in the file. Note: Boundary conditions can be included into analysis settings.
         write_cells: bool, optional
             Option to write out cells as part of the file.
         enable_face_based_labels: bool, optional
@@ -2570,6 +2636,8 @@ class ExportMapdlCdbParams(CoreObject):
             Option to write zones in the file.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
+        analysis_settings_file_name: str, optional
+            File path to export mapdl analysis settings.
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2588,10 +2656,16 @@ class ExportMapdlCdbParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._config_settings is not None:
+            json_data["configSettings"] = self._config_settings
+        if self._pre_solution_settings is not None:
+            json_data["preSolutionSettings"] = self._pre_solution_settings
         if self._material_properties is not None:
             json_data["materialProperties"] = self._material_properties
         if self._boundary_conditions is not None:
             json_data["boundaryConditions"] = self._boundary_conditions
+        if self._analysis_settings is not None:
+            json_data["analysisSettings"] = self._analysis_settings
         if self._write_cells is not None:
             json_data["writeCells"] = self._write_cells
         if self._enable_face_based_labels is not None:
@@ -2600,13 +2674,37 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["writeByZones"] = self._write_by_zones
         if self._simulation_type is not None:
             json_data["simulationType"] = self._simulation_type
+        if self._analysis_settings_file_name is not None:
+            json_data["analysisSettingsFileName"] = self._analysis_settings_file_name
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "material_properties :  %s\nboundary_conditions :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nsimulation_type :  %s" % (self._material_properties, self._boundary_conditions, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._simulation_type)
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._simulation_type, self._analysis_settings_file_name)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def config_settings(self) -> str:
+        """MAPDL configuration settings in CDB format to be added at the beginning of the file.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._config_settings
+
+    @config_settings.setter
+    def config_settings(self, value: str):
+        self._config_settings = value
+
+    @property
+    def pre_solution_settings(self) -> str:
+        """MAPDL Settings in CDB format to be added before the solution block in the file.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._pre_solution_settings
+
+    @pre_solution_settings.setter
+    def pre_solution_settings(self, value: str):
+        self._pre_solution_settings = value
 
     @property
     def material_properties(self) -> str:
@@ -2629,6 +2727,17 @@ class ExportMapdlCdbParams(CoreObject):
     @boundary_conditions.setter
     def boundary_conditions(self, value: str):
         self._boundary_conditions = value
+
+    @property
+    def analysis_settings(self) -> str:
+        """MAPDL analysis settings in CDB format to be added after the solution block in the file. Note: Boundary conditions can be included into analysis settings.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._analysis_settings
+
+    @analysis_settings.setter
+    def analysis_settings(self, value: str):
+        self._analysis_settings = value
 
     @property
     def write_cells(self) -> bool:
@@ -2674,6 +2783,17 @@ class ExportMapdlCdbParams(CoreObject):
     def simulation_type(self, value: CdbSimulationType):
         self._simulation_type = value
 
+    @property
+    def analysis_settings_file_name(self) -> str:
+        """File path to export mapdl analysis settings.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._analysis_settings_file_name
+
+    @analysis_settings_file_name.setter
+    def analysis_settings_file_name(self, value: str):
+        self._analysis_settings_file_name = value
+
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
     """
@@ -2681,13 +2801,19 @@ class ExportMapdlCdbResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            summary_log: str,
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
+        self._summary_log = summary_log
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            summary_log: str = None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbResults`` object.
@@ -2696,8 +2822,14 @@ class ExportMapdlCdbResults(CoreObject):
         ----------
         model: Model
             Model to create a ``ExportMapdlCdbResults`` object with default parameters.
+        summary_log: str, optional
+            Summary log for the export operation in json format.
+            This is a beta parameter. The behavior and name may change in the future.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the operation.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
             JSON dictionary to create a ``ExportMapdlCdbResults`` object with provided parameters.
 
@@ -2707,12 +2839,16 @@ class ExportMapdlCdbResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+                json_data["summaryLog"] if "summaryLog" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [summary_log, error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    summary_log,
+                    error_code,
+                    warning_codes)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -2720,7 +2856,9 @@ class ExportMapdlCdbResults(CoreObject):
                     param_json = model._communicator.initialize_params(model, "ExportMapdlCdbResults")
                     json_data = param_json["ExportMapdlCdbResults"] if "ExportMapdlCdbResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ExportMapdlCdbResults._default_params["error_code"] if "error_code" in ExportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+                        summary_log if summary_log is not None else ( ExportMapdlCdbResults._default_params["summary_log"] if "summary_log" in ExportMapdlCdbResults._default_params else (json_data["summaryLog"] if "summaryLog" in json_data else None)),
+                        error_code if error_code is not None else ( ExportMapdlCdbResults._default_params["error_code"] if "error_code" in ExportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ExportMapdlCdbResults._default_params["warning_codes"] if "warning_codes" in ExportMapdlCdbResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2730,13 +2868,19 @@ class ExportMapdlCdbResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            summary_log: str = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
         """Set the default values of the ``ExportMapdlCdbResults`` object.
 
         Parameters
         ----------
+        summary_log: str, optional
+            Summary log for the export operation in json format.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the operation.
         """
         args = locals()
         [ExportMapdlCdbResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2755,15 +2899,30 @@ class ExportMapdlCdbResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._summary_log is not None:
+            json_data["summaryLog"] = self._summary_log
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "summary_log :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def summary_log(self) -> str:
+        """Summary log for the export operation in json format.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._summary_log
+
+    @summary_log.setter
+    def summary_log(self, value: str):
+        self._summary_log = value
 
     @property
     def error_code(self) -> ErrorCode:
@@ -2774,6 +2933,220 @@ class ExportMapdlCdbResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the operation.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
+class ExportLSDynaKeywordFileParams(CoreObject):
+    """Parameters to control LS-DYNA keyword file export settings.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            material_properties: str,
+            database_keywords: str,
+            output_format: LSDynaFileFormatType,
+            analysis_type: LSDynaAnalysisType,
+            compute_spotweld_thickness: bool):
+        self._material_properties = material_properties
+        self._database_keywords = database_keywords
+        self._output_format = LSDynaFileFormatType(output_format)
+        self._analysis_type = LSDynaAnalysisType(analysis_type)
+        self._compute_spotweld_thickness = compute_spotweld_thickness
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            material_properties: str = None,
+            database_keywords: str = None,
+            output_format: LSDynaFileFormatType = None,
+            analysis_type: LSDynaAnalysisType = None,
+            compute_spotweld_thickness: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ExportLSDynaKeywordFileParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ExportLSDynaKeywordFileParams`` object with default parameters.
+        material_properties: str, optional
+            Materials in LS-DYNA format to be added to the file.
+            This is a beta parameter. The behavior and name may change in the future.
+        database_keywords: str, optional
+            Database keywords in LS-DYNA format to be added to the file.
+            This is a beta parameter. The behavior and name may change in the future.
+        output_format: LSDynaFileFormatType, optional
+            Output file format used to write LS-DYNA file.
+            This is a beta parameter. The behavior and name may change in the future.
+        analysis_type: LSDynaAnalysisType, optional
+            Option to specify LS-DYNA analysis type.
+            This is a beta parameter. The behavior and name may change in the future.
+        compute_spotweld_thickness: bool, optional
+            Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+            This is a beta parameter. The behavior and name may change in the future.
+        json_data: dict, optional
+            JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> export_lsdyna_keyword_file_params = prime.ExportLSDynaKeywordFileParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["materialProperties"] if "materialProperties" in json_data else None,
+                json_data["databaseKeywords"] if "databaseKeywords" in json_data else None,
+                LSDynaFileFormatType(json_data["outputFormat"] if "outputFormat" in json_data else None),
+                LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None),
+                json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness])
+            if all_field_specified:
+                self.__initialize(
+                    material_properties,
+                    database_keywords,
+                    output_format,
+                    analysis_type,
+                    compute_spotweld_thickness)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExportLSDynaKeywordFileParams")
+                    json_data = param_json["ExportLSDynaKeywordFileParams"] if "ExportLSDynaKeywordFileParams" in param_json else {}
+                    self.__initialize(
+                        material_properties if material_properties is not None else ( ExportLSDynaKeywordFileParams._default_params["material_properties"] if "material_properties" in ExportLSDynaKeywordFileParams._default_params else (json_data["materialProperties"] if "materialProperties" in json_data else None)),
+                        database_keywords if database_keywords is not None else ( ExportLSDynaKeywordFileParams._default_params["database_keywords"] if "database_keywords" in ExportLSDynaKeywordFileParams._default_params else (json_data["databaseKeywords"] if "databaseKeywords" in json_data else None)),
+                        output_format if output_format is not None else ( ExportLSDynaKeywordFileParams._default_params["output_format"] if "output_format" in ExportLSDynaKeywordFileParams._default_params else LSDynaFileFormatType(json_data["outputFormat"] if "outputFormat" in json_data else None)),
+                        analysis_type if analysis_type is not None else ( ExportLSDynaKeywordFileParams._default_params["analysis_type"] if "analysis_type" in ExportLSDynaKeywordFileParams._default_params else LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None)),
+                        compute_spotweld_thickness if compute_spotweld_thickness is not None else ( ExportLSDynaKeywordFileParams._default_params["compute_spotweld_thickness"] if "compute_spotweld_thickness" in ExportLSDynaKeywordFileParams._default_params else (json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            material_properties: str = None,
+            database_keywords: str = None,
+            output_format: LSDynaFileFormatType = None,
+            analysis_type: LSDynaAnalysisType = None,
+            compute_spotweld_thickness: bool = None):
+        """Set the default values of the ``ExportLSDynaKeywordFileParams`` object.
+
+        Parameters
+        ----------
+        material_properties: str, optional
+            Materials in LS-DYNA format to be added to the file.
+        database_keywords: str, optional
+            Database keywords in LS-DYNA format to be added to the file.
+        output_format: LSDynaFileFormatType, optional
+            Output file format used to write LS-DYNA file.
+        analysis_type: LSDynaAnalysisType, optional
+            Option to specify LS-DYNA analysis type.
+        compute_spotweld_thickness: bool, optional
+            Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+        """
+        args = locals()
+        [ExportLSDynaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ExportLSDynaKeywordFileParams`` object.
+
+        Examples
+        --------
+        >>> ExportLSDynaKeywordFileParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportLSDynaKeywordFileParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._material_properties is not None:
+            json_data["materialProperties"] = self._material_properties
+        if self._database_keywords is not None:
+            json_data["databaseKeywords"] = self._database_keywords
+        if self._output_format is not None:
+            json_data["outputFormat"] = self._output_format
+        if self._analysis_type is not None:
+            json_data["analysisType"] = self._analysis_type
+        if self._compute_spotweld_thickness is not None:
+            json_data["computeSpotweldThickness"] = self._compute_spotweld_thickness
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def material_properties(self) -> str:
+        """Materials in LS-DYNA format to be added to the file.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._material_properties
+
+    @material_properties.setter
+    def material_properties(self, value: str):
+        self._material_properties = value
+
+    @property
+    def database_keywords(self) -> str:
+        """Database keywords in LS-DYNA format to be added to the file.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._database_keywords
+
+    @database_keywords.setter
+    def database_keywords(self, value: str):
+        self._database_keywords = value
+
+    @property
+    def output_format(self) -> LSDynaFileFormatType:
+        """Output file format used to write LS-DYNA file.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._output_format
+
+    @output_format.setter
+    def output_format(self, value: LSDynaFileFormatType):
+        self._output_format = value
+
+    @property
+    def analysis_type(self) -> LSDynaAnalysisType:
+        """Option to specify LS-DYNA analysis type.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._analysis_type
+
+    @analysis_type.setter
+    def analysis_type(self, value: LSDynaAnalysisType):
+        self._analysis_type = value
+
+    @property
+    def compute_spotweld_thickness(self) -> bool:
+        """Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._compute_spotweld_thickness
+
+    @compute_spotweld_thickness.setter
+    def compute_spotweld_thickness(self, value: bool):
+        self._compute_spotweld_thickness = value
 
 class ExportLSDynaIgaKeywordFileParams(CoreObject):
     """Parameters for exporting LS-DYNA IGA keyword file.
@@ -3064,13 +3437,19 @@ class ImportAbaqusResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            summary_log: str,
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
+        self._summary_log = summary_log
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            summary_log: str = None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ImportAbaqusResults`` object.
@@ -3079,8 +3458,14 @@ class ImportAbaqusResults(CoreObject):
         ----------
         model: Model
             Model to create a ``ImportAbaqusResults`` object with default parameters.
+        summary_log: str, optional
+            Summary log for the import operation in json format.
+            This is a beta parameter. The behavior and name may change in the future.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with Abaqus import operation.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
             JSON dictionary to create a ``ImportAbaqusResults`` object with provided parameters.
 
@@ -3090,12 +3475,16 @@ class ImportAbaqusResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+                json_data["summaryLog"] if "summaryLog" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [summary_log, error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    summary_log,
+                    error_code,
+                    warning_codes)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -3103,7 +3492,9 @@ class ImportAbaqusResults(CoreObject):
                     param_json = model._communicator.initialize_params(model, "ImportAbaqusResults")
                     json_data = param_json["ImportAbaqusResults"] if "ImportAbaqusResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( ImportAbaqusResults._default_params["error_code"] if "error_code" in ImportAbaqusResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+                        summary_log if summary_log is not None else ( ImportAbaqusResults._default_params["summary_log"] if "summary_log" in ImportAbaqusResults._default_params else (json_data["summaryLog"] if "summaryLog" in json_data else None)),
+                        error_code if error_code is not None else ( ImportAbaqusResults._default_params["error_code"] if "error_code" in ImportAbaqusResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ImportAbaqusResults._default_params["warning_codes"] if "warning_codes" in ImportAbaqusResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3113,13 +3504,19 @@ class ImportAbaqusResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            summary_log: str = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
         """Set the default values of the ``ImportAbaqusResults`` object.
 
         Parameters
         ----------
+        summary_log: str, optional
+            Summary log for the import operation in json format.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with Abaqus import operation.
         """
         args = locals()
         [ImportAbaqusResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3138,15 +3535,30 @@ class ImportAbaqusResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._summary_log is not None:
+            json_data["summaryLog"] = self._summary_log
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "summary_log :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def summary_log(self) -> str:
+        """Summary log for the import operation in json format.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._summary_log
+
+    @summary_log.setter
+    def summary_log(self, value: str):
+        self._summary_log = value
 
     @property
     def error_code(self) -> ErrorCode:
@@ -3157,3 +3569,14 @@ class ImportAbaqusResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with Abaqus import operation.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value

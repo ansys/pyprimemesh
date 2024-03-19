@@ -52,9 +52,9 @@ class TopoUtilities(CoreObject):
 
         """
         if not isinstance(topo_edges, Iterable):
-            raise TypeError("Invalid argument type passed for topo_edges, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_edges'. Valid argument type is Iterable[int].")
         if not isinstance(params, TopoFillHoleParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is TopoFillHoleParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is TopoFillHoleParams.")
         args = {"topo_edges" : topo_edges,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::TopoUtilities/FillHole"

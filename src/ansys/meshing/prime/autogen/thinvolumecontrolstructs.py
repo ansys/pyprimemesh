@@ -30,12 +30,12 @@ class ThinVolumeMeshParams(CoreObject):
             n_ignore_rings: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ThinVolumeMeshParams.
+        """Initialize a ``ThinVolumeMeshParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ThinVolumeMeshParams object with default parameters.
+            Model to create a ``ThinVolumeMeshParams`` object with default parameters.
         n_layers: int, optional
             Number of thin volume layers to be generated.
         imprint_sides: bool, optional
@@ -43,7 +43,7 @@ class ThinVolumeMeshParams(CoreObject):
         n_ignore_rings: int, optional
             Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
         json_data: dict, optional
-            JSON dictionary to create a ThinVolumeMeshParams object with provided parameters.
+            JSON dictionary to create a ``ThinVolumeMeshParams`` object with provided parameters.
 
         Examples
         --------
@@ -63,7 +63,7 @@ class ThinVolumeMeshParams(CoreObject):
                     n_ignore_rings)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ThinVolumeMeshParams")
                     json_data = param_json["ThinVolumeMeshParams"] if "ThinVolumeMeshParams" in param_json else {}
@@ -83,7 +83,7 @@ class ThinVolumeMeshParams(CoreObject):
             n_layers: int = None,
             imprint_sides: bool = None,
             n_ignore_rings: int = None):
-        """Set the default values of ThinVolumeMeshParams.
+        """Set the default values of the ``ThinVolumeMeshParams`` object.
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class ThinVolumeMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ThinVolumeMeshParams.
+        """Print the default values of ``ThinVolumeMeshParams`` object.
 
         Examples
         --------

@@ -55,12 +55,12 @@ class WrapParams(CoreObject):
             imprint_iterations: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapParams.
+        """Initialize a ``WrapParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapParams object with default parameters.
+            Model to create a ``WrapParams`` object with default parameters.
         sizing_method: SizeFieldType, optional
             Used to define sizing method for wrapping.
         base_size: float, optional
@@ -78,7 +78,7 @@ class WrapParams(CoreObject):
         imprint_iterations: int, optional
             Used to define number of imprint iterations in wrapping.
         json_data: dict, optional
-            JSON dictionary to create a WrapParams object with provided parameters.
+            JSON dictionary to create a ``WrapParams`` object with provided parameters.
 
         Examples
         --------
@@ -108,7 +108,7 @@ class WrapParams(CoreObject):
                     imprint_iterations)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapParams")
                     json_data = param_json["WrapParams"] if "WrapParams" in param_json else {}
@@ -138,7 +138,7 @@ class WrapParams(CoreObject):
             number_of_threads: int = None,
             imprint_relative_range: float = None,
             imprint_iterations: int = None):
-        """Set the default values of WrapParams.
+        """Set the default values of the ``WrapParams`` object.
 
         Parameters
         ----------
@@ -164,7 +164,7 @@ class WrapParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapParams.
+        """Print the default values of ``WrapParams`` object.
 
         Examples
         --------
@@ -305,12 +305,12 @@ class WrapResult(CoreObject):
             name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapResult.
+        """Initialize a ``WrapResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapResult object with default parameters.
+            Model to create a ``WrapResult`` object with default parameters.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the wrap operation.
         error_code: ErrorCode, optional
@@ -320,7 +320,7 @@ class WrapResult(CoreObject):
         name: str, optional
             Name of wrapper part created.
         json_data: dict, optional
-            JSON dictionary to create a WrapResult object with provided parameters.
+            JSON dictionary to create a ``WrapResult`` object with provided parameters.
 
         Examples
         --------
@@ -342,7 +342,7 @@ class WrapResult(CoreObject):
                     name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapResult")
                     json_data = param_json["WrapResult"] if "WrapResult" in param_json else {}
@@ -364,7 +364,7 @@ class WrapResult(CoreObject):
             error_code: ErrorCode = None,
             id: int = None,
             name: str = None):
-        """Set the default values of WrapResult.
+        """Set the default values of the ``WrapResult`` object.
 
         Parameters
         ----------
@@ -382,7 +382,7 @@ class WrapResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapResult.
+        """Print the default values of ``WrapResult`` object.
 
         Examples
         --------
@@ -502,12 +502,12 @@ class WrapperImproveQualityParams(CoreObject):
             number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapperImproveQualityParams.
+        """Initialize a ``WrapperImproveQualityParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapperImproveQualityParams object with default parameters.
+            Model to create a ``WrapperImproveQualityParams`` object with default parameters.
         target_skewness: float, optional
             Target skewness.
         island_count: int, optional
@@ -535,7 +535,7 @@ class WrapperImproveQualityParams(CoreObject):
         number_of_threads: int, optional
             Number of threads for multithreading.
         json_data: dict, optional
-            JSON dictionary to create a WrapperImproveQualityParams object with provided parameters.
+            JSON dictionary to create a ``WrapperImproveQualityParams`` object with provided parameters.
 
         Examples
         --------
@@ -575,7 +575,7 @@ class WrapperImproveQualityParams(CoreObject):
                     number_of_threads)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapperImproveQualityParams")
                     json_data = param_json["WrapperImproveQualityParams"] if "WrapperImproveQualityParams" in param_json else {}
@@ -615,7 +615,7 @@ class WrapperImproveQualityParams(CoreObject):
             sharp_angle: float = None,
             geom_zonelets: Iterable[int] = None,
             number_of_threads: int = None):
-        """Set the default values of WrapperImproveQualityParams.
+        """Set the default values of the ``WrapperImproveQualityParams`` object.
 
         Parameters
         ----------
@@ -651,7 +651,7 @@ class WrapperImproveQualityParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapperImproveQualityParams.
+        """Print the default values of ``WrapperImproveQualityParams`` object.
 
         Examples
         --------
@@ -855,12 +855,12 @@ class WrapperImproveResult(CoreObject):
             unresolved_face_intersections: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapperImproveResult.
+        """Initialize a ``WrapperImproveResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapperImproveResult object with default parameters.
+            Model to create a ``WrapperImproveResult`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with a wrapper operation.
         n_skew_found: int, optional
@@ -872,7 +872,7 @@ class WrapperImproveResult(CoreObject):
         unresolved_face_intersections: int, optional
             Number of remaining self intersections.
         json_data: dict, optional
-            JSON dictionary to create a WrapperImproveResult object with provided parameters.
+            JSON dictionary to create a ``WrapperImproveResult`` object with provided parameters.
 
         Examples
         --------
@@ -896,7 +896,7 @@ class WrapperImproveResult(CoreObject):
                     unresolved_face_intersections)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapperImproveResult")
                     json_data = param_json["WrapperImproveResult"] if "WrapperImproveResult" in param_json else {}
@@ -920,7 +920,7 @@ class WrapperImproveResult(CoreObject):
             remaining_skew_faces: int = None,
             n_face_intersections_found: int = None,
             unresolved_face_intersections: int = None):
-        """Set the default values of WrapperImproveResult.
+        """Set the default values of the ``WrapperImproveResult`` object.
 
         Parameters
         ----------
@@ -940,7 +940,7 @@ class WrapperImproveResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapperImproveResult.
+        """Print the default values of ``WrapperImproveResult`` object.
 
         Examples
         --------
@@ -1055,12 +1055,12 @@ class WrapperCloseGapsParams(CoreObject):
             resolution_factor: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapperCloseGapsParams.
+        """Initialize a ``WrapperCloseGapsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapperCloseGapsParams object with default parameters.
+            Model to create a ``WrapperCloseGapsParams`` object with default parameters.
         target: ScopeDefinition, optional
             Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
         gap_size: float, optional
@@ -1076,7 +1076,7 @@ class WrapperCloseGapsParams(CoreObject):
         resolution_factor: float, optional
             Factor to resolve the smallest gap for the given gap size.
         json_data: dict, optional
-            JSON dictionary to create a WrapperCloseGapsParams object with provided parameters.
+            JSON dictionary to create a ``WrapperCloseGapsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1104,7 +1104,7 @@ class WrapperCloseGapsParams(CoreObject):
                     resolution_factor)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapperCloseGapsParams")
                     json_data = param_json["WrapperCloseGapsParams"] if "WrapperCloseGapsParams" in param_json else {}
@@ -1132,7 +1132,7 @@ class WrapperCloseGapsParams(CoreObject):
             number_of_threads: int = None,
             create_new_part: bool = None,
             resolution_factor: float = None):
-        """Set the default values of WrapperCloseGapsParams.
+        """Set the default values of the ``WrapperCloseGapsParams`` object.
 
         Parameters
         ----------
@@ -1156,7 +1156,7 @@ class WrapperCloseGapsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapperCloseGapsParams.
+        """Print the default values of ``WrapperCloseGapsParams`` object.
 
         Examples
         --------
@@ -1279,18 +1279,18 @@ class WrapperCloseGapsResult(CoreObject):
             part_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapperCloseGapsResult.
+        """Initialize a ``WrapperCloseGapsResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapperCloseGapsResult object with default parameters.
+            Model to create a ``WrapperCloseGapsResult`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with a close gaps operation.
         part_id: int, optional
             Id of part created with gap cover patches.
         json_data: dict, optional
-            JSON dictionary to create a WrapperCloseGapsResult object with provided parameters.
+            JSON dictionary to create a ``WrapperCloseGapsResult`` object with provided parameters.
 
         Examples
         --------
@@ -1308,7 +1308,7 @@ class WrapperCloseGapsResult(CoreObject):
                     part_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapperCloseGapsResult")
                     json_data = param_json["WrapperCloseGapsResult"] if "WrapperCloseGapsResult" in param_json else {}
@@ -1326,7 +1326,7 @@ class WrapperCloseGapsResult(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             part_id: int = None):
-        """Set the default values of WrapperCloseGapsResult.
+        """Set the default values of the ``WrapperCloseGapsResult`` object.
 
         Parameters
         ----------
@@ -1340,7 +1340,7 @@ class WrapperCloseGapsResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapperCloseGapsResult.
+        """Print the default values of ``WrapperCloseGapsResult`` object.
 
         Examples
         --------
@@ -1406,23 +1406,23 @@ class DeadRegion(CoreObject):
             hole_size: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeadRegion.
+        """Initialize a ``DeadRegion`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeadRegion object with default parameters.
+            Model to create a ``DeadRegion`` object with default parameters.
         face_zonelet_ids: Iterable[int], optional
             Face zonelets enclosing dead region.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         dead_material_points: List[str], optional
             Material points to identify dead region.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         hole_size: float, optional
             Maximum hole size used for patching.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a DeadRegion object with provided parameters.
+            JSON dictionary to create a ``DeadRegion`` object with provided parameters.
 
         Examples
         --------
@@ -1442,7 +1442,7 @@ class DeadRegion(CoreObject):
                     hole_size)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeadRegion")
                     json_data = param_json["DeadRegion"] if "DeadRegion" in param_json else {}
@@ -1462,7 +1462,7 @@ class DeadRegion(CoreObject):
             face_zonelet_ids: Iterable[int] = None,
             dead_material_points: List[str] = None,
             hole_size: float = None):
-        """Set the default values of DeadRegion.
+        """Set the default values of the ``DeadRegion`` object.
 
         Parameters
         ----------
@@ -1478,7 +1478,7 @@ class DeadRegion(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeadRegion.
+        """Print the default values of ``DeadRegion`` object.
 
         Examples
         --------
@@ -1507,7 +1507,7 @@ class DeadRegion(CoreObject):
     @property
     def face_zonelet_ids(self) -> Iterable[int]:
         """Face zonelets enclosing dead region.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._face_zonelet_ids
 
@@ -1518,7 +1518,7 @@ class DeadRegion(CoreObject):
     @property
     def dead_material_points(self) -> List[str]:
         """Material points to identify dead region.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._dead_material_points
 
@@ -1529,7 +1529,7 @@ class DeadRegion(CoreObject):
     @property
     def hole_size(self) -> float:
         """Maximum hole size used for patching.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._hole_size
 
@@ -1563,26 +1563,26 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             dead_regions: List[DeadRegion] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapperPatchFlowRegionsParams.
+        """Initialize a ``WrapperPatchFlowRegionsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapperPatchFlowRegionsParams object with default parameters.
+            Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
         base_size: float, optional
             Base size to define octree.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         suggested_part_name: str, optional
             Suggested part name for created patching surfaces.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         number_of_threads: int, optional
             Number of threads for multithreading.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         dead_regions: List[DeadRegion], optional
             Array of dead region pairs.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a WrapperPatchFlowRegionsParams object with provided parameters.
+            JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1604,7 +1604,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
                     dead_regions)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapperPatchFlowRegionsParams")
                     json_data = param_json["WrapperPatchFlowRegionsParams"] if "WrapperPatchFlowRegionsParams" in param_json else {}
@@ -1626,7 +1626,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             suggested_part_name: str = None,
             number_of_threads: int = None,
             dead_regions: List[DeadRegion] = None):
-        """Set the default values of WrapperPatchFlowRegionsParams.
+        """Set the default values of the ``WrapperPatchFlowRegionsParams`` object.
 
         Parameters
         ----------
@@ -1644,7 +1644,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapperPatchFlowRegionsParams.
+        """Print the default values of ``WrapperPatchFlowRegionsParams`` object.
 
         Examples
         --------
@@ -1675,7 +1675,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def base_size(self) -> float:
         """Base size to define octree.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._base_size
 
@@ -1686,7 +1686,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def suggested_part_name(self) -> str:
         """Suggested part name for created patching surfaces.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._suggested_part_name
 
@@ -1697,7 +1697,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def number_of_threads(self) -> int:
         """Number of threads for multithreading.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._number_of_threads
 
@@ -1708,7 +1708,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def dead_regions(self) -> List[DeadRegion]:
         """Array of dead region pairs.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._dead_regions
 
@@ -1741,25 +1741,25 @@ class WrapperPatchFlowRegionsResult(CoreObject):
             name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the WrapperPatchFlowRegionsResult.
+        """Initialize a ``WrapperPatchFlowRegionsResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a WrapperPatchFlowRegionsResult object with default parameters.
+            Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the patch holes operation.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         error_code: ErrorCode, optional
             Error code associated with a patch holes operation.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         id: int, optional
             Id of part created with hole patches.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         name: str, optional
             Name of part created with hole patches.
         json_data: dict, optional
-            JSON dictionary to create a WrapperPatchFlowRegionsResult object with provided parameters.
+            JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
 
         Examples
         --------
@@ -1781,7 +1781,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
                     name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "WrapperPatchFlowRegionsResult")
                     json_data = param_json["WrapperPatchFlowRegionsResult"] if "WrapperPatchFlowRegionsResult" in param_json else {}
@@ -1803,7 +1803,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
             error_code: ErrorCode = None,
             id: int = None,
             name: str = None):
-        """Set the default values of WrapperPatchFlowRegionsResult.
+        """Set the default values of the ``WrapperPatchFlowRegionsResult`` object.
 
         Parameters
         ----------
@@ -1821,7 +1821,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of WrapperPatchFlowRegionsResult.
+        """Print the default values of ``WrapperPatchFlowRegionsResult`` object.
 
         Examples
         --------
@@ -1852,7 +1852,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def warning_codes(self) -> List[WarningCode]:
         """Warning codes associated with the patch holes operation.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._warning_codes
 
@@ -1863,7 +1863,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with a patch holes operation.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._error_code
 
@@ -1874,7 +1874,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def id(self) -> int:
         """Id of part created with hole patches.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._id
 

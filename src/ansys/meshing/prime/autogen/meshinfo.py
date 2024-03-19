@@ -57,9 +57,9 @@ class MeshInfo(CoreObject):
 
         """
         if not isinstance(part_ids, Iterable):
-            raise TypeError("Invalid argument type passed for part_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, FaceAndEdgeConnectivityParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is FaceAndEdgeConnectivityParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is FaceAndEdgeConnectivityParams.")
         args = {"part_ids" : part_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::MeshInfo/GetFaceAndEdgeConnectivity"
@@ -94,9 +94,9 @@ class MeshInfo(CoreObject):
 
         """
         if not isinstance(cell_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for cell_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'cell_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, CellStatisticsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CellStatisticsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CellStatisticsParams.")
         args = {"cell_zonelets" : cell_zonelets,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::MeshInfo/GetStatisticsOfCellZonelets"

@@ -24,17 +24,17 @@ class DeleteMeshResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteMeshResults.
+        """Initialize a ``DeleteMeshResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteMeshResults object with default parameters.
+            Model to create a ``DeleteMeshResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a DeleteMeshResults object with provided parameters.
+            JSON dictionary to create a ``DeleteMeshResults`` object with provided parameters.
 
         Examples
         --------
@@ -50,7 +50,7 @@ class DeleteMeshResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteMeshResults")
                     json_data = param_json["DeleteMeshResults"] if "DeleteMeshResults" in param_json else {}
@@ -66,7 +66,7 @@ class DeleteMeshResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteMeshResults.
+        """Set the default values of the ``DeleteMeshResults`` object.
 
         Parameters
         ----------
@@ -78,7 +78,7 @@ class DeleteMeshResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteMeshResults.
+        """Print the default values of ``DeleteMeshResults`` object.
 
         Examples
         --------
@@ -103,7 +103,7 @@ class DeleteMeshResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with the failure of operation.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._error_code
 
@@ -127,17 +127,17 @@ class DeleteMeshParams(CoreObject):
             delete_mesh_on_connected_topo_edges: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteMeshParams.
+        """Initialize a ``DeleteMeshParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteMeshParams object with default parameters.
+            Model to create a ``DeleteMeshParams`` object with default parameters.
         delete_mesh_on_connected_topo_edges: bool, optional
             Option to delete mesh on topoedges connected only to provided topoentities.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a DeleteMeshParams object with provided parameters.
+            JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
 
         Examples
         --------
@@ -153,7 +153,7 @@ class DeleteMeshParams(CoreObject):
                     delete_mesh_on_connected_topo_edges)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteMeshParams")
                     json_data = param_json["DeleteMeshParams"] if "DeleteMeshParams" in param_json else {}
@@ -169,7 +169,7 @@ class DeleteMeshParams(CoreObject):
     @staticmethod
     def set_default(
             delete_mesh_on_connected_topo_edges: bool = None):
-        """Set the default values of DeleteMeshParams.
+        """Set the default values of the ``DeleteMeshParams`` object.
 
         Parameters
         ----------
@@ -181,7 +181,7 @@ class DeleteMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteMeshParams.
+        """Print the default values of ``DeleteMeshParams`` object.
 
         Examples
         --------
@@ -206,7 +206,7 @@ class DeleteMeshParams(CoreObject):
     @property
     def delete_mesh_on_connected_topo_edges(self) -> bool:
         """Option to delete mesh on topoedges connected only to provided topoentities.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._delete_mesh_on_connected_topo_edges
 

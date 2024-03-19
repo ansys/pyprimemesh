@@ -32,7 +32,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -40,7 +40,7 @@ class MultiZoneControl(CoreObject):
 
         """
         if not isinstance(scope_info, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope_info, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is ScopeDefinition.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetVolumeScope"
         self._model._print_beta_api_warning("set_volume_scope")
@@ -59,7 +59,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -67,7 +67,7 @@ class MultiZoneControl(CoreObject):
 
         """
         if not isinstance(scope_info, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope_info, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is ScopeDefinition.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetSurfaceScope"
         self._model._print_beta_api_warning("set_surface_scope")
@@ -86,7 +86,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -94,7 +94,7 @@ class MultiZoneControl(CoreObject):
 
         """
         if not isinstance(scope_info, MultiZoneMapMeshParams):
-            raise TypeError("Invalid argument type passed for scope_info, valid argument type is MultiZoneMapMeshParams.")
+            raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is MultiZoneMapMeshParams.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetMapMeshParams"
         self._model._print_beta_api_warning("set_map_mesh_params")
@@ -113,7 +113,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -121,7 +121,7 @@ class MultiZoneControl(CoreObject):
 
         """
         if not isinstance(scope_info, MultiZoneSweepMeshParams):
-            raise TypeError("Invalid argument type passed for scope_info, valid argument type is MultiZoneSweepMeshParams.")
+            raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is MultiZoneSweepMeshParams.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetSweepMeshParams"
         self._model._print_beta_api_warning("set_sweep_mesh_params")
@@ -140,7 +140,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -148,7 +148,7 @@ class MultiZoneControl(CoreObject):
 
         """
         if not isinstance(scope_info, MultiZoneEdgeBiasingParams):
-            raise TypeError("Invalid argument type passed for scope_info, valid argument type is MultiZoneEdgeBiasingParams.")
+            raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is MultiZoneEdgeBiasingParams.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetEdgeBiasingParams"
         self._model._print_beta_api_warning("set_edge_biasing_params")
@@ -167,7 +167,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -175,7 +175,7 @@ class MultiZoneControl(CoreObject):
 
         """
         if not isinstance(params, MultiZoneSizingParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MultiZoneSizingParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MultiZoneSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetMultiZoneSizingParams"
         self._model._print_beta_api_warning("set_multi_zone_sizing_params")

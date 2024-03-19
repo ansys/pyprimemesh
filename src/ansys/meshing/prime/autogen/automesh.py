@@ -56,9 +56,9 @@ class AutoMesh(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(automesh_params, AutoMeshParams):
-            raise TypeError("Invalid argument type passed for automesh_params, valid argument type is AutoMeshParams.")
+            raise TypeError("Invalid argument type passed for 'automesh_params'. Valid argument type is AutoMeshParams.")
         args = {"part_id" : part_id,
         "automesh_params" : automesh_params._jsonify()}
         command_name = "PrimeMesh::AutoMesh/Mesh"

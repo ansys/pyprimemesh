@@ -30,12 +30,12 @@ class SFPeriodicParams(CoreObject):
             center: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SFPeriodicParams.
+        """Initialize a ``SFPeriodicParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SFPeriodicParams object with default parameters.
+            Model to create a ``SFPeriodicParams`` object with default parameters.
         axis: Iterable[float], optional
             Axis vector coordinates.
         angle: float, optional
@@ -43,7 +43,7 @@ class SFPeriodicParams(CoreObject):
         center: Iterable[float], optional
             Center coordinates.
         json_data: dict, optional
-            JSON dictionary to create a SFPeriodicParams object with provided parameters.
+            JSON dictionary to create a ``SFPeriodicParams`` object with provided parameters.
 
         Examples
         --------
@@ -63,7 +63,7 @@ class SFPeriodicParams(CoreObject):
                     center)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SFPeriodicParams")
                     json_data = param_json["SFPeriodicParams"] if "SFPeriodicParams" in param_json else {}
@@ -83,7 +83,7 @@ class SFPeriodicParams(CoreObject):
             axis: Iterable[float] = None,
             angle: float = None,
             center: Iterable[float] = None):
-        """Set the default values of SFPeriodicParams.
+        """Set the default values of the ``SFPeriodicParams`` object.
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class SFPeriodicParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SFPeriodicParams.
+        """Print the default values of ``SFPeriodicParams`` object.
 
         Examples
         --------
@@ -174,18 +174,18 @@ class VolumetricSizeFieldComputeResults(CoreObject):
             size_field_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VolumetricSizeFieldComputeResults.
+        """Initialize a ``VolumetricSizeFieldComputeResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VolumetricSizeFieldComputeResults object with default parameters.
+            Model to create a ``VolumetricSizeFieldComputeResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the compute volumetric size field operation.
         size_field_id: int, optional
             Id of the computed size field.
         json_data: dict, optional
-            JSON dictionary to create a VolumetricSizeFieldComputeResults object with provided parameters.
+            JSON dictionary to create a ``VolumetricSizeFieldComputeResults`` object with provided parameters.
 
         Examples
         --------
@@ -203,7 +203,7 @@ class VolumetricSizeFieldComputeResults(CoreObject):
                     size_field_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VolumetricSizeFieldComputeResults")
                     json_data = param_json["VolumetricSizeFieldComputeResults"] if "VolumetricSizeFieldComputeResults" in param_json else {}
@@ -221,7 +221,7 @@ class VolumetricSizeFieldComputeResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             size_field_id: int = None):
-        """Set the default values of VolumetricSizeFieldComputeResults.
+        """Set the default values of the ``VolumetricSizeFieldComputeResults`` object.
 
         Parameters
         ----------
@@ -235,7 +235,7 @@ class VolumetricSizeFieldComputeResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VolumetricSizeFieldComputeResults.
+        """Print the default values of ``VolumetricSizeFieldComputeResults`` object.
 
         Examples
         --------
@@ -301,12 +301,12 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             periodic_params: SFPeriodicParams = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VolumetricSizeFieldComputeParams.
+        """Initialize a ``VolumetricSizeFieldComputeParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VolumetricSizeFieldComputeParams object with default parameters.
+            Model to create a ``VolumetricSizeFieldComputeParams`` object with default parameters.
         enable_multi_threading: bool, optional
             Option to compute volumetric size field in parallel using multithreads.
         enable_periodicity: bool, optional
@@ -314,7 +314,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
         periodic_params: SFPeriodicParams, optional
             Periodic parameters to compute the size field.
         json_data: dict, optional
-            JSON dictionary to create a VolumetricSizeFieldComputeParams object with provided parameters.
+            JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
         Examples
         --------
@@ -334,7 +334,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
                     periodic_params)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VolumetricSizeFieldComputeParams")
                     json_data = param_json["VolumetricSizeFieldComputeParams"] if "VolumetricSizeFieldComputeParams" in param_json else {}
@@ -354,7 +354,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             enable_multi_threading: bool = None,
             enable_periodicity: bool = None,
             periodic_params: SFPeriodicParams = None):
-        """Set the default values of VolumetricSizeFieldComputeParams.
+        """Set the default values of the ``VolumetricSizeFieldComputeParams`` object.
 
         Parameters
         ----------
@@ -370,7 +370,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VolumetricSizeFieldComputeParams.
+        """Print the default values of ``VolumetricSizeFieldComputeParams`` object.
 
         Examples
         --------

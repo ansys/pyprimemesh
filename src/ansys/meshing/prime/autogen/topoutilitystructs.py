@@ -30,12 +30,12 @@ class TopoFillHoleParams(CoreObject):
             fill_annular_hole: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the TopoFillHoleParams.
+        """Initialize a ``TopoFillHoleParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a TopoFillHoleParams object with default parameters.
+            Model to create a ``TopoFillHoleParams`` object with default parameters.
         edges_to_exclude: Iterable[int], optional
             TopoEdges to be excluded for cap creation.
         suppress_boundary_after_hole_fill: bool, optional
@@ -43,7 +43,7 @@ class TopoFillHoleParams(CoreObject):
         fill_annular_hole: bool, optional
             Option for filling holes with annular bounding loops.
         json_data: dict, optional
-            JSON dictionary to create a TopoFillHoleParams object with provided parameters.
+            JSON dictionary to create a ``TopoFillHoleParams`` object with provided parameters.
 
         Examples
         --------
@@ -63,7 +63,7 @@ class TopoFillHoleParams(CoreObject):
                     fill_annular_hole)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "TopoFillHoleParams")
                     json_data = param_json["TopoFillHoleParams"] if "TopoFillHoleParams" in param_json else {}
@@ -83,7 +83,7 @@ class TopoFillHoleParams(CoreObject):
             edges_to_exclude: Iterable[int] = None,
             suppress_boundary_after_hole_fill: bool = None,
             fill_annular_hole: bool = None):
-        """Set the default values of TopoFillHoleParams.
+        """Set the default values of the ``TopoFillHoleParams`` object.
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class TopoFillHoleParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TopoFillHoleParams.
+        """Print the default values of ``TopoFillHoleParams`` object.
 
         Examples
         --------
@@ -174,18 +174,18 @@ class TopoFillHoleResult(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the TopoFillHoleResult.
+        """Initialize a ``TopoFillHoleResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a TopoFillHoleResult object with default parameters.
+            Model to create a ``TopoFillHoleResult`` object with default parameters.
         new_topo_faces_created: Iterable[int], optional
             Ids of new topofaces created.
         error_code: ErrorCode, optional
             Error code associated with a wrap operation.
         json_data: dict, optional
-            JSON dictionary to create a TopoFillHoleResult object with provided parameters.
+            JSON dictionary to create a ``TopoFillHoleResult`` object with provided parameters.
 
         Examples
         --------
@@ -203,7 +203,7 @@ class TopoFillHoleResult(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "TopoFillHoleResult")
                     json_data = param_json["TopoFillHoleResult"] if "TopoFillHoleResult" in param_json else {}
@@ -221,7 +221,7 @@ class TopoFillHoleResult(CoreObject):
     def set_default(
             new_topo_faces_created: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of TopoFillHoleResult.
+        """Set the default values of the ``TopoFillHoleResult`` object.
 
         Parameters
         ----------
@@ -235,7 +235,7 @@ class TopoFillHoleResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TopoFillHoleResult.
+        """Print the default values of ``TopoFillHoleResult`` object.
 
         Examples
         --------

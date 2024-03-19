@@ -35,7 +35,7 @@ class PrismControl(CoreObject):
 
         """
         if not isinstance(prism_control_growth_params, PrismControlGrowthParams):
-            raise TypeError("Invalid argument type passed for prism_control_growth_params, valid argument type is PrismControlGrowthParams.")
+            raise TypeError("Invalid argument type passed for 'prism_control_growth_params'. Valid argument type is PrismControlGrowthParams.")
         args = {"prism_control_growth_params" : prism_control_growth_params._jsonify()}
         command_name = "PrimeMesh::PrismControl/SetGrowthParams"
         self._model._print_logs_before_command("set_growth_params", args)
@@ -63,7 +63,7 @@ class PrismControl(CoreObject):
 
         """
         if not isinstance(entities, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for entities, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::PrismControl/SetSurfaceScope"
         self._model._print_logs_before_command("set_surface_scope", args)
@@ -92,7 +92,7 @@ class PrismControl(CoreObject):
 
         """
         if not isinstance(entities, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for entities, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::PrismControl/SetVolumeScope"
         self._model._print_logs_before_command("set_volume_scope", args)

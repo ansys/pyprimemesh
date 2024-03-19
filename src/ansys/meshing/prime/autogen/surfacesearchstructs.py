@@ -34,16 +34,16 @@ class SearchBySpikeParams(CoreObject):
             spike_angle: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchBySpikeParams.
+        """Initialize a ``SearchBySpikeParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchBySpikeParams object with default parameters.
+            Model to create a ``SearchBySpikeParams`` object with default parameters.
         spike_angle: float, optional
             Threshold angle for spike detection.
         json_data: dict, optional
-            JSON dictionary to create a SearchBySpikeParams object with provided parameters.
+            JSON dictionary to create a ``SearchBySpikeParams`` object with provided parameters.
 
         Examples
         --------
@@ -59,7 +59,7 @@ class SearchBySpikeParams(CoreObject):
                     spike_angle)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchBySpikeParams")
                     json_data = param_json["SearchBySpikeParams"] if "SearchBySpikeParams" in param_json else {}
@@ -75,7 +75,7 @@ class SearchBySpikeParams(CoreObject):
     @staticmethod
     def set_default(
             spike_angle: float = None):
-        """Set the default values of SearchBySpikeParams.
+        """Set the default values of the ``SearchBySpikeParams`` object.
 
         Parameters
         ----------
@@ -87,7 +87,7 @@ class SearchBySpikeParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchBySpikeParams.
+        """Print the default values of ``SearchBySpikeParams`` object.
 
         Examples
         --------
@@ -138,18 +138,18 @@ class SearchBySpikeResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchBySpikeResults.
+        """Initialize a ``SearchBySpikeResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchBySpikeResults object with default parameters.
+            Model to create a ``SearchBySpikeResults`` object with default parameters.
         n_found: int, optional
             Number of spikes detected.
         error_code: ErrorCode, optional
             Error code associated with search spikes operation.
         json_data: dict, optional
-            JSON dictionary to create a SearchBySpikeResults object with provided parameters.
+            JSON dictionary to create a ``SearchBySpikeResults`` object with provided parameters.
 
         Examples
         --------
@@ -167,7 +167,7 @@ class SearchBySpikeResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchBySpikeResults")
                     json_data = param_json["SearchBySpikeResults"] if "SearchBySpikeResults" in param_json else {}
@@ -185,7 +185,7 @@ class SearchBySpikeResults(CoreObject):
     def set_default(
             n_found: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of SearchBySpikeResults.
+        """Set the default values of the ``SearchBySpikeResults`` object.
 
         Parameters
         ----------
@@ -199,7 +199,7 @@ class SearchBySpikeResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchBySpikeResults.
+        """Print the default values of ``SearchBySpikeResults`` object.
 
         Examples
         --------
@@ -259,16 +259,16 @@ class SearchByFoldsParams(CoreObject):
             critical_angle: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByFoldsParams.
+        """Initialize a ``SearchByFoldsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByFoldsParams object with default parameters.
+            Model to create a ``SearchByFoldsParams`` object with default parameters.
         critical_angle: float, optional
             Threshold angle for fold detection.
         json_data: dict, optional
-            JSON dictionary to create a SearchByFoldsParams object with provided parameters.
+            JSON dictionary to create a ``SearchByFoldsParams`` object with provided parameters.
 
         Examples
         --------
@@ -284,7 +284,7 @@ class SearchByFoldsParams(CoreObject):
                     critical_angle)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByFoldsParams")
                     json_data = param_json["SearchByFoldsParams"] if "SearchByFoldsParams" in param_json else {}
@@ -300,7 +300,7 @@ class SearchByFoldsParams(CoreObject):
     @staticmethod
     def set_default(
             critical_angle: float = None):
-        """Set the default values of SearchByFoldsParams.
+        """Set the default values of the ``SearchByFoldsParams`` object.
 
         Parameters
         ----------
@@ -312,7 +312,7 @@ class SearchByFoldsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByFoldsParams.
+        """Print the default values of ``SearchByFoldsParams`` object.
 
         Examples
         --------
@@ -363,18 +363,18 @@ class SearchByFoldsResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByFoldsResults.
+        """Initialize a ``SearchByFoldsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByFoldsResults object with default parameters.
+            Model to create a ``SearchByFoldsResults`` object with default parameters.
         n_found: int, optional
             Number of folds identified.
         error_code: ErrorCode, optional
             Error code associated with search folds operation.
         json_data: dict, optional
-            JSON dictionary to create a SearchByFoldsResults object with provided parameters.
+            JSON dictionary to create a ``SearchByFoldsResults`` object with provided parameters.
 
         Examples
         --------
@@ -392,7 +392,7 @@ class SearchByFoldsResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByFoldsResults")
                     json_data = param_json["SearchByFoldsResults"] if "SearchByFoldsResults" in param_json else {}
@@ -410,7 +410,7 @@ class SearchByFoldsResults(CoreObject):
     def set_default(
             n_found: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of SearchByFoldsResults.
+        """Set the default values of the ``SearchByFoldsResults`` object.
 
         Parameters
         ----------
@@ -424,7 +424,7 @@ class SearchByFoldsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByFoldsResults.
+        """Print the default values of ``SearchByFoldsResults`` object.
 
         Examples
         --------
@@ -487,18 +487,18 @@ class SearchByInvalidNormalsResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByInvalidNormalsResults.
+        """Initialize a ``SearchByInvalidNormalsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByInvalidNormalsResults object with default parameters.
+            Model to create a ``SearchByInvalidNormalsResults`` object with default parameters.
         n_found: int, optional
             Number of invalid normals identified.
         error_code: ErrorCode, optional
             Error code associated with search invalid normals operation.
         json_data: dict, optional
-            JSON dictionary to create a SearchByInvalidNormalsResults object with provided parameters.
+            JSON dictionary to create a ``SearchByInvalidNormalsResults`` object with provided parameters.
 
         Examples
         --------
@@ -516,7 +516,7 @@ class SearchByInvalidNormalsResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByInvalidNormalsResults")
                     json_data = param_json["SearchByInvalidNormalsResults"] if "SearchByInvalidNormalsResults" in param_json else {}
@@ -534,7 +534,7 @@ class SearchByInvalidNormalsResults(CoreObject):
     def set_default(
             n_found: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of SearchByInvalidNormalsResults.
+        """Set the default values of the ``SearchByInvalidNormalsResults`` object.
 
         Parameters
         ----------
@@ -548,7 +548,7 @@ class SearchByInvalidNormalsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByInvalidNormalsResults.
+        """Print the default values of ``SearchByInvalidNormalsResults`` object.
 
         Examples
         --------
@@ -606,14 +606,14 @@ class SearchBySelfIntersectionParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchBySelfIntersectionParams.
+        """Initialize a ``SearchBySelfIntersectionParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchBySelfIntersectionParams object with default parameters.
+            Model to create a ``SearchBySelfIntersectionParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a SearchBySelfIntersectionParams object with provided parameters.
+            JSON dictionary to create a ``SearchBySelfIntersectionParams`` object with provided parameters.
 
         Examples
         --------
@@ -627,7 +627,7 @@ class SearchBySelfIntersectionParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchBySelfIntersectionParams")
                     json_data = param_json["SearchBySelfIntersectionParams"] if "SearchBySelfIntersectionParams" in param_json else {}
@@ -641,7 +641,7 @@ class SearchBySelfIntersectionParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of SearchBySelfIntersectionParams.
+        """Set the default values of the ``SearchBySelfIntersectionParams`` object.
 
         """
         args = locals()
@@ -649,7 +649,7 @@ class SearchBySelfIntersectionParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchBySelfIntersectionParams.
+        """Print the default values of ``SearchBySelfIntersectionParams`` object.
 
         Examples
         --------
@@ -690,18 +690,18 @@ class SearchByIntersectionResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByIntersectionResults.
+        """Initialize a ``SearchByIntersectionResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByIntersectionResults object with default parameters.
+            Model to create a ``SearchByIntersectionResults`` object with default parameters.
         n_found: int, optional
             Number of face elements identified by intersection(face elements interfering with each other).
         error_code: ErrorCode, optional
             Error code associated with search intersection operation.
         json_data: dict, optional
-            JSON dictionary to create a SearchByIntersectionResults object with provided parameters.
+            JSON dictionary to create a ``SearchByIntersectionResults`` object with provided parameters.
 
         Examples
         --------
@@ -719,7 +719,7 @@ class SearchByIntersectionResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByIntersectionResults")
                     json_data = param_json["SearchByIntersectionResults"] if "SearchByIntersectionResults" in param_json else {}
@@ -737,7 +737,7 @@ class SearchByIntersectionResults(CoreObject):
     def set_default(
             n_found: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of SearchByIntersectionResults.
+        """Set the default values of the ``SearchByIntersectionResults`` object.
 
         Parameters
         ----------
@@ -751,7 +751,7 @@ class SearchByIntersectionResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByIntersectionResults.
+        """Print the default values of ``SearchByIntersectionResults`` object.
 
         Examples
         --------
@@ -814,18 +814,18 @@ class SearchByQualityParams(CoreObject):
             face_quality_measure: FaceQualityMeasure = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByQualityParams.
+        """Initialize a ``SearchByQualityParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByQualityParams object with default parameters.
+            Model to create a ``SearchByQualityParams`` object with default parameters.
         quality_limit: float, optional
             Quality limit used for search face elements.
         face_quality_measure: FaceQualityMeasure, optional
             Quality measure used for search face elements.
         json_data: dict, optional
-            JSON dictionary to create a SearchByQualityParams object with provided parameters.
+            JSON dictionary to create a ``SearchByQualityParams`` object with provided parameters.
 
         Examples
         --------
@@ -843,7 +843,7 @@ class SearchByQualityParams(CoreObject):
                     face_quality_measure)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByQualityParams")
                     json_data = param_json["SearchByQualityParams"] if "SearchByQualityParams" in param_json else {}
@@ -861,7 +861,7 @@ class SearchByQualityParams(CoreObject):
     def set_default(
             quality_limit: float = None,
             face_quality_measure: FaceQualityMeasure = None):
-        """Set the default values of SearchByQualityParams.
+        """Set the default values of the ``SearchByQualityParams`` object.
 
         Parameters
         ----------
@@ -875,7 +875,7 @@ class SearchByQualityParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByQualityParams.
+        """Print the default values of ``SearchByQualityParams`` object.
 
         Examples
         --------
@@ -944,12 +944,12 @@ class SearchByQualityResults(CoreObject):
             min_quality: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByQualityResults.
+        """Initialize a ``SearchByQualityResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByQualityResults object with default parameters.
+            Model to create a ``SearchByQualityResults`` object with default parameters.
         n_found: int, optional
             Number of face elements found by search for given quality limit.
         error_code: ErrorCode, optional
@@ -959,7 +959,7 @@ class SearchByQualityResults(CoreObject):
         min_quality: float, optional
             Minimum quality found by search.
         json_data: dict, optional
-            JSON dictionary to create a SearchByQualityResults object with provided parameters.
+            JSON dictionary to create a ``SearchByQualityResults`` object with provided parameters.
 
         Examples
         --------
@@ -981,7 +981,7 @@ class SearchByQualityResults(CoreObject):
                     min_quality)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByQualityResults")
                     json_data = param_json["SearchByQualityResults"] if "SearchByQualityResults" in param_json else {}
@@ -1003,7 +1003,7 @@ class SearchByQualityResults(CoreObject):
             error_code: ErrorCode = None,
             max_quality: float = None,
             min_quality: float = None):
-        """Set the default values of SearchByQualityResults.
+        """Set the default values of the ``SearchByQualityResults`` object.
 
         Parameters
         ----------
@@ -1021,7 +1021,7 @@ class SearchByQualityResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByQualityResults.
+        """Print the default values of ``SearchByQualityResults`` object.
 
         Examples
         --------
@@ -1117,12 +1117,12 @@ class SearchByThinStripParams(CoreObject):
             feature_angle: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByThinStripParams.
+        """Initialize a ``SearchByThinStripParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByThinStripParams object with default parameters.
+            Model to create a ``SearchByThinStripParams`` object with default parameters.
         strip_height_limit: float, optional
             Absolute height limit to ignore strips with height more than provided limit.
         quality_limit: float, optional
@@ -1134,7 +1134,7 @@ class SearchByThinStripParams(CoreObject):
         feature_angle: float, optional
             Angle used to identify angle based features.
         json_data: dict, optional
-            JSON dictionary to create a SearchByThinStripParams object with provided parameters.
+            JSON dictionary to create a ``SearchByThinStripParams`` object with provided parameters.
 
         Examples
         --------
@@ -1158,7 +1158,7 @@ class SearchByThinStripParams(CoreObject):
                     feature_angle)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByThinStripParams")
                     json_data = param_json["SearchByThinStripParams"] if "SearchByThinStripParams" in param_json else {}
@@ -1182,7 +1182,7 @@ class SearchByThinStripParams(CoreObject):
             face_quality_measure: FaceQualityMeasure = None,
             feature_type: SurfaceFeatureType = None,
             feature_angle: float = None):
-        """Set the default values of SearchByThinStripParams.
+        """Set the default values of the ``SearchByThinStripParams`` object.
 
         Parameters
         ----------
@@ -1202,7 +1202,7 @@ class SearchByThinStripParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByThinStripParams.
+        """Print the default values of ``SearchByThinStripParams`` object.
 
         Examples
         --------
@@ -1301,18 +1301,18 @@ class SearchByThinStripResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchByThinStripResults.
+        """Initialize a ``SearchByThinStripResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchByThinStripResults object with default parameters.
+            Model to create a ``SearchByThinStripResults`` object with default parameters.
         n_found: int, optional
             Number of face elements identified as thin strips.
         error_code: ErrorCode, optional
             Error code associated with search thin strips operation.
         json_data: dict, optional
-            JSON dictionary to create a SearchByThinStripResults object with provided parameters.
+            JSON dictionary to create a ``SearchByThinStripResults`` object with provided parameters.
 
         Examples
         --------
@@ -1330,7 +1330,7 @@ class SearchByThinStripResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchByThinStripResults")
                     json_data = param_json["SearchByThinStripResults"] if "SearchByThinStripResults" in param_json else {}
@@ -1348,7 +1348,7 @@ class SearchByThinStripResults(CoreObject):
     def set_default(
             n_found: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of SearchByThinStripResults.
+        """Set the default values of the ``SearchByThinStripResults`` object.
 
         Parameters
         ----------
@@ -1362,7 +1362,7 @@ class SearchByThinStripResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchByThinStripResults.
+        """Print the default values of ``SearchByThinStripResults`` object.
 
         Examples
         --------
@@ -1437,12 +1437,12 @@ class SurfaceQualityResult(CoreObject):
             min_quality: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurfaceQualityResult.
+        """Initialize a ``SurfaceQualityResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurfaceQualityResult object with default parameters.
+            Model to create a ``SurfaceQualityResult`` object with default parameters.
         face_quality_measure: FaceQualityMeasure, optional
             Type of the face quality measure.
         measure_name: str, optional
@@ -1456,7 +1456,7 @@ class SurfaceQualityResult(CoreObject):
         min_quality: float, optional
             Minimum value of quality measure.
         json_data: dict, optional
-            JSON dictionary to create a SurfaceQualityResult object with provided parameters.
+            JSON dictionary to create a ``SurfaceQualityResult`` object with provided parameters.
 
         Examples
         --------
@@ -1482,7 +1482,7 @@ class SurfaceQualityResult(CoreObject):
                     min_quality)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurfaceQualityResult")
                     json_data = param_json["SurfaceQualityResult"] if "SurfaceQualityResult" in param_json else {}
@@ -1508,7 +1508,7 @@ class SurfaceQualityResult(CoreObject):
             n_found: int = None,
             max_quality: float = None,
             min_quality: float = None):
-        """Set the default values of SurfaceQualityResult.
+        """Set the default values of the ``SurfaceQualityResult`` object.
 
         Parameters
         ----------
@@ -1530,7 +1530,7 @@ class SurfaceQualityResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurfaceQualityResult.
+        """Print the default values of ``SurfaceQualityResult`` object.
 
         Examples
         --------
@@ -1644,12 +1644,12 @@ class SurfaceQualitySummaryResults(CoreObject):
             summary: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurfaceQualitySummaryResults.
+        """Initialize a ``SurfaceQualitySummaryResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurfaceQualitySummaryResults object with default parameters.
+            Model to create a ``SurfaceQualitySummaryResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the surface quality summary.
         quality_results: List[SurfaceQualityResult], optional
@@ -1657,7 +1657,7 @@ class SurfaceQualitySummaryResults(CoreObject):
         summary: str, optional
             Surface quality summary text.
         json_data: dict, optional
-            JSON dictionary to create a SurfaceQualitySummaryResults object with provided parameters.
+            JSON dictionary to create a ``SurfaceQualitySummaryResults`` object with provided parameters.
 
         Examples
         --------
@@ -1677,7 +1677,7 @@ class SurfaceQualitySummaryResults(CoreObject):
                     summary)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurfaceQualitySummaryResults")
                     json_data = param_json["SurfaceQualitySummaryResults"] if "SurfaceQualitySummaryResults" in param_json else {}
@@ -1697,7 +1697,7 @@ class SurfaceQualitySummaryResults(CoreObject):
             error_code: ErrorCode = None,
             quality_results: List[SurfaceQualityResult] = None,
             summary: str = None):
-        """Set the default values of SurfaceQualitySummaryResults.
+        """Set the default values of the ``SurfaceQualitySummaryResults`` object.
 
         Parameters
         ----------
@@ -1713,7 +1713,7 @@ class SurfaceQualitySummaryResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurfaceQualitySummaryResults.
+        """Print the default values of ``SurfaceQualitySummaryResults`` object.
 
         Examples
         --------
@@ -1791,12 +1791,12 @@ class SurfaceQualitySummaryParams(CoreObject):
             quality_limit: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurfaceQualitySummaryParams.
+        """Initialize a ``SurfaceQualitySummaryParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurfaceQualitySummaryParams object with default parameters.
+            Model to create a ``SurfaceQualitySummaryParams`` object with default parameters.
         face_quality_measures: List[FaceQualityMeasure], optional
             List of face quality measures for surface quality diagnostics.
         scope: ScopeDefinition, optional
@@ -1804,7 +1804,7 @@ class SurfaceQualitySummaryParams(CoreObject):
         quality_limit: Iterable[float], optional
             Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
         json_data: dict, optional
-            JSON dictionary to create a SurfaceQualitySummaryParams object with provided parameters.
+            JSON dictionary to create a ``SurfaceQualitySummaryParams`` object with provided parameters.
 
         Examples
         --------
@@ -1824,7 +1824,7 @@ class SurfaceQualitySummaryParams(CoreObject):
                     quality_limit)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurfaceQualitySummaryParams")
                     json_data = param_json["SurfaceQualitySummaryParams"] if "SurfaceQualitySummaryParams" in param_json else {}
@@ -1844,7 +1844,7 @@ class SurfaceQualitySummaryParams(CoreObject):
             face_quality_measures: List[FaceQualityMeasure] = None,
             scope: ScopeDefinition = None,
             quality_limit: Iterable[float] = None):
-        """Set the default values of SurfaceQualitySummaryParams.
+        """Set the default values of the ``SurfaceQualitySummaryParams`` object.
 
         Parameters
         ----------
@@ -1860,7 +1860,7 @@ class SurfaceQualitySummaryParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurfaceQualitySummaryParams.
+        """Print the default values of ``SurfaceQualitySummaryParams`` object.
 
         Examples
         --------
@@ -1944,12 +1944,12 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
             n_duplicate_faces: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurfaceDiagnosticSummaryResults.
+        """Initialize a ``SurfaceDiagnosticSummaryResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurfaceDiagnosticSummaryResults object with default parameters.
+            Model to create a ``SurfaceDiagnosticSummaryResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the surface diagnostic summary.
         n_self_intersections: int, optional
@@ -1961,7 +1961,7 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
         n_duplicate_faces: int, optional
             Number of duplicate faces identified.
         json_data: dict, optional
-            JSON dictionary to create a SurfaceDiagnosticSummaryResults object with provided parameters.
+            JSON dictionary to create a ``SurfaceDiagnosticSummaryResults`` object with provided parameters.
 
         Examples
         --------
@@ -1985,7 +1985,7 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
                     n_duplicate_faces)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurfaceDiagnosticSummaryResults")
                     json_data = param_json["SurfaceDiagnosticSummaryResults"] if "SurfaceDiagnosticSummaryResults" in param_json else {}
@@ -2009,7 +2009,7 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
             n_free_edges: int = None,
             n_multi_edges: int = None,
             n_duplicate_faces: int = None):
-        """Set the default values of SurfaceDiagnosticSummaryResults.
+        """Set the default values of the ``SurfaceDiagnosticSummaryResults`` object.
 
         Parameters
         ----------
@@ -2029,7 +2029,7 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurfaceDiagnosticSummaryResults.
+        """Print the default values of ``SurfaceDiagnosticSummaryResults`` object.
 
         Examples
         --------
@@ -2137,12 +2137,12 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
             compute_duplicate_faces: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurfaceDiagnosticSummaryParams.
+        """Initialize a ``SurfaceDiagnosticSummaryParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurfaceDiagnosticSummaryParams object with default parameters.
+            Model to create a ``SurfaceDiagnosticSummaryParams`` object with default parameters.
         scope: ScopeDefinition, optional
             Scope the face zonelets for surface diagnostics.
         compute_self_intersections: bool, optional
@@ -2154,7 +2154,7 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
         compute_duplicate_faces: bool, optional
             Control to identify duplicate faces are present or not.
         json_data: dict, optional
-            JSON dictionary to create a SurfaceDiagnosticSummaryParams object with provided parameters.
+            JSON dictionary to create a ``SurfaceDiagnosticSummaryParams`` object with provided parameters.
 
         Examples
         --------
@@ -2178,7 +2178,7 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
                     compute_duplicate_faces)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurfaceDiagnosticSummaryParams")
                     json_data = param_json["SurfaceDiagnosticSummaryParams"] if "SurfaceDiagnosticSummaryParams" in param_json else {}
@@ -2202,7 +2202,7 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
             compute_free_edges: bool = None,
             compute_multi_edges: bool = None,
             compute_duplicate_faces: bool = None):
-        """Set the default values of SurfaceDiagnosticSummaryParams.
+        """Set the default values of the ``SurfaceDiagnosticSummaryParams`` object.
 
         Parameters
         ----------
@@ -2222,7 +2222,7 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurfaceDiagnosticSummaryParams.
+        """Print the default values of ``SurfaceDiagnosticSummaryParams`` object.
 
         Examples
         --------
@@ -2316,14 +2316,14 @@ class SearchInfoByRegisterIdParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchInfoByRegisterIdParams.
+        """Initialize a ``SearchInfoByRegisterIdParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchInfoByRegisterIdParams object with default parameters.
+            Model to create a ``SearchInfoByRegisterIdParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a SearchInfoByRegisterIdParams object with provided parameters.
+            JSON dictionary to create a ``SearchInfoByRegisterIdParams`` object with provided parameters.
 
         Examples
         --------
@@ -2337,7 +2337,7 @@ class SearchInfoByRegisterIdParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchInfoByRegisterIdParams")
                     json_data = param_json["SearchInfoByRegisterIdParams"] if "SearchInfoByRegisterIdParams" in param_json else {}
@@ -2351,7 +2351,7 @@ class SearchInfoByRegisterIdParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of SearchInfoByRegisterIdParams.
+        """Set the default values of the ``SearchInfoByRegisterIdParams`` object.
 
         """
         args = locals()
@@ -2359,7 +2359,7 @@ class SearchInfoByRegisterIdParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchInfoByRegisterIdParams.
+        """Print the default values of ``SearchInfoByRegisterIdParams`` object.
 
         Examples
         --------
@@ -2406,12 +2406,12 @@ class SearchInfoByRegisterIdResults(CoreObject):
             face_zonelets_found: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SearchInfoByRegisterIdResults.
+        """Initialize a ``SearchInfoByRegisterIdResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SearchInfoByRegisterIdResults object with default parameters.
+            Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the retreiving information based on register id.
         n_found: int, optional
@@ -2421,7 +2421,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
         face_zonelets_found: Iterable[int], optional
             Ids of the face zonelets containing atleast one registered face element.
         json_data: dict, optional
-            JSON dictionary to create a SearchInfoByRegisterIdResults object with provided parameters.
+            JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
         Examples
         --------
@@ -2443,7 +2443,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
                     face_zonelets_found)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SearchInfoByRegisterIdResults")
                     json_data = param_json["SearchInfoByRegisterIdResults"] if "SearchInfoByRegisterIdResults" in param_json else {}
@@ -2465,7 +2465,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
             n_found: int = None,
             locations_found: Iterable[float] = None,
             face_zonelets_found: Iterable[int] = None):
-        """Set the default values of SearchInfoByRegisterIdResults.
+        """Set the default values of the ``SearchInfoByRegisterIdResults`` object.
 
         Parameters
         ----------
@@ -2483,7 +2483,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SearchInfoByRegisterIdResults.
+        """Print the default values of ``SearchInfoByRegisterIdResults`` object.
 
         Examples
         --------
@@ -2567,16 +2567,16 @@ class CheckFaceDeviationParams(CoreObject):
             distance: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CheckFaceDeviationParams.
+        """Initialize a ``CheckFaceDeviationParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CheckFaceDeviationParams object with default parameters.
+            Model to create a ``CheckFaceDeviationParams`` object with default parameters.
         distance: float, optional
             Distance above which deviated entities are collected.
         json_data: dict, optional
-            JSON dictionary to create a CheckFaceDeviationParams object with provided parameters.
+            JSON dictionary to create a ``CheckFaceDeviationParams`` object with provided parameters.
 
         Examples
         --------
@@ -2592,7 +2592,7 @@ class CheckFaceDeviationParams(CoreObject):
                     distance)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CheckFaceDeviationParams")
                     json_data = param_json["CheckFaceDeviationParams"] if "CheckFaceDeviationParams" in param_json else {}
@@ -2608,7 +2608,7 @@ class CheckFaceDeviationParams(CoreObject):
     @staticmethod
     def set_default(
             distance: float = None):
-        """Set the default values of CheckFaceDeviationParams.
+        """Set the default values of the ``CheckFaceDeviationParams`` object.
 
         Parameters
         ----------
@@ -2620,7 +2620,7 @@ class CheckFaceDeviationParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CheckFaceDeviationParams.
+        """Print the default values of ``CheckFaceDeviationParams`` object.
 
         Examples
         --------
@@ -2671,18 +2671,18 @@ class CheckFaceDeviationResults(CoreObject):
             maximum_deviation: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CheckFaceDeviationResults.
+        """Initialize a ``CheckFaceDeviationResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CheckFaceDeviationResults object with default parameters.
+            Model to create a ``CheckFaceDeviationResults`` object with default parameters.
         n_deviated: int, optional
             Number of faces with deviation.
         maximum_deviation: float, optional
             Maximum deviation found.
         json_data: dict, optional
-            JSON dictionary to create a CheckFaceDeviationResults object with provided parameters.
+            JSON dictionary to create a ``CheckFaceDeviationResults`` object with provided parameters.
 
         Examples
         --------
@@ -2700,7 +2700,7 @@ class CheckFaceDeviationResults(CoreObject):
                     maximum_deviation)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CheckFaceDeviationResults")
                     json_data = param_json["CheckFaceDeviationResults"] if "CheckFaceDeviationResults" in param_json else {}
@@ -2718,7 +2718,7 @@ class CheckFaceDeviationResults(CoreObject):
     def set_default(
             n_deviated: int = None,
             maximum_deviation: float = None):
-        """Set the default values of CheckFaceDeviationResults.
+        """Set the default values of the ``CheckFaceDeviationResults`` object.
 
         Parameters
         ----------
@@ -2732,7 +2732,7 @@ class CheckFaceDeviationResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CheckFaceDeviationResults.
+        """Print the default values of ``CheckFaceDeviationResults`` object.
 
         Examples
         --------

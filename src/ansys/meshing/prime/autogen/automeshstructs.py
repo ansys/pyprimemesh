@@ -64,12 +64,12 @@ class AutoMeshResults(CoreObject):
             error_locations: Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AutoMeshResults.
+        """Initialize a ``AutoMeshResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AutoMeshResults object with default parameters.
+            Model to create a ``AutoMeshResults`` object with default parameters.
         error_code: ErrorCode, optional
             Provides error message when automesh fails.
         warning_codes: List[WarningCode], optional
@@ -77,7 +77,7 @@ class AutoMeshResults(CoreObject):
         error_locations: Iterable[float], optional
             Error location coordinates returned when automesh fails.
         json_data: dict, optional
-            JSON dictionary to create a AutoMeshResults object with provided parameters.
+            JSON dictionary to create a ``AutoMeshResults`` object with provided parameters.
 
         Examples
         --------
@@ -97,7 +97,7 @@ class AutoMeshResults(CoreObject):
                     error_locations)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AutoMeshResults")
                     json_data = param_json["AutoMeshResults"] if "AutoMeshResults" in param_json else {}
@@ -117,7 +117,7 @@ class AutoMeshResults(CoreObject):
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None,
             error_locations: Iterable[float] = None):
-        """Set the default values of AutoMeshResults.
+        """Set the default values of the ``AutoMeshResults`` object.
 
         Parameters
         ----------
@@ -133,7 +133,7 @@ class AutoMeshResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AutoMeshResults.
+        """Print the default values of ``AutoMeshResults`` object.
 
         Examples
         --------
@@ -208,18 +208,18 @@ class PrismStairStep(CoreObject):
             gap_factor_scale: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PrismStairStep.
+        """Initialize a ``PrismStairStep`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PrismStairStep object with default parameters.
+            Model to create a ``PrismStairStep`` object with default parameters.
         check_proximity: bool, optional
             Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
         gap_factor_scale: float, optional
             Scale factor for prism proximity detection gap factor.
         json_data: dict, optional
-            JSON dictionary to create a PrismStairStep object with provided parameters.
+            JSON dictionary to create a ``PrismStairStep`` object with provided parameters.
 
         Examples
         --------
@@ -237,7 +237,7 @@ class PrismStairStep(CoreObject):
                     gap_factor_scale)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PrismStairStep")
                     json_data = param_json["PrismStairStep"] if "PrismStairStep" in param_json else {}
@@ -255,7 +255,7 @@ class PrismStairStep(CoreObject):
     def set_default(
             check_proximity: bool = None,
             gap_factor_scale: float = None):
-        """Set the default values of PrismStairStep.
+        """Set the default values of the ``PrismStairStep`` object.
 
         Parameters
         ----------
@@ -269,7 +269,7 @@ class PrismStairStep(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PrismStairStep.
+        """Print the default values of ``PrismStairStep`` object.
 
         Examples
         --------
@@ -332,18 +332,18 @@ class PrismParams(CoreObject):
             no_imprint_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PrismParams.
+        """Initialize a ``PrismParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PrismParams object with default parameters.
+            Model to create a ``PrismParams`` object with default parameters.
         stair_step: PrismStairStep, optional
             Prism stairstep parameters.
         no_imprint_zonelets: Iterable[int], optional
             Option to specify zonelets to skip prism imprint.
         json_data: dict, optional
-            JSON dictionary to create a PrismParams object with provided parameters.
+            JSON dictionary to create a ``PrismParams`` object with provided parameters.
 
         Examples
         --------
@@ -361,7 +361,7 @@ class PrismParams(CoreObject):
                     no_imprint_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PrismParams")
                     json_data = param_json["PrismParams"] if "PrismParams" in param_json else {}
@@ -379,7 +379,7 @@ class PrismParams(CoreObject):
     def set_default(
             stair_step: PrismStairStep = None,
             no_imprint_zonelets: Iterable[int] = None):
-        """Set the default values of PrismParams.
+        """Set the default values of the ``PrismParams`` object.
 
         Parameters
         ----------
@@ -393,7 +393,7 @@ class PrismParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PrismParams.
+        """Print the default values of ``PrismParams`` object.
 
         Examples
         --------
@@ -459,12 +459,12 @@ class SurfaceMeshSizeScaling(CoreObject):
             size_range_max: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurfaceMeshSizeScaling.
+        """Initialize a ``SurfaceMeshSizeScaling`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurfaceMeshSizeScaling object with default parameters.
+            Model to create a ``SurfaceMeshSizeScaling`` object with default parameters.
         factor: float, optional
             Value by which size should be multiplied when the size falls within a certain range. Applicable only when sizeFieldType is set to Geometric in AutoMeshParams structure.
         size_range_min: float, optional
@@ -472,7 +472,7 @@ class SurfaceMeshSizeScaling(CoreObject):
         size_range_max: float, optional
             Maximum size required to apply scaling. Applicable only when sizeFieldType is set to Geometric in AutoMeshParams structure.
         json_data: dict, optional
-            JSON dictionary to create a SurfaceMeshSizeScaling object with provided parameters.
+            JSON dictionary to create a ``SurfaceMeshSizeScaling`` object with provided parameters.
 
         Examples
         --------
@@ -492,7 +492,7 @@ class SurfaceMeshSizeScaling(CoreObject):
                     size_range_max)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurfaceMeshSizeScaling")
                     json_data = param_json["SurfaceMeshSizeScaling"] if "SurfaceMeshSizeScaling" in param_json else {}
@@ -512,7 +512,7 @@ class SurfaceMeshSizeScaling(CoreObject):
             factor: float = None,
             size_range_min: float = None,
             size_range_max: float = None):
-        """Set the default values of SurfaceMeshSizeScaling.
+        """Set the default values of the ``SurfaceMeshSizeScaling`` object.
 
         Parameters
         ----------
@@ -528,7 +528,7 @@ class SurfaceMeshSizeScaling(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurfaceMeshSizeScaling.
+        """Print the default values of ``SurfaceMeshSizeScaling`` object.
 
         Examples
         --------
@@ -618,12 +618,12 @@ class HexCoreParams(CoreObject):
             enable_region_based_hexcore: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the HexCoreParams.
+        """Initialize a ``HexCoreParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a HexCoreParams object with default parameters.
+            Model to create a ``HexCoreParams`` object with default parameters.
         transition_size_field_type: SizeFieldType, optional
             Size field type to be used for transition volume (volume between hexcore and boundary).
         buffer_layers: int, optional
@@ -639,7 +639,7 @@ class HexCoreParams(CoreObject):
         enable_region_based_hexcore: bool, optional
             Checks whether to enable region based hexcore or not.
         json_data: dict, optional
-            JSON dictionary to create a HexCoreParams object with provided parameters.
+            JSON dictionary to create a ``HexCoreParams`` object with provided parameters.
 
         Examples
         --------
@@ -667,7 +667,7 @@ class HexCoreParams(CoreObject):
                     enable_region_based_hexcore)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "HexCoreParams")
                     json_data = param_json["HexCoreParams"] if "HexCoreParams" in param_json else {}
@@ -695,7 +695,7 @@ class HexCoreParams(CoreObject):
             cell_element_type: HexCoreCellElementType = None,
             surface_mesh_size_scaling: SurfaceMeshSizeScaling = None,
             enable_region_based_hexcore: bool = None):
-        """Set the default values of HexCoreParams.
+        """Set the default values of the ``HexCoreParams`` object.
 
         Parameters
         ----------
@@ -719,7 +719,7 @@ class HexCoreParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of HexCoreParams.
+        """Print the default values of ``HexCoreParams`` object.
 
         Examples
         --------
@@ -839,16 +839,16 @@ class TetParams(CoreObject):
             quadratic: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the TetParams.
+        """Initialize a ``TetParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a TetParams object with default parameters.
+            Model to create a ``TetParams`` object with default parameters.
         quadratic: bool, optional
             Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
         json_data: dict, optional
-            JSON dictionary to create a TetParams object with provided parameters.
+            JSON dictionary to create a ``TetParams`` object with provided parameters.
 
         Examples
         --------
@@ -864,7 +864,7 @@ class TetParams(CoreObject):
                     quadratic)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "TetParams")
                     json_data = param_json["TetParams"] if "TetParams" in param_json else {}
@@ -880,7 +880,7 @@ class TetParams(CoreObject):
     @staticmethod
     def set_default(
             quadratic: bool = None):
-        """Set the default values of TetParams.
+        """Set the default values of the ``TetParams`` object.
 
         Parameters
         ----------
@@ -892,7 +892,7 @@ class TetParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of TetParams.
+        """Print the default values of ``TetParams`` object.
 
         Examples
         --------
@@ -970,12 +970,12 @@ class AutoMeshParams(CoreObject):
             periodic_control_ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AutoMeshParams.
+        """Initialize a ``AutoMeshParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AutoMeshParams object with default parameters.
+            Model to create a ``AutoMeshParams`` object with default parameters.
         size_field_type: SizeFieldType, optional
             Type of sizing to be used to generate volume mesh.
         max_size: float, optional
@@ -999,7 +999,7 @@ class AutoMeshParams(CoreObject):
         periodic_control_ids: Iterable[int], optional
             Ids of the periodic controls.
         json_data: dict, optional
-            JSON dictionary to create a AutoMeshParams object with provided parameters.
+            JSON dictionary to create a ``AutoMeshParams`` object with provided parameters.
 
         Examples
         --------
@@ -1035,7 +1035,7 @@ class AutoMeshParams(CoreObject):
                     periodic_control_ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AutoMeshParams")
                     json_data = param_json["AutoMeshParams"] if "AutoMeshParams" in param_json else {}
@@ -1071,7 +1071,7 @@ class AutoMeshParams(CoreObject):
             hexcore: HexCoreParams = None,
             volume_control_ids: Iterable[int] = None,
             periodic_control_ids: Iterable[int] = None):
-        """Set the default values of AutoMeshParams.
+        """Set the default values of the ``AutoMeshParams`` object.
 
         Parameters
         ----------
@@ -1103,7 +1103,7 @@ class AutoMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AutoMeshParams.
+        """Print the default values of ``AutoMeshParams`` object.
 
         Examples
         --------

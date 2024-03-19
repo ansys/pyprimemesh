@@ -1,5 +1,6 @@
 """Module for mangaging file inputs and outputs."""
 from typing import List
+import json
 
 # isort: split
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
@@ -12,6 +13,7 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportFluentMeshingMeshParams,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
+    ExportLSDynaKeywordFileParams,
     ExportSTLParams,
     FileReadParams,
     FileReadResults,
@@ -33,6 +35,8 @@ from ansys.meshing.prime.autogen.fileiostructs import (
 )
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
+import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
+import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
 
 
 class FileIO(_FileIO):
@@ -296,6 +300,21 @@ class FileIO(_FileIO):
         >>> results = file_io.export_mapdl_cdb("/tmp/file.cdb", params)
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
+            part_id = 1
+            if (len(self._model.parts) > 0):
+                part_id = self._model.parts[0].id
+            sim_data_str = super().get_abaqus_simulation_data(part_id)
+            if params.config_settings == None:
+                params.config_settings = ''
+            params.config_settings = mapdlcdbexportutils.generate_config_commands(
+                params) + params.config_settings
+            all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
+                self._model,
+                sim_data_str,
+                params
+            )
+            params.material_properties = all_mat_cmds + params.material_properties
+            params.analysis_settings = analysis_settings
             result = super().export_mapdl_cdb(temp_file_name, params)
         return result
 
@@ -427,7 +446,54 @@ class FileIO(_FileIO):
                         ExportFluentMeshingMeshParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_fluent_meshing_mesh(temp_file_name, export_fluent_mesh_params)
+            result = super().export_fluent_meshing_mesh(
+                temp_file_name, export_fluent_mesh_params)
+        return result
+
+    def export_lsdyna_keyword_file(
+        self, file_name: str, params: ExportLSDynaKeywordFileParams
+    ) -> FileWriteResults:
+        """ Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        params : ExportLSDynaKeywordFileParams
+            Parameters for FEA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        FileWriteResults
+            Returns FileWriteResults.
+
+        Notes
+        -----
+        This API is a Beta. API Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_keyword_file(
+            file_name, ExportLSDynaKeywordFileParams(model=model)
+        )
+
+        """
+
+        with utils.file_write_context(self._model, file_name) as temp_file_name:
+            part_id = 1
+            if (len(self._model.parts) > 0):
+                part_id = self._model.parts[0].id
+            sim_data = json.loads(super().get_abaqus_simulation_data(part_id))
+            mp = dynaexportutils.MaterialProcessor(
+                self._model, sim_data["Materials"], sim_data["Zones"])
+            all_mat_cmds = mp.get_all_material_commands()
+            params.material_properties = all_mat_cmds + params.material_properties
+            dp = dynaexportutils.DatabaseProcessor(
+                self._model, sim_data["Step"])
+            all_data_cmds = dp.get_output_database_keywords()
+            params.database_keywords = all_data_cmds + params.database_keywords
+            result = super().export_lsdyna_keyword_file(temp_file_name, params)
         return result
 
     def export_boundary_fitted_spline_kfile(

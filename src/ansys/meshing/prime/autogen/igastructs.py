@@ -56,12 +56,12 @@ class IGAResults(CoreObject):
             spline_ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the IGAResults.
+        """Initialize a ``IGAResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a IGAResults object with default parameters.
+            Model to create a ``IGAResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code if IGA operation is unsuccessful.
         warning_code: WarningCode, optional
@@ -69,7 +69,7 @@ class IGAResults(CoreObject):
         spline_ids: Iterable[int], optional
             Ids of the created spline.
         json_data: dict, optional
-            JSON dictionary to create a IGAResults object with provided parameters.
+            JSON dictionary to create a ``IGAResults`` object with provided parameters.
 
         Examples
         --------
@@ -89,7 +89,7 @@ class IGAResults(CoreObject):
                     spline_ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "IGAResults")
                     json_data = param_json["IGAResults"] if "IGAResults" in param_json else {}
@@ -109,7 +109,7 @@ class IGAResults(CoreObject):
             error_code: ErrorCode = None,
             warning_code: WarningCode = None,
             spline_ids: Iterable[int] = None):
-        """Set the default values of IGAResults.
+        """Set the default values of the ``IGAResults`` object.
 
         Parameters
         ----------
@@ -125,7 +125,7 @@ class IGAResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of IGAResults.
+        """Print the default values of ``IGAResults`` object.
 
         Examples
         --------
@@ -197,16 +197,16 @@ class IGASpline(CoreObject):
             id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the IGASpline.
+        """Initialize a ``IGASpline`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a IGASpline object with default parameters.
+            Model to create a ``IGASpline`` object with default parameters.
         id: int, optional
             Unique id of the spline.
         json_data: dict, optional
-            JSON dictionary to create a IGASpline object with provided parameters.
+            JSON dictionary to create a ``IGASpline`` object with provided parameters.
 
         Examples
         --------
@@ -222,7 +222,7 @@ class IGASpline(CoreObject):
                     id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "IGASpline")
                     json_data = param_json["IGASpline"] if "IGASpline" in param_json else {}
@@ -238,7 +238,7 @@ class IGASpline(CoreObject):
     @staticmethod
     def set_default(
             id: int = None):
-        """Set the default values of IGASpline.
+        """Set the default values of the ``IGASpline`` object.
 
         Parameters
         ----------
@@ -250,7 +250,7 @@ class IGASpline(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of IGASpline.
+        """Print the default values of ``IGASpline`` object.
 
         Examples
         --------
@@ -325,12 +325,12 @@ class IGAUnstructuredSplineSurf(CoreObject):
             shell_thickness: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the IGAUnstructuredSplineSurf.
+        """Initialize a ``IGAUnstructuredSplineSurf`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a IGAUnstructuredSplineSurf object with default parameters.
+            Model to create a ``IGAUnstructuredSplineSurf`` object with default parameters.
         id: int, optional
             Id of the unstructured spline surface.
         spline_refinement_level: int, optional
@@ -352,7 +352,7 @@ class IGAUnstructuredSplineSurf(CoreObject):
         shell_thickness: float, optional
             Thickness of shell.
         json_data: dict, optional
-            JSON dictionary to create a IGAUnstructuredSplineSurf object with provided parameters.
+            JSON dictionary to create a ``IGAUnstructuredSplineSurf`` object with provided parameters.
 
         Examples
         --------
@@ -386,7 +386,7 @@ class IGAUnstructuredSplineSurf(CoreObject):
                     shell_thickness)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "IGAUnstructuredSplineSurf")
                     json_data = param_json["IGAUnstructuredSplineSurf"] if "IGAUnstructuredSplineSurf" in param_json else {}
@@ -420,7 +420,7 @@ class IGAUnstructuredSplineSurf(CoreObject):
             average_mesh_size: float = None,
             elements_count: int = None,
             shell_thickness: float = None):
-        """Set the default values of IGAUnstructuredSplineSurf.
+        """Set the default values of the ``IGAUnstructuredSplineSurf`` object.
 
         Parameters
         ----------
@@ -450,7 +450,7 @@ class IGAUnstructuredSplineSurf(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of IGAUnstructuredSplineSurf.
+        """Print the default values of ``IGAUnstructuredSplineSurf`` object.
 
         Examples
         --------
@@ -636,12 +636,12 @@ class BoundaryFittedSplineParams(CoreObject):
             control_point_selection_type: ControlPointSelection = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the BoundaryFittedSplineParams.
+        """Initialize a ``BoundaryFittedSplineParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a BoundaryFittedSplineParams object with default parameters.
+            Model to create a ``BoundaryFittedSplineParams`` object with default parameters.
         degree_u: int, optional
             Degree of spline in u direction.
         degree_v: int, optional
@@ -665,7 +665,7 @@ class BoundaryFittedSplineParams(CoreObject):
         control_point_selection_type: ControlPointSelection, optional
             Spline control points selection type.
         json_data: dict, optional
-            JSON dictionary to create a BoundaryFittedSplineParams object with provided parameters.
+            JSON dictionary to create a ``BoundaryFittedSplineParams`` object with provided parameters.
 
         Examples
         --------
@@ -701,7 +701,7 @@ class BoundaryFittedSplineParams(CoreObject):
                     control_point_selection_type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "BoundaryFittedSplineParams")
                     json_data = param_json["BoundaryFittedSplineParams"] if "BoundaryFittedSplineParams" in param_json else {}
@@ -737,7 +737,7 @@ class BoundaryFittedSplineParams(CoreObject):
             control_points_count_w: int = None,
             n_refine: int = None,
             control_point_selection_type: ControlPointSelection = None):
-        """Set the default values of BoundaryFittedSplineParams.
+        """Set the default values of the ``BoundaryFittedSplineParams`` object.
 
         Parameters
         ----------
@@ -769,7 +769,7 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of BoundaryFittedSplineParams.
+        """Print the default values of ``BoundaryFittedSplineParams`` object.
 
         Examples
         --------
@@ -964,43 +964,43 @@ class QuadToSplineParams(CoreObject):
             projection_scope: ScopeDefinition = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the QuadToSplineParams.
+        """Initialize a ``QuadToSplineParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a QuadToSplineParams object with default parameters.
+            Model to create a ``QuadToSplineParams`` object with default parameters.
         feature_capture_type: SplineFeatureCaptureType, optional
             Feature capture options.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         feature_angle: float, optional
             Angle to capture the feature.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         corner_angle: float, optional
             Corner angle of the feature.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         shell_thickness: float, optional
             Thickness of shell.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         solid_shell: bool, optional
             Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         separate_by_zone: bool, optional
             Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
             Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
         project_on_geometry: bool, optional
             Option to project on geometry.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         use_projection_scope: bool, optional
             Option to use projection scope.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         projection_scope: ScopeDefinition, optional
             Scope to evaluate entities for projection.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+            This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
-            JSON dictionary to create a QuadToSplineParams object with provided parameters.
+            JSON dictionary to create a ``QuadToSplineParams`` object with provided parameters.
 
         Examples
         --------
@@ -1034,7 +1034,7 @@ class QuadToSplineParams(CoreObject):
                     projection_scope)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "QuadToSplineParams")
                     json_data = param_json["QuadToSplineParams"] if "QuadToSplineParams" in param_json else {}
@@ -1068,7 +1068,7 @@ class QuadToSplineParams(CoreObject):
             project_on_geometry: bool = None,
             use_projection_scope: bool = None,
             projection_scope: ScopeDefinition = None):
-        """Set the default values of QuadToSplineParams.
+        """Set the default values of the ``QuadToSplineParams`` object.
 
         Parameters
         ----------
@@ -1098,7 +1098,7 @@ class QuadToSplineParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of QuadToSplineParams.
+        """Print the default values of ``QuadToSplineParams`` object.
 
         Examples
         --------
@@ -1141,7 +1141,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def feature_capture_type(self) -> SplineFeatureCaptureType:
         """Feature capture options.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._feature_capture_type
 
@@ -1152,7 +1152,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def feature_angle(self) -> float:
         """Angle to capture the feature.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._feature_angle
 
@@ -1163,7 +1163,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def corner_angle(self) -> float:
         """Corner angle of the feature.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._corner_angle
 
@@ -1174,7 +1174,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def shell_thickness(self) -> float:
         """Thickness of shell.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._shell_thickness
 
@@ -1185,7 +1185,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def solid_shell(self) -> bool:
         """Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._solid_shell
 
@@ -1196,7 +1196,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def separate_by_zone(self) -> bool:
         """Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._separate_by_zone
 
@@ -1217,7 +1217,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def project_on_geometry(self) -> bool:
         """Option to project on geometry.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._project_on_geometry
 
@@ -1228,7 +1228,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def use_projection_scope(self) -> bool:
         """Option to use projection scope.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._use_projection_scope
 
@@ -1239,7 +1239,7 @@ class QuadToSplineParams(CoreObject):
     @property
     def projection_scope(self) -> ScopeDefinition:
         """Scope to evaluate entities for projection.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+        This is a beta parameter. The behavior and name may change in the future.
         """
         return self._projection_scope
 
@@ -1272,12 +1272,12 @@ class RefineSplineParams(CoreObject):
             spline_refinement_type: SplineRefinementType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the RefineSplineParams.
+        """Initialize a ``RefineSplineParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a RefineSplineParams object with default parameters.
+            Model to create a ``RefineSplineParams`` object with default parameters.
         refine_flag_u: bool, optional
             Indicates whether refinement is applied in u direction.
         refine_flag_v: bool, optional
@@ -1287,7 +1287,7 @@ class RefineSplineParams(CoreObject):
         spline_refinement_type: SplineRefinementType, optional
             Type of spline refinement. Currently, supports h-refinement and p-refinement.
         json_data: dict, optional
-            JSON dictionary to create a RefineSplineParams object with provided parameters.
+            JSON dictionary to create a ``RefineSplineParams`` object with provided parameters.
 
         Examples
         --------
@@ -1309,7 +1309,7 @@ class RefineSplineParams(CoreObject):
                     spline_refinement_type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "RefineSplineParams")
                     json_data = param_json["RefineSplineParams"] if "RefineSplineParams" in param_json else {}
@@ -1331,7 +1331,7 @@ class RefineSplineParams(CoreObject):
             refine_flag_v: bool = None,
             refine_flag_w: bool = None,
             spline_refinement_type: SplineRefinementType = None):
-        """Set the default values of RefineSplineParams.
+        """Set the default values of the ``RefineSplineParams`` object.
 
         Parameters
         ----------
@@ -1349,7 +1349,7 @@ class RefineSplineParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RefineSplineParams.
+        """Print the default values of ``RefineSplineParams`` object.
 
         Examples
         --------

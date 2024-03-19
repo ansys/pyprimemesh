@@ -48,7 +48,7 @@ class VTComposer(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -56,9 +56,9 @@ class VTComposer(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(params, VTComposerParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is VTComposerParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VTComposerParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VTComposer/SeparateFacesWithInteriorEdges"

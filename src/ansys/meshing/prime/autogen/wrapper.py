@@ -52,9 +52,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(wrapper_control_id, int):
-            raise TypeError("Invalid argument type passed for wrapper_control_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'wrapper_control_id'. Valid argument type is int.")
         if not isinstance(params, WrapParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapParams.")
         args = {"wrapper_control_id" : wrapper_control_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/Wrap"
@@ -86,9 +86,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(params, WrapperImproveQualityParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperImproveQualityParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapperImproveQualityParams.")
         args = {"part_id" : part_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/ImproveQuality"
@@ -120,9 +120,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         if not isinstance(params, WrapperCloseGapsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperCloseGapsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapperCloseGapsParams.")
         args = {"scope" : scope._jsonify(),
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/CloseGaps"
@@ -150,7 +150,7 @@ class Wrapper(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        This is a Beta API. The Behavior and implementation may change in future.
 
         Examples
         --------
@@ -158,9 +158,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(live_material_point, str):
-            raise TypeError("Invalid argument type passed for live_material_point, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'live_material_point'. Valid argument type is str.")
         if not isinstance(params, WrapperPatchFlowRegionsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperPatchFlowRegionsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapperPatchFlowRegionsParams.")
         args = {"live_material_point" : live_material_point,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/PatchFlowRegions"
