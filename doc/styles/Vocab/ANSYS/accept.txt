@@ -50,6 +50,7 @@ tetrahedra
 [Tt]opoEntities
 [Tt]opoFaces
 [Tt]opoVolumes
+(?i)towncrier
 [Uu]nmeshed
 xyz
 [Zz]onelet
