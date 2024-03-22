@@ -337,9 +337,12 @@ def get_available_local_port(init_port: int = defaults.port()):
         First available port.
     """
     port = init_port
-    while port_in_use(port) or port in _LOCAL_PORTS:
-        port += 1
-    _LOCAL_PORTS.append(port)
+    import socket
+
+    s = socket.socket()
+    s.bind(("", 0))
+    port = s.getsockname()[1]
+    s.close()
     return port
 
 

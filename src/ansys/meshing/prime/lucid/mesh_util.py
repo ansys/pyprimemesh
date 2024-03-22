@@ -118,6 +118,10 @@ class Mesh:
             prime.FileIO(self._model).export_mapdl_cdb(
                 file_name, prime.ExportMapdlCdbParams(self._model)
             )
+        elif fileext == ".k":
+            prime.FileIO(self._model).export_lsdyna_keyword_file(
+                file_name, prime.ExportLSDynaKeywordFileParams(self._model)
+            )
         elif fileext == ".cas" or file_name[-7:] == ".cas.gz":
             prime.FileIO(self._model).export_fluent_case(
                 file_name, prime.ExportFluentCaseParams(self._model, cff_format=False)
