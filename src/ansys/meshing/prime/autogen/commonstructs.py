@@ -387,12 +387,15 @@ class CopyZoneletsParams(CoreObject):
 
     def __initialize(
             self,
+            copy_labels: bool,
             copy_zones: bool):
+        self._copy_labels = copy_labels
         self._copy_zones = copy_zones
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            copy_labels: bool = None,
             copy_zones: bool = None,
             json_data : dict = None,
              **kwargs):
@@ -402,6 +405,9 @@ class CopyZoneletsParams(CoreObject):
         ----------
         model: Model
             Model to create a ``CopyZoneletsParams`` object with default parameters.
+        copy_labels: bool, optional
+            Option to copy labels of input zonelets to the corresponding copied zonelets.
+            This is a beta parameter. The behavior and name may change in the future.
         copy_zones: bool, optional
             Option to copy zones of input zonelets to corresponding copied zonelets.
         json_data: dict, optional
@@ -413,11 +419,13 @@ class CopyZoneletsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["copyLabels"] if "copyLabels" in json_data else None,
                 json_data["copyZones"] if "copyZones" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [copy_zones])
+            all_field_specified = all(arg is not None for arg in [copy_labels, copy_zones])
             if all_field_specified:
                 self.__initialize(
+                    copy_labels,
                     copy_zones)
             else:
                 if model is None:
@@ -426,6 +434,7 @@ class CopyZoneletsParams(CoreObject):
                     param_json = model._communicator.initialize_params(model, "CopyZoneletsParams")
                     json_data = param_json["CopyZoneletsParams"] if "CopyZoneletsParams" in param_json else {}
                     self.__initialize(
+                        copy_labels if copy_labels is not None else ( CopyZoneletsParams._default_params["copy_labels"] if "copy_labels" in CopyZoneletsParams._default_params else (json_data["copyLabels"] if "copyLabels" in json_data else None)),
                         copy_zones if copy_zones is not None else ( CopyZoneletsParams._default_params["copy_zones"] if "copy_zones" in CopyZoneletsParams._default_params else (json_data["copyZones"] if "copyZones" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -436,11 +445,14 @@ class CopyZoneletsParams(CoreObject):
 
     @staticmethod
     def set_default(
+            copy_labels: bool = None,
             copy_zones: bool = None):
         """Set the default values of the ``CopyZoneletsParams`` object.
 
         Parameters
         ----------
+        copy_labels: bool, optional
+            Option to copy labels of input zonelets to the corresponding copied zonelets.
         copy_zones: bool, optional
             Option to copy zones of input zonelets to corresponding copied zonelets.
         """
@@ -461,15 +473,28 @@ class CopyZoneletsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._copy_labels is not None:
+            json_data["copyLabels"] = self._copy_labels
         if self._copy_zones is not None:
             json_data["copyZones"] = self._copy_zones
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "copy_zones :  %s" % (self._copy_zones)
+        message = "copy_labels :  %s\ncopy_zones :  %s" % (self._copy_labels, self._copy_zones)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def copy_labels(self) -> bool:
+        """Option to copy labels of input zonelets to the corresponding copied zonelets.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._copy_labels
+
+    @copy_labels.setter
+    def copy_labels(self, value: bool):
+        self._copy_labels = value
 
     @property
     def copy_zones(self) -> bool:
