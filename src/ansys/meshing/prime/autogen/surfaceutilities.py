@@ -139,6 +139,46 @@ class SurfaceUtilities(CoreObject):
         self._model._print_logs_after_command("copy_face_zonelets", CopyZoneletsResults(model = self._model, json_data = result))
         return CopyZoneletsResults(model = self._model, json_data = result)
 
+    def project_topo_faces_on_geometry(self, topo_faces : Iterable[int], params : ProjectOnGeometryParams) -> ProjectOnGeometryResults:
+        """ Project nodes of given topofaces on geometry associated to those topofaces.
+
+
+        Parameters
+        ----------
+        topo_faces : Iterable[int]
+            Ids of topofaces to be used to project nodes on the geometry.
+        params : ProjectOnGeometryParams
+            Parameters used for projecting topoface nodes on geometry.
+
+        Returns
+        -------
+        ProjectOnGeometryResults
+            Returns the ProjectOnGeometryResults.
+
+
+        Notes
+        -----
+        This is a Beta API. The Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> params = prime.ProjectOnGeometryParams(model = model)
+        >>> results = surface_utils.project_topo_faces_on_geometry(topofaces, params)
+
+        """
+        if not isinstance(topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
+        if not isinstance(params, ProjectOnGeometryParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ProjectOnGeometryParams.")
+        args = {"topo_faces" : topo_faces,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/ProjectTopoFacesOnGeometry"
+        self._model._print_beta_api_warning("project_topo_faces_on_geometry")
+        self._model._print_logs_before_command("project_topo_faces_on_geometry", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("project_topo_faces_on_geometry", ProjectOnGeometryResults(model = self._model, json_data = result))
+        return ProjectOnGeometryResults(model = self._model, json_data = result)
+
     def fill_holes_at_plane(self, part_id : int, face_zonelets : Iterable[int], plane_points : Iterable[float], params : FillHolesAtPlaneParams) -> FillHolesAtPlaneResults:
         """ Fill holes in given face zonelets at given plane.
 

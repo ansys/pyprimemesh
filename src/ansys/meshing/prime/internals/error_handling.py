@@ -294,6 +294,7 @@ prime_error_messages = {
     ErrorCode.THINVOLUMECONTROLINVALIDNUMBEROFLAYER: "Number of layer in thin volume mesh should be greater than 0.",
     ErrorCode.THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED: "Thin volume mesh controls not supported for part with topology data.",
     ErrorCode.THINVOLUMECONTROLINVALIDCONTROL: "Same face scope is set as target for multiple thin volume controls.",
+    ErrorCode.EXPORTSTLFAILED: "Export STL failed.",
     ErrorCode.EXPORTSTLFAILEDWITHTOPOLOGY: "Export STL not supported for part with topology data.",
     ErrorCode.EXPORTSTLFAILEDWITHQUADFACES: "Export STL not supported for mesh with quad faces.",
     ErrorCode.EXPORTSTLFAILEDWITHPOLYFACES: "Export STL not supported for mesh with poly faces.",

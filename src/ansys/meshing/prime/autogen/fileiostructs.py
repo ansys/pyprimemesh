@@ -3148,6 +3148,159 @@ class ExportLSDynaKeywordFileParams(CoreObject):
     def compute_spotweld_thickness(self, value: bool):
         self._compute_spotweld_thickness = value
 
+class ExportLSDynaResults(CoreObject):
+    """Results associated with the LS-DYNA export.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            summary_log: str,
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
+        self._summary_log = summary_log
+        self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            summary_log: str = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ExportLSDynaResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ExportLSDynaResults`` object with default parameters.
+        summary_log: str, optional
+            Summary log for the import operation in json format.
+            This is a beta parameter. The behavior and name may change in the future.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+            This is a beta parameter. The behavior and name may change in the future.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the operation.
+            This is a beta parameter. The behavior and name may change in the future.
+        json_data: dict, optional
+            JSON dictionary to create a ``ExportLSDynaResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> export_lsdyna_results = prime.ExportLSDynaResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["summaryLog"] if "summaryLog" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [summary_log, error_code, warning_codes])
+            if all_field_specified:
+                self.__initialize(
+                    summary_log,
+                    error_code,
+                    warning_codes)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExportLSDynaResults")
+                    json_data = param_json["ExportLSDynaResults"] if "ExportLSDynaResults" in param_json else {}
+                    self.__initialize(
+                        summary_log if summary_log is not None else ( ExportLSDynaResults._default_params["summary_log"] if "summary_log" in ExportLSDynaResults._default_params else (json_data["summaryLog"] if "summaryLog" in json_data else None)),
+                        error_code if error_code is not None else ( ExportLSDynaResults._default_params["error_code"] if "error_code" in ExportLSDynaResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ExportLSDynaResults._default_params["warning_codes"] if "warning_codes" in ExportLSDynaResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            summary_log: str = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
+        """Set the default values of the ``ExportLSDynaResults`` object.
+
+        Parameters
+        ----------
+        summary_log: str, optional
+            Summary log for the import operation in json format.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the operation.
+        """
+        args = locals()
+        [ExportLSDynaResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ExportLSDynaResults`` object.
+
+        Examples
+        --------
+        >>> ExportLSDynaResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExportLSDynaResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._summary_log is not None:
+            json_data["summaryLog"] = self._summary_log
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "summary_log :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def summary_log(self) -> str:
+        """Summary log for the import operation in json format.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._summary_log
+
+    @summary_log.setter
+    def summary_log(self, value: str):
+        self._summary_log = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the operation.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
 class ExportLSDynaIgaKeywordFileParams(CoreObject):
     """Parameters for exporting LS-DYNA IGA keyword file.
     """
