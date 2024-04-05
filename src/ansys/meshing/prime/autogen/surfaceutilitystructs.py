@@ -292,6 +292,287 @@ class FixInvalidNormalNodeResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+class ProjectOnGeometryParams(CoreObject):
+    """Parameters used to project topoface nodes on associated geometry.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            project_only_mid_nodes: bool,
+            project_on_facets_if_cadnot_found: bool):
+        self._project_only_mid_nodes = project_only_mid_nodes
+        self._project_on_facets_if_cadnot_found = project_on_facets_if_cadnot_found
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            project_only_mid_nodes: bool = None,
+            project_on_facets_if_cadnot_found: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ProjectOnGeometryParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ProjectOnGeometryParams`` object with default parameters.
+        project_only_mid_nodes: bool, optional
+            Option to project only the mid nodes.
+            This is a beta parameter. The behavior and name may change in the future.
+        project_on_facets_if_cadnot_found: bool, optional
+            Option to project on facet if geometry is not found.
+            This is a beta parameter. The behavior and name may change in the future.
+        json_data: dict, optional
+            JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> project_on_geometry_params = prime.ProjectOnGeometryParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["projectOnlyMidNodes"] if "projectOnlyMidNodes" in json_data else None,
+                json_data["projectOnFacetsIfCADNotFound"] if "projectOnFacetsIfCADNotFound" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [project_only_mid_nodes, project_on_facets_if_cadnot_found])
+            if all_field_specified:
+                self.__initialize(
+                    project_only_mid_nodes,
+                    project_on_facets_if_cadnot_found)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ProjectOnGeometryParams")
+                    json_data = param_json["ProjectOnGeometryParams"] if "ProjectOnGeometryParams" in param_json else {}
+                    self.__initialize(
+                        project_only_mid_nodes if project_only_mid_nodes is not None else ( ProjectOnGeometryParams._default_params["project_only_mid_nodes"] if "project_only_mid_nodes" in ProjectOnGeometryParams._default_params else (json_data["projectOnlyMidNodes"] if "projectOnlyMidNodes" in json_data else None)),
+                        project_on_facets_if_cadnot_found if project_on_facets_if_cadnot_found is not None else ( ProjectOnGeometryParams._default_params["project_on_facets_if_cadnot_found"] if "project_on_facets_if_cadnot_found" in ProjectOnGeometryParams._default_params else (json_data["projectOnFacetsIfCADNotFound"] if "projectOnFacetsIfCADNotFound" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            project_only_mid_nodes: bool = None,
+            project_on_facets_if_cadnot_found: bool = None):
+        """Set the default values of the ``ProjectOnGeometryParams`` object.
+
+        Parameters
+        ----------
+        project_only_mid_nodes: bool, optional
+            Option to project only the mid nodes.
+        project_on_facets_if_cadnot_found: bool, optional
+            Option to project on facet if geometry is not found.
+        """
+        args = locals()
+        [ProjectOnGeometryParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ProjectOnGeometryParams`` object.
+
+        Examples
+        --------
+        >>> ProjectOnGeometryParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ProjectOnGeometryParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._project_only_mid_nodes is not None:
+            json_data["projectOnlyMidNodes"] = self._project_only_mid_nodes
+        if self._project_on_facets_if_cadnot_found is not None:
+            json_data["projectOnFacetsIfCADNotFound"] = self._project_on_facets_if_cadnot_found
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "project_only_mid_nodes :  %s\nproject_on_facets_if_cadnot_found :  %s" % (self._project_only_mid_nodes, self._project_on_facets_if_cadnot_found)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def project_only_mid_nodes(self) -> bool:
+        """Option to project only the mid nodes.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._project_only_mid_nodes
+
+    @project_only_mid_nodes.setter
+    def project_only_mid_nodes(self, value: bool):
+        self._project_only_mid_nodes = value
+
+    @property
+    def project_on_facets_if_cadnot_found(self) -> bool:
+        """Option to project on facet if geometry is not found.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._project_on_facets_if_cadnot_found
+
+    @project_on_facets_if_cadnot_found.setter
+    def project_on_facets_if_cadnot_found(self, value: bool):
+        self._project_on_facets_if_cadnot_found = value
+
+class ProjectOnGeometryResults(CoreObject):
+    """Results associated with projection of topofaces nodes on its geometry.
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            success: bool,
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
+        self._success = success
+        self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            success: bool = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ProjectOnGeometryResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ProjectOnGeometryResults`` object with default parameters.
+        success: bool, optional
+            Defines the operation was successful or not.
+            This is a beta parameter. The behavior and name may change in the future.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+            This is a beta parameter. The behavior and name may change in the future.
+        warning_codes: List[WarningCode], optional
+            Warning code associated with operation.
+            This is a beta parameter. The behavior and name may change in the future.
+        json_data: dict, optional
+            JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> project_on_geometry_results = prime.ProjectOnGeometryResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["success"] if "success" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [success, error_code, warning_codes])
+            if all_field_specified:
+                self.__initialize(
+                    success,
+                    error_code,
+                    warning_codes)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ProjectOnGeometryResults")
+                    json_data = param_json["ProjectOnGeometryResults"] if "ProjectOnGeometryResults" in param_json else {}
+                    self.__initialize(
+                        success if success is not None else ( ProjectOnGeometryResults._default_params["success"] if "success" in ProjectOnGeometryResults._default_params else (json_data["success"] if "success" in json_data else None)),
+                        error_code if error_code is not None else ( ProjectOnGeometryResults._default_params["error_code"] if "error_code" in ProjectOnGeometryResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ProjectOnGeometryResults._default_params["warning_codes"] if "warning_codes" in ProjectOnGeometryResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            success: bool = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
+        """Set the default values of the ``ProjectOnGeometryResults`` object.
+
+        Parameters
+        ----------
+        success: bool, optional
+            Defines the operation was successful or not.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning code associated with operation.
+        """
+        args = locals()
+        [ProjectOnGeometryResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ProjectOnGeometryResults`` object.
+
+        Examples
+        --------
+        >>> ProjectOnGeometryResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ProjectOnGeometryResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._success is not None:
+            json_data["success"] = self._success
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "success :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._success, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def success(self) -> bool:
+        """Defines the operation was successful or not.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._success
+
+    @success.setter
+    def success(self, value: bool):
+        self._success = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning code associated with operation.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
 class FillHolesAtPlaneParams(CoreObject):
     """Parameters to fill holes at given plane.
     """

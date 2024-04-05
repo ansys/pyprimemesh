@@ -49,7 +49,7 @@ class ThinVolumeControl(CoreObject):
         Parameters
         ----------
         entities : ScopeDefinition
-            Scope definition entities.
+            Scope definition source face entities.
 
         Returns
         -------
@@ -78,7 +78,7 @@ class ThinVolumeControl(CoreObject):
         Parameters
         ----------
         entities : ScopeDefinition
-            Scope definition entities.
+            Scope definition for target face entities.
 
         Returns
         -------
@@ -98,6 +98,40 @@ class ThinVolumeControl(CoreObject):
         self._model._print_logs_before_command("set_target_scope", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_target_scope", SetScopeResults(model = self._model, json_data = result))
+        return SetScopeResults(model = self._model, json_data = result)
+
+    def set_volume_scope(self, entities : ScopeDefinition) -> SetScopeResults:
+        """ Sets the volume scope of thin volume control.
+
+
+        Parameters
+        ----------
+        entities : ScopeDefinition
+            Scope definition for volume entities.
+
+        Returns
+        -------
+        SetScopeResults
+            Returns SetScopeResults.
+
+
+        Notes
+        -----
+        This is a Beta API. The Behavior and implementation may change in future.
+
+        Examples
+        --------
+        >>> results = thin_vol_ctrl.set_volume_scope(entities)
+
+        """
+        if not isinstance(entities, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
+        args = {"entities" : entities._jsonify()}
+        command_name = "PrimeMesh::ThinVolumeControl/SetVolumeScope"
+        self._model._print_beta_api_warning("set_volume_scope")
+        self._model._print_logs_before_command("set_volume_scope", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_volume_scope", SetScopeResults(model = self._model, json_data = result))
         return SetScopeResults(model = self._model, json_data = result)
 
     @property

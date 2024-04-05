@@ -268,6 +268,8 @@ class ErrorCode(enum.IntEnum):
     """Writing size field failed."""
     MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH = 533
     """Mesh not found to export fluent meshing mesh."""
+    EXPORTSTLFAILED = 549
+    """Export STL failed."""
     EXPORTSTLFAILEDWITHTOPOLOGY = 553
     """Export STL not supported for part with topology data."""
     EXPORTSTLFAILEDWITHQUADFACES = 554
