@@ -82,21 +82,32 @@ Four CAD import routes are available in PyPrimeMesh:
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
 
-.. note::
-    Program Controlled and SpaceClaim route imports JT files containing only faceted data. Workbench and
-    Native does not support importing JT files containing only faceted data.
+ * ``Discovery``: Uses Discovery to import supported ``*.dsco`` and  ``*.scdocx`` files.
 
 To view the CAD supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
 
 .. note::
-    When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration
+*   Program Controlled and SpaceClaim route imports JT files containing only faceted data. Workbench and
+    Native does not support importing JT files containing only faceted data.
+
+*   Transmogrifier supports files from Workbench(pmdb,agdb), JT(faceted data from ``(*.jt/*.plmxml)``,
+	XC ``(.fmdb, .sab/.sat, .stl, .msh/.tgf, .x_t/.x_b)``.
+
+*  SpaceCliam supports files with ``*.scdoc``, ``*.scdocx`` extension.
+
+*  Discovery supports files with ``*.dsco``, ``*.scdocx`` extension.
+
+*   When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration
     and in-app defaults are consistent in the deployed environment.
 
-.. note::
-    You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
+*   You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
     while installing Ansys Workbench. 
 
+
+
+
+    
 
 Append CAD files
 ----------------
