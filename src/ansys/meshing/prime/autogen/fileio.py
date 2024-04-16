@@ -540,7 +540,7 @@ class FileIO(CoreObject):
         self._model._print_logs_after_command("export_fluent_meshing_mesh", FileWriteResults(model = self._model, json_data = result))
         return FileWriteResults(model = self._model, json_data = result)
 
-    def export_lsdyna_keyword_file(self, file_name : str, export_params : ExportLSDynaKeywordFileParams) -> FileWriteResults:
+    def export_lsdyna_keyword_file(self, file_name : str, export_params : ExportLSDynaKeywordFileParams) -> ExportLSDynaResults:
         """ Export FEA LS-DYNA Keyword file for solid, surface mesh or both.
 
 
@@ -553,7 +553,7 @@ class FileIO(CoreObject):
 
         Returns
         -------
-        FileWriteResults
+        ExportLSDynaResults
             Returns FileWriteResults.
 
         Notes
@@ -575,8 +575,8 @@ class FileIO(CoreObject):
         self._model._print_beta_api_warning("export_lsdyna_keyword_file")
         self._model._print_logs_before_command("export_lsdyna_keyword_file", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("export_lsdyna_keyword_file", FileWriteResults(model = self._model, json_data = result))
-        return FileWriteResults(model = self._model, json_data = result)
+        self._model._print_logs_after_command("export_lsdyna_keyword_file", ExportLSDynaResults(model = self._model, json_data = result))
+        return ExportLSDynaResults(model = self._model, json_data = result)
 
     def export_lsdyna_iga_keyword_file(self, file_name : str, export_params : ExportLSDynaIgaKeywordFileParams) -> FileWriteResults:
         """ Export IGA LS-DYNA Keyword file for solid, surface splines, or both.
