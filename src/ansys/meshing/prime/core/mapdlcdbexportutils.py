@@ -681,15 +681,21 @@ class _MaterialProcessor:
     def _process_expansion_data(self, property_dict, material, mat_id):
         expansion_data = ''
         zero = 0.0
+        data = []
+        parameters = []
+        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
+            parameters = property_dict['Parameters']
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         exp_type = 'ISO'
-        if 'ZERO' in property_dict['Parameters']:
-            zero = float(property_dict['Parameters']['ZERO'])
-        if 'TYPE' in property_dict['Parameters']:
-            exp_type = property_dict['Parameters']['TYPE']
+        if 'ZERO' in parameters:
+            zero = float(parameters['ZERO'])
+        if 'TYPE' in parameters:
+            exp_type = parameters['TYPE']
         if (
-            'DEPENDENCIES' in property_dict['Parameters']
-            or 'PORE FLUID' in property_dict['Parameters']
-            or 'USER' in property_dict['Parameters']
+            'DEPENDENCIES' in parameters
+            or 'PORE FLUID' in parameters
+            or 'USER' in parameters
         ):
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
@@ -702,31 +708,32 @@ class _MaterialProcessor:
                 f"not processed for material {material}."
             )
             return ''
-        if 'ZERO' in property_dict['Parameters']:
-            expansion_data += f"MP,REFT,{mat_id},{zero}"
+        if 'ZERO' in parameters:
+            expansion_data += f"MP,REFT,{mat_id},{zero}\n"
         if exp_type == 'ISO':
             temperature = [None]
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
-            if 'a' in property_dict['Data']:
-                ctes = property_dict['Data']['a']
+            ctes = [None]
+            if 'Temperature' in data:
+                temperature = data['Temperature']
+            if 'a' in data:
+                ctes = data['a']
             expansion_data += f"TB, CTE, {mat_id},,,\n"
             for temp, cte in zip(temperature, ctes):
                 if temp is not None:
                     expansion_data += f"TBTEMP,{temp}\n"
                 expansion_data += f"TBDATA, 1, {cte}\n"
         if exp_type == 'ORTHO':
-            if 'A11' in property_dict['Data']:
-                ctexs = property_dict['Data']['A11']
+            if 'A11' in data:
+                ctexs = data['A11']
             cteys = ['0.0'] * len(ctexs)
-            if 'A22' in property_dict['Data']:
-                cteys = property_dict['Data']['A22']
+            if 'A22' in data:
+                cteys = data['A22']
             ctezs = ['0.0'] * len(ctexs)
-            if 'A33' in property_dict['Data']:
-                ctezs = property_dict['Data']['A33']
+            if 'A33' in data:
+                ctezs = data['A33']
             temperature = [None] * len(ctexs)
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
             expansion_data += f"TB, CTE, {mat_id},,,\n"
             for temp, ctex, ctey, ctez in zip(temperature, ctexs, cteys, ctezs):
                 if temp is not None:
@@ -739,22 +746,26 @@ class _MaterialProcessor:
         damping_data = ''
         if property_dict['Parameters'] is None:
             self._logger.warning(f"*DAMPING does not have parameters to process.")
-        if 'ALPHA' in property_dict['Parameters']:
-            damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
-        if float(property_dict['Parameters']['BETA']) != 0.0:
-            self._logger.warning(f"Parameter {'BETA'} on *DAMPING is not processed.")
-        if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
-            self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
+        else:
+            if 'ALPHA' in property_dict['Parameters']:
+                damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
+            if float(property_dict['Parameters']['BETA']) != 0.0:
+                self._logger.warning(f"Parameter {'BETA'} on *DAMPING is not processed.")
+            if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
+                self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
         damping_data += f"\n"
         return damping_data
 
     def _process_density(self, property_dict, material, mat_id):
         density_data = ''
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if "Parameters" in property_dict and property_dict['Parameters'] is not None:
             self._logger.warning(f"Parameter on *DENSITY are not processed.")
-        density = property_dict['Data']['Mass density']
-        if 'Temperature' in property_dict['Data']:
-            temperature = property_dict['Data']['Temperature']
+        density = data['Mass density']
+        if 'Temperature' in data:
+            temperature = data['Temperature']
             if len(density) != len(temperature):
                 self._logger.warning(
                     f"data values on *DENSITY are not consistent for material {material}."
@@ -773,16 +784,19 @@ class _MaterialProcessor:
 
     def _process_elastic_modulus(self, property_dict, material, mat_id):
         elastic_modulus = ''
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if property_dict["Parameters"]["TYPE"] == "ISOTROPIC":
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")
             # return ''
-            youngs_mod = property_dict['Data']['E']
-            nu = property_dict['Data']['V']
-            # temperature = property_dict['Data']['Temperature']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            youngs_mod = data['E']
+            nu = data['V']
+            # temperature = data['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 if len(youngs_mod) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
@@ -820,13 +834,13 @@ class _MaterialProcessor:
                     f" this is not processed."
                 )
                 return ''
-            knn = property_dict['Data']['E/Knn']
-            kss = property_dict['Data']['G1/Kss']
-            ktt = property_dict['Data']['G2/Ktt']
+            knn = data['E/Knn']
+            kss = data['G1/Kss']
+            ktt = data['G2/Ktt']
             t = self._cohezive_zone_thickness_data[material]['Thickness']
-            # temperature = property_dict['Data']['Temperature']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            # temperature = data['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 if len(knn) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
@@ -861,6 +875,9 @@ class _MaterialProcessor:
 
     def _process_plastic_data(self, property_dict, material, mat_id):
         plastic_data = ''
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if property_dict["Parameters"]["HARDENING"] != "ISOTROPIC":
             self._logger.warning(
                 f"Only HARDENING=ISOTROPIC is processed, "
@@ -870,12 +887,12 @@ class _MaterialProcessor:
             return ''
         if self._material_linked_to_zone_type[material] == 'Cohesive':
             return ''
-        strains = property_dict['Data']['Plastic strain']
-        stresses = property_dict['Data']['Yield stress']
-        # temperature = property_dict['Data']['Temperature']
+        strains = data['Plastic strain']
+        stresses = data['Yield stress']
+        # temperature = data['Temperature']
         data_points = len(strains)
-        if 'Temperature' in property_dict['Data']:
-            temperature = property_dict['Data']['Temperature']
+        if 'Temperature' in data:
+            temperature = data['Temperature']
             unique_temperatures = len(list(set(temperature)))
             data_points = len(strains) / unique_temperatures
             if len(stresses) != len(temperature):
@@ -889,7 +906,7 @@ class _MaterialProcessor:
         plastic_data += f"TB,PLAS,{mat_id},,{int(data_points)},MISO\n"
         curr_temp = None
         for i, strain in enumerate(strains):
-            if 'Temperature' in property_dict['Data']:
+            if 'Temperature' in data:
                 if curr_temp != temperature[i]:
                     curr_temp = temperature[i]
                     plastic_data += f"TBTEMP,{curr_temp}\n"
@@ -900,6 +917,9 @@ class _MaterialProcessor:
     def _process_hyperelastic_data(self, property_dict, material, mat_id):
         hyperelastic_data = ''
         param_keys = property_dict["Parameters"].keys()
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if (
             'REDUCED POLYNOMIAL' not in param_keys
             and 'YEOH' not in param_keys
@@ -915,8 +935,8 @@ class _MaterialProcessor:
         if self._material_linked_to_zone_type[material] == 'Cohesive':
             return ''
         if 'NEO HOOKE' in param_keys:
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -924,10 +944,10 @@ class _MaterialProcessor:
                 )
                 temp_data_points = 1
                 temperature = [None]
-            if 'C10' in property_dict['Data'].keys():
-                c10 = property_dict['Data']['C10']
-                if 'D1' in property_dict['Data'].keys():
-                    d1 = property_dict['Data']['D1']
+            if 'C10' in data.keys():
+                c10 = data['C10']
+                if 'D1' in data.keys():
+                    d1 = data['D1']
                 else:
                     d1 = [0.0] * len(c10)
             hyperelastic_data += f"TB,HYPE,{mat_id},,,NEO\n"
@@ -936,8 +956,8 @@ class _MaterialProcessor:
                     hyperelastic_data += f"TBTEMP, {temperature[i]}\n"
                 hyperelastic_data += f"TBDATA, 1, {float(c10[i])*2}, {d1[i]}\n"
         if 'REDUCED POLYNOMIAL' in param_keys or 'YEOH' in param_keys:
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -946,25 +966,25 @@ class _MaterialProcessor:
                 temp_data_points = 1
                 temperature = [None]
             number_of_constants = 3
-            if 'C10' in property_dict['Data'].keys():
+            if 'C10' in data.keys():
                 number_of_constants = 1
-                c10 = property_dict['Data']['C10']
-                if 'D1' in property_dict['Data'].keys():
-                    d1 = property_dict['Data']['D1']
+                c10 = data['C10']
+                if 'D1' in data.keys():
+                    d1 = data['D1']
                 else:
                     d1 = [0.0] * len(c10)
-            if 'C20' in property_dict['Data'].keys():
+            if 'C20' in data.keys():
                 number_of_constants = 2
-                c20 = property_dict['Data']['C20']
-                if 'D2' in property_dict['Data'].keys():
-                    d2 = property_dict['Data']['D2']
+                c20 = data['C20']
+                if 'D2' in data.keys():
+                    d2 = data['D2']
                 else:
                     d2 = [0.0] * len(c20)
-            if 'C30' in property_dict['Data'].keys():
+            if 'C30' in data.keys():
                 number_of_constants = 3
-                c30 = property_dict['Data']['C30']
-                if 'D3' in property_dict['Data'].keys():
-                    d3 = property_dict['Data']['D3']
+                c30 = data['C30']
+                if 'D3' in data.keys():
+                    d3 = data['D3']
                 else:
                     d3 = [0.0] * len(c30)
             hyperelastic_data += f"TB,HYPE,{mat_id},,{number_of_constants},YEOH\n"
@@ -982,8 +1002,8 @@ class _MaterialProcessor:
                 else:
                     pass
         # if 'REDUCED POLYNOMIAL' in param_keys:
-        #     if 'Temperature' in property_dict['Data']:
-        #         temperature = property_dict['Data']['Temperature']
+        #     if 'Temperature' in data:
+        #         temperature = data['Temperature']
         #         temp_data_points = len(temperature)
         #     else:
         #         self._logger.warning(
@@ -1408,21 +1428,24 @@ class _JointMaterialProcessor:
         comp4_str = "Angle1"
         comp5_str = "Angle2"
         comp6_str = "Angle3"
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         # self._logger.info("property_dict")
         # self._logger.info(property_dict)
-        # self._logger.info(property_dict['Data'])
-        if comp1_str in property_dict['Data']:
-            ref_length[0] = property_dict['Data'][comp1_str]
-        if comp2_str in property_dict['Data']:
-            ref_length[1] = property_dict['Data'][comp2_str]
-        if comp3_str in property_dict['Data']:
-            ref_length[2] = property_dict['Data'][comp3_str]
-        if comp4_str in property_dict['Data']:
-            ref_length[3] = property_dict['Data'][comp4_str]
-        if comp5_str in property_dict['Data']:
-            ref_length[4] = property_dict['Data'][comp5_str]
-        if comp6_str in property_dict['Data']:
-            ref_length[5] = property_dict['Data'][comp6_str]
+        # self._logger.info(data)
+        if comp1_str in data:
+            ref_length[0] = data[comp1_str]
+        if comp2_str in data:
+            ref_length[1] = data[comp2_str]
+        if comp3_str in data:
+            ref_length[2] = data[comp3_str]
+        if comp4_str in data:
+            ref_length[3] = data[comp4_str]
+        if comp5_str in data:
+            ref_length[4] = data[comp5_str]
+        if comp6_str in data:
+            ref_length[5] = data[comp6_str]
         return ref_length
 
 
@@ -1464,6 +1487,27 @@ class _BoundaryProcessor:
 
     def get_boundary_commands_by_id(self, boundary_id):
         pass
+
+    def get_boundary_comp_name_with_base_motion(self, base_motion_name):
+        boundaries_data = self._boundaries_data
+        comp_names = []
+        for boundary_data in boundaries_data:
+            if 'Parameters' in boundary_data:
+                params = boundary_data['Parameters']
+                if params is not None and 'BASE NAME' in params:
+                    if params['BASE NAME'] == base_motion_name:
+                        data_lines = boundary_data['Data']
+                        if data_lines is not None:
+                            for data_line in data_lines:
+                                comp_names.append(str(data_line['node_set']))
+                else:
+                    if base_motion_name == "":
+                        data_lines = boundary_data['Data']
+                        if data_lines is not None:
+                            for data_line in data_lines:
+                                comp_names.append(str(data_line['node_set']))
+
+        return comp_names
 
     def _get_commands(self, boundary_data):
         # self._logger.info("boundary data is ")
@@ -2572,17 +2616,18 @@ class _StepProcessor:
         if self._simulation_data is not None:
             if "ConnectorBehavior" in self._simulation_data:
                 all_conn_behavior = self._simulation_data['ConnectorBehavior']
-                for mat in all_conn_behavior:
-                    conn_mat = all_conn_behavior[mat]
-                    if 'CONNECTOR DAMPING' in conn_mat:
-                        for conn_damp in conn_mat['CONNECTOR DAMPING']:
-                            if 'Parameters' in conn_damp:
-                                if (
-                                    "TYPE" in conn_damp['Parameters']
-                                    and conn_damp['Parameters']['TYPE'] == 'VISCOUS'
-                                ):
-                                    modopt_method = 'QRDAMP'
-                                    break
+                if all_conn_behavior:
+                    for mat in all_conn_behavior:
+                        conn_mat = all_conn_behavior[mat]
+                        if conn_mat and 'CONNECTOR DAMPING' in conn_mat:
+                            for conn_damp in conn_mat['CONNECTOR DAMPING']:
+                                if conn_damp and 'Parameters' in conn_damp:
+                                    if (
+                                        "TYPE" in conn_damp['Parameters']
+                                        and conn_damp['Parameters']['TYPE'] == 'VISCOUS'
+                                    ):
+                                        modopt_method = 'QRDAMP'
+                                        break
         frequency_analysis_commands += (
             f'! -------------------------- STEP: {self._step_counter} -----------------------\n'
         )
@@ -2721,7 +2766,7 @@ class _StepProcessor:
                         for modal_ouput in output['Data']['ModalOutput']:
                             # modal_ouput = output['ModalOutput']
                             for key in modal_ouput['Data']['keys']:
-                                if key in ["GV", "GA", "GPV", "GPA"]:
+                                if key in ["GV", "GA", "GPV", "GPA", "A1", "A2", "A3"]:
                                     has_velocities = True
         return has_modal_output, has_velocities
 
@@ -2837,7 +2882,7 @@ class _StepProcessor:
                     for nodeout in output['Data']['NodeOutput']:
                         # nodeout = output['NodeOutput']
                         for key in nodeout['Data']['keys']:
-                            if key in ["RF", "U", "UT"]:
+                            if key in ["RF", "U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
                                 output_analysis_commands += "OUTRES, "
                                 if key == "RF":
                                     output_analysis_commands += "RSOL, "
@@ -2853,7 +2898,7 @@ class _StepProcessor:
                                             output_analysis_commands += f'{nfreq}, '
                                         else:
                                             output_analysis_commands += 'ALL, '
-                                elif key == "U" or key == "UT":
+                                elif key in ["U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
                                     output_analysis_commands += "NSOL, "
                                     if time_points is not None:
                                         output_analysis_commands += f'%{time_points}%, '
@@ -3039,6 +3084,9 @@ class _StepProcessor:
                         base_name = ""
                         if 'BASE NAME' in params:
                             base_name = params['BASE NAME']
+                        boundaries_for_motion = self.get_step_boundary_component_data(
+                            self._curr_step["Boundary"], base_name
+                        )
                         dof = int(params['DOF'])
                         scale = 0
                         if 'SCALE' in params:
@@ -3052,12 +3100,11 @@ class _StepProcessor:
                             vector_commands += f'SFEDELE, ALL, ALL, ALL \n'
                             vector_commands += f'ACEL, 0, 0, 0 \n'
                             vector_commands += f'\n'
-                        vector_commands += f"F, {base_name}, {dof_map[dof]}, 1\n"
-                        count_load_vectors += 1
-                        self._modal_load_vectors[count_load_vectors] = {
-                            'SET': base_name,
-                            "COMP": dof_map[dof],
-                        }
+                        for item in boundaries_for_motion:
+                            vector_commands += f"F, {item}, {dof_map[dof]}, 1\n"
+                            count_load_vectors += 1
+                            self._modal_load_vectors[count_load_vectors] = {
+                                'SET': base_name, "COMP": dof_map[dof]}
         # else:
         # vector_commands += 'SOLVE\n'
         return vector_commands
@@ -3139,6 +3186,20 @@ class _StepProcessor:
         boundary_commands += boundary_processor.get_all_boundary_commands()
         self._boundary_ampl_commands += boundary_processor.get_ampl_commands()
         return boundary_commands
+
+    def get_step_boundary_component_data(self, boundaries_data, base_name):
+        boundary_processor = _BoundaryProcessor(
+            self._model,
+            boundaries_data,
+            self._step_start_time,
+            self._step_end_time,
+            sim_data=self._simulation_data
+        )
+        # TODO this needs to be in List of boundaries instead of single Boundary
+        comp_names = []
+        comp_names.extend(
+            boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
+        return comp_names
 
     def get_global_damping_commnads(self, global_damping_data):
         global_damping_processor = _GlobalDampingProcessing(self._model, global_damping_data)

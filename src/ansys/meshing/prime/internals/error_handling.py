@@ -47,7 +47,7 @@ prime_error_messages = {
     ErrorCode.PERIODICSURFACESNOTSUPPORTEDFORPRISMS: "Periodic surfaces selected for prism generation, not supported.",
     ErrorCode.ALREADYVOLUMEMESHED: "Already volume meshed.",
     ErrorCode.INCREMENTALVOLUMEMESHINGNOTSUPPORTED: "Incremental volume meshing is not supported.",
-    ErrorCode.VOLUMESNOTUPTODATE: "Volumes are not up to date. Update volumes and try again.",
+    ErrorCode.VOLUMESNOTUPTODATE: "Volumes are not up to date. Compute topovolumes for topology part or compute closed volumes for non topology parts and try again.",
     ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS: "Quadratic meshing is supported only for tetrahedrons.",
     ErrorCode.NOACTIVESFFOUND: "Active size fields are not available.",
     ErrorCode.AITOVERLAPALONGMULTIFOUND: "Overlapping faces along multi-connection found.",
@@ -308,6 +308,9 @@ prime_error_messages = {
     ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Minimum size is more than maximum size.",
     ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contain one or more negative values.",
     ErrorCode.FACEZONELETSHAVECELLSCONNECTED: "Face zonelets have cells connected.",
+    ErrorCode.ZEROELEMENTSREADFROMCDBFILE: "No mesh elements found. Check the input CDB file.",
+    ErrorCode.ZERONODESREADFROMCDBFILE: "No nodes found. Check the input CDB file.",
+    ErrorCode.ZEROELEMENTSFORCDBEXPORT: "No mesh elements found for CDB export. Check if the model is meshed, or set write_by_zones in ExportMapdlCdbParams to false if zones are not defined."
 }
 
 prime_warning_messages = {
