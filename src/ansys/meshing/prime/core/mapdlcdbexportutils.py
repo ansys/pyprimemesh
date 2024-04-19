@@ -692,11 +692,7 @@ class _MaterialProcessor:
             zero = float(parameters['ZERO'])
         if 'TYPE' in parameters:
             exp_type = parameters['TYPE']
-        if (
-            'DEPENDENCIES' in parameters
-            or 'PORE FLUID' in parameters
-            or 'USER' in parameters
-        ):
+        if 'DEPENDENCIES' in parameters or 'PORE FLUID' in parameters or 'USER' in parameters:
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
                 f"*EXPANSION are not processed for material {material}"
@@ -3104,7 +3100,9 @@ class _StepProcessor:
                             vector_commands += f"F, {item}, {dof_map[dof]}, 1\n"
                             count_load_vectors += 1
                             self._modal_load_vectors[count_load_vectors] = {
-                                'SET': base_name, "COMP": dof_map[dof]}
+                                'SET': base_name,
+                                "COMP": dof_map[dof],
+                            }
         # else:
         # vector_commands += 'SOLVE\n'
         return vector_commands
@@ -3193,12 +3191,11 @@ class _StepProcessor:
             boundaries_data,
             self._step_start_time,
             self._step_end_time,
-            sim_data=self._simulation_data
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of boundaries instead of single Boundary
         comp_names = []
-        comp_names.extend(
-            boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
+        comp_names.extend(boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
         return comp_names
 
     def get_global_damping_commnads(self, global_damping_data):
