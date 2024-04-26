@@ -337,7 +337,7 @@ class ErrorCode(enum.IntEnum):
     MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS = 1311
     """Merge small zonelets option is supported for only face zonelets."""
     INVALIDINPUTVOLUMES = 1312
-    """Invalid input volumes."""
+    """List of volume ids provided is empty or incorrect."""
     MORPHER_COMPUTEBCS = 1410
     """Failed to compute boundary conditions."""
     MORPHER_MATCHMORPHINVALIDSOURCEINPUT = 1450
@@ -650,6 +650,15 @@ class ErrorCode(enum.IntEnum):
     This is a beta parameter. The behavior and name may change in the future."""
     AUTOQUADMESHER_INVALIDMINMAXSIZES = 15001
     """Difference in maximum value and minimum value is negative.
+    This is a beta parameter. The behavior and name may change in the future."""
+    ZEROELEMENTSREADFROMCDBFILE = 16500
+    """No elements read from CDB file.
+    This is a beta parameter. The behavior and name may change in the future."""
+    ZERONODESREADFROMCDBFILE = 16501
+    """No nodes read from CDB file.
+    This is a beta parameter. The behavior and name may change in the future."""
+    ZEROELEMENTSFORCDBEXPORT = 16600
+    """No elements found for cdb export.
     This is a beta parameter. The behavior and name may change in the future."""
 
 class WarningCode(enum.IntEnum):
