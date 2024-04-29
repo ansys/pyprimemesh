@@ -6,16 +6,16 @@ MultiZone controls
 
 *This is a Beta feature. API Behavior and Implementation  may change in future.*
 
-:class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provides automatic decomposition of geometry into mapped (sweepable) regions and free regions. 
+The :class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provides automatic geometry decomposition into mapped (sweepable) regions and free regions. 
 Mapped (sweepable) regions are filled with hexahedral elements and free regions are filled with non-hexahedral elements.
 When you perform MultiZone Method meshing, all regions are meshed with a pure hexahedral mesh if possible.  
 
-:class:`AutoMesh <ansys.meshing.prime.automesh>` class enables you to automatically create the hex mesh on the scoped bodies using multizone meshing algorithms. 
+The :class:`AutoMesh <ansys.meshing.prime.automesh>` class enables you to automatically create the hex mesh on the scoped bodies using multizone meshing algorithms. 
 :func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` method allows you to perform MultiZone meshing with given MultiZone control. 
 
 The below example shows how MultiZone control can be applied on a body: 
 
-1. Read the model.
+1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volume have volume zones defined such as left volume zone is **solid1** and right is **solid**.
 
 .. code-block:: python
 
@@ -62,12 +62,20 @@ The below example shows how MultiZone control can be applied on a body:
 
    multizone_control = model.control_data.create_multi_zone_control()
 
-
-3. Define the volume scope and surface scope for the model to apply MultiZone control on the same.
+**Output:**
 
 .. code-block:: python
 
-    MZVolParams = prime.ScopeDefinition(
+  This API create_multi_zone_control is a Beta. API Behavior and implementation may change in future.
+
+3. Define the volume scope and surface scope within the model and applying the volume scope and surface scope to the Multizone Control. In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
+
+.. note::
+  Keep the surface scope as the complete geometry (*)
+
+.. code-block:: python
+
+    volume_scope = prime.ScopeDefinition(
         model=model,
         entity_type=prime.ScopeEntity.VOLUME,
         evaluation_type=prime.ScopeEvaluationType.ZONES,
@@ -76,9 +84,9 @@ The below example shows how MultiZone control can be applied on a body:
         zone_expression="solid1",
     )
 
-    multizone_control.set_volume_scope(MZVolParams)
+    multizone_control.set_volume_scope(volume_scope)
 
-    MZSurfParams = prime.ScopeDefinition(
+    surface_scope = prime.ScopeDefinition(
         model=model,
         entity_type=prime.ScopeEntity.FACEZONELETS,
         evaluation_type=prime.ScopeEvaluationType.ZONES,
@@ -87,7 +95,7 @@ The below example shows how MultiZone control can be applied on a body:
         zone_expression="*",
     )
 
-    multizone_control.set_surface_scope(MZSurfParams)
+    multizone_control.set_surface_scope(surface_scope)
 
 4. Sets the MultiZone sizing parameters to initialize MultiZone sizing control parameters.
 
@@ -97,16 +105,16 @@ The below example shows how MultiZone control can be applied on a body:
 
 .. code-block:: python
 
- MZParams = prime.MultiZoneSizingParams(model)
- MZParams.max_size = params.max
- MZParams.min_size = params.min
- MZParams.growth_rate = params.growth_rate
- multizone_control.set_multi_zone_sizing_params(MZParams)
- print(MZParams)
- parts = model.parts
- autoMesher = prime.AutoMesh(model)
- autoMeshParams = prime.AutoMeshParams(model)
- autoMeshParams.multi_zone_control_ids = [multizone_control.id]
+   sizing_params = prime.MultiZoneSizingParams(model)
+   sizing_params.max_size = 1
+   sizing_params.min_size = 0.04
+   sizing_params.growth_rate = 1.2
+   multizone_control.set_multi_zone_sizing_params(sizing_params)
+   print (sizing_params)
+   parts = model.parts
+   autoMesher = prime.AutoMesh(model)
+   autoMeshParams = prime.AutoMeshParams(model)
+   autoMeshParams.multi_zone_control_ids = [multizone_control.id]
 
  for p in parts:
      result = autoMesher.mesh(p.id, autoMeshParams)
