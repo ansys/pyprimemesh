@@ -98,21 +98,16 @@ The below example shows how MultiZone control can be applied on a body:
    When you provide the sizefield, MultiZone consumes sizefield and impacts the MultiZone mesh.
 
 .. code-block:: python
-
+   
    sizing_params = prime.MultiZoneSizingParams(model)
    sizing_params.max_size = 1
    sizing_params.min_size = 0.04
    sizing_params.growth_rate = 1.2
    multizone_control.set_multi_zone_sizing_params(sizing_params)
-   print (sizing_params)
    parts = model.parts
    autoMesher = prime.AutoMesh(model)
    autoMeshParams = prime.AutoMeshParams(model)
    autoMeshParams.multi_zone_control_ids = [multizone_control.id]
-
- for p in parts:
-     result = autoMesher.mesh(p.id, autoMeshParams)
-     print(result)
 
 
 **Output:**
