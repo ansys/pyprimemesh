@@ -856,7 +856,7 @@ class SubtractVolumesParams(CoreObject):
         ignore_face_zonelets: Iterable[int], optional
             Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
-            Option to analyze overlapping or intersecting cutter volumes.
+            Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
         keep_cutters: bool, optional
             Option to retain cutter volumes.
             This is a beta parameter. The behavior and name may change in the future.
@@ -908,7 +908,7 @@ class SubtractVolumesParams(CoreObject):
         ignore_face_zonelets: Iterable[int], optional
             Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
-            Option to analyze overlapping or intersecting cutter volumes.
+            Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
         keep_cutters: bool, optional
             Option to retain cutter volumes.
         """
@@ -955,7 +955,7 @@ class SubtractVolumesParams(CoreObject):
 
     @property
     def check_cutters(self) -> bool:
-        """Option to analyze overlapping or intersecting cutter volumes.
+        """Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
         """
         return self._check_cutters
 
