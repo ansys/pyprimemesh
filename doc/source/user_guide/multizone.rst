@@ -95,7 +95,7 @@ The below example shows how MultiZone control can be applied on a body:
 
 
 .. note::
-   When you provide the sizefield, MultiZone consumes sizefield and impacts the MultiZone mesh. 
+   When you provide the sizefield, MultiZone consumes sizefield and impacts the MultiZone mesh.
 
 .. code-block:: python
 
