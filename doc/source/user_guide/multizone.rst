@@ -62,12 +62,6 @@ The below example shows how MultiZone control can be applied on a body:
 
    multizone_control = model.control_data.create_multi_zone_control()
 
-**Output:**
-
-.. code-block:: python
-
-  This API create_multi_zone_control is a Beta. API Behavior and implementation may change in future.
-
 3. Define the volume scope and surface scope within the model and applying the volume scope and surface scope to the Multizone Control. In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
 
 .. note::
@@ -115,8 +109,7 @@ The below example shows how MultiZone control can be applied on a body:
    autoMesher = prime.AutoMesh(model)
    autoMeshParams = prime.AutoMeshParams(model)
    autoMeshParams.multi_zone_control_ids = [multizone_control.id]
-
-    for p in parts:
+   for p in parts:
         result = autoMesher.mesh(p.id, autoMeshParams)
         print(result)
 
