@@ -104,11 +104,11 @@ The below example shows how MultiZone control can be applied on a body:
    sizing_params.min_size = 0.04
    sizing_params.growth_rate = 1.2
    multizone_control.set_multi_zone_sizing_params(sizing_params)
-   print (sizing_params)
    parts = model.parts
    autoMesher = prime.AutoMesh(model)
    autoMeshParams = prime.AutoMeshParams(model)
    autoMeshParams.multi_zone_control_ids = [multizone_control.id]
+
    for p in parts:
         result = autoMesher.mesh(p.id, autoMeshParams)
         print(result)
