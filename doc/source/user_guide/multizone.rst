@@ -110,8 +110,8 @@ The below example shows how MultiZone control can be applied on a body:
    autoMeshParams.multi_zone_control_ids = [multizone_control.id]
 
    for p in parts:
-        result = autoMesher.mesh(p.id, autoMeshParams)
-        print(result)
+       result = autoMesher.mesh(p.id, autoMeshParams)
+       print(result)
 
 
 **Output:**
