@@ -10,8 +10,8 @@ The :class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provi
 Mapped (sweepable) regions are filled with hexahedral elements and free regions are filled with non-hexahedral elements.
 When you perform MultiZone Method meshing, all regions are meshed with a pure hexahedral mesh if possible.  
 
-The :class:`AutoMesh <ansys.meshing.prime.automesh>` class enables you to automatically create the hex mesh on the scoped bodies using MultiZone meshing algorithms. 
-:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` function allows you to perform MultiZone meshing with the given MultiZone control. 
+The :class:`AutoMesh <ansys.meshing.prime.automesh>` class lets you to automatically create the hex mesh on the scoped bodies using MultiZone meshing algorithms. 
+:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` function lets you  perform MultiZone meshing with the given MultiZone control. 
 
 The following example shows to apply a MultiZone control on a body:: 
 
@@ -62,7 +62,8 @@ The following example shows to apply a MultiZone control on a body::
 
    multizone_control = model.control_data.create_multi_zone_control()
 
-3. Define the volume scope and surface scope within the model and applying the volume scope and surface scope to the Multizone Control. In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
+3. Define the volume scope and surface scope within the model and apply the volume scope and surface scope to the Multizone Control. 
+In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
 
 .. note::
   Keep the surface scope as the complete geometry (*)
