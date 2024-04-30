@@ -7,8 +7,7 @@ from beartype.typing import Any, Dict, List, Optional, Union
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo
 from ansys.meshing.prime.core.model import Model
-from ansys.meshing.prime.graphics.widgets.color_by_type import \
-    ColorByTypeWidget
+from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
@@ -196,7 +195,7 @@ class PrimePlotter(PlotterInterface):
         model_pd = model.get_scoped_polydata(scope)
         self.add_model_pd(model_pd)
 
-    def add_list(
+    def add_iter(
         self,
         plotting_list: List[Any],
         filter: str = None,

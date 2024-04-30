@@ -42,7 +42,7 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -88,7 +88,7 @@ mesh_util.volume_mesh(
 )
 
 # Display the mesh
-pl = PrimePlotter()
+pl = PrimePlotter(allow_picking=True)
 pl.add(model)
 pl.plot()
 

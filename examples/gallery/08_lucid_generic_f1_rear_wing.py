@@ -50,7 +50,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -72,9 +72,10 @@ for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane
     mesh_util.read(file_name, append=True)
 
 # display the rear wing geometry without the enclosure
-display = Graphics(model)
 scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
-display(scope=scope)
+display = PrimePlotter()
+display.add(model, scope)
+display.plot()
 
 ###############################################################################
 # Merge parts
@@ -172,8 +173,9 @@ compute_size.compute_volumetric(
 
 mesh_util.surface_mesh_with_size_controls(size_control_names="*curvature*")
 scope = prime.ScopeDefinition(model, label_expression="* !*enclosure*")
-display(scope=scope)
-
+display = PrimePlotter()
+display.add(model, scope)
+display.plot()
 # Create face zones per label
 for label in part.get_labels():
     mesh_util.create_zones_from_labels(label_expression=label)
@@ -292,8 +294,9 @@ result = prime.VolumeMeshTool(model).check_mesh(part.id, params=prime.CheckMeshP
 print("\nMesh check", result, sep="\n")
 
 scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
-display(scope=scope)
-
+display = PrimePlotter()
+display.add(model, scope)
+display.plot()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~

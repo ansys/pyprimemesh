@@ -3,8 +3,7 @@ import enum
 import os
 
 import numpy as np
-from ansys.visualizer import Plotter
-from ansys.visualizer.widgets import PlotterWidget
+from ansys.visualizer import Plotter, PlotterWidget
 from vtk import vtkButtonWidget, vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo

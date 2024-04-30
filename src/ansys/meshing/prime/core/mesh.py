@@ -158,7 +158,7 @@ class Mesh(MeshInfo):
             mesh_type = DisplayMeshType.TOPOEDGE
         num_colors = int(color_matrix.size / 3)
         if mesh_type == DisplayMeshType.EDGEZONELET:
-            return color_matrix[self._id % num_colors].tolist()
+            return color_matrix[index % num_colors].tolist()
         elif mesh_type == DisplayMeshType.TOPOEDGE:
             if edge_results.topo_edge_types[index] == 1:
                 return [255, 0, 0]
@@ -173,7 +173,7 @@ class Mesh(MeshInfo):
             elif edge_results.topo_edge_types[index] == 6:
                 return [128, 0, 128]
             else:
-                return color_matrix[edge_results._id % num_colors].tolist()
+                return color_matrix[edge_results.id % num_colors].tolist()
 
     def _get_vertices_and_surf_faces(
         self, connectivity_results: FaceConnectivityResults, index

@@ -1,8 +1,7 @@
 """This module contains the HidePicked class."""
 import os
 
-from ansys.visualizer import Plotter
-from ansys.visualizer.widgets import PlotterWidget
+from ansys.visualizer import Plotter, PlotterWidget
 from vtk import vtkButtonWidget, vtkPNGReader
 
 

@@ -43,11 +43,10 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
-display = Graphics(model=model)
 
 mesh_util = prime.lucid.Mesh(model)
 
@@ -66,8 +65,9 @@ mesh_util.read(file_name=saddle_bracket)
 
 print(model)
 
-display = Graphics(model)
-display()
+display = PrimePlotter()
+display.add(model)
+display.plot()
 
 ###############################################################################
 # Quad mesh source faces
@@ -86,7 +86,9 @@ mesh_util.surface_mesh(
     generate_quads=True,
 )
 
-display()
+display = PrimePlotter()
+display.add(model)
+display.plot()
 
 ###############################################################################
 # Surface mesh unmeshed faces
@@ -122,7 +124,9 @@ mesh_util.surface_mesh(
     min_size=2.0,
 )
 
-display()
+display = PrimePlotter()
+display.add(model)
+display.plot()
 
 ###############################################################################
 # Delete topology
@@ -192,8 +196,9 @@ volume_mesh = prime.AutoMesh(model=model)
 result_vol = volume_mesh.mesh(part_id=part.id, automesh_params=auto_mesh_params)
 print(part.get_summary(prime.PartSummaryParams(model)))
 
-display()
-
+display = PrimePlotter()
+display.add(model)
+display.plot()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~

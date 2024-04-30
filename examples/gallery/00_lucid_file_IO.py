@@ -126,7 +126,11 @@ display.add_model(model)
 display.plot()
 
 part = model.get_part_by_name("pyprime_block_import")
-display(scope=prime.ScopeDefinition(model, label_expression="my_group"))
+
+display = PrimePlotter()
+display.add_scope(model, prime.ScopeDefinition(model, label_expression="my_group"))
+display.plot()
+
 mesh_util.volume_mesh()
 
 ###############################################################################
@@ -251,7 +255,9 @@ for zone in part.get_face_zones():
         evaluation_type=prime.ScopeEvaluationType.ZONES,
         zone_expression=model.get_zone_name(zone),
     )
-    display(scope=scope)
+    display = PrimePlotter()
+    display.add_scope(model, scope)
+    display.plot()
 
 ###############################################################################
 # Exit PyPrimeMesh

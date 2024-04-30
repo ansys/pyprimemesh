@@ -41,7 +41,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -63,8 +63,10 @@ mesh_util.read(file_name=source_mesh)
 mesh_util.read(file_name=target_geometry, append=True)
 
 
-display = Graphics(model)
-display()
+display = PrimePlotter()
+display.add(model)
+display.plot()
+
 print(model)
 
 ###############################################################################
@@ -104,8 +106,10 @@ morpher.match_morph(
 )
 
 # Display the morphed mesh
-display()
 
+display = PrimePlotter()
+display.add(model)
+display.plot()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~
