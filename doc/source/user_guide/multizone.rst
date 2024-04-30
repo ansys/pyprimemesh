@@ -4,18 +4,18 @@
 MultiZone controls
 ==================
 
-*This is a Beta feature. API Behavior and Implementation  may change in future.*
+*This is a Beta feature. API Behavior and Implementation might change in future.*
 
 The :class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provides automatic geometry decomposition into mapped (sweepable) regions and free regions. 
 Mapped (sweepable) regions are filled with hexahedral elements and free regions are filled with non-hexahedral elements.
 When you perform MultiZone Method meshing, all regions are meshed with a pure hexahedral mesh if possible.  
 
-The :class:`AutoMesh <ansys.meshing.prime.automesh>` class enables you to automatically create the hex mesh on the scoped bodies using multizone meshing algorithms. 
-:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` method allows you to perform MultiZone meshing with given MultiZone control. 
+The :class:`AutoMesh <ansys.meshing.prime.automesh>` class enables you to automatically create the hex mesh on the scoped bodies using MultiZone meshing algorithms. 
+:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` function allows you to perform MultiZone meshing with the given MultiZone control. 
 
-The below example shows how MultiZone control can be applied on a body: 
+The following example shows to apply a MultiZone control on a body:: 
 
-1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volume have volume zones defined such as left volume zone is **solid1** and right is **solid**.
+1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volumes have volume zones defined. The left volume zone is ``solid1`` and right is ``solid``.
 
 .. code-block:: python
 
