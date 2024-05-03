@@ -21,7 +21,7 @@ The following example shows to apply a MultiZone control on a body::
 
       file_io = prime.FileIO(model)
       res = file_io.read_pmdat(
-         r"E:\Test\2Boxes_2Holes.pmdat", prime.FileReadParams(model=model)
+          r"E:\Test\2Boxes_2Holes.pmdat", prime.FileReadParams(model=model)
       )
       print(model)
 
@@ -71,23 +71,23 @@ In this example, volume scope is scoped specifically to "solid1" to show the dif
    .. code-block:: python
 
       volume_scope = prime.ScopeDefinition(
-         model=model,
-         entity_type=prime.ScopeEntity.VOLUME,
-         evaluation_type=prime.ScopeEvaluationType.ZONES,
-         part_expression="*",
-         label_expression="*",
-         zone_expression="solid1",
+          model=model,
+          entity_type=prime.ScopeEntity.VOLUME,
+          evaluation_type=prime.ScopeEvaluationType.ZONES,
+          part_expression="*",
+          label_expression="*",
+          zone_expression="solid1",
       )
 
       multizone_control.set_volume_scope(volume_scope)
 
       surface_scope = prime.ScopeDefinition(
-         model=model,
-         entity_type=prime.ScopeEntity.FACEZONELETS,
-         evaluation_type=prime.ScopeEvaluationType.ZONES,
-         part_expression="*",
-         label_expression="*",
-         zone_expression="*",
+          model=model,
+          entity_type=prime.ScopeEntity.FACEZONELETS,
+          evaluation_type=prime.ScopeEvaluationType.ZONES,
+          part_expression="*",
+          label_expression="*",
+          zone_expression="*",
       )
 
       multizone_control.set_surface_scope(surface_scope)
