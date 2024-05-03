@@ -17,80 +17,80 @@ The following example shows to apply a MultiZone control on a body::
 
 1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volumes have volume zones defined. The left volume zone is ``solid1`` and right is ``solid``.
 
-.. code-block:: python
+   .. code-block:: python
 
-   file_io = prime.FileIO(model)
-   res = file_io.read_pmdat(
-       r"E:\Test\2Boxes_2Holes.pmdat", prime.FileReadParams(model=model)
-   )
-   print(model)
+      file_io = prime.FileIO(model)
+      res = file_io.read_pmdat(
+         r"E:\Test\2Boxes_2Holes.pmdat", prime.FileReadParams(model=model)
+      )
+      print(model)
 
-**Output:**
+   **Output:**
 
-.. code-block:: pycon
+   .. code-block:: pycon
 
-   Part Summary:
+      Part Summary:
 
-   Part Name: zone2boxes_2holes
-   Part ID: 2
-    24 Topo Edges
-    13 Topo Faces
-    2 Topo Volumes
+      Part Name: zone2boxes_2holes
+      Part ID: 2
+      24 Topo Edges
+      13 Topo Faces
+      2 Topo Volumes
 
-    0 Edge Zones
-        Edge Zone Name(s) : []
-    0 Face Zones
-        Face Zone Name(s) : []
-    2 Volume Zones
-        Volume Zone Name(s) : [solid1, solid]
+      0 Edge Zones
+         Edge Zone Name(s) : []
+      0 Face Zones
+         Face Zone Name(s) : []
+      2 Volume Zones
+         Volume Zone Name(s) : [solid1, solid]
 
-    2 Label(s)
-        Names: [solid, solid1]
+      2 Label(s)
+         Names: [solid, solid1]
 
-    Bounding box (-10 -10 0)
-                 (30 10 20)
+      Bounding box (-10 -10 0)
+                (30 10 20)
 
-    error_code :  ErrorCode.NOERROR
+      error_code :  ErrorCode.NOERROR
 
-.. figure:: ../images/multizone_model.png
-    :width: 400pt
-    :align: center
+   .. figure:: ../images/multizone_model.png
+      :width: 400pt
+      :align: center
 
 2. Initialize the MultiZone control. MultiZone control sets the parameters and controls used for MultiZone meshing.  
 
-.. code-block:: python
+   .. code-block:: python
 
-   multizone_control = model.control_data.create_multi_zone_control()
+      multizone_control = model.control_data.create_multi_zone_control()
 
 3. Define the volume scope and surface scope within the model and apply the volume scope and surface scope to the Multizone Control. 
 In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
 
-.. note::
-  Keep the surface scope as the complete geometry (*)
+   .. note::
+     Keep the surface scope as the complete geometry (*)
 
-.. code-block:: python
+   .. code-block:: python
 
-    volume_scope = prime.ScopeDefinition(
-        model=model,
-        entity_type=prime.ScopeEntity.VOLUME,
-        evaluation_type=prime.ScopeEvaluationType.ZONES,
-        part_expression="*",
-        label_expression="*",
-        zone_expression="solid1",
-    )
+      volume_scope = prime.ScopeDefinition(
+         model=model,
+         entity_type=prime.ScopeEntity.VOLUME,
+         evaluation_type=prime.ScopeEvaluationType.ZONES,
+         part_expression="*",
+         label_expression="*",
+         zone_expression="solid1",
+      )
 
-    multizone_control.set_volume_scope(volume_scope)
+      multizone_control.set_volume_scope(volume_scope)
 
-    surface_scope = prime.ScopeDefinition(
-        model=model,
-        entity_type=prime.ScopeEntity.FACEZONELETS,
-        evaluation_type=prime.ScopeEvaluationType.ZONES,
-        part_expression="*",
-        label_expression="*",
-        zone_expression="*",
-    )
+      surface_scope = prime.ScopeDefinition(
+         model=model,
+         entity_type=prime.ScopeEntity.FACEZONELETS,
+         evaluation_type=prime.ScopeEvaluationType.ZONES,
+         part_expression="*",
+         label_expression="*",
+         zone_expression="*",
+      )
 
-    multizone_control.set_surface_scope(surface_scope)
+      multizone_control.set_surface_scope(surface_scope)
 
 4. Sets the MultiZone sizing parameters to initialize MultiZone sizing control parameters.
 
