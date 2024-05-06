@@ -311,8 +311,8 @@ class _MatHyperelastic:
                 if C30:
                     mat_yeoh._data_line["D1_DATA"][5] = weight * float(C30)
 
-                header_data[5] = 2*float(C10)*weight
-                header_data[6] = 2*float(C10)*weight/500
+                header_data[5] = 2 * float(C10) * weight
+                header_data[6] = 2 * float(C10) * weight / 500
 
                 mat_string += "*MAT_HYPERELASTIC_RUBBER_TITLE\n"
                 mat_string += f"{mat_name}\n"

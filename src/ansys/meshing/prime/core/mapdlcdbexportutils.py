@@ -15,6 +15,7 @@ from ansys.meshing.prime.params.primestructs import ExportMapdlCdbParams
 
 __all__ = ['generate_mapdl_commands']
 
+
 class _TractionProperties:
     DAMAGE_EVOLUTION_ENERGY = 1000
     NOM_STRESS_1 = 1e10
@@ -381,7 +382,8 @@ class _AmplitudeProcessor:
         return table_string.format(name, magn, freq)
 
     def _process_periodic_amplitude_table_complete_single_term(
-            self, name, magn, A0, t0, A1, B1, freq):
+        self, name, magn, A0, t0, A1, B1, freq
+    ):
         table_string = """!
 ! A0 = {2}
 ! Omega = {6}
@@ -493,20 +495,20 @@ class _AmplitudeProcessor:
                 f"Table is written with t0 = 0.0"
             )
         # for i, pt in enumerate(zip(A, B)):
-            # if i == 0 and float(pt[0]) != 0:
-                # self._logger.warning(
-                    # f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
-                    # f" please check the table created with name: "
-                    # f"{self._modified_amplitude_name}"
-                # )
-            # if i == 0 and float(pt[1]) != 1:
-                # self._logger.warning(
-                    # f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
-                    # f"A*SIN(w*time) equation is processed please check the table "
-                    # f"created with name: {self._modified_amplitude_name}"
-                # )
+        # if i == 0 and float(pt[0]) != 0:
+        # self._logger.warning(
+        # f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
+        # f" please check the table created with name: "
+        # f"{self._modified_amplitude_name}"
+        # )
+        # if i == 0 and float(pt[1]) != 1:
+        # self._logger.warning(
+        # f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
+        # f"A*SIN(w*time) equation is processed please check the table "
+        # f"created with name: {self._modified_amplitude_name}"
+        # )
         # amplitude_commands += self._process_periodic_amplitude_table(
-            # self._modified_amplitude_name, self._scale_factor, freq
+        # self._modified_amplitude_name, self._scale_factor, freq
         # )
         if A:
             A1 = A[0]
@@ -555,8 +557,7 @@ class _AmplitudeProcessor:
                 formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(1,
-                                  f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -607,8 +608,7 @@ class _AmplitudeProcessor:
                     formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(1,
-                                  f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -783,11 +783,7 @@ class _MaterialProcessor:
             zero = float(parameters['ZERO'])
         if 'TYPE' in parameters:
             exp_type = parameters['TYPE']
-        if (
-            'DEPENDENCIES' in parameters
-            or 'PORE FLUID' in parameters
-            or 'USER' in parameters
-        ):
+        if 'DEPENDENCIES' in parameters or 'PORE FLUID' in parameters or 'USER' in parameters:
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
                 f"*EXPANSION are not processed for material {material}"
@@ -3198,7 +3194,9 @@ class _StepProcessor:
                             vector_commands += f"F, {item}, {dof_map[dof]}, 1\n"
                             count_load_vectors += 1
                             self._modal_load_vectors[count_load_vectors] = {
-                                'SET': base_name, "COMP": dof_map[dof]}
+                                'SET': base_name,
+                                "COMP": dof_map[dof],
+                            }
         # else:
         # vector_commands += 'SOLVE\n'
         return vector_commands
@@ -3287,12 +3285,11 @@ class _StepProcessor:
             boundaries_data,
             self._step_start_time,
             self._step_end_time,
-            sim_data=self._simulation_data
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of boundaries instead of single Boundary
         comp_names = []
-        comp_names.extend(
-            boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
+        comp_names.extend(boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
         return comp_names
 
     def get_global_damping_commnads(self, global_damping_data):

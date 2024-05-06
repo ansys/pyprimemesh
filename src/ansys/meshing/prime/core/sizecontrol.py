@@ -10,7 +10,8 @@ class SizeControl(_SizeControl):
     """Size control is used to compute the size field.
 
     The size field is computed based on the size control defined.
-    Different type of size controls provide control over how the mesh size is distributed on a surface or within the volume.
+    Different type of size controls provide control over how the mesh size is distributed on a
+    surface or within the volume.
 
     Parameters
     ----------

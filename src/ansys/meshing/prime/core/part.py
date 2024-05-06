@@ -13,7 +13,8 @@ class Part(_Part):
     """Part contains zonelets and topoentities.
 
     Topoentities and zonelets are characterized by dimension of entities.
-    Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets. They are:
+    Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets.
+    They are:
 
     * FaceZonelet: A group of interconnected face elements.
     * EdgeZonelet: A group of interconnected edge elements.

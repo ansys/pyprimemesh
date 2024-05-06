@@ -29,7 +29,8 @@ from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 
 
 class SurfaceUtilities(_SurfaceUtilities):
-    """Performs various general surface utilities algorithms. 
+    """Performs various general surface utilities algorithms.
+
     For example, copy zonelets, resolve surface intersections.
 
     Parameters

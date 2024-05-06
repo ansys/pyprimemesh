@@ -5,6 +5,7 @@ import datetime
 import logging
 import os
 from typing import Union
+
 from ansys.meshing.prime.internals import utils
 
 
@@ -21,8 +22,7 @@ class SingletonType(type):
 
 
 class PrimeLogger(object, metaclass=SingletonType):
-    """Provides the singleton logger for PyPrimeMesh.
-    """
+    """Provides the singleton logger for PyPrimeMesh."""
 
     _logger = None
 
@@ -80,7 +80,9 @@ class PrimeLogger(object, metaclass=SingletonType):
         stream_handler.setFormatter(self._formatter)
         self._logger.addHandler(stream_handler)
 
-    def add_file_handler(self, log_dir: str="./.log", log_file: str=None) -> logging.FileHandler:
+    def add_file_handler(
+        self, log_dir: str = "./.log", log_file: str = None
+    ) -> logging.FileHandler:
         """Save logs to a file.
 
         Parameters
