@@ -8,6 +8,12 @@ from typing import List, Any, Union
 class VolumeSweeper(CoreObject):
     """VolumeSweeper class provide functions to volume mesh a given set of topovolumes by sweeping or stacking a set of face and edge zonelets. Provide operations to generate volume mesh using stacker technology.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeSweeper object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):

@@ -8,6 +8,12 @@ from typing import List, Any, Union
 class Scaffolder(CoreObject):
     """Scaffolder is used for achieving connections in structures made of sheets and beams. Solid bodies should be suppressed before applying scaffolding.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Scaffolder object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):

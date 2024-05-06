@@ -10,6 +10,20 @@ from ansys.meshing.prime.params.primestructs import *
 
 class DeleteMeshResults(CoreObject):
     """Results structure associated with delete mesh on topofaces.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteMeshResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteMeshResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_mesh_results = prime.DeleteMeshResults(model = model)
     """
     _default_params = {}
 
@@ -113,6 +127,20 @@ class DeleteMeshResults(CoreObject):
 
 class DeleteMeshParams(CoreObject):
     """Parameters to delete mesh on topoentities.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteMeshParams`` object with default parameters.
+    delete_mesh_on_connected_topo_edges: bool, optional
+        Option to delete mesh on topoedges connected only to provided topoentities.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_mesh_params = prime.DeleteMeshParams(model = model)
     """
     _default_params = {}
 

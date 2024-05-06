@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class QuadToSpline(CoreObject):
     """Converts all-quad mesh to spline.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create QuadToSpline object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -48,7 +52,7 @@ class QuadToSpline(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

@@ -10,6 +10,17 @@ class MultiZoneControl(CoreObject):
 
     The MultiZone meshing provides hex meshing capabilities.
     Different type of mesh can be generated using MultiZoneControl. For example, sweep mesh, map mesh and edge biased mesh.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create MultiZoneControl object.
+    id : int
+        Id of the MultiZoneControl.
+    object_id : int
+        Object id of the MultiZoneControl.
+    name : str
+        Name of the MultiZoneControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -32,7 +43,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -59,7 +70,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -86,7 +97,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -113,7 +124,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -140,7 +151,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -167,7 +178,7 @@ class MultiZoneControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

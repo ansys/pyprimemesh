@@ -10,6 +10,25 @@ from ansys.meshing.prime.params.primestructs import *
 
 class CollapseParams(CoreObject):
     """Parameters to collapse face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CollapseParams`` object with default parameters.
+    feature_type: SurfaceFeatureType, optional
+        Feature type to be preserved when performing collapse.
+    collapse_ratio: float, optional
+        Maximum ratio of shortest face edge length to longest face edge length.
+    preserve_quality: bool, optional
+        Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
+    target_skewness: float, optional
+        Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+    json_data: dict, optional
+        JSON dictionary to create a ``CollapseParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> collapse_params = prime.CollapseParams(model = model)
     """
     _default_params = {}
 
@@ -180,6 +199,23 @@ class CollapseParams(CoreObject):
 
 class CollapseResults(CoreObject):
     """Results associated with collapse face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CollapseResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    n_collapsed: int, optional
+        Number of face elements collapsed.
+    n_splits: int, optional
+        Number of face elements split.
+    json_data: dict, optional
+        JSON dictionary to create a ``CollapseResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> collapse_results = prime.CollapseResults(model = model)
     """
     _default_params = {}
 

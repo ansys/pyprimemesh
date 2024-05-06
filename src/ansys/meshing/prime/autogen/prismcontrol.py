@@ -9,6 +9,17 @@ class PrismControl(CoreObject):
     """PrismControl allows you to generate prisms.
 
     PrismControl allows you to control generation of prisms. Controls include setting the face scope, volume scope and growth parameters.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create PrismControl object.
+    id : int
+        Id of the PrismControl.
+    object_id : int
+        Object id of the PrismControl.
+    name : str
+        Name of the PrismControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

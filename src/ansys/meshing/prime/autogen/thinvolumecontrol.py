@@ -9,6 +9,17 @@ class ThinVolumeControl(CoreObject):
     """ThinVolumeControl allows you to generate prisms in the space between surfaces.
 
     ThinVolumeControl allows you to control generation of prisms in the thin space between surfaces. Controls include setting the source face scope, target face scope and thin volume mesh parameters.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create ThinVolumeControl object.
+    id : int
+        Id of the ThinVolumeControl.
+    object_id : int
+        Object id of the ThinVolumeControl.
+    name : str
+        Name of the ThinVolumeControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -117,7 +128,7 @@ class ThinVolumeControl(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

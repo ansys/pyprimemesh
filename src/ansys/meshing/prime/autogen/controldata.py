@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class ControlData(CoreObject):
     """ControlData has all controls like size controls, prism controls, wrapper controls and more.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create ControlData object.
+    id : int
+        Id of the ControlData.
+    object_id : int
+        Object id of the ControlData.
+    name : str
+        Name of the ControlData.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -55,7 +65,7 @@ class ControlData(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -81,7 +91,7 @@ class ControlData(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

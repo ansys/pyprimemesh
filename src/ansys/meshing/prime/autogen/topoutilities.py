@@ -8,6 +8,12 @@ from typing import List, Any, Union
 class TopoUtilities(CoreObject):
     """Performs various general surface utilities algorithms. For example, copy zonelets, resolve surface intersections.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create TopoUtilities object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):

@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class SurfaceUtilities(CoreObject):
     """Performs various general surface utilities algorithms. For example, copy zonelets, resolve surface intersections.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create SurfaceUtilities object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -158,7 +162,7 @@ class SurfaceUtilities(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -566,7 +570,7 @@ class SurfaceUtilities(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

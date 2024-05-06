@@ -46,6 +46,23 @@ class BOIType(enum.IntEnum):
 
 class FixInvalidNormalNodeParams(CoreObject):
     """Parameters to fix invalid average face normal at nodes by creating a nugget.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FixInvalidNormalNodeParams`` object with default parameters.
+    nugget_size: float, optional
+        Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+    nugget_mesh_size: float, optional
+        Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+    label: str, optional
+        Label to set on new face zonelets created.
+    json_data: dict, optional
+        JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fix_invalid_normal_node_params = prime.FixInvalidNormalNodeParams(model = model)
     """
     _default_params = {}
 
@@ -193,6 +210,19 @@ class FixInvalidNormalNodeParams(CoreObject):
 
 class FixInvalidNormalNodeResults(CoreObject):
     """Results associated with fix invalid average face normal at nodes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FixInvalidNormalNodeResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fix_invalid_normal_node_results = prime.FixInvalidNormalNodeResults(model = model)
     """
     _default_params = {}
 
@@ -294,6 +324,23 @@ class FixInvalidNormalNodeResults(CoreObject):
 
 class ProjectOnGeometryParams(CoreObject):
     """Parameters used to project topoface nodes on associated geometry.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ProjectOnGeometryParams`` object with default parameters.
+    project_only_mid_nodes: bool, optional
+        Option to project only the mid nodes.
+        This is a beta parameter. The behavior and name may change in the future.
+    project_on_facets_if_cadnot_found: bool, optional
+        Option to project on facet if geometry is not found.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> project_on_geometry_params = prime.ProjectOnGeometryParams(model = model)
     """
     _default_params = {}
 
@@ -422,6 +469,26 @@ class ProjectOnGeometryParams(CoreObject):
 
 class ProjectOnGeometryResults(CoreObject):
     """Results associated with projection of topofaces nodes on its geometry.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ProjectOnGeometryResults`` object with default parameters.
+    success: bool, optional
+        Defines the operation was successful or not.
+        This is a beta parameter. The behavior and name may change in the future.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    warning_codes: List[WarningCode], optional
+        Warning code associated with operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> project_on_geometry_results = prime.ProjectOnGeometryResults(model = model)
     """
     _default_params = {}
 
@@ -575,6 +642,21 @@ class ProjectOnGeometryResults(CoreObject):
 
 class FillHolesAtPlaneParams(CoreObject):
     """Parameters to fill holes at given plane.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FillHolesAtPlaneParams`` object with default parameters.
+    create_zone: bool, optional
+        Option to create a face zone for the zonelets created to fill holes.
+    suggested_zone_name: str, optional
+        Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
+    json_data: dict, optional
+        JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fill_holes_at_plane_params = prime.FillHolesAtPlaneParams(model = model)
     """
     _default_params = {}
 
@@ -699,6 +781,27 @@ class FillHolesAtPlaneParams(CoreObject):
 
 class FillHolesAtPlaneResults(CoreObject):
     """Results associated with fill holes at given plane.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FillHolesAtPlaneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with operation.
+    created_face_zonelets: Iterable[int], optional
+        Ids of face zonelets created to fill the holes.
+    assigned_zone_name: str, optional
+        Name assigned to zone created. Suffix is added to suggested name if the name not available.
+    created_zone_id: int, optional
+        Id assigned to zone created.
+    json_data: dict, optional
+        JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fill_holes_at_plane_results = prime.FillHolesAtPlaneResults(model = model)
     """
     _default_params = {}
 
@@ -892,6 +995,17 @@ class FillHolesAtPlaneResults(CoreObject):
 
 class CreateCapParams(CoreObject):
     """Parameters to create cap on face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateCapParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateCapParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_cap_params = prime.CreateCapParams(model = model)
     """
     _default_params = {}
 
@@ -971,6 +1085,21 @@ class CreateCapParams(CoreObject):
 
 class CreateCapResults(CoreObject):
     """Results associated with create cap on face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateCapResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    created_face_zonelets: Iterable[int], optional
+        Ids of cap face zonelets created.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateCapResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_cap_results = prime.CreateCapResults(model = model)
     """
     _default_params = {}
 
@@ -1095,6 +1224,17 @@ class CreateCapResults(CoreObject):
 
 class DeleteUnwettedParams(CoreObject):
     """DeleteUnwettedParams defines parameters for delete unwetted surfaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteUnwettedParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteUnwettedParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_unwetted_params = prime.DeleteUnwettedParams(model = model)
     """
     _default_params = {}
 
@@ -1174,6 +1314,19 @@ class DeleteUnwettedParams(CoreObject):
 
 class DeleteUnwettedResult(CoreObject):
     """Results structure associated with delete unwetted surfaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteUnwettedResult`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with delete unwetted surfaces operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteUnwettedResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_unwetted_result = prime.DeleteUnwettedResult(model = model)
     """
     _default_params = {}
 
@@ -1275,6 +1428,19 @@ class DeleteUnwettedResult(CoreObject):
 
 class ResolveIntersectionsParams(CoreObject):
     """ResolveIntersectionsParams define parameters for resolve intersections.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ResolveIntersectionsParams`` object with default parameters.
+    number_of_threads: int, optional
+        Number of threads for resolve intersections multithreaded operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> resolve_intersections_params = prime.ResolveIntersectionsParams(model = model)
     """
     _default_params = {}
 
@@ -1376,6 +1542,19 @@ class ResolveIntersectionsParams(CoreObject):
 
 class ResolveIntersectionResult(CoreObject):
     """Result structure associated with resolve intersections operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ResolveIntersectionResult`` object with default parameters.
+    error_code: ErrorCode, optional
+        Errror code associated with a resolve intersections operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> resolve_intersection_result = prime.ResolveIntersectionResult(model = model)
     """
     _default_params = {}
 
@@ -1477,6 +1656,23 @@ class ResolveIntersectionResult(CoreObject):
 
 class SubtractZoneletsParams(CoreObject):
     """Parameters to use when subtracting zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractZoneletsParams`` object with default parameters.
+    retain_cutter: bool, optional
+        Retain the zonelets used for removal.
+    extract_edges: bool, optional
+        Extract edges of intersection during subtract.
+    trace_edges: bool, optional
+        Trace edges of intersection on target. Only works if extractEdges is true.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractZoneletsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_zonelets_params = prime.SubtractZoneletsParams(model = model)
     """
     _default_params = {}
 
@@ -1624,6 +1820,21 @@ class SubtractZoneletsParams(CoreObject):
 
 class SubtractZoneletsResults(CoreObject):
     """Results structure associated with subtracting zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractZoneletsResults`` object with default parameters.
+    processing_time: float, optional
+        Processing time for subtract operation.
+    error_code: ErrorCode, optional
+        Error Code associated with subtract operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_zonelets_results = prime.SubtractZoneletsResults(model = model)
     """
     _default_params = {}
 
@@ -1748,6 +1959,23 @@ class SubtractZoneletsResults(CoreObject):
 
 class SmoothDihedralFaceNodesParams(CoreObject):
     """Parameters to smooth dihedral face nodes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SmoothDihedralFaceNodesParams`` object with default parameters.
+    min_dihedral_angle: float, optional
+        Minimum angle to be used to identify dihedral faces.
+    tolerance: float, optional
+        Tolerance relative to local mesh size to control smooth movement of nodes.
+    type: SmoothType, optional
+        Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+    json_data: dict, optional
+        JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> smooth_dihedral_face_nodes_params = prime.SmoothDihedralFaceNodesParams(model = model)
     """
     _default_params = {}
 
@@ -1895,6 +2123,21 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
 class SmoothDihedralFaceNodesResults(CoreObject):
     """Results structure associated with smooth dihedral face nodes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SmoothDihedralFaceNodesResults`` object with default parameters.
+    n_nodes_smoothed: int, optional
+        Number of dihedral face nodes smoothed.
+    error_code: ErrorCode, optional
+        Error Code associated with creating offset surface.
+    json_data: dict, optional
+        JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> smooth_dihedral_face_nodes_results = prime.SmoothDihedralFaceNodesResults(model = model)
     """
     _default_params = {}
 
@@ -2019,6 +2262,25 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
 class RefineAtContactsParams(CoreObject):
     """Parameters to refine face elements in contact.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RefineAtContactsParams`` object with default parameters.
+    contact_tolerance: float, optional
+        Maximum tolerance used to identify face elements as contacts.
+    relative_tolerance: bool, optional
+        Option to specify the contact tolerance is relative or absolute.
+    refine_max_size: float, optional
+        Maximum size used to refine contact face elements.
+    project_on_geometry: bool, optional
+        Project on geometry on remesh.
+    json_data: dict, optional
+        JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> refine_at_contacts_params = prime.RefineAtContactsParams(model = model)
     """
     _default_params = {}
 
@@ -2189,6 +2451,23 @@ class RefineAtContactsParams(CoreObject):
 
 class RefineAtContactsResults(CoreObject):
     """Results structure associated with refine face elements in contact.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RefineAtContactsResults`` object with default parameters.
+    n_refined: int, optional
+        Number of face elements identified for refinement.
+    size_field_id: int, optional
+        Id of size field created to refine at contacts.
+    error_code: ErrorCode, optional
+        ErrorCode associated with the refine contacts operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> refine_at_contacts_results = prime.RefineAtContactsResults(model = model)
     """
     _default_params = {}
 
@@ -2336,6 +2615,25 @@ class RefineAtContactsResults(CoreObject):
 
 class AddThicknessParams(CoreObject):
     """Parameters to add thickness for a given plane.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddThicknessParams`` object with default parameters.
+    thickness: float, optional
+        To assign the offset distance of inflation.
+    reverse_face_normal: bool, optional
+        To assign the direction of inflation.
+    suggested_part_name: str, optional
+        Suggested part name for created patching surfaces.
+    fix_intersections: bool, optional
+        Fix intersections in concave regions.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_thickness_params = prime.AddThicknessParams(model = model)
     """
     _default_params = {}
 
@@ -2506,6 +2804,21 @@ class AddThicknessParams(CoreObject):
 
 class AddThicknessResults(CoreObject):
     """Result structure associated with add thickness zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddThicknessResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    part_id: int, optional
+        The created thickness part id.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_thickness_results = prime.AddThicknessResults(model = model)
     """
     _default_params = {}
 
@@ -2630,6 +2943,37 @@ class AddThicknessResults(CoreObject):
 
 class CreateBOIParams(CoreObject):
     """Parameters used for BOI surface creation in the given axis.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateBOIParams`` object with default parameters.
+    boi_type: BOIType, optional
+        Type of BOI offsetting.
+    perform_initial_wrap: bool, optional
+        Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+    wrap_size: float, optional
+        Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+    flow_dir: FlowDirection, optional
+        Assigns the offset direction of inflation.
+    side_scale: float, optional
+        BOI side scaling factor.
+    wake_scale: float, optional
+        BOI flow direction scaling factor.
+    wake_levels: int, optional
+        BOI levels.
+    suggested_part_name: str, optional
+        Suggested part name for created BOI surfaces.
+    suggested_label_prefix: str, optional
+        Suggested label name for created BOI surfaces.
+    number_of_threads: int, optional
+        Number of threads for multithreading.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_boiparams = prime.CreateBOIParams(model = model)
     """
     _default_params = {}
 
@@ -2938,6 +3282,21 @@ class CreateBOIParams(CoreObject):
 
 class CreateBOIResults(CoreObject):
     """Result structure associated with BOI creation of zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateBOIResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    part_id: int, optional
+        The BOI part id.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateBOIResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_boiresults = prime.CreateBOIResults(model = model)
     """
     _default_params = {}
 
@@ -3062,6 +3421,27 @@ class CreateBOIResults(CoreObject):
 
 class CreateContactPatchParams(CoreObject):
     """Parameters used for contact patch creation in the given axis.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateContactPatchParams`` object with default parameters.
+    contact_patch_axis: ContactPatchAxis, optional
+        Assigns the contact patch direction.
+    offset_distance: float, optional
+        Source offset distance value.
+    grouping_tolerance: float, optional
+        Tolerance distance value to group regions for contact patch creation.
+    suggested_part_name: str, optional
+        Suggested part name for created contact patch surfaces.
+    suggested_label_prefix: str, optional
+        Suggested label name for created contact patch surfaces.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_contact_patch_params = prime.CreateContactPatchParams(model = model)
     """
     _default_params = {}
 
@@ -3255,6 +3635,21 @@ class CreateContactPatchParams(CoreObject):
 
 class CreateContactPatchResults(CoreObject):
     """Result structure associated with created contact patch zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateContactPatchResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the contact patch creation operation.
+    part_id: int, optional
+        Contact patch part id.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateContactPatchResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_contact_patch_results = prime.CreateContactPatchResults(model = model)
     """
     _default_params = {}
 
@@ -3379,6 +3774,17 @@ class CreateContactPatchResults(CoreObject):
 
 class StretchFreeBoundariesParams(CoreObject):
     """Parameters used for stretch free boundaries operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``StretchFreeBoundariesParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``StretchFreeBoundariesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> stretch_free_boundaries_params = prime.StretchFreeBoundariesParams(model = model)
     """
     _default_params = {}
 
@@ -3458,6 +3864,19 @@ class StretchFreeBoundariesParams(CoreObject):
 
 class StretchFreeBoundariesResults(CoreObject):
     """Results associated with stretch free boundaries operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``StretchFreeBoundariesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``StretchFreeBoundariesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> stretch_free_boundaries_results = prime.StretchFreeBoundariesResults(model = model)
     """
     _default_params = {}
 
@@ -3559,6 +3978,17 @@ class StretchFreeBoundariesResults(CoreObject):
 
 class TriangulateParams(CoreObject):
     """Provides the parameters used for triangulation operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TriangulateParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> triangulate_params = prime.TriangulateParams(model = model)
     """
     _default_params = {}
 
@@ -3638,6 +4068,23 @@ class TriangulateParams(CoreObject):
 
 class TriangulateResults(CoreObject):
     """Results associated with triangulate operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TriangulateResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of the operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    n_faces_triangulated: int, optional
+        Number of faces that were triangulated.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> triangulate_results = prime.TriangulateResults(model = model)
     """
     _default_params = {}
 

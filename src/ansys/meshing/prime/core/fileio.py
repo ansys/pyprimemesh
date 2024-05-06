@@ -40,12 +40,12 @@ from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
 class FileIO(_FileIO):
-    """Manages file inputs and outputs.
+    """Handles reading or writing files from the disk.
 
     Parameters
     ----------
     model : Model
-        Server model from which to create and modify wrapper controls.
+        Server model to create FileIO object.
     """
 
     __doc__ = _FileIO.__doc__
@@ -306,9 +306,6 @@ class FileIO(_FileIO):
             sim_data_str = super().get_abaqus_simulation_data(part_id)
             if params.config_settings == None:
                 params.config_settings = ''
-            params.config_settings = (
-                mapdlcdbexportutils.generate_config_commands(params) + params.config_settings
-            )
             all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
                 self._model, sim_data_str, params
             )
@@ -481,14 +478,15 @@ class FileIO(_FileIO):
             if len(self._model.parts) > 0:
                 part_id = self._model.parts[0].id
             sim_data = json.loads(super().get_abaqus_simulation_data(part_id))
-            mp = dynaexportutils.MaterialProcessor(
-                self._model, sim_data["Materials"], sim_data["Zones"]
-            )
-            all_mat_cmds = mp.get_all_material_commands()
-            params.material_properties = all_mat_cmds + params.material_properties
-            dp = dynaexportutils.DatabaseProcessor(self._model, sim_data["Step"])
-            all_data_cmds = dp.get_output_database_keywords()
-            params.database_keywords = all_data_cmds + params.database_keywords
+            if sim_data is not None:
+                mp = dynaexportutils.MaterialProcessor(
+                    self._model, sim_data["Materials"], sim_data["Zones"]
+                )
+                all_mat_cmds = mp.get_all_material_commands()
+                params.material_properties = all_mat_cmds + params.material_properties
+                dp = dynaexportutils.DatabaseProcessor(self._model, sim_data["Step"])
+                all_data_cmds = dp.get_output_database_keywords()
+                params.database_keywords = all_data_cmds + params.database_keywords
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
         return result
 

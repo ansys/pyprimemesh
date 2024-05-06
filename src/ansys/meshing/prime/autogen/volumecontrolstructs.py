@@ -10,6 +10,21 @@ from ansys.meshing.prime.params.primestructs import *
 
 class VolumeControlParams(CoreObject):
     """Volume control parameters are used to define the volume type in the volume control.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeControlParams`` object with default parameters.
+    cell_zonelet_type: CellZoneletType, optional
+        Cell zonelet type is used to define the type of the associated volume.
+    skip_hexcore: bool, optional
+        Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_control_params = prime.VolumeControlParams(model = model)
     """
     _default_params = {}
 

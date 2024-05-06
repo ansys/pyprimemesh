@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class FeatureExtraction(CoreObject):
     """Provide functions for all feature extraction operations like extracting edges zonlelets, tracing node paths.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create FeatureExtraction object.
     """
 
     def __init__(self, model: CommunicationManager):
