@@ -36,6 +36,27 @@ class ScopeExpressionType(enum.IntEnum):
 
 class ScopeDefinition(CoreObject):
     """ScopeDefinition to scope entities based on entity and evaluation type.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScopeDefinition`` object with default parameters.
+    entity_type: ScopeEntity, optional
+        Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+    evaluation_type: ScopeEvaluationType, optional
+        Evaluation type to scope entities. The default is set to labels.
+    part_expression: str, optional
+        Part expression to scope parts while evaluating scope.
+    label_expression: str, optional
+        Label expression to scope entities when evaluation type is set to labels.
+    zone_expression: str, optional
+        Zone expression to scope entities when evaluation type is set to zones.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScopeDefinition`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scope_definition = prime.ScopeDefinition(model = model)
     """
     _default_params = {}
 
@@ -229,6 +250,25 @@ class ScopeDefinition(CoreObject):
 
 class LeakPreventionParams(CoreObject):
     """LeakPreventionParams defines leakage prevention control parameters for wrapper.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``LeakPreventionParams`` object with default parameters.
+    material_points: List[str], optional
+        Material points used for leak prevention control.
+    scope: ScopeDefinition, optional
+        Scope used for leak prevention control.
+    max_hole_size: float, optional
+        Maximum hole size to prevent leakage into region.
+    n_expansion_layers: int, optional
+        Number of layers to expand leaking region.
+    json_data: dict, optional
+        JSON dictionary to create a ``LeakPreventionParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> leak_prevention_params = prime.LeakPreventionParams(model = model)
     """
     _default_params = {}
 
@@ -399,6 +439,21 @@ class LeakPreventionParams(CoreObject):
 
 class SetLeakPreventionsResults(CoreObject):
     """Results associated with set leak preventions.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetLeakPreventionsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set leak preventions.
+    ids: Iterable[int], optional
+        Ids of added leak prevention controls.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetLeakPreventionsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_leak_preventions_results = prime.SetLeakPreventionsResults(model = model)
     """
     _default_params = {}
 
@@ -523,6 +578,23 @@ class SetLeakPreventionsResults(CoreObject):
 
 class ContactPreventionParams(CoreObject):
     """ContactPreventionParams defines contact prevention control parameters for wrapper.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ContactPreventionParams`` object with default parameters.
+    source_scope: ScopeDefinition, optional
+        Source scope used for contact prevention control.
+    target_scope: ScopeDefinition, optional
+        Target scope used for contact prevention control.
+    size: float, optional
+        Minimum gap size (gap/4) to resolve contact between source and target.
+    json_data: dict, optional
+        JSON dictionary to create a ``ContactPreventionParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> contact_prevention_params = prime.ContactPreventionParams(model = model)
     """
     _default_params = {}
 
@@ -670,6 +742,21 @@ class ContactPreventionParams(CoreObject):
 
 class SetContactPreventionsResults(CoreObject):
     """Results associated with set contact preventions.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetContactPreventionsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set contact preventions.
+    ids: Iterable[int], optional
+        Ids of added contact prevention controls.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetContactPreventionsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_contact_preventions_results = prime.SetContactPreventionsResults(model = model)
     """
     _default_params = {}
 
@@ -794,6 +881,23 @@ class SetContactPreventionsResults(CoreObject):
 
 class FeatureRecoveryParams(CoreObject):
     """FeatureRecoveryParams defines feature recovery control parameters for wrapper.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FeatureRecoveryParams`` object with default parameters.
+    scope: ScopeDefinition, optional
+        Scope used for feature recovery control.
+    enable_feature_octree_refinement: bool, optional
+        Checks whether to perform octree refinement at feature edges.
+    size_at_features: float, optional
+        Refinement size at features.
+    json_data: dict, optional
+        JSON dictionary to create a ``FeatureRecoveryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> feature_recovery_params = prime.FeatureRecoveryParams(model = model)
     """
     _default_params = {}
 
@@ -941,6 +1045,21 @@ class FeatureRecoveryParams(CoreObject):
 
 class SetFeatureRecoveriesResults(CoreObject):
     """Results associated with set feature recoveries.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetFeatureRecoveriesResults`` object with default parameters.
+    ids: Iterable[int], optional
+        Ids of added feature recovery controls.
+    error_code: ErrorCode, optional
+        Error code associated with the set feature recoveries.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetFeatureRecoveriesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_feature_recoveries_results = prime.SetFeatureRecoveriesResults(model = model)
     """
     _default_params = {}
 
@@ -1065,6 +1184,17 @@ class SetFeatureRecoveriesResults(CoreObject):
 
 class ScopeZoneletParams(CoreObject):
     """Parameters used to get the scoped face or edge zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScopeZoneletParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScopeZoneletParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scope_zonelet_params = prime.ScopeZoneletParams(model = model)
     """
     _default_params = {}
 
@@ -1144,6 +1274,21 @@ class ScopeZoneletParams(CoreObject):
 
 class SetScopeResults(CoreObject):
     """Results associated with the set scope operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetScopeResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set scope.
+    warning_code: WarningCode, optional
+        Warning code associated with the set scope.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetScopeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_scope_results = prime.SetScopeResults(model = model)
     """
     _default_params = {}
 
@@ -1268,6 +1413,21 @@ class SetScopeResults(CoreObject):
 
 class SetParamsResults(CoreObject):
     """Results associated with the set parameters operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetParamsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set parameters operation.
+    warning_code: WarningCode, optional
+        Warning code associated with the set parameters operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetParamsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_params_results = prime.SetParamsResults(model = model)
     """
     _default_params = {}
 
@@ -1392,6 +1552,29 @@ class SetParamsResults(CoreObject):
 
 class MultiZoneSweepMeshParams(CoreObject):
     """Defines MultiZone thin sweep mesh control parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneSweepMeshParams`` object with default parameters.
+    source_and_target_scope: ScopeDefinition, optional
+        Source and target faces used to determine the direction of sweep in MultiZone meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    sweep_mesh_size: float, optional
+        Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+        This is a beta parameter. The behavior and name may change in the future.
+    n_divisions: int, optional
+        Number of divisions in the sweep direction.
+        This is a beta parameter. The behavior and name may change in the future.
+    thin_sweep: bool, optional
+        Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_sweep_mesh_params = prime.MultiZoneSweepMeshParams(model = model)
     """
     _default_params = {}
 
@@ -1570,6 +1753,29 @@ class MultiZoneSweepMeshParams(CoreObject):
 
 class MultiZoneEdgeBiasingParams(CoreObject):
     """Defines MultiZone edge biasing control parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneEdgeBiasingParams`` object with default parameters.
+    face_scope: ScopeDefinition, optional
+        Reference face zonelets to control mesh clustering orientation.
+        This is a beta parameter. The behavior and name may change in the future.
+    edge_scope: ScopeDefinition, optional
+        Edge zonelets to control the expanse of edge biasing.
+        This is a beta parameter. The behavior and name may change in the future.
+    bias_factor: float, optional
+        Bias factor used for MultiZone edge biasing control.
+        This is a beta parameter. The behavior and name may change in the future.
+    n_divisions: int, optional
+        Number of divisions on the section where edge biasing is done.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneEdgeBiasingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_edge_biasing_params = prime.MultiZoneEdgeBiasingParams(model = model)
     """
     _default_params = {}
 
@@ -1748,6 +1954,20 @@ class MultiZoneEdgeBiasingParams(CoreObject):
 
 class MultiZoneMapMeshParams(CoreObject):
     """Define controlling parameters for the map mesh using MultiZone.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneMapMeshParams`` object with default parameters.
+    scope: ScopeDefinition, optional
+        Scope used for MultiZone map mesh control.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneMapMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_map_mesh_params = prime.MultiZoneMapMeshParams(model = model)
     """
     _default_params = {}
 
@@ -1851,6 +2071,29 @@ class MultiZoneMapMeshParams(CoreObject):
 
 class MultiZoneSizingParams(CoreObject):
     """Parameters for MultiZone meshing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneSizingParams`` object with default parameters.
+    max_size: float, optional
+        Defines global maximum mesh size.
+        This is a beta parameter. The behavior and name may change in the future.
+    min_size: float, optional
+        Defines global minimum mesh size.
+        This is a beta parameter. The behavior and name may change in the future.
+    growth_rate: float, optional
+        Defines growth rate.
+        This is a beta parameter. The behavior and name may change in the future.
+    use_volumetric_size_field: bool, optional
+        Defines whether to use size field for MultiZone meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_sizing_params = prime.MultiZoneSizingParams(model = model)
     """
     _default_params = {}
 

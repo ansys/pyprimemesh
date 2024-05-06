@@ -10,6 +10,17 @@ class SizeControl(CoreObject):
 
     The size field is computed based on the size control defined.
     Different type of size controls provide control over how the mesh size is distributed on a surface or within the volume.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create SizeControl object.
+    id : int
+        Id of the SizeControl.
+    object_id : int
+        Object id of the SizeControl.
+    name : str
+        Name of the SizeControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

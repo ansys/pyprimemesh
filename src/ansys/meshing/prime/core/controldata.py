@@ -9,14 +9,13 @@ from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
-from ansys.meshing.prime.core.multizonecontrol import MultiZoneControl
+from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
-from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import SizingType
-
+from ansys.meshing.prime.autogen.model import Model
 
 class ControlData(_ControlData):
     """Contains all controls.
@@ -26,7 +25,7 @@ class ControlData(_ControlData):
 
     Parameters
     ----------
-    model : CommunicationManager
+    model : Model
         Communicator with the server.
     id : int
         ID of the model.
@@ -37,7 +36,7 @@ class ControlData(_ControlData):
 
     """
 
-    def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
+    def __init__(self, model: Model, id: int, object_id: int, name: str):
         """Initialize the ``ControlData`` class."""
         self._model = model
         self._wrapper_controls = []

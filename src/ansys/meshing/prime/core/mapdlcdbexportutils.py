@@ -13,10 +13,7 @@ from typing import Tuple
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.params.primestructs import ExportMapdlCdbParams
 
-__all__ = [
-    'generate_config_commands' 'generate_mapdl_commands',
-]
-
+__all__ = ['generate_mapdl_commands']
 
 class _TractionProperties:
     DAMAGE_EVOLUTION_ENERGY = 1000
@@ -383,6 +380,83 @@ class _AmplitudeProcessor:
         # string.format(name, amplitude, frequency)
         return table_string.format(name, magn, freq)
 
+    def _process_periodic_amplitude_table_complete_single_term(
+            self, name, magn, A0, t0, A1, B1, freq):
+        table_string = """!
+! A0 = {2}
+! Omega = {6}
+! t0 = {3}
+! A1 = {4}
+! B1 = {5}
+! Magnitude = {1}
+
+/com,*********** Create Displacement Tables and Functions ******
+!
+! ANSYS Function Representation
+!
+*DIM,{0},TABLE,6,20,2,,,,0
+!
+! Begin of equation: time (mm)
+{0}(0,0,1)= 0, -999
+{0}(2,0,1)= 0.0
+{0}(3,0,1)= 0.0
+{0}(4,0,1)= 0.0
+{0}(5,0,1)= 0.0
+{0}(6,0,1)= 0.0
+{0}(0,1,1)= 1.0, 99, 0, 1, 1, 0, 0
+{0}(0,2,1)= 0.0,
+{0}(0,3,1)=   0,
+{0}(0,4,1)= 0.0,
+{0}(0,5,1)= 0.0,
+{0}(0,6,1)= 0.0,
+{0}(0,7,1)= 0.0,
+{0}(0,8,1)= 0.0,
+{0}(0,9,1)= 0.0,
+{0}(0,10,1)= 0.0,
+{0}(0,11,1)= 0.0,
+{0}(0,12,1)= 0.0,
+{0}(0,13,1)= 0.0,
+{0}(0,14,1)= 0.0,
+{0}(0,15,1)= 0.0,
+{0}(0,16,1)= 0.0,
+{0}(0,17,1)= 0.0,
+{0}(0,18,1)= 0.0,
+{0}(0,19,1)= 0.0,
+{0}(0,20,1)= 0.0,
+! End of equation: time (mm)
+!
+! Begin of equation: Magnitude*(A0 + (A1*cos(Omega*(time-t0)) + B1*sin(Omega*(time-t0)))) (mm)
+! Begin of equation: {1}*({2} + ({4}*cos({6}*(time-{3})) + {5}*sin({6}*(time-{3})))) (mm)
+{0}(0,0,2)= -999, -999
+{0}(2,0,2)= 0.0
+{0}(3,0,2)= 0.0
+{0}(4,0,2)= 0.0
+{0}(5,0,2)= 0.0
+{0}(6,0,2)= 0.0
+{0}(0,1,2)= 1.0, -1, 0, {3}, 0, 0, 1
+{0}(0,2,2)= 0.0, -2, 0, 1, 1, 2, -1
+{0}(0,3,2)=   0, -1, 0, {6}, 0, 0, -2
+{0}(0,4,2)= 0.0, -3, 0, 1, -1, 3, -2
+{0}(0,5,2)= 0.0, -1, 10, 1, -3, 0, 0
+{0}(0,6,2)= 0.0, -2, 0, {4}, 0, 0, -1
+{0}(0,7,2)= 0.0, -3, 0, 1, -2, 3, -1
+{0}(0,8,2)= 0.0, -1, 0, {3}, 0, 0, 1
+{0}(0,9,2)= 0.0, -2, 0, 1, 1, 2, -1
+{0}(0,10,2)= 0.0, -1, 0, {6}, 0, 0, -2
+{0}(0,11,2)= 0.0, -4, 0, 1, -1, 3, -2
+{0}(0,12,2)= 0.0, -1, 9, 1, -4, 0, 0
+{0}(0,13,2)= 0.0, -2, 0, {5}, 0, 0, -1
+{0}(0,14,2)= 0.0, -4, 0, 1, -2, 3, -1
+{0}(0,15,2)= 0.0, -1, 0, 1, -3, 1, -4
+{0}(0,16,2)= 0.0, -2, 0, {2}, 0, 0, -1
+{0}(0,17,2)= 0.0, -3, 0, 1, -2, 1, -1
+{0}(0,18,2)= 0.0, -1, 0, {1}, 0, 0, -3
+{0}(0,19,2)= 0.0, -2, 0, 1, -1, 3, -3
+{0}(0,20,2)= 0.0, 99, 0, 1, -2, 0, 0
+! End of equation: Magnitude*(A0 + (A1*cos(Omega*(time-t0)) + B1*sin(Omega*(time-t0)))) (mm)
+"""
+        return table_string.format(name, magn, A0, t0, A1, B1, freq)
+
     def _process_periodic_data(self, amplitude_name, ampl_table_data):
         amplitude_commands = ""
         data = ampl_table_data
@@ -406,25 +480,40 @@ class _AmplitudeProcessor:
             B = data["B"]
         if terms > 1:
             self._logger.warning(
-                f"Warning: multiple Sine terms for Amplitude Table '{amplitude_name}' "
-                f"is not processed. please check the table created with name: "
+                f"Warning: multiple Sine/Cosine terms for Amplitude Table '{amplitude_name}' "
+                f"is not processed. Only First term is used to define table "
+                f"please check the table created with name: "
                 f"{self._modified_amplitude_name}"
             )
-        for i, pt in enumerate(zip(A, B)):
-            if i == 0 and float(pt[0]) != 0:
-                self._logger.warning(
-                    f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
-                    f" please check the table created with name: "
-                    f"{self._modified_amplitude_name}"
-                )
-            if i == 0 and float(pt[1]) != 1:
-                self._logger.warning(
-                    f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
-                    f"A*SIN(w*time) equation is processed please check the table "
-                    f"created with name: {self._modified_amplitude_name}"
-                )
-        amplitude_commands += self._process_periodic_amplitude_table(
-            self._modified_amplitude_name, self._scale_factor, freq
+        if t0 != 0:
+            self._logger.warning(
+                f"Warning: nonzero value of 't0' is specified. "
+                f"This is not supported in Ansys MAPDL solver directly. "
+                f"Split the step in two to create equivalent effect. "
+                f"Table is written with t0 = 0.0"
+            )
+        # for i, pt in enumerate(zip(A, B)):
+            # if i == 0 and float(pt[0]) != 0:
+                # self._logger.warning(
+                    # f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
+                    # f" please check the table created with name: "
+                    # f"{self._modified_amplitude_name}"
+                # )
+            # if i == 0 and float(pt[1]) != 1:
+                # self._logger.warning(
+                    # f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
+                    # f"A*SIN(w*time) equation is processed please check the table "
+                    # f"created with name: {self._modified_amplitude_name}"
+                # )
+        # amplitude_commands += self._process_periodic_amplitude_table(
+            # self._modified_amplitude_name, self._scale_factor, freq
+        # )
+        if A:
+            A1 = A[0]
+        if B:
+            B1 = B[0]
+        amplitude_commands += self._process_periodic_amplitude_table_complete_single_term(
+            self._modified_amplitude_name, self._scale_factor, A0, t0, A1, B1, freq
         )
         return amplitude_commands
 
@@ -466,7 +555,8 @@ class _AmplitudeProcessor:
                 formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(1,
+                                  f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -517,7 +607,8 @@ class _AmplitudeProcessor:
                     formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(1,
+                                  f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -692,7 +783,11 @@ class _MaterialProcessor:
             zero = float(parameters['ZERO'])
         if 'TYPE' in parameters:
             exp_type = parameters['TYPE']
-        if 'DEPENDENCIES' in parameters or 'PORE FLUID' in parameters or 'USER' in parameters:
+        if (
+            'DEPENDENCIES' in parameters
+            or 'PORE FLUID' in parameters
+            or 'USER' in parameters
+        ):
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
                 f"*EXPANSION are not processed for material {material}"
@@ -2424,7 +2519,7 @@ class _StepProcessor:
             dynamic_analysis_commands += f'FINISH\n'
             dynamic_analysis_commands += f'\n'
             dynamic_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_transient_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
@@ -2534,7 +2629,7 @@ class _StepProcessor:
             dynamic_analysis_commands += f'FINISH\n'
             dynamic_analysis_commands += f'\n'
             dynamic_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_transient_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
@@ -2631,7 +2726,7 @@ class _StepProcessor:
             frequency_analysis_commands += f'FINISH\n'
             frequency_analysis_commands += f'\n'
             frequency_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_modal_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_modal_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_modal_analysis')
             frequency_analysis_commands += f'/SOLU\n'
@@ -2689,7 +2784,7 @@ class _StepProcessor:
             steady_state_dynamics_analysis_commands += f'FINISH\n'
             steady_state_dynamics_analysis_commands += f'\n'
             steady_state_dynamics_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_harmonic_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_harmonic_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_harmonic_analysis')
             steady_state_dynamics_analysis_commands += f'/SOLU\n'
@@ -2789,9 +2884,10 @@ class _StepProcessor:
                 if 'Data' in output and output['Data'] is not None:
                     if 'ElementOutput' in output['Data']:
                         for elemout in output['Data']['ElementOutput']:
-                            for key in elemout['Data']['keys']:
-                                if key in ["S"]:
-                                    store_el_results = True
+                            if elemout is not None and elemout['Data'] is not None:
+                                for key in elemout['Data']['keys']:
+                                    if key in ["S"]:
+                                        store_el_results = True
         return store_el_results
 
     def get_ninterval_mapdl_commands(self):
@@ -2876,128 +2972,130 @@ class _StepProcessor:
                             output_analysis_commands += "1\n"
                 if 'NodeOutput' in output['Data']:
                     for nodeout in output['Data']['NodeOutput']:
-                        # nodeout = output['NodeOutput']
-                        for key in nodeout['Data']['keys']:
-                            if key in ["RF", "U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
-                                output_analysis_commands += "OUTRES, "
-                                if key == "RF":
-                                    output_analysis_commands += "RSOL, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
-                                            else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                        if nodeout is not None and nodeout['Data'] is not None:
+                            # nodeout = output['NodeOutput']
+                            for key in nodeout['Data']['keys']:
+                                if key in ["RF", "U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
+                                    output_analysis_commands += "OUTRES, "
+                                    if key == "RF":
+                                        output_analysis_commands += "RSOL, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                elif key in ["U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
-                                    output_analysis_commands += "NSOL, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
                                             else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += 'ALL, '
+                                    elif key in ["U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
+                                        output_analysis_commands += "NSOL, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in nodeout:
-                                        if (
-                                            nodeout['Parameters'] is not None
-                                            and 'NSET' in nodeout['Parameters']
-                                        ):
-                                            output_analysis_commands += nodeout['Parameters'][
-                                                'NSET'
-                                            ]
-                                output_analysis_commands += ', ,\n'
-                            else:
-                                self._logger.warning(
-                                    f"warning: node output key '{key}' is not processed."
-                                )
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
+                                            else:
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in nodeout:
+                                            if (
+                                                nodeout['Parameters'] is not None
+                                                and 'NSET' in nodeout['Parameters']
+                                            ):
+                                                output_analysis_commands += nodeout['Parameters'][
+                                                    'NSET'
+                                                ]
+                                    output_analysis_commands += ', ,\n'
+                                else:
+                                    self._logger.warning(
+                                        f"warning: node output key '{key}' is not processed."
+                                    )
                 if 'ElementOutput' in output['Data']:
                     for elemout in output['Data']['ElementOutput']:
-                        # elemout = output['ElementOutput']
-                        for key in elemout['Data']['keys']:
-                            if key in ["S", "CTF", "NFORC"]:
-                                output_analysis_commands += "OUTRES, "
-                                if key == "S":
-                                    output_analysis_commands += "STRS, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
-                                            else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                        if elemout is not None and elemout['Data'] is not None:
+                            # elemout = output['ElementOutput']
+                            for key in elemout['Data']['keys']:
+                                if key in ["S", "CTF", "NFORC"]:
+                                    output_analysis_commands += "OUTRES, "
+                                    if key == "S":
+                                        output_analysis_commands += "STRS, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in elemout:
-                                        if (
-                                            elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
-                                        ):
-                                            output_analysis_commands += elemout['Parameters'][
-                                                'ELSET'
-                                            ]
-                                elif key == "CTF":
-                                    output_analysis_commands += "MISC, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
                                             else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in elemout:
+                                            if (
+                                                elemout['Parameters'] is not None
+                                                and 'ELSET' in elemout['Parameters']
+                                            ):
+                                                output_analysis_commands += elemout['Parameters'][
+                                                    'ELSET'
+                                                ]
+                                    elif key == "CTF":
+                                        output_analysis_commands += "MISC, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in elemout:
-                                        if (
-                                            elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
-                                        ):
-                                            output_analysis_commands += elemout['Parameters'][
-                                                'ELSET'
-                                            ]
-                                elif key == "NFORC":
-                                    output_analysis_commands += "NLOAD, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
                                             else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in elemout:
+                                            if (
+                                                elemout['Parameters'] is not None
+                                                and 'ELSET' in elemout['Parameters']
+                                            ):
+                                                output_analysis_commands += elemout['Parameters'][
+                                                    'ELSET'
+                                                ]
+                                    elif key == "NFORC":
+                                        output_analysis_commands += "NLOAD, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in elemout:
-                                        if (
-                                            elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
-                                        ):
-                                            output_analysis_commands += elemout['Parameters'][
-                                                'ELSET'
-                                            ]
-                                output_analysis_commands += ', ,\n'
-                            else:
-                                self._logger.warning(
-                                    f"warning: element output key '{key}' is not processed."
-                                )
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
+                                            else:
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in elemout:
+                                            if (
+                                                elemout['Parameters'] is not None
+                                                and 'ELSET' in elemout['Parameters']
+                                            ):
+                                                output_analysis_commands += elemout['Parameters'][
+                                                    'ELSET'
+                                                ]
+                                    output_analysis_commands += ', ,\n'
+                                else:
+                                    self._logger.warning(
+                                        f"warning: element output key '{key}' is not processed."
+                                    )
                         if (
                             elemout['Parameters'] is not None
                             and 'POSITION' in elemout['Parameters']
@@ -3100,9 +3198,7 @@ class _StepProcessor:
                             vector_commands += f"F, {item}, {dof_map[dof]}, 1\n"
                             count_load_vectors += 1
                             self._modal_load_vectors[count_load_vectors] = {
-                                'SET': base_name,
-                                "COMP": dof_map[dof],
-                            }
+                                'SET': base_name, "COMP": dof_map[dof]}
         # else:
         # vector_commands += 'SOLVE\n'
         return vector_commands
@@ -3191,11 +3287,12 @@ class _StepProcessor:
             boundaries_data,
             self._step_start_time,
             self._step_end_time,
-            sim_data=self._simulation_data,
+            sim_data=self._simulation_data
         )
         # TODO this needs to be in List of boundaries instead of single Boundary
         comp_names = []
-        comp_names.extend(boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
+        comp_names.extend(
+            boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
         return comp_names
 
     def get_global_damping_commnads(self, global_damping_data):
@@ -3401,41 +3498,6 @@ class _AxialTempCorrection:
         return secdata_string
 
 
-def generate_config_commands(params: ExportMapdlCdbParams) -> str:
-    """Generate the configuration commands to be added to the CDB file.
-
-    Parameters
-    ----------
-        params : ExportMapdlCdbParams
-            Parameters to export a CDB file.
-
-    Returns
-    -------
-        str
-            A string containing the configuration commands.
-
-    Notes
-    -----
-    This function is a Beta. Function behavior and implementation may change in future.
-    """
-    config_cmds = ''
-    config_cmds = '/CLEAR\n'
-    config_cmds += '\n'
-    config_cmds += '/NERR,5,99999999,,0,0\n'
-    config_cmds += '/CONFIG,RESUPREC,2\n'
-    config_cmds += '!/FCOMP,RST,5\n'
-    config_cmds += '/UNITS,MPA\n'
-    config_cmds += '\n'
-    config_cmds += '/PREP7\n'
-    config_cmds += '\n'
-    config_cmds += 'SHPP,OFF,,NOWARN\n'
-    config_cmds += 'ETCONTROL, OFF\n'
-    config_cmds += '\n'
-    if not os.path.exists(params.analysis_settings_file_name):
-        config_cmds += '/NOPR\n'
-    return config_cmds
-
-
 def generate_mapdl_commands(
     model: prime.Model, simulation_data: str, params: ExportMapdlCdbParams
 ) -> Tuple[str, str]:
@@ -3574,27 +3636,27 @@ def generate_mapdl_commands(
     analysis_settings += (
         '!--------------------------------------------------------------------------\n'
     )
-    analysis_settings += '/delete,file,cnm,,1\n'
-    analysis_settings += '/delete,file,DSP,,\n'
-    analysis_settings += '/delete,file,mcf,,\n'
-    analysis_settings += '/delete,file,rfrq,,\n'
-    analysis_settings += '/delete,file,log,,1\n'
-    analysis_settings += '/delete,file,emat,,1\n'
-    analysis_settings += '/delete,file,esav,,1\n'
-    analysis_settings += '/delete,file,err,,1\n'
-    analysis_settings += '/delete,file,full,,1\n'
-    analysis_settings += '/delete,file,mlv,,1\n'
-    analysis_settings += '/delete,file,mode,,1\n'
-    analysis_settings += '/delete,file,rfrq,,1\n'
-    analysis_settings += '/delete,file,out,,1\n'
+    analysis_settings += '/delete,,cnm,,1\n'
+    analysis_settings += '/delete,,DSP,,\n'
+    analysis_settings += '/delete,,mcf,,\n'
+    analysis_settings += '/delete,,rfrq,,\n'
+    analysis_settings += '/delete,,log,,1\n'
+    analysis_settings += '/delete,,emat,,1\n'
+    analysis_settings += '/delete,,esav,,1\n'
+    analysis_settings += '/delete,,err,,1\n'
+    analysis_settings += '/delete,,full,,1\n'
+    analysis_settings += '/delete,,mlv,,1\n'
+    analysis_settings += '/delete,,mode,,1\n'
+    analysis_settings += '/delete,,rfrq,,1\n'
+    analysis_settings += '/delete,,out,,1\n'
     # analysis_settings += '/delete,harmonic,rst,,1\n'
-    analysis_settings += '/delete,file,mntr,,\n'
-    analysis_settings += '/delete,file,ldhi,,\n'
-    analysis_settings += '/delete,file,r001,,1\n'
-    analysis_settings += '/delete,file,rst,,1\n'
-    analysis_settings += '/delete,file,stat,,1\n'
-    analysis_settings += '/delete,file,db,,\n'
-    analysis_settings += '/delete,file,rdb,,\n'
+    analysis_settings += '/delete,,mntr,,\n'
+    analysis_settings += '/delete,,ldhi,,\n'
+    analysis_settings += '/delete,,r001,,1\n'
+    analysis_settings += '/delete,,rst,,1\n'
+    analysis_settings += '/delete,,stat,,1\n'
+    analysis_settings += '/delete,,db,,\n'
+    analysis_settings += '/delete,,rdb,,\n'
     if "Step" in json_simulation_data:
         for an_name in steps_data._assign_analysis:
             analysis_settings += f'/delete,{an_name},rst,,1\n'

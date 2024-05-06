@@ -10,6 +10,23 @@ from ansys.meshing.prime.params.primestructs import *
 
 class ThinVolumeMeshParams(CoreObject):
     """Parameters to generate thin volume mesh. This is for internal use only.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ThinVolumeMeshParams`` object with default parameters.
+    n_layers: int, optional
+        Number of thin volume layers to be generated.
+    imprint_sides: bool, optional
+        Checks whether to imprint quad faces on side zonelets.
+    n_ignore_rings: int, optional
+        Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
+    json_data: dict, optional
+        JSON dictionary to create a ``ThinVolumeMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> thin_volume_mesh_params = prime.ThinVolumeMeshParams(model = model)
     """
     _default_params = {}
 

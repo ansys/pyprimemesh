@@ -10,6 +10,23 @@ from ansys.meshing.prime.params.primestructs import *
 
 class PeriodicControlParams(CoreObject):
     """PeriodicControlParams contains the parameters for periodic surface recovery.  Parameters like center, axis and angle determine the transformation from  one surface to its matching periodic surface.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PeriodicControlParams`` object with default parameters.
+    center: Iterable[float], optional
+        Center coordinates.
+    axis: Iterable[float], optional
+        Axis vector coordinates.
+    angle: float, optional
+        Angle in degrees.
+    json_data: dict, optional
+        JSON dictionary to create a ``PeriodicControlParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> periodic_control_params = prime.PeriodicControlParams(model = model)
     """
     _default_params = {}
 
@@ -157,6 +174,19 @@ class PeriodicControlParams(CoreObject):
 
 class PeriodicControlSummaryResult(CoreObject):
     """Results of Periodic control summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PeriodicControlSummaryResult`` object with default parameters.
+    message: str, optional
+        String with the periodic control summary.
+    json_data: dict, optional
+        JSON dictionary to create a ``PeriodicControlSummaryResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> periodic_control_summary_result = prime.PeriodicControlSummaryResult(model = model)
     """
     _default_params = {}
 
@@ -258,6 +288,17 @@ class PeriodicControlSummaryResult(CoreObject):
 
 class PeriodicControlSummaryParams(CoreObject):
     """Parameters used to get size control summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PeriodicControlSummaryParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``PeriodicControlSummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> periodic_control_summary_params = prime.PeriodicControlSummaryParams(model = model)
     """
     _default_params = {}
 

@@ -4,6 +4,8 @@
 import datetime
 import logging
 import os
+from typing import Union
+from ansys.meshing.prime.internals import utils
 
 
 class SingletonType(type):
@@ -20,11 +22,6 @@ class SingletonType(type):
 
 class PrimeLogger(object, metaclass=SingletonType):
     """Provides the singleton logger for PyPrimeMesh.
-
-    Parameters
-    ----------
-    to_file : bool, optional
-        Whether to include the logs in a file. The default is ``False``.
     """
 
     _logger = None
@@ -37,24 +34,30 @@ class PrimeLogger(object, metaclass=SingletonType):
             '%(asctime)s \t [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s'
         )
 
-    def get_logger(self):
-        """Get the logger.
+    @property
+    def python_logger(self) -> logging.Logger:
+        """Get the python logger.
 
         Returns
         -------
-        Logger
+        logging.Logger
             Logger.
         """
         return self._logger
 
-    def set_level(self, level: int):
+    def set_level(self, level: Union[int, str]):
         """Set logger output level.
 
         Parameters
         ----------
         level : int
             Level of the logger.
+
+        Notes
+        -----
+        This is a Beta API. The Behavior and implementation may change in future.
         """
+        utils.print_beta_api_warning(self._logger, "set_level")
         self._logger.setLevel(level=level)
 
     def enable_output(self, stream=None):
@@ -66,23 +69,39 @@ class PrimeLogger(object, metaclass=SingletonType):
         ----------
         stream: TextIO, optional
             Stream to output the log output to stream
+
+        Notes
+        -----
+        This is a Beta API. The Behavior and implementation may change in future.
         """
         # stdout
+        utils.print_beta_api_warning(self._logger, "enable_output")
         stream_handler = logging.StreamHandler(stream)
         stream_handler.setFormatter(self._formatter)
         self._logger.addHandler(stream_handler)
 
-    def add_file_handler(self, logs_dir: str = "./.log"):
-        """Save logs to a file in addition to printing them to stdout.
+    def add_file_handler(self, log_dir: str="./.log", log_file: str=None) -> logging.FileHandler:
+        """Save logs to a file.
 
         Parameters
         ----------
-        logs_dir : str, optional
+        log_dir : str, optional
             Directory of the logs. The default is ``"./.log"``.
+
+        log_file : str, optional
+            Log filename. The default is ``"log_<datestamp>.log"``.
+
+        Notes
+        -----
+        This is a Beta API. The Behavior and implementation may change in future.
         """
-        now = datetime.datetime.now()
-        if not os.path.isdir(logs_dir):
-            os.mkdir(logs_dir)
-        file_handler = logging.FileHandler(logs_dir + "/log_" + now.strftime("%Y-%m-%d") + ".log")
+        utils.print_beta_api_warning(self._logger, "add_file_handler")
+        if log_file is None:
+            now = datetime.datetime.now()
+            log_file = "log_" + now.strftime("%Y-%m-%d") + ".log"
+        if not os.path.isdir(log_dir):
+            os.mkdir(log_dir)
+        file_handler = logging.FileHandler(os.path.join(log_dir, log_file))
         file_handler.setFormatter(self._formatter)
         self._logger.addHandler(file_handler)
+        return file_handler

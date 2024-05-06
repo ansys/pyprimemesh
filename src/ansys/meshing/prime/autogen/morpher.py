@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class Morpher(CoreObject):
     """Morpher contain functionalities to change the geometry, adapting the mesh accordingly without a recomputation.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Morpher object.
     """
 
     def __init__(self, model: CommunicationManager):

@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class CollapseTool(CoreObject):
     """Performs various collapse operations. For example, split and collapse on face zonelets.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create CollapseTool object.
     """
 
     def __init__(self, model: CommunicationManager):

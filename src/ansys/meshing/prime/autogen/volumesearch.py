@@ -9,6 +9,12 @@ class VolumeSearch(CoreObject):
     """VolumeSearch allows you to check volume mesh quality.
 
     VolumeSearch performs volume mesh quality check based on different cell quality measures.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeSearch object.
     """
 
     def __init__(self, model: CommunicationManager):

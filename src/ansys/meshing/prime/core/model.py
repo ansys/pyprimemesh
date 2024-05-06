@@ -354,15 +354,15 @@ class Model(_Model):
 
     @property
     def python_logger(self):
-        """Get PyPrimeMesh's logger instance.
+        """Get python standard logger from PyPrimeMesh's logger instance.
 
-        PyPrimeMesh's logger instance can be used to control the verbosity
-        of messages printed by PyPrimeMesh.
+        PyPrimeMesh's python standard logger instance can be used to control
+        the verbosity of messages printed by PyPrimeMesh and more.
 
         Returns
         -------
         logging.Logger
-            PyPrimeMesh's logger instance.
+            PyPrimeMesh's python standard logger instance.
 
         Examples
         --------
@@ -371,4 +371,26 @@ class Model(_Model):
         >>> model.python_logger.setLevel(logging.DEBUG)
 
         """
-        return PrimeLogger().get_logger()
+        return PrimeLogger().python_logger
+
+    @property
+    def logger(self) -> PrimeLogger:
+        """Get PyPrimeMesh's logger instance.
+
+        PyPrimeMesh's logger instance can be used to save the logs to a file,
+        redirect the logs to the given stream, control the verbosity
+        of messages printed by PyPrimeMesh and more.
+
+        Returns
+        -------
+        PrimeLogger
+            PyPrimeMesh's logger instance.
+
+        Examples
+        --------
+        Save logs to a file.
+
+        >>> model.logger.add_file_handler(logs_dir=r"./tmp")
+
+        """
+        return PrimeLogger()

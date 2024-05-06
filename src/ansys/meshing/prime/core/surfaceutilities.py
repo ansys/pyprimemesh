@@ -29,12 +29,13 @@ from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode
 
 
 class SurfaceUtilities(_SurfaceUtilities):
-    """Performs various general surface utilities algorithms, such as adding thickness.
+    """Performs various general surface utilities algorithms. 
+    For example, copy zonelets, resolve surface intersections.
 
     Parameters
     ----------
     model : Model
-        Server model in which to perform operations.
+        Server model to create SurfaceUtilities object.
     """
 
     def __init__(self, model: Model):

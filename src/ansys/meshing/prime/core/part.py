@@ -10,19 +10,34 @@ from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
 
 
 class Part(_Part):
-    """
-    Defines and modifies the parts of a model.
+    """Part contains zonelets and topoentities.
+
+    Topoentities and zonelets are characterized by dimension of entities.
+    Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets. They are:
+
+    * FaceZonelet: A group of interconnected face elements.
+    * EdgeZonelet: A group of interconnected edge elements.
+    * CellZonelet: A group of interconnected cell elements.
+
+    Topoentities represent connectivity information.
+    Topoentities can be queried from higher order to lower order topoentities and vice versa.
+    Topoentities have geometric representation which may be defined by splines or facets.
+    The mesh generated on topoentities will be projected on geometry representation.
+
+    * TopoFace: Topoentity representing surfaces.
+    * TopoEdge: Topoentity representing curves.
+    * TopoVolume: Topoentity representing volumes.
 
     Parameters
     ----------
-    model: ansys.meshing.prime.Model
-        Model in which the part is created.
-    id: int
-        ID of the part provided by the server.
-    object_id: int
-        Object ID provided by the server.
-    name: str
-        Part name.
+    model : Model
+        Server model to create Part object.
+    id : int
+        Id of the Part.
+    object_id : int
+        Object id of the Part.
+    name : str
+        Name of the Part.
     """
 
     __doc__ = _Part.__doc__
