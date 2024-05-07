@@ -44,7 +44,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           vale-config: "doc/.vale.ini"
-          vale-version: "2.29.6"
+          vale-version: "3.4.1"
 
   docs-style:
     name: Documentation Style Check
