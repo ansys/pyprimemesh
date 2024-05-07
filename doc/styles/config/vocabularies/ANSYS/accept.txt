@@ -43,6 +43,7 @@ stackable
 [Ss]tacker
 [Ss]weeper
 [Ss]weepable
+te
 tet
 tetrahedra
 [Tt]opo
