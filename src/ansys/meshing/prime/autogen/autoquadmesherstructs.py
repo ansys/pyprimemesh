@@ -26,6 +26,32 @@ class EdgeConnectType(enum.IntEnum):
 
 class DetectHolesParams(CoreObject):
     """Parameters for detect holes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DetectHolesParams`` object with default parameters.
+    max_radius_circular_holes: float, optional
+        Maximum radius of circular holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    min_radius_circular_holes: float, optional
+        Minimum radius of circular holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    max_hole_length: float, optional
+        Maximum length of holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    min_hole_length: float, optional
+        Minimum length of holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    allow_curved_topo_faces: bool, optional
+        Option to allow holes in curved topoface.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DetectHolesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> detect_holes_params = prime.DetectHolesParams(model = model)
     """
     _default_params = {}
 
@@ -229,6 +255,29 @@ class DetectHolesParams(CoreObject):
 
 class DetectCircularHolesParams(CoreObject):
     """Parameters for detect circular holes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DetectCircularHolesParams`` object with default parameters.
+    allow_curved_topo_faces: bool, optional
+        Option to allow holes in curved topoface.
+        This is a beta parameter. The behavior and name may change in the future.
+    max_radius_circular_holes: float, optional
+        Maximum radius of circular holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    min_radius_circular_holes: float, optional
+        Minimum radius of circular holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_edge_allow_self_close: bool, optional
+        Option for merging self-closing edge loops.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DetectCircularHolesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> detect_circular_holes_params = prime.DetectCircularHolesParams(model = model)
     """
     _default_params = {}
 
@@ -407,6 +456,29 @@ class DetectCircularHolesParams(CoreObject):
 
 class DetectNonCircularHolesParams(CoreObject):
     """Parameters for detect non circular holes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DetectNonCircularHolesParams`` object with default parameters.
+    allow_curved_topo_faces: bool, optional
+        Option to allow holes in curved topoface.
+        This is a beta parameter. The behavior and name may change in the future.
+    max_hole_length: float, optional
+        Maximum length of holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    min_hole_length: float, optional
+        Minimum length of holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_edge_allow_self_close: bool, optional
+        Option for merging self-closing edge loops.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DetectNonCircularHolesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> detect_non_circular_holes_params = prime.DetectNonCircularHolesParams(model = model)
     """
     _default_params = {}
 
@@ -585,6 +657,29 @@ class DetectNonCircularHolesParams(CoreObject):
 
 class DetectAndTreatCircularFacesParams(CoreObject):
     """Parameters for detect and treat circular faces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DetectAndTreatCircularFacesParams`` object with default parameters.
+    edge_mesh_constant_size: float, optional
+        Constant size used for edge meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    surface_mesh_constant_size: float, optional
+        Constant size used for surface meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_edge_allow_self_close: bool, optional
+        Option for merging self-closing edge loops.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_face_normals_angle: float, optional
+        Merge faces when the normal angle between the faces is below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DetectAndTreatCircularFacesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> detect_and_treat_circular_faces_params = prime.DetectAndTreatCircularFacesParams(model = model)
     """
     _default_params = {}
 
@@ -763,6 +858,23 @@ class DetectAndTreatCircularFacesParams(CoreObject):
 
 class ConnectFacesParams(CoreObject):
     """Parameters for connect faces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ConnectFacesParams`` object with default parameters.
+    constant_mesh_size: float, optional
+        Constant size used for surface meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    absolute_tolerance: float, optional
+        Absolute distance tolerance between edges or faces for connect faces operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ConnectFacesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> connect_faces_params = prime.ConnectFacesParams(model = model)
     """
     _default_params = {}
 
@@ -891,6 +1003,23 @@ class ConnectFacesParams(CoreObject):
 
 class RepairEdgesParams(CoreObject):
     """Parameters for repair edges operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RepairEdgesParams`` object with default parameters.
+    constant_mesh_size: float, optional
+        Constant size used for surface meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    absolute_tolerance: float, optional
+        Absolute distance tolerance between nodes or edges for repair edges operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``RepairEdgesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> repair_edges_params = prime.RepairEdgesParams(model = model)
     """
     _default_params = {}
 
@@ -1019,6 +1148,26 @@ class RepairEdgesParams(CoreObject):
 
 class PartialDefeatureParams(CoreObject):
     """Parameters for partial defeature operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartialDefeatureParams`` object with default parameters.
+    edge_sharp_corner_angle: float, optional
+        Merge edges when the angle between the edges are below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_face_normals_angle: float, optional
+        Merge faces when the normal angle between the faces is below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_edge_allow_self_close: bool, optional
+        Option for merging self-closing edge loops.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartialDefeatureParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> partial_defeature_params = prime.PartialDefeatureParams(model = model)
     """
     _default_params = {}
 
@@ -1172,6 +1321,26 @@ class PartialDefeatureParams(CoreObject):
 
 class DeleteInteriorNodesParams(CoreObject):
     """Parameters for delete interior nodes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteInteriorNodesParams`` object with default parameters.
+    merge_face_normals_angle: float, optional
+        Merge faces when the normal angle between the faces is below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_edge_allow_self_close: bool, optional
+        Option for merging self-closing edge loops.
+        This is a beta parameter. The behavior and name may change in the future.
+    edge_sharp_corner_angle: float, optional
+        Merge edges when the angle between the edges are below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteInteriorNodesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_interior_nodes_params = prime.DeleteInteriorNodesParams(model = model)
     """
     _default_params = {}
 
@@ -1325,6 +1494,62 @@ class DeleteInteriorNodesParams(CoreObject):
 
 class DetectAndTreatHolesParams(CoreObject):
     """Parameters for detect and treat holes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DetectAndTreatHolesParams`` object with default parameters.
+    detect_and_defeature_edges_near_holes: bool, optional
+        Option to detect and defeature edges near all holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    detect_circular_holes: bool, optional
+        Option to detect circular holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    detect_non_circular_holes: bool, optional
+        Option to detect non-circular holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    offset_holes: bool, optional
+        Option to offset holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    mesh_offset_faces: bool, optional
+        Option to mesh the offset holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    detect_holes_params: DetectHolesParams, optional
+        Parameters for detect holes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    detect_circular_holes_params: DetectCircularHolesParams, optional
+        Parameters for detect circular holes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    detect_non_circular_holes_params: DetectNonCircularHolesParams, optional
+        Parameters for detect non circular holes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    hole_proximity_tolerance: float, optional
+        Edge proximity tolerance for holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_face_normals_angle: float, optional
+        Merge faces when the normal angle between the faces is below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    edge_sharp_corner_angle: float, optional
+        Merge edges when the angle between the edges are below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    fragmented_edge_tolerance: float, optional
+        Fragmented edge length tolerance for merging edges.
+        This is a beta parameter. The behavior and name may change in the future.
+    offset_distance: float, optional
+        Offset distance for creating offset edge.
+        This is a beta parameter. The behavior and name may change in the future.
+    edge_mesh_constant_size: float, optional
+        Constant size used for edge meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    surface_mesh_constant_size: float, optional
+        Constant size used for surface meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DetectAndTreatHolesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> detect_and_treat_holes_params = prime.DetectAndTreatHolesParams(model = model)
     """
     _default_params = {}
 
@@ -1427,10 +1652,10 @@ class DetectAndTreatHolesParams(CoreObject):
             Offset distance for creating offset edge.
             This is a beta parameter. The behavior and name may change in the future.
         edge_mesh_constant_size: float, optional
-            Constant size used for Edge meshing.
+            Constant size used for edge meshing.
             This is a beta parameter. The behavior and name may change in the future.
         surface_mesh_constant_size: float, optional
-            Constant size used for Surface meshing.
+            Constant size used for surface meshing.
             This is a beta parameter. The behavior and name may change in the future.
         json_data: dict, optional
             JSON dictionary to create a ``DetectAndTreatHolesParams`` object with provided parameters.
@@ -1552,9 +1777,9 @@ class DetectAndTreatHolesParams(CoreObject):
         offset_distance: float, optional
             Offset distance for creating offset edge.
         edge_mesh_constant_size: float, optional
-            Constant size used for Edge meshing.
+            Constant size used for edge meshing.
         surface_mesh_constant_size: float, optional
-            Constant size used for Surface meshing.
+            Constant size used for surface meshing.
         """
         args = locals()
         [DetectAndTreatHolesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1756,7 +1981,7 @@ class DetectAndTreatHolesParams(CoreObject):
 
     @property
     def edge_mesh_constant_size(self) -> float:
-        """Constant size used for Edge meshing.
+        """Constant size used for edge meshing.
         This is a beta parameter. The behavior and name may change in the future.
         """
         return self._edge_mesh_constant_size
@@ -1767,7 +1992,7 @@ class DetectAndTreatHolesParams(CoreObject):
 
     @property
     def surface_mesh_constant_size(self) -> float:
-        """Constant size used for Surface meshing.
+        """Constant size used for surface meshing.
         This is a beta parameter. The behavior and name may change in the future.
         """
         return self._surface_mesh_constant_size
@@ -1778,6 +2003,29 @@ class DetectAndTreatHolesParams(CoreObject):
 
 class DetectAndTreatFeaturesParams(CoreObject):
     """Parameters for detect and treat features operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DetectAndTreatFeaturesParams`` object with default parameters.
+    detect_and_treat_holes: bool, optional
+        Option to detect and treat holes.
+        This is a beta parameter. The behavior and name may change in the future.
+    detect_and_treat_circular_faces: bool, optional
+        Option to detect and treat circular faces.
+        This is a beta parameter. The behavior and name may change in the future.
+    treat_holes_params: DetectAndTreatHolesParams, optional
+        Parameters for detect and treat holes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    treat_circular_faces_params: DetectAndTreatCircularFacesParams, optional
+        Parameters for detect and treat circular faces operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DetectAndTreatFeaturesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> detect_and_treat_features_params = prime.DetectAndTreatFeaturesParams(model = model)
     """
     _default_params = {}
 
@@ -1956,6 +2204,47 @@ class DetectAndTreatFeaturesParams(CoreObject):
 
 class RepairTopologyParams(CoreObject):
     """Parameters for repair topology operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RepairTopologyParams`` object with default parameters.
+    connect_faces: bool, optional
+        Option to connect faces.
+        This is a beta parameter. The behavior and name may change in the future.
+    repair_edges: bool, optional
+        Option to repair edges.
+        This is a beta parameter. The behavior and name may change in the future.
+    split_topo_edges_at_apex_point: bool, optional
+        Option to split edges at apex point.
+        This is a beta parameter. The behavior and name may change in the future.
+    fillet_max_radius: float, optional
+        Maximum radius of fillets to be detected.
+        This is a beta parameter. The behavior and name may change in the future.
+    smallest_edge_length: float, optional
+        Length of smallest edge for which split is applied.
+        This is a beta parameter. The behavior and name may change in the future.
+    merge_edge_allow_self_close: bool, optional
+        Option for merging self-closing edge loops.
+        This is a beta parameter. The behavior and name may change in the future.
+    suppress_shared_edges_when_merging: bool, optional
+        Option for suppressing shared edges when merging.
+        This is a beta parameter. The behavior and name may change in the future.
+    edge_connect_type: int, optional
+        Edge connection type.
+        This is a beta parameter. The behavior and name may change in the future.
+    connect_faces_params: ConnectFacesParams, optional
+        Parameters for connect faces operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    repair_edges_params: RepairEdgesParams, optional
+        Parameters for repair edges operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``RepairTopologyParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> repair_topology_params = prime.RepairTopologyParams(model = model)
     """
     _default_params = {}
 
@@ -2284,6 +2573,41 @@ class RepairTopologyParams(CoreObject):
 
 class DefeatureTopologyParams(CoreObject):
     """Parameters for defeature topology operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DefeatureTopologyParams`` object with default parameters.
+    partial_defeature: bool, optional
+        Option to partial defeature.
+        This is a beta parameter. The behavior and name may change in the future.
+    delete_interior_nodes: bool, optional
+        Option to delete interior nodes.
+        This is a beta parameter. The behavior and name may change in the future.
+    allow_curved_topo_faces: bool, optional
+        Option to allow curved topofaces.
+        This is a beta parameter. The behavior and name may change in the future.
+    fillet_spanning_angle: float, optional
+        Angular threshold for detecting fillets with spanning angles below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    aggressive_edge_merge: bool, optional
+        Indicate whether to allow aggressive edge merge while performing partial defeature.
+        This is a beta parameter. The behavior and name may change in the future.
+    thin_stripes_tolerance: float, optional
+        Topoface width tolerance to detect thin faces below the provided value.
+        This is a beta parameter. The behavior and name may change in the future.
+    partial_defeature_params: PartialDefeatureParams, optional
+        Parameters for partial defeature operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    delete_interior_nodes_params: DeleteInteriorNodesParams, optional
+        Parameters for delete interior nodes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DefeatureTopologyParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> defeature_topology_params = prime.DefeatureTopologyParams(model = model)
     """
     _default_params = {}
 
@@ -2562,6 +2886,35 @@ class DefeatureTopologyParams(CoreObject):
 
 class OptimizeQuadMeshParams(CoreObject):
     """Parameters for optimize quad mesh operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``OptimizeQuadMeshParams`` object with default parameters.
+    suppress_topo_edge_and_mesh_cleanup: bool, optional
+        Option to suppress topoedges and clean up mesh.
+        This is a beta parameter. The behavior and name may change in the future.
+    edge_mesh_constant_size: float, optional
+        Constant size used for edge meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    surface_mesh_constant_size: float, optional
+        Constant size used for surface meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    generate_quads: bool, optional
+        Option to generate quadrilateral surface mesh.
+        This is a beta parameter. The behavior and name may change in the future.
+    project_on_geometry: bool, optional
+        Option to project on geometry when meshing.
+        This is a beta parameter. The behavior and name may change in the future.
+    delete_interior_nodes_params: DeleteInteriorNodesParams, optional
+        Parameters to control delete interior nodes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``OptimizeQuadMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> optimize_quad_mesh_params = prime.OptimizeQuadMeshParams(model = model)
     """
     _default_params = {}
 
@@ -2790,6 +3143,20 @@ class OptimizeQuadMeshParams(CoreObject):
 
 class CheckTopologyParams(CoreObject):
     """Parameters for check topology operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CheckTopologyParams`` object with default parameters.
+    topo_search_field_mask: int, optional
+        Toposearch field option for topology check.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``CheckTopologyParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_topology_params = prime.CheckTopologyParams(model = model)
     """
     _default_params = {}
 
@@ -2893,6 +3260,26 @@ class CheckTopologyParams(CoreObject):
 
 class AutoQuadMesherResults(CoreObject):
     """Results of auto quad mesher.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AutoQuadMesherResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code if AutoQuadMesher operation is unsuccessful.
+        This is a beta parameter. The behavior and name may change in the future.
+    warning_codes: List[WarningCode], optional
+        Warning code if AutoQuadMesher operation is partially successful.
+        This is a beta parameter. The behavior and name may change in the future.
+    failed_topo_face_ids: Iterable[int], optional
+        Ids of the failed topofaces during topology check.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``AutoQuadMesherResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> auto_quad_mesher_results = prime.AutoQuadMesherResults(model = model)
     """
     _default_params = {}
 

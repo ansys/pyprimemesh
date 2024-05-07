@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class WrapperControl(CoreObject):
     """Wrapper Control to describe all parameters and controls used for wrapping.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create WrapperControl object.
+    id : int
+        Id of the WrapperControl.
+    object_id : int
+        Object id of the WrapperControl.
+    name : str
+        Name of the WrapperControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

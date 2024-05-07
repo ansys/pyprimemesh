@@ -9,6 +9,17 @@ class PeriodicControl(CoreObject):
     """Periodic controls provide settings for the recovery of periodic surfaces.
 
     A periodic control is specified by the scope (source surfaces) and the transformation parameters: the center, axis and angle.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create PeriodicControl object.
+    id : int
+        Id of the PeriodicControl.
+    object_id : int
+        Object id of the PeriodicControl.
+    name : str
+        Name of the PeriodicControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

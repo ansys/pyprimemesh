@@ -6,8 +6,8 @@ from ansys.meshing.prime.internals.logger import PrimeLogger
 def test_logger(tmp_path):
     logs_path = str(tmp_path) + "/logs"
     prime_logger_setup = PrimeLogger(logger_name="Test_logger")
-    prime_logger_setup.add_file_handler(logs_dir=logs_path)
-    logger = prime_logger_setup.get_logger()
+    prime_logger_setup.add_file_handler(log_dir=logs_path)
+    logger = prime_logger_setup.python_logger
 
     logger.setLevel("INFO")
     msg = "this is an error"
@@ -17,7 +17,7 @@ def test_logger(tmp_path):
 
     # Another call to singleton, should be configured already
     prime_logger_setup_2 = PrimeLogger()
-    logger_2 = prime_logger_setup_2.get_logger()
+    logger_2 = prime_logger_setup_2.python_logger
     msg_2 = "this is another error"
     logger_2.error(msg_2)
 

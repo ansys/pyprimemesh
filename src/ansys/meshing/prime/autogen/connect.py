@@ -10,10 +10,14 @@ class Connect(CoreObject):
 
     Perform surface connection using various connect algorithms on face zonelets.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Connect object.
+
     Notes
     -----
-    Connect operations like Join, Stitch and Intersect supports only computational mesh
-    (mesh with reasonable size). Faceted mesh is not supported.
+    Connect operations support only computational mesh, which is mesh with reasonable size changes and quality. Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, not supported.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -237,7 +241,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -287,7 +291,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

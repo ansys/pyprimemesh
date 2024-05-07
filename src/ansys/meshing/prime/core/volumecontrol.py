@@ -11,16 +11,14 @@ class VolumeControl(_VolumeControl):
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify volume controls from.
+    model : Model
+        Server model to create VolumeControl object.
     id : int
-        ID of the volume control.
+        Id of the VolumeControl.
     object_id : int
-        Object ID of the volume control.
+        Object id of the VolumeControl.
     name : str
-        Name of the volume control.
-    local : bool, optional
-        Unused. The default is ``False``.
+        Name of the VolumeControl.
     """
 
     def __init__(self, model, id, object_id, name, local=False):

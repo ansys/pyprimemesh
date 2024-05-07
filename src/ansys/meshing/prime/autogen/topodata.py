@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class TopoData(CoreObject):
     """Topodata has all information about connectivity of nodes, edges, elements and more.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create TopoData object.
+    id : int
+        Id of the TopoData.
+    object_id : int
+        Object id of the TopoData.
+    name : str
+        Name of the TopoData.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -241,7 +251,7 @@ class TopoData(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

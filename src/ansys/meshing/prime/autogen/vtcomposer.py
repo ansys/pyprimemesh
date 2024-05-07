@@ -8,6 +8,12 @@ from typing import List, Any, Union
 class VTComposer(CoreObject):
     """VTComposer is used for fix topology corrections like separate, pinch.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create VTComposer object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):
@@ -48,7 +54,7 @@ class VTComposer(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

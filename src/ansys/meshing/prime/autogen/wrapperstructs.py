@@ -20,6 +20,33 @@ class WrapRegion(enum.IntEnum):
 
 class WrapParams(CoreObject):
     """WrapParams defines parameters for wrapping.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapParams`` object with default parameters.
+    sizing_method: SizeFieldType, optional
+        Used to define sizing method for wrapping.
+    base_size: float, optional
+        Base size to define octree.
+    size_control_ids: Iterable[int], optional
+        Used to construct geodesic sizes for octree refinement.
+    size_field_ids: Iterable[int], optional
+        Used to define size field based octree refinement.
+    wrap_region: WrapRegion, optional
+        Indicates source type to extract wrapper region.
+    number_of_threads: int, optional
+        Number of threads for multithreading.
+    imprint_relative_range: float, optional
+        Used to define relative range in imprinting in wrapping.
+    imprint_iterations: int, optional
+        Used to define number of imprint iterations in wrapping.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrap_params = prime.WrapParams(model = model)
     """
     _default_params = {}
 
@@ -282,6 +309,25 @@ class WrapParams(CoreObject):
 
 class WrapResult(CoreObject):
     """Result structure associated to Wrap operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapResult`` object with default parameters.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the wrap operation.
+    error_code: ErrorCode, optional
+        Error code associated with a wrap operation.
+    id: int, optional
+        Id of the wrapper part created.
+    name: str, optional
+        Name of wrapper part created.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrap_result = prime.WrapResult(model = model)
     """
     _default_params = {}
 
@@ -452,6 +498,43 @@ class WrapResult(CoreObject):
 
 class WrapperImproveQualityParams(CoreObject):
     """WrapperImproveQualityParams defines parameters to improve wrapper part.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapperImproveQualityParams`` object with default parameters.
+    target_skewness: float, optional
+        Target skewness.
+    island_count: int, optional
+        Face count of smallest island.
+    island_tol: float, optional
+        Relative face count of smallest island.
+    overlap_count: int, optional
+        Face count of non-manifold overlap.
+    overlap_tol: float, optional
+        Relative face count of non-manifold overlap.
+    resolve_spikes: bool, optional
+        Control to perform removing spikes or not.
+    resolve_intersections: bool, optional
+        Control to resolve face intersections or not.
+    inflate_dihedral_face_nodes: bool, optional
+        Control to resolve face dihedral angle by inflating opposite nodes or not.
+    resolve_invalid_node_normals: bool, optional
+        Control to resolve invalid node normals by inflating opposite nodes or not.
+    aggressively: bool, optional
+        Control to improve surfaces aggressively or not.
+    sharp_angle: float, optional
+        Maximum off feature sharp node angle.
+    geom_zonelets: Iterable[int], optional
+        Associated underlying geometry zonelet ids.
+    number_of_threads: int, optional
+        Number of threads for multithreading.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapperImproveQualityParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrapper_improve_quality_params = prime.WrapperImproveQualityParams(model = model)
     """
     _default_params = {}
 
@@ -829,6 +912,27 @@ class WrapperImproveQualityParams(CoreObject):
 
 class WrapperImproveResult(CoreObject):
     """Results structure associated to improve quality.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapperImproveResult`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with a wrapper operation.
+    n_skew_found: int, optional
+        Number of skewed faces found.
+    remaining_skew_faces: int, optional
+        Number of remaining skew faces.
+    n_face_intersections_found: int, optional
+        Number of self intersections found.
+    unresolved_face_intersections: int, optional
+        Number of remaining self intersections.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapperImproveResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrapper_improve_result = prime.WrapperImproveResult(model = model)
     """
     _default_params = {}
 
@@ -1023,6 +1127,31 @@ class WrapperImproveResult(CoreObject):
 class WrapperCloseGapsParams(CoreObject):
     """
     WrapperCloseGapsParams to define parameters for close gaps operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapperCloseGapsParams`` object with default parameters.
+    target: ScopeDefinition, optional
+        Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
+    gap_size: float, optional
+        Maximum gap size to be closed.
+    material_point_name: str, optional
+        Material point name near the gaps to be closed.
+    suggested_part_name: str, optional
+        Suggested part name for created patching surfaces.
+    number_of_threads: int, optional
+        Number of threads for multithreading.
+    create_new_part: bool, optional
+        Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+    resolution_factor: float, optional
+        Factor to resolve the smallest gap for the given gap size.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapperCloseGapsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrapper_close_gaps_params = prime.WrapperCloseGapsParams(model = model)
     """
     _default_params = {}
 
@@ -1262,6 +1391,21 @@ class WrapperCloseGapsParams(CoreObject):
 
 class WrapperCloseGapsResult(CoreObject):
     """Result structure associated with close gaps operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapperCloseGapsResult`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with a close gaps operation.
+    part_id: int, optional
+        Id of part created with gap cover patches.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapperCloseGapsResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrapper_close_gaps_result = prime.WrapperCloseGapsResult(model = model)
     """
     _default_params = {}
 
@@ -1386,6 +1530,26 @@ class WrapperCloseGapsResult(CoreObject):
 
 class DeadRegion(CoreObject):
     """DeadRegion defines a dead region for patch flow regions operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeadRegion`` object with default parameters.
+    face_zonelet_ids: Iterable[int], optional
+        Face zonelets enclosing dead region.
+        This is a beta parameter. The behavior and name may change in the future.
+    dead_material_points: List[str], optional
+        Material points to identify dead region.
+        This is a beta parameter. The behavior and name may change in the future.
+    hole_size: float, optional
+        Maximum hole size used for patching.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeadRegion`` object with provided parameters.
+
+    Examples
+    --------
+    >>> dead_region = prime.DeadRegion(model = model)
     """
     _default_params = {}
 
@@ -1540,6 +1704,29 @@ class DeadRegion(CoreObject):
 class WrapperPatchFlowRegionsParams(CoreObject):
     """
     WrapperPatchFlowRegionsParams to define parameters for patch flow regions operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
+    base_size: float, optional
+        Base size to define octree.
+        This is a beta parameter. The behavior and name may change in the future.
+    suggested_part_name: str, optional
+        Suggested part name for created patching surfaces.
+        This is a beta parameter. The behavior and name may change in the future.
+    number_of_threads: int, optional
+        Number of threads for multithreading.
+        This is a beta parameter. The behavior and name may change in the future.
+    dead_regions: List[DeadRegion], optional
+        Array of dead region pairs.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrapper_patch_flow_regions_params = prime.WrapperPatchFlowRegionsParams(model = model)
     """
     _default_params = {}
 
@@ -1718,6 +1905,28 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
 class WrapperPatchFlowRegionsResult(CoreObject):
     """Result structure associated with patch holes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the patch holes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    error_code: ErrorCode, optional
+        Error code associated with a patch holes operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    id: int, optional
+        Id of part created with hole patches.
+        This is a beta parameter. The behavior and name may change in the future.
+    name: str, optional
+        Name of part created with hole patches.
+    json_data: dict, optional
+        JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> wrapper_patch_flow_regions_result = prime.WrapperPatchFlowRegionsResult(model = model)
     """
     _default_params = {}
 

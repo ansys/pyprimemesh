@@ -9,6 +9,12 @@ class VolumeMeshTool(CoreObject):
     """VolumeMeshTool allows you to check grid and improve volume mesh quality.
 
     VolumeMeshTool provides various volume mesh improvement algorithms.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeMeshTool object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -133,7 +139,7 @@ class VolumeMeshTool(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

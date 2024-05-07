@@ -10,18 +10,21 @@ from ansys.meshing.prime.autogen.periodiccontrolstructs import PeriodicControlPa
 
 
 class PeriodicControl(_PeriodicControl):
-    """Defines the scope and transformation for periodic surfaces.
+    """Periodic controls provide settings for the recovery of periodic surfaces.
+
+    A periodic control is specified by the scope (source surfaces) and
+    the transformation parameters: the center, axis and angle.
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify periodic controls from.
+    model : Model
+        Server model to create PeriodicControl object.
     id : int
-        ID of the control.
+        Id of the PeriodicControl.
     object_id : int
-        Object ID of the control.
+        Object id of the PeriodicControl.
     name : str
-        Name of the periodic control.
+        Name of the PeriodicControl.
     local : bool, optional
         Unused. The default is ``False``.
     """
