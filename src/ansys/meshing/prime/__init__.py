@@ -1,5 +1,4 @@
-'''PyPrimeMesh Client library
-'''
+"""PyPrimeMesh Client library."""
 # isort: skip_file
 from ansys.meshing.prime._version import __version__
 from ansys.meshing.prime.core.model import Model
