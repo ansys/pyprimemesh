@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class VolumeControl(CoreObject):
     """Volume controls provide volume specific settings on volumes specified by scope and settings specified by parameters.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeControl object.
+    id : int
+        Id of the VolumeControl.
+    object_id : int
+        Object id of the VolumeControl.
+    name : str
+        Name of the VolumeControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

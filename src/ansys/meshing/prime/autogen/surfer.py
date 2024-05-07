@@ -10,6 +10,13 @@ class Surfer(CoreObject):
 
     Performs surface meshing using various surface meshing algorithms on topofaces or face zonelets.
     For example, constant size or volumetric size surface meshing.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create Surfer object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):

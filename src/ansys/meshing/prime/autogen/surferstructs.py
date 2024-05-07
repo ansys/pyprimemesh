@@ -18,6 +18,43 @@ class AdvancedSurferSetup(enum.IntEnum):
 
 class SurferParams(CoreObject):
     """Parameters used to generate surface mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurferParams`` object with default parameters.
+    max_angle: float, optional
+        Maximum feature angle limit to be used to identify and preserve features.
+    size_field_type: SizeFieldType, optional
+        Size field type used to generate surface mesh.
+    min_size: float, optional
+        Minimum size to be used in sizing for the surfer.
+    max_size: float, optional
+        Maximum size to be used in sizing for the surfer.
+    growth_rate: float, optional
+        Growth rate to be used to propagate sizes.
+    constant_size: float, optional
+        Size used in constant size surface meshing.
+    generate_quads: bool, optional
+        Option to generate quadrilateral surface mesh.
+    check_non_manifolds: bool, optional
+        Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+    avoid_corner_triangles: bool, optional
+        Option to avoid corner triangles(with all three boundary nodes) generated.
+    smooth_size_transition: bool, optional
+        Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+    advanced_surfer_setup: AdvancedSurferSetup, optional
+        Option to define advanced settings for remeshing operation.
+    project_on_geometry: bool, optional
+        Option to project on CAD geometry when meshing.
+    enable_multi_threading: bool, optional
+        Option to perform surface meshing in parallel using multithreads.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurferParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surfer_params = prime.SurferParams(model = model)
     """
     _default_params = {}
 
@@ -400,6 +437,21 @@ class SurferParams(CoreObject):
 
 class SurferResults(CoreObject):
     """Results associated with the surface mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurferResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    topofaces_not_projected_on_geometry: Iterable[int], optional
+        Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurferResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surfer_results = prime.SurferResults(model = model)
     """
     _default_params = {}
 
@@ -524,6 +576,35 @@ class SurferResults(CoreObject):
 
 class LocalSurferParams(CoreObject):
     """Parameters to perform local surface remeshing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``LocalSurferParams`` object with default parameters.
+    min_angle: float, optional
+        Minimum feature angle limit used to identify and preserve features.
+    max_angle: float, optional
+        Maximum feature angle limit used to identify and preserve features.
+    size_field_type: SizeFieldType, optional
+        Size field type used to generate surface mesh.
+    min_size: float, optional
+        Minimum size to be used in sizing for the surfer.
+    max_size: float, optional
+        Maximum size to be used in sizing for the surfer.
+    growth_rate: float, optional
+        Growth rate to be used to propagate sizes.
+    constant_size: float, optional
+        Constant size to be used in case of constant size field.
+    smooth_boundary: bool, optional
+        Option to extend local selection to get smooth boundary of selected elements.
+    n_rings: int, optional
+        Number of rings to extend the registered face selection for remeshing.
+    json_data: dict, optional
+        JSON dictionary to create a ``LocalSurferParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> local_surfer_params = prime.LocalSurferParams(model = model)
     """
     _default_params = {}
 
@@ -809,6 +890,21 @@ class LocalSurferParams(CoreObject):
 
 class LocalSurferResults(CoreObject):
     """Results associated with the local surface mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``LocalSurferResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``LocalSurferResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> local_surfer_results = prime.LocalSurferResults(model = model)
     """
     _default_params = {}
 

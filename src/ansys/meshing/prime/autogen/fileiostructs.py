@@ -112,6 +112,19 @@ class LSDynaAnalysisType(enum.IntEnum):
 
 class FileReadParams(CoreObject):
     """Parameters to read file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FileReadParams`` object with default parameters.
+    append: bool, optional
+        Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
+    json_data: dict, optional
+        JSON dictionary to create a ``FileReadParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> file_read_params = prime.FileReadParams(model = model)
     """
     _default_params = {}
 
@@ -213,6 +226,21 @@ class FileReadParams(CoreObject):
 
 class SizeFieldFileReadResults(CoreObject):
     """Results of size field file read operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SizeFieldFileReadResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code if size field file read operation was unsuccessful.
+    size_field_ids: Iterable[int], optional
+        Ids of size fields read by read size field operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SizeFieldFileReadResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> size_field_file_read_results = prime.SizeFieldFileReadResults(model = model)
     """
     _default_params = {}
 
@@ -337,6 +365,19 @@ class SizeFieldFileReadResults(CoreObject):
 
 class FileReadResults(CoreObject):
     """Results of file read operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FileReadResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code if file read operation was unsuccessful.
+    json_data: dict, optional
+        JSON dictionary to create a ``FileReadResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> file_read_results = prime.FileReadResults(model = model)
     """
     _default_params = {}
 
@@ -438,6 +479,17 @@ class FileReadResults(CoreObject):
 
 class FileWriteParams(CoreObject):
     """Parameters to write a file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FileWriteParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``FileWriteParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> file_write_params = prime.FileWriteParams(model = model)
     """
     _default_params = {}
 
@@ -517,6 +569,21 @@ class FileWriteParams(CoreObject):
 
 class FileWriteResults(CoreObject):
     """Results of file write operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FileWriteResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code if file write operation is unsuccessful.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the file write operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``FileWriteResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> file_write_results = prime.FileWriteResults(model = model)
     """
     _default_params = {}
 
@@ -641,6 +708,19 @@ class FileWriteResults(CoreObject):
 
 class ReadSizeFieldParams(CoreObject):
     """Parameters used to read size field file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ReadSizeFieldParams`` object with default parameters.
+    append: bool, optional
+        Option to append the size fields from file.
+    json_data: dict, optional
+        JSON dictionary to create a ``ReadSizeFieldParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> read_size_field_params = prime.ReadSizeFieldParams(model = model)
     """
     _default_params = {}
 
@@ -742,6 +822,19 @@ class ReadSizeFieldParams(CoreObject):
 
 class WriteSizeFieldParams(CoreObject):
     """Parameters used to write size field file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``WriteSizeFieldParams`` object with default parameters.
+    write_only_active_size_fields: bool, optional
+        Option to write only active size fields into the file.
+    json_data: dict, optional
+        JSON dictionary to create a ``WriteSizeFieldParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> write_size_field_params = prime.WriteSizeFieldParams(model = model)
     """
     _default_params = {}
 
@@ -843,6 +936,19 @@ class WriteSizeFieldParams(CoreObject):
 
 class ExportFluentCaseParams(CoreObject):
     """Parameters to export fluent case file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportFluentCaseParams`` object with default parameters.
+    cff_format: bool, optional
+        Option to specify whether to export Fluent case file in CFF format (.cas.h5) or legacy format (.cas, .cas.gz).
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportFluentCaseParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_fluent_case_params = prime.ExportFluentCaseParams(model = model)
     """
     _default_params = {}
 
@@ -944,6 +1050,17 @@ class ExportFluentCaseParams(CoreObject):
 
 class ExportFluentMeshingMeshParams(CoreObject):
     """Parameters used to export fluent meshing mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportFluentMeshingMeshParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportFluentMeshingMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_fluent_meshing_mesh_params = prime.ExportFluentMeshingMeshParams(model = model)
     """
     _default_params = {}
 
@@ -1023,6 +1140,19 @@ class ExportFluentMeshingMeshParams(CoreObject):
 
 class ExportSTLParams(CoreObject):
     """Parameters to export STL file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportSTLParams`` object with default parameters.
+    part_ids: Iterable[int], optional
+        Ids of parts to export.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportSTLParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_stlparams = prime.ExportSTLParams(model = model)
     """
     _default_params = {}
 
@@ -1124,6 +1254,29 @@ class ExportSTLParams(CoreObject):
 
 class CadRefacetingParams(CoreObject):
     """Parameters to refacet CAD during import.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CadRefacetingParams`` object with default parameters.
+    cad_faceter: CadFaceter, optional
+        Specify the available choices for faceter. The available options are Acis, Parasolid.
+    faceting_resolution: CadRefacetingResolution, optional
+        Set the faceting resolution.
+    custom_surface_deviation_tolerance: float, optional
+        Set custom tolerance for surface deviation in specified length unit.
+    custom_normal_angle_tolerance: float, optional
+        Set custom tolerance for normal angle in degree.
+    max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit, optional
+        Specify maximum edge size limit for faceting.
+    max_edge_size: float, optional
+        Set maximum edge size of the facets.
+    json_data: dict, optional
+        JSON dictionary to create a ``CadRefacetingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> cad_refaceting_params = prime.CadRefacetingParams(model = model)
     """
     _default_params = {}
 
@@ -1340,6 +1493,39 @@ class CadRefacetingParams(CoreObject):
 
 class ImportCadParams(CoreObject):
     """Parameters to control CAD import settings.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportCadParams`` object with default parameters.
+    append: bool, optional
+        Append imported CAD into existing model when true.
+    ansys_release: str, optional
+        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
+    cad_reader_route: CadReaderRoute, optional
+        Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+    part_creation_type: PartCreationType, optional
+        Create a part per CAD Model, Assembly, Part, Body.
+    geometry_transfer: bool, optional
+        Option to enable transfer of geometry data (NURBS).
+    length_unit: LengthUnit, optional
+        Specify length unit for import.
+    refacet: bool, optional
+        Refine or coarsen the CAD faceting based on refaceting parameters when true.
+    cad_refaceting_params: CadRefacetingParams, optional
+        Specify refaceting parameters.
+    stitch_tolerance: float, optional
+        Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+    cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
+        Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+    validate_shared_topology: bool, optional
+        Specify whether to validate the shared topology information.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportCadParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_cad_params = prime.ImportCadParams(model = model)
     """
     _default_params = {}
 
@@ -1671,6 +1857,21 @@ class ImportCadParams(CoreObject):
 
 class ImportCadResults(CoreObject):
     """Results associated with the CAD import.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportCadResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    cad_parameters: Dict[str, Union[str, int, float, bool]], optional
+        Returns the parameters associated with CAD. Available only with WorkBench CAD Reader route.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportCadResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_cad_results = prime.ImportCadResults(model = model)
     """
     _default_params = {}
 
@@ -1795,6 +1996,21 @@ class ImportCadResults(CoreObject):
 
 class ImportFluentMeshingMeshParams(CoreObject):
     """Parameters used to import fluent meshing mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportFluentMeshingMeshParams`` object with default parameters.
+    append: bool, optional
+        Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
+    enable_multi_threading: bool, optional
+        Option to import multiple files in parallel using multithreading.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportFluentMeshingMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_fluent_meshing_mesh_params = prime.ImportFluentMeshingMeshParams(model = model)
     """
     _default_params = {}
 
@@ -1919,6 +2135,21 @@ class ImportFluentMeshingMeshParams(CoreObject):
 
 class ImportFluentMeshingMeshResults(CoreObject):
     """Results associated with fluent meshing mesh import.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportFluentMeshingMeshResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    new_parts_created: Iterable[int], optional
+        Ids of new parts created for each file unreferenced fluent meshing mesh zones.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportFluentMeshingMeshResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_fluent_meshing_mesh_results = prime.ImportFluentMeshingMeshResults(model = model)
     """
     _default_params = {}
 
@@ -2043,6 +2274,19 @@ class ImportFluentMeshingMeshResults(CoreObject):
 
 class ImportFluentCaseParams(CoreObject):
     """Parameters to import fluent case file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportFluentCaseParams`` object with default parameters.
+    append: bool, optional
+        Option to append imported case instead of resetting model to imported case.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportFluentCaseParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_fluent_case_params = prime.ImportFluentCaseParams(model = model)
     """
     _default_params = {}
 
@@ -2144,6 +2388,19 @@ class ImportFluentCaseParams(CoreObject):
 
 class ImportFluentCaseResults(CoreObject):
     """Results associated with fluent case import.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportFluentCaseResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportFluentCaseResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_fluent_case_results = prime.ImportFluentCaseResults(model = model)
     """
     _default_params = {}
 
@@ -2245,6 +2502,21 @@ class ImportFluentCaseResults(CoreObject):
 
 class ImportMapdlCdbParams(CoreObject):
     """Parameters to control MAPDL CDB import settings.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportMapdlCdbParams`` object with default parameters.
+    drop_mid_nodes: bool, optional
+        Option to import quadratic mesh elements as linear by skipping mid nodes.
+    append: bool, optional
+        Option to append imported cdb into existing model.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportMapdlCdbParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_mapdl_cdb_params = prime.ImportMapdlCdbParams(model = model)
     """
     _default_params = {}
 
@@ -2269,7 +2541,9 @@ class ImportMapdlCdbParams(CoreObject):
         model: Model
             Model to create a ``ImportMapdlCdbParams`` object with default parameters.
         drop_mid_nodes: bool, optional
+            Option to import quadratic mesh elements as linear by skipping mid nodes.
         append: bool, optional
+            Option to append imported cdb into existing model.
         json_data: dict, optional
             JSON dictionary to create a ``ImportMapdlCdbParams`` object with provided parameters.
 
@@ -2312,7 +2586,9 @@ class ImportMapdlCdbParams(CoreObject):
         Parameters
         ----------
         drop_mid_nodes: bool, optional
+            Option to import quadratic mesh elements as linear by skipping mid nodes.
         append: bool, optional
+            Option to append imported cdb into existing model.
         """
         args = locals()
         [ImportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2345,8 +2621,7 @@ class ImportMapdlCdbParams(CoreObject):
 
     @property
     def drop_mid_nodes(self) -> bool:
-        """
-        Option to import quadratic mesh elements as linear by skipping mid nodes.
+        """Option to import quadratic mesh elements as linear by skipping mid nodes.
         """
         return self._drop_mid_nodes
 
@@ -2356,8 +2631,7 @@ class ImportMapdlCdbParams(CoreObject):
 
     @property
     def append(self) -> bool:
-        """
-        Option to append imported cdb into existing model.
+        """Option to append imported cdb into existing model.
         """
         return self._append
 
@@ -2367,6 +2641,19 @@ class ImportMapdlCdbParams(CoreObject):
 
 class ImportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB import.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportMapdlCdbResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportMapdlCdbResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_mapdl_cdb_results = prime.ImportMapdlCdbResults(model = model)
     """
     _default_params = {}
 
@@ -2468,6 +2755,50 @@ class ImportMapdlCdbResults(CoreObject):
 
 class ExportMapdlCdbParams(CoreObject):
     """Parameters to control MAPDL CDB export settings.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportMapdlCdbParams`` object with default parameters.
+    config_settings: str, optional
+        MAPDL configuration settings in CDB format to be added at the beginning of the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    pre_solution_settings: str, optional
+        MAPDL Settings in CDB format to be added before the solution block in the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    material_properties: str, optional
+        Materials in CDB format to be added to the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    boundary_conditions: str, optional
+        Boundary conditions in CDB format to be added to the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    analysis_settings: str, optional
+        MAPDL analysis settings in CDB format to be added after the solution block in the file. Note: Boundary conditions can be included into analysis settings.
+        This is a beta parameter. The behavior and name may change in the future.
+    write_cells: bool, optional
+        Option to write out cells as part of the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    enable_face_based_labels: bool, optional
+        Option to write element components for labels.
+        This is a beta parameter. The behavior and name may change in the future.
+    write_by_zones: bool, optional
+        Option to write zones in the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    consider_general_connectors_as_spot_weld: bool, optional
+        Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+        This is a beta parameter. The behavior and name may change in the future.
+    simulation_type: CdbSimulationType, optional
+        Simulation type for the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    analysis_settings_file_name: str, optional
+        File path to export mapdl analysis settings.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_mapdl_cdb_params = prime.ExportMapdlCdbParams(model = model)
     """
     _default_params = {}
 
@@ -2481,6 +2812,7 @@ class ExportMapdlCdbParams(CoreObject):
             write_cells: bool,
             enable_face_based_labels: bool,
             write_by_zones: bool,
+            consider_general_connectors_as_spot_weld: bool,
             simulation_type: CdbSimulationType,
             analysis_settings_file_name: str):
         self._config_settings = config_settings
@@ -2491,6 +2823,7 @@ class ExportMapdlCdbParams(CoreObject):
         self._write_cells = write_cells
         self._enable_face_based_labels = enable_face_based_labels
         self._write_by_zones = write_by_zones
+        self._consider_general_connectors_as_spot_weld = consider_general_connectors_as_spot_weld
         self._simulation_type = CdbSimulationType(simulation_type)
         self._analysis_settings_file_name = analysis_settings_file_name
 
@@ -2505,6 +2838,7 @@ class ExportMapdlCdbParams(CoreObject):
             write_cells: bool = None,
             enable_face_based_labels: bool = None,
             write_by_zones: bool = None,
+            consider_general_connectors_as_spot_weld: bool = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None,
             json_data : dict = None,
@@ -2539,6 +2873,9 @@ class ExportMapdlCdbParams(CoreObject):
         write_by_zones: bool, optional
             Option to write zones in the file.
             This is a beta parameter. The behavior and name may change in the future.
+        consider_general_connectors_as_spot_weld: bool, optional
+            Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+            This is a beta parameter. The behavior and name may change in the future.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
             This is a beta parameter. The behavior and name may change in the future.
@@ -2562,10 +2899,11 @@ class ExportMapdlCdbParams(CoreObject):
                 json_data["writeCells"] if "writeCells" in json_data else None,
                 json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None,
                 json_data["writeByZones"] if "writeByZones" in json_data else None,
+                json_data["considerGeneralConnectorsAsSpotWeld"] if "considerGeneralConnectorsAsSpotWeld" in json_data else None,
                 CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None),
                 json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, simulation_type, analysis_settings_file_name])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, simulation_type, analysis_settings_file_name])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -2576,6 +2914,7 @@ class ExportMapdlCdbParams(CoreObject):
                     write_cells,
                     enable_face_based_labels,
                     write_by_zones,
+                    consider_general_connectors_as_spot_weld,
                     simulation_type,
                     analysis_settings_file_name)
             else:
@@ -2593,6 +2932,7 @@ class ExportMapdlCdbParams(CoreObject):
                         write_cells if write_cells is not None else ( ExportMapdlCdbParams._default_params["write_cells"] if "write_cells" in ExportMapdlCdbParams._default_params else (json_data["writeCells"] if "writeCells" in json_data else None)),
                         enable_face_based_labels if enable_face_based_labels is not None else ( ExportMapdlCdbParams._default_params["enable_face_based_labels"] if "enable_face_based_labels" in ExportMapdlCdbParams._default_params else (json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None)),
                         write_by_zones if write_by_zones is not None else ( ExportMapdlCdbParams._default_params["write_by_zones"] if "write_by_zones" in ExportMapdlCdbParams._default_params else (json_data["writeByZones"] if "writeByZones" in json_data else None)),
+                        consider_general_connectors_as_spot_weld if consider_general_connectors_as_spot_weld is not None else ( ExportMapdlCdbParams._default_params["consider_general_connectors_as_spot_weld"] if "consider_general_connectors_as_spot_weld" in ExportMapdlCdbParams._default_params else (json_data["considerGeneralConnectorsAsSpotWeld"] if "considerGeneralConnectorsAsSpotWeld" in json_data else None)),
                         simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)),
                         analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)))
         self._custom_params = kwargs
@@ -2612,6 +2952,7 @@ class ExportMapdlCdbParams(CoreObject):
             write_cells: bool = None,
             enable_face_based_labels: bool = None,
             write_by_zones: bool = None,
+            consider_general_connectors_as_spot_weld: bool = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
@@ -2634,6 +2975,8 @@ class ExportMapdlCdbParams(CoreObject):
             Option to write element components for labels.
         write_by_zones: bool, optional
             Option to write zones in the file.
+        consider_general_connectors_as_spot_weld: bool, optional
+            Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
         analysis_settings_file_name: str, optional
@@ -2672,6 +3015,8 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["enableFaceBasedLabels"] = self._enable_face_based_labels
         if self._write_by_zones is not None:
             json_data["writeByZones"] = self._write_by_zones
+        if self._consider_general_connectors_as_spot_weld is not None:
+            json_data["considerGeneralConnectorsAsSpotWeld"] = self._consider_general_connectors_as_spot_weld
         if self._simulation_type is not None:
             json_data["simulationType"] = self._simulation_type
         if self._analysis_settings_file_name is not None:
@@ -2680,7 +3025,7 @@ class ExportMapdlCdbParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._simulation_type, self._analysis_settings_file_name)
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._simulation_type, self._analysis_settings_file_name)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -2773,6 +3118,17 @@ class ExportMapdlCdbParams(CoreObject):
         self._write_by_zones = value
 
     @property
+    def consider_general_connectors_as_spot_weld(self) -> bool:
+        """Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+        This is a beta parameter. The behavior and name may change in the future.
+        """
+        return self._consider_general_connectors_as_spot_weld
+
+    @consider_general_connectors_as_spot_weld.setter
+    def consider_general_connectors_as_spot_weld(self, value: bool):
+        self._consider_general_connectors_as_spot_weld = value
+
+    @property
     def simulation_type(self) -> CdbSimulationType:
         """Simulation type for the file.
         This is a beta parameter. The behavior and name may change in the future.
@@ -2796,6 +3152,25 @@ class ExportMapdlCdbParams(CoreObject):
 
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportMapdlCdbResults`` object with default parameters.
+    summary_log: str, optional
+        Summary log for the export operation in json format.
+        This is a beta parameter. The behavior and name may change in the future.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportMapdlCdbResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_mapdl_cdb_results = prime.ExportMapdlCdbResults(model = model)
     """
     _default_params = {}
 
@@ -2947,6 +3322,32 @@ class ExportMapdlCdbResults(CoreObject):
 
 class ExportLSDynaKeywordFileParams(CoreObject):
     """Parameters to control LS-DYNA keyword file export settings.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportLSDynaKeywordFileParams`` object with default parameters.
+    material_properties: str, optional
+        Materials in LS-DYNA format to be added to the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    database_keywords: str, optional
+        Database keywords in LS-DYNA format to be added to the file.
+        This is a beta parameter. The behavior and name may change in the future.
+    output_format: LSDynaFileFormatType, optional
+        Output file format used to write LS-DYNA file.
+        This is a beta parameter. The behavior and name may change in the future.
+    analysis_type: LSDynaAnalysisType, optional
+        Option to specify LS-DYNA analysis type.
+        This is a beta parameter. The behavior and name may change in the future.
+    compute_spotweld_thickness: bool, optional
+        Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_lsdyna_keyword_file_params = prime.ExportLSDynaKeywordFileParams(model = model)
     """
     _default_params = {}
 
@@ -3150,6 +3551,26 @@ class ExportLSDynaKeywordFileParams(CoreObject):
 
 class ExportLSDynaResults(CoreObject):
     """Results associated with the LS-DYNA export.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportLSDynaResults`` object with default parameters.
+    summary_log: str, optional
+        Summary log for the import operation in json format.
+        This is a beta parameter. The behavior and name may change in the future.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportLSDynaResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_lsdyna_results = prime.ExportLSDynaResults(model = model)
     """
     _default_params = {}
 
@@ -3303,6 +3724,17 @@ class ExportLSDynaResults(CoreObject):
 
 class ExportLSDynaIgaKeywordFileParams(CoreObject):
     """Parameters for exporting LS-DYNA IGA keyword file.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportLSDynaIgaKeywordFileParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportLSDynaIgaKeywordFileParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_lsdyna_iga_keyword_file_params = prime.ExportLSDynaIgaKeywordFileParams(model = model)
     """
     _default_params = {}
 
@@ -3382,6 +3814,21 @@ class ExportLSDynaIgaKeywordFileParams(CoreObject):
 
 class ExportBoundaryFittedSplineParams(CoreObject):
     """Parameters for exporting boundary fitted splines.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExportBoundaryFittedSplineParams`` object with default parameters.
+    id_offset: int, optional
+        Offset value for IGA entity ids between parts.
+    id_start: int, optional
+        Start ids for IGA entities.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExportBoundaryFittedSplineParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> export_boundary_fitted_spline_params = prime.ExportBoundaryFittedSplineParams(model = model)
     """
     _default_params = {}
 
@@ -3506,6 +3953,17 @@ class ExportBoundaryFittedSplineParams(CoreObject):
 
 class ImportAbaqusParams(CoreObject):
     """Parameters for importing Abaqus solver input files.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportAbaqusParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportAbaqusParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_abaqus_params = prime.ImportAbaqusParams(model = model)
     """
     _default_params = {}
 
@@ -3585,6 +4043,25 @@ class ImportAbaqusParams(CoreObject):
 
 class ImportAbaqusResults(CoreObject):
     """Results of Abaqus import operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ImportAbaqusResults`` object with default parameters.
+    summary_log: str, optional
+        Summary log for the import operation in json format.
+        This is a beta parameter. The behavior and name may change in the future.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with Abaqus import operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ImportAbaqusResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> import_abaqus_results = prime.ImportAbaqusResults(model = model)
     """
     _default_params = {}
 

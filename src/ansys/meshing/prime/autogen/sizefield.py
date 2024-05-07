@@ -9,6 +9,12 @@ class SizeField(CoreObject):
     """The size field is computed based on the size control defined.
 
     You can remesh surfaces and edges based on the size field.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create SizeField object.
     """
 
     def __init__(self, model: CommunicationManager):

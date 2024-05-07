@@ -10,7 +10,7 @@ from ansys.meshing.prime.core.volumesweeper import VolumeSweeper
 from ansys.meshing.prime.autogen.surfacesearch import SurfaceSearch
 from ansys.meshing.prime.autogen.volumesearch import VolumeSearch
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
-from ansys.meshing.prime.core.multizonecontrol import MultiZoneControl
+from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.core.wrapper import Wrapper
 from ansys.meshing.prime.core.surfaceutilities import SurfaceUtilities
@@ -33,6 +33,7 @@ from ansys.meshing.prime.autogen.volumemeshtool import VolumeMeshTool
 from ansys.meshing.prime.autogen.topoutilities import TopoUtilities
 from ansys.meshing.prime.autogen.morpher import Morpher
 from ansys.meshing.prime.autogen.vtcomposer import VTComposer
+from ansys.meshing.prime.autogen.topodata import TopoData
 from ansys.meshing.prime.autogen.commontypes import *
 from ansys.meshing.prime.autogen.commonstructs import *
 from ansys.meshing.prime.autogen.modelstructs import *

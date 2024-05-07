@@ -23,6 +23,20 @@ class Part(CoreObject):
     * TopoFace: Topoentity representing surfaces.
     * TopoEdge: Topoentity representing curves.
     * TopoVolume: Topoentity representing volumes.
+
+
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create Part object.
+    id : int
+        Id of the Part.
+    object_id : int
+        Object id of the Part.
+    name : str
+        Name of the Part.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -1474,7 +1488,7 @@ Return the ids of topofaces.
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

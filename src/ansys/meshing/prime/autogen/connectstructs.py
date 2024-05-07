@@ -46,6 +46,21 @@ class FuseOption(enum.IntEnum):
 
 class OverlapPairs(CoreObject):
     """Provides ids of a pair of overlapping face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``OverlapPairs`` object with default parameters.
+    zone_id0: int, optional
+        Id of one overlapping face zonelet.
+    zone_id1: int, optional
+        Id of other overlapping face zonelet.
+    json_data: dict, optional
+        JSON dictionary to create a ``OverlapPairs`` object with provided parameters.
+
+    Examples
+    --------
+    >>> overlap_pairs = prime.OverlapPairs(model = model)
     """
     _default_params = {}
 
@@ -170,6 +185,23 @@ class OverlapPairs(CoreObject):
 
 class OverlapSearchResults(CoreObject):
     """Provides ids of a pair of overlapping face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``OverlapSearchResults`` object with default parameters.
+    n_pairs: int, optional
+        Number of pairs.
+    overlap_pairs: List[OverlapPairs], optional
+        Ids corresponding to pairs of overlapping face zonelets.
+    error_code: ErrorCode, optional
+        Error Code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``OverlapSearchResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> overlap_search_results = prime.OverlapSearchResults(model = model)
     """
     _default_params = {}
 
@@ -317,6 +349,21 @@ class OverlapSearchResults(CoreObject):
 
 class ConnectResults(CoreObject):
     """Results associated with the connection operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ConnectResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error Code associated with failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ConnectResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> connect_results = prime.ConnectResults(model = model)
     """
     _default_params = {}
 
@@ -441,6 +488,27 @@ class ConnectResults(CoreObject):
 
 class IntersectParams(CoreObject):
     """Parameters used for intersection.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``IntersectParams`` object with default parameters.
+    tolerance: float, optional
+        Intersection tolerance.
+    use_absolute_tolerance: bool, optional
+        True if tolerance provided is absolute value.
+    remesh: bool, optional
+        Local remesh at the intersection.
+    collapse_feature_angle: float, optional
+        Angle to preserve features while performing collapse in improve operation.
+    collapse_target_skewness: float, optional
+        Perform collapse on faces with skewness above the provided target skewness.
+    json_data: dict, optional
+        JSON dictionary to create a ``IntersectParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> intersect_params = prime.IntersectParams(model = model)
     """
     _default_params = {}
 
@@ -634,6 +702,27 @@ class IntersectParams(CoreObject):
 
 class JoinParams(CoreObject):
     """Parameters used for join.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``JoinParams`` object with default parameters.
+    tolerance: float, optional
+        Overlap tolerance between overlapping zonelets.
+    use_absolute_tolerance: bool, optional
+        Tolerance provided is absolute value.
+    remesh: bool, optional
+        Remesh at overlap surface boundary.
+    match_angle: float, optional
+        Match angle determines face pair inclination for overlap consideration.
+    overlap_zone_name: str, optional
+        Zone id to be assigned to overlap zonelets belonging to different zones.
+    json_data: dict, optional
+        JSON dictionary to create a ``JoinParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> join_params = prime.JoinParams(model = model)
     """
     _default_params = {}
 
@@ -827,6 +916,24 @@ class JoinParams(CoreObject):
 
 class SubtractVolumesParams(CoreObject):
     """Parameters to control the volume subtract operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractVolumesParams`` object with default parameters.
+    ignore_face_zonelets: Iterable[int], optional
+        Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
+    check_cutters: bool, optional
+        Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+    keep_cutters: bool, optional
+        Option to retain cutter volumes.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_volumes_params = prime.SubtractVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -976,6 +1083,21 @@ class SubtractVolumesParams(CoreObject):
 
 class SubtractVolumesResults(CoreObject):
     """Results of the volume subtract operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the volume subtract operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the volume subtract operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_volumes_results = prime.SubtractVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -1100,6 +1222,27 @@ class SubtractVolumesResults(CoreObject):
 
 class StitchParams(CoreObject):
     """Parameters used for stitch operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``StitchParams`` object with default parameters.
+    tolerance: float, optional
+        Distance tolerance for stitching boundaries.
+    use_absolute_tolerance: bool, optional
+        True if tolerance provided is absolute value.
+    remesh: bool, optional
+        Remesh at stitch connection.
+    enable_multi_threading: bool, optional
+        Option to run stitch in parallel using multithread.
+    type: StitchType, optional
+        Stitch type depending on nature of surface boundary edges to be stitched.
+    json_data: dict, optional
+        JSON dictionary to create a ``StitchParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> stitch_params = prime.StitchParams(model = model)
     """
     _default_params = {}
 
@@ -1293,6 +1436,23 @@ class StitchParams(CoreObject):
 
 class MergeBoundaryNodesParams(CoreObject):
     """Parameters used for the merge boundary nodes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
+    tolerance: float, optional
+        Distance tolerance for merging boundary nodes.
+    use_absolute_tolerance: bool, optional
+        Indicates whether the tolerance provided is an absolute value or not.
+    merge_node_type: MergeNodeType, optional
+        Type of nodes to be merged.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_boundary_nodes_params = prime.MergeBoundaryNodesParams(model = model)
     """
     _default_params = {}
 
@@ -1320,8 +1480,11 @@ class MergeBoundaryNodesParams(CoreObject):
         model: Model
             Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
         tolerance: float, optional
+            Distance tolerance for merging boundary nodes.
         use_absolute_tolerance: bool, optional
+            Indicates whether the tolerance provided is an absolute value or not.
         merge_node_type: MergeNodeType, optional
+            Type of nodes to be merged.
         json_data: dict, optional
             JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
 
@@ -1368,8 +1531,11 @@ class MergeBoundaryNodesParams(CoreObject):
         Parameters
         ----------
         tolerance: float, optional
+            Distance tolerance for merging boundary nodes.
         use_absolute_tolerance: bool, optional
+            Indicates whether the tolerance provided is an absolute value or not.
         merge_node_type: MergeNodeType, optional
+            Type of nodes to be merged.
         """
         args = locals()
         [MergeBoundaryNodesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1404,8 +1570,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @property
     def tolerance(self) -> float:
-        """
-        Distance tolerance for merging boundary nodes.
+        """Distance tolerance for merging boundary nodes.
         """
         return self._tolerance
 
@@ -1415,8 +1580,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @property
     def use_absolute_tolerance(self) -> bool:
-        """
-        Indicates whether the tolerance provided is an absolute value or not.
+        """Indicates whether the tolerance provided is an absolute value or not.
         """
         return self._use_absolute_tolerance
 
@@ -1426,8 +1590,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @property
     def merge_node_type(self) -> MergeNodeType:
-        """
-        Type depending on the type of nodes to be merged.
+        """Type of nodes to be merged.
         """
         return self._merge_node_type
 
@@ -1437,6 +1600,19 @@ class MergeBoundaryNodesParams(CoreObject):
 
 class MergeBoundaryNodesResults(CoreObject):
     """Results associated with the merge nodes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeBoundaryNodesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error Code associated with failure of merge nodes operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeBoundaryNodesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_boundary_nodes_results = prime.MergeBoundaryNodesResults(model = model)
     """
     _default_params = {}
 
@@ -1538,6 +1714,42 @@ class MergeBoundaryNodesResults(CoreObject):
 
 class FuseParams(CoreObject):
     """Parameters for fuse operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FuseParams`` object with default parameters.
+    use_absolute_tolerance: bool, optional
+        When true, gap tolerance and side tolerance provided are absolute values.
+    gap_tolerance: float, optional
+        Gap tolerance between faces to be fused.
+    side_tolerance: float, optional
+        Side tolerance for fusing to the side edges.
+    check_interior: bool, optional
+        When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+    fuse_option: FuseOption, optional
+        Option for treatment of fused surfaces.
+    check_orientation: bool, optional
+        Option to check face normal orientation during fuse operation.
+    dump_mesh: bool, optional
+        Option to dump mesh for debugging.
+    local_remesh: bool, optional
+        Local remesh of region to be fused.
+    n_layers: int, optional
+        Face layers around region to be fused.
+    separate: bool, optional
+        Separate region to be fused.
+    angle: float, optional
+        Faces zonelets with angle less than the provided value are considered for fuse operation.
+    fuse_edges_only: bool, optional
+        Fuse edges only.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``FuseParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fuse_params = prime.FuseParams(model = model)
     """
     _default_params = {}
 
@@ -1894,6 +2106,27 @@ class FuseParams(CoreObject):
 
 class FuseResults(CoreObject):
     """Results associated with the fuse operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FuseResults`` object with default parameters.
+    fused_pairs: int, optional
+        Number of face region pairs that were fused.
+    fused_area: float, optional
+        Total area of fused regions from both source and target faces.
+    error_code: ErrorCode, optional
+        Error code associated with failure of the fuse operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the fuse operation.
+    intersecting_locations: Iterable[float], optional
+        Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+    json_data: dict, optional
+        JSON dictionary to create a ``FuseResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fuse_results = prime.FuseResults(model = model)
     """
     _default_params = {}
 

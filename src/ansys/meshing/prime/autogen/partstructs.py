@@ -50,6 +50,29 @@ class CreateVolumeZonesType(enum.IntEnum):
 
 class BoundingBox(CoreObject):
     """Provides information about the definition of a bounding box.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``BoundingBox`` object with default parameters.
+    xmin: float, optional
+        Minimal X coordinate of the bounding box.
+    ymin: float, optional
+        Minimal Y coordinate of the bounding box.
+    zmin: float, optional
+        Minimal Z coordinate of the bounding box.
+    xmax: float, optional
+        Maximal X coordinate of the bounding box.
+    ymax: float, optional
+        Maximal Y coordinate of the bounding box.
+    zmax: float, optional
+        Maximal Z coordinate of the bounding box.
+    json_data: dict, optional
+        JSON dictionary to create a ``BoundingBox`` object with provided parameters.
+
+    Examples
+    --------
+    >>> bounding_box = prime.BoundingBox(model = model)
     """
     _default_params = {}
 
@@ -266,6 +289,21 @@ class BoundingBox(CoreObject):
 
 class MergeZoneletsResults(CoreObject):
     """Results associated with merge zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeZoneletsResults`` object with default parameters.
+    merged_zonelets: Iterable[int], optional
+        Ids of zonelets to which input zonelets are merged.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeZoneletsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_zonelets_results = prime.MergeZoneletsResults(model = model)
     """
     _default_params = {}
 
@@ -390,6 +428,21 @@ class MergeZoneletsResults(CoreObject):
 
 class MergeZoneletsParams(CoreObject):
     """Parameters to merge zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeZoneletsParams`` object with default parameters.
+    merge_small_zonelets_with_neighbors: bool, optional
+        Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+    element_count_limit: int, optional
+        Element count limit to identify small zonelets.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_zonelets_params = prime.MergeZoneletsParams(model = model)
     """
     _default_params = {}
 
@@ -514,6 +567,29 @@ class MergeZoneletsParams(CoreObject):
 
 class ComputeVolumesResults(CoreObject):
     """Results associated with compute volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComputeVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    error_locations: Iterable[float], optional
+        Coordinates of problematic locations in the surface mesh.
+    volumes: Iterable[int], optional
+        Ids of computed volumes.
+    material_point_volumes: Iterable[int], optional
+        Ids of computed volumes enclosing material points.
+    external_open_face_zonelets: Iterable[int], optional
+        Face zonelet ids that are in external space and not part of any computed volumes.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the compute volumes.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComputeVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_volumes_results = prime.ComputeVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -730,6 +806,33 @@ class ComputeVolumesResults(CoreObject):
 
 class ComputeTopoVolumesResults(CoreObject):
     """Results associated with compute topovolumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComputeTopoVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    error_locations: Iterable[float], optional
+        Coordinates of problematic locations in the surface mesh.
+    topo_volumes: Iterable[int], optional
+        Ids of all topovolumes computed.
+    material_point_topo_volumes: Iterable[int], optional
+        Ids of topovolumes enclosing material points.
+    external_open_topo_faces: Iterable[int], optional
+        Topoface ids that are in external space and not part of any topovolumes.
+    new_topo_volumes: Iterable[int], optional
+        Ids of new topovolumes computed.
+    deleted_topo_volumes: Iterable[int], optional
+        Ids of existing topovolumes that got deleted.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the compute topovolumes.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComputeTopoVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_topo_volumes_results = prime.ComputeTopoVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -992,6 +1095,27 @@ class ComputeTopoVolumesResults(CoreObject):
 
 class ExtractVolumesResults(CoreObject):
     """Results associated with compute volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    volumes: Iterable[int], optional
+        Ids of computed volumes.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the compute volumes.
+    assigned_zone_name: str, optional
+        Assigned name of zone for extracted flow volumes.
+    face_zonelets_without_volumes: Iterable[int], optional
+        Ids of face zonelets for which volumes were not extracted.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_volumes_results = prime.ExtractVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -1185,6 +1309,25 @@ class ExtractVolumesResults(CoreObject):
 
 class ComputeVolumesParams(CoreObject):
     """Parameters to compute volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComputeVolumesParams`` object with default parameters.
+    volume_naming_type: VolumeNamingType, optional
+        Indicates source type used to compute zone name for volumes.
+    create_zones_type: CreateVolumeZonesType, optional
+        Option to control volume zone creation for volumes.
+    priority_ordered_names: List[str], optional
+        Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+    material_point_names: List[str], optional
+        Material point names provided to identify volumes. Material point names will have precedence over the volume names.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComputeVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_volumes_params = prime.ComputeVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -1355,6 +1498,21 @@ class ComputeVolumesParams(CoreObject):
 
 class ExtractVolumesParams(CoreObject):
     """Parameters to extract flow volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractVolumesParams`` object with default parameters.
+    create_zone: bool, optional
+        Option to create zone for flow volumes extracted.
+    suggested_zone_name: str, optional
+        Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_volumes_params = prime.ExtractVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -1381,7 +1539,7 @@ class ExtractVolumesParams(CoreObject):
         create_zone: bool, optional
             Option to create zone for flow volumes extracted.
         suggested_zone_name: str, optional
-            Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+            Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         json_data: dict, optional
             JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
 
@@ -1426,7 +1584,7 @@ class ExtractVolumesParams(CoreObject):
         create_zone: bool, optional
             Option to create zone for flow volumes extracted.
         suggested_zone_name: str, optional
-            Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+            Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         """
         args = locals()
         [ExtractVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1469,7 +1627,7 @@ class ExtractVolumesParams(CoreObject):
 
     @property
     def suggested_zone_name(self) -> str:
-        """Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+        """Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         """
         return self._suggested_zone_name
 
@@ -1479,6 +1637,19 @@ class ExtractVolumesParams(CoreObject):
 
 class ExtractTopoVolumesParams(CoreObject):
     """Parameters to extract flow topovolumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractTopoVolumesParams`` object with default parameters.
+    zone_name: str, optional
+        Specifies zone name to associate extracted flow topovolumes.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractTopoVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_topo_volumes_params = prime.ExtractTopoVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -1580,6 +1751,21 @@ class ExtractTopoVolumesParams(CoreObject):
 
 class ExtractTopoVolumesResults(CoreObject):
     """Parameters to extract flow topovolumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractTopoVolumesResults`` object with default parameters.
+    volumes: Iterable[int], optional
+        Ids of extracted flow topovolumes.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractTopoVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_topo_volumes_results = prime.ExtractTopoVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -1704,6 +1890,17 @@ class ExtractTopoVolumesResults(CoreObject):
 
 class NamePatternParams(CoreObject):
     """Parameters to be used to match name pattern with names.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``NamePatternParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``NamePatternParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> name_pattern_params = prime.NamePatternParams(model = model)
     """
     _default_params = {}
 
@@ -1783,6 +1980,21 @@ class NamePatternParams(CoreObject):
 
 class PartSummaryParams(CoreObject):
     """Parameters to control part summary results.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartSummaryParams`` object with default parameters.
+    print_id: bool, optional
+        Boolean to control print ids. The default is false.
+    print_mesh: bool, optional
+        Boolean to control print mesh information. The default is true.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartSummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> part_summary_params = prime.PartSummaryParams(model = model)
     """
     _default_params = {}
 
@@ -1907,6 +2119,63 @@ class PartSummaryParams(CoreObject):
 
 class PartSummaryResults(CoreObject):
     """Results of part summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartSummaryResults`` object with default parameters.
+    message: str, optional
+        Part summary text.
+    n_topo_edges: int, optional
+        Number of topoedges.
+    n_topo_faces: int, optional
+        Number of topofaces.
+    n_topo_volumes: int, optional
+        Number of topovolumes.
+    n_edge_zonelets: int, optional
+        Number of edge zonelets.
+    n_face_zonelets: int, optional
+        Number of face zonelets.
+    n_cell_zonelets: int, optional
+        Number of cell zonelets.
+    n_edge_zones: int, optional
+        Number of edge zones.
+    n_face_zones: int, optional
+        Number of face zones.
+    n_volume_zones: int, optional
+        Number of volume zones.
+    n_labels: int, optional
+        Number of labels.
+    n_nodes: int, optional
+        Number of nodes.
+    n_faces: int, optional
+        Number of faces.
+    n_cells: int, optional
+        Number of cells.
+    n_tri_faces: int, optional
+        Number of triangular faces.
+    n_poly_faces: int, optional
+        Number of polygonal faces.
+    n_quad_faces: int, optional
+        Number of quadrilateral faces.
+    n_tet_cells: int, optional
+        Number of tetrahedral cells.
+    n_pyra_cells: int, optional
+        Number of pyramid cells.
+    n_prism_cells: int, optional
+        Number of prism cells.
+    n_poly_cells: int, optional
+        Number of polyhedral cells.
+    n_hex_cells: int, optional
+        Number of hexahedral cells.
+    n_unmeshed_topo_faces: int, optional
+        Number of unmeshed topofaces.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartSummaryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> part_summary_results = prime.PartSummaryResults(model = model)
     """
     _default_params = {}
 
@@ -2514,6 +2783,21 @@ class PartSummaryResults(CoreObject):
 
 class DeleteTopoEntitiesParams(CoreObject):
     """Parameters to control delete topoentities.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteTopoEntitiesParams`` object with default parameters.
+    delete_geom_zonelets: bool, optional
+        Option to delete geometry zonelets of topology.
+    delete_mesh_zonelets: bool, optional
+        Option to delete mesh zonelets of topology.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteTopoEntitiesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_topo_entities_params = prime.DeleteTopoEntitiesParams(model = model)
     """
     _default_params = {}
 
@@ -2638,6 +2922,19 @@ class DeleteTopoEntitiesParams(CoreObject):
 
 class DeleteTopoEntitiesResults(CoreObject):
     """Results associated with delete topoentities.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteTopoEntitiesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with delete topoentities.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteTopoEntitiesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_topo_entities_results = prime.DeleteTopoEntitiesResults(model = model)
     """
     _default_params = {}
 
@@ -2739,6 +3036,21 @@ class DeleteTopoEntitiesResults(CoreObject):
 
 class AddToZoneResults(CoreObject):
     """Results associated with the add to zone operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddToZoneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the add to zone operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddToZoneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_to_zone_results = prime.AddToZoneResults(model = model)
     """
     _default_params = {}
 
@@ -2863,6 +3175,21 @@ class AddToZoneResults(CoreObject):
 
 class RemoveZoneResults(CoreObject):
     """Results associated with the remove zone operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RemoveZoneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the remove zone operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``RemoveZoneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> remove_zone_results = prime.RemoveZoneResults(model = model)
     """
     _default_params = {}
 
@@ -2987,6 +3314,19 @@ class RemoveZoneResults(CoreObject):
 
 class AddLabelResults(CoreObject):
     """Results associated with the add label operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddLabelResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the add label operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddLabelResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_label_results = prime.AddLabelResults(model = model)
     """
     _default_params = {}
 
@@ -3088,6 +3428,19 @@ class AddLabelResults(CoreObject):
 
 class RemoveLabelResults(CoreObject):
     """Results associated with the remove label operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RemoveLabelResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the remove label operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``RemoveLabelResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> remove_label_results = prime.RemoveLabelResults(model = model)
     """
     _default_params = {}
 
@@ -3189,6 +3542,21 @@ class RemoveLabelResults(CoreObject):
 
 class DeleteVolumesParams(CoreObject):
     """Parameters to delete volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteVolumesParams`` object with default parameters.
+    delete_small_volumes: bool, optional
+        Option to delete only volumes smaller than provided volume limit.
+    volume_limit: float, optional
+        Maximum volume limit to identify smaller volumes to be deleted.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_volumes_params = prime.DeleteVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -3313,6 +3681,21 @@ class DeleteVolumesParams(CoreObject):
 
 class DeleteVolumesResults(CoreObject):
     """Results associated with delete volumes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteVolumesResults`` object with default parameters.
+    deleted_volumes: Iterable[int], optional
+        Ids of deleted volumes.
+    error_code: ErrorCode, optional
+        Error code associated with the volume deletion operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_volumes_results = prime.DeleteVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -3437,6 +3820,21 @@ class DeleteVolumesResults(CoreObject):
 
 class MergeVolumesParams(CoreObject):
     """Parameters to merge volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeVolumesParams`` object with default parameters.
+    merge_to_neighbor_volume: bool, optional
+        Option to merge given volumes to their neighbor volume.
+    neighbor_volumes: Iterable[int], optional
+        Ids of volume that are neighbors to given volumes for merging.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_volumes_params = prime.MergeVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -3561,6 +3959,21 @@ class MergeVolumesParams(CoreObject):
 
 class MergeVolumesResults(CoreObject):
     """Results associated with merge volumes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeVolumesResults`` object with default parameters.
+    merged_volumes: Iterable[int], optional
+        Ids of volumes to which input volumes are merged.
+    error_code: ErrorCode, optional
+        Error code associated with the volume merge operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_volumes_results = prime.MergeVolumesResults(model = model)
     """
     _default_params = {}
 
