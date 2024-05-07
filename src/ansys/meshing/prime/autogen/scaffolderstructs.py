@@ -33,6 +33,38 @@ class EdgeMergeControl(enum.IntEnum):
 
 class ScaffolderParams(CoreObject):
     """Parameters to control scaffold operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderParams`` object with default parameters.
+    absolute_dist_tol: float, optional
+        Defines the maximum gap to connect.
+    size_field_type: int, optional
+        Specifies the type of size field used for scaffolding.
+        This is a beta parameter. The behavior and name may change in the future.
+    intersection_control_mask: IntersectionMask, optional
+        Specifies the nature of intersection to be computed.
+    edge_merge_control: int, optional
+        Specifies type of edge pairs to be merged during scaffold operation.
+        This is a beta parameter. The behavior and name may change in the future.
+    constant_mesh_size: float, optional
+        Defines the constant edge mesh size to check connection.
+    remove_holes_critical_radius: float, optional
+        Defines the maximum radius of holes to be removed.
+        This is a beta parameter. The behavior and name may change in the future.
+    remove_slivers_abs_dist_tol_ratio: float, optional
+        Defines the maximum aspect ratio to remove sliver faces.
+        This is a beta parameter. The behavior and name may change in the future.
+    triangles_coplanar_angle_cos: float, optional
+        Lower bound for cos angle to consider coplanar faces for scaffolding.
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_params = prime.ScaffolderParams(model = model)
     """
     _default_params = {}
 
@@ -77,6 +109,7 @@ class ScaffolderParams(CoreObject):
         absolute_dist_tol: float, optional
             Defines the maximum gap to connect.
         size_field_type: int, optional
+            Specifies the type of size field used for scaffolding.
             This is a beta parameter. The behavior and name may change in the future.
         intersection_control_mask: IntersectionMask, optional
             Specifies the nature of intersection to be computed.
@@ -162,6 +195,7 @@ class ScaffolderParams(CoreObject):
         absolute_dist_tol: float, optional
             Defines the maximum gap to connect.
         size_field_type: int, optional
+            Specifies the type of size field used for scaffolding.
         intersection_control_mask: IntersectionMask, optional
             Specifies the nature of intersection to be computed.
         edge_merge_control: int, optional
@@ -228,8 +262,7 @@ class ScaffolderParams(CoreObject):
 
     @property
     def size_field_type(self) -> int:
-        """
-        Specifies the type of size field used for scaffolding.
+        """Specifies the type of size field used for scaffolding.
         This is a beta parameter. The behavior and name may change in the future.
         """
         return self._size_field_type
@@ -304,6 +337,21 @@ class ScaffolderParams(CoreObject):
 
 class VolumetricScaffolderParams(CoreObject):
     """Parameters to control delete shadowed topofaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumetricScaffolderParams`` object with default parameters.
+    absolute_dist_tol: float, optional
+        Specify distance tolerance between overlapping faces.
+    only_check_exact_overlaps: bool, optional
+        Check only for fully overlapping topofaces when true.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumetricScaffolderParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volumetric_scaffolder_params = prime.VolumetricScaffolderParams(model = model)
     """
     _default_params = {}
 
@@ -428,6 +476,21 @@ class VolumetricScaffolderParams(CoreObject):
 
 class ScaffolderResults(CoreObject):
     """Results structure associated to scaffold operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderResults`` object with default parameters.
+    n_incomplete_topo_faces: int, optional
+        Number of topofaces failed in scaffold operation.
+    error_code: ErrorCode, optional
+        Error code associated with scaffold operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_results = prime.ScaffolderResults(model = model)
     """
     _default_params = {}
 
@@ -552,6 +615,21 @@ class ScaffolderResults(CoreObject):
 
 class ScaffolderSplitResults(CoreObject):
     """Result structure associated to split topofaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderSplitResults`` object with default parameters.
+    new_faces: Iterable[int], optional
+        Topofaces created after split operation.
+    error_code: ErrorCode, optional
+        Error code associated with split topofaces operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderSplitResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_split_results = prime.ScaffolderSplitResults(model = model)
     """
     _default_params = {}
 
@@ -676,6 +754,21 @@ class ScaffolderSplitResults(CoreObject):
 
 class ScaffolderMergeResults(CoreObject):
     """Result structure associated with merge overlapping topofaces and delete shadowed topofaces operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderMergeResults`` object with default parameters.
+    n_merged: int, optional
+        Number of merged topofaces.
+    error_code: ErrorCode, optional
+        Error code associated with merge overlapping topofaces operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderMergeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_merge_results = prime.ScaffolderMergeResults(model = model)
     """
     _default_params = {}
 

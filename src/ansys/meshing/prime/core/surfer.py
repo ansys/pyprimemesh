@@ -16,12 +16,15 @@ from ansys.meshing.prime.core.model import Model
 
 
 class Surfer(CoreObject):
-    """Provides surfer operations.
+    """Generates surface mesh.
+
+    Performs surface meshing using various surface meshing algorithms on topofaces or face zonelets.
+    For example, constant size or volumetric size surface meshing.
 
     Parameters
     ----------
     model : Model
-        Model to operate in.
+        Server model to create Surfer object.
     """
 
     __doc__ = _Surfer.__doc__

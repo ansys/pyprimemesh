@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class AutoQuadMesher(CoreObject):
     """Generate full quad mesh.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create AutoQuadMesher object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -50,7 +54,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -95,7 +99,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -140,7 +144,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -185,7 +189,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -230,7 +234,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

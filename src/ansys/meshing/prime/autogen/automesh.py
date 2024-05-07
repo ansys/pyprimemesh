@@ -10,6 +10,11 @@ class AutoMesh(CoreObject):
 
     Performs volume meshing using various volume meshing algorithms.
     For example, with prisms.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create AutoMesh object.
     """
 
     def __init__(self, model: CommunicationManager):

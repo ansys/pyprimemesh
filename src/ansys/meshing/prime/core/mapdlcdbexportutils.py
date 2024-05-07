@@ -13,9 +13,7 @@ from typing import Tuple
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.params.primestructs import ExportMapdlCdbParams
 
-__all__ = [
-    'generate_config_commands' 'generate_mapdl_commands',
-]
+__all__ = ['generate_mapdl_commands']
 
 
 class _TractionProperties:
@@ -383,6 +381,84 @@ class _AmplitudeProcessor:
         # string.format(name, amplitude, frequency)
         return table_string.format(name, magn, freq)
 
+    def _process_periodic_amplitude_table_complete_single_term(
+        self, name, magn, A0, t0, A1, B1, freq
+    ):
+        table_string = """!
+! A0 = {2}
+! Omega = {6}
+! t0 = {3}
+! A1 = {4}
+! B1 = {5}
+! Magnitude = {1}
+
+/com,*********** Create Displacement Tables and Functions ******
+!
+! ANSYS Function Representation
+!
+*DIM,{0},TABLE,6,20,2,,,,0
+!
+! Begin of equation: time (mm)
+{0}(0,0,1)= 0, -999
+{0}(2,0,1)= 0.0
+{0}(3,0,1)= 0.0
+{0}(4,0,1)= 0.0
+{0}(5,0,1)= 0.0
+{0}(6,0,1)= 0.0
+{0}(0,1,1)= 1.0, 99, 0, 1, 1, 0, 0
+{0}(0,2,1)= 0.0,
+{0}(0,3,1)=   0,
+{0}(0,4,1)= 0.0,
+{0}(0,5,1)= 0.0,
+{0}(0,6,1)= 0.0,
+{0}(0,7,1)= 0.0,
+{0}(0,8,1)= 0.0,
+{0}(0,9,1)= 0.0,
+{0}(0,10,1)= 0.0,
+{0}(0,11,1)= 0.0,
+{0}(0,12,1)= 0.0,
+{0}(0,13,1)= 0.0,
+{0}(0,14,1)= 0.0,
+{0}(0,15,1)= 0.0,
+{0}(0,16,1)= 0.0,
+{0}(0,17,1)= 0.0,
+{0}(0,18,1)= 0.0,
+{0}(0,19,1)= 0.0,
+{0}(0,20,1)= 0.0,
+! End of equation: time (mm)
+!
+! Begin of equation: Magnitude*(A0 + (A1*cos(Omega*(time-t0)) + B1*sin(Omega*(time-t0)))) (mm)
+! Begin of equation: {1}*({2} + ({4}*cos({6}*(time-{3})) + {5}*sin({6}*(time-{3})))) (mm)
+{0}(0,0,2)= -999, -999
+{0}(2,0,2)= 0.0
+{0}(3,0,2)= 0.0
+{0}(4,0,2)= 0.0
+{0}(5,0,2)= 0.0
+{0}(6,0,2)= 0.0
+{0}(0,1,2)= 1.0, -1, 0, {3}, 0, 0, 1
+{0}(0,2,2)= 0.0, -2, 0, 1, 1, 2, -1
+{0}(0,3,2)=   0, -1, 0, {6}, 0, 0, -2
+{0}(0,4,2)= 0.0, -3, 0, 1, -1, 3, -2
+{0}(0,5,2)= 0.0, -1, 10, 1, -3, 0, 0
+{0}(0,6,2)= 0.0, -2, 0, {4}, 0, 0, -1
+{0}(0,7,2)= 0.0, -3, 0, 1, -2, 3, -1
+{0}(0,8,2)= 0.0, -1, 0, {3}, 0, 0, 1
+{0}(0,9,2)= 0.0, -2, 0, 1, 1, 2, -1
+{0}(0,10,2)= 0.0, -1, 0, {6}, 0, 0, -2
+{0}(0,11,2)= 0.0, -4, 0, 1, -1, 3, -2
+{0}(0,12,2)= 0.0, -1, 9, 1, -4, 0, 0
+{0}(0,13,2)= 0.0, -2, 0, {5}, 0, 0, -1
+{0}(0,14,2)= 0.0, -4, 0, 1, -2, 3, -1
+{0}(0,15,2)= 0.0, -1, 0, 1, -3, 1, -4
+{0}(0,16,2)= 0.0, -2, 0, {2}, 0, 0, -1
+{0}(0,17,2)= 0.0, -3, 0, 1, -2, 1, -1
+{0}(0,18,2)= 0.0, -1, 0, {1}, 0, 0, -3
+{0}(0,19,2)= 0.0, -2, 0, 1, -1, 3, -3
+{0}(0,20,2)= 0.0, 99, 0, 1, -2, 0, 0
+! End of equation: Magnitude*(A0 + (A1*cos(Omega*(time-t0)) + B1*sin(Omega*(time-t0)))) (mm)
+"""
+        return table_string.format(name, magn, A0, t0, A1, B1, freq)
+
     def _process_periodic_data(self, amplitude_name, ampl_table_data):
         amplitude_commands = ""
         data = ampl_table_data
@@ -406,25 +482,40 @@ class _AmplitudeProcessor:
             B = data["B"]
         if terms > 1:
             self._logger.warning(
-                f"Warning: multiple Sine terms for Amplitude Table '{amplitude_name}' "
-                f"is not processed. please check the table created with name: "
+                f"Warning: multiple Sine/Cosine terms for Amplitude Table '{amplitude_name}' "
+                f"is not processed. Only First term is used to define table "
+                f"please check the table created with name: "
                 f"{self._modified_amplitude_name}"
             )
-        for i, pt in enumerate(zip(A, B)):
-            if i == 0 and float(pt[0]) != 0:
-                self._logger.warning(
-                    f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
-                    f" please check the table created with name: "
-                    f"{self._modified_amplitude_name}"
-                )
-            if i == 0 and float(pt[1]) != 1:
-                self._logger.warning(
-                    f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
-                    f"A*SIN(w*time) equation is processed please check the table "
-                    f"created with name: {self._modified_amplitude_name}"
-                )
-        amplitude_commands += self._process_periodic_amplitude_table(
-            self._modified_amplitude_name, self._scale_factor, freq
+        if t0 != 0:
+            self._logger.warning(
+                f"Warning: nonzero value of 't0' is specified. "
+                f"This is not supported in Ansys MAPDL solver directly. "
+                f"Split the step in two to create equivalent effect. "
+                f"Table is written with t0 = 0.0"
+            )
+        # for i, pt in enumerate(zip(A, B)):
+        # if i == 0 and float(pt[0]) != 0:
+        # self._logger.warning(
+        # f"Cosine terms for Amplitude Table '{amplitude_name}' is not processed."
+        # f" please check the table created with name: "
+        # f"{self._modified_amplitude_name}"
+        # )
+        # if i == 0 and float(pt[1]) != 1:
+        # self._logger.warning(
+        # f"Sine terms for Amplitude Table '{amplitude_name}' is  not equal to 1, "
+        # f"A*SIN(w*time) equation is processed please check the table "
+        # f"created with name: {self._modified_amplitude_name}"
+        # )
+        # amplitude_commands += self._process_periodic_amplitude_table(
+        # self._modified_amplitude_name, self._scale_factor, freq
+        # )
+        if A:
+            A1 = A[0]
+        if B:
+            B1 = B[0]
+        amplitude_commands += self._process_periodic_amplitude_table_complete_single_term(
+            self._modified_amplitude_name, self._scale_factor, A0, t0, A1, B1, freq
         )
         return amplitude_commands
 
@@ -681,16 +772,18 @@ class _MaterialProcessor:
     def _process_expansion_data(self, property_dict, material, mat_id):
         expansion_data = ''
         zero = 0.0
+        data = []
+        parameters = []
+        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
+            parameters = property_dict['Parameters']
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         exp_type = 'ISO'
-        if 'ZERO' in property_dict['Parameters']:
-            zero = float(property_dict['Parameters']['ZERO'])
-        if 'TYPE' in property_dict['Parameters']:
-            exp_type = property_dict['Parameters']['TYPE']
-        if (
-            'DEPENDENCIES' in property_dict['Parameters']
-            or 'PORE FLUID' in property_dict['Parameters']
-            or 'USER' in property_dict['Parameters']
-        ):
+        if 'ZERO' in parameters:
+            zero = float(parameters['ZERO'])
+        if 'TYPE' in parameters:
+            exp_type = parameters['TYPE']
+        if 'DEPENDENCIES' in parameters or 'PORE FLUID' in parameters or 'USER' in parameters:
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
                 f"*EXPANSION are not processed for material {material}"
@@ -702,31 +795,32 @@ class _MaterialProcessor:
                 f"not processed for material {material}."
             )
             return ''
-        if 'ZERO' in property_dict['Parameters']:
-            expansion_data += f"MP,REFT,{mat_id},{zero}"
+        if 'ZERO' in parameters:
+            expansion_data += f"MP,REFT,{mat_id},{zero}\n"
         if exp_type == 'ISO':
             temperature = [None]
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
-            if 'a' in property_dict['Data']:
-                ctes = property_dict['Data']['a']
+            ctes = [None]
+            if 'Temperature' in data:
+                temperature = data['Temperature']
+            if 'a' in data:
+                ctes = data['a']
             expansion_data += f"TB, CTE, {mat_id},,,\n"
             for temp, cte in zip(temperature, ctes):
                 if temp is not None:
                     expansion_data += f"TBTEMP,{temp}\n"
                 expansion_data += f"TBDATA, 1, {cte}\n"
         if exp_type == 'ORTHO':
-            if 'A11' in property_dict['Data']:
-                ctexs = property_dict['Data']['A11']
+            if 'A11' in data:
+                ctexs = data['A11']
             cteys = ['0.0'] * len(ctexs)
-            if 'A22' in property_dict['Data']:
-                cteys = property_dict['Data']['A22']
+            if 'A22' in data:
+                cteys = data['A22']
             ctezs = ['0.0'] * len(ctexs)
-            if 'A33' in property_dict['Data']:
-                ctezs = property_dict['Data']['A33']
+            if 'A33' in data:
+                ctezs = data['A33']
             temperature = [None] * len(ctexs)
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
             expansion_data += f"TB, CTE, {mat_id},,,\n"
             for temp, ctex, ctey, ctez in zip(temperature, ctexs, cteys, ctezs):
                 if temp is not None:
@@ -739,22 +833,26 @@ class _MaterialProcessor:
         damping_data = ''
         if property_dict['Parameters'] is None:
             self._logger.warning(f"*DAMPING does not have parameters to process.")
-        if 'ALPHA' in property_dict['Parameters']:
-            damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
-        if float(property_dict['Parameters']['BETA']) != 0.0:
-            self._logger.warning(f"Parameter {'BETA'} on *DAMPING is not processed.")
-        if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
-            self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
+        else:
+            if 'ALPHA' in property_dict['Parameters']:
+                damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
+            if float(property_dict['Parameters']['BETA']) != 0.0:
+                self._logger.warning(f"Parameter {'BETA'} on *DAMPING is not processed.")
+            if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
+                self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
         damping_data += f"\n"
         return damping_data
 
     def _process_density(self, property_dict, material, mat_id):
         density_data = ''
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if "Parameters" in property_dict and property_dict['Parameters'] is not None:
             self._logger.warning(f"Parameter on *DENSITY are not processed.")
-        density = property_dict['Data']['Mass density']
-        if 'Temperature' in property_dict['Data']:
-            temperature = property_dict['Data']['Temperature']
+        density = data['Mass density']
+        if 'Temperature' in data:
+            temperature = data['Temperature']
             if len(density) != len(temperature):
                 self._logger.warning(
                     f"data values on *DENSITY are not consistent for material {material}."
@@ -773,16 +871,19 @@ class _MaterialProcessor:
 
     def _process_elastic_modulus(self, property_dict, material, mat_id):
         elastic_modulus = ''
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if property_dict["Parameters"]["TYPE"] == "ISOTROPIC":
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")
             # return ''
-            youngs_mod = property_dict['Data']['E']
-            nu = property_dict['Data']['V']
-            # temperature = property_dict['Data']['Temperature']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            youngs_mod = data['E']
+            nu = data['V']
+            # temperature = data['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 if len(youngs_mod) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
@@ -820,13 +921,13 @@ class _MaterialProcessor:
                     f" this is not processed."
                 )
                 return ''
-            knn = property_dict['Data']['E/Knn']
-            kss = property_dict['Data']['G1/Kss']
-            ktt = property_dict['Data']['G2/Ktt']
+            knn = data['E/Knn']
+            kss = data['G1/Kss']
+            ktt = data['G2/Ktt']
             t = self._cohezive_zone_thickness_data[material]['Thickness']
-            # temperature = property_dict['Data']['Temperature']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            # temperature = data['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 if len(knn) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
@@ -861,6 +962,9 @@ class _MaterialProcessor:
 
     def _process_plastic_data(self, property_dict, material, mat_id):
         plastic_data = ''
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if property_dict["Parameters"]["HARDENING"] != "ISOTROPIC":
             self._logger.warning(
                 f"Only HARDENING=ISOTROPIC is processed, "
@@ -870,12 +974,12 @@ class _MaterialProcessor:
             return ''
         if self._material_linked_to_zone_type[material] == 'Cohesive':
             return ''
-        strains = property_dict['Data']['Plastic strain']
-        stresses = property_dict['Data']['Yield stress']
-        # temperature = property_dict['Data']['Temperature']
+        strains = data['Plastic strain']
+        stresses = data['Yield stress']
+        # temperature = data['Temperature']
         data_points = len(strains)
-        if 'Temperature' in property_dict['Data']:
-            temperature = property_dict['Data']['Temperature']
+        if 'Temperature' in data:
+            temperature = data['Temperature']
             unique_temperatures = len(list(set(temperature)))
             data_points = len(strains) / unique_temperatures
             if len(stresses) != len(temperature):
@@ -889,7 +993,7 @@ class _MaterialProcessor:
         plastic_data += f"TB,PLAS,{mat_id},,{int(data_points)},MISO\n"
         curr_temp = None
         for i, strain in enumerate(strains):
-            if 'Temperature' in property_dict['Data']:
+            if 'Temperature' in data:
                 if curr_temp != temperature[i]:
                     curr_temp = temperature[i]
                     plastic_data += f"TBTEMP,{curr_temp}\n"
@@ -900,6 +1004,9 @@ class _MaterialProcessor:
     def _process_hyperelastic_data(self, property_dict, material, mat_id):
         hyperelastic_data = ''
         param_keys = property_dict["Parameters"].keys()
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         if (
             'REDUCED POLYNOMIAL' not in param_keys
             and 'YEOH' not in param_keys
@@ -915,8 +1022,8 @@ class _MaterialProcessor:
         if self._material_linked_to_zone_type[material] == 'Cohesive':
             return ''
         if 'NEO HOOKE' in param_keys:
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -924,10 +1031,10 @@ class _MaterialProcessor:
                 )
                 temp_data_points = 1
                 temperature = [None]
-            if 'C10' in property_dict['Data'].keys():
-                c10 = property_dict['Data']['C10']
-                if 'D1' in property_dict['Data'].keys():
-                    d1 = property_dict['Data']['D1']
+            if 'C10' in data.keys():
+                c10 = data['C10']
+                if 'D1' in data.keys():
+                    d1 = data['D1']
                 else:
                     d1 = [0.0] * len(c10)
             hyperelastic_data += f"TB,HYPE,{mat_id},,,NEO\n"
@@ -936,8 +1043,8 @@ class _MaterialProcessor:
                     hyperelastic_data += f"TBTEMP, {temperature[i]}\n"
                 hyperelastic_data += f"TBDATA, 1, {float(c10[i])*2}, {d1[i]}\n"
         if 'REDUCED POLYNOMIAL' in param_keys or 'YEOH' in param_keys:
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if 'Temperature' in data:
+                temperature = data['Temperature']
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -946,25 +1053,25 @@ class _MaterialProcessor:
                 temp_data_points = 1
                 temperature = [None]
             number_of_constants = 3
-            if 'C10' in property_dict['Data'].keys():
+            if 'C10' in data.keys():
                 number_of_constants = 1
-                c10 = property_dict['Data']['C10']
-                if 'D1' in property_dict['Data'].keys():
-                    d1 = property_dict['Data']['D1']
+                c10 = data['C10']
+                if 'D1' in data.keys():
+                    d1 = data['D1']
                 else:
                     d1 = [0.0] * len(c10)
-            if 'C20' in property_dict['Data'].keys():
+            if 'C20' in data.keys():
                 number_of_constants = 2
-                c20 = property_dict['Data']['C20']
-                if 'D2' in property_dict['Data'].keys():
-                    d2 = property_dict['Data']['D2']
+                c20 = data['C20']
+                if 'D2' in data.keys():
+                    d2 = data['D2']
                 else:
                     d2 = [0.0] * len(c20)
-            if 'C30' in property_dict['Data'].keys():
+            if 'C30' in data.keys():
                 number_of_constants = 3
-                c30 = property_dict['Data']['C30']
-                if 'D3' in property_dict['Data'].keys():
-                    d3 = property_dict['Data']['D3']
+                c30 = data['C30']
+                if 'D3' in data.keys():
+                    d3 = data['D3']
                 else:
                     d3 = [0.0] * len(c30)
             hyperelastic_data += f"TB,HYPE,{mat_id},,{number_of_constants},YEOH\n"
@@ -982,8 +1089,8 @@ class _MaterialProcessor:
                 else:
                     pass
         # if 'REDUCED POLYNOMIAL' in param_keys:
-        #     if 'Temperature' in property_dict['Data']:
-        #         temperature = property_dict['Data']['Temperature']
+        #     if 'Temperature' in data:
+        #         temperature = data['Temperature']
         #         temp_data_points = len(temperature)
         #     else:
         #         self._logger.warning(
@@ -1408,21 +1515,24 @@ class _JointMaterialProcessor:
         comp4_str = "Angle1"
         comp5_str = "Angle2"
         comp6_str = "Angle3"
+        data = []
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
         # self._logger.info("property_dict")
         # self._logger.info(property_dict)
-        # self._logger.info(property_dict['Data'])
-        if comp1_str in property_dict['Data']:
-            ref_length[0] = property_dict['Data'][comp1_str]
-        if comp2_str in property_dict['Data']:
-            ref_length[1] = property_dict['Data'][comp2_str]
-        if comp3_str in property_dict['Data']:
-            ref_length[2] = property_dict['Data'][comp3_str]
-        if comp4_str in property_dict['Data']:
-            ref_length[3] = property_dict['Data'][comp4_str]
-        if comp5_str in property_dict['Data']:
-            ref_length[4] = property_dict['Data'][comp5_str]
-        if comp6_str in property_dict['Data']:
-            ref_length[5] = property_dict['Data'][comp6_str]
+        # self._logger.info(data)
+        if comp1_str in data:
+            ref_length[0] = data[comp1_str]
+        if comp2_str in data:
+            ref_length[1] = data[comp2_str]
+        if comp3_str in data:
+            ref_length[2] = data[comp3_str]
+        if comp4_str in data:
+            ref_length[3] = data[comp4_str]
+        if comp5_str in data:
+            ref_length[4] = data[comp5_str]
+        if comp6_str in data:
+            ref_length[5] = data[comp6_str]
         return ref_length
 
 
@@ -1464,6 +1574,27 @@ class _BoundaryProcessor:
 
     def get_boundary_commands_by_id(self, boundary_id):
         pass
+
+    def get_boundary_comp_name_with_base_motion(self, base_motion_name):
+        boundaries_data = self._boundaries_data
+        comp_names = []
+        for boundary_data in boundaries_data:
+            if 'Parameters' in boundary_data:
+                params = boundary_data['Parameters']
+                if params is not None and 'BASE NAME' in params:
+                    if params['BASE NAME'] == base_motion_name:
+                        data_lines = boundary_data['Data']
+                        if data_lines is not None:
+                            for data_line in data_lines:
+                                comp_names.append(str(data_line['node_set']))
+                else:
+                    if base_motion_name == "":
+                        data_lines = boundary_data['Data']
+                        if data_lines is not None:
+                            for data_line in data_lines:
+                                comp_names.append(str(data_line['node_set']))
+
+        return comp_names
 
     def _get_commands(self, boundary_data):
         # self._logger.info("boundary data is ")
@@ -2384,7 +2515,7 @@ class _StepProcessor:
             dynamic_analysis_commands += f'FINISH\n'
             dynamic_analysis_commands += f'\n'
             dynamic_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_transient_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
@@ -2494,7 +2625,7 @@ class _StepProcessor:
             dynamic_analysis_commands += f'FINISH\n'
             dynamic_analysis_commands += f'\n'
             dynamic_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_transient_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
@@ -2572,17 +2703,18 @@ class _StepProcessor:
         if self._simulation_data is not None:
             if "ConnectorBehavior" in self._simulation_data:
                 all_conn_behavior = self._simulation_data['ConnectorBehavior']
-                for mat in all_conn_behavior:
-                    conn_mat = all_conn_behavior[mat]
-                    if 'CONNECTOR DAMPING' in conn_mat:
-                        for conn_damp in conn_mat['CONNECTOR DAMPING']:
-                            if 'Parameters' in conn_damp:
-                                if (
-                                    "TYPE" in conn_damp['Parameters']
-                                    and conn_damp['Parameters']['TYPE'] == 'VISCOUS'
-                                ):
-                                    modopt_method = 'QRDAMP'
-                                    break
+                if all_conn_behavior:
+                    for mat in all_conn_behavior:
+                        conn_mat = all_conn_behavior[mat]
+                        if conn_mat and 'CONNECTOR DAMPING' in conn_mat:
+                            for conn_damp in conn_mat['CONNECTOR DAMPING']:
+                                if conn_damp and 'Parameters' in conn_damp:
+                                    if (
+                                        "TYPE" in conn_damp['Parameters']
+                                        and conn_damp['Parameters']['TYPE'] == 'VISCOUS'
+                                    ):
+                                        modopt_method = 'QRDAMP'
+                                        break
         frequency_analysis_commands += (
             f'! -------------------------- STEP: {self._step_counter} -----------------------\n'
         )
@@ -2590,7 +2722,7 @@ class _StepProcessor:
             frequency_analysis_commands += f'FINISH\n'
             frequency_analysis_commands += f'\n'
             frequency_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_modal_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_modal_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_modal_analysis')
             frequency_analysis_commands += f'/SOLU\n'
@@ -2648,7 +2780,7 @@ class _StepProcessor:
             steady_state_dynamics_analysis_commands += f'FINISH\n'
             steady_state_dynamics_analysis_commands += f'\n'
             steady_state_dynamics_analysis_commands += (
-                f'/ASSIGN, RST, step_{self._step_counter}_harmonic_analysis, RST\n'
+                f'/ASSIGN, rst, step_{self._step_counter}_harmonic_analysis, rst\n'
             )
             self._assign_analysis.append(f'step_{self._step_counter}_harmonic_analysis')
             steady_state_dynamics_analysis_commands += f'/SOLU\n'
@@ -2721,7 +2853,7 @@ class _StepProcessor:
                         for modal_ouput in output['Data']['ModalOutput']:
                             # modal_ouput = output['ModalOutput']
                             for key in modal_ouput['Data']['keys']:
-                                if key in ["GV", "GA", "GPV", "GPA"]:
+                                if key in ["GV", "GA", "GPV", "GPA", "A1", "A2", "A3"]:
                                     has_velocities = True
         return has_modal_output, has_velocities
 
@@ -2748,9 +2880,10 @@ class _StepProcessor:
                 if 'Data' in output and output['Data'] is not None:
                     if 'ElementOutput' in output['Data']:
                         for elemout in output['Data']['ElementOutput']:
-                            for key in elemout['Data']['keys']:
-                                if key in ["S"]:
-                                    store_el_results = True
+                            if elemout is not None and elemout['Data'] is not None:
+                                for key in elemout['Data']['keys']:
+                                    if key in ["S"]:
+                                        store_el_results = True
         return store_el_results
 
     def get_ninterval_mapdl_commands(self):
@@ -2835,128 +2968,130 @@ class _StepProcessor:
                             output_analysis_commands += "1\n"
                 if 'NodeOutput' in output['Data']:
                     for nodeout in output['Data']['NodeOutput']:
-                        # nodeout = output['NodeOutput']
-                        for key in nodeout['Data']['keys']:
-                            if key in ["RF", "U", "UT"]:
-                                output_analysis_commands += "OUTRES, "
-                                if key == "RF":
-                                    output_analysis_commands += "RSOL, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
-                                            else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                        if nodeout is not None and nodeout['Data'] is not None:
+                            # nodeout = output['NodeOutput']
+                            for key in nodeout['Data']['keys']:
+                                if key in ["RF", "U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
+                                    output_analysis_commands += "OUTRES, "
+                                    if key == "RF":
+                                        output_analysis_commands += "RSOL, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                elif key == "U" or key == "UT":
-                                    output_analysis_commands += "NSOL, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
                                             else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += 'ALL, '
+                                    elif key in ["U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
+                                        output_analysis_commands += "NSOL, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in nodeout:
-                                        if (
-                                            nodeout['Parameters'] is not None
-                                            and 'NSET' in nodeout['Parameters']
-                                        ):
-                                            output_analysis_commands += nodeout['Parameters'][
-                                                'NSET'
-                                            ]
-                                output_analysis_commands += ', ,\n'
-                            else:
-                                self._logger.warning(
-                                    f"warning: node output key '{key}' is not processed."
-                                )
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
+                                            else:
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in nodeout:
+                                            if (
+                                                nodeout['Parameters'] is not None
+                                                and 'NSET' in nodeout['Parameters']
+                                            ):
+                                                output_analysis_commands += nodeout['Parameters'][
+                                                    'NSET'
+                                                ]
+                                    output_analysis_commands += ', ,\n'
+                                else:
+                                    self._logger.warning(
+                                        f"warning: node output key '{key}' is not processed."
+                                    )
                 if 'ElementOutput' in output['Data']:
                     for elemout in output['Data']['ElementOutput']:
-                        # elemout = output['ElementOutput']
-                        for key in elemout['Data']['keys']:
-                            if key in ["S", "CTF", "NFORC"]:
-                                output_analysis_commands += "OUTRES, "
-                                if key == "S":
-                                    output_analysis_commands += "STRS, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
-                                            else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                        if elemout is not None and elemout['Data'] is not None:
+                            # elemout = output['ElementOutput']
+                            for key in elemout['Data']['keys']:
+                                if key in ["S", "CTF", "NFORC"]:
+                                    output_analysis_commands += "OUTRES, "
+                                    if key == "S":
+                                        output_analysis_commands += "STRS, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in elemout:
-                                        if (
-                                            elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
-                                        ):
-                                            output_analysis_commands += elemout['Parameters'][
-                                                'ELSET'
-                                            ]
-                                elif key == "CTF":
-                                    output_analysis_commands += "MISC, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
                                             else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in elemout:
+                                            if (
+                                                elemout['Parameters'] is not None
+                                                and 'ELSET' in elemout['Parameters']
+                                            ):
+                                                output_analysis_commands += elemout['Parameters'][
+                                                    'ELSET'
+                                                ]
+                                    elif key == "CTF":
+                                        output_analysis_commands += "MISC, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in elemout:
-                                        if (
-                                            elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
-                                        ):
-                                            output_analysis_commands += elemout['Parameters'][
-                                                'ELSET'
-                                            ]
-                                elif key == "NFORC":
-                                    output_analysis_commands += "NLOAD, "
-                                    if time_points is not None:
-                                        output_analysis_commands += f'%{time_points}%, '
-                                    else:
-                                        if ninterval:
-                                            if number_interval_to_table:
-                                                output_analysis_commands += f'%{ninterval}%, '
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
                                             else:
-                                                output_analysis_commands += f'-{ninterval}, '
-                                        elif nfreq:
-                                            output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in elemout:
+                                            if (
+                                                elemout['Parameters'] is not None
+                                                and 'ELSET' in elemout['Parameters']
+                                            ):
+                                                output_analysis_commands += elemout['Parameters'][
+                                                    'ELSET'
+                                                ]
+                                    elif key == "NFORC":
+                                        output_analysis_commands += "NLOAD, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
                                         else:
-                                            output_analysis_commands += 'ALL, '
-                                    if 'Parameters' in elemout:
-                                        if (
-                                            elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
-                                        ):
-                                            output_analysis_commands += elemout['Parameters'][
-                                                'ELSET'
-                                            ]
-                                output_analysis_commands += ', ,\n'
-                            else:
-                                self._logger.warning(
-                                    f"warning: element output key '{key}' is not processed."
-                                )
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
+                                            else:
+                                                output_analysis_commands += 'ALL, '
+                                        if 'Parameters' in elemout:
+                                            if (
+                                                elemout['Parameters'] is not None
+                                                and 'ELSET' in elemout['Parameters']
+                                            ):
+                                                output_analysis_commands += elemout['Parameters'][
+                                                    'ELSET'
+                                                ]
+                                    output_analysis_commands += ', ,\n'
+                                else:
+                                    self._logger.warning(
+                                        f"warning: element output key '{key}' is not processed."
+                                    )
                         if (
                             elemout['Parameters'] is not None
                             and 'POSITION' in elemout['Parameters']
@@ -3039,6 +3174,9 @@ class _StepProcessor:
                         base_name = ""
                         if 'BASE NAME' in params:
                             base_name = params['BASE NAME']
+                        boundaries_for_motion = self.get_step_boundary_component_data(
+                            self._curr_step["Boundary"], base_name
+                        )
                         dof = int(params['DOF'])
                         scale = 0
                         if 'SCALE' in params:
@@ -3052,12 +3190,13 @@ class _StepProcessor:
                             vector_commands += f'SFEDELE, ALL, ALL, ALL \n'
                             vector_commands += f'ACEL, 0, 0, 0 \n'
                             vector_commands += f'\n'
-                        vector_commands += f"F, {base_name}, {dof_map[dof]}, 1\n"
-                        count_load_vectors += 1
-                        self._modal_load_vectors[count_load_vectors] = {
-                            'SET': base_name,
-                            "COMP": dof_map[dof],
-                        }
+                        for item in boundaries_for_motion:
+                            vector_commands += f"F, {item}, {dof_map[dof]}, 1\n"
+                            count_load_vectors += 1
+                            self._modal_load_vectors[count_load_vectors] = {
+                                'SET': base_name,
+                                "COMP": dof_map[dof],
+                            }
         # else:
         # vector_commands += 'SOLVE\n'
         return vector_commands
@@ -3139,6 +3278,19 @@ class _StepProcessor:
         boundary_commands += boundary_processor.get_all_boundary_commands()
         self._boundary_ampl_commands += boundary_processor.get_ampl_commands()
         return boundary_commands
+
+    def get_step_boundary_component_data(self, boundaries_data, base_name):
+        boundary_processor = _BoundaryProcessor(
+            self._model,
+            boundaries_data,
+            self._step_start_time,
+            self._step_end_time,
+            sim_data=self._simulation_data,
+        )
+        # TODO this needs to be in List of boundaries instead of single Boundary
+        comp_names = []
+        comp_names.extend(boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
+        return comp_names
 
     def get_global_damping_commnads(self, global_damping_data):
         global_damping_processor = _GlobalDampingProcessing(self._model, global_damping_data)
@@ -3343,41 +3495,6 @@ class _AxialTempCorrection:
         return secdata_string
 
 
-def generate_config_commands(params: ExportMapdlCdbParams) -> str:
-    """Generate the configuration commands to be added to the CDB file.
-
-    Parameters
-    ----------
-        params : ExportMapdlCdbParams
-            Parameters to export a CDB file.
-
-    Returns
-    -------
-        str
-            A string containing the configuration commands.
-
-    Notes
-    -----
-    This function is a Beta. Function behavior and implementation may change in future.
-    """
-    config_cmds = ''
-    config_cmds = '/CLEAR\n'
-    config_cmds += '\n'
-    config_cmds += '/NERR,5,99999999,,0,0\n'
-    config_cmds += '/CONFIG,RESUPREC,2\n'
-    config_cmds += '!/FCOMP,RST,5\n'
-    config_cmds += '/UNITS,MPA\n'
-    config_cmds += '\n'
-    config_cmds += '/PREP7\n'
-    config_cmds += '\n'
-    config_cmds += 'SHPP,OFF,,NOWARN\n'
-    config_cmds += 'ETCONTROL, OFF\n'
-    config_cmds += '\n'
-    if not os.path.exists(params.analysis_settings_file_name):
-        config_cmds += '/NOPR\n'
-    return config_cmds
-
-
 def generate_mapdl_commands(
     model: prime.Model, simulation_data: str, params: ExportMapdlCdbParams
 ) -> Tuple[str, str]:
@@ -3516,27 +3633,27 @@ def generate_mapdl_commands(
     analysis_settings += (
         '!--------------------------------------------------------------------------\n'
     )
-    analysis_settings += '/delete,file,cnm,,1\n'
-    analysis_settings += '/delete,file,DSP,,\n'
-    analysis_settings += '/delete,file,mcf,,\n'
-    analysis_settings += '/delete,file,rfrq,,\n'
-    analysis_settings += '/delete,file,log,,1\n'
-    analysis_settings += '/delete,file,emat,,1\n'
-    analysis_settings += '/delete,file,esav,,1\n'
-    analysis_settings += '/delete,file,err,,1\n'
-    analysis_settings += '/delete,file,full,,1\n'
-    analysis_settings += '/delete,file,mlv,,1\n'
-    analysis_settings += '/delete,file,mode,,1\n'
-    analysis_settings += '/delete,file,rfrq,,1\n'
-    analysis_settings += '/delete,file,out,,1\n'
+    analysis_settings += '/delete,,cnm,,1\n'
+    analysis_settings += '/delete,,DSP,,\n'
+    analysis_settings += '/delete,,mcf,,\n'
+    analysis_settings += '/delete,,rfrq,,\n'
+    analysis_settings += '/delete,,log,,1\n'
+    analysis_settings += '/delete,,emat,,1\n'
+    analysis_settings += '/delete,,esav,,1\n'
+    analysis_settings += '/delete,,err,,1\n'
+    analysis_settings += '/delete,,full,,1\n'
+    analysis_settings += '/delete,,mlv,,1\n'
+    analysis_settings += '/delete,,mode,,1\n'
+    analysis_settings += '/delete,,rfrq,,1\n'
+    analysis_settings += '/delete,,out,,1\n'
     # analysis_settings += '/delete,harmonic,rst,,1\n'
-    analysis_settings += '/delete,file,mntr,,\n'
-    analysis_settings += '/delete,file,ldhi,,\n'
-    analysis_settings += '/delete,file,r001,,1\n'
-    analysis_settings += '/delete,file,rst,,1\n'
-    analysis_settings += '/delete,file,stat,,1\n'
-    analysis_settings += '/delete,file,db,,\n'
-    analysis_settings += '/delete,file,rdb,,\n'
+    analysis_settings += '/delete,,mntr,,\n'
+    analysis_settings += '/delete,,ldhi,,\n'
+    analysis_settings += '/delete,,r001,,1\n'
+    analysis_settings += '/delete,,rst,,1\n'
+    analysis_settings += '/delete,,stat,,1\n'
+    analysis_settings += '/delete,,db,,\n'
+    analysis_settings += '/delete,,rdb,,\n'
     if "Step" in json_simulation_data:
         for an_name in steps_data._assign_analysis:
             analysis_settings += f'/delete,{an_name},rst,,1\n'

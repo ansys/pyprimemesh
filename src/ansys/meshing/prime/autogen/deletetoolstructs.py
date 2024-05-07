@@ -10,6 +10,25 @@ from ansys.meshing.prime.params.primestructs import *
 
 class DeleteFringesAndOverlapsParams(CoreObject):
     """Parameters to delete fringes and overlapping faces.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteFringesAndOverlapsParams`` object with default parameters.
+    fringe_element_count: int, optional
+        Maximum count of free face elements identified as fringe to be deleted.
+    overlap_element_count: int, optional
+        Maximum count of overlapping face elements identified as overlap to be deleted.
+    delete_fringes: bool, optional
+        Option to delete fringes. The default is true.
+    delete_overlaps: bool, optional
+        Option to delete overlaps. The default is false.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteFringesAndOverlapsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_fringes_and_overlaps_params = prime.DeleteFringesAndOverlapsParams(model = model)
     """
     _default_params = {}
 
@@ -180,6 +199,21 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
 class DeleteFringesAndOverlapsResults(CoreObject):
     """Results associated with the delete fringes and overlapping faces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteFringesAndOverlapsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    n_deleted: int, optional
+        Number of face elements deleted.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteFringesAndOverlapsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_fringes_and_overlaps_results = prime.DeleteFringesAndOverlapsResults(model = model)
     """
     _default_params = {}
 

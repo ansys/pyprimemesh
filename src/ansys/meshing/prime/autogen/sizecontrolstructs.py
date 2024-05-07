@@ -30,6 +30,27 @@ class CurvatureSizingParams(CoreObject):
     The curvature size control uses the normal angle parameter as the maximum allowable angle that one element edge may span.
     For example, a value of 5 implies that a division will be made when the angle change along the curve is 5 degrees.
     Hence, a 90 degree arc will be divided into approximately 18 segments.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CurvatureSizingParams`` object with default parameters.
+    min: float, optional
+        Minimum size used for computing edge and face size using curavture size control.
+    max: float, optional
+        Maximum size used for computing edge and face size using curavture size control.
+    growth_rate: float, optional
+        Growth rate used for transitioning from one element size to neighbor element size.
+    normal_angle: float, optional
+        Maximum allowable angle at which one element edge may span.
+    use_cad_curvature: bool, optional
+        Option to enable use of CAD curvature for computing edge and face size.
+    json_data: dict, optional
+        JSON dictionary to create a ``CurvatureSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> curvature_sizing_params = prime.CurvatureSizingParams(model = model)
     """
     _default_params = {}
 
@@ -223,6 +244,29 @@ class CurvatureSizingParams(CoreObject):
 
 class ProximitySizingParams(CoreObject):
     """Size field using proximity size control computes edge and face sizes in `gaps` using the specified minimum number of element layers.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ProximitySizingParams`` object with default parameters.
+    min: float, optional
+        Minimum size used for computing edge and face size using proximity size control.
+    max: float, optional
+        Maximum size used for computing edge and face size using proximity size control.
+    growth_rate: float, optional
+        Growth rate used for transitioning from one element size to neighbor element size.
+    elements_per_gap: float, optional
+        The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
+    ignore_self_proximity: bool, optional
+        Ignore proximity within zonelets.
+    ignore_orientation: bool, optional
+        The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
+    json_data: dict, optional
+        JSON dictionary to create a ``ProximitySizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> proximity_sizing_params = prime.ProximitySizingParams(model = model)
     """
     _default_params = {}
 
@@ -443,6 +487,21 @@ class SoftSizingParams(CoreObject):
     When the soft sizing is computed for edges or faces, the size will be affected by size computed using other controls.
     The minimum size on the zonelet will be determined based on the influence of other size controls,
     else a uniform size will be maintained.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SoftSizingParams`` object with default parameters.
+    max: float, optional
+        Maximum size used for computing edge and face size using soft size control.
+    growth_rate: float, optional
+        Growth rate used for transitioning from one element size to neighbor element size.
+    json_data: dict, optional
+        JSON dictionary to create a ``SoftSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> soft_sizing_params = prime.SoftSizingParams(model = model)
     """
     _default_params = {}
 
@@ -569,6 +628,21 @@ class HardSizingParams(CoreObject):
     """Size field computed using hard size control enables you to maintain a uniform size based on the size specified.
 
     The hard sizing will override any other specified size.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``HardSizingParams`` object with default parameters.
+    min: float, optional
+        Minimum size used for computing edge and face size using hard size control.
+    growth_rate: float, optional
+        Growth rate used for transitioning from one element size to neighbor element size.
+    json_data: dict, optional
+        JSON dictionary to create a ``HardSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> hard_sizing_params = prime.HardSizingParams(model = model)
     """
     _default_params = {}
 
@@ -693,6 +767,19 @@ class HardSizingParams(CoreObject):
 
 class MeshedSizingParams(CoreObject):
     """Size field computed using meshed size control enables you to set the size based on existing sizes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MeshedSizingParams`` object with default parameters.
+    growth_rate: float, optional
+        Growth rate used for transitioning from one element size to neighbor element size.
+    json_data: dict, optional
+        JSON dictionary to create a ``MeshedSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> meshed_sizing_params = prime.MeshedSizingParams(model = model)
     """
     _default_params = {}
 
@@ -797,6 +884,21 @@ class BoiSizingParams(CoreObject):
 
     The maximum mesh size will be equal to the specified size within the body of influence.
     The minimum size will be determined based on the influence of other size controls.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``BoiSizingParams`` object with default parameters.
+    max: float, optional
+        Maximum size used for computing edge and face size using boi size control.
+    growth_rate: float, optional
+        Growth rate used for transitioning from one element size to neighbor element size.
+    json_data: dict, optional
+        JSON dictionary to create a ``BoiSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> boi_sizing_params = prime.BoiSizingParams(model = model)
     """
     _default_params = {}
 
@@ -921,6 +1023,19 @@ class BoiSizingParams(CoreObject):
 
 class SizeControlSummaryResult(CoreObject):
     """Results of size control summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SizeControlSummaryResult`` object with default parameters.
+    message: str, optional
+        Size control summary text.
+    json_data: dict, optional
+        JSON dictionary to create a ``SizeControlSummaryResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> size_control_summary_result = prime.SizeControlSummaryResult(model = model)
     """
     _default_params = {}
 
@@ -1022,6 +1137,17 @@ class SizeControlSummaryResult(CoreObject):
 
 class SizeControlSummaryParams(CoreObject):
     """Parameters used to get size control summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SizeControlSummaryParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``SizeControlSummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> size_control_summary_params = prime.SizeControlSummaryParams(model = model)
     """
     _default_params = {}
 
@@ -1101,6 +1227,21 @@ class SizeControlSummaryParams(CoreObject):
 
 class SetSizingResults(CoreObject):
     """Result associated with the different set sizing parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetSizingResults`` object with default parameters.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the set sizing parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set sizing parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetSizingResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_sizing_results = prime.SetSizingResults(model = model)
     """
     _default_params = {}
 

@@ -10,6 +10,23 @@ from ansys.meshing.prime.params.primestructs import *
 
 class SFPeriodicParams(CoreObject):
     """Parameters for setting periodic size fields.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SFPeriodicParams`` object with default parameters.
+    axis: Iterable[float], optional
+        Axis vector coordinates.
+    angle: float, optional
+        Angle in degrees.
+    center: Iterable[float], optional
+        Center coordinates.
+    json_data: dict, optional
+        JSON dictionary to create a ``SFPeriodicParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> s_fperiodic_params = prime.SFPeriodicParams(model = model)
     """
     _default_params = {}
 
@@ -157,6 +174,21 @@ class SFPeriodicParams(CoreObject):
 
 class VolumetricSizeFieldComputeResults(CoreObject):
     """Results associated with the compute volumetric size field operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumetricSizeFieldComputeResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the compute volumetric size field operation.
+    size_field_id: int, optional
+        Id of the computed size field.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumetricSizeFieldComputeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volumetric_size_field_compute_results = prime.VolumetricSizeFieldComputeResults(model = model)
     """
     _default_params = {}
 
@@ -281,6 +313,23 @@ class VolumetricSizeFieldComputeResults(CoreObject):
 
 class VolumetricSizeFieldComputeParams(CoreObject):
     """Parameters associated with the compute volumetric size field operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumetricSizeFieldComputeParams`` object with default parameters.
+    enable_multi_threading: bool, optional
+        Option to compute volumetric size field in parallel using multithreads.
+    enable_periodicity: bool, optional
+        Option to enable periodic size field computations.
+    periodic_params: SFPeriodicParams, optional
+        Periodic parameters to compute the size field.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volumetric_size_field_compute_params = prime.VolumetricSizeFieldComputeParams(model = model)
     """
     _default_params = {}
 

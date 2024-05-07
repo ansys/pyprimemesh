@@ -13,6 +13,17 @@ class Model(CoreObject, CommunicationManager):
 
     You can access any information in Prime only through Model.
     Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+
+    Parameters
+    ----------
+    comm : Communicator
+        Communicator to connect with the Ansys Prime server.
+    id : int
+        Id of the Model.
+    object_id : int
+        Object id of the Model.
+    name : str
+        Name of the Model.
     """
 
     def __init__(self, comm, id: int, object_id: int, name: str):

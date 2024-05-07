@@ -9,6 +9,12 @@ class SurfaceSearch(CoreObject):
     """SurfaceSearch allows you to check surface mesh quality.
 
     SurfaceSearch performs surface mesh quality check based on different face quality measures.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create SurfaceSearch object.
     """
 
     def __init__(self, model: CommunicationManager):

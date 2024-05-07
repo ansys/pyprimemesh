@@ -7,18 +7,18 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
 
 class WrapperControl(_WrapperControl):
-    """Provides all parameters and controls used for wrapping.
+    """Wrapper Control to describe all parameters and controls used for wrapping..
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify wrapper controls from.
+    model : Model
+        Server model to create WrapperControl object.
     id : int
-        ID of the wrapper control.
+        Id of the WrapperControl.
     object_id : int
-        Object ID of the wrapper control.
+        Object id of the WrapperControl.
     name : str
-        Name of the wrapper control
+        Name of the WrapperControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

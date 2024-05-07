@@ -9,6 +9,11 @@ class BoundaryFittedSpline(CoreObject):
     """BoundaryFittedSpline helps you to create splines for structured hex-mesh model.
 
     BoundaryFittedSpline allows you to perform H and P refinement.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create BoundaryFittedSpline object.
     """
 
     def __init__(self, model: CommunicationManager):

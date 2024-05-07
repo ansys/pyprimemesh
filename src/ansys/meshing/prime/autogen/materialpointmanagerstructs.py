@@ -18,6 +18,19 @@ class MaterialPointType(enum.IntEnum):
 
 class CreateMaterialPointParams(CoreObject):
     """Defines parameters to create material point.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateMaterialPointParams`` object with default parameters.
+    type: MaterialPointType, optional
+        Defines the type of material point.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateMaterialPointParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_material_point_params = prime.CreateMaterialPointParams(model = model)
     """
     _default_params = {}
 
@@ -119,6 +132,25 @@ class CreateMaterialPointParams(CoreObject):
 
 class CreateMaterialPointResults(CoreObject):
     """Results structure associated with create material point operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateMaterialPointResults`` object with default parameters.
+    id: int, optional
+        Id of the material point created.
+    assigned_name: str, optional
+        Assigned name of the material point created.
+    error_code: ErrorCode, optional
+        Error code associated with create material point operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with create material point operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateMaterialPointResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_material_point_results = prime.CreateMaterialPointResults(model = model)
     """
     _default_params = {}
 
@@ -289,6 +321,19 @@ class CreateMaterialPointResults(CoreObject):
 
 class DeleteMaterialPointResults(CoreObject):
     """Results associated with delete material point operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteMaterialPointResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteMaterialPointResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_material_point_results = prime.DeleteMaterialPointResults(model = model)
     """
     _default_params = {}
 

@@ -10,6 +10,19 @@ from ansys.meshing.prime.params.primestructs import *
 
 class TransformResults(CoreObject):
     """Results associated with the transformation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TransformResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``TransformResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> transform_results = prime.TransformResults(model = model)
     """
     _default_params = {}
 
@@ -111,6 +124,19 @@ class TransformResults(CoreObject):
 
 class TransformParams(CoreObject):
     """Parameters to transform given entities.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TransformParams`` object with default parameters.
+    transformation_matrix: Iterable[float], optional
+        Transformation matrix(4x4) to be used to transform.
+    json_data: dict, optional
+        JSON dictionary to create a ``TransformParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> transform_params = prime.TransformParams(model = model)
     """
     _default_params = {}
 

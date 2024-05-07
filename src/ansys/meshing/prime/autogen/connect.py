@@ -10,10 +10,14 @@ class Connect(CoreObject):
 
     Perform surface connection using various connect algorithms on face zonelets.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Connect object.
+
     Notes
     -----
-    Connect operations like Join, Stitch and Intersect supports only computational mesh
-    (mesh with reasonable size). Faceted mesh is not supported.
+    Connect operations support only computational mesh, which is mesh with reasonable size changes and quality. Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, not supported.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -126,13 +130,13 @@ class Connect(CoreObject):
         return ConnectResults(model = self._model, json_data = result)
 
     def subtract_volumes(self, part_id : int, target_volumes : Iterable[int], cutter_volumes : Iterable[int], params : SubtractVolumesParams) -> SubtractVolumesResults:
-        """ Subtract cutter volumes from target volumes. Volumes should be computed prior to calling this function.
+        """ Subtract cutter volumes from target volumes. Volumes should be computed prior to calling this function. If multiple parts are being merged to form a single part, then volumes should be computed for each part prior to merging. Use compute_closed_volumes to do so.
 
 
         Parameters
         ----------
         part_id : int
-            Id of a part.
+            Id of part containing target and cutter volumes for subtract operation.
         target_volumes : Iterable[int]
             Ids of target volumes.
         cutter_volumes : Iterable[int]
@@ -237,7 +241,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------
@@ -287,7 +291,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        This is a beta API. The behavior and implementation may change in future.
 
         Examples
         --------

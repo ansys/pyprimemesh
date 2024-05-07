@@ -20,6 +20,19 @@ class ThinStripType(enum.IntEnum):
 
 class SearchBySpikeParams(CoreObject):
     """Parameters to control spike detection.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchBySpikeParams`` object with default parameters.
+    spike_angle: float, optional
+        Threshold angle for spike detection.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchBySpikeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_spike_params = prime.SearchBySpikeParams(model = model)
     """
     _default_params = {}
 
@@ -121,6 +134,21 @@ class SearchBySpikeParams(CoreObject):
 
 class SearchBySpikeResults(CoreObject):
     """Results structure associated with search spikes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchBySpikeResults`` object with default parameters.
+    n_found: int, optional
+        Number of spikes detected.
+    error_code: ErrorCode, optional
+        Error code associated with search spikes operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchBySpikeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_spike_results = prime.SearchBySpikeResults(model = model)
     """
     _default_params = {}
 
@@ -245,6 +273,19 @@ class SearchBySpikeResults(CoreObject):
 
 class SearchByFoldsParams(CoreObject):
     """Parameters to control fold detection.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByFoldsParams`` object with default parameters.
+    critical_angle: float, optional
+        Threshold angle for fold detection.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByFoldsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_folds_params = prime.SearchByFoldsParams(model = model)
     """
     _default_params = {}
 
@@ -346,6 +387,21 @@ class SearchByFoldsParams(CoreObject):
 
 class SearchByFoldsResults(CoreObject):
     """Results structure associated with search folds operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByFoldsResults`` object with default parameters.
+    n_found: int, optional
+        Number of folds identified.
+    error_code: ErrorCode, optional
+        Error code associated with search folds operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByFoldsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_folds_results = prime.SearchByFoldsResults(model = model)
     """
     _default_params = {}
 
@@ -470,6 +526,21 @@ class SearchByFoldsResults(CoreObject):
 
 class SearchByInvalidNormalsResults(CoreObject):
     """Results structure associated with search invalid normals operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByInvalidNormalsResults`` object with default parameters.
+    n_found: int, optional
+        Number of invalid normals identified.
+    error_code: ErrorCode, optional
+        Error code associated with search invalid normals operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByInvalidNormalsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_invalid_normals_results = prime.SearchByInvalidNormalsResults(model = model)
     """
     _default_params = {}
 
@@ -594,6 +665,17 @@ class SearchByInvalidNormalsResults(CoreObject):
 
 class SearchBySelfIntersectionParams(CoreObject):
     """Parameters to search by face element intersection.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchBySelfIntersectionParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchBySelfIntersectionParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_self_intersection_params = prime.SearchBySelfIntersectionParams(model = model)
     """
     _default_params = {}
 
@@ -673,6 +755,21 @@ class SearchBySelfIntersectionParams(CoreObject):
 
 class SearchByIntersectionResults(CoreObject):
     """Results associated with search by face element intersection (face elements interfering with each other).
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByIntersectionResults`` object with default parameters.
+    n_found: int, optional
+        Number of face elements identified by intersection(face elements interfering with each other).
+    error_code: ErrorCode, optional
+        Error code associated with search intersection operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByIntersectionResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_intersection_results = prime.SearchByIntersectionResults(model = model)
     """
     _default_params = {}
 
@@ -797,6 +894,21 @@ class SearchByIntersectionResults(CoreObject):
 
 class SearchByQualityParams(CoreObject):
     """Parameters to control search by quality results.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByQualityParams`` object with default parameters.
+    quality_limit: float, optional
+        Quality limit used for search face elements.
+    face_quality_measure: FaceQualityMeasure, optional
+        Quality measure used for search face elements.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByQualityParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_quality_params = prime.SearchByQualityParams(model = model)
     """
     _default_params = {}
 
@@ -921,6 +1033,25 @@ class SearchByQualityParams(CoreObject):
 
 class SearchByQualityResults(CoreObject):
     """Results of search by quality.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByQualityResults`` object with default parameters.
+    n_found: int, optional
+        Number of face elements found by search for given quality limit.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    max_quality: float, optional
+        Maximum quality found by search.
+    min_quality: float, optional
+        Minimum quality found by search.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByQualityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_quality_results = prime.SearchByQualityResults(model = model)
     """
     _default_params = {}
 
@@ -1091,6 +1222,27 @@ class SearchByQualityResults(CoreObject):
 
 class SearchByThinStripParams(CoreObject):
     """Parameters to search by thin strip of face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByThinStripParams`` object with default parameters.
+    strip_height_limit: float, optional
+        Absolute height limit to ignore strips with height more than provided limit.
+    quality_limit: float, optional
+        Quality limit used for search strip of face elements.
+    face_quality_measure: FaceQualityMeasure, optional
+        Quality measure used for search strip of face elements.
+    feature_type: SurfaceFeatureType, optional
+        Used to identify thin strip of face elements based on the provided feature type.
+    feature_angle: float, optional
+        Angle used to identify angle based features.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByThinStripParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_thin_strip_params = prime.SearchByThinStripParams(model = model)
     """
     _default_params = {}
 
@@ -1284,6 +1436,21 @@ class SearchByThinStripParams(CoreObject):
 
 class SearchByThinStripResults(CoreObject):
     """Results associated with search by thin strip of face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchByThinStripResults`` object with default parameters.
+    n_found: int, optional
+        Number of face elements identified as thin strips.
+    error_code: ErrorCode, optional
+        Error code associated with search thin strips operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchByThinStripResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_by_thin_strip_results = prime.SearchByThinStripResults(model = model)
     """
     _default_params = {}
 
@@ -1408,6 +1575,29 @@ class SearchByThinStripResults(CoreObject):
 
 class SurfaceQualityResult(CoreObject):
     """Result of surface quality.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurfaceQualityResult`` object with default parameters.
+    face_quality_measure: FaceQualityMeasure, optional
+        Type of the face quality measure.
+    measure_name: str, optional
+        Name of the face quality measure.
+    quality_limit: float, optional
+        Target quality limit used to find failures.
+    n_found: int, optional
+        Number of failed faces.
+    max_quality: float, optional
+        Maximum value of quality measure.
+    min_quality: float, optional
+        Minimum value of quality measure.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurfaceQualityResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surface_quality_result = prime.SurfaceQualityResult(model = model)
     """
     _default_params = {}
 
@@ -1624,6 +1814,23 @@ class SurfaceQualityResult(CoreObject):
 
 class SurfaceQualitySummaryResults(CoreObject):
     """Results of surface quality summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurfaceQualitySummaryResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the surface quality summary.
+    quality_results: List[SurfaceQualityResult], optional
+        Contains surface quality result per face quality measure specified in parameters.
+    summary: str, optional
+        Surface quality summary text.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurfaceQualitySummaryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surface_quality_summary_results = prime.SurfaceQualitySummaryResults(model = model)
     """
     _default_params = {}
 
@@ -1771,6 +1978,23 @@ class SurfaceQualitySummaryResults(CoreObject):
 
 class SurfaceQualitySummaryParams(CoreObject):
     """Parameters to control surface quality summary results.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurfaceQualitySummaryParams`` object with default parameters.
+    face_quality_measures: List[FaceQualityMeasure], optional
+        List of face quality measures for surface quality diagnostics.
+    scope: ScopeDefinition, optional
+        Scope the face zonelets for surface quality diagnostics.
+    quality_limit: Iterable[float], optional
+        Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurfaceQualitySummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surface_quality_summary_params = prime.SurfaceQualitySummaryParams(model = model)
     """
     _default_params = {}
 
@@ -1918,6 +2142,27 @@ class SurfaceQualitySummaryParams(CoreObject):
 
 class SurfaceDiagnosticSummaryResults(CoreObject):
     """Results of surface diagnostic summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurfaceDiagnosticSummaryResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the surface diagnostic summary.
+    n_self_intersections: int, optional
+        Number of self intersecting faces identified.
+    n_free_edges: int, optional
+        Number of free face edges identified.
+    n_multi_edges: int, optional
+        Number of multi face edges identified.
+    n_duplicate_faces: int, optional
+        Number of duplicate faces identified.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurfaceDiagnosticSummaryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surface_diagnostic_summary_results = prime.SurfaceDiagnosticSummaryResults(model = model)
     """
     _default_params = {}
 
@@ -2111,6 +2356,27 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
 
 class SurfaceDiagnosticSummaryParams(CoreObject):
     """Parameters to control surface diagnostics summary results.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurfaceDiagnosticSummaryParams`` object with default parameters.
+    scope: ScopeDefinition, optional
+        Scope the face zonelets for surface diagnostics.
+    compute_self_intersections: bool, optional
+        Control to identify face intersections are present or not.
+    compute_free_edges: bool, optional
+        Control to identify free face edges are present or not.
+    compute_multi_edges: bool, optional
+        Control to identify multi face edges are present or not.
+    compute_duplicate_faces: bool, optional
+        Control to identify duplicate faces are present or not.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurfaceDiagnosticSummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surface_diagnostic_summary_params = prime.SurfaceDiagnosticSummaryParams(model = model)
     """
     _default_params = {}
 
@@ -2304,6 +2570,17 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
 
 class SearchInfoByRegisterIdParams(CoreObject):
     """Parameters to retrieve information on registered faces.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchInfoByRegisterIdParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchInfoByRegisterIdParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_info_by_register_id_params = prime.SearchInfoByRegisterIdParams(model = model)
     """
     _default_params = {}
 
@@ -2383,6 +2660,25 @@ class SearchInfoByRegisterIdParams(CoreObject):
 
 class SearchInfoByRegisterIdResults(CoreObject):
     """Result structure containing information on registered face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the retreiving information based on register id.
+    n_found: int, optional
+        Number of registered face elements.
+    locations_found: Iterable[float], optional
+        Locations of each cluster of registered face elements.
+    face_zonelets_found: Iterable[int], optional
+        Ids of the face zonelets containing atleast one registered face element.
+    json_data: dict, optional
+        JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> search_info_by_register_id_results = prime.SearchInfoByRegisterIdResults(model = model)
     """
     _default_params = {}
 
@@ -2553,6 +2849,19 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
 class CheckFaceDeviationParams(CoreObject):
     """Parameters used for check face deviation operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CheckFaceDeviationParams`` object with default parameters.
+    distance: float, optional
+        Distance above which deviated entities are collected.
+    json_data: dict, optional
+        JSON dictionary to create a ``CheckFaceDeviationParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_face_deviation_params = prime.CheckFaceDeviationParams(model = model)
     """
     _default_params = {}
 
@@ -2654,6 +2963,21 @@ class CheckFaceDeviationParams(CoreObject):
 
 class CheckFaceDeviationResults(CoreObject):
     """Result structure associated with the check face deviation operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CheckFaceDeviationResults`` object with default parameters.
+    n_deviated: int, optional
+        Number of faces with deviation.
+    maximum_deviation: float, optional
+        Maximum deviation found.
+    json_data: dict, optional
+        JSON dictionary to create a ``CheckFaceDeviationResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_face_deviation_results = prime.CheckFaceDeviationResults(model = model)
     """
     _default_params = {}
 

@@ -10,6 +10,31 @@ from ansys.meshing.prime.params.primestructs import *
 
 class ExtractFeatureParams(CoreObject):
     """Parameter to control feature edge extraction.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractFeatureParams`` object with default parameters.
+    replace: bool, optional
+        Option to replace existing edge zonelets with new extracted edge zonelets.
+    feature_angle: float, optional
+        Angle used to capture face features to be  extracted as edges.
+    separate_features: bool, optional
+        Option to separate extracted features.
+    separation_angle: float, optional
+        Angle used to separate extracted features.
+    disconnect_with_faces: bool, optional
+        Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
+    label_name: str, optional
+        Label name to be assigned to extracted features.
+    number_of_threads: int, optional
+        Number of threads used for multithreading.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractFeatureParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_feature_params = prime.ExtractFeatureParams(model = model)
     """
     _default_params = {}
 
@@ -249,6 +274,23 @@ class ExtractFeatureParams(CoreObject):
 
 class ExtractFeatureResults(CoreObject):
     """Result of edge zonelet extraction by angle.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractFeatureResults`` object with default parameters.
+    processing_time: float, optional
+        Time taken for edge extraction.
+    error_code: ErrorCode, optional
+        Error code returned by edge extraction function.
+    new_edge_zonelets: Iterable[int], optional
+        Ids of new edge zonelets extracted.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractFeatureResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_feature_results = prime.ExtractFeatureResults(model = model)
     """
     _default_params = {}
 
@@ -396,6 +438,21 @@ class ExtractFeatureResults(CoreObject):
 
 class ExtractedFeatureIds(CoreObject):
     """Contains ids of the features extracted.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractedFeatureIds`` object with default parameters.
+    part_id: int, optional
+        Id of the part from which edge zonelets are extracted.
+    new_edge_zonelets: Iterable[int], optional
+        Ids of new edge zonelets extracted.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractedFeatureIds`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extracted_feature_ids = prime.ExtractedFeatureIds(model = model)
     """
     _default_params = {}
 
@@ -520,6 +577,19 @@ class ExtractedFeatureIds(CoreObject):
 
 class CreateIntersectionEdgeLoopsParams(CoreObject):
     """Parameters used to calculate edge loops created by intersection of two groups of face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateIntersectionEdgeLoopsParams`` object with default parameters.
+    label_name: str, optional
+        Label name to be assigned to extracted features.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateIntersectionEdgeLoopsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_intersection_edge_loops_params = prime.CreateIntersectionEdgeLoopsParams(model = model)
     """
     _default_params = {}
 
@@ -621,6 +691,23 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
 
 class CreateIntersectionEdgeLoopsResults(CoreObject):
     """Results for the edge loops created by intersection of two groups of face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateIntersectionEdgeLoopsResults`` object with default parameters.
+    processing_time: float, optional
+        Time taken to extract edges formed by intersecting faces.
+    error_code: ErrorCode, optional
+        Error code returned by edge extraction function.
+    extracted_ids: List[ExtractedFeatureIds], optional
+        List of ExtractedFeatureIds that contains ids of extracted edges.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateIntersectionEdgeLoopsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_intersection_edge_loops_results = prime.CreateIntersectionEdgeLoopsResults(model = model)
     """
     _default_params = {}
 

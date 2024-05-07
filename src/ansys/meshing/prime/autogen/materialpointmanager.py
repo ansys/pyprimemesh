@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class MaterialPointManager(CoreObject):
     """Provides functions for material point creation, deletion and queries.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create MaterialPointManager object.
+    id : int
+        Id of the MaterialPointManager.
+    object_id : int
+        Object id of the MaterialPointManager.
+    name : str
+        Name of the MaterialPointManager.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

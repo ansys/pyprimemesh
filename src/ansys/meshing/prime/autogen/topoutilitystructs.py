@@ -10,6 +10,23 @@ from ansys.meshing.prime.params.primestructs import *
 
 class TopoFillHoleParams(CoreObject):
     """Parameters used to fill holes in topology.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TopoFillHoleParams`` object with default parameters.
+    edges_to_exclude: Iterable[int], optional
+        TopoEdges to be excluded for cap creation.
+    suppress_boundary_after_hole_fill: bool, optional
+        Option to preserve or suppress hole-boundary after filling holes.
+    fill_annular_hole: bool, optional
+        Option for filling holes with annular bounding loops.
+    json_data: dict, optional
+        JSON dictionary to create a ``TopoFillHoleParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> topo_fill_hole_params = prime.TopoFillHoleParams(model = model)
     """
     _default_params = {}
 
@@ -157,6 +174,21 @@ class TopoFillHoleParams(CoreObject):
 
 class TopoFillHoleResult(CoreObject):
     """Results associated with fill holes in topology operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TopoFillHoleResult`` object with default parameters.
+    new_topo_faces_created: Iterable[int], optional
+        Ids of new topofaces created.
+    error_code: ErrorCode, optional
+        Error code associated with a wrap operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``TopoFillHoleResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> topo_fill_hole_result = prime.TopoFillHoleResult(model = model)
     """
     _default_params = {}
 

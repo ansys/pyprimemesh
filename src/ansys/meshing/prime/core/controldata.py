@@ -6,15 +6,15 @@ from ansys.meshing.prime.autogen.controldata import ControlData as _ControlData
 
 # isort: split
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
+from ansys.meshing.prime.autogen.model import Model
+from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
-from ansys.meshing.prime.core.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
-from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import SizingType
 
 
@@ -26,18 +26,17 @@ class ControlData(_ControlData):
 
     Parameters
     ----------
-    model : CommunicationManager
-        Communicator with the server.
+    model : Model
+        Server model to create ControlData object.
     id : int
-        ID of the model.
+        Id of the ControlData.
     object_id : int
-        ID of the object.
+        Object id of the ControlData.
     name : str
-        Name of the control.
-
+        Name of the ControlData.
     """
 
-    def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
+    def __init__(self, model: Model, id: int, object_id: int, name: str):
         """Initialize the ``ControlData`` class."""
         self._model = model
         self._wrapper_controls = []

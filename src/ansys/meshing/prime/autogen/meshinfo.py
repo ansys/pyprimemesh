@@ -9,6 +9,12 @@ class MeshInfo(CoreObject):
     """MeshInfo provides information about the mesh connectivity and more.
 
     Mesh connectivity information is used in graphics rendering.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create MeshInfo object.
     """
 
     def __init__(self, model: CommunicationManager):

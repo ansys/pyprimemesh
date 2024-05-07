@@ -35,7 +35,7 @@ class Wrapper(_Wrapper):
     Parameters
     ----------
     model : Model
-        Model to apply wrapping to.
+        Server model to create Wrapper object.
     """
 
     def __init__(self, model: Model):
