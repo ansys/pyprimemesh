@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class Transform(CoreObject):
     """Provides functionalities to initialize and manage transformation using transformation matrix.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Transform object.
     """
 
     def __init__(self, model: CommunicationManager):

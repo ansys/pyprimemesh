@@ -10,6 +10,29 @@ from ansys.meshing.prime.params.primestructs import *
 
 class AutoNodeMoveParams(CoreObject):
     """Parameters used to improve volume mesh by auto node move.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AutoNodeMoveParams`` object with default parameters.
+    quality_measure: CellQualityMeasure, optional
+        Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
+    target_quality: float, optional
+        Specify target quality used for the mesh improvement based on specified quality measure.
+    dihedral_angle: float, optional
+        Dihedral angle used to mantain features of boundary face zonelets.
+    n_iterations_per_node: int, optional
+        Number of iterations per node to be moved.
+    restrict_boundary_nodes_along_surface: bool, optional
+        Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
+    n_attempts: int, optional
+        Number of attempts to improve specified quality measure by node movement.
+    json_data: dict, optional
+        JSON dictionary to create a ``AutoNodeMoveParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> auto_node_move_params = prime.AutoNodeMoveParams(model = model)
     """
     _default_params = {}
 
@@ -226,6 +249,17 @@ class AutoNodeMoveParams(CoreObject):
 
 class CheckMeshParams(CoreObject):
     """Parameters used to check mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CheckMeshParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``CheckMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_mesh_params = prime.CheckMeshParams(model = model)
     """
     _default_params = {}
 
@@ -305,6 +339,19 @@ class CheckMeshParams(CoreObject):
 
 class VolumeMeshToolResults(CoreObject):
     """Result associated with the volume mesh tool operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeMeshToolResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the volume mesh tool operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeMeshToolResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_mesh_tool_results = prime.VolumeMeshToolResults(model = model)
     """
     _default_params = {}
 
@@ -406,6 +453,29 @@ class VolumeMeshToolResults(CoreObject):
 
 class CheckMeshResults(CoreObject):
     """Result associated with the check mesh operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CheckMeshResults`` object with default parameters.
+    has_non_positive_volumes: bool, optional
+        Indicates whether mesh has non positive volumes.
+    has_non_positive_areas: bool, optional
+        Indicates whether mesh has non positive areas.
+    has_invalid_shape: bool, optional
+        Indicates whether mesh has invalid shape.
+    has_left_handed_faces: bool, optional
+        Indicates whether mesh has left handed faces.
+    error_code: ErrorCode, optional
+        Error code associated with the check grid operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the check grid operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``CheckMeshResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_mesh_results = prime.CheckMeshResults(model = model)
     """
     _default_params = {}
 

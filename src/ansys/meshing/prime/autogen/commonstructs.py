@@ -10,6 +10,21 @@ from ansys.meshing.prime.params.primestructs import *
 
 class PartZonelets(CoreObject):
     """A structure containing some or all face zonelet ids available in a part.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartZonelets`` object with default parameters.
+    part_id: int, optional
+        Id of part.
+    face_zonelets: Iterable[int], optional
+        List of face zonelet ids available in the part.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartZonelets`` object with provided parameters.
+
+    Examples
+    --------
+    >>> part_zonelets = prime.PartZonelets(model = model)
     """
     _default_params = {}
 
@@ -134,6 +149,23 @@ class PartZonelets(CoreObject):
 
 class SetNameResults(CoreObject):
     """Results associated with the set name.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetNameResults`` object with default parameters.
+    warning_code: WarningCode, optional
+        Warning code associated with the set name of given entity.
+    assigned_name: str, optional
+        Assigned name of given entity.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetNameResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_name_results = prime.SetNameResults(model = model)
     """
     _default_params = {}
 
@@ -281,6 +313,19 @@ class SetNameResults(CoreObject):
 
 class DeleteResults(CoreObject):
     """Results associated with the deletion of items.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_results = prime.DeleteResults(model = model)
     """
     _default_params = {}
 
@@ -382,6 +427,22 @@ class DeleteResults(CoreObject):
 
 class CopyZoneletsParams(CoreObject):
     """Parameters to copy zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CopyZoneletsParams`` object with default parameters.
+    copy_labels: bool, optional
+        Option to copy labels of input zonelets to the corresponding copied zonelets.
+        This is a beta parameter. The behavior and name may change in the future.
+    copy_zones: bool, optional
+        Option to copy zones of input zonelets to corresponding copied zonelets.
+    json_data: dict, optional
+        JSON dictionary to create a ``CopyZoneletsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> copy_zonelets_params = prime.CopyZoneletsParams(model = model)
     """
     _default_params = {}
 
@@ -508,6 +569,23 @@ class CopyZoneletsParams(CoreObject):
 
 class CopyZoneletsResults(CoreObject):
     """Result structure associated with copying zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CopyZoneletsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    copied_zonelets: Iterable[int], optional
+        Ids of the copied zonelets.
+    copied_face_zonelets: Iterable[int], optional
+        Ids of the copied bounding faces of cell zonelets.
+    json_data: dict, optional
+        JSON dictionary to create a ``CopyZoneletsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> copy_zonelets_results = prime.CopyZoneletsResults(model = model)
     """
     _default_params = {}
 

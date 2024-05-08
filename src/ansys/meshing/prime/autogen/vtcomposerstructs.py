@@ -10,6 +10,19 @@ from ansys.meshing.prime.params.primestructs import *
 
 class VTComposerParams(CoreObject):
     """Parameters to control VTComposer operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VTComposerParams`` object with default parameters.
+    thin_stripes_tol: float, optional
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> v_tcomposer_params = prime.VTComposerParams(model = model)
     """
     _default_params = {}
 
@@ -110,6 +123,19 @@ class VTComposerParams(CoreObject):
 
 class VTComposerResults(CoreObject):
     """Result struct associated to VTComposer operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VTComposerResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        This is a beta parameter. The behavior and name may change in the future.
+    json_data: dict, optional
+        JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> v_tcomposer_results = prime.VTComposerResults(model = model)
     """
     _default_params = {}
 

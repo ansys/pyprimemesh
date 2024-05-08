@@ -20,7 +20,7 @@ class VolumeSweeper(_Sweeper):
     Parameters
     ----------
     model : Model
-        Model to apply the operations to.
+        Server model to create VolumeSweeper object.
     """
 
     __doc__ = _Sweeper.__doc__

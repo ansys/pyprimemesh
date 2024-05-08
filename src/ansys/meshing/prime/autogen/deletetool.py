@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class DeleteTool(CoreObject):
     """Performs various delete operation. For example, delete fringes and overlapping faces.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create DeleteTool object.
     """
 
     def __init__(self, model: CommunicationManager):

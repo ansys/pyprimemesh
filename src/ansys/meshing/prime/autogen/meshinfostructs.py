@@ -10,6 +10,19 @@ from ansys.meshing.prime.params.primestructs import *
 
 class CellStatisticsParams(CoreObject):
     """Parameters used to calculate cell statistics.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CellStatisticsParams`` object with default parameters.
+    get_volume: bool, optional
+        Provides option to compute and get cumulative cell volume.
+    json_data: dict, optional
+        JSON dictionary to create a ``CellStatisticsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> cell_statistics_params = prime.CellStatisticsParams(model = model)
     """
     _default_params = {}
 
@@ -111,6 +124,21 @@ class CellStatisticsParams(CoreObject):
 
 class CellStatisticsResults(CoreObject):
     """Results of cell statistics information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CellStatisticsResults`` object with default parameters.
+    volume: float, optional
+        Cumulative volume of all the cell elements of selected entities.
+    error_code: ErrorCode, optional
+        Error code associated with the cell statistics function.
+    json_data: dict, optional
+        JSON dictionary to create a ``CellStatisticsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> cell_statistics_results = prime.CellStatisticsResults(model = model)
     """
     _default_params = {}
 
@@ -235,6 +263,37 @@ class CellStatisticsResults(CoreObject):
 
 class FaceConnectivityResults(CoreObject):
     """Result of the face connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FaceConnectivityResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the get face connectivity operation.
+    face_zonelet_ids: Iterable[int], optional
+        Face zonelet ids for which connectivity data is available.
+    topo_face_ids: Iterable[int], optional
+        TopoFace ids corresponding to each face zonelet id for topology based mesh.
+    mesh_face_ids: Iterable[int], optional
+        Mesh face ids corresponding to each topoface.
+    face_zone_ids: Iterable[int], optional
+        Face zone id corresponding to each topoface or face zonelet.
+    face_zone_names: List[str], optional
+        Face zone name corresponding to each topoface or face zonelet.
+    num_nodes_per_face_zonelet: Iterable[int], optional
+        Number of nodes per face zonelet.
+    node_coords: Iterable[float], optional
+        Node coordinates describing faces of face zonelet.
+    num_face_list_per_face_zonelet: Iterable[int], optional
+        Number of face list per face zonelet.
+    face_list: Iterable[int], optional
+        Face list describing connectivity of node coordinates.
+    json_data: dict, optional
+        JSON dictionary to create a ``FaceConnectivityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> face_connectivity_results = prime.FaceConnectivityResults(model = model)
     """
     _default_params = {}
 
@@ -543,6 +602,37 @@ class FaceConnectivityResults(CoreObject):
 
 class EdgeConnectivityResults(CoreObject):
     """Result of the edge connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``EdgeConnectivityResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the get edge connectivity operation.
+    edge_zonelet_ids: Iterable[int], optional
+        Edge zonelet ids for which connectivity data is available.
+    topo_edge_ids: Iterable[int], optional
+        TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
+    mesh_edge_ids: Iterable[int], optional
+        Mesh edge ids corresponding to each topoedge.
+    topo_edge_types: Iterable[int], optional
+        TopoEdge type corresponding to each topoedge.
+    num_nodes_per_edge_zonelet: Iterable[int], optional
+        Number of nodes per edge zonelet.
+    node_coords: Iterable[float], optional
+        Node coordinates describing edges of edge zonelet.
+    num_edge_list_per_edge_zonelet: Iterable[int], optional
+        Number of edge list per edge zonelet.
+    edge_list: Iterable[int], optional
+        Edge list describing connectivity of node coordinates.
+    num_edges_per_edge_zonelet: Iterable[int], optional
+        Number of edges per edge zonelet.
+    json_data: dict, optional
+        JSON dictionary to create a ``EdgeConnectivityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> edge_connectivity_results = prime.EdgeConnectivityResults(model = model)
     """
     _default_params = {}
 
@@ -851,6 +941,25 @@ class EdgeConnectivityResults(CoreObject):
 
 class FaceAndEdgeConnectivityResults(CoreObject):
     """Result of the face and edge connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FaceAndEdgeConnectivityResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the get face and edge connectivity operation.
+    part_ids: Iterable[int], optional
+        Part ids for which face and edge connectivity data is available.
+    face_connectivity_result_per_part: List[FaceConnectivityResults], optional
+        Face connectivity result per part.
+    edge_connectivity_result_per_part: List[EdgeConnectivityResults], optional
+        Edge connectivity result per part.
+    json_data: dict, optional
+        JSON dictionary to create a ``FaceAndEdgeConnectivityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> face_and_edge_connectivity_results = prime.FaceAndEdgeConnectivityResults(model = model)
     """
     _default_params = {}
 
@@ -1021,6 +1130,21 @@ class FaceAndEdgeConnectivityResults(CoreObject):
 
 class FaceAndEdgeConnectivityParams(CoreObject):
     """Parameters to get face and edge connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FaceAndEdgeConnectivityParams`` object with default parameters.
+    reorder_face_zonelets_mid_nodes: bool, optional
+        Option to reorder mid nodes for quadratic faces.
+    reorder_edge_zonelets_mid_nodes: bool, optional
+        Option to reorder mid nodes for quadratic edges.
+    json_data: dict, optional
+        JSON dictionary to create a ``FaceAndEdgeConnectivityParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> face_and_edge_connectivity_params = prime.FaceAndEdgeConnectivityParams(model = model)
     """
     _default_params = {}
 

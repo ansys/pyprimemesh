@@ -7,18 +7,22 @@ from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryPar
 
 
 class SizeControl(_SizeControl):
-    """Compute the size field for a volumetric surface meshing.
+    """Size control is used to compute the size field.
+
+    The size field is computed based on the size control defined.
+    Different type of size controls provide control over how the mesh size is distributed on a
+    surface or within the volume.
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify size controls from.
+    model : Model
+        Server model to create SizeControl object.
     id : int
-        ID of the size control.
+        Id of the SizeControl.
     object_id : int
-        Object ID of the size control.
+        Object id of the SizeControl.
     name : str
-        Name of the size control.
+        Name of the SizeControl..
     local : bool, optional
         Unused. The default is ``False``.
     """

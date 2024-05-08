@@ -10,6 +10,31 @@ from ansys.meshing.prime.params.primestructs import *
 
 class VolumeQualityResultsPart(CoreObject):
     """Result of volume quality of part.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeQualityResultsPart`` object with default parameters.
+    cell_quality_measure: CellQualityMeasure, optional
+        Type of the cell quality measure.
+    measure_name: str, optional
+        Name of the cell quality measure.
+    part_id: int, optional
+        Id of the part for which quality is computed.
+    quality_limit: float, optional
+        Target quality limit used to find failures.
+    n_found: int, optional
+        Number of failed cells.
+    max_quality: float, optional
+        Maximum value of quality measure.
+    min_quality: float, optional
+        Minimum value of quality measure.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeQualityResultsPart`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_quality_results_part = prime.VolumeQualityResultsPart(model = model)
     """
     _default_params = {}
 
@@ -249,6 +274,23 @@ class VolumeQualityResultsPart(CoreObject):
 
 class VolumeQualitySummaryResults(CoreObject):
     """Results of volume quality summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeQualitySummaryResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the volume quality summary.
+    quality_results_part: List[VolumeQualityResultsPart], optional
+        Contains volume quality result per cell quality measure by parts specified in parameters.
+    message: str, optional
+        Volume quality summary text.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeQualitySummaryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_quality_summary_results = prime.VolumeQualitySummaryResults(model = model)
     """
     _default_params = {}
 
@@ -396,6 +438,23 @@ class VolumeQualitySummaryResults(CoreObject):
 
 class VolumeQualitySummaryParams(CoreObject):
     """Parameters to control volume quality summary results.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeQualitySummaryParams`` object with default parameters.
+    cell_quality_measures: List[CellQualityMeasure], optional
+        List of cell quality measures for volume quality diagnostics.
+    scope: ScopeDefinition, optional
+        Scope of the cell zonelets for volume quality diagnostics.
+    quality_limit: Iterable[float], optional
+        Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeQualitySummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_quality_summary_params = prime.VolumeQualitySummaryParams(model = model)
     """
     _default_params = {}
 

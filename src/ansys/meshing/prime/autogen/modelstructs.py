@@ -10,6 +10,19 @@ from ansys.meshing.prime.params.primestructs import *
 
 class MergePartsParams(CoreObject):
     """Parameters to merge parts.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergePartsParams`` object with default parameters.
+    merged_part_suggested_name: str, optional
+        Suggested name to be set on merged part. First in alphabetical order of given part names will be used, when empty name is given.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergePartsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_parts_params = prime.MergePartsParams(model = model)
     """
     _default_params = {}
 
@@ -111,6 +124,23 @@ class MergePartsParams(CoreObject):
 
 class MergePartsResults(CoreObject):
     """Parameters to merge parts.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergePartsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    merged_part_assigned_name: str, optional
+        Name assigned to merged part. Suffix is added to suggested name if the name not available.
+    merged_part_id: int, optional
+        Id assigned to merged part.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergePartsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_parts_results = prime.MergePartsResults(model = model)
     """
     _default_params = {}
 
@@ -258,6 +288,23 @@ class MergePartsResults(CoreObject):
 
 class GlobalSizingParams(CoreObject):
     """Global sizing parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``GlobalSizingParams`` object with default parameters.
+    min: float, optional
+        Minimum value of global sizing parameters.
+    max: float, optional
+        Maximum value of global sizing parameters.
+    growth_rate: float, optional
+        Growth rate of global sizing parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``GlobalSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> global_sizing_params = prime.GlobalSizingParams(model = model)
     """
     _default_params = {}
 
@@ -405,6 +452,23 @@ class GlobalSizingParams(CoreObject):
 
 class CreateZoneResults(CoreObject):
     """Results associated with the create zone.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateZoneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the create zone operation.
+    zone_id: int, optional
+        Id of newly created zone.
+    assigned_name: str, optional
+        Assigned name of newly created zone.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateZoneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_zone_results = prime.CreateZoneResults(model = model)
     """
     _default_params = {}
 
@@ -552,6 +616,19 @@ class CreateZoneResults(CoreObject):
 
 class DeleteZoneResults(CoreObject):
     """Results associated with the delete zone.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteZoneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the delete zone operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteZoneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_zone_results = prime.DeleteZoneResults(model = model)
     """
     _default_params = {}
 

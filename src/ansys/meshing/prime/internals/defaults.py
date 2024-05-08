@@ -41,7 +41,7 @@ LOCAL_OUTDIR = os.path.join(USER_DATA_PATH, 'output')
 if not os.path.exists(LOCAL_OUTDIR):  # pragma: no cover
     os.makedirs(LOCAL_OUTDIR)
 
-CONTAINER_USER_DATA = '/data'
+CONTAINER_USER_DATA = os.getenv('PYPRIMEMESH_CONTAINER_USER_DATA ', '/data')
 CONTAINER_EXAMPLES = os.path.join(CONTAINER_USER_DATA, 'examples')
 CONTAINER_OUTDIR = os.path.join(CONTAINER_USER_DATA, 'output')
 

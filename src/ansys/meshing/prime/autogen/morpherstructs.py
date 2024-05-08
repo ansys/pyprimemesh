@@ -26,6 +26,17 @@ class MatchPairTargetType(enum.IntEnum):
 
 class MorphSolveParams(CoreObject):
     """Morpher solve parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MorphSolveParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``MorphSolveParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> morph_solve_params = prime.MorphSolveParams(model = model)
     """
     _default_params = {}
 
@@ -105,6 +116,17 @@ class MorphSolveParams(CoreObject):
 
 class MatchMorphParams(CoreObject):
     """MatchMorphParams describes the parameters required for match morphing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MatchMorphParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``MatchMorphParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> match_morph_params = prime.MatchMorphParams(model = model)
     """
     _default_params = {}
 
@@ -184,6 +206,19 @@ class MatchMorphParams(CoreObject):
 
 class MatchMorphResults(CoreObject):
     """Results associated with match morph operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MatchMorphResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Errorcode associated with match morph operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MatchMorphResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> match_morph_results = prime.MatchMorphResults(model = model)
     """
     _default_params = {}
 
@@ -285,6 +320,23 @@ class MatchMorphResults(CoreObject):
 
 class BCPair(CoreObject):
     """Used to define boundary conditions for match morphing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``BCPair`` object with default parameters.
+    source_zonelet: int, optional
+        Id of source zonelet.
+    target_zonelet: int, optional
+        Id of target zonelet.
+    type: BCPairType, optional
+        Option to specify boundary condition pair type.
+    json_data: dict, optional
+        JSON dictionary to create a ``BCPair`` object with provided parameters.
+
+    Examples
+    --------
+    >>> b_cpair = prime.BCPair(model = model)
     """
     _default_params = {}
 
@@ -432,6 +484,25 @@ class BCPair(CoreObject):
 
 class MatchPair(CoreObject):
     """Match pair to specify sources, targets for match morphing. Included boundary conditions specification.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MatchPair`` object with default parameters.
+    source_surfaces: Iterable[int], optional
+        Ids of source surfaces.
+    target_surfaces: Iterable[int], optional
+        Ids of target surfaces.
+    target_type: MatchPairTargetType, optional
+        Option to specify target surface type.
+    bc_pairs: List[BCPair], optional
+        Array of boundary condition pairs.
+    json_data: dict, optional
+        JSON dictionary to create a ``MatchPair`` object with provided parameters.
+
+    Examples
+    --------
+    >>> match_pair = prime.MatchPair(model = model)
     """
     _default_params = {}
 
