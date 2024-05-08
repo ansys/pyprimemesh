@@ -13,7 +13,7 @@ When you perform MultiZone Method meshing, all regions are meshed with a pure he
 The :class:`AutoMesh <ansys.meshing.prime.automesh>` class lets you to automatically create the hex mesh on the scoped bodies using MultiZone meshing algorithms. 
 :func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` function lets you  perform MultiZone meshing with the given MultiZone control. 
 
-The following example shows to apply a MultiZone control on a body:: 
+The following example shows to apply a MultiZone control on a body:
 
     1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volumes have volume zones defined. The left volume zone is ``solid1`` and right is ``solid``.
 
