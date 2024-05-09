@@ -1,18 +1,13 @@
-# Contributing
+# Contribute
 
-Repositories should have a contributing section, but we don't need to have all the contributing information here.  You should reference the [Contributing](https://dev.docs.pyansys.com/how-to/contributing.html) topic in the *PyAnsys developer's guide*.
+Overall guidance on contributing to a PyAnsys library appears in the
+[Contributing] topic in the *PyAnsys developer's guide*. Ensure that you
+are thoroughly familiar with this guide before attempting to contribute to
+PyPrimeMesh.
 
-We welcome any code contributions and hope that this
-guide facilitates an understanding of the PyPrimeMesh code. It is important to
-note that while the PyPrimeMesh package is maintained by Ansys and submissions are reviewed
-thoroughly before merging, we still seek to foster a community that can
-support user questions and develop new features to make this software
-a useful tool for all users.  As such, we welcome and encourage any
-questions or submissions to this repository.
+The following contribution information is specific to PyPrimeMesh.
 
-Please reference the [PyAnsys Developer's
-Guide](https://dev.docs.pyansys.com/) for the full documentation
-regarding contributing to the PyPrimeMesh project.
+[Contributing]: https://dev.docs.pyansys.com/how-to/contributing.html
 
 ## Run tests locally
 
