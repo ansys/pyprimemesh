@@ -84,6 +84,13 @@ with prime.launch_prime() as prime_client:
     model = prime_client.model
 ```
 
+## Run the tests
+
+To run the test in local you can use the following command:
+```bash
+    pytest
+```
+
 ## License and aknowledgments
 
 PyPrimeMesh is licensed under the MIT license.
