@@ -84,9 +84,9 @@ with prime.launch_prime() as prime_client:
     model = prime_client.model
 ```
 
-## Run the tests
+## Run tests
 
-To run the test in local you can use the following command:
+To run tests locally, run this command:
 ```bash
     pytest
 ```
