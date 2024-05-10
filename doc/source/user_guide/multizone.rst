@@ -4,7 +4,7 @@
 MultiZone controls
 ==================
 
-*This is a Beta feature. API Behavior and Implementation might change in future.*
+*This is a beta feature. API behavior and implementation may change in future.*
 
 The :class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provides automatic geometry decomposition into mapped (sweepable) regions and free regions. 
 Mapped (sweepable) regions are filled with hexahedral elements and free regions are filled with non-hexahedral elements.
@@ -15,7 +15,7 @@ The :class:`AutoMesh <ansys.meshing.prime.automesh>` class lets you to automatic
 
 The following example shows to apply a MultiZone control on a body:
 
-    1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volumes have volume zones defined. The left volume zone is ``solid1`` and right is ``solid``.
+1. Start the PyPrimeMesh client and read the model. The model is made up of two topo volumes that share a connected topo face between them. The two topo volumes have volume zones defined. The left volume zone is ``solid1`` and right is ``solid``.
 
     .. code-block:: python
 
@@ -56,13 +56,13 @@ The following example shows to apply a MultiZone control on a body:
         :width: 400pt
         :align: center
 
-    2. Initialize the MultiZone control. MultiZone control sets the parameters and controls used for MultiZone meshing.  
+2. Initialize the MultiZone control. MultiZone control sets the parameters and controls used for MultiZone meshing.  
 
     .. code-block:: python
 
        multizone_control = model.control_data.create_multi_zone_control()
 
-    3. Define the volume scope and surface scope within the model and apply the volume scope and surface scope to the Multizone Control. 
+3. Define the volume scope and surface scope within the model and apply the volume scope and surface scope to the Multizone Control. 
     In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
 
     .. note::
@@ -92,7 +92,7 @@ The following example shows to apply a MultiZone control on a body:
 
         multizone_control.set_surface_scope(surface_scope)
 
-    4. Sets the MultiZone sizing parameters to initialize MultiZone sizing control parameters.
+4. Sets the MultiZone sizing parameters to initialize MultiZone sizing control parameters.
 
     .. note::
         When you provide the sizefield, MultiZone method uses the provided sizefield and impacts the MultiZone mesh. 
