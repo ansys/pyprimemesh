@@ -28,7 +28,7 @@ from typing import List
 import numpy as np
 import pyvista as pv
 import vtk
-from pyvista.plotting.plotting import Plotter
+from pyvista import Plotter
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
