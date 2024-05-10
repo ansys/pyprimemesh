@@ -62,11 +62,10 @@ The following example shows to apply a MultiZone control on a body:
 
        multizone_control = model.control_data.create_multi_zone_control()
 
-3. Define the volume scope and surface scope within the model and apply the volume scope and surface scope to the Multizone Control. 
-    In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
+3. Define the volume scope and surface scope within the model and apply the volume scope and surface scope to the Multizone Control. In this example, volume scope is scoped specifically to "solid1" to show the difference between the MultiZone mesh and automesh
 
     .. note::
-      Keep the surface scope as the complete geometry (*)
+         Using the string "*" as the expression for parts, labels and zones for the surface scope includes all the available entities in the Multizone Control
 
     .. code-block:: python
 
