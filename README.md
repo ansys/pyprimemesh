@@ -86,7 +86,7 @@ with prime.launch_prime() as prime_client:
 
 ## Run tests
 
-To run tests locally, run this command:
+Run tests locally with this command:
 ```bash
     pytest
 ```

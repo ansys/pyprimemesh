@@ -11,7 +11,7 @@ The following contribution information is specific to PyPrimeMesh.
 
 ## Run tests locally
 
-To run tests locally, run the following command:
+Run tests locally with this command:
 
 ```bash
     pytest
