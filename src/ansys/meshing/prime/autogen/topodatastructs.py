@@ -17,7 +17,8 @@ class DeleteMeshResults(CoreObject):
         Model to create a ``DeleteMeshResults`` object with default parameters.
     error_code: ErrorCode, optional
         Error code associated with the failure of operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``DeleteMeshResults`` object with provided parameters.
 
@@ -46,7 +47,8 @@ class DeleteMeshResults(CoreObject):
             Model to create a ``DeleteMeshResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``DeleteMeshResults`` object with provided parameters.
 
@@ -117,7 +119,8 @@ class DeleteMeshResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with the failure of operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code
 
@@ -134,7 +137,8 @@ class DeleteMeshParams(CoreObject):
         Model to create a ``DeleteMeshParams`` object with default parameters.
     delete_mesh_on_connected_topo_edges: bool, optional
         Option to delete mesh on topoedges connected only to provided topoentities.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
 
@@ -163,7 +167,8 @@ class DeleteMeshParams(CoreObject):
             Model to create a ``DeleteMeshParams`` object with default parameters.
         delete_mesh_on_connected_topo_edges: bool, optional
             Option to delete mesh on topoedges connected only to provided topoentities.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
 
@@ -234,7 +239,8 @@ class DeleteMeshParams(CoreObject):
     @property
     def delete_mesh_on_connected_topo_edges(self) -> bool:
         """Option to delete mesh on topoedges connected only to provided topoentities.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._delete_mesh_on_connected_topo_edges
 

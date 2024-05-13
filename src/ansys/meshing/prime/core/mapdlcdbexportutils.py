@@ -3538,7 +3538,7 @@ def generate_mapdl_commands(
 
     Notes
     -----
-    This function is a Beta. Function behavior and implementation may change in future.
+    **This is a beta API**. **The behavior and implementation may change in future**.
     """
     all_mat_cmds = ''
     analysis_settings = ''

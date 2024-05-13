@@ -1537,13 +1537,16 @@ class DeadRegion(CoreObject):
         Model to create a ``DeadRegion`` object with default parameters.
     face_zonelet_ids: Iterable[int], optional
         Face zonelets enclosing dead region.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     dead_material_points: List[str], optional
         Material points to identify dead region.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     hole_size: float, optional
         Maximum hole size used for patching.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``DeadRegion`` object with provided parameters.
 
@@ -1578,13 +1581,16 @@ class DeadRegion(CoreObject):
             Model to create a ``DeadRegion`` object with default parameters.
         face_zonelet_ids: Iterable[int], optional
             Face zonelets enclosing dead region.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         dead_material_points: List[str], optional
             Material points to identify dead region.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         hole_size: float, optional
             Maximum hole size used for patching.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``DeadRegion`` object with provided parameters.
 
@@ -1671,7 +1677,8 @@ class DeadRegion(CoreObject):
     @property
     def face_zonelet_ids(self) -> Iterable[int]:
         """Face zonelets enclosing dead region.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._face_zonelet_ids
 
@@ -1682,7 +1689,8 @@ class DeadRegion(CoreObject):
     @property
     def dead_material_points(self) -> List[str]:
         """Material points to identify dead region.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._dead_material_points
 
@@ -1693,7 +1701,8 @@ class DeadRegion(CoreObject):
     @property
     def hole_size(self) -> float:
         """Maximum hole size used for patching.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._hole_size
 
@@ -1711,16 +1720,20 @@ class WrapperPatchFlowRegionsParams(CoreObject):
         Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
     base_size: float, optional
         Base size to define octree.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     suggested_part_name: str, optional
         Suggested part name for created patching surfaces.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     number_of_threads: int, optional
         Number of threads for multithreading.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     dead_regions: List[DeadRegion], optional
-        Array of dead region pairs.
-        This is a beta parameter. The behavior and name may change in the future.
+        List of dead regions.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
@@ -1758,16 +1771,20 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
         base_size: float, optional
             Base size to define octree.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         suggested_part_name: str, optional
             Suggested part name for created patching surfaces.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         number_of_threads: int, optional
             Number of threads for multithreading.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         dead_regions: List[DeadRegion], optional
-            Array of dead region pairs.
-            This is a beta parameter. The behavior and name may change in the future.
+            List of dead regions.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
@@ -1824,7 +1841,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
         number_of_threads: int, optional
             Number of threads for multithreading.
         dead_regions: List[DeadRegion], optional
-            Array of dead region pairs.
+            List of dead regions.
         """
         args = locals()
         [WrapperPatchFlowRegionsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1862,7 +1879,8 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def base_size(self) -> float:
         """Base size to define octree.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._base_size
 
@@ -1873,7 +1891,8 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def suggested_part_name(self) -> str:
         """Suggested part name for created patching surfaces.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._suggested_part_name
 
@@ -1884,7 +1903,8 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @property
     def number_of_threads(self) -> int:
         """Number of threads for multithreading.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._number_of_threads
 
@@ -1894,8 +1914,9 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @property
     def dead_regions(self) -> List[DeadRegion]:
-        """Array of dead region pairs.
-        This is a beta parameter. The behavior and name may change in the future.
+        """List of dead regions.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._dead_regions
 
@@ -1912,15 +1933,20 @@ class WrapperPatchFlowRegionsResult(CoreObject):
         Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
     warning_codes: List[WarningCode], optional
         Warning codes associated with the patch holes operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     error_code: ErrorCode, optional
         Error code associated with a patch holes operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     id: int, optional
         Id of part created with hole patches.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     name: str, optional
         Name of part created with hole patches.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
 
@@ -1958,15 +1984,20 @@ class WrapperPatchFlowRegionsResult(CoreObject):
             Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the patch holes operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         error_code: ErrorCode, optional
             Error code associated with a patch holes operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         id: int, optional
             Id of part created with hole patches.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         name: str, optional
             Name of part created with hole patches.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
 
@@ -2061,7 +2092,8 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def warning_codes(self) -> List[WarningCode]:
         """Warning codes associated with the patch holes operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._warning_codes
 
@@ -2072,7 +2104,8 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with a patch holes operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code
 
@@ -2083,7 +2116,8 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def id(self) -> int:
         """Id of part created with hole patches.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._id
 
@@ -2094,6 +2128,8 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @property
     def name(self) -> str:
         """Name of part created with hole patches.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._name
 

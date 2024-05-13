@@ -65,7 +65,7 @@ class ControlData(CoreObject):
 
         Notes
         -----
-        This is a beta API. The behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -91,7 +91,7 @@ class ControlData(CoreObject):
 
         Notes
         -----
-        This is a beta API. The behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------

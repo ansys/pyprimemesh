@@ -2193,7 +2193,7 @@ class MaterialProcessor:
 
     Notes
     -----
-    This class is a Beta. Class behavior and implementation may change in future.
+    **This is a beta class**. **The behavior and implementation may change in future**.
     """
 
     __slots__ = (
@@ -2242,7 +2242,7 @@ class MaterialProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
@@ -2289,7 +2289,7 @@ class MaterialProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
@@ -2318,7 +2318,7 @@ class MaterialProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
@@ -2850,7 +2850,7 @@ class DatabaseProcessor:
 
     Notes
     -----
-    This class is a Beta. Class behavior and implementation may change in future.
+    **This is a beta API**. **The behavior and implementation may change in future**.
     """
 
     __slots__ = (
@@ -2904,7 +2904,7 @@ class DatabaseProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         time = self._get_dynamic_analysis_time_period()
         database_keyword = ""

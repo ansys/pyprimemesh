@@ -16,7 +16,8 @@ class VTComposerParams(CoreObject):
     model: Model
         Model to create a ``VTComposerParams`` object with default parameters.
     thin_stripes_tol: float, optional
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
 
@@ -44,7 +45,8 @@ class VTComposerParams(CoreObject):
         model: Model
             Model to create a ``VTComposerParams`` object with default parameters.
         thin_stripes_tol: float, optional
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
 
@@ -113,7 +115,8 @@ class VTComposerParams(CoreObject):
 
     @property
     def thin_stripes_tol(self) -> float:
-        """        This is a beta parameter. The behavior and name may change in the future.
+        """
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._thin_stripes_tol
 
@@ -129,7 +132,8 @@ class VTComposerResults(CoreObject):
     model: Model
         Model to create a ``VTComposerResults`` object with default parameters.
     error_code: ErrorCode, optional
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
 
@@ -157,7 +161,8 @@ class VTComposerResults(CoreObject):
         model: Model
             Model to create a ``VTComposerResults`` object with default parameters.
         error_code: ErrorCode, optional
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
 
@@ -226,7 +231,8 @@ class VTComposerResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """        This is a beta parameter. The behavior and name may change in the future.
+        """
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code
 
