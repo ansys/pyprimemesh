@@ -1559,16 +1559,20 @@ class MultiZoneSweepMeshParams(CoreObject):
         Model to create a ``MultiZoneSweepMeshParams`` object with default parameters.
     source_and_target_scope: ScopeDefinition, optional
         Source and target faces used to determine the direction of sweep in MultiZone meshing.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     sweep_mesh_size: float, optional
         Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     n_divisions: int, optional
         Number of divisions in the sweep direction.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     thin_sweep: bool, optional
         Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
 
@@ -1606,16 +1610,20 @@ class MultiZoneSweepMeshParams(CoreObject):
             Model to create a ``MultiZoneSweepMeshParams`` object with default parameters.
         source_and_target_scope: ScopeDefinition, optional
             Source and target faces used to determine the direction of sweep in MultiZone meshing.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         sweep_mesh_size: float, optional
             Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         n_divisions: int, optional
             Number of divisions in the sweep direction.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         thin_sweep: bool, optional
             Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
 
@@ -1710,7 +1718,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def source_and_target_scope(self) -> ScopeDefinition:
         """Source and target faces used to determine the direction of sweep in MultiZone meshing.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._source_and_target_scope
 
@@ -1721,7 +1730,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def sweep_mesh_size(self) -> float:
         """Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._sweep_mesh_size
 
@@ -1732,7 +1742,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def n_divisions(self) -> int:
         """Number of divisions in the sweep direction.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_divisions
 
@@ -1743,7 +1754,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def thin_sweep(self) -> bool:
         """Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._thin_sweep
 
@@ -1760,16 +1772,20 @@ class MultiZoneEdgeBiasingParams(CoreObject):
         Model to create a ``MultiZoneEdgeBiasingParams`` object with default parameters.
     face_scope: ScopeDefinition, optional
         Reference face zonelets to control mesh clustering orientation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     edge_scope: ScopeDefinition, optional
         Edge zonelets to control the expanse of edge biasing.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     bias_factor: float, optional
         Bias factor used for MultiZone edge biasing control.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     n_divisions: int, optional
         Number of divisions on the section where edge biasing is done.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``MultiZoneEdgeBiasingParams`` object with provided parameters.
 
@@ -1807,16 +1823,20 @@ class MultiZoneEdgeBiasingParams(CoreObject):
             Model to create a ``MultiZoneEdgeBiasingParams`` object with default parameters.
         face_scope: ScopeDefinition, optional
             Reference face zonelets to control mesh clustering orientation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         edge_scope: ScopeDefinition, optional
             Edge zonelets to control the expanse of edge biasing.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         bias_factor: float, optional
             Bias factor used for MultiZone edge biasing control.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         n_divisions: int, optional
             Number of divisions on the section where edge biasing is done.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``MultiZoneEdgeBiasingParams`` object with provided parameters.
 
@@ -1911,7 +1931,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def face_scope(self) -> ScopeDefinition:
         """Reference face zonelets to control mesh clustering orientation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._face_scope
 
@@ -1922,7 +1943,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def edge_scope(self) -> ScopeDefinition:
         """Edge zonelets to control the expanse of edge biasing.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._edge_scope
 
@@ -1933,7 +1955,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def bias_factor(self) -> float:
         """Bias factor used for MultiZone edge biasing control.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._bias_factor
 
@@ -1944,7 +1967,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def n_divisions(self) -> int:
         """Number of divisions on the section where edge biasing is done.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_divisions
 
@@ -1961,7 +1985,8 @@ class MultiZoneMapMeshParams(CoreObject):
         Model to create a ``MultiZoneMapMeshParams`` object with default parameters.
     scope: ScopeDefinition, optional
         Scope used for MultiZone map mesh control.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``MultiZoneMapMeshParams`` object with provided parameters.
 
@@ -1990,7 +2015,8 @@ class MultiZoneMapMeshParams(CoreObject):
             Model to create a ``MultiZoneMapMeshParams`` object with default parameters.
         scope: ScopeDefinition, optional
             Scope used for MultiZone map mesh control.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``MultiZoneMapMeshParams`` object with provided parameters.
 
@@ -2061,7 +2087,8 @@ class MultiZoneMapMeshParams(CoreObject):
     @property
     def scope(self) -> ScopeDefinition:
         """Scope used for MultiZone map mesh control.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._scope
 
@@ -2078,16 +2105,20 @@ class MultiZoneSizingParams(CoreObject):
         Model to create a ``MultiZoneSizingParams`` object with default parameters.
     max_size: float, optional
         Defines global maximum mesh size.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     min_size: float, optional
         Defines global minimum mesh size.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     growth_rate: float, optional
         Defines growth rate.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     use_volumetric_size_field: bool, optional
         Defines whether to use size field for MultiZone meshing.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``MultiZoneSizingParams`` object with provided parameters.
 
@@ -2125,16 +2156,20 @@ class MultiZoneSizingParams(CoreObject):
             Model to create a ``MultiZoneSizingParams`` object with default parameters.
         max_size: float, optional
             Defines global maximum mesh size.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         min_size: float, optional
             Defines global minimum mesh size.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         growth_rate: float, optional
             Defines growth rate.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         use_volumetric_size_field: bool, optional
             Defines whether to use size field for MultiZone meshing.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``MultiZoneSizingParams`` object with provided parameters.
 
@@ -2229,7 +2264,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def max_size(self) -> float:
         """Defines global maximum mesh size.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._max_size
 
@@ -2240,7 +2276,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def min_size(self) -> float:
         """Defines global minimum mesh size.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._min_size
 
@@ -2251,7 +2288,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def growth_rate(self) -> float:
         """Defines growth rate.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._growth_rate
 
@@ -2262,7 +2300,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def use_volumetric_size_field(self) -> bool:
         """Defines whether to use size field for MultiZone meshing.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._use_volumetric_size_field
 
