@@ -130,6 +130,7 @@ class Examples(Enum):
     WHEEL_GROUND_FMD = {"filename": "wheel_ground.fmd", "git_folder": "wheel_ground"}
     WHEEL_GROUND_DSCO = {"filename": "wheel_ground.dsco", "git_folder": "wheel_ground"}
 
+
 _DOWNLOADS = []
 
 
@@ -1459,6 +1460,7 @@ def download_block_model_pmdat(
     """
     return get_file(Examples.BLOCK_MODEL_PMDAT, destination, force)
 
+
 def download_wheel_ground_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
@@ -1493,6 +1495,7 @@ def download_wheel_ground_scdoc(
     """
     return get_file(Examples.WHEEL_GROUND_SCDOC, destination, force)
 
+
 def download_wheel_ground_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
@@ -1526,6 +1529,7 @@ def download_wheel_ground_fmd(
 
     """
     return get_file(Examples.WHEEL_GROUND_FMD, destination, force)
+
 
 def download_wheel_ground_dsco(
     destination: Optional[str] = None, force: bool = False
