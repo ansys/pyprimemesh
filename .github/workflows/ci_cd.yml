@@ -167,7 +167,19 @@ jobs:
     needs: [package]
     runs-on: ubuntu-latest
     steps:
+      # If the tag contains ".web.dev" then this is a dev release
+      # that should be published to a private PyPI - otherwise
+      # it should be published to the public PyPI and GitHub
+      - name: Release to the private PyPI repository
+        if: contains(github.ref, '.web.dev') == true
+        uses: ansys/actions/release-pypi-private@v6
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          twine-username: "__token__"
+          twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
+
       - name: Release to the public PyPI repository
+        if: contains(github.ref, '.web.dev') == false
         uses: ansys/actions/release-pypi-public@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
@@ -175,6 +187,7 @@ jobs:
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: Release to GitHub
+        if: contains(github.ref, '.web.dev') == false
         uses: ansys/actions/release-github@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
