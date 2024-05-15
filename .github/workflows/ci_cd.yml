@@ -168,7 +168,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # If the tag contains ".web.dev" then this is a dev release
-      # that should be published to a private PyPI - otherwise
+      # that should be published to a private PyPI. Otherwise
       # it should be published to the public PyPI and GitHub
       - name: Release to the private PyPI repository
         if: contains(github.ref, '.web.dev') == true
