@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """
 .. _ref_contact_patch:
 
@@ -73,10 +95,7 @@ enclosure_part = model.get_part_by_name("enclosure")
 # Convert topo parts to mesh parts.
 # Faceted geometry of topology converted to mesh for all parts as contact patch
 # requires face zonelets from mesh parts as input.
-[
-    part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model))
-    for part in model.parts
-]
+[part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model)) for part in model.parts]
 
 # The face zonelets of the wheel are defined as the source.
 # The planar surface must be specified as the target.
@@ -123,9 +142,7 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 )
 g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 
-model.set_global_sizing_params(
-    prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4)
-)
+model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 
 # Creating a size control to limit the size of mesh on the wheel.
 size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
@@ -154,9 +171,7 @@ print(model)
 # ~~~~~~~~~~~
 # Applying 5 layers of prisms to the wheel, patch and ground, and meshing with polyhedrals.
 
-model.set_global_sizing_params(
-    prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4)
-)
+model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
     prism_layers=5.0,
