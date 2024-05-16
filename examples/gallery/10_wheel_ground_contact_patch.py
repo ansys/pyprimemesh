@@ -139,8 +139,9 @@ print(model)
 # as a single part with narrow gaps between them.
 g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 
-# To merge these contact regions together we can increase the grouping tolerance
-# distance to be of the same scale as the length scale between the contact regions.
+# To merge these contact regions together, the grouping tolerance distance
+# is increased to be of the same scale as the length scale between the contact regions.
+
 model.delete_parts([result.part_id])
 params.grouping_tolerance = 20.0
 result = prime.SurfaceUtilities(model).create_contact_patch(
