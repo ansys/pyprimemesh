@@ -151,7 +151,8 @@ g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 
-# Creating a size control to limit the size of mesh on the wheel.
+# Create a size control to limit the size of mesh on the wheel.
+
 size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
 size_control.set_soft_sizing_params(prime.SoftSizingParams(model=model, max=8.0))
 size_control.set_scope(prime.ScopeDefinition(model=model, label_expression="wheel"))
