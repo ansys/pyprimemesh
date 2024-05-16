@@ -114,7 +114,8 @@ print(model)
 # offset to intersect the planar target face and the intersection used to define the contact patch.
 # Due to the depth of the treads on the wheel, 20.0 is used as the offset to reach the tire surface.
 
-# If multiple contact regions are found they can be merged by grouping them using the grouping
+# If multiple contact regions are found, they can be merged by grouping them using the grouping
+
 # tolerance distance.  With a grouping tolerance of 4.0, separate contact regions are created for
 
 # some of the treads of the tyre.  To merge these contact regions into a single patch the grouping
