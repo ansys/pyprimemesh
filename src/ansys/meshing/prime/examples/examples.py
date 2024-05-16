@@ -1499,7 +1499,7 @@ def download_wheel_ground_scdoc(
 def download_wheel_ground_fmd(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the wheel ground contact patch example.
+    """Download the FMD file for the wheel ground contact patch example.
 
     Parameters
     ----------
