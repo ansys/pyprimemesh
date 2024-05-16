@@ -177,7 +177,8 @@ print(model)
 ###############################################################################
 # Volume mesh
 # ~~~~~~~~~~~
-# Applying 5 layers of prisms to the wheel, patch and ground, and meshing with polyhedrals.
+# Apply five layers of prisms to the wheel, patch, and ground. Mesh with polyhedrals.
+
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 mesh_util.volume_mesh(
