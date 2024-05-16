@@ -120,7 +120,8 @@ print(model)
 
 # some of the treads of the tire.  To merge these contact regions into a single patch, the grouping
 
-# tolerance distance is increased to 20.0 avoiding small gaps between contact regions.
+# tolerance distance is increased to 20.0, avoiding small gaps between contact regions.
+
 params = prime.CreateContactPatchParams(
     model,
     contact_patch_axis=prime.ContactPatchAxis.Z,
