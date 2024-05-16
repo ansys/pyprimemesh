@@ -1464,7 +1464,7 @@ def download_block_model_pmdat(
 def download_wheel_ground_scdoc(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download SCDOC file for the wheel ground contact patch example.
+    """Download the SCDOC file for the wheel ground contact patch example.
 
     Parameters
     ----------
