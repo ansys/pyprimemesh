@@ -1469,8 +1469,8 @@ def download_wheel_ground_scdoc(
     Parameters
     ----------
     destination: Optional[str]
-        Destination for the file to be downloaded.
-        If nothing is provided, the default path in app data is used.
+        Destination for the file being downloaded.
+        If no path is provided, the default path in app data is used.
     force: bool
         Option to download the file.
         If true, the file is always downloaded.
