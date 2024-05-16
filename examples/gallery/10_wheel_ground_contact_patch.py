@@ -75,7 +75,8 @@ mesh_util = prime.lucid.Mesh(model)
 # Import CAD geometry
 # ~~~~~~~~~~~~~~~~~~~
 # Download the wheel ground geometry (FMD) file exported by SpaceClaim.
-# Import the CAD geometry. The geometry consists of two topo parts. A wheel and an enclosing box.
+# Import the CAD geometry. The geometry consists of two topo parts: a wheel and an enclosing box.
+
 # Labels are defined for the ground topo face on the enclosure and for the wheel
 # as all the topo faces of the wheel part.
 
