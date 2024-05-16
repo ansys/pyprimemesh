@@ -24,7 +24,7 @@
 .. _ref_contact_patch:
 
 ==========================================================================
-Creating a contact patch for wrapping between a wheel and ground interface
+Create a contact patch for wrapping between a wheel and ground interface
 ==========================================================================
 
 **Summary**: This example demonstrates how to create a contact patch for use with wrapping
