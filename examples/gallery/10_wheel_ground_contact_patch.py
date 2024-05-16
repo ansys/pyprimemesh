@@ -162,7 +162,8 @@ size_control.set_scope(prime.ScopeDefinition(model=model, label_expression="whee
 # ~~~~~~~~~~~~~~~~~~~~~
 # The largest internal region in this instance is the fluid region around the wheel.
 # Intersection loops are created to capture the features at the corners between the
-# patch, ground and wheel.
+# patch, ground, and wheel.
+
 
 wrap_part = mesh_util.wrap(
     min_size=4.0,
