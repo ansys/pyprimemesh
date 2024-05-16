@@ -1534,7 +1534,7 @@ def download_wheel_ground_fmd(
 def download_wheel_ground_dsco(
     destination: Optional[str] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download DSCO file for the wheel ground contact patch example.
+    """Download the DSCO file for the wheel ground contact patch example.
 
     Parameters
     ----------
