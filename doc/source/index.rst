@@ -66,8 +66,7 @@ To launch PyPrimeMesh, you use this code:
 
    import ansys.meshing.prime as prime
 
-   with prime.launch_prime() as prime_client:
-       model = prime_client.model
+   model = prime.launch_prime().model
 
 
 To read a mesh file, you use this code:
@@ -76,8 +75,7 @@ To read a mesh file, you use this code:
 
    import ansys.meshing.prime as prime
 
-   with prime.launch_prime() as prime_client:
-       model = prime_client.model
+   model = prime.launch_prime().model
 
        io = prime.FileIO(model)
        res = io.read_pmdat(r"E:\Temp\box.pmdat", prime.FileReadParams(model=model))
