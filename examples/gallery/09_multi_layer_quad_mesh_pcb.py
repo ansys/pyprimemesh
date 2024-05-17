@@ -23,9 +23,9 @@
 """
 .. _ref_multi_layer_pcb_mesh:
 
-========================================================
-Meshing a generic PCB geometry with multiple hexa layers
-========================================================
+=====================================================
+Mesh a generic PCB geometry with multiple hexa layers
+=====================================================
 
 **Summary**: This example demonstrates how to set the base mesh size and number of
 layers for each solid in a generic PCB geometry and then generate a mesh.
