@@ -82,7 +82,7 @@ Four CAD import routes are available in PyPrimeMesh:
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
 
- * ``Discovery``: Uses Discovery to import supported ``*.dsco`` and  ``*.scdocx`` files.
+ * ``Discovery``: Uses Discovery to import supported DSCO and SCDOCX files.
 
 To view the CAD supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
