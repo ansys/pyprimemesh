@@ -37,7 +37,7 @@ to improve mesh quality when growing prism layers in the region of the contactin
 
 .. image:: ../../../images/contact_patch.png
    :align: center
-   :width: 400
+   :width: 600
    :alt: Left: Wheel/ground interface. Right: Addition of contact patch.
 
 Procedure
