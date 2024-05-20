@@ -23,9 +23,9 @@
 """
 .. _ref_contact_patch:
 
-==========================================================================
+========================================================================
 Create a contact patch for wrapping between a wheel and ground interface
-==========================================================================
+========================================================================
 
 **Summary**: This example demonstrates how to create a contact patch for use with wrapping
 to avoid meshing into a narrow contact region between two objects.
@@ -99,10 +99,7 @@ print(model)
 wheel_part = model.get_part_by_name("wheel_body")
 enclosure_part = model.get_part_by_name("enclosure")
 
-[
-   part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model))
-   for part in model.parts
-]
+[part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model)) for part in model.parts]
 
 ###############################################################################
 # Create a contact patch
@@ -152,7 +149,6 @@ g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 
 # Create a size control to limit the size of mesh on the wheel.
-
 size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
 size_control.set_soft_sizing_params(prime.SoftSizingParams(model=model, max=8.0))
 size_control.set_scope(prime.ScopeDefinition(model=model, label_expression="wheel"))
