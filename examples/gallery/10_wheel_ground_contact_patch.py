@@ -122,7 +122,6 @@ source = wheel_part.get_face_zonelets()
 target = enclosure_part.get_face_zonelets_of_label_name_pattern(
     "ground", prime.NamePatternParams(model)
 )
-print(model)
 
 params = prime.CreateContactPatchParams(
     model,
