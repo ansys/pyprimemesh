@@ -23,9 +23,9 @@
 """
 .. _ref_turbine_blade:
 
-============================================================
-Morphing a hexahedral mesh of a turbine blade to a new shape
-============================================================
+=========================================================
+Morph a hexahedral mesh of a turbine blade to a new shape
+=========================================================
 
 **Summary**: This example demonstrates how to morph a structural
 hexahedral mesh of a turbine blade to a new deformed shape

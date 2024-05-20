@@ -23,9 +23,9 @@
 """
 .. _ref_pipe_tee:
 
-=======================================================================
-Meshing a pipe T-section for structural thermal and fluid flow analysis
-=======================================================================
+====================================================================
+Mesh a pipe T-section for structural thermal and fluid flow analysis
+====================================================================
 
 **Summary**: This example demonstrates how to mesh a pipe T-section for both
 structural thermal and fluid flow simulation.

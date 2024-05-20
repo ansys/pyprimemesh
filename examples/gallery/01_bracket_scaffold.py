@@ -23,9 +23,9 @@
 """
 .. _ref_bracket_mid_surface_mesh:
 
-========================================================
-Meshing a mid-surfaced bracket for a structural analysis
-========================================================
+=====================================================
+Mesh a mid-surfaced bracket for a structural analysis
+=====================================================
 
 **Summary**: This example demonstrates how to use topology-based connection
 to generate conformal surface mesh.
