@@ -90,13 +90,33 @@ g = Graphics(model)
 g(scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
 print(model)
 
+###############################################################################
+# Convert topo parts to mesh parts
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Faceted geometry of topology converted to mesh for all parts as contact patch
+# requires face zonelets from mesh parts as input.
+
 wheel_part = model.get_part_by_name("wheel_body")
 enclosure_part = model.get_part_by_name("enclosure")
 
-# Convert topo parts to mesh parts.
-# Faceted geometry of topology converted to mesh for all parts as contact patch
-# requires face zonelets from mesh parts as input.
-[part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model)) for part in model.parts]
+[
+   part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model))
+   for part in model.parts
+]
+
+###############################################################################
+# Create a contact patch
+# ~~~~~~~~~~~~~~~~~~~~~~
+# To create a contact patch a direction is needed to define the resulting shape of the patch.
+# A new part is created containing the patch.
+# A prefix can be specified for the label created for the contact patch face zonelets generated.
+# The offset distance determines the thickness and extent of the patch.  The source face zonelet is
+# offset to intersect the planar target face and the intersection used to define the contact patch.
+# Due to the depth of the treads on the wheel, 20.0 is used as the offset to reach the tire surface.
+# If multiple contact regions are found, they can be merged by grouping them using the grouping
+# tolerance distance.  With a grouping tolerance of 4.0, separate contact regions are created for
+# some of the treads of the tire.  To merge these contact regions into a single patch, the grouping
+# tolerance distance is increased to 20.0, avoiding small gaps between contact regions.
 
 # The face zonelets of the wheel are defined as the source.
 # The planar surface must be specified as the target.
@@ -107,26 +127,11 @@ target = enclosure_part.get_face_zonelets_of_label_name_pattern(
 )
 print(model)
 
-# To create a contact patch a direction is needed to define the resulting shape of the patch.
-# A new part is created containing the patch.
-# A prefix can be specified for the label created for the contact patch face zonelets generated.
-# The offset distance determines the thickness and extent of the patch.  The source face zonelet is
-# offset to intersect the planar target face and the intersection used to define the contact patch.
-# Due to the depth of the treads on the wheel, 20.0 is used as the offset to reach the tire surface.
-
-# If multiple contact regions are found, they can be merged by grouping them using the grouping
-
-# tolerance distance.  With a grouping tolerance of 4.0, separate contact regions are created for
-
-# some of the treads of the tire.  To merge these contact regions into a single patch, the grouping
-
-# tolerance distance is increased to 20.0, avoiding small gaps between contact regions.
-
 params = prime.CreateContactPatchParams(
     model,
     contact_patch_axis=prime.ContactPatchAxis.Z,
     offset_distance=20.0,
-    grouping_tolerance=4.0,
+    grouping_tolerance=20.0,
     suggested_label_prefix="patch",
 )
 result = prime.SurfaceUtilities(model).create_contact_patch(
@@ -135,19 +140,14 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
-# The grouping tolerance distance used creates multiple contact patch regions
-# as a single part with narrow gaps between them.
 g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 
-# To merge these contact regions together, the grouping tolerance distance
-# is increased to be of the same scale as the length scale between the contact regions.
-
-model.delete_parts([result.part_id])
-params.grouping_tolerance = 20.0
-result = prime.SurfaceUtilities(model).create_contact_patch(
-    source_zonelets=source, target_zonelets=target, params=params
-)
-g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
+###############################################################################
+# Wrap the fluid region
+# ~~~~~~~~~~~~~~~~~~~~~
+# The largest internal region in this instance is the fluid region around the wheel.
+# Intersection loops are created to capture the features at the corners between the
+# patch, ground, and wheel.
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 
@@ -157,14 +157,6 @@ size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
 size_control.set_soft_sizing_params(prime.SoftSizingParams(model=model, max=8.0))
 size_control.set_scope(prime.ScopeDefinition(model=model, label_expression="wheel"))
 
-###############################################################################
-# Wrap the fluid region
-# ~~~~~~~~~~~~~~~~~~~~~
-# The largest internal region in this instance is the fluid region around the wheel.
-# Intersection loops are created to capture the features at the corners between the
-# patch, ground, and wheel.
-
-
 wrap_part = mesh_util.wrap(
     min_size=4.0,
     max_size=100.0,
@@ -172,6 +164,7 @@ wrap_part = mesh_util.wrap(
     create_intersection_loops=True,
     wrap_size_controls=[size_control],
 )
+
 g(scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 print(model)
 
@@ -179,7 +172,6 @@ print(model)
 # Volume mesh
 # ~~~~~~~~~~~
 # Apply five layers of prisms to the wheel, patch, and ground. Mesh with polyhedrals.
-
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
 mesh_util.volume_mesh(
