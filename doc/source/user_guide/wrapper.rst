@@ -203,7 +203,9 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    file_io = prime.FileIO(model)
-   res = file_io.read_pmdat(r"E:\test2\Surface_mesh_1.pmdat", prime.FileReadParams(model=model))
+   res = file_io.read_pmdat(
+      r"E:\test2\Surface_mesh_1.pmdat", prime.FileReadParams(model=model)
+   )
    g = Graphics(model)
    g()
    set_num_of_threads = model.set_num_threads(8)
@@ -217,12 +219,12 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    model.set_global_sizing_params(
-      prime.GlobalSizingParams(
-         model,
-         min=0.5,
-         max=30,
-         growth_rate=1.2,
-      )
+       prime.GlobalSizingParams(
+          model,
+          min=0.5,
+          max=30,
+          growth_rate=1.2,
+       )
    )
    sfparams = model.get_global_sizing_params()
 
@@ -231,28 +233,28 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    mpt_fluid_res = model.material_point_data.create_material_point(
-      suggested_name="Fluid",
-      coords=[-13, 62,-24 ],
-      params=prime.CreateMaterialPointParams(
-         model=model,
-         type=prime.MaterialPointType.LIVE,
-      ),
+       suggested_name="Fluid",
+       coords=[-13, 62,-24 ],
+       params=prime.CreateMaterialPointParams(
+           model=model,
+           type=prime.MaterialPointType.LIVE,
+       ),
    )
    model.material_point_data.create_material_point(
-      suggested_name="dead_1",
-      coords=[2, 43, 0.0],
-      params=prime.CreateMaterialPointParams(
-         model=model,
-         type=prime.MaterialPointType.DEAD,
-      ),
+       suggested_name="dead_1",
+       coords=[2, 43, 0.0],
+       params=prime.CreateMaterialPointParams(
+           model=model,
+           type=prime.MaterialPointType.DEAD,
+       ),
    )
    model.material_point_data.create_material_point(
-      suggested_name="dead_2",
-      coords=[11, 60, -8.5],
-      params=prime.CreateMaterialPointParams(
-         model=model,
-         type=prime.MaterialPointType.DEAD,
-      ),
+       suggested_name="dead_2",
+       coords=[11, 60, -8.5],
+       params=prime.CreateMaterialPointParams(
+           model=model,
+           type=prime.MaterialPointType.DEAD,
+       ),
    )
 
 
@@ -261,29 +263,29 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    dead_region_scope = prime.ScopeDefinition(
-      model=model,
-      part_expression="box, sph",
+       model=model,
+       part_expression="box, sph",
    )
    faces = model.control_data.get_scope_face_zonelets(
-      scope=dead_region_scope,
-      params=prime.ScopeZoneletParams(model),
+       scope=dead_region_scope,
+       params=prime.ScopeZoneletParams(model),
    )
    dead_region = prime.DeadRegion(
-      model=model,
-      face_zonelet_ids=faces,
-      dead_material_points=["dead_1"],
-      hole_size=5,
+       model=model,
+       face_zonelet_ids=faces,
+       dead_material_points=["dead_1"],
+       hole_size=5,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
-      model=model,
-      dead_regions=[dead_region],
-      number_of_threads=12,
-      suggested_part_name="hole_patch_1",
+       model=model,
+       dead_regions=[dead_region],
+       number_of_threads=12,
+       suggested_part_name="hole_patch_1",
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-      live_material_point="Fluid",
-      params=patch_params,
+       live_material_point="Fluid",
+       params=patch_params,
    )
 
 .. figure:: ../images/patchflow_modelex1.png
@@ -295,30 +297,30 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    dead_region_scope = prime.ScopeDefinition(
-      model=model,
-      part_expression="box, sph",
+       model=model,
+       part_expression="box, sph",
    )
    faces = model.control_data.get_scope_face_zonelets(
-      scope=dead_region_scope,
-      params=prime.ScopeZoneletParams(model),
+       scope=dead_region_scope,
+       params=prime.ScopeZoneletParams(model),
    )
    dead_region = prime.DeadRegion(
-      model=model,
-      face_zonelet_ids=faces,
-      dead_material_points=["dead_2"],
-      hole_size=15,
+       model=model,
+       face_zonelet_ids=faces,
+       dead_material_points=["dead_2"],
+       hole_size=15,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
-        model=model,
-        base_size=4,
-        dead_regions=[dead_region],
-        number_of_threads=12,
-        suggested_part_name="hole_patch_2",
+       model=model,
+       base_size=4,
+       dead_regions=[dead_region],
+       number_of_threads=12,
+       suggested_part_name="hole_patch_2",
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-      live_material_point="Fluid",
-      params=patch_params,
+       live_material_point="Fluid",
+       params=patch_params,
    )
 
 .. figure:: ../images/patchflow_modelex2.png
@@ -330,30 +332,30 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    dead_region_scope = prime.ScopeDefinition(
-      model=model,
-      part_expression="box, sph",
+       model=model,
+       part_expression="box, sph",
    )
    faces = model.control_data.get_scope_face_zonelets(
-      scope=dead_region_scope,
-      params=prime.ScopeZoneletParams(model),
+       scope=dead_region_scope,
+       params=prime.ScopeZoneletParams(model),
    )
    dead_region = prime.DeadRegion(
-      model=model,
-      face_zonelet_ids=faces,
-      dead_material_points=["dead_1","dead_2"],
-      hole_size=15,
+       model=model,
+       face_zonelet_ids=faces,
+       dead_material_points=["dead_1","dead_2"],
+       hole_size=15,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
-      model=model,
-      base_size=2,
-      dead_regions=[dead_region],
-      number_of_threads=8,
-      suggested_part_name="hole_patch_3",
+       model=model,
+       base_size=2,
+       dead_regions=[dead_region],
+       number_of_threads=8,
+       suggested_part_name="hole_patch_3",
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-      live_material_point="Fluid",
-      params=patch_params,
+       live_material_point="Fluid",
+       params=patch_params,
    )
 
 .. figure:: ../images/patchflow_modelex3.png
@@ -365,45 +367,45 @@ The below example demonstrates how to patch surfaces using dead and live materia
 .. code:: python
 
    dead_region_scope_1 = prime.ScopeDefinition(
-      model=model,
-      part_expression="box",
+       model=model,
+       part_expression="box",
    )
    faces_1 = model.control_data.get_scope_face_zonelets(
-      scope=dead_region_scope,
-      params=prime.ScopeZoneletParams(model),
+       scope=dead_region_scope,
+       params=prime.ScopeZoneletParams(model),
    )
    dead_region_1 = prime.DeadRegion(
-      model=model,
-      face_zonelet_ids=faces_1,
-      dead_material_points=["dead_1"],
-      hole_size=5,
+       model=model,
+       face_zonelet_ids=faces_1,
+       dead_material_points=["dead_1"],
+       hole_size=5,
    )
 
    dead_region_scope_2 = prime.ScopeDefinition(
-      model=model,
-      part_expression="sph",
+       model=model,
+       part_expression="sph",
    )
    faces_2 = model.control_data.get_scope_face_zonelets(
-      scope=dead_region_scope,
-      params=prime.ScopeZoneletParams(model),
+       scope=dead_region_scope,
+       params=prime.ScopeZoneletParams(model),
    )
    dead_region_2 = prime.DeadRegion(
-      model=model,
-      face_zonelet_ids=faces_2,
-      dead_material_points=["dead_2"],
-      hole_size=15,
+       model=model,
+       face_zonelet_ids=faces_2,
+       dead_material_points=["dead_2"],
+       hole_size=15,
    )
 
    patch_params = prime.WrapperPatchFlowRegionsParams(
-      model=model,
-      dead_regions=[dead_region_1, dead_region_2],
-      number_of_threads=12,
-      suggested_part_name="hole_patch_4",
+       model=model,
+       dead_regions=[dead_region_1, dead_region_2],
+       number_of_threads=12,
+       suggested_part_name="hole_patch_4",
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-      live_material_point="Fluid",
-      params=patch_params,
+       live_material_point="Fluid",
+       params=patch_params,
    )
  
 .. figure:: ../images/patchflow_modelex4.png
