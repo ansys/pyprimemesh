@@ -293,6 +293,9 @@ Export solver mesh files
    and allows you to specify the LS-DYNA data field format. You should specify the material 
    properties card and the database keywords card in LS-DYNA format.
 
+ .. note::
+    :func:`FileIO.export_lsdyna_keyword_file() <ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>`
+   is a beta API. The behavior and name may change in the future.
 
 
 ===============================
