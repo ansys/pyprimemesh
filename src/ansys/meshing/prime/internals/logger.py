@@ -77,7 +77,7 @@ class PrimeLogger(object, metaclass=SingletonType):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         utils.print_beta_api_warning(self._logger, "set_level")
         self._logger.setLevel(level=level)
@@ -94,7 +94,7 @@ class PrimeLogger(object, metaclass=SingletonType):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         # stdout
         utils.print_beta_api_warning(self._logger, "enable_output")
@@ -117,7 +117,7 @@ class PrimeLogger(object, metaclass=SingletonType):
 
         Notes
         -----
-        This is a Beta API. The Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         utils.print_beta_api_warning(self._logger, "add_file_handler")
         if log_file is None:

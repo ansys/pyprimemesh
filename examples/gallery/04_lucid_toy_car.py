@@ -23,9 +23,9 @@
 """
 .. _ref_toy_car_wrap:
 
-======================================
-Wrapping a toy car for a flow analysis
-======================================
+==================================
+Wrap a toy car for a flow analysis
+==================================
 
 **Summary**: This example demonstrates how to wrap a toy car for a flow analysis.
 

@@ -23,9 +23,9 @@
 """
 .. _ref_generic_f1_rw:
 
-================================================================
-Meshing a generic F1 car rear wing for external aero simulation
-================================================================
+=============================================================
+Mesh a generic F1 car rear wing for external aero simulation
+=============================================================
 
 **Summary**: This example demonstrates how to generate a mesh for a generic F1 rear wing
 STL file model.

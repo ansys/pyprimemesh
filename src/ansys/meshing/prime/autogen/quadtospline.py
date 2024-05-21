@@ -52,7 +52,7 @@ class QuadToSpline(CoreObject):
 
         Notes
         -----
-        This is a beta API. The behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------

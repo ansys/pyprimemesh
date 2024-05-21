@@ -23,13 +23,16 @@ class EdgeMergeControl(enum.IntEnum):
     """
     ALLTOALL = 1
     """Allows to merge all types of edges.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FREETOALL = 2
     """Allows to merge only free edges into all edges.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FREETOFREE = 3
     """Allows to merge free edge into other free edge only.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class ScaffolderParams(CoreObject):
     """Parameters to control scaffold operation.
@@ -42,23 +45,28 @@ class ScaffolderParams(CoreObject):
         Defines the maximum gap to connect.
     size_field_type: int, optional
         Specifies the type of size field used for scaffolding.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     intersection_control_mask: IntersectionMask, optional
         Specifies the nature of intersection to be computed.
     edge_merge_control: int, optional
         Specifies type of edge pairs to be merged during scaffold operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     constant_mesh_size: float, optional
         Defines the constant edge mesh size to check connection.
     remove_holes_critical_radius: float, optional
         Defines the maximum radius of holes to be removed.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     remove_slivers_abs_dist_tol_ratio: float, optional
         Defines the maximum aspect ratio to remove sliver faces.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     triangles_coplanar_angle_cos: float, optional
         Lower bound for cos angle to consider coplanar faces for scaffolding.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
 
@@ -110,23 +118,28 @@ class ScaffolderParams(CoreObject):
             Defines the maximum gap to connect.
         size_field_type: int, optional
             Specifies the type of size field used for scaffolding.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         intersection_control_mask: IntersectionMask, optional
             Specifies the nature of intersection to be computed.
         edge_merge_control: int, optional
             Specifies type of edge pairs to be merged during scaffold operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         constant_mesh_size: float, optional
             Defines the constant edge mesh size to check connection.
         remove_holes_critical_radius: float, optional
             Defines the maximum radius of holes to be removed.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         remove_slivers_abs_dist_tol_ratio: float, optional
             Defines the maximum aspect ratio to remove sliver faces.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         triangles_coplanar_angle_cos: float, optional
             Lower bound for cos angle to consider coplanar faces for scaffolding.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
 
@@ -263,7 +276,8 @@ class ScaffolderParams(CoreObject):
     @property
     def size_field_type(self) -> int:
         """Specifies the type of size field used for scaffolding.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._size_field_type
 
@@ -284,7 +298,8 @@ class ScaffolderParams(CoreObject):
     @property
     def edge_merge_control(self) -> int:
         """Specifies type of edge pairs to be merged during scaffold operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._edge_merge_control
 
@@ -305,7 +320,8 @@ class ScaffolderParams(CoreObject):
     @property
     def remove_holes_critical_radius(self) -> float:
         """Defines the maximum radius of holes to be removed.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._remove_holes_critical_radius
 
@@ -316,7 +332,8 @@ class ScaffolderParams(CoreObject):
     @property
     def remove_slivers_abs_dist_tol_ratio(self) -> float:
         """Defines the maximum aspect ratio to remove sliver faces.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._remove_slivers_abs_dist_tol_ratio
 
@@ -327,7 +344,8 @@ class ScaffolderParams(CoreObject):
     @property
     def triangles_coplanar_angle_cos(self) -> float:
         """Lower bound for cos angle to consider coplanar faces for scaffolding.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._triangles_coplanar_angle_cos
 

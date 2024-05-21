@@ -331,10 +331,12 @@ class ProjectOnGeometryParams(CoreObject):
         Model to create a ``ProjectOnGeometryParams`` object with default parameters.
     project_only_mid_nodes: bool, optional
         Option to project only the mid nodes.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     project_on_facets_if_cadnot_found: bool, optional
         Option to project on facet if geometry is not found.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
 
@@ -366,10 +368,12 @@ class ProjectOnGeometryParams(CoreObject):
             Model to create a ``ProjectOnGeometryParams`` object with default parameters.
         project_only_mid_nodes: bool, optional
             Option to project only the mid nodes.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         project_on_facets_if_cadnot_found: bool, optional
             Option to project on facet if geometry is not found.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
 
@@ -448,7 +452,8 @@ class ProjectOnGeometryParams(CoreObject):
     @property
     def project_only_mid_nodes(self) -> bool:
         """Option to project only the mid nodes.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._project_only_mid_nodes
 
@@ -459,7 +464,8 @@ class ProjectOnGeometryParams(CoreObject):
     @property
     def project_on_facets_if_cadnot_found(self) -> bool:
         """Option to project on facet if geometry is not found.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._project_on_facets_if_cadnot_found
 
@@ -476,13 +482,16 @@ class ProjectOnGeometryResults(CoreObject):
         Model to create a ``ProjectOnGeometryResults`` object with default parameters.
     success: bool, optional
         Defines the operation was successful or not.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     error_code: ErrorCode, optional
         Error code associated with failure of operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     warning_codes: List[WarningCode], optional
         Warning code associated with operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
 
@@ -517,13 +526,16 @@ class ProjectOnGeometryResults(CoreObject):
             Model to create a ``ProjectOnGeometryResults`` object with default parameters.
         success: bool, optional
             Defines the operation was successful or not.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         warning_codes: List[WarningCode], optional
             Warning code associated with operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
 
@@ -610,7 +622,8 @@ class ProjectOnGeometryResults(CoreObject):
     @property
     def success(self) -> bool:
         """Defines the operation was successful or not.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._success
 
@@ -621,7 +634,8 @@ class ProjectOnGeometryResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with failure of operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code
 
@@ -632,7 +646,8 @@ class ProjectOnGeometryResults(CoreObject):
     @property
     def warning_codes(self) -> List[WarningCode]:
         """Warning code associated with operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._warning_codes
 
@@ -4075,10 +4090,12 @@ class TriangulateResults(CoreObject):
         Model to create a ``TriangulateResults`` object with default parameters.
     error_code: ErrorCode, optional
         Error code associated with failure of the operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     n_faces_triangulated: int, optional
         Number of faces that were triangulated.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
 
@@ -4110,10 +4127,12 @@ class TriangulateResults(CoreObject):
             Model to create a ``TriangulateResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of the operation.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         n_faces_triangulated: int, optional
             Number of faces that were triangulated.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
 
@@ -4192,7 +4211,8 @@ class TriangulateResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with failure of the operation.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code
 
@@ -4203,7 +4223,8 @@ class TriangulateResults(CoreObject):
     @property
     def n_faces_triangulated(self) -> int:
         """Number of faces that were triangulated.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_faces_triangulated
 

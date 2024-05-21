@@ -486,7 +486,7 @@ class FileIO(_FileIO):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -610,7 +610,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> model = prime.local_model()
+        >>> model = prime.launch_prime().model
         >>> fileio = prime.FileIO(model=model)
         >>> out_file_path = r"/tmp/output.stl"
         >>> part_ids = [part.id for part in model.parts]
