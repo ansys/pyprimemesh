@@ -184,7 +184,7 @@ The basic PyPrimeMesh wrapper-based workflow follows these steps:
 Patch Flow Region
 ==================
 Patch Flow Region creates patching face zonelets for holes below a specified size 
-that exist between regions defined by live and dead material points.You can define
+that exist between regions defined by live and dead material points. You can define
 multiple dead regions but only one live region can be defined.
 :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>`
 allows you to specify the base size and dead regions to create the patched surface. 
@@ -304,7 +304,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
     :width: 400pt
     :align: center
 
-6.	Define the scope to perform patching,  two dead regions, hole size and specify the base size to perform patches.
+6.	Define the scope to perform patching, two dead regions, hole size and specify the base size to perform patches.
 
 .. code:: python
 
