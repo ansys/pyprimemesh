@@ -223,7 +223,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
 3. Create the material points and define its type.
 
 .. code:: python
-
+   
    mpt_fluid_res = model.material_point_data.create_material_point(
                                               suggested_name = "Fluid", 
                                               coords = [-13, 62,-24 ], 
