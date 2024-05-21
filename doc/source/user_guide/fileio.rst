@@ -284,6 +284,16 @@ Export solver mesh files
    method allows you to export IGA LS-DYNA keyword ``(*.k)`` files and set parameters for exporting boundary-fitted
    splines using the :class:`ExportBoundaryFittedSplineParams <ansys.meshing.prime.ExportBoundaryFittedSplineParams>` class.
 
+ - The :func:`FileIO.export_lsdyna_keyword_file() <ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>`
+   method allows you to write out LS-DYNA Keyword ``(*.k)`` file that contains mesh definition and other 
+   necessary information to carry out the analysis run by LS-DYNA solver. 
+   :class:`ExportLSDynaKeywordFileParams <ansys.meshing.prime.ExportLSDynaKeywordFileParams>` class allows 
+   you to specify the application type (SEATBELT, DOORSLAM), compute the spot weld thickness or not, 
+   append the material cards in the k file, provide the database cards to append in the k file,
+   and allows you to specify the LS-DYNA data field format. You should specify the material 
+   properties card and the database keywords card in LS-DYNA format.
+
+
 
 ===============================
 Read and write size field files
