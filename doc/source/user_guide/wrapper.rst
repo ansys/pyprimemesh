@@ -204,7 +204,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
 
    file_io = prime.FileIO(model)
    res = file_io.read_pmdat(
-      r"E:\test2\Surface_mesh_1.pmdat", prime.FileReadParams(model=model)
+       r"E:\test2\Surface_mesh_1.pmdat", prime.FileReadParams(model=model)
    )
    g = Graphics(model)
    g()
@@ -220,10 +220,10 @@ The below example demonstrates how to patch surfaces using dead and live materia
 
    model.set_global_sizing_params(
        prime.GlobalSizingParams(
-          model,
-          min=0.5,
-          max=30,
-          growth_rate=1.2,
+           model,
+           min=0.5,
+           max=30,
+           growth_rate=1.2,
        )
    )
    sfparams = model.get_global_sizing_params()
@@ -234,7 +234,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
 
    mpt_fluid_res = model.material_point_data.create_material_point(
        suggested_name="Fluid",
-       coords=[-13, 62,-24 ],
+       coords=[-13, 62, -24],
        params=prime.CreateMaterialPointParams(
            model=model,
            type=prime.MaterialPointType.LIVE,
@@ -342,7 +342,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    dead_region = prime.DeadRegion(
        model=model,
        face_zonelet_ids=faces,
-       dead_material_points=["dead_1","dead_2"],
+       dead_material_points=["dead_1", "dead_2"],
        hole_size=15,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
@@ -362,7 +362,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
     :width: 400pt
     :align: center
 
-7. Define the scope to perform patching, two dead regions, hole size and specify the base size to perform patches.
+7.	Define the scope to perform patching, two dead regions, hole size and specify the base size to perform patches.
 
 .. code:: python
 
