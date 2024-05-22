@@ -181,7 +181,7 @@ The basic PyPrimeMesh wrapper-based workflow follows these steps:
    )
 
 =================
-Patch Flow Region
+Patch flow region
 =================
 
 *This is a beta feature. API behavior and implementation might change in the future.*
