@@ -186,7 +186,7 @@ Patch flow region
 
 *This is a beta feature. API behavior and implementation might change in the future.*
 
-:class:`Patch Flow Region <ansys.meshing.prime.Wrapper.patch_flow_regions>` creates patching face zonelets for holes below a specified size 
+Patch Flow Region creates patching face zonelets for holes below a specified size 
 that exist between regions defined by live and dead material points. You can define
 multiple dead regions but only one live region can be defined.
 :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>`
@@ -232,7 +232,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
 
 .. code:: python
 
-   mpt_fluid_res = model.material_point_data.create_material_point(
+   model.material_point_data.create_material_point(
        suggested_name="Fluid",
        coords=[-13, 62, -24],
        params=prime.CreateMaterialPointParams(
@@ -258,7 +258,15 @@ The below example demonstrates how to patch surfaces using dead and live materia
    )
 
 
-4. Define the scope to perform patching, dead region and specify the hole size to be patched.
+4. Define the scope, dead region, live region and specify the hole size, base size to be patched to perform patching.
+
+   The below images shows the defined dead material points and live material points in the model.
+
+.. figure:: ../images/patchflow_demo.png
+    :width: 400pt
+    :align: center
+
+**Case 1**: Scope Dead_1, LIVE material points and specify the hole size to perform patching.
 
 .. code:: python
 
@@ -273,7 +281,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    dead_region = prime.DeadRegion(
        model=model,
        face_zonelet_ids=faces,
-       dead_material_points=["dead_1"],
+       dead_material_points=["Dead_1"],
        hole_size=5,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
@@ -284,7 +292,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-       live_material_point="Fluid",
+       live_material_point="LIVE",
        params=patch_params,
    )
 
@@ -292,7 +300,8 @@ The below example demonstrates how to patch surfaces using dead and live materia
     :width: 400pt
     :align: center
 
-5.	Define the scope to perform patching, dead region and specify the hole size and base size to be patched.
+**Case 2**: Scope Dead_2, LIVE material points and specify the hole size and base size to perform patching.
+
 
 .. code:: python
 
@@ -307,7 +316,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    dead_region = prime.DeadRegion(
        model=model,
        face_zonelet_ids=faces,
-       dead_material_points=["dead_2"],
+       dead_material_points=["Dead_2"],
        hole_size=15,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
@@ -319,7 +328,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-       live_material_point="Fluid",
+       live_material_point="LIVE",
        params=patch_params,
    )
 
@@ -327,7 +336,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
     :width: 400pt
     :align: center
 
-6.	Define the scope to perform patching, two dead regions, hole size and specify the base size to perform patches.
+**Case 3**: Scope Dead_1, Dead_2 and LIVE material points and specify the hole size and base size to perform patching.
 
 .. code:: python
 
@@ -342,7 +351,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    dead_region = prime.DeadRegion(
        model=model,
        face_zonelet_ids=faces,
-       dead_material_points=["dead_1", "dead_2"],
+       dead_material_points=["Dead_1", "Dead_2"],
        hole_size=15,
    )
    patch_params = prime.WrapperPatchFlowRegionsParams(
@@ -354,12 +363,15 @@ The below example demonstrates how to patch surfaces using dead and live materia
    )
    wrapper = prime.Wrapper(model=model)
    patch_result = wrapper.patch_flow_regions(
-       live_material_point="Fluid",
+       live_material_point="LIVE",
        params=patch_params,
    )
 
 .. figure:: ../images/patchflow_modelex3.png
     :width: 400pt
     :align: center
+
+
+
 
 
