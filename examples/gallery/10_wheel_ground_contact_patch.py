@@ -35,13 +35,15 @@ Objective
 This example uses a contact patch for wrapping to avoid the interface of a wheel with the ground
 to improve mesh quality when growing prism layers in the region of the contacting faces.
 
-.. figure:: ../../../images/contact_patch.png
+.. image:: ../../../images/contact_patch.png
    :align: center
    :width: 600
-   
-   Top left: Wheel/ground interface. Top right: Addition of contact patch.
-   Lower left: Grouping tolerance at 4 with multiple contact patches.
-   Lower right: Grouping tolerance at 20 with merged single contact patch.
+
+Image showing the following:
+* Top left: wheel/ground interface. 
+* Top right: addition of contact patch.
+* Lower left: grouping tolerance at 4 with multiple contact patches.
+* Lower right: grouping tolerance at 20 with merged single contact patch.
 
 Procedure
 ~~~~~~~~~
