@@ -23,7 +23,7 @@ A watertight faceted representation (defined by quad faces of the Cartesian mesh
 via material points) and all other regions. The nodes on the faceted representation are then projected back to the input geometry, resulting into a wrapper surface closely
 representing the input geometry. The edges are imprinted on the wrapped zones, and individual zones are recovered and rezoned based on the original geometry objects.
 
-The wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions or size field.
+The wrapper surface quality is improved by post-wrapping operations. Surfaces are remeshed based on size functions or the size field.
 
 .. figure:: ../images/wrapper_schematic.png
     :width: 400pt
