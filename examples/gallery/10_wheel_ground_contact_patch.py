@@ -40,7 +40,7 @@ to improve mesh quality when growing prism layers in the region of the contactin
    :width: 600
 
 Image showing the following:
-* Top left: wheel/ground interface. 
+* Top left: wheel/ground interface.
 * Top right: addition of contact patch.
 * Lower left: grouping tolerance at 4 with multiple contact patches.
 * Lower right: grouping tolerance at 20 with merged single contact patch.
