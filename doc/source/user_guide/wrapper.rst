@@ -186,7 +186,7 @@ Patch flow region
 
 *This is a beta feature. API behavior and implementation might change in the future.*
 
-Patch Flow Region creates patching face zonelets for holes below a specified size 
+:class:`Patch Flow Region <ansys.meshing.prime.Wrapper.patch_flow_regions>` creates patching face zonelets for holes below a specified size 
 that exist between regions defined by live and dead material points. You can define
 multiple dead regions but only one live region can be defined.
 :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>`
