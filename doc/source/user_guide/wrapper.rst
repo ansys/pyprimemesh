@@ -186,7 +186,7 @@ Patch flow region
 
 *This is a beta feature. API behavior and implementation might change in the future.*
 
-Patch Flow Region creates patching face zonelets for holes below a specified size 
+:class:`Patch Flow Region <ansys.meshing.prime.Wrapper.patch_flow_regions>` creates patching face zonelets for holes below a specified size 
 that exist between regions defined by live and dead material points. You can define
 multiple dead regions but only one live region can be defined.
 :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>`
@@ -362,50 +362,4 @@ The below example demonstrates how to patch surfaces using dead and live materia
     :width: 400pt
     :align: center
 
-7.	Define the scope to perform patching, two dead regions, hole size and specify the base size to perform patches.
 
-.. code:: python
-
-   dead_region_scope_1 = prime.ScopeDefinition(
-       model=model,
-       part_expression="box",
-   )
-   faces_1 = model.control_data.get_scope_face_zonelets(
-       scope=dead_region_scope,
-       params=prime.ScopeZoneletParams(model),
-   )
-   dead_region_1 = prime.DeadRegion(
-       model=model,
-       face_zonelet_ids=faces_1,
-       dead_material_points=["dead_1"],
-       hole_size=5,
-   )
-   dead_region_scope_2 = prime.ScopeDefinition(
-       model=model,
-       part_expression="sph",
-   )
-   faces_2 = model.control_data.get_scope_face_zonelets(
-       scope=dead_region_scope,
-       params=prime.ScopeZoneletParams(model),
-   )
-   dead_region_2 = prime.DeadRegion(
-       model=model,
-       face_zonelet_ids=faces_2,
-       dead_material_points=["dead_2"],
-       hole_size=15,
-   )
-   patch_params = prime.WrapperPatchFlowRegionsParams(
-       model=model,
-       dead_regions=[dead_region_1, dead_region_2],
-       number_of_threads=12,
-       suggested_part_name="hole_patch_4",
-   )
-   wrapper = prime.Wrapper(model=model)
-   patch_result = wrapper.patch_flow_regions(
-       live_material_point="Fluid",
-       params=patch_params,
-   )
-
-.. figure:: ../images/patchflow_modelex4.png
-    :width: 400pt
-    :align: center
