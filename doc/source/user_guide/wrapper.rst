@@ -190,12 +190,11 @@ The :class:`Patch Flow Region <ansys.meshing.prime.Wrapper.patch_flow_regions>` 
 patching face zonelets for holes below a specified size 
 that exist between regions defined by live and dead material points. You can define
 multiple dead regions but only one live region can be defined.
-The :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>` class
-allows you to specify the base size and dead regions to create the patched surface. 
-The base size  takes the global min size  value, if you do not provide the base size. 
+The :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>` class allows you to specify the base size and dead regions to create the patched surface. 
+When you do not provide the base size, the global minimum size value is used.
 The patched surface is created towards the dead material point region. 
 When you create a patched surface, the mesh created is non-conformal. 
-You may have to perform wrapping to create conformal mesh.
+You may have to perform wrapping to create a conformal mesh.
 
 The following example demonstrates how to patch surfaces using dead and live material points.
 
