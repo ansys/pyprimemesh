@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for LS-DYNA export utilities."""
 
 ########################### [TODO] ##################################
@@ -2171,7 +2193,7 @@ class MaterialProcessor:
 
     Notes
     -----
-    This class is a Beta. Class behavior and implementation may change in future.
+    **This is a beta class**. **The behavior and implementation may change in future**.
     """
 
     __slots__ = (
@@ -2220,7 +2242,7 @@ class MaterialProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
@@ -2267,7 +2289,7 @@ class MaterialProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
@@ -2296,7 +2318,7 @@ class MaterialProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
@@ -2828,7 +2850,7 @@ class DatabaseProcessor:
 
     Notes
     -----
-    This class is a Beta. Class behavior and implementation may change in future.
+    **This is a beta API**. **The behavior and implementation may change in future**.
     """
 
     __slots__ = (
@@ -2882,7 +2904,7 @@ class DatabaseProcessor:
 
         Notes
         -----
-        This function is a Beta. Function behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
         """
         time = self._get_dynamic_analysis_time_period()
         database_keyword = ""

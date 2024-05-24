@@ -927,7 +927,8 @@ class SubtractVolumesParams(CoreObject):
         Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
     keep_cutters: bool, optional
         Option to retain cutter volumes.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
 
@@ -966,7 +967,8 @@ class SubtractVolumesParams(CoreObject):
             Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
         keep_cutters: bool, optional
             Option to retain cutter volumes.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
 
@@ -1073,7 +1075,8 @@ class SubtractVolumesParams(CoreObject):
     @property
     def keep_cutters(self) -> bool:
         """Option to retain cutter volumes.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._keep_cutters
 
@@ -1092,6 +1095,8 @@ class SubtractVolumesResults(CoreObject):
         Error code associated with the volume subtract operation.
     warning_codes: List[WarningCode], optional
         Warning codes associated with the volume subtract operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
 
@@ -1125,6 +1130,8 @@ class SubtractVolumesResults(CoreObject):
             Error code associated with the volume subtract operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the volume subtract operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
 
@@ -1213,6 +1220,8 @@ class SubtractVolumesResults(CoreObject):
     @property
     def warning_codes(self) -> List[WarningCode]:
         """Warning codes associated with the volume subtract operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._warning_codes
 
@@ -1721,29 +1730,52 @@ class FuseParams(CoreObject):
         Model to create a ``FuseParams`` object with default parameters.
     use_absolute_tolerance: bool, optional
         When true, gap tolerance and side tolerance provided are absolute values.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     gap_tolerance: float, optional
         Gap tolerance between faces to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     side_tolerance: float, optional
         Side tolerance for fusing to the side edges.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     check_interior: bool, optional
         When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     fuse_option: FuseOption, optional
         Option for treatment of fused surfaces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     check_orientation: bool, optional
         Option to check face normal orientation during fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     dump_mesh: bool, optional
         Option to dump mesh for debugging.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     local_remesh: bool, optional
         Local remesh of region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     n_layers: int, optional
         Face layers around region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     separate: bool, optional
         Separate region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     angle: float, optional
         Faces zonelets with angle less than the provided value are considered for fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     fuse_edges_only: bool, optional
         Fuse edges only.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``FuseParams`` object with provided parameters.
 
@@ -1805,29 +1837,52 @@ class FuseParams(CoreObject):
             Model to create a ``FuseParams`` object with default parameters.
         use_absolute_tolerance: bool, optional
             When true, gap tolerance and side tolerance provided are absolute values.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         gap_tolerance: float, optional
             Gap tolerance between faces to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         side_tolerance: float, optional
             Side tolerance for fusing to the side edges.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         check_interior: bool, optional
             When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         fuse_option: FuseOption, optional
             Option for treatment of fused surfaces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         check_orientation: bool, optional
             Option to check face normal orientation during fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         dump_mesh: bool, optional
             Option to dump mesh for debugging.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         local_remesh: bool, optional
             Local remesh of region to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         n_layers: int, optional
             Face layers around region to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         separate: bool, optional
             Separate region to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         angle: float, optional
             Faces zonelets with angle less than the provided value are considered for fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         fuse_edges_only: bool, optional
             Fuse edges only.
-            This is a beta parameter. The behavior and name may change in the future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``FuseParams`` object with provided parameters.
 
@@ -1986,6 +2041,8 @@ class FuseParams(CoreObject):
     @property
     def use_absolute_tolerance(self) -> bool:
         """When true, gap tolerance and side tolerance provided are absolute values.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._use_absolute_tolerance
 
@@ -1996,6 +2053,8 @@ class FuseParams(CoreObject):
     @property
     def gap_tolerance(self) -> float:
         """Gap tolerance between faces to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._gap_tolerance
 
@@ -2006,6 +2065,8 @@ class FuseParams(CoreObject):
     @property
     def side_tolerance(self) -> float:
         """Side tolerance for fusing to the side edges.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._side_tolerance
 
@@ -2016,6 +2077,8 @@ class FuseParams(CoreObject):
     @property
     def check_interior(self) -> bool:
         """When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._check_interior
 
@@ -2026,6 +2089,8 @@ class FuseParams(CoreObject):
     @property
     def fuse_option(self) -> FuseOption:
         """Option for treatment of fused surfaces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._fuse_option
 
@@ -2036,6 +2101,8 @@ class FuseParams(CoreObject):
     @property
     def check_orientation(self) -> bool:
         """Option to check face normal orientation during fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._check_orientation
 
@@ -2046,6 +2113,8 @@ class FuseParams(CoreObject):
     @property
     def dump_mesh(self) -> bool:
         """Option to dump mesh for debugging.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._dump_mesh
 
@@ -2056,6 +2125,8 @@ class FuseParams(CoreObject):
     @property
     def local_remesh(self) -> bool:
         """Local remesh of region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._local_remesh
 
@@ -2066,6 +2137,8 @@ class FuseParams(CoreObject):
     @property
     def n_layers(self) -> int:
         """Face layers around region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_layers
 
@@ -2076,6 +2149,8 @@ class FuseParams(CoreObject):
     @property
     def separate(self) -> bool:
         """Separate region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._separate
 
@@ -2086,6 +2161,8 @@ class FuseParams(CoreObject):
     @property
     def angle(self) -> float:
         """Faces zonelets with angle less than the provided value are considered for fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._angle
 
@@ -2096,7 +2173,8 @@ class FuseParams(CoreObject):
     @property
     def fuse_edges_only(self) -> bool:
         """Fuse edges only.
-        This is a beta parameter. The behavior and name may change in the future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._fuse_edges_only
 
@@ -2113,14 +2191,24 @@ class FuseResults(CoreObject):
         Model to create a ``FuseResults`` object with default parameters.
     fused_pairs: int, optional
         Number of face region pairs that were fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     fused_area: float, optional
         Total area of fused regions from both source and target faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     error_code: ErrorCode, optional
         Error code associated with failure of the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     warning_codes: List[WarningCode], optional
         Warning codes associated with the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     intersecting_locations: Iterable[float], optional
         Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``FuseResults`` object with provided parameters.
 
@@ -2161,14 +2249,24 @@ class FuseResults(CoreObject):
             Model to create a ``FuseResults`` object with default parameters.
         fused_pairs: int, optional
             Number of face region pairs that were fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         fused_area: float, optional
             Total area of fused regions from both source and target faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         error_code: ErrorCode, optional
             Error code associated with failure of the fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         intersecting_locations: Iterable[float], optional
             Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``FuseResults`` object with provided parameters.
 
@@ -2271,6 +2369,8 @@ class FuseResults(CoreObject):
     @property
     def fused_pairs(self) -> int:
         """Number of face region pairs that were fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._fused_pairs
 
@@ -2281,6 +2381,8 @@ class FuseResults(CoreObject):
     @property
     def fused_area(self) -> float:
         """Total area of fused regions from both source and target faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._fused_area
 
@@ -2291,6 +2393,8 @@ class FuseResults(CoreObject):
     @property
     def error_code(self) -> ErrorCode:
         """Error code associated with failure of the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code
 
@@ -2301,6 +2405,8 @@ class FuseResults(CoreObject):
     @property
     def warning_codes(self) -> List[WarningCode]:
         """Warning codes associated with the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._warning_codes
 
@@ -2311,6 +2417,8 @@ class FuseResults(CoreObject):
     @property
     def intersecting_locations(self) -> Iterable[float]:
         """Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._intersecting_locations
 

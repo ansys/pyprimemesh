@@ -544,19 +544,24 @@ class ErrorCode(enum.IntEnum):
     """Resolution Factor should be greater than 0 but less than or equal to 1."""
     WRAPPERLEAKINGFLUIDREGIONS = 3444
     """Two or more fluid regions leaking into each other.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE = 3445
     """Hole size specified for dead region should be positive double.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     WRAPPERPATCHFLOWREGIONS_FAILED = 3446
     """Unable to create patch surfaces.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE = 3447
     """Too small hole size provided for dead region.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE = 3448
     """Base size specified for patching should be positive double.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -647,19 +652,24 @@ class ErrorCode(enum.IntEnum):
     """Bad shape properties."""
     AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
     """Autoquadmesher error codes.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     AUTOQUADMESHER_INVALIDMINMAXSIZES = 15001
     """Difference in maximum value and minimum value is negative.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZEROELEMENTSREADFROMCDBFILE = 16500
     """No elements read from CDB file.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZERONODESREADFROMCDBFILE = 16501
     """No nodes read from CDB file.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZEROELEMENTSFORCDBEXPORT = 16600
     """No elements found for cdb export.
-    This is a beta parameter. The behavior and name may change in the future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.
