@@ -196,7 +196,7 @@ The patched surface is created towards the dead material point region.
 When you create a patched surface, the mesh created is non conformal. 
 You may have to perform wrapping to create conformal mesh.
 
-The below example demonstrates how to patch surfaces using dead and live material points.
+The following example demonstrates how to patch surfaces using dead and live material points.
 
 1. Import the model.
 
