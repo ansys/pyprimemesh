@@ -186,14 +186,15 @@ Patch flow region
 
 *This is a beta feature. API behavior and implementation might change in the future.*
 
-The :class:`Patch Flow Region <ansys.meshing.prime.Wrapper.patch_flow_regions>` class creates patching face zonelets for holes below a specified size 
+The :class:`Patch Flow Region <ansys.meshing.prime.Wrapper.patch_flow_regions>` class creates 
+patching face zonelets for holes below a specified size 
 that exist between regions defined by live and dead material points. You can define
 multiple dead regions but only one live region can be defined.
 The :class:`WrapperPatchFlowRegionsParams <ansys.meshing.prime.WrapperPatchFlowRegionsParams>` class
 allows you to specify the base size and dead regions to create the patched surface. 
 The base size  takes the global min size  value, if you do not provide the base size. 
 The patched surface is created towards the dead material point region. 
-When you create a patched surface, the mesh created is non conformal. 
+When you create a patched surface, the mesh created is non-conformal. 
 You may have to perform wrapping to create conformal mesh.
 
 The following example demonstrates how to patch surfaces using dead and live material points.
@@ -260,13 +261,13 @@ The following example demonstrates how to patch surfaces using dead and live mat
 
 4. Define the scope, dead region, live region and specify the hole size, base size to be patched to perform patching.
 
-   The below images shows the defined dead material points and live material points in the model.
+   The following image shows the defined dead material points and live material points in the model.
 
 .. figure:: ../images/patchflow_demo.png
     :width: 400pt
     :align: center
 
-**Case 1**: scope Dead_1, LIVE material points and specify the hole size to perform patching.
+**Case 1**: Scope Dead_1, LIVE material points and specify the hole size to perform patching.
 
 .. code:: python
 
@@ -300,8 +301,7 @@ The following example demonstrates how to patch surfaces using dead and live mat
     :width: 400pt
     :align: center
 
-**Case 2**: scope Dead_2, LIVE material points and specify the hole size and base size to perform patching.
-
+**Case 2**: Scope Dead_2, LIVE material points and specify the hole size and base size to perform patching.
 
 .. code:: python
 
@@ -336,7 +336,7 @@ The following example demonstrates how to patch surfaces using dead and live mat
     :width: 400pt
     :align: center
 
-**Case 3**: scope Dead_1, Dead_2 and LIVE material points and specify the hole size and base size to perform patching.
+**Case 3**: Scope Dead_1, Dead_2 and LIVE material points and specify the hole size and base size to perform patching.
 
 .. code:: python
 
