@@ -228,7 +228,7 @@ The below example demonstrates how to patch surfaces using dead and live materia
    )
    sfparams = model.get_global_sizing_params()
 
-3. Create the material points and define its type.
+3. Create the material points and define the type.
 
 .. code:: python
 
