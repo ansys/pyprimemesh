@@ -80,10 +80,10 @@ Four CAD import routes are available in PyPrimeMesh:
    Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
 
  * ``SpaceClaim``: uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
-   Windows platform supports importing SpaceClaim files.
+   Windows platform supports importing files using the SpaceClaim reader.
 
  * ``Discovery``: uses Discovery to import supported CAD files from the Discovery reader. Only the
-   Windows platform supports importing Discovery files.
+   Windows platform supports importing files using the Discovery reader.
 
  * ``Workbench``: uses Workbench to import supported CAD files from the Workbench reader.
 
@@ -92,19 +92,19 @@ To view the CAD supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
 
 .. note::
-*   Program controlled and SpaceClaim CAD reader routes import JT files containing only faceted data. Workbench and
-    Native CAD reader routes do not support importing JT files containing only faceted data.
+    * Program controlled and SpaceClaim CAD reader routes import JT files containing only faceted data. Workbench and
+      Native CAD reader routes do not support importing JT files containing only faceted data.
 
-*   When deploying scripts using SpaceClaim, Discovery or Workbench CAD reader routes, ensure that the CAD configuration
-    and in-app defaults are consistent in the deployed environment.
+    * When deploying scripts using SpaceClaim, Discovery or Workbench CAD reader routes, ensure that the CAD configuration
+      and in-app defaults are consistent in the deployed environment.
 
-*   You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
-    while installing Ansys Workbench.
+    * You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
+      while installing Ansys Workbench.
 
-*   In order to preserve shared topology the Workbench CAD reader route must be used.
+    * In order to preserve shared topology the Workbench CAD reader route must be used.
 
-*   Patterned name selections are not supported for the SpaceClaim or Discovery CAD reader routes.
-    To import patterned named selections the Workbench CAD reader route can be used.
+    * Patterned name selections are not supported for the SpaceClaim or Discovery CAD reader routes.
+      To import patterned named selections the Workbench CAD reader route can be used.
 
 
 
