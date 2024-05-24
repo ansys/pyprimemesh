@@ -214,7 +214,7 @@ The following example demonstrates how to patch surfaces using dead and live mat
     :width: 400pt
     :align: center
 
-2. Set the global sizing parameters. The base size takes the global min size value, if not specified.
+2. Set the global sizing parameters. If you do not specify the base size, the value for the global minimum size is used.
 
 .. code:: python
 
