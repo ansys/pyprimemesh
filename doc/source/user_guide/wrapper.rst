@@ -336,7 +336,7 @@ The following example demonstrates how to patch surfaces using dead and live mat
     :width: 400pt
     :align: center
 
-**Case 3**: Scope Dead_1, Dead_2 and LIVE material points and specify the hole size and base size to perform patching.
+**Case 3**: scope Dead_1, Dead_2 and LIVE material points and specify the hole size and base size to perform patching.
 
 .. code:: python
 
