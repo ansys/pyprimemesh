@@ -32,7 +32,7 @@ There are three major operations for zonelet connections:
 - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` method allows you to join
   a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
-.. figure:: ../images/connect_stitch.png
+.. figure:: ../images/connect_join.png
     :width: 200pt
     :align: center
 
@@ -164,24 +164,38 @@ To perform Fuse operation,
 .. figure:: ../images/fuse.png
     :width: 200pt
     :align: center
+
 2.	Enable the fuse parameters as per your requirement. When absolute_tolerance is True, 
     provides the gap tolerance or side tolerance value as absolute value.
 
-.. code-block:: python
+   .. code-block:: python
 
-    connect = prime.Connect(model)
-    params =  prime.FuseParams(model = model)
-    params.use_absolute_tolerance = True
-    params.gap_tolerance = 20
-    params.fuse_option = prime.FuseOption.TRIMONESIDE
-    params.check_interior = True
-    params.check_orientation = False
-    params.local_remesh = True
-    params.separate = True
-    params.dump_mesh = False
-    params.n_layers = 2
-    params.angle = 45
+       connect = prime.Connect(model)
+       params =  prime.FuseParams(model = model)
+       params.use_absolute_tolerance = True
+       params.gap_tolerance = 20
+       params.fuse_option = prime.FuseOption.TRIMONESIDE
+       params.check_interior = True
+       params.check_orientation = False
+       params.local_remesh = True
+       params.separate = True
+       params.dump_mesh = False
+       params.n_layers = 2
+       params.angle = 45
 
+fuse_option specifies how to treat the surface when performing fuse operation. Here, TRIMONESIDE option deletes the faces to be fused on one side and merges the nodes in the middle location. When local_remesh is True, meshes the fused region after performing fuse operation. n_layers specify the number of layers around the region to be fused. When separate is True, separates the fused region.
+
+3.	Fuse the face zonelets using the given parameters.
+
+   .. code-block:: python
+
+      result = connect.fuse_face_zonelets(part.id, source_face_zonelet_ids,target_face_zonelet_ids, params)
+      g = Graphics(model)
+      g()
+
+  .. figure:: ../images/connect_fuse.png
+    :width: 200pt
+    :align: center
 
 =========================
 Topology-based connection
