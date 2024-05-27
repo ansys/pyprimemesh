@@ -18,12 +18,30 @@ There are three major operations for zonelet connections:
 - The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` method allows you
   to intersect the face zonelets of the part along the intersecting faces. 
 
+.. figure:: ../images/connect_intersect.png
+    :width: 200pt
+    :align: center
+
 - The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` method allows you to
-  stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets. 
+  stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets.
+
+.. figure:: ../images/connect_stitch.png
+    :width: 200pt
+    :align: center
 
 - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` method allows you to join
   a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
+.. figure:: ../images/connect_stitch.png
+    :width: 200pt
+    :align: center
+
+-	The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` method allows you to 
+  perform fuse between overlapping face zonelets within a single part.
+
+-	The :func:`Connect.merge_boundary_nodes() <ansys.meshing.prime.Connect.merge_boundary_nodes>` method allows you
+  to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with
+  the given parameters.
 
 .. note::
     Connect operations support only computational mesh, which is mesh with reasonable size changes and quality.
@@ -137,6 +155,32 @@ The following example shows how to accomplish these tasks:
        n_free_edges :  448
        n_multi_edges :  9
        n_duplicate_faces :  0
+
+To perform Fuse operation,
+
+1. Connect face zonelets in the model using fuse operation. You can apply Fuse on overlapping faces
+   within  a single part. You can colocate, merge, or remove fused surfaces as per your requirement.
+
+.. figure:: ../images/fuse.png
+    :width: 200pt
+    :align: center
+2.	Enable the fuse parameters as per your requirement. When absolute_tolerance is True, 
+    provides the gap tolerance or side tolerance value as absolute value.
+
+.. code-block:: python
+
+    connect = prime.Connect(model)
+    params =  prime.FuseParams(model = model)
+    params.use_absolute_tolerance = True
+    params.gap_tolerance = 20
+    params.fuse_option = prime.FuseOption.TRIMONESIDE
+    params.check_interior = True
+    params.check_orientation = False
+    params.local_remesh = True
+    params.separate = True
+    params.dump_mesh = False
+    params.n_layers = 2
+    params.angle = 45
 
 
 =========================
