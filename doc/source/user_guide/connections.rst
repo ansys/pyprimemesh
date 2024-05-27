@@ -165,8 +165,8 @@ To perform Fuse operation,
     :width: 200pt
     :align: center
 
-2.	Enable the fuse parameters as per your requirement. When absolute_tolerance is True, 
-    provides the gap tolerance or side tolerance value as absolute value.
+2. Enable the fuse parameters as per your requirement. When absolute_tolerance is True, 
+   provides the gap tolerance or side tolerance value as absolute value.
 
    .. code-block:: python
 
@@ -189,7 +189,9 @@ fuse_option specifies how to treat the surface when performing fuse operation. H
 
    .. code-block:: python
 
-      result = connect.fuse_face_zonelets(part.id, source_face_zonelet_ids,target_face_zonelet_ids, params)
+      result = connect.fuse_face_zonelets(
+          part.id, source_face_zonelet_ids,target_face_zonelet_ids, params
+      )
       g = Graphics(model)
       g()
 
