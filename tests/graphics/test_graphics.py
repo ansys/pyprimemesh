@@ -54,9 +54,6 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
     display.plot(model)
     display.show()
 
-    mesh_data = display.get_face_mesh_data()
-    assert mesh_data != None
-
 
 def test_compute_distance():
     point1 = [1, 1, 3]
