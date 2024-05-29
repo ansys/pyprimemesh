@@ -26,7 +26,10 @@ from pathlib import Path
 import pyvista as pv
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.core.mesh import Mesh
+from ansys.meshing.prime.core.mesh import (
+    compute_distance,
+    compute_face_list_from_structured_nodes,
+)
 from ansys.meshing.prime.graphics import PrimePlotter
 
 pv.OFF_SCREEN = True
@@ -58,7 +61,7 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
 def test_compute_distance():
     point1 = [1, 1, 3]
     point2 = [1, 1, 1]
-    assert Mesh().compute_distance(point1=point1, point2=point2) == 2.0
+    assert compute_distance(point1=point1, point2=point2) == 2.0
 
 
 def test_compute_face_list():
@@ -66,5 +69,5 @@ def test_compute_face_list():
     dim.append(2)
     dim.append(2)
     dim.append(2)
-    flist = Mesh().compute_face_list_from_structured_nodes(dim)
+    flist = compute_face_list_from_structured_nodes(dim)
     assert len(flist) == 30

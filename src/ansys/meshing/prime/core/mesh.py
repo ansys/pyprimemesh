@@ -115,6 +115,68 @@ class DisplayMeshInfo:
         self.display_mesh_type = display_mesh_type
 
 
+def compute_distance(point1, point2) -> float:
+    """Compute the distance between two points.
+
+    Parameters
+    ----------
+    point1 : list
+        List with the coordinates of the first point.
+    point2 : list
+        List with the coordinates of the second point.
+
+    Returns
+    -------
+    float
+        Distance between the two points.
+    """
+    dist = np.linalg.norm(np.array(point2) - np.array(point1))
+    return dist
+
+
+def compute_face_list_from_structured_nodes(dim):
+    """Compute the distances from the nodes.
+
+    Parameters
+    ----------
+    dim : List[int]
+        List with the number of elements in each dimension.
+
+    Returns
+    -------
+    List
+        List with the faces.
+    """
+    flist = []
+    for w in range(dim[2]):
+        for u in range(dim[0] - 1):
+            for v in range(dim[1] - 1):
+                flist.append(4)
+                flist.append(u + v * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + 1 + v * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + 1 + (v + 1) * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + (v + 1) * dim[0] + w * dim[0] * dim[1])
+
+    for v in range(dim[1]):
+        for u in range(dim[0] - 1):
+            for w in range(dim[2] - 1):
+                flist.append(4)
+                flist.append(u + v * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + 1 + v * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + 1 + v * dim[0] + (w + 1) * dim[0] * dim[1])
+                flist.append(u + v * dim[0] + (w + 1) * dim[0] * dim[1])
+
+    for u in range(dim[0]):
+        for v in range(dim[1] - 1):
+            for w in range(dim[2] - 1):
+                flist.append(4)
+                flist.append(u + v * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + (v + 1) * dim[0] + w * dim[0] * dim[1])
+                flist.append(u + (v + 1) * dim[0] + (w + 1) * dim[0] * dim[1])
+                flist.append(u + v * dim[0] + (w + 1) * dim[0] * dim[1])
+    return flist
+
+
 class Mesh(MeshInfo):
     """Process the mesh for visualization in the GUI.
 
@@ -136,66 +198,6 @@ class Mesh(MeshInfo):
     def model(self):
         """Return the model."""
         return self._model
-
-    def compute_distance(self, point1, point2) -> float:
-        """Compute the distance between two points.
-
-        Parameters
-        ----------
-        point1 : list
-            List with the coordinates of the first point.
-        point2 : list
-            List with the coordinates of the second point.
-
-        Returns
-        -------
-        float
-            Distance between the two points.
-        """
-        dist = np.linalg.norm(np.array(point2) - np.array(point1))
-        return dist
-
-    def compute_face_list_from_structured_nodes(self, dim):
-        """Compute the distances from the nodes.
-
-        Parameters
-        ----------
-        dim : List[int]
-            List with the number of elements in each dimension.
-
-        Returns
-        -------
-        List
-            List with the faces.
-        """
-        flist = []
-        for w in range(dim[2]):
-            for u in range(dim[0] - 1):
-                for v in range(dim[1] - 1):
-                    flist.append(4)
-                    flist.append(u + v * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + 1 + v * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + 1 + (v + 1) * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + (v + 1) * dim[0] + w * dim[0] * dim[1])
-
-        for v in range(dim[1]):
-            for u in range(dim[0] - 1):
-                for w in range(dim[2] - 1):
-                    flist.append(4)
-                    flist.append(u + v * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + 1 + v * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + 1 + v * dim[0] + (w + 1) * dim[0] * dim[1])
-                    flist.append(u + v * dim[0] + (w + 1) * dim[0] * dim[1])
-
-        for u in range(dim[0]):
-            for v in range(dim[1] - 1):
-                for w in range(dim[2] - 1):
-                    flist.append(4)
-                    flist.append(u + v * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + (v + 1) * dim[0] + w * dim[0] * dim[1])
-                    flist.append(u + (v + 1) * dim[0] + (w + 1) * dim[0] * dim[1])
-                    flist.append(u + v * dim[0] + (w + 1) * dim[0] * dim[1])
-        return flist
 
     def get_face_color(self, part: Part, model_type: ColorByType = ColorByType.ZONE):
         """Get the colors of faces.
