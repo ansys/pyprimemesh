@@ -47,7 +47,7 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
         prism_layers=3,
     )
 
-    display = PrimePlotter(model)
+    display = PrimePlotter()
     display.plot(model)
     display.show()
 
