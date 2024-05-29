@@ -8,6 +8,8 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
 
+os.environ["PYANSYS_VISUALIZER_DOC_MODE"] = "true"
+
 # Project information
 project = 'ansys-meshing-prime'
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
