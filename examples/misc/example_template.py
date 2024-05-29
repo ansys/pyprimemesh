@@ -83,7 +83,7 @@ After this preamble is the first code block:
 """
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 # Start Ansys Prime Server instance and get client model
 prime_client = prime.launch_prime()
@@ -132,8 +132,9 @@ mesh_util.volume_mesh(
 # ~~~~~~~~~~~~~~~
 # If you display graphics, the result is auto-generated and
 # rendered on the page:
-display = Graphics(model)
-display()
+display = PrimePlotter(model)
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Make a pull request

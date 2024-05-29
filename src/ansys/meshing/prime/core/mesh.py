@@ -137,6 +137,24 @@ class Mesh(MeshInfo):
         """Return the model."""
         return self._model
 
+    def compute_distance(self, point1, point2) -> float:
+        """Compute the distance between two points.
+
+        Parameters
+        ----------
+        point1 : list
+            List with the coordinates of the first point.
+        point2 : list
+            List with the coordinates of the second point.
+
+        Returns
+        -------
+        float
+            Distance between the two points.
+        """
+        dist = np.linalg.norm(np.array(point2) - np.array(point1))
+        return dist
+
     def compute_face_list_from_structured_nodes(self, dim):
         """Compute the distances from the nodes.
 

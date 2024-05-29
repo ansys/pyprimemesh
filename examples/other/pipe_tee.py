@@ -64,7 +64,7 @@ Procedure
 import os
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 # Start prime and get the model.
 prime_client = prime.launch_prime()
@@ -85,8 +85,9 @@ mesh_util.read(cad_file)
 
 # Let us see what we read from the file. The file is an unmeshed
 # part as you would get after you imported from CAD.
-display = Graphics(model)
-display()
+display = PrimePlotter()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Mesh for structural
@@ -106,7 +107,9 @@ if toDelete:
     model.delete_parts(toDelete)
 
 # Display structural mesh.
-display(update=True)
+display = PrimePlotter()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Write mesh for structural thermal analysis.
@@ -126,7 +129,10 @@ mesh_util.read(cad_file)
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 
 # View only the wrap.
-display(update=True, scope=prime.ScopeDefinition(model=model, part_expression=wrap.name))
+display = PrimePlotter()
+display.plot(model, scope=prime.ScopeDefinition(model=model, part_expression=wrap.name))
+display.show()
+
 
 # Delete unwanted parts to leave only wrap.
 toDelete = [part.id for part in model.parts if part.name != wrap.name]
@@ -158,7 +164,9 @@ mesh_util.volume_mesh(
 
 # Display mesh without unwanted EdgeZonelets. You can clearly see the
 # prism layers that were specified by the Prism control.
-display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display = PrimePlotter()
+display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display.show()
 
 ###############################################################################
 # Write a cas file for use in the Fluent solver

@@ -26,12 +26,8 @@ from pathlib import Path
 import pyvista as pv
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
-from ansys.meshing.prime.graphics.graphics import (
-    Picker,
-    compute_distance,
-    compute_face_list_from_structured_nodes,
-)
+from ansys.meshing.prime.core.mesh import Mesh
+from ansys.meshing.prime.graphics import PrimePlotter
 
 pv.OFF_SCREEN = True
 IMAGE_RESULTS_DIR = Path(Path(__file__).parent, "image_cache", "results")
@@ -51,40 +47,24 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
         prism_layers=3,
     )
 
-    display = Graphics(model)
+    display = PrimePlotter(model)
+    display.plot(model)
+    display.show()
 
     mesh_data = display.get_face_mesh_data()
     assert mesh_data != None
-
-    plotter = pv.Plotter()
-
-    # test picker
-    picker = Picker(plotter, display)
-    selections = picker.selections
-    picker.clear_selection()
-    assert len(selections) == 0
-    picker.ignore(ignore_pick=True)
-    assert picker._ignore == True
-
-    # Can't run picker calls, but ideally we should test it
-    # picker()
-
-    # test graphics class
-    # can't test most callback functions automatically
-    display()
 
 
 def test_compute_distance():
     point1 = [1, 1, 3]
     point2 = [1, 1, 1]
-    assert compute_distance(point1=point1, point2=point2) == 2.0
+    assert Mesh().compute_distance(point1=point1, point2=point2) == 2.0
 
 
 def test_compute_face_list():
     dim = []
-    nodes = None
     dim.append(2)
     dim.append(2)
     dim.append(2)
-    flist = compute_face_list_from_structured_nodes(dim)
+    flist = Mesh().compute_face_list_from_structured_nodes(dim)
     assert len(flist) == 30
