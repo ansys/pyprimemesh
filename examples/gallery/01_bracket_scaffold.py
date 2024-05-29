@@ -154,7 +154,7 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 
 # Display the mesh
 pl = PrimePlotter()
-pl.add(model)
+pl.plot(model)
 pl.show()
 
 ###############################################################################
