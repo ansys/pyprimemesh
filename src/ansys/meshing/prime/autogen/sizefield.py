@@ -9,6 +9,12 @@ class SizeField(CoreObject):
     """The size field is computed based on the size control defined.
 
     You can remesh surfaces and edges based on the size field.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create SizeField object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -46,9 +52,9 @@ class SizeField(CoreObject):
 
         """
         if not isinstance(size_control_ids, Iterable):
-            raise TypeError("Invalid argument type passed for size_control_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'size_control_ids'. Valid argument type is Iterable[int].")
         if not isinstance(volumetric_sizefield_params, VolumetricSizeFieldComputeParams):
-            raise TypeError("Invalid argument type passed for volumetric_sizefield_params, valid argument type is VolumetricSizeFieldComputeParams.")
+            raise TypeError("Invalid argument type passed for 'volumetric_sizefield_params'. Valid argument type is VolumetricSizeFieldComputeParams.")
         args = {"size_control_ids" : size_control_ids,
         "volumetric_sizefield_params" : volumetric_sizefield_params._jsonify()}
         command_name = "PrimeMesh::SizeField/ComputeVolumetric"

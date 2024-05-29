@@ -9,6 +9,12 @@ class VolumeSearch(CoreObject):
     """VolumeSearch allows you to check volume mesh quality.
 
     VolumeSearch performs volume mesh quality check based on different cell quality measures.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeSearch object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -53,7 +59,7 @@ class VolumeSearch(CoreObject):
 
         """
         if not isinstance(params, VolumeQualitySummaryParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is VolumeQualitySummaryParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VolumeQualitySummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeSearch/GetVolumeQualitySummary"
         self._model._print_logs_before_command("get_volume_quality_summary", args)

@@ -36,6 +36,27 @@ class ScopeExpressionType(enum.IntEnum):
 
 class ScopeDefinition(CoreObject):
     """ScopeDefinition to scope entities based on entity and evaluation type.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScopeDefinition`` object with default parameters.
+    entity_type: ScopeEntity, optional
+        Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+    evaluation_type: ScopeEvaluationType, optional
+        Evaluation type to scope entities. The default is set to labels.
+    part_expression: str, optional
+        Part expression to scope parts while evaluating scope.
+    label_expression: str, optional
+        Label expression to scope entities when evaluation type is set to labels.
+    zone_expression: str, optional
+        Zone expression to scope entities when evaluation type is set to zones.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScopeDefinition`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scope_definition = prime.ScopeDefinition(model = model)
     """
     _default_params = {}
 
@@ -62,12 +83,12 @@ class ScopeDefinition(CoreObject):
             zone_expression: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ScopeDefinition.
+        """Initialize a ``ScopeDefinition`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ScopeDefinition object with default parameters.
+            Model to create a ``ScopeDefinition`` object with default parameters.
         entity_type: ScopeEntity, optional
             Entity type for which scope needs to be evaluated. The default is set to face zonelets.
         evaluation_type: ScopeEvaluationType, optional
@@ -79,7 +100,7 @@ class ScopeDefinition(CoreObject):
         zone_expression: str, optional
             Zone expression to scope entities when evaluation type is set to zones.
         json_data: dict, optional
-            JSON dictionary to create a ScopeDefinition object with provided parameters.
+            JSON dictionary to create a ``ScopeDefinition`` object with provided parameters.
 
         Examples
         --------
@@ -103,7 +124,7 @@ class ScopeDefinition(CoreObject):
                     zone_expression)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ScopeDefinition")
                     json_data = param_json["ScopeDefinition"] if "ScopeDefinition" in param_json else {}
@@ -127,7 +148,7 @@ class ScopeDefinition(CoreObject):
             part_expression: str = None,
             label_expression: str = None,
             zone_expression: str = None):
-        """Set the default values of ScopeDefinition.
+        """Set the default values of the ``ScopeDefinition`` object.
 
         Parameters
         ----------
@@ -147,7 +168,7 @@ class ScopeDefinition(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ScopeDefinition.
+        """Print the default values of ``ScopeDefinition`` object.
 
         Examples
         --------
@@ -229,6 +250,25 @@ class ScopeDefinition(CoreObject):
 
 class LeakPreventionParams(CoreObject):
     """LeakPreventionParams defines leakage prevention control parameters for wrapper.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``LeakPreventionParams`` object with default parameters.
+    material_points: List[str], optional
+        Material points used for leak prevention control.
+    scope: ScopeDefinition, optional
+        Scope used for leak prevention control.
+    max_hole_size: float, optional
+        Maximum hole size to prevent leakage into region.
+    n_expansion_layers: int, optional
+        Number of layers to expand leaking region.
+    json_data: dict, optional
+        JSON dictionary to create a ``LeakPreventionParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> leak_prevention_params = prime.LeakPreventionParams(model = model)
     """
     _default_params = {}
 
@@ -252,12 +292,12 @@ class LeakPreventionParams(CoreObject):
             n_expansion_layers: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the LeakPreventionParams.
+        """Initialize a ``LeakPreventionParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a LeakPreventionParams object with default parameters.
+            Model to create a ``LeakPreventionParams`` object with default parameters.
         material_points: List[str], optional
             Material points used for leak prevention control.
         scope: ScopeDefinition, optional
@@ -267,7 +307,7 @@ class LeakPreventionParams(CoreObject):
         n_expansion_layers: int, optional
             Number of layers to expand leaking region.
         json_data: dict, optional
-            JSON dictionary to create a LeakPreventionParams object with provided parameters.
+            JSON dictionary to create a ``LeakPreventionParams`` object with provided parameters.
 
         Examples
         --------
@@ -289,7 +329,7 @@ class LeakPreventionParams(CoreObject):
                     n_expansion_layers)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "LeakPreventionParams")
                     json_data = param_json["LeakPreventionParams"] if "LeakPreventionParams" in param_json else {}
@@ -311,7 +351,7 @@ class LeakPreventionParams(CoreObject):
             scope: ScopeDefinition = None,
             max_hole_size: float = None,
             n_expansion_layers: int = None):
-        """Set the default values of LeakPreventionParams.
+        """Set the default values of the ``LeakPreventionParams`` object.
 
         Parameters
         ----------
@@ -329,7 +369,7 @@ class LeakPreventionParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of LeakPreventionParams.
+        """Print the default values of ``LeakPreventionParams`` object.
 
         Examples
         --------
@@ -399,6 +439,21 @@ class LeakPreventionParams(CoreObject):
 
 class SetLeakPreventionsResults(CoreObject):
     """Results associated with set leak preventions.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetLeakPreventionsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set leak preventions.
+    ids: Iterable[int], optional
+        Ids of added leak prevention controls.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetLeakPreventionsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_leak_preventions_results = prime.SetLeakPreventionsResults(model = model)
     """
     _default_params = {}
 
@@ -416,18 +471,18 @@ class SetLeakPreventionsResults(CoreObject):
             ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetLeakPreventionsResults.
+        """Initialize a ``SetLeakPreventionsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetLeakPreventionsResults object with default parameters.
+            Model to create a ``SetLeakPreventionsResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the set leak preventions.
         ids: Iterable[int], optional
             Ids of added leak prevention controls.
         json_data: dict, optional
-            JSON dictionary to create a SetLeakPreventionsResults object with provided parameters.
+            JSON dictionary to create a ``SetLeakPreventionsResults`` object with provided parameters.
 
         Examples
         --------
@@ -445,7 +500,7 @@ class SetLeakPreventionsResults(CoreObject):
                     ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetLeakPreventionsResults")
                     json_data = param_json["SetLeakPreventionsResults"] if "SetLeakPreventionsResults" in param_json else {}
@@ -463,7 +518,7 @@ class SetLeakPreventionsResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             ids: Iterable[int] = None):
-        """Set the default values of SetLeakPreventionsResults.
+        """Set the default values of the ``SetLeakPreventionsResults`` object.
 
         Parameters
         ----------
@@ -477,7 +532,7 @@ class SetLeakPreventionsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetLeakPreventionsResults.
+        """Print the default values of ``SetLeakPreventionsResults`` object.
 
         Examples
         --------
@@ -523,6 +578,23 @@ class SetLeakPreventionsResults(CoreObject):
 
 class ContactPreventionParams(CoreObject):
     """ContactPreventionParams defines contact prevention control parameters for wrapper.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ContactPreventionParams`` object with default parameters.
+    source_scope: ScopeDefinition, optional
+        Source scope used for contact prevention control.
+    target_scope: ScopeDefinition, optional
+        Target scope used for contact prevention control.
+    size: float, optional
+        Minimum gap size (gap/4) to resolve contact between source and target.
+    json_data: dict, optional
+        JSON dictionary to create a ``ContactPreventionParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> contact_prevention_params = prime.ContactPreventionParams(model = model)
     """
     _default_params = {}
 
@@ -543,12 +615,12 @@ class ContactPreventionParams(CoreObject):
             size: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ContactPreventionParams.
+        """Initialize a ``ContactPreventionParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ContactPreventionParams object with default parameters.
+            Model to create a ``ContactPreventionParams`` object with default parameters.
         source_scope: ScopeDefinition, optional
             Source scope used for contact prevention control.
         target_scope: ScopeDefinition, optional
@@ -556,7 +628,7 @@ class ContactPreventionParams(CoreObject):
         size: float, optional
             Minimum gap size (gap/4) to resolve contact between source and target.
         json_data: dict, optional
-            JSON dictionary to create a ContactPreventionParams object with provided parameters.
+            JSON dictionary to create a ``ContactPreventionParams`` object with provided parameters.
 
         Examples
         --------
@@ -576,7 +648,7 @@ class ContactPreventionParams(CoreObject):
                     size)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ContactPreventionParams")
                     json_data = param_json["ContactPreventionParams"] if "ContactPreventionParams" in param_json else {}
@@ -596,7 +668,7 @@ class ContactPreventionParams(CoreObject):
             source_scope: ScopeDefinition = None,
             target_scope: ScopeDefinition = None,
             size: float = None):
-        """Set the default values of ContactPreventionParams.
+        """Set the default values of the ``ContactPreventionParams`` object.
 
         Parameters
         ----------
@@ -612,7 +684,7 @@ class ContactPreventionParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ContactPreventionParams.
+        """Print the default values of ``ContactPreventionParams`` object.
 
         Examples
         --------
@@ -670,6 +742,21 @@ class ContactPreventionParams(CoreObject):
 
 class SetContactPreventionsResults(CoreObject):
     """Results associated with set contact preventions.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetContactPreventionsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set contact preventions.
+    ids: Iterable[int], optional
+        Ids of added contact prevention controls.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetContactPreventionsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_contact_preventions_results = prime.SetContactPreventionsResults(model = model)
     """
     _default_params = {}
 
@@ -687,18 +774,18 @@ class SetContactPreventionsResults(CoreObject):
             ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetContactPreventionsResults.
+        """Initialize a ``SetContactPreventionsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetContactPreventionsResults object with default parameters.
+            Model to create a ``SetContactPreventionsResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the set contact preventions.
         ids: Iterable[int], optional
             Ids of added contact prevention controls.
         json_data: dict, optional
-            JSON dictionary to create a SetContactPreventionsResults object with provided parameters.
+            JSON dictionary to create a ``SetContactPreventionsResults`` object with provided parameters.
 
         Examples
         --------
@@ -716,7 +803,7 @@ class SetContactPreventionsResults(CoreObject):
                     ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetContactPreventionsResults")
                     json_data = param_json["SetContactPreventionsResults"] if "SetContactPreventionsResults" in param_json else {}
@@ -734,7 +821,7 @@ class SetContactPreventionsResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             ids: Iterable[int] = None):
-        """Set the default values of SetContactPreventionsResults.
+        """Set the default values of the ``SetContactPreventionsResults`` object.
 
         Parameters
         ----------
@@ -748,7 +835,7 @@ class SetContactPreventionsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetContactPreventionsResults.
+        """Print the default values of ``SetContactPreventionsResults`` object.
 
         Examples
         --------
@@ -794,6 +881,23 @@ class SetContactPreventionsResults(CoreObject):
 
 class FeatureRecoveryParams(CoreObject):
     """FeatureRecoveryParams defines feature recovery control parameters for wrapper.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FeatureRecoveryParams`` object with default parameters.
+    scope: ScopeDefinition, optional
+        Scope used for feature recovery control.
+    enable_feature_octree_refinement: bool, optional
+        Checks whether to perform octree refinement at feature edges.
+    size_at_features: float, optional
+        Refinement size at features.
+    json_data: dict, optional
+        JSON dictionary to create a ``FeatureRecoveryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> feature_recovery_params = prime.FeatureRecoveryParams(model = model)
     """
     _default_params = {}
 
@@ -814,12 +918,12 @@ class FeatureRecoveryParams(CoreObject):
             size_at_features: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FeatureRecoveryParams.
+        """Initialize a ``FeatureRecoveryParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FeatureRecoveryParams object with default parameters.
+            Model to create a ``FeatureRecoveryParams`` object with default parameters.
         scope: ScopeDefinition, optional
             Scope used for feature recovery control.
         enable_feature_octree_refinement: bool, optional
@@ -827,7 +931,7 @@ class FeatureRecoveryParams(CoreObject):
         size_at_features: float, optional
             Refinement size at features.
         json_data: dict, optional
-            JSON dictionary to create a FeatureRecoveryParams object with provided parameters.
+            JSON dictionary to create a ``FeatureRecoveryParams`` object with provided parameters.
 
         Examples
         --------
@@ -847,7 +951,7 @@ class FeatureRecoveryParams(CoreObject):
                     size_at_features)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FeatureRecoveryParams")
                     json_data = param_json["FeatureRecoveryParams"] if "FeatureRecoveryParams" in param_json else {}
@@ -867,7 +971,7 @@ class FeatureRecoveryParams(CoreObject):
             scope: ScopeDefinition = None,
             enable_feature_octree_refinement: bool = None,
             size_at_features: float = None):
-        """Set the default values of FeatureRecoveryParams.
+        """Set the default values of the ``FeatureRecoveryParams`` object.
 
         Parameters
         ----------
@@ -883,7 +987,7 @@ class FeatureRecoveryParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FeatureRecoveryParams.
+        """Print the default values of ``FeatureRecoveryParams`` object.
 
         Examples
         --------
@@ -941,6 +1045,21 @@ class FeatureRecoveryParams(CoreObject):
 
 class SetFeatureRecoveriesResults(CoreObject):
     """Results associated with set feature recoveries.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetFeatureRecoveriesResults`` object with default parameters.
+    ids: Iterable[int], optional
+        Ids of added feature recovery controls.
+    error_code: ErrorCode, optional
+        Error code associated with the set feature recoveries.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetFeatureRecoveriesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_feature_recoveries_results = prime.SetFeatureRecoveriesResults(model = model)
     """
     _default_params = {}
 
@@ -958,18 +1077,18 @@ class SetFeatureRecoveriesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetFeatureRecoveriesResults.
+        """Initialize a ``SetFeatureRecoveriesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetFeatureRecoveriesResults object with default parameters.
+            Model to create a ``SetFeatureRecoveriesResults`` object with default parameters.
         ids: Iterable[int], optional
             Ids of added feature recovery controls.
         error_code: ErrorCode, optional
             Error code associated with the set feature recoveries.
         json_data: dict, optional
-            JSON dictionary to create a SetFeatureRecoveriesResults object with provided parameters.
+            JSON dictionary to create a ``SetFeatureRecoveriesResults`` object with provided parameters.
 
         Examples
         --------
@@ -987,7 +1106,7 @@ class SetFeatureRecoveriesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetFeatureRecoveriesResults")
                     json_data = param_json["SetFeatureRecoveriesResults"] if "SetFeatureRecoveriesResults" in param_json else {}
@@ -1005,7 +1124,7 @@ class SetFeatureRecoveriesResults(CoreObject):
     def set_default(
             ids: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of SetFeatureRecoveriesResults.
+        """Set the default values of the ``SetFeatureRecoveriesResults`` object.
 
         Parameters
         ----------
@@ -1019,7 +1138,7 @@ class SetFeatureRecoveriesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetFeatureRecoveriesResults.
+        """Print the default values of ``SetFeatureRecoveriesResults`` object.
 
         Examples
         --------
@@ -1065,6 +1184,17 @@ class SetFeatureRecoveriesResults(CoreObject):
 
 class ScopeZoneletParams(CoreObject):
     """Parameters used to get the scoped face or edge zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScopeZoneletParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScopeZoneletParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scope_zonelet_params = prime.ScopeZoneletParams(model = model)
     """
     _default_params = {}
 
@@ -1077,14 +1207,14 @@ class ScopeZoneletParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ScopeZoneletParams.
+        """Initialize a ``ScopeZoneletParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ScopeZoneletParams object with default parameters.
+            Model to create a ``ScopeZoneletParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a ScopeZoneletParams object with provided parameters.
+            JSON dictionary to create a ``ScopeZoneletParams`` object with provided parameters.
 
         Examples
         --------
@@ -1098,7 +1228,7 @@ class ScopeZoneletParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ScopeZoneletParams")
                     json_data = param_json["ScopeZoneletParams"] if "ScopeZoneletParams" in param_json else {}
@@ -1112,7 +1242,7 @@ class ScopeZoneletParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of ScopeZoneletParams.
+        """Set the default values of the ``ScopeZoneletParams`` object.
 
         """
         args = locals()
@@ -1120,7 +1250,7 @@ class ScopeZoneletParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ScopeZoneletParams.
+        """Print the default values of ``ScopeZoneletParams`` object.
 
         Examples
         --------
@@ -1144,6 +1274,21 @@ class ScopeZoneletParams(CoreObject):
 
 class SetScopeResults(CoreObject):
     """Results associated with the set scope operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetScopeResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set scope.
+    warning_code: WarningCode, optional
+        Warning code associated with the set scope.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetScopeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_scope_results = prime.SetScopeResults(model = model)
     """
     _default_params = {}
 
@@ -1161,18 +1306,18 @@ class SetScopeResults(CoreObject):
             warning_code: WarningCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetScopeResults.
+        """Initialize a ``SetScopeResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetScopeResults object with default parameters.
+            Model to create a ``SetScopeResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the set scope.
         warning_code: WarningCode, optional
             Warning code associated with the set scope.
         json_data: dict, optional
-            JSON dictionary to create a SetScopeResults object with provided parameters.
+            JSON dictionary to create a ``SetScopeResults`` object with provided parameters.
 
         Examples
         --------
@@ -1190,7 +1335,7 @@ class SetScopeResults(CoreObject):
                     warning_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetScopeResults")
                     json_data = param_json["SetScopeResults"] if "SetScopeResults" in param_json else {}
@@ -1208,7 +1353,7 @@ class SetScopeResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_code: WarningCode = None):
-        """Set the default values of SetScopeResults.
+        """Set the default values of the ``SetScopeResults`` object.
 
         Parameters
         ----------
@@ -1222,7 +1367,7 @@ class SetScopeResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetScopeResults.
+        """Print the default values of ``SetScopeResults`` object.
 
         Examples
         --------
@@ -1268,6 +1413,21 @@ class SetScopeResults(CoreObject):
 
 class SetParamsResults(CoreObject):
     """Results associated with the set parameters operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetParamsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the set parameters operation.
+    warning_code: WarningCode, optional
+        Warning code associated with the set parameters operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetParamsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_params_results = prime.SetParamsResults(model = model)
     """
     _default_params = {}
 
@@ -1285,18 +1445,18 @@ class SetParamsResults(CoreObject):
             warning_code: WarningCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetParamsResults.
+        """Initialize a ``SetParamsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetParamsResults object with default parameters.
+            Model to create a ``SetParamsResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the set parameters operation.
         warning_code: WarningCode, optional
             Warning code associated with the set parameters operation.
         json_data: dict, optional
-            JSON dictionary to create a SetParamsResults object with provided parameters.
+            JSON dictionary to create a ``SetParamsResults`` object with provided parameters.
 
         Examples
         --------
@@ -1314,7 +1474,7 @@ class SetParamsResults(CoreObject):
                     warning_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetParamsResults")
                     json_data = param_json["SetParamsResults"] if "SetParamsResults" in param_json else {}
@@ -1332,7 +1492,7 @@ class SetParamsResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_code: WarningCode = None):
-        """Set the default values of SetParamsResults.
+        """Set the default values of the ``SetParamsResults`` object.
 
         Parameters
         ----------
@@ -1346,7 +1506,7 @@ class SetParamsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetParamsResults.
+        """Print the default values of ``SetParamsResults`` object.
 
         Examples
         --------
@@ -1392,6 +1552,33 @@ class SetParamsResults(CoreObject):
 
 class MultiZoneSweepMeshParams(CoreObject):
     """Defines MultiZone thin sweep mesh control parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneSweepMeshParams`` object with default parameters.
+    source_and_target_scope: ScopeDefinition, optional
+        Source and target faces used to determine the direction of sweep in MultiZone meshing.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    sweep_mesh_size: float, optional
+        Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    n_divisions: int, optional
+        Number of divisions in the sweep direction.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    thin_sweep: bool, optional
+        Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_sweep_mesh_params = prime.MultiZoneSweepMeshParams(model = model)
     """
     _default_params = {}
 
@@ -1415,26 +1602,30 @@ class MultiZoneSweepMeshParams(CoreObject):
             thin_sweep: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MultiZoneSweepMeshParams.
+        """Initialize a ``MultiZoneSweepMeshParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MultiZoneSweepMeshParams object with default parameters.
+            Model to create a ``MultiZoneSweepMeshParams`` object with default parameters.
         source_and_target_scope: ScopeDefinition, optional
             Source and target faces used to determine the direction of sweep in MultiZone meshing.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         sweep_mesh_size: float, optional
             Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         n_divisions: int, optional
             Number of divisions in the sweep direction.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         thin_sweep: bool, optional
             Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a MultiZoneSweepMeshParams object with provided parameters.
+            JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
 
         Examples
         --------
@@ -1456,7 +1647,7 @@ class MultiZoneSweepMeshParams(CoreObject):
                     thin_sweep)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MultiZoneSweepMeshParams")
                     json_data = param_json["MultiZoneSweepMeshParams"] if "MultiZoneSweepMeshParams" in param_json else {}
@@ -1478,7 +1669,7 @@ class MultiZoneSweepMeshParams(CoreObject):
             sweep_mesh_size: float = None,
             n_divisions: int = None,
             thin_sweep: bool = None):
-        """Set the default values of MultiZoneSweepMeshParams.
+        """Set the default values of the ``MultiZoneSweepMeshParams`` object.
 
         Parameters
         ----------
@@ -1496,7 +1687,7 @@ class MultiZoneSweepMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MultiZoneSweepMeshParams.
+        """Print the default values of ``MultiZoneSweepMeshParams`` object.
 
         Examples
         --------
@@ -1527,7 +1718,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def source_and_target_scope(self) -> ScopeDefinition:
         """Source and target faces used to determine the direction of sweep in MultiZone meshing.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._source_and_target_scope
 
@@ -1538,7 +1730,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def sweep_mesh_size(self) -> float:
         """Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._sweep_mesh_size
 
@@ -1549,7 +1742,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def n_divisions(self) -> int:
         """Number of divisions in the sweep direction.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_divisions
 
@@ -1560,7 +1754,8 @@ class MultiZoneSweepMeshParams(CoreObject):
     @property
     def thin_sweep(self) -> bool:
         """Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._thin_sweep
 
@@ -1570,6 +1765,33 @@ class MultiZoneSweepMeshParams(CoreObject):
 
 class MultiZoneEdgeBiasingParams(CoreObject):
     """Defines MultiZone edge biasing control parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneEdgeBiasingParams`` object with default parameters.
+    face_scope: ScopeDefinition, optional
+        Reference face zonelets to control mesh clustering orientation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    edge_scope: ScopeDefinition, optional
+        Edge zonelets to control the expanse of edge biasing.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    bias_factor: float, optional
+        Bias factor used for MultiZone edge biasing control.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    n_divisions: int, optional
+        Number of divisions on the section where edge biasing is done.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneEdgeBiasingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_edge_biasing_params = prime.MultiZoneEdgeBiasingParams(model = model)
     """
     _default_params = {}
 
@@ -1593,26 +1815,30 @@ class MultiZoneEdgeBiasingParams(CoreObject):
             n_divisions: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MultiZoneEdgeBiasingParams.
+        """Initialize a ``MultiZoneEdgeBiasingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MultiZoneEdgeBiasingParams object with default parameters.
+            Model to create a ``MultiZoneEdgeBiasingParams`` object with default parameters.
         face_scope: ScopeDefinition, optional
             Reference face zonelets to control mesh clustering orientation.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         edge_scope: ScopeDefinition, optional
             Edge zonelets to control the expanse of edge biasing.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         bias_factor: float, optional
             Bias factor used for MultiZone edge biasing control.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         n_divisions: int, optional
             Number of divisions on the section where edge biasing is done.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a MultiZoneEdgeBiasingParams object with provided parameters.
+            JSON dictionary to create a ``MultiZoneEdgeBiasingParams`` object with provided parameters.
 
         Examples
         --------
@@ -1634,7 +1860,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
                     n_divisions)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MultiZoneEdgeBiasingParams")
                     json_data = param_json["MultiZoneEdgeBiasingParams"] if "MultiZoneEdgeBiasingParams" in param_json else {}
@@ -1656,7 +1882,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
             edge_scope: ScopeDefinition = None,
             bias_factor: float = None,
             n_divisions: int = None):
-        """Set the default values of MultiZoneEdgeBiasingParams.
+        """Set the default values of the ``MultiZoneEdgeBiasingParams`` object.
 
         Parameters
         ----------
@@ -1674,7 +1900,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MultiZoneEdgeBiasingParams.
+        """Print the default values of ``MultiZoneEdgeBiasingParams`` object.
 
         Examples
         --------
@@ -1705,7 +1931,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def face_scope(self) -> ScopeDefinition:
         """Reference face zonelets to control mesh clustering orientation.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._face_scope
 
@@ -1716,7 +1943,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def edge_scope(self) -> ScopeDefinition:
         """Edge zonelets to control the expanse of edge biasing.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._edge_scope
 
@@ -1727,7 +1955,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def bias_factor(self) -> float:
         """Bias factor used for MultiZone edge biasing control.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._bias_factor
 
@@ -1738,7 +1967,8 @@ class MultiZoneEdgeBiasingParams(CoreObject):
     @property
     def n_divisions(self) -> int:
         """Number of divisions on the section where edge biasing is done.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_divisions
 
@@ -1748,6 +1978,21 @@ class MultiZoneEdgeBiasingParams(CoreObject):
 
 class MultiZoneMapMeshParams(CoreObject):
     """Define controlling parameters for the map mesh using MultiZone.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneMapMeshParams`` object with default parameters.
+    scope: ScopeDefinition, optional
+        Scope used for MultiZone map mesh control.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneMapMeshParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_map_mesh_params = prime.MultiZoneMapMeshParams(model = model)
     """
     _default_params = {}
 
@@ -1762,17 +2007,18 @@ class MultiZoneMapMeshParams(CoreObject):
             scope: ScopeDefinition = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MultiZoneMapMeshParams.
+        """Initialize a ``MultiZoneMapMeshParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MultiZoneMapMeshParams object with default parameters.
+            Model to create a ``MultiZoneMapMeshParams`` object with default parameters.
         scope: ScopeDefinition, optional
             Scope used for MultiZone map mesh control.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a MultiZoneMapMeshParams object with provided parameters.
+            JSON dictionary to create a ``MultiZoneMapMeshParams`` object with provided parameters.
 
         Examples
         --------
@@ -1788,7 +2034,7 @@ class MultiZoneMapMeshParams(CoreObject):
                     scope)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MultiZoneMapMeshParams")
                     json_data = param_json["MultiZoneMapMeshParams"] if "MultiZoneMapMeshParams" in param_json else {}
@@ -1804,7 +2050,7 @@ class MultiZoneMapMeshParams(CoreObject):
     @staticmethod
     def set_default(
             scope: ScopeDefinition = None):
-        """Set the default values of MultiZoneMapMeshParams.
+        """Set the default values of the ``MultiZoneMapMeshParams`` object.
 
         Parameters
         ----------
@@ -1816,7 +2062,7 @@ class MultiZoneMapMeshParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MultiZoneMapMeshParams.
+        """Print the default values of ``MultiZoneMapMeshParams`` object.
 
         Examples
         --------
@@ -1841,7 +2087,8 @@ class MultiZoneMapMeshParams(CoreObject):
     @property
     def scope(self) -> ScopeDefinition:
         """Scope used for MultiZone map mesh control.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._scope
 
@@ -1851,6 +2098,33 @@ class MultiZoneMapMeshParams(CoreObject):
 
 class MultiZoneSizingParams(CoreObject):
     """Parameters for MultiZone meshing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MultiZoneSizingParams`` object with default parameters.
+    max_size: float, optional
+        Defines global maximum mesh size.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    min_size: float, optional
+        Defines global minimum mesh size.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    growth_rate: float, optional
+        Defines growth rate.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    use_volumetric_size_field: bool, optional
+        Defines whether to use size field for MultiZone meshing.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``MultiZoneSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> multi_zone_sizing_params = prime.MultiZoneSizingParams(model = model)
     """
     _default_params = {}
 
@@ -1874,26 +2148,30 @@ class MultiZoneSizingParams(CoreObject):
             use_volumetric_size_field: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MultiZoneSizingParams.
+        """Initialize a ``MultiZoneSizingParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MultiZoneSizingParams object with default parameters.
+            Model to create a ``MultiZoneSizingParams`` object with default parameters.
         max_size: float, optional
             Defines global maximum mesh size.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         min_size: float, optional
             Defines global minimum mesh size.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         growth_rate: float, optional
             Defines growth rate.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         use_volumetric_size_field: bool, optional
             Defines whether to use size field for MultiZone meshing.
-            This parameter is a Beta. Parameter behavior and name may change in future.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a MultiZoneSizingParams object with provided parameters.
+            JSON dictionary to create a ``MultiZoneSizingParams`` object with provided parameters.
 
         Examples
         --------
@@ -1915,7 +2193,7 @@ class MultiZoneSizingParams(CoreObject):
                     use_volumetric_size_field)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MultiZoneSizingParams")
                     json_data = param_json["MultiZoneSizingParams"] if "MultiZoneSizingParams" in param_json else {}
@@ -1937,7 +2215,7 @@ class MultiZoneSizingParams(CoreObject):
             min_size: float = None,
             growth_rate: float = None,
             use_volumetric_size_field: bool = None):
-        """Set the default values of MultiZoneSizingParams.
+        """Set the default values of the ``MultiZoneSizingParams`` object.
 
         Parameters
         ----------
@@ -1955,7 +2233,7 @@ class MultiZoneSizingParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MultiZoneSizingParams.
+        """Print the default values of ``MultiZoneSizingParams`` object.
 
         Examples
         --------
@@ -1986,7 +2264,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def max_size(self) -> float:
         """Defines global maximum mesh size.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._max_size
 
@@ -1997,7 +2276,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def min_size(self) -> float:
         """Defines global minimum mesh size.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._min_size
 
@@ -2008,7 +2288,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def growth_rate(self) -> float:
         """Defines growth rate.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._growth_rate
 
@@ -2019,7 +2300,8 @@ class MultiZoneSizingParams(CoreObject):
     @property
     def use_volumetric_size_field(self) -> bool:
         """Defines whether to use size field for MultiZone meshing.
-        This parameter is a Beta. Parameter behavior and name may change in future.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._use_volumetric_size_field
 

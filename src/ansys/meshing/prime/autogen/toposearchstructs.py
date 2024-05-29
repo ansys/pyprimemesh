@@ -13,25 +13,33 @@ class TopoSearchField(enum.IntEnum):
     """
     OVERLAPPINGTOPOFACES = 0
     """Diagnoses overlapping or partially overlapping topofaces.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     INTERSECTINGTOPOFACES = 1
     """Diagnoses intersecting topofaces.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     SELFINTERSECTINGTOPOFACES = 2
     """Diagnoses topofaces with self intersecting bounding edges.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     BROKENLOOPTOPOFACES = 3
     """Diagnoses topofaces with open or broken bounding edge loops.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     NOBOUNDARYLOOPTOPOFACES = 4
     """Diagnoses topofaces without bounding edges.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     INVALIDBOUNDARYTOPOFACES = 5
     """Diagnoses topofaces with incorrect bounding edge orientation.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     SMALLTOPOEDGES = 6
     """Diagnoses topofaces with small topoedges.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     NUMBEROFFIELDS = 7
     """Diagnoses all topofaces.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""

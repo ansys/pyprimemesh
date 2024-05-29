@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class WrapperControl(CoreObject):
     """Wrapper Control to describe all parameters and controls used for wrapping.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create WrapperControl object.
+    id : int
+        Id of the WrapperControl.
+    object_id : int
+        Object id of the WrapperControl.
+    name : str
+        Name of the WrapperControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -34,7 +44,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetGeometryScope"
         self._model._print_logs_before_command("set_geometry_scope", args)
@@ -61,7 +71,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(params, List):
-            raise TypeError("Invalid argument type passed for params, valid argument type is List[LeakPreventionParams].")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is List[LeakPreventionParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetLeakPreventions"
         self._model._print_logs_before_command("set_leak_preventions", args)
@@ -89,7 +99,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(params, List):
-            raise TypeError("Invalid argument type passed for params, valid argument type is List[ContactPreventionParams].")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is List[ContactPreventionParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetContactPreventions"
         self._model._print_logs_before_command("set_contact_preventions", args)
@@ -112,7 +122,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(material_point_names, List):
-            raise TypeError("Invalid argument type passed for material_point_names, valid argument type is List[str].")
+            raise TypeError("Invalid argument type passed for 'material_point_names'. Valid argument type is List[str].")
         args = {"material_point_names" : material_point_names}
         command_name = "PrimeMesh::WrapperControl/SetLiveMaterialPoints"
         self._model._print_logs_before_command("set_live_material_points", args)
@@ -139,7 +149,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(params, List):
-            raise TypeError("Invalid argument type passed for params, valid argument type is List[FeatureRecoveryParams].")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is List[FeatureRecoveryParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetFeatureRecoveries"
         self._model._print_logs_before_command("set_feature_recoveries", args)
@@ -162,7 +172,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(name, str):
-            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::WrapperControl/SetSuggestedWrapperPartName"
         self._model._print_logs_before_command("set_suggested_wrapper_part_name", args)
@@ -190,7 +200,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(name, str):
-            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::WrapperControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)
@@ -257,7 +267,7 @@ class WrapperControl(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetShadowGeometryScope"
         self._model._print_logs_before_command("set_shadow_geometry_scope", args)

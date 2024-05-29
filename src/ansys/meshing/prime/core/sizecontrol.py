@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module containing SizeControl related classes and methods."""
 from ansys.meshing.prime.autogen.sizecontrol import SizeControl as _SizeControl
 
@@ -7,18 +29,22 @@ from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryPar
 
 
 class SizeControl(_SizeControl):
-    """Compute the size field for a volumetric surface meshing.
+    """Size control is used to compute the size field.
+
+    The size field is computed based on the size control defined.
+    Different type of size controls provide control over how the mesh size is distributed on a
+    surface or within the volume.
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify size controls from.
+    model : Model
+        Server model to create SizeControl object.
     id : int
-        ID of the size control.
+        Id of the SizeControl.
     object_id : int
-        Object ID of the size control.
+        Object id of the SizeControl.
     name : str
-        Name of the size control.
+        Name of the SizeControl..
     local : bool, optional
         Unused. The default is ``False``.
     """

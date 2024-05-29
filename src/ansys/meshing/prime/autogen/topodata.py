@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class TopoData(CoreObject):
     """Topodata has all information about connectivity of nodes, edges, elements and more.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create TopoData object.
+    id : int
+        Id of the TopoData.
+    object_id : int
+        Object id of the TopoData.
+    name : str
+        Name of the TopoData.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -40,7 +50,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_edges, Iterable):
-            raise TypeError("Invalid argument type passed for topo_edges, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_edges'. Valid argument type is Iterable[int].")
         args = {"topo_edges" : topo_edges}
         command_name = "PrimeMesh::TopoData/GetGeomZoneletsOfTopoEdges"
         self._model._print_logs_before_command("get_geom_zonelets_of_topo_edges", args)
@@ -69,7 +79,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         args = {"topo_faces" : topo_faces}
         command_name = "PrimeMesh::TopoData/GetGeomZoneletsOfTopoFaces"
         self._model._print_logs_before_command("get_geom_zonelets_of_topo_faces", args)
@@ -98,7 +108,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_edges, Iterable):
-            raise TypeError("Invalid argument type passed for topo_edges, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_edges'. Valid argument type is Iterable[int].")
         args = {"topo_edges" : topo_edges}
         command_name = "PrimeMesh::TopoData/GetMeshZoneletsOfTopoEdges"
         self._model._print_logs_before_command("get_mesh_zonelets_of_topo_edges", args)
@@ -127,7 +137,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         args = {"topo_faces" : topo_faces}
         command_name = "PrimeMesh::TopoData/GetMeshZoneletsOfTopoFaces"
         self._model._print_logs_before_command("get_mesh_zonelets_of_topo_faces", args)
@@ -156,7 +166,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         args = {"topo_faces" : topo_faces}
         command_name = "PrimeMesh::TopoData/GetTopoEdgesOfTopoFaces"
         self._model._print_logs_before_command("get_topo_edges_of_topo_faces", args)
@@ -185,7 +195,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         args = {"topo_faces" : topo_faces}
         command_name = "PrimeMesh::TopoData/GetAdjacentTopoFacesOfTopoFaces"
         self._model._print_logs_before_command("get_adjacent_topo_faces_of_topo_faces", args)
@@ -214,7 +224,7 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_edges, Iterable):
-            raise TypeError("Invalid argument type passed for topo_edges, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_edges'. Valid argument type is Iterable[int].")
         args = {"topo_edges" : topo_edges}
         command_name = "PrimeMesh::TopoData/GetAdjacentTopoEdgesOfTopoEdges"
         self._model._print_logs_before_command("get_adjacent_topo_edges_of_topo_edges", args)
@@ -241,7 +251,7 @@ class TopoData(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -250,9 +260,9 @@ class TopoData(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(params, DeleteMeshParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteMeshParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteMeshParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::TopoData/DeleteMeshOnTopoFaces"

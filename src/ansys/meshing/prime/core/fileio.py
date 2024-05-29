@@ -1,15 +1,41 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for mangaging file inputs and outputs."""
+import json
 from typing import List
 
 # isort: split
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
 
 # isort: split
+import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
+import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
+    ExportLSDynaKeywordFileParams,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -36,12 +62,12 @@ from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
 class FileIO(_FileIO):
-    """Manages file inputs and outputs.
+    """Handles reading or writing files from the disk.
 
     Parameters
     ----------
     model : Model
-        Server model from which to create and modify wrapper controls.
+        Server model to create FileIO object.
     """
 
     __doc__ = _FileIO.__doc__
@@ -296,6 +322,17 @@ class FileIO(_FileIO):
         >>> results = file_io.export_mapdl_cdb("/tmp/file.cdb", params)
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
+            part_id = 1
+            if len(self._model.parts) > 0:
+                part_id = self._model.parts[0].id
+            sim_data_str = super().get_abaqus_simulation_data(part_id)
+            if params.config_settings == None:
+                params.config_settings = ''
+            all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
+                self._model, sim_data_str, params
+            )
+            params.material_properties = all_mat_cmds + params.material_properties
+            params.analysis_settings = analysis_settings
             result = super().export_mapdl_cdb(temp_file_name, params)
         return result
 
@@ -430,6 +467,51 @@ class FileIO(_FileIO):
             result = super().export_fluent_meshing_mesh(temp_file_name, export_fluent_mesh_params)
         return result
 
+    def export_lsdyna_keyword_file(
+        self, file_name: str, params: ExportLSDynaKeywordFileParams
+    ) -> FileWriteResults:
+        """Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        params : ExportLSDynaKeywordFileParams
+            Parameters for FEA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        FileWriteResults
+            Returns FileWriteResults.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_keyword_file(
+            file_name, ExportLSDynaKeywordFileParams(model=model)
+        )
+
+        """
+        with utils.file_write_context(self._model, file_name) as temp_file_name:
+            part_id = 1
+            if len(self._model.parts) > 0:
+                part_id = self._model.parts[0].id
+            sim_data = json.loads(super().get_abaqus_simulation_data(part_id))
+            if sim_data is not None:
+                mp = dynaexportutils.MaterialProcessor(
+                    self._model, sim_data["Materials"], sim_data["Zones"]
+                )
+                all_mat_cmds = mp.get_all_material_commands()
+                params.material_properties = all_mat_cmds + params.material_properties
+                dp = dynaexportutils.DatabaseProcessor(self._model, sim_data["Step"])
+                all_data_cmds = dp.get_output_database_keywords()
+                params.database_keywords = all_data_cmds + params.database_keywords
+            result = super().export_lsdyna_keyword_file(temp_file_name, params)
+        return result
+
     def export_boundary_fitted_spline_kfile(
         self, file_name: str, export_params: ExportBoundaryFittedSplineParams
     ) -> FileWriteResults:
@@ -528,7 +610,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> model = prime.local_model()
+        >>> model = prime.launch_prime().model
         >>> fileio = prime.FileIO(model=model)
         >>> out_file_path = r"/tmp/output.stl"
         >>> part_ids = [part.id for part in model.parts]

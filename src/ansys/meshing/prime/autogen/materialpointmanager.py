@@ -6,8 +6,18 @@ from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any, Union
 
 class MaterialPointManager(CoreObject):
-    """Provide functions for material point creation, deletion and queries.
+    """Provides functions for material point creation, deletion and queries.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create MaterialPointManager object.
+    id : int
+        Id of the MaterialPointManager.
+    object_id : int
+        Object id of the MaterialPointManager.
+    name : str
+        Name of the MaterialPointManager.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -26,28 +36,32 @@ class MaterialPointManager(CoreObject):
         Parameters
         ----------
         suggested_name : str
-            Name suggested for the material point.
+            A name suggestion for material point.
         coords : Iterable[float]
-            Coordinates of the material point.
+            Coordinates of material point.
         params : CreateMaterialPointParams
-            Parameters used to create material point.
+            Parameters to material point.
 
         Returns
         -------
         CreateMaterialPointResults
             Returns the result with material point name and id.
 
-            Examples
+        Notes
+        -----
+        A material point is created on calling this API.
+
+        Examples
         --------
         >>> material_point_results = model.control_data.create_material_point("Fluid", [1.0,2,0,3.0], params)
 
         """
         if not isinstance(suggested_name, str):
-            raise TypeError("Invalid argument type passed for suggested_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
         if not isinstance(coords, Iterable):
-            raise TypeError("Invalid argument type passed for coords, valid argument type is Iterable[float].")
+            raise TypeError("Invalid argument type passed for 'coords'. Valid argument type is Iterable[float].")
         if not isinstance(params, CreateMaterialPointParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CreateMaterialPointParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateMaterialPointParams.")
         args = {"suggested_name" : suggested_name,
         "coords" : coords,
         "params" : params._jsonify()}
@@ -58,7 +72,7 @@ class MaterialPointManager(CoreObject):
         return CreateMaterialPointResults(model = self._model, json_data = result)
 
     def delete_material_point(self, name : str) -> DeleteMaterialPointResults:
-        """ Deletes material point with the given name.
+        """ Deletes material point identified with the given name.
 
 
         Parameters
@@ -80,7 +94,7 @@ class MaterialPointManager(CoreObject):
 
         """
         if not isinstance(name, str):
-            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::MaterialPointManager/DeleteMaterialPoint"
         self._model._print_logs_before_command("delete_material_point", args)

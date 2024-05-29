@@ -8,6 +8,12 @@ from typing import List, Any, Union
 class TopoUtilities(CoreObject):
     """Performs various general surface utilities algorithms. For example, copy zonelets, resolve surface intersections.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create TopoUtilities object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):
@@ -52,9 +58,9 @@ class TopoUtilities(CoreObject):
 
         """
         if not isinstance(topo_edges, Iterable):
-            raise TypeError("Invalid argument type passed for topo_edges, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_edges'. Valid argument type is Iterable[int].")
         if not isinstance(params, TopoFillHoleParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is TopoFillHoleParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is TopoFillHoleParams.")
         args = {"topo_edges" : topo_edges,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::TopoUtilities/FillHole"

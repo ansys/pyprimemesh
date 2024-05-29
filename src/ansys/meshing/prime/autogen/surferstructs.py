@@ -18,6 +18,43 @@ class AdvancedSurferSetup(enum.IntEnum):
 
 class SurferParams(CoreObject):
     """Parameters used to generate surface mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurferParams`` object with default parameters.
+    max_angle: float, optional
+        Maximum feature angle limit to be used to identify and preserve features.
+    size_field_type: SizeFieldType, optional
+        Size field type used to generate surface mesh.
+    min_size: float, optional
+        Minimum size to be used in sizing for the surfer.
+    max_size: float, optional
+        Maximum size to be used in sizing for the surfer.
+    growth_rate: float, optional
+        Growth rate to be used to propagate sizes.
+    constant_size: float, optional
+        Size used in constant size surface meshing.
+    generate_quads: bool, optional
+        Option to generate quadrilateral surface mesh.
+    check_non_manifolds: bool, optional
+        Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+    avoid_corner_triangles: bool, optional
+        Option to avoid corner triangles(with all three boundary nodes) generated.
+    smooth_size_transition: bool, optional
+        Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+    advanced_surfer_setup: AdvancedSurferSetup, optional
+        Option to define advanced settings for remeshing operation.
+    project_on_geometry: bool, optional
+        Option to project on CAD geometry when meshing.
+    enable_multi_threading: bool, optional
+        Option to perform surface meshing in parallel using multithreads.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurferParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surfer_params = prime.SurferParams(model = model)
     """
     _default_params = {}
 
@@ -68,12 +105,12 @@ class SurferParams(CoreObject):
             enable_multi_threading: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurferParams.
+        """Initialize a ``SurferParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurferParams object with default parameters.
+            Model to create a ``SurferParams`` object with default parameters.
         max_angle: float, optional
             Maximum feature angle limit to be used to identify and preserve features.
         size_field_type: SizeFieldType, optional
@@ -101,7 +138,7 @@ class SurferParams(CoreObject):
         enable_multi_threading: bool, optional
             Option to perform surface meshing in parallel using multithreads.
         json_data: dict, optional
-            JSON dictionary to create a SurferParams object with provided parameters.
+            JSON dictionary to create a ``SurferParams`` object with provided parameters.
 
         Examples
         --------
@@ -141,7 +178,7 @@ class SurferParams(CoreObject):
                     enable_multi_threading)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurferParams")
                     json_data = param_json["SurferParams"] if "SurferParams" in param_json else {}
@@ -181,7 +218,7 @@ class SurferParams(CoreObject):
             advanced_surfer_setup: AdvancedSurferSetup = None,
             project_on_geometry: bool = None,
             enable_multi_threading: bool = None):
-        """Set the default values of SurferParams.
+        """Set the default values of the ``SurferParams`` object.
 
         Parameters
         ----------
@@ -217,7 +254,7 @@ class SurferParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurferParams.
+        """Print the default values of ``SurferParams`` object.
 
         Examples
         --------
@@ -400,6 +437,21 @@ class SurferParams(CoreObject):
 
 class SurferResults(CoreObject):
     """Results associated with the surface mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SurferResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    topofaces_not_projected_on_geometry: Iterable[int], optional
+        Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
+    json_data: dict, optional
+        JSON dictionary to create a ``SurferResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> surfer_results = prime.SurferResults(model = model)
     """
     _default_params = {}
 
@@ -417,18 +469,18 @@ class SurferResults(CoreObject):
             topofaces_not_projected_on_geometry: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SurferResults.
+        """Initialize a ``SurferResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SurferResults object with default parameters.
+            Model to create a ``SurferResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         topofaces_not_projected_on_geometry: Iterable[int], optional
             Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
         json_data: dict, optional
-            JSON dictionary to create a SurferResults object with provided parameters.
+            JSON dictionary to create a ``SurferResults`` object with provided parameters.
 
         Examples
         --------
@@ -446,7 +498,7 @@ class SurferResults(CoreObject):
                     topofaces_not_projected_on_geometry)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SurferResults")
                     json_data = param_json["SurferResults"] if "SurferResults" in param_json else {}
@@ -464,7 +516,7 @@ class SurferResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             topofaces_not_projected_on_geometry: Iterable[int] = None):
-        """Set the default values of SurferResults.
+        """Set the default values of the ``SurferResults`` object.
 
         Parameters
         ----------
@@ -478,7 +530,7 @@ class SurferResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SurferResults.
+        """Print the default values of ``SurferResults`` object.
 
         Examples
         --------
@@ -524,6 +576,35 @@ class SurferResults(CoreObject):
 
 class LocalSurferParams(CoreObject):
     """Parameters to perform local surface remeshing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``LocalSurferParams`` object with default parameters.
+    min_angle: float, optional
+        Minimum feature angle limit used to identify and preserve features.
+    max_angle: float, optional
+        Maximum feature angle limit used to identify and preserve features.
+    size_field_type: SizeFieldType, optional
+        Size field type used to generate surface mesh.
+    min_size: float, optional
+        Minimum size to be used in sizing for the surfer.
+    max_size: float, optional
+        Maximum size to be used in sizing for the surfer.
+    growth_rate: float, optional
+        Growth rate to be used to propagate sizes.
+    constant_size: float, optional
+        Constant size to be used in case of constant size field.
+    smooth_boundary: bool, optional
+        Option to extend local selection to get smooth boundary of selected elements.
+    n_rings: int, optional
+        Number of rings to extend the registered face selection for remeshing.
+    json_data: dict, optional
+        JSON dictionary to create a ``LocalSurferParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> local_surfer_params = prime.LocalSurferParams(model = model)
     """
     _default_params = {}
 
@@ -562,12 +643,12 @@ class LocalSurferParams(CoreObject):
             n_rings: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the LocalSurferParams.
+        """Initialize a ``LocalSurferParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a LocalSurferParams object with default parameters.
+            Model to create a ``LocalSurferParams`` object with default parameters.
         min_angle: float, optional
             Minimum feature angle limit used to identify and preserve features.
         max_angle: float, optional
@@ -587,7 +668,7 @@ class LocalSurferParams(CoreObject):
         n_rings: int, optional
             Number of rings to extend the registered face selection for remeshing.
         json_data: dict, optional
-            JSON dictionary to create a LocalSurferParams object with provided parameters.
+            JSON dictionary to create a ``LocalSurferParams`` object with provided parameters.
 
         Examples
         --------
@@ -619,7 +700,7 @@ class LocalSurferParams(CoreObject):
                     n_rings)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "LocalSurferParams")
                     json_data = param_json["LocalSurferParams"] if "LocalSurferParams" in param_json else {}
@@ -651,7 +732,7 @@ class LocalSurferParams(CoreObject):
             constant_size: float = None,
             smooth_boundary: bool = None,
             n_rings: int = None):
-        """Set the default values of LocalSurferParams.
+        """Set the default values of the ``LocalSurferParams`` object.
 
         Parameters
         ----------
@@ -679,7 +760,7 @@ class LocalSurferParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of LocalSurferParams.
+        """Print the default values of ``LocalSurferParams`` object.
 
         Examples
         --------
@@ -809,6 +890,21 @@ class LocalSurferParams(CoreObject):
 
 class LocalSurferResults(CoreObject):
     """Results associated with the local surface mesh.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``LocalSurferResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``LocalSurferResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> local_surfer_results = prime.LocalSurferResults(model = model)
     """
     _default_params = {}
 
@@ -826,18 +922,18 @@ class LocalSurferResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the LocalSurferResults.
+        """Initialize a ``LocalSurferResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a LocalSurferResults object with default parameters.
+            Model to create a ``LocalSurferResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the operation.
         json_data: dict, optional
-            JSON dictionary to create a LocalSurferResults object with provided parameters.
+            JSON dictionary to create a ``LocalSurferResults`` object with provided parameters.
 
         Examples
         --------
@@ -855,7 +951,7 @@ class LocalSurferResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "LocalSurferResults")
                     json_data = param_json["LocalSurferResults"] if "LocalSurferResults" in param_json else {}
@@ -873,7 +969,7 @@ class LocalSurferResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of LocalSurferResults.
+        """Set the default values of the ``LocalSurferResults`` object.
 
         Parameters
         ----------
@@ -887,7 +983,7 @@ class LocalSurferResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of LocalSurferResults.
+        """Print the default values of ``LocalSurferResults`` object.
 
         Examples
         --------

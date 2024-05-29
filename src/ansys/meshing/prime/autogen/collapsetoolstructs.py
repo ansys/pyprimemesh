@@ -10,6 +10,25 @@ from ansys.meshing.prime.params.primestructs import *
 
 class CollapseParams(CoreObject):
     """Parameters to collapse face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CollapseParams`` object with default parameters.
+    feature_type: SurfaceFeatureType, optional
+        Feature type to be preserved when performing collapse.
+    collapse_ratio: float, optional
+        Maximum ratio of shortest face edge length to longest face edge length.
+    preserve_quality: bool, optional
+        Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
+    target_skewness: float, optional
+        Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+    json_data: dict, optional
+        JSON dictionary to create a ``CollapseParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> collapse_params = prime.CollapseParams(model = model)
     """
     _default_params = {}
 
@@ -33,12 +52,12 @@ class CollapseParams(CoreObject):
             target_skewness: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CollapseParams.
+        """Initialize a ``CollapseParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CollapseParams object with default parameters.
+            Model to create a ``CollapseParams`` object with default parameters.
         feature_type: SurfaceFeatureType, optional
             Feature type to be preserved when performing collapse.
         collapse_ratio: float, optional
@@ -48,7 +67,7 @@ class CollapseParams(CoreObject):
         target_skewness: float, optional
             Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
         json_data: dict, optional
-            JSON dictionary to create a CollapseParams object with provided parameters.
+            JSON dictionary to create a ``CollapseParams`` object with provided parameters.
 
         Examples
         --------
@@ -70,7 +89,7 @@ class CollapseParams(CoreObject):
                     target_skewness)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CollapseParams")
                     json_data = param_json["CollapseParams"] if "CollapseParams" in param_json else {}
@@ -92,7 +111,7 @@ class CollapseParams(CoreObject):
             collapse_ratio: float = None,
             preserve_quality: bool = None,
             target_skewness: float = None):
-        """Set the default values of CollapseParams.
+        """Set the default values of the ``CollapseParams`` object.
 
         Parameters
         ----------
@@ -110,7 +129,7 @@ class CollapseParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CollapseParams.
+        """Print the default values of ``CollapseParams`` object.
 
         Examples
         --------
@@ -180,6 +199,23 @@ class CollapseParams(CoreObject):
 
 class CollapseResults(CoreObject):
     """Results associated with collapse face elements.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CollapseResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    n_collapsed: int, optional
+        Number of face elements collapsed.
+    n_splits: int, optional
+        Number of face elements split.
+    json_data: dict, optional
+        JSON dictionary to create a ``CollapseResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> collapse_results = prime.CollapseResults(model = model)
     """
     _default_params = {}
 
@@ -200,12 +236,12 @@ class CollapseResults(CoreObject):
             n_splits: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CollapseResults.
+        """Initialize a ``CollapseResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CollapseResults object with default parameters.
+            Model to create a ``CollapseResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         n_collapsed: int, optional
@@ -213,7 +249,7 @@ class CollapseResults(CoreObject):
         n_splits: int, optional
             Number of face elements split.
         json_data: dict, optional
-            JSON dictionary to create a CollapseResults object with provided parameters.
+            JSON dictionary to create a ``CollapseResults`` object with provided parameters.
 
         Examples
         --------
@@ -233,7 +269,7 @@ class CollapseResults(CoreObject):
                     n_splits)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CollapseResults")
                     json_data = param_json["CollapseResults"] if "CollapseResults" in param_json else {}
@@ -253,7 +289,7 @@ class CollapseResults(CoreObject):
             error_code: ErrorCode = None,
             n_collapsed: int = None,
             n_splits: int = None):
-        """Set the default values of CollapseResults.
+        """Set the default values of the ``CollapseResults`` object.
 
         Parameters
         ----------
@@ -269,7 +305,7 @@ class CollapseResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CollapseResults.
+        """Print the default values of ``CollapseResults`` object.
 
         Examples
         --------

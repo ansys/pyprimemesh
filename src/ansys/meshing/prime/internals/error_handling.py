@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for error handling in PyPrimeMesh."""
 import re
 from functools import wraps
@@ -46,7 +68,8 @@ prime_error_messages = {
     ErrorCode.INVALIDPRISMCONTROLS: "Conflict of prism settings on zonelets or invalid prism controls selected.",
     ErrorCode.PERIODICSURFACESNOTSUPPORTEDFORPRISMS: "Periodic surfaces selected for prism generation, not supported.",
     ErrorCode.ALREADYVOLUMEMESHED: "Already volume meshed.",
-    ErrorCode.VOLUMESNOTUPTODATE: "Volumes are not up to date. Update volumes and try again.",
+    ErrorCode.INCREMENTALVOLUMEMESHINGNOTSUPPORTED: "Incremental volume meshing is not supported.",
+    ErrorCode.VOLUMESNOTUPTODATE: "Volumes are not up to date. Compute topovolumes for topology part or compute closed volumes for non topology parts and try again.",
     ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS: "Quadratic meshing is supported only for tetrahedrons.",
     ErrorCode.NOACTIVESFFOUND: "Active size fields are not available.",
     ErrorCode.AITOVERLAPALONGMULTIFOUND: "Overlapping faces along multi-connection found.",
@@ -58,13 +81,14 @@ prime_error_messages = {
     ErrorCode.CADGEOMETRYNOTFOUND: "CAD Geometry not found.",
     ErrorCode.VOLUMENOTFOUND: "Volume not found.",
     ErrorCode.ZONENOTFOUND: "Zone not found.",
-    ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
+    ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology-based operation.",
     ErrorCode.ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try add_topo_entities_to_zone in part.",
-    ErrorCode.MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
-    ErrorCode.MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology based operation.",
+    ErrorCode.MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology-based operation.",
+    ErrorCode.MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART: "Operation is not supported for part with topology data. Try a topology-based operation.",
     ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART: "Not supported for part with higher order mesh.",
+    ErrorCode.NOTSUPPORTEDFORPOLYMESHPART: "Not supported for part with poly mesh.",
     ErrorCode.SPHEREATINVALIDNORMALNODESFAILED: "Sphere creation at invalid normal nodes failed.",
-    ErrorCode.INVALIDPLANEPOINTS: "Invalid plane points. You need to provide 3 points (9 coordinates).",
+    ErrorCode.INVALIDPLANEPOINTS: "Invalid plane points. You must provide 3 points (9 coordinates).",
     ErrorCode.PLANECOLLINEARPOINTS: "Collinear or duplicate points given to define plane.",
     ErrorCode.INVALIDREGISTERID: "Invalid register id provided. Register ids between 1 to 28 are valid.",
     ErrorCode.SURFACEFEATURETYPENOTSUPPORTED: "Surface search for provided feature type is not supported.",
@@ -127,7 +151,7 @@ prime_error_messages = {
     ErrorCode.DELETEMESHFACES_CELLFOUND: "Cannot delete face element(s) connected to volume mesh.",
     ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS: "Material point with given name already exist.",
     ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST: "Material point with given id does not exist.",
-    ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST: "Material point with given name does not exist.",
+    ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST: "Material point with the given name does not exist.",
     ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE: "Control Points size must be greater than degree.",
     ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT: "Control Points size cannot be greater than input mesh nodes.",
     ErrorCode.IGA_NURBSFITTINGFAILED: "Failed to fit spline.",
@@ -194,11 +218,16 @@ prime_error_messages = {
     ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS: "Leak prevention control specified under wrapper is invalid.",
     ErrorCode.WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID: "Feature recovery control specified under wrapper control does not exist.",
     ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE: "Dead material point cannot be same as live.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE: "Hole size specified for dead region should be positive double.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_FAILED: "Failed to create patching surfaces.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Provided hole size is too small hole for dead region.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE: "Base size specified for patching should be positive double.",
     ErrorCode.INVALIDWRAPPERCONTROL: "Invalid wrapper control.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE: "Gap size specified for close gaps should be positive double.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE: "Scope specified for close gaps is invalid.",
     ErrorCode.WRAPPERCLOSEGAPSFAILED: "Wrapper gap closing failed.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR: "Resolution Factor should be greater than 0 but less than or equal to 1.",
+    ErrorCode.WRAPPERLEAKINGFLUIDREGIONS: "Two or more fluid regions leaking into each other.",
     ErrorCode.AUTOMESHINVALIDMAXSIZE: "AutoMeshParams has invalid max size specified.",
     ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY: "Invalid scope entity.",
     ErrorCode.INVALIDFIRSTASPECTRATIO: "Invalid first aspect ratio.",
@@ -269,12 +298,12 @@ prime_error_messages = {
     ErrorCode.DELETEVOLUMESFAILED: "Delete volumes failed.",
     ErrorCode.INVALIDNEIGHBORVOLUMES: "Invalid neighbor volumes selected to merge volumes.",
     ErrorCode.INVALIDINPUTVOLUMES: "Invalid input volumes.",
-    ErrorCode.MATCHEDMESHOPTIONINVALID: "Invalid option chosen to connect two different parts.",
-    ErrorCode.COLOCATEMATCHEDNODESFAILED: "Colocation of matched nodes failed.",
+    ErrorCode.FUSEOPTIONINVALID: "Invalid option chosen to connect two different parts.",
+    ErrorCode.COLOCATEFUSEDNODESFAILED: "Colocation of fused nodes failed.",
     ErrorCode.IMPRINTBOUNDARYNODESFAILED: "Imprint of boundary nodes failed.",
     ErrorCode.IMPRINTBOUNDARYEDGESFAILED: "Imprint of boundary edges failed.",
     ErrorCode.SPLITINTERSECTINGBOUNDARYEDGESFAILED: "Splitting of intersecting boundary edges failed.",
-    ErrorCode.MATCHINTERIORFAILED: "Matching of interior region of overlap failed.",
+    ErrorCode.FUSEINTERIORFAILED: "Fusing interior region of overlap failed.",
     ErrorCode.TOLERANCEVALUEINVALID: "Invalid tolerance value specified.",
     ErrorCode.INVALIDTHINVOLUMECONTROLS: "Invalid thin volume control.",
     ErrorCode.SOURCEORTARGETNOTSPECIFIED: "No target or source faces specified.",
@@ -287,6 +316,7 @@ prime_error_messages = {
     ErrorCode.THINVOLUMECONTROLINVALIDNUMBEROFLAYER: "Number of layer in thin volume mesh should be greater than 0.",
     ErrorCode.THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED: "Thin volume mesh controls not supported for part with topology data.",
     ErrorCode.THINVOLUMECONTROLINVALIDCONTROL: "Same face scope is set as target for multiple thin volume controls.",
+    ErrorCode.EXPORTSTLFAILED: "Export STL failed.",
     ErrorCode.EXPORTSTLFAILEDWITHTOPOLOGY: "Export STL not supported for part with topology data.",
     ErrorCode.EXPORTSTLFAILEDWITHQUADFACES: "Export STL not supported for mesh with quad faces.",
     ErrorCode.EXPORTSTLFAILEDWITHPOLYFACES: "Export STL not supported for mesh with poly faces.",
@@ -297,9 +327,12 @@ prime_error_messages = {
     ErrorCode.TARGETWITHCELLZONELETS: "Target face zonelets with volume mesh on both sides.",
     ErrorCode.SIDEZONELETSNOTFIT: "Side face zonelets are not sweepable for thin volume mesh.",
     ErrorCode.SOURCETARGETZONELETSNOTFIT: "Source and target zonelets do not fit to thin volume mesh.",
-    ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Min size is more than max size.",
-    ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contains negative value.",
-    ErrorCode.INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT: "Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 .",
+    ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Minimum size is more than maximum size.",
+    ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contain one or more negative values.",
+    ErrorCode.FACEZONELETSHAVECELLSCONNECTED: "Face zonelets have cells connected.",
+    ErrorCode.ZEROELEMENTSREADFROMCDBFILE: "No mesh elements found. Check the input CDB file.",
+    ErrorCode.ZERONODESREADFROMCDBFILE: "No nodes found. Check the input CDB file.",
+    ErrorCode.ZEROELEMENTSFORCDBEXPORT: "No mesh elements found for CDB export. Check if the model is meshed, or set write_by_zones in ExportMapdlCdbParams to false if zones are not defined.",
 }
 
 prime_warning_messages = {
@@ -342,7 +375,16 @@ prime_warning_messages = {
     WarningCode.MESHHASLEFTHANDEDNESSFACES: "Mesh has left handed faces.",
     WarningCode.FACEZONELETSWITHOUTVOLUMES: "Face zonelets have no volume associated to them.",
     WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES: "Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets.",
+    WarningCode.FAILEDTOUPDATEVOLUMES: "Volumes are not updated after performing the operation.  Compute the volumes again.",
+    WarningCode.UNPROCESSEDKEYWORDSINABAQUSFILE: "Some keywords are not processed. Check the unprocessed keywords in the summary log of the import results.",
+    WarningCode.EXPORTMAPDLANALYSISSETTINGSFAILED: "Export of analysis settings to separate file failed.",
+    WarningCode.WRITINGCONTACTPAIRSSKIPPED: "Writing of contact pairs skipped due to no surface or surface interaction definition.",
+    WarningCode.WRITINGTIESSKIPPED: "Writing of ties skipped due to no surface definition.",
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
+    WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topoentities. Skipped projection for those topoentities.",
+    WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topoentities. Mesh node projected on facets for those topoentities.",
+    WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use Fuse operation to remove it.",
+    WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use Intersect operation to remove it.",
 }
 
 

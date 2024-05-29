@@ -10,6 +10,13 @@ class Surfer(CoreObject):
 
     Performs surface meshing using various surface meshing algorithms on topofaces or face zonelets.
     For example, constant size or volumetric size surface meshing.
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create Surfer object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):
@@ -56,11 +63,11 @@ class Surfer(CoreObject):
 
         """
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(edge_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for edge_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'edge_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, SurferParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SurferParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurferParams.")
         args = {"face_zonelets" : face_zonelets,
         "edge_zonelets" : edge_zonelets,
         "params" : params._jsonify()}
@@ -93,9 +100,9 @@ class Surfer(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(params, SurferParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SurferParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurferParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Surfer/MeshTopoFaces"
@@ -151,11 +158,11 @@ class Surfer(CoreObject):
 
         """
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(local_surfer_params, LocalSurferParams):
-            raise TypeError("Invalid argument type passed for local_surfer_params, valid argument type is LocalSurferParams.")
+            raise TypeError("Invalid argument type passed for 'local_surfer_params'. Valid argument type is LocalSurferParams.")
         args = {"face_zonelets" : face_zonelets,
         "register_id" : register_id,
         "local_surfer_params" : local_surfer_params._jsonify()}

@@ -18,42 +18,130 @@ class IntersectionMask(enum.IntEnum):
     FACEFACEANDEDGEEDGE = 3
     """Perform face to face and edge to edge intersections."""
 
+class EdgeMergeControl(enum.IntEnum):
+    """Specifies type of edge pairs to be merged during scaffold operation.
+    """
+    ALLTOALL = 1
+    """Allows to merge all types of edges.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    FREETOALL = 2
+    """Allows to merge only free edges into all edges.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    FREETOFREE = 3
+    """Allows to merge free edge into other free edge only.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+
 class ScaffolderParams(CoreObject):
     """Parameters to control scaffold operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderParams`` object with default parameters.
+    absolute_dist_tol: float, optional
+        Defines the maximum gap to connect.
+    size_field_type: int, optional
+        Specifies the type of size field used for scaffolding.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    intersection_control_mask: IntersectionMask, optional
+        Specifies the nature of intersection to be computed.
+    edge_merge_control: int, optional
+        Specifies type of edge pairs to be merged during scaffold operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    constant_mesh_size: float, optional
+        Defines the constant edge mesh size to check connection.
+    remove_holes_critical_radius: float, optional
+        Defines the maximum radius of holes to be removed.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    remove_slivers_abs_dist_tol_ratio: float, optional
+        Defines the maximum aspect ratio to remove sliver faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    triangles_coplanar_angle_cos: float, optional
+        Lower bound for cos angle to consider coplanar faces for scaffolding.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_params = prime.ScaffolderParams(model = model)
     """
     _default_params = {}
 
     def __initialize(
             self,
             absolute_dist_tol: float,
+            size_field_type: int,
             intersection_control_mask: IntersectionMask,
-            constant_mesh_size: float):
+            edge_merge_control: int,
+            constant_mesh_size: float,
+            remove_holes_critical_radius: float,
+            remove_slivers_abs_dist_tol_ratio: float,
+            triangles_coplanar_angle_cos: float):
         self._absolute_dist_tol = absolute_dist_tol
+        self._size_field_type = size_field_type
         self._intersection_control_mask = IntersectionMask(intersection_control_mask)
+        self._edge_merge_control = edge_merge_control
         self._constant_mesh_size = constant_mesh_size
+        self._remove_holes_critical_radius = remove_holes_critical_radius
+        self._remove_slivers_abs_dist_tol_ratio = remove_slivers_abs_dist_tol_ratio
+        self._triangles_coplanar_angle_cos = triangles_coplanar_angle_cos
 
     def __init__(
             self,
             model: CommunicationManager=None,
             absolute_dist_tol: float = None,
+            size_field_type: int = None,
             intersection_control_mask: IntersectionMask = None,
+            edge_merge_control: int = None,
             constant_mesh_size: float = None,
+            remove_holes_critical_radius: float = None,
+            remove_slivers_abs_dist_tol_ratio: float = None,
+            triangles_coplanar_angle_cos: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ScaffolderParams.
+        """Initialize a ``ScaffolderParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ScaffolderParams object with default parameters.
+            Model to create a ``ScaffolderParams`` object with default parameters.
         absolute_dist_tol: float, optional
             Defines the maximum gap to connect.
+        size_field_type: int, optional
+            Specifies the type of size field used for scaffolding.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         intersection_control_mask: IntersectionMask, optional
             Specifies the nature of intersection to be computed.
+        edge_merge_control: int, optional
+            Specifies type of edge pairs to be merged during scaffold operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         constant_mesh_size: float, optional
             Defines the constant edge mesh size to check connection.
+        remove_holes_critical_radius: float, optional
+            Defines the maximum radius of holes to be removed.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        remove_slivers_abs_dist_tol_ratio: float, optional
+            Defines the maximum aspect ratio to remove sliver faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        triangles_coplanar_angle_cos: float, optional
+            Lower bound for cos angle to consider coplanar faces for scaffolding.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a ScaffolderParams object with provided parameters.
+            JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
 
         Examples
         --------
@@ -62,25 +150,40 @@ class ScaffolderParams(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None,
+                json_data["sizeFieldType"] if "sizeFieldType" in json_data else None,
                 IntersectionMask(json_data["intersectionControlMask"] if "intersectionControlMask" in json_data else None),
-                json_data["constantMeshSize"] if "constantMeshSize" in json_data else None)
+                json_data["edgeMergeControl"] if "edgeMergeControl" in json_data else None,
+                json_data["constantMeshSize"] if "constantMeshSize" in json_data else None,
+                json_data["removeHolesCriticalRadius"] if "removeHolesCriticalRadius" in json_data else None,
+                json_data["removeSliversAbsDistTolRatio"] if "removeSliversAbsDistTolRatio" in json_data else None,
+                json_data["trianglesCoplanarAngleCos"] if "trianglesCoplanarAngleCos" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [absolute_dist_tol, intersection_control_mask, constant_mesh_size])
+            all_field_specified = all(arg is not None for arg in [absolute_dist_tol, size_field_type, intersection_control_mask, edge_merge_control, constant_mesh_size, remove_holes_critical_radius, remove_slivers_abs_dist_tol_ratio, triangles_coplanar_angle_cos])
             if all_field_specified:
                 self.__initialize(
                     absolute_dist_tol,
+                    size_field_type,
                     intersection_control_mask,
-                    constant_mesh_size)
+                    edge_merge_control,
+                    constant_mesh_size,
+                    remove_holes_critical_radius,
+                    remove_slivers_abs_dist_tol_ratio,
+                    triangles_coplanar_angle_cos)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ScaffolderParams")
                     json_data = param_json["ScaffolderParams"] if "ScaffolderParams" in param_json else {}
                     self.__initialize(
                         absolute_dist_tol if absolute_dist_tol is not None else ( ScaffolderParams._default_params["absolute_dist_tol"] if "absolute_dist_tol" in ScaffolderParams._default_params else (json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None)),
+                        size_field_type if size_field_type is not None else ( ScaffolderParams._default_params["size_field_type"] if "size_field_type" in ScaffolderParams._default_params else (json_data["sizeFieldType"] if "sizeFieldType" in json_data else None)),
                         intersection_control_mask if intersection_control_mask is not None else ( ScaffolderParams._default_params["intersection_control_mask"] if "intersection_control_mask" in ScaffolderParams._default_params else IntersectionMask(json_data["intersectionControlMask"] if "intersectionControlMask" in json_data else None)),
-                        constant_mesh_size if constant_mesh_size is not None else ( ScaffolderParams._default_params["constant_mesh_size"] if "constant_mesh_size" in ScaffolderParams._default_params else (json_data["constantMeshSize"] if "constantMeshSize" in json_data else None)))
+                        edge_merge_control if edge_merge_control is not None else ( ScaffolderParams._default_params["edge_merge_control"] if "edge_merge_control" in ScaffolderParams._default_params else (json_data["edgeMergeControl"] if "edgeMergeControl" in json_data else None)),
+                        constant_mesh_size if constant_mesh_size is not None else ( ScaffolderParams._default_params["constant_mesh_size"] if "constant_mesh_size" in ScaffolderParams._default_params else (json_data["constantMeshSize"] if "constantMeshSize" in json_data else None)),
+                        remove_holes_critical_radius if remove_holes_critical_radius is not None else ( ScaffolderParams._default_params["remove_holes_critical_radius"] if "remove_holes_critical_radius" in ScaffolderParams._default_params else (json_data["removeHolesCriticalRadius"] if "removeHolesCriticalRadius" in json_data else None)),
+                        remove_slivers_abs_dist_tol_ratio if remove_slivers_abs_dist_tol_ratio is not None else ( ScaffolderParams._default_params["remove_slivers_abs_dist_tol_ratio"] if "remove_slivers_abs_dist_tol_ratio" in ScaffolderParams._default_params else (json_data["removeSliversAbsDistTolRatio"] if "removeSliversAbsDistTolRatio" in json_data else None)),
+                        triangles_coplanar_angle_cos if triangles_coplanar_angle_cos is not None else ( ScaffolderParams._default_params["triangles_coplanar_angle_cos"] if "triangles_coplanar_angle_cos" in ScaffolderParams._default_params else (json_data["trianglesCoplanarAngleCos"] if "trianglesCoplanarAngleCos" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -91,25 +194,40 @@ class ScaffolderParams(CoreObject):
     @staticmethod
     def set_default(
             absolute_dist_tol: float = None,
+            size_field_type: int = None,
             intersection_control_mask: IntersectionMask = None,
-            constant_mesh_size: float = None):
-        """Set the default values of ScaffolderParams.
+            edge_merge_control: int = None,
+            constant_mesh_size: float = None,
+            remove_holes_critical_radius: float = None,
+            remove_slivers_abs_dist_tol_ratio: float = None,
+            triangles_coplanar_angle_cos: float = None):
+        """Set the default values of the ``ScaffolderParams`` object.
 
         Parameters
         ----------
         absolute_dist_tol: float, optional
             Defines the maximum gap to connect.
+        size_field_type: int, optional
+            Specifies the type of size field used for scaffolding.
         intersection_control_mask: IntersectionMask, optional
             Specifies the nature of intersection to be computed.
+        edge_merge_control: int, optional
+            Specifies type of edge pairs to be merged during scaffold operation.
         constant_mesh_size: float, optional
             Defines the constant edge mesh size to check connection.
+        remove_holes_critical_radius: float, optional
+            Defines the maximum radius of holes to be removed.
+        remove_slivers_abs_dist_tol_ratio: float, optional
+            Defines the maximum aspect ratio to remove sliver faces.
+        triangles_coplanar_angle_cos: float, optional
+            Lower bound for cos angle to consider coplanar faces for scaffolding.
         """
         args = locals()
         [ScaffolderParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of ScaffolderParams.
+        """Print the default values of ``ScaffolderParams`` object.
 
         Examples
         --------
@@ -123,15 +241,25 @@ class ScaffolderParams(CoreObject):
         json_data = {}
         if self._absolute_dist_tol is not None:
             json_data["absoluteDistTol"] = self._absolute_dist_tol
+        if self._size_field_type is not None:
+            json_data["sizeFieldType"] = self._size_field_type
         if self._intersection_control_mask is not None:
             json_data["intersectionControlMask"] = self._intersection_control_mask
+        if self._edge_merge_control is not None:
+            json_data["edgeMergeControl"] = self._edge_merge_control
         if self._constant_mesh_size is not None:
             json_data["constantMeshSize"] = self._constant_mesh_size
+        if self._remove_holes_critical_radius is not None:
+            json_data["removeHolesCriticalRadius"] = self._remove_holes_critical_radius
+        if self._remove_slivers_abs_dist_tol_ratio is not None:
+            json_data["removeSliversAbsDistTolRatio"] = self._remove_slivers_abs_dist_tol_ratio
+        if self._triangles_coplanar_angle_cos is not None:
+            json_data["trianglesCoplanarAngleCos"] = self._triangles_coplanar_angle_cos
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "absolute_dist_tol :  %s\nintersection_control_mask :  %s\nconstant_mesh_size :  %s" % (self._absolute_dist_tol, self._intersection_control_mask, self._constant_mesh_size)
+        message = "absolute_dist_tol :  %s\nsize_field_type :  %s\nintersection_control_mask :  %s\nedge_merge_control :  %s\nconstant_mesh_size :  %s\nremove_holes_critical_radius :  %s\nremove_slivers_abs_dist_tol_ratio :  %s\ntriangles_coplanar_angle_cos :  %s" % (self._absolute_dist_tol, self._size_field_type, self._intersection_control_mask, self._edge_merge_control, self._constant_mesh_size, self._remove_holes_critical_radius, self._remove_slivers_abs_dist_tol_ratio, self._triangles_coplanar_angle_cos)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -146,6 +274,18 @@ class ScaffolderParams(CoreObject):
         self._absolute_dist_tol = value
 
     @property
+    def size_field_type(self) -> int:
+        """Specifies the type of size field used for scaffolding.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._size_field_type
+
+    @size_field_type.setter
+    def size_field_type(self, value: int):
+        self._size_field_type = value
+
+    @property
     def intersection_control_mask(self) -> IntersectionMask:
         """Specifies the nature of intersection to be computed.
         """
@@ -154,6 +294,18 @@ class ScaffolderParams(CoreObject):
     @intersection_control_mask.setter
     def intersection_control_mask(self, value: IntersectionMask):
         self._intersection_control_mask = value
+
+    @property
+    def edge_merge_control(self) -> int:
+        """Specifies type of edge pairs to be merged during scaffold operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._edge_merge_control
+
+    @edge_merge_control.setter
+    def edge_merge_control(self, value: int):
+        self._edge_merge_control = value
 
     @property
     def constant_mesh_size(self) -> float:
@@ -165,8 +317,59 @@ class ScaffolderParams(CoreObject):
     def constant_mesh_size(self, value: float):
         self._constant_mesh_size = value
 
+    @property
+    def remove_holes_critical_radius(self) -> float:
+        """Defines the maximum radius of holes to be removed.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._remove_holes_critical_radius
+
+    @remove_holes_critical_radius.setter
+    def remove_holes_critical_radius(self, value: float):
+        self._remove_holes_critical_radius = value
+
+    @property
+    def remove_slivers_abs_dist_tol_ratio(self) -> float:
+        """Defines the maximum aspect ratio to remove sliver faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._remove_slivers_abs_dist_tol_ratio
+
+    @remove_slivers_abs_dist_tol_ratio.setter
+    def remove_slivers_abs_dist_tol_ratio(self, value: float):
+        self._remove_slivers_abs_dist_tol_ratio = value
+
+    @property
+    def triangles_coplanar_angle_cos(self) -> float:
+        """Lower bound for cos angle to consider coplanar faces for scaffolding.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._triangles_coplanar_angle_cos
+
+    @triangles_coplanar_angle_cos.setter
+    def triangles_coplanar_angle_cos(self, value: float):
+        self._triangles_coplanar_angle_cos = value
+
 class VolumetricScaffolderParams(CoreObject):
     """Parameters to control delete shadowed topofaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumetricScaffolderParams`` object with default parameters.
+    absolute_dist_tol: float, optional
+        Specify distance tolerance between overlapping faces.
+    only_check_exact_overlaps: bool, optional
+        Check only for fully overlapping topofaces when true.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumetricScaffolderParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volumetric_scaffolder_params = prime.VolumetricScaffolderParams(model = model)
     """
     _default_params = {}
 
@@ -184,18 +387,18 @@ class VolumetricScaffolderParams(CoreObject):
             only_check_exact_overlaps: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VolumetricScaffolderParams.
+        """Initialize a ``VolumetricScaffolderParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VolumetricScaffolderParams object with default parameters.
+            Model to create a ``VolumetricScaffolderParams`` object with default parameters.
         absolute_dist_tol: float, optional
             Specify distance tolerance between overlapping faces.
         only_check_exact_overlaps: bool, optional
             Check only for fully overlapping topofaces when true.
         json_data: dict, optional
-            JSON dictionary to create a VolumetricScaffolderParams object with provided parameters.
+            JSON dictionary to create a ``VolumetricScaffolderParams`` object with provided parameters.
 
         Examples
         --------
@@ -213,7 +416,7 @@ class VolumetricScaffolderParams(CoreObject):
                     only_check_exact_overlaps)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VolumetricScaffolderParams")
                     json_data = param_json["VolumetricScaffolderParams"] if "VolumetricScaffolderParams" in param_json else {}
@@ -231,7 +434,7 @@ class VolumetricScaffolderParams(CoreObject):
     def set_default(
             absolute_dist_tol: float = None,
             only_check_exact_overlaps: bool = None):
-        """Set the default values of VolumetricScaffolderParams.
+        """Set the default values of the ``VolumetricScaffolderParams`` object.
 
         Parameters
         ----------
@@ -245,7 +448,7 @@ class VolumetricScaffolderParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VolumetricScaffolderParams.
+        """Print the default values of ``VolumetricScaffolderParams`` object.
 
         Examples
         --------
@@ -291,6 +494,21 @@ class VolumetricScaffolderParams(CoreObject):
 
 class ScaffolderResults(CoreObject):
     """Results structure associated to scaffold operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderResults`` object with default parameters.
+    n_incomplete_topo_faces: int, optional
+        Number of topofaces failed in scaffold operation.
+    error_code: ErrorCode, optional
+        Error code associated with scaffold operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_results = prime.ScaffolderResults(model = model)
     """
     _default_params = {}
 
@@ -308,18 +526,18 @@ class ScaffolderResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ScaffolderResults.
+        """Initialize a ``ScaffolderResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ScaffolderResults object with default parameters.
+            Model to create a ``ScaffolderResults`` object with default parameters.
         n_incomplete_topo_faces: int, optional
             Number of topofaces failed in scaffold operation.
         error_code: ErrorCode, optional
             Error code associated with scaffold operation.
         json_data: dict, optional
-            JSON dictionary to create a ScaffolderResults object with provided parameters.
+            JSON dictionary to create a ``ScaffolderResults`` object with provided parameters.
 
         Examples
         --------
@@ -337,7 +555,7 @@ class ScaffolderResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ScaffolderResults")
                     json_data = param_json["ScaffolderResults"] if "ScaffolderResults" in param_json else {}
@@ -355,7 +573,7 @@ class ScaffolderResults(CoreObject):
     def set_default(
             n_incomplete_topo_faces: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of ScaffolderResults.
+        """Set the default values of the ``ScaffolderResults`` object.
 
         Parameters
         ----------
@@ -369,7 +587,7 @@ class ScaffolderResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ScaffolderResults.
+        """Print the default values of ``ScaffolderResults`` object.
 
         Examples
         --------
@@ -415,6 +633,21 @@ class ScaffolderResults(CoreObject):
 
 class ScaffolderSplitResults(CoreObject):
     """Result structure associated to split topofaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderSplitResults`` object with default parameters.
+    new_faces: Iterable[int], optional
+        Topofaces created after split operation.
+    error_code: ErrorCode, optional
+        Error code associated with split topofaces operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderSplitResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_split_results = prime.ScaffolderSplitResults(model = model)
     """
     _default_params = {}
 
@@ -432,18 +665,18 @@ class ScaffolderSplitResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ScaffolderSplitResults.
+        """Initialize a ``ScaffolderSplitResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ScaffolderSplitResults object with default parameters.
+            Model to create a ``ScaffolderSplitResults`` object with default parameters.
         new_faces: Iterable[int], optional
             Topofaces created after split operation.
         error_code: ErrorCode, optional
             Error code associated with split topofaces operation.
         json_data: dict, optional
-            JSON dictionary to create a ScaffolderSplitResults object with provided parameters.
+            JSON dictionary to create a ``ScaffolderSplitResults`` object with provided parameters.
 
         Examples
         --------
@@ -461,7 +694,7 @@ class ScaffolderSplitResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ScaffolderSplitResults")
                     json_data = param_json["ScaffolderSplitResults"] if "ScaffolderSplitResults" in param_json else {}
@@ -479,7 +712,7 @@ class ScaffolderSplitResults(CoreObject):
     def set_default(
             new_faces: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of ScaffolderSplitResults.
+        """Set the default values of the ``ScaffolderSplitResults`` object.
 
         Parameters
         ----------
@@ -493,7 +726,7 @@ class ScaffolderSplitResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ScaffolderSplitResults.
+        """Print the default values of ``ScaffolderSplitResults`` object.
 
         Examples
         --------
@@ -539,6 +772,21 @@ class ScaffolderSplitResults(CoreObject):
 
 class ScaffolderMergeResults(CoreObject):
     """Result structure associated with merge overlapping topofaces and delete shadowed topofaces operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ScaffolderMergeResults`` object with default parameters.
+    n_merged: int, optional
+        Number of merged topofaces.
+    error_code: ErrorCode, optional
+        Error code associated with merge overlapping topofaces operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ScaffolderMergeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> scaffolder_merge_results = prime.ScaffolderMergeResults(model = model)
     """
     _default_params = {}
 
@@ -556,18 +804,18 @@ class ScaffolderMergeResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ScaffolderMergeResults.
+        """Initialize a ``ScaffolderMergeResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ScaffolderMergeResults object with default parameters.
+            Model to create a ``ScaffolderMergeResults`` object with default parameters.
         n_merged: int, optional
             Number of merged topofaces.
         error_code: ErrorCode, optional
             Error code associated with merge overlapping topofaces operation.
         json_data: dict, optional
-            JSON dictionary to create a ScaffolderMergeResults object with provided parameters.
+            JSON dictionary to create a ``ScaffolderMergeResults`` object with provided parameters.
 
         Examples
         --------
@@ -585,7 +833,7 @@ class ScaffolderMergeResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ScaffolderMergeResults")
                     json_data = param_json["ScaffolderMergeResults"] if "ScaffolderMergeResults" in param_json else {}
@@ -603,7 +851,7 @@ class ScaffolderMergeResults(CoreObject):
     def set_default(
             n_merged: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of ScaffolderMergeResults.
+        """Set the default values of the ``ScaffolderMergeResults`` object.
 
         Parameters
         ----------
@@ -617,7 +865,7 @@ class ScaffolderMergeResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ScaffolderMergeResults.
+        """Print the default values of ``ScaffolderMergeResults`` object.
 
         Examples
         --------

@@ -10,6 +10,19 @@ from ansys.meshing.prime.params.primestructs import *
 
 class CellStatisticsParams(CoreObject):
     """Parameters used to calculate cell statistics.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CellStatisticsParams`` object with default parameters.
+    get_volume: bool, optional
+        Provides option to compute and get cumulative cell volume.
+    json_data: dict, optional
+        JSON dictionary to create a ``CellStatisticsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> cell_statistics_params = prime.CellStatisticsParams(model = model)
     """
     _default_params = {}
 
@@ -24,16 +37,16 @@ class CellStatisticsParams(CoreObject):
             get_volume: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CellStatisticsParams.
+        """Initialize a ``CellStatisticsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CellStatisticsParams object with default parameters.
+            Model to create a ``CellStatisticsParams`` object with default parameters.
         get_volume: bool, optional
             Provides option to compute and get cumulative cell volume.
         json_data: dict, optional
-            JSON dictionary to create a CellStatisticsParams object with provided parameters.
+            JSON dictionary to create a ``CellStatisticsParams`` object with provided parameters.
 
         Examples
         --------
@@ -49,7 +62,7 @@ class CellStatisticsParams(CoreObject):
                     get_volume)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CellStatisticsParams")
                     json_data = param_json["CellStatisticsParams"] if "CellStatisticsParams" in param_json else {}
@@ -65,7 +78,7 @@ class CellStatisticsParams(CoreObject):
     @staticmethod
     def set_default(
             get_volume: bool = None):
-        """Set the default values of CellStatisticsParams.
+        """Set the default values of the ``CellStatisticsParams`` object.
 
         Parameters
         ----------
@@ -77,7 +90,7 @@ class CellStatisticsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CellStatisticsParams.
+        """Print the default values of ``CellStatisticsParams`` object.
 
         Examples
         --------
@@ -111,6 +124,21 @@ class CellStatisticsParams(CoreObject):
 
 class CellStatisticsResults(CoreObject):
     """Results of cell statistics information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CellStatisticsResults`` object with default parameters.
+    volume: float, optional
+        Cumulative volume of all the cell elements of selected entities.
+    error_code: ErrorCode, optional
+        Error code associated with the cell statistics function.
+    json_data: dict, optional
+        JSON dictionary to create a ``CellStatisticsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> cell_statistics_results = prime.CellStatisticsResults(model = model)
     """
     _default_params = {}
 
@@ -128,18 +156,18 @@ class CellStatisticsResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CellStatisticsResults.
+        """Initialize a ``CellStatisticsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CellStatisticsResults object with default parameters.
+            Model to create a ``CellStatisticsResults`` object with default parameters.
         volume: float, optional
             Cumulative volume of all the cell elements of selected entities.
         error_code: ErrorCode, optional
             Error code associated with the cell statistics function.
         json_data: dict, optional
-            JSON dictionary to create a CellStatisticsResults object with provided parameters.
+            JSON dictionary to create a ``CellStatisticsResults`` object with provided parameters.
 
         Examples
         --------
@@ -157,7 +185,7 @@ class CellStatisticsResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CellStatisticsResults")
                     json_data = param_json["CellStatisticsResults"] if "CellStatisticsResults" in param_json else {}
@@ -175,7 +203,7 @@ class CellStatisticsResults(CoreObject):
     def set_default(
             volume: float = None,
             error_code: ErrorCode = None):
-        """Set the default values of CellStatisticsResults.
+        """Set the default values of the ``CellStatisticsResults`` object.
 
         Parameters
         ----------
@@ -189,7 +217,7 @@ class CellStatisticsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CellStatisticsResults.
+        """Print the default values of ``CellStatisticsResults`` object.
 
         Examples
         --------
@@ -235,6 +263,37 @@ class CellStatisticsResults(CoreObject):
 
 class FaceConnectivityResults(CoreObject):
     """Result of the face connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FaceConnectivityResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the get face connectivity operation.
+    face_zonelet_ids: Iterable[int], optional
+        Face zonelet ids for which connectivity data is available.
+    topo_face_ids: Iterable[int], optional
+        TopoFace ids corresponding to each face zonelet id for topology based mesh.
+    mesh_face_ids: Iterable[int], optional
+        Mesh face ids corresponding to each topoface.
+    face_zone_ids: Iterable[int], optional
+        Face zone id corresponding to each topoface or face zonelet.
+    face_zone_names: List[str], optional
+        Face zone name corresponding to each topoface or face zonelet.
+    num_nodes_per_face_zonelet: Iterable[int], optional
+        Number of nodes per face zonelet.
+    node_coords: Iterable[float], optional
+        Node coordinates describing faces of face zonelet.
+    num_face_list_per_face_zonelet: Iterable[int], optional
+        Number of face list per face zonelet.
+    face_list: Iterable[int], optional
+        Face list describing connectivity of node coordinates.
+    json_data: dict, optional
+        JSON dictionary to create a ``FaceConnectivityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> face_connectivity_results = prime.FaceConnectivityResults(model = model)
     """
     _default_params = {}
 
@@ -276,12 +335,12 @@ class FaceConnectivityResults(CoreObject):
             face_list: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FaceConnectivityResults.
+        """Initialize a ``FaceConnectivityResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FaceConnectivityResults object with default parameters.
+            Model to create a ``FaceConnectivityResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the get face connectivity operation.
         face_zonelet_ids: Iterable[int], optional
@@ -303,7 +362,7 @@ class FaceConnectivityResults(CoreObject):
         face_list: Iterable[int], optional
             Face list describing connectivity of node coordinates.
         json_data: dict, optional
-            JSON dictionary to create a FaceConnectivityResults object with provided parameters.
+            JSON dictionary to create a ``FaceConnectivityResults`` object with provided parameters.
 
         Examples
         --------
@@ -337,7 +396,7 @@ class FaceConnectivityResults(CoreObject):
                     face_list)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FaceConnectivityResults")
                     json_data = param_json["FaceConnectivityResults"] if "FaceConnectivityResults" in param_json else {}
@@ -371,7 +430,7 @@ class FaceConnectivityResults(CoreObject):
             node_coords: Iterable[float] = None,
             num_face_list_per_face_zonelet: Iterable[int] = None,
             face_list: Iterable[int] = None):
-        """Set the default values of FaceConnectivityResults.
+        """Set the default values of the ``FaceConnectivityResults`` object.
 
         Parameters
         ----------
@@ -401,7 +460,7 @@ class FaceConnectivityResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FaceConnectivityResults.
+        """Print the default values of ``FaceConnectivityResults`` object.
 
         Examples
         --------
@@ -543,6 +602,37 @@ class FaceConnectivityResults(CoreObject):
 
 class EdgeConnectivityResults(CoreObject):
     """Result of the edge connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``EdgeConnectivityResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the get edge connectivity operation.
+    edge_zonelet_ids: Iterable[int], optional
+        Edge zonelet ids for which connectivity data is available.
+    topo_edge_ids: Iterable[int], optional
+        TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
+    mesh_edge_ids: Iterable[int], optional
+        Mesh edge ids corresponding to each topoedge.
+    topo_edge_types: Iterable[int], optional
+        TopoEdge type corresponding to each topoedge.
+    num_nodes_per_edge_zonelet: Iterable[int], optional
+        Number of nodes per edge zonelet.
+    node_coords: Iterable[float], optional
+        Node coordinates describing edges of edge zonelet.
+    num_edge_list_per_edge_zonelet: Iterable[int], optional
+        Number of edge list per edge zonelet.
+    edge_list: Iterable[int], optional
+        Edge list describing connectivity of node coordinates.
+    num_edges_per_edge_zonelet: Iterable[int], optional
+        Number of edges per edge zonelet.
+    json_data: dict, optional
+        JSON dictionary to create a ``EdgeConnectivityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> edge_connectivity_results = prime.EdgeConnectivityResults(model = model)
     """
     _default_params = {}
 
@@ -584,12 +674,12 @@ class EdgeConnectivityResults(CoreObject):
             num_edges_per_edge_zonelet: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the EdgeConnectivityResults.
+        """Initialize a ``EdgeConnectivityResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a EdgeConnectivityResults object with default parameters.
+            Model to create a ``EdgeConnectivityResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the get edge connectivity operation.
         edge_zonelet_ids: Iterable[int], optional
@@ -611,7 +701,7 @@ class EdgeConnectivityResults(CoreObject):
         num_edges_per_edge_zonelet: Iterable[int], optional
             Number of edges per edge zonelet.
         json_data: dict, optional
-            JSON dictionary to create a EdgeConnectivityResults object with provided parameters.
+            JSON dictionary to create a ``EdgeConnectivityResults`` object with provided parameters.
 
         Examples
         --------
@@ -645,7 +735,7 @@ class EdgeConnectivityResults(CoreObject):
                     num_edges_per_edge_zonelet)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "EdgeConnectivityResults")
                     json_data = param_json["EdgeConnectivityResults"] if "EdgeConnectivityResults" in param_json else {}
@@ -679,7 +769,7 @@ class EdgeConnectivityResults(CoreObject):
             num_edge_list_per_edge_zonelet: Iterable[int] = None,
             edge_list: Iterable[int] = None,
             num_edges_per_edge_zonelet: Iterable[int] = None):
-        """Set the default values of EdgeConnectivityResults.
+        """Set the default values of the ``EdgeConnectivityResults`` object.
 
         Parameters
         ----------
@@ -709,7 +799,7 @@ class EdgeConnectivityResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of EdgeConnectivityResults.
+        """Print the default values of ``EdgeConnectivityResults`` object.
 
         Examples
         --------
@@ -851,6 +941,25 @@ class EdgeConnectivityResults(CoreObject):
 
 class FaceAndEdgeConnectivityResults(CoreObject):
     """Result of the face and edge connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FaceAndEdgeConnectivityResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the get face and edge connectivity operation.
+    part_ids: Iterable[int], optional
+        Part ids for which face and edge connectivity data is available.
+    face_connectivity_result_per_part: List[FaceConnectivityResults], optional
+        Face connectivity result per part.
+    edge_connectivity_result_per_part: List[EdgeConnectivityResults], optional
+        Edge connectivity result per part.
+    json_data: dict, optional
+        JSON dictionary to create a ``FaceAndEdgeConnectivityResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> face_and_edge_connectivity_results = prime.FaceAndEdgeConnectivityResults(model = model)
     """
     _default_params = {}
 
@@ -874,12 +983,12 @@ class FaceAndEdgeConnectivityResults(CoreObject):
             edge_connectivity_result_per_part: List[EdgeConnectivityResults] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FaceAndEdgeConnectivityResults.
+        """Initialize a ``FaceAndEdgeConnectivityResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FaceAndEdgeConnectivityResults object with default parameters.
+            Model to create a ``FaceAndEdgeConnectivityResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the get face and edge connectivity operation.
         part_ids: Iterable[int], optional
@@ -889,7 +998,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
         edge_connectivity_result_per_part: List[EdgeConnectivityResults], optional
             Edge connectivity result per part.
         json_data: dict, optional
-            JSON dictionary to create a FaceAndEdgeConnectivityResults object with provided parameters.
+            JSON dictionary to create a ``FaceAndEdgeConnectivityResults`` object with provided parameters.
 
         Examples
         --------
@@ -911,7 +1020,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
                     edge_connectivity_result_per_part)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityResults")
                     json_data = param_json["FaceAndEdgeConnectivityResults"] if "FaceAndEdgeConnectivityResults" in param_json else {}
@@ -933,7 +1042,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
             part_ids: Iterable[int] = None,
             face_connectivity_result_per_part: List[FaceConnectivityResults] = None,
             edge_connectivity_result_per_part: List[EdgeConnectivityResults] = None):
-        """Set the default values of FaceAndEdgeConnectivityResults.
+        """Set the default values of the ``FaceAndEdgeConnectivityResults`` object.
 
         Parameters
         ----------
@@ -951,7 +1060,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FaceAndEdgeConnectivityResults.
+        """Print the default values of ``FaceAndEdgeConnectivityResults`` object.
 
         Examples
         --------
@@ -1021,6 +1130,21 @@ class FaceAndEdgeConnectivityResults(CoreObject):
 
 class FaceAndEdgeConnectivityParams(CoreObject):
     """Parameters to get face and edge connectivity information.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FaceAndEdgeConnectivityParams`` object with default parameters.
+    reorder_face_zonelets_mid_nodes: bool, optional
+        Option to reorder mid nodes for quadratic faces.
+    reorder_edge_zonelets_mid_nodes: bool, optional
+        Option to reorder mid nodes for quadratic edges.
+    json_data: dict, optional
+        JSON dictionary to create a ``FaceAndEdgeConnectivityParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> face_and_edge_connectivity_params = prime.FaceAndEdgeConnectivityParams(model = model)
     """
     _default_params = {}
 
@@ -1038,18 +1162,18 @@ class FaceAndEdgeConnectivityParams(CoreObject):
             reorder_edge_zonelets_mid_nodes: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FaceAndEdgeConnectivityParams.
+        """Initialize a ``FaceAndEdgeConnectivityParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FaceAndEdgeConnectivityParams object with default parameters.
+            Model to create a ``FaceAndEdgeConnectivityParams`` object with default parameters.
         reorder_face_zonelets_mid_nodes: bool, optional
             Option to reorder mid nodes for quadratic faces.
         reorder_edge_zonelets_mid_nodes: bool, optional
             Option to reorder mid nodes for quadratic edges.
         json_data: dict, optional
-            JSON dictionary to create a FaceAndEdgeConnectivityParams object with provided parameters.
+            JSON dictionary to create a ``FaceAndEdgeConnectivityParams`` object with provided parameters.
 
         Examples
         --------
@@ -1067,7 +1191,7 @@ class FaceAndEdgeConnectivityParams(CoreObject):
                     reorder_edge_zonelets_mid_nodes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FaceAndEdgeConnectivityParams")
                     json_data = param_json["FaceAndEdgeConnectivityParams"] if "FaceAndEdgeConnectivityParams" in param_json else {}
@@ -1085,7 +1209,7 @@ class FaceAndEdgeConnectivityParams(CoreObject):
     def set_default(
             reorder_face_zonelets_mid_nodes: bool = None,
             reorder_edge_zonelets_mid_nodes: bool = None):
-        """Set the default values of FaceAndEdgeConnectivityParams.
+        """Set the default values of the ``FaceAndEdgeConnectivityParams`` object.
 
         Parameters
         ----------
@@ -1099,7 +1223,7 @@ class FaceAndEdgeConnectivityParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FaceAndEdgeConnectivityParams.
+        """Print the default values of ``FaceAndEdgeConnectivityParams`` object.
 
         Examples
         --------

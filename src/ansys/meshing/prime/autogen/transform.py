@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class Transform(CoreObject):
     """Provides functionalities to initialize and manage transformation using transformation matrix.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Transform object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -56,11 +60,11 @@ class Transform(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, TransformParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is TransformParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is TransformParams.")
         args = {"part_id" : part_id,
         "zonelets" : zonelets,
         "params" : params._jsonify()}

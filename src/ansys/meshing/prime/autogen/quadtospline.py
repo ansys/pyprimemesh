@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class QuadToSpline(CoreObject):
     """Converts all-quad mesh to spline.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create QuadToSpline object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -48,7 +52,7 @@ class QuadToSpline(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -56,9 +60,9 @@ class QuadToSpline(CoreObject):
 
         """
         if not isinstance(input_scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for input_scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'input_scope'. Valid argument type is ScopeDefinition.")
         if not isinstance(quad_to_spline_params, QuadToSplineParams):
-            raise TypeError("Invalid argument type passed for quad_to_spline_params, valid argument type is QuadToSplineParams.")
+            raise TypeError("Invalid argument type passed for 'quad_to_spline_params'. Valid argument type is QuadToSplineParams.")
         args = {"input_scope" : input_scope._jsonify(),
         "quad_to_spline_params" : quad_to_spline_params._jsonify()}
         command_name = "PrimeMesh::QuadToSpline/ConvertQuadToSpline"

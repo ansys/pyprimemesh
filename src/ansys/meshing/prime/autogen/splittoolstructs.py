@@ -10,6 +10,19 @@ from ansys.meshing.prime.params.primestructs import *
 
 class SplitParams(CoreObject):
     """Parameters to split face elements at longest edge.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SplitParams`` object with default parameters.
+    split_ratio: float, optional
+        Minimum ratio of split edge length to original edge length.
+    json_data: dict, optional
+        JSON dictionary to create a ``SplitParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> split_params = prime.SplitParams(model = model)
     """
     _default_params = {}
 
@@ -24,16 +37,16 @@ class SplitParams(CoreObject):
             split_ratio: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SplitParams.
+        """Initialize a ``SplitParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SplitParams object with default parameters.
+            Model to create a ``SplitParams`` object with default parameters.
         split_ratio: float, optional
             Minimum ratio of split edge length to original edge length.
         json_data: dict, optional
-            JSON dictionary to create a SplitParams object with provided parameters.
+            JSON dictionary to create a ``SplitParams`` object with provided parameters.
 
         Examples
         --------
@@ -49,7 +62,7 @@ class SplitParams(CoreObject):
                     split_ratio)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SplitParams")
                     json_data = param_json["SplitParams"] if "SplitParams" in param_json else {}
@@ -65,7 +78,7 @@ class SplitParams(CoreObject):
     @staticmethod
     def set_default(
             split_ratio: float = None):
-        """Set the default values of SplitParams.
+        """Set the default values of the ``SplitParams`` object.
 
         Parameters
         ----------
@@ -77,7 +90,7 @@ class SplitParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SplitParams.
+        """Print the default values of ``SplitParams`` object.
 
         Examples
         --------

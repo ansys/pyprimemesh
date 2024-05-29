@@ -13,6 +13,17 @@ class Model(CoreObject, CommunicationManager):
 
     You can access any information in Prime only through Model.
     Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+
+    Parameters
+    ----------
+    comm : Communicator
+        Communicator to connect with the Ansys Prime server.
+    id : int
+        Id of the Model.
+    object_id : int
+        Object id of the Model.
+    name : str
+        Name of the Model.
     """
 
     def __init__(self, comm, id: int, object_id: int, name: str):
@@ -53,7 +64,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(part_ids, Iterable):
-            raise TypeError("Invalid argument type passed for part_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
         args = {"part_ids" : part_ids}
         command_name = "PrimeMesh::Model/DeleteParts"
         self._print_logs_before_command("delete_parts", args)
@@ -62,7 +73,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteResults(model = self, json_data = result)
 
     def merge_parts(self, part_ids : Iterable[int], params : MergePartsParams) -> MergePartsResults:
-        """ Merge given parts into one.
+        """ Merges given parts into one.
 
 
         Parameters
@@ -85,9 +96,9 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(part_ids, Iterable):
-            raise TypeError("Invalid argument type passed for part_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, MergePartsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MergePartsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MergePartsParams.")
         args = {"part_ids" : part_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Model/MergeParts"
@@ -97,7 +108,7 @@ class Model(CoreObject, CommunicationManager):
         return MergePartsResults(model = self, json_data = result)
 
     def set_global_sizing_params(self, params : GlobalSizingParams) -> SetSizingResults:
-        """ Set the global sizing parameters to initialize surfer parameters and various size control parameters.
+        """ Sets the global sizing parameters to initialize surfer parameters and various size control parameters.
 
 
         Parameters
@@ -114,7 +125,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(params, GlobalSizingParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is GlobalSizingParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is GlobalSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Model/SetGlobalSizingParams"
         self._print_logs_before_command("set_global_sizing_params", args)
@@ -169,7 +180,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def activate_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Activate the sizefields with the given sizefield ids.
+        """ Activate the sizefields identified by the given sizefield ids.
 
 
         Parameters
@@ -184,7 +195,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(size_field_ids, Iterable):
-            raise TypeError("Invalid argument type passed for size_field_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'size_field_ids'. Valid argument type is Iterable[int].")
         args = {"size_field_ids" : size_field_ids}
         command_name = "PrimeMesh::Model/ActivateVolumetricSizeFields"
         self._print_logs_before_command("activate_volumetric_size_fields", args)
@@ -192,7 +203,7 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("activate_volumetric_size_fields")
 
     def deactivate_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Deactivate the sizefields with the given sizefield ids.
+        """ Deactivate the sizefields identified by the given sizefield ids.
 
 
         Parameters
@@ -207,7 +218,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(size_field_ids, Iterable):
-            raise TypeError("Invalid argument type passed for size_field_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'size_field_ids'. Valid argument type is Iterable[int].")
         args = {"size_field_ids" : size_field_ids}
         command_name = "PrimeMesh::Model/DeactivateVolumetricSizeFields"
         self._print_logs_before_command("deactivate_volumetric_size_fields", args)
@@ -215,7 +226,7 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("deactivate_volumetric_size_fields")
 
     def delete_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Delete the sizefields with the given sizefield ids.
+        """ Delete the sizefields identified by the given sizefield ids.
 
 
         Parameters
@@ -230,7 +241,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(size_field_ids, Iterable):
-            raise TypeError("Invalid argument type passed for size_field_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'size_field_ids'. Valid argument type is Iterable[int].")
         args = {"size_field_ids" : size_field_ids}
         command_name = "PrimeMesh::Model/DeleteVolumetricSizeFields"
         self._print_logs_before_command("delete_volumetric_size_fields", args)
@@ -253,7 +264,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(num, int):
-            raise TypeError("Invalid argument type passed for num, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'num'. Valid argument type is int.")
         args = {"num" : num}
         command_name = "PrimeMesh::Model/SetNumThreads"
         self._print_logs_before_command("set_num_threads", args)
@@ -325,9 +336,9 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(suggested_name, str):
-            raise TypeError("Invalid argument type passed for suggested_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
         if not isinstance(type, ZoneType):
-            raise TypeError("Invalid argument type passed for type, valid argument type is ZoneType.")
+            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is ZoneType.")
         args = {"suggested_name" : suggested_name,
         "type" : type}
         command_name = "PrimeMesh::Model/CreateZone"
@@ -337,7 +348,7 @@ class Model(CoreObject, CommunicationManager):
         return CreateZoneResults(model = self, json_data = result)
 
     def delete_zone(self, zone_id : int) -> DeleteZoneResults:
-        """ Deletes zone with the given id.
+        """ Deletes zone identified with the given id.
 
 
         Parameters
@@ -359,7 +370,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(zone_id, int):
-            raise TypeError("Invalid argument type passed for zone_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'zone_id'. Valid argument type is int.")
         args = {"zone_id" : zone_id}
         command_name = "PrimeMesh::Model/DeleteZone"
         self._print_logs_before_command("delete_zone", args)
@@ -368,7 +379,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteZoneResults(model = self, json_data = result)
 
     def get_zone_by_name(self, zone_name : str) -> int:
-        """ Gets the zone with the provided name.
+        """ Gets the zone by name.
 
 
         Parameters
@@ -390,7 +401,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(zone_name, str):
-            raise TypeError("Invalid argument type passed for zone_name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'zone_name'. Valid argument type is str.")
         args = {"zone_name" : zone_name}
         command_name = "PrimeMesh::Model/GetZoneByName"
         self._print_logs_before_command("get_zone_by_name", args)
@@ -410,7 +421,7 @@ class Model(CoreObject, CommunicationManager):
         Returns
         -------
         str
-            Return the zone name. Return empty name if the id is invalid.
+            Return the name. Return empty name if the id is invalid.
 
 
         Examples
@@ -421,7 +432,7 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(id, int):
-            raise TypeError("Invalid argument type passed for id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'id'. Valid argument type is int.")
         args = {"id" : id}
         command_name = "PrimeMesh::Model/GetZoneName"
         self._print_logs_before_command("get_zone_name", args)
@@ -430,7 +441,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def set_suggested_zone_name(self, id : int, name : str) -> SetNameResults:
-        """ Sets the unique name for zone with given id based on the suggested name.
+        """ Sets the unique name for zone with given id based on the given suggested name.
 
 
         Parameters
@@ -454,9 +465,9 @@ class Model(CoreObject, CommunicationManager):
 
         """
         if not isinstance(id, int):
-            raise TypeError("Invalid argument type passed for id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'id'. Valid argument type is int.")
         if not isinstance(name, str):
-            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
         args = {"id" : id,
         "name" : name}
         command_name = "PrimeMesh::Model/SetSuggestedZoneName"

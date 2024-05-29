@@ -50,6 +50,29 @@ class CreateVolumeZonesType(enum.IntEnum):
 
 class BoundingBox(CoreObject):
     """Provides information about the definition of a bounding box.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``BoundingBox`` object with default parameters.
+    xmin: float, optional
+        Minimal X coordinate of the bounding box.
+    ymin: float, optional
+        Minimal Y coordinate of the bounding box.
+    zmin: float, optional
+        Minimal Z coordinate of the bounding box.
+    xmax: float, optional
+        Maximal X coordinate of the bounding box.
+    ymax: float, optional
+        Maximal Y coordinate of the bounding box.
+    zmax: float, optional
+        Maximal Z coordinate of the bounding box.
+    json_data: dict, optional
+        JSON dictionary to create a ``BoundingBox`` object with provided parameters.
+
+    Examples
+    --------
+    >>> bounding_box = prime.BoundingBox(model = model)
     """
     _default_params = {}
 
@@ -79,12 +102,12 @@ class BoundingBox(CoreObject):
             zmax: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the BoundingBox.
+        """Initialize a ``BoundingBox`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a BoundingBox object with default parameters.
+            Model to create a ``BoundingBox`` object with default parameters.
         xmin: float, optional
             Minimal X coordinate of the bounding box.
         ymin: float, optional
@@ -98,7 +121,7 @@ class BoundingBox(CoreObject):
         zmax: float, optional
             Maximal Z coordinate of the bounding box.
         json_data: dict, optional
-            JSON dictionary to create a BoundingBox object with provided parameters.
+            JSON dictionary to create a ``BoundingBox`` object with provided parameters.
 
         Examples
         --------
@@ -124,7 +147,7 @@ class BoundingBox(CoreObject):
                     zmax)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "BoundingBox")
                     json_data = param_json["BoundingBox"] if "BoundingBox" in param_json else {}
@@ -150,7 +173,7 @@ class BoundingBox(CoreObject):
             xmax: float = None,
             ymax: float = None,
             zmax: float = None):
-        """Set the default values of BoundingBox.
+        """Set the default values of the ``BoundingBox`` object.
 
         Parameters
         ----------
@@ -172,7 +195,7 @@ class BoundingBox(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of BoundingBox.
+        """Print the default values of ``BoundingBox`` object.
 
         Examples
         --------
@@ -266,6 +289,21 @@ class BoundingBox(CoreObject):
 
 class MergeZoneletsResults(CoreObject):
     """Results associated with merge zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeZoneletsResults`` object with default parameters.
+    merged_zonelets: Iterable[int], optional
+        Ids of zonelets to which input zonelets are merged.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeZoneletsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_zonelets_results = prime.MergeZoneletsResults(model = model)
     """
     _default_params = {}
 
@@ -283,18 +321,18 @@ class MergeZoneletsResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeZoneletsResults.
+        """Initialize a ``MergeZoneletsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeZoneletsResults object with default parameters.
+            Model to create a ``MergeZoneletsResults`` object with default parameters.
         merged_zonelets: Iterable[int], optional
             Ids of zonelets to which input zonelets are merged.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a MergeZoneletsResults object with provided parameters.
+            JSON dictionary to create a ``MergeZoneletsResults`` object with provided parameters.
 
         Examples
         --------
@@ -312,7 +350,7 @@ class MergeZoneletsResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeZoneletsResults")
                     json_data = param_json["MergeZoneletsResults"] if "MergeZoneletsResults" in param_json else {}
@@ -330,7 +368,7 @@ class MergeZoneletsResults(CoreObject):
     def set_default(
             merged_zonelets: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of MergeZoneletsResults.
+        """Set the default values of the ``MergeZoneletsResults`` object.
 
         Parameters
         ----------
@@ -344,7 +382,7 @@ class MergeZoneletsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeZoneletsResults.
+        """Print the default values of ``MergeZoneletsResults`` object.
 
         Examples
         --------
@@ -390,6 +428,21 @@ class MergeZoneletsResults(CoreObject):
 
 class MergeZoneletsParams(CoreObject):
     """Parameters to merge zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeZoneletsParams`` object with default parameters.
+    merge_small_zonelets_with_neighbors: bool, optional
+        Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+    element_count_limit: int, optional
+        Element count limit to identify small zonelets.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_zonelets_params = prime.MergeZoneletsParams(model = model)
     """
     _default_params = {}
 
@@ -407,18 +460,18 @@ class MergeZoneletsParams(CoreObject):
             element_count_limit: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeZoneletsParams.
+        """Initialize a ``MergeZoneletsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeZoneletsParams object with default parameters.
+            Model to create a ``MergeZoneletsParams`` object with default parameters.
         merge_small_zonelets_with_neighbors: bool, optional
             Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
         element_count_limit: int, optional
             Element count limit to identify small zonelets.
         json_data: dict, optional
-            JSON dictionary to create a MergeZoneletsParams object with provided parameters.
+            JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
 
         Examples
         --------
@@ -436,7 +489,7 @@ class MergeZoneletsParams(CoreObject):
                     element_count_limit)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeZoneletsParams")
                     json_data = param_json["MergeZoneletsParams"] if "MergeZoneletsParams" in param_json else {}
@@ -454,7 +507,7 @@ class MergeZoneletsParams(CoreObject):
     def set_default(
             merge_small_zonelets_with_neighbors: bool = None,
             element_count_limit: int = None):
-        """Set the default values of MergeZoneletsParams.
+        """Set the default values of the ``MergeZoneletsParams`` object.
 
         Parameters
         ----------
@@ -468,7 +521,7 @@ class MergeZoneletsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeZoneletsParams.
+        """Print the default values of ``MergeZoneletsParams`` object.
 
         Examples
         --------
@@ -514,6 +567,29 @@ class MergeZoneletsParams(CoreObject):
 
 class ComputeVolumesResults(CoreObject):
     """Results associated with compute volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComputeVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    error_locations: Iterable[float], optional
+        Coordinates of problematic locations in the surface mesh.
+    volumes: Iterable[int], optional
+        Ids of computed volumes.
+    material_point_volumes: Iterable[int], optional
+        Ids of computed volumes enclosing material points.
+    external_open_face_zonelets: Iterable[int], optional
+        Face zonelet ids that are in external space and not part of any computed volumes.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the compute volumes.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComputeVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_volumes_results = prime.ComputeVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -543,12 +619,12 @@ class ComputeVolumesResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ComputeVolumesResults.
+        """Initialize a ``ComputeVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ComputeVolumesResults object with default parameters.
+            Model to create a ``ComputeVolumesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         error_locations: Iterable[float], optional
@@ -562,7 +638,7 @@ class ComputeVolumesResults(CoreObject):
         warning_codes: List[WarningCode], optional
             Warning codes associated with the compute volumes.
         json_data: dict, optional
-            JSON dictionary to create a ComputeVolumesResults object with provided parameters.
+            JSON dictionary to create a ``ComputeVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -588,7 +664,7 @@ class ComputeVolumesResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ComputeVolumesResults")
                     json_data = param_json["ComputeVolumesResults"] if "ComputeVolumesResults" in param_json else {}
@@ -614,7 +690,7 @@ class ComputeVolumesResults(CoreObject):
             material_point_volumes: Iterable[int] = None,
             external_open_face_zonelets: Iterable[int] = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of ComputeVolumesResults.
+        """Set the default values of the ``ComputeVolumesResults`` object.
 
         Parameters
         ----------
@@ -636,7 +712,7 @@ class ComputeVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ComputeVolumesResults.
+        """Print the default values of ``ComputeVolumesResults`` object.
 
         Examples
         --------
@@ -730,6 +806,33 @@ class ComputeVolumesResults(CoreObject):
 
 class ComputeTopoVolumesResults(CoreObject):
     """Results associated with compute topovolumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComputeTopoVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    error_locations: Iterable[float], optional
+        Coordinates of problematic locations in the surface mesh.
+    topo_volumes: Iterable[int], optional
+        Ids of all topovolumes computed.
+    material_point_topo_volumes: Iterable[int], optional
+        Ids of topovolumes enclosing material points.
+    external_open_topo_faces: Iterable[int], optional
+        Topoface ids that are in external space and not part of any topovolumes.
+    new_topo_volumes: Iterable[int], optional
+        Ids of new topovolumes computed.
+    deleted_topo_volumes: Iterable[int], optional
+        Ids of existing topovolumes that got deleted.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the compute topovolumes.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComputeTopoVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_topo_volumes_results = prime.ComputeTopoVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -765,12 +868,12 @@ class ComputeTopoVolumesResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ComputeTopoVolumesResults.
+        """Initialize a ``ComputeTopoVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ComputeTopoVolumesResults object with default parameters.
+            Model to create a ``ComputeTopoVolumesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         error_locations: Iterable[float], optional
@@ -788,7 +891,7 @@ class ComputeTopoVolumesResults(CoreObject):
         warning_codes: List[WarningCode], optional
             Warning codes associated with the compute topovolumes.
         json_data: dict, optional
-            JSON dictionary to create a ComputeTopoVolumesResults object with provided parameters.
+            JSON dictionary to create a ``ComputeTopoVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -818,7 +921,7 @@ class ComputeTopoVolumesResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ComputeTopoVolumesResults")
                     json_data = param_json["ComputeTopoVolumesResults"] if "ComputeTopoVolumesResults" in param_json else {}
@@ -848,7 +951,7 @@ class ComputeTopoVolumesResults(CoreObject):
             new_topo_volumes: Iterable[int] = None,
             deleted_topo_volumes: Iterable[int] = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of ComputeTopoVolumesResults.
+        """Set the default values of the ``ComputeTopoVolumesResults`` object.
 
         Parameters
         ----------
@@ -874,7 +977,7 @@ class ComputeTopoVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ComputeTopoVolumesResults.
+        """Print the default values of ``ComputeTopoVolumesResults`` object.
 
         Examples
         --------
@@ -992,6 +1095,27 @@ class ComputeTopoVolumesResults(CoreObject):
 
 class ExtractVolumesResults(CoreObject):
     """Results associated with compute volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    volumes: Iterable[int], optional
+        Ids of computed volumes.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the compute volumes.
+    assigned_zone_name: str, optional
+        Assigned name of zone for extracted flow volumes.
+    face_zonelets_without_volumes: Iterable[int], optional
+        Ids of face zonelets for which volumes were not extracted.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_volumes_results = prime.ExtractVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -1018,12 +1142,12 @@ class ExtractVolumesResults(CoreObject):
             face_zonelets_without_volumes: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractVolumesResults.
+        """Initialize a ``ExtractVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractVolumesResults object with default parameters.
+            Model to create a ``ExtractVolumesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         volumes: Iterable[int], optional
@@ -1035,7 +1159,7 @@ class ExtractVolumesResults(CoreObject):
         face_zonelets_without_volumes: Iterable[int], optional
             Ids of face zonelets for which volumes were not extracted.
         json_data: dict, optional
-            JSON dictionary to create a ExtractVolumesResults object with provided parameters.
+            JSON dictionary to create a ``ExtractVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1059,7 +1183,7 @@ class ExtractVolumesResults(CoreObject):
                     face_zonelets_without_volumes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractVolumesResults")
                     json_data = param_json["ExtractVolumesResults"] if "ExtractVolumesResults" in param_json else {}
@@ -1083,7 +1207,7 @@ class ExtractVolumesResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             assigned_zone_name: str = None,
             face_zonelets_without_volumes: Iterable[int] = None):
-        """Set the default values of ExtractVolumesResults.
+        """Set the default values of the ``ExtractVolumesResults`` object.
 
         Parameters
         ----------
@@ -1103,7 +1227,7 @@ class ExtractVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractVolumesResults.
+        """Print the default values of ``ExtractVolumesResults`` object.
 
         Examples
         --------
@@ -1185,6 +1309,25 @@ class ExtractVolumesResults(CoreObject):
 
 class ComputeVolumesParams(CoreObject):
     """Parameters to compute volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComputeVolumesParams`` object with default parameters.
+    volume_naming_type: VolumeNamingType, optional
+        Indicates source type used to compute zone name for volumes.
+    create_zones_type: CreateVolumeZonesType, optional
+        Option to control volume zone creation for volumes.
+    priority_ordered_names: List[str], optional
+        Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+    material_point_names: List[str], optional
+        Material point names provided to identify volumes. Material point names will have precedence over the volume names.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComputeVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_volumes_params = prime.ComputeVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -1208,12 +1351,12 @@ class ComputeVolumesParams(CoreObject):
             material_point_names: List[str] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ComputeVolumesParams.
+        """Initialize a ``ComputeVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ComputeVolumesParams object with default parameters.
+            Model to create a ``ComputeVolumesParams`` object with default parameters.
         volume_naming_type: VolumeNamingType, optional
             Indicates source type used to compute zone name for volumes.
         create_zones_type: CreateVolumeZonesType, optional
@@ -1223,7 +1366,7 @@ class ComputeVolumesParams(CoreObject):
         material_point_names: List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
         json_data: dict, optional
-            JSON dictionary to create a ComputeVolumesParams object with provided parameters.
+            JSON dictionary to create a ``ComputeVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1245,7 +1388,7 @@ class ComputeVolumesParams(CoreObject):
                     material_point_names)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ComputeVolumesParams")
                     json_data = param_json["ComputeVolumesParams"] if "ComputeVolumesParams" in param_json else {}
@@ -1267,7 +1410,7 @@ class ComputeVolumesParams(CoreObject):
             create_zones_type: CreateVolumeZonesType = None,
             priority_ordered_names: List[str] = None,
             material_point_names: List[str] = None):
-        """Set the default values of ComputeVolumesParams.
+        """Set the default values of the ``ComputeVolumesParams`` object.
 
         Parameters
         ----------
@@ -1285,7 +1428,7 @@ class ComputeVolumesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ComputeVolumesParams.
+        """Print the default values of ``ComputeVolumesParams`` object.
 
         Examples
         --------
@@ -1355,6 +1498,21 @@ class ComputeVolumesParams(CoreObject):
 
 class ExtractVolumesParams(CoreObject):
     """Parameters to extract flow volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractVolumesParams`` object with default parameters.
+    create_zone: bool, optional
+        Option to create zone for flow volumes extracted.
+    suggested_zone_name: str, optional
+        Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_volumes_params = prime.ExtractVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -1372,18 +1530,18 @@ class ExtractVolumesParams(CoreObject):
             suggested_zone_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractVolumesParams.
+        """Initialize a ``ExtractVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractVolumesParams object with default parameters.
+            Model to create a ``ExtractVolumesParams`` object with default parameters.
         create_zone: bool, optional
             Option to create zone for flow volumes extracted.
         suggested_zone_name: str, optional
-            Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+            Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         json_data: dict, optional
-            JSON dictionary to create a ExtractVolumesParams object with provided parameters.
+            JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1401,7 +1559,7 @@ class ExtractVolumesParams(CoreObject):
                     suggested_zone_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractVolumesParams")
                     json_data = param_json["ExtractVolumesParams"] if "ExtractVolumesParams" in param_json else {}
@@ -1419,21 +1577,21 @@ class ExtractVolumesParams(CoreObject):
     def set_default(
             create_zone: bool = None,
             suggested_zone_name: str = None):
-        """Set the default values of ExtractVolumesParams.
+        """Set the default values of the ``ExtractVolumesParams`` object.
 
         Parameters
         ----------
         create_zone: bool, optional
             Option to create zone for flow volumes extracted.
         suggested_zone_name: str, optional
-            Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+            Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         """
         args = locals()
         [ExtractVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractVolumesParams.
+        """Print the default values of ``ExtractVolumesParams`` object.
 
         Examples
         --------
@@ -1469,7 +1627,7 @@ class ExtractVolumesParams(CoreObject):
 
     @property
     def suggested_zone_name(self) -> str:
-        """Name to be used as suggestion to name zone created. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+        """Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         """
         return self._suggested_zone_name
 
@@ -1479,6 +1637,19 @@ class ExtractVolumesParams(CoreObject):
 
 class ExtractTopoVolumesParams(CoreObject):
     """Parameters to extract flow topovolumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractTopoVolumesParams`` object with default parameters.
+    zone_name: str, optional
+        Specifies zone name to associate extracted flow topovolumes.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractTopoVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_topo_volumes_params = prime.ExtractTopoVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -1493,16 +1664,16 @@ class ExtractTopoVolumesParams(CoreObject):
             zone_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractTopoVolumesParams.
+        """Initialize a ``ExtractTopoVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractTopoVolumesParams object with default parameters.
+            Model to create a ``ExtractTopoVolumesParams`` object with default parameters.
         zone_name: str, optional
             Specifies zone name to associate extracted flow topovolumes.
         json_data: dict, optional
-            JSON dictionary to create a ExtractTopoVolumesParams object with provided parameters.
+            JSON dictionary to create a ``ExtractTopoVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1518,7 +1689,7 @@ class ExtractTopoVolumesParams(CoreObject):
                     zone_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractTopoVolumesParams")
                     json_data = param_json["ExtractTopoVolumesParams"] if "ExtractTopoVolumesParams" in param_json else {}
@@ -1534,7 +1705,7 @@ class ExtractTopoVolumesParams(CoreObject):
     @staticmethod
     def set_default(
             zone_name: str = None):
-        """Set the default values of ExtractTopoVolumesParams.
+        """Set the default values of the ``ExtractTopoVolumesParams`` object.
 
         Parameters
         ----------
@@ -1546,7 +1717,7 @@ class ExtractTopoVolumesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractTopoVolumesParams.
+        """Print the default values of ``ExtractTopoVolumesParams`` object.
 
         Examples
         --------
@@ -1580,6 +1751,21 @@ class ExtractTopoVolumesParams(CoreObject):
 
 class ExtractTopoVolumesResults(CoreObject):
     """Parameters to extract flow topovolumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ExtractTopoVolumesResults`` object with default parameters.
+    volumes: Iterable[int], optional
+        Ids of extracted flow topovolumes.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ExtractTopoVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_topo_volumes_results = prime.ExtractTopoVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -1597,18 +1783,18 @@ class ExtractTopoVolumesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ExtractTopoVolumesResults.
+        """Initialize a ``ExtractTopoVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ExtractTopoVolumesResults object with default parameters.
+            Model to create a ``ExtractTopoVolumesResults`` object with default parameters.
         volumes: Iterable[int], optional
             Ids of extracted flow topovolumes.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a ExtractTopoVolumesResults object with provided parameters.
+            JSON dictionary to create a ``ExtractTopoVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1626,7 +1812,7 @@ class ExtractTopoVolumesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExtractTopoVolumesResults")
                     json_data = param_json["ExtractTopoVolumesResults"] if "ExtractTopoVolumesResults" in param_json else {}
@@ -1644,7 +1830,7 @@ class ExtractTopoVolumesResults(CoreObject):
     def set_default(
             volumes: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of ExtractTopoVolumesResults.
+        """Set the default values of the ``ExtractTopoVolumesResults`` object.
 
         Parameters
         ----------
@@ -1658,7 +1844,7 @@ class ExtractTopoVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ExtractTopoVolumesResults.
+        """Print the default values of ``ExtractTopoVolumesResults`` object.
 
         Examples
         --------
@@ -1704,6 +1890,17 @@ class ExtractTopoVolumesResults(CoreObject):
 
 class NamePatternParams(CoreObject):
     """Parameters to be used to match name pattern with names.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``NamePatternParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``NamePatternParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> name_pattern_params = prime.NamePatternParams(model = model)
     """
     _default_params = {}
 
@@ -1716,14 +1913,14 @@ class NamePatternParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the NamePatternParams.
+        """Initialize a ``NamePatternParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a NamePatternParams object with default parameters.
+            Model to create a ``NamePatternParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a NamePatternParams object with provided parameters.
+            JSON dictionary to create a ``NamePatternParams`` object with provided parameters.
 
         Examples
         --------
@@ -1737,7 +1934,7 @@ class NamePatternParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "NamePatternParams")
                     json_data = param_json["NamePatternParams"] if "NamePatternParams" in param_json else {}
@@ -1751,7 +1948,7 @@ class NamePatternParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of NamePatternParams.
+        """Set the default values of the ``NamePatternParams`` object.
 
         """
         args = locals()
@@ -1759,7 +1956,7 @@ class NamePatternParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of NamePatternParams.
+        """Print the default values of ``NamePatternParams`` object.
 
         Examples
         --------
@@ -1783,6 +1980,21 @@ class NamePatternParams(CoreObject):
 
 class PartSummaryParams(CoreObject):
     """Parameters to control part summary results.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartSummaryParams`` object with default parameters.
+    print_id: bool, optional
+        Boolean to control print ids. The default is false.
+    print_mesh: bool, optional
+        Boolean to control print mesh information. The default is true.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartSummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> part_summary_params = prime.PartSummaryParams(model = model)
     """
     _default_params = {}
 
@@ -1800,18 +2012,18 @@ class PartSummaryParams(CoreObject):
             print_mesh: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PartSummaryParams.
+        """Initialize a ``PartSummaryParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PartSummaryParams object with default parameters.
+            Model to create a ``PartSummaryParams`` object with default parameters.
         print_id: bool, optional
             Boolean to control print ids. The default is false.
         print_mesh: bool, optional
             Boolean to control print mesh information. The default is true.
         json_data: dict, optional
-            JSON dictionary to create a PartSummaryParams object with provided parameters.
+            JSON dictionary to create a ``PartSummaryParams`` object with provided parameters.
 
         Examples
         --------
@@ -1829,7 +2041,7 @@ class PartSummaryParams(CoreObject):
                     print_mesh)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PartSummaryParams")
                     json_data = param_json["PartSummaryParams"] if "PartSummaryParams" in param_json else {}
@@ -1847,7 +2059,7 @@ class PartSummaryParams(CoreObject):
     def set_default(
             print_id: bool = None,
             print_mesh: bool = None):
-        """Set the default values of PartSummaryParams.
+        """Set the default values of the ``PartSummaryParams`` object.
 
         Parameters
         ----------
@@ -1861,7 +2073,7 @@ class PartSummaryParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PartSummaryParams.
+        """Print the default values of ``PartSummaryParams`` object.
 
         Examples
         --------
@@ -1907,6 +2119,63 @@ class PartSummaryParams(CoreObject):
 
 class PartSummaryResults(CoreObject):
     """Results of part summary.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartSummaryResults`` object with default parameters.
+    message: str, optional
+        Part summary text.
+    n_topo_edges: int, optional
+        Number of topoedges.
+    n_topo_faces: int, optional
+        Number of topofaces.
+    n_topo_volumes: int, optional
+        Number of topovolumes.
+    n_edge_zonelets: int, optional
+        Number of edge zonelets.
+    n_face_zonelets: int, optional
+        Number of face zonelets.
+    n_cell_zonelets: int, optional
+        Number of cell zonelets.
+    n_edge_zones: int, optional
+        Number of edge zones.
+    n_face_zones: int, optional
+        Number of face zones.
+    n_volume_zones: int, optional
+        Number of volume zones.
+    n_labels: int, optional
+        Number of labels.
+    n_nodes: int, optional
+        Number of nodes.
+    n_faces: int, optional
+        Number of faces.
+    n_cells: int, optional
+        Number of cells.
+    n_tri_faces: int, optional
+        Number of triangular faces.
+    n_poly_faces: int, optional
+        Number of polygonal faces.
+    n_quad_faces: int, optional
+        Number of quadrilateral faces.
+    n_tet_cells: int, optional
+        Number of tetrahedral cells.
+    n_pyra_cells: int, optional
+        Number of pyramid cells.
+    n_prism_cells: int, optional
+        Number of prism cells.
+    n_poly_cells: int, optional
+        Number of polyhedral cells.
+    n_hex_cells: int, optional
+        Number of hexahedral cells.
+    n_unmeshed_topo_faces: int, optional
+        Number of unmeshed topofaces.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartSummaryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> part_summary_results = prime.PartSummaryResults(model = model)
     """
     _default_params = {}
 
@@ -1987,12 +2256,12 @@ class PartSummaryResults(CoreObject):
             n_unmeshed_topo_faces: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PartSummaryResults.
+        """Initialize a ``PartSummaryResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PartSummaryResults object with default parameters.
+            Model to create a ``PartSummaryResults`` object with default parameters.
         message: str, optional
             Part summary text.
         n_topo_edges: int, optional
@@ -2040,7 +2309,7 @@ class PartSummaryResults(CoreObject):
         n_unmeshed_topo_faces: int, optional
             Number of unmeshed topofaces.
         json_data: dict, optional
-            JSON dictionary to create a PartSummaryResults object with provided parameters.
+            JSON dictionary to create a ``PartSummaryResults`` object with provided parameters.
 
         Examples
         --------
@@ -2100,7 +2369,7 @@ class PartSummaryResults(CoreObject):
                     n_unmeshed_topo_faces)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PartSummaryResults")
                     json_data = param_json["PartSummaryResults"] if "PartSummaryResults" in param_json else {}
@@ -2160,7 +2429,7 @@ class PartSummaryResults(CoreObject):
             n_poly_cells: int = None,
             n_hex_cells: int = None,
             n_unmeshed_topo_faces: int = None):
-        """Set the default values of PartSummaryResults.
+        """Set the default values of the ``PartSummaryResults`` object.
 
         Parameters
         ----------
@@ -2216,7 +2485,7 @@ class PartSummaryResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PartSummaryResults.
+        """Print the default values of ``PartSummaryResults`` object.
 
         Examples
         --------
@@ -2514,6 +2783,21 @@ class PartSummaryResults(CoreObject):
 
 class DeleteTopoEntitiesParams(CoreObject):
     """Parameters to control delete topoentities.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteTopoEntitiesParams`` object with default parameters.
+    delete_geom_zonelets: bool, optional
+        Option to delete geometry zonelets of topology.
+    delete_mesh_zonelets: bool, optional
+        Option to delete mesh zonelets of topology.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteTopoEntitiesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_topo_entities_params = prime.DeleteTopoEntitiesParams(model = model)
     """
     _default_params = {}
 
@@ -2531,18 +2815,18 @@ class DeleteTopoEntitiesParams(CoreObject):
             delete_mesh_zonelets: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteTopoEntitiesParams.
+        """Initialize a ``DeleteTopoEntitiesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteTopoEntitiesParams object with default parameters.
+            Model to create a ``DeleteTopoEntitiesParams`` object with default parameters.
         delete_geom_zonelets: bool, optional
             Option to delete geometry zonelets of topology.
         delete_mesh_zonelets: bool, optional
             Option to delete mesh zonelets of topology.
         json_data: dict, optional
-            JSON dictionary to create a DeleteTopoEntitiesParams object with provided parameters.
+            JSON dictionary to create a ``DeleteTopoEntitiesParams`` object with provided parameters.
 
         Examples
         --------
@@ -2560,7 +2844,7 @@ class DeleteTopoEntitiesParams(CoreObject):
                     delete_mesh_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteTopoEntitiesParams")
                     json_data = param_json["DeleteTopoEntitiesParams"] if "DeleteTopoEntitiesParams" in param_json else {}
@@ -2578,7 +2862,7 @@ class DeleteTopoEntitiesParams(CoreObject):
     def set_default(
             delete_geom_zonelets: bool = None,
             delete_mesh_zonelets: bool = None):
-        """Set the default values of DeleteTopoEntitiesParams.
+        """Set the default values of the ``DeleteTopoEntitiesParams`` object.
 
         Parameters
         ----------
@@ -2592,7 +2876,7 @@ class DeleteTopoEntitiesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteTopoEntitiesParams.
+        """Print the default values of ``DeleteTopoEntitiesParams`` object.
 
         Examples
         --------
@@ -2638,6 +2922,19 @@ class DeleteTopoEntitiesParams(CoreObject):
 
 class DeleteTopoEntitiesResults(CoreObject):
     """Results associated with delete topoentities.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteTopoEntitiesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with delete topoentities.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteTopoEntitiesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_topo_entities_results = prime.DeleteTopoEntitiesResults(model = model)
     """
     _default_params = {}
 
@@ -2652,16 +2949,16 @@ class DeleteTopoEntitiesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteTopoEntitiesResults.
+        """Initialize a ``DeleteTopoEntitiesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteTopoEntitiesResults object with default parameters.
+            Model to create a ``DeleteTopoEntitiesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with delete topoentities.
         json_data: dict, optional
-            JSON dictionary to create a DeleteTopoEntitiesResults object with provided parameters.
+            JSON dictionary to create a ``DeleteTopoEntitiesResults`` object with provided parameters.
 
         Examples
         --------
@@ -2677,7 +2974,7 @@ class DeleteTopoEntitiesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteTopoEntitiesResults")
                     json_data = param_json["DeleteTopoEntitiesResults"] if "DeleteTopoEntitiesResults" in param_json else {}
@@ -2693,7 +2990,7 @@ class DeleteTopoEntitiesResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteTopoEntitiesResults.
+        """Set the default values of the ``DeleteTopoEntitiesResults`` object.
 
         Parameters
         ----------
@@ -2705,7 +3002,7 @@ class DeleteTopoEntitiesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteTopoEntitiesResults.
+        """Print the default values of ``DeleteTopoEntitiesResults`` object.
 
         Examples
         --------
@@ -2739,6 +3036,21 @@ class DeleteTopoEntitiesResults(CoreObject):
 
 class AddToZoneResults(CoreObject):
     """Results associated with the add to zone operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddToZoneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the add to zone operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddToZoneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_to_zone_results = prime.AddToZoneResults(model = model)
     """
     _default_params = {}
 
@@ -2756,18 +3068,18 @@ class AddToZoneResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AddToZoneResults.
+        """Initialize a ``AddToZoneResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AddToZoneResults object with default parameters.
+            Model to create a ``AddToZoneResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the add to zone operation.
         json_data: dict, optional
-            JSON dictionary to create a AddToZoneResults object with provided parameters.
+            JSON dictionary to create a ``AddToZoneResults`` object with provided parameters.
 
         Examples
         --------
@@ -2785,7 +3097,7 @@ class AddToZoneResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AddToZoneResults")
                     json_data = param_json["AddToZoneResults"] if "AddToZoneResults" in param_json else {}
@@ -2803,7 +3115,7 @@ class AddToZoneResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of AddToZoneResults.
+        """Set the default values of the ``AddToZoneResults`` object.
 
         Parameters
         ----------
@@ -2817,7 +3129,7 @@ class AddToZoneResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AddToZoneResults.
+        """Print the default values of ``AddToZoneResults`` object.
 
         Examples
         --------
@@ -2863,6 +3175,21 @@ class AddToZoneResults(CoreObject):
 
 class RemoveZoneResults(CoreObject):
     """Results associated with the remove zone operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RemoveZoneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the remove zone operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``RemoveZoneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> remove_zone_results = prime.RemoveZoneResults(model = model)
     """
     _default_params = {}
 
@@ -2880,18 +3207,18 @@ class RemoveZoneResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the RemoveZoneResults.
+        """Initialize a ``RemoveZoneResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a RemoveZoneResults object with default parameters.
+            Model to create a ``RemoveZoneResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the remove zone operation.
         json_data: dict, optional
-            JSON dictionary to create a RemoveZoneResults object with provided parameters.
+            JSON dictionary to create a ``RemoveZoneResults`` object with provided parameters.
 
         Examples
         --------
@@ -2909,7 +3236,7 @@ class RemoveZoneResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "RemoveZoneResults")
                     json_data = param_json["RemoveZoneResults"] if "RemoveZoneResults" in param_json else {}
@@ -2927,7 +3254,7 @@ class RemoveZoneResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of RemoveZoneResults.
+        """Set the default values of the ``RemoveZoneResults`` object.
 
         Parameters
         ----------
@@ -2941,7 +3268,7 @@ class RemoveZoneResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RemoveZoneResults.
+        """Print the default values of ``RemoveZoneResults`` object.
 
         Examples
         --------
@@ -2987,6 +3314,19 @@ class RemoveZoneResults(CoreObject):
 
 class AddLabelResults(CoreObject):
     """Results associated with the add label operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddLabelResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the add label operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddLabelResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_label_results = prime.AddLabelResults(model = model)
     """
     _default_params = {}
 
@@ -3001,16 +3341,16 @@ class AddLabelResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AddLabelResults.
+        """Initialize a ``AddLabelResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AddLabelResults object with default parameters.
+            Model to create a ``AddLabelResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the add label operation.
         json_data: dict, optional
-            JSON dictionary to create a AddLabelResults object with provided parameters.
+            JSON dictionary to create a ``AddLabelResults`` object with provided parameters.
 
         Examples
         --------
@@ -3026,7 +3366,7 @@ class AddLabelResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AddLabelResults")
                     json_data = param_json["AddLabelResults"] if "AddLabelResults" in param_json else {}
@@ -3042,7 +3382,7 @@ class AddLabelResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of AddLabelResults.
+        """Set the default values of the ``AddLabelResults`` object.
 
         Parameters
         ----------
@@ -3054,7 +3394,7 @@ class AddLabelResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AddLabelResults.
+        """Print the default values of ``AddLabelResults`` object.
 
         Examples
         --------
@@ -3088,6 +3428,19 @@ class AddLabelResults(CoreObject):
 
 class RemoveLabelResults(CoreObject):
     """Results associated with the remove label operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RemoveLabelResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the remove label operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``RemoveLabelResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> remove_label_results = prime.RemoveLabelResults(model = model)
     """
     _default_params = {}
 
@@ -3102,16 +3455,16 @@ class RemoveLabelResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the RemoveLabelResults.
+        """Initialize a ``RemoveLabelResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a RemoveLabelResults object with default parameters.
+            Model to create a ``RemoveLabelResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the remove label operation.
         json_data: dict, optional
-            JSON dictionary to create a RemoveLabelResults object with provided parameters.
+            JSON dictionary to create a ``RemoveLabelResults`` object with provided parameters.
 
         Examples
         --------
@@ -3127,7 +3480,7 @@ class RemoveLabelResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "RemoveLabelResults")
                     json_data = param_json["RemoveLabelResults"] if "RemoveLabelResults" in param_json else {}
@@ -3143,7 +3496,7 @@ class RemoveLabelResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of RemoveLabelResults.
+        """Set the default values of the ``RemoveLabelResults`` object.
 
         Parameters
         ----------
@@ -3155,7 +3508,7 @@ class RemoveLabelResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RemoveLabelResults.
+        """Print the default values of ``RemoveLabelResults`` object.
 
         Examples
         --------
@@ -3189,6 +3542,21 @@ class RemoveLabelResults(CoreObject):
 
 class DeleteVolumesParams(CoreObject):
     """Parameters to delete volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteVolumesParams`` object with default parameters.
+    delete_small_volumes: bool, optional
+        Option to delete only volumes smaller than provided volume limit.
+    volume_limit: float, optional
+        Maximum volume limit to identify smaller volumes to be deleted.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_volumes_params = prime.DeleteVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -3206,18 +3574,18 @@ class DeleteVolumesParams(CoreObject):
             volume_limit: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteVolumesParams.
+        """Initialize a ``DeleteVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteVolumesParams object with default parameters.
+            Model to create a ``DeleteVolumesParams`` object with default parameters.
         delete_small_volumes: bool, optional
             Option to delete only volumes smaller than provided volume limit.
         volume_limit: float, optional
             Maximum volume limit to identify smaller volumes to be deleted.
         json_data: dict, optional
-            JSON dictionary to create a DeleteVolumesParams object with provided parameters.
+            JSON dictionary to create a ``DeleteVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -3235,7 +3603,7 @@ class DeleteVolumesParams(CoreObject):
                     volume_limit)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteVolumesParams")
                     json_data = param_json["DeleteVolumesParams"] if "DeleteVolumesParams" in param_json else {}
@@ -3253,7 +3621,7 @@ class DeleteVolumesParams(CoreObject):
     def set_default(
             delete_small_volumes: bool = None,
             volume_limit: float = None):
-        """Set the default values of DeleteVolumesParams.
+        """Set the default values of the ``DeleteVolumesParams`` object.
 
         Parameters
         ----------
@@ -3267,7 +3635,7 @@ class DeleteVolumesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteVolumesParams.
+        """Print the default values of ``DeleteVolumesParams`` object.
 
         Examples
         --------
@@ -3313,6 +3681,21 @@ class DeleteVolumesParams(CoreObject):
 
 class DeleteVolumesResults(CoreObject):
     """Results associated with delete volumes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteVolumesResults`` object with default parameters.
+    deleted_volumes: Iterable[int], optional
+        Ids of deleted volumes.
+    error_code: ErrorCode, optional
+        Error code associated with the volume deletion operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_volumes_results = prime.DeleteVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -3330,18 +3713,18 @@ class DeleteVolumesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteVolumesResults.
+        """Initialize a ``DeleteVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteVolumesResults object with default parameters.
+            Model to create a ``DeleteVolumesResults`` object with default parameters.
         deleted_volumes: Iterable[int], optional
             Ids of deleted volumes.
         error_code: ErrorCode, optional
             Error code associated with the volume deletion operation.
         json_data: dict, optional
-            JSON dictionary to create a DeleteVolumesResults object with provided parameters.
+            JSON dictionary to create a ``DeleteVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -3359,7 +3742,7 @@ class DeleteVolumesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteVolumesResults")
                     json_data = param_json["DeleteVolumesResults"] if "DeleteVolumesResults" in param_json else {}
@@ -3377,7 +3760,7 @@ class DeleteVolumesResults(CoreObject):
     def set_default(
             deleted_volumes: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of DeleteVolumesResults.
+        """Set the default values of the ``DeleteVolumesResults`` object.
 
         Parameters
         ----------
@@ -3391,7 +3774,7 @@ class DeleteVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteVolumesResults.
+        """Print the default values of ``DeleteVolumesResults`` object.
 
         Examples
         --------
@@ -3437,6 +3820,21 @@ class DeleteVolumesResults(CoreObject):
 
 class MergeVolumesParams(CoreObject):
     """Parameters to merge volumes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeVolumesParams`` object with default parameters.
+    merge_to_neighbor_volume: bool, optional
+        Option to merge given volumes to their neighbor volume.
+    neighbor_volumes: Iterable[int], optional
+        Ids of volume that are neighbors to given volumes for merging.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_volumes_params = prime.MergeVolumesParams(model = model)
     """
     _default_params = {}
 
@@ -3454,18 +3852,18 @@ class MergeVolumesParams(CoreObject):
             neighbor_volumes: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeVolumesParams.
+        """Initialize a ``MergeVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeVolumesParams object with default parameters.
+            Model to create a ``MergeVolumesParams`` object with default parameters.
         merge_to_neighbor_volume: bool, optional
             Option to merge given volumes to their neighbor volume.
         neighbor_volumes: Iterable[int], optional
             Ids of volume that are neighbors to given volumes for merging.
         json_data: dict, optional
-            JSON dictionary to create a MergeVolumesParams object with provided parameters.
+            JSON dictionary to create a ``MergeVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -3483,7 +3881,7 @@ class MergeVolumesParams(CoreObject):
                     neighbor_volumes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeVolumesParams")
                     json_data = param_json["MergeVolumesParams"] if "MergeVolumesParams" in param_json else {}
@@ -3501,7 +3899,7 @@ class MergeVolumesParams(CoreObject):
     def set_default(
             merge_to_neighbor_volume: bool = None,
             neighbor_volumes: Iterable[int] = None):
-        """Set the default values of MergeVolumesParams.
+        """Set the default values of the ``MergeVolumesParams`` object.
 
         Parameters
         ----------
@@ -3515,7 +3913,7 @@ class MergeVolumesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeVolumesParams.
+        """Print the default values of ``MergeVolumesParams`` object.
 
         Examples
         --------
@@ -3561,6 +3959,21 @@ class MergeVolumesParams(CoreObject):
 
 class MergeVolumesResults(CoreObject):
     """Results associated with merge volumes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeVolumesResults`` object with default parameters.
+    merged_volumes: Iterable[int], optional
+        Ids of volumes to which input volumes are merged.
+    error_code: ErrorCode, optional
+        Error code associated with the volume merge operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_volumes_results = prime.MergeVolumesResults(model = model)
     """
     _default_params = {}
 
@@ -3578,18 +3991,18 @@ class MergeVolumesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeVolumesResults.
+        """Initialize a ``MergeVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeVolumesResults object with default parameters.
+            Model to create a ``MergeVolumesResults`` object with default parameters.
         merged_volumes: Iterable[int], optional
             Ids of volumes to which input volumes are merged.
         error_code: ErrorCode, optional
             Error code associated with the volume merge operation.
         json_data: dict, optional
-            JSON dictionary to create a MergeVolumesResults object with provided parameters.
+            JSON dictionary to create a ``MergeVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -3607,7 +4020,7 @@ class MergeVolumesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeVolumesResults")
                     json_data = param_json["MergeVolumesResults"] if "MergeVolumesResults" in param_json else {}
@@ -3625,7 +4038,7 @@ class MergeVolumesResults(CoreObject):
     def set_default(
             merged_volumes: Iterable[int] = None,
             error_code: ErrorCode = None):
-        """Set the default values of MergeVolumesResults.
+        """Set the default values of the ``MergeVolumesResults`` object.
 
         Parameters
         ----------
@@ -3639,7 +4052,7 @@ class MergeVolumesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeVolumesResults.
+        """Print the default values of ``MergeVolumesResults`` object.
 
         Examples
         --------

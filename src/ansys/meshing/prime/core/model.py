@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module containing the managing logic of the Prime model."""
 from typing import Iterable, List
 
@@ -355,15 +377,15 @@ class Model(_Model):
 
     @property
     def python_logger(self):
-        """Get PyPrimeMesh's logger instance.
+        """Get python standard logger from PyPrimeMesh's logger instance.
 
-        PyPrimeMesh's logger instance can be used to control the verbosity
-        of messages printed by PyPrimeMesh.
+        PyPrimeMesh's python standard logger instance can be used to control
+        the verbosity of messages printed by PyPrimeMesh and more.
 
         Returns
         -------
         logging.Logger
-            PyPrimeMesh's logger instance.
+            PyPrimeMesh's python standard logger instance.
 
         Examples
         --------
@@ -372,7 +394,29 @@ class Model(_Model):
         >>> model.python_logger.setLevel(logging.DEBUG)
 
         """
-        return PrimeLogger().get_logger()
+        return PrimeLogger().python_logger
+
+    @property
+    def logger(self) -> PrimeLogger:
+        """Get PyPrimeMesh's logger instance.
+
+        PyPrimeMesh's logger instance can be used to save the logs to a file,
+        redirect the logs to the given stream, control the verbosity
+        of messages printed by PyPrimeMesh and more.
+
+        Returns
+        -------
+        PrimeLogger
+            PyPrimeMesh's logger instance.
+
+        Examples
+        --------
+        Save logs to a file.
+
+        >>> model.logger.add_file_handler(logs_dir=r"./tmp")
+
+        """
+        return PrimeLogger()
 
     def as_polydata(self):
         """Get the model as a polydata.

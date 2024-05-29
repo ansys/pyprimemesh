@@ -10,6 +10,21 @@ from ansys.meshing.prime.params.primestructs import *
 
 class VolumeControlParams(CoreObject):
     """Volume control parameters are used to define the volume type in the volume control.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeControlParams`` object with default parameters.
+    cell_zonelet_type: CellZoneletType, optional
+        Cell zonelet type is used to define the type of the associated volume.
+    skip_hexcore: bool, optional
+        Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_control_params = prime.VolumeControlParams(model = model)
     """
     _default_params = {}
 
@@ -27,18 +42,18 @@ class VolumeControlParams(CoreObject):
             skip_hexcore: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the VolumeControlParams.
+        """Initialize a ``VolumeControlParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a VolumeControlParams object with default parameters.
+            Model to create a ``VolumeControlParams`` object with default parameters.
         cell_zonelet_type: CellZoneletType, optional
             Cell zonelet type is used to define the type of the associated volume.
         skip_hexcore: bool, optional
             Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
         json_data: dict, optional
-            JSON dictionary to create a VolumeControlParams object with provided parameters.
+            JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
 
         Examples
         --------
@@ -56,7 +71,7 @@ class VolumeControlParams(CoreObject):
                     skip_hexcore)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "VolumeControlParams")
                     json_data = param_json["VolumeControlParams"] if "VolumeControlParams" in param_json else {}
@@ -74,7 +89,7 @@ class VolumeControlParams(CoreObject):
     def set_default(
             cell_zonelet_type: CellZoneletType = None,
             skip_hexcore: bool = None):
-        """Set the default values of VolumeControlParams.
+        """Set the default values of the ``VolumeControlParams`` object.
 
         Parameters
         ----------
@@ -88,7 +103,7 @@ class VolumeControlParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of VolumeControlParams.
+        """Print the default values of ``VolumeControlParams`` object.
 
         Examples
         --------

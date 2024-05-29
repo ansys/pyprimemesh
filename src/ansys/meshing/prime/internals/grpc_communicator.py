@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
 from typing import Optional
@@ -74,6 +96,8 @@ class GRPCCommunicator(Communicator):
         **kwargs,
     ):
         """Initialize the server connection."""
+        import os
+
         self._channel = kwargs.get('channel', None)
         self._models = []
         if self._channel is None:
@@ -83,6 +107,10 @@ class GRPCCommunicator(Communicator):
                 self._channel = grpc.insecure_channel(ip_addr, options=channel_options)
             else:
                 self._channel = grpc.secure_channel(ip_addr, credentials, options=channel_options)
+
+        if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
+            timeout = None
+
         try:
             grpc.channel_ready_future(self._channel).result(timeout=timeout)
         except grpc.FutureTimeoutError as err:

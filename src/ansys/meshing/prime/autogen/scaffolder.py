@@ -8,6 +8,12 @@ from typing import List, Any, Union
 class Scaffolder(CoreObject):
     """Scaffolder is used for achieving connections in structures made of sheets and beams. Solid bodies should be suppressed before applying scaffolding.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Scaffolder object.
+    part_id : int
+        Id of the part.
     """
 
     def __init__(self, model: CommunicationManager, part_id: int):
@@ -54,11 +60,11 @@ class Scaffolder(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(topo_beams, Iterable):
-            raise TypeError("Invalid argument type passed for topo_beams, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_beams'. Valid argument type is Iterable[int].")
         if not isinstance(params, ScaffolderParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ScaffolderParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ScaffolderParams.")
         args = {"topo_faces" : topo_faces,
         "topo_beams" : topo_beams,
         "params" : params._jsonify()}
@@ -89,7 +95,7 @@ class Scaffolder(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         args = {"topo_faces" : topo_faces}
         command_name = "PrimeMesh::Scaffolder/SplitTopoFacesByMeshRegion"
         self._model._print_logs_before_command("split_topo_faces_by_mesh_region", args)
@@ -120,9 +126,9 @@ class Scaffolder(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(params, ScaffolderParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ScaffolderParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ScaffolderParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Scaffolder/MergeOverlappingTopoFaces"
@@ -154,9 +160,9 @@ class Scaffolder(CoreObject):
 
         """
         if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for topo_faces, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(params, VolumetricScaffolderParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is VolumetricScaffolderParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VolumetricScaffolderParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Scaffolder/DeleteShadowedTopoFaces"

@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class DeleteTool(CoreObject):
     """Performs various delete operation. For example, delete fringes and overlapping faces.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create DeleteTool object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -58,11 +62,11 @@ class DeleteTool(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, DeleteFringesAndOverlapsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is DeleteFringesAndOverlapsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteFringesAndOverlapsParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "params" : params._jsonify()}

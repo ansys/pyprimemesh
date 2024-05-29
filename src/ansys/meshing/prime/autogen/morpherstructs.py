@@ -26,6 +26,17 @@ class MatchPairTargetType(enum.IntEnum):
 
 class MorphSolveParams(CoreObject):
     """Morpher solve parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MorphSolveParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``MorphSolveParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> morph_solve_params = prime.MorphSolveParams(model = model)
     """
     _default_params = {}
 
@@ -38,14 +49,14 @@ class MorphSolveParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MorphSolveParams.
+        """Initialize a ``MorphSolveParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MorphSolveParams object with default parameters.
+            Model to create a ``MorphSolveParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a MorphSolveParams object with provided parameters.
+            JSON dictionary to create a ``MorphSolveParams`` object with provided parameters.
 
         Examples
         --------
@@ -59,7 +70,7 @@ class MorphSolveParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MorphSolveParams")
                     json_data = param_json["MorphSolveParams"] if "MorphSolveParams" in param_json else {}
@@ -73,7 +84,7 @@ class MorphSolveParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of MorphSolveParams.
+        """Set the default values of the ``MorphSolveParams`` object.
 
         """
         args = locals()
@@ -81,7 +92,7 @@ class MorphSolveParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MorphSolveParams.
+        """Print the default values of ``MorphSolveParams`` object.
 
         Examples
         --------
@@ -105,6 +116,17 @@ class MorphSolveParams(CoreObject):
 
 class MatchMorphParams(CoreObject):
     """MatchMorphParams describes the parameters required for match morphing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MatchMorphParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``MatchMorphParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> match_morph_params = prime.MatchMorphParams(model = model)
     """
     _default_params = {}
 
@@ -117,14 +139,14 @@ class MatchMorphParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MatchMorphParams.
+        """Initialize a ``MatchMorphParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MatchMorphParams object with default parameters.
+            Model to create a ``MatchMorphParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a MatchMorphParams object with provided parameters.
+            JSON dictionary to create a ``MatchMorphParams`` object with provided parameters.
 
         Examples
         --------
@@ -138,7 +160,7 @@ class MatchMorphParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MatchMorphParams")
                     json_data = param_json["MatchMorphParams"] if "MatchMorphParams" in param_json else {}
@@ -152,7 +174,7 @@ class MatchMorphParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of MatchMorphParams.
+        """Set the default values of the ``MatchMorphParams`` object.
 
         """
         args = locals()
@@ -160,7 +182,7 @@ class MatchMorphParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MatchMorphParams.
+        """Print the default values of ``MatchMorphParams`` object.
 
         Examples
         --------
@@ -184,6 +206,19 @@ class MatchMorphParams(CoreObject):
 
 class MatchMorphResults(CoreObject):
     """Results associated with match morph operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MatchMorphResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Errorcode associated with match morph operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MatchMorphResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> match_morph_results = prime.MatchMorphResults(model = model)
     """
     _default_params = {}
 
@@ -198,16 +233,16 @@ class MatchMorphResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MatchMorphResults.
+        """Initialize a ``MatchMorphResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MatchMorphResults object with default parameters.
+            Model to create a ``MatchMorphResults`` object with default parameters.
         error_code: ErrorCode, optional
             Errorcode associated with match morph operation.
         json_data: dict, optional
-            JSON dictionary to create a MatchMorphResults object with provided parameters.
+            JSON dictionary to create a ``MatchMorphResults`` object with provided parameters.
 
         Examples
         --------
@@ -223,7 +258,7 @@ class MatchMorphResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MatchMorphResults")
                     json_data = param_json["MatchMorphResults"] if "MatchMorphResults" in param_json else {}
@@ -239,7 +274,7 @@ class MatchMorphResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of MatchMorphResults.
+        """Set the default values of the ``MatchMorphResults`` object.
 
         Parameters
         ----------
@@ -251,7 +286,7 @@ class MatchMorphResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MatchMorphResults.
+        """Print the default values of ``MatchMorphResults`` object.
 
         Examples
         --------
@@ -285,6 +320,23 @@ class MatchMorphResults(CoreObject):
 
 class BCPair(CoreObject):
     """Used to define boundary conditions for match morphing.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``BCPair`` object with default parameters.
+    source_zonelet: int, optional
+        Id of source zonelet.
+    target_zonelet: int, optional
+        Id of target zonelet.
+    type: BCPairType, optional
+        Option to specify boundary condition pair type.
+    json_data: dict, optional
+        JSON dictionary to create a ``BCPair`` object with provided parameters.
+
+    Examples
+    --------
+    >>> b_cpair = prime.BCPair(model = model)
     """
     _default_params = {}
 
@@ -305,12 +357,12 @@ class BCPair(CoreObject):
             type: BCPairType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the BCPair.
+        """Initialize a ``BCPair`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a BCPair object with default parameters.
+            Model to create a ``BCPair`` object with default parameters.
         source_zonelet: int, optional
             Id of source zonelet.
         target_zonelet: int, optional
@@ -318,7 +370,7 @@ class BCPair(CoreObject):
         type: BCPairType, optional
             Option to specify boundary condition pair type.
         json_data: dict, optional
-            JSON dictionary to create a BCPair object with provided parameters.
+            JSON dictionary to create a ``BCPair`` object with provided parameters.
 
         Examples
         --------
@@ -338,7 +390,7 @@ class BCPair(CoreObject):
                     type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "BCPair")
                     json_data = param_json["BCPair"] if "BCPair" in param_json else {}
@@ -358,7 +410,7 @@ class BCPair(CoreObject):
             source_zonelet: int = None,
             target_zonelet: int = None,
             type: BCPairType = None):
-        """Set the default values of BCPair.
+        """Set the default values of the ``BCPair`` object.
 
         Parameters
         ----------
@@ -374,7 +426,7 @@ class BCPair(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of BCPair.
+        """Print the default values of ``BCPair`` object.
 
         Examples
         --------
@@ -432,6 +484,25 @@ class BCPair(CoreObject):
 
 class MatchPair(CoreObject):
     """Match pair to specify sources, targets for match morphing. Included boundary conditions specification.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MatchPair`` object with default parameters.
+    source_surfaces: Iterable[int], optional
+        Ids of source surfaces.
+    target_surfaces: Iterable[int], optional
+        Ids of target surfaces.
+    target_type: MatchPairTargetType, optional
+        Option to specify target surface type.
+    bc_pairs: List[BCPair], optional
+        Array of boundary condition pairs.
+    json_data: dict, optional
+        JSON dictionary to create a ``MatchPair`` object with provided parameters.
+
+    Examples
+    --------
+    >>> match_pair = prime.MatchPair(model = model)
     """
     _default_params = {}
 
@@ -455,12 +526,12 @@ class MatchPair(CoreObject):
             bc_pairs: List[BCPair] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MatchPair.
+        """Initialize a ``MatchPair`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MatchPair object with default parameters.
+            Model to create a ``MatchPair`` object with default parameters.
         source_surfaces: Iterable[int], optional
             Ids of source surfaces.
         target_surfaces: Iterable[int], optional
@@ -470,7 +541,7 @@ class MatchPair(CoreObject):
         bc_pairs: List[BCPair], optional
             Array of boundary condition pairs.
         json_data: dict, optional
-            JSON dictionary to create a MatchPair object with provided parameters.
+            JSON dictionary to create a ``MatchPair`` object with provided parameters.
 
         Examples
         --------
@@ -492,7 +563,7 @@ class MatchPair(CoreObject):
                     bc_pairs)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MatchPair")
                     json_data = param_json["MatchPair"] if "MatchPair" in param_json else {}
@@ -514,7 +585,7 @@ class MatchPair(CoreObject):
             target_surfaces: Iterable[int] = None,
             target_type: MatchPairTargetType = None,
             bc_pairs: List[BCPair] = None):
-        """Set the default values of MatchPair.
+        """Set the default values of the ``MatchPair`` object.
 
         Parameters
         ----------
@@ -532,7 +603,7 @@ class MatchPair(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MatchPair.
+        """Print the default values of ``MatchPair`` object.
 
         Examples
         --------

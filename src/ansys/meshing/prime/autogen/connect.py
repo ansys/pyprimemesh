@@ -10,14 +10,18 @@ class Connect(CoreObject):
 
     Perform surface connection using various connect algorithms on face zonelets.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Connect object.
+
     Notes
     -----
-    Connect operations like Join, Stitch and Intersect supports only computational mesh
-    (mesh with reasonable size). Faceted mesh is not supported.
+    Connect operations support only computational mesh, which is mesh with reasonable size changes and quality. Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, not supported.
     """
 
     def __init__(self, model: CommunicationManager):
-        """ Initialize Connect. """
+        """ Initialize Connect """
         self._model = model
         self._comm = model._communicator
         command_name = "PrimeMesh::Connect/Construct"
@@ -63,13 +67,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, IntersectParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is IntersectParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is IntersectParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -108,13 +112,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, JoinParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is JoinParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is JoinParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -126,13 +130,13 @@ class Connect(CoreObject):
         return ConnectResults(model = self._model, json_data = result)
 
     def subtract_volumes(self, part_id : int, target_volumes : Iterable[int], cutter_volumes : Iterable[int], params : SubtractVolumesParams) -> SubtractVolumesResults:
-        """ Subtract cutter volumes from target volumes.
+        """ Subtract cutter volumes from target volumes. Volumes should be computed prior to calling this function. If multiple parts are being merged to form a single part, then volumes should be computed for each part prior to merging. Use compute_closed_volumes to do so.
 
 
         Parameters
         ----------
         part_id : int
-            Id of a part.
+            Id of part containing target and cutter volumes for subtract operation.
         target_volumes : Iterable[int]
             Ids of target volumes.
         cutter_volumes : Iterable[int]
@@ -152,13 +156,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(target_volumes, Iterable):
-            raise TypeError("Invalid argument type passed for target_volumes, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'target_volumes'. Valid argument type is Iterable[int].")
         if not isinstance(cutter_volumes, Iterable):
-            raise TypeError("Invalid argument type passed for cutter_volumes, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'cutter_volumes'. Valid argument type is Iterable[int].")
         if not isinstance(params, SubtractVolumesParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SubtractVolumesParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SubtractVolumesParams.")
         args = {"part_id" : part_id,
         "target_volumes" : target_volumes,
         "cutter_volumes" : cutter_volumes,
@@ -197,13 +201,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, StitchParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is StitchParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is StitchParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -215,7 +219,7 @@ class Connect(CoreObject):
         return ConnectResults(model = self._model, json_data = result)
 
     def merge_boundary_nodes(self, part_id : int, face_zonelet_ids : Iterable[int], with_face_zonelet_ids : Iterable[int], params : MergeBoundaryNodesParams) -> MergeBoundaryNodesResults:
-        """ Merge boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
+        """ Merges boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
 
 
         Parameters
@@ -237,7 +241,7 @@ class Connect(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -246,13 +250,13 @@ class Connect(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(with_face_zonelet_ids, Iterable):
-            raise TypeError("Invalid argument type passed for with_face_zonelet_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'with_face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, MergeBoundaryNodesParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is MergeBoundaryNodesParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MergeBoundaryNodesParams.")
         args = {"part_id" : part_id,
         "face_zonelet_ids" : face_zonelet_ids,
         "with_face_zonelet_ids" : with_face_zonelet_ids,
@@ -263,3 +267,53 @@ class Connect(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("merge_boundary_nodes", MergeBoundaryNodesResults(model = self._model, json_data = result))
         return MergeBoundaryNodesResults(model = self._model, json_data = result)
+
+    def fuse_face_zonelets(self, part_id : int, source_face_zonelet_ids : Iterable[int], target_face_zonelet_ids : Iterable[int], params : FuseParams) -> FuseResults:
+        """ Perform fuse between overlapping face zonelets within a single part. Surfaces that are fused can then be colocated, merged or removed as directed.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part.
+        source_face_zonelet_ids : Iterable[int]
+            Ids of source face zonelets to be fused.
+        target_face_zonelet_ids : Iterable[int]
+            Ids of target face zonelets to be fused.
+        params : FuseParams
+            Parameters for fuse operation.
+
+        Returns
+        -------
+        FuseResults
+            Returns the FuseResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        connect = Connect(model = model)
+        connect.fuse_face_zonelets(part.id, source_face_zonelet_ids, target_face_zonelet_ids, fuse_params)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
+        if not isinstance(source_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'source_face_zonelet_ids'. Valid argument type is Iterable[int].")
+        if not isinstance(target_face_zonelet_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'target_face_zonelet_ids'. Valid argument type is Iterable[int].")
+        if not isinstance(params, FuseParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is FuseParams.")
+        args = {"part_id" : part_id,
+        "source_face_zonelet_ids" : source_face_zonelet_ids,
+        "target_face_zonelet_ids" : target_face_zonelet_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Connect/FuseFaceZonelets"
+        self._model._print_beta_api_warning("fuse_face_zonelets")
+        self._model._print_logs_before_command("fuse_face_zonelets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("fuse_face_zonelets", FuseResults(model = self._model, json_data = result))
+        return FuseResults(model = self._model, json_data = result)

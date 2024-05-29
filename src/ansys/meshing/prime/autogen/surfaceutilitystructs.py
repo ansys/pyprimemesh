@@ -46,6 +46,23 @@ class BOIType(enum.IntEnum):
 
 class FixInvalidNormalNodeParams(CoreObject):
     """Parameters to fix invalid average face normal at nodes by creating a nugget.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FixInvalidNormalNodeParams`` object with default parameters.
+    nugget_size: float, optional
+        Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+    nugget_mesh_size: float, optional
+        Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+    label: str, optional
+        Label to set on new face zonelets created.
+    json_data: dict, optional
+        JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fix_invalid_normal_node_params = prime.FixInvalidNormalNodeParams(model = model)
     """
     _default_params = {}
 
@@ -66,12 +83,12 @@ class FixInvalidNormalNodeParams(CoreObject):
             label: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FixInvalidNormalNodeParams.
+        """Initialize a ``FixInvalidNormalNodeParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FixInvalidNormalNodeParams object with default parameters.
+            Model to create a ``FixInvalidNormalNodeParams`` object with default parameters.
         nugget_size: float, optional
             Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
         nugget_mesh_size: float, optional
@@ -79,7 +96,7 @@ class FixInvalidNormalNodeParams(CoreObject):
         label: str, optional
             Label to set on new face zonelets created.
         json_data: dict, optional
-            JSON dictionary to create a FixInvalidNormalNodeParams object with provided parameters.
+            JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
 
         Examples
         --------
@@ -99,7 +116,7 @@ class FixInvalidNormalNodeParams(CoreObject):
                     label)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FixInvalidNormalNodeParams")
                     json_data = param_json["FixInvalidNormalNodeParams"] if "FixInvalidNormalNodeParams" in param_json else {}
@@ -119,7 +136,7 @@ class FixInvalidNormalNodeParams(CoreObject):
             nugget_size: float = None,
             nugget_mesh_size: float = None,
             label: str = None):
-        """Set the default values of FixInvalidNormalNodeParams.
+        """Set the default values of the ``FixInvalidNormalNodeParams`` object.
 
         Parameters
         ----------
@@ -135,7 +152,7 @@ class FixInvalidNormalNodeParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FixInvalidNormalNodeParams.
+        """Print the default values of ``FixInvalidNormalNodeParams`` object.
 
         Examples
         --------
@@ -193,6 +210,19 @@ class FixInvalidNormalNodeParams(CoreObject):
 
 class FixInvalidNormalNodeResults(CoreObject):
     """Results associated with fix invalid average face normal at nodes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FixInvalidNormalNodeResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fix_invalid_normal_node_results = prime.FixInvalidNormalNodeResults(model = model)
     """
     _default_params = {}
 
@@ -207,16 +237,16 @@ class FixInvalidNormalNodeResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FixInvalidNormalNodeResults.
+        """Initialize a ``FixInvalidNormalNodeResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FixInvalidNormalNodeResults object with default parameters.
+            Model to create a ``FixInvalidNormalNodeResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a FixInvalidNormalNodeResults object with provided parameters.
+            JSON dictionary to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
 
         Examples
         --------
@@ -232,7 +262,7 @@ class FixInvalidNormalNodeResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FixInvalidNormalNodeResults")
                     json_data = param_json["FixInvalidNormalNodeResults"] if "FixInvalidNormalNodeResults" in param_json else {}
@@ -248,7 +278,7 @@ class FixInvalidNormalNodeResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of FixInvalidNormalNodeResults.
+        """Set the default values of the ``FixInvalidNormalNodeResults`` object.
 
         Parameters
         ----------
@@ -260,7 +290,7 @@ class FixInvalidNormalNodeResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FixInvalidNormalNodeResults.
+        """Print the default values of ``FixInvalidNormalNodeResults`` object.
 
         Examples
         --------
@@ -292,8 +322,356 @@ class FixInvalidNormalNodeResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+class ProjectOnGeometryParams(CoreObject):
+    """Parameters used to project topoface nodes on associated geometry.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ProjectOnGeometryParams`` object with default parameters.
+    project_only_mid_nodes: bool, optional
+        Option to project only the mid nodes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    project_on_facets_if_cadnot_found: bool, optional
+        Option to project on facet if geometry is not found.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> project_on_geometry_params = prime.ProjectOnGeometryParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            project_only_mid_nodes: bool,
+            project_on_facets_if_cadnot_found: bool):
+        self._project_only_mid_nodes = project_only_mid_nodes
+        self._project_on_facets_if_cadnot_found = project_on_facets_if_cadnot_found
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            project_only_mid_nodes: bool = None,
+            project_on_facets_if_cadnot_found: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ProjectOnGeometryParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ProjectOnGeometryParams`` object with default parameters.
+        project_only_mid_nodes: bool, optional
+            Option to project only the mid nodes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        project_on_facets_if_cadnot_found: bool, optional
+            Option to project on facet if geometry is not found.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> project_on_geometry_params = prime.ProjectOnGeometryParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["projectOnlyMidNodes"] if "projectOnlyMidNodes" in json_data else None,
+                json_data["projectOnFacetsIfCADNotFound"] if "projectOnFacetsIfCADNotFound" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [project_only_mid_nodes, project_on_facets_if_cadnot_found])
+            if all_field_specified:
+                self.__initialize(
+                    project_only_mid_nodes,
+                    project_on_facets_if_cadnot_found)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ProjectOnGeometryParams")
+                    json_data = param_json["ProjectOnGeometryParams"] if "ProjectOnGeometryParams" in param_json else {}
+                    self.__initialize(
+                        project_only_mid_nodes if project_only_mid_nodes is not None else ( ProjectOnGeometryParams._default_params["project_only_mid_nodes"] if "project_only_mid_nodes" in ProjectOnGeometryParams._default_params else (json_data["projectOnlyMidNodes"] if "projectOnlyMidNodes" in json_data else None)),
+                        project_on_facets_if_cadnot_found if project_on_facets_if_cadnot_found is not None else ( ProjectOnGeometryParams._default_params["project_on_facets_if_cadnot_found"] if "project_on_facets_if_cadnot_found" in ProjectOnGeometryParams._default_params else (json_data["projectOnFacetsIfCADNotFound"] if "projectOnFacetsIfCADNotFound" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            project_only_mid_nodes: bool = None,
+            project_on_facets_if_cadnot_found: bool = None):
+        """Set the default values of the ``ProjectOnGeometryParams`` object.
+
+        Parameters
+        ----------
+        project_only_mid_nodes: bool, optional
+            Option to project only the mid nodes.
+        project_on_facets_if_cadnot_found: bool, optional
+            Option to project on facet if geometry is not found.
+        """
+        args = locals()
+        [ProjectOnGeometryParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ProjectOnGeometryParams`` object.
+
+        Examples
+        --------
+        >>> ProjectOnGeometryParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ProjectOnGeometryParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._project_only_mid_nodes is not None:
+            json_data["projectOnlyMidNodes"] = self._project_only_mid_nodes
+        if self._project_on_facets_if_cadnot_found is not None:
+            json_data["projectOnFacetsIfCADNotFound"] = self._project_on_facets_if_cadnot_found
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "project_only_mid_nodes :  %s\nproject_on_facets_if_cadnot_found :  %s" % (self._project_only_mid_nodes, self._project_on_facets_if_cadnot_found)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def project_only_mid_nodes(self) -> bool:
+        """Option to project only the mid nodes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._project_only_mid_nodes
+
+    @project_only_mid_nodes.setter
+    def project_only_mid_nodes(self, value: bool):
+        self._project_only_mid_nodes = value
+
+    @property
+    def project_on_facets_if_cadnot_found(self) -> bool:
+        """Option to project on facet if geometry is not found.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._project_on_facets_if_cadnot_found
+
+    @project_on_facets_if_cadnot_found.setter
+    def project_on_facets_if_cadnot_found(self, value: bool):
+        self._project_on_facets_if_cadnot_found = value
+
+class ProjectOnGeometryResults(CoreObject):
+    """Results associated with projection of topofaces nodes on its geometry.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ProjectOnGeometryResults`` object with default parameters.
+    success: bool, optional
+        Defines the operation was successful or not.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    warning_codes: List[WarningCode], optional
+        Warning code associated with operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> project_on_geometry_results = prime.ProjectOnGeometryResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            success: bool,
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
+        self._success = success
+        self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            success: bool = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ProjectOnGeometryResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ProjectOnGeometryResults`` object with default parameters.
+        success: bool, optional
+            Defines the operation was successful or not.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        warning_codes: List[WarningCode], optional
+            Warning code associated with operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> project_on_geometry_results = prime.ProjectOnGeometryResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["success"] if "success" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [success, error_code, warning_codes])
+            if all_field_specified:
+                self.__initialize(
+                    success,
+                    error_code,
+                    warning_codes)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ProjectOnGeometryResults")
+                    json_data = param_json["ProjectOnGeometryResults"] if "ProjectOnGeometryResults" in param_json else {}
+                    self.__initialize(
+                        success if success is not None else ( ProjectOnGeometryResults._default_params["success"] if "success" in ProjectOnGeometryResults._default_params else (json_data["success"] if "success" in json_data else None)),
+                        error_code if error_code is not None else ( ProjectOnGeometryResults._default_params["error_code"] if "error_code" in ProjectOnGeometryResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( ProjectOnGeometryResults._default_params["warning_codes"] if "warning_codes" in ProjectOnGeometryResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            success: bool = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
+        """Set the default values of the ``ProjectOnGeometryResults`` object.
+
+        Parameters
+        ----------
+        success: bool, optional
+            Defines the operation was successful or not.
+        error_code: ErrorCode, optional
+            Error code associated with failure of operation.
+        warning_codes: List[WarningCode], optional
+            Warning code associated with operation.
+        """
+        args = locals()
+        [ProjectOnGeometryResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ProjectOnGeometryResults`` object.
+
+        Examples
+        --------
+        >>> ProjectOnGeometryResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ProjectOnGeometryResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._success is not None:
+            json_data["success"] = self._success
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "success :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._success, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def success(self) -> bool:
+        """Defines the operation was successful or not.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._success
+
+    @success.setter
+    def success(self, value: bool):
+        self._success = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning code associated with operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
 class FillHolesAtPlaneParams(CoreObject):
     """Parameters to fill holes at given plane.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FillHolesAtPlaneParams`` object with default parameters.
+    create_zone: bool, optional
+        Option to create a face zone for the zonelets created to fill holes.
+    suggested_zone_name: str, optional
+        Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
+    json_data: dict, optional
+        JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fill_holes_at_plane_params = prime.FillHolesAtPlaneParams(model = model)
     """
     _default_params = {}
 
@@ -311,18 +689,18 @@ class FillHolesAtPlaneParams(CoreObject):
             suggested_zone_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FillHolesAtPlaneParams.
+        """Initialize a ``FillHolesAtPlaneParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FillHolesAtPlaneParams object with default parameters.
+            Model to create a ``FillHolesAtPlaneParams`` object with default parameters.
         create_zone: bool, optional
             Option to create a face zone for the zonelets created to fill holes.
         suggested_zone_name: str, optional
             Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
         json_data: dict, optional
-            JSON dictionary to create a FillHolesAtPlaneParams object with provided parameters.
+            JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
 
         Examples
         --------
@@ -340,7 +718,7 @@ class FillHolesAtPlaneParams(CoreObject):
                     suggested_zone_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FillHolesAtPlaneParams")
                     json_data = param_json["FillHolesAtPlaneParams"] if "FillHolesAtPlaneParams" in param_json else {}
@@ -358,7 +736,7 @@ class FillHolesAtPlaneParams(CoreObject):
     def set_default(
             create_zone: bool = None,
             suggested_zone_name: str = None):
-        """Set the default values of FillHolesAtPlaneParams.
+        """Set the default values of the ``FillHolesAtPlaneParams`` object.
 
         Parameters
         ----------
@@ -372,7 +750,7 @@ class FillHolesAtPlaneParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FillHolesAtPlaneParams.
+        """Print the default values of ``FillHolesAtPlaneParams`` object.
 
         Examples
         --------
@@ -418,6 +796,27 @@ class FillHolesAtPlaneParams(CoreObject):
 
 class FillHolesAtPlaneResults(CoreObject):
     """Results associated with fill holes at given plane.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FillHolesAtPlaneResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with operation.
+    created_face_zonelets: Iterable[int], optional
+        Ids of face zonelets created to fill the holes.
+    assigned_zone_name: str, optional
+        Name assigned to zone created. Suffix is added to suggested name if the name not available.
+    created_zone_id: int, optional
+        Id assigned to zone created.
+    json_data: dict, optional
+        JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fill_holes_at_plane_results = prime.FillHolesAtPlaneResults(model = model)
     """
     _default_params = {}
 
@@ -444,12 +843,12 @@ class FillHolesAtPlaneResults(CoreObject):
             created_zone_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the FillHolesAtPlaneResults.
+        """Initialize a ``FillHolesAtPlaneResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a FillHolesAtPlaneResults object with default parameters.
+            Model to create a ``FillHolesAtPlaneResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         warning_codes: List[WarningCode], optional
@@ -461,7 +860,7 @@ class FillHolesAtPlaneResults(CoreObject):
         created_zone_id: int, optional
             Id assigned to zone created.
         json_data: dict, optional
-            JSON dictionary to create a FillHolesAtPlaneResults object with provided parameters.
+            JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
 
         Examples
         --------
@@ -485,7 +884,7 @@ class FillHolesAtPlaneResults(CoreObject):
                     created_zone_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "FillHolesAtPlaneResults")
                     json_data = param_json["FillHolesAtPlaneResults"] if "FillHolesAtPlaneResults" in param_json else {}
@@ -509,7 +908,7 @@ class FillHolesAtPlaneResults(CoreObject):
             created_face_zonelets: Iterable[int] = None,
             assigned_zone_name: str = None,
             created_zone_id: int = None):
-        """Set the default values of FillHolesAtPlaneResults.
+        """Set the default values of the ``FillHolesAtPlaneResults`` object.
 
         Parameters
         ----------
@@ -529,7 +928,7 @@ class FillHolesAtPlaneResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of FillHolesAtPlaneResults.
+        """Print the default values of ``FillHolesAtPlaneResults`` object.
 
         Examples
         --------
@@ -611,6 +1010,17 @@ class FillHolesAtPlaneResults(CoreObject):
 
 class CreateCapParams(CoreObject):
     """Parameters to create cap on face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateCapParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateCapParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_cap_params = prime.CreateCapParams(model = model)
     """
     _default_params = {}
 
@@ -623,14 +1033,14 @@ class CreateCapParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateCapParams.
+        """Initialize a ``CreateCapParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateCapParams object with default parameters.
+            Model to create a ``CreateCapParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a CreateCapParams object with provided parameters.
+            JSON dictionary to create a ``CreateCapParams`` object with provided parameters.
 
         Examples
         --------
@@ -644,7 +1054,7 @@ class CreateCapParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateCapParams")
                     json_data = param_json["CreateCapParams"] if "CreateCapParams" in param_json else {}
@@ -658,7 +1068,7 @@ class CreateCapParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of CreateCapParams.
+        """Set the default values of the ``CreateCapParams`` object.
 
         """
         args = locals()
@@ -666,7 +1076,7 @@ class CreateCapParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateCapParams.
+        """Print the default values of ``CreateCapParams`` object.
 
         Examples
         --------
@@ -690,6 +1100,21 @@ class CreateCapParams(CoreObject):
 
 class CreateCapResults(CoreObject):
     """Results associated with create cap on face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateCapResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    created_face_zonelets: Iterable[int], optional
+        Ids of cap face zonelets created.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateCapResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_cap_results = prime.CreateCapResults(model = model)
     """
     _default_params = {}
 
@@ -707,18 +1132,18 @@ class CreateCapResults(CoreObject):
             created_face_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateCapResults.
+        """Initialize a ``CreateCapResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateCapResults object with default parameters.
+            Model to create a ``CreateCapResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         created_face_zonelets: Iterable[int], optional
             Ids of cap face zonelets created.
         json_data: dict, optional
-            JSON dictionary to create a CreateCapResults object with provided parameters.
+            JSON dictionary to create a ``CreateCapResults`` object with provided parameters.
 
         Examples
         --------
@@ -736,7 +1161,7 @@ class CreateCapResults(CoreObject):
                     created_face_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateCapResults")
                     json_data = param_json["CreateCapResults"] if "CreateCapResults" in param_json else {}
@@ -754,7 +1179,7 @@ class CreateCapResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             created_face_zonelets: Iterable[int] = None):
-        """Set the default values of CreateCapResults.
+        """Set the default values of the ``CreateCapResults`` object.
 
         Parameters
         ----------
@@ -768,7 +1193,7 @@ class CreateCapResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateCapResults.
+        """Print the default values of ``CreateCapResults`` object.
 
         Examples
         --------
@@ -814,6 +1239,17 @@ class CreateCapResults(CoreObject):
 
 class DeleteUnwettedParams(CoreObject):
     """DeleteUnwettedParams defines parameters for delete unwetted surfaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteUnwettedParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteUnwettedParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_unwetted_params = prime.DeleteUnwettedParams(model = model)
     """
     _default_params = {}
 
@@ -826,14 +1262,14 @@ class DeleteUnwettedParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteUnwettedParams.
+        """Initialize a ``DeleteUnwettedParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteUnwettedParams object with default parameters.
+            Model to create a ``DeleteUnwettedParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a DeleteUnwettedParams object with provided parameters.
+            JSON dictionary to create a ``DeleteUnwettedParams`` object with provided parameters.
 
         Examples
         --------
@@ -847,7 +1283,7 @@ class DeleteUnwettedParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteUnwettedParams")
                     json_data = param_json["DeleteUnwettedParams"] if "DeleteUnwettedParams" in param_json else {}
@@ -861,7 +1297,7 @@ class DeleteUnwettedParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of DeleteUnwettedParams.
+        """Set the default values of the ``DeleteUnwettedParams`` object.
 
         """
         args = locals()
@@ -869,7 +1305,7 @@ class DeleteUnwettedParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteUnwettedParams.
+        """Print the default values of ``DeleteUnwettedParams`` object.
 
         Examples
         --------
@@ -893,6 +1329,19 @@ class DeleteUnwettedParams(CoreObject):
 
 class DeleteUnwettedResult(CoreObject):
     """Results structure associated with delete unwetted surfaces operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteUnwettedResult`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with delete unwetted surfaces operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteUnwettedResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_unwetted_result = prime.DeleteUnwettedResult(model = model)
     """
     _default_params = {}
 
@@ -907,16 +1356,16 @@ class DeleteUnwettedResult(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteUnwettedResult.
+        """Initialize a ``DeleteUnwettedResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteUnwettedResult object with default parameters.
+            Model to create a ``DeleteUnwettedResult`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with delete unwetted surfaces operation.
         json_data: dict, optional
-            JSON dictionary to create a DeleteUnwettedResult object with provided parameters.
+            JSON dictionary to create a ``DeleteUnwettedResult`` object with provided parameters.
 
         Examples
         --------
@@ -932,7 +1381,7 @@ class DeleteUnwettedResult(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteUnwettedResult")
                     json_data = param_json["DeleteUnwettedResult"] if "DeleteUnwettedResult" in param_json else {}
@@ -948,7 +1397,7 @@ class DeleteUnwettedResult(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteUnwettedResult.
+        """Set the default values of the ``DeleteUnwettedResult`` object.
 
         Parameters
         ----------
@@ -960,7 +1409,7 @@ class DeleteUnwettedResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteUnwettedResult.
+        """Print the default values of ``DeleteUnwettedResult`` object.
 
         Examples
         --------
@@ -994,6 +1443,19 @@ class DeleteUnwettedResult(CoreObject):
 
 class ResolveIntersectionsParams(CoreObject):
     """ResolveIntersectionsParams define parameters for resolve intersections.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ResolveIntersectionsParams`` object with default parameters.
+    number_of_threads: int, optional
+        Number of threads for resolve intersections multithreaded operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> resolve_intersections_params = prime.ResolveIntersectionsParams(model = model)
     """
     _default_params = {}
 
@@ -1008,16 +1470,16 @@ class ResolveIntersectionsParams(CoreObject):
             number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ResolveIntersectionsParams.
+        """Initialize a ``ResolveIntersectionsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ResolveIntersectionsParams object with default parameters.
+            Model to create a ``ResolveIntersectionsParams`` object with default parameters.
         number_of_threads: int, optional
             Number of threads for resolve intersections multithreaded operation.
         json_data: dict, optional
-            JSON dictionary to create a ResolveIntersectionsParams object with provided parameters.
+            JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1033,7 +1495,7 @@ class ResolveIntersectionsParams(CoreObject):
                     number_of_threads)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ResolveIntersectionsParams")
                     json_data = param_json["ResolveIntersectionsParams"] if "ResolveIntersectionsParams" in param_json else {}
@@ -1049,7 +1511,7 @@ class ResolveIntersectionsParams(CoreObject):
     @staticmethod
     def set_default(
             number_of_threads: int = None):
-        """Set the default values of ResolveIntersectionsParams.
+        """Set the default values of the ``ResolveIntersectionsParams`` object.
 
         Parameters
         ----------
@@ -1061,7 +1523,7 @@ class ResolveIntersectionsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ResolveIntersectionsParams.
+        """Print the default values of ``ResolveIntersectionsParams`` object.
 
         Examples
         --------
@@ -1095,6 +1557,19 @@ class ResolveIntersectionsParams(CoreObject):
 
 class ResolveIntersectionResult(CoreObject):
     """Result structure associated with resolve intersections operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ResolveIntersectionResult`` object with default parameters.
+    error_code: ErrorCode, optional
+        Errror code associated with a resolve intersections operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> resolve_intersection_result = prime.ResolveIntersectionResult(model = model)
     """
     _default_params = {}
 
@@ -1109,16 +1584,16 @@ class ResolveIntersectionResult(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ResolveIntersectionResult.
+        """Initialize a ``ResolveIntersectionResult`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ResolveIntersectionResult object with default parameters.
+            Model to create a ``ResolveIntersectionResult`` object with default parameters.
         error_code: ErrorCode, optional
             Errror code associated with a resolve intersections operation.
         json_data: dict, optional
-            JSON dictionary to create a ResolveIntersectionResult object with provided parameters.
+            JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
         Examples
         --------
@@ -1134,7 +1609,7 @@ class ResolveIntersectionResult(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ResolveIntersectionResult")
                     json_data = param_json["ResolveIntersectionResult"] if "ResolveIntersectionResult" in param_json else {}
@@ -1150,7 +1625,7 @@ class ResolveIntersectionResult(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of ResolveIntersectionResult.
+        """Set the default values of the ``ResolveIntersectionResult`` object.
 
         Parameters
         ----------
@@ -1162,7 +1637,7 @@ class ResolveIntersectionResult(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ResolveIntersectionResult.
+        """Print the default values of ``ResolveIntersectionResult`` object.
 
         Examples
         --------
@@ -1196,6 +1671,23 @@ class ResolveIntersectionResult(CoreObject):
 
 class SubtractZoneletsParams(CoreObject):
     """Parameters to use when subtracting zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractZoneletsParams`` object with default parameters.
+    retain_cutter: bool, optional
+        Retain the zonelets used for removal.
+    extract_edges: bool, optional
+        Extract edges of intersection during subtract.
+    trace_edges: bool, optional
+        Trace edges of intersection on target. Only works if extractEdges is true.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractZoneletsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_zonelets_params = prime.SubtractZoneletsParams(model = model)
     """
     _default_params = {}
 
@@ -1216,12 +1708,12 @@ class SubtractZoneletsParams(CoreObject):
             trace_edges: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SubtractZoneletsParams.
+        """Initialize a ``SubtractZoneletsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SubtractZoneletsParams object with default parameters.
+            Model to create a ``SubtractZoneletsParams`` object with default parameters.
         retain_cutter: bool, optional
             Retain the zonelets used for removal.
         extract_edges: bool, optional
@@ -1229,7 +1721,7 @@ class SubtractZoneletsParams(CoreObject):
         trace_edges: bool, optional
             Trace edges of intersection on target. Only works if extractEdges is true.
         json_data: dict, optional
-            JSON dictionary to create a SubtractZoneletsParams object with provided parameters.
+            JSON dictionary to create a ``SubtractZoneletsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1249,7 +1741,7 @@ class SubtractZoneletsParams(CoreObject):
                     trace_edges)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SubtractZoneletsParams")
                     json_data = param_json["SubtractZoneletsParams"] if "SubtractZoneletsParams" in param_json else {}
@@ -1269,7 +1761,7 @@ class SubtractZoneletsParams(CoreObject):
             retain_cutter: bool = None,
             extract_edges: bool = None,
             trace_edges: bool = None):
-        """Set the default values of SubtractZoneletsParams.
+        """Set the default values of the ``SubtractZoneletsParams`` object.
 
         Parameters
         ----------
@@ -1285,7 +1777,7 @@ class SubtractZoneletsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractZoneletsParams.
+        """Print the default values of ``SubtractZoneletsParams`` object.
 
         Examples
         --------
@@ -1343,6 +1835,21 @@ class SubtractZoneletsParams(CoreObject):
 
 class SubtractZoneletsResults(CoreObject):
     """Results structure associated with subtracting zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractZoneletsResults`` object with default parameters.
+    processing_time: float, optional
+        Processing time for subtract operation.
+    error_code: ErrorCode, optional
+        Error Code associated with subtract operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_zonelets_results = prime.SubtractZoneletsResults(model = model)
     """
     _default_params = {}
 
@@ -1360,18 +1867,18 @@ class SubtractZoneletsResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SubtractZoneletsResults.
+        """Initialize a ``SubtractZoneletsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SubtractZoneletsResults object with default parameters.
+            Model to create a ``SubtractZoneletsResults`` object with default parameters.
         processing_time: float, optional
             Processing time for subtract operation.
         error_code: ErrorCode, optional
             Error Code associated with subtract operation.
         json_data: dict, optional
-            JSON dictionary to create a SubtractZoneletsResults object with provided parameters.
+            JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
 
         Examples
         --------
@@ -1389,7 +1896,7 @@ class SubtractZoneletsResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SubtractZoneletsResults")
                     json_data = param_json["SubtractZoneletsResults"] if "SubtractZoneletsResults" in param_json else {}
@@ -1407,7 +1914,7 @@ class SubtractZoneletsResults(CoreObject):
     def set_default(
             processing_time: float = None,
             error_code: ErrorCode = None):
-        """Set the default values of SubtractZoneletsResults.
+        """Set the default values of the ``SubtractZoneletsResults`` object.
 
         Parameters
         ----------
@@ -1421,7 +1928,7 @@ class SubtractZoneletsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractZoneletsResults.
+        """Print the default values of ``SubtractZoneletsResults`` object.
 
         Examples
         --------
@@ -1467,6 +1974,23 @@ class SubtractZoneletsResults(CoreObject):
 
 class SmoothDihedralFaceNodesParams(CoreObject):
     """Parameters to smooth dihedral face nodes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SmoothDihedralFaceNodesParams`` object with default parameters.
+    min_dihedral_angle: float, optional
+        Minimum angle to be used to identify dihedral faces.
+    tolerance: float, optional
+        Tolerance relative to local mesh size to control smooth movement of nodes.
+    type: SmoothType, optional
+        Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+    json_data: dict, optional
+        JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> smooth_dihedral_face_nodes_params = prime.SmoothDihedralFaceNodesParams(model = model)
     """
     _default_params = {}
 
@@ -1487,12 +2011,12 @@ class SmoothDihedralFaceNodesParams(CoreObject):
             type: SmoothType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SmoothDihedralFaceNodesParams.
+        """Initialize a ``SmoothDihedralFaceNodesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SmoothDihedralFaceNodesParams object with default parameters.
+            Model to create a ``SmoothDihedralFaceNodesParams`` object with default parameters.
         min_dihedral_angle: float, optional
             Minimum angle to be used to identify dihedral faces.
         tolerance: float, optional
@@ -1500,7 +2024,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
         type: SmoothType, optional
             Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
         json_data: dict, optional
-            JSON dictionary to create a SmoothDihedralFaceNodesParams object with provided parameters.
+            JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1520,7 +2044,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
                     type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesParams")
                     json_data = param_json["SmoothDihedralFaceNodesParams"] if "SmoothDihedralFaceNodesParams" in param_json else {}
@@ -1540,7 +2064,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
             min_dihedral_angle: float = None,
             tolerance: float = None,
             type: SmoothType = None):
-        """Set the default values of SmoothDihedralFaceNodesParams.
+        """Set the default values of the ``SmoothDihedralFaceNodesParams`` object.
 
         Parameters
         ----------
@@ -1556,7 +2080,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SmoothDihedralFaceNodesParams.
+        """Print the default values of ``SmoothDihedralFaceNodesParams`` object.
 
         Examples
         --------
@@ -1614,6 +2138,21 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
 class SmoothDihedralFaceNodesResults(CoreObject):
     """Results structure associated with smooth dihedral face nodes.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SmoothDihedralFaceNodesResults`` object with default parameters.
+    n_nodes_smoothed: int, optional
+        Number of dihedral face nodes smoothed.
+    error_code: ErrorCode, optional
+        Error Code associated with creating offset surface.
+    json_data: dict, optional
+        JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> smooth_dihedral_face_nodes_results = prime.SmoothDihedralFaceNodesResults(model = model)
     """
     _default_params = {}
 
@@ -1631,18 +2170,18 @@ class SmoothDihedralFaceNodesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SmoothDihedralFaceNodesResults.
+        """Initialize a ``SmoothDihedralFaceNodesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SmoothDihedralFaceNodesResults object with default parameters.
+            Model to create a ``SmoothDihedralFaceNodesResults`` object with default parameters.
         n_nodes_smoothed: int, optional
             Number of dihedral face nodes smoothed.
         error_code: ErrorCode, optional
             Error Code associated with creating offset surface.
         json_data: dict, optional
-            JSON dictionary to create a SmoothDihedralFaceNodesResults object with provided parameters.
+            JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1660,7 +2199,7 @@ class SmoothDihedralFaceNodesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SmoothDihedralFaceNodesResults")
                     json_data = param_json["SmoothDihedralFaceNodesResults"] if "SmoothDihedralFaceNodesResults" in param_json else {}
@@ -1678,7 +2217,7 @@ class SmoothDihedralFaceNodesResults(CoreObject):
     def set_default(
             n_nodes_smoothed: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of SmoothDihedralFaceNodesResults.
+        """Set the default values of the ``SmoothDihedralFaceNodesResults`` object.
 
         Parameters
         ----------
@@ -1692,7 +2231,7 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SmoothDihedralFaceNodesResults.
+        """Print the default values of ``SmoothDihedralFaceNodesResults`` object.
 
         Examples
         --------
@@ -1738,6 +2277,25 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
 class RefineAtContactsParams(CoreObject):
     """Parameters to refine face elements in contact.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RefineAtContactsParams`` object with default parameters.
+    contact_tolerance: float, optional
+        Maximum tolerance used to identify face elements as contacts.
+    relative_tolerance: bool, optional
+        Option to specify the contact tolerance is relative or absolute.
+    refine_max_size: float, optional
+        Maximum size used to refine contact face elements.
+    project_on_geometry: bool, optional
+        Project on geometry on remesh.
+    json_data: dict, optional
+        JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> refine_at_contacts_params = prime.RefineAtContactsParams(model = model)
     """
     _default_params = {}
 
@@ -1761,12 +2319,12 @@ class RefineAtContactsParams(CoreObject):
             project_on_geometry: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the RefineAtContactsParams.
+        """Initialize a ``RefineAtContactsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a RefineAtContactsParams object with default parameters.
+            Model to create a ``RefineAtContactsParams`` object with default parameters.
         contact_tolerance: float, optional
             Maximum tolerance used to identify face elements as contacts.
         relative_tolerance: bool, optional
@@ -1776,7 +2334,7 @@ class RefineAtContactsParams(CoreObject):
         project_on_geometry: bool, optional
             Project on geometry on remesh.
         json_data: dict, optional
-            JSON dictionary to create a RefineAtContactsParams object with provided parameters.
+            JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
 
         Examples
         --------
@@ -1798,7 +2356,7 @@ class RefineAtContactsParams(CoreObject):
                     project_on_geometry)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "RefineAtContactsParams")
                     json_data = param_json["RefineAtContactsParams"] if "RefineAtContactsParams" in param_json else {}
@@ -1820,7 +2378,7 @@ class RefineAtContactsParams(CoreObject):
             relative_tolerance: bool = None,
             refine_max_size: float = None,
             project_on_geometry: bool = None):
-        """Set the default values of RefineAtContactsParams.
+        """Set the default values of the ``RefineAtContactsParams`` object.
 
         Parameters
         ----------
@@ -1838,7 +2396,7 @@ class RefineAtContactsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RefineAtContactsParams.
+        """Print the default values of ``RefineAtContactsParams`` object.
 
         Examples
         --------
@@ -1908,6 +2466,23 @@ class RefineAtContactsParams(CoreObject):
 
 class RefineAtContactsResults(CoreObject):
     """Results structure associated with refine face elements in contact.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``RefineAtContactsResults`` object with default parameters.
+    n_refined: int, optional
+        Number of face elements identified for refinement.
+    size_field_id: int, optional
+        Id of size field created to refine at contacts.
+    error_code: ErrorCode, optional
+        ErrorCode associated with the refine contacts operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> refine_at_contacts_results = prime.RefineAtContactsResults(model = model)
     """
     _default_params = {}
 
@@ -1928,12 +2503,12 @@ class RefineAtContactsResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the RefineAtContactsResults.
+        """Initialize a ``RefineAtContactsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a RefineAtContactsResults object with default parameters.
+            Model to create a ``RefineAtContactsResults`` object with default parameters.
         n_refined: int, optional
             Number of face elements identified for refinement.
         size_field_id: int, optional
@@ -1941,7 +2516,7 @@ class RefineAtContactsResults(CoreObject):
         error_code: ErrorCode, optional
             ErrorCode associated with the refine contacts operation.
         json_data: dict, optional
-            JSON dictionary to create a RefineAtContactsResults object with provided parameters.
+            JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
 
         Examples
         --------
@@ -1961,7 +2536,7 @@ class RefineAtContactsResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "RefineAtContactsResults")
                     json_data = param_json["RefineAtContactsResults"] if "RefineAtContactsResults" in param_json else {}
@@ -1981,7 +2556,7 @@ class RefineAtContactsResults(CoreObject):
             n_refined: int = None,
             size_field_id: int = None,
             error_code: ErrorCode = None):
-        """Set the default values of RefineAtContactsResults.
+        """Set the default values of the ``RefineAtContactsResults`` object.
 
         Parameters
         ----------
@@ -1997,7 +2572,7 @@ class RefineAtContactsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of RefineAtContactsResults.
+        """Print the default values of ``RefineAtContactsResults`` object.
 
         Examples
         --------
@@ -2055,6 +2630,25 @@ class RefineAtContactsResults(CoreObject):
 
 class AddThicknessParams(CoreObject):
     """Parameters to add thickness for a given plane.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddThicknessParams`` object with default parameters.
+    thickness: float, optional
+        To assign the offset distance of inflation.
+    reverse_face_normal: bool, optional
+        To assign the direction of inflation.
+    suggested_part_name: str, optional
+        Suggested part name for created patching surfaces.
+    fix_intersections: bool, optional
+        Fix intersections in concave regions.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_thickness_params = prime.AddThicknessParams(model = model)
     """
     _default_params = {}
 
@@ -2078,12 +2672,12 @@ class AddThicknessParams(CoreObject):
             fix_intersections: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AddThicknessParams.
+        """Initialize a ``AddThicknessParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AddThicknessParams object with default parameters.
+            Model to create a ``AddThicknessParams`` object with default parameters.
         thickness: float, optional
             To assign the offset distance of inflation.
         reverse_face_normal: bool, optional
@@ -2093,7 +2687,7 @@ class AddThicknessParams(CoreObject):
         fix_intersections: bool, optional
             Fix intersections in concave regions.
         json_data: dict, optional
-            JSON dictionary to create a AddThicknessParams object with provided parameters.
+            JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
 
         Examples
         --------
@@ -2115,7 +2709,7 @@ class AddThicknessParams(CoreObject):
                     fix_intersections)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AddThicknessParams")
                     json_data = param_json["AddThicknessParams"] if "AddThicknessParams" in param_json else {}
@@ -2137,7 +2731,7 @@ class AddThicknessParams(CoreObject):
             reverse_face_normal: bool = None,
             suggested_part_name: str = None,
             fix_intersections: bool = None):
-        """Set the default values of AddThicknessParams.
+        """Set the default values of the ``AddThicknessParams`` object.
 
         Parameters
         ----------
@@ -2155,7 +2749,7 @@ class AddThicknessParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AddThicknessParams.
+        """Print the default values of ``AddThicknessParams`` object.
 
         Examples
         --------
@@ -2225,6 +2819,21 @@ class AddThicknessParams(CoreObject):
 
 class AddThicknessResults(CoreObject):
     """Result structure associated with add thickness zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``AddThicknessResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    part_id: int, optional
+        The created thickness part id.
+    json_data: dict, optional
+        JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> add_thickness_results = prime.AddThicknessResults(model = model)
     """
     _default_params = {}
 
@@ -2242,18 +2851,18 @@ class AddThicknessResults(CoreObject):
             part_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the AddThicknessResults.
+        """Initialize a ``AddThicknessResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a AddThicknessResults object with default parameters.
+            Model to create a ``AddThicknessResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         part_id: int, optional
             The created thickness part id.
         json_data: dict, optional
-            JSON dictionary to create a AddThicknessResults object with provided parameters.
+            JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
 
         Examples
         --------
@@ -2271,7 +2880,7 @@ class AddThicknessResults(CoreObject):
                     part_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "AddThicknessResults")
                     json_data = param_json["AddThicknessResults"] if "AddThicknessResults" in param_json else {}
@@ -2289,7 +2898,7 @@ class AddThicknessResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             part_id: int = None):
-        """Set the default values of AddThicknessResults.
+        """Set the default values of the ``AddThicknessResults`` object.
 
         Parameters
         ----------
@@ -2303,7 +2912,7 @@ class AddThicknessResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of AddThicknessResults.
+        """Print the default values of ``AddThicknessResults`` object.
 
         Examples
         --------
@@ -2349,6 +2958,37 @@ class AddThicknessResults(CoreObject):
 
 class CreateBOIParams(CoreObject):
     """Parameters used for BOI surface creation in the given axis.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateBOIParams`` object with default parameters.
+    boi_type: BOIType, optional
+        Type of BOI offsetting.
+    perform_initial_wrap: bool, optional
+        Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+    wrap_size: float, optional
+        Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+    flow_dir: FlowDirection, optional
+        Assigns the offset direction of inflation.
+    side_scale: float, optional
+        BOI side scaling factor.
+    wake_scale: float, optional
+        BOI flow direction scaling factor.
+    wake_levels: int, optional
+        BOI levels.
+    suggested_part_name: str, optional
+        Suggested part name for created BOI surfaces.
+    suggested_label_prefix: str, optional
+        Suggested label name for created BOI surfaces.
+    number_of_threads: int, optional
+        Number of threads for multithreading.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_boiparams = prime.CreateBOIParams(model = model)
     """
     _default_params = {}
 
@@ -2390,12 +3030,12 @@ class CreateBOIParams(CoreObject):
             number_of_threads: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateBOIParams.
+        """Initialize a ``CreateBOIParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateBOIParams object with default parameters.
+            Model to create a ``CreateBOIParams`` object with default parameters.
         boi_type: BOIType, optional
             Type of BOI offsetting.
         perform_initial_wrap: bool, optional
@@ -2417,7 +3057,7 @@ class CreateBOIParams(CoreObject):
         number_of_threads: int, optional
             Number of threads for multithreading.
         json_data: dict, optional
-            JSON dictionary to create a CreateBOIParams object with provided parameters.
+            JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
 
         Examples
         --------
@@ -2451,7 +3091,7 @@ class CreateBOIParams(CoreObject):
                     number_of_threads)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateBOIParams")
                     json_data = param_json["CreateBOIParams"] if "CreateBOIParams" in param_json else {}
@@ -2485,7 +3125,7 @@ class CreateBOIParams(CoreObject):
             suggested_part_name: str = None,
             suggested_label_prefix: str = None,
             number_of_threads: int = None):
-        """Set the default values of CreateBOIParams.
+        """Set the default values of the ``CreateBOIParams`` object.
 
         Parameters
         ----------
@@ -2515,7 +3155,7 @@ class CreateBOIParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateBOIParams.
+        """Print the default values of ``CreateBOIParams`` object.
 
         Examples
         --------
@@ -2657,6 +3297,21 @@ class CreateBOIParams(CoreObject):
 
 class CreateBOIResults(CoreObject):
     """Result structure associated with BOI creation of zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateBOIResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    part_id: int, optional
+        The BOI part id.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateBOIResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_boiresults = prime.CreateBOIResults(model = model)
     """
     _default_params = {}
 
@@ -2674,18 +3329,18 @@ class CreateBOIResults(CoreObject):
             part_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateBOIResults.
+        """Initialize a ``CreateBOIResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateBOIResults object with default parameters.
+            Model to create a ``CreateBOIResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         part_id: int, optional
             The BOI part id.
         json_data: dict, optional
-            JSON dictionary to create a CreateBOIResults object with provided parameters.
+            JSON dictionary to create a ``CreateBOIResults`` object with provided parameters.
 
         Examples
         --------
@@ -2703,7 +3358,7 @@ class CreateBOIResults(CoreObject):
                     part_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateBOIResults")
                     json_data = param_json["CreateBOIResults"] if "CreateBOIResults" in param_json else {}
@@ -2721,7 +3376,7 @@ class CreateBOIResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             part_id: int = None):
-        """Set the default values of CreateBOIResults.
+        """Set the default values of the ``CreateBOIResults`` object.
 
         Parameters
         ----------
@@ -2735,7 +3390,7 @@ class CreateBOIResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateBOIResults.
+        """Print the default values of ``CreateBOIResults`` object.
 
         Examples
         --------
@@ -2781,6 +3436,27 @@ class CreateBOIResults(CoreObject):
 
 class CreateContactPatchParams(CoreObject):
     """Parameters used for contact patch creation in the given axis.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateContactPatchParams`` object with default parameters.
+    contact_patch_axis: ContactPatchAxis, optional
+        Assigns the contact patch direction.
+    offset_distance: float, optional
+        Source offset distance value.
+    grouping_tolerance: float, optional
+        Tolerance distance value to group regions for contact patch creation.
+    suggested_part_name: str, optional
+        Suggested part name for created contact patch surfaces.
+    suggested_label_prefix: str, optional
+        Suggested label name for created contact patch surfaces.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_contact_patch_params = prime.CreateContactPatchParams(model = model)
     """
     _default_params = {}
 
@@ -2807,12 +3483,12 @@ class CreateContactPatchParams(CoreObject):
             suggested_label_prefix: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateContactPatchParams.
+        """Initialize a ``CreateContactPatchParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateContactPatchParams object with default parameters.
+            Model to create a ``CreateContactPatchParams`` object with default parameters.
         contact_patch_axis: ContactPatchAxis, optional
             Assigns the contact patch direction.
         offset_distance: float, optional
@@ -2824,7 +3500,7 @@ class CreateContactPatchParams(CoreObject):
         suggested_label_prefix: str, optional
             Suggested label name for created contact patch surfaces.
         json_data: dict, optional
-            JSON dictionary to create a CreateContactPatchParams object with provided parameters.
+            JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
 
         Examples
         --------
@@ -2848,7 +3524,7 @@ class CreateContactPatchParams(CoreObject):
                     suggested_label_prefix)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateContactPatchParams")
                     json_data = param_json["CreateContactPatchParams"] if "CreateContactPatchParams" in param_json else {}
@@ -2872,7 +3548,7 @@ class CreateContactPatchParams(CoreObject):
             grouping_tolerance: float = None,
             suggested_part_name: str = None,
             suggested_label_prefix: str = None):
-        """Set the default values of CreateContactPatchParams.
+        """Set the default values of the ``CreateContactPatchParams`` object.
 
         Parameters
         ----------
@@ -2892,7 +3568,7 @@ class CreateContactPatchParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateContactPatchParams.
+        """Print the default values of ``CreateContactPatchParams`` object.
 
         Examples
         --------
@@ -2974,6 +3650,21 @@ class CreateContactPatchParams(CoreObject):
 
 class CreateContactPatchResults(CoreObject):
     """Result structure associated with created contact patch zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateContactPatchResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the contact patch creation operation.
+    part_id: int, optional
+        Contact patch part id.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateContactPatchResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_contact_patch_results = prime.CreateContactPatchResults(model = model)
     """
     _default_params = {}
 
@@ -2991,18 +3682,18 @@ class CreateContactPatchResults(CoreObject):
             part_id: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateContactPatchResults.
+        """Initialize a ``CreateContactPatchResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateContactPatchResults object with default parameters.
+            Model to create a ``CreateContactPatchResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the contact patch creation operation.
         part_id: int, optional
             Contact patch part id.
         json_data: dict, optional
-            JSON dictionary to create a CreateContactPatchResults object with provided parameters.
+            JSON dictionary to create a ``CreateContactPatchResults`` object with provided parameters.
 
         Examples
         --------
@@ -3020,7 +3711,7 @@ class CreateContactPatchResults(CoreObject):
                     part_id)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateContactPatchResults")
                     json_data = param_json["CreateContactPatchResults"] if "CreateContactPatchResults" in param_json else {}
@@ -3038,7 +3729,7 @@ class CreateContactPatchResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             part_id: int = None):
-        """Set the default values of CreateContactPatchResults.
+        """Set the default values of the ``CreateContactPatchResults`` object.
 
         Parameters
         ----------
@@ -3052,7 +3743,7 @@ class CreateContactPatchResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateContactPatchResults.
+        """Print the default values of ``CreateContactPatchResults`` object.
 
         Examples
         --------
@@ -3098,6 +3789,17 @@ class CreateContactPatchResults(CoreObject):
 
 class StretchFreeBoundariesParams(CoreObject):
     """Parameters used for stretch free boundaries operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``StretchFreeBoundariesParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``StretchFreeBoundariesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> stretch_free_boundaries_params = prime.StretchFreeBoundariesParams(model = model)
     """
     _default_params = {}
 
@@ -3110,14 +3812,14 @@ class StretchFreeBoundariesParams(CoreObject):
             model: CommunicationManager=None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the StretchFreeBoundariesParams.
+        """Initialize a ``StretchFreeBoundariesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a StretchFreeBoundariesParams object with default parameters.
+            Model to create a ``StretchFreeBoundariesParams`` object with default parameters.
         json_data: dict, optional
-            JSON dictionary to create a StretchFreeBoundariesParams object with provided parameters.
+            JSON dictionary to create a ``StretchFreeBoundariesParams`` object with provided parameters.
 
         Examples
         --------
@@ -3131,7 +3833,7 @@ class StretchFreeBoundariesParams(CoreObject):
                 self.__initialize()
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "StretchFreeBoundariesParams")
                     json_data = param_json["StretchFreeBoundariesParams"] if "StretchFreeBoundariesParams" in param_json else {}
@@ -3145,7 +3847,7 @@ class StretchFreeBoundariesParams(CoreObject):
 
     @staticmethod
     def set_default():
-        """Set the default values of StretchFreeBoundariesParams.
+        """Set the default values of the ``StretchFreeBoundariesParams`` object.
 
         """
         args = locals()
@@ -3153,7 +3855,7 @@ class StretchFreeBoundariesParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StretchFreeBoundariesParams.
+        """Print the default values of ``StretchFreeBoundariesParams`` object.
 
         Examples
         --------
@@ -3177,6 +3879,19 @@ class StretchFreeBoundariesParams(CoreObject):
 
 class StretchFreeBoundariesResults(CoreObject):
     """Results associated with stretch free boundaries operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``StretchFreeBoundariesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``StretchFreeBoundariesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> stretch_free_boundaries_results = prime.StretchFreeBoundariesResults(model = model)
     """
     _default_params = {}
 
@@ -3191,16 +3906,16 @@ class StretchFreeBoundariesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the StretchFreeBoundariesResults.
+        """Initialize a ``StretchFreeBoundariesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a StretchFreeBoundariesResults object with default parameters.
+            Model to create a ``StretchFreeBoundariesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a StretchFreeBoundariesResults object with provided parameters.
+            JSON dictionary to create a ``StretchFreeBoundariesResults`` object with provided parameters.
 
         Examples
         --------
@@ -3216,7 +3931,7 @@ class StretchFreeBoundariesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "StretchFreeBoundariesResults")
                     json_data = param_json["StretchFreeBoundariesResults"] if "StretchFreeBoundariesResults" in param_json else {}
@@ -3232,7 +3947,7 @@ class StretchFreeBoundariesResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of StretchFreeBoundariesResults.
+        """Set the default values of the ``StretchFreeBoundariesResults`` object.
 
         Parameters
         ----------
@@ -3244,7 +3959,7 @@ class StretchFreeBoundariesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StretchFreeBoundariesResults.
+        """Print the default values of ``StretchFreeBoundariesResults`` object.
 
         Examples
         --------
@@ -3275,3 +3990,244 @@ class StretchFreeBoundariesResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class TriangulateParams(CoreObject):
+    """Provides the parameters used for triangulation operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TriangulateParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> triangulate_params = prime.TriangulateParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``TriangulateParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``TriangulateParams`` object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> triangulate_params = prime.TriangulateParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "TriangulateParams")
+                    json_data = param_json["TriangulateParams"] if "TriangulateParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of the ``TriangulateParams`` object.
+
+        """
+        args = locals()
+        [TriangulateParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``TriangulateParams`` object.
+
+        Examples
+        --------
+        >>> TriangulateParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in TriangulateParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
+        return message
+
+class TriangulateResults(CoreObject):
+    """Results associated with triangulate operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``TriangulateResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of the operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    n_faces_triangulated: int, optional
+        Number of faces that were triangulated.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> triangulate_results = prime.TriangulateResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code: ErrorCode,
+            n_faces_triangulated: int):
+        self._error_code = ErrorCode(error_code)
+        self._n_faces_triangulated = n_faces_triangulated
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code: ErrorCode = None,
+            n_faces_triangulated: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``TriangulateResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``TriangulateResults`` object with default parameters.
+        error_code: ErrorCode, optional
+            Error code associated with failure of the operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        n_faces_triangulated: int, optional
+            Number of faces that were triangulated.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> triangulate_results = prime.TriangulateResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["nFacesTriangulated"] if "nFacesTriangulated" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, n_faces_triangulated])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    n_faces_triangulated)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "TriangulateResults")
+                    json_data = param_json["TriangulateResults"] if "TriangulateResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( TriangulateResults._default_params["error_code"] if "error_code" in TriangulateResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        n_faces_triangulated if n_faces_triangulated is not None else ( TriangulateResults._default_params["n_faces_triangulated"] if "n_faces_triangulated" in TriangulateResults._default_params else (json_data["nFacesTriangulated"] if "nFacesTriangulated" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code: ErrorCode = None,
+            n_faces_triangulated: int = None):
+        """Set the default values of the ``TriangulateResults`` object.
+
+        Parameters
+        ----------
+        error_code: ErrorCode, optional
+            Error code associated with failure of the operation.
+        n_faces_triangulated: int, optional
+            Number of faces that were triangulated.
+        """
+        args = locals()
+        [TriangulateResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``TriangulateResults`` object.
+
+        Examples
+        --------
+        >>> TriangulateResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in TriangulateResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._n_faces_triangulated is not None:
+            json_data["nFacesTriangulated"] = self._n_faces_triangulated
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\nn_faces_triangulated :  %s" % (self._error_code, self._n_faces_triangulated)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of the operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def n_faces_triangulated(self) -> int:
+        """Number of faces that were triangulated.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._n_faces_triangulated
+
+    @n_faces_triangulated.setter
+    def n_faces_triangulated(self, value: int):
+        self._n_faces_triangulated = value

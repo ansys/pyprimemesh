@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class AutoQuadMesher(CoreObject):
     """Generate full quad mesh.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create AutoQuadMesher object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -50,7 +54,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -59,11 +63,11 @@ class AutoQuadMesher(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_face_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, DetectAndTreatFeaturesParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is DetectAndTreatFeaturesParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DetectAndTreatFeaturesParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
         "params" : params._jsonify()}
@@ -95,7 +99,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -104,11 +108,11 @@ class AutoQuadMesher(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_face_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, RepairTopologyParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is RepairTopologyParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is RepairTopologyParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
         "params" : params._jsonify()}
@@ -140,7 +144,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -149,11 +153,11 @@ class AutoQuadMesher(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_face_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, DefeatureTopologyParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is DefeatureTopologyParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DefeatureTopologyParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
         "params" : params._jsonify()}
@@ -185,7 +189,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -194,11 +198,11 @@ class AutoQuadMesher(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_face_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, OptimizeQuadMeshParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is OptimizeQuadMeshParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is OptimizeQuadMeshParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
         "params" : params._jsonify()}
@@ -230,7 +234,7 @@ class AutoQuadMesher(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -239,11 +243,11 @@ class AutoQuadMesher(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
-            raise TypeError("Invalid argument type passed for topo_face_ids, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(params, CheckTopologyParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CheckTopologyParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CheckTopologyParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
         "params" : params._jsonify()}

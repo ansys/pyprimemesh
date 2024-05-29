@@ -10,6 +10,21 @@ from ansys.meshing.prime.params.primestructs import *
 
 class PartZonelets(CoreObject):
     """A structure containing some or all face zonelet ids available in a part.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``PartZonelets`` object with default parameters.
+    part_id: int, optional
+        Id of part.
+    face_zonelets: Iterable[int], optional
+        List of face zonelet ids available in the part.
+    json_data: dict, optional
+        JSON dictionary to create a ``PartZonelets`` object with provided parameters.
+
+    Examples
+    --------
+    >>> part_zonelets = prime.PartZonelets(model = model)
     """
     _default_params = {}
 
@@ -27,18 +42,18 @@ class PartZonelets(CoreObject):
             face_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the PartZonelets.
+        """Initialize a ``PartZonelets`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a PartZonelets object with default parameters.
+            Model to create a ``PartZonelets`` object with default parameters.
         part_id: int, optional
             Id of part.
         face_zonelets: Iterable[int], optional
             List of face zonelet ids available in the part.
         json_data: dict, optional
-            JSON dictionary to create a PartZonelets object with provided parameters.
+            JSON dictionary to create a ``PartZonelets`` object with provided parameters.
 
         Examples
         --------
@@ -56,7 +71,7 @@ class PartZonelets(CoreObject):
                     face_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "PartZonelets")
                     json_data = param_json["PartZonelets"] if "PartZonelets" in param_json else {}
@@ -74,7 +89,7 @@ class PartZonelets(CoreObject):
     def set_default(
             part_id: int = None,
             face_zonelets: Iterable[int] = None):
-        """Set the default values of PartZonelets.
+        """Set the default values of the ``PartZonelets`` object.
 
         Parameters
         ----------
@@ -88,7 +103,7 @@ class PartZonelets(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of PartZonelets.
+        """Print the default values of ``PartZonelets`` object.
 
         Examples
         --------
@@ -134,6 +149,23 @@ class PartZonelets(CoreObject):
 
 class SetNameResults(CoreObject):
     """Results associated with the set name.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SetNameResults`` object with default parameters.
+    warning_code: WarningCode, optional
+        Warning code associated with the set name of given entity.
+    assigned_name: str, optional
+        Assigned name of given entity.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``SetNameResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> set_name_results = prime.SetNameResults(model = model)
     """
     _default_params = {}
 
@@ -154,12 +186,12 @@ class SetNameResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SetNameResults.
+        """Initialize a ``SetNameResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SetNameResults object with default parameters.
+            Model to create a ``SetNameResults`` object with default parameters.
         warning_code: WarningCode, optional
             Warning code associated with the set name of given entity.
         assigned_name: str, optional
@@ -167,7 +199,7 @@ class SetNameResults(CoreObject):
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a SetNameResults object with provided parameters.
+            JSON dictionary to create a ``SetNameResults`` object with provided parameters.
 
         Examples
         --------
@@ -187,7 +219,7 @@ class SetNameResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetNameResults")
                     json_data = param_json["SetNameResults"] if "SetNameResults" in param_json else {}
@@ -207,7 +239,7 @@ class SetNameResults(CoreObject):
             warning_code: WarningCode = None,
             assigned_name: str = None,
             error_code: ErrorCode = None):
-        """Set the default values of SetNameResults.
+        """Set the default values of the ``SetNameResults`` object.
 
         Parameters
         ----------
@@ -223,7 +255,7 @@ class SetNameResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of SetNameResults.
+        """Print the default values of ``SetNameResults`` object.
 
         Examples
         --------
@@ -281,6 +313,19 @@ class SetNameResults(CoreObject):
 
 class DeleteResults(CoreObject):
     """Results associated with the deletion of items.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_results = prime.DeleteResults(model = model)
     """
     _default_params = {}
 
@@ -295,16 +340,16 @@ class DeleteResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteResults.
+        """Initialize a ``DeleteResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteResults object with default parameters.
+            Model to create a ``DeleteResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a DeleteResults object with provided parameters.
+            JSON dictionary to create a ``DeleteResults`` object with provided parameters.
 
         Examples
         --------
@@ -320,7 +365,7 @@ class DeleteResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteResults")
                     json_data = param_json["DeleteResults"] if "DeleteResults" in param_json else {}
@@ -336,7 +381,7 @@ class DeleteResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteResults.
+        """Set the default values of the ``DeleteResults`` object.
 
         Parameters
         ----------
@@ -348,7 +393,7 @@ class DeleteResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteResults.
+        """Print the default values of ``DeleteResults`` object.
 
         Examples
         --------
@@ -382,30 +427,54 @@ class DeleteResults(CoreObject):
 
 class CopyZoneletsParams(CoreObject):
     """Parameters to copy zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CopyZoneletsParams`` object with default parameters.
+    copy_labels: bool, optional
+        Option to copy labels of input zonelets to the corresponding copied zonelets.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    copy_zones: bool, optional
+        Option to copy zones of input zonelets to corresponding copied zonelets.
+    json_data: dict, optional
+        JSON dictionary to create a ``CopyZoneletsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> copy_zonelets_params = prime.CopyZoneletsParams(model = model)
     """
     _default_params = {}
 
     def __initialize(
             self,
+            copy_labels: bool,
             copy_zones: bool):
+        self._copy_labels = copy_labels
         self._copy_zones = copy_zones
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            copy_labels: bool = None,
             copy_zones: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CopyZoneletsParams.
+        """Initialize a ``CopyZoneletsParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CopyZoneletsParams object with default parameters.
+            Model to create a ``CopyZoneletsParams`` object with default parameters.
+        copy_labels: bool, optional
+            Option to copy labels of input zonelets to the corresponding copied zonelets.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         copy_zones: bool, optional
             Option to copy zones of input zonelets to corresponding copied zonelets.
         json_data: dict, optional
-            JSON dictionary to create a CopyZoneletsParams object with provided parameters.
+            JSON dictionary to create a ``CopyZoneletsParams`` object with provided parameters.
 
         Examples
         --------
@@ -413,19 +482,22 @@ class CopyZoneletsParams(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["copyLabels"] if "copyLabels" in json_data else None,
                 json_data["copyZones"] if "copyZones" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [copy_zones])
+            all_field_specified = all(arg is not None for arg in [copy_labels, copy_zones])
             if all_field_specified:
                 self.__initialize(
+                    copy_labels,
                     copy_zones)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CopyZoneletsParams")
                     json_data = param_json["CopyZoneletsParams"] if "CopyZoneletsParams" in param_json else {}
                     self.__initialize(
+                        copy_labels if copy_labels is not None else ( CopyZoneletsParams._default_params["copy_labels"] if "copy_labels" in CopyZoneletsParams._default_params else (json_data["copyLabels"] if "copyLabels" in json_data else None)),
                         copy_zones if copy_zones is not None else ( CopyZoneletsParams._default_params["copy_zones"] if "copy_zones" in CopyZoneletsParams._default_params else (json_data["copyZones"] if "copyZones" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -436,11 +508,14 @@ class CopyZoneletsParams(CoreObject):
 
     @staticmethod
     def set_default(
+            copy_labels: bool = None,
             copy_zones: bool = None):
-        """Set the default values of CopyZoneletsParams.
+        """Set the default values of the ``CopyZoneletsParams`` object.
 
         Parameters
         ----------
+        copy_labels: bool, optional
+            Option to copy labels of input zonelets to the corresponding copied zonelets.
         copy_zones: bool, optional
             Option to copy zones of input zonelets to corresponding copied zonelets.
         """
@@ -449,7 +524,7 @@ class CopyZoneletsParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CopyZoneletsParams.
+        """Print the default values of ``CopyZoneletsParams`` object.
 
         Examples
         --------
@@ -461,15 +536,29 @@ class CopyZoneletsParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._copy_labels is not None:
+            json_data["copyLabels"] = self._copy_labels
         if self._copy_zones is not None:
             json_data["copyZones"] = self._copy_zones
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "copy_zones :  %s" % (self._copy_zones)
+        message = "copy_labels :  %s\ncopy_zones :  %s" % (self._copy_labels, self._copy_zones)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def copy_labels(self) -> bool:
+        """Option to copy labels of input zonelets to the corresponding copied zonelets.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._copy_labels
+
+    @copy_labels.setter
+    def copy_labels(self, value: bool):
+        self._copy_labels = value
 
     @property
     def copy_zones(self) -> bool:
@@ -483,6 +572,23 @@ class CopyZoneletsParams(CoreObject):
 
 class CopyZoneletsResults(CoreObject):
     """Result structure associated with copying zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CopyZoneletsResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with failure of operation.
+    copied_zonelets: Iterable[int], optional
+        Ids of the copied zonelets.
+    copied_face_zonelets: Iterable[int], optional
+        Ids of the copied bounding faces of cell zonelets.
+    json_data: dict, optional
+        JSON dictionary to create a ``CopyZoneletsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> copy_zonelets_results = prime.CopyZoneletsResults(model = model)
     """
     _default_params = {}
 
@@ -503,12 +609,12 @@ class CopyZoneletsResults(CoreObject):
             copied_face_zonelets: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CopyZoneletsResults.
+        """Initialize a ``CopyZoneletsResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CopyZoneletsResults object with default parameters.
+            Model to create a ``CopyZoneletsResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         copied_zonelets: Iterable[int], optional
@@ -516,7 +622,7 @@ class CopyZoneletsResults(CoreObject):
         copied_face_zonelets: Iterable[int], optional
             Ids of the copied bounding faces of cell zonelets.
         json_data: dict, optional
-            JSON dictionary to create a CopyZoneletsResults object with provided parameters.
+            JSON dictionary to create a ``CopyZoneletsResults`` object with provided parameters.
 
         Examples
         --------
@@ -536,7 +642,7 @@ class CopyZoneletsResults(CoreObject):
                     copied_face_zonelets)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CopyZoneletsResults")
                     json_data = param_json["CopyZoneletsResults"] if "CopyZoneletsResults" in param_json else {}
@@ -556,7 +662,7 @@ class CopyZoneletsResults(CoreObject):
             error_code: ErrorCode = None,
             copied_zonelets: Iterable[int] = None,
             copied_face_zonelets: Iterable[int] = None):
-        """Set the default values of CopyZoneletsResults.
+        """Set the default values of the ``CopyZoneletsResults`` object.
 
         Parameters
         ----------
@@ -572,7 +678,7 @@ class CopyZoneletsResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CopyZoneletsResults.
+        """Print the default values of ``CopyZoneletsResults`` object.
 
         Examples
         --------

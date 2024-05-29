@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class Wrapper(CoreObject):
     """Provide operations to generate surface mesh using wrapper technology.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Wrapper object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -52,9 +56,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(wrapper_control_id, int):
-            raise TypeError("Invalid argument type passed for wrapper_control_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'wrapper_control_id'. Valid argument type is int.")
         if not isinstance(params, WrapParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapParams.")
         args = {"wrapper_control_id" : wrapper_control_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/Wrap"
@@ -86,9 +90,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(params, WrapperImproveQualityParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperImproveQualityParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapperImproveQualityParams.")
         args = {"part_id" : part_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/ImproveQuality"
@@ -120,9 +124,9 @@ class Wrapper(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         if not isinstance(params, WrapperCloseGapsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is WrapperCloseGapsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapperCloseGapsParams.")
         args = {"scope" : scope._jsonify(),
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/CloseGaps"
@@ -130,3 +134,42 @@ class Wrapper(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("close_gaps", WrapperCloseGapsResult(model = self._model, json_data = result))
         return WrapperCloseGapsResult(model = self._model, json_data = result)
+
+    def patch_flow_regions(self, live_material_point : str, params : WrapperPatchFlowRegionsParams) -> WrapperPatchFlowRegionsResult:
+        """ Patch flow regions create patching surfaces for regions identified by dead regions from wrapper patch holes parameters.
+
+
+        Parameters
+        ----------
+        live_material_point : str
+            Name of live material point.
+        params : WrapperPatchFlowRegionsParams
+            Parameters to define patch flow regions operation.
+
+        Returns
+        -------
+        WrapperPatchFlowRegionsResult
+            Returns the WrapperPatchFlowRegionsResult.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = wrapper.PatchFlowRegions(live_material_point, params)
+
+        """
+        if not isinstance(live_material_point, str):
+            raise TypeError("Invalid argument type passed for 'live_material_point'. Valid argument type is str.")
+        if not isinstance(params, WrapperPatchFlowRegionsParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WrapperPatchFlowRegionsParams.")
+        args = {"live_material_point" : live_material_point,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Wrapper/PatchFlowRegions"
+        self._model._print_beta_api_warning("patch_flow_regions")
+        self._model._print_logs_before_command("patch_flow_regions", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("patch_flow_regions", WrapperPatchFlowRegionsResult(model = self._model, json_data = result))
+        return WrapperPatchFlowRegionsResult(model = self._model, json_data = result)

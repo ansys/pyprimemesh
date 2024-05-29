@@ -150,6 +150,8 @@ class ErrorCode(enum.IntEnum):
     """Pyramid meshing failed."""
     DELETEMESHFAILED = 142
     """Deleting mesh failed."""
+    INCREMENTALVOLUMEMESHINGNOTSUPPORTED = 143
+    """Incremental volume meshing is not supported."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -266,6 +268,8 @@ class ErrorCode(enum.IntEnum):
     """Writing size field failed."""
     MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH = 533
     """Mesh not found to export fluent meshing mesh."""
+    EXPORTSTLFAILED = 549
+    """Export STL failed."""
     EXPORTSTLFAILEDWITHTOPOLOGY = 553
     """Export STL not supported for part with topology data."""
     EXPORTSTLFAILEDWITHQUADFACES = 554
@@ -278,18 +282,18 @@ class ErrorCode(enum.IntEnum):
     """Export STL failed. List of part ids is empty."""
     EXPORTSTLFAILEDWITHINCORRECTPARTID = 558
     """Export STL failed. Part id is incorrect."""
-    MATCHEDMESHOPTIONINVALID = 850
+    FUSEOPTIONINVALID = 850
     """Invalid option chosen to connect two different parts."""
-    COLOCATEMATCHEDNODESFAILED = 851
-    """Colocation of matched nodes failed."""
+    COLOCATEFUSEDNODESFAILED = 851
+    """Colocation of fused nodes failed."""
     IMPRINTBOUNDARYNODESFAILED = 852
     """Imprint of boundary nodes failed."""
     IMPRINTBOUNDARYEDGESFAILED = 853
     """Imprint of boundary edges failed."""
     SPLITINTERSECTINGBOUNDARYEDGESFAILED = 854
     """Splitting of intersecting boundary edges failed."""
-    MATCHINTERIORFAILED = 855
-    """Matching of interior region of overlap failed."""
+    FUSEINTERIORFAILED = 855
+    """Fusing interior region of overlap failed."""
     TOLERANCEVALUEINVALID = 856
     """Invalid tolerance value specified."""
     SOURCEORTARGETNOTSPECIFIED = 857
@@ -308,6 +312,8 @@ class ErrorCode(enum.IntEnum):
     """Merge zonelets is not supported for part with topology data."""
     MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART = 1207
     """Merge volumes is not supported for part with topology data."""
+    NOTSUPPORTEDFORPOLYMESHPART = 1208
+    """Operation does not support poly elements."""
     MERGEPARTSFAILED = 1301
     """Merge parts failed."""
     MERGEPARTSWANDWOTOPO = 1302
@@ -331,7 +337,7 @@ class ErrorCode(enum.IntEnum):
     MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS = 1311
     """Merge small zonelets option is supported for only face zonelets."""
     INVALIDINPUTVOLUMES = 1312
-    """Invalid input volumes."""
+    """List of volume ids provided is empty or incorrect."""
     MORPHER_COMPUTEBCS = 1410
     """Failed to compute boundary conditions."""
     MORPHER_MATCHMORPHINVALIDSOURCEINPUT = 1450
@@ -536,6 +542,26 @@ class ErrorCode(enum.IntEnum):
     """Wrapper gap closing failed."""
     WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR = 3443
     """Resolution Factor should be greater than 0 but less than or equal to 1."""
+    WRAPPERLEAKINGFLUIDREGIONS = 3444
+    """Two or more fluid regions leaking into each other.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE = 3445
+    """Hole size specified for dead region should be positive double.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    WRAPPERPATCHFLOWREGIONS_FAILED = 3446
+    """Unable to create patch surfaces.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE = 3447
+    """Too small hole size provided for dead region.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE = 3448
+    """Base size specified for patching should be positive double.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -588,6 +614,8 @@ class ErrorCode(enum.IntEnum):
     """Some bodies are intersecting or incorrectly defined."""
     STACKER_BASEFACEUNMESHED = 10111
     """Base face list input has unmeshed topofaces."""
+    FACEZONELETSHAVECELLSCONNECTED = 10205
+    """Face zonelets have cells connected."""
     INVALIDTHINVOLUMECONTROLS = 12101
     """Invalid input provided for thin volume control."""
     THINVOLUMECONTROLINVALIDSOURCESCOPE = 12102
@@ -624,10 +652,24 @@ class ErrorCode(enum.IntEnum):
     """Bad shape properties."""
     AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
     """Autoquadmesher error codes.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     AUTOQUADMESHER_INVALIDMINMAXSIZES = 15001
     """Difference in maximum value and minimum value is negative.
-    This parameter is a Beta. Parameter behavior and name may change in future."""
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    ZEROELEMENTSREADFROMCDBFILE = 16500
+    """No elements read from CDB file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    ZERONODESREADFROMCDBFILE = 16501
+    """No nodes read from CDB file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    ZEROELEMENTSFORCDBEXPORT = 16600
+    """No elements found for cdb export.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.
@@ -668,6 +710,10 @@ class WarningCode(enum.IntEnum):
     """Degenerate input."""
     ALIGN_OPERATIONINTERRUPTED = 1900
     """Align operation interrupted."""
+    FUSEOVERLAPREMOVALINCOMPLETE = 4500
+    """Self intersections found. Use Fuse operation to remove it."""
+    REMOVEOVERLAPWITHINTERSECT = 4501
+    """Self intersections found. Use Intersect operation to remove it."""
     IGA_NOGEOMZONELETFORSPLINEFITTING = 5001
     """Invalid input for IGA."""
     NOHOLESFOUNDONPLANE = 5501
@@ -684,6 +730,8 @@ class WarningCode(enum.IntEnum):
     """Face zonelets have no volume associated to them."""
     JOINEDZONELETSFROMMULTIPLEVOLUMES = 5605
     """Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets."""
+    FAILEDTOUPDATEVOLUMES = 5606
+    """Volumes are not updated after performing the operation. Compute the volumes again."""
     WRAPPER_SIZECONTROLNOTDEFINED = 6001
     """No size controls provided for wrapper."""
     WRAPPER_SIZECONTROLNOTSUPPORTED = 6002
@@ -708,7 +756,19 @@ class WarningCode(enum.IntEnum):
     """Mesh has invalid shape."""
     MESHHASLEFTHANDEDNESSFACES = 7107
     """Mesh has invalid shape."""
+    NOCADGEOMETRYFOUND = 7500
+    """CAD geometry not found for some or all topo entities. Skipped projection for those topo entities."""
+    NOCADGEOMETRYPROJECTONFACETS = 7501
+    """CAD geometry not found for some or all topo entities. Projected on facets for those topo entites."""
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
+    UNPROCESSEDKEYWORDSINABAQUSFILE = 11001
+    """Unprocessed Abaqus keywords have been found."""
+    EXPORTMAPDLANALYSISSETTINGSFAILED = 11101
+    """Export MAPDL analysis settings failed."""
+    WRITINGCONTACTPAIRSSKIPPED = 11102
+    """Writing of contact pairs skipped."""
+    WRITINGTIESSKIPPED = 11103
+    """Writing of ties skipped."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
     """MultiZone warning codes"""

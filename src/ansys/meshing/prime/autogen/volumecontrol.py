@@ -8,6 +8,16 @@ from typing import List, Any, Union
 class VolumeControl(CoreObject):
     """Volume controls provide volume specific settings on volumes specified by scope and settings specified by parameters.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeControl object.
+    id : int
+        Id of the VolumeControl.
+    object_id : int
+        Object id of the VolumeControl.
+    name : str
+        Name of the VolumeControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -36,7 +46,7 @@ class VolumeControl(CoreObject):
 
         """
         if not isinstance(volume_control_params, VolumeControlParams):
-            raise TypeError("Invalid argument type passed for volume_control_params, valid argument type is VolumeControlParams.")
+            raise TypeError("Invalid argument type passed for 'volume_control_params'. Valid argument type is VolumeControlParams.")
         args = {"volume_control_params" : volume_control_params._jsonify()}
         command_name = "PrimeMesh::VolumeControl/SetParams"
         self._model._print_logs_before_command("set_params", args)
@@ -68,7 +78,7 @@ class VolumeControl(CoreObject):
 
         """
         if not isinstance(scope, ScopeDefinition):
-            raise TypeError("Invalid argument type passed for scope, valid argument type is ScopeDefinition.")
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::VolumeControl/SetScope"
         self._model._print_logs_before_command("set_scope", args)
@@ -97,7 +107,7 @@ class VolumeControl(CoreObject):
 
         """
         if not isinstance(name, str):
-            raise TypeError("Invalid argument type passed for name, valid argument type is str.")
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
         args = {"name" : name}
         command_name = "PrimeMesh::VolumeControl/SetSuggestedName"
         self._model._print_logs_before_command("set_suggested_name", args)

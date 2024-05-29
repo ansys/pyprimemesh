@@ -34,18 +34,33 @@ class MergeNodeType(enum.IntEnum):
     FREEFREE = 1
     """Merge only free nodes with free nodes."""
 
-class MatchedMeshOption(enum.IntEnum):
-    """Type to specify treatment of matched mesh.
+class FuseOption(enum.IntEnum):
+    """Type to specify treatment of surfaces for fusing.
     """
     NONE = 0
-    """No action to be taken for matched mesh."""
+    """No action to be taken for surfaces being fused."""
     TRIMONESIDE = 3
-    """Delete matched faces on one side and merge matched nodes at middle locations (works only within a single part)."""
+    """Delete faces to be fused on one side and merge nodes to be fused at middle locations (works only within a single part)."""
     TRIMTWOSIDES = 4
-    """Delete matched faces on both sides and merge matched nodes at middle locations (works only within a single part)."""
+    """Delete faces to be fused on both sides and merge nodes to be fused at middle locations (works only within a single part)."""
 
 class OverlapPairs(CoreObject):
     """Provides ids of a pair of overlapping face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``OverlapPairs`` object with default parameters.
+    zone_id0: int, optional
+        Id of one overlapping face zonelet.
+    zone_id1: int, optional
+        Id of other overlapping face zonelet.
+    json_data: dict, optional
+        JSON dictionary to create a ``OverlapPairs`` object with provided parameters.
+
+    Examples
+    --------
+    >>> overlap_pairs = prime.OverlapPairs(model = model)
     """
     _default_params = {}
 
@@ -63,18 +78,18 @@ class OverlapPairs(CoreObject):
             zone_id1: int = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the OverlapPairs.
+        """Initialize a ``OverlapPairs`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a OverlapPairs object with default parameters.
+            Model to create a ``OverlapPairs`` object with default parameters.
         zone_id0: int, optional
             Id of one overlapping face zonelet.
         zone_id1: int, optional
             Id of other overlapping face zonelet.
         json_data: dict, optional
-            JSON dictionary to create a OverlapPairs object with provided parameters.
+            JSON dictionary to create a ``OverlapPairs`` object with provided parameters.
 
         Examples
         --------
@@ -92,7 +107,7 @@ class OverlapPairs(CoreObject):
                     zone_id1)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "OverlapPairs")
                     json_data = param_json["OverlapPairs"] if "OverlapPairs" in param_json else {}
@@ -110,7 +125,7 @@ class OverlapPairs(CoreObject):
     def set_default(
             zone_id0: int = None,
             zone_id1: int = None):
-        """Set the default values of OverlapPairs.
+        """Set the default values of the ``OverlapPairs`` object.
 
         Parameters
         ----------
@@ -124,7 +139,7 @@ class OverlapPairs(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of OverlapPairs.
+        """Print the default values of ``OverlapPairs`` object.
 
         Examples
         --------
@@ -170,6 +185,23 @@ class OverlapPairs(CoreObject):
 
 class OverlapSearchResults(CoreObject):
     """Provides ids of a pair of overlapping face zonelets.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``OverlapSearchResults`` object with default parameters.
+    n_pairs: int, optional
+        Number of pairs.
+    overlap_pairs: List[OverlapPairs], optional
+        Ids corresponding to pairs of overlapping face zonelets.
+    error_code: ErrorCode, optional
+        Error Code associated with failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``OverlapSearchResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> overlap_search_results = prime.OverlapSearchResults(model = model)
     """
     _default_params = {}
 
@@ -190,12 +222,12 @@ class OverlapSearchResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the OverlapSearchResults.
+        """Initialize a ``OverlapSearchResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a OverlapSearchResults object with default parameters.
+            Model to create a ``OverlapSearchResults`` object with default parameters.
         n_pairs: int, optional
             Number of pairs.
         overlap_pairs: List[OverlapPairs], optional
@@ -203,7 +235,7 @@ class OverlapSearchResults(CoreObject):
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a OverlapSearchResults object with provided parameters.
+            JSON dictionary to create a ``OverlapSearchResults`` object with provided parameters.
 
         Examples
         --------
@@ -223,7 +255,7 @@ class OverlapSearchResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "OverlapSearchResults")
                     json_data = param_json["OverlapSearchResults"] if "OverlapSearchResults" in param_json else {}
@@ -243,7 +275,7 @@ class OverlapSearchResults(CoreObject):
             n_pairs: int = None,
             overlap_pairs: List[OverlapPairs] = None,
             error_code: ErrorCode = None):
-        """Set the default values of OverlapSearchResults.
+        """Set the default values of the ``OverlapSearchResults`` object.
 
         Parameters
         ----------
@@ -259,7 +291,7 @@ class OverlapSearchResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of OverlapSearchResults.
+        """Print the default values of ``OverlapSearchResults`` object.
 
         Examples
         --------
@@ -317,6 +349,21 @@ class OverlapSearchResults(CoreObject):
 
 class ConnectResults(CoreObject):
     """Results associated with the connection operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ConnectResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error Code associated with failure of operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``ConnectResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> connect_results = prime.ConnectResults(model = model)
     """
     _default_params = {}
 
@@ -334,18 +381,18 @@ class ConnectResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the ConnectResults.
+        """Initialize a ``ConnectResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a ConnectResults object with default parameters.
+            Model to create a ``ConnectResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of operation.
         warning_codes: List[WarningCode], optional
             Warning codes associated with the operation.
         json_data: dict, optional
-            JSON dictionary to create a ConnectResults object with provided parameters.
+            JSON dictionary to create a ``ConnectResults`` object with provided parameters.
 
         Examples
         --------
@@ -363,7 +410,7 @@ class ConnectResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ConnectResults")
                     json_data = param_json["ConnectResults"] if "ConnectResults" in param_json else {}
@@ -381,7 +428,7 @@ class ConnectResults(CoreObject):
     def set_default(
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of ConnectResults.
+        """Set the default values of the ``ConnectResults`` object.
 
         Parameters
         ----------
@@ -395,7 +442,7 @@ class ConnectResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of ConnectResults.
+        """Print the default values of ``ConnectResults`` object.
 
         Examples
         --------
@@ -441,6 +488,27 @@ class ConnectResults(CoreObject):
 
 class IntersectParams(CoreObject):
     """Parameters used for intersection.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``IntersectParams`` object with default parameters.
+    tolerance: float, optional
+        Intersection tolerance.
+    use_absolute_tolerance: bool, optional
+        True if tolerance provided is absolute value.
+    remesh: bool, optional
+        Local remesh at the intersection.
+    collapse_feature_angle: float, optional
+        Angle to preserve features while performing collapse in improve operation.
+    collapse_target_skewness: float, optional
+        Perform collapse on faces with skewness above the provided target skewness.
+    json_data: dict, optional
+        JSON dictionary to create a ``IntersectParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> intersect_params = prime.IntersectParams(model = model)
     """
     _default_params = {}
 
@@ -467,12 +535,12 @@ class IntersectParams(CoreObject):
             collapse_target_skewness: float = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the IntersectParams.
+        """Initialize a ``IntersectParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a IntersectParams object with default parameters.
+            Model to create a ``IntersectParams`` object with default parameters.
         tolerance: float, optional
             Intersection tolerance.
         use_absolute_tolerance: bool, optional
@@ -484,7 +552,7 @@ class IntersectParams(CoreObject):
         collapse_target_skewness: float, optional
             Perform collapse on faces with skewness above the provided target skewness.
         json_data: dict, optional
-            JSON dictionary to create a IntersectParams object with provided parameters.
+            JSON dictionary to create a ``IntersectParams`` object with provided parameters.
 
         Examples
         --------
@@ -508,7 +576,7 @@ class IntersectParams(CoreObject):
                     collapse_target_skewness)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "IntersectParams")
                     json_data = param_json["IntersectParams"] if "IntersectParams" in param_json else {}
@@ -532,7 +600,7 @@ class IntersectParams(CoreObject):
             remesh: bool = None,
             collapse_feature_angle: float = None,
             collapse_target_skewness: float = None):
-        """Set the default values of IntersectParams.
+        """Set the default values of the ``IntersectParams`` object.
 
         Parameters
         ----------
@@ -552,7 +620,7 @@ class IntersectParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of IntersectParams.
+        """Print the default values of ``IntersectParams`` object.
 
         Examples
         --------
@@ -634,6 +702,27 @@ class IntersectParams(CoreObject):
 
 class JoinParams(CoreObject):
     """Parameters used for join.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``JoinParams`` object with default parameters.
+    tolerance: float, optional
+        Overlap tolerance between overlapping zonelets.
+    use_absolute_tolerance: bool, optional
+        Tolerance provided is absolute value.
+    remesh: bool, optional
+        Remesh at overlap surface boundary.
+    match_angle: float, optional
+        Match angle determines face pair inclination for overlap consideration.
+    overlap_zone_name: str, optional
+        Zone id to be assigned to overlap zonelets belonging to different zones.
+    json_data: dict, optional
+        JSON dictionary to create a ``JoinParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> join_params = prime.JoinParams(model = model)
     """
     _default_params = {}
 
@@ -660,12 +749,12 @@ class JoinParams(CoreObject):
             overlap_zone_name: str = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the JoinParams.
+        """Initialize a ``JoinParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a JoinParams object with default parameters.
+            Model to create a ``JoinParams`` object with default parameters.
         tolerance: float, optional
             Overlap tolerance between overlapping zonelets.
         use_absolute_tolerance: bool, optional
@@ -677,7 +766,7 @@ class JoinParams(CoreObject):
         overlap_zone_name: str, optional
             Zone id to be assigned to overlap zonelets belonging to different zones.
         json_data: dict, optional
-            JSON dictionary to create a JoinParams object with provided parameters.
+            JSON dictionary to create a ``JoinParams`` object with provided parameters.
 
         Examples
         --------
@@ -701,7 +790,7 @@ class JoinParams(CoreObject):
                     overlap_zone_name)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "JoinParams")
                     json_data = param_json["JoinParams"] if "JoinParams" in param_json else {}
@@ -725,7 +814,7 @@ class JoinParams(CoreObject):
             remesh: bool = None,
             match_angle: float = None,
             overlap_zone_name: str = None):
-        """Set the default values of JoinParams.
+        """Set the default values of the ``JoinParams`` object.
 
         Parameters
         ----------
@@ -745,7 +834,7 @@ class JoinParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of JoinParams.
+        """Print the default values of ``JoinParams`` object.
 
         Examples
         --------
@@ -827,35 +916,61 @@ class JoinParams(CoreObject):
 
 class SubtractVolumesParams(CoreObject):
     """Parameters to control the volume subtract operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractVolumesParams`` object with default parameters.
+    ignore_face_zonelets: Iterable[int], optional
+        Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
+    check_cutters: bool, optional
+        Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+    keep_cutters: bool, optional
+        Option to retain cutter volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_volumes_params = prime.SubtractVolumesParams(model = model)
     """
     _default_params = {}
 
     def __initialize(
             self,
             ignore_face_zonelets: Iterable[int],
-            check_cutters: bool):
+            check_cutters: bool,
+            keep_cutters: bool):
         self._ignore_face_zonelets = ignore_face_zonelets if isinstance(ignore_face_zonelets, np.ndarray) else np.array(ignore_face_zonelets, dtype=np.int32) if ignore_face_zonelets is not None else None
         self._check_cutters = check_cutters
+        self._keep_cutters = keep_cutters
 
     def __init__(
             self,
             model: CommunicationManager=None,
             ignore_face_zonelets: Iterable[int] = None,
             check_cutters: bool = None,
+            keep_cutters: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SubtractVolumesParams.
+        """Initialize a ``SubtractVolumesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SubtractVolumesParams object with default parameters.
+            Model to create a ``SubtractVolumesParams`` object with default parameters.
         ignore_face_zonelets: Iterable[int], optional
-            Face zonelet ids that subtract volumes should not remove.(For example, periodic or fluid cap zonelets)
+            Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
-            Option to handle overlapping or intersecting cutter volumes.
+            Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+        keep_cutters: bool, optional
+            Option to retain cutter volumes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a SubtractVolumesParams object with provided parameters.
+            JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
 
         Examples
         --------
@@ -864,22 +979,25 @@ class SubtractVolumesParams(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["ignoreFaceZonelets"] if "ignoreFaceZonelets" in json_data else None,
-                json_data["checkCutters"] if "checkCutters" in json_data else None)
+                json_data["checkCutters"] if "checkCutters" in json_data else None,
+                json_data["keepCutters"] if "keepCutters" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [ignore_face_zonelets, check_cutters])
+            all_field_specified = all(arg is not None for arg in [ignore_face_zonelets, check_cutters, keep_cutters])
             if all_field_specified:
                 self.__initialize(
                     ignore_face_zonelets,
-                    check_cutters)
+                    check_cutters,
+                    keep_cutters)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SubtractVolumesParams")
                     json_data = param_json["SubtractVolumesParams"] if "SubtractVolumesParams" in param_json else {}
                     self.__initialize(
                         ignore_face_zonelets if ignore_face_zonelets is not None else ( SubtractVolumesParams._default_params["ignore_face_zonelets"] if "ignore_face_zonelets" in SubtractVolumesParams._default_params else (json_data["ignoreFaceZonelets"] if "ignoreFaceZonelets" in json_data else None)),
-                        check_cutters if check_cutters is not None else ( SubtractVolumesParams._default_params["check_cutters"] if "check_cutters" in SubtractVolumesParams._default_params else (json_data["checkCutters"] if "checkCutters" in json_data else None)))
+                        check_cutters if check_cutters is not None else ( SubtractVolumesParams._default_params["check_cutters"] if "check_cutters" in SubtractVolumesParams._default_params else (json_data["checkCutters"] if "checkCutters" in json_data else None)),
+                        keep_cutters if keep_cutters is not None else ( SubtractVolumesParams._default_params["keep_cutters"] if "keep_cutters" in SubtractVolumesParams._default_params else (json_data["keepCutters"] if "keepCutters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -890,22 +1008,25 @@ class SubtractVolumesParams(CoreObject):
     @staticmethod
     def set_default(
             ignore_face_zonelets: Iterable[int] = None,
-            check_cutters: bool = None):
-        """Set the default values of SubtractVolumesParams.
+            check_cutters: bool = None,
+            keep_cutters: bool = None):
+        """Set the default values of the ``SubtractVolumesParams`` object.
 
         Parameters
         ----------
         ignore_face_zonelets: Iterable[int], optional
-            Face zonelet ids that subtract volumes should not remove.(For example, periodic or fluid cap zonelets)
+            Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         check_cutters: bool, optional
-            Option to handle overlapping or intersecting cutter volumes.
+            Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+        keep_cutters: bool, optional
+            Option to retain cutter volumes.
         """
         args = locals()
         [SubtractVolumesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractVolumesParams.
+        """Print the default values of ``SubtractVolumesParams`` object.
 
         Examples
         --------
@@ -921,17 +1042,19 @@ class SubtractVolumesParams(CoreObject):
             json_data["ignoreFaceZonelets"] = self._ignore_face_zonelets
         if self._check_cutters is not None:
             json_data["checkCutters"] = self._check_cutters
+        if self._keep_cutters is not None:
+            json_data["keepCutters"] = self._keep_cutters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "ignore_face_zonelets :  %s\ncheck_cutters :  %s" % (self._ignore_face_zonelets, self._check_cutters)
+        message = "ignore_face_zonelets :  %s\ncheck_cutters :  %s\nkeep_cutters :  %s" % (self._ignore_face_zonelets, self._check_cutters, self._keep_cutters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def ignore_face_zonelets(self) -> Iterable[int]:
-        """Face zonelet ids that subtract volumes should not remove.(For example, periodic or fluid cap zonelets)
+        """Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
         """
         return self._ignore_face_zonelets
 
@@ -941,7 +1064,7 @@ class SubtractVolumesParams(CoreObject):
 
     @property
     def check_cutters(self) -> bool:
-        """Option to handle overlapping or intersecting cutter volumes.
+        """Option to manage intersecting cutter volumes. When keep_cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
         """
         return self._check_cutters
 
@@ -949,32 +1072,68 @@ class SubtractVolumesParams(CoreObject):
     def check_cutters(self, value: bool):
         self._check_cutters = value
 
+    @property
+    def keep_cutters(self) -> bool:
+        """Option to retain cutter volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._keep_cutters
+
+    @keep_cutters.setter
+    def keep_cutters(self, value: bool):
+        self._keep_cutters = value
+
 class SubtractVolumesResults(CoreObject):
     """Results of the volume subtract operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SubtractVolumesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the volume subtract operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the volume subtract operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> subtract_volumes_results = prime.SubtractVolumesResults(model = model)
     """
     _default_params = {}
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode]):
         self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
             error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the SubtractVolumesResults.
+        """Initialize a ``SubtractVolumesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a SubtractVolumesResults object with default parameters.
+            Model to create a ``SubtractVolumesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the volume subtract operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
-            JSON dictionary to create a SubtractVolumesResults object with provided parameters.
+            JSON dictionary to create a ``SubtractVolumesResults`` object with provided parameters.
 
         Examples
         --------
@@ -982,20 +1141,23 @@ class SubtractVolumesResults(CoreObject):
         """
         if json_data:
             self.__initialize(
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [error_code])
+            all_field_specified = all(arg is not None for arg in [error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
-                    error_code)
+                    error_code,
+                    warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SubtractVolumesResults")
                     json_data = param_json["SubtractVolumesResults"] if "SubtractVolumesResults" in param_json else {}
                     self.__initialize(
-                        error_code if error_code is not None else ( SubtractVolumesResults._default_params["error_code"] if "error_code" in SubtractVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
+                        error_code if error_code is not None else ( SubtractVolumesResults._default_params["error_code"] if "error_code" in SubtractVolumesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( SubtractVolumesResults._default_params["warning_codes"] if "warning_codes" in SubtractVolumesResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1005,20 +1167,23 @@ class SubtractVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
-        """Set the default values of SubtractVolumesResults.
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None):
+        """Set the default values of the ``SubtractVolumesResults`` object.
 
         Parameters
         ----------
         error_code: ErrorCode, optional
             Error code associated with the volume subtract operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the volume subtract operation.
         """
         args = locals()
         [SubtractVolumesResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of SubtractVolumesResults.
+        """Print the default values of ``SubtractVolumesResults`` object.
 
         Examples
         --------
@@ -1032,11 +1197,13 @@ class SubtractVolumesResults(CoreObject):
         json_data = {}
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s" % (self._error_code)
+        message = "error_code :  %s\nwarning_codes :  %s" % (self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1050,8 +1217,41 @@ class SubtractVolumesResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the volume subtract operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
 class StitchParams(CoreObject):
     """Parameters used for stitch operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``StitchParams`` object with default parameters.
+    tolerance: float, optional
+        Distance tolerance for stitching boundaries.
+    use_absolute_tolerance: bool, optional
+        True if tolerance provided is absolute value.
+    remesh: bool, optional
+        Remesh at stitch connection.
+    enable_multi_threading: bool, optional
+        Option to run stitch in parallel using multithread.
+    type: StitchType, optional
+        Stitch type depending on nature of surface boundary edges to be stitched.
+    json_data: dict, optional
+        JSON dictionary to create a ``StitchParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> stitch_params = prime.StitchParams(model = model)
     """
     _default_params = {}
 
@@ -1078,12 +1278,12 @@ class StitchParams(CoreObject):
             type: StitchType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the StitchParams.
+        """Initialize a ``StitchParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a StitchParams object with default parameters.
+            Model to create a ``StitchParams`` object with default parameters.
         tolerance: float, optional
             Distance tolerance for stitching boundaries.
         use_absolute_tolerance: bool, optional
@@ -1095,7 +1295,7 @@ class StitchParams(CoreObject):
         type: StitchType, optional
             Stitch type depending on nature of surface boundary edges to be stitched.
         json_data: dict, optional
-            JSON dictionary to create a StitchParams object with provided parameters.
+            JSON dictionary to create a ``StitchParams`` object with provided parameters.
 
         Examples
         --------
@@ -1119,7 +1319,7 @@ class StitchParams(CoreObject):
                     type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "StitchParams")
                     json_data = param_json["StitchParams"] if "StitchParams" in param_json else {}
@@ -1143,7 +1343,7 @@ class StitchParams(CoreObject):
             remesh: bool = None,
             enable_multi_threading: bool = None,
             type: StitchType = None):
-        """Set the default values of StitchParams.
+        """Set the default values of the ``StitchParams`` object.
 
         Parameters
         ----------
@@ -1163,7 +1363,7 @@ class StitchParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of StitchParams.
+        """Print the default values of ``StitchParams`` object.
 
         Examples
         --------
@@ -1245,6 +1445,23 @@ class StitchParams(CoreObject):
 
 class MergeBoundaryNodesParams(CoreObject):
     """Parameters used for the merge boundary nodes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
+    tolerance: float, optional
+        Distance tolerance for merging boundary nodes.
+    use_absolute_tolerance: bool, optional
+        Indicates whether the tolerance provided is an absolute value or not.
+    merge_node_type: MergeNodeType, optional
+        Type of nodes to be merged.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_boundary_nodes_params = prime.MergeBoundaryNodesParams(model = model)
     """
     _default_params = {}
 
@@ -1265,17 +1482,20 @@ class MergeBoundaryNodesParams(CoreObject):
             merge_node_type: MergeNodeType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeBoundaryNodesParams.
+        """Initialize a ``MergeBoundaryNodesParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeBoundaryNodesParams object with default parameters.
+            Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
         tolerance: float, optional
+            Distance tolerance for merging boundary nodes.
         use_absolute_tolerance: bool, optional
+            Indicates whether the tolerance provided is an absolute value or not.
         merge_node_type: MergeNodeType, optional
+            Type of nodes to be merged.
         json_data: dict, optional
-            JSON dictionary to create a MergeBoundaryNodesParams object with provided parameters.
+            JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
 
         Examples
         --------
@@ -1295,7 +1515,7 @@ class MergeBoundaryNodesParams(CoreObject):
                     merge_node_type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeBoundaryNodesParams")
                     json_data = param_json["MergeBoundaryNodesParams"] if "MergeBoundaryNodesParams" in param_json else {}
@@ -1315,20 +1535,23 @@ class MergeBoundaryNodesParams(CoreObject):
             tolerance: float = None,
             use_absolute_tolerance: bool = None,
             merge_node_type: MergeNodeType = None):
-        """Set the default values of MergeBoundaryNodesParams.
+        """Set the default values of the ``MergeBoundaryNodesParams`` object.
 
         Parameters
         ----------
         tolerance: float, optional
+            Distance tolerance for merging boundary nodes.
         use_absolute_tolerance: bool, optional
+            Indicates whether the tolerance provided is an absolute value or not.
         merge_node_type: MergeNodeType, optional
+            Type of nodes to be merged.
         """
         args = locals()
         [MergeBoundaryNodesParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeBoundaryNodesParams.
+        """Print the default values of ``MergeBoundaryNodesParams`` object.
 
         Examples
         --------
@@ -1356,8 +1579,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @property
     def tolerance(self) -> float:
-        """
-        Distance tolerance for merging boundary nodes.
+        """Distance tolerance for merging boundary nodes.
         """
         return self._tolerance
 
@@ -1367,8 +1589,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @property
     def use_absolute_tolerance(self) -> bool:
-        """
-        Indicates whether the tolerance provided is an absolute value or not.
+        """Indicates whether the tolerance provided is an absolute value or not.
         """
         return self._use_absolute_tolerance
 
@@ -1378,8 +1599,7 @@ class MergeBoundaryNodesParams(CoreObject):
 
     @property
     def merge_node_type(self) -> MergeNodeType:
-        """
-        Type depending on the type of nodes to be merged.
+        """Type of nodes to be merged.
         """
         return self._merge_node_type
 
@@ -1389,6 +1609,19 @@ class MergeBoundaryNodesParams(CoreObject):
 
 class MergeBoundaryNodesResults(CoreObject):
     """Results associated with the merge nodes operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MergeBoundaryNodesResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error Code associated with failure of merge nodes operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``MergeBoundaryNodesResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> merge_boundary_nodes_results = prime.MergeBoundaryNodesResults(model = model)
     """
     _default_params = {}
 
@@ -1403,16 +1636,16 @@ class MergeBoundaryNodesResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MergeBoundaryNodesResults.
+        """Initialize a ``MergeBoundaryNodesResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MergeBoundaryNodesResults object with default parameters.
+            Model to create a ``MergeBoundaryNodesResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error Code associated with failure of merge nodes operation.
         json_data: dict, optional
-            JSON dictionary to create a MergeBoundaryNodesResults object with provided parameters.
+            JSON dictionary to create a ``MergeBoundaryNodesResults`` object with provided parameters.
 
         Examples
         --------
@@ -1428,7 +1661,7 @@ class MergeBoundaryNodesResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MergeBoundaryNodesResults")
                     json_data = param_json["MergeBoundaryNodesResults"] if "MergeBoundaryNodesResults" in param_json else {}
@@ -1444,7 +1677,7 @@ class MergeBoundaryNodesResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of MergeBoundaryNodesResults.
+        """Set the default values of the ``MergeBoundaryNodesResults`` object.
 
         Parameters
         ----------
@@ -1456,7 +1689,7 @@ class MergeBoundaryNodesResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MergeBoundaryNodesResults.
+        """Print the default values of ``MergeBoundaryNodesResults`` object.
 
         Examples
         --------
@@ -1487,3 +1720,708 @@ class MergeBoundaryNodesResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class FuseParams(CoreObject):
+    """Parameters for fuse operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FuseParams`` object with default parameters.
+    use_absolute_tolerance: bool, optional
+        When true, gap tolerance and side tolerance provided are absolute values.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    gap_tolerance: float, optional
+        Gap tolerance between faces to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    side_tolerance: float, optional
+        Side tolerance for fusing to the side edges.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    check_interior: bool, optional
+        When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    fuse_option: FuseOption, optional
+        Option for treatment of fused surfaces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    check_orientation: bool, optional
+        Option to check face normal orientation during fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    dump_mesh: bool, optional
+        Option to dump mesh for debugging.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    local_remesh: bool, optional
+        Local remesh of region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    n_layers: int, optional
+        Face layers around region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    separate: bool, optional
+        Separate region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    angle: float, optional
+        Faces zonelets with angle less than the provided value are considered for fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    fuse_edges_only: bool, optional
+        Fuse edges only.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``FuseParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fuse_params = prime.FuseParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            use_absolute_tolerance: bool,
+            gap_tolerance: float,
+            side_tolerance: float,
+            check_interior: bool,
+            fuse_option: FuseOption,
+            check_orientation: bool,
+            dump_mesh: bool,
+            local_remesh: bool,
+            n_layers: int,
+            separate: bool,
+            angle: float,
+            fuse_edges_only: bool):
+        self._use_absolute_tolerance = use_absolute_tolerance
+        self._gap_tolerance = gap_tolerance
+        self._side_tolerance = side_tolerance
+        self._check_interior = check_interior
+        self._fuse_option = FuseOption(fuse_option)
+        self._check_orientation = check_orientation
+        self._dump_mesh = dump_mesh
+        self._local_remesh = local_remesh
+        self._n_layers = n_layers
+        self._separate = separate
+        self._angle = angle
+        self._fuse_edges_only = fuse_edges_only
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            use_absolute_tolerance: bool = None,
+            gap_tolerance: float = None,
+            side_tolerance: float = None,
+            check_interior: bool = None,
+            fuse_option: FuseOption = None,
+            check_orientation: bool = None,
+            dump_mesh: bool = None,
+            local_remesh: bool = None,
+            n_layers: int = None,
+            separate: bool = None,
+            angle: float = None,
+            fuse_edges_only: bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``FuseParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``FuseParams`` object with default parameters.
+        use_absolute_tolerance: bool, optional
+            When true, gap tolerance and side tolerance provided are absolute values.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        gap_tolerance: float, optional
+            Gap tolerance between faces to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        side_tolerance: float, optional
+            Side tolerance for fusing to the side edges.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        check_interior: bool, optional
+            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        fuse_option: FuseOption, optional
+            Option for treatment of fused surfaces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        check_orientation: bool, optional
+            Option to check face normal orientation during fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        dump_mesh: bool, optional
+            Option to dump mesh for debugging.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        local_remesh: bool, optional
+            Local remesh of region to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        n_layers: int, optional
+            Face layers around region to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        separate: bool, optional
+            Separate region to be fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        angle: float, optional
+            Faces zonelets with angle less than the provided value are considered for fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        fuse_edges_only: bool, optional
+            Fuse edges only.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``FuseParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> fuse_params = prime.FuseParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["gapTolerance"] if "gapTolerance" in json_data else None,
+                json_data["sideTolerance"] if "sideTolerance" in json_data else None,
+                json_data["checkInterior"] if "checkInterior" in json_data else None,
+                FuseOption(json_data["fuseOption"] if "fuseOption" in json_data else None),
+                json_data["checkOrientation"] if "checkOrientation" in json_data else None,
+                json_data["dumpMesh"] if "dumpMesh" in json_data else None,
+                json_data["localRemesh"] if "localRemesh" in json_data else None,
+                json_data["nLayers"] if "nLayers" in json_data else None,
+                json_data["separate"] if "separate" in json_data else None,
+                json_data["angle"] if "angle" in json_data else None,
+                json_data["fuseEdgesOnly"] if "fuseEdgesOnly" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [use_absolute_tolerance, gap_tolerance, side_tolerance, check_interior, fuse_option, check_orientation, dump_mesh, local_remesh, n_layers, separate, angle, fuse_edges_only])
+            if all_field_specified:
+                self.__initialize(
+                    use_absolute_tolerance,
+                    gap_tolerance,
+                    side_tolerance,
+                    check_interior,
+                    fuse_option,
+                    check_orientation,
+                    dump_mesh,
+                    local_remesh,
+                    n_layers,
+                    separate,
+                    angle,
+                    fuse_edges_only)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "FuseParams")
+                    json_data = param_json["FuseParams"] if "FuseParams" in param_json else {}
+                    self.__initialize(
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( FuseParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in FuseParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        gap_tolerance if gap_tolerance is not None else ( FuseParams._default_params["gap_tolerance"] if "gap_tolerance" in FuseParams._default_params else (json_data["gapTolerance"] if "gapTolerance" in json_data else None)),
+                        side_tolerance if side_tolerance is not None else ( FuseParams._default_params["side_tolerance"] if "side_tolerance" in FuseParams._default_params else (json_data["sideTolerance"] if "sideTolerance" in json_data else None)),
+                        check_interior if check_interior is not None else ( FuseParams._default_params["check_interior"] if "check_interior" in FuseParams._default_params else (json_data["checkInterior"] if "checkInterior" in json_data else None)),
+                        fuse_option if fuse_option is not None else ( FuseParams._default_params["fuse_option"] if "fuse_option" in FuseParams._default_params else FuseOption(json_data["fuseOption"] if "fuseOption" in json_data else None)),
+                        check_orientation if check_orientation is not None else ( FuseParams._default_params["check_orientation"] if "check_orientation" in FuseParams._default_params else (json_data["checkOrientation"] if "checkOrientation" in json_data else None)),
+                        dump_mesh if dump_mesh is not None else ( FuseParams._default_params["dump_mesh"] if "dump_mesh" in FuseParams._default_params else (json_data["dumpMesh"] if "dumpMesh" in json_data else None)),
+                        local_remesh if local_remesh is not None else ( FuseParams._default_params["local_remesh"] if "local_remesh" in FuseParams._default_params else (json_data["localRemesh"] if "localRemesh" in json_data else None)),
+                        n_layers if n_layers is not None else ( FuseParams._default_params["n_layers"] if "n_layers" in FuseParams._default_params else (json_data["nLayers"] if "nLayers" in json_data else None)),
+                        separate if separate is not None else ( FuseParams._default_params["separate"] if "separate" in FuseParams._default_params else (json_data["separate"] if "separate" in json_data else None)),
+                        angle if angle is not None else ( FuseParams._default_params["angle"] if "angle" in FuseParams._default_params else (json_data["angle"] if "angle" in json_data else None)),
+                        fuse_edges_only if fuse_edges_only is not None else ( FuseParams._default_params["fuse_edges_only"] if "fuse_edges_only" in FuseParams._default_params else (json_data["fuseEdgesOnly"] if "fuseEdgesOnly" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            use_absolute_tolerance: bool = None,
+            gap_tolerance: float = None,
+            side_tolerance: float = None,
+            check_interior: bool = None,
+            fuse_option: FuseOption = None,
+            check_orientation: bool = None,
+            dump_mesh: bool = None,
+            local_remesh: bool = None,
+            n_layers: int = None,
+            separate: bool = None,
+            angle: float = None,
+            fuse_edges_only: bool = None):
+        """Set the default values of the ``FuseParams`` object.
+
+        Parameters
+        ----------
+        use_absolute_tolerance: bool, optional
+            When true, gap tolerance and side tolerance provided are absolute values.
+        gap_tolerance: float, optional
+            Gap tolerance between faces to be fused.
+        side_tolerance: float, optional
+            Side tolerance for fusing to the side edges.
+        check_interior: bool, optional
+            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        fuse_option: FuseOption, optional
+            Option for treatment of fused surfaces.
+        check_orientation: bool, optional
+            Option to check face normal orientation during fuse operation.
+        dump_mesh: bool, optional
+            Option to dump mesh for debugging.
+        local_remesh: bool, optional
+            Local remesh of region to be fused.
+        n_layers: int, optional
+            Face layers around region to be fused.
+        separate: bool, optional
+            Separate region to be fused.
+        angle: float, optional
+            Faces zonelets with angle less than the provided value are considered for fuse operation.
+        fuse_edges_only: bool, optional
+            Fuse edges only.
+        """
+        args = locals()
+        [FuseParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``FuseParams`` object.
+
+        Examples
+        --------
+        >>> FuseParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FuseParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._gap_tolerance is not None:
+            json_data["gapTolerance"] = self._gap_tolerance
+        if self._side_tolerance is not None:
+            json_data["sideTolerance"] = self._side_tolerance
+        if self._check_interior is not None:
+            json_data["checkInterior"] = self._check_interior
+        if self._fuse_option is not None:
+            json_data["fuseOption"] = self._fuse_option
+        if self._check_orientation is not None:
+            json_data["checkOrientation"] = self._check_orientation
+        if self._dump_mesh is not None:
+            json_data["dumpMesh"] = self._dump_mesh
+        if self._local_remesh is not None:
+            json_data["localRemesh"] = self._local_remesh
+        if self._n_layers is not None:
+            json_data["nLayers"] = self._n_layers
+        if self._separate is not None:
+            json_data["separate"] = self._separate
+        if self._angle is not None:
+            json_data["angle"] = self._angle
+        if self._fuse_edges_only is not None:
+            json_data["fuseEdgesOnly"] = self._fuse_edges_only
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "use_absolute_tolerance :  %s\ngap_tolerance :  %s\nside_tolerance :  %s\ncheck_interior :  %s\nfuse_option :  %s\ncheck_orientation :  %s\ndump_mesh :  %s\nlocal_remesh :  %s\nn_layers :  %s\nseparate :  %s\nangle :  %s\nfuse_edges_only :  %s" % (self._use_absolute_tolerance, self._gap_tolerance, self._side_tolerance, self._check_interior, self._fuse_option, self._check_orientation, self._dump_mesh, self._local_remesh, self._n_layers, self._separate, self._angle, self._fuse_edges_only)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def use_absolute_tolerance(self) -> bool:
+        """When true, gap tolerance and side tolerance provided are absolute values.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._use_absolute_tolerance
+
+    @use_absolute_tolerance.setter
+    def use_absolute_tolerance(self, value: bool):
+        self._use_absolute_tolerance = value
+
+    @property
+    def gap_tolerance(self) -> float:
+        """Gap tolerance between faces to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._gap_tolerance
+
+    @gap_tolerance.setter
+    def gap_tolerance(self, value: float):
+        self._gap_tolerance = value
+
+    @property
+    def side_tolerance(self) -> float:
+        """Side tolerance for fusing to the side edges.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._side_tolerance
+
+    @side_tolerance.setter
+    def side_tolerance(self, value: float):
+        self._side_tolerance = value
+
+    @property
+    def check_interior(self) -> bool:
+        """When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._check_interior
+
+    @check_interior.setter
+    def check_interior(self, value: bool):
+        self._check_interior = value
+
+    @property
+    def fuse_option(self) -> FuseOption:
+        """Option for treatment of fused surfaces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._fuse_option
+
+    @fuse_option.setter
+    def fuse_option(self, value: FuseOption):
+        self._fuse_option = value
+
+    @property
+    def check_orientation(self) -> bool:
+        """Option to check face normal orientation during fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._check_orientation
+
+    @check_orientation.setter
+    def check_orientation(self, value: bool):
+        self._check_orientation = value
+
+    @property
+    def dump_mesh(self) -> bool:
+        """Option to dump mesh for debugging.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._dump_mesh
+
+    @dump_mesh.setter
+    def dump_mesh(self, value: bool):
+        self._dump_mesh = value
+
+    @property
+    def local_remesh(self) -> bool:
+        """Local remesh of region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._local_remesh
+
+    @local_remesh.setter
+    def local_remesh(self, value: bool):
+        self._local_remesh = value
+
+    @property
+    def n_layers(self) -> int:
+        """Face layers around region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._n_layers
+
+    @n_layers.setter
+    def n_layers(self, value: int):
+        self._n_layers = value
+
+    @property
+    def separate(self) -> bool:
+        """Separate region to be fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._separate
+
+    @separate.setter
+    def separate(self, value: bool):
+        self._separate = value
+
+    @property
+    def angle(self) -> float:
+        """Faces zonelets with angle less than the provided value are considered for fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._angle
+
+    @angle.setter
+    def angle(self, value: float):
+        self._angle = value
+
+    @property
+    def fuse_edges_only(self) -> bool:
+        """Fuse edges only.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._fuse_edges_only
+
+    @fuse_edges_only.setter
+    def fuse_edges_only(self, value: bool):
+        self._fuse_edges_only = value
+
+class FuseResults(CoreObject):
+    """Results associated with the fuse operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``FuseResults`` object with default parameters.
+    fused_pairs: int, optional
+        Number of face region pairs that were fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    fused_area: float, optional
+        Total area of fused regions from both source and target faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    error_code: ErrorCode, optional
+        Error code associated with failure of the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    intersecting_locations: Iterable[float], optional
+        Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``FuseResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> fuse_results = prime.FuseResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            fused_pairs: int,
+            fused_area: float,
+            error_code: ErrorCode,
+            warning_codes: List[WarningCode],
+            intersecting_locations: Iterable[float]):
+        self._fused_pairs = fused_pairs
+        self._fused_area = fused_area
+        self._error_code = ErrorCode(error_code)
+        self._warning_codes = warning_codes
+        self._intersecting_locations = intersecting_locations if isinstance(intersecting_locations, np.ndarray) else np.array(intersecting_locations, dtype=np.double) if intersecting_locations is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            fused_pairs: int = None,
+            fused_area: float = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            intersecting_locations: Iterable[float] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``FuseResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``FuseResults`` object with default parameters.
+        fused_pairs: int, optional
+            Number of face region pairs that were fused.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        fused_area: float, optional
+            Total area of fused regions from both source and target faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        error_code: ErrorCode, optional
+            Error code associated with failure of the fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the fuse operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        intersecting_locations: Iterable[float], optional
+            Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``FuseResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> fuse_results = prime.FuseResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["fusedPairs"] if "fusedPairs" in json_data else None,
+                json_data["fusedArea"] if "fusedArea" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
+                json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code, warning_codes, intersecting_locations])
+            if all_field_specified:
+                self.__initialize(
+                    fused_pairs,
+                    fused_area,
+                    error_code,
+                    warning_codes,
+                    intersecting_locations)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "FuseResults")
+                    json_data = param_json["FuseResults"] if "FuseResults" in param_json else {}
+                    self.__initialize(
+                        fused_pairs if fused_pairs is not None else ( FuseResults._default_params["fused_pairs"] if "fused_pairs" in FuseResults._default_params else (json_data["fusedPairs"] if "fusedPairs" in json_data else None)),
+                        fused_area if fused_area is not None else ( FuseResults._default_params["fused_area"] if "fused_area" in FuseResults._default_params else (json_data["fusedArea"] if "fusedArea" in json_data else None)),
+                        error_code if error_code is not None else ( FuseResults._default_params["error_code"] if "error_code" in FuseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        warning_codes if warning_codes is not None else ( FuseResults._default_params["warning_codes"] if "warning_codes" in FuseResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
+                        intersecting_locations if intersecting_locations is not None else ( FuseResults._default_params["intersecting_locations"] if "intersecting_locations" in FuseResults._default_params else (json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            fused_pairs: int = None,
+            fused_area: float = None,
+            error_code: ErrorCode = None,
+            warning_codes: List[WarningCode] = None,
+            intersecting_locations: Iterable[float] = None):
+        """Set the default values of the ``FuseResults`` object.
+
+        Parameters
+        ----------
+        fused_pairs: int, optional
+            Number of face region pairs that were fused.
+        fused_area: float, optional
+            Total area of fused regions from both source and target faces.
+        error_code: ErrorCode, optional
+            Error code associated with failure of the fuse operation.
+        warning_codes: List[WarningCode], optional
+            Warning codes associated with the fuse operation.
+        intersecting_locations: Iterable[float], optional
+            Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+        """
+        args = locals()
+        [FuseResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``FuseResults`` object.
+
+        Examples
+        --------
+        >>> FuseResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in FuseResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._fused_pairs is not None:
+            json_data["fusedPairs"] = self._fused_pairs
+        if self._fused_area is not None:
+            json_data["fusedArea"] = self._fused_area
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._warning_codes is not None:
+            json_data["warningCodes"] = [data for data in self._warning_codes]
+        if self._intersecting_locations is not None:
+            json_data["intersectingLocations"] = self._intersecting_locations
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s\nwarning_codes :  %s\nintersecting_locations :  %s" % (self._fused_pairs, self._fused_area, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._intersecting_locations)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def fused_pairs(self) -> int:
+        """Number of face region pairs that were fused.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._fused_pairs
+
+    @fused_pairs.setter
+    def fused_pairs(self, value: int):
+        self._fused_pairs = value
+
+    @property
+    def fused_area(self) -> float:
+        """Total area of fused regions from both source and target faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._fused_area
+
+    @fused_area.setter
+    def fused_area(self, value: float):
+        self._fused_area = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with failure of the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def warning_codes(self) -> List[WarningCode]:
+        """Warning codes associated with the fuse operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._warning_codes
+
+    @warning_codes.setter
+    def warning_codes(self, value: List[WarningCode]):
+        self._warning_codes = value
+
+    @property
+    def intersecting_locations(self) -> Iterable[float]:
+        """Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._intersecting_locations
+
+    @intersecting_locations.setter
+    def intersecting_locations(self, value: Iterable[float]):
+        self._intersecting_locations = value

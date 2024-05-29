@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class Morpher(CoreObject):
     """Morpher contain functionalities to change the geometry, adapting the mesh accordingly without a recomputation.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create Morpher object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -30,7 +34,7 @@ class Morpher(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def match_morph(self, part_id : int, match_pairs : List[MatchPair], match_morph_params : MatchMorphParams, bc_params : MorphBCParams, solve_params : MorphSolveParams) -> MatchMorphResults:
-        """ Match source and target zonelets defined by match pairs with prescribed boundary conditions for each pair. Also, solve boundary condition parameters to define uniform surface and volume regions in source neighborhood.
+        """ Match source and target zonelets defined by match pairs with prescribed boundary conditions for each pair. Also, solves boundary condition parameters to define uniform surface and volume regions in source neighborhood.
 
 
         Parameters
@@ -58,15 +62,15 @@ class Morpher(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(match_pairs, List):
-            raise TypeError("Invalid argument type passed for match_pairs, valid argument type is List[MatchPair].")
+            raise TypeError("Invalid argument type passed for 'match_pairs'. Valid argument type is List[MatchPair].")
         if not isinstance(match_morph_params, MatchMorphParams):
-            raise TypeError("Invalid argument type passed for match_morph_params, valid argument type is MatchMorphParams.")
+            raise TypeError("Invalid argument type passed for 'match_morph_params'. Valid argument type is MatchMorphParams.")
         if not isinstance(bc_params, MorphBCParams):
-            raise TypeError("Invalid argument type passed for bc_params, valid argument type is MorphBCParams.")
+            raise TypeError("Invalid argument type passed for 'bc_params'. Valid argument type is MorphBCParams.")
         if not isinstance(solve_params, MorphSolveParams):
-            raise TypeError("Invalid argument type passed for solve_params, valid argument type is MorphSolveParams.")
+            raise TypeError("Invalid argument type passed for 'solve_params'. Valid argument type is MorphSolveParams.")
         args = {"part_id" : part_id,
         "match_pairs" : [p._jsonify() for p in match_pairs],
         "match_morph_params" : match_morph_params._jsonify(),

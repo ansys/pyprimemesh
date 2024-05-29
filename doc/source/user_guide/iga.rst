@@ -4,7 +4,7 @@
 Isogeometric analysis
 *********************
 
- *This is a Beta feature. API Behavior and Implementation may change in future.*
+ *This is a beta feature. API behavior and implementation might change in the future.*
 
 Isogeometric Analysis (IGA) is a new approach using NURBS to capture the CAD geometry accurately than the FE analysis.
 The FE analysis discretize the CAD geometry approximately into smaller elements to capture the features. 

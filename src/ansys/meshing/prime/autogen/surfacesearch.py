@@ -9,6 +9,12 @@ class SurfaceSearch(CoreObject):
     """SurfaceSearch allows you to check surface mesh quality.
 
     SurfaceSearch performs surface mesh quality check based on different face quality measures.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create SurfaceSearch object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -57,13 +63,13 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(params, SearchByQualityParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SearchByQualityParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchByQualityParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,
@@ -101,13 +107,13 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(params, SearchBySelfIntersectionParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SearchBySelfIntersectionParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchBySelfIntersectionParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,
@@ -146,13 +152,13 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(params, SearchBySpikeParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SearchBySpikeParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchBySpikeParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,
@@ -191,13 +197,13 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(params, SearchByFoldsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SearchByFoldsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchByFoldsParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,
@@ -234,11 +240,11 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id}
@@ -275,13 +281,13 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(params, SearchByThinStripParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SearchByThinStripParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchByThinStripParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,
@@ -315,7 +321,7 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(params, SurfaceQualitySummaryParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SurfaceQualitySummaryParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurfaceQualitySummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceSearch/GetSurfaceQualitySummary"
         self._model._print_logs_before_command("get_surface_quality_summary", args)
@@ -345,7 +351,7 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(params, SurfaceDiagnosticSummaryParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SurfaceDiagnosticSummaryParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurfaceDiagnosticSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceSearch/GetSurfaceDiagnosticSummary"
         self._model._print_logs_before_command("get_surface_diagnostic_summary", args)
@@ -379,11 +385,11 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(params, SearchInfoByRegisterIdParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is SearchInfoByRegisterIdParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchInfoByRegisterIdParams.")
         args = {"face_zonelets" : face_zonelets,
         "register_id" : register_id,
         "params" : params._jsonify()}
@@ -419,11 +425,11 @@ class SurfaceSearch(CoreObject):
 
         """
         if not isinstance(source_face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for source_face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'source_face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(target_face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for target_face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'target_face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, CheckFaceDeviationParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CheckFaceDeviationParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CheckFaceDeviationParams.")
         args = {"source_face_zonelets" : source_face_zonelets,
         "target_face_zonelets" : target_face_zonelets,
         "params" : params._jsonify()}

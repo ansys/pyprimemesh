@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module containing WrapperControl related classes and methods."""
 from ansys.meshing.prime.autogen.wrappercontrol import WrapperControl as _WrapperControl
 
@@ -7,18 +29,18 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
 
 class WrapperControl(_WrapperControl):
-    """Provides all parameters and controls used for wrapping.
+    """Wrapper Control to describe all parameters and controls used for wrapping..
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify wrapper controls from.
+    model : Model
+        Server model to create WrapperControl object.
     id : int
-        ID of the wrapper control.
+        Id of the WrapperControl.
     object_id : int
-        Object ID of the wrapper control.
+        Object id of the WrapperControl.
     name : str
-        Name of the wrapper control
+        Name of the WrapperControl.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):

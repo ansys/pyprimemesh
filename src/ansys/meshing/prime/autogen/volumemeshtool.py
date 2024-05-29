@@ -9,6 +9,12 @@ class VolumeMeshTool(CoreObject):
     """VolumeMeshTool allows you to check grid and improve volume mesh quality.
 
     VolumeMeshTool provides various volume mesh improvement algorithms.
+
+
+    Parameters
+    ----------
+    model : Model
+        Server model to create VolumeMeshTool object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -60,13 +66,13 @@ class VolumeMeshTool(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(cell_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for cell_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'cell_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(boundary_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for boundary_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'boundary_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, AutoNodeMoveParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is AutoNodeMoveParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is AutoNodeMoveParams.")
         args = {"part_id" : part_id,
         "cell_zonelets" : cell_zonelets,
         "boundary_zonelets" : boundary_zonelets,
@@ -101,9 +107,9 @@ class VolumeMeshTool(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(params, CheckMeshParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CheckMeshParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CheckMeshParams.")
         args = {"part_id" : part_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeMeshTool/CheckMesh"
@@ -133,7 +139,7 @@ class VolumeMeshTool(CoreObject):
 
         Notes
         -----
-        This API is a Beta. API Behavior and implementation may change in future.
+        **This is a beta API**. **The behavior and implementation may change in future**.
 
         Examples
         --------
@@ -141,11 +147,11 @@ class VolumeMeshTool(CoreObject):
 
         """
         if not isinstance(cell_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for cell_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'cell_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(target_part_id, int):
-            raise TypeError("Invalid argument type passed for target_part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'target_part_id'. Valid argument type is int.")
         if not isinstance(params, CopyZoneletsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CopyZoneletsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CopyZoneletsParams.")
         args = {"cell_zonelets" : cell_zonelets,
         "target_part_id" : target_part_id,
         "params" : params._jsonify()}

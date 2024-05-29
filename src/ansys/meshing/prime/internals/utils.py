@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for general utilities of the project."""
 import logging
 import os
@@ -181,7 +203,7 @@ def print_beta_api_warning(logger: logging.Logger, command: str):
     """
     if logger.isEnabledFor(logging.WARNING):
         logger.warning(
-            f"This API {command} is a Beta. API Behavior and implementation may change in future."
+            f"This {command} is a beta API. The behavior and implementation may change in future."
         )
 
 
@@ -337,9 +359,12 @@ def get_available_local_port(init_port: int = defaults.port()):
         First available port.
     """
     port = init_port
-    while port_in_use(port) or port in _LOCAL_PORTS:
-        port += 1
-    _LOCAL_PORTS.append(port)
+    import socket
+
+    s = socket.socket()
+    s.bind(("", 0))
+    port = s.getsockname()[1]
+    s.close()
     return port
 
 

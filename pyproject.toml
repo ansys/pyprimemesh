@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-meshing-prime"
-version = "0.5.0.dev11"
+version = "0.6.0"
 description = "PyPrimeMesh is a Python client to Ansys Prime Server, which delivers core Ansys meshing technology."
 readme = "README.md"
 requires-python = ">=3.8,<4"
@@ -30,29 +30,29 @@ dependencies = [
 
 [project.optional-dependencies]
 graphics = [
-  "pyvista>=0.32.0",
+  "pyvista[jupyter]>=0.38.1",
 ]
 tests = [
-  "pytest==7.4.4",
-  "pytest-cov==4.1.0",
+  "pytest==8.2.1",
+  "pytest-cov==5.0.0",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.0.0",
-  "pyvista[trame]==0.43.1"
+  "pyvista[trame]==0.43.8"
 ]
 doc = [
-  "ansys-sphinx-theme==0.12.5",
+  "ansys-sphinx-theme==0.15.2",
   "jupyter-sphinx==0.5.3",
-  "numpydoc==1.6.0",
+  "numpydoc==1.7.0",
   "Sphinx==7.2.6",
-  "pyvista==0.43.1",
-  "sphinx-autodoc-typehints==1.25.2",
+  "pyvista==0.43.8",
+  "sphinx-autodoc-typehints==2.0.1",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.15.0",
   "sphinx-notfound-page==1.0.0",
-  "sphinxemoji==0.2.0",
+  "sphinxemoji==0.3.1",
 ]
 all = [
-  "pyvista>=0.32.0",
+  "pyvista[jupyter]>=0.38.1",
 ]
 
 [project.urls]
@@ -94,4 +94,38 @@ addopts = "-ra --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internal
 testpaths = [
     "tests",
 ]
+
+[tool.towncrier]
+directory = "doc/changelog.d"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+underlines = ["", "", ""]
+template = "doc/changelog.d/changelog_template.jinja"
+title_format = "## [{version}](https://github.com/ansys/pyprimemesh/releases/tag/v{version}) - {project_date}"
+issue_format = "[#{issue}](https://github.com/ansys/pyprimemesh/pull/{issue})"
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "miscellaneous"
+name = "Miscellaneous"
+showcontent = true
 

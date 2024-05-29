@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for control data."""
 from typing import Iterable, List
 
@@ -6,15 +28,15 @@ from ansys.meshing.prime.autogen.controldata import ControlData as _ControlData
 
 # isort: split
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
+from ansys.meshing.prime.autogen.model import Model
+from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
-from ansys.meshing.prime.core.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
-from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import SizingType
 
 
@@ -26,18 +48,17 @@ class ControlData(_ControlData):
 
     Parameters
     ----------
-    model : CommunicationManager
-        Communicator with the server.
+    model : Model
+        Server model to create ControlData object.
     id : int
-        ID of the model.
+        Id of the ControlData.
     object_id : int
-        ID of the object.
+        Object id of the ControlData.
     name : str
-        Name of the control.
-
+        Name of the ControlData.
     """
 
-    def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
+    def __init__(self, model: Model, id: int, object_id: int, name: str):
         """Initialize the ``ControlData`` class."""
         self._model = model
         self._wrapper_controls = []

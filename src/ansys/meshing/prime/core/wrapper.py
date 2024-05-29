@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module for the wrapper class."""
 from typing import List
 
@@ -20,6 +42,8 @@ from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
 from ansys.meshing.prime.autogen.wrapperstructs import (
     WrapperCloseGapsParams,
     WrapperCloseGapsResult,
+    WrapperPatchFlowRegionsParams,
+    WrapperPatchFlowRegionsResult,
 )
 from ansys.meshing.prime.autogen.wrapperstructs import WrapResult as WrapResult
 from ansys.meshing.prime.core.model import Model
@@ -33,7 +57,7 @@ class Wrapper(_Wrapper):
     Parameters
     ----------
     model : Model
-        Model to apply wrapping to.
+        Server model to create Wrapper object.
     """
 
     def __init__(self, model: Model):
@@ -143,8 +167,8 @@ class Wrapper(_Wrapper):
                 with_face_zonelet_ids=with_face_zonelet_ids,
                 params=params,
             )
-            np.append(modified_zonelets, face_zonelet_ids)
-            np.append(modified_zonelets, with_face_zonelet_ids)
+            modified_zonelets = np.append(modified_zonelets, face_zonelet_ids)
+            modified_zonelets = np.append(modified_zonelets, with_face_zonelet_ids)
         surf_utils = SurfaceUtilities(self._model)
         surf_utils.resolve_intersections(
             face_zonelet_ids=modified_zonelets, params=ResolveIntersectionsParams(model=self._model)
@@ -180,4 +204,40 @@ class Wrapper(_Wrapper):
         result = _Wrapper.close_gaps(self, scope, params)
         if result.error_code == ErrorCode.NOERROR:
             self._model._sync_up_model()
+        return result
+
+    def patch_flow_regions(
+        self, live_material_point: str, params: WrapperPatchFlowRegionsParams
+    ) -> WrapperPatchFlowRegionsResult:
+        """Patch flow regions.
+
+        Patch flow regions create patching surfaces for regions identified
+        by dead regions from wrapper patch holes parameters.
+
+
+        Parameters
+        ----------
+        live_material_point : str
+            Name of live material point.
+        params : WrapperPatchFlowRegionsParams
+            Parameters to define patch flow regions operation.
+
+        Returns
+        -------
+        WrapperPatchFlowRegionsResult
+            Returns the WrapperPatchFlowRegionsResult.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = wrapper.PatchFlowRegions(live_material_point, params)
+
+        """
+        result = _Wrapper.patch_flow_regions(self, live_material_point, params)
+        if result.error_code == ErrorCode.NOERROR:
+            self._model._add_part(result.id)
         return result

@@ -10,6 +10,31 @@ from ansys.meshing.prime.params.primestructs import *
 
 class MeshStackerResults(CoreObject):
     """Results associated with the mesh stacker operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MeshStackerResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the operation.
+    error_codes_per_topo_volume: Iterable[int], optional
+        Error codes associated with the topovolume-by-topovolume stacking.
+    non_stackable_faces: Iterable[int], optional
+        List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
+    non_stackable_edges: Iterable[int], optional
+        List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
+    small_features: Iterable[int], optional
+        List of features edges smaller than input tolerance.
+    base_face_ids: Iterable[int], optional
+        List of base face ids after base creation.
+    size_control_ids: Iterable[int], optional
+        List of ids of newly created size controls.
+    json_data: dict, optional
+        JSON dictionary to create a ``MeshStackerResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> mesh_stacker_results = prime.MeshStackerResults(model = model)
     """
     _default_params = {}
 
@@ -42,20 +67,20 @@ class MeshStackerResults(CoreObject):
             size_control_ids: Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MeshStackerResults.
+        """Initialize a ``MeshStackerResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MeshStackerResults object with default parameters.
+            Model to create a ``MeshStackerResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the operation.
         error_codes_per_topo_volume: Iterable[int], optional
             Error codes associated with the topovolume-by-topovolume stacking.
         non_stackable_faces: Iterable[int], optional
-            List of non-stackable faces.
+            List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
         non_stackable_edges: Iterable[int], optional
-            List of non-stackable edges.
+            List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
         small_features: Iterable[int], optional
             List of features edges smaller than input tolerance.
         base_face_ids: Iterable[int], optional
@@ -63,7 +88,7 @@ class MeshStackerResults(CoreObject):
         size_control_ids: Iterable[int], optional
             List of ids of newly created size controls.
         json_data: dict, optional
-            JSON dictionary to create a MeshStackerResults object with provided parameters.
+            JSON dictionary to create a ``MeshStackerResults`` object with provided parameters.
 
         Examples
         --------
@@ -91,7 +116,7 @@ class MeshStackerResults(CoreObject):
                     size_control_ids)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MeshStackerResults")
                     json_data = param_json["MeshStackerResults"] if "MeshStackerResults" in param_json else {}
@@ -119,7 +144,7 @@ class MeshStackerResults(CoreObject):
             small_features: Iterable[int] = None,
             base_face_ids: Iterable[int] = None,
             size_control_ids: Iterable[int] = None):
-        """Set the default values of MeshStackerResults.
+        """Set the default values of the ``MeshStackerResults`` object.
 
         Parameters
         ----------
@@ -128,9 +153,9 @@ class MeshStackerResults(CoreObject):
         error_codes_per_topo_volume: Iterable[int], optional
             Error codes associated with the topovolume-by-topovolume stacking.
         non_stackable_faces: Iterable[int], optional
-            List of non-stackable faces.
+            List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
         non_stackable_edges: Iterable[int], optional
-            List of non-stackable edges.
+            List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
         small_features: Iterable[int], optional
             List of features edges smaller than input tolerance.
         base_face_ids: Iterable[int], optional
@@ -143,7 +168,7 @@ class MeshStackerResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MeshStackerResults.
+        """Print the default values of ``MeshStackerResults`` object.
 
         Examples
         --------
@@ -199,7 +224,7 @@ class MeshStackerResults(CoreObject):
 
     @property
     def non_stackable_faces(self) -> Iterable[int]:
-        """List of non-stackable faces.
+        """List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
         """
         return self._non_stackable_faces
 
@@ -209,7 +234,7 @@ class MeshStackerResults(CoreObject):
 
     @property
     def non_stackable_edges(self) -> Iterable[int]:
-        """List of non-stackable edges.
+        """List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
         """
         return self._non_stackable_edges
 
@@ -249,6 +274,31 @@ class MeshStackerResults(CoreObject):
 
 class MeshStackerParams(CoreObject):
     """Input parameters associated with the mesh stacker operations.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``MeshStackerParams`` object with default parameters.
+    origin: Iterable[float], optional
+        Origin coordinate list of stacker.
+    direction: Iterable[float], optional
+        Direction vector of stacker.
+    lateral_defeature_tolerance: float, optional
+        Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
+    stacking_defeature_tolerance: float, optional
+        Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
+    max_offset_size: float, optional
+        Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
+    size_control_ids: Iterable[int], optional
+        List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+    delete_base: bool, optional
+        Option to delete base face at the end of stacking. The default is false.
+    json_data: dict, optional
+        JSON dictionary to create a ``MeshStackerParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> mesh_stacker_params = prime.MeshStackerParams(model = model)
     """
     _default_params = {}
 
@@ -281,28 +331,28 @@ class MeshStackerParams(CoreObject):
             delete_base: bool = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the MeshStackerParams.
+        """Initialize a ``MeshStackerParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a MeshStackerParams object with default parameters.
+            Model to create a ``MeshStackerParams`` object with default parameters.
         origin: Iterable[float], optional
             Origin coordinate list of stacker.
         direction: Iterable[float], optional
             Direction vector of stacker.
         lateral_defeature_tolerance: float, optional
-            Absolute lateral distance tolerance for stacker. Default value is 0.0.
+            Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
         stacking_defeature_tolerance: float, optional
-            Absolute stacking distance tolerance for stacker. Default value is 0.0.
+            Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
         max_offset_size: float, optional
-            Maximum stack size allowed during stacking.
+            Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
         size_control_ids: Iterable[int], optional
             List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
         delete_base: bool, optional
             Option to delete base face at the end of stacking. The default is false.
         json_data: dict, optional
-            JSON dictionary to create a MeshStackerParams object with provided parameters.
+            JSON dictionary to create a ``MeshStackerParams`` object with provided parameters.
 
         Examples
         --------
@@ -330,7 +380,7 @@ class MeshStackerParams(CoreObject):
                     delete_base)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "MeshStackerParams")
                     json_data = param_json["MeshStackerParams"] if "MeshStackerParams" in param_json else {}
@@ -358,7 +408,7 @@ class MeshStackerParams(CoreObject):
             max_offset_size: float = None,
             size_control_ids: Iterable[int] = None,
             delete_base: bool = None):
-        """Set the default values of MeshStackerParams.
+        """Set the default values of the ``MeshStackerParams`` object.
 
         Parameters
         ----------
@@ -367,11 +417,11 @@ class MeshStackerParams(CoreObject):
         direction: Iterable[float], optional
             Direction vector of stacker.
         lateral_defeature_tolerance: float, optional
-            Absolute lateral distance tolerance for stacker. Default value is 0.0.
+            Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
         stacking_defeature_tolerance: float, optional
-            Absolute stacking distance tolerance for stacker. Default value is 0.0.
+            Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
         max_offset_size: float, optional
-            Maximum stack size allowed during stacking.
+            Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
         size_control_ids: Iterable[int], optional
             List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
         delete_base: bool, optional
@@ -382,7 +432,7 @@ class MeshStackerParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of MeshStackerParams.
+        """Print the default values of ``MeshStackerParams`` object.
 
         Examples
         --------
@@ -438,7 +488,7 @@ class MeshStackerParams(CoreObject):
 
     @property
     def lateral_defeature_tolerance(self) -> float:
-        """Absolute lateral distance tolerance for stacker. Default value is 0.0.
+        """Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
         """
         return self._lateral_defeature_tolerance
 
@@ -448,7 +498,7 @@ class MeshStackerParams(CoreObject):
 
     @property
     def stacking_defeature_tolerance(self) -> float:
-        """Absolute stacking distance tolerance for stacker. Default value is 0.0.
+        """Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
         """
         return self._stacking_defeature_tolerance
 
@@ -458,7 +508,7 @@ class MeshStackerParams(CoreObject):
 
     @property
     def max_offset_size(self) -> float:
-        """Maximum stack size allowed during stacking.
+        """Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
         """
         return self._max_offset_size
 

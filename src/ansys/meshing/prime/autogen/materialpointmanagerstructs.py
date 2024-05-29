@@ -18,6 +18,19 @@ class MaterialPointType(enum.IntEnum):
 
 class CreateMaterialPointParams(CoreObject):
     """Defines parameters to create material point.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateMaterialPointParams`` object with default parameters.
+    type: MaterialPointType, optional
+        Defines the type of material point.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateMaterialPointParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_material_point_params = prime.CreateMaterialPointParams(model = model)
     """
     _default_params = {}
 
@@ -32,16 +45,16 @@ class CreateMaterialPointParams(CoreObject):
             type: MaterialPointType = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateMaterialPointParams.
+        """Initialize a ``CreateMaterialPointParams`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateMaterialPointParams object with default parameters.
+            Model to create a ``CreateMaterialPointParams`` object with default parameters.
         type: MaterialPointType, optional
             Defines the type of material point.
         json_data: dict, optional
-            JSON dictionary to create a CreateMaterialPointParams object with provided parameters.
+            JSON dictionary to create a ``CreateMaterialPointParams`` object with provided parameters.
 
         Examples
         --------
@@ -57,7 +70,7 @@ class CreateMaterialPointParams(CoreObject):
                     type)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateMaterialPointParams")
                     json_data = param_json["CreateMaterialPointParams"] if "CreateMaterialPointParams" in param_json else {}
@@ -73,7 +86,7 @@ class CreateMaterialPointParams(CoreObject):
     @staticmethod
     def set_default(
             type: MaterialPointType = None):
-        """Set the default values of CreateMaterialPointParams.
+        """Set the default values of the ``CreateMaterialPointParams`` object.
 
         Parameters
         ----------
@@ -85,7 +98,7 @@ class CreateMaterialPointParams(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateMaterialPointParams.
+        """Print the default values of ``CreateMaterialPointParams`` object.
 
         Examples
         --------
@@ -119,6 +132,25 @@ class CreateMaterialPointParams(CoreObject):
 
 class CreateMaterialPointResults(CoreObject):
     """Results structure associated with create material point operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``CreateMaterialPointResults`` object with default parameters.
+    id: int, optional
+        Id of the material point created.
+    assigned_name: str, optional
+        Assigned name of the material point created.
+    error_code: ErrorCode, optional
+        Error code associated with create material point operation.
+    warning_codes: List[WarningCode], optional
+        Warning codes associated with create material point operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``CreateMaterialPointResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_material_point_results = prime.CreateMaterialPointResults(model = model)
     """
     _default_params = {}
 
@@ -142,12 +174,12 @@ class CreateMaterialPointResults(CoreObject):
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the CreateMaterialPointResults.
+        """Initialize a ``CreateMaterialPointResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a CreateMaterialPointResults object with default parameters.
+            Model to create a ``CreateMaterialPointResults`` object with default parameters.
         id: int, optional
             Id of the material point created.
         assigned_name: str, optional
@@ -157,7 +189,7 @@ class CreateMaterialPointResults(CoreObject):
         warning_codes: List[WarningCode], optional
             Warning codes associated with create material point operation.
         json_data: dict, optional
-            JSON dictionary to create a CreateMaterialPointResults object with provided parameters.
+            JSON dictionary to create a ``CreateMaterialPointResults`` object with provided parameters.
 
         Examples
         --------
@@ -179,7 +211,7 @@ class CreateMaterialPointResults(CoreObject):
                     warning_codes)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "CreateMaterialPointResults")
                     json_data = param_json["CreateMaterialPointResults"] if "CreateMaterialPointResults" in param_json else {}
@@ -201,7 +233,7 @@ class CreateMaterialPointResults(CoreObject):
             assigned_name: str = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
-        """Set the default values of CreateMaterialPointResults.
+        """Set the default values of the ``CreateMaterialPointResults`` object.
 
         Parameters
         ----------
@@ -219,7 +251,7 @@ class CreateMaterialPointResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of CreateMaterialPointResults.
+        """Print the default values of ``CreateMaterialPointResults`` object.
 
         Examples
         --------
@@ -289,6 +321,19 @@ class CreateMaterialPointResults(CoreObject):
 
 class DeleteMaterialPointResults(CoreObject):
     """Results associated with delete material point operation.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``DeleteMaterialPointResults`` object with default parameters.
+    error_code: ErrorCode, optional
+        Error code associated with the failure of operation.
+    json_data: dict, optional
+        JSON dictionary to create a ``DeleteMaterialPointResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> delete_material_point_results = prime.DeleteMaterialPointResults(model = model)
     """
     _default_params = {}
 
@@ -303,16 +348,16 @@ class DeleteMaterialPointResults(CoreObject):
             error_code: ErrorCode = None,
             json_data : dict = None,
              **kwargs):
-        """Initializes the DeleteMaterialPointResults.
+        """Initialize a ``DeleteMaterialPointResults`` object.
 
         Parameters
         ----------
         model: Model
-            Model to create a DeleteMaterialPointResults object with default parameters.
+            Model to create a ``DeleteMaterialPointResults`` object with default parameters.
         error_code: ErrorCode, optional
             Error code associated with the failure of operation.
         json_data: dict, optional
-            JSON dictionary to create a DeleteMaterialPointResults object with provided parameters.
+            JSON dictionary to create a ``DeleteMaterialPointResults`` object with provided parameters.
 
         Examples
         --------
@@ -328,7 +373,7 @@ class DeleteMaterialPointResults(CoreObject):
                     error_code)
             else:
                 if model is None:
-                    raise ValueError("Invalid assignment. Either pass model or specify all properties")
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "DeleteMaterialPointResults")
                     json_data = param_json["DeleteMaterialPointResults"] if "DeleteMaterialPointResults" in param_json else {}
@@ -344,7 +389,7 @@ class DeleteMaterialPointResults(CoreObject):
     @staticmethod
     def set_default(
             error_code: ErrorCode = None):
-        """Set the default values of DeleteMaterialPointResults.
+        """Set the default values of the ``DeleteMaterialPointResults`` object.
 
         Parameters
         ----------
@@ -356,7 +401,7 @@ class DeleteMaterialPointResults(CoreObject):
 
     @staticmethod
     def print_default():
-        """Print the default values of DeleteMaterialPointResults.
+        """Print the default values of ``DeleteMaterialPointResults`` object.
 
         Examples
         --------

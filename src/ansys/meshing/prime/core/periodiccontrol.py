@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module containing classes and methods related to periodic control."""
 
 from ansys.meshing.prime.autogen.periodiccontrol import (
@@ -10,18 +32,21 @@ from ansys.meshing.prime.autogen.periodiccontrolstructs import PeriodicControlPa
 
 
 class PeriodicControl(_PeriodicControl):
-    """Defines the scope and transformation for periodic surfaces.
+    """Periodic controls provide settings for the recovery of periodic surfaces.
+
+    A periodic control is specified by the scope (source surfaces) and
+    the transformation parameters: the center, axis and angle.
 
     Parameters
     ----------
-    model : CommunicationManager
-        Server model to create and modify periodic controls from.
+    model : Model
+        Server model to create PeriodicControl object.
     id : int
-        ID of the control.
+        Id of the PeriodicControl.
     object_id : int
-        Object ID of the control.
+        Object id of the PeriodicControl.
     name : str
-        Name of the periodic control.
+        Name of the PeriodicControl.
     local : bool, optional
         Unused. The default is ``False``.
     """

@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Module containing the ``Part`` class."""
 from typing import Any
 
@@ -10,19 +32,35 @@ from ansys.meshing.prime.autogen.partstructs import PartSummaryParams
 
 
 class Part(_Part):
-    """
-    Defines and modifies the parts of a model.
+    """Part contains zonelets and topoentities.
+
+    Topoentities and zonelets are characterized by dimension of entities.
+    Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets.
+    They are:
+
+    * FaceZonelet: A group of interconnected face elements.
+    * EdgeZonelet: A group of interconnected edge elements.
+    * CellZonelet: A group of interconnected cell elements.
+
+    Topoentities represent connectivity information.
+    Topoentities can be queried from higher order to lower order topoentities and vice versa.
+    Topoentities have geometric representation which may be defined by splines or facets.
+    The mesh generated on topoentities will be projected on geometry representation.
+
+    * TopoFace: Topoentity representing surfaces.
+    * TopoEdge: Topoentity representing curves.
+    * TopoVolume: Topoentity representing volumes.
 
     Parameters
     ----------
-    model: ansys.meshing.prime.Model
-        Model in which the part is created.
-    id: int
-        ID of the part provided by the server.
-    object_id: int
-        Object ID provided by the server.
-    name: str
-        Part name.
+    model : Model
+        Server model to create Part object.
+    id : int
+        Id of the Part.
+    object_id : int
+        Object id of the Part.
+    name : str
+        Name of the Part.
     """
 
     __doc__ = _Part.__doc__

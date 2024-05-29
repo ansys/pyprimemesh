@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class CollapseTool(CoreObject):
     """Performs various collapse operations. For example, split and collapse on face zonelets.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create CollapseTool object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -59,20 +63,19 @@ class CollapseTool(CoreObject):
         >>>     face_zonelets=part.get_face_zonelets(),
         >>>     register_id=register_id,
         >>>     split_params=prime.SplitParams(model=model),
-        >>>     collapse_params=prime.CollapseParams(model=model),
-        >>> )
+        >>>     collapse_params=prime.CollapseParams(model=model))
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for register_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
         if not isinstance(split_params, SplitParams):
-            raise TypeError("Invalid argument type passed for split_params, valid argument type is SplitParams.")
+            raise TypeError("Invalid argument type passed for 'split_params'. Valid argument type is SplitParams.")
         if not isinstance(collapse_params, CollapseParams):
-            raise TypeError("Invalid argument type passed for collapse_params, valid argument type is CollapseParams.")
+            raise TypeError("Invalid argument type passed for 'collapse_params'. Valid argument type is CollapseParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "register_id" : register_id,

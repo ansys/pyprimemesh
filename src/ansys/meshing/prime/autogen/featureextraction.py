@@ -8,6 +8,10 @@ from typing import List, Any, Union
 class FeatureExtraction(CoreObject):
     """Provide functions for all feature extraction operations like extracting edges zonlelets, tracing node paths.
 
+    Parameters
+    ----------
+    model : Model
+        Server model to create FeatureExtraction object.
     """
 
     def __init__(self, model: CommunicationManager):
@@ -30,7 +34,7 @@ class FeatureExtraction(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def extract_features_on_face_zonelets(self, part_id : int, face_zonelets : Iterable[int], params : ExtractFeatureParams) -> ExtractFeatureResults:
-        """ Extract edges by angle and face zonelet boundary using the given extract feature parameters.
+        """ Extract edges by angle and face zonelet boundary using given extract feature parameters.
 
 
         Parameters
@@ -45,7 +49,7 @@ class FeatureExtraction(CoreObject):
         Returns
         -------
         ExtractFeatureResults
-            Returns the ExtractFeatureResults.
+            Returns a ExtractFeatureResults.
 
 
         Examples
@@ -54,11 +58,11 @@ class FeatureExtraction(CoreObject):
 
         """
         if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for part_id, valid argument type is int.")
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
-            raise TypeError("Invalid argument type passed for face_zonelets, valid argument type is Iterable[int].")
+            raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(params, ExtractFeatureParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is ExtractFeatureParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExtractFeatureParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
         "params" : params._jsonify()}
@@ -69,7 +73,7 @@ class FeatureExtraction(CoreObject):
         return ExtractFeatureResults(model = self._model, json_data = result)
 
     def create_intersection_edge_loops(self, part_face_zonelets : List[PartZonelets], intersecting_part_face_zonelets : List[PartZonelets], params : CreateIntersectionEdgeLoopsParams) -> CreateIntersectionEdgeLoopsResults:
-        """ Find the edge zonelets formed by intersection of two face zonelets. Perform n to n intersection of face zonelets present in part face zonelets with those in intersecting part face zonelets depending on the input parameters. Order of input does not matter.
+        """ Finds the edge zonelets formed by intersection of two face zonelets. Performs n to n intersection of face zonelets present in part face zonelets with those in intersecting part face zonelets depending on the input parameters. Order of input does not matter.
 
 
         Parameters
@@ -93,11 +97,11 @@ class FeatureExtraction(CoreObject):
 
         """
         if not isinstance(part_face_zonelets, List):
-            raise TypeError("Invalid argument type passed for part_face_zonelets, valid argument type is List[PartZonelets].")
+            raise TypeError("Invalid argument type passed for 'part_face_zonelets'. Valid argument type is List[PartZonelets].")
         if not isinstance(intersecting_part_face_zonelets, List):
-            raise TypeError("Invalid argument type passed for intersecting_part_face_zonelets, valid argument type is List[PartZonelets].")
+            raise TypeError("Invalid argument type passed for 'intersecting_part_face_zonelets'. Valid argument type is List[PartZonelets].")
         if not isinstance(params, CreateIntersectionEdgeLoopsParams):
-            raise TypeError("Invalid argument type passed for params, valid argument type is CreateIntersectionEdgeLoopsParams.")
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateIntersectionEdgeLoopsParams.")
         args = {"part_face_zonelets" : [p._jsonify() for p in part_face_zonelets],
         "intersecting_part_face_zonelets" : [p._jsonify() for p in intersecting_part_face_zonelets],
         "params" : params._jsonify()}
