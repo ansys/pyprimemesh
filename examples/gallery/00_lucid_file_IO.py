@@ -118,8 +118,8 @@ mesh_util.read(file_name=prime.examples.download_block_model_fmd())
 # mesh_util.read(file_name=prime.examples.download_block_model_scdoc())
 print(model)
 display = PrimePlotter()
-display.add_model(model)
-display.plot()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Generate Mesh
@@ -144,14 +144,14 @@ display.plot()
 
 mesh_util.surface_mesh(min_size=2.0)
 display = PrimePlotter()
-display.add_model(model)
-display.plot()
+display.plot(model)
+display.show()
 
 part = model.get_part_by_name("pyprime_block_import")
 
 display = PrimePlotter()
 display.add_scope(model, prime.ScopeDefinition(model, label_expression="my_group"))
-display.plot()
+display.show()
 
 mesh_util.volume_mesh()
 
@@ -279,7 +279,7 @@ for zone in part.get_face_zones():
     )
     display = PrimePlotter()
     display.add_scope(model, scope)
-    display.plot()
+    display.show()
 
 ###############################################################################
 # Exit PyPrimeMesh

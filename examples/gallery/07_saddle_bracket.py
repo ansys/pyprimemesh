@@ -88,8 +88,8 @@ mesh_util.read(file_name=saddle_bracket)
 print(model)
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Quad mesh source faces
@@ -109,8 +109,8 @@ mesh_util.surface_mesh(
 )
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Surface mesh unmeshed faces
@@ -147,8 +147,8 @@ mesh_util.surface_mesh(
 )
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Delete topology
@@ -219,8 +219,8 @@ result_vol = volume_mesh.mesh(part_id=part.id, automesh_params=auto_mesh_params)
 print(part.get_summary(prime.PartSummaryParams(model)))
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~

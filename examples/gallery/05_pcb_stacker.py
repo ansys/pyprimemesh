@@ -88,8 +88,8 @@ mesh_util = prime.lucid.Mesh(model=model)
 mesh_util.read(file_name=prime.examples.download_pcb_pmdat())
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 
 sizing_params = prime.GlobalSizingParams(model=model, min=0.5, max=1.0)
 model.set_global_sizing_params(params=sizing_params)
@@ -131,8 +131,8 @@ part.add_labels_on_topo_entities(["base_faces"], base_faces)
 scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 
 display = PrimePlotter()
-display.add(model, scope=scope)
-display.plot()
+display.plot(model, scope=scope)
+display.show()
 
 
 ###############################################################################
@@ -149,8 +149,8 @@ base_scope = prime.lucid.SurfaceScope(
 mesh_util.surface_mesh(min_size=0.5, scope=base_scope, generate_quads=True)
 
 display = PrimePlotter()
-display.add(model, scope=scope)
-display.plot()
+display.plot(model, scope=scope)
+display.show()
 
 ###############################################################################
 # Stack base face
@@ -166,8 +166,8 @@ stackbase_results = sweeper.stack_base_face(
 )
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Write mesh

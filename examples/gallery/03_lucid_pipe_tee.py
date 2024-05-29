@@ -90,8 +90,8 @@ pipe_tee = prime.examples.download_pipe_tee_fmd()
 mesh_util.read(pipe_tee)
 
 display = PrimePlotter()
-display.add(model)
-display.plot()
+display.plot(model)
+display.show()
 
 print(model)
 
@@ -114,7 +114,7 @@ if toDelete:
 
 display = PrimePlotter()
 display.add_model(model)
-display.plot()
+display.show()
 
 ###############################################################################
 # Write structural mesh
@@ -155,7 +155,7 @@ print(model)
 
 display = PrimePlotter()
 display.add_model(model)
-display.plot()
+display.show()
 
 ###############################################################################
 # Volume mesh fluid
@@ -181,7 +181,7 @@ mesh_util.volume_mesh(
 print(model)
 display = PrimePlotter()
 display.add_scope(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
-display.plot()
+display.show()
 
 ###############################################################################
 # Write fluid mesh

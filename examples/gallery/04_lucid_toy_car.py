@@ -89,8 +89,8 @@ mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
 pl = PrimePlotter(allow_picking=True)
-pl.add(model, scope)
-pl.plot()
+pl.plot(model, scope)
+pl.show()
 ###############################################################################
 # Close holes
 # ~~~~~~~~~~~
@@ -107,8 +107,8 @@ for part_name in coarse_wrap:
     # Each open part before wrap
     scope = prime.ScopeDefinition(model, part_expression=part_name)
     pl = PrimePlotter(allow_picking=True)
-    pl.add(model, scope)
-    pl.plot()
+    pl.plot(model, scope)
+    pl.show()
     closed_part = mesh_util.wrap(
         input_parts=part_name,
         max_size=coarse_wrap[part_name],
@@ -118,8 +118,8 @@ for part_name in coarse_wrap:
     # Closed part with no hole
     scope = prime.ScopeDefinition(model, part_expression=closed_part.name)
     pl = PrimePlotter(allow_picking=True)
-    pl.add(model, scope)
-    pl.plot()
+    pl.plot(model, scope)
+    pl.show()
 
 ###############################################################################
 # Extract fluid using a wrapper
@@ -219,8 +219,8 @@ scope = prime.ScopeDefinition(
 )
 
 pl = PrimePlotter(allow_picking=True)
-pl.add(model, scope)
-pl.plot()
+pl.plot(model, scope)
+pl.show()
 print(model)
 
 ###############################################################################

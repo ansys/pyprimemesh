@@ -109,7 +109,7 @@ print(part_summary_res)
 
 display = PrimePlotter()
 display.add_model(model)
-display.plot()
+display.show()
 
 ###############################################################################
 # Connection
@@ -155,7 +155,7 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 # Display the mesh
 pl = PrimePlotter()
 pl.add(model)
-pl.plot()
+pl.show()
 
 ###############################################################################
 # Write mesh

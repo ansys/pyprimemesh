@@ -140,8 +140,8 @@ mesh_util.read(file_name=cad_file)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.add(model)
-    display.plot()
+    display.plot(model)
+    display.show()
 
 ###############################################################################
 # Define edge sizing constraints
@@ -246,8 +246,8 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.add(model)
-    display.plot()
+    display.plot(model)
+    display.show()
 
 ###############################################################################
 # Stack the base face using the volume sweeper
@@ -271,8 +271,8 @@ stackbase_results = sweeper.stack_base_face(
 
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.add(model)
-    display.plot()
+    display.plot(model)
+    display.show()
 ###############################################################################
 # Set up the zone naming before the mesh output
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
