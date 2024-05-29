@@ -1,18 +1,55 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+"""Module for PickedInfo widget."""
 import os
 
-from ansys.visualizer import Plotter, PlotterWidget
-from vtk import vtkButtonWidget, vtkPNGReader
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
+from beartype.typing import TYPE_CHECKING
+from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo, DisplayMeshType
 
+if TYPE_CHECKING:
+    from ansys.meshing.prime.graphics.plotter import PrimePlotter
+
 
 class PickedInfo(PlotterWidget):
-    def __init__(self, plotter_helper: "Plotter") -> None:
-        super().__init__(plotter_helper._pl.scene)
-        self.plotter_helper = plotter_helper
-        self._picked_list = self.plotter_helper._picked_list
-        self._object_actors_map = self.plotter_helper._object_to_actors_map
-        self._button = self.plotter_helper._pl.scene.add_checkbox_button_widget(
+    """Initialize the picked info button widget.
+
+    This widget allows the user to get information about the picked mesh objects.
+
+    Parameters
+    ----------
+    prime_plotter : PrimePlotter
+        Plotter where to apply this widget.
+    """
+
+    def __init__(self, prime_plotter: "PrimePlotter") -> None:
+        """Initialize widget."""
+        super().__init__(prime_plotter._backend._pl.scene)
+        self.prime_plotter = prime_plotter
+        self._picked_list = self.prime_plotter._backend._picked_list
+        self._object_actors_map = self.prime_plotter._backend._object_to_actors_map
+        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
             self.callback,
             position=(5, 570),
             size=30,
@@ -20,9 +57,21 @@ class PickedInfo(PlotterWidget):
             color_off="white",
             color_on="white",
         )
-        self._info_actor_map = self.plotter_helper._info_actor_map
+        self._info_actor_map = self.prime_plotter._info_actor_map
 
     def info_message(self, mesh_info: DisplayMeshInfo) -> str:
+        """Return the information message for the selected mesh object.
+
+        Parameters
+        ----------
+        mesh_info : DisplayMeshInfo
+            The mesh info object to print.
+
+        Returns
+        -------
+        str
+            Message with the information of the selected mesh object.
+        """
         mesh_type = mesh_info.display_mesh_type
         id = mesh_info.id
         part_id = mesh_info.part_id
@@ -46,6 +95,13 @@ class PickedInfo(PlotterWidget):
         return msg
 
     def callback(self, state: bool) -> None:
+        """Define callback function for the button widget.
+
+        Parameters
+        ----------
+        state : bool
+            State of the button widget.
+        """
         for meshobject in self._picked_list:
             mesh_info = self._info_actor_map[meshobject.actor]
             print(self.info_message(mesh_info))

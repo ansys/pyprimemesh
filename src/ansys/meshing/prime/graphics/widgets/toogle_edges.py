@@ -1,15 +1,50 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+"""Module for ToogleEdges widget."""
 import os
 
-from ansys.visualizer import Plotter, PlotterWidget
-from vtk import vtkButtonWidget, vtkPNGReader
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
+from beartype.typing import TYPE_CHECKING
+from vtk import vtkPNGReader
+
+if TYPE_CHECKING:
+    from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
 class ToogleEdges(PlotterWidget):
-    def __init__(self, plotter_helper: "Plotter") -> None:
-        super().__init__(plotter_helper._pl.scene)
-        self.plotter_helper = plotter_helper
-        self._object_actors_map = self.plotter_helper._object_to_actors_map
-        self._button = self.plotter_helper._pl.scene.add_checkbox_button_widget(
+    """Toggle the edges of the mesh objects.
+
+    Parameters
+    ----------
+    prime_plotter : PrimePlotter
+        Plotter where to apply this widget.
+    """
+
+    def __init__(self, prime_plotter: "PrimePlotter") -> None:
+        """Initialize the widget."""
+        super().__init__(prime_plotter._backend._pl.scene)
+        self.prime_plotter = prime_plotter
+        self._object_actors_map = self.prime_plotter._backend._object_to_actors_map
+        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
             self.callback,
             position=(5, 600),
             size=30,
@@ -19,8 +54,15 @@ class ToogleEdges(PlotterWidget):
         )
 
     def callback(self, state: bool) -> None:
+        """Toggle the edges of the mesh objects.
+
+        Parameters
+        ----------
+        state : bool
+            State of the button widget.
+        """
         for actor, object in self._object_actors_map.items():
-            # self.plotter_helper._pl.scene.remove_actor(actor)
+            # self.prime_plotter._pl.scene.remove_actor(actor)
             actor.prop.show_edges = not state
 
     def update(self) -> None:

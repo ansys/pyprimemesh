@@ -1,11 +1,33 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Process the mesh for visualization in the GUI."""
 
 import enum
 
 import numpy as np
 import pyvista as pv
-from ansys.visualizer import MeshObjectPlot
-from beartype.typing import Dict, List, Tuple, Union
+from ansys.tools.visualization_interface import MeshObjectPlot
+from beartype.typing import Dict, List, Union
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.coreobject import CommunicationManager
@@ -13,7 +35,6 @@ from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.meshinfostructs import (
     EdgeConnectivityResults,
     FaceAndEdgeConnectivityParams,
-    FaceAndEdgeConnectivityResults,
     FaceConnectivityResults,
 )
 from ansys.meshing.prime.core.part import Part
@@ -58,6 +79,24 @@ class DisplayMeshType(enum.IntEnum):
 
 
 class DisplayMeshInfo:
+    """Contains the information of the mesh we want to display.
+
+    Parameters
+    ----------
+    id : int
+        ID of the mesh.
+    part_id : int
+        ID of the part.
+    part_name : str
+        Name of the part.
+    zone_id : int
+        ID of the zone.
+    zone_name : str
+        Name of the zone.
+    display_mesh_type : DisplayMeshType
+        Type of mesh to display.
+    """
+
     def __init__(
         self,
         id=0,
@@ -67,6 +106,7 @@ class DisplayMeshInfo:
         zone_name=None,
         display_mesh_type=DisplayMeshType.FACEZONELET,
     ) -> None:
+        """Initialize display mesh info."""
         self.id = id
         self.part_id = part_id
         self.zone_id = zone_id
@@ -76,7 +116,16 @@ class DisplayMeshInfo:
 
 
 class Mesh(MeshInfo):
+    """Process the mesh for visualization in the GUI.
+
+    Parameters
+    ----------
+    model : CommunicationManager
+        Model to process.
+    """
+
     def __init__(self, model: CommunicationManager):
+        """Initialize the mesh object."""
         super().__init__(model)
         self._model = model
         self._unfreeze()
@@ -85,6 +134,7 @@ class Mesh(MeshInfo):
 
     @property
     def model(self):
+        """Return the model."""
         return self._model
 
     def compute_face_list_from_structured_nodes(self, dim):
@@ -178,7 +228,7 @@ class Mesh(MeshInfo):
     def _get_vertices_and_surf_faces(
         self, connectivity_results: FaceConnectivityResults, index
     ) -> Union[np.ndarray, np.ndarray]:
-        """Calculates the vertices and faces of the mesh.
+        """Calculate the vertices and faces of the mesh.
 
         Parameters
         ----------
@@ -205,7 +255,7 @@ class Mesh(MeshInfo):
     def _get_vertices_and_surf_edges(
         self, connectivity_results: EdgeConnectivityResults, index
     ) -> Union[np.ndarray, np.ndarray]:
-        """Calculates the vertices and faces of the mesh.
+        """Calculate the vertices and faces of the mesh.
 
         Parameters
         ----------
@@ -371,7 +421,19 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_scoped_polydata(self, scope):
+    def get_scoped_polydata(self, scope: "prime.ScopeDefinition"):
+        """Get the polydata object of the scoped mesh.
+
+        Parameters
+        ----------
+        scope : prime.ScopeDefinition
+            Scope to get the mesh from.
+
+        Returns
+        -------
+        pv.PolyData
+            PyVista mesh object.
+        """
         if not self._parts_polydata:
             self.as_polydata()
         parts = self._model.control_data.get_scope_parts(scope)
@@ -436,12 +498,33 @@ class Mesh(MeshInfo):
 
     @property
     def id(self):
+        """Return the ID of the mesh.
+
+        Returns
+        -------
+        int
+            ID of the mesh.
+        """
         return self._id
 
     @property
     def part_id(self):
+        """Return the part ID of the mesh.
+
+        Returns
+        -------
+        int
+            Part ID of the mesh.
+        """
         return self._part_id
 
     @property
     def zone_id(self):
+        """Return the zone ID of the mesh.
+
+        Returns
+        -------
+        int
+            Zone ID of the mesh.
+        """
         return self._zone_id
