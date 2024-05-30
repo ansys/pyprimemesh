@@ -76,6 +76,7 @@ class Model(_Model):
         self._topo_data = None
         self._control_data = None
         self._material_point_data = None
+        self._model_pv_mesh = None
         self._freeze()
 
     def _sync_up_model(self):
@@ -430,8 +431,9 @@ class Model(_Model):
         --------
             >>> polydata = model.as_polydata()
         """
-        model_mesh = Mesh(self)
-        return model_mesh.as_polydata()
+        if self._model_pv_mesh is None:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.as_polydata()
 
     def get_scoped_polydata(self, scope):
         """Get the scoped polydata of the model.
@@ -450,5 +452,6 @@ class Model(_Model):
         --------
             >>> scoped_polydata = model.get_scoped_polydata(scope)
         """
-        model_mesh = Mesh(self)
-        return model_mesh.get_scoped_polydata(scope)
+        if self._model_pv_mesh is None:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.get_scoped_polydata(scope)

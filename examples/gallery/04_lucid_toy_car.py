@@ -88,7 +88,7 @@ toy_car = prime.examples.download_toy_car_fmd()
 mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
-pl = PrimePlotter(allow_picking=True)
+pl = PrimePlotter()
 pl.plot(model, scope)
 pl.show()
 ###############################################################################
@@ -106,7 +106,7 @@ coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
 for part_name in coarse_wrap:
     # Each open part before wrap
     scope = prime.ScopeDefinition(model, part_expression=part_name)
-    pl = PrimePlotter(allow_picking=True)
+    pl = PrimePlotter()
     pl.plot(model, scope)
     pl.show()
     closed_part = mesh_util.wrap(
@@ -117,7 +117,7 @@ for part_name in coarse_wrap:
     )
     # Closed part with no hole
     scope = prime.ScopeDefinition(model, part_expression=closed_part.name)
-    pl = PrimePlotter(allow_picking=True)
+    pl = PrimePlotter()
     pl.plot(model, scope)
     pl.show()
 
@@ -218,7 +218,7 @@ scope = prime.ScopeDefinition(
     label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*",
 )
 
-pl = PrimePlotter(allow_picking=True)
+pl = PrimePlotter()
 pl.plot(model, scope)
 pl.show()
 print(model)

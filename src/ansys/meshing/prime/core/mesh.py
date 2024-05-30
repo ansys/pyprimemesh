@@ -457,6 +457,10 @@ class Mesh(MeshInfo):
         if not self._parts_polydata:
             self.as_polydata()
         parts = self._model.control_data.get_scope_parts(scope)
+
+        # Update the polydata if any part is not in the dictionary
+        if len(set(parts).intersection(set(self._parts_polydata.keys()))) != len(parts):
+            self.update_pd(parts)
         scoped_pd = {}
         scope_def = scope
         for part_id in parts:
@@ -480,13 +484,22 @@ class Mesh(MeshInfo):
                 scoped_pd[part_id] = temp_key
         return scoped_pd
 
-    def as_polydata(self) -> Dict[int, Dict[str, List[(pv.PolyData, Part)]]]:
-        """Return the mesh as a ``pv.PolyData`` object."""
-        part_ids = [part.id for part in self._model.parts]
+    def update_pd(self, part_ids) -> Dict[int, Dict[str, List[(pv.PolyData, Part)]]]:
+        """Update the polydata object of the mesh.
+
+        Parameters
+        ----------
+        part_ids : List[int]
+            List of part IDs to update.
+
+        Returns
+        -------
+        Dict[int, Dict[str, List[(pv.PolyData, Part)]]
+            Dictionary with the polydata objects.
+        """
         facet_result = self.get_face_and_edge_connectivity(
             part_ids, FaceAndEdgeConnectivityParams(model=self._model)
         )
-        parts_polydata = {}
         for i, part_id in enumerate(facet_result.part_ids):
             part = self._model.get_part(part_id)
             splines = part.get_splines()
@@ -514,6 +527,19 @@ class Mesh(MeshInfo):
             part_polydata["ctrlpts"] = spline_cp_polydata_list
             part_polydata["splinesurf"] = spline_surface_polydata_list
             self._parts_polydata[part_id] = part_polydata
+        return self._parts_polydata
+
+    def as_polydata(self) -> Dict[int, Dict[str, List[(pv.PolyData, Part)]]]:
+        """Return the mesh as a ``pv.PolyData`` object.
+
+        Returns
+        -------
+        Dict[int, Dict[str, List[(pv.PolyData, Part)]]
+            Dictionary with the polydata objects.
+        """
+        if not self._parts_polydata:
+            part_ids = [part.id for part in self._model.parts]
+            self.update_pd(part_ids)
         return self._parts_polydata
 
     @property
