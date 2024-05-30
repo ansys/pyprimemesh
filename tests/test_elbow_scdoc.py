@@ -50,7 +50,7 @@ def test_elbow_lucid(get_remote_client, get_examples):
         prism_layers=3,
     )
 
-    display = PrimePlotter(model=model)
+    display = PrimePlotter()
     display.plot(model=model)
     display.show()
 

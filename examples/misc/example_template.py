@@ -132,7 +132,7 @@ mesh_util.volume_mesh(
 # ~~~~~~~~~~~~~~~
 # If you display graphics, the result is auto-generated and
 # rendered on the page:
-display = PrimePlotter(model)
+display = PrimePlotter()
 display.plot(model)
 display.show()
 
