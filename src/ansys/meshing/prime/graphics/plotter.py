@@ -231,8 +231,7 @@ class PrimePlotter(Plotter):
         """
         Add a list of any type of object to the scene.
 
-        These types of objects are supported: ``Body``, ``Component``, ``List[pv.PolyData]``,
-        ``pv.MultiBlock``, and ``Sketch``.
+        Allowed types are PyPrime models or any PyVista plottable object.
 
         Parameters
         ----------
@@ -255,6 +254,8 @@ class PrimePlotter(Plotter):
         **plotting_options,
     ):
         """Add an object to the plotter.
+
+        Allowed types are PyPrime models or any PyVista plottable object.
 
         Parameters
         ----------
