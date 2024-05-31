@@ -80,7 +80,7 @@ Four CAD import routes are available in PyPrimeMesh:
  * ``Native``: natively supported file format extensions are FMD, ACIS (SAT and SAB),
    Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
 
- * ``SpaceClaim``: uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
+ * ``SpaceClaim``: Uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
    Windows platform supports importing files using the SpaceClaim reader.
 
  * ``Discovery``: uses Discovery to import supported CAD files from the Discovery reader. Only the
