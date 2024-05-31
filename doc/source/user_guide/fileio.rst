@@ -70,11 +70,12 @@ Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` cl
 
 Four CAD import routes are available in PyPrimeMesh:
 
- * ``Program controlled``: chooses the CAD reader route based on the extension of the provided CAD file, as follows;
-   native for FMD, SAT, SAB, X_T, X_B, JT, PLMXML, and STL;
-   SpaceClaim for SCDOC and SCDOCX;
-   Discovery for DSCO;
-   Workbench for all other extensions.
+ * ``Program controlled``: Chooses the CAD reader route based on the extension of the provided CAD file as follows:
+
+   - Native for FMD, SAT, SAB, X_T, X_B, JT, PLMXML, and STL
+   - SpaceClaim for SCDOC and SCDOCX
+   - Discovery for DSCO
+   - Workbench for all other extensions
 
  * ``Native``: natively supported file format extensions are FMD, ACIS (SAT and SAB),
    Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
