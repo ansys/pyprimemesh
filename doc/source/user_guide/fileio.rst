@@ -83,10 +83,10 @@ Four CAD import routes are available in PyPrimeMesh:
  * ``SpaceClaim``: Uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
    Windows platform supports importing files using the SpaceClaim reader.
 
- * ``Discovery``: uses Discovery to import supported CAD files from the Discovery reader. Only the
+ * ``Discovery``: Uses Discovery to import supported CAD files from the Discovery reader. Only the
    Windows platform supports importing files using the Discovery reader.
 
- * ``Workbench``: uses Workbench to import supported CAD files from the Workbench reader.
+ * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
 
 
 To view the CAD supported for the Workbench route on different platforms, see
