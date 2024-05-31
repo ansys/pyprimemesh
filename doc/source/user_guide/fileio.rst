@@ -105,7 +105,7 @@ To view the CAD supported for the Workbench route on different platforms, see
     * To preserve shared topology, the Workbench CAD reader route must be used.
 
     * Patterned name selections are not supported for the SpaceClaim or Discovery CAD reader routes.
-      To import patterned named selections the Workbench CAD reader route can be used.
+      To import patterned named selections, the Workbench CAD reader route can be used.
 
 
 
