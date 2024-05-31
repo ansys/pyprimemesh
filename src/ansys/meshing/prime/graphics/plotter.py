@@ -275,7 +275,12 @@ class PrimePlotter(Plotter):
             self._backend.pv_interface.plot(object, filter, **plotting_options)
 
     def show(
-        self, object: Any = None, screenshot: str = None, filter: bool = None, **plotting_options
+        self,
+        object: Any = None,
+        screenshot: str = None,
+        filter: bool = None,
+        scope: prime.ScopeDefinition = None,
+        **plotting_options,
     ) -> None:
         """Show the plotted objects.
 
@@ -291,5 +296,5 @@ class PrimePlotter(Plotter):
             Additional plotting options the selected backend accepts.
         """
         if object is not None:
-            self.plot(object, filter=filter, **plotting_options)
+            self.plot(object, filter=filter, scope=scope, **plotting_options)
         self._backend.show(object=object, screenshot=screenshot, filter=filter, **plotting_options)
