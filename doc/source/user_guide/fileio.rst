@@ -77,7 +77,7 @@ Four CAD import routes are available in PyPrimeMesh:
    - Discovery for DSCO
    - Workbench for all other extensions
 
- * ``Native``: natively supported file format extensions are FMD, ACIS (SAT and SAB),
+ * ``Native``: Natively supported file format extensions are FMD, ACIS (SAT and SAB),
    Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
 
  * ``SpaceClaim``: Uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
