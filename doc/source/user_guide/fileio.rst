@@ -96,7 +96,7 @@ To view the CAD supported for the Workbench route on different platforms, see
     * Program controlled and SpaceClaim CAD reader routes import JT files containing only faceted data. Workbench and
       Native CAD reader routes do not support importing JT files containing only faceted data.
 
-    * When deploying scripts using SpaceClaim, Discovery or Workbench CAD reader routes, ensure that the CAD configuration
+    * When deploying scripts using SpaceClaim, Discovery, or Workbench CAD reader routes, ensure that the CAD configuration
       and in-app defaults are consistent in the deployed environment.
 
     * You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
