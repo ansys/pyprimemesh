@@ -21,7 +21,6 @@ env:
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
   RESET_IMAGE_CACHE: 0
-  PYANSYS_VISUALIZER_TESTMODE: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
