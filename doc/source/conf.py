@@ -8,7 +8,9 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
 
-os.environ["PYANSYS_VISUALIZER_DOC_MODE"] = "true"
+import ansys.tools.visualization_interface as viz_interface
+
+viz_interface.DOCUMENTATION_BUILD = True
 
 # Project information
 project = 'ansys-meshing-prime'
