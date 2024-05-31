@@ -23,10 +23,10 @@
 """Module for ColorByTypeWidget."""
 import enum
 import os
+from typing import TYPE_CHECKING
 
 import numpy as np
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
-from beartype.typing import TYPE_CHECKING
 from vtk import vtkPNGReader
 
 if TYPE_CHECKING:

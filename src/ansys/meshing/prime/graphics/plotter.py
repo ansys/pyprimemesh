@@ -21,11 +21,11 @@
 # SOFTWARE.
 """Module for the plotter."""
 import enum
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 from ansys.tools.visualization_interface import Plotter
 from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
-from beartype.typing import Any, Dict, List, Optional
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo

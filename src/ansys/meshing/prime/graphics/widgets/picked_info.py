@@ -21,9 +21,9 @@
 # SOFTWARE.
 """Module for PickedInfo widget."""
 import os
+from typing import TYPE_CHECKING
 
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
-from beartype.typing import TYPE_CHECKING
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo, DisplayMeshType

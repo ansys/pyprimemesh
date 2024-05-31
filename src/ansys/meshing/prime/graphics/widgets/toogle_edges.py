@@ -21,9 +21,9 @@
 # SOFTWARE.
 """Module for ToogleEdges widget."""
 import os
+from typing import TYPE_CHECKING
 
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
-from beartype.typing import TYPE_CHECKING
 from vtk import vtkPNGReader
 
 if TYPE_CHECKING:

@@ -23,11 +23,11 @@
 """Process the mesh for visualization in the GUI."""
 
 import enum
+from typing import Dict, List, Union
 
 import numpy as np
 import pyvista as pv
 from ansys.tools.visualization_interface import MeshObjectPlot
-from beartype.typing import Dict, List, Union
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.coreobject import CommunicationManager
