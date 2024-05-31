@@ -253,14 +253,14 @@ class Mesh(MeshInfo):
         Parameters
         ----------
         connectivity_results : Union[FaceConnectivityResults, EdgeConnectivityResults]
-            _description_
+            Results of the connectivity operations.
         index : _type_
-            _description_
+            Index of the mesh.
 
         Returns
         -------
         Union[np.ndarray, np.ndarray]
-            _description_
+            Vertices and faces of the mesh.
         """
         node_start = 3 * np.sum(connectivity_results.num_nodes_per_face_zonelet[0:index])
         num_node_coords = 3 * connectivity_results.num_nodes_per_face_zonelet[index]
@@ -273,21 +273,21 @@ class Mesh(MeshInfo):
         return vertices, faces
 
     def _get_vertices_and_surf_edges(
-        self, connectivity_results: EdgeConnectivityResults, index
+        self, connectivity_results: EdgeConnectivityResults, index: int
     ) -> Union[np.ndarray, np.ndarray]:
         """Calculate the vertices and faces of the mesh.
 
         Parameters
         ----------
         connectivity_results : Union[FaceConnectivityResults, EdgeConnectivityResults]
-            _description_
-        index : _type_
-            _description_
+            Results of the connectivity operations.
+        index : int
+            Index of the mesh.
 
         Returns
         -------
         Union[np.ndarray, np.ndarray]
-            _description_
+            Vertices and faces of the mesh.
         """
         node_start = 3 * np.sum(connectivity_results.num_nodes_per_edge_zonelet[0:index])
         num_node_coords = 3 * connectivity_results.num_nodes_per_edge_zonelet[index]
@@ -299,22 +299,24 @@ class Mesh(MeshInfo):
         faces = connectivity_results.edge_list[edge_list_start : edge_list_start + num_edge_list]
         return vertices, faces
 
-    def get_face_polydata(self, part_id: int, face_facet_res: FaceConnectivityResults, index: int):
+    def get_face_polydata(
+        self, part_id: int, face_facet_res: FaceConnectivityResults, index: int
+    ) -> MeshObjectPlot:
         """Get the polydata object of the faces.
 
         Parameters
         ----------
         part_id : int
-            _description_
+            ID of the part to get the polydata from.
         face_facet_res : FaceConnectivityResults
-            _description_
+            Results of the face connectivity.
         index : int
-            _description_
+            Index of the face.
 
         Returns
         -------
-        _type_
-            _description_
+        MeshObjectPlot, DisplayMeshInfo
+            Mesh to be plotted and information of the mesh to display.
         """
         part = self._model.get_part(part_id)
 
@@ -342,22 +344,24 @@ class Mesh(MeshInfo):
                 zone_name=face_facet_res.face_zone_names[index],
             )
 
-    def get_edge_polydata(self, part_id: int, edge_facet_res: EdgeConnectivityResults, index: int):
+    def get_edge_polydata(
+        self, part_id: int, edge_facet_res: EdgeConnectivityResults, index: int
+    ) -> MeshObjectPlot:
         """Get the polydata object of the edges.
 
         Parameters
         ----------
         part_id : int
-            _description_
+            ID of the part to get the polydata from.
         edge_facet_res : EdgeConnectivityResults
-            _description_
+            Results of the edge connectivity.
         index : int
-            _description_
+            Index of the edge.
 
         Returns
         -------
-        _type_
-            _description_
+        MeshObjectPlot
+            Mesh to be displayed.
         """
         part = self._model.get_part(part_id)
         vertices, faces = self._get_vertices_and_surf_edges(edge_facet_res, index)
@@ -385,20 +389,20 @@ class Mesh(MeshInfo):
         if edge.n_points > 0:
             return MeshObjectPlot(part, edge)
 
-    def get_spline_cp_polydata(self, part_id: int, spline_id: int):
+    def get_spline_cp_polydata(self, part_id: int, spline_id: int) -> MeshObjectPlot:
         """Get the polydata object of the spline control points.
 
         Parameters
         ----------
         part_id : int
-            _description_
+            ID of the part to get the polydata from.
         spline_id : int
-            _description_
+            ID of the spline.
 
         Returns
         -------
-        _type_
-            _description_
+        MeshObjectPlot
+            Mesh to be displayed.
         """
         part = self._model.get_part(part_id)
         spline = part.get_spline(spline_id)
@@ -413,20 +417,20 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_spline_surface_polydata(self, part_id: int, spline_id: int):
+    def get_spline_surface_polydata(self, part_id: int, spline_id: int) -> MeshObjectPlot:
         """Get the polydata object of the spline surface.
 
         Parameters
         ----------
         part_id : int
-            _description_
+            ID of the part to get the polydata from.
         spline_id : int
-            _description_
+            ID of the spline.
 
         Returns
         -------
-        _type_
-            _description_
+        MeshObjectPlot
+            Mesh to be displayed.
         """
         part = self._model.get_part(part_id)
         spline = part.get_spline(spline_id)

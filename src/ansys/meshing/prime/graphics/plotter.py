@@ -137,10 +137,10 @@ class PrimePlotter(Plotter):
 
         Parameters
         ----------
-        model : _type_
-            _description_
-        scope : _type_, optional
-            _description_, by default None
+        model : Model
+            Prime model to add.
+        scope : prime.ScopeDefinition, optional
+            Scope to show if any, by default None
         """
         model_pd = model.as_polydata()
         if scope is None:
