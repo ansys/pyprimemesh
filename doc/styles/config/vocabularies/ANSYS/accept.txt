@@ -56,3 +56,5 @@ tetrahedra
 xyz
 [Zz]onelet
 [Zz]onelets
+fuse_option
+n_layers
