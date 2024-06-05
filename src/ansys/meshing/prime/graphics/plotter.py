@@ -298,3 +298,48 @@ class PrimePlotter(Plotter):
         if object is not None:
             self.plot(object, filter=filter, scope=scope, **plotting_options)
         self._backend.show(object=object, screenshot=screenshot, filter=filter, **plotting_options)
+
+
+class Graphics:
+    """Manages graphics in PyPrime.
+
+    .. deprecated:: 0.6.0
+        Use :class:`PrimePlotter` instead.
+
+    Parameters
+    ----------
+    model : prime.Model
+        Model to show.
+    use_trame : bool, optional
+        Whether to use the Trame visualizer. The default is ``False``.
+    """
+
+    def __init__(self, model: prime.Model, use_trame: bool = False) -> None:
+        """Initialize graphics."""
+        self.model = model
+        self.use_trame = use_trame
+        raise DeprecationWarning("Use `PrimePlotter` instead.")
+
+    def __call__(
+        self,
+        parts: List = None,
+        update: bool = True,
+        spline: bool = False,
+        scope: prime.ScopeDefinition = None,
+    ) -> None:
+        """Show the appropriate display based on parameters.
+
+        Parameters
+        ----------
+        parts : Any, optional
+            Parts to show. The default is ``None``.
+        update : bool, optional
+            Whether to update the display. The default is ``True``.
+        spline : bool, optional
+            Whether to use splines. The default is ``False``.
+        scope : prime.ScopeDefinition, optional
+            Scope of the parts. The default is ``None``.
+        """
+        plotter = PrimePlotter(use_trame=self.use_trame)
+        plotter.add_model(self.model, scope=scope)
+        plotter.show()
