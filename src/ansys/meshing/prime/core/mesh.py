@@ -23,7 +23,7 @@
 """Process the mesh for visualization in the GUI."""
 
 import enum
-from typing import Dict, Union
+from typing import Dict, List, Union
 
 import numpy as np
 import pyvista as pv
@@ -533,7 +533,7 @@ class Mesh(MeshInfo):
             self._parts_polydata[part_id] = part_polydata
         return self._parts_polydata
 
-    def as_polydata(self) -> Dict[int, Dict[str, list[(pv.PolyData, Part)]]]:
+    def as_polydata(self) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
         """Return the mesh as a ``pv.PolyData`` object.
 
         Returns
