@@ -166,7 +166,7 @@ class PrimePlotter(Plotter):
                     # but we need the actor for the picked info widget
                     colors = self.get_scalar_colors(face_mesh_info)
                     actor = self._backend.pv_interface.scene.add_mesh(
-                        face_mesh_part.mesh, show_edges=True, color=colors, pickable=True
+                        face_mesh_part.mesh, show_edges=False, color=colors, pickable=True
                     )
                     face_mesh_part.actor = actor
                     self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
@@ -188,7 +188,7 @@ class PrimePlotter(Plotter):
                 for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
                     actor = self._backend.pv_interface.scene.add_mesh(
                         ctrlpoint_mesh_part.mesh,
-                        show_edges=True,
+                        show_edges=False,
                         # scalars="colors",
                         rgb=True,
                         pickable=False,
