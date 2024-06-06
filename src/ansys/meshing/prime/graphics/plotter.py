@@ -21,6 +21,7 @@
 # SOFTWARE.
 """Module for the plotter."""
 import enum
+import warnings
 from typing import Any, Dict, List, Optional
 
 import numpy as np
@@ -33,7 +34,7 @@ from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
-from ansys.meshing.prime.graphics.widgets.toogle_edges import ToogleEdges
+from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
 
 color_matrix = np.array(
     [
@@ -83,7 +84,7 @@ class PrimePlotter(Plotter):
 
         # info of the actor to pass to picked info widget
         self._info_actor_map = {}
-        self._backend.add_widget(ToogleEdges(self))
+        self._backend.add_widget(ToggleEdges(self))
         self._backend.add_widget(ColorByTypeWidget(self))
         self._backend.add_widget(HidePicked(self))
         self._backend.add_widget(PickedInfo(self))
@@ -318,7 +319,9 @@ class Graphics:
         """Initialize graphics."""
         self.model = model
         self.use_trame = use_trame
-        raise DeprecationWarning("Use `PrimePlotter` instead.")
+        warnings.warn(
+            "DeprecationWarning: Graphics module is deprecated. Use `PrimePlotter` instead."
+        )
 
     def __call__(
         self,
