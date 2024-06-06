@@ -61,9 +61,8 @@ class ToggleEdges(PlotterWidget):
         state : bool
             State of the button widget.
         """
-        for actor, object in self._object_actors_map.items():
-            # self.prime_plotter._pl.scene.remove_actor(actor)
-            actor.prop.show_edges = not state
+        for key, actor in self.prime_plotter._backend._pl.scene.actors.items():
+            actor.prop.show_edges = state
 
     def update(self) -> None:
         """Define the configuration and representation of the button widget button."""
