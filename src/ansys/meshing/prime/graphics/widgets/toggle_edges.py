@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Module for ToogleEdges widget."""
+"""Module for ToggleEdges widget."""
 import os
 from typing import TYPE_CHECKING
 
@@ -30,7 +30,7 @@ if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
-class ToogleEdges(PlotterWidget):
+class ToggleEdges(PlotterWidget):
     """Toggle the edges of the mesh objects.
 
     Parameters
