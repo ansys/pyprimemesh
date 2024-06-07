@@ -183,7 +183,11 @@ To perform Fuse operation,
        params.n_layers = 2
        params.angle = 45
 
-The fuse_option parameter specifies how to treat the surface when performing fuse operation. Here, TRIMONESIDE option deletes the faces to be fused on one side and merges the nodes in the middle location. When local_remesh parameter is True, the fused region is meshed after performing fuse operation. n_layers parameter specifies the number of layers around the region to be fused. When separate is True, the fused region is separated.
+The fuse_option parameter specifies how to treat the surface when performing fuse operation. 
+Here, TRIMONESIDE option deletes the faces to be fused on one side and merges the nodes in the middle location. 
+When local_remesh parameter is True, the fused region is meshed after performing fuse operation. 
+n_layers parameter specifies the number of layers around the region to be fused. 
+When separate is True, the fused region is separated.
 
 3.	Fuse the face zonelets using the given parameters.
 
