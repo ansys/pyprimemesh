@@ -40,7 +40,7 @@ There are three major operations for zonelet connections:
   perform fuse operation between overlapping face zonelets within a single part.
 
 -	The :func:`Connect.merge_boundary_nodes() <ansys.meshing.prime.Connect.merge_boundary_nodes>` function allows you
-to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with
+  to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with
   the given parameters.
 
 .. note::
