@@ -70,32 +70,44 @@ Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` cl
 
 Four CAD import routes are available in PyPrimeMesh:
 
- * ``Program Controlled``: Automatically chooses the best route based on the CAD format. This
-   route uses the ``Native`` route if available, the ``SpaceClaim`` route for SCDOC file formats,
-   and the ``Workbench`` route for all other file formats.  
+ * ``Program controlled``: Chooses the CAD reader route based on the extension of the provided CAD file as follows:
 
- * ``Native``: Imports selected natively supported file formats like FMD ``(*.fmd)``, ACIS ``(*.sat, *.sab)``,
-   Parasolid ``(*.x_t, *.x_b)``, JTOpen ``(*.jt, *.plmxml)``, and STL ``(*.stl)``. 
+   - Native for FMD, SAT, SAB, X_T, X_B, JT, PLMXML, and STL
+   - SpaceClaim for SCDOC and SCDOCX
+   - Discovery for DSCO
+   - Workbench for all other extensions
 
- * ``SpaceClaim``: Uses SCDM to import supported CAD files from the SpaceClaim reader. Only the
-   Windows platform supports importing SpaceClaim files.  
+ * ``Native``: Natively supported file format extensions are FMD, ACIS (SAT and SAB),
+   Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
+
+ * ``SpaceClaim``: Uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
+   Windows platform supports importing files using the SpaceClaim reader.
+
+ * ``Discovery``: Uses Discovery to import supported CAD files from the Discovery reader. Only the
+   Windows platform supports importing files using the Discovery reader.
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
 
-.. note::
-    Program Controlled and SpaceClaim route imports JT files containing only faceted data. Workbench and
-    Native does not support importing JT files containing only faceted data.
 
-To view the CAD supported for the Workbench route on different platforms, see
+To view the CAD files supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
 
 .. note::
-    When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration
-    and in-app defaults are consistent in the deployed environment.
+    * Program controlled and SpaceClaim CAD reader routes import JT files containing only faceted data. Workbench and
+      Native CAD reader routes do not support importing JT files containing only faceted data.
 
-.. note::
-    You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
-    while installing Ansys Workbench. 
+    * When deploying scripts using SpaceClaim, Discovery, or Workbench CAD reader routes, ensure that the CAD configuration
+      and in-app defaults are consistent in the deployed environment.
+
+    * You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
+      while installing Ansys Workbench.
+
+    * To preserve shared topology, the Workbench CAD reader route must be used.
+
+    * Patterned name selections are not supported for the SpaceClaim or Discovery CAD reader routes.
+      To import patterned named selections, the Workbench CAD reader route can be used.
+
+
 
 
 Append CAD files

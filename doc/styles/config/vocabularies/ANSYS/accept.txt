@@ -18,6 +18,7 @@ ignore_orientation
 ignore_self_proximity
 IGA
 [Ii]sogeometric
+JTOpen
 [Ll]ucid
 Material Point Manager
 [Mm]eshedgeodesic
@@ -28,6 +29,7 @@ multithreading
 MultiZone
 Octree
 params
+[Pp]arasolid
 PMDAT
 polyhedra
 PrepPost
