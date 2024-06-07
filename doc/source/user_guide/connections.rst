@@ -15,32 +15,32 @@ in a part, volume, or model using various connect algorithms.
 
 There are three major operations for zonelet connections: 
 
-- The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` method allows you
+- The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` function allows you
   to intersect the face zonelets of the part along the intersecting faces. 
 
 .. figure:: ../images/connect_intersect.png
     :width: 200pt
     :align: center
 
-- The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` method allows you to
+- The :func:`Connect.stitch_face_zonelets() <ansys.meshing.prime.Connect.stitch_face_zonelets>` function allows you to
   stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets.
 
 .. figure:: ../images/connect_stitch.png
     :width: 200pt
     :align: center
 
-- The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` method allows you to join
+- The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` function allows you to join
   a set of face zonelets to another set of face zonelets along the overlapping faces. 
 
 .. figure:: ../images/connect_join.png
     :width: 200pt
     :align: center
 
--	The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` method allows you to 
-  perform fuse between overlapping face zonelets within a single part.
+-	The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` function allows you to 
+  perform fuse operation between overlapping face zonelets within a single part.
 
--	The :func:`Connect.merge_boundary_nodes() <ansys.meshing.prime.Connect.merge_boundary_nodes>` method allows you
-  to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with
+-	The :func:`Connect.merge_boundary_nodes() <ansys.meshing.prime.Connect.merge_boundary_nodes>` function allows you
+to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with
   the given parameters.
 
 .. note::
@@ -158,8 +158,8 @@ The following example shows how to accomplish these tasks:
 
 To perform Fuse operation,
 
-1. Connect face zonelets in the model using fuse operation. You can apply Fuse on overlapping faces
-   within  a single part. You can colocate, merge, or remove fused surfaces as per your requirement.
+1. Connect face zonelets in the model using fuse operation. You can apply Fuse operation on overlapping faces
+   within a single part. You can co-locate, merge, or remove fused surfaces as per your requirement.
 
 .. figure:: ../images/fuse.png
     :width: 200pt
@@ -183,7 +183,7 @@ To perform Fuse operation,
        params.n_layers = 2
        params.angle = 45
 
-fuse_option specifies how to treat the surface when performing fuse operation. Here, TRIMONESIDE option deletes the faces to be fused on one side and merges the nodes in the middle location. When local_remesh is True, meshes the fused region after performing fuse operation. n_layers specify the number of layers around the region to be fused. When separate is True, separates the fused region.
+The fuse_option parameter specifies how to treat the surface when performing fuse operation. Here, TRIMONESIDE option deletes the faces to be fused on one side and merges the nodes in the middle location. When local_remesh parameter is True, the fused region is meshed after performing fuse operation. n_layers parameter specifies the number of layers around the region to be fused. When separate is True, the fused region is separated.
 
 3.	Fuse the face zonelets using the given parameters.
 
@@ -206,13 +206,22 @@ Topology-based connection
 The :class:`Scaffolder <ansys.meshing.prime.Scaffolder>` class allows you to provide connection
 using faceted geometry and topology. This class also handles the gaps and mismatches in the geometry.
 
-Topology-based connection creates shared TopoEdges between neighboring TopoFaces. Hence, you can
-create connected mesh between TopoFaces.
+Topology-based connection creates shared topoedges between neighboring topofaces. Hence, you can
+create connected mesh between topofaces.
 
 .. note::
   Connectivity cannot be shared across multiple parts.
 
-This code merges parts and scaffold TopoFaces:
+.. figure:: ../images/scaffold.png
+    :width: 200pt
+    :align: center
+
+Here, the yellow edges denote multiple connections between the four topofaces. 
+The model has a single topoface containing an interior edge loop and an overlapping topoface on the central portion.
+You may separate the large topoface by the interior edge loop and delete the shadow or merge the topoface to 
+achieve the desired state.
+
+This code merges parts and scaffold topofaces:
 
 .. code-block:: python
 
@@ -234,7 +243,7 @@ This code merges parts and scaffold TopoFaces:
         topo_faces=part.get_topo_faces(), topo_beams=[], params=params
     )
 
-This code prints the results so that you can verify the number of TopoFaces that failed
+This code prints the results so that you can verify the number of topofaces that failed
 in the scaffold operation:
 
 .. code-block:: pycon
