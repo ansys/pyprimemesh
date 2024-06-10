@@ -171,7 +171,7 @@ To perform Fuse operation,
    .. code-block:: python
 
        connect = prime.Connect(model)
-       params =  prime.FuseParams(model = model)
+       params = prime.FuseParams(model=model)
        params.use_absolute_tolerance = True
        params.gap_tolerance = 20
        params.fuse_option = prime.FuseOption.TRIMONESIDE
@@ -194,7 +194,7 @@ When separate is True, the fused region is separated.
    .. code-block:: python
 
       result = connect.fuse_face_zonelets(
-          part.id, source_face_zonelet_ids,target_face_zonelet_ids, params
+          part.id, source_face_zonelet_ids, target_face_zonelet_ids, params
       )
       g = Graphics(model)
       g()
