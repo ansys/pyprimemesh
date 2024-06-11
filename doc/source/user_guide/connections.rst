@@ -16,7 +16,7 @@ in a part, volume, or model using various connect algorithms.
 There are three major operations for zonelet connections: 
 
 - The :func:`Connect.intersect_face_zonelets() <ansys.meshing.prime.Connect.intersect_face_zonelets>` function allows you
-  to intersect the face zonelets of the part along the intersecting faces. 
+  to intersect the face zonelets of the part along the intersecting faces.
 
 .. figure:: ../images/connect_intersect.png
     :width: 200pt
@@ -30,15 +30,14 @@ There are three major operations for zonelet connections:
     :align: center
 
 - The :func:`Connect.join_face_zonelets() <ansys.meshing.prime.Connect.join_face_zonelets>` function allows you to join
-  a set of face zonelets to another set of face zonelets along the overlapping faces. 
+  a set of face zonelets to another set of face zonelets along the overlapping faces.
 
 .. figure:: ../images/connect_join.png
     :width: 200pt
     :align: center
 
--	The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` function allows you to 
+-	The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` function allows you to
   perform fuse operation between overlapping face zonelets within a single part.
-
 
 -	The :func:`Connect.merge_boundary_nodes() <ansys.meshing.prime.Connect.merge_boundary_nodes>` function allows you
   to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with
