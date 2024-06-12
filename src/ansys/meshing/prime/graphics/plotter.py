@@ -226,7 +226,7 @@ class PrimePlotter(Plotter):
     def plot_iter(
         self,
         plotting_list: List[Any],
-        filter: str = None,
+        name_filter: str = None,
         **plotting_options,
     ) -> None:
         """
@@ -238,20 +238,20 @@ class PrimePlotter(Plotter):
         ----------
         plotting_list : List[Any]
             List of objects you want to plot.
-        filter : str, default: None
+        name_filter : str, default: None
             Regular expression with the desired name or names you want to include in the plotter.
         **plotting_options : dict, default: None
             Keyword arguments. For allowable keyword arguments, see the
             :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
         """
-        for object in plotting_list:
-            _ = self.plot(object, filter, **plotting_options)
+        for plottable_object in plotting_list:
+            _ = self.plot(plottable_object, name_filter, **plotting_options)
 
     def plot(
         self,
-        object: Any,
+        plottable_object: Any,
         scope: prime.ScopeDefinition = None,
-        filter: str = None,
+        name_filter: str = None,
         **plotting_options,
     ):
         """Add an object to the plotter.
@@ -260,26 +260,26 @@ class PrimePlotter(Plotter):
 
         Parameters
         ----------
-        object : Any
+        plottable_object : Any
             Object to add to the plotter.
         scope : prime.ScopeDefinition, optional
             Scope you want to plot, by default None.
-        filter : str, optional
+        name_filter : str, optional
             Regular expression with the desired name or names you want to include in the plotter,
             by default None.
         """
-        if isinstance(object, Model):
-            self.add_model(object, scope)
-        elif isinstance(object, List):
-            self.plot_iter(object, filter, **plotting_options)
+        if isinstance(plottable_object, Model):
+            self.add_model(plottable_object, scope)
+        elif isinstance(plottable_object, List):
+            self.plot_iter(plottable_object, name_filter, **plotting_options)
         else:
-            self._backend.pv_interface.plot(object, filter, **plotting_options)
+            self._backend.pv_interface.plot(plottable_object, name_filter, **plotting_options)
 
     def show(
         self,
-        object: Any = None,
+        plottable_object: Any = None,
         screenshot: str = None,
-        filter: bool = None,
+        name_filter: bool = None,
         scope: prime.ScopeDefinition = None,
         **plotting_options,
     ) -> None:
@@ -287,18 +287,23 @@ class PrimePlotter(Plotter):
 
         Parameters
         ----------
-        object : Any, optional
+        plottable_object : Any, optional
             Object to show, by default None.
         screenshot : str, optional
             Path to save a screenshot, by default None.
-        filter : bool, optional
+        name_filter : bool, optional
             Flag to filter the object, by default None.
         plotting_options : dict
             Additional plotting options the selected backend accepts.
         """
-        if object is not None:
-            self.plot(object, filter=filter, scope=scope, **plotting_options)
-        self._backend.show(object=object, screenshot=screenshot, filter=filter, **plotting_options)
+        if plottable_object is not None:
+            self.plot(plottable_object, name_filter=name_filter, scope=scope, **plotting_options)
+        self._backend.show(
+            object=plottable_object,
+            screenshot=screenshot,
+            name_filter=name_filter,
+            **plotting_options,
+        )
 
 
 class Graphics:
