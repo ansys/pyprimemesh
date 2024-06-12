@@ -23,9 +23,9 @@
 """
 .. _ref_mixing_elbow_mesh:
 
-==========================================
-Meshing a mixing elbow for a flow analysis
-==========================================
+=======================================
+Mesh a mixing elbow for a flow analysis
+=======================================
 
 **Summary**: This example demonstrates how to mesh a mixing elbow for a flow analysis.
 

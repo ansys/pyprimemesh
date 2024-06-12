@@ -23,9 +23,9 @@
 """
 .. _ref_pcb:
 
-=============================================
-Meshing a PCB for structural thermal analysis
-=============================================
+==========================================
+Mesh a PCB for structural thermal analysis
+==========================================
 
 **Summary**: This example demonstrates how to mesh a printed circuit board
 with mainly hexahedral elements for structural thermal simulation using the volume sweeper.

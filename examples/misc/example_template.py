@@ -23,8 +23,8 @@
 """
 .. _ref_how_to_add_an_example_reference_key:
 
-Adding a new example
---------------------
+Add a new example
+-----------------
 **Summary**: This example demonstrates how to add new examples and serves as a template
 that you can use in their creation.
 

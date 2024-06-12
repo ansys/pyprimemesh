@@ -23,9 +23,9 @@
 """
 .. _ref_file_io:
 
-===================================================================
-Data conversion when importing and exporting mesh and CAD formats
-===================================================================
+==============================================================
+Convert data when importing and exporting mesh and CAD formats
+==============================================================
 
 **Summary**: This example shows how mesh and geometry formats are converted
 during import and export.
