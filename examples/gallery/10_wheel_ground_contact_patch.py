@@ -49,15 +49,16 @@ The preceding Image shows the following:
 
 Procedure
 ~~~~~~~~~
-#.  Launch an Ansys Prime Server instance and instantiate the meshing utilities
+#. Launch an Ansys Prime Server instance and instantiate the meshing utilities
    from the ``lucid`` class.
 #. Import the wheel ground geometry.
-#.  Convert the topo parts to mesh parts so that the contact patch can be created.
+#. Convert the topo parts to mesh parts so that the contact patch can be created.
 #. Create a contact patch between the wheel and the ground.
 #. Extract the fluid region using wrapping.
 #. Volume mesh with polyhedral and prism cells.
 #. Write a CAS file for use in the Fluent solver.
 #. Exit the PyPrimeMesh session.
+
 
 """
 
