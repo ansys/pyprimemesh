@@ -39,30 +39,34 @@ to improve mesh quality when growing prism layers in the region of the contactin
    :align: center
    :width: 600
 
-Image showing the following:
-* Top left: wheel/ground interface.
-* Top right: addition of contact patch.
-* Lower left: grouping tolerance at 4 with multiple contact patches.
-* Lower right: grouping tolerance at 20 with merged single contact patch.
+The preceding Image shows the following:
+
+* Top left: wheel/ground interface
+* Top right: addition of contact patch
+* Lower left: grouping tolerance at 4 with multiple contact patches
+* Lower right: grouping tolerance at 20 with merged single contact patch
+
 
 Procedure
 ~~~~~~~~~
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities
-  from the ``lucid`` class.
-* Import the wheel ground geometry.
-* Convert the topo parts to mesh parts so that the contact patch can be created.
-* Create a contact patch between the wheel and the ground.
-* Extract the fluid region using wrapping.
-* Volume mesh with polyhedral and prism cells.
-* Write a CAS file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+#.  Launch an Ansys Prime Server instance and instantiate the meshing utilities
+   from the ``lucid`` class.
+#. Import the wheel ground geometry.
+#.  Convert the topo parts to mesh parts so that the contact patch can be created.
+#. Create a contact patch between the wheel and the ground.
+#. Extract the fluid region using wrapping.
+#. Volume mesh with polyhedral and prism cells.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
+
 """
 
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
-# From the PyPrimeMesh client get the model.
+# From the PyPrimeMesh client, get the model.
+
 # Instantiate meshing utilities from the ``lucid`` class.
 
 import os
@@ -85,7 +89,8 @@ mesh_util = prime.lucid.Mesh(model)
 # Labels are defined for the ground topo face on the enclosure and for the wheel
 # as all the topo faces of the wheel part.
 
-# For Windows OS users, SCDOC or DSCO is also available, for example:
+# For Windows OS users, SCDOC or DSCO is also available. For example:
+
 # wheel_ground_file = prime.examples.download_wheel_ground_scdoc()
 
 wheel_ground_file = prime.examples.download_wheel_ground_fmd()
@@ -109,7 +114,8 @@ enclosure_part = model.get_part_by_name("enclosure")
 ###############################################################################
 # Create a contact patch
 # ~~~~~~~~~~~~~~~~~~~~~~
-# To create a contact patch a direction is needed to define the resulting shape of the patch.
+# To create a contact patch, a direction is needed to define the resulting shape of the patch.
+
 # A new part is created containing the patch.
 # A prefix can be specified for the label created for the contact patch face zonelets generated.
 # The offset distance determines the thickness and extent of the patch.  The source face zonelet is
@@ -122,7 +128,8 @@ enclosure_part = model.get_part_by_name("enclosure")
 
 # The face zonelets of the wheel are defined as the source.
 # The planar surface must be specified as the target.
-# In this instance the ground provides the planar target.
+# In this instance, the ground provides the planar target.
+
 source = wheel_part.get_face_zonelets()
 target = enclosure_part.get_face_zonelets_of_label_name_pattern(
     "ground", prime.NamePatternParams(model)
