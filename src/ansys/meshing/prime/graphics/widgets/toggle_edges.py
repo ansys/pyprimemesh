@@ -36,7 +36,7 @@ class ToggleEdges(PlotterWidget):
     Parameters
     ----------
     prime_plotter : PrimePlotter
-        Plotter where to apply this widget.
+        Plotter to apply this widget to.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:

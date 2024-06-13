@@ -75,8 +75,8 @@ mesh_util.volume_mesh(
 # Rendering graphics in Trame
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # When you want to display graphics using Trame, you just need to set the
-# `use_trame` flag to True. When `display()` function executes, it will
-# pop a browser window with the visualizer open.
+# ``use_trame`=True``. When the ``display()`` function executes, it
+# opens the visualizer in a browser window.
 
 display = PrimePlotter(use_trame=True)
 display.plot(model)

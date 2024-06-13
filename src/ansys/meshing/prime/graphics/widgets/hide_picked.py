@@ -32,14 +32,14 @@ if TYPE_CHECKING:
 
 
 class HidePicked(PlotterWidget):
-    """Initialize the hide picked button widget.
+    """Initializes the hide picked button widget.
 
-    This widget allows the user to hide the picked mesh objects.
+    This widget lets you hide the picked mesh objects.
 
     Parameters
     ----------
     prime_plotter : Plotter
-        Plotter where to apply this widget.
+        Plotter to apply this widget to.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:

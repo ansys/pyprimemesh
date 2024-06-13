@@ -79,21 +79,21 @@ class DisplayMeshType(enum.IntEnum):
 
 
 class DisplayMeshInfo:
-    """Contains the information of the mesh we want to display.
+    """Contains the mesh information to display.
 
     Parameters
     ----------
-    id : int
+    id : int, default: 0
         ID of the mesh.
-    part_id : int
+    part_id : int, default: 0
         ID of the part.
-    part_name : str
+    part_name : str, default: None
         Name of the part.
-    zone_id : int
+    zone_id : int, default: 0
         ID of the zone.
-    zone_name : str
+    zone_name : str, default: None
         Name of the zone.
-    display_mesh_type : DisplayMeshType
+    display_mesh_type : DisplayMeshType, default: FACEZONELET
         Type of mesh to display.
     """
 
@@ -106,7 +106,7 @@ class DisplayMeshInfo:
         zone_name=None,
         display_mesh_type=DisplayMeshType.FACEZONELET,
     ) -> None:
-        """Initialize display mesh info."""
+        """Initialize display mesh information."""
         self.id = id
         self.part_id = part_id
         self.zone_id = zone_id
@@ -178,7 +178,7 @@ def compute_face_list_from_structured_nodes(dim):
 
 
 class Mesh(MeshInfo):
-    """Process the mesh for visualization in the GUI.
+    """Processes the mesh for visualization in the GUI.
 
     Parameters
     ----------
@@ -196,7 +196,7 @@ class Mesh(MeshInfo):
 
     @property
     def model(self):
-        """Return the model."""
+        """Model."""
         return self._model
 
     def get_face_color(self, part: Part, model_type: ColorByType = ColorByType.ZONE):

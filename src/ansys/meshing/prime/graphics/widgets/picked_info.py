@@ -33,14 +33,14 @@ if TYPE_CHECKING:
 
 
 class PickedInfo(PlotterWidget):
-    """Initialize the picked info button widget.
+    """Initializes the picked information button widget.
 
-    This widget allows the user to get information about the picked mesh objects.
+    This widget lets you get information about the picked mesh objects.
 
     Parameters
     ----------
     prime_plotter : PrimePlotter
-        Plotter where to apply this widget.
+        Plotter to apply this widget to.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
@@ -60,12 +60,12 @@ class PickedInfo(PlotterWidget):
         self._info_actor_map = self.prime_plotter._info_actor_map
 
     def info_message(self, mesh_info: DisplayMeshInfo) -> str:
-        """Return the information message for the selected mesh object.
+        """Get the information message for the selected mesh object.
 
         Parameters
         ----------
         mesh_info : DisplayMeshInfo
-            The mesh info object to print.
+            Mesh information object to print.
 
         Returns
         -------
@@ -95,7 +95,7 @@ class PickedInfo(PlotterWidget):
         return msg
 
     def callback(self, state: bool) -> None:
-        """Define callback function for the button widget.
+        """Define the callback function for the button widget.
 
         Parameters
         ----------

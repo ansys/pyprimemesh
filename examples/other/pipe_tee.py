@@ -83,8 +83,8 @@ cad_file = prime.examples.download_pipe_tee_fmd()
 # Import geometry.
 mesh_util.read(cad_file)
 
-# Let us see what we read from the file. The file is an unmeshed
-# part as you would get after you imported from CAD.
+# Read from the file, which is an unmeshed part
+# like you would get after you imported from a CAD file.
 display = PrimePlotter()
 display.plot(model)
 display.show()
@@ -162,14 +162,14 @@ mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
 )
 
-# Display mesh without unwanted EdgeZonelets. You can clearly see the
+# Display mesh without unwanted edge zonelets. You can clearly see the
 # prism layers that were specified by the Prism control.
 display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 display.show()
 
 ###############################################################################
-# Write a cas file for use in the Fluent solver
+# Write a CAS file for use in the Fluent solver
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Write CFD model.

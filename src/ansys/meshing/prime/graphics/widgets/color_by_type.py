@@ -60,10 +60,10 @@ class ColorByType(enum.IntEnum):
 
 
 class ColorByTypeWidget(PlotterWidget):
-    """Initialize the color by type button widget.
+    """Initializes the color by the type button widget.
 
-    This widget allows the user to change the color of the mesh
-    based on the zone, zonelet or part.
+    This widget lets you change the color of the mesh
+    based on the zone, zonelet, or part.
 
     Parameters
     ----------
@@ -97,8 +97,8 @@ class ColorByTypeWidget(PlotterWidget):
 
         Parameters
         ----------
-        color_type : ColorByType, optional
-            Color type to use, by default ColorByType.ZONE.
+        color_type : ColorByType, default: ColorByType.ZONE
+            Color type to use.
         """
         vr = self._button.GetRepresentation()
         icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
@@ -125,7 +125,7 @@ class ColorByTypeWidget(PlotterWidget):
         color_type : ColorByType
             Color type to use.
         mesh_info : DisplayMeshInfo
-            Mesh info that generates an appropriate color.
+            Mesh information that generates an appropriate color.
 
         Returns
         -------

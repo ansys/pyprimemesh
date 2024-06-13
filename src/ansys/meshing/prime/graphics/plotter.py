@@ -69,10 +69,10 @@ class PrimePlotter(Plotter):
 
     Parameters
     ----------
-    use_trame : Optional[bool], optional.
-        Whether to use trame or not, by default None.
-    allow_picking : Optional[bool], optional.
-        Whether to allow picking or not, by default True.
+    use_trame : Optional[bool], default: None
+        Whether to use the Trame visualizer.
+    allow_picking : Optional[bool], default: True.
+        Whether to allow picking.
     """
 
     def __init__(
@@ -91,12 +91,12 @@ class PrimePlotter(Plotter):
 
     @property
     def info_actor_map(self) -> Dict:
-        """Get the info actor map for picked info widget.
+        """Get the information actor map for the selected information widget.
 
         Returns
         -------
         Dict
-            Info actor map.
+            Information actor map.
         """
         return self._info_actor_map
 
@@ -107,7 +107,7 @@ class PrimePlotter(Plotter):
         Parameters
         ----------
         value : Dict
-            Info actor map.
+            Information actor map.
         """
         self._info_actor_map = value
 
@@ -117,7 +117,7 @@ class PrimePlotter(Plotter):
         Parameters
         ----------
         mesh_info : DisplayMeshInfo
-            Mesh info that generates an appropriate color.
+            Mesh information that generates an appropriate color.
 
         Returns
         -------
@@ -140,8 +140,8 @@ class PrimePlotter(Plotter):
         ----------
         model : Model
             Prime model to add.
-        scope : prime.ScopeDefinition, optional
-            Scope to show if any, by default None
+        scope : prime.ScopeDefinition, default: None
+            Scope to show, if any.
         """
         model_pd = model.as_polydata()
         if scope is None:
@@ -237,9 +237,9 @@ class PrimePlotter(Plotter):
         Parameters
         ----------
         plotting_list : List[Any]
-            List of objects you want to plot.
+            List of objects to plot.
         name_filter : str, default: None
-            Regular expression with the desired name or names you want to include in the plotter.
+            Regular expression with the desired name or names to include in the plotter.
         **plotting_options : dict, default: None
             Keyword arguments. For allowable keyword arguments, see the
             :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
@@ -262,11 +262,10 @@ class PrimePlotter(Plotter):
         ----------
         plottable_object : Any
             Object to add to the plotter.
-        scope : prime.ScopeDefinition, optional
-            Scope you want to plot, by default None.
-        name_filter : str, optional
-            Regular expression with the desired name or names you want to include in the plotter,
-            by default None.
+        scope : prime.ScopeDefinition, default: None
+            Scope to plot.
+        name_filter : str, default: None
+            Regular expression with the desired name or names to include in the plotter.
         """
         if isinstance(plottable_object, Model):
             self.add_model(plottable_object, scope)
@@ -287,14 +286,14 @@ class PrimePlotter(Plotter):
 
         Parameters
         ----------
-        plottable_object : Any, optional
-            Object to show, by default None.
-        screenshot : str, optional
-            Path to save a screenshot, by default None.
-        name_filter : bool, optional
-            Flag to filter the object, by default None.
-        plotting_options : dict
-            Additional plotting options the selected backend accepts.
+        plottable_object : Any, default: None
+            Object to show.
+        screenshot : str, default: None
+            Path to save a screenshot to.
+        name_filter : bool, default: None
+            Whether to filter the object.
+        plotting_options : dict, default: None
+            Additional plotting options that the selected backend accepts.
         """
         if plottable_object is not None:
             self.plot(plottable_object, name_filter=name_filter, scope=scope, **plotting_options)
@@ -316,8 +315,8 @@ class Graphics:
     ----------
     model : prime.Model
         Model to show.
-    use_trame : bool, optional
-        Whether to use the Trame visualizer. The default is ``False``.
+    use_trame : bool, default: False
+        Whether to use the Trame visualizer.
     """
 
     def __init__(self, model: prime.Model, use_trame: bool = False) -> None:
@@ -325,7 +324,7 @@ class Graphics:
         self.model = model
         self.use_trame = use_trame
         warnings.warn(
-            "DeprecationWarning: Graphics module is deprecated. Use `PrimePlotter` instead."
+            "DeprecationWarning: The `Graphics` class is deprecated. Use the `PrimePlotter` class instead."
         )
 
     def __call__(
@@ -339,14 +338,14 @@ class Graphics:
 
         Parameters
         ----------
-        parts : Any, optional
-            Parts to show. The default is ``None``.
-        update : bool, optional
-            Whether to update the display. The default is ``True``.
-        spline : bool, optional
-            Whether to use splines. The default is ``False``.
-        scope : prime.ScopeDefinition, optional
-            Scope of the parts. The default is ``None``.
+        parts : Any, default: None
+            Parts to show. 
+        update : bool, default: True
+            Whether to update the display.
+        spline : bool, default: False
+            Whether to use splines.
+        scope : prime.ScopeDefinition, default: None
+            Scope of the parts.
         """
         plotter = PrimePlotter(use_trame=self.use_trame)
         plotter.add_model(self.model, scope=scope)
