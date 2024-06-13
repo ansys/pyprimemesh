@@ -36,7 +36,7 @@ There are three major operations for zonelet connections:
     :width: 200pt
     :align: center
 
--	The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` function allows you to
+- The :func:`Connect.fuse_face_zonelets() <ansys.meshing.prime.Connect.fuse_face_zonelets>` function allows you to
   perform fuse operation between overlapping face zonelets within a single part.
 
 - The :func:`Connect.merge_boundary_nodes() <ansys.meshing.prime.Connect.merge_boundary_nodes>` function allows you
