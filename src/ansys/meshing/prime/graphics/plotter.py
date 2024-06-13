@@ -102,7 +102,7 @@ class PrimePlotter(Plotter):
 
     @info_actor_map.setter
     def info_actor_map(self, value: Dict) -> None:
-        """Set the info actor map for picked info widget.
+        """Set the information actor map for the selected information widget.
 
         Parameters
         ----------
