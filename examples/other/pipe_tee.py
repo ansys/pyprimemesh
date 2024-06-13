@@ -163,7 +163,7 @@ mesh_util.volume_mesh(
 )
 
 # Display mesh without unwanted edge zonelets. You can clearly see the
-# prism layers that were specified by the Prism control.
+# prism layers that were specified by the ``Prism`` control.
 display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
 display.show()
