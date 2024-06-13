@@ -165,7 +165,7 @@ To perform Fuse operation,
     :width: 200pt
     :align: center
 
-2. Enable the fuse parameters as per your requirement. When absolute_tolerance is True, 
+2. Enable the fuse parameters as per your requirement. When use_absolute_tolerance is True, 
    provides the gap tolerance or side tolerance value as absolute value.
 
    .. code-block:: python
