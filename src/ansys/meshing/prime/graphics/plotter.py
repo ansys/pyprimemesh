@@ -278,7 +278,7 @@ class PrimePlotter(Plotter):
         self,
         plottable_object: Any = None,
         screenshot: str = None,
-        name_filter: bool = None,
+        name_filter: str = None,
         scope: prime.ScopeDefinition = None,
         **plotting_options,
     ) -> None:
@@ -290,8 +290,8 @@ class PrimePlotter(Plotter):
             Object to show.
         screenshot : str, default: None
             Path to save a screenshot to.
-        name_filter : bool, default: None
-            Whether to filter the object.
+        name_filter : str, default: None
+            Regular expression with the desired name or names to include in the plotter.
         plotting_options : dict, default: None
             Additional plotting options that the selected backend accepts.
         """
@@ -324,7 +324,8 @@ class Graphics:
         self.model = model
         self.use_trame = use_trame
         warnings.warn(
-            "DeprecationWarning: The `Graphics` class is deprecated. Use the `PrimePlotter` class instead."
+            "DeprecationWarning: The `Graphics` class is deprecated. "
+            + "Use the `PrimePlotter` class instead."
         )
 
     def __call__(
@@ -339,7 +340,7 @@ class Graphics:
         Parameters
         ----------
         parts : Any, default: None
-            Parts to show. 
+            Parts to show.
         update : bool, default: True
             Whether to update the display.
         spline : bool, default: False
