@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 
 
 class ToggleEdges(PlotterWidget):
-    """Toggle the edges of the mesh objects.
+    """Toggles the edges of the mesh objects.
 
     Parameters
     ----------
