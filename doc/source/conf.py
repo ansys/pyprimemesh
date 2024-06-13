@@ -63,7 +63,7 @@ extensions = [
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "sphinx_gallery.gen_gallery",
+    # "sphinx_gallery.gen_gallery",
     "jupyter_sphinx",
     "notfound.extension",
     "sphinx.ext.coverage",
@@ -94,7 +94,7 @@ intersphinx_mapping = {
 numpydoc_show_class_members = False
 numpydoc_xref_param_type = True
 numpydoc_use_plots = True
-numpydoc_validation_exclude = {"__init__"}
+# numpydoc_validation_exclude = {"ansys.meshing.prime.__init__.py"}
 
 # Consider enabling numpydoc validation. See:
 # https://numpydoc.readthedocs.io/en/latest/validation.html#
