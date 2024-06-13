@@ -59,7 +59,7 @@ class ToggleEdges(PlotterWidget):
         Parameters
         ----------
         state : bool
-            State of the button widget.
+            Whether the button widget is activated.
         """
         for key, actor in self.prime_plotter._backend._pl.scene.actors.items():
             actor.prop.show_edges = state
