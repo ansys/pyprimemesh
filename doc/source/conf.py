@@ -63,7 +63,7 @@ extensions = [
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "sphinx_gallery.gen_gallery",
+    # "sphinx_gallery.gen_gallery",
     "jupyter_sphinx",
     "notfound.extension",
     "sphinx.ext.coverage",
@@ -72,6 +72,12 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
 ]
+
+# BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
+# if not BUILD_EXAMPLES:
+#     exclude_patterns = (["examples/index.rst", "examples/**", "examples/**/**"])
+# else:
+#     extensions.append("sphinx_gallery.gen_gallery")
 
 # Intersphinx mapping
 intersphinx_mapping = {
@@ -88,6 +94,7 @@ intersphinx_mapping = {
 numpydoc_show_class_members = False
 numpydoc_xref_param_type = True
 numpydoc_use_plots = True
+# numpydoc_validation_exclude = {"ansys.meshing.prime.__init__.py"}
 
 # Consider enabling numpydoc validation. See:
 # https://numpydoc.readthedocs.io/en/latest/validation.html#
@@ -98,7 +105,7 @@ numpydoc_validation_checks = {
     "GL09",  # Deprecation warning should precede extended summary
     "GL10",  # reST directives {directives} must be followed by two colons
     "SS01",  # No summary found
-    "SS02",  # Summary does not start with a capital letter
+    # "SS02",  # Summary does not start with a capital letter
     # "SS03", # Summary does not end with a period
     "SS04",  # Summary contains heading whitespaces
     # "SS05", # Summary must start with infinitive verb, not third person
@@ -141,7 +148,7 @@ if not os.path.exists(pyvista.FIGURE_PATH):
 
 # Sphinx Gallery Options
 sphinx_gallery_conf = {
-    # convert rst to md for ipynb
+    # convert rst to md for ipyn
     # "pypandoc": True,
     # path to your examples scripts
     "examples_dirs": ["../../examples"],
