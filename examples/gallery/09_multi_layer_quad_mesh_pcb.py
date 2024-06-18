@@ -92,7 +92,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 ###############################################################################
 # Launch Prime server and instantiate the ``lucid`` class
@@ -139,8 +139,9 @@ mesh_util.read(file_name=cad_file)
 # Display the imported CAD in a PyVista window
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if display_intermediate_steps:
-    display = Graphics(model)
-    display()
+    display = PrimePlotter()
+    display.plot(model)
+    display.show()
 
 ###############################################################################
 # Define edge sizing constraints
@@ -244,7 +245,9 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if display_intermediate_steps:
-    display()
+    display = PrimePlotter()
+    display.plot(model)
+    display.show()
 
 ###############################################################################
 # Stack the base face using the volume sweeper
@@ -267,8 +270,9 @@ stackbase_results = sweeper.stack_base_face(
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if display_intermediate_steps:
-    display()
-
+    display = PrimePlotter()
+    display.plot(model)
+    display.show()
 ###############################################################################
 # Set up the zone naming before the mesh output
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

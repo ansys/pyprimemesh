@@ -61,7 +61,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -87,8 +87,9 @@ mesh_util = prime.lucid.Mesh(model=model)
 
 mesh_util.read(file_name=prime.examples.download_pcb_pmdat())
 
-display = Graphics(model)
-display()
+display = PrimePlotter()
+display.plot(model)
+display.show()
 
 sizing_params = prime.GlobalSizingParams(model=model, min=0.5, max=1.0)
 model.set_global_sizing_params(params=sizing_params)
@@ -129,7 +130,10 @@ part.add_labels_on_topo_entities(["base_faces"], base_faces)
 
 scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 
-display(scope=scope)
+display = PrimePlotter()
+display.plot(model, scope=scope)
+display.show()
+
 
 ###############################################################################
 # Surface mesh base face
@@ -144,7 +148,9 @@ base_scope = prime.lucid.SurfaceScope(
 
 mesh_util.surface_mesh(min_size=0.5, scope=base_scope, generate_quads=True)
 
-display(scope=scope)
+display = PrimePlotter()
+display.plot(model, scope=scope)
+display.show()
 
 ###############################################################################
 # Stack base face
@@ -159,7 +165,9 @@ stackbase_results = sweeper.stack_base_face(
     params=stacker_params,
 )
 
-display()
+display = PrimePlotter()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Write mesh

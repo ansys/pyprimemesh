@@ -46,7 +46,7 @@ as an example.
 # Instantiate meshing utilities from Lucid class.
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 # start Ansys Prime Server and get client model
 prime_client = prime.launch_prime()
@@ -75,11 +75,12 @@ mesh_util.volume_mesh(
 # Rendering graphics in Trame
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # When you want to display graphics using Trame, you just need to set the
-# `use_trame` flag to True. When `display()` function executes, it will
-# pop a browser window with the visualizer open.
+# ``use_trame`=True``. When the ``display()`` function executes, it
+# opens the visualizer in a browser window.
 
-display = Graphics(model, use_trame=True)
-display()
+display = PrimePlotter(use_trame=True)
+display.plot(model)
+display.show()
 
 
 ###############################################################################
