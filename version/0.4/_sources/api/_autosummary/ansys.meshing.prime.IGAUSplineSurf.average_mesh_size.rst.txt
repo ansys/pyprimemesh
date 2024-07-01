@@ -1,0 +1,6 @@
+﻿average\_mesh\_size
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUSplineSurf.average_mesh_size

@@ -1,0 +1,6 @@
+﻿mesh\_edge\_ids
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: EdgeConnectivityResults.mesh_edge_ids

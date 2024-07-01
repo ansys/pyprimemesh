@@ -1,0 +1,6 @@
+thin\_stripes\_tolerance
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DefeatureTopologyParams.thin_stripes_tolerance
