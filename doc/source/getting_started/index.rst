@@ -62,8 +62,17 @@ Dependencies
 ------------
 
 You must have Ansys 2023 R1 or later installed to have access to Ansys Prime
-Server. Optionally, CAD readers can be configured. Ansys Prime Server requires
-an Ansys Mechanical PrepPost or Fluids PrepPost (CFD) license to run.
+Server. Optionally, CAD readers can be configured. Ansys Prime Server requires 
+one of the following licenses to run. The first available license will be 
+checked out from the list in the order below:
+
+1.  CFD PrepPost
+2.  CFD PrepPost Pro
+3.  Mechanical Enterprise PrepPost
+4.  Mechanical Enterprise
+5.  Mechanical Pro
+6.  Mechanical Premium
+7.  Ansys LS-DYNA
 
 Launch PyPrimeMesh
 ------------------
