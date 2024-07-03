@@ -64,7 +64,8 @@ Dependencies
 You must have Ansys 2023 R1 or later installed to have access to Ansys Prime
 Server. Optionally, CAD readers can be configured. 
 
-Ansys Prime Server requires one of the following licenses to run. The system checks out the first available license from the list in the following order:
+Ansys Prime Server requires one of the following licenses to run. The system
+checks out the first available license from the list in the following order:
 
 1.  CFD PrepPost
 2.  CFD PrepPost Pro
