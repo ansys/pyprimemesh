@@ -27,6 +27,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  update-changelog:
+    name: "Update CHANGELOG for new tag"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: ansys/actions/doc-deploy-changelog@{{ version }}
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+
   branch-name:
     if: github.event_name == 'pull_request'
     name: Check the name of the branch
@@ -164,7 +176,7 @@ jobs:
   release:
     name: Release project
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    needs: [package]
+    needs: [package, update-changelog]
     runs-on: ubuntu-latest
     steps:
       - name: Release to the public PyPI repository
