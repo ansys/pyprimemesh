@@ -39,12 +39,14 @@ to improve mesh quality when growing prism layers in the region of the contactin
    :align: center
    :width: 600
 
-The preceding Image shows the following:
+The preceding image shows the following:
 
-* Top left: wheel/ground interface
-* Top right: addition of contact patch
-* Lower left: grouping tolerance at 4 with multiple contact patches
-* Lower right: grouping tolerance at 20 with merged single contact patch
+
+* Top left: Wheel/ground interface
+* Top right: Addition of contact patch
+* Lower left: Grouping tolerance at 4 with multiple contact patches
+* Lower right: Grouping tolerance at 20 with merged single contact patch
+
 
 
 Procedure
@@ -104,8 +106,9 @@ print(model)
 ###############################################################################
 # Convert topo parts to mesh parts
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Faceted geometry of topology converted to mesh for all parts as contact patch
+# Convert the faceted geometry of the topology to mesh for all parts as the contact patch
 # requires face zonelets from mesh parts as input.
+
 
 wheel_part = model.get_part_by_name("wheel_body")
 enclosure_part = model.get_part_by_name("enclosure")
