@@ -100,9 +100,7 @@ wheel_ground_file = prime.examples.download_wheel_ground_fmd()
 
 mesh_util.read(wheel_ground_file)
 display = PrimePlotter()
-display.plot(
-    model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel")
-)
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
 display.show()
 print(model)
 
@@ -155,9 +153,7 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
-display.plot(
-    model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
-)
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 display.show()
 
 ###############################################################################
@@ -182,9 +178,7 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
-display.plot(
-    model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
-)
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 display.show()
 print(model)
 
@@ -202,9 +196,7 @@ mesh_util.volume_mesh(
     scope=prime.lucid.VolumeScope(part_expression=wrap_part.name),
 )
 
-display.plot(
-    model, scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top")
-)
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"))
 display.show()
 
 mesh_util.create_zones_from_labels()
