@@ -38,6 +38,7 @@ from ansys.meshing.prime.autogen.modelstructs import (
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.topodata import TopoData
 from ansys.meshing.prime.core.controldata import ControlData
+from ansys.meshing.prime.core.mesh import Mesh
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
@@ -75,6 +76,7 @@ class Model(_Model):
         self._topo_data = None
         self._control_data = None
         self._material_point_data = None
+        self._model_pv_mesh = None
         self._freeze()
 
     def _sync_up_model(self):
@@ -416,3 +418,39 @@ class Model(_Model):
 
         """
         return PrimeLogger()
+
+    def as_polydata(self):
+        """Get the model as a polydata.
+
+        Returns
+        -------
+        vtk.vtkPolyData
+            Polydata of the model.
+
+        Examples
+        --------
+            >>> polydata = model.as_polydata()
+        """
+        self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.as_polydata()
+
+    def get_scoped_polydata(self, scope):
+        """Get the scoped polydata of the model.
+
+        Parameters
+        ----------
+        scope : Scope
+            Scope of the model.
+
+        Returns
+        -------
+        vtk.vtkPolyData
+            Scoped polydata of the model.
+
+        Examples
+        --------
+            >>> scoped_polydata = model.get_scoped_polydata(scope)
+        """
+        if self._model_pv_mesh is None:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.get_scoped_polydata(scope)

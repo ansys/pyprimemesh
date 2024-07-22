@@ -66,11 +66,10 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
-display = Graphics(model=model)
 
 mesh_util = prime.lucid.Mesh(model)
 
@@ -89,8 +88,9 @@ toy_car = prime.examples.download_toy_car_fmd()
 mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
-display(scope=scope)
-
+pl = PrimePlotter()
+pl.plot(model, scope)
+pl.show()
 ###############################################################################
 # Close holes
 # ~~~~~~~~~~~
@@ -105,7 +105,10 @@ coarse_wrap = {"cabin": 1.5, "exhaust": 0.6, "engine": 1.5}
 
 for part_name in coarse_wrap:
     # Each open part before wrap
-    display(scope=prime.ScopeDefinition(model, part_expression=part_name))
+    scope = prime.ScopeDefinition(model, part_expression=part_name)
+    pl = PrimePlotter()
+    pl.plot(model, scope)
+    pl.show()
     closed_part = mesh_util.wrap(
         input_parts=part_name,
         max_size=coarse_wrap[part_name],
@@ -113,7 +116,10 @@ for part_name in coarse_wrap:
         enable_feature_octree_refinement=False,
     )
     # Closed part with no hole
-    display(scope=prime.ScopeDefinition(model, part_expression=closed_part.name))
+    scope = prime.ScopeDefinition(model, part_expression=closed_part.name)
+    pl = PrimePlotter()
+    pl.plot(model, scope)
+    pl.show()
 
 ###############################################################################
 # Extract fluid using a wrapper
@@ -212,8 +218,9 @@ scope = prime.ScopeDefinition(
     label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*",
 )
 
-display(update=True, scope=scope)
-
+pl = PrimePlotter()
+pl.plot(model, scope)
+pl.show()
 print(model)
 
 ###############################################################################
