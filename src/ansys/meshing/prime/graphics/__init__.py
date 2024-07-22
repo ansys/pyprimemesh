@@ -20,4 +20,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ansys.meshing.prime.graphics.graphics import Graphics
+from ansys.meshing.prime.graphics.plotter import Graphics, PrimePlotter

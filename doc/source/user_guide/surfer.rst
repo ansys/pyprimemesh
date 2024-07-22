@@ -29,7 +29,7 @@ Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
 .. code-block:: python
 
     import ansys.meshing.prime as prime
-    from ansys.meshing.prime.graphics import Graphics
+    from ansys.meshing.prime.graphics import PrimePlotter
 
     prime_client = prime.launch_prime()
     model = prime_client.model
@@ -42,7 +42,8 @@ Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:
         params=prime.ImportCadParams(model=model, length_unit=prime.LengthUnit.MM),
     )
     # Show model in graphic
-    display = Graphics(model)
+    display = PrimePlotter
+    display.plot(model)
     display(update=True)
     part = model.get_part_by_name("simple-bracket-holes")
 
@@ -86,7 +87,7 @@ Start the PyPrimeMesh client and import the faceted geometry (STL) file:
 .. code-block:: python
 
     import ansys.meshing.prime as prime
-    from ansys.meshing.prime.graphics import Graphics
+    from ansys.meshing.prime.graphics import PrimePlotter
 
     prime_client = prime.launch_prime()
     model = prime_client.model
@@ -105,8 +106,9 @@ Now that the CAD file is imported, display the model using graphics module:
 .. code-block:: python
 
     # Show model in graphic and get part summary
-    display = Graphics(model)
-    display(update=True)
+    display = PrimePlotter(model)
+    display.plot(model)
+    display.show()
     part = model.get_part_by_name("simple-bracket-holes")
     part_summary_res = part.get_summary(prime.PartSummaryParams(model=model))
 

@@ -68,9 +68,9 @@ Procedure
 import os
 import tempfile
 
-import ansys.meshing.prime.graphics as graphics
 from ansys.meshing import prime
 from ansys.meshing.prime import lucid
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -89,8 +89,9 @@ mesh_util = lucid.Mesh(model)
 pipe_tee = prime.examples.download_pipe_tee_fmd()
 mesh_util.read(pipe_tee)
 
-display = graphics.Graphics(model)
-display()
+display = PrimePlotter()
+display.plot(model)
+display.show()
 
 print(model)
 
@@ -111,8 +112,9 @@ toDelete = [part.id for part in model.parts if not part.get_volume_zones()]
 if toDelete:
     model.delete_parts(toDelete)
 
-display = graphics.Graphics(model)
-display()
+display = PrimePlotter()
+display.add_model(model)
+display.show()
 
 ###############################################################################
 # Write structural mesh
@@ -151,7 +153,9 @@ wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNA
 
 print(model)
 
-display()
+display = PrimePlotter()
+display.add_model(model)
+display.show()
 
 ###############################################################################
 # Volume mesh fluid
@@ -175,7 +179,9 @@ mesh_util.volume_mesh(
 )
 
 print(model)
-display(update=True, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display = PrimePlotter()
+display.add_scope(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display.show()
 
 ###############################################################################
 # Write fluid mesh
