@@ -64,7 +64,7 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -110,8 +110,9 @@ mesh_util.volume_mesh(
 )
 
 # Display the mesh
-display = Graphics(model=model)
-display()
+pl = PrimePlotter(allow_picking=True)
+pl.plot(model)
+pl.show()
 
 ###############################################################################
 # Print mesh statistics

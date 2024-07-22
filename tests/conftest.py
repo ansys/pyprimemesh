@@ -24,10 +24,13 @@
 import os
 import xml.etree.ElementTree as ET
 
+import ansys.tools.visualization_interface as viz_interface
 import pytest
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.examples import download_test_examples
+
+viz_interface.TESTING_MODE = True
 
 
 class RemoteClientManager:

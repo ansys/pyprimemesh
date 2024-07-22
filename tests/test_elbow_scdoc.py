@@ -27,7 +27,7 @@ import tempfile
 import pytest
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import Graphics
+from ansys.meshing.prime.graphics import PrimePlotter
 
 
 @pytest.mark.skipif(platform.system() != 'Windows', reason="Windows specific test.")
@@ -50,8 +50,9 @@ def test_elbow_lucid(get_remote_client, get_examples):
         prism_layers=3,
     )
 
-    display = Graphics(model=model)
-    display()
+    display = PrimePlotter()
+    display.plot(model=model)
+    display.show()
 
     part = model.get_part_by_name("flow_volume")
 
