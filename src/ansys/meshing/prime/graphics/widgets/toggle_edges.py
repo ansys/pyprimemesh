@@ -52,6 +52,7 @@ class ToggleEdges(PlotterWidget):
             color_off="white",
             color_on="white",
         )
+        self._info_actor_map = self.prime_plotter._info_actor_map
 
     def callback(self, state: bool) -> None:
         """Toggle the edges of the mesh objects.
@@ -62,7 +63,8 @@ class ToggleEdges(PlotterWidget):
             Whether the button widget is activated.
         """
         for key, actor in self.prime_plotter._backend._pl.scene.actors.items():
-            actor.prop.show_edges = state
+            if actor in self._info_actor_map and self._info_actor_map[actor].has_mesh:
+                actor.prop.show_edges = not state
 
     def update(self) -> None:
         """Define the configuration and representation of the button widget button."""

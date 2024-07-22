@@ -143,8 +143,8 @@ class PrimePlotter(Plotter):
         scope : prime.ScopeDefinition, default: None
             Scope to show, if any.
         """
-        model_pd = model.as_polydata()
         if scope is None:
+            model_pd = model.as_polydata()
             self.add_model_pd(model_pd)
         else:
             self.add_scope(model, scope)
@@ -165,8 +165,9 @@ class PrimePlotter(Plotter):
                     # These operations could be done downstream,
                     # but we need the actor for the picked info widget
                     colors = self.get_scalar_colors(face_mesh_info)
+                    has_mesh = face_mesh_info.has_mesh
                     actor = self._backend.pv_interface.scene.add_mesh(
-                        face_mesh_part.mesh, show_edges=False, color=colors, pickable=True
+                        face_mesh_part.mesh, show_edges=has_mesh, color=colors, pickable=True
                     )
                     face_mesh_part.actor = actor
                     self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part

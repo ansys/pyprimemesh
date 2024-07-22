@@ -105,6 +105,7 @@ class DisplayMeshInfo:
         zone_id=0,
         zone_name=None,
         display_mesh_type=DisplayMeshType.FACEZONELET,
+        has_mesh=False,
     ) -> None:
         """Initialize display mesh information."""
         self.id = id
@@ -113,6 +114,7 @@ class DisplayMeshInfo:
         self.part_name = part_name
         self.zone_name = zone_name
         self.display_mesh_type = display_mesh_type
+        self.has_mesh = has_mesh
 
 
 def compute_distance(point1, point2) -> float:
@@ -326,10 +328,11 @@ class Mesh(MeshInfo):
         colors = np.tile(fcolor, (surf.n_faces, 1))
         surf["colors"] = colors
         surf.disp_mesh = self
-
+        has_mesh = True
         if face_facet_res.topo_face_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOFACE
             id = face_facet_res.topo_face_ids[index]
+            has_mesh = face_facet_res.mesh_face_ids[index] > 0
         else:
             display_mesh_type = DisplayMeshType.FACEZONELET
             id = face_facet_res.face_zonelet_ids[index]
@@ -342,6 +345,7 @@ class Mesh(MeshInfo):
                 display_mesh_type=display_mesh_type,
                 part_name=part.name,
                 zone_name=face_facet_res.face_zone_names[index],
+                has_mesh=has_mesh,
             )
 
     def get_edge_polydata(
@@ -445,7 +449,7 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_scoped_polydata(self, scope: "prime.ScopeDefinition"):
+    def get_scoped_polydata(self, scope: "prime.ScopeDefinition", recalculate: bool = False):
         """Get the polydata object of the scoped mesh.
 
         Parameters
@@ -458,8 +462,7 @@ class Mesh(MeshInfo):
         pv.PolyData
             PyVista mesh object.
         """
-        if not self._parts_polydata:
-            self.as_polydata()
+        self.as_polydata(recalculate)
         parts = self._model.control_data.get_scope_parts(scope)
 
         # Update the polydata if any part is not in the dictionary
@@ -484,8 +487,15 @@ class Mesh(MeshInfo):
                     if disp_mesh[1].id in disp_ids:
                         temp_pd.append(disp_mesh)
                 temp_key = {}
-                temp_key["faces"] = temp_pd
-                scoped_pd[part_id] = temp_key
+                if len(temp_pd) > 0:
+                    temp_key["faces"] = temp_pd
+                    scoped_pd[part_id] = temp_key
+
+        # in case the scoped_pd is empty, the mesh must be reinitialized
+        # to get the updated changes from the backend
+        if len(scoped_pd) == 0:
+            self.__init__(self._model)
+            return self.get_scoped_polydata(scope, recalculate=True)
         return scoped_pd
 
     def update_pd(self, part_ids) -> Dict[int, Dict[str, list[(pv.PolyData, Part)]]]:
@@ -533,7 +543,9 @@ class Mesh(MeshInfo):
             self._parts_polydata[part_id] = part_polydata
         return self._parts_polydata
 
-    def as_polydata(self) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
+    def as_polydata(
+        self, recalculate: bool = False
+    ) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
         """Return the mesh as a ``pv.PolyData`` object.
 
         Returns
@@ -541,7 +553,7 @@ class Mesh(MeshInfo):
         Dict[int, Dict[str, List[(pv.PolyData, Part)]]
             Dictionary with the polydata objects.
         """
-        if not self._parts_polydata:
+        if not self._parts_polydata and not recalculate:
             part_ids = [part.id for part in self._model.parts]
             self.update_pd(part_ids)
         return self._parts_polydata
