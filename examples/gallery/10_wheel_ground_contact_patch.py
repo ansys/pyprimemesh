@@ -153,6 +153,7 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
+display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 display.show()
 
@@ -178,8 +179,10 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
+display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
 display.show()
+
 print(model)
 
 ###############################################################################
@@ -196,6 +199,7 @@ mesh_util.volume_mesh(
     scope=prime.lucid.VolumeScope(part_expression=wrap_part.name),
 )
 
+display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"))
 display.show()
 
