@@ -5,6 +5,7 @@ from datetime import datetime
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
+from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
@@ -74,7 +75,10 @@ extensions = [
     "sphinx.ext.extlinks",
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
+    "sphinx_design",
+    "pyvista.ext.viewer_directive",
 ]
+nbsphinx_execute = "always"
 
 # Intersphinx mapping
 intersphinx_mapping = {
@@ -162,7 +166,7 @@ sphinx_gallery_conf = {
     "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
     "doc_module": "ansys-meshing-prime",
-    "image_scrapers": ("pyvista", "matplotlib"),
+    "image_scrapers": (DynamicScraper(), "matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
 }
