@@ -272,6 +272,22 @@ class PrimePlotter(Plotter):
             Keyword arguments. For allowable keyword arguments, see the
             :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
             Options only applied to PyVista plottable objects.
+
+
+        Examples
+        --------
+        >>> import pyvista as pv
+        >>> from ansys.meshing.prime.graphics import PrimePlotter
+        >>> import ansys.meshing.prime as prime
+        >>> model = prime.launch_prime().model
+        >>> prime.lucid.Mesh(model).read(prime.examples.download_block_model_fmd())
+        >>> scope = prime.ScopeDefinition(model, label_expression="my_group")
+        >>> plotter = PrimePlotter()
+        >>> # pyvista sphere with plotting options added for opacity and color
+        >>> plotter.plot(plottable_object=pv.Sphere(radius=2.0), opacity=0.5, color="red")
+        >>> plotter.plot(plottable_object=model, scope=scope)
+        >>> plotter.show()
+
         """
         if isinstance(plottable_object, Model):
             self.add_model(plottable_object, scope)
