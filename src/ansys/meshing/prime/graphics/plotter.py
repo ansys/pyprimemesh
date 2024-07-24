@@ -218,7 +218,7 @@ class PrimePlotter(Plotter):
         ----------
         model : Model
             Model to add to the plotter.
-        scope : str
+        scope : prime.ScopeDefinition
             Scope to add to the plotter.
         """
         model_pd = model.get_scoped_polydata(scope)
