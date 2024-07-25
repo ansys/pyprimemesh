@@ -89,9 +89,7 @@ model = prime_client.model
 
 solder_ball = prime.examples.download_solder_ball_fmd()
 
-params = prime.ImportCadParams(
-    model, append=True, part_creation_type=prime.PartCreationType.BODY
-)
+params = prime.ImportCadParams(model, append=True, part_creation_type=prime.PartCreationType.BODY)
 
 prime.FileIO(model).import_cad(file_name=solder_ball, params=params)
 
@@ -102,9 +100,7 @@ for part in model.parts:
 # Display the model without the infill so the cylindrical geometry of the solder
 # is visible.
 display = PrimePlotter()
-display.plot(
-    model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
-)
+display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*"))
 display.show()
 
 ###############################################################################
@@ -118,10 +114,7 @@ display.show()
 # between connected volumes.
 
 part_ids = [part.id for part in model.parts if part.get_topo_faces()]
-merge_result = model.merge_parts(
-    part_ids=part_ids,
-    params=prime.MergePartsParams(model),
-)
+merge_result = model.merge_parts(part_ids=part_ids, params=prime.MergePartsParams(model))
 print(model)
 
 merged_part = model.get_part(merge_result.merged_part_id)
@@ -199,9 +192,7 @@ base_scope = prime.lucid.SurfaceScope(
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
 )
 
-prime.lucid.Mesh(model).surface_mesh(
-    min_size=0.2, scope=base_scope, generate_quads=True
-)
+prime.lucid.Mesh(model).surface_mesh(min_size=0.2, scope=base_scope, generate_quads=True)
 
 display = PrimePlotter()
 display.plot(model)
@@ -235,9 +226,7 @@ display.show()
 
 solder_ball_target = prime.examples.download_solder_ball_target_fmd()
 
-params = prime.ImportCadParams(
-    model, append=True, part_creation_type=prime.PartCreationType.MODEL
-)
+params = prime.ImportCadParams(model, append=True, part_creation_type=prime.PartCreationType.MODEL)
 
 prime.FileIO(model).import_cad(file_name=solder_ball_target, params=params)
 
