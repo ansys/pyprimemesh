@@ -100,7 +100,9 @@ for part in model.parts:
 # Display the model without the infill so the cylindrical geometry of the solder
 # is visible.
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*"))
+display.plot(
+   model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
+)
 display.show()
 
 ###############################################################################
@@ -157,9 +159,7 @@ model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.1, max=0.4)
 
 size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
 size_control.set_scope(
-    prime.ScopeDefinition(
-        model, part_expression=merged_part.name, label_expression="*solder*"
-    )
+    prime.ScopeDefinition(model, part_expression=merged_part.name, label_expression="*solder*")
 )
 size_control.set_soft_sizing_params(prime.SoftSizingParams(model, max=0.1))
 
@@ -206,9 +206,7 @@ stackbase_results = sweeper.stack_base_face(
 )
 
 merged_part.delete_topo_entities(
-    prime.DeleteTopoEntitiesParams(
-        model, delete_geom_zonelets=True, delete_mesh_zonelets=False
-    )
+    prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
 )
 
 merged_part._print_mesh = True
@@ -240,9 +238,7 @@ display.show()
 print(model)
 
 target_part.delete_topo_entities(
-    prime.DeleteTopoEntitiesParams(
-        model, delete_geom_zonelets=False, delete_mesh_zonelets=False
-    )
+    prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=False)
 )
 
 ###############################################################################
@@ -267,7 +263,7 @@ match_pairs = []
 # When the match morph operation is defined by multiple
 # separate local match morph source and targets,
 # individual match pairs must be specified for each
-# contigious set of face zonelets.
+# contiguous set of face zonelets.
 # Separate one to one boundary condition pairs for the
 # connected edge zonelets must also be defined for
 # each face match pair to ensure the edges remain rigid.
@@ -286,9 +282,7 @@ tolerance = 0.2
 for face in cylinder_faces:
     box = prime.SurfaceUtilities(model).get_bounding_box_of_zonelets([face])
     for i in range(len(sphere_faces)):
-        sphere_box = prime.SurfaceUtilities(model).get_bounding_box_of_zonelets(
-            [sphere_faces[i]]
-        )
+        sphere_box = prime.SurfaceUtilities(model).get_bounding_box_of_zonelets([sphere_faces[i]])
         if (
             (abs(sphere_box.xmin - box.xmin) < tolerance)
             and (abs(sphere_box.ymin - box.ymin) < tolerance)
