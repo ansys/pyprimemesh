@@ -128,8 +128,9 @@ enclosure_part = model.get_part_by_name("enclosure")
 # Due to the depth of the treads on the wheel, 20.0 is used as the offset to reach the tire surface.
 # If multiple contact regions are found, they can be merged by grouping them using the grouping
 # tolerance distance.  With a grouping tolerance of 4.0, separate contact regions are created for
-# some of the treads of the tire.  To merge these contact regions into a single patch, the grouping
-# tolerance distance is increased to 20.0, avoiding small gaps between contact regions.
+# some of the treads of the tire, see the image at the top of the example. To merge these contact
+# regions into a single patch, the grouping tolerance distance is increased to 20.0, avoiding small
+# gaps between contact regions.
 
 # The face zonelets of the wheel are defined as the source.
 # The planar surface must be specified as the target.
