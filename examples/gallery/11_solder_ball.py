@@ -101,7 +101,7 @@ for part in model.parts:
 # is visible.
 display = PrimePlotter()
 display.plot(
-   model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
+    model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
 )
 display.show()
 
