@@ -24,10 +24,10 @@
 .. _ref_mixing_elbow_mesh_trame:
 
 ===========================================
-Meshing a Mixing Elbow for showcasing Trame
+Mesh a mixing elbow for showcasing Trame
 ===========================================
 
-**Summary**: This example demonstrates how to use the Trame visualizer in PyPrime.
+**Summary**: This example demonstrates how to use the Trame visualizer in PyPrimeMesh.
 
 Objective
 ~~~~~~~~~
@@ -63,7 +63,6 @@ mixing_elbow = prime.examples.download_elbow_fmd()
 mesh_util.read(mixing_elbow)
 print(model)
 
-
 mesh_util.surface_mesh(min_size=5, max_size=20)
 mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
@@ -81,7 +80,6 @@ mesh_util.volume_mesh(
 display = PrimePlotter(use_trame=True)
 display.plot(model)
 display.show()
-
 
 ###############################################################################
 # Stopping Ansys Prime Server
