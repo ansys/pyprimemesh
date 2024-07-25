@@ -244,6 +244,7 @@ class PrimePlotter(Plotter):
         **plotting_options : dict, default: None
             Keyword arguments. For allowable keyword arguments, see the
             :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+            Options only applied to PyVista plottable objects.
         """
         for plottable_object in plotting_list:
             _ = self.plot(plottable_object, name_filter, **plotting_options)
@@ -267,6 +268,10 @@ class PrimePlotter(Plotter):
             Scope to plot.
         name_filter : str, default: None
             Regular expression with the desired name or names to include in the plotter.
+        **plotting_options : dict, default: None
+            Keyword arguments. For allowable keyword arguments, see the
+            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+            Options only applied to PyVista plottable objects.
 
 
         Examples
@@ -309,8 +314,10 @@ class PrimePlotter(Plotter):
             Path to save a screenshot to.
         name_filter : str, default: None
             Regular expression with the desired name or names to include in the plotter.
-        plotting_options : dict, default: None
-            Additional plotting options that the selected backend accepts.
+        **plotting_options : dict, default: None
+            Keyword arguments. For allowable keyword arguments, see the
+            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+            Options only applied to PyVista plottable objects.
         """
         if plottable_object is not None:
             self.plot(plottable_object, name_filter=name_filter, scope=scope, **plotting_options)
