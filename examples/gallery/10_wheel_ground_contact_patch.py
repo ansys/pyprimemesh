@@ -203,6 +203,9 @@ display.show()
 
 mesh_util.create_zones_from_labels()
 
+wrap_part._print_mesh = True
+print(wrap_part)
+
 ###############################################################################
 # Write model
 # ~~~~~~~~~~~
