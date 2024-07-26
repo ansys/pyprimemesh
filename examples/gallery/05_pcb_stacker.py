@@ -42,12 +42,12 @@ structural thermal analysis using predominantly hexahedral elements.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
-* Read the CAD geometry.
-* Create a base face, projecting edge loops and imprinting to capture the geometry.
-* Surface mesh the base face with quad elements.
-* Stack the base face mesh through the volumes to create a mainly hexahedral volume mesh.
-* Write the mesh for the structural thermal analysis.
+#. Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
+#. Read the CAD geometry.
+#. Create a base face, projecting edge loops and imprinting to capture the geometry.
+#. Surface mesh the base face with quad elements.
+#. Stack the base face mesh through the volumes to create a mainly hexahedral volume mesh.
+#. Write the mesh for the structural thermal analysis.
 """
 
 ###############################################################################
