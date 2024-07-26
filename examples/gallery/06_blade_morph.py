@@ -44,11 +44,11 @@ and match morphs the mesh to the geometry.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
-* Read the mesh and append the new CAD geometry shape.
-* Define the mesh source faces and the target geometry faces to match morph.
-* Match morph the turbine blade mesh to the new CAD geometry shape.
-* Write the mesh for structural analysis.
+#. Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
+#. Read the mesh and append the new CAD geometry shape.
+#. Define the mesh source faces and the target geometry faces to match morph.
+#. Match morph the turbine blade mesh to the new CAD geometry shape.
+#. Write the mesh for structural analysis.
 
 """
 
