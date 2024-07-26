@@ -45,15 +45,15 @@ and export of mesh and geometry.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities
+#. Launch an Ansys Prime Server instance and instantiate the meshing utilities
   from the ``lucid`` class.
-* Import CAD geometry and review the imported entities.
-* Generate surface mesh with a constant mesh size of 2mm.
-* Generate volume mesh using tetrahedral elements and default settings .
-* Review the entities to be exported to solvers.
-* Export the mesh file as pmdat, cdb and cas format.
-* Import the created solver files to review the entities as they are coming from the solvers.
-* Exit the PyPrimeMesh session.
+#. Import CAD geometry and review the imported entities.
+#. Generate surface mesh with a constant mesh size of 2mm.
+#. Generate volume mesh using tetrahedral elements and default settings .
+#. Review the entities to be exported to solvers.
+#. Export the mesh file as pmdat, cdb and cas format.
+#. Import the created solver files to review the entities as they are coming from the solvers.
+#. Exit the PyPrimeMesh session.
 """
 
 ###############################################################################
