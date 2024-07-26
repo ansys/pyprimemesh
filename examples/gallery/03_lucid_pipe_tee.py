@@ -47,14 +47,13 @@ prismatic boundary layers.
 
 Procedure
 ~~~~~~~~~~
-
--   Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
--   Read the CAD geometry.
--   Mesh for the structural thermal analysis.
--   Write the mesh for the structural thermal analysis.
--   Extract the fluid by wrapping.
--   Mesh with polyhedral and prisms.
--   Write the mesh for the fluid simulation.
+#. Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
+#. Read the CAD geometry.
+#. Mesh for the structural thermal analysis.
+#. Write the mesh for the structural thermal analysis.
+#. Extract the fluid by wrapping.
+#. Mesh with polyhedral and prisms.
+#. Write the mesh for the fluid simulation.
 
 """
 
