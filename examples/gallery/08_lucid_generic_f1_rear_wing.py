@@ -45,19 +45,19 @@ meshing utilities provided in the ``lucid`` class.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities
+#. Launch an Ansys Prime Server instance and instantiate the meshing utilities
   from the ``lucid`` class.
-* Import and append the STL geometry files for each part of the F1 rear wing.
-* Merge all imported components into a single part.
-* Use the connect operation to join the components together.
-* Define local size controls on aero surfaces.
-* Generate a surface mesh with curvature sizing.
-* Compute volume zones and define the fluid zone type.
-* Define the boundary layer.
-* Generate a volume mesh using poly-hexcore elements and apply boundary layer refinement.
-* Print statistics on the generated mesh.
-* Write a CAS file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+#. Import and append the STL geometry files for each part of the F1 rear wing.
+#. Merge all imported components into a single part.
+#. Use the connect operation to join the components together.
+#. Define local size controls on aero surfaces.
+#. Generate a surface mesh with curvature sizing.
+#. Compute volume zones and define the fluid zone type.
+#. Define the boundary layer.
+#. Generate a volume mesh using poly-hexcore elements and apply boundary layer refinement.
+#. Print statistics on the generated mesh.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
 """
 
 ###############################################################################
