@@ -45,8 +45,7 @@ and export of mesh and geometry.
 
 Procedure
 ~~~~~~~~~~
-#. Launch an Ansys Prime Server instance and instantiate the meshing utilities
-    from the ``lucid`` class.
+#. Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
 #. Import CAD geometry and review the imported entities.
 #. Generate surface mesh with a constant mesh size of 2mm.
 #. Generate volume mesh using tetrahedral elements and default settings .
