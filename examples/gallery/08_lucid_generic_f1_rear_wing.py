@@ -45,8 +45,7 @@ meshing utilities provided in the ``lucid`` class.
 
 Procedure
 ~~~~~~~~~~
-#. Launch an Ansys Prime Server instance and instantiate the meshing utilities
-    from the ``lucid`` class.
+#. Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid`` class.
 #. Import and append the STL geometry files for each part of the F1 rear wing.
 #. Merge all imported components into a single part.
 #. Use the connect operation to join the components together.
