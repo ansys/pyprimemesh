@@ -42,7 +42,7 @@ It uses several meshing utilities available in the ``lucid`` class for convenien
 Procedure
 ~~~~~~~~~
 #. Launch an Ansys Prime Server instance and instantiate the meshing utilities
-  from the ``lucid`` class.
+    from the ``lucid`` class.
 #. Import the geometry.
 #. Coarse wrap parts with holes to clean up.
 #. Extract the fluid region using a wrapper.
