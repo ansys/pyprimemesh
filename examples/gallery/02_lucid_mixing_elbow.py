@@ -43,13 +43,14 @@ convenience and ease.
 
 Procedure
 ~~~~~~~~~
-* Launch Ansys Prime Server and instantiate meshing utilities from the ``lucid`` class.
-* Import the geometry and create face zones from labels imported from the geometry.
-* Surface mesh geometry with curvature sizing.
-* Volume mesh with polyhedral elements and boundary layer refinement.
-* Print statistics on the generated mesh.
-* Write a CAS file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+#. Launch Ansys Prime Server and instantiate meshing utilities from the ``lucid`` class.
+#. Import the geometry and create face zones from labels imported from the geometry.
+#. Surface mesh geometry with curvature sizing.
+#. Volume mesh with polyhedral elements and boundary layer refinement.
+#. Print statistics on the generated mesh.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
+
 """
 
 ###############################################################################

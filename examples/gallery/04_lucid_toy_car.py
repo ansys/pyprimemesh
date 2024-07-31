@@ -41,18 +41,19 @@ It uses several meshing utilities available in the ``lucid`` class for convenien
 
 Procedure
 ~~~~~~~~~
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities
-  from the ``lucid`` class.
-* Import the geometry.
-* Coarse wrap parts with holes to clean up.
-* Extract the fluid region using a wrapper.
-* Check that the wrap surface is closed and that the quality is suitable.
-* Mesh only fluid with tetrahedral elements and boundary layer refinement.
-* Create face zones from labels imported from the geometry.
-* Print statistics on the generated mesh.
-* Improve the mesh quality.
-* Write a CAS file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+#. Launch an Ansys Prime Server instance.
+#. Instantiate the meshing utilities from the ``lucid`` class.
+#. Import the geometry.
+#. Coarse wrap parts with holes to clean up.
+#. Extract the fluid region using a wrapper.
+#. Check that the wrap surface is closed and that the quality is suitable.
+#. Mesh only fluid with tetrahedral elements and boundary layer refinement.
+#. Create face zones from labels imported from the geometry.
+#. Print statistics on the generated mesh.
+#. Improve the mesh quality.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
+
 """
 
 ###############################################################################
