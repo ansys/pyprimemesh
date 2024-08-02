@@ -1,0 +1,7 @@
+[
+    {
+        "name" : "Set Working Directory",
+        "method" : "numen.settings.set_cwd",
+        "parameters" : "set_cwd_params"
+    }
+]

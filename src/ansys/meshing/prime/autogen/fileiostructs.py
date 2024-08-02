@@ -1505,7 +1505,7 @@ class ImportCadParams(CoreObject):
     append: bool, optional
         Append imported CAD into existing model when true.
     ansys_release: str, optional
-        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
+        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
     cad_reader_route: CadReaderRoute, optional
         Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
     part_creation_type: PartCreationType, optional
@@ -1583,7 +1583,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1682,7 +1682,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1761,7 +1761,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def ansys_release(self) -> str:
-        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '24.2', '242', 'v242', '24R2'.
+        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
         """
         return self._ansys_release
 
@@ -2808,6 +2808,18 @@ class ExportMapdlCdbParams(CoreObject):
         File path to export mapdl analysis settings.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    use_compact_format: bool, optional
+        Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    export_fasteners_as_swgen: bool, optional
+        Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    write_thickness_file: bool, optional
+        Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
 
@@ -2829,7 +2841,10 @@ class ExportMapdlCdbParams(CoreObject):
             write_by_zones: bool,
             consider_general_connectors_as_spot_weld: bool,
             simulation_type: CdbSimulationType,
-            analysis_settings_file_name: str):
+            analysis_settings_file_name: str,
+            use_compact_format: bool,
+            export_fasteners_as_swgen: bool,
+            write_thickness_file: bool):
         self._config_settings = config_settings
         self._pre_solution_settings = pre_solution_settings
         self._material_properties = material_properties
@@ -2841,6 +2856,9 @@ class ExportMapdlCdbParams(CoreObject):
         self._consider_general_connectors_as_spot_weld = consider_general_connectors_as_spot_weld
         self._simulation_type = CdbSimulationType(simulation_type)
         self._analysis_settings_file_name = analysis_settings_file_name
+        self._use_compact_format = use_compact_format
+        self._export_fasteners_as_swgen = export_fasteners_as_swgen
+        self._write_thickness_file = write_thickness_file
 
     def __init__(
             self,
@@ -2856,6 +2874,9 @@ class ExportMapdlCdbParams(CoreObject):
             consider_general_connectors_as_spot_weld: bool = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None,
+            use_compact_format: bool = None,
+            export_fasteners_as_swgen: bool = None,
+            write_thickness_file: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbParams`` object.
@@ -2908,6 +2929,18 @@ class ExportMapdlCdbParams(CoreObject):
             File path to export mapdl analysis settings.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        use_compact_format: bool, optional
+            Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        export_fasteners_as_swgen: bool, optional
+            Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        write_thickness_file: bool, optional
+            Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
 
@@ -2927,9 +2960,12 @@ class ExportMapdlCdbParams(CoreObject):
                 json_data["writeByZones"] if "writeByZones" in json_data else None,
                 json_data["considerGeneralConnectorsAsSpotWeld"] if "considerGeneralConnectorsAsSpotWeld" in json_data else None,
                 CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None),
-                json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)
+                json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None,
+                json_data["useCompactFormat"] if "useCompactFormat" in json_data else None,
+                json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None,
+                json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, simulation_type, analysis_settings_file_name])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, simulation_type, analysis_settings_file_name, use_compact_format, export_fasteners_as_swgen, write_thickness_file])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -2942,7 +2978,10 @@ class ExportMapdlCdbParams(CoreObject):
                     write_by_zones,
                     consider_general_connectors_as_spot_weld,
                     simulation_type,
-                    analysis_settings_file_name)
+                    analysis_settings_file_name,
+                    use_compact_format,
+                    export_fasteners_as_swgen,
+                    write_thickness_file)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -2960,7 +2999,10 @@ class ExportMapdlCdbParams(CoreObject):
                         write_by_zones if write_by_zones is not None else ( ExportMapdlCdbParams._default_params["write_by_zones"] if "write_by_zones" in ExportMapdlCdbParams._default_params else (json_data["writeByZones"] if "writeByZones" in json_data else None)),
                         consider_general_connectors_as_spot_weld if consider_general_connectors_as_spot_weld is not None else ( ExportMapdlCdbParams._default_params["consider_general_connectors_as_spot_weld"] if "consider_general_connectors_as_spot_weld" in ExportMapdlCdbParams._default_params else (json_data["considerGeneralConnectorsAsSpotWeld"] if "considerGeneralConnectorsAsSpotWeld" in json_data else None)),
                         simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)),
-                        analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)))
+                        analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)),
+                        use_compact_format if use_compact_format is not None else ( ExportMapdlCdbParams._default_params["use_compact_format"] if "use_compact_format" in ExportMapdlCdbParams._default_params else (json_data["useCompactFormat"] if "useCompactFormat" in json_data else None)),
+                        export_fasteners_as_swgen if export_fasteners_as_swgen is not None else ( ExportMapdlCdbParams._default_params["export_fasteners_as_swgen"] if "export_fasteners_as_swgen" in ExportMapdlCdbParams._default_params else (json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None)),
+                        write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2980,7 +3022,10 @@ class ExportMapdlCdbParams(CoreObject):
             write_by_zones: bool = None,
             consider_general_connectors_as_spot_weld: bool = None,
             simulation_type: CdbSimulationType = None,
-            analysis_settings_file_name: str = None):
+            analysis_settings_file_name: str = None,
+            use_compact_format: bool = None,
+            export_fasteners_as_swgen: bool = None,
+            write_thickness_file: bool = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
 
         Parameters
@@ -3007,6 +3052,12 @@ class ExportMapdlCdbParams(CoreObject):
             Simulation type for the file.
         analysis_settings_file_name: str, optional
             File path to export mapdl analysis settings.
+        use_compact_format: bool, optional
+            Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+        export_fasteners_as_swgen: bool, optional
+            Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+        write_thickness_file: bool, optional
+            Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3047,11 +3098,17 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["simulationType"] = self._simulation_type
         if self._analysis_settings_file_name is not None:
             json_data["analysisSettingsFileName"] = self._analysis_settings_file_name
+        if self._use_compact_format is not None:
+            json_data["useCompactFormat"] = self._use_compact_format
+        if self._export_fasteners_as_swgen is not None:
+            json_data["exportFastenersAsSwgen"] = self._export_fasteners_as_swgen
+        if self._write_thickness_file is not None:
+            json_data["writeThicknessFile"] = self._write_thickness_file
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._simulation_type, self._analysis_settings_file_name)
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nuse_compact_format :  %s\nexport_fasteners_as_swgen :  %s\nwrite_thickness_file :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._simulation_type, self._analysis_settings_file_name, self._use_compact_format, self._export_fasteners_as_swgen, self._write_thickness_file)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -3186,6 +3243,42 @@ class ExportMapdlCdbParams(CoreObject):
     @analysis_settings_file_name.setter
     def analysis_settings_file_name(self, value: str):
         self._analysis_settings_file_name = value
+
+    @property
+    def use_compact_format(self) -> bool:
+        """Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._use_compact_format
+
+    @use_compact_format.setter
+    def use_compact_format(self, value: bool):
+        self._use_compact_format = value
+
+    @property
+    def export_fasteners_as_swgen(self) -> bool:
+        """Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._export_fasteners_as_swgen
+
+    @export_fasteners_as_swgen.setter
+    def export_fasteners_as_swgen(self, value: bool):
+        self._export_fasteners_as_swgen = value
+
+    @property
+    def write_thickness_file(self) -> bool:
+        """Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._write_thickness_file
+
+    @write_thickness_file.setter
+    def write_thickness_file(self, value: bool):
+        self._write_thickness_file = value
 
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
@@ -3390,6 +3483,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
         Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    write_thickness_file: bool, optional
+        Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
 
@@ -3405,12 +3502,14 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             database_keywords: str,
             output_format: LSDynaFileFormatType,
             analysis_type: LSDynaAnalysisType,
-            compute_spotweld_thickness: bool):
+            compute_spotweld_thickness: bool,
+            write_thickness_file: bool):
         self._material_properties = material_properties
         self._database_keywords = database_keywords
         self._output_format = LSDynaFileFormatType(output_format)
         self._analysis_type = LSDynaAnalysisType(analysis_type)
         self._compute_spotweld_thickness = compute_spotweld_thickness
+        self._write_thickness_file = write_thickness_file
 
     def __init__(
             self,
@@ -3420,6 +3519,7 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             output_format: LSDynaFileFormatType = None,
             analysis_type: LSDynaAnalysisType = None,
             compute_spotweld_thickness: bool = None,
+            write_thickness_file: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportLSDynaKeywordFileParams`` object.
@@ -3448,6 +3548,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        write_thickness_file: bool, optional
+            Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
 
@@ -3461,16 +3565,18 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                 json_data["databaseKeywords"] if "databaseKeywords" in json_data else None,
                 LSDynaFileFormatType(json_data["outputFormat"] if "outputFormat" in json_data else None),
                 LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None),
-                json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)
+                json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None,
+                json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness])
+            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness, write_thickness_file])
             if all_field_specified:
                 self.__initialize(
                     material_properties,
                     database_keywords,
                     output_format,
                     analysis_type,
-                    compute_spotweld_thickness)
+                    compute_spotweld_thickness,
+                    write_thickness_file)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -3482,7 +3588,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                         database_keywords if database_keywords is not None else ( ExportLSDynaKeywordFileParams._default_params["database_keywords"] if "database_keywords" in ExportLSDynaKeywordFileParams._default_params else (json_data["databaseKeywords"] if "databaseKeywords" in json_data else None)),
                         output_format if output_format is not None else ( ExportLSDynaKeywordFileParams._default_params["output_format"] if "output_format" in ExportLSDynaKeywordFileParams._default_params else LSDynaFileFormatType(json_data["outputFormat"] if "outputFormat" in json_data else None)),
                         analysis_type if analysis_type is not None else ( ExportLSDynaKeywordFileParams._default_params["analysis_type"] if "analysis_type" in ExportLSDynaKeywordFileParams._default_params else LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None)),
-                        compute_spotweld_thickness if compute_spotweld_thickness is not None else ( ExportLSDynaKeywordFileParams._default_params["compute_spotweld_thickness"] if "compute_spotweld_thickness" in ExportLSDynaKeywordFileParams._default_params else (json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)))
+                        compute_spotweld_thickness if compute_spotweld_thickness is not None else ( ExportLSDynaKeywordFileParams._default_params["compute_spotweld_thickness"] if "compute_spotweld_thickness" in ExportLSDynaKeywordFileParams._default_params else (json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)),
+                        write_thickness_file if write_thickness_file is not None else ( ExportLSDynaKeywordFileParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportLSDynaKeywordFileParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3496,7 +3603,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             database_keywords: str = None,
             output_format: LSDynaFileFormatType = None,
             analysis_type: LSDynaAnalysisType = None,
-            compute_spotweld_thickness: bool = None):
+            compute_spotweld_thickness: bool = None,
+            write_thickness_file: bool = None):
         """Set the default values of the ``ExportLSDynaKeywordFileParams`` object.
 
         Parameters
@@ -3511,6 +3619,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             Option to specify LS-DYNA analysis type.
         compute_spotweld_thickness: bool, optional
             Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+        write_thickness_file: bool, optional
+            Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
         """
         args = locals()
         [ExportLSDynaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3539,11 +3649,13 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             json_data["analysisType"] = self._analysis_type
         if self._compute_spotweld_thickness is not None:
             json_data["computeSpotweldThickness"] = self._compute_spotweld_thickness
+        if self._write_thickness_file is not None:
+            json_data["writeThicknessFile"] = self._write_thickness_file
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness)
+        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s\nwrite_thickness_file :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness, self._write_thickness_file)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -3606,6 +3718,18 @@ class ExportLSDynaKeywordFileParams(CoreObject):
     @compute_spotweld_thickness.setter
     def compute_spotweld_thickness(self, value: bool):
         self._compute_spotweld_thickness = value
+
+    @property
+    def write_thickness_file(self) -> bool:
+        """Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._write_thickness_file
+
+    @write_thickness_file.setter
+    def write_thickness_file(self, value: bool):
+        self._write_thickness_file = value
 
 class ExportLSDynaResults(CoreObject):
     """Results associated with the LS-DYNA export.

@@ -34,6 +34,8 @@ class FaceQualityMeasure(enum.IntEnum):
     """
     SKEWNESS = 0
     """The Skewness metric ranges between 0 (worst) and 1 (best). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst)."""
+    SIZECHANGE = 2
+    """Size Change is the maximum ratio of the area of each neighboring face element to the area of face element when the area of the face element is smaller than the neighbor. The minimum value for size change is 1."""
     ASPECTRATIO = 5
     """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
     ELEMENTQUALITY = 50

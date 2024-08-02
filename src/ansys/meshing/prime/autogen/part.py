@@ -1424,6 +1424,35 @@ Return the ids of topofaces.
         self._model._print_logs_after_command("get_labels")
         return result
 
+    def get_labels_on_zonelet(self, zonelet_id : int) -> List[str]:
+        """ Gets labels associated with zonelet.
+
+
+        Parameters
+        ----------
+        zonelet_id : int
+            Id of zonelet for which label is queried.
+
+        Returns
+        -------
+        List[str]
+            Returns labels associated with zonelet.
+
+
+        Examples
+        --------
+        >>> results = part.get_labels_on_zonelet(zonelet_id)
+
+        """
+        if not isinstance(zonelet_id, int):
+            raise TypeError("Invalid argument type passed for 'zonelet_id'. Valid argument type is int.")
+        args = {"zonelet_id" : zonelet_id}
+        command_name = "PrimeMesh::Part/GetLabelsOnZonelet"
+        self._model._print_logs_before_command("get_labels_on_zonelet", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_labels_on_zonelet")
+        return result
+
     def delete_topo_entities(self, params : DeleteTopoEntitiesParams) -> DeleteTopoEntitiesResults:
         """ Delete topoentities of part controled by parameters.
 

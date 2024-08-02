@@ -34,6 +34,26 @@ class ScopeExpressionType(enum.IntEnum):
     NAMEPATTERN = 2
     """Use name pattern expression to evaluate scope."""
 
+class SweepType(enum.IntEnum):
+    """Provides the Sweep Mesh Decomposition type.
+    """
+    STANDARD = 1
+    """Multizone create mapped and swept blocks if possible (should be default).
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    THINSWEEP = 2
+    """Creates swept blocks on thin wall geometries.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    MEDIALAXIS = 3
+    """Creates swept blocks on axisymmetric sweepable geometries.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    PROGRAMCONTROLLED = 4
+    """Multizone chooses the best decomposition method based on geometry analysis and decomposition tries.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+
 class ScopeDefinition(CoreObject):
     """ScopeDefinition to scope entities based on entity and evaluation type.
 
@@ -1573,6 +1593,10 @@ class MultiZoneSweepMeshParams(CoreObject):
         Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    sweep_type: SweepType, optional
+        Option to specify the sweep mesh decomposition type.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
 
@@ -1587,11 +1611,13 @@ class MultiZoneSweepMeshParams(CoreObject):
             source_and_target_scope: ScopeDefinition,
             sweep_mesh_size: float,
             n_divisions: int,
-            thin_sweep: bool):
+            thin_sweep: bool,
+            sweep_type: SweepType):
         self._source_and_target_scope = source_and_target_scope
         self._sweep_mesh_size = sweep_mesh_size
         self._n_divisions = n_divisions
         self._thin_sweep = thin_sweep
+        self._sweep_type = SweepType(sweep_type)
 
     def __init__(
             self,
@@ -1600,6 +1626,7 @@ class MultiZoneSweepMeshParams(CoreObject):
             sweep_mesh_size: float = None,
             n_divisions: int = None,
             thin_sweep: bool = None,
+            sweep_type: SweepType = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MultiZoneSweepMeshParams`` object.
@@ -1624,6 +1651,10 @@ class MultiZoneSweepMeshParams(CoreObject):
             Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        sweep_type: SweepType, optional
+            Option to specify the sweep mesh decomposition type.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
 
@@ -1636,15 +1667,17 @@ class MultiZoneSweepMeshParams(CoreObject):
                 ScopeDefinition(model = model, json_data = json_data["sourceAndTargetScope"] if "sourceAndTargetScope" in json_data else None),
                 json_data["sweepMeshSize"] if "sweepMeshSize" in json_data else None,
                 json_data["nDivisions"] if "nDivisions" in json_data else None,
-                json_data["thinSweep"] if "thinSweep" in json_data else None)
+                json_data["thinSweep"] if "thinSweep" in json_data else None,
+                SweepType(json_data["sweepType"] if "sweepType" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [source_and_target_scope, sweep_mesh_size, n_divisions, thin_sweep])
+            all_field_specified = all(arg is not None for arg in [source_and_target_scope, sweep_mesh_size, n_divisions, thin_sweep, sweep_type])
             if all_field_specified:
                 self.__initialize(
                     source_and_target_scope,
                     sweep_mesh_size,
                     n_divisions,
-                    thin_sweep)
+                    thin_sweep,
+                    sweep_type)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -1655,7 +1688,8 @@ class MultiZoneSweepMeshParams(CoreObject):
                         source_and_target_scope if source_and_target_scope is not None else ( MultiZoneSweepMeshParams._default_params["source_and_target_scope"] if "source_and_target_scope" in MultiZoneSweepMeshParams._default_params else ScopeDefinition(model = model, json_data = (json_data["sourceAndTargetScope"] if "sourceAndTargetScope" in json_data else None))),
                         sweep_mesh_size if sweep_mesh_size is not None else ( MultiZoneSweepMeshParams._default_params["sweep_mesh_size"] if "sweep_mesh_size" in MultiZoneSweepMeshParams._default_params else (json_data["sweepMeshSize"] if "sweepMeshSize" in json_data else None)),
                         n_divisions if n_divisions is not None else ( MultiZoneSweepMeshParams._default_params["n_divisions"] if "n_divisions" in MultiZoneSweepMeshParams._default_params else (json_data["nDivisions"] if "nDivisions" in json_data else None)),
-                        thin_sweep if thin_sweep is not None else ( MultiZoneSweepMeshParams._default_params["thin_sweep"] if "thin_sweep" in MultiZoneSweepMeshParams._default_params else (json_data["thinSweep"] if "thinSweep" in json_data else None)))
+                        thin_sweep if thin_sweep is not None else ( MultiZoneSweepMeshParams._default_params["thin_sweep"] if "thin_sweep" in MultiZoneSweepMeshParams._default_params else (json_data["thinSweep"] if "thinSweep" in json_data else None)),
+                        sweep_type if sweep_type is not None else ( MultiZoneSweepMeshParams._default_params["sweep_type"] if "sweep_type" in MultiZoneSweepMeshParams._default_params else SweepType(json_data["sweepType"] if "sweepType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1668,7 +1702,8 @@ class MultiZoneSweepMeshParams(CoreObject):
             source_and_target_scope: ScopeDefinition = None,
             sweep_mesh_size: float = None,
             n_divisions: int = None,
-            thin_sweep: bool = None):
+            thin_sweep: bool = None,
+            sweep_type: SweepType = None):
         """Set the default values of the ``MultiZoneSweepMeshParams`` object.
 
         Parameters
@@ -1681,6 +1716,8 @@ class MultiZoneSweepMeshParams(CoreObject):
             Number of divisions in the sweep direction.
         thin_sweep: bool, optional
             Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+        sweep_type: SweepType, optional
+            Option to specify the sweep mesh decomposition type.
         """
         args = locals()
         [MultiZoneSweepMeshParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1707,11 +1744,13 @@ class MultiZoneSweepMeshParams(CoreObject):
             json_data["nDivisions"] = self._n_divisions
         if self._thin_sweep is not None:
             json_data["thinSweep"] = self._thin_sweep
+        if self._sweep_type is not None:
+            json_data["sweepType"] = self._sweep_type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "source_and_target_scope :  %s\nsweep_mesh_size :  %s\nn_divisions :  %s\nthin_sweep :  %s" % ('{ ' + str(self._source_and_target_scope) + ' }', self._sweep_mesh_size, self._n_divisions, self._thin_sweep)
+        message = "source_and_target_scope :  %s\nsweep_mesh_size :  %s\nn_divisions :  %s\nthin_sweep :  %s\nsweep_type :  %s" % ('{ ' + str(self._source_and_target_scope) + ' }', self._sweep_mesh_size, self._n_divisions, self._thin_sweep, self._sweep_type)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1762,6 +1801,18 @@ class MultiZoneSweepMeshParams(CoreObject):
     @thin_sweep.setter
     def thin_sweep(self, value: bool):
         self._thin_sweep = value
+
+    @property
+    def sweep_type(self) -> SweepType:
+        """Option to specify the sweep mesh decomposition type.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._sweep_type
+
+    @sweep_type.setter
+    def sweep_type(self, value: SweepType):
+        self._sweep_type = value
 
 class MultiZoneEdgeBiasingParams(CoreObject):
     """Defines MultiZone edge biasing control parameters.
