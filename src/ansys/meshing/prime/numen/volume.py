@@ -1,8 +1,31 @@
-from ansys.meshing import prime
-from ansys.meshing.prime.numen.utils.cached_data import CachedData
-from ansys.meshing.prime.numen.utils import surface_utils
-from ansys.meshing.prime.numen.utils import volume_utils
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module for volume mesh."""
 import ansys.meshing.prime.numen.utils.macros as macros
+from ansys.meshing import prime
+from ansys.meshing.prime.numen.utils import surface_utils, volume_utils
+from ansys.meshing.prime.numen.utils.cached_data import CachedData
+
 
 def _str(input: tuple) -> str:
     if isinstance(input, tuple):
@@ -10,14 +33,20 @@ def _str(input: tuple) -> str:
     else:
         return input
 
+
 def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: CachedData):
+    """Perform volume mesh."""
     volume_fill_type = volume_mesh_params["volume_fill_type"]
 
-    if (evaluation_value(volume_fill_type) == prime.VolumeFillType.TET
-            or evaluation_value(volume_fill_type) == prime.VolumeFillType.HEXCORETET):
+    if (
+        evaluation_value(volume_fill_type) == prime.VolumeFillType.TET
+        or evaluation_value(volume_fill_type) == prime.VolumeFillType.HEXCORETET
+    ):
         quality_measure_param = prime.CellQualityMeasure.SKEWNESS
-    elif (evaluation_value(volume_fill_type) == prime.VolumeFillType.POLY
-            or evaluation_value(volume_fill_type) == prime.VolumeFillType.HEXCOREPOLY):
+    elif (
+        evaluation_value(volume_fill_type) == prime.VolumeFillType.POLY
+        or evaluation_value(volume_fill_type) == prime.VolumeFillType.HEXCOREPOLY
+    ):
         quality_measure_param = prime.CellQualityMeasure.INVERSEORTHOGONAL
 
     part_name = volume_mesh_params["part_name"]
@@ -28,10 +57,11 @@ def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: Cache
         tolerant_connect_part = model.get_part_by_name(part_name)
 
     auto_mesh_params = prime.AutoMeshParams(
-            model = model,
-            poly = {"advancedAutoConcaveSplit": True, 'featureAngle': 45},
-            cellQualityMeasure = quality_measure_param,
-            growthRate = 1.3)
+        model=model,
+        poly={"advancedAutoConcaveSplit": True, 'featureAngle': 45},
+        cellQualityMeasure=quality_measure_param,
+        growthRate=1.3,
+    )
 
     thin_volume_mesh_settings = volume_mesh_params["thin_volume_mesh_controls"]
     thin_vol_ctrls_ids = []
@@ -41,9 +71,15 @@ def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: Cache
         imprint = tv_setting["imprint_sides"]
         n_layers = tv_setting["n_layers"]
         stair_step = tv_setting["stair_step"]
-        thin_vol_ctrls = volume_utils.create_thin_volume_controls(model, tolerant_connect_part,
-                                        source_face_label_prefix, target_face_label_prefix,
-                                        imprint, n_layers, stair_step)
+        thin_vol_ctrls = volume_utils.create_thin_volume_controls(
+            model,
+            tolerant_connect_part,
+            source_face_label_prefix,
+            target_face_label_prefix,
+            imprint,
+            n_layers,
+            stair_step,
+        )
         thin_vol_ctrls_ids.extend(thin_vol_ctrls)
 
     auto_mesh_params.thin_volume_control_ids = thin_vol_ctrls_ids
@@ -53,23 +89,26 @@ def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: Cache
     for prism_scope_info in prism_settings:
         n_layers = prism_scope_info["n_layers"]
         first_height = prism_scope_info["first_height"]
-        last_aspect_ratio = prism_scope_info[ "last_aspect_ratio"]
+        last_aspect_ratio = prism_scope_info["last_aspect_ratio"]
         face_evaluation_type = prism_scope_info["face_evaluation_type"]
         face_expression = prism_scope_info["face_expression"]
         volume_expression = prism_scope_info["volume_expression"]
-        prism_ctrl_id = volume_utils.create_prism_control(model, tolerant_connect_part,
-                                                          face_expression,
-                                                          evaluation_value(face_evaluation_type),
-                                                          volume_expression, n_layers,
-                                                          first_height, last_aspect_ratio)
+        prism_ctrl_id = volume_utils.create_prism_control(
+            model,
+            tolerant_connect_part,
+            face_expression,
+            evaluation_value(face_evaluation_type),
+            volume_expression,
+            n_layers,
+            first_height,
+            last_aspect_ratio,
+        )
         prism_ctrl_ids.append(prism_ctrl_id)
     auto_mesh_params.prism_control_ids = prism_ctrl_ids
     stairstep_params = prime.PrismStairStep(
         model=model, check_proximity=False, gap_factor_scale=0.2
     )
-    prism_params = prime.PrismParams(
-        model=model, stair_step=stairstep_params
-    )
+    prism_params = prime.PrismParams(model=model, stair_step=stairstep_params)
     auto_mesh_params.prism = prism_params
     # periodic settings
     '''
@@ -101,29 +140,31 @@ def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: Cache
     auto_mesh_params.size_field_type = prime.SizeFieldType.VOLUMETRIC
 
     auto_mesher = prime.AutoMesh(model=model)
-    auto_mesher.mesh(
-        part_id=tolerant_connect_part.id, automesh_params=auto_mesh_params
-    )
+    auto_mesher.mesh(part_id=tolerant_connect_part.id, automesh_params=auto_mesh_params)
     if "labels_to_delete" in volume_mesh_params:
         labels_to_delete = volume_mesh_params["labels_to_delete"]
-    else: labels_to_delete = []
+    else:
+        labels_to_delete = []
     if "labels_to_retain" in volume_mesh_params:
         labels_to_retain = volume_mesh_params["labels_to_retain"]
-    else: labels_to_retain = []
+    else:
+        labels_to_retain = []
     if labels_to_delete != []:
         tolerant_connect_part.remove_labels_from_zonelets(
-                        labels_to_delete,
-                        tolerant_connect_part.get_face_zonelets(),
-                        )
+            labels_to_delete,
+            tolerant_connect_part.get_face_zonelets(),
+        )
     if labels_to_retain != []:
         total_labels = tolerant_connect_part.get_labels()
         delete_labels = list(set(total_labels).difference(set(labels_to_retain)))
         tolerant_connect_part.remove_labels_from_zonelets(
-                        delete_labels,
-                        tolerant_connect_part.get_face_zonelets(),
-                    )
+            delete_labels,
+            tolerant_connect_part.get_face_zonelets(),
+        )
 
-def evaluation_value(value : str):
+
+def evaluation_value(value: str):
+    """Evaluate volume mesh type."""
     if value == 'tet':
         return prime.VolumeFillType.TET
     if value == 'poly':
@@ -137,17 +178,25 @@ def evaluation_value(value : str):
     if value == 'zones':
         return prime.ScopeEvaluationType.ZONES
 
+
 def cell_apportion(model: prime.Model, cell_apportion_params: dict, cached_data: CachedData):
+    """Separate volume mesh by region."""
     target_part_name = cell_apportion_params["target_part_name"]
     topo_part_scope = cell_apportion_params["topology_part_scope"]
     volume_scope = cell_apportion_params["volume_scope"]
     topo_part_ids = macros._get_part_ids(model, topo_part_scope)
     mesh_part = model.get_part_by_name(target_part_name)
-    args = {"zone_name_pattern" : "*",
-            "name_pattern_params" : prime.NamePatternParams(model)._jsonify()}
-    zonelets = model._comm.serve(model, "PrimeMesh::Part/GetCellZoneletsOfZoneNamePattern_Beta",
-                                    mesh_part._object_id, args=args)
-    #parts = [part.id for part in model.parts if part.id != mesh_part.id]
+    args = {
+        "zone_name_pattern": "*",
+        "name_pattern_params": prime.NamePatternParams(model)._jsonify(),
+    }
+    zonelets = model._comm.serve(
+        model,
+        "PrimeMesh::Part/GetCellZoneletsOfZoneNamePattern_Beta",
+        mesh_part._object_id,
+        args=args,
+    )
+    # parts = [part.id for part in model.parts if part.id != mesh_part.id]
     '''
     # geom_part_name = "dirtysolids_highpriority"
     geom_part = model.get_part_by_name(geom_part_name)
@@ -155,38 +204,58 @@ def cell_apportion(model: prime.Model, cell_apportion_params: dict, cached_data:
     "source_part_ids" : [geom_part.id], "small_regions_volume_fraction" : 0.0001}
     '''
     tool = prime.VolumeMeshTool(model)
-    args = {"target_part_id" : mesh_part.id, "target_cell_zonelets" : zonelets,
-            "source_part_ids" : topo_part_ids, "small_regions_volume_fraction" : 0.0001}
-    region_result = model._comm.serve(model, "PrimeMesh::VolumeMeshTool/AssignMeshRegions",
-                                        tool._object_id, args=args)
-    #print(region_result)
+    args = {
+        "target_part_id": mesh_part.id,
+        "target_cell_zonelets": zonelets,
+        "source_part_ids": topo_part_ids,
+        "small_regions_volume_fraction": 0.0001,
+    }
+    region_result = model._comm.serve(
+        model, "PrimeMesh::VolumeMeshTool/AssignMeshRegions", tool._object_id, args=args
+    )
+    # print(region_result)
 
-    args = {"zone_name_pattern" : "*",
-            "name_pattern_params" : prime.NamePatternParams(model)._jsonify()}
-    cell_zonelets = model._comm.serve(model,
-                        "PrimeMesh::Part/GetCellZoneletsOfZoneNamePattern_Beta",
-                        mesh_part._object_id, args=args)
+    args = {
+        "zone_name_pattern": "*",
+        "name_pattern_params": prime.NamePatternParams(model)._jsonify(),
+    }
+    cell_zonelets = model._comm.serve(
+        model,
+        "PrimeMesh::Part/GetCellZoneletsOfZoneNamePattern_Beta",
+        mesh_part._object_id,
+        args=args,
+    )
     for cell_zonelet in cell_zonelets:
         mesh_info = prime.MeshInfo(model)
-        args = {"edge_zonelets" : [], "face_zonelets" : [], "cell_zonelets" : [cell_zonelet],
-                "params" : {}}
-        result = model._comm.serve(model, "PrimeMesh::MeshInfo/GetElementCountOfZonelets",
-                                    mesh_info._object_id, args=args)
-        #print(result["cellElementCount"])
+        args = {
+            "edge_zonelets": [],
+            "face_zonelets": [],
+            "cell_zonelets": [cell_zonelet],
+            "params": {},
+        }
+        result = model._comm.serve(
+            model, "PrimeMesh::MeshInfo/GetElementCountOfZonelets", mesh_info._object_id, args=args
+        )
+        # print(result["cellElementCount"])
     model.delete_parts(topo_part_ids)
-    name_pattern_params = prime.NamePatternParams(model = model)
+    name_pattern_params = prime.NamePatternParams(model=model)
     zone_ids = mesh_part.get_face_zones_of_name_pattern(
-        "*_boundary, *_contact, *_interface", name_pattern_params)
+        "*_boundary, *_contact, *_interface", name_pattern_params
+    )
     for zone_id in zone_ids:
         results = model.delete_zone(zone_id)
     if volume_scope:
-        fluid_zones_ids = mesh_part.get_volume_zones_of_name_pattern(volume_scope,
-                                                                prime.NamePatternParams(model))
+        fluid_zones_ids = mesh_part.get_volume_zones_of_name_pattern(
+            volume_scope, prime.NamePatternParams(model)
+        )
         fluid_zones = [model.get_zone_name(zone_id) for zone_id in fluid_zones_ids]
         volume_utils.volume_zone_management(model, mesh_part, fluid_zones)
 
-def extract_flow_volume(model: prime.Model, extract_flow_volume_params: dict,
-                        cached_data: CachedData):
+
+def extract_flow_volume(
+    model: prime.Model, extract_flow_volume_params: dict, cached_data: CachedData
+):
+    """Extract flow volume."""
     capping_settings = extract_flow_volume_params["capping_params"]
     part_name = extract_flow_volume_params["part_name"]
 
@@ -200,9 +269,15 @@ def extract_flow_volume(model: prime.Model, extract_flow_volume_params: dict,
             side_face_expression = cap_setting["side_face_expression"]
             flow_volume_zone_name = cap_setting["flow_volume_zone_name"]
             if len(face_expression) > 0 and len(side_face_expression) > 0:
-                raise RuntimeError(_str(("Both \"face_expression\" and",
-                                         "\"side_face_expression\"",
-                                         "cannot be defined together")))
+                raise RuntimeError(
+                    _str(
+                        (
+                            "Both \"face_expression\" and",
+                            "\"side_face_expression\"",
+                            "cannot be defined together",
+                        )
+                    )
+                )
             if len(face_expression) > 0:
                 part_cap_z = []
                 if face_evaluation_type == "labels":
@@ -225,17 +300,16 @@ def extract_flow_volume(model: prime.Model, extract_flow_volume_params: dict,
     # intersect
     if len(cap_face_zonelets) > 0:
         intersect_params = prime.IntersectParams(
-                            model = model,
-                            use_absolute_tolerance = False,
-                            tolerance = 0.25,
-                            remesh = True,
-                        )
+            model=model,
+            use_absolute_tolerance=False,
+            tolerance=0.25,
+            remesh=True,
+        )
         face_zonelets = tolerant_connect_part.get_face_zonelets()
         connect = prime.Connect(model)
-        results = connect.intersect_face_zonelets(tolerant_connect_part.id,
-                                                cap_face_zonelets,
-                                                face_zonelets,
-                                                intersect_params)
+        results = connect.intersect_face_zonelets(
+            tolerant_connect_part.id, cap_face_zonelets, face_zonelets, intersect_params
+        )
 
     intersect_results = surface_utils.check_surface_intersection(model, tolerant_connect_part)
     if intersect_results[0]:
@@ -243,28 +317,34 @@ def extract_flow_volume(model: prime.Model, extract_flow_volume_params: dict,
 
     intersect_results = surface_utils.check_surface_intersection(model, tolerant_connect_part)
     if intersect_results[0]:
-        raise RuntimeError(_str((f"{intersect_results[0]} face elements found",
-                                    "intersecting.\n    Locations are :\n       ",
-                                    f"{intersect_results[1]}\n   ",
-                                    "Intersecting face zonelets are:\n       ",
-                                    f"{intersect_results[2]}")))
+        raise RuntimeError(
+            _str(
+                (
+                    f"{intersect_results[0]} face elements found",
+                    "intersecting.\n    Locations are :\n       ",
+                    f"{intersect_results[1]}\n   ",
+                    "Intersecting face zonelets are:\n       ",
+                    f"{intersect_results[2]}",
+                )
+            )
+        )
 
     # remove free faces
     mesh_check_results = surface_utils.surface_mesh_check(model)
     if mesh_check_results.n_free_edges != 0:
         model._comm.serve(
-                model,
-                "PrimeMesh::Model/SetPyPrimeSettings",
-                model._object_id,
-                args={"settings" : "encode_hidden_params"},
+            model,
+            "PrimeMesh::Model/SetPyPrimeSettings",
+            model._object_id,
+            args={"settings": "encode_hidden_params"},
         )
         command_name = "PrimeMesh::Connect/StitchFaceZonelets"
         args = {
-            "part_id" : tolerant_connect_part.id,
-            "face_zonelet_ids" : tolerant_connect_part.get_face_zonelets(),
-            "with_face_zonelet_ids" : tolerant_connect_part.get_face_zonelets(),
+            "part_id": tolerant_connect_part.id,
+            "face_zonelet_ids": tolerant_connect_part.get_face_zonelets(),
+            "with_face_zonelet_ids": tolerant_connect_part.get_face_zonelets(),
             "params": {"remesh": True, "tolerance": 0.1, "type": 2},
-            }
+        }
         connect = prime.Connect(model)
         model._comm.serve(model, command_name, connect._object_id, args=args)
     mesh_check_results = surface_utils.surface_mesh_check(model)
@@ -315,10 +395,13 @@ def extract_flow_volume(model: prime.Model, extract_flow_volume_params: dict,
         side_face_expression = cap_setting["side_face_expression"]
         flow_volume_zone_name = cap_setting["flow_volume_zone_name"]
         if len(side_face_expression) > 0:
-            cap_face_zonelets = volume_utils.create_cap(model, tolerant_connect_part,
-                                                        side_face_expression,
-                                                        face_evaluation_type,
-                                                        "__numen_cap")
+            cap_face_zonelets = volume_utils.create_cap(
+                model,
+                tolerant_connect_part,
+                side_face_expression,
+                face_evaluation_type,
+                "__numen_cap",
+            )
             cap_zonelets_with_label[flow_volume_zone_name] = cap_face_zonelets
         else:
             cap_face_zonelets = []
@@ -351,7 +434,9 @@ def extract_flow_volume(model: prime.Model, extract_flow_volume_params: dict,
                 + "or check for leaks in the model."
             )
 
+
 def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_data: CachedData):
+    """Prepare for volume meshing."""
     part_name = improve_params["part_name"]
     volume_scope = improve_params["volume_scope"]
     thin_volume_face_prefix = improve_params["thin_volume_face_prefix"]
@@ -386,14 +471,10 @@ def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_
             nugget_mesh_size=0.35,
             label="__numen_nuggets_at_invalid_normals",
         )
-        fluid_face_zonelets = part.get_face_zonelets_of_volumes(
-            fluid_vols
-        )
+        fluid_face_zonelets = part.get_face_zonelets_of_volumes(fluid_vols)
         fix_invalid_normals_on_face_label_exp = "* !periodic*"
-        nugget_zonelets = (
-            part.get_face_zonelets_of_label_name_pattern(
-                fix_invalid_normals_on_face_label_exp, np_params
-            )
+        nugget_zonelets = part.get_face_zonelets_of_label_name_pattern(
+            fix_invalid_normals_on_face_label_exp, np_params
         )
         nugget_zonelets = list(set(nugget_zonelets) & set(fluid_face_zonelets))
         if nugget_zonelets:
@@ -408,10 +489,11 @@ def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_
     excluded_lables = list(set(all_labels) - set(zone_names))
     compute_volume_params = prime.ComputeVolumesParams(
         model,
-        create_zones_type = prime.CreateVolumeZonesType.PERNAMESOURCE,
-        priority_ordered_names = zone_names,
-        volume_naming_type = prime.VolumeNamingType.BYFACELABEL,
-        excludeNames = excluded_lables )
+        create_zones_type=prime.CreateVolumeZonesType.PERNAMESOURCE,
+        priority_ordered_names=zone_names,
+        volume_naming_type=prime.VolumeNamingType.BYFACELABEL,
+        excludeNames=excluded_lables,
+    )
     result = part.compute_closed_volumes(compute_volume_params)
     fluid_vols = []
     volume_zone_ids = part.get_volume_zones()
@@ -427,39 +509,29 @@ def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_
 
     # merging the nuggets to neighbor_volumes
     if fluid_vols:
-        invalid_normal_vols = (
-            part.get_volumes_of_zone_name_pattern(
-                "__numen_nuggets_at_invalid_normals*", np_params
-            )
+        invalid_normal_vols = part.get_volumes_of_zone_name_pattern(
+            "__numen_nuggets_at_invalid_normals*", np_params
         )
         if invalid_normal_vols:
             delete_volumes_params = prime.DeleteVolumesParams(model)
-            part.delete_volumes(
-                volumes=invalid_normal_vols, params=delete_volumes_params
-            )
-        invalid_normal_vols = (
-            part.get_volumes_of_zone_name_pattern(
-                "__numen_nuggets_at_invalid_normals*", np_params
-            )
+            part.delete_volumes(volumes=invalid_normal_vols, params=delete_volumes_params)
+        invalid_normal_vols = part.get_volumes_of_zone_name_pattern(
+            "__numen_nuggets_at_invalid_normals*", np_params
         )
         if invalid_normal_vols:
             merge_vol_params = prime.MergeVolumesParams(model)
             merge_vol_params.merge_to_neighbor_volume = True
             neighbour_volumes_of_nugget = list(
-                set(part.get_volumes())
-                - set(invalid_normal_vols)
-                - set(fluid_vols)
+                set(part.get_volumes()) - set(invalid_normal_vols) - set(fluid_vols)
             )
             merge_vol_params.neighbor_volumes = neighbour_volumes_of_nugget
             part.merge_volumes(invalid_normal_vols, merge_vol_params)
         merge_params = prime.MergeZoneletsParams(
             model,
-            merge_small_zonelets_with_neighbors = True,
-            element_count_limit = 10,
+            merge_small_zonelets_with_neighbors=True,
+            element_count_limit=10,
         )
-        part.merge_zonelets(
-            part.get_face_zonelets(), params=merge_params
-        )
+        part.merge_zonelets(part.get_face_zonelets(), params=merge_params)
 
     volume_utils.volume_zone_management(model, part, fluid_zones)
 
@@ -478,11 +550,13 @@ def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_
 
     face_zones = part.get_face_zones()
     for i in face_zones:
-        zone_face_zonelets = part.get_face_zonelets_of_zone_name_pattern(model.get_zone_name(i),
-                                                                         np_params)
+        zone_face_zonelets = part.get_face_zonelets_of_zone_name_pattern(
+            model.get_zone_name(i), np_params
+        )
         if len(zone_face_zonelets) > 1:
-            final_zone_face_zonelets = [zonelet for zonelet in zone_face_zonelets
-                                        if zonelet not in thin_face_zonelets]
+            final_zone_face_zonelets = [
+                zonelet for zonelet in zone_face_zonelets if zonelet not in thin_face_zonelets
+            ]
             if len(final_zone_face_zonelets) > 1:
                 part.merge_zonelets(final_zone_face_zonelets, merge_params)
 

@@ -1,10 +1,36 @@
-from ansys.meshing import prime
-from ansys.meshing.prime.numen.utils.cached_data import CachedData
-from ansys.meshing.prime.numen.utils import volume_utils
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Topology module."""
+
 import ansys.meshing.prime.numen.utils.communicator as Comm
 import ansys.meshing.prime.numen.utils.macros as macros
+from ansys.meshing import prime
+from ansys.meshing.prime.numen.utils import volume_utils
+from ansys.meshing.prime.numen.utils.cached_data import CachedData
+
 
 def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_data: CachedData):
+    """Clean up topology based on given parameters."""
     part_scope = topology_cleanup_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
 
@@ -31,10 +57,7 @@ def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_d
         topo_nodes = macros._get_topo_nodes(model)
         vt_params["mergeFaceNormalsAngleDeg"] = 180.0
         vt_params["mergeEdgeAllowSelfClose"] = True
-        suppress_node_args = {
-            "topo_node_ids": topo_nodes,
-            "params": vt_params
-        }
+        suppress_node_args = {"topo_node_ids": topo_nodes, "params": vt_params}
         try:
             vt_composer.call_method("SuppressTopoNodes", suppress_node_args)
         except Exception as e:
@@ -46,15 +69,15 @@ def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_d
             faces = macros._get_topo_faces(model)
             scafolding_params["constantMeshSize"] = 0.02
             scafolding_params['absoluteDistTol'] = 0.02
-            repair_edge_args = {
-                "topo_faces": faces,
-                "params": scafolding_params
-            }
+            repair_edge_args = {"topo_faces": faces, "params": scafolding_params}
             scaffold_result = scaffolder.call_method("RepairTopoEdgesOfTopoFaces", repair_edge_args)
         scaffolder.destruct()
 
-def suppress_interior_topoedges(model: prime.Model, suppress_topoedges_params: dict,
-                       cached_data: CachedData):
+
+def suppress_interior_topoedges(
+    model: prime.Model, suppress_topoedges_params: dict, cached_data: CachedData
+):
+    """Suppress interior topo edges."""
     part_scope = suppress_topoedges_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -75,8 +98,10 @@ def suppress_interior_topoedges(model: prime.Model, suppress_topoedges_params: d
         vt_composer.destruct()
 
 
-def suppress_toponodes(model: prime.Model, suppress_toponodes_params: dict,
-                       cached_data: CachedData):
+def suppress_toponodes(
+    model: prime.Model, suppress_toponodes_params: dict, cached_data: CachedData
+):
+    """Suppress topo nodes."""
     part_scope = suppress_toponodes_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -85,18 +110,18 @@ def suppress_toponodes(model: prime.Model, suppress_toponodes_params: dict,
         vt_params = Comm.vt_composer_params.copy()
         vt_params["mergeFaceNormalsAngleDeg"] = 180.0
         vt_params["mergeEdgeAllowSelfClose"] = True
-        suppress_node_args = {
-            "topo_node_ids": topo_nodes,
-            "params": vt_params
-        }
+        suppress_node_args = {"topo_node_ids": topo_nodes, "params": vt_params}
         try:
             vt_composer.call_method("SuppressTopoNodes", suppress_node_args)
         except Exception as e:
             pass
         vt_composer.destruct()
 
-def repair_topoedges_of_topofaces(model: prime.Model, repair_topoedges_params: dict,
-                                  cached_data: CachedData):
+
+def repair_topoedges_of_topofaces(
+    model: prime.Model, repair_topoedges_params: dict, cached_data: CachedData
+):
+    """Repair topoedges of topofaces."""
     part_scope = repair_topoedges_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -105,17 +130,16 @@ def repair_topoedges_of_topofaces(model: prime.Model, repair_topoedges_params: d
         faces = macros._get_topo_faces(model)
         scafolding_params["constantMeshSize"] = 0.05
         scafolding_params['absoluteDistTol'] = 0.05
-        repair_edge_args = {
-            "topo_faces": faces,
-            "params": scafolding_params
-        }
+        repair_edge_args = {"topo_faces": faces, "params": scafolding_params}
         try:
             scaffolder.call_method("RepairTopoEdgesOfTopoFaces", repair_edge_args)
         except Exception as e:
             pass
         scaffolder.destruct()
 
+
 def delete_topology(model: prime.Model, delete_topology_params: dict, cached_data: CachedData):
+    """Delete topology."""
     merge_zonelets_by_label = delete_topology_params["merge_zonelets_by_label"]
     merge_zonelets_by_zone = delete_topology_params["merge_zonelets_by_zone"]
     if merge_zonelets_by_label and merge_zonelets_by_zone:
@@ -128,8 +152,9 @@ def delete_topology(model: prime.Model, delete_topology_params: dict, cached_dat
 
     merge_params = prime.MergeZoneletsParams(model, False, 5)
     name_pattern_params = prime.NamePatternParams(model)
-    params = prime.DeleteTopoEntitiesParams(model=model, delete_geom_zonelets=True,
-                                            delete_mesh_zonelets=False)
+    params = prime.DeleteTopoEntitiesParams(
+        model=model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+    )
 
     part_ids = macros._get_part_ids(model, part_scope)
     part_ids_to_delete = []
@@ -142,15 +167,17 @@ def delete_topology(model: prime.Model, delete_topology_params: dict, cached_dat
             if merge_zonelets_by_label:
                 labels = part.get_labels()
                 for label in labels:
-                    label_face_zonelets = part.get_face_zonelets_of_label_name_pattern(label,
-                                                                         name_pattern_params)
+                    label_face_zonelets = part.get_face_zonelets_of_label_name_pattern(
+                        label, name_pattern_params
+                    )
                     if len(label_face_zonelets) > 1:
                         part.merge_zonelets(label_face_zonelets, merge_params)
             elif merge_zonelets_by_zone:
                 zones = part.get_face_zones()
                 for zone in zones:
-                    zone_face_zonelets = part.get_face_zonelets_of_zone_name_pattern(zone,
-                                                                      name_pattern_params)
+                    zone_face_zonelets = part.get_face_zonelets_of_zone_name_pattern(
+                        zone, name_pattern_params
+                    )
                     if len(zone_face_zonelets) > 1:
                         part.merge_zonelets(zone_face_zonelets, merge_params)
         elif delete_parts_without_topology:
@@ -158,7 +185,9 @@ def delete_topology(model: prime.Model, delete_topology_params: dict, cached_dat
     if len(part_ids_to_delete) > 0:
         model.delete_parts(part_ids_to_delete)
 
+
 def detect_thin_volumes(model: prime.Model, thin_volume_params: dict, cached_data: CachedData):
+    """Delete thin volumes."""
     part_scope = thin_volume_params["part_scope"]
     thickness = thin_volume_params["thickness"]
     volume_scope = thin_volume_params["volume_scope"]
@@ -167,5 +196,6 @@ def detect_thin_volumes(model: prime.Model, thin_volume_params: dict, cached_dat
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
         part = model.get_part(part_id)
-        volume_utils.detect_thin_volumes(model, part, thickness, volume_scope,
-                                         source_label, target_label)
+        volume_utils.detect_thin_volumes(
+            model, part, thickness, volume_scope, source_label, target_label
+        )

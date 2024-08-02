@@ -1,15 +1,40 @@
-from ansys.meshing import prime
-from typing import Dict
-from ansys.meshing.prime.numen.utils.checks import check_param, type_check
-from ansys.meshing.prime.numen.utils.evaluate import evaluate_expression
-from ansys.meshing.prime.numen.utils.cached_data import CachedData
-from ansys.meshing.prime.numen.utils.param_defs import ParamDefs
-from typing import List, Dict
-import logging
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Numen repl module."""
+
+import inspect
 import json
+import logging
 import os
 import re
-import inspect
+from typing import Dict, List
+
+from ansys.meshing import prime
+from ansys.meshing.prime.numen.utils.cached_data import CachedData
+from ansys.meshing.prime.numen.utils.checks import check_param, type_check
+from ansys.meshing.prime.numen.utils.evaluate import evaluate_expression
+from ansys.meshing.prime.numen.utils.param_defs import ParamDefs
+
 
 def _str(input: tuple) -> str:
     if isinstance(input, tuple):
@@ -17,16 +42,26 @@ def _str(input: tuple) -> str:
     else:
         return input
 
+
 class Repl:
+    """Handles execution of numen workflow."""
+
     def __init__(self, model: prime.Model):
+        """Construct Repl object."""
         dir = os.path.dirname(os.path.abspath(__file__))
         file = open(os.path.join(dir, "types.json"))
         self._param_map = json.load(file)
         file.close()
         self._function_map = {}
-        method_modules = [prime.numen.misc, prime.numen.surface, prime.numen.controls,
-                          prime.numen.settings, prime.numen.connect, prime.numen.topology,
-                          prime.numen.volume]
+        method_modules = [
+            prime.numen.misc,
+            prime.numen.surface,
+            prime.numen.controls,
+            prime.numen.settings,
+            prime.numen.connect,
+            prime.numen.topology,
+            prime.numen.volume,
+        ]
         for module in method_modules:
             self._function_map.update(self.__get_function_map(module))
         self._model = model
@@ -54,7 +89,7 @@ class Repl:
             for i in info:
                 self._logger.error(f"        \"{i[0]}\" line:{i[1]}")
 
-    def __log_exception(self, header: str, e: Exception, info = []):
+    def __log_exception(self, header: str, e: Exception, info=[]):
         self._logger.error(header)
         for message in str(e).splitlines():
             self._logger.error("    " + message)
@@ -77,12 +112,9 @@ class Repl:
             if "method" in step:
                 method = step["method"]
                 if method in method_to_function:
-                    method_map.update({
-                        method: {
-                            "details": step,
-                            "function": method_to_function[method]
-                        }
-                    })
+                    method_map.update(
+                        {method: {"details": step, "function": method_to_function[method]}}
+                    )
         return method_map
 
     def __get_param_val(self, param_name: str) -> any:
@@ -101,11 +133,11 @@ class Repl:
             e.append(None)
         return e
 
-    def __is_param_enabled(self, method_name: str, type_name: str, parameter_name: str,
-                           parameters: Dict):
+    def __is_param_enabled(
+        self, method_name: str, type_name: str, parameter_name: str, parameters: Dict
+    ):
         parameter_def = self._param_map[type_name]
-        parameter_def_entry = next((p for p in parameter_def
-                                        if p["name"] == parameter_name), None)
+        parameter_def_entry = next((p for p in parameter_def if p["name"] == parameter_name), None)
         if parameter_def_entry == None:
             raise TypeError(f"Parameter definition not found for \"{parameter_name}\"")
         if "enabled" in parameter_def_entry:
@@ -115,8 +147,14 @@ class Repl:
             return enabled_val
         return True
 
-    def __get_params(self, method_name: str, type_name: str, param_inputs: dict,
-                 parent_vals: dict, parent_param_name: str = ""):
+    def __get_params(
+        self,
+        method_name: str,
+        type_name: str,
+        param_inputs: dict,
+        parent_vals: dict,
+        parent_param_name: str = "",
+    ):
         scope_vals = parent_vals.copy()
         parameters = {}
         parameter_type_map = {}
@@ -127,16 +165,19 @@ class Repl:
 
         # Set parameter values from user input and perform checks
         nested_params = {}
-        self.__process_param_inputs(method_name, type_name, param_inputs, parameters,
-                                    parameter_type_map, scope_vals)
+        self.__process_param_inputs(
+            method_name, type_name, param_inputs, parameters, parameter_type_map, scope_vals
+        )
 
-        self.__process_param_checks(parameter_def, parameters, parameter_type_map,
-                                    nested_params, parent_param_name)
+        self.__process_param_checks(
+            parameter_def, parameters, parameter_type_map, nested_params, parent_param_name
+        )
 
         self._param_defs.push_override_for_global(scope_vals)
         # Handle nested parameters
-        self.__handle_nested_params(method_name, nested_params, param_inputs, scope_vals,
-                                    parameters)
+        self.__handle_nested_params(
+            method_name, nested_params, param_inputs, scope_vals, parameters
+        )
         self._param_defs.pop_override()
 
         return parameters
@@ -159,13 +200,15 @@ class Repl:
             default_param = evaluate_expression(self._param_defs, {}, default_param)
         return default_param
 
-    def __process_param_inputs(self, method_name, type_name, param_inputs, parameters,
-                               parameter_type_map, scope_vals):
+    def __process_param_inputs(
+        self, method_name, type_name, param_inputs, parameters, parameter_type_map, scope_vals
+    ):
         for parameter_name, param_value in param_inputs.items():
             # check if parameter is defined
             if parameter_name not in parameter_type_map:
                 self._logger.warning(
-                    f"Ignoring parameter \"{parameter_name}\" in method \"{method_name}\".")
+                    f"Ignoring parameter \"{parameter_name}\" in method \"{method_name}\"."
+                )
                 continue
 
             # check if parameter is enabled
@@ -175,8 +218,9 @@ class Repl:
             else:
                 parameters.pop(parameter_name)
 
-    def __process_param_checks(self, parameter_def, parameters, parameter_type_map,
-                               nested_params, parent_param_name):
+    def __process_param_checks(
+        self, parameter_def, parameters, parameter_type_map, nested_params, parent_param_name
+    ):
         error_list = []
         for p_name, param_value in parameters.items():
             if param_value == None:
@@ -186,39 +230,63 @@ class Repl:
             if parameter_type[0] == "list" and self._param_map.get(parameter_type[1]):
                 nested_params[p_name] = parameter_type
             else:
-                parameter_def_entry = next((p for p in parameter_def
-                                            if p["name"] == p_name), None)
+                parameter_def_entry = next((p for p in parameter_def if p["name"] == p_name), None)
                 if parameter_def_entry is None:
-                    raise TypeError(_str((f"Parameter definition not found for",
-                                          "\"{parent_param_name}{p_name}\"")))
+                    raise TypeError(
+                        _str(
+                            (
+                                f"Parameter definition not found for",
+                                "\"{parent_param_name}{p_name}\"",
+                            )
+                        )
+                    )
 
                 if parameter_type[0] == "range":
                     if param_value not in parameter_def_entry["range"]:
-                        error_list.append(_str(("Type check failed for parameter",
-                                        f"\"{parent_param_name}{p_name}\".",
-                                        f"Given value \"{param_value}\".",
-                                        f"Allowed values are {parameter_def_entry['range']}")))
+                        error_list.append(
+                            _str(
+                                (
+                                    "Type check failed for parameter",
+                                    f"\"{parent_param_name}{p_name}\".",
+                                    f"Given value \"{param_value}\".",
+                                    f"Allowed values are {parameter_def_entry['range']}",
+                                )
+                            )
+                        )
                         continue
                 elif not type_check(param_value, parameter_type[0], parameter_type[1]):
                     type_name = parameter_type[0]
                     if type_name == "list":
                         type_name = f"list[{parameter_type[1]}]"
-                    error_list.append(_str(("Type check failed for parameter",
-                                            f"\"{parent_param_name}{p_name}\".",
-                                            f"Given value \"{param_value}\".",
-                                            f"Allowed type is \"{type_name}\"")))
+                    error_list.append(
+                        _str(
+                            (
+                                "Type check failed for parameter",
+                                f"\"{parent_param_name}{p_name}\".",
+                                f"Given value \"{param_value}\".",
+                                f"Allowed type is \"{type_name}\"",
+                            )
+                        )
+                    )
                     continue
 
                 checks = parameter_def_entry.get("checks", [])
                 for c in checks:
                     if not check_param(self._param_defs, parameters, p_name, c):
-                        error_list.append(_str((f"Check \"{c}\" failed for parameter",
-                                                f"\"{parent_param_name}{p_name}\"")))
+                        error_list.append(
+                            _str(
+                                (
+                                    f"Check \"{c}\" failed for parameter",
+                                    f"\"{parent_param_name}{p_name}\"",
+                                )
+                            )
+                        )
         if len(error_list) > 0:
             raise ValueError("\n".join(error_list))
 
-    def __handle_nested_params(self, method_name, nested_params, param_inputs, scope_vals,
-                               parameters):
+    def __handle_nested_params(
+        self, method_name, nested_params, param_inputs, scope_vals, parameters
+    ):
         for parameter_name, parameter_type in nested_params.items():
             if parameter_type[0] == "list" and self._param_map[parameter_type[1]]:
                 param_val_arr = []
@@ -226,8 +294,15 @@ class Repl:
                     param_input = param_inputs[parameter_name]
                     for i in range(len(param_input)):
                         input_item = param_input[i]
-                        param_val_arr.append(self.__get_params(method_name, parameter_type[1],
-                                            input_item, scope_vals, f"{parameter_name}[{i}]."))
+                        param_val_arr.append(
+                            self.__get_params(
+                                method_name,
+                                parameter_type[1],
+                                input_item,
+                                scope_vals,
+                                f"{parameter_name}[{i}].",
+                            )
+                        )
                 parameters[parameter_name] = param_val_arr
 
     def __construct_parameters(self, step: dict):
@@ -238,9 +313,11 @@ class Repl:
             parameters = self.__get_params(method_name, parameter_type_name, parameter_inputs, {})
             return parameters
         except Exception as e:
-            self.__log_exception(_str(("Exception while evaluating parameters",
-                                 f"in method '{method_name}'")), e,
-                                 self.__collect_traceback(e))
+            self.__log_exception(
+                _str(("Exception while evaluating parameters", f"in method '{method_name}'")),
+                e,
+                self.__collect_traceback(e),
+            )
             return None
 
     def __execute_method(self, method: any, params: dict) -> bool:
@@ -248,31 +325,40 @@ class Repl:
             method(self._model, params, self._cached_data)
             return True
         except Exception as e:
-            self.__log_exception(f"Exception while executing method '{method.__name__}'", e,
-                                 self.__collect_traceback(e))
+            self.__log_exception(
+                f"Exception while executing method '{method.__name__}'",
+                e,
+                self.__collect_traceback(e),
+            )
             return False
 
     def get_params(self, method_name: str, type_name: str, param_inputs: dict):
+        """Parse params_input to construct parameters object depending upon type_name."""
         try:
-            parameters = self.__get_params(method_name, type_name, param_inputs, {},
-                                           True)
+            parameters = self.__get_params(method_name, type_name, param_inputs, {}, True)
             return parameters
         except Exception as e:
-            self.__log_exception(str("Exception while evaluating parameters",
-                                 f" in method '{method_name}'"), e,
-                                 self.__collect_traceback(e))
+            self.__log_exception(
+                str("Exception while evaluating parameters", f" in method '{method_name}'"),
+                e,
+                self.__collect_traceback(e),
+            )
             return None
 
     def execute(self, method: str, params: Dict):
+        """Execute numen method."""
         method = self._function_map[method]["function"]
         self.__execute_method(method, params)
 
     def run(self, steps: List[Dict]):
+        """Run numen workflow."""
         try:
-            self._model._comm.serve(self._model,
-                                    "PrimeMesh::Model/SetPyPrimeSettings",
-                                    self._model._object_id,
-                                    args={"settings" : "encode_hidden_params"})
+            self._model._comm.serve(
+                self._model,
+                "PrimeMesh::Model/SetPyPrimeSettings",
+                self._model._object_id,
+                args={"settings": "encode_hidden_params"},
+            )
             self._model._sync_up_model()
             self._param_defs.clear_overrides()
             if not isinstance(steps, list):
@@ -354,28 +440,31 @@ class Repl:
                     range_val = []
                     if "range" in param:
                         range_val = param["range"]
-                    param_default = self.__get_default_val_for_type(param["type"],
-                                                                    range_val,
-                                                                    param_name)
+                    param_default = self.__get_default_val_for_type(
+                        param["type"], range_val, param_name
+                    )
                 param_details[param_name] = param_default
             return param_details
         return None
 
     def help(self, arg=None):
-        help_str = _str(("Please call Repl.help with one of the following arguments:\n",
-                         "   methods\n",
-                         "   method:<method name>"))
+        """Print help on numen methods."""
+        help_str = _str(
+            (
+                "Please call Repl.help with one of the following arguments:\n",
+                "   methods\n",
+                "   method:<method name>",
+            )
+        )
         if arg == None:
             print(help_str)
         elif arg.strip() == "methods":
             methods = self._function_map.keys()
             print("\n".join(methods))
         elif re.match(r"^method\s*:", arg.strip()):
-            self._param_defs.push_override_for_global({
-                "min_size": 1.0,
-                "max_size": 10.0,
-                "growth_rate": 1.2
-            })
+            self._param_defs.push_override_for_global(
+                {"min_size": 1.0, "max_size": 10.0, "growth_rate": 1.2}
+            )
             method_name = arg.split(":", 1)[1].strip()
             if method_name in self._function_map:
                 method_details = self._function_map[method_name]["details"]
@@ -384,7 +473,8 @@ class Repl:
                 method_details_copy["method"] = method_details["method"]
                 method_details_copy["skip"] = False
                 method_details_copy["parameters"] = self.__get_help_parameters(
-                    method_details["parameters"])
+                    method_details["parameters"]
+                )
                 print(json.dumps(method_details_copy, indent=4))
             else:
                 print(f"Method \"{method_name}\" not found.")
@@ -392,6 +482,8 @@ class Repl:
         else:
             print(help_str)
 
-    def is_param_enabled(self, method_name: str, type_name: str, parameter_name: str,
-                         parameters: Dict) -> bool:
+    def is_param_enabled(
+        self, method_name: str, type_name: str, parameter_name: str, parameters: Dict
+    ) -> bool:
+        """Check if parameter is enabled or not."""
         return self.__is_param_enabled(method_name, type_name, parameter_name, parameters)

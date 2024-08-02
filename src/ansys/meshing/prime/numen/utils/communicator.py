@@ -1,25 +1,57 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Numen communicator."""
 from ansys.meshing import prime
 
+
 class PrimeObj:
+    """PrimeObj provides interface to construct and destruct PrimeMesh object."""
+
     def __init__(self, model: prime.Model, object_name: str, part_id: int = None):
+        """Create PrimeMeh object with the given object name."""
         self.model = model
         self.object_name = object_name
-        args = {"ModelID" : model._object_id , "MaxID" : -1}
+        args = {"ModelID": model._object_id, "MaxID": -1}
         if part_id is not None:
             args["PartID"] = part_id
         result = model._communicator.serve(model, f"PrimeMesh::{object_name}/Construct", args=args)
         self._object_id = result["ObjectIndex"]
 
     def call_method(self, command_name: str, args: dict):
-        return call_method(self.model, f"PrimeMesh::{self.object_name}/{command_name}",
-                           self._object_id, args)
+        """Call method on PrimeMesh object with the given command name."""
+        return call_method(
+            self.model, f"PrimeMesh::{self.object_name}/{command_name}", self._object_id, args
+        )
 
     def destruct(self):
+        """Destruct PrimeMeh object."""
         self.model._communicator.serve(
             self.model, f"PrimeMesh::{self.object_name}/Destruct", self._object_id, args={}
         )
 
+
 def call_method(model: prime.Model, command_name: str, object_id: int, args: dict):
+    """Call PrimeMesh method with given command name."""
     result = model._communicator.serve(model, command_name, object_id, args=args)
     return result
 
@@ -64,5 +96,5 @@ vt_composer_params = {
     "refacetTopoEntities": False,
     "allowCurvedTopoFaces": True,
     "aggressiveMerge": False,
-    "holeFillSurfaceType": 0
+    "holeFillSurfaceType": 0,
 }
