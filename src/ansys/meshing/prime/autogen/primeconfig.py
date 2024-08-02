@@ -36,6 +36,8 @@ class ErrorCode(enum.IntEnum):
     """Auto sizing must be of volumetric type."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
+    SURFEROPENINITIALFRONTLOOP = 16
+    """Open initial front loop for meshing."""
     FREEZEMESHERROR = 30
     """Cannot remesh freezed mesh."""
     REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART = 31
@@ -298,6 +300,10 @@ class ErrorCode(enum.IntEnum):
     """Invalid tolerance value specified."""
     SOURCEORTARGETNOTSPECIFIED = 857
     """No target or source faces specified."""
+    STITCHWITHPRESERVEDENTITIESFAILED = 858
+    """Stitch with preserved entities failed."""
+    STITCHENTITIESFAILED = 859
+    """Stitch entities failed."""
     NOTSUPPORTEDFORTOPOLOGYPART = 1200
     """Not supported for part with topology data."""
     NOTSUPPORTEDFORHIGHERORDERMESHPART = 1201
@@ -488,6 +494,10 @@ class ErrorCode(enum.IntEnum):
     """Material point with the given name does not exist."""
     MATERIALPOINTWITHGIVENIDDOESNTEXIST = 3302
     """Material point with the given ID already exists."""
+    OCTREELIMITREACHED = 3350
+    """Limit reached for the number of octants supported.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     WRAPPERGLOBALSETTINGSNOTSET = 3400
     """Global settings for wrapper not set."""
     WRAPPERRESOLVEINTERSECTIONFAILED = 3401
@@ -692,6 +702,8 @@ class WarningCode(enum.IntEnum):
     """Overriding BOI sizing parameters."""
     OVERRIDEMESHEDSIZINGPARAMS = 206
     """Overriding meshed sizing parameters."""
+    INVALIDSIZECONTROLSCOPE = 208
+    """Invalid size control type provided."""
     OVERRIDESUGGESTEDNAME = 301
     """Override name by suggested name."""
     OVERRIDESURFACESCOPEENTITY = 401

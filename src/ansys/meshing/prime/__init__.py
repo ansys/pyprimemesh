@@ -91,6 +91,7 @@ from ansys.meshing.prime.internals.config import (
 
 import ansys.meshing.prime.examples as examples
 import ansys.meshing.prime.lucid as lucid
+import ansys.meshing.prime.numen as numen
 
 
 __LOCAL_CLIENT = None

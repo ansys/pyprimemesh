@@ -1951,7 +1951,7 @@ class _MatAddDamageDiem:
             if "Strain rate" in dmg_ini_props["Data"]:
                 self._strn_rate = dmg_ini_props["Data"]["Strain rate"][0]
 
-    def get_all_commands(self, mat_id, mat_name, all_mat_props):
+    def get_all_commands(self, mat_id, mat_name, all_mat_props, material_used_with_shell, max_id):
         mat_string = ""
         mat_string += "*MAT_ADD_DAMAGE_DIEM_TITLE\n"
         mat_string += f"{mat_name}\n"
@@ -1987,12 +1987,17 @@ class _MatAddDamageDiem:
         mat_string += (
             "".join([self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]) + "\n"
         )
-        mat_string += curve_card
 
         if self._damage_length == 0.0 and self._strain_at_dmg_ini == 0.0 and self._strs_tria == 0.0:
             return ""
         else:
-            return mat_string
+            str_2d = ""
+            if material_used_with_shell:
+                str_2d = mat_string.replace(
+                    self._formatter.field_int(mat_id),
+                    self._formatter.field_int(max_id * 3 + mat_id),
+                )
+            return mat_string + str_2d + curve_card
 
 
 class _MatAddInelasticity:
@@ -2581,7 +2586,11 @@ class MaterialProcessor:
                     self._mat_id, mat_name, mat_data, e, pr, density=density
                 )
         if damage_in_mat and is_cohesive is False:
-            dyna_mat_card += damage.get_all_commands(self._mat_id, mat_name, mat_data)
+            material_used_with_shell = self._is_material_used_with_shell(mat_name)
+            max_id = self._get_max_id()
+            dyna_mat_card += damage.get_all_commands(
+                self._mat_id, mat_name, mat_data, material_used_with_shell, max_id
+            )
         if damage_in_mat and is_cohesive:
             dyna_mat_card += damage_cohesive.get_all_commands(
                 self._mat_id,
@@ -2682,7 +2691,7 @@ class MaterialProcessor:
         property_dict = mat_props['ELASTIC']
         mat_elastic_card = ''
         elastic_type = property_dict["Parameters"]["TYPE"]
-        if elastic_type == "ISOTROPIC":
+        if elastic_type == "ISOTROPIC" or elastic_type == "ISO":
             # self._logger.warning(
             # f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
@@ -2782,7 +2791,7 @@ class MaterialProcessor:
     def _get_elastic_modulus(self, mat_props, mat_name, mat_id):
         property_dict = mat_props['ELASTIC']
         elastic_type = property_dict["Parameters"]["TYPE"]
-        if elastic_type == "ISOTROPIC":
+        if elastic_type == "ISOTROPIC" or elastic_type == "ISO":
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")

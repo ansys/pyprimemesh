@@ -1,0 +1,27 @@
+[
+    {
+        "name" : "Mesh Model",
+        "method" : "numen.surface.mesh",
+        "parameters" : "surface_mesh_params"
+    },
+    {
+        "name": "Mesh with sizing",
+        "method": "numen.surface.mesh_with_sizing",
+        "parameters": "surface_mesh_with_sizing_params"
+    },
+    {
+        "name": "Mesh with size controls",
+        "method": "numen.surface.mesh_with_size_controls",
+        "parameters": "surface_mesh_with_size_controls_params"
+    },
+    {
+        "name": "Improve surface mesh quality",
+        "method": "numen.surface.improve_quality",
+        "parameters": "surface_improve_quality_params"
+    },
+    {
+        "name": "Clean up triangles",
+        "method": "numen.surface.clean_up_triangles",
+        "parameters": "clean_up_triangles_params"
+    }
+]

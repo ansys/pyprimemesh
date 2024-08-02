@@ -1,0 +1,7 @@
+[
+    {
+        "name": "Tolerant Connect",
+        "method": "numen.connect.tolerant_connect",
+        "parameters" : "tolerant_connect_params"
+    }
+]

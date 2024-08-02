@@ -476,6 +476,35 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("set_suggested_zone_name", SetNameResults(model = self, json_data = result))
         return SetNameResults(model = self, json_data = result)
 
+    def set_working_directory(self, path : str):
+        """ Set working directory.
+
+        Set working directory to be considered for file i/o when file paths are relative.
+
+        Parameters
+        ----------
+        path : str
+            Path to the directory.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model = prime.local_model
+        >>> zones = model.set_working_directory("C:/input_files")
+
+        """
+        if not isinstance(path, str):
+            raise TypeError("Invalid argument type passed for 'path'. Valid argument type is str.")
+        args = {"path" : path}
+        command_name = "PrimeMesh::Model/SetWorkingDirectory"
+        self._print_beta_api_warning("set_working_directory")
+        self._print_logs_before_command("set_working_directory", args)
+        self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_working_directory")
+
     @property
     def id(self):
         """ Get the id of Model."""
