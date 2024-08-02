@@ -36,6 +36,7 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
     ExportLSDynaKeywordFileParams,
+    ExportLSDynaResults,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,

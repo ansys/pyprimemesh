@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Numen miscellaneous module."""
 import os
 
 import ansys.meshing.prime.numen.utils.macros as macros
@@ -29,6 +30,7 @@ from ansys.meshing.prime.numen.utils.communicator import call_method
 
 
 def read(model: prime.Model, read_params: dict, cached_data: CachedData):
+    """Read a file depending on extension."""
     length_unit_mapping = {
         "m": prime.LengthUnit.M,
         "cm": prime.LengthUnit.CM,
@@ -164,12 +166,14 @@ def read(model: prime.Model, read_params: dict, cached_data: CachedData):
 
 
 def read_size_field(model: prime.Model, size_field_read_params: dict, cached_data: CachedData):
+    """Read size field."""
     file_name = size_field_read_params["file_name"]
     fileio = prime.FileIO(model)
     fileio.read_size_field(file_name, prime.ReadSizeFieldParams(model))
 
 
 def write(model: prime.Model, write_params: dict, cached_data: CachedData):
+    """Write or export a file depending on extension."""
     file_name = macros.resolve_path(write_params["file_name"])
     file_ext = os.path.splitext(file_name)[1]
     fileio = prime.FileIO(model)
@@ -186,6 +190,7 @@ def write(model: prime.Model, write_params: dict, cached_data: CachedData):
 
 
 def set_global_sizing(model: prime.Model, global_params: dict, cached_data: CachedData):
+    """Set global sizing."""
     model.set_global_sizing_params(
         prime.GlobalSizingParams(
             model,
@@ -199,6 +204,7 @@ def set_global_sizing(model: prime.Model, global_params: dict, cached_data: Cach
 def create_labels_per_part_entities(
     model: prime.Model, create_labels_params: dict, cached_data: CachedData
 ):
+    """Create labels per zonelets or topo entities."""
     part_scope = create_labels_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -217,6 +223,7 @@ def create_labels_per_part_entities(
 
 
 def merge_zonelets(model: prime.Model, merge_params: dict, cached_data: CachedData):
+    """Merge zonelets with the given merge parameters."""
     part_scope = merge_params["part_expression"]
     scope_evaluation_type = merge_params["scope_evaluation_type"]
     entity_type = merge_params["entity_type"]
@@ -269,6 +276,7 @@ def merge_zonelets(model: prime.Model, merge_params: dict, cached_data: CachedDa
 
 
 def delete_parts(model: prime.Model, delete_params: dict, cached_data: CachedData):
+    """Delete parts specified by parameters."""
     part_scope = delete_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
     if len(part_ids) > 0:

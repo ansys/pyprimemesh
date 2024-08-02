@@ -20,12 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Model for cached data."""
 import logging
 
 from ansys.meshing import prime
 
 
 def create_size_control(model: prime.Model, parameters, cached_data) -> int:
+    """Create size control."""
     sizing_type = parameters["sizing_type"]
     sizing_params = parameters["sizing_params"]
     control = model.control_data.create_size_control(sizing_type)
@@ -44,6 +46,7 @@ def create_size_control(model: prime.Model, parameters, cached_data) -> int:
 
 
 def create_size_field(model: prime.Model, parameters, cached_data) -> int:
+    """Create size field."""
     controls = []
     for size_control in parameters["size_controls"]:
         controls.append(cached_data.create_cached_object(size_control))
@@ -60,20 +63,26 @@ def create_size_field(model: prime.Model, parameters, cached_data) -> int:
 
 
 def delete_control(model: prime.Model, control_id: int):
+    """Delete control."""
     model.control_data.delete_controls([control_id])
 
 
 def delete_size_field(model: prime.Model, size_field_id: int):
+    """Delete size field."""
     model.delete_volumetric_size_fields([size_field_id])
 
 
 class CachedObject:
+    """CachedObject class."""
+
     def __init__(self, method, params):
+        """Construct cached object."""
         self.method = method
         self.parameters = params
         self.id: int = 0
 
     def create(self, model, cached_data) -> int:
+        """Create size control or size field for cache."""
         if self.method == "numen.controls.create_size_control":
             self.id = create_size_control(model, self.parameters, cached_data)
         elif self.method == "numen.controls.create_size_field":
@@ -81,6 +90,7 @@ class CachedObject:
         return self.id
 
     def destroy(self, model):
+        """Destroy cached object."""
         if self.id == 0:
             return
         if self.method == "numen.controls.create_size_control":
@@ -92,12 +102,16 @@ class CachedObject:
 
 
 class CachedData:
+    """CachedData class."""
+
     def __init__(self, model: prime.Model, logger: logging.Logger):
+        """Construct cached data object."""
         self._model = model
         self._logger = logger
         self._cached_objects: dict[str, CachedObject] = {}
 
     def push_cached_object(self, name: str, method: str, parameters: any) -> bool:
+        """Push cached object."""
         if name in self._cached_objects:
             self._logger.error("Duplicate name \"%s\".", name)
             return False
@@ -105,6 +119,7 @@ class CachedData:
             self._cached_objects[name] = CachedObject(method, parameters)
 
     def create_cached_object(self, name: str) -> int:
+        """Create cached object."""
         if name in self._cached_objects:
             return self._cached_objects[name].create(self._model, self)
         else:
@@ -112,12 +127,14 @@ class CachedData:
         return 0
 
     def destroy_cached_object(self, name: str):
+        """Destroy cached object."""
         if name in self._cached_objects:
             self._cached_objects[name].destroy(self._model)
         else:
             self._logger.error("Name \"%s\" not found.", name)
 
     def pop_cached_object(self, name: str):
+        """Pop cached object."""
         if name in self._cached_objects:
             self._cached_objects[name].destroy(self._model)
             del self._cached_objects[name]

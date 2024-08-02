@@ -20,11 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Numen control module."""
+
 from ansys.meshing import prime
 from ansys.meshing.prime.numen.utils.cached_data import CachedData
 
 
 def _get_size_control_type(control_params):
+    """Get size control type from control parameters."""
     sizing_type_mapping = {
         "boi": prime.SizingType.BOI,
         "curvature": prime.SizingType.CURVATURE,
@@ -38,6 +41,7 @@ def _get_size_control_type(control_params):
 
 
 def _get_size_control_params(model: prime.Model, control_params: dict):
+    """Get size control parameters depending upon size control type."""
     sizing_type = _get_size_control_type(control_params)
     max_size = control_params.get("max_size")
     min_size = control_params.get("min_size")
@@ -78,6 +82,7 @@ def _get_size_control_params(model: prime.Model, control_params: dict):
 
 
 def _get_scope(model: prime.Model, control_params: dict):
+    """Construct ScopeDefinition from control parameters."""
     scope = prime.ScopeDefinition(model)
     scope.entity_type = prime.ScopeEntity.FACEZONELETS
     if control_params["scope_evaluation_type"] == "labels":
@@ -100,6 +105,7 @@ def _get_scope(model: prime.Model, control_params: dict):
 
 
 def create_size_control(model: prime.Model, size_control_params: dict, cached_data: CachedData):
+    """Create size control with the given parameters."""
     parameters = {
         "sizing_type": _get_size_control_type(size_control_params),
         "sizing_params": _get_size_control_params(model, size_control_params),
@@ -111,6 +117,7 @@ def create_size_control(model: prime.Model, size_control_params: dict, cached_da
 
 
 def create_size_field(model: prime.Model, size_field_params: dict, cached_data: CachedData):
+    """Create size field with the given parameters."""
     size_control_names = size_field_params["size_control_names"]
     parameters = {"size_controls": size_control_names}
     cached_data.push_cached_object(
@@ -119,5 +126,6 @@ def create_size_field(model: prime.Model, size_field_params: dict, cached_data: 
 
 
 def delete_control(model: prime.Model, read_params: dict, cached_data: CachedData):
+    """Delete control."""
     control = model.control_data.get_size_control_by_name(read_params["name"])
     model.control_data.delete_controls([control.id])

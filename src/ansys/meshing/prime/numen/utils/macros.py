@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for helper macros."""
 import os
 import re
 
@@ -54,7 +55,6 @@ def get_topo_nodes(model: prime.Model, part_ids: list):
             )
             topo_nodes.extend(part_topo_nodes)
     return topo_nodes
-
 
 def _get_interior_topoedges_of_topoface(model: prime.Model, topo_face: int):
     topo_data = model.topo_data

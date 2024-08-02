@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for surface mesh."""
 import logging
 import time
 
@@ -36,6 +37,7 @@ from ansys.meshing.prime.numen.utils.communicator import call_method
 
 
 def mesh(model: prime.Model, mesh_params: dict, cached_data: CachedData):
+    """Perform surface mesh based on sizing type."""
     size_field_names = mesh_params["size_field_names"]
     part_scope = mesh_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
@@ -300,7 +302,6 @@ def post_mesh_cleanup(model: prime.Model, improve_quality_params: dict, cached_d
             keep_small_free_surfaces,
         )
 
-
 def clean_up_topo_mesh_triangles(
     model: prime.Model, part: prime.Part, clean_up_triangles_params: dict, cached_data: CachedData
 ):
@@ -509,3 +510,4 @@ def _log_time(message: str, measured_time: float, logger: logging.Logger):
         logger.info(f"    {message}: {time_mins} mins {time_secs} seconds")
     else:
         logger.info(f"    {message}: {time_secs} seconds")
+

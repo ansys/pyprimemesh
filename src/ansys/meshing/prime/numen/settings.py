@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for settings."""
 import json
 import logging
 import sys
@@ -30,7 +31,9 @@ from ansys.meshing.prime.numen.utils.cached_data import CachedData
 from ansys.meshing.prime.numen.utils.communicator import call_method
 
 
+
 def set_cwd(model: prime.Model, cwd_params: dict, cached_data: CachedData):
+    """Set current working directory."""
     path = macros.resolve_path(cwd_params["path"])
     model.logger.python_logger.disabled = True
     model.set_working_directory(path)

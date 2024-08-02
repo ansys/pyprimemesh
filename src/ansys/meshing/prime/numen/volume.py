@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for volume mesh."""
 from logging import Logger
 
 import ansys.meshing.prime.numen.utils.communicator as Comm
@@ -204,6 +205,7 @@ def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: Cache
 
 
 def evaluation_value(value: str):
+    """Evaluate volume mesh type."""
     if value == 'tet':
         return prime.VolumeFillType.TET
     if value == 'poly':
@@ -219,6 +221,7 @@ def evaluation_value(value: str):
 
 
 def cell_apportion(model: prime.Model, cell_apportion_params: dict, cached_data: CachedData):
+    """Separate volume mesh by region."""
     target_part_name = cell_apportion_params["target_part_name"]
     topo_part_scope = cell_apportion_params["topology_part_expression"]
     volume_evaluation_type = cell_apportion_params["volume_evaluation_type"]
@@ -289,6 +292,7 @@ def cell_apportion(model: prime.Model, cell_apportion_params: dict, cached_data:
 def extract_flow_volume(
     model: prime.Model, extract_flow_volume_params: dict, cached_data: CachedData
 ):
+    """Extract flow volume."""
     capping_settings = extract_flow_volume_params["capping_params"]
     part_name = extract_flow_volume_params["part_name"]
     part_expression = extract_flow_volume_params["part_expression"]
@@ -467,6 +471,7 @@ def extract_flow_volume(
 
 
 def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_data: CachedData):
+    """Prepare for volume meshing."""
     part_scope = improve_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
     volume_evaluation_type = improve_params["volume_evaluation_type"]
@@ -593,6 +598,7 @@ def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_
             merge_small_zonelets_with_neighbors=False,
             element_count_limit=5,
         )
+        part.merge_zonelets(part.get_face_zonelets(), params=merge_params)
 
         label_fz_map = {}
         fzs = part.get_face_zonelets()
@@ -776,7 +782,6 @@ def _get_cell_and_face_statistics(
     result['thin_volume_count'] = cell_stats_result2["boundaryLayerElementCount"]
     mesh_info.destruct()
     return result
-
 
 def _log_names(names: list, logger: Logger):
     size = len(names)

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for functions."""
 import inspect
 import re
 import sys
@@ -27,42 +28,52 @@ from os.path import exists, isfile
 
 
 def equals_(data1, data2):
+    """Check for equality."""
     return data1 == data2
 
 
 def add_(data1, data2):
+    """Add a data."""
     return data1 + data2
 
 
 def in_list_(value, value_list):
+    """Check whether value present in list or not."""
     return value in value_list
 
 
 def non_empty_string_(value):
+    """Check for non empty string."""
     return len(value) > 0
 
 
 def valid_file_on_disc_(value):
+    """Check for valid file on disc."""
     return exists(value) and isfile(value)
 
 
 def positive_value_(value):
+    """Check for positive value."""
     return value > 0
 
 
 def min_(value, check):
+    """Check for minimum value."""
     return value >= check
 
 
 def max_(value, check):
+    """Check for maximum value."""
     return value <= check
 
 
 def range_(value, check1, check2):
+    """Check for value in range."""
     return min_(value, check1) and max_(value, check2)
 
 
 def unique_name_(value):
+    """Check for unique name."""
     return True
 
 

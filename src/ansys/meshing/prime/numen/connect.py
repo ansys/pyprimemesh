@@ -20,12 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for connect."""
 from ansys.meshing import prime
 from ansys.meshing.prime.numen.utils.cached_data import CachedData
 from ansys.meshing.prime.numen.utils.connectutils import TolerantConnect
 
 
 def tolerant_connect(model: prime.Model, tc_params: dict, cached_data: CachedData):
+    """Tolernt connect."""
     tc = TolerantConnect(model)
     tc.fuse(
         connect_tolerance=tc_params["connect_tolerance"],
@@ -42,6 +44,7 @@ def tolerant_connect(model: prime.Model, tc_params: dict, cached_data: CachedDat
 
 
 def cusp_removal(model: prime.Model, cusp_removal_params: dict, cached_data: CachedData):
+    """Cusp removal."""
     tc = TolerantConnect(model)
     tc.cusp_removal(
         connect_tolerances=cusp_removal_params["connect_tolerance"],
