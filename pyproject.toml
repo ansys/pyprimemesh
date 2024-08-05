@@ -40,17 +40,17 @@ tests = [
   "pyvista[trame]==0.44.1"
 ]
 doc = [
-  "ansys-sphinx-theme==0.15.2",
+  "ansys-sphinx-theme==0.16.6",
   "ansys-tools-visualization-interface==0.2.6",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.7.0",
-  "sphinx==7.2.6",
-  "sphinx_design==0.6.0",
+  "sphinx==8.0.2",
+  "sphinx_design==0.6.1",
   "pyvista==0.44.1",
-  "sphinx-autodoc-typehints==2.0.1",
+  "sphinx-autodoc-typehints==2.2.3",
   "sphinx-copybutton==0.5.2",
-  "sphinx-gallery==0.15.0",
-  "sphinx-notfound-page==1.0.0",
+  "sphinx-gallery==0.17.0",
+  "sphinx-notfound-page==1.0.4",
   "sphinxemoji==0.3.1",
 ]
 all = [
