@@ -1,0 +1,6 @@
+write\_by\_zones
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.write_by_zones
