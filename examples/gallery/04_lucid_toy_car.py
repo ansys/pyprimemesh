@@ -65,6 +65,7 @@ Procedure
 
 import os
 import tempfile
+import time
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import PrimePlotter
@@ -73,7 +74,7 @@ prime_client = prime.launch_prime()
 model = prime_client.model
 
 mesh_util = prime.lucid.Mesh(model)
-
+total_time = 0
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
@@ -89,8 +90,12 @@ toy_car = prime.examples.download_toy_car_fmd()
 mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
+
+start_time = time.time()
 pl = PrimePlotter()
 pl.plot(model, scope)
+end_time = time.time()
+total_time += end_time - start_time
 pl.show()
 ###############################################################################
 # Close holes
@@ -118,8 +123,11 @@ for part_name in coarse_wrap:
     )
     # Closed part with no hole
     scope = prime.ScopeDefinition(model, part_expression=closed_part.name)
+    start_time = time.time()
     pl = PrimePlotter()
     pl.plot(model, scope)
+    end_time = time.time()
+    total_time += end_time - start_time
     pl.show()
 
 ###############################################################################
@@ -219,8 +227,11 @@ scope = prime.ScopeDefinition(
     label_expression="*cabin*,*component*,*engine*,*exhaust*,*ground*,*outer*,*wheel*,*outlet*",
 )
 
+start_time = time.time()
 pl = PrimePlotter()
 pl.plot(model, scope)
+end_time = time.time()
+total_time += end_time - start_time
 pl.show()
 print(model)
 
@@ -307,7 +318,7 @@ for summary_res in qual_summary_res.quality_results_part:
 # Write mesh
 # ~~~~~~~~~~
 # Write a CAS file for use in the Fluent solver.
-
+print("Total time plotting: {:.2f} seconds".format(total_time))
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "toy_car_lucid.cas")
     mesh_util.write(mesh_file)
