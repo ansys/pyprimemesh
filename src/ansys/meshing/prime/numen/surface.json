@@ -15,9 +15,9 @@
         "parameters": "surface_mesh_with_size_controls_params"
     },
     {
-        "name": "Improve surface mesh quality",
-        "method": "numen.surface.improve_quality",
-        "parameters": "surface_improve_quality_params"
+        "name": "Post surface mesh cleanup",
+        "method": "numen.surface.post_mesh_cleanup",
+        "parameters": "post_surface_mesh_cleanup_params"
     },
     {
         "name": "Clean up triangles",

@@ -47,6 +47,11 @@
             "type" : "boolean",
             "default" : false,
             "checks" : []
+        },
+        {
+            "name" : "labels_for_zone_creation",
+            "type" : "list[string]",
+            "default" : []
         }
     ],
     "file_write_params": [
@@ -199,12 +204,19 @@
         {
             "name": "retain_generated_size_field",
             "type": "boolean",
-            "default": false
+            "default": true
         },
         {
             "name": "size_field_computation_per_part",
             "type": "boolean",
             "default": false
+        },
+        {
+            "name": "size_field_per_part_prefix",
+            "type": "string",
+            "default" : "",
+            "checks": [],
+            "enabled" : "$func(equals, $value(size_field_computation_per_part), True)"
         },
         {
             "name": "size_controls",
@@ -215,8 +227,23 @@
         {
             "name" : "stop_on_failure",
             "type" : "boolean",
-            "default" : true,
+            "default" : false,
             "checks" : []
+        },
+        {
+            "name" : "rbf_interpolation",
+            "type" : "boolean",
+            "default" : false
+        },
+        {
+            "name" : "_threaded_surfer",
+            "type" : "boolean",
+            "default" : true
+        },
+        {
+            "name" : "_threaded_size_field_compute",
+            "type" : "boolean",
+            "default" : false
         }
     ],
     "surface_mesh_with_size_controls_params": [
@@ -353,6 +380,11 @@
             "type" : "boolean",
             "default" : false,
             "checks" : []
+        },
+        {
+            "name" : "use_mesh_zonelets",
+            "type" : "boolean",
+            "default" : true
         }
     ],
     "local_tolerance":[
@@ -411,6 +443,12 @@
             "type" : "boolean",
             "default" : false,
             "checks" : []
+        },
+        {
+            "name" : "_debug",
+            "type" : "boolean",
+            "default" : false,
+            "checks" : []
         }
     ],
     "topology_cleanup_params":[
@@ -419,6 +457,18 @@
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "_constant_mesh_size",
+            "type" : "float",
+            "default" : 0.01,
+            "checks" : ["range:0.0,10.0"]
+        },
+        {
+            "name" : "_absolute_dist_tolerance",
+            "type" : "float",
+            "default" : 0.01,
+            "checks" : ["range:0.0,10.0"]
         }
     ],
     "suppress_interior_topoedges_params":
@@ -446,21 +496,44 @@
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "_constant_mesh_size",
+            "type" : "float",
+            "default" : 0.01,
+            "checks" : ["range:0.0,10.0"]
+        },
+        {
+            "name" : "_absolute_dist_tolerance",
+            "type" : "float",
+            "default" : 0.01,
+            "checks" : ["range:0.0,10.0"]
         }
     ],
     "volume_mesh_params": [
         {
-            "name" : "part_name",
+            "name" : "part_scope",
             "type" : "string",
+            "default" : "*",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name": "size_field_computation_per_part",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "name": "size_field_per_part_prefix",
+            "type": "string",
+            "default" : "",
+            "checks": [],
+            "enabled" : "$func(equals, $value(size_field_computation_per_part), True)"
         },
         {
             "name" : "volume_fill_type",
             "type" : "range[string]",
             "default" : "tet",
-            "range" : ["tet", "poly", "tet_hexcore", "poly_hexcore"],
-            "checks" : []
-
+            "range" : ["tet", "poly", "tet_hexcore", "poly_hexcore"]
         },
         {
             "name": "prism_controls",
@@ -522,6 +595,12 @@
             "checks" : []
         },
         {
+            "name" : "part_expression",
+            "type" : "string",
+            "default" : "*",
+            "checks" : ["non_empty_string"]
+        },
+        {
             "name" : "face_expression",
             "type" : "string",
             "default" : "*",
@@ -542,36 +621,37 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name": "source_face_label_prefix",
+            "name" : "part_expression",
             "type" : "string",
-            "default" : "thin_part",
-            "checks" : []
+            "default" : "*",
+            "checks" : ["non_empty_string"]
         },
         {
-            "name": "target_face_label_prefix",
+            "name": "source_face_label",
             "type" : "string",
-            "default" : "thin_part",
-            "checks" : []
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name": "target_face_label",
+            "type" : "string",
+            "checks" : ["non_empty_string"]
         },
         {
             "name" : "imprint_sides",
             "type" : "boolean",
-            "default" : false,
-            "checks" : []
+            "default" : false
 
         },
         {
             "name" : "stair_step",
             "type" : "boolean",
-            "default" : false,
-            "checks" : []
+            "default" : false
 
         },
         {
             "name" : "n_layers",
             "type" : "int",
-            "default" : 1,
-            "checks" : []
+            "default" : 1
         }
 
     ],
@@ -601,7 +681,7 @@
             "checks" : []
         }
     ],
-    "surface_improve_quality_params": [
+    "post_surface_mesh_cleanup_params": [
         {
             "name" : "part_scope",
             "type" : "string",
@@ -689,15 +769,10 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "volume_scope",
+            "name" : "volume_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
-        },
-        {
-            "name" : "thickness",
-            "type" : "float",
-            "checks" : ["positive_value"]
         },
         {
             "name" : "source_face_label",
@@ -708,6 +783,16 @@
             "name" : "target_face_label",
             "type" : "string",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "thickness",
+            "type" : "float",
+            "checks" : ["positive_value"]
+        },
+        {
+            "name" : "use_mesh_zonelets",
+            "type" : "boolean",
+            "default" : true
         }
     ],
     "cell_apportion_params": [
@@ -723,7 +808,7 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "volume_scope",
+            "name" : "volume_expression",
             "type" : "string",
             "default" : ""
         }
@@ -735,15 +820,22 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "volume_scope",
+            "name" : "volume_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "thin_volume_face_prefix",
-            "type" : "string",
-            "default" : ""
+            "name" : "_nugget_size",
+            "type" : "float",
+            "default" : 0.35,
+            "checks" : ["range:0.1,1.0"]
+        },
+        {
+            "name" : "_nugget_mesh_size",
+            "type" : "float",
+            "default" : 0.35,
+            "checks" : ["range:0.1,1.0"]
         }
     ],
     "delete_parts_params" : [
@@ -757,7 +849,49 @@
         {
             "name" : "part_scope",
             "type" : "string",
+            "default" : "*",
             "checks" : ["non_empty_string"]
+        }
+    ],
+    "merge_parts_params" : [
+        {
+            "name" : "part_scope",
+            "type" : "string",
+            "default" : "*",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "merged_part_name",
+            "type" : "string",
+            "checks" : ["non_empty_string"]
+        }
+    ],
+    "delete_labels_params" : [
+        {
+            "name" : "part_scope",
+            "type" : "string",
+            "default" : "*",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "label_expression",
+            "type" : "string",
+            "default" : "*",
+            "checks" : ["non_empty_string"]
+        }
+    ],
+    "volume_mesh_check_params" : [
+        {
+            "name" : "part_scope",
+            "type" : "string",
+            "default" : "*",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "volume_fill_type",
+            "type" : "range[string]",
+            "default" : "tet",
+            "range" : ["tet", "poly", "tet_hexcore", "poly_hexcore"]
         }
     ]
 }

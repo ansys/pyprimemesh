@@ -294,6 +294,29 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("get_num_threads")
         return result
 
+    def get_num_compute_nodes(self) -> int:
+        """ Get the number of compute nodes.
+
+
+        Returns
+        -------
+        int
+            Returns the number of compute nodes.
+
+
+        Examples
+        --------
+        >>> model = client.model
+        >>> num_compute_nodes = model.get_num_compute_nodes()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Model/GetNumComputeNodes"
+        self._print_logs_before_command("get_num_compute_nodes", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_num_compute_nodes")
+        return result
+
     def start_distributed_meshing(self):
         """ Enables distributed meshing mode.
 

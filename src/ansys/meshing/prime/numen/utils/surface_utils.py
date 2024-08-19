@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for surface utils."""
 from logging import Logger
 from typing import List
 
@@ -35,7 +34,6 @@ def improve_quality(
     local_remesh_by_size_change: bool,
     keep_small_free_surfaces: bool,
 ):
-    """Improve qaulity based on skewness."""
     global_sf_params = model.get_global_sizing_params()
     register_id = 26
     surface_search = prime.SurfaceSearch(model)
@@ -327,11 +325,23 @@ def improve_quality(
         register_id=register_id,
         params=params,
     )
+    gs_params = model.get_global_sizing_params()
     if search_results.n_found > 0:
-        local_surfer_params = prime.LocalSurferParams(
-            model, growth_rate=1.2, min_angle=180, max_angle=180
-        )
-        local_surfer_params.size_field_type = prime.SizeFieldType.VOLUMETRIC
+        if len(model.get_active_volumetric_size_fields()) == 0:
+            local_surfer_params = prime.LocalSurferParams(
+                model,
+                min_size=gs_params.min,
+                max_size=gs_params.max,
+                growth_rate=1.2,
+                min_angle=180,
+                max_angle=180,
+            )
+            local_surfer_params.size_field_type = prime.SizeFieldType.MESHEDGEODESIC
+        else:
+            local_surfer_params = prime.LocalSurferParams(
+                model, growth_rate=1.2, min_angle=180, max_angle=180
+            )
+            local_surfer_params.size_field_type = prime.SizeFieldType.VOLUMETRIC
         local_surfer_params.n_rings = 1
         surfer.remesh_face_zonelets_locally(
             part_id=part.id,
@@ -351,7 +361,6 @@ def cleanup_tri_mesh(
     keep_small_free_surfaces: bool,
     logger: Logger,
 ):
-    """Clean up tri mesh."""
     quality_reg_id = 26
     surface_search_tool = prime.SurfaceSearch(model)
     collapse_tool = prime.CollapseTool(model)
@@ -455,7 +464,6 @@ def cleanup_tri_mesh(
 
 
 def check_surface_intersection(model: prime.Model, part: prime.Part):
-    """Check surface intersection."""
     diag = prime.SurfaceSearch(model)
     register_id = 1
     self_inter_params = prime.SearchBySelfIntersectionParams(model)
@@ -483,7 +491,6 @@ def check_surface_intersection(model: prime.Model, part: prime.Part):
 
 
 def surface_mesh_check(model: prime.Model):
-    """Surface mesh check."""
     params = prime.SurfaceDiagnosticSummaryParams(model)
     params.compute_self_intersections = True
     params.compute_free_edges = True
@@ -494,7 +501,6 @@ def surface_mesh_check(model: prime.Model):
 
 
 def free_elements_results(model: prime.Model, part: prime.Part):
-    """Free elements."""
     diag = prime.SurfaceSearch(model)
     register_id = 2
     model._comm.serve(
@@ -535,8 +541,8 @@ def free_elements_results(model: prime.Model, part: prime.Part):
 
 
 def smooth_dihedral_faces(model: prime.Model, part: prime.Part, fluid_volumes: List[int]):
-    """Smooth dihedral faces."""
-    result = diahedral_angle_results(model, part)
+    fluid_zonelets = part.get_face_zonelets_of_volumes(fluid_volumes)
+    result = diahedral_angle_results(model, part, fluid_zonelets)
     if result[0] > 0:
         surface_utils = prime.SurfaceUtilities(model)
         smooth_params = prime.SmoothDihedralFaceNodesParams(
@@ -557,15 +563,14 @@ def smooth_dihedral_faces(model: prime.Model, part: prime.Part, fluid_volumes: L
         raise RuntimeError("Face elements found intersecting")
 
 
-def diahedral_angle_results(model: prime.Model, part: prime.Part):
-    """Dihedral angle result."""
+def diahedral_angle_results(model: prime.Model, part: prime.Part, face_zonelets: List[int]):
     diag = prime.SurfaceSearch(model)
     register_id = 3
     command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsByDihedralAngle"
-    params = {"minAngle": 5, "faceOrientationCorrectionType": 1}
+    params = {"minAngle": 5, "faceOrientationCorrectionType": 2}
     args = {
         "part_id": part.id,
-        "face_zonelets": part.get_face_zonelets(),
+        "face_zonelets": face_zonelets,
         "register_id": register_id,
         "params": params,
     }

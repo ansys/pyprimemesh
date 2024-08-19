@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Numen miscellaneous module."""
 import os
 
 import ansys.meshing.prime.numen.utils.macros as macros
@@ -30,7 +29,6 @@ from ansys.meshing.prime.numen.utils.communicator import call_method
 
 
 def read(model: prime.Model, read_params: dict, cached_data: CachedData):
-    """Read a file depending on extension."""
     length_unit_mapping = {
         "m": prime.LengthUnit.M,
         "cm": prime.LengthUnit.CM,
@@ -121,6 +119,8 @@ def read(model: prime.Model, read_params: dict, cached_data: CachedData):
             ".dsco",
         ]
     file_name = read_params["file_name"]
+    labels_for_zone_creation = read_params["labels_for_zone_creation"]
+    create_zones = False
     file_ext = os.path.splitext(file_name)[1]
     if file_ext == ".msh" or file_name[-7:] == ".msh.gz":
         prime.FileIO(model).import_fluent_meshing_meshes(
@@ -138,7 +138,7 @@ def read(model: prime.Model, read_params: dict, cached_data: CachedData):
         prime.FileIO(model).read_pmdat(
             file_name, prime.FileReadParams(model, append=read_params["append"])
         )
-        call_method(model, "PrimeMesh::Model/EnableLocalGSProjectionMethod", model._object_id, {})
+        create_zones = True
     elif file_ext == ".psf" or file_name[-7:] == ".psf.gz":
         prime.FileIO(model).read_size_field(file_name, prime.ReadSizeFieldParams(model))
     elif file_ext in supported_cad_formats:
@@ -152,33 +152,35 @@ def read(model: prime.Model, read_params: dict, cached_data: CachedData):
         )
         fileio = prime.FileIO(model)
         fileio.import_cad(file_name=file_name, params=params)
+        create_zones = True
     model._comm.serve(
         model, "PrimeMesh::Model/EnableLocalGSProjectionMethod", model._object_id, args={}
     )
+    if create_zones and len(labels_for_zone_creation) > 0:
+        _create_zones_for_labels(model, labels_for_zone_creation)
 
 
 def read_size_field(model: prime.Model, size_field_read_params: dict, cached_data: CachedData):
-    """Read size field."""
     file_name = size_field_read_params["file_name"]
     fileio = prime.FileIO(model)
     fileio.read_size_field(file_name, prime.ReadSizeFieldParams(model))
 
 
 def write(model: prime.Model, write_params: dict, cached_data: CachedData):
-    """Write or export a file depending on extension."""
     file_name = write_params["file_name"]
     file_ext = os.path.splitext(file_name)[1]
     fileio = prime.FileIO(model)
     if file_ext == ".pmdat" or file_name[-9:] == ".pmdat.gz":
         fileio.write_pmdat(write_params["file_name"], prime.FileWriteParams(model))
     elif file_ext == ".msh" or file_name[-7:] == ".msh.gz":
-        fileio.write_pmdat(write_params["file_name"], prime.FileWriteParams(model))
+        fileio.export_fluent_meshing_mesh(
+            write_params["file_name"], prime.ExportFluentMeshingMeshParams(model)
+        )
     elif file_ext == ".psf" or file_name[-7:] == ".psf.gz":
         fileio.write_size_field(file_name, prime.WriteSizeFieldParams(model))
 
 
 def set_global_sizing(model: prime.Model, global_params: dict, cached_data: CachedData):
-    """Set global sizing."""
     model.set_global_sizing_params(
         prime.GlobalSizingParams(
             model,
@@ -192,7 +194,6 @@ def set_global_sizing(model: prime.Model, global_params: dict, cached_data: Cach
 def create_labels_per_part_entities(
     model: prime.Model, create_labels_params: dict, cached_data: CachedData
 ):
-    """Create labels per zonelets or topo entities."""
     part_scope = create_labels_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -211,7 +212,6 @@ def create_labels_per_part_entities(
 
 
 def merge_zonelets(model: prime.Model, merge_params: dict, cached_data: CachedData):
-    """Merge zonelets with the given merge parameters."""
     part_scope = merge_params["part_scope"]
     scope_evaluation_type = merge_params["scope_evaluation_type"]
     entity_type = merge_params["entity_type"]
@@ -264,8 +264,69 @@ def merge_zonelets(model: prime.Model, merge_params: dict, cached_data: CachedDa
 
 
 def delete_parts(model: prime.Model, delete_params: dict, cached_data: CachedData):
-    """Delete parts specified by parameters."""
     part_scope = delete_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     if len(part_ids) > 0:
         model.delete_parts(part_ids)
+
+
+def merge_parts(model: prime.Model, merge_params: dict, cached_data: CachedData):
+    part_scope = merge_params["part_scope"]
+    merged_part_name = merge_params["merged_part_name"]
+    part_ids = macros._get_part_ids(model, part_scope)
+    if len(part_ids) > 0:
+        model.merge_parts(part_ids, prime.MergePartsParams(model, merged_part_name))
+
+
+def delete_labels(model: prime.Model, delete_params: dict, cached_data: CachedData):
+    part_scope = delete_params["part_scope"]
+    label_expression = delete_params["label_expression"]
+    name_pattern_params = prime.NamePatternParams(model)
+    part_ids = macros._get_part_ids(model, part_scope)
+    for part_id in part_ids:
+        part = model.get_part(part_id)
+        labels = part.get_labels()
+        labels_to_remove = []
+        for label in labels:
+            if macros.check_name_pattern(label, label_expression):
+                labels_to_remove.append(label)
+        tfs = part.get_topo_faces_of_label_name_pattern(label_expression, name_pattern_params)
+        if len(tfs) > 0:
+            part.remove_labels_from_topo_entities(labels_to_remove, tfs)
+        tes = part.get_topo_edges_of_label_name_pattern(label_expression, name_pattern_params)
+        if len(tes) > 0:
+            part.remove_labels_from_topo_entities(labels_to_remove, tes)
+        fzs = part.get_face_zonelets_of_label_name_pattern(label_expression, name_pattern_params)
+        if len(fzs) > 0:
+            part.remove_labels_from_zonelets(labels_to_remove, fzs)
+        ezs = part.get_edge_zonelets_of_label_name_pattern(label_expression, name_pattern_params)
+        if len(ezs) > 0:
+            part.remove_labels_from_zonelets(labels_to_remove, ezs)
+
+
+def _create_zones_for_labels(model: prime.Model, labels: list):
+    label_vs_zoneid = {}
+    np = prime.NamePatternParams(model)
+    for part in model.parts:
+        for label in labels:
+            tfs = part.get_topo_faces_of_label_name_pattern(label, np)
+            if len(tfs) > 0:
+                zone_id = 0
+                if label in label_vs_zoneid:
+                    zone_id = label_vs_zoneid[label]
+                else:
+                    zone_id = _get_face_zone_by_name(model, label)
+                    label_vs_zoneid[label] = zone_id
+                part.add_topo_entities_to_zone(zone_id, tfs)
+
+
+def _get_face_zone_by_name(model: prime.Model, zone_name: str):
+    zone_id = model.get_zone_by_name(zone_name)
+    if zone_id > 0:
+        zone_type = call_method(
+            model, "PrimeMesh::Model/ZoneType", model._object_id, {"id": zone_id}
+        )
+        if zone_type == prime.ZoneType.FACE:
+            return zone_id
+    res = model.create_zone(zone_name, prime.ZoneType.FACE)
+    return res.zone_id

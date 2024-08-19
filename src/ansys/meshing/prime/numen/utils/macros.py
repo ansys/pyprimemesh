@@ -21,6 +21,9 @@
 # SOFTWARE.
 
 """Module for helper macros."""
+
+import re
+
 from ansys.meshing import prime
 from ansys.meshing.prime.numen.utils.communicator import call_method
 
@@ -80,3 +83,28 @@ def _check_size_control_scope(
         return True
 
     return False
+
+
+def _check_pattern(val: str, pattern: str):
+    pattern = "^" + pattern.replace("*", ".*") + "$"
+    x = re.search(pattern, val)
+    if x:
+        return True
+    else:
+        return False
+
+
+def check_name_pattern(name: str, name_pattern: str):
+    """Checks name pattern."""
+    name_pattern = name_pattern.replace(",", " ")
+    patterns = name_pattern.split(" ")
+    found = False
+    for pattern in patterns:
+        if pattern.startswith("!"):
+            if _check_pattern(name, pattern[1:]):
+                return False
+            else:
+                found = True
+        elif not found:
+            found = _check_pattern(name, pattern)
+    return found

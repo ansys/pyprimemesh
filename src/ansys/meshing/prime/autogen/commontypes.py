@@ -38,6 +38,10 @@ class FaceQualityMeasure(enum.IntEnum):
     """Size Change is the maximum ratio of the area of each neighboring face element to the area of face element when the area of the face element is smaller than the neighbor. The minimum value for size change is 1."""
     ASPECTRATIO = 5
     """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
+    WARP = 7
+    """Face quality metric to check warping factor.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ELEMENTQUALITY = 50
     """The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst)."""
 

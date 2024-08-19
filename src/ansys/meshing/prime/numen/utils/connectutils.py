@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for connect utils."""
 import re
 from typing import List
 
@@ -32,15 +31,17 @@ from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 class TolerantConnect:
     """
     Provides methods to user who is new to meshing.
-
     This class also serves as a tutorial
     for commonly used tolerant connect workflows.
     The ``TolerantConnect`` class provides these functionalities:
+    *
+    *
+    *
+    *
     """
 
     def __init__(self, model: Model):
         """Initialize using a model.
-
         Parameters
         ----------
         model : Model
@@ -50,7 +51,6 @@ class TolerantConnect:
         self._logger = model.python_logger
 
     def match_pattern(self, pattern: str, name: str) -> bool:
-        """Evaluate pattern."""
         pattern = "^" + pattern.replace("*", ".*").replace("?", ".") + "$"
         x = re.search(pattern, name)
         if x:
@@ -59,7 +59,6 @@ class TolerantConnect:
             return False
 
     def eval_name_pattern(self, name: str, pattern: str) -> bool:
-        """Evaluate name pattern."""
         bb = pattern.split("!")
         if self.match_pattern(bb[0].strip(), name):
             if len(bb) > 1:
@@ -74,7 +73,6 @@ class TolerantConnect:
                 return True
 
     def get_parts_of_name_pattern(self, name_pattern: str):
-        """Get parts of name pattern."""
         patterns = name_pattern.split(",")
 
         part_names = []
@@ -105,7 +103,6 @@ class TolerantConnect:
         results: prime.FuseResults,
         part_labels: list = [],
     ):
-        """Get failed fuse ordering."""
         model = self._model
         pairs = []
         part = model.get_part(part_id)
@@ -139,7 +136,6 @@ class TolerantConnect:
         fuseOption: prime.FuseOption,
         fuse_edges_only: bool = False,
     ):
-        """Perform mesh match."""
         connect = prime.Connect(model=self._model)
         params = prime.FuseParams(
             model=self._model,
@@ -255,6 +251,182 @@ class TolerantConnect:
             faces = part.get_face_zonelets()
             self._collapse_thin_strips(surface_search_tool, collapse_tool, part, faces, tolerance)
 
+    def surface_intersection_results(self, part: Part):
+        diag = prime.SurfaceSearch(model=self._model)
+        register_id = 1
+        self_inter_params = prime.SearchBySelfIntersectionParams(model=self._model)
+        self_inter_res = diag.search_zonelets_by_self_intersections(
+            part_id=part.id,
+            face_zonelets=part.get_face_zonelets(),
+            register_id=register_id,
+            params=self_inter_params,
+        )
+        results = diag.get_search_info_by_register_id(
+            part.get_face_zonelets(),
+            register_id,
+            prime.SearchInfoByRegisterIdParams(model=self._model),
+        )
+        all_locations = []
+        for i in range(int(len(results.locations_found) / 3)):
+            location = [
+                results.locations_found[i * 3],
+                results.locations_found[i * 3 + 1],
+                results.locations_found[i * 3 + 2],
+            ]
+            all_locations.append(location)
+        face_zonelets = results.face_zonelets_found
+        return self_inter_res.n_found, all_locations, face_zonelets
+
+    def _connect_interfering_volumes(
+        self,
+        parts_name_exp: str = "*",
+        join_tolerance: float = 0.05,
+        side_tolerance: float = 0.05,
+        use_abs_tol: bool = False,
+        intersect_tolerance: float = 0.05,
+        join_remesh: bool = True,
+        connected_part_name: str = "merged_part",
+        use_mesh_match: bool = False,
+        mesh_match_angle: float = 45,
+        priority_ordered_part_names_in: List[str] = [],
+        intersect: bool = True,
+        part_labels: list = [],
+        fuse_edges_only: bool = False,
+        debug: bool = False,
+    ):
+        dummy_unique_label1 = "___dummy_unique_label_to_join_intersect_one_by_one1___"
+        dummy_unique_label2 = "___dummy_unique_label_to_join_intersect_one_by_one2___"
+        pattern_params = prime.NamePatternParams(model=self._model)
+        interfering_parts = []
+        if "*" not in parts_name_exp and "!" not in parts_name_exp:
+            patterns = parts_name_exp.split(",")
+            for pattern in patterns:
+                interfering_parts.extend(self.get_parts_of_name_pattern(pattern))
+        else:
+            interfering_parts = self.get_parts_of_name_pattern(parts_name_exp)
+        priority_ordered_part_names = []
+        failed_part_name_exp = []
+        for part_name_exp in priority_ordered_part_names_in:
+            ordered_names = [part.name for part in self.get_parts_of_name_pattern(part_name_exp)]
+            if len(ordered_names) == 0:
+                failed_part_name_exp.append(part_name_exp)
+            else:
+                priority_ordered_part_names.extend(ordered_names)
+        if len(priority_ordered_part_names_in) > 0 and len(failed_part_name_exp) > 0:
+            for part_name_exp in failed_part_name_exp:
+                self._logger.warning(
+                    'No parts found for expression "'
+                    + part_name_exp
+                    + '" specified in interfering_parts_priority setting'
+                )
+        connect = prime.Connect(self._model)
+        intersect_params = prime.IntersectParams(
+            model=self._model,
+            tolerance=intersect_tolerance,
+        )
+        features = prime.FeatureExtraction(self._model)
+        feature_params = prime.ExtractFeatureParams(
+            model=self._model,
+            feature_angle=40.0,
+            label_name="__extracted__features__",
+            disconnect_with_faces=False,
+            replace=True,
+        )
+        merged_part = self._model.parts[0]
+        merged_part.delete_zonelets(merged_part.get_edge_zonelets())
+        volumes = merged_part.get_volumes()
+        merged_part.get_face_zonelets_of_volumes([])
+        n_parts = len(interfering_parts)
+        if n_parts == 1:
+            surf_util = prime.SurfaceUtilities(self._model)
+            hidden = self._model._comm.serve(
+                self._model,
+                "PrimeMesh::Model/SetPyPrimeSettings",
+                self._model._object_id,
+                args={"settings": "encode_hidden_params"},
+            )
+            print("volumes found = ", len(volumes))
+            join_to_faces = merged_part.get_face_zonelets_of_volumes([volumes[0]])
+            for ind in range(1, len(volumes)):
+                print("connecting with volume ", ind)
+                join_faces = merged_part.get_face_zonelets_of_volumes([volumes[ind]])
+                if use_mesh_match:
+                    res = features.extract_features_on_face_zonelets(
+                        part_id=merged_part.id, face_zonelets=join_to_faces, params=feature_params
+                    )
+                    res = features.extract_features_on_face_zonelets(
+                        part_id=merged_part.id, face_zonelets=join_faces, params=feature_params
+                    )
+                # self.write("before_matching_with_volume_" + ind.__str__() + ".pmdat")
+                merged_part.add_labels_on_zonelets([dummy_unique_label1], join_to_faces)
+                merged_part.add_labels_on_zonelets([dummy_unique_label2], join_faces)
+                check_self_intersections = False
+                if use_mesh_match:
+                    result = self.mesh_match(
+                        merged_part,
+                        join_to_faces,
+                        join_faces,
+                        join_tolerance,
+                        side_tolerance,
+                        use_abs_tol,
+                        mesh_match_angle,
+                        prime.FuseOption.TRIMONESIDE,
+                        fuse_edges_only,
+                    )
+                    if prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE in result.warning_codes:
+                        self.getfailedfuseordering(merged_part.id, result, part_labels)
+                        check_self_intersections = True
+                    if prime.WarningCode.REMOVEOVERLAPWITHINTERSECT in result.warning_codes:
+                        all = []
+                        for item in result.intersecting_zonelet_pairs:
+                            all.append(item.zone_id0)
+                            all.append(item.zone_id1)
+                        all = []  # list(set(all))
+                if intersect:
+                    intersect_to_faces = merged_part.get_face_zonelets_of_label_name_pattern(
+                        dummy_unique_label1,
+                        pattern_params,
+                    )
+                    intersect_faces = merged_part.get_face_zonelets_of_label_name_pattern(
+                        dummy_unique_label2,
+                        pattern_params,
+                    )
+                    intersect_params = prime.IntersectParams(
+                        model=self._model,
+                        tolerance=intersect_tolerance,
+                    )
+                    inter_res = connect.intersect_face_zonelets(
+                        merged_part.id,
+                        intersect_faces,
+                        intersect_to_faces,
+                        intersect_params,
+                    )
+                if check_self_intersections == True:
+                    checks = self.surface_intersection_results(merged_part)
+                    if checks[0] > 0:
+                        # self.write("with_self_intersections.pmdat")
+                        err_string = "Failed to connect " " with " + volumes[
+                            ind
+                        ].__str__ + ".\nCheck the locations at " + str(checks[1])
+                        raise PrimeRuntimeError(err_string)
+                fz1 = merged_part.get_face_zonelets_of_label_name_pattern(
+                    dummy_unique_label1,
+                    pattern_params,
+                )
+                fz2 = merged_part.get_face_zonelets_of_label_name_pattern(
+                    dummy_unique_label2,
+                    pattern_params,
+                )
+                join_faces = list(set(fz1).union(set(fz2)))
+                merged_part.remove_labels_from_zonelets(
+                    [dummy_unique_label1, dummy_unique_label2], join_faces
+                )
+                # self._lucid_mesh.write("after_just_connection_with_part_" +  part_name + ".pmdat")
+            merged_part.delete_zonelets(merged_part.get_edge_zonelets())
+        elif n_parts == 1:
+            merged_part = interfering_parts[0]
+            merged_part.set_suggested_name(connected_part_name)
+
     def _connect_interfering_parts(
         self,
         parts_name_exp: str = "*",
@@ -270,6 +442,7 @@ class TolerantConnect:
         intersect: bool = True,
         part_labels: list = [],
         fuse_edges_only: bool = False,
+        debug: bool = False,
     ):
         dummy_unique_label1 = "___dummy_unique_label_to_join_intersect_one_by_one1___"
         dummy_unique_label2 = "___dummy_unique_label_to_join_intersect_one_by_one2___"
@@ -320,10 +493,19 @@ class TolerantConnect:
             for part_i in range(n_parts):
                 part = interfering_parts[part_i]
                 part.delete_zonelets(part.get_edge_zonelets())
-            # merged_part = model.get_part_by_name(connected_part_name)
-            # for part_i in range(n_parts):
+            surf_util = prime.SurfaceUtilities(self._model)
+            hidden = self._model._comm.serve(
+                self._model,
+                "PrimeMesh::Model/SetPyPrimeSettings",
+                self._model._object_id,
+                args={"settings": "encode_hidden_params"},
+            )
             merged_part = interfering_parts[0]
-            for part_i in range(1, n_parts):
+            start_index = 1
+            if debug:
+                merged_part = self._model.get_part_by_name(connected_part_name)
+                start_index = 0
+            for part_i in range(start_index, n_parts):
                 part = interfering_parts[part_i]
                 join_to_faces = merged_part.get_face_zonelets()
                 parts_to_merge = [merged_part.id]
@@ -334,7 +516,7 @@ class TolerantConnect:
                 # self.write("before_mesh_matchin_with_part_" +  part_name + ".pmdat")
                 join_faces = part.get_face_zonelets()
                 if use_mesh_match:
-                    if part_i == 1:
+                    if (debug and part_i == 0) or (not debug and part_i == 1):
                         res = features.extract_features_on_face_zonelets(
                             part_id=merged_part.id,
                             face_zonelets=join_to_faces,
@@ -371,6 +553,11 @@ class TolerantConnect:
                     if prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE in result.warning_codes:
                         self.getfailedfuseordering(merged_part.id, result, part_labels)
                         check_self_intersections = True
+                    if prime.WarningCode.REMOVEOVERLAPWITHINTERSECT in result.warning_codes:
+                        all = []
+                        # for item in result.intersecting_zonelet_pairs:
+                        #    all.append(item.zone_id0)
+                        #   all.append(item.zone_id1)
                 else:
                     joinres = connect.join_face_zonelets(
                         merge_res.merged_part_id,
@@ -400,6 +587,7 @@ class TolerantConnect:
                 if check_self_intersections == True:
                     checks = self.surface_intersection_results(merged_part)
                     if checks[0] > 0:
+                        # self.write("with_self_intersections.pmdat")
                         err_string = (
                             "Failed to connect "
                             + '"'
@@ -413,7 +601,7 @@ class TolerantConnect:
                 merged_part.remove_labels_from_zonelets(
                     [dummy_unique_label1, dummy_unique_label2], all_face_zonelets
                 )
-                # self._lucid_mesh.write("after_just_connection_with_part_" +  part_name + ".pmdat")
+                # self.write("after_just_connection_with_part_" +  part_name + ".pmdat")
             merged_part.delete_zonelets(merged_part.get_edge_zonelets())
         elif n_parts == 1:
             merged_part = interfering_parts[0]
@@ -432,8 +620,8 @@ class TolerantConnect:
         use_mesh_match: bool = False,
         mesh_match_angle: float = 45,
         part_labels: list = [],
+        debug: bool = False,
     ):
-        """Connect volumetric interfering parts."""
         return self._connect_interfering_parts(
             parts_name_exp=parts_name_exp,
             join_tolerance=join_tolerance,
@@ -447,6 +635,7 @@ class TolerantConnect:
             priority_ordered_part_names_in=priority_ordered_part_names,
             intersect=True,
             part_labels=part_labels,
+            debug=debug,
         )
 
     def connect_contact_interfering_parts(
@@ -461,8 +650,8 @@ class TolerantConnect:
         mesh_match_angle: float = 45,
         part_labels: list = [],
         fuse_edges_only: bool = False,
+        debug: bool = False,
     ):
-        """Connect contact interfering parts."""
         return self._connect_interfering_parts(
             parts_name_exp=parts_name_exp,
             join_tolerance=join_tolerance,
@@ -477,10 +666,10 @@ class TolerantConnect:
             intersect=False,
             part_labels=part_labels,
             fuse_edges_only=fuse_edges_only,
+            debug=debug,
         )
 
     def zone_management(self):
-        """Zone management."""
         label_list = []
         mergeParams = prime.MergeZoneletsParams(model=self._model)
         for part in self._model.parts:
@@ -504,7 +693,6 @@ class TolerantConnect:
         stitch_free_faces: bool = True,
         keep_small_free_surfaces: bool = False,
     ):
-        """Clean up triangles post surface mesh."""
         parts = self.get_parts_of_name_pattern(part_name_exp)
         quality_reg_id = 26
         surface_search_tool = prime.SurfaceSearch(model=self._model)
@@ -618,7 +806,6 @@ class TolerantConnect:
             checks = surface_search_tool.get_surface_diagnostic_summary(diag_params)
 
     def surface_mesh_coarsening(self, part: Part = None):
-        """Coarsen the surface mesh."""
         surfer = prime.Surfer(self._model)
         surfer_params = prime.SurferParams(
             self._model,
@@ -639,7 +826,6 @@ class TolerantConnect:
         self,
         write_intermediate_files: bool = False,
     ):
-        """Delete topology."""
         params = prime.DeleteTopoEntitiesParams(model=self._model, delete_geom_zonelets=True)
         part_ids_to_delete = []
         result = None
@@ -658,7 +844,6 @@ class TolerantConnect:
         self,
         connect_tolerance: float,
     ):
-        """Refine contacts."""
         result = None
         global_min_size = self._model.get_global_sizing_params().min
         part_ids = [part.id for part in self._model.parts]
@@ -674,38 +859,31 @@ class TolerantConnect:
             self._logger.info("Less than two parts exist.  No contacts to be refined. ")
         return result
 
-    def fuse(
-        self,
-        connect_tolerance: float,
-        side_tolerance: float,
-        connect_parts_with_diff_tol: list,
-        interfering_parts_exp: str,
-        interfering_parts_priority: list,
-        contact_parts_exp: str,
-        part_name: str = "tolerant_connect_part",
-        delete_topology: bool = False,
-        refine_at_contacts: bool = False,
-        use_absolute_connect_tolerance: bool = True,
-        use_mesh_match: bool = True,
-        mesh_match_angle: int = 45,
-        write_intermediate_files: bool = False,
+    def stfailure1(
+        self, connect_tolerance, side_tolerance, use_absolute_connect_tolerance, mesh_match_angle
     ):
-        """Fuse."""
-        if refine_at_contacts:
-            refine_contact_results = self.refine_contacts(connect_tolerance)
-        if delete_topology:
-            self.delete_topology()
-        # mesh match within part in case of shared topology failure
         for part in self._model.parts:
             non_share_labels = []
             total_labels = part.get_labels()
             for label in total_labels:
                 if "connect_topology" in label:
                     non_share_labels.append(label)
+            print(non_share_labels)
+            features = prime.FeatureExtraction(self._model)
+            feature_params = prime.ExtractFeatureParams(
+                model=self._model,
+                feature_angle=40.0,
+                label_name="__extracted__features__",
+                disconnect_with_faces=False,
+                replace=True,
+            )
             for non_share_label in non_share_labels:
                 name_pattern_params = prime.NamePatternParams(model=self._model)
                 face_zonelets = part.get_face_zonelets_of_label_name_pattern(
                     non_share_label, name_pattern_params
+                )
+                res = features.extract_features_on_face_zonelets(
+                    part_id=part.id, face_zonelets=face_zonelets, params=feature_params
                 )
                 result = self.mesh_match(
                     part=part,
@@ -723,13 +901,93 @@ class TolerantConnect:
                     self._logger.warning(
                         'Intersections found when removing overlaps in part' + part.name
                     )
+
+    def stfailure2(
+        self,
+        connect_tolerance,
+        side_tolerance,
+        use_absolute_connect_tolerance,
+        part_name,
+        use_mesh_match,
+        mesh_match_angle,
+        interfering_parts_priority,
+        debug,
+    ):
+        if len(self._model.parts) == 1:
+            self._connect_interfering_volumes(
+                parts_name_exp="*",
+                join_tolerance=connect_tolerance,
+                side_tolerance=side_tolerance,
+                use_abs_tol=use_absolute_connect_tolerance,
+                intersect_tolerance=0.05,
+                join_remesh=True,
+                connected_part_name=part_name,
+                use_mesh_match=use_mesh_match,
+                mesh_match_angle=mesh_match_angle,
+                priority_ordered_part_names_in=interfering_parts_priority,
+                intersect=False,
+                part_labels=[],
+                debug=debug,
+            )
+
+    def fuse(
+        self,
+        connect_tolerance: float,
+        side_tolerance: float,
+        connect_parts_with_diff_tol: list,
+        interfering_parts_exp: str,
+        interfering_parts_priority: list,
+        contact_parts_exp: str,
+        part_name: str = "tolerant_connect_part",
+        delete_topology: bool = False,
+        refine_at_contacts: bool = False,
+        use_absolute_connect_tolerance: bool = True,
+        use_mesh_match: bool = True,
+        mesh_match_angle: int = 45,
+        write_intermediate_files: bool = False,
+        debug: bool = False,
+    ):
+        if refine_at_contacts:
+            refine_contact_results = self.refine_contacts(connect_tolerance)
+        if delete_topology:
+            self.delete_topology()
+        # extra face label deletion
+        for part in self._model.parts:
+            total_labels = part.get_labels()
+            for label in total_labels:
+                if "__attrib_abr_topotype" in label:
+                    part.remove_labels_from_zonelets(
+                        [label],
+                        part.get_face_zonelets(),
+                    )
+                    part.remove_labels_from_zonelets(
+                        [label],
+                        part.get_edge_zonelets(),
+                    )
+        # mesh match within part in case of shared topology failure
+        if len(self._model.parts) == 1:
+            self.stfailure1(
+                connect_tolerance, side_tolerance, use_absolute_connect_tolerance, mesh_match_angle
+            )
+            # self.stfailure2(
+            #     connect_tolerance,
+            #     side_tolerance,
+            #     use_absolute_connect_tolerance,
+            #     part_name,
+            #     use_mesh_match,
+            #     mesh_match_angle,
+            #     interfering_parts_priority,
+            #     debug
+            # )
         vol_part_name = ""
         cont_part_name = ""
-        part_labels = self.zone_management()
+        part_labels = []
         # [TODO] following edge deletion code is a workaround to speedup join intersect.
         # Remove it when the slowness is fixed
         if len(self._model.parts) > 1:
-            self._collapse_within_parts("*", 1.5 * connect_tolerance)
+            if not debug:
+                part_labels = self.zone_management()
+                self._collapse_within_parts("*", 1.5 * connect_tolerance)
             for part in self._model.parts:
                 edge_zonelets = part.get_edge_zonelets()
                 if edge_zonelets:
@@ -754,6 +1012,7 @@ class TolerantConnect:
                     use_mesh_match=use_mesh_match,
                     mesh_match_angle=mesh_match_angle,
                     part_labels=part_labels,
+                    debug=debug,
                 )
             if self.get_parts_of_name_pattern(interfering_parts_exp):
                 vol_part_name = part_name
@@ -768,6 +1027,7 @@ class TolerantConnect:
                     use_mesh_match=use_mesh_match,
                     mesh_match_angle=mesh_match_angle,
                     part_labels=part_labels,
+                    debug=debug,
                 )
             if self.get_parts_of_name_pattern(contact_parts_exp):
                 cont_part_name = part_name if vol_part_name == "" else "contact_interfering_part"
@@ -780,6 +1040,7 @@ class TolerantConnect:
                     use_mesh_match=use_mesh_match,
                     mesh_match_angle=mesh_match_angle,
                     part_labels=part_labels,
+                    debug=debug,
                 )
             if vol_part_name != "" and cont_part_name != "":
                 connect_part_exp = vol_part_name + ", " + cont_part_name
@@ -793,11 +1054,12 @@ class TolerantConnect:
                     use_mesh_match=use_mesh_match,
                     mesh_match_angle=mesh_match_angle,
                     part_labels=part_labels,
+                    debug=debug,
                 )
             tolerant_connect_part = self._model.get_part_by_name(part_name)
             # if not interferences, no conflict volumes to resolve
             if len(interfering_parts_exp) > 0:
-                self.write("before_resolve_conflict.pmdat")
+                # self.write("before_resolve_conflict.pmdat")
                 self._resolve_conflicts(
                     name=part_name,
                     all_labels_in=part_labels,
@@ -817,3 +1079,6 @@ class TolerantConnect:
 
         if write_intermediate_files:
             self.write("after_fuse.pmdat")
+
+    def write(self, filename: str):
+        prime.FileIO(self._model).write_pmdat(filename, prime.FileWriteParams(self._model))

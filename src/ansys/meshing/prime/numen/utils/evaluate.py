@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for evaluating expression."""
 import ast
 import json
 import re
@@ -45,9 +44,12 @@ def __eval_function(function_str: str):
     f_str = function_str.replace("'", "\"")
     function_name, args_str = f_str.split(',', 1)
     function_name = function_name.strip()
+    arg_names = args_str.strip()
+    arg_names = arg_names.replace('true', 'True')
+    arg_names = arg_names.replace('false', 'False')
     if function_name in function_map:
         args = []
-        args = ast.literal_eval(f'({args_str})')
+        args = ast.literal_eval(f'({arg_names})')
         if not isinstance(args, tuple):
             args = (args,)
         arg_count = len(args)
@@ -69,7 +71,6 @@ def __eval_function(function_str: str):
 
 
 def evaluate_expression(repl_params: ParamDefs, context: Dict, exp: str):
-    """Evaluate expression."""
     if not isinstance(exp, str):
         return exp
     expression = exp

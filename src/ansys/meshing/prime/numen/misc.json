@@ -33,5 +33,15 @@
         "name" : "Delete Parts",
         "method" : "numen.misc.delete_parts",
         "parameters" : "delete_parts_params"
+    },
+    {
+        "name" : "Merge Parts",
+        "method" : "numen.misc.merge_parts",
+        "parameters" : "merge_parts_params"
+    },
+    {
+        "name" : "Delete Labels",
+        "method" : "numen.misc.delete_labels",
+        "parameters" : "delete_labels_params"
     }
 ]

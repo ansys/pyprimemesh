@@ -20,13 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Numen repl module."""
-
 import inspect
 import json
 import logging
 import os
 import re
+import sys
 from typing import Dict, List
 
 from ansys.meshing import prime
@@ -44,10 +43,7 @@ def _str(input: tuple) -> str:
 
 
 class Repl:
-    """Handles execution of numen workflow."""
-
-    def __init__(self, model: prime.Model):
-        """Construct Repl object."""
+    def __init__(self, model: prime.Model, n_threads: int = 12):
         dir = os.path.dirname(os.path.abspath(__file__))
         file = open(os.path.join(dir, "types.json"))
         self._param_map = json.load(file)
@@ -66,9 +62,21 @@ class Repl:
             self._function_map.update(self.__get_function_map(module))
         self._model = model
         self._logger = logging.getLogger(__name__)
+        self._logger.setLevel(20)
+        self._logger.addHandler(logging.StreamHandler(sys.stdout))
         self._cached_data = CachedData(self._model, self._logger)
         self._param_defs = ParamDefs(model)
-        self._verbosity = 0
+        self._verbosity = 1
+        self._write_on_error = False
+        if model:
+            self._model.set_num_threads(n_threads)
+            self._model._comm.serve(
+                self._model,
+                "PrimeMesh::Model/SetPyPrimeSettings",
+                self._model._object_id,
+                args={"settings": "encode_hidden_params"},
+            )
+            self._model._sync_up_model()
 
     def __load_step(self):
         pass
@@ -90,6 +98,8 @@ class Repl:
                 self._logger.error(f"        \"{i[0]}\" line:{i[1]}")
 
     def __log_exception(self, header: str, e: Exception, info=[]):
+        if self._write_on_error:
+            self.__write_intermediate("error")
         self._logger.error(header)
         for message in str(e).splitlines():
             self._logger.error("    " + message)
@@ -332,8 +342,11 @@ class Repl:
             )
             return False
 
+    def __write_intermediate(self, method_name: str):
+        fileio = prime.FileIO(self._model)
+        fileio.write_pmdat(method_name + ".pmdat", prime.FileWriteParams(self._model))
+
     def get_params(self, method_name: str, type_name: str, param_inputs: dict):
-        """Parse params_input to construct parameters object depending upon type_name."""
         try:
             parameters = self.__get_params(method_name, type_name, param_inputs, {}, True)
             return parameters
@@ -346,23 +359,15 @@ class Repl:
             return None
 
     def execute(self, method: str, params: Dict):
-        """Execute numen method."""
         method = self._function_map[method]["function"]
         self.__execute_method(method, params)
 
     def run(self, steps: List[Dict]):
-        """Run numen workflow."""
         try:
-            self._model._comm.serve(
-                self._model,
-                "PrimeMesh::Model/SetPyPrimeSettings",
-                self._model._object_id,
-                args={"settings": "encode_hidden_params"},
-            )
-            self._model._sync_up_model()
-            self._param_defs.clear_overrides()
             if not isinstance(steps, list):
                 raise TypeError("steps should be a list of dictionaries")
+
+            self._param_defs.clear_overrides()
 
             for step in steps:
                 if isinstance(step, list):
@@ -383,7 +388,11 @@ class Repl:
                     params = self.__construct_parameters(step)
                     success = False
                     if params != None:
+                        if self._verbosity > 0:
+                            self._logger.info(f"Executing {method_name}")
                         success = self.__execute_method(method, params)
+                    if success and "write_file" in step and step["write_file"] == True:
+                        self.__write_intermediate(method_name)
                     if not success:
                         raise Exception(f"Failed to execute {method_name}")
                 else:
@@ -448,10 +457,9 @@ class Repl:
         return None
 
     def help(self, arg=None):
-        """Print help on numen methods."""
         help_str = _str(
             (
-                "Please call Repl.help with one of the following arguments:\n",
+                "Access help with one of the following arguments:\n",
                 "   methods\n",
                 "   method:<method name>",
             )
@@ -485,5 +493,4 @@ class Repl:
     def is_param_enabled(
         self, method_name: str, type_name: str, parameter_name: str, parameters: Dict
     ) -> bool:
-        """Check if parameter is enabled or not."""
         return self.__is_param_enabled(method_name, type_name, parameter_name, parameters)

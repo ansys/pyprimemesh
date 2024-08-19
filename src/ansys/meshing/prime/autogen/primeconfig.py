@@ -660,6 +660,10 @@ class ErrorCode(enum.IntEnum):
     """Wrong API call sequence."""
     MICROSTRUCTUREBADSHAPEPROPERTIES = 13003
     """Bad shape properties."""
+    MICROSTRUCTURESMOOTHNOTSUPPORTED = 13004
+    """Smoothing operation is not supported."""
+    MICROSTRUCTUREREMESHNOTSUPPORTED = 13005
+    """Surface remesh operation is not supported."""
     AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
     """Autoquadmesher error codes.
 

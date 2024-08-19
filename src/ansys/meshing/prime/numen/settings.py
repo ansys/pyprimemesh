@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Module for settings."""
+
 from ansys.meshing import prime
 from ansys.meshing.prime.numen.utils.cached_data import CachedData
 
@@ -28,4 +29,6 @@ from ansys.meshing.prime.numen.utils.cached_data import CachedData
 def set_cwd(model: prime.Model, cwd_params: dict, cached_data: CachedData):
     """Set current working directory."""
     path = cwd_params["path"]
+    model.logger.python_logger.disabled = True
     model.set_working_directory(path)
+    model.logger.python_logger.disabled = False

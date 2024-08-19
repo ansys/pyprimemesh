@@ -43,4 +43,5 @@ def tolerant_connect(model: prime.Model, tc_params: dict, cached_data: CachedDat
         refine_at_contacts=tc_params["refine_at_contacts"],
         write_intermediate_files=False,
         delete_topology=tc_params["delete_topology"],
+        debug=tc_params["_debug"],
     )

@@ -36,7 +36,6 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
     ExportLSDynaKeywordFileParams,
-    ExportLSDynaResults,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -341,7 +340,7 @@ class FileIO(_FileIO):
         self, params: ExportMapdlCdbParams, major_version: int, minor_version: int
     ) -> ExportMapdlCdbParams:
         """
-        Initialize specific CDB export parameters based on the given version.
+        Initializes specific CDB export parameters based on the given version.
 
         This function sets the use_compact_format and export_fasteners_as_swgen
         parameters of the provided ExportMapdlCdbParams object based on the given
@@ -526,7 +525,7 @@ class FileIO(_FileIO):
 
     def export_lsdyna_keyword_file(
         self, file_name: str, params: ExportLSDynaKeywordFileParams
-    ) -> ExportLSDynaResults:
+    ) -> FileWriteResults:
         """Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.
 
         Parameters
@@ -538,8 +537,8 @@ class FileIO(_FileIO):
 
         Returns
         -------
-        ExportLSDynaResults
-            Returns ExportLSDynaResults.
+        FileWriteResults
+            Returns FileWriteResults.
 
         Notes
         -----

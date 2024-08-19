@@ -804,6 +804,9 @@ class _MaterialProcessor:
         data = []
         parameters = []
 
+        if self._material_linked_to_zone_type[material] == 'Cohesive':
+            return ''
+
         if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
             parameters = property_dict['Parameters']
         if 'Data' in property_dict and property_dict['Data'] is not None:
@@ -853,6 +856,9 @@ class _MaterialProcessor:
     def _process_damage_evolution_data(self, property_dict, material, mat_id):
 
         damage_evol_data = ''
+
+        if self._material_linked_to_zone_type[material] == 'Cohesive':
+            return ''
 
         data = []
         parameters = []
@@ -3337,13 +3343,13 @@ class _StepProcessor:
                                     output_analysis_commands += f'{nfreq}, '
                                 else:
                                     output_analysis_commands += 'ALL, '
-                            if 'Parameters' in elemout:
+                            if 'Parameters' in enrgout:
                                 if (
-                                    elemout['Parameters'] is not None
-                                    and 'ELSET' in elemout['Parameters']
+                                    enrgout['Parameters'] is not None
+                                    and 'ELSET' in enrgout['Parameters']
                                 ):
                                     output_analysis_commands += get_modified_component_name(
-                                        elemout['Parameters']['ELSET']
+                                        enrgout['Parameters']['ELSET']
                                     )
                             output_analysis_commands += ', ,\n'
                 if 'NodeOutput' in output['Data']:
@@ -4056,7 +4062,7 @@ class _AxialTempCorrection:
 
 def get_modified_component_name(name: str) -> str:
     """
-    Modify a component name to meet specific criteria.
+    Modifies a component name to meet specific criteria.
 
     This function replaces any non-alphanumeric characters with underscores
     and adds the prefix "COMP_" if the name starts with a digit or underscore.
