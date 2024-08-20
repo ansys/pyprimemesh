@@ -15,8 +15,8 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '25.1.0.dev6'
-  MAIN_PYTHON_VERSION: '3.9'
+  DOCKER_IMAGE_TAG: '25.1.0.dev10'
+  MAIN_PYTHON_VERSION: '3.10'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
@@ -75,7 +75,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.10', '3.11', '3.12']
         should-release:
           - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
         exclude:
