@@ -95,7 +95,7 @@ def _check_pattern(val: str, pattern: str):
 
 
 def check_name_pattern(name: str, name_pattern: str):
-    """Checks name pattern."""
+    """Check name pattern."""
     name_pattern = name_pattern.replace(",", " ")
     patterns = name_pattern.split(" ")
     found = False

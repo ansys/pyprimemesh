@@ -4062,7 +4062,7 @@ class _AxialTempCorrection:
 
 def get_modified_component_name(name: str) -> str:
     """
-    Modifies a component name to meet specific criteria.
+    Modify a component name to meet specific criteria.
 
     This function replaces any non-alphanumeric characters with underscores
     and adds the prefix "COMP_" if the name starts with a digit or underscore.

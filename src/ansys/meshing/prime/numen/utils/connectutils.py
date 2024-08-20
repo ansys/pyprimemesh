@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for connect utils."""
 import re
 from typing import List
 
@@ -31,17 +32,15 @@ from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 class TolerantConnect:
     """
     Provides methods to user who is new to meshing.
+
     This class also serves as a tutorial
     for commonly used tolerant connect workflows.
     The ``TolerantConnect`` class provides these functionalities:
-    *
-    *
-    *
-    *
     """
 
     def __init__(self, model: Model):
         """Initialize using a model.
+
         Parameters
         ----------
         model : Model
@@ -51,6 +50,7 @@ class TolerantConnect:
         self._logger = model.python_logger
 
     def match_pattern(self, pattern: str, name: str) -> bool:
+        """Evaluate pattern."""
         pattern = "^" + pattern.replace("*", ".*").replace("?", ".") + "$"
         x = re.search(pattern, name)
         if x:
@@ -59,6 +59,7 @@ class TolerantConnect:
             return False
 
     def eval_name_pattern(self, name: str, pattern: str) -> bool:
+        """Evaluate name pattern."""
         bb = pattern.split("!")
         if self.match_pattern(bb[0].strip(), name):
             if len(bb) > 1:
@@ -73,6 +74,7 @@ class TolerantConnect:
                 return True
 
     def get_parts_of_name_pattern(self, name_pattern: str):
+        """Get parts of name pattern."""
         patterns = name_pattern.split(",")
 
         part_names = []
@@ -103,6 +105,7 @@ class TolerantConnect:
         results: prime.FuseResults,
         part_labels: list = [],
     ):
+        """Get failed fuse ordering."""
         model = self._model
         pairs = []
         part = model.get_part(part_id)
@@ -136,6 +139,7 @@ class TolerantConnect:
         fuseOption: prime.FuseOption,
         fuse_edges_only: bool = False,
     ):
+        """Perform mesh match."""
         connect = prime.Connect(model=self._model)
         params = prime.FuseParams(
             model=self._model,
@@ -252,6 +256,7 @@ class TolerantConnect:
             self._collapse_thin_strips(surface_search_tool, collapse_tool, part, faces, tolerance)
 
     def surface_intersection_results(self, part: Part):
+        """Get result associated with self intersection."""
         diag = prime.SurfaceSearch(model=self._model)
         register_id = 1
         self_inter_params = prime.SearchBySelfIntersectionParams(model=self._model)
@@ -622,6 +627,7 @@ class TolerantConnect:
         part_labels: list = [],
         debug: bool = False,
     ):
+        """Connect volumetric interfering parts."""
         return self._connect_interfering_parts(
             parts_name_exp=parts_name_exp,
             join_tolerance=join_tolerance,
@@ -652,6 +658,7 @@ class TolerantConnect:
         fuse_edges_only: bool = False,
         debug: bool = False,
     ):
+        """Connect contact interfering parts."""
         return self._connect_interfering_parts(
             parts_name_exp=parts_name_exp,
             join_tolerance=join_tolerance,
@@ -670,6 +677,7 @@ class TolerantConnect:
         )
 
     def zone_management(self):
+        """Zone management."""
         label_list = []
         mergeParams = prime.MergeZoneletsParams(model=self._model)
         for part in self._model.parts:
@@ -693,6 +701,7 @@ class TolerantConnect:
         stitch_free_faces: bool = True,
         keep_small_free_surfaces: bool = False,
     ):
+        """Clean up triangles post surface mesh."""
         parts = self.get_parts_of_name_pattern(part_name_exp)
         quality_reg_id = 26
         surface_search_tool = prime.SurfaceSearch(model=self._model)
@@ -806,6 +815,7 @@ class TolerantConnect:
             checks = surface_search_tool.get_surface_diagnostic_summary(diag_params)
 
     def surface_mesh_coarsening(self, part: Part = None):
+        """Coarsen the surface mesh."""
         surfer = prime.Surfer(self._model)
         surfer_params = prime.SurferParams(
             self._model,
@@ -826,6 +836,7 @@ class TolerantConnect:
         self,
         write_intermediate_files: bool = False,
     ):
+        """Delete topology."""
         params = prime.DeleteTopoEntitiesParams(model=self._model, delete_geom_zonelets=True)
         part_ids_to_delete = []
         result = None
@@ -844,6 +855,7 @@ class TolerantConnect:
         self,
         connect_tolerance: float,
     ):
+        """Refine contacts."""
         result = None
         global_min_size = self._model.get_global_sizing_params().min
         part_ids = [part.id for part in self._model.parts]
@@ -862,6 +874,7 @@ class TolerantConnect:
     def stfailure1(
         self, connect_tolerance, side_tolerance, use_absolute_connect_tolerance, mesh_match_angle
     ):
+        """Mesh Match."""
         for part in self._model.parts:
             non_share_labels = []
             total_labels = part.get_labels()
@@ -913,6 +926,7 @@ class TolerantConnect:
         interfering_parts_priority,
         debug,
     ):
+        """Mesh Match."""
         if len(self._model.parts) == 1:
             self._connect_interfering_volumes(
                 parts_name_exp="*",
@@ -947,6 +961,7 @@ class TolerantConnect:
         write_intermediate_files: bool = False,
         debug: bool = False,
     ):
+        """Fuse."""
         if refine_at_contacts:
             refine_contact_results = self.refine_contacts(connect_tolerance)
         if delete_topology:
@@ -1081,4 +1096,5 @@ class TolerantConnect:
             self.write("after_fuse.pmdat")
 
     def write(self, filename: str):
+        """Write pmdat file."""
         prime.FileIO(self._model).write_pmdat(filename, prime.FileWriteParams(self._model))

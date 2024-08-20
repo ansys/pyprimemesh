@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for volume utils."""
 from itertools import combinations
 from typing import List
 
@@ -35,6 +36,7 @@ def create_cap(
     side_face_evaluation_type: str,
     cap_zone_name: str,
 ):
+    """Create cap."""
     surface_utils = prime.SurfaceUtilities(model)
     cap_face_zonelets_params = prime.CreateCapParams(model)
     name_pattern_params = prime.NamePatternParams(model)
@@ -63,6 +65,7 @@ def create_cap(
 
 
 def merge_parts(model: prime.Model, parts: List[prime.Part], suggested_part_name: str):
+    """Merge parts."""
     merge_part_params = prime.MergePartsParams(
         model,
         merged_part_suggested_name=suggested_part_name,
@@ -80,6 +83,7 @@ def detect_thin_volumes(
     target_face_label: str,
     use_mesh_zonelets: bool,
 ):
+    """Detect thin volumes."""
     vt = PrimeObj(model, "VTFeatureRecognition", part.id)
     command_name = "PrimeMesh::Part/GetTopoVolumesOfZoneNamePattern_Beta"
     args = {
@@ -108,6 +112,7 @@ def detect_thin_volumes(
 
 
 def volume_zone_management(model: prime.Model, part: prime.Part, fluid_zones: List[str]):
+    """Volume zone management."""
     boundary_suffix = "_boundary"
     solid_solid_shared_suffix = "_contact"
     fluid_shared_suffix = "_interface"
@@ -168,6 +173,7 @@ def create_thin_volume_controls(
     n_layers: int,
     stair_step: bool,
 ):
+    """Create thin volume controls."""
     thin_volume_controls = []
     np_params = prime.NamePatternParams(model)
     part_ids = macros._get_part_ids(model, part_expression)
@@ -241,6 +247,7 @@ def create_prism_control(
     first_height: float,
     last_aspect_ratio: float,
 ):
+    """Create prism control."""
     prism_ctrl = model.control_data.create_prism_control()
     prism_params = prime.PrismControlGrowthParams(
         model=model,

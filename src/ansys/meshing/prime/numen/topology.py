@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Topology module."""
+
 import ansys.meshing.prime.numen.utils.communicator as Comm
 import ansys.meshing.prime.numen.utils.macros as macros
 from ansys.meshing import prime
@@ -28,6 +30,7 @@ from ansys.meshing.prime.numen.utils.cached_data import CachedData
 
 
 def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_data: CachedData):
+    """Clean up topology based on given parameters."""
     suppress_topoedges_params = {"part_scope": topology_cleanup_params["part_scope"]}
     suppress_toponodes_params = {"part_scope": topology_cleanup_params["part_scope"]}
     repair_topoedges_params = {
@@ -43,6 +46,7 @@ def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_d
 def suppress_interior_topoedges(
     model: prime.Model, suppress_topoedges_params: dict, cached_data: CachedData
 ):
+    """Suppress interior topo edges."""
     part_scope = suppress_topoedges_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -66,6 +70,7 @@ def suppress_interior_topoedges(
 def suppress_toponodes(
     model: prime.Model, suppress_toponodes_params: dict, cached_data: CachedData
 ):
+    """Suppress topo nodes."""
     part_scope = suppress_toponodes_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -85,6 +90,7 @@ def suppress_toponodes(
 def repair_topoedges_of_topofaces(
     model: prime.Model, repair_topoedges_params: dict, cached_data: CachedData
 ):
+    """Repair topoedges of topofaces."""
     part_scope = repair_topoedges_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -102,6 +108,7 @@ def repair_topoedges_of_topofaces(
 
 
 def delete_topology(model: prime.Model, delete_topology_params: dict, cached_data: CachedData):
+    """Delete topology."""
     merge_zonelets_by_label = delete_topology_params["merge_zonelets_by_label"]
     merge_zonelets_by_zone = delete_topology_params["merge_zonelets_by_zone"]
     if merge_zonelets_by_label and merge_zonelets_by_zone:
@@ -149,6 +156,7 @@ def delete_topology(model: prime.Model, delete_topology_params: dict, cached_dat
 
 
 def detect_thin_volumes(model: prime.Model, thin_volume_params: dict, cached_data: CachedData):
+    """Delete thin volumes."""
     part_scope = thin_volume_params["part_scope"]
     thickness = thin_volume_params["thickness"]
     volume_scope = thin_volume_params["volume_expression"]

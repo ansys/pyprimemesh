@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for surface mesh."""
+
 import ansys.meshing.prime.numen.controls as controls
 import ansys.meshing.prime.numen.utils.macros as macros
 from ansys.meshing import prime
@@ -33,6 +35,7 @@ from ansys.meshing.prime.numen.utils.communicator import call_method
 
 
 def mesh(model: prime.Model, mesh_params: dict, cached_data: CachedData):
+    """Perform surface mesh based on sizing type."""
     size_field_names = mesh_params["size_field_names"]
     part_scope = mesh_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
@@ -66,6 +69,7 @@ def mesh(model: prime.Model, mesh_params: dict, cached_data: CachedData):
 
 
 def mesh_with_sizing(model: prime.Model, mesh_params: dict, cached_data: CachedData):
+    """Perform surface mesh based on sizing."""
     part_scope = mesh_params["part_scope"]
     retain_generated_size_field = mesh_params["retain_generated_size_field"]
     sf_per_part = mesh_params["size_field_computation_per_part"]
@@ -203,6 +207,7 @@ def mesh_with_sizing(model: prime.Model, mesh_params: dict, cached_data: CachedD
 
 
 def mesh_with_size_controls(model: prime.Model, mesh_params: dict, cached_data: CachedData):
+    """Perform surface mesh with the given size control."""
     part_scope = mesh_params["part_scope"]
     part_ids = macros._get_part_ids(model, part_scope)
 
@@ -231,7 +236,8 @@ def mesh_with_size_controls(model: prime.Model, mesh_params: dict, cached_data: 
         cached_data.destroy_cached_object(size_control)
 
 
-def post_mesh_cleanup(model: prime.Model, improve_quality_params: dict, cached_data: CachedData):
+def improve_quality(model: prime.Model, improve_quality_params: dict, cached_data: CachedData):
+    """Improve surface mesh quality."""
     part_scope = improve_quality_params["part_scope"]
     soft_target_skewness = improve_quality_params["soft_target_skewness"]
     hard_target_skewness = improve_quality_params["hard_target_skewness"]
@@ -284,6 +290,7 @@ def post_mesh_cleanup(model: prime.Model, improve_quality_params: dict, cached_d
 def clean_up_triangles(
     model: prime.Model, clean_up_triangles_params: dict, cached_data: CachedData
 ):
+    """Clean up triangular elements."""
     part_scope = clean_up_triangles_params["part_scope"]
     collapse_sliver_faces = True
     stitch_free_faces = True

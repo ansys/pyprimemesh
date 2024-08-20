@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Numen repl module."""
+
 import inspect
 import json
 import logging
@@ -43,7 +45,10 @@ def _str(input: tuple) -> str:
 
 
 class Repl:
+    """Handles execution of numen workflow."""
+
     def __init__(self, model: prime.Model, n_threads: int = 12):
+        """Construct Repl object."""
         dir = os.path.dirname(os.path.abspath(__file__))
         file = open(os.path.join(dir, "types.json"))
         self._param_map = json.load(file)
@@ -347,6 +352,7 @@ class Repl:
         fileio.write_pmdat(method_name + ".pmdat", prime.FileWriteParams(self._model))
 
     def get_params(self, method_name: str, type_name: str, param_inputs: dict):
+        """Parse params_input to construct parameters object depending upon type_name."""
         try:
             parameters = self.__get_params(method_name, type_name, param_inputs, {}, True)
             return parameters
@@ -359,10 +365,12 @@ class Repl:
             return None
 
     def execute(self, method: str, params: Dict):
+        """Execute numen method."""
         method = self._function_map[method]["function"]
         self.__execute_method(method, params)
 
     def run(self, steps: List[Dict]):
+        """Run numen workflow."""
         try:
             if not isinstance(steps, list):
                 raise TypeError("steps should be a list of dictionaries")
@@ -457,6 +465,7 @@ class Repl:
         return None
 
     def help(self, arg=None):
+        """Print help on numen methods."""
         help_str = _str(
             (
                 "Access help with one of the following arguments:\n",
@@ -493,4 +502,5 @@ class Repl:
     def is_param_enabled(
         self, method_name: str, type_name: str, parameter_name: str, parameters: Dict
     ) -> bool:
+        """Check if parameter is enabled or not."""
         return self.__is_param_enabled(method_name, type_name, parameter_name, parameters)
