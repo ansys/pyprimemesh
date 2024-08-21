@@ -117,7 +117,7 @@ jobs:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
 
   testing:
     name: Run Unit Tests
@@ -147,7 +147,7 @@ jobs:
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
       
