@@ -449,7 +449,7 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_scoped_polydata(self, scope: "prime.ScopeDefinition", recalculate: bool = False):
+    def get_scoped_polydata(self, scope: "prime.ScopeDefinition"):
         """Get the polydata object of the scoped mesh.
 
         Parameters
@@ -462,7 +462,7 @@ class Mesh(MeshInfo):
         pv.PolyData
             PyVista mesh object.
         """
-        self.as_polydata(recalculate)
+        self.as_polydata()
         parts = self._model.control_data.get_scope_parts(scope)
 
         # Update the polydata if any part is not in the dictionary
@@ -543,9 +543,7 @@ class Mesh(MeshInfo):
             self._parts_polydata[part_id] = part_polydata
         return self._parts_polydata
 
-    def as_polydata(
-        self, recalculate: bool = False
-    ) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
+    def as_polydata(self) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
         """Return the mesh as a ``pv.PolyData`` object.
 
         Returns
@@ -553,9 +551,8 @@ class Mesh(MeshInfo):
         Dict[int, Dict[str, List[(pv.PolyData, Part)]]
             Dictionary with the polydata objects.
         """
-        if not self._parts_polydata and not recalculate:
-            part_ids = [part.id for part in self._model.parts]
-            self.update_pd(part_ids)
+        part_ids = [part.id for part in self._model.parts]
+        self.update_pd(part_ids)
         return self._parts_polydata
 
     @property

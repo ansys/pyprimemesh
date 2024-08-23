@@ -199,6 +199,7 @@ scope = prime.ScopeDefinition(model, label_expression="* !*enclosure*")
 display = PrimePlotter()
 display.plot(model, scope)
 display.show()
+
 # Create face zones per label
 for label in part.get_labels():
     mesh_util.create_zones_from_labels(label_expression=label)
@@ -324,7 +325,6 @@ display.show()
 # Write mesh
 # ~~~~~~~~~~
 # Export as CAS file for external aero simulations.
-
 with tempfile.TemporaryDirectory() as temp_folder:
     print(temp_folder)
     mesh_file = os.path.join(temp_folder, "f1_rear_wing_vol_mesh.cas")
