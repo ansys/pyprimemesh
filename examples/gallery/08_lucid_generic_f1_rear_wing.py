@@ -71,12 +71,10 @@ Procedure
 
 import os
 import tempfile
-import time
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import PrimePlotter
 
-total_time = 0
 prime_client = prime.launch_prime()
 model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
@@ -98,11 +96,8 @@ for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane
 
 # display the rear wing geometry without the enclosure
 scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
-start_time = time.time()
 display = PrimePlotter()
 display.plot(model, scope)
-end_time = time.time()
-total_time += end_time - start_time
 display.show()
 
 ###############################################################################
@@ -201,11 +196,8 @@ compute_size.compute_volumetric(
 
 mesh_util.surface_mesh_with_size_controls(size_control_names="*curvature*")
 scope = prime.ScopeDefinition(model, label_expression="* !*enclosure*")
-start_time = time.time()
 display = PrimePlotter()
 display.plot(model, scope)
-end_time = time.time()
-total_time += end_time - start_time
 display.show()
 
 # Create face zones per label
@@ -326,17 +318,13 @@ result = prime.VolumeMeshTool(model).check_mesh(part.id, params=prime.CheckMeshP
 print("\nMesh check", result, sep="\n")
 
 scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
-start_time = time.time()
 display = PrimePlotter()
 display.plot(model, scope)
-end_time = time.time()
-total_time += end_time - start_time
 display.show()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~
 # Export as CAS file for external aero simulations.
-print("\nTotal time taken for meshing: ", total_time)
 with tempfile.TemporaryDirectory() as temp_folder:
     print(temp_folder)
     mesh_file = os.path.join(temp_folder, "f1_rear_wing_vol_mesh.cas")
