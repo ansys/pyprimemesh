@@ -112,7 +112,7 @@ if toDelete:
     model.delete_parts(toDelete)
 
 display = PrimePlotter()
-display.add_model(model)
+display.plot(model)
 display.show()
 
 ###############################################################################

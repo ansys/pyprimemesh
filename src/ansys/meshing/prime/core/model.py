@@ -451,6 +451,5 @@ class Model(_Model):
         --------
             >>> scoped_polydata = model.get_scoped_polydata(scope)
         """
-        if self._model_pv_mesh is None:
-            self._model_pv_mesh = Mesh(self)
+        self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.get_scoped_polydata(scope)

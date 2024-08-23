@@ -462,7 +462,7 @@ class Mesh(MeshInfo):
         pv.PolyData
             PyVista mesh object.
         """
-        self.as_polydata(recalculate)
+        self.as_polydata()
         parts = self._model.control_data.get_scope_parts(scope)
 
         # Update the polydata if any part is not in the dictionary
@@ -514,6 +514,7 @@ class Mesh(MeshInfo):
         facet_result = self.get_face_and_edge_connectivity(
             part_ids, FaceAndEdgeConnectivityParams(model=self._model)
         )
+        self._parts_polydata = {}
         for i, part_id in enumerate(facet_result.part_ids):
             part = self._model.get_part(part_id)
             splines = part.get_splines()
@@ -544,7 +545,7 @@ class Mesh(MeshInfo):
         return self._parts_polydata
 
     def as_polydata(
-        self, recalculate: bool = False
+        self, recalculate: bool = True
     ) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
         """Return the mesh as a ``pv.PolyData`` object.
 
@@ -553,9 +554,8 @@ class Mesh(MeshInfo):
         Dict[int, Dict[str, List[(pv.PolyData, Part)]]
             Dictionary with the polydata objects.
         """
-        if not self._parts_polydata and not recalculate:
-            part_ids = [part.id for part in self._model.parts]
-            self.update_pd(part_ids)
+        part_ids = [part.id for part in self._model.parts]
+        self.update_pd(part_ids)
         return self._parts_polydata
 
     @property
