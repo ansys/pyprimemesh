@@ -465,6 +465,5 @@ class Model(_Model):
                 + "pip install ansys-meshing-prime[all]"
             )
 
-        if self._model_pv_mesh is None:
-            self._model_pv_mesh = Mesh(self)
+        self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.get_scoped_polydata(scope)
