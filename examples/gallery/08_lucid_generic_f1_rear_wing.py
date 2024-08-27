@@ -318,7 +318,7 @@ print("\nMesh check", result, sep="\n")
 
 scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
 display = PrimePlotter()
-display.plot(model, scope)
+display.plot(model, scope, update=True)
 display.show()
 ###############################################################################
 # Write mesh

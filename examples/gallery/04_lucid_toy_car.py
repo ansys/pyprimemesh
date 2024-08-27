@@ -65,10 +65,12 @@ Procedure
 
 import os
 import tempfile
+import time
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import PrimePlotter
 
+total_time = time.time()
 prime_client = prime.launch_prime()
 model = prime_client.model
 
@@ -90,7 +92,10 @@ mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
 pl = PrimePlotter()
+start_time = time.time()
 pl.plot(model, scope)
+end_time = time.time()
+total_time += end_time - start_time
 pl.show()
 ###############################################################################
 # Close holes
@@ -108,7 +113,10 @@ for part_name in coarse_wrap:
     # Each open part before wrap
     scope = prime.ScopeDefinition(model, part_expression=part_name)
     pl = PrimePlotter()
+    start_time = time.time()
     pl.plot(model, scope)
+    end_time = time.time()
+    total_time += end_time - start_time
     pl.show()
     closed_part = mesh_util.wrap(
         input_parts=part_name,
@@ -119,8 +127,13 @@ for part_name in coarse_wrap:
     # Closed part with no hole
     scope = prime.ScopeDefinition(model, part_expression=closed_part.name)
     pl = PrimePlotter()
+    start_time = time.time()
     pl.plot(model, scope)
+    end_time = time.time()
     pl.show()
+
+
+print("Total time for wrapping: ", total_time)
 
 ###############################################################################
 # Extract fluid using a wrapper
