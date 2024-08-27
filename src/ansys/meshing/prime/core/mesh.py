@@ -450,6 +450,7 @@ class Mesh(MeshInfo):
             return MeshObjectPlot(part, surf)
 
     def get_scoped_polydata(self, scope: "prime.ScopeDefinition", update: bool = False):
+
         """Get the polydata object of the scoped mesh.
 
         Parameters
@@ -549,6 +550,7 @@ class Mesh(MeshInfo):
         self,
         update: bool = False,
     ) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
+
         """Return the mesh as a ``pv.PolyData`` object.
 
         Parameters

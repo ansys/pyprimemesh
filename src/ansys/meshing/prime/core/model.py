@@ -38,7 +38,6 @@ from ansys.meshing.prime.autogen.modelstructs import (
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.topodata import TopoData
 from ansys.meshing.prime.core.controldata import ControlData
-from ansys.meshing.prime.core.mesh import Mesh
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
@@ -436,6 +435,13 @@ class Model(_Model):
         --------
             >>> polydata = model.as_polydata()
         """
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
         if self._model_pv_mesh is None or update:
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.as_polydata(update=update)
@@ -457,6 +463,15 @@ class Model(_Model):
         --------
             >>> scoped_polydata = model.get_scoped_polydata(scope)
         """
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+
         if self._model_pv_mesh is None or update:
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.get_scoped_polydata(scope, update=update)
+
