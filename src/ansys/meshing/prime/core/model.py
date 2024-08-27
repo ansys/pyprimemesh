@@ -474,4 +474,3 @@ class Model(_Model):
         if self._model_pv_mesh is None or update:
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.get_scoped_polydata(scope, update=update)
-
