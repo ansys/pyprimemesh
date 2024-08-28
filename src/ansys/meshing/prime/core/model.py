@@ -418,8 +418,13 @@ class Model(_Model):
         """
         return PrimeLogger()
 
-    def as_polydata(self):
+    def as_polydata(self, update: bool = False):
         """Get the model as a polydata.
+
+        Parameters
+        ----------
+        update : bool, optional
+            Update the polydata if it is already present, by default False.
 
         Returns
         -------
@@ -437,10 +442,11 @@ class Model(_Model):
                 "Please install optional dependencies to use visualization features:"
                 + "pip install ansys-meshing-prime[all]"
             )
-        self._model_pv_mesh = Mesh(self)
-        return self._model_pv_mesh.as_polydata()
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.as_polydata(update=update)
 
-    def get_scoped_polydata(self, scope):
+    def get_scoped_polydata(self, scope, update: bool = False):
         """Get the scoped polydata of the model.
 
         Parameters
@@ -465,5 +471,6 @@ class Model(_Model):
                 + "pip install ansys-meshing-prime[all]"
             )
 
-        self._model_pv_mesh = Mesh(self)
-        return self._model_pv_mesh.get_scoped_polydata(scope)
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.get_scoped_polydata(scope, update=update)

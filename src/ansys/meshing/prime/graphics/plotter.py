@@ -133,7 +133,9 @@ class PrimePlotter(Plotter):
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
-    def add_model(self, model: Model, scope: prime.ScopeDefinition = None) -> None:
+    def add_model(
+        self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
+    ) -> None:
         """Add a Prime model to the plotter.
 
         Parameters
@@ -142,12 +144,14 @@ class PrimePlotter(Plotter):
             Prime model to add.
         scope : prime.ScopeDefinition, default: None
             Scope to show, if any.
+        update : bool, default: False
+            Whether to update the display.
         """
         if scope is None:
-            model_pd = model.as_polydata()
+            model_pd = model.as_polydata(update=update)
             self.add_model_pd(model_pd)
         else:
-            self.add_scope(model, scope)
+            self.add_scope(model, scope, update=update)
 
     def add_model_pd(self, model_pd: Dict) -> None:
         """Add a model to the plotter.
@@ -211,7 +215,7 @@ class PrimePlotter(Plotter):
                     spline_mesh_part.actor = actor
                     self._backend._object_to_actors_map[actor] = spline_mesh_part
 
-    def add_scope(self, model: Model, scope: prime.ScopeDefinition) -> None:
+    def add_scope(self, model: Model, scope: prime.ScopeDefinition, update: bool = False) -> None:
         """Add a scope to the plotter.
 
         Parameters
@@ -220,14 +224,17 @@ class PrimePlotter(Plotter):
             Model to add to the plotter.
         scope : prime.ScopeDefinition
             Scope to add to the plotter.
+        update : bool, default: False
+            Whether to update the display.
         """
-        model_pd = model.get_scoped_polydata(scope)
+        model_pd = model.get_scoped_polydata(scope, update=update)
         self.add_model_pd(model_pd)
 
     def plot_iter(
         self,
         plotting_list: List[Any],
         name_filter: str = None,
+        update: bool = False,
         **plotting_options,
     ) -> None:
         """
@@ -241,6 +248,8 @@ class PrimePlotter(Plotter):
             List of objects to plot.
         name_filter : str, default: None
             Regular expression with the desired name or names to include in the plotter.
+        update: bool, default: False
+            Whether to update the display.
         **plotting_options : dict, default: None
             Keyword arguments. For allowable keyword arguments, see the
             :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
@@ -254,6 +263,7 @@ class PrimePlotter(Plotter):
         plottable_object: Any,
         scope: prime.ScopeDefinition = None,
         name_filter: str = None,
+        update: bool = False,
         **plotting_options,
     ):
         """Add an object to the plotter.
@@ -268,6 +278,8 @@ class PrimePlotter(Plotter):
             Scope to plot.
         name_filter : str, default: None
             Regular expression with the desired name or names to include in the plotter.
+        update: bool, default: False
+            Whether to update the display. Required when any mesh is updated.
         **plotting_options : dict, default: None
             Keyword arguments. For allowable keyword arguments, see the
             :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
@@ -290,9 +302,9 @@ class PrimePlotter(Plotter):
 
         """
         if isinstance(plottable_object, Model):
-            self.add_model(plottable_object, scope)
+            self.add_model(plottable_object, scope, update=update)
         elif isinstance(plottable_object, List):
-            self.plot_iter(plottable_object, name_filter, **plotting_options)
+            self.plot_iter(plottable_object, name_filter, update=update, **plotting_options)
         else:
             self._backend.pv_interface.plot(plottable_object, name_filter, **plotting_options)
 

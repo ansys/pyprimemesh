@@ -122,6 +122,7 @@ for part_name in coarse_wrap:
     pl.plot(model, scope)
     pl.show()
 
+
 ###############################################################################
 # Extract fluid using a wrapper
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
