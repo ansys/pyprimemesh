@@ -145,13 +145,13 @@ display.show()
 
 mesh_util.surface_mesh(min_size=2.0)
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 part = model.get_part_by_name("pyprime_block_import")
 
 display = PrimePlotter()
-display.add_scope(model, prime.ScopeDefinition(model, label_expression="my_group"))
+display.plot(model, prime.ScopeDefinition(model, label_expression="my_group"))
 display.show()
 
 mesh_util.volume_mesh()
@@ -279,7 +279,7 @@ for zone in part.get_face_zones():
         zone_expression=model.get_zone_name(zone),
     )
     display = PrimePlotter()
-    display.add_scope(model, scope)
+    display.plot(model, scope, update=True)
     display.show()
 
 ###############################################################################

@@ -149,7 +149,7 @@ base_scope = prime.lucid.SurfaceScope(
 mesh_util.surface_mesh(min_size=0.5, scope=base_scope, generate_quads=True)
 
 display = PrimePlotter()
-display.plot(model, scope=scope)
+display.plot(model, scope=scope, update=True)
 display.show()
 
 ###############################################################################
@@ -166,7 +166,7 @@ stackbase_results = sweeper.stack_base_face(
 )
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################

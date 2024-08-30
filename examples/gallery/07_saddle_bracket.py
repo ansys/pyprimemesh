@@ -109,7 +109,7 @@ mesh_util.surface_mesh(
 )
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################
@@ -147,7 +147,7 @@ mesh_util.surface_mesh(
 )
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################
@@ -219,7 +219,7 @@ result_vol = volume_mesh.mesh(part_id=part.id, automesh_params=auto_mesh_params)
 print(part.get_summary(prime.PartSummaryParams(model)))
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 ###############################################################################
 # Write mesh

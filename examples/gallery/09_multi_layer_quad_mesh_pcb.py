@@ -244,7 +244,7 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.plot(model)
+    display.plot(model, update=True)
     display.show()
 
 ###############################################################################
@@ -269,7 +269,7 @@ stackbase_results = sweeper.stack_base_face(
 
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.plot(model)
+    display.plot(model, update=True)
     display.show()
 ###############################################################################
 # Set up the zone naming before the mesh output

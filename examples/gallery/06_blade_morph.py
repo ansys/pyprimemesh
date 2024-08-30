@@ -130,7 +130,7 @@ morpher.match_morph(
 # Display the morphed mesh
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 ###############################################################################
 # Write mesh
