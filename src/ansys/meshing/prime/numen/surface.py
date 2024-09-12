@@ -71,6 +71,7 @@ def mesh(model: prime.Model, mesh_params: dict, cached_data: CachedData):
 
 
 def mesh_with_sizing(model: prime.Model, mesh_params: dict, cached_data: CachedData):
+    """Surface mesh with sizing option."""
     min_s = mesh_params["min_size"]
     max_s = mesh_params["max_size"]
     gr = mesh_params["growth_rate"]
@@ -244,6 +245,7 @@ def mesh_with_sizing(model: prime.Model, mesh_params: dict, cached_data: CachedD
 
 
 def mesh_with_size_controls(model: prime.Model, mesh_params: dict, cached_data: CachedData):
+    """Surface mesh with size controls."""
     part_scope = mesh_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
 
@@ -273,6 +275,7 @@ def mesh_with_size_controls(model: prime.Model, mesh_params: dict, cached_data: 
 
 
 def post_mesh_cleanup(model: prime.Model, improve_quality_params: dict, cached_data: CachedData):
+    """Perform post mesh clean up."""
     part_scope = improve_quality_params["part_expression"]
     soft_target_skewness = improve_quality_params["soft_target_skewness"]
     hard_target_skewness = improve_quality_params["hard_target_skewness"]
@@ -302,9 +305,11 @@ def post_mesh_cleanup(model: prime.Model, improve_quality_params: dict, cached_d
             keep_small_free_surfaces,
         )
 
+
 def clean_up_topo_mesh_triangles(
     model: prime.Model, part: prime.Part, clean_up_triangles_params: dict, cached_data: CachedData
 ):
+    """Clean up topological mesh triangles."""
     stitch_free_faces = True
     stitch_tolerance = 0.2
     stitch_tolerance_absolute = False
@@ -381,6 +386,7 @@ def clean_up_topo_mesh_triangles(
 def clean_up_non_topo_mesh_triangles(
     model: prime.Model, part: prime.Part, clean_up_triangles_params: dict, cached_data: CachedData
 ):
+    """Clean up non topological mesh triangles."""
     collapse_sliver_faces = True
     stitch_free_faces = True
     stitch_tolerance = 0.2
@@ -493,6 +499,7 @@ def clean_up_non_topo_mesh_triangles(
 def clean_up_triangles(
     model: prime.Model, clean_up_triangles_params: dict, cached_data: CachedData
 ):
+    """Clean up triangles."""
     part_scope = clean_up_triangles_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -510,4 +517,3 @@ def _log_time(message: str, measured_time: float, logger: logging.Logger):
         logger.info(f"    {message}: {time_mins} mins {time_secs} seconds")
     else:
         logger.info(f"    {message}: {time_secs} seconds")
-

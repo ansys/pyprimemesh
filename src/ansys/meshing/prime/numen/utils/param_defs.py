@@ -26,6 +26,7 @@ from ansys.meshing import prime
 
 class ParamDefs:
     """Parameter definition class."""
+
     def __init__(self, model: prime.Model):
         """Create parameter definition object."""
         self._model = model

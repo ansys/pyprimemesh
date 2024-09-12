@@ -36,7 +36,6 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
     ExportLSDynaKeywordFileParams,
-    ExportLSDynaResults,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -341,7 +340,7 @@ class FileIO(_FileIO):
         self, params: ExportMapdlCdbParams, major_version: int, minor_version: int
     ) -> ExportMapdlCdbParams:
         """
-        Initializes specific CDB export parameters based on the given version.
+        Initialize specific CDB export parameters based on the given version.
 
         This function sets the use_compact_format and export_fasteners_as_swgen
         parameters of the provided ExportMapdlCdbParams object based on the given

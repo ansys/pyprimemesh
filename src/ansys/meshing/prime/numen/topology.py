@@ -30,6 +30,7 @@ from ansys.meshing.prime.numen.utils.cached_data import CachedData
 
 
 def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_data: CachedData):
+    """Perform topology clean up."""
     suppress_topoedges_params = {"part_expression": topology_cleanup_params["part_expression"]}
     suppress_toponodes_params = {"part_expression": topology_cleanup_params["part_expression"]}
     repair_topoedges_params = {
@@ -45,6 +46,7 @@ def topology_cleanup(model: prime.Model, topology_cleanup_params: dict, cached_d
 def suppress_interior_topoedges(
     model: prime.Model, suppress_topoedges_params: dict, cached_data: CachedData
 ):
+    """Suppress interior topo edges."""
     part_scope = suppress_topoedges_params["part_expression"]
     part_ids = macros._get_part_ids(model, part_scope)
     for part_id in part_ids:
@@ -85,6 +87,7 @@ def suppress_toponodes(
             except Exception as e:
                 pass
             vt_composer.destruct()
+
 
 def repair_topoedges_of_topofaces(
     model: prime.Model, repair_topoedges_params: dict, cached_data: CachedData

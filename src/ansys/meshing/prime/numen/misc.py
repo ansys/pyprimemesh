@@ -284,6 +284,7 @@ def delete_parts(model: prime.Model, delete_params: dict, cached_data: CachedDat
 
 
 def merge_parts(model: prime.Model, merge_params: dict, cached_data: CachedData):
+    """Merge parts."""
     part_scope = merge_params["part_expression"]
     merged_part_name = merge_params["merged_part_name"]
     part_ids = macros._get_part_ids(model, part_scope)
@@ -292,6 +293,7 @@ def merge_parts(model: prime.Model, merge_params: dict, cached_data: CachedData)
 
 
 def delete_labels(model: prime.Model, delete_params: dict, cached_data: CachedData):
+    """Delete labels."""
     part_scope = delete_params["part_expression"]
     label_expression = delete_params["label_expression"]
     name_pattern_params = prime.NamePatternParams(model)

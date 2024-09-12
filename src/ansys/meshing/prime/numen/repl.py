@@ -48,6 +48,7 @@ def _str(input: tuple) -> str:
 
 class Repl:
     """Handles execution of numen workflow."""
+
     def __init__(self, model: prime.Model, n_threads: int = 12):
         """Construct Repl object."""
         dir = os.path.dirname(os.path.abspath(__file__))
@@ -546,6 +547,7 @@ class Repl:
         return self.__is_param_enabled(method_name, type_name, parameter_name, parameters)
 
     def test(self, arg=None):
+        """Test function."""
         current_directory = os.path.dirname(os.path.abspath(__file__))
         test_folder = os.path.join(current_directory, "test")
         for filename in os.listdir(test_folder):

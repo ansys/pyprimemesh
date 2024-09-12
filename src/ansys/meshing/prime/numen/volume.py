@@ -39,6 +39,7 @@ def _str(input: tuple) -> str:
 
 
 def volume_mesh(model: prime.Model, volume_mesh_params: dict, cached_data: CachedData):
+    """Perform volume mesh."""
     fill_type = volume_mesh_params["volume_fill_type"]
     part_scope = volume_mesh_params["part_expression"]
     sf_per_part = volume_mesh_params["size_field_computation_per_part"]
@@ -629,6 +630,7 @@ def prepare_for_volume_meshing(model: prime.Model, improve_params: dict, cached_
 
 
 def mesh_check(model: prime.Model, mesh_check_params: dict, cached_data: CachedData):
+    """Check mesh."""
     parts_with_non_positive_volumes = []
     parts_with_non_positive_areas = []
     parts_with_invalid_shapes = []
@@ -783,6 +785,7 @@ def _get_cell_and_face_statistics(
     mesh_info.destruct()
     return result
 
+
 def _log_names(names: list, logger: Logger):
     size = len(names)
     i = 0
@@ -809,6 +812,7 @@ def auto_node_movement_by_value(
     attempts: int,
     restrict_boundary=True,
 ):
+    """Perform auto node movement by value."""
     perform_anm = prime.VolumeMeshTool(model)
     anm_param = prime.AutoNodeMoveParams(
         model=model,
@@ -829,6 +833,7 @@ def auto_node_movement_by_value(
 
 
 def auto_node_movement(model: prime.Model, part: prime.Part, quality_measure_param):
+    """Perform auto node movement."""
     auto_node_move_sequence = [
         {"target_quality": 0.97, "dihedral_angle": 120, "restrict_boundary": True},
         {"target_quality": 0.99, "dihedral_angle": 120, "restrict_boundary": True},

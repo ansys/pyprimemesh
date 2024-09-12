@@ -125,6 +125,25 @@ class PrimeCommunicator(Communicator):
         return result
 
     def server_command(self, command: str, *args) -> dict:
+        """Run commands on the server.
+
+        Parameters
+        ----------
+        command : str
+            Commands to run.
+
+        Returns
+        -------
+        dict
+            Result from the server side.
+
+        Raises
+        ------
+        RuntimeError
+            Bad response from server.
+        RuntimeError
+            Can not connect to server.
+        """
         return {}
 
     def close(self):

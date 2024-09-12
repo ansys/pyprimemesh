@@ -46,6 +46,7 @@ def _get_topo_nodes(model: prime.Model):
 
 
 def get_topo_nodes(model: prime.Model, part_ids: list):
+    """Get topo nodes of given part ids."""
     topo_nodes = []
     for part_id in part_ids:
         part = model.get_part(part_id)
@@ -55,6 +56,7 @@ def get_topo_nodes(model: prime.Model, part_ids: list):
             )
             topo_nodes.extend(part_topo_nodes)
     return topo_nodes
+
 
 def _get_interior_topoedges_of_topoface(model: prime.Model, topo_face: int):
     topo_data = model.topo_data
@@ -106,6 +108,7 @@ def _check_pattern(val: str, pattern: str):
 
 
 def check_name_pattern(name: str, name_pattern: str):
+    """Check name pattern."""
     name_pattern = name_pattern.replace(",", " ")
     patterns = name_pattern.split(" ")
     found = False
@@ -121,6 +124,7 @@ def check_name_pattern(name: str, name_pattern: str):
 
 
 def resolve_path(file_name: str):
+    """Resolve path."""
     pattern = r"\$env\(([\d\w]*)\)"
     res = re.search(pattern, file_name)
     if res:
@@ -136,6 +140,7 @@ def resolve_path(file_name: str):
 
 
 def get_topo_volumes_of_label_name_pattern(model: prime.Model, part: prime.Part, label_exp: str):
+    """Get topo volumes of label name pattern."""
     args = {"label_name_pattern": label_exp, "name_pattern_params": {}}
     command_name = "PrimeMesh::Part/GetTopoVolumesOfLabelNamePattern_Beta"
     topo_volumes = call_method(model, command_name, part._object_id, args=args)
@@ -143,6 +148,7 @@ def get_topo_volumes_of_label_name_pattern(model: prime.Model, part: prime.Part,
 
 
 def get_topo_volumes_of_zone_name_pattern(model: prime.Model, part: prime.Part, zone_exp: str):
+    """Get topo volumes of zone name pattern."""
     args = {"zone_name_pattern": zone_exp, "name_pattern_params": {}}
     command_name = "PrimeMesh::Part/GetTopoVolumesOfZoneNamePattern_Beta"
     topo_volumes = call_method(model, command_name, part._object_id, args=args)
@@ -150,6 +156,7 @@ def get_topo_volumes_of_zone_name_pattern(model: prime.Model, part: prime.Part, 
 
 
 def check_face_scope(model: prime.Model, part: prime.Part, scope: prime.ScopeDefinition):
+    """Check for valid face scope."""
     part_ids = _get_part_ids(model, scope.part_expression)
     if part.id in part_ids:
         np = prime.NamePatternParams(model)

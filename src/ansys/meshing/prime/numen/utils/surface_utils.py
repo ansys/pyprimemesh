@@ -541,6 +541,7 @@ def free_elements_results(model: prime.Model, part: prime.Part):
 
 
 def smooth_dihedral_faces(model: prime.Model, part: prime.Part, fluid_volumes: List[int]):
+    """Perform smooth operation on dihedral faces."""
     fluid_zonelets = part.get_face_zonelets_of_volumes(fluid_volumes)
     if len(fluid_zonelets) > 0:
         result = diahedral_angle_results(model, part, fluid_zonelets)
@@ -565,6 +566,7 @@ def smooth_dihedral_faces(model: prime.Model, part: prime.Part, fluid_volumes: L
 
 
 def diahedral_angle_results(model: prime.Model, part: prime.Part, face_zonelets: List[int]):
+    """Dihedral angle result."""
     diag = prime.SurfaceSearch(model)
     register_id = 3
     command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsByDihedralAngle"

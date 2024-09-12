@@ -31,7 +31,6 @@ from ansys.meshing.prime.numen.utils.cached_data import CachedData
 from ansys.meshing.prime.numen.utils.communicator import call_method
 
 
-
 def set_cwd(model: prime.Model, cwd_params: dict, cached_data: CachedData):
     """Set current working directory."""
     path = macros.resolve_path(cwd_params["path"])
@@ -41,6 +40,7 @@ def set_cwd(model: prime.Model, cwd_params: dict, cached_data: CachedData):
 
 
 def add_file_logging(logger: logging.Logger, log_file: str, verbosity: int):
+    """Add file logging."""
     file_handler = logging.FileHandler(log_file, mode='a')
     file_handler.setLevel(verbosity)
 
@@ -50,6 +50,7 @@ def add_file_logging(logger: logging.Logger, log_file: str, verbosity: int):
 
 
 def setup_server_logging(model: prime.Model, log_file_name: str):
+    """Set up server logging."""
     if log_file_name:
         model_id = model._object_id
         logger_info = json.loads(
@@ -66,6 +67,7 @@ def setup_server_logging(model: prime.Model, log_file_name: str):
 
 
 def set_logger_verbosity(logger: logging.Logger, verbosity: int, model: prime.Model = None):
+    """Set logger verbosity."""
     stream_handler = None
     for handler in logger.handlers:
         if isinstance(handler, logging.StreamHandler):
@@ -92,6 +94,7 @@ def set_logger_verbosity(logger: logging.Logger, verbosity: int, model: prime.Mo
 
 
 def settings(model: prime.Model, settings_params: dict, cached_data: CachedData):
+    """Numen setting.."""
     verbosity = settings_params.get("verbosity")
     base_log_file = settings_params.get("log_file_name")
     cwd = settings_params.get("cwd")

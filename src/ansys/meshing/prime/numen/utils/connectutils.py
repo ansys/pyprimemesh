@@ -256,6 +256,7 @@ class TolerantConnect:
             self._collapse_thin_strips(surface_search_tool, collapse_tool, part, faces, tolerance)
 
     def surface_intersection_results(self, part: Part):
+        """Surface intersection results."""
         diag = prime.SurfaceSearch(model=self._model)
         register_id = 1
         self_inter_params = prime.SearchBySelfIntersectionParams(model=self._model)
@@ -750,6 +751,7 @@ class TolerantConnect:
         use_absolute_connect_tolerance,
         mesh_match_angle,
     ):
+        """Set failure."""
         features = prime.FeatureExtraction(self._model)
         feature_params = prime.ExtractFeatureParams(
             model=self._model,
@@ -813,6 +815,7 @@ class TolerantConnect:
         interfering_parts_priority,
         debug,
     ):
+        """Set failure."""
         if len(self._model.parts) == 1:
             self._connect_interfering_volumes(
                 parts_name_exp="*",
@@ -840,6 +843,7 @@ class TolerantConnect:
         mesh_match_angle: float = 45,
         debug: bool = False,
     ):
+        """Cusp removal."""
         list_parts_to_connect = self.get_parts_of_name_pattern(part_expression)
         pattern_params = prime.NamePatternParams(model=self._model)
         for part in list_parts_to_connect:
@@ -970,5 +974,5 @@ class TolerantConnect:
             self.write("after_fuse.pmdat")
 
     def write(self, filename: str):
+        """Write PMDAT file."""
         prime.FileIO(self._model).write_pmdat(filename, prime.FileWriteParams(self._model))
-

@@ -78,6 +78,7 @@ def unique_name_(value):
 
 
 def no_special_characters_(value):
+    """No special characters."""
     regex = re.compile('[@!#$%^&*()<>?/\|}{~:]')
     return regex.search(value) == None
 
