@@ -20,8 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for helper macros."""
-
+import os
 import re
 
 from ansys.meshing import prime
@@ -43,6 +42,18 @@ def _get_topo_faces(model: prime.Model):
 def _get_topo_nodes(model: prime.Model):
     topo_data = model.topo_data
     return call_method(model, "PrimeMesh::TopoData/GetTopoNodes", topo_data._object_id, {})
+
+
+def get_topo_nodes(model: prime.Model, part_ids: list):
+    topo_nodes = []
+    for part_id in part_ids:
+        part = model.get_part(part_id)
+        if part:
+            part_topo_nodes = call_method(
+                model, "PrimeMesh::Part/GetTopoNodes", part._object_id, {}
+            )
+            topo_nodes.extend(part_topo_nodes)
+    return topo_nodes
 
 
 def _get_interior_topoedges_of_topoface(model: prime.Model, topo_face: int):
@@ -95,7 +106,6 @@ def _check_pattern(val: str, pattern: str):
 
 
 def check_name_pattern(name: str, name_pattern: str):
-    """Check name pattern."""
     name_pattern = name_pattern.replace(",", " ")
     patterns = name_pattern.split(" ")
     found = False
@@ -108,3 +118,43 @@ def check_name_pattern(name: str, name_pattern: str):
         elif not found:
             found = _check_pattern(name, pattern)
     return found
+
+
+def resolve_path(file_name: str):
+    pattern = r"\$env\(([\d\w]*)\)"
+    res = re.search(pattern, file_name)
+    if res:
+        env_name = res.groups()[0]
+        env_val = os.getenv(env_name)
+        if env_val:
+            val_str = file_name[res.span()[0] : res.span()[1]]
+            return file_name.replace(val_str, env_val)
+        else:
+            raise RuntimeError(f"Environment variable \"{env_name}\" not found")
+    else:
+        return file_name
+
+
+def get_topo_volumes_of_label_name_pattern(model: prime.Model, part: prime.Part, label_exp: str):
+    args = {"label_name_pattern": label_exp, "name_pattern_params": {}}
+    command_name = "PrimeMesh::Part/GetTopoVolumesOfLabelNamePattern_Beta"
+    topo_volumes = call_method(model, command_name, part._object_id, args=args)
+    return topo_volumes
+
+
+def get_topo_volumes_of_zone_name_pattern(model: prime.Model, part: prime.Part, zone_exp: str):
+    args = {"zone_name_pattern": zone_exp, "name_pattern_params": {}}
+    command_name = "PrimeMesh::Part/GetTopoVolumesOfZoneNamePattern_Beta"
+    topo_volumes = call_method(model, command_name, part._object_id, args=args)
+    return topo_volumes
+
+
+def check_face_scope(model: prime.Model, part: prime.Part, scope: prime.ScopeDefinition):
+    part_ids = _get_part_ids(model, scope.part_expression)
+    if part.id in part_ids:
+        np = prime.NamePatternParams(model)
+        if scope.evaluation_type == prime.ScopeEvaluationType.LABELS:
+            return len(part.get_face_zonelets_of_label_name_pattern(scope.label_expression, np)) > 0
+        else:
+            return len(part.get_face_zonelets_of_zone_name_pattern(scope.zone_expression, np)) > 0
+    return False

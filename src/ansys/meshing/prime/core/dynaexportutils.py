@@ -27,8 +27,6 @@
 # please move the code to cpp or improve the code quality
 ########################### [TODO] ##################################
 
-import json
-
 import ansys.meshing.prime as prime
 
 __all__ = ['MaterialProcessor', 'DatabaseProcessor']
@@ -2189,10 +2187,8 @@ class MaterialProcessor:
     ----------
     model : prime.Model
         Model that the methods are to work on.
-    raw_materials_data : dict
-        The raw materials data in json dictionary format extracted from the part's simulation data.
-    zone_data : dict
-        The zone data in json dictionary format extracted from the part's simulation data.
+    sim_data : dict
+        The simulation data in json dictionary format containing materials and zone information.
     card_format : str, optional
         The LS-DYNA card format for writing. Defaults to "SHORT".
 
@@ -2203,6 +2199,7 @@ class MaterialProcessor:
 
     __slots__ = (
         '_card_format',
+        '_sim_data',
         '_raw_materials_data',
         '_zone_data',
         '_mat_id',
@@ -2219,14 +2216,14 @@ class MaterialProcessor:
     def __init__(
         self,
         model: prime.Model,
-        raw_materials_data: dict,
-        zone_data: dict,
+        sim_data: dict,
         card_format: str = "SHORT",
     ):
         """Initialize class variables and the superclass."""
         self._card_format = card_format
-        self._raw_materials_data = raw_materials_data
-        self._zone_data = zone_data
+        self._sim_data = sim_data
+        self._raw_materials_data = sim_data['Materials']
+        self._zone_data = sim_data['Zones']
         self._mat_id = 0
         self._wt_factor = 1.0
         self._material_assignedTo_zones = {}
@@ -2343,8 +2340,7 @@ class MaterialProcessor:
     def _get_max_id(self):
         part = self._model.parts[0]
         fileio = prime.FileIO(self._model)
-        simulation_data = json.loads(fileio.get_abaqus_simulation_data(part.id))
-        max_id = simulation_data['SimulationData']['max_id']
+        max_id = self._sim_data['SimulationData']['max_id']
         return int(max_id)
 
     def _get_zone_with_id(self, _id):

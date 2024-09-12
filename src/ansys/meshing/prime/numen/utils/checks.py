@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for validation."""
 import re
 
 from ansys.meshing.prime.numen.utils.evaluate import evaluate_expression
@@ -28,7 +27,6 @@ from ansys.meshing.prime.numen.utils.param_defs import ParamDefs
 
 
 def check_param(param_defs: ParamDefs, input_param: dict, param_name: str, exp: str):
-    """Validate input parameters."""
     # convert the check notation to func notation
     # "range:10,20"  ->  "$func(range,$value(param_name),10,20)"
     search_re = r"^\ *([^\ \:]*):"
@@ -43,12 +41,10 @@ def check_param(param_defs: ParamDefs, input_param: dict, param_name: str, exp: 
 
 
 def null_check(param_value):
-    """Validate null check."""
     return param_value == "$null"
 
 
 def type_check(param_value, param_type, sub_param_type=None):
-    """Validate type check."""
     if param_type == "string" or param_type == "path":
         return isinstance(param_value, str)
     elif param_type == "int":

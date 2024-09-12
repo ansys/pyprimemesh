@@ -82,6 +82,26 @@ class CadRefacetingMaxEdgeSizeLimit(enum.IntEnum):
     RELATIVE = 2
     """Denotes relative maximum edge size limit for CAD faceting."""
 
+class CdbAnalysisType(enum.IntEnum):
+    """Provides the MAPDL CDB analysis type.
+    """
+    NONE = 0
+    """Option to select no analysis type. This is the default option.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    OUTERPANELSTIFFNESS = 1
+    """Option to select Outer Panel Stiffness as CDB analysis type.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    BELGIAN = 2
+    """Option to select Belgian as CDB analysis type.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SEATRETRACTOR = 3
+    """Option to select Seat Retractor as CDB analysis type.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+
 class CdbSimulationType(enum.IntEnum):
     """Simulation Type for CDB export.
     """
@@ -2757,6 +2777,219 @@ class ImportMapdlCdbResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+class ContactElementTypeParams(CoreObject):
+    """Parameters to control element type choices for contact surfaces in TIEs and CONTACT PAIRs.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ContactElementTypeParams`` object with default parameters.
+    tie_surf_to_surf: int, optional
+        Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    tie_node_to_surf: int, optional
+        Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    contact_pair_surf_to_surf: int, optional
+        Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    contact_pair_node_to_surf: int, optional
+        Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``ContactElementTypeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> contact_element_type_params = prime.ContactElementTypeParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            tie_surf_to_surf: int,
+            tie_node_to_surf: int,
+            contact_pair_surf_to_surf: int,
+            contact_pair_node_to_surf: int):
+        self._tie_surf_to_surf = tie_surf_to_surf
+        self._tie_node_to_surf = tie_node_to_surf
+        self._contact_pair_surf_to_surf = contact_pair_surf_to_surf
+        self._contact_pair_node_to_surf = contact_pair_node_to_surf
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            tie_surf_to_surf: int = None,
+            tie_node_to_surf: int = None,
+            contact_pair_surf_to_surf: int = None,
+            contact_pair_node_to_surf: int = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ContactElementTypeParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ContactElementTypeParams`` object with default parameters.
+        tie_surf_to_surf: int, optional
+            Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        tie_node_to_surf: int, optional
+            Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        contact_pair_surf_to_surf: int, optional
+            Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        contact_pair_node_to_surf: int, optional
+            Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``ContactElementTypeParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> contact_element_type_params = prime.ContactElementTypeParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["tieSurfToSurf"] if "tieSurfToSurf" in json_data else None,
+                json_data["tieNodeToSurf"] if "tieNodeToSurf" in json_data else None,
+                json_data["contactPairSurfToSurf"] if "contactPairSurfToSurf" in json_data else None,
+                json_data["contactPairNodeToSurf"] if "contactPairNodeToSurf" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [tie_surf_to_surf, tie_node_to_surf, contact_pair_surf_to_surf, contact_pair_node_to_surf])
+            if all_field_specified:
+                self.__initialize(
+                    tie_surf_to_surf,
+                    tie_node_to_surf,
+                    contact_pair_surf_to_surf,
+                    contact_pair_node_to_surf)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ContactElementTypeParams")
+                    json_data = param_json["ContactElementTypeParams"] if "ContactElementTypeParams" in param_json else {}
+                    self.__initialize(
+                        tie_surf_to_surf if tie_surf_to_surf is not None else ( ContactElementTypeParams._default_params["tie_surf_to_surf"] if "tie_surf_to_surf" in ContactElementTypeParams._default_params else (json_data["tieSurfToSurf"] if "tieSurfToSurf" in json_data else None)),
+                        tie_node_to_surf if tie_node_to_surf is not None else ( ContactElementTypeParams._default_params["tie_node_to_surf"] if "tie_node_to_surf" in ContactElementTypeParams._default_params else (json_data["tieNodeToSurf"] if "tieNodeToSurf" in json_data else None)),
+                        contact_pair_surf_to_surf if contact_pair_surf_to_surf is not None else ( ContactElementTypeParams._default_params["contact_pair_surf_to_surf"] if "contact_pair_surf_to_surf" in ContactElementTypeParams._default_params else (json_data["contactPairSurfToSurf"] if "contactPairSurfToSurf" in json_data else None)),
+                        contact_pair_node_to_surf if contact_pair_node_to_surf is not None else ( ContactElementTypeParams._default_params["contact_pair_node_to_surf"] if "contact_pair_node_to_surf" in ContactElementTypeParams._default_params else (json_data["contactPairNodeToSurf"] if "contactPairNodeToSurf" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            tie_surf_to_surf: int = None,
+            tie_node_to_surf: int = None,
+            contact_pair_surf_to_surf: int = None,
+            contact_pair_node_to_surf: int = None):
+        """Set the default values of the ``ContactElementTypeParams`` object.
+
+        Parameters
+        ----------
+        tie_surf_to_surf: int, optional
+            Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+        tie_node_to_surf: int, optional
+            Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+        contact_pair_surf_to_surf: int, optional
+            Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+        contact_pair_node_to_surf: int, optional
+            Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+        """
+        args = locals()
+        [ContactElementTypeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ContactElementTypeParams`` object.
+
+        Examples
+        --------
+        >>> ContactElementTypeParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ContactElementTypeParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._tie_surf_to_surf is not None:
+            json_data["tieSurfToSurf"] = self._tie_surf_to_surf
+        if self._tie_node_to_surf is not None:
+            json_data["tieNodeToSurf"] = self._tie_node_to_surf
+        if self._contact_pair_surf_to_surf is not None:
+            json_data["contactPairSurfToSurf"] = self._contact_pair_surf_to_surf
+        if self._contact_pair_node_to_surf is not None:
+            json_data["contactPairNodeToSurf"] = self._contact_pair_node_to_surf
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "tie_surf_to_surf :  %s\ntie_node_to_surf :  %s\ncontact_pair_surf_to_surf :  %s\ncontact_pair_node_to_surf :  %s" % (self._tie_surf_to_surf, self._tie_node_to_surf, self._contact_pair_surf_to_surf, self._contact_pair_node_to_surf)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def tie_surf_to_surf(self) -> int:
+        """Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._tie_surf_to_surf
+
+    @tie_surf_to_surf.setter
+    def tie_surf_to_surf(self, value: int):
+        self._tie_surf_to_surf = value
+
+    @property
+    def tie_node_to_surf(self) -> int:
+        """Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._tie_node_to_surf
+
+    @tie_node_to_surf.setter
+    def tie_node_to_surf(self, value: int):
+        self._tie_node_to_surf = value
+
+    @property
+    def contact_pair_surf_to_surf(self) -> int:
+        """Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._contact_pair_surf_to_surf
+
+    @contact_pair_surf_to_surf.setter
+    def contact_pair_surf_to_surf(self, value: int):
+        self._contact_pair_surf_to_surf = value
+
+    @property
+    def contact_pair_node_to_surf(self) -> int:
+        """Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._contact_pair_node_to_surf
+
+    @contact_pair_node_to_surf.setter
+    def contact_pair_node_to_surf(self, value: int):
+        self._contact_pair_node_to_surf = value
+
 class ExportMapdlCdbParams(CoreObject):
     """Parameters to control MAPDL CDB export settings.
 
@@ -2800,6 +3033,10 @@ class ExportMapdlCdbParams(CoreObject):
         Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    analysis_type: CdbAnalysisType, optional
+        Option to specify CDB analysis type.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     simulation_type: CdbSimulationType, optional
         Simulation type for the file.
 
@@ -2818,6 +3055,10 @@ class ExportMapdlCdbParams(CoreObject):
         **This is a beta parameter**. **The behavior and name may change in the future**.
     write_thickness_file: bool, optional
         Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    contact_element_types: ContactElementTypeParams, optional
+        Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -2840,11 +3081,13 @@ class ExportMapdlCdbParams(CoreObject):
             enable_face_based_labels: bool,
             write_by_zones: bool,
             consider_general_connectors_as_spot_weld: bool,
+            analysis_type: CdbAnalysisType,
             simulation_type: CdbSimulationType,
             analysis_settings_file_name: str,
             use_compact_format: bool,
             export_fasteners_as_swgen: bool,
-            write_thickness_file: bool):
+            write_thickness_file: bool,
+            contact_element_types: ContactElementTypeParams):
         self._config_settings = config_settings
         self._pre_solution_settings = pre_solution_settings
         self._material_properties = material_properties
@@ -2854,11 +3097,13 @@ class ExportMapdlCdbParams(CoreObject):
         self._enable_face_based_labels = enable_face_based_labels
         self._write_by_zones = write_by_zones
         self._consider_general_connectors_as_spot_weld = consider_general_connectors_as_spot_weld
+        self._analysis_type = CdbAnalysisType(analysis_type)
         self._simulation_type = CdbSimulationType(simulation_type)
         self._analysis_settings_file_name = analysis_settings_file_name
         self._use_compact_format = use_compact_format
         self._export_fasteners_as_swgen = export_fasteners_as_swgen
         self._write_thickness_file = write_thickness_file
+        self._contact_element_types = contact_element_types
 
     def __init__(
             self,
@@ -2872,11 +3117,13 @@ class ExportMapdlCdbParams(CoreObject):
             enable_face_based_labels: bool = None,
             write_by_zones: bool = None,
             consider_general_connectors_as_spot_weld: bool = None,
+            analysis_type: CdbAnalysisType = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None,
             use_compact_format: bool = None,
             export_fasteners_as_swgen: bool = None,
             write_thickness_file: bool = None,
+            contact_element_types: ContactElementTypeParams = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbParams`` object.
@@ -2921,6 +3168,10 @@ class ExportMapdlCdbParams(CoreObject):
             Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        analysis_type: CdbAnalysisType, optional
+            Option to specify CDB analysis type.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
 
@@ -2941,6 +3192,10 @@ class ExportMapdlCdbParams(CoreObject):
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        contact_element_types: ContactElementTypeParams, optional
+            Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
 
@@ -2959,13 +3214,15 @@ class ExportMapdlCdbParams(CoreObject):
                 json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None,
                 json_data["writeByZones"] if "writeByZones" in json_data else None,
                 json_data["considerGeneralConnectorsAsSpotWeld"] if "considerGeneralConnectorsAsSpotWeld" in json_data else None,
+                CdbAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None),
                 CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None),
                 json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None,
                 json_data["useCompactFormat"] if "useCompactFormat" in json_data else None,
                 json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None,
-                json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)
+                json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
+                ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, simulation_type, analysis_settings_file_name, use_compact_format, export_fasteners_as_swgen, write_thickness_file])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, use_compact_format, export_fasteners_as_swgen, write_thickness_file, contact_element_types])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -2977,11 +3234,13 @@ class ExportMapdlCdbParams(CoreObject):
                     enable_face_based_labels,
                     write_by_zones,
                     consider_general_connectors_as_spot_weld,
+                    analysis_type,
                     simulation_type,
                     analysis_settings_file_name,
                     use_compact_format,
                     export_fasteners_as_swgen,
-                    write_thickness_file)
+                    write_thickness_file,
+                    contact_element_types)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -2998,11 +3257,13 @@ class ExportMapdlCdbParams(CoreObject):
                         enable_face_based_labels if enable_face_based_labels is not None else ( ExportMapdlCdbParams._default_params["enable_face_based_labels"] if "enable_face_based_labels" in ExportMapdlCdbParams._default_params else (json_data["enableFaceBasedLabels"] if "enableFaceBasedLabels" in json_data else None)),
                         write_by_zones if write_by_zones is not None else ( ExportMapdlCdbParams._default_params["write_by_zones"] if "write_by_zones" in ExportMapdlCdbParams._default_params else (json_data["writeByZones"] if "writeByZones" in json_data else None)),
                         consider_general_connectors_as_spot_weld if consider_general_connectors_as_spot_weld is not None else ( ExportMapdlCdbParams._default_params["consider_general_connectors_as_spot_weld"] if "consider_general_connectors_as_spot_weld" in ExportMapdlCdbParams._default_params else (json_data["considerGeneralConnectorsAsSpotWeld"] if "considerGeneralConnectorsAsSpotWeld" in json_data else None)),
+                        analysis_type if analysis_type is not None else ( ExportMapdlCdbParams._default_params["analysis_type"] if "analysis_type" in ExportMapdlCdbParams._default_params else CdbAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None)),
                         simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)),
                         analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)),
                         use_compact_format if use_compact_format is not None else ( ExportMapdlCdbParams._default_params["use_compact_format"] if "use_compact_format" in ExportMapdlCdbParams._default_params else (json_data["useCompactFormat"] if "useCompactFormat" in json_data else None)),
                         export_fasteners_as_swgen if export_fasteners_as_swgen is not None else ( ExportMapdlCdbParams._default_params["export_fasteners_as_swgen"] if "export_fasteners_as_swgen" in ExportMapdlCdbParams._default_params else (json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None)),
-                        write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)))
+                        write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
+                        contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3021,11 +3282,13 @@ class ExportMapdlCdbParams(CoreObject):
             enable_face_based_labels: bool = None,
             write_by_zones: bool = None,
             consider_general_connectors_as_spot_weld: bool = None,
+            analysis_type: CdbAnalysisType = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None,
             use_compact_format: bool = None,
             export_fasteners_as_swgen: bool = None,
-            write_thickness_file: bool = None):
+            write_thickness_file: bool = None,
+            contact_element_types: ContactElementTypeParams = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
 
         Parameters
@@ -3048,6 +3311,8 @@ class ExportMapdlCdbParams(CoreObject):
             Option to write zones in the file.
         consider_general_connectors_as_spot_weld: bool, optional
             Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+        analysis_type: CdbAnalysisType, optional
+            Option to specify CDB analysis type.
         simulation_type: CdbSimulationType, optional
             Simulation type for the file.
         analysis_settings_file_name: str, optional
@@ -3058,6 +3323,8 @@ class ExportMapdlCdbParams(CoreObject):
             Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+        contact_element_types: ContactElementTypeParams, optional
+            Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3094,6 +3361,8 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["writeByZones"] = self._write_by_zones
         if self._consider_general_connectors_as_spot_weld is not None:
             json_data["considerGeneralConnectorsAsSpotWeld"] = self._consider_general_connectors_as_spot_weld
+        if self._analysis_type is not None:
+            json_data["analysisType"] = self._analysis_type
         if self._simulation_type is not None:
             json_data["simulationType"] = self._simulation_type
         if self._analysis_settings_file_name is not None:
@@ -3104,11 +3373,13 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["exportFastenersAsSwgen"] = self._export_fasteners_as_swgen
         if self._write_thickness_file is not None:
             json_data["writeThicknessFile"] = self._write_thickness_file
+        if self._contact_element_types is not None:
+            json_data["contactElementTypes"] = self._contact_element_types._jsonify()
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nuse_compact_format :  %s\nexport_fasteners_as_swgen :  %s\nwrite_thickness_file :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._simulation_type, self._analysis_settings_file_name, self._use_compact_format, self._export_fasteners_as_swgen, self._write_thickness_file)
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nuse_compact_format :  %s\nexport_fasteners_as_swgen :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._use_compact_format, self._export_fasteners_as_swgen, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -3221,6 +3492,18 @@ class ExportMapdlCdbParams(CoreObject):
         self._consider_general_connectors_as_spot_weld = value
 
     @property
+    def analysis_type(self) -> CdbAnalysisType:
+        """Option to specify CDB analysis type.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._analysis_type
+
+    @analysis_type.setter
+    def analysis_type(self, value: CdbAnalysisType):
+        self._analysis_type = value
+
+    @property
     def simulation_type(self) -> CdbSimulationType:
         """Simulation type for the file.
 
@@ -3279,6 +3562,18 @@ class ExportMapdlCdbParams(CoreObject):
     @write_thickness_file.setter
     def write_thickness_file(self, value: bool):
         self._write_thickness_file = value
+
+    @property
+    def contact_element_types(self) -> ContactElementTypeParams:
+        """Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._contact_element_types
+
+    @contact_element_types.setter
+    def contact_element_types(self, value: ContactElementTypeParams):
+        self._contact_element_types = value
 
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.

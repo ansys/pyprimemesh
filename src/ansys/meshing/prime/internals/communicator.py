@@ -82,6 +82,10 @@ class Communicator(object):
         pass
 
     @abstractmethod
+    def server_command(self, command: str, *args) -> dict:
+        pass
+
+    @abstractmethod
     def import_cad(self, model, file_name: str, *args) -> dict:
         """Import a CAD file from local.
 

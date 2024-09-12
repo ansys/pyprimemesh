@@ -1309,7 +1309,8 @@ class _MaterialProcessor:
                 order_N = int(property_dict["Parameters"]["N"])
             if order_N > 3:
                 self._logger.warning(
-                    f"HYPERELASTIC material order (N) greater than 3 is not processed.: {material}."
+                    f"HYPERELASTIC material order (N) "
+                    f"greater than 3 is not processed.: {material}."
                 )
                 return hyperelastic_data
 
@@ -1833,7 +1834,9 @@ class _BoundaryProcessor:
                         if data_lines is not None:
                             for data_line in data_lines:
                                 comp_names.append(
-                                    get_modified_component_name(str(data_line['node_set']))
+                                    get_modified_component_name(
+                                        str(data_line['node_set']), 'NSET', self._simulation_data
+                                    )
                                 )
                 else:
                     if base_motion_name == "":
@@ -1841,7 +1844,9 @@ class _BoundaryProcessor:
                         if data_lines is not None:
                             for data_line in data_lines:
                                 comp_names.append(
-                                    get_modified_component_name(str(data_line['node_set']))
+                                    get_modified_component_name(
+                                        str(data_line['node_set']), 'NSET', self._simulation_data
+                                    )
                                 )
 
         return comp_names
@@ -1887,7 +1892,9 @@ class _BoundaryProcessor:
                 # modified_amplitude_name = f"{amplitude}_{get_modified_component_name(
                 # data_line['node_set'])}"
                 modified_amplitude_name = "AMPL_BOUNDARY"
-                applied_on = get_modified_component_name(str(data_line['node_set']))
+                applied_on = get_modified_component_name(
+                    str(data_line['node_set']), 'NSET', self._simulation_data
+                )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
                 )
@@ -1905,9 +1912,10 @@ class _BoundaryProcessor:
                 if data_line['node_set'].isnumeric():
                     boundary_commands += f"D, {data_line['node_set']}, {dof_map[i]}, "
                 else:
-                    boundary_commands += (
-                        f"D, {get_modified_component_name(data_line['node_set'])}, {dof_map[i]}, "
+                    cmname = get_modified_component_name(
+                        data_line['node_set'], 'NSET', self._simulation_data
                     )
+                    boundary_commands += f"D, {cmname}, {dof_map[i]}, "
                 if amplitude is not None:
                     ac = _AmplitudeProcessor._amplitude_count
                     boundary_commands += f"%{modified_amplitude_name}_{ac}%"
@@ -1925,9 +1933,19 @@ class _BoundaryProcessor:
 
 
 class _DloadProcessor:
-    __slots__ = ('_dloads_data', '_step_start_time', '_step_end_time', '_model', '_logger')
+    __slots__ = (
+        '_simulation_data',
+        '_dloads_data',
+        '_step_start_time',
+        '_step_end_time',
+        '_model',
+        '_logger',
+    )
 
-    def __init__(self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0):
+    def __init__(
+        self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0, sim_data=None
+    ):
+        self._simulation_data = sim_data
         self._dloads_data = data
         self._step_start_time = step_start_time
         self._step_end_time = step_end_time
@@ -1964,7 +1982,9 @@ class _DloadProcessor:
             load_type = None
             elset = None
             if 'element_number_or_set' in data_line:
-                elset = get_modified_component_name(data_line['element_number_or_set'])
+                elset = get_modified_component_name(
+                    data_line['element_number_or_set'], 'ELSET', self._simulation_data
+                )
             if 'magnitude' in data_line:
                 mag = float(data_line['magnitude'])
             if 'type' in data_line:
@@ -2087,7 +2107,9 @@ class _CloadProcessor:
                 # modified_amplitude_name = (
                 # f"{amplitude}_{get_modified_component_name(data_line['node_set'])}")
                 modified_amplitude_name = "AMPL_CLOAD"
-                applied_on = get_modified_component_name(str(data_line['node_set']))
+                applied_on = get_modified_component_name(
+                    str(data_line['node_set']), 'NSET', self._simulation_data
+                )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
                 )
@@ -2104,9 +2126,10 @@ class _CloadProcessor:
             if data_line['node_set'].isnumeric():
                 cload_commands += f"F, {data_line['node_set']}, {dof_map[dof]}, "
             else:
-                cload_commands += (
-                    f"F, {get_modified_component_name(data_line['node_set'])}, {dof_map[dof]}, "
+                cmname = get_modified_component_name(
+                    data_line['node_set'], 'NSET', self._simulation_data
                 )
+                cload_commands += f"F, {cmname}, {dof_map[dof]}, "
             if amplitude is not None:
                 ac = _AmplitudeProcessor._amplitude_count
                 cload_commands += f"%{modified_amplitude_name}_{ac}%"
@@ -2115,8 +2138,10 @@ class _CloadProcessor:
             cload_commands += "\n"
             for dict_key, val in self._modal_load_vectors.items():
                 if (
-                    get_modified_component_name(val["SET"])
-                    == get_modified_component_name(data_line['node_set'])
+                    get_modified_component_name(val["SET"], 'NSET', self._simulation_data)
+                    == get_modified_component_name(
+                        data_line['node_set'], 'NSET', self._simulation_data
+                    )
                     and val["COMP"] == dof_map[dof]
                 ):
                     cload_lv_scale_commands += f"LVSCALE, 0, {dict_key}\n"
@@ -2211,7 +2236,7 @@ class _ConnectorMotionProcessor:
                 # self._logger.info("Tabular Load condition is not processed.")
                 amplitude = params['AMPLITUDE']
             if 'LOAD CASE' in params:
-                self._logger.warning(f"Load Case in Connector Motion is not processed.")
+                self._logger.warning("Load Case in Connector Motion is not processed.")
             if 'TYPE' in params:
                 connnector_motion_type = params['TYPE']
             if 'FIXED' in params:
@@ -2228,7 +2253,9 @@ class _ConnectorMotionProcessor:
                 # modified_amplitude_name = (
                 # f"{amplitude}_{get_modified_component_name(data_line['node_set'])}")
                 modified_amplitude_name = "AMPL_CONNECTOR_MOTION"
-                applied_on = get_modified_component_name(str(data_line['element_number_or_set']))
+                applied_on = get_modified_component_name(
+                    str(data_line['element_number_or_set']), 'ELSET', self._simulation_data
+                )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
                 )
@@ -2242,14 +2269,17 @@ class _ConnectorMotionProcessor:
                 )
                 # ampl_processor.write_amplitude_table_to_file(ampl_commands)
             if data_line['element_number_or_set'].isnumeric() == False:
-                dls = get_modified_component_name(data_line['element_number_or_set'])
+                dls = get_modified_component_name(
+                    data_line['element_number_or_set'], 'ELSET', self._simulation_data
+                )
                 connector_motion_commands += f"CMSEL, S, {dls}, ELEM\n"
                 connector_motion_commands += f"ELEM_NUM = ELNEXT(0)\n"
                 connector_motion_commands += f"DJ, ELEM_NUM, "
             else:
-                connector_motion_commands += (
-                    f"DJ, {get_modified_component_name(str(data_line['element_number_or_set']))}, "
+                cmname = get_modified_component_name(
+                    str(data_line['element_number_or_set']), 'ELSET', self._simulation_data
                 )
+                connector_motion_commands += f"DJ, {cmname}, "
             if connnector_motion_type == 'DISPLACEMENT':
                 connector_motion_commands += f"{dof_map[dof]}, "
             elif connnector_motion_type == 'VELOCITY':
@@ -2360,7 +2390,7 @@ class _BaseMotionProcessor:
                 )
                 return base_motion_commands
             if 'LOAD CASE' in params:
-                self._logger.warning(f"Load Case in base Motion is not processed.")
+                self._logger.warning("Load Case in base Motion is not processed.")
             if 'TYPE' in params:
                 connnector_motion_type = params['TYPE']
             if 'DOF' in params:
@@ -2533,12 +2563,13 @@ class _SurfaceInteractionProcessing:
 
 
 class _MonitorProcessor:
-    __slots__ = ('_monitor_data', '_model', '_logger')
+    __slots__ = ('_simulation_data', '_monitor_data', '_model', '_logger')
 
-    def __init__(self, model: prime.Model, data):
+    def __init__(self, model: prime.Model, data, sim_data=None):
         self._monitor_data = data
         self._model = model
         self._logger = model.python_logger
+        self._simulation_data = sim_data
 
     def get_monitor_commands(self):
         monitor_commands = ""
@@ -2581,7 +2612,8 @@ class _MonitorProcessor:
                     if node.isnumeric():
                         str_node = node
                     else:
-                        monitor_commands += f"CMSEL,S,{node},NODE\n"
+                        cmname = get_modified_component_name(node, 'NSET', self._simulation_data)
+                        monitor_commands += f"CMSEL,S,{cmname},NODE\n"
                         monitor_commands += f"node_id = NDNEXT(0)\n"
                         monitor_commands += f"ALLSEL\n"
                         str_node = 'node_id'
@@ -2661,9 +2693,10 @@ class _StepProcessor:
         '_connector_motion_ampl_commands',
         '_model',
         '_logger',
+        '_model_application',
     )
 
-    def __init__(self, model: prime.Model, data, sim_data):
+    def __init__(self, model: prime.Model, data, sim_data, model_application):
         self._simulation_data = sim_data
         self._steps_data = data
         self._curr_step = None
@@ -2686,6 +2719,7 @@ class _StepProcessor:
         self._connector_motion_ampl_commands = ''
         self._model = model
         self._logger = model.python_logger
+        self._model_application = model_application
 
     def get_cload_ampl_commands(self):
         return self._cload_ampl_commands
@@ -2772,12 +2806,18 @@ class _StepProcessor:
             f'STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis != "STATIC":
-            static_analysis_commands += f'ANTYPE, STATIC\n'
+            if self._model_application == prime.CdbAnalysisType.OUTERPANELSTIFFNESS:
+                static_analysis_commands += 'ANTYPE, TRANSIENT\n'
+                static_analysis_commands += 'TIMINT, ON\n'
+                static_analysis_commands += 'TINTP, QUASI\n'
+                static_analysis_commands += 'NROPT, FULL\n'
+            else:
+                static_analysis_commands += 'ANTYPE, STATIC\n'
         static_analysis_commands += f'TIME,{self._time}\n'
         static_analysis_commands += (
             f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n'
         )
-        static_analysis_commands += f'\n'
+        static_analysis_commands += '\n'
         self._previous_analysis = "STATIC"
         return static_analysis_commands
 
@@ -3058,6 +3098,34 @@ class _StepProcessor:
                                     ):
                                         modopt_method = 'QRDAMP'
                                         break
+            if "Materials" in self._simulation_data:
+                all_mats = self._simulation_data['Materials']
+                if all_mats:
+                    for mat in all_mats:
+                        _mat = all_mats[mat]
+                        if _mat and 'DAMPING' in _mat:
+                            if 'Parameters' in _mat['DAMPING']:
+                                if "ALPHA" in _mat['DAMPING']['Parameters']:
+                                    modopt_method = 'QRDAMP'
+                                    break
+            if "Mass" in self._simulation_data:
+                all_mass = self._simulation_data['Mass']
+                if all_mass:
+                    for m in all_mass:
+                        _m = all_mass[m]
+                        if 'Parameters' in _m:
+                            if "ALPHA" in _m['Parameters']:
+                                modopt_method = 'QRDAMP'
+                                break
+            if "RotaryInertia" in self._simulation_data:
+                all_mass = self._simulation_data['RotaryInertia']
+                if all_mass:
+                    for m in all_mass:
+                        _m = all_mass[m]
+                        if 'Parameters' in _m:
+                            if "ALPHA" in _m['Parameters']:
+                                modopt_method = 'QRDAMP'
+                                break
         frequency_analysis_commands += (
             f'! -------------------------- STEP: {self._step_counter} -----------------------\n'
         )
@@ -3319,12 +3387,12 @@ class _StepProcessor:
                         else:
                             output_analysis_commands += "1\n"
                     # if 'Parameters' in nodeout:
-                    #     if (
-                    #         nodeout['Parameters'] is not None
-                    #         and 'NSET' in nodeout['Parameters']
-                    #     ):
-                    #         output_analysis_commands += get_modified_component_name(
-                    #             nodeout['Parameters']['NSET'])
+                    #    if (
+                    #        nodeout['Parameters'] is not None
+                    #        and 'NSET' in nodeout['Parameters']
+                    #    ):
+                    #        output_analysis_commands += get_modified_component_name(
+                    #            nodeout['Parameters']['NSET'],'NSET', self._simulation_data)
                 if 'EnergyOutput' in output['Data']:
                     for enrgout in output['Data']['EnergyOutput']:
                         if enrgout is not None and enrgout['Data'] is not None:
@@ -3349,7 +3417,9 @@ class _StepProcessor:
                                     and 'ELSET' in enrgout['Parameters']
                                 ):
                                     output_analysis_commands += get_modified_component_name(
-                                        enrgout['Parameters']['ELSET']
+                                        enrgout['Parameters']['ELSET'],
+                                        'ELSET',
+                                        self._simulation_data,
                                     )
                             output_analysis_commands += ', ,\n'
                 if 'NodeOutput' in output['Data']:
@@ -3378,7 +3448,9 @@ class _StepProcessor:
                                                 output_analysis_commands += (
                                                     "CMSEL,S,"
                                                     + get_modified_component_name(
-                                                        nodeout['Parameters']['NSET']
+                                                        nodeout['Parameters']['NSET'],
+                                                        'NSET',
+                                                        self._simulation_data,
                                                     )
                                                     + ",NODE\n"
                                                 )
@@ -3388,7 +3460,9 @@ class _StepProcessor:
                                                 output_analysis_commands += (
                                                     "CM,"
                                                     + get_modified_component_name(
-                                                        nodeout['Parameters']['NSET']
+                                                        nodeout['Parameters']['NSET'],
+                                                        'NSET',
+                                                        self._simulation_data,
                                                     )
                                                     + "_CONTACT, ELEM\n"
                                                 )
@@ -3433,7 +3507,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        nodeout['Parameters']['NSET']
+                                                        nodeout['Parameters']['NSET'],
+                                                        'NSET',
+                                                        self._simulation_data,
                                                     )
                                                 )
                                     elif key == "CF":
@@ -3457,7 +3533,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        nodeout['Parameters']['NSET']
+                                                        nodeout['Parameters']['NSET'],
+                                                        'NSET',
+                                                        self._simulation_data,
                                                     )
                                                     + "_CONTACT"
                                                 )
@@ -3507,7 +3585,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET']
+                                                        elemout['Parameters']['ELSET'],
+                                                        'ELSET',
+                                                        self._simulation_data,
                                                     )
                                                 )
                                     elif key in ["PEEQ", "PEEQMAX"]:
@@ -3531,7 +3611,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET']
+                                                        elemout['Parameters']['ELSET'],
+                                                        'ELSET',
+                                                        self._simulation_data,
                                                     )
                                                 )
                                     elif key == "PE":
@@ -3555,7 +3637,9 @@ class _StepProcessor:
                                                 and 'ELSET' in elemout['Parameters']
                                             ):
                                                 out_cmds += get_modified_component_name(
-                                                    elemout['Parameters']['ELSET']
+                                                    elemout['Parameters']['ELSET'],
+                                                    'ELSET',
+                                                    self._simulation_data,
                                                 )
                                         output_analysis_commands += (
                                             out_cmds
@@ -3584,7 +3668,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET']
+                                                        elemout['Parameters']['ELSET'],
+                                                        'ELSET',
+                                                        self._simulation_data,
                                                     )
                                                 )
                                     elif key == "CTF":
@@ -3608,7 +3694,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET']
+                                                        elemout['Parameters']['ELSET'],
+                                                        'ELSET',
+                                                        self._simulation_data,
                                                     )
                                                 )
                                     elif key == "NFORC":
@@ -3632,7 +3720,9 @@ class _StepProcessor:
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET']
+                                                        elemout['Parameters']['ELSET'],
+                                                        'ELSET',
+                                                        self._simulation_data,
                                                     )
                                                 )
                                     output_analysis_commands += ', ,\n'
@@ -3651,7 +3741,7 @@ class _StepProcessor:
                                 and 'ELSET' in elemout['Parameters']
                             ):
                                 output_analysis_commands += get_modified_component_name(
-                                    elemout['Parameters']['ELSET']
+                                    elemout['Parameters']['ELSET'], 'ELSET', self._simulation_data
                                 )
                             output_analysis_commands += "\n"
         return output_analysis_commands
@@ -3714,14 +3804,13 @@ class _StepProcessor:
                                     f"F, " f"{data_line['node_set']}, " f"{dof_map[dof]}, 1\n"
                                 )
                             else:
-                                vector_commands += (
-                                    f"F, "
-                                    f"{get_modified_component_name(data_line['node_set'])}, "
-                                    f"{dof_map[dof]}, 1\n"
+                                cmname = get_modified_component_name(
+                                    data_line['node_set'], 'NSET', self._simulation_data
                                 )
+                                vector_commands += f"F, " f"{cmname}, " f"{dof_map[dof]}, 1\n"
                             count_load_vectors += 1
                         self._modal_load_vectors[count_load_vectors] = {
-                            'SET': get_modified_component_name(data_line['node_set']),
+                            'SET': cmname,
                             "COMP": dof_map[dof],
                         }
                 if "BaseMotion" in step_data:
@@ -3732,7 +3821,9 @@ class _StepProcessor:
                             continue
                         base_name = ""
                         if 'BASE NAME' in params:
-                            base_name = get_modified_component_name(params['BASE NAME'])
+                            base_name = get_modified_component_name(
+                                params['BASE NAME'], 'NSET', self._simulation_data
+                            )
                         boundaries_for_motion = self.get_step_boundary_component_data(
                             self._curr_step["Boundary"], base_name
                         )
@@ -3817,7 +3908,11 @@ class _StepProcessor:
 
     def get_step_dload_data(self, dloads_data):
         dload_processor = _DloadProcessor(
-            self._model, dloads_data, self._step_start_time, self._step_end_time
+            self._model,
+            dloads_data,
+            self._step_start_time,
+            self._step_end_time,
+            sim_data=self._simulation_data,
         )
         # TODO this needs to be in List of cloads instead of single Cload
         dload_commands = ''
@@ -3859,7 +3954,7 @@ class _StepProcessor:
         return global_damping_commands
 
     def get_monitor_commands(self, monitor_data):
-        monitor_processor = _MonitorProcessor(self._model, monitor_data)
+        monitor_processor = _MonitorProcessor(self._model, monitor_data, self._simulation_data)
         monitor_commands = monitor_processor.get_monitor_commands()
         return monitor_commands
 
@@ -4060,9 +4155,9 @@ class _AxialTempCorrection:
         return secdata_string
 
 
-def get_modified_component_name(name: str) -> str:
+def get_modified_component_name(name: str, set_type: str = None, sim_data=None) -> str:
     """
-    Modify a component name to meet specific criteria.
+    Modifies a component name to meet specific criteria.
 
     This function replaces any non-alphanumeric characters with underscores
     and adds the prefix "COMP_" if the name starts with a digit or underscore.
@@ -4071,6 +4166,12 @@ def get_modified_component_name(name: str) -> str:
     ----------
     name : str
         The original component name.
+
+    set_type : str
+        The type of component (NSET, ELSET, SURFACE), used if there is a potential name conflict.
+
+    sim_data
+        The simulation data of the part in json format, used if there is a potential name conflict.
 
     Returns
     -------
@@ -4083,6 +4184,17 @@ def get_modified_component_name(name: str) -> str:
     where restrictions might exist on allowed characters and initial characters.
     """
     modified_name = re.sub(r"[^\w]", "_", name)
+
+    if set_type == 'NSET':
+        has_surface = 'Surface' in sim_data and name in sim_data['Surface']
+        has_nset = 'Nset' in sim_data and name in sim_data['Nset']
+        has_elset = 'Elset' in sim_data and name in sim_data['Elset']
+
+        count = has_surface + has_nset + has_elset
+
+        if count > 1:
+            modified_name = set_type + "_" + name
+
     if modified_name and (modified_name[0].isdigit() or modified_name[0] == "_"):
         modified_name = "COMP_" + modified_name
     return modified_name
@@ -4164,7 +4276,10 @@ def generate_mapdl_commands(
     base_motion_ampl_commands = ''
     if "Step" in json_simulation_data:
         steps_data = _StepProcessor(
-            model, json_simulation_data["Step"], sim_data=json_simulation_data
+            model,
+            json_simulation_data["Step"],
+            sim_data=json_simulation_data,
+            model_application=params.analysis_type,
         )
         step_settings = steps_data.get_all_steps()
         ninterval_mapdl_commands = steps_data.get_ninterval_mapdl_commands()

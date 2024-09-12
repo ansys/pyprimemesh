@@ -73,7 +73,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteResults(model = self, json_data = result)
 
     def merge_parts(self, part_ids : Iterable[int], params : MergePartsParams) -> MergePartsResults:
-        """ Merges given parts into one.
+        """ Merge given parts into one.
 
 
         Parameters
@@ -108,7 +108,7 @@ class Model(CoreObject, CommunicationManager):
         return MergePartsResults(model = self, json_data = result)
 
     def set_global_sizing_params(self, params : GlobalSizingParams) -> SetSizingResults:
-        """ Sets the global sizing parameters to initialize surfer parameters and various size control parameters.
+        """ Set the global sizing parameters to initialize surfer parameters and various size control parameters.
 
 
         Parameters
@@ -203,7 +203,7 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("activate_volumetric_size_fields")
 
     def deactivate_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Deactivate the sizefields identified by the given sizefield ids.
+        """ Deactivate the size fields with the given size field ids.
 
 
         Parameters
@@ -371,7 +371,7 @@ class Model(CoreObject, CommunicationManager):
         return CreateZoneResults(model = self, json_data = result)
 
     def delete_zone(self, zone_id : int) -> DeleteZoneResults:
-        """ Deletes zone identified with the given id.
+        """ Deletes zone with the given id.
 
 
         Parameters
@@ -402,7 +402,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteZoneResults(model = self, json_data = result)
 
     def get_zone_by_name(self, zone_name : str) -> int:
-        """ Gets the zone by name.
+        """ Gets the zone with the provided name.
 
 
         Parameters
@@ -444,7 +444,7 @@ class Model(CoreObject, CommunicationManager):
         Returns
         -------
         str
-            Return the name. Return empty name if the id is invalid.
+            Return the zone name. Return empty name if the id is invalid.
 
 
         Examples
@@ -464,7 +464,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def set_suggested_zone_name(self, id : int, name : str) -> SetNameResults:
-        """ Sets the unique name for zone with given id based on the given suggested name.
+        """ Sets the unique name for zone with given id based on the suggested name.
 
 
         Parameters

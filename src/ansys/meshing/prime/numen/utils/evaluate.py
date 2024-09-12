@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for evaluating expression."""
 import ast
 import json
 import re
@@ -72,7 +71,6 @@ def __eval_function(function_str: str):
 
 
 def evaluate_expression(repl_params: ParamDefs, context: Dict, exp: str):
-    """Evaluate expression."""
     if not isinstance(exp, str):
         return exp
     expression = exp

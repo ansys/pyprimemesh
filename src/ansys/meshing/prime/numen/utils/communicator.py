@@ -20,15 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Numen communicator."""
 from ansys.meshing import prime
 
 
 class PrimeObj:
-    """PrimeObj provides interface to construct and destruct PrimeMesh object."""
-
     def __init__(self, model: prime.Model, object_name: str, part_id: int = None):
-        """Create PrimeMeh object with the given object name."""
         self.model = model
         self.object_name = object_name
         args = {"ModelID": model._object_id, "MaxID": -1}
@@ -38,20 +34,17 @@ class PrimeObj:
         self._object_id = result["ObjectIndex"]
 
     def call_method(self, command_name: str, args: dict):
-        """Call method on PrimeMesh object with the given command name."""
         return call_method(
             self.model, f"PrimeMesh::{self.object_name}/{command_name}", self._object_id, args
         )
 
     def destruct(self):
-        """Destruct PrimeMeh object."""
         self.model._communicator.serve(
             self.model, f"PrimeMesh::{self.object_name}/Destruct", self._object_id, args={}
         )
 
 
 def call_method(model: prime.Model, command_name: str, object_id: int, args: dict):
-    """Call PrimeMesh method with given command name."""
     result = model._communicator.serve(model, command_name, object_id, args=args)
     return result
 

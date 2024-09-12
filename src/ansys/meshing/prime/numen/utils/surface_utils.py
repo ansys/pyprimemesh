@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for surface utils."""
 from logging import Logger
 from typing import List
 
@@ -35,7 +34,6 @@ def improve_quality(
     local_remesh_by_size_change: bool,
     keep_small_free_surfaces: bool,
 ):
-    """Improve qaulity based on skewness."""
     global_sf_params = model.get_global_sizing_params()
     register_id = 26
     surface_search = prime.SurfaceSearch(model)
@@ -363,7 +361,6 @@ def cleanup_tri_mesh(
     keep_small_free_surfaces: bool,
     logger: Logger,
 ):
-    """Clean up tri mesh."""
     quality_reg_id = 26
     surface_search_tool = prime.SurfaceSearch(model)
     collapse_tool = prime.CollapseTool(model)
@@ -467,7 +464,6 @@ def cleanup_tri_mesh(
 
 
 def check_surface_intersection(model: prime.Model, part: prime.Part):
-    """Check surface intersection."""
     diag = prime.SurfaceSearch(model)
     register_id = 1
     self_inter_params = prime.SearchBySelfIntersectionParams(model)
@@ -495,7 +491,6 @@ def check_surface_intersection(model: prime.Model, part: prime.Part):
 
 
 def surface_mesh_check(model: prime.Model):
-    """Surface mesh check."""
     params = prime.SurfaceDiagnosticSummaryParams(model)
     params.compute_self_intersections = True
     params.compute_free_edges = True
@@ -506,15 +501,8 @@ def surface_mesh_check(model: prime.Model):
 
 
 def free_elements_results(model: prime.Model, part: prime.Part):
-    """Free elements."""
     diag = prime.SurfaceSearch(model)
     register_id = 2
-    model._comm.serve(
-        model,
-        "PrimeMesh::Model/SetPyPrimeSettings",
-        model._object_id,
-        args={"settings": "encode_hidden_params"},
-    )
     command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsByFreeEdges"
     params = {"minFreeEdges": 0}
     args = {
@@ -547,31 +535,30 @@ def free_elements_results(model: prime.Model, part: prime.Part):
 
 
 def smooth_dihedral_faces(model: prime.Model, part: prime.Part, fluid_volumes: List[int]):
-    """Smooth dihedral faces."""
     fluid_zonelets = part.get_face_zonelets_of_volumes(fluid_volumes)
-    result = diahedral_angle_results(model, part, fluid_zonelets)
-    if result[0] > 0:
-        surface_utils = prime.SurfaceUtilities(model)
-        smooth_params = prime.SmoothDihedralFaceNodesParams(
-            model,
-            min_dihedral_angle=20.0,
-            tolerance=0.3,
-            type=prime.SmoothType.INFLATE,
-        )
-        fluid_zonelets = part.get_face_zonelets_of_volumes(fluid_volumes)
-        surface_utils.smooth_dihedral_face_nodes(fluid_zonelets, smooth_params)
-        smooth_params.type = prime.SmoothType.SMOOTH
-        surface_utils.smooth_dihedral_face_nodes(fluid_zonelets, smooth_params)
-    surf_inter_res = check_surface_intersection(model, part)
-    if surf_inter_res[0]:
-        improve_quality(model, part, 0.9, 0.95, False, True)
-    surf_inter_res = check_surface_intersection(model, part)
-    if surf_inter_res[0]:
-        raise RuntimeError("Face elements found intersecting")
+    if len(fluid_zonelets) > 0:
+        result = diahedral_angle_results(model, part, fluid_zonelets)
+        if result[0] > 0:
+            surface_utils = prime.SurfaceUtilities(model)
+            smooth_params = prime.SmoothDihedralFaceNodesParams(
+                model,
+                min_dihedral_angle=20.0,
+                tolerance=0.3,
+                type=prime.SmoothType.INFLATE,
+            )
+            fluid_zonelets = part.get_face_zonelets_of_volumes(fluid_volumes)
+            surface_utils.smooth_dihedral_face_nodes(fluid_zonelets, smooth_params)
+            smooth_params.type = prime.SmoothType.SMOOTH
+            surface_utils.smooth_dihedral_face_nodes(fluid_zonelets, smooth_params)
+        surf_inter_res = check_surface_intersection(model, part)
+        if surf_inter_res[0]:
+            improve_quality(model, part, 0.9, 0.95, False, True)
+        surf_inter_res = check_surface_intersection(model, part)
+        if surf_inter_res[0]:
+            raise RuntimeError("Face elements found intersecting")
 
 
 def diahedral_angle_results(model: prime.Model, part: prime.Part, face_zonelets: List[int]):
-    """Dihedral angle result."""
     diag = prime.SurfaceSearch(model)
     register_id = 3
     command_name = "PrimeMesh::SurfaceSearch/SearchZoneletsByDihedralAngle"

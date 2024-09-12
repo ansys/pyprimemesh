@@ -124,6 +124,9 @@ class PrimeCommunicator(Communicator):
             result = json.loads(output)
         return result
 
+    def server_command(self, command: str, *args) -> dict:
+        return {}
+
     def close(self):
         """Close session."""
         Prime.Finalize()

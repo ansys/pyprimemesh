@@ -20,15 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for parameter definition."""
 from ansys.meshing import prime
 
 
 class ParamDefs:
-    """Parameter definition class."""
-
     def __init__(self, model: prime.Model):
-        """Create parameter definition object."""
         self._model = model
         self._params = {
             "global.min_size": self.__global_min_size,
@@ -38,7 +34,6 @@ class ParamDefs:
         self._overrides = []
 
     def get(self, param_name: str):
-        """Get parameter with the given name."""
         if len(self._overrides) > 0 and param_name in self._overrides[0]:
             result = self._overrides[0][param_name]
             if callable(result):
@@ -55,20 +50,16 @@ class ParamDefs:
         return None
 
     def push_override(self, override):
-        """Push override."""
         self._overrides.insert(0, override)
 
     def pop_override(self):
-        """Pop override."""
         if len(self._overrides) > 0:
             self._overrides.pop(0)
 
     def clear_overrides(self):
-        """Clear override."""
         self._overrides.clear()
 
     def push_override_for_global(self, override: dict):
-        """Push override for global."""
         global_overrides = {}
         for key, value in override.items():
             global_overrides["global." + key] = value

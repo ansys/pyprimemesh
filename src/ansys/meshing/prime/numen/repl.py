@@ -20,19 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Numen repl module."""
-
 import inspect
 import json
 import logging
 import os
 import re
 import sys
+import time
 from typing import Dict, List
 
 from ansys.meshing import prime
 from ansys.meshing.prime.numen.utils.cached_data import CachedData
 from ansys.meshing.prime.numen.utils.checks import check_param, type_check
+from ansys.meshing.prime.numen.utils.communicator import call_method
 from ansys.meshing.prime.numen.utils.evaluate import evaluate_expression
 from ansys.meshing.prime.numen.utils.param_defs import ParamDefs
 
@@ -45,10 +45,7 @@ def _str(input: tuple) -> str:
 
 
 class Repl:
-    """Handles execution of numen workflow."""
-
     def __init__(self, model: prime.Model, n_threads: int = 12):
-        """Construct Repl object."""
         dir = os.path.dirname(os.path.abspath(__file__))
         file = open(os.path.join(dir, "types.json"))
         self._param_map = json.load(file)
@@ -66,14 +63,19 @@ class Repl:
         for module in method_modules:
             self._function_map.update(self.__get_function_map(module))
         self._model = model
+        self._verbosity = 0
         self._logger = logging.getLogger(__name__)
-        self._logger.setLevel(20)
-        self._logger.addHandler(logging.StreamHandler(sys.stdout))
-        self._cached_data = CachedData(self._model, self._logger)
+        self._setup_logging(self._verbosity)
+        # self._logger.setLevel(20)
+        # self._logger.addHandler(logging.StreamHandler(sys.stdout))
+        # self._cached_data = CachedData(self._model, self._logger)
         self._param_defs = ParamDefs(model)
-        self._verbosity = 1
         self._write_on_error = False
         if model:
+            self._n_procs = self._model.get_num_compute_nodes()
+            # self._logger = self._model.logger.python_logger
+            # self._setup_logging(self._verbosity)
+            self._cached_data = CachedData(self._model, self._logger)
             self._model.set_num_threads(n_threads)
             self._model._comm.serve(
                 self._model,
@@ -120,7 +122,10 @@ class Repl:
         members = inspect.getmembers(module)
         for member in members:
             if not member[0].startswith("_") and inspect.isfunction(member[1]):
-                method_to_function["numen." + module_name + "." + member[0]] = member[1]
+                if module_name == member[0]:
+                    method_to_function["numen." + member[0]] = member[1]
+                else:
+                    method_to_function["numen." + module_name + "." + member[0]] = member[1]
 
         method_map = {}
         for step in obj:
@@ -221,9 +226,7 @@ class Repl:
         for parameter_name, param_value in param_inputs.items():
             # check if parameter is defined
             if parameter_name not in parameter_type_map:
-                self._logger.warning(
-                    f"Ignoring parameter \"{parameter_name}\" in method \"{method_name}\"."
-                )
+                self._logger.warning(f"    Ignoring parameter \"{parameter_name}\"")
                 continue
 
             # check if parameter is enabled
@@ -239,7 +242,7 @@ class Repl:
         error_list = []
         for p_name, param_value in parameters.items():
             if param_value == None:
-                error_list.append(f"Parameter \"{p_name}\" must be specified")
+                error_list.append(f"    Parameter \"{p_name}\" must be specified")
                 continue
             parameter_type = parameter_type_map[p_name]
             if parameter_type[0] == "list" and self._param_map.get(parameter_type[1]):
@@ -250,7 +253,7 @@ class Repl:
                     raise TypeError(
                         _str(
                             (
-                                f"Parameter definition not found for",
+                                f"    Parameter definition not found for",
                                 "\"{parent_param_name}{p_name}\"",
                             )
                         )
@@ -261,7 +264,7 @@ class Repl:
                         error_list.append(
                             _str(
                                 (
-                                    "Type check failed for parameter",
+                                    "    Type check failed for parameter",
                                     f"\"{parent_param_name}{p_name}\".",
                                     f"Given value \"{param_value}\".",
                                     f"Allowed values are {parameter_def_entry['range']}",
@@ -276,7 +279,7 @@ class Repl:
                     error_list.append(
                         _str(
                             (
-                                "Type check failed for parameter",
+                                "    Type check failed for parameter",
                                 f"\"{parent_param_name}{p_name}\".",
                                 f"Given value \"{param_value}\".",
                                 f"Allowed type is \"{type_name}\"",
@@ -291,7 +294,7 @@ class Repl:
                         error_list.append(
                             _str(
                                 (
-                                    f"Check \"{c}\" failed for parameter",
+                                    f"    Check \"{c}\" failed for parameter",
                                     f"\"{parent_param_name}{p_name}\"",
                                 )
                             )
@@ -337,7 +340,22 @@ class Repl:
 
     def __execute_method(self, method: any, params: dict) -> bool:
         try:
+            start_time = time.time()
             method(self._model, params, self._cached_data)
+            end_time = time.time()
+            measured_time = end_time - start_time
+            time_mins = int(measured_time) // 60
+            time_secs = int(measured_time) % 60
+            if method.__name__ != "settings":
+                if time_mins:
+                    self._logger.info(f"    Elapsed time: {time_mins} mins {time_secs} seconds")
+                else:
+                    self._logger.info(f"    Elapsed time: {time_secs} seconds")
+            '''
+            else:
+                if(params.get('verbosity')>0):
+                    self._verbosity = params['verbosity']
+            '''
             return True
         except Exception as e:
             self.__log_exception(
@@ -352,7 +370,6 @@ class Repl:
         fileio.write_pmdat(method_name + ".pmdat", prime.FileWriteParams(self._model))
 
     def get_params(self, method_name: str, type_name: str, param_inputs: dict):
-        """Parse params_input to construct parameters object depending upon type_name."""
         try:
             parameters = self.__get_params(method_name, type_name, param_inputs, {}, True)
             return parameters
@@ -365,12 +382,10 @@ class Repl:
             return None
 
     def execute(self, method: str, params: Dict):
-        """Execute numen method."""
         method = self._function_map[method]["function"]
         self.__execute_method(method, params)
 
     def run(self, steps: List[Dict]):
-        """Run numen workflow."""
         try:
             if not isinstance(steps, list):
                 raise TypeError("steps should be a list of dictionaries")
@@ -393,11 +408,10 @@ class Repl:
                     if method_name not in self._function_map:
                         raise KeyError(f"Method '{method_name}' not found in function map")
                     method = self._function_map[method_name]["function"]
+                    self._logger.info(f"Executing {method_name}")
                     params = self.__construct_parameters(step)
                     success = False
                     if params != None:
-                        if self._verbosity > 0:
-                            self._logger.info(f"Executing {method_name}")
                         success = self.__execute_method(method, params)
                     if success and "write_file" in step and step["write_file"] == True:
                         self.__write_intermediate(method_name)
@@ -405,6 +419,25 @@ class Repl:
                         raise Exception(f"Failed to execute {method_name}")
                 else:
                     raise Exception("No method found in step")
+            mem_stats = call_method(
+                self._model, "PrimeMesh::Model/GetMemoryStatistics_Beta", self._model._object_id, {}
+            )
+            peak_memory = mem_stats["peakMemory"] / (1024 * 1024 * 1024)
+            current_memory = mem_stats["currentMemory"] / (1024 * 1024 * 1024)
+            self._logger.info(f"Current memory: {current_memory:.2f} GB")
+            self._logger.info(f"Peak memory   : {peak_memory:.2f} GB")
+            try:
+                logger_info = json.loads(
+                    call_method(
+                        self._model,
+                        "PrimeMesh::Model/GetChildObjectsJson",
+                        self._model._object_id,
+                        {},
+                    )
+                )
+                call_method(self._model, "PrimeMesh::Logger/StopLogFile", logger_info["Logger"], {})
+            except:
+                pass
             return True
         except Exception as e:
             self.__log_exception("REPL run failed", e)
@@ -465,7 +498,6 @@ class Repl:
         return None
 
     def help(self, arg=None):
-        """Print help on numen methods."""
         help_str = _str(
             (
                 "Access help with one of the following arguments:\n",
@@ -488,13 +520,12 @@ class Repl:
                 method_details_copy = {}
                 method_details_copy["name"] = method_details["name"]
                 method_details_copy["method"] = method_details["method"]
-                method_details_copy["skip"] = False
                 method_details_copy["parameters"] = self.__get_help_parameters(
                     method_details["parameters"]
                 )
                 print(json.dumps(method_details_copy, indent=4))
             else:
-                print(f"Method \"{method_name}\" not found.")
+                print(f"Method \"{method_name}\" not found")
             self._param_defs.pop_override()
         else:
             print(help_str)
@@ -502,5 +533,40 @@ class Repl:
     def is_param_enabled(
         self, method_name: str, type_name: str, parameter_name: str, parameters: Dict
     ) -> bool:
-        """Check if parameter is enabled or not."""
         return self.__is_param_enabled(method_name, type_name, parameter_name, parameters)
+
+    def test(self, arg=None):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        test_folder = os.path.join(current_directory, "test")
+        for filename in os.listdir(test_folder):
+            if filename.endswith(".json"):
+                file_path = os.path.join(test_folder, filename)
+                with open(file_path, 'r') as file:
+                    data = json.load(file)
+                    for entry in data:
+                        if 'cwd' in entry['parameters']:
+                            updated_path = os.path.join(test_folder, entry['parameters']['cwd'])
+                            entry['parameters']['cwd'] = os.path.normpath(updated_path)
+                    self.run(data)
+
+    def _setup_logging(self, custom_level):
+        level_mapping = {
+            -2: logging.CRITICAL,
+            -1: logging.ERROR,
+            0: logging.WARNING,
+            1: logging.INFO,
+            2: logging.DEBUG,
+        }
+        self._verbosity = custom_level
+        level = level_mapping.get(custom_level, logging.WARNING)
+        for handler in logging.root.handlers[:]:
+            logging.root.removeHandler(handler)
+
+        logging.basicConfig(level=level)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(level)
+        formatter = logging.Formatter('%(message)s')
+        handler.setFormatter(formatter)
+        self._logger.addHandler(handler)
+        self._logger.setLevel(level)
+        self._logger.propagate = False

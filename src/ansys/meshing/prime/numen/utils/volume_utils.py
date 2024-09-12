@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for volume utils."""
 from itertools import combinations
 from typing import List
 
@@ -36,7 +35,6 @@ def create_cap(
     side_face_evaluation_type: str,
     cap_zone_name: str,
 ):
-    """Create cap."""
     surface_utils = prime.SurfaceUtilities(model)
     cap_face_zonelets_params = prime.CreateCapParams(model)
     name_pattern_params = prime.NamePatternParams(model)
@@ -65,7 +63,6 @@ def create_cap(
 
 
 def merge_parts(model: prime.Model, parts: List[prime.Part], suggested_part_name: str):
-    """Merge parts."""
     merge_part_params = prime.MergePartsParams(
         model,
         merged_part_suggested_name=suggested_part_name,
@@ -78,27 +75,26 @@ def detect_thin_volumes(
     model: prime.Model,
     part: prime.Part,
     thickness: float,
-    volume_zone_exp: str,
+    volume_evaluation_type: str,
+    volume_exp: str,
     source_face_label: str,
     target_face_label: str,
     use_mesh_zonelets: bool,
 ):
-    """Detect thin volumes."""
+    topo_vols = []
+    if volume_evaluation_type == "zones":
+        topo_vols = macros.get_topo_volumes_of_zone_name_pattern(model, part, volume_exp)
+    else:
+        topo_vols = macros.get_topo_volumes_of_label_name_pattern(model, part, volume_exp)
     vt = PrimeObj(model, "VTFeatureRecognition", part.id)
-    command_name = "PrimeMesh::Part/GetTopoVolumesOfZoneNamePattern_Beta"
-    args = {
-        "zone_name_pattern": volume_zone_exp,
-        "name_pattern_params": prime.NamePatternParams(model)._jsonify(),
-    }
-    topo_vols = model._comm.serve(model, command_name, part._object_id, args=args)
     params_vt = {
         "maxThickness": thickness,
         "useMeshZonelets": use_mesh_zonelets,
         "labelScope": {
-            "sourceLabelPrefix": f"{source_face_label}_{thickness}",
-            "targetLabelPrefix": f"{target_face_label}_{thickness}",
-            "addTopoVolumeIdSuffix": True,
-            "addThicknessRangeSuffix": False,
+            "sourceLabelPrefix": source_face_label,
+            "targetLabelPrefix": target_face_label,
+            "addTopoVolumeIdSuffix": False,
+            "addThicknessRangeSuffix": True,
             "numOfThicknessRanges": 1,
         },
     }
@@ -112,7 +108,6 @@ def detect_thin_volumes(
 
 
 def volume_zone_management(model: prime.Model, part: prime.Part, fluid_zones: List[str]):
-    """Volume zone management."""
     boundary_suffix = "_boundary"
     solid_solid_shared_suffix = "_contact"
     fluid_shared_suffix = "_interface"
@@ -164,90 +159,48 @@ def volume_zone_management(model: prime.Model, part: prime.Part, fluid_zones: Li
         part.add_zonelets_to_zone(face_zone.zone_id, volume_zone_boundary_zonelets)
 
 
-def create_thin_volume_controls(
+def create_thin_volume_control(
     model: prime.Model,
-    part_expression: str,
-    source_face_label_prefix: str,
-    target_face_label_prefix: str,
+    source_scope: prime.ScopeDefinition,
+    target_scope: prime.ScopeDefinition,
+    volume_scope: prime.ScopeDefinition,
     imprint_sides: bool,
     n_layers: int,
     stair_step: bool,
+    gap: float,
 ):
-    """Create thin volume controls."""
-    thin_volume_controls = []
-    np_params = prime.NamePatternParams(model)
-    part_ids = macros._get_part_ids(model, part_expression)
-    for part_id in part_ids:
-        part = model.get_part(part_id)
-        labels = part.get_labels()
-        for src_label in labels:
-            if src_label.startswith(source_face_label_prefix):
-                volume_zone_id = src_label.split('_')[-1]
-                thickness = src_label.split('_')[-2]
-                trg_label = f"{target_face_label_prefix}_{thickness}_{volume_zone_id}"
-                src_faces = part.get_face_zonelets_of_label_name_pattern(src_label, np_params)
-                trg_faces = part.get_face_zonelets_of_label_name_pattern(trg_label, np_params)
-                volumes = []
-                for face_z1 in src_faces:
-                    faces_volumes = part.get_volumes_of_face_zonelet(face_z1)
-                    for v in faces_volumes:
-                        fzs = part.get_face_zonelets_of_volumes([v])
-                        for fz in fzs:
-                            if fz in trg_faces:
-                                volumes.append(v)
-                                break
-                volume_zones = [part.get_volume_zone_of_volume(vid) for vid in volumes]
-                volume_zone_names = [model.get_zone_name(vzid) for vzid in volume_zones]
-                volume_zone_names = list(set(volume_zone_names))
-                if len(volume_zone_names) > 0:
-                    source_scope = prime.ScopeDefinition(
-                        model=model,
-                        entity_type=prime.ScopeEntity.FACEZONELETS,
-                        evaluation_type=prime.ScopeEvaluationType.LABELS,
-                        part_expression=part.name,
-                        label_expression=src_label,
-                    )
-                    target_scope = prime.ScopeDefinition(
-                        model=model,
-                        entity_type=prime.ScopeEntity.FACEZONELETS,
-                        evaluation_type=prime.ScopeEvaluationType.LABELS,
-                        part_expression=part.name,
-                        label_expression=trg_label,
-                    )
-                    volume_scope = prime.ScopeDefinition(
-                        model=model,
-                        entity_type=prime.ScopeEntity.VOLUME,
-                        evaluation_type=prime.ScopeEvaluationType.ZONES,
-                        part_expression=part.name,
-                        zone_expression=",".join(volume_zone_names),
-                    )
-                    thin_volume_params = prime.ThinVolumeMeshParams(
-                        model=model,
-                        n_layers=n_layers,
-                        imprint_sides=imprint_sides,
-                        stairStep=stair_step,
-                        gap=float(thickness),
-                    )
-                    thin_vol_ctrl = model.control_data.create_thin_volume_control()
-                    thin_vol_ctrl.set_source_scope(source_scope)
-                    thin_vol_ctrl.set_target_scope(target_scope)
-                    thin_vol_ctrl.set_volume_scope(volume_scope)
-                    thin_vol_ctrl.set_thin_volume_mesh_params(thin_volume_params)
-                    thin_volume_controls.append(thin_vol_ctrl.id)
-    return thin_volume_controls
+    model.logger.python_logger.disabled = True
+    if gap > 0:
+        thin_volume_params = prime.ThinVolumeMeshParams(
+            model=model,
+            n_layers=n_layers,
+            imprint_sides=imprint_sides,
+            stairStep=stair_step,
+            gap=gap,
+        )
+    else:
+        thin_volume_params = prime.ThinVolumeMeshParams(
+            model=model, n_layers=n_layers, imprint_sides=imprint_sides, stairStep=stair_step
+        )
+    model.logger.python_logger.disabled = False
+    thin_vol_ctrl = model.control_data.create_thin_volume_control()
+    thin_vol_ctrl.set_source_scope(source_scope)
+    thin_vol_ctrl.set_target_scope(target_scope)
+    model.logger.python_logger.disabled = True
+    thin_vol_ctrl.set_volume_scope(volume_scope)
+    model.logger.python_logger.disabled = False
+    thin_vol_ctrl.set_thin_volume_mesh_params(thin_volume_params)
+    return thin_vol_ctrl.id
 
 
 def create_prism_control(
     model: prime.Model,
-    part_scope: str,
-    face_expression: str,
-    face_evaluation_type: prime.ScopeEvaluationType,
-    volume_expression: str,
+    face_scope: prime.ScopeDefinition,
+    volume_scope: prime.ScopeDefinition,
     n_layers: int,
     first_height: float,
     last_aspect_ratio: float,
 ):
-    """Create prism control."""
     prism_ctrl = model.control_data.create_prism_control()
     prism_params = prime.PrismControlGrowthParams(
         model=model,
@@ -257,23 +210,6 @@ def create_prism_control(
         offset_type=prime.PrismControlOffsetType.LASTRATIO,
     )
     prism_ctrl.set_growth_params(prism_params)
-
-    surface_scope = prime.ScopeDefinition(
-        model=model,
-        entity_type=prime.ScopeEntity.FACEZONELETS,
-        evaluation_type=face_evaluation_type,
-        part_expression=part_scope,
-        label_expression=face_expression,
-        zone_expression=face_expression,
-    )
-    prism_ctrl.set_surface_scope(surface_scope)
-
-    volume_scope = prime.ScopeDefinition(
-        model=model,
-        entity_type=prime.ScopeEntity.VOLUME,
-        evaluation_type=prime.ScopeEvaluationType.ZONES,
-        part_expression=part_scope,
-        zone_expression=volume_expression,
-    )
+    prism_ctrl.set_surface_scope(face_scope)
     prism_ctrl.set_volume_scope(volume_scope)
     return prism_ctrl.id

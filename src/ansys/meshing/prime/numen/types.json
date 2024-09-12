@@ -14,6 +14,26 @@
             "checks": ["non_empty_string"]
         }
     ],
+    "settings_params" : [
+        {
+            "name" : "cwd",
+            "type" : "string",
+            "default": "",
+            "checks": []
+        },
+        {
+            "name" : "log_file_name",
+            "type" : "path",
+            "default" : "",
+            "checks" : []
+        },
+        {
+            "name" : "verbosity",
+            "type" : "int",
+            "default" : 0,
+            "checks" : ["min:0"]
+        }
+    ],
     "file_read_params": [
         {
             "name" : "file_name",
@@ -49,7 +69,18 @@
             "checks" : []
         },
         {
-            "name" : "labels_for_zone_creation",
+            "name" : "refacet",
+            "type" : "boolean",
+            "default" : true,
+            "checks" : []
+        },
+        {
+            "name" : "face_labels_for_zone_creation",
+            "type" : "list[string]",
+            "default" : []
+        },
+        {
+            "name" : "volume_labels_for_zone_creation",
             "type" : "list[string]",
             "default" : []
         }
@@ -90,7 +121,7 @@
     ],
     "create_labels_per_part_params" : [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -125,7 +156,7 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -140,12 +171,12 @@
             "name" : "add_label",
             "type" : "string",
             "default" : "",
-            "checks" : []
+            "checks" : ["no_special_characters"]
         }
     ],
     "surface_mesh_params": [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -180,7 +211,7 @@
     ],
     "surface_mesh_with_sizing_params": [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -231,9 +262,19 @@
             "checks" : []
         },
         {
-            "name" : "rbf_interpolation",
+            "name" : "robust_mode",
             "type" : "boolean",
-            "default" : false
+            "default" : true
+        },
+        {
+            "name" : "_rbf_interpolation",
+            "type" : "boolean",
+            "default" : true
+        },
+        {
+            "name" : "_stitch_failed_sliver_topofaces",
+            "type" : "boolean",
+            "default" : true
         },
         {
             "name" : "_threaded_surfer",
@@ -248,7 +289,7 @@
     ],
     "surface_mesh_with_size_controls_params": [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -330,7 +371,7 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -352,7 +393,7 @@
     ],
     "delete_topology_params":[
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -387,32 +428,12 @@
             "default" : true
         }
     ],
-    "local_tolerance":[
-        {
-            "name" : "part_expression",
-            "type" : "string",
-            "default" : "",
-            "checks" : ["non_empty_string"]
-        },
-        {
-            "name" : "local_connect_tolerance",
-            "type" : "float",
-            "default" : 0.0,
-            "checks" : ["positive_value"]
-        },
-        {
-            "name" : "local_side_tolerance",
-            "type" : "float",
-            "default" : 0.0,
-            "checks" : ["min:0"]
-        }
-    ],
     "tolerant_connect_params":[
         {
             "name" : "connect_tolerance",
-            "type" : "float",
-            "default" : 0.0,
-            "checks" : ["positive_value"]
+            "type" : "list[float]",
+            "default" : [],
+            "checks" : []
         },
         {
             "name" : "side_tolerance",
@@ -421,16 +442,16 @@
             "checks" : ["min:0"]
         },
         {
-            "name" : "part_name",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "",
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "connect_parts_with_different_tolerance",
-            "type" : "list[local_tolerance]",
-            "default" : [],
-            "checks" : []
+            "name" : "target_part_name",
+            "type" : "string",
+            "default" : "",
+            "checks" : ["non_empty_string"]
         },
         {
             "name" : "delete_topology",
@@ -451,9 +472,47 @@
             "checks" : []
         }
     ],
+    "cusp_removal_params":[
+        {
+            "name" : "connect_tolerance",
+            "type" : "list[float]",
+            "default" : [],
+            "checks" : []
+        },
+        {
+            "name" : "side_tolerance",
+            "type" : "float",
+            "default" : 0.0,
+            "checks" : ["min:0"]
+        },
+        {
+            "name" : "part_expression",
+            "type" : "string",
+            "default" : "",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "source_labels",
+            "type" : "string",
+            "default" : "",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "target_labels",
+            "type" : "string",
+            "default" : "",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "_debug",
+            "type" : "boolean",
+            "default" : false,
+            "checks" : []
+        }
+    ],
     "topology_cleanup_params":[
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -474,7 +533,7 @@
     "suppress_interior_topoedges_params":
     [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -483,7 +542,7 @@
     "suppress_toponodes_params":
     [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -492,7 +551,7 @@
     "repair_topoedges_of_topofaces_params":
     [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -512,7 +571,7 @@
     ],
     "volume_mesh_params": [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -548,10 +607,9 @@
             "checks": []
         },
         {
-            "name" : "n_procs",
-            "type" : "int",
-            "default" : 1,
-            "checks" : []
+            "name": "_auto_node_movement",
+            "type": "boolean",
+            "default": false
         }
     ],
     "generate_cell_regions_params":
@@ -583,14 +641,14 @@
         {
             "name" : "face_evaluation_type",
             "type" : "range[string]",
-            "default" : "zones",
+            "default" : "labels",
             "range" :["labels","zones"],
             "checks" : []
         },
         {
             "name" : "volume_evaluation_type",
             "type" : "range[string]",
-            "default" : "zones",
+            "default" : "labels",
             "range" :["labels","zones"],
             "checks" : []
         },
@@ -615,75 +673,63 @@
     ],
     "thin_volume_mesh_params":[
         {
-            "name" : "part_scope",
-            "type" : "string",
-            "default" : "*",
-            "checks" : ["non_empty_string"]
-        },
-        {
             "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
         },
         {
-            "name": "source_face_label",
+            "name" : "face_evaluation_type",
+            "type" : "range[string]",
+            "default" : "labels",
+            "range" :["labels","zones"]
+        },
+        {
+            "name": "source_face_expression",
             "type" : "string",
             "checks" : ["non_empty_string"]
         },
         {
-            "name": "target_face_label",
+            "name": "target_face_expression",
             "type" : "string",
+            "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "volume_evaluation_type",
+            "type" : "range[string]",
+            "default" : "labels",
+            "range" :["labels","zones"]
+        },
+        {
+            "name": "volume_expression",
+            "type" : "string",
+            "default" : "*",
             "checks" : ["non_empty_string"]
         },
         {
             "name" : "imprint_sides",
             "type" : "boolean",
             "default" : false
-
         },
         {
             "name" : "stair_step",
             "type" : "boolean",
             "default" : false
-
         },
         {
             "name" : "n_layers",
             "type" : "int",
             "default" : 1
-        }
-
-    ],
-    "surface_cleanup_tri_mesh_params" : [
-        {
-            "name" : "part_scope",
-            "type" : "string",
-            "default" : "*",
-            "checks" : ["non_empty_string"]
         },
         {
-            "name" : "collapse_sliver_faces",
-            "type" : "boolean",
-            "default" : true,
-            "checks" : []
-        },
-        {
-            "name" : "stitch_free_faces",
-            "type" : "boolean",
-            "default" : true,
-            "checks" : []
-        },
-        {
-            "name" : "keep_small_free_surfaces",
-            "type" : "boolean",
-            "default" : false,
-            "checks" : []
+            "name" : "thickness",
+            "type" : "float",
+            "default" : 0.0
         }
     ],
     "post_surface_mesh_cleanup_params": [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -730,7 +776,7 @@
             "name" : "face_evaluation_type",
             "type" : "range[string]",
             "range": ["labels", "zones"],
-            "default": "zones"
+            "default": "labels"
         },
         {
             "name" : "face_expression",
@@ -755,6 +801,12 @@
             "checks" : ["non_empty_string"]
         },
         {
+            "name" : "part_expression",
+            "type" : "string",
+            "default" : "*",
+            "checks" : ["non_empty_string"]
+        },
+        {
             "name" : "capping_params",
             "type" : "list[create_cap_params]",
             "default" : [],
@@ -763,10 +815,17 @@
     ],
     "detect_thin_volume_params": [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "volume_evaluation_type",
+            "type" : "range[string]",
+            "default" : "labels",
+            "range" :["labels","zones"],
+            "checks" : []
         },
         {
             "name" : "volume_expression",
@@ -777,12 +836,12 @@
         {
             "name" : "source_face_label",
             "type" : "string",
-            "checks" : ["non_empty_string"]
+            "checks" : ["non_empty_string", "no_special_characters"]
         },
         {
             "name" : "target_face_label",
             "type" : "string",
-            "checks" : ["non_empty_string"]
+            "checks" : ["non_empty_string", "no_special_characters"]
         },
         {
             "name" : "thickness",
@@ -802,28 +861,53 @@
             "checks" : ["non_empty_string"]
         },
         {
-            "name" : "topology_part_scope",
+            "name" : "topology_part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "volume_evaluation_type",
+            "type" : "range[string]",
+            "default" : "labels",
+            "range" :["labels","zones"],
+            "checks" : []
         },
         {
             "name" : "volume_expression",
             "type" : "string",
             "default" : ""
         }
-    ],	
+    ],
     "prepare_for_volume_meshing_params": [
         {
-            "name" : "part_name",
+            "name" : "part_expression",
             "type" : "string",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "volume_evaluation_type",
+            "type" : "range[string]",
+            "default" : "labels",
+            "range" :["labels","zones"],
+            "checks" : []
         },
         {
             "name" : "volume_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
+        },
+        {
+            "name" : "prism_base_evaluation_type",
+            "type" : "range[string]",
+            "range": ["labels", "zones"],
+            "default": "labels"
+        },
+        {
+            "name" : "prism_base_expression",
+            "type" : "string",
+            "default" : ""
         },
         {
             "name" : "_nugget_size",
@@ -840,14 +924,14 @@
     ],
     "delete_parts_params" : [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "checks" : ["non_empty_string"]
         }
     ],
     "clean_up_triangles_params" :[
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -855,7 +939,7 @@
     ],
     "merge_parts_params" : [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -868,7 +952,7 @@
     ],
     "delete_labels_params" : [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -882,7 +966,7 @@
     ],
     "volume_mesh_check_params" : [
         {
-            "name" : "part_scope",
+            "name" : "part_expression",
             "type" : "string",
             "default" : "*",
             "checks" : ["non_empty_string"]
@@ -892,6 +976,23 @@
             "type" : "range[string]",
             "default" : "tet",
             "range" : ["tet", "poly", "tet_hexcore", "poly_hexcore"]
+        },
+        {
+            "name" : "_quality_limit",
+            "type" : "float",
+            "default" : 0.99
+        },
+        {
+            "name" : "fluid_volume_expression",
+            "type" : "string",
+            "default" : ""
+        },
+        {
+            "name" : "volume_evaluation_type",
+            "type" : "range[string]",
+            "default" : "labels",
+            "range" :["labels","zones"],
+            "checks" : []
         }
     ]
 }

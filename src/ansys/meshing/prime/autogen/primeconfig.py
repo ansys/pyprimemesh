@@ -572,6 +572,32 @@ class ErrorCode(enum.IntEnum):
     """Base size specified for patching should be positive double.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_INVALIDINPUT = 3600
+    """Invalid input provided for VT operation."""
+    VT_MERGEFACESFAILED = 3601
+    """Merge faces operation failed."""
+    VT_MERGETHINSTRIPESFAILED = 3602
+    """Merge thin stripes operation failed."""
+    VT_MERGETHINEXTFAILED = 3603
+    """Merge thin extensions operation failed."""
+    VT_REPAIRSHARPCORNERANGLESFAILED = 3604
+    """Repair sharp corner angles operation failed."""
+    VT_PINCHFACESFAILED = 3605
+    """Pinch faces operation failed."""
+    VT_FILLHOLEFAILED = 3606
+    """Fill hole operation failed."""
+    VT_FILLANNULARHOLEFAILED = 3607
+    """Fill annular hole operation failed."""
+    VT_COLLAPSESHORTEDGESFAILED = 3608
+    """Collapse short edges operation failed."""
+    VT_SEPARATEFACESFAILED = 3609
+    """Separate faces operation failed."""
+    VT_CREATELEADINGEDGEFAILED = 3610
+    """Create leading edge operation failed."""
+    VT_CREATEMIDEDGEFAILED = 3611
+    """Create mid edge operation failed."""
+    VT_OPERATIONFAILED = 3612
+    """VT operation failed."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -664,6 +690,8 @@ class ErrorCode(enum.IntEnum):
     """Smoothing operation is not supported."""
     MICROSTRUCTUREREMESHNOTSUPPORTED = 13005
     """Surface remesh operation is not supported."""
+    MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID = 13006
+    """Volume mesh generation for hexahedra requires generation of a quadratic voxel grid."""
     AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
     """Autoquadmesher error codes.
 
@@ -786,5 +814,15 @@ class WarningCode(enum.IntEnum):
     """Writing of contact pairs skipped."""
     WRITINGTIESSKIPPED = 11103
     """Writing of ties skipped."""
+    VT_SKIPPEDPROTECTEDENTITIES = 100001
+    """Input contains protected entities which have been skipped."""
+    VT_SKIPPEDFEATUREENTITIES = 100002
+    """Input contains feature entities which have been skipped."""
+    VT_SKIPPEDFREEEDGES = 100003
+    """Input contains free edges which have been skipped."""
+    VT_SKIPPEDNONMANIFOLDEDGES = 100004
+    """Input contains non-manifold edges which have been skipped."""
+    VT_SKIPPEDENTITIESINDIFFERENTZONES = 100005
+    """Input contains entities in different zones which have been skipped."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
     """MultiZone warning codes"""

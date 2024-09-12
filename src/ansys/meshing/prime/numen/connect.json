@@ -3,5 +3,10 @@
         "name": "Tolerant Connect",
         "method": "numen.connect.tolerant_connect",
         "parameters" : "tolerant_connect_params"
+    },
+    {
+        "name": "Cusp Removal",
+        "method": "numen.connect.cusp_removal",
+        "parameters" : "cusp_removal_params"
     }
 ]

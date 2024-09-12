@@ -340,7 +340,7 @@ class FileIO(_FileIO):
         self, params: ExportMapdlCdbParams, major_version: int, minor_version: int
     ) -> ExportMapdlCdbParams:
         """
-        Initialize specific CDB export parameters based on the given version.
+        Initializes specific CDB export parameters based on the given version.
 
         This function sets the use_compact_format and export_fasteners_as_swgen
         parameters of the provided ExportMapdlCdbParams object based on the given
@@ -557,9 +557,7 @@ class FileIO(_FileIO):
                 part_id = self._model.parts[0].id
             sim_data = json.loads(super().get_abaqus_simulation_data(part_id))
             if sim_data is not None:
-                mp = dynaexportutils.MaterialProcessor(
-                    self._model, sim_data["Materials"], sim_data["Zones"]
-                )
+                mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
                 all_mat_cmds = mp.get_all_material_commands()
                 params.material_properties = all_mat_cmds + params.material_properties
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
