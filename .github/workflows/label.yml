@@ -44,7 +44,7 @@ jobs:
     # Label based on branch name
     - uses: actions-ecosystem/action-add-labels@v1
       if: |
-        startsWith(github.event.pull_request.head.ref, 'doc') || 
+        startsWith(github.event.pull_request.head.ref, 'doc') ||
         startsWith(github.event.pull_request.head.ref, 'docs')
       with:
         labels: documentation
@@ -94,7 +94,7 @@ jobs:
           - [maintenance](https://github.com/ansys/pyprimemesh/pulls?q=label%3Amaintenance+)
           - [release](https://github.com/ansys/pyprimemesh/pulls?q=label%3Arelease+)
           - [testing](https://github.com/ansys/pyprimemesh/pulls?q=label%Atesting+)
-  
+
   changelog-fragment:
     name: "Create changelog fragment"
     needs: [labeler]
@@ -103,6 +103,6 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: ansys/actions/doc-changelog@main
+    - uses: ansys/actions/doc-changelog@7
       with:
         token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
