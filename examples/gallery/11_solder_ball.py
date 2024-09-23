@@ -193,7 +193,9 @@ base_scope = prime.lucid.SurfaceScope(
     scope_evaluation_type=prime.ScopeEvaluationType.LABELS,
 )
 
-prime.lucid.Mesh(model).surface_mesh(min_size=0.2, scope=base_scope, generate_quads=True)
+prime.lucid.Mesh(model).surface_mesh(
+    min_size=0.1, max_size=0.4, scope=base_scope, generate_quads=True
+)
 
 display = PrimePlotter()
 display.plot(model, update=True)
