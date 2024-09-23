@@ -66,6 +66,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
+
 # from ansys.meshing.prime.graphics import PrimePlotter
 
 ###############################################################################
