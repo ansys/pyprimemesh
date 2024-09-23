@@ -59,8 +59,10 @@ all = [
 
 [project.urls]
 Source = "https://github.com/ansys/pyprimemesh"
+Issues = "https://github.com/ansys/pyprimemesh/issues"
+Discussions = "https://github.com/ansys/pyprimemesh/discussions"
 Documentation = "https://prime.docs.pyansys.com"
-
+Releases = "https://github.com/ansys/pyprimemesh/releases"
 
 [tool.flit.module]
 name = "ansys.meshing.prime"
