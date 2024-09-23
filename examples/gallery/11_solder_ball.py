@@ -99,11 +99,11 @@ for part in model.parts:
 
 # Display the model without the infill so the cylindrical geometry of the solder
 # is visible.
-display = PrimePlotter()
-display.plot(
-    model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
-)
-display.show()
+# display = PrimePlotter()
+# display.plot(
+#     model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
+# )
+# display.show()
 
 ###############################################################################
 # Connect geometry
@@ -142,9 +142,9 @@ result = model.topo_data.delete_mesh_on_topo_faces(
 )
 scaffolder.merge_overlapping_topo_faces(merged_part.get_topo_faces(), params)
 
-display = PrimePlotter()
-display.plot(model)
-display.show()
+# display = PrimePlotter()
+# display.plot(model)
+# display.show()
 
 ###############################################################################
 # Volume sweeper
@@ -194,9 +194,9 @@ base_scope = prime.lucid.SurfaceScope(
 
 prime.lucid.Mesh(model).surface_mesh(min_size=0.2, scope=base_scope, generate_quads=True)
 
-display = PrimePlotter()
-display.plot(model)
-display.show()
+# display = PrimePlotter()
+# display.plot(model)
+# display.show()
 
 stackbase_results = sweeper.stack_base_face(
     part_id=merged_part.id,
@@ -212,9 +212,9 @@ merged_part.delete_topo_entities(
 merged_part._print_mesh = True
 print(merged_part)
 
-display = PrimePlotter()
-display.plot(model)
-display.show()
+# display = PrimePlotter()
+# display.plot(model)
+# display.show()
 
 ###############################################################################
 # Import sphere geometry for match morphing
@@ -231,9 +231,9 @@ prime.FileIO(model).import_cad(file_name=solder_ball_target, params=params)
 imported_cad_part_ids = [part.id for part in model.parts if part.get_topo_faces()]
 target_part = model.get_part(imported_cad_part_ids[0])
 
-display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, part_expression=target_part.name))
-display.show()
+# display = PrimePlotter()
+# display.plot(model, scope=prime.ScopeDefinition(model, part_expression=target_part.name))
+# display.show()
 
 print(model)
 
@@ -349,13 +349,13 @@ morph.match_morph(
 
 model.delete_parts([target_part.id])
 
-display = PrimePlotter()
-display.plot(model)
-display.show()
+# display = PrimePlotter()
+# display.plot(model)
+# display.show()
 
-display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"))
-display.show()
+# display = PrimePlotter()
+# display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"))
+# display.show()
 
 ###############################################################################
 # Export mesh
