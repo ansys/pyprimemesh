@@ -351,7 +351,9 @@ morph.match_morph(
 model.delete_parts([target_part.id])
 
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"), update=True)
+display.plot(
+   model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"), update=True
+)
 display.show()
 
 ###############################################################################
