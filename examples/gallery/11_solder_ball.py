@@ -352,7 +352,7 @@ model.delete_parts([target_part.id])
 
 display = PrimePlotter()
 display.plot(
-   model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"), update=True
+    model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"), update=True
 )
 display.show()
 
