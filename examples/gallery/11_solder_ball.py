@@ -360,7 +360,7 @@ model.delete_parts([target_part.id])
 
 ###############################################################################
 # Export mesh
-# ~~~~~~~~~~
+# ~~~~~~~~~~~
 # Export a CDB file.
 
 with tempfile.TemporaryDirectory() as temp_folder:
