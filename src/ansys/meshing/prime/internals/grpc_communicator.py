@@ -279,6 +279,47 @@ class GRPCCommunicator(Communicator):
         else:
             raise RuntimeError("No connection with server")
 
+    def server_command(self, command: str, *args) -> dict:
+        """Run commands on the server.
+
+        Parameters
+        ----------
+        command : str
+            Commands to run.
+
+        Returns
+        -------
+        dict
+            Result from the server side.
+
+        Raises
+        ------
+        RuntimeError
+            Bad response from server.
+        RuntimeError
+            Can not connect to server.
+        """
+        if self._stub is not None:
+            command = {"Command": command}
+            if len(args) > 0:
+                command.update({"Args": args[0]})
+
+            response = self._stub.ServerCommand(
+                request_iterator(
+                    0,
+                    json.dumps(command),
+                    prime_pb2.StringMessage,
+                    prime_pb2.Model,
+                    prime_pb2.StringJsonContent,
+                    prime_pb2.MessageCompletionToken,
+                )
+            )
+            message = get_response(response, '')
+            return message
+        else:
+            raise RuntimeError("No connection with server")
+        return {}
+
     def close(self):
         """Close opened channels."""
         self._stub = None

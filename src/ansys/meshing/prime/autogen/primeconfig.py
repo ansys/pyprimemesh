@@ -36,6 +36,8 @@ class ErrorCode(enum.IntEnum):
     """Auto sizing must be of volumetric type."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
+    SURFEROPENINITIALFRONTLOOP = 16
+    """Open initial front loop for meshing."""
     FREEZEMESHERROR = 30
     """Cannot remesh freezed mesh."""
     REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART = 31
@@ -298,6 +300,10 @@ class ErrorCode(enum.IntEnum):
     """Invalid tolerance value specified."""
     SOURCEORTARGETNOTSPECIFIED = 857
     """No target or source faces specified."""
+    STITCHWITHPRESERVEDENTITIESFAILED = 858
+    """Stitch with preserved entities failed."""
+    STITCHENTITIESFAILED = 859
+    """Stitch entities failed."""
     NOTSUPPORTEDFORTOPOLOGYPART = 1200
     """Not supported for part with topology data."""
     NOTSUPPORTEDFORHIGHERORDERMESHPART = 1201
@@ -488,6 +494,10 @@ class ErrorCode(enum.IntEnum):
     """Material point with the given name does not exist."""
     MATERIALPOINTWITHGIVENIDDOESNTEXIST = 3302
     """Material point with the given ID already exists."""
+    OCTREELIMITREACHED = 3350
+    """Limit reached for the number of octants supported.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     WRAPPERGLOBALSETTINGSNOTSET = 3400
     """Global settings for wrapper not set."""
     WRAPPERRESOLVEINTERSECTIONFAILED = 3401
@@ -562,6 +572,32 @@ class ErrorCode(enum.IntEnum):
     """Base size specified for patching should be positive double.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_INVALIDINPUT = 3600
+    """Invalid input provided for VT operation."""
+    VT_MERGEFACESFAILED = 3601
+    """Merge faces operation failed."""
+    VT_MERGETHINSTRIPESFAILED = 3602
+    """Merge thin stripes operation failed."""
+    VT_MERGETHINEXTFAILED = 3603
+    """Merge thin extensions operation failed."""
+    VT_REPAIRSHARPCORNERANGLESFAILED = 3604
+    """Repair sharp corner angles operation failed."""
+    VT_PINCHFACESFAILED = 3605
+    """Pinch faces operation failed."""
+    VT_FILLHOLEFAILED = 3606
+    """Fill hole operation failed."""
+    VT_FILLANNULARHOLEFAILED = 3607
+    """Fill annular hole operation failed."""
+    VT_COLLAPSESHORTEDGESFAILED = 3608
+    """Collapse short edges operation failed."""
+    VT_SEPARATEFACESFAILED = 3609
+    """Separate faces operation failed."""
+    VT_CREATELEADINGEDGEFAILED = 3610
+    """Create leading edge operation failed."""
+    VT_CREATEMIDEDGEFAILED = 3611
+    """Create mid edge operation failed."""
+    VT_OPERATIONFAILED = 3612
+    """VT operation failed."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -650,6 +686,12 @@ class ErrorCode(enum.IntEnum):
     """Wrong API call sequence."""
     MICROSTRUCTUREBADSHAPEPROPERTIES = 13003
     """Bad shape properties."""
+    MICROSTRUCTURESMOOTHNOTSUPPORTED = 13004
+    """Smoothing operation is not supported."""
+    MICROSTRUCTUREREMESHNOTSUPPORTED = 13005
+    """Surface remesh operation is not supported."""
+    MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID = 13006
+    """Volume mesh generation for hexahedra requires generation of a quadratic voxel grid."""
     AUTOQUADMESHER_NEGATIVEINPUTPARAMETER = 15000
     """Autoquadmesher error codes.
 
@@ -692,6 +734,8 @@ class WarningCode(enum.IntEnum):
     """Overriding BOI sizing parameters."""
     OVERRIDEMESHEDSIZINGPARAMS = 206
     """Overriding meshed sizing parameters."""
+    INVALIDSIZECONTROLSCOPE = 208
+    """Invalid size control type provided."""
     OVERRIDESUGGESTEDNAME = 301
     """Override name by suggested name."""
     OVERRIDESURFACESCOPEENTITY = 401
@@ -770,5 +814,15 @@ class WarningCode(enum.IntEnum):
     """Writing of contact pairs skipped."""
     WRITINGTIESSKIPPED = 11103
     """Writing of ties skipped."""
+    VT_SKIPPEDPROTECTEDENTITIES = 100001
+    """Input contains protected entities which have been skipped."""
+    VT_SKIPPEDFEATUREENTITIES = 100002
+    """Input contains feature entities which have been skipped."""
+    VT_SKIPPEDFREEEDGES = 100003
+    """Input contains free edges which have been skipped."""
+    VT_SKIPPEDNONMANIFOLDEDGES = 100004
+    """Input contains non-manifold edges which have been skipped."""
+    VT_SKIPPEDENTITIESINDIFFERENTZONES = 100005
+    """Input contains entities in different zones which have been skipped."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
     """MultiZone warning codes"""

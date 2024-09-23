@@ -2158,6 +2158,10 @@ class PartSummaryResults(CoreObject):
         Number of polygonal faces.
     n_quad_faces: int, optional
         Number of quadrilateral faces.
+    n_second_order_tri_faces: int, optional
+        Number of second order triangular faces.
+    n_second_order_quad_faces: int, optional
+        Number of second order quadrilateral faces.
     n_tet_cells: int, optional
         Number of tetrahedral cells.
     n_pyra_cells: int, optional
@@ -2168,6 +2172,14 @@ class PartSummaryResults(CoreObject):
         Number of polyhedral cells.
     n_hex_cells: int, optional
         Number of hexahedral cells.
+    n_second_order_tet_cells: int, optional
+        Number of second order tetrahedral cells.
+    n_second_order_pyra_cells: int, optional
+        Number of second order pyramid cells.
+    n_second_order_prism_cells: int, optional
+        Number of second order prism cells.
+    n_second_order_hex_cells: int, optional
+        Number of second order hexahedral cells.
     n_unmeshed_topo_faces: int, optional
         Number of unmeshed topofaces.
     json_data: dict, optional
@@ -2198,11 +2210,17 @@ class PartSummaryResults(CoreObject):
             n_tri_faces: int,
             n_poly_faces: int,
             n_quad_faces: int,
+            n_second_order_tri_faces: int,
+            n_second_order_quad_faces: int,
             n_tet_cells: int,
             n_pyra_cells: int,
             n_prism_cells: int,
             n_poly_cells: int,
             n_hex_cells: int,
+            n_second_order_tet_cells: int,
+            n_second_order_pyra_cells: int,
+            n_second_order_prism_cells: int,
+            n_second_order_hex_cells: int,
             n_unmeshed_topo_faces: int):
         self._message = message
         self._n_topo_edges = n_topo_edges
@@ -2221,11 +2239,17 @@ class PartSummaryResults(CoreObject):
         self._n_tri_faces = n_tri_faces
         self._n_poly_faces = n_poly_faces
         self._n_quad_faces = n_quad_faces
+        self._n_second_order_tri_faces = n_second_order_tri_faces
+        self._n_second_order_quad_faces = n_second_order_quad_faces
         self._n_tet_cells = n_tet_cells
         self._n_pyra_cells = n_pyra_cells
         self._n_prism_cells = n_prism_cells
         self._n_poly_cells = n_poly_cells
         self._n_hex_cells = n_hex_cells
+        self._n_second_order_tet_cells = n_second_order_tet_cells
+        self._n_second_order_pyra_cells = n_second_order_pyra_cells
+        self._n_second_order_prism_cells = n_second_order_prism_cells
+        self._n_second_order_hex_cells = n_second_order_hex_cells
         self._n_unmeshed_topo_faces = n_unmeshed_topo_faces
 
     def __init__(
@@ -2248,11 +2272,17 @@ class PartSummaryResults(CoreObject):
             n_tri_faces: int = None,
             n_poly_faces: int = None,
             n_quad_faces: int = None,
+            n_second_order_tri_faces: int = None,
+            n_second_order_quad_faces: int = None,
             n_tet_cells: int = None,
             n_pyra_cells: int = None,
             n_prism_cells: int = None,
             n_poly_cells: int = None,
             n_hex_cells: int = None,
+            n_second_order_tet_cells: int = None,
+            n_second_order_pyra_cells: int = None,
+            n_second_order_prism_cells: int = None,
+            n_second_order_hex_cells: int = None,
             n_unmeshed_topo_faces: int = None,
             json_data : dict = None,
              **kwargs):
@@ -2296,6 +2326,10 @@ class PartSummaryResults(CoreObject):
             Number of polygonal faces.
         n_quad_faces: int, optional
             Number of quadrilateral faces.
+        n_second_order_tri_faces: int, optional
+            Number of second order triangular faces.
+        n_second_order_quad_faces: int, optional
+            Number of second order quadrilateral faces.
         n_tet_cells: int, optional
             Number of tetrahedral cells.
         n_pyra_cells: int, optional
@@ -2306,6 +2340,14 @@ class PartSummaryResults(CoreObject):
             Number of polyhedral cells.
         n_hex_cells: int, optional
             Number of hexahedral cells.
+        n_second_order_tet_cells: int, optional
+            Number of second order tetrahedral cells.
+        n_second_order_pyra_cells: int, optional
+            Number of second order pyramid cells.
+        n_second_order_prism_cells: int, optional
+            Number of second order prism cells.
+        n_second_order_hex_cells: int, optional
+            Number of second order hexahedral cells.
         n_unmeshed_topo_faces: int, optional
             Number of unmeshed topofaces.
         json_data: dict, optional
@@ -2334,14 +2376,20 @@ class PartSummaryResults(CoreObject):
                 json_data["nTriFaces"] if "nTriFaces" in json_data else None,
                 json_data["nPolyFaces"] if "nPolyFaces" in json_data else None,
                 json_data["nQuadFaces"] if "nQuadFaces" in json_data else None,
+                json_data["nSecondOrderTriFaces"] if "nSecondOrderTriFaces" in json_data else None,
+                json_data["nSecondOrderQuadFaces"] if "nSecondOrderQuadFaces" in json_data else None,
                 json_data["nTetCells"] if "nTetCells" in json_data else None,
                 json_data["nPyraCells"] if "nPyraCells" in json_data else None,
                 json_data["nPrismCells"] if "nPrismCells" in json_data else None,
                 json_data["nPolyCells"] if "nPolyCells" in json_data else None,
                 json_data["nHexCells"] if "nHexCells" in json_data else None,
+                json_data["nSecondOrderTetCells"] if "nSecondOrderTetCells" in json_data else None,
+                json_data["nSecondOrderPyraCells"] if "nSecondOrderPyraCells" in json_data else None,
+                json_data["nSecondOrderPrismCells"] if "nSecondOrderPrismCells" in json_data else None,
+                json_data["nSecondOrderHexCells"] if "nSecondOrderHexCells" in json_data else None,
                 json_data["nUnmeshedTopoFaces"] if "nUnmeshedTopoFaces" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [message, n_topo_edges, n_topo_faces, n_topo_volumes, n_edge_zonelets, n_face_zonelets, n_cell_zonelets, n_edge_zones, n_face_zones, n_volume_zones, n_labels, n_nodes, n_faces, n_cells, n_tri_faces, n_poly_faces, n_quad_faces, n_tet_cells, n_pyra_cells, n_prism_cells, n_poly_cells, n_hex_cells, n_unmeshed_topo_faces])
+            all_field_specified = all(arg is not None for arg in [message, n_topo_edges, n_topo_faces, n_topo_volumes, n_edge_zonelets, n_face_zonelets, n_cell_zonelets, n_edge_zones, n_face_zones, n_volume_zones, n_labels, n_nodes, n_faces, n_cells, n_tri_faces, n_poly_faces, n_quad_faces, n_second_order_tri_faces, n_second_order_quad_faces, n_tet_cells, n_pyra_cells, n_prism_cells, n_poly_cells, n_hex_cells, n_second_order_tet_cells, n_second_order_pyra_cells, n_second_order_prism_cells, n_second_order_hex_cells, n_unmeshed_topo_faces])
             if all_field_specified:
                 self.__initialize(
                     message,
@@ -2361,11 +2409,17 @@ class PartSummaryResults(CoreObject):
                     n_tri_faces,
                     n_poly_faces,
                     n_quad_faces,
+                    n_second_order_tri_faces,
+                    n_second_order_quad_faces,
                     n_tet_cells,
                     n_pyra_cells,
                     n_prism_cells,
                     n_poly_cells,
                     n_hex_cells,
+                    n_second_order_tet_cells,
+                    n_second_order_pyra_cells,
+                    n_second_order_prism_cells,
+                    n_second_order_hex_cells,
                     n_unmeshed_topo_faces)
             else:
                 if model is None:
@@ -2391,11 +2445,17 @@ class PartSummaryResults(CoreObject):
                         n_tri_faces if n_tri_faces is not None else ( PartSummaryResults._default_params["n_tri_faces"] if "n_tri_faces" in PartSummaryResults._default_params else (json_data["nTriFaces"] if "nTriFaces" in json_data else None)),
                         n_poly_faces if n_poly_faces is not None else ( PartSummaryResults._default_params["n_poly_faces"] if "n_poly_faces" in PartSummaryResults._default_params else (json_data["nPolyFaces"] if "nPolyFaces" in json_data else None)),
                         n_quad_faces if n_quad_faces is not None else ( PartSummaryResults._default_params["n_quad_faces"] if "n_quad_faces" in PartSummaryResults._default_params else (json_data["nQuadFaces"] if "nQuadFaces" in json_data else None)),
+                        n_second_order_tri_faces if n_second_order_tri_faces is not None else ( PartSummaryResults._default_params["n_second_order_tri_faces"] if "n_second_order_tri_faces" in PartSummaryResults._default_params else (json_data["nSecondOrderTriFaces"] if "nSecondOrderTriFaces" in json_data else None)),
+                        n_second_order_quad_faces if n_second_order_quad_faces is not None else ( PartSummaryResults._default_params["n_second_order_quad_faces"] if "n_second_order_quad_faces" in PartSummaryResults._default_params else (json_data["nSecondOrderQuadFaces"] if "nSecondOrderQuadFaces" in json_data else None)),
                         n_tet_cells if n_tet_cells is not None else ( PartSummaryResults._default_params["n_tet_cells"] if "n_tet_cells" in PartSummaryResults._default_params else (json_data["nTetCells"] if "nTetCells" in json_data else None)),
                         n_pyra_cells if n_pyra_cells is not None else ( PartSummaryResults._default_params["n_pyra_cells"] if "n_pyra_cells" in PartSummaryResults._default_params else (json_data["nPyraCells"] if "nPyraCells" in json_data else None)),
                         n_prism_cells if n_prism_cells is not None else ( PartSummaryResults._default_params["n_prism_cells"] if "n_prism_cells" in PartSummaryResults._default_params else (json_data["nPrismCells"] if "nPrismCells" in json_data else None)),
                         n_poly_cells if n_poly_cells is not None else ( PartSummaryResults._default_params["n_poly_cells"] if "n_poly_cells" in PartSummaryResults._default_params else (json_data["nPolyCells"] if "nPolyCells" in json_data else None)),
                         n_hex_cells if n_hex_cells is not None else ( PartSummaryResults._default_params["n_hex_cells"] if "n_hex_cells" in PartSummaryResults._default_params else (json_data["nHexCells"] if "nHexCells" in json_data else None)),
+                        n_second_order_tet_cells if n_second_order_tet_cells is not None else ( PartSummaryResults._default_params["n_second_order_tet_cells"] if "n_second_order_tet_cells" in PartSummaryResults._default_params else (json_data["nSecondOrderTetCells"] if "nSecondOrderTetCells" in json_data else None)),
+                        n_second_order_pyra_cells if n_second_order_pyra_cells is not None else ( PartSummaryResults._default_params["n_second_order_pyra_cells"] if "n_second_order_pyra_cells" in PartSummaryResults._default_params else (json_data["nSecondOrderPyraCells"] if "nSecondOrderPyraCells" in json_data else None)),
+                        n_second_order_prism_cells if n_second_order_prism_cells is not None else ( PartSummaryResults._default_params["n_second_order_prism_cells"] if "n_second_order_prism_cells" in PartSummaryResults._default_params else (json_data["nSecondOrderPrismCells"] if "nSecondOrderPrismCells" in json_data else None)),
+                        n_second_order_hex_cells if n_second_order_hex_cells is not None else ( PartSummaryResults._default_params["n_second_order_hex_cells"] if "n_second_order_hex_cells" in PartSummaryResults._default_params else (json_data["nSecondOrderHexCells"] if "nSecondOrderHexCells" in json_data else None)),
                         n_unmeshed_topo_faces if n_unmeshed_topo_faces is not None else ( PartSummaryResults._default_params["n_unmeshed_topo_faces"] if "n_unmeshed_topo_faces" in PartSummaryResults._default_params else (json_data["nUnmeshedTopoFaces"] if "nUnmeshedTopoFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -2423,11 +2483,17 @@ class PartSummaryResults(CoreObject):
             n_tri_faces: int = None,
             n_poly_faces: int = None,
             n_quad_faces: int = None,
+            n_second_order_tri_faces: int = None,
+            n_second_order_quad_faces: int = None,
             n_tet_cells: int = None,
             n_pyra_cells: int = None,
             n_prism_cells: int = None,
             n_poly_cells: int = None,
             n_hex_cells: int = None,
+            n_second_order_tet_cells: int = None,
+            n_second_order_pyra_cells: int = None,
+            n_second_order_prism_cells: int = None,
+            n_second_order_hex_cells: int = None,
             n_unmeshed_topo_faces: int = None):
         """Set the default values of the ``PartSummaryResults`` object.
 
@@ -2467,6 +2533,10 @@ class PartSummaryResults(CoreObject):
             Number of polygonal faces.
         n_quad_faces: int, optional
             Number of quadrilateral faces.
+        n_second_order_tri_faces: int, optional
+            Number of second order triangular faces.
+        n_second_order_quad_faces: int, optional
+            Number of second order quadrilateral faces.
         n_tet_cells: int, optional
             Number of tetrahedral cells.
         n_pyra_cells: int, optional
@@ -2477,6 +2547,14 @@ class PartSummaryResults(CoreObject):
             Number of polyhedral cells.
         n_hex_cells: int, optional
             Number of hexahedral cells.
+        n_second_order_tet_cells: int, optional
+            Number of second order tetrahedral cells.
+        n_second_order_pyra_cells: int, optional
+            Number of second order pyramid cells.
+        n_second_order_prism_cells: int, optional
+            Number of second order prism cells.
+        n_second_order_hex_cells: int, optional
+            Number of second order hexahedral cells.
         n_unmeshed_topo_faces: int, optional
             Number of unmeshed topofaces.
         """
@@ -2531,6 +2609,10 @@ class PartSummaryResults(CoreObject):
             json_data["nPolyFaces"] = self._n_poly_faces
         if self._n_quad_faces is not None:
             json_data["nQuadFaces"] = self._n_quad_faces
+        if self._n_second_order_tri_faces is not None:
+            json_data["nSecondOrderTriFaces"] = self._n_second_order_tri_faces
+        if self._n_second_order_quad_faces is not None:
+            json_data["nSecondOrderQuadFaces"] = self._n_second_order_quad_faces
         if self._n_tet_cells is not None:
             json_data["nTetCells"] = self._n_tet_cells
         if self._n_pyra_cells is not None:
@@ -2541,13 +2623,21 @@ class PartSummaryResults(CoreObject):
             json_data["nPolyCells"] = self._n_poly_cells
         if self._n_hex_cells is not None:
             json_data["nHexCells"] = self._n_hex_cells
+        if self._n_second_order_tet_cells is not None:
+            json_data["nSecondOrderTetCells"] = self._n_second_order_tet_cells
+        if self._n_second_order_pyra_cells is not None:
+            json_data["nSecondOrderPyraCells"] = self._n_second_order_pyra_cells
+        if self._n_second_order_prism_cells is not None:
+            json_data["nSecondOrderPrismCells"] = self._n_second_order_prism_cells
+        if self._n_second_order_hex_cells is not None:
+            json_data["nSecondOrderHexCells"] = self._n_second_order_hex_cells
         if self._n_unmeshed_topo_faces is not None:
             json_data["nUnmeshedTopoFaces"] = self._n_unmeshed_topo_faces
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "message :  %s\nn_topo_edges :  %s\nn_topo_faces :  %s\nn_topo_volumes :  %s\nn_edge_zonelets :  %s\nn_face_zonelets :  %s\nn_cell_zonelets :  %s\nn_edge_zones :  %s\nn_face_zones :  %s\nn_volume_zones :  %s\nn_labels :  %s\nn_nodes :  %s\nn_faces :  %s\nn_cells :  %s\nn_tri_faces :  %s\nn_poly_faces :  %s\nn_quad_faces :  %s\nn_tet_cells :  %s\nn_pyra_cells :  %s\nn_prism_cells :  %s\nn_poly_cells :  %s\nn_hex_cells :  %s\nn_unmeshed_topo_faces :  %s" % (self._message, self._n_topo_edges, self._n_topo_faces, self._n_topo_volumes, self._n_edge_zonelets, self._n_face_zonelets, self._n_cell_zonelets, self._n_edge_zones, self._n_face_zones, self._n_volume_zones, self._n_labels, self._n_nodes, self._n_faces, self._n_cells, self._n_tri_faces, self._n_poly_faces, self._n_quad_faces, self._n_tet_cells, self._n_pyra_cells, self._n_prism_cells, self._n_poly_cells, self._n_hex_cells, self._n_unmeshed_topo_faces)
+        message = "message :  %s\nn_topo_edges :  %s\nn_topo_faces :  %s\nn_topo_volumes :  %s\nn_edge_zonelets :  %s\nn_face_zonelets :  %s\nn_cell_zonelets :  %s\nn_edge_zones :  %s\nn_face_zones :  %s\nn_volume_zones :  %s\nn_labels :  %s\nn_nodes :  %s\nn_faces :  %s\nn_cells :  %s\nn_tri_faces :  %s\nn_poly_faces :  %s\nn_quad_faces :  %s\nn_second_order_tri_faces :  %s\nn_second_order_quad_faces :  %s\nn_tet_cells :  %s\nn_pyra_cells :  %s\nn_prism_cells :  %s\nn_poly_cells :  %s\nn_hex_cells :  %s\nn_second_order_tet_cells :  %s\nn_second_order_pyra_cells :  %s\nn_second_order_prism_cells :  %s\nn_second_order_hex_cells :  %s\nn_unmeshed_topo_faces :  %s" % (self._message, self._n_topo_edges, self._n_topo_faces, self._n_topo_volumes, self._n_edge_zonelets, self._n_face_zonelets, self._n_cell_zonelets, self._n_edge_zones, self._n_face_zones, self._n_volume_zones, self._n_labels, self._n_nodes, self._n_faces, self._n_cells, self._n_tri_faces, self._n_poly_faces, self._n_quad_faces, self._n_second_order_tri_faces, self._n_second_order_quad_faces, self._n_tet_cells, self._n_pyra_cells, self._n_prism_cells, self._n_poly_cells, self._n_hex_cells, self._n_second_order_tet_cells, self._n_second_order_pyra_cells, self._n_second_order_prism_cells, self._n_second_order_hex_cells, self._n_unmeshed_topo_faces)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -2722,6 +2812,26 @@ class PartSummaryResults(CoreObject):
         self._n_quad_faces = value
 
     @property
+    def n_second_order_tri_faces(self) -> int:
+        """Number of second order triangular faces.
+        """
+        return self._n_second_order_tri_faces
+
+    @n_second_order_tri_faces.setter
+    def n_second_order_tri_faces(self, value: int):
+        self._n_second_order_tri_faces = value
+
+    @property
+    def n_second_order_quad_faces(self) -> int:
+        """Number of second order quadrilateral faces.
+        """
+        return self._n_second_order_quad_faces
+
+    @n_second_order_quad_faces.setter
+    def n_second_order_quad_faces(self, value: int):
+        self._n_second_order_quad_faces = value
+
+    @property
     def n_tet_cells(self) -> int:
         """Number of tetrahedral cells.
         """
@@ -2770,6 +2880,46 @@ class PartSummaryResults(CoreObject):
     @n_hex_cells.setter
     def n_hex_cells(self, value: int):
         self._n_hex_cells = value
+
+    @property
+    def n_second_order_tet_cells(self) -> int:
+        """Number of second order tetrahedral cells.
+        """
+        return self._n_second_order_tet_cells
+
+    @n_second_order_tet_cells.setter
+    def n_second_order_tet_cells(self, value: int):
+        self._n_second_order_tet_cells = value
+
+    @property
+    def n_second_order_pyra_cells(self) -> int:
+        """Number of second order pyramid cells.
+        """
+        return self._n_second_order_pyra_cells
+
+    @n_second_order_pyra_cells.setter
+    def n_second_order_pyra_cells(self, value: int):
+        self._n_second_order_pyra_cells = value
+
+    @property
+    def n_second_order_prism_cells(self) -> int:
+        """Number of second order prism cells.
+        """
+        return self._n_second_order_prism_cells
+
+    @n_second_order_prism_cells.setter
+    def n_second_order_prism_cells(self, value: int):
+        self._n_second_order_prism_cells = value
+
+    @property
+    def n_second_order_hex_cells(self) -> int:
+        """Number of second order hexahedral cells.
+        """
+        return self._n_second_order_hex_cells
+
+    @n_second_order_hex_cells.setter
+    def n_second_order_hex_cells(self, value: int):
+        self._n_second_order_hex_cells = value
 
     @property
     def n_unmeshed_topo_faces(self) -> int:
