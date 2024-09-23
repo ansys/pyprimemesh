@@ -2,6 +2,55 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.7.0.dev14](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0.dev14) - 2024-09-23
+
+
+### Added
+
+- Update examples.py [#791](https://github.com/ansys/pyprimemesh/pull/791)
+- feat: Add contact patch example [#792](https://github.com/ansys/pyprimemesh/pull/792)
+- feat: Adapt to `visualization-tool-interface` [#806](https://github.com/ansys/pyprimemesh/pull/806)
+- Added example to plot [#833](https://github.com/ansys/pyprimemesh/pull/833)
+
+
+### Changed
+
+- chore: update CHANGELOG for v0.6.1 [#825](https://github.com/ansys/pyprimemesh/pull/825)
+
+
+### Fixed
+
+- Update tox.ini [#847](https://github.com/ansys/pyprimemesh/pull/847)
+- fix: Example issues [#851](https://github.com/ansys/pyprimemesh/pull/851)
+- fix: Main package import error [#858](https://github.com/ansys/pyprimemesh/pull/858)
+- fix: Slow plotting [#861](https://github.com/ansys/pyprimemesh/pull/861)
+- fix: Labeler pointing to main [#888](https://github.com/ansys/pyprimemesh/pull/888)
+
+
+### Dependencies
+
+- Bump the pyvista group with 2 updates [#829](https://github.com/ansys/pyprimemesh/pull/829)
+- Bump pytest from 8.2.2 to 8.3.2 in the test-dependencies group across 1 directory [#842](https://github.com/ansys/pyprimemesh/pull/842)
+- Bump ansys-tools-visualization-interface from 0.2.6 to 0.4.0 in the general-dependencies group [#849](https://github.com/ansys/pyprimemesh/pull/849)
+- Bump ansys/actions from 6 to 7 [#852](https://github.com/ansys/pyprimemesh/pull/852)
+- Bump ansys-tools-visualization-interface from 0.4.0 to 0.4.1 in the general-dependencies group [#868](https://github.com/ansys/pyprimemesh/pull/868)
+- Bump ansys-tools-visualization-interface from 0.4.1 to 0.4.3 in the general-dependencies group [#876](https://github.com/ansys/pyprimemesh/pull/876)
+
+
+### Miscellaneous
+
+- Doc fix for add_scope [#831](https://github.com/ansys/pyprimemesh/pull/831)
+- Update plotter.py [#834](https://github.com/ansys/pyprimemesh/pull/834)
+- Update 10_wheel_ground_contact_patch.py [#839](https://github.com/ansys/pyprimemesh/pull/839)
+- doc/cleanup examples [#841](https://github.com/ansys/pyprimemesh/pull/841)
+
+
+### Maintenance
+
+- maint: Drop 3.9 support [#846](https://github.com/ansys/pyprimemesh/pull/846)
+- Update tox.ini for 251 [#848](https://github.com/ansys/pyprimemesh/pull/848)
+- MAINT: update code form ADO 0.7.0.dev14 [#882](https://github.com/ansys/pyprimemesh/pull/882)
+
 ## [0.6.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.6.1) - 2024-07-12
 
 
