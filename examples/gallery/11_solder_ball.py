@@ -66,7 +66,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import PrimePlotter
+# from ansys.meshing.prime.graphics import PrimePlotter
 
 ###############################################################################
 # Launch Ansys Prime Server
