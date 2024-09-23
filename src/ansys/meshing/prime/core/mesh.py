@@ -449,7 +449,7 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_scoped_polydata(self, scope: "prime.ScopeDefinition", recalculate: bool = False):
+    def get_scoped_polydata(self, scope: "prime.ScopeDefinition", update: bool = False):
         """Get the polydata object of the scoped mesh.
 
         Parameters
@@ -462,7 +462,7 @@ class Mesh(MeshInfo):
         pv.PolyData
             PyVista mesh object.
         """
-        self.as_polydata(recalculate)
+        self.as_polydata(update=update)
         parts = self._model.control_data.get_scope_parts(scope)
 
         # Update the polydata if any part is not in the dictionary
@@ -495,7 +495,7 @@ class Mesh(MeshInfo):
         # to get the updated changes from the backend
         if len(scoped_pd) == 0:
             self.__init__(self._model)
-            return self.get_scoped_polydata(scope, recalculate=True)
+            return self.get_scoped_polydata(scope, update=True)
         return scoped_pd
 
     def update_pd(self, part_ids) -> Dict[int, Dict[str, list[(pv.PolyData, Part)]]]:
@@ -511,9 +511,11 @@ class Mesh(MeshInfo):
         Dict[int, Dict[str, List[(pv.PolyData, Part)]]
             Dictionary with the polydata objects.
         """
-        facet_result = self.get_face_and_edge_connectivity(
-            part_ids, FaceAndEdgeConnectivityParams(model=self._model)
-        )
+        with prime.numpy_array_optimization_enabled():
+            facet_result = self.get_face_and_edge_connectivity(
+                part_ids, FaceAndEdgeConnectivityParams(model=self._model)
+            )
+        self._parts_polydata = {}
         for i, part_id in enumerate(facet_result.part_ids):
             part = self._model.get_part(part_id)
             splines = part.get_splines()
@@ -544,16 +546,22 @@ class Mesh(MeshInfo):
         return self._parts_polydata
 
     def as_polydata(
-        self, recalculate: bool = False
+        self,
+        update: bool = False,
     ) -> Dict[int, Dict[str, List[tuple[pv.PolyData, Part]]]]:
         """Return the mesh as a ``pv.PolyData`` object.
+
+        Parameters
+        ----------
+        update : bool, default: False
+            Update the polydata.
 
         Returns
         -------
         Dict[int, Dict[str, List[(pv.PolyData, Part)]]
             Dictionary with the polydata objects.
         """
-        if not self._parts_polydata and not recalculate:
+        if not self._parts_polydata or update:
             part_ids = [part.id for part in self._model.parts]
             self.update_pd(part_ids)
         return self._parts_polydata

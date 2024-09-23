@@ -44,7 +44,7 @@ __all__ = ['launch_prime', 'launch_server_process']
 
 
 def get_install_locations():
-    supported_versions = ['242']
+    supported_versions = ['251']
     awp_roots = {ver: os.environ.get(f'AWP_ROOT{ver}', '') for ver in supported_versions}
     installed_versions = {
         ver: os.path.join(path, 'meshing', 'Prime')

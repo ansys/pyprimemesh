@@ -47,14 +47,13 @@ prismatic boundary layers.
 
 Procedure
 ~~~~~~~~~~
-
--   Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
--   Read the CAD geometry.
--   Mesh for the structural thermal analysis.
--   Write the mesh for the structural thermal analysis.
--   Extract the fluid by wrapping.
--   Mesh with polyhedral and prisms.
--   Write the mesh for the fluid simulation.
+#. Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
+#. Read the CAD geometry.
+#. Mesh for the structural thermal analysis.
+#. Write the mesh for the structural thermal analysis.
+#. Extract the fluid by wrapping.
+#. Mesh with polyhedral and prisms.
+#. Write the mesh for the fluid simulation.
 
 """
 
@@ -113,7 +112,7 @@ if toDelete:
     model.delete_parts(toDelete)
 
 display = PrimePlotter()
-display.add_model(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################
@@ -154,7 +153,7 @@ wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNA
 print(model)
 
 display = PrimePlotter()
-display.add_model(model)
+display.add_model(model, update=True)
 display.show()
 
 ###############################################################################
@@ -180,7 +179,9 @@ mesh_util.volume_mesh(
 
 print(model)
 display = PrimePlotter()
-display.add_scope(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display.add_scope(
+    model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"), update=True
+)
 display.show()
 
 ###############################################################################

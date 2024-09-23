@@ -1729,11 +1729,11 @@ class FuseParams(CoreObject):
     model: Model
         Model to create a ``FuseParams`` object with default parameters.
     use_absolute_tolerance: bool, optional
-        When true, gap tolerance and side tolerance provided are absolute values.
+        Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     gap_tolerance: float, optional
-        Gap tolerance between faces to be fused.
+        Gap tolerance between faces to be fused. The default value is 0.05.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     side_tolerance: float, optional
@@ -1741,39 +1741,39 @@ class FuseParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     check_interior: bool, optional
-        When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     fuse_option: FuseOption, optional
-        Option for treatment of fused surfaces.
+        Option for treatment of fused surfaces. The default value is None.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     check_orientation: bool, optional
-        Option to check face normal orientation during fuse operation.
+        Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     dump_mesh: bool, optional
-        Option to dump mesh for debugging.
+        Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     local_remesh: bool, optional
-        Local remesh of region to be fused.
+        Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     n_layers: int, optional
-        Face layers around region to be fused.
+        Face layers around region to be fused. The default value is 2.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     separate: bool, optional
-        Separate region to be fused.
+        Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     angle: float, optional
-        Faces zonelets with angle less than the provided value are considered for fuse operation.
+        Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     fuse_edges_only: bool, optional
-        Fuse edges only.
+        Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -1836,11 +1836,11 @@ class FuseParams(CoreObject):
         model: Model
             Model to create a ``FuseParams`` object with default parameters.
         use_absolute_tolerance: bool, optional
-            When true, gap tolerance and side tolerance provided are absolute values.
+            Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         gap_tolerance: float, optional
-            Gap tolerance between faces to be fused.
+            Gap tolerance between faces to be fused. The default value is 0.05.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         side_tolerance: float, optional
@@ -1848,39 +1848,39 @@ class FuseParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         check_interior: bool, optional
-            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+            Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         fuse_option: FuseOption, optional
-            Option for treatment of fused surfaces.
+            Option for treatment of fused surfaces. The default value is None.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         check_orientation: bool, optional
-            Option to check face normal orientation during fuse operation.
+            Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         dump_mesh: bool, optional
-            Option to dump mesh for debugging.
+            Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         local_remesh: bool, optional
-            Local remesh of region to be fused.
+            Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         n_layers: int, optional
-            Face layers around region to be fused.
+            Face layers around region to be fused. The default value is 2.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         separate: bool, optional
-            Separate region to be fused.
+            Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         angle: float, optional
-            Faces zonelets with angle less than the provided value are considered for fuse operation.
+            Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         fuse_edges_only: bool, optional
-            Fuse edges only.
+            Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
@@ -1965,29 +1965,29 @@ class FuseParams(CoreObject):
         Parameters
         ----------
         use_absolute_tolerance: bool, optional
-            When true, gap tolerance and side tolerance provided are absolute values.
+            Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
         gap_tolerance: float, optional
-            Gap tolerance between faces to be fused.
+            Gap tolerance between faces to be fused. The default value is 0.05.
         side_tolerance: float, optional
             Side tolerance for fusing to the side edges.
         check_interior: bool, optional
-            When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+            Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
         fuse_option: FuseOption, optional
-            Option for treatment of fused surfaces.
+            Option for treatment of fused surfaces. The default value is None.
         check_orientation: bool, optional
-            Option to check face normal orientation during fuse operation.
+            Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
         dump_mesh: bool, optional
-            Option to dump mesh for debugging.
+            Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
         local_remesh: bool, optional
-            Local remesh of region to be fused.
+            Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
         n_layers: int, optional
-            Face layers around region to be fused.
+            Face layers around region to be fused. The default value is 2.
         separate: bool, optional
-            Separate region to be fused.
+            Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
         angle: float, optional
-            Faces zonelets with angle less than the provided value are considered for fuse operation.
+            Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
         fuse_edges_only: bool, optional
-            Fuse edges only.
+            Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
         """
         args = locals()
         [FuseParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2040,7 +2040,7 @@ class FuseParams(CoreObject):
 
     @property
     def use_absolute_tolerance(self) -> bool:
-        """When true, gap tolerance and side tolerance provided are absolute values.
+        """Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2052,7 +2052,7 @@ class FuseParams(CoreObject):
 
     @property
     def gap_tolerance(self) -> float:
-        """Gap tolerance between faces to be fused.
+        """Gap tolerance between faces to be fused. The default value is 0.05.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2076,7 +2076,7 @@ class FuseParams(CoreObject):
 
     @property
     def check_interior(self) -> bool:
-        """When true, checks all nodes including boundary edge nodes and nodes inside the faces.
+        """Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2088,7 +2088,7 @@ class FuseParams(CoreObject):
 
     @property
     def fuse_option(self) -> FuseOption:
-        """Option for treatment of fused surfaces.
+        """Option for treatment of fused surfaces. The default value is None.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2100,7 +2100,7 @@ class FuseParams(CoreObject):
 
     @property
     def check_orientation(self) -> bool:
-        """Option to check face normal orientation during fuse operation.
+        """Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2112,7 +2112,7 @@ class FuseParams(CoreObject):
 
     @property
     def dump_mesh(self) -> bool:
-        """Option to dump mesh for debugging.
+        """Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2124,7 +2124,7 @@ class FuseParams(CoreObject):
 
     @property
     def local_remesh(self) -> bool:
-        """Local remesh of region to be fused.
+        """Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2136,7 +2136,7 @@ class FuseParams(CoreObject):
 
     @property
     def n_layers(self) -> int:
-        """Face layers around region to be fused.
+        """Face layers around region to be fused. The default value is 2.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2148,7 +2148,7 @@ class FuseParams(CoreObject):
 
     @property
     def separate(self) -> bool:
-        """Separate region to be fused.
+        """Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2160,7 +2160,7 @@ class FuseParams(CoreObject):
 
     @property
     def angle(self) -> float:
-        """Faces zonelets with angle less than the provided value are considered for fuse operation.
+        """Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2172,7 +2172,7 @@ class FuseParams(CoreObject):
 
     @property
     def fuse_edges_only(self) -> bool:
-        """Fuse edges only.
+        """Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2209,6 +2209,10 @@ class FuseResults(CoreObject):
         Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    intersecting_zonelet_pairs: List[OverlapPairs], optional
+        Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``FuseResults`` object with provided parameters.
 
@@ -2224,12 +2228,14 @@ class FuseResults(CoreObject):
             fused_area: float,
             error_code: ErrorCode,
             warning_codes: List[WarningCode],
-            intersecting_locations: Iterable[float]):
+            intersecting_locations: Iterable[float],
+            intersecting_zonelet_pairs: List[OverlapPairs]):
         self._fused_pairs = fused_pairs
         self._fused_area = fused_area
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
         self._intersecting_locations = intersecting_locations if isinstance(intersecting_locations, np.ndarray) else np.array(intersecting_locations, dtype=np.double) if intersecting_locations is not None else None
+        self._intersecting_zonelet_pairs = intersecting_zonelet_pairs
 
     def __init__(
             self,
@@ -2239,6 +2245,7 @@ class FuseResults(CoreObject):
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None,
             intersecting_locations: Iterable[float] = None,
+            intersecting_zonelet_pairs: List[OverlapPairs] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``FuseResults`` object.
@@ -2267,6 +2274,10 @@ class FuseResults(CoreObject):
             Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        intersecting_zonelet_pairs: List[OverlapPairs], optional
+            Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``FuseResults`` object with provided parameters.
 
@@ -2280,16 +2291,18 @@ class FuseResults(CoreObject):
                 json_data["fusedArea"] if "fusedArea" in json_data else None,
                 ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
                 [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
-                json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)
+                json_data["intersectingLocations"] if "intersectingLocations" in json_data else None,
+                [OverlapPairs(model = model, json_data = data) for data in json_data["intersectingZoneletPairs"]] if "intersectingZoneletPairs" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code, warning_codes, intersecting_locations])
+            all_field_specified = all(arg is not None for arg in [fused_pairs, fused_area, error_code, warning_codes, intersecting_locations, intersecting_zonelet_pairs])
             if all_field_specified:
                 self.__initialize(
                     fused_pairs,
                     fused_area,
                     error_code,
                     warning_codes,
-                    intersecting_locations)
+                    intersecting_locations,
+                    intersecting_zonelet_pairs)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -2301,7 +2314,8 @@ class FuseResults(CoreObject):
                         fused_area if fused_area is not None else ( FuseResults._default_params["fused_area"] if "fused_area" in FuseResults._default_params else (json_data["fusedArea"] if "fusedArea" in json_data else None)),
                         error_code if error_code is not None else ( FuseResults._default_params["error_code"] if "error_code" in FuseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
                         warning_codes if warning_codes is not None else ( FuseResults._default_params["warning_codes"] if "warning_codes" in FuseResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
-                        intersecting_locations if intersecting_locations is not None else ( FuseResults._default_params["intersecting_locations"] if "intersecting_locations" in FuseResults._default_params else (json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)))
+                        intersecting_locations if intersecting_locations is not None else ( FuseResults._default_params["intersecting_locations"] if "intersecting_locations" in FuseResults._default_params else (json_data["intersectingLocations"] if "intersectingLocations" in json_data else None)),
+                        intersecting_zonelet_pairs if intersecting_zonelet_pairs is not None else ( FuseResults._default_params["intersecting_zonelet_pairs"] if "intersecting_zonelet_pairs" in FuseResults._default_params else [OverlapPairs(model = model, json_data = data) for data in (json_data["intersectingZoneletPairs"] if "intersectingZoneletPairs" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -2315,7 +2329,8 @@ class FuseResults(CoreObject):
             fused_area: float = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None,
-            intersecting_locations: Iterable[float] = None):
+            intersecting_locations: Iterable[float] = None,
+            intersecting_zonelet_pairs: List[OverlapPairs] = None):
         """Set the default values of the ``FuseResults`` object.
 
         Parameters
@@ -2330,6 +2345,8 @@ class FuseResults(CoreObject):
             Warning codes associated with the fuse operation.
         intersecting_locations: Iterable[float], optional
             Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+        intersecting_zonelet_pairs: List[OverlapPairs], optional
+            Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
         """
         args = locals()
         [FuseResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2358,11 +2375,13 @@ class FuseResults(CoreObject):
             json_data["warningCodes"] = [data for data in self._warning_codes]
         if self._intersecting_locations is not None:
             json_data["intersectingLocations"] = self._intersecting_locations
+        if self._intersecting_zonelet_pairs is not None:
+            json_data["intersectingZoneletPairs"] = [data._jsonify() for data in self._intersecting_zonelet_pairs]
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s\nwarning_codes :  %s\nintersecting_locations :  %s" % (self._fused_pairs, self._fused_area, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._intersecting_locations)
+        message = "fused_pairs :  %s\nfused_area :  %s\nerror_code :  %s\nwarning_codes :  %s\nintersecting_locations :  %s\nintersecting_zonelet_pairs :  %s" % (self._fused_pairs, self._fused_area, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._intersecting_locations, '[' + ''.join('\n' + str(data) for data in self._intersecting_zonelet_pairs) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -2425,3 +2444,15 @@ class FuseResults(CoreObject):
     @intersecting_locations.setter
     def intersecting_locations(self, value: Iterable[float]):
         self._intersecting_locations = value
+
+    @property
+    def intersecting_zonelet_pairs(self) -> List[OverlapPairs]:
+        """Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._intersecting_zonelet_pairs
+
+    @intersecting_zonelet_pairs.setter
+    def intersecting_zonelet_pairs(self, value: List[OverlapPairs]):
+        self._intersecting_zonelet_pairs = value

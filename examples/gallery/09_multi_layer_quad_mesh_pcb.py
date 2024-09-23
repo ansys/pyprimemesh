@@ -65,20 +65,18 @@ The resulting mesh with three layers per solid looks like this:
 
 Procedure
 ~~~~~~~~~~
--   Import the fundamental libraries that are necessary to run the script.
--   Launch an Ansys Prime Server instance and instantiate the meshing utilities from the ``lucid``
-    class.
--   Define the main mesh parameters, which are the base size and number of layers along the
-    sweep direction.
--   Import the CAD geometry.
--   Define the edge sizing along the sweep direction (based on pre-existing edges named
-    selections).
--   Define the parameters for the volume sweeper.
--   Set up, generate, and mesh the base face.
--   Stack the base face along the sweep direction.
--   Set up the zone naming before the mesh output.
--   Write a CAS file for use in the Fluent solver.
--   Exit the PyPrimeMesh session.
+#. Import the fundamental libraries that are necessary to run the script.
+#. Launch an Ansys Prime Server instance.
+#. Instantiate the meshing utilities from the ``lucid`` class.
+#. Define the base mesh size and number of layers along the sweep direction.
+#. Import the CAD geometry.
+#. Define the edge sizing along the sweep direction using existing edge named selections.
+#. Define the parameters for the volume sweeper.
+#. Set up, generate, and mesh the base face.
+#. Stack the base face along the sweep direction.
+#. Set up the zone naming before the mesh output.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
 
 """
 
@@ -246,7 +244,7 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.plot(model)
+    display.plot(model, update=True)
     display.show()
 
 ###############################################################################
@@ -271,7 +269,7 @@ stackbase_results = sweeper.stack_base_face(
 
 if display_intermediate_steps:
     display = PrimePlotter()
-    display.plot(model)
+    display.plot(model, update=True)
     display.show()
 ###############################################################################
 # Set up the zone naming before the mesh output

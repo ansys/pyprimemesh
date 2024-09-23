@@ -27,8 +27,6 @@
 # please move the code to cpp or improve the code quality
 ########################### [TODO] ##################################
 
-import json
-
 import ansys.meshing.prime as prime
 
 __all__ = ['MaterialProcessor', 'DatabaseProcessor']
@@ -1951,7 +1949,7 @@ class _MatAddDamageDiem:
             if "Strain rate" in dmg_ini_props["Data"]:
                 self._strn_rate = dmg_ini_props["Data"]["Strain rate"][0]
 
-    def get_all_commands(self, mat_id, mat_name, all_mat_props):
+    def get_all_commands(self, mat_id, mat_name, all_mat_props, material_used_with_shell, max_id):
         mat_string = ""
         mat_string += "*MAT_ADD_DAMAGE_DIEM_TITLE\n"
         mat_string += f"{mat_name}\n"
@@ -1987,12 +1985,17 @@ class _MatAddDamageDiem:
         mat_string += (
             "".join([self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]) + "\n"
         )
-        mat_string += curve_card
 
         if self._damage_length == 0.0 and self._strain_at_dmg_ini == 0.0 and self._strs_tria == 0.0:
             return ""
         else:
-            return mat_string
+            str_2d = ""
+            if material_used_with_shell:
+                str_2d = mat_string.replace(
+                    self._formatter.field_int(mat_id),
+                    self._formatter.field_int(max_id * 3 + mat_id),
+                )
+            return mat_string + str_2d + curve_card
 
 
 class _MatAddInelasticity:
@@ -2184,10 +2187,8 @@ class MaterialProcessor:
     ----------
     model : prime.Model
         Model that the methods are to work on.
-    raw_materials_data : dict
-        The raw materials data in json dictionary format extracted from the part's simulation data.
-    zone_data : dict
-        The zone data in json dictionary format extracted from the part's simulation data.
+    sim_data : dict
+        The simulation data in json dictionary format containing materials and zone information.
     card_format : str, optional
         The LS-DYNA card format for writing. Defaults to "SHORT".
 
@@ -2198,6 +2199,7 @@ class MaterialProcessor:
 
     __slots__ = (
         '_card_format',
+        '_sim_data',
         '_raw_materials_data',
         '_zone_data',
         '_mat_id',
@@ -2214,14 +2216,14 @@ class MaterialProcessor:
     def __init__(
         self,
         model: prime.Model,
-        raw_materials_data: dict,
-        zone_data: dict,
+        sim_data: dict,
         card_format: str = "SHORT",
     ):
         """Initialize class variables and the superclass."""
         self._card_format = card_format
-        self._raw_materials_data = raw_materials_data
-        self._zone_data = zone_data
+        self._sim_data = sim_data
+        self._raw_materials_data = sim_data['Materials']
+        self._zone_data = sim_data['Zones']
         self._mat_id = 0
         self._wt_factor = 1.0
         self._material_assignedTo_zones = {}
@@ -2338,8 +2340,7 @@ class MaterialProcessor:
     def _get_max_id(self):
         part = self._model.parts[0]
         fileio = prime.FileIO(self._model)
-        simulation_data = json.loads(fileio.get_abaqus_simulation_data(part.id))
-        max_id = simulation_data['SimulationData']['max_id']
+        max_id = self._sim_data['SimulationData']['max_id']
         return int(max_id)
 
     def _get_zone_with_id(self, _id):
@@ -2581,7 +2582,11 @@ class MaterialProcessor:
                     self._mat_id, mat_name, mat_data, e, pr, density=density
                 )
         if damage_in_mat and is_cohesive is False:
-            dyna_mat_card += damage.get_all_commands(self._mat_id, mat_name, mat_data)
+            material_used_with_shell = self._is_material_used_with_shell(mat_name)
+            max_id = self._get_max_id()
+            dyna_mat_card += damage.get_all_commands(
+                self._mat_id, mat_name, mat_data, material_used_with_shell, max_id
+            )
         if damage_in_mat and is_cohesive:
             dyna_mat_card += damage_cohesive.get_all_commands(
                 self._mat_id,
@@ -2682,7 +2687,7 @@ class MaterialProcessor:
         property_dict = mat_props['ELASTIC']
         mat_elastic_card = ''
         elastic_type = property_dict["Parameters"]["TYPE"]
-        if elastic_type == "ISOTROPIC":
+        if elastic_type == "ISOTROPIC" or elastic_type == "ISO":
             # self._logger.warning(
             # f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
@@ -2782,7 +2787,7 @@ class MaterialProcessor:
     def _get_elastic_modulus(self, mat_props, mat_name, mat_id):
         property_dict = mat_props['ELASTIC']
         elastic_type = property_dict["Parameters"]["TYPE"]
-        if elastic_type == "ISOTROPIC":
+        if elastic_type == "ISOTROPIC" or elastic_type == "ISO":
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")

@@ -45,19 +45,20 @@ meshing utilities provided in the ``lucid`` class.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities
-  from the ``lucid`` class.
-* Import and append the STL geometry files for each part of the F1 rear wing.
-* Merge all imported components into a single part.
-* Use the connect operation to join the components together.
-* Define local size controls on aero surfaces.
-* Generate a surface mesh with curvature sizing.
-* Compute volume zones and define the fluid zone type.
-* Define the boundary layer.
-* Generate a volume mesh using poly-hexcore elements and apply boundary layer refinement.
-* Print statistics on the generated mesh.
-* Write a CAS file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+#. Launch an Ansys Prime Server instance.
+#. Instantiate the meshing utilities from the ``lucid`` class.
+#. Import and append the STL geometry files for each part of the F1 rear wing.
+#. Merge all imported components into a single part.
+#. Use the connect operation to join the components together.
+#. Define local size controls on aero surfaces.
+#. Generate a surface mesh with curvature sizing.
+#. Compute volume zones and define the fluid zone type.
+#. Define the boundary layer.
+#. Generate a volume mesh using poly-hexcore elements and apply boundary layer refinement.
+#. Print statistics on the generated mesh.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
+
 """
 
 ###############################################################################
@@ -198,6 +199,7 @@ scope = prime.ScopeDefinition(model, label_expression="* !*enclosure*")
 display = PrimePlotter()
 display.plot(model, scope)
 display.show()
+
 # Create face zones per label
 for label in part.get_labels():
     mesh_util.create_zones_from_labels(label_expression=label)
@@ -317,13 +319,12 @@ print("\nMesh check", result, sep="\n")
 
 scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
 display = PrimePlotter()
-display.plot(model, scope)
+display.plot(model, scope, update=True)
 display.show()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~
 # Export as CAS file for external aero simulations.
-
 with tempfile.TemporaryDirectory() as temp_folder:
     print(temp_folder)
     mesh_file = os.path.join(temp_folder, "f1_rear_wing_vol_mesh.cas")

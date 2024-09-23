@@ -174,7 +174,7 @@ class Connect(CoreObject):
         return SubtractVolumesResults(model = self._model, json_data = result)
 
     def stitch_face_zonelets(self, part_id : int, face_zonelet_ids : Iterable[int], with_face_zonelet_ids : Iterable[int], params : StitchParams) -> ConnectResults:
-        """ Stitches a set of face zonelets with another set of face zones.
+        """ Stitches a set of face zonelets with another set of face zonelets.
 
 
         Parameters

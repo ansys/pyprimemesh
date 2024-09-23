@@ -41,18 +41,19 @@ It uses several meshing utilities available in the ``lucid`` class for convenien
 
 Procedure
 ~~~~~~~~~
-* Launch an Ansys Prime Server instance and instantiate the meshing utilities
-  from the ``lucid`` class.
-* Import the geometry.
-* Coarse wrap parts with holes to clean up.
-* Extract the fluid region using a wrapper.
-* Check that the wrap surface is closed and that the quality is suitable.
-* Mesh only fluid with tetrahedral elements and boundary layer refinement.
-* Create face zones from labels imported from the geometry.
-* Print statistics on the generated mesh.
-* Improve the mesh quality.
-* Write a CAS file for use in the Fluent solver.
-* Exit the PyPrimeMesh session.
+#. Launch an Ansys Prime Server instance.
+#. Instantiate the meshing utilities from the ``lucid`` class.
+#. Import the geometry.
+#. Coarse wrap parts with holes to clean up.
+#. Extract the fluid region using a wrapper.
+#. Check that the wrap surface is closed and that the quality is suitable.
+#. Mesh only fluid with tetrahedral elements and boundary layer refinement.
+#. Create face zones from labels imported from the geometry.
+#. Print statistics on the generated mesh.
+#. Improve the mesh quality.
+#. Write a CAS file for use in the Fluent solver.
+#. Exit the PyPrimeMesh session.
+
 """
 
 ###############################################################################
@@ -72,7 +73,6 @@ prime_client = prime.launch_prime()
 model = prime_client.model
 
 mesh_util = prime.lucid.Mesh(model)
-
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
@@ -88,6 +88,7 @@ toy_car = prime.examples.download_toy_car_fmd()
 mesh_util.read(file_name=toy_car)
 
 scope = prime.ScopeDefinition(model, part_expression="* !*tunnel*")
+
 pl = PrimePlotter()
 pl.plot(model, scope)
 pl.show()
@@ -120,6 +121,7 @@ for part_name in coarse_wrap:
     pl = PrimePlotter()
     pl.plot(model, scope)
     pl.show()
+
 
 ###############################################################################
 # Extract fluid using a wrapper
@@ -306,7 +308,6 @@ for summary_res in qual_summary_res.quality_results_part:
 # Write mesh
 # ~~~~~~~~~~
 # Write a CAS file for use in the Fluent solver.
-
 with tempfile.TemporaryDirectory() as temp_folder:
     mesh_file = os.path.join(temp_folder, "toy_car_lucid.cas")
     mesh_util.write(mesh_file)

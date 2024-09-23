@@ -42,12 +42,12 @@ structural thermal analysis using predominantly hexahedral elements.
 
 Procedure
 ~~~~~~~~~~
-* Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
-* Read the CAD geometry.
-* Create a base face, projecting edge loops and imprinting to capture the geometry.
-* Surface mesh the base face with quad elements.
-* Stack the base face mesh through the volumes to create a mainly hexahedral volume mesh.
-* Write the mesh for the structural thermal analysis.
+#. Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.
+#. Read the CAD geometry.
+#. Create a base face, projecting edge loops and imprinting to capture the geometry.
+#. Surface mesh the base face with quad elements.
+#. Stack the base face mesh through the volumes to create a mainly hexahedral volume mesh.
+#. Write the mesh for the structural thermal analysis.
 """
 
 ###############################################################################
@@ -149,7 +149,7 @@ base_scope = prime.lucid.SurfaceScope(
 mesh_util.surface_mesh(min_size=0.5, scope=base_scope, generate_quads=True)
 
 display = PrimePlotter()
-display.plot(model, scope=scope)
+display.plot(model, scope=scope, update=True)
 display.show()
 
 ###############################################################################
@@ -166,7 +166,7 @@ stackbase_results = sweeper.stack_base_face(
 )
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################

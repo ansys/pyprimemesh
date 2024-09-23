@@ -42,15 +42,15 @@ This example creates a mainly hexahedral mesh on a thin solid volume.
 
 Procedure
 ~~~~~~~~~
-* Launch Ansys Prime Server.
-* Import the CAD geometry.
-* Quad surface mesh the source face.
-* Surface mesh the remaining unmeshed TopoFaces with tri surface mesh.
-* Delete the topology.
-* Define volume meshing controls to use thin volume meshing.
-* Volume mesh with hexahedral and prism cells.
-* Write a CDB file for use in the APDL solver.
-* Exit the PyPrimeMesh session.
+#. Launch Ansys Prime Server.
+#. Import the CAD geometry.
+#. Quad surface mesh the source face.
+#. Surface mesh the remaining unmeshed TopoFaces with tri surface mesh.
+#. Delete the topology.
+#. Define volume meshing controls to use thin volume meshing.
+#. Volume mesh with hexahedral and prism cells.
+#. Write a CDB file for use in the APDL solver.
+#. Exit the PyPrimeMesh session.
 
 """
 
@@ -109,7 +109,7 @@ mesh_util.surface_mesh(
 )
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################
@@ -147,7 +147,7 @@ mesh_util.surface_mesh(
 )
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################
@@ -219,7 +219,7 @@ result_vol = volume_mesh.mesh(part_id=part.id, automesh_params=auto_mesh_params)
 print(part.get_summary(prime.PartSummaryParams(model)))
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 ###############################################################################
 # Write mesh

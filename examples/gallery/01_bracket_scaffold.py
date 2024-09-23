@@ -43,12 +43,12 @@ connect all the surface bodies and mesh the bracket with quad elements.
 
 Procedure
 ~~~~~~~~~
-* Launch Ansys Prime Server.
-* Import the CAD geometry and create the part per the CAD model.
-* Scaffold topofaces and topoedges with a tolerance parameter.
-* Surface mesh topofaces with a constant size and generate quad elements.
-* Write a CDB file for use in the APDL solver.
-* Exit the PyPrimeMesh session.
+#. Launch Ansys Prime Server.
+#. Import the CAD geometry and create the part per the CAD model.
+#. Scaffold topofaces and topoedges with a tolerance parameter.
+#. Surface mesh topofaces with a constant size and generate quad elements.
+#. Write a CDB file for use in the APDL solver.
+#. Exit the PyPrimeMesh session.
 
 """
 
@@ -154,7 +154,7 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 
 # Display the mesh
 pl = PrimePlotter()
-pl.plot(model)
+pl.plot(model, update=True)
 pl.show()
 
 ###############################################################################

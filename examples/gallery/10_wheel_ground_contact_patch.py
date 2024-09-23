@@ -69,7 +69,6 @@ Procedure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules and launch an instance of Ansys Prime Server.
 # From the PyPrimeMesh client, get the model.
-
 # Instantiate meshing utilities from the ``lucid`` class.
 
 import os
@@ -88,20 +87,20 @@ mesh_util = prime.lucid.Mesh(model)
 # ~~~~~~~~~~~~~~~~~~~
 # Download the wheel ground geometry (FMD) file exported by SpaceClaim.
 # Import the CAD geometry. The geometry consists of two topo parts: a wheel and an enclosing box.
-
 # Labels are defined for the ground topo face on the enclosure and for the wheel
 # as all the topo faces of the wheel part.
 
 # For Windows OS users, SCDOC or DSCO is also available. For example:
-
 # wheel_ground_file = prime.examples.download_wheel_ground_scdoc()
 
 wheel_ground_file = prime.examples.download_wheel_ground_fmd()
 
 mesh_util.read(wheel_ground_file)
+
 display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
 display.show()
+
 print(model)
 
 ###############################################################################
@@ -109,7 +108,6 @@ print(model)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Convert the faceted geometry of the topology to mesh for all parts as the contact patch
 # requires face zonelets from mesh parts as input.
-
 
 wheel_part = model.get_part_by_name("wheel_body")
 enclosure_part = model.get_part_by_name("enclosure")
@@ -120,7 +118,6 @@ enclosure_part = model.get_part_by_name("enclosure")
 # Create a contact patch
 # ~~~~~~~~~~~~~~~~~~~~~~
 # To create a contact patch, a direction is needed to define the resulting shape of the patch.
-
 # A new part is created containing the patch.
 # A prefix can be specified for the label created for the contact patch face zonelets generated.
 # The offset distance determines the thickness and extent of the patch.  The source face zonelet is
@@ -180,9 +177,9 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
-display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
-display.show()
+# display = PrimePlotter()
+# display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
+# display.show()
 
 print(model)
 
@@ -201,10 +198,17 @@ mesh_util.volume_mesh(
 )
 
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"))
+display.plot(
+    model,
+    scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"),
+    update=True,
+)
 display.show()
 
 mesh_util.create_zones_from_labels()
+
+wrap_part._print_mesh = True
+print(wrap_part)
 
 ###############################################################################
 # Write model

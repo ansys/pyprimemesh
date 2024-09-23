@@ -15,8 +15,8 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '24.2.0'
-  MAIN_PYTHON_VERSION: '3.9'
+  DOCKER_IMAGE_TAG: '25.1.0.dev14'
+  MAIN_PYTHON_VERSION: '3.10'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
@@ -35,7 +35,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@v6
+      - uses: ansys/actions/doc-deploy-changelog@v7
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
 
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@v6
+        uses: ansys/actions/code-style@v7
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           vale-config: "doc/.vale.ini"
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v6
+        uses: ansys/actions/doc-style@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -75,7 +75,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.10', '3.11', '3.12']
         should-release:
           - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
         exclude:
@@ -83,7 +83,7 @@ jobs:
             os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: ansys/actions/build-wheelhouse@v6
+        uses: ansys/actions/build-wheelhouse@v7
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
@@ -110,14 +110,14 @@ jobs:
         uses: pyvista/setup-headless-display-action@v2
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v6
+        uses: ansys/actions/doc-build@v7
         with:
           check-links: false
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
 
   testing:
     name: Run Unit Tests
@@ -143,11 +143,11 @@ jobs:
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
 
       - name: "Run pytest"
-        uses: ansys/actions/tests-pytest@v6
+        uses: ansys/actions/tests-pytest@v7
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
       
@@ -168,7 +168,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
-        uses: ansys/actions/build-library@v6
+        uses: ansys/actions/build-library@v7
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -180,14 +180,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Release to the public PyPI repository
-        uses: ansys/actions/release-pypi-public@v6
+        uses: ansys/actions/release-pypi-public@v7
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: Release to GitHub
-        uses: ansys/actions/release-github@v6
+        uses: ansys/actions/release-github@v7
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -198,7 +198,7 @@ jobs:
     needs: [package]
     steps:
       - name: Deploy the latest documentation
-        uses: ansys/actions/doc-deploy-dev@v6
+        uses: ansys/actions/doc-deploy-dev@v7
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -210,7 +210,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: ansys/actions/doc-deploy-stable@v6
+        uses: ansys/actions/doc-deploy-stable@v7
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}

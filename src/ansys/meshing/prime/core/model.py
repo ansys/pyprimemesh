@@ -27,6 +27,8 @@ from typing import Iterable, List
 from ansys.meshing.prime.autogen.model import Model as _Model
 
 # isort: split
+import os
+
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
@@ -38,7 +40,6 @@ from ansys.meshing.prime.autogen.modelstructs import (
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.topodata import TopoData
 from ansys.meshing.prime.core.controldata import ControlData
-from ansys.meshing.prime.core.mesh import Mesh
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
@@ -98,10 +99,15 @@ class Model(_Model):
         sc_data = res["SizeControl"]
         pc_data = res["PrismControl"]
         wc_data = res["WrapperControl"]
-        mc_data = res["WrapperControl"]
+        mc_data = res["MultiZoneControl"]
         vc_data = res["VolumeControl"]
+
+        if "ThinVolumeControl" in res:
+            tvc_data = res["ThinVolumeControl"]
+
         if "PeriodicControl" in res:
             percon_data = res["PeriodicControl"]
+
         sf_params = res["GlobalSizingParams"]
 
         self._global_sf_params = GlobalSizingParams(
@@ -114,6 +120,7 @@ class Model(_Model):
         self._control_data._update_wrapper_controls(wc_data)
         self._control_data._update_multi_zone_controls(mc_data)
         self._control_data._update_volume_controls(vc_data)
+        self._control_data._update_thin_volume_controls(tvc_data)
         self._topo_data = TopoData(self, -1, res["TopoData"], "")
         if "PeriodicControl" in res:
             self._control_data._update_periodic_controls(percon_data)
@@ -288,6 +295,29 @@ class Model(_Model):
         _Model.set_global_sizing_params(self, params)
         self._global_sf_params = params
 
+    def set_working_directory(self, path: str):
+        """Set working directory.
+
+        Set the working directory to be considered for file i/o when the file paths are relative.
+
+        Parameters
+        ----------
+        path : str
+            Path to the directory.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model = prime.local_model
+        >>> zones = model.set_working_directory("C:/input_files")
+
+        """
+        _Model.set_working_directory(self, path)
+        os.chdir(path)
+
     def __str__(self):
         """Print the summary of the model.
 
@@ -419,8 +449,13 @@ class Model(_Model):
         """
         return PrimeLogger()
 
-    def as_polydata(self):
+    def as_polydata(self, update: bool = False):
         """Get the model as a polydata.
+
+        Parameters
+        ----------
+        update : bool, optional
+            Update the polydata if it is already present, by default False.
 
         Returns
         -------
@@ -431,10 +466,18 @@ class Model(_Model):
         --------
             >>> polydata = model.as_polydata()
         """
-        self._model_pv_mesh = Mesh(self)
-        return self._model_pv_mesh.as_polydata()
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.as_polydata(update=update)
 
-    def get_scoped_polydata(self, scope):
+    def get_scoped_polydata(self, scope, update: bool = False):
         """Get the scoped polydata of the model.
 
         Parameters
@@ -451,6 +494,14 @@ class Model(_Model):
         --------
             >>> scoped_polydata = model.get_scoped_polydata(scope)
         """
-        if self._model_pv_mesh is None:
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+
+        if self._model_pv_mesh is None or update:
             self._model_pv_mesh = Mesh(self)
-        return self._model_pv_mesh.get_scoped_polydata(scope)
+        return self._model_pv_mesh.get_scoped_polydata(scope, update=update)
