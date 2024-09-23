@@ -177,9 +177,11 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
-# display = PrimePlotter()
-# display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
-# display.show()
+display = PrimePlotter()
+display.plot(
+    model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
+)
+display.show()
 
 print(model)
 
