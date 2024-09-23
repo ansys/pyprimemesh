@@ -1,0 +1,194 @@
+---
+title: PyPrimeMesh cheat sheet
+format: cheat_sheet-pdf
+version: main
+footer: PyPrimeMesh
+footerlinks:
+  - urls: 'https://prime.docs.pyansys.com/version/stable/'
+    text: Documentation
+  - urls: 'https://prime.docs.pyansys.com/version/stable/getting_started/index.html'
+    text: Getting started
+  - urls: 'https://prime.docs.pyansys.com/version/stable/examples/index.html'
+    text: Examples
+  - urls: 'https://prime.docs.pyansys.com/version/stable/api/index.html'
+    text: API reference
+
+execute:
+    # output: false
+    eval: false
+
+latex-clean: true
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.1
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+## Launch PyPrimeMesh client
+Launch and exit PyPrimeMesh server from Python in gRPC
+mode:
+```{python}
+#| eval: false
+# Launch PyPrimeMesh server
+from ansys.meshing import prime
+
+with prime.launch_prime(timeout=20) as prime_client:
+    model = prime_client.model
+    # Define script here
+    prime_client.exit()
+
+```
+
+Launch an instance of PyPrimeMesh at IP address 127.0.0.1
+and port 50055 with the number of processes set to 4:
+
+
+```{python}
+#| eval: false
+with prime.launch_prime(
+    ip="127.0.0.1", port=50055, n_procs=4
+    ) as prime_client:
+    model = prime_client.model
+```
+
+## Read and write files
+Read or write files of different formats based on file
+extensions:
+
+```{python}
+#| eval: false
+from ansys.meshing.prime import lucid
+
+# Define \texttt{mesher} object
+mesher = lucid.Mesh(model)
+# Read mesh (*.msh) file
+mesh_file_name = r"sample1_mesh.msh"
+mesher.read(mesh_file_name, append=False)
+# Write mesh (*.cdb) file
+cdb_file_name = r"sample3_case.cdb"
+mesher.write(cdb_file_name)
+```
+
+## Part summary
+Query for the part summary:
+
+```{python}
+#| eval: false
+part = model.get_part_by_name("sample_part")
+summary = part.get_summary(prime.PartSummaryParams(
+    model))
+print("Total number of cells: ", summary.n_cells)
+```
+
+## Define size controls
+Set global sizing parameters:
+
+```{python}
+#| eval: false
+model.set_global_sizing_params(
+    prime.GlobalSizingParams(min=0.5, max=16.0,
+        growth_rate=1.2)
+)
+```
+
+Define the curvature size control:
+```{python}
+#| eval: false
+curvature_control = model.control_data.create_size_control(
+  prime.SizingType.CURVATURE
+)
+control_name = "Curvature_Size_Control"
+curvature_control.set_suggested_name(control_name)
+scope = prime.ScopeDefinition(
+    model,
+    evaluation_type=prime.ScopeEvaluationType.LABELS,
+    label_expression="*",
+)
+curvature_control.set_scope(scope)
+curvature_control.set_curvature_sizing_params(
+    prime.CurvatureSizingParams(model, normal_angle=18)
+)
+```
+
+## Generate wrapper surface mesh
+Generate the wrapper surface mesh:
+```{python}
+#| eval: false
+mesher.wrap(
+  min_size=0.5,
+  max_size=16,
+  input_parts="flange,pipe",
+  use_existing_features=True,
+)
+```
+
+## Generate surface mesh
+Generate the surface mesh based on specified minimum and
+maximum sizes:
+
+```{python}
+#| eval: false
+mesher.surface_mesh(
+    min_size=0.5,
+    max_size=16,
+    generate_quads=True,
+)
+```
+
+Generate the surface mesh based on size controls:
+```{python}
+#| eval: false
+control_name = "Curvature_Size_Control"
+mesher.surface_mesh_with_size_controls(
+    control_name,
+)
+```
+## Analyze surface mesh
+Generate surface mesh diagnostics:
+
+```{python}
+#| eval: false
+surface_scope = prime.ScopeDefinition(model, part_expression="*")
+diag = prime.SurfaceSearch(model)
+diag_params = prime.SurfaceDiagnosticSummaryParams(
+    model,
+    scope=surface_scope,
+    compute_free_edges=True,
+)
+diag_res = diag.get_surface_diagnostic_summary(diag_params)
+print("Number of free edges : ", diag_res.n_free_edges)
+```
+Generate surface mesh quality metrics:
+
+```{python}
+#| eval: false
+face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
+quality = prime.SurfaceSearch(model)
+quality_params = prime.SurfaceQualitySummaryParams(
+    model=model,
+    scope=surface_scope,
+    face_quality_measures=[face_quality_measures],
+    quality_limit=[0.9],
+)
+qual_summary_res = quality.get_surface_quality_summary(quality_params)
+print(
+    "Maximum surface skewness : ",
+    qual_summary_res.quality_results[0].max_quality,
+)
+```
+
+## Generate volume mesh
+Generate a volume mesh:
+```{python}
+#| eval: false
+mesher.volume_mesh(
+    volume_fill_type=prime.VolumeFillType.HEXCOREPOLY,
+)
+```

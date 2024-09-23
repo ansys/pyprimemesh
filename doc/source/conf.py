@@ -58,6 +58,10 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
+    "cheatsheet": {
+        "file": "cheatsheet/cheat_sheet.qmd",
+        "title": "PyPrimeMesh cheat sheet",
+    },
 }
 
 # Sphinx extensions
