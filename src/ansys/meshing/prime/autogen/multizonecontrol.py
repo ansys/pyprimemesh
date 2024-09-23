@@ -87,7 +87,7 @@ class MultiZoneControl(CoreObject):
         self._model._print_logs_after_command("set_surface_scope")
 
     def set_map_mesh_params(self, scope_info : MultiZoneMapMeshParams):
-        """ Sets the parameters for map meshing in terms of topofaces during MultiZone mesh.
+        """ Set the parameters for map meshing in terms of topofaces during MultiZone mesh.
 
 
         Parameters
@@ -114,7 +114,7 @@ class MultiZoneControl(CoreObject):
         self._model._print_logs_after_command("set_map_mesh_params")
 
     def set_sweep_mesh_params(self, scope_info : MultiZoneSweepMeshParams):
-        """ Sets the parameters for sweep meshing in terms of topofaces during MultiZone mesh.
+        """ Set the parameters for sweep meshing in terms of topofaces during MultiZone mesh.
 
 
         Parameters

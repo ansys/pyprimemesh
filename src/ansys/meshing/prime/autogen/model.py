@@ -73,7 +73,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteResults(model = self, json_data = result)
 
     def merge_parts(self, part_ids : Iterable[int], params : MergePartsParams) -> MergePartsResults:
-        """ Merges given parts into one.
+        """ Merge given parts into one.
 
 
         Parameters
@@ -108,7 +108,7 @@ class Model(CoreObject, CommunicationManager):
         return MergePartsResults(model = self, json_data = result)
 
     def set_global_sizing_params(self, params : GlobalSizingParams) -> SetSizingResults:
-        """ Sets the global sizing parameters to initialize surfer parameters and various size control parameters.
+        """ Set the global sizing parameters to initialize surfer parameters and various size control parameters.
 
 
         Parameters
@@ -203,7 +203,7 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("activate_volumetric_size_fields")
 
     def deactivate_volumetric_size_fields(self, size_field_ids : Iterable[int]):
-        """ Deactivate the sizefields identified by the given sizefield ids.
+        """ Deactivate the size fields with the given size field ids.
 
 
         Parameters
@@ -294,6 +294,29 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("get_num_threads")
         return result
 
+    def get_num_compute_nodes(self) -> int:
+        """ Get the number of compute nodes.
+
+
+        Returns
+        -------
+        int
+            Returns the number of compute nodes.
+
+
+        Examples
+        --------
+        >>> model = client.model
+        >>> num_compute_nodes = model.get_num_compute_nodes()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Model/GetNumComputeNodes"
+        self._print_logs_before_command("get_num_compute_nodes", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_num_compute_nodes")
+        return result
+
     def start_distributed_meshing(self):
         """ Enables distributed meshing mode.
 
@@ -348,7 +371,7 @@ class Model(CoreObject, CommunicationManager):
         return CreateZoneResults(model = self, json_data = result)
 
     def delete_zone(self, zone_id : int) -> DeleteZoneResults:
-        """ Deletes zone identified with the given id.
+        """ Deletes zone with the given id.
 
 
         Parameters
@@ -379,7 +402,7 @@ class Model(CoreObject, CommunicationManager):
         return DeleteZoneResults(model = self, json_data = result)
 
     def get_zone_by_name(self, zone_name : str) -> int:
-        """ Gets the zone by name.
+        """ Gets the zone with the provided name.
 
 
         Parameters
@@ -421,7 +444,7 @@ class Model(CoreObject, CommunicationManager):
         Returns
         -------
         str
-            Return the name. Return empty name if the id is invalid.
+            Return the zone name. Return empty name if the id is invalid.
 
 
         Examples
@@ -441,7 +464,7 @@ class Model(CoreObject, CommunicationManager):
         return result
 
     def set_suggested_zone_name(self, id : int, name : str) -> SetNameResults:
-        """ Sets the unique name for zone with given id based on the given suggested name.
+        """ Sets the unique name for zone with given id based on the suggested name.
 
 
         Parameters
@@ -475,6 +498,35 @@ class Model(CoreObject, CommunicationManager):
         result = self._comm.serve(self, command_name, self._object_id, args=args)
         self._print_logs_after_command("set_suggested_zone_name", SetNameResults(model = self, json_data = result))
         return SetNameResults(model = self, json_data = result)
+
+    def set_working_directory(self, path : str):
+        """ Set working directory.
+
+        Set working directory to be considered for file i/o when file paths are relative.
+
+        Parameters
+        ----------
+        path : str
+            Path to the directory.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model = prime.local_model
+        >>> zones = model.set_working_directory("C:/input_files")
+
+        """
+        if not isinstance(path, str):
+            raise TypeError("Invalid argument type passed for 'path'. Valid argument type is str.")
+        args = {"path" : path}
+        command_name = "PrimeMesh::Model/SetWorkingDirectory"
+        self._print_beta_api_warning("set_working_directory")
+        self._print_logs_before_command("set_working_directory", args)
+        self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_working_directory")
 
     @property
     def id(self):

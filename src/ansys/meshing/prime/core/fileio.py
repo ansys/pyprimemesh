@@ -336,6 +336,62 @@ class FileIO(_FileIO):
             result = super().export_mapdl_cdb(temp_file_name, params)
         return result
 
+    def initialize_cdb_export_params(
+        self, params: ExportMapdlCdbParams, major_version: int, minor_version: int
+    ) -> ExportMapdlCdbParams:
+        """
+        Initialize specific CDB export parameters based on the given version.
+
+        This function sets the use_compact_format and export_fasteners_as_swgen
+        parameters of the provided ExportMapdlCdbParams object based on the given
+        major and minor version numbers. Other parameters remain unchanged.
+
+        Parameters
+        ----------
+        params : ExportMapdlCdbParams
+            The CDB export parameters object to be modified.
+        major_version : int
+            The major version number.
+        minor_version : int
+            The minor version number.
+
+        Returns
+        -------
+        ExportMapdlCdbParams
+            The modified CDB export parameters object.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        The version is formed as "<major_version>r<minor_version>", e.g., "24r1", "25r2".
+        If the version is greater than or equal to "25r1", the use_compact_format and
+        export_fasteners_as_swgen parameters are set to True; otherwise, they are set
+        to False.
+
+        Examples
+        --------
+        >>> file_io = prime.FileIO(model=model)
+        >>> params = prime.ExportMapdlCdbParams()
+        >>> params = file_io.initialize_cdb_export_params(params, 24, 1)
+        >>> params.use_compact_format
+        False
+        >>> params.export_fasteners_as_swgen
+        False
+
+        >>> file_io = prime.FileIO(model=model)
+        >>> params = prime.ExportMapdlCdbParams()
+        >>> params = file_io.initialize_cdb_export_params(params, 25, 2)
+        >>> params.use_compact_format
+        True
+        >>> params.export_fasteners_as_swgen
+        True
+        """
+        version = f"{major_version}r{minor_version}"
+        params.use_compact_format = version >= "25r1"
+        params.export_fasteners_as_swgen = version >= "25r1"
+        return params
+
     def import_fluent_meshing_meshes(
         self,
         file_names: List[str],
@@ -501,14 +557,9 @@ class FileIO(_FileIO):
                 part_id = self._model.parts[0].id
             sim_data = json.loads(super().get_abaqus_simulation_data(part_id))
             if sim_data is not None:
-                mp = dynaexportutils.MaterialProcessor(
-                    self._model, sim_data["Materials"], sim_data["Zones"]
-                )
+                mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
                 all_mat_cmds = mp.get_all_material_commands()
                 params.material_properties = all_mat_cmds + params.material_properties
-                dp = dynaexportutils.DatabaseProcessor(self._model, sim_data["Step"])
-                all_data_cmds = dp.get_output_database_keywords()
-                params.database_keywords = all_data_cmds + params.database_keywords
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
         return result
 
