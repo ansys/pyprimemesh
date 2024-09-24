@@ -26,6 +26,7 @@ PyPrimeMesh client release   Ansys Prime Server release
 0.4.x                        23.2.0 (2023 R2)
 0.5.x                        24.1.0 (2024 R1)
 0.6.x                        24.2.0 (2024 R2)
+0.7.x                        25.1.0 (2025 R1)
 ===========================  ===========================
 
 Installation
