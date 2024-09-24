@@ -69,6 +69,8 @@ __all__ = [
     "download_wheel_ground_scdoc",
     "download_wheel_ground_fmd",
     "download_wheel_ground_dsco",
+    "download_solder_ball_fmd",
+    "download_solder_ball_target_fmd",
 ]
 
 
@@ -129,6 +131,8 @@ class Examples(Enum):
     WHEEL_GROUND_SCDOC = {"filename": "wheel_ground.scdoc", "git_folder": "wheel_ground"}
     WHEEL_GROUND_FMD = {"filename": "wheel_ground.fmd", "git_folder": "wheel_ground"}
     WHEEL_GROUND_DSCO = {"filename": "wheel_ground.dsco", "git_folder": "wheel_ground"}
+    SOLDER_BALL_FMD = {"filename": "solder_ball.fmd", "git_folder": "solder_ball"}
+    SOLDER_BALL_TARGET_FMD = {"filename": "solder_ball_target.fmd", "git_folder": "solder_ball"}
 
 
 _DOWNLOADS = []
@@ -1583,3 +1587,75 @@ def download_wheel_ground_dsco(
 
     """
     return get_file(Examples.WHEEL_GROUND_DSCO, destination, force)
+
+
+def download_solder_ball_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download a FMD file for the solder ball example.
+
+    Parameters
+    ----------
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     solder_ball = prime_examples.download_solder_ball_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(solder_ball, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.SOLDER_BALL_FMD, destination, force)
+
+
+def download_solder_ball_target_fmd(
+    destination: Optional[str] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download a FMD file for the solder ball example.
+
+    Parameters
+    ----------
+    destination : str, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     solder_ball_target = prime_examples.download_solder_ball_target_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(solder_ball_target, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.SOLDER_BALL_TARGET_FMD, destination, force)
