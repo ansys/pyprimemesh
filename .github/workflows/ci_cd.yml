@@ -102,9 +102,10 @@ jobs:
         uses: pyvista/setup-headless-display-action@v2
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v7
+        uses: ansys/actions/doc-build@main
         with:
           check-links: false
+          needs-quarto: true
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
