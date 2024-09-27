@@ -53,6 +53,8 @@ from .examples import (
     download_saddle_bracket_dsco,
     download_saddle_bracket_fmd,
     download_saddle_bracket_scdoc,
+    download_solder_ball_fmd,
+    download_solder_ball_target_fmd,
     download_toy_car_dsco,
     download_toy_car_fmd,
     download_toy_car_pmdat,
