@@ -103,7 +103,7 @@ def test_toycar_tutorial(get_remote_client, get_examples):
         prime.PartSummaryParams(model=model, print_id=False, print_mesh=True)
     )
     # Validate number of tri faces
-    assert math.isclose(178102.0, float(part_summary_res.n_faces), rel_tol=0.02)
+    assert math.isclose(178102.0, float(part_summary_res.n_faces_strict), rel_tol=0.02)
 
     mesher.create_zones_from_labels(
         """tunnel,cabin,outer,component21,component22,component24,component25,
