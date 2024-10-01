@@ -170,3 +170,5 @@ sphinx_gallery_conf = {
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
 }
+
+supress_warnings = ["docutils"]
