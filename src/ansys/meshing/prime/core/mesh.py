@@ -325,7 +325,7 @@ class Mesh(MeshInfo):
         vertices, faces = self._get_vertices_and_surf_faces(face_facet_res, index)
         surf = pv.PolyData(vertices, faces)
         fcolor = np.array(self.get_face_color(part, ColorByType.ZONE))
-        colors = np.tile(fcolor, (surf.n_faces, 1))
+        colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
         surf.disp_mesh = self
         has_mesh = True
@@ -415,7 +415,7 @@ class Mesh(MeshInfo):
         faces = self.compute_face_list_from_structured_nodes(dim)
         surf = pv.PolyData(vertices, faces)
         fcolor = np.array([0, 0, 255])
-        colors = np.tile(fcolor, (surf.n_faces, 1))
+        colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
         surf.disp_mesh = self
         if surf.n_points > 0:
@@ -443,7 +443,7 @@ class Mesh(MeshInfo):
         faces = self.compute_face_list_from_structured_nodes(dim)
         surf = pv.PolyData(vertices, faces)
         fcolor = np.array(color_matrix[1])
-        colors = np.tile(fcolor, (surf.n_faces, 1))
+        colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
         surf.disp_mesh = self
         if surf.n_points > 0:
