@@ -105,6 +105,7 @@ jobs:
         uses: ansys/actions/doc-build@v7
         with:
           check-links: false
+          sphinxopts: "-j auto --keep-going"
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
