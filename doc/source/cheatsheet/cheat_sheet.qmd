@@ -107,9 +107,10 @@ curvature_control = model.control_data.create_size_control(
 )
 control_name = "Curvature_Size_Control"
 curvature_control.set_suggested_name(control_name)
+eval_type = prime.ScopeEvaluationType.LABELS
 scope = prime.ScopeDefinition(
     model,
-    evaluation_type=prime.ScopeEvaluationType.LABELS,
+    evaluation_type=eval_type,
     label_expression="*",
 )
 curvature_control.set_scope(scope)
@@ -158,12 +159,14 @@ Generate surface mesh diagnostics:
 #| eval: false
 surface_scope = prime.ScopeDefinition(model, part_expression="*")
 diag = prime.SurfaceSearch(model)
-diag_params = prime.SurfaceDiagnosticSummaryParams(
+diag_prms = prime.SurfaceDiagnosticSummaryParams(
     model,
     scope=surface_scope,
     compute_free_edges=True,
 )
-diag_res = diag.get_surface_diagnostic_summary(diag_params)
+diag_res = diag.get_surface_diagnostic_summary(
+  diag_prms
+)
 print("Number of free edges : ", diag_res.n_free_edges)
 ```
 Generate surface mesh quality metrics:
@@ -178,10 +181,12 @@ quality_params = prime.SurfaceQualitySummaryParams(
     face_quality_measures=[face_quality_measures],
     quality_limit=[0.9],
 )
-qual_summary_res = quality.get_surface_quality_summary(quality_params)
+qual_summary_res = quality.get_surface_quality_summary(
+  quality_params
+)
 print(
     "Maximum surface skewness : ",
-    qual_summary_res.quality_results[0].max_quality,
+    qual_summary_res.quality_results[0].max_quality
 )
 ```
 
@@ -189,7 +194,8 @@ print(
 Generate a volume mesh:
 ```{python}
 #| eval: false
+volume_fill_type = prime.VolumeFillType.HEXCOREPOLY
 mesher.volume_mesh(
-    volume_fill_type=prime.VolumeFillType.HEXCOREPOLY,
+    volume_fill_type=volume_fill_type,
 )
 ```
