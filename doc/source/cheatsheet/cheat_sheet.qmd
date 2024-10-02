@@ -1,7 +1,8 @@
 ---
 title: PyPrimeMesh cheat sheet
 format: cheat_sheet-pdf
-version: main
+params:
+  version: main
 footer: PyPrimeMesh
 footerlinks:
   - urls: 'https://prime.docs.pyansys.com/version/stable/'
@@ -14,7 +15,7 @@ footerlinks:
     text: API reference
 
 execute:
-    # output: false
+    output: false
     eval: false
 
 latex-clean: true

@@ -61,6 +61,7 @@ html_theme_options = {
     "cheatsheet": {
         "file": "cheatsheet/cheat_sheet.qmd",
         "title": "PyPrimeMesh cheat sheet",
+        "version": __version__,
     },
 }
 
