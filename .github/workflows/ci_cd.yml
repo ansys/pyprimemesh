@@ -106,6 +106,7 @@ jobs:
         with:
           check-links: false
           needs-quarto: true
+          sphinxopts: "-j auto --keep-going"
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1

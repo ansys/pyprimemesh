@@ -18,22 +18,27 @@ For more information on getting a licensed copy of Ansys, visit the `Ansys websi
 
 This table provides compatibility information:
 
-===========================  ===========================
-PyPrimeMesh client release   Ansys Prime Server release
-===========================  ===========================
-0.2.x                        23.1.0 (2023 R1) 
-0.3.x                        23.1.1 (2023 R1 SP1)  
-0.4.x                        23.2.0 (2023 R2)
-0.5.x                        24.1.0 (2024 R1)
-0.6.x                        24.2.0 (2024 R2)
-0.7.x                        25.1.0 (2025 R1)
-===========================  ===========================
++----------------------------+----------------------------+--------------------------+
+| PyPrimeMesh client release | Ansys Prime Server release |Supported python versions |
++============================+============================+==========================+
+| 0.2.x                      | 23.1.0 (2023 R1)           | 3.7 to 3.11              |
+|                            |                            |                          |
+| 0.3.x                      | 23.1.1 (2023 R1 SP1)       | 3.7 to 3.11              |
+|                            |                            |                          |
+| 0.4.x                      | 23.2.0 (2023 R2)           | 3.8 to 3.11              |
+|                            |                            |                          |
+| 0.5.x                      | 24.1.0 (2024 R1)           | 3.8 to 3.11              |
+|                            |                            |                          |
+| 0.6.x                      | 24.2.0 (2024 R2)           | 3.8 to 3.11              |
+|                            |                            |                          |
+| 0.7.x                      | 25.1.0 (2025 R1)           | 3.10 to 3.12             |
++----------------------------+----------------------------+--------------------------+
 
 Installation
 ------------
 
-The ``ansys-meshing-prime`` package currently supports Python 3.8
-to Python 3.11 on the Windows and Linux operating systems.
+The ``ansys-meshing-prime`` package currently supports Python 3.10
+to Python 3.12 on the Windows and Linux operating systems.
 
 You can install PyPrimeMesh with all dependencies directly from `PyPI <https://pypi.org/>`_  with this command:
 
