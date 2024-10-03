@@ -36,7 +36,6 @@ jupyter:
 Launch and exit PyPrimeMesh server from Python in gRPC
 mode:
 ```{python}
-#| eval: false
 # Launch PyPrimeMesh server
 from ansys.meshing import prime
 
@@ -52,7 +51,6 @@ and port 50055 with the number of processes set to 4:
 
 
 ```{python}
-#| eval: false
 with prime.launch_prime(
     ip="127.0.0.1", port=50055, n_procs=4
     ) as prime_client:
@@ -64,7 +62,6 @@ Read or write files of different formats based on file
 extensions:
 
 ```{python}
-#| eval: false
 from ansys.meshing.prime import lucid
 
 # Define \texttt{mesher} object
@@ -81,7 +78,6 @@ mesher.write(cdb_file_name)
 Query for the part summary:
 
 ```{python}
-#| eval: false
 part = model.get_part_by_name("sample_part")
 summary = part.get_summary(prime.PartSummaryParams(
     model))
@@ -92,7 +88,6 @@ print("Total number of cells: ", summary.n_cells)
 Set global sizing parameters:
 
 ```{python}
-#| eval: false
 model.set_global_sizing_params(
     prime.GlobalSizingParams(min=0.5, max=16.0,
         growth_rate=1.2)
@@ -101,7 +96,6 @@ model.set_global_sizing_params(
 
 Define the curvature size control:
 ```{python}
-#| eval: false
 curvature_control = model.control_data.create_size_control(
   prime.SizingType.CURVATURE
 )
@@ -122,7 +116,6 @@ curvature_control.set_curvature_sizing_params(
 ## Generate wrapper surface mesh
 Generate the wrapper surface mesh:
 ```{python}
-#| eval: false
 mesher.wrap(
   min_size=0.5,
   max_size=16,
@@ -136,7 +129,6 @@ Generate the surface mesh based on specified minimum and
 maximum sizes:
 
 ```{python}
-#| eval: false
 mesher.surface_mesh(
     min_size=0.5,
     max_size=16,
@@ -146,7 +138,6 @@ mesher.surface_mesh(
 
 Generate the surface mesh based on size controls:
 ```{python}
-#| eval: false
 control_name = "Curvature_Size_Control"
 mesher.surface_mesh_with_size_controls(
     control_name,
@@ -156,7 +147,6 @@ mesher.surface_mesh_with_size_controls(
 Generate surface mesh diagnostics:
 
 ```{python}
-#| eval: false
 surface_scope = prime.ScopeDefinition(model, part_expression="*")
 diag = prime.SurfaceSearch(model)
 diag_prms = prime.SurfaceDiagnosticSummaryParams(
@@ -172,7 +162,6 @@ print("Number of free edges : ", diag_res.n_free_edges)
 Generate surface mesh quality metrics:
 
 ```{python}
-#| eval: false
 face_quality_measures = prime.FaceQualityMeasure.SKEWNESS
 quality = prime.SurfaceSearch(model)
 quality_params = prime.SurfaceQualitySummaryParams(
@@ -193,7 +182,6 @@ print(
 ## Generate volume mesh
 Generate a volume mesh:
 ```{python}
-#| eval: false
 volume_fill_type = prime.VolumeFillType.HEXCOREPOLY
 mesher.volume_mesh(
     volume_fill_type=volume_fill_type,
