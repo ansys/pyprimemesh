@@ -49,8 +49,6 @@ with prime.launch_prime(timeout=20) as prime_client:
 
 Launch an instance of PyPrimeMesh at IP address 127.0.0.1
 and port 50055 with the number of processes set to 4:
-
-
 ```{python}
 #| eval: false
 with prime.launch_prime(
