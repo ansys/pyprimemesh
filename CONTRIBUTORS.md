@@ -6,6 +6,7 @@
 
 ## Individual Contributors
 
+* [Ninad Kamat](https://github.com/ninad-kamat)
 * [Martin Walters](https://github.com/waltersma)
 * [Hao Lee](https://https://github.com/hlee0122)
 * [Alex Fernandez Luces](https://https://github.com/AlejandroFernandezLuces)
