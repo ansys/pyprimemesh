@@ -1,6 +1,6 @@
 # Contributors
 
-## Project Lead or Owner
+## Project Lead
 
 * [Ravindra Chopade](https://github.com/AlejandroFernandezLuces)
 
