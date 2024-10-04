@@ -2,7 +2,7 @@
 
 ## Project Lead
 
-* [Ravindra Chopade](https://github.com/AlejandroFernandezLuces)
+* [Ravindra Chopade](https://github.com/rchopade7)
 
 ## Individual Contributors
 
