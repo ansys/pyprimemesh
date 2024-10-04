@@ -103,7 +103,7 @@ params = prime.ImportCadParams(
         cad_faceter=prime.CadFaceter.PARASOLID,
         max_edge_size_limit=prime.CadRefacetingMaxEdgeSizeLimit.ABSOLUTE,
         max_edge_size=1.0,
-    )
+    ),
 )
 
 prime.FileIO(model).import_cad(file_name=solder_ball, params=params)
