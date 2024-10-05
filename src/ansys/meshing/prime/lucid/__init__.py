@@ -24,3 +24,4 @@
 '''
 from .mesh_util import LabelToZoneMethod, Mesh
 from .scope import SurfaceScope, VolumeScope
+from .utils import Utility
