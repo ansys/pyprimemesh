@@ -40,7 +40,7 @@ tests = [
   "pyvista[trame]==0.44.1"
 ]
 doc = [
-  "ansys-sphinx-theme==1.1.2",
+  "ansys-sphinx-theme[autoapi]==1.1.2",
   "ansys-tools-visualization-interface==0.4.4",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.8.0",
