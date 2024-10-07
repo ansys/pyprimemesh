@@ -1,0 +1,6 @@
+﻿improve\_by\_auto\_node\_move
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeMeshTool.improve_by_auto_node_move

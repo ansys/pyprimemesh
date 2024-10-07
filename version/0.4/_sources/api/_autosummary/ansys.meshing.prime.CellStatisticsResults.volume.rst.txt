@@ -1,0 +1,6 @@
+﻿volume
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CellStatisticsResults.volume

@@ -1,0 +1,36 @@
+.. vale off
+
+SFPeriodicParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SFPeriodicParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SFPeriodicParams.print_default
+      SFPeriodicParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SFPeriodicParams.angle
+      SFPeriodicParams.axis
+      SFPeriodicParams.center
+   
+   
+
+.. vale on

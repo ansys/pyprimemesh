@@ -1,0 +1,6 @@
+VOLUMESEARCHFAILED
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VOLUMESEARCHFAILED

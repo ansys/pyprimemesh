@@ -1,0 +1,6 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FaceQualityMeasure.from_bytes

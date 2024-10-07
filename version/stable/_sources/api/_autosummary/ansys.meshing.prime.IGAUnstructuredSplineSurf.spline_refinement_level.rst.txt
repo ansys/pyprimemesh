@@ -1,0 +1,6 @@
+spline\_refinement\_level
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.spline_refinement_level
