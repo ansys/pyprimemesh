@@ -84,17 +84,22 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
     """Assemble standalone PyPrimeMesh package using Ansys installation as source."""
     if os.path.exists(dest_package_path):
         shutil.rmtree(dest_package_path, ignore_errors=True)
-
+    
+     #copy entire CPython directory
+    shutil.copytree(os.path.join(AWP_ROOT, "commonfiles", "CPython"), 
+          os.path.join(dest_package_path, "commonfiles", "CPython"), symlinks=True)
+    
     # Copy regular files
     for key, value in unifiedPathDict.items():
-        source = os.path.join(AWP_ROOT, value["path"], key)
-        target = os.path.join(dest_package_path, value["destination"])
-
-        if not os.path.exists(target):
-            os.makedirs(target)
-
-        logging.info("\tcopying source {} --> target {}".format(source, target))
-        shutil.copy(source, target)
+        val_list = value if isinstance(value, list) else [value]
+        for val in val_list:
+            source = os.path.join(AWP_ROOT, val["path"], key)
+            target = os.path.join(dest_package_path, val["path"])
+            if not os.path.exists(target):
+                os.makedirs(target)
+            
+            logging.info("\tcopying source {} --> target {}".format(source, target))
+            shutil.copy(source, target)
 
     # Copy symlinks
     for key, value in allSymlinkDict.items():
@@ -120,7 +125,7 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
         except:
             pass
     # TAR the temporary directory and delete it
-    print(">>> Zipping PyPrimeMesh package directory. This might take some time...")
+    print(">>> Zipping temporary directory. This might take some time...")
     tar_file = shutil.make_archive(
         "LINX64",
         "gztar",
@@ -128,12 +133,12 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
     )
 
     # Move the TAR file to the docker directory
-    print(">>> Moving ZIP file to root directory")
+    # print(">>> Moving ZIP file to temporary directory")
     root = os.path.dirname(os.path.abspath(__file__))
     shutil.move(tar_file, root)
 
 
-def create_docker_image(root_path):
+def create_docker_image(dest_package_path):
     """Create docker image from the archived package."""
     # Check if Docker is installed on the system
     print(">>> Checking if Docker is installed")
@@ -144,8 +149,8 @@ def create_docker_image(root_path):
     # Build the docker image
     print(">>> Building docker image. This might take some time...")
     out = subprocess.run(
-        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:25.1.0", "."],
-        cwd=root_path,
+        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:25.1.0-test", "."],
+        cwd=os.path.dirname(os.path.abspath(__file__)),
         capture_output=True,
     )
 
@@ -180,11 +185,11 @@ if __name__ == "__main__":
             "\nDetails in log file {}.".format(dest_package_path, LOG_FILE)
         )
 
-        logging.info("Creating docker image from Ansys PyPrimeMesh server package...")
-        create_docker_image(root)
+        create_docker_image(dest_package_path)
 
-        logging.info("Removing Ansys PyPrimeMesh server package...")
         shutil.rmtree(dest_package_path)
+        
+        os.remove(os.path.join(root, "LINX64.tar.gz"))
 
     except SystemExit:
         raise
