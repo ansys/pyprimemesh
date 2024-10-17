@@ -84,11 +84,14 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
     """Assemble standalone PyPrimeMesh package using Ansys installation as source."""
     if os.path.exists(dest_package_path):
         shutil.rmtree(dest_package_path, ignore_errors=True)
-    
-     #copy entire CPython directory
-    shutil.copytree(os.path.join(AWP_ROOT, "commonfiles", "CPython"), 
-          os.path.join(dest_package_path, "commonfiles", "CPython"), symlinks=True)
-    
+
+    # copy entire CPython directory
+    shutil.copytree(
+        os.path.join(AWP_ROOT, "commonfiles", "CPython"),
+        os.path.join(dest_package_path, "commonfiles", "CPython"),
+        symlinks=True,
+    )
+
     # Copy regular files
     for key, value in unifiedPathDict.items():
         val_list = value if isinstance(value, list) else [value]
@@ -97,7 +100,7 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
             target = os.path.join(dest_package_path, val["path"])
             if not os.path.exists(target):
                 os.makedirs(target)
-            
+
             logging.info("\tcopying source {} --> target {}".format(source, target))
             shutil.copy(source, target)
 
@@ -188,7 +191,7 @@ if __name__ == "__main__":
         create_docker_image(dest_package_path)
 
         shutil.rmtree(dest_package_path)
-        
+
         os.remove(os.path.join(root, "LINX64.tar.gz"))
 
     except SystemExit:
