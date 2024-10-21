@@ -342,9 +342,10 @@ class FileIO(_FileIO):
         """
         Initialize specific CDB export parameters based on the given version.
 
-        This function sets the use_compact_format and export_fasteners_as_swgen
-        parameters of the provided ExportMapdlCdbParams object based on the given
-        major and minor version numbers. Other parameters remain unchanged.
+        This function sets the use_compact_format, export_fasteners_as_swgen and
+        export_rigid_bodies_as_rbgen parameters of the provided ExportMapdlCdbParams
+        object based on the given major and minor version numbers.
+        Other parameters remain unchanged.
 
         Parameters
         ----------
@@ -365,9 +366,9 @@ class FileIO(_FileIO):
         **This is a beta API**. **The behavior and implementation may change in future**.
 
         The version is formed as "<major_version>r<minor_version>", e.g., "24r1", "25r2".
-        If the version is greater than or equal to "25r1", the use_compact_format and
-        export_fasteners_as_swgen parameters are set to True; otherwise, they are set
-        to False.
+        If the version is greater than or equal to "25r1", the use_compact_format,
+        export_fasteners_as_swgen and export_rigid_bodies_as_rbgen parameters are set
+        to True. Otherwise, they are set to False.
 
         Examples
         --------
@@ -378,6 +379,8 @@ class FileIO(_FileIO):
         False
         >>> params.export_fasteners_as_swgen
         False
+        >>> params.export_rigid_bodies_as_swgen
+        False
 
         >>> file_io = prime.FileIO(model=model)
         >>> params = prime.ExportMapdlCdbParams()
@@ -386,10 +389,13 @@ class FileIO(_FileIO):
         True
         >>> params.export_fasteners_as_swgen
         True
+        >>> params.export_rigid_bodies_as_swgen
+        True
         """
         version = f"{major_version}r{minor_version}"
         params.use_compact_format = version >= "25r1"
         params.export_fasteners_as_swgen = version >= "25r1"
+        params.export_rigid_bodies_as_rbgen = version >= "25r1"
         return params
 
     def import_fluent_meshing_meshes(
@@ -595,10 +601,10 @@ class FileIO(_FileIO):
 
         Supported CAD file formats on Windows are:
 
-        \*.scdoc \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb \*.sat \*.sab
-        \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml \*.prt\* \*.asm\*
-        \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm \*.asm \*.sldprt
-        \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
+        \*.scdoc \*.scdocx \*.dsco \*.fmd \*.agdb \*.pmdb \*.meshdat \*.mechdat \*.dsdb \*.cmdb
+        \*.sat \*.sab \*.dwg \*.dxf \*.model \*.exp \*.CATPart \*.CATProduct \*.cgr \*.3dxml
+        \*.prt\* \*.asm\* \*.iges \*.igs \*.ipt \*.iam \*.jt \*.prt \*.x_t \*.x_b \*.par \*.psm
+        \*.asm \*.sldprt \*.sldasm \*.step \*.stp \*.stl \*.plmxml \*.tgf
 
         Supported CAD file formats on Linux are:
 
@@ -606,7 +612,8 @@ class FileIO(_FileIO):
         \*.CATPart \*.CATProduct \*.iges \*.igs \*.jt \*.x_t \*.x_b \*.step \*.stp
         \*.stl \*.plmxml \*.tgf
 
-        See the documentation for a comprehensive list of supported formats.
+        Refer **Reading and writing files** section in **User guide** for a
+        comprehensive list of supported formats.
 
         Parameters
         ----------
@@ -625,12 +632,11 @@ class FileIO(_FileIO):
         --------
         >>> import ansys.meshing.prime as prime
         >>> # connect client to server and get model from it
-        >>> client = prime.Client(ip="localhost", port=50060)
-        >>> model = client.model
+        >>> client  = prime.Client(ip="localhost", port=50060)
+        >>> model   = client.model
         >>> file_io = prime.FileIO(model=model)
-        >>> params = ImportCadParams(model=model)
-        >>> results = file_io.import_cad(
-                        "/tmp/my_cad.x_t", params=params)
+        >>> params  = prime.ImportCadParams(model=model)
+        >>> results = file_io.import_cad("/tmp/my_cad.x_t", params=params)
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:

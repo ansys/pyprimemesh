@@ -686,6 +686,8 @@ class _MaterialProcessor:
         self._logger = model.python_logger
 
     def _map_zone_type_with_material(self):
+        if self._zone_data is None:
+            return
         for zone in self._zone_data:
             zone_details = self._zone_data[zone]
             if 'Type' not in zone_details:
@@ -1908,7 +1910,13 @@ class _BoundaryProcessor:
                 )
                 self._ampl_commands += ampl_commands
                 # ampl_processor.write_amplitude_table_to_file(ampl_commands)
-            for i in range(first, last):
+            if last > 7:
+                self._logger.warning(
+                    f"Warning: only "
+                    f"({[i for i in range(first, min(last,7))]}) "
+                    f"boundary data dofs from {first} to {last} are processed"
+                )
+            for i in range(first, min(last, 7)):
                 if data_line['node_set'].isnumeric():
                     boundary_commands += f"D, {data_line['node_set']}, {dof_map[i]}, "
                 else:
@@ -3339,6 +3347,15 @@ class _StepProcessor:
                 output_analysis_commands += "OUTRES, EANGL, NONE\n"
                 pass
             output_analysis_commands += "\n"
+
+        if self._model_application == prime.CdbAnalysisType.OUTERPANELSTIFFNESS:
+            output_analysis_commands += "ESEL,S,ENAME,,181\n"
+            output_analysis_commands += "ESEL,A,ENAME,,281\n"
+            output_analysis_commands += "CM,SHELL_THICKNESS_STORAGE,ELEM\n"
+            output_analysis_commands += "ALLSEL\n"
+            output_analysis_commands += "OUTRES, MISC, LAST, SHELL_THICKNESS_STORAGE, ,\n"
+            output_analysis_commands += "\n"
+
         number_interval_to_table = False
         for output in output_data:
             minimum_time_interval = self.get_output_time_interval()
@@ -3468,7 +3485,7 @@ class _StepProcessor:
                                                 )
                                                 output_analysis_commands += "ALLSEL\n"
                                             else:
-                                                output_analysis_commands += "ESEL,S,ELEM,,174\n"
+                                                output_analysis_commands += "ESEL,S,ENAME,,174\n"
                                                 output_analysis_commands += "CM,All_CONTACT,ELEM\n"
                                                 output_analysis_commands += "ALLSEL\n"
                                     output_analysis_commands += "OUTRES, "
@@ -4227,7 +4244,8 @@ def generate_mapdl_commands(
     analysis_settings = ''
     json_simulation_data = json.loads(simulation_data)
     if json_simulation_data is None:
-        model.python_logger.warning("Simulation Data is empty")
+        if not simulation_data == 'null':
+            model.python_logger.warning("Simulation data is empty")
         return all_mat_cmds, analysis_settings
     if "Materials" in json_simulation_data and json_simulation_data["Materials"] is not None:
         mp = _MaterialProcessor(

@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 import enum
 from typing import Dict, Any, Union, List, Iterable
@@ -324,6 +346,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
         Option to enable periodic size field computations.
     periodic_params: SFPeriodicParams, optional
         Periodic parameters to compute the size field.
+    growth_rate_lower_bound: float, optional
+        Lower bound for growth rate.
     json_data: dict, optional
         JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
@@ -337,10 +361,12 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             self,
             enable_multi_threading: bool,
             enable_periodicity: bool,
-            periodic_params: SFPeriodicParams):
+            periodic_params: SFPeriodicParams,
+            growth_rate_lower_bound: float):
         self._enable_multi_threading = enable_multi_threading
         self._enable_periodicity = enable_periodicity
         self._periodic_params = periodic_params
+        self._growth_rate_lower_bound = growth_rate_lower_bound
 
     def __init__(
             self,
@@ -348,6 +374,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             enable_multi_threading: bool = None,
             enable_periodicity: bool = None,
             periodic_params: SFPeriodicParams = None,
+            growth_rate_lower_bound: float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumetricSizeFieldComputeParams`` object.
@@ -362,6 +389,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             Option to enable periodic size field computations.
         periodic_params: SFPeriodicParams, optional
             Periodic parameters to compute the size field.
+        growth_rate_lower_bound: float, optional
+            Lower bound for growth rate.
         json_data: dict, optional
             JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
@@ -373,14 +402,16 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             self.__initialize(
                 json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None,
                 json_data["enablePeriodicity"] if "enablePeriodicity" in json_data else None,
-                SFPeriodicParams(model = model, json_data = json_data["periodicParams"] if "periodicParams" in json_data else None))
+                SFPeriodicParams(model = model, json_data = json_data["periodicParams"] if "periodicParams" in json_data else None),
+                json_data["growthRateLowerBound"] if "growthRateLowerBound" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [enable_multi_threading, enable_periodicity, periodic_params])
+            all_field_specified = all(arg is not None for arg in [enable_multi_threading, enable_periodicity, periodic_params, growth_rate_lower_bound])
             if all_field_specified:
                 self.__initialize(
                     enable_multi_threading,
                     enable_periodicity,
-                    periodic_params)
+                    periodic_params,
+                    growth_rate_lower_bound)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -390,7 +421,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
                     self.__initialize(
                         enable_multi_threading if enable_multi_threading is not None else ( VolumetricSizeFieldComputeParams._default_params["enable_multi_threading"] if "enable_multi_threading" in VolumetricSizeFieldComputeParams._default_params else (json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)),
                         enable_periodicity if enable_periodicity is not None else ( VolumetricSizeFieldComputeParams._default_params["enable_periodicity"] if "enable_periodicity" in VolumetricSizeFieldComputeParams._default_params else (json_data["enablePeriodicity"] if "enablePeriodicity" in json_data else None)),
-                        periodic_params if periodic_params is not None else ( VolumetricSizeFieldComputeParams._default_params["periodic_params"] if "periodic_params" in VolumetricSizeFieldComputeParams._default_params else SFPeriodicParams(model = model, json_data = (json_data["periodicParams"] if "periodicParams" in json_data else None))))
+                        periodic_params if periodic_params is not None else ( VolumetricSizeFieldComputeParams._default_params["periodic_params"] if "periodic_params" in VolumetricSizeFieldComputeParams._default_params else SFPeriodicParams(model = model, json_data = (json_data["periodicParams"] if "periodicParams" in json_data else None))),
+                        growth_rate_lower_bound if growth_rate_lower_bound is not None else ( VolumetricSizeFieldComputeParams._default_params["growth_rate_lower_bound"] if "growth_rate_lower_bound" in VolumetricSizeFieldComputeParams._default_params else (json_data["growthRateLowerBound"] if "growthRateLowerBound" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -402,7 +434,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
     def set_default(
             enable_multi_threading: bool = None,
             enable_periodicity: bool = None,
-            periodic_params: SFPeriodicParams = None):
+            periodic_params: SFPeriodicParams = None,
+            growth_rate_lower_bound: float = None):
         """Set the default values of the ``VolumetricSizeFieldComputeParams`` object.
 
         Parameters
@@ -413,6 +446,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             Option to enable periodic size field computations.
         periodic_params: SFPeriodicParams, optional
             Periodic parameters to compute the size field.
+        growth_rate_lower_bound: float, optional
+            Lower bound for growth rate.
         """
         args = locals()
         [VolumetricSizeFieldComputeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -437,11 +472,13 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             json_data["enablePeriodicity"] = self._enable_periodicity
         if self._periodic_params is not None:
             json_data["periodicParams"] = self._periodic_params._jsonify()
+        if self._growth_rate_lower_bound is not None:
+            json_data["growthRateLowerBound"] = self._growth_rate_lower_bound
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "enable_multi_threading :  %s\nenable_periodicity :  %s\nperiodic_params :  %s" % (self._enable_multi_threading, self._enable_periodicity, '{ ' + str(self._periodic_params) + ' }')
+        message = "enable_multi_threading :  %s\nenable_periodicity :  %s\nperiodic_params :  %s\ngrowth_rate_lower_bound :  %s" % (self._enable_multi_threading, self._enable_periodicity, '{ ' + str(self._periodic_params) + ' }', self._growth_rate_lower_bound)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -474,3 +511,13 @@ class VolumetricSizeFieldComputeParams(CoreObject):
     @periodic_params.setter
     def periodic_params(self, value: SFPeriodicParams):
         self._periodic_params = value
+
+    @property
+    def growth_rate_lower_bound(self) -> float:
+        """Lower bound for growth rate.
+        """
+        return self._growth_rate_lower_bound
+
+    @growth_rate_lower_bound.setter
+    def growth_rate_lower_bound(self, value: float):
+        self._growth_rate_lower_bound = value

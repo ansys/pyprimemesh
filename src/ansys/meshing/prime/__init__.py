@@ -76,6 +76,8 @@ from ansys.meshing.prime.autogen.autoquadmesher import *
 from ansys.meshing.prime.autogen.autoquadmesherstructs import *
 from ansys.meshing.prime.autogen.toposearchstructs import *
 from ansys.meshing.prime.autogen.vtcomposerstructs import *
+from ansys.meshing.prime.autogen.shellblcontrolstructs import *
+from ansys.meshing.prime.autogen.shellblcontrol import *
 
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
 from ansys.meshing.prime.internals.client import Client

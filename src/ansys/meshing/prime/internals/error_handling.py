@@ -224,6 +224,7 @@ prime_error_messages = {
     ErrorCode.WRAPPERPATCHFLOWREGIONS_FAILED: "Failed to create patching surfaces.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Provided hole size is too small hole for dead region.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE: "Base size specified for patching should be positive double.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_EMPTYORINVALIDINPUT: "Provided face zonelet ids for dead region are empty or invalid.",
     ErrorCode.INVALIDWRAPPERCONTROL: "Invalid wrapper control.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE: "Gap size specified for close gaps should be positive double.",
     ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE: "Scope specified for close gaps is invalid.",
@@ -335,6 +336,16 @@ prime_error_messages = {
     ErrorCode.ZEROELEMENTSREADFROMCDBFILE: "No mesh elements found. Check the input CDB file.",
     ErrorCode.ZERONODESREADFROMCDBFILE: "No nodes found. Check the input CDB file.",
     ErrorCode.ZEROELEMENTSFORCDBEXPORT: "No mesh elements found for CDB export. Check if the model is meshed, or set write_by_zones in ExportMapdlCdbParams to false if zones are not defined.",
+    ErrorCode.SHELLBLFAILED: "ShellBL creation failed.",
+    ErrorCode.SHELLBLQUADS: "ShellBL quads.",
+    ErrorCode.SHELLBLNOMESH: "ShellBL is not supported for unmeshed topofaces.",
+    ErrorCode.SHELLBLFEWLAYERS: "Only few ShellBL layers are created.",
+    ErrorCode.SHELLBLWRONGTOPO: "Found topofaces with invalid topology.",
+    ErrorCode.OGRIDREFINEFAILED: "Post refinement of ShellBl quads failed.",
+    ErrorCode.SPLITTOTRIFAILED: "ShellBL quads split to triangles failed.",
+    ErrorCode.INVALIDSHELLBLCONTROLS: "Invalid ShellBL controls.",
+    ErrorCode.INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY: "Invalid scope entity.",
+    ErrorCode.PERIODICEDGESNOTSUPPORTEDFORSHELLBL: "Periodic surfaces selected for ShellBL generation are not supported.",
 }
 
 prime_warning_messages = {

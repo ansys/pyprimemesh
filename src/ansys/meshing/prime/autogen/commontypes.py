@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 import enum
 from typing import Dict, Any, Union, List, Iterable
@@ -76,3 +98,23 @@ class SurfaceFeatureType(enum.IntEnum):
     """Face edges at zonelet boundary are considered as feature."""
     FEATUREORZONELETBOUNDARY = 5
     """Face edges at zonelet boundary or with normal angle more than threshold are considered as feature."""
+
+class ShellBLOffsetType(enum.IntEnum):
+    """Type of offset method during ShellBL generation.
+    """
+    ASPECTRATIO = 0
+    """Option to set ShellBL offset type as Aspect Ratio.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    LASTRATIO = 1
+    """Option to set ShellBL offset type as Last Ratio.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    UNIFORM = 2
+    """Option to set ShellBL offset type as Uniform.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CURVATUREBASED = 4
+    """Option to set ShellBL offset type as CurvatureBased.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
