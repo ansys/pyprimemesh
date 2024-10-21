@@ -32,6 +32,7 @@ from ansys.meshing.prime.autogen.model import Model
 from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.prismcontrol import PrismControl
+from ansys.meshing.prime.autogen.shellblcontrol import ShellBLControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
@@ -68,6 +69,7 @@ class ControlData(_ControlData):
         self._thin_volume_controls = []
         self._volume_controls = []
         self._periodic_controls = []
+        self._shell_bl_controls = []
         _ControlData.__init__(self, model, id, object_id, name)
 
     def get_wrapper_control_by_name(self, name) -> WrapperControl:
@@ -151,7 +153,6 @@ class ControlData(_ControlData):
         PrismControl
             Prism control.
 
-
         Examples
         --------
         >>> prism_control = model.control_data.create_prism_control()
@@ -161,6 +162,24 @@ class ControlData(_ControlData):
         new_prism_control = PrismControl(self._model, res[0], res[1], res[2])
         self._prism_controls.append(new_prism_control)
         return new_prism_control
+
+    def create_shell_bl_control(self) -> ShellBLControl:
+        """Create a ShellBL control.
+
+        Returns
+        -------
+        ShellBLControl
+            ShellBL Control.
+
+        Examples
+        --------
+        >>> shell_bl_control = model.control_data.create_shell_bl_control()
+
+        """
+        res = _ControlData.create_shell_bl_control(self)
+        new_shell_bl_control = ShellBLControl(self._model, res[0], res[1], res[2])
+        self._shell_bl_controls.append(new_shell_bl_control)
+        return new_shell_bl_control
 
     def create_thin_volume_control(self) -> ThinVolumeControl:
         """Create a thin volume control.
@@ -266,6 +285,29 @@ class ControlData(_ControlData):
                 return prism_control
         return None
 
+    def get_shell_bl_control_by_name(self, name: str) -> ShellBLControl:
+        """Get a shell bl control by name.
+
+        Parameters
+        ----------
+        name : str
+            Name of the shell bl control.
+
+        Returns
+        -------
+        ShellBLControl
+            Shell BL control.
+
+        Examples
+        --------
+        >>> shell_bl_control = model.control_data.get_shell_bl_control_by_name("ShellBLControl-1")
+
+        """
+        for shell_bl_control in self._shell_bl_controls:
+            if shell_bl_control.name == name:
+                return shell_bl_control
+        return None
+
     def get_thin_volume_control_by_name(self, name: str) -> ThinVolumeControl:
         """Get a thin volume control by name.
 
@@ -323,6 +365,10 @@ class ControlData(_ControlData):
                     if prism_control.id == id:
                         self._prism_controls.remove(prism_control)
                         break
+                for shell_bl_control in self._shell_bl_controls:
+                    if shell_bl_control.id == id:
+                        self._shell_bl_controls.remove(shell_bl_control)
+                        break
                 for thin_volume_control in self._thin_volume_controls:
                     if thin_volume_control.id == id:
                         self._thin_volume_controls.remove(thin_volume_control)
@@ -346,6 +392,9 @@ class ControlData(_ControlData):
 
     def _update_prism_controls(self, c_data: List):
         self._prism_controls = [PrismControl(self._model, c[0], c[1], c[2]) for c in c_data]
+
+    def _update_shell_bl_controls(self, c_data: List):
+        self._shell_bl_controls = [ShellBLControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
     def _update_wrapper_controls(self, c_data: List):
         self._wrapper_controls = [WrapperControl(self._model, c[0], c[1], c[2]) for c in c_data]
@@ -468,6 +517,22 @@ class ControlData(_ControlData):
         return self._thin_volume_controls
 
     @property
+    def shell_bl_controls(self) -> List[ShellBLControl]:
+        """Get the shell bl controls.
+
+        Returns
+        -------
+        List[ShellBLControl]
+            List of shell bl controls.
+
+        Examples
+        --------
+        >>> shell_bl_control = model.control_data.shell_bl_controls
+
+        """
+        return self._shell_bl_controls
+
+    @property
     def wrapper_controls(self) -> List[WrapperControl]:
         """Get the wrapper controls.
 
@@ -489,7 +554,7 @@ class ControlData(_ControlData):
         Returns
         -------
         List[MultiZoneControl]
-            Returns the list of mutlizone controls.
+            Returns the list of multizone controls.
 
         Examples
         --------

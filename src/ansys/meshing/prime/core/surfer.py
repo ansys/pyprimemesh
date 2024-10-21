@@ -29,8 +29,10 @@ from ansys.meshing.prime.autogen.surfer import Surfer as _Surfer
 # isort: split
 from ansys.meshing.prime.autogen.coreobject import CoreObject
 from ansys.meshing.prime.autogen.surferstructs import (
+    CreateShellBLResults,
     LocalSurferParams,
     LocalSurferResults,
+    ShellBLParams,
     SurferParams,
     SurferResults,
 )
@@ -83,6 +85,37 @@ class Surfer(CoreObject):
         """
         with _Surfer(model=self._model, part_id=part_id) as surfer:
             return surfer.mesh_topo_faces(topo_faces, params)
+
+    def create_shell_bl_using_controls(
+        self, part_id: int, shellbl_control_ids: Iterable[int], shellbl_params: ShellBLParams
+    ) -> CreateShellBLResults:
+        """Create ShellBL using data stored in controls.
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part.
+        shellbl_control_ids : Iterable[int]
+            Ids of ShellBL control.
+        shellbl_params : ShellBLParams
+            Parameters related to ShellBL.
+
+        Returns
+        -------
+        CreateShellBLResults
+            Returns the CreateShellBLResults.
+
+        Examples
+        --------
+        >>> results = surfer.create_shell_bl_using_controls(
+                part_id, shellbl_control_ids, shellbl_params
+            )
+
+        """
+        with _Surfer(model=self._model, part_id=part_id) as surfer:
+            return surfer.create_shell_bl_using_controls(
+                part_id, shellbl_control_ids, shellbl_params
+            )
 
     def remesh_face_zonelets_locally(
         self,

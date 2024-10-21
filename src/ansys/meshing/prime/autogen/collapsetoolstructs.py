@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 import enum
 from typing import Dict, Any, Union, List, Iterable
@@ -23,6 +45,10 @@ class CollapseParams(CoreObject):
         Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
     target_skewness: float, optional
         Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+    keep_edge_connectivity: bool, optional
+        Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``CollapseParams`` object with provided parameters.
 
@@ -37,11 +63,13 @@ class CollapseParams(CoreObject):
             feature_type: SurfaceFeatureType,
             collapse_ratio: float,
             preserve_quality: bool,
-            target_skewness: float):
+            target_skewness: float,
+            keep_edge_connectivity: bool):
         self._feature_type = SurfaceFeatureType(feature_type)
         self._collapse_ratio = collapse_ratio
         self._preserve_quality = preserve_quality
         self._target_skewness = target_skewness
+        self._keep_edge_connectivity = keep_edge_connectivity
 
     def __init__(
             self,
@@ -50,6 +78,7 @@ class CollapseParams(CoreObject):
             collapse_ratio: float = None,
             preserve_quality: bool = None,
             target_skewness: float = None,
+            keep_edge_connectivity: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CollapseParams`` object.
@@ -66,6 +95,10 @@ class CollapseParams(CoreObject):
             Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
         target_skewness: float, optional
             Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+        keep_edge_connectivity: bool, optional
+            Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``CollapseParams`` object with provided parameters.
 
@@ -78,15 +111,17 @@ class CollapseParams(CoreObject):
                 SurfaceFeatureType(json_data["featureType"] if "featureType" in json_data else None),
                 json_data["collapseRatio"] if "collapseRatio" in json_data else None,
                 json_data["preserveQuality"] if "preserveQuality" in json_data else None,
-                json_data["targetSkewness"] if "targetSkewness" in json_data else None)
+                json_data["targetSkewness"] if "targetSkewness" in json_data else None,
+                json_data["keepEdgeConnectivity"] if "keepEdgeConnectivity" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [feature_type, collapse_ratio, preserve_quality, target_skewness])
+            all_field_specified = all(arg is not None for arg in [feature_type, collapse_ratio, preserve_quality, target_skewness, keep_edge_connectivity])
             if all_field_specified:
                 self.__initialize(
                     feature_type,
                     collapse_ratio,
                     preserve_quality,
-                    target_skewness)
+                    target_skewness,
+                    keep_edge_connectivity)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -97,7 +132,8 @@ class CollapseParams(CoreObject):
                         feature_type if feature_type is not None else ( CollapseParams._default_params["feature_type"] if "feature_type" in CollapseParams._default_params else SurfaceFeatureType(json_data["featureType"] if "featureType" in json_data else None)),
                         collapse_ratio if collapse_ratio is not None else ( CollapseParams._default_params["collapse_ratio"] if "collapse_ratio" in CollapseParams._default_params else (json_data["collapseRatio"] if "collapseRatio" in json_data else None)),
                         preserve_quality if preserve_quality is not None else ( CollapseParams._default_params["preserve_quality"] if "preserve_quality" in CollapseParams._default_params else (json_data["preserveQuality"] if "preserveQuality" in json_data else None)),
-                        target_skewness if target_skewness is not None else ( CollapseParams._default_params["target_skewness"] if "target_skewness" in CollapseParams._default_params else (json_data["targetSkewness"] if "targetSkewness" in json_data else None)))
+                        target_skewness if target_skewness is not None else ( CollapseParams._default_params["target_skewness"] if "target_skewness" in CollapseParams._default_params else (json_data["targetSkewness"] if "targetSkewness" in json_data else None)),
+                        keep_edge_connectivity if keep_edge_connectivity is not None else ( CollapseParams._default_params["keep_edge_connectivity"] if "keep_edge_connectivity" in CollapseParams._default_params else (json_data["keepEdgeConnectivity"] if "keepEdgeConnectivity" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -110,7 +146,8 @@ class CollapseParams(CoreObject):
             feature_type: SurfaceFeatureType = None,
             collapse_ratio: float = None,
             preserve_quality: bool = None,
-            target_skewness: float = None):
+            target_skewness: float = None,
+            keep_edge_connectivity: bool = None):
         """Set the default values of the ``CollapseParams`` object.
 
         Parameters
@@ -123,6 +160,8 @@ class CollapseParams(CoreObject):
             Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
         target_skewness: float, optional
             Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+        keep_edge_connectivity: bool, optional
+            Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
         """
         args = locals()
         [CollapseParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -149,11 +188,13 @@ class CollapseParams(CoreObject):
             json_data["preserveQuality"] = self._preserve_quality
         if self._target_skewness is not None:
             json_data["targetSkewness"] = self._target_skewness
+        if self._keep_edge_connectivity is not None:
+            json_data["keepEdgeConnectivity"] = self._keep_edge_connectivity
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "feature_type :  %s\ncollapse_ratio :  %s\npreserve_quality :  %s\ntarget_skewness :  %s" % (self._feature_type, self._collapse_ratio, self._preserve_quality, self._target_skewness)
+        message = "feature_type :  %s\ncollapse_ratio :  %s\npreserve_quality :  %s\ntarget_skewness :  %s\nkeep_edge_connectivity :  %s" % (self._feature_type, self._collapse_ratio, self._preserve_quality, self._target_skewness, self._keep_edge_connectivity)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -196,6 +237,18 @@ class CollapseParams(CoreObject):
     @target_skewness.setter
     def target_skewness(self, value: float):
         self._target_skewness = value
+
+    @property
+    def keep_edge_connectivity(self) -> bool:
+        """Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._keep_edge_connectivity
+
+    @keep_edge_connectivity.setter
+    def keep_edge_connectivity(self, value: bool):
+        self._keep_edge_connectivity = value
 
 class CollapseResults(CoreObject):
     """Results associated with collapse face elements.

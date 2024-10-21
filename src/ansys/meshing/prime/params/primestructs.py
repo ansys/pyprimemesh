@@ -45,6 +45,7 @@ from ansys.meshing.prime.autogen.partstructs import *
 from ansys.meshing.prime.autogen.periodiccontrolstructs import *
 from ansys.meshing.prime.autogen.prismcontrolstructs import *
 from ansys.meshing.prime.autogen.scaffolderstructs import *
+from ansys.meshing.prime.autogen.shellblcontrolstructs import *
 from ansys.meshing.prime.autogen.sizecontrolstructs import *
 from ansys.meshing.prime.autogen.sizefieldstructs import *
 from ansys.meshing.prime.autogen.splittoolstructs import *

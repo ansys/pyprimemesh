@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 import enum
 from typing import Dict, Any, Union, List, Iterable
@@ -3053,6 +3075,10 @@ class ExportMapdlCdbParams(CoreObject):
         Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    export_rigid_bodies_as_rbgen: bool, optional
+        Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     write_thickness_file: bool, optional
         Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
 
@@ -3086,6 +3112,7 @@ class ExportMapdlCdbParams(CoreObject):
             analysis_settings_file_name: str,
             use_compact_format: bool,
             export_fasteners_as_swgen: bool,
+            export_rigid_bodies_as_rbgen: bool,
             write_thickness_file: bool,
             contact_element_types: ContactElementTypeParams):
         self._config_settings = config_settings
@@ -3102,6 +3129,7 @@ class ExportMapdlCdbParams(CoreObject):
         self._analysis_settings_file_name = analysis_settings_file_name
         self._use_compact_format = use_compact_format
         self._export_fasteners_as_swgen = export_fasteners_as_swgen
+        self._export_rigid_bodies_as_rbgen = export_rigid_bodies_as_rbgen
         self._write_thickness_file = write_thickness_file
         self._contact_element_types = contact_element_types
 
@@ -3122,6 +3150,7 @@ class ExportMapdlCdbParams(CoreObject):
             analysis_settings_file_name: str = None,
             use_compact_format: bool = None,
             export_fasteners_as_swgen: bool = None,
+            export_rigid_bodies_as_rbgen: bool = None,
             write_thickness_file: bool = None,
             contact_element_types: ContactElementTypeParams = None,
             json_data : dict = None,
@@ -3188,6 +3217,10 @@ class ExportMapdlCdbParams(CoreObject):
             Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        export_rigid_bodies_as_rbgen: bool, optional
+            Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
 
@@ -3219,10 +3252,11 @@ class ExportMapdlCdbParams(CoreObject):
                 json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None,
                 json_data["useCompactFormat"] if "useCompactFormat" in json_data else None,
                 json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None,
+                json_data["exportRigidBodiesAsRbgen"] if "exportRigidBodiesAsRbgen" in json_data else None,
                 json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
                 ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, use_compact_format, export_fasteners_as_swgen, write_thickness_file, contact_element_types])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, use_compact_format, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_thickness_file, contact_element_types])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -3239,6 +3273,7 @@ class ExportMapdlCdbParams(CoreObject):
                     analysis_settings_file_name,
                     use_compact_format,
                     export_fasteners_as_swgen,
+                    export_rigid_bodies_as_rbgen,
                     write_thickness_file,
                     contact_element_types)
             else:
@@ -3262,6 +3297,7 @@ class ExportMapdlCdbParams(CoreObject):
                         analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)),
                         use_compact_format if use_compact_format is not None else ( ExportMapdlCdbParams._default_params["use_compact_format"] if "use_compact_format" in ExportMapdlCdbParams._default_params else (json_data["useCompactFormat"] if "useCompactFormat" in json_data else None)),
                         export_fasteners_as_swgen if export_fasteners_as_swgen is not None else ( ExportMapdlCdbParams._default_params["export_fasteners_as_swgen"] if "export_fasteners_as_swgen" in ExportMapdlCdbParams._default_params else (json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None)),
+                        export_rigid_bodies_as_rbgen if export_rigid_bodies_as_rbgen is not None else ( ExportMapdlCdbParams._default_params["export_rigid_bodies_as_rbgen"] if "export_rigid_bodies_as_rbgen" in ExportMapdlCdbParams._default_params else (json_data["exportRigidBodiesAsRbgen"] if "exportRigidBodiesAsRbgen" in json_data else None)),
                         write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
                         contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))))
         self._custom_params = kwargs
@@ -3287,6 +3323,7 @@ class ExportMapdlCdbParams(CoreObject):
             analysis_settings_file_name: str = None,
             use_compact_format: bool = None,
             export_fasteners_as_swgen: bool = None,
+            export_rigid_bodies_as_rbgen: bool = None,
             write_thickness_file: bool = None,
             contact_element_types: ContactElementTypeParams = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
@@ -3321,6 +3358,8 @@ class ExportMapdlCdbParams(CoreObject):
             Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
         export_fasteners_as_swgen: bool, optional
             Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+        export_rigid_bodies_as_rbgen: bool, optional
+            Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
         contact_element_types: ContactElementTypeParams, optional
@@ -3371,6 +3410,8 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["useCompactFormat"] = self._use_compact_format
         if self._export_fasteners_as_swgen is not None:
             json_data["exportFastenersAsSwgen"] = self._export_fasteners_as_swgen
+        if self._export_rigid_bodies_as_rbgen is not None:
+            json_data["exportRigidBodiesAsRbgen"] = self._export_rigid_bodies_as_rbgen
         if self._write_thickness_file is not None:
             json_data["writeThicknessFile"] = self._write_thickness_file
         if self._contact_element_types is not None:
@@ -3379,7 +3420,7 @@ class ExportMapdlCdbParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nuse_compact_format :  %s\nexport_fasteners_as_swgen :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._use_compact_format, self._export_fasteners_as_swgen, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }')
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nuse_compact_format :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._use_compact_format, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -3550,6 +3591,18 @@ class ExportMapdlCdbParams(CoreObject):
     @export_fasteners_as_swgen.setter
     def export_fasteners_as_swgen(self, value: bool):
         self._export_fasteners_as_swgen = value
+
+    @property
+    def export_rigid_bodies_as_rbgen(self) -> bool:
+        """Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._export_rigid_bodies_as_rbgen
+
+    @export_rigid_bodies_as_rbgen.setter
+    def export_rigid_bodies_as_rbgen(self, value: bool):
+        self._export_rigid_bodies_as_rbgen = value
 
     @property
     def write_thickness_file(self) -> bool:
