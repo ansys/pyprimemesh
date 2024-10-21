@@ -2,6 +2,46 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.7.0.dev19](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0.dev19) - 2024-10-21
+
+
+### Added
+
+- feat: Add solder ball example [#822](https://github.com/ansys/pyprimemesh/pull/822)
+- Feat/add solder ball example [#838](https://github.com/ansys/pyprimemesh/pull/838)
+
+
+### Fixed
+
+- fix: PyVista deprecation [#899](https://github.com/ansys/pyprimemesh/pull/899)
+- fix: remove extension from authors file [#906](https://github.com/ansys/pyprimemesh/pull/906)
+
+
+### Dependencies
+
+- Bump ansys/actions from 7 to 8 [#910](https://github.com/ansys/pyprimemesh/pull/910)
+
+
+### Documentation
+
+- Bump the doc-dependencies group across 1 directory with 7 updates [#889](https://github.com/ansys/pyprimemesh/pull/889)
+- doc: Add quarto cheat sheet [#891](https://github.com/ansys/pyprimemesh/pull/891)
+- Update 10_wheel_ground_contact_patch.py [#892](https://github.com/ansys/pyprimemesh/pull/892)
+- Update version compatibility in docs [#893](https://github.com/ansys/pyprimemesh/pull/893)
+- Update launch_prime.rst [#897](https://github.com/ansys/pyprimemesh/pull/897)
+- Update python version [#900](https://github.com/ansys/pyprimemesh/pull/900)
+- Update README.md [#902](https://github.com/ansys/pyprimemesh/pull/902)
+- Update 11_solder_ball.py [#909](https://github.com/ansys/pyprimemesh/pull/909)
+
+
+### Maintenance
+
+- Update pyproject.toml [#883](https://github.com/ansys/pyprimemesh/pull/883)
+- chore: update CHANGELOG for v0.7.0.dev14 [#890](https://github.com/ansys/pyprimemesh/pull/890)
+- maint: Remove branch action in favor of rulesets [#898](https://github.com/ansys/pyprimemesh/pull/898)
+- Create AUTHORS file [#903](https://github.com/ansys/pyprimemesh/pull/903)
+- MAINT: update code form ADO 0.7.0.dev19 [#916](https://github.com/ansys/pyprimemesh/pull/916)
+
 ## [0.7.0.dev14](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0.dev14) - 2024-09-23
 
 
