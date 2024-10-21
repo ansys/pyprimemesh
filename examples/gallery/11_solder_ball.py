@@ -46,8 +46,8 @@ Procedure
 ~~~~~~~~~~
 #. Import libraries necessary to run the script.
 #. Launch an Ansys Prime Server instance.
-#. Import stackable simplified CAD geometry.
-#. Connect the geometry.
+#. Import stackable simplified CAD geometry with refaceting.
+#. Connect the geometry using scaffolding.
 #. Mesh with hex dominant elements using the volume sweeper.
 #. Import the target CAD geometry for the solders for match morphing.
 #. Locally match morph the simplified mesh to the target spherical solders.
@@ -85,11 +85,26 @@ model = prime_client.model
 # The model has multiple layers either side of several solder balls with pads
 # and contains an infill volume around the solder. During import, the part
 # creation type is set to BODY so that each body in the CAD is imported as a
-# separate part. Labels can be assigned to manage the entities of each volume.
+# separate part. Refaceting is specified for more control of the scaffolding
+# operation. Consistent faceting for the curved surfaces to be joined can be
+# obtained by specifying CadRefacetingMaxEdgeSizeLimit as ABSOLUTE. To avoid
+# over refinement of the faceting the max_edge_size is allowed to reach a size
+# of 1.0. Labels can be assigned to manage the entities of each volume.
 
 solder_ball = prime.examples.download_solder_ball_fmd()
 
-params = prime.ImportCadParams(model, append=True, part_creation_type=prime.PartCreationType.BODY)
+params = prime.ImportCadParams(
+    model,
+    append=True,
+    part_creation_type=prime.PartCreationType.BODY,
+    refacet=True,
+    cad_refaceting_params=prime.CadRefacetingParams(
+        model,
+        cad_faceter=prime.CadFaceter.PARASOLID,
+        max_edge_size_limit=prime.CadRefacetingMaxEdgeSizeLimit.ABSOLUTE,
+        max_edge_size=1.0,
+    ),
+)
 
 prime.FileIO(model).import_cad(file_name=solder_ball, params=params)
 
@@ -155,6 +170,8 @@ display.show()
 # Create the base face to quad surface mesh and use for sweeping.
 # Stack the base face to create the volume mesh.
 # Delete topology on mesh part to allow use of surface utilities and feature extraction.
+# A large lateral defeature tolerance of 0.1 is used to avoid additional topo nodes
+# from scaffolding impacting the final mesh.
 
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.1, max=0.4))
 
@@ -169,7 +186,7 @@ stacker_params = prime.MeshStackerParams(
     direction=[0, 1, 0],
     max_offset_size=0.4,
     delete_base=True,
-    lateral_defeature_tolerance=0.01,
+    lateral_defeature_tolerance=0.1,
     stacking_defeature_tolerance=0.01,
     size_control_ids=[size_control.id],
 )
