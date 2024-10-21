@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
@@ -247,6 +269,73 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_before_command("delete_volumetric_size_fields", args)
         self._comm.serve(self, command_name, self._object_id, args=args)
         self._print_logs_after_command("delete_volumetric_size_fields")
+
+    def set_suggested_size_field_name(self, size_field_id : int, name : str) -> SetNameResults:
+        """ Sets the suggested name of size field with the given id.
+
+
+        Parameters
+        ----------
+        size_field_id : int
+            Size field id.
+        name : str
+            Name of the size field.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model = client.model
+        >>> model.set_suggested_size_field_name(size_field_id, name)
+
+        """
+        if not isinstance(size_field_id, int):
+            raise TypeError("Invalid argument type passed for 'size_field_id'. Valid argument type is int.")
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"size_field_id" : size_field_id,
+        "name" : name}
+        command_name = "PrimeMesh::Model/SetSuggestedSizeFieldName"
+        self._print_beta_api_warning("set_suggested_size_field_name")
+        self._print_logs_before_command("set_suggested_size_field_name", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_suggested_size_field_name", SetNameResults(model = self, json_data = result))
+        return SetNameResults(model = self, json_data = result)
+
+    def get_size_field_name(self, size_field_id : int) -> str:
+        """ Gets the name of size field with the given id.
+
+        Parameters
+        ----------
+        size_field_id : int
+            Size field id.
+
+        Returns
+        -------
+        str
+            Returns the name of the size field.
+        
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model = client.model
+        >>> model.get_size_field_name(size_field_id)
+
+        """
+        if not isinstance(size_field_id, int):
+            raise TypeError("Invalid argument type passed for 'size_field_id'. Valid argument type is int.")
+        args = {"size_field_id" : size_field_id}
+        command_name = "PrimeMesh::Model/GetSizeFieldName"
+        self._print_beta_api_warning("get_size_field_name")
+        self._print_logs_before_command("get_size_field_name", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_size_field_name")
+        return result
 
     def set_num_threads(self, num : int):
         """ Sets the number of threads for multithreaded operation.
