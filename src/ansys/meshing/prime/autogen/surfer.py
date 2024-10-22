@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
@@ -171,3 +193,47 @@ class Surfer(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("remesh_face_zonelets_locally", LocalSurferResults(model = self._model, json_data = result))
         return LocalSurferResults(model = self._model, json_data = result)
+
+    def create_shell_bl_using_controls(self, part_id : int, shellbl_control_ids : Iterable[int], shellbl_params : ShellBLParams) -> CreateShellBLResults:
+        """ Creates ShellBL using data stored in controls.
+
+
+        Parameters
+        ----------
+        part_id : int
+            Id of the part.
+        shellbl_control_ids : Iterable[int]
+            Ids of ShellBL control.
+        shellbl_params : ShellBLParams
+            Parameters related to ShellBL.
+
+        Returns
+        -------
+        CreateShellBLResults
+            Returns the CreateShellBLResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = surfer.create_shellbl_using_controls(part_id,shellbl_control_ids,shellbl_params)
+
+        """
+        if not isinstance(part_id, int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
+        if not isinstance(shellbl_control_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'shellbl_control_ids'. Valid argument type is Iterable[int].")
+        if not isinstance(shellbl_params, ShellBLParams):
+            raise TypeError("Invalid argument type passed for 'shellbl_params'. Valid argument type is ShellBLParams.")
+        args = {"part_id" : part_id,
+        "shellbl_control_ids" : shellbl_control_ids,
+        "shellbl_params" : shellbl_params._jsonify()}
+        command_name = "PrimeMesh::Surfer/CreateShellBLUsingControls"
+        self._model._print_beta_api_warning("create_shell_bl_using_controls")
+        self._model._print_logs_before_command("create_shell_bl_using_controls", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_shell_bl_using_controls", CreateShellBLResults(model = self._model, json_data = result))
+        return CreateShellBLResults(model = self._model, json_data = result)

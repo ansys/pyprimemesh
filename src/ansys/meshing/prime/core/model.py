@@ -98,6 +98,7 @@ class Model(_Model):
         part_data = res["Parts"]
         sc_data = res["SizeControl"]
         pc_data = res["PrismControl"]
+        shc_data = res["ShellBLControl"]
         wc_data = res["WrapperControl"]
         mc_data = res["MultiZoneControl"]
         vc_data = res["VolumeControl"]
@@ -117,6 +118,7 @@ class Model(_Model):
         self._control_data = ControlData(self, -1, res["ControlData"], "")
         self._control_data._update_size_controls(sc_data)
         self._control_data._update_prism_controls(pc_data)
+        self._control_data._update_shell_bl_controls(shc_data)
         self._control_data._update_wrapper_controls(wc_data)
         self._control_data._update_multi_zone_controls(mc_data)
         self._control_data._update_volume_controls(vc_data)

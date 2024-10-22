@@ -48,7 +48,7 @@ class PrimeLogger(object, metaclass=SingletonType):
 
     _logger = None
 
-    def __init__(self, level: int = logging.ERROR, logger_name: str = "PyPrimeMesh"):
+    def __init__(self, level: int = logging.WARNING, logger_name: str = "PyPrimeMesh"):
         """Logger initializer."""
         self._logger = logging.getLogger(logger_name)
         self._logger.setLevel(level)

@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
@@ -54,9 +76,17 @@ class Transform(CoreObject):
 
         Examples
         --------
-        >>> transform_params = prime.TransformParams(model = model)
+        >>> params = prime.TransformParams(model=model)
+        >>> # scale by a factor of 2 using a 4x4 transformation matrix
+        >>> params.transformation_matrix = [
+        >>>    2, 0, 0, 0,
+        >>>    0, 2, 0, 0,
+        >>>    0, 0, 2, 0,
+        >>>    0, 0, 0, 1,
+        >>> ]
+        >>> part = model.get_part_by_name("part_name")
         >>> zonelets = part.get_face_zonelets()
-        >>> results = surface_utilities.transform_zonelets(part.id, zonelets, params)
+        >>> result = prime.SurfaceUtilities(model).transform_zonelets(part.id, zonelets, params)
 
         """
         if not isinstance(part_id, int):

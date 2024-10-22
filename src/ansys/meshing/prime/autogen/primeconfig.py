@@ -1,3 +1,25 @@
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """ Auto-generated file. DO NOT MODIFY """
 import enum
 from typing import Dict, Any, Union, List, Iterable
@@ -72,6 +94,46 @@ class ErrorCode(enum.IntEnum):
     """Invalid absolute distance tolerance for scaffold operation."""
     SCAFFOLDERINVALIDCONSTANTMESHSIZE = 54
     """Invalid constant mesh size input for scaffold operation."""
+    SHELLBLFAILED = 60
+    """ShellBL creation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SHELLBLQUADS = 61
+    """ShellBL quads.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SHELLBLNOMESH = 62
+    """ShellBL is not supported for unmeshed topofaces.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SHELLBLFEWLAYERS = 63
+    """Only few ShellBL layers are created.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SHELLBLWRONGTOPO = 64
+    """Found topofaces with invalid topology.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    OGRIDREFINEFAILED = 65
+    """Post refinement of ShellBl quads failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SPLITTOTRIFAILED = 66
+    """ShellBL quads split to triangles failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INVALIDSHELLBLCONTROLS = 67
+    """Invalid ShellBL controls.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY = 68
+    """Invalid scope entity.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    PERIODICEDGESNOTSUPPORTEDFORSHELLBL = 69
+    """Periodic surfaces selected for ShellBL generation are not supported.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     AUTOMESHFAILED = 100
     """Auto meshing failed."""
     AITOVERLAPALONGMULTIFOUND = 101
@@ -284,6 +346,14 @@ class ErrorCode(enum.IntEnum):
     """Export STL failed. List of part ids is empty."""
     EXPORTSTLFAILEDWITHINCORRECTPARTID = 558
     """Export STL failed. Part id is incorrect."""
+    SHELLBLCONTROLFAILED = 566
+    """Write ShellBL control failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    READSHELLBLCONTROLFAILED = 567
+    """Read thin ShellBL control failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FUSEOPTIONINVALID = 850
     """Invalid option chosen to connect two different parts."""
     COLOCATEFUSEDNODESFAILED = 851
@@ -572,32 +642,64 @@ class ErrorCode(enum.IntEnum):
     """Base size specified for patching should be positive double.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    WRAPPERPATCHFLOWREGIONS_EMPTYORINVALIDINPUT = 3449
+    """Empty or invalid input face zonelet ids.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_INVALIDINPUT = 3600
-    """Invalid input provided for VT operation."""
+    """Invalid input provided for VT operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_MERGEFACESFAILED = 3601
-    """Merge faces operation failed."""
+    """Merge faces operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_MERGETHINSTRIPESFAILED = 3602
-    """Merge thin stripes operation failed."""
+    """Merge thin stripes operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_MERGETHINEXTFAILED = 3603
-    """Merge thin extensions operation failed."""
+    """Merge thin extensions operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_REPAIRSHARPCORNERANGLESFAILED = 3604
-    """Repair sharp corner angles operation failed."""
+    """Repair sharp corner angles operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_PINCHFACESFAILED = 3605
-    """Pinch faces operation failed."""
+    """Pinch faces operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_FILLHOLEFAILED = 3606
-    """Fill hole operation failed."""
+    """Fill hole operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_FILLANNULARHOLEFAILED = 3607
-    """Fill annular hole operation failed."""
+    """Fill annular hole operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_COLLAPSESHORTEDGESFAILED = 3608
-    """Collapse short edges operation failed."""
+    """Collapse short edges operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_SEPARATEFACESFAILED = 3609
-    """Separate faces operation failed."""
+    """Separate faces operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_CREATELEADINGEDGEFAILED = 3610
-    """Create leading edge operation failed."""
+    """Create leading edge operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_CREATEMIDEDGEFAILED = 3611
-    """Create mid edge operation failed."""
+    """Create mid edge operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_OPERATIONFAILED = 3612
-    """VT operation failed."""
+    """VT operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    NUMENMETHODNOTFCOUND = 3801
+    """Could not find numen method."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -736,6 +838,8 @@ class WarningCode(enum.IntEnum):
     """Overriding meshed sizing parameters."""
     INVALIDSIZECONTROLSCOPE = 208
     """Invalid size control type provided."""
+    OVERRIDEGROWTHRATEPARAM = 209
+    """Overriding growth rate parameter."""
     OVERRIDESUGGESTEDNAME = 301
     """Override name by suggested name."""
     OVERRIDESURFACESCOPEENTITY = 401
@@ -744,6 +848,14 @@ class WarningCode(enum.IntEnum):
     """Override volume scope entity."""
     MAXOFPRISMCONTROLSMINASPECTRATIO = 403
     """Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls."""
+    OVERRIDEEDGESCOPEENTITY = 404
+    """Override edge scope entity.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SHELLBLGAPFACTORMINLIMIT = 405
+    """Adjusted ShellBL gap factor to 0.001. As 0.001 is minimum value supported.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     PARTNOTINPARTSCOPE = 601
     """Selected part is not in the part scope of the periodic control."""
     NUMERICPARTNAMERENAMETOALPHANUMERIC = 701
@@ -815,14 +927,32 @@ class WarningCode(enum.IntEnum):
     WRITINGTIESSKIPPED = 11103
     """Writing of ties skipped."""
     VT_SKIPPEDPROTECTEDENTITIES = 100001
-    """Input contains protected entities which have been skipped."""
+    """Input contains protected entities which have been skipped.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_SKIPPEDFEATUREENTITIES = 100002
-    """Input contains feature entities which have been skipped."""
+    """Input contains feature entities which have been skipped.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_SKIPPEDFREEEDGES = 100003
-    """Input contains free edges which have been skipped."""
+    """Input contains free edges which have been skipped.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_SKIPPEDNONMANIFOLDEDGES = 100004
-    """Input contains non-manifold edges which have been skipped."""
+    """Input contains non-manifold edges which have been skipped.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_SKIPPEDENTITIESINDIFFERENTZONES = 100005
-    """Input contains entities in different zones which have been skipped."""
+    """Input contains entities in different zones which have been skipped.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_CANNOTMERGENODES = 100006
+    """Cannot merge nodes during VT operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_REMESHFACEFAILED = 100007
+    """Failed to remesh face(s) during VT operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
     """MultiZone warning codes"""
