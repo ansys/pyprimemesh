@@ -63,11 +63,11 @@ logging.basicConfig(
 
 def load_manifest():
     """Load Ansys unified installation match manifest."""
-    with open(MANIFEST_FOUND_IN_UNIFIED, 'r') as file:
+    with open(MANIFEST_FOUND_IN_UNIFIED, 'r', encoding='utf-8') as file:
         unifiedPathDict = json.load(file)
 
     # Load symlink manifest
-    with open(MANIFEST_SYMLINKS, 'r') as file:
+    with open(MANIFEST_SYMLINKS, 'r', encoding='utf-8') as file:
         allSymlinkDict = json.load(file)
 
     return unifiedPathDict, allSymlinkDict
@@ -92,24 +92,44 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
         symlinks=True,
     )
 
-    #copy parasolid schema
-    shutil.copytree(os.path.join(AWP_ROOT, "commonfiles", "CAD", "Siemens", "Parasolid36.1.212", "linx64", "schema"), 
-          os.path.join(dest_package_path, "commonfiles", "CAD", "Siemens", "Parasolid36.1.212", "linx64", "schema"))
-    
-    #copy JTOpen dependency
-    shutil.copytree(os.path.join(AWP_ROOT, "commonfiles", "CAD", "Siemens", "JTOpen", "linx64"), 
-          os.path.join(dest_package_path, "commonfiles", "CAD", "Siemens", "JTOpen", "linx64"))
-    
+    # copy parasolid schema
+    shutil.copytree(
+        os.path.join(
+            AWP_ROOT, "commonfiles", "CAD", "Siemens", "Parasolid36.1.212", "linx64", "schema"
+        ),
+        os.path.join(
+            dest_package_path,
+            "commonfiles",
+            "CAD",
+            "Siemens",
+            "Parasolid36.1.212",
+            "linx64",
+            "schema",
+        ),
+    )
+
+    # copy JTOpen dependency
+    shutil.copytree(
+        os.path.join(AWP_ROOT, "commonfiles", "CAD", "Siemens", "JTOpen", "linx64"),
+        os.path.join(dest_package_path, "commonfiles", "CAD", "Siemens", "JTOpen", "linx64"),
+    )
+
     if not os.path.exists(os.path.join(dest_package_path, "aisol", "bin", "linx64")):
         os.makedirs(os.path.join(dest_package_path, "aisol", "bin", "linx64"))
-    #copy FMTransmogrifier
-    shutil.copy(os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_JT"), 
-          os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_JT"))
-    shutil.copy(os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_WB"), 
-          os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_WB"))
-    shutil.copy(os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_XC"), 
-          os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_XC"))
-    
+    # copy FMTransmogrifier
+    shutil.copy(
+        os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_JT"),
+        os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_JT"),
+    )
+    shutil.copy(
+        os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_WB"),
+        os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_WB"),
+    )
+    shutil.copy(
+        os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_XC"),
+        os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_XC"),
+    )
+
     # Copy regular files
     for key, value in unifiedPathDict.items():
         val_list = value if isinstance(value, list) else [value]
@@ -121,12 +141,14 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
 
             logging.info("\tcopying source {} --> target {}".format(source, target))
             shutil.copy(source, target)
-    
-    #copy libFM so files
+
+    # copy libFM so files
     for file in os.listdir(os.path.join(AWP_ROOT, "aisol", "lib", "linx64")):
-        if "libFM" in file :
-            shutil.copy(os.path.join(AWP_ROOT, "aisol", "lib", "linx64",file), 
-                os.path.join(dest_package_path, "meshing", "Prime", "lib"))
+        if "libFM" in file:
+            shutil.copy(
+                os.path.join(AWP_ROOT, "aisol", "lib", "linx64", file),
+                os.path.join(dest_package_path, "meshing", "Prime", "lib"),
+            )
 
     # Copy symlinks
     for key, value in allSymlinkDict.items():
@@ -151,6 +173,7 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
                 )
         except:
             pass
+
 
 def create_docker_image(dest_package_path):
     """Create docker image from the archived package."""
