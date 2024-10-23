@@ -6,17 +6,9 @@ FROM rockylinux:8 as builder
 # Define the working directory
 WORKDIR /prime
 
-# Install tar to unpack
-RUN yum -y install tar
+COPY ./PyPrimeMeshPackage /prime
 
-# Add the binary files
-COPY LINX64.tar.gz .
-
-# Unpack and modify permissions
-RUN tar -zxvf LINX64.tar.gz && \
-    rm LINX64.tar.gz
-
-RUN chmod -R 0755 meshing
+RUN chmod -R 0755 /prime
 
 # Build image stage
 # Based on rockylinux:8
