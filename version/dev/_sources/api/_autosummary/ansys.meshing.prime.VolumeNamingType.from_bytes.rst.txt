@@ -1,0 +1,6 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeNamingType.from_bytes

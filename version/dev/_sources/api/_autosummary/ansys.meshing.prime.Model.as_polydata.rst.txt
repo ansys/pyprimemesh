@@ -1,0 +1,6 @@
+as\_polydata
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.as_polydata

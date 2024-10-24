@@ -1,0 +1,6 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeFieldType.bit_length

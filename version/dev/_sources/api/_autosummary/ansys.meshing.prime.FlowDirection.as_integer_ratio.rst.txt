@@ -1,0 +1,6 @@
+as\_integer\_ratio
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FlowDirection.as_integer_ratio

@@ -1,0 +1,6 @@
+extract\_volumes
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.extract_volumes

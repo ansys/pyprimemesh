@@ -1,0 +1,6 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SplineFeatureCaptureType.to_bytes

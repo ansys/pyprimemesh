@@ -1,0 +1,44 @@
+.. vale off
+
+SweepType
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SweepType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SweepType.conjugate
+      SweepType.bit_length
+      SweepType.bit_count
+      SweepType.to_bytes
+      SweepType.from_bytes
+      SweepType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SweepType.real
+      SweepType.imag
+      SweepType.numerator
+      SweepType.denominator
+      SweepType.STANDARD
+      SweepType.THINSWEEP
+      SweepType.MEDIALAXIS
+      SweepType.PROGRAMCONTROLLED
+   
+   
+
+.. vale on

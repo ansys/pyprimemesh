@@ -1,0 +1,6 @@
+create\_shell\_bl\_using\_controls
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Surfer.create_shell_bl_using_controls

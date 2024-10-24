@@ -1,0 +1,6 @@
+get\_size\_field\_name
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.get_size_field_name

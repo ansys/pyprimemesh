@@ -1,0 +1,6 @@
+download\_multi\_layer\_quad\_mesh\_pcb\_scdoc
+==============================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_multi_layer_quad_mesh_pcb_scdoc

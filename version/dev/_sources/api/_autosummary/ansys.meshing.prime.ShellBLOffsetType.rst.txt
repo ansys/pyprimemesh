@@ -1,0 +1,44 @@
+.. vale off
+
+ShellBLOffsetType
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ShellBLOffsetType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ShellBLOffsetType.conjugate
+      ShellBLOffsetType.bit_length
+      ShellBLOffsetType.bit_count
+      ShellBLOffsetType.to_bytes
+      ShellBLOffsetType.from_bytes
+      ShellBLOffsetType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ShellBLOffsetType.real
+      ShellBLOffsetType.imag
+      ShellBLOffsetType.numerator
+      ShellBLOffsetType.denominator
+      ShellBLOffsetType.ASPECTRATIO
+      ShellBLOffsetType.LASTRATIO
+      ShellBLOffsetType.UNIFORM
+      ShellBLOffsetType.CURVATUREBASED
+   
+   
+
+.. vale on

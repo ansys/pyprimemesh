@@ -1,0 +1,6 @@
+get\_edge\_scope
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ShellBLControl.get_edge_scope

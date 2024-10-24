@@ -1,0 +1,6 @@
+as\_integer\_ratio
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PrismControlOffsetType.as_integer_ratio

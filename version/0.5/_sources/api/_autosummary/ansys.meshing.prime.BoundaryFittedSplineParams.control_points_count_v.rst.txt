@@ -1,0 +1,6 @@
+control\_points\_count\_v
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundaryFittedSplineParams.control_points_count_v

@@ -1,0 +1,26 @@
+.. vale off
+
+MatchPairTargetType
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MatchPairTargetType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MatchPairTargetType.FACEZONELET
+      MatchPairTargetType.TOPOFACE
+   
+   
+
+.. vale on

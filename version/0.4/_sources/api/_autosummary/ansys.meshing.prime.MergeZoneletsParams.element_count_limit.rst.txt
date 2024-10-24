@@ -1,0 +1,6 @@
+﻿element\_count\_limit
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergeZoneletsParams.element_count_limit

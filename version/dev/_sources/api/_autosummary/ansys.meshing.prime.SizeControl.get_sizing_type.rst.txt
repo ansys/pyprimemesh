@@ -1,0 +1,6 @@
+get\_sizing\_type
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_sizing_type

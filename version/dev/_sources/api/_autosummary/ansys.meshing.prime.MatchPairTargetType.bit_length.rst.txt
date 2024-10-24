@@ -1,0 +1,6 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: MatchPairTargetType.bit_length

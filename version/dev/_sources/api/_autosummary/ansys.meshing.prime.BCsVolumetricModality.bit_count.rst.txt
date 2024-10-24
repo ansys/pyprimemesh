@@ -1,0 +1,6 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: BCsVolumetricModality.bit_count

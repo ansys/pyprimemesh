@@ -1,0 +1,6 @@
+get\_num\_compute\_nodes
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.get_num_compute_nodes

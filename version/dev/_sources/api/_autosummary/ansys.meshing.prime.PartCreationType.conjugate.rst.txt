@@ -1,0 +1,6 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PartCreationType.conjugate

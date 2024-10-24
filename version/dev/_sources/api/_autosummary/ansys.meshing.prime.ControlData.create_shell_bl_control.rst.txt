@@ -1,0 +1,6 @@
+create\_shell\_bl\_control
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.create_shell_bl_control
