@@ -24,7 +24,7 @@
 .. _ref_solder_ball_mesh:
 
 =================================
-Mesh a set of solder balls (Beta)
+Mesh a set of solder balls (beta)
 =================================
 
 **Summary**: This example demonstrates how to mesh a set of solder balls with mainly
