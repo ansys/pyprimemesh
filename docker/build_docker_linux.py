@@ -186,7 +186,7 @@ def create_docker_image(dest_package_path):
     # Build the docker image
     print(">>> Building docker image. This might take some time...")
     out = subprocess.run(
-        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:25.1.0-test", "."],
+        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:latest", "."],
         cwd=os.path.dirname(os.path.abspath(__file__)),
         capture_output=True,
     )
