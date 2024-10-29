@@ -85,70 +85,20 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
     if os.path.exists(dest_package_path):
         shutil.rmtree(dest_package_path, ignore_errors=True)
 
-    # copy entire CPython directory
-    shutil.copytree(
-        os.path.join(AWP_ROOT, "commonfiles", "CPython"),
-        os.path.join(dest_package_path, "commonfiles", "CPython"),
-        symlinks=True,
-    )
-
-    # copy parasolid schema
-    shutil.copytree(
-        os.path.join(
-            AWP_ROOT, "commonfiles", "CAD", "Siemens", "Parasolid36.1.212", "linx64", "schema"
-        ),
-        os.path.join(
-            dest_package_path,
-            "commonfiles",
-            "CAD",
-            "Siemens",
-            "Parasolid36.1.212",
-            "linx64",
-            "schema",
-        ),
-    )
-
-    # copy JTOpen dependency
-    shutil.copytree(
-        os.path.join(AWP_ROOT, "commonfiles", "CAD", "Siemens", "JTOpen", "linx64"),
-        os.path.join(dest_package_path, "commonfiles", "CAD", "Siemens", "JTOpen", "linx64"),
-    )
-
-    if not os.path.exists(os.path.join(dest_package_path, "aisol", "bin", "linx64")):
-        os.makedirs(os.path.join(dest_package_path, "aisol", "bin", "linx64"))
-    # copy FMTransmogrifier
-    shutil.copy(
-        os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_JT"),
-        os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_JT"),
-    )
-    shutil.copy(
-        os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_WB"),
-        os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_WB"),
-    )
-    shutil.copy(
-        os.path.join(AWP_ROOT, "aisol", "bin", "linx64", "FMTransmogrifier_XC"),
-        os.path.join(dest_package_path, "aisol", "bin", "linx64", "FMTransmogrifier_XC"),
-    )
-
     # Copy regular files
     for key, value in unifiedPathDict.items():
         val_list = value if isinstance(value, list) else [value]
         for val in val_list:
             source = os.path.join(AWP_ROOT, val["path"], key)
-            target = os.path.join(dest_package_path, val["path"])
-            if not os.path.exists(target):
+            target = os.path.join(dest_package_path, val["path"], key) if val["isDir"] else os.path.join(dest_package_path, val["path"])
+            if not os.path.exists(target) and not val["isDir"]:
                 os.makedirs(target)
 
             logging.info("\tcopying source {} --> target {}".format(source, target))
-            shutil.copy(source, target)
-
-    # copy libFM so files
-    for file in os.listdir(os.path.join(AWP_ROOT, "aisol", "lib", "linx64")):
-        if "libFM" in file:
-            shutil.copy(
-                os.path.join(AWP_ROOT, "aisol", "lib", "linx64", file),
-                os.path.join(dest_package_path, "meshing", "Prime", "lib"),
-            )
+            if val["isDir"]:
+                shutil.copytree(source, target, symlinks=True)
+            else:
+                shutil.copy(source, target)
 
     # Copy symlinks
     for key, value in allSymlinkDict.items():
