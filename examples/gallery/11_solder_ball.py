@@ -23,14 +23,16 @@
 """
 .. _ref_solder_ball_mesh:
 
-==========================
-Mesh a set of solder balls
-==========================
+=================================
+Mesh a set of solder balls (beta)
+=================================
 
 **Summary**: This example demonstrates how to mesh a set of solder balls with mainly
 hexahedral elements. The solder is initially modelled as cylindrical to allow meshing
 using stacker and then local match morph controls are applied to recover the
 spherical shapes.
+
+.. note:: This example contains a beta API. The behavior and implementation may change in future.
 
 Objective
 ~~~~~~~~~~
@@ -153,9 +155,12 @@ prime.lucid.Mesh(model).surface_mesh(min_size=0.1)
 prime.Scaffolder(model, merged_part.id).split_topo_faces_by_mesh_region(
     merged_part.get_topo_faces()
 )
+
+# This is a beta API. The behavior and implementation may change in future.
 result = model.topo_data.delete_mesh_on_topo_faces(
     merged_part.get_topo_faces(), prime.DeleteMeshParams(model=model)
 )
+
 scaffolder.merge_overlapping_topo_faces(merged_part.get_topo_faces(), params)
 
 display = PrimePlotter()
