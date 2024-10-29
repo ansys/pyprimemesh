@@ -46,7 +46,7 @@ class HidePicked(PlotterWidget):
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
         self.prime_plotter = prime_plotter
-        self._picked_list = self.prime_plotter._backend._picked_list
+        self._picked_dict = self.prime_plotter._backend._picked_dict
         self._object_actors_map = self.prime_plotter._backend._object_to_actors_map
         self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
             self.callback,
@@ -61,7 +61,7 @@ class HidePicked(PlotterWidget):
     def callback(self, state: bool) -> None:
         """Define callback function for the button widget."""
         if state:
-            for meshobject in self._picked_list:
+            for meshobject in list(self._picked_dict.values()):
                 self.prime_plotter._backend.pv_interface.scene.remove_actor(meshobject.actor)
                 self._removed_actors.append(meshobject.actor)
         else:
