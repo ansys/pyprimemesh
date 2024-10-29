@@ -90,7 +90,11 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
         val_list = value if isinstance(value, list) else [value]
         for val in val_list:
             source = os.path.join(AWP_ROOT, val["path"], key)
-            target = os.path.join(dest_package_path, val["path"], key) if val["isDir"] else os.path.join(dest_package_path, val["path"])
+            target = (
+                os.path.join(dest_package_path, val["path"], key)
+                if val["isDir"]
+                else os.path.join(dest_package_path, val["path"])
+            )
             if not os.path.exists(target) and not val["isDir"]:
                 os.makedirs(target)
 
