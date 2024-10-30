@@ -4,6 +4,7 @@ abc
 AutoMesh
 automesh
 Boolean
+BRep
 CAD
 conformally
 [Dd]efeature
