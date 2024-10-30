@@ -72,29 +72,30 @@ Four CAD import routes are available in PyPrimeMesh:
 
  * ``Program controlled``: Chooses the CAD reader route based on the extension of the provided CAD file as follows:
 
-   - Native for FMD, SAT, SAB, X_T, X_B, JT, PLMXML, and STL
-   - SpaceClaim for SCDOC and SCDOCX
-   - Discovery for DSCO
+   - Native for FMD, X_T, X_B, JT, PLMXML, and STL
+   - Discovery for DSCO, SCDOC and SCDOCX
    - Workbench for all other extensions
 
- * ``Native``: Natively supported file format extensions are FMD, ACIS (SAT and SAB),
+ * ``Native``: Natively supported file format extensions are FMD,
    Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
 
  * ``SpaceClaim``: Uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
-   Windows platform supports importing files using the SpaceClaim reader.
+   Windows platform supports importing files using the SpaceClaim reader. Ensure to install 
+   SpaceClaim for SpaceClaim reader.
 
  * ``Discovery``: Uses Discovery to import supported CAD files from the Discovery reader. Only the
    Windows platform supports importing files using the Discovery reader.
+   Ensure to install Discovery for Discovery reader. 
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
-
+     Ensure to install Workbench for Workbench reader. 
 
 To view the CAD files supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
 
 .. note::
-    * Program controlled and SpaceClaim CAD reader routes import JT files containing only faceted data. Workbench and
-      Native CAD reader routes do not support importing JT files containing only faceted data.
+    * Program controlled supports faceted data. Workbench supports BRep geometry(non-faceted) data. 
+      Discovery or SpaceClaim supports both BRep geometry and faceted data.
 
     * When deploying scripts using SpaceClaim, Discovery, or Workbench CAD reader routes, ensure that the CAD configuration
       and in-app defaults are consistent in the deployed environment.
