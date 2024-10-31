@@ -29,7 +29,7 @@ dependencies = [
 
 [project.optional-dependencies]
 graphics = [
-  "ansys-tools-visualization-interface>=0.2.6,<1",
+  "ansys-tools-visualization-interface>=0.4.7,<1",
 ]
 tests = [
   "ansys-tools-visualization-interface==0.4.7",
