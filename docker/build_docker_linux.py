@@ -29,6 +29,10 @@ import shutil
 import subprocess
 import sys
 
+if sys.platform != 'linux':
+    print("This script should be run on linux platform.")
+    sys.exit(1)
+    
 # -------------------------------------------------------------------------------
 # Check input
 if len(sys.argv) < 2:
@@ -188,4 +192,5 @@ if __name__ == "__main__":
         An internal error occurred."""
             % msg
         )
+        print("""%s""" % msg)
         sys.exit(1)
