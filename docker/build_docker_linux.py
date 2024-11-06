@@ -32,7 +32,7 @@ import sys
 if sys.platform != 'linux':
     print("This script should be run on linux platform.")
     sys.exit(1)
-    
+
 # -------------------------------------------------------------------------------
 # Check input
 if len(sys.argv) < 2:
