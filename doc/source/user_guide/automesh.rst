@@ -13,7 +13,7 @@ For example, it creates mesh objects from the imported geometry. The
 volumetric meshing with given meshing parameters.
 
 .. note::
-   The starting point for the volumetric meshing procedure is a valid surface mesh.
+   The starting point for the volumetric meshing procedure is a valid surface mesh defining any number of computed volumetric regions. If overlapping meshed faces are present then the mesh method may fail due to duplicate nodes on the face.  Consider if the overlapping faces are intended to be in the same part and what the expected connectivity between the faces should be.  If meshing adjacent volumes with disconnected overlapping faces between the volumes it is recommended that the volumes be in different parts.
 
 .. tip::
     Volume mesh can be generated using the :func:`Mesh.volume_mesh() <ansys.meshing.prime.lucid.Mesh.volume_mesh>`
