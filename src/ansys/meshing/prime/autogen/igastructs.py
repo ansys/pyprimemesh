@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -1070,6 +1070,8 @@ class QuadToSplineParams(CoreObject):
         **This is a beta parameter**. **The behavior and name may change in the future**.
     zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
         Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     project_on_geometry: bool, optional
         Option to project on geometry.
 
@@ -1161,6 +1163,8 @@ class QuadToSplineParams(CoreObject):
             **This is a beta parameter**. **The behavior and name may change in the future**.
         zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
             Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         project_on_geometry: bool, optional
             Option to project on geometry.
 
@@ -1387,6 +1391,8 @@ class QuadToSplineParams(CoreObject):
     @property
     def zone_name_shell_thickness_pairs(self) -> Dict[str, Union[str, int, float, bool]]:
         """Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._zone_name_shell_thickness_pairs
 

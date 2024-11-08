@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -194,7 +194,7 @@ class Surfer(CoreObject):
         self._model._print_logs_after_command("remesh_face_zonelets_locally", LocalSurferResults(model = self._model, json_data = result))
         return LocalSurferResults(model = self._model, json_data = result)
 
-    def create_shell_bl_using_controls(self, part_id : int, shellbl_control_ids : Iterable[int], shellbl_params : ShellBLParams) -> CreateShellBLResults:
+    def create_shell_bl_using_controls(self, part_id : int, shell_bl_control_ids : Iterable[int], shell_bl_params : ShellBLParams) -> CreateShellBLResults:
         """ Creates ShellBL using data stored in controls.
 
 
@@ -202,9 +202,9 @@ class Surfer(CoreObject):
         ----------
         part_id : int
             Id of the part.
-        shellbl_control_ids : Iterable[int]
+        shell_bl_control_ids : Iterable[int]
             Ids of ShellBL control.
-        shellbl_params : ShellBLParams
+        shell_bl_params : ShellBLParams
             Parameters related to ShellBL.
 
         Returns
@@ -219,18 +219,18 @@ class Surfer(CoreObject):
 
         Examples
         --------
-        >>> results = surfer.create_shellbl_using_controls(part_id,shellbl_control_ids,shellbl_params)
+        >>> results = surfer.create_shell_bl_using_controls(part_id,shell_bl_control_ids,shell_bl_params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(shellbl_control_ids, Iterable):
-            raise TypeError("Invalid argument type passed for 'shellbl_control_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(shellbl_params, ShellBLParams):
-            raise TypeError("Invalid argument type passed for 'shellbl_params'. Valid argument type is ShellBLParams.")
+        if not isinstance(shell_bl_control_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'shell_bl_control_ids'. Valid argument type is Iterable[int].")
+        if not isinstance(shell_bl_params, ShellBLParams):
+            raise TypeError("Invalid argument type passed for 'shell_bl_params'. Valid argument type is ShellBLParams.")
         args = {"part_id" : part_id,
-        "shellbl_control_ids" : shellbl_control_ids,
-        "shellbl_params" : shellbl_params._jsonify()}
+        "shell_bl_control_ids" : shell_bl_control_ids,
+        "shell_bl_params" : shell_bl_params._jsonify()}
         command_name = "PrimeMesh::Surfer/CreateShellBLUsingControls"
         self._model._print_beta_api_warning("create_shell_bl_using_controls")
         self._model._print_logs_before_command("create_shell_bl_using_controls", args)
