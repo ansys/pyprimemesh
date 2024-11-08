@@ -1,4 +1,4 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -926,8 +926,6 @@ class WarningCode(enum.IntEnum):
     """Writing of contact pairs skipped."""
     WRITINGTIESSKIPPED = 11103
     """Writing of ties skipped."""
-    WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED = 11104
-    """Writing of zonelet skipped while exporting label as element component."""
     VT_SKIPPEDPROTECTEDENTITIES = 100001
     """Input contains protected entities which have been skipped.
 

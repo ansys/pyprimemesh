@@ -1,4 +1,4 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -313,8 +313,7 @@ class Model(_Model):
 
         Examples
         --------
-        >>> client = prime.launch_prime()
-        >>> model = client.model
+        >>> model = prime.local_model
         >>> zones = model.set_working_directory("C:/input_files")
 
         """

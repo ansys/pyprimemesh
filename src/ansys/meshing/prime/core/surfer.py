@@ -1,4 +1,4 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -87,7 +87,7 @@ class Surfer(CoreObject):
             return surfer.mesh_topo_faces(topo_faces, params)
 
     def create_shell_bl_using_controls(
-        self, part_id: int, shell_bl_control_ids: Iterable[int], shell_bl_params: ShellBLParams
+        self, part_id: int, shellbl_control_ids: Iterable[int], shellbl_params: ShellBLParams
     ) -> CreateShellBLResults:
         """Create ShellBL using data stored in controls.
 
@@ -95,9 +95,9 @@ class Surfer(CoreObject):
         ----------
         part_id : int
             Id of the part.
-        shell_bl_control_ids : Iterable[int]
+        shellbl_control_ids : Iterable[int]
             Ids of ShellBL control.
-        shell_bl_params : ShellBLParams
+        shellbl_params : ShellBLParams
             Parameters related to ShellBL.
 
         Returns
@@ -105,21 +105,16 @@ class Surfer(CoreObject):
         CreateShellBLResults
             Returns the CreateShellBLResults.
 
-
-        Notes
-        -----
-        **This is a beta API**. **The behavior and implementation may change in future**.
-
         Examples
         --------
-        >>> results = surfer.create_shell_bl_using_controls(part_id,
-                                                            shell_bl_control_ids,
-                                                            shell_bl_params)
+        >>> results = surfer.create_shell_bl_using_controls(
+                part_id, shellbl_control_ids, shellbl_params
+            )
 
         """
         with _Surfer(model=self._model, part_id=part_id) as surfer:
             return surfer.create_shell_bl_using_controls(
-                part_id, shell_bl_control_ids, shell_bl_params
+                part_id, shellbl_control_ids, shellbl_params
             )
 
     def remesh_face_zonelets_locally(

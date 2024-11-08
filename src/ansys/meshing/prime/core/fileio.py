@@ -1,4 +1,4 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -631,10 +631,11 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> prime_client = prime.launch_prime()
-        >>> model = prime_client.model
+        >>> # connect client to server and get model from it
+        >>> client  = prime.Client(ip="localhost", port=50060)
+        >>> model   = client.model
         >>> file_io = prime.FileIO(model=model)
-        >>> params = prime.ImportCadParams(model=model)
+        >>> params  = prime.ImportCadParams(model=model)
         >>> results = file_io.import_cad("/tmp/my_cad.x_t", params=params)
 
         """
