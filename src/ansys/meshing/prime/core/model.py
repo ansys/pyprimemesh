@@ -313,7 +313,8 @@ class Model(_Model):
 
         Examples
         --------
-        >>> model = prime.local_model
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> zones = model.set_working_directory("C:/input_files")
 
         """
