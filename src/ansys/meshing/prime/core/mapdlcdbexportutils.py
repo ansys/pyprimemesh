@@ -2702,6 +2702,7 @@ class _StepProcessor:
         '_model',
         '_logger',
         '_model_application',
+        '_transient_output_controls',
     )
 
     def __init__(self, model: prime.Model, data, sim_data, model_application):
@@ -2728,6 +2729,7 @@ class _StepProcessor:
         self._model = model
         self._logger = model.python_logger
         self._model_application = model_application
+        self._transient_output_controls = ""
 
     def get_cload_ampl_commands(self):
         return self._cload_ampl_commands
@@ -2815,10 +2817,14 @@ class _StepProcessor:
         )
         if self._previous_analysis != "STATIC":
             if self._model_application == prime.CdbAnalysisType.OUTERPANELSTIFFNESS:
-                static_analysis_commands += 'ANTYPE, TRANSIENT\n'
-                static_analysis_commands += 'TIMINT, ON\n'
-                static_analysis_commands += 'TINTP, QUASI\n'
-                static_analysis_commands += 'NROPT, FULL\n'
+                use_quasi = os.getenv("APDL_QUASI")
+                if use_quasi == "1":
+                    static_analysis_commands += 'ANTYPE, TRANSIENT\n'
+                    static_analysis_commands += 'TIMINT, ON\n'
+                    static_analysis_commands += 'TINTP, QUASI\n'
+                    static_analysis_commands += 'NROPT, FULL\n'
+                else:
+                    static_analysis_commands += 'ANTYPE, STATIC\n'
             else:
                 static_analysis_commands += 'ANTYPE, STATIC\n'
         static_analysis_commands += f'TIME,{self._time}\n'
@@ -3056,12 +3062,12 @@ class _StepProcessor:
         cpxmod = ''
         nrm_key = 'OFF'
         res_modes = None
-        data = frequency_data['Data']
-        if 'Data' in frequency_data and type(data) == list:
+        data = frequency_data['Data'] if 'Data' in frequency_data else None
+        if data is not None and isinstance(data, list):
             first_line = data[0]
         else:
             first_line = data
-        if data is not None:
+        if first_line is not None:
             if 'num_eigenvalues' in first_line:
                 nmodes = int(first_line['num_eigenvalues'])
             if 'min_frequency' in first_line:
@@ -3070,11 +3076,11 @@ class _StepProcessor:
                 max_frequency = float(first_line['max_frequency'])
         if 'Parameters' in frequency_data:
             data = frequency_data['Parameters']
-            if 'EIGENSOLVER' in data:
+            if data is not None and 'EIGENSOLVER' in data:
                 if data['EIGENSOLVER'] == 'SUBSPACE':
                     modopt_method = 'SUBSP'
             # self._logger.info(f"Modal_analysis PArameters: {data}")
-            if 'NORMALIZATION' in data:
+            if data is not None and 'NORMALIZATION' in data:
                 # self._logger.info(f"Modal_analysis PArameters: {data}")
                 # self._logger.info(f"Modal_analysis norm: {data['NORMALIZATION']}")
                 if data['NORMALIZATION'] == 'MASS':
@@ -3084,11 +3090,11 @@ class _StepProcessor:
             else:
                 # self._logger.info(f"Modal_analysis PArameters: {data}")
                 # self._logger.info(f"Modal_analysis eigensolver: {data['EIGENSOLVER']}")
-                if 'EIGENSOLVER' in data and data['EIGENSOLVER'] == 'AMS':
+                if data is not None and 'EIGENSOLVER' in data and data['EIGENSOLVER'] == 'AMS':
                     nrm_key = 'OFF'
                 else:
                     nrm_key = 'ON'
-            if 'RESIDUAL MODES' in data:
+            if data is not None and 'RESIDUAL MODES' in data:
                 res_modes = 'ON'
                 self._previous_modal_resvec = 'ON'
         if self._simulation_data is not None:
@@ -3348,14 +3354,6 @@ class _StepProcessor:
                 pass
             output_analysis_commands += "\n"
 
-        if self._model_application == prime.CdbAnalysisType.OUTERPANELSTIFFNESS:
-            output_analysis_commands += "ESEL,S,ENAME,,181\n"
-            output_analysis_commands += "ESEL,A,ENAME,,281\n"
-            output_analysis_commands += "CM,SHELL_THICKNESS_STORAGE,ELEM\n"
-            output_analysis_commands += "ALLSEL\n"
-            output_analysis_commands += "OUTRES, MISC, LAST, SHELL_THICKNESS_STORAGE, ,\n"
-            output_analysis_commands += "\n"
-
         number_interval_to_table = False
         for output in output_data:
             minimum_time_interval = self.get_output_time_interval()
@@ -3579,6 +3577,7 @@ class _StepProcessor:
                                     "MISESMAX",
                                     "PEEQ",
                                     "PEEQMAX",
+                                    "STH",
                                 ]:
                                     output_analysis_commands += "OUTRES, "
                                     if key in ["S", "SINV", "MISESMAX"]:
@@ -3664,6 +3663,42 @@ class _StepProcessor:
                                             + "OUTRES, "
                                             + out_cmds.replace("EPPL", "NLDAT")
                                         )
+                                    elif key == "STH":
+                                        comp_name = ""
+                                        out_cmds = ""
+                                        if (
+                                            'Parameters' in elemout
+                                            and elemout['Parameters'] is not None
+                                            and 'ELSET' in elemout['Parameters']
+                                        ):
+                                            comp_name += get_modified_component_name(
+                                                elemout['Parameters']['ELSET'],
+                                                'ELSET',
+                                                self._simulation_data,
+                                            )
+                                        else:
+                                            out_cmds += "ESEL, S, ENAME, , 181\n"
+                                            out_cmds += "ESEL, A, ENAME, , 281\n"
+                                            out_cmds += "CM, SHELL_THICKNESS_STORAGE, ELEM\n"
+                                            out_cmds += "ALLSEL\n"
+                                            comp_name += "SHELL_THICKNESS_STORAGE"
+                                        output_analysis_commands = output_analysis_commands[:-8]
+                                        output_analysis_commands += out_cmds
+                                        output_analysis_commands += "OUTRES, "
+                                        output_analysis_commands += "MISC, "
+                                        if time_points is not None:
+                                            output_analysis_commands += f'%{time_points}%, '
+                                        else:
+                                            if ninterval:
+                                                if number_interval_to_table:
+                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                else:
+                                                    output_analysis_commands += f'-{ninterval}, '
+                                            elif nfreq:
+                                                output_analysis_commands += f'{nfreq}, '
+                                            else:
+                                                output_analysis_commands += 'ALL, '
+                                        output_analysis_commands += comp_name
                                     elif key == "LE":
                                         output_analysis_commands += "EPEL, "
                                         if time_points is not None:
@@ -4034,7 +4069,14 @@ class _StepProcessor:
                 # self._logger.info('in Keys')
                 # self._logger.info(function_maps(step_data[key]))
                 function = function_maps[key]
-                mapdl_step_commands += function(step_data[key])
+                key_commands = function(step_data[key])
+                mapdl_step_commands += key_commands
+                if key == "Output" and "Dynamic" in step_data:
+                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
+                        self._transient_output_controls = key_commands
+                if key == "Output" and "Static" in step_data:
+                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
+                        mapdl_step_commands += "Placeholder_Transient_Outres\n"
             # else:
             #     self._logger.warning("\nkey not found ", key)
         # self._logger.info(mapdl_step_commands)
@@ -4088,7 +4130,33 @@ class _StepProcessor:
             # self._logger.info(step_data)
             self._step_counter += 1
             mapdl_commands.append(self._process_step(step_data))
-        return '\n'.join(mapdl_commands)
+
+        steps_commands = '\n'.join(mapdl_commands)
+
+        if "Placeholder_Transient_Outres" in steps_commands and not self._transient_output_controls:
+            updated_steps_commands = steps_commands.replace("Placeholder_Transient_Outres", "")
+        elif "Placeholder_Transient_Outres" in steps_commands and self._transient_output_controls:
+
+            all_lines = self._transient_output_controls.strip().split("\n")
+            new_lines = []
+
+            for i, line in enumerate(all_lines, 1):
+                if i <= 3:
+                    continue
+                if "OUTRES" in line:
+                    ln_data = line.split(",")
+                    ln_data[2] = " LAST"
+                    new_lines.append(",".join(ln_data))
+                else:
+                    new_lines.append(line)
+
+            updated_steps_commands = steps_commands.replace(
+                "Placeholder_Transient_Outres", "\n".join(new_lines) + "\n"
+            )
+        else:
+            updated_steps_commands = steps_commands
+
+        return updated_steps_commands
 
     def get_step_by_step_id(self, step_id):
         mapdl_commands = ''
@@ -4206,14 +4274,16 @@ def get_modified_component_name(name: str, set_type: str = None, sim_data=None) 
         has_surface = 'Surface' in sim_data and name in sim_data['Surface']
         has_nset = 'Nset' in sim_data and name in sim_data['Nset']
         has_elset = 'Elset' in sim_data and name in sim_data['Elset']
+        has_element = 'Element' in sim_data and name in sim_data['Element']
 
-        count = has_surface + has_nset + has_elset
+        count = has_nset + (has_surface or has_elset or has_element)
 
         if count > 1:
-            modified_name = set_type + "_" + name
+            modified_name = set_type + "_" + modified_name
 
     if modified_name and (modified_name[0].isdigit() or modified_name[0] == "_"):
         modified_name = "COMP_" + modified_name
+
     return modified_name
 
 
@@ -4363,7 +4433,7 @@ def generate_mapdl_commands(
     analysis_settings += '/delete,,cnm,,1\n'
     analysis_settings += '/delete,,DSP,,\n'
     analysis_settings += '/delete,,mcf,,\n'
-    analysis_settings += '/delete,,rfrq,,\n'
+    analysis_settings += '/delete,,rfrq,,1\n'
     analysis_settings += '/delete,,log,,1\n'
     analysis_settings += '/delete,,emat,,1\n'
     analysis_settings += '/delete,,esav,,1\n'
@@ -4371,7 +4441,7 @@ def generate_mapdl_commands(
     analysis_settings += '/delete,,full,,1\n'
     analysis_settings += '/delete,,mlv,,1\n'
     analysis_settings += '/delete,,mode,,1\n'
-    analysis_settings += '/delete,,rfrq,,1\n'
+    # analysis_settings += '/delete,,rfrq,,1\n'
     analysis_settings += '/delete,,out,,1\n'
     # analysis_settings += '/delete,harmonic,rst,,1\n'
     analysis_settings += '/delete,,mntr,,\n'

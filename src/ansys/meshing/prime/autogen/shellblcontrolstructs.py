@@ -39,12 +39,20 @@ class ShellBLControlGrowthParams(CoreObject):
         Model to create a ``ShellBLControlGrowthParams`` object with default parameters.
     n_layers: int, optional
         Number of layers to be generated.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     offset_type: ShellBLOffsetType, optional
         Offset type for ShellBL.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     growth_rate: float, optional
         Ratio of heights of current layer to previous layer.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     first_height: float, optional
         Height of first layer of ShellBL.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ShellBLControlGrowthParams`` object with provided parameters.
 
@@ -82,12 +90,20 @@ class ShellBLControlGrowthParams(CoreObject):
             Model to create a ``ShellBLControlGrowthParams`` object with default parameters.
         n_layers: int, optional
             Number of layers to be generated.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         offset_type: ShellBLOffsetType, optional
             Offset type for ShellBL.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         growth_rate: float, optional
             Ratio of heights of current layer to previous layer.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         first_height: float, optional
             Height of first layer of ShellBL.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ShellBLControlGrowthParams`` object with provided parameters.
 
@@ -182,6 +198,8 @@ class ShellBLControlGrowthParams(CoreObject):
     @property
     def n_layers(self) -> int:
         """Number of layers to be generated.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._n_layers
 
@@ -192,6 +210,8 @@ class ShellBLControlGrowthParams(CoreObject):
     @property
     def offset_type(self) -> ShellBLOffsetType:
         """Offset type for ShellBL.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._offset_type
 
@@ -202,6 +222,8 @@ class ShellBLControlGrowthParams(CoreObject):
     @property
     def growth_rate(self) -> float:
         """Ratio of heights of current layer to previous layer.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._growth_rate
 
@@ -212,6 +234,8 @@ class ShellBLControlGrowthParams(CoreObject):
     @property
     def first_height(self) -> float:
         """Height of first layer of ShellBL.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._first_height
 
