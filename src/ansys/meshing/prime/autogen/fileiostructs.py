@@ -78,8 +78,9 @@ class CadFaceter(enum.IntEnum):
     """Types of CAD faceter.
     """
     ACIS = 0
-    """Denotes CAD faceter is Acis.""" 
-    Note: ACIS faceter is being deprecated from 2025R1.
+    """Denotes CAD faceter is Acis.
+    
+    Note: ACIS faceter is being deprecated from 2025R1.""" 
     PARASOLID = 1
     """Denotes CAD faceter is Parasolid."""
 
