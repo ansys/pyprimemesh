@@ -170,7 +170,7 @@ sphinx_gallery_conf = {
     # directory where function granular galleries are stored
     "backreferences_dir": "api/_gallery_backreferences",
     # Modules for which function level galleries are created.  In
-    "doc_module": ("ansys-meshing-prime"),
+    "doc_module": ("ansys.meshing.prime","ansys.meshing.prime.lucid","ansys.meshing.prime.examples"),
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "ignore_pattern": "flycheck*",
