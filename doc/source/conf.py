@@ -173,7 +173,7 @@ sphinx_gallery_conf = {
     "doc_module": (
         "ansys.meshing.prime",
         "ansys.meshing.prime.lucid",
-        "ansys.meshing.prime.examples"
+        "ansys.meshing.prime.examples",
     ),
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
