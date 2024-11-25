@@ -177,4 +177,4 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
 }
 
-supress_warnings = ["docutils"]
+# supress_warnings = ["docutils"]
