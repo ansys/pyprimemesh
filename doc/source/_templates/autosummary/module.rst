@@ -64,4 +64,11 @@
 {% endif %}
 {% endblock %}
 
+.. auto{{ objtype }}:: {{ objname }}
+
+.. minigallery::
+   :add-heading: Examples using {{ objname }}
+
+   {{ fullname }}.{{ objname }}
+
 .. vale on

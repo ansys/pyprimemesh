@@ -168,9 +168,10 @@ sphinx_gallery_conf = {
     # Sort gallery example by file name instead of number of lines (default)
     "within_subsection_order": FileNameSortKey,
     # directory where function granular galleries are stored
-    "backreferences_dir": None,
+    "backreferences_dir": "_gallery_backreferences",
     # Modules for which function level galleries are created.  In
-    "doc_module": "ansys-meshing-prime",
+    "doc_module": ("ansys-meshing-prime"),
+    "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),

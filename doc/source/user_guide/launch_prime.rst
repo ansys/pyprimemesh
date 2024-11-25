@@ -67,7 +67,7 @@ The :func:`Client.exit() <ansys.meshing.prime.Client.exit>` method ends the conn
 If the :class:`Client <ansys.meshing.prime.Client>` class launched the server, then this terminates the server process.
 
 .. note::
-If you use Intel(R) MPI Library, Version 2021.8, you may encounter the following error while exiting the client:
+    If you use Intel(R) MPI Library, Version 2021.8, you may encounter the following error while exiting the client:
 
 .. figure:: ../images/client_exit_error.png
     :width: 200pt
