@@ -58,12 +58,6 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
-    "ansys_sphinx_theme_autoapi": {
-        "project": project,
-        "keep_files": True,
-        "add_toctree_entry": True,
-        "package_depth": 5,
-    },
     "cheatsheet": {
         "file": "cheatsheet/cheat_sheet.qmd",
         "title": "PyPrimeMesh cheat sheet",
@@ -73,6 +67,7 @@ html_theme_options = {
 
 # Sphinx extensions
 extensions = [
+    'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     "numpydoc",
     "sphinx.ext.intersphinx",
@@ -83,10 +78,10 @@ extensions = [
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
     "sphinx.ext.extlinks",
+    "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
     "pyvista.ext.viewer_directive",
-    "ansys_sphinx_theme.extension.autoapi",
 ]
 nbsphinx_execute = "always"
 
@@ -183,40 +178,3 @@ sphinx_gallery_conf = {
 }
 
 supress_warnings = ["docutils"]
-
-exclude_patterns = [
-    "examples/**/*.ipynb",
-    "examples/**/*.py",
-    "examples/**/*.md5",
-    "api/ansys/visualizer/index.rst",
-]
-
-
-BUILD_API = True
-if not BUILD_API:
-    exclude_patterns.append("autoapi")
-
-BUILD_EXAMPLES = True
-if not BUILD_EXAMPLES:
-    exclude_patterns.append("examples/**")
-    exclude_patterns.append("examples.rst")
-
-jinja_contexts = {
-    "main_toctree": {
-        "build_api": BUILD_API,
-        "build_examples": BUILD_EXAMPLES,
-    }
-}
-
-
-def prepare_jinja_env(jinja_env) -> None:
-    """Customize the jinja env.
-
-    Notes
-    -----
-    See https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.Environment
-    """
-    jinja_env.globals["project_name"] = project
-
-
-autoapi_prepare_jinja_env = prepare_jinja_env
