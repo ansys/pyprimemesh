@@ -78,7 +78,9 @@ class CadFaceter(enum.IntEnum):
     """Types of CAD faceter.
     """
     ACIS = 0
-    """Denotes CAD faceter is Acis."""
+    """Denotes CAD faceter is Acis.
+    
+    Note: ACIS faceter is being deprecated from 2025R1.""" 
     PARASOLID = 1
     """Denotes CAD faceter is Parasolid."""
 
@@ -1306,7 +1308,8 @@ class CadRefacetingParams(CoreObject):
     model: Model
         Model to create a ``CadRefacetingParams`` object with default parameters.
     cad_faceter: CadFaceter, optional
-        Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
+        Specify the available choices for faceter. The available option is Parasolid. 
+        Note: ACIS faceter is being deprecated from 2025R1.
     faceting_resolution: CadRefacetingResolution, optional
         Set the faceting resolution.
     custom_surface_deviation_tolerance: float, optional
@@ -1359,7 +1362,8 @@ class CadRefacetingParams(CoreObject):
         model: Model
             Model to create a ``CadRefacetingParams`` object with default parameters.
         cad_faceter: CadFaceter, optional
-            Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
+            Specify the available choices for faceter. The available option is Parasolid. 
+            Note: ACIS faceter is being deprecated from 2025R1.
         faceting_resolution: CadRefacetingResolution, optional
             Set the faceting resolution.
         custom_surface_deviation_tolerance: float, optional
@@ -1428,7 +1432,8 @@ class CadRefacetingParams(CoreObject):
         Parameters
         ----------
         cad_faceter: CadFaceter, optional
-            Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
+            Specify the available choices for faceter. The available option is Parasolid. 
+            Note: ACIS faceter is being deprecated from 2025R1.
         faceting_resolution: CadRefacetingResolution, optional
             Set the faceting resolution.
         custom_surface_deviation_tolerance: float, optional
@@ -1479,7 +1484,8 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def cad_faceter(self) -> CadFaceter:
-        """Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
+        """Specify the available choices for faceter. The available option is Parasolid.
+           Note: ACIS faceter is being deprecated from 2025R1.
         """
         return self._cad_faceter
 

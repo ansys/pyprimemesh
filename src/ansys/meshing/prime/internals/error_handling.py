@@ -393,6 +393,7 @@ prime_warning_messages = {
     WarningCode.EXPORTMAPDLANALYSISSETTINGSFAILED: "Export of analysis settings to separate file failed.",
     WarningCode.WRITINGCONTACTPAIRSSKIPPED: "Writing of contact pairs skipped due to no surface or surface interaction definition.",
     WarningCode.WRITINGTIESSKIPPED: "Writing of ties skipped due to no surface definition.",
+    WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED: "Export of a zonelet skipped while exporting a label as element component. Disable the parameter enable_face_based_labels in ExportMapdlCdbParams to export the label as node component.",
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
     WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topoentities. Skipped projection for those topoentities.",
     WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topoentities. Mesh node projected on facets for those topoentities.",

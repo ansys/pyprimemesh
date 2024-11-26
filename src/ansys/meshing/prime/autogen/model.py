@@ -307,6 +307,7 @@ class Model(CoreObject, CommunicationManager):
     def get_size_field_name(self, size_field_id : int) -> str:
         """ Gets the name of size field with the given id.
 
+
         Parameters
         ----------
         size_field_id : int
@@ -316,7 +317,8 @@ class Model(CoreObject, CommunicationManager):
         -------
         str
             Returns the name of the size field.
-        
+
+
         Notes
         -----
         **This is a beta API**. **The behavior and implementation may change in future**.
@@ -604,7 +606,8 @@ class Model(CoreObject, CommunicationManager):
 
         Examples
         --------
-        >>> model = prime.local_model
+        >>> client = prime.launch_prime()
+        >>> model = client.model
         >>> zones = model.set_working_directory("C:/input_files")
 
         """

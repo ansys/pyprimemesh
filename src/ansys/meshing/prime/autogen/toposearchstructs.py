@@ -61,7 +61,15 @@ class TopoSearchField(enum.IntEnum):
     """Diagnoses topofaces with small topoedges.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
-    NUMBEROFFIELDS = 7
+    INCORRECTBOUNDARYORIENTATIONTOPOFACES = 7
+    """Diagnoses topofaces with incorrect boundary orientations.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INCONSISTENTNORMALORIENTATIONTOPOFACES = 8
+    """Diagnoses topofaces with inconsistent normal orientations.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    NUMBEROFFIELDS = 9
     """Diagnoses all topofaces.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""

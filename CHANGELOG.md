@@ -2,6 +2,39 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.7.0.dev20](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0.dev20) - 2024-11-08
+
+
+### Fixed
+
+- fix: Visualizer version [#928](https://github.com/ansys/pyprimemesh/pull/928)
+
+
+### Dependencies
+
+- Bump ansys-tools-visualization-interface from 0.4.4 to 0.4.6 in the general-dependencies group across 1 directory [#918](https://github.com/ansys/pyprimemesh/pull/918)
+- Bump the doc-dependencies group across 1 directory with 4 updates [#919](https://github.com/ansys/pyprimemesh/pull/919)
+- Bump ansys-tools-visualization-interface from 0.4.4 to 0.4.7 in the general-dependencies group across 1 directory [#923](https://github.com/ansys/pyprimemesh/pull/923)
+- Bump ansys-sphinx-theme[autoapi] from 1.1.6 to 1.1.7 in the doc-dependencies group across 1 directory [#924](https://github.com/ansys/pyprimemesh/pull/924)
+- Bump ansys-tools-visualization-interface from 0.4.7 to 0.5.0 in the general-dependencies group [#930](https://github.com/ansys/pyprimemesh/pull/930)
+- Bump pytest-cov from 5.0.0 to 6.0.0 in the test-dependencies group [#931](https://github.com/ansys/pyprimemesh/pull/931)
+
+
+### Documentation
+
+- Update README.md [#917](https://github.com/ansys/pyprimemesh/pull/917)
+- Update 11_solder_ball.py [#922](https://github.com/ansys/pyprimemesh/pull/922)
+- Update fileio.rst [#925](https://github.com/ansys/pyprimemesh/pull/925)
+- Update launch_prime.rst [#927](https://github.com/ansys/pyprimemesh/pull/927)
+- Update automesh.rst [#933](https://github.com/ansys/pyprimemesh/pull/933)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.7.0.dev19 [#920](https://github.com/ansys/pyprimemesh/pull/920)
+- updated ansys-api-meshing-prime version [#921](https://github.com/ansys/pyprimemesh/pull/921)
+- MAINT: update code from ADO 0.7.0.dev20 [#934](https://github.com/ansys/pyprimemesh/pull/934)
+
 ## [0.7.0.dev19](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0.dev19) - 2024-10-21
 
 

@@ -631,11 +631,10 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> # connect client to server and get model from it
-        >>> client  = prime.Client(ip="localhost", port=50060)
-        >>> model   = client.model
+        >>> prime_client = prime.launch_prime()
+        >>> model = prime_client.model
         >>> file_io = prime.FileIO(model=model)
-        >>> params  = prime.ImportCadParams(model=model)
+        >>> params = prime.ImportCadParams(model=model)
         >>> results = file_io.import_cad("/tmp/my_cad.x_t", params=params)
 
         """
