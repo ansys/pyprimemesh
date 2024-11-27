@@ -158,25 +158,27 @@ class Client(object):
         >>> print(result)
         >>> prime_client.exit() # Sever connection with server and kill the server.
         """
-        if self._comm is not None:
-            self._comm.close()
-            self._comm = None
-        if self._process is not None:
-            assert self._local == False
-            terminate_process(self._process)
-            self._process = None
+        if not self._has_exited:
+            if self._comm is not None:
+                self._comm.close()
+                self._comm = None
+            if self._process is not None:
+                assert self._local == False
+                terminate_process(self._process)
+                self._process = None
 
-        if config.using_container():
-            container_name = getattr(self, 'container_name')
-            utils.stop_prime_github_container(container_name)
-        elif config.has_pim():
-            self.remote_instance.delete()
-            self.pim_client.close()
+            if config.using_container():
+                container_name = getattr(self, 'container_name')
+                utils.stop_prime_github_container(container_name)
+            elif config.has_pim():
+                self.remote_instance.delete()
+                self.pim_client.close()
 
-        clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
-        if clear_examples:
-            download_manager = examples.DownloadManager()
-            download_manager.clear_download_cache()
+            clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
+            if clear_examples:
+                download_manager = examples.DownloadManager()
+                download_manager.clear_download_cache()
+        self._has_exited = True
 
     def __enter__(self):
         """Open client."""
