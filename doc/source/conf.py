@@ -171,7 +171,7 @@ sphinx_gallery_conf = {
     "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
     "doc_module": "ansys-meshing-prime",
-    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "image_scrapers": ("matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
 }
