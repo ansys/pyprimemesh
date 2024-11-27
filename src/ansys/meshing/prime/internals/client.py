@@ -111,6 +111,10 @@ class Client(object):
                     f'Failed to load prime_communicator with message: {err.msg}'
                 )
 
+    def __del__(self):
+        """In case unexpected termination, close the connection."""
+        self.exit()
+
     @property
     def model(self):
         """Get model associated with the client."""
