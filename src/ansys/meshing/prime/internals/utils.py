@@ -50,7 +50,7 @@ def make_unique_container_name(name: str):
     """
     global _PRIME_CONTAINER_COUNT
     _PRIME_CONTAINER_COUNT = _PRIME_CONTAINER_COUNT + 1
-    return f'{name}-{_PRIME_CONTAINER_COUNT}'
+    return f'{name}-{os.getpid()}'
 
 
 def to_camel_case(snake_str):
