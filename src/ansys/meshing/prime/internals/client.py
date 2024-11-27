@@ -75,6 +75,7 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
+        self._has_exited = False
         if not local:
             try:
                 from ansys.meshing.prime.internals.grpc_communicator import (
