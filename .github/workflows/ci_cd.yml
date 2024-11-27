@@ -87,7 +87,7 @@ jobs:
   docs:
     name: Documentation
     runs-on: ubuntu-latest
-    needs: [docs-style]
+    # needs: [docs-style]
     steps:
 
       - name: Login in Github Container registry
