@@ -64,7 +64,6 @@ Procedure
 # launch an instance of Ansys Prime Server.
 # Connect the PyPrimeMesh client and get the model.
 # Instantiate meshing utilities from the ``lucid`` class.
-try:
 import os
 import tempfile
 
