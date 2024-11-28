@@ -85,6 +85,10 @@ mesh_util.read(file_name=source_mesh)
 mesh_util.read(file_name=target_geometry, append=True)
 
 
+display = PrimePlotter()
+display.plot(model)
+display.show()
+
 print(model)
 
 ###############################################################################
@@ -125,6 +129,9 @@ morpher.match_morph(
 
 # Display the morphed mesh
 
+display = PrimePlotter()
+display.plot(model, update=True)
+display.show()
 ###############################################################################
 # Write mesh
 # ~~~~~~~~~~

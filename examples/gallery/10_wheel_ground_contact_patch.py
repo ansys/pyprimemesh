@@ -97,6 +97,10 @@ wheel_ground_file = prime.examples.download_wheel_ground_fmd()
 
 mesh_util.read(wheel_ground_file)
 
+display = PrimePlotter()
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
+display.show()
+
 print(model)
 
 ###############################################################################
@@ -147,6 +151,9 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
+display = PrimePlotter()
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
+display.show()
 
 ###############################################################################
 # Wrap the fluid region
@@ -170,6 +177,11 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
+display = PrimePlotter()
+display.plot(
+    model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
+)
+display.show()
 
 print(model)
 
@@ -187,6 +199,13 @@ mesh_util.volume_mesh(
     scope=prime.lucid.VolumeScope(part_expression=wrap_part.name),
 )
 
+display = PrimePlotter()
+display.plot(
+    model,
+    scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"),
+    update=True,
+)
+display.show()
 
 mesh_util.create_zones_from_labels()
 
@@ -198,14 +217,14 @@ print(wrap_part)
 # ~~~~~~~~~~~
 # Write a CAS file for use in the Fluent solver.
 
-# with tempfile.TemporaryDirectory() as temp_folder:
-#     wheel_model = os.path.join(temp_folder, "wheel_ground_contact.cas.h5")
-#     prime.FileIO(model).export_fluent_case(
-#         wheel_model,
-#         export_fluent_case_params=prime.ExportFluentCaseParams(model, cff_format=True),
-#     )
-#     assert os.path.exists(wheel_model)
-#     print(f"Fluent case exported at {wheel_model}")
+with tempfile.TemporaryDirectory() as temp_folder:
+    wheel_model = os.path.join(temp_folder, "wheel_ground_contact.cas.h5")
+    prime.FileIO(model).export_fluent_case(
+        wheel_model,
+        export_fluent_case_params=prime.ExportFluentCaseParams(model, cff_format=True),
+    )
+    assert os.path.exists(wheel_model)
+    print(f"Fluent case exported at {wheel_model}")
 
 ###############################################################################
 # Exit the PyPrimeMesh session

@@ -242,6 +242,11 @@ mesh_util_controls = mesh_util.surface_mesh_with_size_controls(
 # Display the meshed base face in a PyVista window
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+if display_intermediate_steps:
+    display = PrimePlotter()
+    display.plot(model, update=True)
+    display.show()
+
 ###############################################################################
 # Stack the base face using the volume sweeper
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
