@@ -151,6 +151,14 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
+###################
+# Visualize results
+# =================
+# .. code-block:: python
+#
+#   display = PrimePlotter()
+#   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
+#   display.show()
 
 ###############################################################################
 # Wrap the fluid region
@@ -174,6 +182,16 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
+#########################
+# Open a pyvistaqt window
+# =======================
+# .. code-block:: python
+#
+#     display = PrimePlotter()
+#     display.plot(
+#         model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
+#     )
+#     display.show()
 
 print(model)
 
