@@ -23,6 +23,7 @@
 """Module for general utilities of the project."""
 import logging
 import os
+import random
 import shutil
 import subprocess
 from contextlib import contextmanager
@@ -50,7 +51,7 @@ def make_unique_container_name(name: str):
     """
     global _PRIME_CONTAINER_COUNT
     _PRIME_CONTAINER_COUNT = _PRIME_CONTAINER_COUNT + 1
-    return f'{name}-{os.getpid()}'
+    return f'{name}-{random.randint(1,999999)}'
 
 
 def to_camel_case(snake_str):
