@@ -215,9 +215,6 @@ def example():
         min_size=0.1, max_size=0.4, scope=base_scope, generate_quads=True
     )
 
-    display = PrimePlotter()
-    display.plot(model, update=True)
-    display.show()
 
     stackbase_results = sweeper.stack_base_face(
         part_id=merged_part.id,

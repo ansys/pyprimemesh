@@ -85,10 +85,6 @@ mesh_util.read(file_name=source_mesh)
 mesh_util.read(file_name=target_geometry, append=True)
 
 
-display = PrimePlotter()
-display.plot(model)
-display.show()
-
 print(model)
 
 ###############################################################################
