@@ -170,11 +170,6 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
-display = PrimePlotter()
-display.plot(
-    model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
-)
-display.show()
 
 print(model)
 
@@ -192,13 +187,6 @@ mesh_util.volume_mesh(
     scope=prime.lucid.VolumeScope(part_expression=wrap_part.name),
 )
 
-display = PrimePlotter()
-display.plot(
-    model,
-    scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"),
-    update=True,
-)
-display.show()
 
 mesh_util.create_zones_from_labels()
 

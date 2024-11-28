@@ -108,6 +108,7 @@ jobs:
         with:
           check-links: false
           needs-quarto: true
+          requires-xvfb: true
           sphinxopts: "-j 1 --keep-going"
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1

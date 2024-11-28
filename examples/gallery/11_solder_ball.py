@@ -215,7 +215,6 @@ def example():
         min_size=0.1, max_size=0.4, scope=base_scope, generate_quads=True
     )
 
-
     stackbase_results = sweeper.stack_base_face(
         part_id=merged_part.id,
         base_face_ids=base_faces,
