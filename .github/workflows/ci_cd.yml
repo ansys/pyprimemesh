@@ -154,7 +154,7 @@ jobs:
           path: tests/graphics/image_cache
           retention-days: 7
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         name: 'Upload coverage to CodeCov'
 
   package:
