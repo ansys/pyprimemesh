@@ -97,6 +97,16 @@ wheel_ground_file = prime.examples.download_wheel_ground_fmd()
 
 mesh_util.read(wheel_ground_file)
 
+
+###################
+# Visualize results
+# =================
+# .. code-block:: python
+#
+#   display = PrimePlotter()
+#   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
+#   display.show()
+
 display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
 display.show()
