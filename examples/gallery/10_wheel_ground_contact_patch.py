@@ -157,7 +157,9 @@ print(model)
 # .. code-block:: python
 #
 #   display = PrimePlotter()
-#   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"))
+#   display.plot(
+#          model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
+#   )
 #   display.show()
 
 ###############################################################################
@@ -189,7 +191,8 @@ wrap_part = mesh_util.wrap(
 #
 #     display = PrimePlotter()
 #     display.plot(
-#         model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
+#         model,
+#         scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
 #     )
 #     display.show()
 
