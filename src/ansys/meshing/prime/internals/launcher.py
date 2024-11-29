@@ -21,7 +21,6 @@
 # SOFTWARE.
 
 """Helper module for launching the server."""
-import logging
 import os
 import subprocess
 import sys
@@ -260,7 +259,11 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
-        print('Using Ansys Prime Server from container {container_name}'.format(container_name=container_name))
+        print(
+            'Using Ansys Prime Server from container {container_name}'.format(
+                container_name=container_name
+            )
+        )
         return client
 
     server = launch_server_process(
