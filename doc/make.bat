@@ -10,6 +10,7 @@ if "%SPHINXBUILD%" == "" (
 if "%SPHINXOPTS%" == "" (
 	set SPHINXOPTS=-j auto
 )
+
 set SOURCEDIR=source
 set BUILDDIR=_build
 
