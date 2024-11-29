@@ -131,7 +131,7 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'index'
 
-autosummary_generate = False
+autosummary_generate = True
 autosummary_imported_members = True
 autosummary_ignore_module_all = False
 
@@ -174,7 +174,6 @@ sphinx_gallery_conf = {
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
-    "parallel": 1,
 }
 
 supress_warnings = ["docutils"]

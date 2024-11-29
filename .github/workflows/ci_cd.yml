@@ -89,7 +89,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [docs-style]
     steps:
-
       - name: Login in Github Container registry
         uses: docker/login-action@v3
         with:
