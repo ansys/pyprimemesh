@@ -107,10 +107,6 @@ mesh_util.read(wheel_ground_file)
 #   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
 #   display.show()
 
-display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
-display.show()
-
 print(model)
 
 ###############################################################################
