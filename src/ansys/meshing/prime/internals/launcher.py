@@ -162,7 +162,7 @@ def launch_server_process(
     if sys.platform.startswith('win32'):
         kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
+    print('Using Ansys Prime Server from {prime_root}'.format(prime_root=prime_root))
     server = subprocess.Popen(server_args, **kwargs)
     return server
 
@@ -260,6 +260,7 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
+        print('Using Ansys Prime Server from container {container_name}'.format(container_name=container_name))
         return client
 
     server = launch_server_process(
