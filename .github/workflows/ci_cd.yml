@@ -16,7 +16,7 @@ on:
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
   DOCKER_IMAGE_TAG: '25.1.0.dev20'
-  MAIN_PYTHON_VERSION: '3.10'
+  MAIN_PYTHON_VERSION: '3.12'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
@@ -89,7 +89,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [docs-style]
     steps:
-
       - name: Login in Github Container registry
         uses: docker/login-action@v3
         with:
@@ -101,7 +100,7 @@ jobs:
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Setup headless display
-        uses: pyvista/setup-headless-display-action@v2
+        uses: pyvista/setup-headless-display-action@v3
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
@@ -155,7 +154,7 @@ jobs:
           path: tests/graphics/image_cache
           retention-days: 7
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         name: 'Upload coverage to CodeCov'
 
   package:
