@@ -34,10 +34,6 @@ graphics = [
 pygeometry = [
   "ansys-geometry-core>=0.7.6,<1",
 ]
-all = [
-  "ansys-tools-visualization-interface>=0.4.7,<1",
-  "ansys-geometry-core>=0.7.6,<1",
-]
 tests = [
   "ansys-tools-visualization-interface==0.5.0",
   "pytest==8.3.3",
@@ -62,6 +58,7 @@ doc = [
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
+  "ansys-geometry-core>=0.7.6,<1",
 ]
 
 [project.urls]
