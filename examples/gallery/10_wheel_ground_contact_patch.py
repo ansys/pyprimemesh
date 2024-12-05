@@ -100,7 +100,7 @@ mesh_util.read(wheel_ground_file)
 
 ###################
 # Visualize results
-# =================
+# ~~~~~~~~~~~~~~~~~
 # .. code-block:: python
 #
 #   display = PrimePlotter()
@@ -168,9 +168,9 @@ print(model)
 #   )
 #   display.show()
 
-###############################################################################
+#######################
 # Wrap the fluid region
-# c
+# ~~~~~~~~~~~~~~~~~~~~~
 # The largest internal region in this instance is the fluid region around the wheel.
 # Intersection loops are created to capture the features at the corners between the
 # patch, ground, and wheel.
