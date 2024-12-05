@@ -170,7 +170,7 @@ print(model)
 
 ###############################################################################
 # Wrap the fluid region
-# ~~~~~~~~~~~~~~~~~~~~~
+# c
 # The largest internal region in this instance is the fluid region around the wheel.
 # Intersection loops are created to capture the features at the corners between the
 # patch, ground, and wheel.
@@ -192,7 +192,7 @@ wrap_part = mesh_util.wrap(
 
 #########################
 # Open a pyvistaqt window
-# =======================
+# ~~~~~~~~~~~~~~~~~~~~~~~
 # .. code-block:: python
 #
 #     display = PrimePlotter()
