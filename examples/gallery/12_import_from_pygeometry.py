@@ -39,51 +39,58 @@ Procedure
 #. Import the geometry into PyPrimeMesh.
 #. Exit the PyPrimeMesh session.
 
+
+
+Create the geometry
+~~~~~~~~~~~~~~~~~~~
+First we create a simple geometry using PyGeometry. The geometry is a plate
+with a hole in the center:
+
+.. code-block:: python
+
+   from pint import Quantity
+
+   from ansys.geometry.core import launch_modeler
+   from ansys.geometry.core.math import Point2D
+   from ansys.geometry.core.misc import UNITS
+   from ansys.geometry.core.sketch import Sketch
+   from ansys.geometry.core.math import Point2D
+
+   sketch = Sketch()
+   (
+       sketch.segment(Point2D([-4, 5], unit=UNITS.m), Point2D([4, 5], unit=UNITS.m))
+       .segment_to_point(Point2D([4, -5], unit=UNITS.m))
+       .segment_to_point(Point2D([-4, -5], unit=UNITS.m))
+       .segment_to_point(Point2D([-4, 5], unit=UNITS.m))
+       .box(Point2D([0, 0], unit=UNITS.m), Quantity(3, UNITS.m), Quantity(3, UNITS.m))
+   )
+   modeler = launch_modeler(hidden=True)
+   design = modeler.create_design("ExtrudedPlateNoHoles")
+   body = design.extrude_sketch(f"PlateLayer", sketch, Quantity(2, UNITS.m))
+
+Import the geometry into PyPrimeMesh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Once the geometry is created, we can pass the Design object to PyPrimeMesh to
+create a mesh:
+
+.. code-block:: python
+
+   import ansys.meshing.prime as prime
+   from ansys.meshing.prime.graphics.plotter import PrimePlotter
+
+   prime_client = prime.launch_prime()
+   model = prime_client.model
+   mesh_util = prime.lucid.Mesh(model=model)
+
+Mesh the geometry and display it
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+With the geometry imported, we can now mesh it and display the mesh:
+
+.. code-block:: python
+
+   mesh_util.surface_mesh(min_size=0.1, max_size=0.5)
+   display = PrimePlotter()
+   display.plot(model)
+   display.show()
+   modeler.close()
 """
-
-#####################
-# Create the geometry
-# ~~~~~~~~~~~~~~~~~~~
-# First we create a simple geometry using PyGeometry. The geometry is a plate
-# with a hole in the center.
-# .. code-block:: python
-#   from pint import Quantity
-#
-#   from ansys.geometry.core import launch_modeler
-#   from ansys.geometry.core.math import Point2D
-#   from ansys.geometry.core.misc import UNITS
-#   from ansys.geometry.core.sketch import Sketch
-#   from ansys.geometry.core.math import Point2D
-#   sketch = Sketch()
-#   (sketch.segment(Point2D([-4, 5], unit=UNITS.m), Point2D([4, 5], unit=UNITS.m))
-#      .segment_to_point(Point2D([4, -5], unit=UNITS.m))
-#      .segment_to_point(Point2D([-4, -5], unit=UNITS.m))
-#      .segment_to_point(Point2D([-4, 5], unit=UNITS.m))
-#       .box(Point2D([0,0], unit=UNITS.m), Quantity(3, UNITS.m), Quantity(3, UNITS.m))
-#   )
-#   modeler = launch_modeler(hidden=True)
-#   design = modeler.create_design("ExtrudedPlateNoHoles")
-#   body = design.extrude_sketch(f"PlateLayer", sketch, Quantity(2, UNITS.m))
-
-######################################
-# Import the geometry into PyPrimeMesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Once the geometry is created, we can pass the Design object to PyPrimeMesh to
-# create a mesh.
-# .. code-block:: python
-#   import ansys.meshing.prime as prime
-#   from ansys.meshing.prime.graphics.plotter import PrimePlotter
-#   prime_client = prime.launch_prime()
-#   model = prime_client.model
-#   mesh_util = prime.lucid.Mesh(model=model)
-
-##################################
-# Mesh the geometry and display it
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# With the geometry imported, we can now mesh it and display the mesh.
-# .. code-block:: python
-#   mesh_util.surface_mesh(min_size=0.1, max_size=0.5)
-#   display = PrimePlotter()
-#   display.plot(model)
-#   display.show()
-#   modeler.close()

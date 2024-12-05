@@ -106,7 +106,7 @@ mesh_util.read(wheel_ground_file)
 #   display = PrimePlotter()
 #   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
 #   display.show()
-
+#
 print(model)
 
 ###############################################################################
@@ -167,7 +167,7 @@ print(model)
 #          model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
 #   )
 #   display.show()
-
+#
 #######################
 # Wrap the fluid region
 # ~~~~~~~~~~~~~~~~~~~~~
@@ -201,7 +201,7 @@ wrap_part = mesh_util.wrap(
 #         scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
 #     )
 #     display.show()
-
+#
 print(model)
 
 ###############################################################################
