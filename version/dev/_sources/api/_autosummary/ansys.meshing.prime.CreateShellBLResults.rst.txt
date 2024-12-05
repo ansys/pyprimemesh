@@ -1,0 +1,35 @@
+.. vale off
+
+CreateShellBLResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateShellBLResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateShellBLResults.print_default
+      CreateShellBLResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateShellBLResults.error_code
+      CreateShellBLResults.warning_codes
+   
+   
+
+.. vale on

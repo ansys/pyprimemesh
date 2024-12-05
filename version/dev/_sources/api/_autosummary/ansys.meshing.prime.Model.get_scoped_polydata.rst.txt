@@ -1,0 +1,6 @@
+get\_scoped\_polydata
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.get_scoped_polydata

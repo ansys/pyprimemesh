@@ -1,0 +1,6 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: LabelToZoneMethod.conjugate

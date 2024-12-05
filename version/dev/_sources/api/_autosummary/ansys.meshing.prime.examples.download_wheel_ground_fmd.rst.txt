@@ -1,0 +1,6 @@
+download\_wheel\_ground\_fmd
+============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_wheel_ground_fmd
