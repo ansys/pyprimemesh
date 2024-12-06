@@ -64,10 +64,9 @@
 {% endif %}
 {% endblock %}
 
-.. auto{{ objtype }}:: {{ objname }}
 .. minigallery::
    :add-heading: Examples using {{ objname }}
 
-   {{ fullname }}.{{ objname }}
+   {{ module }}.{{ objname }}
 
 .. vale on
