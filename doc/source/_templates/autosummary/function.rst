@@ -1,0 +1,11 @@
+{{ fullname }}
+{{ underline }}
+
+.. currentmodule:: {{ module }}
+
+.. autofunction:: {{ fullname }}
+
+.. minigallery::
+    :add-heading: Examples using {{ fullname }}
+
+    {{ fullname }}
