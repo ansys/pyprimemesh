@@ -30,9 +30,14 @@
    {% endif %}
    {% endblock %}
 
-.. minigallery::
-   :add-heading: Examples using {{ objname }}
+.. autoclass:: {{ fullname }}
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
-   {{ module }}.{{ objname }}
+.. minigallery::
+    :add-heading: Examples using {{ fullname }}
+
+    {{ fullname }}
 
 .. vale on
