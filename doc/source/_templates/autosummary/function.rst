@@ -5,6 +5,6 @@
 .. autofunction:: {{ fullname }}
 
 .. minigallery::
-    :add-heading: Examples using {{ fullname }}
+    :add-heading: Examples using {{ objname }}
 
     {{ fullname }}
