@@ -8,7 +8,7 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 if "%SPHINXOPTS%" == "" (
-	set SPHINXOPTS=-j auto
+	set SPHINXOPTS=-n -j auto
 )
 
 set SOURCEDIR=source
@@ -36,7 +36,7 @@ goto end
 
 :clean
 rmdir /s /q %BUILDDIR% > /NUL 2>&1
-for /d /r %SOURCEDIR% %%d in (_autosummary) do @if exist "%%d" rmdir /s /q "%%d"
+for /d /r %SOURCEDIR% %%d in (_autosummary,_gallery_backreferences) do @if exist "%%d" rmdir /s /q "%%d"
 rmdir /s /q %SOURCEDIR%\examples\gallery_examples
 rmdir /s /q %SOURCEDIR%\images\auto-generated
 goto end

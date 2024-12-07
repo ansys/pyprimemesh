@@ -64,4 +64,9 @@
 {% endif %}
 {% endblock %}
 
+.. minigallery::
+   :add-heading: Examples using {{ objname }}
+
+   {{ module }}.{{ objname }}
+
 .. vale on
