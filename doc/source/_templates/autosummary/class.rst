@@ -30,12 +30,6 @@
    {% endif %}
    {% endblock %}
 
-.. autoclass:: {{ fullname }}
-    :members:
-    :undoc-members:
-    :show-inheritance:
-    :exclude-members:
-
 .. minigallery::
     :add-heading: Examples using {{ objname }}
 
