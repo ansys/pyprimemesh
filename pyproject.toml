@@ -37,7 +37,7 @@ tests = [
   "pytest-cov==6.0.0",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.0.0",
-  "pyvista[trame]==0.44.1"
+  "pyvista[trame]==0.44.2"
 ]
 doc = [
   "ansys-tools-visualization-interface==0.6.0",
