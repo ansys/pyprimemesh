@@ -30,4 +30,9 @@
    {% endif %}
    {% endblock %}
 
+.. minigallery::
+    :add-heading: Examples using {{ objname }}
+
+    {{ fullname }}
+
 .. vale on
