@@ -1,0 +1,6 @@
+edge\_mesh\_constant\_size
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.edge_mesh_constant_size

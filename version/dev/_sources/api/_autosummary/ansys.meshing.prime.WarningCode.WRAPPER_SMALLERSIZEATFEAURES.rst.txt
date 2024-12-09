@@ -1,0 +1,6 @@
+WRAPPER\_SMALLERSIZEATFEAURES
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.WRAPPER_SMALLERSIZEATFEAURES

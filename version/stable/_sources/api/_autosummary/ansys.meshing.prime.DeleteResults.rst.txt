@@ -1,0 +1,34 @@
+.. vale off
+
+DeleteResults
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteResults.print_default
+      DeleteResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteResults.error_code
+   
+   
+
+.. vale on
