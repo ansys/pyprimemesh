@@ -109,7 +109,7 @@ Docker for Linux containers
 To run the Linux Docker container for the PyPrimeMesh service, 
 ensure that you follow these steps when installing the Docker:
 
-1.	Install Docker Engine.
+1.	Install `Docker Engine <https://docs.docker.com/engine/install/rhel/>`_.
 
 2.	Restart your machine and start Docker Engine after completing the installation.
 
@@ -129,16 +129,13 @@ GitHub container registry
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Note:**
-You should have write access to the repository orshould be a members of the Ansys organization.
+You should have write access to the repository or should be a members of the Ansys organization.
 
 After installing Docker on your machine, follow these steps to download the Linux Docker container
 for the PyPrimeMesh service and install this image.
 
-1.	Download the Docker image from the PyPrimeMesh repository on GitHub using your GitHub credentials.
-
-2.	Use a GitHub personal access token with permission for reading packages to authorize Docker to access the PyPrimeMesh repository.
-   For more information, see Managing your personal access tokens in the GitHub documentation.
-
+1.	Download the Docker image from the `PyPrimeMesh repository <https://github.com/ansys/pyprimemesh>`_ on GitHub using your GitHub credentials.
+2.	Use a GitHub personal access token with permission for reading packages to authorize Docker to access the PyPrimeMesh repository. For more information, see `Managing your personal access tokens <https://docs.github.com/en/authentication/keeping-your-account-and-data-     secure/managing-your-personal-access-tokens>`_ in the GitHub documentation.
 3.	Save the token to a file using this command:
 
    .. code-block:: python
@@ -172,13 +169,12 @@ The docker folder has the linux/Dockerfile that builds the Linux-based Docker im
 
 You can build the docker image file as follows: 
 
-•	**Build from available Ansys installation**:  Builds the Docker image using the Ansys installation
-     available in the machine where the Docker image is being built.
+•	**Build from available Ansys installation**: Builds the Docker image using the Ansys installation available in the machine where the Docker image is being built.
 
 Prerequisites
 ''''''''''''''
 
-Ensure that Docker is installed in your machine. If you do not have Docker available, see Docker for Linux containers.
+Ensure that Docker is installed in your machine. If you do not have Docker available, see :ref:`Docker for Linux containers <Docker for Linux containers>`.
 
 
 Build from available Ansys installation
@@ -234,7 +230,7 @@ Define the following general environment variables prior to using the PyPrimeMes
       export ANSYSLMD_LICENSE_FILE=<valid license server>
 
 .. note::
-   Docker image creation is supported from 2025 R1 version onwards.
+   Docker image creation is supported from 2025 R1 version.
 
 Launching PyPrimeMesh Service
 ''''''''''''''''''''''''''''''
