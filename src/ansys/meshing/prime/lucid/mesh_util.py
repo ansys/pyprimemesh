@@ -23,12 +23,25 @@
 """Module for meshing utility functions."""
 import enum
 import os
+import tempfile
 from typing import Iterable, List
 
 import ansys.meshing.prime as prime
 
 from .scope import SurfaceScope, VolumeScope
 from .utils import check_name_pattern
+
+
+class ImportTypes(enum.Enum):
+    """Allowed geometry import types."""
+
+    PMDB = 0
+    FMD = 1
+    IGES = 2
+    STEP = 3
+    PARA_BIN = 4
+    PARA_TEXT = 5
+    SCDOCX = 6
 
 
 class LabelToZoneMethod(enum.IntEnum):
@@ -68,6 +81,34 @@ class Mesh:
         """
         self._model = model
         self._logger = model.python_logger
+
+    def from_geometry(
+        self, design: "ansys.geometry.core.Design", import_type: ImportTypes = ImportTypes.FMD
+    ):
+        """Import geometry from an Ansys Design object.
+
+        Parameters
+        ----------
+        design : ansys.geometry.core.Design
+            Ansys Design object to import geometry from.
+        import_type : ImportTypes, optional
+            Type of import. The default is ImportTypes.FMD.
+        """
+        with tempfile.TemporaryDirectory() as tmpdir:
+            file_path = os.path.join(tmpdir)
+            if import_type == ImportTypes.FMD:
+                design.export_to_fmd(file_path)
+            elif import_type == ImportTypes.IGES:
+                design.export_to_iges(file_path)
+            elif import_type == ImportTypes.STEP:
+                design.export_to_step(file_path)
+            elif import_type == ImportTypes.PARA_BIN:
+                design.export_to_parasolid_bin(file_path)
+            elif import_type == ImportTypes.PARA_TEXT:
+                design.export_to_parasolid_text(file_path)
+            elif import_type == ImportTypes.SCDOCX:
+                design.export_to_scdocx(file_path)
+            self.read(str(file_path))
 
     def read(
         self, file_name: str, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
