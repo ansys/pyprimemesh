@@ -138,7 +138,7 @@ for the PyPrimeMesh service and install this image.
 2.	Use a GitHub personal access token with permission for reading packages to authorize Docker to access the PyPrimeMesh repository. For more information, see `Managing your personal access tokens <https://docs.github.com/en/authentication/keeping-your-account-and-data-     secure/managing-your-personal-access-tokens>`_ in the GitHub documentation.
 3.	Save the token to a file using this command:
 
-   .. code-block:: python
+   .. code-block:: pycon
 
       echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX > GH_TOKEN.txt
 
@@ -146,14 +146,14 @@ for the PyPrimeMesh service and install this image.
 
    **Linux:**
 
-      .. code-block:: python
+      .. code-block:: pycon
          
          setenv GH_USERNAME <your_github_username>
          cat GH_TOKEN.txt | docker login ghcr.io -u $GH_USERNAME --password-stdin
 
 5.	Pull the PyPrimeMesh service locally using Docker using the following command:
 
-   .. code-block:: python
+   .. code-block:: pycon
 
         docker pull ghcr.io/ansys/prime:25.1.0
 
@@ -192,7 +192,7 @@ To build your own image from your Ansys installation, follow these instructions:
 
 For example,
 
-   .. code-block:: python
+   .. code-block:: pycon
 
       $AWP_ROOT251/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT251
 
@@ -223,7 +223,7 @@ Define the following general environment variables prior to using the PyPrimeMes
 
 **Linux**
 
-   .. code-block:: python
+   .. code-block:: pycon
 
       export PYPRIMEMESH_LAUNCH_CONTAINER=1
       export PYPRIMEMESH_IMAGE_TAG=<latest>
@@ -235,9 +235,9 @@ Define the following general environment variables prior to using the PyPrimeMes
 Launching PyPrimeMesh Service
 ''''''''''''''''''''''''''''''
 
-PYPrimeMesh Service can be launched as follows:
+PyPrimeMesh Service can be launched as follows:
 
-.. code-block:: python
+.. code-block:: pycon
 
    >>> from ansys.meshing import prime
    >>> client = prime.launch_prime()
