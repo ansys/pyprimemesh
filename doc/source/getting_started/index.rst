@@ -186,7 +186,7 @@ To build your own image from your Ansys installation, follow these instructions:
 
 2.	Execute the script with the following command (no specific location needed):
 
-  .. code-block:: python
+  .. code-block:: pycon
 
      python build_docker_linux.py <ANSYS_INSTALLATION_PATH>
 
