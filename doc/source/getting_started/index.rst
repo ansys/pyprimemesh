@@ -96,43 +96,43 @@ To launch PyPrimeMesh, use this code:
 Launching PyPrimeMesh through docker
 ------------------------------------
 
-PyPrimeMesh is capable of being launched through docker. 
+Ansys Prime Server is capable of being launched through docker. 
 Docker is an open platform for developing, shipping, and running apps in a containerized way.
 Containers are standard units of software that package the code and all its dependencies.
 Hence, the app runs quickly and reliably from one computing environment to another.
 
-PyPrimeMesh Service is delivered as a Linux Docker container.
-Hence, you should have a linux machine to run the PyPrimeMesh Service.
+Ansys Prime Server is delivered as a Linux Docker container.
+Hence, you should have a linux machine to run the Ansys Prime Server.
 
 Docker for Linux containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-To run the Linux Docker container for the PyPrimeMesh service, 
+To run the Linux Docker container for the Ansys Prime Server, 
 ensure that you follow these steps when installing the Docker:
 
 1.	Install `Docker Engine <https://docs.docker.com/engine/install/rhel/>`_.
 
 2.	Restart your machine and start Docker Engine after completing the installation.
 
-Now that your Docker engine supports running Linux Docker containers, you can build or install the PyPrimeMesh image.
+Now that your Docker engine supports running Linux Docker containers, you can build or install the Ansys Prime Server image.
 
-Build or install the PyPrimeMesh service image
+Build or install the Ansys Prime Server image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can install the PyPrimeMesh image in the following ways:
+You can install the Ansys Prime Server image in the following ways:
 
 •	Download it from the GitHub Container Registry.
 
-•	Build the PyPrimeMesh service Linux container.
+•	Build the Ansys Prime Server Linux container.
 
 
 GitHub container registry
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Note:**
+.. note::
 You should have write access to the repository or should be a members of the Ansys organization.
 
 After installing Docker on your machine, follow these steps to download the Linux Docker container
-for the PyPrimeMesh service and install this image.
+for the Ansys Prime Server and install this image.
 
 1.	Download the Docker image from the `PyPrimeMesh repository <https://github.com/ansys/pyprimemesh>`_ on GitHub using your GitHub credentials.
 2.	Use a GitHub personal access token with permission for reading packages to authorize Docker to access the PyPrimeMesh repository. For more information, see `Managing your personal access tokens <https://docs.github.com/en/authentication/keeping-your-account-and-data-     secure/managing-your-personal-access-tokens>`_ in the GitHub documentation.
@@ -151,21 +151,21 @@ for the PyPrimeMesh service and install this image.
          setenv GH_USERNAME <your_github_username>
          cat GH_TOKEN.txt | docker login ghcr.io -u $GH_USERNAME --password-stdin
 
-5.	Pull the PyPrimeMesh service locally using Docker using the following command:
+5.	Pull the Ansys Prime Server locally using Docker using the following command:
 
    .. code-block:: pycon
 
         docker pull ghcr.io/ansys/prime:25.1.0
 
 
-Build the PyPrimeMesh service linux container
+Build the Ansys Prime Server linux container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   
 
-You can build the PyPrimeMesh service Docker containers from the PyPrimeMesh repository docker folder.
+You can build the Ansys Prime Server Docker containers from the PyPrimeMesh repository docker folder.
 The docker folder has the linux/Dockerfile that builds the Linux-based Docker image.
 
 .. note::
-   PyPrimeMesh Service does not support building windows-based docker images.
+   Ansys Prime Server does not support building windows-based docker images.
 
 You can build the docker image file as follows: 
 
@@ -204,22 +204,22 @@ You can view the docker image created with latest tag as follows:
   :width: 800pt
   :align: center
 
-Launch the PyPrimeMesh service
+Launch the Ansys Prime Server
 ''''''''''''''''''''''''''''''
 
-PyPrimeMesh service can be launched using the  PyPrimeMesh launcher.
-You should set the following mandatory environment variable for launching the PyPrimeMesh service:
+Ansys Prime Server can be launched using the PyPrimeMesh launcher.
+You should set the following mandatory environment variable for launching the Ansys Prime Server:
 
-- PYPRIMEMESH_LAUNCH_CONTAINER: Launches the PyPrimeMesh  server form the PyPrimeMesh container.
+- PYPRIMEMESH_LAUNCH_CONTAINER: Launches the Ansys Prime Server form the PyPrimeMesh container.
 
-- PYPRIMEMESH_IMAGE_TAG: Latest version of the PyPrimeMesh docker image.
+- PYPRIMEMESH_IMAGE_TAG: Latest version of the Ansys Prime Server docker image.
 
-- ANSYSLMD_LICENSE_FILE: License server required for launching the PyPrimeMesh service.
+- ANSYSLMD_LICENSE_FILE: License server required for launching the Ansys Prime Server.
 
 Setting the environment variable
 '''''''''''''''''''''''''''''''''
 
-Define the following general environment variables prior to using the PyPrimeMesh launcher. 
+Define the following general environment variables prior to using the Ansys Prime Server launcher. 
 
 **Linux**
 
@@ -232,10 +232,10 @@ Define the following general environment variables prior to using the PyPrimeMes
 .. note::
    Docker image creation is supported from 2025 R1 version.
 
-Launching PyPrimeMesh Service
+Launching Ansys Prime Server 
 ''''''''''''''''''''''''''''''
 
-PyPrimeMesh Service can be launched as follows:
+Ansys Prime Server can be launched as follows:
 
 .. code-block:: pycon
 
