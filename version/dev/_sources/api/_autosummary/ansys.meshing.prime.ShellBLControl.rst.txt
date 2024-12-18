@@ -1,0 +1,44 @@
+.. vale off
+
+ShellBLControl
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ShellBLControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ShellBLControl.get_edge_scope
+      ShellBLControl.get_growth_params
+      ShellBLControl.get_surface_scope
+      ShellBLControl.set_edge_scope
+      ShellBLControl.set_growth_params
+      ShellBLControl.set_surface_scope
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ShellBLControl.id
+      ShellBLControl.name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ShellBLControl
+
+    ansys.meshing.prime.ShellBLControl
+
+.. vale on
