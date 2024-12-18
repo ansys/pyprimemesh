@@ -101,7 +101,7 @@ Docker is an open platform for developing, shipping, and running apps in a conta
 Containers are standard units of software that package the code and all its dependencies.
 Hence, the app runs quickly and reliably from one computing environment to another.
 
-Ansys Prime Server is delivered as a Linux Docker container.
+Ansys Prime Server can be built as a Linux Docker container.
 Hence, you should have a linux machine to run the Ansys Prime Server.
 
 Docker for Linux containers
