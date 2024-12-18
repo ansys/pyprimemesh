@@ -113,7 +113,13 @@ ensure that you follow these steps when installing the Docker:
 
 2.	Restart your machine and start Docker Engine after completing the installation.
 
-Now that your Docker engine supports running Linux Docker containers, you can build or install the Ansys Prime Server image.
+Your Docker engine supports running Linux Docker containers, you can build or install the Ansys Prime Server image.
+
+.. note::
+Ansys Prime Server uses Intel MPI library for performing meshing operations. Intel MPI library requires NUMA support.
+Docker desktop allows to run linux containers on windows using WSL. Existing Linux distributions used for WSL do not typically support NUMA.
+It is expected that a custom Linux distribution would be required for WSL to run the Ansys Prime Server container to support NUMA.
+Ansys does not recommend you to run the Ansys Prime Server image without NUMA support.
 
 Build or install the Ansys Prime Server image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
