@@ -81,6 +81,8 @@ create a mesh:
    prime_client = prime.launch_prime()
    model = prime_client.model
    mesh_util = prime.lucid.Mesh(model=model)
+   mesh_util.from_geometry(design)
+
 
 Mesh the geometry and display it
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
