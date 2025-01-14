@@ -32,7 +32,7 @@ graphics = [
   "ansys-tools-visualization-interface>=0.4.7,<1",
 ]
 tests = [
-  "ansys-tools-visualization-interface==0.6.2",
+  "ansys-tools-visualization-interface==0.7.0",
   "pytest==8.3.4",
   "pytest-cov==6.0.0",
   "pytest-pyvista==0.1.9",
@@ -40,8 +40,8 @@ tests = [
   "pyvista[trame]==0.44.2"
 ]
 doc = [
-  "ansys-tools-visualization-interface==0.6.2",
   "ansys-sphinx-theme[autoapi]==1.2.6",
+  "ansys-tools-visualization-interface==0.7.0",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.8.0",
   "sphinx==8.1.3",
