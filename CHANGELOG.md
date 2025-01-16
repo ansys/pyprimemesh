@@ -2,6 +2,46 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.7.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0) - 2025-01-14
+
+
+### Fixed
+
+- fix: Error appearing in some examples while documentation building [#944](https://github.com/ansys/pyprimemesh/pull/944)
+
+
+### Dependencies
+
+- Bump ansys-sphinx-theme[autoapi] from 1.1.7 to 1.2.0 in the doc-dependencies group [#932](https://github.com/ansys/pyprimemesh/pull/932)
+- Bump codecov/codecov-action from 4 to 5 [#939](https://github.com/ansys/pyprimemesh/pull/939)
+- Bump ansys-sphinx-theme[autoapi] from 1.2.0 to 1.2.2 in the doc-dependencies group across 1 directory [#943](https://github.com/ansys/pyprimemesh/pull/943)
+- build(deps): bump ansys-tools-visualization-interface from 0.5.0 to 0.6.0 in the general-dependencies group [#948](https://github.com/ansys/pyprimemesh/pull/948)
+- build(deps): bump pytest from 8.3.3 to 8.3.4 in the test-dependencies group [#949](https://github.com/ansys/pyprimemesh/pull/949)
+- build(deps): bump pyvista[trame] from 0.44.1 to 0.44.2 in the pyvista group [#950](https://github.com/ansys/pyprimemesh/pull/950)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.2.2 to 1.2.3 in the doc-dependencies group [#954](https://github.com/ansys/pyprimemesh/pull/954)
+- build(deps): bump ansys-tools-visualization-interface from 0.6.0 to 0.6.2 in the general-dependencies group [#959](https://github.com/ansys/pyprimemesh/pull/959)
+- build(deps): bump ansys-tools-visualization-interface from 0.6.2 to 0.7.0 in the general-dependencies group [#962](https://github.com/ansys/pyprimemesh/pull/962)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.2.4 to 1.2.6 in the doc-dependencies group [#963](https://github.com/ansys/pyprimemesh/pull/963)
+
+
+### Documentation
+
+- Update fileiostructs.py [#936](https://github.com/ansys/pyprimemesh/pull/936)
+- Doc/show mini gallery [#947](https://github.com/ansys/pyprimemesh/pull/947)
+- Updated Docker image [#958](https://github.com/ansys/pyprimemesh/pull/958)
+
+
+### Maintenance
+
+- Added support for creating linux based docker image [#908](https://github.com/ansys/pyprimemesh/pull/908)
+- chore: update CHANGELOG for v0.7.0.dev20 [#935](https://github.com/ansys/pyprimemesh/pull/935)
+- version update to 0.7.0 [#964](https://github.com/ansys/pyprimemesh/pull/964)
+
+
+### Test
+
+- build(deps): bump the doc-dependencies group across 1 directory with 2 updates [#961](https://github.com/ansys/pyprimemesh/pull/961)
+
 ## [0.7.0.dev20](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0.dev20) - 2024-11-08
 
 
