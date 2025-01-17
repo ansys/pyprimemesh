@@ -90,7 +90,11 @@ With the geometry imported, we can now mesh it and display the mesh:
 
 .. code-block:: python
 
-   mesh_util.surface_mesh(min_size=0.1, max_size=0.5)
+   mesh_util.surface_mesh(max_size=0.5)
+   mesh_util.volume_mesh()
+   
+   model.parts[0].print_mesh = True
+   print(model)
    display = PrimePlotter()
    display.plot(model)
    display.show()
