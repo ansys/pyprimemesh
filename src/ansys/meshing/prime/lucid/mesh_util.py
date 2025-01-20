@@ -95,19 +95,18 @@ class Mesh:
             Type of import. The default is ImportTypes.FMD.
         """
         with tempfile.TemporaryDirectory() as tmpdir:
-            file_path = os.path.join(tmpdir)
             if import_type == ImportTypes.FMD:
-                design.export_to_fmd(file_path)
+                file_path = design.export_to_fmd(tmpdir)
             elif import_type == ImportTypes.IGES:
-                design.export_to_iges(file_path)
+                file_path = design.export_to_iges(tmpdir)
             elif import_type == ImportTypes.STEP:
-                design.export_to_step(file_path)
+                file_path = design.export_to_step(tmpdir)
             elif import_type == ImportTypes.PARA_BIN:
-                design.export_to_parasolid_bin(file_path)
+                file_path = design.export_to_parasolid_bin(tmpdir)
             elif import_type == ImportTypes.PARA_TEXT:
-                design.export_to_parasolid_text(file_path)
+                file_path = design.export_to_parasolid_text(tmpdir)
             elif import_type == ImportTypes.SCDOCX:
-                design.export_to_scdocx(file_path)
+                file_path = design.export_to_scdocx(tmpdir)
             self.read(str(file_path))
 
     def read(

@@ -56,17 +56,36 @@ with a hole in the center:
    from ansys.geometry.core.sketch import Sketch
    from ansys.geometry.core.math import Point2D
 
+   modeler = launch_modeler(hidden=True)
+
    sketch = Sketch()
    (
-       sketch.segment(Point2D([-4, 5], unit=UNITS.m), Point2D([4, 5], unit=UNITS.m))
-       .segment_to_point(Point2D([4, -5], unit=UNITS.m))
-       .segment_to_point(Point2D([-4, -5], unit=UNITS.m))
-       .segment_to_point(Point2D([-4, 5], unit=UNITS.m))
-       .box(Point2D([0, 0], unit=UNITS.m), Quantity(3, UNITS.m), Quantity(3, UNITS.m))
+       sketch.segment(Point2D([-4, 5], unit=UNITS.mm), Point2D([4, 5], unit=UNITS.mm))
+       .segment_to_point(Point2D([4, -5], unit=UNITS.mm))
+       .segment_to_point(Point2D([-4, -5], unit=UNITS.mm))
+       .segment_to_point(Point2D([-4, 5], unit=UNITS.mm))
+       .box(Point2D([0, 0], unit=UNITS.mm), Quantity(3, UNITS.mm), Quantity(3, UNITS.mm))
    )
-   modeler = launch_modeler(hidden=True)
    design = modeler.create_design("ExtrudedPlateNoHoles")
-   body = design.extrude_sketch(f"PlateLayer", sketch, Quantity(2, UNITS.m))
+   body = design.extrude_sketch(f"PlateLayer", sketch, Quantity(2, UNITS.mm))
+   sketch_hole = Sketch()
+   sketch_hole.circle(Point2D([0, 0], unit=UNITS.mm), Quantity(0.5, UNITS.mm))
+
+   hole_centers = [
+       Plane(Point3D([3, 4, 0], unit=UNITS.mm)),
+       Plane(Point3D([-3, 4, 0], unit=UNITS.mm)),
+       Plane(Point3D([-3, -4, 0], unit=UNITS.mm)),
+       Plane(Point3D([3, -4, 0], unit=UNITS.mm)),
+   ]
+   for center in hole_centers:
+       sketch_hole.plane = center
+       design.extrude_sketch(
+           name=f"H_{center.origin.x}_{center.origin.y}",
+           sketch=sketch_hole,
+           distance=Quantity(2, UNITS.mm),
+           cut=True,
+       )
+
 
 Import the geometry into PyPrimeMesh
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +109,15 @@ With the geometry imported, we can now mesh it and display the mesh:
 
 .. code-block:: python
 
-   mesh_util.surface_mesh(min_size=0.1, max_size=0.5)
+   model.set_global_sizing_params(
+       prime.GlobalSizingParams(model, min=0.2, max=10.0, growth_rate=1.2)
+   )
+   mesh_util.surface_mesh(min_size=0.2)
+   mesh_util.volume_mesh()
+
+   # Print the results
+   model.parts[0].print_mesh = True
+   print(model)
    display = PrimePlotter()
    display.plot(model)
    display.show()
