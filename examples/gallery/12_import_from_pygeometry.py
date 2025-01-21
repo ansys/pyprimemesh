@@ -34,10 +34,12 @@ PyGeometry and import it into PyPrimeMesh.
 
 Procedure
 ~~~~~~~~~
+#. Launch the Geometry service and create a simple geometry.
 #. Launch Ansys Prime Server.
 #. Create a CAD geometry with PyGeometry.
 #. Import the geometry into PyPrimeMesh.
-#. Exit the PyPrimeMesh session.
+#. Mesh and display the imported geometry.
+#. Exit the PyPrimeMesh and PyGeometry sessions.
 
 
 
@@ -122,4 +124,5 @@ With the geometry imported, we can now mesh it and display the mesh:
    display.plot(model)
    display.show()
    modeler.close()
+   prime_client.exit()
 """
