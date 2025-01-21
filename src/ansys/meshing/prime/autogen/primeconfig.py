@@ -533,7 +533,7 @@ class ErrorCode(enum.IntEnum):
     RECOVERPERIODICSURFACESINVALIDSCOPE = 2910
     """Invalid scope input for periodic surface recovery."""
     CHECKPERIODICPAIRSFAILED = 2911
-    """Could not find a matching periodic face pair."""
+    """Cannot find a matching periodic face pair."""
     PERIODICSURFACESEDGESMISMATCH = 2912
     """Edge entities do not match on periodic source and target surfaces."""
     PERIODICRECOVERYFORALREADYVOLUMEMESHEDPART = 2913
@@ -699,7 +699,7 @@ class ErrorCode(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     NUMENMETHODNOTFCOUND = 3801
-    """Could not find numen method."""
+    """Cannot find numen method."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
