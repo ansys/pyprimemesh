@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -800,6 +800,18 @@ class ErrorCode(enum.IntEnum):
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     AUTOQUADMESHER_INVALIDMINMAXSIZES = 15001
     """Difference in maximum value and minimum value is negative.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDWITHUNKNOWNERROR = 16200
+    """Import Abaqus failed. Failed with unknown error.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDWITHPARSINGFAILURE = 16201
+    """Import Abaqus failed. Failed to parse file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDDURINGMESHCREATION = 16202
+    """Import Abaqus failed. Failed to create mesh entities.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZEROELEMENTSREADFROMCDBFILE = 16500

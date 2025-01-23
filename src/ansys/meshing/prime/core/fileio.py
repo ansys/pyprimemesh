@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -56,6 +56,7 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ReadSizeFieldParams,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
+    SeparateBlocksFormatType,
 )
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
@@ -342,7 +343,7 @@ class FileIO(_FileIO):
         """
         Initialize specific CDB export parameters based on the given version.
 
-        This function sets the use_compact_format, export_fasteners_as_swgen and
+        This function sets the separate_blocks_format_type, export_fasteners_as_swgen and
         export_rigid_bodies_as_rbgen parameters of the provided ExportMapdlCdbParams
         object based on the given major and minor version numbers.
         Other parameters remain unchanged.
@@ -366,16 +367,16 @@ class FileIO(_FileIO):
         **This is a beta API**. **The behavior and implementation may change in future**.
 
         The version is formed as "<major_version>r<minor_version>", e.g., "24r1", "25r2".
-        If the version is greater than or equal to "25r1", the use_compact_format,
-        export_fasteners_as_swgen and export_rigid_bodies_as_rbgen parameters are set
-        to True. Otherwise, they are set to False.
+        If the version is greater than or equal to "25r1", write_separate_blocks is set to True
+        with COMPACT format, and export_fasteners_as_swgen and export_rigid_bodies_as_rbgen
+        parameters are set to True. Otherwise, they are set to False.
 
         Examples
         --------
         >>> file_io = prime.FileIO(model=model)
         >>> params = prime.ExportMapdlCdbParams()
         >>> params = file_io.initialize_cdb_export_params(params, 24, 1)
-        >>> params.use_compact_format
+        >>> params.write_separate_blocks
         False
         >>> params.export_fasteners_as_swgen
         False
@@ -385,15 +386,21 @@ class FileIO(_FileIO):
         >>> file_io = prime.FileIO(model=model)
         >>> params = prime.ExportMapdlCdbParams()
         >>> params = file_io.initialize_cdb_export_params(params, 25, 2)
-        >>> params.use_compact_format
+        >>> params.write_separate_blocks
         True
+        >>> params.separate_blocks_format_type
+        SeparateBlocksFormatType.COMPACT
         >>> params.export_fasteners_as_swgen
         True
         >>> params.export_rigid_bodies_as_swgen
         True
         """
         version = f"{major_version}r{minor_version}"
-        params.use_compact_format = version >= "25r1"
+        params.write_separate_blocks = version >= "25r1"
+        if version >= "25r1":
+            params.separate_blocks_format_type = SeparateBlocksFormatType.COMPACT
+        else:
+            params.separate_blocks_format_type = SeparateBlocksFormatType.STANDARD
         params.export_fasteners_as_swgen = version >= "25r1"
         params.export_rigid_bodies_as_rbgen = version >= "25r1"
         return params

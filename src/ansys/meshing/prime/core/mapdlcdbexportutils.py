@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -658,6 +658,7 @@ class _MaterialProcessor:
     __slots__ = (
         '_raw_materials_data',
         '_zone_data',
+        '_enable_hm_comments',
         '_mat_id',
         '_material_linked_to_zone_type',
         '_cohezive_zone_thickness_data',
@@ -666,10 +667,11 @@ class _MaterialProcessor:
         '_logger',
     )
 
-    def __init__(self, model: prime.Model, raw_materials_data, zone_data):
+    def __init__(self, model: prime.Model, raw_materials_data, zone_data, hm_comments=False):
         self._raw_materials_data = raw_materials_data
         self._zone_data = zone_data
         self._mat_id = 0
+        self._enable_hm_comments = hm_comments
         self._material_linked_to_zone_type = {}
         self._cohezive_zone_thickness_data = {}
         self._property_function_map = {
@@ -762,7 +764,13 @@ class _MaterialProcessor:
             'DAMAGE EVOLUTION',
         ]
         # self._logger.info(mat_data)
-        mapdl_text_data = f"! material '{material}' \n"
+        mapdl_text_data = ""
+        hm_comment = self._enable_hm_comments
+        if hm_comment:
+            mapdl_text_data += "!!HMNAME MAT \n"
+            mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
+        else:
+            mapdl_text_data += f"! material '{material}' \n"
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
@@ -1030,7 +1038,8 @@ class _MaterialProcessor:
         data = []
         if 'Data' in property_dict and property_dict['Data'] is not None:
             data = property_dict['Data']
-        if property_dict["Parameters"]["TYPE"] == "ISOTROPIC":
+        if (property_dict["Parameters"]["TYPE"] == "ISOTROPIC" or
+            property_dict["Parameters"]["TYPE"] == "ISO"):
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")
@@ -1056,15 +1065,19 @@ class _MaterialProcessor:
                     f"for material {material}"
                 )
                 if self._material_linked_to_zone_type[material] == 'Cohesive':
-                    elastic_modulus += f"TB, GASKET, {mat_id}, 1, 2,elas\n"
+                    elastic_modulus += f"TB, ELAS, {mat_id}, 1, 2,ISOT\n"
                     elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
+                    # elastic_modulus += f"TB, GASKET, {mat_id}, 1, 2,elas\n"
+                    # elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
                 else:
                     elastic_modulus += f"MP,EX,{mat_id},{youngs_mod[0]}\n"
                     elastic_modulus += f"MP,NUXY,{mat_id},{nu[0]}\n"
             else:
                 if self._material_linked_to_zone_type[material] == 'Cohesive':
-                    elastic_modulus += f"TB, GASKET, {mat_id}, 1, 2,elas\n"
+                    elastic_modulus += f"TB, ELAS, {mat_id}, 1, 2,ISOT\n"
                     elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
+                    # elastic_modulus += f"TB, GASKET, {mat_id}, 1, 2,elas\n"
+                    # elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
                 else:
                     elastic_modulus += f"MP,EX,{mat_id},{youngs_mod[0]}\n"
                     elastic_modulus += f"MP,NUXY,{mat_id},{nu[0]}\n"
@@ -1356,14 +1369,16 @@ class _JointMaterialProcessor:
     __slots__ = (
         '_raw_joint_materials_data',
         '_mat_id',
+        '_enable_hm_comments',
         '_property_function_map',
         '_model',
         '_logger',
     )
 
-    def __init__(self, model: prime.Model, raw_joint_materials_data):
+    def __init__(self, model: prime.Model, raw_joint_materials_data, hm_comments=False):
         self._raw_joint_materials_data = raw_joint_materials_data
         self._mat_id = 0
+        self._enable_hm_comments = hm_comments
         self._property_function_map = {
             'CONNECTOR ELASTICITY': self._process_elasticity,
             'CONNECTOR DAMPING': self._process_damping,
@@ -1385,7 +1400,13 @@ class _JointMaterialProcessor:
         self._mat_id = mat_data['id']
         processed_entities = ['CONNECTOR ELASTICITY', 'CONNECTOR DAMPING']
         # self._logger.info(mat_data)
-        mapdl_text_data = f"! material '{material}' \n"
+        mapdl_text_data = ""
+        hm_comment = self._enable_hm_comments
+        if hm_comment:
+            mapdl_text_data += "!!HMNAME MAT \n"
+            mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
+        else:
+            mapdl_text_data += f"! material '{material}' \n"
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
@@ -1474,7 +1495,7 @@ class _JointMaterialProcessor:
                 else:
                     if 'RIGID' in comp_data['Parameters']:
                         ff = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
-                        elasticity_data += f"TBDATA, {ff}, 1e8\n"
+                        elasticity_data += f"TBDATA, {ff}, 1e6\n"
                         continue
                     if 'NONLINEAR' in comp_data['Parameters']:
                         relative_disp = comp_data['Data']["Displacement"]
@@ -1642,12 +1663,12 @@ class _JointMaterialProcessor:
                         cds = comp_data['Data']['Stiffness'][0]
                         elasticity_data += f"TBDATA, {clms}, {cds}\n"
         else:
-            elasticity_data += f"TBDATA,  1, 1e8\n"
-            elasticity_data += f"TBDATA,  7, 1e8\n"
-            elasticity_data += f"TBDATA, 12, 1e8\n"
-            elasticity_data += f"TBDATA, 16, 1e8\n"
-            elasticity_data += f"TBDATA, 19, 1e8\n"
-            elasticity_data += f"TBDATA, 21, 1e8\n"
+            elasticity_data += f"TBDATA,  1, 1e6\n"
+            elasticity_data += f"TBDATA,  7, 1e6\n"
+            elasticity_data += f"TBDATA, 12, 1e6\n"
+            elasticity_data += f"TBDATA, 16, 1e6\n"
+            elasticity_data += f"TBDATA, 19, 1e6\n"
+            elasticity_data += f"TBDATA, 21, 1e6\n"
         return elasticity_data
 
     def _process_damping(self, property_dict, material, mat_id):
@@ -2668,8 +2689,8 @@ class _GlobalDampingProcessing:
                 damping_commands += f"DMPRAT, {structural/2}\n"
             elif analysis == "STEADY STATE DYNAMICS":
                 damping_commands += f"DMPSTR, {structural}\n"
-            # elif analysis == "FREQUENCY":
-            # damping_commands += f"DMPSTR, {structural}\n"
+            elif analysis == "FREQUENCY":
+                damping_commands += f"DMPSTR, {structural}\n"
             else:
                 self._logger.warning(
                     'Global damping under STEP is not processed. Please check the results'
@@ -3345,12 +3366,12 @@ class _StepProcessor:
             output_analysis_commands += "OUTRES, ERASE\n"
             output_analysis_commands += "OUTRES, ALL, NONE\n"
             if time_points:
-                output_analysis_commands += f"OUTRES, EANGL, %{time_points}%\n"
+                output_analysis_commands += f"! OUTRES, EANGL, %{time_points}%\n"
             else:
                 # output_analysis_commands += "OUTRES, ALL, NONE\n"
                 # TODO Removed this line to avoid complications of
                 # multiple tabular output controls with NINTERVAL
-                output_analysis_commands += "OUTRES, EANGL, NONE\n"
+                output_analysis_commands += "! OUTRES, EANGL, NONE\n"
                 pass
             output_analysis_commands += "\n"
 
@@ -3852,6 +3873,7 @@ class _StepProcessor:
                                 vector_commands += f'ACEL, 0, 0, 0 \n'
                                 vector_commands += f'\n'
                             if data_line['node_set'].isnumeric():
+                                cmname = data_line['node_set']
                                 vector_commands += (
                                     f"F, " f"{data_line['node_set']}, " f"{dof_map[dof]}, 1\n"
                                 )
@@ -3861,10 +3883,10 @@ class _StepProcessor:
                                 )
                                 vector_commands += f"F, " f"{cmname}, " f"{dof_map[dof]}, 1\n"
                             count_load_vectors += 1
-                        self._modal_load_vectors[count_load_vectors] = {
-                            'SET': cmname,
-                            "COMP": dof_map[dof],
-                        }
+                            self._modal_load_vectors[count_load_vectors] = {
+                                'SET': cmname,
+                                "COMP": dof_map[dof],
+                            }
                 if "BaseMotion" in step_data:
                     base_motions_data = step_data['BaseMotion']
                     for base_motion_data in base_motions_data:
@@ -4098,7 +4120,7 @@ class _StepProcessor:
         mapdl_step_commands += 'DMPOPT, ESAV,  NO \n'
         mapdl_step_commands += 'DMPOPT, EMAT,  NO \n'
         mapdl_step_commands += 'DMPOPT, FULL,  NO \n'
-        mapdl_step_commands += 'DMPOPT, MODE,  NO \n'
+        mapdl_step_commands += 'DMPOPT, MODE,  YES \n'
         mapdl_step_commands += 'DMPOPT,  MLV,  NO \n'
         mapdl_step_commands += '\n'
         if self._step_counter == 1:
@@ -4175,16 +4197,19 @@ class _AxialTempCorrection:
         '_connector_sections',
         '_connector_behavior',
         '_element_wise_csys',
+        '_enable_hm_comments',
         '_model',
         '_logger',
     )
 
     def __init__(
-        self, model: prime.Model, connector_sections, connector_behavior, element_wise_csys=False
+        self, model: prime.Model, connector_sections, connector_behavior,
+        element_wise_csys=False, hm_comments=False
     ):
         self._connector_sections = connector_sections
         self._connector_behavior = connector_behavior
         self._element_wise_csys = element_wise_csys
+        self._enable_hm_comments = hm_comments
         self._model = model
         self._logger = model.python_logger
 
@@ -4229,7 +4254,8 @@ class _AxialTempCorrection:
         secdata_string = ''
         if "CONNECTOR CONSTITUTIVE REFERENCE" in behavior_data:
             secdata_string += self._modify_section_type(behavior_data)
-            joint_a_processor = _JointMaterialProcessor(self._model, self._connector_behavior)
+            joint_a_processor = _JointMaterialProcessor(
+                self._model, self._connector_behavior, self._enable_hm_comments)
             ref_lens = joint_a_processor._precess_ref_length(
                 behavior_data["CONNECTOR CONSTITUTIVE REFERENCE"]
             )
@@ -4319,7 +4345,8 @@ def generate_mapdl_commands(
         return all_mat_cmds, analysis_settings
     if "Materials" in json_simulation_data and json_simulation_data["Materials"] is not None:
         mp = _MaterialProcessor(
-            model, json_simulation_data["Materials"], json_simulation_data["Zones"]
+            model, json_simulation_data["Materials"],
+            json_simulation_data["Zones"], params.write_separate_blocks
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
@@ -4327,7 +4354,8 @@ def generate_mapdl_commands(
         "ConnectorBehavior" in json_simulation_data
         and json_simulation_data["ConnectorBehavior"] is not None
     ):
-        jmp = _JointMaterialProcessor(model, json_simulation_data["ConnectorBehavior"])
+        jmp = _JointMaterialProcessor(model, json_simulation_data["ConnectorBehavior"],
+                                      params.write_separate_blocks)
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
     general_contact_cmds = ''

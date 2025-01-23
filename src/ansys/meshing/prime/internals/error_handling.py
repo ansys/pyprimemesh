@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -333,6 +333,9 @@ prime_error_messages = {
     ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES: "Minimum size is more than maximum size.",
     ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER: "Input parameters contain one or more negative values.",
     ErrorCode.FACEZONELETSHAVECELLSCONNECTED: "Face zonelets have cells connected.",
+    ErrorCode.IMPORTABAQUSFAILEDWITHUNKNOWNERROR: "Failed to import abaqus file. Unknown error.",
+    ErrorCode.IMPORTABAQUSFAILEDWITHPARSINGFAILURE: "Failed to import abaqus file. Failed to parse file.",
+    ErrorCode.IMPORTABAQUSFAILEDDURINGMESHCREATION: "Failed to import abaqus file. Mesh creation failed after parsing.",
     ErrorCode.ZEROELEMENTSREADFROMCDBFILE: "No mesh elements found. Check the input CDB file.",
     ErrorCode.ZERONODESREADFROMCDBFILE: "No nodes found. Check the input CDB file.",
     ErrorCode.ZEROELEMENTSFORCDBEXPORT: "No mesh elements found for CDB export. Check if the model is meshed, or set write_by_zones in ExportMapdlCdbParams to false if zones are not defined.",
