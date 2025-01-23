@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -416,9 +416,9 @@ class ErrorCode(enum.IntEnum):
     """List of volume ids provided is empty or incorrect."""
     MORPHER_COMPUTEBCS = 1410
     """Failed to compute boundary conditions."""
-    MORPHER_MATCHMORPHINVALIDSOURCEINPUT = 1450
+    MATCHMORPH_INVALIDSOURCEINPUT = 1450
     """Invalid source input for match morphing."""
-    MORPHER_BCPAIRINPUTTYPEMISMATCH = 1451
+    MATCHMORPH_BCPAIRINPUTTYPEMISMATCH = 1451
     """Entity type does not match with input for defined boundary condition pair."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
@@ -445,7 +445,9 @@ class ErrorCode(enum.IntEnum):
     VOLUMEMESHNOTFOUND = 1801
     """Volume mesh not found."""
     SPLITANDCOLLAPSEFACEELEMENTSFAILED = 2101
-    """Faield to split and collapse face element(s)."""
+    """Failed to split and collapse face element(s)."""
+    IMPROVESURFACEMESHQUALITYFAILED = 2102
+    """Improve surface mesh quality failed."""
     IGA_NURBSOPFAILED = 2400
     """Spline operation failed."""
     IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE = 2401
@@ -525,7 +527,7 @@ class ErrorCode(enum.IntEnum):
     CREATECAPONFACEZONELETSFAILED = 2906
     """Failed to create cap on face zonelets."""
     UNITEZONELETSFAILED = 2907
-    """Failed to union input zonelets."""
+    """Failed to unite input zonelets."""
     REFINEATCONTACTSFAILED = 2908
     """Failed to refine at contacts."""
     RECOVERPERIODICSURFACESFAILED = 2909
@@ -802,6 +804,22 @@ class ErrorCode(enum.IntEnum):
     """Difference in maximum value and minimum value is negative.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INVALIDINPUTPOINT = 16000
+    """Invalid input point.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDWITHUNKNOWNERROR = 16200
+    """Import Abaqus failed. Failed with unknown error.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDWITHPARSINGFAILURE = 16201
+    """Import Abaqus failed. Failed to parse file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDDURINGMESHCREATION = 16202
+    """Import Abaqus failed. Failed to create mesh entities.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZEROELEMENTSREADFROMCDBFILE = 16500
     """No elements read from CDB file.
 
@@ -836,6 +854,8 @@ class WarningCode(enum.IntEnum):
     """Overriding BOI sizing parameters."""
     OVERRIDEMESHEDSIZINGPARAMS = 206
     """Overriding meshed sizing parameters."""
+    OVERRIDESOISIZINGPARAMS = 207
+    """Overriding SOI sizing parameters."""
     INVALIDSIZECONTROLSCOPE = 208
     """Invalid size control type provided."""
     OVERRIDEGROWTHRATEPARAM = 209
@@ -898,6 +918,10 @@ class WarningCode(enum.IntEnum):
     """Contact prevention size is smaller than base size."""
     MATERIALPOINTWITHSAMENAMEEXISTS = 6005
     """Material point with the same name exists. Overriding with unique name."""
+    WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND = 6006
+    """No holes detected to patch.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ENTITIESNOTBELONGTOANYZONE = 6201
     """Entities do not belong to any zone."""
     INVALIDENTITIESNOTADDEDTOZONE = 6202

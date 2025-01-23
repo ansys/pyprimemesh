@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -78,9 +78,7 @@ class CadFaceter(enum.IntEnum):
     """Types of CAD faceter.
     """
     ACIS = 0
-    """Denotes CAD faceter is Acis.
-    
-    Note: ACIS faceter is being deprecated from 2025R1.""" 
+    """Denotes CAD faceter is Acis."""
     PARASOLID = 1
     """Denotes CAD faceter is Parasolid."""
 
@@ -133,6 +131,18 @@ class CdbSimulationType(enum.IntEnum):
     """Implicit simulation."""
     EXPLICIT = 1
     """Explicit Simulation."""
+
+class SeparateBlocksFormatType(enum.IntEnum):
+    """Format type for separate element blocks. Only applicable when write_separate_blocks is true.
+    """
+    STANDARD = 0
+    """Standard format for element blocks.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    COMPACT = 1
+    """Compact format for element blocks with reduced columns.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class LSDynaFileFormatType(enum.IntEnum):
     """Provides the format type to write the LS-DYNA file.
@@ -1103,6 +1113,10 @@ class ExportFluentMeshingMeshParams(CoreObject):
     ----------
     model: Model
         Model to create a ``ExportFluentMeshingMeshParams`` object with default parameters.
+    cff_format: bool, optional
+        Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ExportFluentMeshingMeshParams`` object with provided parameters.
 
@@ -1113,12 +1127,14 @@ class ExportFluentMeshingMeshParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            cff_format: bool):
+        self._cff_format = cff_format
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            cff_format: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportFluentMeshingMeshParams`` object.
@@ -1127,6 +1143,10 @@ class ExportFluentMeshingMeshParams(CoreObject):
         ----------
         model: Model
             Model to create a ``ExportFluentMeshingMeshParams`` object with default parameters.
+        cff_format: bool, optional
+            Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportFluentMeshingMeshParams`` object with provided parameters.
 
@@ -1135,18 +1155,21 @@ class ExportFluentMeshingMeshParams(CoreObject):
         >>> export_fluent_meshing_mesh_params = prime.ExportFluentMeshingMeshParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["cffFormat"] if "cffFormat" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [cff_format])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    cff_format)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ExportFluentMeshingMeshParams")
                     json_data = param_json["ExportFluentMeshingMeshParams"] if "ExportFluentMeshingMeshParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        cff_format if cff_format is not None else ( ExportFluentMeshingMeshParams._default_params["cff_format"] if "cff_format" in ExportFluentMeshingMeshParams._default_params else (json_data["cffFormat"] if "cffFormat" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1155,9 +1178,14 @@ class ExportFluentMeshingMeshParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            cff_format: bool = None):
         """Set the default values of the ``ExportFluentMeshingMeshParams`` object.
 
+        Parameters
+        ----------
+        cff_format: bool, optional
+            Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
         """
         args = locals()
         [ExportFluentMeshingMeshParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1176,15 +1204,27 @@ class ExportFluentMeshingMeshParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._cff_format is not None:
+            json_data["cffFormat"] = self._cff_format
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "cff_format :  %s" % (self._cff_format)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
-        if len(message) == 0:
-            message = 'The object has no parameters to print.'
         return message
+
+    @property
+    def cff_format(self) -> bool:
+        """Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._cff_format
+
+    @cff_format.setter
+    def cff_format(self, value: bool):
+        self._cff_format = value
 
 class ExportSTLParams(CoreObject):
     """Parameters to export STL file.
@@ -1308,8 +1348,7 @@ class CadRefacetingParams(CoreObject):
     model: Model
         Model to create a ``CadRefacetingParams`` object with default parameters.
     cad_faceter: CadFaceter, optional
-        Specify the available choices for faceter. The available option is Parasolid. 
-        Note: ACIS faceter is being deprecated from 2025R1.
+        Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
     faceting_resolution: CadRefacetingResolution, optional
         Set the faceting resolution.
     custom_surface_deviation_tolerance: float, optional
@@ -1362,8 +1401,7 @@ class CadRefacetingParams(CoreObject):
         model: Model
             Model to create a ``CadRefacetingParams`` object with default parameters.
         cad_faceter: CadFaceter, optional
-            Specify the available choices for faceter. The available option is Parasolid. 
-            Note: ACIS faceter is being deprecated from 2025R1.
+            Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
         faceting_resolution: CadRefacetingResolution, optional
             Set the faceting resolution.
         custom_surface_deviation_tolerance: float, optional
@@ -1432,8 +1470,7 @@ class CadRefacetingParams(CoreObject):
         Parameters
         ----------
         cad_faceter: CadFaceter, optional
-            Specify the available choices for faceter. The available option is Parasolid. 
-            Note: ACIS faceter is being deprecated from 2025R1.
+            Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
         faceting_resolution: CadRefacetingResolution, optional
             Set the faceting resolution.
         custom_surface_deviation_tolerance: float, optional
@@ -1484,8 +1521,7 @@ class CadRefacetingParams(CoreObject):
 
     @property
     def cad_faceter(self) -> CadFaceter:
-        """Specify the available choices for faceter. The available option is Parasolid.
-           Note: ACIS faceter is being deprecated from 2025R1.
+        """Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
         """
         return self._cad_faceter
 
@@ -1553,7 +1589,7 @@ class ImportCadParams(CoreObject):
     append: bool, optional
         Append imported CAD into existing model when true.
     ansys_release: str, optional
-        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
+        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
     cad_reader_route: CadReaderRoute, optional
         Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
     part_creation_type: PartCreationType, optional
@@ -1631,7 +1667,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1730,7 +1766,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1809,7 +1845,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def ansys_release(self) -> str:
-        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.1', '251', 'v251', '25R1'.
+        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
         """
         return self._ansys_release
 
@@ -3073,8 +3109,12 @@ class ExportMapdlCdbParams(CoreObject):
         File path to export mapdl analysis settings.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    use_compact_format: bool, optional
-        Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+    write_separate_blocks: bool, optional
+        Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    separate_blocks_format_type: SeparateBlocksFormatType, optional
+        Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     export_fasteners_as_swgen: bool, optional
@@ -3083,6 +3123,14 @@ class ExportMapdlCdbParams(CoreObject):
         **This is a beta parameter**. **The behavior and name may change in the future**.
     export_rigid_bodies_as_rbgen: bool, optional
         Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    write_component_based_ties: bool, optional
+        Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    mortar_contact_for_ties: bool, optional
+        Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     write_thickness_file: bool, optional
@@ -3116,9 +3164,12 @@ class ExportMapdlCdbParams(CoreObject):
             analysis_type: CdbAnalysisType,
             simulation_type: CdbSimulationType,
             analysis_settings_file_name: str,
-            use_compact_format: bool,
+            write_separate_blocks: bool,
+            separate_blocks_format_type: SeparateBlocksFormatType,
             export_fasteners_as_swgen: bool,
             export_rigid_bodies_as_rbgen: bool,
+            write_component_based_ties: bool,
+            mortar_contact_for_ties: bool,
             write_thickness_file: bool,
             contact_element_types: ContactElementTypeParams):
         self._config_settings = config_settings
@@ -3133,9 +3184,12 @@ class ExportMapdlCdbParams(CoreObject):
         self._analysis_type = CdbAnalysisType(analysis_type)
         self._simulation_type = CdbSimulationType(simulation_type)
         self._analysis_settings_file_name = analysis_settings_file_name
-        self._use_compact_format = use_compact_format
+        self._write_separate_blocks = write_separate_blocks
+        self._separate_blocks_format_type = SeparateBlocksFormatType(separate_blocks_format_type)
         self._export_fasteners_as_swgen = export_fasteners_as_swgen
         self._export_rigid_bodies_as_rbgen = export_rigid_bodies_as_rbgen
+        self._write_component_based_ties = write_component_based_ties
+        self._mortar_contact_for_ties = mortar_contact_for_ties
         self._write_thickness_file = write_thickness_file
         self._contact_element_types = contact_element_types
 
@@ -3154,9 +3208,12 @@ class ExportMapdlCdbParams(CoreObject):
             analysis_type: CdbAnalysisType = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None,
-            use_compact_format: bool = None,
+            write_separate_blocks: bool = None,
+            separate_blocks_format_type: SeparateBlocksFormatType = None,
             export_fasteners_as_swgen: bool = None,
             export_rigid_bodies_as_rbgen: bool = None,
+            write_component_based_ties: bool = None,
+            mortar_contact_for_ties: bool = None,
             write_thickness_file: bool = None,
             contact_element_types: ContactElementTypeParams = None,
             json_data : dict = None,
@@ -3215,8 +3272,12 @@ class ExportMapdlCdbParams(CoreObject):
             File path to export mapdl analysis settings.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        use_compact_format: bool, optional
-            Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+        write_separate_blocks: bool, optional
+            Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        separate_blocks_format_type: SeparateBlocksFormatType, optional
+            Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         export_fasteners_as_swgen: bool, optional
@@ -3225,6 +3286,14 @@ class ExportMapdlCdbParams(CoreObject):
             **This is a beta parameter**. **The behavior and name may change in the future**.
         export_rigid_bodies_as_rbgen: bool, optional
             Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        write_component_based_ties: bool, optional
+            Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        mortar_contact_for_ties: bool, optional
+            Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         write_thickness_file: bool, optional
@@ -3256,13 +3325,16 @@ class ExportMapdlCdbParams(CoreObject):
                 CdbAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None),
                 CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None),
                 json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None,
-                json_data["useCompactFormat"] if "useCompactFormat" in json_data else None,
+                json_data["writeSeparateBlocks"] if "writeSeparateBlocks" in json_data else None,
+                SeparateBlocksFormatType(json_data["separateBlocksFormatType"] if "separateBlocksFormatType" in json_data else None),
                 json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None,
                 json_data["exportRigidBodiesAsRbgen"] if "exportRigidBodiesAsRbgen" in json_data else None,
+                json_data["writeComponentBasedTies"] if "writeComponentBasedTies" in json_data else None,
+                json_data["mortarContactForTies"] if "mortarContactForTies" in json_data else None,
                 json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
                 ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, use_compact_format, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_thickness_file, contact_element_types])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, separate_blocks_format_type, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, write_thickness_file, contact_element_types])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -3277,9 +3349,12 @@ class ExportMapdlCdbParams(CoreObject):
                     analysis_type,
                     simulation_type,
                     analysis_settings_file_name,
-                    use_compact_format,
+                    write_separate_blocks,
+                    separate_blocks_format_type,
                     export_fasteners_as_swgen,
                     export_rigid_bodies_as_rbgen,
+                    write_component_based_ties,
+                    mortar_contact_for_ties,
                     write_thickness_file,
                     contact_element_types)
             else:
@@ -3301,9 +3376,12 @@ class ExportMapdlCdbParams(CoreObject):
                         analysis_type if analysis_type is not None else ( ExportMapdlCdbParams._default_params["analysis_type"] if "analysis_type" in ExportMapdlCdbParams._default_params else CdbAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None)),
                         simulation_type if simulation_type is not None else ( ExportMapdlCdbParams._default_params["simulation_type"] if "simulation_type" in ExportMapdlCdbParams._default_params else CdbSimulationType(json_data["simulationType"] if "simulationType" in json_data else None)),
                         analysis_settings_file_name if analysis_settings_file_name is not None else ( ExportMapdlCdbParams._default_params["analysis_settings_file_name"] if "analysis_settings_file_name" in ExportMapdlCdbParams._default_params else (json_data["analysisSettingsFileName"] if "analysisSettingsFileName" in json_data else None)),
-                        use_compact_format if use_compact_format is not None else ( ExportMapdlCdbParams._default_params["use_compact_format"] if "use_compact_format" in ExportMapdlCdbParams._default_params else (json_data["useCompactFormat"] if "useCompactFormat" in json_data else None)),
+                        write_separate_blocks if write_separate_blocks is not None else ( ExportMapdlCdbParams._default_params["write_separate_blocks"] if "write_separate_blocks" in ExportMapdlCdbParams._default_params else (json_data["writeSeparateBlocks"] if "writeSeparateBlocks" in json_data else None)),
+                        separate_blocks_format_type if separate_blocks_format_type is not None else ( ExportMapdlCdbParams._default_params["separate_blocks_format_type"] if "separate_blocks_format_type" in ExportMapdlCdbParams._default_params else SeparateBlocksFormatType(json_data["separateBlocksFormatType"] if "separateBlocksFormatType" in json_data else None)),
                         export_fasteners_as_swgen if export_fasteners_as_swgen is not None else ( ExportMapdlCdbParams._default_params["export_fasteners_as_swgen"] if "export_fasteners_as_swgen" in ExportMapdlCdbParams._default_params else (json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None)),
                         export_rigid_bodies_as_rbgen if export_rigid_bodies_as_rbgen is not None else ( ExportMapdlCdbParams._default_params["export_rigid_bodies_as_rbgen"] if "export_rigid_bodies_as_rbgen" in ExportMapdlCdbParams._default_params else (json_data["exportRigidBodiesAsRbgen"] if "exportRigidBodiesAsRbgen" in json_data else None)),
+                        write_component_based_ties if write_component_based_ties is not None else ( ExportMapdlCdbParams._default_params["write_component_based_ties"] if "write_component_based_ties" in ExportMapdlCdbParams._default_params else (json_data["writeComponentBasedTies"] if "writeComponentBasedTies" in json_data else None)),
+                        mortar_contact_for_ties if mortar_contact_for_ties is not None else ( ExportMapdlCdbParams._default_params["mortar_contact_for_ties"] if "mortar_contact_for_ties" in ExportMapdlCdbParams._default_params else (json_data["mortarContactForTies"] if "mortarContactForTies" in json_data else None)),
                         write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
                         contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))))
         self._custom_params = kwargs
@@ -3327,9 +3405,12 @@ class ExportMapdlCdbParams(CoreObject):
             analysis_type: CdbAnalysisType = None,
             simulation_type: CdbSimulationType = None,
             analysis_settings_file_name: str = None,
-            use_compact_format: bool = None,
+            write_separate_blocks: bool = None,
+            separate_blocks_format_type: SeparateBlocksFormatType = None,
             export_fasteners_as_swgen: bool = None,
             export_rigid_bodies_as_rbgen: bool = None,
+            write_component_based_ties: bool = None,
+            mortar_contact_for_ties: bool = None,
             write_thickness_file: bool = None,
             contact_element_types: ContactElementTypeParams = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
@@ -3360,12 +3441,18 @@ class ExportMapdlCdbParams(CoreObject):
             Simulation type for the file.
         analysis_settings_file_name: str, optional
             File path to export mapdl analysis settings.
-        use_compact_format: bool, optional
-            Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+        write_separate_blocks: bool, optional
+            Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+        separate_blocks_format_type: SeparateBlocksFormatType, optional
+            Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
         export_fasteners_as_swgen: bool, optional
             Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
         export_rigid_bodies_as_rbgen: bool, optional
             Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+        write_component_based_ties: bool, optional
+            Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+        mortar_contact_for_ties: bool, optional
+            Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
         contact_element_types: ContactElementTypeParams, optional
@@ -3412,12 +3499,18 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["simulationType"] = self._simulation_type
         if self._analysis_settings_file_name is not None:
             json_data["analysisSettingsFileName"] = self._analysis_settings_file_name
-        if self._use_compact_format is not None:
-            json_data["useCompactFormat"] = self._use_compact_format
+        if self._write_separate_blocks is not None:
+            json_data["writeSeparateBlocks"] = self._write_separate_blocks
+        if self._separate_blocks_format_type is not None:
+            json_data["separateBlocksFormatType"] = self._separate_blocks_format_type
         if self._export_fasteners_as_swgen is not None:
             json_data["exportFastenersAsSwgen"] = self._export_fasteners_as_swgen
         if self._export_rigid_bodies_as_rbgen is not None:
             json_data["exportRigidBodiesAsRbgen"] = self._export_rigid_bodies_as_rbgen
+        if self._write_component_based_ties is not None:
+            json_data["writeComponentBasedTies"] = self._write_component_based_ties
+        if self._mortar_contact_for_ties is not None:
+            json_data["mortarContactForTies"] = self._mortar_contact_for_ties
         if self._write_thickness_file is not None:
             json_data["writeThicknessFile"] = self._write_thickness_file
         if self._contact_element_types is not None:
@@ -3426,7 +3519,7 @@ class ExportMapdlCdbParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nuse_compact_format :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._use_compact_format, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }')
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._separate_blocks_format_type, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -3575,16 +3668,28 @@ class ExportMapdlCdbParams(CoreObject):
         self._analysis_settings_file_name = value
 
     @property
-    def use_compact_format(self) -> bool:
-        """Option to enable compact format for the cdb blocks. When true, writes a new, more space-efficient cdb format while exporting. The default value is false.
+    def write_separate_blocks(self) -> bool:
+        """Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
-        return self._use_compact_format
+        return self._write_separate_blocks
 
-    @use_compact_format.setter
-    def use_compact_format(self, value: bool):
-        self._use_compact_format = value
+    @write_separate_blocks.setter
+    def write_separate_blocks(self, value: bool):
+        self._write_separate_blocks = value
+
+    @property
+    def separate_blocks_format_type(self) -> SeparateBlocksFormatType:
+        """Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._separate_blocks_format_type
+
+    @separate_blocks_format_type.setter
+    def separate_blocks_format_type(self, value: SeparateBlocksFormatType):
+        self._separate_blocks_format_type = value
 
     @property
     def export_fasteners_as_swgen(self) -> bool:
@@ -3609,6 +3714,30 @@ class ExportMapdlCdbParams(CoreObject):
     @export_rigid_bodies_as_rbgen.setter
     def export_rigid_bodies_as_rbgen(self, value: bool):
         self._export_rigid_bodies_as_rbgen = value
+
+    @property
+    def write_component_based_ties(self) -> bool:
+        """Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._write_component_based_ties
+
+    @write_component_based_ties.setter
+    def write_component_based_ties(self, value: bool):
+        self._write_component_based_ties = value
+
+    @property
+    def mortar_contact_for_ties(self) -> bool:
+        """Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._mortar_contact_for_ties
+
+    @mortar_contact_for_ties.setter
+    def mortar_contact_for_ties(self, value: bool):
+        self._mortar_contact_for_ties = value
 
     @property
     def write_thickness_file(self) -> bool:
@@ -3841,6 +3970,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
         Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    output_controls_d3_part: bool, optional
+        Option to create D3Part card in output controls.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
 
@@ -3857,13 +3990,15 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             output_format: LSDynaFileFormatType,
             analysis_type: LSDynaAnalysisType,
             compute_spotweld_thickness: bool,
-            write_thickness_file: bool):
+            write_thickness_file: bool,
+            output_controls_d3_part: bool):
         self._material_properties = material_properties
         self._database_keywords = database_keywords
         self._output_format = LSDynaFileFormatType(output_format)
         self._analysis_type = LSDynaAnalysisType(analysis_type)
         self._compute_spotweld_thickness = compute_spotweld_thickness
         self._write_thickness_file = write_thickness_file
+        self._output_controls_d3_part = output_controls_d3_part
 
     def __init__(
             self,
@@ -3874,6 +4009,7 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             analysis_type: LSDynaAnalysisType = None,
             compute_spotweld_thickness: bool = None,
             write_thickness_file: bool = None,
+            output_controls_d3_part: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportLSDynaKeywordFileParams`` object.
@@ -3906,6 +4042,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        output_controls_d3_part: bool, optional
+            Option to create D3Part card in output controls.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
 
@@ -3920,9 +4060,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                 LSDynaFileFormatType(json_data["outputFormat"] if "outputFormat" in json_data else None),
                 LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None),
                 json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None,
-                json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)
+                json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
+                json_data["outputControlsD3Part"] if "outputControlsD3Part" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness, write_thickness_file])
+            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness, write_thickness_file, output_controls_d3_part])
             if all_field_specified:
                 self.__initialize(
                     material_properties,
@@ -3930,7 +4071,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                     output_format,
                     analysis_type,
                     compute_spotweld_thickness,
-                    write_thickness_file)
+                    write_thickness_file,
+                    output_controls_d3_part)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -3943,7 +4085,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                         output_format if output_format is not None else ( ExportLSDynaKeywordFileParams._default_params["output_format"] if "output_format" in ExportLSDynaKeywordFileParams._default_params else LSDynaFileFormatType(json_data["outputFormat"] if "outputFormat" in json_data else None)),
                         analysis_type if analysis_type is not None else ( ExportLSDynaKeywordFileParams._default_params["analysis_type"] if "analysis_type" in ExportLSDynaKeywordFileParams._default_params else LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None)),
                         compute_spotweld_thickness if compute_spotweld_thickness is not None else ( ExportLSDynaKeywordFileParams._default_params["compute_spotweld_thickness"] if "compute_spotweld_thickness" in ExportLSDynaKeywordFileParams._default_params else (json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)),
-                        write_thickness_file if write_thickness_file is not None else ( ExportLSDynaKeywordFileParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportLSDynaKeywordFileParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)))
+                        write_thickness_file if write_thickness_file is not None else ( ExportLSDynaKeywordFileParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportLSDynaKeywordFileParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
+                        output_controls_d3_part if output_controls_d3_part is not None else ( ExportLSDynaKeywordFileParams._default_params["output_controls_d3_part"] if "output_controls_d3_part" in ExportLSDynaKeywordFileParams._default_params else (json_data["outputControlsD3Part"] if "outputControlsD3Part" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3958,7 +4101,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             output_format: LSDynaFileFormatType = None,
             analysis_type: LSDynaAnalysisType = None,
             compute_spotweld_thickness: bool = None,
-            write_thickness_file: bool = None):
+            write_thickness_file: bool = None,
+            output_controls_d3_part: bool = None):
         """Set the default values of the ``ExportLSDynaKeywordFileParams`` object.
 
         Parameters
@@ -3975,6 +4119,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+        output_controls_d3_part: bool, optional
+            Option to create D3Part card in output controls.
         """
         args = locals()
         [ExportLSDynaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -4005,11 +4151,13 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             json_data["computeSpotweldThickness"] = self._compute_spotweld_thickness
         if self._write_thickness_file is not None:
             json_data["writeThicknessFile"] = self._write_thickness_file
+        if self._output_controls_d3_part is not None:
+            json_data["outputControlsD3Part"] = self._output_controls_d3_part
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s\nwrite_thickness_file :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness, self._write_thickness_file)
+        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s\nwrite_thickness_file :  %s\noutput_controls_d3_part :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness, self._write_thickness_file, self._output_controls_d3_part)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -4084,6 +4232,18 @@ class ExportLSDynaKeywordFileParams(CoreObject):
     @write_thickness_file.setter
     def write_thickness_file(self, value: bool):
         self._write_thickness_file = value
+
+    @property
+    def output_controls_d3_part(self) -> bool:
+        """Option to create D3Part card in output controls.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._output_controls_d3_part
+
+    @output_controls_d3_part.setter
+    def output_controls_d3_part(self, value: bool):
+        self._output_controls_d3_part = value
 
 class ExportLSDynaResults(CoreObject):
     """Results associated with the LS-DYNA export.
