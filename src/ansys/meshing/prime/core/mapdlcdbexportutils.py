@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -1038,8 +1038,10 @@ class _MaterialProcessor:
         data = []
         if 'Data' in property_dict and property_dict['Data'] is not None:
             data = property_dict['Data']
-        if (property_dict["Parameters"]["TYPE"] == "ISOTROPIC" or
-            property_dict["Parameters"]["TYPE"] == "ISO"):
+        if (
+            property_dict["Parameters"]["TYPE"] == "ISOTROPIC"
+            or property_dict["Parameters"]["TYPE"] == "ISO"
+        ):
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")
@@ -4203,8 +4205,12 @@ class _AxialTempCorrection:
     )
 
     def __init__(
-        self, model: prime.Model, connector_sections, connector_behavior,
-        element_wise_csys=False, hm_comments=False
+        self,
+        model: prime.Model,
+        connector_sections,
+        connector_behavior,
+        element_wise_csys=False,
+        hm_comments=False,
     ):
         self._connector_sections = connector_sections
         self._connector_behavior = connector_behavior
@@ -4255,7 +4261,8 @@ class _AxialTempCorrection:
         if "CONNECTOR CONSTITUTIVE REFERENCE" in behavior_data:
             secdata_string += self._modify_section_type(behavior_data)
             joint_a_processor = _JointMaterialProcessor(
-                self._model, self._connector_behavior, self._enable_hm_comments)
+                self._model, self._connector_behavior, self._enable_hm_comments
+            )
             ref_lens = joint_a_processor._precess_ref_length(
                 behavior_data["CONNECTOR CONSTITUTIVE REFERENCE"]
             )
@@ -4345,8 +4352,10 @@ def generate_mapdl_commands(
         return all_mat_cmds, analysis_settings
     if "Materials" in json_simulation_data and json_simulation_data["Materials"] is not None:
         mp = _MaterialProcessor(
-            model, json_simulation_data["Materials"],
-            json_simulation_data["Zones"], params.write_separate_blocks
+            model,
+            json_simulation_data["Materials"],
+            json_simulation_data["Zones"],
+            params.write_separate_blocks,
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
@@ -4354,8 +4363,9 @@ def generate_mapdl_commands(
         "ConnectorBehavior" in json_simulation_data
         and json_simulation_data["ConnectorBehavior"] is not None
     ):
-        jmp = _JointMaterialProcessor(model, json_simulation_data["ConnectorBehavior"],
-                                      params.write_separate_blocks)
+        jmp = _JointMaterialProcessor(
+            model, json_simulation_data["ConnectorBehavior"], params.write_separate_blocks
+        )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
     general_contact_cmds = ''
