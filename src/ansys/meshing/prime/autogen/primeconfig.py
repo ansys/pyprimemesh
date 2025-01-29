@@ -802,6 +802,18 @@ class ErrorCode(enum.IntEnum):
     """Difference in maximum value and minimum value is negative.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDWITHUNKNOWNERROR = 16200
+    """Import Abaqus failed. Failed with unknown error.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDWITHPARSINGFAILURE = 16201
+    """Import Abaqus failed. Failed to parse file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    IMPORTABAQUSFAILEDDURINGMESHCREATION = 16202
+    """Import Abaqus failed. Failed to create mesh entities.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZEROELEMENTSREADFROMCDBFILE = 16500
     """No elements read from CDB file.
 
