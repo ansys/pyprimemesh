@@ -104,8 +104,10 @@ To view the CAD files supported for the Workbench route on different platforms, 
     * Program controlled supports faceted data. Workbench supports BRep geometry(non-faceted) data. 
       Discovery or SpaceClaim supports both BRep geometry and faceted data.
 
-    * When deploying scripts Workbench CAD reader routes, ensure that the CAD configuration
-      are consistent in the deployed environment for Workbench.
+    * When deploying scripts using the Workbench CAD reader route, ensure that the user options for the installed
+       application are consistent in the deployed environment.
+    * When deploying scripts using the CAD configuration, ensure that the configuration is consistent in the deployed
+      environment.
 
     * You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
       while installing Ansys Workbench.
