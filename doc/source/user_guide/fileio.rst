@@ -88,9 +88,11 @@ Four CAD import routes are available in PyPrimeMesh:
    Ensure to install Discovery for Discovery reader. 
 
  ..note:
-      When you import SpaceClaim or Discovery route, your defined inputs in the imported files are ignored. 
-      You may need to import CAD  in the application stand-alone with the options defined and export it to 
-      a native format(fmd or pmdb) for Ansys PrimeServer.
+```suggestion
+      When you import CAD using the SpaceClaim or Discovery reader routes the user import options in those
+      applications are ignored.
+      If the options are required then you can import CAD in the application stand-alone with the options defined and
+      export it to a native format (FMD or PMDB) to import into Ansys Prime Server.
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
      Ensure to install Workbench for Workbench reader. 
