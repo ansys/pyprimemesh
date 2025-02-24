@@ -2,6 +2,25 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.8.0.dev0](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.0.dev0) - 2025-02-03
+
+
+### Dependencies
+
+- build(deps): bump ansys-tools-visualization-interface from 0.7.0 to 0.8.1 in the general-dependencies group [#967](https://github.com/ansys/pyprimemesh/pull/967)
+- build(deps): bump sphinx-autodoc-typehints from 3.0.0 to 3.0.1 in the doc-dependencies group [#968](https://github.com/ansys/pyprimemesh/pull/968)
+
+
+### Documentation
+
+- Update index.rst [#974](https://github.com/ansys/pyprimemesh/pull/974)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.7.0 [#965](https://github.com/ansys/pyprimemesh/pull/965)
+- Include ADO changes [#973](https://github.com/ansys/pyprimemesh/pull/973)
+
 ## [0.7.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0) - 2025-01-14
 
 
