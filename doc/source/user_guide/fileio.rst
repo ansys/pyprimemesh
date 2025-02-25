@@ -88,7 +88,7 @@ Five CAD import routes are available in PyPrimeMesh:
    Ensure to install Discovery for Discovery reader. 
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
-     Ensure to install Workbench for Workbench reader.
+   Ensure to install Workbench for Workbench reader.
 
 .. note:
     * When you import CAD using the SpaceClaim or Discovery reader routes the user import options in those applications are ignored.
@@ -103,7 +103,8 @@ To view the CAD files supported for the Workbench route on different platforms, 
       Discovery or SpaceClaim supports both BRep geometry and faceted data.
 
     * When deploying scripts using the Workbench CAD reader route, ensure that the user options for the installed
-       application are consistent in the deployed environment.
+      application are consistent in the deployed environment.
+
     * When deploying scripts using the CAD configuration, ensure that the configuration is consistent in the deployed
       environment.
 
