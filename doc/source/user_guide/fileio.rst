@@ -68,7 +68,7 @@ Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` cl
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(file_name=mixing_elbow, cad_reader_route=prime.CadReaderRoute.DISCOVERY)
 
-Four CAD import routes are available in PyPrimeMesh:
+Five CAD import routes are available in PyPrimeMesh:
 
  * ``Program controlled``: Chooses the CAD reader route based on the extension of the provided CAD file as follows:
 
