@@ -105,6 +105,7 @@ jobs:
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
         with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
           needs-quarto: true
           sphinxopts: "-j auto --keep-going"
