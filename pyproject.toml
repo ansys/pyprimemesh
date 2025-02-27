@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-meshing-prime"
-version = "0.8.0.dev0"
+version = "0.8.0"
 description = "PyPrimeMesh is a Python client to Ansys Prime Server, which delivers core Ansys meshing technology."
 readme = "README.md"
 requires-python = ">=3.10,<4"
@@ -32,7 +32,7 @@ graphics = [
   "ansys-tools-visualization-interface>=0.4.7,<1",
 ]
 tests = [
-  "ansys-tools-visualization-interface==0.8.1",
+  "ansys-tools-visualization-interface==0.8.3",
   "pytest==8.3.4",
   "pytest-cov==6.0.0",
   "pytest-pyvista==0.1.9",
@@ -40,17 +40,17 @@ tests = [
   "pyvista[trame]==0.44.2"
 ]
 doc = [
-  "ansys-sphinx-theme[autoapi]==1.2.6",
-  "ansys-tools-visualization-interface==0.8.1",
+  "ansys-sphinx-theme[autoapi]==1.3.2",
+  "ansys-tools-visualization-interface==0.8.3",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.8.0",
-  "sphinx==8.1.3",
+  "sphinx==8.2.1",
   "sphinx_design==0.6.1",
   "pyvista==0.44.2",
-  "sphinx-autodoc-typehints==3.0.1",
+  "sphinx-autodoc-typehints==3.1.0",
   "sphinx-copybutton==0.5.2",
-  "sphinx-gallery==0.18.0",
-  "sphinx-notfound-page==1.0.4",
+  "sphinx-gallery==0.19.0",
+  "sphinx-notfound-page==1.1.0",
   "sphinxemoji==0.3.1",
 ]
 all = [
