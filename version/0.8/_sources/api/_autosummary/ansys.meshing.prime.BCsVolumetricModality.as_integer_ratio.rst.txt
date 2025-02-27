@@ -1,0 +1,11 @@
+as\_integer\_ratio
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCsVolumetricModality.as_integer_ratio
+
+.. minigallery::
+   :add-heading: Examples using BCsVolumetricModality.as_integer_ratio
+
+   ansys.meshing.prime.BCsVolumetricModality.as_integer_ratio

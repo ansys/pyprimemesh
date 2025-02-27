@@ -1,0 +1,6 @@
+NUMENMETHODNOTFCOUND
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.NUMENMETHODNOTFCOUND
