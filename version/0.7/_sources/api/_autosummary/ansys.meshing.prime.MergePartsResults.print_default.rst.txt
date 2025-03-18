@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergePartsResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using MergePartsResults.print_default
+
+   ansys.meshing.prime.MergePartsResults.print_default

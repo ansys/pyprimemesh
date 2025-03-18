@@ -1,0 +1,6 @@
+THINVOLUMECONTROLINVALIDTARGETSCOPE
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.THINVOLUMECONTROLINVALIDTARGETSCOPE

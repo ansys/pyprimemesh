@@ -1,0 +1,6 @@
+﻿clear\_download\_cache
+======================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. automethod:: DownloadManager.clear_download_cache

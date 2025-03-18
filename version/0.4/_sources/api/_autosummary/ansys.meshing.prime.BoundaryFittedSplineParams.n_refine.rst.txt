@@ -1,0 +1,6 @@
+﻿n\_refine
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundaryFittedSplineParams.n_refine
