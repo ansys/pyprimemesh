@@ -1,0 +1,22 @@
+AdvancedSurferSetup
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AdvancedSurferSetup
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AdvancedSurferSetup.NONE
+      AdvancedSurferSetup.WRAPPER
+   
+   

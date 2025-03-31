@@ -1,0 +1,6 @@
+﻿CREATEBOI\_INVALIDFLOWDIRECTION
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATEBOI_INVALIDFLOWDIRECTION

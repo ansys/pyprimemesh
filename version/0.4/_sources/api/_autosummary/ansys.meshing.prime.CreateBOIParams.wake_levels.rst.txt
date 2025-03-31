@@ -1,0 +1,6 @@
+﻿wake\_levels
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.wake_levels

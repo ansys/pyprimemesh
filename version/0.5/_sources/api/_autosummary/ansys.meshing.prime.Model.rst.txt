@@ -1,0 +1,57 @@
+.. vale off
+
+Model
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Model
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Model.activate_volumetric_size_fields
+      Model.create_zone
+      Model.deactivate_volumetric_size_fields
+      Model.delete_parts
+      Model.delete_volumetric_size_fields
+      Model.delete_zone
+      Model.get_active_volumetric_size_fields
+      Model.get_global_sizing_params
+      Model.get_num_threads
+      Model.get_part
+      Model.get_part_by_name
+      Model.get_volumetric_size_fields
+      Model.get_zone_by_name
+      Model.get_zone_name
+      Model.merge_parts
+      Model.set_global_sizing_params
+      Model.set_num_threads
+      Model.set_suggested_zone_name
+      Model.start_distributed_meshing
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      Model.control_data
+      Model.id
+      Model.material_point_data
+      Model.name
+      Model.parts
+      Model.python_logger
+      Model.topo_data
+   
+   
+
+.. vale on
