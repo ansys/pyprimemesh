@@ -2,6 +2,22 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.8.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.0) - 2025-02-27
+
+
+### Dependencies
+
+- build(deps): bump sphinx-notfound-page from 1.0.4 to 1.1.0 in the doc-dependencies group [#979](https://github.com/ansys/pyprimemesh/pull/979)
+- build(deps): bump the doc-dependencies group across 1 directory with 2 updates [#983](https://github.com/ansys/pyprimemesh/pull/983)
+- build(deps): bump ansys-tools-visualization-interface from 0.8.1 to 0.8.3 in the general-dependencies group [#985](https://github.com/ansys/pyprimemesh/pull/985)
+- build(deps): bump the doc-dependencies group with 3 updates [#986](https://github.com/ansys/pyprimemesh/pull/986)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.8.0.dev0 [#978](https://github.com/ansys/pyprimemesh/pull/978)
+- publishing dev to release 0.8.0 [#987](https://github.com/ansys/pyprimemesh/pull/987)
+
 ## [0.8.0.dev0](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.0.dev0) - 2025-02-03
 
 
