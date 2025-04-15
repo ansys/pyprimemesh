@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -75,7 +75,6 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
-        self._has_exited = False
         if not local:
             try:
                 from ansys.meshing.prime.internals.grpc_communicator import (
@@ -111,10 +110,6 @@ class Client(object):
                 logging.getLogger('PyPrimeMesh').error(
                     f'Failed to load prime_communicator with message: {err.msg}'
                 )
-
-    def __del__(self):
-        """In case unexpected termination, close the connection."""
-        self.exit()
 
     @property
     def model(self):
@@ -159,27 +154,25 @@ class Client(object):
         >>> print(result)
         >>> prime_client.exit() # Sever connection with server and kill the server.
         """
-        if not self._has_exited:
-            if self._comm is not None:
-                self._comm.close()
-                self._comm = None
-            if self._process is not None:
-                assert self._local == False
-                terminate_process(self._process)
-                self._process = None
+        if self._comm is not None:
+            self._comm.close()
+            self._comm = None
+        if self._process is not None:
+            assert self._local == False
+            terminate_process(self._process)
+            self._process = None
 
-            if config.using_container():
-                container_name = getattr(self, 'container_name')
-                utils.stop_prime_github_container(container_name)
-            elif config.has_pim():
-                self.remote_instance.delete()
-                self.pim_client.close()
+        if config.using_container():
+            container_name = getattr(self, 'container_name')
+            utils.stop_prime_github_container(container_name)
+        elif config.has_pim():
+            self.remote_instance.delete()
+            self.pim_client.close()
 
-            clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
-            if clear_examples:
-                download_manager = examples.DownloadManager()
-                download_manager.clear_download_cache()
-        self._has_exited = True
+        clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
+        if clear_examples:
+            download_manager = examples.DownloadManager()
+            download_manager.clear_download_cache()
 
     def __enter__(self):
         """Open client."""

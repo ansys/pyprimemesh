@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -54,9 +54,9 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
-    SeparateBlocksFormatType,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
+    SeparateBlocksFormatType,
 )
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
