@@ -176,7 +176,7 @@ def launch_remote_prime(
     This method creates a file transfer service that is available on Ansys Lab.
     """
     if version is None:
-        version = 'latest'
+        version = '251-sp2'
 
     pim = pypim.connect()
     instance = pim.create_instance(product_name='prime', product_version=version)
