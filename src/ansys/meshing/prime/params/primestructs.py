@@ -1,5 +1,4 @@
-# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy

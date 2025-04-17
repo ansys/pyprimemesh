@@ -113,6 +113,8 @@ def launch_server_process(
     run_prime_script = f'runPrime.{script_ext}'
 
     exec_path = os.path.join(prime_root, run_prime_script)
+    print('Using Ansys Prime Server from {prime_root}'.format(prime_root=prime_root))
+    logging.getLogger('PyPrimeMesh').info('Using server from %s', prime_root)
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
 
@@ -260,6 +262,8 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
+        print('using server from docker : The container name %s', container_name)
+        logging.getLogger('PyPrimeMesh').info('uses server from container : %s', container_name)
         return client
 
     server = launch_server_process(
