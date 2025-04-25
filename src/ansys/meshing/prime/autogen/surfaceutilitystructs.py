@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -37,6 +37,10 @@ class SmoothType(enum.IntEnum):
     """Performs smoothing during the operation."""
     INFLATE = 2
     """Performs inflation during the operation."""
+    AUTO = 3
+    """Performs smoothing using optimal node movements during the operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class FlowDirection(enum.IntEnum):
     """Flow or wake direction for BOI creation.

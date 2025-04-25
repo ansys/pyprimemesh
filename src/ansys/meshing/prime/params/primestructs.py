@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -36,6 +36,7 @@ from ansys.meshing.prime.autogen.deletetoolstructs import *
 from ansys.meshing.prime.autogen.featureextractionstructs import *
 from ansys.meshing.prime.autogen.fileiostructs import *
 from ansys.meshing.prime.autogen.igastructs import *
+from ansys.meshing.prime.autogen.trimmedsplinestructs import *
 from ansys.meshing.prime.autogen.materialpointmanagerstructs import *
 from ansys.meshing.prime.autogen.meshinfostructs import *
 from ansys.meshing.prime.autogen.modelstructs import *

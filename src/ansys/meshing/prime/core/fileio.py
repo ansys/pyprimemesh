@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -36,6 +36,9 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
     ExportLSDynaKeywordFileParams,
+    ExportLSDynaResults,
+    ExportLSDynaIgaKeywordFileParams,
+    ExportLSDynaIGAResults,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -54,9 +57,9 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
-    SeparateBlocksFormatType,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
+    SeparateBlocksFormatType,
 )
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
@@ -538,7 +541,7 @@ class FileIO(_FileIO):
 
     def export_lsdyna_keyword_file(
         self, file_name: str, params: ExportLSDynaKeywordFileParams
-    ) -> FileWriteResults:
+    ) -> ExportLSDynaResults:
         """Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.
 
         Parameters
@@ -550,8 +553,8 @@ class FileIO(_FileIO):
 
         Returns
         -------
-        FileWriteResults
-            Returns FileWriteResults.
+        ExportLSDynaResults
+            Returns ExportLSDynaResults.
 
         Notes
         -----
@@ -574,6 +577,38 @@ class FileIO(_FileIO):
                 all_mat_cmds = mp.get_all_material_commands()
                 params.material_properties = all_mat_cmds + params.material_properties
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
+        return result
+
+    def export_lsdyna_iga_keyword_file(
+        self, file_name: str, params: ExportLSDynaIgaKeywordFileParams
+    ) -> ExportLSDynaIGAResults:
+        """Export IGA LS-DYNA Keyword file for solid, surface splines.
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        params : ExportLSDynaIgaKeywordFileParams
+            Parameters for IGA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        ExportLSDynaIGAResults
+            Returns ExportLSDynaIGAResults.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_iga_keyword_file(
+            file_name, ExportLSDynaIgaKeywordFileParams(model=model)
+        )
+
+        """
+        with utils.file_write_context(self._model, file_name) as temp_file_name:
+            result = super().export_lsdyna_iga_keyword_file(temp_file_name, params)
         return result
 
     def export_boundary_fitted_spline_kfile(

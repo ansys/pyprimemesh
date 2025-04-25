@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -78,29 +78,6 @@ class Communicator(object):
         -------
         dict
             Response from the server.
-        """
-        pass
-
-    @abstractmethod
-    def server_command(self, command: str, *args) -> dict:
-        """Run commands on the server.
-
-        Parameters
-        ----------
-        command : str
-            Commands to run.
-
-        Returns
-        -------
-        dict
-            Result from the server side.
-
-        Raises
-        ------
-        RuntimeError
-            Bad response from server.
-        RuntimeError
-            Can not connect to server.
         """
         pass
 

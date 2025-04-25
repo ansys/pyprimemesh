@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -166,6 +166,72 @@ class ThinVolumeControl(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_volume_scope", SetScopeResults(model = self._model, json_data = result))
         return SetScopeResults(model = self._model, json_data = result)
+
+    def get_source_scope(self) -> ScopeDefinition:
+        """ Gets the source of thin volume control scope.
+
+
+        Returns
+        -------
+        ScopeDefinition
+            Returns the ScopeDefinition.
+
+
+        Examples
+        --------
+        >>> scope = thin_vol_ctrl.get_source_scope()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ThinVolumeControl/GetSourceScope"
+        self._model._print_logs_before_command("get_source_scope", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_source_scope", ScopeDefinition(model = self._model, json_data = result))
+        return ScopeDefinition(model = self._model, json_data = result)
+
+    def get_target_scope(self) -> ScopeDefinition:
+        """ Gets the target of thin volume control scope.
+
+
+        Returns
+        -------
+        ScopeDefinition
+            Returns the ScopeDefinition.
+
+
+        Examples
+        --------
+        >>> scope = thin_vol_ctrl.get_target_scope()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ThinVolumeControl/GetTargetScope"
+        self._model._print_logs_before_command("get_target_scope", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_target_scope", ScopeDefinition(model = self._model, json_data = result))
+        return ScopeDefinition(model = self._model, json_data = result)
+
+    def get_volume_scope(self) -> ScopeDefinition:
+        """ Gets the volume scope of thin volume control.
+
+
+        Returns
+        -------
+        ScopeDefinition
+            Returns the ScopeDefinition.
+
+
+        Examples
+        --------
+        >>> scope = thin_vol_ctrl.get_volume_scope()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::ThinVolumeControl/GetVolumeScope"
+        self._model._print_logs_before_command("get_volume_scope", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volume_scope", ScopeDefinition(model = self._model, json_data = result))
+        return ScopeDefinition(model = self._model, json_data = result)
 
     @property
     def id(self):

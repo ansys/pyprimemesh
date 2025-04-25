@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -416,9 +416,9 @@ class ErrorCode(enum.IntEnum):
     """List of volume ids provided is empty or incorrect."""
     MORPHER_COMPUTEBCS = 1410
     """Failed to compute boundary conditions."""
-    MORPHER_MATCHMORPHINVALIDSOURCEINPUT = 1450
+    MATCHMORPH_INVALIDSOURCEINPUT = 1450
     """Invalid source input for match morphing."""
-    MORPHER_BCPAIRINPUTTYPEMISMATCH = 1451
+    MATCHMORPH_BCPAIRINPUTTYPEMISMATCH = 1451
     """Entity type does not match with input for defined boundary condition pair."""
     INVALIDGLOBALMINMAX = 1500
     """Invalid global min and max value."""
@@ -444,8 +444,14 @@ class ErrorCode(enum.IntEnum):
     """Mid side nodes are not supported."""
     VOLUMEMESHNOTFOUND = 1801
     """Volume mesh not found."""
+    PREPAREFORVOLUMEMESHINGFAILED = 2000
+    """Prepare for volume meshing failed."""
+    NOTSUPPORTEDFORDISTRIBUTEMESHING = 2001
+    """Method not supported for distributed meshing."""
     SPLITANDCOLLAPSEFACEELEMENTSFAILED = 2101
-    """Faield to split and collapse face element(s)."""
+    """Failed to split and collapse face element(s)."""
+    IMPROVESURFACEMESHQUALITYFAILED = 2102
+    """Improve surface mesh quality failed."""
     IGA_NURBSOPFAILED = 2400
     """Spline operation failed."""
     IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE = 2401
@@ -525,7 +531,7 @@ class ErrorCode(enum.IntEnum):
     CREATECAPONFACEZONELETSFAILED = 2906
     """Failed to create cap on face zonelets."""
     UNITEZONELETSFAILED = 2907
-    """Failed to union input zonelets."""
+    """Failed to unite input zonelets."""
     REFINEATCONTACTSFAILED = 2908
     """Failed to refine at contacts."""
     RECOVERPERIODICSURFACESFAILED = 2909
@@ -698,7 +704,7 @@ class ErrorCode(enum.IntEnum):
     """VT operation failed.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
-    NUMENMETHODNOTFCOUND = 3801
+    NUMENMETHODNOTFOUND = 3801
     """Could not find numen method."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
@@ -802,6 +808,10 @@ class ErrorCode(enum.IntEnum):
     """Difference in maximum value and minimum value is negative.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INVALIDINPUTPOINT = 16000
+    """Invalid input point.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     IMPORTABAQUSFAILEDWITHUNKNOWNERROR = 16200
     """Import Abaqus failed. Failed with unknown error.
 
@@ -822,8 +832,16 @@ class ErrorCode(enum.IntEnum):
     """No nodes read from CDB file.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INVALIDCMBLOCKFORMAT = 16502
+    """CMBLOCK command format error in CDB file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ZEROELEMENTSFORCDBEXPORT = 16600
     """No elements found for cdb export.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    MESHDECOUPLEDFAILED = 16900
+    """Invalid load balancing or failed in volume meshing for one or more parts.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
@@ -848,6 +866,8 @@ class WarningCode(enum.IntEnum):
     """Overriding BOI sizing parameters."""
     OVERRIDEMESHEDSIZINGPARAMS = 206
     """Overriding meshed sizing parameters."""
+    OVERRIDESOISIZINGPARAMS = 207
+    """Overriding SOI sizing parameters."""
     INVALIDSIZECONTROLSCOPE = 208
     """Invalid size control type provided."""
     OVERRIDEGROWTHRATEPARAM = 209
@@ -910,6 +930,10 @@ class WarningCode(enum.IntEnum):
     """Contact prevention size is smaller than base size."""
     MATERIALPOINTWITHSAMENAMEEXISTS = 6005
     """Material point with the same name exists. Overriding with unique name."""
+    WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND = 6006
+    """No holes detected to patch.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     ENTITIESNOTBELONGTOANYZONE = 6201
     """Entities do not belong to any zone."""
     INVALIDENTITIESNOTADDEDTOZONE = 6202
@@ -939,7 +963,9 @@ class WarningCode(enum.IntEnum):
     WRITINGTIESSKIPPED = 11103
     """Writing of ties skipped."""
     WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED = 11104
-    """Writing of zonelet skipped while exporting label as element component."""
+    """Export of label as element component skipped."""
+    IMPORTOFNODALCOMPONENTASLABELSKIPPED = 11201
+    """Import of nodal component as label skipped."""
     VT_SKIPPEDPROTECTEDENTITIES = 100001
     """Input contains protected entities which have been skipped.
 
@@ -970,3 +996,7 @@ class WarningCode(enum.IntEnum):
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
     """MultiZone warning codes"""
+    MULTIZONEMESHER_DEFEATUREDTOPOEDGES = 110002
+    """TopoEdges that got defeatured in the MultiZone mesh."""
+    MULTIZONEMESHER_DEFEATUREDTOPOFACES = 110003
+    """TopoFaces that got defeatured in the MultiZone mesh."""

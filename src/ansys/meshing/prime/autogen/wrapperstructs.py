@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -1756,6 +1756,18 @@ class WrapperPatchFlowRegionsParams(CoreObject):
         List of dead regions.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    sizing_method: SizeFieldType, optional
+        Used to define sizing method for patching.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    size_field_ids: Iterable[int], optional
+        Used to define size field based octree refinement.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    patch_at_live: bool, optional
+        Creates patches closer to live instead of dead.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
@@ -1770,11 +1782,17 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             base_size: float,
             suggested_part_name: str,
             number_of_threads: int,
-            dead_regions: List[DeadRegion]):
+            dead_regions: List[DeadRegion],
+            sizing_method: SizeFieldType,
+            size_field_ids: Iterable[int],
+            patch_at_live: bool):
         self._base_size = base_size
         self._suggested_part_name = suggested_part_name
         self._number_of_threads = number_of_threads
         self._dead_regions = dead_regions
+        self._sizing_method = SizeFieldType(sizing_method)
+        self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32) if size_field_ids is not None else None
+        self._patch_at_live = patch_at_live
 
     def __init__(
             self,
@@ -1783,6 +1801,9 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             suggested_part_name: str = None,
             number_of_threads: int = None,
             dead_regions: List[DeadRegion] = None,
+            sizing_method: SizeFieldType = None,
+            size_field_ids: Iterable[int] = None,
+            patch_at_live: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperPatchFlowRegionsParams`` object.
@@ -1807,6 +1828,18 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             List of dead regions.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        sizing_method: SizeFieldType, optional
+            Used to define sizing method for patching.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        size_field_ids: Iterable[int], optional
+            Used to define size field based octree refinement.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        patch_at_live: bool, optional
+            Creates patches closer to live instead of dead.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
@@ -1819,15 +1852,21 @@ class WrapperPatchFlowRegionsParams(CoreObject):
                 json_data["baseSize"] if "baseSize" in json_data else None,
                 json_data["suggestedPartName"] if "suggestedPartName" in json_data else None,
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
-                [DeadRegion(model = model, json_data = data) for data in json_data["deadRegions"]] if "deadRegions" in json_data else None)
+                [DeadRegion(model = model, json_data = data) for data in json_data["deadRegions"]] if "deadRegions" in json_data else None,
+                SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None),
+                json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None,
+                json_data["patchAtLive"] if "patchAtLive" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [base_size, suggested_part_name, number_of_threads, dead_regions])
+            all_field_specified = all(arg is not None for arg in [base_size, suggested_part_name, number_of_threads, dead_regions, sizing_method, size_field_ids, patch_at_live])
             if all_field_specified:
                 self.__initialize(
                     base_size,
                     suggested_part_name,
                     number_of_threads,
-                    dead_regions)
+                    dead_regions,
+                    sizing_method,
+                    size_field_ids,
+                    patch_at_live)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -1838,7 +1877,10 @@ class WrapperPatchFlowRegionsParams(CoreObject):
                         base_size if base_size is not None else ( WrapperPatchFlowRegionsParams._default_params["base_size"] if "base_size" in WrapperPatchFlowRegionsParams._default_params else (json_data["baseSize"] if "baseSize" in json_data else None)),
                         suggested_part_name if suggested_part_name is not None else ( WrapperPatchFlowRegionsParams._default_params["suggested_part_name"] if "suggested_part_name" in WrapperPatchFlowRegionsParams._default_params else (json_data["suggestedPartName"] if "suggestedPartName" in json_data else None)),
                         number_of_threads if number_of_threads is not None else ( WrapperPatchFlowRegionsParams._default_params["number_of_threads"] if "number_of_threads" in WrapperPatchFlowRegionsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
-                        dead_regions if dead_regions is not None else ( WrapperPatchFlowRegionsParams._default_params["dead_regions"] if "dead_regions" in WrapperPatchFlowRegionsParams._default_params else [DeadRegion(model = model, json_data = data) for data in (json_data["deadRegions"] if "deadRegions" in json_data else None)]))
+                        dead_regions if dead_regions is not None else ( WrapperPatchFlowRegionsParams._default_params["dead_regions"] if "dead_regions" in WrapperPatchFlowRegionsParams._default_params else [DeadRegion(model = model, json_data = data) for data in (json_data["deadRegions"] if "deadRegions" in json_data else None)]),
+                        sizing_method if sizing_method is not None else ( WrapperPatchFlowRegionsParams._default_params["sizing_method"] if "sizing_method" in WrapperPatchFlowRegionsParams._default_params else SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None)),
+                        size_field_ids if size_field_ids is not None else ( WrapperPatchFlowRegionsParams._default_params["size_field_ids"] if "size_field_ids" in WrapperPatchFlowRegionsParams._default_params else (json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None)),
+                        patch_at_live if patch_at_live is not None else ( WrapperPatchFlowRegionsParams._default_params["patch_at_live"] if "patch_at_live" in WrapperPatchFlowRegionsParams._default_params else (json_data["patchAtLive"] if "patchAtLive" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -1851,7 +1893,10 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             base_size: float = None,
             suggested_part_name: str = None,
             number_of_threads: int = None,
-            dead_regions: List[DeadRegion] = None):
+            dead_regions: List[DeadRegion] = None,
+            sizing_method: SizeFieldType = None,
+            size_field_ids: Iterable[int] = None,
+            patch_at_live: bool = None):
         """Set the default values of the ``WrapperPatchFlowRegionsParams`` object.
 
         Parameters
@@ -1864,6 +1909,12 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             Number of threads for multithreading.
         dead_regions: List[DeadRegion], optional
             List of dead regions.
+        sizing_method: SizeFieldType, optional
+            Used to define sizing method for patching.
+        size_field_ids: Iterable[int], optional
+            Used to define size field based octree refinement.
+        patch_at_live: bool, optional
+            Creates patches closer to live instead of dead.
         """
         args = locals()
         [WrapperPatchFlowRegionsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1890,11 +1941,17 @@ class WrapperPatchFlowRegionsParams(CoreObject):
             json_data["numberOfThreads"] = self._number_of_threads
         if self._dead_regions is not None:
             json_data["deadRegions"] = [data._jsonify() for data in self._dead_regions]
+        if self._sizing_method is not None:
+            json_data["sizingMethod"] = self._sizing_method
+        if self._size_field_ids is not None:
+            json_data["sizeFieldIDs"] = self._size_field_ids
+        if self._patch_at_live is not None:
+            json_data["patchAtLive"] = self._patch_at_live
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "base_size :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s\ndead_regions :  %s" % (self._base_size, self._suggested_part_name, self._number_of_threads, '[' + ''.join('\n' + str(data) for data in self._dead_regions) + ']')
+        message = "base_size :  %s\nsuggested_part_name :  %s\nnumber_of_threads :  %s\ndead_regions :  %s\nsizing_method :  %s\nsize_field_ids :  %s\npatch_at_live :  %s" % (self._base_size, self._suggested_part_name, self._number_of_threads, '[' + ''.join('\n' + str(data) for data in self._dead_regions) + ']', self._sizing_method, self._size_field_ids, self._patch_at_live)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -1945,6 +2002,42 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     @dead_regions.setter
     def dead_regions(self, value: List[DeadRegion]):
         self._dead_regions = value
+
+    @property
+    def sizing_method(self) -> SizeFieldType:
+        """Used to define sizing method for patching.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._sizing_method
+
+    @sizing_method.setter
+    def sizing_method(self, value: SizeFieldType):
+        self._sizing_method = value
+
+    @property
+    def size_field_ids(self) -> Iterable[int]:
+        """Used to define size field based octree refinement.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._size_field_ids
+
+    @size_field_ids.setter
+    def size_field_ids(self, value: Iterable[int]):
+        self._size_field_ids = value
+
+    @property
+    def patch_at_live(self) -> bool:
+        """Creates patches closer to live instead of dead.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._patch_at_live
+
+    @patch_at_live.setter
+    def patch_at_live(self, value: bool):
+        self._patch_at_live = value
 
 class WrapperPatchFlowRegionsResult(CoreObject):
     """Result structure associated with patch holes operation.

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -45,6 +45,10 @@ class SizingType(enum.IntEnum):
     """Denotes the size control type is meshed."""
     BOI = 5
     """Denotes the size control type is body of influence."""
+    SOI = 6
+    """Denotes the size control type is sphere of influence.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class CurvatureSizingParams(CoreObject):
     """Size field using curvature size control computes edge and face sizes using their size and normal angle parameters.
@@ -1036,6 +1040,219 @@ class BoiSizingParams(CoreObject):
     @property
     def growth_rate(self) -> float:
         """Growth rate used for transitioning from one element size to neighbor element size.
+        """
+        return self._growth_rate
+
+    @growth_rate.setter
+    def growth_rate(self, value: float):
+        self._growth_rate = value
+
+class SoiSizingParams(CoreObject):
+    """Parameters for sphere of influence size control.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``SoiSizingParams`` object with default parameters.
+    centers: Iterable[float], optional
+        Centers of the spheres within which the size is limited to the specified max value.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    radius: float, optional
+        Radius of the sphere within which the size is limited to the specified max value.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    max: float, optional
+        Maximum size within the sphere.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    growth_rate: float, optional
+        The rate at which size grows outwards from the sphere boundary.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``SoiSizingParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> soi_sizing_params = prime.SoiSizingParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            centers: Iterable[float],
+            radius: float,
+            max: float,
+            growth_rate: float):
+        self._centers = centers if isinstance(centers, np.ndarray) else np.array(centers, dtype=np.double) if centers is not None else None
+        self._radius = radius
+        self._max = max
+        self._growth_rate = growth_rate
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            centers: Iterable[float] = None,
+            radius: float = None,
+            max: float = None,
+            growth_rate: float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``SoiSizingParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``SoiSizingParams`` object with default parameters.
+        centers: Iterable[float], optional
+            Centers of the spheres within which the size is limited to the specified max value.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        radius: float, optional
+            Radius of the sphere within which the size is limited to the specified max value.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        max: float, optional
+            Maximum size within the sphere.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        growth_rate: float, optional
+            The rate at which size grows outwards from the sphere boundary.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``SoiSizingParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> soi_sizing_params = prime.SoiSizingParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["centers"] if "centers" in json_data else None,
+                json_data["radius"] if "radius" in json_data else None,
+                json_data["max"] if "max" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [centers, radius, max, growth_rate])
+            if all_field_specified:
+                self.__initialize(
+                    centers,
+                    radius,
+                    max,
+                    growth_rate)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SoiSizingParams")
+                    json_data = param_json["SoiSizingParams"] if "SoiSizingParams" in param_json else {}
+                    self.__initialize(
+                        centers if centers is not None else ( SoiSizingParams._default_params["centers"] if "centers" in SoiSizingParams._default_params else (json_data["centers"] if "centers" in json_data else None)),
+                        radius if radius is not None else ( SoiSizingParams._default_params["radius"] if "radius" in SoiSizingParams._default_params else (json_data["radius"] if "radius" in json_data else None)),
+                        max if max is not None else ( SoiSizingParams._default_params["max"] if "max" in SoiSizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( SoiSizingParams._default_params["growth_rate"] if "growth_rate" in SoiSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            centers: Iterable[float] = None,
+            radius: float = None,
+            max: float = None,
+            growth_rate: float = None):
+        """Set the default values of the ``SoiSizingParams`` object.
+
+        Parameters
+        ----------
+        centers: Iterable[float], optional
+            Centers of the spheres within which the size is limited to the specified max value.
+        radius: float, optional
+            Radius of the sphere within which the size is limited to the specified max value.
+        max: float, optional
+            Maximum size within the sphere.
+        growth_rate: float, optional
+            The rate at which size grows outwards from the sphere boundary.
+        """
+        args = locals()
+        [SoiSizingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``SoiSizingParams`` object.
+
+        Examples
+        --------
+        >>> SoiSizingParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SoiSizingParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._centers is not None:
+            json_data["centers"] = self._centers
+        if self._radius is not None:
+            json_data["radius"] = self._radius
+        if self._max is not None:
+            json_data["max"] = self._max
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "centers :  %s\nradius :  %s\nmax :  %s\ngrowth_rate :  %s" % (self._centers, self._radius, self._max, self._growth_rate)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def centers(self) -> Iterable[float]:
+        """Centers of the spheres within which the size is limited to the specified max value.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._centers
+
+    @centers.setter
+    def centers(self, value: Iterable[float]):
+        self._centers = value
+
+    @property
+    def radius(self) -> float:
+        """Radius of the sphere within which the size is limited to the specified max value.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._radius
+
+    @radius.setter
+    def radius(self, value: float):
+        self._radius = value
+
+    @property
+    def max(self) -> float:
+        """Maximum size within the sphere.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._max
+
+    @max.setter
+    def max(self, value: float):
+        self._max = value
+
+    @property
+    def growth_rate(self) -> float:
+        """The rate at which size grows outwards from the sphere boundary.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._growth_rate
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -313,6 +313,10 @@ class MeshStackerParams(CoreObject):
         Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
     size_control_ids: Iterable[int], optional
         List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+    seed_faces: Iterable[int], optional
+        List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     delete_base: bool, optional
         Option to delete base face at the end of stacking. The default is false.
     json_data: dict, optional
@@ -332,6 +336,7 @@ class MeshStackerParams(CoreObject):
             stacking_defeature_tolerance: float,
             max_offset_size: float,
             size_control_ids: Iterable[int],
+            seed_faces: Iterable[int],
             delete_base: bool):
         self._origin = origin if isinstance(origin, np.ndarray) else np.array(origin, dtype=np.double) if origin is not None else None
         self._direction = direction if isinstance(direction, np.ndarray) else np.array(direction, dtype=np.double) if direction is not None else None
@@ -339,6 +344,7 @@ class MeshStackerParams(CoreObject):
         self._stacking_defeature_tolerance = stacking_defeature_tolerance
         self._max_offset_size = max_offset_size
         self._size_control_ids = size_control_ids if isinstance(size_control_ids, np.ndarray) else np.array(size_control_ids, dtype=np.int32) if size_control_ids is not None else None
+        self._seed_faces = seed_faces if isinstance(seed_faces, np.ndarray) else np.array(seed_faces, dtype=np.int32) if seed_faces is not None else None
         self._delete_base = delete_base
 
     def __init__(
@@ -350,6 +356,7 @@ class MeshStackerParams(CoreObject):
             stacking_defeature_tolerance: float = None,
             max_offset_size: float = None,
             size_control_ids: Iterable[int] = None,
+            seed_faces: Iterable[int] = None,
             delete_base: bool = None,
             json_data : dict = None,
              **kwargs):
@@ -371,6 +378,10 @@ class MeshStackerParams(CoreObject):
             Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
         size_control_ids: Iterable[int], optional
             List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+        seed_faces: Iterable[int], optional
+            List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         delete_base: bool, optional
             Option to delete base face at the end of stacking. The default is false.
         json_data: dict, optional
@@ -388,9 +399,10 @@ class MeshStackerParams(CoreObject):
                 json_data["stackingDefeatureTolerance"] if "stackingDefeatureTolerance" in json_data else None,
                 json_data["maxOffsetSize"] if "maxOffsetSize" in json_data else None,
                 json_data["sizeControlIds"] if "sizeControlIds" in json_data else None,
+                json_data["seedFaces"] if "seedFaces" in json_data else None,
                 json_data["deleteBase"] if "deleteBase" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [origin, direction, lateral_defeature_tolerance, stacking_defeature_tolerance, max_offset_size, size_control_ids, delete_base])
+            all_field_specified = all(arg is not None for arg in [origin, direction, lateral_defeature_tolerance, stacking_defeature_tolerance, max_offset_size, size_control_ids, seed_faces, delete_base])
             if all_field_specified:
                 self.__initialize(
                     origin,
@@ -399,6 +411,7 @@ class MeshStackerParams(CoreObject):
                     stacking_defeature_tolerance,
                     max_offset_size,
                     size_control_ids,
+                    seed_faces,
                     delete_base)
             else:
                 if model is None:
@@ -413,6 +426,7 @@ class MeshStackerParams(CoreObject):
                         stacking_defeature_tolerance if stacking_defeature_tolerance is not None else ( MeshStackerParams._default_params["stacking_defeature_tolerance"] if "stacking_defeature_tolerance" in MeshStackerParams._default_params else (json_data["stackingDefeatureTolerance"] if "stackingDefeatureTolerance" in json_data else None)),
                         max_offset_size if max_offset_size is not None else ( MeshStackerParams._default_params["max_offset_size"] if "max_offset_size" in MeshStackerParams._default_params else (json_data["maxOffsetSize"] if "maxOffsetSize" in json_data else None)),
                         size_control_ids if size_control_ids is not None else ( MeshStackerParams._default_params["size_control_ids"] if "size_control_ids" in MeshStackerParams._default_params else (json_data["sizeControlIds"] if "sizeControlIds" in json_data else None)),
+                        seed_faces if seed_faces is not None else ( MeshStackerParams._default_params["seed_faces"] if "seed_faces" in MeshStackerParams._default_params else (json_data["seedFaces"] if "seedFaces" in json_data else None)),
                         delete_base if delete_base is not None else ( MeshStackerParams._default_params["delete_base"] if "delete_base" in MeshStackerParams._default_params else (json_data["deleteBase"] if "deleteBase" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -429,6 +443,7 @@ class MeshStackerParams(CoreObject):
             stacking_defeature_tolerance: float = None,
             max_offset_size: float = None,
             size_control_ids: Iterable[int] = None,
+            seed_faces: Iterable[int] = None,
             delete_base: bool = None):
         """Set the default values of the ``MeshStackerParams`` object.
 
@@ -446,6 +461,8 @@ class MeshStackerParams(CoreObject):
             Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
         size_control_ids: Iterable[int], optional
             List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+        seed_faces: Iterable[int], optional
+            List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
         delete_base: bool, optional
             Option to delete base face at the end of stacking. The default is false.
         """
@@ -478,13 +495,15 @@ class MeshStackerParams(CoreObject):
             json_data["maxOffsetSize"] = self._max_offset_size
         if self._size_control_ids is not None:
             json_data["sizeControlIds"] = self._size_control_ids
+        if self._seed_faces is not None:
+            json_data["seedFaces"] = self._seed_faces
         if self._delete_base is not None:
             json_data["deleteBase"] = self._delete_base
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "origin :  %s\ndirection :  %s\nlateral_defeature_tolerance :  %s\nstacking_defeature_tolerance :  %s\nmax_offset_size :  %s\nsize_control_ids :  %s\ndelete_base :  %s" % (self._origin, self._direction, self._lateral_defeature_tolerance, self._stacking_defeature_tolerance, self._max_offset_size, self._size_control_ids, self._delete_base)
+        message = "origin :  %s\ndirection :  %s\nlateral_defeature_tolerance :  %s\nstacking_defeature_tolerance :  %s\nmax_offset_size :  %s\nsize_control_ids :  %s\nseed_faces :  %s\ndelete_base :  %s" % (self._origin, self._direction, self._lateral_defeature_tolerance, self._stacking_defeature_tolerance, self._max_offset_size, self._size_control_ids, self._seed_faces, self._delete_base)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -547,6 +566,18 @@ class MeshStackerParams(CoreObject):
     @size_control_ids.setter
     def size_control_ids(self, value: Iterable[int]):
         self._size_control_ids = value
+
+    @property
+    def seed_faces(self) -> Iterable[int]:
+        """List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._seed_faces
+
+    @seed_faces.setter
+    def seed_faces(self, value: Iterable[int]):
+        self._seed_faces = value
 
     @property
     def delete_base(self) -> bool:

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -29,6 +29,18 @@ from ansys.meshing.prime.autogen.coreobject import *
 import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
+
+class ScaffolderRepairMode(enum.IntEnum):
+    """Mode of Scaffolder repair to be used.
+    """
+    DEFAULT = 0
+    """Repairs edges using the distance tolerance parameter.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CONSERVATIVE = 1
+    """Repairs edges without considering the distance tolerance parameter.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class IntersectionMask(enum.IntEnum):
     """Scaffold parameters use intersection mask to define nature of intersection computation.
@@ -65,6 +77,10 @@ class ScaffolderParams(CoreObject):
         Model to create a ``ScaffolderParams`` object with default parameters.
     absolute_dist_tol: float, optional
         Defines the maximum gap to connect.
+    repair_mode: ScaffolderRepairMode, optional
+        Defines the mode to be used during repair or connect.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     size_field_type: int, optional
         Specifies the type of size field used for scaffolding.
 
@@ -101,6 +117,7 @@ class ScaffolderParams(CoreObject):
     def __initialize(
             self,
             absolute_dist_tol: float,
+            repair_mode: ScaffolderRepairMode,
             size_field_type: int,
             intersection_control_mask: IntersectionMask,
             edge_merge_control: int,
@@ -109,6 +126,7 @@ class ScaffolderParams(CoreObject):
             remove_slivers_abs_dist_tol_ratio: float,
             triangles_coplanar_angle_cos: float):
         self._absolute_dist_tol = absolute_dist_tol
+        self._repair_mode = ScaffolderRepairMode(repair_mode)
         self._size_field_type = size_field_type
         self._intersection_control_mask = IntersectionMask(intersection_control_mask)
         self._edge_merge_control = edge_merge_control
@@ -121,6 +139,7 @@ class ScaffolderParams(CoreObject):
             self,
             model: CommunicationManager=None,
             absolute_dist_tol: float = None,
+            repair_mode: ScaffolderRepairMode = None,
             size_field_type: int = None,
             intersection_control_mask: IntersectionMask = None,
             edge_merge_control: int = None,
@@ -138,6 +157,10 @@ class ScaffolderParams(CoreObject):
             Model to create a ``ScaffolderParams`` object with default parameters.
         absolute_dist_tol: float, optional
             Defines the maximum gap to connect.
+        repair_mode: ScaffolderRepairMode, optional
+            Defines the mode to be used during repair or connect.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         size_field_type: int, optional
             Specifies the type of size field used for scaffolding.
 
@@ -172,6 +195,7 @@ class ScaffolderParams(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None,
+                ScaffolderRepairMode(json_data["repairMode"] if "repairMode" in json_data else None),
                 json_data["sizeFieldType"] if "sizeFieldType" in json_data else None,
                 IntersectionMask(json_data["intersectionControlMask"] if "intersectionControlMask" in json_data else None),
                 json_data["edgeMergeControl"] if "edgeMergeControl" in json_data else None,
@@ -180,10 +204,11 @@ class ScaffolderParams(CoreObject):
                 json_data["removeSliversAbsDistTolRatio"] if "removeSliversAbsDistTolRatio" in json_data else None,
                 json_data["trianglesCoplanarAngleCos"] if "trianglesCoplanarAngleCos" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [absolute_dist_tol, size_field_type, intersection_control_mask, edge_merge_control, constant_mesh_size, remove_holes_critical_radius, remove_slivers_abs_dist_tol_ratio, triangles_coplanar_angle_cos])
+            all_field_specified = all(arg is not None for arg in [absolute_dist_tol, repair_mode, size_field_type, intersection_control_mask, edge_merge_control, constant_mesh_size, remove_holes_critical_radius, remove_slivers_abs_dist_tol_ratio, triangles_coplanar_angle_cos])
             if all_field_specified:
                 self.__initialize(
                     absolute_dist_tol,
+                    repair_mode,
                     size_field_type,
                     intersection_control_mask,
                     edge_merge_control,
@@ -199,6 +224,7 @@ class ScaffolderParams(CoreObject):
                     json_data = param_json["ScaffolderParams"] if "ScaffolderParams" in param_json else {}
                     self.__initialize(
                         absolute_dist_tol if absolute_dist_tol is not None else ( ScaffolderParams._default_params["absolute_dist_tol"] if "absolute_dist_tol" in ScaffolderParams._default_params else (json_data["absoluteDistTol"] if "absoluteDistTol" in json_data else None)),
+                        repair_mode if repair_mode is not None else ( ScaffolderParams._default_params["repair_mode"] if "repair_mode" in ScaffolderParams._default_params else ScaffolderRepairMode(json_data["repairMode"] if "repairMode" in json_data else None)),
                         size_field_type if size_field_type is not None else ( ScaffolderParams._default_params["size_field_type"] if "size_field_type" in ScaffolderParams._default_params else (json_data["sizeFieldType"] if "sizeFieldType" in json_data else None)),
                         intersection_control_mask if intersection_control_mask is not None else ( ScaffolderParams._default_params["intersection_control_mask"] if "intersection_control_mask" in ScaffolderParams._default_params else IntersectionMask(json_data["intersectionControlMask"] if "intersectionControlMask" in json_data else None)),
                         edge_merge_control if edge_merge_control is not None else ( ScaffolderParams._default_params["edge_merge_control"] if "edge_merge_control" in ScaffolderParams._default_params else (json_data["edgeMergeControl"] if "edgeMergeControl" in json_data else None)),
@@ -216,6 +242,7 @@ class ScaffolderParams(CoreObject):
     @staticmethod
     def set_default(
             absolute_dist_tol: float = None,
+            repair_mode: ScaffolderRepairMode = None,
             size_field_type: int = None,
             intersection_control_mask: IntersectionMask = None,
             edge_merge_control: int = None,
@@ -229,6 +256,8 @@ class ScaffolderParams(CoreObject):
         ----------
         absolute_dist_tol: float, optional
             Defines the maximum gap to connect.
+        repair_mode: ScaffolderRepairMode, optional
+            Defines the mode to be used during repair or connect.
         size_field_type: int, optional
             Specifies the type of size field used for scaffolding.
         intersection_control_mask: IntersectionMask, optional
@@ -263,6 +292,8 @@ class ScaffolderParams(CoreObject):
         json_data = {}
         if self._absolute_dist_tol is not None:
             json_data["absoluteDistTol"] = self._absolute_dist_tol
+        if self._repair_mode is not None:
+            json_data["repairMode"] = self._repair_mode
         if self._size_field_type is not None:
             json_data["sizeFieldType"] = self._size_field_type
         if self._intersection_control_mask is not None:
@@ -281,7 +312,7 @@ class ScaffolderParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "absolute_dist_tol :  %s\nsize_field_type :  %s\nintersection_control_mask :  %s\nedge_merge_control :  %s\nconstant_mesh_size :  %s\nremove_holes_critical_radius :  %s\nremove_slivers_abs_dist_tol_ratio :  %s\ntriangles_coplanar_angle_cos :  %s" % (self._absolute_dist_tol, self._size_field_type, self._intersection_control_mask, self._edge_merge_control, self._constant_mesh_size, self._remove_holes_critical_radius, self._remove_slivers_abs_dist_tol_ratio, self._triangles_coplanar_angle_cos)
+        message = "absolute_dist_tol :  %s\nrepair_mode :  %s\nsize_field_type :  %s\nintersection_control_mask :  %s\nedge_merge_control :  %s\nconstant_mesh_size :  %s\nremove_holes_critical_radius :  %s\nremove_slivers_abs_dist_tol_ratio :  %s\ntriangles_coplanar_angle_cos :  %s" % (self._absolute_dist_tol, self._repair_mode, self._size_field_type, self._intersection_control_mask, self._edge_merge_control, self._constant_mesh_size, self._remove_holes_critical_radius, self._remove_slivers_abs_dist_tol_ratio, self._triangles_coplanar_angle_cos)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -294,6 +325,18 @@ class ScaffolderParams(CoreObject):
     @absolute_dist_tol.setter
     def absolute_dist_tol(self, value: float):
         self._absolute_dist_tol = value
+
+    @property
+    def repair_mode(self) -> ScaffolderRepairMode:
+        """Defines the mode to be used during repair or connect.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._repair_mode
+
+    @repair_mode.setter
+    def repair_mode(self, value: ScaffolderRepairMode):
+        self._repair_mode = value
 
     @property
     def size_field_type(self) -> int:

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Helper module for launching the server."""
+import logging
 import os
 import subprocess
 import sys
@@ -43,7 +44,7 @@ __all__ = ['launch_prime', 'launch_server_process']
 
 
 def get_install_locations():
-    supported_versions = ['251']
+    supported_versions = ['252']
     awp_roots = {ver: os.environ.get(f'AWP_ROOT{ver}', '') for ver in supported_versions}
     installed_versions = {
         ver: os.path.join(path, 'meshing', 'Prime')
@@ -112,6 +113,8 @@ def launch_server_process(
     run_prime_script = f'runPrime.{script_ext}'
 
     exec_path = os.path.join(prime_root, run_prime_script)
+    print(f'Launching Ansys Prime Server from {prime_root}')
+    logging.getLogger('PyPrimeMesh').info('Using server from %s', prime_root)
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
 
@@ -121,6 +124,7 @@ def launch_server_process(
         kw = {}
 
     enable_python_server = kw.get('server', 'release')
+    communicator_type = kw.get('communicator_type', 'grpc')
     scheduler = kw.get('scheduler', None)
 
     if not isinstance(enable_python_server, str):
@@ -143,6 +147,7 @@ def launch_server_process(
     if enable_python_server == 'debug':
         server_args.append('-debug')
 
+    server_args.append(f'--type={communicator_type}')
     server_args.append(f'--ip={ip}')
     server_args.append(f'--port={port}')
     if n_procs is not None and isinstance(n_procs, int):
@@ -161,7 +166,7 @@ def launch_server_process(
     if sys.platform.startswith('win32'):
         kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    print('Using Ansys Prime Server from {prime_root}'.format(prime_root=prime_root))
+    logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
     server = subprocess.Popen(server_args, **kwargs)
     return server
 
@@ -175,7 +180,7 @@ def launch_remote_prime(
     This method creates a file transfer service that is available on Ansys Lab.
     """
     if version is None:
-        version = '251-sp1'
+        version = 'latest'
 
     pim = pypim.connect()
     instance = pim.create_instance(product_name='prime', product_version=version)
@@ -259,15 +264,13 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
-        print(
-            'Using Ansys Prime Server from container {container_name}'.format(
-                container_name=container_name
-            )
-        )
+        print('using server from docker : The container name %s', container_name)
+        logging.getLogger('PyPrimeMesh').info('uses server from container : %s', container_name)
         return client
 
     server = launch_server_process(
         prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
     )
 
-    return Client(server_process=server, ip=ip, port=port, timeout=timeout)
+    return Client(server_process=server, ip=ip, port=port, timeout=timeout,
+            communicator_type=kwargs.get('communicator_type', 'grpc'))

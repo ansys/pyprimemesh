@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -241,6 +241,42 @@ class SizeControl(CoreObject):
         self._model._print_logs_after_command("set_boi_sizing_params", SetSizingResults(model = self._model, json_data = result))
         return SetSizingResults(model = self._model, json_data = result)
 
+    def set_soi_sizing_params(self, params : SoiSizingParams) -> SetSizingResults:
+        """ Set the sphere of influence sizing parameters to compute volumetric size field.
+
+
+        Parameters
+        ----------
+        params : SoiSizingParams
+            Parameters that enables you to set sizing on the spherical influence region.
+
+        Returns
+        -------
+        SetSizingResults
+            Returns the SetSizingResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> size_control.set_soi_sizing_params(
+        >>>                  prime.SoiSizingParams(model=model,
+        >>>                  max = 0.1, growth_rate = 1.2))
+
+        """
+        if not isinstance(params, SoiSizingParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SoiSizingParams.")
+        args = {"params" : params._jsonify()}
+        command_name = "PrimeMesh::SizeControl/SetSoiSizingParams"
+        self._model._print_beta_api_warning("set_soi_sizing_params")
+        self._model._print_logs_before_command("set_soi_sizing_params", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_soi_sizing_params", SetSizingResults(model = self._model, json_data = result))
+        return SetSizingResults(model = self._model, json_data = result)
+
     def get_curvature_sizing_params(self) -> CurvatureSizingParams:
         """ Get the curvature sizing parameters of size control.
 
@@ -372,6 +408,33 @@ class SizeControl(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_boi_sizing_params", BoiSizingParams(model = self._model, json_data = result))
         return BoiSizingParams(model = self._model, json_data = result)
+
+    def get_soi_sizing_params(self) -> SoiSizingParams:
+        """ Get the sphere of influence sizing parameters of size control.
+
+
+        Returns
+        -------
+        SoiSizingParams
+            Returns the SoiSizingParams.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> params = size_control.get_soi_sizing_params()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::SizeControl/GetSoiSizingParams"
+        self._model._print_beta_api_warning("get_soi_sizing_params")
+        self._model._print_logs_before_command("get_soi_sizing_params", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_soi_sizing_params", SoiSizingParams(model = self._model, json_data = result))
+        return SoiSizingParams(model = self._model, json_data = result)
 
     def set_suggested_name(self, name : str) -> SetNameResults:
         """ Set the unique name for the size control based on the given suggested name.
