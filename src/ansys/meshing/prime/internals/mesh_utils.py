@@ -1,21 +1,47 @@
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 '''
 Copyright 1987-2024 ANSYS, Inc. All Rights Reserved.
 **This is a beta API**. **The behavior and implementation may change in future**.
 '''
 
-import ansys.meshing.prime as prime
-from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
-from ansys.meshing.prime.internals.error_handling import PrimeRuntimeWarning
-from ansys.meshing.prime import Model, Part
-from ansys.meshing.prime import ScopeDefinition, ScopeEntity
-from ansys.meshing.prime import (
-    SizingType,
-    SizeField,
-    VolumetricSizeFieldComputeParams,
-    SFPeriodicParams,
-)
-from typing import List, Iterable
 import os
+from typing import Iterable, List
+
+import ansys.meshing.prime as prime
+from ansys.meshing.prime import (
+    Model,
+    Part,
+    ScopeDefinition,
+    ScopeEntity,
+    SFPeriodicParams,
+    SizeField,
+    SizingType,
+    VolumetricSizeFieldComputeParams,
+)
+from ansys.meshing.prime.internals.error_handling import (
+    PrimeRuntimeError,
+    PrimeRuntimeWarning,
+)
 
 
 class TolerantConnect:
@@ -40,9 +66,7 @@ class TolerantConnect:
         self._model = model
         self._logger = model.python_logger
 
-    def compute_size_field_with_periodic(
-        self, size_settings: list, periodic_info: dict = None
-    ):
+    def compute_size_field_with_periodic(self, size_settings: list, periodic_info: dict = None):
         """Computes size field using the size settings and periodic inputs.
         Parameters
         ----------
@@ -103,27 +127,18 @@ class TolerantConnect:
                     unmeshed_faces = [
                         face
                         for face in topo_faces
-                        if not self._model.topo_data.get_mesh_zonelets_of_topo_faces(
-                            [face]
-                        )
+                        if not self._model.topo_data.get_mesh_zonelets_of_topo_faces([face])
                     ]
-                    part.add_labels_on_topo_entities(
-                        ["WARNING:Unmeshed_topo_face"], unmeshed_faces
-                    )
+                    part.add_labels_on_topo_entities(["WARNING:Unmeshed_topo_face"], unmeshed_faces)
                     self._logger.warning(
-                        "Unmeshed topo face ids "
-                        + str(unmeshed_faces)
-                        + " on part "
-                        + part.name
+                        "Unmeshed topo face ids " + str(unmeshed_faces) + " on part " + part.name
                     )
             except PrimeRuntimeError as error:
-                error_label = (
-                    "Error: '{}' on '{}' with code '{}' and message '{}'.".format(
-                        error.error_locations,
-                        part.name,
-                        error.error_code,
-                        error.message,
-                    )
+                error_label = "Error: '{}' on '{}' with code '{}' and message '{}'.".format(
+                    error.error_locations,
+                    part.name,
+                    error.error_code,
+                    error.message,
                 )
                 part.add_labels_on_topo_entities([error_label], error.error_locations)
             except PrimeRuntimeWarning as warning:
@@ -154,13 +169,9 @@ class TolerantConnect:
         zonelets_with_zones = []
         for zone in zones:
             zone_name = self._model.get_zone_name(zone)
-            zonelets = part.get_face_zonelets_of_zone_name_pattern(
-                zone_name, patternParams
-            )
+            zonelets = part.get_face_zonelets_of_zone_name_pattern(zone_name, patternParams)
             zonelets_with_zones.extend(zonelets)
-        zonelets_without_zone = list(
-            set(part.get_face_zonelets()) - set(zonelets_with_zones)
-        )
+        zonelets_without_zone = list(set(part.get_face_zonelets()) - set(zonelets_with_zones))
         return zonelets_without_zone
 
     def surface_intersection_results(self, part: Part):
@@ -274,9 +285,7 @@ class TolerantConnect:
             scope.entity_type = self.evaluation_value(entity_types)
         ctrl.set_scope(scope)
         if ctrl_type == SizingType.CURVATURE:
-            params = prime.CurvatureSizingParams(
-                model=self._model, use_cad_curvature=True
-            )
+            params = prime.CurvatureSizingParams(model=self._model, use_cad_curvature=True)
             if min_size_str in size_control_setting:
                 params.min = size_control_setting[min_size_str]
             if max_size_str in size_control_setting:
@@ -345,9 +354,7 @@ class TolerantConnect:
         result = connect.fuse_face_zonelets(part.id, sourceFaces, targetFaces, params)
         if not result.error_code:
             prime.PrimeRuntimeError(
-                "mesh match is not successful and error code = {}".format(
-                    result.error_code
-                )
+                "mesh match is not successful and error code = {}".format(result.error_code)
             )
         return result.error_code
 
@@ -377,9 +384,7 @@ class TolerantConnect:
                     part.id, part.get_face_zonelets(), quality_reg_id, quality_params
                 )
                 if quality_res.n_found:
-                    collapse_params.feature_type = (
-                        prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
-                    )
+                    collapse_params.feature_type = prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
                     collapse_tool.split_and_collapse_on_zonelets(
                         part_id=part.id,
                         face_zonelets=part.get_face_zonelets(),
@@ -424,9 +429,7 @@ class TolerantConnect:
                     )
                     tols = [1.5, 2]
                     for tol in tols:
-                        checks = surface_search_tool.get_surface_diagnostic_summary(
-                            diag_params
-                        )
+                        checks = surface_search_tool.get_surface_diagnostic_summary(diag_params)
                         if checks.n_free_edges == 0:
                             break
                         connect_params.tolerance = 0.2 * tol * tol
@@ -443,9 +446,7 @@ class TolerantConnect:
                         quality_reg_id,
                         quality_params,
                     )
-                    collapse_params.feature_type = (
-                        prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
-                    )
+                    collapse_params.feature_type = prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
                     collapse_tool.split_and_collapse_on_zonelets(
                         part_id=part.id,
                         face_zonelets=part_zonelets,
@@ -561,9 +562,7 @@ class TolerantConnect:
         priority_ordered_part_names = []
         failed_part_name_exp = []
         for part_name_exp in priority_ordered_part_names_in:
-            ordered_names = [
-                part.name for part in self.get_parts_of_name_pattern(part_name_exp)
-            ]
+            ordered_names = [part.name for part in self.get_parts_of_name_pattern(part_name_exp)]
             if not ordered_names:
                 failed_part_name_exp.append(part_name_exp)
             else:
@@ -589,9 +588,7 @@ class TolerantConnect:
             use_absolute_tolerance=use_abs_tol,
             remesh=join_remesh,
         )
-        intersect_params = prime.IntersectParams(
-            model=self._model, tolerance=intersect_tolerance
-        )
+        intersect_params = prime.IntersectParams(model=self._model, tolerance=intersect_tolerance)
         surface_search = prime.SurfaceSearch(model=self._model)
         delete_tool = prime.DeleteTool(model=self._model)
         features = prime.FeatureExtraction(self._model)
@@ -626,9 +623,7 @@ class TolerantConnect:
                         params=mpt_params,
                     )
                     mpt_names.append(results.assigned_name)
-                    compute_volume_params.material_point_names.append(
-                        results.assigned_name
-                    )
+                    compute_volume_params.material_point_names.append(results.assigned_name)
             merged_part = interfering_parts[0]
             for part_i in range(1, n_parts):
                 if merged_part.get_edge_zonelets():
@@ -701,21 +696,15 @@ class TolerantConnect:
                 if merged_part.get_edge_zonelets():
                     merged_part.delete_zonelets(merged_part.get_edge_zonelets())
                 if intersect:
-                    intersect_to_faces = (
-                        merged_part.get_face_zonelets_of_label_name_pattern(
-                            dummy_unique_label1,
-                            pattern_params,
-                        )
+                    intersect_to_faces = merged_part.get_face_zonelets_of_label_name_pattern(
+                        dummy_unique_label1,
+                        pattern_params,
                     )
-                    intersect_faces = (
-                        merged_part.get_face_zonelets_of_label_name_pattern(
-                            dummy_unique_label2,
-                            pattern_params,
-                        )
+                    intersect_faces = merged_part.get_face_zonelets_of_label_name_pattern(
+                        dummy_unique_label2,
+                        pattern_params,
                     )
-                    intersect_params = prime.IntersectParams(
-                        self._model, intersect_tolerance
-                    )
+                    intersect_params = prime.IntersectParams(self._model, intersect_tolerance)
                     connect.intersect_face_zonelets(
                         merged_part.id,
                         intersect_faces,
@@ -731,15 +720,11 @@ class TolerantConnect:
                     params=self_params,
                 )
                 if search_results.n_found:
-                    intersect_to_faces = (
-                        merged_part.get_face_zonelets_of_label_name_pattern(
-                            dummy_unique_label1, pattern_params
-                        )
+                    intersect_to_faces = merged_part.get_face_zonelets_of_label_name_pattern(
+                        dummy_unique_label1, pattern_params
                     )
-                    intersect_faces = (
-                        merged_part.get_face_zonelets_of_label_name_pattern(
-                            dummy_unique_label2, pattern_params
-                        )
+                    intersect_faces = merged_part.get_face_zonelets_of_label_name_pattern(
+                        dummy_unique_label2, pattern_params
                     )
                     intersect_params = prime.IntersectParams(
                         model=self._model, tolerance=0.1 * intersect_tolerance
@@ -753,9 +738,7 @@ class TolerantConnect:
                 if intersect:
                     diag_params = prime.SurfaceDiagnosticSummaryParams(
                         self._model,
-                        scope=ScopeDefinition(
-                            self._model, part_expression=merged_part.name
-                        ),
+                        scope=ScopeDefinition(self._model, part_expression=merged_part.name),
                         compute_self_intersections=True,
                         compute_free_edges=True,
                         compute_multi_edges=True,
@@ -788,27 +771,21 @@ class TolerantConnect:
                             # )
                             delete_fringe_params = prime.DeleteFringesAndOverlapsParams(
                                 model=self._model,
-                                fringe_element_count=0
-                                if keep_small_free_surfaces
-                                else 5,
+                                fringe_element_count=0 if keep_small_free_surfaces else 5,
                                 overlap_element_count=3,
                                 delete_overlaps=True,
                             )
                             delete_tool.delete_fringes_and_overlaps_on_zonelets(
                                 merged_part.id, zonelets, delete_fringe_params
                             )
-                        checks = surface_search.get_surface_diagnostic_summary(
-                            diag_params
-                        )
+                        checks = surface_search.get_surface_diagnostic_summary(diag_params)
                 all_face_zonelets = merged_part.get_face_zonelets()
                 merged_part.remove_labels_from_zonelets(
                     [dummy_unique_label1, dummy_unique_label2], all_face_zonelets
                 )
                 diag_params = prime.SurfaceDiagnosticSummaryParams(
                     self._model,
-                    scope=ScopeDefinition(
-                        self._model, part_expression=merged_part.name
-                    ),
+                    scope=ScopeDefinition(self._model, part_expression=merged_part.name),
                     compute_self_intersections=True,
                     compute_free_edges=False,
                     compute_multi_edges=False,
@@ -830,9 +807,7 @@ class TolerantConnect:
                     if checks[0] > 20 or (checks[0] > 0 and intersect):
                         # lucid_mesh.write("failed_join_intersect.pmdat")
                         for mpt_name in compute_volume_params.material_point_names:
-                            self._model.material_point_data.delete_material_point(
-                                mpt_name
-                            )
+                            self._model.material_point_data.delete_material_point(mpt_name)
                         err_string = (
                             "failed to connect "
                             + '"'
@@ -846,9 +821,7 @@ class TolerantConnect:
                         raise PrimeRuntimeError(err_string)
                 if intersect:
                     try:
-                        results = merged_part.compute_closed_volumes(
-                            compute_volume_params
-                        )
+                        results = merged_part.compute_closed_volumes(compute_volume_params)
                     except:
                         zonelets = merged_part.get_face_zonelets()
                         # print(
@@ -864,9 +837,7 @@ class TolerantConnect:
                         delete_tool.delete_fringes_and_overlaps_on_zonelets(
                             merged_part.id, zonelets, delete_fringe_params
                         )
-                        results = merged_part.compute_closed_volumes(
-                            compute_volume_params
-                        )
+                        results = merged_part.compute_closed_volumes(compute_volume_params)
                     # lucid_mesh.write("after_just_connection_with_part_" +  part_name + ".pmdat")
                     if trim_small_volumes_from_parts_exp:
                         name_pattern_params = prime.NamePatternParams(model=self._model)
@@ -884,9 +855,7 @@ class TolerantConnect:
                                 volumes=trim_volumes, params=delete_volumes_params
                             )
                             if del_results.deleted_volumes:
-                                results = merged_part.compute_closed_volumes(
-                                    compute_volume_params
-                                )
+                                results = merged_part.compute_closed_volumes(compute_volume_params)
                                 trim_volumes = merged_part.get_volumes_of_zone_name_pattern(
                                     zone_name_pattern=trim_small_volumes_from_parts_exp,
                                     name_pattern_params=name_pattern_params,
@@ -920,9 +889,7 @@ class TolerantConnect:
             if intersect:
                 diag_params = prime.SurfaceDiagnosticSummaryParams(
                     self._model,
-                    scope=ScopeDefinition(
-                        self._model, part_expression=merged_part.name
-                    ),
+                    scope=ScopeDefinition(self._model, part_expression=merged_part.name),
                     compute_self_intersections=True,
                     compute_free_edges=True,
                     compute_multi_edges=True,
@@ -947,17 +914,13 @@ class TolerantConnect:
                     merge_small_zonelets_with_neighbors=True,
                     element_count_limit=20,
                 )
-                merged_part.merge_zonelets(
-                    merged_part.get_face_zonelets(), params=merge_params
-                )
+                merged_part.merge_zonelets(merged_part.get_face_zonelets(), params=merge_params)
                 merge_params = prime.MergeZoneletsParams(
                     model=self._model,
                     merge_small_zonelets_with_neighbors=False,
                     element_count_limit=20,
                 )
-                merged_part.merge_zonelets(
-                    merged_part.get_face_zonelets(), params=merge_params
-                )
+                merged_part.merge_zonelets(merged_part.get_face_zonelets(), params=merge_params)
             merged_part.delete_zonelets(merged_part.get_edge_zonelets())
         elif n_parts == 1:
             merged_part = interfering_parts[0]
@@ -1128,9 +1091,7 @@ class TolerantConnect:
             )
             n_size_change_faces_found = quality_res.n_found
         if n_size_change_faces_found:
-            local_surfer_params = prime.LocalSurferParams(
-                model=self._model, max_angle=179.5
-            )
+            local_surfer_params = prime.LocalSurferParams(model=self._model, max_angle=179.5)
             local_surfer_params.size_field_type = prime.SizeFieldType.VOLUMETRIC
             local_surfer_params.n_rings = 2
             surfer.remesh_face_zonelets_locally(
@@ -1152,9 +1113,7 @@ class TolerantConnect:
                     preserve_quality=True,
                     target_skewness=soft_target_skewness,
                 )
-                collapse_params.feature_type = (
-                    prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
-                )
+                collapse_params.feature_type = prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
                 split_params.split_ratio = 0.1
                 collapse_tool.split_and_collapse_on_zonelets(
                     part_id=part.id,
@@ -1216,9 +1175,7 @@ class TolerantConnect:
             part.id, part.get_face_zonelets(), register_id, quality_params
         )
         if quality_res.n_found > 0:
-            collapse_params.feature_type = (
-                prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
-            )
+            collapse_params.feature_type = prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
             split_params.split_ratio = 0.4
             collapse_params = prime.CollapseParams(
                 model=self._model,
@@ -1267,9 +1224,7 @@ class TolerantConnect:
             part.id, part.get_face_zonelets(), register_id, quality_params
         )
         if quality_res.n_found > 0:
-            collapse_params.feature_type = (
-                prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
-            )
+            collapse_params.feature_type = prime.SurfaceFeatureType.FEATUREORZONEBOUNDARY
             split_params.split_ratio = 0.4
             collapse_params = prime.CollapseParams(
                 model=self._model,
@@ -1328,9 +1283,7 @@ class TolerantConnect:
             overlap_element_count=3,
             delete_overlaps=True,
         )
-        delete_tool.delete_fringes_and_overlaps_on_zonelets(
-            part.id, zonelets, delete_fringe_params
-        )
+        delete_tool.delete_fringes_and_overlaps_on_zonelets(part.id, zonelets, delete_fringe_params)
         quality_params.quality_limit = hard_target_skewness
         quality_res = surface_search.search_zonelets_by_quality(
             part.id, part.get_face_zonelets(), register_id, quality_params
@@ -1379,9 +1332,7 @@ class TolerantConnect:
         )
         zone_id = self._model.get_zone_by_name(cap_zone_name)
         if zone_id <= 0:
-            create_zone_res = self._model.create_zone(
-                cap_zone_name, prime.ZoneType.FACE
-            )
+            create_zone_res = self._model.create_zone(cap_zone_name, prime.ZoneType.FACE)
             zone_id = create_zone_res.zone_id
         part.add_zonelets_to_zone(zone_id, cap_res.created_face_zonelets)
         return cap_res.created_face_zonelets
@@ -1427,9 +1378,7 @@ class TolerantConnect:
         sorted_vol_zone = []
         if not exclude_fluid_zones:
             fluid_volume_zones = set(
-                part.get_volume_zones_of_name_pattern(
-                    fluid_zones_exp, name_pattern_params
-                )
+                part.get_volume_zones_of_name_pattern(fluid_zones_exp, name_pattern_params)
             )
         face_zonelets = part.get_face_zonelets()
         for zonelet in face_zonelets:
@@ -1444,12 +1393,8 @@ class TolerantConnect:
                     volume_zone_name = self._model.get_zone_name(volume_zone_for_volume)
                     face_zone_pattern = "{}:face_zone".format(volume_zone_name)
                 elif len(volume_for_face_zonelet) == 2:
-                    first_vol_zone = part.get_volume_zone_of_volume(
-                        volume_for_face_zonelet[0]
-                    )
-                    second_vol_zone = part.get_volume_zone_of_volume(
-                        volume_for_face_zonelet[1]
-                    )
+                    first_vol_zone = part.get_volume_zone_of_volume(volume_for_face_zonelet[0])
+                    second_vol_zone = part.get_volume_zone_of_volume(volume_for_face_zonelet[1])
                     sorted_vol_zone = sorted(
                         [
                             self._model.get_zone_name(first_vol_zone),
@@ -1489,9 +1434,7 @@ class TolerantConnect:
             refine_params.contact_tolerance = 1.3 * connect_tolerance
             refine_params.refine_max_size = global_min_size
             refine_params.project_on_geometry = True
-            result = surface_utils.refine_at_contacts(
-                part_ids=part_ids, params=refine_params
-            )
+            result = surface_utils.refine_at_contacts(part_ids=part_ids, params=refine_params)
             size_field_id = result.size_field_id
             self._model.deactivate_volumetric_size_fields([size_field_id])
         else:
@@ -1499,9 +1442,7 @@ class TolerantConnect:
         return result
 
     def delete_topology(self):
-        params = prime.DeleteTopoEntitiesParams(
-            model=self._model, delete_geom_zonelets=True
-        )
+        params = prime.DeleteTopoEntitiesParams(model=self._model, delete_geom_zonelets=True)
         part_ids_to_delete = []
         result = None
         for part in self._model.parts:
@@ -1587,22 +1528,14 @@ class TolerantConnect:
             # merge zonelets by zone and labels
             vol_bef_stitch = len(part.get_volumes())
             vol_aft_stitch = len(
-                part.compute_closed_volumes(
-                    prime.ComputeVolumesParams(self._model)
-                ).volumes
+                part.compute_closed_volumes(prime.ComputeVolumesParams(self._model)).volumes
             )
             if vol_bef_stitch > vol_aft_stitch:
                 raise PrimeRuntimeError(
-                    "Topo faces failed to mesh on "
-                    + '"'
-                    + part.name
-                    + '"'
-                    + ". Check and restart."
+                    "Topo faces failed to mesh on " + '"' + part.name + '"' + ". Check and restart."
                 )
             if not vol_bef_stitch and not vol_aft_stitch:
-                part.add_labels_on_zonelets(
-                    [part.name + ":cap"], part.get_face_zonelets()
-                )
+                part.add_labels_on_zonelets([part.name + ":cap"], part.get_face_zonelets())
             zonelets = part.get_face_zonelets()
             if len(zonelets) > 1:
                 part.merge_zonelets(zonelets=zonelets, params=mergeParams)
@@ -1612,9 +1545,7 @@ class TolerantConnect:
                 create_zone_res = self._model.create_zone(
                     part.name + ":face_zone", type=prime.ZoneType.FACE
                 )
-                part.add_zonelets_to_zone(
-                    create_zone_res.zone_id, default_zone_zonelets
-                )
+                part.add_zonelets_to_zone(create_zone_res.zone_id, default_zone_zonelets)
             # add label for part with part name
             part.add_labels_on_zonelets([part.name], part.get_face_zonelets())
         # [TODO] following edge deletion code is a workaround to speedup join intersect.
@@ -1662,9 +1593,7 @@ class TolerantConnect:
                     keep_small_free_surfaces=keep_small_free_surfaces,
                 )
             if self.get_parts_of_name_pattern(contact_parts_exp):
-                cont_part_name = (
-                    part_name if vol_part_name == "" else "contact_interfering_part"
-                )
+                cont_part_name = part_name if vol_part_name == "" else "contact_interfering_part"
                 self.connect_contact_interfering_parts(
                     parts_name_exp=contact_parts_exp,
                     join_tolerance=connect_tolerance,
@@ -1712,14 +1641,14 @@ class TolerantConnect:
         hole_punching_cutter_parts_exp: str,
         hole_punching_target_parts_exp: str,
         hole_punching_keep_face_labels_exp: str,
-        part_name: str = "tolerant_connect_part"
+        part_name: str = "tolerant_connect_part",
     ):
         tolerant_connect_part_name = part_name
         compute_volume_params = prime.ComputeVolumesParams(
-                                    self._model,
-                                    create_zones_type=prime.CreateVolumeZonesType.PERNAMESOURCE,
-                                    volume_naming_type=prime.VolumeNamingType.BYFACEZONE,
-                                    )
+            self._model,
+            create_zones_type=prime.CreateVolumeZonesType.PERNAMESOURCE,
+            volume_naming_type=prime.VolumeNamingType.BYFACEZONE,
+        )
         part_ids_to_merge = []
         for part in self.get_parts_of_name_pattern(hole_punching_cutter_parts_exp):
             part_ids_to_merge.append(part.id)
@@ -1727,40 +1656,40 @@ class TolerantConnect:
         if len(part_ids_to_merge) > 0:
             tolerant_connect_part = self._model.get_part_by_name(tolerant_connect_part_name)
             compute_volume_params = prime.ComputeVolumesParams(
-                                    self._model,
-                                    create_zones_type=prime.CreateVolumeZonesType.PERNAMESOURCE,
-                                    volume_naming_type=prime.VolumeNamingType.BYFACELABEL,
-                                    )
+                self._model,
+                create_zones_type=prime.CreateVolumeZonesType.PERNAMESOURCE,
+                volume_naming_type=prime.VolumeNamingType.BYFACELABEL,
+            )
             mpt_params = prime.CreateMaterialPointParams(
-                            model = self._model,
-                            type = prime.MaterialPointType.LIVE,
-                            )
+                model=self._model,
+                type=prime.MaterialPointType.LIVE,
+            )
             for mpt_settings in material_points_for_flow_volumes:
                 results = self._model.material_point_data.create_material_point(
-                            suggested_name = mpt_settings["name"],
-                            coords = mpt_settings["location"],
-                            params=mpt_params,
-                            )
+                    suggested_name=mpt_settings["name"],
+                    coords=mpt_settings["location"],
+                    params=mpt_params,
+                )
                 compute_volume_params.material_point_names.append(results.assigned_name)
             results = tolerant_connect_part.compute_closed_volumes(compute_volume_params)
             for mpt_name in compute_volume_params.material_point_names:
                 self._model.material_point_data.delete_material_point(mpt_name)
             part_ids_to_merge.append(tolerant_connect_part.id)
             merge_res = self._model.merge_parts(
-                            part_ids_to_merge,
-                            prime.MergePartsParams(
-                                model = self._model,
-                                merged_part_suggested_name=tolerant_connect_part_name,
-                                )
-                            )
+                part_ids_to_merge,
+                prime.MergePartsParams(
+                    model=self._model,
+                    merged_part_suggested_name=tolerant_connect_part_name,
+                ),
+            )
             tolerant_connect_part = self._model.get_part_by_name(tolerant_connect_part_name)
             self.punch_holes(
                 self._model,
-                part = tolerant_connect_part,
-                target_volume_zone_exp = hole_punching_target_parts_exp,
-                cutter_volume_zone_exp = hole_punching_cutter_parts_exp,
-                ignore_face_label_exp = hole_punching_keep_face_labels_exp,
-                )
+                part=tolerant_connect_part,
+                target_volume_zone_exp=hole_punching_target_parts_exp,
+                cutter_volume_zone_exp=hole_punching_cutter_parts_exp,
+                ignore_face_label_exp=hole_punching_keep_face_labels_exp,
+            )
 
     def improve_surface_mesh(
         self,
@@ -1792,7 +1721,8 @@ class TolerantConnect:
             print(self._model.parts[0].name)
             if self._model.parts[0].name == "tolerant_connect_part":
                 tolerant_connect_part = self._model.get_part_by_name(part_name)
-            else: tolerant_connect_part = self._model.parts[0]
+            else:
+                tolerant_connect_part = self._model.parts[0]
             surf_inter_res = self.surface_intersection_results(tolerant_connect_part)
             if surf_inter_res[0]:
                 err_string = (
@@ -1832,9 +1762,7 @@ class TolerantConnect:
                     flow_volume_end_label_exp=cap_info["source_face_label_exp"],
                     cap_zone_name=cap_info["cap_face_zone_name"],
                 )
-                caps_and_vol_zone_map.append(
-                    [cap_face_zonelets, cap_info["flow_volume_zone_name"]]
-                )
+                caps_and_vol_zone_map.append([cap_face_zonelets, cap_info["flow_volume_zone_name"]])
             print(caps_and_vol_zone_map)
             extract_volume_params = prime.ExtractVolumesParams(model=self._model)
             extract_volume_params.create_zone = True
@@ -1856,10 +1784,8 @@ class TolerantConnect:
             name_pattern_params = prime.NamePatternParams(model=self._model)
             fluid_zonelets = tolerant_connect_part.get_face_zonelets_of_volumes(fluid_vols)
             if fluid_zonelets and hole_punching_cutter_parts_exp != "":
-                periodic_zonelets = (
-                    tolerant_connect_part.get_face_zonelets_of_label_name_pattern(
-                        hole_punching_keep_face_labels_exp, name_pattern_params
-                    )
+                periodic_zonelets = tolerant_connect_part.get_face_zonelets_of_label_name_pattern(
+                    hole_punching_keep_face_labels_exp, name_pattern_params
                 )
                 periodic_fluid_zonelets = list(set(fluid_zonelets) & set(periodic_zonelets))
                 if periodic_fluid_zonelets:
@@ -1876,9 +1802,7 @@ class TolerantConnect:
                             hole_punching_keep_face_labels_exp, name_pattern_params
                         )
                     )
-                    periodic_fluid_zonelets = list(
-                        set(fluid_zonelets) & set(periodic_zonelets)
-                    )
+                    periodic_fluid_zonelets = list(set(fluid_zonelets) & set(periodic_zonelets))
             merge_params = prime.MergeZoneletsParams(
                 model=self._model,
                 merge_small_zonelets_with_neighbors=True,
@@ -1957,9 +1881,7 @@ class TolerantConnect:
                     tolerance=0.3,
                     type=prime.SmoothType.INFLATE,
                 )
-                fluid_zonelets = tolerant_connect_part.get_face_zonelets_of_volumes(
-                    fluid_vols
-                )
+                fluid_zonelets = tolerant_connect_part.get_face_zonelets_of_volumes(fluid_vols)
                 surface_utils.smooth_dihedral_face_nodes(fluid_zonelets, smooth_params)
                 smooth_params.type = prime.SmoothType.SMOOTH
                 surface_utils.smooth_dihedral_face_nodes(fluid_zonelets, smooth_params)
@@ -1970,13 +1892,9 @@ class TolerantConnect:
                     nugget_size=0.8,
                     label="nuggets_at_invalid_normals",
                 )
-                fluid_face_zonelets = tolerant_connect_part.get_face_zonelets_of_volumes(
-                    fluid_vols
-                )
-                nugget_zonelets = (
-                    tolerant_connect_part.get_face_zonelets_of_label_name_pattern(
-                        fix_invalid_normals_on_face_label_exp, name_pattern_params
-                    )
+                fluid_face_zonelets = tolerant_connect_part.get_face_zonelets_of_volumes(fluid_vols)
+                nugget_zonelets = tolerant_connect_part.get_face_zonelets_of_label_name_pattern(
+                    fix_invalid_normals_on_face_label_exp, name_pattern_params
                 )
                 nugget_zonelets = list(set(nugget_zonelets) & set(fluid_face_zonelets))
                 if nugget_zonelets:
@@ -1994,19 +1912,15 @@ class TolerantConnect:
                     if vol not in fluid_vols:
                         fluid_vols.append(vol)
             if fix_invalid_normals and fluid_vols:
-                invalid_normal_vols = (
-                    tolerant_connect_part.get_volumes_of_zone_name_pattern(
-                        "nuggets_at_invalid_normals", name_pattern_params
-                    )
+                invalid_normal_vols = tolerant_connect_part.get_volumes_of_zone_name_pattern(
+                    "nuggets_at_invalid_normals", name_pattern_params
                 )
                 delete_volumes_params = prime.DeleteVolumesParams(model=self._model)
                 tolerant_connect_part.delete_volumes(
                     volumes=invalid_normal_vols, params=delete_volumes_params
                 )
-                invalid_normal_vols = (
-                    tolerant_connect_part.get_volumes_of_zone_name_pattern(
-                        "nuggets_at_invalid_normals", name_pattern_params
-                    )
+                invalid_normal_vols = tolerant_connect_part.get_volumes_of_zone_name_pattern(
+                    "nuggets_at_invalid_normals", name_pattern_params
                 )
                 if invalid_normal_vols:
                     merge_vol_params = prime.MergeVolumesParams(model=self._model)
@@ -2016,9 +1930,7 @@ class TolerantConnect:
                         - set(invalid_normal_vols)
                         - set(fluid_vols)
                     )
-                    tolerant_connect_part.merge_volumes(
-                        invalid_normal_vols, merge_vol_params
-                    )
+                    tolerant_connect_part.merge_volumes(invalid_normal_vols, merge_vol_params)
                 merge_params = prime.MergeZoneletsParams(
                     model=self._model,
                     merge_small_zonelets_with_neighbors=True,
@@ -2037,8 +1949,8 @@ class TolerantConnect:
                     intersect = list(set(faces).intersection(existing_caps))
                     if intersect:
                         for face in intersect:
-                            connected_volumes = (
-                                tolerant_connect_part.get_volumes_of_face_zonelet(face)
+                            connected_volumes = tolerant_connect_part.get_volumes_of_face_zonelet(
+                                face
                             )
                             n_fluids = len(set(connected_volumes))
                             if fluid_fluid_interface_wall and n_fluids == 2:
@@ -2046,20 +1958,14 @@ class TolerantConnect:
                             else:
                                 zone_name = label
                             result = self._model.create_zone(zone_name, prime.ZoneType.FACE)
-                            tolerant_connect_part.add_zonelets_to_zone(
-                                result.zone_id, intersect
-                            )
+                            tolerant_connect_part.add_zonelets_to_zone(result.zone_id, intersect)
                 else:
                     if fluid_fluid_interface_wall:
-                        faces = (
-                            tolerant_connect_part.get_face_zonelets_of_label_name_pattern(
-                                label, prime.NamePatternParams(self._model)
-                            )
+                        faces = tolerant_connect_part.get_face_zonelets_of_label_name_pattern(
+                            label, prime.NamePatternParams(self._model)
                         )
                         interface_label = label.removesuffix(":cap") + ":interface"
-                        tolerant_connect_part.add_labels_on_zonelets(
-                            [interface_label], faces
-                        )
+                        tolerant_connect_part.add_labels_on_zonelets([interface_label], faces)
             cap_vols = []
             for face in existing_caps:
                 vols = tolerant_connect_part.get_volumes_of_face_zonelet(face)
@@ -2092,10 +1998,9 @@ class TolerantConnect:
             print(self._model.parts[0].name)
             if self._model.parts[0].name == "tolerant_connect_part":
                 tolerant_connect_part = self._model.get_part_by_name(part_name)
-            else: tolerant_connect_part = self._model.parts[0]
-            auto_mesh_params = prime.AutoMeshParams(
-                model=self._model
-            )
+            else:
+                tolerant_connect_part = self._model.parts[0]
+            auto_mesh_params = prime.AutoMeshParams(model=self._model)
             if generate_thin_volume_mesh:
                 thin_vol_ctrls_ids = []
                 for (
@@ -2113,49 +2018,39 @@ class TolerantConnect:
                             ignore_unprojected_base=True,
                         )
                     if "n_layers" in thin_volume_mesh_scope_info:
-                        thin_volume_mesh_params.n_layers = thin_volume_mesh_scope_info[
-                            "n_layers"
-                        ]
+                        thin_volume_mesh_params.n_layers = thin_volume_mesh_scope_info["n_layers"]
                     if "imprint_sides" in thin_volume_mesh_scope_info:
                         thin_volume_mesh_params.imprint_sides = thin_volume_mesh_scope_info[
                             "imprint_sides"
                         ]
                     if "n_ignore_rings" in thin_volume_mesh_scope_info:
-                        thin_volume_mesh_params.n_ignore_rings = (
-                            thin_volume_mesh_scope_info["n_ignore_rings"]
-                        )
+                        thin_volume_mesh_params.n_ignore_rings = thin_volume_mesh_scope_info[
+                            "n_ignore_rings"
+                        ]
                     thin_vol_ctrl.set_thin_volume_mesh_params(thin_volume_mesh_params)
                     if "source_scope" in thin_volume_mesh_scope_info:
                         source_scope = ScopeDefinition(model=self._model)
                         source_scope_dict = thin_volume_mesh_scope_info["source_scope"]
                         if "evaluation_type" in source_scope_dict:
                             source_scope.evaluation_type = self.evaluation_value(
-                                        source_scope_dict["evaluation_type"],
-                                        )
+                                source_scope_dict["evaluation_type"],
+                            )
                         if "label_expression" in source_scope_dict:
-                            source_scope.label_expression = source_scope_dict[
-                                "label_expression"
-                            ]
+                            source_scope.label_expression = source_scope_dict["label_expression"]
                         if "zone_expression" in source_scope_dict:
-                            source_scope.zone_expression = source_scope_dict[
-                                "zone_expression"
-                            ]
+                            source_scope.zone_expression = source_scope_dict["zone_expression"]
                         thin_vol_ctrl.set_source_scope(source_scope)
                     if "target_scope" in thin_volume_mesh_scope_info:
                         target_scope = ScopeDefinition(model=self._model)
                         target_scope_dict = thin_volume_mesh_scope_info["target_scope"]
                         if "evaluation_type" in target_scope_dict:
                             target_scope.evaluation_type = self.evaluation_value(
-                                                source_scope_dict["evaluation_type"],
-                                                )
+                                source_scope_dict["evaluation_type"],
+                            )
                         if "label_expression" in target_scope_dict:
-                            target_scope.label_expression = target_scope_dict[
-                                "label_expression"
-                            ]
+                            target_scope.label_expression = target_scope_dict["label_expression"]
                         if "zone_expression" in target_scope_dict:
-                            target_scope.zone_expression = target_scope_dict[
-                                "zone_expression"
-                            ]
+                            target_scope.zone_expression = target_scope_dict["zone_expression"]
                         thin_vol_ctrl.set_target_scope(target_scope)
                     if "volume_scope" in thin_volume_mesh_scope_info:
                         volume_scope = ScopeDefinition(model=self._model)
@@ -2163,9 +2058,7 @@ class TolerantConnect:
                         volume_scope.entity_type = ScopeEntity.VOLUME
                         volume_scope.evaluation_type = prime.ScopeEvaluationType.ZONES
                         if "zone_expression" in volume_scope_dict:
-                            volume_scope.zone_expression = volume_scope_dict[
-                                "zone_expression"
-                            ]
+                            volume_scope.zone_expression = volume_scope_dict["zone_expression"]
                         # print("some", volume_scope)
                         thin_vol_ctrl.set_volume_scope(volume_scope)
                     thin_vol_ctrls_ids.append(thin_vol_ctrl.id)
@@ -2180,9 +2073,7 @@ class TolerantConnect:
                     if "first_height" in prism_scope_info:
                         prism_params.first_height = prism_scope_info["first_height"]
                     if "last_aspect_ratio" in prism_scope_info:
-                        prism_params.last_aspect_ratio = prism_scope_info[
-                            "last_aspect_ratio"
-                        ]
+                        prism_params.last_aspect_ratio = prism_scope_info["last_aspect_ratio"]
                         prism_params.offset_type = prime.PrismControlOffsetType.LASTRATIO
                     prism_ctrl.set_growth_params(prism_params)
                     if "surface_scope" in prism_scope_info:
@@ -2190,16 +2081,12 @@ class TolerantConnect:
                         surface_scope_dict = prism_scope_info["surface_scope"]
                         if "evaluation_type" in surface_scope_dict:
                             surface_scope.evaluation_type = self.evaluation_value(
-                                            surface_scope_dict["evaluation_type"],
-                                            )
+                                surface_scope_dict["evaluation_type"],
+                            )
                         if "label_expression" in surface_scope_dict:
-                            surface_scope.label_expression = surface_scope_dict[
-                                "label_expression"
-                            ]
+                            surface_scope.label_expression = surface_scope_dict["label_expression"]
                         if "zone_expression" in surface_scope_dict:
-                            surface_scope.zone_expression = surface_scope_dict[
-                                "zone_expression"
-                            ]
+                            surface_scope.zone_expression = surface_scope_dict["zone_expression"]
                         prism_ctrl.set_surface_scope(surface_scope)
                     if "volume_scope" in prism_scope_info:
                         volume_scope = ScopeDefinition(model=self._model)
@@ -2207,18 +2094,14 @@ class TolerantConnect:
                         volume_scope.evaluation_type = prime.ScopeEvaluationType.ZONES
                         volume_scope_dict = prism_scope_info["volume_scope"]
                         if "zone_expression" in volume_scope_dict:
-                            volume_scope.zone_expression = volume_scope_dict[
-                                "zone_expression"
-                            ]
+                            volume_scope.zone_expression = volume_scope_dict["zone_expression"]
                         prism_ctrl.set_volume_scope(volume_scope)
                     prism_ctrl_ids.append(prism_ctrl.id)
                 auto_mesh_params.prism_control_ids = prism_ctrl_ids
                 stairstep_params = prime.PrismStairStep(
                     model=self._model, check_proximity=False, gap_factor_scale=0.2
                 )
-                prism_params = prime.PrismParams(
-                    model=self._model, stair_step=stairstep_params
-                )
+                prism_params = prime.PrismParams(model=self._model, stair_step=stairstep_params)
                 auto_mesh_params.prism = prism_params
             if periodic_labels_exp and periodic_info:
                 periodic_control = self._model.control_data.create_periodic_control()
@@ -2267,21 +2150,19 @@ class TolerantConnect:
             if n_procs > 1 and thin_volume_mesh_settings:
                 self._model.start_distributed_meshing()
             auto_mesher = prime.AutoMesh(model=self._model)
-            auto_mesher.mesh(
-                part_id=tolerant_connect_part.id, automesh_params=auto_mesh_params
-            )
+            auto_mesher.mesh(part_id=tolerant_connect_part.id, automesh_params=auto_mesh_params)
             if labels_to_delete != []:
                 tolerant_connect_part.remove_labels_from_zonelets(
-                                labels_to_delete,
-                                tolerant_connect_part.get_face_zonelets(),
-                                )
+                    labels_to_delete,
+                    tolerant_connect_part.get_face_zonelets(),
+                )
             if labels_to_retain != []:
                 total_labels = tolerant_connect_part.get_labels()
                 delete_labels = list(set(total_labels).difference(set(labels_to_retain)))
                 tolerant_connect_part.remove_labels_from_zonelets(
-                                delete_labels,
-                                tolerant_connect_part.get_face_zonelets(),
-                                )
+                    delete_labels,
+                    tolerant_connect_part.get_face_zonelets(),
+                )
             vtool = prime.VolumeMeshTool(model=self._model)
             vtool.check_mesh(
                 part_id=tolerant_connect_part.id,
@@ -2338,7 +2219,8 @@ class TolerantConnect:
         if not only_solid_mesh:
             if self._model.parts[0].name == "tolerant_connect_part":
                 tolerant_connect_part = self._model.get_part_by_name(part_name)
-            else: tolerant_connect_part = self._model.parts[0]
+            else:
+                tolerant_connect_part = self._model.parts[0]
             for operation in auto_node_move_sequence:
                 self.auto_node_movement(
                     part=tolerant_connect_part,
@@ -2373,40 +2255,30 @@ class TolerantConnect:
             print(f"number of self intersecting elements= {result.n_self_intersections}")
             print(f"number of free elements= {result.n_free_edges}")
         if result.n_self_intersections:
-            self._logger.error(
-                str(result.n_self_intersections) + " self intersecting faces found."
-            )
+            self._logger.error(str(result.n_self_intersections) + " self intersecting faces found.")
         if result.n_free_edges:
             self._logger.error(str(result.n_free_edges) + " free faces found.")
         if result.n_duplicate_faces:
-            self._logger.error(
-                str(result.n_duplicate_faces) + " duplicate faces found."
-            )
+            self._logger.error(str(result.n_duplicate_faces) + " duplicate faces found.")
         return result
 
     def volume_mesh_check(self, volume_fill_type=prime.VolumeFillType.TET):
         for part in self._model.parts:
-            params = prime.PartSummaryParams(
-                model=self._model, print_id=False, print_mesh=True
-            )
+            params = prime.PartSummaryParams(model=self._model, print_id=False, print_mesh=True)
             part_summary_res = part.get_summary(params)
             print(f"number of face elements= {part_summary_res.n_faces}")
             print(f"number of cell= {part_summary_res.n_cells}")
             if volume_fill_type == prime.VolumeFillType.TET:
                 search = prime.SurfaceSearch(model=self._model)
                 params = prime.SurfaceQualitySummaryParams(model=self._model)
-                params.scope = prime.ScopeDefinition(
-                    model=self._model, part_expression=part.name
-                )
+                params.scope = prime.ScopeDefinition(model=self._model, part_expression=part.name)
                 params.face_quality_measures = [prime.FaceQualityMeasure.SKEWNESS]
                 params.quality_limit = [0.9]
                 face_quality = search.get_surface_quality_summary(params)
                 print(f"min face elements quality = {face_quality.quality_results[0].min_quality}")
             search = prime.VolumeSearch(self._model)
             params = prime.VolumeQualitySummaryParams(model=self._model)
-            params.scope = prime.ScopeDefinition(
-                model=self._model, part_expression=part.name
-            )
+            params.scope = prime.ScopeDefinition(model=self._model, part_expression=part.name)
             if (
                 volume_fill_type == prime.VolumeFillType.TET
                 or volume_fill_type == prime.VolumeFillType.HEXCORETET
@@ -2421,9 +2293,7 @@ class TolerantConnect:
                 volume_fill_type == prime.VolumeFillType.POLY
                 or volume_fill_type == prime.VolumeFillType.HEXCOREPOLY
             ):
-                params.cell_quality_measures = [
-                    prime.CellQualityMeasure.INVERSEORTHOGONAL
-                ]
+                params.cell_quality_measures = [prime.CellQualityMeasure.INVERSEORTHOGONAL]
                 params.quality_limit = [0.9]
                 cell_quality = search.get_volume_quality_summary(params)
                 print(f"min cell quality = {cell_quality.quality_results_part[0].min_quality}")
@@ -2441,8 +2311,8 @@ class TolerantConnect:
             ):
                 self._logger.error(check)
 
-    def volume_mesh_solid(self, quadratic: bool= False):
-        #compute volumes
+    def volume_mesh_solid(self, quadratic: bool = False):
+        # compute volumes
         compute_volume_count = 0
         create_zones_type = prime.CreateVolumeZonesType.PERVOLUME
         params = prime.ComputeVolumesParams(self._model, create_zones_type=create_zones_type)
@@ -2458,7 +2328,7 @@ class TolerantConnect:
             except:
                 print("compute volume is failed for part: ", part.name)
         print("total computed volumes are: ", compute_volume_count)
-        #volume meshing
+        # volume meshing
         name_pattern_params = prime.NamePatternParams(self._model)
         dead_volumes = []
         for part in self._model.parts:
@@ -2466,43 +2336,45 @@ class TolerantConnect:
             dead_volumes.append(dead_region)
         volume_control_ids = []
         if len(dead_volumes) > 0:
-            print( ">>>> dead volumes found ")
-            #set the control params
+            print(">>>> dead volumes found ")
+            # set the control params
             volume_control_param = prime.VolumeControlParams(self._model)
             volume_control_param.cell_zonelet_type = prime.CellZoneletType.DEAD
-            volume_control_scope = prime.ScopeDefinition(self._model,
-                                                entity_type=prime.ScopeEntity.VOLUME,
-                                                evaluation_type=prime.ScopeEvaluationType.ZONES,
-                                                part_expression="*",
-                                                zone_expression= "dead*")
-            #set the volume control
+            volume_control_scope = prime.ScopeDefinition(
+                self._model,
+                entity_type=prime.ScopeEntity.VOLUME,
+                evaluation_type=prime.ScopeEvaluationType.ZONES,
+                part_expression="*",
+                zone_expression="dead*",
+            )
+            # set the volume control
             volume_control = self._model.control_data.create_volume_control()
             volume_control.set_params(volume_control_params=volume_control_param)
             volume_control.set_scope(scope=volume_control_scope)
             volume_control_ids.append(volume_control.id)
         else:
-            print( "<<<< no dead volumes found ")
+            print("<<<< no dead volumes found ")
         automesh = prime.AutoMesh(self._model)
         automesh_params = prime.AutoMeshParams(
-                            self._model,
-                            volume_fill_type=prime.VolumeFillType.TET,
-                            volume_control_ids=volume_control_ids,
-                            growth_rate=1.5,
-                            cell_quality_measure = prime.CellQualityMeasure.ELEMENTQUALITY,
-                            target_quality = 0.1,
-                            )
+            self._model,
+            volume_fill_type=prime.VolumeFillType.TET,
+            volume_control_ids=volume_control_ids,
+            growth_rate=1.5,
+            cell_quality_measure=prime.CellQualityMeasure.ELEMENTQUALITY,
+            target_quality=0.1,
+        )
         tet_params = prime.TetParams(
-                            self._model,
-                            # refine_sliver_quality = 0.99,
-                            # refine_target_quality = 0.8,
-                            # refine_target_low_quality = 0.8,
-                            # remove_sliver_cells = True,
-                            # remove_sliver_target_quality = 0.85,
-                            # remove_sliver_quality = 0.8,
-                            )
+            self._model,
+            # refine_sliver_quality = 0.99,
+            # refine_target_quality = 0.8,
+            # refine_target_low_quality = 0.8,
+            # remove_sliver_cells = True,
+            # remove_sliver_target_quality = 0.85,
+            # remove_sliver_quality = 0.8,
+        )
         automesh_params.tet = tet_params
         # if quadratic:
-            # automesh_params.tet = prime.TetParams(self._model, True)
+        # automesh_params.tet = prime.TetParams(self._model, True)
         for part in self._model.parts:
             try:
                 result = automesh.mesh(part.id, automesh_params=automesh_params)
@@ -2510,25 +2382,25 @@ class TolerantConnect:
                 print("volume meshing is failed for part: ", part.name)
         ## mid node projection
         # if quadratic:
-            # project_mid_node = True
-            # if project_mid_node:
-                # for part in self._model.parts:
-                    # try:
-                        # topo_faces = part.get_topo_faces()
-                        # surfaceUtils = prime.SurfaceUtilities(self._model)
-                        # projectParams = prime.ProjectOnGeometryParams(
-                            # model=self._model,
-                            # project_on_facets_if_cadnot_found = True,
-                            # project_only_mid_nodes = True,
-                            # check_quality = True,
-                            ## morphMidNodes = True,
-                            # )
-                        # results = surfaceUtils.project_topo_faces_on_geometry(
-                                        # topo_faces,
-                                        # projectParams,
-                                        # )
-                    # except:
-                        # print("mid node projection is failed for part: ", part.name)
+        # project_mid_node = True
+        # if project_mid_node:
+        # for part in self._model.parts:
+        # try:
+        # topo_faces = part.get_topo_faces()
+        # surfaceUtils = prime.SurfaceUtilities(self._model)
+        # projectParams = prime.ProjectOnGeometryParams(
+        # model=self._model,
+        # project_on_facets_if_cadnot_found = True,
+        # project_only_mid_nodes = True,
+        # check_quality = True,
+        ## morphMidNodes = True,
+        # )
+        # results = surfaceUtils.project_topo_faces_on_geometry(
+        # topo_faces,
+        # projectParams,
+        # )
+        # except:
+        # print("mid node projection is failed for part: ", part.name)
 
     def file_read(self, file_name, sf_file_name=""):
         file_io = prime.FileIO(model=self._model)
@@ -2545,10 +2417,10 @@ class TolerantConnect:
             file_io.import_mapdl_cdb(file_name, prime.ImportMapdlCdbParams(model=self._model))
         else:
             params = prime.ImportCadParams(
-                        model=self._model,
-                        length_unit = prime.LengthUnit.MM,
-                        cad_reader_route = prime.CadReaderRoute.PROGRAMCONTROLLED,
-                        part_creation_type = prime.PartCreationType.BODY,
-                        geometry_transfer = True,
-                        )
+                model=self._model,
+                length_unit=prime.LengthUnit.MM,
+                cad_reader_route=prime.CadReaderRoute.PROGRAMCONTROLLED,
+                part_creation_type=prime.PartCreationType.BODY,
+                geometry_transfer=True,
+            )
             file_io.import_cad(file_name=file_name, params=params)

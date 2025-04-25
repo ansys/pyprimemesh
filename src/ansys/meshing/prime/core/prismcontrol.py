@@ -1,6 +1,5 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +51,7 @@ class PrismControl(_PrismControl):
         self._name = name
 
     def set_suggested_name(self, name: str) -> SetNameResults:
-        """ Set the unique name for the prism control based on the suggested name.
+        """Set the unique name for the prism control based on the suggested name.
 
 
         Parameters

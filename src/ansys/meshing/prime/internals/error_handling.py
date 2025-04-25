@@ -1,6 +1,5 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -547,25 +546,21 @@ class PrimeRuntimeWarning(UserWarning):
         """Warning message to be reported."""
         return self._message
 
-def process_and_handle_results(result : dict):
+
+def process_and_handle_results(result: dict):
     if result is not None:
         if isinstance(result, dict):
             error_code = result.get('errorCode', None)
             error_location_arr = result.get('errorLocations', None)
             error_locations = (
-                [
-                    error_location_arr[i : i + 3]
-                    for i in range(0, len(error_location_arr), 3)
-                ]
+                [error_location_arr[i : i + 3] for i in range(0, len(error_location_arr), 3)]
                 if error_location_arr is not None
                 else []
             )
             if error_code is not None:
                 if error_code > 0:
                     error_location_msg = (
-                        f'\nError Locations: {error_locations}'
-                        if len(error_locations) > 0
-                        else f''
+                        f'\nError Locations: {error_locations}' if len(error_locations) > 0 else f''
                     )
                     raise PrimeRuntimeError(
                         prime_error_messages.get(
@@ -590,15 +585,14 @@ def process_and_handle_results(result : dict):
 
                 [
                     warnings.warn(
-                        prime_warning_messages.get(
-                            WarningCode(w), f'Unrecogonized warning {w}'
-                        ),
+                        prime_warning_messages.get(WarningCode(w), f'Unrecogonized warning {w}'),
                         PrimeRuntimeWarning,
                         stacklevel=4,
                     )
                     for w in prime_warnings
                 ]
     return result
+
 
 def communicator_error_handler(
     _func=None,

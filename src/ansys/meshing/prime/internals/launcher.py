@@ -1,6 +1,5 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -272,5 +271,10 @@ def launch_prime(
         prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
     )
 
-    return Client(server_process=server, ip=ip, port=port, timeout=timeout,
-            communicator_type=kwargs.get('communicator_type', 'grpc'))
+    return Client(
+        server_process=server,
+        ip=ip,
+        port=port,
+        timeout=timeout,
+        communicator_type=kwargs.get('communicator_type', 'grpc'),
+    )

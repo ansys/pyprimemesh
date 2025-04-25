@@ -1,6 +1,5 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +21,11 @@
 
 """Module for communications with the socket server."""
 __all__ = ['SocketCommunicator']
+import json
+import socket
 from typing import Optional
 
+import numpy as np
 
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.core.model import Model
@@ -32,15 +34,14 @@ from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
-import socket
-import json
-import numpy as np
+
 
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.ndarray):
             return obj.tolist()
         return super().default(obj)
+
 
 class SocketCommunicator(Communicator):
     """Manages communication with the socket server.

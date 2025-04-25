@@ -1,6 +1,5 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -103,14 +102,13 @@ class Client(object):
                     raise
             elif communicator_type == "socket":
                 from ansys.meshing.prime.internals.socket_communicator import (
-                        SocketCommunicator
+                    SocketCommunicator,
                 )
+
                 self._comm = SocketCommunicator(ip=ip, port=port)
                 setattr(self, 'port', port)
             else:
-                logging.getLogger('PyPrimeMesh').error(
-                        f'Invalid server type: {communicator_type}'
-                    )
+                logging.getLogger('PyPrimeMesh').error(f'Invalid server type: {communicator_type}')
                 raise
 
         else:

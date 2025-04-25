@@ -1,6 +1,5 @@
-# Copyright 2025 ANSYS, Inc. Unauthorized use, distribution, or duplication is prohibited.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -35,10 +34,10 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
-    ExportLSDynaKeywordFileParams,
-    ExportLSDynaResults,
     ExportLSDynaIgaKeywordFileParams,
     ExportLSDynaIGAResults,
+    ExportLSDynaKeywordFileParams,
+    ExportLSDynaResults,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -57,9 +56,9 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
+    SeparateBlocksFormatType,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
-    SeparateBlocksFormatType,
 )
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
