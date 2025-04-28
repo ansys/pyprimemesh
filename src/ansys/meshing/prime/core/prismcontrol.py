@@ -53,7 +53,6 @@ class PrismControl(_PrismControl):
     def set_suggested_name(self, name: str) -> SetNameResults:
         """Set the unique name for the prism control based on the suggested name.
 
-
         Parameters
         ----------
         name : str
