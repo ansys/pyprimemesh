@@ -31,7 +31,7 @@ ENV LANG=en_US.utf-8 \
     LC_ALL=en_US.utf-8
 	
 # Set env for image
-ENV AWP_ROOT251="/prime"
+ENV AWP_ROOT252="/prime"
 
 # Add container labels
 LABEL org.opencontainers.image.authors="ANSYS Inc."
