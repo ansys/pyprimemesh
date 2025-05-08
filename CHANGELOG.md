@@ -2,6 +2,34 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.8.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.1) - April 29, 2025
+
+
+### Dependencies
+
+- build(deps): bump sphinx from 8.2.1 to 8.2.3 in the doc-dependencies group [#990](https://github.com/ansys/pyprimemesh/pull/990)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.3.2 to 1.3.3 in the doc-dependencies group [#992](https://github.com/ansys/pyprimemesh/pull/992)
+- build(deps): bump the test-dependencies group across 1 directory with 2 updates [#993](https://github.com/ansys/pyprimemesh/pull/993)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.3.3 to 1.4.2 in the doc-dependencies group [#994](https://github.com/ansys/pyprimemesh/pull/994)
+- build(deps): bump pytest-cov from 6.0.0 to 6.1.1 in the test-dependencies group [#996](https://github.com/ansys/pyprimemesh/pull/996)
+
+
+### Miscellaneous
+
+- Sync ADO changes for sp2 [#1000](https://github.com/ansys/pyprimemesh/pull/1000)
+- minor fix for release/0.8.1 [#1004](https://github.com/ansys/pyprimemesh/pull/1004)
+
+
+### Documentation
+
+- Update fileio.rst [#980](https://github.com/ansys/pyprimemesh/pull/980)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.8.0 [#988](https://github.com/ansys/pyprimemesh/pull/988)
+- updated docker image tag for SP2 changes [#997](https://github.com/ansys/pyprimemesh/pull/997)
+
 ## [0.8.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.0) - 2025-02-27
 
 

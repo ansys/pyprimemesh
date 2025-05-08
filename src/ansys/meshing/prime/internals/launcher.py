@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Helper module for launching the server."""
+import logging
 import os
 import subprocess
 import sys
@@ -112,6 +113,8 @@ def launch_server_process(
     run_prime_script = f'runPrime.{script_ext}'
 
     exec_path = os.path.join(prime_root, run_prime_script)
+    print('Using Ansys Prime Server from {prime_root}'.format(prime_root=prime_root))
+    logging.getLogger('PyPrimeMesh').info('Using server from %s', prime_root)
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
 
@@ -161,7 +164,7 @@ def launch_server_process(
     if sys.platform.startswith('win32'):
         kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    print('Using Ansys Prime Server from {prime_root}'.format(prime_root=prime_root))
+    logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
     server = subprocess.Popen(server_args, **kwargs)
     return server
 
@@ -175,7 +178,7 @@ def launch_remote_prime(
     This method creates a file transfer service that is available on Ansys Lab.
     """
     if version is None:
-        version = '251-sp1'
+        version = '251-sp2'
 
     pim = pypim.connect()
     instance = pim.create_instance(product_name='prime', product_version=version)
@@ -259,11 +262,8 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
-        print(
-            'Using Ansys Prime Server from container {container_name}'.format(
-                container_name=container_name
-            )
-        )
+        print('using server from docker : The container name %s', container_name)
+        logging.getLogger('PyPrimeMesh').info('uses server from container : %s', container_name)
         return client
 
     server = launch_server_process(

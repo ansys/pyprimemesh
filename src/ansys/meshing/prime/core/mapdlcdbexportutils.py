@@ -1650,10 +1650,11 @@ class _JointMaterialProcessor:
                                 f"tempereture dependent values are not processed"
                             )
                         clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                        stiff_val = float(comp_data['Data']['Stiffness'][0]) * 1000
                         elasticity_data += f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
-                        elasticity_data += f"TBPT, , -1.0, -{comp_data['Data']['Stiffness'][0]}\n"
-                        elasticity_data += f"TBPT, , 0.0, 0.0\n"
-                        elasticity_data += f"TBPT, , 1.0, {comp_data['Data']['Stiffness'][0]}\n"
+                        elasticity_data += f"TBPT, , -1000.0, -{stiff_val}\n"
+                        elasticity_data += "TBPT, , 0.0, 0.0\n"
+                        elasticity_data += f"TBPT, , 1000.0, {stiff_val}\n"
                     else:
                         if len(comp_data['Data']['Stiffness']) != 1:
                             self._logger.warning(
@@ -1761,10 +1762,11 @@ class _JointMaterialProcessor:
                             f"tempereture dependent values are not processed"
                         )
                     s1 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                    damp_coeff = float(comp_data['Data']['damping_coeff'][0]) * 1000
                     damping_data += f"TB, JOIN, {mat_id}, 1, 3, {s1}\n"
-                    damping_data += f"TBPT, , -1.0, -{comp_data['Data']['damping_coeff'][0]}\n"
-                    damping_data += f"TBPT, , 0.0, 0.0\n"
-                    damping_data += f"TBPT, , 1.0, {comp_data['Data']['damping_coeff'][0]}\n"
+                    damping_data += f"TBPT, , -1000.0, -{damp_coeff}\n"
+                    damping_data += "TBPT, , 0.0, 0.0\n"
+                    damping_data += f"TBPT, , 1000.0, {damp_coeff}\n"
                 else:
                     # self._logger.info('linear')
                     if len(comp_data['Data']['damping_coeff']) != 1:
@@ -2806,6 +2808,7 @@ class _StepProcessor:
                 time_increment = float(data['time_increment'])
             if 'time_period' in data:
                 time_period = float(data['time_period'])
+                min_time_increment = time_period * 1e-05
             if 'min_time_increment' in data:
                 min_time_increment = float(data['min_time_increment'])
             if 'max_time_increment' in data:
@@ -2821,7 +2824,7 @@ class _StepProcessor:
         time_interval_val = self.get_output_time_interval()
         if time_interval_val != 0.0:
             time_increment = time_interval_val
-            min_time_increment = time_interval_val
+            # min_time_increment = time_interval_val
             max_time_increment = time_interval_val
             # if time_increment > time_interval_val:
             # time_increment = time_interval_val
@@ -2851,8 +2854,9 @@ class _StepProcessor:
             else:
                 static_analysis_commands += 'ANTYPE, STATIC\n'
         static_analysis_commands += f'TIME,{self._time}\n'
+        static_analysis_commands += f'AUTOTS,ON\n'
         static_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n'
+            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}, , FORCE\n'
         )
         static_analysis_commands += '\n'
         self._previous_analysis = "STATIC"
@@ -2912,7 +2916,7 @@ class _StepProcessor:
             f'! ---------------------------- STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis == "STATIC":
-            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,1\n'
+            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
             dynamic_analysis_commands += '\n'
             dynamic_analysis_commands += 'SOLO,STOT,FORCE,HHT\n'
             dynamic_analysis_commands += '\n'
@@ -2928,6 +2932,8 @@ class _StepProcessor:
             dynamic_analysis_commands += 'IC,ALL,DMGX,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGY,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGZ,0,,,,LSIC\n'
+            dynamic_analysis_commands += '\n'
+            dynamic_analysis_commands += 'NROPT,FULL\n'
             dynamic_analysis_commands += '\n'
         if self._previous_analysis == "FREQUENCY":
             dynamic_analysis_commands += f'FINISH\n'
@@ -2984,6 +2990,7 @@ class _StepProcessor:
                 time_increment = float(data['time_increment'])
             if 'time_period' in data:
                 time_period = float(data['time_period'])
+                min_time_increment = time_period * 1e-5
             if 'min_time_increment' in data:
                 min_time_increment = float(data['min_time_increment'])
             if 'max_time_increment' in data:
@@ -3001,7 +3008,7 @@ class _StepProcessor:
         time_interval_val = self.get_output_time_interval()
         if time_interval_val != 0:
             time_increment = time_interval_val
-            min_time_increment = time_interval_val
+            # min_time_increment = time_interval_val
             max_time_increment = time_interval_val
             # if time_increment > time_interval_val:
             # time_increment = time_interval_val
@@ -3024,7 +3031,7 @@ class _StepProcessor:
             f'! ------------------------- STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis == "STATIC":
-            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,1\n'
+            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
             dynamic_analysis_commands += '\n'
             dynamic_analysis_commands += 'SOLO,STOT,FORCE,HHT\n'
             dynamic_analysis_commands += '\n'
@@ -3040,6 +3047,8 @@ class _StepProcessor:
             dynamic_analysis_commands += 'IC,ALL,DMGX,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGY,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGZ,0,,,,LSIC\n'
+            dynamic_analysis_commands += '\n'
+            dynamic_analysis_commands += 'NROPT,FULL\n'
             dynamic_analysis_commands += '\n'
         if self._previous_analysis == "FREQUENCY":
             dynamic_analysis_commands += f'FINISH\n'
@@ -3060,8 +3069,9 @@ class _StepProcessor:
         if transient_integration_param:
             dynamic_analysis_commands += f'TINTP, {transient_integration_param}\n'
         dynamic_analysis_commands += f'TIME, {self._time}\n'
+        dynamic_analysis_commands += f'AUTOTS,ON\n'
         dynamic_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n'
+            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment},, FORCE\n'
         )
         dynamic_analysis_commands += f'\n'
         if res_modes:
@@ -3368,12 +3378,12 @@ class _StepProcessor:
             output_analysis_commands += "OUTRES, ERASE\n"
             output_analysis_commands += "OUTRES, ALL, NONE\n"
             if time_points:
-                output_analysis_commands += f"! OUTRES, EANGL, %{time_points}%\n"
+                output_analysis_commands += f"OUTRES, EANGL, %{time_points}%\n"
             else:
                 # output_analysis_commands += "OUTRES, ALL, NONE\n"
                 # TODO Removed this line to avoid complications of
                 # multiple tabular output controls with NINTERVAL
-                output_analysis_commands += "! OUTRES, EANGL, NONE\n"
+                output_analysis_commands += "OUTRES, EANGL, NONE\n"
                 pass
             output_analysis_commands += "\n"
 
@@ -3801,6 +3811,10 @@ class _StepProcessor:
                                                     )
                                                 )
                                     output_analysis_commands += ', ,\n'
+                                    last_line = output_analysis_commands.split("\n")[-2]
+                                    if "STRS" in last_line and ", SEAM_WELD," in last_line:
+                                        new_line = last_line.replace("STRS", "EANGL")
+                                        output_analysis_commands += new_line + "\n"
                                 else:
                                     self._logger.warning(
                                         f"warning: element output key '{key}' is not processed."
@@ -4098,6 +4112,7 @@ class _StepProcessor:
                 if key == "Output" and "Dynamic" in step_data:
                     if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         self._transient_output_controls = key_commands
+                        self._transient_output_controls += "\nNROPT,FULL\n"
                 if key == "Output" and "Static" in step_data:
                     if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         mapdl_step_commands += "Placeholder_Transient_Outres\n"
@@ -4468,6 +4483,8 @@ def generate_mapdl_commands(
     analysis_settings += (
         '!--------------------------------------------------------------------------\n'
     )
+    # analysis_settings += '/copy,file0,err,,errfile,tmp\n'
+    # analysis_settings += '\n'
     analysis_settings += '/delete,,cnm,,1\n'
     analysis_settings += '/delete,,DSP,,\n'
     analysis_settings += '/delete,,mcf,,\n'
@@ -4482,13 +4499,15 @@ def generate_mapdl_commands(
     # analysis_settings += '/delete,,rfrq,,1\n'
     analysis_settings += '/delete,,out,,1\n'
     # analysis_settings += '/delete,harmonic,rst,,1\n'
-    analysis_settings += '/delete,,mntr,,\n'
+    analysis_settings += '!/delete,,mntr,,\n'
     analysis_settings += '/delete,,ldhi,,\n'
     analysis_settings += '/delete,,r001,,1\n'
     analysis_settings += '/delete,,rst,,1\n'
     analysis_settings += '/delete,,stat,,1\n'
     analysis_settings += '/delete,,db,,\n'
     analysis_settings += '/delete,,rdb,,\n'
+    # analysis_settings += '\n'
+    # analysis_settings += '/rename,errfile,tmp,,file,err\n'
     if "Step" in json_simulation_data:
         for an_name in steps_data._assign_analysis:
             analysis_settings += f'/delete,{an_name},rst,,1\n'
