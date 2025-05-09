@@ -38,7 +38,8 @@ tests = [
   "pytest-cov==6.1.1",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.1.1",
-  "pyvista[trame]==0.44.2"
+  "pyvista[trame]==0.44.2",
+  "vtk==9.4.2",
 ]
 doc = [
   "ansys-sphinx-theme[autoapi]==1.4.2",
@@ -53,6 +54,7 @@ doc = [
   "sphinx-gallery==0.19.0",
   "sphinx-notfound-page==1.1.0",
   "sphinxemoji==0.3.1",
+  "vtk==9.4.2",
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
