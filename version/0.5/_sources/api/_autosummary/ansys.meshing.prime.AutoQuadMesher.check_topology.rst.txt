@@ -1,0 +1,6 @@
+check\_topology
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: AutoQuadMesher.check_topology

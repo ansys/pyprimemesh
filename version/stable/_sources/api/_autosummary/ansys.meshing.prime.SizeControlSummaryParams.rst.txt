@@ -1,0 +1,32 @@
+.. vale off
+
+SizeControlSummaryParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizeControlSummaryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SizeControlSummaryParams.print_default
+      SizeControlSummaryParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SizeControlSummaryParams
+
+    ansys.meshing.prime.SizeControlSummaryParams
+
+.. vale on
