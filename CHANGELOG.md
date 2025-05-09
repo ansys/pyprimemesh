@@ -2,6 +2,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.8.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.1) - May 09, 2025
+
+
+### Maintenance
+
+- updated docker image tag for SP2 changes [#997](https://github.com/ansys/pyprimemesh/pull/997)
+
 ## [0.8.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.1) - April 29, 2025
 
 
