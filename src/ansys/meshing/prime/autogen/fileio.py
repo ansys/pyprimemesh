@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -604,7 +604,7 @@ class FileIO(CoreObject):
         self._model._print_logs_after_command("export_lsdyna_keyword_file", ExportLSDynaResults(model = self._model, json_data = result))
         return ExportLSDynaResults(model = self._model, json_data = result)
 
-    def export_lsdyna_iga_keyword_file(self, file_name : str, export_params : ExportLSDynaIgaKeywordFileParams) -> FileWriteResults:
+    def export_lsdyna_iga_keyword_file(self, file_name : str, export_params : ExportLSDynaIgaKeywordFileParams) -> ExportLSDynaIGAResults:
         """ Exports IGA LS-DYNA Keyword file for solid, surface splines, or both.
 
 
@@ -617,7 +617,7 @@ class FileIO(CoreObject):
 
         Returns
         -------
-        FileWriteResults
+        ExportLSDynaIGAResults
             Returns FileWriteResults.
 
         Notes
@@ -639,8 +639,8 @@ class FileIO(CoreObject):
         self._model._print_beta_api_warning("export_lsdyna_iga_keyword_file")
         self._model._print_logs_before_command("export_lsdyna_iga_keyword_file", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("export_lsdyna_iga_keyword_file", FileWriteResults(model = self._model, json_data = result))
-        return FileWriteResults(model = self._model, json_data = result)
+        self._model._print_logs_after_command("export_lsdyna_iga_keyword_file", ExportLSDynaIGAResults(model = self._model, json_data = result))
+        return ExportLSDynaIGAResults(model = self._model, json_data = result)
 
     def export_boundary_fitted_spline_kfile(self, file_name : str, export_params : ExportBoundaryFittedSplineParams) -> FileWriteResults:
         """ Exports IGA LS-DYNA Keyword file for boundary fitted spline.
