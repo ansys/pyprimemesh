@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -56,7 +56,7 @@ class DeleteTool(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def delete_fringes_and_overlaps_on_zonelets(self, part_id : int, face_zonelets : Iterable[int], params : DeleteFringesAndOverlapsParams) -> DeleteFringesAndOverlapsResults:
-        """ Delete fringes and overlapping faces on the given face zonelets.
+        """ Deletes fringes and overlapping faces on the given face zonelets.
 
 
         Parameters

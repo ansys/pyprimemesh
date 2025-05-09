@@ -27,51 +27,49 @@ from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
 from typing import List, Any, Union
 
-class VTComposer(CoreObject):
-    """VTComposer is used for fix topology corrections like separate, pinch.
+class HexToSpline(CoreObject):
+    """Converts all-hex mesh to spline.
 
     Parameters
     ----------
     model : Model
-        Server model to create VTComposer object.
-    part_id : int
-        Id of the part.
+        Server model to create HexToSpline object.
     """
 
-    def __init__(self, model: CommunicationManager, part_id: int):
-        """ Initialize VTComposer  """
+    def __init__(self, model: CommunicationManager):
+        """ Initialize HexToSpline """
         self._model = model
         self._comm = model._communicator
-        command_name = "PrimeMesh::VTComposer/Construct"
-        args = {"ModelID" : model._object_id , "PartID" : part_id, "MaxID" : -1}
+        command_name = "PrimeMesh::HexToSpline/Construct"
+        args = {"ModelID" : model._object_id , "MaxID" : -1 }
         result = self._comm.serve(model, command_name, args=args)
         self._object_id = result["ObjectIndex"]
         self._freeze()
 
     def __enter__(self):
-        """ Enter context for VTComposer. """
+        """ Enter context for HexToSpline. """
         return self
 
     def __exit__(self, type, value, traceback) :
-        """ Exit context for VTComposer. """
-        command_name = "PrimeMesh::VTComposer/Destruct"
+        """ Exit context for HexToSpline. """
+        command_name = "PrimeMesh::HexToSpline/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def separate_faces_with_interior_edges(self, topo_faces : Iterable[int], params : VTComposerParams) -> VTComposerResults:
-        """ Separates the given topofaces having interior edges using the given VT Composer parameters.
+    def convert_hex_to_spline(self, input_scope : ScopeDefinition, hex_to_spline_params : HexToSplineParams) -> IGAResults:
+        """ Converts fully hex mesh with topology to spline.
 
 
         Parameters
         ----------
-        topo_faces : Iterable[int]
-            Ids of input topofaces.
-        params : VTComposerParams
-            VT composer parameters.
+        input_scope : ScopeDefinition
+            Scope definition for input hex mesh.
+        hex_to_spline_params : HexToSplineParams
+            Parameters to convert hex to spline.
 
         Returns
         -------
-        VTComposerResults
-            Return results in VTComposerResults.
+        IGAResults
+            Returns the IGAResults structure.
 
 
         Notes
@@ -80,18 +78,18 @@ class VTComposer(CoreObject):
 
         Examples
         --------
-        >>> results = vtcomposer.separate_faces_with_interior_edges([1,2,3,4,5], params)
+        >>> results = hexToSpline.ConvertHexToSpline(input_scope, hex_to_spline_params)
 
         """
-        if not isinstance(topo_faces, Iterable):
-            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
-        if not isinstance(params, VTComposerParams):
-            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VTComposerParams.")
-        args = {"topo_faces" : topo_faces,
-        "params" : params._jsonify()}
-        command_name = "PrimeMesh::VTComposer/SeparateFacesWithInteriorEdges"
-        self._model._print_beta_api_warning("separate_faces_with_interior_edges")
-        self._model._print_logs_before_command("separate_faces_with_interior_edges", args)
+        if not isinstance(input_scope, ScopeDefinition):
+            raise TypeError("Invalid argument type passed for 'input_scope'. Valid argument type is ScopeDefinition.")
+        if not isinstance(hex_to_spline_params, HexToSplineParams):
+            raise TypeError("Invalid argument type passed for 'hex_to_spline_params'. Valid argument type is HexToSplineParams.")
+        args = {"input_scope" : input_scope._jsonify(),
+        "hex_to_spline_params" : hex_to_spline_params._jsonify()}
+        command_name = "PrimeMesh::HexToSpline/ConvertHexToSpline"
+        self._model._print_beta_api_warning("convert_hex_to_spline")
+        self._model._print_logs_before_command("convert_hex_to_spline", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("separate_faces_with_interior_edges", VTComposerResults(model = self._model, json_data = result))
-        return VTComposerResults(model = self._model, json_data = result)
+        self._model._print_logs_after_command("convert_hex_to_spline", IGAResults(model = self._model, json_data = result))
+        return IGAResults(model = self._model, json_data = result)

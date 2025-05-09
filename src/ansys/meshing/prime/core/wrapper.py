@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -238,6 +237,6 @@ class Wrapper(_Wrapper):
 
         """
         result = _Wrapper.patch_flow_regions(self, live_material_point, params)
-        if result.error_code == ErrorCode.NOERROR:
+        if result.id > 0:
             self._model._add_part(result.id)
         return result

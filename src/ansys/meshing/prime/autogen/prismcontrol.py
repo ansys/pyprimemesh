@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -176,6 +176,67 @@ class PrismControl(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_volume_scope", ScopeDefinition(model = self._model, json_data = result))
         return ScopeDefinition(model = self._model, json_data = result)
+
+    def get_growth_params(self) -> PrismControlGrowthParams:
+        """ Gets the prism parameters for prism control.
+
+
+        Returns
+        -------
+        PrismControlGrowthParams
+            Returns the PrismControlGrowthParams.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> params = prism_ctrl.get_growth_params()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::PrismControl/GetGrowthParams"
+        self._model._print_beta_api_warning("get_growth_params")
+        self._model._print_logs_before_command("get_growth_params", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_growth_params", PrismControlGrowthParams(model = self._model, json_data = result))
+        return PrismControlGrowthParams(model = self._model, json_data = result)
+
+    def set_suggested_name(self, name : str) -> SetNameResults:
+        """ Sets the unique name for the prism control based on the suggested name.
+
+
+        Parameters
+        ----------
+        name : str
+            Suggested name for the prism control.
+
+        Returns
+        -------
+        SetNameResults
+            Returns the SetNameResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> prism_control.set_suggested_name("control1")
+
+        """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"name" : name}
+        command_name = "PrimeMesh::PrismControl/SetSuggestedName"
+        self._model._print_beta_api_warning("set_suggested_name")
+        self._model._print_logs_before_command("set_suggested_name", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_suggested_name", SetNameResults(model = self._model, json_data = result))
+        return SetNameResults(model = self._model, json_data = result)
 
     @property
     def id(self):
