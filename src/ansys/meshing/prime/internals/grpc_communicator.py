@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -278,47 +277,6 @@ class GRPCCommunicator(Communicator):
             return result
         else:
             raise RuntimeError("No connection with server")
-
-    def server_command(self, command: str, *args) -> dict:
-        """Run commands on the server.
-
-        Parameters
-        ----------
-        command : str
-            Commands to run.
-
-        Returns
-        -------
-        dict
-            Result from the server side.
-
-        Raises
-        ------
-        RuntimeError
-            Bad response from server.
-        RuntimeError
-            Can not connect to server.
-        """
-        if self._stub is not None:
-            command = {"Command": command}
-            if len(args) > 0:
-                command.update({"Args": args[0]})
-
-            response = self._stub.ServerCommand(
-                request_iterator(
-                    0,
-                    json.dumps(command),
-                    prime_pb2.StringMessage,
-                    prime_pb2.Model,
-                    prime_pb2.StringJsonContent,
-                    prime_pb2.MessageCompletionToken,
-                )
-            )
-            message = get_response(response, '')
-            return message
-        else:
-            raise RuntimeError("No connection with server")
-        return {}
 
     def close(self):
         """Close opened channels."""
