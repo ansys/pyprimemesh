@@ -1,0 +1,6 @@
+n\_tet\_cells
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_tet_cells

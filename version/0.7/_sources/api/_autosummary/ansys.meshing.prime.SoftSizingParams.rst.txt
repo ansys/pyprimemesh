@@ -1,0 +1,40 @@
+.. vale off
+
+SoftSizingParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SoftSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SoftSizingParams.print_default
+      SoftSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SoftSizingParams.growth_rate
+      SoftSizingParams.max
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SoftSizingParams
+
+    ansys.meshing.prime.SoftSizingParams
+
+.. vale on
