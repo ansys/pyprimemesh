@@ -43,7 +43,7 @@ Installation
 ------------
 
 The ``ansys-meshing-prime`` package currently supports Python 3.10
-to Python 3.12 on the Windows and Linux operating systems.
+to Python 3.13 on the Windows and Linux operating systems.
 
 You can install PyPrimeMesh with all dependencies directly from `PyPI <https://pypi.org/>`_  with this command:
 
@@ -166,7 +166,7 @@ for the Ansys Prime Server and install this image.
 
    .. code-block:: pycon
 
-        docker pull ghcr.io/ansys/prime:25.1.0
+        docker pull ghcr.io/ansys/prime:25.2.0
 
 
 Build the Ansys Prime Server linux container
@@ -205,7 +205,7 @@ For example,
 
    .. code-block:: pycon
 
-      $AWP_ROOT251/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT251
+      $AWP_ROOT252/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT252
 
 3. Check that the image has been created successfully. 
 
@@ -241,7 +241,7 @@ Define the following general environment variables prior to using the Ansys Prim
       export ANSYSLMD_LICENSE_FILE=<valid license server>
 
 .. note::
-   Docker image creation is supported from 2025 R1 version.
+   PyPrimeMesh supports Docker image creation from 2025 R1 version.
 
 Launching Ansys Prime Server 
 ''''''''''''''''''''''''''''''
