@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -123,28 +122,6 @@ class PrimeCommunicator(Communicator):
         with config.numpy_array_optimization_disabled():
             result = json.loads(output)
         return result
-
-    def server_command(self, command: str, *args) -> dict:
-        """Run commands on the server.
-
-        Parameters
-        ----------
-        command : str
-            Commands to run.
-
-        Returns
-        -------
-        dict
-            Result from the server side.
-
-        Raises
-        ------
-        RuntimeError
-            Bad response from server.
-        RuntimeError
-            Can not connect to server.
-        """
-        return {}
 
     def close(self):
         """Close session."""

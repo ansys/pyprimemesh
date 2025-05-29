@@ -2,6 +2,76 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.8.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.1) - May 09, 2025
+
+
+### Maintenance
+
+- updated docker image tag for SP2 changes [#997](https://github.com/ansys/pyprimemesh/pull/997)
+
+## [0.8.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.1) - April 29, 2025
+
+
+### Dependencies
+
+- build(deps): bump sphinx from 8.2.1 to 8.2.3 in the doc-dependencies group [#990](https://github.com/ansys/pyprimemesh/pull/990)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.3.2 to 1.3.3 in the doc-dependencies group [#992](https://github.com/ansys/pyprimemesh/pull/992)
+- build(deps): bump the test-dependencies group across 1 directory with 2 updates [#993](https://github.com/ansys/pyprimemesh/pull/993)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.3.3 to 1.4.2 in the doc-dependencies group [#994](https://github.com/ansys/pyprimemesh/pull/994)
+- build(deps): bump pytest-cov from 6.0.0 to 6.1.1 in the test-dependencies group [#996](https://github.com/ansys/pyprimemesh/pull/996)
+
+
+### Miscellaneous
+
+- Sync ADO changes for sp2 [#1000](https://github.com/ansys/pyprimemesh/pull/1000)
+- minor fix for release/0.8.1 [#1004](https://github.com/ansys/pyprimemesh/pull/1004)
+
+
+### Documentation
+
+- Update fileio.rst [#980](https://github.com/ansys/pyprimemesh/pull/980)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.8.0 [#988](https://github.com/ansys/pyprimemesh/pull/988)
+- updated docker image tag for SP2 changes [#997](https://github.com/ansys/pyprimemesh/pull/997)
+
+## [0.8.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.0) - 2025-02-27
+
+
+### Dependencies
+
+- build(deps): bump sphinx-notfound-page from 1.0.4 to 1.1.0 in the doc-dependencies group [#979](https://github.com/ansys/pyprimemesh/pull/979)
+- build(deps): bump the doc-dependencies group across 1 directory with 2 updates [#983](https://github.com/ansys/pyprimemesh/pull/983)
+- build(deps): bump ansys-tools-visualization-interface from 0.8.1 to 0.8.3 in the general-dependencies group [#985](https://github.com/ansys/pyprimemesh/pull/985)
+- build(deps): bump the doc-dependencies group with 3 updates [#986](https://github.com/ansys/pyprimemesh/pull/986)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.8.0.dev0 [#978](https://github.com/ansys/pyprimemesh/pull/978)
+- publishing dev to release 0.8.0 [#987](https://github.com/ansys/pyprimemesh/pull/987)
+
+## [0.8.0.dev0](https://github.com/ansys/pyprimemesh/releases/tag/v0.8.0.dev0) - 2025-02-03
+
+
+### Dependencies
+
+- build(deps): bump ansys-tools-visualization-interface from 0.7.0 to 0.8.1 in the general-dependencies group [#967](https://github.com/ansys/pyprimemesh/pull/967)
+- build(deps): bump sphinx-autodoc-typehints from 3.0.0 to 3.0.1 in the doc-dependencies group [#968](https://github.com/ansys/pyprimemesh/pull/968)
+
+
+### Documentation
+
+- Update index.rst [#974](https://github.com/ansys/pyprimemesh/pull/974)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.7.0 [#965](https://github.com/ansys/pyprimemesh/pull/965)
+- Include ADO changes [#973](https://github.com/ansys/pyprimemesh/pull/973)
+
 ## [0.7.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.7.0) - 2025-01-14
 
 

@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -31,10 +30,10 @@ from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.model import Model
 from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
-from ansys.meshing.prime.autogen.prismcontrol import PrismControl
 from ansys.meshing.prime.autogen.shellblcontrol import ShellBLControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
+from ansys.meshing.prime.core.prismcontrol import PrismControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
@@ -548,6 +547,7 @@ class ControlData(_ControlData):
         """
         return self._wrapper_controls
 
+    @property
     def multi_zone_controls(self) -> List[MultiZoneControl]:
         """Get the multizone controls.
 
@@ -558,7 +558,7 @@ class ControlData(_ControlData):
 
         Examples
         --------
-        >>> multi_zone_control = model.control_data.mz_controls
+        >>> multi_zone_control = model.control_data.multi_zone_controls
 
         """
         return self._mz_controls
