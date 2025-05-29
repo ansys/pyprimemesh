@@ -9,6 +9,6 @@ If you have your own Ansys installation, you can build a Docker container that u
 To do this, download the Python script [build_docker_linux.py](https://github.com/ansys/pyprimemesh/blob/main/docker/build_docker_linux.py) and run it from the command line:
 
 ```python
-      python build_docker_linux.py
+ python build_docker_linux.py
 ```
 If you have any problems, open a [GitHub Issue](https://github.com/ansys/pyprimemesh/issues).
