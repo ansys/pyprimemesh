@@ -39,6 +39,8 @@ This table provides compatibility information:
 | 0.9.x                      | 25.2.0 (2025 R2)           | 3.10 to 3.13             |
 +----------------------------+----------------------------+--------------------------+
 
+.. _Installation:
+
 Installation
 ------------
 
@@ -245,7 +247,8 @@ Define the following general environment variables prior to using the Ansys Prim
 
 Launching Ansys Prime Server 
 ''''''''''''''''''''''''''''''
-
+Ensure that you have installed ``ansys-meshing-prime`` package before launching Ansys Prime Server. 
+To install ``ansys-meshing-prime`` package, refer :ref:`Installation`.
 Ansys Prime Server can be launched as follows:
 
 .. code-block:: pycon
