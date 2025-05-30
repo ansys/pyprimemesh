@@ -1,6 +1,5 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +34,10 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
     ExportFluentMeshingMeshParams,
+    ExportLSDynaIgaKeywordFileParams,
+    ExportLSDynaIGAResults,
     ExportLSDynaKeywordFileParams,
+    ExportLSDynaResults,
     ExportMapdlCdbParams,
     ExportMapdlCdbResults,
     ExportSTLParams,
@@ -54,6 +56,7 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
+    SeparateBlocksFormatType,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
 )
@@ -342,7 +345,7 @@ class FileIO(_FileIO):
         """
         Initialize specific CDB export parameters based on the given version.
 
-        This function sets the use_compact_format, export_fasteners_as_swgen and
+        This function sets the separate_blocks_format_type, export_fasteners_as_swgen and
         export_rigid_bodies_as_rbgen parameters of the provided ExportMapdlCdbParams
         object based on the given major and minor version numbers.
         Other parameters remain unchanged.
@@ -366,16 +369,16 @@ class FileIO(_FileIO):
         **This is a beta API**. **The behavior and implementation may change in future**.
 
         The version is formed as "<major_version>r<minor_version>", e.g., "24r1", "25r2".
-        If the version is greater than or equal to "25r1", the use_compact_format,
-        export_fasteners_as_swgen and export_rigid_bodies_as_rbgen parameters are set
-        to True. Otherwise, they are set to False.
+        If the version is greater than or equal to "25r1", write_separate_blocks is set to True
+        with COMPACT format, and export_fasteners_as_swgen and export_rigid_bodies_as_rbgen
+        parameters are set to True. Otherwise, they are set to False.
 
         Examples
         --------
         >>> file_io = prime.FileIO(model=model)
         >>> params = prime.ExportMapdlCdbParams()
         >>> params = file_io.initialize_cdb_export_params(params, 24, 1)
-        >>> params.use_compact_format
+        >>> params.write_separate_blocks
         False
         >>> params.export_fasteners_as_swgen
         False
@@ -385,15 +388,21 @@ class FileIO(_FileIO):
         >>> file_io = prime.FileIO(model=model)
         >>> params = prime.ExportMapdlCdbParams()
         >>> params = file_io.initialize_cdb_export_params(params, 25, 2)
-        >>> params.use_compact_format
+        >>> params.write_separate_blocks
         True
+        >>> params.separate_blocks_format_type
+        SeparateBlocksFormatType.COMPACT
         >>> params.export_fasteners_as_swgen
         True
         >>> params.export_rigid_bodies_as_swgen
         True
         """
         version = f"{major_version}r{minor_version}"
-        params.use_compact_format = version >= "25r1"
+        params.write_separate_blocks = version >= "25r1"
+        if version >= "25r1":
+            params.separate_blocks_format_type = SeparateBlocksFormatType.COMPACT
+        else:
+            params.separate_blocks_format_type = SeparateBlocksFormatType.STANDARD
         params.export_fasteners_as_swgen = version >= "25r1"
         params.export_rigid_bodies_as_rbgen = version >= "25r1"
         return params
@@ -531,7 +540,7 @@ class FileIO(_FileIO):
 
     def export_lsdyna_keyword_file(
         self, file_name: str, params: ExportLSDynaKeywordFileParams
-    ) -> FileWriteResults:
+    ) -> ExportLSDynaResults:
         """Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.
 
         Parameters
@@ -543,8 +552,8 @@ class FileIO(_FileIO):
 
         Returns
         -------
-        FileWriteResults
-            Returns FileWriteResults.
+        ExportLSDynaResults
+            Returns ExportLSDynaResults.
 
         Notes
         -----
@@ -567,6 +576,38 @@ class FileIO(_FileIO):
                 all_mat_cmds = mp.get_all_material_commands()
                 params.material_properties = all_mat_cmds + params.material_properties
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
+        return result
+
+    def export_lsdyna_iga_keyword_file(
+        self, file_name: str, params: ExportLSDynaIgaKeywordFileParams
+    ) -> ExportLSDynaIGAResults:
+        """Export IGA LS-DYNA Keyword file for solid, surface splines.
+
+        Parameters
+        ----------
+        file_name : str
+            Name of the file.
+        params : ExportLSDynaIgaKeywordFileParams
+            Parameters for IGA LS-DYNA Keyword file export.
+
+        Returns
+        -------
+        ExportLSDynaIGAResults
+            Returns ExportLSDynaIGAResults.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = file_io.export_lsdyna_iga_keyword_file(
+            file_name, ExportLSDynaIgaKeywordFileParams(model=model)
+        )
+
+        """
+        with utils.file_write_context(self._model, file_name) as temp_file_name:
+            result = super().export_lsdyna_iga_keyword_file(temp_file_name, params)
         return result
 
     def export_boundary_fitted_spline_kfile(

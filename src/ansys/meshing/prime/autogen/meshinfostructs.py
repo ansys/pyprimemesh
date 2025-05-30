@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -38,7 +38,7 @@ class CellStatisticsParams(CoreObject):
     model: Model
         Model to create a ``CellStatisticsParams`` object with default parameters.
     get_volume: bool, optional
-        Provides option to compute and get cumulative cell volume.
+        Provides option to compute and get cumulative cell volume of all element.
     json_data: dict, optional
         JSON dictionary to create a ``CellStatisticsParams`` object with provided parameters.
 
@@ -66,7 +66,7 @@ class CellStatisticsParams(CoreObject):
         model: Model
             Model to create a ``CellStatisticsParams`` object with default parameters.
         get_volume: bool, optional
-            Provides option to compute and get cumulative cell volume.
+            Provides option to compute and get cumulative cell volume of all element.
         json_data: dict, optional
             JSON dictionary to create a ``CellStatisticsParams`` object with provided parameters.
 
@@ -105,7 +105,7 @@ class CellStatisticsParams(CoreObject):
         Parameters
         ----------
         get_volume: bool, optional
-            Provides option to compute and get cumulative cell volume.
+            Provides option to compute and get cumulative cell volume of all element.
         """
         args = locals()
         [CellStatisticsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -136,7 +136,7 @@ class CellStatisticsParams(CoreObject):
 
     @property
     def get_volume(self) -> bool:
-        """Provides option to compute and get cumulative cell volume.
+        """Provides option to compute and get cumulative cell volume of all element.
         """
         return self._get_volume
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -69,7 +69,7 @@ The recommended data formats to be included in the example are:
 
 Supporting input files should be added in:
 
-`Github Example Data Repository <https://github.com/ansys/example-data/tree/master/pyprimemesh>`_
+`Github Example Data Repository <https://github.com/ansys/example-data/tree/main/pyprimemesh>`_
 
 Referencing files as enum and creating download function in:
 

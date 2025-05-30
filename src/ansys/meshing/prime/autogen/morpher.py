@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -56,7 +56,7 @@ class Morpher(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def match_morph(self, part_id : int, match_pairs : List[MatchPair], match_morph_params : MatchMorphParams, bc_params : MorphBCParams, solve_params : MorphSolveParams) -> MatchMorphResults:
-        """ Match source and target zonelets defined by match pairs with prescribed boundary conditions for each pair. Also, solve boundary condition parameters to define uniform surface and volume regions in source neighborhood.
+        """ Matches source and target zonelets defined using match pairs with prescribed boundary conditions for each pair. Also, solves boundary condition parameters to define uniform surface and volume regions in source neighborhood.
 
 
         Parameters
@@ -64,7 +64,7 @@ class Morpher(CoreObject):
         part_id : int
             Id of source part.
         match_pairs : MatchPairArray
-            Array of match pairs of sources and targets.
+            Array of  source and target match pairs.
         match_morph_params : MatchMorphParams
             Match morph parameters.
         bc_params : MorphBCParams

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -503,6 +503,80 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_topo_faces_of_zone_name_pattern")
         return result
 
+    def get_topo_volumes_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Gets the topovolume ids of zones with name matching the given name pattern.
+
+
+        Parameters
+        ----------
+        zone_name_pattern : str
+            Name pattern to be matched with zone name.
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match zone name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns topovolume ids of zones with name matching the name pattern.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> topo_volumes = part.get_topo_volumes_of_zone_name_pattern(zone_name_pattern = "solid*",
+        name_pattern_params = prime.NamePatternParams(model = model))
+
+        """
+        if not isinstance(zone_name_pattern, str):
+            raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
+        args = {"zone_name_pattern" : zone_name_pattern,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetTopoVolumesOfZoneNamePattern"
+        self._model._print_beta_api_warning("get_topo_volumes_of_zone_name_pattern")
+        self._model._print_logs_before_command("get_topo_volumes_of_zone_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_topo_volumes_of_zone_name_pattern")
+        return result
+
+    def get_topo_faces_of_topo_volumes(self, volumes : Iterable[int]) -> Iterable[int]:
+        """ Gets the topofaces of given topovolumes.
+
+
+        Parameters
+        ----------
+        volumes : Iterable[int]
+            Ids of topovolumes.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the ids of topofaces.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> topo_faces = part.get_topo_faces_of_topo_volumes(volumes)
+
+        """
+        if not isinstance(volumes, Iterable):
+            raise TypeError("Invalid argument type passed for 'volumes'. Valid argument type is Iterable[int].")
+        args = {"volumes" : volumes}
+        command_name = "PrimeMesh::Part/GetTopoFacesOfTopoVolumes"
+        self._model._print_beta_api_warning("get_topo_faces_of_topo_volumes")
+        self._model._print_logs_before_command("get_topo_faces_of_topo_volumes", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_topo_faces_of_topo_volumes")
+        return result
+
     def get_edge_zonelets_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
         """ Get edge zonelet ids of labels with name matching the given name pattern.
 
@@ -571,6 +645,51 @@ class Part(CoreObject):
         self._model._print_logs_before_command("get_face_zonelets_of_label_name_pattern", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_face_zonelets_of_label_name_pattern")
+        return result
+
+    def get_face_zonelets_of_component_body_name_pattern(self, component_body_name_pattern : str, type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Gets face zonelet ids belonging to components or bodies with name matching the given name pattern.
+
+
+        Parameters
+        ----------
+        component_body_name_pattern : str
+            Name pattern to be matched with component or body names.
+        type : BodyQueryType
+            Type of query used to match component or body name pattern.
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match component or body name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns face zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> name_pattern_params = prime.NamePatternParams(model = model)
+        >>> face_zonelets = part.get_face_zonelets_of_component_body_pattern("/body*", type, name_pattern_params)
+
+        """
+        if not isinstance(component_body_name_pattern, str):
+            raise TypeError("Invalid argument type passed for 'component_body_name_pattern'. Valid argument type is str.")
+        if not isinstance(type, BodyQueryType):
+            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is BodyQueryType.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
+        args = {"component_body_name_pattern" : component_body_name_pattern,
+        "type" : type,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetFaceZoneletsOfComponentBodyNamePattern"
+        self._model._print_beta_api_warning("get_face_zonelets_of_component_body_name_pattern")
+        self._model._print_logs_before_command("get_face_zonelets_of_component_body_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_face_zonelets_of_component_body_name_pattern")
         return result
 
     def get_topo_edges_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
@@ -643,6 +762,94 @@ class Part(CoreObject):
         self._model._print_logs_before_command("get_topo_faces_of_label_name_pattern", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_topo_faces_of_label_name_pattern")
+        return result
+
+    def get_topo_faces_of_component_body_name_pattern(self, component_body_name_pattern : str, type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Gets topoface ids of component or bodies with name matching the given name pattern.
+
+
+        Parameters
+        ----------
+        component_body_name_pattern : str
+            Name pattern to be matched with component or body name.
+        type : BodyQueryType
+            Type of query used to match component or body name pattern.
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match component or body name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the ids of topofaces.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> topo_faces = part.get_topo_faces_of_component_body_name_pattern(
+        >>>                   component_body_name_pattern = "body*",
+        >>>                   type = BodyQueryType_All,
+        >>>                   params = prime.NamePatternParams(model=model))
+
+        """
+        if not isinstance(component_body_name_pattern, str):
+            raise TypeError("Invalid argument type passed for 'component_body_name_pattern'. Valid argument type is str.")
+        if not isinstance(type, BodyQueryType):
+            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is BodyQueryType.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
+        args = {"component_body_name_pattern" : component_body_name_pattern,
+        "type" : type,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetTopoFacesOfComponentBodyNamePattern"
+        self._model._print_beta_api_warning("get_topo_faces_of_component_body_name_pattern")
+        self._model._print_logs_before_command("get_topo_faces_of_component_body_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_topo_faces_of_component_body_name_pattern")
+        return result
+
+    def get_topo_volumes_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Gets the topovolumes of labels of the given label name expression.
+
+
+        Parameters
+        ----------
+        label_name_pattern : str
+            Name pattern to be matched with topovolume name
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match topovolume name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the ids of the topovolumes.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> topo_volumes = prime.get_topo_volumes_of_label_name_pattern(
+        >>>                      label_name_pattern = "solid*",
+        >>>                      params = prime.NamePatternParams(model=model))
+
+        """
+        if not isinstance(label_name_pattern, str):
+            raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
+        if not isinstance(name_pattern_params, NamePatternParams):
+            raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
+        args = {"label_name_pattern" : label_name_pattern,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetTopoVolumesOfLabelNamePattern"
+        self._model._print_beta_api_warning("get_topo_volumes_of_label_name_pattern")
+        self._model._print_logs_before_command("get_topo_volumes_of_label_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_topo_volumes_of_label_name_pattern")
         return result
 
     def merge_zonelets(self, zonelets : Iterable[int], params : MergeZoneletsParams) -> MergeZoneletsResults:
@@ -1555,6 +1762,34 @@ Return the ids of topofaces.
         self._model._print_logs_after_command("get_unstructured_spline_surface", IGAUnstructuredSplineSurf(model = self._model, json_data = result))
         return IGAUnstructuredSplineSurf(model = self._model, json_data = result)
 
+    def get_unstructured_spline_solid(self) -> IGAUnstructuredSplineSolid:
+        """ Gets the unstructured solid spline for the part.
+
+
+        Returns
+        -------
+        IGAUnstructuredSplineSolid
+            Returns the solid spline structure.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> from ansys.meshing.prime import Part
+        >>> spline = part.GetUnstructuredSplineSolid()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Part/GetUnstructuredSplineSolid"
+        self._model._print_beta_api_warning("get_unstructured_spline_solid")
+        self._model._print_logs_before_command("get_unstructured_spline_solid", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_unstructured_spline_solid", IGAUnstructuredSplineSolid(model = self._model, json_data = result))
+        return IGAUnstructuredSplineSolid(model = self._model, json_data = result)
+
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
         """ Get the part summary.
 
@@ -1583,6 +1818,79 @@ Return the ids of topofaces.
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_summary", PartSummaryResults(model = self._model, json_data = result))
         return PartSummaryResults(model = self._model, json_data = result)
+
+    def get_component_children_by_path(self, path : str, params : ComponentChildrenParams) -> ComponentChildrenResults:
+        """ Gets the child components for a component using the given parameters.
+
+
+        Parameters
+        ----------
+        path : str
+            Path to component for which child components are queried.
+        params : ComponentChildrenParams
+            Parameters to get child component.
+
+        Returns
+        -------
+        ComponentChildrenResults
+            Returns the ComponentChildrenResults structure.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = part.get_component_children_by_path(path, params)
+
+        """
+        if not isinstance(path, str):
+            raise TypeError("Invalid argument type passed for 'path'. Valid argument type is str.")
+        if not isinstance(params, ComponentChildrenParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ComponentChildrenParams.")
+        args = {"path" : path,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/GetComponentChildrenByPath"
+        self._model._print_beta_api_warning("get_component_children_by_path")
+        self._model._print_logs_before_command("get_component_children_by_path", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_component_children_by_path", ComponentChildrenResults(model = self._model, json_data = result))
+        return ComponentChildrenResults(model = self._model, json_data = result)
+
+    def get_components_by_path_expression(self, path_expression : str) -> List[str]:
+        """ Gets component names with the provided path expression.
+
+
+        Parameters
+        ----------
+        path_expression : str
+            Path expression to determine component names that should be returned.
+
+        Returns
+        -------
+        List[str]
+            Returns a list of component names.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = part.get_components_by_path_expression(path_expression)
+
+        """
+        if not isinstance(path_expression, str):
+            raise TypeError("Invalid argument type passed for 'path_expression'. Valid argument type is str.")
+        args = {"path_expression" : path_expression}
+        command_name = "PrimeMesh::Part/GetComponentsByPathExpression"
+        self._model._print_beta_api_warning("get_components_by_path_expression")
+        self._model._print_logs_before_command("get_components_by_path_expression", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_components_by_path_expression")
+        return result
 
     @property
     def id(self):

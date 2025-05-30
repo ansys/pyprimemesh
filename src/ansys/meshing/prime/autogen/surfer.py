@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -97,6 +97,40 @@ class Surfer(CoreObject):
         self._model._print_logs_before_command("remesh_face_zonelets", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("remesh_face_zonelets", SurferResults(model = self._model, json_data = result))
+        return SurferResults(model = self._model, json_data = result)
+
+    def refacet_topo_faces(self, topo_faces : Iterable[int], params : SurferParams) -> SurferResults:
+        """ Performs refaceting on the given topofaces with provided parameters.
+
+
+        Parameters
+        ----------
+        topo_faces : Iterable[int]
+            Ids of topofaces.
+        params : SurferParams
+            Surfer Parameters.
+
+        Returns
+        -------
+        SurferResults
+            Returns the SurferResults.
+
+
+        Examples
+        --------
+        >>> results = surfer.RefacetTopoFaces(topo_faces, params)
+
+        """
+        if not isinstance(topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
+        if not isinstance(params, SurferParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurferParams.")
+        args = {"topo_faces" : topo_faces,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Surfer/RefacetTopoFaces"
+        self._model._print_logs_before_command("refacet_topo_faces", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("refacet_topo_faces", SurferResults(model = self._model, json_data = result))
         return SurferResults(model = self._model, json_data = result)
 
     def mesh_topo_faces(self, topo_faces : Iterable[int], params : SurferParams) -> SurferResults:

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -46,7 +46,7 @@ class ShellBLControlGrowthParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     growth_rate: float, optional
-        Ratio of heights of current layer to previous layer.
+        Ratio of height of the current layer to the previous layer.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     first_height: float, optional

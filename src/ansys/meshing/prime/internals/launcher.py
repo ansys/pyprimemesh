@@ -1,6 +1,5 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +43,7 @@ __all__ = ['launch_prime', 'launch_server_process']
 
 
 def get_install_locations():
-    supported_versions = ['251']
+    supported_versions = ['252']
     awp_roots = {ver: os.environ.get(f'AWP_ROOT{ver}', '') for ver in supported_versions}
     installed_versions = {
         ver: os.path.join(path, 'meshing', 'Prime')
@@ -113,6 +112,8 @@ def launch_server_process(
     run_prime_script = f'runPrime.{script_ext}'
 
     exec_path = os.path.join(prime_root, run_prime_script)
+    print(f'Launching Ansys Prime Server from {prime_root}')
+    logging.getLogger('PyPrimeMesh').info('Using server from %s', prime_root)
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
 
@@ -122,6 +123,7 @@ def launch_server_process(
         kw = {}
 
     enable_python_server = kw.get('server', 'release')
+    communicator_type = kw.get('communicator_type', 'grpc')
     scheduler = kw.get('scheduler', None)
 
     if not isinstance(enable_python_server, str):
@@ -144,6 +146,7 @@ def launch_server_process(
     if enable_python_server == 'debug':
         server_args.append('-debug')
 
+    server_args.append(f'--type={communicator_type}')
     server_args.append(f'--ip={ip}')
     server_args.append(f'--port={port}')
     if n_procs is not None and isinstance(n_procs, int):
@@ -260,10 +263,18 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
+        print('using server from docker : The container name ', container_name)
+        logging.getLogger('PyPrimeMesh').info('uses server from container : ', container_name)
         return client
 
     server = launch_server_process(
         prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
     )
 
-    return Client(server_process=server, ip=ip, port=port, timeout=timeout)
+    return Client(
+        server_process=server,
+        ip=ip,
+        port=port,
+        timeout=timeout,
+        communicator_type=kwargs.get('communicator_type', 'grpc'),
+    )

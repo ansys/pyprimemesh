@@ -57,7 +57,7 @@ You can specify the import route for CAD files using the :class:`CadReaderRoute 
 .. code-block:: python
 
     params = prime.ImportCadParams(
-        model=model, cad_reader_route=prime.CadReaderRoute.SPACECLAIM
+        model=model, cad_reader_route=prime.CadReaderRoute.DISCOVERY
     )
     prime.FileIO(model).import_cad(file_name=mixing_elbow, params=params)
 
@@ -66,9 +66,9 @@ Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` cl
 .. code-block:: python
 
     mesh_util = prime.lucid.Mesh(model=model)
-    mesh_util.read(file_name=mixing_elbow, cad_reader_route=prime.CadReaderRoute.SPACECLAIM)
+    mesh_util.read(file_name=mixing_elbow, cad_reader_route=prime.CadReaderRoute.DISCOVERY)
 
-Four CAD import routes are available in PyPrimeMesh:
+Five CAD import routes are available in PyPrimeMesh:
 
  * ``Program controlled``: Chooses the CAD reader route based on the extension of the provided CAD file as follows:
 
@@ -88,8 +88,13 @@ Four CAD import routes are available in PyPrimeMesh:
    Ensure to install Discovery for Discovery reader. 
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
-     Ensure to install Workbench for Workbench reader. 
+   Ensure to install Workbench for Workbench reader.
 
+.. note:
+    * When you import CAD using the SpaceClaim or Discovery reader routes the user import options in those applications are ignored.
+    
+    * If the options are required then you can import CAD in the application stand-alone with the options defined and export it to a native format (FMD or PMDB) to import into Ansys Prime Server.
+    
 To view the CAD files supported for the Workbench route on different platforms, see
 `CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
 
@@ -97,8 +102,11 @@ To view the CAD files supported for the Workbench route on different platforms, 
     * Program controlled supports faceted data. Workbench supports BRep geometry(non-faceted) data. 
       Discovery or SpaceClaim supports both BRep geometry and faceted data.
 
-    * When deploying scripts using SpaceClaim, Discovery, or Workbench CAD reader routes, ensure that the CAD configuration
-      and in-app defaults are consistent in the deployed environment.
+    * When deploying scripts using the Workbench CAD reader route, ensure that the user options for the installed
+      application are consistent in the deployed environment.
+
+    * When deploying scripts using the CAD configuration, ensure that the configuration is consistent in the deployed
+      environment.
 
     * You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
       while installing Ansys Workbench.
@@ -120,7 +128,7 @@ you to append a CAD file to the model:
 .. code-block:: python
 
     params = prime.ImportCadParams(model=model, append=True)
-    prime.FileIO(model).import_cad(file_name="cad_to_append.scdoc", params=params)
+    prime.FileIO(model).import_cad(file_name="cad_to_append.dsco", params=params)
 
 Alternatively, you can use the :class:`Mesh <ansys.meshing.prime.lucid.Mesh>` class in
 the Lucid API:
@@ -128,7 +136,7 @@ the Lucid API:
 .. code-block:: python
 
     mesh_util = prime.lucid.Mesh(model=model)
-    mesh_util.read("cad_to_append.scdoc", append=True)
+    mesh_util.read("cad_to_append.dsco", append=True)
 
 Parametric CAD update
 ---------------------
@@ -142,7 +150,7 @@ This code gets existing CAD parameters while importing:
 
     params = prime.ImportCadParams(model=model)
     params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
-    result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
+    result = prime.FileIO(model).import_cad(file_name="parametric_cad.dsco", params=params)
 
 .. code-block:: pycon
 
@@ -157,7 +165,7 @@ This code sets the parameters that are used for the import:
     params = prime.ImportCadParams(model=model)
     params.cad_reader_route = prime.CadReaderRoute.WORKBENCH
     params.cad_update_parameters = {"my_param": 2}
-    result = prime.FileIO(model).import_cad(file_name="parametric_cad.scdoc", params=params)
+    result = prime.FileIO(model).import_cad(file_name="parametric_cad.dsco", params=params)
 
 .. code-block:: pycon
 
