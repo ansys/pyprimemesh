@@ -1,0 +1,6 @@
+OFFSETBOX
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: BOIType.OFFSETBOX

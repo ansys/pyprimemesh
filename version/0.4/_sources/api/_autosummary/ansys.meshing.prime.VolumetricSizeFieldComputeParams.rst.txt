@@ -1,0 +1,36 @@
+.. vale off
+
+VolumetricSizeFieldComputeParams
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumetricSizeFieldComputeParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumetricSizeFieldComputeParams.print_default
+      VolumetricSizeFieldComputeParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumetricSizeFieldComputeParams.enable_multi_threading
+      VolumetricSizeFieldComputeParams.enable_periodicity
+      VolumetricSizeFieldComputeParams.periodic_params
+   
+   
+
+.. vale on

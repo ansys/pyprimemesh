@@ -1,0 +1,6 @@
+get\_periodic\_control\_by\_name
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_periodic_control_by_name

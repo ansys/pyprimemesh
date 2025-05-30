@@ -1,0 +1,11 @@
+get\_surface\_diagnostic\_summary
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceSearch.get_surface_diagnostic_summary
+
+.. minigallery::
+   :add-heading: Examples using SurfaceSearch.get_surface_diagnostic_summary
+
+   ansys.meshing.prime.SurfaceSearch.get_surface_diagnostic_summary

@@ -1,0 +1,22 @@
+TopoUtilities
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TopoUtilities
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TopoUtilities.fill_hole
+   
+   
+
+   
+   
+   

@@ -1,0 +1,6 @@
+﻿model
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Client.model

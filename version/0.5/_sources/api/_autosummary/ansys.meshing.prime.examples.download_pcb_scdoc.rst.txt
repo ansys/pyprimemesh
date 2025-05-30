@@ -1,0 +1,6 @@
+download\_pcb\_scdoc
+====================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_pcb_scdoc

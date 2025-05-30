@@ -1,0 +1,49 @@
+.. vale off
+
+ScopeEntity
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeEntity
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ScopeEntity.conjugate
+      ScopeEntity.bit_length
+      ScopeEntity.bit_count
+      ScopeEntity.to_bytes
+      ScopeEntity.from_bytes
+      ScopeEntity.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScopeEntity.real
+      ScopeEntity.imag
+      ScopeEntity.numerator
+      ScopeEntity.denominator
+      ScopeEntity.FACEZONELETS
+      ScopeEntity.EDGEZONELETS
+      ScopeEntity.FACEANDEDGEZONELETS
+      ScopeEntity.VOLUME
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScopeEntity
+
+    ansys.meshing.prime.ScopeEntity
+
+.. vale on

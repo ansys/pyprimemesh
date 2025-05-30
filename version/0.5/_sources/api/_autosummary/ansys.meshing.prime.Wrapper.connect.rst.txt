@@ -1,0 +1,6 @@
+connect
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Wrapper.connect

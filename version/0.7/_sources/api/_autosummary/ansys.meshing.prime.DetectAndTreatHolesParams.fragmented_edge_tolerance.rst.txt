@@ -1,0 +1,6 @@
+fragmented\_edge\_tolerance
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.fragmented_edge_tolerance
