@@ -648,7 +648,7 @@ class Part(CoreObject):
         return result
 
     def get_face_zonelets_of_component_body_name_pattern(self, component_body_name_pattern : str, type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Gets face zonelet ids belonging to components or bodies with name matching the given name pattern.
+        """ Gets face zonelet ids of that belong to components or bodies with name matching the given name pattern.
 
 
         Parameters

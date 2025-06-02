@@ -355,6 +355,8 @@ class IGAUnstructuredSplineSurf(CoreObject):
         Id of the unstructured spline surface.
     degree: int, optional
         Degree of the spline surface.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     spline_refinement_level: int, optional
         Refinement level for rendering of spline points.
     control_points: Iterable[float], optional
@@ -433,6 +435,8 @@ class IGAUnstructuredSplineSurf(CoreObject):
             Id of the unstructured spline surface.
         degree: int, optional
             Degree of the spline surface.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         spline_refinement_level: int, optional
             Refinement level for rendering of spline points.
         control_points: Iterable[float], optional
@@ -611,6 +615,8 @@ class IGAUnstructuredSplineSurf(CoreObject):
     @property
     def degree(self) -> int:
         """Degree of the spline surface.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._degree
 
@@ -717,10 +723,16 @@ class IGAUnstructuredSplineSolid(CoreObject):
         Model to create a ``IGAUnstructuredSplineSolid`` object with default parameters.
     id: int, optional
         Id of the unstructured spline solid.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     degree: int, optional
         Degree of the spline solid.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     invalid_jacobian_elements_count: int, optional
         Count of elements with negative jacobian.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``IGAUnstructuredSplineSolid`` object with provided parameters.
 
@@ -755,10 +767,16 @@ class IGAUnstructuredSplineSolid(CoreObject):
             Model to create a ``IGAUnstructuredSplineSolid`` object with default parameters.
         id: int, optional
             Id of the unstructured spline solid.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         degree: int, optional
             Degree of the spline solid.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         invalid_jacobian_elements_count: int, optional
             Count of elements with negative jacobian.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``IGAUnstructuredSplineSolid`` object with provided parameters.
 
@@ -845,6 +863,8 @@ class IGAUnstructuredSplineSolid(CoreObject):
     @property
     def id(self) -> int:
         """Id of the unstructured spline solid.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._id
 
@@ -855,6 +875,8 @@ class IGAUnstructuredSplineSolid(CoreObject):
     @property
     def degree(self) -> int:
         """Degree of the spline solid.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._degree
 
@@ -865,6 +887,8 @@ class IGAUnstructuredSplineSolid(CoreObject):
     @property
     def invalid_jacobian_elements_count(self) -> int:
         """Count of elements with negative jacobian.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._invalid_jacobian_elements_count
 

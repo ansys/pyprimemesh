@@ -177,6 +177,10 @@ class ThinVolumeControl(CoreObject):
             Returns the ScopeDefinition.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> scope = thin_vol_ctrl.get_source_scope()
@@ -184,6 +188,7 @@ class ThinVolumeControl(CoreObject):
         """
         args = {}
         command_name = "PrimeMesh::ThinVolumeControl/GetSourceScope"
+        self._model._print_beta_api_warning("get_source_scope")
         self._model._print_logs_before_command("get_source_scope", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_source_scope", ScopeDefinition(model = self._model, json_data = result))
@@ -199,6 +204,10 @@ class ThinVolumeControl(CoreObject):
             Returns the ScopeDefinition.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> scope = thin_vol_ctrl.get_target_scope()
@@ -206,6 +215,7 @@ class ThinVolumeControl(CoreObject):
         """
         args = {}
         command_name = "PrimeMesh::ThinVolumeControl/GetTargetScope"
+        self._model._print_beta_api_warning("get_target_scope")
         self._model._print_logs_before_command("get_target_scope", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_target_scope", ScopeDefinition(model = self._model, json_data = result))
@@ -221,6 +231,10 @@ class ThinVolumeControl(CoreObject):
             Returns the ScopeDefinition.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> scope = thin_vol_ctrl.get_volume_scope()
@@ -228,6 +242,7 @@ class ThinVolumeControl(CoreObject):
         """
         args = {}
         command_name = "PrimeMesh::ThinVolumeControl/GetVolumeScope"
+        self._model._print_beta_api_warning("get_volume_scope")
         self._model._print_logs_before_command("get_volume_scope", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_volume_scope", ScopeDefinition(model = self._model, json_data = result))
