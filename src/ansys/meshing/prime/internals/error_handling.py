@@ -548,7 +548,7 @@ class PrimeRuntimeWarning(UserWarning):
 
 
 def process_and_handle_results(result: dict):
-    """Process and handle results ."""
+    """Process and handle results."""
     if result is not None:
         if isinstance(result, dict):
             error_code = result.get('errorCode', None)

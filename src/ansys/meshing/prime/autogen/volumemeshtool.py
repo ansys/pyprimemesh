@@ -80,6 +80,10 @@ class VolumeMeshTool(CoreObject):
             Returns the VolumeMeshToolResults.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> results = volume_mesh_tool.AssignMeshRegions(target_part_id, target_cell_zonelets, source_part_ids, small_regions_volume_fraction)
@@ -98,6 +102,7 @@ class VolumeMeshTool(CoreObject):
         "source_part_ids" : source_part_ids,
         "small_regions_volume_fraction" : small_regions_volume_fraction}
         command_name = "PrimeMesh::VolumeMeshTool/AssignMeshRegions"
+        self._model._print_beta_api_warning("assign_mesh_regions")
         self._model._print_logs_before_command("assign_mesh_regions", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("assign_mesh_regions", VolumeMeshToolResults(model = self._model, json_data = result))
@@ -202,6 +207,10 @@ class VolumeMeshTool(CoreObject):
             Returns array containing information about parts enclosing the points.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> results = volume_mesh_tool.get_parts_for_points([0., 0., 0.], params)
@@ -214,6 +223,7 @@ class VolumeMeshTool(CoreObject):
         args = {"points" : points,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeMeshTool/GetPartsForPoints"
+        self._model._print_beta_api_warning("get_parts_for_points")
         self._model._print_logs_before_command("get_parts_for_points", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_parts_for_points")

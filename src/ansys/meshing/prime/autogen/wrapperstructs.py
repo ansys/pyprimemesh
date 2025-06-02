@@ -1757,11 +1757,11 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     sizing_method: SizeFieldType, optional
-        Method used to define sizing method for patching.
+        Used to define sizing method for patching.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     size_field_ids: Iterable[int], optional
-        Ids used to define size field based octree refinement.
+        Used to define size field based octree refinement.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     patch_at_live: bool, optional

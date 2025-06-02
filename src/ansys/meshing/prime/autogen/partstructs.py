@@ -74,11 +74,17 @@ class BodyQueryType(enum.IntEnum):
     """Indicates type of entity to query in part.
     """
     ALL = 0
-    """Returns all entities in part."""
+    """Returns all entities in part.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FREE = 1
-    """Returns only free entities in part."""
+    """Returns only free entities in part.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     NONFREE = 2
-    """Returns entities associated with non-free body in part."""
+    """Returns entities associated with non-free body in part.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class BoundingBox(CoreObject):
     """Provides information about the definition of a bounding box.
@@ -2248,12 +2254,20 @@ class ComponentChildrenResults(CoreObject):
         Model to create a ``ComponentChildrenResults`` object with default parameters.
     component_ids: Iterable[int], optional
         Ids of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     component_names: List[str], optional
         Names of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     body_ids: Iterable[int], optional
         Ids of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     body_names: List[str], optional
         Names of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ComponentChildrenResults`` object with provided parameters.
 
@@ -2291,12 +2305,20 @@ class ComponentChildrenResults(CoreObject):
             Model to create a ``ComponentChildrenResults`` object with default parameters.
         component_ids: Iterable[int], optional
             Ids of components that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         component_names: List[str], optional
             Names of components that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         body_ids: Iterable[int], optional
             Ids of bodies that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         body_names: List[str], optional
             Names of bodies that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ComponentChildrenResults`` object with provided parameters.
 
@@ -2391,6 +2413,8 @@ class ComponentChildrenResults(CoreObject):
     @property
     def component_ids(self) -> Iterable[int]:
         """Ids of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._component_ids
 
@@ -2401,6 +2425,8 @@ class ComponentChildrenResults(CoreObject):
     @property
     def component_names(self) -> List[str]:
         """Names of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._component_names
 
@@ -2411,6 +2437,8 @@ class ComponentChildrenResults(CoreObject):
     @property
     def body_ids(self) -> Iterable[int]:
         """Ids of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._body_ids
 
@@ -2421,6 +2449,8 @@ class ComponentChildrenResults(CoreObject):
     @property
     def body_names(self) -> List[str]:
         """Names of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._body_names
 
