@@ -101,7 +101,7 @@ class TrimmedSpline(CoreObject):
         Parameters
         ----------
         part_id : int
-            Part on which the tetrahedral mesh is performed.
+            Part on which the tetrahedral meshing is performed.
         mesh_params : TetMeshSplineParams
             Parameters to configure the meshing.
 
