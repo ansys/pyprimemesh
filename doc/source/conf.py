@@ -183,6 +183,8 @@ supress_warnings = ["docutils"]
 autodoc_default_options = {    
     'members': True,    
     'undoc-members': True,    
-    'exclude-members': '__dict__, __weakref__, bit_count, to_bytes, from_bytes, as_integer_ratio,
-is_integer',
+    'exclude-members': '__dict__, __weakref__, bit_count, to_bytes, '
+    'from_bytes, as_integer_ratio, is_integer, conjugate, bit_length, '
+    'real, imag, numerator, denominator',
+    )
 }
