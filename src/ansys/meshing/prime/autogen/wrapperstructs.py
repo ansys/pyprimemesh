@@ -1761,7 +1761,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     size_field_ids: Iterable[int], optional
-        Method used to define size field based octree refinement.
+        Ids used to define size field based octree refinement.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     patch_at_live: bool, optional
