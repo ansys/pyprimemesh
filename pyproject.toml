@@ -53,6 +53,7 @@ doc = [
   "sphinx-gallery==0.19.0",
   "sphinx-notfound-page==1.1.0",
   "sphinxemoji==0.3.1",
+  "trame-vtk!=2.8.16",
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
