@@ -65,6 +65,8 @@ html_theme_options = {
     },
 }
 
+parallel = 1
+
 # Sphinx extensions
 extensions = [
     'sphinx.ext.autodoc',
