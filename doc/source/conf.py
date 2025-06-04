@@ -180,6 +180,7 @@ sphinx_gallery_conf = {
 
 supress_warnings = ["docutils"]
 
+# skip members
 def skip_member(app, what, name, obj, skip, options):
     attributes = (
         'bit_count',
@@ -198,5 +199,6 @@ def skip_member(app, what, name, obj, skip, options):
         return True
     return skip
 
+# setup skip members
 def setup(app):
     app.connect('autodoc-skip-member', skip_member)
