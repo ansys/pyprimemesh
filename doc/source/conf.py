@@ -199,6 +199,7 @@ def skip_member(app, what, name, obj, skip, options):
         return True
     return skip
 
+
 # setup skip members
 def setup(app):
     app.connect('autodoc-skip-member', skip_member)
