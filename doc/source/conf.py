@@ -212,9 +212,9 @@ def skip_member(app, what, name, obj, skip, options):
 
 
 def setup(app):
-    """
-    Set up the Sphinx application.
+    """
+    Set up the Sphinx application.
 
-    :param app: The Sphinx application object.
-    """
+    :param app: The Sphinx application object.
+    """
     app.connect('autodoc-skip-member', skip_member)
