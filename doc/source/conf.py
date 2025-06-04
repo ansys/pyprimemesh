@@ -194,9 +194,9 @@ def skip_member(app, what, name, obj, skip, options):
         'numerator',
         'denominator',
     )
-    if name in attributes:
-        return True
-    return skip
+    if name in attributes:
+        return True
+    return skip
 
 def setup(app):
-    app.connect('autodoc-skip-member', skip_member)
+    app.connect('autodoc-skip-member', skip_member)
