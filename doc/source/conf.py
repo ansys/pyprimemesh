@@ -180,8 +180,19 @@ sphinx_gallery_conf = {
 
 supress_warnings = ["docutils"]
 
-# skip members
+
 def skip_member(app, what, name, obj, skip, options):
+    """
+    Determine whether to skip a member during documentation generation.
+
+    :param app: The Sphinx application object.
+    :param what: The type of the object.
+    :param name: The name of the object.
+    :param obj: The object itself.
+    :param skip: Whether to skip the member.
+    :param options: Additional options.
+    :returns: True if the member should be skipped, False otherwise.
+    """
     attributes = (
         'bit_count',
         'to_bytes',
@@ -200,6 +211,10 @@ def skip_member(app, what, name, obj, skip, options):
     return skip
 
 
-# setup skip members
 def setup(app):
+    """
+    Set up the Sphinx application.
+
+    :param app: The Sphinx application object.
+    """
     app.connect('autodoc-skip-member', skip_member)
