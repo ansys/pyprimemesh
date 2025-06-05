@@ -164,6 +164,8 @@ sphinx_gallery_conf = {
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
     "ignore_pattern": "examples/other_examples",
+    # reorder example folders
+    "gallery_order": ["gallery", "beta", "misc"],
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
