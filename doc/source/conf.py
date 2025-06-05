@@ -157,15 +157,13 @@ sphinx_gallery_conf = {
     # convert rst to md for ipynb
     # "pypandoc": True,
     # path to your examples scripts
-    "examples_dirs": ["../../examples"],
+    "examples_dirs": ["../../examples/gallery", "../../examples/beta", "../../examples/misc"],
     # path where to save gallery generated examples
     "gallery_dirs": ["examples/gallery_examples"],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
     "ignore_pattern": "examples/other_examples",
-    # reorder example folders
-    "gallery_order": ["gallery", "beta", "misc"],
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
