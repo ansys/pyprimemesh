@@ -155,7 +155,11 @@ sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": ["../../examples/gallery", "../../examples/beta", "../../examples/misc"],
     # path where to save gallery generated examples
-    "gallery_dirs": ["examples/gallery_examples/gallery", "examples/gallery_examples/beta", "examples/gallery_examples/misc"],
+    "gallery_dirs": [
+        "examples/gallery_examples/gallery",
+        "examples/gallery_examples/beta",
+        "examples/gallery_examples/misc",
+    ],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
