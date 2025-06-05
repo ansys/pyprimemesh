@@ -137,10 +137,6 @@ autosummary_imported_members = True
 autosummary_ignore_module_all = False
 
 
-# exclude_patterns = [
-#    "examples/gallery_examples/example_template.rst" "examples/gallery_examples/mixing_elbow.rst"
-# ]
-
 # Enable screenshots for gallery for pyvista
 pyvista.BUILDING_GALLERY = True
 
@@ -159,7 +155,7 @@ sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": ["../../examples/gallery", "../../examples/beta", "../../examples/misc"],
     # path where to save gallery generated examples
-    "gallery_dirs": ["examples/gallery_examples"],
+    "gallery_dirs": ["examples/gallery_examples/gallery", "examples/gallery_examples/beta", "examples/gallery_examples/misc"],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
