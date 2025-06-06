@@ -203,8 +203,8 @@ def build_gallery(app):
                         for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs))
 
 def setup(app):
-    """
-    Connect the `build_gallery` function to the Sphinx 'builder-inited' event.
+    """
+    Connect the `build_gallery` function to the Sphinx 'builder-inited' event.
 
     Parameters
     ----------
