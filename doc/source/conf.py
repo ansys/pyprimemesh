@@ -213,7 +213,7 @@ def setup(app):
     Notes
     -----
     This function ensures that the gallery is built when the Sphinx builder is initialized.
-    """
+    """
     app.connect('builder-inited', build_gallery)
 
 
