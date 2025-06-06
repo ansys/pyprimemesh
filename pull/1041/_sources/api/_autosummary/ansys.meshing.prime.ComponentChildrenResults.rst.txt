@@ -1,0 +1,56 @@
+.. vale off
+
+
+
+
+
+
+
+ComponentChildrenResults
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ComponentChildrenResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      ComponentChildrenResults.print_default
+      ComponentChildrenResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ComponentChildrenResults.body_ids
+      
+      
+      ComponentChildrenResults.body_names
+      
+      
+      ComponentChildrenResults.component_ids
+      
+      
+      ComponentChildrenResults.component_names
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ComponentChildrenResults
+
+    ansys.meshing.prime.ComponentChildrenResults
+
+.. vale on

@@ -1,0 +1,6 @@
+AUTOQUADMESHER\_INVALIDMINMAXSIZES
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.AUTOQUADMESHER_INVALIDMINMAXSIZES

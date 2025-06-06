@@ -1,0 +1,31 @@
+CreateCapResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateCapResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateCapResults.print_default
+      CreateCapResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateCapResults.created_face_zonelets
+      CreateCapResults.error_code
+   
+   
