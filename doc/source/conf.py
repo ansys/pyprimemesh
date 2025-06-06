@@ -184,16 +184,16 @@ sphinx_gallery_conf = {
 def build_gallery(app):
     """Build the Sphinx Gallery using parallel processing.
 
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        The Sphinx application object.
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application object.
 
-    Notes
-    -----
-    This function uses `joblib` to run the gallery building process in parallel,
-    utilizing all available CPU cores.
-    """
+    Notes
+    -----
+    This function uses `joblib` to run the gallery building process in parallel,
+    utilizing all available CPU cores.
+    """
     examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
     gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
     Parallel(n_jobs=-1)(
@@ -205,14 +205,14 @@ def build_gallery(app):
 def setup(app):
     """Connect the `build_gallery` function to the Sphinx 'builder-inited' event.
 
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        The Sphinx application object.
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application object.
 
-    Notes
-    -----
-    This function ensures that the gallery is built when the Sphinx builder is initialized.
+    Notes
+    -----
+    This function ensures that the gallery is built when the Sphinx builder is initialized.
     """
     app.connect('builder-inited', build_gallery)
 
