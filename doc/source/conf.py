@@ -180,8 +180,6 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
 }
 
-supress_warnings = ["docutils"]
-
 
 def build_gallery(app):
     """
@@ -199,8 +197,10 @@ def build_gallery(app):
     """
     examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
     gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
-    Parallel(n_jobs=-1)(delayed(gen_gallery.build_gallery)(examples_dir, gallery_dir)
-                        for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs))
+    Parallel(n_jobs=-1)(
+        delayed(gen_gallery.build_gallery)(examples_dir, gallery_dir)
+        for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs)
+    )
 
 def setup(app):
     """
@@ -216,3 +216,6 @@ def setup(app):
     This function ensures that the gallery is built when the Sphinx builder is initialized.
     """
     app.connect('builder-inited', build_gallery)
+
+
+supress_warnings = ["docutils"]
