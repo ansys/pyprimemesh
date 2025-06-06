@@ -253,11 +253,17 @@ def launch_prime_github_container(
         f'{mount_host}:{mount_image}',
         '-e',
         f'ANSYSLMD_LICENSE_FILE={license_file}',
+    ]
+    graphics_port = int(os.environ.get('PYPRIMEMESH_GRAPHICS_PORT', '0'))
+    print(f'Found PYPRIMEMESH_GRAPHICS_PORT={graphics_port}')
+    if graphics_port > 0:
+        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
+    prime_arguments = [
         f'{image_name}:{version}',
         '--port',
         f'{port}',
     ]
-    subprocess.run(docker_command, stdout=subprocess.DEVNULL)
+    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 
 def stop_prime_github_container(name):
