@@ -4,11 +4,11 @@ from datetime import datetime
 
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
+import sphinx_gallery.gen_gallery as gen_gallery
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
+from joblib import Parallel, delayed
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
-from joblib import Parallel, delayed
-import sphinx_gallery.gen_gallery as gen_gallery
 
 from ansys.meshing.prime import __version__
 
@@ -197,9 +197,9 @@ def build_gallery(app):
     This function uses `joblib` to run the gallery building process in parallel,
     utilizing all available CPU cores.
     """
-    examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
-    gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
-    Parallel(n_jobs=-1)(delayed(gen_gallery.build_gallery)(examples_dir, gallery_dir)
+    examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
+    gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
+    Parallel(n_jobs=-1)(delayed(gen_gallery.build_gallery)(examples_dir, gallery_dir)
                         for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs))
 
 def setup(app):
@@ -215,4 +215,4 @@ def setup(app):
     -----
     This function ensures that the gallery is built when the Sphinx builder is initialized.
     """
-    app.connect('builder-inited', build_gallery)
+    app.connect('builder-inited', build_gallery)
