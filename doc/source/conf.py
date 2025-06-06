@@ -7,6 +7,8 @@ import pyvista
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
+from joblib import Parallel, delayed
+import sphinx_gallery.gen_gallery as gen_gallery
 
 from ansys.meshing.prime import __version__
 
@@ -179,3 +181,38 @@ sphinx_gallery_conf = {
 }
 
 supress_warnings = ["docutils"]
+
+
+def build_gallery(app):
+    """
+    Build the Sphinx Gallery using parallel processing.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application object.
+
+    Notes
+    -----
+    This function uses `joblib` to run the gallery building process in parallel,
+    utilizing all available CPU cores.
+    """
+    examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
+    gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
+    Parallel(n_jobs=-1)(delayed(gen_gallery.build_gallery)(examples_dir, gallery_dir)
+                        for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs))
+
+def setup(app):
+    """
+    Connect the `build_gallery` function to the Sphinx 'builder-inited' event.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application object.
+
+    Notes
+    -----
+    This function ensures that the gallery is built when the Sphinx builder is initialized.
+    """
+    app.connect('builder-inited', build_gallery)
