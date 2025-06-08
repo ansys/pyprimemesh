@@ -180,11 +180,14 @@ sphinx_gallery_conf = {
 
 example_file = os.environ.get("EXAMPLES_FILE")
 if example_file:
-    sphinx_gallery_conf["examples_dirs"] = [os.path.dirname(example_file)]
-    sphinx_gallery_conf["gallery_dirs"] = [
-        f"examples/gallery_examples/{os.path.basename(example_file).replace('.py', '')}",
-    ]
-    sphinx_gallery_conf["filename_pattern"] = os.path.basename(example_file)
+    # Set the directory and filename for this example
+    example_dir = os.path.dirname(example_file)
+    example_name = os.path.basename(example_file)
+    gallery_dir = os.path.join("examples", "gallery_examples", example_name.replace(".py", ""))
+
+    sphinx_gallery_conf["examples_dirs"] = [example_dir]
+    sphinx_gallery_conf["gallery_dirs"] = [gallery_dir]
+    sphinx_gallery_conf["filename_pattern"] = f"^{example_name}$"
 
     # Ensure GALLERY_HEADER is present in the example_dir
     for ext in [".rst", ".txt"]:
