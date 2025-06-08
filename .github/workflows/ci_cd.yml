@@ -107,7 +107,7 @@ jobs:
       - uses: actions/checkout@v4
       - id: set-matrix
         run: |
-          files=$(find examples -type f -name "*.py" | jq -R . | jq -s -c .)
+          files=$(find examples -type f -name "*.py" ! -path "examples/other/*" | jq -R . | jq -s -c .)
           echo "files=$files" >> $GITHUB_OUTPUT
 
   docs:
