@@ -1,5 +1,6 @@
 """Sphinx documentation configuration file."""
 import os
+import shutil
 from datetime import datetime
 
 import ansys.tools.visualization_interface as viz_interface
@@ -191,7 +192,6 @@ if example_file:
         header_dst = os.path.join(gallery_dir, f"GALLERY_HEADER{ext}")
         if os.path.exists(header_src):
             os.makedirs(gallery_dir, exist_ok=True)
-            import shutil
             shutil.copyfile(header_src, header_dst)
 else:
     sphinx_gallery_conf["examples_dirs"] = ["../../examples"]
