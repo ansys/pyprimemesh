@@ -99,11 +99,25 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
+  set-example-files:
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.set-matrix.outputs.files }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: |
+          files=$(find examples -type f -name "*.py" | jq -R . | jq -s .)
+          echo "files=$files" >> $GITHUB_OUTPUT
+
   docs:
     name: Documentation
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
-    needs: [docs-style]
+    needs: [docs-style, set-example-files]
+    strategy:
+      matrix:
+        example_file: ${{ fromJson(needs.set-example-files.outputs.files) }}
     steps:
       - name: Login in Github Container registry
         uses: docker/login-action@v3
@@ -126,6 +140,7 @@ jobs:
           needs-quarto: true
           sphinxopts: "-j auto --keep-going"
         env:
+          EXAMPLES_FILE: ${{ matrix.example_file }}
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
