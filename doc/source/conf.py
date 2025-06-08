@@ -178,4 +178,15 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
 }
 
+example_file = os.environ.get("EXAMPLES_FILE")
+if example_file:
+    sphinx_gallery_conf["examples_dirs"] = [os.path.dirname(example_file)]
+    sphinx_gallery_conf["gallery_dirs"] = [f"examples/gallery_examples/{os.path.basename(example_file).replace('.py', '')}"]
+    sphinx_gallery_conf["filename_pattern"] = os.path.basename(example_file)
+else:
+    sphinx_gallery_conf["examples_dirs"] = ["../../examples"]
+    sphinx_gallery_conf["gallery_dirs"] = ["examples/gallery_examples"]
+    sphinx_gallery_conf["filename_pattern"] = r"\.py"
+
+
 supress_warnings = ["docutils"]
