@@ -191,6 +191,8 @@ if example_file:
     sphinx_gallery_conf["filename_pattern"] = f"^{example_name}$"
 
     # Ensure GALLERY_HEADER is present in the example_dir
+    with open(os.path.join(gallery_dir, "GALLERY_HEADER.txt"), "w") as f:
+        pass
     for ext in [".rst", ".txt"]:
         header_src = os.path.join(example_dir, f"GALLERY_HEADER{ext}")
         header_dst = os.path.join(gallery_dir, f"GALLERY_HEADER{ext}")
