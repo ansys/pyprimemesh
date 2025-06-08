@@ -179,6 +179,7 @@ sphinx_gallery_conf = {
 }
 
 example_file = os.environ.get("EXAMPLES_FILE")
+plot_gallery = os.environ.get("PLOT_GALLERY", "yes").lower() == "yes"
 if example_file:
     # Set the directory and filename for this example
     example_dir = os.path.dirname(example_file)
@@ -201,5 +202,7 @@ else:
     sphinx_gallery_conf["gallery_dirs"] = ["examples/gallery_examples"]
     sphinx_gallery_conf["filename_pattern"] = r"\.py"
 
+# Control execution of examples
+sphinx_gallery_conf["plot_gallery"] = plot_gallery
 
 supress_warnings = ["docutils"]
