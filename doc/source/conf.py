@@ -184,6 +184,15 @@ if example_file:
         f"examples/gallery_examples/{os.path.basename(example_file).replace('.py', '')}",
     ]
     sphinx_gallery_conf["filename_pattern"] = os.path.basename(example_file)
+
+    # Ensure GALLERY_HEADER is present in the example_dir
+    for ext in [".rst", ".txt"]:
+        header_src = os.path.join(example_dir, f"GALLERY_HEADER{ext}")
+        header_dst = os.path.join(gallery_dir, f"GALLERY_HEADER{ext}")
+        if os.path.exists(header_src):
+            os.makedirs(gallery_dir, exist_ok=True)
+            import shutil
+            shutil.copyfile(header_src, header_dst)
 else:
     sphinx_gallery_conf["examples_dirs"] = ["../../examples"]
     sphinx_gallery_conf["gallery_dirs"] = ["examples/gallery_examples"]
