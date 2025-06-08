@@ -110,8 +110,8 @@ jobs:
           files=$(find examples -type f -name "*.py" ! -path "examples/other/*" | jq -R . | jq -s -c .)
           echo "files=$files" >> $GITHUB_OUTPUT
 
-  docs:
-    name: Documentation
+  docs-matrix:
+    name: Build examples
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     needs: [docs-style, set-example-files]
@@ -145,6 +145,55 @@ jobs:
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
+      - name: Upload gallery artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gallery-artifacts-${{ matrix.example_file }}
+          path: |
+            pyprimemesh/doc/source/examples/gallery_examples/
+            # Add any other output dirs needed
+
+  docs:
+    name: Documentation
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    needs: docs-matrix
+    steps:
+      - name: Login in Github Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ansys-bot
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull, launch, and validate prime service
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v4
+
+      - name: Download all gallery artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: pyprimemesh/doc/source/examples/gallery_examples/
+      - name: Build full gallery (no re-execution)
+        run: |
+          export PLOT_GALLERY=no
+          sphinx-build -b html doc/source doc/build/html
+
+      - name: "Run Ansys documentation building action"
+        uses: ansys/actions/doc-build@v10.0
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          check-links: false
+          needs-quarto: true
+          sphinxopts: "-j auto --keep-going"
+        env:
+          EXAMPLES_FILE: ${{ matrix.example_file }}
+          PYPRIMEMESH_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_SPHINX_BUILD: 1
+          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'          
 
   doc-deploy-pr:
     name: "Deploy PR documentation"
