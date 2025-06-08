@@ -181,7 +181,9 @@ sphinx_gallery_conf = {
 example_file = os.environ.get("EXAMPLES_FILE")
 if example_file:
     sphinx_gallery_conf["examples_dirs"] = [os.path.dirname(example_file)]
-    sphinx_gallery_conf["gallery_dirs"] = [f"examples/gallery_examples/{os.path.basename(example_file).replace('.py', '')}"]
+    sphinx_gallery_conf["gallery_dirs"] = [
+        f"examples/gallery_examples/{os.path.basename(example_file).replace('.py', '')}",
+    ]
     sphinx_gallery_conf["filename_pattern"] = os.path.basename(example_file)
 else:
     sphinx_gallery_conf["examples_dirs"] = ["../../examples"]
