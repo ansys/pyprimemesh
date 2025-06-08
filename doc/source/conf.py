@@ -163,7 +163,7 @@ sphinx_gallery_conf = {
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
-    "ignore_pattern": "examples/other_examples",
+    "ignore_pattern": r"examples/other/.*\.py|flycheck*",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
@@ -174,7 +174,6 @@ sphinx_gallery_conf = {
     "doc_module": ("ansys.meshing.prime"),
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
-    "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
 }
 
