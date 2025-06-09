@@ -186,10 +186,10 @@ if example_file:
     exclude_patterns = [
         'api/**',
         'cheatsheet/**',
+        'cheat_sheet.qmd',
         'contributing/**',
         'user_guide/**',
         'getting_started/**',
-        'index.rst',
     ]
 
 # Control execution of examples
