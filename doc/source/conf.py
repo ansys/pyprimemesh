@@ -183,6 +183,14 @@ if example_file:
     # Set the directory and filename for this example
     example_name = os.path.basename(example_file)
     sphinx_gallery_conf["filename_pattern"] = f"^{example_name}$"
+    exclude_patterns = [
+        'api/**',
+        'cheatsheet/**',
+        'contributing/**',
+        'user_guide/**',
+        'getting_started/**',
+        'index.rst',
+    ]
 
 # Control execution of examples
 sphinx_gallery_conf["plot_gallery"] = plot_gallery
