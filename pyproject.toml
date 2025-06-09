@@ -39,6 +39,7 @@ tests = [
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.1.1",
   "pyvista[trame]==0.45.2",
+  "numpy<2.3"
 ]
 doc = [
   "ansys-sphinx-theme[autoapi]==1.5.2",
