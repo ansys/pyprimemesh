@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -348,6 +348,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
         Periodic parameters to compute the size field.
     growth_rate_lower_bound: float, optional
         Lower bound for growth rate.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
@@ -391,6 +393,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
             Periodic parameters to compute the size field.
         growth_rate_lower_bound: float, optional
             Lower bound for growth rate.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
@@ -515,6 +519,8 @@ class VolumetricSizeFieldComputeParams(CoreObject):
     @property
     def growth_rate_lower_bound(self) -> float:
         """Lower bound for growth rate.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._growth_rate_lower_bound
 

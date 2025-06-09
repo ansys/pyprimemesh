@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -49,6 +48,7 @@ prime_error_messages = {
     ErrorCode.SURFEROPENINITIALFRONTLOOP: "Surface meshing open initial front loop.",
     ErrorCode.LOCALSURFERINVALIDNUMRINGS: "Invalid number of rings input for the local surface mesh operation.",
     ErrorCode.SURFERQUADFAILED: " Quad meshing failed for surface meshing.",
+    ErrorCode.FREEZEMESHERROR: "Cannot remesh freezed mesh.",
     ErrorCode.REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART: "Remesh face zonelets is not supported for part with topology data. Try mesh_topo_faces in surfer.",
     ErrorCode.REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART: "Remesh face zonelets locally is not supported for part with topology data. Try a topology based operation.",
     ErrorCode.SURFERINVALIDCONSTANTSIZE: "Invalid size for constant size surface meshing.",
@@ -57,9 +57,39 @@ prime_error_messages = {
     ErrorCode.SCAFFOLDERBADINPUTPARAMS: "Invalid scaffolder parameters setup.",
     ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL: "Absolute distance tolerance must be a positive double and smaller than constant mesh size.",
     ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE: "Constant mesh must be a positive double.",
+    ErrorCode.VT_COLLAPSESHORTEDGESFAILED: "Collapse short edges operation failed.",
+    ErrorCode.VT_CREATELEADINGEDGEFAILED: "Create leading edge operation failed.",
+    ErrorCode.VT_CREATEMIDEDGEFAILED: "Create mid edge operation failed.",
+    ErrorCode.VT_FILLANNULARHOLEFAILED: "Fill annular hole operation failed.",
+    ErrorCode.VT_FILLHOLEFAILED: "Fill hole operation failed.",
+    ErrorCode.VT_INVALIDINPUT: "Invalid input provided for VT operation.",
+    ErrorCode.VT_MERGEFACESFAILED: "Merge faces operation failed.",
+    ErrorCode.VT_MERGETHINEXTFAILED: "Merge thin extensions operation failed.",
+    ErrorCode.VT_MERGETHINSTRIPESFAILED: "Merge thin stripes operation failed.",
+    ErrorCode.VT_OPERATIONFAILED: "VT operation failed.",
+    ErrorCode.VT_PINCHFACESFAILED: "Pinch faces operation failed.",
+    ErrorCode.VT_REPAIRSHARPCORNERANGLESFAILED: "Repair sharp corner angles operation failed.",
+    ErrorCode.VT_SEPARATEFACESFAILED: "Separate faces operation failed.",
+    ErrorCode.MICROSTRUCTUREBADSHAPEPROPERTIES: "Bad shape properties.",
+    ErrorCode.MICROSTRUCTUREINVALIDELEMENTTYPE: "Invalid input provided. Invalid Element Type.",
+    ErrorCode.MICROSTRUCTUREINVALIDSHAPETYPE: "Invalid input provided. Invalid Shape.",
+    ErrorCode.MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID: "Volume mesh generation for hexahedra requires generation of a quadratic voxel grid.",
+    ErrorCode.MICROSTRUCTUREREMESHNOTSUPPORTED: "Surface remesh operation is not supported.",
+    ErrorCode.MICROSTRUCTURESMOOTHNOTSUPPORTED: "Smoothing operation is not supported.",
+    ErrorCode.MICROSTRUCTUREWRONGAPICALLSEQUENCE: "Wrong API call sequence.",
+    ErrorCode.NUMENMETHODNOTFOUND: "Could not find numen method.",
+    ErrorCode.PREPAREFORVOLUMEMESHINGFAILED: "Prepare for volume meshing failed.",
+    ErrorCode.NOTSUPPORTEDFORDISTRIBUTEMESHING: "Method not supported for distributed meshing.",
+    ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED: "Failed to split and collapse face element(s).",
+    ErrorCode.STITCHENTITIESFAILED: "Stitch entities failed.",
+    ErrorCode.STITCHWITHPRESERVEDENTITIESFAILED: "Stitch with preserved entities failed.",
+    ErrorCode.CELLSEPARATIONFAILED: "Cell separation failed.",
+    ErrorCode.NOCELLSSEPARATED: "No cells separated based on given input.",
+    ErrorCode.INVALIDCONTROLPARAMS: "Invalid control parameters.",
     ErrorCode.OUTOFMEMORY: "Out of memory.",
     ErrorCode.INTERRUPTED: "Prime operation interrupted.",
     ErrorCode.AUTOMESHFAILED: "Auto meshing failed.",
+    ErrorCode.MESHDECOUPLEDFAILED: "Mesh decoupled parallel failed.",
     ErrorCode.THINVOLUMEMESHFAILED: "Thin volume meshing failed.",
     ErrorCode.PRISMMESHFAILED: "Prism meshing failed.",
     ErrorCode.AUTOMESHINITFAILED: "Auto mesh initialization failed.",
@@ -135,8 +165,8 @@ prime_error_messages = {
     ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE: "Only quadrilateral faces zonelets are supported.",
     ErrorCode.PARTNOTMESHED: "Part has unmeshed topofaces.",
     ErrorCode.MORPHER_COMPUTEBCS: "Failed to compute boundary conditions.",
-    ErrorCode.MORPHER_MATCHMORPHINVALIDSOURCEINPUT: "Invalid source input for match morphing.",
-    ErrorCode.MORPHER_BCPAIRINPUTTYPEMISMATCH: "Entity type does not match with input for defined boundary condition pair.",
+    ErrorCode.MATCHMORPH_INVALIDSOURCEINPUT: "Invalid source input for match morphing.",
+    ErrorCode.MATCHMORPH_BCPAIRINPUTTYPEMISMATCH: "Entity type does not match with input for defined boundary condition pair.",
     ErrorCode.INVALIDGLOBALMINMAX: "Invalid global min, max value.",
     ErrorCode.INVALIDSIZECONTROLINPUTS: "Invalid size control input. Verify sizing parameters of size control.",
     ErrorCode.INVALIDSIZECONTROLSCOPE: "Invalid size control scope. Failed to evaluate scope for the size control.",
@@ -153,6 +183,7 @@ prime_error_messages = {
     ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS: "Material point with given name already exist.",
     ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST: "Material point with given id does not exist.",
     ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST: "Material point with the given name does not exist.",
+    ErrorCode.IMPROVESURFACEMESHQUALITYFAILED: "Improve surface mesh quality failed.",
     ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE: "Control Points size must be greater than degree.",
     ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT: "Control Points size cannot be greater than input mesh nodes.",
     ErrorCode.IGA_NURBSFITTINGFAILED: "Failed to fit spline.",
@@ -175,6 +206,7 @@ prime_error_messages = {
     ErrorCode.CREATEBOI_IVALIDWRAPMESHSIZE: "BOI creation failed. Wrap cannot be performed with invalid mesh size.",
     ErrorCode.CREATEBOI_INVALIDWAKELEVELS: "BOI creation failed. Invalid wake levels input.",
     ErrorCode.CREATEBOI_INVALIDTYPEFORWRAP: "BOI creation failed. Wrapping is invalid for this BOI type.",
+    ErrorCode.CREATEBOI_INVALIDSCOPE: "BOI creation failed. Invalid face zonelets as input.",
     ErrorCode.CREATECONTACTPATCH_INVALIDOFFSETDISTANCE: "Contact patch creation process failed. Scale factors should not be less than zero.",
     ErrorCode.CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS: "Contact patch creation process failed. Invalid Contact patch creation axis.",
     ErrorCode.CONTACTPATCHRESULTSFAILED: "Contact patch creation process failed. Check the inputs.",
@@ -222,7 +254,7 @@ prime_error_messages = {
     ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE: "Dead material point cannot be same as live.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE: "Hole size specified for dead region should be positive double.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_FAILED: "Failed to create patching surfaces.",
-    ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Provided hole size is too small hole for dead region.",
+    ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE: "Too small hole size provided for dead region.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE: "Base size specified for patching should be positive double.",
     ErrorCode.WRAPPERPATCHFLOWREGIONS_EMPTYORINVALIDINPUT: "Provided face zonelet ids for dead region are empty or invalid.",
     ErrorCode.INVALIDWRAPPERCONTROL: "Invalid wrapper control.",
@@ -250,16 +282,18 @@ prime_error_messages = {
     ErrorCode.VOLUMESEARCHFAILED: "Volume search failed.",
     ErrorCode.INVALIDCELLQUALITYLIMIT: "Invalid cell quality limit.",
     ErrorCode.FILLHOLEFAILED: "Unable to create capping surface.",
+    ErrorCode.UNITEZONELETSFAILED: "Failed to unite input zonelets.",
     ErrorCode.INVALIDINPUTPART: "Part is invalid.",
     ErrorCode.INVALIDSCOPEENTITYTYPEINPUT: "Invalid input scope entity type.",
     ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS: "Entities should be added to zone using part it belongs.",
     ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT: "Provided file extension is not supported. Supported extensions are .pmdat and .pmdat.gz",
-    ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH: "Provided file extension is not supported. Supported extensions are .msh and .msh.gz",
+    ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH: "Provided file extension is not supported. If cff_format is set to False, then supported extensions are .msh and .msh.gz. If cff_format is set to True, then supported extension is .msh.h5",
     ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE: "Provided file extension is not supported. Supported extensions are .cas and .cas.gz",
     ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE: "Provided file extension is not supported. Supported extensions are .k and .key",
     ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB: "Provided file extension is not supported. Supported extension is .cdb",
     ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD: "Provided file extension is not supported. Supported extensions are .sf and .sf.gz",
     ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD: "Provided file extension is not supported. Supported extensions are .psf and .psf.gz",
+    ErrorCode.INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT: "Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 .",
     ErrorCode.SUBTRACTZONELETSFAILED: "Failed to subtract cutters from input face zonelets.",
     ErrorCode.QUADRATICTETNOTSUPPORTEDINPARALLEL: "Quadratic tetrahedral meshing is not supported in parallel mode.",
     ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS: "Quadratic tetrahedral meshing is not supported with prisms.",
@@ -319,6 +353,8 @@ prime_error_messages = {
     ErrorCode.THINVOLUMECONTROLINVALIDNUMBEROFLAYER: "Number of layer in thin volume mesh should be greater than 0.",
     ErrorCode.THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED: "Thin volume mesh controls not supported for part with topology data.",
     ErrorCode.THINVOLUMECONTROLINVALIDCONTROL: "Same face scope is set as target for multiple thin volume controls.",
+    ErrorCode.THINVOLUMECONTROLSAMESOURCEFORMORETHANTWOCONTROL: "Same face scope is set as source for more than two thin volume controls.",
+    ErrorCode.THINVOLUMEMESHNOTSUPPORTEDWITHFACEBASEDDATABASE: "Thin volume mesh is not supported with face based database.",
     ErrorCode.EXPORTSTLFAILED: "Export STL failed.",
     ErrorCode.EXPORTSTLFAILEDWITHTOPOLOGY: "Export STL not supported for part with topology data.",
     ErrorCode.EXPORTSTLFAILEDWITHQUADFACES: "Export STL not supported for mesh with quad faces.",
@@ -338,17 +374,21 @@ prime_error_messages = {
     ErrorCode.IMPORTABAQUSFAILEDDURINGMESHCREATION: "Failed to import abaqus file. Mesh creation failed after parsing.",
     ErrorCode.ZEROELEMENTSREADFROMCDBFILE: "No mesh elements found. Check the input CDB file.",
     ErrorCode.ZERONODESREADFROMCDBFILE: "No nodes found. Check the input CDB file.",
+    ErrorCode.INVALIDCMBLOCKFORMAT: "CMBLOCK command format error in input CDB file. Check command syntax or data format.",
     ErrorCode.ZEROELEMENTSFORCDBEXPORT: "No mesh elements found for CDB export. Check if the model is meshed, or set write_by_zones in ExportMapdlCdbParams to false if zones are not defined.",
     ErrorCode.SHELLBLFAILED: "ShellBL creation failed.",
     ErrorCode.SHELLBLQUADS: "ShellBL quads.",
     ErrorCode.SHELLBLNOMESH: "ShellBL is not supported for unmeshed topofaces.",
     ErrorCode.SHELLBLFEWLAYERS: "Only few ShellBL layers are created.",
     ErrorCode.SHELLBLWRONGTOPO: "Found topofaces with invalid topology.",
+    ErrorCode.READSHELLBLCONTROLFAILED: "Read thin ShellBL control failed.",
+    ErrorCode.SHELLBLCONTROLFAILED: "Write ShellBL control failed.",
     ErrorCode.OGRIDREFINEFAILED: "Post refinement of ShellBl quads failed.",
     ErrorCode.SPLITTOTRIFAILED: "ShellBL quads split to triangles failed.",
     ErrorCode.INVALIDSHELLBLCONTROLS: "Invalid ShellBL controls.",
     ErrorCode.INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY: "Invalid scope entity.",
     ErrorCode.PERIODICEDGESNOTSUPPORTEDFORSHELLBL: "Periodic surfaces selected for ShellBL generation are not supported.",
+    ErrorCode.INVALIDINPUTPOINT: "Invalid input point.",
 }
 
 prime_warning_messages = {
@@ -364,12 +404,22 @@ prime_warning_messages = {
     WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT: "There are no computed volumes enclosing the given material point.",
     WarningCode.EXTERNALOPENFACEZONELETSFOUND: "External open face zonelets found.",
     WarningCode.EXTERNALOPENTOPOFACESFOUND: "External open topofaces found.",
+    WarningCode.VT_CANNOTMERGENODES: "Cannot merge nodes during VT operation.",
+    WarningCode.VT_REMESHFACEFAILED: "Failed to remesh face(s) during VT operation.",
+    WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES: "Input contains entities in different zones which have been skipped.",
+    WarningCode.VT_SKIPPEDFEATUREENTITIES: "Input contains feature entities which have been skipped.",
+    WarningCode.VT_SKIPPEDFREEEDGES: "Input contains free edges which have been skipped.",
+    WarningCode.VT_SKIPPEDNONMANIFOLDEDGES: "Input contains non-manifold edges which have been skipped.",
+    WarningCode.VT_SKIPPEDPROTECTEDENTITIES: "Input contains protected entities which have been skipped.",
     WarningCode.OVERRIDECURVATURESIZINGPARAMS: "Invalid curvature sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDESOFTSIZINGPARAMS: "Invalid soft sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDEHARDSIZINGPARAMS: "Invalid hard sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDEPROXIMITYSIZINGPARAMS: "Invalid proximity sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDEBOISIZINGPARAMS: "Invalid BOI sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDEMESHEDSIZINGPARAMS: "Invalid meshed sizing parameters override by global sizing parameters.",
+    WarningCode.OVERRIDESOISIZINGPARAMS: "Invalid SOI sizing parameters override by global sizing parameters.",
+    WarningCode.INVALIDSIZECONTROLSCOPE: "Invalid size control type provided.",
+    WarningCode.OVERRIDEGROWTHRATEPARAM: "Overriding growth rate parameter.",
     WarningCode.OVERRIDESURFACESCOPEENTITY: "Invalid surface scope entity, override by face zonelets.",
     WarningCode.OVERRIDEVOLUMESCOPEENTITY: "Invalid volume scope entity, override by volume.",
     WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO: "Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls.",
@@ -380,6 +430,7 @@ prime_warning_messages = {
     WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED: "Size control is not supported in wrapper. Skipping it.",
     WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE: "Contact prevention size is smaller than base size. Size will be adjusted to base size.",
     WarningCode.WRAPPER_SMALLERSIZEATFEAURES: "Size at features is smaller than base size. Size will be adjusted to base size.",
+    WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND: "No holes detected to patch",
     WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS: "Material point with same name exists. Overriding with unique name.",
     WarningCode.LOCALSURFERNOFACEREGISTERED: "No face registered with the given register id.",
     WarningCode.ENTITIESNOTBELONGTOANYZONE: "Entities not belong to any zone.",
@@ -396,12 +447,17 @@ prime_warning_messages = {
     WarningCode.EXPORTMAPDLANALYSISSETTINGSFAILED: "Export of analysis settings to separate file failed.",
     WarningCode.WRITINGCONTACTPAIRSSKIPPED: "Writing of contact pairs skipped due to no surface or surface interaction definition.",
     WarningCode.WRITINGTIESSKIPPED: "Writing of ties skipped due to no surface definition.",
-    WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED: "Export of a zonelet skipped while exporting a label as element component. Disable the parameter enable_face_based_labels in ExportMapdlCdbParams to export the label as node component.",
+    WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED: "Skipped the export of label as element component because the labelled topology or zonelets are not a part of any zone. Refer label_export_params to export desired labels as nodal components.",
+    WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED: "Skipped the import of nodal component as label because no element fully represents nodal component.",
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
+    WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES: "Topofaces that got defeatured in the MultiZone mesh.",
+    WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES: "Topoedges that got defeatured in the MultiZone mesh.",
     WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topoentities. Skipped projection for those topoentities.",
     WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topoentities. Mesh node projected on facets for those topoentities.",
     WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use Fuse operation to remove it.",
     WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use Intersect operation to remove it.",
+    WarningCode.OVERRIDEEDGESCOPEENTITY: "Override edge scope entity.",
+    WarningCode.SHELLBLGAPFACTORMINLIMIT: "Adjusted ShellBL gap factor to 0.001. As 0.001 is minimum value supported.",
 }
 
 
@@ -491,6 +547,54 @@ class PrimeRuntimeWarning(UserWarning):
         return self._message
 
 
+def process_and_handle_results(result: dict):
+    """Process and handle results."""
+    if result is not None:
+        if isinstance(result, dict):
+            error_code = result.get('errorCode', None)
+            error_location_arr = result.get('errorLocations', None)
+            error_locations = (
+                [error_location_arr[i : i + 3] for i in range(0, len(error_location_arr), 3)]
+                if error_location_arr is not None
+                else []
+            )
+            if error_code is not None:
+                if error_code > 0:
+                    error_location_msg = (
+                        f'\nError Locations: {error_locations}' if len(error_locations) > 0 else f''
+                    )
+                    raise PrimeRuntimeError(
+                        prime_error_messages.get(
+                            ErrorCode(error_code), f'Unrecogonized error code {error_code}'
+                        )
+                        + error_location_msg,
+                        ErrorCode(error_code),
+                        error_locations,
+                    )
+
+            prime_warnings = []
+            single_warning = result.get('warningCode', None)
+            if single_warning is not None and single_warning > 0:
+                prime_warnings.append(single_warning)
+
+            multiple_warnings = result.get('warningCodes', None)
+            if multiple_warnings:  # Note that this will filter out empty list as well
+                [prime_warnings.append(w) for w in multiple_warnings]
+
+            if prime_warnings:
+                import warnings
+
+                [
+                    warnings.warn(
+                        prime_warning_messages.get(WarningCode(w), f'Unrecogonized warning {w}'),
+                        PrimeRuntimeWarning,
+                        stacklevel=4,
+                    )
+                    for w in prime_warnings
+                ]
+    return result
+
+
 def communicator_error_handler(
     _func=None,
     *,
@@ -572,58 +676,7 @@ def error_code_handler(_func=None):
 
                 logging.exception(err)
                 raise
-            if result is not None:
-                if isinstance(result, dict):
-                    error_code = result.get('errorCode', None)
-                    error_location_arr = result.get('errorLocations', None)
-                    error_locations = (
-                        [
-                            error_location_arr[i : i + 3]
-                            for i in range(0, len(error_location_arr), 3)
-                        ]
-                        if error_location_arr is not None
-                        else []
-                    )
-                    if error_code is not None:
-                        if error_code > 0:
-                            error_location_msg = (
-                                f'\nError Locations: {error_locations}'
-                                if len(error_locations) > 0
-                                else f''
-                            )
-                            raise PrimeRuntimeError(
-                                prime_error_messages.get(
-                                    ErrorCode(error_code), f'Unrecogonized error code {error_code}'
-                                )
-                                + error_location_msg,
-                                ErrorCode(error_code),
-                                error_locations,
-                            )
-
-                    prime_warnings = []
-                    single_warning = result.get('warningCode', None)
-                    if single_warning is not None and single_warning > 0:
-                        prime_warnings.append(single_warning)
-
-                    multiple_warnings = result.get('warningCodes', None)
-                    if multiple_warnings:  # Note that this will filter out empty list as well
-                        [prime_warnings.append(w) for w in multiple_warnings]
-
-                    if prime_warnings:
-                        import warnings
-
-                        [
-                            warnings.warn(
-                                prime_warning_messages.get(
-                                    WarningCode(w), f'Unrecogonized warning {w}'
-                                ),
-                                PrimeRuntimeWarning,
-                                stacklevel=4,
-                            )
-                            for w in prime_warnings
-                        ]
-
-            return result
+            return process_and_handle_results(result=result)
 
         return wrapper_error_code
 

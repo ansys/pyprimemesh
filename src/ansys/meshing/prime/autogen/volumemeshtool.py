@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -57,6 +57,56 @@ class VolumeMeshTool(CoreObject):
         """ Exit context for VolumeMeshTool. """
         command_name = "PrimeMesh::VolumeMeshTool/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
+
+    def assign_mesh_regions(self, target_part_id : int, target_cell_zonelets : Iterable[int], source_part_ids : Iterable[int], small_regions_volume_fraction : float) -> VolumeMeshToolResults:
+        """ Assigns a region id to the cells in target cell zonelets of target part id. The region id is based on their location within source part ids.
+
+
+        Parameters
+        ----------
+        target_part_id : int
+            Id of the target part.
+        target_cell_zonelets : Iterable[int]
+            Ids of cell zonelets to be split into regions.
+        source_part_ids : Iterable[int]
+            Ids of solids used as a reference for assigning regions.
+        small_regions_volume_fraction : float
+            Regions with volumes smaller than a specified fraction of the total volume are merged into their largest adjacent region.
+            This helps to eliminate isolated cells and thin regions from the output.
+
+        Returns
+        -------
+        VolumeMeshToolResults
+            Returns the VolumeMeshToolResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = volume_mesh_tool.AssignMeshRegions(target_part_id, target_cell_zonelets, source_part_ids, small_regions_volume_fraction)
+
+        """
+        if not isinstance(target_part_id, int):
+            raise TypeError("Invalid argument type passed for 'target_part_id'. Valid argument type is int.")
+        if not isinstance(target_cell_zonelets, Iterable):
+            raise TypeError("Invalid argument type passed for 'target_cell_zonelets'. Valid argument type is Iterable[int].")
+        if not isinstance(source_part_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'source_part_ids'. Valid argument type is Iterable[int].")
+        if not isinstance(small_regions_volume_fraction, float):
+            raise TypeError("Invalid argument type passed for 'small_regions_volume_fraction'. Valid argument type is float.")
+        args = {"target_part_id" : target_part_id,
+        "target_cell_zonelets" : target_cell_zonelets,
+        "source_part_ids" : source_part_ids,
+        "small_regions_volume_fraction" : small_regions_volume_fraction}
+        command_name = "PrimeMesh::VolumeMeshTool/AssignMeshRegions"
+        self._model._print_beta_api_warning("assign_mesh_regions")
+        self._model._print_logs_before_command("assign_mesh_regions", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("assign_mesh_regions", VolumeMeshToolResults(model = self._model, json_data = result))
+        return VolumeMeshToolResults(model = self._model, json_data = result)
 
     def improve_by_auto_node_move(self, part_id : int, cell_zonelets : Iterable[int], boundary_zonelets : Iterable[int], params : AutoNodeMoveParams) -> VolumeMeshToolResults:
         """ Improve volume mesh by auto node move.
@@ -139,6 +189,45 @@ class VolumeMeshTool(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("check_mesh", CheckMeshResults(model = self._model, json_data = result))
         return CheckMeshResults(model = self._model, json_data = result)
+
+    def get_parts_for_points(self, points : Iterable[float], params : PartsForPointsParams) -> Iterable[int]:
+        """ Finds parts enclosing the given list of points.
+
+
+        Parameters
+        ----------
+        points : Iterable[float]
+            Coordinates of points for which parts need to be found.
+        params : PartsForPointsParams
+            Parameters for searching parts.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns array containing information about parts enclosing the points.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = volume_mesh_tool.get_parts_for_points([0., 0., 0.], params)
+
+        """
+        if not isinstance(points, Iterable):
+            raise TypeError("Invalid argument type passed for 'points'. Valid argument type is Iterable[float].")
+        if not isinstance(params, PartsForPointsParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is PartsForPointsParams.")
+        args = {"points" : points,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::VolumeMeshTool/GetPartsForPoints"
+        self._model._print_beta_api_warning("get_parts_for_points")
+        self._model._print_logs_before_command("get_parts_for_points", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_parts_for_points")
+        return result
 
     def copy_cell_zonelets(self, cell_zonelets : Iterable[int], target_part_id : int, params : CopyZoneletsParams) -> CopyZoneletsResults:
         """ Copy cell zonelets and face zonelets connected to the cell zonelets.

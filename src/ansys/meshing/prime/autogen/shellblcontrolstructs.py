@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -46,7 +46,7 @@ class ShellBLControlGrowthParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     growth_rate: float, optional
-        Ratio of heights of current layer to previous layer.
+        Ratio of height of the current layer to the previous layer.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     first_height: float, optional
@@ -97,7 +97,7 @@ class ShellBLControlGrowthParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         growth_rate: float, optional
-            Ratio of heights of current layer to previous layer.
+            Ratio of height of the current layer to the previous layer.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         first_height: float, optional
@@ -158,7 +158,7 @@ class ShellBLControlGrowthParams(CoreObject):
         offset_type: ShellBLOffsetType, optional
             Offset type for ShellBL.
         growth_rate: float, optional
-            Ratio of heights of current layer to previous layer.
+            Ratio of height of the current layer to the previous layer.
         first_height: float, optional
             Height of first layer of ShellBL.
         """
@@ -221,7 +221,7 @@ class ShellBLControlGrowthParams(CoreObject):
 
     @property
     def growth_rate(self) -> float:
-        """Ratio of heights of current layer to previous layer.
+        """Ratio of height of the current layer to previous layer.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """

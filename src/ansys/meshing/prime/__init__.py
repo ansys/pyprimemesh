@@ -23,6 +23,8 @@ from ansys.meshing.prime.autogen.scaffolder import Scaffolder
 from ansys.meshing.prime.autogen.automesh import AutoMesh
 from ansys.meshing.prime.autogen.boundaryfittednurbs import BoundaryFittedSpline
 from ansys.meshing.prime.autogen.quadtospline import QuadToSpline
+from ansys.meshing.prime.autogen.hextospline import HexToSpline
+from ansys.meshing.prime.autogen.trimmedspline import TrimmedSpline
 from ansys.meshing.prime.autogen.sizefield import SizeField
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.transform import Transform
@@ -43,6 +45,7 @@ from ansys.meshing.prime.autogen.surferstructs import *
 from ansys.meshing.prime.autogen.scaffolderstructs import *
 from ansys.meshing.prime.autogen.automeshstructs import *
 from ansys.meshing.prime.autogen.igastructs import *
+from ansys.meshing.prime.autogen.trimmedsplinestructs import *
 from ansys.meshing.prime.autogen.surfacesearchstructs import *
 from ansys.meshing.prime.autogen.volumesearchstructs import *
 from ansys.meshing.prime.autogen.materialpointmanagerstructs import *
@@ -112,6 +115,11 @@ def local_model() -> Model:
 
     This imports the Ansys Prime Server environment into the Python process. It will
     error unless proper environment is set up to support Ansys Prime Server.
+
+    Returns
+    -------
+    Model
+            The local model
     '''
     model = __get_local_client().model
     model._sync_up_model()  # For running Python recipe directly on server, local model needs to be synced up with gRPC model

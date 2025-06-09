@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -28,7 +27,6 @@
 ########################### [TODO] ##################################
 
 import json
-import math
 import os
 import re
 from typing import Tuple
@@ -183,7 +181,7 @@ class _OutputIntervalProcessor:
     def write_interval_points_table_to_file(self, mapdl_commands):
         # with open(self._file_name, 'a') as file_time_pt:
         # file_time_pt.write(mapdl_commands)
-        if os.path.isfile(_AmplitudeProcessor._amplitude_file) == True:
+        if os.path.isfile(_AmplitudeProcessor._amplitude_file):
             with open(_AmplitudeProcessor._amplitude_file, 'w') as file_ampl:
                 file_ampl.write('/prep7\n')
         if _AmplitudeProcessor._amplitude_file:
@@ -395,7 +393,7 @@ class _AmplitudeProcessor:
 {0}(6,0,2)= 0.0
 {0}(0,1,2)= 1.0, -1, 0, {2}, 0, 0, 1
 {0}(0,2,2)= 0.0, -2, 0, 1, -1, 3, 1
-{0}(0,3,2)=   1, -1, 9, 1, -2, 0, 0
+{0}(0,3,2)=   0, -1, 9, 1, -2, 0, 0
 {0}(0,4,2)= 0.0, -2, 0, {1}, 0, 0, -1
 {0}(0,5,2)= 0.0, -3, 0, 1, -2, 3, -1
 {0}(0,6,2)= 0.0, 99, 0, 1, -3, 0, 0
@@ -495,7 +493,8 @@ class _AmplitudeProcessor:
         if "number_of_terms" in data:
             terms = int(data["number_of_terms"])
         if "circular_frequency" in data:
-            freq = float(data["circular_frequency"]) * 180 / math.pi
+            # freq = float(data["circular_frequency"]) * 180 / math.pi
+            freq = float(data["circular_frequency"])
         if "t0" in data:
             t0 = float(data["t0"])
         if "A0" in data:
@@ -683,6 +682,7 @@ class _MaterialProcessor:
             'EXPANSION': self._process_expansion_data,
             'DAMAGE EVOLUTION': self._process_damage_evolution_data,
             'DAMAGE INITIATION': self._process_damage_initiation_data,
+            'HYPERFOAM': self._process_hyperfoam_data,
         }
         self._model = model
         self._logger = model.python_logger
@@ -762,6 +762,7 @@ class _MaterialProcessor:
             "EXPANSION",
             'DAMAGE INITIATION',
             'DAMAGE EVOLUTION',
+            'HYPERFOAM',
         ]
         # self._logger.info(mat_data)
         mapdl_text_data = ""
@@ -777,9 +778,10 @@ class _MaterialProcessor:
             if prop == 'id':
                 continue
             elif prop not in processed_entities:
-                self._logger.warning(
-                    f"The property {prop} for Material {material} is not processed."
-                )
+                if prop not in ['HMComments', 'Comments', "UNIAXIAL TEST DATA"]:
+                    self._logger.warning(
+                        f"The property {prop} for Material {material} is not processed."
+                    )
                 continue
             function = self._property_function_map[prop]
             mapdl_text_data += function(mat_data[prop], material, self._mat_id)
@@ -862,6 +864,199 @@ class _MaterialProcessor:
                 damage_init_data += f"TBPT, DEFI, {ts}, {fs}\n"
             damage_init_data += "\n"
         return damage_init_data
+
+    def _process_hyperfoam_data(self, property_dict, material, mat_id):
+        hyperfoam_data = ''
+        data = []
+        parameters = []
+        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
+            parameters = property_dict['Parameters']
+        if 'Data' in property_dict and property_dict['Data'] is not None:
+            data = property_dict['Data']
+        n = 1
+        if 'N' in parameters:
+            n = int(parameters['N'])
+        poisson = None
+        if 'POISSON' in parameters:
+            poisson = float(parameters['POISSON'])
+        if 'TEST DATA INPUT' in parameters:
+            uniaxial_test_data = []
+            if 'UNIAXIAL TEST DATA' in self._raw_materials_data[material]:
+                if 'Data' in self._raw_materials_data[material]['UNIAXIAL TEST DATA']:
+                    uniaxial_test_data = self._raw_materials_data[material]['UNIAXIAL TEST DATA'][
+                        'Data'
+                    ]
+            hyperfoam_data = self._hyperfoam_with_test_data(n, uniaxial_test_data, poisson, mat_id)
+        else:
+            hyperfoam_data = self._hyperfoam_with_coeffs(n, data, mat_id)
+        self._logger.warning(f"{property_dict}")
+        self._logger.warning(f"{self._raw_materials_data[material]['UNIAXIAL TEST DATA']}")
+        return hyperfoam_data
+
+    def _hyperfoam_with_coeffs(self, n, data, mat_id):
+        hyperfoam_coeff_data = ''
+        u1 = data['u1']
+        a1 = data['a1']
+        v1 = [0.0] * len(u1)
+        if 'v1' in data and data['v1'] is not None:
+            v1 = data['v1']
+        if n > 1:
+            u2 = data['u2']
+            a2 = data['a2']
+            v2 = [0.0] * len(u2)
+            if 'v2' in data and data['v2'] is not None:
+                v2 = data['v2']
+        if n > 2:
+            u3 = data['u3']
+            a3 = data['a3']
+            v3 = [0.0] * len(u3)
+            if 'v3' in data and data['v3'] is not None:
+                v3 = data['v3']
+        if n > 3:
+            u4 = data['u4']
+            a4 = data['a4']
+            v4 = [0.0] * len(u4)
+            if 'v4' in data and data['v4'] is not None:
+                v4 = data['v4']
+        if n > 4:
+            u5 = data['u5']
+            a5 = data['a5']
+            v5 = [0.0] * len(u5)
+            if 'v5' in data and data['v5'] is not None:
+                v5 = data['v5']
+        if n > 5:
+            u6 = data['u6']
+            a6 = data['a6']
+            v6 = [0.0] * len(u6)
+            if 'v6' in data and data['v6'] is not None:
+                v6 = data['v6']
+        temperature = [None] * len(u1)
+        if 'Temperature' in data:
+            temperature = data['Temperature']
+
+        hyperfoam_coeff_data += f"TB, HYPE, {mat_id},,{n},FOAM"
+        for i in range(len(temperature)):
+            if temperature[i] is not None:
+                hyperfoam_coeff_data += f"TBTEMP,{temperature[i]}\n"
+            u1a = 2 * u1[i] / a1[i]
+            a1a = a1[i]
+            hyperfoam_coeff_data += f"TBDATA, 1, {u1a}, {a1a}"
+            if n > 1:
+                u2a = 2 * u2[i] / a2[i]
+                a2a = a2[i]
+                hyperfoam_coeff_data += f", {u2a}, {a2a}"
+            if n > 2:
+                u3a = 2 * u3[i] / a3[i]
+                a3a = a3[i]
+                hyperfoam_coeff_data += f", {u3a}, {a3a}"
+            if n > 3:
+                u4a = 2 * u4[i] / a4[i]
+                a4a = a4[i]
+                hyperfoam_coeff_data += "\n"
+                hyperfoam_coeff_data += f"TBDATA, 7, {u4a}, {a4a}"
+            if n > 4:
+                u5a = 2 * u5[i] / a5[i]
+                a5a = a5[i]
+                hyperfoam_coeff_data += f", {u5a}, {a6a}"
+            if n > 5:
+                u6a = 2 * u6[i] / a6[i]
+                a6a = a6[i]
+                hyperfoam_coeff_data += f", {u6a}, {a6a}"
+            hyperfoam_coeff_data += "\n"
+
+            b1a = v1[i] / (1 - 2 * v1[i])
+            hyperfoam_coeff_data += f"TBDATA, {n*2 + 1}, {b1a}"
+            if n > 1:
+                b2a = v2[i] / (1 - 2 * v2[i])
+                hyperfoam_coeff_data += f", {b2a}"
+            if n > 2:
+                b3a = v3[i] / (1 - 2 * v3[i])
+                hyperfoam_coeff_data += f", {b3a}"
+            if n > 3:
+                b4a = v4[i] / (1 - 2 * v4[i])
+                hyperfoam_coeff_data += f", {b4a}"
+            if n > 4:
+                b5a = v5[i] / (1 - 2 * v5[i])
+                hyperfoam_coeff_data += f", {b5a}"
+            if n > 5:
+                b6a = v6[i] / (1 - 2 * v6[i])
+                hyperfoam_coeff_data += f", {b6a}"
+            hyperfoam_coeff_data += "\n"
+        return hyperfoam_coeff_data
+
+    def _hyperfoam_with_test_data(self, n, data, poisson, mat_id):
+        stress = data['Nominal stress']
+        strain = data['Nominal strain']
+        lateral_strain = [0.0] * len(stress)
+        lateral_strain_key = (
+            "Nominal lateral strain, . Default is zero. Not needed if the POISSON "
+            "parameter is specified on the *HYPERFOAM option"
+        )
+        if lateral_strain_key in data:
+            lateral_strain = data[lateral_strain_key]
+        if poisson is None:
+            poisson = float(lateral_strain[0])
+        beta_ansys = poisson / (1 - 2 * poisson)
+        hyperfoam_test_to_data = ''
+        hyperfoam_test_to_data += f'*create, unia_test_material_{mat_id}.exp\n'
+        hyperfoam_test_to_data += f'/1, epto\n'
+        hyperfoam_test_to_data += f'/2, s\n'
+        for i in range(len(stress)):
+            hyperfoam_test_to_data += f'{strain[i]}, {stress[i]}\n'
+        hyperfoam_test_to_data += f'*end\n'
+
+        hyperfoam_test_to_data += f"TB, HYPE, {mat_id},,{n},FOAM\n"
+        hyperfoam_test_to_data += f"TBTEMP,0\n"
+
+        hyperfoam_test_to_data += f"TBDATA, 1, 1, 1"
+        if n > 1:
+            hyperfoam_test_to_data += f", 1, 1"
+        if n > 2:
+            hyperfoam_test_to_data += f", 1, 1"
+        if n > 3:
+            hyperfoam_test_to_data += "\n"
+            hyperfoam_test_to_data += f"TBDATA, 7, 1, 1"
+        if n > 4:
+            hyperfoam_test_to_data += f", 1, 1"
+        if n > 5:
+            hyperfoam_test_to_data += f", 1, 1"
+        hyperfoam_test_to_data += "\n"
+
+        hyperfoam_test_to_data += f"TBDATA, {n*2 + 1}, {beta_ansys}"
+        if n > 1:
+            hyperfoam_test_to_data += f", {beta_ansys}"
+        if n > 2:
+            hyperfoam_test_to_data += f", {beta_ansys}"
+        if n > 3:
+            hyperfoam_test_to_data += f", {beta_ansys}"
+        if n > 4:
+            hyperfoam_test_to_data += f", {beta_ansys}"
+        if n > 5:
+            hyperfoam_test_to_data += f", {beta_ansys}"
+        hyperfoam_test_to_data += "\n"
+
+        hyperfoam_test_to_data += f'\n'
+        hyperfoam_test_to_data += f'TBFT, EADD, {mat_id}, UNIA, unia_test_material_{mat_id}.exp\n'
+        hyperfoam_test_to_data += f'TBFT, FADD, {mat_id}, HYPER, FOAM, {n}\n'
+        for i in range(1, n + 1):
+            hyperfoam_test_to_data += f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2*i-1}, 0.001\n'
+            hyperfoam_test_to_data += f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2*i}, 0.001\n'
+        for i in range(1, n + 1):
+            hyperfoam_test_to_data += (
+                f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2*n+i}, {beta_ansys}\n'
+            )
+        hyperfoam_test_to_data += f'\n'
+        for i in range(1, n + 1):
+            hyperfoam_test_to_data += f'TBFT, FIX, {mat_id}, HYPER, FOAM, {n}, {2*n+i}, 1\n'
+        hyperfoam_test_to_data += f'\n'
+        # hyperfoam_test_to_data += f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, TREF, 0\n'
+        # hyperfoam_test_to_data += f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, TDEP, 0\n'
+        hyperfoam_test_to_data += f'\n'
+        hyperfoam_test_to_data += f'TBFT, SOLVE, {mat_id}, HYPER, FOAM, {n}, 1, 100, 0, 0\n'
+        hyperfoam_test_to_data += f'\n'
+        hyperfoam_test_to_data += f'TBFT, FSET, {mat_id}, HYPER, FOAM, {n}\n'
+
+        return hyperfoam_test_to_data
 
     def _process_damage_evolution_data(self, property_dict, material, mat_id):
 
@@ -1167,7 +1362,7 @@ class _MaterialProcessor:
         plastic_data += f"TB,PLAS,{mat_id},,{int(data_points)},MISO\n"
         curr_temp = None
         for i, strain in enumerate(strains):
-            if 'Temperature' in data and skip_temp != True:
+            if 'Temperature' in data and not skip_temp:
                 if curr_temp != temperature[i]:
                     curr_temp = temperature[i]
                     plastic_data += f"TBTEMP,{curr_temp}\n"
@@ -1415,9 +1610,10 @@ class _JointMaterialProcessor:
             if prop == 'id' or prop == "CONNECTOR CONSTITUTIVE REFERENCE":
                 continue
             elif prop not in processed_entities:
-                self._logger.warning(
-                    f"The property {prop} for Material {material} is not processed."
-                )
+                if prop not in ['HMComments', 'Comments']:
+                    self._logger.warning(
+                        f"The property {prop} for Material {material} is not processed."
+                    )
                 continue
             function = self._property_function_map[prop]
             mapdl_text_data += function(mat_data[prop], material, self._mat_id)
@@ -1487,6 +1683,7 @@ class _JointMaterialProcessor:
         if all_linear or all_rigid:
             elasticity_data += f"TB, JOIN, {mat_id}, 1,, STIF\n"
         if not all_rigid:
+            diagonal_stiffness = ["1", "2", "3", "4", "5", "6"]
             for comp_data in property_dict:
                 # self._logger.info(comp_data)
                 if 'Parameters' not in comp_data:
@@ -1650,10 +1847,11 @@ class _JointMaterialProcessor:
                                 f"tempereture dependent values are not processed"
                             )
                         clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                        stiff_val = float(comp_data['Data']['Stiffness'][0]) * 1000
                         elasticity_data += f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
-                        elasticity_data += f"TBPT, , -1.0, -{comp_data['Data']['Stiffness'][0]}\n"
-                        elasticity_data += f"TBPT, , 0.0, 0.0\n"
-                        elasticity_data += f"TBPT, , 1.0, {comp_data['Data']['Stiffness'][0]}\n"
+                        elasticity_data += f"TBPT, , -1000.0, -{stiff_val}\n"
+                        elasticity_data += "TBPT, , 0.0, 0.0\n"
+                        elasticity_data += f"TBPT, , 1000.0, {stiff_val}\n"
                     else:
                         if len(comp_data['Data']['Stiffness']) != 1:
                             self._logger.warning(
@@ -1664,6 +1862,19 @@ class _JointMaterialProcessor:
                         clms = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
                         cds = comp_data['Data']['Stiffness'][0]
                         elasticity_data += f"TBDATA, {clms}, {cds}\n"
+                        if comp_data['Parameters']['COMPONENT'] in diagonal_stiffness:
+                            diagonal_stiffness.remove(comp_data['Parameters']['COMPONENT'])
+            insert_stiffness = os.getenv("MAPDL_JOINT_SMALL_STIFF")
+            if (
+                insert_stiffness
+                and insert_stiffness.lower().strip() == 'true'
+                and len(diagonal_stiffness) != 6
+            ):
+                for component_number in diagonal_stiffness:
+                    # if component_number in ['4','5','6']:
+                    clms = comps_linear_mapping[component_number]
+                    cds = "0.000001"
+                    elasticity_data += f"TBDATA, {clms}, {cds}\n"
         else:
             elasticity_data += f"TBDATA,  1, 1e6\n"
             elasticity_data += f"TBDATA,  7, 1e6\n"
@@ -1761,10 +1972,11 @@ class _JointMaterialProcessor:
                             f"tempereture dependent values are not processed"
                         )
                     s1 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                    damp_coeff = float(comp_data['Data']['damping_coeff'][0]) * 1000
                     damping_data += f"TB, JOIN, {mat_id}, 1, 3, {s1}\n"
-                    damping_data += f"TBPT, , -1.0, -{comp_data['Data']['damping_coeff'][0]}\n"
-                    damping_data += f"TBPT, , 0.0, 0.0\n"
-                    damping_data += f"TBPT, , 1.0, {comp_data['Data']['damping_coeff'][0]}\n"
+                    damping_data += f"TBPT, , -1000.0, -{damp_coeff}\n"
+                    damping_data += "TBPT, , 0.0, 0.0\n"
+                    damping_data += f"TBPT, , 1000.0, {damp_coeff}\n"
                 else:
                     # self._logger.info('linear')
                     if len(comp_data['Data']['damping_coeff']) != 1:
@@ -2697,7 +2909,7 @@ class _GlobalDampingProcessing:
                 self._logger.warning(
                     'Global damping under STEP is not processed. Please check the results'
                 )
-        return damping_commands
+        return damping_commands, structural
 
 
 class _StepProcessor:
@@ -2726,6 +2938,7 @@ class _StepProcessor:
         '_logger',
         '_model_application',
         '_transient_output_controls',
+        '_global_structural_damping_value',
     )
 
     def __init__(self, model: prime.Model, data, sim_data, model_application):
@@ -2753,6 +2966,7 @@ class _StepProcessor:
         self._logger = model.python_logger
         self._model_application = model_application
         self._transient_output_controls = ""
+        self._global_structural_damping_value = 0.0
 
     def get_cload_ampl_commands(self):
         return self._cload_ampl_commands
@@ -2806,6 +3020,7 @@ class _StepProcessor:
                 time_increment = float(data['time_increment'])
             if 'time_period' in data:
                 time_period = float(data['time_period'])
+                min_time_increment = time_period * 1e-05
             if 'min_time_increment' in data:
                 min_time_increment = float(data['min_time_increment'])
             if 'max_time_increment' in data:
@@ -2821,7 +3036,7 @@ class _StepProcessor:
         time_interval_val = self.get_output_time_interval()
         if time_interval_val != 0.0:
             time_increment = time_interval_val
-            min_time_increment = time_interval_val
+            # min_time_increment = time_interval_val
             max_time_increment = time_interval_val
             # if time_increment > time_interval_val:
             # time_increment = time_interval_val
@@ -2851,8 +3066,9 @@ class _StepProcessor:
             else:
                 static_analysis_commands += 'ANTYPE, STATIC\n'
         static_analysis_commands += f'TIME,{self._time}\n'
+        static_analysis_commands += f'AUTOTS,ON\n'
         static_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n'
+            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}, , FORCE\n'
         )
         static_analysis_commands += '\n'
         self._previous_analysis = "STATIC"
@@ -2912,7 +3128,7 @@ class _StepProcessor:
             f'! ---------------------------- STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis == "STATIC":
-            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,1\n'
+            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
             dynamic_analysis_commands += '\n'
             dynamic_analysis_commands += 'SOLO,STOT,FORCE,HHT\n'
             dynamic_analysis_commands += '\n'
@@ -2928,6 +3144,8 @@ class _StepProcessor:
             dynamic_analysis_commands += 'IC,ALL,DMGX,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGY,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGZ,0,,,,LSIC\n'
+            dynamic_analysis_commands += '\n'
+            dynamic_analysis_commands += 'NROPT,FULL\n'
             dynamic_analysis_commands += '\n'
         if self._previous_analysis == "FREQUENCY":
             dynamic_analysis_commands += f'FINISH\n'
@@ -2984,6 +3202,7 @@ class _StepProcessor:
                 time_increment = float(data['time_increment'])
             if 'time_period' in data:
                 time_period = float(data['time_period'])
+                min_time_increment = time_period * 1e-5
             if 'min_time_increment' in data:
                 min_time_increment = float(data['min_time_increment'])
             if 'max_time_increment' in data:
@@ -3001,7 +3220,7 @@ class _StepProcessor:
         time_interval_val = self.get_output_time_interval()
         if time_interval_val != 0:
             time_increment = time_interval_val
-            min_time_increment = time_interval_val
+            # min_time_increment = time_interval_val
             max_time_increment = time_interval_val
             # if time_increment > time_interval_val:
             # time_increment = time_interval_val
@@ -3024,7 +3243,7 @@ class _StepProcessor:
             f'! ------------------------- STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis == "STATIC":
-            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,1\n'
+            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
             dynamic_analysis_commands += '\n'
             dynamic_analysis_commands += 'SOLO,STOT,FORCE,HHT\n'
             dynamic_analysis_commands += '\n'
@@ -3040,6 +3259,8 @@ class _StepProcessor:
             dynamic_analysis_commands += 'IC,ALL,DMGX,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGY,0,,,,LSIC\n'
             dynamic_analysis_commands += 'IC,ALL,DMGZ,0,,,,LSIC\n'
+            dynamic_analysis_commands += '\n'
+            dynamic_analysis_commands += 'NROPT,FULL\n'
             dynamic_analysis_commands += '\n'
         if self._previous_analysis == "FREQUENCY":
             dynamic_analysis_commands += f'FINISH\n'
@@ -3060,8 +3281,9 @@ class _StepProcessor:
         if transient_integration_param:
             dynamic_analysis_commands += f'TINTP, {transient_integration_param}\n'
         dynamic_analysis_commands += f'TIME, {self._time}\n'
+        dynamic_analysis_commands += f'AUTOTS,ON\n'
         dynamic_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n'
+            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment},, FORCE\n'
         )
         dynamic_analysis_commands += f'\n'
         if res_modes:
@@ -3121,6 +3343,8 @@ class _StepProcessor:
                 res_modes = 'ON'
                 self._previous_modal_resvec = 'ON'
         if self._simulation_data is not None:
+            if "GlobalDamping" in self._curr_step and self._curr_step['GlobalDamping']:
+                modopt_method = 'QRDAMP'
             if "ConnectorBehavior" in self._simulation_data:
                 all_conn_behavior = self._simulation_data['ConnectorBehavior']
                 if all_conn_behavior:
@@ -3182,6 +3406,12 @@ class _StepProcessor:
         )
         if res_modes:
             frequency_analysis_commands += f'RESVEC, {res_modes}\n'
+            if not (
+                ("Boundary" in self._curr_step and self._curr_step['Boundary'])
+                or ("Boundary" in self._simulation_data and self._simulation_data['Boundary'])
+            ):
+                frequency_analysis_commands += 'KEYW, BETA, 1\n'
+                frequency_analysis_commands += 'AIRL, AUTO, 1\n'
         if (
             "MODAL DYNAMIC" in self._analysis_sequence
             or "STEADY STATE DYNAMICS" in self._analysis_sequence
@@ -3301,7 +3531,7 @@ class _StepProcessor:
                         for modal_ouput in output['Data']['ModalOutput']:
                             # modal_ouput = output['ModalOutput']
                             for key in modal_ouput['Data']['keys']:
-                                if key in ["GV", "GA", "GPV", "GPA", "A1", "A2", "A3"]:
+                                if key in ["GV", "GA", "GPV", "GPA", 'A', "A1", "A2", "A3"]:
                                     has_velocities = True
         return has_modal_output, has_velocities
 
@@ -3368,12 +3598,12 @@ class _StepProcessor:
             output_analysis_commands += "OUTRES, ERASE\n"
             output_analysis_commands += "OUTRES, ALL, NONE\n"
             if time_points:
-                output_analysis_commands += f"! OUTRES, EANGL, %{time_points}%\n"
+                output_analysis_commands += f"OUTRES, EANGL, %{time_points}%\n"
             else:
                 # output_analysis_commands += "OUTRES, ALL, NONE\n"
                 # TODO Removed this line to avoid complications of
                 # multiple tabular output controls with NINTERVAL
-                output_analysis_commands += "! OUTRES, EANGL, NONE\n"
+                output_analysis_commands += "OUTRES, EANGL, NONE\n"
                 pass
             output_analysis_commands += "\n"
 
@@ -3472,6 +3702,7 @@ class _StepProcessor:
                                     "U1",
                                     "U2",
                                     "U3",
+                                    "A",
                                     "A1",
                                     "A2",
                                     "A3",
@@ -3524,7 +3755,17 @@ class _StepProcessor:
                                                 output_analysis_commands += f'{nfreq}, '
                                             else:
                                                 output_analysis_commands += 'ALL, '
-                                    elif key in ["U", "UT", "U1", "U2", "U3", "A1", "A2", "A3"]:
+                                    elif key in [
+                                        "U",
+                                        "UT",
+                                        "U1",
+                                        "U2",
+                                        "U3",
+                                        'A',
+                                        "A1",
+                                        "A2",
+                                        "A3",
+                                    ]:
                                         output_analysis_commands += "NSOL, "
                                         if time_points is not None:
                                             output_analysis_commands += f'%{time_points}%, '
@@ -3801,6 +4042,10 @@ class _StepProcessor:
                                                     )
                                                 )
                                     output_analysis_commands += ', ,\n'
+                                    last_line = output_analysis_commands.split("\n")[-2]
+                                    if "STRS" in last_line and ", SEAM_WELD," in last_line:
+                                        new_line = last_line.replace("STRS", "EANGL")
+                                        output_analysis_commands += new_line + "\n"
                                 else:
                                     self._logger.warning(
                                         f"warning: element output key '{key}' is not processed."
@@ -4024,9 +4269,17 @@ class _StepProcessor:
 
     def get_global_damping_commnads(self, global_damping_data):
         global_damping_processor = _GlobalDampingProcessing(self._model, global_damping_data)
-        global_damping_commands = global_damping_processor.get_global_damping_commands(
+        (
+            global_damping_commands,
+            global_structural_damping,
+        ) = global_damping_processor.get_global_damping_commands(
             self._previous_analysis, self._step_MSUP
         )
+        if (
+            'Frequency' in self._curr_step
+            or self._analysis_sequence[self._step_counter - 1] == "FREQUENCY"
+        ):
+            self._global_structural_damping_value += global_structural_damping
         return global_damping_commands
 
     def get_monitor_commands(self, monitor_data):
@@ -4093,11 +4346,27 @@ class _StepProcessor:
                 # self._logger.info('in Keys')
                 # self._logger.info(function_maps(step_data[key]))
                 function = function_maps[key]
+                global_damp_value = 0.0
+                if self._global_structural_damping_value:
+                    global_damp_value = self._global_structural_damping_value
                 key_commands = function(step_data[key])
+                # if key == "GlobalDamping" and global_damp_value and (
+                #     'SteadyStateDynamics' in step_data or
+                #     'ModalDynamic' in step_data
+                # ):
+                if (
+                    key == "GlobalDamping"
+                    and global_damp_value
+                    and 'SteadyStateDynamics' in step_data
+                ):
+                    key_commands = ""
+                if key == "GlobalDamping" and 'Frequency' in step_data:
+                    key_commands = "Placeholder_GlobalDamping\n"
                 mapdl_step_commands += key_commands
                 if key == "Output" and "Dynamic" in step_data:
                     if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         self._transient_output_controls = key_commands
+                        self._transient_output_controls += "\nNROPT,FULL\n"
                 if key == "Output" and "Static" in step_data:
                     if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         mapdl_step_commands += "Placeholder_Transient_Outres\n"
@@ -4125,7 +4394,7 @@ class _StepProcessor:
         mapdl_step_commands += 'DMPOPT, MODE,  YES \n'
         mapdl_step_commands += 'DMPOPT,  MLV,  NO \n'
         mapdl_step_commands += '\n'
-        if self._step_counter == 1:
+        if self._step_counter == 1 or 'AIRL, AUTO' in mapdl_step_commands:
             mapdl_step_commands += '/GST, ON, ON\n'
             mapdl_step_commands += '! Compress contact printout\n'
             mapdl_step_commands += 'CNTR, OUT, yes\n'
@@ -4153,10 +4422,16 @@ class _StepProcessor:
         for step_data in self._steps_data:
             # self._logger.info(step_data)
             self._step_counter += 1
-            mapdl_commands.append(self._process_step(step_data))
+            current_step_data = self._process_step(step_data)
+            if 'AIRL, AUTO' in current_step_data:
+                mapdl_commands = []
+            mapdl_commands.append(current_step_data)
 
         steps_commands = '\n'.join(mapdl_commands)
-
+        if "Placeholder_GlobalDamping" in steps_commands:
+            steps_commands = steps_commands.replace(
+                "Placeholder_GlobalDamping", f"DMPSTR, {self._global_structural_damping_value}"
+            )
         if "Placeholder_Transient_Outres" in steps_commands and not self._transient_output_controls:
             updated_steps_commands = steps_commands.replace("Placeholder_Transient_Outres", "")
         elif "Placeholder_Transient_Outres" in steps_commands and self._transient_output_controls:
@@ -4468,6 +4743,8 @@ def generate_mapdl_commands(
     analysis_settings += (
         '!--------------------------------------------------------------------------\n'
     )
+    # analysis_settings += '/copy,file0,err,,errfile,tmp\n'
+    # analysis_settings += '\n'
     analysis_settings += '/delete,,cnm,,1\n'
     analysis_settings += '/delete,,DSP,,\n'
     analysis_settings += '/delete,,mcf,,\n'
@@ -4482,13 +4759,15 @@ def generate_mapdl_commands(
     # analysis_settings += '/delete,,rfrq,,1\n'
     analysis_settings += '/delete,,out,,1\n'
     # analysis_settings += '/delete,harmonic,rst,,1\n'
-    analysis_settings += '/delete,,mntr,,\n'
+    analysis_settings += '!/delete,,mntr,,\n'
     analysis_settings += '/delete,,ldhi,,\n'
     analysis_settings += '/delete,,r001,,1\n'
     analysis_settings += '/delete,,rst,,1\n'
     analysis_settings += '/delete,,stat,,1\n'
     analysis_settings += '/delete,,db,,\n'
     analysis_settings += '/delete,,rdb,,\n'
+    # analysis_settings += '\n'
+    # analysis_settings += '/rename,errfile,tmp,,file,err\n'
     if "Step" in json_simulation_data:
         for an_name in steps_data._assign_analysis:
             analysis_settings += f'/delete,{an_name},rst,,1\n'

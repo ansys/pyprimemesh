@@ -59,3 +59,5 @@ repos:
   rev: v0.2.8
   hooks:
     - id: add-license-headers
+      args:
+          - LICENSE

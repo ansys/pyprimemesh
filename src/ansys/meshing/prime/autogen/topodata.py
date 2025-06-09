@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -194,6 +194,40 @@ class TopoData(CoreObject):
         self._model._print_logs_before_command("get_topo_edges_of_topo_faces", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_topo_edges_of_topo_faces")
+        return result
+
+    def get_topo_volumes_of_topo_faces(self, topo_faces : Iterable[int]) -> Iterable[int]:
+        """ Gets the topovolumes of the given topofaces.
+
+
+        Parameters
+        ----------
+        topo_faces : Iterable[int]
+            Ids of the topofaces.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the list of topovolume ids.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> topovolumes = topo_data.get_topo_volumes_of_topo_faces(topo_faces)
+
+        """
+        if not isinstance(topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
+        args = {"topo_faces" : topo_faces}
+        command_name = "PrimeMesh::TopoData/GetTopoVolumesOfTopoFaces"
+        self._model._print_beta_api_warning("get_topo_volumes_of_topo_faces")
+        self._model._print_logs_before_command("get_topo_volumes_of_topo_faces", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_topo_volumes_of_topo_faces")
         return result
 
     def get_adjacent_topo_faces_of_topo_faces(self, topo_faces : Iterable[int]) -> Iterable[int]:

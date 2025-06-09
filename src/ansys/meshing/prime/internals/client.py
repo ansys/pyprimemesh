@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -65,6 +64,7 @@ class Client(object):
         port: int = defaults.port(),
         timeout: float = defaults.connection_timeout(),
         credentials=None,
+        communicator_type="grpc",
         **kwargs,
     ):
         """Initialize the client."""
@@ -75,31 +75,42 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
-        self._has_exited = False
         if not local:
-            try:
-                from ansys.meshing.prime.internals.grpc_communicator import (
-                    GRPCCommunicator,
-                )
-
-                channel = kwargs.get('channel', None)
-                if channel is not None:
-                    self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
-                else:
-                    self._comm = GRPCCommunicator(
-                        ip=ip, port=port, timeout=timeout, credentials=credentials
+            if communicator_type == "grpc":
+                try:
+                    from ansys.meshing.prime.internals.grpc_communicator import (
+                        GRPCCommunicator,
                     )
-                    setattr(self, 'port', port)
-            except ImportError as err:
-                logging.getLogger('PyPrimeMesh').error(
-                    f'Failed to load grpc_communicator with message: {err.msg}'
-                )
-                raise
-            except ConnectionError:
-                self.exit()
 
-                logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
+                    channel = kwargs.get('channel', None)
+                    if channel is not None:
+                        self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
+                    else:
+                        self._comm = GRPCCommunicator(
+                            ip=ip, port=port, timeout=timeout, credentials=credentials
+                        )
+                        setattr(self, 'port', port)
+                except ImportError as err:
+                    logging.getLogger('PyPrimeMesh').error(
+                        f'Failed to load grpc_communicator with message: {err.msg}'
+                    )
+                    raise
+                except ConnectionError:
+                    self.exit()
+
+                    logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
+                    raise
+            elif communicator_type == "socket":
+                from ansys.meshing.prime.internals.socket_communicator import (
+                    SocketCommunicator,
+                )
+
+                self._comm = SocketCommunicator(ip=ip, port=port)
+                setattr(self, 'port', port)
+            else:
+                logging.getLogger('PyPrimeMesh').error(f'Invalid server type: {communicator_type}')
                 raise
+
         else:
             try:
                 from ansys.meshing.prime.internals.prime_communicator import (
@@ -111,10 +122,6 @@ class Client(object):
                 logging.getLogger('PyPrimeMesh').error(
                     f'Failed to load prime_communicator with message: {err.msg}'
                 )
-
-    def __del__(self):
-        """In case unexpected termination, close the connection."""
-        self.exit()
 
     @property
     def model(self):
@@ -159,27 +166,25 @@ class Client(object):
         >>> print(result)
         >>> prime_client.exit() # Sever connection with server and kill the server.
         """
-        if not self._has_exited:
-            if self._comm is not None:
-                self._comm.close()
-                self._comm = None
-            if self._process is not None:
-                assert self._local == False
-                terminate_process(self._process)
-                self._process = None
+        if self._comm is not None:
+            self._comm.close()
+            self._comm = None
+        if self._process is not None:
+            assert self._local == False
+            terminate_process(self._process)
+            self._process = None
 
-            if config.using_container():
-                container_name = getattr(self, 'container_name')
-                utils.stop_prime_github_container(container_name)
-            elif config.has_pim():
-                self.remote_instance.delete()
-                self.pim_client.close()
+        if config.using_container():
+            container_name = getattr(self, 'container_name')
+            utils.stop_prime_github_container(container_name)
+        elif config.has_pim():
+            self.remote_instance.delete()
+            self.pim_client.close()
 
-            clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
-            if clear_examples:
-                download_manager = examples.DownloadManager()
-                download_manager.clear_download_cache()
-        self._has_exited = True
+        clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
+        if clear_examples:
+            download_manager = examples.DownloadManager()
+            download_manager.clear_download_cache()
 
     def __enter__(self):
         """Open client."""

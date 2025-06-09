@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -69,6 +69,22 @@ class CreateVolumeZonesType(enum.IntEnum):
     """Option to create volume zone per volume. Suffix is added to volume zone name, if same name is identified for different volumes using face zonelets."""
     PERNAMESOURCE = 2
     """Option to create zone per name computed from face zonelets of volume. Single zone is created for multiple volumes if same zone name is identified using face zonelets for the volumes."""
+
+class BodyQueryType(enum.IntEnum):
+    """Indicates type of entity to query in part.
+    """
+    ALL = 0
+    """Returns all entities in part.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    FREE = 1
+    """Returns only free entities in part.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    NONFREE = 2
+    """Returns entities associated with non-free body in part.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class BoundingBox(CoreObject):
     """Provides information about the definition of a bounding box.
@@ -2138,6 +2154,309 @@ class PartSummaryParams(CoreObject):
     @print_mesh.setter
     def print_mesh(self, value: bool):
         self._print_mesh = value
+
+class ComponentChildrenParams(CoreObject):
+    """Parameters associated with querying child components.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComponentChildrenParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComponentChildrenParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> component_children_params = prime.ComponentChildrenParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ComponentChildrenParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ComponentChildrenParams`` object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a ``ComponentChildrenParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> component_children_params = prime.ComponentChildrenParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ComponentChildrenParams")
+                    json_data = param_json["ComponentChildrenParams"] if "ComponentChildrenParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of the ``ComponentChildrenParams`` object.
+
+        """
+        args = locals()
+        [ComponentChildrenParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ComponentChildrenParams`` object.
+
+        Examples
+        --------
+        >>> ComponentChildrenParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ComponentChildrenParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
+        return message
+
+class ComponentChildrenResults(CoreObject):
+    """Results associated with querying child components.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``ComponentChildrenResults`` object with default parameters.
+    component_ids: Iterable[int], optional
+        Ids of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    component_names: List[str], optional
+        Names of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    body_ids: Iterable[int], optional
+        Ids of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    body_names: List[str], optional
+        Names of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data: dict, optional
+        JSON dictionary to create a ``ComponentChildrenResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> component_children_results = prime.ComponentChildrenResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            component_ids: Iterable[int],
+            component_names: List[str],
+            body_ids: Iterable[int],
+            body_names: List[str]):
+        self._component_ids = component_ids if isinstance(component_ids, np.ndarray) else np.array(component_ids, dtype=np.int32) if component_ids is not None else None
+        self._component_names = component_names
+        self._body_ids = body_ids if isinstance(body_ids, np.ndarray) else np.array(body_ids, dtype=np.int32) if body_ids is not None else None
+        self._body_names = body_names
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            component_ids: Iterable[int] = None,
+            component_names: List[str] = None,
+            body_ids: Iterable[int] = None,
+            body_names: List[str] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ComponentChildrenResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``ComponentChildrenResults`` object with default parameters.
+        component_ids: Iterable[int], optional
+            Ids of components that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        component_names: List[str], optional
+            Names of components that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        body_ids: Iterable[int], optional
+            Ids of bodies that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        body_names: List[str], optional
+            Names of bodies that are queried.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data: dict, optional
+            JSON dictionary to create a ``ComponentChildrenResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> component_children_results = prime.ComponentChildrenResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["componentIds"] if "componentIds" in json_data else None,
+                json_data["componentNames"] if "componentNames" in json_data else None,
+                json_data["bodyIds"] if "bodyIds" in json_data else None,
+                json_data["bodyNames"] if "bodyNames" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [component_ids, component_names, body_ids, body_names])
+            if all_field_specified:
+                self.__initialize(
+                    component_ids,
+                    component_names,
+                    body_ids,
+                    body_names)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ComponentChildrenResults")
+                    json_data = param_json["ComponentChildrenResults"] if "ComponentChildrenResults" in param_json else {}
+                    self.__initialize(
+                        component_ids if component_ids is not None else ( ComponentChildrenResults._default_params["component_ids"] if "component_ids" in ComponentChildrenResults._default_params else (json_data["componentIds"] if "componentIds" in json_data else None)),
+                        component_names if component_names is not None else ( ComponentChildrenResults._default_params["component_names"] if "component_names" in ComponentChildrenResults._default_params else (json_data["componentNames"] if "componentNames" in json_data else None)),
+                        body_ids if body_ids is not None else ( ComponentChildrenResults._default_params["body_ids"] if "body_ids" in ComponentChildrenResults._default_params else (json_data["bodyIds"] if "bodyIds" in json_data else None)),
+                        body_names if body_names is not None else ( ComponentChildrenResults._default_params["body_names"] if "body_names" in ComponentChildrenResults._default_params else (json_data["bodyNames"] if "bodyNames" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            component_ids: Iterable[int] = None,
+            component_names: List[str] = None,
+            body_ids: Iterable[int] = None,
+            body_names: List[str] = None):
+        """Set the default values of the ``ComponentChildrenResults`` object.
+
+        Parameters
+        ----------
+        component_ids: Iterable[int], optional
+            Ids of components that are queried.
+        component_names: List[str], optional
+            Names of components that are queried.
+        body_ids: Iterable[int], optional
+            Ids of bodies that are queried.
+        body_names: List[str], optional
+            Names of bodies that are queried.
+        """
+        args = locals()
+        [ComponentChildrenResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ComponentChildrenResults`` object.
+
+        Examples
+        --------
+        >>> ComponentChildrenResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ComponentChildrenResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._component_ids is not None:
+            json_data["componentIds"] = self._component_ids
+        if self._component_names is not None:
+            json_data["componentNames"] = self._component_names
+        if self._body_ids is not None:
+            json_data["bodyIds"] = self._body_ids
+        if self._body_names is not None:
+            json_data["bodyNames"] = self._body_names
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "component_ids :  %s\ncomponent_names :  %s\nbody_ids :  %s\nbody_names :  %s" % (self._component_ids, self._component_names, self._body_ids, self._body_names)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def component_ids(self) -> Iterable[int]:
+        """Ids of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._component_ids
+
+    @component_ids.setter
+    def component_ids(self, value: Iterable[int]):
+        self._component_ids = value
+
+    @property
+    def component_names(self) -> List[str]:
+        """Names of components that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._component_names
+
+    @component_names.setter
+    def component_names(self, value: List[str]):
+        self._component_names = value
+
+    @property
+    def body_ids(self) -> Iterable[int]:
+        """Ids of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._body_ids
+
+    @body_ids.setter
+    def body_ids(self, value: Iterable[int]):
+        self._body_ids = value
+
+    @property
+    def body_names(self) -> List[str]:
+        """Names of bodies that are queried.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._body_names
+
+    @body_names.setter
+    def body_names(self, value: List[str]):
+        self._body_names = value
 
 class PartSummaryResults(CoreObject):
     """Results of part summary.
