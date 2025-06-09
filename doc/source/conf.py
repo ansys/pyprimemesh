@@ -1,6 +1,5 @@
 """Sphinx documentation configuration file."""
 import os
-import shutil
 from datetime import datetime
 
 import ansys.tools.visualization_interface as viz_interface
