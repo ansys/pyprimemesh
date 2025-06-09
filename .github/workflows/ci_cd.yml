@@ -3,6 +3,7 @@ name: GitHub CI
 # run only on main branch.  This avoids duplicated actions on PRs
 on:
   pull_request:
+    types: [opened, reopened, synchronize, edited, closed]
     branches:
       - main
       - release/*
@@ -41,8 +42,20 @@ jobs:
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
           bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
+  vulnerabilities:
+    name: Vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ansys/actions/check-vulnerabilities@v10.0.3
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          python-package-name: ${{ env.PACKAGE_NAME }}
+          dev-mode: ${{ github.ref != 'refs/heads/main' }}
+
   style:
     name: Code style
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
@@ -54,6 +67,7 @@ jobs:
 
   docs-style:
     name: Documentation Style Check
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
@@ -63,6 +77,7 @@ jobs:
 
   smoke-tests:
     name: Build and Smoke tests
+    if: github.event.action != 'closed'
     runs-on: ${{ matrix.os }}
     needs: [style]
     strategy:
@@ -86,6 +101,7 @@ jobs:
 
   docs:
     name: Documentation
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     needs: [docs-style]
     steps:
@@ -103,7 +119,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v9
+        uses: ansys/actions/doc-build@v10.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
@@ -115,8 +131,24 @@ jobs:
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
 
+  doc-deploy-pr:
+    name: "Deploy PR documentation"
+    runs-on: ubuntu-latest
+    needs: docs
+    # Run when the PR is closed i.e. when docs job is skipped
+    if: always() && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
+    steps:
+      - uses: ansys/actions/doc-deploy-pr@v10.0
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+          maximum-pr-doc-deployments: 10
+
   testing:
     name: Run Unit Tests
+    if: github.event.action != 'closed'
     needs: [ smoke-tests ]
     runs-on: ubuntu-latest
 
@@ -160,6 +192,7 @@ jobs:
 
   package:
     name: Package library
+    if: github.event.action != 'closed'
     needs: [testing, docs]
     runs-on: ubuntu-latest
     steps:
