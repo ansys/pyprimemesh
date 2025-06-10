@@ -181,7 +181,7 @@ plot_gallery = os.environ.get("PLOT_GALLERY", "yes").lower() == "yes"
 if example_file:
     # Set the directory and filename for this example
     example_name = os.path.basename(example_file)
-    sphinx_gallery_conf["filename_pattern"] = f"^{example_name}$"
+    sphinx_gallery_conf["filename_pattern"] = example_name
     exclude_patterns = [
         'api/**',
         'cheatsheet/**',
