@@ -135,7 +135,7 @@ jobs:
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v10.0
         with:
-          UPLOAD_DOC_ARTIFACT: false
+          UPLOAD_DOC_ARTIFACT: 'false'
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
           needs-quarto: true
