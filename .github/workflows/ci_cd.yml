@@ -151,6 +151,7 @@ jobs:
           name: gallery-artifacts-${{ matrix.example_file }}
           path: |
             pyprimemesh/doc/source/examples/gallery_examples/
+            /home/runner/work/pyprimemesh/pyprimemesh/doc/source/examples/gallery_examples/
             # Add any other output dirs needed
 
   docs:
