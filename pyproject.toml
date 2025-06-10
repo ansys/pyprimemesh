@@ -26,6 +26,7 @@ dependencies = [
   "numpy>=1.14.0",
   "appdirs>=1.4.0",
   "importlib-metadata>=4.0,<5; python_version<='3.8'",
+  "numpy<2.3", # temporary fix since breaks visualization
 ]
 
 [project.optional-dependencies]
