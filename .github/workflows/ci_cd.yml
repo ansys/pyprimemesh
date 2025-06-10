@@ -137,7 +137,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
-          needs-quarto: false
+          needs-quarto: true
           sphinxopts: "-j auto --keep-going"
         env:
           EXAMPLES_FILE: ${{ matrix.example_file }}
