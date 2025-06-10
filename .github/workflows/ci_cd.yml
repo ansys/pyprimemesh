@@ -145,10 +145,13 @@ jobs:
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
+      - name: Get base filename
+        id: filename
+        run: echo "name=$(basename '${{ matrix.example_file }}')" >> $GITHUB_OUTPUT
       - name: Upload gallery artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: gallery-artifacts-${{ matrix.example_file }}
+          name: gallery-artifacts-${{ steps.filename.outputs.name }}
           path: |
             pyprimemesh/doc/source/examples/gallery_examples/
             /home/runner/work/pyprimemesh/pyprimemesh/doc/source/examples/gallery_examples/
