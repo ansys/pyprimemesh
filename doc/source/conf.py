@@ -71,7 +71,6 @@ extensions = [
     'sphinx.ext.autosummary',
     "numpydoc",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.napoleon",
     "sphinx_copybutton",
     "sphinx_gallery.gen_gallery",
     "jupyter_sphinx",
