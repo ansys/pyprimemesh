@@ -192,7 +192,7 @@ if example_file:
     ]
 else:
     sphinx_gallery_conf["filename_pattern"] = r"a^"
-    
+
 # Control execution of examples
 sphinx_gallery_conf["plot_gallery"] = plot_gallery
 
