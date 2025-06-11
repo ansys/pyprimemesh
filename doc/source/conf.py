@@ -185,12 +185,14 @@ if example_file:
     exclude_patterns = [
         'api/**',
         'cheatsheet/**',
-        'cheat_sheet.qmd',
+        '.*cheat_sheet.*',
         'contributing/**',
         'user_guide/**',
         'getting_started/**',
     ]
-
+else:
+    sphinx_gallery_conf["filename_pattern"] = r"a^"
+    
 # Control execution of examples
 sphinx_gallery_conf["plot_gallery"] = plot_gallery
 
