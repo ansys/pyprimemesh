@@ -133,13 +133,14 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v10.0
+        uses: waltersma/actions/doc-build@v10.0
         with:
           UPLOAD_DOC_ARTIFACT: 'false'
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
           needs-quarto: true
           sphinxopts: "-j auto --keep-going"
+          skip-artefacts: true
         env:
           EXAMPLES_FILE: ${{ matrix.example_file }}
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
