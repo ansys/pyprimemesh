@@ -138,7 +138,7 @@ jobs:
           UPLOAD_DOC_ARTIFACT: 'false'
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
-          needs-quarto: false
+          needs-quarto: true
           sphinxopts: "-j auto --keep-going"
           skip-artefacts: true
         env:
