@@ -191,7 +191,7 @@ if example_file:
         'getting_started/**',
     ]
 else:
-    sphinx_gallery_conf["filename_pattern"] = r"a^"
+    sphinx_gallery_conf["filename_pattern"] = r"examples/other/.*\.py"
 
 # Control execution of examples
 sphinx_gallery_conf["plot_gallery"] = "yes"
