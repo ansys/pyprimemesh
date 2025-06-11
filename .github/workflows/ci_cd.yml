@@ -184,7 +184,7 @@ jobs:
           path: pyprimemesh/doc/source/examples/gallery_examples/
       - name: Build full gallery (no re-execution)
         run: |
-          export PLOT_GALLERY=no
+          export PLOT_GALLERY=yes
           sphinx-build -b html doc/source doc/build/html
 
       - name: "Run Ansys documentation building action"
