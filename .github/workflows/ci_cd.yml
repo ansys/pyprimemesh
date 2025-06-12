@@ -49,6 +49,7 @@ jobs:
       - uses: ansys/actions/check-vulnerabilities@v10.0.3
         with:
           upload-reports: true
+          hide-log: false
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           python-package-name: ${{ env.PACKAGE_NAME }}
