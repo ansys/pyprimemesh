@@ -7,7 +7,6 @@ os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
 import sphinx_gallery.gen_gallery as gen_gallery
-from sphinx_gallery.gen_gallery import build_gallery
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from joblib import Parallel, delayed
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
@@ -200,7 +199,7 @@ def build_gallery(app):
     examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
     gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
     Parallel(n_jobs=-1)(
-        delayed(gen_gallery.build_gallery)(examples_dir, gallery_dir)
+        delayed(gen_gallery.generate_gallery_rst)(examples_dir, gallery_dir)
         for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs)
     )
 
