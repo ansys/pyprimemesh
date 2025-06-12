@@ -182,62 +182,8 @@ sphinx_gallery_conf = {
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
     "parallel": True,
+    "n_jobs": -1,
 }
-
-
-def build_gallery(app):
-     """Build the Sphinx Gallery using parallel processing.
-     Parameters
-     ----------
-     app : sphinx.application.Sphinx
-         The Sphinx application object.
-     Notes
-     -----
-     This function uses `joblib` to run the gallery building process in parallel,
-     utilizing all available CPU cores.
-     """
-     examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
-     gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
-     
-     # Extract necessary data before parallel processing
-     config_data = [(examples_dir, gallery_dir) for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs)]
-     
-     Parallel(n_jobs=-1)(
-         delayed(generate_gallery_rst)(examples_dir, gallery_dir)
-         for examples_dir, gallery_dir in config_data
-     )
-
-
-# def build_gallery(app):
-#     """Build the Sphinx Gallery using parallel processing.
-#     Parameters
-#     ----------
-#     app : sphinx.application.Sphinx
-#         The Sphinx application object.
-#     Notes
-#     -----
-#     This function uses `joblib` to run the gallery building process in parallel,
-#     utilizing all available CPU cores.
-#     """
-#     examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
-#     gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
-#     Parallel(n_jobs=-1)(
-#         delayed(gen_gallery.generate_gallery_rst)(app)
-#         for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs)
-#     )
-
-
-def setup(app):
-    """Connect the `build_gallery` function to the Sphinx 'builder-inited' event.
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        The Sphinx application object.
-    Notes
-    -----
-    This function ensures that the gallery is built when the Sphinx builder is initialized.
-    """
-    app.connect('builder-inited', build_gallery)
 
 
 supress_warnings = ["docutils"]
