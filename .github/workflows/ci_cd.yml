@@ -124,7 +124,7 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
           needs-quarto: true
-          sphinxopts: "-j auto --keep-going"
+          sphinxopts: "-j 13 --keep-going"
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
