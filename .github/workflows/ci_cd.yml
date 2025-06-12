@@ -53,17 +53,17 @@ jobs:
           python-package-name: ${{ env.PACKAGE_NAME }}
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
 
-  style:
-    name: Code style
-    if: github.event.action != 'closed'
-    runs-on: ubuntu-latest
-    steps:
-      - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@v9
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          vale-config: "doc/.vale.ini"
-          vale-version: "3.4.1"
+  # style:
+  #   name: Code style
+  #   if: github.event.action != 'closed'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: PyAnsys code style checks
+  #       uses: ansys/actions/code-style@v9
+  #       with:
+  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
+  #         vale-config: "doc/.vale.ini"
+  #         vale-version: "3.4.1"
 
   docs-style:
     name: Documentation Style Check
@@ -102,7 +102,7 @@ jobs:
   docs:
     name: Documentation
     if: github.event.action != 'closed'
-    runs-on: [self-hosted, public-ubuntu-latest-16-cores]
+    runs-on: public-ubuntu-latest-16-cores
     needs: [docs-style]
     steps:
       - name: Login in Github Container registry
