@@ -184,8 +184,8 @@ sphinx_gallery_conf = {
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "thumbnail_size": (350, 350),
-    # "parallel": True,
-    # "n_jobs": -1,
+    "parallel": True,
+    "n_jobs": -1,
 }
 
 
