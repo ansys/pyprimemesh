@@ -181,8 +181,8 @@ sphinx_gallery_conf = {
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
-    "parallel": True,
-    "n_jobs": -1,
+    # "parallel": True,
+    # "n_jobs": -1,
 }
 
 
