@@ -7,6 +7,7 @@ import glob
 from datetime import datetime
 
 os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
@@ -185,6 +186,7 @@ sphinx_gallery_conf = {
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "thumbnail_size": (350, 350),
     "parallel": True,
+    "run_stale_examples": False,
 }
 
 
