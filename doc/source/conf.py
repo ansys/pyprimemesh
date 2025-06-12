@@ -199,7 +199,7 @@ def build_gallery(app):
     examples_dirs = app.config.sphinx_gallery_conf['examples_dirs']
     gallery_dirs = app.config.sphinx_gallery_conf['gallery_dirs']
     Parallel(n_jobs=-1)(
-        delayed(gen_gallery.generate_gallery_rst)(examples_dir, gallery_dir)
+        delayed(gen_gallery.generate_gallery_rst)(app)
         for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs)
     )
 
