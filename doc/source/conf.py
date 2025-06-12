@@ -2,6 +2,8 @@
 import os
 from datetime import datetime
 
+os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
 import sphinx_gallery.gen_gallery as gen_gallery
@@ -11,6 +13,7 @@ from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
+
 
 viz_interface.DOCUMENTATION_BUILD = True
 
