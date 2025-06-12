@@ -79,7 +79,7 @@ jobs:
     name: Build and Smoke tests
     if: github.event.action != 'closed'
     runs-on: ${{ matrix.os }}
-    needs: [style]
+    # needs: [style]
     strategy:
       fail-fast: false
       matrix:
