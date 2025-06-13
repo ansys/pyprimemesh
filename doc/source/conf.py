@@ -6,7 +6,7 @@ import glob
 
 from datetime import datetime
 
-os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+# os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
@@ -171,7 +171,7 @@ sphinx_gallery_conf = {
     # path where to save gallery generated examples
     "gallery_dirs": ["examples/gallery_examples"],
     # Pattern to search for example files
-    "filename_pattern": r"\.py",
+    "filename_pattern": r"^(?!examples/other/).*\.py$",
     # ignore mixing elbow and example template
     "ignore_pattern": r"examples/other/.*\.py|flycheck*",
     # Remove the "Download all examples" button from the top level gallery
