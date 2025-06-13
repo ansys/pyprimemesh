@@ -10,7 +10,6 @@ os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
-import sphinx_gallery.gen_gallery as gen_gallery
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from joblib import Parallel, delayed
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
