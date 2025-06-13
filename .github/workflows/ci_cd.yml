@@ -102,7 +102,8 @@ jobs:
   docs:
     name: Documentation
     if: github.event.action != 'closed'
-    runs-on: public-ubuntu-latest-16-cores
+    # runs-on: public-ubuntu-latest-16-cores
+    runs-on: ubuntu-latest
     needs: [docs-style]
     steps:
       - name: Login in Github Container registry
@@ -126,7 +127,7 @@ jobs:
           needs-quarto: true
           sphinxopts: "-j auto --keep-going"
         env:
-          # PYVISTA_BUILDING_GALLERY: 'True'
+          PYVISTA_BUILDING_GALLERY: 'True'
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
