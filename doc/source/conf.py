@@ -173,7 +173,7 @@ sphinx_gallery_conf = {
     # Pattern to search for example files
     "filename_pattern": r"^(?!examples/other/).*\.py$",
     # ignore mixing elbow and example template
-    "ignore_pattern": r"examples/other/.*\.py|flycheck*",
+    "ignore_pattern": r"examples/other/|flycheck*",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
@@ -199,10 +199,12 @@ def run_example(script_path):
     return result.returncode
 
 def run_all_examples_in_parallel():
-    # Adjust this path to match your examples directory
+    # Find all .py scripts under ../../examples, recursively
     example_scripts = glob.glob(os.path.join(os.path.dirname(__file__), "../../examples/**/*.py"), recursive=True)
-    # Filter out files you want to ignore, if needed
-    # example_scripts = [f for f in example_scripts if "template" not in f]
+    # Exclude any scripts in 'examples/other'
+    example_scripts = [f for f in example_scripts if "examples/other" not in f.replace("\\", "/")]
+    # Exclude flycheck files if needed
+    example_scripts = [f for f in example_scripts if "flycheck" not in f]
     Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)
 
 def setup(app):
