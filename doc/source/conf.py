@@ -1,14 +1,24 @@
 """Sphinx documentation configuration file."""
 import os
+import subprocess
+import sys
+import glob
+
 from datetime import datetime
+
+# os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
+import sphinx_gallery.gen_gallery as gen_gallery
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
+from joblib import Parallel, delayed
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
+
 
 viz_interface.DOCUMENTATION_BUILD = True
 
@@ -161,9 +171,9 @@ sphinx_gallery_conf = {
     # path where to save gallery generated examples
     "gallery_dirs": ["examples/gallery_examples"],
     # Pattern to search for example files
-    "filename_pattern": r"\.py",
+    "filename_pattern": r"^(?!examples/other/).*\.py$",
     # ignore mixing elbow and example template
-    "ignore_pattern": "examples/other_examples",
+    "ignore_pattern": r"examples/other/|flycheck*",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
@@ -174,8 +184,31 @@ sphinx_gallery_conf = {
     "doc_module": ("ansys.meshing.prime"),
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
-    "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
+    "parallel": True,
+    "run_stale_examples": False,
 }
+
+
+def run_example(script_path):
+    """Run a Python script and return its exit code."""
+    print(f"Running {script_path} ...")
+    result = subprocess.run([sys.executable, script_path], capture_output=True)
+    if result.returncode != 0:
+        print(f"Error in {script_path}:\n{result.stderr.decode()}")
+    return result.returncode
+
+def run_all_examples_in_parallel():
+    # Find all .py scripts under ../../examples, recursively
+    example_scripts = glob.glob(os.path.join(os.path.dirname(__file__), "../../examples/**/*.py"), recursive=True)
+    # Exclude any scripts in 'examples/other'
+    example_scripts = [f for f in example_scripts if "examples/other" not in f.replace("\\", "/")]
+    # Exclude flycheck files if needed
+    example_scripts = [f for f in example_scripts if "flycheck" not in f]
+    Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)
+
+def setup(app):
+    app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+
 
 supress_warnings = ["docutils"]
