@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+BCsVolumetricModality
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BCsVolumetricModality
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      BCsVolumetricModality.BOX
+      
+      
+      BCsVolumetricModality.ALL
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BCsVolumetricModality
+
+    ansys.meshing.prime.BCsVolumetricModality
+
+.. vale on

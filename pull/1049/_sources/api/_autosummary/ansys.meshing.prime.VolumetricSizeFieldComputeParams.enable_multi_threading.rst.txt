@@ -1,0 +1,6 @@
+enable\_multi\_threading
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumetricSizeFieldComputeParams.enable_multi_threading

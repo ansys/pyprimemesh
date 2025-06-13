@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+BOIType
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BOIType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      BOIType.OFFSETBOX
+      
+      
+      BOIType.OFFSETSURFACE
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BOIType
+
+    ansys.meshing.prime.BOIType
+
+.. vale on

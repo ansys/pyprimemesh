@@ -1,0 +1,53 @@
+.. vale off
+
+
+
+
+
+
+
+IGAUnstructuredSplineSolid
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IGAUnstructuredSplineSolid
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      IGAUnstructuredSplineSolid.print_default
+      IGAUnstructuredSplineSolid.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      IGAUnstructuredSplineSolid.degree
+      
+      
+      IGAUnstructuredSplineSolid.id
+      
+      
+      IGAUnstructuredSplineSolid.invalid_jacobian_elements_count
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using IGAUnstructuredSplineSolid
+
+    ansys.meshing.prime.IGAUnstructuredSplineSolid
+
+.. vale on
