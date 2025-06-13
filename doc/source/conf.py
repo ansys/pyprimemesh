@@ -216,7 +216,11 @@ def run_all_examples_in_parallel():
     All found scripts are executed in parallel using all available CPU cores.
     """
     example_scripts = glob.glob(
-        os.path.join(os.path.dirname(__file__), "../../examples/**/*.py"), recursive=True,
+        os.path.join(
+            os.path.dirname(__file__),
+            "../../examples/**/*.py",
+        ),
+        recursive=True,
     )
     # Exclude any scripts in 'examples/other'
     example_scripts = [f for f in example_scripts if "examples/other" not in f.replace("\\", "/")]
