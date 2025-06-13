@@ -1,9 +1,8 @@
 """Sphinx documentation configuration file."""
+import glob
 import os
 import subprocess
 import sys
-import glob
-
 from datetime import datetime
 
 # os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
@@ -18,7 +17,6 @@ from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
-
 
 viz_interface.DOCUMENTATION_BUILD = True
 
@@ -191,23 +189,50 @@ sphinx_gallery_conf = {
 
 
 def run_example(script_path):
-    """Run a Python script and return its exit code."""
+    """Run a Python script and return its exit code.
+
+    Parameters
+    ----------
+    script_path : str
+        The path to the Python script to execute.
+
+    Returns
+    -------
+    int
+        The exit code of the script execution. 0 indicates success.
+    """
     print(f"Running {script_path} ...")
     result = subprocess.run([sys.executable, script_path], capture_output=True)
     if result.returncode != 0:
         print(f"Error in {script_path}:\n{result.stderr.decode()}")
     return result.returncode
 
+
 def run_all_examples_in_parallel():
-    # Find all .py scripts under ../../examples, recursively
-    example_scripts = glob.glob(os.path.join(os.path.dirname(__file__), "../../examples/**/*.py"), recursive=True)
+    """Find and run all example Python scripts in parallel, excluding certain patterns.
+
+    This function searches for all `.py` files under the `../../examples` directory,
+    excluding any scripts in 'examples/other' and any files containing 'flycheck' in their name.
+    All found scripts are executed in parallel using all available CPU cores.
+    """
+    example_scripts = glob.glob(
+        os.path.join(os.path.dirname(__file__), "../../examples/**/*.py"), recursive=True,
+    )
     # Exclude any scripts in 'examples/other'
     example_scripts = [f for f in example_scripts if "examples/other" not in f.replace("\\", "/")]
     # Exclude flycheck files if needed
     example_scripts = [f for f in example_scripts if "flycheck" not in f]
     Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)
 
+
 def setup(app):
+    """Sphinx setup function to run all example scripts in parallel before building the docs.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application object.
+    """
     app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
 
 
