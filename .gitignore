@@ -34,6 +34,7 @@ dist/
 _autosummary
 _build/
 _gallery_backreferences
+doc/source/api
 
 # Testing
 .coverage
