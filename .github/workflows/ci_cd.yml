@@ -142,6 +142,7 @@ jobs:
           sphinxopts: "-j auto --keep-going"
           skip-artefacts: true
         env:
+          PYVISTA_BUILDING_GALLERY: 'True'
           EXAMPLES_FILE: ${{ matrix.example_file }}
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
@@ -163,7 +164,7 @@ jobs:
     name: Documentation
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
-    needs: docs-matrix
+    needs: [docs-style, docs-matrix, set-example-files]
     steps:
       - name: Login in Github Container registry
         uses: docker/login-action@v3
