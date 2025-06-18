@@ -163,7 +163,7 @@ sphinx_gallery_conf = {
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # ignore mixing elbow and example template
-    "ignore_pattern": "examples/other_examples",
+    "ignore_pattern": r"examples/other/.*\.py|flycheck*",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
     # Sort gallery example by file name instead of number of lines (default)
@@ -174,8 +174,27 @@ sphinx_gallery_conf = {
     "doc_module": ("ansys.meshing.prime"),
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
-    "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
 }
+
+example_file = os.environ.get("EXAMPLES_FILE")
+plot_gallery = os.environ.get("PLOT_GALLERY", "yes").lower() == "yes"
+if example_file:
+    # Set the directory and filename for this example
+    example_name = os.path.basename(example_file)
+    sphinx_gallery_conf["filename_pattern"] = example_name
+    exclude_patterns = [
+        'api/**',
+        'cheatsheet/**',
+        '.*cheat_sheet.*',
+        'contributing/**',
+        'user_guide/**',
+        'getting_started/**',
+    ]
+else:
+    sphinx_gallery_conf["filename_pattern"] = r"examples/other/.*\.py"
+
+# Control execution of examples
+sphinx_gallery_conf["plot_gallery"] = "yes"
 
 supress_warnings = ["docutils"]
