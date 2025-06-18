@@ -23,6 +23,7 @@
 * [nikhilpawar159](https://github.com/nikhilpawar159)
 * [Ninad Kamat](https://github.com/ninad-kamat)
 * [P1532](https://github.com/P1532)
+* [Prajakt Mahajan](https://github.com/prajaktmahajan)
 * [Rajesh Meena](https://github.com/MeenaBytes)
 * [Raphael Luciano](https://github.com/raph-luc)
 * [Revathy Venugopal](https://github.com/Revathyvenugopal162)
