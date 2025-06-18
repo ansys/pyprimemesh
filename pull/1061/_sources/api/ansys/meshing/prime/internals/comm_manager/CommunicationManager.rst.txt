@@ -1,0 +1,31 @@
+
+
+
+
+
+
+:class:`CommunicationManager`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.internals.comm_manager.CommunicationManager(comm: ansys.meshing.prime.internals.communicator.Communicator)
+
+   Provides the wrapper class for the communicator.
+
+   :param comm: Wrapped ``Communicator`` class.
+   :type comm: Communicator
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.comm_manager import CommunicationManager
+
+
+
+
+

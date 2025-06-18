@@ -1,0 +1,6 @@
+overlap\_pairs
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: OverlapSearchResults.overlap_pairs

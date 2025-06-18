@@ -1,0 +1,130 @@
+
+
+
+
+
+
+:class:`PeriodicControl`
+========================
+
+
+.. py:class:: ansys.meshing.prime.core.periodiccontrol.PeriodicControl(model, id, object_id, name, local=False)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.periodiccontrol.PeriodicControl`
+
+
+   Periodic controls provide settings for the recovery of periodic surfaces.
+
+   A periodic control is specified by the scope (source surfaces) and
+   the transformation parameters: the center, axis and angle.
+
+   :param model: Server model to create PeriodicControl object.
+   :type model: Model
+   :param id: Id of the PeriodicControl.
+   :type id: int
+   :param object_id: Object id of the PeriodicControl.
+   :type object_id: int
+   :param name: Name of the PeriodicControl.
+   :type name: str
+   :param local: Unused. The default is ``False``.
+   :type local: bool, optional
+
+
+
+
+.. py:currentmodule:: PeriodicControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the periodic control to a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - Get the name of the periodic control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
+
+Property detail
+---------------
+
+.. py:property:: name
+
+   Get the name of the periodic control.
+
+   :returns: Name of the periodic control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(periodic_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the periodic control to a suggested name.
+
+   :param name: Suggested name for the periodic control.
+   :type name: str
+
+   :returns: Newly suggested name of the periodic control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> periodic_control.set_suggested_name("control1")
+
+
+
+
+

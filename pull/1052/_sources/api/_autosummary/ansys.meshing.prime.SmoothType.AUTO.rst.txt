@@ -1,0 +1,6 @@
+AUTO
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SmoothType.AUTO

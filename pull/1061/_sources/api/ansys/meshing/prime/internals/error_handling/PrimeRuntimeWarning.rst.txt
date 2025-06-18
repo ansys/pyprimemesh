@@ -1,0 +1,85 @@
+
+
+
+
+
+
+:class:`PrimeRuntimeWarning`
+============================
+
+
+.. py:exception:: ansys.meshing.prime.internals.error_handling.PrimeRuntimeWarning(message)
+
+   Bases: :py:obj:`UserWarning`
+
+
+   Provides the runtime warning for PyPrimeMesh.
+
+   :param message: Message to show.
+   :type message: str
+
+
+
+
+.. py:currentmodule:: PrimeRuntimeWarning
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~message`
+            - Warning message to be reported.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Transform the message to a string.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.error_handling import PrimeRuntimeWarning
+
+Property detail
+---------------
+
+.. py:property:: message
+
+   Warning message to be reported.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+   Transform the message to a string.
+
+
+
+
+

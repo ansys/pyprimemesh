@@ -1,0 +1,300 @@
+
+
+
+
+
+
+The ``utils.py`` module
+=======================
+
+.. py:module:: ansys.meshing.prime.internals.utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: utils
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~make_unique_container_name`
+            - Make a unique container name.
+
+
+          * - :py:obj:`~to_camel_case`
+            - Transform snake_case string to camelCase.
+
+
+          * - :py:obj:`~get_child_processes`
+            - Get child processes of a process.
+
+
+          * - :py:obj:`~terminate_process`
+            - Terminates a process.
+
+
+          * - :py:obj:`~print_logs_before_command`
+            - Print logs before running a command.
+
+
+          * - :py:obj:`~print_logs_after_command`
+            - Print logs after running a command.
+
+
+          * - :py:obj:`~print_beta_api_warning`
+            - Print warning for beta API.
+
+
+          * - :py:obj:`~launch_prime_github_container`
+            - Launch a container.
+
+
+          * - :py:obj:`~stop_prime_github_container`
+            - Stop a running container.
+
+
+          * - :py:obj:`~file_read_context`
+            - Upload context.
+
+
+          * - :py:obj:`~port_in_use`
+            - Check if a port is in use on a given host.
+
+
+          * - :py:obj:`~get_available_local_port`
+            - Get which ports are available and return the first one.
+
+
+          * - :py:obj:`~file_read_context_list`
+            - Upload context.
+
+
+          * - :py:obj:`~file_write_context`
+            - Download context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for general utilities of the project.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: make_unique_container_name(name: str)
+
+   Make a unique container name.
+
+   :param name: Original name prefix that is provided.
+   :type name: str
+
+   :returns: Unique name with a numeric integer added as suffix.
+   :rtype: str
+
+
+.. py:function:: to_camel_case(snake_str)
+
+   Transform snake_case string to camelCase.
+
+   :param snake_str: snake_case string.
+   :type snake_str: str
+
+   :returns: String converted to camelCase.
+   :rtype: str
+
+
+.. py:function:: get_child_processes(process)
+
+   Get child processes of a process.
+
+   :param process: Process ID of the parent process.
+   :type process: int
+
+   :returns: Process IDs of the processes.
+   :rtype: List
+
+
+.. py:function:: terminate_process(process: subprocess)
+
+   Terminates a process.
+
+   :param process: Process to terminate.
+   :type process: subprocess
+
+
+.. py:function:: print_logs_before_command(logger: logging.Logger, command: str, args)
+
+   Print logs before running a command.
+
+   :param logger: Logger to print to.
+   :type logger: logging.Logger
+   :param command: Command to run.
+   :type command: str
+   :param args: Arguments of the command.
+   :type args: str
+
+
+.. py:function:: print_logs_after_command(logger: logging.Logger, command: str, ret)
+
+   Print logs after running a command.
+
+   :param logger: Logger to print to.
+   :type logger: logging.Logger
+   :param command: Command to run.
+   :type command: str
+   :param ret: Return type of the command.
+   :type ret: str
+
+
+.. py:function:: print_beta_api_warning(logger: logging.Logger, command: str)
+
+   Print warning for beta API.
+
+   :param logger: Logger to print to.
+   :type logger: logging.Logger
+   :param command: Command to run.
+   :type command: str
+
+
+.. py:function:: launch_prime_github_container(mount_host: str = defaults.get_user_data_path(), mount_image: str = defaults.get_user_data_path_for_containers(), port: int = defaults.port(), name: str = 'ansys-prime-server', version: Optional[str] = None)
+
+   Launch a container.
+
+   :param mount_host: IP address for the container to mount. The default is ``defaults.get_user_data_path()``.
+   :type mount_host: str, optional
+   :param mount_image: Name of the path to the container to mount. The default is
+                       ``defaults.get_user_data_path_for_containers()``.
+   :type mount_image: str, optional
+   :param port: Port to expose. The default is ``defaults.port()``.
+   :type port: int, optional
+   :param name: Name of the container. The default is ``"ansys-prime-server"``.
+   :type name: str, optional
+   :param version: Version of the container to retrieve. The default is ``None``.
+   :type version: str, optional
+
+   :raises ValueError: License is not available.
+
+
+.. py:function:: stop_prime_github_container(name)
+
+   Stop a running container.
+
+   :param name: Name of the container.
+   :type name: str
+
+
+.. py:function:: file_read_context(model, file_name: str)
+
+   Upload context.
+
+   Upload context to a model.
+
+   :param model: Model to upload the context to.
+   :type model: Model
+   :param file_name: Name of the file containing the context.
+   :type file_name: str
+
+   :Yields: *str* -- File name of the context.
+
+
+.. py:function:: port_in_use(port, host=defaults.ip())
+
+   Check if a port is in use on a given host.
+
+   This method must actually check is is a "bind" of the port to the
+   address. Just checking if a socket can be created is insufficient
+   because it's possible to run into permission errors like this one:
+
+   - An attempt was made to access a socket in a way forbidden by its
+     access permissions.
+
+   :param port: Port to check.
+   :type port: int
+   :param host: IP address to check. The default is ``defaults.ip()``.
+   :type host: str, optional
+
+   :returns: ``True`` if the port is in use, ``False`` if the port is available.
+   :rtype: bool
+
+
+.. py:function:: get_available_local_port(init_port: int = defaults.port())
+
+   Get which ports are available and return the first one.
+
+   :param init_port: Port to start the search from. The default is ``defaults.port()```.
+   :type init_port: int, optional
+
+   :returns: First available port.
+   :rtype: int
+
+
+.. py:function:: file_read_context_list(model, file_names: List[str])
+
+   Upload context.
+
+   Upload context to a model.
+
+   :param model: Model to upload context to.
+   :type model: Model
+   :param file_names: List of files with the context.
+   :type file_names: List[str]
+
+   :Yields: *List[str]* -- List of context files.
+
+
+.. py:function:: file_write_context(model, file_name: str)
+
+   Download context.
+
+   Download context from a model and write it to a local file.
+
+   :param model: Model to download context from.
+   :type model: Model
+   :param file_name: Name of the file to write the context to.
+   :type file_name: str
+
+   :Yields: *str* -- Name of the file to which context has been written.
+
+
+
+

@@ -1,0 +1,166 @@
+
+
+
+
+
+
+:class:`JSONDecoder`
+====================
+
+
+.. py:class:: ansys.meshing.prime.relaxed_json.decoder.JSONDecoder(*, object_hook=None, parse_float=None, parse_int=None, parse_constant=None or _CONSTANTS.__getitem__, strict=True, object_pairs_hook=None)
+
+   Decode object to JSON format.
+
+   :param object_hook: Unused parameter, by default None
+   :type object_hook: Any, optional
+   :param parse_float: Parses float values, by default None
+   :type parse_float: String or float, optional
+   :param parse_int: Parses int values, by default None
+   :type parse_int: String or int, optional
+   :param parse_constant: Parses constant values, by default Noneor_CONSTANTS.__getitem__
+   :type parse_constant: Any, optional
+   :param strict: Unused parameter, by default True
+   :type strict: bool, optional
+   :param object_pairs_hook: Unused parameter, by default None
+   :type object_pairs_hook: Any, optional
+
+
+
+.. py:currentmodule:: JSONDecoder
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~raw_decode`
+            - Decode bytes or bytearray to a JSON object.
+          * - :py:attr:`~decode`
+            - Decode bytes or bytearray to a JSON object.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~object_hook`
+            - 
+          * - :py:attr:`~parse_float`
+            - 
+          * - :py:attr:`~parse_int`
+            - 
+          * - :py:attr:`~parse_constant`
+            - 
+          * - :py:attr:`~object_pairs_hook`
+            - 
+          * - :py:attr:`~parse_string`
+            - 
+          * - :py:attr:`~parse_array`
+            - 
+          * - :py:attr:`~parse_object`
+            - 
+          * - :py:attr:`~parse_bytes`
+            - 
+          * - :py:attr:`~strict`
+            - 
+          * - :py:attr:`~memo`
+            - 
+          * - :py:attr:`~scan_once`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.relaxed_json.decoder import JSONDecoder
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: object_hook
+   :value: None
+
+
+.. py:attribute:: parse_float
+
+.. py:attribute:: parse_int
+
+.. py:attribute:: parse_constant
+
+.. py:attribute:: object_pairs_hook
+   :value: None
+
+
+.. py:attribute:: parse_string
+
+.. py:attribute:: parse_array
+
+.. py:attribute:: parse_object
+
+.. py:attribute:: parse_bytes
+
+.. py:attribute:: strict
+   :value: True
+
+
+.. py:attribute:: memo
+
+.. py:attribute:: scan_once
+
+
+
+Method detail
+-------------
+
+.. py:method:: raw_decode(s: bytes or bytearray, idx: int) -> Tuple[Any, int]
+
+   Decode bytes or bytearray to a JSON object.
+
+   :param s: Information to decode.
+   :type s: bytesorbytearray
+   :param idx: Position to decode.
+   :type idx: int
+
+   :returns: JSON object and final position.
+   :rtype: Tuple[Any, int]
+
+   :raises JSONDecodeError: Unexpected value.
+
+
+.. py:method:: decode(s: bytes or bytearray, _w=WHITESPACE.match) -> Any
+
+   Decode bytes or bytearray to a JSON object.
+
+   :param s: Information to decode.
+   :type s: bytesorbytearray
+   :param _w: White space regex, by default WHITESPACE.match.
+   :type _w: str, optional
+
+   :returns: JSON object.
+   :rtype: Any
+
+   :raises JSONDecodeError: Document malformed.
+
+
+
+
+

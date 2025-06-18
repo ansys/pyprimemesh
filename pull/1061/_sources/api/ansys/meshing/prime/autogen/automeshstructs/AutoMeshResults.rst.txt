@@ -1,0 +1,150 @@
+
+
+
+
+
+
+:class:`AutoMeshResults`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, error_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, json_data: dict = None, **kwargs)
+
+   Bases: :py:obj:`ansys.meshing.prime.params.primestructs.CoreObject`
+
+
+   Results of volume meshing.
+
+   :param model: Model to create a ``AutoMeshResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Provides error message when automesh fails.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with the operation.
+   :type warning_codes: List[WarningCode], optional
+   :param error_locations: Error location coordinates returned when automesh fails.
+   :type error_locations: Iterable[float], optional
+   :param json_data: JSON dictionary to create a ``AutoMeshResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> auto_mesh_results = prime.AutoMeshResults(model = model)
+
+
+
+
+
+
+.. py:currentmodule:: AutoMeshResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Provides error message when automesh fails.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the operation.
+          * - :py:attr:`~error_locations`
+            - Error location coordinates returned when automesh fails.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``AutoMeshResults`` object.
+          * - :py:attr:`~print_default`
+            - Print the default values of ``AutoMeshResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.automeshstructs import AutoMeshResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Provides error message when automesh fails.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the operation.
+
+.. py:property:: error_locations
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Error location coordinates returned when automesh fails.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, error_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``AutoMeshResults`` object.
+
+   :param error_code: Provides error message when automesh fails.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with the operation.
+   :type warning_codes: List[WarningCode], optional
+   :param error_locations: Error location coordinates returned when automesh fails.
+   :type error_locations: Iterable[float], optional
+
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``AutoMeshResults`` object.
+
+   .. rubric:: Examples
+
+   >>> AutoMeshResults.print_default()
+
+
+.. py:method:: __str__() -> str
+
+
+
+

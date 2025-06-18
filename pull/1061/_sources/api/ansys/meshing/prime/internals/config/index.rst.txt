@@ -1,0 +1,204 @@
+
+
+
+
+
+
+The ``config.py`` module
+========================
+
+.. py:module:: ansys.meshing.prime.internals.config
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: config
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~enable_optimizing_numpy_arrays`
+            - Enable optimizing numpy arrays over the wire.
+
+
+          * - :py:obj:`~disable_optimizing_numpy_arrays`
+            - Disable optimizing numpy arrays over the wire.
+
+
+          * - :py:obj:`~is_optimizing_numpy_arrays`
+            - Determine if serialization of numpy arrays is enabled.
+
+
+          * - :py:obj:`~numpy_array_optimization_enabled`
+            - Context helper to execute code with numpy optimization enabled.
+
+
+          * - :py:obj:`~numpy_array_optimization_disabled`
+            - Context helper to execute code with numpy optimization disabled.
+
+
+          * - :py:obj:`~set_using_container`
+            - Set the ``USING_CONTAINER`` flag to ``value``.
+
+
+          * - :py:obj:`~using_container`
+            - Get the value for the ``USING_CONTAINER`` flag.
+
+
+          * - :py:obj:`~set_has_pim`
+            - Set the `HAS_PIM` flag.
+
+
+          * - :py:obj:`~has_pim`
+            - Get the ``HAS_PIM`` flag.
+
+
+          * - :py:obj:`~enable_log_output`
+            - Enable logger output to given stream.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Configuration utility for PyPrimeMesh.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: enable_optimizing_numpy_arrays()
+
+   Enable optimizing numpy arrays over the wire.
+
+   This method allows the library to optimize serialization of numpy arrays
+   for faster deserialization. This can cause the data transferred
+   over the network to increase slightly unless the array is of a very
+   large size. Consider enabling this option to improve performance if
+   your workflow is not limited by network bandwidth for performance. The
+   default for optimization is always ``True``.
+
+
+.. py:function:: disable_optimizing_numpy_arrays()
+
+   Disable optimizing numpy arrays over the wire.
+
+   This method disables serialization optimization for numpy arrays when
+   sending them over the wire. Typically, this is needed in case the
+   performance is limited by a saturated network. Disabling this flag
+   can provide some benefit for data transferred over the wire for
+   most arrays. The default for optimization is always ``True``.
+
+
+.. py:function:: is_optimizing_numpy_arrays()
+
+   Determine if serialization of numpy arrays is enabled.
+
+   The default for optimization is always ``True``.
+
+   :returns: Boolean flag indicating if optimizing of numpy arrays is enabled.
+   :rtype: bool
+
+
+.. py:function:: numpy_array_optimization_enabled()
+
+   Context helper to execute code with numpy optimization enabled.
+
+
+.. py:function:: numpy_array_optimization_disabled()
+
+   Context helper to execute code with numpy optimization disabled.
+
+
+.. py:function:: set_using_container(value: bool)
+
+   Set the ``USING_CONTAINER`` flag to ``value``.
+
+   :param value: Whether to use a container.
+   :type value: bool
+
+   :returns: Value for the ``USING_CONTAINER`` flag.
+   :rtype: bool
+
+
+.. py:function:: using_container()
+
+   Get the value for the ``USING_CONTAINER`` flag.
+
+   :returns: Value for the ``USING_CONTAINER`` flag.
+   :rtype: bool
+
+
+.. py:function:: set_has_pim(value: bool)
+
+   Set the `HAS_PIM` flag.
+
+   PIM (Product Instance Manager) provides a gRPC API that
+   enables both library and app developers to start a product in
+   a remote environment and communicate with its API.
+
+   :param value: Value for setting the ``HAS_PIM`` flag.
+   :type value: bool
+
+   :returns: Value for the ``HAS_PIM`` flag.
+   :rtype: bool
+
+
+.. py:function:: has_pim()
+
+   Get the ``HAS_PIM`` flag.
+
+   :returns: Value for the ``HAS_PIM`` flag.
+   :rtype: bool
+
+
+.. py:function:: enable_log_output(stream=None)
+
+   Enable logger output to given stream.
+
+   If stream is not specified, sys.stderr is used.
+
+   :param stream: Stream to output the log output to stream
+   :type stream: TextIO, optional
+
+
+
+

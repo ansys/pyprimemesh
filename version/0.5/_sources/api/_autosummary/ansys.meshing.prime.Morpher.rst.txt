@@ -1,0 +1,26 @@
+.. vale off
+
+Morpher
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Morpher
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Morpher.match_morph
+   
+   
+
+   
+   
+   
+
+.. vale on

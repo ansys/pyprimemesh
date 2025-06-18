@@ -1,0 +1,168 @@
+
+
+
+
+
+
+The ``error_handling.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.internals.error_handling
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: error_handling
+.. tab-set::
+
+
+
+
+
+
+    .. tab-item:: Exceptions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.error_handling.PrimeRuntimeError`
+            - Provides runtime errors for PyPrimeMesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.error_handling.PrimeRuntimeWarning`
+            - Provides the runtime warning for PyPrimeMesh.
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~process_and_handle_results`
+            - Process and handle results.
+
+
+          * - :py:obj:`~communicator_error_handler`
+            - Create a decorator to use in error handling.
+
+
+          * - :py:obj:`~error_code_handler`
+            - Decode errors from the server.
+
+
+          * - :py:obj:`~apply_if`
+            - Apply a function based on a condition.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~prime_error_messages`
+            - 
+
+
+          * - :py:obj:`~prime_warning_messages`
+            - 
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-lightning_bolt"></span> PrimeRuntimeError</api/ansys/meshing/prime/internals/error_handling/PrimeRuntimeError>
+    <span class="nf nf-md-lightning_bolt"></span> PrimeRuntimeWarning</api/ansys/meshing/prime/internals/error_handling/PrimeRuntimeWarning>
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for error handling in PyPrimeMesh.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: process_and_handle_results(result: dict)
+
+   Process and handle results.
+
+
+.. py:function:: communicator_error_handler(_func=None, *, expected_token='Results', server_error_token='ServerError', info_token='info_msg', warning_token='warning_msg', error_token='err_msg')
+
+   Create a decorator to use in error handling.
+
+   :param _func: Function to use as decorator. The default is ``None``.
+   :type _func: Func, optional
+   :param expected_token: Token to expect in the response result. The default is ""Results"".
+   :type expected_token: str, optional
+   :param server_error_token: Token from the server error. The default is ``"ServerError"``.
+   :type server_error_token: str, optional
+   :param info_token: Information message. The default is ``"info_msg"``.
+   :type info_token: str, optional
+   :param warning_token: Warning message. The default is ``"warning_msg"``.
+   :type warning_token: str, optional
+   :param error_token: Error message. The default is ``"err_msg"``.
+   :type error_token: str, optional
+
+
+.. py:function:: error_code_handler(_func=None)
+
+   Decode errors from the server.
+
+   :param _func: Decorator to apply to the error code. The default is ``None``.
+   :type _func: Func, optional
+
+
+.. py:function:: apply_if(decorator, condition)
+
+   Apply a function based on a condition.
+
+   :param decorator: Function to apply.
+   :type decorator: Func
+   :param condition: Condition to check.
+   :type condition: bool
+
+
+.. py:data:: prime_error_messages
+
+.. py:data:: prime_warning_messages
+
+
+

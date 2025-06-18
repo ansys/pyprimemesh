@@ -1,0 +1,419 @@
+
+
+
+
+
+
+:class:`Model`
+==============
+
+
+.. py:class:: ansys.meshing.prime.core.model.Model(comm: ansys.meshing.prime.internals.communicator.Communicator, id: int, object_id: int, name: str)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.model.Model`
+
+
+   Contains all information about Ansys Prime Server.
+
+   This class provides the nucleus of Ansys meshing technology. You can access
+   any information in Ansys Prime Server only through the ``Model`` class.
+   Using this class, you can query topo data, control data, parts, size fields,
+   and more.
+
+   :param comm: Communicator to connect with the Ansys Prime server.
+   :type comm: Communicator
+   :param id: ID of the model.
+   :type id: int
+   :param object_id: Object ID of the model.
+   :type object_id: int
+   :param name: Name of the model.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: Model
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_part_by_name`
+            - Get the part by name.
+          * - :py:attr:`~get_part`
+            - Get the part by ID.
+          * - :py:attr:`~merge_parts`
+            - Merge multiple parts into a single part.
+          * - :py:attr:`~delete_parts`
+            - Delete parts and their contents.
+          * - :py:attr:`~get_global_sizing_params`
+            - Get global sizing parameters.
+          * - :py:attr:`~set_global_sizing_params`
+            - Set global sizing parameters.
+          * - :py:attr:`~set_working_directory`
+            - Set working directory.
+          * - :py:attr:`~as_polydata`
+            - Get the model as a polydata.
+          * - :py:attr:`~get_scoped_polydata`
+            - Get the scoped polydata of the model.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~parts`
+            - Get the list of parts for the model.
+          * - :py:attr:`~topo_data`
+            - Get the TopoData for the model.
+          * - :py:attr:`~control_data`
+            - Get the control data for the model.
+          * - :py:attr:`~material_point_data`
+            - Get material point data for the model.
+          * - :py:attr:`~python_logger`
+            - Get python standard logger from PyPrimeMesh's logger instance.
+          * - :py:attr:`~logger`
+            - Get PyPrimeMesh's logger instance.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__doc__`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Print the summary of the model.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.model import Model
+
+Property detail
+---------------
+
+.. py:property:: parts
+   :type: List[ansys.meshing.prime.core.part.Part]
+
+
+   Get the list of parts for the model.
+
+   :returns: List of parts for the model.
+   :rtype: List[Part]
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> parts = model.parts
+
+.. py:property:: topo_data
+   :type: ansys.meshing.prime.autogen.topodata.TopoData
+
+
+   Get the TopoData for the model.
+
+   :returns: TopoData for the model.
+   :rtype: TopoData
+
+   .. rubric:: Examples
+
+   >>> topo_data=model.topo_data
+
+.. py:property:: control_data
+   :type: ansys.meshing.prime.core.controldata.ControlData
+
+
+   Get the control data for the model.
+
+   :returns: Control data for the model.
+   :rtype: ControlData
+
+   .. rubric:: Examples
+
+   >>> control_data = model.control_data
+
+.. py:property:: material_point_data
+   :type: ansys.meshing.prime.autogen.materialpointmanager.MaterialPointManager
+
+
+   Get material point data for the model.
+
+   The Material Point Manager is used to create, delete, and manage material points.
+
+   :returns: Material Point Manager.
+   :rtype: MaterialPointManager
+
+   .. rubric:: Examples
+
+   >>> mpt_data = model.material_point_data
+
+.. py:property:: python_logger
+
+   Get python standard logger from PyPrimeMesh's logger instance.
+
+   PyPrimeMesh's python standard logger instance can be used to control
+   the verbosity of messages printed by PyPrimeMesh and more.
+
+   :returns: PyPrimeMesh's python standard logger instance.
+   :rtype: logging.Logger
+
+   .. rubric:: Examples
+
+   Set log level to debug.
+
+   >>> model.python_logger.setLevel(logging.DEBUG)
+
+.. py:property:: logger
+   :type: ansys.meshing.prime.internals.logger.PrimeLogger
+
+
+   Get PyPrimeMesh's logger instance.
+
+   PyPrimeMesh's logger instance can be used to save the logs to a file,
+   redirect the logs to the given stream, control the verbosity
+   of messages printed by PyPrimeMesh and more.
+
+   :returns: PyPrimeMesh's logger instance.
+   :rtype: PrimeLogger
+
+   .. rubric:: Examples
+
+   Save logs to a file.
+
+   >>> model.logger.add_file_handler(logs_dir=r"./tmp")
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __doc__
+   :value: Multiline-String
+
+   .. raw:: html
+
+      <details><summary>Show Value</summary>
+
+   .. code-block:: python
+
+      """Model is the nucleus of Prime. Model forms the base and contains all the information about Prime.
+      
+          You can access any information in Prime only through Model.
+          Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+      
+          Parameters
+          ----------
+          comm : Communicator
+              Communicator to connect with the Ansys Prime server.
+          id : int
+              Id of the Model.
+          object_id : int
+              Object id of the Model.
+          name : str
+              Name of the Model.
+          """
+
+   .. raw:: html
+
+      </details>
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: get_part_by_name(name: str) -> ansys.meshing.prime.core.part.Part
+
+   Get the part by name.
+
+   :param name: Name of the part.
+   :type name: str
+
+   :returns: Part or ``None`` if the given part name doesn't exist.
+   :rtype: Part
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> part = model.get_part_by_name("part.1")
+
+
+.. py:method:: get_part(id: int) -> ansys.meshing.prime.core.part.Part
+
+   Get the part by ID.
+
+   :param id: ID of the part.
+   :type id: int
+
+   :returns: Part or ``None`` if the given part ID doesn't exist.
+   :rtype: Part
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> part = model.get_part(2)
+
+
+.. py:method:: merge_parts(part_ids: Iterable[int], params: ansys.meshing.prime.autogen.modelstructs.MergePartsParams) -> ansys.meshing.prime.autogen.modelstructs.MergePartsResults
+
+   Merge multiple parts into a single part.
+
+   :param part_ids: IDs of the parts to merge.
+   :type part_ids: Iterable[int]
+   :param params: Parameters for merging parts.
+   :type params: MergePartsParams
+
+   :returns: Results for merging the parts into a single part.
+   :rtype: MergePartsResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.MergePartsParams(model = model)
+   >>> results = model.merge_parts(part_ids, params)
+
+
+.. py:method:: delete_parts(part_ids: Iterable[int]) -> ansys.meshing.prime.autogen.commonstructs.DeleteResults
+
+   Delete parts and their contents.
+
+   :param part_ids: IDs of parts to delete.
+   :type part_ids: Iterable[int]
+
+   :returns: Results from deleting parts and their contents.
+   :rtype: DeleteResults
+
+   .. rubric:: Examples
+
+   >>> results = model.delete_parts(part_ids)
+
+
+.. py:method:: get_global_sizing_params() -> ansys.meshing.prime.autogen.modelstructs.GlobalSizingParams
+
+   Get global sizing parameters.
+
+   :returns: Global sizing parameters.
+   :rtype: GlobalSizingParams
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> sf_params = model.get_global_sizing_params()
+
+
+.. py:method:: set_global_sizing_params(params: ansys.meshing.prime.autogen.modelstructs.GlobalSizingParams)
+
+   Set global sizing parameters.
+
+   :param params: Global sizing parameters for initializing surfer parameters and
+                  various size control parameters.
+   :type params: GlobalSizingParams
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.set_global_sizing_params(GlobalSizingParams(model=model,
+   ...                                          min=0.1,
+   ...                                          max=1.0,
+   ...                                          growth_rate=1.2))
+
+
+.. py:method:: set_working_directory(path: str)
+
+   Set working directory.
+
+   Set the working directory to be considered for file i/o when the file paths are relative.
+
+   :param path: Path to the directory.
+   :type path: str
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> zones = model.set_working_directory("C:/input_files")
+
+
+.. py:method:: __str__()
+
+   Print the summary of the model.
+
+   :returns: Summary of the model.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> print(model)
+
+
+.. py:method:: as_polydata(update: bool = False)
+
+   Get the model as a polydata.
+
+   :param update: Update the polydata if it is already present, by default False.
+   :type update: bool, optional
+
+   :returns: Polydata of the model.
+   :rtype: vtk.vtkPolyData
+
+   .. rubric:: Examples
+
+   >>> polydata = model.as_polydata()
+
+
+.. py:method:: get_scoped_polydata(scope, update: bool = False)
+
+   Get the scoped polydata of the model.
+
+   :param scope: Scope of the model.
+   :type scope: Scope
+
+   :returns: Scoped polydata of the model.
+   :rtype: vtk.vtkPolyData
+
+   .. rubric:: Examples
+
+   >>> scoped_polydata = model.get_scoped_polydata(scope)
+
+
+
+
+

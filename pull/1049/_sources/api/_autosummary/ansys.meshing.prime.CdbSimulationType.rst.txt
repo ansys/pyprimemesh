@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+CdbSimulationType
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CdbSimulationType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      CdbSimulationType.IMPLICIT
+      
+      
+      CdbSimulationType.EXPLICIT
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CdbSimulationType
+
+    ansys.meshing.prime.CdbSimulationType
+
+.. vale on

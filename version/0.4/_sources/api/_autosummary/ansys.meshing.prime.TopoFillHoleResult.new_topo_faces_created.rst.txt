@@ -1,0 +1,6 @@
+﻿new\_topo\_faces\_created
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TopoFillHoleResult.new_topo_faces_created

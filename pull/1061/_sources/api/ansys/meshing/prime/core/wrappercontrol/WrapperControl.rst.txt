@@ -1,0 +1,125 @@
+
+
+
+
+
+
+:class:`WrapperControl`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.core.wrappercontrol.WrapperControl(model: ansys.meshing.prime.internals.comm_manager.CommunicationManager, id: int, object_id: int, name: str)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.wrappercontrol.WrapperControl`
+
+
+   Wrapper Control to describe all parameters and controls used for wrapping..
+
+   :param model: Server model to create WrapperControl object.
+   :type model: Model
+   :param id: Id of the WrapperControl.
+   :type id: int
+   :param object_id: Object id of the WrapperControl.
+   :type object_id: int
+   :param name: Name of the WrapperControl.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: WrapperControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the wrapper control based on a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - Get the name of the wrapper control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.wrappercontrol import WrapperControl
+
+Property detail
+---------------
+
+.. py:property:: name
+
+   Get the name of the wrapper control.
+
+   :returns: Name of the wrapper control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(wrapper_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the wrapper control based on a suggested name.
+
+   :param name: Suggested name for the wrapper control.
+   :type name: str
+
+   :returns: Newly assigned name of the wrapper control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> wrapper_control.set_suggested_name("wrapper_control1")
+
+
+
+
+

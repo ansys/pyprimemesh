@@ -1,0 +1,125 @@
+
+
+
+
+
+
+The ``launcher.py`` module
+==========================
+
+.. py:module:: ansys.meshing.prime.internals.launcher
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: launcher
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~launch_server_process`
+            - Launch a server process for Ansys Prime Server.
+
+
+          * - :py:obj:`~launch_prime`
+            - Launch an instance of Ansys Prime Server and get a client for it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Helper module for launching the server.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: launch_server_process(prime_root: Optional[str] = None, ip: str = defaults.ip(), port: int = defaults.port(), n_procs: Optional[int] = None, **kw) -> subprocess.Popen
+
+   Launch a server process for Ansys Prime Server.
+
+   :param prime_root: Root directory for Ansys Prime Server.
+   :type prime_root: str, optional
+   :param ip: IP address to start the server at. The default is ``127.0.0.1``.
+   :type ip: str
+   :param port: Port at which the server is started. The default is ``50055``.
+   :type port: int
+   :param n_procs: When running in distributed mode, the number of distributed
+                   processes to spawn. The default is ``None``, in which case
+                   the server is launched as the only process (normal mode). The
+                   process marked as ``Node 0`` hosts the gRPC server.
+   :type n_procs: Optional[int]
+
+   :returns: Instance of the subprocess that is launched.
+   :rtype: subprocess.Popen
+
+   :raises FileNotFoundError: When there is an error in the file paths used to launch the server.
+
+
+.. py:function:: launch_prime(prime_root: Optional[str] = None, ip: str = defaults.ip(), port: int = defaults.port(), timeout: float = defaults.connection_timeout(), n_procs: Optional[int] = None, version: Optional[str] = None, **kwargs)
+
+   Launch an instance of Ansys Prime Server and get a client for it.
+
+   :param prime_root: Root directory for Ansys Prime Server.
+   :type prime_root: Optional[str]
+   :param ip: IP address to start the server at. The default is ``127.0.0.1``.
+   :type ip: str
+   :param port: Port at which the server is started. The default is ``50055``.
+   :type port: int
+   :param timeout: Maximum time in seconds to wait for the client to connect to the server.
+                   The default is ``20.0``.
+   :type timeout: float
+   :param n_procs: When running in distributed mode, the number of distributed
+                   processes to spawn. The default is ``None``, in which case
+                   the server is launched as the only process (normal mode). The
+                   process marked as ``Node 0`` hosts the gRPC server.
+   :type n_procs: Optional[int]
+
+   :returns: Instance of the client that is connected to the launched server.
+   :rtype: Client
+
+   :raises FileNotFoundError: When there is an error in file paths used to launch the server.
+   :raises ConnectionError: When there is an error in connecting to the gRPC server.
+
+
+
+

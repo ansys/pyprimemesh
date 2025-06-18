@@ -1,0 +1,6 @@
+﻿max
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: GlobalSizingParams.max

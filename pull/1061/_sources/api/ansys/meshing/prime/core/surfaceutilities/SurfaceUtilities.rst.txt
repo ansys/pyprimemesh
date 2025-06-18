@@ -1,0 +1,121 @@
+
+
+
+
+
+
+:class:`SurfaceUtilities`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities(model: ansys.meshing.prime.core.model.Model)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.surfaceutilities.SurfaceUtilities`
+
+
+   Performs various general surface utilities algorithms.
+
+   For example, copy zonelets, resolve surface intersections.
+
+   :param model: Server model to create SurfaceUtilities object.
+   :type model: Model
+
+
+
+.. py:currentmodule:: SurfaceUtilities
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~add_thickness`
+            - Add thicknesss to input face zonelets.
+          * - :py:attr:`~create_boi`
+            - Create BOI to input face zonelets.
+          * - :py:attr:`~create_contact_patch`
+            - Create a contact patch by offsetting the target zonelets.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.surfaceutilities import SurfaceUtilities
+
+
+
+Method detail
+-------------
+
+.. py:method:: add_thickness(zonelets: Iterable[int], params: ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessParams) -> ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults
+
+   Add thicknesss to input face zonelets.
+
+   :param zonelets: List of input face zonelet IDs.
+   :type zonelets: Iterable[int]
+   :param params: Parameters for controlling the addition of thickness.
+   :type params: AddThicknessParams
+
+   :returns: Results for adding thickness.
+   :rtype: AddThicknessResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.add_thickness(zonelets, params)
+
+
+.. py:method:: create_boi(face_zonelet_ids: Iterable[int], params: ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIParams) -> ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIResults
+
+   Create BOI to input face zonelets.
+
+   :param face_zonelet_ids: List of input face zonelet IDs.
+   :type face_zonelet_ids: Iterable[int]
+   :param params: Parameters for controlling BOI creation.
+   :type params: CreateBOIParams
+
+   :returns: Results from creating BOI.
+   :rtype: CreateBOIResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.create_boi(zonelets, params)
+
+
+.. py:method:: create_contact_patch(source_zonelets: Iterable[int], target_zonelets: Iterable[int], params: ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams) -> ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchResults
+
+   Create a contact patch by offsetting the target zonelets.
+
+   :param source_zonelets: IDS for the source face zonelets.
+   :type source_zonelets: Iterable[int]
+   :param target_zonelets: IDs for the target face zonelets.
+   :type target_zonelets: Iterable[int]
+   :param params: Parameters for controlling the contact patch creation.
+   :type params: CreateContactPatchParams
+
+   :returns: Results from creating the contact patch.
+   :rtype: CreateContactPatchResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.create_contact_patch(zonelets, params)
+
+
+
+
+

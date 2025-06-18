@@ -1,0 +1,78 @@
+
+
+
+
+
+
+The ``communicator.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.internals.communicator
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: communicator
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.communicator.Communicator`
+            - Provides the abstract class for the server communicator.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Communicator</api/ansys/meshing/prime/internals/communicator/Communicator>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for abstract communicator.
+
+
+
+
+
+
+
+

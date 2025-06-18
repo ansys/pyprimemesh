@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+SeparateBlocksFormatType
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SeparateBlocksFormatType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      SeparateBlocksFormatType.STANDARD
+      
+      
+      SeparateBlocksFormatType.COMPACT
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SeparateBlocksFormatType
+
+    ansys.meshing.prime.SeparateBlocksFormatType
+
+.. vale on

@@ -1,0 +1,100 @@
+
+
+
+
+
+
+The ``scanner.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.relaxed_json.scanner
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: scanner
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~make_scanner`
+            - Make a scanner for bytes or bytearrays.
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~NUMBER_RE`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Implementation of Scanner for scanning bytes or bytearrays.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: make_scanner(context) -> Callable[[str, int], Tuple[str, int]]
+
+   Make a scanner for bytes or bytearrays.
+
+   :param context: Context needed to know the types.
+   :type context: JSONDecoder
+
+   :returns: Function that scans byte or a bytearray.
+   :rtype: Callable[[str, int], Tuple[str, int]]
+
+   :raises StopIteration: Stop the current iteration.
+   :raises StopIteration: Stop the current iteration.
+
+
+.. py:data:: NUMBER_RE
+
+
+

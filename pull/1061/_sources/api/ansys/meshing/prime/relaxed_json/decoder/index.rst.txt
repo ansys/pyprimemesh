@@ -1,0 +1,96 @@
+
+
+
+
+
+
+The ``decoder.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.relaxed_json.decoder
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: decoder
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.decoder.JSONDecoder`
+            - Decode object to JSON format.
+
+
+
+
+    .. tab-item:: Exceptions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.decoder.JSONDecodeError`
+            - Errors for JSONDecode class.
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> JSONDecoder</api/ansys/meshing/prime/relaxed_json/decoder/JSONDecoder>
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-lightning_bolt"></span> JSONDecodeError</api/ansys/meshing/prime/relaxed_json/decoder/JSONDecodeError>
+
+
+
+
+
+
+
+Description
+-----------
+
+Implementation of Relaxed JSON Decoder.
+
+
+
+
+
+
+
+

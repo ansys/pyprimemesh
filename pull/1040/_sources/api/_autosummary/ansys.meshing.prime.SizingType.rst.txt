@@ -1,0 +1,60 @@
+.. vale off
+
+
+
+
+
+
+
+SizingType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizingType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      SizingType.CURVATURE
+      
+      
+      SizingType.PROXIMITY
+      
+      
+      SizingType.HARD
+      
+      
+      SizingType.SOFT
+      
+      
+      SizingType.MESHED
+      
+      
+      SizingType.BOI
+      
+      
+      SizingType.SOI
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SizingType
+
+    ansys.meshing.prime.SizingType
+
+.. vale on

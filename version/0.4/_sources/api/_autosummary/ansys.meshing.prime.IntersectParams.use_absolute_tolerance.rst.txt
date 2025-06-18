@@ -1,0 +1,6 @@
+﻿use\_absolute\_tolerance
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IntersectParams.use_absolute_tolerance

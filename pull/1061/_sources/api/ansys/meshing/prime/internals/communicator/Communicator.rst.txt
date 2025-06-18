@@ -1,0 +1,139 @@
+
+
+
+
+
+
+:class:`Communicator`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.internals.communicator.Communicator
+
+   Bases: :py:obj:`object`
+
+
+   Provides the abstract class for the server communicator.
+
+
+
+
+
+
+
+
+.. py:currentmodule:: Communicator
+
+Overview
+--------
+
+.. tab-set::
+
+   .. tab-item:: Abstract methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~serve`
+            - Serve the model and send a command to the server.
+          * - :py:attr:`~initialize_params`
+            - Initialize parameters on the server side.
+          * - :py:attr:`~run_on_server`
+            - Run the command on the server side.
+          * - :py:attr:`~import_cad`
+            - Import a CAD file from local.
+          * - :py:attr:`~close`
+            - Close communication when deleting the instance.
+
+
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.communicator import Communicator
+
+
+
+Method detail
+-------------
+
+.. py:method:: serve(model, command, *args, **kwargs) -> dict
+   :abstractmethod:
+
+
+   Serve the model and send a command to the server.
+
+   :param model: Model to serve.
+   :type model: Model
+   :param command: Command to send to the server.
+   :type command: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: initialize_params(model, param_name: str, *args) -> dict
+   :abstractmethod:
+
+
+   Initialize parameters on the server side.
+
+   :param model: Model to initialize parameter on.
+   :type model: Model
+   :param param_name: Parameter to initialize.
+   :type param_name: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: run_on_server(model, recipe: str) -> dict
+   :abstractmethod:
+
+
+   Run the command on the server side.
+
+   :param model: Model to run commands on.
+   :type model: Model
+   :param recipe: Command to run.
+   :type recipe: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: import_cad(model, file_name: str, *args) -> dict
+   :abstractmethod:
+
+
+   Import a CAD file from local.
+
+   :param model: Model to import.
+   :type model: Model
+   :param file_name: Name of the CAD file.
+   :type file_name: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: close()
+   :abstractmethod:
+
+
+   Close communication when deleting the instance.
+
+
+
+
+

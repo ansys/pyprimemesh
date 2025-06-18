@@ -1,0 +1,105 @@
+
+
+
+
+
+
+:class:`PrimeRuntimeError`
+==========================
+
+
+.. py:exception:: ansys.meshing.prime.internals.error_handling.PrimeRuntimeError(message: str, error_code: ansys.meshing.prime.autogen.primeconfig.ErrorCode = None, error_locations=None)
+
+   Bases: :py:obj:`Exception`
+
+
+   Provides runtime errors for PyPrimeMesh.
+
+   :param message: Error message to show.
+   :type message: str
+   :param error_code: ID of the error. The default is ``None``.
+   :type error_code: ErrorCode, optional
+   :param error_locations: Location of the error. The default is ``None``.
+   :type error_locations: Any, optional
+
+
+
+
+.. py:currentmodule:: PrimeRuntimeError
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~message`
+            - Error message to be reported.
+          * - :py:attr:`~error_code`
+            - Error code representing the error.
+          * - :py:attr:`~error_locations`
+            - Locations associated with the error.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Transform the message to a string.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
+
+Property detail
+---------------
+
+.. py:property:: message
+
+   Error message to be reported.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.autogen.primeconfig.ErrorCode
+
+
+   Error code representing the error.
+
+.. py:property:: error_locations
+   :type: list
+
+
+   Locations associated with the error.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+   Transform the message to a string.
+
+
+
+
+

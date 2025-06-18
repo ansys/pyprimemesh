@@ -1,0 +1,84 @@
+
+
+
+
+
+
+The ``lucid`` package
+=========================
+
+.. py:module:: ansys.meshing.prime.lucid
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: lucid
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.mesh_util`
+            - Module for meshing utility functions.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.scope`
+            - Module for Lucid Scope for operation on surfaces functionality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.utils`
+            - Util functions for lucid modules.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> mesh_util</api/ansys/meshing/prime/lucid/mesh_util/index>
+    <span class="nf nf-fa-file"></span> scope</api/ansys/meshing/prime/lucid/scope/index>
+    <span class="nf nf-fa-file"></span> utils</api/ansys/meshing/prime/lucid/utils/index>
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+High level helper functions for PyPrimeMesh
+
+
+
+
+
+

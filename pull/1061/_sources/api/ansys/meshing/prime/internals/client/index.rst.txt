@@ -1,0 +1,78 @@
+
+
+
+
+
+
+The ``client.py`` module
+========================
+
+.. py:module:: ansys.meshing.prime.internals.client
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: client
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.client.Client`
+            - Provides the ``Client`` class for PyPrimeMesh.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Client</api/ansys/meshing/prime/internals/client/Client>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for client communication implementations.
+
+
+
+
+
+
+
+

@@ -1,0 +1,126 @@
+
+
+
+
+
+
+:class:`PrimeCommunicator`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.internals.prime_communicator.PrimeCommunicator
+
+   Bases: :py:obj:`ansys.meshing.prime.internals.communicator.Communicator`
+
+
+   Provides for communicating with Ansys Prime Server.
+
+
+
+.. py:currentmodule:: PrimeCommunicator
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~serve`
+            - Serve the model and send a command to the server.
+          * - :py:attr:`~initialize_params`
+            - Initialize parameters on the server side.
+          * - :py:attr:`~run_on_server`
+            - Run recipe on a model on the server.
+          * - :py:attr:`~close`
+            - Close session.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~models`
+            - List of models available.
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.prime_communicator import PrimeCommunicator
+
+Property detail
+---------------
+
+.. py:property:: models
+
+   List of models available.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: serve(model, command, *args, **kwargs) -> dict
+
+   Serve the model and send a command to the server.
+
+   :param model: Model to serve.
+   :type model: Model
+   :param command: Command to send.
+   :type command: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: initialize_params(model, param_name: str) -> dict
+
+   Initialize parameters on the server side.
+
+   :param model: Model to initialize parameters on.
+   :type model: Model
+   :param param_name: Parameter to initialize.
+   :type param_name: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: run_on_server(model, recipe: str) -> dict
+
+   Run recipe on a model on the server.
+
+   :param model: Model to run recipe on.
+   :type model: Model
+   :param recipe: Recipe to run.
+   :type recipe: str
+
+   :returns: Response from the server.
+   :rtype: dict
+
+
+.. py:method:: close()
+
+   Close session.
+
+
+
+
+

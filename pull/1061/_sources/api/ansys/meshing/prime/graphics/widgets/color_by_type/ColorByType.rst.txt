@@ -1,0 +1,75 @@
+
+
+
+
+
+
+:class:`ColorByType`
+====================
+
+
+.. py:class:: ansys.meshing.prime.graphics.widgets.color_by_type.ColorByType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   Contains the zone types to display.
+
+
+
+.. py:currentmodule:: ColorByType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ZONE`
+            - 
+          * - :py:attr:`~ZONELET`
+            - 
+          * - :py:attr:`~PART`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ZONE
+   :value: 0
+
+
+.. py:attribute:: ZONELET
+   :value: 1
+
+
+.. py:attribute:: PART
+   :value: 2
+
+
+
+
+
+

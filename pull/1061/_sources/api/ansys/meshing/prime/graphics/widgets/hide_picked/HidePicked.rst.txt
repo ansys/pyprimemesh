@@ -1,0 +1,91 @@
+
+
+
+
+
+
+:class:`HidePicked`
+===================
+
+
+.. py:class:: ansys.meshing.prime.graphics.widgets.hide_picked.HidePicked(prime_plotter: ansys.meshing.prime.graphics.plotter.PrimePlotter)
+
+   Bases: :py:obj:`ansys.tools.visualization_interface.backends.pyvista.widgets.PlotterWidget`
+
+
+   Initializes the hide picked button widget.
+
+   This widget lets you hide the picked mesh objects.
+
+   :param prime_plotter: Plotter to apply this widget to.
+   :type prime_plotter: Plotter
+
+
+
+.. py:currentmodule:: HidePicked
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~callback`
+            - Define callback function for the button widget.
+          * - :py:attr:`~update`
+            - Define the configuration and representation of the button widget button.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~prime_plotter`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: prime_plotter
+
+
+
+Method detail
+-------------
+
+.. py:method:: callback(state: bool) -> None
+
+   Define callback function for the button widget.
+
+
+.. py:method:: update() -> None
+
+   Define the configuration and representation of the button widget button.
+
+
+
+
+

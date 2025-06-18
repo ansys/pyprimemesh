@@ -1,0 +1,36 @@
+.. vale off
+
+ProjectOnGeometryResults
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ProjectOnGeometryResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ProjectOnGeometryResults.print_default
+      ProjectOnGeometryResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ProjectOnGeometryResults.error_code
+      ProjectOnGeometryResults.success
+      ProjectOnGeometryResults.warning_codes
+   
+   
+
+.. vale on

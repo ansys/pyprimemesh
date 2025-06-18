@@ -1,0 +1,82 @@
+
+
+
+
+
+
+:class:`SplineFeatureCaptureType`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.igastructs.SplineFeatureCaptureType
+
+   Bases: :py:obj:`ansys.meshing.prime.params.primestructs.enum.IntEnum`
+
+
+   Options to capture features in spline.
+
+
+
+
+.. py:currentmodule:: SplineFeatureCaptureType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~IGNORE`
+            - Ignores feature capture in spline.
+          * - :py:attr:`~BYANGLE`
+            - Uses angle for capturing features in spline.
+          * - :py:attr:`~BYEDGES`
+            - Use edges for capturing features in spline.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.igastructs import SplineFeatureCaptureType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: IGNORE
+   :value: 0
+
+
+   Ignores feature capture in spline.
+
+.. py:attribute:: BYANGLE
+   :value: 1
+
+
+   Uses angle for capturing features in spline.
+
+.. py:attribute:: BYEDGES
+   :value: 2
+
+
+   Use edges for capturing features in spline.
+
+
+
+
+

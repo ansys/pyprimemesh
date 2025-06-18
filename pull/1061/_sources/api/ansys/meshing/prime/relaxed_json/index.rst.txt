@@ -1,0 +1,186 @@
+
+
+
+
+
+
+The ``relaxed_json`` package
+================================
+
+.. py:module:: ansys.meshing.prime.relaxed_json
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: relaxed_json
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.decoder`
+            - Implementation of Relaxed JSON Decoder.
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.encoder`
+            - Implementation of JSOnEncoder that can handle byte arrays.
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.scanner`
+            - Implementation of Scanner for scanning bytes or bytearrays.
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.JSONDecoder`
+            - Decode object to JSON format.
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.JSONEncoder`
+            - Class to encode Object to JSON format.
+
+
+
+
+    .. tab-item:: Exceptions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.JSONDecodeError`
+            - Errors for JSONDecode class.
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~dumps`
+            - Serialize an object to a JSON-formatted string.
+
+
+          * - :py:obj:`~loads`
+            - 
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> decoder</api/ansys/meshing/prime/relaxed_json/decoder/index>
+    <span class="nf nf-fa-file"></span> encoder</api/ansys/meshing/prime/relaxed_json/encoder/index>
+    <span class="nf nf-fa-file"></span> scanner</api/ansys/meshing/prime/relaxed_json/scanner/index>
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> JSONDecoder</api/ansys/meshing/prime/relaxed_json/JSONDecoder>
+    <span class="nf nf-cod-symbol_class"></span> JSONEncoder</api/ansys/meshing/prime/relaxed_json/JSONEncoder>
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-lightning_bolt"></span> JSONDecodeError</api/ansys/meshing/prime/relaxed_json/JSONDecodeError>
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: dumps(obj, *, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, separators=None, default=None, sort_keys=False, **kw)
+
+   Serialize an object to a JSON-formatted string.
+
+   If ``skipkeys`` is ``True``, ``dict`` keys that are not basic types
+   (``str``, ``int``, ``float``, ``bool``, and ``None``) are skipped
+   instead of raising a ``TypeError``.
+
+   If ``ensure_ascii`` is ``False``, the return value can contain non-ASCII
+   characters if they appear in strings contained in the object. Otherwise, all
+   such characters are escaped in JSON strings.
+
+   If ``check_circular`` is ``False``, the circular reference check
+   for container types is skipped and a circular reference
+   results in an ``RecursionError`` (or worse).
+
+   If ``allow_nan`` is ``False``, it is a ``ValueError`` to
+   serialize out-of-range float values (``nan``, ``inf``, and ``-inf``) in
+   strict compliance of the JSON specification, instead of using the
+   JavaScript equivalents (``NaN``, ``Infinity``, and ``-Infinity``).
+
+   If specified, ``separators`` should be an ``(item_separator, key_separator)``
+   tuple. The default is ``(', ', ': ')`` if *indent* is ``None`` and
+   ``(',', ': ')`` otherwise. To get the most compact JSON representation,
+   you should specify ``(',', ':')`` to eliminate whitespace.
+
+   ``default(obj)`` is a function that should return a serializable version
+   of the object or raise a ``TypeError``. The default simply raises a
+   ``TypeError``.
+
+   If ``sort_keys`` is ``True`` rather than the default of ``False``, the
+   output of the dictionaries are sorted by key.
+
+   To use a custom ``JSONEncoder`` subclass (one that overrides the
+   ``.default()`` method to serialize additional types), specify it with
+   the ``cls`` kwarg. Otherwise ``JSONEncoder`` is used.
+
+
+
+.. py:function:: loads(s: bytes or bytearray, *, cls=None, object_hook=None, parse_int=None, parse_float=None, parse_constant=None, object_pairs_hook=None, **kw)
+
+
+

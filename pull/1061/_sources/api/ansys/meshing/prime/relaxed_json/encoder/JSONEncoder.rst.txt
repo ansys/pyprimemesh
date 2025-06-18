@@ -1,0 +1,151 @@
+
+
+
+
+
+
+:class:`JSONEncoder`
+====================
+
+
+.. py:class:: ansys.meshing.prime.relaxed_json.encoder.JSONEncoder(*, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, sort_keys=False, separators=None, default=None)
+
+   Class to encode Object to JSON format.
+
+   :param skipkeys: Skip keys, by default False.
+   :type skipkeys: bool, optional
+   :param ensure_ascii: Ensure that we use ASCII characters, by default True.
+   :type ensure_ascii: bool, optional
+   :param check_circular: Check circular loops, by default True.
+   :type check_circular: bool, optional
+   :param allow_nan: Allow not number values, by default True.
+   :type allow_nan: bool, optional
+   :param sort_keys: Order the keys, by default False.
+   :type sort_keys: bool, optional
+   :param separators: String separators, by default None.
+   :type separators: Any, optional
+   :param default: Default error message, by default None.
+   :type default: Any, optional
+
+
+
+.. py:currentmodule:: JSONEncoder
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~default`
+            - Raise default error.
+          * - :py:attr:`~encode`
+            - Return a bytearray containing JSON.
+          * - :py:attr:`~iterencode`
+            - Encode the given object and yield the bytearray representationas available.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~item_separator`
+            - 
+          * - :py:attr:`~key_separator`
+            - 
+          * - :py:attr:`~skipkeys`
+            - 
+          * - :py:attr:`~ensure_ascii`
+            - 
+          * - :py:attr:`~check_circular`
+            - 
+          * - :py:attr:`~allow_nan`
+            - 
+          * - :py:attr:`~sort_keys`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.relaxed_json.encoder import JSONEncoder
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: item_separator
+   :value: b','
+
+
+.. py:attribute:: key_separator
+   :value: b':'
+
+
+.. py:attribute:: skipkeys
+   :value: False
+
+
+.. py:attribute:: ensure_ascii
+   :value: True
+
+
+.. py:attribute:: check_circular
+   :value: True
+
+
+.. py:attribute:: allow_nan
+   :value: True
+
+
+.. py:attribute:: sort_keys
+   :value: False
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: default(obj)
+
+   Raise default error.
+
+   :param obj: Object that is not serializable.
+   :type obj: Any
+
+   :raises TypeError: Raise the error with the proper type
+
+
+.. py:method:: encode(obj)
+
+   Return a bytearray containing JSON.
+
+   Return a bytearray containing JSON representation of Python Data
+   structure, with the vector extension
+
+
+.. py:method:: iterencode(obj)
+
+   Encode the given object and yield the bytearray representationas available.
+
+
+
+
+

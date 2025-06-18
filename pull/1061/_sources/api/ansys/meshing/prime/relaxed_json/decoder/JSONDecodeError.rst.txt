@@ -1,0 +1,82 @@
+
+
+
+
+
+
+:class:`JSONDecodeError`
+========================
+
+
+.. py:exception:: ansys.meshing.prime.relaxed_json.decoder.JSONDecodeError(msg: str, document: bytes or bytearray, pos: int)
+
+   Bases: :py:obj:`ValueError`
+
+
+   Errors for JSONDecode class.
+
+   :param msg: Error message
+   :type msg: str
+   :param document: Document where the error is happening.
+   :type document: bytesorbytearray
+   :param pos: Position where the error is happening.
+   :type pos: int
+
+
+
+.. py:currentmodule:: JSONDecodeError
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_msg`
+            - 
+          * - :py:attr:`~lineno`
+            - 
+          * - :py:attr:`~colno`
+            - 
+          * - :py:attr:`~pos`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.relaxed_json.decoder import JSONDecodeError
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: error_msg
+   :value: 'Uninferable: line Uninferable column Uninferable (char Uninferable)'
+
+
+.. py:attribute:: lineno
+
+.. py:attribute:: colno
+
+.. py:attribute:: pos
+
+
+
+
+

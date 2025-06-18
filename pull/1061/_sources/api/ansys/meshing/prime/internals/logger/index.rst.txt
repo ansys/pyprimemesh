@@ -1,0 +1,85 @@
+
+
+
+
+
+
+The ``logger.py`` module
+========================
+
+.. py:module:: ansys.meshing.prime.internals.logger
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: logger
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.logger.SingletonType`
+            - Provides the singleton helper class for the logger.
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.logger.PrimeLogger`
+            - Provides the singleton logger for PyPrimeMesh.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SingletonType</api/ansys/meshing/prime/internals/logger/SingletonType>
+    <span class="nf nf-cod-symbol_class"></span> PrimeLogger</api/ansys/meshing/prime/internals/logger/PrimeLogger>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for logger singleton.
+
+
+
+
+
+
+
+

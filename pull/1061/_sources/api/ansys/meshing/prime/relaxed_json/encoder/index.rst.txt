@@ -1,0 +1,169 @@
+
+
+
+
+
+
+The ``encoder.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.relaxed_json.encoder
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: encoder
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json.encoder.JSONEncoder`
+            - Class to encode Object to JSON format.
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~py_encode_basestring`
+            - Return a bytearray JSON representation of a Python string.
+
+
+          * - :py:obj:`~py_encode_basestring_ascii`
+            - Return an ASCII-only bytearray JSON representation of a Python string.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~encode_basestring`
+            - 
+
+
+          * - :py:obj:`~encode_basestring_ascii`
+            - 
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ESCAPE`
+            - 
+
+
+          * - :py:obj:`~ESCAPE_ASCII`
+            - 
+
+
+          * - :py:obj:`~HAS_UTF8`
+            - 
+
+
+          * - :py:obj:`~ESCAPE_DCT`
+            - 
+
+
+          * - :py:obj:`~INFINITY`
+            - 
+
+
+          * - :py:obj:`~NUMPY_TYPEMAP`
+            - 
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> JSONEncoder</api/ansys/meshing/prime/relaxed_json/encoder/JSONEncoder>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Implementation of JSOnEncoder that can handle byte arrays.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: py_encode_basestring(s)
+
+   Return a bytearray JSON representation of a Python string.
+
+
+.. py:function:: py_encode_basestring_ascii(s)
+
+   Return an ASCII-only bytearray JSON representation of a Python string.
+
+
+.. py:data:: ESCAPE
+
+.. py:data:: ESCAPE_ASCII
+
+.. py:data:: HAS_UTF8
+
+.. py:data:: ESCAPE_DCT
+
+.. py:data:: INFINITY
+
+.. py:data:: NUMPY_TYPEMAP
+
+.. py:data:: encode_basestring
+
+.. py:data:: encode_basestring_ascii
+
+
+

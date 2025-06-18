@@ -1,0 +1,38 @@
+.. vale off
+
+DetectHolesParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DetectHolesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DetectHolesParams.print_default
+      DetectHolesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DetectHolesParams.allow_curved_topo_faces
+      DetectHolesParams.max_hole_length
+      DetectHolesParams.max_radius_circular_holes
+      DetectHolesParams.min_hole_length
+      DetectHolesParams.min_radius_circular_holes
+   
+   
+
+.. vale on

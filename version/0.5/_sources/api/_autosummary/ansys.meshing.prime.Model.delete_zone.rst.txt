@@ -1,0 +1,6 @@
+delete\_zone
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.delete_zone

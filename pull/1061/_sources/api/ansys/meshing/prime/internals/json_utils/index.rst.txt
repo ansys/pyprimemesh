@@ -1,0 +1,99 @@
+
+
+
+
+
+
+The ``json_utils.py`` module
+============================
+
+.. py:module:: ansys.meshing.prime.internals.json_utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: json_utils
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~loads`
+            - Load JSON from an input string.
+
+
+          * - :py:obj:`~dumps`
+            - Dump JSON to an object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for JSON utility functions.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: loads(s: Union[str, bytes, bytearray], *args, **kwargs)
+
+   Load JSON from an input string.
+
+   :param s: Input string.
+   :type s: Union[str, bytes, bytearray]
+
+   :returns: Object converted to JSON.
+   :rtype: json
+
+
+.. py:function:: dumps(obj, *args, **kwargs)
+
+   Dump JSON to an object.
+
+   :param obj: Input object.
+   :type obj: Any
+
+   :returns: JSON converted to an object.
+   :rtype: Object
+
+
+
+

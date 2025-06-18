@@ -1,0 +1,140 @@
+
+
+
+
+
+
+:class:`Client`
+===============
+
+
+.. py:class:: ansys.meshing.prime.internals.client.Client(*, server_process=None, ip: str = defaults.ip(), port: int = defaults.port(), timeout: float = defaults.connection_timeout(), credentials=None, communicator_type='grpc', **kwargs)
+
+   Bases: :py:obj:`object`
+
+
+   Provides the ``Client`` class for PyPrimeMesh.
+
+   :param server_process: Server process in the system. The default is ``None``.
+   :type server_process: Any, optional
+   :param ip: IP address where the server is located. The default is ``defaults.ip()``.
+   :type ip: str, optional
+   :param port: Port where the server is deployed. The default is ``defaults.port()``.
+   :type port: int, optional
+   :param timeout: Maximum time to wait for connection. The default is ``defaults.connection_timeout()``.
+   :type timeout: float, optional
+   :param credentials: Credentials to connect to the server. The default is ``None``.
+   :type credentials: Any, optional
+
+   :raises ValueError: Failed to load the communicator.
+
+
+
+
+
+.. py:currentmodule:: Client
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~run_on_server`
+            - Run a recipe on the server.
+          * - :py:attr:`~exit`
+            - Close the connection with the server.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~model`
+            - Get model associated with the client.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Open client.
+          * - :py:attr:`~__exit__`
+            - Close communication with the server when deleting the instance.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.client import Client
+
+Property detail
+---------------
+
+.. py:property:: model
+
+   Get model associated with the client.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: run_on_server(recipe: str)
+
+   Run a recipe on the server.
+
+   :param recipe: Recipe to run. This must be a valid Python script.
+   :type recipe: str
+
+
+.. py:method:: exit()
+
+   Close the connection with the server.
+
+   If the client has launched the server, this method also
+   kills the server process.
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> prime_client = prime.launch_prime() # This launches a server process.
+   >>> model = prime_client.model
+   >>> fileio = prime.FileIO(model)
+   >>> result = fileio.read_pmdat('example.pmdat', prime.FileReadParams(model=model))
+   >>> print(result)
+   >>> prime_client.exit() # Sever connection with server and kill the server.
+
+
+.. py:method:: __enter__()
+
+   Open client.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Close communication with the server when deleting the instance.
+
+
+
+
+

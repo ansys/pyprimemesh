@@ -1,0 +1,65 @@
+
+
+
+
+
+
+:class:`SingletonType`
+======================
+
+
+.. py:class:: ansys.meshing.prime.internals.logger.SingletonType
+
+   Bases: :py:obj:`type`
+
+
+   Provides the singleton helper class for the logger.
+
+
+
+
+.. py:currentmodule:: SingletonType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__call__`
+            - Call to redirect new instances to the singleton instance.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.logger import SingletonType
+
+
+
+Method detail
+-------------
+
+.. py:method:: __call__(*args, **kwargs)
+
+   Call to redirect new instances to the singleton instance.
+
+
+
+
+

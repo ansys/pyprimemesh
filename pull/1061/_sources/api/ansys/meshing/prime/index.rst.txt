@@ -1,0 +1,89 @@
+
+
+
+
+
+
+The ``ansys.meshing.prime`` library
+===================================
+
+.. py:module:: ansys.meshing.prime
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: prime
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples`
+            - 
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics`
+            - 
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid`
+            - High level helper functions for PyPrimeMesh
+
+
+          * - :py:obj:`~ansys.meshing.prime.relaxed_json`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> examples</api/ansys/meshing/prime/examples/index>
+    <span class="nf nf-md-package"></span> graphics</api/ansys/meshing/prime/graphics/index>
+    <span class="nf nf-md-package"></span> lucid</api/ansys/meshing/prime/lucid/index>
+    <span class="nf nf-md-package"></span> relaxed_json</api/ansys/meshing/prime/relaxed_json/index>
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+PyPrimeMesh Client library
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+
+
+
+
+
+
+The ``grpc_utils.py`` module
+============================
+
+.. py:module:: ansys.meshing.prime.internals.grpc_utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: grpc_utils
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~get_default_channel_args`
+            - Get default channel arguments for gRPC.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for gRPC utilities.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: get_default_channel_args()
+
+   Get default channel arguments for gRPC.
+
+   :returns: List with channel parameters.
+   :rtype: List
+
+
+
+

@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``prime_communicator.py`` module
+====================================
+
+.. py:module:: ansys.meshing.prime.internals.prime_communicator
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: prime_communicator
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.prime_communicator.PrimeCommunicator`
+            - Provides for communicating with Ansys Prime Server.
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~return_value`
+            - 
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> PrimeCommunicator</api/ansys/meshing/prime/internals/prime_communicator/PrimeCommunicator>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for Prime Server communications.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: return_value
+   :value: ''
+
+
+
+

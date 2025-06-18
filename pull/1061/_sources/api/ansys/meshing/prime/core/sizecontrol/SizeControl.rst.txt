@@ -1,0 +1,131 @@
+
+
+
+
+
+
+:class:`SizeControl`
+====================
+
+
+.. py:class:: ansys.meshing.prime.core.sizecontrol.SizeControl(model, id, object_id, name, local=False)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.sizecontrol.SizeControl`
+
+
+   Size control is used to compute the size field.
+
+   The size field is computed based on the size control defined.
+   Different type of size controls provide control over how the mesh size is distributed on a
+   surface or within the volume.
+
+   :param model: Server model to create SizeControl object.
+   :type model: Model
+   :param id: Id of the SizeControl.
+   :type id: int
+   :param object_id: Object id of the SizeControl.
+   :type object_id: int
+   :param name: Name of the SizeControl..
+   :type name: str
+   :param local: Unused. The default is ``False``.
+   :type local: bool, optional
+
+
+
+
+.. py:currentmodule:: SizeControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the size control to a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - Get the name of size control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.sizecontrol import SizeControl
+
+Property detail
+---------------
+
+.. py:property:: name
+
+   Get the name of size control.
+
+   :returns: Name of the size control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(size_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the size control to a suggested name.
+
+   :param name: Suggested name for the size control.
+   :type name: str
+
+   :returns: Newly suggested name for the size control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> size_control.set_suggested_name("control1")
+
+
+
+
+

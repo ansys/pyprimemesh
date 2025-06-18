@@ -1,0 +1,125 @@
+
+
+
+
+
+
+:class:`PrimeLogger`
+====================
+
+
+.. py:class:: ansys.meshing.prime.internals.logger.PrimeLogger(level: int = logging.WARNING, logger_name: str = 'PyPrimeMesh')
+
+   Bases: :py:obj:`object`
+
+
+   Provides the singleton logger for PyPrimeMesh.
+
+
+
+.. py:currentmodule:: PrimeLogger
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_level`
+            - Set logger output level.
+          * - :py:attr:`~enable_output`
+            - Enable logger output to given stream.
+          * - :py:attr:`~add_file_handler`
+            - Save logs to a file.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~python_logger`
+            - Get the python logger.
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.internals.logger import PrimeLogger
+
+Property detail
+---------------
+
+.. py:property:: python_logger
+   :type: logging.Logger
+
+
+   Get the python logger.
+
+   :returns: Logger.
+   :rtype: logging.Logger
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_level(level: Union[int, str])
+
+   Set logger output level.
+
+   :param level: Level of the logger.
+   :type level: int
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+.. py:method:: enable_output(stream=None)
+
+   Enable logger output to given stream.
+
+   If stream is not specified, sys.stderr is used.
+
+   :param stream: Stream to output the log output to stream
+   :type stream: TextIO, optional
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+.. py:method:: add_file_handler(log_dir: str = './.log', log_file: str = None) -> logging.FileHandler
+
+   Save logs to a file.
+
+   :param log_dir: Directory of the logs. The default is ``"./.log"``.
+   :type log_dir: str, optional
+   :param log_file: Log filename. The default is ``"log_<datestamp>.log"``.
+   :type log_file: str, optional
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+
+
+

@@ -1,0 +1,35 @@
+
+
+
+
+
+
+:class:`VolumeScope`
+====================
+
+
+.. py:class:: ansys.meshing.prime.lucid.scope.VolumeScope(part_expression: str = '*', entity_expression: str = '*', scope_evaluation_type: ansys.meshing.prime.autogen.controlstructs.ScopeEvaluationType = ScopeEvaluationType.ZONES)
+
+   Bases: :py:obj:`_LucidScope`
+
+
+   VolumeScope is one of the classes in Lucid API.
+
+   This class is meant for beginners to meshing. This class is used to define
+   a scope for operation on volumes.
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.lucid.scope import VolumeScope
+
+
+
+
+

@@ -1,0 +1,78 @@
+
+
+
+
+
+
+The ``socket_communicator.py`` module
+=====================================
+
+.. py:module:: ansys.meshing.prime.internals.socket_communicator
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: socket_communicator
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.socket_communicator.SocketCommunicator`
+            - Manages communication with the socket server.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SocketCommunicator</api/ansys/meshing/prime/internals/socket_communicator/SocketCommunicator>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for communications with the socket server.
+
+
+
+
+
+
+
+

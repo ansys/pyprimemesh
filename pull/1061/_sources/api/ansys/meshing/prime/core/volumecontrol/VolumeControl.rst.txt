@@ -1,0 +1,125 @@
+
+
+
+
+
+
+:class:`VolumeControl`
+======================
+
+
+.. py:class:: ansys.meshing.prime.core.volumecontrol.VolumeControl(model, id, object_id, name, local=False)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.volumecontrol.VolumeControl`
+
+
+   Defines the scope and type of volume mesh to generate.
+
+   :param model: Server model to create VolumeControl object.
+   :type model: Model
+   :param id: Id of the VolumeControl.
+   :type id: int
+   :param object_id: Object id of the VolumeControl.
+   :type object_id: int
+   :param name: Name of the VolumeControl.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: VolumeControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the volume control based on a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - Get the name of the volume control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.volumecontrol import VolumeControl
+
+Property detail
+---------------
+
+.. py:property:: name
+
+   Get the name of the volume control.
+
+   :returns: Name of the volume control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(volume_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the volume control based on a suggested name.
+
+   :param name: Suggested name for the volume control.
+   :type name: str
+
+   :returns: Newly suggested name of the volume control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> volume_control.set_suggested_name("control1")
+
+
+
+
+

@@ -1,0 +1,78 @@
+
+
+
+
+
+
+The ``grpc_communicator.py`` module
+===================================
+
+.. py:module:: ansys.meshing.prime.internals.grpc_communicator
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: grpc_communicator
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.internals.grpc_communicator.GRPCCommunicator`
+            - Manages communication with the gRPC server.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> GRPCCommunicator</api/ansys/meshing/prime/internals/grpc_communicator/GRPCCommunicator>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for communications with the gRPC server.
+
+
+
+
+
+
+
+

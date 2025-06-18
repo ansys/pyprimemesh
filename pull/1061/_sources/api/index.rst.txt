@@ -1,0 +1,11 @@
+API reference
+=============
+
+This section describes ansys-meshing-prime endpoints, their capabilities, and how
+to interact with them programmatically.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   <span class="nf nf-md-package"></span> ansys.meshing.prime</api/ansys/meshing/prime/index>
