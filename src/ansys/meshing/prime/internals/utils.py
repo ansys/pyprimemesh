@@ -254,9 +254,9 @@ def launch_prime_github_container(
         '-e',
         f'ANSYSLMD_LICENSE_FILE={license_file}',
     ]
-    graphics_port = int(os.environ.get('PYPRIMEMESH_GRAPHICS_PORT', '0'))
-    print(f'Found PYPRIMEMESH_GRAPHICS_PORT={graphics_port}')
+    graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
+        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
         docker_command += ['-p', f'{graphics_port}:{graphics_port}']
     prime_arguments = [
         f'{image_name}:{version}',
