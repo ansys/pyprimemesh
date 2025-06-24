@@ -58,13 +58,14 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
-    "cheatsheet": {
-        "file": "cheatsheet/cheat_sheet.qmd",
-        "title": "PyPrimeMesh cheat sheet",
-        "version": __version__,
-    },
+    # "cheatsheet": {
+    #     "file": "cheatsheet/cheat_sheet.qmd",
+    #     "title": "PyPrimeMesh cheat sheet",
+    #     "version": __version__,
+    # },
     "ansys_sphinx_theme_autoapi": {
         "project": project,
+        "add_toctree_entry": True,
     },
 }
 
