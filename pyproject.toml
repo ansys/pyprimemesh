@@ -35,8 +35,8 @@ graphics = [
 ]
 tests = [
   "ansys-tools-visualization-interface==0.10.0",
-  "pytest==8.3.5",
-  "pytest-cov==6.1.1",
+  "pytest==8.4.1",
+  "pytest-cov==6.2.1",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.1.1",
   "pyvista[trame]==0.45.2",
