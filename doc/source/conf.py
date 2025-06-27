@@ -63,13 +63,22 @@ html_theme_options = {
         "title": "PyPrimeMesh cheat sheet",
         "version": __version__,
     },
+    "ansys_sphinx_theme_autoapi": {
+        "project": project,
+        "package_depth": 4,
+        "ignore": [
+            # ignore all files under the ``relaxed json`` and 
+            # ``internals`` subpackage.
+            "*relaxed_json*",
+            "*internals*",
+        ],
+    },
 }
 
 # Sphinx extensions
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
     "sphinx_gallery.gen_gallery",
@@ -83,8 +92,19 @@ extensions = [
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
     "pyvista.ext.viewer_directive",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 nbsphinx_execute = "always"
+suppress_warnings = [
+    "docutils",
+    "ref.class",
+    "ref.obj",
+    "ref.func",
+    "toc.not_included",
+    "toc.not_readable",
+    "autoapi.python_import_resolution",
+    "toc.not_included",
+]
 
 # Intersphinx mapping
 intersphinx_mapping = {
@@ -177,5 +197,3 @@ sphinx_gallery_conf = {
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
 }
-
-supress_warnings = ["docutils"]

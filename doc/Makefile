@@ -21,7 +21,7 @@ help:
 
 # customized clean due to examples gallery
 clean:
-	rm -rf build
+	rm -rf _build
 	find . -type d -name "_autosummary" -exec rm -rf {} +
 
 # Create PDF
