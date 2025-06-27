@@ -1,0 +1,69 @@
+
+
+
+
+
+
+The ``graphics`` package
+============================
+
+.. py:module:: ansys.meshing.prime.graphics
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: graphics
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.plotter`
+            - Module for the plotter.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> plotter</api/ansys/meshing/prime/graphics/plotter/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CreateCapResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using CreateCapResults.print_default
+
+   ansys.meshing.prime.CreateCapResults.print_default

@@ -1,0 +1,85 @@
+
+
+
+
+
+
+The ``topodatastructs.py`` module
+=================================
+
+.. py:module:: ansys.meshing.prime.autogen.topodatastructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: topodatastructs
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topodatastructs.DeleteMeshResults`
+            - Results structure associated with delete mesh on topofaces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topodatastructs.DeleteMeshParams`
+            - Parameters to delete mesh on topoentities.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DeleteMeshResults</api/ansys/meshing/prime/autogen/topodatastructs/DeleteMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteMeshParams</api/ansys/meshing/prime/autogen/topodatastructs/DeleteMeshParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+

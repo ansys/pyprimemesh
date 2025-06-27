@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TetParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using TetParams.set_default
+
+   ansys.meshing.prime.TetParams.set_default

@@ -1,0 +1,90 @@
+
+
+
+
+
+
+:class:`PartCreationType`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.PartCreationType
+
+   Bases: :py:obj:`ansys.meshing.prime.params.primestructs.enum.IntEnum`
+
+
+   Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
+
+
+
+
+.. py:currentmodule:: PartCreationType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~MODEL`
+            - Denotes a part per CAD Model.
+          * - :py:attr:`~ASSEMBLY`
+            - Denotes a part per CAD Assembly.
+          * - :py:attr:`~PART`
+            - Denotes a part per CAD Part.
+          * - :py:attr:`~BODY`
+            - Denotes a part per CAD Body.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import PartCreationType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: MODEL
+   :value: 0
+
+
+   Denotes a part per CAD Model.
+
+.. py:attribute:: ASSEMBLY
+   :value: 1
+
+
+   Denotes a part per CAD Assembly.
+
+.. py:attribute:: PART
+   :value: 2
+
+
+   Denotes a part per CAD Part.
+
+.. py:attribute:: BODY
+   :value: 3
+
+
+   Denotes a part per CAD Body.
+
+
+
+
+

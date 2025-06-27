@@ -1,0 +1,104 @@
+
+
+
+
+
+
+The ``utils.py`` module
+=======================
+
+.. py:module:: ansys.meshing.prime.lucid.utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: utils
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~match_pattern`
+            - Pattern matching function for strings.
+
+
+          * - :py:obj:`~check_name_pattern`
+            - Check several patterns in one string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Util functions for lucid modules.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: match_pattern(pattern: str, name: str) -> bool
+
+   Pattern matching function for strings.
+
+   :param pattern: Pattern you are looking for in the string.
+   :type pattern: str
+   :param name: String where you look for patterns.
+   :type name: str
+
+   :returns: True if the pattern is found.
+   :rtype: bool
+
+
+.. py:function:: check_name_pattern(name_patterns: str, name: str) -> bool
+
+   Check several patterns in one string.
+
+   :param name_patterns: Patterns to check, separated by commas.
+                         If pattern starts with !, it shouldn't be found.
+   :type name_patterns: str
+   :param name: String where you look for patterns.
+   :type name: str
+
+   :returns: True if all found.
+   :rtype: bool
+
+
+
+

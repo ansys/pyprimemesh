@@ -1,0 +1,54 @@
+.. vale off
+
+
+
+
+
+
+
+CadReaderRoute
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadReaderRoute
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      CadReaderRoute.PROGRAMCONTROLLED
+      
+      
+      CadReaderRoute.NATIVE
+      
+      
+      CadReaderRoute.WORKBENCH
+      
+      
+      CadReaderRoute.SPACECLAIM
+      
+      
+      CadReaderRoute.DISCOVERY
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CadReaderRoute
+
+    ansys.meshing.prime.CadReaderRoute
+
+.. vale on

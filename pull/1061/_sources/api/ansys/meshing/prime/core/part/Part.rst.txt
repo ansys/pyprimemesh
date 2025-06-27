@@ -1,0 +1,244 @@
+
+
+
+
+
+
+:class:`Part`
+=============
+
+
+.. py:class:: ansys.meshing.prime.core.part.Part(model, id: int, object_id: int, name: str)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.part.Part`
+
+
+   Part contains zonelets and topoentities.
+
+   Topoentities and zonelets are characterized by dimension of entities.
+   Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets.
+   They are:
+
+   * FaceZonelet: A group of interconnected face elements.
+   * EdgeZonelet: A group of interconnected edge elements.
+   * CellZonelet: A group of interconnected cell elements.
+
+   Topoentities represent connectivity information.
+   Topoentities can be queried from higher order to lower order topoentities and vice versa.
+   Topoentities have geometric representation which may be defined by splines or facets.
+   The mesh generated on topoentities will be projected on geometry representation.
+
+   * TopoFace: Topoentity representing surfaces.
+   * TopoEdge: Topoentity representing curves.
+   * TopoVolume: Topoentity representing volumes.
+
+   :param model: Server model to create Part object.
+   :type model: Model
+   :param id: Id of the Part.
+   :type id: int
+   :param object_id: Object id of the Part.
+   :type object_id: int
+   :param name: Name of the Part.
+   :type name: str
+
+
+
+
+
+.. py:currentmodule:: Part
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the part to a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_mesh`
+            - Whether the mesh summary is set to print along with the part summary.
+          * - :py:attr:`~print_id`
+            - Whether IDs of TopoEntities or zonelets are set to print along with the part summary.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__doc__`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__call__`
+            - Get a summary of the part.
+          * - :py:attr:`~__str__`
+            - Print the summary of a part.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.part import Part
+
+Property detail
+---------------
+
+.. py:property:: print_mesh
+   :type: bool
+
+
+   Whether the mesh summary is set to print along with the part summary.
+
+.. py:property:: print_id
+   :type: bool
+
+
+   Whether IDs of TopoEntities or zonelets are set to print along with the part summary.
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __doc__
+   :value: Multiline-String
+
+   .. raw:: html
+
+      <details><summary>Show Value</summary>
+
+   .. code-block:: python
+
+      """Part contains zonelets and topoentities.
+      
+          Topoentities and zonelets are characterized by dimension of entities.
+          Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets. They are:
+      
+          * FaceZonelet: A group of interconnected face elements.
+          * EdgeZonelet: A group of interconnected edge elements.
+          * CellZonelet: A group of interconnected cell elements.
+      
+          Topoentities represent connectivity information.
+          Topoentities can be queried from higher order to lower order topoentities and vice versa.
+          Topoentities have geometric representation which may be defined by splines or facets.
+          The mesh generated on topoentities will be projected on geometry representation.
+      
+          * TopoFace: Topoentity representing surfaces.
+          * TopoEdge: Topoentity representing curves.
+          * TopoVolume: Topoentity representing volumes.
+      
+      
+      
+      
+          Parameters
+          ----------
+          model : Model
+              Server model to create Part object.
+          id : int
+              Id of the Part.
+          object_id : int
+              Object id of the Part.
+          name : str
+              Name of the Part.
+          """
+
+   .. raw:: html
+
+      </details>
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __call__(*args: Any, **kwds: Any) -> str
+
+   Get a summary of the part.
+
+   This method provides a callable interface of the part for getting a part summary
+   using supported keyword arguments.
+
+   :param print_mesh: Whether to get the mesh summary along with the part summary. The default is
+                      ``False``.
+   :type print_mesh: bool, optional
+   :param print_id: Whether to get IDs of TopEntities or zonelets along with the part summary.
+                    The default is ``False``.
+   :type print_id: bool, optional
+
+   :returns: Summary of the part.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> part = model.get_part_by_name("Part.1")
+   >>> print(part(print_mesh=True, print_id=True))
+
+
+.. py:method:: __str__() -> str
+
+   Print the summary of a part.
+
+   This method uses the ``print_mesh`` and ``print_id`` properties
+   to control the summary of a part.
+
+   :returns: Summary of the part.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> part = model.get_part_by_name("Part.1")
+   >>> print(part)
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the part to a suggested name.
+
+   :param name: Suggested name for the part.
+   :type name: str
+
+   :returns: Newly suggested name for the part.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> part.set_suggested_name("part1")
+
+
+
+
+

@@ -1,0 +1,79 @@
+
+
+
+
+
+
+The ``examples`` package
+============================
+
+.. py:module:: ansys.meshing.prime.examples
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: examples
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.download_utilities`
+            - 
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples`
+            - Examples module for PyPrimeMesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.unit_test_examples`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> download_utilities</api/ansys/meshing/prime/examples/download_utilities/index>
+    <span class="nf nf-fa-file"></span> examples</api/ansys/meshing/prime/examples/examples/index>
+    <span class="nf nf-fa-file"></span> unit_test_examples</api/ansys/meshing/prime/examples/unit_test_examples/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

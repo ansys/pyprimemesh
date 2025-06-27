@@ -1,0 +1,86 @@
+
+
+
+
+
+
+:class:`PrismControl`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.core.prismcontrol.PrismControl(model, id, object_id, name, local=False)
+
+   Bases: :py:obj:`ansys.meshing.prime.autogen.prismcontrol.PrismControl`
+
+
+   PrismControl allows you to generate prisms.
+
+   PrismControl allows you to control generation of prisms.
+   Controls include setting the face scope, volume scope and growth parameters.
+
+   :param model: Server model to create PrismControl object.
+   :type model: Model
+   :param id: Id of the PrismControl.
+   :type id: int
+   :param object_id: Object id of the PrismControl.
+   :type object_id: int
+   :param name: Name of the PrismControl.
+   :type name: str
+
+
+
+.. py:currentmodule:: PrismControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the prism control based on the suggested name.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.prismcontrol import PrismControl
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the prism control based on the suggested name.
+
+   :param name: Suggested name for the prism control.
+   :type name: str
+
+   :returns: Returns the SetNameResults.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> prism_control.set_suggested_name("control1")
+
+
+
+
+

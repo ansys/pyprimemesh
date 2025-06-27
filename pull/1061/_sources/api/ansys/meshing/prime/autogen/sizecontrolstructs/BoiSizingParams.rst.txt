@@ -1,0 +1,141 @@
+
+
+
+
+
+
+:class:`BoiSizingParams`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizecontrolstructs.BoiSizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, max: float = None, growth_rate: float = None, json_data: dict = None, **kwargs)
+
+   Bases: :py:obj:`ansys.meshing.prime.params.primestructs.CoreObject`
+
+
+   Size field computed using body of influence size control enables you to specify a body of influence(that is, a region for sizing control).
+
+   The maximum mesh size will be equal to the specified size within the body of influence.
+   The minimum size will be determined based on the influence of other size controls.
+
+   :param model: Model to create a ``BoiSizingParams`` object with default parameters.
+   :type model: Model
+   :param max: Maximum size used for computing edge and face size using boi size control.
+   :type max: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+   :param json_data: JSON dictionary to create a ``BoiSizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> boi_sizing_params = prime.BoiSizingParams(model = model)
+
+
+
+
+
+
+.. py:currentmodule:: BoiSizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~max`
+            - Maximum size used for computing edge and face size using boi size control.
+          * - :py:attr:`~growth_rate`
+            - Growth rate used for transitioning from one element size to neighbor element size.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``BoiSizingParams`` object.
+          * - :py:attr:`~print_default`
+            - Print the default values of ``BoiSizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizecontrolstructs import BoiSizingParams
+
+Property detail
+---------------
+
+.. py:property:: max
+   :type: float
+
+
+   Maximum size used for computing edge and face size using boi size control.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate used for transitioning from one element size to neighbor element size.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_default(max: float = None, growth_rate: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``BoiSizingParams`` object.
+
+   :param max: Maximum size used for computing edge and face size using boi size control.
+   :type max: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``BoiSizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> BoiSizingParams.print_default()
+
+
+.. py:method:: __str__() -> str
+
+
+
+

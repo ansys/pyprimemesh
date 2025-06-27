@@ -1,0 +1,6 @@
+CUSTOM
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadRefacetingResolution.CUSTOM

@@ -1,0 +1,93 @@
+
+
+
+
+
+
+:class:`DisplayMeshType`
+========================
+
+
+.. py:class:: ansys.meshing.prime.core.mesh.DisplayMeshType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   Contains the mesh types to display.
+
+
+
+.. py:currentmodule:: DisplayMeshType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~TOPOFACE`
+            - 
+          * - :py:attr:`~TOPOEDGE`
+            - 
+          * - :py:attr:`~FACEZONELET`
+            - 
+          * - :py:attr:`~EDGEZONELET`
+            - 
+          * - :py:attr:`~SPLINECONTROLPOINTS`
+            - 
+          * - :py:attr:`~SPLINESURFACE`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.mesh import DisplayMeshType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: TOPOFACE
+   :value: 0
+
+
+.. py:attribute:: TOPOEDGE
+   :value: 1
+
+
+.. py:attribute:: FACEZONELET
+   :value: 2
+
+
+.. py:attribute:: EDGEZONELET
+   :value: 3
+
+
+.. py:attribute:: SPLINECONTROLPOINTS
+   :value: 4
+
+
+.. py:attribute:: SPLINESURFACE
+   :value: 5
+
+
+
+
+
+
