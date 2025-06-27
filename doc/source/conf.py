@@ -67,7 +67,8 @@ html_theme_options = {
         "project": project,
         "package_depth": 4,
         "ignore": [
-            # ignore all files under the ``writer`` subpackage.
+            # ignore all files under the ``relaxed json`` and 
+            # ``internals`` subpackage.
             "*relaxed_json*",
             "*internals*",
         ],
