@@ -66,6 +66,11 @@ html_theme_options = {
     "ansys_sphinx_theme_autoapi": {
         "project": project,
         "package_depth": 4,
+        "ignore": [
+            # ignore all files under the ``writer`` subpackage.
+            "*relaxed_json*",
+            "*internals*",
+        ],
     },
 }
 
