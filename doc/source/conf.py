@@ -66,14 +66,20 @@ html_theme_options = {
     "ansys_sphinx_theme_autoapi": {
         "templates": "_templates/autoapi",
         "ignore": [
-            # ignore all files under the ``relaxed json`` and 
+            # ignore all files under the ``relaxed json`` and
             # ``internals`` subpackage.
             "*relaxed_json*",
             "*internals*",
         ],
-        "options":[
-            'members', 'undoc-members', 'private-members', 'show-inheritance', 'show-module-summary', 'special-members', 'imported-members',
-        ]
+        "options": [
+            'members',
+            'undoc-members',
+            'private-members',
+            'show-inheritance',
+            'show-module-summary',
+            'special-members',
+            'imported-members',
+        ],
     },
 }
 
