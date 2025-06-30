@@ -45,7 +45,7 @@ doc = [
   "ansys-sphinx-theme[autoapi]==1.5.2",
   "ansys-tools-visualization-interface==0.9.2",
   "jupyter-sphinx==0.5.3",
-  "numpydoc==1.8.0",
+  "numpydoc==1.9.0",
   "sphinx==8.2.3",
   "sphinx_design==0.6.1",
   "pyvista==0.45.2",
