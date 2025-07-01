@@ -20,8 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ansys.meshing.prime import __all__
 import ansys.meshing.prime
+from ansys.meshing.prime import __all__
 
 
 def test_imports():
