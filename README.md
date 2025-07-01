@@ -7,6 +7,7 @@
 [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat)](https://github.com/psf/black)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/ansys-meshing-prime)](https://pypi.org/project/ansys-meshing-prime/)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ansys/pyprimemesh)
 
 ## Overview
 
