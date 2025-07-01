@@ -20,11 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ansys.meshing.prime import __all__, __symbols
+from ansys.meshing.prime import __all__
+import ansys.meshing.prime
 
 
 def test_imports():
     """Test that all symbols in __all__ are imported from __symbols__."""
-    symbols = list(__symbols.keys())
+    symbols = dir(ansys.meshing.prime)
     for symbol in __all__:
         assert symbol in symbols, f"{symbol} is not in __symbols__"
