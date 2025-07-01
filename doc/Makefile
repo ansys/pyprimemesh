@@ -23,6 +23,7 @@ help:
 clean:
 	rm -rf _build
 	find . -type d -name "_autosummary" -exec rm -rf {} +
+	rm -rf source/api/
 
 # Create PDF
 pdf:
