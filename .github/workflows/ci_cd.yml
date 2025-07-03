@@ -103,6 +103,7 @@ jobs:
     name: Documentation
     if: github.event.action != 'closed'
     runs-on: public-ubuntu-latest-16-cores
+    needs: [docs-style]
     steps:
       - name: Login in Github Container registry
         uses: docker/login-action@v3
