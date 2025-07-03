@@ -76,6 +76,7 @@ html_theme_options = {
             'undoc-members',
             'private-members',
             'show-inheritance',
+            'inherited-members',
             'show-module-summary',
             'special-members',
             'imported-members',

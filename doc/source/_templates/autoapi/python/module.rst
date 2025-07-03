@@ -123,10 +123,6 @@ Summary
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
-{% if visible_subpackages %}
-    {{ tab_item_from_objects_list(visible_subpackages, "Subpackages") }}
-{% endif %}
-
 {% if visible_submodules %}
     {{ tab_item_from_objects_list(visible_submodules, "Submodules") }}
 {% endif %}
@@ -163,11 +159,11 @@ Summary
 {# ---------------------- End module tabset -------------------- #}
 {# ------------------------ Begin toctree definition ----------------------- #}
 
-{% block subpackages %}
-{% if visible_subpackages %}
-{{ toctree_from_objects_list(visible_subpackages, "nf nf-md-package") }}
-{% endif %}
-{% endblock %}
+.. {% block subpackages %}
+.. {% if visible_subpackages %}
+.. {{ toctree_from_objects_list(visible_subpackages, "nf nf-md-package") }}
+.. {% endif %}
+.. {% endblock %}
 
 {% block submodules %}
 {% if visible_submodules %}
