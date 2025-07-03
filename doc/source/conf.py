@@ -74,8 +74,6 @@ html_theme_options = {
         "options": [
             'members',
             'undoc-members',
-            'private-members',
-            'show-inheritance',
             'inherited-members',
             'show-module-summary',
             'special-members',
@@ -113,6 +111,8 @@ suppress_warnings = [
     "toc.not_readable",
     "autoapi.python_import_resolution",
     "toc.not_included",
+    "ref.ref",
+    "ref.python",
 ]
 
 # Intersphinx mapping
