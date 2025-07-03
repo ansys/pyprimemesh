@@ -1,5 +1,6 @@
-{% if obj.display %}
 .. vale off
+
+{% if obj.display %}
 
 {# ----------------- Start macros definition for tab item ------------------#}
 {% macro tab_item_from_objects_list(objects_list, title="") -%}
