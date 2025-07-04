@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`IGAResults`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.igastructs.IGAResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_code: ansys.meshing.prime.params.primestructs.WarningCode = None, spline_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of IGA operations.
+
+   :param model: Model to create a ``IGAResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code if IGA operation is unsuccessful.
+   :type error_code: ErrorCode, optional
+   :param warning_code: Warning code if IGA operation is partially successful.
+   :type warning_code: WarningCode, optional
+   :param spline_ids: Ids of the created spline.
+   :type spline_ids: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``IGAResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> iga_results = prime.IGAResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: IGAResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code if IGA operation is unsuccessful.
+          * - :py:attr:`~spline_ids`
+            - Ids of the created spline.
+          * - :py:attr:`~warning_code`
+            - Warning code if IGA operation is partially successful.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``IGAResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``IGAResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.igastructs import IGAResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code if IGA operation is unsuccessful.
+
+.. py:property:: spline_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of the created spline.
+
+.. py:property:: warning_code
+   :type: ansys.meshing.prime.params.primestructs.WarningCode
+
+
+   Warning code if IGA operation is partially successful.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``IGAResults`` object.
+
+   .. rubric:: Examples
+
+   >>> IGAResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_code: ansys.meshing.prime.params.primestructs.WarningCode = None, spline_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``IGAResults`` object.
+
+   :param error_code: Error code if IGA operation is unsuccessful.
+   :type error_code: ErrorCode, optional
+   :param warning_code: Warning code if IGA operation is partially successful.
+   :type warning_code: WarningCode, optional
+   :param spline_ids: Ids of the created spline.
+   :type spline_ids: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

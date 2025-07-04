@@ -1,0 +1,1474 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``examples`` package
+============================
+
+.. py:module:: ansys.meshing.prime.examples
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: examples
+.. tab-set::
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.download_utilities`
+            - 
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples`
+            - Examples module for PyPrimeMesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.unit_test_examples`
+            - 
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.DownloadManager`
+            - Manages downloads of example files.
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~download_block_model_fmd`
+            - Download CAD file for the block model example.
+
+
+          * - :py:obj:`~download_block_model_pmdat`
+            - Download PMDAT file for the block model example.
+
+
+          * - :py:obj:`~download_block_model_scdoc`
+            - Download CAD file for the block model example.
+
+
+          * - :py:obj:`~download_bracket_dsco`
+            - Download the DSCO file for the bracket scaffold example.
+
+
+          * - :py:obj:`~download_bracket_fmd`
+            - Download the FMD file for the bracket scaffold example.
+
+
+          * - :py:obj:`~download_bracket_scdoc`
+            - Download the SCDOC file for the bracket scaffold example.
+
+
+          * - :py:obj:`~download_deformed_blade_dsco`
+            - Download the DSCO file for the turbine blade example.
+
+
+          * - :py:obj:`~download_deformed_blade_fmd`
+            - Download the FMD file for the turbine blade example.
+
+
+          * - :py:obj:`~download_deformed_blade_scdoc`
+            - Download the SCDOC file for the turbine blade example.
+
+
+          * - :py:obj:`~download_elbow_dsco`
+            - Download the DSCO file for the mixing elbow example.
+
+
+          * - :py:obj:`~download_elbow_fmd`
+            - Download the FMD file for the mixing elbow example.
+
+
+          * - :py:obj:`~download_elbow_pmdat`
+            - Download the PMDAT file for the mixing elbow example.
+
+
+          * - :py:obj:`~download_elbow_scdoc`
+            - Download the SCDOC file for the mixing elbow example.
+
+
+          * - :py:obj:`~download_f1_rw_drs_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~download_f1_rw_enclosure_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~download_f1_rw_end_plates_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~download_f1_rw_main_plane_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~download_multi_layer_quad_mesh_pcb_dsco`
+            - Download the DSCO file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~download_multi_layer_quad_mesh_pcb_fmd`
+            - Download the FMD file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~download_multi_layer_quad_mesh_pcb_pmdat`
+            - Download the PMDAT file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~download_multi_layer_quad_mesh_pcb_pmdb`
+            - Download the PMDB file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~download_multi_layer_quad_mesh_pcb_scdoc`
+            - Download the SCDOC file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~download_pcb_pmdat`
+            - Download the PMDAT file for the PCB example.
+
+
+          * - :py:obj:`~download_pcb_scdoc`
+            - Download SCDOC file for the pcb example.
+
+
+          * - :py:obj:`~download_pipe_tee_dsco`
+            - Download the DSCO file for the pipe tee example.
+
+
+          * - :py:obj:`~download_pipe_tee_fmd`
+            - Download the FMD file for the pipe tee example.
+
+
+          * - :py:obj:`~download_pipe_tee_pmdat`
+            - Download the PMDAT file for the pipe tee example.
+
+
+          * - :py:obj:`~download_pipe_tee_scdoc`
+            - Download the SCDOC file for the pipe tee example.
+
+
+          * - :py:obj:`~download_saddle_bracket_dsco`
+            - Download DSCO file for the saddle bracket example.
+
+
+          * - :py:obj:`~download_saddle_bracket_fmd`
+            - Download FMD file for the saddle bracket example
+
+
+          * - :py:obj:`~download_saddle_bracket_scdoc`
+            - Download SCDOC file for the saddle bracket example.
+
+
+          * - :py:obj:`~download_solder_ball_fmd`
+            - Download a FMD file for the solder ball example.
+
+
+          * - :py:obj:`~download_solder_ball_target_fmd`
+            - Download a FMD file for the solder ball example.
+
+
+          * - :py:obj:`~download_test_examples`
+            - Download the example files necessary for unit testing.
+
+
+          * - :py:obj:`~download_toy_car_dsco`
+            - Download the DSCO file for the toy car example.
+
+
+          * - :py:obj:`~download_toy_car_fmd`
+            - Download the FMD file for the toy car example.
+
+
+          * - :py:obj:`~download_toy_car_pmdat`
+            - Download the PMDAT file for the toy car example.
+
+
+          * - :py:obj:`~download_toy_car_scdoc`
+            - Download the SCDOC file for the toy car example.
+
+
+          * - :py:obj:`~download_turbine_blade_cdb`
+            - Download the CDB file for the turbine blade example.
+
+
+          * - :py:obj:`~download_wheel_ground_dsco`
+            - Download the DSCO file for the wheel ground contact patch example.
+
+
+          * - :py:obj:`~download_wheel_ground_fmd`
+            - Download the FMD file for the wheel ground contact patch example.
+
+
+          * - :py:obj:`~download_wheel_ground_scdoc`
+            - Download the SCDOC file for the wheel ground contact patch example.
+
+
+
+
+
+
+.. .. .. 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> download_utilities</api/ansys/meshing/prime/examples/download_utilities/index>
+    <span class="nf nf-fa-file"></span> examples</api/ansys/meshing/prime/examples/examples/index>
+    <span class="nf nf-fa-file"></span> unit_test_examples</api/ansys/meshing/prime/examples/unit_test_examples/index>
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DownloadManager</api/ansys/meshing/prime/examples/DownloadManager>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: download_block_model_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download CAD file for the block model example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     block_model = prime_examples.download_block_model_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(block_model, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_block_model_pmdat(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download PMDAT file for the block model example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     block_model = prime_examples.download_block_model_pmdat()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.read_pmdat(block_model, params=prime.FileReadParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_block_model_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download CAD file for the block model example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     block_model = prime_examples.download_block_model_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(block_model, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_bracket_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the bracket scaffold example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     bracket = prime_examples.download_bracket_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_bracket_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the bracket scaffold example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     bracket = prime_examples.download_bracket_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_bracket_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the bracket scaffold example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     bracket = prime_examples.download_bracket_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_deformed_blade_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the turbine blade example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     deformed_blade = prime_examples.download_deformed_blade_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(deformed_blade, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_deformed_blade_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the turbine blade example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     deformed_blade = prime_examples.download_deformed_blade_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(deformed_blade, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_deformed_blade_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the turbine blade example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     deformed_blade = prime_examples.download_deformed_blade_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(deformed_blade, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_elbow_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the mixing elbow example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     elbow = prime_examples.download_elbow_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_elbow_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the mixing elbow example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     elbow = prime_examples.download_elbow_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_elbow_pmdat(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the PMDAT file for the mixing elbow example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     elbow = prime_examples.download_elbow_pmdat()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.read_pmdat(elbow, params=prime.FileReadParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_elbow_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the mixing elbow example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     elbow = prime_examples.download_elbow_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(elbow, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_f1_rw_drs_stl(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download STL file for the generic f1 rear wing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     f1_rw_drs = prime_examples.download_f1_rw_drs_stl()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(f1_rw_drs, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_f1_rw_enclosure_stl(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download STL file for the generic f1 rear wing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     f1_rw_enclosure = prime_examples.download_f1_rw_enclosure_stl()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(f1_rw_enclosure, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_f1_rw_end_plates_stl(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download STL file for the generic f1 rear wing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     f1_rw_end_plates = prime_examples.download_f1_rw_end_plates_stl()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(f1_rw_end_plates, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_f1_rw_main_plane_stl(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download STL file for the generic f1 rear wing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     f1_rw_main_plane = prime_examples.download_f1_rw_main_plane_stl()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(f1_rw_main_plane, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_multi_layer_quad_mesh_pcb_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the multi-layer PCB meshing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_multi_layer_quad_mesh_pcb_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the multi-layer PCB meshing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_multi_layer_quad_mesh_pcb_pmdat(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the PMDAT file for the multi-layer PCB meshing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_pmdat()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.read_pmdat(cad_file, params=prime.FileReadParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_multi_layer_quad_mesh_pcb_pmdb(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the PMDB file for the multi-layer PCB meshing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_pmdb()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_multi_layer_quad_mesh_pcb_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the multi-layer PCB meshing example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     cad_file = prime_examples.download_multi_layer_quad_mesh_pcb_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(cad_file, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_pcb_pmdat(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the PMDAT file for the PCB example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     pcb = prime_examples.download_pcb_pmdat()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.read_pmdat(pcb, params=prime.FileReadParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_pcb_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download SCDOC file for the pcb example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     pcb = prime_examples.download_pcb_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(pcb, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_pipe_tee_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the pipe tee example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     pipe_tee = prime_examples.download_pipe_tee_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_pipe_tee_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the pipe tee example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Option to  download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     pipe_tee = prime_examples.download_pipe_tee_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_pipe_tee_pmdat(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the PMDAT file for the pipe tee example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     pipe_tee = prime_examples.download_pipe_tee_pmdat()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.read_pmdat(pipe_tee, params=prime.FileReadParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_pipe_tee_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the pipe tee example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     pipe_tee = prime_examples.download_pipe_tee_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(pipe_tee, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_saddle_bracket_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download DSCO file for the saddle bracket example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     saddle_bracket = prime_examples.download_saddle_bracket_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(saddle_bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_saddle_bracket_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download FMD file for the saddle bracket example
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     saddle_bracket = prime_examples.download_saddle_bracket_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(saddle_bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_saddle_bracket_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download SCDOC file for the saddle bracket example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     saddle_bracket = prime_examples.download_saddle_bracket_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(saddle_bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_solder_ball_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download a FMD file for the solder ball example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     solder_ball = prime_examples.download_solder_ball_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(solder_ball, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_solder_ball_target_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download a FMD file for the solder ball example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     solder_ball_target = prime_examples.download_solder_ball_target_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(solder_ball_target, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_test_examples(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the example files necessary for unit testing.
+
+   :param destination: Path to download the test example files to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to always download the test example files. The default is
+                 ``False``, in which case if the test example files are cached, they
+                 are reused.
+   :type force: bool, optional
+
+   :returns: Local paths to the downloaded test example files.
+   :rtype: List[str]
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     examples = prime_examples.unit_test_examples.download_test_examples()
+
+
+.. py:function:: download_toy_car_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the toy car example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     toy_car = prime_examples.download_toy_car_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_toy_car_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the toy car example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     toy_car = prime_examples.download_toy_car_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_toy_car_pmdat(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the PMDAT file for the toy car example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     toy_car = prime_examples.download_toy_car_pmdat()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.read_pmdat(toy_car, params=prime.FileReadParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_toy_car_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the toy car example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     toy_car = prime_examples.download_toy_car_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_turbine_blade_cdb(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the CDB file for the turbine blade example.
+
+   destination : str, optional
+       Path to download the example file to. The default
+       is ``None``, in which case the default path for app data
+       is used.
+   force : bool, optional
+       Whether to download the example file. The default is
+       ``False``, in which case if the example file is cached, it
+       is reused.
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     turbine_blade_mesh = prime_examples.download_turbine_blade_cdb()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_mapdl_cdb(
+   >>>             turbine_blade_mesh,
+   >>>             params=prime.ImportMapdlCdbParams(model),
+   >>>         )
+   >>>     print(model)
+
+
+.. py:function:: download_wheel_ground_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the wheel ground contact patch example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     wheel_ground = prime_examples.download_wheel_ground_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(wheel_ground, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_wheel_ground_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the wheel ground contact patch example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     wheel_ground = prime_examples.download_wheel_ground_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(wheel_ground, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+.. py:function:: download_wheel_ground_scdoc(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the SCDOC file for the wheel ground contact patch example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     wheel_ground = prime_examples.download_wheel_ground_scdoc()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(wheel_ground, params=prime.ImportCADParams(model))
+   >>>     print(model)
+
+
+
+
+
+.. vale on

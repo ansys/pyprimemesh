@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``collapsetool.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.autogen.collapsetool
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: collapsetool
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.collapsetool.CollapseTool`
+            - Performs various collapse operations. For example, split and collapse on face zonelets.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CollapseTool</api/ansys/meshing/prime/autogen/collapsetool/CollapseTool>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,67 @@
+
+:orphan:
+
+.. _sphx_glr_sg_execution_times:
+
+
+Computation times
+=================
+**09:12.677** total execution time for 11 files **from all galleries**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_04_lucid_toy_car.py` (``../../examples/gallery/04_lucid_toy_car.py``)
+     - 02:39.991
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_08_lucid_generic_f1_rear_wing.py` (``../../examples/gallery/08_lucid_generic_f1_rear_wing.py``)
+     - 02:06.943
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_03_lucid_pipe_tee.py` (``../../examples/gallery/03_lucid_pipe_tee.py``)
+     - 00:56.077
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_09_multi_layer_quad_mesh_pcb.py` (``../../examples/gallery/09_multi_layer_quad_mesh_pcb.py``)
+     - 00:44.735
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_06_blade_morph.py` (``../../examples/gallery/06_blade_morph.py``)
+     - 00:38.038
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_05_pcb_stacker.py` (``../../examples/gallery/05_pcb_stacker.py``)
+     - 00:24.047
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_00_lucid_file_IO.py` (``../../examples/gallery/00_lucid_file_IO.py``)
+     - 00:23.382
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_07_saddle_bracket.py` (``../../examples/gallery/07_saddle_bracket.py``)
+     - 00:21.750
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_02_lucid_mixing_elbow.py` (``../../examples/gallery/02_lucid_mixing_elbow.py``)
+     - 00:19.683
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_01_bracket_scaffold.py` (``../../examples/gallery/01_bracket_scaffold.py``)
+     - 00:19.457
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_misc_example_template.py` (``../../examples/misc/example_template.py``)
+     - 00:18.574
+     - 0.0

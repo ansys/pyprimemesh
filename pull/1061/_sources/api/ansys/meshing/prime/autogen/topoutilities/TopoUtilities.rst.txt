@@ -1,0 +1,117 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TopoUtilities`
+======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.topoutilities.TopoUtilities(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, part_id: int)
+
+
+
+   Performs various general topology utility algorithms. For example, fill hole.
+
+   :param model: Server model to create TopoUtilities object.
+   :type model: Model
+   :param part_id: Id of the part.
+   :type part_id: int
+
+
+
+
+
+
+.. py:currentmodule:: TopoUtilities
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~fill_hole`
+            - Fill holes bounded by given topoedges.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for TopoUtilities.
+          * - :py:attr:`~__exit__`
+            - Exit context for TopoUtilities.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.topoutilities import TopoUtilities
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for TopoUtilities.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for TopoUtilities.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: fill_hole(topo_edges: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.TopoFillHoleParams) -> ansys.meshing.prime.params.primestructs.TopoFillHoleResult
+
+   Fill holes bounded by given topoedges.
+
+
+   :param topo_edges: Ids of topoedges to be used to find holes.
+   :type topo_edges: Iterable[int]
+   :param params: Parameters to fill holes.
+   :type params: TopoFillHoleParams
+
+   :returns: Return the TopoFillHoleResult.
+   :rtype: TopoFillHoleResult
+
+   .. rubric:: Examples
+
+   >>> results = topo_utils.fill_hole(topo_edges, params)
+
+
+
+
+
+
+
+.. vale on

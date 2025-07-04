@@ -1,0 +1,92 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BodyQueryType`
+======================
+
+
+.. py:class:: ansys.meshing.prime.BodyQueryType
+
+
+
+   Indicates type of entity to query in part.
+
+
+
+
+.. py:currentmodule:: BodyQueryType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALL`
+            - Returns all entities in part.
+          * - :py:attr:`~FREE`
+            - Returns only free entities in part.
+          * - :py:attr:`~NONFREE`
+            - Returns entities associated with non-free body in part.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import BodyQueryType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALL
+   :value: 0
+
+
+   Returns all entities in part.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: FREE
+   :value: 1
+
+
+   Returns only free entities in part.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: NONFREE
+   :value: 2
+
+
+   Returns entities associated with non-free body in part.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SmoothDihedralFaceNodesParams`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.SmoothDihedralFaceNodesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, min_dihedral_angle: float = None, tolerance: float = None, type: SmoothType = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to smooth dihedral face nodes.
+
+   :param model: Model to create a ``SmoothDihedralFaceNodesParams`` object with default parameters.
+   :type model: Model
+   :param min_dihedral_angle: Minimum angle to be used to identify dihedral faces.
+   :type min_dihedral_angle: float, optional
+   :param tolerance: Tolerance relative to local mesh size to control smooth movement of nodes.
+   :type tolerance: float, optional
+   :param type: Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+   :type type: SmoothType, optional
+   :param json_data: JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> smooth_dihedral_face_nodes_params = prime.SmoothDihedralFaceNodesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SmoothDihedralFaceNodesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~min_dihedral_angle`
+            - Minimum angle to be used to identify dihedral faces.
+          * - :py:attr:`~tolerance`
+            - Tolerance relative to local mesh size to control smooth movement of nodes.
+          * - :py:attr:`~type`
+            - Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SmoothDihedralFaceNodesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SmoothDihedralFaceNodesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import SmoothDihedralFaceNodesParams
+
+Property detail
+---------------
+
+.. py:property:: min_dihedral_angle
+   :type: float
+
+
+   Minimum angle to be used to identify dihedral faces.
+
+.. py:property:: tolerance
+   :type: float
+
+
+   Tolerance relative to local mesh size to control smooth movement of nodes.
+
+.. py:property:: type
+   :type: SmoothType
+
+
+   Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SmoothDihedralFaceNodesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SmoothDihedralFaceNodesParams.print_default()
+
+
+.. py:method:: set_default(min_dihedral_angle: float = None, tolerance: float = None, type: SmoothType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SmoothDihedralFaceNodesParams`` object.
+
+   :param min_dihedral_angle: Minimum angle to be used to identify dihedral faces.
+   :type min_dihedral_angle: float, optional
+   :param tolerance: Tolerance relative to local mesh size to control smooth movement of nodes.
+   :type tolerance: float, optional
+   :param type: Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
+   :type type: SmoothType, optional
+
+
+
+
+
+
+
+.. vale on

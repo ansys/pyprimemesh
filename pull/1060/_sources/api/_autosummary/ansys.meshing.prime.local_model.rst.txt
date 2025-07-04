@@ -1,0 +1,11 @@
+local\_model
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: ansys.meshing.prime.local_model
+
+.. minigallery::
+    :add-heading: Examples using local_model
+
+    ansys.meshing.prime.local_model

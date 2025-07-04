@@ -1,0 +1,186 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``mesh.py`` module
+======================
+
+.. py:module:: ansys.meshing.prime.core.mesh
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: mesh
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.DisplayMeshInfo`
+            - Contains the mesh information to display.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.Mesh`
+            - Processes the mesh for visualization in the GUI.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.ColorByType`
+            - Contains the zone types to display.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.DisplayMeshType`
+            - Contains the mesh types to display.
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~compute_distance`
+            - Compute the distance between two points.
+
+
+          * - :py:obj:`~compute_face_list_from_structured_nodes`
+            - Compute the distances from the nodes.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~color_matrix`
+            - 
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DisplayMeshInfo</api/ansys/meshing/prime/core/mesh/DisplayMeshInfo>
+    <span class="nf nf-cod-symbol_class"></span> Mesh</api/ansys/meshing/prime/core/mesh/Mesh>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> ColorByType</api/ansys/meshing/prime/core/mesh/ColorByType>
+    <span class="nf nf-cod-symbol_enum"></span> DisplayMeshType</api/ansys/meshing/prime/core/mesh/DisplayMeshType>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Process the mesh for visualization in the GUI.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: compute_distance(point1, point2) -> float
+
+   Compute the distance between two points.
+
+   :param point1: List with the coordinates of the first point.
+   :type point1: list
+   :param point2: List with the coordinates of the second point.
+   :type point2: list
+
+   :returns: Distance between the two points.
+   :rtype: float
+
+
+.. py:function:: compute_face_list_from_structured_nodes(dim)
+
+   Compute the distances from the nodes.
+
+   :param dim: List with the number of elements in each dimension.
+   :type dim: List[int]
+
+   :returns: List with the faces.
+   :rtype: List
+
+
+.. py:data:: color_matrix
+
+
+
+
+.. vale on

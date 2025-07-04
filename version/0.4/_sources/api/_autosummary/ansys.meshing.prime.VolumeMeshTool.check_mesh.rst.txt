@@ -1,0 +1,6 @@
+﻿check\_mesh
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeMeshTool.check_mesh

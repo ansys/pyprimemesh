@@ -1,0 +1,6 @@
+MAXOFPRISMCONTROLSMINASPECTRATIO
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO

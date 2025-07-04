@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FaceAndEdgeConnectivityParams`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.FaceAndEdgeConnectivityParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, reorder_face_zonelets_mid_nodes: bool = None, reorder_edge_zonelets_mid_nodes: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to get face and edge connectivity information.
+
+   :param model: Model to create a ``FaceAndEdgeConnectivityParams`` object with default parameters.
+   :type model: Model
+   :param reorder_face_zonelets_mid_nodes: Option to reorder mid nodes for quadratic faces.
+   :type reorder_face_zonelets_mid_nodes: bool, optional
+   :param reorder_edge_zonelets_mid_nodes: Option to reorder mid nodes for quadratic edges.
+   :type reorder_edge_zonelets_mid_nodes: bool, optional
+   :param json_data: JSON dictionary to create a ``FaceAndEdgeConnectivityParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> face_and_edge_connectivity_params = prime.FaceAndEdgeConnectivityParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FaceAndEdgeConnectivityParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~reorder_edge_zonelets_mid_nodes`
+            - Option to reorder mid nodes for quadratic edges.
+          * - :py:attr:`~reorder_face_zonelets_mid_nodes`
+            - Option to reorder mid nodes for quadratic faces.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FaceAndEdgeConnectivityParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FaceAndEdgeConnectivityParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FaceAndEdgeConnectivityParams
+
+Property detail
+---------------
+
+.. py:property:: reorder_edge_zonelets_mid_nodes
+   :type: bool
+
+
+   Option to reorder mid nodes for quadratic edges.
+
+.. py:property:: reorder_face_zonelets_mid_nodes
+   :type: bool
+
+
+   Option to reorder mid nodes for quadratic faces.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FaceAndEdgeConnectivityParams`` object.
+
+   .. rubric:: Examples
+
+   >>> FaceAndEdgeConnectivityParams.print_default()
+
+
+.. py:method:: set_default(reorder_face_zonelets_mid_nodes: bool = None, reorder_edge_zonelets_mid_nodes: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FaceAndEdgeConnectivityParams`` object.
+
+   :param reorder_face_zonelets_mid_nodes: Option to reorder mid nodes for quadratic faces.
+   :type reorder_face_zonelets_mid_nodes: bool, optional
+   :param reorder_edge_zonelets_mid_nodes: Option to reorder mid nodes for quadratic edges.
+   :type reorder_edge_zonelets_mid_nodes: bool, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,238 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`HexToSplineParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.HexToSplineParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, feature_capture_type: SplineFeatureCaptureType = None, feature_angle: float = None, corner_angle: float = None, continuity: SplineContinuityType = None, project_on_geometry: bool = None, use_projection_scope: bool = None, projection_scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control conversion of hex mesh to spline.
+
+   :param model: Model to create a ``HexToSplineParams`` object with default parameters.
+   :type model: Model
+   :param feature_capture_type: Feature capture options.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type feature_capture_type: SplineFeatureCaptureType, optional
+   :param feature_angle: Angle to capture the feature.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type feature_angle: float, optional
+   :param corner_angle: Corner angle of the feature.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type corner_angle: float, optional
+   :param continuity: Spline Continuity options.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type continuity: SplineContinuityType, optional
+   :param project_on_geometry: Option to project on geometry.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type project_on_geometry: bool, optional
+   :param use_projection_scope: Option to use projection scope.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type use_projection_scope: bool, optional
+   :param projection_scope: Scope to evaluate entities for projection.
+
+                            **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type projection_scope: ScopeDefinition, optional
+   :param json_data: JSON dictionary to create a ``HexToSplineParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> hex_to_spline_params = prime.HexToSplineParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: HexToSplineParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~continuity`
+            - Spline Continuity options.
+          * - :py:attr:`~corner_angle`
+            - Corner angle of the feature.
+          * - :py:attr:`~feature_angle`
+            - Angle to capture the feature.
+          * - :py:attr:`~feature_capture_type`
+            - Feature capture options.
+          * - :py:attr:`~project_on_geometry`
+            - Option to project on geometry.
+          * - :py:attr:`~projection_scope`
+            - Scope to evaluate entities for projection.
+          * - :py:attr:`~use_projection_scope`
+            - Option to use projection scope.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``HexToSplineParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``HexToSplineParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import HexToSplineParams
+
+Property detail
+---------------
+
+.. py:property:: continuity
+   :type: SplineContinuityType
+
+
+   Spline Continuity options.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: corner_angle
+   :type: float
+
+
+   Corner angle of the feature.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: feature_angle
+   :type: float
+
+
+   Angle to capture the feature.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: feature_capture_type
+   :type: SplineFeatureCaptureType
+
+
+   Feature capture options.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: project_on_geometry
+   :type: bool
+
+
+   Option to project on geometry.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: projection_scope
+   :type: ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+
+   Scope to evaluate entities for projection.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: use_projection_scope
+   :type: bool
+
+
+   Option to use projection scope.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``HexToSplineParams`` object.
+
+   .. rubric:: Examples
+
+   >>> HexToSplineParams.print_default()
+
+
+.. py:method:: set_default(feature_capture_type: SplineFeatureCaptureType = None, feature_angle: float = None, corner_angle: float = None, continuity: SplineContinuityType = None, project_on_geometry: bool = None, use_projection_scope: bool = None, projection_scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None)
+   :staticmethod:
+
+
+   Set the default values of the ``HexToSplineParams`` object.
+
+   :param feature_capture_type: Feature capture options.
+   :type feature_capture_type: SplineFeatureCaptureType, optional
+   :param feature_angle: Angle to capture the feature.
+   :type feature_angle: float, optional
+   :param corner_angle: Corner angle of the feature.
+   :type corner_angle: float, optional
+   :param continuity: Spline Continuity options.
+   :type continuity: SplineContinuityType, optional
+   :param project_on_geometry: Option to project on geometry.
+   :type project_on_geometry: bool, optional
+   :param use_projection_scope: Option to use projection scope.
+   :type use_projection_scope: bool, optional
+   :param projection_scope: Scope to evaluate entities for projection.
+   :type projection_scope: ScopeDefinition, optional
+
+
+
+
+
+
+
+.. vale on

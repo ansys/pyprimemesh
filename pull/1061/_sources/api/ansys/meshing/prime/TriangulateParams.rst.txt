@@ -1,0 +1,116 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TriangulateParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.TriangulateParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, json_data: dict = None, **kwargs)
+
+
+
+   Provides the parameters used for triangulation operation.
+
+   :param model: Model to create a ``TriangulateParams`` object with default parameters.
+   :type model: Model
+   :param json_data: JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> triangulate_params = prime.TriangulateParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TriangulateParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TriangulateParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TriangulateParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TriangulateParams
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TriangulateParams`` object.
+
+   .. rubric:: Examples
+
+   >>> TriangulateParams.print_default()
+
+
+.. py:method:: set_default()
+   :staticmethod:
+
+
+   Set the default values of the ``TriangulateParams`` object.
+
+
+
+
+
+
+
+
+
+.. vale on

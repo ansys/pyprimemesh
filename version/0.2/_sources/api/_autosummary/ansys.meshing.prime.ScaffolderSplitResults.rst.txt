@@ -1,0 +1,31 @@
+ScaffolderSplitResults
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderSplitResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScaffolderSplitResults.print_default
+      ScaffolderSplitResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScaffolderSplitResults.error_code
+      ScaffolderSplitResults.new_faces
+   
+   

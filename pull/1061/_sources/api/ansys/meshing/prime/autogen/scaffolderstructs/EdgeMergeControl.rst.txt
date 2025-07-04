@@ -1,0 +1,92 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`EdgeMergeControl`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.scaffolderstructs.EdgeMergeControl
+
+
+
+   Specifies type of edge pairs to be merged during scaffold operation.
+
+
+
+
+.. py:currentmodule:: EdgeMergeControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALLTOALL`
+            - Allows to merge all types of edges.
+          * - :py:attr:`~FREETOALL`
+            - Allows to merge only free edges into all edges.
+          * - :py:attr:`~FREETOFREE`
+            - Allows to merge free edge into other free edge only.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.scaffolderstructs import EdgeMergeControl
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALLTOALL
+   :value: 1
+
+
+   Allows to merge all types of edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: FREETOALL
+   :value: 2
+
+
+   Allows to merge only free edges into all edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: FREETOFREE
+   :value: 3
+
+
+   Allows to merge free edge into other free edge only.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

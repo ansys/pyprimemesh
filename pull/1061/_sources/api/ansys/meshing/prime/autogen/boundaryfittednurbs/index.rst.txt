@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``boundaryfittednurbs.py`` module
+=====================================
+
+.. py:module:: ansys.meshing.prime.autogen.boundaryfittednurbs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: boundaryfittednurbs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.boundaryfittednurbs.BoundaryFittedSpline`
+            - BoundaryFittedSpline helps you to create splines for structured hex-mesh model.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> BoundaryFittedSpline</api/ansys/meshing/prime/autogen/boundaryfittednurbs/BoundaryFittedSpline>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on
