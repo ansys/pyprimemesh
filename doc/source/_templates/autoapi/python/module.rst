@@ -80,9 +80,7 @@ Summary
 {% set visible_functions = visible_children|selectattr("type", "equalto", "function")|list %}
 {% set visible_attributes_and_constants = visible_children|selectattr("type", "equalto", "data")|list %}
 {% set visible_exceptions = visible_children|selectattr("type", "equalto", "exception")|list %}
-
 {% set visible_classes = [] %}
-{% set visible_interfaces = [] %}
 {% set visible_enums = [] %}
 {% for element in visible_classes_and_interfaces %}
 
@@ -100,8 +98,6 @@ Summary
 
     {% if has_enum_base %}
         {% set _ = visible_enums.append(element) %}
-    {% elif element.name.startswith("I") and element.name[1].isupper() and not has_enum_base %}
-        {% set _ = visible_interfaces.append(element) %}
     {% else %}
         {% set _ = visible_classes.append(element) %}
     {% endif %}
@@ -117,7 +113,87 @@ Summary
     {% endif %}
 {% endfor %}
 
-{% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
+
+{# Deduplicate visible_classes by name #}
+{% set seen_names = [] %}
+{% set deduped_classes = [] %}
+
+{% for cls in visible_classes %}
+  {% if cls.name not in seen_names %}
+    {% set _ = seen_names.append(cls.name) %}
+    {# Only append if the class is not already in deduped_classes #}
+    {% if cls not in deduped_classes %}
+    {% set _ = deduped_classes.append(cls) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% set visible_classes = deduped_classes %}
+
+{# Deduplicate visible_constants by name #}
+{% set seen_constants = [] %}
+{% set deduped_constants = [] %}
+
+{% for const in visible_constants %}
+  {% if const.name not in seen_constants %}
+    {% set _ = seen_constants.append(const.name) %}
+    {# Only append if the constant is not already in deduped_constants #}
+    {% if const not in deduped_constants %}
+    {% set _ = deduped_constants.append(const) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% set visible_constants = deduped_constants %}
+
+{# Deduplicate visible_attributes by name #}
+{% set seen_attributes = [] %}
+{% set deduped_attributes = [] %}
+
+{% for attr in visible_attributes %}
+  {% if attr.name not in seen_attributes %}
+    {% set _ = seen_attributes.append(attr.name) %}
+    {# Only append if the attribute is not already in deduped_attributes #}
+    {% if attr not in deduped_attributes %}
+    {% set _ = deduped_attributes.append(attr) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% set visible_attributes = deduped_attributes %}
+{# Deduplicate visible_enums by name #}
+{% set seen_enums = [] %}
+{% set deduped_enums = [] %}
+
+{% for enum in visible_enums %}
+  {% if enum.name not in seen_enums %}
+    {% set _ = seen_enums.append(enum.name) %}
+    {# Only append if the enum is not already in deduped_enums #}
+    {% if enum not in deduped_enums %}
+    {% set _ = deduped_enums.append(enum) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% set visible_enums = deduped_enums %}
+
+{# Deduplicate visible_exceptions by name #}
+{% set seen_exceptions = [] %}
+{% set deduped_exceptions = [] %}
+
+{% for exc in visible_exceptions %}
+  {% if exc.name not in seen_exceptions %}
+    {% set _ = seen_exceptions.append(exc.name) %}
+    {# Only append if the exception is not already in deduped_exceptions #}
+    {% if exc not in deduped_exceptions %}
+    {% set _ = deduped_exceptions.append(exc) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% set visible_exceptions = deduped_exceptions %}
+
+{% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
 
 {# ---------------------- End module summary -------------------- #}
 {# ---------------------- Begin module tabset -------------------- #}
@@ -128,10 +204,6 @@ Summary
 
 {% if visible_submodules %}
     {{ tab_item_from_objects_list(visible_submodules, "Submodules") }}
-{% endif %}
-
-{% if visible_interfaces %}
-    {{ tab_item_from_objects_list(visible_interfaces, "Interfaces") }}
 {% endif %}
 
 {% if visible_classes %}
@@ -176,9 +248,7 @@ Summary
 
 {% block class %}
 {% if own_page_types and "class" in own_page_types %}
-{% if visible_interfaces %}
-{{ toctree_from_objects_list(visible_interfaces, "nf nf-cod-symbol_interface") }}
-{% endif %}
+
 
 {% if visible_classes %}
 {{ toctree_from_objects_list(visible_classes, "nf nf-cod-symbol_class") }}
@@ -223,7 +293,7 @@ Description
 
 {# -------------------------- Begin module detail -------------------------- #}
 
-{% set module_objects_in_this_page = visible_classes + visible_interfaces + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
+{% set module_objects_in_this_page = visible_classes + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
 {% if module_objects_in_this_page %}
 {% set visible_objects_in_this_page = [] %}
 

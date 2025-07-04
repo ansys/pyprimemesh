@@ -85,6 +85,7 @@ html_theme_options = {
             'special-members',
             'imported-members',
         ],
+        "member_order": "alphabetical",
     },
 }
 
