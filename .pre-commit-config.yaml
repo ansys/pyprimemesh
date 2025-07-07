@@ -16,14 +16,22 @@ repos:
   hooks:
   - id: blacken-docs
     additional_dependencies: [black==22.12.0]
-    # Extend to handle Python docstrings in addition to documentation files
-    files: \.(py|pyi|md|rst|tex)$
+    args: [--line-length=88]
 
 - repo: https://github.com/PyCQA/docformatter
   rev: v1.7.5
   hooks:
   - id: docformatter
-    args: [--in-place, --wrap-summaries=79, --wrap-descriptions=79, --make-summary-multi-line]
+    args: [--in-place, --wrap-summaries=88, --wrap-descriptions=88, --make-summary-multi-line]
+
+- repo: https://github.com/asottile/blacken-docs
+  rev: v1.12.1
+  hooks:
+  - id: blacken-docs
+    name: blacken-docs-python
+    additional_dependencies: [black==22.12.0]
+    files: \.py$
+    args: [--line-length=88]
 
 - repo: https://github.com/PyCQA/flake8
   rev: 6.0.0
