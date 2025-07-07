@@ -86,6 +86,7 @@ html_theme_options = {
             'imported-members',
         ],
         "member_order": "alphabetical",
+        "own_page_level": "function",
     },
 }
 
