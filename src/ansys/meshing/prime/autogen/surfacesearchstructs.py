@@ -2688,13 +2688,13 @@ class SearchInfoByRegisterIdResults(CoreObject):
     model: Model
         Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
     error_code: ErrorCode, optional
-        Error code associated with the retreiving information based on register id.
+        Error code associated with the retrieving information based on register id.
     n_found: int, optional
         Number of registered face elements.
     locations_found: Iterable[float], optional
         Locations of each cluster of registered face elements.
     face_zonelets_found: Iterable[int], optional
-        Ids of the face zonelets containing atleast one registered face element.
+        Ids of the face zonelets containing at least one registered face element.
     json_data: dict, optional
         JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
@@ -2731,13 +2731,13 @@ class SearchInfoByRegisterIdResults(CoreObject):
         model: Model
             Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
         error_code: ErrorCode, optional
-            Error code associated with the retreiving information based on register id.
+            Error code associated with the retrieving information based on register id.
         n_found: int, optional
             Number of registered face elements.
         locations_found: Iterable[float], optional
             Locations of each cluster of registered face elements.
         face_zonelets_found: Iterable[int], optional
-            Ids of the face zonelets containing atleast one registered face element.
+            Ids of the face zonelets containing at least one registered face element.
         json_data: dict, optional
             JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
@@ -2788,13 +2788,13 @@ class SearchInfoByRegisterIdResults(CoreObject):
         Parameters
         ----------
         error_code: ErrorCode, optional
-            Error code associated with the retreiving information based on register id.
+            Error code associated with the retrieving information based on register id.
         n_found: int, optional
             Number of registered face elements.
         locations_found: Iterable[float], optional
             Locations of each cluster of registered face elements.
         face_zonelets_found: Iterable[int], optional
-            Ids of the face zonelets containing atleast one registered face element.
+            Ids of the face zonelets containing at least one registered face element.
         """
         args = locals()
         [SearchInfoByRegisterIdResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2831,7 +2831,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """Error code associated with the retreiving information based on register id.
+        """Error code associated with the retrieving information based on register id.
         """
         return self._error_code
 
@@ -2861,7 +2861,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     @property
     def face_zonelets_found(self) -> Iterable[int]:
-        """Ids of the face zonelets containing atleast one registered face element.
+        """Ids of the face zonelets containing at least one registered face element.
         """
         return self._face_zonelets_found
 
