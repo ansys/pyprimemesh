@@ -64,7 +64,7 @@ class LengthUnit(enum.IntEnum):
     CM = 1
     """Denotes length unit is centimeters."""
     MM = 2
-    """Denotes length unit is milimeters."""
+    """Denotes length unit is millimeters."""
     UM = 3
     """Denotes length unit is micrometers."""
     NM = 4
