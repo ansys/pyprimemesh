@@ -42,7 +42,7 @@ class AutoNodeMoveParams(CoreObject):
     target_quality: float, optional
         Specify target quality used for the mesh improvement based on specified quality measure.
     dihedral_angle: float, optional
-        Dihedral angle used to mantain features of boundary face zonelets.
+        Dihedral angle used to maintain features of boundary face zonelets.
     n_iterations_per_node: int, optional
         Number of iterations per node to be moved.
     restrict_boundary_nodes_along_surface: bool, optional
@@ -95,7 +95,7 @@ class AutoNodeMoveParams(CoreObject):
         target_quality: float, optional
             Specify target quality used for the mesh improvement based on specified quality measure.
         dihedral_angle: float, optional
-            Dihedral angle used to mantain features of boundary face zonelets.
+            Dihedral angle used to maintain features of boundary face zonelets.
         n_iterations_per_node: int, optional
             Number of iterations per node to be moved.
         restrict_boundary_nodes_along_surface: bool, optional
@@ -164,7 +164,7 @@ class AutoNodeMoveParams(CoreObject):
         target_quality: float, optional
             Specify target quality used for the mesh improvement based on specified quality measure.
         dihedral_angle: float, optional
-            Dihedral angle used to mantain features of boundary face zonelets.
+            Dihedral angle used to maintain features of boundary face zonelets.
         n_iterations_per_node: int, optional
             Number of iterations per node to be moved.
         restrict_boundary_nodes_along_surface: bool, optional
@@ -231,7 +231,7 @@ class AutoNodeMoveParams(CoreObject):
 
     @property
     def dihedral_angle(self) -> float:
-        """Dihedral angle used to mantain features of boundary face zonelets.
+        """Dihedral angle used to maintain features of boundary face zonelets.
         """
         return self._dihedral_angle
 
