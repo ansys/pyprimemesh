@@ -1589,7 +1589,7 @@ class ResolveIntersectionResult(CoreObject):
     model: Model
         Model to create a ``ResolveIntersectionResult`` object with default parameters.
     error_code: ErrorCode, optional
-        Errror code associated with a resolve intersections operation.
+        Error code associated with a resolve intersections operation.
     json_data: dict, optional
         JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
@@ -1617,7 +1617,7 @@ class ResolveIntersectionResult(CoreObject):
         model: Model
             Model to create a ``ResolveIntersectionResult`` object with default parameters.
         error_code: ErrorCode, optional
-            Errror code associated with a resolve intersections operation.
+            Error code associated with a resolve intersections operation.
         json_data: dict, optional
             JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
@@ -1656,7 +1656,7 @@ class ResolveIntersectionResult(CoreObject):
         Parameters
         ----------
         error_code: ErrorCode, optional
-            Errror code associated with a resolve intersections operation.
+            Error code associated with a resolve intersections operation.
         """
         args = locals()
         [ResolveIntersectionResult._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1687,7 +1687,7 @@ class ResolveIntersectionResult(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """Errror code associated with a resolve intersections operation.
+        """Error code associated with a resolve intersections operation.
         """
         return self._error_code
 
