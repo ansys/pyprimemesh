@@ -951,7 +951,7 @@ class WarningCode(enum.IntEnum):
     NOCADGEOMETRYFOUND = 7500
     """CAD geometry not found for some or all topo entities. Skipped projection for those topo entities."""
     NOCADGEOMETRYPROJECTONFACETS = 7501
-    """CAD geometry not found for some or all topo entities. Projected on facets for those topo entites."""
+    """CAD geometry not found for some or all topo entities. Projected on facets for those topo entities."""
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
     UNPROCESSEDKEYWORDSINABAQUSFILE = 11001
