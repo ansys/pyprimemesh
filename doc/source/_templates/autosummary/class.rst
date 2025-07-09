@@ -20,7 +20,7 @@
       :toctree:
 
    {% for item in filtered_methods %}
-      {{ name }}.{{ item }}
+      {% if item != '__init__' %}{{ name }}.{{ item }}{% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
