@@ -9,7 +9,7 @@ This section gives an overview of all API classes, methods, and parameters prese
 .. autosummary::
    :toctree: _autosummary
    
-   <span class="nf nf-md-package"></span> ansys.meshing.prime</api/ansys/meshing/prime/index>
-   <span class="nf nf-md-package"></span> ansys.meshing.prime.lucid</api/ansys/meshing/prime/lucid/index>
-   <span class="nf nf-md-package"></span> ansys.meshing.prime.examples</api/ansys/meshing/prime/examples/index>
-   <span class="nf nf-md-package"></span> ansys.meshing.prime.graphics</api/ansys/meshing/prime/graphics/index>
+   ansys.meshing.prime
+   ansys.meshing.prime.examples
+   ansys.meshing.prime.graphics
+   ansys.meshing.prime.lucid
