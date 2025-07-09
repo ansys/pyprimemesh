@@ -4,7 +4,8 @@
 
 {% set excluded_methods = ['__init__', 'bit_length', 'conjugate', 'from_bytes', 'to_bytes', 'bit_count', 'as_integer_ratio', 'is_integer'] %}
 
-{% set filtered_methods = methods | reject('in', excluded_methods) | list %}
+{% set all_excluded_present = (excluded_methods | reject('in', methods) | list | length == 0) %}
+{% set filtered_methods = methods if all_excluded_present else [] %}
 
 {{ name | escape | underline}}
 
