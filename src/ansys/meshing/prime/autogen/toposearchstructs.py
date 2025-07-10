@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class TopoSearchField(enum.IntEnum):
+class TopoSearchField(enum.Enum):
     """Toposearch diagnostic field.
     """
     OVERLAPPINGTOPOFACES = 0

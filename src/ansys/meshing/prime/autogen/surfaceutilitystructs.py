@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class SmoothType(enum.IntEnum):
+class SmoothType(enum.Enum):
     """Indicates the the type of operation to be performed during the smooth dihedral face nodes operation.
     """
     SMOOTH = 1
@@ -42,7 +42,7 @@ class SmoothType(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
-class FlowDirection(enum.IntEnum):
+class FlowDirection(enum.Enum):
     """Flow or wake direction for BOI creation.
     """
     X = 1
@@ -52,7 +52,7 @@ class FlowDirection(enum.IntEnum):
     Z = 3
     """Flow or wake inflation in the Z direction for BOI creation."""
 
-class ContactPatchAxis(enum.IntEnum):
+class ContactPatchAxis(enum.Enum):
     """Flow or wake direction for BOI creation.
     """
     X = 1
@@ -62,7 +62,7 @@ class ContactPatchAxis(enum.IntEnum):
     Z = 3
     """Flow or wake inflation in the Z direction for BOI creation."""
 
-class BOIType(enum.IntEnum):
+class BOIType(enum.Enum):
     """BOI type for BOI creation.
     """
     OFFSETBOX = 1

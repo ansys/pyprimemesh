@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class EdgeConnectType(enum.IntEnum):
+class EdgeConnectType(enum.Enum):
     """Edge connect type to define the type of connection between edges .
     """
     NONE = 0

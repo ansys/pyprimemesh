@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class MaterialPointType(enum.IntEnum):
+class MaterialPointType(enum.Enum):
     """Defines define type of material point.
     """
     DEAD = 0
