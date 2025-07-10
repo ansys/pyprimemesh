@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class BCPairType(enum.IntEnum):
+class BCPairType(enum.Enum):
     """Option to specify boundary condition pair type.
     """
     FACE = 1
@@ -38,7 +38,7 @@ class BCPairType(enum.IntEnum):
     EDGE = 2
     """Option to specify edge zonelet as boundary condition pair."""
 
-class MatchPairTargetType(enum.IntEnum):
+class MatchPairTargetType(enum.Enum):
     """Match morph target type.
     """
     FACEZONELET = 1

@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class PrismControlOffsetType(enum.IntEnum):
+class PrismControlOffsetType(enum.Enum):
     """Offset type for prism control.
     """
     UNIFORM = 0

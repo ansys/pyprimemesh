@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class BCsVolumetricModality(enum.IntEnum):
+class BCsVolumetricModality(enum.Enum):
     """Indicate options to identify morphable region in input volumetric mesh.
     """
     BOX = 1

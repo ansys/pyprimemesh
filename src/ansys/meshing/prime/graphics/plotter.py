@@ -53,7 +53,7 @@ color_matrix = np.array(
 )
 
 
-class ColorByType(enum.IntEnum):
+class ColorByType(enum.Enum):
     """Contains the zone types to display."""
 
     ZONE = 0

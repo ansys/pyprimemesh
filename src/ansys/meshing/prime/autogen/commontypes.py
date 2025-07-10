@@ -29,7 +29,7 @@ from ansys.meshing.prime.autogen.coreobject import *
 import numpy as np
 
 
-class SizeFieldType(enum.IntEnum):
+class SizeFieldType(enum.Enum):
     """The type of sizing field to be used to fetch element size at given location.
     """
     GEOMETRIC = 0
@@ -43,7 +43,7 @@ class SizeFieldType(enum.IntEnum):
     MESHEDGEODESIC = 7
     """Computes size field using existing surface mesh sizes and diffuses geodesically. Then uses the computed size field to remesh surfaces. Notes: The type is applicable when remeshing already meshed surfaces."""
 
-class SolverType(enum.IntEnum):
+class SolverType(enum.Enum):
     """Type of solver.
     """
     FLUENT = 1
@@ -51,7 +51,7 @@ class SolverType(enum.IntEnum):
     MAPDL = 2
     """Solver type is MAPDL. Creates a group of face quality measures mostly used in MAPDL."""
 
-class FaceQualityMeasure(enum.IntEnum):
+class FaceQualityMeasure(enum.Enum):
     """The type of face quality measures to check face quality metrics.
     """
     SKEWNESS = 0
@@ -67,7 +67,7 @@ class FaceQualityMeasure(enum.IntEnum):
     ELEMENTQUALITY = 50
     """The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst)."""
 
-class CellQualityMeasure(enum.IntEnum):
+class CellQualityMeasure(enum.Enum):
     """The type of cell quality measures to check cell quality metrics.
     """
     SKEWNESS = 0
@@ -83,7 +83,7 @@ class CellQualityMeasure(enum.IntEnum):
     ELEMENTQUALITY = 50
     """The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst)."""
 
-class SurfaceFeatureType(enum.IntEnum):
+class SurfaceFeatureType(enum.Enum):
     """Type of face edges considered as features.
     """
     NONE = 0
@@ -99,7 +99,7 @@ class SurfaceFeatureType(enum.IntEnum):
     FEATUREORZONELETBOUNDARY = 5
     """Face edges at zonelet boundary or with normal angle more than threshold are considered as feature."""
 
-class ShellBLOffsetType(enum.IntEnum):
+class ShellBLOffsetType(enum.Enum):
     """Type of offset method during ShellBL generation.
     """
     ASPECTRATIO = 0

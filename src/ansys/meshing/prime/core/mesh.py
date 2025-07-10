@@ -41,7 +41,7 @@ from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import CommunicationManager
 
 
-class ColorByType(enum.IntEnum):
+class ColorByType(enum.Enum):
     """Contains the zone types to display."""
 
     ZONE = 0
@@ -66,7 +66,7 @@ color_matrix = np.array(
 )
 
 
-class DisplayMeshType(enum.IntEnum):
+class DisplayMeshType(enum.Enum):
     """Contains the mesh types to display."""
 
     TOPOFACE = 0

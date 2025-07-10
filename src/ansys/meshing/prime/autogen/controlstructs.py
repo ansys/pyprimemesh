@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class ScopeEntity(enum.IntEnum):
+class ScopeEntity(enum.Enum):
     """ScopeDefinition uses entity type to scope entities.
     """
     FACEZONELETS = 1
@@ -42,7 +42,7 @@ class ScopeEntity(enum.IntEnum):
     VOLUME = 6
     """Evaluate scope to get volumes."""
 
-class ScopeEvaluationType(enum.IntEnum):
+class ScopeEvaluationType(enum.Enum):
     """ScopeDefinition uses evaluation type to evaluate the scope.
     """
     LABELS = 3
@@ -50,13 +50,13 @@ class ScopeEvaluationType(enum.IntEnum):
     ZONES = 4
     """Use zones to evaluate the scope."""
 
-class ScopeExpressionType(enum.IntEnum):
+class ScopeExpressionType(enum.Enum):
     """ScopeExpressionType uses expression type to evaluate the scope.
     """
     NAMEPATTERN = 2
     """Use name pattern expression to evaluate scope."""
 
-class SweepType(enum.IntEnum):
+class SweepType(enum.Enum):
     """Provides the Sweep Mesh Decomposition type.
     """
     STANDARD = 1

@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class VolumeFillType(enum.IntEnum):
+class VolumeFillType(enum.Enum):
     """Types of volume fill options.
     """
     TET = 0
@@ -42,7 +42,7 @@ class VolumeFillType(enum.IntEnum):
     HEXCOREPOLY = 3
     """Volume fill using hexahedral cells in the core and polyhedral cells near the boundary."""
 
-class HexCoreCellElementType(enum.IntEnum):
+class HexCoreCellElementType(enum.Enum):
     """Cell element type of hex-shaped cells.
     """
     ALLPOLY = 0
@@ -52,7 +52,7 @@ class HexCoreCellElementType(enum.IntEnum):
     HEXANDPOLY = 2
     """Generates a mix of poly type and hex type cells."""
 
-class HexCoreTransitionLayerType(enum.IntEnum):
+class HexCoreTransitionLayerType(enum.Enum):
     """Handle size transition of hex cells.
     """
     HANGINGNODES = 0

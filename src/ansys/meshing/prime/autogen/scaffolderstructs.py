@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class ScaffolderRepairMode(enum.IntEnum):
+class ScaffolderRepairMode(enum.Enum):
     """Mode of Scaffolder repair to be used.
     """
     DEFAULT = 0
@@ -42,7 +42,7 @@ class ScaffolderRepairMode(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
-class IntersectionMask(enum.IntEnum):
+class IntersectionMask(enum.Enum):
     """Scaffold parameters use intersection mask to define nature of intersection computation.
     """
     EDGEEDGE = 1
@@ -52,7 +52,7 @@ class IntersectionMask(enum.IntEnum):
     FACEFACEANDEDGEEDGE = 3
     """Perform face to face and edge to edge intersections."""
 
-class EdgeMergeControl(enum.IntEnum):
+class EdgeMergeControl(enum.Enum):
     """Specifies type of edge pairs to be merged during scaffold operation.
     """
     ALLTOALL = 1

@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class SizingType(enum.IntEnum):
+class SizingType(enum.Enum):
     """Sizing type decides the type of size control.
     """
     CURVATURE = 0

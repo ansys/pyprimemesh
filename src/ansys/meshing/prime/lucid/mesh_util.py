@@ -31,7 +31,7 @@ from .scope import SurfaceScope, VolumeScope
 from .utils import check_name_pattern
 
 
-class LabelToZoneMethod(enum.IntEnum):
+class LabelToZoneMethod(enum.Enum):
     """Provides for creating zones from labels."""
 
     SIMPLE = 0

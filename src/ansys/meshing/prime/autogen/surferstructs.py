@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class AdvancedSurferSetup(enum.IntEnum):
+class AdvancedSurferSetup(enum.Enum):
     """Define advanced settings for remeshing operation.
     """
     NONE = 0

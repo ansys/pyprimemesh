@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class JoinSeparateMethod(enum.IntEnum):
+class JoinSeparateMethod(enum.Enum):
     """Join separation method to handle separated overlapped zonelets.
     """
     KEEPNONE = 0
@@ -40,7 +40,7 @@ class JoinSeparateMethod(enum.IntEnum):
     KEEPBOTH = 2
     """Keep both overlapping zonelets after joining."""
 
-class StitchType(enum.IntEnum):
+class StitchType(enum.Enum):
     """Stitch type depending on nature of surface boundary edges to be stitched.
     """
     ALLALL = 0
@@ -48,7 +48,7 @@ class StitchType(enum.IntEnum):
     FREEFREE = 1
     """Stitch surfaces at free boundary edges."""
 
-class MergeNodeType(enum.IntEnum):
+class MergeNodeType(enum.Enum):
     """Type of nodes to be merged.
     """
     ALLALL = 0
@@ -56,7 +56,7 @@ class MergeNodeType(enum.IntEnum):
     FREEFREE = 1
     """Merge only free nodes with free nodes."""
 
-class FuseOption(enum.IntEnum):
+class FuseOption(enum.Enum):
     """Type to specify treatment of surfaces for fusing.
     """
     NONE = 0

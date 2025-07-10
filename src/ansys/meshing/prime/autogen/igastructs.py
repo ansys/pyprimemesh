@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class ControlPointSelection(enum.IntEnum):
+class ControlPointSelection(enum.Enum):
     """Control point selection type.
     """
     MANUAL = 0
@@ -38,7 +38,7 @@ class ControlPointSelection(enum.IntEnum):
     PROGRAMCONTROLLED = 1
     """Program controlled spline control point selection."""
 
-class SplineRefinementType(enum.IntEnum):
+class SplineRefinementType(enum.Enum):
     """Type of spline refinement. Currently, supports h-refinement and p-refinement.
     """
     H = 0
@@ -46,7 +46,7 @@ class SplineRefinementType(enum.IntEnum):
     P = 1
     """P refinement of spline."""
 
-class SplineFeatureCaptureType(enum.IntEnum):
+class SplineFeatureCaptureType(enum.Enum):
     """Options to capture features in spline.
     """
     IGNORE = 0
@@ -56,7 +56,7 @@ class SplineFeatureCaptureType(enum.IntEnum):
     BYEDGES = 2
     """Use edges for capturing features in spline."""
 
-class SplineContinuityType(enum.IntEnum):
+class SplineContinuityType(enum.Enum):
     """Spline Continuity types.
     """
     CUBICC0 = 0

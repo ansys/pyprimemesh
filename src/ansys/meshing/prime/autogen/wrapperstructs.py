@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class WrapRegion(enum.IntEnum):
+class WrapRegion(enum.Enum):
     """Indicates source type to extract wrapper region.
     """
     MATERIALPOINT = 0
