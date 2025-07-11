@@ -11,4 +11,5 @@ This section gives an overview of all API classes, methods, and parameters prese
    
    ansys.meshing.prime
    ansys.meshing.prime.examples
+   ansys.meshing.prime.graphics
    ansys.meshing.prime.lucid
