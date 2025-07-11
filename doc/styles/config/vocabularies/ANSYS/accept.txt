@@ -1,4 +1,5 @@
 abc
+(?i)Abaqus
 (?i)Ansys
 (?i)Apis
 AutoMesh
@@ -20,6 +21,7 @@ ignore_self_proximity
 IGA
 [Ii]sogeometric
 JTOpen
+JSON
 [Ll]inux
 [Ll]ucid
 Material Point Manager
