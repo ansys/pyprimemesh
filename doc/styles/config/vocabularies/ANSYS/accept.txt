@@ -16,6 +16,7 @@ Fluent Meshing's
 geodesical
 hexahedra
 hexcore
+_inp
 ignore_orientation
 ignore_self_proximity
 IGA
