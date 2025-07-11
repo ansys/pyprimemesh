@@ -1,0 +1,56 @@
+.. vale off
+
+
+
+
+
+ShellBLOffsetType
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ShellBLOffsetType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ShellBLOffsetType.real
+      ShellBLOffsetType.imag
+      ShellBLOffsetType.numerator
+      ShellBLOffsetType.denominator
+      ShellBLOffsetType.ASPECTRATIO
+      ShellBLOffsetType.LASTRATIO
+      ShellBLOffsetType.UNIFORM
+      ShellBLOffsetType.CURVATUREBASED
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ShellBLOffsetType
+
+    ansys.meshing.prime.ShellBLOffsetType
+
+.. vale on

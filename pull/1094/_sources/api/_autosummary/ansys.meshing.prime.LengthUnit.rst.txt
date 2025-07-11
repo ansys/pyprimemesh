@@ -1,0 +1,59 @@
+.. vale off
+
+
+
+
+
+LengthUnit
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LengthUnit
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LengthUnit.real
+      LengthUnit.imag
+      LengthUnit.numerator
+      LengthUnit.denominator
+      LengthUnit.M
+      LengthUnit.CM
+      LengthUnit.MM
+      LengthUnit.UM
+      LengthUnit.NM
+      LengthUnit.IN
+      LengthUnit.FT
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using LengthUnit
+
+    ansys.meshing.prime.LengthUnit
+
+.. vale on

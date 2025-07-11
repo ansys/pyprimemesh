@@ -1,0 +1,54 @@
+.. vale off
+
+
+
+
+
+ControlPointSelection
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ControlPointSelection
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ControlPointSelection.real
+      ControlPointSelection.imag
+      ControlPointSelection.numerator
+      ControlPointSelection.denominator
+      ControlPointSelection.MANUAL
+      ControlPointSelection.PROGRAMCONTROLLED
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ControlPointSelection
+
+    ansys.meshing.prime.ControlPointSelection
+
+.. vale on

@@ -1,0 +1,119 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`HexToSpline`
+====================
+
+
+.. py:class:: ansys.meshing.prime.HexToSpline(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Converts all-hex mesh to spline.
+
+   :param model: Server model to create HexToSpline object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: HexToSpline
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~convert_hex_to_spline`
+            - Converts fully hex mesh with topology to spline.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for HexToSpline.
+          * - :py:attr:`~__exit__`
+            - Exit context for HexToSpline.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import HexToSpline
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for HexToSpline.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for HexToSpline.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: convert_hex_to_spline(input_scope: ansys.meshing.prime.params.primestructs.ScopeDefinition, hex_to_spline_params: ansys.meshing.prime.params.primestructs.HexToSplineParams) -> ansys.meshing.prime.params.primestructs.IGAResults
+
+   Converts fully hex mesh with topology to spline.
+
+
+   :param input_scope: Scope definition for input hex mesh.
+   :type input_scope: ScopeDefinition
+   :param hex_to_spline_params: Parameters to convert hex to spline.
+   :type hex_to_spline_params: HexToSplineParams
+
+   :returns: Returns the IGAResults structure.
+   :rtype: IGAResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = hexToSpline.ConvertHexToSpline(input_scope, hex_to_spline_params)
+
+
+
+
+
+
+
+.. vale on

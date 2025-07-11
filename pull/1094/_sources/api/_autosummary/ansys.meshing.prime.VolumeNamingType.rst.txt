@@ -1,0 +1,55 @@
+.. vale off
+
+
+
+
+
+VolumeNamingType
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeNamingType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeNamingType.real
+      VolumeNamingType.imag
+      VolumeNamingType.numerator
+      VolumeNamingType.denominator
+      VolumeNamingType.BYFACELABEL
+      VolumeNamingType.BYFACEZONE
+      VolumeNamingType.BYFACENORMALS
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumeNamingType
+
+    ansys.meshing.prime.VolumeNamingType
+
+.. vale on

@@ -1,0 +1,116 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ShellBLParams`
+======================
+
+
+.. py:class:: ansys.meshing.prime.ShellBLParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to generate ShellBL.
+
+   :param model: Model to create a ``ShellBLParams`` object with default parameters.
+   :type model: Model
+   :param json_data: JSON dictionary to create a ``ShellBLParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> shell_blparams = prime.ShellBLParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ShellBLParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ShellBLParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ShellBLParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ShellBLParams
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ShellBLParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ShellBLParams.print_default()
+
+
+.. py:method:: set_default()
+   :staticmethod:
+
+
+   Set the default values of the ``ShellBLParams`` object.
+
+
+
+
+
+
+
+
+
+.. vale on

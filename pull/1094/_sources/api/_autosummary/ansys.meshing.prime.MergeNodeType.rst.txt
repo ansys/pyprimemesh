@@ -1,0 +1,54 @@
+.. vale off
+
+
+
+
+
+MergeNodeType
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeNodeType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeNodeType.real
+      MergeNodeType.imag
+      MergeNodeType.numerator
+      MergeNodeType.denominator
+      MergeNodeType.ALLALL
+      MergeNodeType.FREEFREE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MergeNodeType
+
+    ansys.meshing.prime.MergeNodeType
+
+.. vale on

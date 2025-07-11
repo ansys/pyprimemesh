@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``fileio.py`` module
+========================
+
+.. py:module:: ansys.meshing.prime.core.fileio
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: fileio
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.fileio.FileIO`
+            - Handles reading or writing files from the disk.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> FileIO</api/ansys/meshing/prime/core/fileio/FileIO>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for mangaging file inputs and outputs.
+
+
+
+
+
+
+
+
+
+.. vale on

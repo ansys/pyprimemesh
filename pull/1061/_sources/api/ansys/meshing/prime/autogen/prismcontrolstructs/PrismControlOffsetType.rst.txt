@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PrismControlOffsetType`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.prismcontrolstructs.PrismControlOffsetType
+
+
+
+   Offset type for prism control.
+
+
+
+
+.. py:currentmodule:: PrismControlOffsetType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ASPECTRATIO`
+            - Option to grow prism layers based on first aspect ratio specified.
+          * - :py:attr:`~LASTRATIO`
+            - Option to grow prism layers based on first height and last aspect ratio.
+          * - :py:attr:`~UNIFORM`
+            - Option to grow prism layers with uniform offset height based on first height.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.prismcontrolstructs import PrismControlOffsetType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ASPECTRATIO
+   :value: 1
+
+
+   Option to grow prism layers based on first aspect ratio specified.
+
+.. py:attribute:: LASTRATIO
+   :value: 2
+
+
+   Option to grow prism layers based on first height and last aspect ratio.
+
+.. py:attribute:: UNIFORM
+   :value: 0
+
+
+   Option to grow prism layers with uniform offset height based on first height.
+
+
+
+
+
+
+
+.. vale on

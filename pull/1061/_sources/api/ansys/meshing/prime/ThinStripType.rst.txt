@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ThinStripType`
+======================
+
+
+.. py:class:: ansys.meshing.prime.ThinStripType
+
+
+
+   The type to identify strip of face elements as thin strips using shape formed by features around the strip of face elements.
+
+
+
+
+.. py:currentmodule:: ThinStripType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALL`
+            - Thin strips of all shapes.
+          * - :py:attr:`~EXCLUDEVSHAPE`
+            - Thin strips of all, but not v shape.
+          * - :py:attr:`~VSHAPE`
+            - Thin strips of v shape only.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ThinStripType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALL
+   :value: 0
+
+
+   Thin strips of all shapes.
+
+.. py:attribute:: EXCLUDEVSHAPE
+   :value: 1
+
+
+   Thin strips of all, but not v shape.
+
+.. py:attribute:: VSHAPE
+   :value: 2
+
+
+   Thin strips of v shape only.
+
+
+
+
+
+
+
+.. vale on

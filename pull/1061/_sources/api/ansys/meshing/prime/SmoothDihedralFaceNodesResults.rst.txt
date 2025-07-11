@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SmoothDihedralFaceNodesResults`
+=======================================
+
+
+.. py:class:: ansys.meshing.prime.SmoothDihedralFaceNodesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_nodes_smoothed: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results structure associated with smooth dihedral face nodes.
+
+   :param model: Model to create a ``SmoothDihedralFaceNodesResults`` object with default parameters.
+   :type model: Model
+   :param n_nodes_smoothed: Number of dihedral face nodes smoothed.
+   :type n_nodes_smoothed: int, optional
+   :param error_code: Error Code associated with creating offset surface.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> smooth_dihedral_face_nodes_results = prime.SmoothDihedralFaceNodesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SmoothDihedralFaceNodesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error Code associated with creating offset surface.
+          * - :py:attr:`~n_nodes_smoothed`
+            - Number of dihedral face nodes smoothed.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SmoothDihedralFaceNodesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SmoothDihedralFaceNodesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SmoothDihedralFaceNodesResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error Code associated with creating offset surface.
+
+.. py:property:: n_nodes_smoothed
+   :type: int
+
+
+   Number of dihedral face nodes smoothed.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SmoothDihedralFaceNodesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SmoothDihedralFaceNodesResults.print_default()
+
+
+.. py:method:: set_default(n_nodes_smoothed: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SmoothDihedralFaceNodesResults`` object.
+
+   :param n_nodes_smoothed: Number of dihedral face nodes smoothed.
+   :type n_nodes_smoothed: int, optional
+   :param error_code: Error Code associated with creating offset surface.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

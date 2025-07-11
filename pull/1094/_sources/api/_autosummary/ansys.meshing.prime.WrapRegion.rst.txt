@@ -1,0 +1,55 @@
+.. vale off
+
+
+
+
+
+WrapRegion
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapRegion
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapRegion.real
+      WrapRegion.imag
+      WrapRegion.numerator
+      WrapRegion.denominator
+      WrapRegion.MATERIALPOINT
+      WrapRegion.EXTERNAL
+      WrapRegion.LARGESTINTERNAL
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WrapRegion
+
+    ansys.meshing.prime.WrapRegion
+
+.. vale on

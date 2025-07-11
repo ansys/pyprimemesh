@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CellStatisticsParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.meshinfostructs.CellStatisticsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, get_volume: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to calculate cell statistics.
+
+   :param model: Model to create a ``CellStatisticsParams`` object with default parameters.
+   :type model: Model
+   :param get_volume: Provides option to compute and get cumulative cell volume of all element.
+   :type get_volume: bool, optional
+   :param json_data: JSON dictionary to create a ``CellStatisticsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> cell_statistics_params = prime.CellStatisticsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CellStatisticsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_volume`
+            - Provides option to compute and get cumulative cell volume of all element.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CellStatisticsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CellStatisticsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.meshinfostructs import CellStatisticsParams
+
+Property detail
+---------------
+
+.. py:property:: get_volume
+   :type: bool
+
+
+   Provides option to compute and get cumulative cell volume of all element.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CellStatisticsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CellStatisticsParams.print_default()
+
+
+.. py:method:: set_default(get_volume: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CellStatisticsParams`` object.
+
+   :param get_volume: Provides option to compute and get cumulative cell volume of all element.
+   :type get_volume: bool, optional
+
+
+
+
+
+
+
+.. vale on

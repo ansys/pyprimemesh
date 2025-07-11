@@ -1,0 +1,299 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``examples.py`` module
+==========================
+
+.. py:module:: ansys.meshing.prime.examples.examples
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: examples
+.. tab-set::
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_block_model_fmd`
+            - Download CAD file for the block model example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_block_model_pmdat`
+            - Download PMDAT file for the block model example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_block_model_scdoc`
+            - Download CAD file for the block model example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_bracket_dsco`
+            - Download the DSCO file for the bracket scaffold example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_bracket_fmd`
+            - Download the FMD file for the bracket scaffold example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_bracket_scdoc`
+            - Download the SCDOC file for the bracket scaffold example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_deformed_blade_dsco`
+            - Download the DSCO file for the turbine blade example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_deformed_blade_fmd`
+            - Download the FMD file for the turbine blade example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_deformed_blade_scdoc`
+            - Download the SCDOC file for the turbine blade example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_elbow_dsco`
+            - Download the DSCO file for the mixing elbow example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_elbow_fmd`
+            - Download the FMD file for the mixing elbow example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_elbow_pmdat`
+            - Download the PMDAT file for the mixing elbow example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_elbow_scdoc`
+            - Download the SCDOC file for the mixing elbow example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_f1_rw_drs_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_f1_rw_enclosure_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_f1_rw_end_plates_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_f1_rw_main_plane_stl`
+            - Download STL file for the generic f1 rear wing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_multi_layer_quad_mesh_pcb_dsco`
+            - Download the DSCO file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_multi_layer_quad_mesh_pcb_fmd`
+            - Download the FMD file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_multi_layer_quad_mesh_pcb_pmdat`
+            - Download the PMDAT file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_multi_layer_quad_mesh_pcb_pmdb`
+            - Download the PMDB file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_multi_layer_quad_mesh_pcb_scdoc`
+            - Download the SCDOC file for the multi-layer PCB meshing example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_pcb_pmdat`
+            - Download the PMDAT file for the PCB example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_pcb_scdoc`
+            - Download SCDOC file for the pcb example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_pipe_tee_dsco`
+            - Download the DSCO file for the pipe tee example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_pipe_tee_fmd`
+            - Download the FMD file for the pipe tee example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_pipe_tee_pmdat`
+            - Download the PMDAT file for the pipe tee example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_pipe_tee_scdoc`
+            - Download the SCDOC file for the pipe tee example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_saddle_bracket_dsco`
+            - Download DSCO file for the saddle bracket example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_saddle_bracket_fmd`
+            - Download FMD file for the saddle bracket example
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_saddle_bracket_scdoc`
+            - Download SCDOC file for the saddle bracket example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_solder_ball_fmd`
+            - Download a FMD file for the solder ball example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_solder_ball_target_fmd`
+            - Download a FMD file for the solder ball example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_toy_car_dsco`
+            - Download the DSCO file for the toy car example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_toy_car_fmd`
+            - Download the FMD file for the toy car example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_toy_car_pmdat`
+            - Download the PMDAT file for the toy car example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_toy_car_scdoc`
+            - Download the SCDOC file for the toy car example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_turbine_blade_cdb`
+            - Download the CDB file for the turbine blade example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_wheel_ground_dsco`
+            - Download the DSCO file for the wheel ground contact patch example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_wheel_ground_fmd`
+            - Download the FMD file for the wheel ground contact patch example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.download_wheel_ground_scdoc`
+            - Download the SCDOC file for the wheel ground contact patch example.
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.examples.get_file`
+            - Download a PyPrimeMesh example file from the GitHub repository.
+
+
+
+
+
+
+.. .. .. 
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-function_variant"></span> download_block_model_fmd</api/ansys/meshing/prime/examples/examples/download_block_model_fmd>
+    <span class="nf nf-md-function_variant"></span> download_block_model_pmdat</api/ansys/meshing/prime/examples/examples/download_block_model_pmdat>
+    <span class="nf nf-md-function_variant"></span> download_block_model_scdoc</api/ansys/meshing/prime/examples/examples/download_block_model_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_bracket_dsco</api/ansys/meshing/prime/examples/examples/download_bracket_dsco>
+    <span class="nf nf-md-function_variant"></span> download_bracket_fmd</api/ansys/meshing/prime/examples/examples/download_bracket_fmd>
+    <span class="nf nf-md-function_variant"></span> download_bracket_scdoc</api/ansys/meshing/prime/examples/examples/download_bracket_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_deformed_blade_dsco</api/ansys/meshing/prime/examples/examples/download_deformed_blade_dsco>
+    <span class="nf nf-md-function_variant"></span> download_deformed_blade_fmd</api/ansys/meshing/prime/examples/examples/download_deformed_blade_fmd>
+    <span class="nf nf-md-function_variant"></span> download_deformed_blade_scdoc</api/ansys/meshing/prime/examples/examples/download_deformed_blade_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_elbow_dsco</api/ansys/meshing/prime/examples/examples/download_elbow_dsco>
+    <span class="nf nf-md-function_variant"></span> download_elbow_fmd</api/ansys/meshing/prime/examples/examples/download_elbow_fmd>
+    <span class="nf nf-md-function_variant"></span> download_elbow_pmdat</api/ansys/meshing/prime/examples/examples/download_elbow_pmdat>
+    <span class="nf nf-md-function_variant"></span> download_elbow_scdoc</api/ansys/meshing/prime/examples/examples/download_elbow_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_f1_rw_drs_stl</api/ansys/meshing/prime/examples/examples/download_f1_rw_drs_stl>
+    <span class="nf nf-md-function_variant"></span> download_f1_rw_enclosure_stl</api/ansys/meshing/prime/examples/examples/download_f1_rw_enclosure_stl>
+    <span class="nf nf-md-function_variant"></span> download_f1_rw_end_plates_stl</api/ansys/meshing/prime/examples/examples/download_f1_rw_end_plates_stl>
+    <span class="nf nf-md-function_variant"></span> download_f1_rw_main_plane_stl</api/ansys/meshing/prime/examples/examples/download_f1_rw_main_plane_stl>
+    <span class="nf nf-md-function_variant"></span> download_multi_layer_quad_mesh_pcb_dsco</api/ansys/meshing/prime/examples/examples/download_multi_layer_quad_mesh_pcb_dsco>
+    <span class="nf nf-md-function_variant"></span> download_multi_layer_quad_mesh_pcb_fmd</api/ansys/meshing/prime/examples/examples/download_multi_layer_quad_mesh_pcb_fmd>
+    <span class="nf nf-md-function_variant"></span> download_multi_layer_quad_mesh_pcb_pmdat</api/ansys/meshing/prime/examples/examples/download_multi_layer_quad_mesh_pcb_pmdat>
+    <span class="nf nf-md-function_variant"></span> download_multi_layer_quad_mesh_pcb_pmdb</api/ansys/meshing/prime/examples/examples/download_multi_layer_quad_mesh_pcb_pmdb>
+    <span class="nf nf-md-function_variant"></span> download_multi_layer_quad_mesh_pcb_scdoc</api/ansys/meshing/prime/examples/examples/download_multi_layer_quad_mesh_pcb_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_pcb_pmdat</api/ansys/meshing/prime/examples/examples/download_pcb_pmdat>
+    <span class="nf nf-md-function_variant"></span> download_pcb_scdoc</api/ansys/meshing/prime/examples/examples/download_pcb_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_pipe_tee_dsco</api/ansys/meshing/prime/examples/examples/download_pipe_tee_dsco>
+    <span class="nf nf-md-function_variant"></span> download_pipe_tee_fmd</api/ansys/meshing/prime/examples/examples/download_pipe_tee_fmd>
+    <span class="nf nf-md-function_variant"></span> download_pipe_tee_pmdat</api/ansys/meshing/prime/examples/examples/download_pipe_tee_pmdat>
+    <span class="nf nf-md-function_variant"></span> download_pipe_tee_scdoc</api/ansys/meshing/prime/examples/examples/download_pipe_tee_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_saddle_bracket_dsco</api/ansys/meshing/prime/examples/examples/download_saddle_bracket_dsco>
+    <span class="nf nf-md-function_variant"></span> download_saddle_bracket_fmd</api/ansys/meshing/prime/examples/examples/download_saddle_bracket_fmd>
+    <span class="nf nf-md-function_variant"></span> download_saddle_bracket_scdoc</api/ansys/meshing/prime/examples/examples/download_saddle_bracket_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_solder_ball_fmd</api/ansys/meshing/prime/examples/examples/download_solder_ball_fmd>
+    <span class="nf nf-md-function_variant"></span> download_solder_ball_target_fmd</api/ansys/meshing/prime/examples/examples/download_solder_ball_target_fmd>
+    <span class="nf nf-md-function_variant"></span> download_toy_car_dsco</api/ansys/meshing/prime/examples/examples/download_toy_car_dsco>
+    <span class="nf nf-md-function_variant"></span> download_toy_car_fmd</api/ansys/meshing/prime/examples/examples/download_toy_car_fmd>
+    <span class="nf nf-md-function_variant"></span> download_toy_car_pmdat</api/ansys/meshing/prime/examples/examples/download_toy_car_pmdat>
+    <span class="nf nf-md-function_variant"></span> download_toy_car_scdoc</api/ansys/meshing/prime/examples/examples/download_toy_car_scdoc>
+    <span class="nf nf-md-function_variant"></span> download_turbine_blade_cdb</api/ansys/meshing/prime/examples/examples/download_turbine_blade_cdb>
+    <span class="nf nf-md-function_variant"></span> download_wheel_ground_dsco</api/ansys/meshing/prime/examples/examples/download_wheel_ground_dsco>
+    <span class="nf nf-md-function_variant"></span> download_wheel_ground_fmd</api/ansys/meshing/prime/examples/examples/download_wheel_ground_fmd>
+    <span class="nf nf-md-function_variant"></span> download_wheel_ground_scdoc</api/ansys/meshing/prime/examples/examples/download_wheel_ground_scdoc>
+    <span class="nf nf-md-function_variant"></span> get_file</api/ansys/meshing/prime/examples/examples/get_file>
+
+
+
+
+
+
+Description
+-----------
+
+Examples module for PyPrimeMesh.
+
+
+
+
+
+
+
+
+
+.. vale on

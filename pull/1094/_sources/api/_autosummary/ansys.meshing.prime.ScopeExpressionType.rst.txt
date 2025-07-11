@@ -1,0 +1,53 @@
+.. vale off
+
+
+
+
+
+ScopeExpressionType
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeExpressionType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScopeExpressionType.real
+      ScopeExpressionType.imag
+      ScopeExpressionType.numerator
+      ScopeExpressionType.denominator
+      ScopeExpressionType.NAMEPATTERN
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScopeExpressionType
+
+    ansys.meshing.prime.ScopeExpressionType
+
+.. vale on

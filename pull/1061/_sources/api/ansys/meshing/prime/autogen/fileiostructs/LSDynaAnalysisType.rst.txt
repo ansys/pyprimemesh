@@ -1,0 +1,82 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LSDynaAnalysisType`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.LSDynaAnalysisType
+
+
+
+   Provides the LS-DYNA analysis type.
+
+
+
+
+.. py:currentmodule:: LSDynaAnalysisType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~DOORSLAM`
+            - Option to select doorslam as LS-DYNA analysis type.
+          * - :py:attr:`~SEATBELT`
+            - Option to select Seatbelt as LS-DYNA analysis type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import LSDynaAnalysisType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: DOORSLAM
+   :value: 0
+
+
+   Option to select doorslam as LS-DYNA analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SEATBELT
+   :value: 1
+
+
+   Option to select Seatbelt as LS-DYNA analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,55 @@
+.. vale off
+
+
+
+
+
+CreateVolumeZonesType
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateVolumeZonesType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateVolumeZonesType.real
+      CreateVolumeZonesType.imag
+      CreateVolumeZonesType.numerator
+      CreateVolumeZonesType.denominator
+      CreateVolumeZonesType.NONE
+      CreateVolumeZonesType.PERVOLUME
+      CreateVolumeZonesType.PERNAMESOURCE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateVolumeZonesType
+
+    ansys.meshing.prime.CreateVolumeZonesType
+
+.. vale on

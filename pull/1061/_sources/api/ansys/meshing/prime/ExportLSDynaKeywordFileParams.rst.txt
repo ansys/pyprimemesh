@@ -1,0 +1,238 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExportLSDynaKeywordFileParams`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.ExportLSDynaKeywordFileParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, material_properties: str = None, database_keywords: str = None, output_format: LSDynaFileFormatType = None, analysis_type: LSDynaAnalysisType = None, compute_spotweld_thickness: bool = None, write_thickness_file: bool = None, output_controls_d3_part: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control LS-DYNA keyword file export settings.
+
+   :param model: Model to create a ``ExportLSDynaKeywordFileParams`` object with default parameters.
+   :type model: Model
+   :param material_properties: Materials in LS-DYNA format to be added to the file.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type material_properties: str, optional
+   :param database_keywords: Database keywords in LS-DYNA format to be added to the file.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type database_keywords: str, optional
+   :param output_format: Output file format used to write LS-DYNA file.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type output_format: LSDynaFileFormatType, optional
+   :param analysis_type: Option to specify LS-DYNA analysis type.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type analysis_type: LSDynaAnalysisType, optional
+   :param compute_spotweld_thickness: Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+
+                                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type compute_spotweld_thickness: bool, optional
+   :param write_thickness_file: Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_thickness_file: bool, optional
+   :param output_controls_d3_part: Option to create D3Part card in output controls.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type output_controls_d3_part: bool, optional
+   :param json_data: JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> export_lsdyna_keyword_file_params = prime.ExportLSDynaKeywordFileParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExportLSDynaKeywordFileParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~analysis_type`
+            - Option to specify LS-DYNA analysis type.
+          * - :py:attr:`~compute_spotweld_thickness`
+            - Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+          * - :py:attr:`~database_keywords`
+            - Database keywords in LS-DYNA format to be added to the file.
+          * - :py:attr:`~material_properties`
+            - Materials in LS-DYNA format to be added to the file.
+          * - :py:attr:`~output_controls_d3_part`
+            - Option to create D3Part card in output controls.
+          * - :py:attr:`~output_format`
+            - Output file format used to write LS-DYNA file.
+          * - :py:attr:`~write_thickness_file`
+            - Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExportLSDynaKeywordFileParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExportLSDynaKeywordFileParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ExportLSDynaKeywordFileParams
+
+Property detail
+---------------
+
+.. py:property:: analysis_type
+   :type: LSDynaAnalysisType
+
+
+   Option to specify LS-DYNA analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: compute_spotweld_thickness
+   :type: bool
+
+
+   Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: database_keywords
+   :type: str
+
+
+   Database keywords in LS-DYNA format to be added to the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: material_properties
+   :type: str
+
+
+   Materials in LS-DYNA format to be added to the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: output_controls_d3_part
+   :type: bool
+
+
+   Option to create D3Part card in output controls.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: output_format
+   :type: LSDynaFileFormatType
+
+
+   Output file format used to write LS-DYNA file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_thickness_file
+   :type: bool
+
+
+   Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExportLSDynaKeywordFileParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ExportLSDynaKeywordFileParams.print_default()
+
+
+.. py:method:: set_default(material_properties: str = None, database_keywords: str = None, output_format: LSDynaFileFormatType = None, analysis_type: LSDynaAnalysisType = None, compute_spotweld_thickness: bool = None, write_thickness_file: bool = None, output_controls_d3_part: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExportLSDynaKeywordFileParams`` object.
+
+   :param material_properties: Materials in LS-DYNA format to be added to the file.
+   :type material_properties: str, optional
+   :param database_keywords: Database keywords in LS-DYNA format to be added to the file.
+   :type database_keywords: str, optional
+   :param output_format: Output file format used to write LS-DYNA file.
+   :type output_format: LSDynaFileFormatType, optional
+   :param analysis_type: Option to specify LS-DYNA analysis type.
+   :type analysis_type: LSDynaAnalysisType, optional
+   :param compute_spotweld_thickness: Option to compute spot weld thickness using shell thickness when set to true. Else, use search radius as thickness.
+   :type compute_spotweld_thickness: bool, optional
+   :param write_thickness_file: Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
+   :type write_thickness_file: bool, optional
+   :param output_controls_d3_part: Option to create D3Part card in output controls.
+   :type output_controls_d3_part: bool, optional
+
+
+
+
+
+
+
+.. vale on

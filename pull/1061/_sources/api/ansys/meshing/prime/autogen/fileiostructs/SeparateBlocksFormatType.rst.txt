@@ -1,0 +1,82 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SeparateBlocksFormatType`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.SeparateBlocksFormatType
+
+
+
+   Format type for separate element blocks. Only applicable when write_separate_blocks is true.
+
+
+
+
+.. py:currentmodule:: SeparateBlocksFormatType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~COMPACT`
+            - Compact format for element blocks with reduced columns.
+          * - :py:attr:`~STANDARD`
+            - Standard format for element blocks.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import SeparateBlocksFormatType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: COMPACT
+   :value: 1
+
+
+   Compact format for element blocks with reduced columns.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: STANDARD
+   :value: 0
+
+
+   Standard format for element blocks.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

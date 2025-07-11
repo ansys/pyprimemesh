@@ -1,0 +1,27 @@
+.. vale off
+
+SplineFeatureCaptureType
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplineFeatureCaptureType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SplineFeatureCaptureType.IGNORE
+      SplineFeatureCaptureType.BYANGLE
+      SplineFeatureCaptureType.BYEDGES
+   
+   
+
+.. vale on

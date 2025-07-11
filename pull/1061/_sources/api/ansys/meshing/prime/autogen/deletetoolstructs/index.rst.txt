@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``deletetoolstructs.py`` module
+===================================
+
+.. py:module:: ansys.meshing.prime.autogen.deletetoolstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: deletetoolstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.deletetoolstructs.DeleteFringesAndOverlapsParams`
+            - Parameters to delete fringes and overlapping faces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.deletetoolstructs.DeleteFringesAndOverlapsResults`
+            - Results associated with the delete fringes and overlapping faces operation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DeleteFringesAndOverlapsParams</api/ansys/meshing/prime/autogen/deletetoolstructs/DeleteFringesAndOverlapsParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteFringesAndOverlapsResults</api/ansys/meshing/prime/autogen/deletetoolstructs/DeleteFringesAndOverlapsResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

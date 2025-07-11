@@ -1,0 +1,198 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ProximitySizingParams`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizecontrolstructs.ProximitySizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, min: float = None, max: float = None, growth_rate: float = None, elements_per_gap: float = None, ignore_self_proximity: bool = None, ignore_orientation: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Size field using proximity size control computes edge and face sizes in `gaps` using the specified minimum number of element layers.
+
+   :param model: Model to create a ``ProximitySizingParams`` object with default parameters.
+   :type model: Model
+   :param min: Minimum size used for computing edge and face size using proximity size control.
+   :type min: float, optional
+   :param max: Maximum size used for computing edge and face size using proximity size control.
+   :type max: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+   :param elements_per_gap: The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
+   :type elements_per_gap: float, optional
+   :param ignore_self_proximity: Ignore proximity within zonelets.
+   :type ignore_self_proximity: bool, optional
+   :param ignore_orientation: The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
+   :type ignore_orientation: bool, optional
+   :param json_data: JSON dictionary to create a ``ProximitySizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> proximity_sizing_params = prime.ProximitySizingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ProximitySizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~elements_per_gap`
+            - The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
+          * - :py:attr:`~growth_rate`
+            - Growth rate used for transitioning from one element size to neighbor element size.
+          * - :py:attr:`~ignore_orientation`
+            - The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
+          * - :py:attr:`~ignore_self_proximity`
+            - Ignore proximity within zonelets.
+          * - :py:attr:`~max`
+            - Maximum size used for computing edge and face size using proximity size control.
+          * - :py:attr:`~min`
+            - Minimum size used for computing edge and face size using proximity size control.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ProximitySizingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ProximitySizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizecontrolstructs import ProximitySizingParams
+
+Property detail
+---------------
+
+.. py:property:: elements_per_gap
+   :type: float
+
+
+   The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate used for transitioning from one element size to neighbor element size.
+
+.. py:property:: ignore_orientation
+   :type: bool
+
+
+   The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
+
+.. py:property:: ignore_self_proximity
+   :type: bool
+
+
+   Ignore proximity within zonelets.
+
+.. py:property:: max
+   :type: float
+
+
+   Maximum size used for computing edge and face size using proximity size control.
+
+.. py:property:: min
+   :type: float
+
+
+   Minimum size used for computing edge and face size using proximity size control.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ProximitySizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ProximitySizingParams.print_default()
+
+
+.. py:method:: set_default(min: float = None, max: float = None, growth_rate: float = None, elements_per_gap: float = None, ignore_self_proximity: bool = None, ignore_orientation: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ProximitySizingParams`` object.
+
+   :param min: Minimum size used for computing edge and face size using proximity size control.
+   :type min: float, optional
+   :param max: Maximum size used for computing edge and face size using proximity size control.
+   :type max: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+   :param elements_per_gap: The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
+   :type elements_per_gap: float, optional
+   :param ignore_self_proximity: Ignore proximity within zonelets.
+   :type ignore_self_proximity: bool, optional
+   :param ignore_orientation: The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
+   :type ignore_orientation: bool, optional
+
+
+
+
+
+
+
+.. vale on

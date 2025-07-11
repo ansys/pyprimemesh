@@ -1,0 +1,55 @@
+.. vale off
+
+
+
+
+
+BodyQueryType
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BodyQueryType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BodyQueryType.real
+      BodyQueryType.imag
+      BodyQueryType.numerator
+      BodyQueryType.denominator
+      BodyQueryType.ALL
+      BodyQueryType.FREE
+      BodyQueryType.NONFREE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BodyQueryType
+
+    ansys.meshing.prime.BodyQueryType
+
+.. vale on

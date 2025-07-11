@@ -1,0 +1,6 @@
+ymin
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundingBox.ymin

@@ -1,0 +1,6 @@
+ACIS
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadFaceter.ACIS

@@ -1,0 +1,58 @@
+.. vale off
+
+
+
+
+
+SurfaceFeatureType
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceFeatureType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceFeatureType.real
+      SurfaceFeatureType.imag
+      SurfaceFeatureType.numerator
+      SurfaceFeatureType.denominator
+      SurfaceFeatureType.NONE
+      SurfaceFeatureType.ZONEBOUNDARY
+      SurfaceFeatureType.FEATURE
+      SurfaceFeatureType.FEATUREORZONEBOUNDARY
+      SurfaceFeatureType.ZONELETBOUNDARY
+      SurfaceFeatureType.FEATUREORZONELETBOUNDARY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurfaceFeatureType
+
+    ansys.meshing.prime.SurfaceFeatureType
+
+.. vale on

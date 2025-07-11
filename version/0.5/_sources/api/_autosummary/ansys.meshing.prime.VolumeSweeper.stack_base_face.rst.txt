@@ -1,0 +1,6 @@
+stack\_base\_face
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeSweeper.stack_base_face
