@@ -19,7 +19,7 @@ The following example shows the translation of Abaqus input file to MAPDL file f
        file_io = prime.FileIO(model=model)
        import_results = file_io.import_abaqus_inp(
                             r"E:/test2/Abaqus_Input_multistep.inp", 
-                            prime.ImportAbaqusParams(model)
+                            prime.ImportAbaqusParams(model),
                             )
        print(import_results)
    
@@ -39,7 +39,8 @@ The following example shows the translation of Abaqus input file to MAPDL file f
         mesh_file_cdb = os.path.join(r"E:\test3\Abaqus_Input_multistep.cdb")
         export_cdb_result = file_io.export_mapdl_cdb(
                                             mesh_file_cdb, 
-                                        params=mapdl_params)
+                                        params=mapdl_params,
+                                            )
         print(export_cdb_result)
 
     :class:`ExportMapdlCdbParams <ansys.meshing.prime.ExportMapdlCdbParams>` allows setting parameters to control
