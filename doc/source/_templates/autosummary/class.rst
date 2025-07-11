@@ -20,8 +20,8 @@
    .. autosummary::
       :toctree:
 
-   {% for item in filtered_methods %}
-      {% if item != '__init__' %}{{ name }}.{{ item }}{% endif %}
+   {% for item in methods %}
+      {% if item not in filtered_methods %}{{ name }}.{{ item }}{% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
