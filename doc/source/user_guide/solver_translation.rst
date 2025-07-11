@@ -20,7 +20,7 @@ The following example shows the translation of Abaqus input file to MAPDL file f
        import_results = file_io.import_abaqus_inp(r"E:/test2/Abaqus_Input_multistep.inp", prime.ImportAbaqusParams(model))
        print(import_results)
    
-    The import_abaqus _inp imports the abaqus file as mesh, extracts simulation specific information from the abaqus file and
+    The import_abaqus_inp imports the abaqus file as mesh, extracts simulation specific information from the abaqus file and
     stores the information in Prime as a JSON document. :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>`
     allows you to set the parameters for importing the model. The example uses default parameters for importing the model.
 
