@@ -2,26 +2,23 @@
 
 {% set excluded_attrs = ['real', 'imag', 'numerator', 'denominator'] %}
 
-{% set excluded_methods = ['bit_length', 'conjugate', 'from_bytes', 'to_bytes', 'bit_count', 'as_integer_ratio', 'is_integer'] %}
-
-{% set all_excluded_present = (excluded_methods | reject('in', methods) | list | length == 0) %}
-{% set filtered_methods = [] if all_excluded_present else methods %}
+{% set excluded_methods = ['__init__', 'bit_length', 'conjugate', 'from_bytes', 'to_bytes', 'bit_count', 'as_integer_ratio', 'is_integer'] %}
 
 {{ name | escape | underline}}
 
 .. currentmodule:: {{ module }}
 
 .. autoclass:: {{ objname }}
-   
+
    {% block methods %}
-   {% if filtered_methods %}
+   {% if methods %}
    .. rubric:: {{ _('Methods') }}
 
    .. autosummary::
       :toctree:
 
    {% for item in methods %}
-      {% if item not in filtered_methods %}{{ name }}.{{ item }}{% endif %}
+      {% if item not in excluded_methods %}{{ name }}.{{ item }}{% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
@@ -33,9 +30,7 @@
    .. autosummary::
       :toctree:
    {% for item in attributes %}
-      {% if item not in excluded_attrs %}
       {{ name }}.{{ item }}
-      {% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
