@@ -21,7 +21,8 @@ The following example shows the translation of Abaqus input file to MAPDL file f
        print(import_results)  
    
     The import_abaqus _inp imports the abaqus file as mesh, extracts simulation specific information from the abaqus file and 
-    stores this information in Prime as a Json document. ImportAbaqusParams allows you to set the parameters for importing the 
+    stores this information in Prime as a Json document.  :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>`
+    allows you to set the parameters for importing the 
     model. The example uses default parameters for importing the model.
 
     **Output**:
@@ -36,5 +37,11 @@ The following example shows the translation of Abaqus input file to MAPDL file f
         mesh_file_cdb = os.path.join(r"E:\test3\Abaqus_Input_multistep.cdb")
         export_cdb_result = file_io.export_mapdl_cdb(mesh_file_cdb, params=mapdl_params)
         print(export_cdb_result)	
- 
+
+    :class:`ExportMapdlCdbParams <ansys.meshing.prime.ExportMapdlCdbParams>` allows setting parameters to control 
+    the export of MAPDL CDB files. 
+
+    :class:`ExportMapdlCdbResults <ansys.meshing.prime.ExportMapdlCdbResults>` contains the summary 
+    result of the export process in json format. This writes the .cdb file to the specified location.
+
     .. figure:: ../images/fe2ansys_cdb_export.png
