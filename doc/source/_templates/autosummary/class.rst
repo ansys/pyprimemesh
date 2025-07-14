@@ -2,7 +2,7 @@
 
 {% set excluded_attrs = ['real', 'imag', 'numerator', 'denominator'] %}
 
-{% set excluded_methods = ['__init__', 'bit_length', 'conjugate', 'from_bytes', 'to_bytes', 'bit_count', 'as_integer_ratio', 'is_integer'] %}
+{% set excluded_methods = ['bit_length', 'conjugate', 'from_bytes', 'to_bytes', 'bit_count', 'as_integer_ratio', 'is_integer'] %}
 
 {{ name | escape | underline}}
 
@@ -30,7 +30,7 @@
    .. autosummary::
       :toctree:
    {% for item in attributes %}
-      {{ name }}.{{ item }}
+      {% if item not in excluded_attrs %}{{ name }}.{{ item }}{% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
