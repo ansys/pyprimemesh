@@ -18,7 +18,7 @@
       :toctree:
 
    {% for item in methods %}
-      {% if item not in excluded_methods %}{{ name }}.{{ item }}{% endif %}
+      {% if item != '__init__' %}{{ name }}.{{ item }}{% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
