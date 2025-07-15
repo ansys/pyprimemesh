@@ -4,15 +4,15 @@
 Solver translation
 ******************
 
-Solver translation (commonly known as FE2Ansys) translates Abaqus input deck to Ansys solver decks (MAPDL and LS-DYNA).
-The translation ensures that the abaqus model can be used in Ansys without recreating them from scratch.
-It helps to save time and efforts even though minor manual adjustments may be required.
+Solver translation (also known as FE2Ansys) translates Abaqus INP input deck to Ansys CDB and K solver decks (MAPDL and LS-DYNA).
+The translation ensures that the Abaqus model can be used in Ansys without recreating from scratch.
+It helps to save time and effort even though minor manual adjustments may be required.
 The manual adjustments like redefining boundary conditions, loads, and material properties,
 ensures that the model behaves as expected in Ansys solver deck.
 
-The following example shows the translation of Abaqus input file to MAPDL file format:
+The following example shows the translation of Abaqus INP file to CDB file format:
 
-1.	Import the Abaqus file.
+1.	Import the Abaqus INP file.
 
     .. code-block:: python
 
@@ -23,15 +23,15 @@ The following example shows the translation of Abaqus input file to MAPDL file f
        )
        print(import_results)
    
-    The import_abaqus_inp imports the abaqus file as mesh, extracts simulation specific information from the abaqus file and
-    stores the information in Prime as a JSON document. :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>`
+    The import_abaqus_inp imports the INP file as mesh, extracts simulation specific information from the INP file and
+    stores the information internally as a JSON document. :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>`
     allows you to set the parameters for importing the model. The example uses default parameters for importing the model.
 
     **Output**:
 
     .. figure:: ../images/fe2ansys_abaqus_import.png
 
-2.	Export the file in MAPDL format.
+2.	Export the CDB file.
 
     .. code-block:: python
 
@@ -47,6 +47,6 @@ The following example shows the translation of Abaqus input file to MAPDL file f
     the export of MAPDL CDB files.
 
     :class:`ExportMapdlCdbResults <ansys.meshing.prime.ExportMapdlCdbResults>` contains the summary
-    result of the export process in json format. This writes the .cdb file to the specified location.
+    result of the export process in json format. This writes the CDB file to the specified location.
 
     .. figure:: ../images/fe2ansys_cdb_export.png
