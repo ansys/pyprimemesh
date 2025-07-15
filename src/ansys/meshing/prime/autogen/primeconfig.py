@@ -29,7 +29,7 @@ from ansys.meshing.prime.autogen.coreobject import *
 import numpy as np
 
 
-class ErrorCode(enum.IntEnum):
+class ErrorCode(enum.Enum):
     """Error codes associated with the failure of PyPrimeMesh operation.
     """
     NOERROR = 0
@@ -845,7 +845,7 @@ class ErrorCode(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
-class WarningCode(enum.IntEnum):
+class WarningCode(enum.Enum):
     """Warning codes associated with the PyPrimeMesh operation.
     """
     NOWARNING = 0

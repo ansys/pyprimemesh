@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class CellZoneletType(enum.IntEnum):
+class CellZoneletType(enum.Enum):
     """Types of cell zonelet.
     """
     DEAD = 0
@@ -40,7 +40,7 @@ class CellZoneletType(enum.IntEnum):
     SOLID = 17
     """Cell zonelet type is solid."""
 
-class ZoneType(enum.IntEnum):
+class ZoneType(enum.Enum):
     """ZoneType decides the type of zone.
     """
     EDGE = 1
@@ -50,7 +50,7 @@ class ZoneType(enum.IntEnum):
     VOLUME = 3
     """Denotes the zone is volume zone."""
 
-class VolumeNamingType(enum.IntEnum):
+class VolumeNamingType(enum.Enum):
     """Indicate source types used to name volume zones.
     """
     BYFACELABEL = 1
@@ -60,7 +60,7 @@ class VolumeNamingType(enum.IntEnum):
     BYFACENORMALS = 4
     """Option to use face normal as source to name volume zones. Here, the volume zones with face normal into the volume are considered as dead and volume zones with face normal outwards from the volume are considered as solid.."""
 
-class CreateVolumeZonesType(enum.IntEnum):
+class CreateVolumeZonesType(enum.Enum):
     """Indicate type to create volume zones for volumes.
     """
     NONE = 0
@@ -70,7 +70,7 @@ class CreateVolumeZonesType(enum.IntEnum):
     PERNAMESOURCE = 2
     """Option to create zone per name computed from face zonelets of volume. Single zone is created for multiple volumes if same zone name is identified using face zonelets for the volumes."""
 
-class BodyQueryType(enum.IntEnum):
+class BodyQueryType(enum.Enum):
     """Indicates type of entity to query in part.
     """
     ALL = 0

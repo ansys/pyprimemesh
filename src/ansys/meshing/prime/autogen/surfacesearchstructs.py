@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class ThinStripType(enum.IntEnum):
+class ThinStripType(enum.Enum):
     """The type to identify strip of face elements as thin strips using shape formed by features around the strip of face elements.
     """
     ALL = 0

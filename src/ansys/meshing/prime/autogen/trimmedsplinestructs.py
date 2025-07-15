@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class TrimmedSolidSplineCutMode(enum.IntEnum):
+class TrimmedSolidSplineCutMode(enum.Enum):
     """Types of Cut modes used to generate Cartesian grid representing subdomains of trimmed solid spline.
     """
     HYBRID = 0

@@ -30,7 +30,7 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class CadReaderRoute(enum.IntEnum):
+class CadReaderRoute(enum.Enum):
     """CAD Reader routes.
     """
     PROGRAMCONTROLLED = 0
@@ -44,7 +44,7 @@ class CadReaderRoute(enum.IntEnum):
     DISCOVERY = 4
     """Denotes Discovery as CAD reader route."""
 
-class PartCreationType(enum.IntEnum):
+class PartCreationType(enum.Enum):
     """Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
     """
     MODEL = 0
@@ -56,7 +56,7 @@ class PartCreationType(enum.IntEnum):
     BODY = 3
     """Denotes a part per CAD Body."""
 
-class LengthUnit(enum.IntEnum):
+class LengthUnit(enum.Enum):
     """Length units
     """
     M = 0
@@ -74,7 +74,7 @@ class LengthUnit(enum.IntEnum):
     FT = 6
     """Denotes length unit is feet."""
 
-class CadFaceter(enum.IntEnum):
+class CadFaceter(enum.Enum):
     """Types of CAD faceter.
     """
     ACIS = 0
@@ -82,7 +82,7 @@ class CadFaceter(enum.IntEnum):
     PARASOLID = 1
     """Denotes CAD faceter is Parasolid."""
 
-class CadRefacetingResolution(enum.IntEnum):
+class CadRefacetingResolution(enum.Enum):
     """Levels of CAD faceting refinement.
     """
     COARSE = 0
@@ -94,7 +94,7 @@ class CadRefacetingResolution(enum.IntEnum):
     CUSTOM = 3
     """Denotes custom resolution of CAD faceting."""
 
-class CadRefacetingMaxEdgeSizeLimit(enum.IntEnum):
+class CadRefacetingMaxEdgeSizeLimit(enum.Enum):
     """Types of maximum edge size limit for CAD faceting.
     """
     NONE = 0
@@ -104,7 +104,7 @@ class CadRefacetingMaxEdgeSizeLimit(enum.IntEnum):
     RELATIVE = 2
     """Denotes relative maximum edge size limit for CAD faceting."""
 
-class CdbAnalysisType(enum.IntEnum):
+class CdbAnalysisType(enum.Enum):
     """Provides the MAPDL CDB analysis type.
     """
     NONE = 0
@@ -124,7 +124,7 @@ class CdbAnalysisType(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
-class CdbSimulationType(enum.IntEnum):
+class CdbSimulationType(enum.Enum):
     """Simulation Type for CDB export.
     """
     IMPLICIT = 0
@@ -132,7 +132,7 @@ class CdbSimulationType(enum.IntEnum):
     EXPLICIT = 1
     """Explicit Simulation."""
 
-class SeparateBlocksFormatType(enum.IntEnum):
+class SeparateBlocksFormatType(enum.Enum):
     """Format type for separate element blocks. Only applicable when write_separate_blocks is true.
     """
     STANDARD = 0
@@ -144,7 +144,7 @@ class SeparateBlocksFormatType(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
-class LSDynaFileFormatType(enum.IntEnum):
+class LSDynaFileFormatType(enum.Enum):
     """Provides the format type to write the LS-DYNA file.
     """
     REGULAR = 0
@@ -156,7 +156,7 @@ class LSDynaFileFormatType(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
-class LSDynaAnalysisType(enum.IntEnum):
+class LSDynaAnalysisType(enum.Enum):
     """Provides the LS-DYNA analysis type.
     """
     DOORSLAM = 0
