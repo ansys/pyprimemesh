@@ -145,7 +145,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
           bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
-          maximum-pr-doc-deployments: 10
+          maximum-pr-doc-deployments: 20
 
   testing:
     name: Run Unit Tests
@@ -208,6 +208,9 @@ jobs:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     needs: [package, update-changelog]
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Release to the public PyPI repository
         uses: ansys/actions/release-pypi-public@v10
@@ -219,6 +222,7 @@ jobs:
       - name: Release to GitHub
         uses: ansys/actions/release-github@v10
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
 
   upload_dev_docs:
