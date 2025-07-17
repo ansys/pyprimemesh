@@ -13,6 +13,7 @@ This section provides an overview of how you use PyPrimeMesh for mesh preparatio
    launch_prime
    lucid
    fileio
+   solver_translation
    logging
    graphics
    surfer
