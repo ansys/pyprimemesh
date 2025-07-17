@@ -1,0 +1,286 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`RepairTopologyParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.RepairTopologyParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, connect_faces: bool = None, repair_edges: bool = None, split_topo_edges_at_apex_point: bool = None, fillet_max_radius: float = None, smallest_edge_length: float = None, merge_edge_allow_self_close: bool = None, suppress_shared_edges_when_merging: bool = None, edge_connect_type: int = None, connect_faces_params: ConnectFacesParams = None, repair_edges_params: RepairEdgesParams = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for repair topology operations.
+
+   :param model: Model to create a ``RepairTopologyParams`` object with default parameters.
+   :type model: Model
+   :param connect_faces: Option to connect faces.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type connect_faces: bool, optional
+   :param repair_edges: Option to repair edges.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type repair_edges: bool, optional
+   :param split_topo_edges_at_apex_point: Option to split edges at apex point.
+
+                                          **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type split_topo_edges_at_apex_point: bool, optional
+   :param fillet_max_radius: Maximum radius of fillets to be detected.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fillet_max_radius: float, optional
+   :param smallest_edge_length: Length of smallest edge for which split is applied.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type smallest_edge_length: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_edge_allow_self_close: bool, optional
+   :param suppress_shared_edges_when_merging: Option for suppressing shared edges when merging.
+
+                                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type suppress_shared_edges_when_merging: bool, optional
+   :param edge_connect_type: Edge connection type.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_connect_type: int, optional
+   :param connect_faces_params: Parameters for connect faces operation.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type connect_faces_params: ConnectFacesParams, optional
+   :param repair_edges_params: Parameters for repair edges operation.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type repair_edges_params: RepairEdgesParams, optional
+   :param json_data: JSON dictionary to create a ``RepairTopologyParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> repair_topology_params = prime.RepairTopologyParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: RepairTopologyParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~connect_faces`
+            - Option to connect faces.
+          * - :py:attr:`~connect_faces_params`
+            - Parameters for connect faces operation.
+          * - :py:attr:`~edge_connect_type`
+            - Edge connection type.
+          * - :py:attr:`~fillet_max_radius`
+            - Maximum radius of fillets to be detected.
+          * - :py:attr:`~merge_edge_allow_self_close`
+            - Option for merging self-closing edge loops.
+          * - :py:attr:`~repair_edges`
+            - Option to repair edges.
+          * - :py:attr:`~repair_edges_params`
+            - Parameters for repair edges operation.
+          * - :py:attr:`~smallest_edge_length`
+            - Length of smallest edge for which split is applied.
+          * - :py:attr:`~split_topo_edges_at_apex_point`
+            - Option to split edges at apex point.
+          * - :py:attr:`~suppress_shared_edges_when_merging`
+            - Option for suppressing shared edges when merging.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``RepairTopologyParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``RepairTopologyParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import RepairTopologyParams
+
+Property detail
+---------------
+
+.. py:property:: connect_faces
+   :type: bool
+
+
+   Option to connect faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: connect_faces_params
+   :type: ConnectFacesParams
+
+
+   Parameters for connect faces operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: edge_connect_type
+   :type: int
+
+
+   Edge connection type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fillet_max_radius
+   :type: float
+
+
+   Maximum radius of fillets to be detected.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_edge_allow_self_close
+   :type: bool
+
+
+   Option for merging self-closing edge loops.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: repair_edges
+   :type: bool
+
+
+   Option to repair edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: repair_edges_params
+   :type: RepairEdgesParams
+
+
+   Parameters for repair edges operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: smallest_edge_length
+   :type: float
+
+
+   Length of smallest edge for which split is applied.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: split_topo_edges_at_apex_point
+   :type: bool
+
+
+   Option to split edges at apex point.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: suppress_shared_edges_when_merging
+   :type: bool
+
+
+   Option for suppressing shared edges when merging.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``RepairTopologyParams`` object.
+
+   .. rubric:: Examples
+
+   >>> RepairTopologyParams.print_default()
+
+
+.. py:method:: set_default(connect_faces: bool = None, repair_edges: bool = None, split_topo_edges_at_apex_point: bool = None, fillet_max_radius: float = None, smallest_edge_length: float = None, merge_edge_allow_self_close: bool = None, suppress_shared_edges_when_merging: bool = None, edge_connect_type: int = None, connect_faces_params: ConnectFacesParams = None, repair_edges_params: RepairEdgesParams = None)
+   :staticmethod:
+
+
+   Set the default values of the ``RepairTopologyParams`` object.
+
+   :param connect_faces: Option to connect faces.
+   :type connect_faces: bool, optional
+   :param repair_edges: Option to repair edges.
+   :type repair_edges: bool, optional
+   :param split_topo_edges_at_apex_point: Option to split edges at apex point.
+   :type split_topo_edges_at_apex_point: bool, optional
+   :param fillet_max_radius: Maximum radius of fillets to be detected.
+   :type fillet_max_radius: float, optional
+   :param smallest_edge_length: Length of smallest edge for which split is applied.
+   :type smallest_edge_length: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+   :type merge_edge_allow_self_close: bool, optional
+   :param suppress_shared_edges_when_merging: Option for suppressing shared edges when merging.
+   :type suppress_shared_edges_when_merging: bool, optional
+   :param edge_connect_type: Edge connection type.
+   :type edge_connect_type: int, optional
+   :param connect_faces_params: Parameters for connect faces operation.
+   :type connect_faces_params: ConnectFacesParams, optional
+   :param repair_edges_params: Parameters for repair edges operation.
+   :type repair_edges_params: RepairEdgesParams, optional
+
+
+
+
+
+
+
+.. vale on

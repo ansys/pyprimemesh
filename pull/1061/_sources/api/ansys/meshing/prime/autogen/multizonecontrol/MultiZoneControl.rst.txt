@@ -1,0 +1,225 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MultiZoneControl`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.multizonecontrol.MultiZoneControl(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   MultiZoneControl provides a way to gather all the information required for MultiZone meshing.
+
+   The MultiZone meshing provides hex meshing capabilities.
+   Different type of mesh can be generated using MultiZoneControl. For example, sweep mesh, map mesh and edge biased mesh.
+
+   :param model: Server model to create MultiZoneControl object.
+   :type model: Model
+   :param id: Id of the MultiZoneControl.
+   :type id: int
+   :param object_id: Object id of the MultiZoneControl.
+   :type object_id: int
+   :param name: Name of the MultiZoneControl.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: MultiZoneControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_edge_biasing_params`
+            - Sets the parameters for edge biasing in terms of topoedges and topofaces during MultiZone mesh.
+          * - :py:attr:`~set_map_mesh_params`
+            - Set the parameters for map meshing in terms of topofaces during MultiZone mesh.
+          * - :py:attr:`~set_multi_zone_sizing_params`
+            - Sets the MultiZone parameters.
+          * - :py:attr:`~set_surface_scope`
+            - Sets the scope for surface in terms of topofaces.
+          * - :py:attr:`~set_sweep_mesh_params`
+            - Set the parameters for sweep meshing in terms of topofaces during MultiZone mesh.
+          * - :py:attr:`~set_volume_scope`
+            - Sets the scope for volume in terms of topovolumes.The topovolumes given by the scope are imported by MultiZone to generate MultiZone mesh on it.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of MultiZoneControl.
+          * - :py:attr:`~name`
+            - Get the name of MultiZoneControl.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of MultiZoneControl.
+
+.. py:property:: name
+
+   Get the name of MultiZoneControl.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: set_edge_biasing_params(scope_info: ansys.meshing.prime.params.primestructs.MultiZoneEdgeBiasingParams)
+
+   Sets the parameters for edge biasing in terms of topoedges and topofaces during MultiZone mesh.
+
+
+   :param scope_info: Information for edge biasing in MultiZone meshing.
+   :type scope_info: MultiZoneEdgeBiasingParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> multizone_control.set_edge_biasing_params(scope_info)
+
+
+.. py:method:: set_map_mesh_params(scope_info: ansys.meshing.prime.params.primestructs.MultiZoneMapMeshParams)
+
+   Set the parameters for map meshing in terms of topofaces during MultiZone mesh.
+
+
+   :param scope_info: Scoped topofaces to be map meshed.
+   :type scope_info: MultiZoneMapMeshParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> multizone_control.set_map_mesh_params(scope_info)
+
+
+.. py:method:: set_multi_zone_sizing_params(params: ansys.meshing.prime.params.primestructs.MultiZoneSizingParams)
+
+   Sets the MultiZone parameters.
+
+
+   :param params: Parameters required for MultiZone mesh.
+   :type params: MultiZoneSizingParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> multizone_control.set_multi_zone_params(params)
+
+
+.. py:method:: set_surface_scope(scope_info: ansys.meshing.prime.params.primestructs.ScopeDefinition)
+
+   Sets the scope for surface in terms of topofaces.
+
+
+   :param scope_info: Scoped topofaces.
+   :type scope_info: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> multizone_control.set_surface_scope(scope_info)
+
+
+.. py:method:: set_sweep_mesh_params(scope_info: ansys.meshing.prime.params.primestructs.MultiZoneSweepMeshParams)
+
+   Set the parameters for sweep meshing in terms of topofaces during MultiZone mesh.
+
+
+   :param scope_info: Information required for sweep meshing.
+   :type scope_info: MultiZoneSweepMeshParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> multizone_control.set_sweep_mesh_params(scope_info)
+
+
+.. py:method:: set_volume_scope(scope_info: ansys.meshing.prime.params.primestructs.ScopeDefinition)
+
+   Sets the scope for volume in terms of topovolumes.The topovolumes given by the scope are imported by MultiZone to generate MultiZone mesh on it.
+
+
+   :param scope_info: Scoped topovolumes.
+   :type scope_info: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> multizone_control.set_volume_scope(scope_info)
+
+
+
+
+
+
+
+.. vale on

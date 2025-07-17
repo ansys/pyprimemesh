@@ -1,0 +1,11 @@
+set\_suggested\_name
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperControl.set_suggested_name
+
+.. minigallery::
+   :add-heading: Examples using WrapperControl.set_suggested_name
+
+   ansys.meshing.prime.WrapperControl.set_suggested_name

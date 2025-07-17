@@ -1,0 +1,82 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TrimmedSolidSplineCutMode`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.trimmedsplinestructs.TrimmedSolidSplineCutMode
+
+
+
+   Types of Cut modes used to generate Cartesian grid representing subdomains of trimmed solid spline.
+
+
+
+
+.. py:currentmodule:: TrimmedSolidSplineCutMode
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EXACT`
+            - This mode guarantees to represent the exact input mesh for each subdomain without any defeaturing.
+          * - :py:attr:`~HYBRID`
+            - This is faster mode and may defeature the input mesh to represent each subdomain.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.trimmedsplinestructs import TrimmedSolidSplineCutMode
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EXACT
+   :value: 1
+
+
+   This mode guarantees to represent the exact input mesh for each subdomain without any defeaturing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: HYBRID
+   :value: 0
+
+
+   This is faster mode and may defeature the input mesh to represent each subdomain.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

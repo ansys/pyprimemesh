@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TopoFillHoleParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.topoutilitystructs.TopoFillHoleParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, edges_to_exclude: ansys.meshing.prime.params.primestructs.Iterable[int] = None, suppress_boundary_after_hole_fill: bool = None, fill_annular_hole: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to fill holes in topology.
+
+   :param model: Model to create a ``TopoFillHoleParams`` object with default parameters.
+   :type model: Model
+   :param edges_to_exclude: TopoEdges to be excluded for cap creation.
+   :type edges_to_exclude: Iterable[int], optional
+   :param suppress_boundary_after_hole_fill: Option to preserve or suppress hole-boundary after filling holes.
+   :type suppress_boundary_after_hole_fill: bool, optional
+   :param fill_annular_hole: Option for filling holes with annular bounding loops.
+   :type fill_annular_hole: bool, optional
+   :param json_data: JSON dictionary to create a ``TopoFillHoleParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> topo_fill_hole_params = prime.TopoFillHoleParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TopoFillHoleParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~edges_to_exclude`
+            - TopoEdges to be excluded for cap creation.
+          * - :py:attr:`~fill_annular_hole`
+            - Option for filling holes with annular bounding loops.
+          * - :py:attr:`~suppress_boundary_after_hole_fill`
+            - Option to preserve or suppress hole-boundary after filling holes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TopoFillHoleParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TopoFillHoleParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.topoutilitystructs import TopoFillHoleParams
+
+Property detail
+---------------
+
+.. py:property:: edges_to_exclude
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   TopoEdges to be excluded for cap creation.
+
+.. py:property:: fill_annular_hole
+   :type: bool
+
+
+   Option for filling holes with annular bounding loops.
+
+.. py:property:: suppress_boundary_after_hole_fill
+   :type: bool
+
+
+   Option to preserve or suppress hole-boundary after filling holes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TopoFillHoleParams`` object.
+
+   .. rubric:: Examples
+
+   >>> TopoFillHoleParams.print_default()
+
+
+.. py:method:: set_default(edges_to_exclude: ansys.meshing.prime.params.primestructs.Iterable[int] = None, suppress_boundary_after_hole_fill: bool = None, fill_annular_hole: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TopoFillHoleParams`` object.
+
+   :param edges_to_exclude: TopoEdges to be excluded for cap creation.
+   :type edges_to_exclude: Iterable[int], optional
+   :param suppress_boundary_after_hole_fill: Option to preserve or suppress hole-boundary after filling holes.
+   :type suppress_boundary_after_hole_fill: bool, optional
+   :param fill_annular_hole: Option for filling holes with annular bounding loops.
+   :type fill_annular_hole: bool, optional
+
+
+
+
+
+
+
+.. vale on

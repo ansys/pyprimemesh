@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``morpherbcsstructs.py`` module
+===================================
+
+.. py:module:: ansys.meshing.prime.autogen.morpherbcsstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: morpherbcsstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherbcsstructs.BCsVolumetricModality`
+            - Indicate options to identify morphable region in input volumetric mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherbcsstructs.MorphBCParams`
+            - MorphBCParams contains the input parameters for calculating the boundary conditions for a morphing problem.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> BCsVolumetricModality</api/ansys/meshing/prime/autogen/morpherbcsstructs/BCsVolumetricModality>
+    <span class="nf nf-cod-symbol_class"></span> MorphBCParams</api/ansys/meshing/prime/autogen/morpherbcsstructs/MorphBCParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

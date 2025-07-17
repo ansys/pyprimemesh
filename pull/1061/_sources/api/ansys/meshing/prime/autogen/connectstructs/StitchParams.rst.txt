@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`StitchParams`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.StitchParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, tolerance: float = None, use_absolute_tolerance: bool = None, remesh: bool = None, enable_multi_threading: bool = None, type: StitchType = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used for stitch operation.
+
+   :param model: Model to create a ``StitchParams`` object with default parameters.
+   :type model: Model
+   :param tolerance: Distance tolerance for stitching boundaries.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: True if tolerance provided is absolute value.
+   :type use_absolute_tolerance: bool, optional
+   :param remesh: Remesh at stitch connection.
+   :type remesh: bool, optional
+   :param enable_multi_threading: Option to run stitch in parallel using multithread.
+   :type enable_multi_threading: bool, optional
+   :param type: Stitch type depending on nature of surface boundary edges to be stitched.
+   :type type: StitchType, optional
+   :param json_data: JSON dictionary to create a ``StitchParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> stitch_params = prime.StitchParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: StitchParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~enable_multi_threading`
+            - Option to run stitch in parallel using multithread.
+          * - :py:attr:`~remesh`
+            - Remesh at stitch connection.
+          * - :py:attr:`~tolerance`
+            - Distance tolerance for stitching boundaries.
+          * - :py:attr:`~type`
+            - Stitch type depending on nature of surface boundary edges to be stitched.
+          * - :py:attr:`~use_absolute_tolerance`
+            - True if tolerance provided is absolute value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``StitchParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``StitchParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import StitchParams
+
+Property detail
+---------------
+
+.. py:property:: enable_multi_threading
+   :type: bool
+
+
+   Option to run stitch in parallel using multithread.
+
+.. py:property:: remesh
+   :type: bool
+
+
+   Remesh at stitch connection.
+
+.. py:property:: tolerance
+   :type: float
+
+
+   Distance tolerance for stitching boundaries.
+
+.. py:property:: type
+   :type: StitchType
+
+
+   Stitch type depending on nature of surface boundary edges to be stitched.
+
+.. py:property:: use_absolute_tolerance
+   :type: bool
+
+
+   True if tolerance provided is absolute value.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``StitchParams`` object.
+
+   .. rubric:: Examples
+
+   >>> StitchParams.print_default()
+
+
+.. py:method:: set_default(tolerance: float = None, use_absolute_tolerance: bool = None, remesh: bool = None, enable_multi_threading: bool = None, type: StitchType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``StitchParams`` object.
+
+   :param tolerance: Distance tolerance for stitching boundaries.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: True if tolerance provided is absolute value.
+   :type use_absolute_tolerance: bool, optional
+   :param remesh: Remesh at stitch connection.
+   :type remesh: bool, optional
+   :param enable_multi_threading: Option to run stitch in parallel using multithread.
+   :type enable_multi_threading: bool, optional
+   :param type: Stitch type depending on nature of surface boundary edges to be stitched.
+   :type type: StitchType, optional
+
+
+
+
+
+
+
+.. vale on

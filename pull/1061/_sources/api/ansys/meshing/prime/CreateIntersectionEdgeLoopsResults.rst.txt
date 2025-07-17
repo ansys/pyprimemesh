@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateIntersectionEdgeLoopsResults`
+===========================================
+
+
+.. py:class:: ansys.meshing.prime.CreateIntersectionEdgeLoopsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, processing_time: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, extracted_ids: ansys.meshing.prime.params.primestructs.List[ExtractedFeatureIds] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results for the edge loops created by intersection of two groups of face zonelets.
+
+   :param model: Model to create a ``CreateIntersectionEdgeLoopsResults`` object with default parameters.
+   :type model: Model
+   :param processing_time: Time taken to extract edges formed by intersecting faces.
+   :type processing_time: float, optional
+   :param error_code: Error code returned by edge extraction function.
+   :type error_code: ErrorCode, optional
+   :param extracted_ids: List of ExtractedFeatureIds that contains ids of extracted edges.
+   :type extracted_ids: List[ExtractedFeatureIds], optional
+   :param json_data: JSON dictionary to create a ``CreateIntersectionEdgeLoopsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_intersection_edge_loops_results = prime.CreateIntersectionEdgeLoopsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateIntersectionEdgeLoopsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code returned by edge extraction function.
+          * - :py:attr:`~extracted_ids`
+            - List of ExtractedFeatureIds that contains ids of extracted edges.
+          * - :py:attr:`~processing_time`
+            - Time taken to extract edges formed by intersecting faces.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateIntersectionEdgeLoopsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateIntersectionEdgeLoopsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CreateIntersectionEdgeLoopsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code returned by edge extraction function.
+
+.. py:property:: extracted_ids
+   :type: ansys.meshing.prime.params.primestructs.List[ExtractedFeatureIds]
+
+
+   List of ExtractedFeatureIds that contains ids of extracted edges.
+
+.. py:property:: processing_time
+   :type: float
+
+
+   Time taken to extract edges formed by intersecting faces.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateIntersectionEdgeLoopsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateIntersectionEdgeLoopsResults.print_default()
+
+
+.. py:method:: set_default(processing_time: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, extracted_ids: ansys.meshing.prime.params.primestructs.List[ExtractedFeatureIds] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateIntersectionEdgeLoopsResults`` object.
+
+   :param processing_time: Time taken to extract edges formed by intersecting faces.
+   :type processing_time: float, optional
+   :param error_code: Error code returned by edge extraction function.
+   :type error_code: ErrorCode, optional
+   :param extracted_ids: List of ExtractedFeatureIds that contains ids of extracted edges.
+   :type extracted_ids: List[ExtractedFeatureIds], optional
+
+
+
+
+
+
+
+.. vale on

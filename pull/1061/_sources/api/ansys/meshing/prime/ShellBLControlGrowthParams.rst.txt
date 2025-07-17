@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ShellBLControlGrowthParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.ShellBLControlGrowthParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_layers: int = None, offset_type: ansys.meshing.prime.params.primestructs.ShellBLOffsetType = None, growth_rate: float = None, first_height: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Growth parameters for ShellBL control.
+
+   :param model: Model to create a ``ShellBLControlGrowthParams`` object with default parameters.
+   :type model: Model
+   :param n_layers: Number of layers to be generated.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_layers: int, optional
+   :param offset_type: Offset type for ShellBL.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type offset_type: ShellBLOffsetType, optional
+   :param growth_rate: Ratio of height of the current layer to the previous layer.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type growth_rate: float, optional
+   :param first_height: Height of first layer of ShellBL.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type first_height: float, optional
+   :param json_data: JSON dictionary to create a ``ShellBLControlGrowthParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> shell_bl_control_growth_params = prime.ShellBLControlGrowthParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ShellBLControlGrowthParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~first_height`
+            - Height of first layer of ShellBL.
+          * - :py:attr:`~growth_rate`
+            - Ratio of height of the current layer to previous layer.
+          * - :py:attr:`~n_layers`
+            - Number of layers to be generated.
+          * - :py:attr:`~offset_type`
+            - Offset type for ShellBL.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ShellBLControlGrowthParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ShellBLControlGrowthParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ShellBLControlGrowthParams
+
+Property detail
+---------------
+
+.. py:property:: first_height
+   :type: float
+
+
+   Height of first layer of ShellBL.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Ratio of height of the current layer to previous layer.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_layers
+   :type: int
+
+
+   Number of layers to be generated.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: offset_type
+   :type: ansys.meshing.prime.params.primestructs.ShellBLOffsetType
+
+
+   Offset type for ShellBL.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ShellBLControlGrowthParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ShellBLControlGrowthParams.print_default()
+
+
+.. py:method:: set_default(n_layers: int = None, offset_type: ansys.meshing.prime.params.primestructs.ShellBLOffsetType = None, growth_rate: float = None, first_height: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ShellBLControlGrowthParams`` object.
+
+   :param n_layers: Number of layers to be generated.
+   :type n_layers: int, optional
+   :param offset_type: Offset type for ShellBL.
+   :type offset_type: ShellBLOffsetType, optional
+   :param growth_rate: Ratio of height of the current layer to the previous layer.
+   :type growth_rate: float, optional
+   :param first_height: Height of first layer of ShellBL.
+   :type first_height: float, optional
+
+
+
+
+
+
+
+.. vale on

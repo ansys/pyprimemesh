@@ -1,0 +1,47 @@
+.. vale off
+
+StitchType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: StitchType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      StitchType.conjugate
+      StitchType.bit_length
+      StitchType.bit_count
+      StitchType.to_bytes
+      StitchType.from_bytes
+      StitchType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      StitchType.real
+      StitchType.imag
+      StitchType.numerator
+      StitchType.denominator
+      StitchType.ALLALL
+      StitchType.FREEFREE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using StitchType
+
+    ansys.meshing.prime.StitchType
+
+.. vale on

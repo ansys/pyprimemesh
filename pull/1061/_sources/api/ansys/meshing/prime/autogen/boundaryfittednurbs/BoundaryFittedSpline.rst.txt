@@ -1,0 +1,156 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BoundaryFittedSpline`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.boundaryfittednurbs.BoundaryFittedSpline(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   BoundaryFittedSpline helps you to create splines for structured hex-mesh model.
+
+   BoundaryFittedSpline allows you to perform H and P refinement.
+
+   :param model: Server model to create BoundaryFittedSpline object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: BoundaryFittedSpline
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_boundary_fitted_spline`
+            - Create boundary fitted spline for structured hex-mesh.
+          * - :py:attr:`~refine_spline`
+            - Refine boundary fitted splines.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for BoundaryFittedSpline.
+          * - :py:attr:`~__exit__`
+            - Exit context for BoundaryFittedSpline.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.boundaryfittednurbs import BoundaryFittedSpline
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for BoundaryFittedSpline.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for BoundaryFittedSpline.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: create_boundary_fitted_spline(part_id: int, cell_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], boundary_fitted_spline_params: ansys.meshing.prime.params.primestructs.BoundaryFittedSplineParams) -> ansys.meshing.prime.params.primestructs.IGAResults
+
+   Create boundary fitted spline for structured hex-mesh.
+
+   The hex-mesh can be structured in blocks but must be conformally connected.
+   That is, each block must have six sided volume and must be connected to other blocks through unique face.
+   The degree and number of control points of the spline can be set in the fitting parameter structure.
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param cell_zonelet_ids: Ids of the cell zonelets on which spline will be fit.
+   :type cell_zonelet_ids: Iterable[int]
+   :param boundary_fitted_spline_params: Structure containing spline fitting parameters.
+   :type boundary_fitted_spline_params: BoundaryFittedSplineParams
+
+   :returns: Returns the IGAResults.
+   :rtype: IGAResults
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import BoundaryFittedSpline
+   >>> #connect client to server and get model from it
+   >>> client = Client(ip="localhost", port=50060)
+   >>> model = client.model
+   >>> boundary_fitted_spline = BoundaryFittedSpline(model = model)
+   >>> results = boundary_fitted_spline.create_boundary_fitted_spline(part_id, cell_zonelet_ids, boundary_fitted_spline_params)
+
+
+.. py:method:: refine_spline(part_id: int, spline_ids: ansys.meshing.prime.params.primestructs.Iterable[int], refine_spline_params: ansys.meshing.prime.params.primestructs.RefineSplineParams) -> ansys.meshing.prime.params.primestructs.IGAResults
+
+   Refine boundary fitted splines.
+
+   Now H and P refinement are supported.
+   Refinement along one or more dimension can be suppressed using refinement parameters in the input.
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param spline_ids: Ids of the splines on which refinement is performed.
+   :type spline_ids: Iterable[int]
+   :param refine_spline_params: Structure containing parameters for spline refinement.
+   :type refine_spline_params: RefineSplineParams
+
+   :returns: Returns the IGAResults Structure.
+   :rtype: IGAResults
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import BoundaryFittedSpline
+   >>> #connect client to server and get model from it
+   >>> client = Client(ip="localhost", port=50060)
+   >>> model = client.model
+   >>> boundary_fitted_spline = BoundaryFittedSpline(model = model)
+   >>> results = boundary_fitted_spline.refine_spline(part_id, spline_ids, refine_spline_params)
+
+
+
+
+
+
+
+.. vale on

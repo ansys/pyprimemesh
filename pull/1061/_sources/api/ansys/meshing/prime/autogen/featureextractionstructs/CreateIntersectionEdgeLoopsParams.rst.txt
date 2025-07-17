@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateIntersectionEdgeLoopsParams`
+==========================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.featureextractionstructs.CreateIntersectionEdgeLoopsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, label_name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to calculate edge loops created by intersection of two groups of face zonelets.
+
+   :param model: Model to create a ``CreateIntersectionEdgeLoopsParams`` object with default parameters.
+   :type model: Model
+   :param label_name: Label name to be assigned to extracted features.
+   :type label_name: str, optional
+   :param json_data: JSON dictionary to create a ``CreateIntersectionEdgeLoopsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_intersection_edge_loops_params = prime.CreateIntersectionEdgeLoopsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateIntersectionEdgeLoopsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~label_name`
+            - Label name to be assigned to extracted features.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateIntersectionEdgeLoopsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateIntersectionEdgeLoopsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.featureextractionstructs import CreateIntersectionEdgeLoopsParams
+
+Property detail
+---------------
+
+.. py:property:: label_name
+   :type: str
+
+
+   Label name to be assigned to extracted features.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateIntersectionEdgeLoopsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateIntersectionEdgeLoopsParams.print_default()
+
+
+.. py:method:: set_default(label_name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateIntersectionEdgeLoopsParams`` object.
+
+   :param label_name: Label name to be assigned to extracted features.
+   :type label_name: str, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DetectCircularHolesParams`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.DetectCircularHolesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, allow_curved_topo_faces: bool = None, max_radius_circular_holes: float = None, min_radius_circular_holes: float = None, merge_edge_allow_self_close: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for detect circular holes operation.
+
+   :param model: Model to create a ``DetectCircularHolesParams`` object with default parameters.
+   :type model: Model
+   :param allow_curved_topo_faces: Option to allow holes in curved topoface.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type allow_curved_topo_faces: bool, optional
+   :param max_radius_circular_holes: Maximum radius of circular holes.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type max_radius_circular_holes: float, optional
+   :param min_radius_circular_holes: Minimum radius of circular holes.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type min_radius_circular_holes: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_edge_allow_self_close: bool, optional
+   :param json_data: JSON dictionary to create a ``DetectCircularHolesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> detect_circular_holes_params = prime.DetectCircularHolesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DetectCircularHolesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~allow_curved_topo_faces`
+            - Option to allow holes in curved topoface.
+          * - :py:attr:`~max_radius_circular_holes`
+            - Maximum radius of circular holes.
+          * - :py:attr:`~merge_edge_allow_self_close`
+            - Option for merging self-closing edge loops.
+          * - :py:attr:`~min_radius_circular_holes`
+            - Minimum radius of circular holes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DetectCircularHolesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DetectCircularHolesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DetectCircularHolesParams
+
+Property detail
+---------------
+
+.. py:property:: allow_curved_topo_faces
+   :type: bool
+
+
+   Option to allow holes in curved topoface.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: max_radius_circular_holes
+   :type: float
+
+
+   Maximum radius of circular holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_edge_allow_self_close
+   :type: bool
+
+
+   Option for merging self-closing edge loops.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: min_radius_circular_holes
+   :type: float
+
+
+   Minimum radius of circular holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DetectCircularHolesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DetectCircularHolesParams.print_default()
+
+
+.. py:method:: set_default(allow_curved_topo_faces: bool = None, max_radius_circular_holes: float = None, min_radius_circular_holes: float = None, merge_edge_allow_self_close: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DetectCircularHolesParams`` object.
+
+   :param allow_curved_topo_faces: Option to allow holes in curved topoface.
+   :type allow_curved_topo_faces: bool, optional
+   :param max_radius_circular_holes: Maximum radius of circular holes.
+   :type max_radius_circular_holes: float, optional
+   :param min_radius_circular_holes: Minimum radius of circular holes.
+   :type min_radius_circular_holes: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+   :type merge_edge_allow_self_close: bool, optional
+
+
+
+
+
+
+
+.. vale on

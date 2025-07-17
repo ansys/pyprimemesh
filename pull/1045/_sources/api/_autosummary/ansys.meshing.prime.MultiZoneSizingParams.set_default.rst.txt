@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MultiZoneSizingParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using MultiZoneSizingParams.set_default
+
+   ansys.meshing.prime.MultiZoneSizingParams.set_default

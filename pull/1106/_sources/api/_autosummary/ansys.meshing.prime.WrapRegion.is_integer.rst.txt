@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapRegion.is_integer
+
+.. minigallery::
+   :add-heading: Examples using WrapRegion.is_integer
+
+   ansys.meshing.prime.WrapRegion.is_integer

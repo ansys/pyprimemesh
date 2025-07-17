@@ -1,0 +1,6 @@
+max\_edge\_size\_limit
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CadRefacetingParams.max_edge_size_limit

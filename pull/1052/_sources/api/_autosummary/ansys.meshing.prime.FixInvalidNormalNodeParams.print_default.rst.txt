@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FixInvalidNormalNodeParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using FixInvalidNormalNodeParams.print_default
+
+   ansys.meshing.prime.FixInvalidNormalNodeParams.print_default

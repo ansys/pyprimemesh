@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MaterialPointType`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.MaterialPointType
+
+
+
+   Defines define type of material point.
+
+
+
+
+.. py:currentmodule:: MaterialPointType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~DEAD`
+            - Used to define dead material point.
+          * - :py:attr:`~LIVE`
+            - Used to define live material point.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MaterialPointType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: DEAD
+   :value: 0
+
+
+   Used to define dead material point.
+
+.. py:attribute:: LIVE
+   :value: 1
+
+
+   Used to define live material point.
+
+
+
+
+
+
+
+.. vale on

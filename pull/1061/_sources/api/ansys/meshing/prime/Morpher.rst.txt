@@ -1,0 +1,121 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Morpher`
+================
+
+
+.. py:class:: ansys.meshing.prime.Morpher(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Morpher contain functionalities to change the geometry, adapting the mesh accordingly without a recomputation.
+
+   :param model: Server model to create Morpher object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: Morpher
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~match_morph`
+            - Matches source and target zonelets defined using match pairs with prescribed boundary conditions for each pair. Also, solves boundary condition parameters to define uniform surface and volume regions in source neighborhood.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for Morpher.
+          * - :py:attr:`~__exit__`
+            - Exit context for Morpher.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import Morpher
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for Morpher.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for Morpher.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: match_morph(part_id: int, match_pairs: List[ansys.meshing.prime.params.primestructs.MatchPair], match_morph_params: ansys.meshing.prime.params.primestructs.MatchMorphParams, bc_params: ansys.meshing.prime.params.primestructs.MorphBCParams, solve_params: ansys.meshing.prime.params.primestructs.MorphSolveParams) -> ansys.meshing.prime.params.primestructs.MatchMorphResults
+
+   Matches source and target zonelets defined using match pairs with prescribed boundary conditions for each pair. Also, solves boundary condition parameters to define uniform surface and volume regions in source neighborhood.
+
+
+   :param part_id: Id of source part.
+   :type part_id: int
+   :param match_pairs: Array of  source and target match pairs.
+   :type match_pairs: MatchPairArray
+   :param match_morph_params: Match morph parameters.
+   :type match_morph_params: MatchMorphParams
+   :param bc_params: Morph boundary condition parameters.
+   :type bc_params: MorphBCParams
+   :param solve_params: Morpher solve parameters.
+   :type solve_params: MorphSolveParams
+
+   :returns: Returns the MatchMorphResults.
+   :rtype: MatchMorphResults
+
+   .. rubric:: Examples
+
+   >>> result = morph.match_morph([match_pair1, match_pair2], match_morph_params, bc_params, solve_params)
+
+
+
+
+
+
+
+.. vale on

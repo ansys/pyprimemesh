@@ -1,0 +1,6 @@
+ZONESARENOTSUPPORTEDFORCELLZONELETS
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ZONESARENOTSUPPORTEDFORCELLZONELETS

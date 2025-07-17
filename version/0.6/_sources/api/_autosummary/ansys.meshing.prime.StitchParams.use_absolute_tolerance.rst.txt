@@ -1,0 +1,6 @@
+use\_absolute\_tolerance
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: StitchParams.use_absolute_tolerance

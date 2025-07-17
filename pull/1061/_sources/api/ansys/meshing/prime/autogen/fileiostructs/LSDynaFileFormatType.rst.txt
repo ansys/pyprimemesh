@@ -1,0 +1,82 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LSDynaFileFormatType`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.LSDynaFileFormatType
+
+
+
+   Provides the format type to write the LS-DYNA file.
+
+
+
+
+.. py:currentmodule:: LSDynaFileFormatType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~I10`
+            - Option to select 10-char width format to write ids for elements and nodes.
+          * - :py:attr:`~REGULAR`
+            - Option to select 8-char width format to write ids for elements and nodes.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import LSDynaFileFormatType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: I10
+   :value: 1
+
+
+   Option to select 10-char width format to write ids for elements and nodes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: REGULAR
+   :value: 0
+
+
+   Option to select 8-char width format to write ids for elements and nodes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

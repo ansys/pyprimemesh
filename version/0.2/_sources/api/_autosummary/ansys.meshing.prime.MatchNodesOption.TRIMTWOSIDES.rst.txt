@@ -1,0 +1,6 @@
+TRIMTWOSIDES
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MatchNodesOption.TRIMTWOSIDES

@@ -1,0 +1,6 @@
+MERGEPARTSWANDWOTOPO
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MERGEPARTSWANDWOTOPO
