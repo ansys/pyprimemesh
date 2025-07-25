@@ -142,10 +142,6 @@ autosummary_imported_members = True
 autosummary_ignore_module_all = False
 
 
-# exclude_patterns = [
-#    "examples/gallery_examples/example_template.rst" "examples/gallery_examples/mixing_elbow.rst"
-# ]
-
 # Enable screenshots for gallery for pyvista
 pyvista.BUILDING_GALLERY = True
 
