@@ -58,6 +58,11 @@ html_theme_options = {
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
+    "static_search": {
+        "threshold": 0.5,
+        "minMatchCharLength": 2,
+        "ignoreLocation": True,
+    },
     "icon_links": [
         {
             "name": "Support",
