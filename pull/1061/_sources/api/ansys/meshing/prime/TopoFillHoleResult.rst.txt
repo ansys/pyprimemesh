@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TopoFillHoleResult`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.TopoFillHoleResult(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, new_topo_faces_created: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with fill holes in topology operations.
+
+   :param model: Model to create a ``TopoFillHoleResult`` object with default parameters.
+   :type model: Model
+   :param new_topo_faces_created: Ids of new topofaces created.
+   :type new_topo_faces_created: Iterable[int], optional
+   :param error_code: Error code associated with a wrap operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``TopoFillHoleResult`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> topo_fill_hole_result = prime.TopoFillHoleResult(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TopoFillHoleResult
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with a wrap operation.
+          * - :py:attr:`~new_topo_faces_created`
+            - Ids of new topofaces created.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TopoFillHoleResult`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TopoFillHoleResult`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TopoFillHoleResult
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with a wrap operation.
+
+.. py:property:: new_topo_faces_created
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of new topofaces created.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TopoFillHoleResult`` object.
+
+   .. rubric:: Examples
+
+   >>> TopoFillHoleResult.print_default()
+
+
+.. py:method:: set_default(new_topo_faces_created: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TopoFillHoleResult`` object.
+
+   :param new_topo_faces_created: Ids of new topofaces created.
+   :type new_topo_faces_created: Iterable[int], optional
+   :param error_code: Error code associated with a wrap operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

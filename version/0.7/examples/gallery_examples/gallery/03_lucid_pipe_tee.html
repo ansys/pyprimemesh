@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mesh a pipe T-section for structural thermal and fluid flow analysis &#8212; PyPrimeMesh</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/ansys_sphinx_theme.css?v=77703c5e" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+  
+    <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../_static/documentation_options.js?v=fe7df9b0"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/gallery/03_lucid_pipe_tee';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Wrap a toy car for a flow analysis" href="04_lucid_toy_car.html" />
+    <link rel="prev" title="Mesh a mixing elbow for a flow analysis" href="02_lucid_mixing_elbow.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7.0" />
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/03_lucid_pipe_tee.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <img src="../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyPrimeMesh - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_lucid_file_IO.html">Convert data when importing and exporting mesh and CAD formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_bracket_scaffold.html">Mesh a mid-surfaced bracket for a structural analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_lucid_mixing_elbow.html">Mesh a mixing elbow for a flow analysis</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mesh a pipe T-section for structural thermal and fluid flow analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_lucid_toy_car.html">Wrap a toy car for a flow analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_pcb_stacker.html">Mesh a PCB for structural thermal analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_blade_morph.html">Morph a hexahedral mesh of a turbine blade to a new shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_saddle_bracket.html">Mesh a saddle bracket for a structural analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html">Mesh a generic F1 car rear wing for external aero simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html">Mesh a generic PCB geometry with multiple hexa layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_wheel_ground_contact_patch.html">Create a contact patch for wrapping between a wheel and ground interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_solder_ball.html">Mesh a set of solder balls (beta)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Miscellaneous examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Examples</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Mesh a pipe T-section for structural thermal and fluid flow analysis</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-gallery-03-lucid-pipe-tee-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="mesh-a-pipe-t-section-for-structural-thermal-and-fluid-flow-analysis">
+<span id="ref-pipe-tee"></span><span id="sphx-glr-examples-gallery-examples-gallery-03-lucid-pipe-tee-py"></span><h1>Mesh a pipe T-section for structural thermal and fluid flow analysis<a class="headerlink" href="#mesh-a-pipe-t-section-for-structural-thermal-and-fluid-flow-analysis" title="Link to this heading">#</a></h1>
+<p><strong>Summary</strong>: This example demonstrates how to mesh a pipe T-section for both
+structural thermal and fluid flow simulation.</p>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading">#</a></h2>
+<p>This example meshes the solids of a pipe T-section for a
+structural thermal analysis using tetrahedral elements and uses the
+wrapper to extract the fluid domain and mesh using polyhedral cells with
+prismatic boundary layers.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../../_images/pipe_tee.png"><img alt="../../../_images/pipe_tee.png" src="../../../_images/pipe_tee.png" style="width: 800px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Thermal structural and fluid flow meshes</strong></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Launch an Ansys Prime Server instance and connect the PyPrimeMesh client.</p></li>
+<li><p>Read the CAD geometry.</p></li>
+<li><p>Mesh for the structural thermal analysis.</p></li>
+<li><p>Write the mesh for the structural thermal analysis.</p></li>
+<li><p>Extract the fluid by wrapping.</p></li>
+<li><p>Mesh with polyhedral and prisms.</p></li>
+<li><p>Write the mesh for the fluid simulation.</p></li>
+</ol>
+</section>
+<section id="launch-ansys-prime-server">
+<h2>Launch Ansys Prime Server<a class="headerlink" href="#launch-ansys-prime-server" title="Link to this heading">#</a></h2>
+<p>Import all necessary modules.
+Launch the Ansys Prime Server instance and connect the client.
+Get the client model and instantiate meshing utilities from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing</span><span class="w"> </span><span class="kn">import</span> <span class="n">prime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="kn">import</span> <span class="n">lucid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing.prime.graphics</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrimePlotter</span>
+
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+<span class="n">mesh_util</span> <span class="o">=</span> <span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using Ansys Prime Server from container ansys-prime-server-4
+</pre></div>
+</div>
+</section>
+<section id="read-cad-geometry">
+<h2>Read CAD geometry<a class="headerlink" href="#read-cad-geometry" title="Link to this heading">#</a></h2>
+<p>Download the example FMD geometry file.
+The FMD  file format is exported from SpaceClaim and is compatible with Linux.
+Read and display the geometry file.
+The file contains several unmeshed parts, which is what you would get after you
+import from a CAD file.
+For Windows OS users, the SCDOC format is also available:
+<code class="docutils literal notranslate"><span class="pre">pipe_tee</span> <span class="pre">=</span> <span class="pre">prime.examples.download_pipe_tee_scdoc()</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pipe_tee</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_pipe_tee_fmd</span><span class="p">()</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pipe_tee</span></a><span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_03_lucid_pipe_tee_001.png" srcset="../../../_images/sphx_glr_03_lucid_pipe_tee_001.png" alt="03 lucid pipe tee" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_03_lucid_pipe_tee_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: solid_coupling_out
+Part ID: 2
+    18 Topo Edges
+    12 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid_coupling_out]
+
+    1 Label(s)
+        Names: [out]
+
+    Bounding box (-127 -360.99 -126.998)
+                 (126.982 -184.15 126.982)
+
+Part Name: solid_coupling_in1
+Part ID: 3
+    18 Topo Edges
+    12 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid_coupling_in1]
+
+    1 Label(s)
+        Names: [in1]
+
+    Bounding box (-127 184.15 -126.992)
+                 (126.992 356.616 126.992)
+
+Part Name: solid_tee
+Part ID: 4
+    50 Topo Edges
+    31 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid_tee]
+
+    0 Label(s)
+        Names: []
+
+    Bounding box (-127 -184.15 -126.985)
+                 (126.985 184.15 203.2)
+
+Part Name: solid_coupling_in2
+Part ID: 5
+    18 Topo Edges
+    12 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid_coupling_in2]
+
+    1 Label(s)
+        Names: [in2]
+
+    Bounding box (-95.25 -95.2483 203.2)
+                 (95.2351 95.2351 374.65)
+
+Part Name: cap_out
+Part ID: 6
+    1 Topo Edges
+    1 Topo Faces
+    0 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    1 Face Zones
+        Face Zone Name(s) : [cap_out]
+    0 Volume Zones
+        Volume Zone Name(s) : []
+
+    1 Label(s)
+        Names: [outlet_main]
+
+    Bounding box (-76.2 -360.99 -76.0649)
+                 (76.185 -360.99 76.0649)
+
+Part Name: cap_in2
+Part ID: 7
+    1 Topo Edges
+    1 Topo Faces
+    0 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    1 Face Zones
+        Face Zone Name(s) : [cap_in2]
+    0 Volume Zones
+        Volume Zone Name(s) : []
+
+    1 Label(s)
+        Names: [in2_inlet]
+
+    Bounding box (-51.308 -51.217 374.65)
+                 (51.2979 51.217 374.65)
+
+Part Name: cap_in1
+Part ID: 8
+    1 Topo Edges
+    1 Topo Faces
+    0 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    1 Face Zones
+        Face Zone Name(s) : [cap_in1]
+    0 Volume Zones
+        Volume Zone Name(s) : []
+
+    1 Label(s)
+        Names: [in1_inlet]
+
+    Bounding box (-76.2 356.616 -76.0649)
+                 (76.185 356.616 76.0649)
+</pre></div>
+</div>
+</section>
+<section id="mesh-for-structural">
+<h2>Mesh for structural<a class="headerlink" href="#mesh-for-structural" title="Link to this heading">#</a></h2>
+<p>Surface mesh using curvature sizing.
+Volume mesh with tetrahedral elements.
+Delete unwanted capping surface geometries by deleting
+parts that do not have any volume zones.
+Display structural thermal mesh ready for export.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">surface_mesh</span><span class="p">(</span><span class="n">min_size</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">volume_mesh</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">toDelete</span></a> <span class="o">=</span> <span class="p">[</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">part</span><span class="o">.</span><span class="n">get_volume_zones</span><span class="p">()]</span>
+
+<span class="k">if</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">toDelete</span></a><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">delete_parts</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">toDelete</span></a><span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_03_lucid_pipe_tee_002.png" srcset="../../../_images/sphx_glr_03_lucid_pipe_tee_002.png" alt="03 lucid pipe tee" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_03_lucid_pipe_tee_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+</section>
+<section id="write-structural-mesh">
+<h2>Write structural mesh<a class="headerlink" href="#write-structural-mesh" title="Link to this heading">#</a></h2>
+<p>Labels are exported to the CDB file as components for
+applying load boundary conditions in the solver.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <a href="https://docs.python.org/3.11/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span> <span class="k">as</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">:</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">structural_mesh</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">,</span> <span class="s2">&quot;pipe_tee.cdb&quot;</span><span class="p">)</span>
+    <span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">structural_mesh</span></a><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported Structural Mesh: &quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">structural_mesh</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
+
+Exported Structural Mesh:  /tmp/tmpt1bnyt9r/pipe_tee.cdb
+</pre></div>
+</div>
+</section>
+<section id="extract-fluid-by-wrapping">
+<h2>Extract fluid by wrapping<a class="headerlink" href="#extract-fluid-by-wrapping" title="Link to this heading">#</a></h2>
+<p>You can deal with the small internal diameter change between flanges in several ways:</p>
+<ul class="simple">
+<li><p>Connect the geometry to extract a volume and refine the
+mesh around this detail to capture.</p></li>
+<li><p>Modify the geometry to remove the feature.</p></li>
+<li><p>Wrap to extract the internal flow volume and walk over the feature.</p></li>
+</ul>
+<p>This example wraps and walks over these features.</p>
+<p>Read in the geometry again.</p>
+<p>Use a constant size wrap to walk over the diameter change
+feature and extract the largest internal volume as the fluid.</p>
+<p>By default, the wrap uses all parts as input and deletes the input
+geometry after wrapping unless <code class="docutils literal notranslate"><span class="pre">keep_input</span></code> is set as <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pipe_tee</span></a><span class="p">)</span>
+
+<span class="n">wrap</span> <span class="o">=</span> <span class="n">mesh_util</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">min_size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">region_extract</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">WrapRegion</span><span class="o">.</span><span class="n">LARGESTINTERNAL</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_03_lucid_pipe_tee_003.png" srcset="../../../_images/sphx_glr_03_lucid_pipe_tee_003.png" alt="03 lucid pipe tee" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_03_lucid_pipe_tee_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: __wrap__
+Part ID: 9
+    1 Edge Zonelets
+    8 Face Zonelets
+    0 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    3 Face Zones
+        Face Zone Name(s) : [cap_out, cap_in2, cap_in1]
+    1 Volume Zones
+        Volume Zone Name(s) : [unreferenced]
+
+    13 Label(s)
+        Names: [___geom_features___, __extracted__features__, cap_in1, cap_in2, cap_out, in1_inlet, in2_inlet, outlet_main, solid_coupling_in1, solid_coupling_in2, solid_coupling_out, solid_tee, unreferenced]
+
+    Bounding box (-126.974 -360.99 -126.99)
+                 (126.983 356.616 374.65)
+</pre></div>
+</div>
+</section>
+<section id="volume-mesh-fluid">
+<h2>Volume mesh fluid<a class="headerlink" href="#volume-mesh-fluid" title="Link to this heading">#</a></h2>
+<p>Create zones for each label to use for boundary condition definitions.
+Volume mesh with prism polyhedral, not growing prisms from inlets and outlets.
+Visualize the generated volume mesh.
+When displaying, you can avoid displaying unnecessary edge zones.
+You can clearly see the prism layers that were specified by the Prism control.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set global sizing</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">GlobalSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_global_sizing_params</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">create_zones_from_labels</span><span class="p">(</span><span class="s2">&quot;outlet_main,in1_inlet,in2_inlet&quot;</span><span class="p">)</span>
+
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">volume_mesh</span><span class="p">(</span>
+    <span class="n">prism_layers</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">prism_surface_expression</span><span class="o">=</span><span class="s2">&quot;* !*inlet* !*outlet*&quot;</span><span class="p">,</span>
+    <span class="n">volume_fill_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">VolumeFillType</span><span class="o">.</span><span class="n">POLY</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">add_scope</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;* !*__*&quot;</span><span class="p">),</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_03_lucid_pipe_tee_004.png" srcset="../../../_images/sphx_glr_03_lucid_pipe_tee_004.png" alt="03 lucid pipe tee" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_03_lucid_pipe_tee_004.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: __wrap__
+Part ID: 9
+    1 Edge Zonelets
+    8 Face Zonelets
+    1 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    6 Face Zones
+        Face Zone Name(s) : [cap_out, cap_in2, cap_in1, in1_inlet, in2_inlet, outlet_main]
+    1 Volume Zones
+        Volume Zone Name(s) : [unreferenced]
+
+    13 Label(s)
+        Names: [___geom_features___, __extracted__features__, cap_in1, cap_in2, cap_out, in1_inlet, in2_inlet, outlet_main, solid_coupling_in1, solid_coupling_in2, solid_coupling_out, solid_tee, unreferenced]
+
+    Bounding box (-126.974 -360.99 -126.99)
+                 (126.983 356.616 374.65)
+</pre></div>
+</div>
+</section>
+<section id="write-fluid-mesh">
+<h2>Write fluid mesh<a class="headerlink" href="#write-fluid-mesh" title="Link to this heading">#</a></h2>
+<p>Write a MSH file for the Fluent solver.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <a href="https://docs.python.org/3.11/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span> <span class="k">as</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">:</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fluid_mesh</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">,</span> <span class="s2">&quot;pipe_tee.msh&quot;</span><span class="p">)</span>
+    <span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fluid_mesh</span></a><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fluid_mesh</span></a><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported Fluid Mesh: &quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fluid_mesh</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Exported Fluid Mesh:  /tmp/tmp_nzm3305/pipe_tee.msh
+</pre></div>
+</div>
+</section>
+<section id="exit-pyprimemesh">
+<h2>Exit PyPrimeMesh<a class="headerlink" href="#exit-pyprimemesh" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (1 minutes 29.995 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-03-lucid-pipe-tee-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/4decb25c3ecda824af7803524082795f/03_lucid_pipe_tee.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">03_lucid_pipe_tee.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/f223e035edf45e93317d8d336612dae2/03_lucid_pipe_tee.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">03_lucid_pipe_tee.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/934b069987fe942b71decced0f4a62b0/03_lucid_pipe_tee.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">03_lucid_pipe_tee.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-ansys-prime-server">Launch Ansys Prime Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-cad-geometry">Read CAD geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesh-for-structural">Mesh for structural</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-structural-mesh">Write structural mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-fluid-by-wrapping">Extract fluid by wrapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-mesh-fluid">Volume mesh fluid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-fluid-mesh">Write fluid mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-pyprimemesh">Exit PyPrimeMesh</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/examples/gallery_examples/gallery/03_lucid_pipe_tee.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/examples/gallery_examples/gallery/03_lucid_pipe_tee.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+<link rel="stylesheet" href="../../../_static/css/fuse-search.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../_static/search.json";
+</script>
+
+
+<script src="../../../_static/js/search.js"></script>
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.2.6. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

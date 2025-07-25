@@ -1,0 +1,222 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ComputeTopoVolumesResults`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.ComputeTopoVolumesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, error_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, material_point_topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, external_open_topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, new_topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, deleted_topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with compute topovolumes.
+
+   :param model: Model to create a ``ComputeTopoVolumesResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param error_locations: Coordinates of problematic locations in the surface mesh.
+   :type error_locations: Iterable[float], optional
+   :param topo_volumes: Ids of all topovolumes computed.
+   :type topo_volumes: Iterable[int], optional
+   :param material_point_topo_volumes: Ids of topovolumes enclosing material points.
+   :type material_point_topo_volumes: Iterable[int], optional
+   :param external_open_topo_faces: Topoface ids that are in external space and not part of any topovolumes.
+   :type external_open_topo_faces: Iterable[int], optional
+   :param new_topo_volumes: Ids of new topovolumes computed.
+   :type new_topo_volumes: Iterable[int], optional
+   :param deleted_topo_volumes: Ids of existing topovolumes that got deleted.
+   :type deleted_topo_volumes: Iterable[int], optional
+   :param warning_codes: Warning codes associated with the compute topovolumes.
+   :type warning_codes: List[WarningCode], optional
+   :param json_data: JSON dictionary to create a ``ComputeTopoVolumesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> compute_topo_volumes_results = prime.ComputeTopoVolumesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ComputeTopoVolumesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~deleted_topo_volumes`
+            - Ids of existing topovolumes that got deleted.
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~error_locations`
+            - Coordinates of problematic locations in the surface mesh.
+          * - :py:attr:`~external_open_topo_faces`
+            - Topoface ids that are in external space and not part of any topovolumes.
+          * - :py:attr:`~material_point_topo_volumes`
+            - Ids of topovolumes enclosing material points.
+          * - :py:attr:`~new_topo_volumes`
+            - Ids of new topovolumes computed.
+          * - :py:attr:`~topo_volumes`
+            - Ids of all topovolumes computed.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the compute topovolumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ComputeTopoVolumesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ComputeTopoVolumesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ComputeTopoVolumesResults
+
+Property detail
+---------------
+
+.. py:property:: deleted_topo_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of existing topovolumes that got deleted.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: error_locations
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Coordinates of problematic locations in the surface mesh.
+
+.. py:property:: external_open_topo_faces
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Topoface ids that are in external space and not part of any topovolumes.
+
+.. py:property:: material_point_topo_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of topovolumes enclosing material points.
+
+.. py:property:: new_topo_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of new topovolumes computed.
+
+.. py:property:: topo_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of all topovolumes computed.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the compute topovolumes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ComputeTopoVolumesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ComputeTopoVolumesResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, error_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, material_point_topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, external_open_topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, new_topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, deleted_topo_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ComputeTopoVolumesResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param error_locations: Coordinates of problematic locations in the surface mesh.
+   :type error_locations: Iterable[float], optional
+   :param topo_volumes: Ids of all topovolumes computed.
+   :type topo_volumes: Iterable[int], optional
+   :param material_point_topo_volumes: Ids of topovolumes enclosing material points.
+   :type material_point_topo_volumes: Iterable[int], optional
+   :param external_open_topo_faces: Topoface ids that are in external space and not part of any topovolumes.
+   :type external_open_topo_faces: Iterable[int], optional
+   :param new_topo_volumes: Ids of new topovolumes computed.
+   :type new_topo_volumes: Iterable[int], optional
+   :param deleted_topo_volumes: Ids of existing topovolumes that got deleted.
+   :type deleted_topo_volumes: Iterable[int], optional
+   :param warning_codes: Warning codes associated with the compute topovolumes.
+   :type warning_codes: List[WarningCode], optional
+
+
+
+
+
+
+
+.. vale on

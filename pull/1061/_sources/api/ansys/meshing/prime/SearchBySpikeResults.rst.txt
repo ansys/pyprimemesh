@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchBySpikeResults`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.SearchBySpikeResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_found: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results structure associated with search spikes operation.
+
+   :param model: Model to create a ``SearchBySpikeResults`` object with default parameters.
+   :type model: Model
+   :param n_found: Number of spikes detected.
+   :type n_found: int, optional
+   :param error_code: Error code associated with search spikes operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``SearchBySpikeResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_by_spike_results = prime.SearchBySpikeResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchBySpikeResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with search spikes operation.
+          * - :py:attr:`~n_found`
+            - Number of spikes detected.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchBySpikeResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchBySpikeResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SearchBySpikeResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with search spikes operation.
+
+.. py:property:: n_found
+   :type: int
+
+
+   Number of spikes detected.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchBySpikeResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchBySpikeResults.print_default()
+
+
+.. py:method:: set_default(n_found: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SearchBySpikeResults`` object.
+
+   :param n_found: Number of spikes detected.
+   :type n_found: int, optional
+   :param error_code: Error code associated with search spikes operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

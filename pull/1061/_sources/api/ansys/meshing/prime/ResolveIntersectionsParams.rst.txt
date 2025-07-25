@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ResolveIntersectionsParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.ResolveIntersectionsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, number_of_threads: int = None, json_data: dict = None, **kwargs)
+
+
+
+   ResolveIntersectionsParams define parameters for resolve intersections.
+
+   :param model: Model to create a ``ResolveIntersectionsParams`` object with default parameters.
+   :type model: Model
+   :param number_of_threads: Number of threads for resolve intersections multithreaded operation.
+   :type number_of_threads: int, optional
+   :param json_data: JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> resolve_intersections_params = prime.ResolveIntersectionsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ResolveIntersectionsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~number_of_threads`
+            - Number of threads for resolve intersections multithreaded operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ResolveIntersectionsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ResolveIntersectionsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ResolveIntersectionsParams
+
+Property detail
+---------------
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads for resolve intersections multithreaded operation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ResolveIntersectionsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ResolveIntersectionsParams.print_default()
+
+
+.. py:method:: set_default(number_of_threads: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ResolveIntersectionsParams`` object.
+
+   :param number_of_threads: Number of threads for resolve intersections multithreaded operation.
+   :type number_of_threads: int, optional
+
+
+
+
+
+
+
+.. vale on

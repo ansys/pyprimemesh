@@ -1,0 +1,6 @@
+MATERIALPOINT
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WrapRegion.MATERIALPOINT

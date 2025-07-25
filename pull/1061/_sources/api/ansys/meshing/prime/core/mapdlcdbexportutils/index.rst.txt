@@ -1,0 +1,94 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``mapdlcdbexportutils.py`` module
+=====================================
+
+.. py:module:: ansys.meshing.prime.core.mapdlcdbexportutils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: mapdlcdbexportutils
+.. tab-set::
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mapdlcdbexportutils.generate_mapdl_commands`
+            - Generate the additional MAPDL commands to be added to the CDB export file.
+
+
+
+
+
+
+.. .. .. 
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-function_variant"></span> generate_mapdl_commands</api/ansys/meshing/prime/core/mapdlcdbexportutils/generate_mapdl_commands>
+
+
+
+
+
+
+Description
+-----------
+
+Module for MAPDL cdb export utilities.
+
+
+
+
+
+
+
+
+
+.. vale on

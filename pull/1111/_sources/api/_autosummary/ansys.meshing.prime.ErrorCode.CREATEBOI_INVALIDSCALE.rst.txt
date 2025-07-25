@@ -1,0 +1,6 @@
+CREATEBOI\_INVALIDSCALE
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATEBOI_INVALIDSCALE

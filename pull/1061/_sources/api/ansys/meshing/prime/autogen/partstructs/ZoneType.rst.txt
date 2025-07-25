@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ZoneType`
+=================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.ZoneType
+
+
+
+   ZoneType decides the type of zone.
+
+
+
+
+.. py:currentmodule:: ZoneType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EDGE`
+            - Denotes the zone is edge zone.
+          * - :py:attr:`~FACE`
+            - Denotes the zone is face zone.
+          * - :py:attr:`~VOLUME`
+            - Denotes the zone is volume zone.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import ZoneType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EDGE
+   :value: 1
+
+
+   Denotes the zone is edge zone.
+
+.. py:attribute:: FACE
+   :value: 2
+
+
+   Denotes the zone is face zone.
+
+.. py:attribute:: VOLUME
+   :value: 3
+
+
+   Denotes the zone is volume zone.
+
+
+
+
+
+
+
+.. vale on

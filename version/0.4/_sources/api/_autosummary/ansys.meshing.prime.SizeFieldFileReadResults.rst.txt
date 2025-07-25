@@ -1,0 +1,35 @@
+.. vale off
+
+SizeFieldFileReadResults
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizeFieldFileReadResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SizeFieldFileReadResults.print_default
+      SizeFieldFileReadResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SizeFieldFileReadResults.error_code
+      SizeFieldFileReadResults.size_field_ids
+   
+   
+
+.. vale on

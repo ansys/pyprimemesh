@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlPointSelection.is_integer
+
+.. minigallery::
+   :add-heading: Examples using ControlPointSelection.is_integer
+
+   ansys.meshing.prime.ControlPointSelection.is_integer

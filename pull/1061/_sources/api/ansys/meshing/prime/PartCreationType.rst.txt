@@ -1,0 +1,94 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PartCreationType`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.PartCreationType
+
+
+
+   Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
+
+
+
+
+.. py:currentmodule:: PartCreationType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ASSEMBLY`
+            - Denotes a part per CAD Assembly.
+          * - :py:attr:`~BODY`
+            - Denotes a part per CAD Body.
+          * - :py:attr:`~MODEL`
+            - Denotes a part per CAD Model.
+          * - :py:attr:`~PART`
+            - Denotes a part per CAD Part.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import PartCreationType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ASSEMBLY
+   :value: 1
+
+
+   Denotes a part per CAD Assembly.
+
+.. py:attribute:: BODY
+   :value: 3
+
+
+   Denotes a part per CAD Body.
+
+.. py:attribute:: MODEL
+   :value: 0
+
+
+   Denotes a part per CAD Model.
+
+.. py:attribute:: PART
+   :value: 2
+
+
+   Denotes a part per CAD Part.
+
+
+
+
+
+
+
+.. vale on

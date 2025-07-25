@@ -1,0 +1,6 @@
+INVALIDLAYERS
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDLAYERS

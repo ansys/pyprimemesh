@@ -1,0 +1,11 @@
+get\_volume\_quality\_summary
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeSearch.get_volume_quality_summary
+
+.. minigallery::
+   :add-heading: Examples using VolumeSearch.get_volume_quality_summary
+
+   ansys.meshing.prime.VolumeSearch.get_volume_quality_summary

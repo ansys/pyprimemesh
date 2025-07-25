@@ -1,0 +1,138 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``morpherstructs.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.autogen.morpherstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: morpherstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.BCPair`
+            - Used to define boundary conditions for match morphing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.BCPairType`
+            - Option to specify boundary condition pair type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.MatchMorphParams`
+            - MatchMorphParams describes the parameters required for match morphing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.MatchMorphResults`
+            - Results associated with match morph operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.MatchPair`
+            - Match pair to specify sources, targets for match morphing. Included boundary conditions specification.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.MatchPairTargetType`
+            - Match morph target type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs.MorphSolveParams`
+            - Morpher solve parameters.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> BCPair</api/ansys/meshing/prime/autogen/morpherstructs/BCPair>
+    <span class="nf nf-cod-symbol_class"></span> BCPairType</api/ansys/meshing/prime/autogen/morpherstructs/BCPairType>
+    <span class="nf nf-cod-symbol_class"></span> MatchMorphParams</api/ansys/meshing/prime/autogen/morpherstructs/MatchMorphParams>
+    <span class="nf nf-cod-symbol_class"></span> MatchMorphResults</api/ansys/meshing/prime/autogen/morpherstructs/MatchMorphResults>
+    <span class="nf nf-cod-symbol_class"></span> MatchPair</api/ansys/meshing/prime/autogen/morpherstructs/MatchPair>
+    <span class="nf nf-cod-symbol_class"></span> MatchPairTargetType</api/ansys/meshing/prime/autogen/morpherstructs/MatchPairTargetType>
+    <span class="nf nf-cod-symbol_class"></span> MorphSolveParams</api/ansys/meshing/prime/autogen/morpherstructs/MorphSolveParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,610 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WarningCode`
+====================
+
+
+.. py:class:: ansys.meshing.prime.WarningCode
+
+
+
+   Warning codes associated with the PyPrimeMesh operation.
+
+
+
+
+.. py:currentmodule:: WarningCode
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALIGN_OPERATIONINTERRUPTED`
+            - Align operation interrupted.
+          * - :py:attr:`~DUPLICATEINPUT`
+            - Duplicate items in input.
+          * - :py:attr:`~ENTITIESNOTBELONGTOANYZONE`
+            - Entities do not belong to any zone.
+          * - :py:attr:`~EXPORTMAPDLANALYSISSETTINGSFAILED`
+            - Export MAPDL analysis settings failed.
+          * - :py:attr:`~EXTERNALOPENFACEZONELETSFOUND`
+            - External open face zonelets found when computing volumes.
+          * - :py:attr:`~EXTERNALOPENTOPOFACESFOUND`
+            - External open topofaces found when computing topovolumes.
+          * - :py:attr:`~FACEZONELETSWITHOUTVOLUMES`
+            - Face zonelets have no volume associated to them.
+          * - :py:attr:`~FAILEDTOUPDATEVOLUMES`
+            - Volumes are not updated after performing the operation. Compute the volumes again.
+          * - :py:attr:`~FUSEOVERLAPREMOVALINCOMPLETE`
+            - Self intersections found. Use Fuse operation to remove it.
+          * - :py:attr:`~IGA_NOGEOMZONELETFORSPLINEFITTING`
+            - Invalid input for IGA.
+          * - :py:attr:`~IMPORTOFNODALCOMPONENTASLABELSKIPPED`
+            - Import of nodal component as label skipped.
+          * - :py:attr:`~INVALIDENTITIESNOTADDEDTOZONE`
+            - Entities with invalid id or type not added to zone.
+          * - :py:attr:`~INVALIDSIZECONTROLSCOPE`
+            - Invalid size control type provided.
+          * - :py:attr:`~JOINEDZONELETSFROMMULTIPLEVOLUMES`
+            - Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets.
+          * - :py:attr:`~LOCALSURFERNOFACEREGISTERED`
+            - No face registered with the given register id.
+          * - :py:attr:`~MATERIALPOINTWITHSAMENAMEEXISTS`
+            - Material point with the same name exists. Overriding with unique name.
+          * - :py:attr:`~MAXOFPRISMCONTROLSMINASPECTRATIO`
+            - Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls.
+          * - :py:attr:`~MESHHASINVALIDSHAPE`
+            - Mesh has invalid shape.
+          * - :py:attr:`~MESHHASLEFTHANDEDNESSFACES`
+            - Mesh has invalid shape.
+          * - :py:attr:`~MESHHASNONPOSITIVEAREAS`
+            - Mesh has non positive areas.
+          * - :py:attr:`~MESHHASNONPOSITIVEVOLUMES`
+            - Mesh has non positive volumes.
+          * - :py:attr:`~MULTIZONEMESHER_DEFEATUREDTOPOEDGES`
+            - TopoEdges that got defeatured in the MultiZone mesh.
+          * - :py:attr:`~MULTIZONEMESHER_DEFEATUREDTOPOFACES`
+            - TopoFaces that got defeatured in the MultiZone mesh.
+          * - :py:attr:`~MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY`
+            - MultiZone warning codes
+          * - :py:attr:`~NOCADGEOMETRYFOUND`
+            - CAD geometry not found for some or all topo entities. Skipped projection for those topo entities.
+          * - :py:attr:`~NOCADGEOMETRYPROJECTONFACETS`
+            - CAD geometry not found for some or all topo entities. Projected on facets for those topo entites.
+          * - :py:attr:`~NOHOLESFOUNDONPLANE`
+            - Provides warning when no closed holes are found in the given face zonelets at given plane.
+          * - :py:attr:`~NOVOLUMESCOMPUTED`
+            - There are no volumes found.
+          * - :py:attr:`~NOVOLUMESENCLOSINGMATERIALPOINT`
+            - No computed volumes enclosing material point.
+          * - :py:attr:`~NOWARNING`
+            - No warnings.
+          * - :py:attr:`~NUMERICPARTNAMERENAMETOALPHANUMERIC`
+            - Numeric part name renamed to alphanumeric name.
+          * - :py:attr:`~OVERRIDEBOISIZINGPARAMS`
+            - Overriding BOI sizing parameters.
+          * - :py:attr:`~OVERRIDECURVATURESIZINGPARAMS`
+            - Overriding curvature sizing parameters.
+          * - :py:attr:`~OVERRIDEEDGESCOPEENTITY`
+            - Override edge scope entity.
+          * - :py:attr:`~OVERRIDEGROWTHRATEPARAM`
+            - Overriding growth rate parameter.
+          * - :py:attr:`~OVERRIDEHARDSIZINGPARAMS`
+            - Overriding hard sizing parameters.
+          * - :py:attr:`~OVERRIDEMESHEDSIZINGPARAMS`
+            - Overriding meshed sizing parameters.
+          * - :py:attr:`~OVERRIDEPROXIMITYSIZINGPARAMS`
+            - Overriding proximity sizing parameters.
+          * - :py:attr:`~OVERRIDESOFTSIZINGPARAMS`
+            - Overriding soft sizing parameters.
+          * - :py:attr:`~OVERRIDESOISIZINGPARAMS`
+            - Overriding SOI sizing parameters.
+          * - :py:attr:`~OVERRIDESUGGESTEDNAME`
+            - Override name by suggested name.
+          * - :py:attr:`~OVERRIDESURFACESCOPEENTITY`
+            - Override surface scope entity.
+          * - :py:attr:`~OVERRIDEVOLUMESCOPEENTITY`
+            - Override volume scope entity.
+          * - :py:attr:`~PARTNOTINPARTSCOPE`
+            - Selected part is not in the part scope of the periodic control.
+          * - :py:attr:`~REMOVEOVERLAPWITHINTERSECT`
+            - Self intersections found. Use Intersect operation to remove it.
+          * - :py:attr:`~SHELLBLGAPFACTORMINLIMIT`
+            - Adjusted ShellBL gap factor to 0.001. As 0.001 is minimum value supported.
+          * - :py:attr:`~SURFERDEGENERATEFACE`
+            - Degenerate input.
+          * - :py:attr:`~SURFERLAYEREDQUADFAILED`
+            - Layered quad failed with surfer.
+          * - :py:attr:`~SURFER_QUADCLEANUP_MULTITHREADINGNOTSUPPORTED`
+            - Multithreading is not supported for quad cleanup operation.
+          * - :py:attr:`~UNKNOWN`
+            - Unknown warning.
+          * - :py:attr:`~UNPROCESSEDKEYWORDSINABAQUSFILE`
+            - Unprocessed Abaqus keywords have been found.
+          * - :py:attr:`~VT_CANNOTMERGENODES`
+            - Cannot merge nodes during VT operation.
+          * - :py:attr:`~VT_REMESHFACEFAILED`
+            - Failed to remesh face(s) during VT operation.
+          * - :py:attr:`~VT_SKIPPEDENTITIESINDIFFERENTZONES`
+            - Input contains entities in different zones which have been skipped.
+          * - :py:attr:`~VT_SKIPPEDFEATUREENTITIES`
+            - Input contains feature entities which have been skipped.
+          * - :py:attr:`~VT_SKIPPEDFREEEDGES`
+            - Input contains free edges which have been skipped.
+          * - :py:attr:`~VT_SKIPPEDNONMANIFOLDEDGES`
+            - Input contains non-manifold edges which have been skipped.
+          * - :py:attr:`~VT_SKIPPEDPROTECTEDENTITIES`
+            - Input contains protected entities which have been skipped.
+          * - :py:attr:`~WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND`
+            - No holes detected to patch.
+          * - :py:attr:`~WRAPPER_SIZECONTROLNOTDEFINED`
+            - No size controls provided for wrapper.
+          * - :py:attr:`~WRAPPER_SIZECONTROLNOTSUPPORTED`
+            - Size control is not supported in wrapper.
+          * - :py:attr:`~WRAPPER_SMALLERCONTACTPREVENTIONSIZE`
+            - Contact prevention size is smaller than base size.
+          * - :py:attr:`~WRAPPER_SMALLERSIZEATFEAURES`
+            - Size at features is smaller than base size.
+          * - :py:attr:`~WRITINGCONTACTPAIRSSKIPPED`
+            - Writing of contact pairs skipped.
+          * - :py:attr:`~WRITINGTIESSKIPPED`
+            - Writing of ties skipped.
+          * - :py:attr:`~WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED`
+            - Export of label as element component skipped.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import WarningCode
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALIGN_OPERATIONINTERRUPTED
+   :value: 1900
+
+
+   Align operation interrupted.
+
+.. py:attribute:: DUPLICATEINPUT
+   :value: 8001
+
+
+   Duplicate items in input.
+
+.. py:attribute:: ENTITIESNOTBELONGTOANYZONE
+   :value: 6201
+
+
+   Entities do not belong to any zone.
+
+.. py:attribute:: EXPORTMAPDLANALYSISSETTINGSFAILED
+   :value: 11101
+
+
+   Export MAPDL analysis settings failed.
+
+.. py:attribute:: EXTERNALOPENFACEZONELETSFOUND
+   :value: 5601
+
+
+   External open face zonelets found when computing volumes.
+
+.. py:attribute:: EXTERNALOPENTOPOFACESFOUND
+   :value: 5603
+
+
+   External open topofaces found when computing topovolumes.
+
+.. py:attribute:: FACEZONELETSWITHOUTVOLUMES
+   :value: 5604
+
+
+   Face zonelets have no volume associated to them.
+
+.. py:attribute:: FAILEDTOUPDATEVOLUMES
+   :value: 5606
+
+
+   Volumes are not updated after performing the operation. Compute the volumes again.
+
+.. py:attribute:: FUSEOVERLAPREMOVALINCOMPLETE
+   :value: 4500
+
+
+   Self intersections found. Use Fuse operation to remove it.
+
+.. py:attribute:: IGA_NOGEOMZONELETFORSPLINEFITTING
+   :value: 5001
+
+
+   Invalid input for IGA.
+
+.. py:attribute:: IMPORTOFNODALCOMPONENTASLABELSKIPPED
+   :value: 11201
+
+
+   Import of nodal component as label skipped.
+
+.. py:attribute:: INVALIDENTITIESNOTADDEDTOZONE
+   :value: 6202
+
+
+   Entities with invalid id or type not added to zone.
+
+.. py:attribute:: INVALIDSIZECONTROLSCOPE
+   :value: 208
+
+
+   Invalid size control type provided.
+
+.. py:attribute:: JOINEDZONELETSFROMMULTIPLEVOLUMES
+   :value: 5605
+
+
+   Joined zonelets from more than two volumes. The volumes are not auto updated on the zonelets.
+
+.. py:attribute:: LOCALSURFERNOFACEREGISTERED
+   :value: 7001
+
+
+   No face registered with the given register id.
+
+.. py:attribute:: MATERIALPOINTWITHSAMENAMEEXISTS
+   :value: 6005
+
+
+   Material point with the same name exists. Overriding with unique name.
+
+.. py:attribute:: MAXOFPRISMCONTROLSMINASPECTRATIO
+   :value: 403
+
+
+   Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls.
+
+.. py:attribute:: MESHHASINVALIDSHAPE
+   :value: 7106
+
+
+   Mesh has invalid shape.
+
+.. py:attribute:: MESHHASLEFTHANDEDNESSFACES
+   :value: 7107
+
+
+   Mesh has invalid shape.
+
+.. py:attribute:: MESHHASNONPOSITIVEAREAS
+   :value: 7105
+
+
+   Mesh has non positive areas.
+
+.. py:attribute:: MESHHASNONPOSITIVEVOLUMES
+   :value: 7104
+
+
+   Mesh has non positive volumes.
+
+.. py:attribute:: MULTIZONEMESHER_DEFEATUREDTOPOEDGES
+   :value: 110002
+
+
+   TopoEdges that got defeatured in the MultiZone mesh.
+
+.. py:attribute:: MULTIZONEMESHER_DEFEATUREDTOPOFACES
+   :value: 110003
+
+
+   TopoFaces that got defeatured in the MultiZone mesh.
+
+.. py:attribute:: MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY
+   :value: 110001
+
+
+   MultiZone warning codes
+
+.. py:attribute:: NOCADGEOMETRYFOUND
+   :value: 7500
+
+
+   CAD geometry not found for some or all topo entities. Skipped projection for those topo entities.
+
+.. py:attribute:: NOCADGEOMETRYPROJECTONFACETS
+   :value: 7501
+
+
+   CAD geometry not found for some or all topo entities. Projected on facets for those topo entites.
+
+.. py:attribute:: NOHOLESFOUNDONPLANE
+   :value: 5501
+
+
+   Provides warning when no closed holes are found in the given face zonelets at given plane.
+
+.. py:attribute:: NOVOLUMESCOMPUTED
+   :value: 5600
+
+
+   There are no volumes found.
+
+.. py:attribute:: NOVOLUMESENCLOSINGMATERIALPOINT
+   :value: 5602
+
+
+   No computed volumes enclosing material point.
+
+.. py:attribute:: NOWARNING
+   :value: 0
+
+
+   No warnings.
+
+.. py:attribute:: NUMERICPARTNAMERENAMETOALPHANUMERIC
+   :value: 701
+
+
+   Numeric part name renamed to alphanumeric name.
+
+.. py:attribute:: OVERRIDEBOISIZINGPARAMS
+   :value: 205
+
+
+   Overriding BOI sizing parameters.
+
+.. py:attribute:: OVERRIDECURVATURESIZINGPARAMS
+   :value: 201
+
+
+   Overriding curvature sizing parameters.
+
+.. py:attribute:: OVERRIDEEDGESCOPEENTITY
+   :value: 404
+
+
+   Override edge scope entity.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: OVERRIDEGROWTHRATEPARAM
+   :value: 209
+
+
+   Overriding growth rate parameter.
+
+.. py:attribute:: OVERRIDEHARDSIZINGPARAMS
+   :value: 203
+
+
+   Overriding hard sizing parameters.
+
+.. py:attribute:: OVERRIDEMESHEDSIZINGPARAMS
+   :value: 206
+
+
+   Overriding meshed sizing parameters.
+
+.. py:attribute:: OVERRIDEPROXIMITYSIZINGPARAMS
+   :value: 204
+
+
+   Overriding proximity sizing parameters.
+
+.. py:attribute:: OVERRIDESOFTSIZINGPARAMS
+   :value: 202
+
+
+   Overriding soft sizing parameters.
+
+.. py:attribute:: OVERRIDESOISIZINGPARAMS
+   :value: 207
+
+
+   Overriding SOI sizing parameters.
+
+.. py:attribute:: OVERRIDESUGGESTEDNAME
+   :value: 301
+
+
+   Override name by suggested name.
+
+.. py:attribute:: OVERRIDESURFACESCOPEENTITY
+   :value: 401
+
+
+   Override surface scope entity.
+
+.. py:attribute:: OVERRIDEVOLUMESCOPEENTITY
+   :value: 402
+
+
+   Override volume scope entity.
+
+.. py:attribute:: PARTNOTINPARTSCOPE
+   :value: 601
+
+
+   Selected part is not in the part scope of the periodic control.
+
+.. py:attribute:: REMOVEOVERLAPWITHINTERSECT
+   :value: 4501
+
+
+   Self intersections found. Use Intersect operation to remove it.
+
+.. py:attribute:: SHELLBLGAPFACTORMINLIMIT
+   :value: 405
+
+
+   Adjusted ShellBL gap factor to 0.001. As 0.001 is minimum value supported.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SURFERDEGENERATEFACE
+   :value: 1801
+
+
+   Degenerate input.
+
+.. py:attribute:: SURFERLAYEREDQUADFAILED
+   :value: 1800
+
+
+   Layered quad failed with surfer.
+
+.. py:attribute:: SURFER_QUADCLEANUP_MULTITHREADINGNOTSUPPORTED
+   :value: 102
+
+
+   Multithreading is not supported for quad cleanup operation.
+
+.. py:attribute:: UNKNOWN
+   :value: 1
+
+
+   Unknown warning.
+
+.. py:attribute:: UNPROCESSEDKEYWORDSINABAQUSFILE
+   :value: 11001
+
+
+   Unprocessed Abaqus keywords have been found.
+
+.. py:attribute:: VT_CANNOTMERGENODES
+   :value: 100006
+
+
+   Cannot merge nodes during VT operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_REMESHFACEFAILED
+   :value: 100007
+
+
+   Failed to remesh face(s) during VT operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_SKIPPEDENTITIESINDIFFERENTZONES
+   :value: 100005
+
+
+   Input contains entities in different zones which have been skipped.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_SKIPPEDFEATUREENTITIES
+   :value: 100002
+
+
+   Input contains feature entities which have been skipped.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_SKIPPEDFREEEDGES
+   :value: 100003
+
+
+   Input contains free edges which have been skipped.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_SKIPPEDNONMANIFOLDEDGES
+   :value: 100004
+
+
+   Input contains non-manifold edges which have been skipped.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_SKIPPEDPROTECTEDENTITIES
+   :value: 100001
+
+
+   Input contains protected entities which have been skipped.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND
+   :value: 6006
+
+
+   No holes detected to patch.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPER_SIZECONTROLNOTDEFINED
+   :value: 6001
+
+
+   No size controls provided for wrapper.
+
+.. py:attribute:: WRAPPER_SIZECONTROLNOTSUPPORTED
+   :value: 6002
+
+
+   Size control is not supported in wrapper.
+
+.. py:attribute:: WRAPPER_SMALLERCONTACTPREVENTIONSIZE
+   :value: 6004
+
+
+   Contact prevention size is smaller than base size.
+
+.. py:attribute:: WRAPPER_SMALLERSIZEATFEAURES
+   :value: 6003
+
+
+   Size at features is smaller than base size.
+
+.. py:attribute:: WRITINGCONTACTPAIRSSKIPPED
+   :value: 11102
+
+
+   Writing of contact pairs skipped.
+
+.. py:attribute:: WRITINGTIESSKIPPED
+   :value: 11103
+
+
+   Writing of ties skipped.
+
+.. py:attribute:: WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED
+   :value: 11104
+
+
+   Export of label as element component skipped.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SubtractZoneletsResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using SubtractZoneletsResults.set_default
+
+   ansys.meshing.prime.SubtractZoneletsResults.set_default

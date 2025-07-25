@@ -1,0 +1,142 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExportFluentMeshingMeshParams`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ExportFluentMeshingMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, cff_format: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to export fluent meshing mesh.
+
+   :param model: Model to create a ``ExportFluentMeshingMeshParams`` object with default parameters.
+   :type model: Model
+   :param cff_format: Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type cff_format: bool, optional
+   :param json_data: JSON dictionary to create a ``ExportFluentMeshingMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> export_fluent_meshing_mesh_params = prime.ExportFluentMeshingMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExportFluentMeshingMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~cff_format`
+            - Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExportFluentMeshingMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExportFluentMeshingMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ExportFluentMeshingMeshParams
+
+Property detail
+---------------
+
+.. py:property:: cff_format
+   :type: bool
+
+
+   Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExportFluentMeshingMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ExportFluentMeshingMeshParams.print_default()
+
+
+.. py:method:: set_default(cff_format: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExportFluentMeshingMeshParams`` object.
+
+   :param cff_format: Option to specify whether to export Fluent mesh file in CFF format (.msh.h5) or legacy format (.msh, .msh.gz).
+   :type cff_format: bool, optional
+
+
+
+
+
+
+
+.. vale on

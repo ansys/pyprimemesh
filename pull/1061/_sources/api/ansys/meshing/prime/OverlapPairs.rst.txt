@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`OverlapPairs`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.OverlapPairs(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, zone_id0: int = None, zone_id1: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Provides ids of a pair of overlapping face zonelets.
+
+   :param model: Model to create a ``OverlapPairs`` object with default parameters.
+   :type model: Model
+   :param zone_id0: Id of one overlapping face zonelet.
+   :type zone_id0: int, optional
+   :param zone_id1: Id of other overlapping face zonelet.
+   :type zone_id1: int, optional
+   :param json_data: JSON dictionary to create a ``OverlapPairs`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> overlap_pairs = prime.OverlapPairs(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: OverlapPairs
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~zone_id0`
+            - Id of one overlapping face zonelet.
+          * - :py:attr:`~zone_id1`
+            - Id of other overlapping face zonelet.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``OverlapPairs`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``OverlapPairs`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import OverlapPairs
+
+Property detail
+---------------
+
+.. py:property:: zone_id0
+   :type: int
+
+
+   Id of one overlapping face zonelet.
+
+.. py:property:: zone_id1
+   :type: int
+
+
+   Id of other overlapping face zonelet.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``OverlapPairs`` object.
+
+   .. rubric:: Examples
+
+   >>> OverlapPairs.print_default()
+
+
+.. py:method:: set_default(zone_id0: int = None, zone_id1: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``OverlapPairs`` object.
+
+   :param zone_id0: Id of one overlapping face zonelet.
+   :type zone_id0: int, optional
+   :param zone_id1: Id of other overlapping face zonelet.
+   :type zone_id1: int, optional
+
+
+
+
+
+
+
+.. vale on

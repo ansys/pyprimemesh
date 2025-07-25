@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``picked_info.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.graphics.widgets.picked_info
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: picked_info
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.widgets.picked_info.PickedInfo`
+            - Initializes the picked information button widget.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> PickedInfo</api/ansys/meshing/prime/graphics/widgets/picked_info/PickedInfo>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for PickedInfo widget.
+
+
+
+
+
+
+
+
+
+.. vale on

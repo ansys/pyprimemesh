@@ -1,0 +1,127 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CollapseTool`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.autogen.collapsetool.CollapseTool(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Performs various collapse operations. For example, split and collapse on face zonelets.
+
+   :param model: Server model to create CollapseTool object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: CollapseTool
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~split_and_collapse_on_zonelets`
+            - Split and collapse elements on face zonelets with the specified register id.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for CollapseTool.
+          * - :py:attr:`~__exit__`
+            - Exit context for CollapseTool.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.collapsetool import CollapseTool
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for CollapseTool.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for CollapseTool.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: split_and_collapse_on_zonelets(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, split_params: ansys.meshing.prime.params.primestructs.SplitParams, collapse_params: ansys.meshing.prime.params.primestructs.CollapseParams) -> ansys.meshing.prime.params.primestructs.CollapseResults
+
+   Split and collapse elements on face zonelets with the specified register id.
+
+
+   :param part_id: Id of a part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id used to identify face elements to split and collapse.
+   :type register_id: int
+   :param split_params: Parameters to split longest edge of face elements before collapse.
+   :type split_params: SplitParams
+   :param collapse_params: Parameters to collapse shortest edge of face elements.
+   :type collapse_params: CollapseParams
+
+   :returns: Returns the CollapseResults.
+   :rtype: CollapseResults
+
+   .. rubric:: Examples
+
+   >>> collapse_tool = prime.CollapseTool(model = model)
+   >>> results = collapse_tool.split_and_collapse_on_zonelets(
+   >>>     part_id=part.id,
+   >>>     face_zonelets=part.get_face_zonelets(),
+   >>>     register_id=register_id,
+   >>>     split_params=prime.SplitParams(model=model),
+   >>>     collapse_params=prime.CollapseParams(model=model))
+
+
+
+
+
+
+
+.. vale on

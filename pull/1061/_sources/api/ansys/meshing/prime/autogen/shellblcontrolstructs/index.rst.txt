@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``shellblcontrolstructs.py`` module
+=======================================
+
+.. py:module:: ansys.meshing.prime.autogen.shellblcontrolstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: shellblcontrolstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.shellblcontrolstructs.ShellBLControlGrowthParams`
+            - Growth parameters for ShellBL control.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ShellBLControlGrowthParams</api/ansys/meshing/prime/autogen/shellblcontrolstructs/ShellBLControlGrowthParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

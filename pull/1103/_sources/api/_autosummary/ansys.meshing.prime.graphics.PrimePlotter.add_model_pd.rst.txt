@@ -1,0 +1,11 @@
+add\_model\_pd
+==============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_model_pd
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_model_pd
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_model_pd

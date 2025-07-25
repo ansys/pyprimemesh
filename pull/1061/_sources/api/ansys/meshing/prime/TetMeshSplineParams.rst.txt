@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TetMeshSplineParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.TetMeshSplineParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, feature_angle: float = None, mode: TrimmedSolidSplineCutMode = None, decimation_factor: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for meshing the solid spline.
+
+   :param model: Model to create a ``TetMeshSplineParams`` object with default parameters.
+   :type model: Model
+   :param feature_angle: Feature angle used in meshing of the solid spline.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type feature_angle: float, optional
+   :param mode: Cut mode to specify rule for mesh cell selection in the volume mesh.
+
+                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type mode: TrimmedSolidSplineCutMode, optional
+   :param decimation_factor: Decimation factor used in meshing of the solid spline.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type decimation_factor: float, optional
+   :param json_data: JSON dictionary to create a ``TetMeshSplineParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> tet_mesh_spline_params = prime.TetMeshSplineParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TetMeshSplineParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~decimation_factor`
+            - Decimation factor used in meshing of the solid spline.
+          * - :py:attr:`~feature_angle`
+            - Feature angle used in meshing of the solid spline.
+          * - :py:attr:`~mode`
+            - Cut mode to specify rule for mesh cell selection in the volume mesh.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TetMeshSplineParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TetMeshSplineParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TetMeshSplineParams
+
+Property detail
+---------------
+
+.. py:property:: decimation_factor
+   :type: float
+
+
+   Decimation factor used in meshing of the solid spline.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: feature_angle
+   :type: float
+
+
+   Feature angle used in meshing of the solid spline.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: mode
+   :type: TrimmedSolidSplineCutMode
+
+
+   Cut mode to specify rule for mesh cell selection in the volume mesh.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TetMeshSplineParams`` object.
+
+   .. rubric:: Examples
+
+   >>> TetMeshSplineParams.print_default()
+
+
+.. py:method:: set_default(feature_angle: float = None, mode: TrimmedSolidSplineCutMode = None, decimation_factor: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TetMeshSplineParams`` object.
+
+   :param feature_angle: Feature angle used in meshing of the solid spline.
+   :type feature_angle: float, optional
+   :param mode: Cut mode to specify rule for mesh cell selection in the volume mesh.
+   :type mode: TrimmedSolidSplineCutMode, optional
+   :param decimation_factor: Decimation factor used in meshing of the solid spline.
+   :type decimation_factor: float, optional
+
+
+
+
+
+
+
+.. vale on

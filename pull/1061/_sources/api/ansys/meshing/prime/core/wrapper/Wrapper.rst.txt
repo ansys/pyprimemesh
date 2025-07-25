@@ -1,0 +1,212 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Wrapper`
+================
+
+
+.. py:class:: ansys.meshing.prime.core.wrapper.Wrapper(model: ansys.meshing.prime.core.model.Model)
+
+
+
+   Provides operations for generating a surface mesh using wrapper technology.
+
+   :param model: Server model to create Wrapper object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: Wrapper
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~close_gaps`
+            - Close gaps.
+          * - :py:attr:`~connect`
+            - Perform a label-controlled connection.
+          * - :py:attr:`~improve_quality`
+            - Improve the surface quality and resolve connectivity issues like intersections, multi, free, spikes, point contacts and so on.
+          * - :py:attr:`~patch_flow_regions`
+            - Patch flow regions.
+          * - :py:attr:`~wrap`
+            - Perform wrapping with specified controls and given parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for Wrapper.
+          * - :py:attr:`~__exit__`
+            - Exit context for Wrapper.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.wrapper import Wrapper
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for Wrapper.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for Wrapper.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: close_gaps(scope: ansys.meshing.prime.autogen.controlstructs.ScopeDefinition, params: ansys.meshing.prime.autogen.wrapperstructs.WrapperCloseGapsParams) -> ansys.meshing.prime.autogen.wrapperstructs.WrapperCloseGapsResult
+
+   Close gaps.
+
+   Closing gaps creates patching surfaces within the face zonelets specified
+   by scope using gap size.
+
+
+   :param scope: Scope definition of the face zonelets.
+   :type scope: ScopeDefinition
+   :param params: Wrapper providing close gap parameters.
+   :type params: WrapperCloseGapsParams
+
+   :returns: Results from the wrapper for closing gaps.
+   :rtype: WrapperCloseGapsResult
+
+   .. rubric:: Examples
+
+   >>> result = wrapper.close_gaps(scope, params)
+
+
+.. py:method:: connect(wrapper_part: ansys.meshing.prime.core.part.Part, target_labels: List[str], source_parts: List[ansys.meshing.prime.core.part.Part], source_labels: List[str])
+
+   Perform a label-controlled connection.
+
+   This method performs a label-controlled connection of wrapper part face zonelets to
+   face zonelets of source parts.
+
+
+   :param wrapper_part: Wrapper part.
+   :type wrapper_part: Part
+   :param target_labels: List of target zonelet labels to connect.
+   :type target_labels: List[str]
+   :param source_parts: List of source parts to connect with.
+   :type source_parts: List[Part]
+   :param source_labels: List of source zonelet labels to connect.
+   :type source_labels: List[Part]
+
+   .. rubric:: Examples
+
+   >>> wrapper.connect(wrapper_part, target_labels, source_parts, source_labels)
+
+
+.. py:method:: improve_quality(part_id: int, params: ansys.meshing.prime.params.primestructs.WrapperImproveQualityParams) -> ansys.meshing.prime.params.primestructs.WrapperImproveResult
+
+   Improve the surface quality and resolve connectivity issues like intersections, multi, free, spikes, point contacts and so on.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param params: Wrapper improve quality parameters.
+   :type params: WrapperImproveQualityParams
+
+   :returns: Return the Wrapper improve result.
+   :rtype: WrapperImproveResult
+
+   .. rubric:: Examples
+
+   >>> result = wrapper.improve_quality(part_id, params)
+
+
+.. py:method:: patch_flow_regions(live_material_point: str, params: ansys.meshing.prime.autogen.wrapperstructs.WrapperPatchFlowRegionsParams) -> ansys.meshing.prime.autogen.wrapperstructs.WrapperPatchFlowRegionsResult
+
+   Patch flow regions.
+
+   Patch flow regions create patching surfaces for regions identified
+   by dead regions from wrapper patch holes parameters.
+
+
+   :param live_material_point: Name of live material point.
+   :type live_material_point: str
+   :param params: Parameters to define patch flow regions operation.
+   :type params: WrapperPatchFlowRegionsParams
+
+   :returns: Returns the WrapperPatchFlowRegionsResult.
+   :rtype: WrapperPatchFlowRegionsResult
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = wrapper.PatchFlowRegions(live_material_point, params)
+
+
+.. py:method:: wrap(wrapper_control_id: int, params: ansys.meshing.prime.autogen.wrapperstructs.WrapParams) -> ansys.meshing.prime.autogen.wrapperstructs.WrapResult
+
+   Perform wrapping with specified controls and given parameters.
+
+   This method performs wrapping with specified controls in the wrapper control
+   and with given parameters.
+
+
+   :param wrapper_control_id: ID of the wrapper control.
+   :type wrapper_control_id: int
+   :param params: Wrap parameters.
+   :type params: WrapParams
+
+   :returns: Wrap results.
+   :rtype: WrapResult
+
+   .. rubric:: Examples
+
+   >>> results = wrapper.wrap(wrapper_control_id, params)
+
+
+
+
+
+
+
+.. vale on

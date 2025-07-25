@@ -1,0 +1,131 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``meshinfostructs.py`` module
+=================================
+
+.. py:module:: ansys.meshing.prime.autogen.meshinfostructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: meshinfostructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs.CellStatisticsParams`
+            - Parameters used to calculate cell statistics.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs.CellStatisticsResults`
+            - Results of cell statistics information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs.EdgeConnectivityResults`
+            - Result of the edge connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs.FaceAndEdgeConnectivityParams`
+            - Parameters to get face and edge connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs.FaceAndEdgeConnectivityResults`
+            - Result of the face and edge connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs.FaceConnectivityResults`
+            - Result of the face connectivity information.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CellStatisticsParams</api/ansys/meshing/prime/autogen/meshinfostructs/CellStatisticsParams>
+    <span class="nf nf-cod-symbol_class"></span> CellStatisticsResults</api/ansys/meshing/prime/autogen/meshinfostructs/CellStatisticsResults>
+    <span class="nf nf-cod-symbol_class"></span> EdgeConnectivityResults</api/ansys/meshing/prime/autogen/meshinfostructs/EdgeConnectivityResults>
+    <span class="nf nf-cod-symbol_class"></span> FaceAndEdgeConnectivityParams</api/ansys/meshing/prime/autogen/meshinfostructs/FaceAndEdgeConnectivityParams>
+    <span class="nf nf-cod-symbol_class"></span> FaceAndEdgeConnectivityResults</api/ansys/meshing/prime/autogen/meshinfostructs/FaceAndEdgeConnectivityResults>
+    <span class="nf nf-cod-symbol_class"></span> FaceConnectivityResults</api/ansys/meshing/prime/autogen/meshinfostructs/FaceConnectivityResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

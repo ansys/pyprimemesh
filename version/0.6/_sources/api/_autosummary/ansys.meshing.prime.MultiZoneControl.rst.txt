@@ -1,0 +1,39 @@
+.. vale off
+
+MultiZoneControl
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultiZoneControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MultiZoneControl.set_edge_biasing_params
+      MultiZoneControl.set_map_mesh_params
+      MultiZoneControl.set_multi_zone_sizing_params
+      MultiZoneControl.set_surface_scope
+      MultiZoneControl.set_sweep_mesh_params
+      MultiZoneControl.set_volume_scope
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultiZoneControl.id
+      MultiZoneControl.name
+   
+   
+
+.. vale on

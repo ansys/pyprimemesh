@@ -1,0 +1,82 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ScaffolderRepairMode`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderRepairMode
+
+
+
+   Mode of Scaffolder repair to be used.
+
+
+
+
+.. py:currentmodule:: ScaffolderRepairMode
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~CONSERVATIVE`
+            - Repairs edges without considering the distance tolerance parameter.
+          * - :py:attr:`~DEFAULT`
+            - Repairs edges using the distance tolerance parameter.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.scaffolderstructs import ScaffolderRepairMode
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: CONSERVATIVE
+   :value: 1
+
+
+   Repairs edges without considering the distance tolerance parameter.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: DEFAULT
+   :value: 0
+
+
+   Repairs edges using the distance tolerance parameter.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

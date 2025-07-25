@@ -1,0 +1,6 @@
+check\_orientation
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.check_orientation

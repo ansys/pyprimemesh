@@ -1,0 +1,238 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapperPatchFlowRegionsParams`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.WrapperPatchFlowRegionsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, base_size: float = None, suggested_part_name: str = None, number_of_threads: int = None, dead_regions: ansys.meshing.prime.params.primestructs.List[DeadRegion] = None, sizing_method: ansys.meshing.prime.params.primestructs.SizeFieldType = None, size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, patch_at_live: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   WrapperPatchFlowRegionsParams to define parameters for patch flow regions operation.
+
+   :param model: Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
+   :type model: Model
+   :param base_size: Base size to define octree.
+
+                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type base_size: float, optional
+   :param suggested_part_name: Suggested part name for created patching surfaces.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type suggested_part_name: str, optional
+   :param number_of_threads: Number of threads for multithreading.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type number_of_threads: int, optional
+   :param dead_regions: List of dead regions.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type dead_regions: List[DeadRegion], optional
+   :param sizing_method: Method used to define sizing method for patching.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type sizing_method: SizeFieldType, optional
+   :param size_field_ids: Ids used to define size field based octree refinement.
+
+                          **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type size_field_ids: Iterable[int], optional
+   :param patch_at_live: Creates patches closer to live instead of dead.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type patch_at_live: bool, optional
+   :param json_data: JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> wrapper_patch_flow_regions_params = prime.WrapperPatchFlowRegionsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WrapperPatchFlowRegionsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~base_size`
+            - Base size to define octree.
+          * - :py:attr:`~dead_regions`
+            - List of dead regions.
+          * - :py:attr:`~number_of_threads`
+            - Number of threads for multithreading.
+          * - :py:attr:`~patch_at_live`
+            - Creates patches closer to live instead of dead.
+          * - :py:attr:`~size_field_ids`
+            - Used to define size field based octree refinement.
+          * - :py:attr:`~sizing_method`
+            - Used to define sizing method for patching.
+          * - :py:attr:`~suggested_part_name`
+            - Suggested part name for created patching surfaces.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WrapperPatchFlowRegionsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WrapperPatchFlowRegionsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import WrapperPatchFlowRegionsParams
+
+Property detail
+---------------
+
+.. py:property:: base_size
+   :type: float
+
+
+   Base size to define octree.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: dead_regions
+   :type: ansys.meshing.prime.params.primestructs.List[DeadRegion]
+
+
+   List of dead regions.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads for multithreading.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: patch_at_live
+   :type: bool
+
+
+   Creates patches closer to live instead of dead.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: size_field_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Used to define size field based octree refinement.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: sizing_method
+   :type: ansys.meshing.prime.params.primestructs.SizeFieldType
+
+
+   Used to define sizing method for patching.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: suggested_part_name
+   :type: str
+
+
+   Suggested part name for created patching surfaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WrapperPatchFlowRegionsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> WrapperPatchFlowRegionsParams.print_default()
+
+
+.. py:method:: set_default(base_size: float = None, suggested_part_name: str = None, number_of_threads: int = None, dead_regions: ansys.meshing.prime.params.primestructs.List[DeadRegion] = None, sizing_method: ansys.meshing.prime.params.primestructs.SizeFieldType = None, size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, patch_at_live: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WrapperPatchFlowRegionsParams`` object.
+
+   :param base_size: Base size to define octree.
+   :type base_size: float, optional
+   :param suggested_part_name: Suggested part name for created patching surfaces.
+   :type suggested_part_name: str, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param dead_regions: List of dead regions.
+   :type dead_regions: List[DeadRegion], optional
+   :param sizing_method: Used to define sizing method for patching.
+   :type sizing_method: SizeFieldType, optional
+   :param size_field_ids: Used to define size field based octree refinement.
+   :type size_field_ids: Iterable[int], optional
+   :param patch_at_live: Creates patches closer to live instead of dead.
+   :type patch_at_live: bool, optional
+
+
+
+
+
+
+
+.. vale on

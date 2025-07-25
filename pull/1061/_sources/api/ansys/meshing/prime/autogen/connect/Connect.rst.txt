@@ -1,0 +1,258 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Connect`
+================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connect.Connect(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Connect face zonelets.
+
+   Perform surface connection using various connect algorithms on face zonelets.
+
+   :param model: Server model to create Connect object.
+   :type model: Model
+
+   .. rubric:: Notes
+
+   Connect operations support only computational mesh, which is mesh with reasonable size changes and quality. Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, not supported.
+
+
+
+
+
+
+.. py:currentmodule:: Connect
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~fuse_face_zonelets`
+            - Perform fuse between overlapping face zonelets within a single part. Surfaces that are fused can then be colocated, merged or removed as directed.
+          * - :py:attr:`~intersect_face_zonelets`
+            - Perform intersection between specified face zonelets of the part with the given intersect parameters.
+          * - :py:attr:`~join_face_zonelets`
+            - Joins a set of face zones with another set of face zones.
+          * - :py:attr:`~merge_boundary_nodes`
+            - Merges boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
+          * - :py:attr:`~stitch_face_zonelets`
+            - Stitches a set of face zonelets with another set of face zonelets.
+          * - :py:attr:`~subtract_volumes`
+            - Subtract cutter volumes from target volumes. Volumes should be computed prior to calling this function. If multiple parts are being merged to form a single part, then volumes should be computed for each part prior to merging. Use compute_closed_volumes to do so. Volumes involved in this operation should not have self intersections. You can use SearchZoneletsBySelfIntersections to check self intersections in the volume.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for Connect.
+          * - :py:attr:`~__exit__`
+            - Exit context for Connect.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connect import Connect
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for Connect.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for Connect.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: fuse_face_zonelets(part_id: int, source_face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], target_face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.FuseParams) -> ansys.meshing.prime.params.primestructs.FuseResults
+
+   Perform fuse between overlapping face zonelets within a single part. Surfaces that are fused can then be colocated, merged or removed as directed.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param source_face_zonelet_ids: Ids of source face zonelets to be fused.
+   :type source_face_zonelet_ids: Iterable[int]
+   :param target_face_zonelet_ids: Ids of target face zonelets to be fused.
+   :type target_face_zonelet_ids: Iterable[int]
+   :param params: Parameters for fuse operation.
+   :type params: FuseParams
+
+   :returns: Returns the FuseResults.
+   :rtype: FuseResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   connect = Connect(model = model)
+   connect.fuse_face_zonelets(part.id, source_face_zonelet_ids, target_face_zonelet_ids, fuse_params)
+
+
+.. py:method:: intersect_face_zonelets(part_id: int, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], with_face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.IntersectParams) -> ansys.meshing.prime.params.primestructs.ConnectResults
+
+   Perform intersection between specified face zonelets of the part with the given intersect parameters.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param face_zonelet_ids: Face zonelets to be intersected.
+   :type face_zonelet_ids: Iterable[int]
+   :param with_face_zonelet_ids: Face zonelets to be intersected with.
+   :type with_face_zonelet_ids: Iterable[int]
+   :param params: Parameters for intersection.
+   :type params: IntersectParams
+
+   :returns: Returns the ConnectResults.
+   :rtype: ConnectResults
+
+   .. rubric:: Examples
+
+   >>> connect = Connect(model = model)
+   >>> results = connect.intersect_face_zonelets (part_id, face_zonelet_ids, with_face_zonelet_ids, params)
+
+
+.. py:method:: join_face_zonelets(part_id: int, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], with_face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.JoinParams) -> ansys.meshing.prime.params.primestructs.ConnectResults
+
+   Joins a set of face zones with another set of face zones.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param face_zonelet_ids: Face zonelets to be joined.
+   :type face_zonelet_ids: Iterable[int]
+   :param with_face_zonelet_ids: Face zonelets to be joined with.
+   :type with_face_zonelet_ids: Iterable[int]
+   :param params: Parameters for join.
+   :type params: JoinParams
+
+   :returns: Returns the ConnectResults.
+   :rtype: ConnectResults
+
+   .. rubric:: Examples
+
+   >>> connect = Connect(model = model)
+   >>> results = connect.join_face_zonelets (part_id, face_zonelet_ids, with_face_zonelet_ids, params)
+
+
+.. py:method:: merge_boundary_nodes(part_id: int, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], with_face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.MergeBoundaryNodesParams) -> ansys.meshing.prime.params.primestructs.MergeBoundaryNodesResults
+
+   Merges boundary nodes of source face zonelets with boundary nodes of target face zonelets according to the provided parameters.
+
+
+   :param part_id: Id of the part where merging has to take place.
+   :type part_id: int
+   :param face_zonelet_ids: Ids of the source face zonelets.
+   :type face_zonelet_ids: Iterable[int]
+   :param with_face_zonelet_ids: Ids of the target face zonelets.
+   :type with_face_zonelet_ids: Iterable[int]
+   :param params: Parameters for merging boundary nodes.
+   :type params: MergeBoundaryNodesParams
+
+   :returns: Returns the MergeBoundaryNodesResults.
+   :rtype: MergeBoundaryNodesResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> connect = Connect(model = model)
+   >>> results = connect.MergeBoundaryNodes(2, [2,3], [4,5], params)
+
+
+.. py:method:: stitch_face_zonelets(part_id: int, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], with_face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.StitchParams) -> ansys.meshing.prime.params.primestructs.ConnectResults
+
+   Stitches a set of face zonelets with another set of face zonelets.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param face_zonelet_ids: Face zonelets to be stitched.
+   :type face_zonelet_ids: Iterable[int]
+   :param with_face_zonelet_ids: Face zonelets to be stitched with.
+   :type with_face_zonelet_ids: Iterable[int]
+   :param params: Parameters for stitch.
+   :type params: StitchParams
+
+   :returns: Returns the ConnectResults.
+   :rtype: ConnectResults
+
+   .. rubric:: Examples
+
+   >>> connect = Connect(model = model)
+   >>> results = connect.stitch_face_zonelets (part_id, face_zonelet_ids, with_face_zonelet_ids, stitch_params)
+
+
+.. py:method:: subtract_volumes(part_id: int, target_volumes: ansys.meshing.prime.params.primestructs.Iterable[int], cutter_volumes: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.SubtractVolumesParams) -> ansys.meshing.prime.params.primestructs.SubtractVolumesResults
+
+   Subtract cutter volumes from target volumes. Volumes should be computed prior to calling this function. If multiple parts are being merged to form a single part, then volumes should be computed for each part prior to merging. Use compute_closed_volumes to do so. Volumes involved in this operation should not have self intersections. You can use SearchZoneletsBySelfIntersections to check self intersections in the volume.
+
+
+   :param part_id: Id of part containing target and cutter volumes for subtract operation.
+   :type part_id: int
+   :param target_volumes: Ids of target volumes.
+   :type target_volumes: Iterable[int]
+   :param cutter_volumes: Ids of cutter volumes.
+   :type cutter_volumes: Iterable[int]
+   :param params: Parameters to control subtraction of volumes.
+   :type params: SubtractVolumesParams
+
+   :returns: Returns the SubtractVolumesResults.
+   :rtype: SubtractVolumesResults
+
+   .. rubric:: Examples
+
+   >>> results = connect.subtract_volumes(part_id, target_volumes, cutter_volumes, params)
+
+
+
+
+
+
+
+.. vale on

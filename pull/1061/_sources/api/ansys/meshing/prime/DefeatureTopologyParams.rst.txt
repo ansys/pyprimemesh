@@ -1,0 +1,254 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DefeatureTopologyParams`
+================================
+
+
+.. py:class:: ansys.meshing.prime.DefeatureTopologyParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, partial_defeature: bool = None, delete_interior_nodes: bool = None, allow_curved_topo_faces: bool = None, fillet_spanning_angle: float = None, aggressive_edge_merge: bool = None, thin_stripes_tolerance: float = None, partial_defeature_params: PartialDefeatureParams = None, delete_interior_nodes_params: DeleteInteriorNodesParams = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for defeature topology operations.
+
+   :param model: Model to create a ``DefeatureTopologyParams`` object with default parameters.
+   :type model: Model
+   :param partial_defeature: Option to partial defeature.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type partial_defeature: bool, optional
+   :param delete_interior_nodes: Option to delete interior nodes.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type delete_interior_nodes: bool, optional
+   :param allow_curved_topo_faces: Option to allow curved topofaces.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type allow_curved_topo_faces: bool, optional
+   :param fillet_spanning_angle: Angular threshold for detecting fillets with spanning angles below the provided value.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fillet_spanning_angle: float, optional
+   :param aggressive_edge_merge: Indicate whether to allow aggressive edge merge while performing partial defeature.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type aggressive_edge_merge: bool, optional
+   :param thin_stripes_tolerance: Topoface width tolerance to detect thin faces below the provided value.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type thin_stripes_tolerance: float, optional
+   :param partial_defeature_params: Parameters for partial defeature operation.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type partial_defeature_params: PartialDefeatureParams, optional
+   :param delete_interior_nodes_params: Parameters for delete interior nodes operation.
+
+                                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type delete_interior_nodes_params: DeleteInteriorNodesParams, optional
+   :param json_data: JSON dictionary to create a ``DefeatureTopologyParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> defeature_topology_params = prime.DefeatureTopologyParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DefeatureTopologyParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~aggressive_edge_merge`
+            - Indicate whether to allow aggressive edge merge while performing partial defeature.
+          * - :py:attr:`~allow_curved_topo_faces`
+            - Option to allow curved topofaces.
+          * - :py:attr:`~delete_interior_nodes`
+            - Option to delete interior nodes.
+          * - :py:attr:`~delete_interior_nodes_params`
+            - Parameters for delete interior nodes operation.
+          * - :py:attr:`~fillet_spanning_angle`
+            - Angular threshold for detecting fillets with spanning angles below the provided value.
+          * - :py:attr:`~partial_defeature`
+            - Option to partial defeature.
+          * - :py:attr:`~partial_defeature_params`
+            - Parameters for partial defeature operation.
+          * - :py:attr:`~thin_stripes_tolerance`
+            - Topoface width tolerance to detect thin faces below the provided value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DefeatureTopologyParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DefeatureTopologyParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DefeatureTopologyParams
+
+Property detail
+---------------
+
+.. py:property:: aggressive_edge_merge
+   :type: bool
+
+
+   Indicate whether to allow aggressive edge merge while performing partial defeature.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: allow_curved_topo_faces
+   :type: bool
+
+
+   Option to allow curved topofaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: delete_interior_nodes
+   :type: bool
+
+
+   Option to delete interior nodes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: delete_interior_nodes_params
+   :type: DeleteInteriorNodesParams
+
+
+   Parameters for delete interior nodes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fillet_spanning_angle
+   :type: float
+
+
+   Angular threshold for detecting fillets with spanning angles below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: partial_defeature
+   :type: bool
+
+
+   Option to partial defeature.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: partial_defeature_params
+   :type: PartialDefeatureParams
+
+
+   Parameters for partial defeature operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: thin_stripes_tolerance
+   :type: float
+
+
+   Topoface width tolerance to detect thin faces below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DefeatureTopologyParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DefeatureTopologyParams.print_default()
+
+
+.. py:method:: set_default(partial_defeature: bool = None, delete_interior_nodes: bool = None, allow_curved_topo_faces: bool = None, fillet_spanning_angle: float = None, aggressive_edge_merge: bool = None, thin_stripes_tolerance: float = None, partial_defeature_params: PartialDefeatureParams = None, delete_interior_nodes_params: DeleteInteriorNodesParams = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DefeatureTopologyParams`` object.
+
+   :param partial_defeature: Option to partial defeature.
+   :type partial_defeature: bool, optional
+   :param delete_interior_nodes: Option to delete interior nodes.
+   :type delete_interior_nodes: bool, optional
+   :param allow_curved_topo_faces: Option to allow curved topofaces.
+   :type allow_curved_topo_faces: bool, optional
+   :param fillet_spanning_angle: Angular threshold for detecting fillets with spanning angles below the provided value.
+   :type fillet_spanning_angle: float, optional
+   :param aggressive_edge_merge: Indicate whether to allow aggressive edge merge while performing partial defeature.
+   :type aggressive_edge_merge: bool, optional
+   :param thin_stripes_tolerance: Topoface width tolerance to detect thin faces below the provided value.
+   :type thin_stripes_tolerance: float, optional
+   :param partial_defeature_params: Parameters for partial defeature operation.
+   :type partial_defeature_params: PartialDefeatureParams, optional
+   :param delete_interior_nodes_params: Parameters for delete interior nodes operation.
+   :type delete_interior_nodes_params: DeleteInteriorNodesParams, optional
+
+
+
+
+
+
+
+.. vale on

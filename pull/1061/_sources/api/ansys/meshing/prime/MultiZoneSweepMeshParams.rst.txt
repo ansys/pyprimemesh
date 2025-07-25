@@ -1,0 +1,206 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MultiZoneSweepMeshParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.MultiZoneSweepMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, source_and_target_scope: ScopeDefinition = None, sweep_mesh_size: float = None, n_divisions: int = None, thin_sweep: bool = None, sweep_type: SweepType = None, json_data: dict = None, **kwargs)
+
+
+
+   Defines MultiZone thin sweep mesh control parameters.
+
+   :param model: Model to create a ``MultiZoneSweepMeshParams`` object with default parameters.
+   :type model: Model
+   :param source_and_target_scope: Source and target faces used to determine the direction of sweep in MultiZone meshing.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type source_and_target_scope: ScopeDefinition, optional
+   :param sweep_mesh_size: Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type sweep_mesh_size: float, optional
+   :param n_divisions: Number of divisions in the sweep direction.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_divisions: int, optional
+   :param thin_sweep: Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type thin_sweep: bool, optional
+   :param sweep_type: Option to specify the sweep mesh decomposition type.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type sweep_type: SweepType, optional
+   :param json_data: JSON dictionary to create a ``MultiZoneSweepMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> multi_zone_sweep_mesh_params = prime.MultiZoneSweepMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MultiZoneSweepMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~n_divisions`
+            - Number of divisions in the sweep direction.
+          * - :py:attr:`~source_and_target_scope`
+            - Source and target faces used to determine the direction of sweep in MultiZone meshing.
+          * - :py:attr:`~sweep_mesh_size`
+            - Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+          * - :py:attr:`~sweep_type`
+            - Option to specify the sweep mesh decomposition type.
+          * - :py:attr:`~thin_sweep`
+            - Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MultiZoneSweepMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MultiZoneSweepMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MultiZoneSweepMeshParams
+
+Property detail
+---------------
+
+.. py:property:: n_divisions
+   :type: int
+
+
+   Number of divisions in the sweep direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: source_and_target_scope
+   :type: ScopeDefinition
+
+
+   Source and target faces used to determine the direction of sweep in MultiZone meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: sweep_mesh_size
+   :type: float
+
+
+   Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: sweep_type
+   :type: SweepType
+
+
+   Option to specify the sweep mesh decomposition type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: thin_sweep
+   :type: bool
+
+
+   Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MultiZoneSweepMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MultiZoneSweepMeshParams.print_default()
+
+
+.. py:method:: set_default(source_and_target_scope: ScopeDefinition = None, sweep_mesh_size: float = None, n_divisions: int = None, thin_sweep: bool = None, sweep_type: SweepType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MultiZoneSweepMeshParams`` object.
+
+   :param source_and_target_scope: Source and target faces used to determine the direction of sweep in MultiZone meshing.
+   :type source_and_target_scope: ScopeDefinition, optional
+   :param sweep_mesh_size: Sweep mesh size used to determine the mesh size and number of divisions in the sweep direction.
+   :type sweep_mesh_size: float, optional
+   :param n_divisions: Number of divisions in the sweep direction.
+   :type n_divisions: int, optional
+   :param thin_sweep: Thin sweep option set to True will generate sweep mesh in thin volumes by respecting nDivisions.   Thin sweep option set to False will generate sweep mesh whose number of divisions in the direction of sweep is determined by sweepMeshSize.
+   :type thin_sweep: bool, optional
+   :param sweep_type: Option to specify the sweep mesh decomposition type.
+   :type sweep_type: SweepType, optional
+
+
+
+
+
+
+
+.. vale on

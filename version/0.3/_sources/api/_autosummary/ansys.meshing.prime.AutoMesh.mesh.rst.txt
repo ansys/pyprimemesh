@@ -1,0 +1,6 @@
+mesh
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: AutoMesh.mesh
