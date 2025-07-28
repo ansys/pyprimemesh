@@ -4,7 +4,7 @@
 Solver translation
 ******************
 
-Solver translation (also known as FE2Ansys) translates Abaqus INP input deck to Ansys CDB and K solver decks (MAPDL and LS-DYNA).
+Solver translation (also known as FE2Ansys) translates Abaqus INP files to Ansys CDB and K files (MAPDL and LS-DYNA).
 The translation ensures that the Abaqus model can be used in Ansys without recreating from scratch.
 It helps to save time and effort even though minor manual adjustments may be required.
 The manual adjustments like redefining boundary conditions, loads, and material properties,
@@ -35,11 +35,10 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 
     .. code-block:: python
 
-        mapdl_params = prime.ExportMapdlCdbParams(model=model)
-        mesh_file_cdb = os.path.join(r"E:\test3\Abaqus_Input_multistep.cdb")
-        export_cdb_result = file_io.export_mapdl_cdb(
-            mesh_file_cdb,
-            params=mapdl_params,
+       
+     export_cdb_result = file_io.export_mapdl_cdb(
+            r"E:\test3\Abaqus_Input_multistep.cdb",
+            prime.ExportMapdlCdbParams(model)
         )
         print(export_cdb_result)
 
