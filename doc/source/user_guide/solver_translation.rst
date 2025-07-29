@@ -35,7 +35,6 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 
     .. code-block:: python
 
-       
      export_cdb_result = file_io.export_mapdl_cdb(
             r"E:\test3\Abaqus_Input_multistep.cdb",
             prime.ExportMapdlCdbParams(model)
