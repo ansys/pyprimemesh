@@ -35,11 +35,11 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 
     .. code-block:: python
 
-     export_cdb_result = file_io.export_mapdl_cdb(
+       export_cdb_result = file_io.export_mapdl_cdb(
             r"E:\test3\Abaqus_Input_multistep.cdb",
-            prime.ExportMapdlCdbParams(model)
-        )
-        print(export_cdb_result)
+            prime.ExportMapdlCdbParams(model),
+       )
+       print(export_cdb_result)
 
     :class:`ExportMapdlCdbParams <ansys.meshing.prime.ExportMapdlCdbParams>` allows setting parameters to control
     the export of MAPDL CDB files.
