@@ -1,4 +1,5 @@
 abc
+(?i)Abaqus
 (?i)Ansys
 (?i)Apis
 AutoMesh
@@ -15,11 +16,13 @@ Fluent Meshing's
 geodesical
 hexahedra
 hexcore
+_inp
 ignore_orientation
 ignore_self_proximity
 IGA
 [Ii]sogeometric
 JTOpen
+JSON
 [Ll]inux
 [Ll]ucid
 Material Point Manager
