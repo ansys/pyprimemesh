@@ -47,8 +47,6 @@ html_theme_options = {
         "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "check_switcher": False,
-    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "navigation_with_keys": False,
     "github_url": "https://github.com/ansys/pyprimemesh",
     "show_prev_next": False,
@@ -143,10 +141,6 @@ autosummary_generate = True
 autosummary_imported_members = True
 autosummary_ignore_module_all = False
 
-
-# exclude_patterns = [
-#    "examples/gallery_examples/example_template.rst" "examples/gallery_examples/mixing_elbow.rst"
-# ]
 
 # Enable screenshots for gallery for pyvista
 pyvista.BUILDING_GALLERY = True
