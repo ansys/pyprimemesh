@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``model.py`` module
+=======================
+
+.. py:module:: ansys.meshing.prime.core.model
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: model
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.model.Model`
+            - Contains all information about Ansys Prime Server.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Model</api/ansys/meshing/prime/core/model/Model>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing the managing logic of the Prime model.
+
+
+
+
+
+
+
+
+
+.. vale on

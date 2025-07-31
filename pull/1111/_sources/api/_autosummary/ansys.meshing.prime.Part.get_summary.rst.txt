@@ -1,0 +1,11 @@
+get\_summary
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_summary
+
+.. minigallery::
+   :add-heading: Examples using Part.get_summary
+
+   ansys.meshing.prime.Part.get_summary

@@ -1,0 +1,51 @@
+.. vale off
+
+
+
+
+
+
+
+SweepType
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SweepType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      SweepType.STANDARD
+      
+      
+      SweepType.THINSWEEP
+      
+      
+      SweepType.MEDIALAXIS
+      
+      
+      SweepType.PROGRAMCONTROLLED
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SweepType
+
+    ansys.meshing.prime.SweepType
+
+.. vale on

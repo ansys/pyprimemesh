@@ -1,0 +1,1273 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Part`
+=============
+
+
+.. py:class:: ansys.meshing.prime.autogen.part.Part(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   Part contains zonelets and topoentities.
+
+   Topoentities and zonelets are characterized by dimension of entities.
+   Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets. They are:
+
+   * FaceZonelet: A group of interconnected face elements.
+   * EdgeZonelet: A group of interconnected edge elements.
+   * CellZonelet: A group of interconnected cell elements.
+
+   Topoentities represent connectivity information.
+   Topoentities can be queried from higher order to lower order topoentities and vice versa.
+   Topoentities have geometric representation which may be defined by splines or facets.
+   The mesh generated on topoentities will be projected on geometry representation.
+
+   * TopoFace: Topoentity representing surfaces.
+   * TopoEdge: Topoentity representing curves.
+   * TopoVolume: Topoentity representing volumes.
+
+
+
+
+   :param model: Server model to create Part object.
+   :type model: Model
+   :param id: Id of the Part.
+   :type id: int
+   :param object_id: Object id of the Part.
+   :type object_id: int
+   :param name: Name of the Part.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: Part
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~add_labels_on_topo_entities`
+            - Add the given labels on the provided topoentities.
+          * - :py:attr:`~add_labels_on_zonelets`
+            - Add the given labels on the provided zonelets.
+          * - :py:attr:`~add_topo_entities_to_zone`
+            - Add topoentities to zone.
+          * - :py:attr:`~add_volumes_to_zone`
+            - Add volumes to zone.
+          * - :py:attr:`~add_zonelets_to_zone`
+            - Add zonelets to zone.
+          * - :py:attr:`~compute_closed_volumes`
+            - Computes volume by identifying closed volumes defined by face zonelets of the part.
+          * - :py:attr:`~compute_topo_volumes`
+            - Compute topovolumes by identifying closed volumes defined by topofaces of the part.
+          * - :py:attr:`~delete_topo_entities`
+            - Delete topoentities of part controled by parameters.
+          * - :py:attr:`~delete_volumes`
+            - Delete volumes by deleting its face zonelets.
+          * - :py:attr:`~delete_zonelets`
+            - Delete given face zonelets.
+          * - :py:attr:`~extract_topo_volumes`
+            - Extract topovolumes connected to given cap topofaces.
+          * - :py:attr:`~extract_volumes`
+            - Extract volumes connected to given face zonelets.
+          * - :py:attr:`~get_adjacent_face_zonelets_of_face_zonelets`
+            - Gets the adjacent facezonelets for the provided facezonelet ids.
+          * - :py:attr:`~get_adjacent_volumes_of_volumes`
+            - Get the adjacent volumes for the provided volume ids.
+          * - :py:attr:`~get_cell_zonelets`
+            - Get the cell zonelet ids in the part.
+          * - :py:attr:`~get_component_children_by_path`
+            - Gets the child components for a component using the given parameters.
+          * - :py:attr:`~get_components_by_path_expression`
+            - Gets component names with the provided path expression.
+          * - :py:attr:`~get_edge_zonelets`
+            - Get the edge zonelets of a part.
+          * - :py:attr:`~get_edge_zonelets_of_label_name_pattern`
+            - Get edge zonelet ids of labels with name matching the given name pattern.
+          * - :py:attr:`~get_edge_zones`
+            - Get all the edge zones of the part.
+          * - :py:attr:`~get_face_zone_of_zonelet`
+            - Gets the face zone of given zonelet.
+          * - :py:attr:`~get_face_zonelets`
+            - Get the face zonelets of a part.
+          * - :py:attr:`~get_face_zonelets_of_component_body_name_pattern`
+            - Gets face zonelet ids belonging to components or bodies with name matching the given name pattern.
+          * - :py:attr:`~get_face_zonelets_of_label_name_pattern`
+            - Get face zonelet ids of labels with name matching the given name pattern.
+          * - :py:attr:`~get_face_zonelets_of_volumes`
+            - Get the face zonelets of given volumes.
+          * - :py:attr:`~get_face_zonelets_of_zone_name_pattern`
+            - Get ids of face zonelets of zones with name matching the given name pattern.
+          * - :py:attr:`~get_face_zones`
+            - Get all the face zones of the part.
+          * - :py:attr:`~get_face_zones_of_name_pattern`
+            - Get ids of face zones with name matching the given name pattern.
+          * - :py:attr:`~get_labels`
+            - Get all labels on entities of part.
+          * - :py:attr:`~get_labels_on_zonelet`
+            - Gets labels associated with zonelet.
+          * - :py:attr:`~get_name`
+            - Gets the name of the Part.
+          * - :py:attr:`~get_splines`
+            - Gets the list of spline ids.
+          * - :py:attr:`~get_summary`
+            - Get the part summary.
+          * - :py:attr:`~get_topo_edges`
+            - Get the topoedges of a part.
+          * - :py:attr:`~get_topo_edges_of_label_name_pattern`
+            - Get topoedge ids of labels with name matching the given name pattern.
+          * - :py:attr:`~get_topo_faces`
+            - Get the topofaces of a part.
+          * - :py:attr:`~get_topo_faces_of_component_body_name_pattern`
+            - Gets topoface ids of component or bodies with name matching the given name pattern.
+          * - :py:attr:`~get_topo_faces_of_label_name_pattern`
+            - Get topoface ids of labels with name matching the given name pattern.
+          * - :py:attr:`~get_topo_faces_of_topo_volumes`
+            - Gets the topofaces of given topovolumes.
+          * - :py:attr:`~get_topo_faces_of_zone_name_pattern`
+            - Get topoface ids of zones with name matching the given name pattern.
+          * - :py:attr:`~get_topo_volumes`
+            - Get topovolumes of part.
+          * - :py:attr:`~get_topo_volumes_of_label_name_pattern`
+            - Gets the topovolumes of labels of the given label name expression.
+          * - :py:attr:`~get_topo_volumes_of_zone_name_pattern`
+            - Gets the topovolume ids of zones with name matching the given name pattern.
+          * - :py:attr:`~get_unstructured_spline_solid`
+            - Gets the unstructured solid spline for the part.
+          * - :py:attr:`~get_unstructured_spline_surface`
+            - Gets the unstructured surface spline for the part.
+          * - :py:attr:`~get_volume_zone_of_volume`
+            - Gets the volume zone of given volume.
+          * - :py:attr:`~get_volume_zones`
+            - Get all the volume zones of the part.
+          * - :py:attr:`~get_volume_zones_of_name_pattern`
+            - Get ids of volume zones with name matching the given name pattern.
+          * - :py:attr:`~get_volumes`
+            - Get all the volumes of the part.
+          * - :py:attr:`~get_volumes_of_face_zonelet`
+            - Get volume ids of given face zonelet.
+          * - :py:attr:`~get_volumes_of_zone_name_pattern`
+            - Get volume ids of zones with name matching the given name pattern.
+          * - :py:attr:`~merge_volumes`
+            - Merge volumes by removing shared face zonelets.
+          * - :py:attr:`~merge_zonelets`
+            - Merge zonelets.
+          * - :py:attr:`~remove_labels_from_topo_entities`
+            - Remove the given labels from the provided topoentities.
+          * - :py:attr:`~remove_labels_from_zonelets`
+            - Remove the given labels from the provided zonelets.
+          * - :py:attr:`~remove_zone_on_topo_entities`
+            - Removes zone on the given topoentities.
+          * - :py:attr:`~remove_zone_on_volumes`
+            - Removes zone on the given volumes.
+          * - :py:attr:`~remove_zone_on_zonelets`
+            - Removes zone on the given zonelets.
+          * - :py:attr:`~set_suggested_name`
+            - Sets the unique name for the part based on the suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of Part.
+          * - :py:attr:`~name`
+            - Get the name of Part.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.part import Part
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of Part.
+
+.. py:property:: name
+
+   Get the name of Part.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: add_labels_on_topo_entities(labels: List[str], topo_entities: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.AddLabelResults
+
+   Add the given labels on the provided topoentities.
+
+
+   :param labels: Labels to be added on topoentities.
+   :type labels: List[str]
+   :param topo_entities: Ids of topoentities.
+   :type topo_entities: Iterable[int]
+
+   :returns: Returns the AddLabelResults.
+   :rtype: AddLabelResults
+
+   .. rubric:: Examples
+
+   >>> labels = ["wall", "outer"]
+   >>> part.add_labels_on_topo_entities(labels, topo_entities)
+
+
+.. py:method:: add_labels_on_zonelets(labels: List[str], zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.AddLabelResults
+
+   Add the given labels on the provided zonelets.
+
+
+   :param labels: Labels to be added on zonelets.
+   :type labels: List[str]
+   :param zonelets: Ids of zonelets.
+   :type zonelets: Iterable[int]
+
+   :returns: Returns the AddLabelResults.
+   :rtype: AddLabelResults
+
+   .. rubric:: Examples
+
+   >>> labels = ["wall", "outer"]
+   >>> part.add_labels_on_zonelets(labels, zonelets)
+
+
+.. py:method:: add_topo_entities_to_zone(zone_id: int, topo_entities: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.AddToZoneResults
+
+   Add topoentities to zone.
+
+
+   :param zone_id: Id of a zone .
+   :type zone_id: int
+   :param topo_entities: Ids of topoentities to be added.
+   :type topo_entities: Iterable[int]
+
+   :returns: Returns the AddToZoneResults.
+   :rtype: AddToZoneResults
+
+   .. rubric:: Examples
+
+   >>> results = part.add_topo_entities_to_zone(zone_id, topo_entities)
+
+
+.. py:method:: add_volumes_to_zone(zone_id: int, volumes: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.AddToZoneResults
+
+   Add volumes to zone.
+
+
+   :param zone_id: Id of a zone .
+   :type zone_id: int
+   :param volumes: Ids of volumes to be added.
+   :type volumes: Iterable[int]
+
+   :returns: Returns the AddToZoneResults.
+   :rtype: AddToZoneResults
+
+   .. rubric:: Examples
+
+   >>> results = part.add_volumes_to_zone(zone_id, volumes)
+
+
+.. py:method:: add_zonelets_to_zone(zone_id: int, zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.AddToZoneResults
+
+   Add zonelets to zone.
+
+
+   :param zone_id: Id of a zone .
+   :type zone_id: int
+   :param zonelets: Ids of zonelets to be added.
+   :type zonelets: Iterable[int]
+
+   :returns: Returns the AddToZoneResults.
+   :rtype: AddToZoneResults
+
+   .. rubric:: Examples
+
+   >>> results = part.add_zonelets_to_zone(zone_id, zonelets)
+
+
+.. py:method:: compute_closed_volumes(params: ansys.meshing.prime.params.primestructs.ComputeVolumesParams) -> ansys.meshing.prime.params.primestructs.ComputeVolumesResults
+
+   Computes volume by identifying closed volumes defined by face zonelets of the part.
+
+
+   :param params: Parameters to compute volumes.
+   :type params: ComputeVolumesParams
+
+   :returns: Returns the ComputeVolumesResults.
+   :rtype: ComputeVolumesResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.ComputeVolumesParams(model = model, create_zones_type = prime.CreateVolumeZonesType.PERVOLUME)
+   >>> results = part.compute_closed_volumes(params)
+
+
+.. py:method:: compute_topo_volumes(params: ansys.meshing.prime.params.primestructs.ComputeVolumesParams) -> ansys.meshing.prime.params.primestructs.ComputeTopoVolumesResults
+
+   Compute topovolumes by identifying closed volumes defined by topofaces of the part.
+
+
+   :param params: Parameters to compute topovolumes.
+   :type params: ComputeVolumesParams
+
+   :returns: Return the ComputeTopoVolumesResults.
+   :rtype: ComputeTopoVolumesResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.ComputeVolumesParams(model = model, create_zones_type = prime.CreateVolumeZonesType.PERVOLUME)
+   >>> results = part.compute_topo_volumes(params)
+
+
+.. py:method:: delete_topo_entities(params: ansys.meshing.prime.params.primestructs.DeleteTopoEntitiesParams) -> ansys.meshing.prime.params.primestructs.DeleteTopoEntitiesResults
+
+   Delete topoentities of part controled by parameters.
+
+
+   :param params: Parameters for control delete topoentities operation.
+   :type params: DeleteTopoEntitiesParams
+
+   :returns: Return results of delete topoentities.
+   :rtype: DeleteTopoEntitiesResults
+
+   .. rubric:: Examples
+
+   >>> results = part.delete_topo_entities(params)
+
+
+.. py:method:: delete_volumes(volumes: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.DeleteVolumesParams) -> ansys.meshing.prime.params.primestructs.DeleteVolumesResults
+
+   Delete volumes by deleting its face zonelets.
+
+
+   :param volumes: Ids of volumes to be deleted.
+   :type volumes: Iterable[int]
+   :param params: Parameters to delete volumes.
+   :type params: DeleteVolumesParams
+
+   :returns: Returns the DeleteVolumesResults.
+   :rtype: DeleteVolumesResults
+
+   .. rubric:: Examples
+
+   params = prime.DeleteVolumesParams(model = model)
+   results = part.delete_volumes(volumes, params)
+
+
+.. py:method:: delete_zonelets(zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.DeleteResults
+
+   Delete given face zonelets.
+
+
+   :param zonelets: Ids of zonelets to be deleted.
+   :type zonelets: Iterable[int]
+
+   :returns: Return DeleteResults.
+   :rtype: DeleteResults
+
+   .. rubric:: Examples
+
+   >>> results = part.delete_zonelets(zonelets)
+
+
+.. py:method:: extract_topo_volumes(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ExtractTopoVolumesParams) -> ansys.meshing.prime.params.primestructs.ExtractTopoVolumesResults
+
+   Extract topovolumes connected to given cap topofaces.
+
+
+   :param topo_faces: Ids of topofaces connected to topovolumes.
+   :type topo_faces: Iterable[int]
+   :param params: Parameters to compute topovolumes.
+   :type params: ExtractTopoVolumesParams
+
+   :returns: Return the ExtractTopoVolumesResults.
+   :rtype: ExtractTopoVolumesResults
+
+   .. rubric:: Examples
+
+   >>> results = part.extract_flow_topo_volumes(topo_faces, params)
+
+
+.. py:method:: extract_volumes(face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ExtractVolumesParams) -> ansys.meshing.prime.params.primestructs.ExtractVolumesResults
+
+   Extract volumes connected to given face zonelets.
+
+
+   :param face_zonelets: Ids of face zonelets connected to volumes.
+   :type face_zonelets: Iterable[int]
+   :param params: Parameters to compute volumes.
+   :type params: ExtractVolumesParams
+
+   :returns: Return the ExtractVolumesResults.
+   :rtype: ExtractVolumesResults
+
+   .. rubric:: Examples
+
+   >>> results = part.extract_volumes(face_zonelets, params)
+
+
+.. py:method:: get_adjacent_face_zonelets_of_face_zonelets(face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets the adjacent facezonelets for the provided facezonelet ids.
+
+
+   :param face_zonelets: Ids of facezonelets.
+   :type face_zonelets: Iterable[int]
+
+   :returns: Returns the list of adjacent facezonelet ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> face_zonelets_of_face_zonelet = part.get_adjacent_face_zonelets_of_face_zonelets(face_zonelets)
+
+
+.. py:method:: get_adjacent_volumes_of_volumes(volumes: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the adjacent volumes for the provided volume ids.
+
+
+   :param volumes: Ids of the volume.
+   :type volumes: Iterable[int]
+
+   :returns: Returns the list of adjacent volume ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> adjacent_volumes_of_volumes = part.get_adjacent_volumes_of_volumes(volumes)
+
+
+.. py:method:: get_cell_zonelets() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the cell zonelet ids in the part.
+
+
+   :returns: Return the ids of cell zonelets. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Part
+   >>> cell_zonelet_ids = part.get_cell_zonelets()
+
+
+.. py:method:: get_component_children_by_path(path: str, params: ansys.meshing.prime.params.primestructs.ComponentChildrenParams) -> ansys.meshing.prime.params.primestructs.ComponentChildrenResults
+
+   Gets the child components for a component using the given parameters.
+
+
+   :param path: Path to component for which child components are queried.
+   :type path: str
+   :param params: Parameters to get child component.
+   :type params: ComponentChildrenParams
+
+   :returns: Returns the ComponentChildrenResults structure.
+   :rtype: ComponentChildrenResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = part.get_component_children_by_path(path, params)
+
+
+.. py:method:: get_components_by_path_expression(path_expression: str) -> List[str]
+
+   Gets component names with the provided path expression.
+
+
+   :param path_expression: Path expression to determine component names that should be returned.
+   :type path_expression: str
+
+   :returns: Returns a list of component names.
+   :rtype: List[str]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = part.get_components_by_path_expression(path_expression)
+
+
+.. py:method:: get_edge_zonelets() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the edge zonelets of a part.
+
+
+   :returns: Return the ids of edge zonelets. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> edge_zonelets = part.get_edge_zonelets()
+
+
+.. py:method:: get_edge_zonelets_of_label_name_pattern(label_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get edge zonelet ids of labels with name matching the given name pattern.
+
+
+   :param label_name_pattern: Name pattern to be matched with label name.
+   :type label_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match label name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return edge zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> edge_zonelets = part.get_edge_zonelets_of_label_name_pattern("wall*", name_pattern_params)
+
+
+.. py:method:: get_edge_zones() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get all the edge zones of the part.
+
+
+   :returns: Return ids of edge zones.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> edge_zones = part.get_edge_zones()
+
+
+.. py:method:: get_face_zone_of_zonelet(zonelet: int) -> int
+
+   Gets the face zone of given zonelet.
+
+
+   :param zonelet: Id of zonelet.
+   :type zonelet: int
+
+   :returns: Returns the id of face zone.
+   :rtype: int
+
+   .. rubric:: Examples
+
+   >>> face_zone = part.get_face_zone_of_zonelet(zonelet)
+
+
+.. py:method:: get_face_zonelets() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the face zonelets of a part.
+
+
+   :returns: Return the ids of face zonelets. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> face_zonelets = part.get_face_zonelets()
+
+
+.. py:method:: get_face_zonelets_of_component_body_name_pattern(component_body_name_pattern: str, type: ansys.meshing.prime.params.primestructs.BodyQueryType, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets face zonelet ids belonging to components or bodies with name matching the given name pattern.
+
+
+   :param component_body_name_pattern: Name pattern to be matched with component or body names.
+   :type component_body_name_pattern: str
+   :param type: Type of query used to match component or body name pattern.
+   :type type: BodyQueryType
+   :param name_pattern_params: Name pattern parameters used to match component or body name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Returns face zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> face_zonelets = part.get_face_zonelets_of_component_body_pattern("/body*", type, name_pattern_params)
+
+
+.. py:method:: get_face_zonelets_of_label_name_pattern(label_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get face zonelet ids of labels with name matching the given name pattern.
+
+
+   :param label_name_pattern: Name pattern to be matched with label name.
+   :type label_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match label name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return face zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> face_zonelets = part.get_face_zonelets_of_label_name_pattern("wall*", name_pattern_params)
+
+
+.. py:method:: get_face_zonelets_of_volumes(volumes: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the face zonelets of given volumes.
+
+
+   :param volumes: Ids of volumes.
+   :type volumes: Iterable[int]
+
+   :returns: Return the ids of face zonelets.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> face_zonelets = part.get_face_zonelets_of_volumes(volumes)
+
+
+.. py:method:: get_face_zonelets_of_zone_name_pattern(zone_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get ids of face zonelets of zones with name matching the given name pattern.
+
+
+   :param zone_name_pattern: Name pattern to be matched with zone name.
+   :type zone_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match zone name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return face zonelet ids of zones with name matching the name pattern. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> face_zonelets = part.get_face_zonelets_of_zone_name_pattern("wall*", name_pattern_params)
+
+
+.. py:method:: get_face_zones() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get all the face zones of the part.
+
+
+   :returns: Return ids of face zones.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> face_zones = part.get_face_zones()
+
+
+.. py:method:: get_face_zones_of_name_pattern(zone_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get ids of face zones with name matching the given name pattern.
+
+
+   :param zone_name_pattern: Name pattern to be matched with zone name.
+   :type zone_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match zone name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return list of face zone ids matching the zone name pattern.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> zones = part.get_face_zones_of_name_pattern("wall*", name_pattern_params)
+
+
+.. py:method:: get_labels() -> List[str]
+
+   Get all labels on entities of part.
+
+
+   :returns: Return labels on entities of part.
+   :rtype: List[str]
+
+   .. rubric:: Examples
+
+   >>> part.get_labels()
+
+
+.. py:method:: get_labels_on_zonelet(zonelet_id: int) -> List[str]
+
+   Gets labels associated with zonelet.
+
+
+   :param zonelet_id: Id of zonelet for which label is queried.
+   :type zonelet_id: int
+
+   :returns: Returns labels associated with zonelet.
+   :rtype: List[str]
+
+   .. rubric:: Examples
+
+   >>> results = part.get_labels_on_zonelet(zonelet_id)
+
+
+.. py:method:: get_name() -> str
+
+   Gets the name of the Part.
+
+
+   :returns: Returns part name.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> part_name = part.get_name()
+
+
+.. py:method:: get_splines() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets the list of spline ids.
+
+
+   :returns: Returns the list of spline ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Part
+   >>> results = part.get_splines()
+
+
+.. py:method:: get_summary(params: ansys.meshing.prime.params.primestructs.PartSummaryParams) -> ansys.meshing.prime.params.primestructs.PartSummaryResults
+
+   Get the part summary.
+
+   Provides the part summary for the given parameters.
+
+   :param params: Part summary parameters.
+   :type params: PartSummaryParams
+
+   :returns: Return the PartSummaryResults.
+   :rtype: PartSummaryResults
+
+   .. rubric:: Examples
+
+   >>> results = part.get_summary(PartSummaryParams(model=model))
+
+
+.. py:method:: get_topo_edges() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the topoedges of a part.
+
+
+   :returns: Return the ids of topoedges.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+
+.. py:method:: get_topo_edges_of_label_name_pattern(label_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get topoedge ids of labels with name matching the given name pattern.
+
+
+   :param label_name_pattern: Name pattern to be matched with label name.
+   :type label_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match label name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return the ids of topoedges.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> topo_edges = part.get_topo_edges_of_label_name_pattern(
+   >>>                   label_name_pattern = "edge_label",
+   >>>                   params = prime.NamePatternParams(model=model))
+
+
+.. py:method:: get_topo_faces() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the topofaces of a part.
+
+
+           Returns
+           -------
+           Iterable[int]
+               Return the ids of topofaces.
+
+   Return the ids of topofaces.
+
+
+           Examples
+           --------
+           >>> topo_faces = part.get_topo_faces()
+
+
+
+
+.. py:method:: get_topo_faces_of_component_body_name_pattern(component_body_name_pattern: str, type: ansys.meshing.prime.params.primestructs.BodyQueryType, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets topoface ids of component or bodies with name matching the given name pattern.
+
+
+   :param component_body_name_pattern: Name pattern to be matched with component or body name.
+   :type component_body_name_pattern: str
+   :param type: Type of query used to match component or body name pattern.
+   :type type: BodyQueryType
+   :param name_pattern_params: Name pattern parameters used to match component or body name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Returns the ids of topofaces.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> topo_faces = part.get_topo_faces_of_component_body_name_pattern(
+   >>>                   component_body_name_pattern = "body*",
+   >>>                   type = BodyQueryType_All,
+   >>>                   params = prime.NamePatternParams(model=model))
+
+
+.. py:method:: get_topo_faces_of_label_name_pattern(label_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get topoface ids of labels with name matching the given name pattern.
+
+
+   :param label_name_pattern: Name pattern to be matched with label name.
+   :type label_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match label name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return the ids of topofaces.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> topo_faces = part.get_topo_faces_of_label_name_pattern(
+   >>>                   label_name_pattern = "face_label",
+   >>>                   params = prime.NamePatternParams(model=model))
+
+
+.. py:method:: get_topo_faces_of_topo_volumes(volumes: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets the topofaces of given topovolumes.
+
+
+   :param volumes: Ids of topovolumes.
+   :type volumes: Iterable[int]
+
+   :returns: Returns the ids of topofaces.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> topo_faces = part.get_topo_faces_of_topo_volumes(volumes)
+
+
+.. py:method:: get_topo_faces_of_zone_name_pattern(zone_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get topoface ids of zones with name matching the given name pattern.
+
+
+   :param zone_name_pattern: Name pattern to be matched with zone name.
+   :type zone_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match zone name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return topoface ids of zones with name matching the name pattern.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> topo_faces = part.get_topo_faces_of_zone_name_pattern("wall*", name_pattern_params)
+
+
+.. py:method:: get_topo_volumes() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get topovolumes of part.
+
+
+   :returns: Returns the list of topovolume ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> results = part.get_topo_volumes()
+
+
+.. py:method:: get_topo_volumes_of_label_name_pattern(label_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets the topovolumes of labels of the given label name expression.
+
+
+   :param label_name_pattern: Name pattern to be matched with topovolume name
+   :type label_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match topovolume name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Returns the ids of the topovolumes.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> topo_volumes = prime.get_topo_volumes_of_label_name_pattern(
+   >>>                      label_name_pattern = "solid*",
+   >>>                      params = prime.NamePatternParams(model=model))
+
+
+.. py:method:: get_topo_volumes_of_zone_name_pattern(zone_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets the topovolume ids of zones with name matching the given name pattern.
+
+
+   :param zone_name_pattern: Name pattern to be matched with zone name.
+   :type zone_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match zone name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Returns topovolume ids of zones with name matching the name pattern.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> topo_volumes = part.get_topo_volumes_of_zone_name_pattern(zone_name_pattern = "solid*",
+   name_pattern_params = prime.NamePatternParams(model = model))
+
+
+.. py:method:: get_unstructured_spline_solid() -> ansys.meshing.prime.params.primestructs.IGAUnstructuredSplineSolid
+
+   Gets the unstructured solid spline for the part.
+
+
+   :returns: Returns the solid spline structure.
+   :rtype: IGAUnstructuredSplineSolid
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Part
+   >>> spline = part.GetUnstructuredSplineSolid()
+
+
+.. py:method:: get_unstructured_spline_surface() -> ansys.meshing.prime.params.primestructs.IGAUnstructuredSplineSurf
+
+   Gets the unstructured surface spline for the part.
+
+
+   :returns: Returns the surface spline structure.
+   :rtype: IGAUnstructuredSplineSurf
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Part
+   >>> spline = part.GetUnstructuredSplineSurface()
+
+
+.. py:method:: get_volume_zone_of_volume(volume: int) -> int
+
+   Gets the volume zone of given volume.
+
+
+   :param volume: Id of volume.
+   :type volume: int
+
+   :returns: Returns the id of volume zone.
+   :rtype: int
+
+   .. rubric:: Examples
+
+   >>> volume_zone = part.get_volume_zone_of_volume(volume)
+
+
+.. py:method:: get_volume_zones() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get all the volume zones of the part.
+
+
+   :returns: Return ids of volume zones.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> volume_zones = part.get_volume_zones()
+
+
+.. py:method:: get_volume_zones_of_name_pattern(zone_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get ids of volume zones with name matching the given name pattern.
+
+
+   :param zone_name_pattern: Name pattern to be matched with zone name.
+   :type zone_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match zone name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Returns a list of volume zone ids matching the zone name pattern.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> zones = part.get_volume_zones_of_name_pattern("solid*", name_pattern_params)
+
+
+.. py:method:: get_volumes() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get all the volumes of the part.
+
+
+   :returns: Return ids of volumes.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> volumes = part.get_volumes()
+
+
+.. py:method:: get_volumes_of_face_zonelet(face_zonelet: int) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get volume ids of given face zonelet.
+
+
+   :param face_zonelet: Id of face zonelet.
+   :type face_zonelet: int
+
+   :returns: Return volume ids of given face zonelet.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> volumes = part.get_volumes_of_face_zonelet(face_zonelet)
+
+
+.. py:method:: get_volumes_of_zone_name_pattern(zone_name_pattern: str, name_pattern_params: ansys.meshing.prime.params.primestructs.NamePatternParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get volume ids of zones with name matching the given name pattern.
+
+
+   :param zone_name_pattern: Name pattern to be matched with zone name.
+   :type zone_name_pattern: str
+   :param name_pattern_params: Name pattern parameters used to match zone name pattern.
+   :type name_pattern_params: NamePatternParams
+
+   :returns: Return volume ids of zones with name matching the name pattern. Returns an empty list for a topology part.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> name_pattern_params = prime.NamePatternParams(model = model)
+   >>> volumes = part.get_volumes_of_zone_name_pattern("body*", name_pattern_params)
+
+
+.. py:method:: merge_volumes(volumes: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.MergeVolumesParams) -> ansys.meshing.prime.params.primestructs.MergeVolumesResults
+
+   Merge volumes by removing shared face zonelets.
+
+
+   :param volumes: Ids of volumes to be merged.
+   :type volumes: Iterable[int]
+   :param params: Parameters to merge volumes.
+   :type params: MergeVolumesParams
+
+   :returns: Returns the MergeVolumesResults.
+   :rtype: MergeVolumesResults
+
+   .. rubric:: Examples
+
+   params = prime.MergeVolumesParams(model = model)
+   results = part.merge_volumes(volumes, params)
+
+
+.. py:method:: merge_zonelets(zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.MergeZoneletsParams) -> ansys.meshing.prime.params.primestructs.MergeZoneletsResults
+
+   Merge zonelets.
+
+
+   :param zonelets: Ids of zonelets to be merged.
+   :type zonelets: Iterable[int]
+   :param params: Parameters to merge zonelets.
+   :type params: MergeZoneletsParams
+
+   :returns: Returns the MergeZoneletsResults.
+   :rtype: MergeZoneletsResults
+
+   .. rubric:: Examples
+
+   params = prime.MergeZoneletsParams(model = model)
+   results = part.merge_zonelets(zonelets, params)
+
+
+.. py:method:: remove_labels_from_topo_entities(labels: List[str], topo_entities: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.RemoveLabelResults
+
+   Remove the given labels from the provided topoentities.
+
+
+   :param labels: Labels to be removed from topoentities.
+   :type labels: List[str]
+   :param topo_entities: Ids of topoentities.
+   :type topo_entities: Iterable[int]
+
+   :returns: Returns the RemoveLabelResults.
+   :rtype: RemoveLabelResults
+
+   .. rubric:: Examples
+
+   >>> labels = ["wall", "outer"]
+   >>> part.remove_labels_from_topo_entities(labels, topo_entities)
+
+
+.. py:method:: remove_labels_from_zonelets(labels: List[str], zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.RemoveLabelResults
+
+   Remove the given labels from the provided zonelets.
+
+
+   :param labels: Labels to be removed from zonelets.
+   :type labels: List[str]
+   :param zonelets: Ids of zonelets.
+   :type zonelets: Iterable[int]
+
+   :returns: Returns the RemoveLabelResults.
+   :rtype: RemoveLabelResults
+
+   .. rubric:: Examples
+
+   >>> labels = ["wall", "outer"]
+   >>> part.remove_labels_from_zonelets(labels, zonelets)
+
+
+.. py:method:: remove_zone_on_topo_entities(topo_entities: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.RemoveZoneResults
+
+   Removes zone on the given topoentities.
+
+
+   :param topo_entities: Topoentity ids whose zone is to be removed.
+   :type topo_entities: Iterable[int]
+
+   :returns: Returns the RemoveZoneResults.
+   :rtype: RemoveZoneResults
+
+   .. rubric:: Examples
+
+   >>> part.remove_zone_on_topo_entities(topo_entities)
+
+
+.. py:method:: remove_zone_on_volumes(volumes: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.RemoveZoneResults
+
+   Removes zone on the given volumes.
+
+
+   :param volumes: Volume ids whose zone is to be removed.
+   :type volumes: Iterable[int]
+
+   :returns: Returns the RemoveZoneResults.
+   :rtype: RemoveZoneResults
+
+   .. rubric:: Examples
+
+   >>> part.remove_zone_on_volumes(volumes)
+
+
+.. py:method:: remove_zone_on_zonelets(zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.RemoveZoneResults
+
+   Removes zone on the given zonelets.
+
+
+   :param zonelets: Zonelet ids whose zone is to be removed.
+   :type zonelets: Iterable[int]
+
+   :returns: Returns the RemoveZoneResults.
+   :rtype: RemoveZoneResults
+
+   .. rubric:: Examples
+
+   >>> part.remove_zone_on_zonelets(zonelets)
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.params.primestructs.SetNameResults
+
+   Sets the unique name for the part based on the suggested name.
+
+
+   :param name: Suggested name for the part.
+   :type name: str
+
+   :returns: Returns the SetNameResults.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> part.set_suggested_name("part1")
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,127 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Transform`
+==================
+
+
+.. py:class:: ansys.meshing.prime.Transform(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Provides functionalities to initialize and manage transformation using transformation matrix.
+
+   :param model: Server model to create Transform object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: Transform
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~transform_zonelets`
+            - Transforms given zonelets using provided transform parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for Transform.
+          * - :py:attr:`~__exit__`
+            - Exit context for Transform.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import Transform
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for Transform.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for Transform.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: transform_zonelets(part_id: int, zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.TransformParams) -> ansys.meshing.prime.params.primestructs.TransformResults
+
+   Transforms given zonelets using provided transform parameters.
+
+
+   :param part_id: Part id of zonelets to be transformed.
+   :type part_id: int
+   :param zonelets: Ids of zonelets.
+   :type zonelets: Iterable[int]
+   :param params: Transform parameters.
+   :type params: TransformParams
+
+   :returns: Returns the transform results.
+   :rtype: TransformResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.TransformParams(model=model)
+   >>> # scale by a factor of 2 using a 4x4 transformation matrix
+   >>> params.transformation_matrix = [
+   >>>    2, 0, 0, 0,
+   >>>    0, 2, 0, 0,
+   >>>    0, 0, 2, 0,
+   >>>    0, 0, 0, 1,
+   >>> ]
+   >>> part = model.get_part_by_name("part_name")
+   >>> zonelets = part.get_face_zonelets()
+   >>> result = prime.SurfaceUtilities(model).transform_zonelets(part.id, zonelets, params)
+
+
+
+
+
+
+
+.. vale on

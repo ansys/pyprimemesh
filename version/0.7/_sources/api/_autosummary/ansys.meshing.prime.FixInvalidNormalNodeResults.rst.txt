@@ -1,0 +1,39 @@
+.. vale off
+
+FixInvalidNormalNodeResults
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FixInvalidNormalNodeResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FixInvalidNormalNodeResults.print_default
+      FixInvalidNormalNodeResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FixInvalidNormalNodeResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FixInvalidNormalNodeResults
+
+    ansys.meshing.prime.FixInvalidNormalNodeResults
+
+.. vale on

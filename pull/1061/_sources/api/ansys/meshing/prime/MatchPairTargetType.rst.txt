@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MatchPairTargetType`
+============================
+
+
+.. py:class:: ansys.meshing.prime.MatchPairTargetType
+
+
+
+   Match morph target type.
+
+
+
+
+.. py:currentmodule:: MatchPairTargetType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~FACEZONELET`
+            - Option to specify face zonelet as target.
+          * - :py:attr:`~TOPOFACE`
+            - Option to specify topoface as target.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MatchPairTargetType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: FACEZONELET
+   :value: 1
+
+
+   Option to specify face zonelet as target.
+
+.. py:attribute:: TOPOFACE
+   :value: 2
+
+
+   Option to specify topoface as target.
+
+
+
+
+
+
+
+.. vale on

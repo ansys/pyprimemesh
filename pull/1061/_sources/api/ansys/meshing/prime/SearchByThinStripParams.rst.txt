@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchByThinStripParams`
+================================
+
+
+.. py:class:: ansys.meshing.prime.SearchByThinStripParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, strip_height_limit: float = None, quality_limit: float = None, face_quality_measure: ansys.meshing.prime.params.primestructs.FaceQualityMeasure = None, feature_type: ansys.meshing.prime.params.primestructs.SurfaceFeatureType = None, feature_angle: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to search by thin strip of face elements.
+
+   :param model: Model to create a ``SearchByThinStripParams`` object with default parameters.
+   :type model: Model
+   :param strip_height_limit: Absolute height limit to ignore strips with height more than provided limit.
+   :type strip_height_limit: float, optional
+   :param quality_limit: Quality limit used for search strip of face elements.
+   :type quality_limit: float, optional
+   :param face_quality_measure: Quality measure used for search strip of face elements.
+   :type face_quality_measure: FaceQualityMeasure, optional
+   :param feature_type: Used to identify thin strip of face elements based on the provided feature type.
+   :type feature_type: SurfaceFeatureType, optional
+   :param feature_angle: Angle used to identify angle based features.
+   :type feature_angle: float, optional
+   :param json_data: JSON dictionary to create a ``SearchByThinStripParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_by_thin_strip_params = prime.SearchByThinStripParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchByThinStripParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~face_quality_measure`
+            - Quality measure used for search strip of face elements.
+          * - :py:attr:`~feature_angle`
+            - Angle used to identify angle based features.
+          * - :py:attr:`~feature_type`
+            - Used to identify thin strip of face elements based on the provided feature type.
+          * - :py:attr:`~quality_limit`
+            - Quality limit used for search strip of face elements.
+          * - :py:attr:`~strip_height_limit`
+            - Absolute height limit to ignore strips with height more than provided limit.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchByThinStripParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchByThinStripParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SearchByThinStripParams
+
+Property detail
+---------------
+
+.. py:property:: face_quality_measure
+   :type: ansys.meshing.prime.params.primestructs.FaceQualityMeasure
+
+
+   Quality measure used for search strip of face elements.
+
+.. py:property:: feature_angle
+   :type: float
+
+
+   Angle used to identify angle based features.
+
+.. py:property:: feature_type
+   :type: ansys.meshing.prime.params.primestructs.SurfaceFeatureType
+
+
+   Used to identify thin strip of face elements based on the provided feature type.
+
+.. py:property:: quality_limit
+   :type: float
+
+
+   Quality limit used for search strip of face elements.
+
+.. py:property:: strip_height_limit
+   :type: float
+
+
+   Absolute height limit to ignore strips with height more than provided limit.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchByThinStripParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchByThinStripParams.print_default()
+
+
+.. py:method:: set_default(strip_height_limit: float = None, quality_limit: float = None, face_quality_measure: ansys.meshing.prime.params.primestructs.FaceQualityMeasure = None, feature_type: ansys.meshing.prime.params.primestructs.SurfaceFeatureType = None, feature_angle: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SearchByThinStripParams`` object.
+
+   :param strip_height_limit: Absolute height limit to ignore strips with height more than provided limit.
+   :type strip_height_limit: float, optional
+   :param quality_limit: Quality limit used for search strip of face elements.
+   :type quality_limit: float, optional
+   :param face_quality_measure: Quality measure used for search strip of face elements.
+   :type face_quality_measure: FaceQualityMeasure, optional
+   :param feature_type: Used to identify thin strip of face elements based on the provided feature type.
+   :type feature_type: SurfaceFeatureType, optional
+   :param feature_angle: Angle used to identify angle based features.
+   :type feature_angle: float, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,234 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LocalSurferParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surferstructs.LocalSurferParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, min_angle: float = None, max_angle: float = None, size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, min_size: float = None, max_size: float = None, growth_rate: float = None, constant_size: float = None, smooth_boundary: bool = None, n_rings: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to perform local surface remeshing.
+
+   :param model: Model to create a ``LocalSurferParams`` object with default parameters.
+   :type model: Model
+   :param min_angle: Minimum feature angle limit used to identify and preserve features.
+   :type min_angle: float, optional
+   :param max_angle: Maximum feature angle limit used to identify and preserve features.
+   :type max_angle: float, optional
+   :param size_field_type: Size field type used to generate surface mesh.
+   :type size_field_type: SizeFieldType, optional
+   :param min_size: Minimum size to be used in sizing for the surfer.
+   :type min_size: float, optional
+   :param max_size: Maximum size to be used in sizing for the surfer.
+   :type max_size: float, optional
+   :param growth_rate: Growth rate to be used to propagate sizes.
+   :type growth_rate: float, optional
+   :param constant_size: Constant size to be used in case of constant size field.
+   :type constant_size: float, optional
+   :param smooth_boundary: Option to extend local selection to get smooth boundary of selected elements.
+   :type smooth_boundary: bool, optional
+   :param n_rings: Number of rings to extend the registered face selection for remeshing.
+   :type n_rings: int, optional
+   :param json_data: JSON dictionary to create a ``LocalSurferParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> local_surfer_params = prime.LocalSurferParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: LocalSurferParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~constant_size`
+            - Constant size to be used in case of constant size field.
+          * - :py:attr:`~growth_rate`
+            - Growth rate to be used to propagate sizes.
+          * - :py:attr:`~max_angle`
+            - Maximum feature angle limit used to identify and preserve features.
+          * - :py:attr:`~max_size`
+            - Maximum size to be used in sizing for the surfer.
+          * - :py:attr:`~min_angle`
+            - Minimum feature angle limit used to identify and preserve features.
+          * - :py:attr:`~min_size`
+            - Minimum size to be used in sizing for the surfer.
+          * - :py:attr:`~n_rings`
+            - Number of rings to extend the registered face selection for remeshing.
+          * - :py:attr:`~size_field_type`
+            - Size field type used to generate surface mesh.
+          * - :py:attr:`~smooth_boundary`
+            - Option to extend local selection to get smooth boundary of selected elements.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``LocalSurferParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``LocalSurferParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surferstructs import LocalSurferParams
+
+Property detail
+---------------
+
+.. py:property:: constant_size
+   :type: float
+
+
+   Constant size to be used in case of constant size field.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate to be used to propagate sizes.
+
+.. py:property:: max_angle
+   :type: float
+
+
+   Maximum feature angle limit used to identify and preserve features.
+
+.. py:property:: max_size
+   :type: float
+
+
+   Maximum size to be used in sizing for the surfer.
+
+.. py:property:: min_angle
+   :type: float
+
+
+   Minimum feature angle limit used to identify and preserve features.
+
+.. py:property:: min_size
+   :type: float
+
+
+   Minimum size to be used in sizing for the surfer.
+
+.. py:property:: n_rings
+   :type: int
+
+
+   Number of rings to extend the registered face selection for remeshing.
+
+.. py:property:: size_field_type
+   :type: ansys.meshing.prime.params.primestructs.SizeFieldType
+
+
+   Size field type used to generate surface mesh.
+
+.. py:property:: smooth_boundary
+   :type: bool
+
+
+   Option to extend local selection to get smooth boundary of selected elements.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``LocalSurferParams`` object.
+
+   .. rubric:: Examples
+
+   >>> LocalSurferParams.print_default()
+
+
+.. py:method:: set_default(min_angle: float = None, max_angle: float = None, size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, min_size: float = None, max_size: float = None, growth_rate: float = None, constant_size: float = None, smooth_boundary: bool = None, n_rings: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``LocalSurferParams`` object.
+
+   :param min_angle: Minimum feature angle limit used to identify and preserve features.
+   :type min_angle: float, optional
+   :param max_angle: Maximum feature angle limit used to identify and preserve features.
+   :type max_angle: float, optional
+   :param size_field_type: Size field type used to generate surface mesh.
+   :type size_field_type: SizeFieldType, optional
+   :param min_size: Minimum size to be used in sizing for the surfer.
+   :type min_size: float, optional
+   :param max_size: Maximum size to be used in sizing for the surfer.
+   :type max_size: float, optional
+   :param growth_rate: Growth rate to be used to propagate sizes.
+   :type growth_rate: float, optional
+   :param constant_size: Constant size to be used in case of constant size field.
+   :type constant_size: float, optional
+   :param smooth_boundary: Option to extend local selection to get smooth boundary of selected elements.
+   :type smooth_boundary: bool, optional
+   :param n_rings: Number of rings to extend the registered face selection for remeshing.
+   :type n_rings: int, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+start\_distributed\_meshing
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.start_distributed_meshing

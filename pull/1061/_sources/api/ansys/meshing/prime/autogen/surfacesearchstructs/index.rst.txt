@@ -1,0 +1,236 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``surfacesearchstructs.py`` module
+======================================
+
+.. py:module:: ansys.meshing.prime.autogen.surfacesearchstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: surfacesearchstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.CheckFaceDeviationParams`
+            - Parameters used for check face deviation operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.CheckFaceDeviationResults`
+            - Result structure associated with the check face deviation operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByFoldsParams`
+            - Parameters to control fold detection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByFoldsResults`
+            - Results structure associated with search folds operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByIntersectionResults`
+            - Results associated with search by face element intersection (face elements interfering with each other).
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByInvalidNormalsResults`
+            - Results structure associated with search invalid normals operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByQualityParams`
+            - Parameters to control search by quality results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByQualityResults`
+            - Results of search by quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchBySelfIntersectionParams`
+            - Parameters to search by face element intersection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchBySpikeParams`
+            - Parameters to control spike detection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchBySpikeResults`
+            - Results structure associated with search spikes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByThinStripParams`
+            - Parameters to search by thin strip of face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchByThinStripResults`
+            - Results associated with search by thin strip of face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchInfoByRegisterIdParams`
+            - Parameters to retrieve information on registered faces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SearchInfoByRegisterIdResults`
+            - Result structure containing information on registered face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceDiagnosticSummaryParams`
+            - Parameters to control surface diagnostics summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceDiagnosticSummaryResults`
+            - Results of surface diagnostic summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceQualityResult`
+            - Result of surface quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceQualitySummaryParams`
+            - Parameters to control surface quality summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceQualitySummaryResults`
+            - Results of surface quality summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs.ThinStripType`
+            - The type to identify strip of face elements as thin strips using shape formed by features around the strip of face elements.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CheckFaceDeviationParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/CheckFaceDeviationParams>
+    <span class="nf nf-cod-symbol_class"></span> CheckFaceDeviationResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/CheckFaceDeviationResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByFoldsParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByFoldsParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByFoldsResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByFoldsResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByIntersectionResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByIntersectionResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByInvalidNormalsResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByInvalidNormalsResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByQualityParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByQualityParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByQualityResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByQualityResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchBySelfIntersectionParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchBySelfIntersectionParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchBySpikeParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchBySpikeParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchBySpikeResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchBySpikeResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByThinStripParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByThinStripParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByThinStripResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchByThinStripResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchInfoByRegisterIdParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchInfoByRegisterIdParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchInfoByRegisterIdResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SearchInfoByRegisterIdResults>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceDiagnosticSummaryParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SurfaceDiagnosticSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceDiagnosticSummaryResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SurfaceDiagnosticSummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceQualityResult</api/ansys/meshing/prime/autogen/surfacesearchstructs/SurfaceQualityResult>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceQualitySummaryParams</api/ansys/meshing/prime/autogen/surfacesearchstructs/SurfaceQualitySummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceQualitySummaryResults</api/ansys/meshing/prime/autogen/surfacesearchstructs/SurfaceQualitySummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> ThinStripType</api/ansys/meshing/prime/autogen/surfacesearchstructs/ThinStripType>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

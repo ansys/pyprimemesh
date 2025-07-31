@@ -1,0 +1,138 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``surferstructs.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.autogen.surferstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: surferstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.AdvancedSurferSetup`
+            - Define advanced settings for remeshing operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.CreateShellBLResults`
+            - Results associated with the ShellBL mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.LocalSurferParams`
+            - Parameters to perform local surface remeshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.LocalSurferResults`
+            - Results associated with the local surface mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.ShellBLParams`
+            - Parameters used to generate ShellBL.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.SurferParams`
+            - Parameters used to generate surface mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs.SurferResults`
+            - Results associated with the surface mesh.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AdvancedSurferSetup</api/ansys/meshing/prime/autogen/surferstructs/AdvancedSurferSetup>
+    <span class="nf nf-cod-symbol_class"></span> CreateShellBLResults</api/ansys/meshing/prime/autogen/surferstructs/CreateShellBLResults>
+    <span class="nf nf-cod-symbol_class"></span> LocalSurferParams</api/ansys/meshing/prime/autogen/surferstructs/LocalSurferParams>
+    <span class="nf nf-cod-symbol_class"></span> LocalSurferResults</api/ansys/meshing/prime/autogen/surferstructs/LocalSurferResults>
+    <span class="nf nf-cod-symbol_class"></span> ShellBLParams</api/ansys/meshing/prime/autogen/surferstructs/ShellBLParams>
+    <span class="nf nf-cod-symbol_class"></span> SurferParams</api/ansys/meshing/prime/autogen/surferstructs/SurferParams>
+    <span class="nf nf-cod-symbol_class"></span> SurferResults</api/ansys/meshing/prime/autogen/surferstructs/SurferResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

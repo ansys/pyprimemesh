@@ -1,0 +1,120 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SizingType`
+===================
+
+
+.. py:class:: ansys.meshing.prime.SizingType
+
+
+
+   Sizing type decides the type of size control.
+
+
+
+
+.. py:currentmodule:: SizingType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~BOI`
+            - Denotes the size control type is body of influence.
+          * - :py:attr:`~CURVATURE`
+            - Denotes the size control type is curvature.
+          * - :py:attr:`~HARD`
+            - Denotes the size control type is hard.
+          * - :py:attr:`~MESHED`
+            - Denotes the size control type is meshed.
+          * - :py:attr:`~PROXIMITY`
+            - Denotes the size control type is proximity.
+          * - :py:attr:`~SOFT`
+            - Denotes the size control type is soft.
+          * - :py:attr:`~SOI`
+            - Denotes the size control type is sphere of influence.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SizingType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: BOI
+   :value: 5
+
+
+   Denotes the size control type is body of influence.
+
+.. py:attribute:: CURVATURE
+   :value: 0
+
+
+   Denotes the size control type is curvature.
+
+.. py:attribute:: HARD
+   :value: 2
+
+
+   Denotes the size control type is hard.
+
+.. py:attribute:: MESHED
+   :value: 4
+
+
+   Denotes the size control type is meshed.
+
+.. py:attribute:: PROXIMITY
+   :value: 1
+
+
+   Denotes the size control type is proximity.
+
+.. py:attribute:: SOFT
+   :value: 3
+
+
+   Denotes the size control type is soft.
+
+.. py:attribute:: SOI
+   :value: 6
+
+
+   Denotes the size control type is sphere of influence.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

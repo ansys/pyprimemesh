@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ProjectOnGeometryResults`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.ProjectOnGeometryResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, success: bool = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with projection of topofaces nodes on its geometry.
+
+   :param model: Model to create a ``ProjectOnGeometryResults`` object with default parameters.
+   :type model: Model
+   :param success: Defines the operation was successful or not.
+
+                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type success: bool, optional
+   :param error_code: Error code associated with failure of operation.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning code associated with operation.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type warning_codes: List[WarningCode], optional
+   :param json_data: JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> project_on_geometry_results = prime.ProjectOnGeometryResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ProjectOnGeometryResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of operation.
+          * - :py:attr:`~success`
+            - Defines the operation was successful or not.
+          * - :py:attr:`~warning_codes`
+            - Warning code associated with operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ProjectOnGeometryResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ProjectOnGeometryResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import ProjectOnGeometryResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: success
+   :type: bool
+
+
+   Defines the operation was successful or not.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning code associated with operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ProjectOnGeometryResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ProjectOnGeometryResults.print_default()
+
+
+.. py:method:: set_default(success: bool = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ProjectOnGeometryResults`` object.
+
+   :param success: Defines the operation was successful or not.
+   :type success: bool, optional
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning code associated with operation.
+   :type warning_codes: List[WarningCode], optional
+
+
+
+
+
+
+
+.. vale on

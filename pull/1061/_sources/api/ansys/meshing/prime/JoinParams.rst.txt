@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`JoinParams`
+===================
+
+
+.. py:class:: ansys.meshing.prime.JoinParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, tolerance: float = None, use_absolute_tolerance: bool = None, remesh: bool = None, match_angle: float = None, overlap_zone_name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used for join.
+
+   :param model: Model to create a ``JoinParams`` object with default parameters.
+   :type model: Model
+   :param tolerance: Overlap tolerance between overlapping zonelets.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: Tolerance provided is absolute value.
+   :type use_absolute_tolerance: bool, optional
+   :param remesh: Remesh at overlap surface boundary.
+   :type remesh: bool, optional
+   :param match_angle: Match angle determines face pair inclination for overlap consideration.
+   :type match_angle: float, optional
+   :param overlap_zone_name: Zone id to be assigned to overlap zonelets belonging to different zones.
+   :type overlap_zone_name: str, optional
+   :param json_data: JSON dictionary to create a ``JoinParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> join_params = prime.JoinParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: JoinParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~match_angle`
+            - Match angle determines face pair inclination for overlap consideration.
+          * - :py:attr:`~overlap_zone_name`
+            - Zone id to be assigned to overlap zonelets belonging to different zones.
+          * - :py:attr:`~remesh`
+            - Remesh at overlap surface boundary.
+          * - :py:attr:`~tolerance`
+            - Overlap tolerance between overlapping zonelets.
+          * - :py:attr:`~use_absolute_tolerance`
+            - Tolerance provided is absolute value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``JoinParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``JoinParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import JoinParams
+
+Property detail
+---------------
+
+.. py:property:: match_angle
+   :type: float
+
+
+   Match angle determines face pair inclination for overlap consideration.
+
+.. py:property:: overlap_zone_name
+   :type: str
+
+
+   Zone id to be assigned to overlap zonelets belonging to different zones.
+
+.. py:property:: remesh
+   :type: bool
+
+
+   Remesh at overlap surface boundary.
+
+.. py:property:: tolerance
+   :type: float
+
+
+   Overlap tolerance between overlapping zonelets.
+
+.. py:property:: use_absolute_tolerance
+   :type: bool
+
+
+   Tolerance provided is absolute value.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``JoinParams`` object.
+
+   .. rubric:: Examples
+
+   >>> JoinParams.print_default()
+
+
+.. py:method:: set_default(tolerance: float = None, use_absolute_tolerance: bool = None, remesh: bool = None, match_angle: float = None, overlap_zone_name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``JoinParams`` object.
+
+   :param tolerance: Overlap tolerance between overlapping zonelets.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: Tolerance provided is absolute value.
+   :type use_absolute_tolerance: bool, optional
+   :param remesh: Remesh at overlap surface boundary.
+   :type remesh: bool, optional
+   :param match_angle: Match angle determines face pair inclination for overlap consideration.
+   :type match_angle: float, optional
+   :param overlap_zone_name: Zone id to be assigned to overlap zonelets belonging to different zones.
+   :type overlap_zone_name: str, optional
+
+
+
+
+
+
+
+.. vale on

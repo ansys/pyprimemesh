@@ -1,0 +1,6 @@
+VT\_INVALIDINPUT
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_INVALIDINPUT

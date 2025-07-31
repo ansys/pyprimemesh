@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`StitchType`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.StitchType
+
+
+
+   Stitch type depending on nature of surface boundary edges to be stitched.
+
+
+
+
+.. py:currentmodule:: StitchType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALLALL`
+            - Stitch surfaces at boundary edges.
+          * - :py:attr:`~FREEFREE`
+            - Stitch surfaces at free boundary edges.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import StitchType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALLALL
+   :value: 0
+
+
+   Stitch surfaces at boundary edges.
+
+.. py:attribute:: FREEFREE
+   :value: 1
+
+
+   Stitch surfaces at free boundary edges.
+
+
+
+
+
+
+
+.. vale on

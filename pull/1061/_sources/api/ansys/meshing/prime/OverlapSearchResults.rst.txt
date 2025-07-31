@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`OverlapSearchResults`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.OverlapSearchResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_pairs: int = None, overlap_pairs: ansys.meshing.prime.params.primestructs.List[OverlapPairs] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Provides ids of a pair of overlapping face zonelets.
+
+   :param model: Model to create a ``OverlapSearchResults`` object with default parameters.
+   :type model: Model
+   :param n_pairs: Number of pairs.
+   :type n_pairs: int, optional
+   :param overlap_pairs: Ids corresponding to pairs of overlapping face zonelets.
+   :type overlap_pairs: List[OverlapPairs], optional
+   :param error_code: Error Code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``OverlapSearchResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> overlap_search_results = prime.OverlapSearchResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: OverlapSearchResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error Code associated with failure of operation.
+          * - :py:attr:`~n_pairs`
+            - Number of pairs.
+          * - :py:attr:`~overlap_pairs`
+            - Ids corresponding to pairs of overlapping face zonelets.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``OverlapSearchResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``OverlapSearchResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import OverlapSearchResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error Code associated with failure of operation.
+
+.. py:property:: n_pairs
+   :type: int
+
+
+   Number of pairs.
+
+.. py:property:: overlap_pairs
+   :type: ansys.meshing.prime.params.primestructs.List[OverlapPairs]
+
+
+   Ids corresponding to pairs of overlapping face zonelets.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``OverlapSearchResults`` object.
+
+   .. rubric:: Examples
+
+   >>> OverlapSearchResults.print_default()
+
+
+.. py:method:: set_default(n_pairs: int = None, overlap_pairs: ansys.meshing.prime.params.primestructs.List[OverlapPairs] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``OverlapSearchResults`` object.
+
+   :param n_pairs: Number of pairs.
+   :type n_pairs: int, optional
+   :param overlap_pairs: Ids corresponding to pairs of overlapping face zonelets.
+   :type overlap_pairs: List[OverlapPairs], optional
+   :param error_code: Error Code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

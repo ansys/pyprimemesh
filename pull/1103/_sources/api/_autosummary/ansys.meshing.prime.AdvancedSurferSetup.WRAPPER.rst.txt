@@ -1,0 +1,6 @@
+WRAPPER
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: AdvancedSurferSetup.WRAPPER

@@ -1,0 +1,313 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``surfaceutilitystructs.py`` module
+=======================================
+
+.. py:module:: ansys.meshing.prime.autogen.surfaceutilitystructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: surfaceutilitystructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessParams`
+            - Parameters to add thickness for a given plane.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults`
+            - Result structure associated with add thickness zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.BOIType`
+            - BOI type for BOI creation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.ContactPatchAxis`
+            - Flow or wake direction for BOI creation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIParams`
+            - Parameters used for BOI surface creation in the given axis.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIResults`
+            - Result structure associated with BOI creation of zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.CreateCapParams`
+            - Parameters to create cap on face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.CreateCapResults`
+            - Results associated with create cap on face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams`
+            - Parameters used for contact patch creation in the given axis.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchResults`
+            - Result structure associated with created contact patch zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.DeleteUnwettedParams`
+            - DeleteUnwettedParams defines parameters for delete unwetted surfaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.DeleteUnwettedResult`
+            - Results structure associated with delete unwetted surfaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.FillHolesAtPlaneParams`
+            - Parameters to fill holes at given plane.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.FillHolesAtPlaneResults`
+            - Results associated with fill holes at given plane.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.FixInvalidNormalNodeParams`
+            - Parameters to fix invalid average face normal at nodes by creating a nugget.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.FixInvalidNormalNodeResults`
+            - Results associated with fix invalid average face normal at nodes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.FlowDirection`
+            - Flow or wake direction for BOI creation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.ProjectOnGeometryParams`
+            - Parameters used to project topoface nodes on associated geometry.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.ProjectOnGeometryResults`
+            - Results associated with projection of topofaces nodes on its geometry.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.RefineAtContactsParams`
+            - Parameters to refine face elements in contact.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.RefineAtContactsResults`
+            - Results structure associated with refine face elements in contact.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.ResolveIntersectionResult`
+            - Result structure associated with resolve intersections operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.ResolveIntersectionsParams`
+            - ResolveIntersectionsParams define parameters for resolve intersections.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.SmoothDihedralFaceNodesParams`
+            - Parameters to smooth dihedral face nodes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.SmoothDihedralFaceNodesResults`
+            - Results structure associated with smooth dihedral face nodes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.SmoothType`
+            - Indicates the the type of operation to be performed during the smooth dihedral face nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.StretchFreeBoundariesParams`
+            - Parameters used for stretch free boundaries operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.StretchFreeBoundariesResults`
+            - Results associated with stretch free boundaries operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.SubtractZoneletsParams`
+            - Parameters to use when subtracting zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.SubtractZoneletsResults`
+            - Results structure associated with subtracting zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.TriangulateParams`
+            - Provides the parameters used for triangulation operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs.TriangulateResults`
+            - Results associated with triangulate operation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AddThicknessParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/AddThicknessParams>
+    <span class="nf nf-cod-symbol_class"></span> AddThicknessResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/AddThicknessResults>
+    <span class="nf nf-cod-symbol_class"></span> BOIType</api/ansys/meshing/prime/autogen/surfaceutilitystructs/BOIType>
+    <span class="nf nf-cod-symbol_class"></span> ContactPatchAxis</api/ansys/meshing/prime/autogen/surfaceutilitystructs/ContactPatchAxis>
+    <span class="nf nf-cod-symbol_class"></span> CreateBOIParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/CreateBOIParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateBOIResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/CreateBOIResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateCapParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/CreateCapParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateCapResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/CreateCapResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateContactPatchParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/CreateContactPatchParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateContactPatchResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/CreateContactPatchResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteUnwettedParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/DeleteUnwettedParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteUnwettedResult</api/ansys/meshing/prime/autogen/surfaceutilitystructs/DeleteUnwettedResult>
+    <span class="nf nf-cod-symbol_class"></span> FillHolesAtPlaneParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/FillHolesAtPlaneParams>
+    <span class="nf nf-cod-symbol_class"></span> FillHolesAtPlaneResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/FillHolesAtPlaneResults>
+    <span class="nf nf-cod-symbol_class"></span> FixInvalidNormalNodeParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/FixInvalidNormalNodeParams>
+    <span class="nf nf-cod-symbol_class"></span> FixInvalidNormalNodeResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/FixInvalidNormalNodeResults>
+    <span class="nf nf-cod-symbol_class"></span> FlowDirection</api/ansys/meshing/prime/autogen/surfaceutilitystructs/FlowDirection>
+    <span class="nf nf-cod-symbol_class"></span> ProjectOnGeometryParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/ProjectOnGeometryParams>
+    <span class="nf nf-cod-symbol_class"></span> ProjectOnGeometryResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/ProjectOnGeometryResults>
+    <span class="nf nf-cod-symbol_class"></span> RefineAtContactsParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/RefineAtContactsParams>
+    <span class="nf nf-cod-symbol_class"></span> RefineAtContactsResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/RefineAtContactsResults>
+    <span class="nf nf-cod-symbol_class"></span> ResolveIntersectionResult</api/ansys/meshing/prime/autogen/surfaceutilitystructs/ResolveIntersectionResult>
+    <span class="nf nf-cod-symbol_class"></span> ResolveIntersectionsParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/ResolveIntersectionsParams>
+    <span class="nf nf-cod-symbol_class"></span> SmoothDihedralFaceNodesParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/SmoothDihedralFaceNodesParams>
+    <span class="nf nf-cod-symbol_class"></span> SmoothDihedralFaceNodesResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/SmoothDihedralFaceNodesResults>
+    <span class="nf nf-cod-symbol_class"></span> SmoothType</api/ansys/meshing/prime/autogen/surfaceutilitystructs/SmoothType>
+    <span class="nf nf-cod-symbol_class"></span> StretchFreeBoundariesParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/StretchFreeBoundariesParams>
+    <span class="nf nf-cod-symbol_class"></span> StretchFreeBoundariesResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/StretchFreeBoundariesResults>
+    <span class="nf nf-cod-symbol_class"></span> SubtractZoneletsParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/SubtractZoneletsParams>
+    <span class="nf nf-cod-symbol_class"></span> SubtractZoneletsResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/SubtractZoneletsResults>
+    <span class="nf nf-cod-symbol_class"></span> TriangulateParams</api/ansys/meshing/prime/autogen/surfaceutilitystructs/TriangulateParams>
+    <span class="nf nf-cod-symbol_class"></span> TriangulateResults</api/ansys/meshing/prime/autogen/surfaceutilitystructs/TriangulateResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

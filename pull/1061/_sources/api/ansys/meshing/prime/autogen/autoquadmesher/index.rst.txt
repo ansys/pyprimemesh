@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``autoquadmesher.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.autogen.autoquadmesher
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: autoquadmesher
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesher.AutoQuadMesher`
+            - Generate full quad mesh.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AutoQuadMesher</api/ansys/meshing/prime/autogen/autoquadmesher/AutoQuadMesher>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

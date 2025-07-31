@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``volumesweeperstructs.py`` module
+======================================
+
+.. py:module:: ansys.meshing.prime.autogen.volumesweeperstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: volumesweeperstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerParams`
+            - Input parameters associated with the mesh stacker operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerResults`
+            - Results associated with the mesh stacker operations.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> MeshStackerParams</api/ansys/meshing/prime/autogen/volumesweeperstructs/MeshStackerParams>
+    <span class="nf nf-cod-symbol_class"></span> MeshStackerResults</api/ansys/meshing/prime/autogen/volumesweeperstructs/MeshStackerResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

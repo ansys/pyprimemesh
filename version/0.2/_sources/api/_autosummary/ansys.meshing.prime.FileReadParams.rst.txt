@@ -1,0 +1,30 @@
+FileReadParams
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileReadParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileReadParams.print_default
+      FileReadParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FileReadParams.append
+   
+   

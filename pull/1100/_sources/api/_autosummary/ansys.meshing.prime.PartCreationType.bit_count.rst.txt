@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PartCreationType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using PartCreationType.bit_count
+
+   ansys.meshing.prime.PartCreationType.bit_count

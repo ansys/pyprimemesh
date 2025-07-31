@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperPatchFlowRegionsParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using WrapperPatchFlowRegionsParams.print_default
+
+   ansys.meshing.prime.WrapperPatchFlowRegionsParams.print_default

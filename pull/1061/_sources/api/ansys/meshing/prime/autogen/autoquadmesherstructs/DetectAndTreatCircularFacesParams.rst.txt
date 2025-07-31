@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DetectAndTreatCircularFacesParams`
+==========================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.DetectAndTreatCircularFacesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, edge_mesh_constant_size: float = None, surface_mesh_constant_size: float = None, merge_edge_allow_self_close: bool = None, merge_face_normals_angle: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for detect and treat circular faces operation.
+
+   :param model: Model to create a ``DetectAndTreatCircularFacesParams`` object with default parameters.
+   :type model: Model
+   :param edge_mesh_constant_size: Constant size used for edge meshing.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_mesh_constant_size: float, optional
+   :param surface_mesh_constant_size: Constant size used for surface meshing.
+
+                                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type surface_mesh_constant_size: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_edge_allow_self_close: bool, optional
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_face_normals_angle: float, optional
+   :param json_data: JSON dictionary to create a ``DetectAndTreatCircularFacesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> detect_and_treat_circular_faces_params = prime.DetectAndTreatCircularFacesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DetectAndTreatCircularFacesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~edge_mesh_constant_size`
+            - Constant size used for edge meshing.
+          * - :py:attr:`~merge_edge_allow_self_close`
+            - Option for merging self-closing edge loops.
+          * - :py:attr:`~merge_face_normals_angle`
+            - Merge faces when the normal angle between the faces is below the provided value.
+          * - :py:attr:`~surface_mesh_constant_size`
+            - Constant size used for surface meshing.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DetectAndTreatCircularFacesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DetectAndTreatCircularFacesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import DetectAndTreatCircularFacesParams
+
+Property detail
+---------------
+
+.. py:property:: edge_mesh_constant_size
+   :type: float
+
+
+   Constant size used for edge meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_edge_allow_self_close
+   :type: bool
+
+
+   Option for merging self-closing edge loops.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_face_normals_angle
+   :type: float
+
+
+   Merge faces when the normal angle between the faces is below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: surface_mesh_constant_size
+   :type: float
+
+
+   Constant size used for surface meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DetectAndTreatCircularFacesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DetectAndTreatCircularFacesParams.print_default()
+
+
+.. py:method:: set_default(edge_mesh_constant_size: float = None, surface_mesh_constant_size: float = None, merge_edge_allow_self_close: bool = None, merge_face_normals_angle: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DetectAndTreatCircularFacesParams`` object.
+
+   :param edge_mesh_constant_size: Constant size used for edge meshing.
+   :type edge_mesh_constant_size: float, optional
+   :param surface_mesh_constant_size: Constant size used for surface meshing.
+   :type surface_mesh_constant_size: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+   :type merge_edge_allow_self_close: bool, optional
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+   :type merge_face_normals_angle: float, optional
+
+
+
+
+
+
+
+.. vale on

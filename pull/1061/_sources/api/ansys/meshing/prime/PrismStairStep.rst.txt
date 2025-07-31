@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PrismStairStep`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.PrismStairStep(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, check_proximity: bool = None, gap_factor_scale: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control prism stairsteping.
+
+   :param model: Model to create a ``PrismStairStep`` object with default parameters.
+   :type model: Model
+   :param check_proximity: Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+   :type check_proximity: bool, optional
+   :param gap_factor_scale: Scale factor for prism proximity detection gap factor.
+   :type gap_factor_scale: float, optional
+   :param json_data: JSON dictionary to create a ``PrismStairStep`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> prism_stair_step = prime.PrismStairStep(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PrismStairStep
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~check_proximity`
+            - Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+          * - :py:attr:`~gap_factor_scale`
+            - Scale factor for prism proximity detection gap factor.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PrismStairStep`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PrismStairStep`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import PrismStairStep
+
+Property detail
+---------------
+
+.. py:property:: check_proximity
+   :type: bool
+
+
+   Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+
+.. py:property:: gap_factor_scale
+   :type: float
+
+
+   Scale factor for prism proximity detection gap factor.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PrismStairStep`` object.
+
+   .. rubric:: Examples
+
+   >>> PrismStairStep.print_default()
+
+
+.. py:method:: set_default(check_proximity: bool = None, gap_factor_scale: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PrismStairStep`` object.
+
+   :param check_proximity: Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
+   :type check_proximity: bool, optional
+   :param gap_factor_scale: Scale factor for prism proximity detection gap factor.
+   :type gap_factor_scale: float, optional
+
+
+
+
+
+
+
+.. vale on
