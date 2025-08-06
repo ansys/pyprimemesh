@@ -32,6 +32,9 @@ from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.shellblcontrol import ShellBLControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
+from ansys.meshing.prime.core.featurerecoverycontrol import (
+    FeatureRecoveryControl as _FRControl,
+)
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.prismcontrol import PrismControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
@@ -64,6 +67,7 @@ class ControlData(_ControlData):
         self._wrapper_controls = []
         self._mz_controls = []
         self._size_controls = []
+        self._feature_controls = []
         self._prism_controls = []
         self._thin_volume_controls = []
         self._volume_controls = []
@@ -143,6 +147,28 @@ class ControlData(_ControlData):
         new_size_control = SizeControl(self._model, res[0], res[1], res[2])
         self._size_controls.append(new_size_control)
         return new_size_control
+
+    def create_feature_recovery_control(self) -> _FRControl:
+        """Create Feature Recovery control for wrap.
+
+        Returns
+        -------
+        _FRControl
+            Returns the feature recovery control.
+
+        Notes
+        -----
+        An empty feature recovery control is created on calling this API.
+
+        Examples
+        --------
+        >>> feature_recovery_control = model.control_data.create_feature_recovery_control()
+
+        """
+        res = _ControlData.create_feature_recovery_control(self)
+        new_feature_recovery_control = _FRControl(self._model, res[0], res[1], res[2])
+        self._feature_controls.append(new_feature_recovery_control)
+        return new_feature_recovery_control
 
     def create_prism_control(self) -> PrismControl:
         """Create a prism control.
@@ -261,6 +287,29 @@ class ControlData(_ControlData):
                 return size_control
         return None
 
+    def get_feature_recovery_control_by_name(self, name: str) -> _FRControl:
+        """Get a feature recovery control by name.
+
+        Parameters
+        ----------
+        name : str
+            Name of the feature recovery control.
+
+        Returns
+        -------
+        _FRControl
+            Feature recovery control.
+
+        Examples
+        --------
+        >>> fr_control = model.control_data.get_feature_recovery_control_by_name("_FRControl-1")
+
+        """
+        for feature_recovery_control in self._feature_controls:
+            if feature_recovery_control.name == name:
+                return feature_recovery_control
+        return None
+
     def get_prism_control_by_name(self, name: str) -> PrismControl:
         """Get a prism control by name.
 
@@ -356,6 +405,10 @@ class ControlData(_ControlData):
                     if size_control.id == id:
                         self._size_controls.remove(size_control)
                         break
+                for feature_recovery_control in self._feature_controls:
+                    if feature_recovery_control.id == id:
+                        self._feature_controls.remove(feature_recovery_control)
+                        break
                 for wrapper_control in self._wrapper_controls:
                     if wrapper_control.id == id:
                         self._wrapper_controls.remove(wrapper_control)
@@ -388,6 +441,9 @@ class ControlData(_ControlData):
 
     def _update_size_controls(self, c_data: List):
         self._size_controls = [SizeControl(self._model, c[0], c[1], c[2]) for c in c_data]
+
+    def _update_feature_recovery_controls(self, c_data: List):
+        self._feature_controls = [_FRControl(self._model, c[0], c[1], c[2]) for c in c_data]
 
     def _update_prism_controls(self, c_data: List):
         self._prism_controls = [PrismControl(self._model, c[0], c[1], c[2]) for c in c_data]
@@ -467,6 +523,21 @@ class ControlData(_ControlData):
             >>> size_controls = model.control_data.size_controls
         """
         return self._size_controls
+
+    @property
+    def feature_recovery_controls(self) -> List[_FRControl]:
+        """Get the feature recovery controls.
+
+        Returns
+        -------
+        List[SizeControl]
+            List of feature recovery controls.
+
+        Examples
+        --------
+            >>> feature_recovery_controls = model.control_data.feature_recovery_controls
+        """
+        return self._feature_controls
 
     @property
     def volume_controls(self) -> List[VolumeControl]:
