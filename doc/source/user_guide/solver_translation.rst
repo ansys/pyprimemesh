@@ -68,6 +68,9 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 
     .. figure:: ../images/fe2ansys_cdb_export.png
 
-    CDB Export summary provides information about the number of error and warnings occured while exporting the CDB file and the maximum 
-    number of node ids and elements ids that are exported.
+    CDB Export summary provides information about:
+
+    - Number of error and warnings that occured while exporting the CDB file.
+
+    - Maximum number of node ids and elements ids that are exported.
     
