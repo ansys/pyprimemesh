@@ -31,6 +31,25 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 
     .. figure:: ../images/fe2ansys_abaqus_import.png
 
+    Here, the import summary provides information on the following:
+
+    - Total number of keywords in the imported file.
+
+    - Total number of processed keywords.
+
+    - Total number of skipped or unprocessed keywords.
+
+    - Number of imported nodes.
+
+    - Number of imported elements(solid, shell, beam and more).
+
+    - Number and type of skipped elements.
+
+    - Ids of imported nodes and elements.
+
+    - Number of errors and warnings that occurred while importing the file.
+
+
 2.	Export the CDB file.
 
     .. code-block:: python
@@ -48,3 +67,7 @@ The following example shows the translation of Abaqus INP file to CDB file forma
     result of the export process in json format. This writes the CDB file to the specified location.
 
     .. figure:: ../images/fe2ansys_cdb_export.png
+
+    CDB Export summary provides information about the number of error and warnings occured while exporting the CDB file and the maximum 
+    number of node ids and elements ids that are exported.
+    
