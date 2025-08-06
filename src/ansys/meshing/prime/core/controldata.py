@@ -32,10 +32,12 @@ from ansys.meshing.prime.autogen.multizonecontrol import MultiZoneControl
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.shellblcontrol import ShellBLControl
 from ansys.meshing.prime.autogen.thinvolumecontrol import ThinVolumeControl
+from ansys.meshing.prime.core.featurerecoverycontrol import (
+    FeatureRecoveryControl as _FRControl,
+)
 from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
 from ansys.meshing.prime.core.prismcontrol import PrismControl
 from ansys.meshing.prime.core.sizecontrol import SizeControl
-from ansys.meshing.prime.core.featurerecoverycontrol import FeatureRecoveryControl as _FRControl
 from ansys.meshing.prime.core.volumecontrol import VolumeControl
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
 from ansys.meshing.prime.params.primestructs import SizingType
@@ -147,8 +149,7 @@ class ControlData(_ControlData):
         return new_size_control
 
     def create_feature_recovery_control(self) -> _FRControl:
-        """ Creates Feature Recovery control for wrap.
-
+        """Create Feature Recovery control for wrap.
 
         Returns
         -------
