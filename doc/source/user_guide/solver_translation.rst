@@ -70,7 +70,7 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 
     CDB Export summary provides information about:
 
-    - Number of error and warnings that occured while exporting the CDB file.
+    - Number of error and warnings that occurred while exporting the CDB file.
 
     - Maximum number of node ids and elements ids that are exported.
     
