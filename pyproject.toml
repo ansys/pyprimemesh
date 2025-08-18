@@ -37,7 +37,7 @@ tests = [
   "ansys-tools-visualization-interface==0.11.0",
   "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "pytest-pyvista==0.1.9",
+  "pytest-pyvista==0.2.0",
   "pytest-xvfb==3.1.1",
   "pyvista[trame]==0.45.3",
 ]
@@ -46,7 +46,7 @@ doc = [
   "ansys-tools-visualization-interface==0.11.0",
   "joblib==1.5.1",
   "jupyter-sphinx==0.5.3",
-  "numpydoc==1.8.0",
+  "numpydoc==1.9.0",
   "sphinx==8.2.3",
   "sphinx_design==0.6.1",
   "pyvista==0.45.3",
