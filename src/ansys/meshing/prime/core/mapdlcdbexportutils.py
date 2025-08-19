@@ -889,12 +889,14 @@ class _MaterialProcessor:
             hyperfoam_data = self._hyperfoam_with_test_data(n, uniaxial_test_data, poisson, mat_id)
         else:
             hyperfoam_data = self._hyperfoam_with_coeffs(n, data, mat_id)
-        self._logger.warning(f"{property_dict}")
-        self._logger.warning(f"{self._raw_materials_data[material]['UNIAXIAL TEST DATA']}")
         return hyperfoam_data
 
     def _hyperfoam_with_coeffs(self, n, data, mat_id):
         hyperfoam_coeff_data = ''
+        data = {
+            k: [float(x) for x in v if x is not None] if v is not None else None
+            for k, v in data.items()
+        }
         u1 = data['u1']
         a1 = data['a1']
         v1 = [0.0] * len(u1)
@@ -957,7 +959,7 @@ class _MaterialProcessor:
             if n > 4:
                 u5a = 2 * u5[i] / a5[i]
                 a5a = a5[i]
-                hyperfoam_coeff_data += f", {u5a}, {a6a}"
+                hyperfoam_coeff_data += f", {u5a}, {a5a}"
             if n > 5:
                 u6a = 2 * u6[i] / a6[i]
                 a6a = a6[i]
