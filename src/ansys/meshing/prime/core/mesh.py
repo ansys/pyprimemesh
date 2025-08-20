@@ -326,7 +326,6 @@ class Mesh(MeshInfo):
         fcolor = np.array(self.get_face_color(part, ColorByType.ZONE))
         colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
-        # surf.disp_mesh = self
         has_mesh = True
         if face_facet_res.topo_face_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOFACE
@@ -388,7 +387,6 @@ class Mesh(MeshInfo):
         ecolor = np.array(self.get_edge_color(edge_facet_res, index))
         colors = np.tile(ecolor, (n_edges, 1))
         edge["colors"] = colors
-        # edge.disp_mesh = self
         if edge.n_points > 0:
             return MeshObjectPlot(part, edge)
 
@@ -416,7 +414,6 @@ class Mesh(MeshInfo):
         fcolor = np.array([0, 0, 255])
         colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
-        # surf.disp_mesh = self
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
@@ -444,7 +441,6 @@ class Mesh(MeshInfo):
         fcolor = np.array(color_matrix[1])
         colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
-        # surf.disp_mesh = self
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
