@@ -664,9 +664,17 @@ class _MaterialProcessor:
         '_property_function_map',
         '_model',
         '_logger',
+        '_skip_comments',
     )
 
-    def __init__(self, model: prime.Model, raw_materials_data, zone_data, hm_comments=False):
+    def __init__(
+        self,
+        model: prime.Model,
+        raw_materials_data,
+        zone_data,
+        hm_comments=False,
+        skip_comments=True,
+    ):
         self._raw_materials_data = raw_materials_data
         self._zone_data = zone_data
         self._mat_id = 0
@@ -683,9 +691,11 @@ class _MaterialProcessor:
             'DAMAGE EVOLUTION': self._process_damage_evolution_data,
             'DAMAGE INITIATION': self._process_damage_initiation_data,
             'HYPERFOAM': self._process_hyperfoam_data,
+            'VISCOELASTIC': self._process_viscoelastic_data,
         }
         self._model = model
         self._logger = model.python_logger
+        self._skip_comments = skip_comments
 
     def _map_zone_type_with_material(self):
         if self._zone_data is None:
@@ -763,10 +773,11 @@ class _MaterialProcessor:
             'DAMAGE INITIATION',
             'DAMAGE EVOLUTION',
             'HYPERFOAM',
+            'VISCOELASTIC',
         ]
         # self._logger.info(mat_data)
         mapdl_text_data = ""
-        hm_comment = self._enable_hm_comments
+        hm_comment = self._enable_hm_comments and self._skip_comments is False
         if hm_comment:
             mapdl_text_data += "!!HMNAME MAT \n"
             mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
@@ -865,6 +876,108 @@ class _MaterialProcessor:
             damage_init_data += "\n"
         return damage_init_data
 
+    def get_weight_factor(self, mat_id, material):
+        weight_sum = 0
+        weight_factor = 1
+        all_mat_props = self._raw_materials_data[material]
+        if 'VISCOELASTIC' not in all_mat_props:
+            return weight_factor
+        mat_props = all_mat_props["VISCOELASTIC"]
+        if (
+            mat_props["Parameters"]
+            and "TIME" in mat_props["Parameters"]
+            and mat_props["Parameters"]["TIME"] == "PRONY"
+        ):
+            g = mat_props["Data"]['g']
+            if 'k' in mat_props["Data"]:
+                k = mat_props["Data"]['k']
+            else:
+                k = [0.0] * len(g)
+            t = mat_props["Data"]['t']
+            plastic_data = {}
+            for pnt in zip(g, k, t):
+                if float(pnt[1]) in plastic_data.keys():
+                    plastic_data[float(pnt[1])].append([float(pnt[0]), float(pnt[2])])
+                else:
+                    plastic_data[float(pnt[1])] = [[float(pnt[0]), float(pnt[2])]]
+
+            if len(plastic_data.keys()) > 1:
+                self._logger.warning(
+                    f"More than one temperature data is provided in the material "
+                    f"(ID : {mat_id} Name: {material}). Please verify the material data."
+                )
+            for tb_temp, data_temp in plastic_data.items():
+
+                data_for_temp = sorted(data_temp, key=lambda x: x[0])
+                for count, plst_data in enumerate(data_for_temp):
+                    weight_sum += float(plst_data[0])
+
+            if weight_sum > 1:
+                self._logger.warning(
+                    f"Weight sum of the hyperleastic material {material} is more than 1"
+                )
+            weight_factor = 1 / (1 - weight_sum)
+            # self._logger.info(f"weight_factor1 {weight_factor}")
+            return weight_factor
+        else:
+            self._logger.warning(
+                f"The visco-elasticity available in the material "
+                f"(ID : {mat_id} Name: {material}) is not translated. "
+                f"Only Prony series is supported."
+            )
+            return weight_factor
+
+    def _process_viscoelastic_data(self, property_dict, material, mat_id):
+        viscoelastic_data = ''
+
+        if (
+            property_dict["Parameters"]
+            and "TIME" in property_dict["Parameters"]
+            and property_dict["Parameters"]["TIME"] == "PRONY"
+        ):
+            g = property_dict["Data"]['g']
+            if 'k' in property_dict["Data"]:
+                k = property_dict["Data"]['k']
+            else:
+                k = [0.0] * len(g)
+            if 't' in property_dict["Data"]:
+                t = property_dict["Data"]['t']
+            else:
+                t = [0.0] * len(g)
+            plastic_data = {}
+            for pnt in zip(g, k, t):
+                if float(pnt[1]) in plastic_data.keys():
+                    plastic_data[float(pnt[1])].append([float(pnt[0]), float(pnt[2])])
+                else:
+                    plastic_data[float(pnt[1])] = [[float(pnt[0]), float(pnt[2])]]
+
+            if len(plastic_data.keys()) > 1:
+                self._logger.warning(
+                    f"More than one temperature data is provided in the material "
+                    f"(ID : {mat_id} Name: {mat_name}). Please verify the material data."
+                )
+
+            key = list(plastic_data.keys())[0]
+            data = plastic_data[key]
+
+            viscoelastic_data += f"TB, PRONY, {mat_id},,,SHEAR\n"
+            for g, t in data:
+                viscoelastic_data += f"TBDATA,, {g}, {t}\n"
+            viscoelastic_data += "\n"
+
+            viscoelastic_data += f"TB, PRONY, {mat_id},,,BULK\n"
+            for g, t in data:
+                viscoelastic_data += f"TBDATA,, {g}, {t}\n"
+            viscoelastic_data += "\n"
+
+        else:
+            self._logger.warning(
+                f"Only TIME=PRONY is processed for VISCOELASTIC material. "
+                f"Material {material} is not processed completly."
+            )
+
+        return viscoelastic_data
+
     def _process_hyperfoam_data(self, property_dict, material, mat_id):
         hyperfoam_data = ''
         data = []
@@ -888,10 +1001,13 @@ class _MaterialProcessor:
                     ]
             hyperfoam_data = self._hyperfoam_with_test_data(n, uniaxial_test_data, poisson, mat_id)
         else:
-            hyperfoam_data = self._hyperfoam_with_coeffs(n, data, mat_id)
+            weight_factor = 1
+            if not ('MODULI' in parameters and parameters['MODULI'] == 'INSTANTANEOUS'):
+                weight_factor = self.get_weight_factor(mat_id, material)
+            hyperfoam_data = self._hyperfoam_with_coeffs(n, data, mat_id, weight_factor)
         return hyperfoam_data
 
-    def _hyperfoam_with_coeffs(self, n, data, mat_id):
+    def _hyperfoam_with_coeffs(self, n, data, mat_id, weight_factor):
         hyperfoam_coeff_data = ''
         data = {
             k: [float(x) for x in v if x is not None] if v is not None else None
@@ -936,32 +1052,32 @@ class _MaterialProcessor:
         if 'Temperature' in data:
             temperature = data['Temperature']
 
-        hyperfoam_coeff_data += f"TB, HYPE, {mat_id},,{n},FOAM"
+        hyperfoam_coeff_data += f"TB, HYPE, {mat_id},,{n},FOAM\n"
         for i in range(len(temperature)):
             if temperature[i] is not None:
                 hyperfoam_coeff_data += f"TBTEMP,{temperature[i]}\n"
-            u1a = 2 * u1[i] / a1[i]
+            u1a = 2 * u1[i] / a1[i] * weight_factor
             a1a = a1[i]
             hyperfoam_coeff_data += f"TBDATA, 1, {u1a}, {a1a}"
             if n > 1:
-                u2a = 2 * u2[i] / a2[i]
+                u2a = 2 * u2[i] / a2[i] * weight_factor
                 a2a = a2[i]
                 hyperfoam_coeff_data += f", {u2a}, {a2a}"
             if n > 2:
-                u3a = 2 * u3[i] / a3[i]
+                u3a = 2 * u3[i] / a3[i] * weight_factor
                 a3a = a3[i]
                 hyperfoam_coeff_data += f", {u3a}, {a3a}"
             if n > 3:
-                u4a = 2 * u4[i] / a4[i]
+                u4a = 2 * u4[i] / a4[i] * weight_factor
                 a4a = a4[i]
                 hyperfoam_coeff_data += "\n"
                 hyperfoam_coeff_data += f"TBDATA, 7, {u4a}, {a4a}"
             if n > 4:
-                u5a = 2 * u5[i] / a5[i]
+                u5a = 2 * u5[i] / a5[i] * weight_factor
                 a5a = a5[i]
                 hyperfoam_coeff_data += f", {u5a}, {a5a}"
             if n > 5:
-                u6a = 2 * u6[i] / a6[i]
+                u6a = 2 * u6[i] / a6[i] * weight_factor
                 a6a = a6[i]
                 hyperfoam_coeff_data += f", {u6a}, {a6a}"
             hyperfoam_coeff_data += "\n"
@@ -983,6 +1099,7 @@ class _MaterialProcessor:
             if n > 5:
                 b6a = v6[i] / (1 - 2 * v6[i])
                 hyperfoam_coeff_data += f", {b6a}"
+            hyperfoam_coeff_data += "\n"
             hyperfoam_coeff_data += "\n"
         return hyperfoam_coeff_data
 
@@ -1198,7 +1315,7 @@ class _MaterialProcessor:
             if 'ALPHA' in property_dict['Parameters']:
                 damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
             if float(property_dict['Parameters']['BETA']) != 0.0:
-                self._logger.warning(f"Parameter {'BETA'} on *DAMPING is not processed.")
+                damping_data += f"MP, BETD, {mat_id}, {property_dict['Parameters']['BETA']} \n"
             if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
                 self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
         damping_data += f"\n"
@@ -1375,7 +1492,13 @@ class _MaterialProcessor:
     def _process_hyperelastic_data(self, property_dict, material, mat_id):
         hyperelastic_data = ''
         param_keys = property_dict["Parameters"].keys()
+        parameters = property_dict["Parameters"]
         data = []
+
+        weight_factor = 1
+        if not ('MODULI' in parameters and parameters['MODULI'] == 'INSTANTANEOUS'):
+            weight_factor = self.get_weight_factor(mat_id, material)
+
         if 'Data' in property_dict and property_dict['Data'] is not None:
             data = property_dict['Data']
         if (
@@ -1425,6 +1548,10 @@ class _MaterialProcessor:
                 temp_data_points = 1
                 temperature = [None]
             number_of_constants = 3
+            data = {
+                k: [float(x) for x in v if x is not None] if v is not None else None
+                for k, v in data.items()
+            }
             if 'C10' in data.keys():
                 number_of_constants = 1
                 c10 = data['C10']
@@ -1451,12 +1578,14 @@ class _MaterialProcessor:
                 if temperature[i] is not None:
                     hyperelastic_data += f"TBTEMP, {temperature[i]}\n"
                 if number_of_constants == 1:
-                    hyperelastic_data += f"TBDATA, 1, {c10[i]}, {d1[i]}\n"
+                    hyperelastic_data += f"TBDATA, 1, {c10[i]*weight_factor}, {d1[i]}\n"
                 elif number_of_constants == 2:
-                    hyperelastic_data += f"TBDATA, 1, {c10[i]}, {c20[i]}, {d1[i]}, {d2[i]}\n"
+                    hyperelastic_data += f"TBDATA, 1, {c10[i]*weight_factor}, "
+                    hyperelastic_data += f"{c20[i]*weight_factor}, {d1[i]}, {d2[i]}\n"
                 elif number_of_constants == 3:
                     hyperelastic_data += (
-                        f"TBDATA, 1, {c10[i]}, {c20[i]}, {c30[i]}, {d1[i]}, {d2[i]}, {d3[i]}\n"
+                        f"TBDATA, 1, {c10[i]*weight_factor}, {c20[i]*weight_factor}, "
+                        f"{c30[i]*weight_factor}, {d1[i]}, {d2[i]}, {d3[i]}\n"
                     )
                 else:
                     pass
@@ -1572,9 +1701,12 @@ class _JointMaterialProcessor:
         '_property_function_map',
         '_model',
         '_logger',
+        '_skip_comments',
     )
 
-    def __init__(self, model: prime.Model, raw_joint_materials_data, hm_comments=False):
+    def __init__(
+        self, model: prime.Model, raw_joint_materials_data, hm_comments=False, skip_comments=True
+    ):
         self._raw_joint_materials_data = raw_joint_materials_data
         self._mat_id = 0
         self._enable_hm_comments = hm_comments
@@ -1584,6 +1716,7 @@ class _JointMaterialProcessor:
         }
         self._model = model
         self._logger = model.python_logger
+        self._skip_comments = skip_comments
 
     def get_all_material_commands(self):
         mapdl_text_data_list = []
@@ -1600,7 +1733,7 @@ class _JointMaterialProcessor:
         processed_entities = ['CONNECTOR ELASTICITY', 'CONNECTOR DAMPING']
         # self._logger.info(mat_data)
         mapdl_text_data = ""
-        hm_comment = self._enable_hm_comments
+        hm_comment = self._enable_hm_comments and self._skip_comments is False
         if hm_comment:
             mapdl_text_data += "!!HMNAME MAT \n"
             mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
@@ -3413,7 +3546,7 @@ class _StepProcessor:
                 or ("Boundary" in self._simulation_data and self._simulation_data['Boundary'])
             ):
                 frequency_analysis_commands += 'KEYW, BETA, 1\n'
-                frequency_analysis_commands += 'AIRL, AUTO, 1\n'
+                frequency_analysis_commands += 'AIRL, AUTO\n'
         if (
             "MODAL DYNAMIC" in self._analysis_sequence
             or "STEADY STATE DYNAMICS" in self._analysis_sequence
@@ -4633,6 +4766,7 @@ def generate_mapdl_commands(
             json_simulation_data["Materials"],
             json_simulation_data["Zones"],
             params.write_separate_blocks,
+            params.skip_comments,
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
@@ -4641,7 +4775,10 @@ def generate_mapdl_commands(
         and json_simulation_data["ConnectorBehavior"] is not None
     ):
         jmp = _JointMaterialProcessor(
-            model, json_simulation_data["ConnectorBehavior"], params.write_separate_blocks
+            model,
+            json_simulation_data["ConnectorBehavior"],
+            params.write_separate_blocks,
+            params.skip_comments,
         )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
@@ -4742,36 +4879,36 @@ def generate_mapdl_commands(
     analysis_settings += '\nFINISH\n'
     if params.analysis_settings != None:
         analysis_settings += params.analysis_settings
-    analysis_settings += (
-        '!--------------------------------------------------------------------------\n'
-    )
-    # analysis_settings += '/copy,file0,err,,errfile,tmp\n'
-    # analysis_settings += '\n'
-    analysis_settings += '/delete,,cnm,,1\n'
-    analysis_settings += '/delete,,DSP,,\n'
-    analysis_settings += '/delete,,mcf,,\n'
-    analysis_settings += '/delete,,rfrq,,1\n'
-    analysis_settings += '/delete,,log,,1\n'
-    analysis_settings += '/delete,,emat,,1\n'
-    analysis_settings += '/delete,,esav,,1\n'
-    analysis_settings += '/delete,,err,,1\n'
-    analysis_settings += '/delete,,full,,1\n'
-    analysis_settings += '/delete,,mlv,,1\n'
-    analysis_settings += '/delete,,mode,,1\n'
-    # analysis_settings += '/delete,,rfrq,,1\n'
-    analysis_settings += '/delete,,out,,1\n'
-    # analysis_settings += '/delete,harmonic,rst,,1\n'
-    analysis_settings += '!/delete,,mntr,,\n'
-    analysis_settings += '/delete,,ldhi,,\n'
-    analysis_settings += '/delete,,r001,,1\n'
-    analysis_settings += '/delete,,rst,,1\n'
-    analysis_settings += '/delete,,stat,,1\n'
-    analysis_settings += '/delete,,db,,\n'
-    analysis_settings += '/delete,,rdb,,\n'
-    # analysis_settings += '\n'
-    # analysis_settings += '/rename,errfile,tmp,,file,err\n'
-    if "Step" in json_simulation_data:
-        for an_name in steps_data._assign_analysis:
-            analysis_settings += f'/delete,{an_name},rst,,1\n'
-    analysis_settings += '/exit,nosave\n'
+        analysis_settings += (
+            '!--------------------------------------------------------------------------\n'
+        )
+        # analysis_settings += '/copy,file0,err,,errfile,tmp\n'
+        # analysis_settings += '\n'
+        analysis_settings += '/delete,,cnm,,1\n'
+        analysis_settings += '/delete,,DSP,,\n'
+        analysis_settings += '/delete,,mcf,,\n'
+        analysis_settings += '/delete,,rfrq,,1\n'
+        analysis_settings += '/delete,,log,,1\n'
+        analysis_settings += '/delete,,emat,,1\n'
+        analysis_settings += '/delete,,esav,,1\n'
+        analysis_settings += '/delete,,err,,1\n'
+        analysis_settings += '/delete,,full,,1\n'
+        analysis_settings += '/delete,,mlv,,1\n'
+        analysis_settings += '/delete,,mode,,1\n'
+        # analysis_settings += '/delete,,rfrq,,1\n'
+        analysis_settings += '/delete,,out,,1\n'
+        # analysis_settings += '/delete,harmonic,rst,,1\n'
+        analysis_settings += '!/delete,,mntr,,\n'
+        analysis_settings += '/delete,,ldhi,,\n'
+        analysis_settings += '/delete,,r001,,1\n'
+        analysis_settings += '/delete,,rst,,1\n'
+        analysis_settings += '/delete,,stat,,1\n'
+        analysis_settings += '/delete,,db,,\n'
+        analysis_settings += '/delete,,rdb,,\n'
+        # analysis_settings += '\n'
+        # analysis_settings += '/rename,errfile,tmp,,file,err\n'
+        if "Step" in json_simulation_data:
+            for an_name in steps_data._assign_analysis:
+                analysis_settings += f'/delete,{an_name},rst,,1\n'
+        analysis_settings += '/exit,nosave\n'
     return all_mat_cmds, analysis_settings
