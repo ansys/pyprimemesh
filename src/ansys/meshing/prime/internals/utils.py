@@ -24,6 +24,7 @@ import logging
 import os
 import shutil
 import subprocess
+import uuid
 from contextlib import contextmanager
 from typing import List, Optional
 
@@ -31,7 +32,6 @@ import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 
 _LOCAL_PORTS = []
-_PRIME_CONTAINER_COUNT = 0
 
 
 def make_unique_container_name(name: str):
@@ -47,9 +47,7 @@ def make_unique_container_name(name: str):
     str
         Unique name with a numeric integer added as suffix.
     """
-    global _PRIME_CONTAINER_COUNT
-    _PRIME_CONTAINER_COUNT = _PRIME_CONTAINER_COUNT + 1
-    return f'{name}-{_PRIME_CONTAINER_COUNT}'
+    return f'{name}-' + str(uuid.uuid4())
 
 
 def to_camel_case(snake_str):
