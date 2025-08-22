@@ -1,0 +1,6 @@
+custom\_surface\_deviation\_tolerance
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CadRefacetingParams.custom_surface_deviation_tolerance

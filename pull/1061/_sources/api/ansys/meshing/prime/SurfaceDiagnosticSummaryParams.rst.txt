@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceDiagnosticSummaryParams`
+=======================================
+
+
+.. py:class:: ansys.meshing.prime.SurfaceDiagnosticSummaryParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, compute_self_intersections: bool = None, compute_free_edges: bool = None, compute_multi_edges: bool = None, compute_duplicate_faces: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control surface diagnostics summary results.
+
+   :param model: Model to create a ``SurfaceDiagnosticSummaryParams`` object with default parameters.
+   :type model: Model
+   :param scope: Scope the face zonelets for surface diagnostics.
+   :type scope: ScopeDefinition, optional
+   :param compute_self_intersections: Control to identify face intersections are present or not.
+   :type compute_self_intersections: bool, optional
+   :param compute_free_edges: Control to identify free face edges are present or not.
+   :type compute_free_edges: bool, optional
+   :param compute_multi_edges: Control to identify multi face edges are present or not.
+   :type compute_multi_edges: bool, optional
+   :param compute_duplicate_faces: Control to identify duplicate faces are present or not.
+   :type compute_duplicate_faces: bool, optional
+   :param json_data: JSON dictionary to create a ``SurfaceDiagnosticSummaryParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> surface_diagnostic_summary_params = prime.SurfaceDiagnosticSummaryParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceDiagnosticSummaryParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~compute_duplicate_faces`
+            - Control to identify duplicate faces are present or not.
+          * - :py:attr:`~compute_free_edges`
+            - Control to identify free face edges are present or not.
+          * - :py:attr:`~compute_multi_edges`
+            - Control to identify multi face edges are present or not.
+          * - :py:attr:`~compute_self_intersections`
+            - Control to identify face intersections are present or not.
+          * - :py:attr:`~scope`
+            - Scope the face zonelets for surface diagnostics.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SurfaceDiagnosticSummaryParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SurfaceDiagnosticSummaryParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SurfaceDiagnosticSummaryParams
+
+Property detail
+---------------
+
+.. py:property:: compute_duplicate_faces
+   :type: bool
+
+
+   Control to identify duplicate faces are present or not.
+
+.. py:property:: compute_free_edges
+   :type: bool
+
+
+   Control to identify free face edges are present or not.
+
+.. py:property:: compute_multi_edges
+   :type: bool
+
+
+   Control to identify multi face edges are present or not.
+
+.. py:property:: compute_self_intersections
+   :type: bool
+
+
+   Control to identify face intersections are present or not.
+
+.. py:property:: scope
+   :type: ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+
+   Scope the face zonelets for surface diagnostics.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SurfaceDiagnosticSummaryParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SurfaceDiagnosticSummaryParams.print_default()
+
+
+.. py:method:: set_default(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, compute_self_intersections: bool = None, compute_free_edges: bool = None, compute_multi_edges: bool = None, compute_duplicate_faces: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SurfaceDiagnosticSummaryParams`` object.
+
+   :param scope: Scope the face zonelets for surface diagnostics.
+   :type scope: ScopeDefinition, optional
+   :param compute_self_intersections: Control to identify face intersections are present or not.
+   :type compute_self_intersections: bool, optional
+   :param compute_free_edges: Control to identify free face edges are present or not.
+   :type compute_free_edges: bool, optional
+   :param compute_multi_edges: Control to identify multi face edges are present or not.
+   :type compute_multi_edges: bool, optional
+   :param compute_duplicate_faces: Control to identify duplicate faces are present or not.
+   :type compute_duplicate_faces: bool, optional
+
+
+
+
+
+
+
+.. vale on

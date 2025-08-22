@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeNamingType`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.VolumeNamingType
+
+
+
+   Indicate source types used to name volume zones.
+
+
+
+
+.. py:currentmodule:: VolumeNamingType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~BYFACELABEL`
+            - Option to use face label name as source to name volume zones.
+          * - :py:attr:`~BYFACENORMALS`
+            - Option to use face normal as source to name volume zones. Here, the volume zones with face normal into the volume are considered as dead and volume zones with face normal outwards from the volume are considered as solid..
+          * - :py:attr:`~BYFACEZONE`
+            - Option to use face zone name as source to name volume zones.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VolumeNamingType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: BYFACELABEL
+   :value: 1
+
+
+   Option to use face label name as source to name volume zones.
+
+.. py:attribute:: BYFACENORMALS
+   :value: 4
+
+
+   Option to use face normal as source to name volume zones. Here, the volume zones with face normal into the volume are considered as dead and volume zones with face normal outwards from the volume are considered as solid..
+
+.. py:attribute:: BYFACEZONE
+   :value: 2
+
+
+   Option to use face zone name as source to name volume zones.
+
+
+
+
+
+
+
+.. vale on

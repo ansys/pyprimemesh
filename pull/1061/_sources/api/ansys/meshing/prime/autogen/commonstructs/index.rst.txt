@@ -1,0 +1,124 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``commonstructs.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.autogen.commonstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: commonstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commonstructs.CopyZoneletsParams`
+            - Parameters to copy zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commonstructs.CopyZoneletsResults`
+            - Result structure associated with copying zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commonstructs.DeleteResults`
+            - Results associated with the deletion of items.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commonstructs.PartZonelets`
+            - A structure containing some or all face zonelet ids available in a part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commonstructs.SetNameResults`
+            - Results associated with the set name.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CopyZoneletsParams</api/ansys/meshing/prime/autogen/commonstructs/CopyZoneletsParams>
+    <span class="nf nf-cod-symbol_class"></span> CopyZoneletsResults</api/ansys/meshing/prime/autogen/commonstructs/CopyZoneletsResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteResults</api/ansys/meshing/prime/autogen/commonstructs/DeleteResults>
+    <span class="nf nf-cod-symbol_class"></span> PartZonelets</api/ansys/meshing/prime/autogen/commonstructs/PartZonelets>
+    <span class="nf nf-cod-symbol_class"></span> SetNameResults</api/ansys/meshing/prime/autogen/commonstructs/SetNameResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

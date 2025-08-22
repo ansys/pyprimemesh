@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CadRefacetingMaxEdgeSizeLimit`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit
+
+
+
+   Types of maximum edge size limit for CAD faceting.
+
+
+
+
+.. py:currentmodule:: CadRefacetingMaxEdgeSizeLimit
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ABSOLUTE`
+            - Denotes absolute maximum edge size limit for CAD faceting.
+          * - :py:attr:`~NONE`
+            - Denotes no maximum edge size limit for CAD faceting.
+          * - :py:attr:`~RELATIVE`
+            - Denotes relative maximum edge size limit for CAD faceting.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CadRefacetingMaxEdgeSizeLimit
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ABSOLUTE
+   :value: 1
+
+
+   Denotes absolute maximum edge size limit for CAD faceting.
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   Denotes no maximum edge size limit for CAD faceting.
+
+.. py:attribute:: RELATIVE
+   :value: 2
+
+
+   Denotes relative maximum edge size limit for CAD faceting.
+
+
+
+
+
+
+
+.. vale on

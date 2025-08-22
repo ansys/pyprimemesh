@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`RefineAtContactsParams`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.RefineAtContactsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, contact_tolerance: float = None, relative_tolerance: bool = None, refine_max_size: float = None, project_on_geometry: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to refine face elements in contact.
+
+   :param model: Model to create a ``RefineAtContactsParams`` object with default parameters.
+   :type model: Model
+   :param contact_tolerance: Maximum tolerance used to identify face elements as contacts.
+   :type contact_tolerance: float, optional
+   :param relative_tolerance: Option to specify the contact tolerance is relative or absolute.
+   :type relative_tolerance: bool, optional
+   :param refine_max_size: Maximum size used to refine contact face elements.
+   :type refine_max_size: float, optional
+   :param project_on_geometry: Project on geometry on remesh.
+   :type project_on_geometry: bool, optional
+   :param json_data: JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> refine_at_contacts_params = prime.RefineAtContactsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: RefineAtContactsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~contact_tolerance`
+            - Maximum tolerance used to identify face elements as contacts.
+          * - :py:attr:`~project_on_geometry`
+            - Project on geometry on remesh.
+          * - :py:attr:`~refine_max_size`
+            - Maximum size used to refine contact face elements.
+          * - :py:attr:`~relative_tolerance`
+            - Option to specify the contact tolerance is relative or absolute.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``RefineAtContactsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``RefineAtContactsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import RefineAtContactsParams
+
+Property detail
+---------------
+
+.. py:property:: contact_tolerance
+   :type: float
+
+
+   Maximum tolerance used to identify face elements as contacts.
+
+.. py:property:: project_on_geometry
+   :type: bool
+
+
+   Project on geometry on remesh.
+
+.. py:property:: refine_max_size
+   :type: float
+
+
+   Maximum size used to refine contact face elements.
+
+.. py:property:: relative_tolerance
+   :type: bool
+
+
+   Option to specify the contact tolerance is relative or absolute.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``RefineAtContactsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> RefineAtContactsParams.print_default()
+
+
+.. py:method:: set_default(contact_tolerance: float = None, relative_tolerance: bool = None, refine_max_size: float = None, project_on_geometry: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``RefineAtContactsParams`` object.
+
+   :param contact_tolerance: Maximum tolerance used to identify face elements as contacts.
+   :type contact_tolerance: float, optional
+   :param relative_tolerance: Option to specify the contact tolerance is relative or absolute.
+   :type relative_tolerance: bool, optional
+   :param refine_max_size: Maximum size used to refine contact face elements.
+   :type refine_max_size: float, optional
+   :param project_on_geometry: Project on geometry on remesh.
+   :type project_on_geometry: bool, optional
+
+
+
+
+
+
+
+.. vale on

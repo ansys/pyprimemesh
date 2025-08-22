@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapRegion.conjugate
+
+.. minigallery::
+   :add-heading: Examples using WrapRegion.conjugate
+
+   ansys.meshing.prime.WrapRegion.conjugate

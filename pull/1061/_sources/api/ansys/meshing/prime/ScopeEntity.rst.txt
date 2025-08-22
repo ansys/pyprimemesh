@@ -1,0 +1,94 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ScopeEntity`
+====================
+
+
+.. py:class:: ansys.meshing.prime.ScopeEntity
+
+
+
+   ScopeDefinition uses entity type to scope entities.
+
+
+
+
+.. py:currentmodule:: ScopeEntity
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EDGEZONELETS`
+            - Evaluate scope to get the edge zonelets.
+          * - :py:attr:`~FACEANDEDGEZONELETS`
+            - Evaluate scope to get face and edge zonelets.
+          * - :py:attr:`~FACEZONELETS`
+            - Evaluate scope to get the face zonelets.
+          * - :py:attr:`~VOLUME`
+            - Evaluate scope to get volumes.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ScopeEntity
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EDGEZONELETS
+   :value: 2
+
+
+   Evaluate scope to get the edge zonelets.
+
+.. py:attribute:: FACEANDEDGEZONELETS
+   :value: 3
+
+
+   Evaluate scope to get face and edge zonelets.
+
+.. py:attribute:: FACEZONELETS
+   :value: 1
+
+
+   Evaluate scope to get the face zonelets.
+
+.. py:attribute:: VOLUME
+   :value: 6
+
+
+   Evaluate scope to get volumes.
+
+
+
+
+
+
+
+.. vale on

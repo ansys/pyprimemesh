@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``connect.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.autogen.connect
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: connect
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connect.Connect`
+            - Connect face zonelets.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Connect</api/ansys/meshing/prime/autogen/connect/Connect>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

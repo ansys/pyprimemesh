@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SplineContinuityType`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.SplineContinuityType
+
+
+
+   Spline Continuity types.
+
+
+
+
+.. py:currentmodule:: SplineContinuityType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~CUBICC0`
+            - Spline use cubic C0 continuity.
+          * - :py:attr:`~CUBICC1`
+            - Spline use cubic C1 continuity.
+          * - :py:attr:`~QUADRATICC0`
+            - Spline use quadratic C0 continuity.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SplineContinuityType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: CUBICC0
+   :value: 0
+
+
+   Spline use cubic C0 continuity.
+
+.. py:attribute:: CUBICC1
+   :value: 1
+
+
+   Spline use cubic C1 continuity.
+
+.. py:attribute:: QUADRATICC0
+   :value: 2
+
+
+   Spline use quadratic C0 continuity.
+
+
+
+
+
+
+
+.. vale on

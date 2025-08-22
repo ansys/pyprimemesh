@@ -1,0 +1,6 @@
+remesh\_face\_zonelets\_locally
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Surfer.remesh_face_zonelets_locally

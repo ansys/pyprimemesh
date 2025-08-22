@@ -1,0 +1,11 @@
+wrap
+====
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.wrap
+
+.. minigallery::
+   :add-heading: Examples using Mesh.wrap
+
+   ansys.meshing.prime.lucid.Mesh.wrap

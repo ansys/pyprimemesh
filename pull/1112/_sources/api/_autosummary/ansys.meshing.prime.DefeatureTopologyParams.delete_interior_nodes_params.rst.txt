@@ -1,0 +1,6 @@
+delete\_interior\_nodes\_params
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DefeatureTopologyParams.delete_interior_nodes_params

@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ScopeDefinition`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.controlstructs.ScopeDefinition(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, entity_type: ScopeEntity = None, evaluation_type: ScopeEvaluationType = None, part_expression: str = None, label_expression: str = None, zone_expression: str = None, json_data: dict = None, **kwargs)
+
+
+
+   ScopeDefinition to scope entities based on entity and evaluation type.
+
+   :param model: Model to create a ``ScopeDefinition`` object with default parameters.
+   :type model: Model
+   :param entity_type: Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+   :type entity_type: ScopeEntity, optional
+   :param evaluation_type: Evaluation type to scope entities. The default is set to labels.
+   :type evaluation_type: ScopeEvaluationType, optional
+   :param part_expression: Part expression to scope parts while evaluating scope.
+   :type part_expression: str, optional
+   :param label_expression: Label expression to scope entities when evaluation type is set to labels.
+   :type label_expression: str, optional
+   :param zone_expression: Zone expression to scope entities when evaluation type is set to zones.
+   :type zone_expression: str, optional
+   :param json_data: JSON dictionary to create a ``ScopeDefinition`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> scope_definition = prime.ScopeDefinition(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ScopeDefinition
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~entity_type`
+            - Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+          * - :py:attr:`~evaluation_type`
+            - Evaluation type to scope entities. The default is set to labels.
+          * - :py:attr:`~label_expression`
+            - Label expression to scope entities when evaluation type is set to labels.
+          * - :py:attr:`~part_expression`
+            - Part expression to scope parts while evaluating scope.
+          * - :py:attr:`~zone_expression`
+            - Zone expression to scope entities when evaluation type is set to zones.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ScopeDefinition`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ScopeDefinition`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.controlstructs import ScopeDefinition
+
+Property detail
+---------------
+
+.. py:property:: entity_type
+   :type: ScopeEntity
+
+
+   Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+
+.. py:property:: evaluation_type
+   :type: ScopeEvaluationType
+
+
+   Evaluation type to scope entities. The default is set to labels.
+
+.. py:property:: label_expression
+   :type: str
+
+
+   Label expression to scope entities when evaluation type is set to labels.
+
+.. py:property:: part_expression
+   :type: str
+
+
+   Part expression to scope parts while evaluating scope.
+
+.. py:property:: zone_expression
+   :type: str
+
+
+   Zone expression to scope entities when evaluation type is set to zones.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ScopeDefinition`` object.
+
+   .. rubric:: Examples
+
+   >>> ScopeDefinition.print_default()
+
+
+.. py:method:: set_default(entity_type: ScopeEntity = None, evaluation_type: ScopeEvaluationType = None, part_expression: str = None, label_expression: str = None, zone_expression: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ScopeDefinition`` object.
+
+   :param entity_type: Entity type for which scope needs to be evaluated. The default is set to face zonelets.
+   :type entity_type: ScopeEntity, optional
+   :param evaluation_type: Evaluation type to scope entities. The default is set to labels.
+   :type evaluation_type: ScopeEvaluationType, optional
+   :param part_expression: Part expression to scope parts while evaluating scope.
+   :type part_expression: str, optional
+   :param label_expression: Label expression to scope entities when evaluation type is set to labels.
+   :type label_expression: str, optional
+   :param zone_expression: Zone expression to scope entities when evaluation type is set to zones.
+   :type zone_expression: str, optional
+
+
+
+
+
+
+
+.. vale on

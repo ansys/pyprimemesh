@@ -1,0 +1,6 @@
+backend
+=======
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.backend

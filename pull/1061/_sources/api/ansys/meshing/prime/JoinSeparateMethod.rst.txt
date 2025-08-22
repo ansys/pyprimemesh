@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`JoinSeparateMethod`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.JoinSeparateMethod
+
+
+
+   Join separation method to handle separated overlapped zonelets.
+
+
+
+
+.. py:currentmodule:: JoinSeparateMethod
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~KEEPBOTH`
+            - Keep both overlapping zonelets after joining.
+          * - :py:attr:`~KEEPNONE`
+            - Remove both overlapping zonelets after joining.
+          * - :py:attr:`~KEEPONE`
+            - Keep one overlap zonelets after joining.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import JoinSeparateMethod
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: KEEPBOTH
+   :value: 2
+
+
+   Keep both overlapping zonelets after joining.
+
+.. py:attribute:: KEEPNONE
+   :value: 0
+
+
+   Remove both overlapping zonelets after joining.
+
+.. py:attribute:: KEEPONE
+   :value: 1
+
+
+   Keep one overlap zonelets after joining.
+
+
+
+
+
+
+
+.. vale on

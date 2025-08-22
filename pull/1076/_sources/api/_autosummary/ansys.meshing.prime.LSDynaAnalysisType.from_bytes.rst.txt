@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LSDynaAnalysisType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using LSDynaAnalysisType.from_bytes
+
+   ansys.meshing.prime.LSDynaAnalysisType.from_bytes

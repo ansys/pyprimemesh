@@ -1,0 +1,6 @@
+SPLITANDCOLLAPSEFACEELEMENTSFAILED
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED

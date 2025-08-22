@@ -1,0 +1,246 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateBOIParams`
+========================
+
+
+.. py:class:: ansys.meshing.prime.CreateBOIParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, boi_type: BOIType = None, perform_initial_wrap: bool = None, wrap_size: float = None, flow_dir: FlowDirection = None, side_scale: float = None, wake_scale: float = None, wake_levels: int = None, suggested_part_name: str = None, suggested_label_prefix: str = None, number_of_threads: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used for BOI surface creation in the given axis.
+
+   :param model: Model to create a ``CreateBOIParams`` object with default parameters.
+   :type model: Model
+   :param boi_type: Type of BOI offsetting.
+   :type boi_type: BOIType, optional
+   :param perform_initial_wrap: Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+   :type perform_initial_wrap: bool, optional
+   :param wrap_size: Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+   :type wrap_size: float, optional
+   :param flow_dir: Assigns the offset direction of inflation.
+   :type flow_dir: FlowDirection, optional
+   :param side_scale: BOI side scaling factor.
+   :type side_scale: float, optional
+   :param wake_scale: BOI flow direction scaling factor.
+   :type wake_scale: float, optional
+   :param wake_levels: BOI levels.
+   :type wake_levels: int, optional
+   :param suggested_part_name: Suggested part name for created BOI surfaces.
+   :type suggested_part_name: str, optional
+   :param suggested_label_prefix: Suggested label name for created BOI surfaces.
+   :type suggested_label_prefix: str, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param json_data: JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_boiparams = prime.CreateBOIParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateBOIParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~boi_type`
+            - Type of BOI offsetting.
+          * - :py:attr:`~flow_dir`
+            - Assigns the offset direction of inflation.
+          * - :py:attr:`~number_of_threads`
+            - Number of threads for multithreading.
+          * - :py:attr:`~perform_initial_wrap`
+            - Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+          * - :py:attr:`~side_scale`
+            - BOI side scaling factor.
+          * - :py:attr:`~suggested_label_prefix`
+            - Suggested label name for created BOI surfaces.
+          * - :py:attr:`~suggested_part_name`
+            - Suggested part name for created BOI surfaces.
+          * - :py:attr:`~wake_levels`
+            - BOI levels.
+          * - :py:attr:`~wake_scale`
+            - BOI flow direction scaling factor.
+          * - :py:attr:`~wrap_size`
+            - Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateBOIParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateBOIParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CreateBOIParams
+
+Property detail
+---------------
+
+.. py:property:: boi_type
+   :type: BOIType
+
+
+   Type of BOI offsetting.
+
+.. py:property:: flow_dir
+   :type: FlowDirection
+
+
+   Assigns the offset direction of inflation.
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads for multithreading.
+
+.. py:property:: perform_initial_wrap
+   :type: bool
+
+
+   Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+
+.. py:property:: side_scale
+   :type: float
+
+
+   BOI side scaling factor.
+
+.. py:property:: suggested_label_prefix
+   :type: str
+
+
+   Suggested label name for created BOI surfaces.
+
+.. py:property:: suggested_part_name
+   :type: str
+
+
+   Suggested part name for created BOI surfaces.
+
+.. py:property:: wake_levels
+   :type: int
+
+
+   BOI levels.
+
+.. py:property:: wake_scale
+   :type: float
+
+
+   BOI flow direction scaling factor.
+
+.. py:property:: wrap_size
+   :type: float
+
+
+   Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateBOIParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateBOIParams.print_default()
+
+
+.. py:method:: set_default(boi_type: BOIType = None, perform_initial_wrap: bool = None, wrap_size: float = None, flow_dir: FlowDirection = None, side_scale: float = None, wake_scale: float = None, wake_levels: int = None, suggested_part_name: str = None, suggested_label_prefix: str = None, number_of_threads: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateBOIParams`` object.
+
+   :param boi_type: Type of BOI offsetting.
+   :type boi_type: BOIType, optional
+   :param perform_initial_wrap: Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
+   :type perform_initial_wrap: bool, optional
+   :param wrap_size: Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
+   :type wrap_size: float, optional
+   :param flow_dir: Assigns the offset direction of inflation.
+   :type flow_dir: FlowDirection, optional
+   :param side_scale: BOI side scaling factor.
+   :type side_scale: float, optional
+   :param wake_scale: BOI flow direction scaling factor.
+   :type wake_scale: float, optional
+   :param wake_levels: BOI levels.
+   :type wake_levels: int, optional
+   :param suggested_part_name: Suggested part name for created BOI surfaces.
+   :type suggested_part_name: str, optional
+   :param suggested_label_prefix: Suggested label name for created BOI surfaces.
+   :type suggested_label_prefix: str, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+
+
+
+
+
+
+
+.. vale on

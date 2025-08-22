@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`HexCoreCellElementType`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.HexCoreCellElementType
+
+
+
+   Cell element type of hex-shaped cells.
+
+
+
+
+.. py:currentmodule:: HexCoreCellElementType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALLHEX`
+            - Generates hex type cells.
+          * - :py:attr:`~ALLPOLY`
+            - Generates poly type cells.
+          * - :py:attr:`~HEXANDPOLY`
+            - Generates a mix of poly type and hex type cells.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import HexCoreCellElementType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALLHEX
+   :value: 1
+
+
+   Generates hex type cells.
+
+.. py:attribute:: ALLPOLY
+   :value: 0
+
+
+   Generates poly type cells.
+
+.. py:attribute:: HEXANDPOLY
+   :value: 2
+
+
+   Generates a mix of poly type and hex type cells.
+
+
+
+
+
+
+
+.. vale on

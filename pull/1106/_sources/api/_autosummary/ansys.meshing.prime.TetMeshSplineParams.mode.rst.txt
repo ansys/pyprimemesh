@@ -1,0 +1,6 @@
+mode
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TetMeshSplineParams.mode

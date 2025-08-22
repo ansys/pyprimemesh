@@ -1,0 +1,215 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``controlstructs.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.autogen.controlstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: controlstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.ContactPreventionParams`
+            - ContactPreventionParams defines contact prevention control parameters for wrapper.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.FeatureRecoveryParams`
+            - FeatureRecoveryParams defines feature recovery control parameters for wrapper.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.LeakPreventionParams`
+            - LeakPreventionParams defines leakage prevention control parameters for wrapper.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.MultiZoneEdgeBiasingParams`
+            - Defines MultiZone edge biasing control parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.MultiZoneMapMeshParams`
+            - Define controlling parameters for the map mesh using MultiZone.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.MultiZoneSizingParams`
+            - Parameters for MultiZone meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.MultiZoneSweepMeshParams`
+            - Defines MultiZone thin sweep mesh control parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.ScopeDefinition`
+            - ScopeDefinition to scope entities based on entity and evaluation type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.ScopeEntity`
+            - ScopeDefinition uses entity type to scope entities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.ScopeEvaluationType`
+            - ScopeDefinition uses evaluation type to evaluate the scope.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.ScopeExpressionType`
+            - ScopeExpressionType uses expression type to evaluate the scope.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.ScopeZoneletParams`
+            - Parameters used to get the scoped face or edge zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.SetContactPreventionsResults`
+            - Results associated with set contact preventions.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.SetFeatureRecoveriesResults`
+            - Results associated with set feature recoveries.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.SetLeakPreventionsResults`
+            - Results associated with set leak preventions.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.SetParamsResults`
+            - Results associated with the set parameters operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.SetScopeResults`
+            - Results associated with the set scope operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs.SweepType`
+            - Provides the Sweep Mesh Decomposition type.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ContactPreventionParams</api/ansys/meshing/prime/autogen/controlstructs/ContactPreventionParams>
+    <span class="nf nf-cod-symbol_class"></span> FeatureRecoveryParams</api/ansys/meshing/prime/autogen/controlstructs/FeatureRecoveryParams>
+    <span class="nf nf-cod-symbol_class"></span> LeakPreventionParams</api/ansys/meshing/prime/autogen/controlstructs/LeakPreventionParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneEdgeBiasingParams</api/ansys/meshing/prime/autogen/controlstructs/MultiZoneEdgeBiasingParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneMapMeshParams</api/ansys/meshing/prime/autogen/controlstructs/MultiZoneMapMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneSizingParams</api/ansys/meshing/prime/autogen/controlstructs/MultiZoneSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneSweepMeshParams</api/ansys/meshing/prime/autogen/controlstructs/MultiZoneSweepMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> ScopeDefinition</api/ansys/meshing/prime/autogen/controlstructs/ScopeDefinition>
+    <span class="nf nf-cod-symbol_class"></span> ScopeEntity</api/ansys/meshing/prime/autogen/controlstructs/ScopeEntity>
+    <span class="nf nf-cod-symbol_class"></span> ScopeEvaluationType</api/ansys/meshing/prime/autogen/controlstructs/ScopeEvaluationType>
+    <span class="nf nf-cod-symbol_class"></span> ScopeExpressionType</api/ansys/meshing/prime/autogen/controlstructs/ScopeExpressionType>
+    <span class="nf nf-cod-symbol_class"></span> ScopeZoneletParams</api/ansys/meshing/prime/autogen/controlstructs/ScopeZoneletParams>
+    <span class="nf nf-cod-symbol_class"></span> SetContactPreventionsResults</api/ansys/meshing/prime/autogen/controlstructs/SetContactPreventionsResults>
+    <span class="nf nf-cod-symbol_class"></span> SetFeatureRecoveriesResults</api/ansys/meshing/prime/autogen/controlstructs/SetFeatureRecoveriesResults>
+    <span class="nf nf-cod-symbol_class"></span> SetLeakPreventionsResults</api/ansys/meshing/prime/autogen/controlstructs/SetLeakPreventionsResults>
+    <span class="nf nf-cod-symbol_class"></span> SetParamsResults</api/ansys/meshing/prime/autogen/controlstructs/SetParamsResults>
+    <span class="nf nf-cod-symbol_class"></span> SetScopeResults</api/ansys/meshing/prime/autogen/controlstructs/SetScopeResults>
+    <span class="nf nf-cod-symbol_class"></span> SweepType</api/ansys/meshing/prime/autogen/controlstructs/SweepType>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

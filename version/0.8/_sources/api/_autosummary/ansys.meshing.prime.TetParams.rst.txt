@@ -1,0 +1,39 @@
+.. vale off
+
+TetParams
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TetParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TetParams.print_default
+      TetParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TetParams.quadratic
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TetParams
+
+    ansys.meshing.prime.TetParams
+
+.. vale on

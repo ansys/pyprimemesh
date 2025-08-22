@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExportBoundaryFittedSplineParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using ExportBoundaryFittedSplineParams.print_default
+
+   ansys.meshing.prime.ExportBoundaryFittedSplineParams.print_default

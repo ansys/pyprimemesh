@@ -1,0 +1,114 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SizeField`
+==================
+
+
+.. py:class:: ansys.meshing.prime.SizeField(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   The size field is computed based on the size control defined.
+
+   You can remesh surfaces and edges based on the size field.
+
+
+   :param model: Server model to create SizeField object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: SizeField
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~compute_volumetric`
+            - Computes the volumetric size field using given size control ids.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for SizeField.
+          * - :py:attr:`~__exit__`
+            - Exit context for SizeField.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SizeField
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for SizeField.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for SizeField.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: compute_volumetric(size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int], volumetric_sizefield_params: ansys.meshing.prime.params.primestructs.VolumetricSizeFieldComputeParams) -> ansys.meshing.prime.params.primestructs.VolumetricSizeFieldComputeResults
+
+   Computes the volumetric size field using given size control ids.
+
+
+   :param size_control_ids: Ids of size controls.
+   :type size_control_ids: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> size_field.compute_volumetric(
+   >>>           [size_control.id for size_control in model.control_data.size_controls], volumetric_sizefield_params))
+
+
+
+
+
+
+
+.. vale on

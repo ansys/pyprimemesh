@@ -1,0 +1,6 @@
+imag
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: PrismControlOffsetType.imag

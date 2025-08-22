@@ -1,0 +1,4476 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``ansys.meshing.prime`` library
+===================================
+
+.. py:module:: ansys.meshing.prime
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: prime
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.AddLabelResults`
+            - Results associated with the add label operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AddThicknessParams`
+            - Parameters to add thickness for a given plane.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AddThicknessResults`
+            - Result structure associated with add thickness zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AddToZoneResults`
+            - Results associated with the add to zone operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AdvancedSurferSetup`
+            - Define advanced settings for remeshing operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AutoMesh`
+            - Generates volume mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AutoMeshParams`
+            - Parameters for volume meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AutoMeshResults`
+            - Results of volume meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AutoNodeMoveParams`
+            - Parameters used to improve volume mesh by auto node move.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AutoQuadMesher`
+            - Generate full quad mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.AutoQuadMesherResults`
+            - Results of auto quad mesher.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BCPair`
+            - Used to define boundary conditions for match morphing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BCPairType`
+            - Option to specify boundary condition pair type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BCsVolumetricModality`
+            - Indicate options to identify morphable region in input volumetric mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BOIType`
+            - BOI type for BOI creation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BodyQueryType`
+            - Indicates type of entity to query in part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BoiSizingParams`
+            - Size field computed using body of influence size control enables you to specify a body of influence(that is, a region for sizing control).
+
+
+          * - :py:obj:`~ansys.meshing.prime.BoundaryFittedSpline`
+            - BoundaryFittedSpline helps you to create splines for structured hex-mesh model.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BoundaryFittedSplineParams`
+            - Boundary fitted spline fitting parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.BoundingBox`
+            - Provides information about the definition of a bounding box.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CadFaceter`
+            - Types of CAD faceter.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CadReaderRoute`
+            - CAD Reader routes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit`
+            - Types of maximum edge size limit for CAD faceting.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CadRefacetingParams`
+            - Parameters to refacet CAD during import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CadRefacetingResolution`
+            - Levels of CAD faceting refinement.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CdbAnalysisType`
+            - Provides the MAPDL CDB analysis type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CdbSimulationType`
+            - Simulation Type for CDB export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CellStatisticsParams`
+            - Parameters used to calculate cell statistics.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CellStatisticsResults`
+            - Results of cell statistics information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CellZoneletType`
+            - Types of cell zonelet.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CheckFaceDeviationParams`
+            - Parameters used for check face deviation operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CheckFaceDeviationResults`
+            - Result structure associated with the check face deviation operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CheckMeshParams`
+            - Parameters used to check mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CheckMeshResults`
+            - Result associated with the check mesh operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CheckTopologyParams`
+            - Parameters for check topology operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CollapseParams`
+            - Parameters to collapse face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CollapseResults`
+            - Results associated with collapse face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CollapseTool`
+            - Performs various collapse operations. For example, split and collapse on face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ComponentChildrenParams`
+            - Parameters associated with querying child components.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ComponentChildrenResults`
+            - Results associated with querying child components.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ComputeTopoVolumesResults`
+            - Results associated with compute topovolumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ComputeVolumesParams`
+            - Parameters to compute volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ComputeVolumesResults`
+            - Results associated with compute volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Connect`
+            - Connect face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ConnectFacesParams`
+            - Parameters for connect faces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ConnectResults`
+            - Results associated with the connection operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ContactElementTypeParams`
+            - Parameters to control element type choices for contact surfaces in TIEs and CONTACT PAIRs.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ContactPatchAxis`
+            - Flow or wake direction for BOI creation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ContactPreventionParams`
+            - ContactPreventionParams defines contact prevention control parameters for wrapper.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ControlData`
+            - Contains all controls.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ControlPointSelection`
+            - Control point selection type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CopyZoneletsParams`
+            - Parameters to copy zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CopyZoneletsResults`
+            - Result structure associated with copying zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateBOIParams`
+            - Parameters used for BOI surface creation in the given axis.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateBOIResults`
+            - Result structure associated with BOI creation of zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateCapParams`
+            - Parameters to create cap on face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateCapResults`
+            - Results associated with create cap on face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateContactPatchParams`
+            - Parameters used for contact patch creation in the given axis.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateContactPatchResults`
+            - Result structure associated with created contact patch zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateIntersectionEdgeLoopsParams`
+            - Parameters used to calculate edge loops created by intersection of two groups of face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateIntersectionEdgeLoopsResults`
+            - Results for the edge loops created by intersection of two groups of face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateMaterialPointParams`
+            - Defines parameters to create material point.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateMaterialPointResults`
+            - Results structure associated with create material point operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateShellBLResults`
+            - Results associated with the ShellBL mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateVolumeZonesType`
+            - Indicate type to create volume zones for volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CreateZoneResults`
+            - Results associated with the create zone.
+
+
+          * - :py:obj:`~ansys.meshing.prime.CurvatureSizingParams`
+            - Size field using curvature size control computes edge and face sizes using their size and normal angle parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeadRegion`
+            - DeadRegion defines a dead region for patch flow regions operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DefeatureTopologyParams`
+            - Parameters for defeature topology operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteFringesAndOverlapsParams`
+            - Parameters to delete fringes and overlapping faces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteFringesAndOverlapsResults`
+            - Results associated with the delete fringes and overlapping faces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteInteriorNodesParams`
+            - Parameters for delete interior nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteMaterialPointResults`
+            - Results associated with delete material point operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteMeshParams`
+            - Parameters to delete mesh on topoentities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteMeshResults`
+            - Results structure associated with delete mesh on topofaces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteResults`
+            - Results associated with the deletion of items.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteTool`
+            - Performs various delete operation. For example, delete fringes and overlapping faces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteTopoEntitiesParams`
+            - Parameters to control delete topoentities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteTopoEntitiesResults`
+            - Results associated with delete topoentities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteUnwettedParams`
+            - DeleteUnwettedParams defines parameters for delete unwetted surfaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteUnwettedResult`
+            - Results structure associated with delete unwetted surfaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteVolumesParams`
+            - Parameters to delete volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteVolumesResults`
+            - Results associated with delete volumes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DeleteZoneResults`
+            - Results associated with the delete zone.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DetectAndTreatCircularFacesParams`
+            - Parameters for detect and treat circular faces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DetectAndTreatFeaturesParams`
+            - Parameters for detect and treat features operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DetectAndTreatHolesParams`
+            - Parameters for detect and treat holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DetectCircularHolesParams`
+            - Parameters for detect circular holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DetectHolesParams`
+            - Parameters for detect holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.DetectNonCircularHolesParams`
+            - Parameters for detect non circular holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.EdgeConnectType`
+            - Edge connect type to define the type of connection between edges .
+
+
+          * - :py:obj:`~ansys.meshing.prime.EdgeConnectivityResults`
+            - Result of the edge connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.EdgeMergeControl`
+            - Specifies type of edge pairs to be merged during scaffold operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportBoundaryFittedSplineParams`
+            - Parameters for exporting boundary fitted splines.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportFluentCaseParams`
+            - Parameters to export fluent case file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportFluentMeshingMeshParams`
+            - Parameters used to export fluent meshing mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportLSDynaIGAResults`
+            - Results associated with the LS-DYNA export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams`
+            - Parameters for exporting LS-DYNA IGA keyword file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportLSDynaKeywordFileParams`
+            - Parameters to control LS-DYNA keyword file export settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportLSDynaResults`
+            - Results associated with the LS-DYNA export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportMapdlCdbParams`
+            - Parameters to control MAPDL CDB export settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportMapdlCdbResults`
+            - Results associated with the MAPDL CDB export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExportSTLParams`
+            - Parameters to export STL file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractFeatureParams`
+            - Parameter to control feature edge extraction.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractFeatureResults`
+            - Result of edge zonelet extraction by angle.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractTopoVolumesParams`
+            - Parameters to extract flow topovolumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractTopoVolumesResults`
+            - Parameters to extract flow topovolumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractVolumesParams`
+            - Parameters to extract flow volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractVolumesResults`
+            - Results associated with compute volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ExtractedFeatureIds`
+            - Contains ids of the features extracted.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FaceAndEdgeConnectivityParams`
+            - Parameters to get face and edge connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FaceAndEdgeConnectivityResults`
+            - Result of the face and edge connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FaceConnectivityResults`
+            - Result of the face connectivity information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FeatureExtraction`
+            - Provide functions for all feature extraction operations like extracting edges zonlelets, tracing node paths.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FeatureRecoveryParams`
+            - FeatureRecoveryParams defines feature recovery control parameters for wrapper.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FileIO`
+            - Handles reading or writing files from the disk.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FileReadParams`
+            - Parameters to read file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FileReadResults`
+            - Results of file read operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FileWriteParams`
+            - Parameters to write a file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FileWriteResults`
+            - Results of file write operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FillHolesAtPlaneParams`
+            - Parameters to fill holes at given plane.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FillHolesAtPlaneResults`
+            - Results associated with fill holes at given plane.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FixInvalidNormalNodeParams`
+            - Parameters to fix invalid average face normal at nodes by creating a nugget.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FixInvalidNormalNodeResults`
+            - Results associated with fix invalid average face normal at nodes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FlowDirection`
+            - Flow or wake direction for BOI creation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FuseOption`
+            - Type to specify treatment of surfaces for fusing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FuseParams`
+            - Parameters for fuse operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FuseResults`
+            - Results associated with the fuse operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.GlobalSizingParams`
+            - Global sizing parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.HardSizingParams`
+            - Size field computed using hard size control enables you to maintain a uniform size based on the size specified.
+
+
+          * - :py:obj:`~ansys.meshing.prime.HexCoreCellElementType`
+            - Cell element type of hex-shaped cells.
+
+
+          * - :py:obj:`~ansys.meshing.prime.HexCoreParams`
+            - Parameters to control hexahedral mesh generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.HexCoreTransitionLayerType`
+            - Handle size transition of hex cells.
+
+
+          * - :py:obj:`~ansys.meshing.prime.HexToSpline`
+            - Converts all-hex mesh to spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.HexToSplineParams`
+            - Parameters to control conversion of hex mesh to spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.IGAResults`
+            - Results of IGA operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.IGASpline`
+            - Information of the spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.IGAUnstructuredSplineSolid`
+            - Information of unstructured spline solid.
+
+
+          * - :py:obj:`~ansys.meshing.prime.IGAUnstructuredSplineSurf`
+            - Information of unstructured spline surface.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportAbaqusParams`
+            - Parameters for importing Abaqus solver input files.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportAbaqusResults`
+            - Results of Abaqus import operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportCadParams`
+            - Parameters to control CAD import settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportCadResults`
+            - Results associated with the CAD import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportFluentCaseParams`
+            - Parameters to import fluent case file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportFluentCaseResults`
+            - Results associated with fluent case import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportFluentMeshingMeshParams`
+            - Parameters used to import fluent meshing mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportFluentMeshingMeshResults`
+            - Results associated with fluent meshing mesh import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportMapdlCdbParams`
+            - Parameters to control MAPDL CDB import settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ImportMapdlCdbResults`
+            - Results associated with the MAPDL CDB import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.IntersectParams`
+            - Parameters used for intersection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.IntersectionMask`
+            - Scaffold parameters use intersection mask to define nature of intersection computation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.JoinParams`
+            - Parameters used for join.
+
+
+          * - :py:obj:`~ansys.meshing.prime.JoinSeparateMethod`
+            - Join separation method to handle separated overlapped zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.LSDynaAnalysisType`
+            - Provides the LS-DYNA analysis type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.LSDynaFileFormatType`
+            - Provides the format type to write the LS-DYNA file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.LabelExportParams`
+            - Parameters to control the export of labels as Nodal or Element Components in CDB. By default, all the labels are exported as Element Components.
+
+
+          * - :py:obj:`~ansys.meshing.prime.LeakPreventionParams`
+            - LeakPreventionParams defines leakage prevention control parameters for wrapper.
+
+
+          * - :py:obj:`~ansys.meshing.prime.LengthUnit`
+            - Length units
+
+
+          * - :py:obj:`~ansys.meshing.prime.LocalSurferParams`
+            - Parameters to perform local surface remeshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.LocalSurferResults`
+            - Results associated with the local surface mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MatchMorphParams`
+            - MatchMorphParams describes the parameters required for match morphing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MatchMorphResults`
+            - Results associated with match morph operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MatchPair`
+            - Match pair to specify sources, targets for match morphing. Included boundary conditions specification.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MatchPairTargetType`
+            - Match morph target type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MaterialPointManager`
+            - Provide functions for material point creation, deletion and queries.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MaterialPointType`
+            - Defines define type of material point.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeBoundaryNodesParams`
+            - Parameters used for the merge boundary nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeBoundaryNodesResults`
+            - Results associated with the merge nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeNodeType`
+            - Type of nodes to be merged.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergePartsParams`
+            - Parameters to merge parts.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergePartsResults`
+            - Parameters to merge parts.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeVolumesParams`
+            - Parameters to merge volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeVolumesResults`
+            - Results associated with merge volumes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeZoneletsParams`
+            - Parameters to merge zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MergeZoneletsResults`
+            - Results associated with merge zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MeshInfo`
+            - MeshInfo provides information about the mesh connectivity and more.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MeshStackerParams`
+            - Input parameters associated with the mesh stacker operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MeshStackerResults`
+            - Results associated with the mesh stacker operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MeshedSizingParams`
+            - Size field computed using meshed size control enables you to set the size based on existing sizes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Model`
+            - Contains all information about Ansys Prime Server.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MorphBCParams`
+            - MorphBCParams contains the input parameters for calculating the boundary conditions for a morphing problem.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MorphSolveParams`
+            - Morpher solve parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Morpher`
+            - Morpher contain functionalities to change the geometry, adapting the mesh accordingly without a recomputation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MultiZoneControl`
+            - MultiZoneControl provides a way to gather all the information required for MultiZone meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MultiZoneEdgeBiasingParams`
+            - Defines MultiZone edge biasing control parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MultiZoneMapMeshParams`
+            - Define controlling parameters for the map mesh using MultiZone.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MultiZoneSizingParams`
+            - Parameters for MultiZone meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.MultiZoneSweepMeshParams`
+            - Defines MultiZone thin sweep mesh control parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.NamePatternParams`
+            - Parameters to be used to match name pattern with names.
+
+
+          * - :py:obj:`~ansys.meshing.prime.OptimizeQuadMeshParams`
+            - Parameters for optimize quad mesh operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.OverlapPairs`
+            - Provides ids of a pair of overlapping face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.OverlapSearchResults`
+            - Provides ids of a pair of overlapping face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Part`
+            - Part contains zonelets and topoentities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PartCreationType`
+            - Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PartSummaryParams`
+            - Parameters to control part summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PartSummaryResults`
+            - Results of part summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PartZonelets`
+            - A structure containing some or all face zonelet ids available in a part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PartialDefeatureParams`
+            - Parameters for partial defeature operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PeriodicControl`
+            - Periodic controls provide settings for the recovery of periodic surfaces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PeriodicControlParams`
+            - PeriodicControlParams contains the parameters for periodic surface recovery.  Parameters like center, axis and angle determine the transformation from  one surface to its matching periodic surface.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PeriodicControlSummaryParams`
+            - Parameters used to get size control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PeriodicControlSummaryResult`
+            - Results of Periodic control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PrismControl`
+            - PrismControl allows you to generate prisms.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PrismControlGrowthParams`
+            - Growth parameters for prism control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PrismControlOffsetType`
+            - Offset type for prism control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PrismParams`
+            - Parameters to control prism mesh generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.PrismStairStep`
+            - Parameters to control prism stairsteping.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ProjectOnGeometryParams`
+            - Parameters used to project topoface nodes on associated geometry.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ProjectOnGeometryResults`
+            - Results associated with projection of topofaces nodes on its geometry.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ProximitySizingParams`
+            - Size field using proximity size control computes edge and face sizes in `gaps` using the specified minimum number of element layers.
+
+
+          * - :py:obj:`~ansys.meshing.prime.QuadToSpline`
+            - Converts all-quad mesh to spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.QuadToSplineParams`
+            - Parameters to control conversion of quadrilateral mesh to spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ReadSizeFieldParams`
+            - Parameters used to read size field file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RefineAtContactsParams`
+            - Parameters to refine face elements in contact.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RefineAtContactsResults`
+            - Results structure associated with refine face elements in contact.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RefineSplineParams`
+            - Spline refinement parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RefineTetMeshParams`
+            - Parameters for meshing the solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RemoveLabelResults`
+            - Results associated with the remove label operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RemoveZoneResults`
+            - Results associated with the remove zone operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RepairEdgesParams`
+            - Parameters for repair edges operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.RepairTopologyParams`
+            - Parameters for repair topology operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ResolveIntersectionResult`
+            - Result structure associated with resolve intersections operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ResolveIntersectionsParams`
+            - ResolveIntersectionsParams define parameters for resolve intersections.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SFPeriodicParams`
+            - Parameters for setting periodic size fields.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Scaffolder`
+            - Scaffolder is used for achieving connections in structures made of sheets and beams. Solid bodies should be suppressed before applying scaffolding.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScaffolderMergeResults`
+            - Result structure associated with merge overlapping topofaces and delete shadowed topofaces operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScaffolderParams`
+            - Parameters to control scaffold operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScaffolderRepairMode`
+            - Mode of Scaffolder repair to be used.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScaffolderResults`
+            - Results structure associated to scaffold operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScaffolderSplitResults`
+            - Result structure associated to split topofaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScopeDefinition`
+            - ScopeDefinition to scope entities based on entity and evaluation type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScopeEntity`
+            - ScopeDefinition uses entity type to scope entities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScopeEvaluationType`
+            - ScopeDefinition uses evaluation type to evaluate the scope.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScopeExpressionType`
+            - ScopeExpressionType uses expression type to evaluate the scope.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ScopeZoneletParams`
+            - Parameters used to get the scoped face or edge zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByFoldsParams`
+            - Parameters to control fold detection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByFoldsResults`
+            - Results structure associated with search folds operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByIntersectionResults`
+            - Results associated with search by face element intersection (face elements interfering with each other).
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByInvalidNormalsResults`
+            - Results structure associated with search invalid normals operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByQualityParams`
+            - Parameters to control search by quality results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByQualityResults`
+            - Results of search by quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchBySelfIntersectionParams`
+            - Parameters to search by face element intersection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchBySpikeParams`
+            - Parameters to control spike detection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchBySpikeResults`
+            - Results structure associated with search spikes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByThinStripParams`
+            - Parameters to search by thin strip of face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchByThinStripResults`
+            - Results associated with search by thin strip of face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchInfoByRegisterIdParams`
+            - Parameters to retrieve information on registered faces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SearchInfoByRegisterIdResults`
+            - Result structure containing information on registered face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SeparateBlocksFormatType`
+            - Format type for separate element blocks. Only applicable when write_separate_blocks is true.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetContactPreventionsResults`
+            - Results associated with set contact preventions.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetFeatureRecoveriesResults`
+            - Results associated with set feature recoveries.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetLeakPreventionsResults`
+            - Results associated with set leak preventions.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetNameResults`
+            - Results associated with the set name.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetParamsResults`
+            - Results associated with the set parameters operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetScopeResults`
+            - Results associated with the set scope operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SetSizingResults`
+            - Result associated with the different set sizing parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ShellBLControl`
+            - ShellBLControl allows you to generate quad mesh on face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ShellBLControlGrowthParams`
+            - Growth parameters for ShellBL control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ShellBLParams`
+            - Parameters used to generate ShellBL.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizeControl`
+            - Size control is used to compute the size field.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizeControlSummaryParams`
+            - Parameters used to get size control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizeControlSummaryResult`
+            - Results of size control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizeField`
+            - The size field is computed based on the size control defined.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizeFieldFileReadResults`
+            - Results of size field file read operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizingType`
+            - Sizing type decides the type of size control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SmoothDihedralFaceNodesParams`
+            - Parameters to smooth dihedral face nodes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SmoothDihedralFaceNodesResults`
+            - Results structure associated with smooth dihedral face nodes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SmoothType`
+            - Indicates the the type of operation to be performed during the smooth dihedral face nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SoftSizingParams`
+            - Size field computed using soft size control enables you to set the maximum size on the scoped zonelets .
+
+
+          * - :py:obj:`~ansys.meshing.prime.SoiSizingParams`
+            - Parameters for sphere of influence size control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SplineContinuityType`
+            - Spline Continuity types.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SplineFeatureCaptureType`
+            - Options to capture features in spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SplineRefinementType`
+            - Type of spline refinement. Currently, supports h-refinement and p-refinement.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SplitParams`
+            - Parameters to split face elements at longest edge.
+
+
+          * - :py:obj:`~ansys.meshing.prime.StitchParams`
+            - Parameters used for stitch operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.StitchType`
+            - Stitch type depending on nature of surface boundary edges to be stitched.
+
+
+          * - :py:obj:`~ansys.meshing.prime.StretchFreeBoundariesParams`
+            - Parameters used for stretch free boundaries operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.StretchFreeBoundariesResults`
+            - Results associated with stretch free boundaries operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SubtractVolumesParams`
+            - Parameters to control the volume subtract operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SubtractVolumesResults`
+            - Results of the volume subtract operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SubtractZoneletsParams`
+            - Parameters to use when subtracting zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SubtractZoneletsResults`
+            - Results structure associated with subtracting zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceDiagnosticSummaryParams`
+            - Parameters to control surface diagnostics summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceDiagnosticSummaryResults`
+            - Results of surface diagnostic summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceMeshSizeScaling`
+            - Settings related to scaling of surface mesh size for hexcore refinement.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceQualityResult`
+            - Result of surface quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceQualitySummaryParams`
+            - Parameters to control surface quality summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceQualitySummaryResults`
+            - Results of surface quality summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceSearch`
+            - SurfaceSearch allows you to check surface mesh quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceUtilities`
+            - Performs various general surface utilities algorithms.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Surfer`
+            - Generates surface mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurferParams`
+            - Parameters used to generate surface mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurferResults`
+            - Results associated with the surface mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SweepType`
+            - Provides the Sweep Mesh Decomposition type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TetMeshSplineParams`
+            - Parameters for meshing the solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TetParams`
+            - Parameters to control tetrahedral mesh generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ThinStripType`
+            - The type to identify strip of face elements as thin strips using shape formed by features around the strip of face elements.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ThinVolumeControl`
+            - ThinVolumeControl allows you to generate prisms in the space between surfaces.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ThinVolumeMeshParams`
+            - Parameters to generate thin volume mesh. This is for internal use only.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TopoData`
+            - Topodata has all information about connectivity of nodes, edges, elements and more.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TopoFillHoleParams`
+            - Parameters used to fill holes in topology.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TopoFillHoleResult`
+            - Results associated with fill holes in topology operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TopoSearchField`
+            - Toposearch diagnostic field.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TopoUtilities`
+            - Performs various general topology utility algorithms. For example, fill hole.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Transform`
+            - Provides functionalities to initialize and manage transformation using transformation matrix.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TransformParams`
+            - Parameters to transform given entities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TransformResults`
+            - Results associated with the transformation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TriangulateParams`
+            - Provides the parameters used for triangulation operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TriangulateResults`
+            - Results associated with triangulate operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TrimmedSolidSplineCutMode`
+            - Types of Cut modes used to generate Cartesian grid representing subdomains of trimmed solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TrimmedSpline`
+            - Handles creation and meshing of trimmed spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.TrimmedSplineResults`
+            - Results of IGA operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.UniformSolidSplineCreationParams`
+            - Parameters to define the uniform solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VTComposer`
+            - VTComposer is used for fix topology corrections like separate, pinch.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VTComposerParams`
+            - Parameters to control VTComposer operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VTComposerResults`
+            - Result struct associated to VTComposer operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeControl`
+            - Defines the scope and type of volume mesh to generate.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeControlParams`
+            - Volume control parameters are used to define the volume type in the volume control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeFillType`
+            - Types of volume fill options.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeMeshTool`
+            - VolumeMeshTool allows you to check grid and improve volume mesh quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeMeshToolResults`
+            - Result associated with the volume mesh tool operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeNamingType`
+            - Indicate source types used to name volume zones.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeQualityResultsPart`
+            - Result of volume quality of part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeQualitySummaryParams`
+            - Parameters to control volume quality summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeQualitySummaryResults`
+            - Results of volume quality summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeSearch`
+            - VolumeSearch allows you to check volume mesh quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumeSweeper`
+            - Provides operations to generate volume meshes using stacker technology.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumetricScaffolderParams`
+            - Parameters to control delete shadowed topofaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumetricSizeFieldComputeParams`
+            - Parameters associated with the compute volumetric size field operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.VolumetricSizeFieldComputeResults`
+            - Results associated with the compute volumetric size field operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapParams`
+            - WrapParams defines parameters for wrapping.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapRegion`
+            - Indicates source type to extract wrapper region.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapResult`
+            - Result structure associated to Wrap operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.Wrapper`
+            - Provides operations for generating a surface mesh using wrapper technology.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperCloseGapsParams`
+            - WrapperCloseGapsParams to define parameters for close gaps operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperCloseGapsResult`
+            - Result structure associated with close gaps operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperControl`
+            - Wrapper Control to describe all parameters and controls used for wrapping..
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperImproveQualityParams`
+            - WrapperImproveQualityParams defines parameters to improve wrapper part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperImproveResult`
+            - Results structure associated to improve quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperPatchFlowRegionsParams`
+            - WrapperPatchFlowRegionsParams to define parameters for patch flow regions operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WrapperPatchFlowRegionsResult`
+            - Result structure associated with patch holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WriteSizeFieldParams`
+            - Parameters used to write size field file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ZoneMeshResult`
+            - Results containing zone-wise mesh information.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ZoneType`
+            - ZoneType decides the type of zone.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.CellQualityMeasure`
+            - The type of cell quality measures to check cell quality metrics.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ErrorCode`
+            - Error codes associated with the failure of PyPrimeMesh operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.FaceQualityMeasure`
+            - The type of face quality measures to check face quality metrics.
+
+
+          * - :py:obj:`~ansys.meshing.prime.ShellBLOffsetType`
+            - Type of offset method during ShellBL generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SizeFieldType`
+            - The type of sizing field to be used to fetch element size at given location.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SolverType`
+            - Type of solver.
+
+
+          * - :py:obj:`~ansys.meshing.prime.SurfaceFeatureType`
+            - Type of face edges considered as features.
+
+
+          * - :py:obj:`~ansys.meshing.prime.WarningCode`
+            - Warning codes associated with the PyPrimeMesh operation.
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.local_model`
+            - Get local model
+
+
+
+
+
+
+.. .. .. .. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> autogen</api/ansys/meshing/prime/autogen/index>
+    <span class="nf nf-md-package"></span> core</api/ansys/meshing/prime/core/index>
+    <span class="nf nf-md-package"></span> examples</api/ansys/meshing/prime/examples/index>
+    <span class="nf nf-md-package"></span> graphics</api/ansys/meshing/prime/graphics/index>
+    <span class="nf nf-md-package"></span> lucid</api/ansys/meshing/prime/lucid/index>
+    <span class="nf nf-md-package"></span> params</api/ansys/meshing/prime/params/index>
+
+.. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AddLabelResults</api/ansys/meshing/prime/AddLabelResults>
+    <span class="nf nf-cod-symbol_class"></span> AddThicknessParams</api/ansys/meshing/prime/AddThicknessParams>
+    <span class="nf nf-cod-symbol_class"></span> AddThicknessResults</api/ansys/meshing/prime/AddThicknessResults>
+    <span class="nf nf-cod-symbol_class"></span> AddToZoneResults</api/ansys/meshing/prime/AddToZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> AdvancedSurferSetup</api/ansys/meshing/prime/AdvancedSurferSetup>
+    <span class="nf nf-cod-symbol_class"></span> AutoMesh</api/ansys/meshing/prime/AutoMesh>
+    <span class="nf nf-cod-symbol_class"></span> AutoMeshParams</api/ansys/meshing/prime/AutoMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> AutoMeshResults</api/ansys/meshing/prime/AutoMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> AutoNodeMoveParams</api/ansys/meshing/prime/AutoNodeMoveParams>
+    <span class="nf nf-cod-symbol_class"></span> AutoQuadMesher</api/ansys/meshing/prime/AutoQuadMesher>
+    <span class="nf nf-cod-symbol_class"></span> AutoQuadMesherResults</api/ansys/meshing/prime/AutoQuadMesherResults>
+    <span class="nf nf-cod-symbol_class"></span> BCPair</api/ansys/meshing/prime/BCPair>
+    <span class="nf nf-cod-symbol_class"></span> BCPairType</api/ansys/meshing/prime/BCPairType>
+    <span class="nf nf-cod-symbol_class"></span> BCsVolumetricModality</api/ansys/meshing/prime/BCsVolumetricModality>
+    <span class="nf nf-cod-symbol_class"></span> BOIType</api/ansys/meshing/prime/BOIType>
+    <span class="nf nf-cod-symbol_class"></span> BodyQueryType</api/ansys/meshing/prime/BodyQueryType>
+    <span class="nf nf-cod-symbol_class"></span> BoiSizingParams</api/ansys/meshing/prime/BoiSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> BoundaryFittedSpline</api/ansys/meshing/prime/BoundaryFittedSpline>
+    <span class="nf nf-cod-symbol_class"></span> BoundaryFittedSplineParams</api/ansys/meshing/prime/BoundaryFittedSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> BoundingBox</api/ansys/meshing/prime/BoundingBox>
+    <span class="nf nf-cod-symbol_class"></span> CadFaceter</api/ansys/meshing/prime/CadFaceter>
+    <span class="nf nf-cod-symbol_class"></span> CadReaderRoute</api/ansys/meshing/prime/CadReaderRoute>
+    <span class="nf nf-cod-symbol_class"></span> CadRefacetingMaxEdgeSizeLimit</api/ansys/meshing/prime/CadRefacetingMaxEdgeSizeLimit>
+    <span class="nf nf-cod-symbol_class"></span> CadRefacetingParams</api/ansys/meshing/prime/CadRefacetingParams>
+    <span class="nf nf-cod-symbol_class"></span> CadRefacetingResolution</api/ansys/meshing/prime/CadRefacetingResolution>
+    <span class="nf nf-cod-symbol_class"></span> CdbAnalysisType</api/ansys/meshing/prime/CdbAnalysisType>
+    <span class="nf nf-cod-symbol_class"></span> CdbSimulationType</api/ansys/meshing/prime/CdbSimulationType>
+    <span class="nf nf-cod-symbol_class"></span> CellStatisticsParams</api/ansys/meshing/prime/CellStatisticsParams>
+    <span class="nf nf-cod-symbol_class"></span> CellStatisticsResults</api/ansys/meshing/prime/CellStatisticsResults>
+    <span class="nf nf-cod-symbol_class"></span> CellZoneletType</api/ansys/meshing/prime/CellZoneletType>
+    <span class="nf nf-cod-symbol_class"></span> CheckFaceDeviationParams</api/ansys/meshing/prime/CheckFaceDeviationParams>
+    <span class="nf nf-cod-symbol_class"></span> CheckFaceDeviationResults</api/ansys/meshing/prime/CheckFaceDeviationResults>
+    <span class="nf nf-cod-symbol_class"></span> CheckMeshParams</api/ansys/meshing/prime/CheckMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> CheckMeshResults</api/ansys/meshing/prime/CheckMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> CheckTopologyParams</api/ansys/meshing/prime/CheckTopologyParams>
+    <span class="nf nf-cod-symbol_class"></span> CollapseParams</api/ansys/meshing/prime/CollapseParams>
+    <span class="nf nf-cod-symbol_class"></span> CollapseResults</api/ansys/meshing/prime/CollapseResults>
+    <span class="nf nf-cod-symbol_class"></span> CollapseTool</api/ansys/meshing/prime/CollapseTool>
+    <span class="nf nf-cod-symbol_class"></span> ComponentChildrenParams</api/ansys/meshing/prime/ComponentChildrenParams>
+    <span class="nf nf-cod-symbol_class"></span> ComponentChildrenResults</api/ansys/meshing/prime/ComponentChildrenResults>
+    <span class="nf nf-cod-symbol_class"></span> ComputeTopoVolumesResults</api/ansys/meshing/prime/ComputeTopoVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> ComputeVolumesParams</api/ansys/meshing/prime/ComputeVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> ComputeVolumesResults</api/ansys/meshing/prime/ComputeVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> Connect</api/ansys/meshing/prime/Connect>
+    <span class="nf nf-cod-symbol_class"></span> ConnectFacesParams</api/ansys/meshing/prime/ConnectFacesParams>
+    <span class="nf nf-cod-symbol_class"></span> ConnectResults</api/ansys/meshing/prime/ConnectResults>
+    <span class="nf nf-cod-symbol_class"></span> ContactElementTypeParams</api/ansys/meshing/prime/ContactElementTypeParams>
+    <span class="nf nf-cod-symbol_class"></span> ContactPatchAxis</api/ansys/meshing/prime/ContactPatchAxis>
+    <span class="nf nf-cod-symbol_class"></span> ContactPreventionParams</api/ansys/meshing/prime/ContactPreventionParams>
+    <span class="nf nf-cod-symbol_class"></span> ControlData</api/ansys/meshing/prime/ControlData>
+    <span class="nf nf-cod-symbol_class"></span> ControlPointSelection</api/ansys/meshing/prime/ControlPointSelection>
+    <span class="nf nf-cod-symbol_class"></span> CopyZoneletsParams</api/ansys/meshing/prime/CopyZoneletsParams>
+    <span class="nf nf-cod-symbol_class"></span> CopyZoneletsResults</api/ansys/meshing/prime/CopyZoneletsResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateBOIParams</api/ansys/meshing/prime/CreateBOIParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateBOIResults</api/ansys/meshing/prime/CreateBOIResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateCapParams</api/ansys/meshing/prime/CreateCapParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateCapResults</api/ansys/meshing/prime/CreateCapResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateContactPatchParams</api/ansys/meshing/prime/CreateContactPatchParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateContactPatchResults</api/ansys/meshing/prime/CreateContactPatchResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateIntersectionEdgeLoopsParams</api/ansys/meshing/prime/CreateIntersectionEdgeLoopsParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateIntersectionEdgeLoopsResults</api/ansys/meshing/prime/CreateIntersectionEdgeLoopsResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateMaterialPointParams</api/ansys/meshing/prime/CreateMaterialPointParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateMaterialPointResults</api/ansys/meshing/prime/CreateMaterialPointResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateShellBLResults</api/ansys/meshing/prime/CreateShellBLResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateVolumeZonesType</api/ansys/meshing/prime/CreateVolumeZonesType>
+    <span class="nf nf-cod-symbol_class"></span> CreateZoneResults</api/ansys/meshing/prime/CreateZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> CurvatureSizingParams</api/ansys/meshing/prime/CurvatureSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> DeadRegion</api/ansys/meshing/prime/DeadRegion>
+    <span class="nf nf-cod-symbol_class"></span> DefeatureTopologyParams</api/ansys/meshing/prime/DefeatureTopologyParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteFringesAndOverlapsParams</api/ansys/meshing/prime/DeleteFringesAndOverlapsParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteFringesAndOverlapsResults</api/ansys/meshing/prime/DeleteFringesAndOverlapsResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteInteriorNodesParams</api/ansys/meshing/prime/DeleteInteriorNodesParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteMaterialPointResults</api/ansys/meshing/prime/DeleteMaterialPointResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteMeshParams</api/ansys/meshing/prime/DeleteMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteMeshResults</api/ansys/meshing/prime/DeleteMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteResults</api/ansys/meshing/prime/DeleteResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteTool</api/ansys/meshing/prime/DeleteTool>
+    <span class="nf nf-cod-symbol_class"></span> DeleteTopoEntitiesParams</api/ansys/meshing/prime/DeleteTopoEntitiesParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteTopoEntitiesResults</api/ansys/meshing/prime/DeleteTopoEntitiesResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteUnwettedParams</api/ansys/meshing/prime/DeleteUnwettedParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteUnwettedResult</api/ansys/meshing/prime/DeleteUnwettedResult>
+    <span class="nf nf-cod-symbol_class"></span> DeleteVolumesParams</api/ansys/meshing/prime/DeleteVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteVolumesResults</api/ansys/meshing/prime/DeleteVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteZoneResults</api/ansys/meshing/prime/DeleteZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> DetectAndTreatCircularFacesParams</api/ansys/meshing/prime/DetectAndTreatCircularFacesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectAndTreatFeaturesParams</api/ansys/meshing/prime/DetectAndTreatFeaturesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectAndTreatHolesParams</api/ansys/meshing/prime/DetectAndTreatHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectCircularHolesParams</api/ansys/meshing/prime/DetectCircularHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectHolesParams</api/ansys/meshing/prime/DetectHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectNonCircularHolesParams</api/ansys/meshing/prime/DetectNonCircularHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> EdgeConnectType</api/ansys/meshing/prime/EdgeConnectType>
+    <span class="nf nf-cod-symbol_class"></span> EdgeConnectivityResults</api/ansys/meshing/prime/EdgeConnectivityResults>
+    <span class="nf nf-cod-symbol_class"></span> EdgeMergeControl</api/ansys/meshing/prime/EdgeMergeControl>
+    <span class="nf nf-cod-symbol_class"></span> ExportBoundaryFittedSplineParams</api/ansys/meshing/prime/ExportBoundaryFittedSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportFluentCaseParams</api/ansys/meshing/prime/ExportFluentCaseParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportFluentMeshingMeshParams</api/ansys/meshing/prime/ExportFluentMeshingMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaIGAResults</api/ansys/meshing/prime/ExportLSDynaIGAResults>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaIgaKeywordFileParams</api/ansys/meshing/prime/ExportLSDynaIgaKeywordFileParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaKeywordFileParams</api/ansys/meshing/prime/ExportLSDynaKeywordFileParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaResults</api/ansys/meshing/prime/ExportLSDynaResults>
+    <span class="nf nf-cod-symbol_class"></span> ExportMapdlCdbParams</api/ansys/meshing/prime/ExportMapdlCdbParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportMapdlCdbResults</api/ansys/meshing/prime/ExportMapdlCdbResults>
+    <span class="nf nf-cod-symbol_class"></span> ExportSTLParams</api/ansys/meshing/prime/ExportSTLParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractFeatureParams</api/ansys/meshing/prime/ExtractFeatureParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractFeatureResults</api/ansys/meshing/prime/ExtractFeatureResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractTopoVolumesParams</api/ansys/meshing/prime/ExtractTopoVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractTopoVolumesResults</api/ansys/meshing/prime/ExtractTopoVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractVolumesParams</api/ansys/meshing/prime/ExtractVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractVolumesResults</api/ansys/meshing/prime/ExtractVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractedFeatureIds</api/ansys/meshing/prime/ExtractedFeatureIds>
+    <span class="nf nf-cod-symbol_class"></span> FaceAndEdgeConnectivityParams</api/ansys/meshing/prime/FaceAndEdgeConnectivityParams>
+    <span class="nf nf-cod-symbol_class"></span> FaceAndEdgeConnectivityResults</api/ansys/meshing/prime/FaceAndEdgeConnectivityResults>
+    <span class="nf nf-cod-symbol_class"></span> FaceConnectivityResults</api/ansys/meshing/prime/FaceConnectivityResults>
+    <span class="nf nf-cod-symbol_class"></span> FeatureExtraction</api/ansys/meshing/prime/FeatureExtraction>
+    <span class="nf nf-cod-symbol_class"></span> FeatureRecoveryParams</api/ansys/meshing/prime/FeatureRecoveryParams>
+    <span class="nf nf-cod-symbol_class"></span> FileIO</api/ansys/meshing/prime/FileIO>
+    <span class="nf nf-cod-symbol_class"></span> FileReadParams</api/ansys/meshing/prime/FileReadParams>
+    <span class="nf nf-cod-symbol_class"></span> FileReadResults</api/ansys/meshing/prime/FileReadResults>
+    <span class="nf nf-cod-symbol_class"></span> FileWriteParams</api/ansys/meshing/prime/FileWriteParams>
+    <span class="nf nf-cod-symbol_class"></span> FileWriteResults</api/ansys/meshing/prime/FileWriteResults>
+    <span class="nf nf-cod-symbol_class"></span> FillHolesAtPlaneParams</api/ansys/meshing/prime/FillHolesAtPlaneParams>
+    <span class="nf nf-cod-symbol_class"></span> FillHolesAtPlaneResults</api/ansys/meshing/prime/FillHolesAtPlaneResults>
+    <span class="nf nf-cod-symbol_class"></span> FixInvalidNormalNodeParams</api/ansys/meshing/prime/FixInvalidNormalNodeParams>
+    <span class="nf nf-cod-symbol_class"></span> FixInvalidNormalNodeResults</api/ansys/meshing/prime/FixInvalidNormalNodeResults>
+    <span class="nf nf-cod-symbol_class"></span> FlowDirection</api/ansys/meshing/prime/FlowDirection>
+    <span class="nf nf-cod-symbol_class"></span> FuseOption</api/ansys/meshing/prime/FuseOption>
+    <span class="nf nf-cod-symbol_class"></span> FuseParams</api/ansys/meshing/prime/FuseParams>
+    <span class="nf nf-cod-symbol_class"></span> FuseResults</api/ansys/meshing/prime/FuseResults>
+    <span class="nf nf-cod-symbol_class"></span> GlobalSizingParams</api/ansys/meshing/prime/GlobalSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> HardSizingParams</api/ansys/meshing/prime/HardSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> HexCoreCellElementType</api/ansys/meshing/prime/HexCoreCellElementType>
+    <span class="nf nf-cod-symbol_class"></span> HexCoreParams</api/ansys/meshing/prime/HexCoreParams>
+    <span class="nf nf-cod-symbol_class"></span> HexCoreTransitionLayerType</api/ansys/meshing/prime/HexCoreTransitionLayerType>
+    <span class="nf nf-cod-symbol_class"></span> HexToSpline</api/ansys/meshing/prime/HexToSpline>
+    <span class="nf nf-cod-symbol_class"></span> HexToSplineParams</api/ansys/meshing/prime/HexToSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> IGAResults</api/ansys/meshing/prime/IGAResults>
+    <span class="nf nf-cod-symbol_class"></span> IGASpline</api/ansys/meshing/prime/IGASpline>
+    <span class="nf nf-cod-symbol_class"></span> IGAUnstructuredSplineSolid</api/ansys/meshing/prime/IGAUnstructuredSplineSolid>
+    <span class="nf nf-cod-symbol_class"></span> IGAUnstructuredSplineSurf</api/ansys/meshing/prime/IGAUnstructuredSplineSurf>
+    <span class="nf nf-cod-symbol_class"></span> ImportAbaqusParams</api/ansys/meshing/prime/ImportAbaqusParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportAbaqusResults</api/ansys/meshing/prime/ImportAbaqusResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportCadParams</api/ansys/meshing/prime/ImportCadParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportCadResults</api/ansys/meshing/prime/ImportCadResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentCaseParams</api/ansys/meshing/prime/ImportFluentCaseParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentCaseResults</api/ansys/meshing/prime/ImportFluentCaseResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentMeshingMeshParams</api/ansys/meshing/prime/ImportFluentMeshingMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentMeshingMeshResults</api/ansys/meshing/prime/ImportFluentMeshingMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportMapdlCdbParams</api/ansys/meshing/prime/ImportMapdlCdbParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportMapdlCdbResults</api/ansys/meshing/prime/ImportMapdlCdbResults>
+    <span class="nf nf-cod-symbol_class"></span> IntersectParams</api/ansys/meshing/prime/IntersectParams>
+    <span class="nf nf-cod-symbol_class"></span> IntersectionMask</api/ansys/meshing/prime/IntersectionMask>
+    <span class="nf nf-cod-symbol_class"></span> JoinParams</api/ansys/meshing/prime/JoinParams>
+    <span class="nf nf-cod-symbol_class"></span> JoinSeparateMethod</api/ansys/meshing/prime/JoinSeparateMethod>
+    <span class="nf nf-cod-symbol_class"></span> LSDynaAnalysisType</api/ansys/meshing/prime/LSDynaAnalysisType>
+    <span class="nf nf-cod-symbol_class"></span> LSDynaFileFormatType</api/ansys/meshing/prime/LSDynaFileFormatType>
+    <span class="nf nf-cod-symbol_class"></span> LabelExportParams</api/ansys/meshing/prime/LabelExportParams>
+    <span class="nf nf-cod-symbol_class"></span> LeakPreventionParams</api/ansys/meshing/prime/LeakPreventionParams>
+    <span class="nf nf-cod-symbol_class"></span> LengthUnit</api/ansys/meshing/prime/LengthUnit>
+    <span class="nf nf-cod-symbol_class"></span> LocalSurferParams</api/ansys/meshing/prime/LocalSurferParams>
+    <span class="nf nf-cod-symbol_class"></span> LocalSurferResults</api/ansys/meshing/prime/LocalSurferResults>
+    <span class="nf nf-cod-symbol_class"></span> MatchMorphParams</api/ansys/meshing/prime/MatchMorphParams>
+    <span class="nf nf-cod-symbol_class"></span> MatchMorphResults</api/ansys/meshing/prime/MatchMorphResults>
+    <span class="nf nf-cod-symbol_class"></span> MatchPair</api/ansys/meshing/prime/MatchPair>
+    <span class="nf nf-cod-symbol_class"></span> MatchPairTargetType</api/ansys/meshing/prime/MatchPairTargetType>
+    <span class="nf nf-cod-symbol_class"></span> MaterialPointManager</api/ansys/meshing/prime/MaterialPointManager>
+    <span class="nf nf-cod-symbol_class"></span> MaterialPointType</api/ansys/meshing/prime/MaterialPointType>
+    <span class="nf nf-cod-symbol_class"></span> MergeBoundaryNodesParams</api/ansys/meshing/prime/MergeBoundaryNodesParams>
+    <span class="nf nf-cod-symbol_class"></span> MergeBoundaryNodesResults</api/ansys/meshing/prime/MergeBoundaryNodesResults>
+    <span class="nf nf-cod-symbol_class"></span> MergeNodeType</api/ansys/meshing/prime/MergeNodeType>
+    <span class="nf nf-cod-symbol_class"></span> MergePartsParams</api/ansys/meshing/prime/MergePartsParams>
+    <span class="nf nf-cod-symbol_class"></span> MergePartsResults</api/ansys/meshing/prime/MergePartsResults>
+    <span class="nf nf-cod-symbol_class"></span> MergeVolumesParams</api/ansys/meshing/prime/MergeVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> MergeVolumesResults</api/ansys/meshing/prime/MergeVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> MergeZoneletsParams</api/ansys/meshing/prime/MergeZoneletsParams>
+    <span class="nf nf-cod-symbol_class"></span> MergeZoneletsResults</api/ansys/meshing/prime/MergeZoneletsResults>
+    <span class="nf nf-cod-symbol_class"></span> MeshInfo</api/ansys/meshing/prime/MeshInfo>
+    <span class="nf nf-cod-symbol_class"></span> MeshStackerParams</api/ansys/meshing/prime/MeshStackerParams>
+    <span class="nf nf-cod-symbol_class"></span> MeshStackerResults</api/ansys/meshing/prime/MeshStackerResults>
+    <span class="nf nf-cod-symbol_class"></span> MeshedSizingParams</api/ansys/meshing/prime/MeshedSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> Model</api/ansys/meshing/prime/Model>
+    <span class="nf nf-cod-symbol_class"></span> MorphBCParams</api/ansys/meshing/prime/MorphBCParams>
+    <span class="nf nf-cod-symbol_class"></span> MorphSolveParams</api/ansys/meshing/prime/MorphSolveParams>
+    <span class="nf nf-cod-symbol_class"></span> Morpher</api/ansys/meshing/prime/Morpher>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneControl</api/ansys/meshing/prime/MultiZoneControl>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneEdgeBiasingParams</api/ansys/meshing/prime/MultiZoneEdgeBiasingParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneMapMeshParams</api/ansys/meshing/prime/MultiZoneMapMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneSizingParams</api/ansys/meshing/prime/MultiZoneSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> MultiZoneSweepMeshParams</api/ansys/meshing/prime/MultiZoneSweepMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> NamePatternParams</api/ansys/meshing/prime/NamePatternParams>
+    <span class="nf nf-cod-symbol_class"></span> OptimizeQuadMeshParams</api/ansys/meshing/prime/OptimizeQuadMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> OverlapPairs</api/ansys/meshing/prime/OverlapPairs>
+    <span class="nf nf-cod-symbol_class"></span> OverlapSearchResults</api/ansys/meshing/prime/OverlapSearchResults>
+    <span class="nf nf-cod-symbol_class"></span> Part</api/ansys/meshing/prime/Part>
+    <span class="nf nf-cod-symbol_class"></span> PartCreationType</api/ansys/meshing/prime/PartCreationType>
+    <span class="nf nf-cod-symbol_class"></span> PartSummaryParams</api/ansys/meshing/prime/PartSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> PartSummaryResults</api/ansys/meshing/prime/PartSummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> PartZonelets</api/ansys/meshing/prime/PartZonelets>
+    <span class="nf nf-cod-symbol_class"></span> PartialDefeatureParams</api/ansys/meshing/prime/PartialDefeatureParams>
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControl</api/ansys/meshing/prime/PeriodicControl>
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControlParams</api/ansys/meshing/prime/PeriodicControlParams>
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControlSummaryParams</api/ansys/meshing/prime/PeriodicControlSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControlSummaryResult</api/ansys/meshing/prime/PeriodicControlSummaryResult>
+    <span class="nf nf-cod-symbol_class"></span> PrismControl</api/ansys/meshing/prime/PrismControl>
+    <span class="nf nf-cod-symbol_class"></span> PrismControlGrowthParams</api/ansys/meshing/prime/PrismControlGrowthParams>
+    <span class="nf nf-cod-symbol_class"></span> PrismControlOffsetType</api/ansys/meshing/prime/PrismControlOffsetType>
+    <span class="nf nf-cod-symbol_class"></span> PrismParams</api/ansys/meshing/prime/PrismParams>
+    <span class="nf nf-cod-symbol_class"></span> PrismStairStep</api/ansys/meshing/prime/PrismStairStep>
+    <span class="nf nf-cod-symbol_class"></span> ProjectOnGeometryParams</api/ansys/meshing/prime/ProjectOnGeometryParams>
+    <span class="nf nf-cod-symbol_class"></span> ProjectOnGeometryResults</api/ansys/meshing/prime/ProjectOnGeometryResults>
+    <span class="nf nf-cod-symbol_class"></span> ProximitySizingParams</api/ansys/meshing/prime/ProximitySizingParams>
+    <span class="nf nf-cod-symbol_class"></span> QuadToSpline</api/ansys/meshing/prime/QuadToSpline>
+    <span class="nf nf-cod-symbol_class"></span> QuadToSplineParams</api/ansys/meshing/prime/QuadToSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> ReadSizeFieldParams</api/ansys/meshing/prime/ReadSizeFieldParams>
+    <span class="nf nf-cod-symbol_class"></span> RefineAtContactsParams</api/ansys/meshing/prime/RefineAtContactsParams>
+    <span class="nf nf-cod-symbol_class"></span> RefineAtContactsResults</api/ansys/meshing/prime/RefineAtContactsResults>
+    <span class="nf nf-cod-symbol_class"></span> RefineSplineParams</api/ansys/meshing/prime/RefineSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> RefineTetMeshParams</api/ansys/meshing/prime/RefineTetMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> RemoveLabelResults</api/ansys/meshing/prime/RemoveLabelResults>
+    <span class="nf nf-cod-symbol_class"></span> RemoveZoneResults</api/ansys/meshing/prime/RemoveZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> RepairEdgesParams</api/ansys/meshing/prime/RepairEdgesParams>
+    <span class="nf nf-cod-symbol_class"></span> RepairTopologyParams</api/ansys/meshing/prime/RepairTopologyParams>
+    <span class="nf nf-cod-symbol_class"></span> ResolveIntersectionResult</api/ansys/meshing/prime/ResolveIntersectionResult>
+    <span class="nf nf-cod-symbol_class"></span> ResolveIntersectionsParams</api/ansys/meshing/prime/ResolveIntersectionsParams>
+    <span class="nf nf-cod-symbol_class"></span> SFPeriodicParams</api/ansys/meshing/prime/SFPeriodicParams>
+    <span class="nf nf-cod-symbol_class"></span> Scaffolder</api/ansys/meshing/prime/Scaffolder>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderMergeResults</api/ansys/meshing/prime/ScaffolderMergeResults>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderParams</api/ansys/meshing/prime/ScaffolderParams>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderRepairMode</api/ansys/meshing/prime/ScaffolderRepairMode>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderResults</api/ansys/meshing/prime/ScaffolderResults>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderSplitResults</api/ansys/meshing/prime/ScaffolderSplitResults>
+    <span class="nf nf-cod-symbol_class"></span> ScopeDefinition</api/ansys/meshing/prime/ScopeDefinition>
+    <span class="nf nf-cod-symbol_class"></span> ScopeEntity</api/ansys/meshing/prime/ScopeEntity>
+    <span class="nf nf-cod-symbol_class"></span> ScopeEvaluationType</api/ansys/meshing/prime/ScopeEvaluationType>
+    <span class="nf nf-cod-symbol_class"></span> ScopeExpressionType</api/ansys/meshing/prime/ScopeExpressionType>
+    <span class="nf nf-cod-symbol_class"></span> ScopeZoneletParams</api/ansys/meshing/prime/ScopeZoneletParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByFoldsParams</api/ansys/meshing/prime/SearchByFoldsParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByFoldsResults</api/ansys/meshing/prime/SearchByFoldsResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByIntersectionResults</api/ansys/meshing/prime/SearchByIntersectionResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByInvalidNormalsResults</api/ansys/meshing/prime/SearchByInvalidNormalsResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByQualityParams</api/ansys/meshing/prime/SearchByQualityParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByQualityResults</api/ansys/meshing/prime/SearchByQualityResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchBySelfIntersectionParams</api/ansys/meshing/prime/SearchBySelfIntersectionParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchBySpikeParams</api/ansys/meshing/prime/SearchBySpikeParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchBySpikeResults</api/ansys/meshing/prime/SearchBySpikeResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchByThinStripParams</api/ansys/meshing/prime/SearchByThinStripParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchByThinStripResults</api/ansys/meshing/prime/SearchByThinStripResults>
+    <span class="nf nf-cod-symbol_class"></span> SearchInfoByRegisterIdParams</api/ansys/meshing/prime/SearchInfoByRegisterIdParams>
+    <span class="nf nf-cod-symbol_class"></span> SearchInfoByRegisterIdResults</api/ansys/meshing/prime/SearchInfoByRegisterIdResults>
+    <span class="nf nf-cod-symbol_class"></span> SeparateBlocksFormatType</api/ansys/meshing/prime/SeparateBlocksFormatType>
+    <span class="nf nf-cod-symbol_class"></span> SetContactPreventionsResults</api/ansys/meshing/prime/SetContactPreventionsResults>
+    <span class="nf nf-cod-symbol_class"></span> SetFeatureRecoveriesResults</api/ansys/meshing/prime/SetFeatureRecoveriesResults>
+    <span class="nf nf-cod-symbol_class"></span> SetLeakPreventionsResults</api/ansys/meshing/prime/SetLeakPreventionsResults>
+    <span class="nf nf-cod-symbol_class"></span> SetNameResults</api/ansys/meshing/prime/SetNameResults>
+    <span class="nf nf-cod-symbol_class"></span> SetParamsResults</api/ansys/meshing/prime/SetParamsResults>
+    <span class="nf nf-cod-symbol_class"></span> SetScopeResults</api/ansys/meshing/prime/SetScopeResults>
+    <span class="nf nf-cod-symbol_class"></span> SetSizingResults</api/ansys/meshing/prime/SetSizingResults>
+    <span class="nf nf-cod-symbol_class"></span> ShellBLControl</api/ansys/meshing/prime/ShellBLControl>
+    <span class="nf nf-cod-symbol_class"></span> ShellBLControlGrowthParams</api/ansys/meshing/prime/ShellBLControlGrowthParams>
+    <span class="nf nf-cod-symbol_class"></span> ShellBLParams</api/ansys/meshing/prime/ShellBLParams>
+    <span class="nf nf-cod-symbol_class"></span> SizeControl</api/ansys/meshing/prime/SizeControl>
+    <span class="nf nf-cod-symbol_class"></span> SizeControlSummaryParams</api/ansys/meshing/prime/SizeControlSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> SizeControlSummaryResult</api/ansys/meshing/prime/SizeControlSummaryResult>
+    <span class="nf nf-cod-symbol_class"></span> SizeField</api/ansys/meshing/prime/SizeField>
+    <span class="nf nf-cod-symbol_class"></span> SizeFieldFileReadResults</api/ansys/meshing/prime/SizeFieldFileReadResults>
+    <span class="nf nf-cod-symbol_class"></span> SizingType</api/ansys/meshing/prime/SizingType>
+    <span class="nf nf-cod-symbol_class"></span> SmoothDihedralFaceNodesParams</api/ansys/meshing/prime/SmoothDihedralFaceNodesParams>
+    <span class="nf nf-cod-symbol_class"></span> SmoothDihedralFaceNodesResults</api/ansys/meshing/prime/SmoothDihedralFaceNodesResults>
+    <span class="nf nf-cod-symbol_class"></span> SmoothType</api/ansys/meshing/prime/SmoothType>
+    <span class="nf nf-cod-symbol_class"></span> SoftSizingParams</api/ansys/meshing/prime/SoftSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> SoiSizingParams</api/ansys/meshing/prime/SoiSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> SplineContinuityType</api/ansys/meshing/prime/SplineContinuityType>
+    <span class="nf nf-cod-symbol_class"></span> SplineFeatureCaptureType</api/ansys/meshing/prime/SplineFeatureCaptureType>
+    <span class="nf nf-cod-symbol_class"></span> SplineRefinementType</api/ansys/meshing/prime/SplineRefinementType>
+    <span class="nf nf-cod-symbol_class"></span> SplitParams</api/ansys/meshing/prime/SplitParams>
+    <span class="nf nf-cod-symbol_class"></span> StitchParams</api/ansys/meshing/prime/StitchParams>
+    <span class="nf nf-cod-symbol_class"></span> StitchType</api/ansys/meshing/prime/StitchType>
+    <span class="nf nf-cod-symbol_class"></span> StretchFreeBoundariesParams</api/ansys/meshing/prime/StretchFreeBoundariesParams>
+    <span class="nf nf-cod-symbol_class"></span> StretchFreeBoundariesResults</api/ansys/meshing/prime/StretchFreeBoundariesResults>
+    <span class="nf nf-cod-symbol_class"></span> SubtractVolumesParams</api/ansys/meshing/prime/SubtractVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> SubtractVolumesResults</api/ansys/meshing/prime/SubtractVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> SubtractZoneletsParams</api/ansys/meshing/prime/SubtractZoneletsParams>
+    <span class="nf nf-cod-symbol_class"></span> SubtractZoneletsResults</api/ansys/meshing/prime/SubtractZoneletsResults>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceDiagnosticSummaryParams</api/ansys/meshing/prime/SurfaceDiagnosticSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceDiagnosticSummaryResults</api/ansys/meshing/prime/SurfaceDiagnosticSummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceMeshSizeScaling</api/ansys/meshing/prime/SurfaceMeshSizeScaling>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceQualityResult</api/ansys/meshing/prime/SurfaceQualityResult>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceQualitySummaryParams</api/ansys/meshing/prime/SurfaceQualitySummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceQualitySummaryResults</api/ansys/meshing/prime/SurfaceQualitySummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceSearch</api/ansys/meshing/prime/SurfaceSearch>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceUtilities</api/ansys/meshing/prime/SurfaceUtilities>
+    <span class="nf nf-cod-symbol_class"></span> Surfer</api/ansys/meshing/prime/Surfer>
+    <span class="nf nf-cod-symbol_class"></span> SurferParams</api/ansys/meshing/prime/SurferParams>
+    <span class="nf nf-cod-symbol_class"></span> SurferResults</api/ansys/meshing/prime/SurferResults>
+    <span class="nf nf-cod-symbol_class"></span> SweepType</api/ansys/meshing/prime/SweepType>
+    <span class="nf nf-cod-symbol_class"></span> TetMeshSplineParams</api/ansys/meshing/prime/TetMeshSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> TetParams</api/ansys/meshing/prime/TetParams>
+    <span class="nf nf-cod-symbol_class"></span> ThinStripType</api/ansys/meshing/prime/ThinStripType>
+    <span class="nf nf-cod-symbol_class"></span> ThinVolumeControl</api/ansys/meshing/prime/ThinVolumeControl>
+    <span class="nf nf-cod-symbol_class"></span> ThinVolumeMeshParams</api/ansys/meshing/prime/ThinVolumeMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> TopoData</api/ansys/meshing/prime/TopoData>
+    <span class="nf nf-cod-symbol_class"></span> TopoFillHoleParams</api/ansys/meshing/prime/TopoFillHoleParams>
+    <span class="nf nf-cod-symbol_class"></span> TopoFillHoleResult</api/ansys/meshing/prime/TopoFillHoleResult>
+    <span class="nf nf-cod-symbol_class"></span> TopoSearchField</api/ansys/meshing/prime/TopoSearchField>
+    <span class="nf nf-cod-symbol_class"></span> TopoUtilities</api/ansys/meshing/prime/TopoUtilities>
+    <span class="nf nf-cod-symbol_class"></span> Transform</api/ansys/meshing/prime/Transform>
+    <span class="nf nf-cod-symbol_class"></span> TransformParams</api/ansys/meshing/prime/TransformParams>
+    <span class="nf nf-cod-symbol_class"></span> TransformResults</api/ansys/meshing/prime/TransformResults>
+    <span class="nf nf-cod-symbol_class"></span> TriangulateParams</api/ansys/meshing/prime/TriangulateParams>
+    <span class="nf nf-cod-symbol_class"></span> TriangulateResults</api/ansys/meshing/prime/TriangulateResults>
+    <span class="nf nf-cod-symbol_class"></span> TrimmedSolidSplineCutMode</api/ansys/meshing/prime/TrimmedSolidSplineCutMode>
+    <span class="nf nf-cod-symbol_class"></span> TrimmedSpline</api/ansys/meshing/prime/TrimmedSpline>
+    <span class="nf nf-cod-symbol_class"></span> TrimmedSplineResults</api/ansys/meshing/prime/TrimmedSplineResults>
+    <span class="nf nf-cod-symbol_class"></span> UniformSolidSplineCreationParams</api/ansys/meshing/prime/UniformSolidSplineCreationParams>
+    <span class="nf nf-cod-symbol_class"></span> VTComposer</api/ansys/meshing/prime/VTComposer>
+    <span class="nf nf-cod-symbol_class"></span> VTComposerParams</api/ansys/meshing/prime/VTComposerParams>
+    <span class="nf nf-cod-symbol_class"></span> VTComposerResults</api/ansys/meshing/prime/VTComposerResults>
+    <span class="nf nf-cod-symbol_class"></span> VolumeControl</api/ansys/meshing/prime/VolumeControl>
+    <span class="nf nf-cod-symbol_class"></span> VolumeControlParams</api/ansys/meshing/prime/VolumeControlParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumeFillType</api/ansys/meshing/prime/VolumeFillType>
+    <span class="nf nf-cod-symbol_class"></span> VolumeMeshTool</api/ansys/meshing/prime/VolumeMeshTool>
+    <span class="nf nf-cod-symbol_class"></span> VolumeMeshToolResults</api/ansys/meshing/prime/VolumeMeshToolResults>
+    <span class="nf nf-cod-symbol_class"></span> VolumeNamingType</api/ansys/meshing/prime/VolumeNamingType>
+    <span class="nf nf-cod-symbol_class"></span> VolumeQualityResultsPart</api/ansys/meshing/prime/VolumeQualityResultsPart>
+    <span class="nf nf-cod-symbol_class"></span> VolumeQualitySummaryParams</api/ansys/meshing/prime/VolumeQualitySummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumeQualitySummaryResults</api/ansys/meshing/prime/VolumeQualitySummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> VolumeSearch</api/ansys/meshing/prime/VolumeSearch>
+    <span class="nf nf-cod-symbol_class"></span> VolumeSweeper</api/ansys/meshing/prime/VolumeSweeper>
+    <span class="nf nf-cod-symbol_class"></span> VolumetricScaffolderParams</api/ansys/meshing/prime/VolumetricScaffolderParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumetricSizeFieldComputeParams</api/ansys/meshing/prime/VolumetricSizeFieldComputeParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumetricSizeFieldComputeResults</api/ansys/meshing/prime/VolumetricSizeFieldComputeResults>
+    <span class="nf nf-cod-symbol_class"></span> WrapParams</api/ansys/meshing/prime/WrapParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapRegion</api/ansys/meshing/prime/WrapRegion>
+    <span class="nf nf-cod-symbol_class"></span> WrapResult</api/ansys/meshing/prime/WrapResult>
+    <span class="nf nf-cod-symbol_class"></span> Wrapper</api/ansys/meshing/prime/Wrapper>
+    <span class="nf nf-cod-symbol_class"></span> WrapperCloseGapsParams</api/ansys/meshing/prime/WrapperCloseGapsParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapperCloseGapsResult</api/ansys/meshing/prime/WrapperCloseGapsResult>
+    <span class="nf nf-cod-symbol_class"></span> WrapperControl</api/ansys/meshing/prime/WrapperControl>
+    <span class="nf nf-cod-symbol_class"></span> WrapperImproveQualityParams</api/ansys/meshing/prime/WrapperImproveQualityParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapperImproveResult</api/ansys/meshing/prime/WrapperImproveResult>
+    <span class="nf nf-cod-symbol_class"></span> WrapperPatchFlowRegionsParams</api/ansys/meshing/prime/WrapperPatchFlowRegionsParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapperPatchFlowRegionsResult</api/ansys/meshing/prime/WrapperPatchFlowRegionsResult>
+    <span class="nf nf-cod-symbol_class"></span> WriteSizeFieldParams</api/ansys/meshing/prime/WriteSizeFieldParams>
+    <span class="nf nf-cod-symbol_class"></span> ZoneMeshResult</api/ansys/meshing/prime/ZoneMeshResult>
+    <span class="nf nf-cod-symbol_class"></span> ZoneType</api/ansys/meshing/prime/ZoneType>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> CellQualityMeasure</api/ansys/meshing/prime/CellQualityMeasure>
+    <span class="nf nf-cod-symbol_enum"></span> ErrorCode</api/ansys/meshing/prime/ErrorCode>
+    <span class="nf nf-cod-symbol_enum"></span> FaceQualityMeasure</api/ansys/meshing/prime/FaceQualityMeasure>
+    <span class="nf nf-cod-symbol_enum"></span> ShellBLOffsetType</api/ansys/meshing/prime/ShellBLOffsetType>
+    <span class="nf nf-cod-symbol_enum"></span> SizeFieldType</api/ansys/meshing/prime/SizeFieldType>
+    <span class="nf nf-cod-symbol_enum"></span> SolverType</api/ansys/meshing/prime/SolverType>
+    <span class="nf nf-cod-symbol_enum"></span> SurfaceFeatureType</api/ansys/meshing/prime/SurfaceFeatureType>
+    <span class="nf nf-cod-symbol_enum"></span> WarningCode</api/ansys/meshing/prime/WarningCode>
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-function_variant"></span> local_model</api/ansys/meshing/prime/local_model>
+
+
+
+
+
+
+Description
+-----------
+
+PyPrimeMesh Client library
+
+
+
+
+
+
+
+
+
+.. vale on

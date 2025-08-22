@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``trimmedspline.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.autogen.trimmedspline
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: trimmedspline
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedspline.TrimmedSpline`
+            - Handles creation and meshing of trimmed spline.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TrimmedSpline</api/ansys/meshing/prime/autogen/trimmedspline/TrimmedSpline>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on
