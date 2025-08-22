@@ -241,6 +241,7 @@ def launch_prime_github_container(
     docker_command = [
         'docker',
         'run',
+        '--shm-size=4g',
         '-d',
         '--rm',
         '--name',
