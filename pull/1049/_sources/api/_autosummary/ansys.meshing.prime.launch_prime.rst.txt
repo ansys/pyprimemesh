@@ -1,0 +1,11 @@
+launch\_prime
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: ansys.meshing.prime.launch_prime
+
+.. minigallery::
+    :add-heading: Examples using launch_prime
+
+    ansys.meshing.prime.launch_prime

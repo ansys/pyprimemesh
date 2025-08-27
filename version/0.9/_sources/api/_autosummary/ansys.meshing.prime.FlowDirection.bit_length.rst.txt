@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FlowDirection.bit_length
+
+.. minigallery::
+   :add-heading: Examples using FlowDirection.bit_length
+
+   ansys.meshing.prime.FlowDirection.bit_length

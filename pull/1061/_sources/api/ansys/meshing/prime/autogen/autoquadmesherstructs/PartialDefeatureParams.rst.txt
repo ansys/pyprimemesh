@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PartialDefeatureParams`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.PartialDefeatureParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, edge_sharp_corner_angle: float = None, merge_face_normals_angle: float = None, merge_edge_allow_self_close: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for partial defeature operation.
+
+   :param model: Model to create a ``PartialDefeatureParams`` object with default parameters.
+   :type model: Model
+   :param edge_sharp_corner_angle: Merge edges when the angle between the edges are below the provided value.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_sharp_corner_angle: float, optional
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_face_normals_angle: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_edge_allow_self_close: bool, optional
+   :param json_data: JSON dictionary to create a ``PartialDefeatureParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> partial_defeature_params = prime.PartialDefeatureParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PartialDefeatureParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~edge_sharp_corner_angle`
+            - Merge edges when the angle between the edges are below the provided value.
+          * - :py:attr:`~merge_edge_allow_self_close`
+            - Option for merging self-closing edge loops.
+          * - :py:attr:`~merge_face_normals_angle`
+            - Merge faces when the normal angle between the faces is below the provided value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PartialDefeatureParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PartialDefeatureParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import PartialDefeatureParams
+
+Property detail
+---------------
+
+.. py:property:: edge_sharp_corner_angle
+   :type: float
+
+
+   Merge edges when the angle between the edges are below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_edge_allow_self_close
+   :type: bool
+
+
+   Option for merging self-closing edge loops.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_face_normals_angle
+   :type: float
+
+
+   Merge faces when the normal angle between the faces is below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PartialDefeatureParams`` object.
+
+   .. rubric:: Examples
+
+   >>> PartialDefeatureParams.print_default()
+
+
+.. py:method:: set_default(edge_sharp_corner_angle: float = None, merge_face_normals_angle: float = None, merge_edge_allow_self_close: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PartialDefeatureParams`` object.
+
+   :param edge_sharp_corner_angle: Merge edges when the angle between the edges are below the provided value.
+   :type edge_sharp_corner_angle: float, optional
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+   :type merge_face_normals_angle: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+   :type merge_edge_allow_self_close: bool, optional
+
+
+
+
+
+
+
+.. vale on

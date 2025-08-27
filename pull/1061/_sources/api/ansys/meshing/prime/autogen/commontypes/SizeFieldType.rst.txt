@@ -1,0 +1,104 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SizeFieldType`
+======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.commontypes.SizeFieldType
+
+
+
+   The type of sizing field to be used to fetch element size at given location.
+
+
+
+
+.. py:currentmodule:: SizeFieldType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~CONSTANT`
+            - Uses constant size at all locations of sizing field.
+          * - :py:attr:`~GEODESIC`
+            - Uses geodesic size field.
+          * - :py:attr:`~GEOMETRIC`
+            - Geometric size field.
+          * - :py:attr:`~MESHEDGEODESIC`
+            - The type is applicable when remeshing already meshed surfaces.
+          * - :py:attr:`~VOLUMETRIC`
+            - Uses precomputed variable size in volumetric space defined by size field.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.commontypes import SizeFieldType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: CONSTANT
+   :value: 3
+
+
+   Uses constant size at all locations of sizing field.
+
+.. py:attribute:: GEODESIC
+   :value: 2
+
+
+   Uses geodesic size field.
+
+.. py:attribute:: GEOMETRIC
+   :value: 0
+
+
+   Geometric size field.
+
+.. py:attribute:: MESHEDGEODESIC
+   :value: 7
+
+
+   The type is applicable when remeshing already meshed surfaces.
+
+   :type: Computes size field using existing surface mesh sizes and diffuses geodesically. Then uses the computed size field to remesh surfaces. Notes
+
+.. py:attribute:: VOLUMETRIC
+   :value: 1
+
+
+   Uses precomputed variable size in volumetric space defined by size field.
+
+
+
+
+
+
+
+.. vale on

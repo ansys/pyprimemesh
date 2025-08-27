@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ComputeVolumesParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.ComputeVolumesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, volume_naming_type: VolumeNamingType = None, create_zones_type: CreateVolumeZonesType = None, priority_ordered_names: ansys.meshing.prime.params.primestructs.List[str] = None, material_point_names: ansys.meshing.prime.params.primestructs.List[str] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to compute volumes.
+
+   :param model: Model to create a ``ComputeVolumesParams`` object with default parameters.
+   :type model: Model
+   :param volume_naming_type: Indicates source type used to compute zone name for volumes.
+   :type volume_naming_type: VolumeNamingType, optional
+   :param create_zones_type: Option to control volume zone creation for volumes.
+   :type create_zones_type: CreateVolumeZonesType, optional
+   :param priority_ordered_names: Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+   :type priority_ordered_names: List[str], optional
+   :param material_point_names: Material point names provided to identify volumes. Material point names will have precedence over the volume names.
+   :type material_point_names: List[str], optional
+   :param json_data: JSON dictionary to create a ``ComputeVolumesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> compute_volumes_params = prime.ComputeVolumesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ComputeVolumesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_zones_type`
+            - Option to control volume zone creation for volumes.
+          * - :py:attr:`~material_point_names`
+            - Material point names provided to identify volumes. Material point names will have precedence over the volume names.
+          * - :py:attr:`~priority_ordered_names`
+            - Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+          * - :py:attr:`~volume_naming_type`
+            - Indicates source type used to compute zone name for volumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ComputeVolumesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ComputeVolumesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import ComputeVolumesParams
+
+Property detail
+---------------
+
+.. py:property:: create_zones_type
+   :type: CreateVolumeZonesType
+
+
+   Option to control volume zone creation for volumes.
+
+.. py:property:: material_point_names
+   :type: ansys.meshing.prime.params.primestructs.List[str]
+
+
+   Material point names provided to identify volumes. Material point names will have precedence over the volume names.
+
+.. py:property:: priority_ordered_names
+   :type: ansys.meshing.prime.params.primestructs.List[str]
+
+
+   Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+
+.. py:property:: volume_naming_type
+   :type: VolumeNamingType
+
+
+   Indicates source type used to compute zone name for volumes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ComputeVolumesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ComputeVolumesParams.print_default()
+
+
+.. py:method:: set_default(volume_naming_type: VolumeNamingType = None, create_zones_type: CreateVolumeZonesType = None, priority_ordered_names: ansys.meshing.prime.params.primestructs.List[str] = None, material_point_names: ansys.meshing.prime.params.primestructs.List[str] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ComputeVolumesParams`` object.
+
+   :param volume_naming_type: Indicates source type used to compute zone name for volumes.
+   :type volume_naming_type: VolumeNamingType, optional
+   :param create_zones_type: Option to control volume zone creation for volumes.
+   :type create_zones_type: CreateVolumeZonesType, optional
+   :param priority_ordered_names: Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
+   :type priority_ordered_names: List[str], optional
+   :param material_point_names: Material point names provided to identify volumes. Material point names will have precedence over the volume names.
+   :type material_point_names: List[str], optional
+
+
+
+
+
+
+
+.. vale on

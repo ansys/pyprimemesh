@@ -1,0 +1,6 @@
+small\_features
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerResults.small_features

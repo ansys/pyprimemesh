@@ -1,0 +1,159 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``automeshstructs.py`` module
+=================================
+
+.. py:module:: ansys.meshing.prime.autogen.automeshstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: automeshstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.AutoMeshParams`
+            - Parameters for volume meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults`
+            - Results of volume meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.HexCoreCellElementType`
+            - Cell element type of hex-shaped cells.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.HexCoreParams`
+            - Parameters to control hexahedral mesh generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.HexCoreTransitionLayerType`
+            - Handle size transition of hex cells.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.PrismParams`
+            - Parameters to control prism mesh generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.PrismStairStep`
+            - Parameters to control prism stairsteping.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.SurfaceMeshSizeScaling`
+            - Settings related to scaling of surface mesh size for hexcore refinement.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.TetParams`
+            - Parameters to control tetrahedral mesh generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs.VolumeFillType`
+            - Types of volume fill options.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AutoMeshParams</api/ansys/meshing/prime/autogen/automeshstructs/AutoMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> AutoMeshResults</api/ansys/meshing/prime/autogen/automeshstructs/AutoMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> HexCoreCellElementType</api/ansys/meshing/prime/autogen/automeshstructs/HexCoreCellElementType>
+    <span class="nf nf-cod-symbol_class"></span> HexCoreParams</api/ansys/meshing/prime/autogen/automeshstructs/HexCoreParams>
+    <span class="nf nf-cod-symbol_class"></span> HexCoreTransitionLayerType</api/ansys/meshing/prime/autogen/automeshstructs/HexCoreTransitionLayerType>
+    <span class="nf nf-cod-symbol_class"></span> PrismParams</api/ansys/meshing/prime/autogen/automeshstructs/PrismParams>
+    <span class="nf nf-cod-symbol_class"></span> PrismStairStep</api/ansys/meshing/prime/autogen/automeshstructs/PrismStairStep>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceMeshSizeScaling</api/ansys/meshing/prime/autogen/automeshstructs/SurfaceMeshSizeScaling>
+    <span class="nf nf-cod-symbol_class"></span> TetParams</api/ansys/meshing/prime/autogen/automeshstructs/TetParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumeFillType</api/ansys/meshing/prime/autogen/automeshstructs/VolumeFillType>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

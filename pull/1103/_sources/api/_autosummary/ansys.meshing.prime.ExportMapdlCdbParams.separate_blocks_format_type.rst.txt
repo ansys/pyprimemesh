@@ -1,0 +1,6 @@
+separate\_blocks\_format\_type
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.separate_blocks_format_type

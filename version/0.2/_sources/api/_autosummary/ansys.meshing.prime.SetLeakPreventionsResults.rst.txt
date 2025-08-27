@@ -1,0 +1,31 @@
+SetLeakPreventionsResults
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetLeakPreventionsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetLeakPreventionsResults.print_default
+      SetLeakPreventionsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetLeakPreventionsResults.error_code
+      SetLeakPreventionsResults.ids
+   
+   

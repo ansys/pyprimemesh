@@ -1,0 +1,6 @@
+VT\_SKIPPEDPROTECTEDENTITIES
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.VT_SKIPPEDPROTECTEDENTITIES

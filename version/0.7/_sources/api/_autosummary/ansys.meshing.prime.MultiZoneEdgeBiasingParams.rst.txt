@@ -1,0 +1,42 @@
+.. vale off
+
+MultiZoneEdgeBiasingParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultiZoneEdgeBiasingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MultiZoneEdgeBiasingParams.print_default
+      MultiZoneEdgeBiasingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultiZoneEdgeBiasingParams.bias_factor
+      MultiZoneEdgeBiasingParams.edge_scope
+      MultiZoneEdgeBiasingParams.face_scope
+      MultiZoneEdgeBiasingParams.n_divisions
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MultiZoneEdgeBiasingParams
+
+    ansys.meshing.prime.MultiZoneEdgeBiasingParams
+
+.. vale on

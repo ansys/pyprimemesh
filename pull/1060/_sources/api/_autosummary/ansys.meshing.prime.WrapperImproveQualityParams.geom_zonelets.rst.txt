@@ -1,0 +1,6 @@
+geom\_zonelets
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.geom_zonelets

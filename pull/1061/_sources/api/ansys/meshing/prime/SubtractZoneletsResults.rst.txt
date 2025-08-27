@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SubtractZoneletsResults`
+================================
+
+
+.. py:class:: ansys.meshing.prime.SubtractZoneletsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, processing_time: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results structure associated with subtracting zonelets.
+
+   :param model: Model to create a ``SubtractZoneletsResults`` object with default parameters.
+   :type model: Model
+   :param processing_time: Processing time for subtract operation.
+   :type processing_time: float, optional
+   :param error_code: Error Code associated with subtract operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> subtract_zonelets_results = prime.SubtractZoneletsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SubtractZoneletsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error Code associated with subtract operation.
+          * - :py:attr:`~processing_time`
+            - Processing time for subtract operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SubtractZoneletsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SubtractZoneletsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SubtractZoneletsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error Code associated with subtract operation.
+
+.. py:property:: processing_time
+   :type: float
+
+
+   Processing time for subtract operation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SubtractZoneletsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SubtractZoneletsResults.print_default()
+
+
+.. py:method:: set_default(processing_time: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SubtractZoneletsResults`` object.
+
+   :param processing_time: Processing time for subtract operation.
+   :type processing_time: float, optional
+   :param error_code: Error Code associated with subtract operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

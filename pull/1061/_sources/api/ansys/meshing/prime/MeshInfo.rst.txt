@@ -1,0 +1,145 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MeshInfo`
+=================
+
+
+.. py:class:: ansys.meshing.prime.MeshInfo(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   MeshInfo provides information about the mesh connectivity and more.
+
+   Mesh connectivity information is used in graphics rendering.
+
+
+   :param model: Server model to create MeshInfo object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: MeshInfo
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_face_and_edge_connectivity`
+            - Gets the connectivity of face and edge zonelets of the given part ids.
+          * - :py:attr:`~get_statistics_of_cell_zonelets`
+            - Gets cell statistics of given cell zonelets using provided cell statistics parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for MeshInfo.
+          * - :py:attr:`~__exit__`
+            - Exit context for MeshInfo.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MeshInfo
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for MeshInfo.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for MeshInfo.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: get_face_and_edge_connectivity(part_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.FaceAndEdgeConnectivityParams) -> ansys.meshing.prime.params.primestructs.FaceAndEdgeConnectivityResults
+
+   Gets the connectivity of face and edge zonelets of the given part ids.
+
+   Connectivity result is used in graphics rendering.
+
+   :param part_ids: Ids of the part.
+   :type part_ids: Iterable[int]
+   :param params: Parameters to get connectivity of face zonelets and edge zonelets.
+   :type params: FaceAndEdgeConnectivityParams
+
+   :returns: Returns the FaceAndEdgeConnectivityResults.
+   :rtype: FaceAndEdgeConnectivityResults
+
+   .. rubric:: Examples
+
+   >>> mesh_info = prime.MeshInfo(model)
+   >>> part_ids = [part.id for part in model.parts]
+   >>> result = mesh_info.get_face_and_edge_connectivity(part_ids,
+   >>>                  prime.FaceAndEdgeConnectivityParams(model =model))
+
+
+.. py:method:: get_statistics_of_cell_zonelets(cell_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.CellStatisticsParams) -> ansys.meshing.prime.params.primestructs.CellStatisticsResults
+
+   Gets cell statistics of given cell zonelets using provided cell statistics parameters.
+
+
+   :param cell_zonelets: Ids of cell zonelets for which statistics are calculated.
+   :type cell_zonelets: Iterable[int]
+   :param params: Parameters to get cells statistics.
+   :type params: CellStatisticsParams
+
+   :returns: Returns the CellStatisticsResults.
+   :rtype: CellStatisticsResults
+
+   .. rubric:: Examples
+
+   >>> mesh_info = prime.MeshInfo(model)
+   >>> part = model.get_part_by_name("part_name")
+   >>> result = mesh_info.get_statistics_of_cell_zonelets(part.get_cell_zonelets(),
+   >>>                  prime.CellStatisticsParams(model=model))
+
+
+
+
+
+
+
+.. vale on

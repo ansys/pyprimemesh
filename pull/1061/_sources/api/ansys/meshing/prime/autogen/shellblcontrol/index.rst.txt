@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``shellblcontrol.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.autogen.shellblcontrol
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: shellblcontrol
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.shellblcontrol.ShellBLControl`
+            - ShellBLControl allows you to generate quad mesh on face zonelets.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ShellBLControl</api/ansys/meshing/prime/autogen/shellblcontrol/ShellBLControl>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+INFLATE
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SmoothType.INFLATE

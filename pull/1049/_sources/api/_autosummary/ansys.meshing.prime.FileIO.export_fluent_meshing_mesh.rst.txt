@@ -1,0 +1,11 @@
+export\_fluent\_meshing\_mesh
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.export_fluent_meshing_mesh
+
+.. minigallery::
+   :add-heading: Examples using FileIO.export_fluent_meshing_mesh
+
+   ansys.meshing.prime.FileIO.export_fluent_meshing_mesh

@@ -1,0 +1,94 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CadRefacetingResolution`
+================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.CadRefacetingResolution
+
+
+
+   Levels of CAD faceting refinement.
+
+
+
+
+.. py:currentmodule:: CadRefacetingResolution
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~COARSE`
+            - Denotes coarse resolution of CAD faceting.
+          * - :py:attr:`~CUSTOM`
+            - Denotes custom resolution of CAD faceting.
+          * - :py:attr:`~FINE`
+            - Denotes fine resolution of CAD faceting.
+          * - :py:attr:`~MEDIUM`
+            - Denotes medium resolution of CAD faceting.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import CadRefacetingResolution
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: COARSE
+   :value: 0
+
+
+   Denotes coarse resolution of CAD faceting.
+
+.. py:attribute:: CUSTOM
+   :value: 3
+
+
+   Denotes custom resolution of CAD faceting.
+
+.. py:attribute:: FINE
+   :value: 2
+
+
+   Denotes fine resolution of CAD faceting.
+
+.. py:attribute:: MEDIUM
+   :value: 1
+
+
+   Denotes medium resolution of CAD faceting.
+
+
+
+
+
+
+
+.. vale on

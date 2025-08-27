@@ -1,0 +1,6 @@
+﻿X
+=
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FlowDirection.X

@@ -1,0 +1,48 @@
+.. vale off
+
+
+
+
+
+
+
+PrismControlOffsetType
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismControlOffsetType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      PrismControlOffsetType.UNIFORM
+      
+      
+      PrismControlOffsetType.ASPECTRATIO
+      
+      
+      PrismControlOffsetType.LASTRATIO
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PrismControlOffsetType
+
+    ansys.meshing.prime.PrismControlOffsetType
+
+.. vale on

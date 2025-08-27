@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MorphBCParams`
+======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.morpherbcsstructs.MorphBCParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, morph_region_method: BCsVolumetricModality = None, morphable_layers: int = None, morph_region_box_extension: float = None, json_data: dict = None, **kwargs)
+
+
+
+   MorphBCParams contains the input parameters for calculating the boundary conditions for a morphing problem.
+
+   :param model: Model to create a ``MorphBCParams`` object with default parameters.
+   :type model: Model
+   :param morph_region_method: Indicate options to identify morphable regions in the input volumetric mesh.
+   :type morph_region_method: BCsVolumetricModality, optional
+   :param morphable_layers: Number of layers around defined boundary.
+   :type morphable_layers: int, optional
+   :param morph_region_box_extension: Percentage extension for the volumetric box.
+   :type morph_region_box_extension: float, optional
+   :param json_data: JSON dictionary to create a ``MorphBCParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> morph_bcparams = prime.MorphBCParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MorphBCParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~morph_region_box_extension`
+            - Percentage extension for the volumetric box.
+          * - :py:attr:`~morph_region_method`
+            - Indicate options to identify morphable regions in the input volumetric mesh.
+          * - :py:attr:`~morphable_layers`
+            - Number of layers around defined boundary.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MorphBCParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MorphBCParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.morpherbcsstructs import MorphBCParams
+
+Property detail
+---------------
+
+.. py:property:: morph_region_box_extension
+   :type: float
+
+
+   Percentage extension for the volumetric box.
+
+.. py:property:: morph_region_method
+   :type: BCsVolumetricModality
+
+
+   Indicate options to identify morphable regions in the input volumetric mesh.
+
+.. py:property:: morphable_layers
+   :type: int
+
+
+   Number of layers around defined boundary.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MorphBCParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MorphBCParams.print_default()
+
+
+.. py:method:: set_default(morph_region_method: BCsVolumetricModality = None, morphable_layers: int = None, morph_region_box_extension: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MorphBCParams`` object.
+
+   :param morph_region_method: Indicate options to identify morphable regions in the input volumetric mesh.
+   :type morph_region_method: BCsVolumetricModality, optional
+   :param morphable_layers: Number of layers around defined boundary.
+   :type morphable_layers: int, optional
+   :param morph_region_box_extension: Percentage extension for the volumetric box.
+   :type morph_region_box_extension: float, optional
+
+
+
+
+
+
+
+.. vale on

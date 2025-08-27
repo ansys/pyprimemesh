@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VTComposerResults`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.vtcomposerstructs.VTComposerResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Result struct associated to VTComposer operations.
+
+   :param model: Model to create a ``VTComposerResults`` object with default parameters.
+   :type model: Model
+   :param error_code: **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> v_tcomposer_results = prime.VTComposerResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VTComposerResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VTComposerResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VTComposerResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.vtcomposerstructs import VTComposerResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VTComposerResults`` object.
+
+   .. rubric:: Examples
+
+   >>> VTComposerResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VTComposerResults`` object.
+
+   :param error_code:
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

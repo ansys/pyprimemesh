@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``periodiccontrol.py`` module
+=================================
+
+.. py:module:: ansys.meshing.prime.core.periodiccontrol
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: periodiccontrol
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.periodiccontrol.PeriodicControl`
+            - Periodic controls provide settings for the recovery of periodic surfaces.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControl</api/ansys/meshing/prime/core/periodiccontrol/PeriodicControl>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing classes and methods related to periodic control.
+
+
+
+
+
+
+
+
+
+.. vale on

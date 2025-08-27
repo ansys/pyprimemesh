@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``volumesweeper.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.core.volumesweeper
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: volumesweeper
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.volumesweeper.VolumeSweeper`
+            - Provides operations to generate volume meshes using stacker technology.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> VolumeSweeper</api/ansys/meshing/prime/core/volumesweeper/VolumeSweeper>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for volume sweeper operations.
+
+
+
+
+
+
+
+
+
+.. vale on

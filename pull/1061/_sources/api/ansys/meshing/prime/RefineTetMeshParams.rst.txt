@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`RefineTetMeshParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.RefineTetMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, nisr: int = None, niss: int = None, nist: int = None, tolerance: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for meshing the solid spline.
+
+   :param model: Model to create a ``RefineTetMeshParams`` object with default parameters.
+   :type model: Model
+   :param nisr: Interpolation elements in the local r-direction.
+
+                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type nisr: int, optional
+   :param niss: Interpolation elements in the local s-direction.
+
+                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type niss: int, optional
+   :param nist: Interpolation elements in the local t-direction.
+
+                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type nist: int, optional
+   :param tolerance: Tolerance for boundary refinement.
+
+                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type tolerance: float, optional
+   :param json_data: JSON dictionary to create a ``RefineTetMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> refine_tet_mesh_params = prime.RefineTetMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: RefineTetMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~nisr`
+            - Interpolation elements in the local r-direction.
+          * - :py:attr:`~niss`
+            - Interpolation elements in the local s-direction.
+          * - :py:attr:`~nist`
+            - Interpolation elements in the local t-direction.
+          * - :py:attr:`~tolerance`
+            - Tolerance for boundary refinement.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``RefineTetMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``RefineTetMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import RefineTetMeshParams
+
+Property detail
+---------------
+
+.. py:property:: nisr
+   :type: int
+
+
+   Interpolation elements in the local r-direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: niss
+   :type: int
+
+
+   Interpolation elements in the local s-direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: nist
+   :type: int
+
+
+   Interpolation elements in the local t-direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: tolerance
+   :type: float
+
+
+   Tolerance for boundary refinement.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``RefineTetMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> RefineTetMeshParams.print_default()
+
+
+.. py:method:: set_default(nisr: int = None, niss: int = None, nist: int = None, tolerance: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``RefineTetMeshParams`` object.
+
+   :param nisr: Interpolation elements in the local r-direction.
+   :type nisr: int, optional
+   :param niss: Interpolation elements in the local s-direction.
+   :type niss: int, optional
+   :param nist: Interpolation elements in the local t-direction.
+   :type nist: int, optional
+   :param tolerance: Tolerance for boundary refinement.
+   :type tolerance: float, optional
+
+
+
+
+
+
+
+.. vale on

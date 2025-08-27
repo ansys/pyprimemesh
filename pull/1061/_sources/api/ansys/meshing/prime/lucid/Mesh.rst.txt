@@ -1,0 +1,436 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Mesh`
+=============
+
+
+.. py:class:: ansys.meshing.prime.lucid.Mesh(model: ansys.meshing.prime.Model)
+
+   Provides methods for users who are new to meshing.
+
+   This class also serves as a tutorial for commonly used meshing workflows.
+
+   The ``Mesh`` class provides these functionalities:
+
+   * Surface meshing with constant and variable sizing with triangle
+     or quad dominant mesh
+   * Volume meshing with prism, tetrahedral, and polyhedral elements
+   * Surface wrapping
+   * Helper method for creating zones from labels
+   * Helper methods for reading and writing files
+
+
+
+
+.. py:currentmodule:: Mesh
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~compute_volumes`
+            - Compute volumes in the parts defined by the part expression.
+          * - :py:attr:`~connect_faces`
+            - Connect face zonelets with a label name pattern within a given tolerance.
+          * - :py:attr:`~create_constant_size_control`
+            - Generate constant size control on a scope.
+          * - :py:attr:`~create_curvature_size_control`
+            - Generate a curvature size control on a scope.
+          * - :py:attr:`~create_flow_volume`
+            - Create flow volume by the face labels defining the boundary of the volume.
+          * - :py:attr:`~create_zones_from_labels`
+            - Create zones from labels.
+          * - :py:attr:`~delete_topology`
+            - Delete topology in one or more parts.
+          * - :py:attr:`~merge_parts`
+            - Merge multiple parts into a single part.
+          * - :py:attr:`~read`
+            - Read or import files of different formats based on file extensions.
+          * - :py:attr:`~surface_mesh`
+            - Generate a surface mesh on a scope.
+          * - :py:attr:`~surface_mesh_with_size_controls`
+            - Generate a surface mesh on a scope using the given size controls.
+          * - :py:attr:`~volume_mesh`
+            - Generate a volume mesh on the model.
+          * - :py:attr:`~wrap`
+            - Wrap and remesh the input.
+          * - :py:attr:`~write`
+            - Write or export files of different formats based on file extensions.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.lucid import Mesh
+
+
+
+Method detail
+-------------
+
+.. py:method:: compute_volumes(part_expression: str = '*', create_zones_per_volume: bool = True)
+
+   Compute volumes in the parts defined by the part expression.
+
+   :param part_expression: Expression of the parts where the topology must be deleted.
+                           The default is ``"*"``.
+   :type part_expression: str, optional
+   :param create_zones_per_volume: Whether to create volume zones for each volume. The default
+                                   is ``True``.
+   :type create_zones_per_volume: bool, optional
+
+
+.. py:method:: connect_faces(part_expression: str = '*', face_labels: str = '*', target_face_labels: str = '*', tolerance: float = 0.05)
+
+   Connect face zonelets with a label name pattern within a given tolerance.
+
+   This method connects face zonelets with a label name pattern to
+   face zonelets with target face labels within a given tolerance. The connection
+   happens within the part. Face zonelets of a part are connected with face zonelets
+   of the same part only.
+
+   :param part_expression: Name pattern of the parts to use for connecting the face zonelets. The
+                           default is ``"*"``.
+   :type part_expression: str, optional
+   :param face_labels: Name pattern of the face labels used for connecting the face zonelets.
+                       The default is ``"*"``.
+   :type face_labels: str, optional
+   :param target_face_labels: Name pattern of the face labels to connect. The default is ``"*"``.
+   :type target_face_labels: str, optional
+   :param tolerance: Tolerance for the connection. The default is ``0.05``.
+   :type tolerance: float, optional
+
+
+.. py:method:: create_constant_size_control(control_name: str = 'size_control', size: float = 1.0, scope: ansys.meshing.prime.lucid.scope.SurfaceScope = SurfaceScope())
+
+   Generate constant size control on a scope.
+
+   :param control_name: Name of the control.
+   :type control_name: str
+   :param size: Constant edge length of the mesh. The default is ``1.0``.
+   :type size: float, optional
+   :param scope: Scope for creating the size control.
+   :type scope: SurfaceScope
+
+
+.. py:method:: create_curvature_size_control(control_name: str = 'size_control', min: float = 1.0, max: float = 2.0, scope: ansys.meshing.prime.lucid.scope.SurfaceScope = SurfaceScope())
+
+   Generate a curvature size control on a scope.
+
+   :param control_name: Name of the control. The default is ``"size_control"``.
+   :type control_name: str, optional
+   :param min: Minimum edge length of the mesh. The default is ``1.0``.
+   :type min: float, optional
+   :param max: Maximum edge length of the mesh. The default is ``2.0``.
+   :type max: float
+   :param scope: Scope for creating the size control.
+   :type scope: SurfaceScope
+
+
+.. py:method:: create_flow_volume(flow_volume_zone_name: str = 'flow_volume', cap_scope: ansys.meshing.prime.lucid.scope.SurfaceScope = SurfaceScope())
+
+   Create flow volume by the face labels defining the boundary of the volume.
+
+   :param flow_volume_zone_name: Name for the volume zone of the created flow volume. The default is
+                                 ``"flow_volume"``.
+   :type flow_volume_zone_name: str, optional
+   :param cap_scope: Scope defining the face zonelets where the cap for flow volume must
+                     be created.
+   :type cap_scope: SurfaceScope
+
+
+.. py:method:: create_zones_from_labels(label_expression: str = None, conversion_method: LabelToZoneMethod = LabelToZoneMethod.SIMPLE)
+
+   Create zones from labels.
+
+   When exporting to various solvers, zones play a very important role.
+   Zones are where material properties and boundary conditions
+   can be set in respective solvers.
+
+   Zones allow downstream setting of boundary conditions or material properties.
+
+   Zone names in PyPrimeMesh are translated into equivalent concepts in the solver.
+   Currently, only one method is available to convert a zone to a label, and
+   only face zones are created.
+
+   The ``create_zones_from_labels`` method finds the entities by labels
+   and then adds them to zones with the same names as the labels.
+
+   If the ``label_expression`` parameter is not provided, all labels are
+   flattened to create zones. If overlaps occur, label names are combined, and
+   separate zones are created.
+
+   For example, if "LabelA" and "LabelB" have overlapping TopoFaces,
+   these zones are created: ``"LabelA"``, ``"LabelB"``, and
+   ``"LabelA_LabelB"`` for the overlap.
+
+   :param label_expression: Expression for the labels to convert to zones. The
+                            default is ``None``.
+   :type label_expression: str, optional
+   :param conversion_method: Method for converting the labels to zones. The default
+                             is ``LabelToZoneMethod.SIMPLE``.
+   :type conversion_method: LabelToZoneMethod, optional
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import lucid
+   >>> mesh_util = lucid.Mesh(model)
+   >>> mesh_util.create_zones_from_labels()
+
+
+.. py:method:: delete_topology(part_expression: str = '*', delete_edges: bool = True)
+
+   Delete topology in one or more parts.
+
+   :param part_expression: Expression of the parts where the topology must be deleted.
+                           The default is ``"*"``.
+   :type part_expression: str, optional
+   :param delete_edges: Whether to delete edge zonelets. The default is ``True``.
+   :type delete_edges: bool, optional
+
+
+.. py:method:: merge_parts(parts_expression: str = '*', new_name: str = 'merged_part')
+
+   Merge multiple parts into a single part.
+
+   :param parts_expression: Expression of the parts to merge. The default is ``"*"``.
+   :type parts_expression: str, optional
+   :param new_name: Name of the new part that is created from the merged parts.
+                    The default is ``"merged_part"``.
+   :type new_name: str, optional
+
+
+.. py:method:: read(file_name: str, append: bool = False, cad_reader_route: ansys.meshing.prime.CadReaderRoute = None)
+
+   Read or import files of different formats based on file extensions.
+
+   This method supports reading and importing these file formats:
+
+   * Reading PyPrimeMesh's native PMDAT files
+   * Importing various types of CAD files
+   * Importing Fluent Meshing's MSH files
+   * Importing Fluent's CAS files
+   * Importing MAPDL's CDB files
+
+   :param file_name: Path to the file to read or import.
+   :type file_name: str
+   :param append:
+                  Whether to append to the file. The default is ``False``, in which case
+                   the file is overwritten.
+   :type append: bool, optional
+   :param cad_reader_route: Route of the CAD reader. The default is ``None``.
+   :type cad_reader_route: prime.CadReaderRoute, optional
+
+
+.. py:method:: surface_mesh(min_size: float = None, max_size: float = None, generate_quads: bool = False, scope: ansys.meshing.prime.lucid.scope.SurfaceScope = SurfaceScope())
+
+   Generate a surface mesh on a scope.
+
+   This method is used to generate a surface mesh of a constant or variable
+   size. It supports generating quad dominant or triangular elements.
+
+   If minimum and maximum sizes are provided, a variable size mesh is generated
+   between the minimum size and maximum size by applying sizes based on curvature.
+
+   If only the minimum size or maximum size is provided, a constant size mesh
+   is generated with the provided size.
+
+   If neither minimum size or maximum size is provided, the global maximum setting
+   is used to generate a constant size mesh.
+
+   :param min_size: Minimum edge length of the mesh. The default is ``None``.
+   :type min_size: float, optional
+   :param max_size: Maximum edge length of the mesh. The default is ``None``.
+   :type max_size: float, optional
+   :param generate_quads: Whether to generate a quad dominant mesh. The default is
+                          ``False``, in which case a triangular mesh is generated.
+   :type generate_quads: bool, optional
+   :param scope: Scope for generating the surface mesh.
+   :type scope: SurfaceScope
+
+
+.. py:method:: surface_mesh_with_size_controls(size_control_names: str = '*', generate_quads: bool = False, scope: ansys.meshing.prime.lucid.scope.SurfaceScope = SurfaceScope())
+
+   Generate a surface mesh on a scope using the given size controls.
+
+   This method supports generating quad dominant or triangular elements.
+
+   :param size_control_names: Name pattern for the size controls. The default is ``"*"``.
+   :type size_control_names: str, optional
+   :param generate_quads: Whether to generate a quad dominant mesh. The default is
+                          ``False``, in which case a triangular mesh is generated.
+   :type generate_quads: bool, optional
+   :param scope: Scope for generating the surface mesh.
+   :type scope: SurfaceScope
+
+
+.. py:method:: volume_mesh(volume_fill_type: ansys.meshing.prime.VolumeFillType = prime.VolumeFillType.TET, quadratic: bool = False, prism_layers: int = None, prism_surface_expression: str = '*', prism_volume_expression: str = '*', growth_rate: float = 1.2, scope: ansys.meshing.prime.lucid.scope.VolumeScope = VolumeScope())
+
+   Generate a volume mesh on the model.
+
+   :param volume_fill_type: Type of volume elements to generate.
+   :type volume_fill_type: prime.VolumeFillType
+   :param quadratic: Whether to generate a quadratic mesh. The default is ``False``.
+                     A quadratic mesh is not supported with parallel meshing.
+                     It is only supported with a pure tetrahedral mesh.
+   :type quadratic: bool, optional
+   :param prism_layers: Number of prism layers to grow. The default is ``None``.
+                        If a value for prism layers is specified, prism layers are generated.
+   :type prism_layers: int, optional
+   :param prism_surface_expression: Face zones or TopoFaces to grow prisms from. The default is ``"*"``,
+                                    in which case prisms are grown from all surfaces.
+   :type prism_surface_expression: str, optional
+   :param prism_volume_expression: Volumes or TopoVolumes to grow prisms in.
+                                   The default is ``"*"``. This expression evaluates
+                                   to zone names and volumes, or TopoVolumes are queried
+                                   based on the zones evaluated.
+   :type prism_volume_expression: str, optional
+   :param growth_rate: Prism growth rate. The default is ``1.2``.
+   :type growth_rate: float, optional
+   :param scope: Scope of volumes to mesh.
+   :type scope: VolumeScope
+
+
+.. py:method:: wrap(min_size: float = None, max_size: float = None, growth_rate: float = 1.2, elements_per_gap: float = None, normal_angle: float = 18.0, input_parts: str = '*', input_labels: str = '*', keep_inputs: bool = False, region_extract: ansys.meshing.prime.WrapRegion = prime.WrapRegion.EXTERNAL, material_point: List[float] = None, extract_features: bool = True, create_intersection_loops: bool = False, use_existing_features: bool = False, enable_feature_octree_refinement: bool = True, feature_angle: float = 40.0, contact_prevention_size: float = None, number_of_threads: int = None, remesh_postwrap: bool = True, recompute_remesh_sizes: bool = False, use_existing_size_fields: bool = False, size_fields: List[ansys.meshing.prime.SizeField] = None, wrap_size_controls: List[ansys.meshing.prime.SizeControl] = None, remesh_size_controls: List[ansys.meshing.prime.SizeControl] = None, feature_recovery_params: List[ansys.meshing.prime.FeatureRecoveryParams] = None, contact_prevention_params: List[ansys.meshing.prime.ContactPreventionParams] = None, leak_prevention_params: List[ansys.meshing.prime.LeakPreventionParams] = None)
+
+   Wrap and remesh the input.
+
+   The default behavior is to perform an external wrap of all parts in the model
+   using curvature sizing and extracting features. The wrap is then remeshed
+   to provide a surface mesh for the extracted region.
+
+   Geodesic sizing is used only if soft and curvature controls are set.
+   If contact prevention size is set and geodesic sizing is available, contact
+   detection is used globally.
+
+   If minimum and maximum sizes are provided, variable size mesh is generated
+   between the minimum size and maximum size by applying sizes based on curvature.
+
+   If either minimum size or maximum size is provided, constant size mesh
+   is generated with the provided size.
+
+   If neither minimum size or maximum size is provided, global minimum and
+   maximum settings are used to generate a variable size mesh based on curvature.
+
+   :param min_size: Minimum edge length of the mesh. The default is ``None``.
+   :type min_size: float, optional
+   :param max_size: Maximum edge length of the mesh. The default is ``None``.
+   :type max_size: float, optional
+   :param growth_rate: Growth rate. The default is ``1.2``.
+   :type growth_rate: float, optional
+   :param elements_per_gap: Global proximity size control elements per gap with self proximity.
+                            The default is ``None``.
+   :type elements_per_gap: float, optional
+   :param normal_angle: Global curvature size control normal angle. The default is ``18.0``.
+   :type normal_angle: float, optional
+   :param input_parts: Parts to wrap. The default is ``"*"``.
+   :type input_parts: str, optional
+   :param input_labels: Labels to wrap. The default is ``"*"``.
+   :type input_labels: str
+   :param keep_inputs: Whether to retain inputs. The default is ``False``.
+   :type keep_inputs: bool, optional
+   :param region_extract: Region to wrap. The default is ``prime.WrapRegion.EXTERNAL``.
+   :type region_extract: prime.WrapRegion
+   :param material_point: Material point if the region extraction method is set to
+                          material point. The default is ``None``.
+   :type material_point: List[float], optional
+   :param extract_features: Whether to extract feature edges using the feature angle. The
+                            default is ``True``.
+   :type extract_features: bool, optional
+   :param create_intersection_loops: Whether to create intersection loops between all parts.
+                                     The default is ``False``.
+   :type create_intersection_loops: bool, optional
+   :param use_existing_features: Whether to maintain existing features on parts. The
+                                 default is ``False``.
+   :type use_existing_features: bool, optional
+   :param enable_feature_octree_refinement: Whether to apply refinement to feature edges during the wrap.
+                                            The default is ``True``.
+   :type enable_feature_octree_refinement: bool, optional
+   :param feature_angle: Angle to use for extracting features. The default is ``40.0``.
+   :type feature_angle: float, optional
+   :param contact_prevention_size: Global proximity size controls between all parts.
+                                   The default is ``None``.
+   :type contact_prevention_size: float, optional
+   :param number_of_threads: Number of threads. The default is ``None``.
+   :type number_of_threads: int, optional
+   :param remesh_postwrap: Whether to remesh the wrap. The default is ``True``.
+   :type remesh_postwrap: bool, optional
+   :param recompute_remesh_sizes: Whether to recompute sizes from global controls using
+                                  the wrap surface. The default is ``False``.
+   :type recompute_remesh_sizes: bool, optional
+   :param use_existing_size_fields: Whether to use precomputed size fields. The default is ``False``.
+   :type use_existing_size_fields: bool, optional
+   :param size_fields: List of size fields to use. The default is ``None``.
+   :type size_fields: List[prime.SizeField], optional
+   :param wrap_size_controls: List of wrap size controls to use. The default is ``None``.
+   :type wrap_size_controls: List[prime.SizeControl], optional
+   :param remesh_size_controls: List of remesh size controls to use. The default is ``None``.
+   :type remesh_size_controls: List[prime.SizeControl], optional
+   :param feature_recovery_params: List of feature recovery parameters to use. The default is ``None``.
+   :type feature_recovery_params: List[prime.FeatureRecoveryParams], optional
+   :param contact_prevention_params: List of contact prevention parameters to use. The default is ``None``.
+   :type contact_prevention_params: List[prime.ContactPreventionParams], optional
+   :param leak_prevention_params: List of leak prevention parameters to use.  The default is ``None``.
+   :type leak_prevention_params: List[prime.LeakPreventionParams], optional
+
+   :returns: Returns Part.
+   :rtype: Wrapped part
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> from ansys.meshing.prime import lucid
+   >>> prime_client = prime.launch_prime()
+   >>> model = prime_client.model
+   >>> mesh = lucid.Mesh(model)
+   >>> mesh.read("/my_geometry.stl")
+   >>> mesh.wrap(min_size=1, max_size=20, create_intersection_loops=True)
+   >>> mesh.write("/mesh_output.pmdat")
+   >>> prime_client.exit()
+
+
+.. py:method:: write(file_name: str)
+
+   Write or export files of different formats based on file extensions.
+
+   This method supports writing and exporting these file formats:
+
+   * Writing PyPrimeMesh's native PMDAT files
+   * Exporting Fluent Meshing's MSH files
+   * Exporting Fluent's CAS files
+   * Exporting MAPDL's CDB files.
+   * Exporting STL files.
+
+   :param file_name: Path of the file to write or export.
+   :type file_name: str
+
+
+
+
+
+
+
+.. vale on
