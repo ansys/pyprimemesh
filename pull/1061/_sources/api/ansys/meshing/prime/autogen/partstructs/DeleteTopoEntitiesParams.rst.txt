@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteTopoEntitiesParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, delete_geom_zonelets: bool = None, delete_mesh_zonelets: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control delete topoentities.
+
+   :param model: Model to create a ``DeleteTopoEntitiesParams`` object with default parameters.
+   :type model: Model
+   :param delete_geom_zonelets: Option to delete geometry zonelets of topology.
+   :type delete_geom_zonelets: bool, optional
+   :param delete_mesh_zonelets: Option to delete mesh zonelets of topology.
+   :type delete_mesh_zonelets: bool, optional
+   :param json_data: JSON dictionary to create a ``DeleteTopoEntitiesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_topo_entities_params = prime.DeleteTopoEntitiesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteTopoEntitiesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_geom_zonelets`
+            - Option to delete geometry zonelets of topology.
+          * - :py:attr:`~delete_mesh_zonelets`
+            - Option to delete mesh zonelets of topology.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteTopoEntitiesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteTopoEntitiesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import DeleteTopoEntitiesParams
+
+Property detail
+---------------
+
+.. py:property:: delete_geom_zonelets
+   :type: bool
+
+
+   Option to delete geometry zonelets of topology.
+
+.. py:property:: delete_mesh_zonelets
+   :type: bool
+
+
+   Option to delete mesh zonelets of topology.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteTopoEntitiesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteTopoEntitiesParams.print_default()
+
+
+.. py:method:: set_default(delete_geom_zonelets: bool = None, delete_mesh_zonelets: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteTopoEntitiesParams`` object.
+
+   :param delete_geom_zonelets: Option to delete geometry zonelets of topology.
+   :type delete_geom_zonelets: bool, optional
+   :param delete_mesh_zonelets: Option to delete mesh zonelets of topology.
+   :type delete_mesh_zonelets: bool, optional
+
+
+
+
+
+
+
+.. vale on

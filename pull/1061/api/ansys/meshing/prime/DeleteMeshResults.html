@@ -1,0 +1,1163 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:site_name" content="PyAnsys" />
+    <title>DeleteMeshResults &#8212; PyPrimeMesh</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/ansys-sphinx-theme.css?v=ce7f2556" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/ansys-sphinx-theme.css?v=ce7f2556" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../_static/documentation_options.js?v=f1207ea0"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/meshing/prime/DeleteMeshResults';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="DeleteResults" href="DeleteResults.html" />
+    <link rel="prev" title="DeleteMeshParams" href="DeleteMeshParams.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.0.dev3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <img src="../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyPrimeMesh - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><span class="nf nf-md-package"></span> ansys.meshing.prime</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AddLabelResults.html"> <span class="nf nf-cod-symbol_class"></span> AddLabelResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddThicknessParams.html"> <span class="nf nf-cod-symbol_class"></span> AddThicknessParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddThicknessResults.html"> <span class="nf nf-cod-symbol_class"></span> AddThicknessResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddToZoneResults.html"> <span class="nf nf-cod-symbol_class"></span> AddToZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AdvancedSurferSetup.html"> <span class="nf nf-cod-symbol_class"></span> AdvancedSurferSetup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AutoMesh.html"> <span class="nf nf-cod-symbol_class"></span> AutoMesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AutoMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> AutoMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AutoMeshResults.html"> <span class="nf nf-cod-symbol_class"></span> AutoMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AutoNodeMoveParams.html"> <span class="nf nf-cod-symbol_class"></span> AutoNodeMoveParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AutoQuadMesher.html"> <span class="nf nf-cod-symbol_class"></span> AutoQuadMesher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AutoQuadMesherResults.html"> <span class="nf nf-cod-symbol_class"></span> AutoQuadMesherResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BCPair.html"> <span class="nf nf-cod-symbol_class"></span> BCPair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BCPairType.html"> <span class="nf nf-cod-symbol_class"></span> BCPairType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BCsVolumetricModality.html"> <span class="nf nf-cod-symbol_class"></span> BCsVolumetricModality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BOIType.html"> <span class="nf nf-cod-symbol_class"></span> BOIType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BodyQueryType.html"> <span class="nf nf-cod-symbol_class"></span> BodyQueryType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BoiSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> BoiSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BoundaryFittedSpline.html"> <span class="nf nf-cod-symbol_class"></span> BoundaryFittedSpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BoundaryFittedSplineParams.html"> <span class="nf nf-cod-symbol_class"></span> BoundaryFittedSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BoundingBox.html"> <span class="nf nf-cod-symbol_class"></span> BoundingBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CadFaceter.html"> <span class="nf nf-cod-symbol_class"></span> CadFaceter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CadReaderRoute.html"> <span class="nf nf-cod-symbol_class"></span> CadReaderRoute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CadRefacetingMaxEdgeSizeLimit.html"> <span class="nf nf-cod-symbol_class"></span> CadRefacetingMaxEdgeSizeLimit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CadRefacetingParams.html"> <span class="nf nf-cod-symbol_class"></span> CadRefacetingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CadRefacetingResolution.html"> <span class="nf nf-cod-symbol_class"></span> CadRefacetingResolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CdbAnalysisType.html"> <span class="nf nf-cod-symbol_class"></span> CdbAnalysisType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CdbSimulationType.html"> <span class="nf nf-cod-symbol_class"></span> CdbSimulationType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CellStatisticsParams.html"> <span class="nf nf-cod-symbol_class"></span> CellStatisticsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CellStatisticsResults.html"> <span class="nf nf-cod-symbol_class"></span> CellStatisticsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CellZoneletType.html"> <span class="nf nf-cod-symbol_class"></span> CellZoneletType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CheckFaceDeviationParams.html"> <span class="nf nf-cod-symbol_class"></span> CheckFaceDeviationParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CheckFaceDeviationResults.html"> <span class="nf nf-cod-symbol_class"></span> CheckFaceDeviationResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CheckMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> CheckMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CheckMeshResults.html"> <span class="nf nf-cod-symbol_class"></span> CheckMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CheckTopologyParams.html"> <span class="nf nf-cod-symbol_class"></span> CheckTopologyParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CollapseParams.html"> <span class="nf nf-cod-symbol_class"></span> CollapseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CollapseResults.html"> <span class="nf nf-cod-symbol_class"></span> CollapseResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CollapseTool.html"> <span class="nf nf-cod-symbol_class"></span> CollapseTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ComponentChildrenParams.html"> <span class="nf nf-cod-symbol_class"></span> ComponentChildrenParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ComponentChildrenResults.html"> <span class="nf nf-cod-symbol_class"></span> ComponentChildrenResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ComputeTopoVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> ComputeTopoVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ComputeVolumesParams.html"> <span class="nf nf-cod-symbol_class"></span> ComputeVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ComputeVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> ComputeVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Connect.html"> <span class="nf nf-cod-symbol_class"></span> Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConnectFacesParams.html"> <span class="nf nf-cod-symbol_class"></span> ConnectFacesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConnectResults.html"> <span class="nf nf-cod-symbol_class"></span> ConnectResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContactElementTypeParams.html"> <span class="nf nf-cod-symbol_class"></span> ContactElementTypeParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContactPatchAxis.html"> <span class="nf nf-cod-symbol_class"></span> ContactPatchAxis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ContactPreventionParams.html"> <span class="nf nf-cod-symbol_class"></span> ContactPreventionParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ControlData.html"> <span class="nf nf-cod-symbol_class"></span> ControlData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ControlPointSelection.html"> <span class="nf nf-cod-symbol_class"></span> ControlPointSelection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CopyZoneletsParams.html"> <span class="nf nf-cod-symbol_class"></span> CopyZoneletsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CopyZoneletsResults.html"> <span class="nf nf-cod-symbol_class"></span> CopyZoneletsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateBOIParams.html"> <span class="nf nf-cod-symbol_class"></span> CreateBOIParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateBOIResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateBOIResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateCapParams.html"> <span class="nf nf-cod-symbol_class"></span> CreateCapParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateCapResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateCapResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateContactPatchParams.html"> <span class="nf nf-cod-symbol_class"></span> CreateContactPatchParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateContactPatchResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateContactPatchResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateIntersectionEdgeLoopsParams.html"> <span class="nf nf-cod-symbol_class"></span> CreateIntersectionEdgeLoopsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateIntersectionEdgeLoopsResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateIntersectionEdgeLoopsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateMaterialPointParams.html"> <span class="nf nf-cod-symbol_class"></span> CreateMaterialPointParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateMaterialPointResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateMaterialPointResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateShellBLResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateShellBLResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateVolumeZonesType.html"> <span class="nf nf-cod-symbol_class"></span> CreateVolumeZonesType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CreateZoneResults.html"> <span class="nf nf-cod-symbol_class"></span> CreateZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CurvatureSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> CurvatureSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeadRegion.html"> <span class="nf nf-cod-symbol_class"></span> DeadRegion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DefeatureTopologyParams.html"> <span class="nf nf-cod-symbol_class"></span> DefeatureTopologyParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteFringesAndOverlapsParams.html"> <span class="nf nf-cod-symbol_class"></span> DeleteFringesAndOverlapsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteFringesAndOverlapsResults.html"> <span class="nf nf-cod-symbol_class"></span> DeleteFringesAndOverlapsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteInteriorNodesParams.html"> <span class="nf nf-cod-symbol_class"></span> DeleteInteriorNodesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteMaterialPointResults.html"> <span class="nf nf-cod-symbol_class"></span> DeleteMaterialPointResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> DeleteMeshParams</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"> <span class="nf nf-cod-symbol_class"></span> DeleteMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteResults.html"> <span class="nf nf-cod-symbol_class"></span> DeleteResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteTool.html"> <span class="nf nf-cod-symbol_class"></span> DeleteTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteTopoEntitiesParams.html"> <span class="nf nf-cod-symbol_class"></span> DeleteTopoEntitiesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteTopoEntitiesResults.html"> <span class="nf nf-cod-symbol_class"></span> DeleteTopoEntitiesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteUnwettedParams.html"> <span class="nf nf-cod-symbol_class"></span> DeleteUnwettedParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteUnwettedResult.html"> <span class="nf nf-cod-symbol_class"></span> DeleteUnwettedResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteVolumesParams.html"> <span class="nf nf-cod-symbol_class"></span> DeleteVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> DeleteVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeleteZoneResults.html"> <span class="nf nf-cod-symbol_class"></span> DeleteZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DetectAndTreatCircularFacesParams.html"> <span class="nf nf-cod-symbol_class"></span> DetectAndTreatCircularFacesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DetectAndTreatFeaturesParams.html"> <span class="nf nf-cod-symbol_class"></span> DetectAndTreatFeaturesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DetectAndTreatHolesParams.html"> <span class="nf nf-cod-symbol_class"></span> DetectAndTreatHolesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DetectCircularHolesParams.html"> <span class="nf nf-cod-symbol_class"></span> DetectCircularHolesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DetectHolesParams.html"> <span class="nf nf-cod-symbol_class"></span> DetectHolesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DetectNonCircularHolesParams.html"> <span class="nf nf-cod-symbol_class"></span> DetectNonCircularHolesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EdgeConnectType.html"> <span class="nf nf-cod-symbol_class"></span> EdgeConnectType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EdgeConnectivityResults.html"> <span class="nf nf-cod-symbol_class"></span> EdgeConnectivityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EdgeMergeControl.html"> <span class="nf nf-cod-symbol_class"></span> EdgeMergeControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportBoundaryFittedSplineParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportBoundaryFittedSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportFluentCaseParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportFluentCaseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportFluentMeshingMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportFluentMeshingMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportLSDynaIGAResults.html"> <span class="nf nf-cod-symbol_class"></span> ExportLSDynaIGAResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportLSDynaIgaKeywordFileParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportLSDynaIgaKeywordFileParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportLSDynaKeywordFileParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportLSDynaKeywordFileParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportLSDynaResults.html"> <span class="nf nf-cod-symbol_class"></span> ExportLSDynaResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportMapdlCdbParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportMapdlCdbParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportMapdlCdbResults.html"> <span class="nf nf-cod-symbol_class"></span> ExportMapdlCdbResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportSTLParams.html"> <span class="nf nf-cod-symbol_class"></span> ExportSTLParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractFeatureParams.html"> <span class="nf nf-cod-symbol_class"></span> ExtractFeatureParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractFeatureResults.html"> <span class="nf nf-cod-symbol_class"></span> ExtractFeatureResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractTopoVolumesParams.html"> <span class="nf nf-cod-symbol_class"></span> ExtractTopoVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractTopoVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> ExtractTopoVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractVolumesParams.html"> <span class="nf nf-cod-symbol_class"></span> ExtractVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> ExtractVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExtractedFeatureIds.html"> <span class="nf nf-cod-symbol_class"></span> ExtractedFeatureIds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FaceAndEdgeConnectivityParams.html"> <span class="nf nf-cod-symbol_class"></span> FaceAndEdgeConnectivityParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FaceAndEdgeConnectivityResults.html"> <span class="nf nf-cod-symbol_class"></span> FaceAndEdgeConnectivityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FaceConnectivityResults.html"> <span class="nf nf-cod-symbol_class"></span> FaceConnectivityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FeatureExtraction.html"> <span class="nf nf-cod-symbol_class"></span> FeatureExtraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FeatureRecoveryParams.html"> <span class="nf nf-cod-symbol_class"></span> FeatureRecoveryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileIO.html"> <span class="nf nf-cod-symbol_class"></span> FileIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileReadParams.html"> <span class="nf nf-cod-symbol_class"></span> FileReadParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileReadResults.html"> <span class="nf nf-cod-symbol_class"></span> FileReadResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileWriteParams.html"> <span class="nf nf-cod-symbol_class"></span> FileWriteParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileWriteResults.html"> <span class="nf nf-cod-symbol_class"></span> FileWriteResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FillHolesAtPlaneParams.html"> <span class="nf nf-cod-symbol_class"></span> FillHolesAtPlaneParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FillHolesAtPlaneResults.html"> <span class="nf nf-cod-symbol_class"></span> FillHolesAtPlaneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FixInvalidNormalNodeParams.html"> <span class="nf nf-cod-symbol_class"></span> FixInvalidNormalNodeParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FixInvalidNormalNodeResults.html"> <span class="nf nf-cod-symbol_class"></span> FixInvalidNormalNodeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FlowDirection.html"> <span class="nf nf-cod-symbol_class"></span> FlowDirection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuseOption.html"> <span class="nf nf-cod-symbol_class"></span> FuseOption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuseParams.html"> <span class="nf nf-cod-symbol_class"></span> FuseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuseResults.html"> <span class="nf nf-cod-symbol_class"></span> FuseResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GlobalSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> GlobalSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HardSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> HardSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HexCoreCellElementType.html"> <span class="nf nf-cod-symbol_class"></span> HexCoreCellElementType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HexCoreParams.html"> <span class="nf nf-cod-symbol_class"></span> HexCoreParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HexCoreTransitionLayerType.html"> <span class="nf nf-cod-symbol_class"></span> HexCoreTransitionLayerType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HexToSpline.html"> <span class="nf nf-cod-symbol_class"></span> HexToSpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HexToSplineParams.html"> <span class="nf nf-cod-symbol_class"></span> HexToSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IGAResults.html"> <span class="nf nf-cod-symbol_class"></span> IGAResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IGASpline.html"> <span class="nf nf-cod-symbol_class"></span> IGASpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IGAUnstructuredSplineSolid.html"> <span class="nf nf-cod-symbol_class"></span> IGAUnstructuredSplineSolid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IGAUnstructuredSplineSurf.html"> <span class="nf nf-cod-symbol_class"></span> IGAUnstructuredSplineSurf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportAbaqusParams.html"> <span class="nf nf-cod-symbol_class"></span> ImportAbaqusParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportAbaqusResults.html"> <span class="nf nf-cod-symbol_class"></span> ImportAbaqusResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportCadParams.html"> <span class="nf nf-cod-symbol_class"></span> ImportCadParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportCadResults.html"> <span class="nf nf-cod-symbol_class"></span> ImportCadResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportFluentCaseParams.html"> <span class="nf nf-cod-symbol_class"></span> ImportFluentCaseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportFluentCaseResults.html"> <span class="nf nf-cod-symbol_class"></span> ImportFluentCaseResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportFluentMeshingMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> ImportFluentMeshingMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportFluentMeshingMeshResults.html"> <span class="nf nf-cod-symbol_class"></span> ImportFluentMeshingMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportMapdlCdbParams.html"> <span class="nf nf-cod-symbol_class"></span> ImportMapdlCdbParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ImportMapdlCdbResults.html"> <span class="nf nf-cod-symbol_class"></span> ImportMapdlCdbResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IntersectParams.html"> <span class="nf nf-cod-symbol_class"></span> IntersectParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IntersectionMask.html"> <span class="nf nf-cod-symbol_class"></span> IntersectionMask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JoinParams.html"> <span class="nf nf-cod-symbol_class"></span> JoinParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JoinSeparateMethod.html"> <span class="nf nf-cod-symbol_class"></span> JoinSeparateMethod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LSDynaAnalysisType.html"> <span class="nf nf-cod-symbol_class"></span> LSDynaAnalysisType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LSDynaFileFormatType.html"> <span class="nf nf-cod-symbol_class"></span> LSDynaFileFormatType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LabelExportParams.html"> <span class="nf nf-cod-symbol_class"></span> LabelExportParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LeakPreventionParams.html"> <span class="nf nf-cod-symbol_class"></span> LeakPreventionParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LengthUnit.html"> <span class="nf nf-cod-symbol_class"></span> LengthUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LocalSurferParams.html"> <span class="nf nf-cod-symbol_class"></span> LocalSurferParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LocalSurferResults.html"> <span class="nf nf-cod-symbol_class"></span> LocalSurferResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MatchMorphParams.html"> <span class="nf nf-cod-symbol_class"></span> MatchMorphParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MatchMorphResults.html"> <span class="nf nf-cod-symbol_class"></span> MatchMorphResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MatchPair.html"> <span class="nf nf-cod-symbol_class"></span> MatchPair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MatchPairTargetType.html"> <span class="nf nf-cod-symbol_class"></span> MatchPairTargetType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MaterialPointManager.html"> <span class="nf nf-cod-symbol_class"></span> MaterialPointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MaterialPointType.html"> <span class="nf nf-cod-symbol_class"></span> MaterialPointType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeBoundaryNodesParams.html"> <span class="nf nf-cod-symbol_class"></span> MergeBoundaryNodesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeBoundaryNodesResults.html"> <span class="nf nf-cod-symbol_class"></span> MergeBoundaryNodesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeNodeType.html"> <span class="nf nf-cod-symbol_class"></span> MergeNodeType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergePartsParams.html"> <span class="nf nf-cod-symbol_class"></span> MergePartsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergePartsResults.html"> <span class="nf nf-cod-symbol_class"></span> MergePartsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeVolumesParams.html"> <span class="nf nf-cod-symbol_class"></span> MergeVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> MergeVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeZoneletsParams.html"> <span class="nf nf-cod-symbol_class"></span> MergeZoneletsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MergeZoneletsResults.html"> <span class="nf nf-cod-symbol_class"></span> MergeZoneletsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MeshInfo.html"> <span class="nf nf-cod-symbol_class"></span> MeshInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MeshStackerParams.html"> <span class="nf nf-cod-symbol_class"></span> MeshStackerParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MeshStackerResults.html"> <span class="nf nf-cod-symbol_class"></span> MeshStackerResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MeshedSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> MeshedSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Model.html"> <span class="nf nf-cod-symbol_class"></span> Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MorphBCParams.html"> <span class="nf nf-cod-symbol_class"></span> MorphBCParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MorphSolveParams.html"> <span class="nf nf-cod-symbol_class"></span> MorphSolveParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Morpher.html"> <span class="nf nf-cod-symbol_class"></span> Morpher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiZoneControl.html"> <span class="nf nf-cod-symbol_class"></span> MultiZoneControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiZoneEdgeBiasingParams.html"> <span class="nf nf-cod-symbol_class"></span> MultiZoneEdgeBiasingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiZoneMapMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> MultiZoneMapMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiZoneSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> MultiZoneSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiZoneSweepMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> MultiZoneSweepMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NamePatternParams.html"> <span class="nf nf-cod-symbol_class"></span> NamePatternParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OptimizeQuadMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> OptimizeQuadMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OverlapPairs.html"> <span class="nf nf-cod-symbol_class"></span> OverlapPairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OverlapSearchResults.html"> <span class="nf nf-cod-symbol_class"></span> OverlapSearchResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Part.html"> <span class="nf nf-cod-symbol_class"></span> Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PartCreationType.html"> <span class="nf nf-cod-symbol_class"></span> PartCreationType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PartSummaryParams.html"> <span class="nf nf-cod-symbol_class"></span> PartSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PartSummaryResults.html"> <span class="nf nf-cod-symbol_class"></span> PartSummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PartZonelets.html"> <span class="nf nf-cod-symbol_class"></span> PartZonelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PartialDefeatureParams.html"> <span class="nf nf-cod-symbol_class"></span> PartialDefeatureParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PeriodicControl.html"> <span class="nf nf-cod-symbol_class"></span> PeriodicControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PeriodicControlParams.html"> <span class="nf nf-cod-symbol_class"></span> PeriodicControlParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PeriodicControlSummaryParams.html"> <span class="nf nf-cod-symbol_class"></span> PeriodicControlSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PeriodicControlSummaryResult.html"> <span class="nf nf-cod-symbol_class"></span> PeriodicControlSummaryResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrismControl.html"> <span class="nf nf-cod-symbol_class"></span> PrismControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrismControlGrowthParams.html"> <span class="nf nf-cod-symbol_class"></span> PrismControlGrowthParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrismControlOffsetType.html"> <span class="nf nf-cod-symbol_class"></span> PrismControlOffsetType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrismParams.html"> <span class="nf nf-cod-symbol_class"></span> PrismParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrismStairStep.html"> <span class="nf nf-cod-symbol_class"></span> PrismStairStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProjectOnGeometryParams.html"> <span class="nf nf-cod-symbol_class"></span> ProjectOnGeometryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProjectOnGeometryResults.html"> <span class="nf nf-cod-symbol_class"></span> ProjectOnGeometryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProximitySizingParams.html"> <span class="nf nf-cod-symbol_class"></span> ProximitySizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QuadToSpline.html"> <span class="nf nf-cod-symbol_class"></span> QuadToSpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QuadToSplineParams.html"> <span class="nf nf-cod-symbol_class"></span> QuadToSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ReadSizeFieldParams.html"> <span class="nf nf-cod-symbol_class"></span> ReadSizeFieldParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RefineAtContactsParams.html"> <span class="nf nf-cod-symbol_class"></span> RefineAtContactsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RefineAtContactsResults.html"> <span class="nf nf-cod-symbol_class"></span> RefineAtContactsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RefineSplineParams.html"> <span class="nf nf-cod-symbol_class"></span> RefineSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RefineTetMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> RefineTetMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RemoveLabelResults.html"> <span class="nf nf-cod-symbol_class"></span> RemoveLabelResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RemoveZoneResults.html"> <span class="nf nf-cod-symbol_class"></span> RemoveZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RepairEdgesParams.html"> <span class="nf nf-cod-symbol_class"></span> RepairEdgesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RepairTopologyParams.html"> <span class="nf nf-cod-symbol_class"></span> RepairTopologyParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolveIntersectionResult.html"> <span class="nf nf-cod-symbol_class"></span> ResolveIntersectionResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolveIntersectionsParams.html"> <span class="nf nf-cod-symbol_class"></span> ResolveIntersectionsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SFPeriodicParams.html"> <span class="nf nf-cod-symbol_class"></span> SFPeriodicParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Scaffolder.html"> <span class="nf nf-cod-symbol_class"></span> Scaffolder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScaffolderMergeResults.html"> <span class="nf nf-cod-symbol_class"></span> ScaffolderMergeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScaffolderParams.html"> <span class="nf nf-cod-symbol_class"></span> ScaffolderParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScaffolderRepairMode.html"> <span class="nf nf-cod-symbol_class"></span> ScaffolderRepairMode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScaffolderResults.html"> <span class="nf nf-cod-symbol_class"></span> ScaffolderResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScaffolderSplitResults.html"> <span class="nf nf-cod-symbol_class"></span> ScaffolderSplitResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScopeDefinition.html"> <span class="nf nf-cod-symbol_class"></span> ScopeDefinition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScopeEntity.html"> <span class="nf nf-cod-symbol_class"></span> ScopeEntity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScopeEvaluationType.html"> <span class="nf nf-cod-symbol_class"></span> ScopeEvaluationType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScopeExpressionType.html"> <span class="nf nf-cod-symbol_class"></span> ScopeExpressionType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ScopeZoneletParams.html"> <span class="nf nf-cod-symbol_class"></span> ScopeZoneletParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByFoldsParams.html"> <span class="nf nf-cod-symbol_class"></span> SearchByFoldsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByFoldsResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchByFoldsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByIntersectionResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchByIntersectionResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByInvalidNormalsResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchByInvalidNormalsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByQualityParams.html"> <span class="nf nf-cod-symbol_class"></span> SearchByQualityParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByQualityResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchByQualityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchBySelfIntersectionParams.html"> <span class="nf nf-cod-symbol_class"></span> SearchBySelfIntersectionParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchBySpikeParams.html"> <span class="nf nf-cod-symbol_class"></span> SearchBySpikeParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchBySpikeResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchBySpikeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByThinStripParams.html"> <span class="nf nf-cod-symbol_class"></span> SearchByThinStripParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchByThinStripResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchByThinStripResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchInfoByRegisterIdParams.html"> <span class="nf nf-cod-symbol_class"></span> SearchInfoByRegisterIdParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchInfoByRegisterIdResults.html"> <span class="nf nf-cod-symbol_class"></span> SearchInfoByRegisterIdResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SeparateBlocksFormatType.html"> <span class="nf nf-cod-symbol_class"></span> SeparateBlocksFormatType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetContactPreventionsResults.html"> <span class="nf nf-cod-symbol_class"></span> SetContactPreventionsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetFeatureRecoveriesResults.html"> <span class="nf nf-cod-symbol_class"></span> SetFeatureRecoveriesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetLeakPreventionsResults.html"> <span class="nf nf-cod-symbol_class"></span> SetLeakPreventionsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetNameResults.html"> <span class="nf nf-cod-symbol_class"></span> SetNameResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetParamsResults.html"> <span class="nf nf-cod-symbol_class"></span> SetParamsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetScopeResults.html"> <span class="nf nf-cod-symbol_class"></span> SetScopeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SetSizingResults.html"> <span class="nf nf-cod-symbol_class"></span> SetSizingResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ShellBLControl.html"> <span class="nf nf-cod-symbol_class"></span> ShellBLControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ShellBLControlGrowthParams.html"> <span class="nf nf-cod-symbol_class"></span> ShellBLControlGrowthParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ShellBLParams.html"> <span class="nf nf-cod-symbol_class"></span> ShellBLParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizeControl.html"> <span class="nf nf-cod-symbol_class"></span> SizeControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizeControlSummaryParams.html"> <span class="nf nf-cod-symbol_class"></span> SizeControlSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizeControlSummaryResult.html"> <span class="nf nf-cod-symbol_class"></span> SizeControlSummaryResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizeField.html"> <span class="nf nf-cod-symbol_class"></span> SizeField</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizeFieldFileReadResults.html"> <span class="nf nf-cod-symbol_class"></span> SizeFieldFileReadResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizingType.html"> <span class="nf nf-cod-symbol_class"></span> SizingType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SmoothDihedralFaceNodesParams.html"> <span class="nf nf-cod-symbol_class"></span> SmoothDihedralFaceNodesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SmoothDihedralFaceNodesResults.html"> <span class="nf nf-cod-symbol_class"></span> SmoothDihedralFaceNodesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SmoothType.html"> <span class="nf nf-cod-symbol_class"></span> SmoothType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SoftSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> SoftSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SoiSizingParams.html"> <span class="nf nf-cod-symbol_class"></span> SoiSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SplineContinuityType.html"> <span class="nf nf-cod-symbol_class"></span> SplineContinuityType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SplineFeatureCaptureType.html"> <span class="nf nf-cod-symbol_class"></span> SplineFeatureCaptureType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SplineRefinementType.html"> <span class="nf nf-cod-symbol_class"></span> SplineRefinementType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SplitParams.html"> <span class="nf nf-cod-symbol_class"></span> SplitParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StitchParams.html"> <span class="nf nf-cod-symbol_class"></span> StitchParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StitchType.html"> <span class="nf nf-cod-symbol_class"></span> StitchType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StretchFreeBoundariesParams.html"> <span class="nf nf-cod-symbol_class"></span> StretchFreeBoundariesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StretchFreeBoundariesResults.html"> <span class="nf nf-cod-symbol_class"></span> StretchFreeBoundariesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SubtractVolumesParams.html"> <span class="nf nf-cod-symbol_class"></span> SubtractVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SubtractVolumesResults.html"> <span class="nf nf-cod-symbol_class"></span> SubtractVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SubtractZoneletsParams.html"> <span class="nf nf-cod-symbol_class"></span> SubtractZoneletsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SubtractZoneletsResults.html"> <span class="nf nf-cod-symbol_class"></span> SubtractZoneletsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceDiagnosticSummaryParams.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceDiagnosticSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceDiagnosticSummaryResults.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceDiagnosticSummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceMeshSizeScaling.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceMeshSizeScaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceQualityResult.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceQualityResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceQualitySummaryParams.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceQualitySummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceQualitySummaryResults.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceQualitySummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceSearch.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceUtilities.html"> <span class="nf nf-cod-symbol_class"></span> SurfaceUtilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Surfer.html"> <span class="nf nf-cod-symbol_class"></span> Surfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurferParams.html"> <span class="nf nf-cod-symbol_class"></span> SurferParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurferResults.html"> <span class="nf nf-cod-symbol_class"></span> SurferResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SweepType.html"> <span class="nf nf-cod-symbol_class"></span> SweepType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TetMeshSplineParams.html"> <span class="nf nf-cod-symbol_class"></span> TetMeshSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TetParams.html"> <span class="nf nf-cod-symbol_class"></span> TetParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThinStripType.html"> <span class="nf nf-cod-symbol_class"></span> ThinStripType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThinVolumeControl.html"> <span class="nf nf-cod-symbol_class"></span> ThinVolumeControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThinVolumeMeshParams.html"> <span class="nf nf-cod-symbol_class"></span> ThinVolumeMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TopoData.html"> <span class="nf nf-cod-symbol_class"></span> TopoData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TopoFillHoleParams.html"> <span class="nf nf-cod-symbol_class"></span> TopoFillHoleParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TopoFillHoleResult.html"> <span class="nf nf-cod-symbol_class"></span> TopoFillHoleResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TopoSearchField.html"> <span class="nf nf-cod-symbol_class"></span> TopoSearchField</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TopoUtilities.html"> <span class="nf nf-cod-symbol_class"></span> TopoUtilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Transform.html"> <span class="nf nf-cod-symbol_class"></span> Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TransformParams.html"> <span class="nf nf-cod-symbol_class"></span> TransformParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TransformResults.html"> <span class="nf nf-cod-symbol_class"></span> TransformResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TriangulateParams.html"> <span class="nf nf-cod-symbol_class"></span> TriangulateParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TriangulateResults.html"> <span class="nf nf-cod-symbol_class"></span> TriangulateResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TrimmedSolidSplineCutMode.html"> <span class="nf nf-cod-symbol_class"></span> TrimmedSolidSplineCutMode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TrimmedSpline.html"> <span class="nf nf-cod-symbol_class"></span> TrimmedSpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TrimmedSplineResults.html"> <span class="nf nf-cod-symbol_class"></span> TrimmedSplineResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UniformSolidSplineCreationParams.html"> <span class="nf nf-cod-symbol_class"></span> UniformSolidSplineCreationParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VTComposer.html"> <span class="nf nf-cod-symbol_class"></span> VTComposer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VTComposerParams.html"> <span class="nf nf-cod-symbol_class"></span> VTComposerParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VTComposerResults.html"> <span class="nf nf-cod-symbol_class"></span> VTComposerResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeControl.html"> <span class="nf nf-cod-symbol_class"></span> VolumeControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeControlParams.html"> <span class="nf nf-cod-symbol_class"></span> VolumeControlParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeFillType.html"> <span class="nf nf-cod-symbol_class"></span> VolumeFillType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeMeshTool.html"> <span class="nf nf-cod-symbol_class"></span> VolumeMeshTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeMeshToolResults.html"> <span class="nf nf-cod-symbol_class"></span> VolumeMeshToolResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeNamingType.html"> <span class="nf nf-cod-symbol_class"></span> VolumeNamingType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeQualityResultsPart.html"> <span class="nf nf-cod-symbol_class"></span> VolumeQualityResultsPart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeQualitySummaryParams.html"> <span class="nf nf-cod-symbol_class"></span> VolumeQualitySummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeQualitySummaryResults.html"> <span class="nf nf-cod-symbol_class"></span> VolumeQualitySummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeSearch.html"> <span class="nf nf-cod-symbol_class"></span> VolumeSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumeSweeper.html"> <span class="nf nf-cod-symbol_class"></span> VolumeSweeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumetricScaffolderParams.html"> <span class="nf nf-cod-symbol_class"></span> VolumetricScaffolderParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumetricSizeFieldComputeParams.html"> <span class="nf nf-cod-symbol_class"></span> VolumetricSizeFieldComputeParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VolumetricSizeFieldComputeResults.html"> <span class="nf nf-cod-symbol_class"></span> VolumetricSizeFieldComputeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapParams.html"> <span class="nf nf-cod-symbol_class"></span> WrapParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapRegion.html"> <span class="nf nf-cod-symbol_class"></span> WrapRegion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapResult.html"> <span class="nf nf-cod-symbol_class"></span> WrapResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Wrapper.html"> <span class="nf nf-cod-symbol_class"></span> Wrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperCloseGapsParams.html"> <span class="nf nf-cod-symbol_class"></span> WrapperCloseGapsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperCloseGapsResult.html"> <span class="nf nf-cod-symbol_class"></span> WrapperCloseGapsResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperControl.html"> <span class="nf nf-cod-symbol_class"></span> WrapperControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperImproveQualityParams.html"> <span class="nf nf-cod-symbol_class"></span> WrapperImproveQualityParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperImproveResult.html"> <span class="nf nf-cod-symbol_class"></span> WrapperImproveResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperPatchFlowRegionsParams.html"> <span class="nf nf-cod-symbol_class"></span> WrapperPatchFlowRegionsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WrapperPatchFlowRegionsResult.html"> <span class="nf nf-cod-symbol_class"></span> WrapperPatchFlowRegionsResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteSizeFieldParams.html"> <span class="nf nf-cod-symbol_class"></span> WriteSizeFieldParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZoneMeshResult.html"> <span class="nf nf-cod-symbol_class"></span> ZoneMeshResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZoneType.html"> <span class="nf nf-cod-symbol_class"></span> ZoneType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CellQualityMeasure.html"> <span class="nf nf-cod-symbol_enum"></span> CellQualityMeasure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ErrorCode.html"> <span class="nf nf-cod-symbol_enum"></span> ErrorCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FaceQualityMeasure.html"> <span class="nf nf-cod-symbol_enum"></span> FaceQualityMeasure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ShellBLOffsetType.html"> <span class="nf nf-cod-symbol_enum"></span> ShellBLOffsetType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SizeFieldType.html"> <span class="nf nf-cod-symbol_enum"></span> SizeFieldType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SolverType.html"> <span class="nf nf-cod-symbol_enum"></span> SolverType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SurfaceFeatureType.html"> <span class="nf nf-cod-symbol_enum"></span> SurfaceFeatureType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WarningCode.html"> <span class="nf nf-cod-symbol_enum"></span> WarningCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_model.html"> <span class="nf nf-md-function_variant"></span> local_model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="lucid/index.html"><span class="nf nf-md-package"></span> ansys.meshing.prime.lucid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html"><span class="nf nf-md-package"></span> ansys.meshing.prime.examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics/index.html"><span class="nf nf-md-package"></span> ansys.meshing.prime.graphics</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">The <code class="docutils literal notranslate"><span class="pre">ansys.meshing.prime</span></code> library</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code></span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="deletemeshresults">
+<h1><code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code><a class="headerlink" href="#deletemeshresults" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.meshing.prime.DeleteMeshResults">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.</span></span><span class="sig-name descname"><span class="pre">DeleteMeshResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.CommunicationManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.ErrorCode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.DeleteMeshResults" title="Link to this definition">#</a></dt>
+<dd><p>Results structure associated with delete mesh on topofaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><em>Model</em></a>) – Model to create a <code class="docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code> object with default parameters.</p></li>
+<li><p><strong>error_code</strong> (<a class="reference internal" href="ErrorCode.html#ansys.meshing.prime.ErrorCode" title="ansys.meshing.prime.ErrorCode"><em>ErrorCode</em></a><em>, </em><em>optional</em>) – <p>Error code associated with the failure of operation.</p>
+<p><strong>This is a beta parameter</strong>. <strong>The behavior and name may change in the future</strong>.</p>
+</p></li>
+<li><p><strong>json_data</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – JSON dictionary to create a <code class="docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code> object with provided parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">delete_mesh_results</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">DeleteMeshResults</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Properties</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="autogen/topodatastructs/DeleteMeshResults.html#DeleteMeshResults.error_code" title="DeleteMeshResults.error_code"><code class="xref py py-attr docutils literal notranslate"><span class="pre">error_code</span></code></a></p></td>
+<td><p>Error code associated with the failure of operation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Static methods</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="autogen/topodatastructs/DeleteMeshResults.html#DeleteMeshResults.print_default" title="DeleteMeshResults.print_default"><code class="xref py py-attr docutils literal notranslate"><span class="pre">print_default</span></code></a></p></td>
+<td><p>Print the default values of <code class="docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code> object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="autogen/topodatastructs/DeleteMeshResults.html#DeleteMeshResults.set_default" title="DeleteMeshResults.set_default"><code class="xref py py-attr docutils literal notranslate"><span class="pre">set_default</span></code></a></p></td>
+<td><p>Set the default values of the <code class="docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code> object.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Special methods</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="autogen/topodatastructs/DeleteMeshResults.html#DeleteMeshResults.__setattr__" title="DeleteMeshResults.__setattr__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__setattr__</span></code></a></p></td>
+<td><p>__setattr__(CoreObject self, key, value)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="autogen/topodatastructs/DeleteMeshResults.html#DeleteMeshResults.__str__" title="DeleteMeshResults.__str__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__str__</span></code></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="import-detail">
+<h2>Import detail<a class="headerlink" href="#import-detail" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeleteMeshResults</span>
+</pre></div>
+</div>
+</section>
+<section id="property-detail">
+<h2>Property detail<a class="headerlink" href="#property-detail" title="Link to this heading">#</a></h2>
+<dl class="py property">
+<dt class="sig sig-object py" id="DeleteMeshResults.error_code">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DeleteMeshResults.</span></span><span class="sig-name descname"><span class="pre">error_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ansys.meshing.prime.params.primestructs.ErrorCode</span></em><a class="headerlink" href="#DeleteMeshResults.error_code" title="Link to this definition">#</a></dt>
+<dd><p>Error code associated with the failure of operation.</p>
+<p><strong>This is a beta parameter</strong>. <strong>The behavior and name may change in the future</strong>.</p>
+</dd></dl>
+
+</section>
+<section id="method-detail">
+<h2>Method detail<a class="headerlink" href="#method-detail" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="DeleteMeshResults.__setattr__">
+<span class="sig-prename descclassname"><span class="pre">DeleteMeshResults.</span></span><span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DeleteMeshResults.__setattr__" title="Link to this definition">#</a></dt>
+<dd><p>__setattr__(CoreObject self, key, value)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DeleteMeshResults.__str__">
+<span class="sig-prename descclassname"><span class="pre">DeleteMeshResults.</span></span><span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#DeleteMeshResults.__str__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DeleteMeshResults.print_default">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DeleteMeshResults.</span></span><span class="sig-name descname"><span class="pre">print_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#DeleteMeshResults.print_default" title="Link to this definition">#</a></dt>
+<dd><p>Print the default values of <code class="docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code> object.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">DeleteMeshResults</span><span class="o">.</span><span class="n">print_default</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DeleteMeshResults.set_default">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DeleteMeshResults.</span></span><span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.ErrorCode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DeleteMeshResults.set_default" title="Link to this definition">#</a></dt>
+<dd><p>Set the default values of the <code class="docutils literal notranslate"><span class="pre">DeleteMeshResults</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>error_code</strong> (<a class="reference internal" href="ErrorCode.html#ansys.meshing.prime.ErrorCode" title="ansys.meshing.prime.ErrorCode"><em>ErrorCode</em></a><em>, </em><em>optional</em>) – Error code associated with the failure of operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.meshing.prime.DeleteMeshResults"><code class="docutils literal notranslate"><span class="pre">ansys.meshing.prime.DeleteMeshResults</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-detail">Import detail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-detail">Property detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#DeleteMeshResults.error_code"><code class="docutils literal notranslate"><span class="pre">error_code</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-detail">Method detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#DeleteMeshResults.__setattr__"><code class="docutils literal notranslate"><span class="pre">__setattr__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#DeleteMeshResults.__str__"><code class="docutils literal notranslate"><span class="pre">__str__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#DeleteMeshResults.print_default"><code class="docutils literal notranslate"><span class="pre">print_default()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#DeleteMeshResults.set_default"><code class="docutils literal notranslate"><span class="pre">set_default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pyprimemesh/edit/main/ansys/meshing/prime/DeleteMeshResults.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/api/ansys/meshing/prime/DeleteMeshResults.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.5.2. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

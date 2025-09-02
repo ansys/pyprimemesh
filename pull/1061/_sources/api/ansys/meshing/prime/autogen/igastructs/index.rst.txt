@@ -1,0 +1,173 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``igastructs.py`` module
+============================
+
+.. py:module:: ansys.meshing.prime.autogen.igastructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: igastructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.BoundaryFittedSplineParams`
+            - Boundary fitted spline fitting parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.ControlPointSelection`
+            - Control point selection type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.HexToSplineParams`
+            - Parameters to control conversion of hex mesh to spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.IGAResults`
+            - Results of IGA operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.IGASpline`
+            - Information of the spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.IGAUnstructuredSplineSolid`
+            - Information of unstructured spline solid.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.IGAUnstructuredSplineSurf`
+            - Information of unstructured spline surface.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.QuadToSplineParams`
+            - Parameters to control conversion of quadrilateral mesh to spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.RefineSplineParams`
+            - Spline refinement parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.SplineContinuityType`
+            - Spline Continuity types.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.SplineFeatureCaptureType`
+            - Options to capture features in spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs.SplineRefinementType`
+            - Type of spline refinement. Currently, supports h-refinement and p-refinement.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> BoundaryFittedSplineParams</api/ansys/meshing/prime/autogen/igastructs/BoundaryFittedSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> ControlPointSelection</api/ansys/meshing/prime/autogen/igastructs/ControlPointSelection>
+    <span class="nf nf-cod-symbol_class"></span> HexToSplineParams</api/ansys/meshing/prime/autogen/igastructs/HexToSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> IGAResults</api/ansys/meshing/prime/autogen/igastructs/IGAResults>
+    <span class="nf nf-cod-symbol_class"></span> IGASpline</api/ansys/meshing/prime/autogen/igastructs/IGASpline>
+    <span class="nf nf-cod-symbol_class"></span> IGAUnstructuredSplineSolid</api/ansys/meshing/prime/autogen/igastructs/IGAUnstructuredSplineSolid>
+    <span class="nf nf-cod-symbol_class"></span> IGAUnstructuredSplineSurf</api/ansys/meshing/prime/autogen/igastructs/IGAUnstructuredSplineSurf>
+    <span class="nf nf-cod-symbol_class"></span> QuadToSplineParams</api/ansys/meshing/prime/autogen/igastructs/QuadToSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> RefineSplineParams</api/ansys/meshing/prime/autogen/igastructs/RefineSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> SplineContinuityType</api/ansys/meshing/prime/autogen/igastructs/SplineContinuityType>
+    <span class="nf nf-cod-symbol_class"></span> SplineFeatureCaptureType</api/ansys/meshing/prime/autogen/igastructs/SplineFeatureCaptureType>
+    <span class="nf nf-cod-symbol_class"></span> SplineRefinementType</api/ansys/meshing/prime/autogen/igastructs/SplineRefinementType>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

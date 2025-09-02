@@ -1,0 +1,121 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VTComposer`
+===================
+
+
+.. py:class:: ansys.meshing.prime.VTComposer(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, part_id: int)
+
+
+
+   VTComposer is used for fix topology corrections like separate, pinch.
+
+   :param model: Server model to create VTComposer object.
+   :type model: Model
+   :param part_id: Id of the part.
+   :type part_id: int
+
+
+
+
+
+
+.. py:currentmodule:: VTComposer
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~separate_faces_with_interior_edges`
+            - Separates the given topofaces having interior edges using the given VT Composer parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for VTComposer.
+          * - :py:attr:`~__exit__`
+            - Exit context for VTComposer.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VTComposer
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for VTComposer.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for VTComposer.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: separate_faces_with_interior_edges(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.VTComposerParams) -> ansys.meshing.prime.params.primestructs.VTComposerResults
+
+   Separates the given topofaces having interior edges using the given VT Composer parameters.
+
+
+   :param topo_faces: Ids of input topofaces.
+   :type topo_faces: Iterable[int]
+   :param params: VT composer parameters.
+   :type params: VTComposerParams
+
+   :returns: Return results in VTComposerResults.
+   :rtype: VTComposerResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = vtcomposer.separate_faces_with_interior_edges([1,2,3,4,5], params)
+
+
+
+
+
+
+
+.. vale on

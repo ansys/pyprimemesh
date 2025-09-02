@@ -1,0 +1,167 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TrimmedSpline`
+======================
+
+
+.. py:class:: ansys.meshing.prime.TrimmedSpline(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Handles creation and meshing of trimmed spline.
+
+   :param model: Server model to create TrimmedSpline object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: TrimmedSpline
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_tet_mesh_on_trimmed_solid_spline`
+            - Creates tetrahedral mesh on trimmed solid spline.
+          * - :py:attr:`~create_trimmed_uniform_solid_spline_by_brep_mapping`
+            - Creates uniform solid spline and maps the CAD geometry in its parametric space.
+          * - :py:attr:`~refine_tet_mesh`
+            - Refines tetrahedral mesh.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for TrimmedSpline.
+          * - :py:attr:`~__exit__`
+            - Exit context for TrimmedSpline.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TrimmedSpline
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for TrimmedSpline.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for TrimmedSpline.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: create_tet_mesh_on_trimmed_solid_spline(part_id: int, mesh_params: ansys.meshing.prime.params.primestructs.TetMeshSplineParams) -> ansys.meshing.prime.params.primestructs.TrimmedSplineResults
+
+   Creates tetrahedral mesh on trimmed solid spline.
+
+
+   :param part_id: Part on which the tetrahedral meshing is performed.
+   :type part_id: int
+   :param mesh_params: Parameters to configure the meshing.
+   :type mesh_params: TetMeshSplineParams
+
+   :returns: Returns the TrimmedSplineResults.
+   :rtype: TrimmedSplineResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = trimmedSpline.CreateTetMeshOnTrimmedSolidSpline(part_id, mesh_params)
+
+
+.. py:method:: create_trimmed_uniform_solid_spline_by_brep_mapping(part_id: int, spline_params: ansys.meshing.prime.params.primestructs.UniformSolidSplineCreationParams) -> ansys.meshing.prime.params.primestructs.TrimmedSplineResults
+
+   Creates uniform solid spline and maps the CAD geometry in its parametric space.
+
+
+   :param part_id: Part on which the spline is to be created.
+   :type part_id: int
+   :param spline_params: Parameters used to create the spline.
+   :type spline_params: UniformSolidSplineCreationParams
+
+   :returns: Returns the TrimmedSplineResults.
+   :rtype: TrimmedSplineResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = trimmedSpline.CreateTrimmedUniformSolidSplineByBrepMapping(part_id, spline_params)
+
+
+.. py:method:: refine_tet_mesh(part_id: int, refine_params: ansys.meshing.prime.params.primestructs.RefineTetMeshParams) -> ansys.meshing.prime.params.primestructs.TrimmedSplineResults
+
+   Refines tetrahedral mesh.
+
+
+   :param part_id: Part on which mesh refinement is performed.
+   :type part_id: int
+   :param refine_params: Parameters to configure mesh refinement.
+   :type refine_params: RefineTetMeshParams
+
+   :returns: Returns the TrimmedSplineResults.
+   :rtype: TrimmedSplineResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = trimmedSpline.RefineTetMesh(part_id, refine_params)
+
+
+
+
+
+
+
+.. vale on

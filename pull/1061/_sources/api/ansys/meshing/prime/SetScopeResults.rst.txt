@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SetScopeResults`
+========================
+
+
+.. py:class:: ansys.meshing.prime.SetScopeResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_code: ansys.meshing.prime.params.primestructs.WarningCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the set scope operation.
+
+   :param model: Model to create a ``SetScopeResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the set scope.
+   :type error_code: ErrorCode, optional
+   :param warning_code: Warning code associated with the set scope.
+   :type warning_code: WarningCode, optional
+   :param json_data: JSON dictionary to create a ``SetScopeResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> set_scope_results = prime.SetScopeResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SetScopeResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the set scope.
+          * - :py:attr:`~warning_code`
+            - Warning code associated with the set scope.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SetScopeResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SetScopeResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SetScopeResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the set scope.
+
+.. py:property:: warning_code
+   :type: ansys.meshing.prime.params.primestructs.WarningCode
+
+
+   Warning code associated with the set scope.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SetScopeResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SetScopeResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_code: ansys.meshing.prime.params.primestructs.WarningCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SetScopeResults`` object.
+
+   :param error_code: Error code associated with the set scope.
+   :type error_code: ErrorCode, optional
+   :param warning_code: Warning code associated with the set scope.
+   :type warning_code: WarningCode, optional
+
+
+
+
+
+
+
+.. vale on

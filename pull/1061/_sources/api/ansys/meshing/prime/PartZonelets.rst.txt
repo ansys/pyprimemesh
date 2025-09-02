@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PartZonelets`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.PartZonelets(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, part_id: int = None, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   A structure containing some or all face zonelet ids available in a part.
+
+   :param model: Model to create a ``PartZonelets`` object with default parameters.
+   :type model: Model
+   :param part_id: Id of part.
+   :type part_id: int, optional
+   :param face_zonelets: List of face zonelet ids available in the part.
+   :type face_zonelets: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``PartZonelets`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> part_zonelets = prime.PartZonelets(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PartZonelets
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~face_zonelets`
+            - List of face zonelet ids available in the part.
+          * - :py:attr:`~part_id`
+            - Id of part.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PartZonelets`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PartZonelets`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import PartZonelets
+
+Property detail
+---------------
+
+.. py:property:: face_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of face zonelet ids available in the part.
+
+.. py:property:: part_id
+   :type: int
+
+
+   Id of part.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PartZonelets`` object.
+
+   .. rubric:: Examples
+
+   >>> PartZonelets.print_default()
+
+
+.. py:method:: set_default(part_id: int = None, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PartZonelets`` object.
+
+   :param part_id: Id of part.
+   :type part_id: int, optional
+   :param face_zonelets: List of face zonelet ids available in the part.
+   :type face_zonelets: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

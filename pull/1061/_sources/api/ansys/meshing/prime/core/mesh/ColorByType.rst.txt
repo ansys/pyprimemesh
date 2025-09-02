@@ -1,0 +1,79 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ColorByType`
+====================
+
+
+.. py:class:: ansys.meshing.prime.core.mesh.ColorByType
+
+
+
+   Contains the zone types to display.
+
+
+
+.. py:currentmodule:: ColorByType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~PART`
+            - 
+          * - :py:attr:`~ZONE`
+            - 
+          * - :py:attr:`~ZONELET`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.mesh import ColorByType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: PART
+   :value: 2
+
+
+.. py:attribute:: ZONE
+   :value: 0
+
+
+.. py:attribute:: ZONELET
+   :value: 1
+
+
+
+
+
+
+
+
+.. vale on

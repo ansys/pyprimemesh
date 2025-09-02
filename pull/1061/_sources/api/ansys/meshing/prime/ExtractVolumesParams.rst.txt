@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractVolumesParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.ExtractVolumesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, create_zone: bool = None, suggested_zone_name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to extract flow volumes.
+
+   :param model: Model to create a ``ExtractVolumesParams`` object with default parameters.
+   :type model: Model
+   :param create_zone: Option to create zone for flow volumes extracted.
+   :type create_zone: bool, optional
+   :param suggested_zone_name: Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+   :type suggested_zone_name: str, optional
+   :param json_data: JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extract_volumes_params = prime.ExtractVolumesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractVolumesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_zone`
+            - Option to create zone for flow volumes extracted.
+          * - :py:attr:`~suggested_zone_name`
+            - Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractVolumesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractVolumesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ExtractVolumesParams
+
+Property detail
+---------------
+
+.. py:property:: create_zone
+   :type: bool
+
+
+   Option to create zone for flow volumes extracted.
+
+.. py:property:: suggested_zone_name
+   :type: str
+
+
+   Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractVolumesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractVolumesParams.print_default()
+
+
+.. py:method:: set_default(create_zone: bool = None, suggested_zone_name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractVolumesParams`` object.
+
+   :param create_zone: Option to create zone for flow volumes extracted.
+   :type create_zone: bool, optional
+   :param suggested_zone_name: Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
+   :type suggested_zone_name: str, optional
+
+
+
+
+
+
+
+.. vale on

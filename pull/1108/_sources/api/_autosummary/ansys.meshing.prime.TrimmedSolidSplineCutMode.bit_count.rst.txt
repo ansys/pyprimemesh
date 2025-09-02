@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TrimmedSolidSplineCutMode.bit_count
+
+.. minigallery::
+   :add-heading: Examples using TrimmedSolidSplineCutMode.bit_count
+
+   ansys.meshing.prime.TrimmedSolidSplineCutMode.bit_count

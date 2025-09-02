@@ -1,0 +1,166 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``sizecontrolstructs.py`` module
+====================================
+
+.. py:module:: ansys.meshing.prime.autogen.sizecontrolstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: sizecontrolstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.BoiSizingParams`
+            - Size field computed using body of influence size control enables you to specify a body of influence(that is, a region for sizing control).
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.CurvatureSizingParams`
+            - Size field using curvature size control computes edge and face sizes using their size and normal angle parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.HardSizingParams`
+            - Size field computed using hard size control enables you to maintain a uniform size based on the size specified.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.MeshedSizingParams`
+            - Size field computed using meshed size control enables you to set the size based on existing sizes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.ProximitySizingParams`
+            - Size field using proximity size control computes edge and face sizes in `gaps` using the specified minimum number of element layers.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.SetSizingResults`
+            - Result associated with the different set sizing parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.SizeControlSummaryParams`
+            - Parameters used to get size control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.SizeControlSummaryResult`
+            - Results of size control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.SizingType`
+            - Sizing type decides the type of size control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.SoftSizingParams`
+            - Size field computed using soft size control enables you to set the maximum size on the scoped zonelets .
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs.SoiSizingParams`
+            - Parameters for sphere of influence size control.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> BoiSizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/BoiSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> CurvatureSizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/CurvatureSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> HardSizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/HardSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> MeshedSizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/MeshedSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> ProximitySizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/ProximitySizingParams>
+    <span class="nf nf-cod-symbol_class"></span> SetSizingResults</api/ansys/meshing/prime/autogen/sizecontrolstructs/SetSizingResults>
+    <span class="nf nf-cod-symbol_class"></span> SizeControlSummaryParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/SizeControlSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> SizeControlSummaryResult</api/ansys/meshing/prime/autogen/sizecontrolstructs/SizeControlSummaryResult>
+    <span class="nf nf-cod-symbol_class"></span> SizingType</api/ansys/meshing/prime/autogen/sizecontrolstructs/SizingType>
+    <span class="nf nf-cod-symbol_class"></span> SoftSizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/SoftSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> SoiSizingParams</api/ansys/meshing/prime/autogen/sizecontrolstructs/SoiSizingParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchByFoldsParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SearchByFoldsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, critical_angle: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control fold detection.
+
+   :param model: Model to create a ``SearchByFoldsParams`` object with default parameters.
+   :type model: Model
+   :param critical_angle: Threshold angle for fold detection.
+   :type critical_angle: float, optional
+   :param json_data: JSON dictionary to create a ``SearchByFoldsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_by_folds_params = prime.SearchByFoldsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchByFoldsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~critical_angle`
+            - Threshold angle for fold detection.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchByFoldsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchByFoldsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SearchByFoldsParams
+
+Property detail
+---------------
+
+.. py:property:: critical_angle
+   :type: float
+
+
+   Threshold angle for fold detection.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchByFoldsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchByFoldsParams.print_default()
+
+
+.. py:method:: set_default(critical_angle: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SearchByFoldsParams`` object.
+
+   :param critical_angle: Threshold angle for fold detection.
+   :type critical_angle: float, optional
+
+
+
+
+
+
+
+.. vale on

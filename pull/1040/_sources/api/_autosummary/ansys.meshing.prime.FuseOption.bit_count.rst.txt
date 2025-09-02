@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FuseOption.bit_count
+
+.. minigallery::
+   :add-heading: Examples using FuseOption.bit_count
+
+   ansys.meshing.prime.FuseOption.bit_count

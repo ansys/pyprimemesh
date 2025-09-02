@@ -1,0 +1,246 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FaceConnectivityResults`
+================================
+
+
+.. py:class:: ansys.meshing.prime.FaceConnectivityResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, mesh_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_zone_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_zone_names: ansys.meshing.prime.params.primestructs.List[str] = None, num_nodes_per_face_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, node_coords: ansys.meshing.prime.params.primestructs.Iterable[float] = None, num_face_list_per_face_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_list: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Result of the face connectivity information.
+
+   :param model: Model to create a ``FaceConnectivityResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the get face connectivity operation.
+   :type error_code: ErrorCode, optional
+   :param face_zonelet_ids: Face zonelet ids for which connectivity data is available.
+   :type face_zonelet_ids: Iterable[int], optional
+   :param topo_face_ids: TopoFace ids corresponding to each face zonelet id for topology based mesh.
+   :type topo_face_ids: Iterable[int], optional
+   :param mesh_face_ids: Mesh face ids corresponding to each topoface.
+   :type mesh_face_ids: Iterable[int], optional
+   :param face_zone_ids: Face zone id corresponding to each topoface or face zonelet.
+   :type face_zone_ids: Iterable[int], optional
+   :param face_zone_names: Face zone name corresponding to each topoface or face zonelet.
+   :type face_zone_names: List[str], optional
+   :param num_nodes_per_face_zonelet: Number of nodes per face zonelet.
+   :type num_nodes_per_face_zonelet: Iterable[int], optional
+   :param node_coords: Node coordinates describing faces of face zonelet.
+   :type node_coords: Iterable[float], optional
+   :param num_face_list_per_face_zonelet: Number of face list per face zonelet.
+   :type num_face_list_per_face_zonelet: Iterable[int], optional
+   :param face_list: Face list describing connectivity of node coordinates.
+   :type face_list: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``FaceConnectivityResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> face_connectivity_results = prime.FaceConnectivityResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FaceConnectivityResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the get face connectivity operation.
+          * - :py:attr:`~face_list`
+            - Face list describing connectivity of node coordinates.
+          * - :py:attr:`~face_zone_ids`
+            - Face zone id corresponding to each topoface or face zonelet.
+          * - :py:attr:`~face_zone_names`
+            - Face zone name corresponding to each topoface or face zonelet.
+          * - :py:attr:`~face_zonelet_ids`
+            - Face zonelet ids for which connectivity data is available.
+          * - :py:attr:`~mesh_face_ids`
+            - Mesh face ids corresponding to each topoface.
+          * - :py:attr:`~node_coords`
+            - Node coordinates describing faces of face zonelet.
+          * - :py:attr:`~num_face_list_per_face_zonelet`
+            - Number of face list per face zonelet.
+          * - :py:attr:`~num_nodes_per_face_zonelet`
+            - Number of nodes per face zonelet.
+          * - :py:attr:`~topo_face_ids`
+            - TopoFace ids corresponding to each face zonelet id for topology based mesh.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FaceConnectivityResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FaceConnectivityResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FaceConnectivityResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the get face connectivity operation.
+
+.. py:property:: face_list
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Face list describing connectivity of node coordinates.
+
+.. py:property:: face_zone_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Face zone id corresponding to each topoface or face zonelet.
+
+.. py:property:: face_zone_names
+   :type: ansys.meshing.prime.params.primestructs.List[str]
+
+
+   Face zone name corresponding to each topoface or face zonelet.
+
+.. py:property:: face_zonelet_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Face zonelet ids for which connectivity data is available.
+
+.. py:property:: mesh_face_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Mesh face ids corresponding to each topoface.
+
+.. py:property:: node_coords
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Node coordinates describing faces of face zonelet.
+
+.. py:property:: num_face_list_per_face_zonelet
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Number of face list per face zonelet.
+
+.. py:property:: num_nodes_per_face_zonelet
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Number of nodes per face zonelet.
+
+.. py:property:: topo_face_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   TopoFace ids corresponding to each face zonelet id for topology based mesh.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FaceConnectivityResults`` object.
+
+   .. rubric:: Examples
+
+   >>> FaceConnectivityResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, mesh_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_zone_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_zone_names: ansys.meshing.prime.params.primestructs.List[str] = None, num_nodes_per_face_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, node_coords: ansys.meshing.prime.params.primestructs.Iterable[float] = None, num_face_list_per_face_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_list: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FaceConnectivityResults`` object.
+
+   :param error_code: Error code associated with the get face connectivity operation.
+   :type error_code: ErrorCode, optional
+   :param face_zonelet_ids: Face zonelet ids for which connectivity data is available.
+   :type face_zonelet_ids: Iterable[int], optional
+   :param topo_face_ids: TopoFace ids corresponding to each face zonelet id for topology based mesh.
+   :type topo_face_ids: Iterable[int], optional
+   :param mesh_face_ids: Mesh face ids corresponding to each topoface.
+   :type mesh_face_ids: Iterable[int], optional
+   :param face_zone_ids: Face zone id corresponding to each topoface or face zonelet.
+   :type face_zone_ids: Iterable[int], optional
+   :param face_zone_names: Face zone name corresponding to each topoface or face zonelet.
+   :type face_zone_names: List[str], optional
+   :param num_nodes_per_face_zonelet: Number of nodes per face zonelet.
+   :type num_nodes_per_face_zonelet: Iterable[int], optional
+   :param node_coords: Node coordinates describing faces of face zonelet.
+   :type node_coords: Iterable[float], optional
+   :param num_face_list_per_face_zonelet: Number of face list per face zonelet.
+   :type num_face_list_per_face_zonelet: Iterable[int], optional
+   :param face_list: Face list describing connectivity of node coordinates.
+   :type face_list: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

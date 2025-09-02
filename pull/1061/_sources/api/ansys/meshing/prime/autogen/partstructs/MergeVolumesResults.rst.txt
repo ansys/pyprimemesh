@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergeVolumesResults`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.MergeVolumesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, merged_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with merge volumes operation.
+
+   :param model: Model to create a ``MergeVolumesResults`` object with default parameters.
+   :type model: Model
+   :param merged_volumes: Ids of volumes to which input volumes are merged.
+   :type merged_volumes: Iterable[int], optional
+   :param error_code: Error code associated with the volume merge operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``MergeVolumesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> merge_volumes_results = prime.MergeVolumesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MergeVolumesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the volume merge operation.
+          * - :py:attr:`~merged_volumes`
+            - Ids of volumes to which input volumes are merged.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MergeVolumesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MergeVolumesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import MergeVolumesResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the volume merge operation.
+
+.. py:property:: merged_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of volumes to which input volumes are merged.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MergeVolumesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> MergeVolumesResults.print_default()
+
+
+.. py:method:: set_default(merged_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MergeVolumesResults`` object.
+
+   :param merged_volumes: Ids of volumes to which input volumes are merged.
+   :type merged_volumes: Iterable[int], optional
+   :param error_code: Error code associated with the volume merge operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

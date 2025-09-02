@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``vtcomposerstructs.py`` module
+===================================
+
+.. py:module:: ansys.meshing.prime.autogen.vtcomposerstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: vtcomposerstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.vtcomposerstructs.VTComposerParams`
+            - Parameters to control VTComposer operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.vtcomposerstructs.VTComposerResults`
+            - Result struct associated to VTComposer operations.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> VTComposerParams</api/ansys/meshing/prime/autogen/vtcomposerstructs/VTComposerParams>
+    <span class="nf nf-cod-symbol_class"></span> VTComposerResults</api/ansys/meshing/prime/autogen/vtcomposerstructs/VTComposerResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

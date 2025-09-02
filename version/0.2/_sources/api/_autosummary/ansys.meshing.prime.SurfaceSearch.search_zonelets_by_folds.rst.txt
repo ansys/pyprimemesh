@@ -1,0 +1,6 @@
+search\_zonelets\_by\_folds
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceSearch.search_zonelets_by_folds

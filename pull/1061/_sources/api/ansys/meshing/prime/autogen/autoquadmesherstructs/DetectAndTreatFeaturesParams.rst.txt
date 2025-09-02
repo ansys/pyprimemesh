@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DetectAndTreatFeaturesParams`
+=====================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.DetectAndTreatFeaturesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, detect_and_treat_holes: bool = None, detect_and_treat_circular_faces: bool = None, treat_holes_params: DetectAndTreatHolesParams = None, treat_circular_faces_params: DetectAndTreatCircularFacesParams = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for detect and treat features operations.
+
+   :param model: Model to create a ``DetectAndTreatFeaturesParams`` object with default parameters.
+   :type model: Model
+   :param detect_and_treat_holes: Option to detect and treat holes.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_and_treat_holes: bool, optional
+   :param detect_and_treat_circular_faces: Option to detect and treat circular faces.
+
+                                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_and_treat_circular_faces: bool, optional
+   :param treat_holes_params: Parameters for detect and treat holes operation.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type treat_holes_params: DetectAndTreatHolesParams, optional
+   :param treat_circular_faces_params: Parameters for detect and treat circular faces operation.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type treat_circular_faces_params: DetectAndTreatCircularFacesParams, optional
+   :param json_data: JSON dictionary to create a ``DetectAndTreatFeaturesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> detect_and_treat_features_params = prime.DetectAndTreatFeaturesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DetectAndTreatFeaturesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~detect_and_treat_circular_faces`
+            - Option to detect and treat circular faces.
+          * - :py:attr:`~detect_and_treat_holes`
+            - Option to detect and treat holes.
+          * - :py:attr:`~treat_circular_faces_params`
+            - Parameters for detect and treat circular faces operation.
+          * - :py:attr:`~treat_holes_params`
+            - Parameters for detect and treat holes operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DetectAndTreatFeaturesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DetectAndTreatFeaturesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import DetectAndTreatFeaturesParams
+
+Property detail
+---------------
+
+.. py:property:: detect_and_treat_circular_faces
+   :type: bool
+
+
+   Option to detect and treat circular faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: detect_and_treat_holes
+   :type: bool
+
+
+   Option to detect and treat holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: treat_circular_faces_params
+   :type: DetectAndTreatCircularFacesParams
+
+
+   Parameters for detect and treat circular faces operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: treat_holes_params
+   :type: DetectAndTreatHolesParams
+
+
+   Parameters for detect and treat holes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DetectAndTreatFeaturesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DetectAndTreatFeaturesParams.print_default()
+
+
+.. py:method:: set_default(detect_and_treat_holes: bool = None, detect_and_treat_circular_faces: bool = None, treat_holes_params: DetectAndTreatHolesParams = None, treat_circular_faces_params: DetectAndTreatCircularFacesParams = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DetectAndTreatFeaturesParams`` object.
+
+   :param detect_and_treat_holes: Option to detect and treat holes.
+   :type detect_and_treat_holes: bool, optional
+   :param detect_and_treat_circular_faces: Option to detect and treat circular faces.
+   :type detect_and_treat_circular_faces: bool, optional
+   :param treat_holes_params: Parameters for detect and treat holes operation.
+   :type treat_holes_params: DetectAndTreatHolesParams, optional
+   :param treat_circular_faces_params: Parameters for detect and treat circular faces operation.
+   :type treat_circular_faces_params: DetectAndTreatCircularFacesParams, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,262 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`IGAUnstructuredSplineSurf`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.IGAUnstructuredSplineSurf(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, id: int = None, degree: int = None, spline_refinement_level: int = None, control_points: ansys.meshing.prime.params.primestructs.Iterable[float] = None, spline_points: ansys.meshing.prime.params.primestructs.Iterable[float] = None, bad_spline_points_indices: ansys.meshing.prime.params.primestructs.Iterable[int] = None, deviation_array: ansys.meshing.prime.params.primestructs.Iterable[float] = None, invalid_jacobian_elements_count: int = None, average_mesh_size: float = None, elements_count: int = None, shell_thickness: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Information of unstructured spline surface.
+
+   :param model: Model to create a ``IGAUnstructuredSplineSurf`` object with default parameters.
+   :type model: Model
+   :param id: Id of the unstructured spline surface.
+   :type id: int, optional
+   :param degree: Degree of the spline surface.
+
+                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type degree: int, optional
+   :param spline_refinement_level: Refinement level for rendering of spline points.
+   :type spline_refinement_level: int, optional
+   :param control_points: Coordinates of the control points of the spline.
+   :type control_points: Iterable[float], optional
+   :param spline_points: Coordinates of the spline points.
+   :type spline_points: Iterable[float], optional
+   :param bad_spline_points_indices: Node indices in the spline points list which has negative jacobian value.
+   :type bad_spline_points_indices: Iterable[int], optional
+   :param deviation_array: Deviation value from the spline point to the model geometry.
+   :type deviation_array: Iterable[float], optional
+   :param invalid_jacobian_elements_count: Count of elements with negative jacobian.
+   :type invalid_jacobian_elements_count: int, optional
+   :param average_mesh_size: Reference length to compute deviation.
+   :type average_mesh_size: float, optional
+   :param elements_count: Count of shell elements.
+   :type elements_count: int, optional
+   :param shell_thickness: Thickness of shell.
+   :type shell_thickness: float, optional
+   :param json_data: JSON dictionary to create a ``IGAUnstructuredSplineSurf`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> iga_unstructured_spline_surf = prime.IGAUnstructuredSplineSurf(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: IGAUnstructuredSplineSurf
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~average_mesh_size`
+            - Reference length to compute deviation.
+          * - :py:attr:`~bad_spline_points_indices`
+            - Node indices in the spline points list which has negative jacobian value.
+          * - :py:attr:`~control_points`
+            - Coordinates of the control points of the spline.
+          * - :py:attr:`~degree`
+            - Degree of the spline surface.
+          * - :py:attr:`~deviation_array`
+            - Deviation value from the spline point to the model geometry.
+          * - :py:attr:`~elements_count`
+            - Count of shell elements.
+          * - :py:attr:`~id`
+            - Id of the unstructured spline surface.
+          * - :py:attr:`~invalid_jacobian_elements_count`
+            - Count of elements with negative jacobian.
+          * - :py:attr:`~shell_thickness`
+            - Thickness of shell.
+          * - :py:attr:`~spline_points`
+            - Coordinates of the spline points.
+          * - :py:attr:`~spline_refinement_level`
+            - Refinement level for rendering of spline points.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``IGAUnstructuredSplineSurf`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``IGAUnstructuredSplineSurf`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import IGAUnstructuredSplineSurf
+
+Property detail
+---------------
+
+.. py:property:: average_mesh_size
+   :type: float
+
+
+   Reference length to compute deviation.
+
+.. py:property:: bad_spline_points_indices
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Node indices in the spline points list which has negative jacobian value.
+
+.. py:property:: control_points
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Coordinates of the control points of the spline.
+
+.. py:property:: degree
+   :type: int
+
+
+   Degree of the spline surface.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: deviation_array
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Deviation value from the spline point to the model geometry.
+
+.. py:property:: elements_count
+   :type: int
+
+
+   Count of shell elements.
+
+.. py:property:: id
+   :type: int
+
+
+   Id of the unstructured spline surface.
+
+.. py:property:: invalid_jacobian_elements_count
+   :type: int
+
+
+   Count of elements with negative jacobian.
+
+.. py:property:: shell_thickness
+   :type: float
+
+
+   Thickness of shell.
+
+.. py:property:: spline_points
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Coordinates of the spline points.
+
+.. py:property:: spline_refinement_level
+   :type: int
+
+
+   Refinement level for rendering of spline points.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``IGAUnstructuredSplineSurf`` object.
+
+   .. rubric:: Examples
+
+   >>> IGAUnstructuredSplineSurf.print_default()
+
+
+.. py:method:: set_default(id: int = None, degree: int = None, spline_refinement_level: int = None, control_points: ansys.meshing.prime.params.primestructs.Iterable[float] = None, spline_points: ansys.meshing.prime.params.primestructs.Iterable[float] = None, bad_spline_points_indices: ansys.meshing.prime.params.primestructs.Iterable[int] = None, deviation_array: ansys.meshing.prime.params.primestructs.Iterable[float] = None, invalid_jacobian_elements_count: int = None, average_mesh_size: float = None, elements_count: int = None, shell_thickness: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``IGAUnstructuredSplineSurf`` object.
+
+   :param id: Id of the unstructured spline surface.
+   :type id: int, optional
+   :param degree: Degree of the spline surface.
+   :type degree: int, optional
+   :param spline_refinement_level: Refinement level for rendering of spline points.
+   :type spline_refinement_level: int, optional
+   :param control_points: Coordinates of the control points of the spline.
+   :type control_points: Iterable[float], optional
+   :param spline_points: Coordinates of the spline points.
+   :type spline_points: Iterable[float], optional
+   :param bad_spline_points_indices: Node indices in the spline points list which has negative jacobian value.
+   :type bad_spline_points_indices: Iterable[int], optional
+   :param deviation_array: Deviation value from the spline point to the model geometry.
+   :type deviation_array: Iterable[float], optional
+   :param invalid_jacobian_elements_count: Count of elements with negative jacobian.
+   :type invalid_jacobian_elements_count: int, optional
+   :param average_mesh_size: Reference length to compute deviation.
+   :type average_mesh_size: float, optional
+   :param elements_count: Count of shell elements.
+   :type elements_count: int, optional
+   :param shell_thickness: Thickness of shell.
+   :type shell_thickness: float, optional
+
+
+
+
+
+
+
+.. vale on

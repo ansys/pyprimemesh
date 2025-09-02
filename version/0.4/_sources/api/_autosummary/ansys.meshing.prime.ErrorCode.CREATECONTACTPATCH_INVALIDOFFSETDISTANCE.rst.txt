@@ -1,0 +1,6 @@
+﻿CREATECONTACTPATCH\_INVALIDOFFSETDISTANCE
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATECONTACTPATCH_INVALIDOFFSETDISTANCE

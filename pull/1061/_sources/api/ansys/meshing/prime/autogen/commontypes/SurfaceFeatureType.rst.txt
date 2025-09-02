@@ -1,0 +1,110 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceFeatureType`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.commontypes.SurfaceFeatureType
+
+
+
+   Type of face edges considered as features.
+
+
+
+
+.. py:currentmodule:: SurfaceFeatureType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~FEATURE`
+            - Face edges with normal angle more than threshold are considered as feature.
+          * - :py:attr:`~FEATUREORZONEBOUNDARY`
+            - Face edges at zone boundary or with normal angle more than threshold are considered as feature.
+          * - :py:attr:`~FEATUREORZONELETBOUNDARY`
+            - Face edges at zonelet boundary or with normal angle more than threshold are considered as feature.
+          * - :py:attr:`~NONE`
+            - None of face edges are considered as feature.
+          * - :py:attr:`~ZONEBOUNDARY`
+            - Face edges at zone boundary are considered as feature.
+          * - :py:attr:`~ZONELETBOUNDARY`
+            - Face edges at zonelet boundary are considered as feature.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.commontypes import SurfaceFeatureType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: FEATURE
+   :value: 2
+
+
+   Face edges with normal angle more than threshold are considered as feature.
+
+.. py:attribute:: FEATUREORZONEBOUNDARY
+   :value: 3
+
+
+   Face edges at zone boundary or with normal angle more than threshold are considered as feature.
+
+.. py:attribute:: FEATUREORZONELETBOUNDARY
+   :value: 5
+
+
+   Face edges at zonelet boundary or with normal angle more than threshold are considered as feature.
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   None of face edges are considered as feature.
+
+.. py:attribute:: ZONEBOUNDARY
+   :value: 1
+
+
+   Face edges at zone boundary are considered as feature.
+
+.. py:attribute:: ZONELETBOUNDARY
+   :value: 4
+
+
+   Face edges at zonelet boundary are considered as feature.
+
+
+
+
+
+
+
+.. vale on

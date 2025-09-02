@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScopeEntity.bit_count
+
+.. minigallery::
+   :add-heading: Examples using ScopeEntity.bit_count
+
+   ansys.meshing.prime.ScopeEntity.bit_count
