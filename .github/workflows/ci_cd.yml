@@ -2,6 +2,7 @@ name: GitHub CI
 
 # run only on main branch.  This avoids duplicated actions on PRs
 on:
+  merge_group:
   pull_request:
     types: [opened, reopened, synchronize, edited, closed]
     branches:
