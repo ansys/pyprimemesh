@@ -2,7 +2,7 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
-## [0.9.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.1) - August 07, 2025
+## [0.9.2.dev0](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.2.dev0) - September 10, 2025
 
 
 ### Miscellaneous
@@ -11,6 +11,8 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 - Removed the dev4 version from pyproj.toml [#1110](https://github.com/ansys/pyprimemesh/pull/1110)
 - Include changes for SP1 release for dev0 [#1118](https://github.com/ansys/pyprimemesh/pull/1118)
 - Update the version for sp1 stable release [#1121](https://github.com/ansys/pyprimemesh/pull/1121)
+- Ado to GitHub 252 sp2 [#1142](https://github.com/ansys/pyprimemesh/pull/1142)
+- Updates to the version [#1143](https://github.com/ansys/pyprimemesh/pull/1143)
 
 ## [0.9.0.dev4](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.0.dev4) - July 15, 2025
 
