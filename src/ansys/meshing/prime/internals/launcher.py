@@ -264,6 +264,7 @@ def launch_prime(
         client = Client(port=port, timeout=timeout)
         client.container_name = container_name
         print('using server from docker : The container name ', container_name)
+        logging.getLogger('PyPrimeMesh').info('uses server from container : ', container_name)
         return client
 
     server = launch_server_process(
