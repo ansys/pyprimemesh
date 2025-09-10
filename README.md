@@ -35,7 +35,7 @@ you can create issues to report bugs and request new features. On the
 [Discussions](https://discuss.ansys.com/) page on the Ansys Developer portal,
 you can post questions, share ideas, and get community feedback. 
 
-To reach the project support team, email [pyansys.core@ansys.com](mailtto:pyansys.core@ansys.com).
+To reach the project support team, email [pyansys.core@ansys.com](mailto:pyansys.core@ansys.com).
 
 ## Installation
 
