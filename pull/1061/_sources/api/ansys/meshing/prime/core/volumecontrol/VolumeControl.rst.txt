@@ -1,0 +1,212 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeControl`
+======================
+
+
+.. py:class:: ansys.meshing.prime.core.volumecontrol.VolumeControl(model, id, object_id, name, local=False)
+
+
+
+   Defines the scope and type of volume mesh to generate.
+
+   :param model: Server model to create VolumeControl object.
+   :type model: Model
+   :param id: Id of the VolumeControl.
+   :type id: int
+   :param object_id: Object id of the VolumeControl.
+   :type object_id: int
+   :param name: Name of the VolumeControl.
+   :type name: str
+
+
+
+
+
+.. py:currentmodule:: VolumeControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_params`
+            - Get the parameters of the volume control.
+          * - :py:attr:`~get_scope`
+            - Gets the scope for the volume control.
+          * - :py:attr:`~set_params`
+            - Sets the volume control parameters.
+          * - :py:attr:`~set_scope`
+            - Sets the scope for volume control to evaluate.
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the volume control based on a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of VolumeControl.
+          * - :py:attr:`~name`
+            - Get the name of the volume control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.volumecontrol import VolumeControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of VolumeControl.
+
+.. py:property:: name
+
+   Get the name of the volume control.
+
+   :returns: Name of the volume control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(volume_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: get_params() -> ansys.meshing.prime.params.primestructs.VolumeControlParams
+
+   Get the parameters of the volume control.
+
+
+   :returns: Return parameters of the volume control.
+   :rtype: VolumeControlParams
+
+   .. rubric:: Examples
+
+   >>> params = volume_control.get_params()
+
+
+.. py:method:: get_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the scope for the volume control.
+
+
+   :returns: Returns scope of the volume control.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> scope_definition = volume_control.get_scope()
+
+
+.. py:method:: set_params(volume_control_params: ansys.meshing.prime.params.primestructs.VolumeControlParams)
+
+   Sets the volume control parameters.
+
+
+   :param volume_control_params: Parameters to control volume.
+   :type volume_control_params: VolumeControlParams
+
+   .. rubric:: Examples
+
+   >>> volume_control.set_params(
+   >>>                  prime.VolumeControlParams(model=model,
+   >>>                  cell_zonelet_type = prime.CellZoneletType.FLUID))
+
+
+.. py:method:: set_scope(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the scope for volume control to evaluate.
+
+   Volume control uses scope to evaluate entities for which volume mesh needs to be generated.
+
+   :param scope: ScopeDefinition to scope entities for volume mesh generation.
+   :type scope: ScopeDefinition
+
+   :returns: Returns a SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Examples
+
+   >>> volume_control.set_scope(prime.ScopeDefinition(model=model,
+   >>>                        entity_type = ScopeEntity.VOLUMES,
+   >>>                        evaluation_type = ScopeEvaluationType.ZONES,
+   >>>                        zone_expression = "vol_in"))
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the volume control based on a suggested name.
+
+   :param name: Suggested name for the volume control.
+   :type name: str
+
+   :returns: Newly suggested name of the volume control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> volume_control.set_suggested_name("control1")
+
+
+
+
+
+
+
+.. vale on

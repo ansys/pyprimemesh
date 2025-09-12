@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SetFeatureRecoveriesResults`
+====================================
+
+
+.. py:class:: ansys.meshing.prime.SetFeatureRecoveriesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with set feature recoveries.
+
+   :param model: Model to create a ``SetFeatureRecoveriesResults`` object with default parameters.
+   :type model: Model
+   :param ids: Ids of added feature recovery controls.
+   :type ids: Iterable[int], optional
+   :param error_code: Error code associated with the set feature recoveries.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``SetFeatureRecoveriesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> set_feature_recoveries_results = prime.SetFeatureRecoveriesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SetFeatureRecoveriesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the set feature recoveries.
+          * - :py:attr:`~ids`
+            - Ids of added feature recovery controls.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SetFeatureRecoveriesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SetFeatureRecoveriesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SetFeatureRecoveriesResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the set feature recoveries.
+
+.. py:property:: ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of added feature recovery controls.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SetFeatureRecoveriesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SetFeatureRecoveriesResults.print_default()
+
+
+.. py:method:: set_default(ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SetFeatureRecoveriesResults`` object.
+
+   :param ids: Ids of added feature recovery controls.
+   :type ids: Iterable[int], optional
+   :param error_code: Error code associated with the set feature recoveries.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

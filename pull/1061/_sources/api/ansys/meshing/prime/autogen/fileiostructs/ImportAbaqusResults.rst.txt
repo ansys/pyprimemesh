@@ -1,0 +1,170 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ImportAbaqusResults`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, summary_log: str = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of Abaqus import operation.
+
+   :param model: Model to create a ``ImportAbaqusResults`` object with default parameters.
+   :type model: Model
+   :param summary_log: Summary log for the import operation in json format.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type summary_log: str, optional
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with Abaqus import operation.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type warning_codes: List[WarningCode], optional
+   :param json_data: JSON dictionary to create a ``ImportAbaqusResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> import_abaqus_results = prime.ImportAbaqusResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ImportAbaqusResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of operation.
+          * - :py:attr:`~summary_log`
+            - Summary log for the import operation in json format.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with Abaqus import operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ImportAbaqusResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ImportAbaqusResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ImportAbaqusResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of operation.
+
+.. py:property:: summary_log
+   :type: str
+
+
+   Summary log for the import operation in json format.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with Abaqus import operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ImportAbaqusResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ImportAbaqusResults.print_default()
+
+
+.. py:method:: set_default(summary_log: str = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ImportAbaqusResults`` object.
+
+   :param summary_log: Summary log for the import operation in json format.
+   :type summary_log: str, optional
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with Abaqus import operation.
+   :type warning_codes: List[WarningCode], optional
+
+
+
+
+
+
+
+.. vale on

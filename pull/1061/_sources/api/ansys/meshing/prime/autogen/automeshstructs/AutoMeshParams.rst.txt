@@ -1,0 +1,258 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AutoMeshParams`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.automeshstructs.AutoMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, max_size: float = None, prism_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, thin_volume_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, multi_zone_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, volume_fill_type: VolumeFillType = None, prism: PrismParams = None, tet: TetParams = None, hexcore: HexCoreParams = None, volume_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, periodic_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for volume meshing.
+
+   :param model: Model to create a ``AutoMeshParams`` object with default parameters.
+   :type model: Model
+   :param size_field_type: Type of sizing to be used to generate volume mesh.
+   :type size_field_type: SizeFieldType, optional
+   :param max_size: Maximum cell size.
+   :type max_size: float, optional
+   :param prism_control_ids: Set prism control ids.
+   :type prism_control_ids: Iterable[int], optional
+   :param thin_volume_control_ids: Set thin volume control ids.
+   :type thin_volume_control_ids: Iterable[int], optional
+   :param multi_zone_control_ids: Set MultiZone control ids.
+   :type multi_zone_control_ids: Iterable[int], optional
+   :param volume_fill_type: Option to fill volume.
+   :type volume_fill_type: VolumeFillType, optional
+   :param prism: Prism control parameters.
+   :type prism: PrismParams, optional
+   :param tet: Parameters to control tetrahedral mesh generation.
+   :type tet: TetParams, optional
+   :param hexcore: Parameters to control hexahedral mesh generation.
+   :type hexcore: HexCoreParams, optional
+   :param volume_control_ids: Ids of the volume controls.
+   :type volume_control_ids: Iterable[int], optional
+   :param periodic_control_ids: Ids of the periodic controls.
+   :type periodic_control_ids: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``AutoMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> auto_mesh_params = prime.AutoMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: AutoMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~hexcore`
+            - Parameters to control hexahedral mesh generation.
+          * - :py:attr:`~max_size`
+            - Maximum cell size.
+          * - :py:attr:`~multi_zone_control_ids`
+            - Set MultiZone control ids.
+          * - :py:attr:`~periodic_control_ids`
+            - Ids of the periodic controls.
+          * - :py:attr:`~prism`
+            - Prism control parameters.
+          * - :py:attr:`~prism_control_ids`
+            - Set prism control ids.
+          * - :py:attr:`~size_field_type`
+            - Type of sizing to be used to generate volume mesh.
+          * - :py:attr:`~tet`
+            - Parameters to control tetrahedral mesh generation.
+          * - :py:attr:`~thin_volume_control_ids`
+            - Set thin volume control ids.
+          * - :py:attr:`~volume_control_ids`
+            - Ids of the volume controls.
+          * - :py:attr:`~volume_fill_type`
+            - Option to fill volume.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``AutoMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``AutoMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.automeshstructs import AutoMeshParams
+
+Property detail
+---------------
+
+.. py:property:: hexcore
+   :type: HexCoreParams
+
+
+   Parameters to control hexahedral mesh generation.
+
+.. py:property:: max_size
+   :type: float
+
+
+   Maximum cell size.
+
+.. py:property:: multi_zone_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Set MultiZone control ids.
+
+.. py:property:: periodic_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of the periodic controls.
+
+.. py:property:: prism
+   :type: PrismParams
+
+
+   Prism control parameters.
+
+.. py:property:: prism_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Set prism control ids.
+
+.. py:property:: size_field_type
+   :type: ansys.meshing.prime.params.primestructs.SizeFieldType
+
+
+   Type of sizing to be used to generate volume mesh.
+
+.. py:property:: tet
+   :type: TetParams
+
+
+   Parameters to control tetrahedral mesh generation.
+
+.. py:property:: thin_volume_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Set thin volume control ids.
+
+.. py:property:: volume_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of the volume controls.
+
+.. py:property:: volume_fill_type
+   :type: VolumeFillType
+
+
+   Option to fill volume.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``AutoMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> AutoMeshParams.print_default()
+
+
+.. py:method:: set_default(size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, max_size: float = None, prism_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, thin_volume_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, multi_zone_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, volume_fill_type: VolumeFillType = None, prism: PrismParams = None, tet: TetParams = None, hexcore: HexCoreParams = None, volume_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, periodic_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``AutoMeshParams`` object.
+
+   :param size_field_type: Type of sizing to be used to generate volume mesh.
+   :type size_field_type: SizeFieldType, optional
+   :param max_size: Maximum cell size.
+   :type max_size: float, optional
+   :param prism_control_ids: Set prism control ids.
+   :type prism_control_ids: Iterable[int], optional
+   :param thin_volume_control_ids: Set thin volume control ids.
+   :type thin_volume_control_ids: Iterable[int], optional
+   :param multi_zone_control_ids: Set MultiZone control ids.
+   :type multi_zone_control_ids: Iterable[int], optional
+   :param volume_fill_type: Option to fill volume.
+   :type volume_fill_type: VolumeFillType, optional
+   :param prism: Prism control parameters.
+   :type prism: PrismParams, optional
+   :param tet: Parameters to control tetrahedral mesh generation.
+   :type tet: TetParams, optional
+   :param hexcore: Parameters to control hexahedral mesh generation.
+   :type hexcore: HexCoreParams, optional
+   :param volume_control_ids: Ids of the volume controls.
+   :type volume_control_ids: Iterable[int], optional
+   :param periodic_control_ids: Ids of the periodic controls.
+   :type periodic_control_ids: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

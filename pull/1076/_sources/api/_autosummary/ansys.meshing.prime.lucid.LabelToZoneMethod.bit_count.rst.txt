@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.LabelToZoneMethod.bit_count
+
+.. minigallery::
+   :add-heading: Examples using LabelToZoneMethod.bit_count
+
+   ansys.meshing.prime.lucid.LabelToZoneMethod.bit_count

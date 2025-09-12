@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:site_name" content="PyAnsys" />
+    <title>FileIO &#8212; PyPrimeMesh</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=ce7f2556" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=ce7f2556" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../_static/documentation_options.js?v=f1207ea0"></script>
+    <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/meshing/prime/core/fileio/FileIO';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.0.dev3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <img src="../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyPrimeMesh - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"> <span class="nf nf-cod-symbol_class"></span> FileIO</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileIO</span></code></span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="fileio">
+<h1><code class="xref py py-class docutils literal notranslate"><span class="pre">FileIO</span></code><a class="headerlink" href="#fileio" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.meshing.prime.core.fileio.FileIO">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.core.fileio.</span></span><span class="sig-name descname"><span class="pre">FileIO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../model/Model.html#ansys.meshing.prime.core.model.Model" title="ansys.meshing.prime.core.model.Model"><span class="pre">ansys.meshing.prime.core.model.Model</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.core.fileio.FileIO" title="Link to this definition">#</a></dt>
+<dd><p>Handles reading or writing files from the disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="../../Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><em>Model</em></a>) – Server model to create FileIO object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Methods</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_boundary_fitted_spline_kfile" title="FileIO.export_boundary_fitted_spline_kfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_boundary_fitted_spline_kfile</span></code></a></p></td>
+<td><p>Export the IGA LS-DYNA keyword file for a boundary fitted spline.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_fluent_case" title="FileIO.export_fluent_case"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_fluent_case</span></code></a></p></td>
+<td><p>Export a Fluent case (CAS) file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_fluent_meshing_mesh" title="FileIO.export_fluent_meshing_mesh"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_fluent_meshing_mesh</span></code></a></p></td>
+<td><p>Export a Fluent Meshing mesh (MSH) file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_lsdyna_iga_keyword_file" title="FileIO.export_lsdyna_iga_keyword_file"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_lsdyna_iga_keyword_file</span></code></a></p></td>
+<td><p>Export IGA LS-DYNA Keyword file for solid, surface splines.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_lsdyna_keyword_file" title="FileIO.export_lsdyna_keyword_file"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_lsdyna_keyword_file</span></code></a></p></td>
+<td><p>Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_mapdl_cdb" title="FileIO.export_mapdl_cdb"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_mapdl_cdb</span></code></a></p></td>
+<td><p>Export an MAPDL CDB file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.export_stl" title="FileIO.export_stl"><code class="xref py py-attr docutils literal notranslate"><span class="pre">export_stl</span></code></a></p></td>
+<td><p>Export an STL file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.get_abaqus_simulation_data" title="FileIO.get_abaqus_simulation_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">get_abaqus_simulation_data</span></code></a></p></td>
+<td><p>Gets simulation document generated by Abaqus import for a given part.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.import_abaqus_inp" title="FileIO.import_abaqus_inp"><code class="xref py py-attr docutils literal notranslate"><span class="pre">import_abaqus_inp</span></code></a></p></td>
+<td><p>(BETA FEATURE) Import a Abaqus file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.import_cad" title="FileIO.import_cad"><code class="xref py py-attr docutils literal notranslate"><span class="pre">import_cad</span></code></a></p></td>
+<td><p>Import a CAD file from disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.import_fluent_case" title="FileIO.import_fluent_case"><code class="xref py py-attr docutils literal notranslate"><span class="pre">import_fluent_case</span></code></a></p></td>
+<td><p>Import a Fluent case (CAS) file from disk.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.import_fluent_meshing_meshes" title="FileIO.import_fluent_meshing_meshes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">import_fluent_meshing_meshes</span></code></a></p></td>
+<td><p>Import Fluent Meshing’s mesh (MS and MSH.GZ) files from disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.import_fluent_meshing_size_field" title="FileIO.import_fluent_meshing_size_field"><code class="xref py py-attr docutils literal notranslate"><span class="pre">import_fluent_meshing_size_field</span></code></a></p></td>
+<td><p>Import a Fluent Meshing size field (SF and SF.GZ) file from disk.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.import_mapdl_cdb" title="FileIO.import_mapdl_cdb"><code class="xref py py-attr docutils literal notranslate"><span class="pre">import_mapdl_cdb</span></code></a></p></td>
+<td><p>Import an MAPDL CDB file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FileIO.initialize_cdb_export_params" title="FileIO.initialize_cdb_export_params"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initialize_cdb_export_params</span></code></a></p></td>
+<td><p>Initialize specific CDB export parameters based on the given version.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.read_pmdat" title="FileIO.read_pmdat"><code class="xref py py-attr docutils literal notranslate"><span class="pre">read_pmdat</span></code></a></p></td>
+<td><p>Read a PyPrimeMesh data (PMDAT) file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.read_size_field" title="FileIO.read_size_field"><code class="xref py py-attr docutils literal notranslate"><span class="pre">read_size_field</span></code></a></p></td>
+<td><p>Read a PyPrimeMesh size field (PSF and PSF.GZ) file from disk.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.write_pmdat" title="FileIO.write_pmdat"><code class="xref py py-attr docutils literal notranslate"><span class="pre">write_pmdat</span></code></a></p></td>
+<td><p>Write a PyPrimeMesh data (PMDAT) file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.write_size_field" title="FileIO.write_size_field"><code class="xref py py-attr docutils literal notranslate"><span class="pre">write_size_field</span></code></a></p></td>
+<td><p>Write a PyPrimeMesh size field (PSF) file to a file on disk.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Attributes</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FileIO.__doc__" title="FileIO.__doc__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__doc__</span></code></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Special methods</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.__enter__" title="FileIO.__enter__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__enter__</span></code></a></p></td>
+<td><p>Enter context for FileIO.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.__exit__" title="FileIO.__exit__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__exit__</span></code></a></p></td>
+<td><p>Exit context for FileIO.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/fileio/FileIO.html#FileIO.__setattr__" title="FileIO.__setattr__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__setattr__</span></code></a></p></td>
+<td><p>__setattr__(CoreObject self, key, value)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="import-detail">
+<h2>Import detail<a class="headerlink" href="#import-detail" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing.prime.core.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileIO</span>
+</pre></div>
+</div>
+</section>
+<section id="attribute-detail">
+<h2>Attribute detail<a class="headerlink" href="#attribute-detail" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileIO.__doc__">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">__doc__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Multiline-String</span></em><a class="headerlink" href="#FileIO.__doc__" title="Link to this definition">#</a></dt>
+<dd><details><summary>Show Value</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Handles reading or writing files from the disk.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model : Model</span>
+<span class="sd">        Server model to create FileIO object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</details></dd></dl>
+
+</section>
+<section id="method-detail">
+<h2>Method detail<a class="headerlink" href="#method-detail" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.__enter__">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">__enter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FileIO.__enter__" title="Link to this definition">#</a></dt>
+<dd><p>Enter context for FileIO.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.__exit__">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">__exit__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traceback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FileIO.__exit__" title="Link to this definition">#</a></dt>
+<dd><p>Exit context for FileIO.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.__setattr__">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FileIO.__setattr__" title="Link to this definition">#</a></dt>
+<dd><p>__setattr__(CoreObject self, key, value)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_boundary_fitted_spline_kfile">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_boundary_fitted_spline_kfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportBoundaryFittedSplineParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportBoundaryFittedSplineParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportBoundaryFittedSplineParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportBoundaryFittedSplineParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteResults.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteResults" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteResults</span></a></span></span><a class="headerlink" href="#FileIO.export_boundary_fitted_spline_kfile" title="Link to this definition">#</a></dt>
+<dd><p>Export the IGA LS-DYNA keyword file for a boundary fitted spline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the keyword file.</p></li>
+<li><p><strong>export_params</strong> (<a class="reference internal" href="../../ExportBoundaryFittedSplineParams.html#ansys.meshing.prime.ExportBoundaryFittedSplineParams" title="ansys.meshing.prime.ExportBoundaryFittedSplineParams"><em>ExportBoundaryFittedSplineParams</em></a>) – Parameters for exporting the keyword file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from exporting the keyword file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileWriteResults.html#ansys.meshing.prime.FileWriteResults" title="ansys.meshing.prime.FileWriteResults">FileWriteResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">export_boundary_fitted_spline_k_file</span><span class="p">(</span>
+<span class="go">                file_name,</span>
+<span class="go">                ExportBoundaryFittedSplineParams(model=model))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_fluent_case">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_fluent_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_fluent_case_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportFluentCaseParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportFluentCaseParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportFluentCaseParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportFluentCaseParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteResults.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteResults" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteResults</span></a></span></span><a class="headerlink" href="#FileIO.export_fluent_case" title="Link to this definition">#</a></dt>
+<dd><p>Export a Fluent case (CAS) file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the case file on disk.</p></li>
+<li><p><strong>export_fluent_case_params</strong> (<a class="reference internal" href="../../ExportFluentCaseParams.html#ansys.meshing.prime.ExportFluentCaseParams" title="ansys.meshing.prime.ExportFluentCaseParams"><em>ExportFluentCaseParams</em></a>) – Parameters for exporting the case file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from exporting the case file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileWriteResults.html#ansys.meshing.prime.FileWriteResults" title="ansys.meshing.prime.FileWriteResults">FileWriteResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">export_fluent_case</span><span class="p">(</span>
+<span class="go">                &quot;/tmp/fluent.cas&quot;,</span>
+<span class="go">                prime.ExportFluentCaseParams(model=model))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_fluent_meshing_mesh">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_fluent_meshing_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_fluent_mesh_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportFluentMeshingMeshParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportFluentMeshingMeshParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportFluentMeshingMeshParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportFluentMeshingMeshParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteResults.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteResults" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteResults</span></a></span></span><a class="headerlink" href="#FileIO.export_fluent_meshing_mesh" title="Link to this definition">#</a></dt>
+<dd><p>Export a Fluent Meshing mesh (MSH) file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the mesh file on disk.</p></li>
+<li><p><strong>export_fluent_mesh_params</strong> (<a class="reference internal" href="../../ExportFluentMeshingMeshParams.html#ansys.meshing.prime.ExportFluentMeshingMeshParams" title="ansys.meshing.prime.ExportFluentMeshingMeshParams"><em>ExportFluentMeshingMeshParams</em></a>) – Parameters for exporting the mesh file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from exporting the mesh file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileWriteResults.html#ansys.meshing.prime.FileWriteResults" title="ansys.meshing.prime.FileWriteResults">FileWriteResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">export_fluent_meshing_mesh</span><span class="p">(</span>
+<span class="go">                &quot;/tmp/fluent_meshing.msh&quot;,</span>
+<span class="go">                ExportFluentMeshingMeshParams(model=model))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_lsdyna_iga_keyword_file">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_lsdyna_iga_keyword_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportLSDynaIgaKeywordFileParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIgaKeywordFileParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIgaKeywordFileParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIgaKeywordFileParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ExportLSDynaIGAResults.html#ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIGAResults" title="ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIGAResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIGAResults</span></a></span></span><a class="headerlink" href="#FileIO.export_lsdyna_iga_keyword_file" title="Link to this definition">#</a></dt>
+<dd><p>Export IGA LS-DYNA Keyword file for solid, surface splines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the file.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ExportLSDynaIgaKeywordFileParams.html#ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams" title="ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams"><em>ExportLSDynaIgaKeywordFileParams</em></a>) – Parameters for IGA LS-DYNA Keyword file export.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns ExportLSDynaIGAResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ExportLSDynaIGAResults.html#ansys.meshing.prime.ExportLSDynaIGAResults" title="ansys.meshing.prime.ExportLSDynaIGAResults">ExportLSDynaIGAResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>This is a beta API</strong>. <strong>The behavior and implementation may change in future</strong>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">export_lsdyna_iga_keyword_file</span><span class="p">(</span>
+<span class="go">    file_name, ExportLSDynaIgaKeywordFileParams(model=model)</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_lsdyna_keyword_file">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_lsdyna_keyword_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportLSDynaKeywordFileParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaKeywordFileParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaKeywordFileParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaKeywordFileParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ExportLSDynaResults.html#ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaResults" title="ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaResults</span></a></span></span><a class="headerlink" href="#FileIO.export_lsdyna_keyword_file" title="Link to this definition">#</a></dt>
+<dd><p>Export FEA LS-DYNA Keyword file for solid, surface mesh, or both.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the file.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ExportLSDynaKeywordFileParams.html#ansys.meshing.prime.ExportLSDynaKeywordFileParams" title="ansys.meshing.prime.ExportLSDynaKeywordFileParams"><em>ExportLSDynaKeywordFileParams</em></a>) – Parameters for FEA LS-DYNA Keyword file export.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns ExportLSDynaResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ExportLSDynaResults.html#ansys.meshing.prime.ExportLSDynaResults" title="ansys.meshing.prime.ExportLSDynaResults">ExportLSDynaResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>This is a beta API</strong>. <strong>The behavior and implementation may change in future</strong>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">export_lsdyna_keyword_file</span><span class="p">(</span>
+<span class="go">    file_name, ExportLSDynaKeywordFileParams(model=model)</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_mapdl_cdb">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_mapdl_cdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportMapdlCdbParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ExportMapdlCdbResults.html#ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbResults" title="ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbResults</span></a></span></span><a class="headerlink" href="#FileIO.export_mapdl_cdb" title="Link to this definition">#</a></dt>
+<dd><p>Export an MAPDL CDB file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the CDB file on disk.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ExportMapdlCdbParams.html#ansys.meshing.prime.ExportMapdlCdbParams" title="ansys.meshing.prime.ExportMapdlCdbParams"><em>ExportMapdlCdbParams</em></a>) – Parameters for exporting the CDB file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from exporting the CDB file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ExportMapdlCdbResults.html#ansys.meshing.prime.ExportMapdlCdbResults" title="ansys.meshing.prime.ExportMapdlCdbResults">ExportMapdlCdbResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="kn">import</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">prime</span>
+<span class="gp">>>> </span><span class="c1">#connect client to server and get model from it</span>
+<span class="gp">>>> </span><span class="n">client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">50060</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">model</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">model</span>
+<span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ExportMapdlCdbParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">export_mapdl_cdb</span><span class="p">(</span><span class="s2">&quot;/tmp/file.cdb&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.export_stl">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">export_stl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportSTLParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportSTLParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportSTLParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportSTLParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteResults.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteResults" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteResults</span></a></span></span><a class="headerlink" href="#FileIO.export_stl" title="Link to this definition">#</a></dt>
+<dd><p>Export an STL file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the STL file on disk.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ExportSTLParams.html#ansys.meshing.prime.ExportSTLParams" title="ansys.meshing.prime.ExportSTLParams"><em>ExportSTLParams</em></a>) – Parameters for exporting the STL file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from exporting the STL file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileWriteResults.html#ansys.meshing.prime.FileWriteResults" title="ansys.meshing.prime.FileWriteResults">FileWriteResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="kn">import</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">prime</span>
+<span class="gp">>>> </span><span class="n">model</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span><span class="o">.</span><span class="n">model</span>
+<span class="gp">>>> </span><span class="n">fileio</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">out_file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/tmp/output.stl&quot;</span>
+<span class="gp">>>> </span><span class="n">part_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">]</span>
+<span class="gp">>>> </span><span class="n">export_stl_params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ExportSTLParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span><span class="n">part_ids</span><span class="o">=</span><span class="n">part_ids</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">fileio</span><span class="o">.</span><span class="n">export_stl</span><span class="p">(</span><span class="n">out_file_path</span><span class="p">,</span><span class="n">export_stl_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.get_abaqus_simulation_data">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">get_abaqus_simulation_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#FileIO.get_abaqus_simulation_data" title="Link to this definition">#</a></dt>
+<dd><p>Gets simulation document generated by Abaqus import for a given part.</p>
+<p>This method will return the JSON Simulation Document for a part if the part exists. Otherwise,
+it returns an empty string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partId</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Part Id.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the string containing a JSON document for simulation data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>This is a beta API</strong>. <strong>The behavior and implementation may change in future</strong>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="gp">>>> </span><span class="n">simdata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">file_io</span><span class="o">.</span><span class="n">get_abaqus_simulation_data</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.import_abaqus_inp">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">import_abaqus_inp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ImportAbaqusParams.html#ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusParams" title="ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ImportAbaqusResults.html#ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusResults" title="ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusResults</span></a></span></span><a class="headerlink" href="#FileIO.import_abaqus_inp" title="Link to this definition">#</a></dt>
+<dd><p>(BETA FEATURE) Import a Abaqus file.</p>
+<p>This is a beta feature to import abaqus files as dead mesh and also store
+simulation-specific information into Prime in the form of JSON documents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of file to import.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ImportAbaqusParams.html#ansys.meshing.prime.ImportAbaqusParams" title="ansys.meshing.prime.ImportAbaqusParams"><em>ImportAbaqusParams</em></a>) – Parameters to specify options during import.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the results of the abaqus database import.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ImportAbaqusResults.html#ansys.meshing.prime.ImportAbaqusResults" title="ansys.meshing.prime.ImportAbaqusResults">ImportAbaqusResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">import_abaqus</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/tmp/file.inp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.import_cad">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">import_cad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ImportCadParams.html#ansys.meshing.prime.autogen.fileiostructs.ImportCadParams" title="ansys.meshing.prime.autogen.fileiostructs.ImportCadParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportCadParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ImportCadResults.html#ansys.meshing.prime.autogen.fileiostructs.ImportCadResults" title="ansys.meshing.prime.autogen.fileiostructs.ImportCadResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportCadResults</span></a></span></span><a class="headerlink" href="#FileIO.import_cad" title="Link to this definition">#</a></dt>
+<dd><p>Import a CAD file from disk.</p>
+<p>Supported CAD file formats on Windows are:</p>
+<p>*.scdoc *.scdocx *.dsco *.fmd *.agdb *.pmdb *.meshdat *.mechdat *.dsdb *.cmdb
+*.sat *.sab *.dwg *.dxf *.model *.exp *.CATPart *.CATProduct *.cgr *.3dxml
+*.prt* *.asm* *.iges *.igs *.ipt *.iam *.jt *.prt *.x_t *.x_b *.par *.psm
+*.asm *.sldprt *.sldasm *.step *.stp *.stl *.plmxml *.tgf</p>
+<p>Supported CAD file formats on Linux are:</p>
+<p>*.fmd *.agdb *.pmdb *.meshdat *.mechdat *.dsdb *.cmdb *.sat *.sab
+*.CATPart *.CATProduct *.iges *.igs *.jt *.x_t *.x_b *.step *.stp
+*.stl *.plmxml *.tgf</p>
+<p>Refer <strong>Reading and writing files</strong> section in <strong>User guide</strong> for a
+comprehensive list of supported formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the CAD file on disk.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ImportCadParams.html#ansys.meshing.prime.ImportCadParams" title="ansys.meshing.prime.ImportCadParams"><em>ImportCadParams</em></a>) – Parameters for importing the CAD file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from importing the CAD file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ImportCadResults.html#ansys.meshing.prime.ImportCadResults" title="ansys.meshing.prime.ImportCadResults">ImportCadResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="kn">import</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">prime</span>
+<span class="gp">>>> </span><span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="gp">>>> </span><span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+<span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="s2">&quot;/tmp/my_cad.x_t&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.import_fluent_case">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">import_fluent_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_fluent_case_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ImportFluentCaseParams.html#ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseParams" title="ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ImportFluentCaseResults.html#ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseResults" title="ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseResults</span></a></span></span><a class="headerlink" href="#FileIO.import_fluent_case" title="Link to this definition">#</a></dt>
+<dd><p>Import a Fluent case (CAS) file from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the case file on disk.</p></li>
+<li><p><strong>import_fluent_case_params</strong> (<a class="reference internal" href="../../ImportFluentCaseParams.html#ansys.meshing.prime.ImportFluentCaseParams" title="ansys.meshing.prime.ImportFluentCaseParams"><em>ImportFluentCaseParams</em></a>) – Parameters for importing the case file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from importing the case file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ImportFluentCaseResults.html#ansys.meshing.prime.ImportFluentCaseResults" title="ansys.meshing.prime.ImportFluentCaseResults">ImportFluentCaseResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportFluentCaseParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">import_fluent_case</span><span class="p">(</span><span class="s2">&quot;/tmp/fluent.cas&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.import_fluent_meshing_meshes">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">import_fluent_meshing_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_fluent_meshing_mesh_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ImportFluentMeshingMeshParams.html#ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshParams" title="ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ImportFluentMeshingMeshResults.html#ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshResults" title="ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshResults</span></a></span></span><a class="headerlink" href="#FileIO.import_fluent_meshing_meshes" title="Link to this definition">#</a></dt>
+<dd><p>Import Fluent Meshing’s mesh (MS and MSH.GZ) files from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_names</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – List of full path for the mesh files to import.</p></li>
+<li><p><strong>import_fluent_meshing_mesh_params</strong> (<a class="reference internal" href="../../ImportFluentMeshingMeshParams.html#ansys.meshing.prime.ImportFluentMeshingMeshParams" title="ansys.meshing.prime.ImportFluentMeshingMeshParams"><em>ImportFluentMeshingMeshParams</em></a>) – Parameters for importing the mesh files.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from importing the mesh files.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ImportFluentMeshingMeshResults.html#ansys.meshing.prime.ImportFluentMeshingMeshResults" title="ansys.meshing.prime.ImportFluentMeshingMeshResults">ImportFluentMeshingMeshResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportFluentMeshingMeshParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">import_fluent_meshing_meshes</span><span class="p">(</span>
+<span class="go">                [&quot;/tmp/mesh.msh&quot;, &quot;/tmp/mesh1.msh&quot;],</span>
+<span class="go">                params)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.import_fluent_meshing_size_field">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">import_fluent_meshing_size_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/SizeFieldFileReadResults.html#ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults" title="ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults</span></a></span></span><a class="headerlink" href="#FileIO.import_fluent_meshing_size_field" title="Link to this definition">#</a></dt>
+<dd><p>Import a Fluent Meshing size field (SF and SF.GZ) file from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the size field file on disk.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from reading the size field file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../SizeFieldFileReadResults.html#ansys.meshing.prime.SizeFieldFileReadResults" title="ansys.meshing.prime.SizeFieldFileReadResults">SizeFieldFileReadResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">import_fluent_meshing_size_field</span><span class="p">(</span><span class="s2">&quot;/tmp/my_sizefield.sf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.import_mapdl_cdb">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">import_mapdl_cdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ImportMapdlCdbParams.html#ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbParams" title="ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ImportMapdlCdbResults.html#ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbResults" title="ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbResults</span></a></span></span><a class="headerlink" href="#FileIO.import_mapdl_cdb" title="Link to this definition">#</a></dt>
+<dd><p>Import an MAPDL CDB file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the CDB file on disk.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ImportMapdlCdbParams.html#ansys.meshing.prime.ImportMapdlCdbParams" title="ansys.meshing.prime.ImportMapdlCdbParams"><em>ImportMapdlCdbParams</em></a>) – Parameters for importing the CDB file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from importing the CDB file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ImportMapdlCdbResults.html#ansys.meshing.prime.ImportMapdlCdbResults" title="ansys.meshing.prime.ImportMapdlCdbResults">ImportMapdlCdbResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="kn">import</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">prime</span>
+<span class="gp">>>> </span><span class="c1"># connect client to server and get model from it</span>
+<span class="gp">>>> </span><span class="n">client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">50060</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">model</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">model</span>
+<span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportMapdlCdbParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">import_mapdl_cdb</span><span class="p">(</span><span class="s2">&quot;/tmp/file.cdb&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.initialize_cdb_export_params">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">initialize_cdb_export_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ExportMapdlCdbParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">major_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/ExportMapdlCdbParams.html#ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams" title="ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams</span></a></span></span><a class="headerlink" href="#FileIO.initialize_cdb_export_params" title="Link to this definition">#</a></dt>
+<dd><p>Initialize specific CDB export parameters based on the given version.</p>
+<p>This function sets the separate_blocks_format_type, export_fasteners_as_swgen and
+export_rigid_bodies_as_rbgen parameters of the provided ExportMapdlCdbParams
+object based on the given major and minor version numbers.
+Other parameters remain unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ExportMapdlCdbParams.html#ansys.meshing.prime.ExportMapdlCdbParams" title="ansys.meshing.prime.ExportMapdlCdbParams"><em>ExportMapdlCdbParams</em></a>) – The CDB export parameters object to be modified.</p></li>
+<li><p><strong>major_version</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The major version number.</p></li>
+<li><p><strong>minor_version</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The minor version number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modified CDB export parameters object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ExportMapdlCdbParams.html#ansys.meshing.prime.ExportMapdlCdbParams" title="ansys.meshing.prime.ExportMapdlCdbParams">ExportMapdlCdbParams</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>This is a beta API</strong>. <strong>The behavior and implementation may change in future</strong>.</p>
+<p>The version is formed as “<major_version>r<minor_version>”, e.g., “24r1”, “25r2”.
+If the version is greater than or equal to “25r1”, write_separate_blocks is set to True
+with COMPACT format, and export_fasteners_as_swgen and export_rigid_bodies_as_rbgen
+parameters are set to True. Otherwise, they are set to False.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ExportMapdlCdbParams</span><span class="p">()</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">initialize_cdb_export_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">write_separate_blocks</span>
+<span class="go">False</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">export_fasteners_as_swgen</span>
+<span class="go">False</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">export_rigid_bodies_as_swgen</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ExportMapdlCdbParams</span><span class="p">()</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">initialize_cdb_export_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">write_separate_blocks</span>
+<span class="go">True</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">separate_blocks_format_type</span>
+<span class="go">SeparateBlocksFormatType.COMPACT</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">export_fasteners_as_swgen</span>
+<span class="go">True</span>
+<span class="gp">>>> </span><span class="n">params</span><span class="o">.</span><span class="n">export_rigid_bodies_as_swgen</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.read_pmdat">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">read_pmdat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_read_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/FileReadParams.html#ansys.meshing.prime.autogen.fileiostructs.FileReadParams" title="ansys.meshing.prime.autogen.fileiostructs.FileReadParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileReadParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileReadResults.html#ansys.meshing.prime.autogen.fileiostructs.FileReadResults" title="ansys.meshing.prime.autogen.fileiostructs.FileReadResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileReadResults</span></a></span></span><a class="headerlink" href="#FileIO.read_pmdat" title="Link to this definition">#</a></dt>
+<dd><p>Read a PyPrimeMesh data (PMDAT) file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the data file on disk.</p></li>
+<li><p><strong>file_read_params</strong> (<a class="reference internal" href="../../FileReadParams.html#ansys.meshing.prime.FileReadParams" title="ansys.meshing.prime.FileReadParams"><em>FileReadParams</em></a>) – Parameters for reading the data file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from reading the data file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileReadResults.html#ansys.meshing.prime.FileReadResults" title="ansys.meshing.prime.FileReadResults">FileReadResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="kn">import</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">prime</span>
+<span class="gp">>>> </span><span class="c1">#connect client to server and get model from it</span>
+<span class="gp">>>> </span><span class="n">client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">50060</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">model</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">model</span>
+<span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">file_read_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileReadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">read_pmdat</span><span class="p">(</span><span class="s2">&quot;/tmp/file.pmdat&quot;</span><span class="p">,</span> <span class="n">file_read_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.read_size_field">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">read_size_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/ReadSizeFieldParams.html#ansys.meshing.prime.autogen.fileiostructs.ReadSizeFieldParams" title="ansys.meshing.prime.autogen.fileiostructs.ReadSizeFieldParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.ReadSizeFieldParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/SizeFieldFileReadResults.html#ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults" title="ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults</span></a></span></span><a class="headerlink" href="#FileIO.read_size_field" title="Link to this definition">#</a></dt>
+<dd><p>Read a PyPrimeMesh size field (PSF and PSF.GZ) file from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the size field file on disk.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ReadSizeFieldParams.html#ansys.meshing.prime.ReadSizeFieldParams" title="ansys.meshing.prime.ReadSizeFieldParams"><em>ReadSizeFieldParams</em></a>) – Parameters for reading size field file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from reading the size field file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../SizeFieldFileReadResults.html#ansys.meshing.prime.SizeFieldFileReadResults" title="ansys.meshing.prime.SizeFieldFileReadResults">SizeFieldFileReadResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ReadSizeFieldParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">read_size_field</span><span class="p">(</span><span class="s2">&quot;/tmp/my_prime_sizefield.psf&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.write_pmdat">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">write_pmdat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_write_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteParams.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteParams" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteResults.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteResults" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteResults</span></a></span></span><a class="headerlink" href="#FileIO.write_pmdat" title="Link to this definition">#</a></dt>
+<dd><p>Write a PyPrimeMesh data (PMDAT) file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path for writing the data file on disk.</p></li>
+<li><p><strong>file_write_params</strong> (<a class="reference internal" href="../../FileWriteParams.html#ansys.meshing.prime.FileWriteParams" title="ansys.meshing.prime.FileWriteParams"><em>FileWriteParams</em></a>) – Parameters for writing the data file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from writing the data file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileWriteResults.html#ansys.meshing.prime.FileWriteResults" title="ansys.meshing.prime.FileWriteResults">FileWriteResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">write_pmdat</span><span class="p">(</span><span class="s2">&quot;/tmp/prime_mesh_data.pmdat&quot;</span><span class="p">,</span>
+<span class="go">                                  prime.FileWriteParams(model=model))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileIO.write_size_field">
+<span class="sig-prename descclassname"><span class="pre">FileIO.</span></span><span class="sig-name descname"><span class="pre">write_size_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/fileiostructs/WriteSizeFieldParams.html#ansys.meshing.prime.autogen.fileiostructs.WriteSizeFieldParams" title="ansys.meshing.prime.autogen.fileiostructs.WriteSizeFieldParams"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.WriteSizeFieldParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/fileiostructs/FileWriteResults.html#ansys.meshing.prime.autogen.fileiostructs.FileWriteResults" title="ansys.meshing.prime.autogen.fileiostructs.FileWriteResults"><span class="pre">ansys.meshing.prime.autogen.fileiostructs.FileWriteResults</span></a></span></span><a class="headerlink" href="#FileIO.write_size_field" title="Link to this definition">#</a></dt>
+<dd><p>Write a PyPrimeMesh size field (PSF) file to a file on disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to the size field file on disk.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../WriteSizeFieldParams.html#ansys.meshing.prime.WriteSizeFieldParams" title="ansys.meshing.prime.WriteSizeFieldParams"><em>WriteSizeFieldParams</em></a>) – Parameters for writing the size field file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from writing the size field file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FileWriteResults.html#ansys.meshing.prime.FileWriteResults" title="ansys.meshing.prime.FileWriteResults">FileWriteResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method does not support Unicode paths.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">WriteSizeFieldParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">file_io</span><span class="o">.</span><span class="n">write_size_field</span><span class="p">(</span><span class="s2">&quot;/tmp/my_prime_sizefield.psf&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.meshing.prime.core.fileio.FileIO"><code class="docutils literal notranslate"><span class="pre">ansys.meshing.prime.core.fileio.FileIO</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-detail">Import detail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute-detail">Attribute detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.__doc__"><code class="docutils literal notranslate"><span class="pre">__doc__</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-detail">Method detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.__enter__"><code class="docutils literal notranslate"><span class="pre">__enter__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.__exit__"><code class="docutils literal notranslate"><span class="pre">__exit__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.__setattr__"><code class="docutils literal notranslate"><span class="pre">__setattr__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_boundary_fitted_spline_kfile"><code class="docutils literal notranslate"><span class="pre">export_boundary_fitted_spline_kfile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_fluent_case"><code class="docutils literal notranslate"><span class="pre">export_fluent_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_fluent_meshing_mesh"><code class="docutils literal notranslate"><span class="pre">export_fluent_meshing_mesh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_lsdyna_iga_keyword_file"><code class="docutils literal notranslate"><span class="pre">export_lsdyna_iga_keyword_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_lsdyna_keyword_file"><code class="docutils literal notranslate"><span class="pre">export_lsdyna_keyword_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_mapdl_cdb"><code class="docutils literal notranslate"><span class="pre">export_mapdl_cdb()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.export_stl"><code class="docutils literal notranslate"><span class="pre">export_stl()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.get_abaqus_simulation_data"><code class="docutils literal notranslate"><span class="pre">get_abaqus_simulation_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.import_abaqus_inp"><code class="docutils literal notranslate"><span class="pre">import_abaqus_inp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.import_cad"><code class="docutils literal notranslate"><span class="pre">import_cad()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.import_fluent_case"><code class="docutils literal notranslate"><span class="pre">import_fluent_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.import_fluent_meshing_meshes"><code class="docutils literal notranslate"><span class="pre">import_fluent_meshing_meshes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.import_fluent_meshing_size_field"><code class="docutils literal notranslate"><span class="pre">import_fluent_meshing_size_field()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.import_mapdl_cdb"><code class="docutils literal notranslate"><span class="pre">import_mapdl_cdb()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.initialize_cdb_export_params"><code class="docutils literal notranslate"><span class="pre">initialize_cdb_export_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.read_pmdat"><code class="docutils literal notranslate"><span class="pre">read_pmdat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.read_size_field"><code class="docutils literal notranslate"><span class="pre">read_size_field()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.write_pmdat"><code class="docutils literal notranslate"><span class="pre">write_pmdat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#FileIO.write_size_field"><code class="docutils literal notranslate"><span class="pre">write_size_field()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pyprimemesh/edit/main/ansys/meshing/prime/core/fileio/FileIO.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../_sources/api/ansys/meshing/prime/core/fileio/FileIO.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.5.2. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

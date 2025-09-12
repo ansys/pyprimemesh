@@ -1,0 +1,201 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``autoquadmesherstructs.py`` module
+=======================================
+
+.. py:module:: ansys.meshing.prime.autogen.autoquadmesherstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: autoquadmesherstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.AutoQuadMesherResults`
+            - Results of auto quad mesher.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.CheckTopologyParams`
+            - Parameters for check topology operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.ConnectFacesParams`
+            - Parameters for connect faces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DefeatureTopologyParams`
+            - Parameters for defeature topology operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DeleteInteriorNodesParams`
+            - Parameters for delete interior nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DetectAndTreatCircularFacesParams`
+            - Parameters for detect and treat circular faces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DetectAndTreatFeaturesParams`
+            - Parameters for detect and treat features operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DetectAndTreatHolesParams`
+            - Parameters for detect and treat holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DetectCircularHolesParams`
+            - Parameters for detect circular holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DetectHolesParams`
+            - Parameters for detect holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.DetectNonCircularHolesParams`
+            - Parameters for detect non circular holes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.EdgeConnectType`
+            - Edge connect type to define the type of connection between edges .
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.OptimizeQuadMeshParams`
+            - Parameters for optimize quad mesh operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.PartialDefeatureParams`
+            - Parameters for partial defeature operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.RepairEdgesParams`
+            - Parameters for repair edges operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs.RepairTopologyParams`
+            - Parameters for repair topology operations.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AutoQuadMesherResults</api/ansys/meshing/prime/autogen/autoquadmesherstructs/AutoQuadMesherResults>
+    <span class="nf nf-cod-symbol_class"></span> CheckTopologyParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/CheckTopologyParams>
+    <span class="nf nf-cod-symbol_class"></span> ConnectFacesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/ConnectFacesParams>
+    <span class="nf nf-cod-symbol_class"></span> DefeatureTopologyParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DefeatureTopologyParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteInteriorNodesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DeleteInteriorNodesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectAndTreatCircularFacesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DetectAndTreatCircularFacesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectAndTreatFeaturesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DetectAndTreatFeaturesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectAndTreatHolesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DetectAndTreatHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectCircularHolesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DetectCircularHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectHolesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DetectHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> DetectNonCircularHolesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/DetectNonCircularHolesParams>
+    <span class="nf nf-cod-symbol_class"></span> EdgeConnectType</api/ansys/meshing/prime/autogen/autoquadmesherstructs/EdgeConnectType>
+    <span class="nf nf-cod-symbol_class"></span> OptimizeQuadMeshParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/OptimizeQuadMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> PartialDefeatureParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/PartialDefeatureParams>
+    <span class="nf nf-cod-symbol_class"></span> RepairEdgesParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/RepairEdgesParams>
+    <span class="nf nf-cod-symbol_class"></span> RepairTopologyParams</api/ansys/meshing/prime/autogen/autoquadmesherstructs/RepairTopologyParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

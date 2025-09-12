@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergeBoundaryNodesParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.MergeBoundaryNodesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, tolerance: float = None, use_absolute_tolerance: bool = None, merge_node_type: MergeNodeType = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used for the merge boundary nodes operation.
+
+   :param model: Model to create a ``MergeBoundaryNodesParams`` object with default parameters.
+   :type model: Model
+   :param tolerance: Distance tolerance for merging boundary nodes.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: Indicates whether the tolerance provided is an absolute value or not.
+   :type use_absolute_tolerance: bool, optional
+   :param merge_node_type: Type of nodes to be merged.
+   :type merge_node_type: MergeNodeType, optional
+   :param json_data: JSON dictionary to create a ``MergeBoundaryNodesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> merge_boundary_nodes_params = prime.MergeBoundaryNodesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MergeBoundaryNodesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~merge_node_type`
+            - Type of nodes to be merged.
+          * - :py:attr:`~tolerance`
+            - Distance tolerance for merging boundary nodes.
+          * - :py:attr:`~use_absolute_tolerance`
+            - Indicates whether the tolerance provided is an absolute value or not.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MergeBoundaryNodesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MergeBoundaryNodesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import MergeBoundaryNodesParams
+
+Property detail
+---------------
+
+.. py:property:: merge_node_type
+   :type: MergeNodeType
+
+
+   Type of nodes to be merged.
+
+.. py:property:: tolerance
+   :type: float
+
+
+   Distance tolerance for merging boundary nodes.
+
+.. py:property:: use_absolute_tolerance
+   :type: bool
+
+
+   Indicates whether the tolerance provided is an absolute value or not.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MergeBoundaryNodesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MergeBoundaryNodesParams.print_default()
+
+
+.. py:method:: set_default(tolerance: float = None, use_absolute_tolerance: bool = None, merge_node_type: MergeNodeType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MergeBoundaryNodesParams`` object.
+
+   :param tolerance: Distance tolerance for merging boundary nodes.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: Indicates whether the tolerance provided is an absolute value or not.
+   :type use_absolute_tolerance: bool, optional
+   :param merge_node_type: Type of nodes to be merged.
+   :type merge_node_type: MergeNodeType, optional
+
+
+
+
+
+
+
+.. vale on

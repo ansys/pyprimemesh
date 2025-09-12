@@ -1,0 +1,210 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`HexCoreParams`
+======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.automeshstructs.HexCoreParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, transition_size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, buffer_layers: int = None, rel_peel_layer_offset: float = None, transition_layer_type: HexCoreTransitionLayerType = None, cell_element_type: HexCoreCellElementType = None, surface_mesh_size_scaling: SurfaceMeshSizeScaling = None, enable_region_based_hexcore: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control hexahedral mesh generation.
+
+   :param model: Model to create a ``HexCoreParams`` object with default parameters.
+   :type model: Model
+   :param transition_size_field_type: Size field type to be used for transition volume (volume between hexcore and boundary).
+   :type transition_size_field_type: SizeFieldType, optional
+   :param buffer_layers: Minimum number of cell layers of the same size before the cell size halves or doubles.
+   :type buffer_layers: int, optional
+   :param rel_peel_layer_offset: Gap between hexahedral core and geometry surface relative to the surface mesh size.
+   :type rel_peel_layer_offset: float, optional
+   :param transition_layer_type: Handle size transition of hex cells.
+   :type transition_layer_type: HexCoreTransitionLayerType, optional
+   :param cell_element_type: Cell element type of hex-shaped cells.
+   :type cell_element_type: HexCoreCellElementType, optional
+   :param surface_mesh_size_scaling: Setting for scaling surface mesh size for hexcore refinement.
+   :type surface_mesh_size_scaling: SurfaceMeshSizeScaling, optional
+   :param enable_region_based_hexcore: Checks whether to enable region based hexcore or not.
+   :type enable_region_based_hexcore: bool, optional
+   :param json_data: JSON dictionary to create a ``HexCoreParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> hex_core_params = prime.HexCoreParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: HexCoreParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~buffer_layers`
+            - Minimum number of cell layers of the same size before the cell size halves or doubles.
+          * - :py:attr:`~cell_element_type`
+            - Cell element type of hex-shaped cells.
+          * - :py:attr:`~enable_region_based_hexcore`
+            - Checks whether to enable region based hexcore or not.
+          * - :py:attr:`~rel_peel_layer_offset`
+            - Gap between hexahedral core and geometry surface relative to the surface mesh size.
+          * - :py:attr:`~surface_mesh_size_scaling`
+            - Setting for scaling surface mesh size for hexcore refinement.
+          * - :py:attr:`~transition_layer_type`
+            - Handle size transition of hex cells.
+          * - :py:attr:`~transition_size_field_type`
+            - Size field type to be used for transition volume (volume between hexcore and boundary).
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``HexCoreParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``HexCoreParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.automeshstructs import HexCoreParams
+
+Property detail
+---------------
+
+.. py:property:: buffer_layers
+   :type: int
+
+
+   Minimum number of cell layers of the same size before the cell size halves or doubles.
+
+.. py:property:: cell_element_type
+   :type: HexCoreCellElementType
+
+
+   Cell element type of hex-shaped cells.
+
+.. py:property:: enable_region_based_hexcore
+   :type: bool
+
+
+   Checks whether to enable region based hexcore or not.
+
+.. py:property:: rel_peel_layer_offset
+   :type: float
+
+
+   Gap between hexahedral core and geometry surface relative to the surface mesh size.
+
+.. py:property:: surface_mesh_size_scaling
+   :type: SurfaceMeshSizeScaling
+
+
+   Setting for scaling surface mesh size for hexcore refinement.
+
+.. py:property:: transition_layer_type
+   :type: HexCoreTransitionLayerType
+
+
+   Handle size transition of hex cells.
+
+.. py:property:: transition_size_field_type
+   :type: ansys.meshing.prime.params.primestructs.SizeFieldType
+
+
+   Size field type to be used for transition volume (volume between hexcore and boundary).
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``HexCoreParams`` object.
+
+   .. rubric:: Examples
+
+   >>> HexCoreParams.print_default()
+
+
+.. py:method:: set_default(transition_size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, buffer_layers: int = None, rel_peel_layer_offset: float = None, transition_layer_type: HexCoreTransitionLayerType = None, cell_element_type: HexCoreCellElementType = None, surface_mesh_size_scaling: SurfaceMeshSizeScaling = None, enable_region_based_hexcore: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``HexCoreParams`` object.
+
+   :param transition_size_field_type: Size field type to be used for transition volume (volume between hexcore and boundary).
+   :type transition_size_field_type: SizeFieldType, optional
+   :param buffer_layers: Minimum number of cell layers of the same size before the cell size halves or doubles.
+   :type buffer_layers: int, optional
+   :param rel_peel_layer_offset: Gap between hexahedral core and geometry surface relative to the surface mesh size.
+   :type rel_peel_layer_offset: float, optional
+   :param transition_layer_type: Handle size transition of hex cells.
+   :type transition_layer_type: HexCoreTransitionLayerType, optional
+   :param cell_element_type: Cell element type of hex-shaped cells.
+   :type cell_element_type: HexCoreCellElementType, optional
+   :param surface_mesh_size_scaling: Setting for scaling surface mesh size for hexcore refinement.
+   :type surface_mesh_size_scaling: SurfaceMeshSizeScaling, optional
+   :param enable_region_based_hexcore: Checks whether to enable region based hexcore or not.
+   :type enable_region_based_hexcore: bool, optional
+
+
+
+
+
+
+
+.. vale on

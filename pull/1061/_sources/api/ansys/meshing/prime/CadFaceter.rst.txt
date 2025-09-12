@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CadFaceter`
+===================
+
+
+.. py:class:: ansys.meshing.prime.CadFaceter
+
+
+
+   Types of CAD faceter.
+
+
+
+
+.. py:currentmodule:: CadFaceter
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ACIS`
+            - Denotes CAD faceter is Acis.
+          * - :py:attr:`~PARASOLID`
+            - Denotes CAD faceter is Parasolid.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CadFaceter
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ACIS
+   :value: 0
+
+
+   Denotes CAD faceter is Acis.
+
+.. py:attribute:: PARASOLID
+   :value: 1
+
+
+   Denotes CAD faceter is Parasolid.
+
+
+
+
+
+
+
+.. vale on

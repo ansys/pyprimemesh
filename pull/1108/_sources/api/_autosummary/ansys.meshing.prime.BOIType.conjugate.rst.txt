@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BOIType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using BOIType.conjugate
+
+   ansys.meshing.prime.BOIType.conjugate

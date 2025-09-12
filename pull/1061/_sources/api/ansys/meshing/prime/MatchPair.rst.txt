@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MatchPair`
+==================
+
+
+.. py:class:: ansys.meshing.prime.MatchPair(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, source_surfaces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, target_surfaces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, target_type: MatchPairTargetType = None, bc_pairs: ansys.meshing.prime.params.primestructs.List[BCPair] = None, json_data: dict = None, **kwargs)
+
+
+
+   Match pair to specify sources, targets for match morphing. Included boundary conditions specification.
+
+   :param model: Model to create a ``MatchPair`` object with default parameters.
+   :type model: Model
+   :param source_surfaces: Ids of source surfaces.
+   :type source_surfaces: Iterable[int], optional
+   :param target_surfaces: Ids of target surfaces.
+   :type target_surfaces: Iterable[int], optional
+   :param target_type: Option to specify target surface type.
+   :type target_type: MatchPairTargetType, optional
+   :param bc_pairs: Array of boundary condition pairs.
+   :type bc_pairs: List[BCPair], optional
+   :param json_data: JSON dictionary to create a ``MatchPair`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> match_pair = prime.MatchPair(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MatchPair
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~bc_pairs`
+            - Array of boundary condition pairs.
+          * - :py:attr:`~source_surfaces`
+            - Ids of source surfaces.
+          * - :py:attr:`~target_surfaces`
+            - Ids of target surfaces.
+          * - :py:attr:`~target_type`
+            - Option to specify target surface type.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MatchPair`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MatchPair`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MatchPair
+
+Property detail
+---------------
+
+.. py:property:: bc_pairs
+   :type: ansys.meshing.prime.params.primestructs.List[BCPair]
+
+
+   Array of boundary condition pairs.
+
+.. py:property:: source_surfaces
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of source surfaces.
+
+.. py:property:: target_surfaces
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of target surfaces.
+
+.. py:property:: target_type
+   :type: MatchPairTargetType
+
+
+   Option to specify target surface type.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MatchPair`` object.
+
+   .. rubric:: Examples
+
+   >>> MatchPair.print_default()
+
+
+.. py:method:: set_default(source_surfaces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, target_surfaces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, target_type: MatchPairTargetType = None, bc_pairs: ansys.meshing.prime.params.primestructs.List[BCPair] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MatchPair`` object.
+
+   :param source_surfaces: Ids of source surfaces.
+   :type source_surfaces: Iterable[int], optional
+   :param target_surfaces: Ids of target surfaces.
+   :type target_surfaces: Iterable[int], optional
+   :param target_type: Option to specify target surface type.
+   :type target_type: MatchPairTargetType, optional
+   :param bc_pairs: Array of boundary condition pairs.
+   :type bc_pairs: List[BCPair], optional
+
+
+
+
+
+
+
+.. vale on

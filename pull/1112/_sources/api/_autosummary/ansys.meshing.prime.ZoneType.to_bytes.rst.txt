@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ZoneType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using ZoneType.to_bytes
+
+   ansys.meshing.prime.ZoneType.to_bytes

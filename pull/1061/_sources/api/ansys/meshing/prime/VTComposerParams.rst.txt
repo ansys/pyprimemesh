@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VTComposerParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.VTComposerParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, thin_stripes_tol: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control VTComposer operations.
+
+   :param model: Model to create a ``VTComposerParams`` object with default parameters.
+   :type model: Model
+   :param thin_stripes_tol: **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type thin_stripes_tol: float, optional
+   :param json_data: JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> v_tcomposer_params = prime.VTComposerParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VTComposerParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~thin_stripes_tol`
+            - **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VTComposerParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VTComposerParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VTComposerParams
+
+Property detail
+---------------
+
+.. py:property:: thin_stripes_tol
+   :type: float
+
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VTComposerParams`` object.
+
+   .. rubric:: Examples
+
+   >>> VTComposerParams.print_default()
+
+
+.. py:method:: set_default(thin_stripes_tol: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VTComposerParams`` object.
+
+   :param thin_stripes_tol:
+   :type thin_stripes_tol: float, optional
+
+
+
+
+
+
+
+.. vale on

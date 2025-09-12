@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CollapseResults`
+========================
+
+
+.. py:class:: ansys.meshing.prime.CollapseResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_collapsed: int = None, n_splits: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with collapse face elements.
+
+   :param model: Model to create a ``CollapseResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param n_collapsed: Number of face elements collapsed.
+   :type n_collapsed: int, optional
+   :param n_splits: Number of face elements split.
+   :type n_splits: int, optional
+   :param json_data: JSON dictionary to create a ``CollapseResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> collapse_results = prime.CollapseResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CollapseResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~n_collapsed`
+            - Number of face elements collapsed.
+          * - :py:attr:`~n_splits`
+            - Number of face elements split.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CollapseResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CollapseResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CollapseResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: n_collapsed
+   :type: int
+
+
+   Number of face elements collapsed.
+
+.. py:property:: n_splits
+   :type: int
+
+
+   Number of face elements split.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CollapseResults`` object.
+
+   .. rubric:: Examples
+
+   >>> CollapseResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_collapsed: int = None, n_splits: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CollapseResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param n_collapsed: Number of face elements collapsed.
+   :type n_collapsed: int, optional
+   :param n_splits: Number of face elements split.
+   :type n_splits: int, optional
+
+
+
+
+
+
+
+.. vale on

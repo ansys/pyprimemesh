@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateVolumeZonesType`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.CreateVolumeZonesType
+
+
+
+   Indicate type to create volume zones for volumes.
+
+
+
+
+.. py:currentmodule:: CreateVolumeZonesType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~NONE`
+            - Option to not create volume zones.
+          * - :py:attr:`~PERNAMESOURCE`
+            - Option to create zone per name computed from face zonelets of volume. Single zone is created for multiple volumes if same zone name is identified using face zonelets for the volumes.
+          * - :py:attr:`~PERVOLUME`
+            - Option to create volume zone per volume. Suffix is added to volume zone name, if same name is identified for different volumes using face zonelets.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CreateVolumeZonesType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   Option to not create volume zones.
+
+.. py:attribute:: PERNAMESOURCE
+   :value: 2
+
+
+   Option to create zone per name computed from face zonelets of volume. Single zone is created for multiple volumes if same zone name is identified using face zonelets for the volumes.
+
+.. py:attribute:: PERVOLUME
+   :value: 1
+
+
+   Option to create volume zone per volume. Suffix is added to volume zone name, if same name is identified for different volumes using face zonelets.
+
+
+
+
+
+
+
+.. vale on

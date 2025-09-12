@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``hextospline.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.autogen.hextospline
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: hextospline
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.hextospline.HexToSpline`
+            - Converts all-hex mesh to spline.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> HexToSpline</api/ansys/meshing/prime/autogen/hextospline/HexToSpline>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

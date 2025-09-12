@@ -1,0 +1,240 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ThinVolumeControl`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.ThinVolumeControl(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   ThinVolumeControl allows you to generate prisms in the space between surfaces.
+
+   ThinVolumeControl allows you to control generation of prisms in the thin space between surfaces. Controls include setting the source face scope, target face scope and thin volume mesh parameters.
+
+   :param model: Server model to create ThinVolumeControl object.
+   :type model: Model
+   :param id: Id of the ThinVolumeControl.
+   :type id: int
+   :param object_id: Object id of the ThinVolumeControl.
+   :type object_id: int
+   :param name: Name of the ThinVolumeControl.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: ThinVolumeControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_source_scope`
+            - Gets the source of thin volume control scope.
+          * - :py:attr:`~get_target_scope`
+            - Gets the target of thin volume control scope.
+          * - :py:attr:`~get_volume_scope`
+            - Gets the volume scope of thin volume control.
+          * - :py:attr:`~set_source_scope`
+            - Sets the source surface scope of thin volume control.
+          * - :py:attr:`~set_target_scope`
+            - Sets the target surface scope of thin volume control.
+          * - :py:attr:`~set_thin_volume_mesh_params`
+            - Sets thin volume mesh parameters for thin volume control.
+          * - :py:attr:`~set_volume_scope`
+            - Sets the volume scope of thin volume control.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of ThinVolumeControl.
+          * - :py:attr:`~name`
+            - Get the name of ThinVolumeControl.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ThinVolumeControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of ThinVolumeControl.
+
+.. py:property:: name
+
+   Get the name of ThinVolumeControl.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: get_source_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the source of thin volume control scope.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> scope = thin_vol_ctrl.get_source_scope()
+
+
+.. py:method:: get_target_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the target of thin volume control scope.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> scope = thin_vol_ctrl.get_target_scope()
+
+
+.. py:method:: get_volume_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the volume scope of thin volume control.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> scope = thin_vol_ctrl.get_volume_scope()
+
+
+.. py:method:: set_source_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the source surface scope of thin volume control.
+
+
+   :param entities: Scope definition source face entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Examples
+
+   >>> results = thin_vol_ctrl.set_source_scope(entities)
+
+
+.. py:method:: set_target_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the target surface scope of thin volume control.
+
+
+   :param entities: Scope definition for target face entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Examples
+
+   >>> results = thin_vol_ctrl.set_target_scope(entities)
+
+
+.. py:method:: set_thin_volume_mesh_params(thin_volume_mesh_params: ansys.meshing.prime.params.primestructs.ThinVolumeMeshParams)
+
+   Sets thin volume mesh parameters for thin volume control.
+
+
+   :param thin_volume_mesh_params: Parameters to set thin volume control growth.
+   :type thin_volume_mesh_params: ThinVolumeMeshParams
+
+   .. rubric:: Examples
+
+   >>> results = thin_vol_ctrl.set_thin_volume_mesh_params(ThinVolumeMeshParams(model=model))
+
+
+.. py:method:: set_volume_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the volume scope of thin volume control.
+
+
+   :param entities: Scope definition for volume entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = thin_vol_ctrl.set_volume_scope(entities)
+
+
+
+
+
+
+
+.. vale on

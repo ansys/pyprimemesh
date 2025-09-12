@@ -1,0 +1,6 @@
+merge\_overlapping\_topo\_faces
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Scaffolder.merge_overlapping_topo_faces

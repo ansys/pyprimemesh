@@ -1,0 +1,6 @@
+﻿grouping\_tolerance
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateContactPatchParams.grouping_tolerance

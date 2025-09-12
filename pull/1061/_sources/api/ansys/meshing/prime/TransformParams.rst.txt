@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TransformParams`
+========================
+
+
+.. py:class:: ansys.meshing.prime.TransformParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, transformation_matrix: ansys.meshing.prime.params.primestructs.Iterable[float] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to transform given entities.
+
+   :param model: Model to create a ``TransformParams`` object with default parameters.
+   :type model: Model
+   :param transformation_matrix: Transformation matrix(4x4) to be used to transform.
+   :type transformation_matrix: Iterable[float], optional
+   :param json_data: JSON dictionary to create a ``TransformParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> transform_params = prime.TransformParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TransformParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~transformation_matrix`
+            - Transformation matrix(4x4) to be used to transform.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TransformParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TransformParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TransformParams
+
+Property detail
+---------------
+
+.. py:property:: transformation_matrix
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Transformation matrix(4x4) to be used to transform.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TransformParams`` object.
+
+   .. rubric:: Examples
+
+   >>> TransformParams.print_default()
+
+
+.. py:method:: set_default(transformation_matrix: ansys.meshing.prime.params.primestructs.Iterable[float] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TransformParams`` object.
+
+   :param transformation_matrix: Transformation matrix(4x4) to be used to transform.
+   :type transformation_matrix: Iterable[float], optional
+
+
+
+
+
+
+
+.. vale on

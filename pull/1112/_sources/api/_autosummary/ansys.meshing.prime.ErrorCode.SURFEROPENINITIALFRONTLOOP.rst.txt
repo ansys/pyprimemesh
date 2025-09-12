@@ -1,0 +1,6 @@
+SURFEROPENINITIALFRONTLOOP
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFEROPENINITIALFRONTLOOP

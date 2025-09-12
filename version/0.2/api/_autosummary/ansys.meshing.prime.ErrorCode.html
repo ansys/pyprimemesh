@@ -1,0 +1,1686 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ErrorCode &#8212; PyPrimeMesh</title>
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/ansys_sphinx_theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    
+        <link href="../../_static/css/breadcrumbs.css" rel="stylesheet">
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/js/table.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/_autosummary/ansys.meshing.prime.ErrorCode';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.2';
+        </script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NOERROR" href="ansys.meshing.prime.ErrorCode.NOERROR.html" />
+    <link rel="prev" title="topo_edge_types" href="ansys.meshing.prime.EdgeConnectivityResults.topo_edge_types.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/api/_autosummary/ansys.meshing.prime.ErrorCode.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+</div>
+  </div>
+  
+    
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../contributing/index.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.2  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+
+    
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+    
+
+    
+    <div class="container-xl">
+    <div class="row">
+        <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+        <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+          
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+    
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="https://docs.pyansys.com/">PyAnsys</a> » </li>
+    
+    
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyPrimeMesh</a> » </li>
+    
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> » </li>
+          <li class="nav-item nav-item-2"><a href="ansys.meshing.prime.html" accesskey="U">ansys.meshing.prime</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">ErrorCode</a></li> 
+      </ul>
+    </div>
+        </div>
+  </div>
+</div>
+    
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../contributing/index.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.2  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ansys.meshing.prime.html">ansys.meshing.prime</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.disable_optimizing_numpy_arrays.html">disable_optimizing_numpy_arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.enable_optimizing_numpy_arrays.html">enable_optimizing_numpy_arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.is_optimizing_numpy_arrays.html">is_optimizing_numpy_arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.launch_prime.html">launch_prime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.launch_server_process.html">launch_server_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.local_model.html">local_model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.numpy_array_optimization_disabled.html">numpy_array_optimization_disabled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.numpy_array_optimization_enabled.html">numpy_array_optimization_enabled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AddLabelResults.html">AddLabelResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AddThicknessParams.html">AddThicknessParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AddThicknessResults.html">AddThicknessResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AddToZoneResults.html">AddToZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AdvancedSurferSetup.html">AdvancedSurferSetup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AutoMesh.html">AutoMesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AutoMeshParams.html">AutoMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AutoMeshResults.html">AutoMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.AutoNodeMoveParams.html">AutoNodeMoveParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoiSizingParams.html">BoiSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundaryFittedSpline.html">BoundaryFittedSpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundaryFittedSplineParams.html">BoundaryFittedSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundingBox.html">BoundingBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CadFaceter.html">CadFaceter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CadReaderRoute.html">CadReaderRoute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.html">CadRefacetingMaxEdgeSizeLimit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CadRefacetingParams.html">CadRefacetingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CadRefacetingResolution.html">CadRefacetingResolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CellQualityMeasure.html">CellQualityMeasure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CellZoneletType.html">CellZoneletType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CheckMeshParams.html">CheckMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CheckMeshResults.html">CheckMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseParams.html">CollapseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseResults.html">CollapseResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseTool.html">CollapseTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeTopoVolumesResults.html">ComputeTopoVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeVolumesParams.html">ComputeVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeVolumesResults.html">ComputeVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Connect.html">Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ConnectResults.html">ConnectResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ContactPreventionParams.html">ContactPreventionParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ControlData.html">ControlData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ControlPointSelection.html">ControlPointSelection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CopyZoneletsParams.html">CopyZoneletsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CopyZoneletsResults.html">CopyZoneletsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateCapParams.html">CreateCapParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateCapResults.html">CreateCapResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateIntersectionEdgeLoopsParams.html">CreateIntersectionEdgeLoopsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateIntersectionEdgeLoopsResults.html">CreateIntersectionEdgeLoopsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateMaterialPointParams.html">CreateMaterialPointParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateMaterialPointResults.html">CreateMaterialPointResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateVolumeZonesType.html">CreateVolumeZonesType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CreateZoneResults.html">CreateZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CurvatureSizingParams.html">CurvatureSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteFringesAndOverlapsParams.html">DeleteFringesAndOverlapsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteFringesAndOverlapsResults.html">DeleteFringesAndOverlapsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteResults.html">DeleteResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteTool.html">DeleteTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteTopoEntitiesParams.html">DeleteTopoEntitiesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteTopoEntitiesResults.html">DeleteTopoEntitiesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteUnwettedParams.html">DeleteUnwettedParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteUnwettedResult.html">DeleteUnwettedResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteVolumesParams.html">DeleteVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteVolumesResults.html">DeleteVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.DeleteZoneResults.html">DeleteZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.EdgeConnectivityResults.html">EdgeConnectivityResults</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">ErrorCode</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOERROR.html">NOERROR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNKNOWN.html">UNKNOWN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIGSEGV.html">SIGSEGV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERFAILED.html">SURFERFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOPOFACESREMESHFAILED.html">TOPOFACESREMESHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOPOEDGESREMESHFAILED.html">TOPOEDGESREMESHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERLAYEREDQUADFAILED.html">SURFERLAYEREDQUADFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDINPUT.html">SURFERINVALIDINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERQUADFAILED.html">SURFERQUADFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.FACEZONELETSFEATURESNOTUPTODATE.html">FACEZONELETSFEATURESNOTUPTODATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEQUADUNSUPPORTED.html">SURFERAUTOSIZEQUADUNSUPPORTED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEMUSTBEVOLUMETRIC.html">SURFERAUTOSIZEMUSTBEVOLUMETRIC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERNONMANIFOLDEDGE.html">SURFERNONMANIFOLDEDGE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDCONSTANTSIZE.html">SURFERINVALIDCONSTANTSIZE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDMINORMAXSIZES.html">SURFERINVALIDMINORMAXSIZES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDANGLES.html">SURFERINVALIDANGLES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO.html">SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.LOCALSURFERINVALIDNUMRINGS.html">LOCALSURFERINVALIDNUMRINGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS.html">SURFERCANNOTREMESHPERIODICZONELETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO.html">SCAFFOLDERBADINPUTEMPTYTOPO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES.html">SCAFFOLDERBADINPUTNOFREEFACES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTPARAMS.html">SCAFFOLDERBADINPUTPARAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL.html">SCAFFOLDERINVALIDABSOLUTEDISTOL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE.html">SCAFFOLDERINVALIDCONSTANTMESHSIZE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTOMESHFAILED.html">AUTOMESHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AITOVERLAPALONGMULTIFOUND.html">AITOVERLAPALONGMULTIFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TRIANGULATIONFAILED.html">TRIANGULATIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DUPLICATENODESFOUND.html">DUPLICATENODESFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EDGEINTERSECTINGFACEFOUND.html">EDGEINTERSECTINGFACEFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DUPLICATEFACESFOUND.html">DUPLICATEFACESFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TETIMPROVEFAILED.html">TETIMPROVEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTONODEMOVEFAILED.html">AUTONODEMOVEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ALREADYVOLUMEMESHED.html">ALREADYVOLUMEMESHED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS.html">INVALIDPRISMCONTROLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMESNOTUPTODATE.html">VOLUMESNOTUPTODATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS.html">QUADRATICMESHSUPPORTEDONLYFORTETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOACTIVESFFOUND.html">NOACTIVESFFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTOMESHINVALIDMAXSIZE.html">AUTOMESHINVALIDMAXSIZE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTOMESHHEXCOREFAILED.html">AUTOMESHHEXCOREFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDVOLUMECONTROLS.html">INVALIDVOLUMECONTROLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY.html">INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDFIRSTASPECTRATIO.html">INVALIDFIRSTASPECTRATIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDLASTASPECTRATIO.html">INVALIDLASTASPECTRATIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDFIRSTHEIGHT.html">INVALIDFIRSTHEIGHT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDLAYERS.html">INVALIDLAYERS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDGROWTHRATE.html">INVALIDGROWTHRATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.COMPUTEVOLUMESFAILED.html">COMPUTEVOLUMESFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDINPARALLEL.html">QUADRATICTETNOTSUPPORTEDINPARALLEL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS.html">QUADRATICTETNOTSUPPORTEDWITHPRISMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTVOLUMESFAILED.html">EXTRACTVOLUMESFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.OUTOFMEMORY.html">OUTOFMEMORY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INTERRUPTED.html">INTERRUPTED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.GETSTATISTICSFAILED.html">GETSTATISTICSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.GETELEMENTCOUNTFAILED.html">GETELEMENTCOUNTFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTNOTFOUND.html">PARTNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOPODATANOTFOUND.html">TOPODATANOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIZEFIELDNOTFOUND.html">SIZEFIELDNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONESARENOTOFSAMETYPE.html">ZONESARENOTOFSAMETYPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTNOTMESHED.html">PARTNOTMESHED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDINPUTPART.html">INVALIDINPUTPART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CADGEOMETRYNOTFOUND.html">CADGEOMETRYNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMENOTFOUND.html">VOLUMENOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONENOTFOUND.html">ZONENOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS.html">ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTDOESNOTHAVETOPOLOGY.html">PARTDOESNOTHAVETOPOLOGY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONESARENOTSUPPORTEDFORCELLZONELETS.html">ZONESARENOTSUPPORTEDFORCELLZONELETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SPHEREATINVALIDNORMALNODESFAILED.html">SPHEREATINVALIDNORMALNODESFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PROJECTONCADGEOMETRYFAILED.html">PROJECTONCADGEOMETRYFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SEPARATIONRESULTSFAILED.html">SEPARATIONRESULTSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONELETSARENOTOFSAMEDIMENSION.html">ZONELETSARENOTOFSAMEDIMENSION</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIZEFIELDCOMPUTATIONFAILED.html">SIZEFIELDCOMPUTATIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLS.html">INVALIDSIZECONTROLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.REFRESHSIZEFIELDSFAILED.html">REFRESHSIZEFIELDSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READMESHFAILED.html">READMESHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITEMESHFAILED.html">WRITEMESHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CADIMPORTFAILED.html">CADIMPORTFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READSIZEFIELDFAILED.html">READSIZEFIELDFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READCDBFAILED.html">READCDBFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITECDBFAILED.html">WRITECDBFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PATHNOTFOUND.html">PATHNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READKEYWORDFILEFAILED.html">READKEYWORDFILEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITEKEYWORDFILEFAILED.html">WRITEKEYWORDFILEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICMESH_WRITEMESHFAILED.html">QUADRATICMESH_WRITEMESHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INCLUDEKFILENOTFOUND.html">INCLUDEKFILENOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READSIZECONTROLFAILED.html">READSIZECONTROLFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITESIZECONTROLFAILED.html">WRITESIZECONTROLFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.FILENOTFOUND.html">FILENOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READPMDATFAILED.html">READPMDATFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXPORTFLUENTCASEFAILED.html">EXPORTFLUENTCASEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE.html">VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IMPORTFLUENTMESHINGMSHFAILED.html">IMPORTFLUENTMESHINGMSHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IMPORTFLUENTCASEFAILED.html">IMPORTFLUENTCASEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITEPMDATFAILED.html">WRITEPMDATFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXPORTFLUENTMESHINGMSHFAILED.html">EXPORTFLUENTMESHINGMSHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITESIZEFIELDFAILED.html">WRITESIZEFIELDFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH.html">MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART.html">NOTSUPPORTEDFORTOPOLOGYPART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART.html">NOTSUPPORTEDFORHIGHERORDERMESHPART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE.html">NOTSUPPORTEDFORNONTRIFACEZONE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE.html">NOTSUPPORTEDFORNONQUADFACEZONE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGEPARTSFAILED.html">MERGEPARTSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO.html">MERGEPARTSWANDWOTOPO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SETNAMEFAILED.html">SETNAMEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CONTROLNOTFOUND.html">CONTROLNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOINPUT.html">NOINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEPARTSFAILED.html">DELETEPARTSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETECONTROLSFAILED.html">DELETECONTROLSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INPUTNOTCOMPLETE.html">INPUTNOTCOMPLETE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDINPUTZONELETS.html">INVALIDINPUTZONELETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGEZONELETSFAILED.html">MERGEZONELETSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS.html">MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDGLOBALMINMAX.html">INVALIDGLOBALMINMAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLINPUTS.html">INVALIDSIZECONTROLINPUTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLSCOPE.html">INVALIDSIZECONTROLSCOPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDCURVATURESIZINGINPUT.html">INVALIDCURVATURESIZINGINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPROXIMITYSIZINGINPUT.html">INVALIDPROXIMITYSIZINGINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSCOPEENTITYTYPEINPUT.html">INVALIDSCOPEENTITYTYPEINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYANGLEFAILED.html">EXTRACTFEATURESBYANGLEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYEDGESFAILED.html">EXTRACTFEATURESBYEDGESFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CREATEEDGEZONELETFAILED.html">CREATEEDGEZONELETFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYINTERSECTIONFAILED.html">EXTRACTFEATURESBYINTERSECTIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMEMESH_MIDNODESNOTSUPPORTED.html">VOLUMEMESH_MIDNODESNOTSUPPORTED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMEMESHNOTFOUND.html">VOLUMEMESHNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED.html">SPLITANDCOLLAPSEFACEELEMENTSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NURBSOPFAILED.html">IGA_NURBSOPFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE.html">IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT.html">IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NURBSFITTINGFAILED.html">IGA_NURBSFITTINGFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NEGATIVEJACOBIAN.html">IGA_NEGATIVEJACOBIAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_PERIODICKNOTVECTORCONVERSIONFAILED.html">IGA_PERIODICKNOTVECTORCONVERSIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_HREFINEMENTFAILED.html">IGA_HREFINEMENTFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_PREFINEMENTFAILED.html">IGA_PREFINEMENTFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NURBSSMOOTHFAILED.html">IGA_NURBSSMOOTHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NODEINDEXINGFAILED.html">IGA_NODEINDEXINGFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NOCELLZONELETS.html">IGA_NOCELLZONELETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING.html">IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORGENUSZEROFITTING.html">IGA_INVALIDINPUTFILEFORGENUSZEROFITTING</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NOFACEZONELETS.html">IGA_NOFACEZONELETS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED.html">IGA_EDGEPATHCOMPUTATIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INCORRECTDEGREE.html">IGA_INCORRECTDEGREE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_QUADRATICMESHINPUT.html">IGA_QUADRATICMESHINPUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED.html">IGA_UNIFORMTRIMMEDNURBSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTHASTOPOLOGY.html">PARTHASTOPOLOGY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFACESEARCHFAILED.html">SURFACESEARCHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND.html">SURFACESEARCHPARTWITHMESHNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPLANEPOINTS.html">INVALIDPLANEPOINTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PLANECOLLINEARPOINTS.html">PLANECOLLINEARPOINTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDREGISTERID.html">INVALIDREGISTERID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMESEARCHPARTWITHMESHNOTFOUND.html">VOLUMESEARCHPARTWITHMESHNOTFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMESEARCHFAILED.html">VOLUMESEARCHFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDCELLQUALITYLIMIT.html">INVALIDCELLQUALITYLIMIT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.FILLHOLEFAILED.html">FILLHOLEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SUBTRACTZONELETSFAILED.html">SUBTRACTZONELETSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CREATECAPONFACEZONELETSFAILED.html">CREATECAPONFACEZONELETSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNITEZONELETSFAILED.html">UNITEZONELETSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.REFINEATCONTACTSFAILED.html">REFINEATCONTACTSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TRANSFORMATIONFAILED.html">TRANSFORMATIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCALINGFAILED.html">SCALINGFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ALIGNMENTFAILED.html">ALIGNMENTFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDTRANSFORMATIONMATRIX.html">INVALIDTRANSFORMATIONMATRIX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEMESHFACESFAILED.html">DELETEMESHFACESFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEMESHFACES_TOPOLOGYNOTSUPPORTED.html">DELETEMESHFACES_TOPOLOGYNOTSUPPORTED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEMESHFACES_CELLFOUND.html">DELETEMESHFACES_CELLFOUND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEFRINGESANDOVERLAPSFAILED.html">DELETEFRINGESANDOVERLAPSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEZONELETSCONNECTEDTOCELLS.html">DELETEZONELETSCONNECTEDTOCELLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEZONELETSFAILED.html">DELETEZONELETSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS.html">MATERIALPOINTWITHSAMENAMEEXISTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST.html">MATERIALPOINTWITHGIVENNAMEDOESNTEXIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST.html">MATERIALPOINTWITHGIVENIDDOESNTEXIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERGLOBALSETTINGSNOTSET.html">WRAPPERGLOBALSETTINGSNOTSET</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERRESOLVEINTERSECTIONFAILED.html">WRAPPERRESOLVEINTERSECTIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONNECTFAILED.html">WRAPPERCONNECTFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCOULDNOTEXTRACTINTERFACE.html">WRAPPERCOULDNOTEXTRACTINTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERLEAKPREVENTIONFAILED.html">WRAPPERLEAKPREVENTIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERUNSUPPORTEDWRAPREGION.html">WRAPPERUNSUPPORTEDWRAPREGION</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED.html">WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERSURFACEHASHOLES.html">WRAPPERSURFACEHASHOLES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPEROCTREEREGIONINGFAILED.html">WRAPPEROCTREEREGIONINGFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERPROJECTIONFAILED.html">WRAPPERPROJECTIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST.html">WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST.html">WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERSIZINGMETHODNOTSUPPORTED.html">WRAPPERSIZINGMETHODNOTSUPPORTED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERIMPROVEFAILED.html">WRAPPERIMPROVEFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERSIZEFIELDSNOTDEFINED.html">WRAPPERSIZEFIELDSNOTDEFINED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDGEOMETRYSCOPE.html">WRAPPERCONTROL_INVALIDGEOMETRYSCOPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID.html">WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS.html">WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONID.html">WRAPPERCONTROL_INVALIDLEAKPREVENTIONID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS.html">WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID.html">WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE.html">WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDWRAPPERCONTROL.html">INVALIDWRAPPERCONTROL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE.html">WRAPPERCLOSEGAPS_INVALIDGAPSIZE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE.html">WRAPPERCLOSEGAPS_INVALIDSCOPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPSFAILED.html">WRAPPERCLOSEGAPSFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CELLSEPARATIONFAILED.html">CELLSEPARATIONFAILED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOCELLSSEPARATED.html">NOCELLSSEPARATED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIZEFIELDTYPENOTSUPPORTED.html">SIZEFIELDTYPENOTSUPPORTED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT.html">UNSUPPORTEDFILEEXTENSIONFORPMDAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH.html">UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE.html">UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE.html">UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD.html">UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD.html">UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB.html">UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PLUGINLOADFAILURE.html">PLUGINLOADFAILURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TARGETZONELETS_SELFINTERSECTING.html">TARGETZONELETS_SELFINTERSECTING</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TARGETZONELETS_NOTWATERTIGHT.html">TARGETZONELETS_NOTWATERTIGHT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOOLZONELETS_SELFINTERSECTING.html">TOOLZONELETS_SELFINTERSECTING</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOOLZONELETS_NOTWATERTIGHT.html">TOOLZONELETS_NOTWATERTIGHT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportBoundaryFittedSplineParams.html">ExportBoundaryFittedSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportFluentCaseParams.html">ExportFluentCaseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportFluentMeshingMeshParams.html">ExportFluentMeshingMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportMapdlCdbParams.html">ExportMapdlCdbParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportMapdlCdbResults.html">ExportMapdlCdbResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractFeatureParams.html">ExtractFeatureParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractFeatureResults.html">ExtractFeatureResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractTopoVolumesParams.html">ExtractTopoVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractTopoVolumesResults.html">ExtractTopoVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractVolumesParams.html">ExtractVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractVolumesResults.html">ExtractVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExtractedFeatureIds.html">ExtractedFeatureIds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FaceAndEdgeConnectivityParams.html">FaceAndEdgeConnectivityParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FaceAndEdgeConnectivityResults.html">FaceAndEdgeConnectivityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FaceConnectivityResults.html">FaceConnectivityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FaceQualityMeasure.html">FaceQualityMeasure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FeatureRecoveryParams.html">FeatureRecoveryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FileIO.html">FileIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FileReadParams.html">FileReadParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FileReadResults.html">FileReadResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FileWriteParams.html">FileWriteParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FileWriteResults.html">FileWriteResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FillHolesAtPlaneParams.html">FillHolesAtPlaneParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.FillHolesAtPlaneResults.html">FillHolesAtPlaneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.GlobalSizingParams.html">GlobalSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HardSizingParams.html">HardSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAResults.html">IGAResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGASpline.html">IGASpline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportCadParams.html">ImportCadParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportCadResults.html">ImportCadResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportFluentCaseParams.html">ImportFluentCaseParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportFluentCaseResults.html">ImportFluentCaseResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportFluentMeshingMeshParams.html">ImportFluentMeshingMeshParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportFluentMeshingMeshResults.html">ImportFluentMeshingMeshResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportMapdlCdbParams.html">ImportMapdlCdbParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportMapdlCdbResults.html">ImportMapdlCdbResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IntersectParams.html">IntersectParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IntersectionMask.html">IntersectionMask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.JoinParams.html">JoinParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.JoinSeparateMethod.html">JoinSeparateMethod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LeakPreventionParams.html">LeakPreventionParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LengthUnit.html">LengthUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LocalSurferParams.html">LocalSurferParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LocalSurferResults.html">LocalSurferResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MatchNodesOption.html">MatchNodesOption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MaterialPointManager.html">MaterialPointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MaterialPointType.html">MaterialPointType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MergePartsParams.html">MergePartsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MergePartsResults.html">MergePartsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MergeVolumesParams.html">MergeVolumesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MergeVolumesResults.html">MergeVolumesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MergeZoneletsParams.html">MergeZoneletsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MergeZoneletsResults.html">MergeZoneletsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MeshInfo.html">MeshInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MeshMatchParams.html">MeshMatchParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.MeshedSizingParams.html">MeshedSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.NamePatternParams.html">NamePatternParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Part.html">Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PartCreationType.html">PartCreationType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PartSummaryParams.html">PartSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PartSummaryResults.html">PartSummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PartZonelets.html">PartZonelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrismControl.html">PrismControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrismControlGrowthParams.html">PrismControlGrowthParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrismControlOffsetType.html">PrismControlOffsetType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrismParams.html">PrismParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ProximitySizingParams.html">ProximitySizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ReadSizeFieldParams.html">ReadSizeFieldParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineAtContactsParams.html">RefineAtContactsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineAtContactsResults.html">RefineAtContactsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineSplineParams.html">RefineSplineParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RemoveLabelResults.html">RemoveLabelResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RemoveZoneResults.html">RemoveZoneResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ResolveIntersectionResult.html">ResolveIntersectionResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ResolveIntersectionsParams.html">ResolveIntersectionsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Scaffolder.html">Scaffolder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderMergeResults.html">ScaffolderMergeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderParams.html">ScaffolderParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderResults.html">ScaffolderResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderSplitResults.html">ScaffolderSplitResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeDefinition.html">ScopeDefinition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeEntity.html">ScopeEntity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeEvaluationType.html">ScopeEvaluationType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeExpressionType.html">ScopeExpressionType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeZoneletParams.html">ScopeZoneletParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByFoldsParams.html">SearchByFoldsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByFoldsResults.html">SearchByFoldsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByIntersectionResults.html">SearchByIntersectionResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByQualityParams.html">SearchByQualityParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByQualityResults.html">SearchByQualityResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchBySelfIntersectionParams.html">SearchBySelfIntersectionParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchBySpikeParams.html">SearchBySpikeParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchBySpikeResults.html">SearchBySpikeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByThinStripParams.html">SearchByThinStripParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SearchByThinStripResults.html">SearchByThinStripResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SetContactPreventionsResults.html">SetContactPreventionsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SetFeatureRecoveriesResults.html">SetFeatureRecoveriesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SetLeakPreventionsResults.html">SetLeakPreventionsResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SetNameResults.html">SetNameResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SetScopeResults.html">SetScopeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SetSizingResults.html">SetSizingResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizeControl.html">SizeControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizeControlSummaryParams.html">SizeControlSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizeControlSummaryResult.html">SizeControlSummaryResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizeField.html">SizeField</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizeFieldFileReadResults.html">SizeFieldFileReadResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizeFieldType.html">SizeFieldType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SizingType.html">SizingType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SmoothDihedralFaceNodesParams.html">SmoothDihedralFaceNodesParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SmoothDihedralFaceNodesResults.html">SmoothDihedralFaceNodesResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SoftSizingParams.html">SoftSizingParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SolverType.html">SolverType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineRefinementType.html">SplineRefinementType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplitParams.html">SplitParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.StitchParams.html">StitchParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.StitchType.html">StitchType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceDiagnosticSummaryParams.html">SurfaceDiagnosticSummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceDiagnosticSummaryResults.html">SurfaceDiagnosticSummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceFeatureType.html">SurfaceFeatureType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceQualityResult.html">SurfaceQualityResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceQualitySummaryParams.html">SurfaceQualitySummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceQualitySummaryResults.html">SurfaceQualitySummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceSearch.html">SurfaceSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurfaceUtilities.html">SurfaceUtilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Surfer.html">Surfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurferParams.html">SurferParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurferResults.html">SurferResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TetParams.html">TetParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TopoFillHoleParams.html">TopoFillHoleParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TopoFillHoleResult.html">TopoFillHoleResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TopoUtilities.html">TopoUtilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Transform.html">Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TransformParams.html">TransformParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TransformResults.html">TransformResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeControl.html">VolumeControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeControlParams.html">VolumeControlParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.html">VolumeFillType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeMeshTool.html">VolumeMeshTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeMeshToolResults.html">VolumeMeshToolResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeNamingType.html">VolumeNamingType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeQualityResultsPart.html">VolumeQualityResultsPart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeQualitySummaryParams.html">VolumeQualitySummaryParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeQualitySummaryResults.html">VolumeQualitySummaryResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumeSearch.html">VolumeSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumetricScaffolderParams.html">VolumetricScaffolderParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumetricSizeFieldComputeParams.html">VolumetricSizeFieldComputeParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VolumetricSizeFieldComputeResults.html">VolumetricSizeFieldComputeResults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WarningCode.html">WarningCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapParams.html">WrapParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapRegion.html">WrapRegion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapResult.html">WrapResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Wrapper.html">Wrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperCloseGapsParams.html">WrapperCloseGapsParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperCloseGapsResult.html">WrapperCloseGapsResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperControl.html">WrapperControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperImproveQualityParams.html">WrapperImproveQualityParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperImproveResult.html">WrapperImproveResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WriteSizeFieldParams.html">WriteSizeFieldParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ZoneType.html">ZoneType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrimeRuntimeError.html">PrimeRuntimeError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrimeRuntimeWarning.html">PrimeRuntimeWarning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.examples.html">ansys.meshing.prime.examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.lucid.html">ansys.meshing.prime.lucid</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="errorcode">
+<h1>ErrorCode<a class="headerlink" href="#errorcode" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.meshing.prime.ErrorCode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.</span></span><span class="sig-name descname"><span class="pre">ErrorCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.ErrorCode" title="Permalink to this definition">#</a></dt>
+<dd><p>Error codes associated with the failure of PyPrimeMesh operation.</p>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOERROR.html#ansys.meshing.prime.ErrorCode.NOERROR" title="ansys.meshing.prime.ErrorCode.NOERROR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOERROR</span></code></a></p></td>
+<td><p>No error.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNKNOWN.html#ansys.meshing.prime.ErrorCode.UNKNOWN" title="ansys.meshing.prime.ErrorCode.UNKNOWN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNKNOWN</span></code></a></p></td>
+<td><p>Unknown error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIGSEGV.html#ansys.meshing.prime.ErrorCode.SIGSEGV" title="ansys.meshing.prime.ErrorCode.SIGSEGV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SIGSEGV</span></code></a></p></td>
+<td><p>Segmentation violation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERFAILED.html#ansys.meshing.prime.ErrorCode.SURFERFAILED" title="ansys.meshing.prime.ErrorCode.SURFERFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERFAILED</span></code></a></p></td>
+<td><p>Surface meshing failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOPOFACESREMESHFAILED.html#ansys.meshing.prime.ErrorCode.TOPOFACESREMESHFAILED" title="ansys.meshing.prime.ErrorCode.TOPOFACESREMESHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TOPOFACESREMESHFAILED</span></code></a></p></td>
+<td><p>Failed to remesh topofaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOPOEDGESREMESHFAILED.html#ansys.meshing.prime.ErrorCode.TOPOEDGESREMESHFAILED" title="ansys.meshing.prime.ErrorCode.TOPOEDGESREMESHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TOPOEDGESREMESHFAILED</span></code></a></p></td>
+<td><p>Failed to remesh topoedges.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERLAYEREDQUADFAILED.html#ansys.meshing.prime.ErrorCode.SURFERLAYEREDQUADFAILED" title="ansys.meshing.prime.ErrorCode.SURFERLAYEREDQUADFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERLAYEREDQUADFAILED</span></code></a></p></td>
+<td><p>Failed to layer quad meshing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDINPUT.html#ansys.meshing.prime.ErrorCode.SURFERINVALIDINPUT" title="ansys.meshing.prime.ErrorCode.SURFERINVALIDINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERINVALIDINPUT</span></code></a></p></td>
+<td><p>Invalid input for surface meshing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERQUADFAILED.html#ansys.meshing.prime.ErrorCode.SURFERQUADFAILED" title="ansys.meshing.prime.ErrorCode.SURFERQUADFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERQUADFAILED</span></code></a></p></td>
+<td><p>Quad surface meshing failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.FACEZONELETSFEATURESNOTUPTODATE.html#ansys.meshing.prime.ErrorCode.FACEZONELETSFEATURESNOTUPTODATE" title="ansys.meshing.prime.ErrorCode.FACEZONELETSFEATURESNOTUPTODATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.FACEZONELETSFEATURESNOTUPTODATE</span></code></a></p></td>
+<td><p>Face zonelets features are not up to date.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEQUADUNSUPPORTED.html#ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEQUADUNSUPPORTED" title="ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEQUADUNSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERAUTOSIZEQUADUNSUPPORTED</span></code></a></p></td>
+<td><p>Auto sizing for quad meshing is not supported.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEMUSTBEVOLUMETRIC.html#ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEMUSTBEVOLUMETRIC" title="ansys.meshing.prime.ErrorCode.SURFERAUTOSIZEMUSTBEVOLUMETRIC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERAUTOSIZEMUSTBEVOLUMETRIC</span></code></a></p></td>
+<td><p>Auto sizing must be of volumetric type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERNONMANIFOLDEDGE.html#ansys.meshing.prime.ErrorCode.SURFERNONMANIFOLDEDGE" title="ansys.meshing.prime.ErrorCode.SURFERNONMANIFOLDEDGE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERNONMANIFOLDEDGE</span></code></a></p></td>
+<td><p>Non manifold edge for meshing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDCONSTANTSIZE.html#ansys.meshing.prime.ErrorCode.SURFERINVALIDCONSTANTSIZE" title="ansys.meshing.prime.ErrorCode.SURFERINVALIDCONSTANTSIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERINVALIDCONSTANTSIZE</span></code></a></p></td>
+<td><p>Invalid size for constant size surface meshing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDMINORMAXSIZES.html#ansys.meshing.prime.ErrorCode.SURFERINVALIDMINORMAXSIZES" title="ansys.meshing.prime.ErrorCode.SURFERINVALIDMINORMAXSIZES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERINVALIDMINORMAXSIZES</span></code></a></p></td>
+<td><p>Invalid min or max size for surface meshing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERINVALIDANGLES.html#ansys.meshing.prime.ErrorCode.SURFERINVALIDANGLES" title="ansys.meshing.prime.ErrorCode.SURFERINVALIDANGLES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERINVALIDANGLES</span></code></a></p></td>
+<td><p>Invalid Corner angle or min angle more than max angle specified for surface meshing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO.html#ansys.meshing.prime.ErrorCode.SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO" title="ansys.meshing.prime.ErrorCode.SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO</span></code></a></p></td>
+<td><p>Smooth size transition option is not supported for topology surface meshing yet.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.LOCALSURFERINVALIDNUMRINGS.html#ansys.meshing.prime.ErrorCode.LOCALSURFERINVALIDNUMRINGS" title="ansys.meshing.prime.ErrorCode.LOCALSURFERINVALIDNUMRINGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.LOCALSURFERINVALIDNUMRINGS</span></code></a></p></td>
+<td><p>Invalid number of rings input for the local surface mesh operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS.html#ansys.meshing.prime.ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS" title="ansys.meshing.prime.ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS</span></code></a></p></td>
+<td><p>Cannot remesh periodic face zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO.html#ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO" title="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO</span></code></a></p></td>
+<td><p>Incorrect input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES.html#ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES" title="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SCAFFOLDERBADINPUTNOFREEFACES</span></code></a></p></td>
+<td><p>Incorrect input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTPARAMS.html#ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTPARAMS" title="ansys.meshing.prime.ErrorCode.SCAFFOLDERBADINPUTPARAMS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SCAFFOLDERBADINPUTPARAMS</span></code></a></p></td>
+<td><p>Incorrect input parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL.html#ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL" title="ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL</span></code></a></p></td>
+<td><p>Invalid absolute distance tolerance for scaffold operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE.html#ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE" title="ansys.meshing.prime.ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE</span></code></a></p></td>
+<td><p>Invalid constant mesh size input for scaffold operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTOMESHFAILED.html#ansys.meshing.prime.ErrorCode.AUTOMESHFAILED" title="ansys.meshing.prime.ErrorCode.AUTOMESHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.AUTOMESHFAILED</span></code></a></p></td>
+<td><p>Auto mesh failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AITOVERLAPALONGMULTIFOUND.html#ansys.meshing.prime.ErrorCode.AITOVERLAPALONGMULTIFOUND" title="ansys.meshing.prime.ErrorCode.AITOVERLAPALONGMULTIFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.AITOVERLAPALONGMULTIFOUND</span></code></a></p></td>
+<td><p>Topology identification failed because of overlapping faces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TRIANGULATIONFAILED.html#ansys.meshing.prime.ErrorCode.TRIANGULATIONFAILED" title="ansys.meshing.prime.ErrorCode.TRIANGULATIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TRIANGULATIONFAILED</span></code></a></p></td>
+<td><p>Triangulation failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DUPLICATENODESFOUND.html#ansys.meshing.prime.ErrorCode.DUPLICATENODESFOUND" title="ansys.meshing.prime.ErrorCode.DUPLICATENODESFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DUPLICATENODESFOUND</span></code></a></p></td>
+<td><p>Duplicate nodes found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EDGEINTERSECTINGFACEFOUND.html#ansys.meshing.prime.ErrorCode.EDGEINTERSECTINGFACEFOUND" title="ansys.meshing.prime.ErrorCode.EDGEINTERSECTINGFACEFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EDGEINTERSECTINGFACEFOUND</span></code></a></p></td>
+<td><p>Edge intersecting face found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DUPLICATEFACESFOUND.html#ansys.meshing.prime.ErrorCode.DUPLICATEFACESFOUND" title="ansys.meshing.prime.ErrorCode.DUPLICATEFACESFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DUPLICATEFACESFOUND</span></code></a></p></td>
+<td><p>Duplicate faces found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TETIMPROVEFAILED.html#ansys.meshing.prime.ErrorCode.TETIMPROVEFAILED" title="ansys.meshing.prime.ErrorCode.TETIMPROVEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TETIMPROVEFAILED</span></code></a></p></td>
+<td><p>Tet improve failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTONODEMOVEFAILED.html#ansys.meshing.prime.ErrorCode.AUTONODEMOVEFAILED" title="ansys.meshing.prime.ErrorCode.AUTONODEMOVEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.AUTONODEMOVEFAILED</span></code></a></p></td>
+<td><p>Auto node move failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ALREADYVOLUMEMESHED.html#ansys.meshing.prime.ErrorCode.ALREADYVOLUMEMESHED" title="ansys.meshing.prime.ErrorCode.ALREADYVOLUMEMESHED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ALREADYVOLUMEMESHED</span></code></a></p></td>
+<td><p>Volume is already meshed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS.html#ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS" title="ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDPRISMCONTROLS</span></code></a></p></td>
+<td><p>Invalid prism controls.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMESNOTUPTODATE.html#ansys.meshing.prime.ErrorCode.VOLUMESNOTUPTODATE" title="ansys.meshing.prime.ErrorCode.VOLUMESNOTUPTODATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMESNOTUPTODATE</span></code></a></p></td>
+<td><p>Volumes are not updated.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS.html#ansys.meshing.prime.ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS" title="ansys.meshing.prime.ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS</span></code></a></p></td>
+<td><p>Quadratic elements can only be generated for tetrahedral elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOACTIVESFFOUND.html#ansys.meshing.prime.ErrorCode.NOACTIVESFFOUND" title="ansys.meshing.prime.ErrorCode.NOACTIVESFFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOACTIVESFFOUND</span></code></a></p></td>
+<td><p>No active size fields found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTOMESHINVALIDMAXSIZE.html#ansys.meshing.prime.ErrorCode.AUTOMESHINVALIDMAXSIZE" title="ansys.meshing.prime.ErrorCode.AUTOMESHINVALIDMAXSIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.AUTOMESHINVALIDMAXSIZE</span></code></a></p></td>
+<td><p>Invalid max size for auto volume meshing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.AUTOMESHHEXCOREFAILED.html#ansys.meshing.prime.ErrorCode.AUTOMESHHEXCOREFAILED" title="ansys.meshing.prime.ErrorCode.AUTOMESHHEXCOREFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.AUTOMESHHEXCOREFAILED</span></code></a></p></td>
+<td><p>Hex generation part of volume meshing failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDVOLUMECONTROLS.html#ansys.meshing.prime.ErrorCode.INVALIDVOLUMECONTROLS" title="ansys.meshing.prime.ErrorCode.INVALIDVOLUMECONTROLS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDVOLUMECONTROLS</span></code></a></p></td>
+<td><p>Invalid volume controls specified for volume meshing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY.html#ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY" title="ansys.meshing.prime.ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY</span></code></a></p></td>
+<td><p>Invalid scope entity.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDFIRSTASPECTRATIO.html#ansys.meshing.prime.ErrorCode.INVALIDFIRSTASPECTRATIO" title="ansys.meshing.prime.ErrorCode.INVALIDFIRSTASPECTRATIO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDFIRSTASPECTRATIO</span></code></a></p></td>
+<td><p>Invalid first aspect ratio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDLASTASPECTRATIO.html#ansys.meshing.prime.ErrorCode.INVALIDLASTASPECTRATIO" title="ansys.meshing.prime.ErrorCode.INVALIDLASTASPECTRATIO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDLASTASPECTRATIO</span></code></a></p></td>
+<td><p>Invalid last aspect ratio.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDFIRSTHEIGHT.html#ansys.meshing.prime.ErrorCode.INVALIDFIRSTHEIGHT" title="ansys.meshing.prime.ErrorCode.INVALIDFIRSTHEIGHT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDFIRSTHEIGHT</span></code></a></p></td>
+<td><p>Invalid first height.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDLAYERS.html#ansys.meshing.prime.ErrorCode.INVALIDLAYERS" title="ansys.meshing.prime.ErrorCode.INVALIDLAYERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDLAYERS</span></code></a></p></td>
+<td><p>Invalid number of layers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDGROWTHRATE.html#ansys.meshing.prime.ErrorCode.INVALIDGROWTHRATE" title="ansys.meshing.prime.ErrorCode.INVALIDGROWTHRATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDGROWTHRATE</span></code></a></p></td>
+<td><p>Invalid growth rate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.COMPUTEVOLUMESFAILED.html#ansys.meshing.prime.ErrorCode.COMPUTEVOLUMESFAILED" title="ansys.meshing.prime.ErrorCode.COMPUTEVOLUMESFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.COMPUTEVOLUMESFAILED</span></code></a></p></td>
+<td><p>Compute volumes failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDINPARALLEL.html#ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDINPARALLEL" title="ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDINPARALLEL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.QUADRATICTETNOTSUPPORTEDINPARALLEL</span></code></a></p></td>
+<td><p>Quadratic tetrahedal meshing is not supported in parallel mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS.html#ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS" title="ansys.meshing.prime.ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS</span></code></a></p></td>
+<td><p>Quadratic tetrahedral meshing is not supported with prism.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTVOLUMESFAILED.html#ansys.meshing.prime.ErrorCode.EXTRACTVOLUMESFAILED" title="ansys.meshing.prime.ErrorCode.EXTRACTVOLUMESFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EXTRACTVOLUMESFAILED</span></code></a></p></td>
+<td><p>Extract volumes failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.OUTOFMEMORY.html#ansys.meshing.prime.ErrorCode.OUTOFMEMORY" title="ansys.meshing.prime.ErrorCode.OUTOFMEMORY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.OUTOFMEMORY</span></code></a></p></td>
+<td><p>Out of memory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INTERRUPTED.html#ansys.meshing.prime.ErrorCode.INTERRUPTED" title="ansys.meshing.prime.ErrorCode.INTERRUPTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INTERRUPTED</span></code></a></p></td>
+<td><p>Method call interrupted.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.GETSTATISTICSFAILED.html#ansys.meshing.prime.ErrorCode.GETSTATISTICSFAILED" title="ansys.meshing.prime.ErrorCode.GETSTATISTICSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.GETSTATISTICSFAILED</span></code></a></p></td>
+<td><p>Failed to get mesh statistics.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.GETELEMENTCOUNTFAILED.html#ansys.meshing.prime.ErrorCode.GETELEMENTCOUNTFAILED" title="ansys.meshing.prime.ErrorCode.GETELEMENTCOUNTFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.GETELEMENTCOUNTFAILED</span></code></a></p></td>
+<td><p>Failed to get element count.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTNOTFOUND.html#ansys.meshing.prime.ErrorCode.PARTNOTFOUND" title="ansys.meshing.prime.ErrorCode.PARTNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PARTNOTFOUND</span></code></a></p></td>
+<td><p>Given part not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOPODATANOTFOUND.html#ansys.meshing.prime.ErrorCode.TOPODATANOTFOUND" title="ansys.meshing.prime.ErrorCode.TOPODATANOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TOPODATANOTFOUND</span></code></a></p></td>
+<td><p>TopoData not found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIZEFIELDNOTFOUND.html#ansys.meshing.prime.ErrorCode.SIZEFIELDNOTFOUND" title="ansys.meshing.prime.ErrorCode.SIZEFIELDNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SIZEFIELDNOTFOUND</span></code></a></p></td>
+<td><p>Size field not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONESARENOTOFSAMETYPE.html#ansys.meshing.prime.ErrorCode.ZONESARENOTOFSAMETYPE" title="ansys.meshing.prime.ErrorCode.ZONESARENOTOFSAMETYPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ZONESARENOTOFSAMETYPE</span></code></a></p></td>
+<td><p>Zones are not of same type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTNOTMESHED.html#ansys.meshing.prime.ErrorCode.PARTNOTMESHED" title="ansys.meshing.prime.ErrorCode.PARTNOTMESHED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PARTNOTMESHED</span></code></a></p></td>
+<td><p>Part is not meshed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDINPUTPART.html#ansys.meshing.prime.ErrorCode.INVALIDINPUTPART" title="ansys.meshing.prime.ErrorCode.INVALIDINPUTPART"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDINPUTPART</span></code></a></p></td>
+<td><p>Invalid input part.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CADGEOMETRYNOTFOUND.html#ansys.meshing.prime.ErrorCode.CADGEOMETRYNOTFOUND" title="ansys.meshing.prime.ErrorCode.CADGEOMETRYNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.CADGEOMETRYNOTFOUND</span></code></a></p></td>
+<td><p>No CAD Geometry found for projections.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMENOTFOUND.html#ansys.meshing.prime.ErrorCode.VOLUMENOTFOUND" title="ansys.meshing.prime.ErrorCode.VOLUMENOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMENOTFOUND</span></code></a></p></td>
+<td><p>Volumes not found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONENOTFOUND.html#ansys.meshing.prime.ErrorCode.ZONENOTFOUND" title="ansys.meshing.prime.ErrorCode.ZONENOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ZONENOTFOUND</span></code></a></p></td>
+<td><p>Given zone not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS.html#ansys.meshing.prime.ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS" title="ansys.meshing.prime.ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS</span></code></a></p></td>
+<td><p>Entities should be added to zone using part it belongs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTDOESNOTHAVETOPOLOGY.html#ansys.meshing.prime.ErrorCode.PARTDOESNOTHAVETOPOLOGY" title="ansys.meshing.prime.ErrorCode.PARTDOESNOTHAVETOPOLOGY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PARTDOESNOTHAVETOPOLOGY</span></code></a></p></td>
+<td><p>Part does not have topology.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONESARENOTSUPPORTEDFORCELLZONELETS.html#ansys.meshing.prime.ErrorCode.ZONESARENOTSUPPORTEDFORCELLZONELETS" title="ansys.meshing.prime.ErrorCode.ZONESARENOTSUPPORTEDFORCELLZONELETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ZONESARENOTSUPPORTEDFORCELLZONELETS</span></code></a></p></td>
+<td><p>Zones are not supported for cell zonelets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SPHEREATINVALIDNORMALNODESFAILED.html#ansys.meshing.prime.ErrorCode.SPHEREATINVALIDNORMALNODESFAILED" title="ansys.meshing.prime.ErrorCode.SPHEREATINVALIDNORMALNODESFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SPHEREATINVALIDNORMALNODESFAILED</span></code></a></p></td>
+<td><p>Sphere creation at invalid normals failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PROJECTONCADGEOMETRYFAILED.html#ansys.meshing.prime.ErrorCode.PROJECTONCADGEOMETRYFAILED" title="ansys.meshing.prime.ErrorCode.PROJECTONCADGEOMETRYFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PROJECTONCADGEOMETRYFAILED</span></code></a></p></td>
+<td><p>Projection on CAD Geometry failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SEPARATIONRESULTSFAILED.html#ansys.meshing.prime.ErrorCode.SEPARATIONRESULTSFAILED" title="ansys.meshing.prime.ErrorCode.SEPARATIONRESULTSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SEPARATIONRESULTSFAILED</span></code></a></p></td>
+<td><p>Separation failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ZONELETSARENOTOFSAMEDIMENSION.html#ansys.meshing.prime.ErrorCode.ZONELETSARENOTOFSAMEDIMENSION" title="ansys.meshing.prime.ErrorCode.ZONELETSARENOTOFSAMEDIMENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ZONELETSARENOTOFSAMEDIMENSION</span></code></a></p></td>
+<td><p>Zonelets are not of same dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIZEFIELDCOMPUTATIONFAILED.html#ansys.meshing.prime.ErrorCode.SIZEFIELDCOMPUTATIONFAILED" title="ansys.meshing.prime.ErrorCode.SIZEFIELDCOMPUTATIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SIZEFIELDCOMPUTATIONFAILED</span></code></a></p></td>
+<td><p>Size field computation failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLS.html#ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLS" title="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDSIZECONTROLS</span></code></a></p></td>
+<td><p>Invalid size controls.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.REFRESHSIZEFIELDSFAILED.html#ansys.meshing.prime.ErrorCode.REFRESHSIZEFIELDSFAILED" title="ansys.meshing.prime.ErrorCode.REFRESHSIZEFIELDSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.REFRESHSIZEFIELDSFAILED</span></code></a></p></td>
+<td><p>Refreshing size field failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READMESHFAILED.html#ansys.meshing.prime.ErrorCode.READMESHFAILED" title="ansys.meshing.prime.ErrorCode.READMESHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.READMESHFAILED</span></code></a></p></td>
+<td><p>Reading mesh file failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITEMESHFAILED.html#ansys.meshing.prime.ErrorCode.WRITEMESHFAILED" title="ansys.meshing.prime.ErrorCode.WRITEMESHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRITEMESHFAILED</span></code></a></p></td>
+<td><p>Writing mesh file failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CADIMPORTFAILED.html#ansys.meshing.prime.ErrorCode.CADIMPORTFAILED" title="ansys.meshing.prime.ErrorCode.CADIMPORTFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.CADIMPORTFAILED</span></code></a></p></td>
+<td><p>CAD import failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READSIZEFIELDFAILED.html#ansys.meshing.prime.ErrorCode.READSIZEFIELDFAILED" title="ansys.meshing.prime.ErrorCode.READSIZEFIELDFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.READSIZEFIELDFAILED</span></code></a></p></td>
+<td><p>Reading size field file failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READCDBFAILED.html#ansys.meshing.prime.ErrorCode.READCDBFAILED" title="ansys.meshing.prime.ErrorCode.READCDBFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.READCDBFAILED</span></code></a></p></td>
+<td><p>Reading CDB file failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITECDBFAILED.html#ansys.meshing.prime.ErrorCode.WRITECDBFAILED" title="ansys.meshing.prime.ErrorCode.WRITECDBFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRITECDBFAILED</span></code></a></p></td>
+<td><p>Writing CDB file failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PATHNOTFOUND.html#ansys.meshing.prime.ErrorCode.PATHNOTFOUND" title="ansys.meshing.prime.ErrorCode.PATHNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PATHNOTFOUND</span></code></a></p></td>
+<td><p>Invalid path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READKEYWORDFILEFAILED.html#ansys.meshing.prime.ErrorCode.READKEYWORDFILEFAILED" title="ansys.meshing.prime.ErrorCode.READKEYWORDFILEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.READKEYWORDFILEFAILED</span></code></a></p></td>
+<td><p>Reading LS-Dyna Keyword file failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITEKEYWORDFILEFAILED.html#ansys.meshing.prime.ErrorCode.WRITEKEYWORDFILEFAILED" title="ansys.meshing.prime.ErrorCode.WRITEKEYWORDFILEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRITEKEYWORDFILEFAILED</span></code></a></p></td>
+<td><p>Writing LS-Dyna Keyword file failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.QUADRATICMESH_WRITEMESHFAILED.html#ansys.meshing.prime.ErrorCode.QUADRATICMESH_WRITEMESHFAILED" title="ansys.meshing.prime.ErrorCode.QUADRATICMESH_WRITEMESHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.QUADRATICMESH_WRITEMESHFAILED</span></code></a></p></td>
+<td><p>Writing failed with quadratic mesh.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INCLUDEKFILENOTFOUND.html#ansys.meshing.prime.ErrorCode.INCLUDEKFILENOTFOUND" title="ansys.meshing.prime.ErrorCode.INCLUDEKFILENOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INCLUDEKFILENOTFOUND</span></code></a></p></td>
+<td><p>Include keyword file not found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READSIZECONTROLFAILED.html#ansys.meshing.prime.ErrorCode.READSIZECONTROLFAILED" title="ansys.meshing.prime.ErrorCode.READSIZECONTROLFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.READSIZECONTROLFAILED</span></code></a></p></td>
+<td><p>Reading size control file failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITESIZECONTROLFAILED.html#ansys.meshing.prime.ErrorCode.WRITESIZECONTROLFAILED" title="ansys.meshing.prime.ErrorCode.WRITESIZECONTROLFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRITESIZECONTROLFAILED</span></code></a></p></td>
+<td><p>Writing size control file failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.FILENOTFOUND.html#ansys.meshing.prime.ErrorCode.FILENOTFOUND" title="ansys.meshing.prime.ErrorCode.FILENOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.FILENOTFOUND</span></code></a></p></td>
+<td><p>File path or name not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.READPMDATFAILED.html#ansys.meshing.prime.ErrorCode.READPMDATFAILED" title="ansys.meshing.prime.ErrorCode.READPMDATFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.READPMDATFAILED</span></code></a></p></td>
+<td><p>PMDAT file read failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXPORTFLUENTCASEFAILED.html#ansys.meshing.prime.ErrorCode.EXPORTFLUENTCASEFAILED" title="ansys.meshing.prime.ErrorCode.EXPORTFLUENTCASEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EXPORTFLUENTCASEFAILED</span></code></a></p></td>
+<td><p>Export fluent case failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE.html#ansys.meshing.prime.ErrorCode.VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE" title="ansys.meshing.prime.ErrorCode.VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE</span></code></a></p></td>
+<td><p>Volume zones are not found to export fluent case.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IMPORTFLUENTMESHINGMSHFAILED.html#ansys.meshing.prime.ErrorCode.IMPORTFLUENTMESHINGMSHFAILED" title="ansys.meshing.prime.ErrorCode.IMPORTFLUENTMESHINGMSHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IMPORTFLUENTMESHINGMSHFAILED</span></code></a></p></td>
+<td><p>Failed to import fluent meshing mesh file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IMPORTFLUENTCASEFAILED.html#ansys.meshing.prime.ErrorCode.IMPORTFLUENTCASEFAILED" title="ansys.meshing.prime.ErrorCode.IMPORTFLUENTCASEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IMPORTFLUENTCASEFAILED</span></code></a></p></td>
+<td><p>Failed to import fluent case file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITEPMDATFAILED.html#ansys.meshing.prime.ErrorCode.WRITEPMDATFAILED" title="ansys.meshing.prime.ErrorCode.WRITEPMDATFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRITEPMDATFAILED</span></code></a></p></td>
+<td><p>Failed to write PMDAT file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXPORTFLUENTMESHINGMSHFAILED.html#ansys.meshing.prime.ErrorCode.EXPORTFLUENTMESHINGMSHFAILED" title="ansys.meshing.prime.ErrorCode.EXPORTFLUENTMESHINGMSHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EXPORTFLUENTMESHINGMSHFAILED</span></code></a></p></td>
+<td><p>Export fluent meshing mesh failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRITESIZEFIELDFAILED.html#ansys.meshing.prime.ErrorCode.WRITESIZEFIELDFAILED" title="ansys.meshing.prime.ErrorCode.WRITESIZEFIELDFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRITESIZEFIELDFAILED</span></code></a></p></td>
+<td><p>Writing size field failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH.html#ansys.meshing.prime.ErrorCode.MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH" title="ansys.meshing.prime.ErrorCode.MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH</span></code></a></p></td>
+<td><p>Mesh not found to export fluent meshing mesh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART.html#ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART" title="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOTSUPPORTEDFORTOPOLOGYPART</span></code></a></p></td>
+<td><p>Not supported for part with topology data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART.html#ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART" title="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART</span></code></a></p></td>
+<td><p>Operation does not support higher order elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE.html#ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE" title="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE</span></code></a></p></td>
+<td><p>Only triangular face zone is supported.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE.html#ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE" title="ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOTSUPPORTEDFORNONQUADFACEZONE</span></code></a></p></td>
+<td><p>Operation supports only quads.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGEPARTSFAILED.html#ansys.meshing.prime.ErrorCode.MERGEPARTSFAILED" title="ansys.meshing.prime.ErrorCode.MERGEPARTSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MERGEPARTSFAILED</span></code></a></p></td>
+<td><p>Merge parts failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO.html#ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO" title="ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MERGEPARTSWANDWOTOPO</span></code></a></p></td>
+<td><p>Merge parts with topology and parts without topology are not supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SETNAMEFAILED.html#ansys.meshing.prime.ErrorCode.SETNAMEFAILED" title="ansys.meshing.prime.ErrorCode.SETNAMEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SETNAMEFAILED</span></code></a></p></td>
+<td><p>Set name failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CONTROLNOTFOUND.html#ansys.meshing.prime.ErrorCode.CONTROLNOTFOUND" title="ansys.meshing.prime.ErrorCode.CONTROLNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.CONTROLNOTFOUND</span></code></a></p></td>
+<td><p>Control not found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOINPUT.html#ansys.meshing.prime.ErrorCode.NOINPUT" title="ansys.meshing.prime.ErrorCode.NOINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOINPUT</span></code></a></p></td>
+<td><p>No input provided.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEPARTSFAILED.html#ansys.meshing.prime.ErrorCode.DELETEPARTSFAILED" title="ansys.meshing.prime.ErrorCode.DELETEPARTSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEPARTSFAILED</span></code></a></p></td>
+<td><p>Delete parts failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETECONTROLSFAILED.html#ansys.meshing.prime.ErrorCode.DELETECONTROLSFAILED" title="ansys.meshing.prime.ErrorCode.DELETECONTROLSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETECONTROLSFAILED</span></code></a></p></td>
+<td><p>Delete controls failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INPUTNOTCOMPLETE.html#ansys.meshing.prime.ErrorCode.INPUTNOTCOMPLETE" title="ansys.meshing.prime.ErrorCode.INPUTNOTCOMPLETE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INPUTNOTCOMPLETE</span></code></a></p></td>
+<td><p>Input provided is incomplete.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDINPUTZONELETS.html#ansys.meshing.prime.ErrorCode.INVALIDINPUTZONELETS" title="ansys.meshing.prime.ErrorCode.INVALIDINPUTZONELETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDINPUTZONELETS</span></code></a></p></td>
+<td><p>Invalid input zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGEZONELETSFAILED.html#ansys.meshing.prime.ErrorCode.MERGEZONELETSFAILED" title="ansys.meshing.prime.ErrorCode.MERGEZONELETSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MERGEZONELETSFAILED</span></code></a></p></td>
+<td><p>Merge zonelets failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS.html#ansys.meshing.prime.ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS" title="ansys.meshing.prime.ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS</span></code></a></p></td>
+<td><p>Merge small zonelets option is supported for only face zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDGLOBALMINMAX.html#ansys.meshing.prime.ErrorCode.INVALIDGLOBALMINMAX" title="ansys.meshing.prime.ErrorCode.INVALIDGLOBALMINMAX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDGLOBALMINMAX</span></code></a></p></td>
+<td><p>Invalid global min and max value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLINPUTS.html#ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLINPUTS" title="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLINPUTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDSIZECONTROLINPUTS</span></code></a></p></td>
+<td><p>Invalid size control input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLSCOPE.html#ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLSCOPE" title="ansys.meshing.prime.ErrorCode.INVALIDSIZECONTROLSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDSIZECONTROLSCOPE</span></code></a></p></td>
+<td><p>Invalid size control scope.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDCURVATURESIZINGINPUT.html#ansys.meshing.prime.ErrorCode.INVALIDCURVATURESIZINGINPUT" title="ansys.meshing.prime.ErrorCode.INVALIDCURVATURESIZINGINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDCURVATURESIZINGINPUT</span></code></a></p></td>
+<td><p>Invalid curvature sizing input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPROXIMITYSIZINGINPUT.html#ansys.meshing.prime.ErrorCode.INVALIDPROXIMITYSIZINGINPUT" title="ansys.meshing.prime.ErrorCode.INVALIDPROXIMITYSIZINGINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDPROXIMITYSIZINGINPUT</span></code></a></p></td>
+<td><p>Invalid proximity sizing input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDSCOPEENTITYTYPEINPUT.html#ansys.meshing.prime.ErrorCode.INVALIDSCOPEENTITYTYPEINPUT" title="ansys.meshing.prime.ErrorCode.INVALIDSCOPEENTITYTYPEINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDSCOPEENTITYTYPEINPUT</span></code></a></p></td>
+<td><p>Invalid input scope entity type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYANGLEFAILED.html#ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYANGLEFAILED" title="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYANGLEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EXTRACTFEATURESBYANGLEFAILED</span></code></a></p></td>
+<td><p>Feature extraction by angle failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYEDGESFAILED.html#ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYEDGESFAILED" title="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYEDGESFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EXTRACTFEATURESBYEDGESFAILED</span></code></a></p></td>
+<td><p>Extracting features by angle failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CREATEEDGEZONELETFAILED.html#ansys.meshing.prime.ErrorCode.CREATEEDGEZONELETFAILED" title="ansys.meshing.prime.ErrorCode.CREATEEDGEZONELETFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.CREATEEDGEZONELETFAILED</span></code></a></p></td>
+<td><p>Creating edge zonelet failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYINTERSECTIONFAILED.html#ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYINTERSECTIONFAILED" title="ansys.meshing.prime.ErrorCode.EXTRACTFEATURESBYINTERSECTIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.EXTRACTFEATURESBYINTERSECTIONFAILED</span></code></a></p></td>
+<td><p>Feature extraction by intersection failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMEMESH_MIDNODESNOTSUPPORTED.html#ansys.meshing.prime.ErrorCode.VOLUMEMESH_MIDNODESNOTSUPPORTED" title="ansys.meshing.prime.ErrorCode.VOLUMEMESH_MIDNODESNOTSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMEMESH_MIDNODESNOTSUPPORTED</span></code></a></p></td>
+<td><p>Mid side nodes are not supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMEMESHNOTFOUND.html#ansys.meshing.prime.ErrorCode.VOLUMEMESHNOTFOUND" title="ansys.meshing.prime.ErrorCode.VOLUMEMESHNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMEMESHNOTFOUND</span></code></a></p></td>
+<td><p>Volume mesh not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED.html#ansys.meshing.prime.ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED" title="ansys.meshing.prime.ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SPLITANDCOLLAPSEFACEELEMENTSFAILED</span></code></a></p></td>
+<td><p>Faield to split and collapse face element(s).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NURBSOPFAILED.html#ansys.meshing.prime.ErrorCode.IGA_NURBSOPFAILED" title="ansys.meshing.prime.ErrorCode.IGA_NURBSOPFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NURBSOPFAILED</span></code></a></p></td>
+<td><p>Spline operation failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE.html#ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE" title="ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE</span></code></a></p></td>
+<td><p>Incorrect control point size with respect to degree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT.html#ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT" title="ansys.meshing.prime.ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT</span></code></a></p></td>
+<td><p>Incorrect control point size with respect to mesh size.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NURBSFITTINGFAILED.html#ansys.meshing.prime.ErrorCode.IGA_NURBSFITTINGFAILED" title="ansys.meshing.prime.ErrorCode.IGA_NURBSFITTINGFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NURBSFITTINGFAILED</span></code></a></p></td>
+<td><p>Spline fitting failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NEGATIVEJACOBIAN.html#ansys.meshing.prime.ErrorCode.IGA_NEGATIVEJACOBIAN" title="ansys.meshing.prime.ErrorCode.IGA_NEGATIVEJACOBIAN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NEGATIVEJACOBIAN</span></code></a></p></td>
+<td><p>Spline has negative jacobian.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_PERIODICKNOTVECTORCONVERSIONFAILED.html#ansys.meshing.prime.ErrorCode.IGA_PERIODICKNOTVECTORCONVERSIONFAILED" title="ansys.meshing.prime.ErrorCode.IGA_PERIODICKNOTVECTORCONVERSIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_PERIODICKNOTVECTORCONVERSIONFAILED</span></code></a></p></td>
+<td><p>Periodic knot conversion of spline failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_HREFINEMENTFAILED.html#ansys.meshing.prime.ErrorCode.IGA_HREFINEMENTFAILED" title="ansys.meshing.prime.ErrorCode.IGA_HREFINEMENTFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_HREFINEMENTFAILED</span></code></a></p></td>
+<td><p>H-refinement of spline failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_PREFINEMENTFAILED.html#ansys.meshing.prime.ErrorCode.IGA_PREFINEMENTFAILED" title="ansys.meshing.prime.ErrorCode.IGA_PREFINEMENTFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_PREFINEMENTFAILED</span></code></a></p></td>
+<td><p>P-refinement of spline failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NURBSSMOOTHFAILED.html#ansys.meshing.prime.ErrorCode.IGA_NURBSSMOOTHFAILED" title="ansys.meshing.prime.ErrorCode.IGA_NURBSSMOOTHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NURBSSMOOTHFAILED</span></code></a></p></td>
+<td><p>Smoothing of spline failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NODEINDEXINGFAILED.html#ansys.meshing.prime.ErrorCode.IGA_NODEINDEXINGFAILED" title="ansys.meshing.prime.ErrorCode.IGA_NODEINDEXINGFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NODEINDEXINGFAILED</span></code></a></p></td>
+<td><p>Hex mesh is unstructured.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NOCELLZONELETS.html#ansys.meshing.prime.ErrorCode.IGA_NOCELLZONELETS" title="ansys.meshing.prime.ErrorCode.IGA_NOCELLZONELETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NOCELLZONELETS</span></code></a></p></td>
+<td><p>No cell zonelets found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING.html#ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING" title="ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING</span></code></a></p></td>
+<td><p>Invalid model for structured hex-mesh spline fitting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORGENUSZEROFITTING.html#ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORGENUSZEROFITTING" title="ansys.meshing.prime.ErrorCode.IGA_INVALIDINPUTFILEFORGENUSZEROFITTING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_INVALIDINPUTFILEFORGENUSZEROFITTING</span></code></a></p></td>
+<td><p>Invalid model for genus-zero spline fitting.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_NOFACEZONELETS.html#ansys.meshing.prime.ErrorCode.IGA_NOFACEZONELETS" title="ansys.meshing.prime.ErrorCode.IGA_NOFACEZONELETS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_NOFACEZONELETS</span></code></a></p></td>
+<td><p>No face zonelets found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED.html#ansys.meshing.prime.ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED" title="ansys.meshing.prime.ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED</span></code></a></p></td>
+<td><p>Edge path computation failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_INCORRECTDEGREE.html#ansys.meshing.prime.ErrorCode.IGA_INCORRECTDEGREE" title="ansys.meshing.prime.ErrorCode.IGA_INCORRECTDEGREE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_INCORRECTDEGREE</span></code></a></p></td>
+<td><p>Incorrect degree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_QUADRATICMESHINPUT.html#ansys.meshing.prime.ErrorCode.IGA_QUADRATICMESHINPUT" title="ansys.meshing.prime.ErrorCode.IGA_QUADRATICMESHINPUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_QUADRATICMESHINPUT</span></code></a></p></td>
+<td><p>Quadratic mesh is not supported for solid spline creation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED.html#ansys.meshing.prime.ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED" title="ansys.meshing.prime.ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.IGA_UNIFORMTRIMMEDNURBSFAILED</span></code></a></p></td>
+<td><p>Uniform trimmed spline creation failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PARTHASTOPOLOGY.html#ansys.meshing.prime.ErrorCode.PARTHASTOPOLOGY" title="ansys.meshing.prime.ErrorCode.PARTHASTOPOLOGY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PARTHASTOPOLOGY</span></code></a></p></td>
+<td><p>Part has a topology.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFACESEARCHFAILED.html#ansys.meshing.prime.ErrorCode.SURFACESEARCHFAILED" title="ansys.meshing.prime.ErrorCode.SURFACESEARCHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFACESEARCHFAILED</span></code></a></p></td>
+<td><p>Surface search failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND.html#ansys.meshing.prime.ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND" title="ansys.meshing.prime.ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND</span></code></a></p></td>
+<td><p>Part with mesh not found for surface quality check.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDPLANEPOINTS.html#ansys.meshing.prime.ErrorCode.INVALIDPLANEPOINTS" title="ansys.meshing.prime.ErrorCode.INVALIDPLANEPOINTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDPLANEPOINTS</span></code></a></p></td>
+<td><p>Invalid plane points, cannot define a plane.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PLANECOLLINEARPOINTS.html#ansys.meshing.prime.ErrorCode.PLANECOLLINEARPOINTS" title="ansys.meshing.prime.ErrorCode.PLANECOLLINEARPOINTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PLANECOLLINEARPOINTS</span></code></a></p></td>
+<td><p>Collinear or duplicate points given to define plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDREGISTERID.html#ansys.meshing.prime.ErrorCode.INVALIDREGISTERID" title="ansys.meshing.prime.ErrorCode.INVALIDREGISTERID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDREGISTERID</span></code></a></p></td>
+<td><p>Invalid register id provided.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMESEARCHPARTWITHMESHNOTFOUND.html#ansys.meshing.prime.ErrorCode.VOLUMESEARCHPARTWITHMESHNOTFOUND" title="ansys.meshing.prime.ErrorCode.VOLUMESEARCHPARTWITHMESHNOTFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMESEARCHPARTWITHMESHNOTFOUND</span></code></a></p></td>
+<td><p>Part with mesh not found for volume quality check.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.VOLUMESEARCHFAILED.html#ansys.meshing.prime.ErrorCode.VOLUMESEARCHFAILED" title="ansys.meshing.prime.ErrorCode.VOLUMESEARCHFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.VOLUMESEARCHFAILED</span></code></a></p></td>
+<td><p>Volume search failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDCELLQUALITYLIMIT.html#ansys.meshing.prime.ErrorCode.INVALIDCELLQUALITYLIMIT" title="ansys.meshing.prime.ErrorCode.INVALIDCELLQUALITYLIMIT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDCELLQUALITYLIMIT</span></code></a></p></td>
+<td><p>Invalid cell quality limit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.FILLHOLEFAILED.html#ansys.meshing.prime.ErrorCode.FILLHOLEFAILED" title="ansys.meshing.prime.ErrorCode.FILLHOLEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.FILLHOLEFAILED</span></code></a></p></td>
+<td><p>Unable to create capping surface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SUBTRACTZONELETSFAILED.html#ansys.meshing.prime.ErrorCode.SUBTRACTZONELETSFAILED" title="ansys.meshing.prime.ErrorCode.SUBTRACTZONELETSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SUBTRACTZONELETSFAILED</span></code></a></p></td>
+<td><p>Unable to subtract cutters from input zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CREATECAPONFACEZONELETSFAILED.html#ansys.meshing.prime.ErrorCode.CREATECAPONFACEZONELETSFAILED" title="ansys.meshing.prime.ErrorCode.CREATECAPONFACEZONELETSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.CREATECAPONFACEZONELETSFAILED</span></code></a></p></td>
+<td><p>Failed to create cap on face zonelets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNITEZONELETSFAILED.html#ansys.meshing.prime.ErrorCode.UNITEZONELETSFAILED" title="ansys.meshing.prime.ErrorCode.UNITEZONELETSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNITEZONELETSFAILED</span></code></a></p></td>
+<td><p>Failed to union input zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.REFINEATCONTACTSFAILED.html#ansys.meshing.prime.ErrorCode.REFINEATCONTACTSFAILED" title="ansys.meshing.prime.ErrorCode.REFINEATCONTACTSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.REFINEATCONTACTSFAILED</span></code></a></p></td>
+<td><p>Failed to refine at contacts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TRANSFORMATIONFAILED.html#ansys.meshing.prime.ErrorCode.TRANSFORMATIONFAILED" title="ansys.meshing.prime.ErrorCode.TRANSFORMATIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TRANSFORMATIONFAILED</span></code></a></p></td>
+<td><p>Transformation failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SCALINGFAILED.html#ansys.meshing.prime.ErrorCode.SCALINGFAILED" title="ansys.meshing.prime.ErrorCode.SCALINGFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SCALINGFAILED</span></code></a></p></td>
+<td><p>Scaling failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.ALIGNMENTFAILED.html#ansys.meshing.prime.ErrorCode.ALIGNMENTFAILED" title="ansys.meshing.prime.ErrorCode.ALIGNMENTFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.ALIGNMENTFAILED</span></code></a></p></td>
+<td><p>Alignment failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDTRANSFORMATIONMATRIX.html#ansys.meshing.prime.ErrorCode.INVALIDTRANSFORMATIONMATRIX" title="ansys.meshing.prime.ErrorCode.INVALIDTRANSFORMATIONMATRIX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDTRANSFORMATIONMATRIX</span></code></a></p></td>
+<td><p>Invalid transformation matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEMESHFACESFAILED.html#ansys.meshing.prime.ErrorCode.DELETEMESHFACESFAILED" title="ansys.meshing.prime.ErrorCode.DELETEMESHFACESFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEMESHFACESFAILED</span></code></a></p></td>
+<td><p>Delete Mesh faces failed</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEMESHFACES_TOPOLOGYNOTSUPPORTED.html#ansys.meshing.prime.ErrorCode.DELETEMESHFACES_TOPOLOGYNOTSUPPORTED" title="ansys.meshing.prime.ErrorCode.DELETEMESHFACES_TOPOLOGYNOTSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEMESHFACES_TOPOLOGYNOTSUPPORTED</span></code></a></p></td>
+<td><p>Topoentities do not support deleting faces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEMESHFACES_CELLFOUND.html#ansys.meshing.prime.ErrorCode.DELETEMESHFACES_CELLFOUND" title="ansys.meshing.prime.ErrorCode.DELETEMESHFACES_CELLFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEMESHFACES_CELLFOUND</span></code></a></p></td>
+<td><p>Deleting faces failed as they have cell neighbors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEFRINGESANDOVERLAPSFAILED.html#ansys.meshing.prime.ErrorCode.DELETEFRINGESANDOVERLAPSFAILED" title="ansys.meshing.prime.ErrorCode.DELETEFRINGESANDOVERLAPSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEFRINGESANDOVERLAPSFAILED</span></code></a></p></td>
+<td><p>Deleting fringes and overlaps failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEZONELETSCONNECTEDTOCELLS.html#ansys.meshing.prime.ErrorCode.DELETEZONELETSCONNECTEDTOCELLS" title="ansys.meshing.prime.ErrorCode.DELETEZONELETSCONNECTEDTOCELLS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEZONELETSCONNECTEDTOCELLS</span></code></a></p></td>
+<td><p>Cannot delete zonelets connected to volume mesh.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.DELETEZONELETSFAILED.html#ansys.meshing.prime.ErrorCode.DELETEZONELETSFAILED" title="ansys.meshing.prime.ErrorCode.DELETEZONELETSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.DELETEZONELETSFAILED</span></code></a></p></td>
+<td><p>Delete zonelets failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS.html#ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS" title="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MATERIALPOINTWITHSAMENAMEEXISTS</span></code></a></p></td>
+<td><p>Material point with the same name already exists.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST.html#ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST" title="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST</span></code></a></p></td>
+<td><p>Material point with the given name does not exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST.html#ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST" title="ansys.meshing.prime.ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST</span></code></a></p></td>
+<td><p>Material point with the given ID already exists.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERGLOBALSETTINGSNOTSET.html#ansys.meshing.prime.ErrorCode.WRAPPERGLOBALSETTINGSNOTSET" title="ansys.meshing.prime.ErrorCode.WRAPPERGLOBALSETTINGSNOTSET"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERGLOBALSETTINGSNOTSET</span></code></a></p></td>
+<td><p>Global settings for wrapper not set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERRESOLVEINTERSECTIONFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERRESOLVEINTERSECTIONFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPERRESOLVEINTERSECTIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERRESOLVEINTERSECTIONFAILED</span></code></a></p></td>
+<td><p>Resolving intersections failed for wrapper.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONNECTFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERCONNECTFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPERCONNECTFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONNECTFAILED</span></code></a></p></td>
+<td><p>Wrapper connect failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCOULDNOTEXTRACTINTERFACE.html#ansys.meshing.prime.ErrorCode.WRAPPERCOULDNOTEXTRACTINTERFACE" title="ansys.meshing.prime.ErrorCode.WRAPPERCOULDNOTEXTRACTINTERFACE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCOULDNOTEXTRACTINTERFACE</span></code></a></p></td>
+<td><p>Failed to extract wrapper interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERLEAKPREVENTIONFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERLEAKPREVENTIONFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPERLEAKPREVENTIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERLEAKPREVENTIONFAILED</span></code></a></p></td>
+<td><p>Wrapper leak prevention failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERUNSUPPORTEDWRAPREGION.html#ansys.meshing.prime.ErrorCode.WRAPPERUNSUPPORTEDWRAPREGION" title="ansys.meshing.prime.ErrorCode.WRAPPERUNSUPPORTEDWRAPREGION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERUNSUPPORTEDWRAPREGION</span></code></a></p></td>
+<td><p>Wrap region option provided does not support wrap operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED</span></code></a></p></td>
+<td><p>Live material points list provided for wrapper control is empty.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERSURFACEHASHOLES.html#ansys.meshing.prime.ErrorCode.WRAPPERSURFACEHASHOLES" title="ansys.meshing.prime.ErrorCode.WRAPPERSURFACEHASHOLES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERSURFACEHASHOLES</span></code></a></p></td>
+<td><p>Wrapper surface has holes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPEROCTREEREGIONINGFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPEROCTREEREGIONINGFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPEROCTREEREGIONINGFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPEROCTREEREGIONINGFAILED</span></code></a></p></td>
+<td><p>Octree regioning failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERPROJECTIONFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERPROJECTIONFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPERPROJECTIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERPROJECTIONFAILED</span></code></a></p></td>
+<td><p>Projection failed for wrapper.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST</span></code></a></p></td>
+<td><p>Live material point added to wrapper control doesn't exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST</span></code></a></p></td>
+<td><p>Live material point does not exist for wrapper.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERSIZINGMETHODNOTSUPPORTED.html#ansys.meshing.prime.ErrorCode.WRAPPERSIZINGMETHODNOTSUPPORTED" title="ansys.meshing.prime.ErrorCode.WRAPPERSIZINGMETHODNOTSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERSIZINGMETHODNOTSUPPORTED</span></code></a></p></td>
+<td><p>Sizing method is not supported for wrapper.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERIMPROVEFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERIMPROVEFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPERIMPROVEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERIMPROVEFAILED</span></code></a></p></td>
+<td><p>Wrapper improve quality failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERSIZEFIELDSNOTDEFINED.html#ansys.meshing.prime.ErrorCode.WRAPPERSIZEFIELDSNOTDEFINED" title="ansys.meshing.prime.ErrorCode.WRAPPERSIZEFIELDSNOTDEFINED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERSIZEFIELDSNOTDEFINED</span></code></a></p></td>
+<td><p>No size field ids provided for wrapping.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDGEOMETRYSCOPE.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDGEOMETRYSCOPE" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDGEOMETRYSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_INVALIDGEOMETRYSCOPE</span></code></a></p></td>
+<td><p>Geometry scope specified under wrapper control is invalid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID</span></code></a></p></td>
+<td><p>Contact prevention specified under wrapper control doesn't exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS</span></code></a></p></td>
+<td><p>Contact prevention control specified under wrapper is invalid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONID.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONID" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONID</span></code></a></p></td>
+<td><p>Leak prevention specified under wrapper control doesn't exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS</span></code></a></p></td>
+<td><p>Leak prevention control specified under wrapper is invalid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID</span></code></a></p></td>
+<td><p>Feature recovery control specified under wrapper control doesn't exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE" title="ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE</span></code></a></p></td>
+<td><p>Dead material point cannot be same as live.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.INVALIDWRAPPERCONTROL.html#ansys.meshing.prime.ErrorCode.INVALIDWRAPPERCONTROL" title="ansys.meshing.prime.ErrorCode.INVALIDWRAPPERCONTROL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.INVALIDWRAPPERCONTROL</span></code></a></p></td>
+<td><p>Invalid wrapper control.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE.html#ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE" title="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE</span></code></a></p></td>
+<td><p>Gap size specified for patching should be positive double.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE.html#ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE" title="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE</span></code></a></p></td>
+<td><p>Scope specified for close gaps is invalid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPSFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPSFAILED" title="ansys.meshing.prime.ErrorCode.WRAPPERCLOSEGAPSFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.WRAPPERCLOSEGAPSFAILED</span></code></a></p></td>
+<td><p>Wrapper gap closing failed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.CELLSEPARATIONFAILED.html#ansys.meshing.prime.ErrorCode.CELLSEPARATIONFAILED" title="ansys.meshing.prime.ErrorCode.CELLSEPARATIONFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.CELLSEPARATIONFAILED</span></code></a></p></td>
+<td><p>Cell separation failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.NOCELLSSEPARATED.html#ansys.meshing.prime.ErrorCode.NOCELLSSEPARATED" title="ansys.meshing.prime.ErrorCode.NOCELLSSEPARATED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.NOCELLSSEPARATED</span></code></a></p></td>
+<td><p>No cells separated based on given input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.SIZEFIELDTYPENOTSUPPORTED.html#ansys.meshing.prime.ErrorCode.SIZEFIELDTYPENOTSUPPORTED" title="ansys.meshing.prime.ErrorCode.SIZEFIELDTYPENOTSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.SIZEFIELDTYPENOTSUPPORTED</span></code></a></p></td>
+<td><p>Provided Size Field Type is not supported by this operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB.html#ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB" title="ansys.meshing.prime.ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB</span></code></a></p></td>
+<td><p>Provided file extension is not supported.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.PLUGINLOADFAILURE.html#ansys.meshing.prime.ErrorCode.PLUGINLOADFAILURE" title="ansys.meshing.prime.ErrorCode.PLUGINLOADFAILURE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.PLUGINLOADFAILURE</span></code></a></p></td>
+<td><p>Failed to load Surface Editor plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TARGETZONELETS_SELFINTERSECTING.html#ansys.meshing.prime.ErrorCode.TARGETZONELETS_SELFINTERSECTING" title="ansys.meshing.prime.ErrorCode.TARGETZONELETS_SELFINTERSECTING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TARGETZONELETS_SELFINTERSECTING</span></code></a></p></td>
+<td><p>Target zonelets form a self intersecting volume.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TARGETZONELETS_NOTWATERTIGHT.html#ansys.meshing.prime.ErrorCode.TARGETZONELETS_NOTWATERTIGHT" title="ansys.meshing.prime.ErrorCode.TARGETZONELETS_NOTWATERTIGHT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TARGETZONELETS_NOTWATERTIGHT</span></code></a></p></td>
+<td><p>Target zonelets do not form a watertight volume.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOOLZONELETS_SELFINTERSECTING.html#ansys.meshing.prime.ErrorCode.TOOLZONELETS_SELFINTERSECTING" title="ansys.meshing.prime.ErrorCode.TOOLZONELETS_SELFINTERSECTING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TOOLZONELETS_SELFINTERSECTING</span></code></a></p></td>
+<td><p>Tool zonelets form a self intersecting volume.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.ErrorCode.TOOLZONELETS_NOTWATERTIGHT.html#ansys.meshing.prime.ErrorCode.TOOLZONELETS_NOTWATERTIGHT" title="ansys.meshing.prime.ErrorCode.TOOLZONELETS_NOTWATERTIGHT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorCode.TOOLZONELETS_NOTWATERTIGHT</span></code></a></p></td>
+<td><p>Tool zonelets do not form a watertight volume.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.meshing.prime.ErrorCode"><code class="docutils literal notranslate"><span class="pre">ErrorCode</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/api/_autosummary/ansys.meshing.prime.ErrorCode.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/api/_autosummary/ansys.meshing.prime.ErrorCode.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+    Built with the <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a> 0.9.9.
+    <br>Last updated on <span id="date"></span></br>
+</p>
+<script>
+  var options = { day: 'numeric', month: 'long', year: 'numeric' };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString('en-US', options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

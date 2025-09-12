@@ -1,0 +1,102 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CadReaderRoute`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.CadReaderRoute
+
+
+
+   CAD Reader routes.
+
+
+
+
+.. py:currentmodule:: CadReaderRoute
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~DISCOVERY`
+            - Denotes Discovery as CAD reader route.
+          * - :py:attr:`~NATIVE`
+            - Denotes native CAD reader route.
+          * - :py:attr:`~PROGRAMCONTROLLED`
+            - Denotes program controlled CAD reader route.
+          * - :py:attr:`~SPACECLAIM`
+            - Denotes SpaceClaim as CAD reader route.
+          * - :py:attr:`~WORKBENCH`
+            - Denotes WorkBench as CAD reader route.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CadReaderRoute
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: DISCOVERY
+   :value: 4
+
+
+   Denotes Discovery as CAD reader route.
+
+.. py:attribute:: NATIVE
+   :value: 1
+
+
+   Denotes native CAD reader route.
+
+.. py:attribute:: PROGRAMCONTROLLED
+   :value: 0
+
+
+   Denotes program controlled CAD reader route.
+
+.. py:attribute:: SPACECLAIM
+   :value: 3
+
+
+   Denotes SpaceClaim as CAD reader route.
+
+.. py:attribute:: WORKBENCH
+   :value: 2
+
+
+   Denotes WorkBench as CAD reader route.
+
+
+
+
+
+
+
+.. vale on
