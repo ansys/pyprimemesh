@@ -46,6 +46,7 @@ jobs:
   vulnerabilities:
     name: Vulnerabilities
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: ansys/actions/check-vulnerabilities@v10
         with:
