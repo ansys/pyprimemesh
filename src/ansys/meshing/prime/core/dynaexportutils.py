@@ -1292,6 +1292,116 @@ class _MatPiecewiseLinearPlasticity:
         return mat_string + str_2d
 
 
+class _MatFabric:
+    __slots__ = (
+        '_card_format',
+        '_data_dict',
+        '_formatter',
+        '_format_map',
+        '_header_title',
+        '_header',
+        '_data_line',
+        '_model',
+        '_logger',
+    )
+
+    def __init__(self, model: prime.Model, card_format="SHORT"):
+        self._card_format = card_format
+        self._data_dict = {}
+        self._formatter = _FormatDynaCards(self._card_format)
+        self._format_map = {"SHORT": 10, "LONG": 20}
+        self._header_title = ["mid", "ro", "ea", "eb", "-", "prba", "prab", "-"]
+        self._header = [1, 1.000e-09, 210000.0, 0.0, " ", 0.29, 0.0, " "]
+        self._data_line = {
+            "D1_TITLE": ["gab", "-", "-", "cse", "el", "prl", "lratio", "damp"],
+            "D1_DATA": [0.0, " ", " ", 0.0, 0.0, 0.0, 0.0, 0.05],
+            "D2_TITLE": ["aopt", "flc", "fac", "ela", "inrc", "form", "fvopt", "tsrfac"],
+            "D2_DATA": [0.0, 0.0, 0.0, 0.0, 0.0, -14, 0, 0.0],
+            "D3_TITLE": ["unused", "rgbrth", "a0ref", "a1", "a2", "a3", "x0", "x1"],
+            "D3_DATA": [" ", 0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            "D4_TITLE": ["v1", "v2", "v3", "-", "-", "-", "beta", "isrefg"],
+            "D4_DATA": [0.0, 0.0, 0.0, " ", " ", " ", 0.0, 0],
+            "D5_TITLE": ["lca", "lcb", "lcab", "lcua", "lcub", "lcuab", "rl"],
+            "D5_DATA": [0, 0, 0, 0, 0, 0, 0.0],
+            "D6_TITLE": ["lcaa", "lcbb", "h", "dt", "-", "ecoat", "scoat", "tcoat"],
+            "D6_DATA": [0, 0, 0.0, 0, 0, 2000, 10.0, -0.07],
+        }
+        self._model = model
+        self._logger = model.python_logger
+
+    def write_mat_fabric(
+        self,
+        mat_name,
+        mat_id,
+        nu,
+        density,
+        max_id=0,
+    ):
+        mat_string = ""
+        mat_string += "*MAT_FABRIC_TITLE\n"
+        mat_string += f"{mat_name}_FABRIC\n"
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
+        mat_string += "\n"
+
+        header_data = self._header
+        header_data[0] = max_id * 3 + mat_id
+        header_data[1] = density
+        header_data[5] = nu
+        mat_string += self._formatter.field_int(header_data[0])
+        mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:]])
+        mat_string += "\n"
+        mat_string += (
+            "$#"
+            + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            + "\n"
+        )
+        mat_string += (
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D1_DATA"]]) + "\n"
+        )
+        mat_string += (
+            "$#"
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
+            + "\n"
+        )
+        mat_string += (
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D2_DATA"]]) + "\n"
+        )
+        mat_string += (
+            "$#"
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]])[2:]
+            + "\n"
+        )
+        mat_string += (
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D3_DATA"]]) + "\n"
+        )
+        mat_string += (
+            "$#"
+            + "".join([self._formatter.field_str(i) for i in self._data_line['D4_TITLE']])[2:]
+            + "\n"
+        )
+        mat_string += (
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D4_DATA"]]) + "\n"
+        )
+        mat_string += (
+            "$#"
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D5_TITLE"]])[2:]
+            + "\n"
+        )
+        mat_string += (
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D5_DATA"]]) + "\n"
+        )
+        mat_string += (
+            "$#"
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D6_TITLE"]])[2:]
+            + "\n"
+        )
+        mat_string += (
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D6_DATA"]]) + "\n"
+        )
+
+        return mat_string
+
+
 class _CohesiveMaterialMapper:
     __slots__ = (
         '_card_format',
@@ -2371,6 +2481,22 @@ class MaterialProcessor:
 
         return used_with_shell
 
+    def _is_material_used_with_membrane(self, mat_name):
+        zone_types_for_2d_plasticity = ['Membrane']
+        zone_details = {}
+        used_with_shell = False
+        if mat_name not in self._material_assignedTo_zones:
+            used_with_shell = False
+        else:
+            if self._material_assignedTo_zones[mat_name]:
+                for zone_id in self._material_assignedTo_zones[mat_name]:
+                    _zone_name, zone_details = self._get_zone_with_id(zone_id)
+                    if zone_details and zone_details['Type'] in zone_types_for_2d_plasticity:
+                        used_with_shell = True
+                        break
+
+        return used_with_shell
+
     def _material_is_cohesive(self, mat_name):
         zone_name = None
         zone_details = {}
@@ -2747,6 +2873,12 @@ class MaterialProcessor:
                 f"{self._formatter.field_exp(nu)}"
                 f"{''.join([self._formatter.field_str('0.')]*4)}\n"
             )
+            if self._is_material_used_with_membrane(mat_name):
+                max_id = self._get_max_id()
+                mat_fabric = _MatFabric(self._model, card_format=self._card_format)
+                mat_elastic_card += mat_fabric.write_mat_fabric(
+                    mat_name, mat_id, nu, density, max_id=max_id
+                )
         elif elastic_type == "TRACTION":
             kn = property_dict['Data']['E/Knn']
             ks1 = property_dict['Data']['G1/Kss']

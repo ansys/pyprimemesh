@@ -6,7 +6,8 @@
 [![GH-CI](https://github.com/ansys/pyprimemesh/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/ansys/pyprimemesh/actions/workflows/ci_cd.yml)
 [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat)](https://github.com/psf/black)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/ansys-meshing-prime)](https://pypi.org/project/ansys-meshing-prime/)
+[![PyPI Downloads](https://static.pepy.tech/badge/ansys-meshing-prime/month)](https://pepy.tech/projects/ansys-meshing-prime)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ansys/pyprimemesh)
 
 ## Overview
 
@@ -38,7 +39,7 @@ To reach the project support team, email [pyansys.core@ansys.com](mailtto:pyansy
 
 ## Installation
 
-The `ansys-meshing-prime` package supports Python 3.10 to Python 3.12 on the Windows and Linux
+The `ansys-meshing-prime` package supports Python 3.10 to Python 3.13 on the Windows and Linux
 operating systems.
 
 

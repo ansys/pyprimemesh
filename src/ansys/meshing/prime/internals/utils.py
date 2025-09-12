@@ -24,6 +24,7 @@ import logging
 import os
 import shutil
 import subprocess
+import uuid
 from contextlib import contextmanager
 from typing import List, Optional
 
@@ -31,7 +32,6 @@ import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 
 _LOCAL_PORTS = []
-_PRIME_CONTAINER_COUNT = 0
 
 
 def make_unique_container_name(name: str):
@@ -47,9 +47,7 @@ def make_unique_container_name(name: str):
     str
         Unique name with a numeric integer added as suffix.
     """
-    global _PRIME_CONTAINER_COUNT
-    _PRIME_CONTAINER_COUNT = _PRIME_CONTAINER_COUNT + 1
-    return f'{name}-{_PRIME_CONTAINER_COUNT}'
+    return f'{name}-' + str(uuid.uuid4())
 
 
 def to_camel_case(snake_str):
@@ -243,6 +241,7 @@ def launch_prime_github_container(
     docker_command = [
         'docker',
         'run',
+        '--shm-size=4g',
         '-d',
         '--rm',
         '--name',
@@ -253,11 +252,17 @@ def launch_prime_github_container(
         f'{mount_host}:{mount_image}',
         '-e',
         f'ANSYSLMD_LICENSE_FILE={license_file}',
+    ]
+    graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
+    if graphics_port > 0:
+        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
+        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
+    prime_arguments = [
         f'{image_name}:{version}',
         '--port',
         f'{port}',
     ]
-    subprocess.run(docker_command, stdout=subprocess.DEVNULL)
+    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 
 def stop_prime_github_container(name):
