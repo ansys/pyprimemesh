@@ -33,23 +33,26 @@ dependencies = [
 graphics = [
   "ansys-tools-visualization-interface>=0.4.7,<1",
 ]
+pygeometry = [
+  "ansys-geometry-core>=0.7.6,<1",
+]
 tests = [
   "ansys-tools-visualization-interface==0.11.0",
-  "pytest==8.4.1",
-  "pytest-cov==6.2.1",
+  "pytest==8.4.2",
+  "pytest-cov==7.0.0",
   "pytest-pyvista==0.2.0",
   "pytest-xvfb==3.1.1",
-  "pyvista[trame]==0.45.3",
+  "pyvista[trame]==0.46.3",
 ]
 doc = [
-  "ansys-sphinx-theme[autoapi]==1.5.3",
+  "ansys-sphinx-theme[autoapi]==1.6.0",
   "ansys-tools-visualization-interface==0.11.0",
-  "joblib==1.5.1",
+  "joblib==1.5.2",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.9.0",
   "sphinx==8.2.3",
   "sphinx_design==0.6.1",
-  "pyvista==0.45.3",
+  "pyvista==0.46.3",
   "sphinx-autodoc-typehints==3.1.0",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.19.0",
@@ -58,6 +61,7 @@ doc = [
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
+  "ansys-geometry-core>=0.7.6,<1",
 ]
 
 [project.urls]
