@@ -134,7 +134,7 @@ class Mesh:
 
         """
         filename, fileext = os.path.splitext(file_name)
-        if fileext == ".msh" or file_name[-7:] == ".msh.gz":
+        if fileext == ".msh" or file_name[-7:] == ".msh.gz" or file_name[-7:] == ".msh.h5":
             prime.FileIO(self._model).import_fluent_meshing_meshes(
                 [file_name], prime.ImportFluentMeshingMeshParams(self._model, append=append)
             )
@@ -195,6 +195,10 @@ class Mesh:
         elif fileext == ".msh" or file_name[-7:] == ".msh.gz":
             prime.FileIO(self._model).export_fluent_meshing_mesh(
                 file_name, prime.ExportFluentMeshingMeshParams(self._model)
+            )
+        elif file_name[-7:] == ".msh.h5":
+            prime.FileIO(self._model).export_fluent_meshing_mesh(
+                file_name, prime.ExportFluentMeshingMeshParams(self._model, cff_format=True)
             )
         elif fileext == ".stl":
             part_ids = [part.id for part in self._model.parts]
