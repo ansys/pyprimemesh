@@ -195,7 +195,7 @@ jobs:
 
   package:
     name: Package library
-    if: !(github.event_name == 'pull_request' && github.event.action == 'closed')
+    if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
     needs: [testing, docs]
     runs-on: ubuntu-latest
     steps:
