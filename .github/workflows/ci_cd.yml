@@ -204,7 +204,7 @@ jobs:
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
+#
   release:
     name: Release project
     if: github.ref == 'refs/heads/main' || github.event_name == 'merge_group'
