@@ -26,6 +26,7 @@ import os
 import subprocess
 import sys
 from typing import Optional
+import uuid
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -73,6 +74,7 @@ def launch_server_process(
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     n_procs: Optional[int] = None,
+    connection_type: config.ConnectionType = None,
     **kw,
 ) -> subprocess.Popen:
     """Launch a server process for Ansys Prime Server.
@@ -153,6 +155,9 @@ def launch_server_process(
             server_args.append(f'--scheduler')
             server_args.append(f'{scheduler}')
 
+    if os.name != 'nt' and connection_type == config.ConnectionType.GRPC:
+        server_args.append(f'--uds={kw.get("uds_file", "")}')
+
     kwargs = {
         'stdin': subprocess.DEVNULL,
     }
@@ -205,12 +210,12 @@ def launch_remote_prime(
 
     return client
 
-
 def launch_prime(
     prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
+    connection_type: config.ConnectionType = config.ConnectionType.GRPC,
     n_procs: Optional[int] = None,
     version: Optional[str] = None,
     **kwargs,
@@ -262,8 +267,18 @@ def launch_prime(
         client.container_name = container_name
         return client
 
+    uds_file = f'unix:/tmp/pyprimemesh-{uuid.uuid4()}.sock'
+
     server = launch_server_process(
-        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
+        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs,
+        connection_type=connection_type, uds_file=uds_file, **kwargs
     )
 
-    return Client(server_process=server, ip=ip, port=port, timeout=timeout)
+    return Client(
+        server_process=server,
+        ip=ip,
+        port=port,
+        timeout=timeout,
+        uds_file=uds_file,
+        connection_type=connection_type,
+    )

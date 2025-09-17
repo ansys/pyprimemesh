@@ -23,6 +23,7 @@
 """Configuration utility for PyPrimeMesh."""
 
 from contextlib import contextmanager
+from enum import Enum
 
 __all__ = [
     'enable_optimizing_numpy_arrays',
@@ -43,6 +44,9 @@ __HAS_PIM = False
 __FILE_CHECK = True
 
 from ansys.meshing.prime.internals.logger import PrimeLogger
+
+class ConnectionType(Enum):
+    GRPC = 1
 
 
 def _optimize_vectors():
