@@ -2,6 +2,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.9.2](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.2) - September 18, 2025
+
+
+### Miscellaneous
+
+- Revert the index.rst code [#1156](https://github.com/ansys/pyprimemesh/pull/1156)
+
 ## [0.9.2](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.2) - September 17, 2025
 
 
