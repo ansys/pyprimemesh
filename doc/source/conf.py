@@ -32,6 +32,7 @@ html_context = {
     "github_repo": "pyprimemesh",
     "github_version": "main",
     "doc_path": "doc/source",
+    "pyansys_tags": ["CAD", "Meshing"],
 }
 
 # specify the location of your github repo
