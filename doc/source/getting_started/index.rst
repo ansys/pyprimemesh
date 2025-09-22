@@ -168,7 +168,7 @@ for the Ansys Prime Server and install this image.
 
    .. code-block:: pycon
 
-        docker pull ghcr.io/ansys/prime:25.2.0
+        docker pull ghcr.io/ansys/prime:25.2.2
 
 
 Build the Ansys Prime Server linux container
