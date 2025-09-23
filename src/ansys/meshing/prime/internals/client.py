@@ -30,7 +30,7 @@ import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.utils import terminate_process
-
+import docker
 __all__ = ['Client']
 
 
@@ -176,7 +176,9 @@ class Client(object):
 
         if config.using_container():
             container_name = getattr(self, 'container_name')
-            utils.stop_prime_github_container(container_name)
+            client = docker.from_env()
+            container = client.containers.get(container_name)
+            container.stop()
         elif config.has_pim():
             self.remote_instance.delete()
             self.pim_client.close()

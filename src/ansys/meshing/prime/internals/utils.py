@@ -20,6 +20,7 @@
 # SOFTWARE.
 
 """Module for general utilities of the project."""
+import docker
 import logging
 import os
 import shutil
@@ -263,18 +264,6 @@ def launch_prime_github_container(
         f'{port}',
     ]
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
-
-
-def stop_prime_github_container(name):
-    """Stop a running container.
-
-    Parameters
-    ----------
-    name : str
-        Name of the container.
-    """
-    subprocess.run(['docker', 'stop', f'{name}'], stdout=subprocess.DEVNULL)
-
 
 @contextmanager
 def file_read_context(model, file_name: str):
