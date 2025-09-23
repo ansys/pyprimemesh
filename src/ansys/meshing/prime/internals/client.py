@@ -30,7 +30,7 @@ import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.utils import terminate_process
-import docker
+
 __all__ = ['Client']
 
 

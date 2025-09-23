@@ -145,7 +145,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
         parsed = urlparse(url)
         if parsed.scheme not in ('http', 'https'):
             raise ValueError(f"Unsupported URL scheme: {parsed.scheme}")
-        
+
         saved_file, _ = urllib.request.urlretrieve(url, filename=dest)
         return saved_file
 

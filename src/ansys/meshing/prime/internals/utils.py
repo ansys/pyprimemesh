@@ -20,7 +20,6 @@
 # SOFTWARE.
 
 """Module for general utilities of the project."""
-import docker
 import logging
 import os
 import shutil
@@ -29,10 +28,9 @@ import uuid
 from contextlib import contextmanager
 from typing import List, Optional
 
-from semver import process
-
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
+import docker
 
 _LOCAL_PORTS = []
 _DOCKER_CLIENT = docker.from_env()
@@ -93,9 +91,7 @@ def get_child_processes(process):
     for pid in out.split("\n")[:1]:
         if pid.strip() == '':
             break
-        ps_cmd = subprocess.Popen(
-            ['ps', '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE
-        )
+        ps_cmd = subprocess.Popen(['ps', '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE)
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         cmd_name = ps_out.split()[0]
@@ -245,16 +241,9 @@ def launch_prime_github_container(
 
     ports = {f'{port}/tcp': port}
 
-    volumes = {
-        mount_host: {
-            'bind': mount_image,
-            'mode': 'rw'
-        }
-    }
+    volumes = {mount_host: {'bind': mount_image, 'mode': 'rw'}}
 
-    environment = {
-        'ANSYSLMD_LICENSE_FILE': license_file
-    }
+    environment = {'ANSYSLMD_LICENSE_FILE': license_file}
     container = _DOCKER_CLIENT.containers.run(
         image=f'{image_name}:{version}',
         name=name,
@@ -264,8 +253,9 @@ def launch_prime_github_container(
         volumes=volumes,
         environment=environment,
         remove=True,
-        command=['--port', str(port)]
+        command=['--port', str(port)],
     )
+
 
 def stop_prime_github_container(container_name: str):
     """Stop a container.

@@ -59,7 +59,7 @@ def get_response_messages(response_generator):
             break
 
         if not response.HasField('content'):
-            raise RuntimeError('Bad response from server') # TODO Use proper error.
+            raise RuntimeError('Bad response from server')  # TODO Use proper error.
         yield response.content
 
 
