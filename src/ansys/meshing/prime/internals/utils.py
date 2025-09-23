@@ -29,6 +29,8 @@ import uuid
 from contextlib import contextmanager
 from typing import List, Optional
 
+from semver import process
+
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 
@@ -85,7 +87,7 @@ def get_child_processes(process):
         Process IDs of the processes.
     """
     children = []
-    cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
+    cmd = subprocess.Popen(['pgrep', '-P', str(process)], stdout=subprocess.PIPE)
     out = cmd.stdout.read().decode("utf-8")
     cmd.wait()
     for pid in out.split("\n")[:1]:
