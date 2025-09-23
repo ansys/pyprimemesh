@@ -2,6 +2,19 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.9.3](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.3) - September 23, 2025
+
+
+### Miscellaneous
+
+- Updates the pyproj.toml [#1158](https://github.com/ansys/pyprimemesh/pull/1158)
+- Fix for search bar issue [#1160](https://github.com/ansys/pyprimemesh/pull/1160)
+
+
+### Maintenance
+
+- Update the conf.py file for pyansys tags & update the ansys-sphinx-theme version [#1159](https://github.com/ansys/pyprimemesh/pull/1159)
+
 ## [0.9.2](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.2) - September 18, 2025
 
 
