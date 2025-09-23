@@ -24,7 +24,7 @@ import os
 import urllib.request
 from threading import Lock
 from typing import Optional
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import ansys.meshing.prime.internals.defaults as defaults
 
@@ -142,6 +142,10 @@ class DownloadManager(metaclass=DownloadManagerMeta):
             return joiner(server, filename)
 
     def _retrieve_url(self, url, dest):
+        parsed = urlparse(url)
+        if parsed.scheme not in ('http', 'https'):
+            raise ValueError(f"Unsupported URL scheme: {parsed.scheme}")
+        
         saved_file, _ = urllib.request.urlretrieve(url, filename=dest)
         return saved_file
 

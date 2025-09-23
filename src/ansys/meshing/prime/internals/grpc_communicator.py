@@ -58,7 +58,8 @@ def get_response_messages(response_generator):
         if response.HasField('completion_token'):
             break
 
-        assert response.HasField('content')
+        if not response.HasField('content'):
+            raise RuntimeError('Bad response from server') # TODO Use proper error.
         yield response.content
 
 
@@ -128,7 +129,8 @@ class GRPCCommunicator(Communicator):
         except ConnectionError:
             raise
         except:
-            pass
+            # TODO Use logger
+            print('Uncontrolled error, continuing execution')
 
     @error_code_handler
     @communicator_error_handler
