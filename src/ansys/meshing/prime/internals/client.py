@@ -176,9 +176,7 @@ class Client(object):
 
         if config.using_container():
             container_name = getattr(self, 'container_name')
-            client = docker.from_env()
-            container = client.containers.get(container_name)
-            container.stop()
+            utils.stop_prime_github_container(container_name)
         elif config.has_pim():
             self.remote_instance.delete()
             self.pim_client.close()
