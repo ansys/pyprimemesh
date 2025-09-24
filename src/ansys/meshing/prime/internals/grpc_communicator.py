@@ -30,12 +30,14 @@ import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.grpc_utils as grpc_utils
 import ansys.meshing.prime.internals.json_utils as json
+from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
+import logging
 
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
@@ -59,7 +61,7 @@ def get_response_messages(response_generator):
             break
 
         if not response.HasField('content'):
-            raise RuntimeError('Bad response from server')  # TODO Use proper error.
+            raise PrimeRuntimeError('Bad response from server')
         yield response.content
 
 
@@ -129,8 +131,7 @@ class GRPCCommunicator(Communicator):
         except ConnectionError:
             raise
         except:
-            # TODO Use logger
-            print('Uncontrolled error, continuing execution')
+            logging.getLogger("PyPrimeMesh").error('Uncontrolled error, continuing execution')
 
     @error_code_handler
     @communicator_error_handler
@@ -187,8 +188,6 @@ class GRPCCommunicator(Communicator):
                 )
                 message = get_response(response, '')
             if defaults.print_communicator_stats():
-                import logging
-
                 logging.getLogger("PyPrimeMesh").info(
                     f'Data Transfer: Received {len(message)} bytes'
                 )
