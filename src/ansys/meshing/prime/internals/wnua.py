@@ -22,21 +22,24 @@
 
 """
 Windows Named User Authentication (WNUA) for Python gRPC servers.
+
 This module provides a server interceptor that authenticates clients
 by verifying they run under the same Windows user account.
 """
 
-import sys
+import ctypes
 import os
 import re
-import ctypes
-from ctypes import wintypes
+import sys
 from concurrent import futures
+from ctypes import wintypes
+
 import grpc
 
 # Only available on Windows
 if sys.platform != "win32":
     raise ImportError("WNUA (Windows Named User Authentication) is only supported on Windows")
+
 
 class WNUAAuthenticator:
     """Windows Named User Authentication using FPN library.
@@ -58,8 +61,9 @@ class WNUAAuthenticator:
             If the FPN library cannot be loaded or accessed.
         """
         # Look for the FPN DLL in the build directory - demo repository location after build
-        fpn_dll_path = os.path.join(os.path.dirname(__file__), "..", "build",
-                                    "fpn_install", "bin", "fpn.dll")
+        fpn_dll_path = os.path.join(
+            os.path.dirname(__file__), "..", "build", "fpn_install", "bin", "fpn.dll"
+        )
 
         try:
             # Try to load from build directory first
@@ -69,20 +73,22 @@ class WNUAAuthenticator:
                 # Fall back to searching in PATH
                 self.fpn_lib = ctypes.CDLL("fpn.dll")
         except OSError as e:
-            raise RuntimeError(f"Failed to load FPN library: {e}. \
-                                Make sure fpn.dll is built and accessible.")
+            raise RuntimeError(
+                f"Failed to load FPN library: {e}. \
+                                Make sure fpn.dll is built and accessible."
+            )
 
         # Define function signatures
         self.fpn_lib.fpn_remote_is_me.argtypes = [
             ctypes.c_ushort,  # port
             ctypes.POINTER(wintypes.DWORD),  # err_loc
-            ctypes.POINTER(wintypes.DWORD)   # err_code
+            ctypes.POINTER(wintypes.DWORD),  # err_code
         ]
         self.fpn_lib.fpn_remote_is_me.restype = wintypes.BOOL
 
         self.fpn_lib.fpn_reduce_err_codes.argtypes = [
             ctypes.POINTER(wintypes.DWORD),  # err_loc
-            ctypes.POINTER(wintypes.DWORD)   # err_code
+            ctypes.POINTER(wintypes.DWORD),  # err_code
         ]
         self.fpn_lib.fpn_reduce_err_codes.restype = wintypes.DWORD
 
@@ -127,24 +133,20 @@ class WNUAAuthenticator:
             err_code = wintypes.DWORD()
 
             is_same_user = self.fpn_lib.fpn_remote_is_me(
-                ctypes.c_ushort(client_port),
-                ctypes.byref(err_loc),
-                ctypes.byref(err_code)
+                ctypes.c_ushort(client_port), ctypes.byref(err_loc), ctypes.byref(err_code)
             )
 
             if is_same_user:
                 print("WNUA: Client is same Windows user - ACCESS GRANTED")
                 # Add authentication metadata
-                context.set_trailing_metadata([
-                    ("wnua-authenticated", "true"),
-                    ("wnua-user-verified", "same-user")
-                ])
+                context.set_trailing_metadata(
+                    [("wnua-authenticated", "true"), ("wnua-user-verified", "same-user")]
+                )
                 return True, ""
             else:
                 print("WNUA: Client is NOT same Windows user - ACCESS DENIED")
                 reduced_error = self.fpn_lib.fpn_reduce_err_codes(
-                    ctypes.byref(err_loc),
-                    ctypes.byref(err_code)
+                    ctypes.byref(err_loc), ctypes.byref(err_code)
                 )
 
                 error_msg = "Authentication failed"
@@ -217,7 +219,6 @@ class WNUAServerInterceptor(grpc.ServerInterceptor):
             Modified handler with authentication wrapper for the appropriate
             call pattern, or None if no handler exists.
         """
-
         # Get the original handler from the continuation
         original_handler = continuation(handler_call_details)
 
@@ -227,6 +228,7 @@ class WNUAServerInterceptor(grpc.ServerInterceptor):
         # Generic authentication wrapper that works for all call patterns
         def create_authenticated_wrapper(original_method):
             """Create an authenticated wrapper for any handler method."""
+
             def wrapper(*args):
                 # The context is always the last argument
                 context = args[-1]
@@ -239,6 +241,7 @@ class WNUAServerInterceptor(grpc.ServerInterceptor):
                         context.abort(grpc.StatusCode.UNAUTHENTICATED, error_message)
                     return  # This line won't be reached due to abort exception
                 return original_method(*args)
+
             return wrapper
 
         # Handler type mapping: (attribute_name, handler_constructor)
@@ -257,7 +260,7 @@ class WNUAServerInterceptor(grpc.ServerInterceptor):
                 return handler_constructor(
                     authenticated_method,
                     request_deserializer=original_handler.request_deserializer,
-                    response_serializer=original_handler.response_serializer
+                    response_serializer=original_handler.response_serializer,
                 )
 
         # Unknown handler type, return as-is
@@ -284,8 +287,7 @@ def create_wnua_server(max_workers=10):
     # Create server with WNUA interceptor
     interceptors = [WNUAServerInterceptor()]
     server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=max_workers),
-        interceptors=interceptors
+        futures.ThreadPoolExecutor(max_workers=max_workers), interceptors=interceptors
     )
 
     return server
