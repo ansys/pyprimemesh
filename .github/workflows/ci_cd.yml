@@ -84,9 +84,10 @@ jobs:
 
   docs:
     name: Documentation
-    runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
+    runs-on: public-ubuntu-latest-16-cores
+    needs: [docs-style]
     steps:
-
       - name: Login in Github Container registry
         uses: docker/login-action@v3
         with:
@@ -98,17 +99,21 @@ jobs:
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Setup headless display
-        uses: pyvista/setup-headless-display-action@v2
+        uses: pyvista/setup-headless-display-action@v4
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v10
         with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
+          needs-quarto: true
+          sphinxopts: "-j auto --keep-going"
         env:
+          PYVISTA_BUILDING_GALLERY: 'True'
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: ${{ format('1055@{0}', secrets.LICENSE_SERVER )}}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
 
   testing:
     name: Run Unit Tests
