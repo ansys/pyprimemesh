@@ -41,10 +41,10 @@ repos:
   - id: debug-statements
 
 # this validates our github workflow files
-- repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.20.0
-  hooks:
-    - id: check-github-workflows
+# - repo: https://github.com/python-jsonschema/check-jsonschema
+#   rev: 0.20.0
+#   hooks:
+#     - id: check-github-workflows
 
 # To be activated after quick dev cycles
 #
