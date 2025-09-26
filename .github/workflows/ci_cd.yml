@@ -39,14 +39,6 @@ jobs:
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
 
-  branch-name:
-    if: github.event_name == 'pull_request'
-    name: Check the name of the branch
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check branch name
-        uses: ansys/actions/branch-name-style@main
-
   style:
     name: Code style
     runs-on: ubuntu-latest
