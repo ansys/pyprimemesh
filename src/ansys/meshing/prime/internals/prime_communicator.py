@@ -104,7 +104,7 @@ class PrimeCommunicator(Communicator):
         return res
 
     def run_on_server(self, model, recipe: str) -> dict:
-        """Run recipe on a model on the server.
+        """[DEPRECATED] Run recipe on a model on the server.
 
         Parameters
         ----------
@@ -118,11 +118,7 @@ class PrimeCommunicator(Communicator):
         dict
             Response from the server.
         """
-        exec(recipe, globals())
-        output = '{"Results" : "' + str(return_value) + '"}'
-        with config.numpy_array_optimization_disabled():
-            result = json.loads(output)
-        return result
+        pass
 
     def close(self):
         """Close session."""
