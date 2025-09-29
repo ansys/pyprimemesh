@@ -22,10 +22,6 @@ env:
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
   RESET_IMAGE_CACHE: 0
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   update-changelog:
     name: "Update CHANGELOG for new tag"
@@ -85,7 +81,7 @@ jobs:
   docs:
     name: Documentation
     if: github.event.action != 'closed'
-    runs-on: public-ubuntu-latest-16-cores
+    runs-on: ubuntu-latest
     needs: [docs-style]
     steps:
       - name: Login in Github Container registry
