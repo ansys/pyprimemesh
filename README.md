@@ -32,7 +32,7 @@ On the [PyPrimeMesh Issues](https://github.com/ansys/pyprimemesh/issues) page,
 you can create issues to report bugs and request new features. On the
 [PyPrimeMesh Discussions](https://github.com/ansys/pyprimemesh/discussions) page or the
 [Discussions](https://discuss.ansys.com/) page on the Ansys Developer portal,
-you can post questions, share ideas, and get community feedback. 
+you can post your questions, share ideas, and get community feedback. 
 
 To reach the project support team, email [pyansys.core@ansys.com](mailtto:pyansys.core@ansys.com).
 
