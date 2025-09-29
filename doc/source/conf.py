@@ -223,15 +223,15 @@ def run_all_examples_in_parallel():
     Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)
 
 
-def setup(app):
-    """Sphinx setup function to run all example scripts in parallel before building the docs.
+# def setup(app):
+#     """Sphinx setup function to run all example scripts in parallel before building the docs.
 
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        The Sphinx application object.
-    """
-    app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+#     Parameters
+#     ----------
+#     app : sphinx.application.Sphinx
+#         The Sphinx application object.
+#     """
+#     app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
 
 
-supress_warnings = ["docutils"]
+# supress_warnings = ["docutils"]
