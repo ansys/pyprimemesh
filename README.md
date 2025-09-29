@@ -49,7 +49,7 @@ this command:
 pip install ansys-meshing-prime[all]
 ```
 
-Alternatively, you can clone this repository and install the client using
+Alternatively, you can also clone this repository and install the client using
 these commands:
 
 ```bash
