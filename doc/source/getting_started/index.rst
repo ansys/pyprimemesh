@@ -142,7 +142,7 @@ GitHub container registry
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-You should have write access to the repository or should be a members of the Ansys organization.
+You should have write access to the repository or should be a members of the Ansys organization .
 
 After installing Docker on your machine, follow these steps to download the Linux Docker container
 for the Ansys Prime Server and install this image.
