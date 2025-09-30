@@ -30,8 +30,10 @@ from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
+import docker
 
 _LOCAL_PORTS = []
+_DOCKER_CLIENT = docker.from_env()
 
 
 def make_unique_container_name(name: str):
@@ -83,15 +85,13 @@ def get_child_processes(process):
         Process IDs of the processes.
     """
     children = []
-    cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
+    cmd = subprocess.Popen(['pgrep', '-P', str(process)], stdout=subprocess.PIPE)
     out = cmd.stdout.read().decode("utf-8")
     cmd.wait()
     for pid in out.split("\n")[:1]:
         if pid.strip() == '':
             break
-        ps_cmd = subprocess.Popen(
-            "ps -o cmd= {}".format(int(pid)), stdout=subprocess.PIPE, shell=True
-        )
+        ps_cmd = subprocess.Popen(['ps', '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE)
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         cmd_name = ps_out.split()[0]
@@ -238,42 +238,38 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-    docker_command = [
-        'docker',
-        'run',
-        '--shm-size=4g',
-        '-d',
-        '--rm',
-        '--name',
-        f'{name}',
-        '-p',
-        f'{port}:{port}',
-        '-v',
-        f'{mount_host}:{mount_image}',
-        '-e',
-        f'ANSYSLMD_LICENSE_FILE={license_file}',
-    ]
-    graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
-    if graphics_port > 0:
-        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
-        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
-    prime_arguments = [
-        f'{image_name}:{version}',
-        '--port',
-        f'{port}',
-    ]
-    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
+
+    ports = {f'{port}/tcp': port}
+
+    volumes = {mount_host: {'bind': mount_image, 'mode': 'rw'}}
+
+    environment = {'ANSYSLMD_LICENSE_FILE': license_file}
+    container = _DOCKER_CLIENT.containers.run(
+        image=f'{image_name}:{version}',
+        name=name,
+        detach=True,
+        shm_size='4g',
+        ports=ports,
+        volumes=volumes,
+        environment=environment,
+        remove=True,
+        command=['--port', str(port)],
+    )
 
 
-def stop_prime_github_container(name):
-    """Stop a running container.
+def stop_prime_github_container(container_name: str):
+    """Stop a container.
 
     Parameters
     ----------
-    name : str
-        Name of the container.
+    container : str
+        Name of the container to stop.
     """
-    subprocess.run(['docker', 'stop', f'{name}'], stdout=subprocess.DEVNULL)
+    try:
+        cont = _DOCKER_CLIENT.containers.get(container_name)
+        cont.stop()
+    except docker.errors.NotFound:
+        pass
 
 
 @contextmanager

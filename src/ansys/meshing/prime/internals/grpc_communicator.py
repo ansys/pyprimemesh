@@ -21,6 +21,7 @@
 
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
+import logging
 from typing import Optional
 
 import grpc
@@ -33,6 +34,7 @@ import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
+    PrimeRuntimeError,
     communicator_error_handler,
     error_code_handler,
 )
@@ -58,7 +60,8 @@ def get_response_messages(response_generator):
         if response.HasField('completion_token'):
             break
 
-        assert response.HasField('content')
+        if not response.HasField('content'):
+            raise PrimeRuntimeError('Bad response from server')
         yield response.content
 
 
@@ -128,7 +131,7 @@ class GRPCCommunicator(Communicator):
         except ConnectionError:
             raise
         except:
-            pass
+            logging.getLogger("PyPrimeMesh").error('Uncontrolled error, continuing execution')
 
     @error_code_handler
     @communicator_error_handler
@@ -185,8 +188,6 @@ class GRPCCommunicator(Communicator):
                 )
                 message = get_response(response, '')
             if defaults.print_communicator_stats():
-                import logging
-
                 logging.getLogger("PyPrimeMesh").info(
                     f'Data Transfer: Received {len(message)} bytes'
                 )
