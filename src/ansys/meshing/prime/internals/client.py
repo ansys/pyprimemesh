@@ -71,7 +71,7 @@ class Client(object):
         self._default_model: Model = None
         local = kwargs.get('local', False)
         if local and server_process is not None:
-            raise ValueError('Local client cannot be instantiated with a server process')
+            raise ValueError('Local client can\'t be instantiated with a server process')
         self._local = local
         self._process = server_process
         self._comm = None
