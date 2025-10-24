@@ -1,0 +1,210 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractFeatureParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.ExtractFeatureParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, replace: bool = None, feature_angle: float = None, separate_features: bool = None, separation_angle: float = None, disconnect_with_faces: bool = None, label_name: str = None, number_of_threads: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameter to control feature edge extraction.
+
+   :param model: Model to create a ``ExtractFeatureParams`` object with default parameters.
+   :type model: Model
+   :param replace: Option to replace existing edge zonelets with new extracted edge zonelets.
+   :type replace: bool, optional
+   :param feature_angle: Angle used to capture face features to be  extracted as edges.
+   :type feature_angle: float, optional
+   :param separate_features: Option to separate extracted features.
+   :type separate_features: bool, optional
+   :param separation_angle: Angle used to separate extracted features.
+   :type separation_angle: float, optional
+   :param disconnect_with_faces: Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
+   :type disconnect_with_faces: bool, optional
+   :param label_name: Label name to be assigned to extracted features.
+   :type label_name: str, optional
+   :param number_of_threads: Number of threads used for multithreading.
+   :type number_of_threads: int, optional
+   :param json_data: JSON dictionary to create a ``ExtractFeatureParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extract_feature_params = prime.ExtractFeatureParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractFeatureParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~disconnect_with_faces`
+            - Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
+          * - :py:attr:`~feature_angle`
+            - Angle used to capture face features to be  extracted as edges.
+          * - :py:attr:`~label_name`
+            - Label name to be assigned to extracted features.
+          * - :py:attr:`~number_of_threads`
+            - Number of threads used for multithreading.
+          * - :py:attr:`~replace`
+            - Option to replace existing edge zonelets with new extracted edge zonelets.
+          * - :py:attr:`~separate_features`
+            - Option to separate extracted features.
+          * - :py:attr:`~separation_angle`
+            - Angle used to separate extracted features.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractFeatureParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractFeatureParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ExtractFeatureParams
+
+Property detail
+---------------
+
+.. py:property:: disconnect_with_faces
+   :type: bool
+
+
+   Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
+
+.. py:property:: feature_angle
+   :type: float
+
+
+   Angle used to capture face features to be  extracted as edges.
+
+.. py:property:: label_name
+   :type: str
+
+
+   Label name to be assigned to extracted features.
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads used for multithreading.
+
+.. py:property:: replace
+   :type: bool
+
+
+   Option to replace existing edge zonelets with new extracted edge zonelets.
+
+.. py:property:: separate_features
+   :type: bool
+
+
+   Option to separate extracted features.
+
+.. py:property:: separation_angle
+   :type: float
+
+
+   Angle used to separate extracted features.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractFeatureParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractFeatureParams.print_default()
+
+
+.. py:method:: set_default(replace: bool = None, feature_angle: float = None, separate_features: bool = None, separation_angle: float = None, disconnect_with_faces: bool = None, label_name: str = None, number_of_threads: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractFeatureParams`` object.
+
+   :param replace: Option to replace existing edge zonelets with new extracted edge zonelets.
+   :type replace: bool, optional
+   :param feature_angle: Angle used to capture face features to be  extracted as edges.
+   :type feature_angle: float, optional
+   :param separate_features: Option to separate extracted features.
+   :type separate_features: bool, optional
+   :param separation_angle: Angle used to separate extracted features.
+   :type separation_angle: float, optional
+   :param disconnect_with_faces: Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
+   :type disconnect_with_faces: bool, optional
+   :param label_name: Label name to be assigned to extracted features.
+   :type label_name: str, optional
+   :param number_of_threads: Number of threads used for multithreading.
+   :type number_of_threads: int, optional
+
+
+
+
+
+
+
+.. vale on

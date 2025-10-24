@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MultiZoneEdgeBiasingParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.controlstructs.MultiZoneEdgeBiasingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, face_scope: ScopeDefinition = None, edge_scope: ScopeDefinition = None, bias_factor: float = None, n_divisions: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Defines MultiZone edge biasing control parameters.
+
+   :param model: Model to create a ``MultiZoneEdgeBiasingParams`` object with default parameters.
+   :type model: Model
+   :param face_scope: Reference face zonelets to control mesh clustering orientation.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type face_scope: ScopeDefinition, optional
+   :param edge_scope: Edge zonelets to control the expanse of edge biasing.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_scope: ScopeDefinition, optional
+   :param bias_factor: Bias factor used for MultiZone edge biasing control.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type bias_factor: float, optional
+   :param n_divisions: Number of divisions on the section where edge biasing is done.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_divisions: int, optional
+   :param json_data: JSON dictionary to create a ``MultiZoneEdgeBiasingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> multi_zone_edge_biasing_params = prime.MultiZoneEdgeBiasingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MultiZoneEdgeBiasingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~bias_factor`
+            - Bias factor used for MultiZone edge biasing control.
+          * - :py:attr:`~edge_scope`
+            - Edge zonelets to control the expanse of edge biasing.
+          * - :py:attr:`~face_scope`
+            - Reference face zonelets to control mesh clustering orientation.
+          * - :py:attr:`~n_divisions`
+            - Number of divisions on the section where edge biasing is done.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MultiZoneEdgeBiasingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MultiZoneEdgeBiasingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.controlstructs import MultiZoneEdgeBiasingParams
+
+Property detail
+---------------
+
+.. py:property:: bias_factor
+   :type: float
+
+
+   Bias factor used for MultiZone edge biasing control.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: edge_scope
+   :type: ScopeDefinition
+
+
+   Edge zonelets to control the expanse of edge biasing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: face_scope
+   :type: ScopeDefinition
+
+
+   Reference face zonelets to control mesh clustering orientation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_divisions
+   :type: int
+
+
+   Number of divisions on the section where edge biasing is done.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MultiZoneEdgeBiasingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MultiZoneEdgeBiasingParams.print_default()
+
+
+.. py:method:: set_default(face_scope: ScopeDefinition = None, edge_scope: ScopeDefinition = None, bias_factor: float = None, n_divisions: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MultiZoneEdgeBiasingParams`` object.
+
+   :param face_scope: Reference face zonelets to control mesh clustering orientation.
+   :type face_scope: ScopeDefinition, optional
+   :param edge_scope: Edge zonelets to control the expanse of edge biasing.
+   :type edge_scope: ScopeDefinition, optional
+   :param bias_factor: Bias factor used for MultiZone edge biasing control.
+   :type bias_factor: float, optional
+   :param n_divisions: Number of divisions on the section where edge biasing is done.
+   :type n_divisions: int, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``sizecontrol.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.autogen.sizecontrol
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: sizecontrol
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrol.SizeControl`
+            - Size control is used to compute the size field.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SizeControl</api/ansys/meshing/prime/autogen/sizecontrol/SizeControl>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+n\_found
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualityResultsPart.n_found

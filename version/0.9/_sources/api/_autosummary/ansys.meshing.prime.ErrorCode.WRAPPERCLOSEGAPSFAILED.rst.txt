@@ -1,0 +1,6 @@
+WRAPPERCLOSEGAPSFAILED
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCLOSEGAPSFAILED

@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BCPair`
+===============
+
+
+.. py:class:: ansys.meshing.prime.BCPair(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, source_zonelet: int = None, target_zonelet: int = None, type: BCPairType = None, json_data: dict = None, **kwargs)
+
+
+
+   Used to define boundary conditions for match morphing.
+
+   :param model: Model to create a ``BCPair`` object with default parameters.
+   :type model: Model
+   :param source_zonelet: Id of source zonelet.
+   :type source_zonelet: int, optional
+   :param target_zonelet: Id of target zonelet.
+   :type target_zonelet: int, optional
+   :param type: Option to specify boundary condition pair type.
+   :type type: BCPairType, optional
+   :param json_data: JSON dictionary to create a ``BCPair`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> b_cpair = prime.BCPair(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: BCPair
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~source_zonelet`
+            - Id of source zonelet.
+          * - :py:attr:`~target_zonelet`
+            - Id of target zonelet.
+          * - :py:attr:`~type`
+            - Option to specify boundary condition pair type.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``BCPair`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``BCPair`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import BCPair
+
+Property detail
+---------------
+
+.. py:property:: source_zonelet
+   :type: int
+
+
+   Id of source zonelet.
+
+.. py:property:: target_zonelet
+   :type: int
+
+
+   Id of target zonelet.
+
+.. py:property:: type
+   :type: BCPairType
+
+
+   Option to specify boundary condition pair type.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``BCPair`` object.
+
+   .. rubric:: Examples
+
+   >>> BCPair.print_default()
+
+
+.. py:method:: set_default(source_zonelet: int = None, target_zonelet: int = None, type: BCPairType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``BCPair`` object.
+
+   :param source_zonelet: Id of source zonelet.
+   :type source_zonelet: int, optional
+   :param target_zonelet: Id of target zonelet.
+   :type target_zonelet: int, optional
+   :param type: Option to specify boundary condition pair type.
+   :type type: BCPairType, optional
+
+
+
+
+
+
+
+.. vale on

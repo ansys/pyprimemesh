@@ -1,0 +1,6 @@
+new\_faces
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderSplitResults.new_faces

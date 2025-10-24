@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.IntersectionMask.conjugate
+
+.. minigallery::
+   :add-heading: Examples using IntersectionMask.conjugate
+
+   ansys.meshing.prime.IntersectionMask.conjugate

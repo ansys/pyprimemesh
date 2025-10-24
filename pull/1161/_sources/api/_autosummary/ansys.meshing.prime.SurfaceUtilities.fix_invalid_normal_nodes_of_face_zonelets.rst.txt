@@ -1,0 +1,11 @@
+fix\_invalid\_normal\_nodes\_of\_face\_zonelets
+===============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets
+
+   ansys.meshing.prime.SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets

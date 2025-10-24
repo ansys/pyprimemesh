@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``hide_picked.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.graphics.widgets.hide_picked
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: hide_picked
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.widgets.hide_picked.HidePicked`
+            - Initializes the hide picked button widget.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> HidePicked</api/ansys/meshing/prime/graphics/widgets/hide_picked/HidePicked>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+This module contains the HidePicked class.
+
+
+
+
+
+
+
+
+
+.. vale on

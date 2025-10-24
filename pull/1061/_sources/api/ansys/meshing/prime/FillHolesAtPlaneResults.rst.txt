@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FillHolesAtPlaneResults`
+================================
+
+
+.. py:class:: ansys.meshing.prime.FillHolesAtPlaneResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, created_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, assigned_zone_name: str = None, created_zone_id: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with fill holes at given plane.
+
+   :param model: Model to create a ``FillHolesAtPlaneResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with operation.
+   :type warning_codes: List[WarningCode], optional
+   :param created_face_zonelets: Ids of face zonelets created to fill the holes.
+   :type created_face_zonelets: Iterable[int], optional
+   :param assigned_zone_name: Name assigned to zone created. Suffix is added to suggested name if the name not available.
+   :type assigned_zone_name: str, optional
+   :param created_zone_id: Id assigned to zone created.
+   :type created_zone_id: int, optional
+   :param json_data: JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> fill_holes_at_plane_results = prime.FillHolesAtPlaneResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FillHolesAtPlaneResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assigned_zone_name`
+            - Name assigned to zone created. Suffix is added to suggested name if the name not available.
+          * - :py:attr:`~created_face_zonelets`
+            - Ids of face zonelets created to fill the holes.
+          * - :py:attr:`~created_zone_id`
+            - Id assigned to zone created.
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FillHolesAtPlaneResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FillHolesAtPlaneResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FillHolesAtPlaneResults
+
+Property detail
+---------------
+
+.. py:property:: assigned_zone_name
+   :type: str
+
+
+   Name assigned to zone created. Suffix is added to suggested name if the name not available.
+
+.. py:property:: created_face_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of face zonelets created to fill the holes.
+
+.. py:property:: created_zone_id
+   :type: int
+
+
+   Id assigned to zone created.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with operation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FillHolesAtPlaneResults`` object.
+
+   .. rubric:: Examples
+
+   >>> FillHolesAtPlaneResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, created_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, assigned_zone_name: str = None, created_zone_id: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FillHolesAtPlaneResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with operation.
+   :type warning_codes: List[WarningCode], optional
+   :param created_face_zonelets: Ids of face zonelets created to fill the holes.
+   :type created_face_zonelets: Iterable[int], optional
+   :param assigned_zone_name: Name assigned to zone created. Suffix is added to suggested name if the name not available.
+   :type assigned_zone_name: str, optional
+   :param created_zone_id: Id assigned to zone created.
+   :type created_zone_id: int, optional
+
+
+
+
+
+
+
+.. vale on

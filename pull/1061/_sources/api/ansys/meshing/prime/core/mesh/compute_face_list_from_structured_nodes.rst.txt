@@ -1,0 +1,13 @@
+ansys.meshing.prime.core.mesh.compute_face_list_from_structured_nodes
+=====================================================================
+
+.. py:function:: ansys.meshing.prime.core.mesh.compute_face_list_from_structured_nodes(dim)
+
+   Compute the distances from the nodes.
+
+   :param dim: List with the number of elements in each dimension.
+   :type dim: List[int]
+
+   :returns: List with the faces.
+   :rtype: List
+

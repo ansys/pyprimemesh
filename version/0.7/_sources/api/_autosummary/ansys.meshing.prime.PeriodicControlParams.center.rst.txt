@@ -1,0 +1,6 @@
+center
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PeriodicControlParams.center

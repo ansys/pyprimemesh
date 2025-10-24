@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ControlPointSelection`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.ControlPointSelection
+
+
+
+   Control point selection type.
+
+
+
+
+.. py:currentmodule:: ControlPointSelection
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~MANUAL`
+            - Manual Spline control point selection.
+          * - :py:attr:`~PROGRAMCONTROLLED`
+            - Program controlled spline control point selection.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ControlPointSelection
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: MANUAL
+   :value: 0
+
+
+   Manual Spline control point selection.
+
+.. py:attribute:: PROGRAMCONTROLLED
+   :value: 1
+
+
+   Program controlled spline control point selection.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿aggressively
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.aggressively

@@ -1,0 +1,6 @@
+OVERRIDEEDGESCOPEENTITY
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.OVERRIDEEDGESCOPEENTITY

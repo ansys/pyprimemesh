@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BCsVolumetricModality`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.morpherbcsstructs.BCsVolumetricModality
+
+
+
+   Indicate options to identify morphable region in input volumetric mesh.
+
+
+
+
+.. py:currentmodule:: BCsVolumetricModality
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALL`
+            - Option to identify all nodes expect fixed nodes as morphable nodes from the input volumetric mesh.
+          * - :py:attr:`~BOX`
+            - Option to identify nodes enclosed by bounding box as morphable nodes from the input volumetric mesh.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.morpherbcsstructs import BCsVolumetricModality
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALL
+   :value: 2
+
+
+   Option to identify all nodes expect fixed nodes as morphable nodes from the input volumetric mesh.
+
+.. py:attribute:: BOX
+   :value: 1
+
+
+   Option to identify nodes enclosed by bounding box as morphable nodes from the input volumetric mesh.
+
+
+
+
+
+
+
+.. vale on

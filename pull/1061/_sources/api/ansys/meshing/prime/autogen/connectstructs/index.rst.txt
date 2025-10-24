@@ -1,0 +1,201 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``connectstructs.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.autogen.connectstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: connectstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.ConnectResults`
+            - Results associated with the connection operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.FuseOption`
+            - Type to specify treatment of surfaces for fusing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.FuseParams`
+            - Parameters for fuse operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.FuseResults`
+            - Results associated with the fuse operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.IntersectParams`
+            - Parameters used for intersection.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.JoinParams`
+            - Parameters used for join.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.JoinSeparateMethod`
+            - Join separation method to handle separated overlapped zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.MergeBoundaryNodesParams`
+            - Parameters used for the merge boundary nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.MergeBoundaryNodesResults`
+            - Results associated with the merge nodes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.MergeNodeType`
+            - Type of nodes to be merged.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.OverlapPairs`
+            - Provides ids of a pair of overlapping face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.OverlapSearchResults`
+            - Provides ids of a pair of overlapping face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.StitchParams`
+            - Parameters used for stitch operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.StitchType`
+            - Stitch type depending on nature of surface boundary edges to be stitched.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.SubtractVolumesParams`
+            - Parameters to control the volume subtract operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs.SubtractVolumesResults`
+            - Results of the volume subtract operation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ConnectResults</api/ansys/meshing/prime/autogen/connectstructs/ConnectResults>
+    <span class="nf nf-cod-symbol_class"></span> FuseOption</api/ansys/meshing/prime/autogen/connectstructs/FuseOption>
+    <span class="nf nf-cod-symbol_class"></span> FuseParams</api/ansys/meshing/prime/autogen/connectstructs/FuseParams>
+    <span class="nf nf-cod-symbol_class"></span> FuseResults</api/ansys/meshing/prime/autogen/connectstructs/FuseResults>
+    <span class="nf nf-cod-symbol_class"></span> IntersectParams</api/ansys/meshing/prime/autogen/connectstructs/IntersectParams>
+    <span class="nf nf-cod-symbol_class"></span> JoinParams</api/ansys/meshing/prime/autogen/connectstructs/JoinParams>
+    <span class="nf nf-cod-symbol_class"></span> JoinSeparateMethod</api/ansys/meshing/prime/autogen/connectstructs/JoinSeparateMethod>
+    <span class="nf nf-cod-symbol_class"></span> MergeBoundaryNodesParams</api/ansys/meshing/prime/autogen/connectstructs/MergeBoundaryNodesParams>
+    <span class="nf nf-cod-symbol_class"></span> MergeBoundaryNodesResults</api/ansys/meshing/prime/autogen/connectstructs/MergeBoundaryNodesResults>
+    <span class="nf nf-cod-symbol_class"></span> MergeNodeType</api/ansys/meshing/prime/autogen/connectstructs/MergeNodeType>
+    <span class="nf nf-cod-symbol_class"></span> OverlapPairs</api/ansys/meshing/prime/autogen/connectstructs/OverlapPairs>
+    <span class="nf nf-cod-symbol_class"></span> OverlapSearchResults</api/ansys/meshing/prime/autogen/connectstructs/OverlapSearchResults>
+    <span class="nf nf-cod-symbol_class"></span> StitchParams</api/ansys/meshing/prime/autogen/connectstructs/StitchParams>
+    <span class="nf nf-cod-symbol_class"></span> StitchType</api/ansys/meshing/prime/autogen/connectstructs/StitchType>
+    <span class="nf nf-cod-symbol_class"></span> SubtractVolumesParams</api/ansys/meshing/prime/autogen/connectstructs/SubtractVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> SubtractVolumesResults</api/ansys/meshing/prime/autogen/connectstructs/SubtractVolumesResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`RefineAtContactsResults`
+================================
+
+
+.. py:class:: ansys.meshing.prime.RefineAtContactsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_refined: int = None, size_field_id: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results structure associated with refine face elements in contact.
+
+   :param model: Model to create a ``RefineAtContactsResults`` object with default parameters.
+   :type model: Model
+   :param n_refined: Number of face elements identified for refinement.
+   :type n_refined: int, optional
+   :param size_field_id: Id of size field created to refine at contacts.
+   :type size_field_id: int, optional
+   :param error_code: ErrorCode associated with the refine contacts operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> refine_at_contacts_results = prime.RefineAtContactsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: RefineAtContactsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - ErrorCode associated with the refine contacts operation.
+          * - :py:attr:`~n_refined`
+            - Number of face elements identified for refinement.
+          * - :py:attr:`~size_field_id`
+            - Id of size field created to refine at contacts.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``RefineAtContactsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``RefineAtContactsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import RefineAtContactsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   ErrorCode associated with the refine contacts operation.
+
+.. py:property:: n_refined
+   :type: int
+
+
+   Number of face elements identified for refinement.
+
+.. py:property:: size_field_id
+   :type: int
+
+
+   Id of size field created to refine at contacts.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``RefineAtContactsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> RefineAtContactsResults.print_default()
+
+
+.. py:method:: set_default(n_refined: int = None, size_field_id: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``RefineAtContactsResults`` object.
+
+   :param n_refined: Number of face elements identified for refinement.
+   :type n_refined: int, optional
+   :param size_field_id: Id of size field created to refine at contacts.
+   :type size_field_id: int, optional
+   :param error_code: ErrorCode associated with the refine contacts operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

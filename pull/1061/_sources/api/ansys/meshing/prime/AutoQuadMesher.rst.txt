@@ -1,0 +1,230 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AutoQuadMesher`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.AutoQuadMesher(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Generate full quad mesh.
+
+   :param model: Server model to create AutoQuadMesher object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: AutoQuadMesher
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~check_topology`
+            - Check topology for inconsistencies with the given parameters.
+          * - :py:attr:`~defeature_topology`
+            - Defeature topology with given parameters.
+          * - :py:attr:`~detect_and_treat_features`
+            - Detect features in topology and treat them with given parameters.
+          * - :py:attr:`~optimize_quad_mesh`
+            - Optimize quad faces with given parameters.
+          * - :py:attr:`~repair_topology`
+            - Repair topology with given parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for AutoQuadMesher.
+          * - :py:attr:`~__exit__`
+            - Exit context for AutoQuadMesher.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import AutoQuadMesher
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for AutoQuadMesher.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for AutoQuadMesher.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: check_topology(part_id: int, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.CheckTopologyParams) -> ansys.meshing.prime.params.primestructs.AutoQuadMesherResults
+
+   Check topology for inconsistencies with the given parameters.
+
+
+   :param part_id: Id of the Part.
+   :type part_id: int
+   :param topo_face_ids: Ids of topofaces.
+   :type topo_face_ids: Iterable[int]
+   :param params: Parameters of check topology.
+   :type params: CheckTopologyParams
+
+   :returns: Returns the AutoQuadMesherResults structure.
+   :rtype: AutoQuadMesherResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> autoQuadMesher = AutoQuadMesher(model=model)
+   >>> results = autoQuadMesher.check_topology(part_id, topo_face_ids, params);
+
+
+.. py:method:: defeature_topology(part_id: int, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.DefeatureTopologyParams) -> ansys.meshing.prime.params.primestructs.AutoQuadMesherResults
+
+   Defeature topology with given parameters.
+
+
+   :param part_id: Id of the Part.
+   :type part_id: int
+   :param topo_face_ids: Ids of topofaces.
+   :type topo_face_ids: Iterable[int]
+   :param params: Parameters of defeature topology.
+   :type params: DefeatureTopologyParams
+
+   :returns: Returns the AutoQuadMesherResults structure.
+   :rtype: AutoQuadMesherResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> autoQuadMesher = AutoQuadMesher(model=model)
+   >>> results = autoQuadMesher.defeature_topology(part_id, topo_face_ids, params);
+
+
+.. py:method:: detect_and_treat_features(part_id: int, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.DetectAndTreatFeaturesParams) -> ansys.meshing.prime.params.primestructs.AutoQuadMesherResults
+
+   Detect features in topology and treat them with given parameters.
+
+
+   :param part_id: Id of the Part.
+   :type part_id: int
+   :param topo_face_ids: Ids of topofaces.
+   :type topo_face_ids: Iterable[int]
+   :param params: Parameters of detect and treat features.
+   :type params: DetectAndTreatFeaturesParams
+
+   :returns: Returns the AutoQuadMesherResults structure.
+   :rtype: AutoQuadMesherResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> autoQuadMesher = AutoQuadMesher(model=model)
+   >>> results = autoQuadMesher.detect_and_treat_features(part_id, topo_face_ids, params);
+
+
+.. py:method:: optimize_quad_mesh(part_id: int, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.OptimizeQuadMeshParams) -> ansys.meshing.prime.params.primestructs.AutoQuadMesherResults
+
+   Optimize quad faces with given parameters.
+
+
+   :param part_id: Id of the Part.
+   :type part_id: int
+   :param topo_face_ids: Ids of topofaces.
+   :type topo_face_ids: Iterable[int]
+   :param params: Parameters of optimize quad mesh.
+   :type params: OptimizeQuadMeshParams
+
+   :returns: Returns the AutoQuadMesherResults structure.
+   :rtype: AutoQuadMesherResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> autoQuadMesher = AutoQuadMesher(model=model)
+   >>> results = autoQuadMesher.optimize_quad_mesh(part_id, topo_face_ids, params);
+
+
+.. py:method:: repair_topology(part_id: int, topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.RepairTopologyParams) -> ansys.meshing.prime.params.primestructs.AutoQuadMesherResults
+
+   Repair topology with given parameters.
+
+
+   :param part_id: Id of the Part.
+   :type part_id: int
+   :param topo_face_ids: Ids of topofaces.
+   :type topo_face_ids: Iterable[int]
+   :param params: Parameters of repair topology.
+   :type params: RepairTopologyParams
+
+   :returns: Returns the AutoQuadMesherResults structure.
+   :rtype: AutoQuadMesherResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> autoQuadMesher = AutoQuadMesher(model=model)
+   >>> results = autoQuadMesher.repair_topology(part_id, topo_face_ids, params);
+
+
+
+
+
+
+
+.. vale on

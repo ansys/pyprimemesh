@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``materialpointmanager.py`` module
+======================================
+
+.. py:module:: ansys.meshing.prime.autogen.materialpointmanager
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: materialpointmanager
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanager.MaterialPointManager`
+            - Provide functions for material point creation, deletion and queries.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> MaterialPointManager</api/ansys/meshing/prime/autogen/materialpointmanager/MaterialPointManager>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

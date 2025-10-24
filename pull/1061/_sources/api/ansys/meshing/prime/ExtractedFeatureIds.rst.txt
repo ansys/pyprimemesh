@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractedFeatureIds`
+============================
+
+
+.. py:class:: ansys.meshing.prime.ExtractedFeatureIds(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, part_id: int = None, new_edge_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Contains ids of the features extracted.
+
+   :param model: Model to create a ``ExtractedFeatureIds`` object with default parameters.
+   :type model: Model
+   :param part_id: Id of the part from which edge zonelets are extracted.
+   :type part_id: int, optional
+   :param new_edge_zonelets: Ids of new edge zonelets extracted.
+   :type new_edge_zonelets: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``ExtractedFeatureIds`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extracted_feature_ids = prime.ExtractedFeatureIds(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractedFeatureIds
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~new_edge_zonelets`
+            - Ids of new edge zonelets extracted.
+          * - :py:attr:`~part_id`
+            - Id of the part from which edge zonelets are extracted.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractedFeatureIds`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractedFeatureIds`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ExtractedFeatureIds
+
+Property detail
+---------------
+
+.. py:property:: new_edge_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of new edge zonelets extracted.
+
+.. py:property:: part_id
+   :type: int
+
+
+   Id of the part from which edge zonelets are extracted.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractedFeatureIds`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractedFeatureIds.print_default()
+
+
+.. py:method:: set_default(part_id: int = None, new_edge_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractedFeatureIds`` object.
+
+   :param part_id: Id of the part from which edge zonelets are extracted.
+   :type part_id: int, optional
+   :param new_edge_zonelets: Ids of new edge zonelets extracted.
+   :type new_edge_zonelets: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateZoneResults`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.modelstructs.CreateZoneResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, zone_id: int = None, assigned_name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the create zone.
+
+   :param model: Model to create a ``CreateZoneResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the create zone operation.
+   :type error_code: ErrorCode, optional
+   :param zone_id: Id of newly created zone.
+   :type zone_id: int, optional
+   :param assigned_name: Assigned name of newly created zone.
+   :type assigned_name: str, optional
+   :param json_data: JSON dictionary to create a ``CreateZoneResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_zone_results = prime.CreateZoneResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateZoneResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assigned_name`
+            - Assigned name of newly created zone.
+          * - :py:attr:`~error_code`
+            - Error code associated with the create zone operation.
+          * - :py:attr:`~zone_id`
+            - Id of newly created zone.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateZoneResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateZoneResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.modelstructs import CreateZoneResults
+
+Property detail
+---------------
+
+.. py:property:: assigned_name
+   :type: str
+
+
+   Assigned name of newly created zone.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the create zone operation.
+
+.. py:property:: zone_id
+   :type: int
+
+
+   Id of newly created zone.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateZoneResults`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateZoneResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, zone_id: int = None, assigned_name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateZoneResults`` object.
+
+   :param error_code: Error code associated with the create zone operation.
+   :type error_code: ErrorCode, optional
+   :param zone_id: Id of newly created zone.
+   :type zone_id: int, optional
+   :param assigned_name: Assigned name of newly created zone.
+   :type assigned_name: str, optional
+
+
+
+
+
+
+
+.. vale on

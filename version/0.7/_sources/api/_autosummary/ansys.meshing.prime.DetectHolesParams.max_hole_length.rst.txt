@@ -1,0 +1,6 @@
+max\_hole\_length
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectHolesParams.max_hole_length

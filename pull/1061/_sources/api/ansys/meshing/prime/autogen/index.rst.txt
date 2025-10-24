@@ -1,0 +1,482 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``autogen`` package
+===========================
+
+.. py:module:: ansys.meshing.prime.autogen
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: autogen
+.. tab-set::
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automesh`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.automeshstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesher`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.autoquadmesherstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.boundaryfittednurbs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.collapsetool`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.collapsetoolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commonstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connect`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.connectstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controldata`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.controlstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.coreobject`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.deletetool`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.deletetoolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextraction`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextractionstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileio`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.hextospline`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.igastructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanager`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanagerstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfo`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.meshinfostructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.model`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.modelstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpher`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherbcsstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpherstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.multizonecontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.part`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.periodiccontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.periodiccontrolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.primeconfig`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.prismcontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.prismcontrolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.quadtospline`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolder`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.shellblcontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.shellblcontrolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizecontrolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizefield`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizefieldstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.splittoolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearch`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfacesearchstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilities`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfaceutilitystructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surfer`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.surferstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.thinvolumecontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.thinvolumecontrolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topodata`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topodatastructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.toposearchstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topoutilities`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topoutilitystructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.transform`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.transformstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedspline`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedsplinestructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumecontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumecontrolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumemeshtool`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumemeshtoolstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumesearch`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumesearchstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumesweeper`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumesweeperstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.vtcomposer`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.vtcomposerstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapper`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrappercontrol`
+            - Auto-generated file. DO NOT MODIFY
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs`
+            - Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+
+.. .. .. 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> automesh</api/ansys/meshing/prime/autogen/automesh/index>
+    <span class="nf nf-fa-file"></span> automeshstructs</api/ansys/meshing/prime/autogen/automeshstructs/index>
+    <span class="nf nf-fa-file"></span> autoquadmesher</api/ansys/meshing/prime/autogen/autoquadmesher/index>
+    <span class="nf nf-fa-file"></span> autoquadmesherstructs</api/ansys/meshing/prime/autogen/autoquadmesherstructs/index>
+    <span class="nf nf-fa-file"></span> boundaryfittednurbs</api/ansys/meshing/prime/autogen/boundaryfittednurbs/index>
+    <span class="nf nf-fa-file"></span> collapsetool</api/ansys/meshing/prime/autogen/collapsetool/index>
+    <span class="nf nf-fa-file"></span> collapsetoolstructs</api/ansys/meshing/prime/autogen/collapsetoolstructs/index>
+    <span class="nf nf-fa-file"></span> commonstructs</api/ansys/meshing/prime/autogen/commonstructs/index>
+    <span class="nf nf-fa-file"></span> commontypes</api/ansys/meshing/prime/autogen/commontypes/index>
+    <span class="nf nf-fa-file"></span> connect</api/ansys/meshing/prime/autogen/connect/index>
+    <span class="nf nf-fa-file"></span> connectstructs</api/ansys/meshing/prime/autogen/connectstructs/index>
+    <span class="nf nf-fa-file"></span> controldata</api/ansys/meshing/prime/autogen/controldata/index>
+    <span class="nf nf-fa-file"></span> controlstructs</api/ansys/meshing/prime/autogen/controlstructs/index>
+    <span class="nf nf-fa-file"></span> coreobject</api/ansys/meshing/prime/autogen/coreobject/index>
+    <span class="nf nf-fa-file"></span> deletetool</api/ansys/meshing/prime/autogen/deletetool/index>
+    <span class="nf nf-fa-file"></span> deletetoolstructs</api/ansys/meshing/prime/autogen/deletetoolstructs/index>
+    <span class="nf nf-fa-file"></span> featureextraction</api/ansys/meshing/prime/autogen/featureextraction/index>
+    <span class="nf nf-fa-file"></span> featureextractionstructs</api/ansys/meshing/prime/autogen/featureextractionstructs/index>
+    <span class="nf nf-fa-file"></span> fileio</api/ansys/meshing/prime/autogen/fileio/index>
+    <span class="nf nf-fa-file"></span> fileiostructs</api/ansys/meshing/prime/autogen/fileiostructs/index>
+    <span class="nf nf-fa-file"></span> hextospline</api/ansys/meshing/prime/autogen/hextospline/index>
+    <span class="nf nf-fa-file"></span> igastructs</api/ansys/meshing/prime/autogen/igastructs/index>
+    <span class="nf nf-fa-file"></span> materialpointmanager</api/ansys/meshing/prime/autogen/materialpointmanager/index>
+    <span class="nf nf-fa-file"></span> materialpointmanagerstructs</api/ansys/meshing/prime/autogen/materialpointmanagerstructs/index>
+    <span class="nf nf-fa-file"></span> meshinfo</api/ansys/meshing/prime/autogen/meshinfo/index>
+    <span class="nf nf-fa-file"></span> meshinfostructs</api/ansys/meshing/prime/autogen/meshinfostructs/index>
+    <span class="nf nf-fa-file"></span> model</api/ansys/meshing/prime/autogen/model/index>
+    <span class="nf nf-fa-file"></span> modelstructs</api/ansys/meshing/prime/autogen/modelstructs/index>
+    <span class="nf nf-fa-file"></span> morpher</api/ansys/meshing/prime/autogen/morpher/index>
+    <span class="nf nf-fa-file"></span> morpherbcsstructs</api/ansys/meshing/prime/autogen/morpherbcsstructs/index>
+    <span class="nf nf-fa-file"></span> morpherstructs</api/ansys/meshing/prime/autogen/morpherstructs/index>
+    <span class="nf nf-fa-file"></span> multizonecontrol</api/ansys/meshing/prime/autogen/multizonecontrol/index>
+    <span class="nf nf-fa-file"></span> part</api/ansys/meshing/prime/autogen/part/index>
+    <span class="nf nf-fa-file"></span> partstructs</api/ansys/meshing/prime/autogen/partstructs/index>
+    <span class="nf nf-fa-file"></span> periodiccontrol</api/ansys/meshing/prime/autogen/periodiccontrol/index>
+    <span class="nf nf-fa-file"></span> periodiccontrolstructs</api/ansys/meshing/prime/autogen/periodiccontrolstructs/index>
+    <span class="nf nf-fa-file"></span> primeconfig</api/ansys/meshing/prime/autogen/primeconfig/index>
+    <span class="nf nf-fa-file"></span> prismcontrol</api/ansys/meshing/prime/autogen/prismcontrol/index>
+    <span class="nf nf-fa-file"></span> prismcontrolstructs</api/ansys/meshing/prime/autogen/prismcontrolstructs/index>
+    <span class="nf nf-fa-file"></span> quadtospline</api/ansys/meshing/prime/autogen/quadtospline/index>
+    <span class="nf nf-fa-file"></span> scaffolder</api/ansys/meshing/prime/autogen/scaffolder/index>
+    <span class="nf nf-fa-file"></span> scaffolderstructs</api/ansys/meshing/prime/autogen/scaffolderstructs/index>
+    <span class="nf nf-fa-file"></span> shellblcontrol</api/ansys/meshing/prime/autogen/shellblcontrol/index>
+    <span class="nf nf-fa-file"></span> shellblcontrolstructs</api/ansys/meshing/prime/autogen/shellblcontrolstructs/index>
+    <span class="nf nf-fa-file"></span> sizecontrol</api/ansys/meshing/prime/autogen/sizecontrol/index>
+    <span class="nf nf-fa-file"></span> sizecontrolstructs</api/ansys/meshing/prime/autogen/sizecontrolstructs/index>
+    <span class="nf nf-fa-file"></span> sizefield</api/ansys/meshing/prime/autogen/sizefield/index>
+    <span class="nf nf-fa-file"></span> sizefieldstructs</api/ansys/meshing/prime/autogen/sizefieldstructs/index>
+    <span class="nf nf-fa-file"></span> splittoolstructs</api/ansys/meshing/prime/autogen/splittoolstructs/index>
+    <span class="nf nf-fa-file"></span> surfacesearch</api/ansys/meshing/prime/autogen/surfacesearch/index>
+    <span class="nf nf-fa-file"></span> surfacesearchstructs</api/ansys/meshing/prime/autogen/surfacesearchstructs/index>
+    <span class="nf nf-fa-file"></span> surfaceutilities</api/ansys/meshing/prime/autogen/surfaceutilities/index>
+    <span class="nf nf-fa-file"></span> surfaceutilitystructs</api/ansys/meshing/prime/autogen/surfaceutilitystructs/index>
+    <span class="nf nf-fa-file"></span> surfer</api/ansys/meshing/prime/autogen/surfer/index>
+    <span class="nf nf-fa-file"></span> surferstructs</api/ansys/meshing/prime/autogen/surferstructs/index>
+    <span class="nf nf-fa-file"></span> thinvolumecontrol</api/ansys/meshing/prime/autogen/thinvolumecontrol/index>
+    <span class="nf nf-fa-file"></span> thinvolumecontrolstructs</api/ansys/meshing/prime/autogen/thinvolumecontrolstructs/index>
+    <span class="nf nf-fa-file"></span> topodata</api/ansys/meshing/prime/autogen/topodata/index>
+    <span class="nf nf-fa-file"></span> topodatastructs</api/ansys/meshing/prime/autogen/topodatastructs/index>
+    <span class="nf nf-fa-file"></span> toposearchstructs</api/ansys/meshing/prime/autogen/toposearchstructs/index>
+    <span class="nf nf-fa-file"></span> topoutilities</api/ansys/meshing/prime/autogen/topoutilities/index>
+    <span class="nf nf-fa-file"></span> topoutilitystructs</api/ansys/meshing/prime/autogen/topoutilitystructs/index>
+    <span class="nf nf-fa-file"></span> transform</api/ansys/meshing/prime/autogen/transform/index>
+    <span class="nf nf-fa-file"></span> transformstructs</api/ansys/meshing/prime/autogen/transformstructs/index>
+    <span class="nf nf-fa-file"></span> trimmedspline</api/ansys/meshing/prime/autogen/trimmedspline/index>
+    <span class="nf nf-fa-file"></span> trimmedsplinestructs</api/ansys/meshing/prime/autogen/trimmedsplinestructs/index>
+    <span class="nf nf-fa-file"></span> volumecontrol</api/ansys/meshing/prime/autogen/volumecontrol/index>
+    <span class="nf nf-fa-file"></span> volumecontrolstructs</api/ansys/meshing/prime/autogen/volumecontrolstructs/index>
+    <span class="nf nf-fa-file"></span> volumemeshtool</api/ansys/meshing/prime/autogen/volumemeshtool/index>
+    <span class="nf nf-fa-file"></span> volumemeshtoolstructs</api/ansys/meshing/prime/autogen/volumemeshtoolstructs/index>
+    <span class="nf nf-fa-file"></span> volumesearch</api/ansys/meshing/prime/autogen/volumesearch/index>
+    <span class="nf nf-fa-file"></span> volumesearchstructs</api/ansys/meshing/prime/autogen/volumesearchstructs/index>
+    <span class="nf nf-fa-file"></span> volumesweeper</api/ansys/meshing/prime/autogen/volumesweeper/index>
+    <span class="nf nf-fa-file"></span> volumesweeperstructs</api/ansys/meshing/prime/autogen/volumesweeperstructs/index>
+    <span class="nf nf-fa-file"></span> vtcomposer</api/ansys/meshing/prime/autogen/vtcomposer/index>
+    <span class="nf nf-fa-file"></span> vtcomposerstructs</api/ansys/meshing/prime/autogen/vtcomposerstructs/index>
+    <span class="nf nf-fa-file"></span> wrapper</api/ansys/meshing/prime/autogen/wrapper/index>
+    <span class="nf nf-fa-file"></span> wrappercontrol</api/ansys/meshing/prime/autogen/wrappercontrol/index>
+    <span class="nf nf-fa-file"></span> wrapperstructs</api/ansys/meshing/prime/autogen/wrapperstructs/index>
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Autogenerated module.
+
+
+
+
+
+
+
+.. vale on

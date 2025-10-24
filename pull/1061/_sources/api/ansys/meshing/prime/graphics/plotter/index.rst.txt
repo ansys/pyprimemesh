@@ -1,0 +1,140 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``plotter.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.graphics.plotter
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: plotter
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.plotter.Graphics`
+            - Manages graphics in PyPrime.
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.plotter.PrimePlotter`
+            - Create a plotter for PyPrimeMesh models.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.plotter.ColorByType`
+            - Contains the zone types to display.
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~color_matrix`
+            - 
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Graphics</api/ansys/meshing/prime/graphics/plotter/Graphics>
+    <span class="nf nf-cod-symbol_class"></span> PrimePlotter</api/ansys/meshing/prime/graphics/plotter/PrimePlotter>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> ColorByType</api/ansys/meshing/prime/graphics/plotter/ColorByType>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for the plotter.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: color_matrix
+
+
+
+
+.. vale on
