@@ -2461,6 +2461,7 @@ class MaterialProcessor:
                     zone_details = zone_details
                     return zone_name, zone_details
             except:
+                self._logger.warning(f'Zone {zone} does not have id for it ')
                 pass
         return None, {}
 
