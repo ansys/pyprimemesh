@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FixInvalidNormalNodeParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.FixInvalidNormalNodeParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, nugget_size: float = None, nugget_mesh_size: float = None, label: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to fix invalid average face normal at nodes by creating a nugget.
+
+   :param model: Model to create a ``FixInvalidNormalNodeParams`` object with default parameters.
+   :type model: Model
+   :param nugget_size: Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+   :type nugget_size: float, optional
+   :param nugget_mesh_size: Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+   :type nugget_mesh_size: float, optional
+   :param label: Label to set on new face zonelets created.
+   :type label: str, optional
+   :param json_data: JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> fix_invalid_normal_node_params = prime.FixInvalidNormalNodeParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FixInvalidNormalNodeParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~label`
+            - Label to set on new face zonelets created.
+          * - :py:attr:`~nugget_mesh_size`
+            - Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+          * - :py:attr:`~nugget_size`
+            - Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FixInvalidNormalNodeParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FixInvalidNormalNodeParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import FixInvalidNormalNodeParams
+
+Property detail
+---------------
+
+.. py:property:: label
+   :type: str
+
+
+   Label to set on new face zonelets created.
+
+.. py:property:: nugget_mesh_size
+   :type: float
+
+
+   Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+
+.. py:property:: nugget_size
+   :type: float
+
+
+   Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FixInvalidNormalNodeParams`` object.
+
+   .. rubric:: Examples
+
+   >>> FixInvalidNormalNodeParams.print_default()
+
+
+.. py:method:: set_default(nugget_size: float = None, nugget_mesh_size: float = None, label: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FixInvalidNormalNodeParams`` object.
+
+   :param nugget_size: Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
+   :type nugget_size: float, optional
+   :param nugget_mesh_size: Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
+   :type nugget_mesh_size: float, optional
+   :param label: Label to set on new face zonelets created.
+   :type label: str, optional
+
+
+
+
+
+
+
+.. vale on

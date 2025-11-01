@@ -1,0 +1,6 @@
+﻿FACEANDEDGEZONELETS
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScopeEntity.FACEANDEDGEZONELETS

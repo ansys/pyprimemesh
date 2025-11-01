@@ -1,0 +1,36 @@
+.. vale off
+
+CopyZoneletsResults
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CopyZoneletsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CopyZoneletsResults.print_default
+      CopyZoneletsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CopyZoneletsResults.copied_face_zonelets
+      CopyZoneletsResults.copied_zonelets
+      CopyZoneletsResults.error_code
+   
+   
+
+.. vale on

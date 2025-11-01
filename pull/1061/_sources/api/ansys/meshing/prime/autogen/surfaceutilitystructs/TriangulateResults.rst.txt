@@ -1,0 +1,158 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TriangulateResults`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.TriangulateResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_faces_triangulated: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with triangulate operation.
+
+   :param model: Model to create a ``TriangulateResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with failure of the operation.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param n_faces_triangulated: Number of faces that were triangulated.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_faces_triangulated: int, optional
+   :param json_data: JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> triangulate_results = prime.TriangulateResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TriangulateResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of the operation.
+          * - :py:attr:`~n_faces_triangulated`
+            - Number of faces that were triangulated.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TriangulateResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TriangulateResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import TriangulateResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of the operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_faces_triangulated
+   :type: int
+
+
+   Number of faces that were triangulated.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TriangulateResults`` object.
+
+   .. rubric:: Examples
+
+   >>> TriangulateResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_faces_triangulated: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TriangulateResults`` object.
+
+   :param error_code: Error code associated with failure of the operation.
+   :type error_code: ErrorCode, optional
+   :param n_faces_triangulated: Number of faces that were triangulated.
+   :type n_faces_triangulated: int, optional
+
+
+
+
+
+
+
+.. vale on

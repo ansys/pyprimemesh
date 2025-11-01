@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`GlobalSizingParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.modelstructs.GlobalSizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, min: float = None, max: float = None, growth_rate: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Global sizing parameters.
+
+   :param model: Model to create a ``GlobalSizingParams`` object with default parameters.
+   :type model: Model
+   :param min: Minimum value of global sizing parameters.
+   :type min: float, optional
+   :param max: Maximum value of global sizing parameters.
+   :type max: float, optional
+   :param growth_rate: Growth rate of global sizing parameters.
+   :type growth_rate: float, optional
+   :param json_data: JSON dictionary to create a ``GlobalSizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> global_sizing_params = prime.GlobalSizingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: GlobalSizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~growth_rate`
+            - Growth rate of global sizing parameters.
+          * - :py:attr:`~max`
+            - Maximum value of global sizing parameters.
+          * - :py:attr:`~min`
+            - Minimum value of global sizing parameters.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``GlobalSizingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``GlobalSizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.modelstructs import GlobalSizingParams
+
+Property detail
+---------------
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate of global sizing parameters.
+
+.. py:property:: max
+   :type: float
+
+
+   Maximum value of global sizing parameters.
+
+.. py:property:: min
+   :type: float
+
+
+   Minimum value of global sizing parameters.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``GlobalSizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> GlobalSizingParams.print_default()
+
+
+.. py:method:: set_default(min: float = None, max: float = None, growth_rate: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``GlobalSizingParams`` object.
+
+   :param min: Minimum value of global sizing parameters.
+   :type min: float, optional
+   :param max: Maximum value of global sizing parameters.
+   :type max: float, optional
+   :param growth_rate: Growth rate of global sizing parameters.
+   :type growth_rate: float, optional
+
+
+
+
+
+
+
+.. vale on

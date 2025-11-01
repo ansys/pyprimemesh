@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``prismcontrol.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.core.prismcontrol
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: prismcontrol
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.prismcontrol.PrismControl`
+            - PrismControl allows you to generate prisms.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> PrismControl</api/ansys/meshing/prime/core/prismcontrol/PrismControl>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing PrismControl related classes and methods.
+
+
+
+
+
+
+
+
+
+.. vale on

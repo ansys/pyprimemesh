@@ -1,0 +1,6 @@
+intersect\_face\_zonelets
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Connect.intersect_face_zonelets

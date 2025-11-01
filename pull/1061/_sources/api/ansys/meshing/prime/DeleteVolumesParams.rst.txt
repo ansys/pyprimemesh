@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteVolumesParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.DeleteVolumesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, delete_small_volumes: bool = None, volume_limit: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to delete volumes.
+
+   :param model: Model to create a ``DeleteVolumesParams`` object with default parameters.
+   :type model: Model
+   :param delete_small_volumes: Option to delete only volumes smaller than provided volume limit.
+   :type delete_small_volumes: bool, optional
+   :param volume_limit: Maximum volume limit to identify smaller volumes to be deleted.
+   :type volume_limit: float, optional
+   :param json_data: JSON dictionary to create a ``DeleteVolumesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_volumes_params = prime.DeleteVolumesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteVolumesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_small_volumes`
+            - Option to delete only volumes smaller than provided volume limit.
+          * - :py:attr:`~volume_limit`
+            - Maximum volume limit to identify smaller volumes to be deleted.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteVolumesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteVolumesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DeleteVolumesParams
+
+Property detail
+---------------
+
+.. py:property:: delete_small_volumes
+   :type: bool
+
+
+   Option to delete only volumes smaller than provided volume limit.
+
+.. py:property:: volume_limit
+   :type: float
+
+
+   Maximum volume limit to identify smaller volumes to be deleted.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteVolumesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteVolumesParams.print_default()
+
+
+.. py:method:: set_default(delete_small_volumes: bool = None, volume_limit: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteVolumesParams`` object.
+
+   :param delete_small_volumes: Option to delete only volumes smaller than provided volume limit.
+   :type delete_small_volumes: bool, optional
+   :param volume_limit: Maximum volume limit to identify smaller volumes to be deleted.
+   :type volume_limit: float, optional
+
+
+
+
+
+
+
+.. vale on

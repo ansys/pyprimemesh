@@ -1,0 +1,222 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapParams`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.wrapperstructs.WrapParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, sizing_method: ansys.meshing.prime.params.primestructs.SizeFieldType = None, base_size: float = None, size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, wrap_region: WrapRegion = None, number_of_threads: int = None, imprint_relative_range: float = None, imprint_iterations: int = None, json_data: dict = None, **kwargs)
+
+
+
+   WrapParams defines parameters for wrapping.
+
+   :param model: Model to create a ``WrapParams`` object with default parameters.
+   :type model: Model
+   :param sizing_method: Used to define sizing method for wrapping.
+   :type sizing_method: SizeFieldType, optional
+   :param base_size: Base size to define octree.
+   :type base_size: float, optional
+   :param size_control_ids: Used to construct geodesic sizes for octree refinement.
+   :type size_control_ids: Iterable[int], optional
+   :param size_field_ids: Used to define size field based octree refinement.
+   :type size_field_ids: Iterable[int], optional
+   :param wrap_region: Indicates source type to extract wrapper region.
+   :type wrap_region: WrapRegion, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param imprint_relative_range: Used to define relative range in imprinting in wrapping.
+   :type imprint_relative_range: float, optional
+   :param imprint_iterations: Used to define number of imprint iterations in wrapping.
+   :type imprint_iterations: int, optional
+   :param json_data: JSON dictionary to create a ``WrapParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> wrap_params = prime.WrapParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WrapParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~base_size`
+            - Base size to define octree.
+          * - :py:attr:`~imprint_iterations`
+            - Used to define number of imprint iterations in wrapping.
+          * - :py:attr:`~imprint_relative_range`
+            - Used to define relative range in imprinting in wrapping.
+          * - :py:attr:`~number_of_threads`
+            - Number of threads for multithreading.
+          * - :py:attr:`~size_control_ids`
+            - Used to construct geodesic sizes for octree refinement.
+          * - :py:attr:`~size_field_ids`
+            - Used to define size field based octree refinement.
+          * - :py:attr:`~sizing_method`
+            - Used to define sizing method for wrapping.
+          * - :py:attr:`~wrap_region`
+            - Indicates source type to extract wrapper region.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WrapParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WrapParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.wrapperstructs import WrapParams
+
+Property detail
+---------------
+
+.. py:property:: base_size
+   :type: float
+
+
+   Base size to define octree.
+
+.. py:property:: imprint_iterations
+   :type: int
+
+
+   Used to define number of imprint iterations in wrapping.
+
+.. py:property:: imprint_relative_range
+   :type: float
+
+
+   Used to define relative range in imprinting in wrapping.
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads for multithreading.
+
+.. py:property:: size_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Used to construct geodesic sizes for octree refinement.
+
+.. py:property:: size_field_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Used to define size field based octree refinement.
+
+.. py:property:: sizing_method
+   :type: ansys.meshing.prime.params.primestructs.SizeFieldType
+
+
+   Used to define sizing method for wrapping.
+
+.. py:property:: wrap_region
+   :type: WrapRegion
+
+
+   Indicates source type to extract wrapper region.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WrapParams`` object.
+
+   .. rubric:: Examples
+
+   >>> WrapParams.print_default()
+
+
+.. py:method:: set_default(sizing_method: ansys.meshing.prime.params.primestructs.SizeFieldType = None, base_size: float = None, size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, wrap_region: WrapRegion = None, number_of_threads: int = None, imprint_relative_range: float = None, imprint_iterations: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WrapParams`` object.
+
+   :param sizing_method: Used to define sizing method for wrapping.
+   :type sizing_method: SizeFieldType, optional
+   :param base_size: Base size to define octree.
+   :type base_size: float, optional
+   :param size_control_ids: Used to construct geodesic sizes for octree refinement.
+   :type size_control_ids: Iterable[int], optional
+   :param size_field_ids: Used to define size field based octree refinement.
+   :type size_field_ids: Iterable[int], optional
+   :param wrap_region: Indicates source type to extract wrapper region.
+   :type wrap_region: WrapRegion, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param imprint_relative_range: Used to define relative range in imprinting in wrapping.
+   :type imprint_relative_range: float, optional
+   :param imprint_iterations: Used to define number of imprint iterations in wrapping.
+   :type imprint_iterations: int, optional
+
+
+
+
+
+
+
+.. vale on

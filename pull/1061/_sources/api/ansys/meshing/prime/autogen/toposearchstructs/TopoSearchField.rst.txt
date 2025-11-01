@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TopoSearchField`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.toposearchstructs.TopoSearchField
+
+
+
+   Toposearch diagnostic field.
+
+
+
+
+.. py:currentmodule:: TopoSearchField
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~BROKENLOOPTOPOFACES`
+            - Diagnoses topofaces with open or broken bounding edge loops.
+          * - :py:attr:`~INCONSISTENTNORMALORIENTATIONTOPOFACES`
+            - Diagnoses topofaces with inconsistent normal orientations.
+          * - :py:attr:`~INCORRECTBOUNDARYORIENTATIONTOPOFACES`
+            - Diagnoses topofaces with incorrect boundary orientations.
+          * - :py:attr:`~INTERSECTINGTOPOFACES`
+            - Diagnoses intersecting topofaces.
+          * - :py:attr:`~INVALIDBOUNDARYTOPOFACES`
+            - Diagnoses topofaces with incorrect bounding edge orientation.
+          * - :py:attr:`~NOBOUNDARYLOOPTOPOFACES`
+            - Diagnoses topofaces without bounding edges.
+          * - :py:attr:`~NUMBEROFFIELDS`
+            - Diagnoses all topofaces.
+          * - :py:attr:`~OVERLAPPINGTOPOFACES`
+            - Diagnoses overlapping or partially overlapping topofaces.
+          * - :py:attr:`~SELFINTERSECTINGTOPOFACES`
+            - Diagnoses topofaces with self intersecting bounding edges.
+          * - :py:attr:`~SMALLTOPOEDGES`
+            - Diagnoses topofaces with small topoedges.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.toposearchstructs import TopoSearchField
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: BROKENLOOPTOPOFACES
+   :value: 3
+
+
+   Diagnoses topofaces with open or broken bounding edge loops.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INCONSISTENTNORMALORIENTATIONTOPOFACES
+   :value: 8
+
+
+   Diagnoses topofaces with inconsistent normal orientations.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INCORRECTBOUNDARYORIENTATIONTOPOFACES
+   :value: 7
+
+
+   Diagnoses topofaces with incorrect boundary orientations.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INTERSECTINGTOPOFACES
+   :value: 1
+
+
+   Diagnoses intersecting topofaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INVALIDBOUNDARYTOPOFACES
+   :value: 5
+
+
+   Diagnoses topofaces with incorrect bounding edge orientation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: NOBOUNDARYLOOPTOPOFACES
+   :value: 4
+
+
+   Diagnoses topofaces without bounding edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: NUMBEROFFIELDS
+   :value: 9
+
+
+   Diagnoses all topofaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: OVERLAPPINGTOPOFACES
+   :value: 0
+
+
+   Diagnoses overlapping or partially overlapping topofaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SELFINTERSECTINGTOPOFACES
+   :value: 2
+
+
+   Diagnoses topofaces with self intersecting bounding edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SMALLTOPOEDGES
+   :value: 6
+
+
+   Diagnoses topofaces with small topoedges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

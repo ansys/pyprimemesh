@@ -1,0 +1,46 @@
+.. vale off
+
+LabelToZoneMethod
+=================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoclass:: LabelToZoneMethod
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      LabelToZoneMethod.conjugate
+      LabelToZoneMethod.bit_length
+      LabelToZoneMethod.bit_count
+      LabelToZoneMethod.to_bytes
+      LabelToZoneMethod.from_bytes
+      LabelToZoneMethod.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LabelToZoneMethod.real
+      LabelToZoneMethod.imag
+      LabelToZoneMethod.numerator
+      LabelToZoneMethod.denominator
+      LabelToZoneMethod.SIMPLE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using LabelToZoneMethod
+
+    ansys.meshing.prime.lucid.LabelToZoneMethod
+
+.. vale on

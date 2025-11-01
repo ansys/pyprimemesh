@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchInfoByRegisterIdResults`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SearchInfoByRegisterIdResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_found: int = None, locations_found: ansys.meshing.prime.params.primestructs.Iterable[float] = None, face_zonelets_found: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Result structure containing information on registered face elements.
+
+   :param model: Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the retreiving information based on register id.
+   :type error_code: ErrorCode, optional
+   :param n_found: Number of registered face elements.
+   :type n_found: int, optional
+   :param locations_found: Locations of each cluster of registered face elements.
+   :type locations_found: Iterable[float], optional
+   :param face_zonelets_found: Ids of the face zonelets containing atleast one registered face element.
+   :type face_zonelets_found: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_info_by_register_id_results = prime.SearchInfoByRegisterIdResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchInfoByRegisterIdResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the retreiving information based on register id.
+          * - :py:attr:`~face_zonelets_found`
+            - Ids of the face zonelets containing atleast one registered face element.
+          * - :py:attr:`~locations_found`
+            - Locations of each cluster of registered face elements.
+          * - :py:attr:`~n_found`
+            - Number of registered face elements.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchInfoByRegisterIdResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchInfoByRegisterIdResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SearchInfoByRegisterIdResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the retreiving information based on register id.
+
+.. py:property:: face_zonelets_found
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of the face zonelets containing atleast one registered face element.
+
+.. py:property:: locations_found
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Locations of each cluster of registered face elements.
+
+.. py:property:: n_found
+   :type: int
+
+
+   Number of registered face elements.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchInfoByRegisterIdResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchInfoByRegisterIdResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_found: int = None, locations_found: ansys.meshing.prime.params.primestructs.Iterable[float] = None, face_zonelets_found: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SearchInfoByRegisterIdResults`` object.
+
+   :param error_code: Error code associated with the retreiving information based on register id.
+   :type error_code: ErrorCode, optional
+   :param n_found: Number of registered face elements.
+   :type n_found: int, optional
+   :param locations_found: Locations of each cluster of registered face elements.
+   :type locations_found: Iterable[float], optional
+   :param face_zonelets_found: Ids of the face zonelets containing atleast one registered face element.
+   :type face_zonelets_found: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

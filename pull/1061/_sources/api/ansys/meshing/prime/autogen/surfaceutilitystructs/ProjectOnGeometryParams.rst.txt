@@ -1,0 +1,158 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ProjectOnGeometryParams`
+================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.ProjectOnGeometryParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, project_only_mid_nodes: bool = None, project_on_facets_if_cadnot_found: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to project topoface nodes on associated geometry.
+
+   :param model: Model to create a ``ProjectOnGeometryParams`` object with default parameters.
+   :type model: Model
+   :param project_only_mid_nodes: Option to project only the mid nodes.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type project_only_mid_nodes: bool, optional
+   :param project_on_facets_if_cadnot_found: Option to project on facet if geometry is not found.
+
+                                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type project_on_facets_if_cadnot_found: bool, optional
+   :param json_data: JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> project_on_geometry_params = prime.ProjectOnGeometryParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ProjectOnGeometryParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~project_on_facets_if_cadnot_found`
+            - Option to project on facet if geometry is not found.
+          * - :py:attr:`~project_only_mid_nodes`
+            - Option to project only the mid nodes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ProjectOnGeometryParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ProjectOnGeometryParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import ProjectOnGeometryParams
+
+Property detail
+---------------
+
+.. py:property:: project_on_facets_if_cadnot_found
+   :type: bool
+
+
+   Option to project on facet if geometry is not found.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: project_only_mid_nodes
+   :type: bool
+
+
+   Option to project only the mid nodes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ProjectOnGeometryParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ProjectOnGeometryParams.print_default()
+
+
+.. py:method:: set_default(project_only_mid_nodes: bool = None, project_on_facets_if_cadnot_found: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ProjectOnGeometryParams`` object.
+
+   :param project_only_mid_nodes: Option to project only the mid nodes.
+   :type project_only_mid_nodes: bool, optional
+   :param project_on_facets_if_cadnot_found: Option to project on facet if geometry is not found.
+   :type project_on_facets_if_cadnot_found: bool, optional
+
+
+
+
+
+
+
+.. vale on

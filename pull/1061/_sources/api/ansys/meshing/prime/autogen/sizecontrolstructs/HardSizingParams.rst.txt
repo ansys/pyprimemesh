@@ -1,0 +1,152 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`HardSizingParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizecontrolstructs.HardSizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, min: float = None, growth_rate: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Size field computed using hard size control enables you to maintain a uniform size based on the size specified.
+
+   The hard sizing will override any other specified size.
+
+   :param model: Model to create a ``HardSizingParams`` object with default parameters.
+   :type model: Model
+   :param min: Minimum size used for computing edge and face size using hard size control.
+   :type min: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+   :param json_data: JSON dictionary to create a ``HardSizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> hard_sizing_params = prime.HardSizingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: HardSizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~growth_rate`
+            - Growth rate used for transitioning from one element size to neighbor element size.
+          * - :py:attr:`~min`
+            - Minimum size used for computing edge and face size using hard size control.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``HardSizingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``HardSizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizecontrolstructs import HardSizingParams
+
+Property detail
+---------------
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate used for transitioning from one element size to neighbor element size.
+
+.. py:property:: min
+   :type: float
+
+
+   Minimum size used for computing edge and face size using hard size control.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``HardSizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> HardSizingParams.print_default()
+
+
+.. py:method:: set_default(min: float = None, growth_rate: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``HardSizingParams`` object.
+
+   :param min: Minimum size used for computing edge and face size using hard size control.
+   :type min: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+
+
+
+
+
+
+
+.. vale on

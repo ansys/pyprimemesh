@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CellZoneletType`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.CellZoneletType
+
+
+
+   Types of cell zonelet.
+
+
+
+
+.. py:currentmodule:: CellZoneletType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~DEAD`
+            - Cell zonelet type is dead.
+          * - :py:attr:`~FLUID`
+            - Cell zonelet type is fluid.
+          * - :py:attr:`~SOLID`
+            - Cell zonelet type is solid.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import CellZoneletType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: DEAD
+   :value: 0
+
+
+   Cell zonelet type is dead.
+
+.. py:attribute:: FLUID
+   :value: 1
+
+
+   Cell zonelet type is fluid.
+
+.. py:attribute:: SOLID
+   :value: 17
+
+
+   Cell zonelet type is solid.
+
+
+
+
+
+
+
+.. vale on

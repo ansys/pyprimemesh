@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeadRegion`
+===================
+
+
+.. py:class:: ansys.meshing.prime.DeadRegion(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, dead_material_points: ansys.meshing.prime.params.primestructs.List[str] = None, hole_size: float = None, json_data: dict = None, **kwargs)
+
+
+
+   DeadRegion defines a dead region for patch flow regions operation.
+
+   :param model: Model to create a ``DeadRegion`` object with default parameters.
+   :type model: Model
+   :param face_zonelet_ids: Face zonelets enclosing dead region.
+
+                            **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type face_zonelet_ids: Iterable[int], optional
+   :param dead_material_points: Material points to identify dead region.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type dead_material_points: List[str], optional
+   :param hole_size: Maximum hole size used for patching.
+
+                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type hole_size: float, optional
+   :param json_data: JSON dictionary to create a ``DeadRegion`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> dead_region = prime.DeadRegion(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeadRegion
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~dead_material_points`
+            - Material points to identify dead region.
+          * - :py:attr:`~face_zonelet_ids`
+            - Face zonelets enclosing dead region.
+          * - :py:attr:`~hole_size`
+            - Maximum hole size used for patching.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeadRegion`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeadRegion`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DeadRegion
+
+Property detail
+---------------
+
+.. py:property:: dead_material_points
+   :type: ansys.meshing.prime.params.primestructs.List[str]
+
+
+   Material points to identify dead region.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: face_zonelet_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Face zonelets enclosing dead region.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: hole_size
+   :type: float
+
+
+   Maximum hole size used for patching.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeadRegion`` object.
+
+   .. rubric:: Examples
+
+   >>> DeadRegion.print_default()
+
+
+.. py:method:: set_default(face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, dead_material_points: ansys.meshing.prime.params.primestructs.List[str] = None, hole_size: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeadRegion`` object.
+
+   :param face_zonelet_ids: Face zonelets enclosing dead region.
+   :type face_zonelet_ids: Iterable[int], optional
+   :param dead_material_points: Material points to identify dead region.
+   :type dead_material_points: List[str], optional
+   :param hole_size: Maximum hole size used for patching.
+   :type hole_size: float, optional
+
+
+
+
+
+
+
+.. vale on
