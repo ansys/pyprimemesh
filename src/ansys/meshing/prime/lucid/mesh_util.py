@@ -83,7 +83,10 @@ class Mesh:
         self._logger = model.python_logger
 
     def from_geometry(
-        self, design: "ansys.geometry.core.Design", import_type: ImportTypes = ImportTypes.FMD, append: bool = False
+        self,
+        design: "ansys.geometry.core.Design",
+        import_type: ImportTypes = ImportTypes.FMD,
+        append: bool = False,
     ):
         """Import geometry from an Ansys Design object.
 
