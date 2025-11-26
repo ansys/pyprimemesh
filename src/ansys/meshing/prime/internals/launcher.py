@@ -25,6 +25,7 @@ import os
 import subprocess
 import sys
 from typing import Optional
+import uuid
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -72,6 +73,8 @@ def launch_server_process(
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     n_procs: Optional[int] = None,
+    connection_type: config.ConnectionType = None,
+    server_certs_dir: Optional[str] = None,
     **kw,
 ) -> subprocess.Popen:
     """Launch a server process for Ansys Prime Server.
@@ -89,6 +92,8 @@ def launch_server_process(
         processes to spawn. The default is ``None``, in which case
         the server is launched as the only process (normal mode). The
         process marked as ``Node 0`` hosts the gRPC server.
+    server_certs_dir : Optional[str]
+        Directory containing server certificates for mutual TLS.
 
     Returns
     -------
@@ -156,6 +161,9 @@ def launch_server_process(
             server_args.append(f'--scheduler')
             server_args.append(f'{scheduler}')
 
+    if os.name != 'nt' and connection_type == config.ConnectionType.GRPC_SECURE:
+        server_args.append(f'--uds={kw.get("uds_file", "")}')
+
     kwargs = {
         'stdin': subprocess.DEVNULL,
     }
@@ -164,6 +172,14 @@ def launch_server_process(
         kwargs['stderr'] = subprocess.DEVNULL
     if sys.platform.startswith('win32'):
         kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
+
+    if connection_type == config.ConnectionType.GRPC_SECURE:
+        server_args.append("--secure=yes")
+    else:
+        server_args.append("--secure=no")
+
+    if server_certs_dir is not None:
+        server_args.append(f"--server_cert_dir={server_certs_dir}")
 
     logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
     server = subprocess.Popen(server_args, **kwargs)
@@ -208,12 +224,14 @@ def launch_remote_prime(
 
     return client
 
-
 def launch_prime(
     prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
+    connection_type: config.ConnectionType = config.ConnectionType.GRPC_SECURE,
+    client_certs_dir : Optional[str] = None,
+    server_certs_dir : Optional[str] = None,
     n_procs: Optional[int] = None,
     version: Optional[str] = None,
     **kwargs,
@@ -236,6 +254,10 @@ def launch_prime(
         processes to spawn. The default is ``None``, in which case
         the server is launched as the only process (normal mode). The
         process marked as ``Node 0`` hosts the gRPC server.
+    client_certs_dir : Optional[str]
+        Directory containing client certificates for mutual TLS.
+    server_certs_dir : Optional[str]
+        Directory containing server certificates for mutual TLS.
 
     Returns
     -------
@@ -256,19 +278,37 @@ def launch_prime(
     if ip == defaults.ip():
         port = utils.get_available_local_port(port)
 
+    channel = None
+    if ip not in ["127.0.0.1", "localhost"] and \
+        connection_type == config.ConnectionType.GRPC_SECURE: 
+        if client_certs_dir is None or server_certs_dir is None:
+            raise RuntimeError(f"Please provide certificate directory for remote connections.")
+        missing = [f for f in [f"{client_certs_dir}/client.crt",
+                               f"{client_certs_dir}/client.key",
+                               f"{client_certs_dir}/ca.crt"]
+                               if not os.path.exists(f)]
+        if missing:
+            raise RuntimeError(f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}")
+        
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     if launch_container:
         container_name = utils.make_unique_container_name('ansys-prime-server')
         utils.launch_prime_github_container(port=port, name=container_name, version=version)
         config.set_using_container(True)
-        client = Client(port=port, timeout=timeout)
+        client = Client(port=port, timeout=timeout, client_certs_dir = client_certs_dir)
         client.container_name = container_name
         print('using server from docker : The container name ', container_name)
-        logging.getLogger('PyPrimeMesh').info('uses server from container : ', container_name)
         return client
 
+    uds_file = None
+    if os.name != 'nt' and client_certs_dir is None:
+        uds_file = f'unix:/tmp/pyprimemesh-{uuid.uuid4()}.sock'
+
     server = launch_server_process(
-        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs, **kwargs
+        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs,
+        connection_type=connection_type, uds_file=uds_file,
+        server_certs_dir=server_certs_dir,
+        **kwargs
     )
 
     return Client(
@@ -276,5 +316,8 @@ def launch_prime(
         ip=ip,
         port=port,
         timeout=timeout,
-        communicator_type=kwargs.get('communicator_type', 'grpc'),
+        uds_file=uds_file,
+        connection_type=connection_type,
+        client_certs_dir=client_certs_dir,
+        channel=channel
     )
