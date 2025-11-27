@@ -21,8 +21,8 @@
 
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
-from typing import Optional
 import os
+from typing import Optional
 
 import grpc
 from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
@@ -61,7 +61,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
 
     if not os.path.exists(client_certs_dir):
         raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
-    
+
     cert_file = f"{client_certs_dir}/client.crt"
     key_file = f"{client_certs_dir}/client.key"
     ca_file = f"{client_certs_dir}/ca.crt"
@@ -77,13 +77,14 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         creds = grpc.ssl_channel_credentials(
             root_certificates=root_certificates,
             private_key=private_key,
-            certificate_chain=certificate_chain
+            certificate_chain=certificate_chain,
         )
     except Exception as e:
         raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
-    
+
     channel = grpc.secure_channel(target, creds)
     return channel
+
 
 def make_chunks(data, chunk_size):
     n = max(1, chunk_size)
@@ -149,9 +150,7 @@ class GRPCCommunicator(Communicator):
         self._channel = kwargs.get('channel', None)
         if self._channel is None and client_certs_dir is not None:
             self._channel = get_secure_channel(
-                client_certs_dir=client_certs_dir,
-                server_host=ip,
-                server_port=port
+                client_certs_dir=client_certs_dir, server_host=ip, server_port=port
             )
 
         self._models = []

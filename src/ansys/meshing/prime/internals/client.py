@@ -34,6 +34,7 @@ from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 
+
 class Client(object):
     """Provides the ``Client`` class for PyPrimeMesh.
 
@@ -75,18 +76,21 @@ class Client(object):
         local = kwargs.get('local', False)
         if local and server_process is not None:
             raise ValueError('Local client cannot be instantiated with a server process')
-        
-        
+
         if connection_type == config.ConnectionType.GRPC_INSECURE:
             print("Warning (Client): Modification of these configurations is not recommended.")
-            print("Please see the documentation for your installed product for additional information")
+            print(
+                "Please see the documentation for your installed product for additional information"
+            )
 
         self._local = local
         self._process = server_process
         self._comm = None
         if not local:
-            if connection_type == config.ConnectionType.GRPC_SECURE or \
-                connection_type == config.ConnectionType.GRPC_INSECURE:
+            if (
+                connection_type == config.ConnectionType.GRPC_SECURE
+                or connection_type == config.ConnectionType.GRPC_INSECURE
+            ):
                 try:
                     from ansys.meshing.prime.internals.grpc_communicator import (
                         GRPCCommunicator,
@@ -97,26 +101,38 @@ class Client(object):
                     if channel is not None:
                         self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
                     else:
-                        if os.name == 'nt' or \
-                            connection_type == config.ConnectionType.GRPC_INSECURE:
-                            if connection_type == config.ConnectionType.GRPC_INSECURE \
-                                and client_certs_dir is not None:
-                                print("Warning: Ignoring client certificate \
-directory for insecure connections")
+                        if (
+                            os.name == 'nt'
+                            or connection_type == config.ConnectionType.GRPC_INSECURE
+                        ):
+                            if (
+                                connection_type == config.ConnectionType.GRPC_INSECURE
+                                and client_certs_dir is not None
+                            ):
+                                print(
+                                    "Warning: Ignoring client certificate \
+directory for insecure connections"
+                                )
                                 client_certs_dir = None
                             self._comm = GRPCCommunicator(
-                                ip=ip, port=port, timeout=timeout, credentials=credentials,
-                                client_certs_dir=client_certs_dir)
+                                ip=ip,
+                                port=port,
+                                timeout=timeout,
+                                credentials=credentials,
+                                client_certs_dir=client_certs_dir,
+                            )
                         else:
                             if uds_file is None:
                                 self._comm = GRPCCommunicator(
-                                    ip=ip, port=port,
+                                    ip=ip,
+                                    port=port,
                                     client_certs_dir=client_certs_dir,
-                                    timeout=timeout)
+                                    timeout=timeout,
+                                )
                             else:
                                 self._comm = GRPCCommunicator(
-                                    uds_file=uds_file, timeout=timeout,
-                                    credentials=credentials)
+                                    uds_file=uds_file, timeout=timeout, credentials=credentials
+                                )
                         setattr(self, 'port', port)
                 except ImportError as err:
                     logging.getLogger('PyPrimeMesh').error(

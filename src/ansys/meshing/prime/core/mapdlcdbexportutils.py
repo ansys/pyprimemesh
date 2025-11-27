@@ -664,11 +664,17 @@ class _MaterialProcessor:
         '_property_function_map',
         '_model',
         '_logger',
-        '_skip_comments'
+        '_skip_comments',
     )
 
-    def __init__(self, model: prime.Model, raw_materials_data, zone_data, hm_comments=False,
-                 skip_comments=True):
+    def __init__(
+        self,
+        model: prime.Model,
+        raw_materials_data,
+        zone_data,
+        hm_comments=False,
+        skip_comments=True,
+    ):
         self._raw_materials_data = raw_materials_data
         self._zone_data = zone_data
         self._mat_id = 0
@@ -1695,11 +1701,12 @@ class _JointMaterialProcessor:
         '_property_function_map',
         '_model',
         '_logger',
-        '_skip_comments'
+        '_skip_comments',
     )
 
-    def __init__(self, model: prime.Model, raw_joint_materials_data, hm_comments=False,
-                 skip_comments = True):
+    def __init__(
+        self, model: prime.Model, raw_joint_materials_data, hm_comments=False, skip_comments=True
+    ):
         self._raw_joint_materials_data = raw_joint_materials_data
         self._mat_id = 0
         self._enable_hm_comments = hm_comments
@@ -4759,7 +4766,7 @@ def generate_mapdl_commands(
             json_simulation_data["Materials"],
             json_simulation_data["Zones"],
             params.write_separate_blocks,
-            params.skip_comments
+            params.skip_comments,
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
@@ -4768,8 +4775,10 @@ def generate_mapdl_commands(
         and json_simulation_data["ConnectorBehavior"] is not None
     ):
         jmp = _JointMaterialProcessor(
-            model, json_simulation_data["ConnectorBehavior"], params.write_separate_blocks,
-            params.skip_comments
+            model,
+            json_simulation_data["ConnectorBehavior"],
+            params.write_separate_blocks,
+            params.skip_comments,
         )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
