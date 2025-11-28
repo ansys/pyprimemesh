@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -23,6 +22,7 @@
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
 from typing import Optional
+import os
 
 import grpc
 from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
@@ -41,6 +41,49 @@ from ansys.meshing.prime.internals.error_handling import (
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
 
+
+def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int):
+    """Create a secure gRPC channel using the provided TLS files.
+
+    Parameters
+    ----------
+    tls_client_files : list
+        List of paths to the TLS files. The list should contain:
+        - client certificate file path
+        - client key file path
+        - CA certificate file path
+    Returns
+    -------
+    grpc.Channel
+        A secure gRPC channel.
+    """
+    target = f"{server_host}:{server_port}"
+
+    if not os.path.exists(client_certs_dir):
+        raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
+    
+    cert_file = f"{client_certs_dir}/client.crt"
+    key_file = f"{client_certs_dir}/client.key"
+    ca_file = f"{client_certs_dir}/ca.crt"
+
+    with open(cert_file, 'rb') as f:
+        certificate_chain = f.read()
+    with open(key_file, 'rb') as f:
+        private_key = f.read()
+    with open(ca_file, 'rb') as f:
+        root_certificates = f.read()
+
+    try:
+        creds = grpc.ssl_channel_credentials(
+            root_certificates=root_certificates,
+            private_key=private_key,
+            certificate_chain=certificate_chain
+        )
+    except Exception as e:
+        raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
+    
+    channel = grpc.secure_channel(target, creds)
+    return channel
 
 def make_chunks(data, chunk_size):
     n = max(1, chunk_size)
@@ -80,7 +123,10 @@ class GRPCCommunicator(Communicator):
         Maximum time to wait for connection. The default is ``10.0``.
     credentials : Any, optional
         Credentials for connecting to the server. The default is ``None``.
-
+    uds_file : Optional[str], optional
+        Path to the Unix Domain Socket (UDS) file. The default is ``None``.
+    client_certs_dir : Optional[str], optional
+        Directory containing client certificates for mutual TLS. The default is ``None``.
     Raises
     ------
     ConnectionError
@@ -93,18 +139,32 @@ class GRPCCommunicator(Communicator):
         port: Optional[int] = None,
         timeout: float = 10.0,
         credentials=None,
+        uds_file: Optional[str] = None,
+        client_certs_dir: Optional[str] = None,
         **kwargs,
     ):
         """Initialize the server connection."""
         import os
 
         self._channel = kwargs.get('channel', None)
+        if self._channel is None and client_certs_dir is not None:
+            self._channel = get_secure_channel(
+                client_certs_dir=client_certs_dir,
+                server_host=ip,
+                server_port=port
+            )
+
         self._models = []
         if self._channel is None:
             ip_addr = f"{ip}:{port}"
             channel_options = grpc_utils.get_default_channel_args()
             if credentials is None:
-                self._channel = grpc.insecure_channel(ip_addr, options=channel_options)
+                if uds_file is not None:
+                    options = (('grpc.default_authority', 'localhost'),)
+                    self._channel = grpc.insecure_channel(uds_file, options=options)
+                else:
+                    options = (('grpc.default_authority', 'localhost'),)
+                    self._channel = grpc.insecure_channel(ip_addr, options=options)
             else:
                 self._channel = grpc.secure_channel(ip_addr, credentials, options=channel_options)
 
@@ -278,47 +338,6 @@ class GRPCCommunicator(Communicator):
             return result
         else:
             raise RuntimeError("No connection with server")
-
-    def server_command(self, command: str, *args) -> dict:
-        """Run commands on the server.
-
-        Parameters
-        ----------
-        command : str
-            Commands to run.
-
-        Returns
-        -------
-        dict
-            Result from the server side.
-
-        Raises
-        ------
-        RuntimeError
-            Bad response from server.
-        RuntimeError
-            Can not connect to server.
-        """
-        if self._stub is not None:
-            command = {"Command": command}
-            if len(args) > 0:
-                command.update({"Args": args[0]})
-
-            response = self._stub.ServerCommand(
-                request_iterator(
-                    0,
-                    json.dumps(command),
-                    prime_pb2.StringMessage,
-                    prime_pb2.Model,
-                    prime_pb2.StringJsonContent,
-                    prime_pb2.MessageCompletionToken,
-                )
-            )
-            message = get_response(response, '')
-            return message
-        else:
-            raise RuntimeError("No connection with server")
-        return {}
 
     def close(self):
         """Close opened channels."""

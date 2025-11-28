@@ -65,6 +65,58 @@ To install a basic version of the client, use this command instead:
 
    pip install -e .
 
+Connect through gRPC
+-----------------------
+
+PyPrimeMesh uses gRPC to provide secure communications between client and server.
+When you run the client and server on the same machine,
+
+- For Unix OS or Linux OS, PyPrimeMesh uses UDS (Unix Domain Socket) for communication.
+  
+- For Windows OS, server uses interceptor to validate gRPC connections, 
+  ensures the client is running on the same Windows user account as the server and authenticates the client.
+
+When you launch PyPrimeMesh, gRPC  establish connection between the Client and Server
+through secure option. Secure is the default option when you use launch_prime(). 
+You should always prefer secure option to establish secured connection between the client and server.
+
+When you want to make an insecure connection between the client and server,
+you may need to specify the connection type as follows:
+
+.. code-block:: python
+
+   client = prime.launch_prime(connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE)
+
+.. note::   
+   Insecure option is not recommended.
+
+Connect securely using certificates
+--------------------------------------
+
+PyPrimeMesh offers secure connection using certificates. For secure connection with mutual TLS (mTLS), you may pass client certificate directory and server certificate directory using client_certs_dir and server_certs_dir respectively to launch_prime().
+
+client_certs_dir should contain the following files:
+
+- client.crt
+  
+- client.key
+  
+- ca.crt
+  
+server_certs_dir should contain the following files:
+
+- server.crt
+  
+- server.key
+  
+- ca.crt
+
+.. note::
+   - Ensure that ca.crt file is same for client and server. You should not modify the 
+     file names in the client_certs_dir and server_certs_dir respectively.
+
+   - The path of input files must be same for server and client and should be on the shared network.
+  
 
 Dependencies
 ------------
