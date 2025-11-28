@@ -104,7 +104,13 @@ class GRPCCommunicator(Communicator):
             ip_addr = f"{ip}:{port}"
             channel_options = grpc_utils.get_default_channel_args()
             if credentials is None:
-                self._channel = grpc.insecure_channel(ip_addr, options=channel_options)
+                uds_file = kwargs.get('uds_file', None)
+                if uds_file is not None:
+                    options = (('grpc.default_authority', 'localhost'),)
+                    self._channel = grpc.insecure_channel(uds_file, options=options)
+                else:
+                    options = (('grpc.default_authority', 'localhost'),)
+                    self._channel = grpc.insecure_channel(ip_addr, options=options)
             else:
                 self._channel = grpc.secure_channel(ip_addr, credentials, options=channel_options)
 
