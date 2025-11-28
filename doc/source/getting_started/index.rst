@@ -61,13 +61,13 @@ Connecting through gRPC
 -----------------------
 
 PyPrimeMesh uses gRPC to provide secure communications between client and server. 
-When you run the client and server on the same machine, 
+When you run the client and server on the same machine: 
 
-- For Unix OS or Linux OS, PyPrimeMesh uses UDS (Unix Domain Socket) for communication. 
-- For Windows OS, server uses interceptor to validate gRPC connections,
+- For Linux OS, PyPrimeMesh uses UDS (Unix Domain Socket) for communications. 
+- For Windows OS, PyPrimeMesh uses interceptor to validate gRPC connections,
   ensures the client is running on the same Windows user account as the server and authenticates the client. 
  
-When you launch PyPrimeMesh, gRPC  establish connection between the Client and Server with local connection only. 
+When you launch PyPrimeMesh, gRPC  establishes a connection between the Client and the Server with local a connection only. 
 
 Dependencies
 ------------
