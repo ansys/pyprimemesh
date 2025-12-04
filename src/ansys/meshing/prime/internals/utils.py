@@ -261,7 +261,8 @@ def launch_prime_github_container(
         '--port',
         f'{port}',
     ]
-    print('Warning: Secure connection is not supported yet for Prime containers, using insecure connection.')
+    print('Warning: Secure connection is not supported ' \
+          'yet for Prime containers, using insecure connection.')
     prime_arguments.append('--secure=no')
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
