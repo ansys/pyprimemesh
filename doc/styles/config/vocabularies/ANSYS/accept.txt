@@ -6,6 +6,7 @@ automesh
 Boolean
 BRep
 CAD
+client_certs_dir
 conformally
 [Dd]efeature
 defeaturing

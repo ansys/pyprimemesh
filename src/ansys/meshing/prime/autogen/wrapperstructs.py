@@ -1829,11 +1829,11 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         sizing_method: SizeFieldType, optional
-            Used to define sizing method for patching.
+            Method used to define sizing method for patching.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         size_field_ids: Iterable[int], optional
-            Used to define size field based octree refinement.
+            Ids used to define size field based octree refinement.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         patch_at_live: bool, optional
@@ -1910,9 +1910,9 @@ class WrapperPatchFlowRegionsParams(CoreObject):
         dead_regions: List[DeadRegion], optional
             List of dead regions.
         sizing_method: SizeFieldType, optional
-            Used to define sizing method for patching.
+            Method used to define sizing method for patching.
         size_field_ids: Iterable[int], optional
-            Used to define size field based octree refinement.
+            Ids used to define size field based octree refinement.
         patch_at_live: bool, optional
             Creates patches closer to live instead of dead.
         """
@@ -2005,7 +2005,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @property
     def sizing_method(self) -> SizeFieldType:
-        """Used to define sizing method for patching.
+        """Method used to define sizing method for patching.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2017,7 +2017,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @property
     def size_field_ids(self) -> Iterable[int]:
-        """Used to define size field based octree refinement.
+        """Ids used to define size field based octree refinement.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
