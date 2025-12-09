@@ -31,13 +31,15 @@ dependencies = [
 [project.optional-dependencies]
 graphics = [
   "pyvista[jupyter]>=0.38.1",
+  "vtk>=9.3.0",
 ]
 tests = [
   "pytest==8.2.2",
   "pytest-cov==5.0.0",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.0.0",
-  "pyvista[trame]==0.44.0"
+  "pyvista[trame]==0.44.0",
+  "vtk>=9.3.0"
 ]
 doc = [
   "ansys-sphinx-theme==0.15.2",
@@ -45,6 +47,7 @@ doc = [
   "numpydoc==1.7.0",
   "Sphinx==7.2.6",
   "pyvista==0.44.0",
+  "vtk>=9.3.0",
   "sphinx-autodoc-typehints==2.0.1",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.15.0",
@@ -53,6 +56,7 @@ doc = [
 ]
 all = [
   "pyvista[jupyter]>=0.38.1",
+  "vtk>=9.3.0",
 ]
 
 [project.urls]
