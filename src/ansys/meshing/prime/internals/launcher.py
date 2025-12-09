@@ -25,8 +25,8 @@ import logging
 import os
 import subprocess
 import sys
-from typing import Optional
 import uuid
+from typing import Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -210,6 +210,7 @@ def launch_remote_prime(
 
     return client
 
+
 def launch_prime(
     prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
@@ -270,8 +271,13 @@ def launch_prime(
     uds_file = f'unix:/tmp/pyprimemesh-{uuid.uuid4()}.sock'
 
     server = launch_server_process(
-        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs,
-        connection_type=connection_type, uds_file=uds_file, **kwargs
+        prime_root=prime_root,
+        ip=ip,
+        port=port,
+        n_procs=n_procs,
+        connection_type=connection_type,
+        uds_file=uds_file,
+        **kwargs,
     )
 
     return Client(

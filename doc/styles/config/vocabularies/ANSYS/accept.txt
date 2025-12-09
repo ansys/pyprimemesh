@@ -5,6 +5,7 @@ AutoMesh
 automesh
 Boolean
 CAD
+client_certs_dir
 conformally
 [Dd]efeature
 defeaturing
