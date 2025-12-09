@@ -24,8 +24,8 @@ import logging
 import os
 import subprocess
 import sys
-from typing import Optional
 import uuid
+from typing import Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -224,14 +224,15 @@ def launch_remote_prime(
 
     return client
 
+
 def launch_prime(
     prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
     connection_type: config.ConnectionType = config.ConnectionType.GRPC_SECURE,
-    client_certs_dir : Optional[str] = None,
-    server_certs_dir : Optional[str] = None,
+    client_certs_dir: Optional[str] = None,
+    server_certs_dir: Optional[str] = None,
     n_procs: Optional[int] = None,
     version: Optional[str] = None,
     **kwargs,
@@ -279,23 +280,32 @@ def launch_prime(
         port = utils.get_available_local_port(port)
 
     channel = None
-    if ip not in ["127.0.0.1", "localhost"] and \
-        connection_type == config.ConnectionType.GRPC_SECURE:
+    if (
+        ip not in ["127.0.0.1", "localhost"]
+        and connection_type == config.ConnectionType.GRPC_SECURE
+    ):
         if client_certs_dir is None or server_certs_dir is None:
             raise RuntimeError(f"Please provide certificate directory for remote connections.")
-        missing = [f for f in [f"{client_certs_dir}/client.crt",
-                               f"{client_certs_dir}/client.key",
-                               f"{client_certs_dir}/ca.crt"]
-                               if not os.path.exists(f)]
+        missing = [
+            f
+            for f in [
+                f"{client_certs_dir}/client.crt",
+                f"{client_certs_dir}/client.key",
+                f"{client_certs_dir}/ca.crt",
+            ]
+            if not os.path.exists(f)
+        ]
         if missing:
-            raise RuntimeError(f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}")
-        
+            raise RuntimeError(
+                f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}"
+            )
+
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     if launch_container:
         container_name = utils.make_unique_container_name('ansys-prime-server')
         utils.launch_prime_github_container(port=port, name=container_name, version=version)
         config.set_using_container(True)
-        client = Client(port=port, timeout=timeout, client_certs_dir = client_certs_dir)
+        client = Client(port=port, timeout=timeout, client_certs_dir=client_certs_dir)
         client.container_name = container_name
         print('using server from docker : The container name ', container_name)
         return client
@@ -305,10 +315,14 @@ def launch_prime(
         uds_file = f'unix:/tmp/pyprimemesh-{uuid.uuid4()}.sock'
 
     server = launch_server_process(
-        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs,
-        connection_type=connection_type, uds_file=uds_file,
+        prime_root=prime_root,
+        ip=ip,
+        port=port,
+        n_procs=n_procs,
+        connection_type=connection_type,
+        uds_file=uds_file,
         server_certs_dir=server_certs_dir,
-        **kwargs
+        **kwargs,
     )
 
     return Client(
@@ -319,5 +333,5 @@ def launch_prime(
         uds_file=uds_file,
         connection_type=connection_type,
         client_certs_dir=client_certs_dir,
-        channel=channel
+        channel=channel,
     )

@@ -85,7 +85,9 @@ you may need to specify the connection type as follows:
 
 .. code-block:: python
 
-   client = prime.launch_prime(connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE)
+   client = prime.launch_prime(
+       connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE
+   )
 
 .. note::   
    Insecure option is not recommended.

@@ -54,9 +54,9 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     ImportMapdlCdbParams,
     ImportMapdlCdbResults,
     ReadSizeFieldParams,
+    SeparateBlocksFormatType,
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
-    SeparateBlocksFormatType,
 )
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.params.primestructs import ErrorCode
