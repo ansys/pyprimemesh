@@ -38,16 +38,14 @@ tests = [
   "pytest-cov==5.0.0",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.0.0",
-  "pyvista[trame]==0.44.0",
-  "vtk>=9.3.0"
+  "pyvista[trame]>=0.44.1",
 ]
 doc = [
   "ansys-sphinx-theme==0.15.2",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.7.0",
   "Sphinx==7.2.6",
-  "pyvista==0.44.0",
-  "vtk>=9.3.0",
+  "pyvista>=0.44.1",
   "sphinx-autodoc-typehints==2.0.1",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.15.0",
@@ -56,7 +54,6 @@ doc = [
 ]
 all = [
   "pyvista[jupyter]>=0.38.1",
-  "vtk>=9.3.0",
 ]
 
 [project.urls]
