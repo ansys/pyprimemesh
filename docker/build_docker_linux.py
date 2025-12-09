@@ -37,7 +37,7 @@ if sys.platform != 'linux':
 # Check input
 if len(sys.argv) < 2:
     print("Please specify Ansys installation folder.")
-    print("Example: {} /ansys_inc/v251".format(os.path.basename(__file__)))
+    print("Example: {} /ansys_inc/v252".format(os.path.basename(__file__)))
     sys.exit(1)
 
 AWP_ROOT = sys.argv[1]
@@ -144,7 +144,7 @@ def create_docker_image(dest_package_path):
     # Build the docker image
     print(">>> Building docker image. This might take some time...")
     out = subprocess.run(
-        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:25.2.2.dev0", "."],
+        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:25.2.3", "."],
         cwd=os.path.dirname(os.path.abspath(__file__)),
         capture_output=True,
     )
