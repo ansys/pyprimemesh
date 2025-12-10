@@ -6,8 +6,6 @@ FROM rockylinux:8 as builder
 # Define the working directory
 WORKDIR /prime
 
-COPY ./certs /prime/certs
-
 COPY ./PyPrimeMeshPackage /prime
 
 RUN chmod -R 0755 /prime
@@ -39,4 +37,4 @@ ENV AWP_ROOT251="/prime"
 LABEL org.opencontainers.image.authors="ANSYS Inc."
 LABEL org.opencontainers.image.vendor="ANSYS Inc."
 
-ENTRYPOINT [ "/prime/meshing/Prime/runPrime.sh", "server", "--ip", "0.0.0.0"]
+ENTRYPOINT [ "/prime/meshing/Prime/runPrime.sh", "server", "--ip", "0.0.0.0" ]
