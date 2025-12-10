@@ -143,11 +143,44 @@ def create_docker_image(dest_package_path):
 
     # Build the docker image
     print(">>> Building docker image. This might take some time...")
+    # Parse version from AWP_ROOT or command line argument
+    version = "latest"  # default
+    if len(sys.argv) >= 3:
+        version = sys.argv[2]
+    else:
+        # Try to extract version from AWP_ROOT path (e.g., /ansys_inc/v252 -> 25.2)
+        version_match = re.search(r'v(\d+)(\d)', AWP_ROOT)
+        if version_match:
+            major = version_match.group(1)
+            minor = version_match.group(2)
+            version = f"{major}.{minor}.0"
+    
+    # Get the script directory for robust file path handling
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    dockerfile_path = os.path.join(script_dir, "linux", "Dockerfile")
+    
+    # Verify Dockerfile exists
+    if not os.path.exists(dockerfile_path):
+        print(f"XXXXXXX Dockerfile not found at {dockerfile_path}. Exiting process. XXXXXXX")
+        exit(1)
+    
+    # Build Docker image with version tag
+    image_tag = f"ghcr.io/ansys/prime:{version}"
+    print(f">>> Building Docker image with tag: {image_tag}")
+    
     out = subprocess.run(
-        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:latest", "."],
-        cwd=os.path.dirname(os.path.abspath(__file__)),
+        ["docker", "build", "-f", dockerfile_path, "-t", image_tag, script_dir],
         capture_output=True,
     )
+    
+    # Check if docker build was successful
+    if out.returncode != 0:
+        print("XXXXXXX Docker build failed. XXXXXXX")
+        print("STDOUT:", out.stdout.decode())
+        print("STDERR:", out.stderr.decode())
+        exit(1)
+    else:
+        print(f">>> Docker image built successfully with tag: {image_tag}")
 
 
 # -------------------------------------------------------------------------------
