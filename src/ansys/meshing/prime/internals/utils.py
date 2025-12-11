@@ -268,14 +268,10 @@ def launch_prime_github_container(
 
     # Set default connection type if not provided
     if connection_type is None:
-        connection_type = config.ConnectionType.GRPC_INSECURE
+        connection_type = config.ConnectionType.GRPC_SECURE
 
     # Handle connection type
     if connection_type == config.ConnectionType.GRPC_INSECURE:
-        print(
-            'Warning: Secure connection is not supported '
-            'yet for Prime containers, using insecure connection.'
-        )
         prime_arguments.append('--secure=no')
 
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
