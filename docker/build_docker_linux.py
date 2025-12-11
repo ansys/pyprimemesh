@@ -143,17 +143,10 @@ def create_docker_image(dest_package_path):
 
     # Build the docker image
     print(">>> Building docker image. This might take some time...")
-    # Parse version from AWP_ROOT or command line argument
+    # Parse version from command line argument or default to latest
     version = "latest"  # default
     if len(sys.argv) >= 3:
         version = sys.argv[2]
-    else:
-        # Try to extract version from AWP_ROOT path (e.g., /ansys_inc/v252 -> 25.2)
-        version_match = re.search(r'v(\d+)(\d)', AWP_ROOT)
-        if version_match:
-            major = version_match.group(1)
-            minor = version_match.group(2)
-            version = f"{major}.{minor}.0"
 
     # Get the script directory for robust file path handling
     script_dir = os.path.dirname(os.path.abspath(__file__))
