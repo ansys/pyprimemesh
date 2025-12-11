@@ -229,7 +229,7 @@ def launch_prime_github_container(
         Version of the container to retrieve. The default is ``None``.
     connection_type : config.ConnectionType, optional
         Type of connection to use. The default is ``None``, which defaults to
-        ``config.ConnectionType.GRPC_INSECURE``.
+        ``config.ConnectionType.GRPC_SECURE``.
 
     Raises
     ------
