@@ -39,4 +39,4 @@ ENV AWP_ROOT252="/prime"
 LABEL org.opencontainers.image.authors="ANSYS Inc."
 LABEL org.opencontainers.image.vendor="ANSYS Inc."
 
-ENTRYPOINT [ "/prime/meshing/Prime/runPrime.sh", "server", "--ip", "0.0.0.0", "--secure", "yes", "--server_cert_dir", "/prime/certs"]
+ENTRYPOINT [ "/prime/meshing/Prime/runPrime.sh", "server", "--ip", "0.0.0.0" , "--secure", "yes", "--server_cert_dir", "/prime/certs"]
