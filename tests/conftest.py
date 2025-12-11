@@ -57,10 +57,19 @@ class RemoteClientManager:
             by default ``1``.
         """
         if n_procs == 1:
-            self.client = prime.launch_prime(prime_root=prime_root, ip=ip, port=port)
+            self.client = prime.launch_prime(
+                prime_root=prime_root,
+                ip=ip,
+                port=port,
+                connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE,
+            )
         else:
             self.client = prime.launch_prime(
-                prime_root=prime_root, ip=ip, port=port, n_procs=n_procs
+                prime_root=prime_root,
+                ip=ip,
+                port=port,
+                n_procs=n_procs,
+                connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE,
             )
 
     def start_remote_client(self):
