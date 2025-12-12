@@ -130,6 +130,7 @@ jobs:
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
+          PRIME_MODE: "GRPC_INSECURE"
 
   doc-deploy-pr:
     name: "Deploy PR documentation"
