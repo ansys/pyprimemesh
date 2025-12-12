@@ -210,6 +210,7 @@ def launch_prime_github_container(
     port: int = defaults.port(),
     name: str = "ansys-prime-server",
     version: Optional[str] = None,
+    connection_type: Optional['config.ConnectionType'] = None,
 ):
     """Launch a container.
 
@@ -226,6 +227,9 @@ def launch_prime_github_container(
         Name of the container. The default is ``"ansys-prime-server"``.
     version : str, optional
         Version of the container to retrieve. The default is ``None``.
+    connection_type : config.ConnectionType, optional
+        Type of connection to use. The default is ``None``, which defaults to
+        ``config.ConnectionType.GRPC_SECURE``.
 
     Raises
     ------
@@ -261,11 +265,18 @@ def launch_prime_github_container(
         '--port',
         f'{port}',
     ]
-    print(
-        'Warning: Secure connection is not supported '
-        'yet for Prime containers, using insecure connection.'
-    )
-    prime_arguments.append('--secure=no')
+
+    # Set default connection type if not provided
+    if connection_type is None:
+        connection_type = config.ConnectionType.GRPC_SECURE
+
+    # Handle connection type
+    if (
+        connection_type == config.ConnectionType.GRPC_INSECURE
+        or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
+    ):
+        prime_arguments.append('--secure=no')
+
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 
