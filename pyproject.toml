@@ -37,11 +37,11 @@ tests = [
   "pytest-cov==6.1.1",
   "pytest-pyvista==0.1.9",
   "pytest-xvfb==3.1.1",
-  "pyvista[trame]==0.44.2"
+  "pyvista[trame]<=0.45.3"
 ]
 doc = [
   "ansys-sphinx-theme[autoapi]==1.4.2",
-  "ansys-tools-visualization-interface==0.8.3",
+  "ansys-tools-visualization-interface<=0.11.0",
   "jupyter-sphinx==0.5.3",
   "numpydoc==1.8.0",
   "sphinx==8.2.3",
