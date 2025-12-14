@@ -103,7 +103,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       - name: Install compatible pyvista and vtk
-        run: pip install "pyvista==0.39.1" "vtk==9.2.6"
+        run: pip install "pyvista>=0.42" vtk
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v9
@@ -143,7 +143,7 @@ jobs:
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
       
       - name: Install compatible pyvista and vtk
-        run: pip install "pyvista==0.39.1" "vtk==9.2.6"
+        run: pip install "pyvista>=0.42" vtk
 
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v9
