@@ -16,7 +16,7 @@ on:
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
   DOCKER_IMAGE_TAG: '25.1.4'
-  MAIN_PYTHON_VERSION: '3.12'
+  MAIN_PYTHON_VERSION: '3.10'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
@@ -103,7 +103,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       - name: Install compatible pyvista and vtk
-        run: pip install "pyvista==0.39.*" "vtk<9.3"
+        run: pip install "pyvista==0.39.1" "vtk==9.2.6"
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v9
@@ -143,7 +143,7 @@ jobs:
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
       
       - name: Install compatible pyvista and vtk
-        run: pip install "pyvista==0.39.*" "vtk<9.3"
+        run: pip install "pyvista==0.39.1" "vtk==9.2.6"
 
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v9
