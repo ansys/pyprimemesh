@@ -1,0 +1,178 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumetricSizeFieldComputeParams`
+=========================================
+
+
+.. py:class:: ansys.meshing.prime.VolumetricSizeFieldComputeParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, enable_multi_threading: bool = None, enable_periodicity: bool = None, periodic_params: SFPeriodicParams = None, growth_rate_lower_bound: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters associated with the compute volumetric size field operation.
+
+   :param model: Model to create a ``VolumetricSizeFieldComputeParams`` object with default parameters.
+   :type model: Model
+   :param enable_multi_threading: Option to compute volumetric size field in parallel using multithreads.
+   :type enable_multi_threading: bool, optional
+   :param enable_periodicity: Option to enable periodic size field computations.
+   :type enable_periodicity: bool, optional
+   :param periodic_params: Periodic parameters to compute the size field.
+   :type periodic_params: SFPeriodicParams, optional
+   :param growth_rate_lower_bound: Lower bound for growth rate.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type growth_rate_lower_bound: float, optional
+   :param json_data: JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> volumetric_size_field_compute_params = prime.VolumetricSizeFieldComputeParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VolumetricSizeFieldComputeParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~enable_multi_threading`
+            - Option to compute volumetric size field in parallel using multithreads.
+          * - :py:attr:`~enable_periodicity`
+            - Option to enable periodic size field computations.
+          * - :py:attr:`~growth_rate_lower_bound`
+            - Lower bound for growth rate.
+          * - :py:attr:`~periodic_params`
+            - Periodic parameters to compute the size field.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VolumetricSizeFieldComputeParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VolumetricSizeFieldComputeParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VolumetricSizeFieldComputeParams
+
+Property detail
+---------------
+
+.. py:property:: enable_multi_threading
+   :type: bool
+
+
+   Option to compute volumetric size field in parallel using multithreads.
+
+.. py:property:: enable_periodicity
+   :type: bool
+
+
+   Option to enable periodic size field computations.
+
+.. py:property:: growth_rate_lower_bound
+   :type: float
+
+
+   Lower bound for growth rate.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: periodic_params
+   :type: SFPeriodicParams
+
+
+   Periodic parameters to compute the size field.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VolumetricSizeFieldComputeParams`` object.
+
+   .. rubric:: Examples
+
+   >>> VolumetricSizeFieldComputeParams.print_default()
+
+
+.. py:method:: set_default(enable_multi_threading: bool = None, enable_periodicity: bool = None, periodic_params: SFPeriodicParams = None, growth_rate_lower_bound: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VolumetricSizeFieldComputeParams`` object.
+
+   :param enable_multi_threading: Option to compute volumetric size field in parallel using multithreads.
+   :type enable_multi_threading: bool, optional
+   :param enable_periodicity: Option to enable periodic size field computations.
+   :type enable_periodicity: bool, optional
+   :param periodic_params: Periodic parameters to compute the size field.
+   :type periodic_params: SFPeriodicParams, optional
+   :param growth_rate_lower_bound: Lower bound for growth rate.
+   :type growth_rate_lower_bound: float, optional
+
+
+
+
+
+
+
+.. vale on

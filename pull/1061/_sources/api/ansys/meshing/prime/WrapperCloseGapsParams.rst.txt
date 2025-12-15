@@ -1,0 +1,210 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapperCloseGapsParams`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.WrapperCloseGapsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, target: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, gap_size: float = None, material_point_name: str = None, suggested_part_name: str = None, number_of_threads: int = None, create_new_part: bool = None, resolution_factor: float = None, json_data: dict = None, **kwargs)
+
+
+
+   WrapperCloseGapsParams to define parameters for close gaps operation.
+
+   :param model: Model to create a ``WrapperCloseGapsParams`` object with default parameters.
+   :type model: Model
+   :param target: Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
+   :type target: ScopeDefinition, optional
+   :param gap_size: Maximum gap size to be closed.
+   :type gap_size: float, optional
+   :param material_point_name: Material point name near the gaps to be closed.
+   :type material_point_name: str, optional
+   :param suggested_part_name: Suggested part name for created patching surfaces.
+   :type suggested_part_name: str, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param create_new_part: Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+   :type create_new_part: bool, optional
+   :param resolution_factor: Factor to resolve the smallest gap for the given gap size.
+   :type resolution_factor: float, optional
+   :param json_data: JSON dictionary to create a ``WrapperCloseGapsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> wrapper_close_gaps_params = prime.WrapperCloseGapsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WrapperCloseGapsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_new_part`
+            - Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+          * - :py:attr:`~gap_size`
+            - Maximum gap size to be closed.
+          * - :py:attr:`~material_point_name`
+            - Material point name near the gaps to be closed.
+          * - :py:attr:`~number_of_threads`
+            - Number of threads for multithreading.
+          * - :py:attr:`~resolution_factor`
+            - Factor to resolve the smallest gap for the given gap size.
+          * - :py:attr:`~suggested_part_name`
+            - Suggested part name for created patching surfaces.
+          * - :py:attr:`~target`
+            - Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WrapperCloseGapsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WrapperCloseGapsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import WrapperCloseGapsParams
+
+Property detail
+---------------
+
+.. py:property:: create_new_part
+   :type: bool
+
+
+   Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+
+.. py:property:: gap_size
+   :type: float
+
+
+   Maximum gap size to be closed.
+
+.. py:property:: material_point_name
+   :type: str
+
+
+   Material point name near the gaps to be closed.
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads for multithreading.
+
+.. py:property:: resolution_factor
+   :type: float
+
+
+   Factor to resolve the smallest gap for the given gap size.
+
+.. py:property:: suggested_part_name
+   :type: str
+
+
+   Suggested part name for created patching surfaces.
+
+.. py:property:: target
+   :type: ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+
+   Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WrapperCloseGapsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> WrapperCloseGapsParams.print_default()
+
+
+.. py:method:: set_default(target: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, gap_size: float = None, material_point_name: str = None, suggested_part_name: str = None, number_of_threads: int = None, create_new_part: bool = None, resolution_factor: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WrapperCloseGapsParams`` object.
+
+   :param target: Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
+   :type target: ScopeDefinition, optional
+   :param gap_size: Maximum gap size to be closed.
+   :type gap_size: float, optional
+   :param material_point_name: Material point name near the gaps to be closed.
+   :type material_point_name: str, optional
+   :param suggested_part_name: Suggested part name for created patching surfaces.
+   :type suggested_part_name: str, optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param create_new_part: Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
+   :type create_new_part: bool, optional
+   :param resolution_factor: Factor to resolve the smallest gap for the given gap size.
+   :type resolution_factor: float, optional
+
+
+
+
+
+
+
+.. vale on

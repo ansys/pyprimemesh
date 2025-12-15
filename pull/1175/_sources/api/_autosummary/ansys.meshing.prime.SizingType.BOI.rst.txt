@@ -1,0 +1,6 @@
+BOI
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizingType.BOI

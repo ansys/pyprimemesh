@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+CadFaceter
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadFaceter
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      CadFaceter.ACIS
+      
+      
+      CadFaceter.PARASOLID
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CadFaceter
+
+    ansys.meshing.prime.CadFaceter
+
+.. vale on

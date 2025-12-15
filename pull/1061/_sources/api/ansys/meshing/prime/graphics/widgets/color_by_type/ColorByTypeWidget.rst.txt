@@ -1,0 +1,139 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ColorByTypeWidget`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.graphics.widgets.color_by_type.ColorByTypeWidget(prime_plotter: ansys.meshing.prime.graphics.plotter.PrimePlotter)
+
+
+
+   Initializes the color by the type button widget.
+
+   This widget lets you change the color of the mesh
+   based on the zone, zonelet, or part.
+
+   :param prime_plotter: Plotter object to use.
+   :type prime_plotter: Plotter
+
+
+
+.. py:currentmodule:: ColorByTypeWidget
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~callback`
+            - Define the callback function for the button widget.
+          * - :py:attr:`~set_color_by_type`
+            - Get the colors of faces.
+          * - :py:attr:`~update`
+            - Define the configuration and representation of the button widget button.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~plotter`
+            - Plotter object that the widget is assigned to.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__slots__`
+            - 
+          * - :py:attr:`~prime_plotter`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
+
+Property detail
+---------------
+
+.. py:property:: plotter
+   :type: pyvista.Plotter
+
+
+   Plotter object that the widget is assigned to.
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __slots__
+   :value: ()
+
+
+.. py:attribute:: prime_plotter
+
+
+
+Method detail
+-------------
+
+.. py:method:: callback(state) -> None
+
+   Define the callback function for the button widget.
+
+
+.. py:method:: set_color_by_type(color_type: ColorByType, mesh_info: ansys.meshing.prime.core.mesh.DisplayMeshInfo)
+
+   Get the colors of faces.
+
+   :param color_type: Color type to use.
+   :type color_type: ColorByType
+   :param mesh_info: Mesh information that generates an appropriate color.
+   :type mesh_info: DisplayMeshInfo
+
+   :returns: List of colors for faces.
+   :rtype: List
+
+
+.. py:method:: update(color_type=ColorByType.ZONE) -> None
+
+   Define the configuration and representation of the button widget button.
+
+   :param color_type: Color type to use.
+   :type color_type: ColorByType, default: ColorByType.ZONE
+
+
+
+
+
+
+
+.. vale on

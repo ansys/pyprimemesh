@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScopeEntity.is_integer
+
+.. minigallery::
+   :add-heading: Examples using ScopeEntity.is_integer
+
+   ansys.meshing.prime.ScopeEntity.is_integer

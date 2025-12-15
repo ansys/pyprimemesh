@@ -1,0 +1,6 @@
+formatted\_summary\_log
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbResults.formatted_summary_log

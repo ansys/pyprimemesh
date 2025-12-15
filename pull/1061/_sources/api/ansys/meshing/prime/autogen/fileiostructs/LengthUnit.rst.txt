@@ -1,0 +1,118 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LengthUnit`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.LengthUnit
+
+
+
+   Length units
+
+
+
+
+.. py:currentmodule:: LengthUnit
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~CM`
+            - Denotes length unit is centimeters.
+          * - :py:attr:`~FT`
+            - Denotes length unit is feet.
+          * - :py:attr:`~IN`
+            - Denotes length unit is inches.
+          * - :py:attr:`~M`
+            - Denotes length unit is meters.
+          * - :py:attr:`~MM`
+            - Denotes length unit is milimeters.
+          * - :py:attr:`~NM`
+            - Denotes length unit is nanometers.
+          * - :py:attr:`~UM`
+            - Denotes length unit is micrometers.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import LengthUnit
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: CM
+   :value: 1
+
+
+   Denotes length unit is centimeters.
+
+.. py:attribute:: FT
+   :value: 6
+
+
+   Denotes length unit is feet.
+
+.. py:attribute:: IN
+   :value: 5
+
+
+   Denotes length unit is inches.
+
+.. py:attribute:: M
+   :value: 0
+
+
+   Denotes length unit is meters.
+
+.. py:attribute:: MM
+   :value: 2
+
+
+   Denotes length unit is milimeters.
+
+.. py:attribute:: NM
+   :value: 4
+
+
+   Denotes length unit is nanometers.
+
+.. py:attribute:: UM
+   :value: 3
+
+
+   Denotes length unit is micrometers.
+
+
+
+
+
+
+
+.. vale on

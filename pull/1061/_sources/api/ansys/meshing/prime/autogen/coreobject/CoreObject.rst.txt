@@ -1,0 +1,69 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CoreObject`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.coreobject.CoreObject
+
+
+
+   
+
+
+
+
+.. py:currentmodule:: CoreObject
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.coreobject import CoreObject
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+
+
+
+
+
+.. vale on

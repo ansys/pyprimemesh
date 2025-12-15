@@ -1,0 +1,158 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExportLSDynaIGAResults`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIGAResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the LS-DYNA export.
+
+   :param model: Model to create a ``ExportLSDynaIGAResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with failure of operation.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with the operation.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type warning_codes: List[WarningCode], optional
+   :param json_data: JSON dictionary to create a ``ExportLSDynaIGAResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> export_lsdyna_igaesults = prime.ExportLSDynaIGAResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExportLSDynaIGAResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of operation.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExportLSDynaIGAResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExportLSDynaIGAResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ExportLSDynaIGAResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExportLSDynaIGAResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ExportLSDynaIGAResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExportLSDynaIGAResults`` object.
+
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with the operation.
+   :type warning_codes: List[WarningCode], optional
+
+
+
+
+
+
+
+.. vale on

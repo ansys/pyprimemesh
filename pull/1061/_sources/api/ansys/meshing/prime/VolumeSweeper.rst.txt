@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeSweeper`
+======================
+
+
+.. py:class:: ansys.meshing.prime.VolumeSweeper(model: ansys.meshing.prime.core.model.Model)
+
+
+
+   Provides operations to generate volume meshes using stacker technology.
+
+   TopoVolumes are volume meshed by sweeping or stacking a set of face
+   and edge zonelets.
+
+   :param model: Server model to create VolumeSweeper object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: VolumeSweeper
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_base_face`
+            - Create a face at the specified origin.
+          * - :py:attr:`~stack_base_face`
+            - Generate volume mesh by stacking a meshed face.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__doc__`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for VolumeSweeper.
+          * - :py:attr:`~__exit__`
+            - Exit context for VolumeSweeper.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VolumeSweeper
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __doc__
+   :value: Multiline-String
+
+   .. raw:: html
+
+      <details><summary>Show Value</summary>
+
+   .. code-block:: python
+
+      """VolumeSweeper class provide functions to volume mesh a given set of topovolumes by sweeping or stacking a set of face and edge zonelets. Provide operations to generate volume mesh using stacker technology.
+      
+          Parameters
+          ----------
+          model : Model
+              Server model to create VolumeSweeper object.
+          part_id : int
+              Id of the part.
+          """
+
+   .. raw:: html
+
+      </details>
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for VolumeSweeper.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for VolumeSweeper.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: create_base_face(part_id: int, topo_volume_ids: Iterable[int], params: ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerParams) -> ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerResults
+
+   Create a face at the specified origin.
+
+   This method creates a face at the specified origin and perpendicular to the
+   specified direction. Also, it imprints model edges on the face, makes necessary
+   edge repairs, and duplicates relevant size controls on the base face.
+
+
+   :param part_id: ID of part.
+   :type part_id: int
+   :param topo_volume_ids: IDs of the volumes to mesh.
+   :type topo_volume_ids: Iterable[int]
+   :param params: Mesh stacker parameters.
+   :type params: MeshStackerParams
+
+   :returns: Results from creating the face.
+   :rtype: MeshStackerResults
+
+   .. rubric:: Examples
+
+   >>> results = volumesweeper.create_base_face(part_id, topo_volume_ids, params)
+
+
+.. py:method:: stack_base_face(part_id: int, base_face_ids: Iterable[int], topo_volume_ids: Iterable[int], params: ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerParams) -> ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerResults
+
+   Generate volume mesh by stacking a meshed face.
+
+   This method generates volume mesh by stacking a meshed face, layer by layer, along
+   the given direction. It calculates the stack layers using size controls and global
+   size parameters.
+
+
+   :param part_id: ID of the part.
+   :type part_id: int
+   :param base_face_ids: IDs of the base faces to stack.
+   :type base_face_ids: Iterable[int]
+   :param topo_volume_ids: IDs of the volumes to mesh.
+   :type topo_volume_ids: Iterable[int]
+   :param params: Mesh stacker parameters.
+   :type params: MeshStackerParams
+
+   :returns: Results from generating the volume mesh.
+   :rtype: MeshStackerResults
+
+   .. rubric:: Examples
+
+   >>> results = volumesweeper.stack_base_face(part_id, base_face_ids, topo_volume_ids, params)
+
+
+
+
+
+
+
+.. vale on

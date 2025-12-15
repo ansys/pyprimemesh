@@ -1,0 +1,6 @@
+volume\_fill\_type
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.volume_fill_type

@@ -1,0 +1,42 @@
+.. vale off
+
+ContactElementTypeParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ContactElementTypeParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ContactElementTypeParams.print_default
+      ContactElementTypeParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ContactElementTypeParams.contact_pair_node_to_surf
+      ContactElementTypeParams.contact_pair_surf_to_surf
+      ContactElementTypeParams.tie_node_to_surf
+      ContactElementTypeParams.tie_surf_to_surf
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ContactElementTypeParams
+
+    ansys.meshing.prime.ContactElementTypeParams
+
+.. vale on

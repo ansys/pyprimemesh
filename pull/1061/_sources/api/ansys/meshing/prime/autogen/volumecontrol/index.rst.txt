@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``volumecontrol.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.autogen.volumecontrol
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: volumecontrol
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.volumecontrol.VolumeControl`
+            - Volume controls provide volume specific settings on volumes specified by scope and settings specified by parameters.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> VolumeControl</api/ansys/meshing/prime/autogen/volumecontrol/VolumeControl>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

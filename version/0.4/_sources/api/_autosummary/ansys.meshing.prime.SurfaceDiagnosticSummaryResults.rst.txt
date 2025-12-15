@@ -1,0 +1,38 @@
+.. vale off
+
+SurfaceDiagnosticSummaryResults
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceDiagnosticSummaryResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceDiagnosticSummaryResults.print_default
+      SurfaceDiagnosticSummaryResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceDiagnosticSummaryResults.error_code
+      SurfaceDiagnosticSummaryResults.n_duplicate_faces
+      SurfaceDiagnosticSummaryResults.n_free_edges
+      SurfaceDiagnosticSummaryResults.n_multi_edges
+      SurfaceDiagnosticSummaryResults.n_self_intersections
+   
+   
+
+.. vale on

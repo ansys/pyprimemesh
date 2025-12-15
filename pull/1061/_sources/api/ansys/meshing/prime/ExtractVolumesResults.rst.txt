@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractVolumesResults`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.ExtractVolumesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, assigned_zone_name: str = None, face_zonelets_without_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with compute volumes.
+
+   :param model: Model to create a ``ExtractVolumesResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param volumes: Ids of computed volumes.
+   :type volumes: Iterable[int], optional
+   :param warning_codes: Warning codes associated with the compute volumes.
+   :type warning_codes: List[WarningCode], optional
+   :param assigned_zone_name: Assigned name of zone for extracted flow volumes.
+   :type assigned_zone_name: str, optional
+   :param face_zonelets_without_volumes: Ids of face zonelets for which volumes were not extracted.
+   :type face_zonelets_without_volumes: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``ExtractVolumesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extract_volumes_results = prime.ExtractVolumesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractVolumesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assigned_zone_name`
+            - Assigned name of zone for extracted flow volumes.
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~face_zonelets_without_volumes`
+            - Ids of face zonelets for which volumes were not extracted.
+          * - :py:attr:`~volumes`
+            - Ids of computed volumes.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the compute volumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractVolumesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractVolumesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ExtractVolumesResults
+
+Property detail
+---------------
+
+.. py:property:: assigned_zone_name
+   :type: str
+
+
+   Assigned name of zone for extracted flow volumes.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: face_zonelets_without_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of face zonelets for which volumes were not extracted.
+
+.. py:property:: volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of computed volumes.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the compute volumes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractVolumesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractVolumesResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, assigned_zone_name: str = None, face_zonelets_without_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractVolumesResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param volumes: Ids of computed volumes.
+   :type volumes: Iterable[int], optional
+   :param warning_codes: Warning codes associated with the compute volumes.
+   :type warning_codes: List[WarningCode], optional
+   :param assigned_zone_name: Assigned name of zone for extracted flow volumes.
+   :type assigned_zone_name: str, optional
+   :param face_zonelets_without_volumes: Ids of face zonelets for which volumes were not extracted.
+   :type face_zonelets_without_volumes: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

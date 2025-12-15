@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchByQualityParams`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.SearchByQualityParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, quality_limit: float = None, face_quality_measure: ansys.meshing.prime.params.primestructs.FaceQualityMeasure = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control search by quality results.
+
+   :param model: Model to create a ``SearchByQualityParams`` object with default parameters.
+   :type model: Model
+   :param quality_limit: Quality limit used for search face elements.
+   :type quality_limit: float, optional
+   :param face_quality_measure: Quality measure used for search face elements.
+   :type face_quality_measure: FaceQualityMeasure, optional
+   :param json_data: JSON dictionary to create a ``SearchByQualityParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_by_quality_params = prime.SearchByQualityParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchByQualityParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~face_quality_measure`
+            - Quality measure used for search face elements.
+          * - :py:attr:`~quality_limit`
+            - Quality limit used for search face elements.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchByQualityParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchByQualityParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SearchByQualityParams
+
+Property detail
+---------------
+
+.. py:property:: face_quality_measure
+   :type: ansys.meshing.prime.params.primestructs.FaceQualityMeasure
+
+
+   Quality measure used for search face elements.
+
+.. py:property:: quality_limit
+   :type: float
+
+
+   Quality limit used for search face elements.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchByQualityParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchByQualityParams.print_default()
+
+
+.. py:method:: set_default(quality_limit: float = None, face_quality_measure: ansys.meshing.prime.params.primestructs.FaceQualityMeasure = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SearchByQualityParams`` object.
+
+   :param quality_limit: Quality limit used for search face elements.
+   :type quality_limit: float, optional
+   :param face_quality_measure: Quality measure used for search face elements.
+   :type face_quality_measure: FaceQualityMeasure, optional
+
+
+
+
+
+
+
+.. vale on

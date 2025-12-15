@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapRegion`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.wrapperstructs.WrapRegion
+
+
+
+   Indicates source type to extract wrapper region.
+
+
+
+
+.. py:currentmodule:: WrapRegion
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EXTERNAL`
+            - Option to extract exterior wrapper region.
+          * - :py:attr:`~LARGESTINTERNAL`
+            - Option to extract largest internal wrapper region.
+          * - :py:attr:`~MATERIALPOINT`
+            - Option to use live material points to extract wrapper region.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.wrapperstructs import WrapRegion
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EXTERNAL
+   :value: 1
+
+
+   Option to extract exterior wrapper region.
+
+.. py:attribute:: LARGESTINTERNAL
+   :value: 2
+
+
+   Option to extract largest internal wrapper region.
+
+.. py:attribute:: MATERIALPOINT
+   :value: 0
+
+
+   Option to use live material points to extract wrapper region.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿elements\_per\_gap
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProximitySizingParams.elements_per_gap

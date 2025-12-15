@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeQualitySummaryResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using VolumeQualitySummaryResults.set_default
+
+   ansys.meshing.prime.VolumeQualitySummaryResults.set_default

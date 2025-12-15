@@ -1,0 +1,11 @@
+download\_elbow\_pmdat
+======================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_elbow_pmdat
+
+.. minigallery::
+    :add-heading: Examples using download_elbow_pmdat
+
+    ansys.meshing.prime.examples.download_elbow_pmdat

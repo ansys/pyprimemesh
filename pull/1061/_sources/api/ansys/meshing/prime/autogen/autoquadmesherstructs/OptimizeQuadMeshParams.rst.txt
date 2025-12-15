@@ -1,0 +1,222 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`OptimizeQuadMeshParams`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.OptimizeQuadMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, suppress_topo_edge_and_mesh_cleanup: bool = None, edge_mesh_constant_size: float = None, surface_mesh_constant_size: float = None, generate_quads: bool = None, project_on_geometry: bool = None, delete_interior_nodes_params: DeleteInteriorNodesParams = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for optimize quad mesh operations.
+
+   :param model: Model to create a ``OptimizeQuadMeshParams`` object with default parameters.
+   :type model: Model
+   :param suppress_topo_edge_and_mesh_cleanup: Option to suppress topoedges and clean up mesh.
+
+                                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type suppress_topo_edge_and_mesh_cleanup: bool, optional
+   :param edge_mesh_constant_size: Constant size used for edge meshing.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_mesh_constant_size: float, optional
+   :param surface_mesh_constant_size: Constant size used for surface meshing.
+
+                                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type surface_mesh_constant_size: float, optional
+   :param generate_quads: Option to generate quadrilateral surface mesh.
+
+                          **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type generate_quads: bool, optional
+   :param project_on_geometry: Option to project on geometry when meshing.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type project_on_geometry: bool, optional
+   :param delete_interior_nodes_params: Parameters to control delete interior nodes operation.
+
+                                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type delete_interior_nodes_params: DeleteInteriorNodesParams, optional
+   :param json_data: JSON dictionary to create a ``OptimizeQuadMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> optimize_quad_mesh_params = prime.OptimizeQuadMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: OptimizeQuadMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_interior_nodes_params`
+            - Parameters to control delete interior nodes operation.
+          * - :py:attr:`~edge_mesh_constant_size`
+            - Constant size used for edge meshing.
+          * - :py:attr:`~generate_quads`
+            - Option to generate quadrilateral surface mesh.
+          * - :py:attr:`~project_on_geometry`
+            - Option to project on geometry when meshing.
+          * - :py:attr:`~suppress_topo_edge_and_mesh_cleanup`
+            - Option to suppress topoedges and clean up mesh.
+          * - :py:attr:`~surface_mesh_constant_size`
+            - Constant size used for surface meshing.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``OptimizeQuadMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``OptimizeQuadMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import OptimizeQuadMeshParams
+
+Property detail
+---------------
+
+.. py:property:: delete_interior_nodes_params
+   :type: DeleteInteriorNodesParams
+
+
+   Parameters to control delete interior nodes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: edge_mesh_constant_size
+   :type: float
+
+
+   Constant size used for edge meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: generate_quads
+   :type: bool
+
+
+   Option to generate quadrilateral surface mesh.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: project_on_geometry
+   :type: bool
+
+
+   Option to project on geometry when meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: suppress_topo_edge_and_mesh_cleanup
+   :type: bool
+
+
+   Option to suppress topoedges and clean up mesh.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: surface_mesh_constant_size
+   :type: float
+
+
+   Constant size used for surface meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``OptimizeQuadMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> OptimizeQuadMeshParams.print_default()
+
+
+.. py:method:: set_default(suppress_topo_edge_and_mesh_cleanup: bool = None, edge_mesh_constant_size: float = None, surface_mesh_constant_size: float = None, generate_quads: bool = None, project_on_geometry: bool = None, delete_interior_nodes_params: DeleteInteriorNodesParams = None)
+   :staticmethod:
+
+
+   Set the default values of the ``OptimizeQuadMeshParams`` object.
+
+   :param suppress_topo_edge_and_mesh_cleanup: Option to suppress topoedges and clean up mesh.
+   :type suppress_topo_edge_and_mesh_cleanup: bool, optional
+   :param edge_mesh_constant_size: Constant size used for edge meshing.
+   :type edge_mesh_constant_size: float, optional
+   :param surface_mesh_constant_size: Constant size used for surface meshing.
+   :type surface_mesh_constant_size: float, optional
+   :param generate_quads: Option to generate quadrilateral surface mesh.
+   :type generate_quads: bool, optional
+   :param project_on_geometry: Option to project on geometry when meshing.
+   :type project_on_geometry: bool, optional
+   :param delete_interior_nodes_params: Parameters to control delete interior nodes operation.
+   :type delete_interior_nodes_params: DeleteInteriorNodesParams, optional
+
+
+
+
+
+
+
+.. vale on

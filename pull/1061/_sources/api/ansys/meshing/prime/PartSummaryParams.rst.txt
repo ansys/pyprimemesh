@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PartSummaryParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.PartSummaryParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, print_id: bool = None, print_mesh: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control part summary results.
+
+   :param model: Model to create a ``PartSummaryParams`` object with default parameters.
+   :type model: Model
+   :param print_id: Boolean to control print ids. The default is false.
+   :type print_id: bool, optional
+   :param print_mesh: Boolean to control print mesh information. The default is true.
+   :type print_mesh: bool, optional
+   :param json_data: JSON dictionary to create a ``PartSummaryParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> part_summary_params = prime.PartSummaryParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PartSummaryParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_id`
+            - Boolean to control print ids. The default is false.
+          * - :py:attr:`~print_mesh`
+            - Boolean to control print mesh information. The default is true.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PartSummaryParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PartSummaryParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import PartSummaryParams
+
+Property detail
+---------------
+
+.. py:property:: print_id
+   :type: bool
+
+
+   Boolean to control print ids. The default is false.
+
+.. py:property:: print_mesh
+   :type: bool
+
+
+   Boolean to control print mesh information. The default is true.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PartSummaryParams`` object.
+
+   .. rubric:: Examples
+
+   >>> PartSummaryParams.print_default()
+
+
+.. py:method:: set_default(print_id: bool = None, print_mesh: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PartSummaryParams`` object.
+
+   :param print_id: Boolean to control print ids. The default is false.
+   :type print_id: bool, optional
+   :param print_mesh: Boolean to control print mesh information. The default is true.
+   :type print_mesh: bool, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,124 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``featureextractionstructs.py`` module
+==========================================
+
+.. py:module:: ansys.meshing.prime.autogen.featureextractionstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: featureextractionstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextractionstructs.CreateIntersectionEdgeLoopsParams`
+            - Parameters used to calculate edge loops created by intersection of two groups of face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextractionstructs.CreateIntersectionEdgeLoopsResults`
+            - Results for the edge loops created by intersection of two groups of face zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextractionstructs.ExtractFeatureParams`
+            - Parameter to control feature edge extraction.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextractionstructs.ExtractFeatureResults`
+            - Result of edge zonelet extraction by angle.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextractionstructs.ExtractedFeatureIds`
+            - Contains ids of the features extracted.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CreateIntersectionEdgeLoopsParams</api/ansys/meshing/prime/autogen/featureextractionstructs/CreateIntersectionEdgeLoopsParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateIntersectionEdgeLoopsResults</api/ansys/meshing/prime/autogen/featureextractionstructs/CreateIntersectionEdgeLoopsResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractFeatureParams</api/ansys/meshing/prime/autogen/featureextractionstructs/ExtractFeatureParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractFeatureResults</api/ansys/meshing/prime/autogen/featureextractionstructs/ExtractFeatureResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractedFeatureIds</api/ansys/meshing/prime/autogen/featureextractionstructs/ExtractedFeatureIds>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

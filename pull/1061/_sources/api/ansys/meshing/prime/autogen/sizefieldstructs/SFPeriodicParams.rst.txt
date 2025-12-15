@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SFPeriodicParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizefieldstructs.SFPeriodicParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, axis: ansys.meshing.prime.params.primestructs.Iterable[float] = None, angle: float = None, center: ansys.meshing.prime.params.primestructs.Iterable[float] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for setting periodic size fields.
+
+   :param model: Model to create a ``SFPeriodicParams`` object with default parameters.
+   :type model: Model
+   :param axis: Axis vector coordinates.
+   :type axis: Iterable[float], optional
+   :param angle: Angle in degrees.
+   :type angle: float, optional
+   :param center: Center coordinates.
+   :type center: Iterable[float], optional
+   :param json_data: JSON dictionary to create a ``SFPeriodicParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> s_fperiodic_params = prime.SFPeriodicParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SFPeriodicParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~angle`
+            - Angle in degrees.
+          * - :py:attr:`~axis`
+            - Axis vector coordinates.
+          * - :py:attr:`~center`
+            - Center coordinates.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SFPeriodicParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SFPeriodicParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizefieldstructs import SFPeriodicParams
+
+Property detail
+---------------
+
+.. py:property:: angle
+   :type: float
+
+
+   Angle in degrees.
+
+.. py:property:: axis
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Axis vector coordinates.
+
+.. py:property:: center
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Center coordinates.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SFPeriodicParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SFPeriodicParams.print_default()
+
+
+.. py:method:: set_default(axis: ansys.meshing.prime.params.primestructs.Iterable[float] = None, angle: float = None, center: ansys.meshing.prime.params.primestructs.Iterable[float] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SFPeriodicParams`` object.
+
+   :param axis: Axis vector coordinates.
+   :type axis: Iterable[float], optional
+   :param angle: Angle in degrees.
+   :type angle: float, optional
+   :param center: Center coordinates.
+   :type center: Iterable[float], optional
+
+
+
+
+
+
+
+.. vale on

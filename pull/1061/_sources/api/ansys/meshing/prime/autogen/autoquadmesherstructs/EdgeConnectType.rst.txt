@@ -1,0 +1,102 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`EdgeConnectType`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.EdgeConnectType
+
+
+
+   Edge connect type to define the type of connection between edges .
+
+
+
+
+.. py:currentmodule:: EdgeConnectType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALLTOALL`
+            - Perform connections between any type of edges or faces.
+          * - :py:attr:`~FREETOALL`
+            - Perform connections between free edges and any type of edges or faces.
+          * - :py:attr:`~FREETOFREE`
+            - Perform connections between free edges.
+          * - :py:attr:`~NONE`
+            - Perform no connection.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import EdgeConnectType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALLTOALL
+   :value: 1
+
+
+   Perform connections between any type of edges or faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: FREETOALL
+   :value: 2
+
+
+   Perform connections between free edges and any type of edges or faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: FREETOFREE
+   :value: 3
+
+
+   Perform connections between free edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   Perform no connection.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

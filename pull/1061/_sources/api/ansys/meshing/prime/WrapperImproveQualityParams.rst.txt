@@ -1,0 +1,282 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapperImproveQualityParams`
+====================================
+
+
+.. py:class:: ansys.meshing.prime.WrapperImproveQualityParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, target_skewness: float = None, island_count: int = None, island_tol: float = None, overlap_count: int = None, overlap_tol: float = None, resolve_spikes: bool = None, resolve_intersections: bool = None, inflate_dihedral_face_nodes: bool = None, resolve_invalid_node_normals: bool = None, aggressively: bool = None, sharp_angle: float = None, geom_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, number_of_threads: int = None, json_data: dict = None, **kwargs)
+
+
+
+   WrapperImproveQualityParams defines parameters to improve wrapper part.
+
+   :param model: Model to create a ``WrapperImproveQualityParams`` object with default parameters.
+   :type model: Model
+   :param target_skewness: Target skewness.
+   :type target_skewness: float, optional
+   :param island_count: Face count of smallest island.
+   :type island_count: int, optional
+   :param island_tol: Relative face count of smallest island.
+   :type island_tol: float, optional
+   :param overlap_count: Face count of non-manifold overlap.
+   :type overlap_count: int, optional
+   :param overlap_tol: Relative face count of non-manifold overlap.
+   :type overlap_tol: float, optional
+   :param resolve_spikes: Control to perform removing spikes or not.
+   :type resolve_spikes: bool, optional
+   :param resolve_intersections: Control to resolve face intersections or not.
+   :type resolve_intersections: bool, optional
+   :param inflate_dihedral_face_nodes: Control to resolve face dihedral angle by inflating opposite nodes or not.
+   :type inflate_dihedral_face_nodes: bool, optional
+   :param resolve_invalid_node_normals: Control to resolve invalid node normals by inflating opposite nodes or not.
+   :type resolve_invalid_node_normals: bool, optional
+   :param aggressively: Control to improve surfaces aggressively or not.
+   :type aggressively: bool, optional
+   :param sharp_angle: Maximum off feature sharp node angle.
+   :type sharp_angle: float, optional
+   :param geom_zonelets: Associated underlying geometry zonelet ids.
+   :type geom_zonelets: Iterable[int], optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+   :param json_data: JSON dictionary to create a ``WrapperImproveQualityParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> wrapper_improve_quality_params = prime.WrapperImproveQualityParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WrapperImproveQualityParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~aggressively`
+            - Control to improve surfaces aggressively or not.
+          * - :py:attr:`~geom_zonelets`
+            - Associated underlying geometry zonelet ids.
+          * - :py:attr:`~inflate_dihedral_face_nodes`
+            - Control to resolve face dihedral angle by inflating opposite nodes or not.
+          * - :py:attr:`~island_count`
+            - Face count of smallest island.
+          * - :py:attr:`~island_tol`
+            - Relative face count of smallest island.
+          * - :py:attr:`~number_of_threads`
+            - Number of threads for multithreading.
+          * - :py:attr:`~overlap_count`
+            - Face count of non-manifold overlap.
+          * - :py:attr:`~overlap_tol`
+            - Relative face count of non-manifold overlap.
+          * - :py:attr:`~resolve_intersections`
+            - Control to resolve face intersections or not.
+          * - :py:attr:`~resolve_invalid_node_normals`
+            - Control to resolve invalid node normals by inflating opposite nodes or not.
+          * - :py:attr:`~resolve_spikes`
+            - Control to perform removing spikes or not.
+          * - :py:attr:`~sharp_angle`
+            - Maximum off feature sharp node angle.
+          * - :py:attr:`~target_skewness`
+            - Target skewness.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WrapperImproveQualityParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WrapperImproveQualityParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import WrapperImproveQualityParams
+
+Property detail
+---------------
+
+.. py:property:: aggressively
+   :type: bool
+
+
+   Control to improve surfaces aggressively or not.
+
+.. py:property:: geom_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Associated underlying geometry zonelet ids.
+
+.. py:property:: inflate_dihedral_face_nodes
+   :type: bool
+
+
+   Control to resolve face dihedral angle by inflating opposite nodes or not.
+
+.. py:property:: island_count
+   :type: int
+
+
+   Face count of smallest island.
+
+.. py:property:: island_tol
+   :type: float
+
+
+   Relative face count of smallest island.
+
+.. py:property:: number_of_threads
+   :type: int
+
+
+   Number of threads for multithreading.
+
+.. py:property:: overlap_count
+   :type: int
+
+
+   Face count of non-manifold overlap.
+
+.. py:property:: overlap_tol
+   :type: float
+
+
+   Relative face count of non-manifold overlap.
+
+.. py:property:: resolve_intersections
+   :type: bool
+
+
+   Control to resolve face intersections or not.
+
+.. py:property:: resolve_invalid_node_normals
+   :type: bool
+
+
+   Control to resolve invalid node normals by inflating opposite nodes or not.
+
+.. py:property:: resolve_spikes
+   :type: bool
+
+
+   Control to perform removing spikes or not.
+
+.. py:property:: sharp_angle
+   :type: float
+
+
+   Maximum off feature sharp node angle.
+
+.. py:property:: target_skewness
+   :type: float
+
+
+   Target skewness.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WrapperImproveQualityParams`` object.
+
+   .. rubric:: Examples
+
+   >>> WrapperImproveQualityParams.print_default()
+
+
+.. py:method:: set_default(target_skewness: float = None, island_count: int = None, island_tol: float = None, overlap_count: int = None, overlap_tol: float = None, resolve_spikes: bool = None, resolve_intersections: bool = None, inflate_dihedral_face_nodes: bool = None, resolve_invalid_node_normals: bool = None, aggressively: bool = None, sharp_angle: float = None, geom_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, number_of_threads: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WrapperImproveQualityParams`` object.
+
+   :param target_skewness: Target skewness.
+   :type target_skewness: float, optional
+   :param island_count: Face count of smallest island.
+   :type island_count: int, optional
+   :param island_tol: Relative face count of smallest island.
+   :type island_tol: float, optional
+   :param overlap_count: Face count of non-manifold overlap.
+   :type overlap_count: int, optional
+   :param overlap_tol: Relative face count of non-manifold overlap.
+   :type overlap_tol: float, optional
+   :param resolve_spikes: Control to perform removing spikes or not.
+   :type resolve_spikes: bool, optional
+   :param resolve_intersections: Control to resolve face intersections or not.
+   :type resolve_intersections: bool, optional
+   :param inflate_dihedral_face_nodes: Control to resolve face dihedral angle by inflating opposite nodes or not.
+   :type inflate_dihedral_face_nodes: bool, optional
+   :param resolve_invalid_node_normals: Control to resolve invalid node normals by inflating opposite nodes or not.
+   :type resolve_invalid_node_normals: bool, optional
+   :param aggressively: Control to improve surfaces aggressively or not.
+   :type aggressively: bool, optional
+   :param sharp_angle: Maximum off feature sharp node angle.
+   :type sharp_angle: float, optional
+   :param geom_zonelets: Associated underlying geometry zonelet ids.
+   :type geom_zonelets: Iterable[int], optional
+   :param number_of_threads: Number of threads for multithreading.
+   :type number_of_threads: int, optional
+
+
+
+
+
+
+
+.. vale on

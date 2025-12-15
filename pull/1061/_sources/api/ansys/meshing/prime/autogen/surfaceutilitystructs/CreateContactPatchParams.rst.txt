@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateContactPatchParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, contact_patch_axis: ContactPatchAxis = None, offset_distance: float = None, grouping_tolerance: float = None, suggested_part_name: str = None, suggested_label_prefix: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used for contact patch creation in the given axis.
+
+   :param model: Model to create a ``CreateContactPatchParams`` object with default parameters.
+   :type model: Model
+   :param contact_patch_axis: Assigns the contact patch direction.
+   :type contact_patch_axis: ContactPatchAxis, optional
+   :param offset_distance: Source offset distance value.
+   :type offset_distance: float, optional
+   :param grouping_tolerance: Tolerance distance value to group regions for contact patch creation.
+   :type grouping_tolerance: float, optional
+   :param suggested_part_name: Suggested part name for created contact patch surfaces.
+   :type suggested_part_name: str, optional
+   :param suggested_label_prefix: Suggested label name for created contact patch surfaces.
+   :type suggested_label_prefix: str, optional
+   :param json_data: JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_contact_patch_params = prime.CreateContactPatchParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateContactPatchParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~contact_patch_axis`
+            - Assigns the contact patch direction.
+          * - :py:attr:`~grouping_tolerance`
+            - Tolerance distance value to group regions for contact patch creation.
+          * - :py:attr:`~offset_distance`
+            - Source offset distance value.
+          * - :py:attr:`~suggested_label_prefix`
+            - Suggested label name for created contact patch surfaces.
+          * - :py:attr:`~suggested_part_name`
+            - Suggested part name for created contact patch surfaces.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateContactPatchParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateContactPatchParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import CreateContactPatchParams
+
+Property detail
+---------------
+
+.. py:property:: contact_patch_axis
+   :type: ContactPatchAxis
+
+
+   Assigns the contact patch direction.
+
+.. py:property:: grouping_tolerance
+   :type: float
+
+
+   Tolerance distance value to group regions for contact patch creation.
+
+.. py:property:: offset_distance
+   :type: float
+
+
+   Source offset distance value.
+
+.. py:property:: suggested_label_prefix
+   :type: str
+
+
+   Suggested label name for created contact patch surfaces.
+
+.. py:property:: suggested_part_name
+   :type: str
+
+
+   Suggested part name for created contact patch surfaces.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateContactPatchParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateContactPatchParams.print_default()
+
+
+.. py:method:: set_default(contact_patch_axis: ContactPatchAxis = None, offset_distance: float = None, grouping_tolerance: float = None, suggested_part_name: str = None, suggested_label_prefix: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateContactPatchParams`` object.
+
+   :param contact_patch_axis: Assigns the contact patch direction.
+   :type contact_patch_axis: ContactPatchAxis, optional
+   :param offset_distance: Source offset distance value.
+   :type offset_distance: float, optional
+   :param grouping_tolerance: Tolerance distance value to group regions for contact patch creation.
+   :type grouping_tolerance: float, optional
+   :param suggested_part_name: Suggested part name for created contact patch surfaces.
+   :type suggested_part_name: str, optional
+   :param suggested_label_prefix: Suggested label name for created contact patch surfaces.
+   :type suggested_label_prefix: str, optional
+
+
+
+
+
+
+
+.. vale on

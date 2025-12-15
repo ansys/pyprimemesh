@@ -1,0 +1,177 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Scaffolder`
+===================
+
+
+.. py:class:: ansys.meshing.prime.Scaffolder(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, part_id: int)
+
+
+
+   Scaffolder is used for achieving connections in structures made of sheets and beams. Solid bodies should be suppressed before applying scaffolding.
+
+   :param model: Server model to create Scaffolder object.
+   :type model: Model
+   :param part_id: Id of the part.
+   :type part_id: int
+
+
+
+
+
+
+.. py:currentmodule:: Scaffolder
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_shadowed_topo_faces`
+            - Delete fully shadowed topofaces.
+          * - :py:attr:`~merge_overlapping_topo_faces`
+            - Merge overlapping topofaces.
+          * - :py:attr:`~scaffold_topo_faces_and_beams`
+            - Scaffold faces and beams with provided parameters.
+          * - :py:attr:`~split_topo_faces_by_mesh_region`
+            - Split input topofaces by mesh region.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for Scaffolder.
+          * - :py:attr:`~__exit__`
+            - Exit context for Scaffolder.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import Scaffolder
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for Scaffolder.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for Scaffolder.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: delete_shadowed_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.VolumetricScaffolderParams) -> ansys.meshing.prime.params.primestructs.ScaffolderMergeResults
+
+   Delete fully shadowed topofaces.
+
+
+   :param topo_faces: Ids of input topofaces.
+   :type topo_faces: Iterable[int]
+   :param params: Volumetric scaffolder parameters.
+   :type params: VolumetricScaffolderParams
+
+   :returns: Return results in ScaffolderMergeResults.
+   :rtype: ScaffolderMergeResults
+
+   .. rubric:: Examples
+
+   >>> results = scaffolder.delete_shadowed_topo_faces([1,2,3,4,5], params)
+
+
+.. py:method:: merge_overlapping_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ScaffolderParams) -> ansys.meshing.prime.params.primestructs.ScaffolderMergeResults
+
+   Merge overlapping topofaces.
+
+
+   :param topo_faces: Ids of topology faces.
+   :type topo_faces: Iterable[int]
+   :param params: Scaffolder parameters.
+   :type params: ScaffolderParams
+
+   :returns: Return results in ScaffolderMergeResults.
+   :rtype: ScaffolderMergeResults
+
+   .. rubric:: Examples
+
+   >>> results = scaffolder.MergeOverlappingTopoFaces([1,2,7,8], params)
+
+
+.. py:method:: scaffold_topo_faces_and_beams(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], topo_beams: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ScaffolderParams) -> ansys.meshing.prime.params.primestructs.ScaffolderResults
+
+   Scaffold faces and beams with provided parameters.
+
+
+   :param topo_faces: Ids of topology faces.
+   :type topo_faces: Iterable[int]
+   :param topo_beams: Ids of topology edges for beams.
+   :type topo_beams: Iterable[int]
+   :param params: Scaffolding parameters.
+   :type params: ScaffolderParams
+
+   :returns: Return results in ScaffolderResults structure.
+   :rtype: ScaffolderResults
+
+   .. rubric:: Examples
+
+   >>> results = scaffolder.ScaffoldTopoFacesAndBeams([1,2], [7,8], params)
+
+
+.. py:method:: split_topo_faces_by_mesh_region(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.ScaffolderSplitResults
+
+   Split input topofaces by mesh region.
+
+
+   :param topo_faces: Ids of topology faces.
+   :type topo_faces: Iterable[int]
+
+   :returns: Return results in ScaffolderSplitResults type.
+   :rtype: ScaffolderSplitResults
+
+   .. rubric:: Examples
+
+   >>> results = scaffolder.split_topo_faces_by_mesh_region([1,2,7,8])
+
+
+
+
+
+
+
+.. vale on

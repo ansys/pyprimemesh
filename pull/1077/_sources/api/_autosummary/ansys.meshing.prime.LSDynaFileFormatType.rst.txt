@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+LSDynaFileFormatType
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LSDynaFileFormatType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      LSDynaFileFormatType.REGULAR
+      
+      
+      LSDynaFileFormatType.I10
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using LSDynaFileFormatType
+
+    ansys.meshing.prime.LSDynaFileFormatType
+
+.. vale on

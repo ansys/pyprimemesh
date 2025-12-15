@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SetNameResults`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.SetNameResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, warning_code: ansys.meshing.prime.params.primestructs.WarningCode = None, assigned_name: str = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the set name.
+
+   :param model: Model to create a ``SetNameResults`` object with default parameters.
+   :type model: Model
+   :param warning_code: Warning code associated with the set name of given entity.
+   :type warning_code: WarningCode, optional
+   :param assigned_name: Assigned name of given entity.
+   :type assigned_name: str, optional
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``SetNameResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> set_name_results = prime.SetNameResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SetNameResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assigned_name`
+            - Assigned name of given entity.
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~warning_code`
+            - Warning code associated with the set name of given entity.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SetNameResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SetNameResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SetNameResults
+
+Property detail
+---------------
+
+.. py:property:: assigned_name
+   :type: str
+
+
+   Assigned name of given entity.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: warning_code
+   :type: ansys.meshing.prime.params.primestructs.WarningCode
+
+
+   Warning code associated with the set name of given entity.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SetNameResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SetNameResults.print_default()
+
+
+.. py:method:: set_default(warning_code: ansys.meshing.prime.params.primestructs.WarningCode = None, assigned_name: str = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SetNameResults`` object.
+
+   :param warning_code: Warning code associated with the set name of given entity.
+   :type warning_code: WarningCode, optional
+   :param assigned_name: Assigned name of given entity.
+   :type assigned_name: str, optional
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

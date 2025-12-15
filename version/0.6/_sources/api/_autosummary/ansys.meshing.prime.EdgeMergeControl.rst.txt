@@ -1,0 +1,27 @@
+.. vale off
+
+EdgeMergeControl
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: EdgeMergeControl
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      EdgeMergeControl.ALLTOALL
+      EdgeMergeControl.FREETOALL
+      EdgeMergeControl.FREETOFREE
+   
+   
+
+.. vale on

@@ -1,0 +1,198 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ComputeVolumesResults`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.ComputeVolumesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, error_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, material_point_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, external_open_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with compute volumes.
+
+   :param model: Model to create a ``ComputeVolumesResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param error_locations: Coordinates of problematic locations in the surface mesh.
+   :type error_locations: Iterable[float], optional
+   :param volumes: Ids of computed volumes.
+   :type volumes: Iterable[int], optional
+   :param material_point_volumes: Ids of computed volumes enclosing material points.
+   :type material_point_volumes: Iterable[int], optional
+   :param external_open_face_zonelets: Face zonelet ids that are in external space and not part of any computed volumes.
+   :type external_open_face_zonelets: Iterable[int], optional
+   :param warning_codes: Warning codes associated with the compute volumes.
+   :type warning_codes: List[WarningCode], optional
+   :param json_data: JSON dictionary to create a ``ComputeVolumesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> compute_volumes_results = prime.ComputeVolumesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ComputeVolumesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~error_locations`
+            - Coordinates of problematic locations in the surface mesh.
+          * - :py:attr:`~external_open_face_zonelets`
+            - Face zonelet ids that are in external space and not part of any computed volumes.
+          * - :py:attr:`~material_point_volumes`
+            - Ids of computed volumes enclosing material points.
+          * - :py:attr:`~volumes`
+            - Ids of computed volumes.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the compute volumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ComputeVolumesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ComputeVolumesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ComputeVolumesResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: error_locations
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Coordinates of problematic locations in the surface mesh.
+
+.. py:property:: external_open_face_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Face zonelet ids that are in external space and not part of any computed volumes.
+
+.. py:property:: material_point_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of computed volumes enclosing material points.
+
+.. py:property:: volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of computed volumes.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the compute volumes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ComputeVolumesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ComputeVolumesResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, error_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, material_point_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, external_open_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ComputeVolumesResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param error_locations: Coordinates of problematic locations in the surface mesh.
+   :type error_locations: Iterable[float], optional
+   :param volumes: Ids of computed volumes.
+   :type volumes: Iterable[int], optional
+   :param material_point_volumes: Ids of computed volumes enclosing material points.
+   :type material_point_volumes: Iterable[int], optional
+   :param external_open_face_zonelets: Face zonelet ids that are in external space and not part of any computed volumes.
+   :type external_open_face_zonelets: Iterable[int], optional
+   :param warning_codes: Warning codes associated with the compute volumes.
+   :type warning_codes: List[WarningCode], optional
+
+
+
+
+
+
+
+.. vale on

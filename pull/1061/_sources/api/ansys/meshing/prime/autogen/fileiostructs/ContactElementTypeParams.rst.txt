@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ContactElementTypeParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ContactElementTypeParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, tie_surf_to_surf: int = None, tie_node_to_surf: int = None, contact_pair_surf_to_surf: int = None, contact_pair_node_to_surf: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control element type choices for contact surfaces in TIEs and CONTACT PAIRs.
+
+   :param model: Model to create a ``ContactElementTypeParams`` object with default parameters.
+   :type model: Model
+   :param tie_surf_to_surf: Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+                            **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type tie_surf_to_surf: int, optional
+   :param tie_node_to_surf: Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+
+                            **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type tie_node_to_surf: int, optional
+   :param contact_pair_surf_to_surf: Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type contact_pair_surf_to_surf: int, optional
+   :param contact_pair_node_to_surf: Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type contact_pair_node_to_surf: int, optional
+   :param json_data: JSON dictionary to create a ``ContactElementTypeParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> contact_element_type_params = prime.ContactElementTypeParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ContactElementTypeParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~contact_pair_node_to_surf`
+            - Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+          * - :py:attr:`~contact_pair_surf_to_surf`
+            - Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+          * - :py:attr:`~tie_node_to_surf`
+            - Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+          * - :py:attr:`~tie_surf_to_surf`
+            - Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ContactElementTypeParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ContactElementTypeParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ContactElementTypeParams
+
+Property detail
+---------------
+
+.. py:property:: contact_pair_node_to_surf
+   :type: int
+
+
+   Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: contact_pair_surf_to_surf
+   :type: int
+
+
+   Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: tie_node_to_surf
+   :type: int
+
+
+   Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: tie_surf_to_surf
+   :type: int
+
+
+   Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ContactElementTypeParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ContactElementTypeParams.print_default()
+
+
+.. py:method:: set_default(tie_surf_to_surf: int = None, tie_node_to_surf: int = None, contact_pair_surf_to_surf: int = None, contact_pair_node_to_surf: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ContactElementTypeParams`` object.
+
+   :param tie_surf_to_surf: Element type for TIE with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+   :type tie_surf_to_surf: int, optional
+   :param tie_node_to_surf: Element type for TIE with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 175. The choices are 174 and 175.
+   :type tie_node_to_surf: int, optional
+   :param contact_pair_surf_to_surf: Element type for CONTACT PAIR with Surface-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+   :type contact_pair_surf_to_surf: int, optional
+   :param contact_pair_node_to_surf: Element type for CONTACT PAIR with Node-to-Surface contact where the contact surface is of type ELEMENT. Default value is 174. The choices are 174 and 175.
+   :type contact_pair_node_to_surf: int, optional
+
+
+
+
+
+
+
+.. vale on

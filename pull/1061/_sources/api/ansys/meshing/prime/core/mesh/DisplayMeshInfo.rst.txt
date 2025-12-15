@@ -1,0 +1,112 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DisplayMeshInfo`
+========================
+
+
+.. py:class:: ansys.meshing.prime.core.mesh.DisplayMeshInfo(id=0, part_id=0, part_name=None, zone_id=0, zone_name=None, display_mesh_type=DisplayMeshType.FACEZONELET, has_mesh=False)
+
+   Contains the mesh information to display.
+
+   :param id: ID of the mesh.
+   :type id: int, default: 0
+   :param part_id: ID of the part.
+   :type part_id: int, default: 0
+   :param part_name: Name of the part.
+   :type part_name: str, default: None
+   :param zone_id: ID of the zone.
+   :type zone_id: int, default: 0
+   :param zone_name: Name of the zone.
+   :type zone_name: str, default: None
+   :param display_mesh_type: Type of mesh to display.
+   :type display_mesh_type: DisplayMeshType, default: FACEZONELET
+
+
+
+.. py:currentmodule:: DisplayMeshInfo
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~display_mesh_type`
+            - 
+          * - :py:attr:`~has_mesh`
+            - 
+          * - :py:attr:`~id`
+            - 
+          * - :py:attr:`~part_id`
+            - 
+          * - :py:attr:`~part_name`
+            - 
+          * - :py:attr:`~zone_id`
+            - 
+          * - :py:attr:`~zone_name`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.mesh import DisplayMeshInfo
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: display_mesh_type
+
+.. py:attribute:: has_mesh
+   :value: False
+
+
+.. py:attribute:: id
+   :value: 0
+
+
+.. py:attribute:: part_id
+   :value: 0
+
+
+.. py:attribute:: part_name
+   :value: None
+
+
+.. py:attribute:: zone_id
+   :value: 0
+
+
+.. py:attribute:: zone_name
+   :value: None
+
+
+
+
+
+
+
+
+.. vale on

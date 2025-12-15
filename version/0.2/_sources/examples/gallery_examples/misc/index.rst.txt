@@ -1,0 +1,42 @@
+
+
+.. _sphx_glr_examples_gallery_examples_misc:
+
+Miscellaneous Examples
+======================
+These examples demonstrate miscellaneous tips and tricks for using PyPrimeMesh.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This block comment should be included at the top of any new example. Each example should have a...">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/misc/images/thumb/sphx_glr_example_template_thumb.png
+    :alt: Adding a New Gallery Example
+
+  :ref:`sphx_glr_examples_gallery_examples_misc_example_template.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Adding a New Gallery Example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/misc/example_template
+

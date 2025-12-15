@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``sizefield.py`` module
+===========================
+
+.. py:module:: ansys.meshing.prime.autogen.sizefield
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: sizefield
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizefield.SizeField`
+            - The size field is computed based on the size control defined.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SizeField</api/ansys/meshing/prime/autogen/sizefield/SizeField>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

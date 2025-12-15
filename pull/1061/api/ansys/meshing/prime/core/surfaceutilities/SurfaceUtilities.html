@@ -1,0 +1,1175 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:site_name" content="PyAnsys" />
+    <title>SurfaceUtilities &#8212; PyPrimeMesh</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=ce7f2556" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=ce7f2556" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../_static/documentation_options.js?v=f1207ea0"></script>
+    <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/meshing/prime/core/surfaceutilities/SurfaceUtilities';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.0.dev3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <img src="../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyPrimeMesh - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"> <span class="nf nf-cod-symbol_class"></span> SurfaceUtilities</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceUtilities</span></code></span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="surfaceutilities">
+<h1><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceUtilities</span></code><a class="headerlink" href="#surfaceutilities" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.core.surfaceutilities.</span></span><span class="sig-name descname"><span class="pre">SurfaceUtilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../model/Model.html#ansys.meshing.prime.core.model.Model" title="ansys.meshing.prime.core.model.Model"><span class="pre">ansys.meshing.prime.core.model.Model</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities" title="Link to this definition">#</a></dt>
+<dd><p>Performs various general surface utilities algorithms.</p>
+<p>For example, copy zonelets, resolve surface intersections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="../../Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><em>Model</em></a>) – Server model to create SurfaceUtilities object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Methods</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.add_thickness" title="SurfaceUtilities.add_thickness"><code class="xref py py-attr docutils literal notranslate"><span class="pre">add_thickness</span></code></a></p></td>
+<td><p>Add thicknesss to input face zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.copy_face_zonelets" title="SurfaceUtilities.copy_face_zonelets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">copy_face_zonelets</span></code></a></p></td>
+<td><p>Copy face zonelets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.create_boi" title="SurfaceUtilities.create_boi"><code class="xref py py-attr docutils literal notranslate"><span class="pre">create_boi</span></code></a></p></td>
+<td><p>Create BOI to input face zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.create_cap_on_face_zonelets" title="SurfaceUtilities.create_cap_on_face_zonelets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">create_cap_on_face_zonelets</span></code></a></p></td>
+<td><p>Create caps on the given face zonelets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.create_contact_patch" title="SurfaceUtilities.create_contact_patch"><code class="xref py py-attr docutils literal notranslate"><span class="pre">create_contact_patch</span></code></a></p></td>
+<td><p>Create a contact patch by offsetting the target zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.delete_unwetted_surfaces" title="SurfaceUtilities.delete_unwetted_surfaces"><code class="xref py py-attr docutils literal notranslate"><span class="pre">delete_unwetted_surfaces</span></code></a></p></td>
+<td><p>Delete unwetted surfaces based on material point list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.fill_holes_at_plane" title="SurfaceUtilities.fill_holes_at_plane"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_holes_at_plane</span></code></a></p></td>
+<td><p>Fill holes in given face zonelets at given plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets" title="SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fix_invalid_normal_nodes_of_face_zonelets</span></code></a></p></td>
+<td><p>Create nuggets to fix invalid normal at nodes of the given face zonelets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.get_bounding_box_of_zonelets" title="SurfaceUtilities.get_bounding_box_of_zonelets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">get_bounding_box_of_zonelets</span></code></a></p></td>
+<td><p>Get bounding box of given zonelets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.project_topo_faces_on_geometry" title="SurfaceUtilities.project_topo_faces_on_geometry"><code class="xref py py-attr docutils literal notranslate"><span class="pre">project_topo_faces_on_geometry</span></code></a></p></td>
+<td><p>Project nodes of given topofaces on geometry associated to those topofaces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.refine_at_contacts" title="SurfaceUtilities.refine_at_contacts"><code class="xref py py-attr docutils literal notranslate"><span class="pre">refine_at_contacts</span></code></a></p></td>
+<td><p>Refine face elements in contact with other parts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.resolve_intersections" title="SurfaceUtilities.resolve_intersections"><code class="xref py py-attr docutils literal notranslate"><span class="pre">resolve_intersections</span></code></a></p></td>
+<td><p>Resolve facezonelets intersections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.smooth_dihedral_face_nodes" title="SurfaceUtilities.smooth_dihedral_face_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">smooth_dihedral_face_nodes</span></code></a></p></td>
+<td><p>Perform a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.stretch_free_boundaries" title="SurfaceUtilities.stretch_free_boundaries"><code class="xref py py-attr docutils literal notranslate"><span class="pre">stretch_free_boundaries</span></code></a></p></td>
+<td><p>Stretch free boundaries of each zonelet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.triangulate_face_zonelets" title="SurfaceUtilities.triangulate_face_zonelets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">triangulate_face_zonelets</span></code></a></p></td>
+<td><p>Split faces in zonelets to get triangular faces.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Special methods</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.__enter__" title="SurfaceUtilities.__enter__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__enter__</span></code></a></p></td>
+<td><p>Enter context for SurfaceUtilities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.__exit__" title="SurfaceUtilities.__exit__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__exit__</span></code></a></p></td>
+<td><p>Exit context for SurfaceUtilities.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../autogen/surfaceutilities/SurfaceUtilities.html#SurfaceUtilities.__setattr__" title="SurfaceUtilities.__setattr__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__setattr__</span></code></a></p></td>
+<td><p>__setattr__(CoreObject self, key, value)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="import-detail">
+<h2>Import detail<a class="headerlink" href="#import-detail" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing.prime.core.surfaceutilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfaceUtilities</span>
+</pre></div>
+</div>
+</section>
+<section id="method-detail">
+<h2>Method detail<a class="headerlink" href="#method-detail" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.__enter__">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">__enter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SurfaceUtilities.__enter__" title="Link to this definition">#</a></dt>
+<dd><p>Enter context for SurfaceUtilities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.__exit__">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">__exit__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traceback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SurfaceUtilities.__exit__" title="Link to this definition">#</a></dt>
+<dd><p>Exit context for SurfaceUtilities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.__setattr__">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SurfaceUtilities.__setattr__" title="Link to this definition">#</a></dt>
+<dd><p>__setattr__(CoreObject self, key, value)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.add_thickness">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">add_thickness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/surfaceutilitystructs/AddThicknessParams.html#ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessParams" title="ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessParams"><span class="pre">ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/surfaceutilitystructs/AddThicknessResults.html#ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults" title="ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults"><span class="pre">ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults</span></a></span></span><a class="headerlink" href="#SurfaceUtilities.add_thickness" title="Link to this definition">#</a></dt>
+<dd><p>Add thicknesss to input face zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – List of input face zonelet IDs.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../AddThicknessParams.html#ansys.meshing.prime.AddThicknessParams" title="ansys.meshing.prime.AddThicknessParams"><em>AddThicknessParams</em></a>) – Parameters for controlling the addition of thickness.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results for adding thickness.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../AddThicknessResults.html#ansys.meshing.prime.AddThicknessResults" title="ansys.meshing.prime.AddThicknessResults">AddThicknessResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">add_thickness</span><span class="p">(</span><span class="n">zonelets</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.copy_face_zonelets">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">copy_face_zonelets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_part_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.CopyZoneletsParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.CopyZoneletsResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.copy_face_zonelets" title="Link to this definition">#</a></dt>
+<dd><p>Copy face zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>face_zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets to be copied.</p></li>
+<li><p><strong>target_part_id</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Part id to be used to move the copied zonelets.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../CopyZoneletsParams.html#ansys.meshing.prime.CopyZoneletsParams" title="ansys.meshing.prime.CopyZoneletsParams"><em>CopyZoneletsParams</em></a>) – Parameters to copy face zonelets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the CopyZoneletsResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../CopyZoneletsResults.html#ansys.meshing.prime.CopyZoneletsResults" title="ansys.meshing.prime.CopyZoneletsResults">CopyZoneletsResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>>>>> surfaceutil = SurfaceUtilities(model = model)
+>>>> surfaceutil = surfaceutil.copy_face_zonelets(face_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.create_boi">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">create_boi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_zonelet_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/surfaceutilitystructs/CreateBOIParams.html#ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIParams" title="ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIParams"><span class="pre">ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/surfaceutilitystructs/CreateBOIResults.html#ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIResults" title="ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIResults"><span class="pre">ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIResults</span></a></span></span><a class="headerlink" href="#SurfaceUtilities.create_boi" title="Link to this definition">#</a></dt>
+<dd><p>Create BOI to input face zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>face_zonelet_ids</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – List of input face zonelet IDs.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../CreateBOIParams.html#ansys.meshing.prime.CreateBOIParams" title="ansys.meshing.prime.CreateBOIParams"><em>CreateBOIParams</em></a>) – Parameters for controlling BOI creation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from creating BOI.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../CreateBOIResults.html#ansys.meshing.prime.CreateBOIResults" title="ansys.meshing.prime.CreateBOIResults">CreateBOIResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">create_boi</span><span class="p">(</span><span class="n">zonelets</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.create_cap_on_face_zonelets">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">create_cap_on_face_zonelets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">part_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.CreateCapParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.CreateCapResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.create_cap_on_face_zonelets" title="Link to this definition">#</a></dt>
+<dd><p>Create caps on the given face zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>part_id</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Id of part to associate face zonelets created to cap.</p></li>
+<li><p><strong>face_zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets to be used to find caps.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../CreateCapParams.html#ansys.meshing.prime.CreateCapParams" title="ansys.meshing.prime.CreateCapParams"><em>CreateCapParams</em></a>) – Parameters to create caps.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the CreateCapResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../CreateCapResults.html#ansys.meshing.prime.CreateCapResults" title="ansys.meshing.prime.CreateCapResults">CreateCapResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">CreateCapParams</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">surface_utils</span><span class="o">.</span><span class="n">cap_face_zonelets</span><span class="p">(</span><span class="n">part_id</span><span class="p">,</span> <span class="n">face_zonelets</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.create_contact_patch">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">create_contact_patch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../autogen/surfaceutilitystructs/CreateContactPatchParams.html#ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams" title="ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams"><span class="pre">ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../autogen/surfaceutilitystructs/CreateContactPatchResults.html#ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchResults" title="ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchResults"><span class="pre">ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchResults</span></a></span></span><a class="headerlink" href="#SurfaceUtilities.create_contact_patch" title="Link to this definition">#</a></dt>
+<dd><p>Create a contact patch by offsetting the target zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – IDS for the source face zonelets.</p></li>
+<li><p><strong>target_zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – IDs for the target face zonelets.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../CreateContactPatchParams.html#ansys.meshing.prime.CreateContactPatchParams" title="ansys.meshing.prime.CreateContactPatchParams"><em>CreateContactPatchParams</em></a>) – Parameters for controlling the contact patch creation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results from creating the contact patch.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../CreateContactPatchResults.html#ansys.meshing.prime.CreateContactPatchResults" title="ansys.meshing.prime.CreateContactPatchResults">CreateContactPatchResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">create_contact_patch</span><span class="p">(</span><span class="n">zonelets</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.delete_unwetted_surfaces">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">delete_unwetted_surfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_zonelet_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">live_material_point_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.DeleteUnwettedParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.DeleteUnwettedResult</span></span></span><a class="headerlink" href="#SurfaceUtilities.delete_unwetted_surfaces" title="Link to this definition">#</a></dt>
+<dd><p>Delete unwetted surfaces based on material point list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>face_zonelet_ids</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets.</p></li>
+<li><p><strong>live_material_point_names</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Names of material points.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../DeleteUnwettedParams.html#ansys.meshing.prime.DeleteUnwettedParams" title="ansys.meshing.prime.DeleteUnwettedParams"><em>DeleteUnwettedParams</em></a>) – DeleteUnwettedParams to define material points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns a DeleteUnwettedResult.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../DeleteUnwettedResult.html#ansys.meshing.prime.DeleteUnwettedResult" title="ansys.meshing.prime.DeleteUnwettedResult">DeleteUnwettedResult</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">delete_unwetted_surfaces</span><span class="p">(</span><span class="n">zonelets</span><span class="p">,</span> <span class="n">live_mpt_names</span><span class="p">,</span> <span class="n">prime</span><span class="o">.</span><span class="n">DeleteUnwettedParams</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.fill_holes_at_plane">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">fill_holes_at_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">part_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.FillHolesAtPlaneParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.FillHolesAtPlaneResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.fill_holes_at_plane" title="Link to this definition">#</a></dt>
+<dd><p>Fill holes in given face zonelets at given plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>part_id</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Id of part to associate face zonelets created to fill hole.</p></li>
+<li><p><strong>face_zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets to be used to find holes.</p></li>
+<li><p><strong>plane_points</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – Coordinates of three points to define plane.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../FillHolesAtPlaneParams.html#ansys.meshing.prime.FillHolesAtPlaneParams" title="ansys.meshing.prime.FillHolesAtPlaneParams"><em>FillHolesAtPlaneParams</em></a>) – Parameters to fill holes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the FillHolesAtPlaneResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FillHolesAtPlaneResults.html#ansys.meshing.prime.FillHolesAtPlaneResults" title="ansys.meshing.prime.FillHolesAtPlaneResults">FillHolesAtPlaneResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FillHolesAtPlaneParams</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">surface_utils</span><span class="o">.</span><span class="n">fill_holes_at_plane</span><span class="p">(</span><span class="n">part_id</span><span class="p">,</span> <span class="n">face_zonelets</span><span class="p">,</span> <span class="n">plane_points</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">fix_invalid_normal_nodes_of_face_zonelets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">part_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.FixInvalidNormalNodeParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.FixInvalidNormalNodeResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets" title="Link to this definition">#</a></dt>
+<dd><p>Create nuggets to fix invalid normal at nodes of the given face zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>part_id</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Part id of the given face zonelets. Nuggets created are associated to the given part.</p></li>
+<li><p><strong>face_zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets used to find invalid normal nodes.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../FixInvalidNormalNodeParams.html#ansys.meshing.prime.FixInvalidNormalNodeParams" title="ansys.meshing.prime.FixInvalidNormalNodeParams"><em>FixInvalidNormalNodeParams</em></a>) – Parameters to find invalid normal nodes and fix them.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the FixInvalidNormalNodeResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../FixInvalidNormalNodeResults.html#ansys.meshing.prime.FixInvalidNormalNodeResults" title="ansys.meshing.prime.FixInvalidNormalNodeResults">FixInvalidNormalNodeResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FixInvalidNormalNodeParams</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">surface_utils</span><span class="o">.</span><span class="n">fix_invalid_normal_nodes_of_face_zonelets</span><span class="p">(</span><span class="n">part_id</span><span class="p">,</span> <span class="n">face_zonelets</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.get_bounding_box_of_zonelets">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">get_bounding_box_of_zonelets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.BoundingBox</span></span></span><a class="headerlink" href="#SurfaceUtilities.get_bounding_box_of_zonelets" title="Link to this definition">#</a></dt>
+<dd><p>Get bounding box of given zonelets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of zonelets.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns bounding of box of given zonelets.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../BoundingBox.html#ansys.meshing.prime.BoundingBox" title="ansys.meshing.prime.BoundingBox">BoundingBox</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">zonelets</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_face_zonelets</span><span class="p">()</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="n">get_edge_zonelets</span><span class="p">()</span>
+<span class="gp">>>> </span><span class="n">bounding_box</span> <span class="o">=</span> <span class="n">surface_utilities</span><span class="o">.</span><span class="n">get_bounding_box_of_zonelets</span><span class="p">(</span><span class="n">zonelets</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.project_topo_faces_on_geometry">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">project_topo_faces_on_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topo_faces</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.ProjectOnGeometryParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.ProjectOnGeometryResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.project_topo_faces_on_geometry" title="Link to this definition">#</a></dt>
+<dd><p>Project nodes of given topofaces on geometry associated to those topofaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topo_faces</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of topofaces to be used to project nodes on the geometry.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ProjectOnGeometryParams.html#ansys.meshing.prime.ProjectOnGeometryParams" title="ansys.meshing.prime.ProjectOnGeometryParams"><em>ProjectOnGeometryParams</em></a>) – Parameters used for projecting topoface nodes on geometry.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the ProjectOnGeometryResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ProjectOnGeometryResults.html#ansys.meshing.prime.ProjectOnGeometryResults" title="ansys.meshing.prime.ProjectOnGeometryResults">ProjectOnGeometryResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>This is a beta API</strong>. <strong>The behavior and implementation may change in future</strong>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ProjectOnGeometryParams</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">results</span> <span class="o">=</span> <span class="n">surface_utils</span><span class="o">.</span><span class="n">project_topo_faces_on_geometry</span><span class="p">(</span><span class="n">topofaces</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.refine_at_contacts">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">refine_at_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">part_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.RefineAtContactsParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.RefineAtContactsResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.refine_at_contacts" title="Link to this definition">#</a></dt>
+<dd><p>Refine face elements in contact with other parts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>part_ids</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Input part ids.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../RefineAtContactsParams.html#ansys.meshing.prime.RefineAtContactsParams" title="ansys.meshing.prime.RefineAtContactsParams"><em>RefineAtContactsParams</em></a>) – Parameters to refine at contacts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the RefineAtContactsResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../RefineAtContactsResults.html#ansys.meshing.prime.RefineAtContactsResults" title="ansys.meshing.prime.RefineAtContactsResults">RefineAtContactsResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">RefineAtContactsParams</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">refine_at_contacts</span><span class="p">(</span><span class="n">part_ids</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.resolve_intersections">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">resolve_intersections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_zonelet_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.ResolveIntersectionsParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.ResolveIntersectionResult</span></span></span><a class="headerlink" href="#SurfaceUtilities.resolve_intersections" title="Link to this definition">#</a></dt>
+<dd><p>Resolve facezonelets intersections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>face_zonelet_ids</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../ResolveIntersectionsParams.html#ansys.meshing.prime.ResolveIntersectionsParams" title="ansys.meshing.prime.ResolveIntersectionsParams"><em>ResolveIntersectionsParams</em></a>) – ResolveIntersectionsParams for resolve intersection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns a ResolveIntersectionResult.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../ResolveIntersectionResult.html#ansys.meshing.prime.ResolveIntersectionResult" title="ansys.meshing.prime.ResolveIntersectionResult">ResolveIntersectionResult</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">resolve_intersections</span><span class="p">(</span><span class="n">zonelets</span><span class="p">,</span> <span class="n">prime</span><span class="o">.</span><span class="n">ResolveIntersectionsParams</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.smooth_dihedral_face_nodes">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">smooth_dihedral_face_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zonelets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.SmoothDihedralFaceNodesParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.SmoothDihedralFaceNodesResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.smooth_dihedral_face_nodes" title="Link to this definition">#</a></dt>
+<dd><p>Perform a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zonelets</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – List of input face zonelet ids.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../SmoothDihedralFaceNodesParams.html#ansys.meshing.prime.SmoothDihedralFaceNodesParams" title="ansys.meshing.prime.SmoothDihedralFaceNodesParams"><em>SmoothDihedralFaceNodesParams</em></a>) – Parameters to control the smoothing operation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns a SmoothDihedralFaceNodesResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../SmoothDihedralFaceNodesResults.html#ansys.meshing.prime.SmoothDihedralFaceNodesResults" title="ansys.meshing.prime.SmoothDihedralFaceNodesResults">SmoothDihedralFaceNodesResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">smooth_dihedral_face_nodes</span><span class="p">(</span><span class="n">zonelets</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.stretch_free_boundaries">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">stretch_free_boundaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_zonelet_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.StretchFreeBoundariesParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.StretchFreeBoundariesResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.stretch_free_boundaries" title="Link to this definition">#</a></dt>
+<dd><p>Stretch free boundaries of each zonelet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>face_zonelet_ids</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../StretchFreeBoundariesParams.html#ansys.meshing.prime.StretchFreeBoundariesParams" title="ansys.meshing.prime.StretchFreeBoundariesParams"><em>StretchFreeBoundariesParams</em></a>) – Parameters to control stretch free boundaries operation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the StretchFreeBoundariesResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../StretchFreeBoundariesResults.html#ansys.meshing.prime.StretchFreeBoundariesResults" title="ansys.meshing.prime.StretchFreeBoundariesResults">StretchFreeBoundariesResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">stretch_free_boundaries</span><span class="p">(</span><span class="n">face_zonelet_ids</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SurfaceUtilities.triangulate_face_zonelets">
+<span class="sig-prename descclassname"><span class="pre">SurfaceUtilities.</span></span><span class="sig-name descname"><span class="pre">triangulate_face_zonelets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_zonelet_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ansys.meshing.prime.params.primestructs.TriangulateParams</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.meshing.prime.params.primestructs.TriangulateResults</span></span></span><a class="headerlink" href="#SurfaceUtilities.triangulate_face_zonelets" title="Link to this definition">#</a></dt>
+<dd><p>Split faces in zonelets to get triangular faces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>face_zonelet_ids</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Ids of face zonelets.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../../TriangulateParams.html#ansys.meshing.prime.TriangulateParams" title="ansys.meshing.prime.TriangulateParams"><em>TriangulateParams</em></a>) – Parameters to control the split operation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the TriangulateResults.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../TriangulateResults.html#ansys.meshing.prime.TriangulateResults" title="ansys.meshing.prime.TriangulateResults">TriangulateResults</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>This is a beta API</strong>. <strong>The behavior and implementation may change in future</strong>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">result</span> <span class="o">=</span> <span class="n">surf_utils</span><span class="o">.</span><span class="n">triangulate_face_zonelets</span><span class="p">(</span><span class="n">face_zonelet_ids</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities"><code class="docutils literal notranslate"><span class="pre">ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-detail">Import detail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-detail">Method detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.__enter__"><code class="docutils literal notranslate"><span class="pre">__enter__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.__exit__"><code class="docutils literal notranslate"><span class="pre">__exit__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.__setattr__"><code class="docutils literal notranslate"><span class="pre">__setattr__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.add_thickness"><code class="docutils literal notranslate"><span class="pre">add_thickness()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.copy_face_zonelets"><code class="docutils literal notranslate"><span class="pre">copy_face_zonelets()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.create_boi"><code class="docutils literal notranslate"><span class="pre">create_boi()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.create_cap_on_face_zonelets"><code class="docutils literal notranslate"><span class="pre">create_cap_on_face_zonelets()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.create_contact_patch"><code class="docutils literal notranslate"><span class="pre">create_contact_patch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.delete_unwetted_surfaces"><code class="docutils literal notranslate"><span class="pre">delete_unwetted_surfaces()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.fill_holes_at_plane"><code class="docutils literal notranslate"><span class="pre">fill_holes_at_plane()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.fix_invalid_normal_nodes_of_face_zonelets"><code class="docutils literal notranslate"><span class="pre">fix_invalid_normal_nodes_of_face_zonelets()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.get_bounding_box_of_zonelets"><code class="docutils literal notranslate"><span class="pre">get_bounding_box_of_zonelets()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.project_topo_faces_on_geometry"><code class="docutils literal notranslate"><span class="pre">project_topo_faces_on_geometry()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.refine_at_contacts"><code class="docutils literal notranslate"><span class="pre">refine_at_contacts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.resolve_intersections"><code class="docutils literal notranslate"><span class="pre">resolve_intersections()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.smooth_dihedral_face_nodes"><code class="docutils literal notranslate"><span class="pre">smooth_dihedral_face_nodes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.stretch_free_boundaries"><code class="docutils literal notranslate"><span class="pre">stretch_free_boundaries()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SurfaceUtilities.triangulate_face_zonelets"><code class="docutils literal notranslate"><span class="pre">triangulate_face_zonelets()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pyprimemesh/edit/main/ansys/meshing/prime/core/surfaceutilities/SurfaceUtilities.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../_sources/api/ansys/meshing/prime/core/surfaceutilities/SurfaceUtilities.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.5.2. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

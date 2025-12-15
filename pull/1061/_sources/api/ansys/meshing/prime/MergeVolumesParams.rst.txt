@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergeVolumesParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.MergeVolumesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, merge_to_neighbor_volume: bool = None, neighbor_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to merge volumes.
+
+   :param model: Model to create a ``MergeVolumesParams`` object with default parameters.
+   :type model: Model
+   :param merge_to_neighbor_volume: Option to merge given volumes to their neighbor volume.
+   :type merge_to_neighbor_volume: bool, optional
+   :param neighbor_volumes: Ids of volume that are neighbors to given volumes for merging.
+   :type neighbor_volumes: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``MergeVolumesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> merge_volumes_params = prime.MergeVolumesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MergeVolumesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~merge_to_neighbor_volume`
+            - Option to merge given volumes to their neighbor volume.
+          * - :py:attr:`~neighbor_volumes`
+            - Ids of volume that are neighbors to given volumes for merging.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MergeVolumesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MergeVolumesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MergeVolumesParams
+
+Property detail
+---------------
+
+.. py:property:: merge_to_neighbor_volume
+   :type: bool
+
+
+   Option to merge given volumes to their neighbor volume.
+
+.. py:property:: neighbor_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of volume that are neighbors to given volumes for merging.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MergeVolumesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MergeVolumesParams.print_default()
+
+
+.. py:method:: set_default(merge_to_neighbor_volume: bool = None, neighbor_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MergeVolumesParams`` object.
+
+   :param merge_to_neighbor_volume: Option to merge given volumes to their neighbor volume.
+   :type merge_to_neighbor_volume: bool, optional
+   :param neighbor_volumes: Ids of volume that are neighbors to given volumes for merging.
+   :type neighbor_volumes: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

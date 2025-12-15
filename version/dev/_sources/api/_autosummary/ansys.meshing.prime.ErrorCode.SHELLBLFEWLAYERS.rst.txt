@@ -1,0 +1,6 @@
+SHELLBLFEWLAYERS
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SHELLBLFEWLAYERS

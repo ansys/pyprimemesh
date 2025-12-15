@@ -1,0 +1,6 @@
+compute\_volumetric
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeField.compute_volumetric

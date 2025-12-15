@@ -1,0 +1,170 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``mesh.py`` module
+======================
+
+.. py:module:: ansys.meshing.prime.core.mesh
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: mesh
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.DisplayMeshInfo`
+            - Contains the mesh information to display.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.Mesh`
+            - Processes the mesh for visualization in the GUI.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.ColorByType`
+            - Contains the zone types to display.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.DisplayMeshType`
+            - Contains the mesh types to display.
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.compute_distance`
+            - Compute the distance between two points.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh.compute_face_list_from_structured_nodes`
+            - Compute the distances from the nodes.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~color_matrix`
+            - 
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DisplayMeshInfo</api/ansys/meshing/prime/core/mesh/DisplayMeshInfo>
+    <span class="nf nf-cod-symbol_class"></span> Mesh</api/ansys/meshing/prime/core/mesh/Mesh>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> ColorByType</api/ansys/meshing/prime/core/mesh/ColorByType>
+    <span class="nf nf-cod-symbol_enum"></span> DisplayMeshType</api/ansys/meshing/prime/core/mesh/DisplayMeshType>
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-function_variant"></span> compute_distance</api/ansys/meshing/prime/core/mesh/compute_distance>
+    <span class="nf nf-md-function_variant"></span> compute_face_list_from_structured_nodes</api/ansys/meshing/prime/core/mesh/compute_face_list_from_structured_nodes>
+
+
+
+
+
+
+Description
+-----------
+
+Process the mesh for visualization in the GUI.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: color_matrix
+
+
+
+
+.. vale on

@@ -1,0 +1,11 @@
+get\_volumetric\_size\_fields
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.get_volumetric_size_fields
+
+.. minigallery::
+   :add-heading: Examples using Model.get_volumetric_size_fields
+
+   ansys.meshing.prime.Model.get_volumetric_size_fields

@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``topodata.py`` module
+==========================
+
+.. py:module:: ansys.meshing.prime.autogen.topodata
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: topodata
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topodata.TopoData`
+            - Topodata has all information about connectivity of nodes, edges, elements and more.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TopoData</api/ansys/meshing/prime/autogen/topodata/TopoData>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

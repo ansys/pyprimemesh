@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CdbSimulationType`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.CdbSimulationType
+
+
+
+   Simulation Type for CDB export.
+
+
+
+
+.. py:currentmodule:: CdbSimulationType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EXPLICIT`
+            - Explicit Simulation.
+          * - :py:attr:`~IMPLICIT`
+            - Implicit simulation.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CdbSimulationType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EXPLICIT
+   :value: 1
+
+
+   Explicit Simulation.
+
+.. py:attribute:: IMPLICIT
+   :value: 0
+
+
+   Implicit simulation.
+
+
+
+
+
+
+
+.. vale on

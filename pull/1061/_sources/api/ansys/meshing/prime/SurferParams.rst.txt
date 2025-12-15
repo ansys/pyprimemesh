@@ -1,0 +1,287 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurferParams`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.SurferParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, max_angle: float = None, size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, min_size: float = None, max_size: float = None, growth_rate: float = None, constant_size: float = None, generate_quads: bool = None, check_non_manifolds: bool = None, avoid_corner_triangles: bool = None, smooth_size_transition: bool = None, advanced_surfer_setup: AdvancedSurferSetup = None, project_on_geometry: bool = None, enable_multi_threading: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to generate surface mesh.
+
+   :param model: Model to create a ``SurferParams`` object with default parameters.
+   :type model: Model
+   :param max_angle: Maximum feature angle limit to be used to identify and preserve features.
+   :type max_angle: float, optional
+   :param size_field_type: Size field type used to generate surface mesh.
+   :type size_field_type: SizeFieldType, optional
+   :param min_size: Minimum size to be used in sizing for the surfer.
+   :type min_size: float, optional
+   :param max_size: Maximum size to be used in sizing for the surfer.
+   :type max_size: float, optional
+   :param growth_rate: Growth rate to be used to propagate sizes.
+   :type growth_rate: float, optional
+   :param constant_size: Size used in constant size surface meshing.
+   :type constant_size: float, optional
+   :param generate_quads: Option to generate quadrilateral surface mesh.
+   :type generate_quads: bool, optional
+   :param check_non_manifolds: Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+   :type check_non_manifolds: bool, optional
+   :param avoid_corner_triangles: Option to avoid corner triangles(with all three boundary nodes) generated.
+   :type avoid_corner_triangles: bool, optional
+   :param smooth_size_transition: Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+   :type smooth_size_transition: bool, optional
+   :param advanced_surfer_setup: Option to define advanced settings for remeshing operation.
+   :type advanced_surfer_setup: AdvancedSurferSetup, optional
+   :param project_on_geometry: Option to project on CAD geometry when meshing.
+   :type project_on_geometry: bool, optional
+   :param enable_multi_threading: Option to perform surface meshing in parallel using multithreads.
+   :type enable_multi_threading: bool, optional
+   :param json_data: JSON dictionary to create a ``SurferParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> surfer_params = prime.SurferParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SurferParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~advanced_surfer_setup`
+            - Option to define advanced settings for remeshing operation.
+          * - :py:attr:`~avoid_corner_triangles`
+            - Option to avoid corner triangles(with all three boundary nodes) generated.
+          * - :py:attr:`~check_non_manifolds`
+            - Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+          * - :py:attr:`~constant_size`
+            - Size used in constant size surface meshing.
+          * - :py:attr:`~enable_multi_threading`
+            - Option to perform surface meshing in parallel using multithreads.
+          * - :py:attr:`~generate_quads`
+            - Option to generate quadrilateral surface mesh.
+          * - :py:attr:`~growth_rate`
+            - Growth rate to be used to propagate sizes.
+          * - :py:attr:`~max_angle`
+            - Maximum feature angle limit to be used to identify and preserve features.
+          * - :py:attr:`~max_size`
+            - Maximum size to be used in sizing for the surfer.
+          * - :py:attr:`~min_size`
+            - Minimum size to be used in sizing for the surfer.
+          * - :py:attr:`~project_on_geometry`
+            - Option to project on CAD geometry when meshing.
+          * - :py:attr:`~size_field_type`
+            - Size field type used to generate surface mesh.
+          * - :py:attr:`~smooth_size_transition`
+            - Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SurferParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SurferParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SurferParams
+
+Property detail
+---------------
+
+.. py:property:: advanced_surfer_setup
+   :type: AdvancedSurferSetup
+
+
+   Option to define advanced settings for remeshing operation.
+
+.. py:property:: avoid_corner_triangles
+   :type: bool
+
+
+   Option to avoid corner triangles(with all three boundary nodes) generated.
+
+.. py:property:: check_non_manifolds
+   :type: bool
+
+
+   Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+
+.. py:property:: constant_size
+   :type: float
+
+
+   Size used in constant size surface meshing.
+
+.. py:property:: enable_multi_threading
+   :type: bool
+
+
+   Option to perform surface meshing in parallel using multithreads.
+
+.. py:property:: generate_quads
+   :type: bool
+
+
+   Option to generate quadrilateral surface mesh.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate to be used to propagate sizes.
+
+.. py:property:: max_angle
+   :type: float
+
+
+   Maximum feature angle limit to be used to identify and preserve features.
+
+.. py:property:: max_size
+   :type: float
+
+
+   Maximum size to be used in sizing for the surfer.
+
+.. py:property:: min_size
+   :type: float
+
+
+   Minimum size to be used in sizing for the surfer.
+
+.. py:property:: project_on_geometry
+   :type: bool
+
+
+   Option to project on CAD geometry when meshing.
+
+.. py:property:: size_field_type
+   :type: ansys.meshing.prime.params.primestructs.SizeFieldType
+
+
+   Size field type used to generate surface mesh.
+
+.. py:property:: smooth_size_transition
+   :type: bool
+
+
+   Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+
+   Notes
+    -----
+     - Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work.
+     - Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SurferParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SurferParams.print_default()
+
+
+.. py:method:: set_default(max_angle: float = None, size_field_type: ansys.meshing.prime.params.primestructs.SizeFieldType = None, min_size: float = None, max_size: float = None, growth_rate: float = None, constant_size: float = None, generate_quads: bool = None, check_non_manifolds: bool = None, avoid_corner_triangles: bool = None, smooth_size_transition: bool = None, advanced_surfer_setup: AdvancedSurferSetup = None, project_on_geometry: bool = None, enable_multi_threading: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SurferParams`` object.
+
+   :param max_angle: Maximum feature angle limit to be used to identify and preserve features.
+   :type max_angle: float, optional
+   :param size_field_type: Size field type used to generate surface mesh.
+   :type size_field_type: SizeFieldType, optional
+   :param min_size: Minimum size to be used in sizing for the surfer.
+   :type min_size: float, optional
+   :param max_size: Maximum size to be used in sizing for the surfer.
+   :type max_size: float, optional
+   :param growth_rate: Growth rate to be used to propagate sizes.
+   :type growth_rate: float, optional
+   :param constant_size: Size used in constant size surface meshing.
+   :type constant_size: float, optional
+   :param generate_quads: Option to generate quadrilateral surface mesh.
+   :type generate_quads: bool, optional
+   :param check_non_manifolds: Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
+   :type check_non_manifolds: bool, optional
+   :param avoid_corner_triangles: Option to avoid corner triangles(with all three boundary nodes) generated.
+   :type avoid_corner_triangles: bool, optional
+   :param smooth_size_transition: Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
+   :type smooth_size_transition: bool, optional
+   :param advanced_surfer_setup: Option to define advanced settings for remeshing operation.
+   :type advanced_surfer_setup: AdvancedSurferSetup, optional
+   :param project_on_geometry: Option to project on CAD geometry when meshing.
+   :type project_on_geometry: bool, optional
+   :param enable_multi_threading: Option to perform surface meshing in parallel using multithreads.
+   :type enable_multi_threading: bool, optional
+
+
+
+
+
+
+
+.. vale on

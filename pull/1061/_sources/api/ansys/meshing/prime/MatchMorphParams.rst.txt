@@ -1,0 +1,116 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MatchMorphParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.MatchMorphParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, json_data: dict = None, **kwargs)
+
+
+
+   MatchMorphParams describes the parameters required for match morphing.
+
+   :param model: Model to create a ``MatchMorphParams`` object with default parameters.
+   :type model: Model
+   :param json_data: JSON dictionary to create a ``MatchMorphParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> match_morph_params = prime.MatchMorphParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MatchMorphParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MatchMorphParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MatchMorphParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MatchMorphParams
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MatchMorphParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MatchMorphParams.print_default()
+
+
+.. py:method:: set_default()
+   :staticmethod:
+
+
+   Set the default values of the ``MatchMorphParams`` object.
+
+
+
+
+
+
+
+
+
+.. vale on

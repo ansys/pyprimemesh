@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergeZoneletsResults`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.MergeZoneletsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, merged_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with merge zonelets.
+
+   :param model: Model to create a ``MergeZoneletsResults`` object with default parameters.
+   :type model: Model
+   :param merged_zonelets: Ids of zonelets to which input zonelets are merged.
+   :type merged_zonelets: Iterable[int], optional
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``MergeZoneletsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> merge_zonelets_results = prime.MergeZoneletsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MergeZoneletsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~merged_zonelets`
+            - Ids of zonelets to which input zonelets are merged.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MergeZoneletsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MergeZoneletsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import MergeZoneletsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: merged_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of zonelets to which input zonelets are merged.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MergeZoneletsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> MergeZoneletsResults.print_default()
+
+
+.. py:method:: set_default(merged_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MergeZoneletsResults`` object.
+
+   :param merged_zonelets: Ids of zonelets to which input zonelets are merged.
+   :type merged_zonelets: Iterable[int], optional
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

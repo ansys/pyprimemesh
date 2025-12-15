@@ -1,0 +1,6 @@
+OVERRIDECURVATURESIZINGPARAMS
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.OVERRIDECURVATURESIZINGPARAMS

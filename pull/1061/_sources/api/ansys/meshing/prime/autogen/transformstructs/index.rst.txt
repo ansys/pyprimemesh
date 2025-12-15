@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``transformstructs.py`` module
+==================================
+
+.. py:module:: ansys.meshing.prime.autogen.transformstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: transformstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.transformstructs.TransformParams`
+            - Parameters to transform given entities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.transformstructs.TransformResults`
+            - Results associated with the transformation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TransformParams</api/ansys/meshing/prime/autogen/transformstructs/TransformParams>
+    <span class="nf nf-cod-symbol_class"></span> TransformResults</api/ansys/meshing/prime/autogen/transformstructs/TransformResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

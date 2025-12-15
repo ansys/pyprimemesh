@@ -1,0 +1,167 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``core`` package
+========================
+
+.. py:module:: ansys.meshing.prime.core
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: core
+.. tab-set::
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.controldata`
+            - Module for control data.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.dynaexportutils`
+            - Module for LS-DYNA export utilities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.fileio`
+            - Module for mangaging file inputs and outputs.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mapdlcdbexportutils`
+            - Module for MAPDL cdb export utilities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.mesh`
+            - Process the mesh for visualization in the GUI.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.model`
+            - Module containing the managing logic of the Prime model.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.part`
+            - Module containing the ``Part`` class.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.periodiccontrol`
+            - Module containing classes and methods related to periodic control.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.prismcontrol`
+            - Module containing PrismControl related classes and methods.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.sizecontrol`
+            - Module containing SizeControl related classes and methods.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.surfaceutilities`
+            - Utilities module for surface operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.surfer`
+            - Module for surfer data.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.volumecontrol`
+            - Module containing VolumeControl related classes and methods.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.volumesweeper`
+            - Module for volume sweeper operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.wrapper`
+            - Module for the wrapper class.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.wrappercontrol`
+            - Module containing WrapperControl related classes and methods.
+
+
+
+
+
+
+
+
+
+
+.. .. .. 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> controldata</api/ansys/meshing/prime/core/controldata/index>
+    <span class="nf nf-fa-file"></span> dynaexportutils</api/ansys/meshing/prime/core/dynaexportutils/index>
+    <span class="nf nf-fa-file"></span> fileio</api/ansys/meshing/prime/core/fileio/index>
+    <span class="nf nf-fa-file"></span> mapdlcdbexportutils</api/ansys/meshing/prime/core/mapdlcdbexportutils/index>
+    <span class="nf nf-fa-file"></span> mesh</api/ansys/meshing/prime/core/mesh/index>
+    <span class="nf nf-fa-file"></span> model</api/ansys/meshing/prime/core/model/index>
+    <span class="nf nf-fa-file"></span> part</api/ansys/meshing/prime/core/part/index>
+    <span class="nf nf-fa-file"></span> periodiccontrol</api/ansys/meshing/prime/core/periodiccontrol/index>
+    <span class="nf nf-fa-file"></span> prismcontrol</api/ansys/meshing/prime/core/prismcontrol/index>
+    <span class="nf nf-fa-file"></span> sizecontrol</api/ansys/meshing/prime/core/sizecontrol/index>
+    <span class="nf nf-fa-file"></span> surfaceutilities</api/ansys/meshing/prime/core/surfaceutilities/index>
+    <span class="nf nf-fa-file"></span> surfer</api/ansys/meshing/prime/core/surfer/index>
+    <span class="nf nf-fa-file"></span> volumecontrol</api/ansys/meshing/prime/core/volumecontrol/index>
+    <span class="nf nf-fa-file"></span> volumesweeper</api/ansys/meshing/prime/core/volumesweeper/index>
+    <span class="nf nf-fa-file"></span> wrapper</api/ansys/meshing/prime/core/wrapper/index>
+    <span class="nf nf-fa-file"></span> wrappercontrol</api/ansys/meshing/prime/core/wrappercontrol/index>
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Core module.
+
+
+
+
+
+
+
+.. vale on

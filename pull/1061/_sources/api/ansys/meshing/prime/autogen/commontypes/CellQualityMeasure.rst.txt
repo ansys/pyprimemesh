@@ -1,0 +1,110 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CellQualityMeasure`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.commontypes.CellQualityMeasure
+
+
+
+   The type of cell quality measures to check cell quality metrics.
+
+
+
+
+.. py:currentmodule:: CellQualityMeasure
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ASPECTRATIO`
+            - The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst).
+          * - :py:attr:`~ELEMENTQUALITY`
+            - The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst).
+          * - :py:attr:`~FLUENTASPECTRATIO`
+            - The Fluent aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst).
+          * - :py:attr:`~INVERSEORTHOGONAL`
+            - The inverse orthogonal metric ranges between 0 (best) and 1 (worst).
+          * - :py:attr:`~INVERSEORTHOGONAL_V2`
+            - The advanced inverse orthogonal metric ranges between 0 (best) and 1 (worst).
+          * - :py:attr:`~SKEWNESS`
+            - The Skewness metric ranges between 0 (best) and 1 (worst). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst).
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.commontypes import CellQualityMeasure
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ASPECTRATIO
+   :value: 5
+
+
+   The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst).
+
+.. py:attribute:: ELEMENTQUALITY
+   :value: 50
+
+
+   The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst).
+
+.. py:attribute:: FLUENTASPECTRATIO
+   :value: 13
+
+
+   The Fluent aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst).
+
+.. py:attribute:: INVERSEORTHOGONAL
+   :value: 14
+
+
+   The inverse orthogonal metric ranges between 0 (best) and 1 (worst).
+
+.. py:attribute:: INVERSEORTHOGONAL_V2
+   :value: 25
+
+
+   The advanced inverse orthogonal metric ranges between 0 (best) and 1 (worst).
+
+.. py:attribute:: SKEWNESS
+   :value: 0
+
+
+   The Skewness metric ranges between 0 (best) and 1 (worst). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst).
+
+
+
+
+
+
+
+.. vale on

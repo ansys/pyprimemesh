@@ -1,0 +1,15 @@
+ansys.meshing.prime.lucid.utils.match_pattern
+=============================================
+
+.. py:function:: ansys.meshing.prime.lucid.utils.match_pattern(pattern: str, name: str) -> bool
+
+   Pattern matching function for strings.
+
+   :param pattern: Pattern you are looking for in the string.
+   :type pattern: str
+   :param name: String where you look for patterns.
+   :type name: str
+
+   :returns: True if the pattern is found.
+   :rtype: bool
+

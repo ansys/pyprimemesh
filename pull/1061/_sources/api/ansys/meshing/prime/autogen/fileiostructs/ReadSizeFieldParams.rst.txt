@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ReadSizeFieldParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ReadSizeFieldParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, append: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to read size field file.
+
+   :param model: Model to create a ``ReadSizeFieldParams`` object with default parameters.
+   :type model: Model
+   :param append: Option to append the size fields from file.
+   :type append: bool, optional
+   :param json_data: JSON dictionary to create a ``ReadSizeFieldParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> read_size_field_params = prime.ReadSizeFieldParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ReadSizeFieldParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~append`
+            - Option to append the size fields from file.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ReadSizeFieldParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ReadSizeFieldParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ReadSizeFieldParams
+
+Property detail
+---------------
+
+.. py:property:: append
+   :type: bool
+
+
+   Option to append the size fields from file.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ReadSizeFieldParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ReadSizeFieldParams.print_default()
+
+
+.. py:method:: set_default(append: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ReadSizeFieldParams`` object.
+
+   :param append: Option to append the size fields from file.
+   :type append: bool, optional
+
+
+
+
+
+
+
+.. vale on

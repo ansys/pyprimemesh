@@ -1,0 +1,474 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PartSummaryResults`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.PartSummaryResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, message: str = None, n_topo_edges: int = None, n_topo_faces: int = None, n_topo_volumes: int = None, n_edge_zonelets: int = None, n_face_zonelets: int = None, n_cell_zonelets: int = None, n_edge_zones: int = None, n_face_zones: int = None, n_volume_zones: int = None, n_labels: int = None, n_nodes: int = None, n_faces: int = None, n_cells: int = None, n_tri_faces: int = None, n_poly_faces: int = None, n_quad_faces: int = None, n_second_order_tri_faces: int = None, n_second_order_quad_faces: int = None, n_tet_cells: int = None, n_pyra_cells: int = None, n_prism_cells: int = None, n_poly_cells: int = None, n_hex_cells: int = None, n_second_order_tet_cells: int = None, n_second_order_pyra_cells: int = None, n_second_order_prism_cells: int = None, n_second_order_hex_cells: int = None, n_unmeshed_topo_faces: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of part summary.
+
+   :param model: Model to create a ``PartSummaryResults`` object with default parameters.
+   :type model: Model
+   :param message: Part summary text.
+   :type message: str, optional
+   :param n_topo_edges: Number of topoedges.
+   :type n_topo_edges: int, optional
+   :param n_topo_faces: Number of topofaces.
+   :type n_topo_faces: int, optional
+   :param n_topo_volumes: Number of topovolumes.
+   :type n_topo_volumes: int, optional
+   :param n_edge_zonelets: Number of edge zonelets.
+   :type n_edge_zonelets: int, optional
+   :param n_face_zonelets: Number of face zonelets.
+   :type n_face_zonelets: int, optional
+   :param n_cell_zonelets: Number of cell zonelets.
+   :type n_cell_zonelets: int, optional
+   :param n_edge_zones: Number of edge zones.
+   :type n_edge_zones: int, optional
+   :param n_face_zones: Number of face zones.
+   :type n_face_zones: int, optional
+   :param n_volume_zones: Number of volume zones.
+   :type n_volume_zones: int, optional
+   :param n_labels: Number of labels.
+   :type n_labels: int, optional
+   :param n_nodes: Number of nodes.
+   :type n_nodes: int, optional
+   :param n_faces: Number of faces.
+   :type n_faces: int, optional
+   :param n_cells: Number of cells.
+   :type n_cells: int, optional
+   :param n_tri_faces: Number of triangular faces.
+   :type n_tri_faces: int, optional
+   :param n_poly_faces: Number of polygonal faces.
+   :type n_poly_faces: int, optional
+   :param n_quad_faces: Number of quadrilateral faces.
+   :type n_quad_faces: int, optional
+   :param n_second_order_tri_faces: Number of second order triangular faces.
+   :type n_second_order_tri_faces: int, optional
+   :param n_second_order_quad_faces: Number of second order quadrilateral faces.
+   :type n_second_order_quad_faces: int, optional
+   :param n_tet_cells: Number of tetrahedral cells.
+   :type n_tet_cells: int, optional
+   :param n_pyra_cells: Number of pyramid cells.
+   :type n_pyra_cells: int, optional
+   :param n_prism_cells: Number of prism cells.
+   :type n_prism_cells: int, optional
+   :param n_poly_cells: Number of polyhedral cells.
+   :type n_poly_cells: int, optional
+   :param n_hex_cells: Number of hexahedral cells.
+   :type n_hex_cells: int, optional
+   :param n_second_order_tet_cells: Number of second order tetrahedral cells.
+   :type n_second_order_tet_cells: int, optional
+   :param n_second_order_pyra_cells: Number of second order pyramid cells.
+   :type n_second_order_pyra_cells: int, optional
+   :param n_second_order_prism_cells: Number of second order prism cells.
+   :type n_second_order_prism_cells: int, optional
+   :param n_second_order_hex_cells: Number of second order hexahedral cells.
+   :type n_second_order_hex_cells: int, optional
+   :param n_unmeshed_topo_faces: Number of unmeshed topofaces.
+   :type n_unmeshed_topo_faces: int, optional
+   :param json_data: JSON dictionary to create a ``PartSummaryResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> part_summary_results = prime.PartSummaryResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PartSummaryResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~message`
+            - Part summary text.
+          * - :py:attr:`~n_cell_zonelets`
+            - Number of cell zonelets.
+          * - :py:attr:`~n_cells`
+            - Number of cells.
+          * - :py:attr:`~n_edge_zonelets`
+            - Number of edge zonelets.
+          * - :py:attr:`~n_edge_zones`
+            - Number of edge zones.
+          * - :py:attr:`~n_face_zonelets`
+            - Number of face zonelets.
+          * - :py:attr:`~n_face_zones`
+            - Number of face zones.
+          * - :py:attr:`~n_faces`
+            - Number of faces.
+          * - :py:attr:`~n_hex_cells`
+            - Number of hexahedral cells.
+          * - :py:attr:`~n_labels`
+            - Number of labels.
+          * - :py:attr:`~n_nodes`
+            - Number of nodes.
+          * - :py:attr:`~n_poly_cells`
+            - Number of polyhedral cells.
+          * - :py:attr:`~n_poly_faces`
+            - Number of polygonal faces.
+          * - :py:attr:`~n_prism_cells`
+            - Number of prism cells.
+          * - :py:attr:`~n_pyra_cells`
+            - Number of pyramid cells.
+          * - :py:attr:`~n_quad_faces`
+            - Number of quadrilateral faces.
+          * - :py:attr:`~n_second_order_hex_cells`
+            - Number of second order hexahedral cells.
+          * - :py:attr:`~n_second_order_prism_cells`
+            - Number of second order prism cells.
+          * - :py:attr:`~n_second_order_pyra_cells`
+            - Number of second order pyramid cells.
+          * - :py:attr:`~n_second_order_quad_faces`
+            - Number of second order quadrilateral faces.
+          * - :py:attr:`~n_second_order_tet_cells`
+            - Number of second order tetrahedral cells.
+          * - :py:attr:`~n_second_order_tri_faces`
+            - Number of second order triangular faces.
+          * - :py:attr:`~n_tet_cells`
+            - Number of tetrahedral cells.
+          * - :py:attr:`~n_topo_edges`
+            - Number of topoedges.
+          * - :py:attr:`~n_topo_faces`
+            - Number of topofaces.
+          * - :py:attr:`~n_topo_volumes`
+            - Number of topovolumes.
+          * - :py:attr:`~n_tri_faces`
+            - Number of triangular faces.
+          * - :py:attr:`~n_unmeshed_topo_faces`
+            - Number of unmeshed topofaces.
+          * - :py:attr:`~n_volume_zones`
+            - Number of volume zones.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PartSummaryResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PartSummaryResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import PartSummaryResults
+
+Property detail
+---------------
+
+.. py:property:: message
+   :type: str
+
+
+   Part summary text.
+
+.. py:property:: n_cell_zonelets
+   :type: int
+
+
+   Number of cell zonelets.
+
+.. py:property:: n_cells
+   :type: int
+
+
+   Number of cells.
+
+.. py:property:: n_edge_zonelets
+   :type: int
+
+
+   Number of edge zonelets.
+
+.. py:property:: n_edge_zones
+   :type: int
+
+
+   Number of edge zones.
+
+.. py:property:: n_face_zonelets
+   :type: int
+
+
+   Number of face zonelets.
+
+.. py:property:: n_face_zones
+   :type: int
+
+
+   Number of face zones.
+
+.. py:property:: n_faces
+   :type: int
+
+
+   Number of faces.
+
+.. py:property:: n_hex_cells
+   :type: int
+
+
+   Number of hexahedral cells.
+
+.. py:property:: n_labels
+   :type: int
+
+
+   Number of labels.
+
+.. py:property:: n_nodes
+   :type: int
+
+
+   Number of nodes.
+
+.. py:property:: n_poly_cells
+   :type: int
+
+
+   Number of polyhedral cells.
+
+.. py:property:: n_poly_faces
+   :type: int
+
+
+   Number of polygonal faces.
+
+.. py:property:: n_prism_cells
+   :type: int
+
+
+   Number of prism cells.
+
+.. py:property:: n_pyra_cells
+   :type: int
+
+
+   Number of pyramid cells.
+
+.. py:property:: n_quad_faces
+   :type: int
+
+
+   Number of quadrilateral faces.
+
+.. py:property:: n_second_order_hex_cells
+   :type: int
+
+
+   Number of second order hexahedral cells.
+
+.. py:property:: n_second_order_prism_cells
+   :type: int
+
+
+   Number of second order prism cells.
+
+.. py:property:: n_second_order_pyra_cells
+   :type: int
+
+
+   Number of second order pyramid cells.
+
+.. py:property:: n_second_order_quad_faces
+   :type: int
+
+
+   Number of second order quadrilateral faces.
+
+.. py:property:: n_second_order_tet_cells
+   :type: int
+
+
+   Number of second order tetrahedral cells.
+
+.. py:property:: n_second_order_tri_faces
+   :type: int
+
+
+   Number of second order triangular faces.
+
+.. py:property:: n_tet_cells
+   :type: int
+
+
+   Number of tetrahedral cells.
+
+.. py:property:: n_topo_edges
+   :type: int
+
+
+   Number of topoedges.
+
+.. py:property:: n_topo_faces
+   :type: int
+
+
+   Number of topofaces.
+
+.. py:property:: n_topo_volumes
+   :type: int
+
+
+   Number of topovolumes.
+
+.. py:property:: n_tri_faces
+   :type: int
+
+
+   Number of triangular faces.
+
+.. py:property:: n_unmeshed_topo_faces
+   :type: int
+
+
+   Number of unmeshed topofaces.
+
+.. py:property:: n_volume_zones
+   :type: int
+
+
+   Number of volume zones.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PartSummaryResults`` object.
+
+   .. rubric:: Examples
+
+   >>> PartSummaryResults.print_default()
+
+
+.. py:method:: set_default(message: str = None, n_topo_edges: int = None, n_topo_faces: int = None, n_topo_volumes: int = None, n_edge_zonelets: int = None, n_face_zonelets: int = None, n_cell_zonelets: int = None, n_edge_zones: int = None, n_face_zones: int = None, n_volume_zones: int = None, n_labels: int = None, n_nodes: int = None, n_faces: int = None, n_cells: int = None, n_tri_faces: int = None, n_poly_faces: int = None, n_quad_faces: int = None, n_second_order_tri_faces: int = None, n_second_order_quad_faces: int = None, n_tet_cells: int = None, n_pyra_cells: int = None, n_prism_cells: int = None, n_poly_cells: int = None, n_hex_cells: int = None, n_second_order_tet_cells: int = None, n_second_order_pyra_cells: int = None, n_second_order_prism_cells: int = None, n_second_order_hex_cells: int = None, n_unmeshed_topo_faces: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PartSummaryResults`` object.
+
+   :param message: Part summary text.
+   :type message: str, optional
+   :param n_topo_edges: Number of topoedges.
+   :type n_topo_edges: int, optional
+   :param n_topo_faces: Number of topofaces.
+   :type n_topo_faces: int, optional
+   :param n_topo_volumes: Number of topovolumes.
+   :type n_topo_volumes: int, optional
+   :param n_edge_zonelets: Number of edge zonelets.
+   :type n_edge_zonelets: int, optional
+   :param n_face_zonelets: Number of face zonelets.
+   :type n_face_zonelets: int, optional
+   :param n_cell_zonelets: Number of cell zonelets.
+   :type n_cell_zonelets: int, optional
+   :param n_edge_zones: Number of edge zones.
+   :type n_edge_zones: int, optional
+   :param n_face_zones: Number of face zones.
+   :type n_face_zones: int, optional
+   :param n_volume_zones: Number of volume zones.
+   :type n_volume_zones: int, optional
+   :param n_labels: Number of labels.
+   :type n_labels: int, optional
+   :param n_nodes: Number of nodes.
+   :type n_nodes: int, optional
+   :param n_faces: Number of faces.
+   :type n_faces: int, optional
+   :param n_cells: Number of cells.
+   :type n_cells: int, optional
+   :param n_tri_faces: Number of triangular faces.
+   :type n_tri_faces: int, optional
+   :param n_poly_faces: Number of polygonal faces.
+   :type n_poly_faces: int, optional
+   :param n_quad_faces: Number of quadrilateral faces.
+   :type n_quad_faces: int, optional
+   :param n_second_order_tri_faces: Number of second order triangular faces.
+   :type n_second_order_tri_faces: int, optional
+   :param n_second_order_quad_faces: Number of second order quadrilateral faces.
+   :type n_second_order_quad_faces: int, optional
+   :param n_tet_cells: Number of tetrahedral cells.
+   :type n_tet_cells: int, optional
+   :param n_pyra_cells: Number of pyramid cells.
+   :type n_pyra_cells: int, optional
+   :param n_prism_cells: Number of prism cells.
+   :type n_prism_cells: int, optional
+   :param n_poly_cells: Number of polyhedral cells.
+   :type n_poly_cells: int, optional
+   :param n_hex_cells: Number of hexahedral cells.
+   :type n_hex_cells: int, optional
+   :param n_second_order_tet_cells: Number of second order tetrahedral cells.
+   :type n_second_order_tet_cells: int, optional
+   :param n_second_order_pyra_cells: Number of second order pyramid cells.
+   :type n_second_order_pyra_cells: int, optional
+   :param n_second_order_prism_cells: Number of second order prism cells.
+   :type n_second_order_prism_cells: int, optional
+   :param n_second_order_hex_cells: Number of second order hexahedral cells.
+   :type n_second_order_hex_cells: int, optional
+   :param n_unmeshed_topo_faces: Number of unmeshed topofaces.
+   :type n_unmeshed_topo_faces: int, optional
+
+
+
+
+
+
+
+.. vale on

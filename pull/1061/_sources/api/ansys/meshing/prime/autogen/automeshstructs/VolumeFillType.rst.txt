@@ -1,0 +1,94 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeFillType`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.automeshstructs.VolumeFillType
+
+
+
+   Types of volume fill options.
+
+
+
+
+.. py:currentmodule:: VolumeFillType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~HEXCOREPOLY`
+            - Volume fill using hexahedral cells in the core and polyhedral cells near the boundary.
+          * - :py:attr:`~HEXCORETET`
+            - Volume fill using hexahedral cells in the core and tetrahedral cells near the boundary.
+          * - :py:attr:`~POLY`
+            - Volume fill using polyhedral cells.
+          * - :py:attr:`~TET`
+            - Volume fill using tetrahedral cells.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.automeshstructs import VolumeFillType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: HEXCOREPOLY
+   :value: 3
+
+
+   Volume fill using hexahedral cells in the core and polyhedral cells near the boundary.
+
+.. py:attribute:: HEXCORETET
+   :value: 2
+
+
+   Volume fill using hexahedral cells in the core and tetrahedral cells near the boundary.
+
+.. py:attribute:: POLY
+   :value: 1
+
+
+   Volume fill using polyhedral cells.
+
+.. py:attribute:: TET
+   :value: 0
+
+
+   Volume fill using tetrahedral cells.
+
+
+
+
+
+
+
+.. vale on

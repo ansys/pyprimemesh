@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TriangulateResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using TriangulateResults.print_default
+
+   ansys.meshing.prime.TriangulateResults.print_default

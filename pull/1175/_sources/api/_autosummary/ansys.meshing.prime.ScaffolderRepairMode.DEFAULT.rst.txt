@@ -1,0 +1,6 @@
+DEFAULT
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScaffolderRepairMode.DEFAULT

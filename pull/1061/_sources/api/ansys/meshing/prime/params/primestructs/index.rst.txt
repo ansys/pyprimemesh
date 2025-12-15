@@ -1,0 +1,64 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``primestructs.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.params.primestructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for imports of autogen modules.
+
+
+
+
+
+
+
+.. vale on

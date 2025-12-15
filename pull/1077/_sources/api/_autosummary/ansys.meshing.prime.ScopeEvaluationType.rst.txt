@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+ScopeEvaluationType
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeEvaluationType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      ScopeEvaluationType.LABELS
+      
+      
+      ScopeEvaluationType.ZONES
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScopeEvaluationType
+
+    ansys.meshing.prime.ScopeEvaluationType
+
+.. vale on

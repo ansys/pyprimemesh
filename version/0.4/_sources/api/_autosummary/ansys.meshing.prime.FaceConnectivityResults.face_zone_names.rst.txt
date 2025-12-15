@@ -1,0 +1,6 @@
+﻿face\_zone\_names
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceConnectivityResults.face_zone_names

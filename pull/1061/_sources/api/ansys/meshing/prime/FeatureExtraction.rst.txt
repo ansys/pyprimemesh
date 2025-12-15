@@ -1,0 +1,139 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FeatureExtraction`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.FeatureExtraction(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Provide functions for all feature extraction operations like extracting edges zonlelets, tracing node paths.
+
+   :param model: Server model to create FeatureExtraction object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: FeatureExtraction
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_intersection_edge_loops`
+            - Finds the edge zonelets formed by intersection of two face zonelets. Performs n to n intersection of face zonelets present in part face zonelets with those in intersecting part face zonelets depending on the input parameters. Order of input does not matter.
+          * - :py:attr:`~extract_features_on_face_zonelets`
+            - Extract edges by angle and face zonelet boundary using given extract feature parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for FeatureExtraction.
+          * - :py:attr:`~__exit__`
+            - Exit context for FeatureExtraction.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FeatureExtraction
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for FeatureExtraction.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for FeatureExtraction.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: create_intersection_edge_loops(part_face_zonelets: List[ansys.meshing.prime.params.primestructs.PartZonelets], intersecting_part_face_zonelets: List[ansys.meshing.prime.params.primestructs.PartZonelets], params: ansys.meshing.prime.params.primestructs.CreateIntersectionEdgeLoopsParams) -> ansys.meshing.prime.params.primestructs.CreateIntersectionEdgeLoopsResults
+
+   Finds the edge zonelets formed by intersection of two face zonelets. Performs n to n intersection of face zonelets present in part face zonelets with those in intersecting part face zonelets depending on the input parameters. Order of input does not matter.
+
+
+   :param part_face_zonelets: List of part zonelets to be intersected.
+   :type part_face_zonelets: PartZoneletsArray
+   :param intersecting_part_face_zonelets: List of part zonelets to intersect with.
+   :type intersecting_part_face_zonelets: PartZoneletsArray
+   :param params: Parameter to control edge extraction.
+   :type params: CreateIntersectionEdgeLoopsParams
+
+   :returns: Returns the CreateIntersectionEdgeLoopsResults.
+   :rtype: CreateIntersectionEdgeLoopsResults
+
+   .. rubric:: Examples
+
+   >>> results = feature_extraction.create_intersection_edge_loops(part_face_zonelets, intersecting_part_face_zonelets, params)
+
+
+.. py:method:: extract_features_on_face_zonelets(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ExtractFeatureParams) -> ansys.meshing.prime.params.primestructs.ExtractFeatureResults
+
+   Extract edges by angle and face zonelet boundary using given extract feature parameters.
+
+
+   :param part_id: Id of input part.
+   :type part_id: int
+   :param face_zonelets: Ids of input face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param params: Parameters used to extract edges.
+   :type params: ExtractFeatureParams
+
+   :returns: Returns a ExtractFeatureResults.
+   :rtype: ExtractFeatureResults
+
+   .. rubric:: Examples
+
+   >>> results = feature_extraction.extract_features_on_face_zonelets(part_id, face_zonelets, params)
+
+
+
+
+
+
+
+.. vale on

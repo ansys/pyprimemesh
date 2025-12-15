@@ -1,0 +1,11 @@
+initialize\_cdb\_export\_params
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.initialize_cdb_export_params
+
+.. minigallery::
+   :add-heading: Examples using FileIO.initialize_cdb_export_params
+
+   ansys.meshing.prime.FileIO.initialize_cdb_export_params

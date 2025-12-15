@@ -1,0 +1,6 @@
+UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH
+============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH

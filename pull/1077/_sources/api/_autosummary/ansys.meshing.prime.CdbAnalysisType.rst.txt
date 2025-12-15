@@ -1,0 +1,51 @@
+.. vale off
+
+
+
+
+
+
+
+CdbAnalysisType
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CdbAnalysisType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      CdbAnalysisType.NONE
+      
+      
+      CdbAnalysisType.OUTERPANELSTIFFNESS
+      
+      
+      CdbAnalysisType.BELGIAN
+      
+      
+      CdbAnalysisType.SEATRETRACTOR
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CdbAnalysisType
+
+    ansys.meshing.prime.CdbAnalysisType
+
+.. vale on

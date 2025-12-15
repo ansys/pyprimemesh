@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceQualitySummaryResults`
+=====================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceQualitySummaryResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, quality_results: ansys.meshing.prime.params.primestructs.List[SurfaceQualityResult] = None, summary: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of surface quality summary.
+
+   :param model: Model to create a ``SurfaceQualitySummaryResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the surface quality summary.
+   :type error_code: ErrorCode, optional
+   :param quality_results: Contains surface quality result per face quality measure specified in parameters.
+   :type quality_results: List[SurfaceQualityResult], optional
+   :param summary: Surface quality summary text.
+   :type summary: str, optional
+   :param json_data: JSON dictionary to create a ``SurfaceQualitySummaryResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> surface_quality_summary_results = prime.SurfaceQualitySummaryResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceQualitySummaryResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the surface quality summary.
+          * - :py:attr:`~quality_results`
+            - Contains surface quality result per face quality measure specified in parameters.
+          * - :py:attr:`~summary`
+            - Surface quality summary text.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SurfaceQualitySummaryResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SurfaceQualitySummaryResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SurfaceQualitySummaryResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the surface quality summary.
+
+.. py:property:: quality_results
+   :type: ansys.meshing.prime.params.primestructs.List[SurfaceQualityResult]
+
+
+   Contains surface quality result per face quality measure specified in parameters.
+
+.. py:property:: summary
+   :type: str
+
+
+   Surface quality summary text.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SurfaceQualitySummaryResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SurfaceQualitySummaryResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, quality_results: ansys.meshing.prime.params.primestructs.List[SurfaceQualityResult] = None, summary: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SurfaceQualitySummaryResults`` object.
+
+   :param error_code: Error code associated with the surface quality summary.
+   :type error_code: ErrorCode, optional
+   :param quality_results: Contains surface quality result per face quality measure specified in parameters.
+   :type quality_results: List[SurfaceQualityResult], optional
+   :param summary: Surface quality summary text.
+   :type summary: str, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractTopoVolumesResults`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.ExtractTopoVolumesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to extract flow topovolumes.
+
+   :param model: Model to create a ``ExtractTopoVolumesResults`` object with default parameters.
+   :type model: Model
+   :param volumes: Ids of extracted flow topovolumes.
+   :type volumes: Iterable[int], optional
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``ExtractTopoVolumesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extract_topo_volumes_results = prime.ExtractTopoVolumesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractTopoVolumesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~volumes`
+            - Ids of extracted flow topovolumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractTopoVolumesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractTopoVolumesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import ExtractTopoVolumesResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of extracted flow topovolumes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractTopoVolumesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractTopoVolumesResults.print_default()
+
+
+.. py:method:: set_default(volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractTopoVolumesResults`` object.
+
+   :param volumes: Ids of extracted flow topovolumes.
+   :type volumes: Iterable[int], optional
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

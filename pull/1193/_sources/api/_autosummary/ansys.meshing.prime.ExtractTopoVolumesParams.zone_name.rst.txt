@@ -1,0 +1,6 @@
+zone\_name
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractTopoVolumesParams.zone_name

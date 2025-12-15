@@ -1,0 +1,142 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TrimmedSplineResults`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.trimmedsplinestructs.TrimmedSplineResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of IGA operations.
+
+   :param model: Model to create a ``TrimmedSplineResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code if IGA operation is unsuccessful.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``TrimmedSplineResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> trimmed_spline_results = prime.TrimmedSplineResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TrimmedSplineResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code if IGA operation is unsuccessful.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TrimmedSplineResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TrimmedSplineResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.trimmedsplinestructs import TrimmedSplineResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code if IGA operation is unsuccessful.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TrimmedSplineResults`` object.
+
+   .. rubric:: Examples
+
+   >>> TrimmedSplineResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TrimmedSplineResults`` object.
+
+   :param error_code: Error code if IGA operation is unsuccessful.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

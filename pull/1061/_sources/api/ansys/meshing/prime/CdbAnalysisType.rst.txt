@@ -1,0 +1,102 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CdbAnalysisType`
+========================
+
+
+.. py:class:: ansys.meshing.prime.CdbAnalysisType
+
+
+
+   Provides the MAPDL CDB analysis type.
+
+
+
+
+.. py:currentmodule:: CdbAnalysisType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~BELGIAN`
+            - Option to select Belgian as CDB analysis type.
+          * - :py:attr:`~NONE`
+            - Option to select no analysis type. This is the default option.
+          * - :py:attr:`~OUTERPANELSTIFFNESS`
+            - Option to select Outer Panel Stiffness as CDB analysis type.
+          * - :py:attr:`~SEATRETRACTOR`
+            - Option to select Seat Retractor as CDB analysis type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CdbAnalysisType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: BELGIAN
+   :value: 2
+
+
+   Option to select Belgian as CDB analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   Option to select no analysis type. This is the default option.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: OUTERPANELSTIFFNESS
+   :value: 1
+
+
+   Option to select Outer Panel Stiffness as CDB analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SEATRETRACTOR
+   :value: 3
+
+
+   Option to select Seat Retractor as CDB analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

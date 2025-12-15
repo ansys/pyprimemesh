@@ -1,0 +1,230 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ShellBLControl`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.shellblcontrol.ShellBLControl(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   ShellBLControl allows you to generate quad mesh on face zonelets.
+
+   ShellBLControl allows you to control generation of quad mesh on face zonelets. Controls include setting the edge scope, face scope and growth parameters.
+
+   :param model: Server model to create ShellBLControl object.
+   :type model: Model
+   :param id: Id of the ShellBLControl.
+   :type id: int
+   :param object_id: Object id of the ShellBLControl.
+   :type object_id: int
+   :param name: Name of the ShellBLControl.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: ShellBLControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_edge_scope`
+            - Gets the edge scope.
+          * - :py:attr:`~get_growth_params`
+            - Gets thin ShellBL parameters for ShellBL control.
+          * - :py:attr:`~get_surface_scope`
+            - Gets the surface scope.
+          * - :py:attr:`~set_edge_scope`
+            - Sets the edge scope.
+          * - :py:attr:`~set_growth_params`
+            - Sets growth parameters for ShellBL control.
+          * - :py:attr:`~set_surface_scope`
+            - Sets the face zonelet scope.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of ShellBLControl.
+          * - :py:attr:`~name`
+            - Get the name of ShellBLControl.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.shellblcontrol import ShellBLControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of ShellBLControl.
+
+.. py:property:: name
+
+   Get the name of ShellBLControl.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: get_edge_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the edge scope.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> scope = shellbl_control.get_edge_scope()
+
+
+.. py:method:: get_growth_params() -> ansys.meshing.prime.params.primestructs.ShellBLControlGrowthParams
+
+   Gets thin ShellBL parameters for ShellBL control.
+
+
+   :returns: Returns the ShellBLControlGrowthParams.
+   :rtype: ShellBLControlGrowthParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> params = shellBL_ctrl.get_growth_params()
+
+
+.. py:method:: get_surface_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the surface scope.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> scope = shellbl_control.get_surface_scope()
+
+
+.. py:method:: set_edge_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the edge scope.
+
+
+   :param entities: Scope definition entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = shellbl_control.set_edge_scope(entities)
+
+
+.. py:method:: set_growth_params(params: ansys.meshing.prime.params.primestructs.ShellBLControlGrowthParams)
+
+   Sets growth parameters for ShellBL control.
+
+
+   :param params: Parameters to set ShellBL growth.
+   :type params: ShellBLControlGrowthParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = shellbl_control.set_growth_params(ShellBLControlGrowthParams(model=model))
+
+
+.. py:method:: set_surface_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the face zonelet scope.
+
+
+   :param entities: Scope definition entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = shellbl_control.set_surface_scope(entities)
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,734 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Model`
+==============
+
+
+.. py:class:: ansys.meshing.prime.Model(comm: ansys.meshing.prime.internals.communicator.Communicator, id: int, object_id: int, name: str)
+
+
+
+   Contains all information about Ansys Prime Server.
+
+   This class provides the nucleus of Ansys meshing technology. You can access
+   any information in Ansys Prime Server only through the ``Model`` class.
+   Using this class, you can query topo data, control data, parts, size fields,
+   and more.
+
+   :param comm: Communicator to connect with the Ansys Prime server.
+   :type comm: Communicator
+   :param id: ID of the model.
+   :type id: int
+   :param object_id: Object ID of the model.
+   :type object_id: int
+   :param name: Name of the model.
+   :type name: str
+
+
+
+
+
+.. py:currentmodule:: Model
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~activate_volumetric_size_fields`
+            - Activate the sizefields identified by the given sizefield ids.
+          * - :py:attr:`~as_polydata`
+            - Get the model as a polydata.
+          * - :py:attr:`~create_zone`
+            - Creates zone for the given zone type.
+          * - :py:attr:`~deactivate_volumetric_size_fields`
+            - Deactivate the size fields with the given size field ids.
+          * - :py:attr:`~delete_parts`
+            - Delete parts and their contents.
+          * - :py:attr:`~delete_volumetric_size_fields`
+            - Delete the sizefields identified by the given sizefield ids.
+          * - :py:attr:`~delete_zone`
+            - Deletes zone with the given id.
+          * - :py:attr:`~get_active_volumetric_size_fields`
+            - Get the active sizefield ids.
+          * - :py:attr:`~get_global_sizing_params`
+            - Get global sizing parameters.
+          * - :py:attr:`~get_num_compute_nodes`
+            - Get the number of compute nodes.
+          * - :py:attr:`~get_num_threads`
+            - Get the number of threads enabled for multithreaded operation.
+          * - :py:attr:`~get_part`
+            - Get the part by ID.
+          * - :py:attr:`~get_part_by_name`
+            - Get the part by name.
+          * - :py:attr:`~get_scoped_polydata`
+            - Get the scoped polydata of the model.
+          * - :py:attr:`~get_size_field_name`
+            - Gets the name of size field with the given id.
+          * - :py:attr:`~get_volumetric_size_fields`
+            - Get the sizefield ids.
+          * - :py:attr:`~get_zone_by_name`
+            - Gets the zone with the provided name.
+          * - :py:attr:`~get_zone_name`
+            - Get the name of given zone.
+          * - :py:attr:`~merge_parts`
+            - Merge multiple parts into a single part.
+          * - :py:attr:`~set_global_sizing_params`
+            - Set global sizing parameters.
+          * - :py:attr:`~set_num_threads`
+            - Sets the number of threads for multithreaded operation.
+          * - :py:attr:`~set_suggested_size_field_name`
+            - Sets the suggested name of size field with the given id.
+          * - :py:attr:`~set_suggested_zone_name`
+            - Sets the unique name for zone with given id based on the suggested name.
+          * - :py:attr:`~set_working_directory`
+            - Set working directory.
+          * - :py:attr:`~start_distributed_meshing`
+            - Enables distributed meshing mode.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~control_data`
+            - Get the control data for the model.
+          * - :py:attr:`~id`
+            - Get the id of Model.
+          * - :py:attr:`~logger`
+            - Get PyPrimeMesh's logger instance.
+          * - :py:attr:`~material_point_data`
+            - Get material point data for the model.
+          * - :py:attr:`~name`
+            - Get the name of Model.
+          * - :py:attr:`~parts`
+            - Get the list of parts for the model.
+          * - :py:attr:`~python_logger`
+            - Get python standard logger from PyPrimeMesh's logger instance.
+          * - :py:attr:`~topo_data`
+            - Get the TopoData for the model.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__doc__`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - Print the summary of the model.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import Model
+
+Property detail
+---------------
+
+.. py:property:: control_data
+   :type: ansys.meshing.prime.core.controldata.ControlData
+
+
+   Get the control data for the model.
+
+   :returns: Control data for the model.
+   :rtype: ControlData
+
+   .. rubric:: Examples
+
+   >>> control_data = model.control_data
+
+.. py:property:: id
+
+   Get the id of Model.
+
+.. py:property:: logger
+   :type: ansys.meshing.prime.internals.logger.PrimeLogger
+
+
+   Get PyPrimeMesh's logger instance.
+
+   PyPrimeMesh's logger instance can be used to save the logs to a file,
+   redirect the logs to the given stream, control the verbosity
+   of messages printed by PyPrimeMesh and more.
+
+   :returns: PyPrimeMesh's logger instance.
+   :rtype: PrimeLogger
+
+   .. rubric:: Examples
+
+   Save logs to a file.
+
+   >>> model.logger.add_file_handler(logs_dir=r"./tmp")
+
+.. py:property:: material_point_data
+   :type: ansys.meshing.prime.autogen.materialpointmanager.MaterialPointManager
+
+
+   Get material point data for the model.
+
+   The Material Point Manager is used to create, delete, and manage material points.
+
+   :returns: Material Point Manager.
+   :rtype: MaterialPointManager
+
+   .. rubric:: Examples
+
+   >>> mpt_data = model.material_point_data
+
+.. py:property:: name
+
+   Get the name of Model.
+
+.. py:property:: parts
+   :type: List[ansys.meshing.prime.core.part.Part]
+
+
+   Get the list of parts for the model.
+
+   :returns: List of parts for the model.
+   :rtype: List[Part]
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> parts = model.parts
+
+.. py:property:: python_logger
+
+   Get python standard logger from PyPrimeMesh's logger instance.
+
+   PyPrimeMesh's python standard logger instance can be used to control
+   the verbosity of messages printed by PyPrimeMesh and more.
+
+   :returns: PyPrimeMesh's python standard logger instance.
+   :rtype: logging.Logger
+
+   .. rubric:: Examples
+
+   Set log level to debug.
+
+   >>> model.python_logger.setLevel(logging.DEBUG)
+
+.. py:property:: topo_data
+   :type: ansys.meshing.prime.autogen.topodata.TopoData
+
+
+   Get the TopoData for the model.
+
+   :returns: TopoData for the model.
+   :rtype: TopoData
+
+   .. rubric:: Examples
+
+   >>> topo_data=model.topo_data
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __doc__
+   :value: Multiline-String
+
+   .. raw:: html
+
+      <details><summary>Show Value</summary>
+
+   .. code-block:: python
+
+      """Model is the nucleus of Prime. Model forms the base and contains all the information about Prime.
+      
+          You can access any information in Prime only through Model.
+          Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+      
+          Parameters
+          ----------
+          comm : Communicator
+              Communicator to connect with the Ansys Prime server.
+          id : int
+              Id of the Model.
+          object_id : int
+              Object id of the Model.
+          name : str
+              Name of the Model.
+          """
+
+   .. raw:: html
+
+      </details>
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__()
+
+   Print the summary of the model.
+
+   :returns: Summary of the model.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> print(model)
+
+
+.. py:method:: activate_volumetric_size_fields(size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int])
+
+   Activate the sizefields identified by the given sizefield ids.
+
+
+   :param size_field_ids: List of sizefield ids.
+   :type size_field_ids: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.activate_volumetric_size_fields(size_field_ids)
+
+
+.. py:method:: as_polydata(update: bool = False)
+
+   Get the model as a polydata.
+
+   :param update: Update the polydata if it is already present, by default False.
+   :type update: bool, optional
+
+   :returns: Polydata of the model.
+   :rtype: vtk.vtkPolyData
+
+   .. rubric:: Examples
+
+   >>> polydata = model.as_polydata()
+
+
+.. py:method:: create_zone(suggested_name: str, type: ansys.meshing.prime.params.primestructs.ZoneType) -> ansys.meshing.prime.params.primestructs.CreateZoneResults
+
+   Creates zone for the given zone type.
+
+
+   :param suggested_name: Suggested name for the zone to be created.
+   :type suggested_name: str
+   :param type: Type of the zone to be created.
+   :type type: ZoneType
+
+   :returns: Returns the CreateZoneResults.
+   :rtype: CreateZoneResults
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> results = model.create_zone("wall", prime.ZoneType.FACE)
+
+
+.. py:method:: deactivate_volumetric_size_fields(size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int])
+
+   Deactivate the size fields with the given size field ids.
+
+
+   :param size_field_ids: List of sizefield ids.
+   :type size_field_ids: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.deactivate_volumetric_size_fields(size_field_ids)
+
+
+.. py:method:: delete_parts(part_ids: Iterable[int]) -> ansys.meshing.prime.autogen.commonstructs.DeleteResults
+
+   Delete parts and their contents.
+
+   :param part_ids: IDs of parts to delete.
+   :type part_ids: Iterable[int]
+
+   :returns: Results from deleting parts and their contents.
+   :rtype: DeleteResults
+
+   .. rubric:: Examples
+
+   >>> results = model.delete_parts(part_ids)
+
+
+.. py:method:: delete_volumetric_size_fields(size_field_ids: ansys.meshing.prime.params.primestructs.Iterable[int])
+
+   Delete the sizefields identified by the given sizefield ids.
+
+
+   :param size_field_ids: List of sizefield ids.
+   :type size_field_ids: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.delete_volumetric_size_fields(size_field_ids)
+
+
+.. py:method:: delete_zone(zone_id: int) -> ansys.meshing.prime.params.primestructs.DeleteZoneResults
+
+   Deletes zone with the given id.
+
+
+   :param zone_id: Id of the zone to be deleted.
+   :type zone_id: int
+
+   :returns: Returns the DeleteZoneResults.
+   :rtype: DeleteZoneResults
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> results = model.delete_zone(1)
+
+
+.. py:method:: get_active_volumetric_size_fields() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the active sizefield ids.
+
+
+   :returns: Return the list of active sizefield ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> active_size_field_ids = model.get_active_volumetric_size_fields()
+
+
+.. py:method:: get_global_sizing_params() -> ansys.meshing.prime.autogen.modelstructs.GlobalSizingParams
+
+   Get global sizing parameters.
+
+   :returns: Global sizing parameters.
+   :rtype: GlobalSizingParams
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> sf_params = model.get_global_sizing_params()
+
+
+.. py:method:: get_num_compute_nodes() -> int
+
+   Get the number of compute nodes.
+
+
+   :returns: Returns the number of compute nodes.
+   :rtype: int
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> num_compute_nodes = model.get_num_compute_nodes()
+
+
+.. py:method:: get_num_threads() -> int
+
+   Get the number of threads enabled for multithreaded operation.
+
+
+   :returns: Returns the number of threads.
+   :rtype: int
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> num_threads = model.get_num_threads()
+
+
+.. py:method:: get_part(id: int) -> ansys.meshing.prime.core.part.Part
+
+   Get the part by ID.
+
+   :param id: ID of the part.
+   :type id: int
+
+   :returns: Part or ``None`` if the given part ID doesn't exist.
+   :rtype: Part
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> part = model.get_part(2)
+
+
+.. py:method:: get_part_by_name(name: str) -> ansys.meshing.prime.core.part.Part
+
+   Get the part by name.
+
+   :param name: Name of the part.
+   :type name: str
+
+   :returns: Part or ``None`` if the given part name doesn't exist.
+   :rtype: Part
+
+   .. rubric:: Examples
+
+   >>> from ansys.meshing.prime import Model
+   >>> model = client.model
+   >>> part = model.get_part_by_name("part.1")
+
+
+.. py:method:: get_scoped_polydata(scope, update: bool = False)
+
+   Get the scoped polydata of the model.
+
+   :param scope: Scope of the model.
+   :type scope: Scope
+
+   :returns: Scoped polydata of the model.
+   :rtype: vtk.vtkPolyData
+
+   .. rubric:: Examples
+
+   >>> scoped_polydata = model.get_scoped_polydata(scope)
+
+
+.. py:method:: get_size_field_name(size_field_id: int) -> str
+
+   Gets the name of size field with the given id.
+
+
+   :param size_field_id: Size field id.
+   :type size_field_id: int
+
+   :returns: Returns the name of the size field.
+   :rtype: str
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.get_size_field_name(size_field_id)
+
+
+.. py:method:: get_volumetric_size_fields() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the sizefield ids.
+
+
+   :returns: Return the list of sizefield ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> size_field_ids = model.get_volumetric_size_fields()
+
+
+.. py:method:: get_zone_by_name(zone_name: str) -> int
+
+   Gets the zone with the provided name.
+
+
+   :param zone_name: Name of the zone.
+   :type zone_name: str
+
+   :returns: Returns id of the zone.
+   :rtype: int
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> zone_id = model.get_zone_by_name("inlet")
+
+
+.. py:method:: get_zone_name(id: int) -> str
+
+   Get the name of given zone.
+
+
+   :param id: Id of zone.
+   :type id: int
+
+   :returns: Return the zone name. Return empty name if the id is invalid.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> name = model.get_zone_name(id)
+
+
+.. py:method:: merge_parts(part_ids: Iterable[int], params: ansys.meshing.prime.autogen.modelstructs.MergePartsParams) -> ansys.meshing.prime.autogen.modelstructs.MergePartsResults
+
+   Merge multiple parts into a single part.
+
+   :param part_ids: IDs of the parts to merge.
+   :type part_ids: Iterable[int]
+   :param params: Parameters for merging parts.
+   :type params: MergePartsParams
+
+   :returns: Results for merging the parts into a single part.
+   :rtype: MergePartsResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.MergePartsParams(model = model)
+   >>> results = model.merge_parts(part_ids, params)
+
+
+.. py:method:: set_global_sizing_params(params: ansys.meshing.prime.autogen.modelstructs.GlobalSizingParams)
+
+   Set global sizing parameters.
+
+   :param params: Global sizing parameters for initializing surfer parameters and
+                  various size control parameters.
+   :type params: GlobalSizingParams
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.set_global_sizing_params(GlobalSizingParams(model=model,
+   ...                                          min=0.1,
+   ...                                          max=1.0,
+   ...                                          growth_rate=1.2))
+
+
+.. py:method:: set_num_threads(num: int)
+
+   Sets the number of threads for multithreaded operation.
+
+
+   :param num: Number of threads.
+   :type num: int
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.set_num_threads(4)
+
+
+.. py:method:: set_suggested_size_field_name(size_field_id: int, name: str) -> ansys.meshing.prime.params.primestructs.SetNameResults
+
+   Sets the suggested name of size field with the given id.
+
+
+   :param size_field_id: Size field id.
+   :type size_field_id: int
+   :param name: Name of the size field.
+   :type name: str
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> model = client.model
+   >>> model.set_suggested_size_field_name(size_field_id, name)
+
+
+.. py:method:: set_suggested_zone_name(id: int, name: str) -> ansys.meshing.prime.params.primestructs.SetNameResults
+
+   Sets the unique name for zone with given id based on the suggested name.
+
+
+   :param id: Id of the zone to set suggested name.
+   :type id: int
+   :param name: Suggested name for the zone.
+   :type name: str
+
+   :returns: Returns the SetNameResults. results.assignedName indicates the assigned name to the zone.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> results = model.set_suggested_zone_name(id = 5, name = "zone1")
+
+
+.. py:method:: set_working_directory(path: str)
+
+   Set working directory.
+
+   Set the working directory to be considered for file i/o when the file paths are relative.
+
+   :param path: Path to the directory.
+   :type path: str
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> zones = model.set_working_directory("C:/input_files")
+
+
+.. py:method:: start_distributed_meshing()
+
+   Enables distributed meshing mode.
+
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> model.start_distributed_meshing()
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ContactPreventionParams`
+================================
+
+
+.. py:class:: ansys.meshing.prime.ContactPreventionParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, source_scope: ScopeDefinition = None, target_scope: ScopeDefinition = None, size: float = None, json_data: dict = None, **kwargs)
+
+
+
+   ContactPreventionParams defines contact prevention control parameters for wrapper.
+
+   :param model: Model to create a ``ContactPreventionParams`` object with default parameters.
+   :type model: Model
+   :param source_scope: Source scope used for contact prevention control.
+   :type source_scope: ScopeDefinition, optional
+   :param target_scope: Target scope used for contact prevention control.
+   :type target_scope: ScopeDefinition, optional
+   :param size: Minimum gap size (gap/4) to resolve contact between source and target.
+   :type size: float, optional
+   :param json_data: JSON dictionary to create a ``ContactPreventionParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> contact_prevention_params = prime.ContactPreventionParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ContactPreventionParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~size`
+            - Minimum gap size (gap/4) to resolve contact between source and target.
+          * - :py:attr:`~source_scope`
+            - Source scope used for contact prevention control.
+          * - :py:attr:`~target_scope`
+            - Target scope used for contact prevention control.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ContactPreventionParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ContactPreventionParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ContactPreventionParams
+
+Property detail
+---------------
+
+.. py:property:: size
+   :type: float
+
+
+   Minimum gap size (gap/4) to resolve contact between source and target.
+
+.. py:property:: source_scope
+   :type: ScopeDefinition
+
+
+   Source scope used for contact prevention control.
+
+.. py:property:: target_scope
+   :type: ScopeDefinition
+
+
+   Target scope used for contact prevention control.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ContactPreventionParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ContactPreventionParams.print_default()
+
+
+.. py:method:: set_default(source_scope: ScopeDefinition = None, target_scope: ScopeDefinition = None, size: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ContactPreventionParams`` object.
+
+   :param source_scope: Source scope used for contact prevention control.
+   :type source_scope: ScopeDefinition, optional
+   :param target_scope: Target scope used for contact prevention control.
+   :type target_scope: ScopeDefinition, optional
+   :param size: Minimum gap size (gap/4) to resolve contact between source and target.
+   :type size: float, optional
+
+
+
+
+
+
+
+.. vale on

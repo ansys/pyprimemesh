@@ -1,0 +1,6 @@
+constant\_mesh\_size
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ConnectFacesParams.constant_mesh_size

@@ -1,0 +1,154 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CopyZoneletsParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.CopyZoneletsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, copy_labels: bool = None, copy_zones: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to copy zonelets.
+
+   :param model: Model to create a ``CopyZoneletsParams`` object with default parameters.
+   :type model: Model
+   :param copy_labels: Option to copy labels of input zonelets to the corresponding copied zonelets.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type copy_labels: bool, optional
+   :param copy_zones: Option to copy zones of input zonelets to corresponding copied zonelets.
+   :type copy_zones: bool, optional
+   :param json_data: JSON dictionary to create a ``CopyZoneletsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> copy_zonelets_params = prime.CopyZoneletsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CopyZoneletsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~copy_labels`
+            - Option to copy labels of input zonelets to the corresponding copied zonelets.
+          * - :py:attr:`~copy_zones`
+            - Option to copy zones of input zonelets to corresponding copied zonelets.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CopyZoneletsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CopyZoneletsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CopyZoneletsParams
+
+Property detail
+---------------
+
+.. py:property:: copy_labels
+   :type: bool
+
+
+   Option to copy labels of input zonelets to the corresponding copied zonelets.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: copy_zones
+   :type: bool
+
+
+   Option to copy zones of input zonelets to corresponding copied zonelets.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CopyZoneletsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CopyZoneletsParams.print_default()
+
+
+.. py:method:: set_default(copy_labels: bool = None, copy_zones: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CopyZoneletsParams`` object.
+
+   :param copy_labels: Option to copy labels of input zonelets to the corresponding copied zonelets.
+   :type copy_labels: bool, optional
+   :param copy_zones: Option to copy zones of input zonelets to corresponding copied zonelets.
+   :type copy_zones: bool, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WriteSizeFieldParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.WriteSizeFieldParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, write_only_active_size_fields: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to write size field file.
+
+   :param model: Model to create a ``WriteSizeFieldParams`` object with default parameters.
+   :type model: Model
+   :param write_only_active_size_fields: Option to write only active size fields into the file.
+   :type write_only_active_size_fields: bool, optional
+   :param json_data: JSON dictionary to create a ``WriteSizeFieldParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> write_size_field_params = prime.WriteSizeFieldParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WriteSizeFieldParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~write_only_active_size_fields`
+            - Option to write only active size fields into the file.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WriteSizeFieldParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WriteSizeFieldParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import WriteSizeFieldParams
+
+Property detail
+---------------
+
+.. py:property:: write_only_active_size_fields
+   :type: bool
+
+
+   Option to write only active size fields into the file.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WriteSizeFieldParams`` object.
+
+   .. rubric:: Examples
+
+   >>> WriteSizeFieldParams.print_default()
+
+
+.. py:method:: set_default(write_only_active_size_fields: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WriteSizeFieldParams`` object.
+
+   :param write_only_active_size_fields: Option to write only active size fields into the file.
+   :type write_only_active_size_fields: bool, optional
+
+
+
+
+
+
+
+.. vale on

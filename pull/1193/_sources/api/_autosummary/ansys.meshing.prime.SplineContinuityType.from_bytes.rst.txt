@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SplineContinuityType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using SplineContinuityType.from_bytes
+
+   ansys.meshing.prime.SplineContinuityType.from_bytes

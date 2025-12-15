@@ -1,0 +1,210 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PrismControlGrowthParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.PrismControlGrowthParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, offset_type: PrismControlOffsetType = None, n_layers: int = None, growth_rate: float = None, first_height: float = None, first_aspect_ratio: float = None, last_aspect_ratio: float = None, min_aspect_ratio: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Growth parameters for prism control.
+
+   :param model: Model to create a ``PrismControlGrowthParams`` object with default parameters.
+   :type model: Model
+   :param offset_type: Offset type controls the method that is used to compute prism layer heights. The following options are supported.The aspect ratio option takes first aspect ratio, number of layers and growth rate. It ignores first height as input.The uniform option takes first height, number of layers and growth rate. It ignores first aspect ratio as input.Aspect ratio is ratio of prism base to height.
+   :type offset_type: PrismControlOffsetType, optional
+   :param n_layers: Number of prism layers to be generated. It is used for all prism control offset types.
+   :type n_layers: int, optional
+   :param growth_rate: Growth rate to be used to compute prism layer heights. It is used when prism control offset type is ASPECTRATIO or UNIFORM.
+   :type growth_rate: float, optional
+   :param first_height: Height to be used for first layer and adjust following layer height based on other settings. It is used when prism control offset type is UNIFORM.
+   :type first_height: float, optional
+   :param first_aspect_ratio: Aspect ratio to be used to compute first layer height. It is used only when prism control offset type is ASPECTRATIO.
+   :type first_aspect_ratio: float, optional
+   :param last_aspect_ratio: Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
+   :type last_aspect_ratio: float, optional
+   :param min_aspect_ratio: Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
+   :type min_aspect_ratio: float, optional
+   :param json_data: JSON dictionary to create a ``PrismControlGrowthParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> prism_control_growth_params = prime.PrismControlGrowthParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PrismControlGrowthParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~first_aspect_ratio`
+            - Aspect ratio to be used to compute first layer height. It is used only when prism control offset type is ASPECTRATIO.
+          * - :py:attr:`~first_height`
+            - Height to be used for first layer and adjust following layer height based on other settings. It is used when prism control offset type is UNIFORM.
+          * - :py:attr:`~growth_rate`
+            - Growth rate to be used to compute prism layer heights. It is used when prism control offset type is ASPECTRATIO or UNIFORM.
+          * - :py:attr:`~last_aspect_ratio`
+            - Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
+          * - :py:attr:`~min_aspect_ratio`
+            - Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
+          * - :py:attr:`~n_layers`
+            - Number of prism layers to be generated. It is used for all prism control offset types.
+          * - :py:attr:`~offset_type`
+            - Offset type controls the method that is used to compute prism layer heights. The following options are supported.The aspect ratio option takes first aspect ratio, number of layers and growth rate. It ignores first height as input.The uniform option takes first height, number of layers and growth rate. It ignores first aspect ratio as input.Aspect ratio is ratio of prism base to height.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PrismControlGrowthParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PrismControlGrowthParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import PrismControlGrowthParams
+
+Property detail
+---------------
+
+.. py:property:: first_aspect_ratio
+   :type: float
+
+
+   Aspect ratio to be used to compute first layer height. It is used only when prism control offset type is ASPECTRATIO.
+
+.. py:property:: first_height
+   :type: float
+
+
+   Height to be used for first layer and adjust following layer height based on other settings. It is used when prism control offset type is UNIFORM.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate to be used to compute prism layer heights. It is used when prism control offset type is ASPECTRATIO or UNIFORM.
+
+.. py:property:: last_aspect_ratio
+   :type: float
+
+
+   Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
+
+.. py:property:: min_aspect_ratio
+   :type: float
+
+
+   Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
+
+.. py:property:: n_layers
+   :type: int
+
+
+   Number of prism layers to be generated. It is used for all prism control offset types.
+
+.. py:property:: offset_type
+   :type: PrismControlOffsetType
+
+
+   Offset type controls the method that is used to compute prism layer heights. The following options are supported.The aspect ratio option takes first aspect ratio, number of layers and growth rate. It ignores first height as input.The uniform option takes first height, number of layers and growth rate. It ignores first aspect ratio as input.Aspect ratio is ratio of prism base to height.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PrismControlGrowthParams`` object.
+
+   .. rubric:: Examples
+
+   >>> PrismControlGrowthParams.print_default()
+
+
+.. py:method:: set_default(offset_type: PrismControlOffsetType = None, n_layers: int = None, growth_rate: float = None, first_height: float = None, first_aspect_ratio: float = None, last_aspect_ratio: float = None, min_aspect_ratio: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PrismControlGrowthParams`` object.
+
+   :param offset_type: Offset type controls the method that is used to compute prism layer heights. The following options are supported.The aspect ratio option takes first aspect ratio, number of layers and growth rate. It ignores first height as input.The uniform option takes first height, number of layers and growth rate. It ignores first aspect ratio as input.Aspect ratio is ratio of prism base to height.
+   :type offset_type: PrismControlOffsetType, optional
+   :param n_layers: Number of prism layers to be generated. It is used for all prism control offset types.
+   :type n_layers: int, optional
+   :param growth_rate: Growth rate to be used to compute prism layer heights. It is used when prism control offset type is ASPECTRATIO or UNIFORM.
+   :type growth_rate: float, optional
+   :param first_height: Height to be used for first layer and adjust following layer height based on other settings. It is used when prism control offset type is UNIFORM.
+   :type first_height: float, optional
+   :param first_aspect_ratio: Aspect ratio to be used to compute first layer height. It is used only when prism control offset type is ASPECTRATIO.
+   :type first_aspect_ratio: float, optional
+   :param last_aspect_ratio: Apsect ratio of the last layer. The heights of the other layers is computed based on number of layers and first height. This is used only when prism control offset type is LASTRATIO.
+   :type last_aspect_ratio: float, optional
+   :param min_aspect_ratio: Minimum apsect ratio limit to be used for all the layers. This condition is respected in all offset types.
+   :type min_aspect_ratio: float, optional
+
+
+
+
+
+
+
+.. vale on

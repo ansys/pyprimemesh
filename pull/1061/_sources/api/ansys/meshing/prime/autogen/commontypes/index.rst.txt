@@ -1,0 +1,131 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``commontypes.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.autogen.commontypes
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: commontypes
+.. tab-set::
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes.CellQualityMeasure`
+            - The type of cell quality measures to check cell quality metrics.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes.FaceQualityMeasure`
+            - The type of face quality measures to check face quality metrics.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes.ShellBLOffsetType`
+            - Type of offset method during ShellBL generation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes.SizeFieldType`
+            - The type of sizing field to be used to fetch element size at given location.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes.SolverType`
+            - Type of solver.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.commontypes.SurfaceFeatureType`
+            - Type of face edges considered as features.
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> CellQualityMeasure</api/ansys/meshing/prime/autogen/commontypes/CellQualityMeasure>
+    <span class="nf nf-cod-symbol_enum"></span> FaceQualityMeasure</api/ansys/meshing/prime/autogen/commontypes/FaceQualityMeasure>
+    <span class="nf nf-cod-symbol_enum"></span> ShellBLOffsetType</api/ansys/meshing/prime/autogen/commontypes/ShellBLOffsetType>
+    <span class="nf nf-cod-symbol_enum"></span> SizeFieldType</api/ansys/meshing/prime/autogen/commontypes/SizeFieldType>
+    <span class="nf nf-cod-symbol_enum"></span> SolverType</api/ansys/meshing/prime/autogen/commontypes/SolverType>
+    <span class="nf nf-cod-symbol_enum"></span> SurfaceFeatureType</api/ansys/meshing/prime/autogen/commontypes/SurfaceFeatureType>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

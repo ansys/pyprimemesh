@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CellStatisticsResults`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.meshinfostructs.CellStatisticsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, volume: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of cell statistics information.
+
+   :param model: Model to create a ``CellStatisticsResults`` object with default parameters.
+   :type model: Model
+   :param volume: Cumulative volume of all the cell elements of selected entities.
+   :type volume: float, optional
+   :param error_code: Error code associated with the cell statistics function.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``CellStatisticsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> cell_statistics_results = prime.CellStatisticsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CellStatisticsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the cell statistics function.
+          * - :py:attr:`~volume`
+            - Cumulative volume of all the cell elements of selected entities.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CellStatisticsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CellStatisticsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.meshinfostructs import CellStatisticsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the cell statistics function.
+
+.. py:property:: volume
+   :type: float
+
+
+   Cumulative volume of all the cell elements of selected entities.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CellStatisticsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> CellStatisticsResults.print_default()
+
+
+.. py:method:: set_default(volume: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CellStatisticsResults`` object.
+
+   :param volume: Cumulative volume of all the cell elements of selected entities.
+   :type volume: float, optional
+   :param error_code: Error code associated with the cell statistics function.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

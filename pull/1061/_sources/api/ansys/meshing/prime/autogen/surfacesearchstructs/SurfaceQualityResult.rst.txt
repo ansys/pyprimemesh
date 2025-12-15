@@ -1,0 +1,198 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceQualityResult`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceQualityResult(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, face_quality_measure: ansys.meshing.prime.params.primestructs.FaceQualityMeasure = None, measure_name: str = None, quality_limit: float = None, n_found: int = None, max_quality: float = None, min_quality: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Result of surface quality.
+
+   :param model: Model to create a ``SurfaceQualityResult`` object with default parameters.
+   :type model: Model
+   :param face_quality_measure: Type of the face quality measure.
+   :type face_quality_measure: FaceQualityMeasure, optional
+   :param measure_name: Name of the face quality measure.
+   :type measure_name: str, optional
+   :param quality_limit: Target quality limit used to find failures.
+   :type quality_limit: float, optional
+   :param n_found: Number of failed faces.
+   :type n_found: int, optional
+   :param max_quality: Maximum value of quality measure.
+   :type max_quality: float, optional
+   :param min_quality: Minimum value of quality measure.
+   :type min_quality: float, optional
+   :param json_data: JSON dictionary to create a ``SurfaceQualityResult`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> surface_quality_result = prime.SurfaceQualityResult(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceQualityResult
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~face_quality_measure`
+            - Type of the face quality measure.
+          * - :py:attr:`~max_quality`
+            - Maximum value of quality measure.
+          * - :py:attr:`~measure_name`
+            - Name of the face quality measure.
+          * - :py:attr:`~min_quality`
+            - Minimum value of quality measure.
+          * - :py:attr:`~n_found`
+            - Number of failed faces.
+          * - :py:attr:`~quality_limit`
+            - Target quality limit used to find failures.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SurfaceQualityResult`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SurfaceQualityResult`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SurfaceQualityResult
+
+Property detail
+---------------
+
+.. py:property:: face_quality_measure
+   :type: ansys.meshing.prime.params.primestructs.FaceQualityMeasure
+
+
+   Type of the face quality measure.
+
+.. py:property:: max_quality
+   :type: float
+
+
+   Maximum value of quality measure.
+
+.. py:property:: measure_name
+   :type: str
+
+
+   Name of the face quality measure.
+
+.. py:property:: min_quality
+   :type: float
+
+
+   Minimum value of quality measure.
+
+.. py:property:: n_found
+   :type: int
+
+
+   Number of failed faces.
+
+.. py:property:: quality_limit
+   :type: float
+
+
+   Target quality limit used to find failures.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SurfaceQualityResult`` object.
+
+   .. rubric:: Examples
+
+   >>> SurfaceQualityResult.print_default()
+
+
+.. py:method:: set_default(face_quality_measure: ansys.meshing.prime.params.primestructs.FaceQualityMeasure = None, measure_name: str = None, quality_limit: float = None, n_found: int = None, max_quality: float = None, min_quality: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SurfaceQualityResult`` object.
+
+   :param face_quality_measure: Type of the face quality measure.
+   :type face_quality_measure: FaceQualityMeasure, optional
+   :param measure_name: Name of the face quality measure.
+   :type measure_name: str, optional
+   :param quality_limit: Target quality limit used to find failures.
+   :type quality_limit: float, optional
+   :param n_found: Number of failed faces.
+   :type n_found: int, optional
+   :param max_quality: Maximum value of quality measure.
+   :type max_quality: float, optional
+   :param min_quality: Minimum value of quality measure.
+   :type min_quality: float, optional
+
+
+
+
+
+
+
+.. vale on

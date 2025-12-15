@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapperPatchFlowRegionsResult`
+======================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.wrapperstructs.WrapperPatchFlowRegionsResult(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, id: int = None, name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Result structure associated with patch holes operation.
+
+   :param model: Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
+   :type model: Model
+   :param warning_codes: Warning codes associated with the patch holes operation.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type warning_codes: List[WarningCode], optional
+   :param error_code: Error code associated with a patch holes operation.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param id: Id of part created with hole patches.
+
+              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type id: int, optional
+   :param name: Name of part created with hole patches.
+
+                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type name: str, optional
+   :param json_data: JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> wrapper_patch_flow_regions_result = prime.WrapperPatchFlowRegionsResult(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WrapperPatchFlowRegionsResult
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with a patch holes operation.
+          * - :py:attr:`~id`
+            - Id of part created with hole patches.
+          * - :py:attr:`~name`
+            - Name of part created with hole patches.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the patch holes operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WrapperPatchFlowRegionsResult`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WrapperPatchFlowRegionsResult`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.wrapperstructs import WrapperPatchFlowRegionsResult
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with a patch holes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: id
+   :type: int
+
+
+   Id of part created with hole patches.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: name
+   :type: str
+
+
+   Name of part created with hole patches.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the patch holes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WrapperPatchFlowRegionsResult`` object.
+
+   .. rubric:: Examples
+
+   >>> WrapperPatchFlowRegionsResult.print_default()
+
+
+.. py:method:: set_default(warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, id: int = None, name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WrapperPatchFlowRegionsResult`` object.
+
+   :param warning_codes: Warning codes associated with the patch holes operation.
+   :type warning_codes: List[WarningCode], optional
+   :param error_code: Error code associated with a patch holes operation.
+   :type error_code: ErrorCode, optional
+   :param id: Id of part created with hole patches.
+   :type id: int, optional
+   :param name: Name of part created with hole patches.
+   :type name: str, optional
+
+
+
+
+
+
+
+.. vale on

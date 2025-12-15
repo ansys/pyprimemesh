@@ -1,0 +1,222 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PrimePlotter`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.graphics.plotter.PrimePlotter(use_trame: Optional[bool] = None, allow_picking: Optional[bool] = True)
+
+
+
+   Create a plotter for PyPrimeMesh models.
+
+   This plotter is a wrapper around the PyAnsys generic plotter
+   with additional functionality for PyPrimeMesh.
+
+   :param use_trame: Whether to use the Trame visualizer.
+   :type use_trame: Optional[bool], default: None
+   :param allow_picking: Whether to allow picking.
+   :type allow_picking: Optional[bool], default: True.
+
+
+
+.. py:currentmodule:: PrimePlotter
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~add_model`
+            - Add a Prime model to the plotter.
+          * - :py:attr:`~add_model_pd`
+            - Add a model to the plotter.
+          * - :py:attr:`~add_scope`
+            - Add a scope to the plotter.
+          * - :py:attr:`~get_scalar_colors`
+            - Get the scalar colors for the mesh.
+          * - :py:attr:`~plot`
+            - Add an object to the plotter.
+          * - :py:attr:`~plot_iter`
+            - Add a list of any type of object to the scene.
+          * - :py:attr:`~show`
+            - Show the plotted objects.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~backend`
+            - Return the base plotter object.
+          * - :py:attr:`~info_actor_map`
+            - Get the information actor map for the selected information widget.
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.graphics.plotter import PrimePlotter
+
+Property detail
+---------------
+
+.. py:property:: backend
+
+   Return the base plotter object.
+
+.. py:property:: info_actor_map
+   :type: Dict
+
+
+   Get the information actor map for the selected information widget.
+
+   :returns: Information actor map.
+   :rtype: Dict
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: add_model(model: ansys.meshing.prime.core.model.Model, scope: ansys.meshing.prime.ScopeDefinition = None, update: bool = False) -> None
+
+   Add a Prime model to the plotter.
+
+   :param model: Prime model to add.
+   :type model: Model
+   :param scope: Scope to show, if any.
+   :type scope: prime.ScopeDefinition, default: None
+   :param update: Whether to update the display.
+   :type update: bool, default: False
+
+
+.. py:method:: add_model_pd(model_pd: Dict) -> None
+
+   Add a model to the plotter.
+
+   :param model: Model to add to the plotter.
+   :type model: Model
+
+
+.. py:method:: add_scope(model: ansys.meshing.prime.core.model.Model, scope: ansys.meshing.prime.ScopeDefinition, update: bool = False) -> None
+
+   Add a scope to the plotter.
+
+   :param model: Model to add to the plotter.
+   :type model: Model
+   :param scope: Scope to add to the plotter.
+   :type scope: prime.ScopeDefinition
+   :param update: Whether to update the display.
+   :type update: bool, default: False
+
+
+.. py:method:: get_scalar_colors(mesh_info: ansys.meshing.prime.core.mesh.DisplayMeshInfo) -> numpy.ndarray
+
+   Get the scalar colors for the mesh.
+
+   :param mesh_info: Mesh information that generates an appropriate color.
+   :type mesh_info: DisplayMeshInfo
+
+   :returns: Scalar colors for the mesh.
+   :rtype: np.ndarray
+
+
+.. py:method:: plot(plottable_object: Any, scope: ansys.meshing.prime.ScopeDefinition = None, name_filter: str = None, update: bool = False, **plotting_options)
+
+   Add an object to the plotter.
+
+   Allowed types are PyPrime models or any PyVista plottable object.
+
+   :param plottable_object: Object to add to the plotter.
+   :type plottable_object: Any
+   :param scope: Scope to plot.
+   :type scope: prime.ScopeDefinition, default: None
+   :param name_filter: Regular expression with the desired name or names to include in the plotter.
+   :type name_filter: str, default: None
+   :param update: Whether to update the display. Required when any mesh is updated.
+   :type update: bool, default: False
+   :param \*\*plotting_options: Keyword arguments. For allowable keyword arguments, see the
+                                :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+                                Options only applied to PyVista plottable objects.
+   :type \*\*plotting_options: dict, default: None
+
+   .. rubric:: Examples
+
+   >>> import pyvista as pv
+   >>> from ansys.meshing.prime.graphics import PrimePlotter
+   >>> import ansys.meshing.prime as prime
+   >>> model = prime.launch_prime().model
+   >>> prime.lucid.Mesh(model).read(prime.examples.download_block_model_fmd())
+   >>> scope = prime.ScopeDefinition(model, label_expression="my_group")
+   >>> plotter = PrimePlotter()
+   >>> # pyvista sphere with plotting options added for opacity and color
+   >>> plotter.plot(plottable_object=pv.Sphere(radius=2.0), opacity=0.5, color="red")
+   >>> plotter.plot(plottable_object=model, scope=scope)
+   >>> plotter.show()
+
+
+.. py:method:: plot_iter(plotting_list: List[Any], name_filter: str = None, update: bool = False, **plotting_options) -> None
+
+   Add a list of any type of object to the scene.
+
+   Allowed types are PyPrime models or any PyVista plottable object.
+
+   :param plotting_list: List of objects to plot.
+   :type plotting_list: List[Any]
+   :param name_filter: Regular expression with the desired name or names to include in the plotter.
+   :type name_filter: str, default: None
+   :param update: Whether to update the display.
+   :type update: bool, default: False
+   :param \*\*plotting_options: Keyword arguments. For allowable keyword arguments, see the
+                                :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+                                Options only applied to PyVista plottable objects.
+   :type \*\*plotting_options: dict, default: None
+
+
+.. py:method:: show(plottable_object: Any = None, screenshot: str = None, name_filter: str = None, scope: ansys.meshing.prime.ScopeDefinition = None, **plotting_options) -> None
+
+   Show the plotted objects.
+
+   :param plottable_object: Object to show.
+   :type plottable_object: Any, default: None
+   :param screenshot: Path to save a screenshot to.
+   :type screenshot: str, default: None
+   :param name_filter: Regular expression with the desired name or names to include in the plotter.
+   :type name_filter: str, default: None
+   :param \*\*plotting_options: Keyword arguments. For allowable keyword arguments, see the
+                                :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+                                Options only applied to PyVista plottable objects.
+   :type \*\*plotting_options: dict, default: None
+
+
+
+
+
+
+
+.. vale on

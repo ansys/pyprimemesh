@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchByQualityResults`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.SearchByQualityResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_found: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, max_quality: float = None, min_quality: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of search by quality.
+
+   :param model: Model to create a ``SearchByQualityResults`` object with default parameters.
+   :type model: Model
+   :param n_found: Number of face elements found by search for given quality limit.
+   :type n_found: int, optional
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param max_quality: Maximum quality found by search.
+   :type max_quality: float, optional
+   :param min_quality: Minimum quality found by search.
+   :type min_quality: float, optional
+   :param json_data: JSON dictionary to create a ``SearchByQualityResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_by_quality_results = prime.SearchByQualityResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchByQualityResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of operation.
+          * - :py:attr:`~max_quality`
+            - Maximum quality found by search.
+          * - :py:attr:`~min_quality`
+            - Minimum quality found by search.
+          * - :py:attr:`~n_found`
+            - Number of face elements found by search for given quality limit.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchByQualityResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchByQualityResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SearchByQualityResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of operation.
+
+.. py:property:: max_quality
+   :type: float
+
+
+   Maximum quality found by search.
+
+.. py:property:: min_quality
+   :type: float
+
+
+   Minimum quality found by search.
+
+.. py:property:: n_found
+   :type: int
+
+
+   Number of face elements found by search for given quality limit.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchByQualityResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchByQualityResults.print_default()
+
+
+.. py:method:: set_default(n_found: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, max_quality: float = None, min_quality: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SearchByQualityResults`` object.
+
+   :param n_found: Number of face elements found by search for given quality limit.
+   :type n_found: int, optional
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param max_quality: Maximum quality found by search.
+   :type max_quality: float, optional
+   :param min_quality: Minimum quality found by search.
+   :type min_quality: float, optional
+
+
+
+
+
+
+
+.. vale on

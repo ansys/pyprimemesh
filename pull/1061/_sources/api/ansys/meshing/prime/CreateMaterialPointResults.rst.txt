@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateMaterialPointResults`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.CreateMaterialPointResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, id: int = None, assigned_name: str = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results structure associated with create material point operation.
+
+   :param model: Model to create a ``CreateMaterialPointResults`` object with default parameters.
+   :type model: Model
+   :param id: Id of the material point created.
+   :type id: int, optional
+   :param assigned_name: Assigned name of the material point created.
+   :type assigned_name: str, optional
+   :param error_code: Error code associated with create material point operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with create material point operation.
+   :type warning_codes: List[WarningCode], optional
+   :param json_data: JSON dictionary to create a ``CreateMaterialPointResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_material_point_results = prime.CreateMaterialPointResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateMaterialPointResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assigned_name`
+            - Assigned name of the material point created.
+          * - :py:attr:`~error_code`
+            - Error code associated with create material point operation.
+          * - :py:attr:`~id`
+            - Id of the material point created.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with create material point operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateMaterialPointResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateMaterialPointResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CreateMaterialPointResults
+
+Property detail
+---------------
+
+.. py:property:: assigned_name
+   :type: str
+
+
+   Assigned name of the material point created.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with create material point operation.
+
+.. py:property:: id
+   :type: int
+
+
+   Id of the material point created.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with create material point operation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateMaterialPointResults`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateMaterialPointResults.print_default()
+
+
+.. py:method:: set_default(id: int = None, assigned_name: str = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateMaterialPointResults`` object.
+
+   :param id: Id of the material point created.
+   :type id: int, optional
+   :param assigned_name: Assigned name of the material point created.
+   :type assigned_name: str, optional
+   :param error_code: Error code associated with create material point operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with create material point operation.
+   :type warning_codes: List[WarningCode], optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,142 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LabelExportParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.LabelExportParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, label_expression_for_nodal_components: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control the export of labels as Nodal or Element Components in CDB. By default, all the labels are exported as Element Components.
+
+   :param model: Model to create a ``LabelExportParams`` object with default parameters.
+   :type model: Model
+   :param label_expression_for_nodal_components: Label expression to export matching labels as Nodal Components in CDB. Non-matching labels will be exported as Element Components.
+
+                                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type label_expression_for_nodal_components: str, optional
+   :param json_data: JSON dictionary to create a ``LabelExportParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> label_export_params = prime.LabelExportParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: LabelExportParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~label_expression_for_nodal_components`
+            - Label expression to export matching labels as Nodal Components in CDB. Non-matching labels will be exported as Element Components.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``LabelExportParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``LabelExportParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import LabelExportParams
+
+Property detail
+---------------
+
+.. py:property:: label_expression_for_nodal_components
+   :type: str
+
+
+   Label expression to export matching labels as Nodal Components in CDB. Non-matching labels will be exported as Element Components.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``LabelExportParams`` object.
+
+   .. rubric:: Examples
+
+   >>> LabelExportParams.print_default()
+
+
+.. py:method:: set_default(label_expression_for_nodal_components: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``LabelExportParams`` object.
+
+   :param label_expression_for_nodal_components: Label expression to export matching labels as Nodal Components in CDB. Non-matching labels will be exported as Element Components.
+   :type label_expression_for_nodal_components: str, optional
+
+
+
+
+
+
+
+.. vale on

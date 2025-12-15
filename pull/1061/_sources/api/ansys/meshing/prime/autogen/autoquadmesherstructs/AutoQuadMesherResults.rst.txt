@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AutoQuadMesherResults`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.AutoQuadMesherResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, failed_topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of auto quad mesher.
+
+   :param model: Model to create a ``AutoQuadMesherResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code if AutoQuadMesher operation is unsuccessful.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning code if AutoQuadMesher operation is partially successful.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type warning_codes: List[WarningCode], optional
+   :param failed_topo_face_ids: Ids of the failed topofaces during topology check.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type failed_topo_face_ids: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``AutoQuadMesherResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> auto_quad_mesher_results = prime.AutoQuadMesherResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: AutoQuadMesherResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code if AutoQuadMesher operation is unsuccessful.
+          * - :py:attr:`~failed_topo_face_ids`
+            - Ids of the failed topofaces during topology check.
+          * - :py:attr:`~warning_codes`
+            - Warning code if AutoQuadMesher operation is partially successful.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``AutoQuadMesherResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``AutoQuadMesherResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import AutoQuadMesherResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code if AutoQuadMesher operation is unsuccessful.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: failed_topo_face_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of the failed topofaces during topology check.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning code if AutoQuadMesher operation is partially successful.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``AutoQuadMesherResults`` object.
+
+   .. rubric:: Examples
+
+   >>> AutoQuadMesherResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, failed_topo_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``AutoQuadMesherResults`` object.
+
+   :param error_code: Error code if AutoQuadMesher operation is unsuccessful.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning code if AutoQuadMesher operation is partially successful.
+   :type warning_codes: List[WarningCode], optional
+   :param failed_topo_face_ids: Ids of the failed topofaces during topology check.
+   :type failed_topo_face_ids: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

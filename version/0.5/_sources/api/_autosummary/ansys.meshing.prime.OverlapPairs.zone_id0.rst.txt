@@ -1,0 +1,6 @@
+zone\_id0
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: OverlapPairs.zone_id0

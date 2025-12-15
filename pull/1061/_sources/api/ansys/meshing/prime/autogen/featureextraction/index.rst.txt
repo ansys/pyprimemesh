@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``featureextraction.py`` module
+===================================
+
+.. py:module:: ansys.meshing.prime.autogen.featureextraction
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: featureextraction
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.featureextraction.FeatureExtraction`
+            - Provide functions for all feature extraction operations like extracting edges zonlelets, tracing node paths.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> FeatureExtraction</api/ansys/meshing/prime/autogen/featureextraction/FeatureExtraction>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

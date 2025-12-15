@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AddThicknessResults`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, part_id: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Result structure associated with add thickness zonelets.
+
+   :param model: Model to create a ``AddThicknessResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param part_id: The created thickness part id.
+   :type part_id: int, optional
+   :param json_data: JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> add_thickness_results = prime.AddThicknessResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: AddThicknessResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of operation.
+          * - :py:attr:`~part_id`
+            - The created thickness part id.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``AddThicknessResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``AddThicknessResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import AddThicknessResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of operation.
+
+.. py:property:: part_id
+   :type: int
+
+
+   The created thickness part id.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``AddThicknessResults`` object.
+
+   .. rubric:: Examples
+
+   >>> AddThicknessResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, part_id: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``AddThicknessResults`` object.
+
+   :param error_code: Error code associated with failure of operation.
+   :type error_code: ErrorCode, optional
+   :param part_id: The created thickness part id.
+   :type part_id: int, optional
+
+
+
+
+
+
+
+.. vale on

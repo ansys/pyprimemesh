@@ -1,0 +1,366 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DetectAndTreatHolesParams`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.DetectAndTreatHolesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, detect_and_defeature_edges_near_holes: bool = None, detect_circular_holes: bool = None, detect_non_circular_holes: bool = None, offset_holes: bool = None, mesh_offset_faces: bool = None, detect_holes_params: DetectHolesParams = None, detect_circular_holes_params: DetectCircularHolesParams = None, detect_non_circular_holes_params: DetectNonCircularHolesParams = None, hole_proximity_tolerance: float = None, merge_face_normals_angle: float = None, edge_sharp_corner_angle: float = None, fragmented_edge_tolerance: float = None, offset_distance: float = None, edge_mesh_constant_size: float = None, surface_mesh_constant_size: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for detect and treat holes operation.
+
+   :param model: Model to create a ``DetectAndTreatHolesParams`` object with default parameters.
+   :type model: Model
+   :param detect_and_defeature_edges_near_holes: Option to detect and defeature edges near all holes.
+
+                                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_and_defeature_edges_near_holes: bool, optional
+   :param detect_circular_holes: Option to detect circular holes.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_circular_holes: bool, optional
+   :param detect_non_circular_holes: Option to detect non-circular holes.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_non_circular_holes: bool, optional
+   :param offset_holes: Option to offset holes.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type offset_holes: bool, optional
+   :param mesh_offset_faces: Option to mesh the offset holes.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type mesh_offset_faces: bool, optional
+   :param detect_holes_params: Parameters for detect holes operation.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_holes_params: DetectHolesParams, optional
+   :param detect_circular_holes_params: Parameters for detect circular holes operation.
+
+                                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_circular_holes_params: DetectCircularHolesParams, optional
+   :param detect_non_circular_holes_params: Parameters for detect non circular holes operation.
+
+                                            **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type detect_non_circular_holes_params: DetectNonCircularHolesParams, optional
+   :param hole_proximity_tolerance: Edge proximity tolerance for holes.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type hole_proximity_tolerance: float, optional
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_face_normals_angle: float, optional
+   :param edge_sharp_corner_angle: Merge edges when the angle between the edges are below the provided value.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_sharp_corner_angle: float, optional
+   :param fragmented_edge_tolerance: Fragmented edge length tolerance for merging edges.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fragmented_edge_tolerance: float, optional
+   :param offset_distance: Offset distance for creating offset edge.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type offset_distance: float, optional
+   :param edge_mesh_constant_size: Constant size used for edge meshing.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_mesh_constant_size: float, optional
+   :param surface_mesh_constant_size: Constant size used for surface meshing.
+
+                                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type surface_mesh_constant_size: float, optional
+   :param json_data: JSON dictionary to create a ``DetectAndTreatHolesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> detect_and_treat_holes_params = prime.DetectAndTreatHolesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DetectAndTreatHolesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~detect_and_defeature_edges_near_holes`
+            - Option to detect and defeature edges near all holes.
+          * - :py:attr:`~detect_circular_holes`
+            - Option to detect circular holes.
+          * - :py:attr:`~detect_circular_holes_params`
+            - Parameters for detect circular holes operation.
+          * - :py:attr:`~detect_holes_params`
+            - Parameters for detect holes operation.
+          * - :py:attr:`~detect_non_circular_holes`
+            - Option to detect non-circular holes.
+          * - :py:attr:`~detect_non_circular_holes_params`
+            - Parameters for detect non circular holes operation.
+          * - :py:attr:`~edge_mesh_constant_size`
+            - Constant size used for edge meshing.
+          * - :py:attr:`~edge_sharp_corner_angle`
+            - Merge edges when the angle between the edges are below the provided value.
+          * - :py:attr:`~fragmented_edge_tolerance`
+            - Fragmented edge length tolerance for merging edges.
+          * - :py:attr:`~hole_proximity_tolerance`
+            - Edge proximity tolerance for holes.
+          * - :py:attr:`~merge_face_normals_angle`
+            - Merge faces when the normal angle between the faces is below the provided value.
+          * - :py:attr:`~mesh_offset_faces`
+            - Option to mesh the offset holes.
+          * - :py:attr:`~offset_distance`
+            - Offset distance for creating offset edge.
+          * - :py:attr:`~offset_holes`
+            - Option to offset holes.
+          * - :py:attr:`~surface_mesh_constant_size`
+            - Constant size used for surface meshing.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DetectAndTreatHolesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DetectAndTreatHolesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import DetectAndTreatHolesParams
+
+Property detail
+---------------
+
+.. py:property:: detect_and_defeature_edges_near_holes
+   :type: bool
+
+
+   Option to detect and defeature edges near all holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: detect_circular_holes
+   :type: bool
+
+
+   Option to detect circular holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: detect_circular_holes_params
+   :type: DetectCircularHolesParams
+
+
+   Parameters for detect circular holes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: detect_holes_params
+   :type: DetectHolesParams
+
+
+   Parameters for detect holes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: detect_non_circular_holes
+   :type: bool
+
+
+   Option to detect non-circular holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: detect_non_circular_holes_params
+   :type: DetectNonCircularHolesParams
+
+
+   Parameters for detect non circular holes operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: edge_mesh_constant_size
+   :type: float
+
+
+   Constant size used for edge meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: edge_sharp_corner_angle
+   :type: float
+
+
+   Merge edges when the angle between the edges are below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fragmented_edge_tolerance
+   :type: float
+
+
+   Fragmented edge length tolerance for merging edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: hole_proximity_tolerance
+   :type: float
+
+
+   Edge proximity tolerance for holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_face_normals_angle
+   :type: float
+
+
+   Merge faces when the normal angle between the faces is below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: mesh_offset_faces
+   :type: bool
+
+
+   Option to mesh the offset holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: offset_distance
+   :type: float
+
+
+   Offset distance for creating offset edge.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: offset_holes
+   :type: bool
+
+
+   Option to offset holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: surface_mesh_constant_size
+   :type: float
+
+
+   Constant size used for surface meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DetectAndTreatHolesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DetectAndTreatHolesParams.print_default()
+
+
+.. py:method:: set_default(detect_and_defeature_edges_near_holes: bool = None, detect_circular_holes: bool = None, detect_non_circular_holes: bool = None, offset_holes: bool = None, mesh_offset_faces: bool = None, detect_holes_params: DetectHolesParams = None, detect_circular_holes_params: DetectCircularHolesParams = None, detect_non_circular_holes_params: DetectNonCircularHolesParams = None, hole_proximity_tolerance: float = None, merge_face_normals_angle: float = None, edge_sharp_corner_angle: float = None, fragmented_edge_tolerance: float = None, offset_distance: float = None, edge_mesh_constant_size: float = None, surface_mesh_constant_size: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DetectAndTreatHolesParams`` object.
+
+   :param detect_and_defeature_edges_near_holes: Option to detect and defeature edges near all holes.
+   :type detect_and_defeature_edges_near_holes: bool, optional
+   :param detect_circular_holes: Option to detect circular holes.
+   :type detect_circular_holes: bool, optional
+   :param detect_non_circular_holes: Option to detect non-circular holes.
+   :type detect_non_circular_holes: bool, optional
+   :param offset_holes: Option to offset holes.
+   :type offset_holes: bool, optional
+   :param mesh_offset_faces: Option to mesh the offset holes.
+   :type mesh_offset_faces: bool, optional
+   :param detect_holes_params: Parameters for detect holes operation.
+   :type detect_holes_params: DetectHolesParams, optional
+   :param detect_circular_holes_params: Parameters for detect circular holes operation.
+   :type detect_circular_holes_params: DetectCircularHolesParams, optional
+   :param detect_non_circular_holes_params: Parameters for detect non circular holes operation.
+   :type detect_non_circular_holes_params: DetectNonCircularHolesParams, optional
+   :param hole_proximity_tolerance: Edge proximity tolerance for holes.
+   :type hole_proximity_tolerance: float, optional
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+   :type merge_face_normals_angle: float, optional
+   :param edge_sharp_corner_angle: Merge edges when the angle between the edges are below the provided value.
+   :type edge_sharp_corner_angle: float, optional
+   :param fragmented_edge_tolerance: Fragmented edge length tolerance for merging edges.
+   :type fragmented_edge_tolerance: float, optional
+   :param offset_distance: Offset distance for creating offset edge.
+   :type offset_distance: float, optional
+   :param edge_mesh_constant_size: Constant size used for edge meshing.
+   :type edge_mesh_constant_size: float, optional
+   :param surface_mesh_constant_size: Constant size used for surface meshing.
+   :type surface_mesh_constant_size: float, optional
+
+
+
+
+
+
+
+.. vale on

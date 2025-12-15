@@ -1,0 +1,177 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ZoneMeshResult`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.ZoneMeshResult(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, zone_name: str = None, element_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, centroids: ansys.meshing.prime.params.primestructs.Iterable[float] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results containing zone-wise mesh information.
+
+   Contains zone name, element ids and their corresponding data (such as centroid coordinates)
+   for elements within a zone.
+
+   :param model: Model to create a ``ZoneMeshResult`` object with default parameters.
+   :type model: Model
+   :param zone_name: Name of the zone where the elements belong to.
+
+                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type zone_name: str, optional
+   :param element_ids: List of element ids in the zone.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type element_ids: Iterable[int], optional
+   :param centroids: Flattened array of centroid coordinates [x1,y1,z1,x2,y2,z2,...].
+
+                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type centroids: Iterable[float], optional
+   :param json_data: JSON dictionary to create a ``ZoneMeshResult`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> zone_mesh_result = prime.ZoneMeshResult(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ZoneMeshResult
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~centroids`
+            - Flattened array of centroid coordinates [x1,y1,z1,x2,y2,z2,...].
+          * - :py:attr:`~element_ids`
+            - List of element ids in the zone.
+          * - :py:attr:`~zone_name`
+            - Name of the zone where the elements belong to.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ZoneMeshResult`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ZoneMeshResult`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ZoneMeshResult
+
+Property detail
+---------------
+
+.. py:property:: centroids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Flattened array of centroid coordinates [x1,y1,z1,x2,y2,z2,...].
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: element_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of element ids in the zone.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: zone_name
+   :type: str
+
+
+   Name of the zone where the elements belong to.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ZoneMeshResult`` object.
+
+   .. rubric:: Examples
+
+   >>> ZoneMeshResult.print_default()
+
+
+.. py:method:: set_default(zone_name: str = None, element_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, centroids: ansys.meshing.prime.params.primestructs.Iterable[float] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ZoneMeshResult`` object.
+
+   :param zone_name: Name of the zone where the elements belong to.
+   :type zone_name: str, optional
+   :param element_ids: List of element ids in the zone.
+   :type element_ids: Iterable[int], optional
+   :param centroids: Flattened array of centroid coordinates [x1,y1,z1,x2,y2,z2,...].
+   :type centroids: Iterable[float], optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿CM
+==
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LengthUnit.CM

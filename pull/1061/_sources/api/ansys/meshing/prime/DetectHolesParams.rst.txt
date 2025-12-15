@@ -1,0 +1,206 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DetectHolesParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.DetectHolesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, max_radius_circular_holes: float = None, min_radius_circular_holes: float = None, max_hole_length: float = None, min_hole_length: float = None, allow_curved_topo_faces: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for detect holes operation.
+
+   :param model: Model to create a ``DetectHolesParams`` object with default parameters.
+   :type model: Model
+   :param max_radius_circular_holes: Maximum radius of circular holes.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type max_radius_circular_holes: float, optional
+   :param min_radius_circular_holes: Minimum radius of circular holes.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type min_radius_circular_holes: float, optional
+   :param max_hole_length: Maximum length of holes.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type max_hole_length: float, optional
+   :param min_hole_length: Minimum length of holes.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type min_hole_length: float, optional
+   :param allow_curved_topo_faces: Option to allow holes in curved topoface.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type allow_curved_topo_faces: bool, optional
+   :param json_data: JSON dictionary to create a ``DetectHolesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> detect_holes_params = prime.DetectHolesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DetectHolesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~allow_curved_topo_faces`
+            - Option to allow holes in curved topoface.
+          * - :py:attr:`~max_hole_length`
+            - Maximum length of holes.
+          * - :py:attr:`~max_radius_circular_holes`
+            - Maximum radius of circular holes.
+          * - :py:attr:`~min_hole_length`
+            - Minimum length of holes.
+          * - :py:attr:`~min_radius_circular_holes`
+            - Minimum radius of circular holes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DetectHolesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DetectHolesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DetectHolesParams
+
+Property detail
+---------------
+
+.. py:property:: allow_curved_topo_faces
+   :type: bool
+
+
+   Option to allow holes in curved topoface.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: max_hole_length
+   :type: float
+
+
+   Maximum length of holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: max_radius_circular_holes
+   :type: float
+
+
+   Maximum radius of circular holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: min_hole_length
+   :type: float
+
+
+   Minimum length of holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: min_radius_circular_holes
+   :type: float
+
+
+   Minimum radius of circular holes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DetectHolesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DetectHolesParams.print_default()
+
+
+.. py:method:: set_default(max_radius_circular_holes: float = None, min_radius_circular_holes: float = None, max_hole_length: float = None, min_hole_length: float = None, allow_curved_topo_faces: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DetectHolesParams`` object.
+
+   :param max_radius_circular_holes: Maximum radius of circular holes.
+   :type max_radius_circular_holes: float, optional
+   :param min_radius_circular_holes: Minimum radius of circular holes.
+   :type min_radius_circular_holes: float, optional
+   :param max_hole_length: Maximum length of holes.
+   :type max_hole_length: float, optional
+   :param min_hole_length: Minimum length of holes.
+   :type min_hole_length: float, optional
+   :param allow_curved_topo_faces: Option to allow holes in curved topoface.
+   :type allow_curved_topo_faces: bool, optional
+
+
+
+
+
+
+
+.. vale on

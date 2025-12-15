@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VTComposerResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using VTComposerResults.print_default
+
+   ansys.meshing.prime.VTComposerResults.print_default

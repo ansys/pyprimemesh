@@ -1,0 +1,6 @@
+print\_id
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Part.print_id

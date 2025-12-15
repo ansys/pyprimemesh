@@ -1,0 +1,104 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FaceQualityMeasure`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.commontypes.FaceQualityMeasure
+
+
+
+   The type of face quality measures to check face quality metrics.
+
+
+
+
+.. py:currentmodule:: FaceQualityMeasure
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ASPECTRATIO`
+            - The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst).
+          * - :py:attr:`~ELEMENTQUALITY`
+            - The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst).
+          * - :py:attr:`~SIZECHANGE`
+            - Size Change is the maximum ratio of the area of each neighboring face element to the area of face element when the area of the face element is smaller than the neighbor. The minimum value for size change is 1.
+          * - :py:attr:`~SKEWNESS`
+            - The Skewness metric ranges between 0 (worst) and 1 (best). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst).
+          * - :py:attr:`~WARP`
+            - Face quality metric to check warping factor.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.commontypes import FaceQualityMeasure
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ASPECTRATIO
+   :value: 5
+
+
+   The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst).
+
+.. py:attribute:: ELEMENTQUALITY
+   :value: 50
+
+
+   The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst).
+
+.. py:attribute:: SIZECHANGE
+   :value: 2
+
+
+   Size Change is the maximum ratio of the area of each neighboring face element to the area of face element when the area of the face element is smaller than the neighbor. The minimum value for size change is 1.
+
+.. py:attribute:: SKEWNESS
+   :value: 0
+
+
+   The Skewness metric ranges between 0 (worst) and 1 (best). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst).
+
+.. py:attribute:: WARP
+   :value: 7
+
+
+   Face quality metric to check warping factor.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

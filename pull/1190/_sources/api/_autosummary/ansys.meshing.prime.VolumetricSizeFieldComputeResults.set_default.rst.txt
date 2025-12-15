@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumetricSizeFieldComputeResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using VolumetricSizeFieldComputeResults.set_default
+
+   ansys.meshing.prime.VolumetricSizeFieldComputeResults.set_default

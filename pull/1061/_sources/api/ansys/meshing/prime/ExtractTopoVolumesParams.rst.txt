@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractTopoVolumesParams`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.ExtractTopoVolumesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, zone_name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to extract flow topovolumes.
+
+   :param model: Model to create a ``ExtractTopoVolumesParams`` object with default parameters.
+   :type model: Model
+   :param zone_name: Specifies zone name to associate extracted flow topovolumes.
+   :type zone_name: str, optional
+   :param json_data: JSON dictionary to create a ``ExtractTopoVolumesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extract_topo_volumes_params = prime.ExtractTopoVolumesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractTopoVolumesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~zone_name`
+            - Specifies zone name to associate extracted flow topovolumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractTopoVolumesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractTopoVolumesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ExtractTopoVolumesParams
+
+Property detail
+---------------
+
+.. py:property:: zone_name
+   :type: str
+
+
+   Specifies zone name to associate extracted flow topovolumes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractTopoVolumesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractTopoVolumesParams.print_default()
+
+
+.. py:method:: set_default(zone_name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractTopoVolumesParams`` object.
+
+   :param zone_name: Specifies zone name to associate extracted flow topovolumes.
+   :type zone_name: str, optional
+
+
+
+
+
+
+
+.. vale on

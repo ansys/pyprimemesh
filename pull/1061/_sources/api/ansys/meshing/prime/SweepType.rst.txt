@@ -1,0 +1,102 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SweepType`
+==================
+
+
+.. py:class:: ansys.meshing.prime.SweepType
+
+
+
+   Provides the Sweep Mesh Decomposition type.
+
+
+
+
+.. py:currentmodule:: SweepType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~MEDIALAXIS`
+            - Creates swept blocks on axisymmetric sweepable geometries.
+          * - :py:attr:`~PROGRAMCONTROLLED`
+            - Multizone chooses the best decomposition method based on geometry analysis and decomposition tries.
+          * - :py:attr:`~STANDARD`
+            - Multizone create mapped and swept blocks if possible (should be default).
+          * - :py:attr:`~THINSWEEP`
+            - Creates swept blocks on thin wall geometries.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SweepType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: MEDIALAXIS
+   :value: 3
+
+
+   Creates swept blocks on axisymmetric sweepable geometries.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: PROGRAMCONTROLLED
+   :value: 4
+
+
+   Multizone chooses the best decomposition method based on geometry analysis and decomposition tries.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: STANDARD
+   :value: 1
+
+
+   Multizone create mapped and swept blocks if possible (should be default).
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: THINSWEEP
+   :value: 2
+
+
+   Creates swept blocks on thin wall geometries.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

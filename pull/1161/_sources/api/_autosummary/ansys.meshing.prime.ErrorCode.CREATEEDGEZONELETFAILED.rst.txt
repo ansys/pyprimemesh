@@ -1,0 +1,6 @@
+CREATEEDGEZONELETFAILED
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATEEDGEZONELETFAILED

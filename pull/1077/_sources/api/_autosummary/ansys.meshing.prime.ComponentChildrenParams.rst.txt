@@ -1,0 +1,38 @@
+.. vale off
+
+
+
+
+
+
+
+ComponentChildrenParams
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ComponentChildrenParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      ComponentChildrenParams.print_default
+      ComponentChildrenParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ComponentChildrenParams
+
+    ansys.meshing.prime.ComponentChildrenParams
+
+.. vale on

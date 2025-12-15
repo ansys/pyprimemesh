@@ -1,0 +1,90 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeScope`
+====================
+
+
+.. py:class:: ansys.meshing.prime.lucid.VolumeScope(part_expression: str = '*', entity_expression: str = '*', scope_evaluation_type: ansys.meshing.prime.autogen.controlstructs.ScopeEvaluationType = ScopeEvaluationType.ZONES)
+
+
+
+   VolumeScope is one of the classes in Lucid API.
+
+   This class is meant for beginners to meshing. This class is used to define
+   a scope for operation on volumes.
+
+
+
+
+
+.. py:currentmodule:: VolumeScope
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_scope_definition`
+            - Get the scope definition of the scope.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.lucid import VolumeScope
+
+
+
+Method detail
+-------------
+
+.. py:method:: __str__() -> str
+
+.. py:method:: get_scope_definition(model: ansys.meshing.prime.core.model.Model) -> ansys.meshing.prime.autogen.controlstructs.ScopeDefinition
+
+   Get the scope definition of the scope.
+
+   :param model: PyPrimeMesh model.
+   :type model: Model
+
+   :returns: Returns the scope definition.
+   :rtype: ScopeDefinition
+
+
+
+
+
+
+
+.. vale on

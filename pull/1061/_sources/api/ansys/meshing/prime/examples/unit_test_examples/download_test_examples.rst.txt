@@ -1,0 +1,27 @@
+ansys.meshing.prime.examples.unit_test_examples.download_test_examples
+======================================================================
+
+.. py:function:: ansys.meshing.prime.examples.unit_test_examples.download_test_examples(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the example files necessary for unit testing.
+
+   :param destination: Path to download the test example files to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to always download the test example files. The default is
+                 ``False``, in which case if the test example files are cached, they
+                 are reused.
+   :type force: bool, optional
+
+   :returns: Local paths to the downloaded test example files.
+   :rtype: List[str]
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     examples = prime_examples.unit_test_examples.download_test_examples()
+

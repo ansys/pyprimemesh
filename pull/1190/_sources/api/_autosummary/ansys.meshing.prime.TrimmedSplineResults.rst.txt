@@ -1,0 +1,39 @@
+.. vale off
+
+TrimmedSplineResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TrimmedSplineResults
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TrimmedSplineResults.print_default
+      TrimmedSplineResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TrimmedSplineResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TrimmedSplineResults
+
+    ansys.meshing.prime.TrimmedSplineResults
+
+.. vale on

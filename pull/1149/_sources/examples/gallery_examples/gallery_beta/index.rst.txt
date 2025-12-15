@@ -1,0 +1,45 @@
+
+
+.. _sphx_glr_examples_gallery_examples_gallery_beta:
+
+Examples using beta APIs
+========================
+These examples use beta APIs and as such their behavior and implementation may change in future.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Summary: This example demonstrates how to mesh a set of solder balls with mainly hexahedral elements. The solder is initially modelled as cylindrical to allow meshing using stacker and then local match morph controls are applied to recover the spherical shapes.">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/gallery_beta/images/thumb/sphx_glr_11_solder_ball_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_gallery_beta_11_solder_ball.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh a set of solder balls (beta)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/gallery_beta/11_solder_ball
+

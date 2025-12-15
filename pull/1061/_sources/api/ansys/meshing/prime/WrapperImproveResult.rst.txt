@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapperImproveResult`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.WrapperImproveResult(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_skew_found: int = None, remaining_skew_faces: int = None, n_face_intersections_found: int = None, unresolved_face_intersections: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results structure associated to improve quality.
+
+   :param model: Model to create a ``WrapperImproveResult`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with a wrapper operation.
+   :type error_code: ErrorCode, optional
+   :param n_skew_found: Number of skewed faces found.
+   :type n_skew_found: int, optional
+   :param remaining_skew_faces: Number of remaining skew faces.
+   :type remaining_skew_faces: int, optional
+   :param n_face_intersections_found: Number of self intersections found.
+   :type n_face_intersections_found: int, optional
+   :param unresolved_face_intersections: Number of remaining self intersections.
+   :type unresolved_face_intersections: int, optional
+   :param json_data: JSON dictionary to create a ``WrapperImproveResult`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> wrapper_improve_result = prime.WrapperImproveResult(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: WrapperImproveResult
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with a wrapper operation.
+          * - :py:attr:`~n_face_intersections_found`
+            - Number of self intersections found.
+          * - :py:attr:`~n_skew_found`
+            - Number of skewed faces found.
+          * - :py:attr:`~remaining_skew_faces`
+            - Number of remaining skew faces.
+          * - :py:attr:`~unresolved_face_intersections`
+            - Number of remaining self intersections.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``WrapperImproveResult`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``WrapperImproveResult`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import WrapperImproveResult
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with a wrapper operation.
+
+.. py:property:: n_face_intersections_found
+   :type: int
+
+
+   Number of self intersections found.
+
+.. py:property:: n_skew_found
+   :type: int
+
+
+   Number of skewed faces found.
+
+.. py:property:: remaining_skew_faces
+   :type: int
+
+
+   Number of remaining skew faces.
+
+.. py:property:: unresolved_face_intersections
+   :type: int
+
+
+   Number of remaining self intersections.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``WrapperImproveResult`` object.
+
+   .. rubric:: Examples
+
+   >>> WrapperImproveResult.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_skew_found: int = None, remaining_skew_faces: int = None, n_face_intersections_found: int = None, unresolved_face_intersections: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``WrapperImproveResult`` object.
+
+   :param error_code: Error code associated with a wrapper operation.
+   :type error_code: ErrorCode, optional
+   :param n_skew_found: Number of skewed faces found.
+   :type n_skew_found: int, optional
+   :param remaining_skew_faces: Number of remaining skew faces.
+   :type remaining_skew_faces: int, optional
+   :param n_face_intersections_found: Number of self intersections found.
+   :type n_face_intersections_found: int, optional
+   :param unresolved_face_intersections: Number of remaining self intersections.
+   :type unresolved_face_intersections: int, optional
+
+
+
+
+
+
+
+.. vale on

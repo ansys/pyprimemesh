@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeControlParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.volumecontrolstructs.VolumeControlParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, cell_zonelet_type: ansys.meshing.prime.params.primestructs.CellZoneletType = None, skip_hexcore: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Volume control parameters are used to define the volume type in the volume control.
+
+   :param model: Model to create a ``VolumeControlParams`` object with default parameters.
+   :type model: Model
+   :param cell_zonelet_type: Cell zonelet type is used to define the type of the associated volume.
+   :type cell_zonelet_type: CellZoneletType, optional
+   :param skip_hexcore: Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+   :type skip_hexcore: bool, optional
+   :param json_data: JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> volume_control_params = prime.VolumeControlParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VolumeControlParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~cell_zonelet_type`
+            - Cell zonelet type is used to define the type of the associated volume.
+          * - :py:attr:`~skip_hexcore`
+            - Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VolumeControlParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VolumeControlParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
+
+Property detail
+---------------
+
+.. py:property:: cell_zonelet_type
+   :type: ansys.meshing.prime.params.primestructs.CellZoneletType
+
+
+   Cell zonelet type is used to define the type of the associated volume.
+
+.. py:property:: skip_hexcore
+   :type: bool
+
+
+   Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VolumeControlParams`` object.
+
+   .. rubric:: Examples
+
+   >>> VolumeControlParams.print_default()
+
+
+.. py:method:: set_default(cell_zonelet_type: ansys.meshing.prime.params.primestructs.CellZoneletType = None, skip_hexcore: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VolumeControlParams`` object.
+
+   :param cell_zonelet_type: Cell zonelet type is used to define the type of the associated volume.
+   :type cell_zonelet_type: CellZoneletType, optional
+   :param skip_hexcore: Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+   :type skip_hexcore: bool, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿target
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.target

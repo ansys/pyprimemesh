@@ -1,0 +1,6 @@
+control\_points
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.control_points

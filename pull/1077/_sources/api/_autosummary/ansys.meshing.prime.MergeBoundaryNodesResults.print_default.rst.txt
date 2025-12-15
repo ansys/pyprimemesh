@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeBoundaryNodesResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using MergeBoundaryNodesResults.print_default
+
+   ansys.meshing.prime.MergeBoundaryNodesResults.print_default

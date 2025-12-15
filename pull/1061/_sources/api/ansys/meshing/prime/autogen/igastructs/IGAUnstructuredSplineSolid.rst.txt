@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`IGAUnstructuredSplineSolid`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.igastructs.IGAUnstructuredSplineSolid(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, id: int = None, degree: int = None, invalid_jacobian_elements_count: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Information of unstructured spline solid.
+
+   :param model: Model to create a ``IGAUnstructuredSplineSolid`` object with default parameters.
+   :type model: Model
+   :param id: Id of the unstructured spline solid.
+
+              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type id: int, optional
+   :param degree: Degree of the spline solid.
+
+                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type degree: int, optional
+   :param invalid_jacobian_elements_count: Count of elements with negative jacobian.
+
+                                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type invalid_jacobian_elements_count: int, optional
+   :param json_data: JSON dictionary to create a ``IGAUnstructuredSplineSolid`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> iga_unstructured_spline_solid = prime.IGAUnstructuredSplineSolid(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: IGAUnstructuredSplineSolid
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~degree`
+            - Degree of the spline solid.
+          * - :py:attr:`~id`
+            - Id of the unstructured spline solid.
+          * - :py:attr:`~invalid_jacobian_elements_count`
+            - Count of elements with negative jacobian.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``IGAUnstructuredSplineSolid`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``IGAUnstructuredSplineSolid`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.igastructs import IGAUnstructuredSplineSolid
+
+Property detail
+---------------
+
+.. py:property:: degree
+   :type: int
+
+
+   Degree of the spline solid.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: id
+   :type: int
+
+
+   Id of the unstructured spline solid.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: invalid_jacobian_elements_count
+   :type: int
+
+
+   Count of elements with negative jacobian.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``IGAUnstructuredSplineSolid`` object.
+
+   .. rubric:: Examples
+
+   >>> IGAUnstructuredSplineSolid.print_default()
+
+
+.. py:method:: set_default(id: int = None, degree: int = None, invalid_jacobian_elements_count: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``IGAUnstructuredSplineSolid`` object.
+
+   :param id: Id of the unstructured spline solid.
+   :type id: int, optional
+   :param degree: Degree of the spline solid.
+   :type degree: int, optional
+   :param invalid_jacobian_elements_count: Count of elements with negative jacobian.
+   :type invalid_jacobian_elements_count: int, optional
+
+
+
+
+
+
+
+.. vale on

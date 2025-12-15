@@ -1,0 +1,117 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``materialpointmanagerstructs.py`` module
+=============================================
+
+.. py:module:: ansys.meshing.prime.autogen.materialpointmanagerstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: materialpointmanagerstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanagerstructs.CreateMaterialPointParams`
+            - Defines parameters to create material point.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanagerstructs.CreateMaterialPointResults`
+            - Results structure associated with create material point operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanagerstructs.DeleteMaterialPointResults`
+            - Results associated with delete material point operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.materialpointmanagerstructs.MaterialPointType`
+            - Defines define type of material point.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CreateMaterialPointParams</api/ansys/meshing/prime/autogen/materialpointmanagerstructs/CreateMaterialPointParams>
+    <span class="nf nf-cod-symbol_class"></span> CreateMaterialPointResults</api/ansys/meshing/prime/autogen/materialpointmanagerstructs/CreateMaterialPointResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteMaterialPointResults</api/ansys/meshing/prime/autogen/materialpointmanagerstructs/DeleteMaterialPointResults>
+    <span class="nf nf-cod-symbol_class"></span> MaterialPointType</api/ansys/meshing/prime/autogen/materialpointmanagerstructs/MaterialPointType>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

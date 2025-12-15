@@ -1,0 +1,6 @@
+NONE
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: EdgeConnectType.NONE

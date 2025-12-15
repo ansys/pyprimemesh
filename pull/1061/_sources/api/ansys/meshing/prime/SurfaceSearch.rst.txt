@@ -1,0 +1,338 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceSearch`
+======================
+
+
+.. py:class:: ansys.meshing.prime.SurfaceSearch(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   SurfaceSearch allows you to check surface mesh quality.
+
+   SurfaceSearch performs surface mesh quality check based on different face quality measures.
+
+
+   :param model: Server model to create SurfaceSearch object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceSearch
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~check_face_deviation`
+            - Gets information regarding the number of faces with a deviation higher than the tolerance.
+          * - :py:attr:`~get_search_info_by_register_id`
+            - Gets search information regarding registered face elements of provided zonelets using a register id.
+          * - :py:attr:`~get_surface_diagnostic_summary`
+            - Gets the surface diagnostic summary.
+          * - :py:attr:`~get_surface_quality_summary`
+            - Gets the surface quality summary.
+          * - :py:attr:`~search_zonelets_by_folds`
+            - Search face zonelets to identify folds.
+          * - :py:attr:`~search_zonelets_by_invalid_normals`
+            - Search face zonelets to identify faces with invalid normals.
+          * - :py:attr:`~search_zonelets_by_quality`
+            - Search face zonelets with the provided quality parameters and applies register id on face elements found.
+          * - :py:attr:`~search_zonelets_by_self_intersections`
+            - Search face zonelets to identify face elements intersecting with each other.
+          * - :py:attr:`~search_zonelets_by_spikes`
+            - Search face zonelets to identify spikes.
+          * - :py:attr:`~search_zonelets_by_thin_strips`
+            - Search face zonelets to identify face element of thin strips(single layer of triangles between features).
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for SurfaceSearch.
+          * - :py:attr:`~__exit__`
+            - Exit context for SurfaceSearch.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SurfaceSearch
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for SurfaceSearch.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for SurfaceSearch.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: check_face_deviation(source_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], target_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.CheckFaceDeviationParams) -> ansys.meshing.prime.params.primestructs.CheckFaceDeviationResults
+
+   Gets information regarding the number of faces with a deviation higher than the tolerance.
+
+
+   :param source_face_zonelets: Scope of reference zonelets from which the deviation is checked.
+   :type source_face_zonelets: Iterable[int]
+   :param target_face_zonelets: Scope of target zonelets for which the deviation is checked.
+   :type target_face_zonelets: Iterable[int]
+   :param params: Parameters for retrieving information while performing check face deviation operation.
+   :type params: CheckFaceDeviationParams
+
+   :returns: Returns the CheckFaceDeviationResults.
+   :rtype: CheckFaceDeviationResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> params = prime.CheckFaceDeviationParams()
+   >>> results = surf_search.check_face_deviation(source_scope, reference_scope, params)
+
+
+.. py:method:: get_search_info_by_register_id(face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, params: ansys.meshing.prime.params.primestructs.SearchInfoByRegisterIdParams) -> ansys.meshing.prime.params.primestructs.SearchInfoByRegisterIdResults
+
+   Gets search information regarding registered face elements of provided zonelets using a register id.
+
+
+   :param face_zonelets: Ids of the face zonelets to search in.
+   :type face_zonelets: Iterable[int]
+   :param register_id: An integer register id.
+   :type register_id: int
+   :param params: Parameters for retrieveing information on registered faces.
+   :type params: SearchInfoByRegisterIdParams
+
+   :returns: Returns the SearchInfoByRegisterIdResults.
+   :rtype: SearchInfoByRegisterIdResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> params = prime.SearchInfoByRegisterIdParams(model=model)
+   >>> results = surf_search.get_search_info_by_register_id(face_zonelets, register_id, params)
+
+
+.. py:method:: get_surface_diagnostic_summary(params: ansys.meshing.prime.params.primestructs.SurfaceDiagnosticSummaryParams) -> ansys.meshing.prime.params.primestructs.SurfaceDiagnosticSummaryResults
+
+   Gets the surface diagnostic summary.
+
+   Diagnose surface connectivity for the given scope and controls provided by the surface diagnostic summary parameters.
+
+   :param params: Surface diagnostic summary parameters.
+   :type params: SurfaceDiagnosticSummaryParams
+
+   :returns: Returns the SurfaceDiagnosticSummaryResults.
+   :rtype: SurfaceDiagnosticSummaryResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.get_surface_diagnostics_summary(SurfaceDiagnosticSummaryParams(model=model))
+
+
+.. py:method:: get_surface_quality_summary(params: ansys.meshing.prime.params.primestructs.SurfaceQualitySummaryParams) -> ansys.meshing.prime.params.primestructs.SurfaceQualitySummaryResults
+
+   Gets the surface quality summary.
+
+   Diagnose surface quality for the given scope and face quality measures provided by the surface quality summary parameters.
+   Uses default quality limit if not specified with params.
+
+   :param params: Surface quality summary parameters.
+   :type params: SurfaceQualitySummaryParams
+
+   :returns: Returns the SurfaceQualitySummaryResults.
+   :rtype: SurfaceQualitySummaryResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.get_surface_quality_summary(SurfaceQualitySummaryParams(model=model))
+
+
+.. py:method:: search_zonelets_by_folds(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, params: ansys.meshing.prime.params.primestructs.SearchByFoldsParams) -> ansys.meshing.prime.params.primestructs.SearchByFoldsResults
+
+   Search face zonelets to identify folds.
+
+   Search face zonelets to identify folds with provided folds parameters.
+
+   :param part_id: Id of part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id of register.
+   :type register_id: int
+   :param params: Parameters used to identify folds.
+   :type params: SearchByFoldsParams
+
+   :returns: Returns the SearchByFoldsResults.
+   :rtype: SearchByFoldsResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.search_zonelets_by_folds(part_id, face_zonelets, register_id, params)
+
+
+.. py:method:: search_zonelets_by_invalid_normals(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int) -> ansys.meshing.prime.params.primestructs.SearchByInvalidNormalsResults
+
+   Search face zonelets to identify faces with invalid normals.
+
+   Search face zonelets to identify faces with invalid normals.
+
+   :param part_id: Id of part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id of register.
+   :type register_id: int
+
+   :returns: Returns the SearchByInvalidNormalsResults.
+   :rtype: SearchByInvalidNormalsResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.search_zonelets_by_invalid_normals(part_id, face_zonelets, register_id)
+
+
+.. py:method:: search_zonelets_by_quality(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, params: ansys.meshing.prime.params.primestructs.SearchByQualityParams) -> ansys.meshing.prime.params.primestructs.SearchByQualityResults
+
+   Search face zonelets with the provided quality parameters and applies register id on face elements found.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param face_zonelets: Ids of the face zonelets whose element search is performed.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id used to register face elements found by the search.
+   :type register_id: int
+   :param params: Quality parameters used to search face elements.
+   :type params: SearchByQualityParams
+
+   :returns: Returns the SearchByQualityResults.
+   :rtype: SearchByQualityResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = prime.SurfaceSearch(model=model)
+   >>> results = surf_search.search_zonelets_by_quality(part_id, face_zonelets, register_id, prime.SearchByQualityParams(model=model))
+
+
+.. py:method:: search_zonelets_by_self_intersections(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, params: ansys.meshing.prime.params.primestructs.SearchBySelfIntersectionParams) -> ansys.meshing.prime.params.primestructs.SearchByIntersectionResults
+
+   Search face zonelets to identify face elements intersecting with each other.
+
+
+   :param part_id: Id of part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id of register.
+   :type register_id: int
+   :param params: Parameters used to identify face elements by self intersection.
+   :type params: SearchBySelfIntersectionParams
+
+   :returns: Returns the SearchByIntersectionResults.
+   :rtype: SearchByIntersectionResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.search_zonelets_by_self_intersections(part_id, face_zonelets, register_id, params)
+
+
+.. py:method:: search_zonelets_by_spikes(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, params: ansys.meshing.prime.params.primestructs.SearchBySpikeParams) -> ansys.meshing.prime.params.primestructs.SearchBySpikeResults
+
+   Search face zonelets to identify spikes.
+
+   Search face zonelets to identify spikes with provided spike parameters
+
+   :param part_id: Id of part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id of register.
+   :type register_id: int
+   :param params: Parameters used to identify spikes.
+   :type params: SearchBySpikeParams
+
+   :returns: Returns the SearchBySpikeResults.
+   :rtype: SearchBySpikeResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.search_zonelets_by_spikes(part_id, face_zonelets, register_id, params)
+
+
+.. py:method:: search_zonelets_by_thin_strips(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], register_id: int, params: ansys.meshing.prime.params.primestructs.SearchByThinStripParams) -> ansys.meshing.prime.params.primestructs.SearchByThinStripResults
+
+   Search face zonelets to identify face element of thin strips(single layer of triangles between features).
+
+
+   :param part_id: Id of part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param register_id: Id of register.
+   :type register_id: int
+   :param params: Parameters used to identify face elements of thin strips.
+   :type params: SearchByThinStripParams
+
+   :returns: Returns the SearchByThinStripResults.
+   :rtype: SearchByThinStripResults
+
+   .. rubric:: Examples
+
+   >>> surf_search = SurfaceSearch(model=model)
+   >>> results = surf_search.search_zonelets_by_thin_strips(part_id, face_zonelets, register_id, params)
+
+
+
+
+
+
+
+.. vale on

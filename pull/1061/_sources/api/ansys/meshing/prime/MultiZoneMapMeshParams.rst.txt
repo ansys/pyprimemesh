@@ -1,0 +1,142 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MultiZoneMapMeshParams`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.MultiZoneMapMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, scope: ScopeDefinition = None, json_data: dict = None, **kwargs)
+
+
+
+   Define controlling parameters for the map mesh using MultiZone.
+
+   :param model: Model to create a ``MultiZoneMapMeshParams`` object with default parameters.
+   :type model: Model
+   :param scope: Scope used for MultiZone map mesh control.
+
+                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type scope: ScopeDefinition, optional
+   :param json_data: JSON dictionary to create a ``MultiZoneMapMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> multi_zone_map_mesh_params = prime.MultiZoneMapMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MultiZoneMapMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~scope`
+            - Scope used for MultiZone map mesh control.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MultiZoneMapMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MultiZoneMapMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MultiZoneMapMeshParams
+
+Property detail
+---------------
+
+.. py:property:: scope
+   :type: ScopeDefinition
+
+
+   Scope used for MultiZone map mesh control.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MultiZoneMapMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MultiZoneMapMeshParams.print_default()
+
+
+.. py:method:: set_default(scope: ScopeDefinition = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MultiZoneMapMeshParams`` object.
+
+   :param scope: Scope used for MultiZone map mesh control.
+   :type scope: ScopeDefinition, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿PRISMMESHFAILED
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PRISMMESHFAILED

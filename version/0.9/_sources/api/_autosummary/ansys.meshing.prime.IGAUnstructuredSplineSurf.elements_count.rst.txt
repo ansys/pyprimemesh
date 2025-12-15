@@ -1,0 +1,6 @@
+elements\_count
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.elements_count

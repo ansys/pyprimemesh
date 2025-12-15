@@ -1,0 +1,6 @@
+detect\_and\_defeature\_edges\_near\_holes
+==========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.detect_and_defeature_edges_near_holes

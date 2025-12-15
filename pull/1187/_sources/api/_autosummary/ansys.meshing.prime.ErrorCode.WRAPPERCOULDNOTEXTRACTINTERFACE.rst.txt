@@ -1,0 +1,6 @@
+WRAPPERCOULDNOTEXTRACTINTERFACE
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCOULDNOTEXTRACTINTERFACE

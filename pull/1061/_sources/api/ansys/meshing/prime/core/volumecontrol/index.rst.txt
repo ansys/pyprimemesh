@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``volumecontrol.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.core.volumecontrol
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: volumecontrol
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.volumecontrol.VolumeControl`
+            - Defines the scope and type of volume mesh to generate.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> VolumeControl</api/ansys/meshing/prime/core/volumecontrol/VolumeControl>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing VolumeControl related classes and methods.
+
+
+
+
+
+
+
+
+
+.. vale on

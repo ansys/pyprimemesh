@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ImportMapdlCdbParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, drop_mid_nodes: bool = None, append: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control MAPDL CDB import settings.
+
+   :param model: Model to create a ``ImportMapdlCdbParams`` object with default parameters.
+   :type model: Model
+   :param drop_mid_nodes: Option to import quadratic mesh elements as linear by skipping mid nodes.
+   :type drop_mid_nodes: bool, optional
+   :param append: Option to append imported cdb into existing model.
+   :type append: bool, optional
+   :param json_data: JSON dictionary to create a ``ImportMapdlCdbParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> import_mapdl_cdb_params = prime.ImportMapdlCdbParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ImportMapdlCdbParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~append`
+            - Option to append imported cdb into existing model.
+          * - :py:attr:`~drop_mid_nodes`
+            - Option to import quadratic mesh elements as linear by skipping mid nodes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ImportMapdlCdbParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ImportMapdlCdbParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ImportMapdlCdbParams
+
+Property detail
+---------------
+
+.. py:property:: append
+   :type: bool
+
+
+   Option to append imported cdb into existing model.
+
+.. py:property:: drop_mid_nodes
+   :type: bool
+
+
+   Option to import quadratic mesh elements as linear by skipping mid nodes.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ImportMapdlCdbParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ImportMapdlCdbParams.print_default()
+
+
+.. py:method:: set_default(drop_mid_nodes: bool = None, append: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ImportMapdlCdbParams`` object.
+
+   :param drop_mid_nodes: Option to import quadratic mesh elements as linear by skipping mid nodes.
+   :type drop_mid_nodes: bool, optional
+   :param append: Option to append imported cdb into existing model.
+   :type append: bool, optional
+
+
+
+
+
+
+
+.. vale on

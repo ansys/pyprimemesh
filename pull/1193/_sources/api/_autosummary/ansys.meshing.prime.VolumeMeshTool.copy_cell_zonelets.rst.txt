@@ -1,0 +1,11 @@
+copy\_cell\_zonelets
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeMeshTool.copy_cell_zonelets
+
+.. minigallery::
+   :add-heading: Examples using VolumeMeshTool.copy_cell_zonelets
+
+   ansys.meshing.prime.VolumeMeshTool.copy_cell_zonelets

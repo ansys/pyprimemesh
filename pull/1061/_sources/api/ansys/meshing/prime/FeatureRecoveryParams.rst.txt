@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FeatureRecoveryParams`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.FeatureRecoveryParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, scope: ScopeDefinition = None, enable_feature_octree_refinement: bool = None, size_at_features: float = None, json_data: dict = None, **kwargs)
+
+
+
+   FeatureRecoveryParams defines feature recovery control parameters for wrapper.
+
+   :param model: Model to create a ``FeatureRecoveryParams`` object with default parameters.
+   :type model: Model
+   :param scope: Scope used for feature recovery control.
+   :type scope: ScopeDefinition, optional
+   :param enable_feature_octree_refinement: Checks whether to perform octree refinement at feature edges.
+   :type enable_feature_octree_refinement: bool, optional
+   :param size_at_features: Refinement size at features.
+   :type size_at_features: float, optional
+   :param json_data: JSON dictionary to create a ``FeatureRecoveryParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> feature_recovery_params = prime.FeatureRecoveryParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FeatureRecoveryParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~enable_feature_octree_refinement`
+            - Checks whether to perform octree refinement at feature edges.
+          * - :py:attr:`~scope`
+            - Scope used for feature recovery control.
+          * - :py:attr:`~size_at_features`
+            - Refinement size at features.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FeatureRecoveryParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FeatureRecoveryParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FeatureRecoveryParams
+
+Property detail
+---------------
+
+.. py:property:: enable_feature_octree_refinement
+   :type: bool
+
+
+   Checks whether to perform octree refinement at feature edges.
+
+.. py:property:: scope
+   :type: ScopeDefinition
+
+
+   Scope used for feature recovery control.
+
+.. py:property:: size_at_features
+   :type: float
+
+
+   Refinement size at features.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FeatureRecoveryParams`` object.
+
+   .. rubric:: Examples
+
+   >>> FeatureRecoveryParams.print_default()
+
+
+.. py:method:: set_default(scope: ScopeDefinition = None, enable_feature_octree_refinement: bool = None, size_at_features: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FeatureRecoveryParams`` object.
+
+   :param scope: Scope used for feature recovery control.
+   :type scope: ScopeDefinition, optional
+   :param enable_feature_octree_refinement: Checks whether to perform octree refinement at feature edges.
+   :type enable_feature_octree_refinement: bool, optional
+   :param size_at_features: Refinement size at features.
+   :type size_at_features: float, optional
+
+
+
+
+
+
+
+.. vale on

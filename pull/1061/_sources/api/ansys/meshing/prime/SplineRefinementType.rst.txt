@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SplineRefinementType`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.SplineRefinementType
+
+
+
+   Type of spline refinement. Currently, supports h-refinement and p-refinement.
+
+
+
+
+.. py:currentmodule:: SplineRefinementType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~H`
+            - H refinement of spline.
+          * - :py:attr:`~P`
+            - P refinement of spline.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SplineRefinementType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: H
+   :value: 0
+
+
+   H refinement of spline.
+
+.. py:attribute:: P
+   :value: 1
+
+
+   P refinement of spline.
+
+
+
+
+
+
+
+.. vale on

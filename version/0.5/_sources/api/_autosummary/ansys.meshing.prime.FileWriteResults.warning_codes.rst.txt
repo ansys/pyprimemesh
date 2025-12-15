@@ -1,0 +1,6 @@
+warning\_codes
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FileWriteResults.warning_codes

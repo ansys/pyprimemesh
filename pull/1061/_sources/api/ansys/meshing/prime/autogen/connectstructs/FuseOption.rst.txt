@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FuseOption`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.FuseOption
+
+
+
+   Type to specify treatment of surfaces for fusing.
+
+
+
+
+.. py:currentmodule:: FuseOption
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~NONE`
+            - No action to be taken for surfaces being fused.
+          * - :py:attr:`~TRIMONESIDE`
+            - Delete faces to be fused on one side and merge nodes to be fused at middle locations (works only within a single part).
+          * - :py:attr:`~TRIMTWOSIDES`
+            - Delete faces to be fused on both sides and merge nodes to be fused at middle locations (works only within a single part).
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import FuseOption
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   No action to be taken for surfaces being fused.
+
+.. py:attribute:: TRIMONESIDE
+   :value: 3
+
+
+   Delete faces to be fused on one side and merge nodes to be fused at middle locations (works only within a single part).
+
+.. py:attribute:: TRIMTWOSIDES
+   :value: 4
+
+
+   Delete faces to be fused on both sides and merge nodes to be fused at middle locations (works only within a single part).
+
+
+
+
+
+
+
+.. vale on

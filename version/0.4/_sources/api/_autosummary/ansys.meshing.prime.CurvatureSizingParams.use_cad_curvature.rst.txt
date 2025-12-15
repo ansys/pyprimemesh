@@ -1,0 +1,6 @@
+﻿use\_cad\_curvature
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CurvatureSizingParams.use_cad_curvature

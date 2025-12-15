@@ -1,0 +1,6 @@
+analysis\_settings\_file\_name
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.analysis_settings_file_name

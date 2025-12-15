@@ -1,0 +1,48 @@
+.. vale off
+
+FlowDirection
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FlowDirection
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      FlowDirection.conjugate
+      FlowDirection.bit_length
+      FlowDirection.bit_count
+      FlowDirection.to_bytes
+      FlowDirection.from_bytes
+      FlowDirection.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FlowDirection.real
+      FlowDirection.imag
+      FlowDirection.numerator
+      FlowDirection.denominator
+      FlowDirection.X
+      FlowDirection.Y
+      FlowDirection.Z
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FlowDirection
+
+    ansys.meshing.prime.FlowDirection
+
+.. vale on

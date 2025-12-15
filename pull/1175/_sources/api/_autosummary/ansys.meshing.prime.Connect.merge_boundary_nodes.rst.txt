@@ -1,0 +1,11 @@
+merge\_boundary\_nodes
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Connect.merge_boundary_nodes
+
+.. minigallery::
+   :add-heading: Examples using Connect.merge_boundary_nodes
+
+   ansys.meshing.prime.Connect.merge_boundary_nodes

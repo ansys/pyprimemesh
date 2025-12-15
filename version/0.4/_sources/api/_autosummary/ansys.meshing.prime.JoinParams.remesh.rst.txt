@@ -1,0 +1,6 @@
+﻿remesh
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: JoinParams.remesh

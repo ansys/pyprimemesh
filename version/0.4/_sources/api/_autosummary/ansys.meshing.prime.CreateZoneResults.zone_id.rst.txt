@@ -1,0 +1,6 @@
+﻿zone\_id
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateZoneResults.zone_id

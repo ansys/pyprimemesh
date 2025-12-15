@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergeNodeType`
+======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.MergeNodeType
+
+
+
+   Type of nodes to be merged.
+
+
+
+
+.. py:currentmodule:: MergeNodeType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ALLALL`
+            - Merge any type of nodes with any type of nodes.
+          * - :py:attr:`~FREEFREE`
+            - Merge only free nodes with free nodes.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import MergeNodeType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ALLALL
+   :value: 0
+
+
+   Merge any type of nodes with any type of nodes.
+
+.. py:attribute:: FREEFREE
+   :value: 1
+
+
+   Merge only free nodes with free nodes.
+
+
+
+
+
+
+
+.. vale on

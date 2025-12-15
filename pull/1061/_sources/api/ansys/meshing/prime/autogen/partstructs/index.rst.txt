@@ -1,0 +1,299 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``partstructs.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.autogen.partstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: partstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.AddLabelResults`
+            - Results associated with the add label operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.AddToZoneResults`
+            - Results associated with the add to zone operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.BodyQueryType`
+            - Indicates type of entity to query in part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.BoundingBox`
+            - Provides information about the definition of a bounding box.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.CellZoneletType`
+            - Types of cell zonelet.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ComponentChildrenParams`
+            - Parameters associated with querying child components.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ComponentChildrenResults`
+            - Results associated with querying child components.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ComputeTopoVolumesResults`
+            - Results associated with compute topovolumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ComputeVolumesParams`
+            - Parameters to compute volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ComputeVolumesResults`
+            - Results associated with compute volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.CreateVolumeZonesType`
+            - Indicate type to create volume zones for volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesParams`
+            - Parameters to control delete topoentities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults`
+            - Results associated with delete topoentities.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.DeleteVolumesParams`
+            - Parameters to delete volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.DeleteVolumesResults`
+            - Results associated with delete volumes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ExtractTopoVolumesParams`
+            - Parameters to extract flow topovolumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ExtractTopoVolumesResults`
+            - Parameters to extract flow topovolumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ExtractVolumesParams`
+            - Parameters to extract flow volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ExtractVolumesResults`
+            - Results associated with compute volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.MergeVolumesParams`
+            - Parameters to merge volumes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.MergeVolumesResults`
+            - Results associated with merge volumes operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.MergeZoneletsParams`
+            - Parameters to merge zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.MergeZoneletsResults`
+            - Results associated with merge zonelets.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.NamePatternParams`
+            - Parameters to be used to match name pattern with names.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.PartSummaryParams`
+            - Parameters to control part summary results.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.PartSummaryResults`
+            - Results of part summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.RemoveLabelResults`
+            - Results associated with the remove label operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.RemoveZoneResults`
+            - Results associated with the remove zone operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.VolumeNamingType`
+            - Indicate source types used to name volume zones.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.partstructs.ZoneType`
+            - ZoneType decides the type of zone.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AddLabelResults</api/ansys/meshing/prime/autogen/partstructs/AddLabelResults>
+    <span class="nf nf-cod-symbol_class"></span> AddToZoneResults</api/ansys/meshing/prime/autogen/partstructs/AddToZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> BodyQueryType</api/ansys/meshing/prime/autogen/partstructs/BodyQueryType>
+    <span class="nf nf-cod-symbol_class"></span> BoundingBox</api/ansys/meshing/prime/autogen/partstructs/BoundingBox>
+    <span class="nf nf-cod-symbol_class"></span> CellZoneletType</api/ansys/meshing/prime/autogen/partstructs/CellZoneletType>
+    <span class="nf nf-cod-symbol_class"></span> ComponentChildrenParams</api/ansys/meshing/prime/autogen/partstructs/ComponentChildrenParams>
+    <span class="nf nf-cod-symbol_class"></span> ComponentChildrenResults</api/ansys/meshing/prime/autogen/partstructs/ComponentChildrenResults>
+    <span class="nf nf-cod-symbol_class"></span> ComputeTopoVolumesResults</api/ansys/meshing/prime/autogen/partstructs/ComputeTopoVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> ComputeVolumesParams</api/ansys/meshing/prime/autogen/partstructs/ComputeVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> ComputeVolumesResults</api/ansys/meshing/prime/autogen/partstructs/ComputeVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> CreateVolumeZonesType</api/ansys/meshing/prime/autogen/partstructs/CreateVolumeZonesType>
+    <span class="nf nf-cod-symbol_class"></span> DeleteTopoEntitiesParams</api/ansys/meshing/prime/autogen/partstructs/DeleteTopoEntitiesParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteTopoEntitiesResults</api/ansys/meshing/prime/autogen/partstructs/DeleteTopoEntitiesResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteVolumesParams</api/ansys/meshing/prime/autogen/partstructs/DeleteVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> DeleteVolumesResults</api/ansys/meshing/prime/autogen/partstructs/DeleteVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractTopoVolumesParams</api/ansys/meshing/prime/autogen/partstructs/ExtractTopoVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractTopoVolumesResults</api/ansys/meshing/prime/autogen/partstructs/ExtractTopoVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> ExtractVolumesParams</api/ansys/meshing/prime/autogen/partstructs/ExtractVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> ExtractVolumesResults</api/ansys/meshing/prime/autogen/partstructs/ExtractVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> MergeVolumesParams</api/ansys/meshing/prime/autogen/partstructs/MergeVolumesParams>
+    <span class="nf nf-cod-symbol_class"></span> MergeVolumesResults</api/ansys/meshing/prime/autogen/partstructs/MergeVolumesResults>
+    <span class="nf nf-cod-symbol_class"></span> MergeZoneletsParams</api/ansys/meshing/prime/autogen/partstructs/MergeZoneletsParams>
+    <span class="nf nf-cod-symbol_class"></span> MergeZoneletsResults</api/ansys/meshing/prime/autogen/partstructs/MergeZoneletsResults>
+    <span class="nf nf-cod-symbol_class"></span> NamePatternParams</api/ansys/meshing/prime/autogen/partstructs/NamePatternParams>
+    <span class="nf nf-cod-symbol_class"></span> PartSummaryParams</api/ansys/meshing/prime/autogen/partstructs/PartSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> PartSummaryResults</api/ansys/meshing/prime/autogen/partstructs/PartSummaryResults>
+    <span class="nf nf-cod-symbol_class"></span> RemoveLabelResults</api/ansys/meshing/prime/autogen/partstructs/RemoveLabelResults>
+    <span class="nf nf-cod-symbol_class"></span> RemoveZoneResults</api/ansys/meshing/prime/autogen/partstructs/RemoveZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> VolumeNamingType</api/ansys/meshing/prime/autogen/partstructs/VolumeNamingType>
+    <span class="nf nf-cod-symbol_class"></span> ZoneType</api/ansys/meshing/prime/autogen/partstructs/ZoneType>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

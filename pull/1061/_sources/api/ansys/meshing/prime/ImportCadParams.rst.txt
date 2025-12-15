@@ -1,0 +1,258 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ImportCadParams`
+========================
+
+
+.. py:class:: ansys.meshing.prime.ImportCadParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, append: bool = None, ansys_release: str = None, cad_reader_route: CadReaderRoute = None, part_creation_type: PartCreationType = None, geometry_transfer: bool = None, length_unit: LengthUnit = None, refacet: bool = None, cad_refaceting_params: CadRefacetingParams = None, stitch_tolerance: float = None, cad_update_parameters: ansys.meshing.prime.params.primestructs.Dict[str, ansys.meshing.prime.params.primestructs.Union[str, int, float, bool]] = None, validate_shared_topology: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control CAD import settings.
+
+   :param model: Model to create a ``ImportCadParams`` object with default parameters.
+   :type model: Model
+   :param append: Append imported CAD into existing model when true.
+   :type append: bool, optional
+   :param ansys_release: Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+   :type ansys_release: str, optional
+   :param cad_reader_route: Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+   :type cad_reader_route: CadReaderRoute, optional
+   :param part_creation_type: Create a part per CAD Model, Assembly, Part, Body.
+   :type part_creation_type: PartCreationType, optional
+   :param geometry_transfer: Option to enable transfer of geometry data (NURBS).
+   :type geometry_transfer: bool, optional
+   :param length_unit: Specify length unit for import.
+   :type length_unit: LengthUnit, optional
+   :param refacet: Refine or coarsen the CAD faceting based on refaceting parameters when true.
+   :type refacet: bool, optional
+   :param cad_refaceting_params: Specify refaceting parameters.
+   :type cad_refaceting_params: CadRefacetingParams, optional
+   :param stitch_tolerance: Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+   :type stitch_tolerance: float, optional
+   :param cad_update_parameters: Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+   :type cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
+   :param validate_shared_topology: Specify whether to validate the shared topology information.
+   :type validate_shared_topology: bool, optional
+   :param json_data: JSON dictionary to create a ``ImportCadParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> import_cad_params = prime.ImportCadParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ImportCadParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ansys_release`
+            - Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+          * - :py:attr:`~append`
+            - Append imported CAD into existing model when true.
+          * - :py:attr:`~cad_reader_route`
+            - Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+          * - :py:attr:`~cad_refaceting_params`
+            - Specify refaceting parameters.
+          * - :py:attr:`~cad_update_parameters`
+            - Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+          * - :py:attr:`~geometry_transfer`
+            - Option to enable transfer of geometry data (NURBS).
+          * - :py:attr:`~length_unit`
+            - Specify length unit for import.
+          * - :py:attr:`~part_creation_type`
+            - Create a part per CAD Model, Assembly, Part, Body.
+          * - :py:attr:`~refacet`
+            - Refine or coarsen the CAD faceting based on refaceting parameters when true.
+          * - :py:attr:`~stitch_tolerance`
+            - Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+          * - :py:attr:`~validate_shared_topology`
+            - Specify whether to validate the shared topology information.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ImportCadParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ImportCadParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ImportCadParams
+
+Property detail
+---------------
+
+.. py:property:: ansys_release
+   :type: str
+
+
+   Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+
+.. py:property:: append
+   :type: bool
+
+
+   Append imported CAD into existing model when true.
+
+.. py:property:: cad_reader_route
+   :type: CadReaderRoute
+
+
+   Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+
+.. py:property:: cad_refaceting_params
+   :type: CadRefacetingParams
+
+
+   Specify refaceting parameters.
+
+.. py:property:: cad_update_parameters
+   :type: ansys.meshing.prime.params.primestructs.Dict[str, ansys.meshing.prime.params.primestructs.Union[str, int, float, bool]]
+
+
+   Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+
+.. py:property:: geometry_transfer
+   :type: bool
+
+
+   Option to enable transfer of geometry data (NURBS).
+
+.. py:property:: length_unit
+   :type: LengthUnit
+
+
+   Specify length unit for import.
+
+.. py:property:: part_creation_type
+   :type: PartCreationType
+
+
+   Create a part per CAD Model, Assembly, Part, Body.
+
+.. py:property:: refacet
+   :type: bool
+
+
+   Refine or coarsen the CAD faceting based on refaceting parameters when true.
+
+.. py:property:: stitch_tolerance
+   :type: float
+
+
+   Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+
+.. py:property:: validate_shared_topology
+   :type: bool
+
+
+   Specify whether to validate the shared topology information.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ImportCadParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ImportCadParams.print_default()
+
+
+.. py:method:: set_default(append: bool = None, ansys_release: str = None, cad_reader_route: CadReaderRoute = None, part_creation_type: PartCreationType = None, geometry_transfer: bool = None, length_unit: LengthUnit = None, refacet: bool = None, cad_refaceting_params: CadRefacetingParams = None, stitch_tolerance: float = None, cad_update_parameters: ansys.meshing.prime.params.primestructs.Dict[str, ansys.meshing.prime.params.primestructs.Union[str, int, float, bool]] = None, validate_shared_topology: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ImportCadParams`` object.
+
+   :param append: Append imported CAD into existing model when true.
+   :type append: bool, optional
+   :param ansys_release: Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+   :type ansys_release: str, optional
+   :param cad_reader_route: Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
+   :type cad_reader_route: CadReaderRoute, optional
+   :param part_creation_type: Create a part per CAD Model, Assembly, Part, Body.
+   :type part_creation_type: PartCreationType, optional
+   :param geometry_transfer: Option to enable transfer of geometry data (NURBS).
+   :type geometry_transfer: bool, optional
+   :param length_unit: Specify length unit for import.
+   :type length_unit: LengthUnit, optional
+   :param refacet: Refine or coarsen the CAD faceting based on refaceting parameters when true.
+   :type refacet: bool, optional
+   :param cad_refaceting_params: Specify refaceting parameters.
+   :type cad_refaceting_params: CadRefacetingParams, optional
+   :param stitch_tolerance: Stitch facets based on tolerance. Available only with WorkBench CAD Reader route.
+   :type stitch_tolerance: float, optional
+   :param cad_update_parameters: Specify the CAD parameters for parametric CAD update. Available only with WorkBench CAD Reader route.
+   :type cad_update_parameters: Dict[str, Union[str, int, float, bool]], optional
+   :param validate_shared_topology: Specify whether to validate the shared topology information.
+   :type validate_shared_topology: bool, optional
+
+
+
+
+
+
+
+.. vale on

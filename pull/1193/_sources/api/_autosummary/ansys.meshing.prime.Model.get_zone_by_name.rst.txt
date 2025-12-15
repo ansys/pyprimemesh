@@ -1,0 +1,11 @@
+get\_zone\_by\_name
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.get_zone_by_name
+
+.. minigallery::
+   :add-heading: Examples using Model.get_zone_by_name
+
+   ansys.meshing.prime.Model.get_zone_by_name

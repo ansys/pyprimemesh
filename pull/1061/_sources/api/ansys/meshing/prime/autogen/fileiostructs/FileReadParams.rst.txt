@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FileReadParams`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.FileReadParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, append: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to read file.
+
+   :param model: Model to create a ``FileReadParams`` object with default parameters.
+   :type model: Model
+   :param append: Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
+   :type append: bool, optional
+   :param json_data: JSON dictionary to create a ``FileReadParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> file_read_params = prime.FileReadParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FileReadParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~append`
+            - Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FileReadParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FileReadParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import FileReadParams
+
+Property detail
+---------------
+
+.. py:property:: append
+   :type: bool
+
+
+   Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FileReadParams`` object.
+
+   .. rubric:: Examples
+
+   >>> FileReadParams.print_default()
+
+
+.. py:method:: set_default(append: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FileReadParams`` object.
+
+   :param append: Option to append imported mesh to existing mesh instead of resetting model to imported mesh.
+   :type append: bool, optional
+
+
+
+
+
+
+
+.. vale on

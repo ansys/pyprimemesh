@@ -1,0 +1,6 @@
+python\_logger
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Model.python_logger

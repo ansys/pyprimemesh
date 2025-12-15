@@ -1,0 +1,30 @@
+ansys.meshing.prime.examples.download_bracket_fmd
+=================================================
+
+.. py:function:: ansys.meshing.prime.examples.download_bracket_fmd(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the FMD file for the bracket scaffold example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     bracket = prime_examples.download_bracket_fmd()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(bracket, params=prime.ImportCADParams(model))
+   >>>     print(model)
+

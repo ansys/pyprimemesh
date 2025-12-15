@@ -1,0 +1,6 @@
+WRAPPERPATCHFLOWREGIONS\_INVALIDBASESIZE
+========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE

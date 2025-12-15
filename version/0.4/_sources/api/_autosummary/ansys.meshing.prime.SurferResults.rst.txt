@@ -1,0 +1,35 @@
+.. vale off
+
+SurferResults
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurferResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurferResults.print_default
+      SurferResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurferResults.error_code
+      SurferResults.topofaces_not_projected_on_geometry
+   
+   
+
+.. vale on

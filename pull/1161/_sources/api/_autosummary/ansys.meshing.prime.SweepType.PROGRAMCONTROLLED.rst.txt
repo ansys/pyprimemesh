@@ -1,0 +1,6 @@
+PROGRAMCONTROLLED
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SweepType.PROGRAMCONTROLLED

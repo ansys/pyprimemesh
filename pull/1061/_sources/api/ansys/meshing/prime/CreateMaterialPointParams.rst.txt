@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CreateMaterialPointParams`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.CreateMaterialPointParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, type: MaterialPointType = None, json_data: dict = None, **kwargs)
+
+
+
+   Defines parameters to create material point.
+
+   :param model: Model to create a ``CreateMaterialPointParams`` object with default parameters.
+   :type model: Model
+   :param type: Defines the type of material point.
+   :type type: MaterialPointType, optional
+   :param json_data: JSON dictionary to create a ``CreateMaterialPointParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> create_material_point_params = prime.CreateMaterialPointParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CreateMaterialPointParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~type`
+            - Defines the type of material point.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CreateMaterialPointParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CreateMaterialPointParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CreateMaterialPointParams
+
+Property detail
+---------------
+
+.. py:property:: type
+   :type: MaterialPointType
+
+
+   Defines the type of material point.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CreateMaterialPointParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CreateMaterialPointParams.print_default()
+
+
+.. py:method:: set_default(type: MaterialPointType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CreateMaterialPointParams`` object.
+
+   :param type: Defines the type of material point.
+   :type type: MaterialPointType, optional
+
+
+
+
+
+
+
+.. vale on

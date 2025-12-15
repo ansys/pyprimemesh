@@ -1,0 +1,6 @@
+compute\_spotweld\_thickness
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.compute_spotweld_thickness

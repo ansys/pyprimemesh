@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteFringesAndOverlapsParams`
+=======================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.deletetoolstructs.DeleteFringesAndOverlapsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, fringe_element_count: int = None, overlap_element_count: int = None, delete_fringes: bool = None, delete_overlaps: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to delete fringes and overlapping faces.
+
+   :param model: Model to create a ``DeleteFringesAndOverlapsParams`` object with default parameters.
+   :type model: Model
+   :param fringe_element_count: Maximum count of free face elements identified as fringe to be deleted.
+   :type fringe_element_count: int, optional
+   :param overlap_element_count: Maximum count of overlapping face elements identified as overlap to be deleted.
+   :type overlap_element_count: int, optional
+   :param delete_fringes: Option to delete fringes. The default is true.
+   :type delete_fringes: bool, optional
+   :param delete_overlaps: Option to delete overlaps. The default is false.
+   :type delete_overlaps: bool, optional
+   :param json_data: JSON dictionary to create a ``DeleteFringesAndOverlapsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_fringes_and_overlaps_params = prime.DeleteFringesAndOverlapsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteFringesAndOverlapsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_fringes`
+            - Option to delete fringes. The default is true.
+          * - :py:attr:`~delete_overlaps`
+            - Option to delete overlaps. The default is false.
+          * - :py:attr:`~fringe_element_count`
+            - Maximum count of free face elements identified as fringe to be deleted.
+          * - :py:attr:`~overlap_element_count`
+            - Maximum count of overlapping face elements identified as overlap to be deleted.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteFringesAndOverlapsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteFringesAndOverlapsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.deletetoolstructs import DeleteFringesAndOverlapsParams
+
+Property detail
+---------------
+
+.. py:property:: delete_fringes
+   :type: bool
+
+
+   Option to delete fringes. The default is true.
+
+.. py:property:: delete_overlaps
+   :type: bool
+
+
+   Option to delete overlaps. The default is false.
+
+.. py:property:: fringe_element_count
+   :type: int
+
+
+   Maximum count of free face elements identified as fringe to be deleted.
+
+.. py:property:: overlap_element_count
+   :type: int
+
+
+   Maximum count of overlapping face elements identified as overlap to be deleted.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteFringesAndOverlapsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteFringesAndOverlapsParams.print_default()
+
+
+.. py:method:: set_default(fringe_element_count: int = None, overlap_element_count: int = None, delete_fringes: bool = None, delete_overlaps: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteFringesAndOverlapsParams`` object.
+
+   :param fringe_element_count: Maximum count of free face elements identified as fringe to be deleted.
+   :type fringe_element_count: int, optional
+   :param overlap_element_count: Maximum count of overlapping face elements identified as overlap to be deleted.
+   :type overlap_element_count: int, optional
+   :param delete_fringes: Option to delete fringes. The default is true.
+   :type delete_fringes: bool, optional
+   :param delete_overlaps: Option to delete overlaps. The default is false.
+   :type delete_overlaps: bool, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ImportAbaqusParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using ImportAbaqusParams.print_default
+
+   ansys.meshing.prime.ImportAbaqusParams.print_default

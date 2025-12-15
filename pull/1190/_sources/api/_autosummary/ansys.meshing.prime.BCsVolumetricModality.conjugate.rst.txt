@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCsVolumetricModality.conjugate
+
+.. minigallery::
+   :add-heading: Examples using BCsVolumetricModality.conjugate
+
+   ansys.meshing.prime.BCsVolumetricModality.conjugate

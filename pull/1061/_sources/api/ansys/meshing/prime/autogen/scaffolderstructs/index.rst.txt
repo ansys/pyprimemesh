@@ -1,0 +1,145 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``scaffolderstructs.py`` module
+===================================
+
+.. py:module:: ansys.meshing.prime.autogen.scaffolderstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: scaffolderstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.EdgeMergeControl`
+            - Specifies type of edge pairs to be merged during scaffold operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.IntersectionMask`
+            - Scaffold parameters use intersection mask to define nature of intersection computation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderMergeResults`
+            - Result structure associated with merge overlapping topofaces and delete shadowed topofaces operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderParams`
+            - Parameters to control scaffold operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderRepairMode`
+            - Mode of Scaffolder repair to be used.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderResults`
+            - Results structure associated to scaffold operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderSplitResults`
+            - Result structure associated to split topofaces operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.scaffolderstructs.VolumetricScaffolderParams`
+            - Parameters to control delete shadowed topofaces operation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> EdgeMergeControl</api/ansys/meshing/prime/autogen/scaffolderstructs/EdgeMergeControl>
+    <span class="nf nf-cod-symbol_class"></span> IntersectionMask</api/ansys/meshing/prime/autogen/scaffolderstructs/IntersectionMask>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderMergeResults</api/ansys/meshing/prime/autogen/scaffolderstructs/ScaffolderMergeResults>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderParams</api/ansys/meshing/prime/autogen/scaffolderstructs/ScaffolderParams>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderRepairMode</api/ansys/meshing/prime/autogen/scaffolderstructs/ScaffolderRepairMode>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderResults</api/ansys/meshing/prime/autogen/scaffolderstructs/ScaffolderResults>
+    <span class="nf nf-cod-symbol_class"></span> ScaffolderSplitResults</api/ansys/meshing/prime/autogen/scaffolderstructs/ScaffolderSplitResults>
+    <span class="nf nf-cod-symbol_class"></span> VolumetricScaffolderParams</api/ansys/meshing/prime/autogen/scaffolderstructs/VolumetricScaffolderParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

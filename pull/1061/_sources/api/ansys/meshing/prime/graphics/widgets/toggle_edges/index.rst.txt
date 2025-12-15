@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``toggle_edges.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.graphics.widgets.toggle_edges
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: toggle_edges
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.widgets.toggle_edges.ToggleEdges`
+            - Toggles the edges of the mesh objects.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ToggleEdges</api/ansys/meshing/prime/graphics/widgets/toggle_edges/ToggleEdges>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for ToggleEdges widget.
+
+
+
+
+
+
+
+
+
+.. vale on

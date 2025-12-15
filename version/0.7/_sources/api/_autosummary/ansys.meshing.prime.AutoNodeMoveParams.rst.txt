@@ -1,0 +1,44 @@
+.. vale off
+
+AutoNodeMoveParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoNodeMoveParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoNodeMoveParams.print_default
+      AutoNodeMoveParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AutoNodeMoveParams.dihedral_angle
+      AutoNodeMoveParams.n_attempts
+      AutoNodeMoveParams.n_iterations_per_node
+      AutoNodeMoveParams.quality_measure
+      AutoNodeMoveParams.restrict_boundary_nodes_along_surface
+      AutoNodeMoveParams.target_quality
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using AutoNodeMoveParams
+
+    ansys.meshing.prime.AutoNodeMoveParams
+
+.. vale on

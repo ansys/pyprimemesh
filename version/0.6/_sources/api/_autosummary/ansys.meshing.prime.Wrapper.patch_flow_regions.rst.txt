@@ -1,0 +1,6 @@
+patch\_flow\_regions
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Wrapper.patch_flow_regions

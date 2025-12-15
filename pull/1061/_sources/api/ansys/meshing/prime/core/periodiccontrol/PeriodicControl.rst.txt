@@ -1,0 +1,236 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PeriodicControl`
+========================
+
+
+.. py:class:: ansys.meshing.prime.core.periodiccontrol.PeriodicControl(model, id, object_id, name, local=False)
+
+
+
+   Periodic controls provide settings for the recovery of periodic surfaces.
+
+   A periodic control is specified by the scope (source surfaces) and
+   the transformation parameters: the center, axis and angle.
+
+   :param model: Server model to create PeriodicControl object.
+   :type model: Model
+   :param id: Id of the PeriodicControl.
+   :type id: int
+   :param object_id: Object id of the PeriodicControl.
+   :type object_id: int
+   :param name: Name of the PeriodicControl.
+   :type name: str
+   :param local: Unused. The default is ``False``.
+   :type local: bool, optional
+
+
+
+
+
+.. py:currentmodule:: PeriodicControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_params`
+            - Get the parameters of the periodic control.
+          * - :py:attr:`~get_scope`
+            - Gets the scope for the periodic control.
+          * - :py:attr:`~get_summary`
+            - Get the periodic control summary along with the evaluated scope for the provided parameters.
+          * - :py:attr:`~set_params`
+            - Set the periodic control parameters.
+          * - :py:attr:`~set_scope`
+            - Sets the scope for periodic control to evaluate.
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the periodic control to a suggested name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of PeriodicControl.
+          * - :py:attr:`~name`
+            - Get the name of the periodic control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.periodiccontrol import PeriodicControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of PeriodicControl.
+
+.. py:property:: name
+
+   Get the name of the periodic control.
+
+   :returns: Name of the periodic control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(periodic_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: get_params() -> ansys.meshing.prime.params.primestructs.PeriodicControlParams
+
+   Get the parameters of the periodic control.
+
+
+   :returns: Return parameters of the periodic control.
+   :rtype: PeriodicControlParams
+
+   .. rubric:: Examples
+
+   >>> params = periodic_control.get_params()
+
+
+.. py:method:: get_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the scope for the periodic control.
+
+
+   :returns: Returns the scope of the periodic control.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> scope_definition = periodic_control.get_scope()
+
+
+.. py:method:: get_summary(params: ansys.meshing.prime.params.primestructs.PeriodicControlSummaryParams) -> ansys.meshing.prime.params.primestructs.PeriodicControlSummaryResult
+
+   Get the periodic control summary along with the evaluated scope for the provided parameters.
+
+
+   :param params: Periodic control summary parameters.
+   :type params: PeriodicControlSummaryParams
+
+   :returns: Return the PeriodicControlSummaryResult.
+   :rtype: PeriodicControlSummaryResult
+
+   .. rubric:: Examples
+
+   >>> results = periodic_control.get_summary(prime.PeriodicControlSummaryParams(model=model))
+
+
+.. py:method:: set_params(periodic_control_params: ansys.meshing.prime.params.primestructs.PeriodicControlParams) -> ansys.meshing.prime.params.primestructs.SetParamsResults
+
+   Set the periodic control parameters.
+
+
+   :param periodic_control_params: Parameters to control periodic surface recovery.
+   :type periodic_control_params: PeriodicControlParams
+
+   .. rubric:: Examples
+
+   >>> periodic_control.set_params(
+   >>>                  PeriodicControlParams(model=model,
+   >>>                     center=[0,0,0], axis=[0,1,0], angle=180))
+
+
+.. py:method:: set_scope(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the scope for periodic control to evaluate.
+
+   Periodic Control uses scope to evaluate entities for which periodic surface recovery must be carried out.
+
+   :param scope: ScopeDefinition to scope entities for periodic surface recovery.
+   :type scope: ScopeDefinition
+
+   :returns: Returns the SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Examples
+
+   >>> surface_scope = prime.ScopeDefinition(model=model,
+   >>>                     entity_type=prime.ScopeEntity.FACEZONELETS,
+   >>>                     evaluation_type=prime.ScopeEvaluationType.LABELS,
+   >>>                     label_expression="periodic-1")
+   >>> periodic_control.set_scope(surface_scope)
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the periodic control to a suggested name.
+
+   :param name: Suggested name for the periodic control.
+   :type name: str
+
+   :returns: Newly suggested name of the periodic control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> periodic_control.set_suggested_name("control1")
+
+
+
+
+
+
+
+.. vale on

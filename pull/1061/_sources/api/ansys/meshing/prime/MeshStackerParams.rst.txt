@@ -1,0 +1,226 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MeshStackerParams`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.MeshStackerParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, origin: ansys.meshing.prime.params.primestructs.Iterable[float] = None, direction: ansys.meshing.prime.params.primestructs.Iterable[float] = None, lateral_defeature_tolerance: float = None, stacking_defeature_tolerance: float = None, max_offset_size: float = None, size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, seed_faces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, delete_base: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Input parameters associated with the mesh stacker operations.
+
+   :param model: Model to create a ``MeshStackerParams`` object with default parameters.
+   :type model: Model
+   :param origin: Origin coordinate list of stacker.
+   :type origin: Iterable[float], optional
+   :param direction: Direction vector of stacker.
+   :type direction: Iterable[float], optional
+   :param lateral_defeature_tolerance: Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
+   :type lateral_defeature_tolerance: float, optional
+   :param stacking_defeature_tolerance: Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
+   :type stacking_defeature_tolerance: float, optional
+   :param max_offset_size: Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
+   :type max_offset_size: float, optional
+   :param size_control_ids: List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+   :type size_control_ids: Iterable[int], optional
+   :param seed_faces: List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type seed_faces: Iterable[int], optional
+   :param delete_base: Option to delete base face at the end of stacking. The default is false.
+   :type delete_base: bool, optional
+   :param json_data: JSON dictionary to create a ``MeshStackerParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> mesh_stacker_params = prime.MeshStackerParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MeshStackerParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_base`
+            - Option to delete base face at the end of stacking. The default is false.
+          * - :py:attr:`~direction`
+            - Direction vector of stacker.
+          * - :py:attr:`~lateral_defeature_tolerance`
+            - Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
+          * - :py:attr:`~max_offset_size`
+            - Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
+          * - :py:attr:`~origin`
+            - Origin coordinate list of stacker.
+          * - :py:attr:`~seed_faces`
+            - List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+          * - :py:attr:`~size_control_ids`
+            - List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+          * - :py:attr:`~stacking_defeature_tolerance`
+            - Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MeshStackerParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MeshStackerParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MeshStackerParams
+
+Property detail
+---------------
+
+.. py:property:: delete_base
+   :type: bool
+
+
+   Option to delete base face at the end of stacking. The default is false.
+
+.. py:property:: direction
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Direction vector of stacker.
+
+.. py:property:: lateral_defeature_tolerance
+   :type: float
+
+
+   Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
+
+.. py:property:: max_offset_size
+   :type: float
+
+
+   Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
+
+.. py:property:: origin
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Origin coordinate list of stacker.
+
+.. py:property:: seed_faces
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: size_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+
+.. py:property:: stacking_defeature_tolerance
+   :type: float
+
+
+   Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MeshStackerParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MeshStackerParams.print_default()
+
+
+.. py:method:: set_default(origin: ansys.meshing.prime.params.primestructs.Iterable[float] = None, direction: ansys.meshing.prime.params.primestructs.Iterable[float] = None, lateral_defeature_tolerance: float = None, stacking_defeature_tolerance: float = None, max_offset_size: float = None, size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, seed_faces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, delete_base: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MeshStackerParams`` object.
+
+   :param origin: Origin coordinate list of stacker.
+   :type origin: Iterable[float], optional
+   :param direction: Direction vector of stacker.
+   :type direction: Iterable[float], optional
+   :param lateral_defeature_tolerance: Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
+   :type lateral_defeature_tolerance: float, optional
+   :param stacking_defeature_tolerance: Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
+   :type stacking_defeature_tolerance: float, optional
+   :param max_offset_size: Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
+   :type max_offset_size: float, optional
+   :param size_control_ids: List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
+   :type size_control_ids: Iterable[int], optional
+   :param seed_faces: List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
+   :type seed_faces: Iterable[int], optional
+   :param delete_base: Option to delete base face at the end of stacking. The default is false.
+   :type delete_base: bool, optional
+
+
+
+
+
+
+
+.. vale on

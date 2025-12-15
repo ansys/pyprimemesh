@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``part.py`` module
+======================
+
+.. py:module:: ansys.meshing.prime.core.part
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: part
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.part.Part`
+            - Part contains zonelets and topoentities.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Part</api/ansys/meshing/prime/core/part/Part>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing the ``Part`` class.
+
+
+
+
+
+
+
+
+
+.. vale on

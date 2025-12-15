@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceDiagnosticSummaryResults`
+========================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceDiagnosticSummaryResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_self_intersections: int = None, n_free_edges: int = None, n_multi_edges: int = None, n_duplicate_faces: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of surface diagnostic summary.
+
+   :param model: Model to create a ``SurfaceDiagnosticSummaryResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the surface diagnostic summary.
+   :type error_code: ErrorCode, optional
+   :param n_self_intersections: Number of self intersecting faces identified.
+   :type n_self_intersections: int, optional
+   :param n_free_edges: Number of free face edges identified.
+   :type n_free_edges: int, optional
+   :param n_multi_edges: Number of multi face edges identified.
+   :type n_multi_edges: int, optional
+   :param n_duplicate_faces: Number of duplicate faces identified.
+   :type n_duplicate_faces: int, optional
+   :param json_data: JSON dictionary to create a ``SurfaceDiagnosticSummaryResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> surface_diagnostic_summary_results = prime.SurfaceDiagnosticSummaryResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceDiagnosticSummaryResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the surface diagnostic summary.
+          * - :py:attr:`~n_duplicate_faces`
+            - Number of duplicate faces identified.
+          * - :py:attr:`~n_free_edges`
+            - Number of free face edges identified.
+          * - :py:attr:`~n_multi_edges`
+            - Number of multi face edges identified.
+          * - :py:attr:`~n_self_intersections`
+            - Number of self intersecting faces identified.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SurfaceDiagnosticSummaryResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SurfaceDiagnosticSummaryResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SurfaceDiagnosticSummaryResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the surface diagnostic summary.
+
+.. py:property:: n_duplicate_faces
+   :type: int
+
+
+   Number of duplicate faces identified.
+
+.. py:property:: n_free_edges
+   :type: int
+
+
+   Number of free face edges identified.
+
+.. py:property:: n_multi_edges
+   :type: int
+
+
+   Number of multi face edges identified.
+
+.. py:property:: n_self_intersections
+   :type: int
+
+
+   Number of self intersecting faces identified.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SurfaceDiagnosticSummaryResults`` object.
+
+   .. rubric:: Examples
+
+   >>> SurfaceDiagnosticSummaryResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_self_intersections: int = None, n_free_edges: int = None, n_multi_edges: int = None, n_duplicate_faces: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SurfaceDiagnosticSummaryResults`` object.
+
+   :param error_code: Error code associated with the surface diagnostic summary.
+   :type error_code: ErrorCode, optional
+   :param n_self_intersections: Number of self intersecting faces identified.
+   :type n_self_intersections: int, optional
+   :param n_free_edges: Number of free face edges identified.
+   :type n_free_edges: int, optional
+   :param n_multi_edges: Number of multi face edges identified.
+   :type n_multi_edges: int, optional
+   :param n_duplicate_faces: Number of duplicate faces identified.
+   :type n_duplicate_faces: int, optional
+
+
+
+
+
+
+
+.. vale on

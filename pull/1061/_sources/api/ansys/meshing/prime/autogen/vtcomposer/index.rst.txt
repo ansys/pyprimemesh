@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``vtcomposer.py`` module
+============================
+
+.. py:module:: ansys.meshing.prime.autogen.vtcomposer
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: vtcomposer
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.vtcomposer.VTComposer`
+            - VTComposer is used for fix topology corrections like separate, pinch.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> VTComposer</api/ansys/meshing/prime/autogen/vtcomposer/VTComposer>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

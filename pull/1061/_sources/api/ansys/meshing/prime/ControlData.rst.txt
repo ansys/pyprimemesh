@@ -1,0 +1,591 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ControlData`
+====================
+
+
+.. py:class:: ansys.meshing.prime.ControlData(model: ansys.meshing.prime.autogen.model.Model, id: int, object_id: int, name: str)
+
+
+
+   Contains all controls.
+
+   This class contains all controls, including size controls, prism controls, multizone controls
+   and wrapper controls.
+
+   :param model: Server model to create ControlData object.
+   :type model: Model
+   :param id: Id of the ControlData.
+   :type id: int
+   :param object_id: Object id of the ControlData.
+   :type object_id: int
+   :param name: Name of the ControlData.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: ControlData
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_multi_zone_control`
+            - Create multizone control with defaults.
+          * - :py:attr:`~create_periodic_control`
+            - Create a periodic control.
+          * - :py:attr:`~create_prism_control`
+            - Create a prism control.
+          * - :py:attr:`~create_shell_bl_control`
+            - Create a ShellBL control.
+          * - :py:attr:`~create_size_control`
+            - Create a size control for a sizing type.
+          * - :py:attr:`~create_thin_volume_control`
+            - Create a thin volume control.
+          * - :py:attr:`~create_volume_control`
+            - Create a volume control.
+          * - :py:attr:`~create_wrapper_control`
+            - Create a wrapper control with default values.
+          * - :py:attr:`~delete_controls`
+            - Delete the control for one or more IDs.
+          * - :py:attr:`~get_multi_zone_control_by_name`
+            - Get the multizone control by name.
+          * - :py:attr:`~get_multi_zone_controls`
+            - Get ids of all the MultiZone controls.
+          * - :py:attr:`~get_part_zonelets`
+            - Creates an array of part zonelet structure using the input ScopeDefinition.
+          * - :py:attr:`~get_periodic_control_by_name`
+            - Get a periodic control by name.
+          * - :py:attr:`~get_prism_control_by_name`
+            - Get a prism control by name.
+          * - :py:attr:`~get_scope_face_zonelets`
+            - Get the face zonelet ids for the given scope.
+          * - :py:attr:`~get_scope_parts`
+            - Get the part ids for the given scope.
+          * - :py:attr:`~get_shell_bl_control_by_name`
+            - Get a shell bl control by name.
+          * - :py:attr:`~get_size_control_by_name`
+            - Get a size control by name.
+          * - :py:attr:`~get_thin_volume_control_by_name`
+            - Get a thin volume control by name.
+          * - :py:attr:`~get_volume_control_by_name`
+            - Get a volume control by name.
+          * - :py:attr:`~get_wrapper_control_by_name`
+            - Get the wrapper control by name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of ControlData.
+          * - :py:attr:`~multi_zone_controls`
+            - Get the multizone controls.
+          * - :py:attr:`~name`
+            - Get the name of ControlData.
+          * - :py:attr:`~periodic_controls`
+            - Get the periodic controls.
+          * - :py:attr:`~prism_controls`
+            - Get the prism controls.
+          * - :py:attr:`~shell_bl_controls`
+            - Get the shell bl controls.
+          * - :py:attr:`~size_controls`
+            - Get the size controls.
+          * - :py:attr:`~thin_volume_controls`
+            - Get the thin volume controls.
+          * - :py:attr:`~volume_controls`
+            - Get the volume controls.
+          * - :py:attr:`~wrapper_controls`
+            - Get the wrapper controls.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ControlData
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of ControlData.
+
+.. py:property:: multi_zone_controls
+   :type: List[ansys.meshing.prime.autogen.multizonecontrol.MultiZoneControl]
+
+
+   Get the multizone controls.
+
+   :returns: Returns the list of multizone controls.
+   :rtype: List[MultiZoneControl]
+
+   .. rubric:: Examples
+
+   >>> multi_zone_control = model.control_data.multi_zone_controls
+
+.. py:property:: name
+
+   Get the name of ControlData.
+
+.. py:property:: periodic_controls
+   :type: List[ansys.meshing.prime.core.periodiccontrol.PeriodicControl]
+
+
+   Get the periodic controls.
+
+   :returns: List of periodic controls.
+   :rtype: List[PeriodicControl]
+
+   .. rubric:: Examples
+
+   >>> periodic_controls = model.control_data.periodic_controls
+
+.. py:property:: prism_controls
+   :type: List[ansys.meshing.prime.core.prismcontrol.PrismControl]
+
+
+   Get the prism controls.
+
+   :returns: List of prism controls.
+   :rtype: List[PrismControl]
+
+   .. rubric:: Examples
+
+   >>> prism_control = model.control_data.prism_controls
+
+.. py:property:: shell_bl_controls
+   :type: List[ansys.meshing.prime.autogen.shellblcontrol.ShellBLControl]
+
+
+   Get the shell bl controls.
+
+   :returns: List of shell bl controls.
+   :rtype: List[ShellBLControl]
+
+   .. rubric:: Examples
+
+   >>> shell_bl_control = model.control_data.shell_bl_controls
+
+.. py:property:: size_controls
+   :type: List[ansys.meshing.prime.core.sizecontrol.SizeControl]
+
+
+   Get the size controls.
+
+   :returns: List of size controls.
+   :rtype: List[SizeControl]
+
+   .. rubric:: Examples
+
+   >>> size_controls = model.control_data.size_controls
+
+.. py:property:: thin_volume_controls
+   :type: List[ansys.meshing.prime.autogen.thinvolumecontrol.ThinVolumeControl]
+
+
+   Get the thin volume controls.
+
+   :returns: List of thin volume controls.
+   :rtype: List[ThinVolumeControl]
+
+   .. rubric:: Examples
+
+   >>> thin_volume_control = model.control_data.thin_volume_controls
+
+.. py:property:: volume_controls
+   :type: List[ansys.meshing.prime.core.volumecontrol.VolumeControl]
+
+
+   Get the volume controls.
+
+   :returns: List of volume controls.
+   :rtype: List[VolumeControl]
+
+   .. rubric:: Examples
+
+   >>> volume_controls = model.control_data.volume_controls
+
+.. py:property:: wrapper_controls
+   :type: List[ansys.meshing.prime.core.wrappercontrol.WrapperControl]
+
+
+   Get the wrapper controls.
+
+   :returns: List of wrapper controls.
+   :rtype: List[WrapperControl]
+
+   .. rubric:: Examples
+
+   >>> wrapper_control = model.control_data.wrapper_controls
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: create_multi_zone_control() -> ansys.meshing.prime.autogen.multizonecontrol.MultiZoneControl
+
+   Create multizone control with defaults.
+
+   :returns: Returns the multizone control.
+   :rtype: multizone
+
+   .. rubric:: Examples
+
+   >>> multizone = model.control_data.create_wrapper_control()
+
+
+.. py:method:: create_periodic_control() -> ansys.meshing.prime.core.periodiccontrol.PeriodicControl
+
+   Create a periodic control.
+
+   :returns: Periodic control.
+   :rtype: PeriodicControl
+
+   .. rubric:: Examples
+
+   >>> periodic_control = model.control_data.create_periodic_control()
+
+
+.. py:method:: create_prism_control() -> ansys.meshing.prime.core.prismcontrol.PrismControl
+
+   Create a prism control.
+
+   :returns: Prism control.
+   :rtype: PrismControl
+
+   .. rubric:: Examples
+
+   >>> prism_control = model.control_data.create_prism_control()
+
+
+.. py:method:: create_shell_bl_control() -> ansys.meshing.prime.autogen.shellblcontrol.ShellBLControl
+
+   Create a ShellBL control.
+
+   :returns: ShellBL Control.
+   :rtype: ShellBLControl
+
+   .. rubric:: Examples
+
+   >>> shell_bl_control = model.control_data.create_shell_bl_control()
+
+
+.. py:method:: create_size_control(sizing_type: ansys.meshing.prime.params.primestructs.SizingType) -> ansys.meshing.prime.core.sizecontrol.SizeControl
+
+   Create a size control for a sizing type.
+
+   :param type: Sizing type for creating the size control.
+   :type type: SizingType
+
+   :returns: Size control.
+   :rtype: SizeControl
+
+   .. rubric:: Notes
+
+   An empty size control is created on calling this method.
+
+   .. rubric:: Examples
+
+   >>> size_control = model.control_data.create_size_control(SizingType.Curvature)
+
+
+.. py:method:: create_thin_volume_control() -> ansys.meshing.prime.autogen.thinvolumecontrol.ThinVolumeControl
+
+   Create a thin volume control.
+
+   :returns: Thin volume control.
+   :rtype: ThinVolumeControl
+
+   .. rubric:: Examples
+
+   >>> thin_volume_control = model.control_data.create_thin_volume_control()
+
+
+.. py:method:: create_volume_control() -> ansys.meshing.prime.core.volumecontrol.VolumeControl
+
+   Create a volume control.
+
+   :returns: Volume control.
+   :rtype: VolumeControl
+
+   .. rubric:: Examples
+
+   >>> volume_control = model.control_data.create_volume_control()
+
+
+.. py:method:: create_wrapper_control() -> ansys.meshing.prime.core.wrappercontrol.WrapperControl
+
+   Create a wrapper control with default values.
+
+   :returns: Wrapper control.
+   :rtype: WrapperControl
+
+   .. rubric:: Notes
+
+   A wrapper control with default values is created on calling this method.
+
+   .. rubric:: Examples
+
+   >>> wrapper_control = model.control_data.create_wrapper_control()
+
+
+.. py:method:: delete_controls(control_ids: Iterable[int]) -> ansys.meshing.prime.autogen.commonstructs.DeleteResults
+
+   Delete the control for one or more IDs.
+
+   :param control_ids: List of control IDs.
+   :type control_ids: Iterable[int]
+
+   :returns: Delete results.
+   :rtype: DeleteResults
+
+   .. rubric:: Examples
+
+   >>> results = model.control_data.delete_controls([size_control.id, volume_control.id])
+
+
+.. py:method:: get_multi_zone_control_by_name(name) -> ansys.meshing.prime.autogen.multizonecontrol.MultiZoneControl
+
+   Get the multizone control by name.
+
+   :param name: Name of the multizone control.
+   :type name: str
+
+   :returns: Returns the multizone control.
+   :rtype: MultiZoneControl
+
+   .. rubric:: Examples
+
+   >>> multi_zone_control = model.control_data.get_multi_zone_control_by_name("mzcontrol-1")
+
+
+.. py:method:: get_multi_zone_controls() -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get ids of all the MultiZone controls.
+
+
+   :returns: Return all the MultiZone controls ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> MultiZoneControls = model.control_data.get_multi_zone_controls()
+
+
+.. py:method:: get_part_zonelets(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> List[ansys.meshing.prime.params.primestructs.PartZonelets]
+
+   Creates an array of part zonelet structure using the input ScopeDefinition.
+
+
+   :param scope: Input ScopeDefinition.
+   :type scope: ScopeDefinition
+
+   :returns: Returns a list of PartZonelets.
+   :rtype: List[PartZonelets]
+
+   .. rubric:: Examples
+
+   >>> results = control_data.get_part_zonelets(scope)
+
+
+.. py:method:: get_periodic_control_by_name(name: str) -> ansys.meshing.prime.core.periodiccontrol.PeriodicControl
+
+   Get a periodic control by name.
+
+   :param name: Name of the periodic control.
+   :type name: str
+
+   :returns: Periodic control.
+   :rtype: PeriodicControl
+
+   .. rubric:: Examples
+
+   >>> periodic_control = model.control_data.get_periodic_control_by_name("PeriodicControl-1")
+
+
+.. py:method:: get_prism_control_by_name(name: str) -> ansys.meshing.prime.core.prismcontrol.PrismControl
+
+   Get a prism control by name.
+
+   :param name: Name of the prism control.
+   :type name: str
+
+   :returns: Prism control.
+   :rtype: PrismControl
+
+   .. rubric:: Examples
+
+   >>> prism_control = model.control_data.get_prism_control_by_name("PrismControl-1")
+
+
+.. py:method:: get_scope_face_zonelets(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition, params: ansys.meshing.prime.params.primestructs.ScopeZoneletParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the face zonelet ids for the given scope.
+
+
+   :param scope: Scope definition to evaluate entities.
+   :type scope: ScopeDefinition
+   :param params: Parameters to scope zonelets.
+   :type params: ScopeZoneletParams
+
+   :returns: Return the ids of face zonelets.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> face_zonelets = model.control_data.get_scope_face_zonelets(
+   >>>                 prime.ScopeDefinition(model = model,
+   >>>                 entity_type = prime.ScopeEntity.FACEZONELETS,
+   >>>                 part_expression = "*"),
+   >>>                 prime.ScopeZoneletParams(model =model))
+
+
+.. py:method:: get_scope_parts(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the part ids for the given scope.
+
+
+   :param scope: Scope definition to evaluate the part ids.
+   :type scope: ScopeDefinition
+
+   :returns: Return the ids of parts.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> part_ids = model.control_data.get_scope_parts(
+   >>>                 prime.ScopeDefinition(model = model,
+   >>>                 part_expression = "*"),
+   >>>                 prime.ScopeZoneletParams(model =model))
+
+
+.. py:method:: get_shell_bl_control_by_name(name: str) -> ansys.meshing.prime.autogen.shellblcontrol.ShellBLControl
+
+   Get a shell bl control by name.
+
+   :param name: Name of the shell bl control.
+   :type name: str
+
+   :returns: Shell BL control.
+   :rtype: ShellBLControl
+
+   .. rubric:: Examples
+
+   >>> shell_bl_control = model.control_data.get_shell_bl_control_by_name("ShellBLControl-1")
+
+
+.. py:method:: get_size_control_by_name(name: str) -> ansys.meshing.prime.core.sizecontrol.SizeControl
+
+   Get a size control by name.
+
+   :param name: Name of the size control.
+   :type name: str
+
+   :returns: Size control.
+   :rtype: SizeControl
+
+   .. rubric:: Examples
+
+   >>> size_control = model.control_data.get_size_control_by_name("SizeControl-1")
+
+
+.. py:method:: get_thin_volume_control_by_name(name: str) -> ansys.meshing.prime.autogen.thinvolumecontrol.ThinVolumeControl
+
+   Get a thin volume control by name.
+
+   :param name: Name of the thin volume control.
+   :type name: str
+
+   :returns: Thin volume control.
+   :rtype: ThinVolumeControl
+
+   .. rubric:: Examples
+
+   >>> contorl_data = model.control_data
+   >>> thin_volume_control = control_data.get_thin_volume_control_by_name(
+                                                "ThinVolumeControl-1")
+
+
+.. py:method:: get_volume_control_by_name(name: str) -> ansys.meshing.prime.core.volumecontrol.VolumeControl
+
+   Get a volume control by name.
+
+   :param name: Name of the volume control.
+   :type name: str
+
+   :returns: Volume control.
+   :rtype: VolumeControl
+
+   .. rubric:: Examples
+
+   >>> volume_control = model.control_data.get_volume_control_by_name("VolumeControl-1")
+
+
+.. py:method:: get_wrapper_control_by_name(name) -> ansys.meshing.prime.core.wrappercontrol.WrapperControl
+
+   Get the wrapper control by name.
+
+   :param name: Name of the wrapper control.
+   :type name: str
+
+   :returns: Wrapper control.
+   :rtype: WrapperControl
+
+   .. rubric:: Examples
+
+   >>> wrapper_control = model.control_data.get_wrapper_control_by_name("wrappercontrol-1")
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,122 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteTool`
+===================
+
+
+.. py:class:: ansys.meshing.prime.DeleteTool(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Performs various delete operation. For example, delete fringes and overlapping faces.
+
+   :param model: Server model to create DeleteTool object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: DeleteTool
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_fringes_and_overlaps_on_zonelets`
+            - Deletes fringes and overlapping faces on the given face zonelets.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for DeleteTool.
+          * - :py:attr:`~__exit__`
+            - Exit context for DeleteTool.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DeleteTool
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for DeleteTool.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for DeleteTool.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: delete_fringes_and_overlaps_on_zonelets(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.DeleteFringesAndOverlapsParams) -> ansys.meshing.prime.params.primestructs.DeleteFringesAndOverlapsResults
+
+   Deletes fringes and overlapping faces on the given face zonelets.
+
+
+   :param part_id: Id of a part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets.
+   :type face_zonelets: Iterable[int]
+   :param params: Parameters to delete the fringes and overlapping faces.
+   :type params: DeleteFringesAndOverlapsParams
+
+   :returns: Returns the DeleteFringesAndOverlapsResults.
+   :rtype: DeleteFringesAndOverlapsResults
+
+   .. rubric:: Examples
+
+   >>> delete_tool = prime.DeleteTool(model = model)
+   >>> results = delete_tool.delete_fringes_and_overlaps_on_zonelets(
+   >>>                                    part.id,
+   >>>                                    part.get_face_zonelets(),
+   >>>                                    prime.DeleteFringesAndOverlapsParams(
+   >>>                                       model=model))
+
+
+
+
+
+
+
+.. vale on

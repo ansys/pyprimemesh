@@ -1,0 +1,120 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AutoMesh`
+=================
+
+
+.. py:class:: ansys.meshing.prime.AutoMesh(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   Generates volume mesh.
+
+   Performs volume meshing using various volume meshing algorithms.
+   For example, with prisms.
+
+   :param model: Server model to create AutoMesh object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: AutoMesh
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mesh`
+            - Performs volume meshing on the part with the given meshing parameters.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for AutoMesh.
+          * - :py:attr:`~__exit__`
+            - Exit context for AutoMesh.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import AutoMesh
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for AutoMesh.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for AutoMesh.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: mesh(part_id: int, automesh_params: ansys.meshing.prime.params.primestructs.AutoMeshParams) -> ansys.meshing.prime.params.primestructs.AutoMeshResults
+
+   Performs volume meshing on the part with the given meshing parameters.
+
+
+   :param part_id: Id of the part.
+   :type part_id: int
+   :param automesh_params: Parameters for auto mesh.
+   :type automesh_params: AutoMeshParams
+
+   :returns: Returns the AutomeshResults.
+   :rtype: AutoMeshResults
+
+   .. rubric:: Examples
+
+   >>> auto_mesh = AutoMesh(model = model)
+   >>> automesh_params = AutoMeshParams(model = model)
+   >>> results = auto_mesh.mesh(part_id, automesh_params)
+
+
+
+
+
+
+
+.. vale on

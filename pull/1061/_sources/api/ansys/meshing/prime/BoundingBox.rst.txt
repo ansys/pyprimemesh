@@ -1,0 +1,198 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BoundingBox`
+====================
+
+
+.. py:class:: ansys.meshing.prime.BoundingBox(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, xmin: float = None, ymin: float = None, zmin: float = None, xmax: float = None, ymax: float = None, zmax: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Provides information about the definition of a bounding box.
+
+   :param model: Model to create a ``BoundingBox`` object with default parameters.
+   :type model: Model
+   :param xmin: Minimal X coordinate of the bounding box.
+   :type xmin: float, optional
+   :param ymin: Minimal Y coordinate of the bounding box.
+   :type ymin: float, optional
+   :param zmin: Minimal Z coordinate of the bounding box.
+   :type zmin: float, optional
+   :param xmax: Maximal X coordinate of the bounding box.
+   :type xmax: float, optional
+   :param ymax: Maximal Y coordinate of the bounding box.
+   :type ymax: float, optional
+   :param zmax: Maximal Z coordinate of the bounding box.
+   :type zmax: float, optional
+   :param json_data: JSON dictionary to create a ``BoundingBox`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> bounding_box = prime.BoundingBox(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: BoundingBox
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~xmax`
+            - Maximal X coordinate of the bounding box.
+          * - :py:attr:`~xmin`
+            - Minimal X coordinate of the bounding box.
+          * - :py:attr:`~ymax`
+            - Maximal Y coordinate of the bounding box.
+          * - :py:attr:`~ymin`
+            - Minimal Y coordinate of the bounding box.
+          * - :py:attr:`~zmax`
+            - Maximal Z coordinate of the bounding box.
+          * - :py:attr:`~zmin`
+            - Minimal Z coordinate of the bounding box.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``BoundingBox`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``BoundingBox`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import BoundingBox
+
+Property detail
+---------------
+
+.. py:property:: xmax
+   :type: float
+
+
+   Maximal X coordinate of the bounding box.
+
+.. py:property:: xmin
+   :type: float
+
+
+   Minimal X coordinate of the bounding box.
+
+.. py:property:: ymax
+   :type: float
+
+
+   Maximal Y coordinate of the bounding box.
+
+.. py:property:: ymin
+   :type: float
+
+
+   Minimal Y coordinate of the bounding box.
+
+.. py:property:: zmax
+   :type: float
+
+
+   Maximal Z coordinate of the bounding box.
+
+.. py:property:: zmin
+   :type: float
+
+
+   Minimal Z coordinate of the bounding box.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``BoundingBox`` object.
+
+   .. rubric:: Examples
+
+   >>> BoundingBox.print_default()
+
+
+.. py:method:: set_default(xmin: float = None, ymin: float = None, zmin: float = None, xmax: float = None, ymax: float = None, zmax: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``BoundingBox`` object.
+
+   :param xmin: Minimal X coordinate of the bounding box.
+   :type xmin: float, optional
+   :param ymin: Minimal Y coordinate of the bounding box.
+   :type ymin: float, optional
+   :param zmin: Minimal Z coordinate of the bounding box.
+   :type zmin: float, optional
+   :param xmax: Maximal X coordinate of the bounding box.
+   :type xmax: float, optional
+   :param ymax: Maximal Y coordinate of the bounding box.
+   :type ymax: float, optional
+   :param zmax: Maximal Z coordinate of the bounding box.
+   :type zmax: float, optional
+
+
+
+
+
+
+
+.. vale on

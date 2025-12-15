@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.EdgeConnectType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using EdgeConnectType.is_integer
+
+   ansys.meshing.prime.EdgeConnectType.is_integer

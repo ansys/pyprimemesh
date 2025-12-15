@@ -1,0 +1,15 @@
+ansys.meshing.prime.local_model
+===============================
+
+.. py:function:: ansys.meshing.prime.local_model() -> core.model.Model
+
+   Get local model
+
+   .. note:: USE IN DEVELOPMENT ONLY
+
+   This imports the Ansys Prime Server environment into the Python process. It will
+   error unless proper environment is set up to support Ansys Prime Server.
+
+   :returns: The local model
+   :rtype: Model
+

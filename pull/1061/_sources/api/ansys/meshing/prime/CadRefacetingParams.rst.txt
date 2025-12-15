@@ -1,0 +1,200 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CadRefacetingParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.CadRefacetingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, cad_faceter: CadFaceter = None, faceting_resolution: CadRefacetingResolution = None, custom_surface_deviation_tolerance: float = None, custom_normal_angle_tolerance: float = None, max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit = None, max_edge_size: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to refacet CAD during import.
+
+   :param model: Model to create a ``CadRefacetingParams`` object with default parameters.
+   :type model: Model
+   :param cad_faceter: Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
+   :type cad_faceter: CadFaceter, optional
+   :param faceting_resolution: Set the faceting resolution.
+   :type faceting_resolution: CadRefacetingResolution, optional
+   :param custom_surface_deviation_tolerance: Set custom tolerance for surface deviation in specified length unit.
+   :type custom_surface_deviation_tolerance: float, optional
+   :param custom_normal_angle_tolerance: Set custom tolerance for normal angle in degree.
+   :type custom_normal_angle_tolerance: float, optional
+   :param max_edge_size_limit: Specify maximum edge size limit for faceting.
+   :type max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit, optional
+   :param max_edge_size: Set maximum edge size of the facets.
+   :type max_edge_size: float, optional
+   :param json_data: JSON dictionary to create a ``CadRefacetingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> cad_refaceting_params = prime.CadRefacetingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CadRefacetingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~cad_faceter`
+            - ACIS faceter is being deprecated from 25R1).
+          * - :py:attr:`~custom_normal_angle_tolerance`
+            - Set custom tolerance for normal angle in degree.
+          * - :py:attr:`~custom_surface_deviation_tolerance`
+            - Set custom tolerance for surface deviation in specified length unit.
+          * - :py:attr:`~faceting_resolution`
+            - Set the faceting resolution.
+          * - :py:attr:`~max_edge_size`
+            - Set maximum edge size of the facets.
+          * - :py:attr:`~max_edge_size_limit`
+            - Specify maximum edge size limit for faceting.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CadRefacetingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CadRefacetingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import CadRefacetingParams
+
+Property detail
+---------------
+
+.. py:property:: cad_faceter
+   :type: CadFaceter
+
+
+   ACIS faceter is being deprecated from 25R1).
+
+   :type: Specify the available choices for faceter. The available option is Parasolid. (Note
+
+.. py:property:: custom_normal_angle_tolerance
+   :type: float
+
+
+   Set custom tolerance for normal angle in degree.
+
+.. py:property:: custom_surface_deviation_tolerance
+   :type: float
+
+
+   Set custom tolerance for surface deviation in specified length unit.
+
+.. py:property:: faceting_resolution
+   :type: CadRefacetingResolution
+
+
+   Set the faceting resolution.
+
+.. py:property:: max_edge_size
+   :type: float
+
+
+   Set maximum edge size of the facets.
+
+.. py:property:: max_edge_size_limit
+   :type: CadRefacetingMaxEdgeSizeLimit
+
+
+   Specify maximum edge size limit for faceting.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CadRefacetingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CadRefacetingParams.print_default()
+
+
+.. py:method:: set_default(cad_faceter: CadFaceter = None, faceting_resolution: CadRefacetingResolution = None, custom_surface_deviation_tolerance: float = None, custom_normal_angle_tolerance: float = None, max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit = None, max_edge_size: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CadRefacetingParams`` object.
+
+   :param cad_faceter: Specify the available choices for faceter. The available option is Parasolid. (Note: ACIS faceter is being deprecated from 25R1).
+   :type cad_faceter: CadFaceter, optional
+   :param faceting_resolution: Set the faceting resolution.
+   :type faceting_resolution: CadRefacetingResolution, optional
+   :param custom_surface_deviation_tolerance: Set custom tolerance for surface deviation in specified length unit.
+   :type custom_surface_deviation_tolerance: float, optional
+   :param custom_normal_angle_tolerance: Set custom tolerance for normal angle in degree.
+   :type custom_normal_angle_tolerance: float, optional
+   :param max_edge_size_limit: Specify maximum edge size limit for faceting.
+   :type max_edge_size_limit: CadRefacetingMaxEdgeSizeLimit, optional
+   :param max_edge_size: Set maximum edge size of the facets.
+   :type max_edge_size: float, optional
+
+
+
+
+
+
+
+.. vale on

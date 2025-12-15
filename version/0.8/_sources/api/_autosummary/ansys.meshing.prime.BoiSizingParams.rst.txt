@@ -1,0 +1,40 @@
+.. vale off
+
+BoiSizingParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BoiSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      BoiSizingParams.print_default
+      BoiSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BoiSizingParams.growth_rate
+      BoiSizingParams.max
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BoiSizingParams
+
+    ansys.meshing.prime.BoiSizingParams
+
+.. vale on

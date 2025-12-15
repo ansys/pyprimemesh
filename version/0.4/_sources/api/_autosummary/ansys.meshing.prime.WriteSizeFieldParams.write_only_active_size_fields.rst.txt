@@ -1,0 +1,6 @@
+﻿write\_only\_active\_size\_fields
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WriteSizeFieldParams.write_only_active_size_fields

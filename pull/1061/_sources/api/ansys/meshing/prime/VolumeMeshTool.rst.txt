@@ -1,0 +1,225 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeMeshTool`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.VolumeMeshTool(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager)
+
+
+
+   VolumeMeshTool allows you to check grid and improve volume mesh quality.
+
+   VolumeMeshTool provides various volume mesh improvement algorithms.
+
+
+   :param model: Server model to create VolumeMeshTool object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: VolumeMeshTool
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assign_mesh_regions`
+            - Assigns a region id to the cells in target cell zonelets of target part id. The region id is based on their location within source part ids.
+          * - :py:attr:`~check_mesh`
+            - Checks mesh of a part.
+          * - :py:attr:`~copy_cell_zonelets`
+            - Copy cell zonelets and face zonelets connected to the cell zonelets.
+          * - :py:attr:`~get_parts_for_points`
+            - Finds parts enclosing the given list of points.
+          * - :py:attr:`~improve_by_auto_node_move`
+            - Improve volume mesh by auto node move.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for VolumeMeshTool.
+          * - :py:attr:`~__exit__`
+            - Exit context for VolumeMeshTool.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VolumeMeshTool
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for VolumeMeshTool.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for VolumeMeshTool.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: assign_mesh_regions(target_part_id: int, target_cell_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], source_part_ids: ansys.meshing.prime.params.primestructs.Iterable[int], small_regions_volume_fraction: float) -> ansys.meshing.prime.params.primestructs.VolumeMeshToolResults
+
+   Assigns a region id to the cells in target cell zonelets of target part id. The region id is based on their location within source part ids.
+
+
+   :param target_part_id: Id of the target part.
+   :type target_part_id: int
+   :param target_cell_zonelets: Ids of cell zonelets to be split into regions.
+   :type target_cell_zonelets: Iterable[int]
+   :param source_part_ids: Ids of solids used as a reference for assigning regions.
+   :type source_part_ids: Iterable[int]
+   :param small_regions_volume_fraction: Regions with volumes smaller than a specified fraction of the total volume are merged into their largest adjacent region.
+                                         This helps to eliminate isolated cells and thin regions from the output.
+   :type small_regions_volume_fraction: float
+
+   :returns: Returns the VolumeMeshToolResults.
+   :rtype: VolumeMeshToolResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = volume_mesh_tool.AssignMeshRegions(target_part_id, target_cell_zonelets, source_part_ids, small_regions_volume_fraction)
+
+
+.. py:method:: check_mesh(part_id: int, params: ansys.meshing.prime.params.primestructs.CheckMeshParams) -> ansys.meshing.prime.params.primestructs.CheckMeshResults
+
+   Checks mesh of a part.
+
+
+   :param part_id: Id of a part.
+   :type part_id: int
+   :param params: Parameters to check mesh.
+   :type params: CheckMeshParams
+
+   :returns: Returns the CheckMeshResults.
+   :rtype: CheckMeshResults
+
+   .. rubric:: Examples
+
+   >>> results = volume_mesh_tool.check_mesh(part_id,
+   >>>                                prime.CheckMeshParams(model =model))
+
+
+.. py:method:: copy_cell_zonelets(cell_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], target_part_id: int, params: ansys.meshing.prime.params.primestructs.CopyZoneletsParams) -> ansys.meshing.prime.params.primestructs.CopyZoneletsResults
+
+   Copy cell zonelets and face zonelets connected to the cell zonelets.
+
+
+   :param cell_zonelets: Ids of cell zonelets to be copied.
+   :type cell_zonelets: Iterable[int]
+   :param target_part_id: Part id used to move the copied zonelets.
+   :type target_part_id: int
+   :param params: Parameters to copy cell zonelets.
+   :type params: CopyZoneletsParams
+
+   :returns: Returns the CopyZoneletsResults.
+   :rtype: CopyZoneletsResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>>> results = volume_mesh_tool.copy_cell_zonelets(cell_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))
+
+
+.. py:method:: get_parts_for_points(points: ansys.meshing.prime.params.primestructs.Iterable[float], params: PartsForPointsParams) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Finds parts enclosing the given list of points.
+
+
+   :param points: Coordinates of points for which parts need to be found.
+   :type points: Iterable[float]
+   :param params: Parameters for searching parts.
+   :type params: PartsForPointsParams
+
+   :returns: Returns array containing information about parts enclosing the points.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> results = volume_mesh_tool.get_parts_for_points([0., 0., 0.], params)
+
+
+.. py:method:: improve_by_auto_node_move(part_id: int, cell_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], boundary_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.AutoNodeMoveParams) -> ansys.meshing.prime.params.primestructs.VolumeMeshToolResults
+
+   Improve volume mesh by auto node move.
+
+
+   :param part_id: Id of a part.
+   :type part_id: int
+   :param cell_zonelets: Ids of cell zonelets to be improved.
+   :type cell_zonelets: Iterable[int]
+   :param boundary_zonelets: Ids of boundary face zonelets.
+   :type boundary_zonelets: Iterable[int]
+   :param params: Auto node move parameters.
+   :type params: AutoNodeMoveParams
+
+   :returns: Return the VolumeMeshToolResults.
+   :rtype: VolumeMeshToolResults
+
+   .. rubric:: Examples
+
+   >>> results = volume_mesh_tool.improve_by_auto_node_move(part_id,
+   >>>                                cell_zonelets,
+   >>>                                boundary_zonelets,
+   >>>                                prime.AutoNodeMoveParams(model =model))
+
+
+
+
+
+
+
+.. vale on

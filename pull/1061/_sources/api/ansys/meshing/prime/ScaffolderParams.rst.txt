@@ -1,0 +1,258 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ScaffolderParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.ScaffolderParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, absolute_dist_tol: float = None, repair_mode: ScaffolderRepairMode = None, size_field_type: int = None, intersection_control_mask: IntersectionMask = None, edge_merge_control: int = None, constant_mesh_size: float = None, remove_holes_critical_radius: float = None, remove_slivers_abs_dist_tol_ratio: float = None, triangles_coplanar_angle_cos: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control scaffold operation.
+
+   :param model: Model to create a ``ScaffolderParams`` object with default parameters.
+   :type model: Model
+   :param absolute_dist_tol: Defines the maximum gap to connect.
+   :type absolute_dist_tol: float, optional
+   :param repair_mode: Defines the mode to be used during repair or connect.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type repair_mode: ScaffolderRepairMode, optional
+   :param size_field_type: Specifies the type of size field used for scaffolding.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type size_field_type: int, optional
+   :param intersection_control_mask: Specifies the nature of intersection to be computed.
+   :type intersection_control_mask: IntersectionMask, optional
+   :param edge_merge_control: Specifies type of edge pairs to be merged during scaffold operation.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_merge_control: int, optional
+   :param constant_mesh_size: Defines the constant edge mesh size to check connection.
+   :type constant_mesh_size: float, optional
+   :param remove_holes_critical_radius: Defines the maximum radius of holes to be removed.
+
+                                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type remove_holes_critical_radius: float, optional
+   :param remove_slivers_abs_dist_tol_ratio: Defines the maximum aspect ratio to remove sliver faces.
+
+                                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type remove_slivers_abs_dist_tol_ratio: float, optional
+   :param triangles_coplanar_angle_cos: Lower bound for cos angle to consider coplanar faces for scaffolding.
+
+                                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type triangles_coplanar_angle_cos: float, optional
+   :param json_data: JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> scaffolder_params = prime.ScaffolderParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ScaffolderParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~absolute_dist_tol`
+            - Defines the maximum gap to connect.
+          * - :py:attr:`~constant_mesh_size`
+            - Defines the constant edge mesh size to check connection.
+          * - :py:attr:`~edge_merge_control`
+            - Specifies type of edge pairs to be merged during scaffold operation.
+          * - :py:attr:`~intersection_control_mask`
+            - Specifies the nature of intersection to be computed.
+          * - :py:attr:`~remove_holes_critical_radius`
+            - Defines the maximum radius of holes to be removed.
+          * - :py:attr:`~remove_slivers_abs_dist_tol_ratio`
+            - Defines the maximum aspect ratio to remove sliver faces.
+          * - :py:attr:`~repair_mode`
+            - Defines the mode to be used during repair or connect.
+          * - :py:attr:`~size_field_type`
+            - Specifies the type of size field used for scaffolding.
+          * - :py:attr:`~triangles_coplanar_angle_cos`
+            - Lower bound for cos angle to consider coplanar faces for scaffolding.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ScaffolderParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ScaffolderParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ScaffolderParams
+
+Property detail
+---------------
+
+.. py:property:: absolute_dist_tol
+   :type: float
+
+
+   Defines the maximum gap to connect.
+
+.. py:property:: constant_mesh_size
+   :type: float
+
+
+   Defines the constant edge mesh size to check connection.
+
+.. py:property:: edge_merge_control
+   :type: int
+
+
+   Specifies type of edge pairs to be merged during scaffold operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: intersection_control_mask
+   :type: IntersectionMask
+
+
+   Specifies the nature of intersection to be computed.
+
+.. py:property:: remove_holes_critical_radius
+   :type: float
+
+
+   Defines the maximum radius of holes to be removed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: remove_slivers_abs_dist_tol_ratio
+   :type: float
+
+
+   Defines the maximum aspect ratio to remove sliver faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: repair_mode
+   :type: ScaffolderRepairMode
+
+
+   Defines the mode to be used during repair or connect.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: size_field_type
+   :type: int
+
+
+   Specifies the type of size field used for scaffolding.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: triangles_coplanar_angle_cos
+   :type: float
+
+
+   Lower bound for cos angle to consider coplanar faces for scaffolding.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ScaffolderParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ScaffolderParams.print_default()
+
+
+.. py:method:: set_default(absolute_dist_tol: float = None, repair_mode: ScaffolderRepairMode = None, size_field_type: int = None, intersection_control_mask: IntersectionMask = None, edge_merge_control: int = None, constant_mesh_size: float = None, remove_holes_critical_radius: float = None, remove_slivers_abs_dist_tol_ratio: float = None, triangles_coplanar_angle_cos: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ScaffolderParams`` object.
+
+   :param absolute_dist_tol: Defines the maximum gap to connect.
+   :type absolute_dist_tol: float, optional
+   :param repair_mode: Defines the mode to be used during repair or connect.
+   :type repair_mode: ScaffolderRepairMode, optional
+   :param size_field_type: Specifies the type of size field used for scaffolding.
+   :type size_field_type: int, optional
+   :param intersection_control_mask: Specifies the nature of intersection to be computed.
+   :type intersection_control_mask: IntersectionMask, optional
+   :param edge_merge_control: Specifies type of edge pairs to be merged during scaffold operation.
+   :type edge_merge_control: int, optional
+   :param constant_mesh_size: Defines the constant edge mesh size to check connection.
+   :type constant_mesh_size: float, optional
+   :param remove_holes_critical_radius: Defines the maximum radius of holes to be removed.
+   :type remove_holes_critical_radius: float, optional
+   :param remove_slivers_abs_dist_tol_ratio: Defines the maximum aspect ratio to remove sliver faces.
+   :type remove_slivers_abs_dist_tol_ratio: float, optional
+   :param triangles_coplanar_angle_cos: Lower bound for cos angle to consider coplanar faces for scaffolding.
+   :type triangles_coplanar_angle_cos: float, optional
+
+
+
+
+
+
+
+.. vale on

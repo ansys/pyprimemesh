@@ -1,0 +1,6 @@
+MERGEVOLUMESFAILED
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MERGEVOLUMESFAILED

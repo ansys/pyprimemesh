@@ -1,0 +1,970 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mesh a generic PCB geometry with multiple hexa layers &#8212; PyPrimeMesh</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../_static/documentation_options.js?v=1c28bd9a"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/gallery/09_multi_layer_quad_mesh_pcb';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.6';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Miscellaneous examples" href="../misc/index.html" />
+    <link rel="prev" title="Mesh a generic F1 car rear wing for external aero simulation" href="08_lucid_generic_f1_rear_wing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/09_multi_layer_quad_mesh_pcb.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyPrimeMesh - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_lucid_file_IO.html">Convert data when importing and exporting mesh and CAD formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_bracket_scaffold.html">Mesh a mid-surfaced bracket for a structural analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_lucid_mixing_elbow.html">Mesh a mixing elbow for a flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_lucid_pipe_tee.html">Mesh a pipe T-section for structural thermal and fluid flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_lucid_toy_car.html">Wrap a toy car for a flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_pcb_stacker.html">Mesh a PCB for structural thermal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_blade_morph.html">Morph a hexahedral mesh of a turbine blade to a new shape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_saddle_bracket.html">Mesh a saddle bracket for a structural analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html">Mesh a generic F1 car rear wing for external aero simulation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mesh a generic PCB geometry with multiple hexa layers</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Examples</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Mesh a generic PCB geometry with multiple hexa layers</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-gallery-09-multi-layer-quad-mesh-pcb-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="mesh-a-generic-pcb-geometry-with-multiple-hexa-layers">
+<span id="ref-multi-layer-pcb-mesh"></span><span id="sphx-glr-examples-gallery-examples-gallery-09-multi-layer-quad-mesh-pcb-py"></span><h1>Mesh a generic PCB geometry with multiple hexa layers<a class="headerlink" href="#mesh-a-generic-pcb-geometry-with-multiple-hexa-layers" title="Link to this heading">#</a></h1>
+<p><strong>Summary</strong>: This example demonstrates how to set the base mesh size and number of
+layers for each solid in a generic PCB geometry and then generate a mesh.</p>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading">#</a></h2>
+<p>The example uses PyPrimeMesh to discretize a PCB CAD geometry by means of the
+stacker technology. You can easily set up the mesh size of the base face (xy plane
+in this example) and the number of mesh layers along the sweep direction (z axis in this example).
+The CAD edges along the z direction are assigned with a named selection at a CAD level in Ansys
+Discovery/SpaceClaim.</p>
+<p>The following image provides a snapshot of the Discovery tree to help you to understand the model’s
+organization. Share topology in Discovery/SpaceClaim guarantees the generation of a conformal mesh
+between the solids. Named selections of edges allow you to specify the number of mesh elements to
+generate along the sweep direction. To simplify the process and enhance convenience, this example
+uses multiple meshing utilities provided in the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p>
+<a class="reference internal image-reference" href="../../../_images/multi_layer_quad_mesh_pcb.png"><img alt="Generic PCB geometry." class="align-center" src="../../../_images/multi_layer_quad_mesh_pcb.png" style="width: 800px;" /></a>
+<p>The resulting mesh with three layers per solid looks like this:</p>
+<a class="reference internal image-reference" href="../../../_images/multi_layer_quad_mesh_pcb_3.png"><img alt="Generic PCB geometry meshed." class="align-center" src="../../../_images/multi_layer_quad_mesh_pcb_3.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/multi_layer_quad_mesh_pcb_2.png"><img alt="Generic PCB geometry meshed, zoom in." class="align-center" src="../../../_images/multi_layer_quad_mesh_pcb_2.png" style="width: 500px;" /></a>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Import the fundamental libraries that are necessary to run the script.</p></li>
+<li><p>Launch an Ansys Prime Server instance and instantiate the meshing utilities from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code>
+class.</p></li>
+<li><p>Define the main mesh parameters, which are the base size and number of layers along the
+sweep direction.</p></li>
+<li><p>Import the CAD geometry.</p></li>
+<li><p>Define the edge sizing along the sweep direction (based on pre-existing edges named
+selections).</p></li>
+<li><p>Define the parameters for the volume sweeper.</p></li>
+<li><p>Set up, generate, and mesh the base face.</p></li>
+<li><p>Stack the base face along the sweep direction.</p></li>
+<li><p>Set up the zone naming before the mesh output.</p></li>
+<li><p>Write a CAS file for use in the Fluent solver.</p></li>
+<li><p>Exit the PyPrimeMesh session.</p></li>
+</ul>
+</section>
+<section id="import-all-necessary-modules">
+<h2>Import all necessary modules<a class="headerlink" href="#import-all-necessary-modules" title="Link to this heading">#</a></h2>
+<p>Notice that you must install the PyVista library to be able to run the visualization
+tools included in this script.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">import</span> <span class="nn">ansys.meshing.prime</span> <span class="k">as</span> <span class="nn">prime</span>
+<span class="kn">from</span> <span class="nn">ansys.meshing.prime.graphics</span> <span class="kn">import</span> <span class="n">Graphics</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-prime-server-and-instantiate-the-lucid-class">
+<h2>Launch Prime server and instantiate the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class<a class="headerlink" href="#launch-prime-server-and-instantiate-the-lucid-class" title="Link to this heading">#</a></h2>
+<p>Launch an instance of Ansys Prime Server.
+Connect the PyPrimeMesh client and get the model.
+Instantiate meshing utilities from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+<span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-cad-file-and-mesh-settings">
+<h2>Define CAD file and mesh settings<a class="headerlink" href="#define-cad-file-and-mesh-settings" title="Link to this heading">#</a></h2>
+<p>Define the number of layers per solid.
+Define the size in mm of the quad-dominant mesh on the base size.
+Define the path to the CAD file to mesh.
+Download the example CAD file using the <code class="docutils literal notranslate"><span class="pre">prime.examples</span></code> function. Otherwise,
+write the path to the desired CAD file on your machine. Supported file types
+are SCDOC, DSCO, and PMDB.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># cad_file=&#39;/path/to/any/cad/file.dsco&#39;</span>
+<a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cad_file</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_multi_layer_quad_mesh_pcb_pmdat</span><span class="p">()</span>
+<a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">layers_per_solid</span></a> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># number of hexa mesh layers in each solid</span>
+<a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">base_face_size</span></a> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># surface mesh size in mm on the base face</span>
+<span class="c1"># Chose whether to display the CAD/mesh at every stage</span>
+<a href="https://docs.python.org/3.11/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">display_intermediate_steps</span></a> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Use True/False</span>
+</pre></div>
+</div>
+</section>
+<section id="import-geometry">
+<h2>Import geometry<a class="headerlink" href="#import-geometry" title="Link to this heading">#</a></h2>
+<p>Import the geometry into Prime server.
+Use the Workbench <code class="docutils literal notranslate"><span class="pre">CadReaderRoute</span></code> to ensure that the shared topology is kept.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cad_file</span></a><span class="p">)</span>
+<span class="c1"># Use the following command to open CAD files of these types: SCDOC, DSCO, and PMDB.</span>
+<span class="c1"># mesh_util.read(</span>
+<span class="c1">#     file_name = cad_file,</span>
+<span class="c1">#     cad_reader_route = prime.CadReaderRoute.WORKBENCH)</span>
+</pre></div>
+</div>
+</section>
+<section id="display-the-imported-cad-in-a-pyvista-window">
+<h2>Display the imported CAD in a PyVista window<a class="headerlink" href="#display-the-imported-cad-in-a-pyvista-window" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <a href="https://docs.python.org/3.11/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">display_intermediate_steps</span></a><span class="p">:</span>
+    <span class="n">display</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_09_multi_layer_quad_mesh_pcb_001.png" srcset="../../../_images/sphx_glr_09_multi_layer_quad_mesh_pcb_001.png" alt="09 multi layer quad mesh pcb" class = "sphx-glr-single-img"/></section>
+<section id="define-edge-sizing-constraints">
+<h2>Define edge sizing constraints<a class="headerlink" href="#define-edge-sizing-constraints" title="Link to this heading">#</a></h2>
+<p>Set generic global sizing from 0.002mm to 2mm.
+Extract the the edge’s length from the named selections, such as “edge_1_0.50_mm”
+(extract 0.5 mm length) or “edge_23_0.27_mm” (extract 0.27mm length).
+On each edge, assign a size equal to the edge’s length divided by the
+predefined number of layers per solid.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set generic global sizing from 0.002mm to 2mm.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_global_sizing_params</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">GlobalSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
+<a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ids</span></a> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># collect the imported geometry</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">get_labels</span><span class="p">():</span>
+    <span class="c1"># Check whether the named selection&#39;s name starts with the string &quot;edge&quot;</span>
+    <span class="k">if</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;edge&#39;</span><span class="p">):</span>
+        <span class="c1"># Extract the edge&#39;s length, splitting its name at every &quot;_&quot; string</span>
+        <span class="c1"># Collect the second to last number</span>
+        <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">length</span></a> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># get 0.27 from &quot;edge_23_0.27_mm&quot;</span>
+        <span class="c1"># Initialize a constant-size mesh control (SOFT)</span>
+        <span class="n">soft_size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">SOFT</span><span class="p">)</span>
+        <span class="c1"># Assign a mesh size equal to the edge&#39;s length/number of mesh layers</span>
+        <span class="n">soft_size_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SoftSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">length</span></a> <span class="o">/</span> <a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">layers_per_solid</span></a><span class="p">)</span>
+        <span class="c1"># Finalize the creation of mesh sizing</span>
+        <span class="n">soft_size_control</span><span class="o">.</span><span class="n">set_soft_sizing_params</span><span class="p">(</span><span class="n">soft_size_params</span><span class="p">)</span>
+        <span class="n">soft_size_scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span>
+            <span class="n">part_expression</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">entity_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEntity</span><span class="o">.</span><span class="n">FACEANDEDGEZONELETS</span><span class="p">,</span>
+            <span class="n">label_expression</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">soft_size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">soft_size_scope</span><span class="p">)</span>
+        <span class="n">soft_size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a><span class="p">)</span>
+        <span class="c1"># Append the id of the edge sizing to the edge sizings&#39; ids&#39; list</span>
+        <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ids</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">soft_size_control</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-controls-for-volume-sweeper">
+<h2>Define controls for volume sweeper<a class="headerlink" href="#define-controls-for-volume-sweeper" title="Link to this heading">#</a></h2>
+<p>Set the sweep direction vector.
+Set up the geometric tolerances for lateral and stacking defeature.
+Select the sweep direction as the z axis (0,0,1).
+Append the IDs of the soft local sizings that have been previously defined on
+the edges.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate the volume sweeper</span>
+<span class="n">sweeper</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">VolumeSweeper</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="c1"># Define the parameters for stacker</span>
+<span class="n">stacker_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MeshStackerParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">direction</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># define the sweep direction for the mesh</span>
+    <span class="n">delete_base</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># delete the base face in the end of stacker</span>
+    <span class="n">lateral_defeature_tolerance</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">stacking_defeature_tolerance</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">size_control_ids</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ids</span></a><span class="p">,</span>
+<span class="p">)</span>  <span class="c1"># list of control IDs to be respected by the stacker</span>
+</pre></div>
+</div>
+</section>
+<section id="set-up-generate-and-mesh-the-base-face">
+<h2>Set up, generate, and mesh the base face<a class="headerlink" href="#set-up-generate-and-mesh-the-base-face" title="Link to this heading">#</a></h2>
+<p>Create a soft sizing control.
+Assign the previously defined <code class="docutils literal notranslate"><span class="pre">base_face_size</span></code> function to the soft sizing.
+Create the base face.
+Mesh the base face.
+Display the base face.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the necessary parameters for the generation of the base face.</span>
+<span class="n">soft_size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">SOFT</span><span class="p">)</span>
+<span class="n">soft_size_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SoftSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">base_face_size</span></a><span class="p">)</span>
+<span class="n">soft_size_control</span><span class="o">.</span><span class="n">set_soft_sizing_params</span><span class="p">(</span><span class="n">soft_size_params</span><span class="p">)</span>
+<span class="n">soft_size_scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">entity_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEntity</span><span class="o">.</span><span class="n">FACEANDEDGEZONELETS</span>
+<span class="p">)</span>
+<span class="n">soft_size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">soft_size_scope</span><span class="p">)</span>
+<span class="n">soft_size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;b_f_size&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the base face, appending the the stacker mesh parameters.</span>
+<span class="n">createbase_results</span> <span class="o">=</span> <span class="n">sweeper</span><span class="o">.</span><span class="n">create_base_face</span><span class="p">(</span>
+    <span class="n">part_id</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">topo_volume_ids</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">get_topo_volumes</span><span class="p">(),</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">stacker_params</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">base_faces</span> <span class="o">=</span> <span class="n">createbase_results</span><span class="o">.</span><span class="n">base_face_ids</span>
+<span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">add_labels_on_topo_entities</span><span class="p">([</span><span class="s2">&quot;base_faces&quot;</span><span class="p">],</span> <span class="n">base_faces</span><span class="p">)</span>
+<span class="n">scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;base_faces&quot;</span><span class="p">)</span>
+<span class="n">base_scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">SurfaceScope</span><span class="p">(</span>
+    <span class="n">entity_expression</span><span class="o">=</span><span class="s2">&quot;base_faces&quot;</span><span class="p">,</span>
+    <span class="n">part_expression</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">scope_evaluation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEvaluationType</span><span class="o">.</span><span class="n">LABELS</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Generate the quad-dominant surface mesh on the base face.</span>
+<span class="n">mesh_util_controls</span> <span class="o">=</span> <span class="n">mesh_util</span><span class="o">.</span><span class="n">surface_mesh_with_size_controls</span><span class="p">(</span>
+    <span class="n">size_control_names</span><span class="o">=</span><span class="s2">&quot;b_f_size&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">base_scope</span><span class="p">,</span> <span class="n">generate_quads</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="display-the-meshed-base-face-in-a-pyvista-window">
+<h2>Display the meshed base face in a PyVista window<a class="headerlink" href="#display-the-meshed-base-face-in-a-pyvista-window" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <a href="https://docs.python.org/3.11/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">display_intermediate_steps</span></a><span class="p">:</span>
+    <span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_09_multi_layer_quad_mesh_pcb_002.png" srcset="../../../_images/sphx_glr_09_multi_layer_quad_mesh_pcb_002.png" alt="09 multi layer quad mesh pcb" class = "sphx-glr-single-img"/></section>
+<section id="stack-the-base-face-using-the-volume-sweeper">
+<h2>Stack the base face using the volume sweeper<a class="headerlink" href="#stack-the-base-face-using-the-volume-sweeper" title="Link to this heading">#</a></h2>
+<p>Use the volume sweeper to stack the base face along the previously defined sweep
+direction.
+Include the previously defined stacker parameters.
+Display the final volume mesh.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the ``stack_base_face`` function to generate the volume mesh</span>
+<span class="n">stackbase_results</span> <span class="o">=</span> <span class="n">sweeper</span><span class="o">.</span><span class="n">stack_base_face</span><span class="p">(</span>
+    <span class="n">part_id</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">base_face_ids</span><span class="o">=</span><span class="n">base_faces</span><span class="p">,</span>
+    <span class="n">topo_volume_ids</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">get_topo_volumes</span><span class="p">(),</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">stacker_params</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="display-the-final-pcb-mesh-in-a-pyvista-window">
+<h2>Display the final PCB mesh in a PyVista window<a class="headerlink" href="#display-the-final-pcb-mesh-in-a-pyvista-window" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <a href="https://docs.python.org/3.11/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">display_intermediate_steps</span></a><span class="p">:</span>
+    <span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_09_multi_layer_quad_mesh_pcb_003.png" srcset="../../../_images/sphx_glr_09_multi_layer_quad_mesh_pcb_003.png" alt="09 multi layer quad mesh pcb" class = "sphx-glr-single-img"/></section>
+<section id="set-up-the-zone-naming-before-the-mesh-output">
+<h2>Set up the zone naming before the mesh output<a class="headerlink" href="#set-up-the-zone-naming-before-the-mesh-output" title="Link to this heading">#</a></h2>
+<p>Delete the unnecessary topo entities.
+Name the walls of <code class="docutils literal notranslate"><span class="pre">solid</span></code> as <code class="docutils literal notranslate"><span class="pre">wall_solid</span></code>. For example, if the solid’s name is <code class="docutils literal notranslate"><span class="pre">A</span></code>, then
+name the walls surrounding the solid <code class="docutils literal notranslate"><span class="pre">wall_A</span></code>).
+Convert the labels to mesh zones.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define deletion parameters</span>
+<span class="n">deletion_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">DeleteTopoEntitiesParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">delete_geom_zonelets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delete_mesh_zonelets</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="c1"># Delete unnecessary geometrical entities.</span>
+<span class="n">part</span><span class="o">.</span><span class="n">delete_topo_entities</span><span class="p">(</span><span class="n">deletion_params</span><span class="p">)</span>
+<span class="c1"># Rename the walls surrounding any volume of the mesh by appending the string</span>
+<span class="c1"># ``wall_`` to the solid&#39;s name. For example, if the solid is named ``my_solid``, then</span>
+<span class="c1"># name the walls surrounding the solid ``wall_my_solid``.</span>
+<span class="k">for</span> <a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">volume</span></a> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">get_volumes</span><span class="p">():</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">volume_zone_name</span></a> <span class="o">=</span> <span class="s2">&quot;wall_&quot;</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">get_zone_name</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get_volume_zone_of_volume</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">volume</span></a><span class="p">))</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label_zonelets</span></a> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_face_zonelets_of_volumes</span><span class="p">([</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">volume</span></a><span class="p">])</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">add_labels_on_zonelets</span><span class="p">([</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">volume_zone_name</span></a><span class="p">],</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label_zonelets</span></a><span class="p">)</span>
+<span class="c1"># Convert labels into mesh zones to use in the solver.</span>
+<span class="n">mesh_util_create_zones</span> <span class="o">=</span> <span class="n">mesh_util</span><span class="o">.</span><span class="n">create_zones_from_labels</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="mesh-output">
+<h2>Mesh output<a class="headerlink" href="#mesh-output" title="Link to this heading">#</a></h2>
+<p>Create a temporary folder and use it to output the mesh to a CAS file.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <a href="https://docs.python.org/3.11/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span> <span class="k">as</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">:</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">,</span> <span class="s1">&#39;multi_layer_quad_mesh_pcb.cas&#39;</span><span class="p">)</span>
+    <span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+<span class="c1"># Otherwise, specify a path on your local machine:</span>
+<span class="c1"># mesh_util.write(&#39;local/path/to/your/mesh_file.cas&#39;)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Exported file:
+ /tmp/tmpc2of1pxs/multi_layer_quad_mesh_pcb.cas
+</pre></div>
+</div>
+</section>
+<section id="exit-pyprimemesh">
+<h2>Exit PyPrimeMesh<a class="headerlink" href="#exit-pyprimemesh" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 42.621 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-09-multi-layer-quad-mesh-pcb-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/6a1ff247eb32a33e12c8730325ec329b/09_multi_layer_quad_mesh_pcb.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">09_multi_layer_quad_mesh_pcb.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/a822aa2e01092d8a6526151db0ec6a6c/09_multi_layer_quad_mesh_pcb.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">09_multi_layer_quad_mesh_pcb.py</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-all-necessary-modules">Import all necessary modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-prime-server-and-instantiate-the-lucid-class">Launch Prime server and instantiate the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-cad-file-and-mesh-settings">Define CAD file and mesh settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-geometry">Import geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-imported-cad-in-a-pyvista-window">Display the imported CAD in a PyVista window</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-edge-sizing-constraints">Define edge sizing constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-controls-for-volume-sweeper">Define controls for volume sweeper</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-generate-and-mesh-the-base-face">Set up, generate, and mesh the base face</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-meshed-base-face-in-a-pyvista-window">Display the meshed base face in a PyVista window</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-the-base-face-using-the-volume-sweeper">Stack the base face using the volume sweeper</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-final-pcb-mesh-in-a-pyvista-window">Display the final PCB mesh in a PyVista window</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-zone-naming-before-the-mesh-output">Set up the zone naming before the mesh output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesh-output">Mesh output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-pyprimemesh">Exit PyPrimeMesh</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/examples/gallery_examples/gallery/09_multi_layer_quad_mesh_pcb.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/examples/gallery_examples/gallery/09_multi_layer_quad_mesh_pcb.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.15.2. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

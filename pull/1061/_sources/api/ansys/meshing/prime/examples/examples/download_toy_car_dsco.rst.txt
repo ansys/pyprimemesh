@@ -1,0 +1,30 @@
+ansys.meshing.prime.examples.examples.download_toy_car_dsco
+===========================================================
+
+.. py:function:: ansys.meshing.prime.examples.examples.download_toy_car_dsco(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the DSCO file for the toy car example.
+
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     toy_car = prime_examples.download_toy_car_dsco()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_cad(toy_car, params=prime.ImportCADParams(model))
+   >>>     print(model)
+

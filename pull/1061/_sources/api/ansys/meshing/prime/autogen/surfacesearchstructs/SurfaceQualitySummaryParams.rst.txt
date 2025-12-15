@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceQualitySummaryParams`
+====================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SurfaceQualitySummaryParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, face_quality_measures: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.FaceQualityMeasure] = None, scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, quality_limit: ansys.meshing.prime.params.primestructs.Iterable[float] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control surface quality summary results.
+
+   :param model: Model to create a ``SurfaceQualitySummaryParams`` object with default parameters.
+   :type model: Model
+   :param face_quality_measures: List of face quality measures for surface quality diagnostics.
+   :type face_quality_measures: List[FaceQualityMeasure], optional
+   :param scope: Scope the face zonelets for surface quality diagnostics.
+   :type scope: ScopeDefinition, optional
+   :param quality_limit: Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
+   :type quality_limit: Iterable[float], optional
+   :param json_data: JSON dictionary to create a ``SurfaceQualitySummaryParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> surface_quality_summary_params = prime.SurfaceQualitySummaryParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceQualitySummaryParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~face_quality_measures`
+            - List of face quality measures for surface quality diagnostics.
+          * - :py:attr:`~quality_limit`
+            - Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
+          * - :py:attr:`~scope`
+            - Scope the face zonelets for surface quality diagnostics.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SurfaceQualitySummaryParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SurfaceQualitySummaryParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SurfaceQualitySummaryParams
+
+Property detail
+---------------
+
+.. py:property:: face_quality_measures
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.FaceQualityMeasure]
+
+
+   List of face quality measures for surface quality diagnostics.
+
+.. py:property:: quality_limit
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
+
+.. py:property:: scope
+   :type: ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+
+   Scope the face zonelets for surface quality diagnostics.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SurfaceQualitySummaryParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SurfaceQualitySummaryParams.print_default()
+
+
+.. py:method:: set_default(face_quality_measures: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.FaceQualityMeasure] = None, scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, quality_limit: ansys.meshing.prime.params.primestructs.Iterable[float] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SurfaceQualitySummaryParams`` object.
+
+   :param face_quality_measures: List of face quality measures for surface quality diagnostics.
+   :type face_quality_measures: List[FaceQualityMeasure], optional
+   :param scope: Scope the face zonelets for surface quality diagnostics.
+   :type scope: ScopeDefinition, optional
+   :param quality_limit: Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
+   :type quality_limit: Iterable[float], optional
+
+
+
+
+
+
+
+.. vale on

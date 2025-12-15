@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumetricSizeFieldComputeResults`
+==========================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, size_field_id: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the compute volumetric size field operation.
+
+   :param model: Model to create a ``VolumetricSizeFieldComputeResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the compute volumetric size field operation.
+   :type error_code: ErrorCode, optional
+   :param size_field_id: Id of the computed size field.
+   :type size_field_id: int, optional
+   :param json_data: JSON dictionary to create a ``VolumetricSizeFieldComputeResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> volumetric_size_field_compute_results = prime.VolumetricSizeFieldComputeResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VolumetricSizeFieldComputeResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the compute volumetric size field operation.
+          * - :py:attr:`~size_field_id`
+            - Id of the computed size field.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VolumetricSizeFieldComputeResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VolumetricSizeFieldComputeResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizefieldstructs import VolumetricSizeFieldComputeResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the compute volumetric size field operation.
+
+.. py:property:: size_field_id
+   :type: int
+
+
+   Id of the computed size field.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VolumetricSizeFieldComputeResults`` object.
+
+   .. rubric:: Examples
+
+   >>> VolumetricSizeFieldComputeResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, size_field_id: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VolumetricSizeFieldComputeResults`` object.
+
+   :param error_code: Error code associated with the compute volumetric size field operation.
+   :type error_code: ErrorCode, optional
+   :param size_field_id: Id of the computed size field.
+   :type size_field_id: int, optional
+
+
+
+
+
+
+
+.. vale on

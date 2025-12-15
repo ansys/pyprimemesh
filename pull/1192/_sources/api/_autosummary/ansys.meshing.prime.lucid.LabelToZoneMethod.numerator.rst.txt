@@ -1,0 +1,6 @@
+numerator
+=========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoattribute:: LabelToZoneMethod.numerator

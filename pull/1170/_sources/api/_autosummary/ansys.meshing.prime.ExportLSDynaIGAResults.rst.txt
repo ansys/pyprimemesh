@@ -1,0 +1,40 @@
+.. vale off
+
+ExportLSDynaIGAResults
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportLSDynaIGAResults
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportLSDynaIGAResults.print_default
+      ExportLSDynaIGAResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportLSDynaIGAResults.error_code
+      ExportLSDynaIGAResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExportLSDynaIGAResults
+
+    ansys.meshing.prime.ExportLSDynaIGAResults
+
+.. vale on

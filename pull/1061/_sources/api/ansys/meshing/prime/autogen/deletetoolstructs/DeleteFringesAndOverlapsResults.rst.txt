@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteFringesAndOverlapsResults`
+========================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.deletetoolstructs.DeleteFringesAndOverlapsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_deleted: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the delete fringes and overlapping faces operation.
+
+   :param model: Model to create a ``DeleteFringesAndOverlapsResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param n_deleted: Number of face elements deleted.
+   :type n_deleted: int, optional
+   :param json_data: JSON dictionary to create a ``DeleteFringesAndOverlapsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_fringes_and_overlaps_results = prime.DeleteFringesAndOverlapsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteFringesAndOverlapsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~n_deleted`
+            - Number of face elements deleted.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteFringesAndOverlapsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteFringesAndOverlapsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.deletetoolstructs import DeleteFringesAndOverlapsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: n_deleted
+   :type: int
+
+
+   Number of face elements deleted.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteFringesAndOverlapsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteFringesAndOverlapsResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, n_deleted: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteFringesAndOverlapsResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param n_deleted: Number of face elements deleted.
+   :type n_deleted: int, optional
+
+
+
+
+
+
+
+.. vale on

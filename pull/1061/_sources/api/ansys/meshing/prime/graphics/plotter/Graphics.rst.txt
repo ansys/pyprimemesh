@@ -1,0 +1,105 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Graphics`
+=================
+
+
+.. py:class:: ansys.meshing.prime.graphics.plotter.Graphics(model: ansys.meshing.prime.Model, use_trame: bool = False)
+
+   Manages graphics in PyPrime.
+
+   .. deprecated:: 0.6.0
+       Use :class:`PrimePlotter` instead.
+
+   :param model: Model to show.
+   :type model: prime.Model
+   :param use_trame: Whether to use the Trame visualizer.
+   :type use_trame: bool, default: False
+
+
+
+
+.. py:currentmodule:: Graphics
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~model`
+            - 
+          * - :py:attr:`~use_trame`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__call__`
+            - Show the appropriate display based on parameters.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.graphics.plotter import Graphics
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: model
+
+.. py:attribute:: use_trame
+   :value: False
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __call__(parts: List = None, update: bool = True, spline: bool = False, scope: ansys.meshing.prime.ScopeDefinition = None) -> None
+
+   Show the appropriate display based on parameters.
+
+   :param parts: Parts to show.
+   :type parts: Any, default: None
+   :param update: Whether to update the display.
+   :type update: bool, default: True
+   :param spline: Whether to use splines.
+   :type spline: bool, default: False
+   :param scope: Scope of the parts.
+   :type scope: prime.ScopeDefinition, default: None
+
+
+
+
+
+
+
+.. vale on

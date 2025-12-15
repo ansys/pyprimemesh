@@ -1,0 +1,6 @@
+﻿create\_thin\_volume\_control
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.create_thin_volume_control

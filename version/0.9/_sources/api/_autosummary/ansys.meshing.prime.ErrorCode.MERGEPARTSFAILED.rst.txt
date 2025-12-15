@@ -1,0 +1,6 @@
+MERGEPARTSFAILED
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MERGEPARTSFAILED

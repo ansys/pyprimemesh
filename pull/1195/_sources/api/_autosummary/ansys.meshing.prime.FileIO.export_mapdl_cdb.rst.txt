@@ -1,0 +1,11 @@
+export\_mapdl\_cdb
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.export_mapdl_cdb
+
+.. minigallery::
+   :add-heading: Examples using FileIO.export_mapdl_cdb
+
+   ansys.meshing.prime.FileIO.export_mapdl_cdb

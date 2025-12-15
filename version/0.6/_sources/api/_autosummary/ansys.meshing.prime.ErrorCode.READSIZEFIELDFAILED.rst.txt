@@ -1,0 +1,6 @@
+READSIZEFIELDFAILED
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.READSIZEFIELDFAILED

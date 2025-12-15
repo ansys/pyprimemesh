@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`IntersectionMask`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.IntersectionMask
+
+
+
+   Scaffold parameters use intersection mask to define nature of intersection computation.
+
+
+
+
+.. py:currentmodule:: IntersectionMask
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EDGEEDGE`
+            - Performs edge to edge intersection.
+          * - :py:attr:`~FACEFACE`
+            - Performs face to face intersection.
+          * - :py:attr:`~FACEFACEANDEDGEEDGE`
+            - Perform face to face and edge to edge intersections.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import IntersectionMask
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EDGEEDGE
+   :value: 1
+
+
+   Performs edge to edge intersection.
+
+.. py:attribute:: FACEFACE
+   :value: 2
+
+
+   Performs face to face intersection.
+
+.. py:attribute:: FACEFACEANDEDGEEDGE
+   :value: 3
+
+
+   Perform face to face and edge to edge intersections.
+
+
+
+
+
+
+
+.. vale on

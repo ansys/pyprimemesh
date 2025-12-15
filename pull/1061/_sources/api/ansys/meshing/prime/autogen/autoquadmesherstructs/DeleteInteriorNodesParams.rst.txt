@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteInteriorNodesParams`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.DeleteInteriorNodesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, merge_face_normals_angle: float = None, merge_edge_allow_self_close: bool = None, edge_sharp_corner_angle: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for delete interior nodes operation.
+
+   :param model: Model to create a ``DeleteInteriorNodesParams`` object with default parameters.
+   :type model: Model
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_face_normals_angle: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type merge_edge_allow_self_close: bool, optional
+   :param edge_sharp_corner_angle: Merge edges when the angle between the edges are below the provided value.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type edge_sharp_corner_angle: float, optional
+   :param json_data: JSON dictionary to create a ``DeleteInteriorNodesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_interior_nodes_params = prime.DeleteInteriorNodesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteInteriorNodesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~edge_sharp_corner_angle`
+            - Merge edges when the angle between the edges are below the provided value.
+          * - :py:attr:`~merge_edge_allow_self_close`
+            - Option for merging self-closing edge loops.
+          * - :py:attr:`~merge_face_normals_angle`
+            - Merge faces when the normal angle between the faces is below the provided value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteInteriorNodesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteInteriorNodesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import DeleteInteriorNodesParams
+
+Property detail
+---------------
+
+.. py:property:: edge_sharp_corner_angle
+   :type: float
+
+
+   Merge edges when the angle between the edges are below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_edge_allow_self_close
+   :type: bool
+
+
+   Option for merging self-closing edge loops.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: merge_face_normals_angle
+   :type: float
+
+
+   Merge faces when the normal angle between the faces is below the provided value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteInteriorNodesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteInteriorNodesParams.print_default()
+
+
+.. py:method:: set_default(merge_face_normals_angle: float = None, merge_edge_allow_self_close: bool = None, edge_sharp_corner_angle: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteInteriorNodesParams`` object.
+
+   :param merge_face_normals_angle: Merge faces when the normal angle between the faces is below the provided value.
+   :type merge_face_normals_angle: float, optional
+   :param merge_edge_allow_self_close: Option for merging self-closing edge loops.
+   :type merge_edge_allow_self_close: bool, optional
+   :param edge_sharp_corner_angle: Merge edges when the angle between the edges are below the provided value.
+   :type edge_sharp_corner_angle: float, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``primeconfig.py`` module
+=============================
+
+.. py:module:: ansys.meshing.prime.autogen.primeconfig
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: primeconfig
+.. tab-set::
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.primeconfig.ErrorCode`
+            - Error codes associated with the failure of PyPrimeMesh operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.primeconfig.WarningCode`
+            - Warning codes associated with the PyPrimeMesh operation.
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> ErrorCode</api/ansys/meshing/prime/autogen/primeconfig/ErrorCode>
+    <span class="nf nf-cod-symbol_enum"></span> WarningCode</api/ansys/meshing/prime/autogen/primeconfig/WarningCode>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+FLUENT
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SolverType.FLUENT

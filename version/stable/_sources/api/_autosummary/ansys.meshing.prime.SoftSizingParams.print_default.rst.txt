@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SoftSizingParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using SoftSizingParams.print_default
+
+   ansys.meshing.prime.SoftSizingParams.print_default

@@ -1,0 +1,6 @@
+get\_edge\_zonelets\_of\_label\_name\_pattern
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_edge_zonelets_of_label_name_pattern

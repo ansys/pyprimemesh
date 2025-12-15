@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MultiZoneSizingParams`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.MultiZoneSizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, max_size: float = None, min_size: float = None, growth_rate: float = None, use_volumetric_size_field: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for MultiZone meshing.
+
+   :param model: Model to create a ``MultiZoneSizingParams`` object with default parameters.
+   :type model: Model
+   :param max_size: Defines global maximum mesh size.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type max_size: float, optional
+   :param min_size: Defines global minimum mesh size.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type min_size: float, optional
+   :param growth_rate: Defines growth rate.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type growth_rate: float, optional
+   :param use_volumetric_size_field: Defines whether to use size field for MultiZone meshing.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type use_volumetric_size_field: bool, optional
+   :param json_data: JSON dictionary to create a ``MultiZoneSizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> multi_zone_sizing_params = prime.MultiZoneSizingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MultiZoneSizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~growth_rate`
+            - Defines growth rate.
+          * - :py:attr:`~max_size`
+            - Defines global maximum mesh size.
+          * - :py:attr:`~min_size`
+            - Defines global minimum mesh size.
+          * - :py:attr:`~use_volumetric_size_field`
+            - Defines whether to use size field for MultiZone meshing.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MultiZoneSizingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MultiZoneSizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import MultiZoneSizingParams
+
+Property detail
+---------------
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Defines growth rate.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: max_size
+   :type: float
+
+
+   Defines global maximum mesh size.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: min_size
+   :type: float
+
+
+   Defines global minimum mesh size.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: use_volumetric_size_field
+   :type: bool
+
+
+   Defines whether to use size field for MultiZone meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MultiZoneSizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MultiZoneSizingParams.print_default()
+
+
+.. py:method:: set_default(max_size: float = None, min_size: float = None, growth_rate: float = None, use_volumetric_size_field: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MultiZoneSizingParams`` object.
+
+   :param max_size: Defines global maximum mesh size.
+   :type max_size: float, optional
+   :param min_size: Defines global minimum mesh size.
+   :type min_size: float, optional
+   :param growth_rate: Defines growth rate.
+   :type growth_rate: float, optional
+   :param use_volumetric_size_field: Defines whether to use size field for MultiZone meshing.
+   :type use_volumetric_size_field: bool, optional
+
+
+
+
+
+
+
+.. vale on

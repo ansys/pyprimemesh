@@ -1,0 +1,6 @@
+get\_scope\_definition
+======================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: VolumeScope.get_scope_definition

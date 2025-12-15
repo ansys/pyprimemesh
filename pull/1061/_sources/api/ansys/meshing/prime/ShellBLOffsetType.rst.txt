@@ -1,0 +1,102 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ShellBLOffsetType`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.ShellBLOffsetType
+
+
+
+   Type of offset method during ShellBL generation.
+
+
+
+
+.. py:currentmodule:: ShellBLOffsetType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ASPECTRATIO`
+            - Option to set ShellBL offset type as Aspect Ratio.
+          * - :py:attr:`~CURVATUREBASED`
+            - Option to set ShellBL offset type as CurvatureBased.
+          * - :py:attr:`~LASTRATIO`
+            - Option to set ShellBL offset type as Last Ratio.
+          * - :py:attr:`~UNIFORM`
+            - Option to set ShellBL offset type as Uniform.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ShellBLOffsetType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ASPECTRATIO
+   :value: 0
+
+
+   Option to set ShellBL offset type as Aspect Ratio.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: CURVATUREBASED
+   :value: 4
+
+
+   Option to set ShellBL offset type as CurvatureBased.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: LASTRATIO
+   :value: 1
+
+
+   Option to set ShellBL offset type as Last Ratio.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: UNIFORM
+   :value: 2
+
+
+   Option to set ShellBL offset type as Uniform.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+
+
+
+.. vale on

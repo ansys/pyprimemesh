@@ -1,0 +1,6 @@
+COMPUTEVOLUMESFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.COMPUTEVOLUMESFAILED

@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TetParams`
+==================
+
+
+.. py:class:: ansys.meshing.prime.TetParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, quadratic: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control tetrahedral mesh generation.
+
+   :param model: Model to create a ``TetParams`` object with default parameters.
+   :type model: Model
+   :param quadratic: Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
+   :type quadratic: bool, optional
+   :param json_data: JSON dictionary to create a ``TetParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> tet_params = prime.TetParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: TetParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~quadratic`
+            - Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``TetParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``TetParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TetParams
+
+Property detail
+---------------
+
+.. py:property:: quadratic
+   :type: bool
+
+
+   Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``TetParams`` object.
+
+   .. rubric:: Examples
+
+   >>> TetParams.print_default()
+
+
+.. py:method:: set_default(quadratic: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``TetParams`` object.
+
+   :param quadratic: Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
+   :type quadratic: bool, optional
+
+
+
+
+
+
+
+.. vale on

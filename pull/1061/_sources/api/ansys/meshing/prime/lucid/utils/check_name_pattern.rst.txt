@@ -1,0 +1,16 @@
+ansys.meshing.prime.lucid.utils.check_name_pattern
+==================================================
+
+.. py:function:: ansys.meshing.prime.lucid.utils.check_name_pattern(name_patterns: str, name: str) -> bool
+
+   Check several patterns in one string.
+
+   :param name_patterns: Patterns to check, separated by commas.
+                         If pattern starts with !, it shouldn't be found.
+   :type name_patterns: str
+   :param name: String where you look for patterns.
+   :type name: str
+
+   :returns: True if all found.
+   :rtype: bool
+

@@ -1,0 +1,166 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SubtractVolumesParams`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.SubtractVolumesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, ignore_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, check_cutters: bool = None, keep_cutters: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control the volume subtract operation.
+
+   :param model: Model to create a ``SubtractVolumesParams`` object with default parameters.
+   :type model: Model
+   :param ignore_face_zonelets: Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
+   :type ignore_face_zonelets: Iterable[int], optional
+   :param check_cutters: Option to manage intersecting cutter volumes. When check cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+   :type check_cutters: bool, optional
+   :param keep_cutters: Option to retain cutter volumes.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type keep_cutters: bool, optional
+   :param json_data: JSON dictionary to create a ``SubtractVolumesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> subtract_volumes_params = prime.SubtractVolumesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SubtractVolumesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~check_cutters`
+            - Option to manage intersecting cutter volumes. When check cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+          * - :py:attr:`~ignore_face_zonelets`
+            - Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
+          * - :py:attr:`~keep_cutters`
+            - Option to retain cutter volumes.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SubtractVolumesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SubtractVolumesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SubtractVolumesParams
+
+Property detail
+---------------
+
+.. py:property:: check_cutters
+   :type: bool
+
+
+   Option to manage intersecting cutter volumes. When check cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+
+.. py:property:: ignore_face_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
+
+.. py:property:: keep_cutters
+   :type: bool
+
+
+   Option to retain cutter volumes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SubtractVolumesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SubtractVolumesParams.print_default()
+
+
+.. py:method:: set_default(ignore_face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, check_cutters: bool = None, keep_cutters: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SubtractVolumesParams`` object.
+
+   :param ignore_face_zonelets: Face zonelet ids that subtract volumes should not remove (for example, periodic or fluid cap zonelets). If ignore face zonelets are provided, then the target volumes after subtract operation need to be recomputed.
+   :type ignore_face_zonelets: Iterable[int], optional
+   :param check_cutters: Option to manage intersecting cutter volumes. When check cutters is False an error message is provided if multiple cutters intersect. Overlapping cutter volumes are not supported.
+   :type check_cutters: bool, optional
+   :param keep_cutters: Option to retain cutter volumes.
+   :type keep_cutters: bool, optional
+
+
+
+
+
+
+
+.. vale on

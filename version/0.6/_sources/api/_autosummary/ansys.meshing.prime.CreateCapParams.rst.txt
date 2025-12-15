@@ -1,0 +1,27 @@
+.. vale off
+
+CreateCapParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateCapParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateCapParams.print_default
+      CreateCapParams.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

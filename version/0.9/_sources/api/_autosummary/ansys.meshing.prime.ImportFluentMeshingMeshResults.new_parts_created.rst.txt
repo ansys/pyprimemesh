@@ -1,0 +1,6 @@
+new\_parts\_created
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportFluentMeshingMeshResults.new_parts_created

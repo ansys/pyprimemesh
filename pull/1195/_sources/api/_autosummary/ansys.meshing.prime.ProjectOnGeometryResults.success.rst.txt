@@ -1,0 +1,6 @@
+success
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProjectOnGeometryResults.success

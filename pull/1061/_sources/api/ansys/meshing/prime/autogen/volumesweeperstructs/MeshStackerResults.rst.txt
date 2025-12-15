@@ -1,0 +1,214 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MeshStackerResults`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.volumesweeperstructs.MeshStackerResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, error_codes_per_topo_volume: ansys.meshing.prime.params.primestructs.Iterable[int] = None, non_stackable_faces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, non_stackable_edges: ansys.meshing.prime.params.primestructs.Iterable[int] = None, small_features: ansys.meshing.prime.params.primestructs.Iterable[int] = None, base_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the mesh stacker operations.
+
+   :param model: Model to create a ``MeshStackerResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the operation.
+   :type error_code: ErrorCode, optional
+   :param error_codes_per_topo_volume: Error codes associated with the topovolume-by-topovolume stacking.
+   :type error_codes_per_topo_volume: Iterable[int], optional
+   :param non_stackable_faces: List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
+   :type non_stackable_faces: Iterable[int], optional
+   :param non_stackable_edges: List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
+   :type non_stackable_edges: Iterable[int], optional
+   :param small_features: List of features edges smaller than input tolerance.
+   :type small_features: Iterable[int], optional
+   :param base_face_ids: List of base face ids after base creation.
+   :type base_face_ids: Iterable[int], optional
+   :param size_control_ids: List of ids of newly created size controls.
+   :type size_control_ids: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``MeshStackerResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> mesh_stacker_results = prime.MeshStackerResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MeshStackerResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~base_face_ids`
+            - List of base face ids after base creation.
+          * - :py:attr:`~error_code`
+            - Error code associated with the operation.
+          * - :py:attr:`~error_codes_per_topo_volume`
+            - Error codes associated with the topovolume-by-topovolume stacking.
+          * - :py:attr:`~non_stackable_edges`
+            - Under-resolved faceting can also create non-stackable geometry.
+          * - :py:attr:`~non_stackable_faces`
+            - Under-resolved faceting can also create non-stackable geometry.
+          * - :py:attr:`~size_control_ids`
+            - List of ids of newly created size controls.
+          * - :py:attr:`~small_features`
+            - List of features edges smaller than input tolerance.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MeshStackerResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MeshStackerResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.volumesweeperstructs import MeshStackerResults
+
+Property detail
+---------------
+
+.. py:property:: base_face_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of base face ids after base creation.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the operation.
+
+.. py:property:: error_codes_per_topo_volume
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Error codes associated with the topovolume-by-topovolume stacking.
+
+.. py:property:: non_stackable_edges
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Under-resolved faceting can also create non-stackable geometry.
+
+   :type: List of non-stackable edges. Note
+
+.. py:property:: non_stackable_faces
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Under-resolved faceting can also create non-stackable geometry.
+
+   :type: List of non-stackable faces. Note
+
+.. py:property:: size_control_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of ids of newly created size controls.
+
+.. py:property:: small_features
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   List of features edges smaller than input tolerance.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MeshStackerResults`` object.
+
+   .. rubric:: Examples
+
+   >>> MeshStackerResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, error_codes_per_topo_volume: ansys.meshing.prime.params.primestructs.Iterable[int] = None, non_stackable_faces: ansys.meshing.prime.params.primestructs.Iterable[int] = None, non_stackable_edges: ansys.meshing.prime.params.primestructs.Iterable[int] = None, small_features: ansys.meshing.prime.params.primestructs.Iterable[int] = None, base_face_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, size_control_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MeshStackerResults`` object.
+
+   :param error_code: Error code associated with the operation.
+   :type error_code: ErrorCode, optional
+   :param error_codes_per_topo_volume: Error codes associated with the topovolume-by-topovolume stacking.
+   :type error_codes_per_topo_volume: Iterable[int], optional
+   :param non_stackable_faces: List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
+   :type non_stackable_faces: Iterable[int], optional
+   :param non_stackable_edges: List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
+   :type non_stackable_edges: Iterable[int], optional
+   :param small_features: List of features edges smaller than input tolerance.
+   :type small_features: Iterable[int], optional
+   :param base_face_ids: List of base face ids after base creation.
+   :type base_face_ids: Iterable[int], optional
+   :param size_control_ids: List of ids of newly created size controls.
+   :type size_control_ids: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

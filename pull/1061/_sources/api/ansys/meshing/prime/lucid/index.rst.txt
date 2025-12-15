@@ -1,0 +1,158 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``lucid`` package
+=========================
+
+.. py:module:: ansys.meshing.prime.lucid
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: lucid
+.. tab-set::
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.mesh_util`
+            - Module for meshing utility functions.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.scope`
+            - Module for Lucid Scope for operation on surfaces functionality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.utils`
+            - Util functions for lucid modules.
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.Mesh`
+            - Provides methods for users who are new to meshing.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.SurfaceScope`
+            - SurfaceScope is one of the classes in Lucid API.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.VolumeScope`
+            - VolumeScope is one of the classes in Lucid API.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.LabelToZoneMethod`
+            - Provides for creating zones from labels.
+
+
+
+
+
+
+
+
+.. .. .. 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> mesh_util</api/ansys/meshing/prime/lucid/mesh_util/index>
+    <span class="nf nf-fa-file"></span> scope</api/ansys/meshing/prime/lucid/scope/index>
+    <span class="nf nf-fa-file"></span> utils</api/ansys/meshing/prime/lucid/utils/index>
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Mesh</api/ansys/meshing/prime/lucid/Mesh>
+    <span class="nf nf-cod-symbol_class"></span> SurfaceScope</api/ansys/meshing/prime/lucid/SurfaceScope>
+    <span class="nf nf-cod-symbol_class"></span> VolumeScope</api/ansys/meshing/prime/lucid/VolumeScope>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> LabelToZoneMethod</api/ansys/meshing/prime/lucid/LabelToZoneMethod>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+High level helper functions for PyPrimeMesh
+
+
+
+
+
+
+
+
+
+.. vale on

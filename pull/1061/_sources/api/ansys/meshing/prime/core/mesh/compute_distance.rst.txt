@@ -1,0 +1,15 @@
+ansys.meshing.prime.core.mesh.compute_distance
+==============================================
+
+.. py:function:: ansys.meshing.prime.core.mesh.compute_distance(point1, point2) -> float
+
+   Compute the distance between two points.
+
+   :param point1: List with the coordinates of the first point.
+   :type point1: list
+   :param point2: List with the coordinates of the second point.
+   :type point2: list
+
+   :returns: Distance between the two points.
+   :rtype: float
+

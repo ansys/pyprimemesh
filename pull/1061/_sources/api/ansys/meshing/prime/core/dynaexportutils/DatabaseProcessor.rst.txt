@@ -1,0 +1,103 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DatabaseProcessor`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.core.dynaexportutils.DatabaseProcessor(model: ansys.meshing.prime.Model, steps_data: dict, card_format: str = 'SHORT')
+
+   Processes the part's simulation data and generates LS-DYNA cards for database keywords.
+
+   :param model: Model that the methods are to work on.
+   :type model: prime.Model
+   :param steps_data: The steps data extracted from the part's simulation data.
+   :type steps_data: dict
+   :param card_format: The LS-DYNA card format for writing. Defaults to "SHORT".
+   :type card_format: str, optional
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+
+.. py:currentmodule:: DatabaseProcessor
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_output_database_keywords`
+            - Generate and return the LS-DYNA database keyword cards.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__slots__`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.dynaexportutils import DatabaseProcessor
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __slots__
+   :value: ('_steps_data', '_time', '_card_format', '_formatter', '_format_map', '_header_title',...
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: get_output_database_keywords() -> str
+
+   Generate and return the LS-DYNA database keyword cards.
+
+   :returns:
+
+             str
+                 A string containing the LS-DYNA database keyword cards for writing.
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+
+
+
+
+
+.. vale on

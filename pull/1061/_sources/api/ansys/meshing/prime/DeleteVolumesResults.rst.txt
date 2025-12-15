@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteVolumesResults`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.DeleteVolumesResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, deleted_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with delete volumes operation.
+
+   :param model: Model to create a ``DeleteVolumesResults`` object with default parameters.
+   :type model: Model
+   :param deleted_volumes: Ids of deleted volumes.
+   :type deleted_volumes: Iterable[int], optional
+   :param error_code: Error code associated with the volume deletion operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``DeleteVolumesResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_volumes_results = prime.DeleteVolumesResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteVolumesResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~deleted_volumes`
+            - Ids of deleted volumes.
+          * - :py:attr:`~error_code`
+            - Error code associated with the volume deletion operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteVolumesResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteVolumesResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import DeleteVolumesResults
+
+Property detail
+---------------
+
+.. py:property:: deleted_volumes
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of deleted volumes.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the volume deletion operation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteVolumesResults`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteVolumesResults.print_default()
+
+
+.. py:method:: set_default(deleted_volumes: ansys.meshing.prime.params.primestructs.Iterable[int] = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteVolumesResults`` object.
+
+   :param deleted_volumes: Ids of deleted volumes.
+   :type deleted_volumes: Iterable[int], optional
+   :param error_code: Error code associated with the volume deletion operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

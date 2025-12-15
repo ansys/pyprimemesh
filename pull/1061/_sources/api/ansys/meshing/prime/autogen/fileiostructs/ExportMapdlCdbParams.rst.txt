@@ -1,0 +1,480 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExportMapdlCdbParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, config_settings: str = None, pre_solution_settings: str = None, material_properties: str = None, boundary_conditions: str = None, analysis_settings: str = None, write_cells: bool = None, enable_face_based_labels: bool = None, label_export_params: LabelExportParams = None, write_by_zones: bool = None, consider_general_connectors_as_spot_weld: bool = None, analysis_type: CdbAnalysisType = None, simulation_type: CdbSimulationType = None, analysis_settings_file_name: str = None, write_separate_blocks: bool = None, write_components_with_element_blocks: bool = None, separate_blocks_format_type: SeparateBlocksFormatType = None, export_fasteners_as_swgen: bool = None, export_rigid_bodies_as_rbgen: bool = None, write_component_based_ties: bool = None, mortar_contact_for_ties: bool = None, write_thickness_file: bool = None, contact_element_types: ContactElementTypeParams = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control MAPDL CDB export settings.
+
+   :param model: Model to create a ``ExportMapdlCdbParams`` object with default parameters.
+   :type model: Model
+   :param config_settings: MAPDL configuration settings in CDB format to be added at the beginning of the file.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type config_settings: str, optional
+   :param pre_solution_settings: MAPDL Settings in CDB format to be added before the solution block in the file.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type pre_solution_settings: str, optional
+   :param material_properties: Materials in CDB format to be added to the file.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type material_properties: str, optional
+   :param boundary_conditions: Boundary conditions in CDB format to be added to the file.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type boundary_conditions: str, optional
+   :param analysis_settings: MAPDL analysis settings in CDB format to be added after the solution block in the file. Note: Boundary conditions can be included into analysis settings.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type analysis_settings: str, optional
+   :param write_cells: Option to write out cells as part of the file.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_cells: bool, optional
+   :param enable_face_based_labels: Use LabelExportParams instead. Parameter enableFaceBasedLabels will be removed in 2025R2.
+
+                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type enable_face_based_labels: bool, optional
+   :param label_export_params: Parameters to control the export of labels as Nodal or Element Components in CDB.
+
+                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type label_export_params: LabelExportParams, optional
+   :param write_by_zones: Option to write zones in the file.
+
+                          **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_by_zones: bool, optional
+   :param consider_general_connectors_as_spot_weld: Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+
+                                                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type consider_general_connectors_as_spot_weld: bool, optional
+   :param analysis_type: Option to specify CDB analysis type.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type analysis_type: CdbAnalysisType, optional
+   :param simulation_type: Simulation type for the file.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type simulation_type: CdbSimulationType, optional
+   :param analysis_settings_file_name: File path to export mapdl analysis settings.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type analysis_settings_file_name: str, optional
+   :param write_separate_blocks: Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_separate_blocks: bool, optional
+   :param write_components_with_element_blocks: Controls whether component definitions should be written within individual element blocks. write_components_with_element_blocks only has effect when write_separate_blocks is true. When write_components_with_element_blocks is true, writes component commands for each element block. When write_components_with_element_blocks is false, writes components separately.
+
+                                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_components_with_element_blocks: bool, optional
+   :param separate_blocks_format_type: Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
+
+                                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type separate_blocks_format_type: SeparateBlocksFormatType, optional
+   :param export_fasteners_as_swgen: Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+
+                                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type export_fasteners_as_swgen: bool, optional
+   :param export_rigid_bodies_as_rbgen: Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+                                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type export_rigid_bodies_as_rbgen: bool, optional
+   :param write_component_based_ties: Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+
+                                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_component_based_ties: bool, optional
+   :param mortar_contact_for_ties: Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
+
+                                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type mortar_contact_for_ties: bool, optional
+   :param write_thickness_file: Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+                                **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type write_thickness_file: bool, optional
+   :param contact_element_types: Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+
+                                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type contact_element_types: ContactElementTypeParams, optional
+   :param json_data: JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> export_mapdl_cdb_params = prime.ExportMapdlCdbParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExportMapdlCdbParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~analysis_settings`
+            - Boundary conditions can be included into analysis settings.
+          * - :py:attr:`~analysis_settings_file_name`
+            - File path to export mapdl analysis settings.
+          * - :py:attr:`~analysis_type`
+            - Option to specify CDB analysis type.
+          * - :py:attr:`~boundary_conditions`
+            - Boundary conditions in CDB format to be added to the file.
+          * - :py:attr:`~config_settings`
+            - MAPDL configuration settings in CDB format to be added at the beginning of the file.
+          * - :py:attr:`~consider_general_connectors_as_spot_weld`
+            - Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+          * - :py:attr:`~contact_element_types`
+            - Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+          * - :py:attr:`~enable_face_based_labels`
+            - Use LabelExportParams instead. Parameter enableFaceBasedLabels will be removed in 2025R2.
+          * - :py:attr:`~export_fasteners_as_swgen`
+            - Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+          * - :py:attr:`~export_rigid_bodies_as_rbgen`
+            - Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+          * - :py:attr:`~label_export_params`
+            - Parameters to control the export of labels as Nodal or Element Components in CDB.
+          * - :py:attr:`~material_properties`
+            - Materials in CDB format to be added to the file.
+          * - :py:attr:`~mortar_contact_for_ties`
+            - Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
+          * - :py:attr:`~pre_solution_settings`
+            - MAPDL Settings in CDB format to be added before the solution block in the file.
+          * - :py:attr:`~separate_blocks_format_type`
+            - Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
+          * - :py:attr:`~simulation_type`
+            - Simulation type for the file.
+          * - :py:attr:`~write_by_zones`
+            - Option to write zones in the file.
+          * - :py:attr:`~write_cells`
+            - Option to write out cells as part of the file.
+          * - :py:attr:`~write_component_based_ties`
+            - Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+          * - :py:attr:`~write_components_with_element_blocks`
+            - Controls whether component definitions should be written within individual element blocks. write_components_with_element_blocks only has effect when write_separate_blocks is true. When write_components_with_element_blocks is true, writes component commands for each element block. When write_components_with_element_blocks is false, writes components separately.
+          * - :py:attr:`~write_separate_blocks`
+            - Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+          * - :py:attr:`~write_thickness_file`
+            - Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExportMapdlCdbParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExportMapdlCdbParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.fileiostructs import ExportMapdlCdbParams
+
+Property detail
+---------------
+
+.. py:property:: analysis_settings
+   :type: str
+
+
+   Boundary conditions can be included into analysis settings.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+   :type: MAPDL analysis settings in CDB format to be added after the solution block in the file. Note
+
+.. py:property:: analysis_settings_file_name
+   :type: str
+
+
+   File path to export mapdl analysis settings.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: analysis_type
+   :type: CdbAnalysisType
+
+
+   Option to specify CDB analysis type.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: boundary_conditions
+   :type: str
+
+
+   Boundary conditions in CDB format to be added to the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: config_settings
+   :type: str
+
+
+   MAPDL configuration settings in CDB format to be added at the beginning of the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: consider_general_connectors_as_spot_weld
+   :type: bool
+
+
+   Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: contact_element_types
+   :type: ContactElementTypeParams
+
+
+   Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: enable_face_based_labels
+   :type: bool
+
+
+   Use LabelExportParams instead. Parameter enableFaceBasedLabels will be removed in 2025R2.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: export_fasteners_as_swgen
+   :type: bool
+
+
+   Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: export_rigid_bodies_as_rbgen
+   :type: bool
+
+
+   Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: label_export_params
+   :type: LabelExportParams
+
+
+   Parameters to control the export of labels as Nodal or Element Components in CDB.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: material_properties
+   :type: str
+
+
+   Materials in CDB format to be added to the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: mortar_contact_for_ties
+   :type: bool
+
+
+   Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: pre_solution_settings
+   :type: str
+
+
+   MAPDL Settings in CDB format to be added before the solution block in the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: separate_blocks_format_type
+   :type: SeparateBlocksFormatType
+
+
+   Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: simulation_type
+   :type: CdbSimulationType
+
+
+   Simulation type for the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_by_zones
+   :type: bool
+
+
+   Option to write zones in the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_cells
+   :type: bool
+
+
+   Option to write out cells as part of the file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_component_based_ties
+   :type: bool
+
+
+   Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_components_with_element_blocks
+   :type: bool
+
+
+   Controls whether component definitions should be written within individual element blocks. write_components_with_element_blocks only has effect when write_separate_blocks is true. When write_components_with_element_blocks is true, writes component commands for each element block. When write_components_with_element_blocks is false, writes components separately.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_separate_blocks
+   :type: bool
+
+
+   Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: write_thickness_file
+   :type: bool
+
+
+   Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExportMapdlCdbParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ExportMapdlCdbParams.print_default()
+
+
+.. py:method:: set_default(config_settings: str = None, pre_solution_settings: str = None, material_properties: str = None, boundary_conditions: str = None, analysis_settings: str = None, write_cells: bool = None, enable_face_based_labels: bool = None, label_export_params: LabelExportParams = None, write_by_zones: bool = None, consider_general_connectors_as_spot_weld: bool = None, analysis_type: CdbAnalysisType = None, simulation_type: CdbSimulationType = None, analysis_settings_file_name: str = None, write_separate_blocks: bool = None, write_components_with_element_blocks: bool = None, separate_blocks_format_type: SeparateBlocksFormatType = None, export_fasteners_as_swgen: bool = None, export_rigid_bodies_as_rbgen: bool = None, write_component_based_ties: bool = None, mortar_contact_for_ties: bool = None, write_thickness_file: bool = None, contact_element_types: ContactElementTypeParams = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExportMapdlCdbParams`` object.
+
+   :param config_settings: MAPDL configuration settings in CDB format to be added at the beginning of the file.
+   :type config_settings: str, optional
+   :param pre_solution_settings: MAPDL Settings in CDB format to be added before the solution block in the file.
+   :type pre_solution_settings: str, optional
+   :param material_properties: Materials in CDB format to be added to the file.
+   :type material_properties: str, optional
+   :param boundary_conditions: Boundary conditions in CDB format to be added to the file.
+   :type boundary_conditions: str, optional
+   :param analysis_settings: MAPDL analysis settings in CDB format to be added after the solution block in the file. Note: Boundary conditions can be included into analysis settings.
+   :type analysis_settings: str, optional
+   :param write_cells: Option to write out cells as part of the file.
+   :type write_cells: bool, optional
+   :param enable_face_based_labels: Use LabelExportParams instead. Parameter enableFaceBasedLabels will be removed in 2025R2.
+   :type enable_face_based_labels: bool, optional
+   :param label_export_params: Parameters to control the export of labels as Nodal or Element Components in CDB.
+   :type label_export_params: LabelExportParams, optional
+   :param write_by_zones: Option to write zones in the file.
+   :type write_by_zones: bool, optional
+   :param consider_general_connectors_as_spot_weld: Option to translate all general connector joints (other than axial) to spot weld type. This is important when nodes are non coincident.
+   :type consider_general_connectors_as_spot_weld: bool, optional
+   :param analysis_type: Option to specify CDB analysis type.
+   :type analysis_type: CdbAnalysisType, optional
+   :param simulation_type: Simulation type for the file.
+   :type simulation_type: CdbSimulationType, optional
+   :param analysis_settings_file_name: File path to export mapdl analysis settings.
+   :type analysis_settings_file_name: str, optional
+   :param write_separate_blocks: Controls whether element blocks should be written separately. When true, writes elements in separate blocks based on the format specified in separate_blocks_format_type. When false, writes all elements into a single block.
+   :type write_separate_blocks: bool, optional
+   :param write_components_with_element_blocks: Controls whether component definitions should be written within individual element blocks. write_components_with_element_blocks only has effect when write_separate_blocks is true. When write_components_with_element_blocks is true, writes component commands for each element block. When write_components_with_element_blocks is false, writes components separately.
+   :type write_components_with_element_blocks: bool, optional
+   :param separate_blocks_format_type: Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
+   :type separate_blocks_format_type: SeparateBlocksFormatType, optional
+   :param export_fasteners_as_swgen: Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
+   :type export_fasteners_as_swgen: bool, optional
+   :param export_rigid_bodies_as_rbgen: Option to export rigid bodies as rbgen. When true, translates rigid bodies into compact rbgen blocks in the exported file. The default value is false.
+   :type export_rigid_bodies_as_rbgen: bool, optional
+   :param write_component_based_ties: Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
+   :type write_component_based_ties: bool, optional
+   :param mortar_contact_for_ties: Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
+   :type mortar_contact_for_ties: bool, optional
+   :param write_thickness_file: Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
+   :type write_thickness_file: bool, optional
+   :param contact_element_types: Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+   :type contact_element_types: ContactElementTypeParams, optional
+
+
+
+
+
+
+
+.. vale on

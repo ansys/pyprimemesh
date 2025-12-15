@@ -1,0 +1,152 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergeZoneletsParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.partstructs.MergeZoneletsParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, merge_small_zonelets_with_neighbors: bool = None, element_count_limit: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to merge zonelets.
+
+   :param model: Model to create a ``MergeZoneletsParams`` object with default parameters.
+   :type model: Model
+   :param merge_small_zonelets_with_neighbors: Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+   :type merge_small_zonelets_with_neighbors: bool, optional
+   :param element_count_limit: Element count limit to identify small zonelets.
+   :type element_count_limit: int, optional
+   :param json_data: JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> merge_zonelets_params = prime.MergeZoneletsParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MergeZoneletsParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~element_count_limit`
+            - Element count limit to identify small zonelets.
+          * - :py:attr:`~merge_small_zonelets_with_neighbors`
+            - Works better if zonelets are separated by region.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MergeZoneletsParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MergeZoneletsParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.partstructs import MergeZoneletsParams
+
+Property detail
+---------------
+
+.. py:property:: element_count_limit
+   :type: int
+
+
+   Element count limit to identify small zonelets.
+
+.. py:property:: merge_small_zonelets_with_neighbors
+   :type: bool
+
+
+   Works better if zonelets are separated by region.
+
+   :type: Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MergeZoneletsParams`` object.
+
+   .. rubric:: Examples
+
+   >>> MergeZoneletsParams.print_default()
+
+
+.. py:method:: set_default(merge_small_zonelets_with_neighbors: bool = None, element_count_limit: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MergeZoneletsParams`` object.
+
+   :param merge_small_zonelets_with_neighbors: Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+   :type merge_small_zonelets_with_neighbors: bool, optional
+   :param element_count_limit: Element count limit to identify small zonelets.
+   :type element_count_limit: int, optional
+
+
+
+
+
+
+
+.. vale on

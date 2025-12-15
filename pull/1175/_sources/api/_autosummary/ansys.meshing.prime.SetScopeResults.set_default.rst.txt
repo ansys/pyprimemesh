@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SetScopeResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using SetScopeResults.set_default
+
+   ansys.meshing.prime.SetScopeResults.set_default

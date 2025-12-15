@@ -1,0 +1,6 @@
+copy\_labels
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CopyZoneletsParams.copy_labels

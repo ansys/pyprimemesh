@@ -1,0 +1,71 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LabelToZoneMethod`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.lucid.LabelToZoneMethod
+
+
+
+   Provides for creating zones from labels.
+
+
+
+.. py:currentmodule:: LabelToZoneMethod
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~SIMPLE`
+            - Simple method for creating zones from labels.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.lucid import LabelToZoneMethod
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: SIMPLE
+   :value: 0
+
+
+   Simple method for creating zones from labels.
+
+   Entities are queried using labels, and zones are created.
+
+
+
+
+
+
+
+.. vale on

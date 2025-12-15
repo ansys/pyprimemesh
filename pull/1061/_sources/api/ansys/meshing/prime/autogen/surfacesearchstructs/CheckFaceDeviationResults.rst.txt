@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CheckFaceDeviationResults`
+==================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.CheckFaceDeviationResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_deviated: int = None, maximum_deviation: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Result structure associated with the check face deviation operations.
+
+   :param model: Model to create a ``CheckFaceDeviationResults`` object with default parameters.
+   :type model: Model
+   :param n_deviated: Number of faces with deviation.
+   :type n_deviated: int, optional
+   :param maximum_deviation: Maximum deviation found.
+   :type maximum_deviation: float, optional
+   :param json_data: JSON dictionary to create a ``CheckFaceDeviationResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> check_face_deviation_results = prime.CheckFaceDeviationResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CheckFaceDeviationResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~maximum_deviation`
+            - Maximum deviation found.
+          * - :py:attr:`~n_deviated`
+            - Number of faces with deviation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CheckFaceDeviationResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CheckFaceDeviationResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import CheckFaceDeviationResults
+
+Property detail
+---------------
+
+.. py:property:: maximum_deviation
+   :type: float
+
+
+   Maximum deviation found.
+
+.. py:property:: n_deviated
+   :type: int
+
+
+   Number of faces with deviation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CheckFaceDeviationResults`` object.
+
+   .. rubric:: Examples
+
+   >>> CheckFaceDeviationResults.print_default()
+
+
+.. py:method:: set_default(n_deviated: int = None, maximum_deviation: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CheckFaceDeviationResults`` object.
+
+   :param n_deviated: Number of faces with deviation.
+   :type n_deviated: int, optional
+   :param maximum_deviation: Maximum deviation found.
+   :type maximum_deviation: float, optional
+
+
+
+
+
+
+
+.. vale on

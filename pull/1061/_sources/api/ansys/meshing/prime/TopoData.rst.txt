@@ -1,0 +1,281 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`TopoData`
+=================
+
+
+.. py:class:: ansys.meshing.prime.TopoData(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   Topodata has all information about connectivity of nodes, edges, elements and more.
+
+   :param model: Server model to create TopoData object.
+   :type model: Model
+   :param id: Id of the TopoData.
+   :type id: int
+   :param object_id: Object id of the TopoData.
+   :type object_id: int
+   :param name: Name of the TopoData.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: TopoData
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_mesh_on_topo_faces`
+            - Delete mesh on the provided topofaces.
+          * - :py:attr:`~get_adjacent_topo_edges_of_topo_edges`
+            - Get the adjacent topoedges for the provided topoedge ids.
+          * - :py:attr:`~get_adjacent_topo_faces_of_topo_faces`
+            - Get the adjacent topofaces for the provided topoface ids.
+          * - :py:attr:`~get_geom_zonelets_of_topo_edges`
+            - Get the geometry edge zonelets for the provided topoedge ids.
+          * - :py:attr:`~get_geom_zonelets_of_topo_faces`
+            - Get the geometry face zonelets for the provided topoface ids.
+          * - :py:attr:`~get_mesh_zonelets_of_topo_edges`
+            - Get the mesh edge zonelets for the provided topoedge ids.
+          * - :py:attr:`~get_mesh_zonelets_of_topo_faces`
+            - Get the mesh face zonelets for the provided topoface ids.
+          * - :py:attr:`~get_topo_edges_of_topo_faces`
+            - Get the topoedges of the provided topoface ids.
+          * - :py:attr:`~get_topo_volumes_of_topo_faces`
+            - Gets the topovolumes of the given topofaces.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of TopoData.
+          * - :py:attr:`~name`
+            - Get the name of TopoData.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import TopoData
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of TopoData.
+
+.. py:property:: name
+
+   Get the name of TopoData.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: delete_mesh_on_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.DeleteMeshParams) -> ansys.meshing.prime.params.primestructs.DeleteMeshResults
+
+   Delete mesh on the provided topofaces.
+
+
+   :param topo_faces: Ids of topofaces.
+   :type topo_faces: Iterable[int]
+   :param params: Parameters to delete mesh on topofaces.
+   :type params: DeleteMeshParams
+
+   :returns: Returns the DeleteMeshResults.
+   :rtype: DeleteMeshResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> params = prime.DeleteMeshParams(model = model)
+   >>> result = topo_data.delete_mesh_on_topo_faces(top_faces, params)
+
+
+.. py:method:: get_adjacent_topo_edges_of_topo_edges(topo_edges: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the adjacent topoedges for the provided topoedge ids.
+
+
+   :param topo_edges: Ids of the topoedge.
+   :type topo_edges: Iterable[int]
+
+   :returns: Returns the list of adjacent topoedge ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> topo_edges_of_topo_edges = topo_data.get_adjacent_topo_edges_of_topo_edges(topo_edges)
+
+
+.. py:method:: get_adjacent_topo_faces_of_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the adjacent topofaces for the provided topoface ids.
+
+
+   :param topo_faces: Ids of the topoface.
+   :type topo_faces: Iterable[int]
+
+   :returns: Returns the list of adjacent topoface ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> topo_faces_of_topo_faces = topo_data.get_adjacent_topo_faces_of_topo_faces(topo_faces)
+
+
+.. py:method:: get_geom_zonelets_of_topo_edges(topo_edges: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the geometry edge zonelets for the provided topoedge ids.
+
+
+   :param topo_edges: Ids of the topoedges.
+   :type topo_edges: Iterable[int]
+
+   :returns: Return the geometry edge zonelet ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> geom_edge_zonelets = topo_data.get_geom_zonelets_of_topo_edges(topo_edges)
+
+
+.. py:method:: get_geom_zonelets_of_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the geometry face zonelets for the provided topoface ids.
+
+
+   :param topo_faces: Ids of the topofaces.
+   :type topo_faces: Iterable[int]
+
+   :returns: Return the geometry face zonelet ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> geom_face_zonelets = topo_data.get_geom_zonelets_of_topo_faces(topo_faces)
+
+
+.. py:method:: get_mesh_zonelets_of_topo_edges(topo_edges: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the mesh edge zonelets for the provided topoedge ids.
+
+
+   :param topo_edges: Ids of the topoedges.
+   :type topo_edges: Iterable[int]
+
+   :returns: Return the mesh edge zonelet ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> mesh_edge_zonelets = topo_data.get_mesh_zonelets_of_topo_edges(topo_edges)
+
+
+.. py:method:: get_mesh_zonelets_of_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the mesh face zonelets for the provided topoface ids.
+
+
+   :param topo_faces: Ids of the topofaces.
+   :type topo_faces: Iterable[int]
+
+   :returns: Return the mesh face zonelet ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> mesh_face_zonelets = topo_data.get_mesh_zonelets_of_topo_faces(topo_faces)
+
+
+.. py:method:: get_topo_edges_of_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Get the topoedges of the provided topoface ids.
+
+
+   :param topo_faces: Ids of the topoface.
+   :type topo_faces: Iterable[int]
+
+   :returns: Returns the list of topoedge ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Examples
+
+   >>> topo_edges_of_topo_faces = topo_data.get_topo_edges_of_topo_faces(topo_faces)
+
+
+.. py:method:: get_topo_volumes_of_topo_faces(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.Iterable[int]
+
+   Gets the topovolumes of the given topofaces.
+
+
+   :param topo_faces: Ids of the topofaces.
+   :type topo_faces: Iterable[int]
+
+   :returns: Returns the list of topovolume ids.
+   :rtype: Iterable[int]
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> topovolumes = topo_data.get_topo_volumes_of_topo_faces(topo_faces)
+
+
+
+
+
+
+
+.. vale on

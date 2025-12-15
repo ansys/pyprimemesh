@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FillHolesAtPlaneParams`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.FillHolesAtPlaneParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, create_zone: bool = None, suggested_zone_name: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to fill holes at given plane.
+
+   :param model: Model to create a ``FillHolesAtPlaneParams`` object with default parameters.
+   :type model: Model
+   :param create_zone: Option to create a face zone for the zonelets created to fill holes.
+   :type create_zone: bool, optional
+   :param suggested_zone_name: Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
+   :type suggested_zone_name: str, optional
+   :param json_data: JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> fill_holes_at_plane_params = prime.FillHolesAtPlaneParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FillHolesAtPlaneParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_zone`
+            - Option to create a face zone for the zonelets created to fill holes.
+          * - :py:attr:`~suggested_zone_name`
+            - Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FillHolesAtPlaneParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FillHolesAtPlaneParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import FillHolesAtPlaneParams
+
+Property detail
+---------------
+
+.. py:property:: create_zone
+   :type: bool
+
+
+   Option to create a face zone for the zonelets created to fill holes.
+
+.. py:property:: suggested_zone_name
+   :type: str
+
+
+   Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FillHolesAtPlaneParams`` object.
+
+   .. rubric:: Examples
+
+   >>> FillHolesAtPlaneParams.print_default()
+
+
+.. py:method:: set_default(create_zone: bool = None, suggested_zone_name: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FillHolesAtPlaneParams`` object.
+
+   :param create_zone: Option to create a face zone for the zonelets created to fill holes.
+   :type create_zone: bool, optional
+   :param suggested_zone_name: Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
+   :type suggested_zone_name: str, optional
+
+
+
+
+
+
+
+.. vale on

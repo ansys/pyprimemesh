@@ -1,0 +1,110 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``periodiccontrolstructs.py`` module
+========================================
+
+.. py:module:: ansys.meshing.prime.autogen.periodiccontrolstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: periodiccontrolstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.periodiccontrolstructs.PeriodicControlParams`
+            - PeriodicControlParams contains the parameters for periodic surface recovery.  Parameters like center, axis and angle determine the transformation from  one surface to its matching periodic surface.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.periodiccontrolstructs.PeriodicControlSummaryParams`
+            - Parameters used to get size control summary.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.periodiccontrolstructs.PeriodicControlSummaryResult`
+            - Results of Periodic control summary.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControlParams</api/ansys/meshing/prime/autogen/periodiccontrolstructs/PeriodicControlParams>
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControlSummaryParams</api/ansys/meshing/prime/autogen/periodiccontrolstructs/PeriodicControlSummaryParams>
+    <span class="nf nf-cod-symbol_class"></span> PeriodicControlSummaryResult</api/ansys/meshing/prime/autogen/periodiccontrolstructs/PeriodicControlSummaryResult>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

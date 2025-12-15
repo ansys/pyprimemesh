@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.OverlapPairs.print_default
+
+.. minigallery::
+   :add-heading: Examples using OverlapPairs.print_default
+
+   ansys.meshing.prime.OverlapPairs.print_default

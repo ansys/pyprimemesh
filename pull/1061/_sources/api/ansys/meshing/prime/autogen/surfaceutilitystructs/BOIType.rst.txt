@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BOIType`
+================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfaceutilitystructs.BOIType
+
+
+
+   BOI type for BOI creation.
+
+
+
+
+.. py:currentmodule:: BOIType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~OFFSETBOX`
+            - Box BOI type for BOI creation.
+          * - :py:attr:`~OFFSETSURFACE`
+            - Surface BOI type for BOI creation.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfaceutilitystructs import BOIType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: OFFSETBOX
+   :value: 1
+
+
+   Box BOI type for BOI creation.
+
+.. py:attribute:: OFFSETSURFACE
+   :value: 2
+
+
+   Surface BOI type for BOI creation.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+ScaffolderRepairMode
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderRepairMode
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      ScaffolderRepairMode.DEFAULT
+      
+      
+      ScaffolderRepairMode.CONSERVATIVE
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScaffolderRepairMode
+
+    ansys.meshing.prime.ScaffolderRepairMode
+
+.. vale on

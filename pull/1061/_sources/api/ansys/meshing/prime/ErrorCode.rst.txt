@@ -1,0 +1,3052 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ErrorCode`
+==================
+
+
+.. py:class:: ansys.meshing.prime.ErrorCode
+
+
+
+   Error codes associated with the failure of PyPrimeMesh operation.
+
+
+
+
+.. py:currentmodule:: ErrorCode
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART`
+            - Adding provided entities is not supported for part with topology data.
+          * - :py:attr:`~ADDTHICKNESSRESULTSFAILED`
+            - Adding thickness failed.
+          * - :py:attr:`~AITOVERLAPALONGMULTIFOUND`
+            - Topology identification failed because of overlapping faces.
+          * - :py:attr:`~ALIGNMENTFAILED`
+            - Alignment failed.
+          * - :py:attr:`~ALREADYVOLUMEMESHED`
+            - Volume is already meshed.
+          * - :py:attr:`~AUTOMESHFAILED`
+            - Auto meshing failed.
+          * - :py:attr:`~AUTOMESHHEXCOREFAILED`
+            - Hex generation part of volume meshing failed.
+          * - :py:attr:`~AUTOMESHINITFAILED`
+            - Auto mesh initialization failed.
+          * - :py:attr:`~AUTOMESHINVALIDMAXSIZE`
+            - Invalid max size for auto volume meshing.
+          * - :py:attr:`~AUTONODEMOVEFAILED`
+            - Auto node move failed.
+          * - :py:attr:`~AUTOQUADMESHER_INVALIDMINMAXSIZES`
+            - Difference in maximum value and minimum value is negative.
+          * - :py:attr:`~AUTOQUADMESHER_NEGATIVEINPUTPARAMETER`
+            - Autoquadmesher error codes.
+          * - :py:attr:`~BOIRESULTSFAILED`
+            - BOI creation failed.
+          * - :py:attr:`~CADGEOMETRYNOTFOUND`
+            - No CAD Geometry found for projections.
+          * - :py:attr:`~CADIMPORTFAILED`
+            - CAD import failed.
+          * - :py:attr:`~CELLSEPARATIONFAILED`
+            - Cell separation failed.
+          * - :py:attr:`~CHECKPERIODICPAIRSFAILED`
+            - Could not find a matching periodic face pair.
+          * - :py:attr:`~COLOCATEFUSEDNODESFAILED`
+            - Colocation of fused nodes failed.
+          * - :py:attr:`~COMPUTEVOLUMESFAILED`
+            - Compute volumes failed.
+          * - :py:attr:`~CONTACTPATCHRESULTSFAILED`
+            - Contact patch creation process failed. Check the inputs.
+          * - :py:attr:`~CONTROLNOTFOUND`
+            - Control not found.
+          * - :py:attr:`~CREATEBOI_INVALIDFLOWDIRECTION`
+            - BOI creation failed. Invalid flow or wake direction.
+          * - :py:attr:`~CREATEBOI_INVALIDSCALE`
+            - BOI creation failed. Scale factors should not be less than one.
+          * - :py:attr:`~CREATEBOI_INVALIDSCOPE`
+            - BOI creation failed. Invalid face zonelets as input.
+          * - :py:attr:`~CREATEBOI_INVALIDTYPEFORWRAP`
+            - BOI creation failed. Wrapping is invalid for this BOI type.
+          * - :py:attr:`~CREATEBOI_INVALIDWAKELEVELS`
+            - BOI creation failed. Invalid wake levels input.
+          * - :py:attr:`~CREATEBOI_IVALIDWRAPMESHSIZE`
+            - BOI creation failed. Wrap cannot be performed with invalid mesh size.
+          * - :py:attr:`~CREATECAPONFACEZONELETSFAILED`
+            - Failed to create cap on face zonelets.
+          * - :py:attr:`~CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS`
+            - Contact patch creation process failed. Invalid contact patch creation axis.
+          * - :py:attr:`~CREATECONTACTPATCH_INVALIDOFFSETDISTANCE`
+            - Contact patch creation process failed. Scale factors should not be less than zero.
+          * - :py:attr:`~CREATECONTACTPATCH_INVALIDTOLERANCEVALUE`
+            - Contact patch creation process failed. Tolerance value should not be less than zero.
+          * - :py:attr:`~CREATEEDGEZONELETFAILED`
+            - Creating edge zonelet failed.
+          * - :py:attr:`~DELETECONTROLSFAILED`
+            - Delete controls failed.
+          * - :py:attr:`~DELETEFRINGESANDOVERLAPSFAILED`
+            - Deleting fringes and overlaps failed.
+          * - :py:attr:`~DELETEMESHFACESFAILED`
+            - Delete Mesh faces failed
+          * - :py:attr:`~DELETEMESHFACES_CELLFOUND`
+            - Deleting faces failed as they have cell neighbors.
+          * - :py:attr:`~DELETEMESHFACES_TOPOLOGYNOTSUPPORTED`
+            - Topoentities do not support deleting faces.
+          * - :py:attr:`~DELETEMESHFAILED`
+            - Deleting mesh failed.
+          * - :py:attr:`~DELETEPARTSFAILED`
+            - Delete parts failed.
+          * - :py:attr:`~DELETEVOLUMESFAILED`
+            - Delete volumes failed.
+          * - :py:attr:`~DELETEZONELETSCONNECTEDTOCELLS`
+            - Cannot delete zonelets connected to volume mesh.
+          * - :py:attr:`~DELETEZONELETSFAILED`
+            - Delete zonelets failed.
+          * - :py:attr:`~DUPLICATEFACESFOUND`
+            - Duplicate faces found.
+          * - :py:attr:`~DUPLICATENODESFOUND`
+            - Duplicate nodes found.
+          * - :py:attr:`~EDGEINTERSECTINGFACEFOUND`
+            - Edge intersecting face found.
+          * - :py:attr:`~ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS`
+            - Entities should be added to zone using part it belongs.
+          * - :py:attr:`~EXPORTFLUENTCASEFAILED`
+            - Export fluent case failed.
+          * - :py:attr:`~EXPORTFLUENTMESHINGMSHFAILED`
+            - Export fluent meshing mesh failed.
+          * - :py:attr:`~EXPORTSTLFAILED`
+            - Export STL failed.
+          * - :py:attr:`~EXPORTSTLFAILEDWITHEMPTYPARTIDLIST`
+            - Export STL failed. List of part ids is empty.
+          * - :py:attr:`~EXPORTSTLFAILEDWITHHIGHERORDERMESH`
+            - Export STL not supported for higher order mesh.
+          * - :py:attr:`~EXPORTSTLFAILEDWITHINCORRECTPARTID`
+            - Export STL failed. Part id is incorrect.
+          * - :py:attr:`~EXPORTSTLFAILEDWITHPOLYFACES`
+            - Export STL not supported for mesh with poly faces.
+          * - :py:attr:`~EXPORTSTLFAILEDWITHQUADFACES`
+            - Export STL not supported for mesh with quad faces.
+          * - :py:attr:`~EXPORTSTLFAILEDWITHTOPOLOGY`
+            - Export STL not supported for part with topology data.
+          * - :py:attr:`~EXTRACTFEATURESBYANGLEFAILED`
+            - Feature extraction by angle failed.
+          * - :py:attr:`~EXTRACTFEATURESBYEDGESFAILED`
+            - Extracting features by angle failed.
+          * - :py:attr:`~EXTRACTFEATURESBYINTERSECTIONFAILED`
+            - Feature extraction by intersection failed.
+          * - :py:attr:`~EXTRACTVOLUMESFAILED`
+            - Extract volumes failed.
+          * - :py:attr:`~FACEZONELETSFEATURESNOTUPTODATE`
+            - Face zonelets features are not up to date.
+          * - :py:attr:`~FACEZONELETSHAVECELLSCONNECTED`
+            - Face zonelets have cells connected.
+          * - :py:attr:`~FILENOTFOUND`
+            - File path or name not found.
+          * - :py:attr:`~FILLHOLEFAILED`
+            - Unable to create capping surface.
+          * - :py:attr:`~FREEZEMESHERROR`
+            - Cannot remesh freezed mesh.
+          * - :py:attr:`~FUSEINTERIORFAILED`
+            - Fusing interior region of overlap failed.
+          * - :py:attr:`~FUSEOPTIONINVALID`
+            - Invalid option chosen to connect two different parts.
+          * - :py:attr:`~GETELEMENTCOUNTFAILED`
+            - Failed to get element count.
+          * - :py:attr:`~GETSTATISTICSFAILED`
+            - Failed to get mesh statistics.
+          * - :py:attr:`~IGA_EDGEPATHCOMPUTATIONFAILED`
+            - Edge path computation failed.
+          * - :py:attr:`~IGA_HREFINEMENTFAILED`
+            - H-refinement of spline failed.
+          * - :py:attr:`~IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE`
+            - Incorrect control point size with respect to degree.
+          * - :py:attr:`~IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT`
+            - Incorrect control point size with respect to mesh size.
+          * - :py:attr:`~IGA_INCORRECTDEGREE`
+            - Incorrect degree.
+          * - :py:attr:`~IGA_INVALIDINPUTFILEFORGENUSZEROFITTING`
+            - Invalid model for genus-zero spline fitting.
+          * - :py:attr:`~IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING`
+            - Invalid model for structured hex-mesh spline fitting.
+          * - :py:attr:`~IGA_NEGATIVEJACOBIAN`
+            - Spline has negative jacobian.
+          * - :py:attr:`~IGA_NOCELLZONELETS`
+            - No cell zonelets found.
+          * - :py:attr:`~IGA_NODEINDEXINGFAILED`
+            - Hex mesh is unstructured.
+          * - :py:attr:`~IGA_NOFACEZONELETS`
+            - No face zonelets found.
+          * - :py:attr:`~IGA_NURBSFITTINGFAILED`
+            - Spline fitting failed.
+          * - :py:attr:`~IGA_NURBSOPFAILED`
+            - Spline operation failed.
+          * - :py:attr:`~IGA_NURBSSMOOTHFAILED`
+            - Smoothing of spline failed.
+          * - :py:attr:`~IGA_PERIODICKNOTVECTORCONVERSIONFAILED`
+            - Periodic knot conversion of spline failed.
+          * - :py:attr:`~IGA_PREFINEMENTFAILED`
+            - P-refinement of spline failed.
+          * - :py:attr:`~IGA_QUADRATICMESHINPUT`
+            - Quadratic mesh is not supported for solid spline creation.
+          * - :py:attr:`~IGA_QUADTOSPLINEBASISFAILED`
+            - Quad to spline operation failed.
+          * - :py:attr:`~IGA_UNIFORMTRIMMEDNURBSFAILED`
+            - Uniform trimmed spline creation failed.
+          * - :py:attr:`~IMPORTABAQUSFAILEDDURINGMESHCREATION`
+            - Import Abaqus failed. Failed to create mesh entities.
+          * - :py:attr:`~IMPORTABAQUSFAILEDWITHPARSINGFAILURE`
+            - Import Abaqus failed. Failed to parse file.
+          * - :py:attr:`~IMPORTABAQUSFAILEDWITHUNKNOWNERROR`
+            - Import Abaqus failed. Failed with unknown error.
+          * - :py:attr:`~IMPORTFLUENTCASEFAILED`
+            - Failed to import fluent case file.
+          * - :py:attr:`~IMPORTFLUENTMESHINGMSHFAILED`
+            - Failed to import fluent meshing mesh file.
+          * - :py:attr:`~IMPRINTBOUNDARYEDGESFAILED`
+            - Imprint of boundary edges failed.
+          * - :py:attr:`~IMPRINTBOUNDARYNODESFAILED`
+            - Imprint of boundary nodes failed.
+          * - :py:attr:`~IMPROVESURFACEMESHQUALITYFAILED`
+            - Improve surface mesh quality failed.
+          * - :py:attr:`~INCLUDEKFILENOTFOUND`
+            - Include keyword file not found.
+          * - :py:attr:`~INCREMENTALVOLUMEMESHINGNOTSUPPORTED`
+            - Incremental volume meshing is not supported.
+          * - :py:attr:`~INPUTNOTCOMPLETE`
+            - Input provided is incomplete.
+          * - :py:attr:`~INTERRUPTED`
+            - Method call interrupted.
+          * - :py:attr:`~INTERSECTIONINCUTTERVOLUMES`
+            - Found overlapping or intersecting cutter volumes.
+          * - :py:attr:`~INTERSECTIONINTARGETVOLUMES`
+            - Found overlapping or intersecting target volumes.
+          * - :py:attr:`~INVALIDCELLQUALITYLIMIT`
+            - Invalid cell quality limit.
+          * - :py:attr:`~INVALIDCMBLOCKFORMAT`
+            - CMBLOCK command format error in CDB file.
+          * - :py:attr:`~INVALIDCONTROLPARAMS`
+            - Invalid control parameters.
+          * - :py:attr:`~INVALIDCURVATURESIZINGINPUT`
+            - Invalid curvature sizing input.
+          * - :py:attr:`~INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT`
+            - Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 .
+          * - :py:attr:`~INVALIDFIRSTASPECTRATIO`
+            - Invalid first aspect ratio.
+          * - :py:attr:`~INVALIDFIRSTHEIGHT`
+            - Invalid first height.
+          * - :py:attr:`~INVALIDGLOBALMINMAX`
+            - Invalid global min and max value.
+          * - :py:attr:`~INVALIDGROWTHRATE`
+            - Invalid growth rate.
+          * - :py:attr:`~INVALIDINPUTPART`
+            - Invalid input part.
+          * - :py:attr:`~INVALIDINPUTPOINT`
+            - Invalid input point.
+          * - :py:attr:`~INVALIDINPUTVOLUMES`
+            - List of volume ids provided is empty or incorrect.
+          * - :py:attr:`~INVALIDINPUTZONELETS`
+            - Invalid input zonelets.
+          * - :py:attr:`~INVALIDLASTASPECTRATIO`
+            - Invalid last aspect ratio.
+          * - :py:attr:`~INVALIDLAYERS`
+            - Invalid number of layers.
+          * - :py:attr:`~INVALIDNEIGHBORVOLUMES`
+            - Invalid neighbor volumes selected to merge volumes.
+          * - :py:attr:`~INVALIDPLANEPOINTS`
+            - Invalid plane points, cannot define a plane.
+          * - :py:attr:`~INVALIDPRISMCONTROLS`
+            - Invalid prism controls.
+          * - :py:attr:`~INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY`
+            - Invalid scope entity.
+          * - :py:attr:`~INVALIDPROXIMITYSIZINGINPUT`
+            - Invalid proximity sizing input.
+          * - :py:attr:`~INVALIDREGISTERID`
+            - Invalid register id provided. Register ids between 1 to 28 are valid.
+          * - :py:attr:`~INVALIDSCOPEENTITYTYPEINPUT`
+            - Invalid input scope entity type.
+          * - :py:attr:`~INVALIDSHELLBLCONTROLS`
+            - Invalid ShellBL controls.
+          * - :py:attr:`~INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY`
+            - Invalid scope entity.
+          * - :py:attr:`~INVALIDSIZECONTROLINPUTS`
+            - Invalid size control input.
+          * - :py:attr:`~INVALIDSIZECONTROLS`
+            - Invalid size controls.
+          * - :py:attr:`~INVALIDSIZECONTROLSCOPE`
+            - Invalid size control scope.
+          * - :py:attr:`~INVALIDTHINVOLUMECONTROLS`
+            - Invalid input provided for thin volume control.
+          * - :py:attr:`~INVALIDTRANSFORMATIONMATRIX`
+            - Invalid transformation matrix.
+          * - :py:attr:`~INVALIDVOLUMECONTROLS`
+            - Invalid volume controls specified for volume meshing.
+          * - :py:attr:`~INVALIDWRAPPERCONTROL`
+            - Invalid wrapper control.
+          * - :py:attr:`~LOCALSURFERINVALIDNUMRINGS`
+            - Invalid number of rings input for the local surface mesh operation.
+          * - :py:attr:`~MATCHMORPH_BCPAIRINPUTTYPEMISMATCH`
+            - Entity type does not match with input for defined boundary condition pair.
+          * - :py:attr:`~MATCHMORPH_INVALIDSOURCEINPUT`
+            - Invalid source input for match morphing.
+          * - :py:attr:`~MATERIALPOINTWITHGIVENIDDOESNTEXIST`
+            - Material point with the given ID already exists.
+          * - :py:attr:`~MATERIALPOINTWITHGIVENNAMEDOESNTEXIST`
+            - Material point with the given name does not exist.
+          * - :py:attr:`~MATERIALPOINTWITHSAMENAMEEXISTS`
+            - Material point with the same name already exists.
+          * - :py:attr:`~MERGEPARTSFAILED`
+            - Merge parts failed.
+          * - :py:attr:`~MERGEPARTSWANDWOTOPO`
+            - Merge parts with topology and parts without topology are not supported.
+          * - :py:attr:`~MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS`
+            - Merge small zonelets option is supported for only face zonelets.
+          * - :py:attr:`~MERGEVOLUMESFAILED`
+            - Merge volumes failed.
+          * - :py:attr:`~MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART`
+            - Merge volumes is not supported for part with topology data.
+          * - :py:attr:`~MERGEZONELETSFAILED`
+            - Merge zonelets failed.
+          * - :py:attr:`~MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART`
+            - Merge zonelets is not supported for part with topology data.
+          * - :py:attr:`~MESHDECOUPLEDFAILED`
+            - Invalid load balancing or failed in volume meshing for one or more parts.
+          * - :py:attr:`~MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH`
+            - Mesh not found to export fluent meshing mesh.
+          * - :py:attr:`~MICROSTRUCTUREBADSHAPEPROPERTIES`
+            - Bad shape properties.
+          * - :py:attr:`~MICROSTRUCTUREINVALIDELEMENTTYPE`
+            - Invalid input provided. Invalid Element Type.
+          * - :py:attr:`~MICROSTRUCTUREINVALIDSHAPETYPE`
+            - Invalid input provided. Invalid Shape.
+          * - :py:attr:`~MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID`
+            - Volume mesh generation for hexahedra requires generation of a quadratic voxel grid.
+          * - :py:attr:`~MICROSTRUCTUREREMESHNOTSUPPORTED`
+            - Surface remesh operation is not supported.
+          * - :py:attr:`~MICROSTRUCTURESMOOTHNOTSUPPORTED`
+            - Smoothing operation is not supported.
+          * - :py:attr:`~MICROSTRUCTUREWRONGAPICALLSEQUENCE`
+            - Wrong API call sequence.
+          * - :py:attr:`~MORPHER_COMPUTEBCS`
+            - Failed to compute boundary conditions.
+          * - :py:attr:`~MULTIZONEMESHER_BLOCKINGFAILED`
+            - Creating MultiZone blocking failed.
+          * - :py:attr:`~MULTIZONEMESHER_MESHINGFAILED`
+            - Generating MultiZone mesh failed.
+          * - :py:attr:`~MULTIZONEMESHER_MESHTRANSFERFAILED`
+            - MultiZone mesh transfer failed.
+          * - :py:attr:`~MULTIZONEMESHER_MULTIPLECONTROLSNOTSUPPORTED`
+            - MultiZone mesh does not support multiple controls.
+          * - :py:attr:`~MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER`
+            - No volumes for geometry import.
+          * - :py:attr:`~MULTIZONEMESHER_NOVOLUMESSCOPEDINCURRENTPART`
+            - No volumes for geometry import in the current part.
+          * - :py:attr:`~MULTIZONEMESHER_USERINPUTTOPOLOGYMISSING`
+            - Input does not have topology for MultiZone mesh.
+          * - :py:attr:`~NOACTIVESFFOUND`
+            - No active size fields found.
+          * - :py:attr:`~NOCELLSSEPARATED`
+            - No cells separated based on given input.
+          * - :py:attr:`~NOERROR`
+            - No error.
+          * - :py:attr:`~NOINPUT`
+            - No input provided.
+          * - :py:attr:`~NOTSUPPORTEDFORDISTRIBUTEMESHING`
+            - Method not supported for distributed meshing.
+          * - :py:attr:`~NOTSUPPORTEDFORHIGHERORDERMESHPART`
+            - Operation does not support higher order elements.
+          * - :py:attr:`~NOTSUPPORTEDFORNONQUADFACEZONE`
+            - Operation supports only quads.
+          * - :py:attr:`~NOTSUPPORTEDFORNONTRIFACEZONE`
+            - Only triangular face zone is supported.
+          * - :py:attr:`~NOTSUPPORTEDFORPOLYMESHPART`
+            - Operation does not support poly elements.
+          * - :py:attr:`~NOTSUPPORTEDFORTOPOLOGYPART`
+            - Not supported for part with topology data.
+          * - :py:attr:`~NUMENMETHODNOTFOUND`
+            - Could not find numen method.
+          * - :py:attr:`~OCTREELIMITREACHED`
+            - Limit reached for the number of octants supported.
+          * - :py:attr:`~OGRIDREFINEFAILED`
+            - Post refinement of ShellBl quads failed.
+          * - :py:attr:`~OUTOFMEMORY`
+            - Out of memory.
+          * - :py:attr:`~PARTDOESNOTHAVETOPOLOGY`
+            - Part does not have topology.
+          * - :py:attr:`~PARTHASTOPOLOGY`
+            - Part has a topology.
+          * - :py:attr:`~PARTNOTFOUND`
+            - Given part not found.
+          * - :py:attr:`~PARTNOTMESHED`
+            - Part is not meshed.
+          * - :py:attr:`~PATHNOTFOUND`
+            - Invalid path.
+          * - :py:attr:`~PERIODICEDGESNOTSUPPORTEDFORSHELLBL`
+            - Periodic surfaces selected for ShellBL generation are not supported.
+          * - :py:attr:`~PERIODICRECOVERYFORALREADYVOLUMEMESHEDPART`
+            - Periodic recovery unsupported for already volume meshed part.
+          * - :py:attr:`~PERIODICSURFACESEDGESMISMATCH`
+            - Edge entities do not match on periodic source and target surfaces.
+          * - :py:attr:`~PERIODICSURFACESNOTSUPPORTEDFORPRISMS`
+            - Periodic surfaces selected for prism generation are not supported.
+          * - :py:attr:`~PLANECOLLINEARPOINTS`
+            - Collinear or duplicate points given to define plane.
+          * - :py:attr:`~PLUGINLOADFAILURE`
+            - Failed to load Surface Editor plugin.
+          * - :py:attr:`~POLYMESHFAILED`
+            - Poly meshing failed.
+          * - :py:attr:`~PREPAREFORVOLUMEMESHINGFAILED`
+            - Prepare for volume meshing failed.
+          * - :py:attr:`~PRISMMESHFAILED`
+            - Prism meshing failed.
+          * - :py:attr:`~PROJECTONCADGEOMETRYFAILED`
+            - Projection on CAD Geometry failed.
+          * - :py:attr:`~PYRAMIDMESHFAILED`
+            - Pyramid meshing failed.
+          * - :py:attr:`~QUADRATICMESHSUPPORTEDONLYFORTETS`
+            - Quadratic elements can only be generated for tetrahedral elements.
+          * - :py:attr:`~QUADRATICMESH_WRITEMESHFAILED`
+            - Writing failed with quadratic mesh.
+          * - :py:attr:`~QUADRATICTETNOTSUPPORTEDINPARALLEL`
+            - Quadratic tetrahedal meshing is not supported in parallel mode.
+          * - :py:attr:`~QUADRATICTETNOTSUPPORTEDWITHPRISMS`
+            - Quadratic tetrahedral meshing is not supported with prism.
+          * - :py:attr:`~READCDBFAILED`
+            - Reading CDB file failed.
+          * - :py:attr:`~READKEYWORDFILEFAILED`
+            - Reading LS-Dyna Keyword file failed.
+          * - :py:attr:`~READMESHFAILED`
+            - Reading mesh file failed.
+          * - :py:attr:`~READPMDATFAILED`
+            - PMDAT file read failed.
+          * - :py:attr:`~READSHELLBLCONTROLFAILED`
+            - Read thin ShellBL control failed.
+          * - :py:attr:`~READSIZECONTROLFAILED`
+            - Reading size control file failed.
+          * - :py:attr:`~READSIZEFIELDFAILED`
+            - Reading size field file failed.
+          * - :py:attr:`~RECOVERPERIODICSURFACESFAILED`
+            - Unable to recover periodic surfaces.
+          * - :py:attr:`~RECOVERPERIODICSURFACESINVALIDSCOPE`
+            - Invalid scope input for periodic surface recovery.
+          * - :py:attr:`~REFINEATCONTACTSFAILED`
+            - Failed to refine at contacts.
+          * - :py:attr:`~REFRESHSIZEFIELDSFAILED`
+            - Refreshing size field failed.
+          * - :py:attr:`~REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART`
+            - Remesh face zonelets locally is not supported for topology part.
+          * - :py:attr:`~REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART`
+            - Remesh face zonelets is not supported for topology part.
+          * - :py:attr:`~SCAFFOLDERBADINPUTEMPTYTOPO`
+            - Incorrect input. No topo faces or edges in input.
+          * - :py:attr:`~SCAFFOLDERBADINPUTNOFREEFACES`
+            - Incorrect input. No free faces in input.
+          * - :py:attr:`~SCAFFOLDERBADINPUTPARAMS`
+            - Incorrect input parameters.
+          * - :py:attr:`~SCAFFOLDERINVALIDABSOLUTEDISTOL`
+            - Invalid absolute distance tolerance for scaffold operation.
+          * - :py:attr:`~SCAFFOLDERINVALIDCONSTANTMESHSIZE`
+            - Invalid constant mesh size input for scaffold operation.
+          * - :py:attr:`~SCALINGFAILED`
+            - Scaling failed.
+          * - :py:attr:`~SEPARATIONRESULTSFAILED`
+            - Separation failed.
+          * - :py:attr:`~SETNAMEFAILED`
+            - Set name failed.
+          * - :py:attr:`~SHELLBLCONTROLFAILED`
+            - Write ShellBL control failed.
+          * - :py:attr:`~SHELLBLFAILED`
+            - ShellBL creation failed.
+          * - :py:attr:`~SHELLBLFEWLAYERS`
+            - Only few ShellBL layers are created.
+          * - :py:attr:`~SHELLBLNOMESH`
+            - ShellBL is not supported for unmeshed topofaces.
+          * - :py:attr:`~SHELLBLQUADS`
+            - ShellBL quads.
+          * - :py:attr:`~SHELLBLWRONGTOPO`
+            - Found topofaces with invalid topology.
+          * - :py:attr:`~SIDEZONELETSNOTFIT`
+            - Side face zonelets are not sweepable for thin volume mesh.
+          * - :py:attr:`~SIGSEGV`
+            - Segmentation violation.
+          * - :py:attr:`~SIZEFIELDCOMPUTATIONFAILED`
+            - Size field computation failed.
+          * - :py:attr:`~SIZEFIELDNOTFOUND`
+            - Size field not found.
+          * - :py:attr:`~SIZEFIELDTYPENOTSUPPORTED`
+            - Provided Size Field Type is not supported by this operation.
+          * - :py:attr:`~SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO`
+            - Smooth size transition option is not supported for topology surface meshing yet.
+          * - :py:attr:`~SOURCEFACINGCELLZONELETS`
+            - Source face zonelets facing existing volume mesh.
+          * - :py:attr:`~SOURCEORTARGETNOTSPECIFIED`
+            - No target or source faces specified.
+          * - :py:attr:`~SOURCETARGETZONELETSNOTFIT`
+            - Source and target zonelets do not fit to thin volume mesh.
+          * - :py:attr:`~SPHEREATINVALIDNORMALNODESFAILED`
+            - Sphere creation at invalid normals failed.
+          * - :py:attr:`~SPLITANDCOLLAPSEFACEELEMENTSFAILED`
+            - Failed to split and collapse face element(s).
+          * - :py:attr:`~SPLITINTERSECTINGBOUNDARYEDGESFAILED`
+            - Splitting of intersecting boundary edges failed.
+          * - :py:attr:`~SPLITTOTRIFAILED`
+            - ShellBL quads split to triangles failed.
+          * - :py:attr:`~STACKER_BASEFACEUNMESHED`
+            - Base face list input has unmeshed topofaces.
+          * - :py:attr:`~STACKER_FACESEPARATIONFAILED`
+            - Stacker failed to separate base face.
+          * - :py:attr:`~STACKER_FAILED`
+            - Stacker failed to mesh the model.
+          * - :py:attr:`~STACKER_INCORRECTBODYDEFINITION`
+            - Some bodies are intersecting or incorrectly defined.
+          * - :py:attr:`~STACKER_INVALIDBASEFACEINPUT`
+            - Base face list input is invalid.
+          * - :py:attr:`~STACKER_INVALIDINPUTVOLUMES`
+            - Invalid input volumes provided to stacker.
+          * - :py:attr:`~STACKER_INVALIDPARAMS`
+            - Invalid parameters provided to stacker.
+          * - :py:attr:`~STACKER_MESHEDFACESFOUND`
+            - Some faces in the input model have existing mesh.
+          * - :py:attr:`~STACKER_NOFACEFOUNDINVOLUMES`
+            - No faces are found in the specified volumes.
+          * - :py:attr:`~STACKER_NONSTACKABLEVOLUMESFOUND`
+            - Some volumes are not aligned in the stacking direction.
+          * - :py:attr:`~STITCHENTITIESFAILED`
+            - Stitch entities failed.
+          * - :py:attr:`~STITCHWITHPRESERVEDENTITIESFAILED`
+            - Stitch with preserved entities failed.
+          * - :py:attr:`~SUBTRACTVOLUMEFAILED`
+            - Failed to subtract volumes.
+          * - :py:attr:`~SUBTRACTZONELETSFAILED`
+            - Unable to subtract cutters from input zonelets.
+          * - :py:attr:`~SURFACEFEATURETYPENOTSUPPORTED`
+            - Surface search for provided feature type is not supported.
+          * - :py:attr:`~SURFACESEARCHFAILED`
+            - Surface search failed.
+          * - :py:attr:`~SURFACESEARCHPARTWITHMESHNOTFOUND`
+            - Part with mesh not found for surface quality check.
+          * - :py:attr:`~SURFERAUTOSIZEMUSTBEVOLUMETRIC`
+            - Auto sizing must be of volumetric type.
+          * - :py:attr:`~SURFERAUTOSIZEQUADUNSUPPORTED`
+            - Auto sizing for quad meshing is not supported.
+          * - :py:attr:`~SURFERCANNOTREMESHPERIODICZONELETS`
+            - Cannot remesh periodic face zonelets.
+          * - :py:attr:`~SURFERFAILED`
+            - Surface meshing failed.
+          * - :py:attr:`~SURFERINVALIDANGLES`
+            - Invalid Corner angle or min angle more than max angle specified for surface meshing.
+          * - :py:attr:`~SURFERINVALIDCONSTANTSIZE`
+            - Invalid size for constant size surface meshing.
+          * - :py:attr:`~SURFERINVALIDINPUT`
+            - Invalid input for surface meshing.
+          * - :py:attr:`~SURFERINVALIDMINORMAXSIZES`
+            - Invalid min or max size for surface meshing.
+          * - :py:attr:`~SURFERLAYEREDQUADFAILED`
+            - Failed to layer quad meshing.
+          * - :py:attr:`~SURFERNONMANIFOLDEDGE`
+            - Non manifold edge for meshing.
+          * - :py:attr:`~SURFEROPENINITIALFRONTLOOP`
+            - Open initial front loop for meshing.
+          * - :py:attr:`~SURFERQUADFAILED`
+            - Quad surface meshing failed.
+          * - :py:attr:`~TARGETWITHCELLZONELETS`
+            - Target face zonelets with volume mesh on both side.
+          * - :py:attr:`~TARGETZONELETS_NOTWATERTIGHT`
+            - Target zonelets do not form a watertight volume.
+          * - :py:attr:`~TARGETZONELETS_SELFINTERSECTING`
+            - Target zonelets form a self intersecting volume.
+          * - :py:attr:`~TETIMPROVEFAILED`
+            - Tet improve failed.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDCONTROL`
+            - Same face scope is set as target for multiple thin volume controls.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDNUMBEROFLAYER`
+            - Invalid number of layers provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDSCOPE`
+            - Same source and target scope provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDSOURCESCOPE`
+            - Invalid source scope provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDSOURCESCOPEENTITY`
+            - Invalid source scope entity provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDTARGETSCOPE`
+            - Invalid target scope provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY`
+            - Invalid target scope entity provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLINVALIDVOLUMESCOPE`
+            - Invalid volume scope provided for thin volume control.
+          * - :py:attr:`~THINVOLUMECONTROLSAMESOURCEFORMORETHANTWOCONTROL`
+            - Same face scope is set as source for more than two thin volume controls.
+          * - :py:attr:`~THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED`
+            - Thin volume mesh controls not supported for part with topology data.
+          * - :py:attr:`~THINVOLUMEMESHFAILED`
+            - Thin volume meshing failed.
+          * - :py:attr:`~THINVOLUMEMESHNOTSUPPORTEDWITHFACEBASEDDATABASE`
+            - Thin volume mesh is not supported with face based database.
+          * - :py:attr:`~TOLERANCEVALUEINVALID`
+            - Invalid tolerance value specified.
+          * - :py:attr:`~TOOLZONELETS_NOTWATERTIGHT`
+            - Tool zonelets do not form a watertight volume.
+          * - :py:attr:`~TOOLZONELETS_SELFINTERSECTING`
+            - Tool zonelets form a self intersecting volume.
+          * - :py:attr:`~TOPODATANOTFOUND`
+            - TopoData not found.
+          * - :py:attr:`~TOPOEDGESREMESHFAILED`
+            - Failed to remesh topoedges.
+          * - :py:attr:`~TOPOFACESREMESHFAILED`
+            - Failed to remesh topofaces.
+          * - :py:attr:`~TRANSFORMATIONFAILED`
+            - Transformation failed.
+          * - :py:attr:`~TRIANGULATIONFAILED`
+            - Triangulation failed.
+          * - :py:attr:`~UNITEZONELETSFAILED`
+            - Failed to unite input zonelets.
+          * - :py:attr:`~UNKNOWN`
+            - Unknown error.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE`
+            - Provided file extension is not supported. Supported extensions are .cas, .cas.gz and .cas.h5.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH`
+            - Provided file extension is not supported. Supported extensions are .msh and .msh.gz.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD`
+            - Provided file extension is not supported. Supported extensions are .sf and .sf.gz.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE`
+            - Provided file extension is not supported. Supported extensions are .k and .key.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB`
+            - Provided file extension is not supported. Supported extension is .cdb.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORPMDAT`
+            - Provided file extension is not supported. Supported extensions are .pmdat and .pmdat.gz.
+          * - :py:attr:`~UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD`
+            - Provided file extension is not supported. Supported extensions are .psf and .psf.gz.
+          * - :py:attr:`~VOLUMEMESHNOTFOUND`
+            - Volume mesh not found.
+          * - :py:attr:`~VOLUMEMESH_MIDNODESNOTSUPPORTED`
+            - Mid side nodes are not supported.
+          * - :py:attr:`~VOLUMENOTFOUND`
+            - Volumes not found.
+          * - :py:attr:`~VOLUMESEARCHFAILED`
+            - Volume search failed.
+          * - :py:attr:`~VOLUMESEARCHPARTWITHMESHNOTFOUND`
+            - Part with mesh not found for volume quality check.
+          * - :py:attr:`~VOLUMESNOTUPTODATE`
+            - Volumes are not updated.
+          * - :py:attr:`~VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE`
+            - Volume zones are not found to export fluent case.
+          * - :py:attr:`~VT_COLLAPSESHORTEDGESFAILED`
+            - Collapse short edges operation failed.
+          * - :py:attr:`~VT_CREATELEADINGEDGEFAILED`
+            - Create leading edge operation failed.
+          * - :py:attr:`~VT_CREATEMIDEDGEFAILED`
+            - Create mid edge operation failed.
+          * - :py:attr:`~VT_FILLANNULARHOLEFAILED`
+            - Fill annular hole operation failed.
+          * - :py:attr:`~VT_FILLHOLEFAILED`
+            - Fill hole operation failed.
+          * - :py:attr:`~VT_INVALIDINPUT`
+            - Invalid input provided for VT operation.
+          * - :py:attr:`~VT_MERGEFACESFAILED`
+            - Merge faces operation failed.
+          * - :py:attr:`~VT_MERGETHINEXTFAILED`
+            - Merge thin extensions operation failed.
+          * - :py:attr:`~VT_MERGETHINSTRIPESFAILED`
+            - Merge thin stripes operation failed.
+          * - :py:attr:`~VT_OPERATIONFAILED`
+            - VT operation failed.
+          * - :py:attr:`~VT_PINCHFACESFAILED`
+            - Pinch faces operation failed.
+          * - :py:attr:`~VT_REPAIRSHARPCORNERANGLESFAILED`
+            - Repair sharp corner angles operation failed.
+          * - :py:attr:`~VT_SEPARATEFACESFAILED`
+            - Separate faces operation failed.
+          * - :py:attr:`~WRAPPERCLOSEGAPSFAILED`
+            - Wrapper gap closing failed.
+          * - :py:attr:`~WRAPPERCLOSEGAPS_INVALIDGAPSIZE`
+            - Gap size specified for patching should be positive double.
+          * - :py:attr:`~WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR`
+            - Resolution Factor should be greater than 0 but less than or equal to 1.
+          * - :py:attr:`~WRAPPERCLOSEGAPS_INVALIDSCOPE`
+            - Scope specified for close gaps is invalid.
+          * - :py:attr:`~WRAPPERCONNECTFAILED`
+            - Wrapper connect failed.
+          * - :py:attr:`~WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID`
+            - Contact prevention specified under wrapper control doesn't exist.
+          * - :py:attr:`~WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS`
+            - Contact prevention control specified under wrapper is invalid.
+          * - :py:attr:`~WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID`
+            - Feature recovery control specified under wrapper control doesn't exist.
+          * - :py:attr:`~WRAPPERCONTROL_INVALIDGEOMETRYSCOPE`
+            - Geometry scope specified under wrapper control is invalid.
+          * - :py:attr:`~WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS`
+            - Leak prevention control specified under wrapper is invalid.
+          * - :py:attr:`~WRAPPERCONTROL_INVALIDLEAKPREVENTIONID`
+            - Leak prevention specified under wrapper control doesn't exist.
+          * - :py:attr:`~WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE`
+            - Dead material point cannot be same as live.
+          * - :py:attr:`~WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST`
+            - Live material point does not exist for wrapper.
+          * - :py:attr:`~WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST`
+            - Live material point added to wrapper control doesn't exist.
+          * - :py:attr:`~WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED`
+            - Live material points list provided for wrapper control is empty.
+          * - :py:attr:`~WRAPPERCOULDNOTEXTRACTINTERFACE`
+            - Failed to extract wrapper interface.
+          * - :py:attr:`~WRAPPERGLOBALSETTINGSNOTSET`
+            - Global settings for wrapper not set.
+          * - :py:attr:`~WRAPPERIMPROVEFAILED`
+            - Wrapper improve quality failed.
+          * - :py:attr:`~WRAPPERLEAKINGFLUIDREGIONS`
+            - Two or more fluid regions leaking into each other.
+          * - :py:attr:`~WRAPPERLEAKPREVENTIONFAILED`
+            - Wrapper leak prevention failed.
+          * - :py:attr:`~WRAPPEROCTREEREGIONINGFAILED`
+            - Octree regioning failed.
+          * - :py:attr:`~WRAPPERPATCHFLOWREGIONS_EMPTYORINVALIDINPUT`
+            - Empty or invalid input face zonelet ids.
+          * - :py:attr:`~WRAPPERPATCHFLOWREGIONS_FAILED`
+            - Unable to create patch surfaces.
+          * - :py:attr:`~WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE`
+            - Base size specified for patching should be positive double.
+          * - :py:attr:`~WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE`
+            - Hole size specified for dead region should be positive double.
+          * - :py:attr:`~WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE`
+            - Too small hole size provided for dead region.
+          * - :py:attr:`~WRAPPERPROJECTIONFAILED`
+            - Projection failed for wrapper.
+          * - :py:attr:`~WRAPPERRESOLVEINTERSECTIONFAILED`
+            - Resolving intersections failed for wrapper.
+          * - :py:attr:`~WRAPPERSIZEFIELDSNOTDEFINED`
+            - No size field ids provided for wrapping.
+          * - :py:attr:`~WRAPPERSIZINGMETHODNOTSUPPORTED`
+            - Sizing method is not supported for wrapper.
+          * - :py:attr:`~WRAPPERSURFACEHASHOLES`
+            - Wrapper surface has holes.
+          * - :py:attr:`~WRAPPERUNSUPPORTEDWRAPREGION`
+            - Wrap region option provided does not support wrap operation.
+          * - :py:attr:`~WRITECDBFAILED`
+            - Writing CDB file failed.
+          * - :py:attr:`~WRITEKEYWORDFILEFAILED`
+            - Writing LS-Dyna Keyword file failed.
+          * - :py:attr:`~WRITEMESHFAILED`
+            - Writing mesh file failed.
+          * - :py:attr:`~WRITEPMDATFAILED`
+            - Failed to write PMDAT file.
+          * - :py:attr:`~WRITESIZECONTROLFAILED`
+            - Writing size control file failed.
+          * - :py:attr:`~WRITESIZEFIELDFAILED`
+            - Writing size field failed.
+          * - :py:attr:`~ZEROELEMENTSFORCDBEXPORT`
+            - No elements found for cdb export.
+          * - :py:attr:`~ZEROELEMENTSREADFROMCDBFILE`
+            - No elements read from CDB file.
+          * - :py:attr:`~ZERONODESREADFROMCDBFILE`
+            - No nodes read from CDB file.
+          * - :py:attr:`~ZONELETSARENOTOFSAMEDIMENSION`
+            - Zonelets are not of same dimension.
+          * - :py:attr:`~ZONENOTFOUND`
+            - Given zone not found.
+          * - :py:attr:`~ZONESARENOTOFSAMETYPE`
+            - Zones are not of same type.
+          * - :py:attr:`~ZONESARENOTSUPPORTEDFORCELLZONELETS`
+            - Zones are not supported for cell zonelets.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ErrorCode
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART
+   :value: 1205
+
+
+   Adding provided entities is not supported for part with topology data.
+
+.. py:attribute:: ADDTHICKNESSRESULTSFAILED
+   :value: 380
+
+
+   Adding thickness failed.
+
+.. py:attribute:: AITOVERLAPALONGMULTIFOUND
+   :value: 101
+
+
+   Topology identification failed because of overlapping faces.
+
+.. py:attribute:: ALIGNMENTFAILED
+   :value: 3002
+
+
+   Alignment failed.
+
+.. py:attribute:: ALREADYVOLUMEMESHED
+   :value: 110
+
+
+   Volume is already meshed.
+
+.. py:attribute:: AUTOMESHFAILED
+   :value: 100
+
+
+   Auto meshing failed.
+
+.. py:attribute:: AUTOMESHHEXCOREFAILED
+   :value: 117
+
+
+   Hex generation part of volume meshing failed.
+
+.. py:attribute:: AUTOMESHINITFAILED
+   :value: 139
+
+
+   Auto mesh initialization failed.
+
+.. py:attribute:: AUTOMESHINVALIDMAXSIZE
+   :value: 116
+
+
+   Invalid max size for auto volume meshing.
+
+.. py:attribute:: AUTONODEMOVEFAILED
+   :value: 107
+
+
+   Auto node move failed.
+
+.. py:attribute:: AUTOQUADMESHER_INVALIDMINMAXSIZES
+   :value: 15001
+
+
+   Difference in maximum value and minimum value is negative.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: AUTOQUADMESHER_NEGATIVEINPUTPARAMETER
+   :value: 15000
+
+
+   Autoquadmesher error codes.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: BOIRESULTSFAILED
+   :value: 381
+
+
+   BOI creation failed.
+
+.. py:attribute:: CADGEOMETRYNOTFOUND
+   :value: 306
+
+
+   No CAD Geometry found for projections.
+
+.. py:attribute:: CADIMPORTFAILED
+   :value: 502
+
+
+   CAD import failed.
+
+.. py:attribute:: CELLSEPARATIONFAILED
+   :value: 6000
+
+
+   Cell separation failed.
+
+.. py:attribute:: CHECKPERIODICPAIRSFAILED
+   :value: 2911
+
+
+   Could not find a matching periodic face pair.
+
+.. py:attribute:: COLOCATEFUSEDNODESFAILED
+   :value: 851
+
+
+   Colocation of fused nodes failed.
+
+.. py:attribute:: COMPUTEVOLUMESFAILED
+   :value: 129
+
+
+   Compute volumes failed.
+
+.. py:attribute:: CONTACTPATCHRESULTSFAILED
+   :value: 391
+
+
+   Contact patch creation process failed. Check the inputs.
+
+.. py:attribute:: CONTROLNOTFOUND
+   :value: 1304
+
+
+   Control not found.
+
+.. py:attribute:: CREATEBOI_INVALIDFLOWDIRECTION
+   :value: 383
+
+
+   BOI creation failed. Invalid flow or wake direction.
+
+.. py:attribute:: CREATEBOI_INVALIDSCALE
+   :value: 382
+
+
+   BOI creation failed. Scale factors should not be less than one.
+
+.. py:attribute:: CREATEBOI_INVALIDSCOPE
+   :value: 387
+
+
+   BOI creation failed. Invalid face zonelets as input.
+
+.. py:attribute:: CREATEBOI_INVALIDTYPEFORWRAP
+   :value: 386
+
+
+   BOI creation failed. Wrapping is invalid for this BOI type.
+
+.. py:attribute:: CREATEBOI_INVALIDWAKELEVELS
+   :value: 385
+
+
+   BOI creation failed. Invalid wake levels input.
+
+.. py:attribute:: CREATEBOI_IVALIDWRAPMESHSIZE
+   :value: 384
+
+
+   BOI creation failed. Wrap cannot be performed with invalid mesh size.
+
+.. py:attribute:: CREATECAPONFACEZONELETSFAILED
+   :value: 2906
+
+
+   Failed to create cap on face zonelets.
+
+.. py:attribute:: CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS
+   :value: 390
+
+
+   Contact patch creation process failed. Invalid contact patch creation axis.
+
+.. py:attribute:: CREATECONTACTPATCH_INVALIDOFFSETDISTANCE
+   :value: 388
+
+
+   Contact patch creation process failed. Scale factors should not be less than zero.
+
+.. py:attribute:: CREATECONTACTPATCH_INVALIDTOLERANCEVALUE
+   :value: 389
+
+
+   Contact patch creation process failed. Tolerance value should not be less than zero.
+
+.. py:attribute:: CREATEEDGEZONELETFAILED
+   :value: 1602
+
+
+   Creating edge zonelet failed.
+
+.. py:attribute:: DELETECONTROLSFAILED
+   :value: 1307
+
+
+   Delete controls failed.
+
+.. py:attribute:: DELETEFRINGESANDOVERLAPSFAILED
+   :value: 3203
+
+
+   Deleting fringes and overlaps failed.
+
+.. py:attribute:: DELETEMESHFACESFAILED
+   :value: 3200
+
+
+   Delete Mesh faces failed
+
+.. py:attribute:: DELETEMESHFACES_CELLFOUND
+   :value: 3202
+
+
+   Deleting faces failed as they have cell neighbors.
+
+.. py:attribute:: DELETEMESHFACES_TOPOLOGYNOTSUPPORTED
+   :value: 3201
+
+
+   Topoentities do not support deleting faces.
+
+.. py:attribute:: DELETEMESHFAILED
+   :value: 142
+
+
+   Deleting mesh failed.
+
+.. py:attribute:: DELETEPARTSFAILED
+   :value: 1306
+
+
+   Delete parts failed.
+
+.. py:attribute:: DELETEVOLUMESFAILED
+   :value: 134
+
+
+   Delete volumes failed.
+
+.. py:attribute:: DELETEZONELETSCONNECTEDTOCELLS
+   :value: 3204
+
+
+   Cannot delete zonelets connected to volume mesh.
+
+.. py:attribute:: DELETEZONELETSFAILED
+   :value: 3205
+
+
+   Delete zonelets failed.
+
+.. py:attribute:: DUPLICATEFACESFOUND
+   :value: 105
+
+
+   Duplicate faces found.
+
+.. py:attribute:: DUPLICATENODESFOUND
+   :value: 103
+
+
+   Duplicate nodes found.
+
+.. py:attribute:: EDGEINTERSECTINGFACEFOUND
+   :value: 104
+
+
+   Edge intersecting face found.
+
+.. py:attribute:: ENTITIESSHOULDBEADDEDTOZONEUSINGPARTITBELONGS
+   :value: 309
+
+
+   Entities should be added to zone using part it belongs.
+
+.. py:attribute:: EXPORTFLUENTCASEFAILED
+   :value: 526
+
+
+   Export fluent case failed.
+
+.. py:attribute:: EXPORTFLUENTMESHINGMSHFAILED
+   :value: 531
+
+
+   Export fluent meshing mesh failed.
+
+.. py:attribute:: EXPORTSTLFAILED
+   :value: 549
+
+
+   Export STL failed.
+
+.. py:attribute:: EXPORTSTLFAILEDWITHEMPTYPARTIDLIST
+   :value: 557
+
+
+   Export STL failed. List of part ids is empty.
+
+.. py:attribute:: EXPORTSTLFAILEDWITHHIGHERORDERMESH
+   :value: 556
+
+
+   Export STL not supported for higher order mesh.
+
+.. py:attribute:: EXPORTSTLFAILEDWITHINCORRECTPARTID
+   :value: 558
+
+
+   Export STL failed. Part id is incorrect.
+
+.. py:attribute:: EXPORTSTLFAILEDWITHPOLYFACES
+   :value: 555
+
+
+   Export STL not supported for mesh with poly faces.
+
+.. py:attribute:: EXPORTSTLFAILEDWITHQUADFACES
+   :value: 554
+
+
+   Export STL not supported for mesh with quad faces.
+
+.. py:attribute:: EXPORTSTLFAILEDWITHTOPOLOGY
+   :value: 553
+
+
+   Export STL not supported for part with topology data.
+
+.. py:attribute:: EXTRACTFEATURESBYANGLEFAILED
+   :value: 1600
+
+
+   Feature extraction by angle failed.
+
+.. py:attribute:: EXTRACTFEATURESBYEDGESFAILED
+   :value: 1601
+
+
+   Extracting features by angle failed.
+
+.. py:attribute:: EXTRACTFEATURESBYINTERSECTIONFAILED
+   :value: 1603
+
+
+   Feature extraction by intersection failed.
+
+.. py:attribute:: EXTRACTVOLUMESFAILED
+   :value: 132
+
+
+   Extract volumes failed.
+
+.. py:attribute:: FACEZONELETSFEATURESNOTUPTODATE
+   :value: 10
+
+
+   Face zonelets features are not up to date.
+
+.. py:attribute:: FACEZONELETSHAVECELLSCONNECTED
+   :value: 10205
+
+
+   Face zonelets have cells connected.
+
+.. py:attribute:: FILENOTFOUND
+   :value: 524
+
+
+   File path or name not found.
+
+.. py:attribute:: FILLHOLEFAILED
+   :value: 2901
+
+
+   Unable to create capping surface.
+
+.. py:attribute:: FREEZEMESHERROR
+   :value: 30
+
+
+   Cannot remesh freezed mesh.
+
+.. py:attribute:: FUSEINTERIORFAILED
+   :value: 855
+
+
+   Fusing interior region of overlap failed.
+
+.. py:attribute:: FUSEOPTIONINVALID
+   :value: 850
+
+
+   Invalid option chosen to connect two different parts.
+
+.. py:attribute:: GETELEMENTCOUNTFAILED
+   :value: 251
+
+
+   Failed to get element count.
+
+.. py:attribute:: GETSTATISTICSFAILED
+   :value: 250
+
+
+   Failed to get mesh statistics.
+
+.. py:attribute:: IGA_EDGEPATHCOMPUTATIONFAILED
+   :value: 2414
+
+
+   Edge path computation failed.
+
+.. py:attribute:: IGA_HREFINEMENTFAILED
+   :value: 2406
+
+
+   H-refinement of spline failed.
+
+.. py:attribute:: IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE
+   :value: 2401
+
+
+   Incorrect control point size with respect to degree.
+
+.. py:attribute:: IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT
+   :value: 2402
+
+
+   Incorrect control point size with respect to mesh size.
+
+.. py:attribute:: IGA_INCORRECTDEGREE
+   :value: 2415
+
+
+   Incorrect degree.
+
+.. py:attribute:: IGA_INVALIDINPUTFILEFORGENUSZEROFITTING
+   :value: 2412
+
+
+   Invalid model for genus-zero spline fitting.
+
+.. py:attribute:: IGA_INVALIDINPUTFILEFORSTRUCTUREDHEXMESHFITTING
+   :value: 2411
+
+
+   Invalid model for structured hex-mesh spline fitting.
+
+.. py:attribute:: IGA_NEGATIVEJACOBIAN
+   :value: 2404
+
+
+   Spline has negative jacobian.
+
+.. py:attribute:: IGA_NOCELLZONELETS
+   :value: 2410
+
+
+   No cell zonelets found.
+
+.. py:attribute:: IGA_NODEINDEXINGFAILED
+   :value: 2409
+
+
+   Hex mesh is unstructured.
+
+.. py:attribute:: IGA_NOFACEZONELETS
+   :value: 2413
+
+
+   No face zonelets found.
+
+.. py:attribute:: IGA_NURBSFITTINGFAILED
+   :value: 2403
+
+
+   Spline fitting failed.
+
+.. py:attribute:: IGA_NURBSOPFAILED
+   :value: 2400
+
+
+   Spline operation failed.
+
+.. py:attribute:: IGA_NURBSSMOOTHFAILED
+   :value: 2408
+
+
+   Smoothing of spline failed.
+
+.. py:attribute:: IGA_PERIODICKNOTVECTORCONVERSIONFAILED
+   :value: 2405
+
+
+   Periodic knot conversion of spline failed.
+
+.. py:attribute:: IGA_PREFINEMENTFAILED
+   :value: 2407
+
+
+   P-refinement of spline failed.
+
+.. py:attribute:: IGA_QUADRATICMESHINPUT
+   :value: 2416
+
+
+   Quadratic mesh is not supported for solid spline creation.
+
+.. py:attribute:: IGA_QUADTOSPLINEBASISFAILED
+   :value: 2421
+
+
+   Quad to spline operation failed.
+
+.. py:attribute:: IGA_UNIFORMTRIMMEDNURBSFAILED
+   :value: 2417
+
+
+   Uniform trimmed spline creation failed.
+
+.. py:attribute:: IMPORTABAQUSFAILEDDURINGMESHCREATION
+   :value: 16202
+
+
+   Import Abaqus failed. Failed to create mesh entities.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: IMPORTABAQUSFAILEDWITHPARSINGFAILURE
+   :value: 16201
+
+
+   Import Abaqus failed. Failed to parse file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: IMPORTABAQUSFAILEDWITHUNKNOWNERROR
+   :value: 16200
+
+
+   Import Abaqus failed. Failed with unknown error.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: IMPORTFLUENTCASEFAILED
+   :value: 529
+
+
+   Failed to import fluent case file.
+
+.. py:attribute:: IMPORTFLUENTMESHINGMSHFAILED
+   :value: 528
+
+
+   Failed to import fluent meshing mesh file.
+
+.. py:attribute:: IMPRINTBOUNDARYEDGESFAILED
+   :value: 853
+
+
+   Imprint of boundary edges failed.
+
+.. py:attribute:: IMPRINTBOUNDARYNODESFAILED
+   :value: 852
+
+
+   Imprint of boundary nodes failed.
+
+.. py:attribute:: IMPROVESURFACEMESHQUALITYFAILED
+   :value: 2102
+
+
+   Improve surface mesh quality failed.
+
+.. py:attribute:: INCLUDEKFILENOTFOUND
+   :value: 520
+
+
+   Include keyword file not found.
+
+.. py:attribute:: INCREMENTALVOLUMEMESHINGNOTSUPPORTED
+   :value: 143
+
+
+   Incremental volume meshing is not supported.
+
+.. py:attribute:: INPUTNOTCOMPLETE
+   :value: 1308
+
+
+   Input provided is incomplete.
+
+.. py:attribute:: INTERRUPTED
+   :value: 201
+
+
+   Method call interrupted.
+
+.. py:attribute:: INTERSECTIONINCUTTERVOLUMES
+   :value: 49
+
+
+   Found overlapping or intersecting cutter volumes.
+
+.. py:attribute:: INTERSECTIONINTARGETVOLUMES
+   :value: 48
+
+
+   Found overlapping or intersecting target volumes.
+
+.. py:attribute:: INVALIDCELLQUALITYLIMIT
+   :value: 2852
+
+
+   Invalid cell quality limit.
+
+.. py:attribute:: INVALIDCMBLOCKFORMAT
+   :value: 16502
+
+
+   CMBLOCK command format error in CDB file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INVALIDCONTROLPARAMS
+   :value: 12201
+
+
+   Invalid control parameters.
+
+.. py:attribute:: INVALIDCURVATURESIZINGINPUT
+   :value: 1503
+
+
+   Invalid curvature sizing input.
+
+.. py:attribute:: INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT
+   :value: 9009
+
+
+   Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 .
+
+.. py:attribute:: INVALIDFIRSTASPECTRATIO
+   :value: 124
+
+
+   Invalid first aspect ratio.
+
+.. py:attribute:: INVALIDFIRSTHEIGHT
+   :value: 126
+
+
+   Invalid first height.
+
+.. py:attribute:: INVALIDGLOBALMINMAX
+   :value: 1500
+
+
+   Invalid global min and max value.
+
+.. py:attribute:: INVALIDGROWTHRATE
+   :value: 128
+
+
+   Invalid growth rate.
+
+.. py:attribute:: INVALIDINPUTPART
+   :value: 305
+
+
+   Invalid input part.
+
+.. py:attribute:: INVALIDINPUTPOINT
+   :value: 16000
+
+
+   Invalid input point.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INVALIDINPUTVOLUMES
+   :value: 1312
+
+
+   List of volume ids provided is empty or incorrect.
+
+.. py:attribute:: INVALIDINPUTZONELETS
+   :value: 1309
+
+
+   Invalid input zonelets.
+
+.. py:attribute:: INVALIDLASTASPECTRATIO
+   :value: 125
+
+
+   Invalid last aspect ratio.
+
+.. py:attribute:: INVALIDLAYERS
+   :value: 127
+
+
+   Invalid number of layers.
+
+.. py:attribute:: INVALIDNEIGHBORVOLUMES
+   :value: 136
+
+
+   Invalid neighbor volumes selected to merge volumes.
+
+.. py:attribute:: INVALIDPLANEPOINTS
+   :value: 2804
+
+
+   Invalid plane points, cannot define a plane.
+
+.. py:attribute:: INVALIDPRISMCONTROLS
+   :value: 111
+
+
+   Invalid prism controls.
+
+.. py:attribute:: INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY
+   :value: 123
+
+
+   Invalid scope entity.
+
+.. py:attribute:: INVALIDPROXIMITYSIZINGINPUT
+   :value: 1504
+
+
+   Invalid proximity sizing input.
+
+.. py:attribute:: INVALIDREGISTERID
+   :value: 2806
+
+
+   Invalid register id provided. Register ids between 1 to 28 are valid.
+
+.. py:attribute:: INVALIDSCOPEENTITYTYPEINPUT
+   :value: 1505
+
+
+   Invalid input scope entity type.
+
+.. py:attribute:: INVALIDSHELLBLCONTROLS
+   :value: 67
+
+
+   Invalid ShellBL controls.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY
+   :value: 68
+
+
+   Invalid scope entity.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INVALIDSIZECONTROLINPUTS
+   :value: 1501
+
+
+   Invalid size control input.
+
+.. py:attribute:: INVALIDSIZECONTROLS
+   :value: 401
+
+
+   Invalid size controls.
+
+.. py:attribute:: INVALIDSIZECONTROLSCOPE
+   :value: 1502
+
+
+   Invalid size control scope.
+
+.. py:attribute:: INVALIDTHINVOLUMECONTROLS
+   :value: 12101
+
+
+   Invalid input provided for thin volume control.
+
+.. py:attribute:: INVALIDTRANSFORMATIONMATRIX
+   :value: 3003
+
+
+   Invalid transformation matrix.
+
+.. py:attribute:: INVALIDVOLUMECONTROLS
+   :value: 118
+
+
+   Invalid volume controls specified for volume meshing.
+
+.. py:attribute:: INVALIDWRAPPERCONTROL
+   :value: 3427
+
+
+   Invalid wrapper control.
+
+.. py:attribute:: LOCALSURFERINVALIDNUMRINGS
+   :value: 44
+
+
+   Invalid number of rings input for the local surface mesh operation.
+
+.. py:attribute:: MATCHMORPH_BCPAIRINPUTTYPEMISMATCH
+   :value: 1451
+
+
+   Entity type does not match with input for defined boundary condition pair.
+
+.. py:attribute:: MATCHMORPH_INVALIDSOURCEINPUT
+   :value: 1450
+
+
+   Invalid source input for match morphing.
+
+.. py:attribute:: MATERIALPOINTWITHGIVENIDDOESNTEXIST
+   :value: 3302
+
+
+   Material point with the given ID already exists.
+
+.. py:attribute:: MATERIALPOINTWITHGIVENNAMEDOESNTEXIST
+   :value: 3301
+
+
+   Material point with the given name does not exist.
+
+.. py:attribute:: MATERIALPOINTWITHSAMENAMEEXISTS
+   :value: 3300
+
+
+   Material point with the same name already exists.
+
+.. py:attribute:: MERGEPARTSFAILED
+   :value: 1301
+
+
+   Merge parts failed.
+
+.. py:attribute:: MERGEPARTSWANDWOTOPO
+   :value: 1302
+
+
+   Merge parts with topology and parts without topology are not supported.
+
+.. py:attribute:: MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS
+   :value: 1311
+
+
+   Merge small zonelets option is supported for only face zonelets.
+
+.. py:attribute:: MERGEVOLUMESFAILED
+   :value: 133
+
+
+   Merge volumes failed.
+
+.. py:attribute:: MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART
+   :value: 1207
+
+
+   Merge volumes is not supported for part with topology data.
+
+.. py:attribute:: MERGEZONELETSFAILED
+   :value: 1310
+
+
+   Merge zonelets failed.
+
+.. py:attribute:: MERGEZONELETSNOTSUPPORTEDFORTOPOLOGYPART
+   :value: 1206
+
+
+   Merge zonelets is not supported for part with topology data.
+
+.. py:attribute:: MESHDECOUPLEDFAILED
+   :value: 16900
+
+
+   Invalid load balancing or failed in volume meshing for one or more parts.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: MESHNOTFOUNDTOEXPORTFLUENTMESHINGMESH
+   :value: 533
+
+
+   Mesh not found to export fluent meshing mesh.
+
+.. py:attribute:: MICROSTRUCTUREBADSHAPEPROPERTIES
+   :value: 13003
+
+
+   Bad shape properties.
+
+.. py:attribute:: MICROSTRUCTUREINVALIDELEMENTTYPE
+   :value: 13000
+
+
+   Invalid input provided. Invalid Element Type.
+
+.. py:attribute:: MICROSTRUCTUREINVALIDSHAPETYPE
+   :value: 13001
+
+
+   Invalid input provided. Invalid Shape.
+
+.. py:attribute:: MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID
+   :value: 13006
+
+
+   Volume mesh generation for hexahedra requires generation of a quadratic voxel grid.
+
+.. py:attribute:: MICROSTRUCTUREREMESHNOTSUPPORTED
+   :value: 13005
+
+
+   Surface remesh operation is not supported.
+
+.. py:attribute:: MICROSTRUCTURESMOOTHNOTSUPPORTED
+   :value: 13004
+
+
+   Smoothing operation is not supported.
+
+.. py:attribute:: MICROSTRUCTUREWRONGAPICALLSEQUENCE
+   :value: 13002
+
+
+   Wrong API call sequence.
+
+.. py:attribute:: MORPHER_COMPUTEBCS
+   :value: 1410
+
+
+   Failed to compute boundary conditions.
+
+.. py:attribute:: MULTIZONEMESHER_BLOCKINGFAILED
+   :value: 2601
+
+
+   Creating MultiZone blocking failed.
+
+.. py:attribute:: MULTIZONEMESHER_MESHINGFAILED
+   :value: 2603
+
+
+   Generating MultiZone mesh failed.
+
+.. py:attribute:: MULTIZONEMESHER_MESHTRANSFERFAILED
+   :value: 2604
+
+
+   MultiZone mesh transfer failed.
+
+.. py:attribute:: MULTIZONEMESHER_MULTIPLECONTROLSNOTSUPPORTED
+   :value: 2611
+
+
+   MultiZone mesh does not support multiple controls.
+
+.. py:attribute:: MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER
+   :value: 2612
+
+
+   No volumes for geometry import.
+
+.. py:attribute:: MULTIZONEMESHER_NOVOLUMESSCOPEDINCURRENTPART
+   :value: 2613
+
+
+   No volumes for geometry import in the current part.
+
+.. py:attribute:: MULTIZONEMESHER_USERINPUTTOPOLOGYMISSING
+   :value: 2610
+
+
+   Input does not have topology for MultiZone mesh.
+
+.. py:attribute:: NOACTIVESFFOUND
+   :value: 114
+
+
+   No active size fields found.
+
+.. py:attribute:: NOCELLSSEPARATED
+   :value: 6001
+
+
+   No cells separated based on given input.
+
+.. py:attribute:: NOERROR
+   :value: 0
+
+
+   No error.
+
+.. py:attribute:: NOINPUT
+   :value: 1305
+
+
+   No input provided.
+
+.. py:attribute:: NOTSUPPORTEDFORDISTRIBUTEMESHING
+   :value: 2001
+
+
+   Method not supported for distributed meshing.
+
+.. py:attribute:: NOTSUPPORTEDFORHIGHERORDERMESHPART
+   :value: 1201
+
+
+   Operation does not support higher order elements.
+
+.. py:attribute:: NOTSUPPORTEDFORNONQUADFACEZONE
+   :value: 1203
+
+
+   Operation supports only quads.
+
+.. py:attribute:: NOTSUPPORTEDFORNONTRIFACEZONE
+   :value: 1202
+
+
+   Only triangular face zone is supported.
+
+.. py:attribute:: NOTSUPPORTEDFORPOLYMESHPART
+   :value: 1208
+
+
+   Operation does not support poly elements.
+
+.. py:attribute:: NOTSUPPORTEDFORTOPOLOGYPART
+   :value: 1200
+
+
+   Not supported for part with topology data.
+
+.. py:attribute:: NUMENMETHODNOTFOUND
+   :value: 3801
+
+
+   Could not find numen method.
+
+.. py:attribute:: OCTREELIMITREACHED
+   :value: 3350
+
+
+   Limit reached for the number of octants supported.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: OGRIDREFINEFAILED
+   :value: 65
+
+
+   Post refinement of ShellBl quads failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: OUTOFMEMORY
+   :value: 200
+
+
+   Out of memory.
+
+.. py:attribute:: PARTDOESNOTHAVETOPOLOGY
+   :value: 310
+
+
+   Part does not have topology.
+
+.. py:attribute:: PARTHASTOPOLOGY
+   :value: 2800
+
+
+   Part has a topology.
+
+.. py:attribute:: PARTNOTFOUND
+   :value: 300
+
+
+   Given part not found.
+
+.. py:attribute:: PARTNOTMESHED
+   :value: 304
+
+
+   Part is not meshed.
+
+.. py:attribute:: PATHNOTFOUND
+   :value: 511
+
+
+   Invalid path.
+
+.. py:attribute:: PERIODICEDGESNOTSUPPORTEDFORSHELLBL
+   :value: 69
+
+
+   Periodic surfaces selected for ShellBL generation are not supported.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: PERIODICRECOVERYFORALREADYVOLUMEMESHEDPART
+   :value: 2913
+
+
+   Periodic recovery unsupported for already volume meshed part.
+
+.. py:attribute:: PERIODICSURFACESEDGESMISMATCH
+   :value: 2912
+
+
+   Edge entities do not match on periodic source and target surfaces.
+
+.. py:attribute:: PERIODICSURFACESNOTSUPPORTEDFORPRISMS
+   :value: 135
+
+
+   Periodic surfaces selected for prism generation are not supported.
+
+.. py:attribute:: PLANECOLLINEARPOINTS
+   :value: 2805
+
+
+   Collinear or duplicate points given to define plane.
+
+.. py:attribute:: PLUGINLOADFAILURE
+   :value: 10001
+
+
+   Failed to load Surface Editor plugin.
+
+.. py:attribute:: POLYMESHFAILED
+   :value: 140
+
+
+   Poly meshing failed.
+
+.. py:attribute:: PREPAREFORVOLUMEMESHINGFAILED
+   :value: 2000
+
+
+   Prepare for volume meshing failed.
+
+.. py:attribute:: PRISMMESHFAILED
+   :value: 138
+
+
+   Prism meshing failed.
+
+.. py:attribute:: PROJECTONCADGEOMETRYFAILED
+   :value: 351
+
+
+   Projection on CAD Geometry failed.
+
+.. py:attribute:: PYRAMIDMESHFAILED
+   :value: 141
+
+
+   Pyramid meshing failed.
+
+.. py:attribute:: QUADRATICMESHSUPPORTEDONLYFORTETS
+   :value: 113
+
+
+   Quadratic elements can only be generated for tetrahedral elements.
+
+.. py:attribute:: QUADRATICMESH_WRITEMESHFAILED
+   :value: 519
+
+
+   Writing failed with quadratic mesh.
+
+.. py:attribute:: QUADRATICTETNOTSUPPORTEDINPARALLEL
+   :value: 130
+
+
+   Quadratic tetrahedal meshing is not supported in parallel mode.
+
+.. py:attribute:: QUADRATICTETNOTSUPPORTEDWITHPRISMS
+   :value: 131
+
+
+   Quadratic tetrahedral meshing is not supported with prism.
+
+.. py:attribute:: READCDBFAILED
+   :value: 505
+
+
+   Reading CDB file failed.
+
+.. py:attribute:: READKEYWORDFILEFAILED
+   :value: 517
+
+
+   Reading LS-Dyna Keyword file failed.
+
+.. py:attribute:: READMESHFAILED
+   :value: 500
+
+
+   Reading mesh file failed.
+
+.. py:attribute:: READPMDATFAILED
+   :value: 525
+
+
+   PMDAT file read failed.
+
+.. py:attribute:: READSHELLBLCONTROLFAILED
+   :value: 567
+
+
+   Read thin ShellBL control failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: READSIZECONTROLFAILED
+   :value: 522
+
+
+   Reading size control file failed.
+
+.. py:attribute:: READSIZEFIELDFAILED
+   :value: 503
+
+
+   Reading size field file failed.
+
+.. py:attribute:: RECOVERPERIODICSURFACESFAILED
+   :value: 2909
+
+
+   Unable to recover periodic surfaces.
+
+.. py:attribute:: RECOVERPERIODICSURFACESINVALIDSCOPE
+   :value: 2910
+
+
+   Invalid scope input for periodic surface recovery.
+
+.. py:attribute:: REFINEATCONTACTSFAILED
+   :value: 2908
+
+
+   Failed to refine at contacts.
+
+.. py:attribute:: REFRESHSIZEFIELDSFAILED
+   :value: 402
+
+
+   Refreshing size field failed.
+
+.. py:attribute:: REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART
+   :value: 32
+
+
+   Remesh face zonelets locally is not supported for topology part.
+
+.. py:attribute:: REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART
+   :value: 31
+
+
+   Remesh face zonelets is not supported for topology part.
+
+.. py:attribute:: SCAFFOLDERBADINPUTEMPTYTOPO
+   :value: 50
+
+
+   Incorrect input. No topo faces or edges in input.
+
+.. py:attribute:: SCAFFOLDERBADINPUTNOFREEFACES
+   :value: 51
+
+
+   Incorrect input. No free faces in input.
+
+.. py:attribute:: SCAFFOLDERBADINPUTPARAMS
+   :value: 52
+
+
+   Incorrect input parameters.
+
+.. py:attribute:: SCAFFOLDERINVALIDABSOLUTEDISTOL
+   :value: 53
+
+
+   Invalid absolute distance tolerance for scaffold operation.
+
+.. py:attribute:: SCAFFOLDERINVALIDCONSTANTMESHSIZE
+   :value: 54
+
+
+   Invalid constant mesh size input for scaffold operation.
+
+.. py:attribute:: SCALINGFAILED
+   :value: 3001
+
+
+   Scaling failed.
+
+.. py:attribute:: SEPARATIONRESULTSFAILED
+   :value: 360
+
+
+   Separation failed.
+
+.. py:attribute:: SETNAMEFAILED
+   :value: 1303
+
+
+   Set name failed.
+
+.. py:attribute:: SHELLBLCONTROLFAILED
+   :value: 566
+
+
+   Write ShellBL control failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SHELLBLFAILED
+   :value: 60
+
+
+   ShellBL creation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SHELLBLFEWLAYERS
+   :value: 63
+
+
+   Only few ShellBL layers are created.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SHELLBLNOMESH
+   :value: 62
+
+
+   ShellBL is not supported for unmeshed topofaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SHELLBLQUADS
+   :value: 61
+
+
+   ShellBL quads.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SHELLBLWRONGTOPO
+   :value: 64
+
+
+   Found topofaces with invalid topology.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: SIDEZONELETSNOTFIT
+   :value: 121
+
+
+   Side face zonelets are not sweepable for thin volume mesh.
+
+.. py:attribute:: SIGSEGV
+   :value: 2
+
+
+   Segmentation violation.
+
+.. py:attribute:: SIZEFIELDCOMPUTATIONFAILED
+   :value: 400
+
+
+   Size field computation failed.
+
+.. py:attribute:: SIZEFIELDNOTFOUND
+   :value: 302
+
+
+   Size field not found.
+
+.. py:attribute:: SIZEFIELDTYPENOTSUPPORTED
+   :value: 8001
+
+
+   Provided Size Field Type is not supported by this operation.
+
+.. py:attribute:: SMOOTHSIZETRANSITIONNOTSUPPORTEDFORTOPO
+   :value: 43
+
+
+   Smooth size transition option is not supported for topology surface meshing yet.
+
+.. py:attribute:: SOURCEFACINGCELLZONELETS
+   :value: 119
+
+
+   Source face zonelets facing existing volume mesh.
+
+.. py:attribute:: SOURCEORTARGETNOTSPECIFIED
+   :value: 857
+
+
+   No target or source faces specified.
+
+.. py:attribute:: SOURCETARGETZONELETSNOTFIT
+   :value: 122
+
+
+   Source and target zonelets do not fit to thin volume mesh.
+
+.. py:attribute:: SPHEREATINVALIDNORMALNODESFAILED
+   :value: 350
+
+
+   Sphere creation at invalid normals failed.
+
+.. py:attribute:: SPLITANDCOLLAPSEFACEELEMENTSFAILED
+   :value: 2101
+
+
+   Failed to split and collapse face element(s).
+
+.. py:attribute:: SPLITINTERSECTINGBOUNDARYEDGESFAILED
+   :value: 854
+
+
+   Splitting of intersecting boundary edges failed.
+
+.. py:attribute:: SPLITTOTRIFAILED
+   :value: 66
+
+
+   ShellBL quads split to triangles failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: STACKER_BASEFACEUNMESHED
+   :value: 10111
+
+
+   Base face list input has unmeshed topofaces.
+
+.. py:attribute:: STACKER_FACESEPARATIONFAILED
+   :value: 10103
+
+
+   Stacker failed to separate base face.
+
+.. py:attribute:: STACKER_FAILED
+   :value: 10104
+
+
+   Stacker failed to mesh the model.
+
+.. py:attribute:: STACKER_INCORRECTBODYDEFINITION
+   :value: 10110
+
+
+   Some bodies are intersecting or incorrectly defined.
+
+.. py:attribute:: STACKER_INVALIDBASEFACEINPUT
+   :value: 10107
+
+
+   Base face list input is invalid.
+
+.. py:attribute:: STACKER_INVALIDINPUTVOLUMES
+   :value: 10101
+
+
+   Invalid input volumes provided to stacker.
+
+.. py:attribute:: STACKER_INVALIDPARAMS
+   :value: 10102
+
+
+   Invalid parameters provided to stacker.
+
+.. py:attribute:: STACKER_MESHEDFACESFOUND
+   :value: 10106
+
+
+   Some faces in the input model have existing mesh.
+
+.. py:attribute:: STACKER_NOFACEFOUNDINVOLUMES
+   :value: 10105
+
+
+   No faces are found in the specified volumes.
+
+.. py:attribute:: STACKER_NONSTACKABLEVOLUMESFOUND
+   :value: 10109
+
+
+   Some volumes are not aligned in the stacking direction.
+
+.. py:attribute:: STITCHENTITIESFAILED
+   :value: 859
+
+
+   Stitch entities failed.
+
+.. py:attribute:: STITCHWITHPRESERVEDENTITIESFAILED
+   :value: 858
+
+
+   Stitch with preserved entities failed.
+
+.. py:attribute:: SUBTRACTVOLUMEFAILED
+   :value: 47
+
+
+   Failed to subtract volumes.
+
+.. py:attribute:: SUBTRACTZONELETSFAILED
+   :value: 2903
+
+
+   Unable to subtract cutters from input zonelets.
+
+.. py:attribute:: SURFACEFEATURETYPENOTSUPPORTED
+   :value: 2807
+
+
+   Surface search for provided feature type is not supported.
+
+.. py:attribute:: SURFACESEARCHFAILED
+   :value: 2802
+
+
+   Surface search failed.
+
+.. py:attribute:: SURFACESEARCHPARTWITHMESHNOTFOUND
+   :value: 2803
+
+
+   Part with mesh not found for surface quality check.
+
+.. py:attribute:: SURFERAUTOSIZEMUSTBEVOLUMETRIC
+   :value: 12
+
+
+   Auto sizing must be of volumetric type.
+
+.. py:attribute:: SURFERAUTOSIZEQUADUNSUPPORTED
+   :value: 11
+
+
+   Auto sizing for quad meshing is not supported.
+
+.. py:attribute:: SURFERCANNOTREMESHPERIODICZONELETS
+   :value: 45
+
+
+   Cannot remesh periodic face zonelets.
+
+.. py:attribute:: SURFERFAILED
+   :value: 3
+
+
+   Surface meshing failed.
+
+.. py:attribute:: SURFERINVALIDANGLES
+   :value: 42
+
+
+   Invalid Corner angle or min angle more than max angle specified for surface meshing.
+
+.. py:attribute:: SURFERINVALIDCONSTANTSIZE
+   :value: 40
+
+
+   Invalid size for constant size surface meshing.
+
+.. py:attribute:: SURFERINVALIDINPUT
+   :value: 7
+
+
+   Invalid input for surface meshing.
+
+.. py:attribute:: SURFERINVALIDMINORMAXSIZES
+   :value: 41
+
+
+   Invalid min or max size for surface meshing.
+
+.. py:attribute:: SURFERLAYEREDQUADFAILED
+   :value: 6
+
+
+   Failed to layer quad meshing.
+
+.. py:attribute:: SURFERNONMANIFOLDEDGE
+   :value: 14
+
+
+   Non manifold edge for meshing.
+
+.. py:attribute:: SURFEROPENINITIALFRONTLOOP
+   :value: 16
+
+
+   Open initial front loop for meshing.
+
+.. py:attribute:: SURFERQUADFAILED
+   :value: 8
+
+
+   Quad surface meshing failed.
+
+.. py:attribute:: TARGETWITHCELLZONELETS
+   :value: 120
+
+
+   Target face zonelets with volume mesh on both side.
+
+.. py:attribute:: TARGETZONELETS_NOTWATERTIGHT
+   :value: 10003
+
+
+   Target zonelets do not form a watertight volume.
+
+.. py:attribute:: TARGETZONELETS_SELFINTERSECTING
+   :value: 10002
+
+
+   Target zonelets form a self intersecting volume.
+
+.. py:attribute:: TETIMPROVEFAILED
+   :value: 106
+
+
+   Tet improve failed.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDCONTROL
+   :value: 12110
+
+
+   Same face scope is set as target for multiple thin volume controls.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDNUMBEROFLAYER
+   :value: 12107
+
+
+   Invalid number of layers provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDSCOPE
+   :value: 12104
+
+
+   Same source and target scope provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDSOURCESCOPE
+   :value: 12102
+
+
+   Invalid source scope provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDSOURCESCOPEENTITY
+   :value: 12105
+
+
+   Invalid source scope entity provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDTARGETSCOPE
+   :value: 12103
+
+
+   Invalid target scope provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDTARGETSCOPEENTITY
+   :value: 12106
+
+
+   Invalid target scope entity provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLINVALIDVOLUMESCOPE
+   :value: 12109
+
+
+   Invalid volume scope provided for thin volume control.
+
+.. py:attribute:: THINVOLUMECONTROLSAMESOURCEFORMORETHANTWOCONTROL
+   :value: 12111
+
+
+   Same face scope is set as source for more than two thin volume controls.
+
+.. py:attribute:: THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED
+   :value: 12108
+
+
+   Thin volume mesh controls not supported for part with topology data.
+
+.. py:attribute:: THINVOLUMEMESHFAILED
+   :value: 137
+
+
+   Thin volume meshing failed.
+
+.. py:attribute:: THINVOLUMEMESHNOTSUPPORTEDWITHFACEBASEDDATABASE
+   :value: 12112
+
+
+   Thin volume mesh is not supported with face based database.
+
+.. py:attribute:: TOLERANCEVALUEINVALID
+   :value: 856
+
+
+   Invalid tolerance value specified.
+
+.. py:attribute:: TOOLZONELETS_NOTWATERTIGHT
+   :value: 10005
+
+
+   Tool zonelets do not form a watertight volume.
+
+.. py:attribute:: TOOLZONELETS_SELFINTERSECTING
+   :value: 10004
+
+
+   Tool zonelets form a self intersecting volume.
+
+.. py:attribute:: TOPODATANOTFOUND
+   :value: 301
+
+
+   TopoData not found.
+
+.. py:attribute:: TOPOEDGESREMESHFAILED
+   :value: 5
+
+
+   Failed to remesh topoedges.
+
+.. py:attribute:: TOPOFACESREMESHFAILED
+   :value: 4
+
+
+   Failed to remesh topofaces.
+
+.. py:attribute:: TRANSFORMATIONFAILED
+   :value: 3000
+
+
+   Transformation failed.
+
+.. py:attribute:: TRIANGULATIONFAILED
+   :value: 102
+
+
+   Triangulation failed.
+
+.. py:attribute:: UNITEZONELETSFAILED
+   :value: 2907
+
+
+   Failed to unite input zonelets.
+
+.. py:attribute:: UNKNOWN
+   :value: 1
+
+
+   Unknown error.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE
+   :value: 9003
+
+
+   Provided file extension is not supported. Supported extensions are .cas, .cas.gz and .cas.h5.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORFLUENTMESHINGMESH
+   :value: 9002
+
+
+   Provided file extension is not supported. Supported extensions are .msh and .msh.gz.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD
+   :value: 9005
+
+
+   Provided file extension is not supported. Supported extensions are .sf and .sf.gz.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE
+   :value: 9004
+
+
+   Provided file extension is not supported. Supported extensions are .k and .key.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB
+   :value: 9007
+
+
+   Provided file extension is not supported. Supported extension is .cdb.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORPMDAT
+   :value: 9001
+
+
+   Provided file extension is not supported. Supported extensions are .pmdat and .pmdat.gz.
+
+.. py:attribute:: UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD
+   :value: 9006
+
+
+   Provided file extension is not supported. Supported extensions are .psf and .psf.gz.
+
+.. py:attribute:: VOLUMEMESHNOTFOUND
+   :value: 1801
+
+
+   Volume mesh not found.
+
+.. py:attribute:: VOLUMEMESH_MIDNODESNOTSUPPORTED
+   :value: 1800
+
+
+   Mid side nodes are not supported.
+
+.. py:attribute:: VOLUMENOTFOUND
+   :value: 307
+
+
+   Volumes not found.
+
+.. py:attribute:: VOLUMESEARCHFAILED
+   :value: 2851
+
+
+   Volume search failed.
+
+.. py:attribute:: VOLUMESEARCHPARTWITHMESHNOTFOUND
+   :value: 2850
+
+
+   Part with mesh not found for volume quality check.
+
+.. py:attribute:: VOLUMESNOTUPTODATE
+   :value: 112
+
+
+   Volumes are not updated.
+
+.. py:attribute:: VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE
+   :value: 527
+
+
+   Volume zones are not found to export fluent case.
+
+.. py:attribute:: VT_COLLAPSESHORTEDGESFAILED
+   :value: 3608
+
+
+   Collapse short edges operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_CREATELEADINGEDGEFAILED
+   :value: 3610
+
+
+   Create leading edge operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_CREATEMIDEDGEFAILED
+   :value: 3611
+
+
+   Create mid edge operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_FILLANNULARHOLEFAILED
+   :value: 3607
+
+
+   Fill annular hole operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_FILLHOLEFAILED
+   :value: 3606
+
+
+   Fill hole operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_INVALIDINPUT
+   :value: 3600
+
+
+   Invalid input provided for VT operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_MERGEFACESFAILED
+   :value: 3601
+
+
+   Merge faces operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_MERGETHINEXTFAILED
+   :value: 3603
+
+
+   Merge thin extensions operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_MERGETHINSTRIPESFAILED
+   :value: 3602
+
+
+   Merge thin stripes operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_OPERATIONFAILED
+   :value: 3612
+
+
+   VT operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_PINCHFACESFAILED
+   :value: 3605
+
+
+   Pinch faces operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_REPAIRSHARPCORNERANGLESFAILED
+   :value: 3604
+
+
+   Repair sharp corner angles operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: VT_SEPARATEFACESFAILED
+   :value: 3609
+
+
+   Separate faces operation failed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERCLOSEGAPSFAILED
+   :value: 3442
+
+
+   Wrapper gap closing failed.
+
+.. py:attribute:: WRAPPERCLOSEGAPS_INVALIDGAPSIZE
+   :value: 3440
+
+
+   Gap size specified for patching should be positive double.
+
+.. py:attribute:: WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR
+   :value: 3443
+
+
+   Resolution Factor should be greater than 0 but less than or equal to 1.
+
+.. py:attribute:: WRAPPERCLOSEGAPS_INVALIDSCOPE
+   :value: 3441
+
+
+   Scope specified for close gaps is invalid.
+
+.. py:attribute:: WRAPPERCONNECTFAILED
+   :value: 3402
+
+
+   Wrapper connect failed.
+
+.. py:attribute:: WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID
+   :value: 3421
+
+
+   Contact prevention specified under wrapper control doesn't exist.
+
+.. py:attribute:: WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS
+   :value: 3422
+
+
+   Contact prevention control specified under wrapper is invalid.
+
+.. py:attribute:: WRAPPERCONTROL_INVALIDFEATURERECOVERYCONTROLID
+   :value: 3425
+
+
+   Feature recovery control specified under wrapper control doesn't exist.
+
+.. py:attribute:: WRAPPERCONTROL_INVALIDGEOMETRYSCOPE
+   :value: 3420
+
+
+   Geometry scope specified under wrapper control is invalid.
+
+.. py:attribute:: WRAPPERCONTROL_INVALIDLEAKPREVENTIONCONTROLINPUTS
+   :value: 3424
+
+
+   Leak prevention control specified under wrapper is invalid.
+
+.. py:attribute:: WRAPPERCONTROL_INVALIDLEAKPREVENTIONID
+   :value: 3423
+
+
+   Leak prevention specified under wrapper control doesn't exist.
+
+.. py:attribute:: WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE
+   :value: 3426
+
+
+   Dead material point cannot be same as live.
+
+.. py:attribute:: WRAPPERCONTROL_LIVEMATERIALPOINTDOESNTEXIST
+   :value: 3414
+
+
+   Live material point does not exist for wrapper.
+
+.. py:attribute:: WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST
+   :value: 3413
+
+
+   Live material point added to wrapper control doesn't exist.
+
+.. py:attribute:: WRAPPERCONTROL_NOLIVEMATERIALPOINTSPROVIDED
+   :value: 3408
+
+
+   Live material points list provided for wrapper control is empty.
+
+.. py:attribute:: WRAPPERCOULDNOTEXTRACTINTERFACE
+   :value: 3405
+
+
+   Failed to extract wrapper interface.
+
+.. py:attribute:: WRAPPERGLOBALSETTINGSNOTSET
+   :value: 3400
+
+
+   Global settings for wrapper not set.
+
+.. py:attribute:: WRAPPERIMPROVEFAILED
+   :value: 3416
+
+
+   Wrapper improve quality failed.
+
+.. py:attribute:: WRAPPERLEAKINGFLUIDREGIONS
+   :value: 3444
+
+
+   Two or more fluid regions leaking into each other.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERLEAKPREVENTIONFAILED
+   :value: 3406
+
+
+   Wrapper leak prevention failed.
+
+.. py:attribute:: WRAPPEROCTREEREGIONINGFAILED
+   :value: 3411
+
+
+   Octree regioning failed.
+
+.. py:attribute:: WRAPPERPATCHFLOWREGIONS_EMPTYORINVALIDINPUT
+   :value: 3449
+
+
+   Empty or invalid input face zonelet ids.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERPATCHFLOWREGIONS_FAILED
+   :value: 3446
+
+
+   Unable to create patch surfaces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERPATCHFLOWREGIONS_INVALIDBASESIZE
+   :value: 3448
+
+
+   Base size specified for patching should be positive double.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE
+   :value: 3445
+
+
+   Hole size specified for dead region should be positive double.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE
+   :value: 3447
+
+
+   Too small hole size provided for dead region.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: WRAPPERPROJECTIONFAILED
+   :value: 3412
+
+
+   Projection failed for wrapper.
+
+.. py:attribute:: WRAPPERRESOLVEINTERSECTIONFAILED
+   :value: 3401
+
+
+   Resolving intersections failed for wrapper.
+
+.. py:attribute:: WRAPPERSIZEFIELDSNOTDEFINED
+   :value: 3419
+
+
+   No size field ids provided for wrapping.
+
+.. py:attribute:: WRAPPERSIZINGMETHODNOTSUPPORTED
+   :value: 3415
+
+
+   Sizing method is not supported for wrapper.
+
+.. py:attribute:: WRAPPERSURFACEHASHOLES
+   :value: 3410
+
+
+   Wrapper surface has holes.
+
+.. py:attribute:: WRAPPERUNSUPPORTEDWRAPREGION
+   :value: 3407
+
+
+   Wrap region option provided does not support wrap operation.
+
+.. py:attribute:: WRITECDBFAILED
+   :value: 506
+
+
+   Writing CDB file failed.
+
+.. py:attribute:: WRITEKEYWORDFILEFAILED
+   :value: 518
+
+
+   Writing LS-Dyna Keyword file failed.
+
+.. py:attribute:: WRITEMESHFAILED
+   :value: 501
+
+
+   Writing mesh file failed.
+
+.. py:attribute:: WRITEPMDATFAILED
+   :value: 530
+
+
+   Failed to write PMDAT file.
+
+.. py:attribute:: WRITESIZECONTROLFAILED
+   :value: 523
+
+
+   Writing size control file failed.
+
+.. py:attribute:: WRITESIZEFIELDFAILED
+   :value: 532
+
+
+   Writing size field failed.
+
+.. py:attribute:: ZEROELEMENTSFORCDBEXPORT
+   :value: 16600
+
+
+   No elements found for cdb export.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: ZEROELEMENTSREADFROMCDBFILE
+   :value: 16500
+
+
+   No elements read from CDB file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: ZERONODESREADFROMCDBFILE
+   :value: 16501
+
+
+   No nodes read from CDB file.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: ZONELETSARENOTOFSAMEDIMENSION
+   :value: 374
+
+
+   Zonelets are not of same dimension.
+
+.. py:attribute:: ZONENOTFOUND
+   :value: 308
+
+
+   Given zone not found.
+
+.. py:attribute:: ZONESARENOTOFSAMETYPE
+   :value: 303
+
+
+   Zones are not of same type.
+
+.. py:attribute:: ZONESARENOTSUPPORTEDFORCELLZONELETS
+   :value: 311
+
+
+   Zones are not supported for cell zonelets.
+
+
+
+
+
+
+
+.. vale on

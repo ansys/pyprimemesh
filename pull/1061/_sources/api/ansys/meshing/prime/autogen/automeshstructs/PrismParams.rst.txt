@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PrismParams`
+====================
+
+
+.. py:class:: ansys.meshing.prime.autogen.automeshstructs.PrismParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, stair_step: PrismStairStep = None, no_imprint_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control prism mesh generation.
+
+   :param model: Model to create a ``PrismParams`` object with default parameters.
+   :type model: Model
+   :param stair_step: Prism stairstep parameters.
+   :type stair_step: PrismStairStep, optional
+   :param no_imprint_zonelets: Option to specify zonelets to skip prism imprint.
+   :type no_imprint_zonelets: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``PrismParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> prism_params = prime.PrismParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: PrismParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~no_imprint_zonelets`
+            - Option to specify zonelets to skip prism imprint.
+          * - :py:attr:`~stair_step`
+            - Prism stairstep parameters.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``PrismParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``PrismParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.automeshstructs import PrismParams
+
+Property detail
+---------------
+
+.. py:property:: no_imprint_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Option to specify zonelets to skip prism imprint.
+
+.. py:property:: stair_step
+   :type: PrismStairStep
+
+
+   Prism stairstep parameters.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``PrismParams`` object.
+
+   .. rubric:: Examples
+
+   >>> PrismParams.print_default()
+
+
+.. py:method:: set_default(stair_step: PrismStairStep = None, no_imprint_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``PrismParams`` object.
+
+   :param stair_step: Prism stairstep parameters.
+   :type stair_step: PrismStairStep, optional
+   :param no_imprint_zonelets: Option to specify zonelets to skip prism imprint.
+   :type no_imprint_zonelets: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

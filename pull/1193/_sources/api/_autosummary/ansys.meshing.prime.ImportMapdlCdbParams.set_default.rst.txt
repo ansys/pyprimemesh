@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ImportMapdlCdbParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ImportMapdlCdbParams.set_default
+
+   ansys.meshing.prime.ImportMapdlCdbParams.set_default

@@ -1,0 +1,6 @@
+suggested\_part\_name
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperPatchFlowRegionsParams.suggested_part_name

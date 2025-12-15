@@ -1,0 +1,108 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``unit_test_examples.py`` module
+====================================
+
+.. py:module:: ansys.meshing.prime.examples.unit_test_examples
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: unit_test_examples
+.. tab-set::
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.examples.unit_test_examples.download_test_examples`
+            - Download the example files necessary for unit testing.
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~FILE_NAMES`
+            - 
+
+
+
+
+.. .. .. 
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-function_variant"></span> download_test_examples</api/ansys/meshing/prime/examples/unit_test_examples/download_test_examples>
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: FILE_NAMES
+   :value: ['box.psf', 'box.sf', 'file.cas', 'file.pdmat', 'file.pmdat', 'hex.cas', 'hex.cdb', 'hex.fmd', 'hex.msh']
+
+
+
+
+
+.. vale on

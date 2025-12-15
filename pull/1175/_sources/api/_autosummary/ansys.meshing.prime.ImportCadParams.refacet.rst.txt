@@ -1,0 +1,6 @@
+refacet
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.refacet

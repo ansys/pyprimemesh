@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ThinVolumeMeshParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.thinvolumecontrolstructs.ThinVolumeMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_layers: int = None, imprint_sides: bool = None, n_ignore_rings: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to generate thin volume mesh. This is for internal use only.
+
+   :param model: Model to create a ``ThinVolumeMeshParams`` object with default parameters.
+   :type model: Model
+   :param n_layers: Number of thin volume layers to be generated.
+   :type n_layers: int, optional
+   :param imprint_sides: Checks whether to imprint quad faces on side zonelets.
+   :type imprint_sides: bool, optional
+   :param n_ignore_rings: Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
+   :type n_ignore_rings: int, optional
+   :param json_data: JSON dictionary to create a ``ThinVolumeMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> thin_volume_mesh_params = prime.ThinVolumeMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ThinVolumeMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~imprint_sides`
+            - Checks whether to imprint quad faces on side zonelets.
+          * - :py:attr:`~n_ignore_rings`
+            - Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
+          * - :py:attr:`~n_layers`
+            - Number of thin volume layers to be generated.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ThinVolumeMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ThinVolumeMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.thinvolumecontrolstructs import ThinVolumeMeshParams
+
+Property detail
+---------------
+
+.. py:property:: imprint_sides
+   :type: bool
+
+
+   Checks whether to imprint quad faces on side zonelets.
+
+.. py:property:: n_ignore_rings
+   :type: int
+
+
+   Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
+
+.. py:property:: n_layers
+   :type: int
+
+
+   Number of thin volume layers to be generated.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ThinVolumeMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ThinVolumeMeshParams.print_default()
+
+
+.. py:method:: set_default(n_layers: int = None, imprint_sides: bool = None, n_ignore_rings: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ThinVolumeMeshParams`` object.
+
+   :param n_layers: Number of thin volume layers to be generated.
+   :type n_layers: int, optional
+   :param imprint_sides: Checks whether to imprint quad faces on side zonelets.
+   :type imprint_sides: bool, optional
+   :param n_ignore_rings: Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
+   :type n_ignore_rings: int, optional
+
+
+
+
+
+
+
+.. vale on

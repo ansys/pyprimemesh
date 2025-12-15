@@ -1,0 +1,198 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AutoNodeMoveParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.volumemeshtoolstructs.AutoNodeMoveParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, quality_measure: ansys.meshing.prime.params.primestructs.CellQualityMeasure = None, target_quality: float = None, dihedral_angle: float = None, n_iterations_per_node: int = None, restrict_boundary_nodes_along_surface: bool = None, n_attempts: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used to improve volume mesh by auto node move.
+
+   :param model: Model to create a ``AutoNodeMoveParams`` object with default parameters.
+   :type model: Model
+   :param quality_measure: Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
+   :type quality_measure: CellQualityMeasure, optional
+   :param target_quality: Specify target quality used for the mesh improvement based on specified quality measure.
+   :type target_quality: float, optional
+   :param dihedral_angle: Dihedral angle used to mantain features of boundary face zonelets.
+   :type dihedral_angle: float, optional
+   :param n_iterations_per_node: Number of iterations per node to be moved.
+   :type n_iterations_per_node: int, optional
+   :param restrict_boundary_nodes_along_surface: Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
+   :type restrict_boundary_nodes_along_surface: bool, optional
+   :param n_attempts: Number of attempts to improve specified quality measure by node movement.
+   :type n_attempts: int, optional
+   :param json_data: JSON dictionary to create a ``AutoNodeMoveParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> auto_node_move_params = prime.AutoNodeMoveParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: AutoNodeMoveParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~dihedral_angle`
+            - Dihedral angle used to mantain features of boundary face zonelets.
+          * - :py:attr:`~n_attempts`
+            - Number of attempts to improve specified quality measure by node movement.
+          * - :py:attr:`~n_iterations_per_node`
+            - Number of iterations per node to be moved.
+          * - :py:attr:`~quality_measure`
+            - Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
+          * - :py:attr:`~restrict_boundary_nodes_along_surface`
+            - Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
+          * - :py:attr:`~target_quality`
+            - Specify target quality used for the mesh improvement based on specified quality measure.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``AutoNodeMoveParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``AutoNodeMoveParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.volumemeshtoolstructs import AutoNodeMoveParams
+
+Property detail
+---------------
+
+.. py:property:: dihedral_angle
+   :type: float
+
+
+   Dihedral angle used to mantain features of boundary face zonelets.
+
+.. py:property:: n_attempts
+   :type: int
+
+
+   Number of attempts to improve specified quality measure by node movement.
+
+.. py:property:: n_iterations_per_node
+   :type: int
+
+
+   Number of iterations per node to be moved.
+
+.. py:property:: quality_measure
+   :type: ansys.meshing.prime.params.primestructs.CellQualityMeasure
+
+
+   Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
+
+.. py:property:: restrict_boundary_nodes_along_surface
+   :type: bool
+
+
+   Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
+
+.. py:property:: target_quality
+   :type: float
+
+
+   Specify target quality used for the mesh improvement based on specified quality measure.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``AutoNodeMoveParams`` object.
+
+   .. rubric:: Examples
+
+   >>> AutoNodeMoveParams.print_default()
+
+
+.. py:method:: set_default(quality_measure: ansys.meshing.prime.params.primestructs.CellQualityMeasure = None, target_quality: float = None, dihedral_angle: float = None, n_iterations_per_node: int = None, restrict_boundary_nodes_along_surface: bool = None, n_attempts: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``AutoNodeMoveParams`` object.
+
+   :param quality_measure: Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
+   :type quality_measure: CellQualityMeasure, optional
+   :param target_quality: Specify target quality used for the mesh improvement based on specified quality measure.
+   :type target_quality: float, optional
+   :param dihedral_angle: Dihedral angle used to mantain features of boundary face zonelets.
+   :type dihedral_angle: float, optional
+   :param n_iterations_per_node: Number of iterations per node to be moved.
+   :type n_iterations_per_node: int, optional
+   :param restrict_boundary_nodes_along_surface: Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
+   :type restrict_boundary_nodes_along_surface: bool, optional
+   :param n_attempts: Number of attempts to improve specified quality measure by node movement.
+   :type n_attempts: int, optional
+
+
+
+
+
+
+
+.. vale on

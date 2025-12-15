@@ -1,0 +1,11 @@
+get\_scope\_parts
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.get_scope_parts
+
+.. minigallery::
+   :add-heading: Examples using ControlData.get_scope_parts
+
+   ansys.meshing.prime.ControlData.get_scope_parts

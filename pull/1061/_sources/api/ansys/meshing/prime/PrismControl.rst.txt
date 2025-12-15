@@ -1,0 +1,232 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PrismControl`
+=====================
+
+
+.. py:class:: ansys.meshing.prime.PrismControl(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   PrismControl allows you to generate prisms.
+
+   PrismControl allows you to control generation of prisms. Controls include setting the face scope, volume scope and growth parameters.
+
+   :param model: Server model to create PrismControl object.
+   :type model: Model
+   :param id: Id of the PrismControl.
+   :type id: int
+   :param object_id: Object id of the PrismControl.
+   :type object_id: int
+   :param name: Name of the PrismControl.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: PrismControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_growth_params`
+            - Gets the prism parameters for prism control.
+          * - :py:attr:`~get_surface_scope`
+            - Gets the surface control scope.
+          * - :py:attr:`~get_volume_scope`
+            - Gets the volume control scope.
+          * - :py:attr:`~set_growth_params`
+            - Set growth parameters for prism control.
+          * - :py:attr:`~set_suggested_name`
+            - Sets the unique name for the prism control based on the suggested name.
+          * - :py:attr:`~set_surface_scope`
+            - Sets the surface control scope.
+          * - :py:attr:`~set_volume_scope`
+            - Sets the volume control scope.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of PrismControl.
+          * - :py:attr:`~name`
+            - Get the name of PrismControl.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import PrismControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of PrismControl.
+
+.. py:property:: name
+
+   Get the name of PrismControl.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: get_growth_params() -> ansys.meshing.prime.params.primestructs.PrismControlGrowthParams
+
+   Gets the prism parameters for prism control.
+
+
+   :returns: Returns the PrismControlGrowthParams.
+   :rtype: PrismControlGrowthParams
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> params = prism_ctrl.get_growth_params()
+
+
+.. py:method:: get_surface_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the surface control scope.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> scope = prism_control.get_surface_scope()
+
+
+.. py:method:: get_volume_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets the volume control scope.
+
+
+   :returns: Returns the ScopeDefinition.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> scope = prism_control.get_volume_scope()
+
+
+.. py:method:: set_growth_params(prism_control_growth_params: ansys.meshing.prime.params.primestructs.PrismControlGrowthParams)
+
+   Set growth parameters for prism control.
+
+
+   :param prism_control_growth_params: Parameters to set prism control growth.
+   :type prism_control_growth_params: PrismControlGrowthParams
+
+   .. rubric:: Examples
+
+   >>> results = prism_control.set_growth_params(PrismControlGrowthParams(model=model))
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.params.primestructs.SetNameResults
+
+   Sets the unique name for the prism control based on the suggested name.
+
+
+   :param name: Suggested name for the prism control.
+   :type name: str
+
+   :returns: Returns the SetNameResults.
+   :rtype: SetNameResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> prism_control.set_suggested_name("control1")
+
+
+.. py:method:: set_surface_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the surface control scope.
+
+
+   :param entities: Scope definition entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Examples
+
+   >>> results = prism_control.set_surface_scope(entities)
+
+
+.. py:method:: set_volume_scope(entities: ansys.meshing.prime.params.primestructs.ScopeDefinition) -> ansys.meshing.prime.params.primestructs.SetScopeResults
+
+   Sets the volume control scope.
+
+
+   :param entities: Scope definition entities.
+   :type entities: ScopeDefinition
+
+   :returns: Returns SetScopeResults.
+   :rtype: SetScopeResults
+
+   .. rubric:: Examples
+
+   >>> results = prism_control.set_volume_scope(entities)
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,88 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SmoothType`
+===================
+
+
+.. py:class:: ansys.meshing.prime.SmoothType
+
+
+
+   Indicates the the type of operation to be performed during the smooth dihedral face nodes operation.
+
+
+
+
+.. py:currentmodule:: SmoothType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~AUTO`
+            - Performs smoothing using optimal node movements during the operation.
+          * - :py:attr:`~INFLATE`
+            - Performs inflation during the operation.
+          * - :py:attr:`~SMOOTH`
+            - Performs smoothing during the operation.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SmoothType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: AUTO
+   :value: 3
+
+
+   Performs smoothing using optimal node movements during the operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:attribute:: INFLATE
+   :value: 2
+
+
+   Performs inflation during the operation.
+
+.. py:attribute:: SMOOTH
+   :value: 1
+
+
+   Performs smoothing during the operation.
+
+
+
+
+
+
+
+.. vale on

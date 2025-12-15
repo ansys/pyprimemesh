@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CollapseParams`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.autogen.collapsetoolstructs.CollapseParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, feature_type: ansys.meshing.prime.params.primestructs.SurfaceFeatureType = None, collapse_ratio: float = None, preserve_quality: bool = None, target_skewness: float = None, keep_edge_connectivity: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to collapse face elements.
+
+   :param model: Model to create a ``CollapseParams`` object with default parameters.
+   :type model: Model
+   :param feature_type: Feature type to be preserved when performing collapse.
+   :type feature_type: SurfaceFeatureType, optional
+   :param collapse_ratio: Maximum ratio of shortest face edge length to longest face edge length.
+   :type collapse_ratio: float, optional
+   :param preserve_quality: Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
+   :type preserve_quality: bool, optional
+   :param target_skewness: Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+   :type target_skewness: float, optional
+   :param keep_edge_connectivity: Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type keep_edge_connectivity: bool, optional
+   :param json_data: JSON dictionary to create a ``CollapseParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> collapse_params = prime.CollapseParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CollapseParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~collapse_ratio`
+            - Maximum ratio of shortest face edge length to longest face edge length.
+          * - :py:attr:`~feature_type`
+            - Feature type to be preserved when performing collapse.
+          * - :py:attr:`~keep_edge_connectivity`
+            - Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+          * - :py:attr:`~preserve_quality`
+            - Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
+          * - :py:attr:`~target_skewness`
+            - Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CollapseParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CollapseParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.collapsetoolstructs import CollapseParams
+
+Property detail
+---------------
+
+.. py:property:: collapse_ratio
+   :type: float
+
+
+   Maximum ratio of shortest face edge length to longest face edge length.
+
+.. py:property:: feature_type
+   :type: ansys.meshing.prime.params.primestructs.SurfaceFeatureType
+
+
+   Feature type to be preserved when performing collapse.
+
+.. py:property:: keep_edge_connectivity
+   :type: bool
+
+
+   Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: preserve_quality
+   :type: bool
+
+
+   Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
+
+.. py:property:: target_skewness
+   :type: float
+
+
+   Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CollapseParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CollapseParams.print_default()
+
+
+.. py:method:: set_default(feature_type: ansys.meshing.prime.params.primestructs.SurfaceFeatureType = None, collapse_ratio: float = None, preserve_quality: bool = None, target_skewness: float = None, keep_edge_connectivity: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CollapseParams`` object.
+
+   :param feature_type: Feature type to be preserved when performing collapse.
+   :type feature_type: SurfaceFeatureType, optional
+   :param collapse_ratio: Maximum ratio of shortest face edge length to longest face edge length.
+   :type collapse_ratio: float, optional
+   :param preserve_quality: Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
+   :type preserve_quality: bool, optional
+   :param target_skewness: Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
+   :type target_skewness: float, optional
+   :param keep_edge_connectivity: Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
+   :type keep_edge_connectivity: bool, optional
+
+
+
+
+
+
+
+.. vale on

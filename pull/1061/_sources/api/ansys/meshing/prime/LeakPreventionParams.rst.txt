@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`LeakPreventionParams`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.LeakPreventionParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, material_points: ansys.meshing.prime.params.primestructs.List[str] = None, scope: ScopeDefinition = None, max_hole_size: float = None, n_expansion_layers: int = None, json_data: dict = None, **kwargs)
+
+
+
+   LeakPreventionParams defines leakage prevention control parameters for wrapper.
+
+   :param model: Model to create a ``LeakPreventionParams`` object with default parameters.
+   :type model: Model
+   :param material_points: Material points used for leak prevention control.
+   :type material_points: List[str], optional
+   :param scope: Scope used for leak prevention control.
+   :type scope: ScopeDefinition, optional
+   :param max_hole_size: Maximum hole size to prevent leakage into region.
+   :type max_hole_size: float, optional
+   :param n_expansion_layers: Number of layers to expand leaking region.
+   :type n_expansion_layers: int, optional
+   :param json_data: JSON dictionary to create a ``LeakPreventionParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> leak_prevention_params = prime.LeakPreventionParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: LeakPreventionParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~material_points`
+            - Material points used for leak prevention control.
+          * - :py:attr:`~max_hole_size`
+            - Maximum hole size to prevent leakage into region.
+          * - :py:attr:`~n_expansion_layers`
+            - Number of layers to expand leaking region.
+          * - :py:attr:`~scope`
+            - Scope used for leak prevention control.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``LeakPreventionParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``LeakPreventionParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import LeakPreventionParams
+
+Property detail
+---------------
+
+.. py:property:: material_points
+   :type: ansys.meshing.prime.params.primestructs.List[str]
+
+
+   Material points used for leak prevention control.
+
+.. py:property:: max_hole_size
+   :type: float
+
+
+   Maximum hole size to prevent leakage into region.
+
+.. py:property:: n_expansion_layers
+   :type: int
+
+
+   Number of layers to expand leaking region.
+
+.. py:property:: scope
+   :type: ScopeDefinition
+
+
+   Scope used for leak prevention control.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``LeakPreventionParams`` object.
+
+   .. rubric:: Examples
+
+   >>> LeakPreventionParams.print_default()
+
+
+.. py:method:: set_default(material_points: ansys.meshing.prime.params.primestructs.List[str] = None, scope: ScopeDefinition = None, max_hole_size: float = None, n_expansion_layers: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``LeakPreventionParams`` object.
+
+   :param material_points: Material points used for leak prevention control.
+   :type material_points: List[str], optional
+   :param scope: Scope used for leak prevention control.
+   :type scope: ScopeDefinition, optional
+   :param max_hole_size: Maximum hole size to prevent leakage into region.
+   :type max_hole_size: float, optional
+   :param n_expansion_layers: Number of layers to expand leaking region.
+   :type n_expansion_layers: int, optional
+
+
+
+
+
+
+
+.. vale on

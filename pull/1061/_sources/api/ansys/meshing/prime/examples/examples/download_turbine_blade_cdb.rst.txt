@@ -1,0 +1,33 @@
+ansys.meshing.prime.examples.examples.download_turbine_blade_cdb
+================================================================
+
+.. py:function:: ansys.meshing.prime.examples.examples.download_turbine_blade_cdb(destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download the CDB file for the turbine blade example.
+
+   destination : str, optional
+       Path to download the example file to. The default
+       is ``None``, in which case the default path for app data
+       is used.
+   force : bool, optional
+       Whether to download the example file. The default is
+       ``False``, in which case if the example file is cached, it
+       is reused.
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> import ansys.meshing.prime as prime
+   >>> import ansys.meshing.prime.examples as prime_examples
+   >>> with prime.launch_prime() as session:
+   >>>     model = session.model
+   >>>     turbine_blade_mesh = prime_examples.download_turbine_blade_cdb()
+   >>>     with prime.FileIO(model) as io:
+   >>>         _ = io.import_mapdl_cdb(
+   >>>             turbine_blade_mesh,
+   >>>             params=prime.ImportMapdlCdbParams(model),
+   >>>         )
+   >>>     print(model)
+

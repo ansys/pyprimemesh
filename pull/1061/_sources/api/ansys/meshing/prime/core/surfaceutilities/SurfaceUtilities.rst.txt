@@ -1,0 +1,421 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SurfaceUtilities`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities(model: ansys.meshing.prime.core.model.Model)
+
+
+
+   Performs various general surface utilities algorithms.
+
+   For example, copy zonelets, resolve surface intersections.
+
+   :param model: Server model to create SurfaceUtilities object.
+   :type model: Model
+
+
+
+
+
+
+.. py:currentmodule:: SurfaceUtilities
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~add_thickness`
+            - Add thicknesss to input face zonelets.
+          * - :py:attr:`~copy_face_zonelets`
+            - Copy face zonelets.
+          * - :py:attr:`~create_boi`
+            - Create BOI to input face zonelets.
+          * - :py:attr:`~create_cap_on_face_zonelets`
+            - Create caps on the given face zonelets.
+          * - :py:attr:`~create_contact_patch`
+            - Create a contact patch by offsetting the target zonelets.
+          * - :py:attr:`~delete_unwetted_surfaces`
+            - Delete unwetted surfaces based on material point list.
+          * - :py:attr:`~fill_holes_at_plane`
+            - Fill holes in given face zonelets at given plane.
+          * - :py:attr:`~fix_invalid_normal_nodes_of_face_zonelets`
+            - Create nuggets to fix invalid normal at nodes of the given face zonelets.
+          * - :py:attr:`~get_bounding_box_of_zonelets`
+            - Get bounding box of given zonelets.
+          * - :py:attr:`~project_topo_faces_on_geometry`
+            - Project nodes of given topofaces on geometry associated to those topofaces.
+          * - :py:attr:`~refine_at_contacts`
+            - Refine face elements in contact with other parts.
+          * - :py:attr:`~resolve_intersections`
+            - Resolve facezonelets intersections.
+          * - :py:attr:`~smooth_dihedral_face_nodes`
+            - Perform a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.
+          * - :py:attr:`~stretch_free_boundaries`
+            - Stretch free boundaries of each zonelet.
+          * - :py:attr:`~triangulate_face_zonelets`
+            - Split faces in zonelets to get triangular faces.
+
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for SurfaceUtilities.
+          * - :py:attr:`~__exit__`
+            - Exit context for SurfaceUtilities.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.surfaceutilities import SurfaceUtilities
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for SurfaceUtilities.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for SurfaceUtilities.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: add_thickness(zonelets: Iterable[int], params: ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessParams) -> ansys.meshing.prime.autogen.surfaceutilitystructs.AddThicknessResults
+
+   Add thicknesss to input face zonelets.
+
+   :param zonelets: List of input face zonelet IDs.
+   :type zonelets: Iterable[int]
+   :param params: Parameters for controlling the addition of thickness.
+   :type params: AddThicknessParams
+
+   :returns: Results for adding thickness.
+   :rtype: AddThicknessResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.add_thickness(zonelets, params)
+
+
+.. py:method:: copy_face_zonelets(face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], target_part_id: int, params: ansys.meshing.prime.params.primestructs.CopyZoneletsParams) -> ansys.meshing.prime.params.primestructs.CopyZoneletsResults
+
+   Copy face zonelets.
+
+
+   :param face_zonelets: Ids of face zonelets to be copied.
+   :type face_zonelets: Iterable[int]
+   :param target_part_id: Part id to be used to move the copied zonelets.
+   :type target_part_id: int
+   :param params: Parameters to copy face zonelets.
+   :type params: CopyZoneletsParams
+
+   :returns: Returns the CopyZoneletsResults.
+   :rtype: CopyZoneletsResults
+
+   .. rubric:: Examples
+
+   >>>> surfaceutil = SurfaceUtilities(model = model)
+   >>>> surfaceutil = surfaceutil.copy_face_zonelets(face_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))
+
+
+.. py:method:: create_boi(face_zonelet_ids: Iterable[int], params: ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIParams) -> ansys.meshing.prime.autogen.surfaceutilitystructs.CreateBOIResults
+
+   Create BOI to input face zonelets.
+
+   :param face_zonelet_ids: List of input face zonelet IDs.
+   :type face_zonelet_ids: Iterable[int]
+   :param params: Parameters for controlling BOI creation.
+   :type params: CreateBOIParams
+
+   :returns: Results from creating BOI.
+   :rtype: CreateBOIResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.create_boi(zonelets, params)
+
+
+.. py:method:: create_cap_on_face_zonelets(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.CreateCapParams) -> ansys.meshing.prime.params.primestructs.CreateCapResults
+
+   Create caps on the given face zonelets.
+
+
+   :param part_id: Id of part to associate face zonelets created to cap.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets to be used to find caps.
+   :type face_zonelets: Iterable[int]
+   :param params: Parameters to create caps.
+   :type params: CreateCapParams
+
+   :returns: Returns the CreateCapResults.
+   :rtype: CreateCapResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.CreateCapParams(model = model)
+   >>> results = surface_utils.cap_face_zonelets(part_id, face_zonelets, params)
+
+
+.. py:method:: create_contact_patch(source_zonelets: Iterable[int], target_zonelets: Iterable[int], params: ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchParams) -> ansys.meshing.prime.autogen.surfaceutilitystructs.CreateContactPatchResults
+
+   Create a contact patch by offsetting the target zonelets.
+
+   :param source_zonelets: IDS for the source face zonelets.
+   :type source_zonelets: Iterable[int]
+   :param target_zonelets: IDs for the target face zonelets.
+   :type target_zonelets: Iterable[int]
+   :param params: Parameters for controlling the contact patch creation.
+   :type params: CreateContactPatchParams
+
+   :returns: Results from creating the contact patch.
+   :rtype: CreateContactPatchResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.create_contact_patch(zonelets, params)
+
+
+.. py:method:: delete_unwetted_surfaces(face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], live_material_point_names: List[str], params: ansys.meshing.prime.params.primestructs.DeleteUnwettedParams) -> ansys.meshing.prime.params.primestructs.DeleteUnwettedResult
+
+   Delete unwetted surfaces based on material point list.
+
+
+   :param face_zonelet_ids: Ids of face zonelets.
+   :type face_zonelet_ids: Iterable[int]
+   :param live_material_point_names: Names of material points.
+   :type live_material_point_names: List[str]
+   :param params: DeleteUnwettedParams to define material points.
+   :type params: DeleteUnwettedParams
+
+   :returns: Returns a DeleteUnwettedResult.
+   :rtype: DeleteUnwettedResult
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.delete_unwetted_surfaces(zonelets, live_mpt_names, prime.DeleteUnwettedParams(model))
+
+
+.. py:method:: fill_holes_at_plane(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], plane_points: ansys.meshing.prime.params.primestructs.Iterable[float], params: ansys.meshing.prime.params.primestructs.FillHolesAtPlaneParams) -> ansys.meshing.prime.params.primestructs.FillHolesAtPlaneResults
+
+   Fill holes in given face zonelets at given plane.
+
+
+   :param part_id: Id of part to associate face zonelets created to fill hole.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets to be used to find holes.
+   :type face_zonelets: Iterable[int]
+   :param plane_points: Coordinates of three points to define plane.
+   :type plane_points: Iterable[float]
+   :param params: Parameters to fill holes.
+   :type params: FillHolesAtPlaneParams
+
+   :returns: Returns the FillHolesAtPlaneResults.
+   :rtype: FillHolesAtPlaneResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.FillHolesAtPlaneParams(model = model)
+   >>> results = surface_utils.fill_holes_at_plane(part_id, face_zonelets, plane_points, params)
+
+
+.. py:method:: fix_invalid_normal_nodes_of_face_zonelets(part_id: int, face_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.FixInvalidNormalNodeParams) -> ansys.meshing.prime.params.primestructs.FixInvalidNormalNodeResults
+
+   Create nuggets to fix invalid normal at nodes of the given face zonelets.
+
+
+   :param part_id: Part id of the given face zonelets. Nuggets created are associated to the given part.
+   :type part_id: int
+   :param face_zonelets: Ids of face zonelets used to find invalid normal nodes.
+   :type face_zonelets: Iterable[int]
+   :param params: Parameters to find invalid normal nodes and fix them.
+   :type params: FixInvalidNormalNodeParams
+
+   :returns: Returns the FixInvalidNormalNodeResults.
+   :rtype: FixInvalidNormalNodeResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.FixInvalidNormalNodeParams(model = model)
+   >>> results = surface_utils.fix_invalid_normal_nodes_of_face_zonelets(part_id, face_zonelets, params)
+
+
+.. py:method:: get_bounding_box_of_zonelets(zonelets: ansys.meshing.prime.params.primestructs.Iterable[int]) -> ansys.meshing.prime.params.primestructs.BoundingBox
+
+   Get bounding box of given zonelets.
+
+
+   :param zonelets: Ids of zonelets.
+   :type zonelets: Iterable[int]
+
+   :returns: Returns bounding of box of given zonelets.
+   :rtype: BoundingBox
+
+   .. rubric:: Examples
+
+   >>> zonelets = part.get_face_zonelets() + part.get_edge_zonelets()
+   >>> bounding_box = surface_utilities.get_bounding_box_of_zonelets(zonelets)
+
+
+.. py:method:: project_topo_faces_on_geometry(topo_faces: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ProjectOnGeometryParams) -> ansys.meshing.prime.params.primestructs.ProjectOnGeometryResults
+
+   Project nodes of given topofaces on geometry associated to those topofaces.
+
+
+   :param topo_faces: Ids of topofaces to be used to project nodes on the geometry.
+   :type topo_faces: Iterable[int]
+   :param params: Parameters used for projecting topoface nodes on geometry.
+   :type params: ProjectOnGeometryParams
+
+   :returns: Returns the ProjectOnGeometryResults.
+   :rtype: ProjectOnGeometryResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> params = prime.ProjectOnGeometryParams(model = model)
+   >>> results = surface_utils.project_topo_faces_on_geometry(topofaces, params)
+
+
+.. py:method:: refine_at_contacts(part_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.RefineAtContactsParams) -> ansys.meshing.prime.params.primestructs.RefineAtContactsResults
+
+   Refine face elements in contact with other parts.
+
+
+   :param part_ids: Input part ids.
+   :type part_ids: Iterable[int]
+   :param params: Parameters to refine at contacts.
+   :type params: RefineAtContactsParams
+
+   :returns: Returns the RefineAtContactsResults.
+   :rtype: RefineAtContactsResults
+
+   .. rubric:: Examples
+
+   >>> params = prime.RefineAtContactsParams(model = model)
+   >>> result = surf_utils.refine_at_contacts(part_ids, params)
+
+
+.. py:method:: resolve_intersections(face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.ResolveIntersectionsParams) -> ansys.meshing.prime.params.primestructs.ResolveIntersectionResult
+
+   Resolve facezonelets intersections.
+
+
+   :param face_zonelet_ids: Ids of face zonelets.
+   :type face_zonelet_ids: Iterable[int]
+   :param params: ResolveIntersectionsParams for resolve intersection.
+   :type params: ResolveIntersectionsParams
+
+   :returns: Returns a ResolveIntersectionResult.
+   :rtype: ResolveIntersectionResult
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.resolve_intersections(zonelets, prime.ResolveIntersectionsParams(model))
+
+
+.. py:method:: smooth_dihedral_face_nodes(zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.SmoothDihedralFaceNodesParams) -> ansys.meshing.prime.params.primestructs.SmoothDihedralFaceNodesResults
+
+   Perform a smoothing operation to eliminate sharp corners at locations where the input face zonelets intersect.
+
+
+   :param zonelets: List of input face zonelet ids.
+   :type zonelets: Iterable[int]
+   :param params: Parameters to control the smoothing operation.
+   :type params: SmoothDihedralFaceNodesParams
+
+   :returns: Returns a SmoothDihedralFaceNodesResults.
+   :rtype: SmoothDihedralFaceNodesResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.smooth_dihedral_face_nodes(zonelets, params)
+
+
+.. py:method:: stretch_free_boundaries(face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.StretchFreeBoundariesParams) -> ansys.meshing.prime.params.primestructs.StretchFreeBoundariesResults
+
+   Stretch free boundaries of each zonelet.
+
+
+   :param face_zonelet_ids: Ids of face zonelets.
+   :type face_zonelet_ids: Iterable[int]
+   :param params: Parameters to control stretch free boundaries operation.
+   :type params: StretchFreeBoundariesParams
+
+   :returns: Returns the StretchFreeBoundariesResults.
+   :rtype: StretchFreeBoundariesResults
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.stretch_free_boundaries(face_zonelet_ids, params)
+
+
+.. py:method:: triangulate_face_zonelets(face_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.TriangulateParams) -> ansys.meshing.prime.params.primestructs.TriangulateResults
+
+   Split faces in zonelets to get triangular faces.
+
+
+   :param face_zonelet_ids: Ids of face zonelets.
+   :type face_zonelet_ids: Iterable[int]
+   :param params: Parameters to control the split operation.
+   :type params: TriangulateParams
+
+   :returns: Returns the TriangulateResults.
+   :rtype: TriangulateResults
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+   .. rubric:: Examples
+
+   >>> result = surf_utils.triangulate_face_zonelets(face_zonelet_ids, params)
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AddThicknessParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.AddThicknessParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, thickness: float = None, reverse_face_normal: bool = None, suggested_part_name: str = None, fix_intersections: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to add thickness for a given plane.
+
+   :param model: Model to create a ``AddThicknessParams`` object with default parameters.
+   :type model: Model
+   :param thickness: To assign the offset distance of inflation.
+   :type thickness: float, optional
+   :param reverse_face_normal: To assign the direction of inflation.
+   :type reverse_face_normal: bool, optional
+   :param suggested_part_name: Suggested part name for created patching surfaces.
+   :type suggested_part_name: str, optional
+   :param fix_intersections: Fix intersections in concave regions.
+   :type fix_intersections: bool, optional
+   :param json_data: JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> add_thickness_params = prime.AddThicknessParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: AddThicknessParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~fix_intersections`
+            - Fix intersections in concave regions.
+          * - :py:attr:`~reverse_face_normal`
+            - To assign the direction of inflation.
+          * - :py:attr:`~suggested_part_name`
+            - Suggested part name for created patching surfaces.
+          * - :py:attr:`~thickness`
+            - To assign the offset distance of inflation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``AddThicknessParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``AddThicknessParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import AddThicknessParams
+
+Property detail
+---------------
+
+.. py:property:: fix_intersections
+   :type: bool
+
+
+   Fix intersections in concave regions.
+
+.. py:property:: reverse_face_normal
+   :type: bool
+
+
+   To assign the direction of inflation.
+
+.. py:property:: suggested_part_name
+   :type: str
+
+
+   Suggested part name for created patching surfaces.
+
+.. py:property:: thickness
+   :type: float
+
+
+   To assign the offset distance of inflation.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``AddThicknessParams`` object.
+
+   .. rubric:: Examples
+
+   >>> AddThicknessParams.print_default()
+
+
+.. py:method:: set_default(thickness: float = None, reverse_face_normal: bool = None, suggested_part_name: str = None, fix_intersections: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``AddThicknessParams`` object.
+
+   :param thickness: To assign the offset distance of inflation.
+   :type thickness: float, optional
+   :param reverse_face_normal: To assign the direction of inflation.
+   :type reverse_face_normal: bool, optional
+   :param suggested_part_name: Suggested part name for created patching surfaces.
+   :type suggested_part_name: str, optional
+   :param fix_intersections: Fix intersections in concave regions.
+   :type fix_intersections: bool, optional
+
+
+
+
+
+
+
+.. vale on

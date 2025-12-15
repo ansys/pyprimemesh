@@ -1,0 +1,258 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BoundaryFittedSplineParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.igastructs.BoundaryFittedSplineParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, degree_u: int = None, degree_v: int = None, degree_w: int = None, refinement_fraction_u: float = None, refinement_fraction_v: float = None, refinement_fraction_w: float = None, control_points_count_u: int = None, control_points_count_v: int = None, control_points_count_w: int = None, n_refine: int = None, control_point_selection_type: ControlPointSelection = None, json_data: dict = None, **kwargs)
+
+
+
+   Boundary fitted spline fitting parameters.
+
+   :param model: Model to create a ``BoundaryFittedSplineParams`` object with default parameters.
+   :type model: Model
+   :param degree_u: Degree of spline in u direction.
+   :type degree_u: int, optional
+   :param degree_v: Degree of spline in v direction.
+   :type degree_v: int, optional
+   :param degree_w: Degree of spline in w direction.
+   :type degree_w: int, optional
+   :param refinement_fraction_u: Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
+   :type refinement_fraction_u: float, optional
+   :param refinement_fraction_v: Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
+   :type refinement_fraction_v: float, optional
+   :param refinement_fraction_w: Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
+   :type refinement_fraction_w: float, optional
+   :param control_points_count_u: Spline control points count in U direction. Used in manual control points selection mode.
+   :type control_points_count_u: int, optional
+   :param control_points_count_v: Spline control points count in V direction. Used in manual control points selection mode.
+   :type control_points_count_v: int, optional
+   :param control_points_count_w: Spline control points count in W direction. Used in manual control points selection mode.
+   :type control_points_count_w: int, optional
+   :param n_refine: Spline refinement level for rendering.
+   :type n_refine: int, optional
+   :param control_point_selection_type: Spline control points selection type.
+   :type control_point_selection_type: ControlPointSelection, optional
+   :param json_data: JSON dictionary to create a ``BoundaryFittedSplineParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> boundary_fitted_spline_params = prime.BoundaryFittedSplineParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: BoundaryFittedSplineParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~control_point_selection_type`
+            - Spline control points selection type.
+          * - :py:attr:`~control_points_count_u`
+            - Spline control points count in U direction. Used in manual control points selection mode.
+          * - :py:attr:`~control_points_count_v`
+            - Spline control points count in V direction. Used in manual control points selection mode.
+          * - :py:attr:`~control_points_count_w`
+            - Spline control points count in W direction. Used in manual control points selection mode.
+          * - :py:attr:`~degree_u`
+            - Degree of spline in u direction.
+          * - :py:attr:`~degree_v`
+            - Degree of spline in v direction.
+          * - :py:attr:`~degree_w`
+            - Degree of spline in w direction.
+          * - :py:attr:`~n_refine`
+            - Spline refinement level for rendering.
+          * - :py:attr:`~refinement_fraction_u`
+            - Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
+          * - :py:attr:`~refinement_fraction_v`
+            - Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
+          * - :py:attr:`~refinement_fraction_w`
+            - Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``BoundaryFittedSplineParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``BoundaryFittedSplineParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.igastructs import BoundaryFittedSplineParams
+
+Property detail
+---------------
+
+.. py:property:: control_point_selection_type
+   :type: ControlPointSelection
+
+
+   Spline control points selection type.
+
+.. py:property:: control_points_count_u
+   :type: int
+
+
+   Spline control points count in U direction. Used in manual control points selection mode.
+
+.. py:property:: control_points_count_v
+   :type: int
+
+
+   Spline control points count in V direction. Used in manual control points selection mode.
+
+.. py:property:: control_points_count_w
+   :type: int
+
+
+   Spline control points count in W direction. Used in manual control points selection mode.
+
+.. py:property:: degree_u
+   :type: int
+
+
+   Degree of spline in u direction.
+
+.. py:property:: degree_v
+   :type: int
+
+
+   Degree of spline in v direction.
+
+.. py:property:: degree_w
+   :type: int
+
+
+   Degree of spline in w direction.
+
+.. py:property:: n_refine
+   :type: int
+
+
+   Spline refinement level for rendering.
+
+.. py:property:: refinement_fraction_u
+   :type: float
+
+
+   Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
+
+.. py:property:: refinement_fraction_v
+   :type: float
+
+
+   Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
+
+.. py:property:: refinement_fraction_w
+   :type: float
+
+
+   Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``BoundaryFittedSplineParams`` object.
+
+   .. rubric:: Examples
+
+   >>> BoundaryFittedSplineParams.print_default()
+
+
+.. py:method:: set_default(degree_u: int = None, degree_v: int = None, degree_w: int = None, refinement_fraction_u: float = None, refinement_fraction_v: float = None, refinement_fraction_w: float = None, control_points_count_u: int = None, control_points_count_v: int = None, control_points_count_w: int = None, n_refine: int = None, control_point_selection_type: ControlPointSelection = None)
+   :staticmethod:
+
+
+   Set the default values of the ``BoundaryFittedSplineParams`` object.
+
+   :param degree_u: Degree of spline in u direction.
+   :type degree_u: int, optional
+   :param degree_v: Degree of spline in v direction.
+   :type degree_v: int, optional
+   :param degree_w: Degree of spline in w direction.
+   :type degree_w: int, optional
+   :param refinement_fraction_u: Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
+   :type refinement_fraction_u: float, optional
+   :param refinement_fraction_v: Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
+   :type refinement_fraction_v: float, optional
+   :param refinement_fraction_w: Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
+   :type refinement_fraction_w: float, optional
+   :param control_points_count_u: Spline control points count in U direction. Used in manual control points selection mode.
+   :type control_points_count_u: int, optional
+   :param control_points_count_v: Spline control points count in V direction. Used in manual control points selection mode.
+   :type control_points_count_v: int, optional
+   :param control_points_count_w: Spline control points count in W direction. Used in manual control points selection mode.
+   :type control_points_count_w: int, optional
+   :param n_refine: Spline refinement level for rendering.
+   :type n_refine: int, optional
+   :param control_point_selection_type: Spline control points selection type.
+   :type control_point_selection_type: ControlPointSelection, optional
+
+
+
+
+
+
+
+.. vale on

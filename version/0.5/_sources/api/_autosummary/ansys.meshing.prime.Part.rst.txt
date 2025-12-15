@@ -1,0 +1,85 @@
+.. vale off
+
+Part
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Part
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Part.add_labels_on_topo_entities
+      Part.add_labels_on_zonelets
+      Part.add_topo_entities_to_zone
+      Part.add_volumes_to_zone
+      Part.add_zonelets_to_zone
+      Part.compute_closed_volumes
+      Part.compute_topo_volumes
+      Part.delete_topo_entities
+      Part.delete_volumes
+      Part.delete_zonelets
+      Part.extract_topo_volumes
+      Part.extract_volumes
+      Part.get_adjacent_face_zonelets_of_face_zonelets
+      Part.get_adjacent_volumes_of_volumes
+      Part.get_cell_zonelets
+      Part.get_edge_zonelets
+      Part.get_edge_zonelets_of_label_name_pattern
+      Part.get_edge_zones
+      Part.get_face_zone_of_zonelet
+      Part.get_face_zonelets
+      Part.get_face_zonelets_of_label_name_pattern
+      Part.get_face_zonelets_of_volumes
+      Part.get_face_zonelets_of_zone_name_pattern
+      Part.get_face_zones
+      Part.get_face_zones_of_name_pattern
+      Part.get_labels
+      Part.get_name
+      Part.get_splines
+      Part.get_summary
+      Part.get_topo_edges
+      Part.get_topo_edges_of_label_name_pattern
+      Part.get_topo_faces
+      Part.get_topo_faces_of_label_name_pattern
+      Part.get_topo_faces_of_zone_name_pattern
+      Part.get_topo_volumes
+      Part.get_unstructured_spline_surface
+      Part.get_volume_zone_of_volume
+      Part.get_volume_zones
+      Part.get_volume_zones_of_name_pattern
+      Part.get_volumes
+      Part.get_volumes_of_face_zonelet
+      Part.get_volumes_of_zone_name_pattern
+      Part.merge_volumes
+      Part.merge_zonelets
+      Part.remove_labels_from_topo_entities
+      Part.remove_labels_from_zonelets
+      Part.remove_zone_on_topo_entities
+      Part.remove_zone_on_volumes
+      Part.remove_zone_on_zonelets
+      Part.set_suggested_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      Part.id
+      Part.name
+      Part.print_id
+      Part.print_mesh
+   
+   
+
+.. vale on

@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+SplineRefinementType
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplineRefinementType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      SplineRefinementType.H
+      
+      
+      SplineRefinementType.P
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SplineRefinementType
+
+    ansys.meshing.prime.SplineRefinementType
+
+.. vale on

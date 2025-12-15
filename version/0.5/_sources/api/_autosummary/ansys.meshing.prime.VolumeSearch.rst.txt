@@ -1,0 +1,26 @@
+.. vale off
+
+VolumeSearch
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeSearch
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeSearch.get_volume_quality_summary
+   
+   
+
+   
+   
+   
+
+.. vale on

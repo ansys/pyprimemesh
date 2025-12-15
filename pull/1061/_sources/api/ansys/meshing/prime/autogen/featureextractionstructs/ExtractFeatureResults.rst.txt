@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ExtractFeatureResults`
+==============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.featureextractionstructs.ExtractFeatureResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, processing_time: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, new_edge_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Result of edge zonelet extraction by angle.
+
+   :param model: Model to create a ``ExtractFeatureResults`` object with default parameters.
+   :type model: Model
+   :param processing_time: Time taken for edge extraction.
+   :type processing_time: float, optional
+   :param error_code: Error code returned by edge extraction function.
+   :type error_code: ErrorCode, optional
+   :param new_edge_zonelets: Ids of new edge zonelets extracted.
+   :type new_edge_zonelets: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``ExtractFeatureResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> extract_feature_results = prime.ExtractFeatureResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ExtractFeatureResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code returned by edge extraction function.
+          * - :py:attr:`~new_edge_zonelets`
+            - Ids of new edge zonelets extracted.
+          * - :py:attr:`~processing_time`
+            - Time taken for edge extraction.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ExtractFeatureResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ExtractFeatureResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.featureextractionstructs import ExtractFeatureResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code returned by edge extraction function.
+
+.. py:property:: new_edge_zonelets
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Ids of new edge zonelets extracted.
+
+.. py:property:: processing_time
+   :type: float
+
+
+   Time taken for edge extraction.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ExtractFeatureResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ExtractFeatureResults.print_default()
+
+
+.. py:method:: set_default(processing_time: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, new_edge_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ExtractFeatureResults`` object.
+
+   :param processing_time: Time taken for edge extraction.
+   :type processing_time: float, optional
+   :param error_code: Error code returned by edge extraction function.
+   :type error_code: ErrorCode, optional
+   :param new_edge_zonelets: Ids of new edge zonelets extracted.
+   :type new_edge_zonelets: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

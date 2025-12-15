@@ -1,0 +1,116 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SearchBySelfIntersectionParams`
+=======================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surfacesearchstructs.SearchBySelfIntersectionParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to search by face element intersection.
+
+   :param model: Model to create a ``SearchBySelfIntersectionParams`` object with default parameters.
+   :type model: Model
+   :param json_data: JSON dictionary to create a ``SearchBySelfIntersectionParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> search_by_self_intersection_params = prime.SearchBySelfIntersectionParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SearchBySelfIntersectionParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SearchBySelfIntersectionParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SearchBySelfIntersectionParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surfacesearchstructs import SearchBySelfIntersectionParams
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SearchBySelfIntersectionParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SearchBySelfIntersectionParams.print_default()
+
+
+.. py:method:: set_default()
+   :staticmethod:
+
+
+   Set the default values of the ``SearchBySelfIntersectionParams`` object.
+
+
+
+
+
+
+
+
+
+.. vale on

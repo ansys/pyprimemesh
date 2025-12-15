@@ -1,0 +1,6 @@
+split\_and\_collapse\_on\_zonelets
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: CollapseTool.split_and_collapse_on_zonelets

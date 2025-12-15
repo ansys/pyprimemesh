@@ -1,0 +1,154 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SoftSizingParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.SoftSizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, max: float = None, growth_rate: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Size field computed using soft size control enables you to set the maximum size on the scoped zonelets .
+
+   When the soft sizing is computed for edges or faces, the size will be affected by size computed using other controls.
+   The minimum size on the zonelet will be determined based on the influence of other size controls,
+   else a uniform size will be maintained.
+
+   :param model: Model to create a ``SoftSizingParams`` object with default parameters.
+   :type model: Model
+   :param max: Maximum size used for computing edge and face size using soft size control.
+   :type max: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+   :param json_data: JSON dictionary to create a ``SoftSizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> soft_sizing_params = prime.SoftSizingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SoftSizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~growth_rate`
+            - Growth rate used for transitioning from one element size to neighbor element size.
+          * - :py:attr:`~max`
+            - Maximum size used for computing edge and face size using soft size control.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SoftSizingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SoftSizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SoftSizingParams
+
+Property detail
+---------------
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   Growth rate used for transitioning from one element size to neighbor element size.
+
+.. py:property:: max
+   :type: float
+
+
+   Maximum size used for computing edge and face size using soft size control.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SoftSizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SoftSizingParams.print_default()
+
+
+.. py:method:: set_default(max: float = None, growth_rate: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SoftSizingParams`` object.
+
+   :param max: Maximum size used for computing edge and face size using soft size control.
+   :type max: float, optional
+   :param growth_rate: Growth rate used for transitioning from one element size to neighbor element size.
+   :type growth_rate: float, optional
+
+
+
+
+
+
+
+.. vale on

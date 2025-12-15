@@ -1,0 +1,31 @@
+.. vale off
+
+VolumeScope
+===========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoclass:: VolumeScope
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeScope.get_scope_definition
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumeScope
+
+    ansys.meshing.prime.lucid.VolumeScope
+
+.. vale on

@@ -1,0 +1,287 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`WrapperControl`
+=======================
+
+
+.. py:class:: ansys.meshing.prime.WrapperControl(model: ansys.meshing.prime.internals.comm_manager.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   Wrapper Control to describe all parameters and controls used for wrapping..
+
+   :param model: Server model to create WrapperControl object.
+   :type model: Model
+   :param id: Id of the WrapperControl.
+   :type id: int
+   :param object_id: Object id of the WrapperControl.
+   :type object_id: int
+   :param name: Name of the WrapperControl.
+   :type name: str
+
+
+
+
+
+.. py:currentmodule:: WrapperControl
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_geometry_scope`
+            - Gets geometry scope of wrapper control.
+          * - :py:attr:`~get_live_material_points`
+            - Gets list of material point names.
+          * - :py:attr:`~set_contact_preventions`
+            - Set contact preventions to the wrapper control.
+          * - :py:attr:`~set_feature_recoveries`
+            - Set feature recoveries to the wrapper control.
+          * - :py:attr:`~set_geometry_scope`
+            - Sets geometry scope to given scope.
+          * - :py:attr:`~set_leak_preventions`
+            - Set leak preventions to the wrapper control.
+          * - :py:attr:`~set_live_material_points`
+            - Set live material points to the wrapper control.
+          * - :py:attr:`~set_shadow_geometry_scope`
+            - Sets shadow geometry scope to given scope.
+          * - :py:attr:`~set_suggested_name`
+            - Set the unique name for the wrapper control based on a suggested name.
+          * - :py:attr:`~set_suggested_wrapper_part_name`
+            - Sets the given name for the created wrapper part  after wrapping with the wrapper control.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of WrapperControl.
+          * - :py:attr:`~name`
+            - Get the name of the wrapper control.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - Get a representation of the class in string format.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import WrapperControl
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of WrapperControl.
+
+.. py:property:: name
+
+   Get the name of the wrapper control.
+
+   :returns: Name of the wrapper control.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> print(wrapper_control.name)
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+   Get a representation of the class in string format.
+
+   :returns: Class data in string format.
+   :rtype: str
+
+
+.. py:method:: get_geometry_scope() -> ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+   Gets geometry scope of wrapper control.
+
+
+   :returns: Returns ScopeDefinition to scope entities from wrapper control.
+   :rtype: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> geom_scope = wrapper_control.get_geometry_scope()
+
+
+.. py:method:: get_live_material_points() -> List[str]
+
+   Gets list of material point names.
+
+
+   :returns: Returns the list of material point names.
+   :rtype: List[str]
+
+   .. rubric:: Examples
+
+   >>> live_material_point_names = wrapper_control.get_live_material_points()
+
+
+.. py:method:: set_contact_preventions(params: List[ansys.meshing.prime.params.primestructs.ContactPreventionParams]) -> ansys.meshing.prime.params.primestructs.SetContactPreventionsResults
+
+   Set contact preventions to the wrapper control.
+
+
+   :param params: List of contact prevention parameters.
+   :type params: ContactPreventionParamsArray
+
+   :returns: Return the set contact prevention results.
+   :rtype: SetContactPreventionsResults
+
+   .. rubric:: Examples
+
+   >>> set_cont_prev_results = wrapper_control.set_contact_preventions([params])
+
+
+.. py:method:: set_feature_recoveries(params: List[ansys.meshing.prime.params.primestructs.FeatureRecoveryParams]) -> ansys.meshing.prime.params.primestructs.SetFeatureRecoveriesResults
+
+   Set feature recoveries to the wrapper control.
+
+
+   :param params: List of feature recovery parameters.
+   :type params: FeatureRecoveryParamsArray
+
+   :returns: Return the set feature recoveries results.
+   :rtype: SetFeatureRecoveriesResults
+
+   .. rubric:: Examples
+
+   >>> set_feat_rec_results = wrapper_control.set_feature_recoveries([params])
+
+
+.. py:method:: set_geometry_scope(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition)
+
+   Sets geometry scope to given scope.
+
+
+   :param scope: ScopeDefinition to scope entities for wrapping.
+   :type scope: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> wrapper_control.set_geometry_scope(scope)
+
+
+.. py:method:: set_leak_preventions(params: List[ansys.meshing.prime.params.primestructs.LeakPreventionParams]) -> ansys.meshing.prime.params.primestructs.SetLeakPreventionsResults
+
+   Set leak preventions to the wrapper control.
+
+
+   :param params: List of leak prevention parameters.
+   :type params: LeakPreventionParamsArray
+
+   :returns: Return the set leak prevention results.
+   :rtype: SetLeakPreventionsResults
+
+   .. rubric:: Examples
+
+   >>> set_leak_prev_results = wrapper_control.set_leak_preventions([params])
+
+
+.. py:method:: set_live_material_points(material_point_names: List[str])
+
+   Set live material points to the wrapper control.
+
+
+   :param material_point_names: List of live material points.
+   :type material_point_names: List[str]
+
+   .. rubric:: Examples
+
+   >>> wrapper_control.set_live_material_points(["Fluid1"])
+
+
+.. py:method:: set_shadow_geometry_scope(scope: ansys.meshing.prime.params.primestructs.ScopeDefinition)
+
+   Sets shadow geometry scope to given scope.
+
+
+   :param scope: ScopeDefinition to scope shadow entities for wrapping.
+   :type scope: ScopeDefinition
+
+   .. rubric:: Examples
+
+   >>> wrapper_control.set_shadow_geometry_scope(scope)
+
+
+.. py:method:: set_suggested_name(name: str) -> ansys.meshing.prime.autogen.commonstructs.SetNameResults
+
+   Set the unique name for the wrapper control based on a suggested name.
+
+   :param name: Suggested name for the wrapper control.
+   :type name: str
+
+   :returns: Newly assigned name of the wrapper control.
+   :rtype: SetNameResults
+
+   .. rubric:: Examples
+
+   >>> wrapper_control.set_suggested_name("wrapper_control1")
+
+
+.. py:method:: set_suggested_wrapper_part_name(name: str)
+
+   Sets the given name for the created wrapper part  after wrapping with the wrapper control.
+
+
+   :param name: Suggested name of the wrapper part to be created.
+   :type name: str
+
+   .. rubric:: Examples
+
+   >>> wrapper_control.set_suggested_wrapper_part_name("wrap")
+
+
+
+
+
+
+
+.. vale on

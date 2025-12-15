@@ -1,0 +1,133 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``color_by_type.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.graphics.widgets.color_by_type
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: color_by_type
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.widgets.color_by_type.ColorByTypeWidget`
+            - Initializes the color by the type button widget.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.graphics.widgets.color_by_type.ColorByType`
+            - Contains the zone types to display.
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~color_matrix`
+            - 
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ColorByTypeWidget</api/ansys/meshing/prime/graphics/widgets/color_by_type/ColorByTypeWidget>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> ColorByType</api/ansys/meshing/prime/graphics/widgets/color_by_type/ColorByType>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for ColorByTypeWidget.
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: color_matrix
+
+
+
+
+.. vale on

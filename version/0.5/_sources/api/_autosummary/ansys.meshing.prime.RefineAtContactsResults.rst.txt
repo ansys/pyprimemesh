@@ -1,0 +1,36 @@
+.. vale off
+
+RefineAtContactsResults
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RefineAtContactsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RefineAtContactsResults.print_default
+      RefineAtContactsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RefineAtContactsResults.error_code
+      RefineAtContactsResults.n_refined
+      RefineAtContactsResults.size_field_id
+   
+   
+
+.. vale on

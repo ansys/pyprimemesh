@@ -1,0 +1,158 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ConnectFacesParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.ConnectFacesParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, constant_mesh_size: float = None, absolute_tolerance: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for connect faces operation.
+
+   :param model: Model to create a ``ConnectFacesParams`` object with default parameters.
+   :type model: Model
+   :param constant_mesh_size: Constant size used for surface meshing.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type constant_mesh_size: float, optional
+   :param absolute_tolerance: Absolute distance tolerance between edges or faces for connect faces operation.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type absolute_tolerance: float, optional
+   :param json_data: JSON dictionary to create a ``ConnectFacesParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> connect_faces_params = prime.ConnectFacesParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ConnectFacesParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~absolute_tolerance`
+            - Absolute distance tolerance between edges or faces for connect faces operation.
+          * - :py:attr:`~constant_mesh_size`
+            - Constant size used for surface meshing.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ConnectFacesParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ConnectFacesParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ConnectFacesParams
+
+Property detail
+---------------
+
+.. py:property:: absolute_tolerance
+   :type: float
+
+
+   Absolute distance tolerance between edges or faces for connect faces operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: constant_mesh_size
+   :type: float
+
+
+   Constant size used for surface meshing.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ConnectFacesParams`` object.
+
+   .. rubric:: Examples
+
+   >>> ConnectFacesParams.print_default()
+
+
+.. py:method:: set_default(constant_mesh_size: float = None, absolute_tolerance: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ConnectFacesParams`` object.
+
+   :param constant_mesh_size: Constant size used for surface meshing.
+   :type constant_mesh_size: float, optional
+   :param absolute_tolerance: Absolute distance tolerance between edges or faces for connect faces operation.
+   :type absolute_tolerance: float, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``scope.py`` module
+=======================
+
+.. py:module:: ansys.meshing.prime.lucid.scope
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: scope
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.scope.SurfaceScope`
+            - SurfaceScope is one of the classes in Lucid API.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.scope.VolumeScope`
+            - VolumeScope is one of the classes in Lucid API.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SurfaceScope</api/ansys/meshing/prime/lucid/scope/SurfaceScope>
+    <span class="nf nf-cod-symbol_class"></span> VolumeScope</api/ansys/meshing/prime/lucid/scope/VolumeScope>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for Lucid Scope for operation on surfaces functionality.
+
+
+
+
+
+
+
+
+
+.. vale on

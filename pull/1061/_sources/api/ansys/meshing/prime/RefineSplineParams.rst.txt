@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`RefineSplineParams`
+===========================
+
+
+.. py:class:: ansys.meshing.prime.RefineSplineParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, refine_flag_u: bool = None, refine_flag_v: bool = None, refine_flag_w: bool = None, spline_refinement_type: SplineRefinementType = None, json_data: dict = None, **kwargs)
+
+
+
+   Spline refinement parameters.
+
+   :param model: Model to create a ``RefineSplineParams`` object with default parameters.
+   :type model: Model
+   :param refine_flag_u: Indicates whether refinement is applied in u direction.
+   :type refine_flag_u: bool, optional
+   :param refine_flag_v: Indicates whether refinement is applied in v direction.
+   :type refine_flag_v: bool, optional
+   :param refine_flag_w: Indicates whether refinement is applied in w direction.
+   :type refine_flag_w: bool, optional
+   :param spline_refinement_type: Type of spline refinement. Currently, supports h-refinement and p-refinement.
+   :type spline_refinement_type: SplineRefinementType, optional
+   :param json_data: JSON dictionary to create a ``RefineSplineParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> refine_spline_params = prime.RefineSplineParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: RefineSplineParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~refine_flag_u`
+            - Indicates whether refinement is applied in u direction.
+          * - :py:attr:`~refine_flag_v`
+            - Indicates whether refinement is applied in v direction.
+          * - :py:attr:`~refine_flag_w`
+            - Indicates whether refinement is applied in w direction.
+          * - :py:attr:`~spline_refinement_type`
+            - Type of spline refinement. Currently, supports h-refinement and p-refinement.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``RefineSplineParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``RefineSplineParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import RefineSplineParams
+
+Property detail
+---------------
+
+.. py:property:: refine_flag_u
+   :type: bool
+
+
+   Indicates whether refinement is applied in u direction.
+
+.. py:property:: refine_flag_v
+   :type: bool
+
+
+   Indicates whether refinement is applied in v direction.
+
+.. py:property:: refine_flag_w
+   :type: bool
+
+
+   Indicates whether refinement is applied in w direction.
+
+.. py:property:: spline_refinement_type
+   :type: SplineRefinementType
+
+
+   Type of spline refinement. Currently, supports h-refinement and p-refinement.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``RefineSplineParams`` object.
+
+   .. rubric:: Examples
+
+   >>> RefineSplineParams.print_default()
+
+
+.. py:method:: set_default(refine_flag_u: bool = None, refine_flag_v: bool = None, refine_flag_w: bool = None, spline_refinement_type: SplineRefinementType = None)
+   :staticmethod:
+
+
+   Set the default values of the ``RefineSplineParams`` object.
+
+   :param refine_flag_u: Indicates whether refinement is applied in u direction.
+   :type refine_flag_u: bool, optional
+   :param refine_flag_v: Indicates whether refinement is applied in v direction.
+   :type refine_flag_v: bool, optional
+   :param refine_flag_w: Indicates whether refinement is applied in w direction.
+   :type refine_flag_w: bool, optional
+   :param spline_refinement_type: Type of spline refinement. Currently, supports h-refinement and p-refinement.
+   :type spline_refinement_type: SplineRefinementType, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,318 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FuseParams`
+===================
+
+
+.. py:class:: ansys.meshing.prime.FuseParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, use_absolute_tolerance: bool = None, gap_tolerance: float = None, side_tolerance: float = None, check_interior: bool = None, fuse_option: FuseOption = None, check_orientation: bool = None, dump_mesh: bool = None, local_remesh: bool = None, n_layers: int = None, separate: bool = None, angle: float = None, fuse_edges_only: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for fuse operation.
+
+   :param model: Model to create a ``FuseParams`` object with default parameters.
+   :type model: Model
+   :param use_absolute_tolerance: Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type use_absolute_tolerance: bool, optional
+   :param gap_tolerance: Gap tolerance between faces to be fused. The default value is 0.05.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type gap_tolerance: float, optional
+   :param side_tolerance: Side tolerance for fusing to the side edges.
+
+                          **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type side_tolerance: float, optional
+   :param check_interior: Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+                          **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type check_interior: bool, optional
+   :param fuse_option: Option for treatment of fused surfaces. The default value is None.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fuse_option: FuseOption, optional
+   :param check_orientation: Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
+
+                             **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type check_orientation: bool, optional
+   :param dump_mesh: Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
+
+                     **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type dump_mesh: bool, optional
+   :param local_remesh: Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
+
+                        **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type local_remesh: bool, optional
+   :param n_layers: Face layers around region to be fused. The default value is 2.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_layers: int, optional
+   :param separate: Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type separate: bool, optional
+   :param angle: Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
+
+                 **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type angle: float, optional
+   :param fuse_edges_only: Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+
+                           **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fuse_edges_only: bool, optional
+   :param json_data: JSON dictionary to create a ``FuseParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> fuse_params = prime.FuseParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FuseParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~angle`
+            - Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
+          * - :py:attr:`~check_interior`
+            - Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
+          * - :py:attr:`~check_orientation`
+            - Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
+          * - :py:attr:`~dump_mesh`
+            - Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
+          * - :py:attr:`~fuse_edges_only`
+            - Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+          * - :py:attr:`~fuse_option`
+            - Option for treatment of fused surfaces. The default value is None.
+          * - :py:attr:`~gap_tolerance`
+            - Gap tolerance between faces to be fused. The default value is 0.05.
+          * - :py:attr:`~local_remesh`
+            - Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
+          * - :py:attr:`~n_layers`
+            - Face layers around region to be fused. The default value is 2.
+          * - :py:attr:`~separate`
+            - Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
+          * - :py:attr:`~side_tolerance`
+            - Side tolerance for fusing to the side edges.
+          * - :py:attr:`~use_absolute_tolerance`
+            - Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FuseParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FuseParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FuseParams
+
+Property detail
+---------------
+
+.. py:property:: angle
+   :type: float
+
+
+   Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: check_interior
+   :type: bool
+
+
+   Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: check_orientation
+   :type: bool
+
+
+   Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: dump_mesh
+   :type: bool
+
+
+   Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fuse_edges_only
+   :type: bool
+
+
+   Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fuse_option
+   :type: FuseOption
+
+
+   Option for treatment of fused surfaces. The default value is None.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: gap_tolerance
+   :type: float
+
+
+   Gap tolerance between faces to be fused. The default value is 0.05.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: local_remesh
+   :type: bool
+
+
+   Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_layers
+   :type: int
+
+
+   Face layers around region to be fused. The default value is 2.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: separate
+   :type: bool
+
+
+   Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: side_tolerance
+   :type: float
+
+
+   Side tolerance for fusing to the side edges.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: use_absolute_tolerance
+   :type: bool
+
+
+   Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FuseParams`` object.
+
+   .. rubric:: Examples
+
+   >>> FuseParams.print_default()
+
+
+.. py:method:: set_default(use_absolute_tolerance: bool = None, gap_tolerance: float = None, side_tolerance: float = None, check_interior: bool = None, fuse_option: FuseOption = None, check_orientation: bool = None, dump_mesh: bool = None, local_remesh: bool = None, n_layers: int = None, separate: bool = None, angle: float = None, fuse_edges_only: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FuseParams`` object.
+
+   :param use_absolute_tolerance: Option to use absolute tolerance value. The default value is false. When use absolute tolerance is true, gap tolerance and side tolerance provided are absolute values.
+   :type use_absolute_tolerance: bool, optional
+   :param gap_tolerance: Gap tolerance between faces to be fused. The default value is 0.05.
+   :type gap_tolerance: float, optional
+   :param side_tolerance: Side tolerance for fusing to the side edges.
+   :type side_tolerance: float, optional
+   :param check_interior: Option to check the interior nodes. The default value is false. When check interior is true, checks all nodes including boundary edge nodes and nodes inside the faces.
+   :type check_interior: bool, optional
+   :param fuse_option: Option for treatment of fused surfaces. The default value is None.
+   :type fuse_option: FuseOption, optional
+   :param check_orientation: Option to check the face normal orientation during fuse operation. The default value is true. When check orientation is true, face normal orientation is checked during fuse operation.
+   :type check_orientation: bool, optional
+   :param dump_mesh: Option to save mesh for debugging. The default value is false. When dump mesh is true, mesh is saved for debugging.
+   :type dump_mesh: bool, optional
+   :param local_remesh: Option to remesh the fused region. The default value is true. When local remesh is true, local remeshing of fuse region is performed.
+   :type local_remesh: bool, optional
+   :param n_layers: Face layers around region to be fused. The default value is 2.
+   :type n_layers: int, optional
+   :param separate: Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
+   :type separate: bool, optional
+   :param angle: Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
+   :type angle: float, optional
+   :param fuse_edges_only: Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+   :type fuse_edges_only: bool, optional
+
+
+
+
+
+
+
+.. vale on

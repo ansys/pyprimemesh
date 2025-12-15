@@ -1,0 +1,99 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``utils.py`` module
+=======================
+
+.. py:module:: ansys.meshing.prime.lucid.utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: utils
+.. tab-set::
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.utils.check_name_pattern`
+            - Check several patterns in one string.
+
+
+          * - :py:obj:`~ansys.meshing.prime.lucid.utils.match_pattern`
+            - Pattern matching function for strings.
+
+
+
+
+
+
+.. .. .. 
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-function_variant"></span> check_name_pattern</api/ansys/meshing/prime/lucid/utils/check_name_pattern>
+    <span class="nf nf-md-function_variant"></span> match_pattern</api/ansys/meshing/prime/lucid/utils/match_pattern>
+
+
+
+
+
+
+Description
+-----------
+
+Util functions for lucid modules.
+
+
+
+
+
+
+
+
+
+.. vale on

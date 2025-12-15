@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`BCPairType`
+===================
+
+
+.. py:class:: ansys.meshing.prime.autogen.morpherstructs.BCPairType
+
+
+
+   Option to specify boundary condition pair type.
+
+
+
+
+.. py:currentmodule:: BCPairType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~EDGE`
+            - Option to specify edge zonelet as boundary condition pair.
+          * - :py:attr:`~FACE`
+            - Option to specify face zonelet as boundary condition pair.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.morpherstructs import BCPairType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: EDGE
+   :value: 2
+
+
+   Option to specify edge zonelet as boundary condition pair.
+
+.. py:attribute:: FACE
+   :value: 1
+
+
+   Option to specify face zonelet as boundary condition pair.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoQuadMesherResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using AutoQuadMesherResults.print_default
+
+   ansys.meshing.prime.AutoQuadMesherResults.print_default

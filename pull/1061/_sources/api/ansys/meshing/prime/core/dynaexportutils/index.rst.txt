@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``dynaexportutils.py`` module
+=================================
+
+.. py:module:: ansys.meshing.prime.core.dynaexportutils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynaexportutils
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.dynaexportutils.DatabaseProcessor`
+            - Processes the part's simulation data and generates LS-DYNA cards for database keywords.
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.dynaexportutils.MaterialProcessor`
+            - Processes the material information.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DatabaseProcessor</api/ansys/meshing/prime/core/dynaexportutils/DatabaseProcessor>
+    <span class="nf nf-cod-symbol_class"></span> MaterialProcessor</api/ansys/meshing/prime/core/dynaexportutils/MaterialProcessor>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for LS-DYNA export utilities.
+
+
+
+
+
+
+
+
+
+.. vale on

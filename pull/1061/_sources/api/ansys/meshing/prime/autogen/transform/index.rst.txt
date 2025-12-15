@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``transform.py`` module
+===========================
+
+.. py:module:: ansys.meshing.prime.autogen.transform
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: transform
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.transform.Transform`
+            - Provides functionalities to initialize and manage transformation using transformation matrix.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Transform</api/ansys/meshing/prime/autogen/transform/Transform>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using WrapParams.print_default
+
+   ansys.meshing.prime.WrapParams.print_default

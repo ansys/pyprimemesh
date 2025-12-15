@@ -1,0 +1,56 @@
+.. vale off
+
+
+
+
+
+
+
+RefineTetMeshParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RefineTetMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      RefineTetMeshParams.print_default
+      RefineTetMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RefineTetMeshParams.nisr
+      
+      
+      RefineTetMeshParams.niss
+      
+      
+      RefineTetMeshParams.nist
+      
+      
+      RefineTetMeshParams.tolerance
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using RefineTetMeshParams
+
+    ansys.meshing.prime.RefineTetMeshParams
+
+.. vale on

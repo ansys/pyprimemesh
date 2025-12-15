@@ -1,0 +1,92 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``params`` package
+==========================
+
+.. py:module:: ansys.meshing.prime.params
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: params
+.. tab-set::
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.params.primestructs`
+            - Module for imports of autogen modules.
+
+
+
+
+
+
+
+
+
+
+.. .. .. 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> primestructs</api/ansys/meshing/prime/params/primestructs/index>
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Params module.
+
+
+
+
+
+
+
+.. vale on

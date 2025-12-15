@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumetricScaffolderParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.VolumetricScaffolderParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, absolute_dist_tol: float = None, only_check_exact_overlaps: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control delete shadowed topofaces operation.
+
+   :param model: Model to create a ``VolumetricScaffolderParams`` object with default parameters.
+   :type model: Model
+   :param absolute_dist_tol: Specify distance tolerance between overlapping faces.
+   :type absolute_dist_tol: float, optional
+   :param only_check_exact_overlaps: Check only for fully overlapping topofaces when true.
+   :type only_check_exact_overlaps: bool, optional
+   :param json_data: JSON dictionary to create a ``VolumetricScaffolderParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> volumetric_scaffolder_params = prime.VolumetricScaffolderParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VolumetricScaffolderParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~absolute_dist_tol`
+            - Specify distance tolerance between overlapping faces.
+          * - :py:attr:`~only_check_exact_overlaps`
+            - Check only for fully overlapping topofaces when true.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VolumetricScaffolderParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VolumetricScaffolderParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VolumetricScaffolderParams
+
+Property detail
+---------------
+
+.. py:property:: absolute_dist_tol
+   :type: float
+
+
+   Specify distance tolerance between overlapping faces.
+
+.. py:property:: only_check_exact_overlaps
+   :type: bool
+
+
+   Check only for fully overlapping topofaces when true.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VolumetricScaffolderParams`` object.
+
+   .. rubric:: Examples
+
+   >>> VolumetricScaffolderParams.print_default()
+
+
+.. py:method:: set_default(absolute_dist_tol: float = None, only_check_exact_overlaps: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VolumetricScaffolderParams`` object.
+
+   :param absolute_dist_tol: Specify distance tolerance between overlapping faces.
+   :type absolute_dist_tol: float, optional
+   :param only_check_exact_overlaps: Check only for fully overlapping topofaces when true.
+   :type only_check_exact_overlaps: bool, optional
+
+
+
+
+
+
+
+.. vale on

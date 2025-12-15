@@ -1,0 +1,45 @@
+.. vale off
+
+
+
+
+
+
+
+MaterialPointType
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MaterialPointType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      MaterialPointType.DEAD
+      
+      
+      MaterialPointType.LIVE
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MaterialPointType
+
+    ansys.meshing.prime.MaterialPointType
+
+.. vale on

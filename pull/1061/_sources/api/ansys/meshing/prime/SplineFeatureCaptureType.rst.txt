@@ -1,0 +1,86 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SplineFeatureCaptureType`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.SplineFeatureCaptureType
+
+
+
+   Options to capture features in spline.
+
+
+
+
+.. py:currentmodule:: SplineFeatureCaptureType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~BYANGLE`
+            - Uses angle for capturing features in spline.
+          * - :py:attr:`~BYEDGES`
+            - Use edges for capturing features in spline.
+          * - :py:attr:`~IGNORE`
+            - Ignores feature capture in spline.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SplineFeatureCaptureType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: BYANGLE
+   :value: 1
+
+
+   Uses angle for capturing features in spline.
+
+.. py:attribute:: BYEDGES
+   :value: 2
+
+
+   Use edges for capturing features in spline.
+
+.. py:attribute:: IGNORE
+   :value: 0
+
+
+   Ignores feature capture in spline.
+
+
+
+
+
+
+
+.. vale on

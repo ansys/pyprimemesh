@@ -1,0 +1,147 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MaterialProcessor`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.core.dynaexportutils.MaterialProcessor(model: ansys.meshing.prime.Model, sim_data: dict, card_format: str = 'SHORT')
+
+   Processes the material information.
+
+   Processes simulation data to generate LS-DYNA commands.
+
+   :param model: Model that the methods are to work on.
+   :type model: prime.Model
+   :param sim_data: The simulation data in json dictionary format containing materials and zone information.
+   :type sim_data: dict
+   :param card_format: The LS-DYNA card format for writing. Defaults to "SHORT".
+   :type card_format: str, optional
+
+   .. rubric:: Notes
+
+   **This is a beta class**. **The behavior and implementation may change in future**.
+
+
+
+.. py:currentmodule:: MaterialProcessor
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_all_material_commands`
+            - Generate and return all the material commands to be added to the LS-DYNA export file.
+          * - :py:attr:`~get_material_commands_by_material_id`
+            - Generate and return the material commands for a specific material given it's id.
+          * - :py:attr:`~get_material_commands_by_material_name`
+            - Generate and return the material commands for a specific material given it's name.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__slots__`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.dynaexportutils import MaterialProcessor
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __slots__
+   :value: ('_card_format', '_sim_data', '_raw_materials_data', '_zone_data', '_mat_id', '_wt_factor',...
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: get_all_material_commands() -> str
+
+   Generate and return all the material commands to be added to the LS-DYNA export file.
+
+   :returns:
+
+             str:
+                 A string containing all the material commands.
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+.. py:method:: get_material_commands_by_material_id(id: int) -> str
+
+   Generate and return the material commands for a specific material given it's id.
+
+   This is to be added to the LS-DYNA export file.
+
+   :param id: Material id to generate material commands for.
+   :type id: int
+
+   :returns:
+
+             str
+                 A string containing the material commands for the given material.
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+.. py:method:: get_material_commands_by_material_name(mat_name: str) -> str
+
+   Generate and return the material commands for a specific material given it's name.
+
+   This is to be added to the LS-DYNA export file.
+
+   :param mat_name: The name of the material.
+   :type mat_name: str
+
+   :returns:
+
+             str:
+                 A string containing the material commands for the given material.
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SolverType`
+===================
+
+
+.. py:class:: ansys.meshing.prime.SolverType
+
+
+
+   Type of solver.
+
+
+
+
+.. py:currentmodule:: SolverType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~FLUENT`
+            - Solver type is Fluent. Creates a group of face quality measures mostly used in Fluent.
+          * - :py:attr:`~MAPDL`
+            - Solver type is MAPDL. Creates a group of face quality measures mostly used in MAPDL.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import SolverType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: FLUENT
+   :value: 1
+
+
+   Solver type is Fluent. Creates a group of face quality measures mostly used in Fluent.
+
+.. py:attribute:: MAPDL
+   :value: 2
+
+
+   Solver type is MAPDL. Creates a group of face quality measures mostly used in MAPDL.
+
+
+
+
+
+
+
+.. vale on

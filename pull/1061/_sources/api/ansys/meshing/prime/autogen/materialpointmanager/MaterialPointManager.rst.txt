@@ -1,0 +1,154 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MaterialPointManager`
+=============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.materialpointmanager.MaterialPointManager(model: ansys.meshing.prime.autogen.coreobject.CommunicationManager, id: int, object_id: int, name: str)
+
+
+
+   Provide functions for material point creation, deletion and queries.
+
+   :param model: Server model to create MaterialPointManager object.
+   :type model: Model
+   :param id: Id of the MaterialPointManager.
+   :type id: int
+   :param object_id: Object id of the MaterialPointManager.
+   :type object_id: int
+   :param name: Name of the MaterialPointManager.
+   :type name: str
+
+
+
+
+.. py:currentmodule:: MaterialPointManager
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create_material_point`
+            - Creates a material point at the given coordinates.
+          * - :py:attr:`~delete_material_point`
+            - Deletes material point identified with the given name.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Get the id of MaterialPointManager.
+          * - :py:attr:`~name`
+            - Get the name of MaterialPointManager.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Get the id of MaterialPointManager.
+
+.. py:property:: name
+
+   Get the name of MaterialPointManager.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: create_material_point(suggested_name: str, coords: ansys.meshing.prime.params.primestructs.Iterable[float], params: ansys.meshing.prime.params.primestructs.CreateMaterialPointParams) -> ansys.meshing.prime.params.primestructs.CreateMaterialPointResults
+
+   Creates a material point at the given coordinates.
+
+
+   :param suggested_name: Name suggested for the material point.
+   :type suggested_name: str
+   :param coords: Coordinates of material point.
+   :type coords: Iterable[float]
+   :param params: Parameters used to create material point.
+   :type params: CreateMaterialPointParams
+
+   :returns: Returns the result with material point name and id.
+   :rtype: CreateMaterialPointResults
+
+   .. rubric:: Notes
+
+   A material point is created on calling this API.
+
+   .. rubric:: Examples
+
+   >>> material_point_results = model.control_data.create_material_point("Fluid", [1.0,2,0,3.0], params)
+
+
+.. py:method:: delete_material_point(name: str) -> ansys.meshing.prime.params.primestructs.DeleteMaterialPointResults
+
+   Deletes material point identified with the given name.
+
+
+   :param name: Name of the material point to be deleted.
+   :type name: str
+
+   :returns: Returns the DeleteMaterialPointResults.
+   :rtype: DeleteMaterialPointResults
+
+   .. rubric:: Examples
+
+   >>> client = prime.launch_prime()
+   >>> model = client.model
+   >>> results = model.material_point_data.delete_material_point("fluid")
+
+
+
+
+
+
+
+.. vale on

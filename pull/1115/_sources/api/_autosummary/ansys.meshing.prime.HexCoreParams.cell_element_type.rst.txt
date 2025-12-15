@@ -1,0 +1,6 @@
+cell\_element\_type
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.cell_element_type

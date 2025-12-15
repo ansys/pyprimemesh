@@ -1,0 +1,6 @@
+﻿intersection\_control\_mask
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.intersection_control_mask

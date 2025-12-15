@@ -1,0 +1,70 @@
+
+:orphan:
+
+.. _sphx_glr_examples_gallery_examples_gallery_sg_execution_times:
+
+
+Computation times
+=================
+**14:47.090** total execution time for 12 files **from examples/gallery_examples/gallery**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_04_lucid_toy_car.py` (``04_lucid_toy_car.py``)
+     - 03:33.583
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_10_wheel_ground_contact_patch.py` (``10_wheel_ground_contact_patch.py``)
+     - 02:33.184
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_03_lucid_pipe_tee.py` (``03_lucid_pipe_tee.py``)
+     - 02:30.443
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_08_lucid_generic_f1_rear_wing.py` (``08_lucid_generic_f1_rear_wing.py``)
+     - 01:41.450
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_06_blade_morph.py` (``06_blade_morph.py``)
+     - 01:09.631
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_09_multi_layer_quad_mesh_pcb.py` (``09_multi_layer_quad_mesh_pcb.py``)
+     - 01:07.405
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_05_pcb_stacker.py` (``05_pcb_stacker.py``)
+     - 00:31.040
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_07_saddle_bracket.py` (``07_saddle_bracket.py``)
+     - 00:26.287
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_00_lucid_file_IO.py` (``00_lucid_file_IO.py``)
+     - 00:26.053
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_02_lucid_mixing_elbow.py` (``02_lucid_mixing_elbow.py``)
+     - 00:25.043
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_01_bracket_scaffold.py` (``01_bracket_scaffold.py``)
+     - 00:22.972
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_12_import_from_pygeometry.py` (``12_import_from_pygeometry.py``)
+     - 00:00.000
+     - 0.0

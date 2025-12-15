@@ -1,0 +1,39 @@
+.. vale off
+
+DeleteMaterialPointResults
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteMaterialPointResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteMaterialPointResults.print_default
+      DeleteMaterialPointResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteMaterialPointResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteMaterialPointResults
+
+    ansys.meshing.prime.DeleteMaterialPointResults
+
+.. vale on

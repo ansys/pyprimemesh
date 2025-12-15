@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``quadtospline.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.autogen.quadtospline
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: quadtospline
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.quadtospline.QuadToSpline`
+            - Converts all-quad mesh to spline.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> QuadToSpline</api/ansys/meshing/prime/autogen/quadtospline/QuadToSpline>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

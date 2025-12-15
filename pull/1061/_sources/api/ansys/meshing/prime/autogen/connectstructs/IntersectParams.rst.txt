@@ -1,0 +1,186 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`IntersectParams`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.IntersectParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, tolerance: float = None, use_absolute_tolerance: bool = None, remesh: bool = None, collapse_feature_angle: float = None, collapse_target_skewness: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters used for intersection.
+
+   :param model: Model to create a ``IntersectParams`` object with default parameters.
+   :type model: Model
+   :param tolerance: Intersection tolerance.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: True if tolerance provided is absolute value.
+   :type use_absolute_tolerance: bool, optional
+   :param remesh: Local remesh at the intersection.
+   :type remesh: bool, optional
+   :param collapse_feature_angle: Angle to preserve features while performing collapse in improve operation.
+   :type collapse_feature_angle: float, optional
+   :param collapse_target_skewness: Perform collapse on faces with skewness above the provided target skewness.
+   :type collapse_target_skewness: float, optional
+   :param json_data: JSON dictionary to create a ``IntersectParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> intersect_params = prime.IntersectParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: IntersectParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~collapse_feature_angle`
+            - Angle to preserve features while performing collapse in improve operation.
+          * - :py:attr:`~collapse_target_skewness`
+            - Perform collapse on faces with skewness above the provided target skewness.
+          * - :py:attr:`~remesh`
+            - Local remesh at the intersection.
+          * - :py:attr:`~tolerance`
+            - Intersection tolerance.
+          * - :py:attr:`~use_absolute_tolerance`
+            - True if tolerance provided is absolute value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``IntersectParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``IntersectParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import IntersectParams
+
+Property detail
+---------------
+
+.. py:property:: collapse_feature_angle
+   :type: float
+
+
+   Angle to preserve features while performing collapse in improve operation.
+
+.. py:property:: collapse_target_skewness
+   :type: float
+
+
+   Perform collapse on faces with skewness above the provided target skewness.
+
+.. py:property:: remesh
+   :type: bool
+
+
+   Local remesh at the intersection.
+
+.. py:property:: tolerance
+   :type: float
+
+
+   Intersection tolerance.
+
+.. py:property:: use_absolute_tolerance
+   :type: bool
+
+
+   True if tolerance provided is absolute value.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``IntersectParams`` object.
+
+   .. rubric:: Examples
+
+   >>> IntersectParams.print_default()
+
+
+.. py:method:: set_default(tolerance: float = None, use_absolute_tolerance: bool = None, remesh: bool = None, collapse_feature_angle: float = None, collapse_target_skewness: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``IntersectParams`` object.
+
+   :param tolerance: Intersection tolerance.
+   :type tolerance: float, optional
+   :param use_absolute_tolerance: True if tolerance provided is absolute value.
+   :type use_absolute_tolerance: bool, optional
+   :param remesh: Local remesh at the intersection.
+   :type remesh: bool, optional
+   :param collapse_feature_angle: Angle to preserve features while performing collapse in improve operation.
+   :type collapse_feature_angle: float, optional
+   :param collapse_target_skewness: Perform collapse on faces with skewness above the provided target skewness.
+   :type collapse_target_skewness: float, optional
+
+
+
+
+
+
+
+.. vale on

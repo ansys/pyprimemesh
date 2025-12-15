@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`MergePartsResults`
+==========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.modelstructs.MergePartsResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, merged_part_assigned_name: str = None, merged_part_id: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to merge parts.
+
+   :param model: Model to create a ``MergePartsResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param merged_part_assigned_name: Name assigned to merged part. Suffix is added to suggested name if the name not available.
+   :type merged_part_assigned_name: str, optional
+   :param merged_part_id: Id assigned to merged part.
+   :type merged_part_id: int, optional
+   :param json_data: JSON dictionary to create a ``MergePartsResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> merge_parts_results = prime.MergePartsResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: MergePartsResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with the failure of operation.
+          * - :py:attr:`~merged_part_assigned_name`
+            - Name assigned to merged part. Suffix is added to suggested name if the name not available.
+          * - :py:attr:`~merged_part_id`
+            - Id assigned to merged part.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``MergePartsResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``MergePartsResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.modelstructs import MergePartsResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the failure of operation.
+
+.. py:property:: merged_part_assigned_name
+   :type: str
+
+
+   Name assigned to merged part. Suffix is added to suggested name if the name not available.
+
+.. py:property:: merged_part_id
+   :type: int
+
+
+   Id assigned to merged part.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``MergePartsResults`` object.
+
+   .. rubric:: Examples
+
+   >>> MergePartsResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, merged_part_assigned_name: str = None, merged_part_id: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``MergePartsResults`` object.
+
+   :param error_code: Error code associated with the failure of operation.
+   :type error_code: ErrorCode, optional
+   :param merged_part_assigned_name: Name assigned to merged part. Suffix is added to suggested name if the name not available.
+   :type merged_part_assigned_name: str, optional
+   :param merged_part_id: Id assigned to merged part.
+   :type merged_part_id: int, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,124 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``modelstructs.py`` module
+==============================
+
+.. py:module:: ansys.meshing.prime.autogen.modelstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: modelstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.modelstructs.CreateZoneResults`
+            - Results associated with the create zone.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.modelstructs.DeleteZoneResults`
+            - Results associated with the delete zone.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.modelstructs.GlobalSizingParams`
+            - Global sizing parameters.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.modelstructs.MergePartsParams`
+            - Parameters to merge parts.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.modelstructs.MergePartsResults`
+            - Parameters to merge parts.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CreateZoneResults</api/ansys/meshing/prime/autogen/modelstructs/CreateZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> DeleteZoneResults</api/ansys/meshing/prime/autogen/modelstructs/DeleteZoneResults>
+    <span class="nf nf-cod-symbol_class"></span> GlobalSizingParams</api/ansys/meshing/prime/autogen/modelstructs/GlobalSizingParams>
+    <span class="nf nf-cod-symbol_class"></span> MergePartsParams</api/ansys/meshing/prime/autogen/modelstructs/MergePartsParams>
+    <span class="nf nf-cod-symbol_class"></span> MergePartsResults</api/ansys/meshing/prime/autogen/modelstructs/MergePartsResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

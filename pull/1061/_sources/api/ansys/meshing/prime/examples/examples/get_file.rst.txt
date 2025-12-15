@@ -1,0 +1,23 @@
+ansys.meshing.prime.examples.examples.get_file
+==============================================
+
+.. py:function:: ansys.meshing.prime.examples.examples.get_file(example: Examples, destination: Optional[str] = None, force: bool = False) -> Union[str, os.PathLike]
+
+   Download a PyPrimeMesh example file from the GitHub repository.
+
+   :param example: Name of the example file to be downloaded.
+   :type example: Examples
+   :param destination: Path to download the example file to. The default
+                       is ``None``, in which case the default path for app data
+                       is used.
+   :type destination: str, optional
+   :param force: Whether to download the example file. The default is
+                 ``False``, in which case if the example file is cached, it
+                 is reused.
+   :type force: bool, optional
+
+   :returns: Local path to the downloaded example file.
+   :rtype: str
+
+   :raises ValueError: When the provided destination path for the example file does not exist.
+

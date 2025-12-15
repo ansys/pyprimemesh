@@ -1,0 +1,174 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FaceAndEdgeConnectivityResults`
+=======================================
+
+
+.. py:class:: ansys.meshing.prime.FaceAndEdgeConnectivityResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, part_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_connectivity_result_per_part: ansys.meshing.prime.params.primestructs.List[FaceConnectivityResults] = None, edge_connectivity_result_per_part: ansys.meshing.prime.params.primestructs.List[EdgeConnectivityResults] = None, json_data: dict = None, **kwargs)
+
+
+
+   Result of the face and edge connectivity information.
+
+   :param model: Model to create a ``FaceAndEdgeConnectivityResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the get face and edge connectivity operation.
+   :type error_code: ErrorCode, optional
+   :param part_ids: Part ids for which face and edge connectivity data is available.
+   :type part_ids: Iterable[int], optional
+   :param face_connectivity_result_per_part: Face connectivity result per part.
+   :type face_connectivity_result_per_part: List[FaceConnectivityResults], optional
+   :param edge_connectivity_result_per_part: Edge connectivity result per part.
+   :type edge_connectivity_result_per_part: List[EdgeConnectivityResults], optional
+   :param json_data: JSON dictionary to create a ``FaceAndEdgeConnectivityResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> face_and_edge_connectivity_results = prime.FaceAndEdgeConnectivityResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FaceAndEdgeConnectivityResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~edge_connectivity_result_per_part`
+            - Edge connectivity result per part.
+          * - :py:attr:`~error_code`
+            - Error code associated with the get face and edge connectivity operation.
+          * - :py:attr:`~face_connectivity_result_per_part`
+            - Face connectivity result per part.
+          * - :py:attr:`~part_ids`
+            - Part ids for which face and edge connectivity data is available.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FaceAndEdgeConnectivityResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FaceAndEdgeConnectivityResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import FaceAndEdgeConnectivityResults
+
+Property detail
+---------------
+
+.. py:property:: edge_connectivity_result_per_part
+   :type: ansys.meshing.prime.params.primestructs.List[EdgeConnectivityResults]
+
+
+   Edge connectivity result per part.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the get face and edge connectivity operation.
+
+.. py:property:: face_connectivity_result_per_part
+   :type: ansys.meshing.prime.params.primestructs.List[FaceConnectivityResults]
+
+
+   Face connectivity result per part.
+
+.. py:property:: part_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Part ids for which face and edge connectivity data is available.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FaceAndEdgeConnectivityResults`` object.
+
+   .. rubric:: Examples
+
+   >>> FaceAndEdgeConnectivityResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, part_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, face_connectivity_result_per_part: ansys.meshing.prime.params.primestructs.List[FaceConnectivityResults] = None, edge_connectivity_result_per_part: ansys.meshing.prime.params.primestructs.List[EdgeConnectivityResults] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FaceAndEdgeConnectivityResults`` object.
+
+   :param error_code: Error code associated with the get face and edge connectivity operation.
+   :type error_code: ErrorCode, optional
+   :param part_ids: Part ids for which face and edge connectivity data is available.
+   :type part_ids: Iterable[int], optional
+   :param face_connectivity_result_per_part: Face connectivity result per part.
+   :type face_connectivity_result_per_part: List[FaceConnectivityResults], optional
+   :param edge_connectivity_result_per_part: Edge connectivity result per part.
+   :type edge_connectivity_result_per_part: List[EdgeConnectivityResults], optional
+
+
+
+
+
+
+
+.. vale on

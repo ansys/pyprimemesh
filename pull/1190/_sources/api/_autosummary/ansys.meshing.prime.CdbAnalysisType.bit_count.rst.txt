@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CdbAnalysisType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using CdbAnalysisType.bit_count
+
+   ansys.meshing.prime.CdbAnalysisType.bit_count

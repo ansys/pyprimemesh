@@ -1,0 +1,6 @@
+face\_zonelets\_without\_volumes
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractVolumesResults.face_zonelets_without_volumes

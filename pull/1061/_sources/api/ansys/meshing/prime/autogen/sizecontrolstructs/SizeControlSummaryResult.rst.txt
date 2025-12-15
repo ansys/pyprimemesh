@@ -1,0 +1,138 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SizeControlSummaryResult`
+=================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizecontrolstructs.SizeControlSummaryResult(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, message: str = None, json_data: dict = None, **kwargs)
+
+
+
+   Results of size control summary.
+
+   :param model: Model to create a ``SizeControlSummaryResult`` object with default parameters.
+   :type model: Model
+   :param message: Size control summary text.
+   :type message: str, optional
+   :param json_data: JSON dictionary to create a ``SizeControlSummaryResult`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> size_control_summary_result = prime.SizeControlSummaryResult(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SizeControlSummaryResult
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~message`
+            - Size control summary text.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SizeControlSummaryResult`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SizeControlSummaryResult`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizecontrolstructs import SizeControlSummaryResult
+
+Property detail
+---------------
+
+.. py:property:: message
+   :type: str
+
+
+   Size control summary text.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SizeControlSummaryResult`` object.
+
+   .. rubric:: Examples
+
+   >>> SizeControlSummaryResult.print_default()
+
+
+.. py:method:: set_default(message: str = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SizeControlSummaryResult`` object.
+
+   :param message: Size control summary text.
+   :type message: str, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,136 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`PickedInfo`
+===================
+
+
+.. py:class:: ansys.meshing.prime.graphics.widgets.picked_info.PickedInfo(prime_plotter: ansys.meshing.prime.graphics.plotter.PrimePlotter)
+
+
+
+   Initializes the picked information button widget.
+
+   This widget lets you get information about the picked mesh objects.
+
+   :param prime_plotter: Plotter to apply this widget to.
+   :type prime_plotter: PrimePlotter
+
+
+
+.. py:currentmodule:: PickedInfo
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~callback`
+            - Define the callback function for the button widget.
+          * - :py:attr:`~info_message`
+            - Get the information message for the selected mesh object.
+          * - :py:attr:`~update`
+            - Define the configuration and representation of the button widget button.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~plotter`
+            - Plotter object that the widget is assigned to.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__slots__`
+            - 
+          * - :py:attr:`~prime_plotter`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
+
+Property detail
+---------------
+
+.. py:property:: plotter
+   :type: pyvista.Plotter
+
+
+   Plotter object that the widget is assigned to.
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: __slots__
+   :value: ()
+
+
+.. py:attribute:: prime_plotter
+
+
+
+Method detail
+-------------
+
+.. py:method:: callback(state: bool) -> None
+
+   Define the callback function for the button widget.
+
+   :param state: State of the button widget.
+   :type state: bool
+
+
+.. py:method:: info_message(mesh_info: ansys.meshing.prime.core.mesh.DisplayMeshInfo) -> str
+
+   Get the information message for the selected mesh object.
+
+   :param mesh_info: Mesh information object to print.
+   :type mesh_info: DisplayMeshInfo
+
+   :returns: Message with the information of the selected mesh object.
+   :rtype: str
+
+
+.. py:method:: update() -> None
+
+   Define the configuration and representation of the button widget button.
+
+
+
+
+
+
+
+.. vale on

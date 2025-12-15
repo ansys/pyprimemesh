@@ -1,0 +1,162 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`VolumeQualitySummaryParams`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.VolumeQualitySummaryParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, cell_quality_measures: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.CellQualityMeasure] = None, scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, quality_limit: ansys.meshing.prime.params.primestructs.Iterable[float] = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to control volume quality summary results.
+
+   :param model: Model to create a ``VolumeQualitySummaryParams`` object with default parameters.
+   :type model: Model
+   :param cell_quality_measures: List of cell quality measures for volume quality diagnostics.
+   :type cell_quality_measures: List[CellQualityMeasure], optional
+   :param scope: Scope of the cell zonelets for volume quality diagnostics.
+   :type scope: ScopeDefinition, optional
+   :param quality_limit: Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
+   :type quality_limit: Iterable[float], optional
+   :param json_data: JSON dictionary to create a ``VolumeQualitySummaryParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> volume_quality_summary_params = prime.VolumeQualitySummaryParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: VolumeQualitySummaryParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~cell_quality_measures`
+            - List of cell quality measures for volume quality diagnostics.
+          * - :py:attr:`~quality_limit`
+            - Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
+          * - :py:attr:`~scope`
+            - Scope of the cell zonelets for volume quality diagnostics.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``VolumeQualitySummaryParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``VolumeQualitySummaryParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import VolumeQualitySummaryParams
+
+Property detail
+---------------
+
+.. py:property:: cell_quality_measures
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.CellQualityMeasure]
+
+
+   List of cell quality measures for volume quality diagnostics.
+
+.. py:property:: quality_limit
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
+
+.. py:property:: scope
+   :type: ansys.meshing.prime.params.primestructs.ScopeDefinition
+
+
+   Scope of the cell zonelets for volume quality diagnostics.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``VolumeQualitySummaryParams`` object.
+
+   .. rubric:: Examples
+
+   >>> VolumeQualitySummaryParams.print_default()
+
+
+.. py:method:: set_default(cell_quality_measures: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.CellQualityMeasure] = None, scope: ansys.meshing.prime.params.primestructs.ScopeDefinition = None, quality_limit: ansys.meshing.prime.params.primestructs.Iterable[float] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``VolumeQualitySummaryParams`` object.
+
+   :param cell_quality_measures: List of cell quality measures for volume quality diagnostics.
+   :type cell_quality_measures: List[CellQualityMeasure], optional
+   :param scope: Scope of the cell zonelets for volume quality diagnostics.
+   :type scope: ScopeDefinition, optional
+   :param quality_limit: Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
+   :type quality_limit: Iterable[float], optional
+
+
+
+
+
+
+
+.. vale on

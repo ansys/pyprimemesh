@@ -1,0 +1,383 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``fileiostructs.py`` module
+===============================
+
+.. py:module:: ansys.meshing.prime.autogen.fileiostructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: fileiostructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CadFaceter`
+            - Types of CAD faceter.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CadReaderRoute`
+            - CAD Reader routes.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CadRefacetingMaxEdgeSizeLimit`
+            - Types of maximum edge size limit for CAD faceting.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CadRefacetingParams`
+            - Parameters to refacet CAD during import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CadRefacetingResolution`
+            - Levels of CAD faceting refinement.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CdbAnalysisType`
+            - Provides the MAPDL CDB analysis type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.CdbSimulationType`
+            - Simulation Type for CDB export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ContactElementTypeParams`
+            - Parameters to control element type choices for contact surfaces in TIEs and CONTACT PAIRs.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportBoundaryFittedSplineParams`
+            - Parameters for exporting boundary fitted splines.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportFluentCaseParams`
+            - Parameters to export fluent case file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportFluentMeshingMeshParams`
+            - Parameters used to export fluent meshing mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIGAResults`
+            - Results associated with the LS-DYNA export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaIgaKeywordFileParams`
+            - Parameters for exporting LS-DYNA IGA keyword file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaKeywordFileParams`
+            - Parameters to control LS-DYNA keyword file export settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportLSDynaResults`
+            - Results associated with the LS-DYNA export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams`
+            - Parameters to control MAPDL CDB export settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbResults`
+            - Results associated with the MAPDL CDB export.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ExportSTLParams`
+            - Parameters to export STL file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.FileReadParams`
+            - Parameters to read file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.FileReadResults`
+            - Results of file read operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.FileWriteParams`
+            - Parameters to write a file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.FileWriteResults`
+            - Results of file write operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusParams`
+            - Parameters for importing Abaqus solver input files.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportAbaqusResults`
+            - Results of Abaqus import operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportCadParams`
+            - Parameters to control CAD import settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportCadResults`
+            - Results associated with the CAD import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseParams`
+            - Parameters to import fluent case file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportFluentCaseResults`
+            - Results associated with fluent case import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshParams`
+            - Parameters used to import fluent meshing mesh.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportFluentMeshingMeshResults`
+            - Results associated with fluent meshing mesh import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbParams`
+            - Parameters to control MAPDL CDB import settings.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ImportMapdlCdbResults`
+            - Results associated with the MAPDL CDB import.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.LSDynaAnalysisType`
+            - Provides the LS-DYNA analysis type.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.LSDynaFileFormatType`
+            - Provides the format type to write the LS-DYNA file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.LabelExportParams`
+            - Parameters to control the export of labels as Nodal or Element Components in CDB. By default, all the labels are exported as Element Components.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.LengthUnit`
+            - Length units
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.PartCreationType`
+            - Part Creation Type decides whether to create a part per CAD Model, Assembly, Part, Body.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ReadSizeFieldParams`
+            - Parameters used to read size field file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.SeparateBlocksFormatType`
+            - Format type for separate element blocks. Only applicable when write_separate_blocks is true.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.SizeFieldFileReadResults`
+            - Results of size field file read operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.WriteSizeFieldParams`
+            - Parameters used to write size field file.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.fileiostructs.ZoneMeshResult`
+            - Results containing zone-wise mesh information.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CadFaceter</api/ansys/meshing/prime/autogen/fileiostructs/CadFaceter>
+    <span class="nf nf-cod-symbol_class"></span> CadReaderRoute</api/ansys/meshing/prime/autogen/fileiostructs/CadReaderRoute>
+    <span class="nf nf-cod-symbol_class"></span> CadRefacetingMaxEdgeSizeLimit</api/ansys/meshing/prime/autogen/fileiostructs/CadRefacetingMaxEdgeSizeLimit>
+    <span class="nf nf-cod-symbol_class"></span> CadRefacetingParams</api/ansys/meshing/prime/autogen/fileiostructs/CadRefacetingParams>
+    <span class="nf nf-cod-symbol_class"></span> CadRefacetingResolution</api/ansys/meshing/prime/autogen/fileiostructs/CadRefacetingResolution>
+    <span class="nf nf-cod-symbol_class"></span> CdbAnalysisType</api/ansys/meshing/prime/autogen/fileiostructs/CdbAnalysisType>
+    <span class="nf nf-cod-symbol_class"></span> CdbSimulationType</api/ansys/meshing/prime/autogen/fileiostructs/CdbSimulationType>
+    <span class="nf nf-cod-symbol_class"></span> ContactElementTypeParams</api/ansys/meshing/prime/autogen/fileiostructs/ContactElementTypeParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportBoundaryFittedSplineParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportBoundaryFittedSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportFluentCaseParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportFluentCaseParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportFluentMeshingMeshParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportFluentMeshingMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaIGAResults</api/ansys/meshing/prime/autogen/fileiostructs/ExportLSDynaIGAResults>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaIgaKeywordFileParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportLSDynaIgaKeywordFileParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaKeywordFileParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportLSDynaKeywordFileParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportLSDynaResults</api/ansys/meshing/prime/autogen/fileiostructs/ExportLSDynaResults>
+    <span class="nf nf-cod-symbol_class"></span> ExportMapdlCdbParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportMapdlCdbParams>
+    <span class="nf nf-cod-symbol_class"></span> ExportMapdlCdbResults</api/ansys/meshing/prime/autogen/fileiostructs/ExportMapdlCdbResults>
+    <span class="nf nf-cod-symbol_class"></span> ExportSTLParams</api/ansys/meshing/prime/autogen/fileiostructs/ExportSTLParams>
+    <span class="nf nf-cod-symbol_class"></span> FileReadParams</api/ansys/meshing/prime/autogen/fileiostructs/FileReadParams>
+    <span class="nf nf-cod-symbol_class"></span> FileReadResults</api/ansys/meshing/prime/autogen/fileiostructs/FileReadResults>
+    <span class="nf nf-cod-symbol_class"></span> FileWriteParams</api/ansys/meshing/prime/autogen/fileiostructs/FileWriteParams>
+    <span class="nf nf-cod-symbol_class"></span> FileWriteResults</api/ansys/meshing/prime/autogen/fileiostructs/FileWriteResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportAbaqusParams</api/ansys/meshing/prime/autogen/fileiostructs/ImportAbaqusParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportAbaqusResults</api/ansys/meshing/prime/autogen/fileiostructs/ImportAbaqusResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportCadParams</api/ansys/meshing/prime/autogen/fileiostructs/ImportCadParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportCadResults</api/ansys/meshing/prime/autogen/fileiostructs/ImportCadResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentCaseParams</api/ansys/meshing/prime/autogen/fileiostructs/ImportFluentCaseParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentCaseResults</api/ansys/meshing/prime/autogen/fileiostructs/ImportFluentCaseResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentMeshingMeshParams</api/ansys/meshing/prime/autogen/fileiostructs/ImportFluentMeshingMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportFluentMeshingMeshResults</api/ansys/meshing/prime/autogen/fileiostructs/ImportFluentMeshingMeshResults>
+    <span class="nf nf-cod-symbol_class"></span> ImportMapdlCdbParams</api/ansys/meshing/prime/autogen/fileiostructs/ImportMapdlCdbParams>
+    <span class="nf nf-cod-symbol_class"></span> ImportMapdlCdbResults</api/ansys/meshing/prime/autogen/fileiostructs/ImportMapdlCdbResults>
+    <span class="nf nf-cod-symbol_class"></span> LSDynaAnalysisType</api/ansys/meshing/prime/autogen/fileiostructs/LSDynaAnalysisType>
+    <span class="nf nf-cod-symbol_class"></span> LSDynaFileFormatType</api/ansys/meshing/prime/autogen/fileiostructs/LSDynaFileFormatType>
+    <span class="nf nf-cod-symbol_class"></span> LabelExportParams</api/ansys/meshing/prime/autogen/fileiostructs/LabelExportParams>
+    <span class="nf nf-cod-symbol_class"></span> LengthUnit</api/ansys/meshing/prime/autogen/fileiostructs/LengthUnit>
+    <span class="nf nf-cod-symbol_class"></span> PartCreationType</api/ansys/meshing/prime/autogen/fileiostructs/PartCreationType>
+    <span class="nf nf-cod-symbol_class"></span> ReadSizeFieldParams</api/ansys/meshing/prime/autogen/fileiostructs/ReadSizeFieldParams>
+    <span class="nf nf-cod-symbol_class"></span> SeparateBlocksFormatType</api/ansys/meshing/prime/autogen/fileiostructs/SeparateBlocksFormatType>
+    <span class="nf nf-cod-symbol_class"></span> SizeFieldFileReadResults</api/ansys/meshing/prime/autogen/fileiostructs/SizeFieldFileReadResults>
+    <span class="nf nf-cod-symbol_class"></span> WriteSizeFieldParams</api/ansys/meshing/prime/autogen/fileiostructs/WriteSizeFieldParams>
+    <span class="nf nf-cod-symbol_class"></span> ZoneMeshResult</api/ansys/meshing/prime/autogen/fileiostructs/ZoneMeshResult>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

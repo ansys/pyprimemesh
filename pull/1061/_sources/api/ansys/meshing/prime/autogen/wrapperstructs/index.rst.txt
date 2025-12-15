@@ -1,0 +1,159 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``wrapperstructs.py`` module
+================================
+
+.. py:module:: ansys.meshing.prime.autogen.wrapperstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: wrapperstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.DeadRegion`
+            - DeadRegion defines a dead region for patch flow regions operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapParams`
+            - WrapParams defines parameters for wrapping.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapRegion`
+            - Indicates source type to extract wrapper region.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapResult`
+            - Result structure associated to Wrap operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapperCloseGapsParams`
+            - WrapperCloseGapsParams to define parameters for close gaps operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapperCloseGapsResult`
+            - Result structure associated with close gaps operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapperImproveQualityParams`
+            - WrapperImproveQualityParams defines parameters to improve wrapper part.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapperImproveResult`
+            - Results structure associated to improve quality.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapperPatchFlowRegionsParams`
+            - WrapperPatchFlowRegionsParams to define parameters for patch flow regions operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapperstructs.WrapperPatchFlowRegionsResult`
+            - Result structure associated with patch holes operation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DeadRegion</api/ansys/meshing/prime/autogen/wrapperstructs/DeadRegion>
+    <span class="nf nf-cod-symbol_class"></span> WrapParams</api/ansys/meshing/prime/autogen/wrapperstructs/WrapParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapRegion</api/ansys/meshing/prime/autogen/wrapperstructs/WrapRegion>
+    <span class="nf nf-cod-symbol_class"></span> WrapResult</api/ansys/meshing/prime/autogen/wrapperstructs/WrapResult>
+    <span class="nf nf-cod-symbol_class"></span> WrapperCloseGapsParams</api/ansys/meshing/prime/autogen/wrapperstructs/WrapperCloseGapsParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapperCloseGapsResult</api/ansys/meshing/prime/autogen/wrapperstructs/WrapperCloseGapsResult>
+    <span class="nf nf-cod-symbol_class"></span> WrapperImproveQualityParams</api/ansys/meshing/prime/autogen/wrapperstructs/WrapperImproveQualityParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapperImproveResult</api/ansys/meshing/prime/autogen/wrapperstructs/WrapperImproveResult>
+    <span class="nf nf-cod-symbol_class"></span> WrapperPatchFlowRegionsParams</api/ansys/meshing/prime/autogen/wrapperstructs/WrapperPatchFlowRegionsParams>
+    <span class="nf nf-cod-symbol_class"></span> WrapperPatchFlowRegionsResult</api/ansys/meshing/prime/autogen/wrapperstructs/WrapperPatchFlowRegionsResult>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

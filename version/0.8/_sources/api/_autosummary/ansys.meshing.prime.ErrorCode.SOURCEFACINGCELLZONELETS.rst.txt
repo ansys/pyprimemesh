@@ -1,0 +1,6 @@
+SOURCEFACINGCELLZONELETS
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SOURCEFACINGCELLZONELETS

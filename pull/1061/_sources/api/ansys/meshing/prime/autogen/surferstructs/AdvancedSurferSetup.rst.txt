@@ -1,0 +1,78 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`AdvancedSurferSetup`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.surferstructs.AdvancedSurferSetup
+
+
+
+   Define advanced settings for remeshing operation.
+
+
+
+
+.. py:currentmodule:: AdvancedSurferSetup
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~NONE`
+            - Option to define no advanced settings.
+          * - :py:attr:`~WRAPPER`
+            - Option to define advanced settings for wrapper surfaces.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.surferstructs import AdvancedSurferSetup
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: NONE
+   :value: 0
+
+
+   Option to define no advanced settings.
+
+.. py:attribute:: WRAPPER
+   :value: 1
+
+
+   Option to define advanced settings for wrapper surfaces.
+
+
+
+
+
+
+
+.. vale on

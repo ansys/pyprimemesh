@@ -1,0 +1,39 @@
+.. vale off
+
+AddLabelResults
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AddLabelResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AddLabelResults.print_default
+      AddLabelResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AddLabelResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using AddLabelResults
+
+    ansys.meshing.prime.AddLabelResults
+
+.. vale on

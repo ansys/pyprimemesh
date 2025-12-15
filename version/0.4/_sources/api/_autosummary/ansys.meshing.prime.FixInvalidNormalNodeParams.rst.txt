@@ -1,0 +1,36 @@
+.. vale off
+
+FixInvalidNormalNodeParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FixInvalidNormalNodeParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FixInvalidNormalNodeParams.print_default
+      FixInvalidNormalNodeParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FixInvalidNormalNodeParams.label
+      FixInvalidNormalNodeParams.nugget_mesh_size
+      FixInvalidNormalNodeParams.nugget_size
+   
+   
+
+.. vale on

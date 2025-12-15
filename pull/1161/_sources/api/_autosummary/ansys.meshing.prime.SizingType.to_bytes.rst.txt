@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizingType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using SizingType.to_bytes
+
+   ansys.meshing.prime.SizingType.to_bytes

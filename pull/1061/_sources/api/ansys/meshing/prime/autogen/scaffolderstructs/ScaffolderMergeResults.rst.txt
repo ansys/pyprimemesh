@@ -1,0 +1,150 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ScaffolderMergeResults`
+===============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.scaffolderstructs.ScaffolderMergeResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_merged: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, json_data: dict = None, **kwargs)
+
+
+
+   Result structure associated with merge overlapping topofaces and delete shadowed topofaces operations.
+
+   :param model: Model to create a ``ScaffolderMergeResults`` object with default parameters.
+   :type model: Model
+   :param n_merged: Number of merged topofaces.
+   :type n_merged: int, optional
+   :param error_code: Error code associated with merge overlapping topofaces operation.
+   :type error_code: ErrorCode, optional
+   :param json_data: JSON dictionary to create a ``ScaffolderMergeResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> scaffolder_merge_results = prime.ScaffolderMergeResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: ScaffolderMergeResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with merge overlapping topofaces operation.
+          * - :py:attr:`~n_merged`
+            - Number of merged topofaces.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``ScaffolderMergeResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``ScaffolderMergeResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.scaffolderstructs import ScaffolderMergeResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with merge overlapping topofaces operation.
+
+.. py:property:: n_merged
+   :type: int
+
+
+   Number of merged topofaces.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``ScaffolderMergeResults`` object.
+
+   .. rubric:: Examples
+
+   >>> ScaffolderMergeResults.print_default()
+
+
+.. py:method:: set_default(n_merged: int = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None)
+   :staticmethod:
+
+
+   Set the default values of the ``ScaffolderMergeResults`` object.
+
+   :param n_merged: Number of merged topofaces.
+   :type n_merged: int, optional
+   :param error_code: Error code associated with merge overlapping topofaces operation.
+   :type error_code: ErrorCode, optional
+
+
+
+
+
+
+
+.. vale on

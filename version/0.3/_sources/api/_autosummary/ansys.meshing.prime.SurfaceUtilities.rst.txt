@@ -1,0 +1,34 @@
+.. vale off
+
+SurfaceUtilities
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceUtilities
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceUtilities.add_thickness
+      SurfaceUtilities.copy_face_zonelets
+      SurfaceUtilities.create_cap_on_face_zonelets
+      SurfaceUtilities.delete_unwetted_surfaces
+      SurfaceUtilities.fill_holes_at_plane
+      SurfaceUtilities.get_bounding_box_of_zonelets
+      SurfaceUtilities.refine_at_contacts
+      SurfaceUtilities.resolve_intersections
+      SurfaceUtilities.smooth_dihedral_face_nodes
+   
+   
+
+   
+   
+   
+
+.. vale on

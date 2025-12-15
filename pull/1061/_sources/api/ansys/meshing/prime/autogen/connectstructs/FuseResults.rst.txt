@@ -1,0 +1,222 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`FuseResults`
+====================
+
+
+.. py:class:: ansys.meshing.prime.autogen.connectstructs.FuseResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, fused_pairs: int = None, fused_area: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, intersecting_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, intersecting_zonelet_pairs: ansys.meshing.prime.params.primestructs.List[OverlapPairs] = None, json_data: dict = None, **kwargs)
+
+
+
+   Results associated with the fuse operations.
+
+   :param model: Model to create a ``FuseResults`` object with default parameters.
+   :type model: Model
+   :param fused_pairs: Number of face region pairs that were fused.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fused_pairs: int, optional
+   :param fused_area: Total area of fused regions from both source and target faces.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type fused_area: float, optional
+   :param error_code: Error code associated with failure of the fuse operation.
+
+                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with the fuse operation.
+
+                         **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type warning_codes: List[WarningCode], optional
+   :param intersecting_locations: Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type intersecting_locations: Iterable[float], optional
+   :param intersecting_zonelet_pairs: Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+
+                                      **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type intersecting_zonelet_pairs: List[OverlapPairs], optional
+   :param json_data: JSON dictionary to create a ``FuseResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> fuse_results = prime.FuseResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: FuseResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~error_code`
+            - Error code associated with failure of the fuse operation.
+          * - :py:attr:`~fused_area`
+            - Total area of fused regions from both source and target faces.
+          * - :py:attr:`~fused_pairs`
+            - Number of face region pairs that were fused.
+          * - :py:attr:`~intersecting_locations`
+            - Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+          * - :py:attr:`~intersecting_zonelet_pairs`
+            - Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+          * - :py:attr:`~warning_codes`
+            - Warning codes associated with the fuse operation.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``FuseResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``FuseResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.connectstructs import FuseResults
+
+Property detail
+---------------
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with failure of the fuse operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fused_area
+   :type: float
+
+
+   Total area of fused regions from both source and target faces.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: fused_pairs
+   :type: int
+
+
+   Number of face region pairs that were fused.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: intersecting_locations
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: intersecting_zonelet_pairs
+   :type: ansys.meshing.prime.params.primestructs.List[OverlapPairs]
+
+
+   Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: warning_codes
+   :type: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode]
+
+
+   Warning codes associated with the fuse operation.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``FuseResults`` object.
+
+   .. rubric:: Examples
+
+   >>> FuseResults.print_default()
+
+
+.. py:method:: set_default(fused_pairs: int = None, fused_area: float = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, warning_codes: ansys.meshing.prime.params.primestructs.List[ansys.meshing.prime.params.primestructs.WarningCode] = None, intersecting_locations: ansys.meshing.prime.params.primestructs.Iterable[float] = None, intersecting_zonelet_pairs: ansys.meshing.prime.params.primestructs.List[OverlapPairs] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``FuseResults`` object.
+
+   :param fused_pairs: Number of face region pairs that were fused.
+   :type fused_pairs: int, optional
+   :param fused_area: Total area of fused regions from both source and target faces.
+   :type fused_area: float, optional
+   :param error_code: Error code associated with failure of the fuse operation.
+   :type error_code: ErrorCode, optional
+   :param warning_codes: Warning codes associated with the fuse operation.
+   :type warning_codes: List[WarningCode], optional
+   :param intersecting_locations: Locations where the fuse operation did not remove self-intersections in the input. Each location corresponds to a patch of faces where self-intersections exist. The number of elements in intersecting locations are in multiples of three. For example, zero, three, six, nine, and so on. Each triplet corresponds to coordinates in x, y, and z. For example, if the intersecting locations contain (a, b, c, d, e, f), then (a, b, c) represent the first location and (d, e, f) represent the second location.
+   :type intersecting_locations: Iterable[float], optional
+   :param intersecting_zonelet_pairs: Contains pairs of face zonelet ids where the fuse operation failed to remove self-intersections in the input.
+   :type intersecting_zonelet_pairs: List[OverlapPairs], optional
+
+
+
+
+
+
+
+.. vale on

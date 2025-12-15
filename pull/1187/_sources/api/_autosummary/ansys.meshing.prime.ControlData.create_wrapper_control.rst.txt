@@ -1,0 +1,11 @@
+create\_wrapper\_control
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.create_wrapper_control
+
+.. minigallery::
+   :add-heading: Examples using ControlData.create_wrapper_control
+
+   ansys.meshing.prime.ControlData.create_wrapper_control

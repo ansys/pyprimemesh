@@ -1,0 +1,309 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`Mesh`
+=============
+
+
+.. py:class:: ansys.meshing.prime.core.mesh.Mesh(model: ansys.meshing.prime.params.primestructs.CommunicationManager)
+
+
+
+   Processes the mesh for visualization in the GUI.
+
+   :param model: Model to process.
+   :type model: CommunicationManager
+
+
+
+
+
+
+.. py:currentmodule:: Mesh
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~as_polydata`
+            - Return the mesh as a ``pv.PolyData`` object.
+          * - :py:attr:`~get_edge_color`
+            - Get the colors of edges.
+          * - :py:attr:`~get_edge_polydata`
+            - Get the polydata object of the edges.
+          * - :py:attr:`~get_face_and_edge_connectivity`
+            - Gets the connectivity of face and edge zonelets of the given part ids.
+          * - :py:attr:`~get_face_color`
+            - Get the colors of faces.
+          * - :py:attr:`~get_face_polydata`
+            - Get the polydata object of the faces.
+          * - :py:attr:`~get_scoped_polydata`
+            - Get the polydata object of the scoped mesh.
+          * - :py:attr:`~get_spline_cp_polydata`
+            - Get the polydata object of the spline control points.
+          * - :py:attr:`~get_spline_surface_polydata`
+            - Get the polydata object of the spline surface.
+          * - :py:attr:`~get_statistics_of_cell_zonelets`
+            - Gets cell statistics of given cell zonelets using provided cell statistics parameters.
+          * - :py:attr:`~update_pd`
+            - Update the polydata object of the mesh.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - Return the ID of the mesh.
+          * - :py:attr:`~model`
+            - Model.
+          * - :py:attr:`~part_id`
+            - Return the part ID of the mesh.
+          * - :py:attr:`~zone_id`
+            - Return the zone ID of the mesh.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Enter context for MeshInfo.
+          * - :py:attr:`~__exit__`
+            - Exit context for MeshInfo.
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.core.mesh import Mesh
+
+Property detail
+---------------
+
+.. py:property:: id
+
+   Return the ID of the mesh.
+
+   :returns: ID of the mesh.
+   :rtype: int
+
+.. py:property:: model
+
+   Model.
+
+.. py:property:: part_id
+
+   Return the part ID of the mesh.
+
+   :returns: Part ID of the mesh.
+   :rtype: int
+
+.. py:property:: zone_id
+
+   Return the zone ID of the mesh.
+
+   :returns: Zone ID of the mesh.
+   :rtype: int
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   Enter context for MeshInfo.
+
+
+.. py:method:: __exit__(type, value, traceback)
+
+   Exit context for MeshInfo.
+
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: as_polydata(update: bool = False) -> Dict[int, Dict[str, List[tuple[pyvista.PolyData, ansys.meshing.prime.core.part.Part]]]]
+
+   Return the mesh as a ``pv.PolyData`` object.
+
+   :param update: Update the polydata.
+   :type update: bool, default: False
+
+   :returns: Dictionary with the polydata objects.
+   :rtype: Dict[int, Dict[str, List[(pv.PolyData, Part)]]
+
+
+.. py:method:: get_edge_color(edge_results: ansys.meshing.prime.autogen.meshinfostructs.EdgeConnectivityResults, index: int)
+
+   Get the colors of edges.
+
+   :returns: List of colors for edges.
+   :rtype: List
+
+
+.. py:method:: get_edge_polydata(part_id: int, edge_facet_res: ansys.meshing.prime.autogen.meshinfostructs.EdgeConnectivityResults, index: int) -> ansys.tools.visualization_interface.MeshObjectPlot
+
+   Get the polydata object of the edges.
+
+   :param part_id: ID of the part to get the polydata from.
+   :type part_id: int
+   :param edge_facet_res: Results of the edge connectivity.
+   :type edge_facet_res: EdgeConnectivityResults
+   :param index: Index of the edge.
+   :type index: int
+
+   :returns: Mesh to be displayed.
+   :rtype: MeshObjectPlot
+
+
+.. py:method:: get_face_and_edge_connectivity(part_ids: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.FaceAndEdgeConnectivityParams) -> ansys.meshing.prime.params.primestructs.FaceAndEdgeConnectivityResults
+
+   Gets the connectivity of face and edge zonelets of the given part ids.
+
+   Connectivity result is used in graphics rendering.
+
+   :param part_ids: Ids of the part.
+   :type part_ids: Iterable[int]
+   :param params: Parameters to get connectivity of face zonelets and edge zonelets.
+   :type params: FaceAndEdgeConnectivityParams
+
+   :returns: Returns the FaceAndEdgeConnectivityResults.
+   :rtype: FaceAndEdgeConnectivityResults
+
+   .. rubric:: Examples
+
+   >>> mesh_info = prime.MeshInfo(model)
+   >>> part_ids = [part.id for part in model.parts]
+   >>> result = mesh_info.get_face_and_edge_connectivity(part_ids,
+   >>>                  prime.FaceAndEdgeConnectivityParams(model =model))
+
+
+.. py:method:: get_face_color(part: ansys.meshing.prime.core.part.Part, model_type: ColorByType = ColorByType.ZONE)
+
+   Get the colors of faces.
+
+   :returns: List of colors for faces.
+   :rtype: List
+
+
+.. py:method:: get_face_polydata(part_id: int, face_facet_res: ansys.meshing.prime.autogen.meshinfostructs.FaceConnectivityResults, index: int) -> ansys.tools.visualization_interface.MeshObjectPlot
+
+   Get the polydata object of the faces.
+
+   :param part_id: ID of the part to get the polydata from.
+   :type part_id: int
+   :param face_facet_res: Results of the face connectivity.
+   :type face_facet_res: FaceConnectivityResults
+   :param index: Index of the face.
+   :type index: int
+
+   :returns: Mesh to be plotted and information of the mesh to display.
+   :rtype: MeshObjectPlot, DisplayMeshInfo
+
+
+.. py:method:: get_scoped_polydata(scope: ansys.meshing.prime.ScopeDefinition, update: bool = False)
+
+   Get the polydata object of the scoped mesh.
+
+   :param scope: Scope to get the mesh from.
+   :type scope: prime.ScopeDefinition
+
+   :returns: PyVista mesh object.
+   :rtype: pv.PolyData
+
+
+.. py:method:: get_spline_cp_polydata(part_id: int, spline_id: int) -> ansys.tools.visualization_interface.MeshObjectPlot
+
+   Get the polydata object of the spline control points.
+
+   :param part_id: ID of the part to get the polydata from.
+   :type part_id: int
+   :param spline_id: ID of the spline.
+   :type spline_id: int
+
+   :returns: Mesh to be displayed.
+   :rtype: MeshObjectPlot
+
+
+.. py:method:: get_spline_surface_polydata(part_id: int, spline_id: int) -> ansys.tools.visualization_interface.MeshObjectPlot
+
+   Get the polydata object of the spline surface.
+
+   :param part_id: ID of the part to get the polydata from.
+   :type part_id: int
+   :param spline_id: ID of the spline.
+   :type spline_id: int
+
+   :returns: Mesh to be displayed.
+   :rtype: MeshObjectPlot
+
+
+.. py:method:: get_statistics_of_cell_zonelets(cell_zonelets: ansys.meshing.prime.params.primestructs.Iterable[int], params: ansys.meshing.prime.params.primestructs.CellStatisticsParams) -> ansys.meshing.prime.params.primestructs.CellStatisticsResults
+
+   Gets cell statistics of given cell zonelets using provided cell statistics parameters.
+
+
+   :param cell_zonelets: Ids of cell zonelets for which statistics are calculated.
+   :type cell_zonelets: Iterable[int]
+   :param params: Parameters to get cells statistics.
+   :type params: CellStatisticsParams
+
+   :returns: Returns the CellStatisticsResults.
+   :rtype: CellStatisticsResults
+
+   .. rubric:: Examples
+
+   >>> mesh_info = prime.MeshInfo(model)
+   >>> part = model.get_part_by_name("part_name")
+   >>> result = mesh_info.get_statistics_of_cell_zonelets(part.get_cell_zonelets(),
+   >>>                  prime.CellStatisticsParams(model=model))
+
+
+.. py:method:: update_pd(part_ids) -> Dict[int, Dict[str, list[pyvista.PolyData, ansys.meshing.prime.core.part.Part]]]
+
+   Update the polydata object of the mesh.
+
+   :param part_ids: List of part IDs to update.
+   :type part_ids: List[int]
+
+   :returns: Dictionary with the polydata objects.
+   :rtype: Dict[int, Dict[str, List[(pv.PolyData, Part)]]
+
+
+
+
+
+
+
+.. vale on

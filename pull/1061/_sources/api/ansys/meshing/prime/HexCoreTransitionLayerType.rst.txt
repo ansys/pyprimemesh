@@ -1,0 +1,94 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`HexCoreTransitionLayerType`
+===================================
+
+
+.. py:class:: ansys.meshing.prime.HexCoreTransitionLayerType
+
+
+
+   Handle size transition of hex cells.
+
+
+
+
+.. py:currentmodule:: HexCoreTransitionLayerType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~DELETEBOTH`
+            - Remove neighboring hexes of different size by deleting both smaller and larger cell layers. The voids are filled with tetrahedral or polyhedral cells depending on volumeFillType in AutoMeshParams structure.
+          * - :py:attr:`~DELETELARGE`
+            - Remove neighboring hexes of different size by deleting a layer of larger cells. The voids are filled with tetrahedral or polyhedral cells depending on volumeFillType in AutoMeshParams structure.
+          * - :py:attr:`~DELETESMALL`
+            - Remove neighboring hexes of different size by deleting a layer of smaller cells. The voids are filled with tetrahedral or polyhedral cells depending on volumeFillType in AutoMeshParams structure.
+          * - :py:attr:`~HANGINGNODES`
+            - Allow different size hexes to be neighbors.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import HexCoreTransitionLayerType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: DELETEBOTH
+   :value: 3
+
+
+   Remove neighboring hexes of different size by deleting both smaller and larger cell layers. The voids are filled with tetrahedral or polyhedral cells depending on volumeFillType in AutoMeshParams structure.
+
+.. py:attribute:: DELETELARGE
+   :value: 2
+
+
+   Remove neighboring hexes of different size by deleting a layer of larger cells. The voids are filled with tetrahedral or polyhedral cells depending on volumeFillType in AutoMeshParams structure.
+
+.. py:attribute:: DELETESMALL
+   :value: 1
+
+
+   Remove neighboring hexes of different size by deleting a layer of smaller cells. The voids are filled with tetrahedral or polyhedral cells depending on volumeFillType in AutoMeshParams structure.
+
+.. py:attribute:: HANGINGNODES
+   :value: 0
+
+
+   Allow different size hexes to be neighbors.
+
+
+
+
+
+
+
+.. vale on

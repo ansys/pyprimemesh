@@ -1,0 +1,6 @@
+face\_quality\_measure
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchByQualityParams.face_quality_measure

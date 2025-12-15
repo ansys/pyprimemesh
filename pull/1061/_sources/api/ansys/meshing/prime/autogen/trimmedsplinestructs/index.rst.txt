@@ -1,0 +1,124 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``trimmedsplinestructs.py`` module
+======================================
+
+.. py:module:: ansys.meshing.prime.autogen.trimmedsplinestructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: trimmedsplinestructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedsplinestructs.RefineTetMeshParams`
+            - Parameters for meshing the solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedsplinestructs.TetMeshSplineParams`
+            - Parameters for meshing the solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedsplinestructs.TrimmedSolidSplineCutMode`
+            - Types of Cut modes used to generate Cartesian grid representing subdomains of trimmed solid spline.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedsplinestructs.TrimmedSplineResults`
+            - Results of IGA operations.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.trimmedsplinestructs.UniformSolidSplineCreationParams`
+            - Parameters to define the uniform solid spline.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> RefineTetMeshParams</api/ansys/meshing/prime/autogen/trimmedsplinestructs/RefineTetMeshParams>
+    <span class="nf nf-cod-symbol_class"></span> TetMeshSplineParams</api/ansys/meshing/prime/autogen/trimmedsplinestructs/TetMeshSplineParams>
+    <span class="nf nf-cod-symbol_class"></span> TrimmedSolidSplineCutMode</api/ansys/meshing/prime/autogen/trimmedsplinestructs/TrimmedSolidSplineCutMode>
+    <span class="nf nf-cod-symbol_class"></span> TrimmedSplineResults</api/ansys/meshing/prime/autogen/trimmedsplinestructs/TrimmedSplineResults>
+    <span class="nf nf-cod-symbol_class"></span> UniformSolidSplineCreationParams</api/ansys/meshing/prime/autogen/trimmedsplinestructs/UniformSolidSplineCreationParams>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

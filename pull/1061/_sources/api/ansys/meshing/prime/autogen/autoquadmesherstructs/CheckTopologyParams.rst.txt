@@ -1,0 +1,142 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`CheckTopologyParams`
+============================
+
+
+.. py:class:: ansys.meshing.prime.autogen.autoquadmesherstructs.CheckTopologyParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, topo_search_field_mask: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for check topology operations.
+
+   :param model: Model to create a ``CheckTopologyParams`` object with default parameters.
+   :type model: Model
+   :param topo_search_field_mask: Toposearch field option for topology check.
+
+                                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type topo_search_field_mask: int, optional
+   :param json_data: JSON dictionary to create a ``CheckTopologyParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> check_topology_params = prime.CheckTopologyParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: CheckTopologyParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~topo_search_field_mask`
+            - Toposearch field option for topology check.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``CheckTopologyParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``CheckTopologyParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.autoquadmesherstructs import CheckTopologyParams
+
+Property detail
+---------------
+
+.. py:property:: topo_search_field_mask
+   :type: int
+
+
+   Toposearch field option for topology check.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``CheckTopologyParams`` object.
+
+   .. rubric:: Examples
+
+   >>> CheckTopologyParams.print_default()
+
+
+.. py:method:: set_default(topo_search_field_mask: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``CheckTopologyParams`` object.
+
+   :param topo_search_field_mask: Toposearch field option for topology check.
+   :type topo_search_field_mask: int, optional
+
+
+
+
+
+
+
+.. vale on

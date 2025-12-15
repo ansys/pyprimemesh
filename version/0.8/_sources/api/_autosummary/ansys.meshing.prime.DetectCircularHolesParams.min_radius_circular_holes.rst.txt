@@ -1,0 +1,6 @@
+min\_radius\_circular\_holes
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectCircularHolesParams.min_radius_circular_holes

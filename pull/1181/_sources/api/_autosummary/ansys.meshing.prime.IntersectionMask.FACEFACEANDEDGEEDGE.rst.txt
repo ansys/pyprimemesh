@@ -1,0 +1,6 @@
+FACEFACEANDEDGEEDGE
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: IntersectionMask.FACEFACEANDEDGEEDGE

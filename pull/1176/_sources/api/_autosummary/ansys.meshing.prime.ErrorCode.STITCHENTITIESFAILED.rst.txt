@@ -1,0 +1,6 @@
+STITCHENTITIESFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STITCHENTITIESFAILED

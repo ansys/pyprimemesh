@@ -1,0 +1,6 @@
+WRITECDBFAILED
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRITECDBFAILED

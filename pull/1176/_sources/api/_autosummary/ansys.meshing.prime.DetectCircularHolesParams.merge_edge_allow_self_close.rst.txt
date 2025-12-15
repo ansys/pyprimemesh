@@ -1,0 +1,6 @@
+merge\_edge\_allow\_self\_close
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectCircularHolesParams.merge_edge_allow_self_close

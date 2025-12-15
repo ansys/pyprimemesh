@@ -1,0 +1,70 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`ScopeExpressionType`
+============================
+
+
+.. py:class:: ansys.meshing.prime.ScopeExpressionType
+
+
+
+   ScopeExpressionType uses expression type to evaluate the scope.
+
+
+
+
+.. py:currentmodule:: ScopeExpressionType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~NAMEPATTERN`
+            - Use name pattern expression to evaluate scope.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import ScopeExpressionType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: NAMEPATTERN
+   :value: 2
+
+
+   Use name pattern expression to evaluate scope.
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,222 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`UniformSolidSplineCreationParams`
+=========================================
+
+
+.. py:class:: ansys.meshing.prime.autogen.trimmedsplinestructs.UniformSolidSplineCreationParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, n_control_points_u: int = None, n_control_points_v: int = None, n_control_points_w: int = None, degree_u: int = None, degree_v: int = None, degree_w: int = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to define the uniform solid spline.
+
+   :param model: Model to create a ``UniformSolidSplineCreationParams`` object with default parameters.
+   :type model: Model
+   :param n_control_points_u: Number of control points in u direction.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_control_points_u: int, optional
+   :param n_control_points_v: Number of control points in v direction.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_control_points_v: int, optional
+   :param n_control_points_w: Number of control points in w direction.
+
+                              **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type n_control_points_w: int, optional
+   :param degree_u: Degree in u direction.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type degree_u: int, optional
+   :param degree_v: Degree in v direction.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type degree_v: int, optional
+   :param degree_w: Degree in w direction.
+
+                    **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type degree_w: int, optional
+   :param json_data: JSON dictionary to create a ``UniformSolidSplineCreationParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> uniform_solid_spline_creation_params = prime.UniformSolidSplineCreationParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: UniformSolidSplineCreationParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~degree_u`
+            - Degree in u direction.
+          * - :py:attr:`~degree_v`
+            - Degree in v direction.
+          * - :py:attr:`~degree_w`
+            - Degree in w direction.
+          * - :py:attr:`~n_control_points_u`
+            - Number of control points in u direction.
+          * - :py:attr:`~n_control_points_v`
+            - Number of control points in v direction.
+          * - :py:attr:`~n_control_points_w`
+            - Number of control points in w direction.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``UniformSolidSplineCreationParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``UniformSolidSplineCreationParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.trimmedsplinestructs import UniformSolidSplineCreationParams
+
+Property detail
+---------------
+
+.. py:property:: degree_u
+   :type: int
+
+
+   Degree in u direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: degree_v
+   :type: int
+
+
+   Degree in v direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: degree_w
+   :type: int
+
+
+   Degree in w direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_control_points_u
+   :type: int
+
+
+   Number of control points in u direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_control_points_v
+   :type: int
+
+
+   Number of control points in v direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: n_control_points_w
+   :type: int
+
+
+   Number of control points in w direction.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``UniformSolidSplineCreationParams`` object.
+
+   .. rubric:: Examples
+
+   >>> UniformSolidSplineCreationParams.print_default()
+
+
+.. py:method:: set_default(n_control_points_u: int = None, n_control_points_v: int = None, n_control_points_w: int = None, degree_u: int = None, degree_v: int = None, degree_w: int = None)
+   :staticmethod:
+
+
+   Set the default values of the ``UniformSolidSplineCreationParams`` object.
+
+   :param n_control_points_u: Number of control points in u direction.
+   :type n_control_points_u: int, optional
+   :param n_control_points_v: Number of control points in v direction.
+   :type n_control_points_v: int, optional
+   :param n_control_points_w: Number of control points in w direction.
+   :type n_control_points_w: int, optional
+   :param degree_u: Degree in u direction.
+   :type degree_u: int, optional
+   :param degree_v: Degree in v direction.
+   :type degree_v: int, optional
+   :param degree_w: Degree in w direction.
+   :type degree_w: int, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,65 @@
+.. vale off
+
+
+
+
+
+
+
+HexToSplineParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HexToSplineParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      HexToSplineParams.print_default
+      HexToSplineParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      HexToSplineParams.continuity
+      
+      
+      HexToSplineParams.corner_angle
+      
+      
+      HexToSplineParams.feature_angle
+      
+      
+      HexToSplineParams.feature_capture_type
+      
+      
+      HexToSplineParams.project_on_geometry
+      
+      
+      HexToSplineParams.projection_scope
+      
+      
+      HexToSplineParams.use_projection_scope
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using HexToSplineParams
+
+    ansys.meshing.prime.HexToSplineParams
+
+.. vale on

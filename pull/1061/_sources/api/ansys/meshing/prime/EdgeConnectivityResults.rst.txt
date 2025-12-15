@@ -1,0 +1,246 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`EdgeConnectivityResults`
+================================
+
+
+.. py:class:: ansys.meshing.prime.EdgeConnectivityResults(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, edge_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, topo_edge_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, mesh_edge_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, topo_edge_types: ansys.meshing.prime.params.primestructs.Iterable[int] = None, num_nodes_per_edge_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, node_coords: ansys.meshing.prime.params.primestructs.Iterable[float] = None, num_edge_list_per_edge_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, edge_list: ansys.meshing.prime.params.primestructs.Iterable[int] = None, num_edges_per_edge_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, json_data: dict = None, **kwargs)
+
+
+
+   Result of the edge connectivity information.
+
+   :param model: Model to create a ``EdgeConnectivityResults`` object with default parameters.
+   :type model: Model
+   :param error_code: Error code associated with the get edge connectivity operation.
+   :type error_code: ErrorCode, optional
+   :param edge_zonelet_ids: Edge zonelet ids for which connectivity data is available.
+   :type edge_zonelet_ids: Iterable[int], optional
+   :param topo_edge_ids: TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
+   :type topo_edge_ids: Iterable[int], optional
+   :param mesh_edge_ids: Mesh edge ids corresponding to each topoedge.
+   :type mesh_edge_ids: Iterable[int], optional
+   :param topo_edge_types: TopoEdge type corresponding to each topoedge.
+   :type topo_edge_types: Iterable[int], optional
+   :param num_nodes_per_edge_zonelet: Number of nodes per edge zonelet.
+   :type num_nodes_per_edge_zonelet: Iterable[int], optional
+   :param node_coords: Node coordinates describing edges of edge zonelet.
+   :type node_coords: Iterable[float], optional
+   :param num_edge_list_per_edge_zonelet: Number of edge list per edge zonelet.
+   :type num_edge_list_per_edge_zonelet: Iterable[int], optional
+   :param edge_list: Edge list describing connectivity of node coordinates.
+   :type edge_list: Iterable[int], optional
+   :param num_edges_per_edge_zonelet: Number of edges per edge zonelet.
+   :type num_edges_per_edge_zonelet: Iterable[int], optional
+   :param json_data: JSON dictionary to create a ``EdgeConnectivityResults`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> edge_connectivity_results = prime.EdgeConnectivityResults(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: EdgeConnectivityResults
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~edge_list`
+            - Edge list describing connectivity of node coordinates.
+          * - :py:attr:`~edge_zonelet_ids`
+            - Edge zonelet ids for which connectivity data is available.
+          * - :py:attr:`~error_code`
+            - Error code associated with the get edge connectivity operation.
+          * - :py:attr:`~mesh_edge_ids`
+            - Mesh edge ids corresponding to each topoedge.
+          * - :py:attr:`~node_coords`
+            - Node coordinates describing edges of edge zonelet.
+          * - :py:attr:`~num_edge_list_per_edge_zonelet`
+            - Number of edge list per edge zonelet.
+          * - :py:attr:`~num_edges_per_edge_zonelet`
+            - Number of edges per edge zonelet.
+          * - :py:attr:`~num_nodes_per_edge_zonelet`
+            - Number of nodes per edge zonelet.
+          * - :py:attr:`~topo_edge_ids`
+            - TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
+          * - :py:attr:`~topo_edge_types`
+            - TopoEdge type corresponding to each topoedge.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``EdgeConnectivityResults`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``EdgeConnectivityResults`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime import EdgeConnectivityResults
+
+Property detail
+---------------
+
+.. py:property:: edge_list
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Edge list describing connectivity of node coordinates.
+
+.. py:property:: edge_zonelet_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Edge zonelet ids for which connectivity data is available.
+
+.. py:property:: error_code
+   :type: ansys.meshing.prime.params.primestructs.ErrorCode
+
+
+   Error code associated with the get edge connectivity operation.
+
+.. py:property:: mesh_edge_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Mesh edge ids corresponding to each topoedge.
+
+.. py:property:: node_coords
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Node coordinates describing edges of edge zonelet.
+
+.. py:property:: num_edge_list_per_edge_zonelet
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Number of edge list per edge zonelet.
+
+.. py:property:: num_edges_per_edge_zonelet
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Number of edges per edge zonelet.
+
+.. py:property:: num_nodes_per_edge_zonelet
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   Number of nodes per edge zonelet.
+
+.. py:property:: topo_edge_ids
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
+
+.. py:property:: topo_edge_types
+   :type: ansys.meshing.prime.params.primestructs.Iterable[int]
+
+
+   TopoEdge type corresponding to each topoedge.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``EdgeConnectivityResults`` object.
+
+   .. rubric:: Examples
+
+   >>> EdgeConnectivityResults.print_default()
+
+
+.. py:method:: set_default(error_code: ansys.meshing.prime.params.primestructs.ErrorCode = None, edge_zonelet_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, topo_edge_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, mesh_edge_ids: ansys.meshing.prime.params.primestructs.Iterable[int] = None, topo_edge_types: ansys.meshing.prime.params.primestructs.Iterable[int] = None, num_nodes_per_edge_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, node_coords: ansys.meshing.prime.params.primestructs.Iterable[float] = None, num_edge_list_per_edge_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None, edge_list: ansys.meshing.prime.params.primestructs.Iterable[int] = None, num_edges_per_edge_zonelet: ansys.meshing.prime.params.primestructs.Iterable[int] = None)
+   :staticmethod:
+
+
+   Set the default values of the ``EdgeConnectivityResults`` object.
+
+   :param error_code: Error code associated with the get edge connectivity operation.
+   :type error_code: ErrorCode, optional
+   :param edge_zonelet_ids: Edge zonelet ids for which connectivity data is available.
+   :type edge_zonelet_ids: Iterable[int], optional
+   :param topo_edge_ids: TopoEdge ids corresponding to each edge zonelet id for topology based mesh.
+   :type topo_edge_ids: Iterable[int], optional
+   :param mesh_edge_ids: Mesh edge ids corresponding to each topoedge.
+   :type mesh_edge_ids: Iterable[int], optional
+   :param topo_edge_types: TopoEdge type corresponding to each topoedge.
+   :type topo_edge_types: Iterable[int], optional
+   :param num_nodes_per_edge_zonelet: Number of nodes per edge zonelet.
+   :type num_nodes_per_edge_zonelet: Iterable[int], optional
+   :param node_coords: Node coordinates describing edges of edge zonelet.
+   :type node_coords: Iterable[float], optional
+   :param num_edge_list_per_edge_zonelet: Number of edge list per edge zonelet.
+   :type num_edge_list_per_edge_zonelet: Iterable[int], optional
+   :param edge_list: Edge list describing connectivity of node coordinates.
+   :type edge_list: Iterable[int], optional
+   :param num_edges_per_edge_zonelet: Number of edges per edge zonelet.
+   :type num_edges_per_edge_zonelet: Iterable[int], optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,103 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``topoutilitystructs.py`` module
+====================================
+
+.. py:module:: ansys.meshing.prime.autogen.topoutilitystructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: topoutilitystructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topoutilitystructs.TopoFillHoleParams`
+            - Parameters used to fill holes in topology.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.topoutilitystructs.TopoFillHoleResult`
+            - Results associated with fill holes in topology operations.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TopoFillHoleParams</api/ansys/meshing/prime/autogen/topoutilitystructs/TopoFillHoleParams>
+    <span class="nf nf-cod-symbol_class"></span> TopoFillHoleResult</api/ansys/meshing/prime/autogen/topoutilitystructs/TopoFillHoleResult>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

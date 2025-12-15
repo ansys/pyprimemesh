@@ -1,0 +1,48 @@
+.. vale off
+
+
+
+
+
+
+
+ContactPatchAxis
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ContactPatchAxis
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      ContactPatchAxis.X
+      
+      
+      ContactPatchAxis.Y
+      
+      
+      ContactPatchAxis.Z
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ContactPatchAxis
+
+    ansys.meshing.prime.ContactPatchAxis
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿prism\_control\_ids
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.prism_control_ids

@@ -1,0 +1,23 @@
+ansys.meshing.prime.core.mapdlcdbexportutils.generate_mapdl_commands
+====================================================================
+
+.. py:function:: ansys.meshing.prime.core.mapdlcdbexportutils.generate_mapdl_commands(model: ansys.meshing.prime.Model, simulation_data: str, params: ansys.meshing.prime.autogen.fileiostructs.ExportMapdlCdbParams) -> Tuple[str, str]
+
+   Generate the additional MAPDL commands to be added to the CDB export file.
+
+   :param model: Model that the methods are to work on.
+   :type model: prime.Model
+   :param simulation_data: The simulation data of the part in json format.
+   :type simulation_data: str
+   :param params: Parameters to export a CDB file.
+   :type params: ExportMapdlCdbParams
+
+   :returns:
+
+             Tuple[str, str]
+                 Two strings containing material settings and analysis settings respectively.
+
+   .. rubric:: Notes
+
+   **This is a beta API**. **The behavior and implementation may change in future**.
+

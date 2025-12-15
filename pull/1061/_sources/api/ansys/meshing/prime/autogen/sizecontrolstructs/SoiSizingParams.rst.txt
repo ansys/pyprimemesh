@@ -1,0 +1,190 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`SoiSizingParams`
+========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.sizecontrolstructs.SoiSizingParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, centers: ansys.meshing.prime.params.primestructs.Iterable[float] = None, radius: float = None, max: float = None, growth_rate: float = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters for sphere of influence size control.
+
+   :param model: Model to create a ``SoiSizingParams`` object with default parameters.
+   :type model: Model
+   :param centers: Centers of the spheres within which the size is limited to the specified max value.
+
+                   **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type centers: Iterable[float], optional
+   :param radius: Radius of the sphere within which the size is limited to the specified max value.
+
+                  **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type radius: float, optional
+   :param max: Maximum size within the sphere.
+
+               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type max: float, optional
+   :param growth_rate: The rate at which size grows outwards from the sphere boundary.
+
+                       **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type growth_rate: float, optional
+   :param json_data: JSON dictionary to create a ``SoiSizingParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> soi_sizing_params = prime.SoiSizingParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: SoiSizingParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~centers`
+            - Centers of the spheres within which the size is limited to the specified max value.
+          * - :py:attr:`~growth_rate`
+            - The rate at which size grows outwards from the sphere boundary.
+          * - :py:attr:`~max`
+            - Maximum size within the sphere.
+          * - :py:attr:`~radius`
+            - Radius of the sphere within which the size is limited to the specified max value.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``SoiSizingParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``SoiSizingParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.sizecontrolstructs import SoiSizingParams
+
+Property detail
+---------------
+
+.. py:property:: centers
+   :type: ansys.meshing.prime.params.primestructs.Iterable[float]
+
+
+   Centers of the spheres within which the size is limited to the specified max value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: growth_rate
+   :type: float
+
+
+   The rate at which size grows outwards from the sphere boundary.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: max
+   :type: float
+
+
+   Maximum size within the sphere.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+.. py:property:: radius
+   :type: float
+
+
+   Radius of the sphere within which the size is limited to the specified max value.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``SoiSizingParams`` object.
+
+   .. rubric:: Examples
+
+   >>> SoiSizingParams.print_default()
+
+
+.. py:method:: set_default(centers: ansys.meshing.prime.params.primestructs.Iterable[float] = None, radius: float = None, max: float = None, growth_rate: float = None)
+   :staticmethod:
+
+
+   Set the default values of the ``SoiSizingParams`` object.
+
+   :param centers: Centers of the spheres within which the size is limited to the specified max value.
+   :type centers: Iterable[float], optional
+   :param radius: Radius of the sphere within which the size is limited to the specified max value.
+   :type radius: float, optional
+   :param max: Maximum size within the sphere.
+   :type max: float, optional
+   :param growth_rate: The rate at which size grows outwards from the sphere boundary.
+   :type growth_rate: float, optional
+
+
+
+
+
+
+
+.. vale on

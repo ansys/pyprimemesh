@@ -1,0 +1,11 @@
+set\_geometry\_scope
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperControl.set_geometry_scope
+
+.. minigallery::
+   :add-heading: Examples using WrapperControl.set_geometry_scope
+
+   ansys.meshing.prime.WrapperControl.set_geometry_scope

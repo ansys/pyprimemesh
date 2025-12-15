@@ -1,0 +1,110 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``sizefieldstructs.py`` module
+==================================
+
+.. py:module:: ansys.meshing.prime.autogen.sizefieldstructs
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: sizefieldstructs
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizefieldstructs.SFPeriodicParams`
+            - Parameters for setting periodic size fields.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeParams`
+            - Parameters associated with the compute volumetric size field operation.
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults`
+            - Results associated with the compute volumetric size field operation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SFPeriodicParams</api/ansys/meshing/prime/autogen/sizefieldstructs/SFPeriodicParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumetricSizeFieldComputeParams</api/ansys/meshing/prime/autogen/sizefieldstructs/VolumetricSizeFieldComputeParams>
+    <span class="nf nf-cod-symbol_class"></span> VolumetricSizeFieldComputeResults</api/ansys/meshing/prime/autogen/sizefieldstructs/VolumetricSizeFieldComputeResults>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

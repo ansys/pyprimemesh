@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.IntersectionMask.bit_count
+
+.. minigallery::
+   :add-heading: Examples using IntersectionMask.bit_count
+
+   ansys.meshing.prime.IntersectionMask.bit_count

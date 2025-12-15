@@ -1,0 +1,142 @@
+.. vale off
+
+
+
+
+
+
+
+:class:`DeleteMeshParams`
+=========================
+
+
+.. py:class:: ansys.meshing.prime.autogen.topodatastructs.DeleteMeshParams(model: ansys.meshing.prime.params.primestructs.CommunicationManager = None, delete_mesh_on_connected_topo_edges: bool = None, json_data: dict = None, **kwargs)
+
+
+
+   Parameters to delete mesh on topoentities.
+
+   :param model: Model to create a ``DeleteMeshParams`` object with default parameters.
+   :type model: Model
+   :param delete_mesh_on_connected_topo_edges: Option to delete mesh on topoedges connected only to provided topoentities.
+
+                                               **This is a beta parameter**. **The behavior and name may change in the future**.
+   :type delete_mesh_on_connected_topo_edges: bool, optional
+   :param json_data: JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
+   :type json_data: dict, optional
+
+   .. rubric:: Examples
+
+   >>> delete_mesh_params = prime.DeleteMeshParams(model = model)
+
+
+
+
+
+
+
+.. py:currentmodule:: DeleteMeshParams
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~delete_mesh_on_connected_topo_edges`
+            - Option to delete mesh on topoedges connected only to provided topoentities.
+
+
+
+   .. tab-item:: Static methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~print_default`
+            - Print the default values of ``DeleteMeshParams`` object.
+          * - :py:attr:`~set_default`
+            - Set the default values of the ``DeleteMeshParams`` object.
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__setattr__`
+            - __setattr__(CoreObject self, key, value)
+          * - :py:attr:`~__str__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.meshing.prime.autogen.topodatastructs import DeleteMeshParams
+
+Property detail
+---------------
+
+.. py:property:: delete_mesh_on_connected_topo_edges
+   :type: bool
+
+
+   Option to delete mesh on topoedges connected only to provided topoentities.
+
+   **This is a beta parameter**. **The behavior and name may change in the future**.
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __setattr__(key, value)
+
+   __setattr__(CoreObject self, key, value)
+
+
+.. py:method:: __str__() -> str
+
+.. py:method:: print_default()
+   :staticmethod:
+
+
+   Print the default values of ``DeleteMeshParams`` object.
+
+   .. rubric:: Examples
+
+   >>> DeleteMeshParams.print_default()
+
+
+.. py:method:: set_default(delete_mesh_on_connected_topo_edges: bool = None)
+   :staticmethod:
+
+
+   Set the default values of the ``DeleteMeshParams`` object.
+
+   :param delete_mesh_on_connected_topo_edges: Option to delete mesh on topoedges connected only to provided topoentities.
+   :type delete_mesh_on_connected_topo_edges: bool, optional
+
+
+
+
+
+
+
+.. vale on

@@ -1,0 +1,6 @@
+max\_radius\_circular\_holes
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectHolesParams.max_radius_circular_holes

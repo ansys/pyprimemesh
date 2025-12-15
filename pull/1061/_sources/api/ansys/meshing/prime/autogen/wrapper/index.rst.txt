@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``wrapper.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.autogen.wrapper
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: wrapper
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.wrapper.Wrapper`
+            - Provide operations to generate surface mesh using wrapper technology.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Wrapper</api/ansys/meshing/prime/autogen/wrapper/Wrapper>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

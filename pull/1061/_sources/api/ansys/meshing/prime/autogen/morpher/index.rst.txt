@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``morpher.py`` module
+=========================
+
+.. py:module:: ansys.meshing.prime.autogen.morpher
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: morpher
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.autogen.morpher.Morpher`
+            - Morpher contain functionalities to change the geometry, adapting the mesh accordingly without a recomputation.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Morpher</api/ansys/meshing/prime/autogen/morpher/Morpher>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Auto-generated file. DO NOT MODIFY
+
+
+
+
+
+
+
+
+
+.. vale on

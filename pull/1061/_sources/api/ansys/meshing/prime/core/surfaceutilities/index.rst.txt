@@ -1,0 +1,96 @@
+
+.. vale off
+
+
+
+
+
+
+
+The ``surfaceutilities.py`` module
+==================================
+
+.. py:module:: ansys.meshing.prime.core.surfaceutilities
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: surfaceutilities
+.. tab-set::
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.meshing.prime.core.surfaceutilities.SurfaceUtilities`
+            - Performs various general surface utilities algorithms.
+
+
+
+
+
+
+
+
+
+.. .. .. 
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SurfaceUtilities</api/ansys/meshing/prime/core/surfaceutilities/SurfaceUtilities>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Utilities module for surface operations.
+
+
+
+
+
+
+
+
+
+.. vale on

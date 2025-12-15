@@ -1,0 +1,48 @@
+.. vale off
+
+
+
+
+
+
+
+HexCoreCellElementType
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HexCoreCellElementType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      HexCoreCellElementType.ALLPOLY
+      
+      
+      HexCoreCellElementType.ALLHEX
+      
+      
+      HexCoreCellElementType.HEXANDPOLY
+      
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using HexCoreCellElementType
+
+    ansys.meshing.prime.HexCoreCellElementType
+
+.. vale on
