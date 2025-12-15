@@ -65,6 +65,60 @@ To install a basic version of the client, use this command instead:
 
    pip install -e .
 
+Connecting through gRPC
+-----------------------
+
+PyPrimeMesh uses gRPC to provide secure communications between client and server.
+When you run the client and server on the same machine:
+
+- For Linux OS, PyPrimeMesh uses UDS (Unix Domain Socket) for communications.
+  
+- For Windows OS, PyPrimeMesh uses interceptor to validate gRPC connections, 
+  ensures the client is running on the same Windows user account as the server and authenticates the client.
+
+When you launch PyPrimeMesh, gRPC  establishes a connection between the Client and Server
+through the secure option. **Secure** is the default option when you use launch_prime(). 
+You should always use the **Secure** option to establish a secured connection between the client and server.
+
+When you want to make an insecure connection between the client and server,
+you may need to specify the connection type as follows:
+
+.. code-block:: python
+
+   client = prime.launch_prime(
+       connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE
+   )
+
+.. note::   
+   Insecure option is not recommended.
+
+Connect securely using certificates
+--------------------------------------
+
+PyPrimeMesh offers secure connection using certificates. For secure connection with mutual TLS (mTLS), you may pass a client certificate directory and server certificate directory using client_certs_dir and server_certs_dir respectively to launch_prime().
+
+client_certs_dir should contain the following files:
+
+- client.crt
+  
+- client.key
+  
+- ca.crt
+  
+server_certs_dir should contain the following files:
+
+- server.crt
+  
+- server.key
+  
+- ca.crt
+
+.. note::
+   - Ensure that ca.crt file is the same for the client and the server. You should not modify the 
+     file names in the client_certs_dir and server_certs_dir respectively.
+
+   - The path of input the files must be the same for server and client and should be on the shared network.
+  
 
 Dependencies
 ------------

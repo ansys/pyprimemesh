@@ -10,6 +10,7 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
 
+os.environ["PRIME_MODE"] = "GRPC_INSECURE"
 viz_interface.DOCUMENTATION_BUILD = True
 
 # Project information

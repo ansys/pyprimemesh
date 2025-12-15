@@ -15,8 +15,8 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: ghcr.io/ansys/prime
-  DOCKER_IMAGE_TAG: '25.1.2'
-  MAIN_PYTHON_VERSION: '3.12'
+  DOCKER_IMAGE_TAG: '25.1.4'
+  MAIN_PYTHON_VERSION: '3.10'
   PACKAGE_NAME: 'ansys-meshing-prime'
   PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
@@ -102,6 +102,9 @@ jobs:
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v4
 
+      - name: Install compatible pyvista and vtk
+        run: pip install "pyvista>=0.42" vtk
+
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v9
         with:
@@ -114,6 +117,7 @@ jobs:
           PYPRIMEMESH_SPHINX_BUILD: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
+          PRIME_MODE: "GRPC_INSECURE"
 
   testing:
     name: Run Unit Tests
@@ -137,6 +141,9 @@ jobs:
           path: tests/graphics/image_cache
           key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
+      
+      - name: Install compatible pyvista and vtk
+        run: pip install "pyvista>=0.42" vtk
 
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v9

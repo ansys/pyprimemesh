@@ -213,6 +213,7 @@ def launch_prime_github_container(
     port: int = defaults.port(),
     name: str = "ansys-prime-server",
     version: Optional[str] = None,
+    connection_type: Optional['config.ConnectionType'] = None,
 ):
     """Launch a container.
 
@@ -229,6 +230,9 @@ def launch_prime_github_container(
         Name of the container. The default is ``"ansys-prime-server"``.
     version : str, optional
         Version of the container to retrieve. The default is ``None``.
+    connection_type : config.ConnectionType, optional
+        Type of connection to use. The default is ``None``, which defaults to
+        ``config.ConnectionType.GRPC_SECURE``.
 
     Raises
     ------
@@ -254,11 +258,29 @@ def launch_prime_github_container(
         f'{mount_host}:{mount_image}',
         '-e',
         f'ANSYSLMD_LICENSE_FILE={license_file}',
+    ]
+    graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
+    if graphics_port > 0:
+        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
+        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
+    prime_arguments = [
         f'{image_name}:{version}',
         '--port',
         f'{port}',
     ]
-    subprocess.run(docker_command, stdout=subprocess.DEVNULL)
+
+    # Set default connection type if not provided
+    if connection_type is None:
+        connection_type = config.ConnectionType.GRPC_SECURE
+
+    # Handle connection type
+    if (
+        connection_type == config.ConnectionType.GRPC_INSECURE
+        or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
+    ):
+        prime_arguments.append('--secure=no')
+
+    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 
 def stop_prime_github_container(name):
