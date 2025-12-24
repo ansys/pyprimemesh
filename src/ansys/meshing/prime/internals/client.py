@@ -65,6 +65,8 @@ class Client(object):
         port: int = defaults.port(),
         timeout: float = defaults.connection_timeout(),
         credentials=None,
+        connection_type: config.ConnectionType = config.ConnectionType.GRPC,
+        uds_file: str = None,
         **kwargs,
     ):
         """Initialize the client."""
@@ -76,28 +78,37 @@ class Client(object):
         self._process = server_process
         self._comm = None
         if not local:
-            try:
-                from ansys.meshing.prime.internals.grpc_communicator import (
-                    GRPCCommunicator,
-                )
-
-                channel = kwargs.get('channel', None)
-                if channel is not None:
-                    self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
-                else:
-                    self._comm = GRPCCommunicator(
-                        ip=ip, port=port, timeout=timeout, credentials=credentials
+            if connection_type == config.ConnectionType.GRPC:
+                try:
+                    from ansys.meshing.prime.internals.grpc_communicator import (
+                        GRPCCommunicator,
                     )
-                    setattr(self, 'port', port)
-            except ImportError as err:
-                logging.getLogger('PyPrimeMesh').error(
-                    f'Failed to load grpc_communicator with message: {err.msg}'
-                )
-                raise
-            except ConnectionError:
-                self.exit()
 
-                logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
+                    channel = kwargs.get('channel', None)
+                    if channel is not None:
+                        self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
+                    else:
+                        if os.name == 'nt':
+                            self._comm = GRPCCommunicator(
+                                ip=ip, port=port, timeout=timeout, credentials=credentials
+                            )
+                        else:
+                            self._comm = GRPCCommunicator(
+                                uds_file=uds_file, timeout=timeout, credentials=credentials
+                            )
+                        setattr(self, 'port', port)
+                except ImportError as err:
+                    logging.getLogger('PyPrimeMesh').error(
+                        f'Failed to load grpc_communicator with message: {err.msg}'
+                    )
+                    raise
+                except ConnectionError:
+                    self.exit()
+
+                    logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
+                    raise
+            else:
+                logging.getLogger('PyPrimeMesh').error(f'Invalid server type: {connection_type}')
                 raise
         else:
             try:
